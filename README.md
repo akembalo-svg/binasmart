@@ -4,6 +4,10 @@
 
 BinaSmart brings smart building management, Digital Ethiopia service guides, free public tenders, hotel & travel booking, events, insurance, cars, property, payments and a bilingual (Amharic/English) AI assistant together in one place.
 
+<p align="center">
+  <img src="docs/screenshot-home.png" alt="BinaSmart homepage — bilingual search, service directory and the Bini AI assistant" width="300">
+</p>
+
 ---
 
 ## What's inside
