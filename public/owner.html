@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner — BinaSmart</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* tw-lite: hand-rolled replacement for Tailwind CDN — only classes actually used */
+.flex{display:flex}.grid{display:grid}.hidden{display:none!important}
+.flex-1{flex:1 1 0%}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}
+.items-center{align-items:center}.items-end{align-items:flex-end}
+.justify-between{justify-content:space-between}.justify-center{justify-content:center}.justify-end{justify-content:flex-end}
+.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}
+.text-center{text-align:center}.text-right{text-align:right}
+.w-full{width:100%}.max-w-sm{max-width:24rem}
+.w-8{width:2rem}.h-8{height:2rem}.w-10{width:2.5rem}.h-10{height:2.5rem}.w-11{width:2.75rem}.h-11{height:2.75rem}
+.h-16{height:4rem}.h-20{height:5rem}.h-24{height:6rem}.h-40{height:10rem}
+.min-w-\[120px\]{min-width:120px}.min-w-\[210px\]{min-width:210px}
+.p-1\.5{padding:6px}.p-2{padding:8px}.p-2\.5{padding:10px}.p-3{padding:12px}.p-4{padding:16px}.p-5{padding:20px}.p-6{padding:24px}
+.px-3{padding-left:12px;padding-right:12px}
+.py-1\.5{padding-top:6px;padding-bottom:6px}.py-2{padding-top:8px;padding-bottom:8px}.py-2\.5{padding-top:10px;padding-bottom:10px}.py-4{padding-top:16px;padding-bottom:16px}
+.pb-1{padding-bottom:4px}.pb-3{padding-bottom:12px}.pb-8{padding-bottom:32px}.pl-2{padding-left:8px}
+.mb-1{margin-bottom:4px}.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}
+.mt-0\.5{margin-top:2px}.mt-1{margin-top:4px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}.-mt-4{margin-top:-16px}
+.gap-1{gap:4px}.gap-1\.5{gap:6px}.gap-2{gap:8px}.gap-3{gap:12px}
+.space-y-1\.5>*+*{margin-top:6px}.space-y-2>*+*{margin-top:8px}.space-y-2\.5>*+*{margin-top:10px}.space-y-4>*+*{margin-top:16px}
+.rounded-xl{border-radius:12px}.rounded-2xl{border-radius:16px}.rounded-full{border-radius:9999px}
+.font-black{font-weight:900}.font-bold{font-weight:700}
+.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}
+.text-\[8px\]{font-size:8px}.text-\[9px\]{font-size:9px}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12px\]{font-size:12px}
+.text-white{color:#fff}
+.text-purple-100{color:#e6f7f4}.text-purple-200{color:#bfeae2}.text-purple-600{color:#068f79}
+.text-amber-200{color:#fde68a}.text-amber-600{color:#d97706}.text-amber-700{color:#b45309}.text-amber-800{color:#92400e}
+.text-slate-400{color:#94a3b8}.text-slate-500{color:#64748b}.text-slate-700{color:#334155}.text-slate-800{color:#1e293b}
+.text-emerald-600{color:#059669}.text-emerald-700{color:#047857}
+.text-red-500{color:#ef4444}.text-red-600{color:#dc2626}
+.text-blue-700{color:#1d4ed8}
+.bg-white\/25{background-color:rgba(255,255,255,.25)}
+.bg-amber-100{background-color:#fef3c7}.bg-amber-500{background-color:#f59e0b}
+.bg-blue-100{background-color:#dbeafe}.bg-blue-600{background-color:#2563eb}
+.bg-emerald-100{background-color:#d1fae5}.bg-emerald-600{background-color:#059669}
+.bg-purple-100{background-color:#e6f7f4}.bg-purple-600{background-color:#068f79}
+.bg-red-100{background-color:#fee2e2}
+.bg-slate-100{background-color:#f1f5f9}.bg-slate-200{background-color:#e2e8f0}.bg-slate-600{background-color:#475569}
+button{font-family:inherit;border:none;background:none}
+a{text-decoration:none;color:inherit}
+img,svg{display:block;max-width:100%}
+
+/* ===== DESKTOP (laptop) layout ===== */
+@media (min-width: 900px){
+  body .phone{max-width:1100px !important}
+  #tabbar{margin-top:-16px}
+  .tabbtn{font-size:14px;padding:11px 22px}
+  #app > .grid:first-child{grid-template-columns:repeat(4,minmax(0,1fr))}
+  #tlist{display:grid;grid-template-columns:1fr 1fr;column-gap:28px}
+  #app .card{border-radius:18px}
+  .gradient-owner{border-radius:0 0 24px 24px}
+}
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700;900&family=Inter:wght@400;600;700;800;900&display=swap');
+*{-webkit-tap-highlight-color:transparent;margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans','Inter','Noto Sans Ethiopic',sans-serif;background:#eef4f3;color:#1e293b}
+.gradient-owner{background:linear-gradient(135deg,#ffffff 0%,#fffbeb 100%);border-bottom:1px solid #fcd34d}
+.tag-amber{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.card{background:#ffffff;border:1px solid #e3ecea;border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.tag{padding:3px 10px;border-radius:999px;font-size:10px;font-weight:800}
+.phone{max-width:430px;margin:0 auto;min-height:100vh}
+.bar{background:#e3ecea;border-radius:99px;height:8px;overflow:hidden}
+.bar>div{background:linear-gradient(90deg,#10b981,#34d399);height:100%;border-radius:99px;transition:width 1s}
+.chart-bar{background:linear-gradient(180deg,#3fbfa8,#0aa88f);border-radius:3px 3px 0 0;min-height:2px;flex:1}
+.skel{background:linear-gradient(90deg,#e3ecea 25%,#eef4f3 50%,#e3ecea 75%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:16px}
+@keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.hidden{display:none!important}
+.tabbtn{flex-shrink:0;padding:8px 13px;border-radius:12px 12px 0 0;font-size:12px;font-weight:800;background:#e9f0ee;color:#64748b;border:1px solid #e3ecea;border-bottom:none;cursor:pointer;white-space:nowrap}
+.tabbtn.on{background:#fff;color:#0aa88f}
+.mrow{display:flex;align-items:center;gap:8px;padding:10px;border-bottom:1px solid #e9f0ee}
+.mbtn{font-size:10px;font-weight:800;padding:5px 10px;border-radius:99px;cursor:pointer;border:none}
+.modal{position:fixed;inset:0;background:rgba(30,41,59,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal.open{display:flex}
+.paybtn{display:flex;align-items:center;gap:10px;width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #e3ecea;background:#f5f9f8;font-size:13px;font-weight:800;color:#1e293b;cursor:pointer;text-align:left}
+.paybtn:hover{border-color:#10b981;background:#ecfdf5}
+button{cursor:pointer}
+</style>
+</head>
+<body>
+<div class="phone">
+
+<div class="gradient-owner p-4 pb-8">
+  <div class="flex items-center justify-between mb-2">
+    <span class="tag tag-amber">👑 OWNER</span>
+    <a class="tag tag-amber" id="pub-link" href="#">🧊 Public 3D page</a>
+    <button onclick="logoutKey()" class="tag tag-amber" title="Log out">🚪 Exit</button>
+    <span class="tag tag-amber" id="month">—</span>
+  </div>
+  <div class="text-2xl font-black text-slate-800" id="bname">Loading…</div>
+  <div class="text-xs text-amber-700 font-bold" id="bnameAm"></div>
+</div>
+
+<div class="flex gap-1 px-3 -mt-4 overflow-x-auto" id="tabbar" style="position:relative;z-index:5">
+  <button onclick="setTab('overview')" data-t="overview" class="tabbtn on">📊 Overview</button>
+  <button onclick="setTab('tenants')" data-t="tenants" class="tabbtn">🏬 Tenants</button>
+  <button onclick="setTab('invoices')" data-t="invoices" class="tabbtn">🧾 Invoices</button>
+  <button onclick="setTab('acct')" data-t="acct" class="tabbtn">💰 Accounting</button>
+  <button onclick="setTab('meters')" data-t="meters" class="tabbtn">⚡ Meters</button>
+  <button onclick="setTab('maint')" data-t="maint" class="tabbtn">🔧 Maintenance</button>
+  <button onclick="setTab('leads')" data-t="leads" class="tabbtn">✨ Vacancies</button>
+  <button onclick="setTab('ai')" data-t="ai" class="tabbtn">🤖 AI</button>
+  <button onclick="setTab('settings')" data-t="settings" class="tabbtn">⚙️ Settings</button>
+</div>
+<div class="p-3 space-y-4" id="app">
+  <div class="skel h-24"></div><div class="skel h-40"></div><div class="skel h-40"></div>
+</div>
+
+<div class="text-center text-[10px] text-slate-400 py-4">ቢ BinaSmart Owner Console</div>
+</div>
+
+<!-- PAY METHOD MODAL -->
+<div id="pay-modal" class="modal">
+  <div class="card p-5 w-full max-w-sm" style="max-width:340px">
+    <div class="font-black text-lg mb-1">💰 How was it paid?</div>
+    <div class="text-xs text-slate-500 mb-4" id="pay-label">—</div>
+    <div class="space-y-2">
+      <button class="paybtn" onclick="payWith('TELEBIRR')">📱 <span>telebirr</span></button>
+      <button class="paybtn" onclick="payWith('CBE_BIRR')">🏦 <span>CBE Birr</span></button>
+      <button class="paybtn" onclick="payWith('BANK_TRANSFER')">🏛️ <span>Bank transfer</span></button>
+      <button class="paybtn" onclick="payWith('CASH')">💵 <span>Cash / ጥሬ ገንዘብ</span></button>
+    </div>
+    <button onclick="document.getElementById('pay-modal').classList.remove('open')" class="w-full bg-slate-200 text-slate-700 py-2.5 rounded-xl text-sm font-bold mt-3">Cancel</button>
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+let KEY = params.get('key') || localStorage.getItem('bs_key') || '';
+if (params.get('key')) {
+  localStorage.setItem('bs_key', params.get('key'));
+  params.delete('key');
+  history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params.toString() : ''));
+}
+const slug = location.pathname.split('/').filter(Boolean).pop();
+const fmtETB = n => n.toLocaleString() + ' ETB';
+document.getElementById('pub-link').href = '/b/' + slug;
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+async function load(){
+  const r = await fetch('/api/owner/' + slug + '/overview?key=' + encodeURIComponent(KEY));
+  if (r.status === 401) { // REDIR-TO-LOGIN
+    localStorage.removeItem('bs_key'); KEY = '';
+    const prefix = location.pathname.split('/owner/')[0];
+    location.href = prefix + '/login';
+    return;
+  }
+  const d = await r.json();
+  await loadUnits();
+  const now = new Date();
+  document.getElementById('bname').textContent = d.building.name;
+  document.getElementById('bnameAm').textContent = d.building.nameAm;
+  document.getElementById('month').textContent = '📅 ' + MONTHS[now.getMonth()] + ' ' + now.getFullYear();
+
+  const colPct = d.collection.invoiceCount ? Math.round(d.collection.paidCount / d.collection.invoiceCount * 100) : 0;
+  const scanVals = Object.values(d.scansByDay);
+  const scanMax = Math.max(1, ...scanVals);
+
+  const unpaid = d.invoices.filter(i => i.status !== 'PAID');
+  const paid = d.invoices.filter(i => i.status === 'PAID');
+
+  D = d; renderTab();
+}
+
+let D = null, UNITS = [], TAB = 'overview';
+function setTab(t){ TAB = t; document.querySelectorAll('.tabbtn').forEach(function(b){ b.classList.toggle('on', b.dataset.t === t); }); renderTab(); }
+async function loadUnits(){ UNITS = await (await fetch('/api/owner/' + slug + '/units?key=' + encodeURIComponent(KEY))).json(); }
+
+let AI_MSGS = [];
+function aiEsc(s){ return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+function aiBubble(role, text, box){
+  var d = document.createElement('div');
+  d.className = role==='u' ? 'text-right' : 'text-left';
+  d.innerHTML = '<span class="inline-block px-3 py-2 rounded-2xl text-sm '+(role==='u'?'bg-emerald-600 text-white':'bg-slate-100 text-slate-800')+'" style="max-width:85%;white-space:pre-wrap">'+aiEsc(text)+'</span>';
+  box.appendChild(d);
+}
+function renderAI(){
+  var app = document.getElementById('app');
+  app.innerHTML =
+    '<div class="card p-4">'
+    + '<div class="font-black text-lg mb-1">🤖 Bini — Building Assistant</div>'
+    + '<div class="text-xs text-slate-500 mb-3">ስለ ህንፃዎ ይጠይቁ · Ask about rent, vacancies, VAT, maintenance</div>'
+    + '<div id="ai-msgs" class="space-y-2 mb-3" style="max-height:52vh;overflow-y:auto"></div>'
+    + '<form id="ai-form" class="flex gap-2"><input id="ai-in" autocomplete="off" placeholder="ጠይቁ… how much rent is outstanding?" class="flex-1 border rounded-xl px-3 py-2 text-sm"><button class="bg-emerald-600 text-white rounded-xl px-4 text-sm font-bold">➤</button></form>'
+    + '<div class="text-[10px] text-slate-400 mt-2">🔒 Answers use only THIS building\'s live data.</div>'
+    + '</div>';
+  var box = document.getElementById('ai-msgs');
+  if (!AI_MSGS.length) AI_MSGS.push({r:'a', t:'ሰላም! ስለ ህንፃዎ ማንኛውንም ይጠይቁኝ — ኪራይ፣ ክፍት ክፍሎች፣ VAT፣ ጥገና።\nHi! Ask me anything about your building.'});
+  AI_MSGS.forEach(function(m){ aiBubble(m.r, m.t, box); });
+  box.scrollTop = box.scrollHeight;
+  document.getElementById('ai-form').addEventListener('submit', function(e){ e.preventDefault(); ownerAiSend(); });
+}
+async function ownerAiSend(){
+  var inp = document.getElementById('ai-in'); var q = inp.value.trim(); if(!q) return;
+  var box = document.getElementById('ai-msgs');
+  inp.value=''; AI_MSGS.push({r:'u',t:q}); aiBubble('u',q,box);
+  var typing=document.createElement('div'); typing.className='text-left text-xs text-slate-400 px-1'; typing.textContent='ቢኒ እየጻፈ ነው…'; box.appendChild(typing); box.scrollTop=box.scrollHeight;
+  try{
+    var r = await fetch('/api/owner/' + slug + '/ai?key=' + encodeURIComponent(KEY), {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:q})});
+    var d = await r.json(); typing.remove();
+    var rep = (d && d.reply) || 'ይቅርታ።'; AI_MSGS.push({r:'a',t:rep}); aiBubble('a',rep,box);
+  }catch(e){ typing.remove(); aiBubble('a','ይቅርታ፣ የግንኙነት ችግር።',box); }
+  box.scrollTop = box.scrollHeight;
+}
+function copyVatReturn(){
+  if(!ACCT){ alert('Open the Accounting tab first.'); return; }
+  var a=ACCT, v=a.vat;
+  var txt=['BinaSmart — VAT Return (for eTax / etax.mor.gov.et)',
+    'Period: '+a.month,
+    'TIN: '+(a.tin||'-'),
+    'VAT No: '+(v.number||'-'),
+    'Taxable supplies: '+v.taxable+' ETB',
+    'Output VAT (15%): '+v.outputVat+' ETB',
+    'Input VAT (expenses): '+v.inputVat+' ETB',
+    'Net VAT payable: '+v.netVat+' ETB',
+    'File by: '+v.filingDue].join('\n');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){ alert('✅ VAT return copied.\nPaste into etax.mor.gov.et to file.'); }, function(){ prompt('Copy your VAT return:', txt); });
+  } else { prompt('Copy your VAT return:', txt); }
+}
+function renderTab(){
+  if (TAB === 'ai') { return renderAI(); }
+  if (!D) return;
+  const app = document.getElementById('app');
+  const d = D;
+  const colPct = d.collection.invoiceCount ? Math.round(d.collection.paidCount / d.collection.invoiceCount * 100) : 0;
+  const scanVals = Object.values(d.scansByDay); const scanMax = Math.max(1, ...scanVals);
+  const unpaid = d.invoices.filter(i => i.status !== 'PAID'); const paid = d.invoices.filter(i => i.status === 'PAID');
+
+  if (TAB === 'overview'){
+    app.innerHTML = `
+    <div class="grid grid-cols-2 gap-2">
+      <div class="card p-3"><div class="text-[10px] text-slate-400 font-bold">OCCUPANCY</div>
+        <div class="text-2xl font-black text-emerald-600">${d.stats.occupancyPct}%</div>
+        <div class="text-[10px] text-slate-400">${d.stats.occupied}/${d.stats.units} units • ${d.stats.vacant} vacant</div></div>
+      <div class="card p-3"><div class="text-[10px] text-slate-400 font-bold">EXPECTED / MONTH</div>
+        <div class="text-xl font-black text-amber-600">${fmtETB(d.stats.expectedMonthly)}</div></div>
+      <div class="card p-3"><div class="text-[10px] text-slate-400 font-bold">QR SCANS (30D)</div>
+        <div class="text-2xl font-black text-purple-600">${d.stats.qrScans30d}</div></div>
+      <div class="card p-3"><div class="text-[10px] text-slate-400 font-bold">OPEN MAINTENANCE</div>
+        <div class="text-2xl font-black ${d.stats.openMaintenance ? 'text-red-500' : 'text-slate-400'}">${d.stats.openMaintenance}</div></div>
+    </div>
+    <div class="card p-4">
+      <div class="flex items-center justify-between mb-1"><div class="font-black text-sm text-slate-800">💰 Rent Collection</div>
+        <span class="tag ${colPct >= 80 ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}">${colPct}% collected</span></div>
+      <div class="text-[11px] text-slate-500 mb-2">${d.collection.paidCount}/${d.collection.invoiceCount} invoices paid</div>
+      <div class="bar mb-3"><div style="width:${colPct}%"></div></div>
+      <div class="grid grid-cols-2 gap-2 text-center">
+        <div class="rounded-xl p-2" style="background:#ecfdf5;border:1px solid #a7f3d0"><div class="text-[9px] text-emerald-700 font-bold">COLLECTED</div>
+          <div class="text-sm font-black text-emerald-600">${fmtETB(d.collection.collected)}</div></div>
+        <div class="rounded-xl p-2" style="background:#fef2f2;border:1px solid #fecaca"><div class="text-[9px] text-red-600 font-bold">OUTSTANDING</div>
+          <div class="text-sm font-black text-red-500">${fmtETB(d.collection.outstanding)}</div></div>
+      </div>
+    </div>
+    <div class="card p-4">
+      <div class="font-black text-sm mb-2 text-slate-800">📈 QR Scans — last 14 days</div>
+      <div class="flex items-end gap-1 h-16">${scanVals.map(v => `<div class="chart-bar" style="height:${Math.round(v / scanMax * 100)}%"></div>`).join('')}</div>
+    </div>
+    ${d.offers.length ? `<div class="card p-4"><div class="font-black text-sm mb-2 text-slate-800">🔥 Marketplace Offers</div>
+      <div class="space-y-2">${d.offers.map(o => `<div class="flex items-center gap-2 text-[11px]"><span>${o.icon || '🏬'}</span>
+        <div class="flex-1"><span class="font-bold text-slate-700">${o.title}</span></div>
+        <span class="tag bg-slate-100 text-slate-500">👁 ${o.views}</span><span class="tag bg-amber-100 text-amber-700">🎟 ${o.claims}</span></div>`).join('')}</div></div>` : ''}`;
+  }
+
+  if (TAB === 'tenants'){
+    const payColor = { PAID: '#10b981', PENDING: '#f59e0b', OVERDUE: '#ef4444', NONE: '#cbd5e1' };
+    const rows = UNITS.map(u => `
+      <div class="mrow" style="border-left:4px solid ${u.tenant ? payColor[u.pay] || '#cbd5e1' : '#cbd5e1'};border-radius:6px">
+        <div style="min-width:52px"><div class="font-black text-[12px]">${u.number}</div>
+          <div class="text-[9px] text-slate-400">${u.floor === 0 ? 'Ground' : 'F' + u.floor}</div></div>
+        <div class="flex-1" style="min-width:0">
+          ${u.tenant ? `<div class="text-[11px] font-bold text-slate-800" style="line-height:1.3">${u.tenant.nameAm || u.tenant.name}${u.contractDays !== null && u.contractDays <= 60 ? ' <span class="tag bg-red-100 text-red-600">📋 ' + u.contractDays + 'd</span>' : ''}</div>
+            <div class="text-[9px] text-slate-400">${u.tenant.name !== u.tenant.nameAm ? u.tenant.name + ' • ' : ''}${u.tenant.phone}</div>`
+          : '<div class="text-[11px] font-black text-amber-600">VACANT / ባዶ</div>'}
+          <div class="text-[10px] font-black text-emerald-600">${fmtETB(u.monthlyRent)}/mo</div>
+        </div>
+        <div class="flex flex-col gap-1">
+          ${u.tenant ? `<button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="editUnit('${u.id}')">✏️ Edit</button>
+            <button class="mbtn bg-slate-200 text-slate-600" onclick="vacateUnit('${u.id}','${u.number}')">🚪 Vacate</button>`
+          : `<button class="mbtn" style="background:#059669;color:#fff" onclick="occupyUnit('${u.id}','${u.number}')">➕ Add tenant</button>
+            <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="restoreUnit('${u.id}','${u.number}')">↩️ Restore</button>`}
+        </div>
+      </div>`).join('');
+    app.innerHTML = `<div class="card p-2">
+      <div class="flex gap-3 px-2 pt-2 text-[9px] font-bold text-slate-500">
+        <span>🟢 Paid</span><span>🟡 Waiting</span><span>🔴 Overdue</span><span>📋 = contract ending soon</span></div>
+      <div class="flex items-center justify-between p-2">
+      <div class="font-black text-sm">🏬 All Units — ${UNITS.length} (${UNITS.filter(u=>!u.tenant).length} vacant)</div>
+      <div class="flex gap-1.5 items-center">
+        <button class="mbtn" style="background:#059669;color:#fff" onclick="addUnit()">➕ Unit</button>
+        <input id="tsearch" oninput="filterTenants()" placeholder="Search / ፈልግ" style="width:110px;background:#f5f9f8;border:1.5px solid #e3ecea;border-radius:10px;padding:6px 10px;font-size:12px"></div></div>
+      <div id="tlist">${rows}</div></div>`;
+  }
+
+  if (TAB === 'invoices'){
+    app.innerHTML = `
+    <div class="card p-4"><div class="flex items-center justify-between">
+      <div class="font-black text-sm">🧾 ${new Date().toLocaleString('en',{month:'long'})} — ${d.collection.paidCount}/${d.collection.invoiceCount} paid</div>
+      <button class="mbtn" style="background:#0aa88f;color:#fff" onclick="genInvoices()">⚡ Generate month invoices</button></div></div>
+    ${unpaid.length ? `<div class="card p-4"><div class="font-black text-sm mb-2 text-red-500">⏰ Unpaid (${unpaid.length})</div>
+      <div class="space-y-2">${unpaid.map(i => `
+      <div class="rounded-xl p-2.5 flex items-center gap-2" style="background:#fef2f2;border:1px solid #fecaca">
+        <div class="flex-1"><div class="text-[11px] font-black">${i.shop?.name || 'Unit'} • ${i.unit}</div>
+        <div class="text-[9px] text-slate-400">code: ${i.paymentCode || '—'}</div></div>
+        <div class="text-right"><div class="text-[11px] font-black text-red-500">${fmtETB(i.amount)}</div>
+        <div class="flex gap-1 mt-1 justify-end">
+        <button onclick="sendInvoice('${i.id}','${i.unit}')" class="tag" style="background:#25D366;color:#fff">📤 Send</button>
+        <button onclick="markPaid('${i.id}','${(i.shop?.name || 'Unit').replace(/'/g,'')} ${i.unit} — ${i.amount.toLocaleString()} ETB')" class="tag bg-emerald-600 text-white">✓ Paid</button></div></div>
+      </div>`).join('')}</div></div>` : '<div class="card p-4 text-center text-sm text-emerald-600 font-black">✅ All invoices paid!</div>'}
+    ${paid.length ? `<div class="card p-4"><div class="font-black text-sm mb-2 text-slate-800">✅ Paid (${paid.length})</div>
+      <div class="space-y-1.5">${paid.map(i => `<div class="flex items-center gap-2 text-[10px]">
+        <span class="font-bold flex-1">${i.shop?.name || ''} ${i.unit}</span>
+        <span class="text-slate-400">${i.method || ''}</span>
+        <span class="font-black text-emerald-600">${fmtETB(i.amount)}</span>
+        <button onclick="unpayInvoice('${i.id}','${(i.shop?.name || 'Unit').replace(/'/g,'')} ${i.unit}')" class="tag bg-slate-200 text-slate-500">↩️</button></div>`).join('')}</div></div>` : ''}`;
+  }
+
+  if (TAB === 'acct'){
+    if (!ACCT){ app.innerHTML = '<div class="skel h-40"></div>'; loadAcct().then(renderTab); return; }
+    const a = ACCT, v = a.vat;
+    const daysLeft = Math.ceil((new Date(v.filingDue) - Date.now()) / 86400000);
+    app.innerHTML = `
+    <div class="card p-3 flex items-center gap-2">
+      <button class="mbtn bg-slate-200 text-slate-600" onclick="acctMonth(-1)">‹</button>
+      <div class="flex-1 text-center font-black text-sm">${new Date(a.month + '-15').toLocaleString('en',{month:'long',year:'numeric'})}</div>
+      <button class="mbtn bg-slate-200 text-slate-600" onclick="acctMonth(1)">›</button>
+    </div>
+    <div class="card p-4" style="background:linear-gradient(135deg,#eef7f5,#fff)">
+      <div class="flex items-center justify-between mb-2">
+        <div class="font-black text-sm">🇪🇹 VAT — 15% ${v.registered ? '' : '(not registered)'}</div>
+        <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="vatSettings()">⚙️ VAT settings</button>
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div class="rounded-xl p-2 text-center" style="background:#fff;border:1px solid #e3ecea"><div class="text-[9px] text-slate-400 font-bold">TAXABLE SUPPLIES</div><div class="text-sm font-black">${fmtETB(v.taxable)}</div></div>
+        <div class="rounded-xl p-2 text-center" style="background:#fff;border:1px solid #e3ecea"><div class="text-[9px] text-slate-400 font-bold">OUTPUT VAT (rent)</div><div class="text-sm font-black text-violet" style="color:#0aa88f">${fmtETB(v.outputVat)}</div></div>
+        <div class="rounded-xl p-2 text-center" style="background:#fff;border:1px solid #e3ecea"><div class="text-[9px] text-slate-400 font-bold">INPUT VAT (expenses)</div><div class="text-sm font-black text-emerald-600">− ${fmtETB(v.inputVat)}</div></div>
+        <div class="rounded-xl p-2 text-center" style="background:#fef3c7;border:1px solid #fcd34d"><div class="text-[9px] text-amber-700 font-bold">${v.netVat >= 0 ? 'NET VAT PAYABLE' : 'VAT CREDIT'}</div><div class="text-sm font-black text-amber-700">${fmtETB(Math.abs(v.netVat))}</div></div>
+      </div>
+      <div class="flex items-center justify-between mt-2">
+        <div class="text-[10px] ${daysLeft < 10 ? 'text-red-500 font-black' : 'text-slate-500'}">⏰ File by ${v.filingDue}${daysLeft >= 0 ? ' (' + daysLeft + ' days)' : ' — OVERDUE'}</div>
+        <a class="mbtn" style="background:#0aa88f;color:#fff" target="_blank" href="/owner/${slug}/vat-report?month=${a.month}&key=${encodeURIComponent(KEY)}">🖨️ VAT report</a>
+      </div>
+      <button class="mbtn" style="background:#1e293b;color:#fff;width:100%;margin-top:8px" onclick="copyVatReturn()">📋 Copy VAT return for eTax</button>
+      <div class="text-[9px] text-slate-400 mt-1.5 leading-snug">👉 Paste these figures into <b>etax.mor.gov.et</b> to file your monthly VAT return. BinaSmart prepares the return; you submit it. (Fully-automatic clearance filing needs MOR e-invoicing certification — Directive 1142.)</div>
+    </div>
+    <div class="card p-4">
+      <div class="font-black text-sm mb-2">📒 Profit & Loss — ${a.month}</div>
+      <div class="grid grid-cols-2 gap-2 text-center">
+        <div class="rounded-xl p-2" style="background:#ecfdf5;border:1px solid #a7f3d0"><div class="text-[9px] text-emerald-700 font-bold">COLLECTED</div><div class="text-sm font-black text-emerald-600">${fmtETB(a.income.collected)}</div></div>
+        <div class="rounded-xl p-2" style="background:#fef2f2;border:1px solid #fecaca"><div class="text-[9px] text-red-600 font-bold">EXPENSES</div><div class="text-sm font-black text-red-500">${fmtETB(a.expenseTotal)}</div></div>
+      </div>
+      <div class="text-center mt-2 text-[11px]">Net: <b class="${a.profit >= 0 ? 'text-emerald-600' : 'text-red-500'}">${fmtETB(a.profit)} ETB</b> · invoiced ${fmtETB(a.income.invoiced)} · outstanding ${fmtETB(a.income.outstanding)}</div>
+    </div>
+    <div class="card p-4">
+      <div class="flex items-center justify-between mb-2"><div class="font-black text-sm">👷 Building Staff${STAFF ? ' (' + STAFF.staff.length + ')' : ''}</div>
+        <div class="flex gap-1.5">
+          <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="addStaff()">➕ Add staff</button>
+          ${STAFF && STAFF.staff.length ? `<button class="mbtn" style="background:${STAFF.postedThisMonth ? '#e2e8f0;color:#64748b' : '#059669;color:#fff'}" onclick="postSalaries()">${STAFF.postedThisMonth ? '✓ Salaries posted' : '⚡ Post month salaries'}</button>` : ''}
+        </div></div>
+      ${STAFF && STAFF.staff.length ? `<div class="space-y-1.5">${STAFF.staff.map(s => `
+        <div class="mrow"><div class="flex-1"><div class="text-[11px] font-bold">${s.name} <span class="tag bg-slate-100 text-slate-500">${s.role}</span></div>
+          ${s.phone ? `<div class="text-[9px] text-slate-400">${s.phone}</div>` : ''}</div>
+          <div class="text-[11px] font-black">${fmtETB(s.salary)}<span class="text-[9px] text-slate-400 font-normal">/mo</span></div>
+          <button class="mbtn bg-slate-200 text-slate-500" onclick="editStaff('${s.id}')">✏️</button>
+          <button class="mbtn bg-slate-200 text-slate-500" onclick="removeStaff('${s.id}','${s.name.replace(/'/g,'')}')">🗑</button></div>`).join('')}
+        <div class="text-right text-[10px] text-slate-500 mt-1">Total payroll: <b>${fmtETB(STAFF.monthlyTotal)} ETB/mo</b> · salaries are VAT-exempt</div></div>`
+      : '<div class="text-xs text-slate-400">Add guards, cleaners, lift operator, office staff — then post all salaries each month with one tap.</div>'}
+    </div>
+    <div class="card p-4">
+      <div class="flex items-center justify-between mb-2"><div class="font-black text-sm">🧾 Expenses (${a.expenses.length})</div>
+        <button class="mbtn" style="background:#059669;color:#fff" onclick="addExpense()">➕ Add expense</button></div>
+      ${a.expenses.length ? `<div class="space-y-1.5">${a.expenses.map(e => `
+        <div class="mrow"><div class="flex-1"><div class="text-[11px] font-bold">${e.vendor} <span class="tag bg-slate-100 text-slate-500">${e.category}</span></div>
+          <div class="text-[9px] text-slate-400">${e.date}${e.receiptNo ? ' • #' + e.receiptNo : ''}${e.description ? ' • ' + e.description : ''}</div></div>
+          <div class="text-right"><div class="text-[11px] font-black text-red-500">${fmtETB(e.amount)}</div><div class="text-[9px] text-slate-400">VAT ${fmtETB(e.vatAmount)}</div></div>
+          <button class="mbtn bg-slate-200 text-slate-500" onclick="delExpense('${e.id}')">🗑</button></div>`).join('')}</div>`
+      : '<div class="text-xs text-slate-400">No expenses this month — add electricity, cleaning, guards, repairs…</div>'}
+    </div>
+    <div class="card p-4">
+      <div class="font-black text-sm mb-2">🔎 Audit Trail (${a.audit.length})</div>
+      <div class="space-y-1" style="max-height:260px;overflow-y:auto">${a.audit.map(x => `
+        <div class="flex items-center gap-2 text-[10px] py-1" style="border-bottom:1px solid #e9f0ee">
+          <span class="text-slate-400" style="min-width:88px">${x.at}</span>
+          <span class="tag ${x.action.includes('PAID') ? 'bg-emerald-100 text-emerald-700' : x.action.includes('DELETED') || x.action.includes('VACATED') ? 'bg-red-100 text-red-600' : 'bg-slate-100 text-slate-600'}">${x.action}</span>
+          <span class="flex-1 text-slate-600" style="min-width:0;overflow:hidden;text-overflow:ellipsis">${x.detail || ''}</span>
+          ${x.amount != null ? '<b>' + fmtETB(x.amount) + '</b>' : ''}</div>`).join('') || '<div class="text-xs text-slate-400">No activity yet</div>'}
+      </div>
+    </div>`;
+  }
+
+  if (TAB === 'meters'){
+    if (!METERS){ app.innerHTML = '<div class="skel h-40"></div>'; loadMeters().then(renderTab); return; }
+    const mrow = (u, type, icon, unitTxt) => {
+      const m = u[type];
+      return `<div class="flex items-center gap-2 text-[10px] py-1" style="border-bottom:1px solid #e9f0ee${m.high ? ';background:#fef2f2' : ''}">
+        <span>${icon}</span>
+        <span class="flex-1">${m.last != null ? 'last: <b>' + m.last.toLocaleString() + '</b> (' + m.lastAt + ')' : '<em class="text-slate-400">no reading yet</em>'}
+        ${m.consumption != null ? ' · Δ <b>' + m.consumption.toLocaleString() + ' ' + unitTxt + '</b> = <b class="text-emerald-600">' + fmtETB(m.charge) + '</b>' : ''}
+        ${m.high ? ' <span class="tag bg-red-100 text-red-600">⚠ HIGH — check leak/waste</span>' : ''}</span>
+        <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="addReading('${u.unitId}','${type === 'electricity' ? 'ELECTRICITY' : 'WATER'}','${u.number}')">📥 Read</button>
+        ${m.consumption ? `<button class="mbtn" style="background:#059669;color:#fff" onclick="billMeter('${u.unitId}','${type === 'electricity' ? 'ELECTRICITY' : 'WATER'}','${u.number}',${m.charge})">💡 Bill</button>` : ''}
+      </div>`;
+    };
+    app.innerHTML = `
+    <div class="card p-3 text-[10px] text-slate-500">⚡ Tariffs: electricity <b>${METERS.tariffs.electricity} ETB/kWh</b> · water <b>${METERS.tariffs.water} ETB/m³</b> · Enter each meter's number monthly → the system computes usage & bills the tenant. ⚠ red rows = suspiciously high (possible leakage / ብክነት).</div>
+    <div class="card p-2">${METERS.units.map(u => `
+      <div class="p-2" style="border-bottom:2px solid #e9f0ee">
+        <div class="text-[11px] font-black">${u.number} <span class="text-slate-400 font-normal">· ${u.tenant}</span></div>
+        ${mrow(u, 'electricity', '💡', 'kWh')}
+        ${mrow(u, 'water', '🚿', 'm³')}
+      </div>`).join('')}</div>`;
+  }
+
+  if (TAB === 'maint'){
+    const open = d.maintenance.filter(m => !['DONE','VERIFIED'].includes(m.status));
+    const closed = d.maintenance.filter(m => ['DONE','VERIFIED'].includes(m.status));
+    app.innerHTML = `<div class="card p-4">
+      <div class="font-black text-sm mb-2">🔧 Open Requests (${open.length})</div>
+      ${open.length ? `<div class="space-y-2">${open.map(m => `
+        <div class="rounded-xl p-2.5" style="background:#fffbeb;border:1px solid #fcd34d">
+          <div class="text-[11px] font-black">${MAINT_ICON[m.type] || '🔧'} ${m.type} <span class="tag ${m.status==='OPEN'?'bg-red-100 text-red-600':'bg-blue-100 text-blue-700'}">${m.status.replace('_',' ')}</span></div>
+          <div class="text-[10px] text-slate-500 mt-0.5">${m.description}</div>
+          <div class="text-[9px] text-slate-400">${m.name || ''} ${m.phone || ''} • ${new Date(m.createdAt).toLocaleDateString()}</div>
+          <div class="flex gap-1.5 mt-1.5 justify-end">
+            ${m.phone ? `<a href="tel:${m.phone}" class="tag bg-slate-600 text-white">📞</a>` : ''}
+            ${m.status === 'OPEN' ? `<button onclick="setMaint('${m.id}','IN_PROGRESS')" class="tag bg-blue-600 text-white">▶ Start</button>` : ''}
+            <button onclick="setMaint('${m.id}','DONE')" class="tag bg-emerald-600 text-white">✓ Done</button>
+          </div></div>`).join('')}</div>` : '<div class="text-xs text-slate-400">No open requests 🎉</div>'}
+      ${closed.length ? `<div class="text-[10px] text-slate-400 mt-3">✅ ${closed.length} resolved</div>` : ''}</div>
+    <div class="card p-4"><div class="font-black text-sm mb-2">🩺 Asset Health / የንብረት ጤንነት</div>
+      ${(function(){
+        const byType = {};
+        d.maintenance.forEach(m => { byType[m.type] = byType[m.type] || { n: 0, open: 0, last: '' }; byType[m.type].n++; if (!['DONE','VERIFIED','CANCELLED'].includes(m.status)) byType[m.type].open++; if (!byType[m.type].last) byType[m.type].last = m.createdAt; });
+        const keys = Object.keys(byType);
+        if (!keys.length) return '<div class="text-xs text-slate-400">No history yet — asset health builds as requests come in.</div>';
+        return keys.map(k => `<div class="flex items-center gap-2 text-[11px] py-1" style="border-bottom:1px solid #e9f0ee">
+          <span class="flex-1 font-bold">${MAINT_ICON[k] || '🔧'} ${k}</span>
+          <span class="tag bg-slate-100 text-slate-500">${byType[k].n}× total</span>
+          ${byType[k].open ? '<span class="tag bg-amber-100 text-amber-700">' + byType[k].open + ' open</span>' : ''}
+          ${byType[k].n >= 3 ? '<span class="tag bg-red-100 text-red-600">⚠ recurring — consider replacement / መቀየር ይታሰብ</span>' : ''}</div>`).join('');
+      })()}</div>`;
+  }
+
+  if (TAB === 'leads'){
+    const vac = UNITS.filter(u => !u.tenant);
+    app.innerHTML = `
+    <div class="card p-4"><div class="font-black text-sm mb-2">🈳 Vacant Units (${vac.length})</div>
+      ${vac.length ? `<div class="space-y-2">${vac.map(u => `<div class="mrow" style="border:1px dashed #6ee7b7;border-radius:12px;background:#f0fdf9">
+        <div class="flex-1"><div class="font-black text-[12px] text-emerald-700">${u.number} • ${u.floor===0?'Ground':'F'+u.floor}</div>
+        <div class="text-[10px] text-slate-500">${u.areaSqm} m² • ${fmtETB(u.monthlyRent)}/mo</div></div>
+        <button class="mbtn" style="background:#059669;color:#fff" onclick="occupyUnit('${u.id}','${u.number}')">➕ Add</button>
+        <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="restoreUnit('${u.id}','${u.number}')">↩️</button></div>`).join('')}</div>` : '<div class="text-xs text-slate-400">Fully occupied 💪</div>'}</div>
+    <div class="card p-4"><div class="font-black text-sm mb-2">🎯 Leads from QR page (${d.leads.length})</div>
+      ${d.leads.length ? `<div class="space-y-2">${d.leads.map(l => `<div class="mrow">
+        <div class="flex-1"><div class="text-[11px] font-black">${l.name}</div>
+        <div class="text-[9px] text-slate-400">wants ${l.unit} • ${new Date(l.createdAt).toLocaleDateString()}</div></div>
+        <a href="tel:${l.phone}" class="tag bg-purple-600 text-white">📞 ${l.phone}</a></div>`).join('')}</div>` : '<div class="text-xs text-slate-400">No leads yet — the QR poster brings them!</div>'}</div>`;
+  }
+
+  if (TAB === 'settings'){
+    app.innerHTML = `
+    <div class="card p-4"><div class="font-black text-sm mb-2">🏦 Payment Accounts</div>
+      ${(d.bankAccounts || []).map(a => `<div class="flex justify-between text-[11px] py-1 border-b" style="border-color:#e9f0ee">
+        <span class="text-slate-600">${a.bank}</span><span class="font-black">${a.account}</span></div>`).join('')}
+      ${d.tinNumber ? `<div class="flex justify-between text-[11px] py-1"><span class="text-slate-600">TIN</span><span class="font-black">${d.tinNumber}</span></div>` : ''}</div>
+    <div class="card p-4 space-y-2">
+      <div class="font-black text-sm mb-1">🔗 Links</div>
+      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/b/${slug}" target="_blank">🏢 Public building page</a>
+      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/nav" target="_blank">🚶 3D walk (entrance QR)</a>
+      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/owner/${slug}/report?key=${encodeURIComponent(KEY)}" target="_blank">📄 Full printable report</a>
+      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/static/qr-poster.html?b=${slug}" target="_blank">🖨️ QR poster</a>
+      <button class="mbtn w-full" style="background:#059669;color:#fff;padding:10px" onclick="addBuilding()">🏢 ➕ Add another building / ሌላ ህንፃ ጨምር</button>
+      <a class="mbtn w-full block text-center" style="background:#fef3c7;color:#92400e;padding:10px" href="/owner">🔑 Change password / የይለፍ ቃል</a>
+      <button class="mbtn w-full" style="background:#fee2e2;color:#dc2626;padding:10px" onclick="logoutKey()">🚪 Logout / ውጣ</button>
+    </div>
+    <div class="text-center text-[10px] text-slate-400">Support: <a class="font-bold text-violet" href="https://wa.me/251911244344">WhatsApp +251 911 244 344</a></div>`;
+  }
+}
+
+let ACCT = null, ACCT_MONTH = new Date().toISOString().slice(0, 7);
+let STAFF = null, METERS = null;
+async function loadMeters(){ METERS = await (await fetch('/api/owner/' + slug + '/meters?key=' + encodeURIComponent(KEY))).json(); }
+async function addReading(unitId, type, num){
+  const v = prompt((type === 'ELECTRICITY' ? '💡 Electric' : '🚿 Water') + ' meter reading for ' + num + ' / የቆጣሪ ንባብ:'); if (!v) return;
+  const r = await (await fetch('/api/owner/' + slug + '/meter-reading?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ unitId: unitId, type: type, reading: v }) })).json();
+  if (r.consumption != null) alert('Usage: ' + r.consumption.toFixed(1) + (type === 'ELECTRICITY' ? ' kWh' : ' m³') + ' = ' + (r.charge || 0).toLocaleString() + ' ETB');
+  METERS = null; renderTab();
+}
+async function billMeter(unitId, type, num, charge){
+  if (!confirm('Bill ' + num + ' — ' + charge.toLocaleString() + ' ETB for ' + (type === 'ELECTRICITY' ? 'electricity' : 'water') + '? Creates an invoice.')) return;
+  const r = await (await fetch('/api/owner/' + slug + '/meter-bill?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ unitId: unitId, type: type }) })).json();
+  alert(r.ok ? '✓ Invoice created: ' + r.code + ' — ' + r.amount.toLocaleString() + ' ETB' : 'Error: ' + r.error);
+  METERS = null; load();
+}
+async function loadAcct(){
+  const [a, s] = await Promise.all([
+    fetch('/api/owner/' + slug + '/accounting?month=' + ACCT_MONTH + '&key=' + encodeURIComponent(KEY)).then(r => r.json()),
+    fetch('/api/owner/' + slug + '/staff?key=' + encodeURIComponent(KEY)).then(r => r.json())
+  ]);
+  ACCT = a; STAFF = s;
+}
+async function addStaff(){
+  const name = prompt('Staff name / የሰራተኛ ስም:'); if (!name) return;
+  const role = prompt('Role: GUARD / CLEANER / LIFT / OFFICE / MANAGER / OTHER', 'GUARD') || 'OTHER';
+  const salary = prompt('Monthly salary (ETB):'); if (!salary) return;
+  const phone = prompt('Phone (optional):') || '';
+  await fetch('/api/owner/' + slug + '/staff?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, role: role, salary: salary, phone: phone }) });
+  ACCT = null; renderTab();
+}
+async function editStaff(id){
+  const s = STAFF.staff.find(x => x.id === id);
+  const salary = prompt('New salary for ' + s.name + ' (ETB):', s.salary); if (salary === null) return;
+  await fetch('/api/owner/' + slug + '/staff/' + id + '/update?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ salary: salary }) });
+  ACCT = null; renderTab();
+}
+async function removeStaff(id, name){
+  if (!confirm('Remove ' + name + ' from staff? / ይሰረዝ?')) return;
+  await fetch('/api/owner/' + slug + '/staff/' + id + '/update?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ remove: true }) });
+  ACCT = null; renderTab();
+}
+async function postSalaries(){
+  if (!confirm('Post ALL staff salaries as ' + ACCT_MONTH + ' expenses? (once per month)')) return;
+  const r = await (await fetch('/api/owner/' + slug + '/post-salaries?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ month: ACCT_MONTH }) })).json();
+  alert('Posted: ' + r.created + (r.skipped ? ', already posted: ' + r.skipped : ''));
+  ACCT = null; renderTab();
+}
+function acctMonth(d){
+  const [y, m] = ACCT_MONTH.split('-').map(Number);
+  const nd = new Date(Date.UTC(y, m - 1 + d, 1));
+  ACCT_MONTH = nd.toISOString().slice(0, 7);
+  ACCT = null; renderTab();
+}
+async function addExpense(){
+  const vendor = prompt('Vendor / who was paid? (e.g. Ethio Electric)'); if (!vendor) return;
+  const amount = prompt('Total amount paid (ETB):'); if (!amount) return;
+  const vat = prompt('VAT shown on the receipt (ETB) — 0 if none:', Math.round(parseFloat(amount) * 15 / 115)); if (vat === null) return;
+  const cat = prompt('Category: SALARY / CLEANING / SECURITY / REPAIRS / UTILITIES / OFFICE / OTHER', 'REPAIRS') || 'OTHER';
+  const receipt = prompt('Receipt number (optional):') || '';
+  await fetch('/api/owner/' + slug + '/expense?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ vendor: vendor, amount: amount, vatAmount: vat, category: cat, receiptNo: receipt, date: ACCT_MONTH + '-' + String(new Date().getDate()).padStart(2, '0') }) });
+  ACCT = null; renderTab();
+}
+async function delExpense(id){
+  if (!confirm('Delete this expense?')) return;
+  await fetch('/api/owner/' + slug + '/expense/' + id + '/delete?key=' + encodeURIComponent(KEY), { method: 'POST' });
+  ACCT = null; renderTab();
+}
+async function vatSettings(){
+  const reg = confirm('Is this building VAT-registered? OK = Yes, Cancel = No');
+  let no = null;
+  if (reg) no = prompt('VAT registration number (optional):', (ACCT && ACCT.vat.number) || '');
+  await fetch('/api/owner/' + slug + '/vat-settings?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ vatRegistered: reg, vatNumber: no, vatInclusive: true }) });
+  ACCT = null; renderTab();
+}
+function filterTenants(){
+  const q = document.getElementById('tsearch').value.toLowerCase();
+  document.querySelectorAll('#tlist .mrow').forEach(function(r){ r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+}
+async function editUnit(id){
+  const u = UNITS.find(x => x.id === id);
+  const name = prompt('Tenant / shop name:', u.tenant.nameAm || u.tenant.name); if (name === null) return;
+  const phone = prompt('Phone:', u.tenant.phone); if (phone === null) return;
+  const rent = prompt('Monthly rent (ETB):', u.monthlyRent); if (rent === null) return;
+  await fetch('/api/owner/' + slug + '/unit/' + id + '/update?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tenantName: name, tenantPhone: phone, rent: rent }) });
+  await loadUnits(); renderTab();
+}
+async function vacateUnit(id, num){
+  if (!confirm('⚠️ Mark unit ' + num + ' as VACANT?\nThe tenancy will be ended and the unit advertised for rent.\nክፍሉ ባዶ ይሆናል እና ለኪራይ ይተዋወቃል።')) return;
+  const typed = prompt('🔒 To confirm, TYPE the unit number exactly:\nለማረጋገጥ የክፍሉን ቁጥር ይጻፉ: ' + num);
+  if (typed === null) return;
+  if (typed.trim() !== num){ alert('❌ Did not match — cancelled. / አልተዛመደም — ተሰርዟል'); return; }
+  await fetch('/api/owner/' + slug + '/unit/' + id + '/vacate?key=' + encodeURIComponent(KEY), { method: 'POST' });
+  alert('Unit ' + num + ' vacated. You can UNDO with the ↩️ Restore button. / በ↩️ መመለስ ይችላሉ');
+  await loadUnits(); load();
+}
+async function addUnit(){
+  const number = prompt('New unit number (e.g. 305 or G-07) / የክፍል ቁጥር:'); if (!number) return;
+  const floor = prompt('Floor (0 = Ground) / ፎቅ:', '1'); if (floor === null) return;
+  const rent = prompt('Monthly rent (ETB) / ወርሃዊ ኪራይ:', '0'); if (rent === null) return;
+  const r = await (await fetch('/api/owner/' + slug + '/add-unit?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ number: number, floor: floor, rent: rent }) })).json();
+  alert(r.ok ? '✓ Unit ' + number + ' created (vacant — use ➕ Add tenant to fill it)' : '❌ ' + (r.error === 'unit_number_exists' ? 'That unit number already exists' : r.error));
+  await loadUnits(); renderTab();
+}
+async function addBuilding(){
+  const name = prompt('🏢 New building name (English) / የህንፃው ስም:'); if (!name) return;
+  const nameAm = prompt('Name in Amharic / በአማርኛ:', name) || name;
+  const floors = prompt('Number of floors (G+? total) / ስንት ፎቅ:', '5'); if (!floors) return;
+  const subCity = prompt('Area / Sub-city (e.g. Bole) / አካባቢ:') || '';
+  if (!confirm('Create "' + name + '" (' + floors + ' floors, ' + (subCity || 'Addis Ababa') + ')?\nIt will appear on your login and on bina.et.')) return;
+  const r = await (await fetch('/api/owner/' + slug + '/add-building?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, nameAm: nameAm, floors: floors, subCity: subCity }) })).json();
+  if (r.ok){
+    alert('✅ ' + r.name + ' created!\n\n• Dashboard: bina.et/owner/' + r.slug + '\n• Its own access key: ' + r.key + '\n• It now appears when you login with your phone.\n\nNext: open it and use ➕ Unit to add its rooms.');
+  } else alert('❌ ' + r.error);
+}
+async function restoreUnit(id, num){
+  if (!confirm('↩️ Restore the previous tenant to unit ' + num + '? / የቀድሞውን ተከራይ መመለስ?')) return;
+  const r = await (await fetch('/api/owner/' + slug + '/unit/' + id + '/restore?key=' + encodeURIComponent(KEY), { method: 'POST' })).json();
+  alert(r.ok ? '✓ Restored: ' + r.restored : '❌ ' + (r.error === 'no_previous_tenant' ? 'No previous tenant on this unit' : r.error));
+  await loadUnits(); load();
+}
+async function occupyUnit(id, num){
+  const name = prompt('New tenant name for ' + num + ':'); if (!name) return;
+  const phone = prompt('Tenant phone (09… / +2519…):'); if (!phone) return;
+  const rent = prompt('Monthly rent (ETB):'); if (rent === null) return;
+  await fetch('/api/owner/' + slug + '/unit/' + id + '/occupy?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, phone: phone, rent: rent }) });
+  await loadUnits(); load();
+}
+async function unpayInvoice(id, label){
+  if (!confirm('↩️ UNDO payment for ' + label + '?\nThe invoice will go back to UNPAID. / ክፍያው ይሰረዝና ወደ ያልተከፈለ ይመለሳል')) return;
+  const typed = prompt('Type UNDO to confirm / ለማረጋገጥ UNDO ብለው ይጻፉ:');
+  if ((typed || '').trim().toUpperCase() !== 'UNDO') { alert('Cancelled — nothing changed.'); return; }
+  const r = await (await fetch('/api/owner/' + slug + '/invoice/' + id + '/unpay?key=' + encodeURIComponent(KEY), { method: 'POST' })).json();
+  if (r.ok) { alert('✅ Reverted to ' + r.status); DATA = null; load(); } else alert('❌ ' + r.error);
+}
+async function sendInvoice(id, unit){
+  if (!confirm('📤 Send this invoice to the tenant of ' + unit + ' by WhatsApp/Telegram? / ደረሰኙን ለተከራዩ ይላክ?')) return;
+  const r = await (await fetch('/api/owner/' + slug + '/invoice/' + id + '/send?key=' + encodeURIComponent(KEY), { method: 'POST' })).json();
+  alert(r.ok ? (r.delivered ? '✅ Sent to tenant / ተልኳል' : '⚠️ Message channel is offline right now — NOT delivered. Press Send again later. / ቻናሉ ጠፍቷል — አልደረሰም፣ በኋላ እንደገና ይላኩ') : '❌ ' + r.error);
+}
+async function genInvoices(){
+  if (!confirm('Generate this month\'s invoices for all occupied units?')) return;
+  const r = await (await fetch('/api/admin/' + slug + '/generate-invoices?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })).json();
+  alert('Created: ' + r.created + ', already existed: ' + r.skipped);
+  load();
+}
+
+
+function loginKey(){
+  const v = document.getElementById('key-in').value.trim();
+  if (!v) return;
+  KEY = v; localStorage.setItem('bs_key', v);
+  document.getElementById('app').innerHTML = '<div class="skel h-24"></div><div class="skel h-40"></div>';
+  load();
+}
+function logoutKey(){
+  localStorage.removeItem('bs_key'); KEY = '';
+  location.reload();
+}
+
+const MAINT_ICON = { PLUMBING:'🚿', ELECTRIC:'💡', LIFT:'🛗', CLEANING:'🧹', SECURITY:'🛡️', GENERAL:'🔧' };
+async function setMaint(id, status){
+  const r = await fetch('/api/admin/maintenance/' + id + '/status?key=' + encodeURIComponent(KEY), {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status })
+  });
+  if ((await r.json()).ok) load();
+}
+
+let payInvoiceId = null;
+function markPaid(id, label){
+  payInvoiceId = id;
+  document.getElementById('pay-label').textContent = label || 'Select the payment method';
+  document.getElementById('pay-modal').classList.add('open');
+}
+async function payWith(method){
+  const r = await fetch('/api/admin/invoices/' + payInvoiceId + '/pay?key=' + encodeURIComponent(KEY), {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ method })
+  });
+  document.getElementById('pay-modal').classList.remove('open');
+  if ((await r.json()).ok) load();
+}
+
+load();
+</script>
+</body>
+</html>

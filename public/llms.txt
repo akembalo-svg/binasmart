@@ -1,0 +1,36 @@
+# BinaSmart (bina.et) — Ethiopia's all-in-one digital platform
+
+> BinaSmart is an all-in-one digital services platform for Ethiopia, based in Addis Ababa. It brings many everyday services onto one platform, in Amharic and English: smart building management, hotel booking, restaurant QR ordering, hospital appointments, bus & flight tickets, cinema & event tickets, verified government/company tenders, Amharic business news, an insurance comparison marketplace, and car and property marketplaces. Customers reach it on the web, WhatsApp and Telegram.
+
+Note: BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian retail ERP) or "Smartlife Bina" (Turkey). BinaSmart is Ethiopian, headquartered in Addis Ababa.
+
+## Services (verticals)
+- Smart building management: public building directory pages with interactive 3D navigation (/b/<name>), QR entrance posters, and an owner dashboard (rent invoicing, Ethiopian 15% VAT accounting, sub-metered electricity/water billing, maintenance work orders, tenant notifications via WhatsApp/Telegram)
+- Hotels: direct hotel booking with 0% commission, pay at the hotel — https://bina.et/hotel/bina-grand-hotel
+- Restaurants: scan-a-table QR ordering — https://bina.et/restaurant/bina-restaurant
+- Hospitals: find departments, floors and fees; book a visit — https://bina.et/hospital/bina-general-hospital
+- Bus & travel tickets — https://bina.et/travel
+- Flight tickets (via a licensed IATA travel agency) — https://bina.et/flights/hanud
+- Cinema & event tickets (tiered seating) — https://bina.et/events
+- Insurance: compare Ethiopia's licensed insurers (motor, health, property, business, travel, life), get an instant indicative estimate, buy via a trusted agent — https://bina.et/insurance
+- Cars: buy and sell cars from trusted Ethiopian dealers, with 1-tap insurance — https://bina.et/cars
+- Property / real estate: verified homes, land and commercial property for sale and rent, diaspora-friendly — https://bina.et/property
+- Verified Ethiopian tenders (free for bidders, updated daily) — https://bina.et/tenders
+- Amharic news: technology, construction and business, politics-free — https://bina.et/news
+- For diaspora building owners: manage your Ethiopian building from abroad — https://bina.et/diaspora
+- For insurance companies, car dealers and estate agents: partner to receive qualified leads — https://bina.et/for-insurers
+
+## Facts
+- Country: Ethiopia. City: Addis Ababa. Languages: Amharic and English.
+- Contact / WhatsApp: +251 911 244 344
+- Flagship building: JJ Darule Building (ጄጄ ዳሩሌ ህንፃ), Addis Ababa — G+10, 71 tenants: https://bina.et/b/darulle
+- Model: BinaSmart is a neutral platform/marketplace and comparison layer; insurers, dealers and agents supply their own products and listings.
+
+## Key pages
+- Home: https://bina.et/
+- Insurance comparison: https://bina.et/insurance
+- Cars marketplace: https://bina.et/cars
+- Property marketplace: https://bina.et/property
+- Tenders: https://bina.et/tenders
+- News: https://bina.et/news
+- 3D building directory example: https://bina.et/b/darulle

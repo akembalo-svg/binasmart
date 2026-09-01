@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darulle — QR Poster</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@700;900&family=Inter:wght@700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans Ethiopic',sans-serif;background:#e5e7eb;display:flex;justify-content:center;padding:20px}
+.poster{width:420px;background:linear-gradient(160deg,#ffffff 0%,#faf8f4 100%);border:1px solid #e7e2d8;border-radius:24px;padding:36px 30px;text-align:center;color:#1e293b;box-shadow:0 20px 60px rgba(30,41,59,.15)}
+.logo{font-size:13px;font-weight:900;color:#b45309;letter-spacing:2px;margin-bottom:14px}
+h1{font-size:34px;font-weight:900;line-height:1.15}
+h2{font-size:16px;font-weight:700;color:#7c3aed;margin-top:4px}
+.qr-wrap{background:#fff;border:1.5px solid #e7e2d8;border-radius:20px;padding:18px;margin:26px auto;width:280px;box-shadow:0 0 0 6px rgba(194,168,117,.30)}
+.qr-wrap img{width:100%;display:block}
+.scan{font-size:20px;font-weight:900;color:#b45309}
+.scan-en{font-size:12px;font-weight:700;color:#64748b;margin-top:2px}
+.features{display:flex;justify-content:center;gap:14px;margin-top:22px;font-size:10px;font-weight:700;color:#334155}
+.f{background:#faf8f4;border:1px solid #e7e2d8;padding:8px 10px;border-radius:12px}
+.print-btn{position:fixed;top:14px;right:14px;background:#7c3aed;color:#fff;border:none;padding:10px 18px;border-radius:10px;font-weight:800;cursor:pointer}
+@page{size:A4 portrait;margin:0}
+@media print{
+  .print-btn{display:none}
+  body{background:#fff;padding:0;display:block}
+  .poster{width:210mm;height:296mm;border-radius:0;border:none;box-shadow:none;padding:22mm 18mm;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
+  .logo{font-size:24px;margin-bottom:10mm}
+  h1{font-size:64px}
+  h2{font-size:26px;margin-top:4mm}
+  .qr-wrap{width:120mm;padding:8mm;margin:14mm auto;border-radius:8mm}
+  .scan{font-size:34px}
+  .scan-en{font-size:18px;margin-top:3mm}
+  .features{gap:6mm;margin-top:12mm;font-size:15px}
+  .f{padding:5mm 6mm;border-radius:5mm}
+}
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">🖨️ Print</button>
+<div class="poster">
+  <div class="logo">ቢ BINASMART</div>
+  <h1 id="p-am">—</h1>
+  <h2 id="p-en">Loading…</h2>
+  <div class="qr-wrap"><img id="p-qr" src="" alt="QR"></div>
+  <div class="scan">📱 ስካን ያድርጉ!</div>
+  <div class="scan-en">Scan — a 3D guide walks you to any shop / ስካን ያድርጉ — 3D መሪ ወደ ሱቁ ይወስድዎታል</div>
+  <div class="features" id="p-feat"></div>
+</div>
+<script>
+const slug = new URLSearchParams(location.search).get('b') || 'darulle';
+document.getElementById('p-qr').src = '/static/qr-' + slug + '.png';
+fetch('/api/b/' + slug).then(r => r.json()).then(d => {
+  document.title = d.name + ' — QR Poster';
+  document.getElementById('p-am').textContent = d.nameAm || d.name;
+  document.getElementById('p-en').textContent = d.name + ' • ' + (d.subCity ? d.subCity + ', ' : '') + d.city;
+  const shops = d.units.filter(u => u.shop).length;
+  document.getElementById('p-feat').innerHTML =
+    '<div class="f">🏬 ' + shops + ' Shops</div>'
+    + '<div class="f">🔥 Live Offers</div>'
+    + (d.stats.vacant ? '<div class="f">✨ ' + d.stats.vacant + ' Vacancies</div>' : '')
+    + '<div class="f">🧊 3D Tour</div>';
+});
+</script>
+</body>
+</html>

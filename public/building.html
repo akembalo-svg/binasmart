@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BinaSmart — Building</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* tw-lite: hand-rolled replacement for Tailwind CDN — only classes actually used */
+.flex{display:flex}.grid{display:grid}.hidden{display:none!important}
+.flex-1{flex:1 1 0%}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}
+.items-center{align-items:center}.items-end{align-items:flex-end}
+.justify-between{justify-content:space-between}.justify-center{justify-content:center}.justify-end{justify-content:flex-end}
+.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}
+.text-center{text-align:center}.text-right{text-align:right}
+.w-full{width:100%}.max-w-sm{max-width:24rem}
+.w-8{width:2rem}.h-8{height:2rem}.w-10{width:2.5rem}.h-10{height:2.5rem}.w-11{width:2.75rem}.h-11{height:2.75rem}
+.h-16{height:4rem}.h-20{height:5rem}.h-24{height:6rem}.h-40{height:10rem}
+.min-w-\[120px\]{min-width:120px}.min-w-\[210px\]{min-width:210px}
+.p-1\.5{padding:6px}.p-2{padding:8px}.p-2\.5{padding:10px}.p-3{padding:12px}.p-4{padding:16px}.p-5{padding:20px}.p-6{padding:24px}
+.px-3{padding-left:12px;padding-right:12px}
+.py-1\.5{padding-top:6px;padding-bottom:6px}.py-2{padding-top:8px;padding-bottom:8px}.py-2\.5{padding-top:10px;padding-bottom:10px}.py-4{padding-top:16px;padding-bottom:16px}
+.pb-1{padding-bottom:4px}.pb-3{padding-bottom:12px}.pb-8{padding-bottom:32px}.pl-2{padding-left:8px}
+.mb-1{margin-bottom:4px}.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}
+.mt-0\.5{margin-top:2px}.mt-1{margin-top:4px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}.-mt-4{margin-top:-16px}
+.gap-1{gap:4px}.gap-1\.5{gap:6px}.gap-2{gap:8px}.gap-3{gap:12px}
+.space-y-1\.5>*+*{margin-top:6px}.space-y-2>*+*{margin-top:8px}.space-y-2\.5>*+*{margin-top:10px}.space-y-4>*+*{margin-top:16px}
+.rounded-xl{border-radius:12px}.rounded-2xl{border-radius:16px}.rounded-full{border-radius:9999px}
+.font-black{font-weight:900}.font-bold{font-weight:700}
+.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}
+.text-\[8px\]{font-size:8px}.text-\[9px\]{font-size:9px}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12px\]{font-size:12px}
+.text-white{color:#fff}
+.text-purple-100{color:#e6f7f4}.text-purple-200{color:#bfeae2}.text-purple-600{color:#068f79}
+.text-amber-200{color:#fde68a}.text-amber-600{color:#d97706}.text-amber-700{color:#b45309}.text-amber-800{color:#92400e}
+.text-slate-400{color:#94a3b8}.text-slate-500{color:#64748b}.text-slate-700{color:#334155}.text-slate-800{color:#1e293b}
+.text-emerald-600{color:#059669}.text-emerald-700{color:#047857}
+.text-red-500{color:#ef4444}.text-red-600{color:#dc2626}
+.text-blue-700{color:#1d4ed8}
+.bg-white\/25{background-color:rgba(255,255,255,.25)}
+.bg-amber-100{background-color:#fef3c7}.bg-amber-500{background-color:#f59e0b}
+.bg-blue-100{background-color:#dbeafe}.bg-blue-600{background-color:#2563eb}
+.bg-emerald-100{background-color:#d1fae5}.bg-emerald-600{background-color:#059669}
+.bg-purple-100{background-color:#e6f7f4}.bg-purple-600{background-color:#068f79}
+.bg-red-100{background-color:#fee2e2}
+.bg-slate-100{background-color:#f1f5f9}.bg-slate-200{background-color:#e2e8f0}.bg-slate-600{background-color:#475569}
+button{font-family:inherit;border:none;background:none}
+a{text-decoration:none;color:inherit}
+img,svg{display:block;max-width:100%}
+
+/* ===== DESKTOP (laptop) layout ===== */
+@media (min-width: 900px){
+  body .phone{max-width:980px !important}
+  body .scene{height:380px !important}
+  .hero-lite{border-radius:0 0 26px 26px}
+  #shops{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  #shops > *{margin-top:0 !important}
+  #offers{flex-wrap:wrap}
+  .rowsign{font-size:10px}
+  .vglass .rowsign{font-size:12px}
+}
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700;800;900&family=Inter:wght@400;600;700;800;900&display=swap');
+*{-webkit-tap-highlight-color:transparent;margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans','Inter','Noto Sans Ethiopic',sans-serif;background:#f4f1ea;color:#1e293b}
+.hero-lite{background:linear-gradient(135deg,#ffffff 0%,#eef7f5 100%);border-bottom:1px solid #e3ecea}
+.gradient-public{background:#d7f2ec}
+.tag-violet{background:#d7f2ec;color:#068f79;border:1px solid #a7e5d9}
+.text-violet{color:#0aa88f}
+.gradient-nav{background:linear-gradient(135deg,#10b981,#059669)}
+.card{background:#ffffff;border:1px solid #e3ecea;border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card-amber{background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fcd34d;border-radius:16px}
+.tag{padding:3px 10px;border-radius:999px;font-size:10px;font-weight:800}
+.badge-live{width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.phone{max-width:430px;margin:0 auto;min-height:100vh}
+.skel{background:linear-gradient(90deg,#e3ecea 25%,#f2eee5 50%,#e3ecea 75%);background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.modal{position:fixed;inset:0;background:rgba(30,41,59,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal.open{display:flex}
+input{background:#f5f9f8;border:1.5px solid #e3ecea;border-radius:12px;padding:11px 12px;font-size:14px;color:#1e293b;width:100%;outline:none}
+input:focus{border-color:#0aa88f}
+input::placeholder{color:#94a3b8}
+.hidden{display:none!important}
+/* ===== 3D BUILDING ===== */
+.scene{perspective:900px;height:250px;display:flex;align-items:flex-end;justify-content:center;touch-action:pan-y;cursor:grab;user-select:none;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#bae6fd 0%,#e0f2fe 55%,#fef3c7 100%);border-radius:16px}
+.scene:active{cursor:grabbing}
+.stars{position:absolute;inset:0;background-image:radial-gradient(38px 14px at 60px 42px,#ffffffcc,transparent 70%),radial-gradient(50px 16px at 300px 30px,#ffffffb8,transparent 70%),radial-gradient(30px 11px at 190px 62px,#ffffffaa,transparent 70%),radial-gradient(24px 24px at 375px 45px,#fde68a99,transparent 65%);pointer-events:none}
+.b3d-wrap{transform-style:preserve-3d;position:relative;margin-bottom:34px}
+.b3d{transform-style:preserve-3d;position:relative}
+.face{position:absolute;left:50%;top:50%;backface-visibility:hidden;display:flex;flex-direction:column-reverse}
+.frow{flex:1;display:flex;align-items:center;justify-content:space-evenly;padding:0 8%;border-top:1px solid rgba(0,0,0,.10);cursor:pointer}
+.frow.sel{outline:2px solid #3fbfa8;outline-offset:-2px;background:rgba(167,139,250,.18);animation:floorpulse 1s ease-in-out 4}
+.win{width:12%;height:52%;border-radius:2px;background:#7da7c4;box-shadow:inset 0 0 3px #0003}
+.win.lit{background:linear-gradient(180deg,#fde68a,#f59e0b);box-shadow:0 0 8px #fbbf2488}
+.win.vac{background:#d1fae5;border:1.5px dashed #059669;box-shadow:0 0 7px #34d39988;animation:pulse 2s infinite}
+.door{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:22%;height:78%;background:linear-gradient(180deg,#3b2f23,#191410);border-radius:5px 5px 0 0;box-shadow:0 0 10px #fbbf2433, inset 0 0 6px #000}
+.sign{position:absolute;left:50%;width:100%;text-align:center;font-weight:900;color:#92400e;text-shadow:0 1px 0 #fff,0 0 10px #fbbf2466;font-size:15px;letter-spacing:1px;white-space:nowrap}
+.shadow3d{position:absolute;left:50%;bottom:-20px;transform:translateX(-50%) rotateX(88deg);width:230px;height:90px;background:radial-gradient(ellipse,rgba(30,41,59,.30),transparent 65%);border-radius:50%}
+.legend3d{position:absolute;top:10px;left:12px;display:flex;flex-direction:column;gap:4px;font-size:9px;color:#334155;font-weight:700;pointer-events:none}
+.legend3d span{display:flex;align-items:center;gap:5px}
+.dotl{width:9px;height:9px;border-radius:2px;display:inline-block}
+.hint3d{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:9px;color:#64748b;font-weight:700;pointer-events:none}
+/* ===== VIP (photo-based) MODEL ===== */
+.rowsign{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:94%;background:rgba(255,255,255,.92);border:1px solid #cfd5db;border-radius:4px;padding:0 5px;font-size:8.5px;font-weight:800;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.15);z-index:2}
+.vglass .rowsign{font-size:10px;padding:1px 7px}
+.vrow{flex:1;cursor:pointer;position:relative;background:linear-gradient(180deg,#dfe3e8 0,#dfe3e8 26%,#a9c6de 26%,#6f9fc7 100%)}
+.vrow::after{content:'';position:absolute;inset:26% 0 0 0;background:repeating-linear-gradient(90deg,transparent 0 13px,rgba(255,255,255,.28) 13px 14px)}
+.vrow.sel{outline:2px solid #0aa88f;outline-offset:-2px;filter:brightness(1.12);animation:floorpulse 1s ease-in-out 4}
+@keyframes floorpulse{0%,100%{filter:brightness(1.1)}50%{filter:brightness(1.6)}}
+.vglass{flex:1;cursor:pointer;position:relative;background:linear-gradient(180deg,#8fb6d6 0,#5d8db8 100%)}
+.vglass::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 11px,rgba(255,255,255,.32) 11px 12px),linear-gradient(180deg,rgba(255,255,255,.25),transparent 40%)}
+.vglass.sel{outline:2px solid #0aa88f;outline-offset:-2px;filter:brightness(1.12);animation:floorpulse 1s ease-in-out 4}
+.vdoor{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:26%;height:60%;background:linear-gradient(180deg,#2c3e50,#1a2733);border:2px solid #d8dce1;border-bottom:none;border-radius:4px 4px 0 0;z-index:2}
+.vcanopy{position:absolute;bottom:58%;left:50%;transform:translateX(-50%);width:36%;height:5px;background:#d8dce1;border-radius:2px;z-index:2}
+.vsign{display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#2b3a47,#1f2c38);color:#eef1f4;font-weight:800;letter-spacing:3px;text-shadow:0 1px 2px #000,0 0 6px rgba(255,255,255,.35);font-family:Georgia,'Times New Roman',serif}
+.scard{perspective:1400px}
+.scard-inner{position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.1,.2,1)}
+.scard.flipped .scard-inner{transform:rotateY(180deg)}
+.scard-front,.scard-back{backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#ffffff;border:1px solid #e3ecea;border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.scard-front{position:relative;overflow:hidden}
+.scard-back{position:absolute;inset:0;transform:rotateY(180deg);overflow-y:auto;padding:12px}
+.actbtn{flex:1;text-align:center;padding:9px 4px;border-radius:11px;font-size:11px;font-weight:800;white-space:nowrap}
+.actbtn-call{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.actbtn-wa{background:#25D366;color:#fff}
+.actbtn-more{background:#d7f2ec;color:#068f79}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.chip{flex-shrink:0;padding:6px 13px;border-radius:999px;font-size:11px;font-weight:800;background:#fff;border:1.5px solid #e3ecea;color:#475569;cursor:pointer}
+.chip.on{background:#0aa88f;border-color:#0aa88f;color:#fff}
+.chip .cnt{opacity:.65;font-weight:700}
+</style>
+</head>
+<body>
+<div class="phone">
+
+<!-- HERO -->
+<div class="hero-lite p-4 pb-8">
+  <div class="flex items-center justify-between mb-3">
+    <span class="tag tag-violet" id="loc">📍 ...</span>
+    <span style="display:flex;gap:6px"><a id="maps-link" href="#" target="_blank" rel="noopener" class="tag tag-violet">🗺️ Map</a>
+    <a id="walk-link" href="/nav" class="tag hidden" style="background:#0aa88f;color:#fff;border:1px solid #068f79">🚶 3D Walk / መራመድ</a>
+    <a href="#b3d-card" class="tag tag-violet">🧊 3D View</a></span>
+  </div>
+  <div class="text-3xl font-black text-slate-800" id="nameAm">— </div>
+  <div class="text-sm text-violet font-bold" id="nameEn">Loading...</div>
+  <div class="flex items-center gap-3 mt-2 text-[11px] text-slate-500" id="hero-stats"></div>
+</div>
+
+<div class="p-3 space-y-4 -mt-4">
+
+  <!-- 3D BUILDING -->
+  <div class="card overflow-hidden" id="b3d-card">
+    <div class="scene" id="scene">
+      <div class="stars"></div>
+      <div class="legend3d">
+        <span><span class="dotl" style="background:linear-gradient(180deg,#fde68a,#f59e0b)"></span> Occupied / ተይዟል</span>
+        <span><span class="dotl" style="background:#0f2b22;border:1px dashed #34d399"></span> Vacant / ባዶ</span>
+      </div>
+      <div class="b3d-wrap" id="b3dwrap"><div class="b3d" id="b3d"></div></div>
+      <div class="hint3d">↔ Drag to rotate · Tap a floor to see its shops / ወለል ይንኩ</div>
+    </div>
+    <div id="nav-banner" class="hidden p-3" style="background:linear-gradient(135deg,#eef7f5,#d7f2ec);border-top:2px solid #0aa88f">
+      <div class="flex items-center gap-2">
+        <div class="text-xl">🧭</div>
+        <div class="flex-1" style="min-width:0">
+          <div id="nav-title" class="font-black text-[12px] text-slate-800"></div>
+          <div id="nav-steps" class="text-[11px] text-slate-600 mt-0.5"></div>
+        </div>
+        <a id="nav-walk" href="/nav" class="tag hidden" style="background:#0aa88f;color:#fff;flex-shrink:0">🚶 Walk in 3D</a>
+        <button onclick="document.getElementById('nav-banner').classList.add('hidden')" class="tag bg-white text-slate-500">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOOR CHIPS -->
+  <div class="chips" id="floor-chips"></div>
+
+  <!-- SEARCH -->
+  <div class="card p-1.5 flex items-center gap-2" style="box-shadow:0 8px 20px rgba(0,0,0,.08)">
+    <span class="pl-2">🔍</span>
+    <input id="q" oninput="renderShops()" placeholder="Search shops & products / ፈልግ..." style="background:transparent;border:none">
+  </div>
+
+  <!-- REPORT PROBLEM -->
+  <div class="card p-3 flex items-center gap-3" style="border:1.5px solid #fcd34d;background:linear-gradient(135deg,#fffbeb,#fef3c7)">
+    <div class="text-2xl">🔧</div>
+    <div class="flex-1">
+      <div class="font-black text-[12px] text-slate-800">Something broken?</div>
+      <div class="text-[10px] text-amber-700">የተበላሸ ነገር አለ? ወዲያውኑ ያሳውቁ</div>
+    </div>
+    <button onclick="openMaint()" class="bg-amber-500 text-white text-[10px] font-black px-3 py-2 rounded-full">Report / ያሳውቁ</button>
+  </div>
+
+  <!-- OFFERS -->
+  <div id="offers-section" class="hidden">
+    <div class="font-black text-sm mb-2 text-slate-800">🔥 Live Offers / የቀጥታ ቅናሾች</div>
+    <div id="offers" class="flex gap-2 overflow-x-auto pb-1"></div>
+  </div>
+
+  <!-- SHOPS -->
+  <div>
+    <div class="font-black text-sm mb-2 text-slate-800" id="shops-title">🏬 Shops & Offices / ሱቆች እና ቢሮዎች</div>
+    <div id="shops" class="space-y-2.5">
+      <div class="skel h-20 rounded-2xl"></div>
+      <div class="skel h-20 rounded-2xl"></div>
+      <div class="skel h-20 rounded-2xl"></div>
+    </div>
+  </div>
+
+  <!-- VACANCIES -->
+  <div id="vac-section" class="hidden">
+    <div class="font-black text-sm mb-2 text-slate-800">✨ Available Units / ባዶ ክፍሎች</div>
+    <div id="vacancies" class="space-y-2"></div>
+  </div>
+
+  <div class="text-center text-[10px] text-slate-400 py-4">Powered by <span class="text-amber-600 font-bold">ቢ BinaSmart</span>
+    <div class="mt-1"><a id="owner-link" href="/owner" class="text-violet font-bold">Own this building? Open your dashboard →</a></div>
+  </div>
+</div>
+</div>
+
+<!-- SHOP DETAIL MODAL -->
+<div id="shop-modal" class="modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="card p-5 w-full max-w-sm" style="max-height:82vh;overflow-y:auto">
+    <div class="flex items-center gap-3 mb-1">
+      <div id="sm-icon" class="w-11 h-11 rounded-xl gradient-public flex items-center justify-center text-xl">🏬</div>
+      <div class="flex-1"><div id="sm-name" class="font-black text-lg"></div><div id="sm-loc" class="text-[10px] text-slate-400"></div></div>
+    </div>
+    <div class="grid grid-cols-2 gap-2 mt-3">
+      <a id="sm-call" href="#" class="gradient-nav text-white py-2.5 rounded-xl text-sm font-black text-center">📞 Call / ይደውሉ</a>
+      <a id="sm-wa" href="#" target="_blank" rel="noopener" class="text-white py-2.5 rounded-xl text-sm font-black text-center" style="background:#25D366">💬 WhatsApp</a>
+      <a id="sm-tg" href="#" target="_blank" rel="noopener" class="text-white py-2.5 rounded-xl text-sm font-black text-center" style="background:#229ED9">✈️ Telegram</a>
+      <button id="sm-share" class="py-2.5 rounded-xl text-sm font-black text-center" style="background:#d7f2ec;color:#068f79">📤 Share</button>
+    </div>
+    <div id="sm-products-wrap" class="hidden mt-4">
+      <div class="font-black text-[12px] text-slate-800 mb-2">🛒 Products & Services / ምርቶች</div>
+      <div id="sm-products" class="space-y-2"></div>
+    </div>
+    <div id="sm-offers-wrap" class="hidden mt-4">
+      <div class="font-black text-[12px] text-slate-800 mb-2">🔥 Offers / ቅናሾች</div>
+      <div id="sm-offers" class="space-y-2"></div>
+    </div>
+    <button onclick="document.getElementById('shop-modal').classList.remove('open')" class="w-full bg-slate-200 text-slate-700 py-2.5 rounded-xl text-sm font-bold mt-4">Close / ዝጋ</button>
+  </div>
+</div>
+
+<!-- MAINTENANCE MODAL -->
+<div id="maint-modal" class="modal">
+  <div class="card p-5 w-full max-w-sm">
+    <div class="font-black text-lg mb-1">🔧 Report a problem / ችግር ያሳውቁ</div>
+    <div class="text-xs text-slate-500 mb-4">The building manager will be notified / ለህንፃው አስተዳዳሪ ይደርሳል</div>
+    <div class="space-y-2.5">
+      <select id="m-type" style="background:#f5f9f8;border:1.5px solid #e3ecea;border-radius:12px;padding:11px 12px;font-size:14px;color:#1e293b;width:100%;outline:none">
+        <option value="PLUMBING">🚿 Water / Plumbing — ውሃ</option>
+        <option value="ELECTRIC">💡 Electricity — መብራት</option>
+        <option value="LIFT">🛗 Lift / Elevator — ሊፍት</option>
+        <option value="CLEANING">🧹 Cleaning — ጽዳት</option>
+        <option value="SECURITY">🛡️ Security — ጥበቃ</option>
+        <option value="GENERAL">🔧 Other — ሌላ</option>
+      </select>
+      <input id="m-unit" placeholder="Unit / shop number (optional) / የክፍል ቁጥር">
+      <input id="m-name" placeholder="Your name / ስምዎ">
+      <input id="m-phone" placeholder="Phone / ስልክ (09...)">
+      <textarea id="m-desc" rows="3" placeholder="Describe the problem / ችግሩን ይግለጹ" style="background:#f5f9f8;border:1.5px solid #e3ecea;border-radius:12px;padding:11px 12px;font-size:14px;color:#1e293b;width:100%;outline:none;font-family:inherit;resize:none"></textarea>
+    </div>
+    <div class="grid grid-cols-2 gap-2 mt-4">
+      <button onclick="closeMaint()" class="bg-slate-200 text-slate-700 py-2.5 rounded-xl text-sm font-bold">Cancel</button>
+      <button onclick="submitMaint()" id="maint-btn" class="bg-amber-500 text-white py-2.5 rounded-xl text-sm font-black">Send 🔧</button>
+    </div>
+  </div>
+</div>
+
+<!-- LEAD MODAL -->
+<div id="lead-modal" class="modal">
+  <div class="card p-5 w-full max-w-sm">
+    <div class="font-black text-lg mb-1">🏢 Interested? / ፍላጎት አለዎት?</div>
+    <div class="text-xs text-slate-500 mb-4" id="lead-unit-label">Unit —</div>
+    <div class="space-y-2.5">
+      <input id="lead-name" placeholder="Your name / ስምዎ">
+      <input id="lead-phone" placeholder="Phone / ስልክ (09...)">
+    </div>
+    <div class="grid grid-cols-2 gap-2 mt-4">
+      <button onclick="closeLead()" class="bg-slate-200 text-slate-700 py-2.5 rounded-xl text-sm font-bold">Cancel</button>
+      <button onclick="submitLead()" id="lead-btn" class="gradient-nav text-white py-2.5 rounded-xl text-sm font-black">Send ✓</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const slug = location.pathname.split('/').filter(Boolean).pop();
+const API = '/api/b/' + slug;
+let DATA = null, leadUnitId = null, floorFilter = null;
+
+const CAT_ICON = { CAFE:'☕', RESTAURANT:'🍽️', PHARMACY:'💊', RETAIL:'🛒', SERVICE:'🧰', GYM:'💪', SALON:'💇‍♀️', CLINIC:'🏥', BANK:'🏦', OFFICE:'💼', OTHER:'🏬' };
+
+function floorLabel(f){ return f===0 ? 'Ground' : 'Floor '+f; }
+function floorShort(f){ return f===0 ? 'G' : 'F'+f; }
+
+/* ===== 3D BUILDING ===== */
+let rotY = -24, dragging = false, lastX = 0, spin = true, SCALE = 1;
+function shade(hex, f){
+  const n = parseInt(hex.slice(1),16);
+  const r = Math.min(255,Math.max(0,Math.round(((n>>16)&255)*f)));
+  const g = Math.min(255,Math.max(0,Math.round(((n>>8)&255)*f)));
+  const b = Math.min(255,Math.max(0,Math.round((n&255)*f)));
+  return 'rgb('+r+','+g+','+b+')';
+}
+function buildVIP(){
+  const floors = DATA.floors || 11;
+  const podF = 2, towF = Math.max(3, floors - podF);
+  const podH = 27 * podF, towFH = Math.max(12, Math.min(19, 160 / towF)), towH = Math.round(towF * towFH);
+  const signH = 17, crownH = 6;
+  const Wp = 196, Dp = 122, Wt = 138, Dt = 94;
+  const H = crownH + towH + signH + podH;
+  SCALE = Math.min(1, 182 / H);
+  const boxes = [
+    { top: 0, h: crownH, W: Wt + 12, D: Dt + 12, kind: 'crown' },
+    { top: crownH, h: towH, W: Wt, D: Dt, kind: 'tower' },
+    { top: crownH + towH, h: signH, W: Wp, D: Dp, kind: 'sign' },
+    { top: crownH + towH + signH, h: podH, W: Wp, D: Dp, kind: 'podium' }
+  ];
+  function rows(kind, isFront, faceIdx){
+    if (kind === 'crown') return '';
+    if (kind === 'sign') return isFront ? DATA.signText || DATA.name : '';
+    const signEl = function(f, extra){
+      return '<div class="rowsign" data-f="' + f + '" data-face="' + faceIdx + '" onclick="signClick(event,' + f + ')"' + (extra || '') + '></div>';
+    };
+    if (kind === 'tower'){
+      let out = '';
+      for (let i = towF - 1; i >= 0; i--){
+        const f = podF + i;
+        out += '<div class="vrow' + (floorFilter === f ? ' sel' : '') + '" onclick="pickFloor(' + f + ')">'
+          + signEl(f) + '</div>';
+      }
+      return out;
+    }
+    // podium: 2 glass storeys + entrance on front
+    let out = '';
+    for (let i = podF - 1; i >= 0; i--){
+      out += '<div class="vglass' + (floorFilter === i ? ' sel' : '') + '" onclick="pickFloor(' + i + ')">'
+        + (isFront && i === 0 ? '<div class="vcanopy"></div><div class="vdoor"></div>' : '')
+        + signEl(i, isFront && i === 0 ? ' style="top:24%"' : '') + '</div>';
+    }
+    return out;
+  }
+  let html = '';
+  for (const b of boxes){
+    const mt = b.top - H / 2;
+    const faces = [
+      { w: b.W, r: 'rotateY(0deg) translateZ(' + (b.D/2) + 'px)', front: true },
+      { w: b.W, r: 'rotateY(180deg) translateZ(' + (b.D/2) + 'px)' },
+      { w: b.D, r: 'rotateY(90deg) translateZ(' + (b.W/2) + 'px)' },
+      { w: b.D, r: 'rotateY(-90deg) translateZ(' + (b.W/2) + 'px)' }
+    ];
+    for (const f of faces){
+      const cls = b.kind === 'sign' ? 'face vsign' : 'face';
+      const bg = b.kind === 'crown' ? 'background:linear-gradient(180deg,#eef0f3,#d5dade);'
+        : b.kind === 'sign' ? ''
+        : 'background:#cfd5db;border-left:3px solid #c3c9d1;border-right:3px solid #c3c9d1;';
+      const fs = b.kind === 'sign' ? 'font-size:' + Math.max(10, Math.round(13 / SCALE * 0.8)) + 'px;' : '';
+      html += '<div class="' + cls + '" style="width:' + f.w + 'px;height:' + b.h + 'px;margin-left:-' + (f.w/2) + 'px;margin-top:' + mt + 'px;' + bg + fs
+        + 'transform:' + f.r + ';display:flex;flex-direction:column">' + rows(b.kind, !!f.front, faces.indexOf(f)) + '</div>';
+    }
+    // top slab
+    html += '<div class="face" style="width:' + b.W + 'px;height:' + b.D + 'px;margin-left:-' + (b.W/2) + 'px;margin-top:-' + (b.D/2) + 'px;'
+      + 'background:#e8ebee;transform:rotateX(90deg) translateZ(' + (H/2 - b.top) + 'px)"></div>';
+  }
+  html += '<div class="shadow3d" style="width:260px"></div>';
+  const el = document.getElementById('b3d');
+  el.style.width = '0px'; el.style.height = H + 'px';
+  el.innerHTML = html;
+  applyRot();
+  if (DATA) setTimeout(startSignCycle, 50);
+}
+
+function build3D(){
+  if (DATA.threeD && DATA.threeD.style === 'vip') return buildVIP();
+
+  const t = DATA.threeD || {};
+  const facade = t.facadeColor || '#c2a875';
+  const floors = DATA.floors || 4;
+  const W = Math.min(190, (t.width || 12) * 13);
+  const D = Math.min(140, (t.depth || 8) * 12);
+  const FH = floors > 10 ? Math.max(7, Math.round(340 / floors)) : Math.max(22, Math.min(30, 170 / floors));
+  const H = floors * FH;
+  SCALE = Math.min(1, 185 / H);
+  const byFloor = {};
+  DATA.units.forEach(u => { (byFloor[u.floor] = byFloor[u.floor] || []).push(u); });
+
+  function windowsRow(f, count){
+    const units = (byFloor[f] || []);
+    let w = '';
+    const n = Math.max(2, Math.min(count, 5));
+    for (let i = 0; i < n; i++){
+      const u = units[Math.floor(i * units.length / n)];
+      const cls = !u ? 'win' : u.status === 'VACANT' ? 'win vac' : u.status === 'OCCUPIED' ? 'win lit' : 'win';
+      w += '<div class="' + cls + '"></div>';
+    }
+    return w;
+  }
+  function faceHTML(w, isFront){
+    let rows = '';
+    for (let f = 0; f < floors; f++){
+      rows += '<div class="frow' + (floorFilter === f ? ' sel' : '') + '" data-f="' + f + '" onclick="pickFloor(' + f + ')">'
+        + windowsRow(f, isFront ? 5 : 3)
+        + (isFront && f === 0 ? '<div class="door"></div>' : '')
+        + '</div>';
+    }
+    return rows;
+  }
+  const faces = [
+    { w: W, r: 'rotateY(0deg) translateZ(' + (D/2) + 'px)', c: facade, front: true },
+    { w: W, r: 'rotateY(180deg) translateZ(' + (D/2) + 'px)', c: shade(facade, .62) },
+    { w: D, r: 'rotateY(90deg) translateZ(' + (W/2) + 'px)', c: shade(facade, .8) },
+    { w: D, r: 'rotateY(-90deg) translateZ(' + (W/2) + 'px)', c: shade(facade, .72) }
+  ];
+  let html = faces.map(f =>
+    '<div class="face" style="width:' + f.w + 'px;height:' + H + 'px;margin-left:-' + (f.w/2) + 'px;margin-top:-' + (H/2) + 'px;'
+    + 'background:linear-gradient(180deg,' + shade(f.c === facade ? facade : f.c, 1.06) + ',' + (f.c === facade ? facade : f.c) + ');'
+    + 'transform:' + f.r + '">' + faceHTML(f.w, !!f.front) + '</div>'
+  ).join('');
+  html += '<div class="face" style="width:' + W + 'px;height:' + D + 'px;margin-left:-' + (W/2) + 'px;margin-top:-' + (D/2) + 'px;'
+    + 'background:' + shade(facade, .5) + ';transform:rotateX(90deg) translateZ(' + (H/2) + 'px)"></div>';
+  const signPx = Math.min(28, Math.round(15 / SCALE));
+  html += '<div class="sign" style="font-size:' + signPx + 'px;transform:translate(-50%,0) translateZ(' + (D/2 + 1) + 'px);top:-' + (signPx + 12) + 'px">' + (DATA.signText || DATA.nameAm || DATA.name) + '</div>';
+  const b = document.getElementById('b3d');
+  b.style.width = '0px'; b.style.height = H + 'px';
+  b.innerHTML = html + '<div class="shadow3d"></div>';
+  applyRot();
+}
+function applyRot(){
+  document.getElementById('b3d').style.transform = 'scale(' + SCALE + ') rotateX(-9deg) rotateY(' + rotY + 'deg)';
+}
+(function animate(){
+  if (spin && !dragging){ rotY += 0.25; if (DATA) applyRot(); }
+  requestAnimationFrame(animate);
+})();
+const scene = document.getElementById('scene');
+scene.addEventListener('pointerdown', e => { dragging = true; spin = false; lastX = e.clientX; });
+window.addEventListener('pointermove', e => { if (!dragging) return; rotY += (e.clientX - lastX) * .45; lastX = e.clientX; applyRot(); });
+window.addEventListener('pointerup', () => { dragging = false; setTimeout(() => spin = true, 4000); });
+
+function renderFloorShops(){}
+let __signIdx = {}, __signTimer = null;
+function floorShopList(f){
+  const all = DATA.units.filter(function(x){ return x.shop; });
+  return all.map(function(u, i){ return { u: u, i: i }; }).filter(function(o){ return o.u.floor === f; });
+}
+function updateSigns(){
+  document.querySelectorAll('.rowsign').forEach(function(el){
+    const f = parseInt(el.dataset.f);
+    const face = parseInt(el.dataset.face || '0');
+    const list = floorShopList(f);
+    if (!list.length){ el.style.display = 'none'; return; }
+    __signIdx[f] = (__signIdx[f] || 0) % list.length;
+    const o = list[(__signIdx[f] + face) % list.length];
+    el.textContent = (o.u.shop.icon || '🏬') + ' ' + (o.u.shop.nameAm || o.u.shop.name) + (list.length > 4 ? '  ›' : '');
+    el.dataset.idx = o.i;
+  });
+}
+function cycleSigns(){
+  Object.keys(__signIdx).forEach(function(f){ __signIdx[f]++; });
+  DATA.units.filter(function(x){ return x.shop; }).forEach(function(u){ if (!(u.floor in __signIdx)) __signIdx[u.floor] = 0; });
+  updateSigns();
+}
+function startSignCycle(){
+  if (__signTimer) clearInterval(__signTimer);
+  DATA.units.filter(function(x){ return x.shop; }).forEach(function(u){ if (!(u.floor in __signIdx)) __signIdx[u.floor] = 0; });
+  updateSigns();
+  __signTimer = setInterval(cycleSigns, 2400);
+}
+function signClick(ev, f){
+  ev.stopPropagation();
+  const el = ev.currentTarget;
+  if (el.dataset.idx !== undefined) jumpToShop(parseInt(el.dataset.idx));
+}
+function jumpToShop(shopIdx){
+  const el = document.getElementById('scard-' + shopIdx);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (!el.classList.contains('flipped')) setTimeout(function(){ flipShop(el.querySelector('.actbtn-more')); }, 450);
+}
+function pickFloor(f){
+  floorFilter = (floorFilter === f) ? null : f;
+  renderChips(); renderShops(); renderVacancies(); renderFloorShops();
+  if (DATA) build3D();
+  document.getElementById('shops-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function renderChips(){
+  const floors = [...new Set(DATA.units.map(u => u.floor))].sort((a,b) => a-b);
+  const chip = (label, val, cnt) =>
+    '<div class="chip' + (floorFilter === val ? ' on' : '') + '" onclick="pickFloor(' + (val === null ? 'null' : val) + ')">'
+    + label + (cnt != null ? ' <span class="cnt">' + cnt + '</span>' : '') + '</div>';
+  let html = '<div class="chip' + (floorFilter === null ? ' on' : '') + '" onclick="floorFilter=null;renderChips();renderShops();renderVacancies();renderFloorShops();build3D()">All / ሁሉም</div>';
+  floors.forEach(f => { html += chip(floorShort(f), f, DATA.units.filter(u => u.floor === f && u.shop).length); });
+  document.getElementById('floor-chips').innerHTML = html;
+}
+
+async function load(){
+  try{
+    const r = await fetch(API);
+    DATA = await r.json();
+    document.title = DATA.name + ' — BinaSmart';
+    document.getElementById('nameAm').textContent = DATA.nameAm;
+    document.getElementById('nameEn').textContent = DATA.name;
+    document.getElementById('loc').textContent = '📍 ' + (DATA.subCity ? DATA.subCity + ', ' : '') + DATA.city;
+    document.getElementById('maps-link').href = (DATA.lat && DATA.lng)
+      ? 'https://www.google.com/maps/search/?api=1&query=' + DATA.lat + ',' + DATA.lng
+      : 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(DATA.name + ' ' + (DATA.subCity || '') + ' ' + DATA.city);
+    document.getElementById('owner-link').href = '/owner/' + slug;
+    if (slug === 'darulle') document.getElementById('walk-link').classList.remove('hidden');
+    document.getElementById('hero-stats').innerHTML =
+      '<span>🏢 '+DATA.floors+' floors</span><span>🏬 '+DATA.stats.units+' units</span>' +
+      '<span><span class="badge-live"></span> '+DATA.stats.occupied+' occupied / ተይዟል</span>' +
+      (DATA.stats.vacant ? '<span>✨ '+DATA.stats.vacant+' available</span>' : '');
+    build3D();
+    renderChips();
+    renderFloorShops();
+    renderShops();
+    renderVacancies();
+    loadOffers();
+  }catch(e){
+    document.getElementById('shops').innerHTML = '<div class="card p-4 text-center text-sm text-red-500">Could not load building. Try again.</div>';
+  }
+}
+
+async function loadOffers(){
+  try{
+    const offers = await (await fetch(API + '/offers')).json();
+    OFFERS = offers;
+    if (!offers.length) return;
+    document.getElementById('offers-section').classList.remove('hidden');
+    document.getElementById('offers').innerHTML = offers.map(o => {
+      const hrs = Math.max(1, Math.round((new Date(o.endsAt) - Date.now())/3600000));
+      return '<div class="card-amber p-3 min-w-[210px]">'
+        + '<div class="flex items-center gap-2 mb-1"><span class="text-lg">'+(o.shop.icon||'🏬')+'</span>'
+        + '<span class="text-[10px] font-bold text-amber-800">'+o.shop.name+' • '+o.shop.unit+'</span></div>'
+        + '<div class="text-[12px] font-black text-slate-800">'+o.title+'</div>'
+        + (o.titleAm ? '<div class="text-[10px] text-amber-700 mt-0.5">'+o.titleAm+'</div>' : '')
+        + '<div class="text-[9px] text-red-500 font-bold mt-1">⏰ ends in ~'+hrs+'h • '+o.claims+' claimed</div>'
+        + '<button onclick="claimOffer(\''+o.id+'\',this)" class="mt-1.5 text-white text-[10px] font-black px-3 py-1.5 rounded-full" style="background:#25D366">💬 Claim / ይውሰዱ</button></div>';
+    }).join('');
+  }catch(e){}
+}
+
+function renderShops(){
+  if (!DATA) return;
+  const q = (document.getElementById('q').value || '').toLowerCase();
+  const occupied = DATA.units.filter(u => u.shop && (floorFilter === null || u.floor === floorFilter));
+  document.getElementById('shops-title').textContent = floorFilter === null
+    ? '🏬 Shops & Offices / ሱቆች እና ቢሮዎች'
+    : '🏬 ' + floorLabel(floorFilter) + ' — Shops / ሱቆች';
+  const list = occupied.filter(u => {
+    if (!q) return true;
+    const s = u.shop;
+    const inProducts = (s.products||[]).some(p => (p.name+' '+(p.nameAm||'')).toLowerCase().includes(q));
+    return (s.name+' '+(s.nameAm||'')+' '+u.number).toLowerCase().includes(q) || inProducts;
+  });
+  const allShops = DATA.units.filter(x => x.shop);
+  document.getElementById('shops').innerHTML = list.map(u => {
+    const s = u.shop;
+    const shopIdx = allShops.indexOf(u);
+    const prods = (s.products||[]).slice(0,4).map(p =>
+      '<a target="_blank" rel="noopener" href="' + waLink(s.phone, 'Selam! I want to order: ' + p.name + ' (' + p.price.toLocaleString() + ' ETB) — seen on BinaSmart, ' + DATA.name) + '" class="rounded-xl px-3 py-2 min-w-[120px]" style="background:#f5f9f8;border:1px solid #e3ecea;flex-shrink:0">'
+      + '<div class="text-[10px] font-bold text-slate-700">'+p.name+'</div>'
+      + (p.nameAm ? '<div class="text-[9px] text-slate-400">'+p.nameAm+'</div>' : '')
+      + '<div class="text-[11px] font-black text-emerald-600 mt-0.5">'+p.price.toLocaleString()+' ETB'+(p.deliverable?' 🚚':'')+' <span style="color:#25D366">🛒</span></div></a>'
+    ).join('');
+    const open = isOpenNow();
+    const waMain = waLink(s.phone, 'Selam! (via BinaSmart — ' + DATA.name + ')');
+    const backProds = (s.products||[]).map(p =>
+      '<a target="_blank" rel="noopener" href="' + waLink(s.phone, 'Selam! I want to order: ' + p.name + ' (' + p.price.toLocaleString() + ' ETB) — BinaSmart, ' + DATA.name) + '" class="rounded-xl px-3 py-2 min-w-[130px]" style="background:#f5f9f8;border:1px solid #e3ecea;flex-shrink:0">'
+      + '<div class="text-[10px] font-bold text-slate-700">'+p.name+'</div>'
+      + '<div class="text-[11px] font-black text-emerald-600">'+p.price.toLocaleString()+' ETB <span style="color:#25D366">🛒 Order</span></div></a>'
+    ).join('');
+    const myOffers = OFFERS.filter(o => o.shop.name === s.name).map(o =>
+      '<div class="card-amber p-2 mt-2"><span class="text-[10px] font-black text-slate-800">'+o.title+'</span> '
+      + '<button onclick="claimOffer(\''+o.id+'\',this)" class="text-white text-[9px] font-black px-2 py-1 rounded-full ml-1" style="background:#25D366">💬 Claim</button></div>'
+    ).join('');
+    return '<div class="scard" id="scard-'+shopIdx+'"><div class="scard-inner">'
+      // ---- FRONT ----
+      + '<div class="scard-front">'
+      + '<div onclick="flipShop(this)" class="p-3 pb-2 flex items-center gap-3" style="cursor:pointer">'
+      + '<div class="w-11 h-11 rounded-xl gradient-public flex items-center justify-center text-xl" style="flex-shrink:0">'+(s.icon||CAT_ICON[s.category]||'🏬')+'</div>'
+      + '<div class="flex-1" style="min-width:0">'
+      + '<div class="font-black text-sm text-slate-800" style="line-height:1.3">'+(s.nameAm||s.name)+'</div>'
+      + (s.name && s.name !== s.nameAm ? '<div class="text-[10px] text-violet font-bold" style="line-height:1.2">'+s.name+'</div>' : '')
+      + '<div class="text-[10px] text-slate-400 mt-0.5">'+floorLabel(u.floor)+' • '+u.number
+      + (open ? ' • <span class="text-emerald-600 font-bold">● Open</span>' : ' • <span class="text-slate-400">Closed now</span>')+'</div></div>'
+      + '<div class="text-slate-400" style="font-size:18px;flex-shrink:0">›</div>'
+      + '</div>'
+      + '<div class="flex gap-1.5 px-3 pb-3">'
+      + '<a href="tel:'+s.phone+'" class="actbtn actbtn-call">📞 Call</a>'
+      + '<a target="_blank" rel="noopener" href="'+waMain+'" class="actbtn actbtn-wa">💬 Chat</a>'
+      + '<button onclick="goToShop('+u.floor+',\''+u.number+'\',\''+esc(s.name)+'\')" class="actbtn" style="background:linear-gradient(135deg,#0aa88f,#068f79);color:#fff">📍 Go / ሂድ</button>'
+      + '<button onclick="flipShop(this)" class="actbtn actbtn-more">ℹ️</button>'
+      + '</div>'
+      + ((s.products && s.products.length) ? '<div class="flex gap-2 px-3 pb-3 overflow-x-auto" style="margin-top:-4px">'
+        + s.products.slice(0,3).map(function(p){ return '<a target="_blank" rel="noopener" href="' + waLink(s.phone, 'Selam! I want to order: ' + p.name + ' (' + p.price.toLocaleString() + ' ETB) — BinaSmart, ' + DATA.name) + '" class="rounded-xl px-3 py-2 min-w-[120px]" style="background:#f5f9f8;border:1px solid #e3ecea;flex-shrink:0">'
+          + '<div class="text-[10px] font-bold text-slate-700">'+p.name+'</div>'
+          + '<div class="text-[11px] font-black text-emerald-600">'+p.price.toLocaleString()+' ETB <span style="color:#25D366">🛒</span></div></a>'; }).join('')
+        + (s.products.length > 3 ? '<button onclick="flipShop(this)" class="rounded-xl px-3 py-2 text-[10px] font-black" style="background:#d7f2ec;color:#068f79;flex-shrink:0">+' + (s.products.length - 3) + ' more<br>ተጨማሪ ›</button>' : '')
+        + '</div>' : '')
+      + '</div>'
+      // ---- BACK ----
+      + '<div class="scard-back">'
+      + '<div class="flex items-center gap-2 mb-2">'
+      + '<span class="text-xl">'+(s.icon||CAT_ICON[s.category]||'🏬')+'</span>'
+      + '<div class="flex-1" style="min-width:0"><div class="font-black text-[12px] text-slate-800" style="line-height:1.2">'+(s.nameAm||s.name)+'</div>'
+      + (s.name && s.name !== s.nameAm ? '<div class="text-[9px] text-violet font-bold">'+s.name+'</div>' : '')
+      + '<div class="text-[9px] text-slate-400">'+floorLabel(u.floor)+' • Unit '+u.number+' • '+s.phone+'</div></div>'
+      + '<button onclick="flipShop(this)" class="tag bg-slate-200 text-slate-600" style="flex-shrink:0">🔙 Back</button>'
+      + '</div>'
+      + '<button onclick="goToShop('+u.floor+',\''+u.number+'\',\''+esc(s.name)+'\')" class="actbtn w-full mb-1.5" style="background:linear-gradient(135deg,#0aa88f,#068f79);color:#fff">📍 Take me there / ወደዚያ ውሰደኝ</button>'
+      + '<div class="grid grid-cols-2 gap-1.5">'
+      + '<a href="tel:'+s.phone+'" class="actbtn actbtn-call">📞 Call / ይደውሉ</a>'
+      + '<a target="_blank" rel="noopener" href="'+waMain+'" class="actbtn actbtn-wa">💬 WhatsApp</a>'
+      + '<a target="_blank" rel="noopener" href="https://t.me/+'+digits(s.phone)+'" class="actbtn" style="background:#229ED9;color:#fff">✈️ Telegram</a>'
+      + '<button onclick="shareShop(\''+esc(s.name)+'\',\''+u.number+'\')" class="actbtn actbtn-more">📤 Share</button>'
+      + '</div>'
+      + (backProds ? '<div class="text-[10px] font-black text-slate-800 mt-2 mb-1">🛒 Products / ምርቶች</div><div class="flex gap-2 overflow-x-auto pb-1">'+backProds+'</div>' : '')
+      + myOffers
+      + '<div class="text-center text-[9px] text-slate-300 mt-2">⭐ VIP full shop page — coming soon</div>'
+      + '</div>'
+      + '</div></div>';
+  }).join('') || '<div class="card p-4 text-center text-xs text-slate-400">No results / ውጤት የለም</div>';
+}
+
+function renderVacancies(){
+  const vac = DATA.units.filter(u => u.status === 'VACANT' && (floorFilter === null || u.floor === floorFilter));
+  document.getElementById('vac-section').classList.toggle('hidden', !vac.length);
+  if (!vac.length) return;
+  document.getElementById('vacancies').innerHTML = vac.map(u =>
+    '<div class="card p-3 flex items-center gap-3" style="border:2px dashed #6ee7b7;background:#f0fdf9">'
+    + '<div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-lg">✨</div>'
+    + '<div class="flex-1"><div class="font-black text-sm text-emerald-700">'+u.number+' • '+floorLabel(u.floor)+'</div>'
+    + '<div class="text-[10px] text-slate-500">'+u.areaSqm+' m² • '+u.monthlyRent.toLocaleString()+' ETB/mo</div></div>'
+    + '<button onclick="openLead(\''+u.id+'\',\''+u.number+'\')" class="bg-emerald-600 text-white text-[10px] font-black px-3 py-1.5 rounded-full">Interested ✋</button></div>'
+  ).join('');
+}
+
+function esc(s){ return String(s).replace(/'/g, '').replace(/"/g, ''); }
+function digits(p){ return String(p || '').replace(/\D/g, ''); }
+function isOpenNow(){
+  const now = new Date(Date.now() + (3 * 60 + new Date().getTimezoneOffset()) * 60000); // Africa/Addis_Ababa UTC+3
+  const h = now.getHours(), d = now.getDay();
+  return d !== 0 && h >= 8 && h < 19;
+}
+function waLink(phone, text){ return 'https://wa.me/' + digits(phone) + (text ? '?text=' + encodeURIComponent(text) : ''); }
+let OFFERS = [];
+function goToShop(floor, unitNumber, shopName){
+  if (slug === 'darulle'){
+    location.href = '/nav?to=' + encodeURIComponent(unitNumber) + '&floor=' + floor + '&name=' + encodeURIComponent(shopName);
+    return;
+  }
+  floorFilter = floor;
+  renderChips(); renderShops(); renderVacancies(); build3D();
+  const steps = floor === 0
+    ? '🚪 From the main entrance — it is on the <b>Ground floor</b>, unit <b>' + unitNumber + '</b> / ከዋናው በር ግራውንድ ላይ'
+    : '🚪 Enter → 🛗 Take the lift (or stairs) to <b>' + floorLabel(floor) + '</b> → unit <b>' + unitNumber + '</b> / ሊፍቱን ወደ ' + floor + 'ኛ ፎቅ ይውሰዱ';
+  document.getElementById('nav-title').textContent = '📍 ' + shopName;
+  document.getElementById('nav-steps').innerHTML = steps + ' — the floor is flashing on the 3D / ፎቁ በ3D ላይ ያበራል';
+  document.getElementById('nav-banner').classList.remove('hidden');
+  if (slug === 'darulle'){
+    const w = document.getElementById('nav-walk');
+    w.href = '/nav?to=' + encodeURIComponent(unitNumber) + '&floor=' + floor + '&name=' + encodeURIComponent(shopName);
+    w.classList.remove('hidden');
+  }
+  document.getElementById('b3d-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function flipShop(el){
+  const c = el.closest('.scard'), inner = c.querySelector('.scard-inner');
+  const front = c.querySelector('.scard-front'), back = c.querySelector('.scard-back');
+  if (!c.classList.contains('flipped')){
+    inner.style.height = Math.max(front.offsetHeight, Math.min(back.scrollHeight + 24, 420)) + 'px';
+    c.classList.add('flipped');
+  } else {
+    c.classList.remove('flipped');
+    setTimeout(() => { inner.style.height = ''; }, 560);
+  }
+}
+function openShop(unitIdx){
+  const u = DATA.units.filter(x => x.shop)[unitIdx];
+  if (!u) return;
+  const s = u.shop;
+  document.getElementById('sm-icon').textContent = s.icon || CAT_ICON[s.category] || '🏬';
+  document.getElementById('sm-name').textContent = s.name;
+  document.getElementById('sm-loc').textContent = floorLabel(u.floor) + ' · Unit ' + u.number + ' · ' + (isOpenNow() ? 'Open now / ክፍት ነው' : 'Closed now / ዝግ ነው');
+  document.getElementById('sm-call').href = 'tel:' + s.phone;
+  document.getElementById('sm-wa').href = waLink(s.phone, 'Selam! I found ' + s.name + ' on ' + DATA.name + ' (BinaSmart): https://bina.et/b/' + slug);
+  document.getElementById('sm-tg').href = 'https://t.me/+' + digits(s.phone);
+  document.getElementById('sm-share').onclick = () => shareShop(esc(s.name), u.number);
+  const prods = s.products || [];
+  document.getElementById('sm-products-wrap').classList.toggle('hidden', !prods.length);
+  document.getElementById('sm-products').innerHTML = prods.map(p =>
+    '<div class="rounded-xl p-2.5 flex items-center gap-2" style="background:#f5f9f8;border:1px solid #e3ecea">'
+    + '<div class="flex-1"><div class="text-[11px] font-bold text-slate-700">' + p.name + '</div>'
+    + (p.nameAm ? '<div class="text-[9px] text-slate-400">' + p.nameAm + '</div>' : '')
+    + '<div class="text-[11px] font-black text-emerald-600">' + p.price.toLocaleString() + ' ETB' + (p.deliverable ? ' 🚚' : '') + '</div></div>'
+    + '<a target="_blank" rel="noopener" href="' + waLink(s.phone, 'Selam! I want to order: ' + p.name + ' (' + p.price.toLocaleString() + ' ETB) — seen on BinaSmart, ' + DATA.name) + '"'
+    + ' class="text-white text-[10px] font-black px-3 py-2 rounded-full" style="background:#25D366">🛒 Order</a></div>'
+  ).join('');
+  const myOffers = OFFERS.filter(o => o.shop.name === s.name);
+  document.getElementById('sm-offers-wrap').classList.toggle('hidden', !myOffers.length);
+  document.getElementById('sm-offers').innerHTML = myOffers.map(o =>
+    '<div class="card-amber p-2.5"><div class="text-[11px] font-black text-slate-800">' + o.title + '</div>'
+    + (o.titleAm ? '<div class="text-[9px] text-amber-700">' + o.titleAm + '</div>' : '')
+    + '<button onclick="claimOffer(\'' + o.id + '\',this)" class="mt-1.5 text-white text-[10px] font-black px-3 py-1.5 rounded-full" style="background:#25D366">💬 Claim / ይውሰዱ</button></div>'
+  ).join('');
+  document.getElementById('shop-modal').classList.add('open');
+}
+function claimOffer(id, btn){
+  const o = OFFERS.find(x => x.id === id);
+  if (!o) return;
+  fetch('/api/offers/' + id + '/claim', { method: 'POST' }).catch(() => {});
+  if (btn) btn.textContent = '✓ Opening WhatsApp…';
+  window.open(waLink(o.shop.phone, 'Selam! I want to claim this offer: "' + o.title + '" — seen on BinaSmart, ' + (DATA ? DATA.name : '')), '_blank');
+}
+function shareShop(name, unit){
+  const url = 'https://bina.et/b/' + slug;
+  const text = '🏬 ' + name + ' — ' + (DATA ? DATA.name : '') + ', ' + unit + '. See shops, offers & the 3D building: ' + url;
+  if (navigator.share) { navigator.share({ title: name, text: text, url: url }).catch(() => {}); return; }
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+function openMaint(){ document.getElementById('maint-modal').classList.add('open'); }
+function closeMaint(){ document.getElementById('maint-modal').classList.remove('open'); }
+async function submitMaint(){
+  const phone = document.getElementById('m-phone').value.trim();
+  const desc = document.getElementById('m-desc').value.trim();
+  if (!phone || !desc) { alert('Please enter phone and description / ስልክ እና መግለጫ ያስገቡ'); return; }
+  const btn = document.getElementById('maint-btn');
+  btn.textContent = '...';
+  try{
+    const r = await fetch(API + '/maintenance', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: document.getElementById('m-type').value,
+        unit: document.getElementById('m-unit').value.trim(),
+        name: document.getElementById('m-name').value.trim(),
+        phone, description: desc
+      })
+    });
+    if ((await r.json()).ok){
+      btn.textContent = '✓ Sent! / ተልኳል';
+      setTimeout(() => { closeMaint(); btn.textContent = 'Send 🔧'; document.getElementById('m-desc').value=''; }, 1100);
+    } else { btn.textContent = 'Retry'; }
+  }catch(e){ btn.textContent = 'Retry'; }
+}
+
+function openLead(unitId, number){
+  leadUnitId = unitId;
+  document.getElementById('lead-unit-label').textContent = 'Unit ' + number + ' — the owner will call you / ባለቤቱ ይደውልልዎታል';
+  document.getElementById('lead-modal').classList.add('open');
+}
+function closeLead(){ document.getElementById('lead-modal').classList.remove('open'); }
+
+async function submitLead(){
+  const name = document.getElementById('lead-name').value.trim();
+  const phone = document.getElementById('lead-phone').value.trim();
+  if (!name || !phone) { alert('Please enter name and phone / ስም እና ስልክ ያስገቡ'); return; }
+  const btn = document.getElementById('lead-btn');
+  btn.textContent = '...';
+  try{
+    const r = await fetch('/api/units/' + leadUnitId + '/leads', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone })
+    });
+    if ((await r.json()).ok){
+      btn.textContent = '✓ Sent!';
+      setTimeout(() => { closeLead(); btn.textContent = 'Send ✓'; }, 900);
+    }
+  }catch(e){ btn.textContent = 'Retry'; }
+}
+
+load();
+</script>
+</body>
+</html>

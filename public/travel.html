@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bus Tickets — Book Direct | BinaSmart Travel</title>
+<meta name="description" content="Book intercity bus tickets in Ethiopia — pick your trip, pay at boarding, instant ticket code. Amharic + English. Powered by BinaSmart.">
+<link rel="icon" href="/icon-32.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#faf8f4;color:#1e293b;min-height:100vh;padding-bottom:40px}
+.top{display:flex;align-items:center;gap:8px;padding:14px 18px;max-width:680px;margin:0 auto}
+.top a{text-decoration:none;color:#1e293b;font-weight:900;font-size:17px}
+.top .g{color:#d4a017}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.hero{background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:22px;padding:22px 18px;color:#fff}
+.hero h1{font-size:24px;font-weight:900}
+.hero .am{color:#bfdbfe;font-weight:800;font-size:14px}
+.hero .sub{font-size:11.5px;opacity:.85;margin-top:6px}
+.filters{display:flex;gap:8px;overflow-x:auto;padding:14px 0 4px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.f{flex-shrink:0;background:#fff;border:1.5px solid #e9e4da;border-radius:999px;padding:8px 16px;font-size:12.5px;font-weight:800;cursor:pointer;color:#475569}
+.f.on{background:#1e3a8a;color:#fff;border-color:#1e3a8a}
+.trip{background:#fff;border:1.5px solid #e9e4da;border-radius:20px;padding:16px;margin-top:12px}
+.route{display:flex;align-items:center;gap:10px;font-weight:900;font-size:16px}
+.route .arrow{color:#2563eb}
+.route .am{font-size:11.5px;color:#94a3b8;font-weight:700;display:block}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{font-size:10.5px;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:4px 10px;font-weight:800}
+.brow{display:flex;align-items:center;justify-content:space-between}
+.brow .pr b{font-size:19px;color:#1e3a8a}
+.brow .pr span{font-size:10px;color:#94a3b8;display:block;font-weight:700}
+.seats{font-size:11.5px;font-weight:800}
+.seats.ok{color:#059669}.seats.low{color:#d97706}.seats.no{color:#dc2626}
+.bkbtn{border:0;border-radius:13px;padding:11px 22px;background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;font-weight:900;font-size:13.5px;cursor:pointer;font-family:inherit}
+.bkbtn:disabled{background:#cbd5e1;cursor:not-allowed}
+#modal{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+#modal.on{display:flex}
+.sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:680px;padding:22px 20px calc(22px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto}
+.sheet h3{font-size:17px;font-weight:900;margin-bottom:6px}
+.sheet .sm{font-size:12px;color:#64748b;margin-bottom:8px}
+.sheet label{font-size:11px;font-weight:900;color:#64748b;display:block;margin:12px 0 4px;text-transform:uppercase;letter-spacing:1px}
+.sheet input,.sheet select{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:11px 12px;font-size:15px;font-family:inherit;background:#faf8f4}
+.tot{display:flex;justify-content:space-between;background:#eff6ff;border-radius:14px;padding:12px 14px;margin-top:14px;font-weight:900}
+.tot b{color:#1e3a8a}
+.obtn{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;font-weight:900;font-size:15px;cursor:pointer;font-family:inherit;margin-top:12px}
+.conf{text-align:center;padding:22px 0}
+.conf .big{font-size:52px}
+.conf h3{font-size:20px}
+.ticket{margin:14px auto;max-width:320px;background:#fff;border:2px dashed #1e3a8a;border-radius:18px;padding:16px;text-align:left}
+.ticket .code{font-size:22px;font-weight:900;letter-spacing:2px;color:#1e3a8a;text-align:center;border-bottom:1px solid #e9e4da;padding-bottom:10px;margin-bottom:10px}
+.ticket .row{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0}
+.ticket .row span{color:#94a3b8;font-weight:700}
+.ticket .row b{font-weight:900}
+.conf p{font-size:12.5px;color:#64748b;line-height:1.6}
+.wa{display:inline-block;background:#25D366;color:#fff;font-weight:900;border-radius:999px;padding:12px 26px;text-decoration:none;margin-top:8px;font-size:14px}
+.skel{background:linear-gradient(90deg,#eee 25%,#f7f5f0 50%,#eee 75%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:18px;height:110px;margin-top:12px}
+@keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/">🏢 Bina<span class="g">Smart</span></a><span style="margin-left:auto;font-size:11px;font-weight:800;color:#2563eb">🚌 Book Direct · Pay at boarding</span></div>
+<div class="wrap">
+  <div class="hero"><h1>🚌 Bus Tickets</h1><div class="am">የአውቶብስ ትኬት — በቀጥታ ያስይዙ</div><div class="sub">No queue at the station · pay at boarding · instant ticket code · Demo — sample trips</div></div>
+  <div class="filters" id="filters"></div>
+  <div id="trips"><div class="skel"></div><div class="skel"></div></div>
+</div>
+<div id="modal"><div class="sheet" id="sheet"></div></div>
+<script>
+const $ = id => document.getElementById(id);
+let TRIPS = [], DEST = null;
+const fmtD = s => new Date(s).toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Africa/Addis_Ababa' });
+const fmtT = s => new Date(s).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Addis_Ababa' });
+async function load(){
+  const d = await (await fetch('/api/travel')).json();
+  TRIPS = d.trips;
+  const dests = [...new Set(TRIPS.map(t => t.to))];
+  $('filters').innerHTML = '<div class="f on" onclick="setDest(this,null)">All · ሁሉም</div>'
+    + dests.map(x => '<div class="f" onclick="setDest(this,\'' + x.replace(/'/g,"\\'") + '\')">' + x + '</div>').join('');
+  render();
+}
+function setDest(el, d){ document.querySelectorAll('.f').forEach(x => x.classList.remove('on')); el.classList.add('on'); DEST = d; render(); }
+function render(){
+  const list = TRIPS.filter(t => !DEST || t.to === DEST);
+  $('trips').innerHTML = list.length ? list.map(t => {
+    const s = t.seatsLeft <= 0 ? '<span class="seats no">✖ Sold out</span>'
+      : t.seatsLeft <= 5 ? '<span class="seats low">⚡ ' + t.seatsLeft + ' seats left</span>'
+      : '<span class="seats ok">✓ ' + t.seatsLeft + ' seats</span>';
+    return '<div class="trip"><div class="route"><div>' + t.from + '<span class="am">' + (t.fromAm || '') + '</span></div>'
+      + '<div class="arrow">→</div><div>' + t.to + '<span class="am">' + (t.toAm || '') + '</span></div></div>'
+      + '<div class="meta"><span>📅 ' + fmtD(t.departure) + '</span><span>🕐 ' + fmtT(t.departure) + '</span><span>⏱ ' + (t.duration || '') + '</span><span>🚌 ' + t.bus + '</span></div>'
+      + '<div class="brow"><div class="pr"><b>' + t.price.toLocaleString() + ' ETB</b><span>per seat · በመቀመጫ</span></div>' + s
+      + '<button class="bkbtn" ' + (t.seatsLeft <= 0 ? 'disabled' : '') + ' onclick="openBook(\'' + t.id + '\')">Book · ያስይዙ</button></div></div>';
+  }).join('') : '<p style="text-align:center;color:#94a3b8;padding:24px">No trips found</p>';
+}
+function openBook(id){
+  const t = TRIPS.find(x => x.id === id); if (!t) return;
+  $('modal').classList.add('on');
+  $('sheet').innerHTML = '<h3>🚌 ' + t.from + ' → ' + t.to + '</h3><div class="sm">' + fmtD(t.departure) + ' · ' + fmtT(t.departure) + ' · ' + t.bus + '</div>'
+    + '<label>Full name / ሙሉ ስም</label><input id="tn" placeholder="Passenger name">'
+    + '<label>Phone / ስልክ</label><input id="tp" placeholder="09…" inputmode="tel">'
+    + '<label>Seats / መቀመጫዎች</label><select id="ts">' + Array.from({length: Math.min(t.seatsLeft, 6)}, (_, i) => '<option>' + (i + 1) + '</option>').join('') + '</select>'
+    + '<div class="tot"><span>Total · ጠቅላላ</span><b id="tt">' + t.price.toLocaleString() + ' ETB</b></div>'
+    + '<div style="font-size:11px;color:#94a3b8;margin-top:8px">Pay cash or telebirr at boarding. Show your ticket code to the conductor. / ክፍያ በመሳፈሪያ ጊዜ።</div>'
+    + '<button class="obtn" onclick="submitBook(\'' + t.id + '\')">🎫 Get my ticket · ትኬቴን ስጠኝ</button>';
+  $('ts').onchange = () => $('tt').textContent = (t.price * +$('ts').value).toLocaleString() + ' ETB';
+  $('modal').onclick = e => { if (e.target === $('modal')) $('modal').classList.remove('on'); };
+}
+async function submitBook(id){
+  const tn = $('tn').value.trim(), tp = $('tp').value.trim();
+  if (!tn || !tp) return alert('Please enter name and phone / ስም እና ስልክ ያስገቡ');
+  const r = await fetch('/api/travel/' + id + '/book', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: tn, phone: tp, seats: +$('ts').value }) });
+  const d = await r.json();
+  if (!d.ok){ alert(d.error === 'not_available' ? 'Only ' + d.seatsLeft + ' seats left' : '❌ ' + (d.error || 'error')); return; }
+  const summary = '🎫 Bus ticket ' + d.code + '\n' + d.from + ' → ' + d.to + '\n' + fmtD(d.departure) + ' ' + fmtT(d.departure) + ' · ' + d.bus + '\nSeats: ' + d.seats + ' · Total: ' + d.total.toLocaleString() + ' ETB\nPassenger: ' + tn;
+  $('sheet').innerHTML = '<div class="conf"><div class="big">🎫</div><h3>Ticket booked! · ትኬትዎ ተይዟል!</h3>'
+    + '<div class="ticket"><div class="code">' + d.code + '</div>'
+    + '<div class="row"><span>Route</span><b>' + d.from + ' → ' + d.to + '</b></div>'
+    + '<div class="row"><span>Departure</span><b>' + fmtD(d.departure) + ' · ' + fmtT(d.departure) + '</b></div>'
+    + '<div class="row"><span>Bus</span><b>' + d.bus + '</b></div>'
+    + '<div class="row"><span>Seats</span><b>' + d.seats + '</b></div>'
+    + '<div class="row"><span>Total</span><b>' + d.total.toLocaleString() + ' ETB — pay at boarding</b></div></div>'
+    + '<p>Show this code to the conductor · ኮዱን ለረዳቱ ያሳዩ</p>'
+    + '<a href="/pay?amount=' + d.total + '&for=' + encodeURIComponent((d.from+' \u2192 '+d.to)) + '&bt=travel&bc=' + encodeURIComponent(d.code) + '" style="display:block;text-align:center;text-decoration:none;background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;font-weight:800;border-radius:14px;padding:14px;margin:8px 0 10px">💳 አሁን በኦንላይን ይክፈሉ · Pay online</a>'
+    + '<a class="wa" href="https://wa.me/?text=' + encodeURIComponent(summary) + '">💬 Save to WhatsApp</a></div>';
+  load();
+}
+load();
+</script>
+</body>
+</html>

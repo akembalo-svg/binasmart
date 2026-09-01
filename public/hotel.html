@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Book Direct — 0% Commission | BinaSmart Hotels</title>
+<meta name="description" content="Book hotel rooms direct — no commission, no credit card, instant WhatsApp confirmation. Prices in ETB. Powered by BinaSmart.">
+<link rel="icon" href="/icon-32.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#faf8f4;color:#1e293b;min-height:100vh}
+.top{display:flex;align-items:center;gap:8px;padding:14px 18px;max-width:680px;margin:0 auto}
+.top a{text-decoration:none;color:#1e293b;font-weight:900;font-size:17px}
+.top .g{color:#d4a017}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px 60px}
+.hero{border-radius:22px;overflow:hidden;position:relative;min-height:180px;background:linear-gradient(135deg,#065f46,#059669)}
+.hero img{width:100%;height:230px;object-fit:cover;display:block}
+.hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,6,23,.72),transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.hero h1{color:#fff;font-size:24px;font-weight:900;letter-spacing:-.3px}
+.hero .am{color:#fcd34d;font-size:14px;font-weight:800}
+.hero .loc{color:#e2e8f0;font-size:12px;margin-top:3px}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.w{background:#fff;border:1.5px solid #e9e4da;border-radius:16px;padding:10px 8px;text-align:center}
+.w b{display:block;font-size:12px;color:#059669}
+.w span{font-size:9.5px;color:#94a3b8;font-weight:700}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#fff;border:1.5px solid #e9e4da;border-radius:18px;padding:14px;margin-bottom:16px}
+.dates label{font-size:10.5px;font-weight:900;color:#64748b;text-transform:uppercase;letter-spacing:1px}
+.dates input{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:9px 10px;font-size:14px;font-family:inherit;margin-top:4px;background:#faf8f4}
+h2{font-size:18px;font-weight:900;margin:18px 0 10px}
+.room{background:#fff;border:1.5px solid #e9e4da;border-radius:20px;padding:16px;margin-bottom:12px}
+.room .rh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.room .nm{font-weight:900;font-size:16px}
+.room .am{font-size:12.5px;color:#64748b}
+.room .pr{text-align:right;flex-shrink:0}
+.room .pr b{font-size:19px;color:#059669}
+.room .pr span{font-size:10px;color:#94a3b8;display:block;font-weight:700}
+.room .ams{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.room .ams span{font-size:10.5px;background:#f0fdf4;color:#047857;border-radius:999px;padding:4px 10px;font-weight:700}
+.avail{font-size:11.5px;font-weight:800;margin-bottom:10px}
+.avail.ok{color:#059669}.avail.low{color:#d97706}.avail.no{color:#dc2626}
+.bkbtn{width:100%;border:0;border-radius:14px;padding:13px;background:linear-gradient(135deg,#059669,#047857);color:#fff;font-weight:900;font-size:14.5px;cursor:pointer;font-family:inherit}
+.bkbtn:disabled{background:#cbd5e1;cursor:not-allowed}
+/* modal */
+#modal{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+#modal.on{display:flex}
+.sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:680px;padding:22px 20px calc(22px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto}
+.sheet h3{font-size:17px;font-weight:900;margin-bottom:12px}
+.sheet label{font-size:11px;font-weight:900;color:#64748b;display:block;margin:10px 0 4px;text-transform:uppercase;letter-spacing:1px}
+.sheet input,.sheet select{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:11px 12px;font-size:15px;font-family:inherit;background:#faf8f4}
+.tot{display:flex;justify-content:space-between;background:#f0fdf4;border-radius:14px;padding:12px 14px;margin-top:14px;font-weight:900}
+.tot b{color:#059669}
+.note{font-size:11px;color:#94a3b8;margin-top:8px;line-height:1.5}
+/* confirmation */
+.conf{text-align:center;padding:24px 0}
+.conf .big{font-size:52px}
+.conf h3{font-size:20px;font-weight:900;margin:8px 0}
+.conf .code{font-size:26px;font-weight:900;letter-spacing:2px;color:#059669;background:#f0fdf4;border-radius:14px;padding:12px;margin:12px 0;border:2px dashed #059669}
+.conf p{font-size:13px;color:#64748b;line-height:1.6}
+.wa{display:inline-block;background:#25D366;color:#fff;font-weight:900;border-radius:999px;padding:12px 26px;text-decoration:none;margin-top:12px;font-size:14px}
+.skel{background:linear-gradient(90deg,#eee 25%,#f7f5f0 50%,#eee 75%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:18px;height:120px;margin-bottom:12px}
+@keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/">🏢 Bina<span class="g">Smart</span></a><span style="margin-left:auto;font-size:11px;font-weight:800;color:#059669">🏨 Book Direct · 0% commission</span></div>
+<div class="wrap">
+  <div id="hero" class="hero"><div class="ov"><h1 id="hname">Loading…</h1><div class="am" id="hnameAm"></div><div class="loc" id="hloc"></div></div></div>
+  <div class="why">
+    <div class="w"><b>0% ኮሚሽን</b><span>Book direct — hotel keeps 100%</span></div>
+    <div class="w"><b>ካርድ አያስፈልግም</b><span>No credit card — pay at hotel</span></div>
+    <div class="w"><b>ዋትስአፕ ማረጋገጫ</b><span>Instant WhatsApp confirmation</span></div>
+  </div>
+  <div class="dates">
+    <div><label>Check-in / መግቢያ</label><input type="date" id="ci"></div>
+    <div><label>Check-out / መውጫ</label><input type="date" id="co"></div>
+  </div>
+  <h2>Rooms · ክፍሎች</h2>
+  <div id="rooms"><div class="skel"></div><div class="skel"></div></div>
+</div>
+<div id="modal"><div class="sheet" id="sheet"></div></div>
+<script>
+const slug = location.pathname.split('/')[2];
+const $ = id => document.getElementById(id);
+let HOTEL = null, ROOMS = [];
+const today = new Date(); const d2s = d => d.toISOString().slice(0,10);
+$('ci').value = d2s(today); $('ci').min = d2s(today);
+const tm = new Date(today); tm.setDate(tm.getDate()+1);
+$('co').value = d2s(tm); $('co').min = d2s(tm);
+$('ci').onchange = $('co').onchange = load;
+function nights(){ return Math.max(1, Math.round((new Date($('co').value) - new Date($('ci').value)) / 86400000)); }
+async function load(){
+  const r = await fetch('/api/hotel/' + slug + '?in=' + $('ci').value + '&out=' + $('co').value);
+  if (!r.ok){ $('rooms').innerHTML = '<p style="color:#94a3b8;text-align:center;padding:20px">This building has no bookable rooms yet.</p>'; return; }
+  const d = await r.json(); HOTEL = d.hotel; ROOMS = d.rooms;
+  $('hname').textContent = HOTEL.name; $('hnameAm').textContent = HOTEL.nameAm || '';
+  $('hloc').textContent = '📍 ' + (HOTEL.subCity ? HOTEL.subCity + ' · ' : '') + HOTEL.city;
+  document.title = HOTEL.name + ' — Book Direct | BinaSmart';
+  if (HOTEL.photo) $('hero').insertAdjacentHTML('afterbegin', '<img src="' + HOTEL.photo + '" alt="' + HOTEL.name + '">');
+  $('rooms').innerHTML = ROOMS.map(rm => {
+    const av = rm.available <= 0 ? '<div class="avail no">✖ Fully booked for these dates</div>'
+      : rm.available <= 2 ? '<div class="avail low">⚡ Only ' + rm.available + ' left for these dates</div>'
+      : '<div class="avail ok">✓ ' + rm.available + ' rooms available</div>';
+    return '<div class="room"><div class="rh"><div><div class="nm">' + rm.name + '</div><div class="am">' + (rm.nameAm || '') + ' · 👥 ' + rm.capacity + '</div></div>'
+      + '<div class="pr"><b>' + rm.pricePerNight.toLocaleString() + ' ETB</b><span>per night · በሌሊት</span></div></div>'
+      + '<div class="ams">' + (rm.amenities || []).map(a => '<span>' + a + '</span>').join('') + '</div>' + av
+      + '<button class="bkbtn" ' + (rm.available <= 0 ? 'disabled' : '') + ' onclick="openBook(\'' + rm.id + '\')">Book · ያስይዙ — ' + (rm.pricePerNight * nights()).toLocaleString() + ' ETB total</button></div>';
+  }).join('');
+}
+function openBook(id){
+  const rm = ROOMS.find(x => x.id === id); if (!rm) return;
+  $('modal').classList.add('on');
+  $('sheet').innerHTML = '<h3>🏨 ' + rm.name + ' — ' + $('ci').value + ' → ' + $('co').value + ' (' + nights() + ' nights)</h3>'
+    + '<label>Full name / ሙሉ ስም</label><input id="gn" placeholder="Your name">'
+    + '<label>Phone (WhatsApp) / ስልክ</label><input id="gp" placeholder="09… or +2519…" inputmode="tel">'
+    + '<label>Rooms / ክፍሎች</label><select id="gr">' + Array.from({length: Math.min(rm.available, 5)}, (_, i) => '<option>' + (i + 1) + '</option>').join('') + '</select>'
+    + '<div class="tot"><span>Total · ጠቅላላ</span><b id="gt">' + (rm.pricePerNight * nights()).toLocaleString() + ' ETB</b></div>'
+    + '<div class="note">Pay at the hotel — cash or telebirr. No prepayment, no card. Free cancellation by phone. / ክፍያ ሆቴሉ ላይ — ቅድመ ክፍያ የለም።</div>'
+    + '<button class="bkbtn" style="margin-top:12px" onclick="submitBook(\'' + rm.id + '\')">✓ Confirm booking · ያረጋግጡ</button>';
+  $('gr').onchange = () => $('gt').textContent = (rm.pricePerNight * nights() * +$('gr').value).toLocaleString() + ' ETB';
+  $('modal').onclick = e => { if (e.target === $('modal')) $('modal').classList.remove('on'); };
+}
+async function submitBook(id){
+  const gn = $('gn').value.trim(), gp = $('gp').value.trim();
+  if (!gn || !gp) return alert('Please enter your name and phone / ስምዎን እና ስልክዎን ያስገቡ');
+  const r = await fetch('/api/hotel/' + slug + '/book', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ roomTypeId: id, guestName: gn, guestPhone: gp, checkIn: $('ci').value, checkOut: $('co').value, rooms: +$('gr').value }) });
+  const d = await r.json();
+  if (!d.ok){ alert(d.error === 'not_available' ? 'Sorry — just sold out for these dates. Only ' + d.available + ' left.' : '❌ ' + (d.error || 'error')); return; }
+  const summary = '🏨 Booking ' + d.code + '\n' + d.hotel + '\n' + d.room + ' · ' + $('ci').value + ' → ' + $('co').value + '\nTotal: ' + d.total.toLocaleString() + ' ETB\nGuest: ' + gn;
+  $('sheet').innerHTML = '<div class="conf"><div class="big">🎉</div><h3>Booking received! · ተይዟል!</h3>'
+    + '<div class="code">' + d.code + '</div>'
+    + '<p>Show this code at reception.<br>' + d.room + ' · ' + nights() + ' nights · <b>' + d.total.toLocaleString() + ' ETB</b><br>Pay at the hotel — no prepayment.</p>'
+    + '<a href="/pay?amount=' + d.total + '&for=' + encodeURIComponent(d.hotel||'Hotel booking') + '&bt=hotel&bc=' + encodeURIComponent(d.code) + '" style="display:block;text-align:center;text-decoration:none;background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;font-weight:800;border-radius:14px;padding:14px;margin:8px 0 10px">💳 አሁን በኦንላይን ይክፈሉ · Pay online</a>'
+    + '<a class="wa" href="https://wa.me/?text=' + encodeURIComponent(summary) + '">💬 Save to WhatsApp</a></div>';
+  load();
+}
+load();
+</script>
+</body>
+</html>

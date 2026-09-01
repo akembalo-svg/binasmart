@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Find Your Department — Book a Visit | BinaSmart Health</title>
+<meta name="description" content="Scan at the hospital gate: find every department, floor and room, see the fee, and book your visit — Amharic + English. Powered by BinaSmart.">
+<link rel="icon" href="/icon-32.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#faf8f4;color:#1e293b;min-height:100vh;padding-bottom:40px}
+.top{display:flex;align-items:center;gap:8px;padding:14px 18px;max-width:680px;margin:0 auto}
+.top a{text-decoration:none;color:#1e293b;font-weight:900;font-size:17px}
+.top .g{color:#d4a017}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.hero{background:linear-gradient(135deg,#0e7490,#0891b2);border-radius:22px;padding:22px 18px;color:#fff}
+.hero h1{font-size:24px;font-weight:900}
+.hero .am{color:#a5f3fc;font-weight:800;font-size:14px}
+.hero .sub{font-size:11.5px;opacity:.85;margin-top:6px}
+.emerg{display:flex;align-items:center;gap:10px;background:#fef2f2;border:1.5px solid #fecaca;border-radius:16px;padding:12px 14px;margin:12px 0;font-size:12.5px;font-weight:800;color:#b91c1c}
+.emerg span{margin-left:auto;background:#dc2626;color:#fff;border-radius:999px;padding:6px 14px;font-size:11px}
+.dept{background:#fff;border:1.5px solid #e9e4da;border-radius:20px;padding:15px;margin-top:11px}
+.dh{display:flex;align-items:flex-start;gap:12px}
+.dh .ic{width:44px;height:44px;border-radius:14px;background:#ecfeff;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.dh .nm{font-weight:900;font-size:15.5px}
+.dh .am{font-size:12px;color:#64748b}
+.loc{margin-left:auto;text-align:right;flex-shrink:0}
+.loc b{font-size:12px;color:#0e7490;display:block}
+.loc span{font-size:10px;color:#94a3b8;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tags span{font-size:10.5px;background:#ecfeff;color:#0e7490;border-radius:999px;padding:4px 10px;font-weight:800}
+.tags .fee{background:#f0fdf4;color:#047857}
+.brow{display:flex;align-items:center;justify-content:space-between}
+.slots{font-size:11.5px;font-weight:800}
+.slots.ok{color:#059669}.slots.low{color:#d97706}.slots.no{color:#dc2626}.slots.walk{color:#64748b}
+.bkbtn{border:0;border-radius:13px;padding:11px 20px;background:linear-gradient(135deg,#0e7490,#0891b2);color:#fff;font-weight:900;font-size:13px;cursor:pointer;font-family:inherit}
+.bkbtn:disabled{background:#cbd5e1;cursor:not-allowed}
+#modal{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+#modal.on{display:flex}
+.sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:680px;padding:22px 20px calc(22px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto}
+.sheet h3{font-size:17px;font-weight:900;margin-bottom:6px}
+.sheet .sm{font-size:12px;color:#64748b;margin-bottom:8px}
+.sheet label{font-size:11px;font-weight:900;color:#64748b;display:block;margin:12px 0 4px;text-transform:uppercase;letter-spacing:1px}
+.sheet input{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:11px 12px;font-size:15px;font-family:inherit;background:#faf8f4}
+.obtn{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#0e7490,#0891b2);color:#fff;font-weight:900;font-size:15px;cursor:pointer;font-family:inherit;margin-top:14px}
+.conf{text-align:center;padding:22px 0}
+.conf .big{font-size:52px}
+.conf h3{font-size:20px}
+.card{margin:14px auto;max-width:320px;background:#fff;border:2px dashed #0e7490;border-radius:18px;padding:16px;text-align:left}
+.card .code{font-size:22px;font-weight:900;letter-spacing:2px;color:#0e7490;text-align:center;border-bottom:1px solid #e9e4da;padding-bottom:10px;margin-bottom:10px}
+.card .row{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0}
+.card .row span{color:#94a3b8;font-weight:700}
+.card .row b{font-weight:900;text-align:right}
+.conf p{font-size:12.5px;color:#64748b;line-height:1.6}
+.wa{display:inline-block;background:#25D366;color:#fff;font-weight:900;border-radius:999px;padding:12px 26px;text-decoration:none;margin-top:8px;font-size:14px}
+.skel{background:linear-gradient(90deg,#eee 25%,#f7f5f0 50%,#eee 75%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:18px;height:110px;margin-top:12px}
+@keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/">🏢 Bina<span class="g">Smart</span></a><span style="margin-left:auto;font-size:11px;font-weight:800;color:#0891b2">🏥 Find your department</span></div>
+<div class="wrap">
+  <div class="hero"><h1 id="hname">Loading…</h1><div class="am" id="hnameAm"></div><div class="sub" id="hsub"></div></div>
+  <div class="emerg">🚨 Emergency? Go straight to <b>E-01, Ground Floor</b> · ድንገተኛ? በቀጥታ E-01<span>24/7</span></div>
+  <div id="depts"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+</div>
+<div id="modal"><div class="sheet" id="sheet"></div></div>
+<script>
+const slug = location.pathname.split('/')[2];
+const $ = id => document.getElementById(id);
+let H = null, DEPTS = [];
+const floorName = f => f === 0 ? 'Ground Floor · ምድር ቤት' : 'Floor ' + f + ' · ' + f + 'ኛ ፎቅ';
+async function load(){
+  const r = await fetch('/api/hospital/' + slug);
+  if (!r.ok){ $('hname').textContent = 'Hospital not found'; $('depts').innerHTML = ''; return; }
+  const d = await r.json(); H = d.hospital; DEPTS = d.departments;
+  $('hname').textContent = H.name; $('hnameAm').textContent = H.nameAm || '';
+  $('hsub').textContent = '📍 ' + (H.subCity ? H.subCity + ' · ' : '') + H.city + ' — every department, floor and fee below';
+  document.title = H.name + ' — Departments & Booking | BinaSmart';
+  $('depts').innerHTML = DEPTS.map(dp => {
+    const walkIn = dp.slotsPerDay >= 999 || !dp.fee;
+    const s = walkIn ? '<span class="slots walk">Walk-in · ቀጥታ ይግቡ</span>'
+      : dp.slotsLeft <= 0 ? '<span class="slots no">✖ Today full — book tomorrow</span>'
+      : dp.slotsLeft <= 5 ? '<span class="slots low">⚡ ' + dp.slotsLeft + ' slots left today</span>'
+      : '<span class="slots ok">✓ ' + dp.slotsLeft + ' slots today</span>';
+    return '<div class="dept"><div class="dh"><div class="ic">' + (dp.icon || '🏥') + '</div>'
+      + '<div><div class="nm">' + dp.name + '</div><div class="am">' + (dp.nameAm || '') + '</div></div>'
+      + '<div class="loc"><b>' + (dp.room || '') + '</b><span>' + floorName(dp.floor) + '</span></div></div>'
+      + '<div class="tags">' + (dp.fee ? '<span class="fee">💵 ' + dp.fee.toLocaleString() + ' ETB</span>' : '')
+      + (dp.openHours ? '<span>🕐 ' + dp.openHours + '</span>' : '')
+      + (dp.doctors || []).map(x => '<span>👨‍⚕️ ' + x + '</span>').join('') + '</div>'
+      + '<div class="brow">' + s + (walkIn ? '' : '<button class="bkbtn" onclick="openBook(\'' + dp.id + '\')">📅 Book visit · ቀጠሮ</button>') + '</div></div>';
+  }).join('');
+}
+function openBook(id){
+  const dp = DEPTS.find(x => x.id === id); if (!dp) return;
+  const today = new Date().toISOString().slice(0, 10);
+  $('modal').classList.add('on');
+  $('sheet').innerHTML = '<h3>' + (dp.icon || '🏥') + ' ' + dp.name + ' · ' + (dp.nameAm || '') + '</h3>'
+    + '<div class="sm">' + (dp.room || '') + ' · ' + floorName(dp.floor) + (dp.fee ? ' · ' + dp.fee.toLocaleString() + ' ETB' : '') + '</div>'
+    + '<label>Date / ቀን</label><input type="date" id="ad" value="' + today + '" min="' + today + '">'
+    + '<label>Full name / ሙሉ ስም</label><input id="an" placeholder="Patient name">'
+    + '<label>Phone / ስልክ</label><input id="ap" placeholder="09…" inputmode="tel">'
+    + '<label>Reason (optional) / ምክንያት</label><input id="ar" placeholder="Short description">'
+    + '<button class="obtn" onclick="submitBook(\'' + dp.id + '\')">📅 Book my visit · ቀጠሮዬን ያዙ</button>';
+  $('modal').onclick = e => { if (e.target === $('modal')) $('modal').classList.remove('on'); };
+}
+async function submitBook(id){
+  const an = $('an').value.trim(), ap = $('ap').value.trim();
+  if (!an || !ap) return alert('Please enter name and phone / ስም እና ስልክ ያስገቡ');
+  const r = await fetch('/api/hospital/' + slug + '/appointment', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ departmentId: id, name: an, phone: ap, date: $('ad').value, note: $('ar').value.trim() }) });
+  const d = await r.json();
+  if (!d.ok){ alert(d.error === 'day_full' ? 'That day is fully booked — please pick another date / ሙሉ ነው' : '❌ ' + (d.error || 'error')); return; }
+  const summary = '🏥 Appointment ' + d.code + '\n' + H.name + ' — ' + d.department + '\n' + d.date + ' · Queue #' + d.queueNumber + '\n' + (d.room || '') + ', floor ' + d.floor + (d.fee ? '\nFee: ' + d.fee.toLocaleString() + ' ETB' : '') + '\nPatient: ' + an;
+  $('sheet').innerHTML = '<div class="conf"><div class="big">🩺</div><h3>Appointment booked! · ቀጠሮዎ ተይዟል!</h3>'
+    + '<div class="card"><div class="code">' + d.code + '</div>'
+    + '<div class="row"><span>Department</span><b>' + d.department + '<br>' + (d.departmentAm || '') + '</b></div>'
+    + '<div class="row"><span>Date</span><b>' + d.date + '</b></div>'
+    + '<div class="row"><span>Queue</span><b>#' + d.queueNumber + '</b></div>'
+    + '<div class="row"><span>Where</span><b>' + (d.room || '') + ' · ' + floorName(d.floor) + '</b></div>'
+    + (d.fee ? '<div class="row"><span>Fee</span><b>' + d.fee.toLocaleString() + ' ETB — pay at reception</b></div>' : '') + '</div>'
+    + '<p>Show this code at reception · ኮዱን መቀበያ ላይ ያሳዩ</p>'
+    + '<a class="wa" href="https://wa.me/?text=' + encodeURIComponent(summary) + '">💬 Save to WhatsApp</a></div>';
+  load();
+}
+load();
+</script>
+</body>
+</html>

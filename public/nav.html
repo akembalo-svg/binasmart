@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darulle 3D Navigation — Find Any Shop</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700;900&family=Inter:wght@400;600;700;800;900&display=swap');
+* { -webkit-tap-highlight-color:transparent; margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter','Noto Sans Ethiopic',sans-serif; background:#0f172a; color:#fff; overflow:hidden; }
+#canvas-container { width:100vw; height:100vh; position:fixed; top:0; left:0; }
+.glass { background:rgba(15,23,42,.88); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); }
+.gradient-gold { background:linear-gradient(135deg,#fbbf24,#d97706); }
+.gradient-nav { background:linear-gradient(135deg,#10b981,#059669); }
+.ui { position:fixed; z-index:10; }
+.drawer { position:fixed; bottom:0; left:0; right:0; z-index:30; background:rgba(15,23,42,.96); backdrop-filter:blur(20px); border-top:1px solid rgba(251,191,36,.3); border-radius:20px 20px 0 0; max-height:75vh; overflow-y:auto; transform:translateY(100%); transition:transform .3s; }
+.drawer.open { transform:translateY(0); }
+.shop-row { transition:all .15s; }
+.shop-row:active { background:rgba(16,185,129,.15); }
+.step-card { animation:slideIn .35s ease; }
+@keyframes slideIn { from{transform:translateY(-16px);opacity:0} to{transform:none;opacity:1} }
+.mode-pill { border:1px solid #334155; background:rgba(15,23,42,.7); transition:.2s; }
+.mode-pill.on { background:linear-gradient(135deg,#10b981,#059669); border-color:#34d399; }
+#progress-bar { height:4px; background:#1e293b; border-radius:99px; overflow:hidden; }
+#progress-fill { height:100%; width:0%; background:linear-gradient(90deg,#34d399,#10b981); transition:width .2s linear; }
+.hidden { display:none !important; }
+</style>
+</head>
+<body>
+
+<div id="canvas-container"></div>
+
+<div class="ui top-0 left-0 right-0 p-3">
+  <div class="glass rounded-2xl p-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 gradient-gold rounded-xl flex items-center justify-center text-amber-950 font-black">ድ</div>
+        <div>
+          <div class="font-black text-sm">ዳሩሌ ህንፃ • Darulle</div>
+          <div class="text-[9px] text-amber-300" id="top-status">Choose a shop from the list / ሱቅ ይምረጡ</div>
+        </div>
+      </div>
+      <button onclick="openPicker()" class="gradient-nav rounded-full px-4 py-2 text-xs font-black shadow-lg">🧭 Find a Shop</button>
+    </div>
+    <div id="nav-header" class="hidden mt-3">
+      <div class="step-card bg-emerald-500/15 border border-emerald-400/40 rounded-xl p-3">
+        <div class="flex items-center gap-3">
+          <div class="text-3xl" id="step-icon">🚶</div>
+          <div class="flex-1">
+            <div class="font-black text-sm" id="step-text-en">Walk to the entrance</div>
+            <div class="text-[11px] text-emerald-300" id="step-text-am">ወደ መግቢያው ይሂዱ</div>
+          </div>
+          <div class="text-right">
+            <div class="text-[9px] text-slate-400">Step</div>
+            <div class="font-black text-emerald-400" id="step-count">1/5</div>
+          </div>
+        </div>
+        <div id="progress-bar" class="mt-2"><div id="progress-fill"></div></div>
+        <div class="flex items-center justify-between mt-2">
+          <div class="text-[10px] text-slate-400">🎯 <span id="dest-label">—</span> • ETA <span id="eta-label">~1 min</span></div>
+          <div class="flex gap-1.5">
+            <button onclick="replayNav()" class="text-[10px] bg-slate-700 px-2.5 py-1 rounded-full font-bold">↻ Replay</button>
+            <button onclick="exitNav()" class="text-[10px] bg-red-500/30 text-red-300 px-2.5 py-1 rounded-full font-bold">✕ Exit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="picker" class="drawer">
+  <div class="p-4">
+    <div class="w-12 h-1 bg-slate-600 rounded-full mx-auto mb-3"></div>
+    <div class="flex items-center justify-between mb-3">
+      <div class="font-black text-lg">🧭 Where do you want to go?</div>
+      <button onclick="closePicker()" class="w-8 h-8 bg-slate-700 rounded-full">✕</button>
+    </div>
+    <div class="flex gap-2 mb-3">
+      <button onclick="setTravelMode('lift')" id="pill-lift" class="mode-pill on rounded-full px-4 py-2 text-xs font-bold flex-1">🛗 Lift / አሳንሰር</button>
+      <button onclick="setTravelMode('stairs')" id="pill-stairs" class="mode-pill rounded-full px-4 py-2 text-xs font-bold flex-1">🪜 Stairs / ደረጃ</button>
+    </div>
+    <input id="search" oninput="filterShops()" placeholder="Search... / ፈልግ..." 
+      class="w-full bg-slate-800 border border-slate-600 rounded-xl px-3 py-2.5 text-sm mb-3 outline-none focus:border-emerald-400" />
+    <div id="shop-list" class="space-y-1.5 pb-4"></div>
+  </div>
+</div>
+
+<div id="arrival" class="ui hidden inset-0 flex items-center justify-center p-6" style="background:rgba(0,0,0,.6); z-index:40;">
+  <div class="glass border border-emerald-400/50 rounded-3xl p-6 text-center max-w-xs w-full step-card">
+    <div class="text-6xl mb-3" id="arrival-icon">☕</div>
+    <div class="text-emerald-400 font-black text-xs mb-1">🎉 YOU HAVE ARRIVED / ደርሰዋል</div>
+    <div class="font-black text-xl mb-1" id="arrival-name">Abebe Coffee</div>
+    <div class="text-xs text-slate-400 mb-4" id="arrival-info">Ground Floor • G-04</div>
+    <div class="grid grid-cols-2 gap-2">
+      <button class="gradient-nav text-white py-2.5 rounded-xl text-xs font-black">📞 Call</button>
+      <button onclick="exitNav()" class="bg-slate-700 text-white py-2.5 rounded-xl text-xs font-bold">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const B = { floors: 6, upf: 4, FH: 3.5, W: 12, D: 8 };
+const shops = [
+  { id:'G-01', floor:0, pos:0, name:'Habesha Supermarket', am:'ሀበሻ ሱፐርማርኬት', icon:'🛒' },
+  { id:'G-02', floor:0, pos:1, name:'Zemen Pharmacy', am:'ዘመን ፋርማሲ', icon:'💊' },
+  { id:'G-04', floor:0, pos:3, name:'Abebe Coffee', am:'አበበ ቡና', icon:'☕' },
+  { id:'1-01', floor:1, pos:0, name:'Selam Law Office', am:'ሰላም ጠበቃ', icon:'⚖️' },
+  { id:'1-04', floor:1, pos:3, name:'Rose Beauty Salon', am:'ሮዝ ውበት ሳሎን', icon:'💇‍♀️' },
+  { id:'2-01', floor:2, pos:0, name:'Tech Solutions PLC', am:'ቴክ ሶሉሽንስ', icon:'💻' },
+  { id:'2-02', floor:2, pos:1, name:'Dr. Mulugeta Clinic', am:'ዶ/ር ሙሉጌታ ክሊኒክ', icon:'🏥' },
+  { id:'2-04', floor:2, pos:3, name:'Axum Travel', am:'አክሱም ጉዞ', icon:'✈️' },
+  { id:'3-01', floor:3, pos:0, name:'CBE Branch', am:'ንግድ ባንክ', icon:'🏦' },
+  { id:'3-02', floor:3, pos:1, name:'Hassan Real Estate', am:'ሀሰን ሪል እስቴት', icon:'🏘️' },
+  { id:'4-01', floor:4, pos:0, name:'Alem Consulting', am:'አለም አማካሪ', icon:'📈' },
+  { id:'4-03', floor:4, pos:2, name:'Lidya Design Studio', am:'ሊድያ ዲዛይን', icon:'🎨' },
+  { id:'5-01', floor:5, pos:0, name:'Royal Gym', am:'ሮያል ጂም', icon:'💪' },
+  { id:'5-02', floor:5, pos:1, name:'Sky Restaurant', am:'ስካይ ሬስቶራንት', icon:'🍽️' },
+  { id:'5-04', floor:5, pos:3, name:'Elite Spa', am:'ኢሊት ስፓ', icon:'🧖‍♀️' },
+];
+
+const LIFT = { x: B.W/2 - 1.6, z: 1.8 };   // JJ Darule: ~4-5 steps in from entrance, on the side
+const STAIRS = { x: B.W/2 - 1.2, z: 0.2 }; // stairs immediately NEXT to the lift
+const CORRIDOR_Z = 1.2;
+function unitX(pos){ return -B.W/2 + pos*(B.W/B.upf) + (B.W/B.upf)/2; }
+function floorY(f){ return f*B.FH + 1.5; }
+
+let scene, camera, renderer, buildingGroup;
+let frontWalls = [], marker, pathLine, destBeacon;
+let rotY = 0.5, rotX = 0.25, zoom = 1, dragging = false, prev = {x:0,y:0};
+let followMode = false;
+let travelMode = 'lift';
+
+scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0f172a);
+scene.fog = new THREE.Fog(0x0f172a, 40, 110);
+camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, .1, 500);
+renderer = new THREE.WebGLRenderer({ antialias:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+renderer.setSize(innerWidth, innerHeight);
+document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+scene.add(new THREE.AmbientLight(0xfef3c7,.45));
+const sun = new THREE.DirectionalLight(0xfbbf24,1.1);
+sun.position.set(20,30,15); scene.add(sun);
+const fillLight = new THREE.DirectionalLight(0x60a5fa,.25);
+fillLight.position.set(-15,10,-10); scene.add(fillLight);
+
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(70,70), new THREE.MeshStandardMaterial({color:0x1e293b,roughness:.85}));
+ground.rotation.x = -Math.PI/2; scene.add(ground);
+const pave = new THREE.Mesh(new THREE.PlaneGeometry(22,18), new THREE.MeshStandardMaterial({color:0x334155}));
+pave.rotation.x = -Math.PI/2; pave.position.y=.01; scene.add(pave);
+
+buildingGroup = new THREE.Group();
+const facadeMat = new THREE.MeshStandardMaterial({ color:0xc2a875, roughness:.9, transparent:true });
+const slabMat = new THREE.MeshStandardMaterial({ color:0x92400e });
+
+for (let f=0; f<=B.floors; f++){
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(B.W+.2,.18,B.D+.2), slabMat.clone());
+  slab.position.y = f*B.FH; slab.material.transparent = true;
+  buildingGroup.add(slab);
+}
+
+for (let f=0; f<B.floors; f++){
+  for (let p=0; p<B.upf; p++){
+    const uw = B.W/B.upf, x = unitX(p), y = f*B.FH + B.FH/2;
+    const shop = shops.find(function(s){ return s.floor===f&&s.pos===p; });
+    const wall = new THREE.Mesh(new THREE.BoxGeometry(uw-.1,B.FH-.2,.25), facadeMat.clone());
+    wall.position.set(x,y,B.D/2); buildingGroup.add(wall); frontWalls.push(wall);
+    const win = new THREE.Mesh(new THREE.PlaneGeometry(uw*.55,B.FH*.5),
+      new THREE.MeshBasicMaterial({ color: shop?0xfbbf24:0x475569, transparent:true, opacity: shop?.8:.4 }));
+    win.position.set(x,y,B.D/2+.14); buildingGroup.add(win); frontWalls.push(win);
+  }
+  [-B.W/2, B.W/2].forEach(function(sx){
+    const sw = new THREE.Mesh(new THREE.BoxGeometry(.25,B.FH-.2,B.D), facadeMat.clone());
+    sw.position.set(sx, f*B.FH+B.FH/2, 0); sw.material.opacity=.9; buildingGroup.add(sw); frontWalls.push(sw);
+  });
+  const bw = new THREE.Mesh(new THREE.BoxGeometry(B.W,B.FH-.2,.25), facadeMat.clone());
+  bw.position.set(0, f*B.FH+B.FH/2, -B.D/2); bw.material.opacity=.9; buildingGroup.add(bw); frontWalls.push(bw);
+}
+
+const shaft = new THREE.Mesh(new THREE.BoxGeometry(1.8, B.floors*B.FH, 1.8),
+  new THREE.MeshPhysicalMaterial({ color:0x34d399, transparent:true, opacity:.18, roughness:.1 }));
+shaft.position.set(LIFT.x, B.floors*B.FH/2, LIFT.z); buildingGroup.add(shaft);
+const liftCab = new THREE.Mesh(new THREE.BoxGeometry(1.5,2.2,1.5),
+  new THREE.MeshStandardMaterial({ color:0x10b981, emissive:0x059669, emissiveIntensity:.4 }));
+liftCab.position.set(LIFT.x, 1.2, LIFT.z); buildingGroup.add(liftCab);
+addLabel('🛗', LIFT.x, B.floors*B.FH + 1, LIFT.z);
+
+for (let f=0; f<B.floors; f++){
+  for (let s=0; s<6; s++){
+    const st = new THREE.Mesh(new THREE.BoxGeometry(1.6,.12,.5),
+      new THREE.MeshStandardMaterial({ color:0x78716c }));
+    st.position.set(STAIRS.x, f*B.FH + .3 + s*.55, STAIRS.z - 1 + s*.35);
+    buildingGroup.add(st);
+  }
+}
+addLabel('🪜', STAIRS.x, B.floors*B.FH + 1, STAIRS.z);
+
+const door = new THREE.Mesh(new THREE.BoxGeometry(2.4,3,.3),
+  new THREE.MeshStandardMaterial({ color:0xb45309, metalness:.3 }));
+door.position.set(0,1.5,B.D/2+.2); buildingGroup.add(door);
+const canopy = new THREE.Mesh(new THREE.BoxGeometry(4,.2,1.4), new THREE.MeshStandardMaterial({color:0x92400e}));
+canopy.position.set(0,3.2,B.D/2+.85); buildingGroup.add(canopy);
+const sc = document.createElement('canvas'); sc.width=768; sc.height=144;
+const sctx = sc.getContext('2d');
+const grad = sctx.createLinearGradient(0,0,768,0); grad.addColorStop(0,'#fbbf24'); grad.addColorStop(1,'#d97706');
+sctx.fillStyle=grad; sctx.fillRect(0,0,768,144);
+sctx.fillStyle='#451a03'; sctx.font='bold 72px sans-serif'; sctx.textAlign='center'; sctx.textBaseline='middle';
+sctx.fillText('ዳሩሌ ህንፃ', 384, 72);
+const sign = new THREE.Mesh(new THREE.PlaneGeometry(3.2,.6), new THREE.MeshBasicMaterial({ map:new THREE.CanvasTexture(sc) }));
+sign.position.set(0,3.4,B.D/2+1.5); buildingGroup.add(sign);
+
+scene.add(buildingGroup);
+
+function addLabel(emoji, x, y, z){
+  const c = document.createElement('canvas'); c.width=128; c.height=128;
+  const cx = c.getContext('2d'); cx.font='90px sans-serif'; cx.textAlign='center'; cx.textBaseline='middle';
+  cx.fillText(emoji,64,70);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map:new THREE.CanvasTexture(c), transparent:true }));
+  sp.scale.set(1.6,1.6,1); sp.position.set(x,y,z); buildingGroup.add(sp);
+}
+
+marker = new THREE.Group();
+// little walking human
+const skinMat = new THREE.MeshStandardMaterial({ color: 0xd9a066 });
+const shirtMat = new THREE.MeshStandardMaterial({ color: 0x7c3aed, emissive: 0x4c1d95, emissiveIntensity: .25 });
+const pantsMat = new THREE.MeshStandardMaterial({ color: 0x1e293b });
+const humanoid = new THREE.Group();
+const legL = new THREE.Mesh(new THREE.CylinderGeometry(.07, .075, .42, 8), pantsMat);
+const legR = legL.clone();
+legL.position.set(-.1, .24, 0); legR.position.set(.1, .24, 0);
+legL.geometry.translate(0, -.21, 0); legL.position.y = .45;
+legR.position.y = .45;
+const torso = new THREE.Mesh(new THREE.CylinderGeometry(.15, .17, .45, 12), shirtMat);
+torso.position.y = .66;
+const armL = new THREE.Mesh(new THREE.CylinderGeometry(.045, .05, .36, 8), shirtMat);
+const armR = armL.clone();
+armL.geometry.translate(0, -.18, 0);
+armL.position.set(-.23, .82, 0); armR.position.set(.23, .64, 0);
+const head = new THREE.Mesh(new THREE.SphereGeometry(.13, 16, 16), skinMat);
+head.position.y = .97;
+humanoid.add(legL, legR, torso, armL, armR, head);
+humanoid.scale.setScalar(1.15);
+marker.add(humanoid);
+marker.userData.limbs = { legL: legL, legR: legR, armL: armL, armR: armR, body: humanoid };
+const navRing = new THREE.Mesh(new THREE.RingGeometry(.5,.65,32),
+  new THREE.MeshBasicMaterial({ color:0x34d399, side:THREE.DoubleSide, transparent:true, opacity:.7 }));
+navRing.rotation.x = -Math.PI/2; navRing.position.y = .02; marker.add(navRing);
+marker.visible = false; scene.add(marker);
+
+destBeacon = new THREE.Mesh(new THREE.ConeGeometry(.4,.9,16),
+  new THREE.MeshStandardMaterial({ color:0xf87171, emissive:0xdc2626, emissiveIntensity:.6 }));
+destBeacon.rotation.x = Math.PI; destBeacon.visible = false; scene.add(destBeacon);
+
+let navPath = [], navSegs = [], navSteps = [], navTotal = 0, navDist = 0, navActive = false, curStep = -1, currentDest = null, arrivalShown = false;
+
+function buildPath(shop){
+  const pts = [];
+  const steps = [];
+  const fy0 = floorY(0);
+  pts.push(new THREE.Vector3(0, fy0, B.D/2 + 6));
+  pts.push(new THREE.Vector3(0, fy0, B.D/2 + .8));
+  steps.push({ at:0, icon:'🚶', en:'Walk to the main entrance', am:'ወደ ዋናው መግቢያ ይሂዱ' });
+  pts.push(new THREE.Vector3(0, fy0, CORRIDOR_Z));
+  steps.push({ at:pts.length-2, icon:'🚪', en:'Enter through the main door', am:'በዋናው በር ይግቡ' });
+
+  if (shop.floor === 0){
+    pts.push(new THREE.Vector3(unitX(shop.pos), fy0, CORRIDOR_Z));
+    const side = unitX(shop.pos) < 0 ? ['left','ግራ'] : ['right','ቀኝ'];
+    steps.push({ at:pts.length-2, icon:'➡️', en:'Turn '+side[0]+' along the corridor', am:'በኮሪደሩ ወደ '+side[1]+' ይታጠፉ' });
+    pts.push(new THREE.Vector3(unitX(shop.pos), fy0, B.D/2 - .6));
+    steps.push({ at:pts.length-2, icon:shop.icon, en:shop.name+' is right here!', am:shop.am+' እዚህ ነው!' });
+  } else {
+    const fyT = floorY(shop.floor);
+    if (travelMode === 'lift'){
+      pts.push(new THREE.Vector3(LIFT.x, fy0, LIFT.z + 1.4));
+      steps.push({ at:pts.length-2, icon:'🛗', en:'A few steps in — the lift is on your side', am:'ጥቂት እርምጃ — አሳንሰሩ በጎንዎ ነው' });
+      pts.push(new THREE.Vector3(LIFT.x, fyT, LIFT.z + 1.4));
+      steps.push({ at:pts.length-2, icon:'⬆️', en:'Take the lift to Floor '+shop.floor, am:'አሳንሰሩን ወደ '+shop.floor+'ኛ ፎቅ ይውሰዱ' });
+    } else {
+      pts.push(new THREE.Vector3(STAIRS.x, fy0, STAIRS.z + 1.4));
+      steps.push({ at:pts.length-2, icon:'🪜', en:'The stairs are right next to the lift', am:'ደረጃው ከአሳንሰሩ አጠገብ ነው' });
+      for (let f=1; f<=shop.floor; f++){
+        pts.push(new THREE.Vector3(STAIRS.x - 1.2, floorY(f) - B.FH/2, STAIRS.z + .6));
+        pts.push(new THREE.Vector3(STAIRS.x, floorY(f), STAIRS.z + 1.4));
+      }
+      steps.push({ at:pts.length-2, icon:'⬆️', en:'Climb to Floor '+shop.floor, am:'ወደ '+shop.floor+'ኛ ፎቅ ይውጡ' });
+    }
+    pts.push(new THREE.Vector3(unitX(shop.pos), fyT, CORRIDOR_Z));
+    const startX = travelMode==='lift' ? LIFT.x : STAIRS.x;
+    const side = unitX(shop.pos) < startX ? ['left','ግራ'] : ['right','ቀኝ'];
+    steps.push({ at:pts.length-2, icon:'➡️', en:'Exit and turn '+side[0]+' along the corridor', am:'ወጥተው ወደ '+side[1]+' በኮሪደሩ ይሂዱ' });
+    pts.push(new THREE.Vector3(unitX(shop.pos), fyT, B.D/2 - .6));
+    steps.push({ at:pts.length-2, icon:shop.icon, en:shop.name+' — you arrived!', am:shop.am+' — ደርሰዋል!' });
+  }
+  return { pts: pts, steps: steps };
+}
+
+let voiceUnlocked = false, __navAudio = null;
+const AUDIO_ALIAS = {
+  'ጥቂት እርምጃ — አሳንሰሩ በጎንዎ ነው': 'ወደ አሳንሰሩ ይሂዱ (ከሎቢው ጀርባ)',
+  'ደረጃው ከአሳንሰሩ አጠገብ ነው': 'ወደ ደረጃው ይሂዱ (ከጀርባ በቀኝ)'
+};
+function playAm(amText, enFallback){
+  amText = AUDIO_ALIAS[amText] || amText;
+  try{
+    if (__navAudio){ __navAudio.pause(); __navAudio = null; }
+    const a = new Audio('/static/nav-audio/' + encodeURIComponent(amText) + '.mp3');
+    __navAudio = a;
+    a.onerror = function(){ tts(enFallback); };
+    a.play().catch(function(){ tts(enFallback); });
+  }catch(e){ tts(enFallback); }
+}
+function tts(t){
+  if (!t) return;
+  try{ speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'en-US'; u.rate = .95; speechSynthesis.speak(u); }catch(e){}
+}
+function speakStep(st){ if (!st || !voiceUnlocked) return; playAm(st.am, st.en); }
+function unlockVoice(){
+  if (voiceUnlocked) return;
+  voiceUnlocked = true;
+  const h = document.getElementById('voice-hint'); if (h) h.remove();
+  playAm('ናቪጌሽን ተጀምሯል', 'Navigation started');
+  setTimeout(function(){ if (navActive && curStep >= 0) speakStep(navSteps[curStep]); }, 1800);
+}
+document.addEventListener('pointerdown', unlockVoice, { once: false });
+
+function startNav(shopId){
+  const shop = shops.find(function(s){ return s.id===shopId; });
+  currentDest = shop;
+  closePicker();
+  const built = buildPath(shop);
+  navPath = built.pts; navSteps = built.steps;
+
+  navSegs = []; navTotal = 0;
+  for (let i=0;i<navPath.length-1;i++){
+    const d = navPath[i].distanceTo(navPath[i+1]);
+    navSegs.push({ a:navPath[i], b:navPath[i+1], d:d, start:navTotal });
+    navTotal += d;
+  }
+  if (shop.realFloor && shop.realFloor !== shop.floor){
+    navSteps.forEach(function(s){
+      s.en = s.en.replace('Floor ' + shop.floor, 'Floor ' + shop.realFloor);
+      s.am = s.am.replace(shop.floor + 'ኛ', shop.realFloor + 'ኛ');
+    });
+  }
+  navDist = 0; curStep = -1; navActive = true; followMode = true; arrivalShown = false;
+
+  if (pathLine) scene.remove(pathLine);
+  const lineGeo = new THREE.BufferGeometry().setFromPoints(navPath);
+  pathLine = new THREE.Line(lineGeo, new THREE.LineDashedMaterial({ color:0x34d399, dashSize:.4, gapSize:.25 }));
+  pathLine.computeLineDistances(); scene.add(pathLine);
+
+  const last = navPath[navPath.length-1];
+  destBeacon.position.set(last.x, last.y + 1.6, last.z); destBeacon.visible = true;
+
+  frontWalls.forEach(function(w){ w.material.opacity = .16; });
+  buildingGroup.children.forEach(function(c){
+    if (c.material && c.material.transparent && c.geometry && c.geometry.type==='BoxGeometry' && c.material.color && c.material.color.getHex()===0x92400e){ c.material.opacity=.25; }
+  });
+
+  marker.visible = true;
+  document.getElementById('nav-header').classList.remove('hidden');
+  document.getElementById('dest-label').textContent = shop.icon+' '+shop.name+' ('+shop.id+')';
+  document.getElementById('eta-label').textContent = shop.floor === 0 ? '~30 sec' : '~'+(1+Math.ceil(shop.floor/2))+' min';
+  document.getElementById('top-status').textContent = 'Navigating...';
+}
+
+function exitNav(){
+  navActive = false; followMode = false; marker.visible = false; destBeacon.visible = false;
+  if (pathLine){ scene.remove(pathLine); pathLine = null; }
+  frontWalls.forEach(function(w){ w.material.opacity = w.geometry.type==='PlaneGeometry' ? .8 : 1; });
+  document.getElementById('nav-header').classList.add('hidden');
+  document.getElementById('arrival').classList.add('hidden');
+  document.getElementById('top-status').textContent = 'Choose a shop from the list / ሱቅ ይምረጡ';
+}
+
+function replayNav(){ if (currentDest){ document.getElementById('arrival').classList.add('hidden'); startNav(currentDest.id); } }
+
+function renderShops(filter){
+  filter = filter || '';
+  const list = document.getElementById('shop-list');
+  const f = filter.toLowerCase();
+  list.innerHTML = shops
+    .filter(function(s){ return s.name.toLowerCase().indexOf(f)>=0 || s.am.indexOf(filter)>=0 || s.id.toLowerCase().indexOf(f)>=0; })
+    .map(function(s){ return '<div onclick="startNav(\''+s.id+'\')" class="shop-row flex items-center gap-3 bg-slate-800 rounded-xl p-3 cursor-pointer">'
+      +'<div class="text-2xl">'+s.icon+'</div>'
+      +'<div class="flex-1"><div class="text-[13px] font-bold">'+s.name+'</div>'
+      +'<div class="text-[10px] text-slate-400">'+(s.floorLabel || (s.floor===0?'Ground':'Floor '+s.floor))+' • '+s.id+'</div></div>'
+      +'<div class="gradient-nav text-white text-[10px] font-black px-3 py-1.5 rounded-full">GO ›</div></div>'; }).join('');
+}
+function openPicker(){ renderShops(); document.getElementById('picker').classList.add('open'); }
+function closePicker(){ document.getElementById('picker').classList.remove('open'); }
+function filterShops(){ renderShops(document.getElementById('search').value); }
+function setTravelMode(m){
+  travelMode = m;
+  document.getElementById('pill-lift').classList.toggle('on', m==='lift');
+  document.getElementById('pill-stairs').classList.toggle('on', m==='stairs');
+}
+
+const cv = renderer.domElement;
+cv.addEventListener('touchstart', function(e){ dragging=true; prev.x=e.touches[0].clientX; prev.y=e.touches[0].clientY; if(e.touches.length===2){const dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;prev.d=Math.sqrt(dx*dx+dy*dy);} },{passive:true});
+cv.addEventListener('touchmove', function(e){
+  if(e.touches.length===1&&dragging){ rotY+=(e.touches[0].clientX-prev.x)*.005; rotX=Math.max(-.2,Math.min(1.2,rotX+(e.touches[0].clientY-prev.y)*.005)); prev.x=e.touches[0].clientX; prev.y=e.touches[0].clientY; followMode=false; }
+  else if(e.touches.length===2){ const dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY,d=Math.sqrt(dx*dx+dy*dy); if(prev.d) zoom=Math.max(.4,Math.min(3,zoom*prev.d/d)); prev.d=d; followMode=false; }
+},{passive:true});
+cv.addEventListener('touchend', function(){ dragging=false; prev.d=null; if(navActive) setTimeout(function(){followMode=true;}, 2500); });
+cv.addEventListener('mousedown', function(e){ dragging=true; prev.x=e.clientX; prev.y=e.clientY; });
+cv.addEventListener('mousemove', function(e){ if(dragging){ rotY+=(e.clientX-prev.x)*.005; rotX=Math.max(-.2,Math.min(1.2,rotX+(e.clientY-prev.y)*.005)); prev.x=e.clientX; prev.y=e.clientY; followMode=false; } });
+cv.addEventListener('mouseup', function(){ dragging=false; if(navActive) setTimeout(function(){followMode=true;}, 2500); });
+cv.addEventListener('wheel', function(e){ zoom=Math.max(.4,Math.min(3,zoom*(e.deltaY>0?1.08:0.92))); followMode=false; if(navActive) setTimeout(function(){followMode=true;},2500); },{passive:true});
+window.addEventListener('resize', function(){ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
+
+const SPEED = 2.0;
+let lastT = performance.now();
+
+function animate(now){
+  requestAnimationFrame(animate);
+  const dt = Math.min(.05,(now-lastT)/1000); lastT = now;
+
+  if (navActive && navDist < navTotal){
+    navDist += SPEED*dt;
+    let seg = null;
+    for (let i=0;i<navSegs.length;i++){ if (navDist >= navSegs[i].start && navDist <= navSegs[i].start + navSegs[i].d){ seg = navSegs[i]; break; } }
+    if (!seg) seg = navSegs[navSegs.length-1];
+    const t = Math.min(1,(navDist - seg.start)/seg.d);
+    marker.position.lerpVectors(seg.a, seg.b, t);
+    // walk cycle: swing limbs, bob body, face movement direction
+    const L = marker.userData.limbs;
+    if (L){
+      const w = navDist * 3.4;
+      L.legL.rotation.x = Math.sin(w) * .55;
+      L.legR.rotation.x = -Math.sin(w) * .55;
+      L.armL.rotation.x = -Math.sin(w) * .45;
+      L.armR.rotation.x = Math.sin(w) * .45;
+      L.body.position.y = Math.abs(Math.sin(w)) * .04;
+      const dir = new THREE.Vector3().subVectors(seg.b, seg.a);
+      if (dir.lengthSq() > .0001){ L.body.rotation.y = Math.atan2(dir.x, dir.z); }
+    }
+
+    document.getElementById('progress-fill').style.width = Math.min(100, navDist/navTotal*100) + '%';
+    const segIdx = navSegs.indexOf(seg);
+    let stepIdx = 0;
+    for (let i=0;i<navSteps.length;i++){ if (segIdx >= navSteps[i].at) stepIdx = i; }
+    if (stepIdx !== curStep){
+      curStep = stepIdx;
+      const st = navSteps[stepIdx];
+      document.getElementById('step-icon').textContent = st.icon;
+      document.getElementById('step-text-en').textContent = st.en;
+      document.getElementById('step-text-am').textContent = st.am;
+      document.getElementById('step-count').textContent = (stepIdx+1)+'/'+navSteps.length;
+      speakStep(st);
+    }
+    if (navDist >= navTotal && !arrivalShown){
+      arrivalShown = true;
+      setTimeout(function(){
+        document.getElementById('arrival-icon').textContent = currentDest.icon;
+        document.getElementById('arrival-name').textContent = currentDest.name;
+        document.getElementById('arrival-info').textContent = (currentDest.floor===0?'Ground Floor':'Floor '+currentDest.floor)+' • '+currentDest.id;
+        document.getElementById('arrival').classList.remove('hidden');
+      }, 400);
+    }
+  }
+
+  if (destBeacon.visible){ destBeacon.position.y += Math.sin(now*.005)*.008; destBeacon.rotation.y += .03; }
+  if (marker.visible){ const s = 1 + Math.sin(now*.006)*.25; marker.children[1].scale.set(s,s,1); }
+
+  if (followMode && navActive){
+    const target = marker.position;
+    camera.position.lerp(new THREE.Vector3(target.x+6*zoom, target.y+4.5*zoom, target.z+9*zoom), .04);
+    camera.lookAt(target);
+  } else {
+    const r = 30*zoom;
+    camera.position.lerp(new THREE.Vector3(r*Math.sin(rotY)*Math.cos(rotX), r*Math.sin(rotX)+9, r*Math.cos(rotY)*Math.cos(rotX)), .06);
+    camera.lookAt(0,9,0);
+  }
+
+  renderer.render(scene, camera);
+}
+animate(performance.now());
+
+// ===== deep link from building page: /nav?to=UNIT&floor=N&name=... =====
+(function(){
+  const q = new URLSearchParams(location.search);
+  const to = q.get('to');
+  if (!to) return;
+  const realFloor = Math.max(0, parseInt(q.get('floor') || '0') || 0);
+  const MAXF = B.floors - 1;
+  const visF = Math.min(realFloor, MAXF);
+  let h = 0; for (let i = 0; i < to.length; i++) h = (h * 31 + to.charCodeAt(i)) >>> 0;
+  const synth = { id: '__dest', floor: visF, pos: h % 6, name: (q.get('name') || 'Unit ' + to) + ' (' + to + ')', am: q.get('name') || to, icon: '📍' };
+  shops.push(synth);
+  setTimeout(function(){
+    try{
+      startNav('__dest');
+      if (realFloor !== visF){
+        navSteps.forEach(function(s){
+          s.en = s.en.replace('Floor ' + visF, 'Floor ' + realFloor);
+          s.am = s.am.replace(visF + 'ኛ', realFloor + 'ኛ');
+        });
+      }
+      if (!voiceUnlocked){
+        const hint = document.createElement('div');
+        hint.id = 'voice-hint';
+        hint.style.cssText = 'position:fixed;bottom:86px;left:50%;transform:translateX(-50%);background:#0aa88f;color:#fff;font-weight:800;font-size:12px;padding:10px 18px;border-radius:99px;z-index:99;box-shadow:0 6px 20px rgba(124,58,237,.45);animation:pulse 1.6s infinite';
+        hint.textContent = '🔊 Tap once for voice / ድምጽ ለማብራት አንዴ ይንኩ';
+        document.body.appendChild(hint);
+      }
+    }catch(e){}
+  }, 1200);
+})();
+
+// ===== load REAL tenants into the shop picker =====
+(function(){
+  fetch('/api/b/darulle').then(function(r){ return r.json(); }).then(function(d){
+    var real = (d.units || []).filter(function(u){ return u.shop; }).map(function(u){
+      var h = 0, id = String(u.number);
+      for (var i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+      var rf = u.floor, vf = Math.min(rf, B.floors - 1);
+      return { id: id, floor: vf, realFloor: rf, floorLabel: (rf === 0 ? 'Ground' : 'Floor ' + rf),
+               pos: h % 6, name: u.shop.name, am: u.shop.nameAm || u.shop.name, icon: u.shop.icon || '🏬' };
+    });
+    if (real.length){ shops.length = 0; real.forEach(function(s){ shops.push(s); }); }
+    if (document.getElementById('picker').classList.contains('open')){
+      renderShops(document.getElementById('search') ? document.getElementById('search').value : '');
+    }
+  }).catch(function(){});
+  // no deep link → open the shop list immediately (client just taps a shop)
+  if (!new URLSearchParams(location.search).get('to')){
+    setTimeout(openPicker, 700);
+  }
+})();
+</script>
+</body>
+</html>

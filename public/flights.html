@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Flight Tickets — Request Your Fare | BinaSmart Flights</title>
+<meta name="description" content="Send your route and dates — the travel agency prices it in their airline system and WhatsApps you the best fare. Amharic + English. Powered by BinaSmart.">
+<link rel="icon" href="/icon-32.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#faf8f4;color:#1e293b;min-height:100vh;padding-bottom:40px}
+.top{display:flex;align-items:center;gap:8px;padding:14px 18px;max-width:680px;margin:0 auto}
+.top a{text-decoration:none;color:#1e293b;font-weight:900;font-size:17px}
+.top .g{color:#d4a017}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.hero{background:linear-gradient(135deg,#312e81,#4f46e5);border-radius:22px;padding:22px 18px;color:#fff;position:relative;overflow:hidden}
+.hero::after{content:'✈️';position:absolute;right:-8px;bottom:-14px;font-size:90px;opacity:.15;transform:rotate(-20deg)}
+.hero h1{font-size:23px;font-weight:900}
+.hero .am{color:#c7d2fe;font-weight:800;font-size:14px}
+.hero .sub{font-size:11.5px;opacity:.9;margin-top:6px}
+.badges{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.badges span{font-size:10px;font-weight:900;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 10px}
+.form{background:#fff;border:1.5px solid #e9e4da;border-radius:22px;padding:18px;margin-top:14px}
+.trip{display:flex;gap:8px;margin-bottom:6px}
+.tt{flex:1;text-align:center;border:1.5px solid #e9e4da;border-radius:12px;padding:10px;font-weight:900;font-size:13px;cursor:pointer;color:#64748b}
+.tt.on{background:#312e81;color:#fff;border-color:#312e81}
+label{font-size:11px;font-weight:900;color:#64748b;display:block;margin:12px 0 4px;text-transform:uppercase;letter-spacing:1px}
+input,select{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:11px 12px;font-size:15px;font-family:inherit;background:#faf8f4}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.obtn{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#312e81,#4f46e5);color:#fff;font-weight:900;font-size:15px;cursor:pointer;font-family:inherit;margin-top:16px}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.hw{background:#fff;border:1.5px solid #e9e4da;border-radius:16px;padding:12px 8px;text-align:center}
+.hw b{display:block;font-size:11.5px;color:#312e81}
+.hw span{font-size:9.5px;color:#94a3b8;font-weight:700}
+.conf{text-align:center;padding:10px 0}
+.conf .big{font-size:52px}
+.conf h3{font-size:20px;font-weight:900}
+.code{font-size:24px;font-weight:900;letter-spacing:2px;color:#312e81;background:#eef2ff;border:2px dashed #4f46e5;border-radius:14px;padding:12px;margin:12px 0}
+.conf p{font-size:13px;color:#64748b;line-height:1.7}
+.wa{display:inline-block;background:#25D366;color:#fff;font-weight:900;border-radius:999px;padding:12px 26px;text-decoration:none;margin-top:10px;font-size:14px}
+.walk{display:inline-block;background:#059669;color:#fff;font-weight:900;border-radius:999px;padding:12px 26px;text-decoration:none;margin-top:10px;font-size:14px;margin-left:6px}
+</style>
+</head>
+<body>
+<div class="top"><a href="/">🏢 Bina<span class="g">Smart</span></a><span style="margin-left:auto;font-size:11px;font-weight:800;color:#4f46e5">✈️ Flight tickets</span></div>
+<div class="wrap">
+  <div class="hero"><h1 id="aname">Loading…</h1><div class="am" id="anameAm"></div><div class="sub" id="asub"></div>
+    <div class="badges"><span>✈️ Airline ticketing agent</span><span>🌍 International & domestic</span><span>💬 Fare by WhatsApp</span></div></div>
+  <div class="how">
+    <div class="hw"><b>1. Send route</b><span>መስመርዎን ይላኩ</span></div>
+    <div class="hw"><b>2. Agency prices it</b><span>በአየር መንገድ ሲስተም</span></div>
+    <div class="hw"><b>3. Fare on WhatsApp</b><span>ዋጋ በዋትስአፕ</span></div>
+  </div>
+  <div class="form" id="form">
+    <div class="trip"><div class="tt on" id="ttR" onclick="setTrip('ROUND')">🔁 Round trip · ደርሶ መልስ</div><div class="tt" id="ttO" onclick="setTrip('ONEWAY')">➡️ One way · አንድ አቅጣጫ</div></div>
+    <div class="row2"><div><label>From / መነሻ</label><input id="from" value="Addis Ababa (ADD)" list="cities"></div>
+    <div><label>To / መድረሻ</label><input id="to" placeholder="Dubai, Jeddah, Istanbul…" list="cities"></div></div>
+    <datalist id="cities">
+      <option>Addis Ababa (ADD)</option><option>Dubai (DXB)</option><option>Jeddah (JED)</option><option>Riyadh (RUH)</option>
+      <option>Doha (DOH)</option><option>Kuwait (KWI)</option><option>Bahrain (BAH)</option><option>Muscat (MCT)</option>
+      <option>Istanbul (IST)</option><option>Cairo (CAI)</option><option>Nairobi (NBO)</option><option>Beirut (BEY)</option>
+      <option>London (LHR)</option><option>Washington DC (IAD)</option><option>Toronto (YYZ)</option><option>Frankfurt (FRA)</option>
+      <option>Guangzhou (CAN)</option><option>Bangkok (BKK)</option><option>Mumbai (BOM)</option><option>Dire Dawa (DIR)</option>
+      <option>Bahir Dar (BJR)</option><option>Mekelle (MQX)</option><option>Hawassa (AWA)</option><option>Jimma (JIM)</option>
+    </datalist>
+    <div class="row2"><div><label>Depart / መሄጃ ቀን</label><input type="date" id="dd"></div>
+    <div id="retwrap"><label>Return / መመለሻ ቀን</label><input type="date" id="rd"></div></div>
+    <div class="row2"><div><label>Passengers / ተሳፋሪዎች</label><select id="px"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select></div>
+    <div><label>Class / ክፍል</label><select id="cb"><option value="ECONOMY">Economy · ኢኮኖሚ</option><option value="BUSINESS">Business · ቢዝነስ</option></select></div></div>
+    <div id="farebox" style="display:none;background:#eef2ff;border:1.5px solid #c7d2fe;border-radius:16px;padding:12px 14px;margin-top:14px">
+      <div style="font-size:11px;font-weight:900;color:#312e81;text-transform:uppercase;letter-spacing:1px">💡 Live fares — indicative · አመላካች ዋጋ</div>
+      <div id="farelist" style="margin-top:8px"></div>
+      <div style="font-size:10px;color:#6b7280;font-weight:700;margin-top:6px">Prices from airline systems, change by the minute — your exact fare comes from Hanud. / ትክክለኛው ዋጋ ከሀኑድ ይደርስዎታል።</div>
+    </div>
+    <label>Full name / ሙሉ ስም</label><input id="nm" placeholder="As on passport">
+    <label>Phone (WhatsApp) / ስልክ</label><input id="ph" placeholder="09…" inputmode="tel">
+    <label>Note (optional) / ማስታወሻ</label><input id="nt" placeholder="Flexible dates, luggage, visa question…">
+    <button class="obtn" onclick="submitReq()">✈️ Get my fare · ዋጋዬን ላክልኝ</button>
+  </div>
+</div>
+<script>
+const slug = location.pathname.split('/')[2];
+const $ = id => document.getElementById(id);
+let A = null, TRIP = 'ROUND';
+const today = new Date(); const d2s = d => d.toISOString().slice(0, 10);
+const dep = new Date(today); dep.setDate(dep.getDate() + 7); $('dd').value = d2s(dep); $('dd').min = d2s(today);
+const ret = new Date(today); ret.setDate(ret.getDate() + 21); $('rd').value = d2s(ret); $('rd').min = d2s(today);
+function setTrip(t){ TRIP = t; $('ttR').classList.toggle('on', t === 'ROUND'); $('ttO').classList.toggle('on', t === 'ONEWAY'); $('retwrap').style.visibility = t === 'ROUND' ? 'visible' : 'hidden'; }
+async function load(){
+  const r = await fetch('/api/flights/' + slug);
+  if (!r.ok){ $('aname').textContent = 'Agency not found'; return; }
+  A = (await r.json()).agency;
+  $('aname').textContent = '✈️ ' + A.name;
+  $('anameAm').textContent = A.nameAm || '';
+  $('asub').textContent = '📍 ' + A.building + ' · Office ' + A.unit + ', Floor ' + A.floor + ' · ☎️ ' + A.phone;
+  document.title = A.name + ' — Flight Tickets | BinaSmart';
+}
+async function submitReq(){
+  const nm = $('nm').value.trim(), ph = $('ph').value.trim(), to = $('to').value.trim();
+  if (!to) return alert('Where do you want to fly? / የት መብረር ይፈልጋሉ?');
+  if (!nm || !ph) return alert('Please enter your name and phone / ስም እና ስልክ ያስገቡ');
+  const r = await fetch('/api/flights/' + A.id + '/request', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tripType: TRIP, fromCity: $('from').value.trim(), toCity: to, departDate: $('dd').value,
+      returnDate: TRIP === 'ROUND' ? $('rd').value : null, passengers: +$('px').value, cabin: $('cb').value,
+      name: nm, phone: ph, note: $('nt').value.trim() }) });
+  const d = await r.json();
+  if (!d.ok){ alert('❌ ' + (d.error || 'error')); return; }
+  const msg = 'Selam! ✈️ Flight request ' + d.code + '\n' + $('from').value + ' → ' + to + (TRIP === 'ROUND' ? ' (round trip, return ' + $('rd').value + ')' : ' (one way)') + '\nDepart: ' + $('dd').value + ' · ' + $('px').value + ' passenger(s) · ' + $('cb').value + '\nName: ' + nm + '\nPlease send me your best fare. / ዋጋ ይላኩልኝ።';
+  const agPhone = (d.agencyPhone || '').replace(/[^0-9]/g, '');
+  $('form').innerHTML = '<div class="conf"><div class="big">🛫</div><h3>Request sent! · ጥያቄዎ ተልኳል!</h3>'
+    + '<div class="code">' + d.code + '</div>'
+    + '<p><b>' + d.agency + '</b> will price your trip in the airline system<br>and send your fare on WhatsApp shortly.<br>ወኪሉ ዋጋውን በዋትስአፕ ይልክልዎታል።</p>'
+    + '<a class="wa" href="https://wa.me/' + agPhone + '?text=' + encodeURIComponent(msg) + '">💬 WhatsApp the agency now</a>'
+    + (A.buildingSlug === 'darulle' ? '<a class="walk" href="/nav?to=' + encodeURIComponent(A.unit) + '&floor=' + A.floor + '&name=' + encodeURIComponent(A.name) + '">🧭 Walk to office ' + A.unit + '</a>' : '')
+    + '</div>';
+}
+let fareT;
+function codeOf(v){ const m = (v || '').match(/\(([A-Z]{3})\)/); return m ? m[1] : null; }
+async function fares(){
+  const f = codeOf($('from').value), t = codeOf($('to').value);
+  const fb = $('farebox');
+  if (!f || !t || !$('dd').value){ fb.style.display = 'none'; return; }
+  $('farelist').innerHTML = '<div style="font-size:12px;color:#6b7280;font-weight:700">Searching live fares…</div>';
+  fb.style.display = '';
+  const q = '?from=' + f + '&to=' + t + '&date=' + $('dd').value + (TRIP === 'ROUND' && $('rd').value ? '&ret=' + $('rd').value : '') + '&pax=' + $('px').value;
+  try {
+    const d = await (await fetch('/api/flights-price' + q)).json();
+    if (!d.available || !d.offers.length){ fb.style.display = 'none'; return; }
+    $('farelist').innerHTML = d.offers.map(o =>
+      '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #e0e7ff;font-size:13px">'
+      + '<span style="font-weight:800">' + o.carrier + ' <span style="color:#6b7280;font-weight:700;font-size:11px">' + (o.stops === 0 ? 'non-stop' : o.stops + ' stop') + ' · ' + o.duration + '</span></span>'
+      + '<b style="color:#312e81">from $' + o.price.toLocaleString() + '</b></div>').join('');
+  } catch (e) { fb.style.display = 'none'; }
+}
+['from','to','dd','rd','px'].forEach(id => $(id).addEventListener('change', () => { clearTimeout(fareT); fareT = setTimeout(fares, 400); }));
+load().then(fares);
+</script>
+</body>
+</html>

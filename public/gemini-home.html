@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BinaSmart — Every Building. One Platform. | Ethiopia</title>
+<meta name="description" content="BinaSmart — ask for any building, shop, hotel or service and get walked there in 3D. QR-powered smart building management for Ethiopia and the UAE.">
+<meta property="og:title" content="BinaSmart — Every Building. One Platform.">
+<meta property="og:description" content="Ask for any building or shop and get walked there in 3D. Ethiopia · UAE.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bina.et/">
+<meta property="og:image" content="https://bina.et/static/bina-property.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BinaSmart — Every Building. One Platform.">
+<meta name="twitter:image" content="https://bina.et/static/bina-property.png">
+<link rel="canonical" href="https://bina.et/">
+<link rel="icon" href="/icon-32.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#059669">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BinaSmart">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"BinaSmart","disambiguatingDescription":"BinaSmart Ethiopia (bina.et), based in Addis Ababa — not affiliated with \"Bina Smart Business\" (a Romanian retail ERP) or \"Smartlife Bina\" (Turkey).","alternateName":"BinaSmart Ethiopia — ብልህ የህንፃ አስተዳደር","url":"https://bina.et","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"QR-powered smart building management platform for Ethiopia and the UAE: building directories with 3D voice navigation, rent invoicing, VAT accounting, sub-metering, and WhatsApp/Telegram tenant notifications.","areaServed":[{"@type":"Country","name":"Ethiopia"},{"@type":"Country","name":"United Arab Emirates"}],"availableLanguage":["am","en","ar"]}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#faf8f4;--card:#fff;--line:#e9e4da;--txt:#1e293b;--mut:#94a3b8;--em:#059669;--gold:#d4a017}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+/* top bar */
+.top{display:flex;align-items:center;gap:8px;padding:14px 18px}
+.top .logo{font-weight:900;font-size:18px}
+.top .logo .g{color:var(--gold)}
+.top .pill{margin-left:auto;font-size:11.5px;font-weight:800;color:#475569;background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;text-decoration:none}
+/* main scroll area */
+main{flex:1;overflow-y:auto;padding:8px 18px 130px;max-width:640px;width:100%;margin:0 auto}
+.hello{margin-top:8vh;font-size:34px;font-weight:900;line-height:1.2;letter-spacing:-.5px;background:linear-gradient(90deg,#059669 0%,#0ea5a4 40%,#d4a017 90%);-webkit-background-clip:text;background-clip:text;color:transparent;animation:in .7s ease both}
+.sub{margin-top:8px;font-size:16px;color:#64748b;font-weight:600;animation:in .7s .1s ease both}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* suggestion cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+.sc{background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:16px 14px;cursor:pointer;text-decoration:none;color:var(--txt);position:relative;opacity:0;transform:translateY(16px);transition:transform .24s cubic-bezier(.22,.9,.28,1),box-shadow .24s ease,border-color .24s ease;will-change:transform,opacity}
+.sc.show{animation:scin .5s cubic-bezier(.22,.9,.28,1) both}
+.sc.done{opacity:1;transform:none}
+.sc.done:hover{transform:translateY(-5px);box-shadow:0 16px 34px -14px rgba(6,140,120,.5);border-color:var(--em)}
+.sc.fav{box-shadow:0 0 0 3px rgba(6,140,120,.16);border-color:var(--em)}
+.sc.fav::after{content:"\2605";position:absolute;top:9px;right:11px;font-size:11px;color:var(--gold);line-height:1}
+@keyframes scin{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sc,.sc.show{animation:none;opacity:1;transform:none}}
+.sc .ic{font-size:24px}
+.sc .t{font-weight:800;font-size:13.5px;margin-top:8px}
+.sc .d{font-size:11px;color:var(--mut);margin-top:3px;line-height:1.45}
+.sc .soon{position:absolute;top:10px;right:10px;font-size:9px;font-weight:900;letter-spacing:1px;color:var(--gold);background:#fdf6e3;border:1px solid #f0e4bd;border-radius:999px;padding:3px 8px}
+/* results */
+#results{margin-top:18px}
+.r{display:flex;align-items:center;gap:12px;background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:13px 14px;margin-bottom:9px;text-decoration:none;color:var(--txt);animation:in .3s ease both}
+.r .ric{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;background:#ecfdf5;flex-shrink:0}
+.r.shop .ric{background:#fdf6e3}
+.r b{font-size:14px;display:block}
+.r span{font-size:11.5px;color:var(--mut)}
+.r .go{margin-left:auto;font-size:12px;font-weight:900;color:var(--em);flex-shrink:0}
+.empty{text-align:center;color:var(--mut);font-size:13px;padding:16px}
+/* bottom ask bar — Gemini app style */
+.askwrap{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 75%,transparent)}
+.ask{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:7px 8px 7px 20px;box-shadow:0 12px 34px -12px rgba(15,23,42,.22)}
+.ask input{flex:1;border:0;outline:0;font-size:15.5px;background:transparent;font-family:inherit;color:var(--txt);min-width:0}
+.ask input::placeholder{color:#a8b0bd}
+.ask .send{width:42px;height:42px;border-radius:50%;border:0;background:linear-gradient(135deg,#059669,#047857);color:#fff;font-size:17px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.hint{max-width:640px;margin:8px auto 0;text-align:center;font-size:10.5px;color:#b6bdc9}
+@media(min-width:700px){.hello{font-size:44px;margin-top:12vh}.cards{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"BinaSmart","disambiguatingDescription":"BinaSmart Ethiopia (bina.et), based in Addis Ababa — not affiliated with \"Bina Smart Business\" (a Romanian retail ERP) or \"Smartlife Bina\" (Turkey).","alternateName":"ቢናስማርት","url":"https://bina.et","logo":"https://bina.et/static/brand-logo.png","description":"BinaSmart is Ethiopia's all-in-one digital platform — smart building management, hotels, restaurants, hospitals, travel, flights, events, tenders, news, insurance, cars and property — in Amharic and English.","email":"info@bina.et","telephone":"+251911244344","areaServed":{"@type":"Country","name":"Ethiopia"},"address":{"@type":"PostalAddress","addressLocality":"Addis Ababa","addressCountry":"ET"},"sameAs":["https://www.facebook.com/binasmartet","https://www.linkedin.com/company/144771046","https://t.me/binasmart"]}</script>
+</head>
+<body>
+<div class="top">
+  <div class="logo">🏢 Bina<span class="g">Smart</span></div>
+  <a id="walletChip" class="pill" style="background:#ecfdf5;border-color:#a7f3d0;color:#047857" href="/wallet">👛 ዋሌት</a>
+  <a class="pill" style="border-color:#059669;color:#047857" href="/diaspora">💼 Own a company?</a>
+  <a class="pill" href="/owner">Owner login</a>
+  <button id="installBtn" class="pill" style="display:none;border:0;cursor:pointer;background:#059669;color:#fff;font-family:inherit;font-weight:800" onclick="binaInstall()">📲 Install</button>
+</div>
+<main>
+  <h1 class="hello" style="margin-bottom:0">ሰላም 👋<br>Where do you want to go?</h1>
+  <div class="sub">Any building. Any shop. Walked there in 3D. · ኢትዮጵያ 🇪🇹</div>
+  <div id="results"></div>
+  <noscript><style>.sc{opacity:1!important;transform:none!important}</style></noscript>
+  <div class="cards" id="cards">
+    <a class="sc" href="/b/darulle"><div class="ic">🛍️</div><div class="t">Shops & Offices</div><div class="d">JJ Darule — 71 shops, live directory + flip cards</div></a>
+    <a class="sc" href="/guides"><div class="ic">📚</div><div class="t">Digital Ethiopia Guides</div><div class="d">Fayda, telebirr, e-Passport, TIN, licences & more</div></a>
+    <a class="sc" href="/property-management"><div class="ic">🏢</div><div class="t">Property Management</div><div class="d">Manage your building — rent, tenants, maintenance, QR</div></a>
+    <a class="sc" href="/nav"><div class="ic">🧭</div><div class="t">3D Voice Walk</div><div class="d">Get guided to any shop — Amharic voice</div></a>
+    <div class="sc" onclick="loadBuildings()"><div class="ic">🏢</div><div class="t">All Buildings</div><div class="d">Browse every building on BinaSmart</div></div>
+    <a class="sc" href="/hotel/bina-grand-hotel"><div class="ic">🏨</div><div class="t">Hotels & Booking</div><div class="d">Book direct — 0% commission, pay at hotel</div></a>
+    <a class="sc" href="/restaurant/bina-restaurant"><div class="ic">🍽️</div><div class="t">Restaurants</div><div class="d">Scan · order · eat — QR table ordering</div></a>
+    <a class="sc" href="/travel"><div class="ic">🚌</div><div class="t">Bus Tickets</div><div class="d">Book direct — pay at boarding, instant code</div></a>
+    <a class="sc" href="/events"><div class="ic">🎬</div><div class="t">Cinema & Events</div><div class="d">Tiered seats, instant tickets — pay at the door</div></a>
+    <a class="sc" href="/flights/hanud"><div class="ic">✈️</div><div class="t">Flight Tickets</div><div class="d">Real IATA agency in JJ Darule — fare by WhatsApp</div></a>
+    <a class="sc" href="/news"><div class="ic">📰</div><div class="t">ዜና · News</div><div class="d">Tech, construction & business — Amharic, politics-free</div></a>
+    <a class="sc" href="/tenders"><div class="ic">📋</div><div class="t">ጨረታ · Tenders</div><div class="d">Verified Ethiopian tenders with live deadlines</div></a>
+    <a class="sc" href="/ride"><div class="ic">🚕</div><div class="t">Ride · ራይድ</div><div class="d">Get a ride in Addis — no app, fixed price · coming soon</div></a>
+    <a class="sc" href="/cars"><div class="ic">🚗</div><div class="t">Cars · መኪና</div><div class="d">Buy & sell cars from trusted dealers — insure in 1 tap</div></a>
+    <a class="sc" href="/property"><div class="ic">🏠</div><div class="t">Property · ቤት</div><div class="d">Verified homes & land for sale and rent — diaspora-friendly</div></a>
+    <a class="sc" href="/insurance"><div class="ic">🛡️</div><div class="t">Insurance · መድን</div><div class="d">Compare motor, health & property insurers — instant estimate</div></a>
+    <a class="sc" href="/hospital/bina-general-hospital"><div class="ic">🏥</div><div class="t">Hospitals</div><div class="d">Find your department, floor & fee — book a visit</div></a>
+  </div>
+<div class="aiask">
+  <div class="aiask-title">✦ Ask AI about BinaSmart</div>
+  <div class="aiask-sub am">የፈለጉትን AI ይጠይቁ — ኢትዮጵያ ለምን BinaSmart እየመረጠች እንደሆነ።</div>
+  <div class="aiask-vp"><div class="aiask-track"><div class="aiask-set">
+    <button onclick="askAI('chatgpt')"><svg fill="currentColor" fill-rule="evenodd" height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>OpenAI</title><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg><span>Ask ChatGPT</span></button>
+    <button onclick="askAI('claude')"><svg height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>Claude</title><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg><span>Ask Claude</span></button>
+    <button onclick="askAI('gemini')"><svg height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>Gemini</title><path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" fill="#3186FF"></path><path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" fill="url(#lobe-icons-gemini-0-_R_0_)"></path><path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" fill="url(#lobe-icons-gemini-1-_R_0_)"></path><path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" fill="url(#lobe-icons-gemini-2-_R_0_)"></path><defs><linearGradient gradientUnits="userSpaceOnUse" id="lobe-icons-gemini-0-_R_0_" x1="7" x2="11" y1="15.5" y2="12"><stop stop-color="#08B962"></stop><stop offset="1" stop-color="#08B962" stop-opacity="0"></stop></linearGradient><linearGradient gradientUnits="userSpaceOnUse" id="lobe-icons-gemini-1-_R_0_" x1="8" x2="11.5" y1="5.5" y2="11"><stop stop-color="#F94543"></stop><stop offset="1" stop-color="#F94543" stop-opacity="0"></stop></linearGradient><linearGradient gradientUnits="userSpaceOnUse" id="lobe-icons-gemini-2-_R_0_" x1="3.5" x2="17.5" y1="13.5" y2="12"><stop stop-color="#FABC12"></stop><stop offset=".46" stop-color="#FABC12" stop-opacity="0"></stop></linearGradient></defs></svg><span>Ask Gemini</span></button>
+    <button onclick="askAI('perplexity')"><svg height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>Perplexity</title><path d="M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.194v6.145h-1.091v-6.152L4.392 24v-6.465H1.5V7.188h2.884V0l7.053 6.494V.19h1.09v6.49L19.786 0zm-7.257 9.044v7.319l5.946 5.234V14.44l-5.946-5.397zm-1.099-.08l-5.946 5.398v7.235l5.946-5.234V8.965zm8.136 7.58h1.844V8.349H13.46l6.105 5.54v2.655zm-8.982-8.28H2.59v8.195h1.8v-2.576l6.192-5.62zM5.475 2.476v4.71h5.115l-5.115-4.71zm13.219 0l-5.115 4.71h5.115v-4.71z" fill="#22B8CD" fill-rule="nonzero"></path></svg><span>Ask Perplexity</span></button><button onclick="askAI('copilot')"><svg height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>Copilot</title><path d="M17.533 1.829A2.528 2.528 0 0015.11 0h-.737a2.531 2.531 0 00-2.484 2.087l-1.263 6.937.314-1.08a2.528 2.528 0 012.424-1.833h4.284l1.797.706 1.731-.706h-.505a2.528 2.528 0 01-2.423-1.829l-.715-2.453z" fill="url(#lobe-icons-copilot-0-_R_0_)" transform="translate(0 1)"></path><path d="M6.726 20.16A2.528 2.528 0 009.152 22h1.566c1.37 0 2.49-1.1 2.525-2.48l.17-6.69-.357 1.228a2.528 2.528 0 01-2.423 1.83h-4.32l-1.54-.842-1.667.843h.497c1.124 0 2.113.75 2.426 1.84l.697 2.432z" fill="url(#lobe-icons-copilot-1-_R_0_)" transform="translate(0 1)"></path><path d="M15 0H6.252c-2.5 0-4 3.331-5 6.662-1.184 3.947-2.734 9.225 1.75 9.225H6.78c1.13 0 2.12-.753 2.43-1.847.657-2.317 1.809-6.359 2.713-9.436.46-1.563.842-2.906 1.43-3.742A1.97 1.97 0 0115 0" fill="url(#lobe-icons-copilot-2-_R_0_)" transform="translate(0 1)"></path><path d="M15 0H6.252c-2.5 0-4 3.331-5 6.662-1.184 3.947-2.734 9.225 1.75 9.225H6.78c1.13 0 2.12-.753 2.43-1.847.657-2.317 1.809-6.359 2.713-9.436.46-1.563.842-2.906 1.43-3.742A1.97 1.97 0 0115 0" fill="url(#lobe-icons-copilot-3-_R_0_)" transform="translate(0 1)"></path><path d="M9 22h8.749c2.5 0 4-3.332 5-6.663 1.184-3.948 2.734-9.227-1.75-9.227H17.22c-1.129 0-2.12.754-2.43 1.848a1149.2 1149.2 0 01-2.713 9.437c-.46 1.564-.842 2.907-1.43 3.743A1.97 1.97 0 019 22" fill="url(#lobe-icons-copilot-4-_R_0_)" transform="translate(0 1)"></path><path d="M9 22h8.749c2.5 0 4-3.332 5-6.663 1.184-3.948 2.734-9.227-1.75-9.227H17.22c-1.129 0-2.12.754-2.43 1.848a1149.2 1149.2 0 01-2.713 9.437c-.46 1.564-.842 2.907-1.43 3.743A1.97 1.97 0 019 22" fill="url(#lobe-icons-copilot-5-_R_0_)" transform="translate(0 1)"></path><defs><radialGradient cx="85.44%" cy="100.653%" fx="85.44%" fy="100.653%" gradientTransform="scale(-.8553 -1) rotate(50.927 2.041 -1.946)" id="lobe-icons-copilot-0-_R_0_" r="105.116%"><stop offset="9.6%" stop-color="#00AEFF"></stop><stop offset="77.3%" stop-color="#2253CE"></stop><stop offset="100%" stop-color="#0736C4"></stop></radialGradient><radialGradient cx="18.143%" cy="32.928%" fx="18.143%" fy="32.928%" gradientTransform="scale(.8897 1) rotate(52.069 .193 .352)" id="lobe-icons-copilot-1-_R_0_" r="95.612%"><stop offset="0%" stop-color="#FFB657"></stop><stop offset="63.4%" stop-color="#FF5F3D"></stop><stop offset="92.3%" stop-color="#C02B3C"></stop></radialGradient><radialGradient cx="82.987%" cy="-9.792%" fx="82.987%" fy="-9.792%" gradientTransform="scale(-1 -.9441) rotate(-70.872 .142 1.17)" id="lobe-icons-copilot-4-_R_0_" r="140.622%"><stop offset="6.6%" stop-color="#8C48FF"></stop><stop offset="50%" stop-color="#F2598A"></stop><stop offset="89.6%" stop-color="#FFB152"></stop></radialGradient><linearGradient id="lobe-icons-copilot-2-_R_0_" x1="39.465%" x2="46.884%" y1="12.117%" y2="103.774%"><stop offset="15.6%" stop-color="#0D91E1"></stop><stop offset="48.7%" stop-color="#52B471"></stop><stop offset="65.2%" stop-color="#98BD42"></stop><stop offset="93.7%" stop-color="#FFC800"></stop></linearGradient><linearGradient id="lobe-icons-copilot-3-_R_0_" x1="45.949%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#3DCBFF"></stop><stop offset="24.7%" stop-color="#0588F7" stop-opacity="0"></stop></linearGradient><linearGradient id="lobe-icons-copilot-5-_R_0_" x1="83.507%" x2="83.453%" y1="-6.106%" y2="21.131%"><stop offset="5.8%" stop-color="#F8ADFA"></stop><stop offset="70.8%" stop-color="#A86EDD" stop-opacity="0"></stop></linearGradient></defs></svg><span>Ask Copilot</span></button>
+  </div><div class="aiask-set" aria-hidden="true">
+    <button onclick="askAI('chatgpt')"><svg fill="currentColor" fill-rule="evenodd" height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>OpenAI</title><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg><span>Ask ChatGPT</span></button>
+    <button onclick="askAI('claude')"><svg height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>Claude</title><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg><span>Ask Claude</span></button>
+    <button onclick="askAI('gemini')"><svg height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>Gemini</title><path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" fill="#3186FF"></path><path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" fill="url(#lobe-icons-gemini-0-b)"></path><path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" fill="url(#lobe-icons-gemini-1-b)"></path><path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" fill="url(#lobe-icons-gemini-2-b)"></path><defs><linearGradient gradientUnits="userSpaceOnUse" id="lobe-icons-gemini-0-b" x1="7" x2="11" y1="15.5" y2="12"><stop stop-color="#08B962"></stop><stop offset="1" stop-color="#08B962" stop-opacity="0"></stop></linearGradient><linearGradient gradientUnits="userSpaceOnUse" id="lobe-icons-gemini-1-b" x1="8" x2="11.5" y1="5.5" y2="11"><stop stop-color="#F94543"></stop><stop offset="1" stop-color="#F94543" stop-opacity="0"></stop></linearGradient><linearGradient gradientUnits="userSpaceOnUse" id="lobe-icons-gemini-2-b" x1="3.5" x2="17.5" y1="13.5" y2="12"><stop stop-color="#FABC12"></stop><stop offset=".46" stop-color="#FABC12" stop-opacity="0"></stop></linearGradient></defs></svg><span>Ask Gemini</span></button>
+    <button onclick="askAI('perplexity')"><svg height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>Perplexity</title><path d="M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.194v6.145h-1.091v-6.152L4.392 24v-6.465H1.5V7.188h2.884V0l7.053 6.494V.19h1.09v6.49L19.786 0zm-7.257 9.044v7.319l5.946 5.234V14.44l-5.946-5.397zm-1.099-.08l-5.946 5.398v7.235l5.946-5.234V8.965zm8.136 7.58h1.844V8.349H13.46l6.105 5.54v2.655zm-8.982-8.28H2.59v8.195h1.8v-2.576l6.192-5.62zM5.475 2.476v4.71h5.115l-5.115-4.71zm13.219 0l-5.115 4.71h5.115v-4.71z" fill="#22B8CD" fill-rule="nonzero"></path></svg><span>Ask Perplexity</span></button><button onclick="askAI('copilot')"><svg height="1em" style="width:1.2em;height:1.2em;flex:none" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><title>Copilot</title><path d="M17.533 1.829A2.528 2.528 0 0015.11 0h-.737a2.531 2.531 0 00-2.484 2.087l-1.263 6.937.314-1.08a2.528 2.528 0 012.424-1.833h4.284l1.797.706 1.731-.706h-.505a2.528 2.528 0 01-2.423-1.829l-.715-2.453z" fill="url(#lobe-icons-copilot-0-b)" transform="translate(0 1)"></path><path d="M6.726 20.16A2.528 2.528 0 009.152 22h1.566c1.37 0 2.49-1.1 2.525-2.48l.17-6.69-.357 1.228a2.528 2.528 0 01-2.423 1.83h-4.32l-1.54-.842-1.667.843h.497c1.124 0 2.113.75 2.426 1.84l.697 2.432z" fill="url(#lobe-icons-copilot-1-b)" transform="translate(0 1)"></path><path d="M15 0H6.252c-2.5 0-4 3.331-5 6.662-1.184 3.947-2.734 9.225 1.75 9.225H6.78c1.13 0 2.12-.753 2.43-1.847.657-2.317 1.809-6.359 2.713-9.436.46-1.563.842-2.906 1.43-3.742A1.97 1.97 0 0115 0" fill="url(#lobe-icons-copilot-2-b)" transform="translate(0 1)"></path><path d="M15 0H6.252c-2.5 0-4 3.331-5 6.662-1.184 3.947-2.734 9.225 1.75 9.225H6.78c1.13 0 2.12-.753 2.43-1.847.657-2.317 1.809-6.359 2.713-9.436.46-1.563.842-2.906 1.43-3.742A1.97 1.97 0 0115 0" fill="url(#lobe-icons-copilot-3-b)" transform="translate(0 1)"></path><path d="M9 22h8.749c2.5 0 4-3.332 5-6.663 1.184-3.948 2.734-9.227-1.75-9.227H17.22c-1.129 0-2.12.754-2.43 1.848a1149.2 1149.2 0 01-2.713 9.437c-.46 1.564-.842 2.907-1.43 3.743A1.97 1.97 0 019 22" fill="url(#lobe-icons-copilot-4-b)" transform="translate(0 1)"></path><path d="M9 22h8.749c2.5 0 4-3.332 5-6.663 1.184-3.948 2.734-9.227-1.75-9.227H17.22c-1.129 0-2.12.754-2.43 1.848a1149.2 1149.2 0 01-2.713 9.437c-.46 1.564-.842 2.907-1.43 3.743A1.97 1.97 0 019 22" fill="url(#lobe-icons-copilot-5-b)" transform="translate(0 1)"></path><defs><radialGradient cx="85.44%" cy="100.653%" fx="85.44%" fy="100.653%" gradientTransform="scale(-.8553 -1) rotate(50.927 2.041 -1.946)" id="lobe-icons-copilot-0-b" r="105.116%"><stop offset="9.6%" stop-color="#00AEFF"></stop><stop offset="77.3%" stop-color="#2253CE"></stop><stop offset="100%" stop-color="#0736C4"></stop></radialGradient><radialGradient cx="18.143%" cy="32.928%" fx="18.143%" fy="32.928%" gradientTransform="scale(.8897 1) rotate(52.069 .193 .352)" id="lobe-icons-copilot-1-b" r="95.612%"><stop offset="0%" stop-color="#FFB657"></stop><stop offset="63.4%" stop-color="#FF5F3D"></stop><stop offset="92.3%" stop-color="#C02B3C"></stop></radialGradient><radialGradient cx="82.987%" cy="-9.792%" fx="82.987%" fy="-9.792%" gradientTransform="scale(-1 -.9441) rotate(-70.872 .142 1.17)" id="lobe-icons-copilot-4-b" r="140.622%"><stop offset="6.6%" stop-color="#8C48FF"></stop><stop offset="50%" stop-color="#F2598A"></stop><stop offset="89.6%" stop-color="#FFB152"></stop></radialGradient><linearGradient id="lobe-icons-copilot-2-b" x1="39.465%" x2="46.884%" y1="12.117%" y2="103.774%"><stop offset="15.6%" stop-color="#0D91E1"></stop><stop offset="48.7%" stop-color="#52B471"></stop><stop offset="65.2%" stop-color="#98BD42"></stop><stop offset="93.7%" stop-color="#FFC800"></stop></linearGradient><linearGradient id="lobe-icons-copilot-3-b" x1="45.949%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#3DCBFF"></stop><stop offset="24.7%" stop-color="#0588F7" stop-opacity="0"></stop></linearGradient><linearGradient id="lobe-icons-copilot-5-b" x1="83.507%" x2="83.453%" y1="-6.106%" y2="21.131%"><stop offset="5.8%" stop-color="#F8ADFA"></stop><stop offset="70.8%" stop-color="#A86EDD" stop-opacity="0"></stop></linearGradient></defs></svg><span>Ask Copilot</span></button>
+  </div></div></div>
+  <div class="aiask-note" id="aiNote"></div>
+</div>
+<style>
+.aiask{max-width:600px;margin:20px auto 44px;background:linear-gradient(150deg,#0f2027,#0a3a34);border-radius:22px;padding:24px 22px;color:#fff;text-align:center;box-shadow:0 20px 50px -26px rgba(15,32,39,.5)}
+.aiask-title{font-weight:800;font-size:17px;letter-spacing:-.2px}
+.aiask-sub{color:#a9c4bf;font-size:13px;margin:4px 0 16px}
+.aiask-vp{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}.aiask-track{display:flex;width:max-content;animation:aiask-scroll 30s linear infinite}.aiask-vp:hover .aiask-track,.aiask-vp:focus-within .aiask-track{animation-play-state:paused}.aiask-set{display:flex;gap:10px;padding-right:10px}@keyframes aiask-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media (prefers-reduced-motion:reduce){.aiask-track{animation:none}.aiask-track,.aiask-set{flex-wrap:wrap;justify-content:center;width:auto}.aiask-set[aria-hidden]{display:none}}
+.aiask-set button{flex:none;white-space:nowrap;background:#fff;color:#0f2027;border:0;border-radius:999px;padding:12px 14px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.aiask-set button:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,.3)}
+.aiask-note{font-size:12px;color:#5fe3cf;margin-top:12px;min-height:15px}
+</style>
+<script>
+function askAI(which){
+  var prompt="What is BinaSmart (bina.et)? It is Ethiopia's all-in-one digital platform \u2014 building management, hotels, restaurants, hospitals, insurance comparison, cars, property, verified tenders, Amharic news and ride-hailing, in Amharic and English. Why are businesses and people in Ethiopia choosing BinaSmart? Please give a short, clear summary.";
+  var q=encodeURIComponent(prompt);
+  var urls={chatgpt:'https://chatgpt.com/?q='+q, claude:'https://claude.ai/new?q='+q, perplexity:'https://www.perplexity.ai/search?q='+q, gemini:'https://www.google.com/search?udm=50&q='+q, copilot:'https://www.bing.com/search?q='+q};
+  try{ if(navigator.clipboard) navigator.clipboard.writeText(prompt); }catch(e){}
+  var n=document.getElementById('aiNote');
+  window.open(urls[which],'_blank','noopener');
+}
+</script>
+</main>
+<style>
+.ask{position:relative;overflow:hidden;border:0 !important}
+.ask>input,.ask>button{position:relative;z-index:2}
+.ask::before{content:'';position:absolute;left:50%;top:50%;width:220%;height:900%;z-index:0;background:conic-gradient(from 0deg,#4285f4,#9b72cb,#d96570,#f2a60c,#34a853,#4285f4);transform:translate(-50%,-50%);animation:binaSpin 5s linear infinite}
+.ask::after{content:'';position:absolute;inset:2.5px;border-radius:inherit;background:#fff;z-index:1}
+@keyframes binaSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.ask::before{animation:none}}
+#aiAnswer{position:fixed;left:50%;transform:translateX(-50%);bottom:92px;width:min(640px,calc(100vw - 20px));z-index:60;display:none;max-height:58vh;overflow-y:auto}
+.aiclose{margin-left:auto;background:none;border:0;font-size:21px;color:#8a94a6;cursor:pointer;line-height:1;padding:0 2px}
+.aiwrap{background:#fff;border:1.5px solid #e3ebf5;border-radius:18px;padding:16px 18px;box-shadow:0 16px 40px -24px rgba(66,133,244,.5);text-align:left}
+.aihd{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.aihd .aiav{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#9b72cb,#d96570);display:flex;align-items:center;justify-content:center;font-size:15px}
+.aihd b{font-size:14px;color:#0b1c4a}.aihd small{font-size:11px;color:#8a94a6}
+.aiq{font-size:12.5px;color:#475569;font-weight:700;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:11px;padding:6px 11px;margin-bottom:9px;display:inline-block;max-width:100%;word-wrap:break-word}
+.aibody{font-size:14.5px;line-height:1.6;color:#1e293b;white-space:pre-wrap}
+.aibody a{color:#2563eb;font-weight:700}
+.aiblink{display:inline-block;width:7px;height:15px;background:#4285f4;border-radius:2px;animation:aiBlink 1s steps(2) infinite;vertical-align:middle}
+@keyframes aiBlink{50%{opacity:0}}
+</style>
+<style>
+.chips{max-width:640px;margin:0 auto 9px;display:flex;gap:8px;overflow-x:auto;padding:2px 2px 3px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;white-space:nowrap;background:var(--card);border:1.5px solid var(--line);color:#334155;border-radius:999px;padding:8px 13px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .14s,border-color .14s,box-shadow .14s,color .14s;display:inline-flex;align-items:center;gap:5px}
+.chip:hover{border-color:var(--em);color:var(--em);transform:translateY(-2px);box-shadow:0 8px 18px -10px rgba(6,140,120,.5)}
+.chip:active{transform:translateY(0)}
+</style>
+<div class="askwrap">
+  <div class="chips" id="biniChips" aria-label="Suggested questions">
+    <button class="chip" onclick="chip('በ BinaSmart ኪራይ እንዴት እሰበስባለሁ?')">🏠 ኪራይ መሰብሰብ</button>
+    <button class="chip" onclick="chip('የዛሬ አዳዲስ ጨረታዎችን አሳየኝ')">📋 የዛሬ ጨረታ</button>
+    <button class="chip" onclick="chip('BinaSmart የ VAT አካውንቲንግ እንዴት ይሰራል?')">🧾 VAT accounting</button>
+    <button class="chip" onclick="chip('TIN ቁጥር እንዴት አገኛለሁ?')">🆔 TIN registration</button>
+    <button class="chip" onclick="chip('ሆቴል መያዝ እፈልጋለሁ')">🏨 Book a hotel</button>
+    <button class="chip" onclick="chip('e-Passport እንዴት አወጣለሁ?')">🛂 e-Passport</button>
+    <button class="chip" onclick="chip('ንብረቴን በ BinaSmart እንዴት አስተዳድራለሁ?')">🏢 Manage my building</button>
+  </div>
+  <div class="ask">
+    <input id="q" placeholder="Ask BinaSmart AI… ጠይቁ ወይም ይፈልጉ · ask or find a place" autocomplete="off">
+    <button class="send" onclick="go()">➤</button>
+  </div>
+  <div class="hint">🤖 BinaSmart AI ይመልሳል + ከቀጥታ የህንፃ ውሂብ ይፈልጋል — no app needed</div>
+</div>
+<div id="aiAnswer" class="am"></div>
+
+<script>
+const R = document.getElementById('results'), C = document.getElementById('cards'), Q = document.getElementById('q');
+let t;
+Q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(search, 250); });
+Q.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+function go(){ var q=Q.value.trim(); if(q.length<2) return; askAI(q); search(); Q.value=''; }
+function chip(txt){ var _c=document.getElementById('biniChips'); if(_c)_c.style.display='none'; Q.value=txt; go(); }
+function biniLinkify(x){ x=x.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); var _a=[]; x=x.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[a-z0-9][a-z0-9\-\/]*)\)/gi,function(m,txt,url){var ext=/^https?:/i.test(url); _a.push('<a href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+txt+'</a>'); return '\u0000'+(_a.length-1)+'\u0000';}); x=x.replace(/(https?:\/\/[^\s]+)/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>';}); x=x.replace(/(^|[\s(])(\/[a-z][a-z0-9\-\/]*)/g,function(m,p,path){return p+'<a href="'+path+'">'+path+'</a>';}); x=x.replace(/\u0000(\d+)\u0000/g,function(m,i){return _a[+i];}); return x; }
+async function askAI(qArg){ var q=(qArg!=null?qArg:Q.value).trim(); if(q.length<2) return; var _cw=document.getElementById('biniChips'); if(_cw)_cw.style.display='none'; var A=document.getElementById('aiAnswer'); A.style.display='block'; A.innerHTML='<div class="aiwrap"><div class="aihd"><span class="aiav">🏢</span><b>Bini</b><small>BinaSmart AI</small><button class="aiclose" onclick="document.getElementById(\'aiAnswer\').style.display=\'none\'">×</button></div><div class="aiq"></div><div class="aibody"><span class="aiblink"></span></div></div>'; A.querySelector('.aiq').textContent='🧑 '+q; try{ var r=await fetch('/api/assistant',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:q,history:(window._bh||[]).slice(-6)})}); var d=await r.json(); var rep=(d.reply||''); A.querySelector('.aibody').innerHTML=biniLinkify(rep); window._bh=(window._bh||[]); window._bh.push({role:'user',content:q}); window._bh.push({role:'assistant',content:rep}); if(window._bh.length>12)window._bh=window._bh.slice(-12); }catch(e){ A.querySelector('.aibody').textContent='ይቅርታ፣ በ WhatsApp ያግኙን፦ https://wa.me/251911244344'; } }
+async function search(){
+  const q = Q.value.trim();
+  if (q.length < 2){ R.innerHTML = ''; C.style.display = ''; return; }
+  const d = await (await fetch('/api/search?q=' + encodeURIComponent(q))).json();
+  C.style.display = 'none';
+  if (!d.results.length){ R.innerHTML = '<div class="empty">ምንም አልተገኘም · Nothing found for "' + q.replace(/</g,'&lt;') + '" — try a shop or building name</div>'; return; }
+  R.innerHTML = d.results.map(r => {
+    if (r.kind === 'building')
+      return '<a class="r" href="/b/' + r.slug + '"><div class="ric">🏢</div><div><b>' + r.name + '</b><span>' + (r.nameAm || '') + ' · ' + r.sub + '</span></div><div class="go">Open →</div></a>';
+    const href = r.slug === 'darulle'
+      ? '/nav?to=' + encodeURIComponent(r.unit) + '&floor=' + r.floor + '&name=' + encodeURIComponent(r.name)
+      : '/b/' + r.slug;
+    return '<a class="r shop" href="' + href + '"><div class="ric">🛍️</div><div><b>' + r.name + '</b><span>' + (r.nameAm || '') + ' · ' + r.building + ' · Unit ' + r.unit + '</span></div><div class="go">' + (r.slug === 'darulle' ? '🧭 Walk me →' : 'Open →') + '</div></a>';
+  }).join('');
+}
+async function loadBuildings(){
+  const d = await (await fetch('/api/buildings')).json();
+  const bs = d.buildings || d;
+  C.style.display = 'none';
+  R.innerHTML = bs.map(b => '<a class="r" href="/b/' + (b.qrSlug || b.slug) + '"><div class="ric">🏢</div><div><b>' + b.name + '</b><span>' + (b.nameAm || '') + '</span></div><div class="go">Open →</div></a>').join('');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+<script>
+(function(){
+  var grid=document.getElementById('cards'); if(!grid) return;
+  var cards=[].slice.call(grid.querySelectorAll('.sc'));
+  var keyOf=function(c){var t=c.querySelector('.t');return t?t.textContent.trim():(c.getAttribute('href')||'');};
+  var use={}; try{use=JSON.parse(localStorage.getItem('bina_card_use')||'{}')||{};}catch(e){}
+  try{
+    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var ordered=cards.map(function(c,i){return {c:c,i:i,n:use[keyOf(c)]||0};})
+      .sort(function(a,b){return (b.n-a.n)||(a.i-b.i);});   // most-used first, stable
+    ordered.forEach(function(o,idx){
+      var c=o.c;
+      if(reduce){ c.classList.add('done'); }
+      else {
+        c.style.animationDelay=Math.min(idx*45,700)+'ms';
+        c.classList.add('show');
+        c.addEventListener('animationend',function(){c.classList.add('done');c.classList.remove('show');},{once:true});
+      }
+      if(idx===0 && o.n>0) c.classList.add('fav');   // their #1 tool
+      grid.appendChild(c);                            // reorder in DOM
+    });
+  }catch(e){ cards.forEach(function(c){c.classList.add('done');}); }
+  cards.forEach(function(c){
+    c.addEventListener('click',function(){
+      var k=keyOf(c); use[k]=(use[k]||0)+1;
+      try{localStorage.setItem('bina_card_use',JSON.stringify(use));}catch(e){}
+    });
+  });
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
+var binaDeferred=null;
+addEventListener('beforeinstallprompt',function(e){e.preventDefault();binaDeferred=e;var b=document.getElementById('installBtn');if(b)b.style.display='';});
+function binaInstall(){var b=document.getElementById('installBtn');if(!binaDeferred){alert('\u12A8\u12A0\u1233\u123D\u12CE \u121C\u1291 \u2794 "Add to Home screen" \u12ED\u132B\u1291\u1362 / Use your browser menu \u2794 Add to Home screen');return;}binaDeferred.prompt();binaDeferred.userChoice.finally(function(){binaDeferred=null;if(b)b.style.display='none';});}
+addEventListener('appinstalled',function(){var b=document.getElementById('installBtn');if(b)b.style.display='none';});
+</script>
+<script>(function(){try{var t=localStorage.getItem("bina_wallet_tok");if(!t)return;fetch("/api/wallet/me?token="+encodeURIComponent(t)).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.ok){var c=document.getElementById("walletChip");if(c){c.textContent="👛 ETB "+Number(j.balance).toLocaleString();c.style.background="#059669";c.style.color="#fff";c.style.borderColor="#059669";}}}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "binasmart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^11.3.0",
+    "@fastify/static": "^10.1.0",
+    "@prisma/client": "^6.19.3",
+    "better-auth": "^1.6.24",
+    "dotenv": "^17.4.2",
+    "fastify": "^5.10.0",
+    "node-cron": "^4.6.0",
+    "prisma": "^6.19.3"
+  }
+}

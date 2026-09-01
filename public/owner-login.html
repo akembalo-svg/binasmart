@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Owner Sign in — BinaSmart</title><meta name="robots" content="noindex">
+<link rel="icon" href="/icon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--em:#0aa88f;--em2:#068f79;--ink:#0f2027;--mut:#5c7080;--line:#e3ecea;--err:#e5484d}
+body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif;color:var(--ink);background:#eef4f3;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
+.am{font-family:'Noto Sans Ethiopic',sans-serif}
+.shell{display:grid;grid-template-columns:1fr 1fr;max-width:900px;width:100%;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(15,32,39,.35)}
+.brandp{background:radial-gradient(600px 300px at 20% 10%,rgba(118,185,0,.18),transparent 60%),linear-gradient(150deg,#0f2027,#0a3a34);color:#fff;padding:44px 38px;display:flex;flex-direction:column}
+.brandp .logo{font-size:26px;font-weight:800;letter-spacing:-.5px}.brandp .logo .g{color:#5fe3cf}
+.brandp .tag{color:#a9c4bf;font-size:14px;margin-top:6px}
+.brandp h2{font-size:26px;font-weight:800;line-height:1.2;margin:auto 0 18px}
+.feat{display:flex;flex-direction:column;gap:12px}
+.feat .f{display:flex;gap:11px;align-items:flex-start;font-size:14px;color:#dceeeb}
+.feat .f .i{font-size:18px;line-height:1.2}
+.formp{padding:44px 40px;display:flex;flex-direction:column;justify-content:center}
+.formp h1{font-size:24px;font-weight:800}.formp .sub{color:var(--mut);font-size:14px;margin:4px 0 24px}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--mut);margin:0 0 6px}
+input{width:100%;padding:14px 15px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;font-family:inherit;font-weight:600;color:var(--ink);background:#fff;margin-bottom:14px}
+input:focus{outline:0;border-color:var(--em);box-shadow:0 0 0 3px rgba(10,168,143,.12)}
+button{width:100%;padding:15px;border:0;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;background:var(--em);color:#fff;transition:.15s}
+button:hover{background:var(--em2)}
+.err{color:var(--err);font-size:13px;font-weight:700;margin:2px 0 12px;display:none}
+.linkrow{margin-top:14px;font-size:13px}.linkrow a{color:var(--em);font-weight:700;text-decoration:none}
+.hint{color:var(--mut);font-size:12.5px;margin-top:22px;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
+.hint a{color:var(--em);font-weight:700;text-decoration:none}
+.blist button{margin-bottom:10px;background:var(--ink);text-align:left;padding:14px 16px}
+.blist button:hover{background:#1a3540}
+.back{display:inline-block;margin-top:16px;color:var(--mut);font-size:13px;text-decoration:none}
+@media(max-width:760px){.shell{grid-template-columns:1fr;max-width:440px}.brandp{padding:30px 30px}.brandp h2{font-size:21px;margin:18px 0 16px}.formp{padding:32px 28px}}
+</style></head><body>
+<div class="shell">
+  <div class="brandp">
+    <div class="logo">Bina<span class="g">Smart</span></div>
+    <div class="tag am">ሁሉንም በአንድ መድረክ · All-in-one platform</div>
+    <h2>Manage your business,<br>from anywhere.</h2>
+    <div class="feat">
+      <div class="f"><span class="i">🏢</span><span>Rent, invoices, tenants, meters & maintenance — in one dashboard.</span></div>
+      <div class="f"><span class="i">🔒</span><span>Secure sign-in · your data stays private.</span></div>
+      <div class="f am"><span class="i">🗣️</span><span>በአማርኛ ድጋፍ — በWhatsApp/Telegram።</span></div>
+    </div>
+  </div>
+  <div class="formp">
+    <div id="login-form">
+      <h1>Owner sign in</h1>
+      <div class="sub am">የባለቤት መግቢያ — በስልክ ቁጥርዎ ይግቡ</div>
+      <label>Phone · <span class="am">ስልክ</span></label>
+      <input id="phone" type="tel" placeholder="09... or +2519..." autocomplete="tel">
+      <label>Password · <span class="am">የይለፍ ቃል</span></label>
+      <input id="password" type="password" placeholder="••••••••" autocomplete="current-password">
+      <div class="err" id="err"></div>
+      <button onclick="doLogin()" id="login-btn">Sign in →</button>
+      <div class="linkrow"><a href="#" onclick="showChange();return false">Change password · <span class="am">የይለፍ ቃል ይቀይሩ</span></a></div>
+      <div class="hint am">ስልክዎ = በWhatsApp/Telegram የሚጠቀሙት ቁጥር<br>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif">Forgot password?</span> <a href="https://wa.me/251911244344?text=BinaSmart%20password%20reset">WhatsApp us</a> · <a href="https://t.me/+251911244344">Telegram</a></div>
+      <a class="back" href="/">← BinaSmart</a>
+    </div>
+
+    <div id="change-form" style="display:none">
+      <h1>Change password</h1>
+      <div class="sub am">የይለፍ ቃል ይቀይሩ</div>
+      <label>Phone · <span class="am">ስልክ</span></label><input id="c-phone" type="tel" placeholder="09...">
+      <label>Current password · <span class="am">የአሁኑ</span></label><input id="c-old" type="password" placeholder="••••••••">
+      <label>New password · <span class="am">አዲስ (min 6)</span></label><input id="c-new" type="password" placeholder="••••••••">
+      <div class="err" id="c-err"></div>
+      <button onclick="doChange()" id="c-btn">Save new password ✓</button>
+      <div class="linkrow"><a href="#" onclick="showLogin();return false">← Back to sign in</a></div>
+    </div>
+
+    <div id="pick-form" style="display:none">
+      <h1>Choose your building</h1>
+      <div class="sub am">ህንፃዎን ይምረጡ</div>
+      <div class="blist" id="blist"></div>
+      <a class="back" href="#" onclick="showLogin();return false">← Back</a>
+    </div>
+  </div>
+</div>
+<script>
+function showChange(){ document.getElementById('login-form').style.display='none'; document.getElementById('change-form').style.display='block'; document.getElementById('c-phone').value=document.getElementById('phone').value; }
+function showLogin(){ document.getElementById('change-form').style.display='none'; document.getElementById('pick-form').style.display='none'; document.getElementById('login-form').style.display='block'; }
+function err(id, m){ const e=document.getElementById(id); e.textContent=m; e.style.display='block'; }
+async function doLogin(){
+  const phone=document.getElementById('phone').value.trim(), pw=document.getElementById('password').value;
+  if(!phone||!pw){ err('err','Enter phone and password / ስልክ እና የይለፍ ቃል ያስገቡ'); return; }
+  const btn=document.getElementById('login-btn'); btn.textContent='...';
+  try{
+    const r=await fetch('/api/owner/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,password:pw})});
+    const d=await r.json();
+    if(!r.ok){ err('err', r.status===401?'Wrong phone or password / ስህተት ነው':'Error: '+(d.error||r.status)); btn.textContent='Sign in →'; return; }
+    if(d.buildings.length===1){
+      localStorage.setItem('bs_key', d.buildings[0].key);
+      location.href='/owner/'+d.buildings[0].slug;
+    } else {
+      document.getElementById('login-form').style.display='none';
+      document.getElementById('pick-form').style.display='block';
+      document.getElementById('blist').innerHTML=d.buildings.map(function(b){
+        return '<button onclick="localStorage.setItem(\'bs_key\',\''+b.key+'\');location.href=\'/owner/'+b.slug+'\'">🏢 '+b.name+'</button>';
+      }).join('');
+    }
+  }catch(e){ err('err','Network error'); btn.textContent='Sign in →'; }
+}
+async function doChange(){
+  const phone=document.getElementById('c-phone').value.trim(), o=document.getElementById('c-old').value, n=document.getElementById('c-new').value;
+  if(!phone||!o||!n){ err('c-err','Fill all fields / ሁሉንም ይሙሉ'); return; }
+  const btn=document.getElementById('c-btn'); btn.textContent='...';
+  const r=await fetch('/api/owner/change-password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,oldPassword:o,newPassword:n})});
+  const d=await r.json();
+  if(r.ok){ btn.textContent='✓ Changed! / ተቀይሯል'; setTimeout(showLogin,1200); }
+  else { err('c-err', d.error==='password_too_short_min_6'?'Min 6 characters / ቢያንስ 6 ፊደል':'Wrong phone or current password'); btn.textContent='Save new password ✓'; }
+}
+document.getElementById('password').addEventListener('keydown',function(e){ if(e.key==='Enter') doLogin(); });
+</script></body></html>

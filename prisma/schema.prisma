@@ -1,0 +1,982 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===== CORE SAAS =====
+
+model Organization {
+  id           String        @id @default(cuid())
+  name         String
+  plan         Plan          @default(STARTER)
+  subscription Subscription?
+  buildings    Building[]
+  users        User[]
+  createdAt    DateTime      @default(now())
+}
+
+enum Plan {
+  STARTER
+  PRO
+  ENTERPRISE
+}
+
+model Subscription {
+  id               String    @id @default(cuid())
+  orgId            String    @unique
+  org              Organization @relation(fields: [orgId], references: [id])
+  plan             Plan
+  status           SubStatus @default(TRIAL)
+  currentPeriodEnd DateTime
+  paymentMethod    String?
+  createdAt        DateTime  @default(now())
+}
+
+enum SubStatus {
+  TRIAL
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+}
+
+model User {
+  id             String   @id @default(cuid())
+  orgId          String?
+  org            Organization? @relation(fields: [orgId], references: [id])
+  phone          String   @unique
+  passwordHash String?
+  telegramChatId String?
+  telegramId     String?  @unique
+  fullName       String
+  role           Role     @default(TENANT)
+  language       String   @default("am")
+  parentUserId   String?
+  permissions    String[]
+  tenancies      Tenancy[]
+  createdAt      DateTime @default(now())
+  ownedBuildings Building[]     @relation("BuildingOwner")
+  notifications  Notification[]
+  orders         Order[]        @relation("Customer")
+  reviews        Review[]
+  favorites      Favorite[]
+}
+
+enum Role {
+  SUPER_ADMIN
+  OWNER
+  MANAGER
+  TECHNICIAN
+  TENANT
+  STAFF
+  PUBLIC
+}
+
+// ===== BUILDING & UNITS =====
+
+model Building {
+  id         String  @id @default(cuid())
+  orgId      String
+  org        Organization @relation(fields: [orgId], references: [id])
+  ownerId    String
+  owner      User    @relation("BuildingOwner", fields: [ownerId], references: [id])
+  name       String
+  nameAm     String
+  city       String
+  subCity    String?
+  lat        Float?
+  lng        Float?
+  floors     Int
+  qrSlug     String  @unique
+  units      Unit[]
+
+  threeD_style       String?
+  threeD_facadeColor String?
+  threeD_width       Float?
+  threeD_depth       Float?
+  threeD_modelUrl    String?
+  threeD_modelType   String?
+
+  facadePhotoUrl   String?
+  entrancePhotoUrl String?
+  logoUrl          String?
+  signText         String?
+  ownerKey         String?
+  tinNumber        String?
+  vatRegistered    Boolean @default(false)
+  vatNumber        String?
+  vatInclusive     Boolean @default(true)
+  latePenaltyPct   Int     @default(10)
+  penaltiesEnabled Boolean @default(false)
+  notifyTenants    Boolean @default(false)
+  elecTariff       Float   @default(2.12)
+  waterTariff      Float   @default(15)
+  expenses         Expense[]
+  staff            StaffMember[]
+  auditLogs        AuditLog[]
+  bankAccounts     Json?
+
+  walkthroughVideoUrl       String?
+  threeD_processing         Boolean   @default(false)
+  threeD_processStartedAt   DateTime?
+  threeD_processCompletedAt DateTime?
+  threeD_processError       String?
+
+  marketplaceEnabled Boolean @default(true)
+  moderationRequired Boolean @default(false)
+  telegramChannelId  String?
+
+  wifiPortalEnabled Boolean @default(false)
+  parkingSlots      Int?
+  parkingFree       Int?
+
+  events     BuildingEvent[]
+  scanEvents QrScanEvent[]
+  createdAt  DateTime @default(now())
+  buildingType String @default("COMMERCIAL")
+  roomTypes    RoomType[]
+  hotelBookings HotelBooking[]
+  travelTrips  TravelTrip[]
+  departments  Department[]
+  appointments Appointment[]
+}
+
+model Unit {
+  id                 String     @id @default(cuid())
+  buildingId         String
+  building           Building   @relation(fields: [buildingId], references: [id])
+  number             String
+  floor              Int
+  areaSqm            Float
+  monthlyRent        Int
+  status             UnitStatus @default(VACANT)
+  unitType           UnitType   @default(SHOP)
+  storefrontPhotoUrl String?
+  tenancies          Tenancy[]
+  leads              Lead[]
+}
+
+enum UnitStatus {
+  OCCUPIED
+  VACANT
+  MAINTENANCE
+  RESERVED
+}
+
+enum UnitType {
+  SHOP
+  OFFICE
+  RESIDENTIAL
+  WAREHOUSE
+  OTHER
+}
+
+// ===== TENANCY / BILLING =====
+
+model Tenancy {
+  id                  String   @id @default(cuid())
+  unitId              String
+  unit                Unit     @relation(fields: [unitId], references: [id])
+  userId              String
+  user                User     @relation(fields: [userId], references: [id])
+  profileId           String?
+  profile             TenantProfile? @relation(fields: [profileId], references: [id])
+  contract            Contract?
+  invoices            Invoice[]
+  meters              Meter[]
+  maintenance         MaintenanceRequest[]
+  shop                Shop?
+  startDate           DateTime
+  endDate             DateTime?
+  endReason           String?
+  exitInspectionScore Int?
+  ownerRating         Int?
+  active              Boolean  @default(true)
+}
+
+model Contract {
+  id                String    @id @default(cuid())
+  tenancyId         String    @unique
+  tenancy           Tenancy   @relation(fields: [tenancyId], references: [id])
+  startDate         DateTime
+  endDate           DateTime
+  monthlyRent       Int
+  depositMonths     Int       @default(2)
+  pdfUrl            String?
+  signedAt          DateTime?
+  renewalNotifiedAt DateTime?
+}
+
+model Invoice {
+  id          String      @id @default(cuid())
+  tenancyId   String
+  tenancy     Tenancy     @relation(fields: [tenancyId], references: [id])
+  type        InvoiceType @default(RENT)
+  amount      Int
+  lateFee     Int         @default(0)
+  dueDate     DateTime
+  paidDate    DateTime?
+  daysLate    Int         @default(0)
+  paymentCode String?     @unique
+  method      String?
+  status      InvStatus   @default(PENDING)
+  createdAt   DateTime    @default(now())
+}
+
+enum InvoiceType {
+  RENT
+  ELECTRICITY
+  WATER
+  SERVICE
+  PENALTY
+  OTHER
+}
+
+enum InvStatus {
+  PENDING
+  PAID
+  OVERDUE
+  PARTIAL
+  CANCELLED
+}
+
+model Meter {
+  id        String         @id @default(cuid())
+  tenancyId String
+  tenancy   Tenancy        @relation(fields: [tenancyId], references: [id])
+  meterType MeterType
+  serialNo  String?
+  tariff    Float
+  readings  MeterReading[]
+}
+
+enum MeterType {
+  ELECTRICITY
+  WATER
+}
+
+model MeterReading {
+  id      String   @id @default(cuid())
+  meterId String
+  meter   Meter    @relation(fields: [meterId], references: [id])
+  reading Float
+  photoUrl String?
+  readAt  DateTime @default(now())
+  readBy  String?
+  anomaly Boolean  @default(false)
+}
+
+model MaintenanceRequest {
+  id           String      @id @default(cuid())
+  tenancyId    String?
+  tenancy      Tenancy?    @relation(fields: [tenancyId], references: [id])
+  buildingId   String?
+  type         String
+  description  String
+  reporterName  String?
+  reporterPhone String?
+  voiceNoteUrl String?
+  photoBefore  String?
+  photoAfter   String?
+  source       String      @default("APP")
+  status       MaintStatus @default(OPEN)
+  assignedTo   String?
+  flagged      Boolean     @default(false)
+  assetTag     String?
+  createdAt    DateTime    @default(now())
+  resolvedAt   DateTime?
+}
+
+enum MaintStatus {
+  OPEN
+  ASSIGNED
+  IN_PROGRESS
+  DONE
+  VERIFIED
+  CANCELLED
+}
+
+model Lead {
+  id              String   @id @default(cuid())
+  unitId          String
+  unit            Unit     @relation(fields: [unitId], references: [id])
+  name            String
+  phone           String
+  source          String   @default("QR")
+  budgetMax       Int?
+  notifyOnVacancy Boolean  @default(false)
+  status          String   @default("NEW")
+  createdAt       DateTime @default(now())
+}
+
+// ===== MARKETPLACE =====
+
+model Shop {
+  id            String       @id @default(cuid())
+  tenancyId     String       @unique
+  tenancy       Tenancy      @relation(fields: [tenancyId], references: [id])
+  name          String
+  nameAm        String?
+  category      ShopCategory
+  description   String?
+  descriptionAm String?
+  phone         String
+  telegram      String?
+  socialLink    String?
+  photos        String[]
+  openingHours  Json?
+  isOpenNow     Boolean @default(true)
+  avgRating     Float   @default(0)
+  reviewCount   Int     @default(0)
+  featured      Boolean @default(false)
+  featuredUntil DateTime?
+  icon          String?
+  products      Product[]
+  offers        Offer[]
+  orders        Order[]
+  reviews       Review[]
+  favorites     Favorite[]
+  jobPosts      JobPost[]
+}
+
+enum ShopCategory {
+  CAFE
+  RESTAURANT
+  PHARMACY
+  RETAIL
+  SERVICE
+  GYM
+  SALON
+  CLINIC
+  BANK
+  OFFICE
+  OTHER
+}
+
+model Product {
+  id          String  @id @default(cuid())
+  shopId      String
+  shop        Shop    @relation(fields: [shopId], references: [id])
+  name        String
+  nameAm      String?
+  description String?
+  price       Int
+  category    String?
+  photoUrl    String?
+  deliverable Boolean @default(false)
+  visible     Boolean @default(true)
+  approved    Boolean @default(true)
+  orderCount  Int     @default(0)
+  orderItems  OrderItem[]
+  createdAt   DateTime @default(now())
+}
+
+model Offer {
+  id             String   @id @default(cuid())
+  shopId         String
+  shop           Shop     @relation(fields: [shopId], references: [id])
+  title          String
+  titleAm        String?
+  description    String?
+  startsAt       DateTime
+  endsAt         DateTime
+  active         Boolean  @default(true)
+  approved       Boolean  @default(true)
+  views          Int      @default(0)
+  claims         Int      @default(0)
+  telegramPosted Boolean  @default(false)
+  createdAt      DateTime @default(now())
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  shopId        String
+  shop          Shop        @relation(fields: [shopId], references: [id])
+  customerId    String?
+  customer      User?       @relation("Customer", fields: [customerId], references: [id])
+  customerName  String?
+  customerPhone String?
+  deliverToUnit String?
+  note          String?
+  items         OrderItem[]
+  total         Int
+  status        OrderStatus @default(NEW)
+  paymentMethod String?
+  paidAt        DateTime?
+  source        String      @default("QR")
+  createdAt     DateTime    @default(now())
+  completedAt   DateTime?
+}
+
+enum OrderStatus {
+  NEW
+  ACCEPTED
+  IN_PROGRESS
+  DELIVERED
+  COMPLETED
+  CANCELLED
+  REJECTED
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  qty       Int
+  unitPrice Int
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  shopId    String
+  shop      Shop     @relation(fields: [shopId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  orderId   String?  @unique
+  rating    Int
+  comment   String?
+  photoUrl  String?
+  createdAt DateTime @default(now())
+}
+
+model Favorite {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  shopId String
+  shop   Shop   @relation(fields: [shopId], references: [id])
+
+  @@unique([userId, shopId])
+}
+
+model JobPost {
+  id        String   @id @default(cuid())
+  shopId    String
+  shop      Shop     @relation(fields: [shopId], references: [id])
+  title     String
+  salary    String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+// ===== BINASCORE =====
+
+model TenantProfile {
+  id             String    @id @default(cuid())
+  phone          String    @unique
+  fullName       String
+  faydaId        String?   @unique
+  binaScore      Int       @default(0)
+  scoreUpdatedAt DateTime?
+  tenancies      Tenancy[]
+  paymentRecords PaymentRecord[]
+  consents       ScreeningConsent[]
+  disputes       ScoreDispute[]
+}
+
+model PaymentRecord {
+  id        String        @id @default(cuid())
+  profileId String
+  profile   TenantProfile @relation(fields: [profileId], references: [id])
+  dueDate   DateTime
+  paidDate  DateTime?
+  amount    Int
+  daysLate  Int           @default(0)
+  unitType  UnitType
+}
+
+model ScreeningConsent {
+  id             String        @id @default(cuid())
+  profileId      String
+  profile        TenantProfile @relation(fields: [profileId], references: [id])
+  requestedBy    String
+  buildingId     String
+  otpCode        String?
+  otpVerified    Boolean       @default(false)
+  reportViewedAt DateTime?
+  expiresAt      DateTime
+  createdAt      DateTime      @default(now())
+}
+
+model ScoreDispute {
+  id          String        @id @default(cuid())
+  profileId   String
+  profile     TenantProfile @relation(fields: [profileId], references: [id])
+  targetType  String
+  targetId    String
+  reason      String
+  evidenceUrl String?
+  status      String        @default("OPEN")
+  createdAt   DateTime      @default(now())
+  resolvedAt  DateTime?
+}
+
+// ===== USSD / NOTIFICATIONS / ANALYTICS =====
+
+model UssdLog {
+  id        String   @id @default(cuid())
+  sessionId String
+  phone     String
+  path      String
+  action    String?
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  type      String
+  title     String
+  body      String
+  channel   String
+  sentAt    DateTime?
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model BuildingEvent {
+  id         String   @id @default(cuid())
+  buildingId String
+  building   Building @relation(fields: [buildingId], references: [id])
+  title      String
+  titleAm    String?
+  date       DateTime
+  createdAt  DateTime @default(now())
+}
+
+model QrScanEvent {
+  id         String   @id @default(cuid())
+  buildingId String
+  building   Building @relation(fields: [buildingId], references: [id])
+  userAgent  String?
+  referrer   String?
+  createdAt  DateTime @default(now())
+
+  @@index([buildingId, createdAt])
+}
+
+
+model Expense {
+  id          String   @id @default(cuid())
+  buildingId  String
+  building    Building @relation(fields: [buildingId], references: [id])
+  date        DateTime @default(now())
+  vendor      String
+  vendorTin   String?
+  category    String   @default("GENERAL")
+  description String?
+  amount      Int
+  vatAmount   Int      @default(0)
+  receiptNo   String?
+  createdAt   DateTime @default(now())
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  buildingId String
+  building   Building @relation(fields: [buildingId], references: [id])
+  actor      String?
+  action     String
+  detail     String?
+  amount     Int?
+  createdAt  DateTime @default(now())
+}
+
+model StaffMember {
+  id         String   @id @default(cuid())
+  buildingId String
+  building   Building @relation(fields: [buildingId], references: [id])
+  name       String
+  role       String   @default("GUARD")
+  phone      String?
+  salary     Int
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+}
+
+// ===== BETTER AUTH =====
+model AuthUser {
+  id            String   @id
+  name          String
+  email         String   @unique
+  emailVerified Boolean  @default(false)
+  image         String?
+  role          String   @default("owner")
+  buildingSlug  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  sessions      AuthSession[]
+  accounts      AuthAccount[]
+  @@map("auth_user")
+}
+
+model AuthSession {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      AuthUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("auth_session")
+}
+
+model AuthAccount {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  AuthUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  @@map("auth_account")
+}
+
+model AuthVerification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@map("auth_verification")
+}
+
+model RoomType {
+  id            String   @id @default(cuid())
+  buildingId    String
+  building      Building @relation(fields: [buildingId], references: [id])
+  name          String
+  nameAm        String?
+  description   String?
+  pricePerNight Int
+  capacity      Int      @default(2)
+  totalRooms    Int      @default(1)
+  amenities     String[]
+  photos        String[]
+  active        Boolean  @default(true)
+  bookings      HotelBooking[]
+}
+
+model HotelBooking {
+  id         String   @id @default(cuid())
+  buildingId String
+  building   Building @relation(fields: [buildingId], references: [id])
+  roomTypeId String
+  roomType   RoomType @relation(fields: [roomTypeId], references: [id])
+  guestName  String
+  guestPhone String
+  checkIn    DateTime
+  checkOut   DateTime
+  rooms      Int      @default(1)
+  totalPrice Int
+  status     String   @default("PENDING")
+  code       String   @unique
+  note       String?
+  createdAt  DateTime @default(now())
+}
+
+model TravelTrip {
+  id         String   @id @default(cuid())
+  buildingId String
+  building   Building @relation(fields: [buildingId], references: [id])
+  fromCity   String
+  fromCityAm String?
+  toCity     String
+  toCityAm   String?
+  departure  DateTime
+  duration   String?
+  busName    String
+  price      Int
+  seats      Int      @default(44)
+  active     Boolean  @default(true)
+  tickets    TravelTicket[]
+}
+
+model TravelTicket {
+  id        String     @id @default(cuid())
+  tripId    String
+  trip      TravelTrip @relation(fields: [tripId], references: [id])
+  name      String
+  phone     String
+  seats     Int        @default(1)
+  total     Int
+  code      String     @unique
+  status    String     @default("CONFIRMED")
+  createdAt DateTime   @default(now())
+  paid      Boolean  @default(false)
+}
+
+model Department {
+  id          String   @id @default(cuid())
+  buildingId  String
+  building    Building @relation(fields: [buildingId], references: [id])
+  name        String
+  nameAm      String?
+  icon        String?
+  floor       Int      @default(0)
+  room        String?
+  fee         Int?
+  doctors     String[]
+  openHours   String?
+  slotsPerDay Int      @default(20)
+  active      Boolean  @default(true)
+  appointments Appointment[]
+}
+
+model Appointment {
+  id           String     @id @default(cuid())
+  buildingId   String
+  building     Building   @relation(fields: [buildingId], references: [id])
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+  name         String
+  phone        String
+  date         DateTime
+  note         String?
+  code         String     @unique
+  status       String     @default("PENDING")
+  createdAt    DateTime   @default(now())
+}
+
+model FlightRequest {
+  id         String   @id @default(cuid())
+  shopId     String
+  tripType   String   @default("ROUND")
+  fromCity   String
+  toCity     String
+  departDate DateTime
+  returnDate DateTime?
+  passengers Int      @default(1)
+  cabin      String   @default("ECONOMY")
+  name       String
+  phone      String
+  note       String?
+  status     String   @default("NEW")
+  quotedPrice Int?
+  code       String   @unique
+  createdAt  DateTime @default(now())
+}
+
+model DiasporaLead {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  country   String?
+  city      String?
+  building  String?
+  units     String?
+  note      String?
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+}
+
+model NewsPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  titleAm     String?
+  category    String
+  excerpt     String
+  bodyHtml    String
+  lang        String   @default("am")
+  author      String   @default("ቢና ዜና ዴስክ")
+  heroEmoji   String?
+  readMinutes Int      @default(4)
+  evergreen   Boolean  @default(false)
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+}
+
+model Tender {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  titleAm     String?
+  category    String
+  region      String   @default("Addis Ababa")
+  org         String
+  summary     String
+  bodyHtml    String?
+  deadline    DateTime?
+  budget      String?
+  sourceUrl   String?
+  sourceName  String?
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+}
+
+model Event {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  title      String
+  titleAm    String?
+  type       String   @default("CINEMA")
+  venue      String
+  city       String   @default("Addis Ababa")
+  descr      String?
+  emoji      String?
+  startsAt   DateTime
+  durationMin Int     @default(120)
+  tiers      Json
+  active     Boolean  @default(true)
+  tickets    EventTicket[]
+}
+
+model EventTicket {
+  id        String   @id @default(cuid())
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id])
+  code      String   @unique
+  name      String
+  phone     String
+  tier      String
+  qty       Int      @default(1)
+  total     Int
+  status    String   @default("CONFIRMED")
+  createdAt DateTime @default(now())
+  paid      Boolean  @default(false)
+}
+
+model InsuranceLead {
+  id           String   @id @default(cuid())
+  insType      String
+  name         String
+  phone        String
+  city         String?
+  coverType    String?
+  vehicleType  String?
+  vehicleMake  String?
+  vehicleYear  String?
+  vehicleValue String?
+  estimate     String?
+  note         String?
+  status       String   @default("NEW")
+  createdAt    DateTime @default(now())
+}
+
+model InsurerPartner {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  name          String
+  products      String
+  commissionPct String?
+  commissionNote String?
+  agreement     String   @default("PROSPECT")
+  contactName   String?
+  contactPhone  String?
+  contactEmail  String?
+  priority      Int      @default(0)
+  active        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}
+
+model CarListing {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  make         String?
+  model        String?
+  year         String?
+  price        String?
+  mileage      String?
+  fuel         String?
+  transmission String?
+  bodyType     String?
+  condition    String?
+  city         String?
+  imageUrl     String?
+  dealer       String?
+  dealerPhone  String?
+  featured     Boolean  @default(false)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+model PropertyListing {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  listingType  String   @default("sale")
+  propertyType String?
+  price        String?
+  beds         String?
+  baths        String?
+  area         String?
+  city         String?
+  location     String?
+  imageUrl     String?
+  agency       String?
+  agencyPhone  String?
+  verified     Boolean  @default(false)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+model MarketLead {
+  id          String   @id @default(cuid())
+  kind        String
+  listingSlug String?
+  listingRef  String?
+  name        String
+  phone       String
+  budget      String?
+  note        String?
+  status      String   @default("NEW")
+  createdAt   DateTime @default(now())
+}
+
+model Payment {
+  id        String   @id @default(cuid())
+  txRef     String   @unique
+  amount    Float
+  currency  String   @default("ETB")
+  purpose   String?
+  email     String?
+  name      String?
+  phone     String?
+  status    String   @default("pending")
+  kind      String   @default("checkout")
+  meta      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Wallet {
+  id        String      @id @default(cuid())
+  phone     String      @unique
+  pinHash   String
+  name      String?
+  balance   Float       @default(0)
+  token     String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  txns      WalletTxn[]
+}
+
+model WalletTxn {
+  id        String   @id @default(cuid())
+  walletId  String
+  wallet    Wallet   @relation(fields: [walletId], references: [id])
+  type      String
+  amount    Float
+  ref       String?
+  note      String?
+  status    String   @default("success")
+  createdAt DateTime @default(now())
+}

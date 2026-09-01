@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BinaSmart — Smart Building Management for Ethiopia | የህንፃ አስተዳደር</title>
+<meta name="google-site-verification" content="G5rfXyxcwdti9GePuZDwqN_gl8JQ5hOKAtMRLlcL50A" />
+<meta name="description" content="BinaSmart digitizes your building in Addis Ababa — rent & invoices, meter readings, maintenance requests, vacancy listings and a building marketplace. Tenants scan one QR code. Owners see everything.">
+<meta property="og:title" content="BinaSmart — Smart Building Management for Ethiopia">
+<meta property="og:description" content="One QR code per building: rent, invoices, meters, maintenance, vacancies and shops. Built in Addis Ababa.">
+<meta property="og:image" content="https://bina.et/static/shot-public.png">
+<meta property="og:url" content="https://bina.et/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"BinaSmart","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"QR-powered building management platform for Ethiopia: rent and invoices, meter readings, maintenance requests, vacancies and building marketplace.","offers":{"@type":"Offer","priceCurrency":"ETB"},"provider":{"@type":"Organization","name":"BinaSmart","areaServed":"Addis Ababa, Ethiopia","telephone":"+251904441111"}}
+</script>
+<style>
+:root{--bg:#faf8f4;--card:#ffffff;--line:#e7e2d8;--ink:#1e293b;--muted:#64748b;--violet:#7c3aed;--emerald:#10b981;--gold:#c2a875;--amber:#fffbeb}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Ethiopic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;background:rgba(250,248,244,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-size:1.25rem;font-weight:800;letter-spacing:-.02em}
+.logo span{color:var(--violet)}
+.nav-links{display:flex;gap:24px;align-items:center;font-size:.92rem;color:var(--muted)}
+.nav-links a:hover{color:var(--ink)}
+.btn{display:inline-block;padding:12px 24px;border-radius:12px;font-weight:700;font-size:.95rem;transition:transform .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-violet{background:var(--violet);color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.25)}
+.btn-emerald{background:var(--emerald);color:#fff;box-shadow:0 4px 14px rgba(16,185,129,.25)}
+.btn-ghost{border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.btn-sm{padding:9px 18px;font-size:.88rem}
+.hero{padding:72px 0 56px;text-align:center}
+.badge{display:inline-block;background:var(--amber);border:1px solid var(--gold);color:#92700c;font-size:.8rem;font-weight:700;padding:5px 14px;border-radius:99px;margin-bottom:20px}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
+h1 em{font-style:normal;color:var(--violet)}
+.h1-am{font-size:clamp(1.1rem,3vw,1.5rem);color:var(--gold);font-weight:700;margin-bottom:18px}
+.sub{max-width:620px;margin:0 auto 30px;color:var(--muted);font-size:1.08rem}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.strip{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:36px;font-size:.85rem;color:var(--muted)}
+.strip div{background:var(--card);border:1px solid var(--line);padding:8px 16px;border-radius:99px}
+.statbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:840px;margin:44px auto 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 12px;text-align:center;box-shadow:0 4px 14px rgba(30,41,59,.04)}
+.stat .n{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--violet);line-height:1.1}
+.stat .n.st-green{color:var(--emerald)}
+.stat .n.st-gold{color:#b45309}
+.stat .l{font-size:.78rem;font-weight:700;color:var(--muted);margin-top:4px}
+.stat .l span{display:block;color:var(--gold);font-size:.7rem}
+section{padding:56px 0}
+.sec-h{text-align:center;margin-bottom:8px;font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+.sec-am{text-align:center;color:var(--gold);font-weight:700;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:box-shadow .2s ease}
+.card:hover{box-shadow:0 8px 24px rgba(30,41,59,.07)}
+.card .ico{font-size:1.9rem;margin-bottom:12px}
+.card h3{font-size:1.05rem;margin-bottom:4px}
+.card .am{color:var(--gold);font-size:.85rem;font-weight:700;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.92rem}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:step}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;position:relative}
+.step .n{width:38px;height:38px;border-radius:50%;background:var(--violet);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.step h3{font-size:1rem;margin-bottom:6px}
+.step p{color:var(--muted);font-size:.9rem}
+.demo{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.demo iframe{width:100%;height:560px;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 32px rgba(30,41,59,.12);background:#f4f1ea}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin-top:8px}
+.bcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .15s ease,box-shadow .2s ease;display:block}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(30,41,59,.12)}
+.bcard-top{height:96px;position:relative;padding:10px 12px}
+.btag{display:inline-block;background:rgba(255,255,255,.85);color:#334155;font-size:.68rem;font-weight:800;padding:3px 9px;border-radius:99px;margin-right:6px}
+.bemoji{position:absolute;right:14px;bottom:8px;font-size:2.3rem;filter:drop-shadow(0 3px 6px rgba(0,0,0,.25))}
+.bcard-body{padding:14px 16px 16px}
+.btype{font-size:.68rem;font-weight:800;color:var(--violet);text-transform:uppercase;letter-spacing:.05em}
+.bname{font-weight:800;font-size:1.02rem;margin-top:2px;letter-spacing:-.01em}
+.bnameAm{color:var(--gold);font-size:.8rem;font-weight:700}
+.bloc{color:var(--muted);font-size:.78rem;margin-top:4px}
+.bstats{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;font-size:.72rem;font-weight:700}
+.bstats span{background:var(--bg);border:1px solid var(--line);padding:3px 9px;border-radius:99px;color:#475569}
+.bstats .bocc{background:#ecfdf5;border-color:#a7f3d0;color:#047857}
+.bstats .bvac{background:#fffbeb;border-color:#fcd34d;color:#92400e}
+.bcard-skel{height:230px;border-radius:16px;background:linear-gradient(90deg,#efece4 25%,#f7f4ee 50%,#efece4 75%);background-size:200% 100%;animation:bsk 1.2s infinite}
+@keyframes bsk{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.demo h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.demo .am{color:var(--gold);font-weight:700;margin-bottom:14px}
+.demo p{color:var(--muted);margin-bottom:22px}
+.demo ul{list-style:none;margin-bottom:24px}
+.demo li{padding:6px 0;color:var(--ink);font-size:.95rem}
+.demo li::before{content:"✓";color:var(--emerald);font-weight:800;margin-right:10px}
+.contact{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:52px 40px;text-align:center;color:var(--ink);box-shadow:0 12px 32px rgba(30,41,59,.07)}
+.contact h2{font-size:1.7rem;font-weight:800;margin-bottom:6px}
+.contact .am{color:var(--gold);font-weight:700;margin-bottom:14px}
+.contact p{color:var(--muted);max-width:520px;margin:0 auto 26px}
+.contact .phones{margin-top:22px;color:var(--muted);font-size:.95rem}
+.contact .phones a{color:var(--ink);font-weight:700}
+footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;color:var(--muted);font-size:.85rem}
+@media(max-width:760px){.nav-links{display:none}.demo{grid-template-columns:1fr;padding:26px}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="logo" href="/">Bina<span>Smart</span> 🏢</a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#demo">Live demo</a>
+    <a href="#contact">Contact</a>
+    <a href="/owner" style="color:var(--violet);font-weight:700">Owner Login</a>
+  </div>
+  <a class="btn btn-violet btn-sm" href="#contact">Get Started</a>
+</div></nav>
+
+<header class="hero wrap">
+  <div class="badge">🇪🇹 Built in Addis Ababa</div>
+  <h1>Your whole building,<br>managed from <em>one QR code</em></h1>
+  <div class="h1-am">ህንፃዎን በአንድ QR ኮድ ያስተዳድሩ</div>
+  <p class="sub">BinaSmart digitizes commercial buildings in Ethiopia. Tenants scan the QR at the entrance to pay rent, report problems and see offers. Owners get invoices, meters and occupancy in one dashboard.</p>
+  <div class="cta-row">
+    <a class="btn btn-violet" href="/b/darulle">▶ See a live building in 3D</a>
+    <a class="btn btn-emerald" href="https://wa.me/251904441111?text=BinaSmart%20info">💬 WhatsApp us</a>
+  </div>
+  <div class="strip">
+    <div>🧊 Interactive 3D view</div>
+    <div>📄 Automatic rent invoices</div>
+    <div>⚡ Meter readings</div>
+    <div>🔧 Maintenance requests</div>
+    <div>🏬 Building marketplace</div>
+    <div>🈳 Amharic + English</div>
+  </div>
+  <div class="statbar" id="statbar">
+    <div class="stat"><div class="n" id="st-b">–</div><div class="l">Buildings<span>ህንፃዎች</span></div></div>
+    <div class="stat"><div class="n" id="st-u">–</div><div class="l">Units managed<span>የሚተዳደሩ ክፍሎች</span></div></div>
+    <div class="stat"><div class="n st-green" id="st-o">–</div><div class="l">Occupancy<span>የተያዙ</span></div></div>
+    <div class="stat"><div class="n st-gold" id="st-v">–</div><div class="l">Units available<span>ባዶ ክፍሎች</span></div></div>
+  </div>
+</header>
+
+<section id="features" class="wrap">
+  <h2 class="sec-h">Everything a building owner needs</h2>
+  <div class="sec-am">ለህንፃ ባለቤቶች የተሟላ መፍትሄ</div>
+  <div class="grid">
+    <div class="card"><div class="ico">📄</div><h3>Rent &amp; Invoices</h3><div class="am">ኪራይ እና ደረሰኞች</div><p>Monthly invoices generated automatically for every unit. Track payments, arrears and receipts in ETB.</p></div>
+    <div class="card"><div class="ico">⚡</div><h3>Meter Readings</h3><div class="am">የቆጣሪ ንባብ</div><p>Electricity and water readings per unit, with history — no more notebook disputes at month end.</p></div>
+    <div class="card"><div class="ico">🔧</div><h3>Maintenance Requests</h3><div class="am">የጥገና ጥያቄዎች</div><p>Tenants report a broken lift or leaking pipe from their phone. You see, assign and close every request.</p></div>
+    <div class="card"><div class="ico">🈳</div><h3>Vacancies &amp; Leads</h3><div class="am">ክፍት ክፍሎች</div><p>Empty units are advertised automatically on your building page. Interested renters become leads with one tap.</p></div>
+    <div class="card"><div class="ico">🏬</div><h3>Building Marketplace</h3><div class="am">የህንፃ ገበያ</div><p>Every shop in your building gets a profile with offers and products — the QR code brings them customers.</p></div>
+    <div class="card"><div class="ico">🛡️</div><h3>Tenant Screening</h3><div class="am">የተከራይ ማጣሪያ</div><p>Payment history builds a tenant score. Screen new applicants with consent-based records.</p></div>
+  </div>
+</section>
+
+<section id="how" class="wrap">
+  <h2 class="sec-h">How it works</h2>
+  <div class="sec-am">እንዴት እንደሚሰራ</div>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>We digitize your building</h3><p>Floors, units, shops and tenants — set up for you in one day.</p></div>
+    <div class="step"><div class="n">2</div><h3>QR poster at the entrance</h3><p>One printed poster. Every tenant and visitor scans the same code.</p></div>
+    <div class="step"><div class="n">3</div><h3>Tenants self-serve</h3><p>Pay rent, report issues, read meters, browse offers — in Amharic or English.</p></div>
+    <div class="step"><div class="n">4</div><h3>You watch the dashboard</h3><p>Occupancy, income and requests, live from anywhere — even abroad.</p></div>
+  </div>
+</section>
+
+<section id="demo" class="wrap">
+  <div class="demo">
+    <div>
+      <h2>See it live: JJ Darule Building</h2>
+      <div class="am">ጄጄ ዳሩሌ ህንፃ — ከሰሜን ሆቴል ትይዩ፣ አዲስ አበባ</div>
+      <p>A real G+10 tower by JJ Darule Construction PLC, across from Semen Hotel, Addis Ababa — the first building live on BinaSmart. Drag the 3D building, tap a floor, browse the shops.</p>
+      <ul>
+        <li>Interactive 3D building — drag to rotate, tap a floor</li>
+        <li>Shops with live offers and phone ordering</li>
+        <li>Vacant units captured as leads with one tap</li>
+        <li>Owner dashboard with income &amp; requests</li>
+      </ul>
+      <a class="btn btn-violet" href="/b/darulle">Open the building page →</a>
+    </div>
+    <div>
+      <iframe src="/b/darulle" title="Live BinaSmart demo — Darulle Building" loading="lazy"></iframe>
+      <div style="text-align:center;margin-top:10px"><a href="/b/darulle" style="font-size:.85rem;font-weight:700;color:var(--violet)">Open full page ↗</a></div>
+    </div>
+  </div>
+
+  <h2 class="sec-h" style="margin-top:64px">Live on BinaSmart</h2>
+  <div class="sec-am">አሁን በBinaSmart ላይ ያሉ ህንፃዎች</div>
+  <div class="bgrid" id="bgrid">
+    <div class="bcard-skel"></div><div class="bcard-skel"></div><div class="bcard-skel"></div>
+    <div class="bcard-skel"></div><div class="bcard-skel"></div><div class="bcard-skel"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const TYPE = {
+    'darulle': ['🏢', 'G+10 tower'],
+    'cbe-tower': ['🏦', 'Skyscraper HQ'],
+    'bole-airport': ['✈️', 'Airport terminal'],
+    'edna-mall': ['🎬', 'Entertainment mall'],
+    'century-mall': ['🛍️', 'Shopping mall'],
+    'friendship-mall': ['🛒', 'Supermarket mall'],
+    'zefmesh-mall': ['🎪', 'Grand mall'],
+    'morning-star-mall': ['🌅', 'Boutique mall'],
+    'dembel-city-center': ['🌆', 'City center mall'],
+    'getu-commercial': ['🏙️', 'Commercial tower'],
+    'abenezer-mall': ['🛍️', 'Megenagna mall'],
+    'sarbet-mall': ['🏬', 'Neighborhood mall'],
+    'lafto-mall': ['🏪', 'South Addis mall'],
+    'adams-pavilion': ['🏛️', 'Office pavilion'],
+    'unity-park': ['🌳', 'Park & attraction'],
+    'skylight-hotel': ['🏨', '5-star hotel'],
+    'sheraton-addis': ['👑', 'Luxury hotel'],
+    'hilton-addis': ['♨️', 'Heritage hotel'],
+    'radisson-blu': ['🌃', 'Business hotel'],
+    'bole-medhanealem-mall': ['✨', 'District mall'],
+    'century-city-mall': ['🎡', 'Family mall'],
+    'marathon-tower': ['🏃', 'Landmark tower'],
+    'edna-tower': ['🌇', 'Mixed-use tower'],
+    'flamingo-mall': ['🦩', 'Kazanchis mall'],
+    'ambassador-mall': ['🎩', 'Churchill Ave mall'],
+    'friendship-city-center': ['🤝', 'City center']
+  };
+  function shade(hex, f){
+    const n = parseInt(hex.slice(1), 16);
+    const r = Math.min(255, Math.round(((n >> 16) & 255) * f));
+    const g = Math.min(255, Math.round(((n >> 8) & 255) * f));
+    const b = Math.min(255, Math.round((n & 255) * f));
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+  function countUp(el, target, suffix){
+    const final = target + (suffix || '');
+    if (document.hidden) { el.textContent = final; return; }
+    const dur = 900, t0 = performance.now();
+    (function tick(t){
+      const p = Math.min(1, (t - t0) / dur);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + (suffix || '');
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+    setTimeout(() => { el.textContent = final; }, dur + 150);
+  }
+  fetch('/api/buildings').then(r => r.json()).then(list => {
+    const units = list.reduce((s, b) => s + b.units, 0);
+    const occ = list.reduce((s, b) => s + b.occupied, 0);
+    countUp(document.getElementById('st-b'), list.length);
+    countUp(document.getElementById('st-u'), units);
+    countUp(document.getElementById('st-o'), units ? Math.round(occ / units * 100) : 0, '%');
+    countUp(document.getElementById('st-v'), units - occ);
+    document.getElementById('bgrid').innerHTML = list.map(b => {
+      const t = TYPE[b.slug] || ['🏢', 'Commercial building'];
+      return '<a class="bcard" href="/b/' + b.slug + '">'
+        + '<div class="bcard-top" style="background:linear-gradient(150deg,' + shade(b.facadeColor, 1.15) + ',' + b.facadeColor + ')">'
+        + '<span class="btag">' + b.floors + ' floors</span><span class="btag">🧊 3D</span>'
+        + '<div class="bemoji">' + t[0] + '</div></div>'
+        + '<div class="bcard-body">'
+        + '<div class="btype">' + t[1] + '</div>'
+        + '<div class="bname">' + b.name + '</div>'
+        + '<div class="bnameAm">' + (b.nameAm || '') + '</div>'
+        + '<div class="bloc">📍 ' + (b.subCity ? b.subCity + ', ' : '') + b.city + '</div>'
+        + '<div class="bstats">'
+        + '<span>' + b.units + ' units</span>'
+        + '<span class="bocc">' + b.occupancyPct + '% occupied</span>'
+        + (b.vacant ? '<span class="bvac">✨ ' + b.vacant + ' vacant</span>' : '')
+        + '</div></div></a>';
+    }).join('');
+  }).catch(() => {
+    document.getElementById('bgrid').innerHTML = '<div style="color:var(--muted);text-align:center;grid-column:1/-1">Could not load buildings — <a href="/b/darulle" style="color:var(--violet);font-weight:700">open the demo →</a></div>';
+  });
+})();
+</script>
+
+<section id="contact" class="wrap">
+  <div class="contact">
+    <h2>Put your building on BinaSmart</h2>
+    <div class="am">ህንፃዎን ዛሬ ያስመዝግቡ</div>
+    <p>Setup is done for you — send us your building name and location, and we'll have your QR poster ready.</p>
+    <div class="cta-row">
+      <a class="btn btn-emerald" href="https://wa.me/251904441111?text=I%20want%20BinaSmart%20for%20my%20building">💬 WhatsApp</a>
+      <a class="btn btn-ghost" href="tel:+251904441111">📞 Call us</a>
+    </div>
+    <div class="phones">📱 <a href="tel:+251904441111">+251 904 441 111</a> &nbsp;·&nbsp; <a href="tel:+251911703528">+251 911 703 528</a></div>
+  </div>
+</section>
+
+<footer><div class="wrap">© 2026 BinaSmart — Smart Building Management · Addis Ababa, Ethiopia 🇪🇹</div></footer>
+
+<script src="/static/bina-assistant.js?v=2" defer></script>
+</body>
+</html>

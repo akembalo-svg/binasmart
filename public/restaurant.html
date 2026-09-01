@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Order by QR — Menu | BinaSmart Restaurants</title>
+<meta name="description" content="Scan, order, eat. QR table ordering with Amharic menus — no app, no waiting. Powered by BinaSmart.">
+<link rel="icon" href="/icon-32.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#faf8f4;color:#1e293b;min-height:100vh;padding-bottom:110px}
+.top{display:flex;align-items:center;gap:8px;padding:14px 18px;max-width:680px;margin:0 auto}
+.top a{text-decoration:none;color:#1e293b;font-weight:900;font-size:17px}
+.top .g{color:#d4a017}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.hero{background:linear-gradient(135deg,#7c2d12,#c2410c);border-radius:22px;padding:22px 18px;color:#fff;position:relative;overflow:hidden}
+.hero h1{font-size:24px;font-weight:900}
+.hero .am{color:#fed7aa;font-weight:800;font-size:14px}
+.hero .tbl{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:900}
+.hero .sub{font-size:11.5px;opacity:.85;margin-top:6px}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:14px 0 4px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex-shrink:0;background:#fff;border:1.5px solid #e9e4da;border-radius:999px;padding:8px 16px;font-size:12.5px;font-weight:800;cursor:pointer;color:#475569}
+.cat.on{background:#7c2d12;color:#fff;border-color:#7c2d12}
+.item{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid #e9e4da;border-radius:18px;padding:13px 14px;margin-top:10px}
+.item .nm{font-weight:800;font-size:14.5px}
+.item .am{font-size:12px;color:#94a3b8}
+.item .pr{font-weight:900;color:#7c2d12;font-size:14px;margin-left:auto;flex-shrink:0;text-align:right}
+.qty{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.qty button{width:32px;height:32px;border-radius:10px;border:1.5px solid #e9e4da;background:#faf8f4;font-size:16px;font-weight:900;cursor:pointer;color:#7c2d12}
+.qty b{min-width:16px;text-align:center;font-size:14px}
+.qty .add{background:#7c2d12;color:#fff;border-color:#7c2d12;width:auto;padding:0 14px;font-size:12px;border-radius:10px;height:32px}
+/* cart bar */
+.cartbar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(to top,#faf8f4 75%,transparent);display:none}
+.cartbar.on{display:block}
+.cbtn{max-width:680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#7c2d12,#c2410c);color:#fff;border-radius:18px;padding:15px 20px;font-weight:900;cursor:pointer;box-shadow:0 14px 34px -12px rgba(124,45,18,.5)}
+#modal{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+#modal.on{display:flex}
+.sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:680px;padding:22px 20px calc(22px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto}
+.sheet h3{font-size:17px;font-weight:900;margin-bottom:10px}
+.line{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-bottom:1px solid #f4f0e8}
+.sheet label{font-size:11px;font-weight:900;color:#64748b;display:block;margin:12px 0 4px;text-transform:uppercase;letter-spacing:1px}
+.sheet input{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:11px 12px;font-size:15px;font-family:inherit;background:#faf8f4}
+.tot{display:flex;justify-content:space-between;background:#fff7ed;border-radius:14px;padding:12px 14px;margin-top:14px;font-weight:900}
+.tot b{color:#7c2d12}
+.obtn{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#7c2d12,#c2410c);color:#fff;font-weight:900;font-size:15px;cursor:pointer;font-family:inherit;margin-top:12px}
+.conf{text-align:center;padding:22px 0}
+.conf .big{font-size:52px}
+.conf h3{font-size:20px}
+.conf .code{font-size:24px;font-weight:900;letter-spacing:2px;color:#7c2d12;background:#fff7ed;border:2px dashed #c2410c;border-radius:14px;padding:12px;margin:12px 0}
+.conf p{font-size:13px;color:#64748b;line-height:1.6}
+.skel{background:linear-gradient(90deg,#eee 25%,#f7f5f0 50%,#eee 75%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:18px;height:70px;margin-top:10px}
+@keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/">🏢 Bina<span class="g">Smart</span></a><span style="margin-left:auto;font-size:11px;font-weight:800;color:#c2410c">🍽️ Scan · Order · Eat</span></div>
+<div class="wrap">
+  <div class="hero"><div class="tbl" id="tbl"></div><h1 id="rname">Loading…</h1><div class="am" id="rnameAm"></div><div class="sub" id="rsub"></div></div>
+  <div class="cats" id="cats"></div>
+  <div id="menu"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+</div>
+<div class="cartbar" id="cartbar"><div class="cbtn" onclick="openCart()"><span id="cn">🛒 0 items</span><span id="ct">0 ETB</span></div></div>
+<div id="modal"><div class="sheet" id="sheet"></div></div>
+<script>
+const slug = location.pathname.split('/')[2];
+const table = new URLSearchParams(location.search).get('table') || '';
+const $ = id => document.getElementById(id);
+let R = null, MENU = [], CART = {}, CAT = null;
+if (table) $('tbl').textContent = '🪑 Table ' + table;
+async function load(){
+  const r = await fetch('/api/restaurant/' + slug);
+  if (!r.ok){ $('rname').textContent = 'Restaurant not found'; $('menu').innerHTML = ''; return; }
+  const d = await r.json(); R = d.restaurant; MENU = d.menu;
+  $('rname').textContent = R.name; $('rnameAm').textContent = R.nameAm || '';
+  $('rsub').textContent = '📍 ' + R.building + ' · ' + R.unit + ' — order here, we bring it to you';
+  document.title = R.name + ' — Order by QR | BinaSmart';
+  const cats = [...new Set(MENU.map(m => m.category))];
+  $('cats').innerHTML = cats.map((c, i) => '<div class="cat' + (i === 0 ? ' on' : '') + '" onclick="setCat(this,\'' + c.replace(/'/g,"\\'") + '\')">' + c + '</div>').join('');
+  CAT = cats[0]; render();
+}
+function setCat(el, c){ document.querySelectorAll('.cat').forEach(x => x.classList.remove('on')); el.classList.add('on'); CAT = c; render(); }
+function render(){
+  $('menu').innerHTML = MENU.filter(m => m.category === CAT).map(m => {
+    const q = CART[m.id] || 0;
+    return '<div class="item"><div><div class="nm">' + m.name + '</div><div class="am">' + (m.nameAm || '') + '</div></div>'
+      + '<div class="pr">' + m.price.toLocaleString() + '<br><span style="font-size:9px;color:#94a3b8">ETB</span></div>'
+      + '<div class="qty">' + (q ? '<button onclick="chg(\'' + m.id + '\',-1)">−</button><b>' + q + '</b><button onclick="chg(\'' + m.id + '\',1)">+</button>'
+      : '<button class="add" onclick="chg(\'' + m.id + '\',1)">➕ Add</button>') + '</div></div>';
+  }).join('');
+  bar();
+}
+function chg(id, d){ CART[id] = (CART[id] || 0) + d; if (CART[id] <= 0) delete CART[id]; render(); }
+function totals(){ let n = 0, t = 0; for (const id in CART){ const m = MENU.find(x => x.id === id); n += CART[id]; t += m.price * CART[id]; } return { n, t }; }
+function bar(){ const { n, t } = totals(); $('cartbar').classList.toggle('on', n > 0); $('cn').textContent = '🛒 ' + n + ' items · ይዘዙ'; $('ct').textContent = t.toLocaleString() + ' ETB'; }
+function openCart(){
+  const { t } = totals();
+  $('modal').classList.add('on');
+  $('sheet').innerHTML = '<h3>🧾 Your order · ትዕዛዝዎ</h3>'
+    + Object.keys(CART).map(id => { const m = MENU.find(x => x.id === id); return '<div class="line"><span>' + CART[id] + '× ' + m.name + '</span><b>' + (m.price * CART[id]).toLocaleString() + '</b></div>'; }).join('')
+    + '<label>Table / ጠረጴዛ</label><input id="ot" value="' + table.replace(/"/g,'') + '" placeholder="Table number">'
+    + '<label>Name (optional) / ስም</label><input id="on" placeholder="Your name">'
+    + '<label>Note (optional) / ማስታወሻ</label><input id="onote" placeholder="No berbere, extra injera…">'
+    + '<div class="tot"><span>Total · ጠቅላላ</span><b>' + t.toLocaleString() + ' ETB</b></div>'
+    + '<button class="obtn" onclick="submitOrder()">🍽️ Send order to kitchen · ወደ ወጥ ቤት ላክ</button>';
+  $('modal').onclick = e => { if (e.target === $('modal')) $('modal').classList.remove('on'); };
+}
+async function submitOrder(){
+  const items = Object.keys(CART).map(id => ({ productId: id, qty: CART[id] }));
+  const r = await fetch('/api/restaurant/' + R.id + '/order', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ table: $('ot').value.trim(), customerName: $('on').value.trim(), note: $('onote').value.trim(), items }) });
+  const d = await r.json();
+  if (!d.ok){ alert('❌ ' + (d.error || 'error')); return; }
+  CART = {}; bar();
+  $('sheet').innerHTML = '<div class="conf"><div class="big">👨‍🍳</div><h3>Order sent! · ትዕዛዝዎ ተልኳል!</h3>'
+    + '<div class="code">' + d.code + '</div>'
+    + '<p>The kitchen received your order.<br>Total: <b>' + d.total.toLocaleString() + ' ETB</b> — pay at your table.<br>ትዕዛዝዎ ደርሷል፤ ክፍያ ጠረጴዛዎ ላይ።</p></div>';
+}
+load();
+</script>
+</body>
+</html>

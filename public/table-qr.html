@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Table QR Stickers — BinaSmart</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#e5e7eb}
+.sheet{width:210mm;min-height:297mm;margin:0 auto;background:#fff;padding:8mm;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:87mm;gap:6mm}
+.stk{border:1.2mm solid #7c2d12;border-radius:8mm;padding:6mm;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 62%,#fff7ed)}
+.hd{display:flex;align-items:center;gap:2mm;font-weight:900;font-size:5mm;color:#7c2d12}
+.hd .am{font-size:3.6mm;color:#c2410c}
+.qr{width:44mm;height:44mm}
+.qr img{width:100%;height:100%}
+.cta{font-weight:900;font-size:4.6mm;color:#1e293b}
+.cta .am{display:block;font-size:4mm;color:#c2410c}
+.tno{position:absolute;top:4mm;right:5mm;background:#7c2d12;color:#fff;border-radius:999px;padding:1.6mm 4mm;font-weight:900;font-size:4.6mm}
+.ft{font-size:2.8mm;color:#94a3b8;font-weight:700}
+.steps{display:flex;gap:3mm;font-size:2.9mm;color:#475569;font-weight:700}
+.steps b{color:#7c2d12}
+@media print{body{background:#fff}.sheet{margin:0}@page{size:A4;margin:0}}
+</style>
+</head>
+<body>
+<div class="sheet" id="sheet"></div>
+<script>
+const P = new URLSearchParams(location.search);
+const r = P.get('r') || 'bina-restaurant';
+const name = P.get('name') || 'Bina Restaurant';
+const nameAm = P.get('am') || 'ቢና ምግብ ቤት';
+const n = Math.min(20, parseInt(P.get('n')) || 10);
+let h = '';
+for (let t = 1; t <= n; t++) {
+  h += '<div class="stk"><div class="tno">🪑 ' + t + '</div>'
+    + '<div class="hd">🍽️ ' + name + ' <span class="am">' + nameAm + '</span></div>'
+    + '<div class="qr"><img src="/static/qr-table-' + r + '-' + t + '.png" alt="Table ' + t + ' QR"></div>'
+    + '<div class="cta">Scan to order<span class="am">ስካን አድርገው ይዘዙ</span></div>'
+    + '<div class="steps"><span><b>1</b> Scan ስካን</span><span><b>2</b> Choose ይምረጡ</span><span><b>3</b> We bring it እናመጣለን</span></div>'
+    + '<div class="ft">No app needed · መተግበሪያ አያስፈልግም · Powered by BinaSmart</div></div>';
+}
+document.getElementById('sheet').innerHTML = h;
+</script>
+</body>
+</html>

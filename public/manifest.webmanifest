@@ -1,0 +1,24 @@
+{
+  "name": "BinaSmart — Ethiopia",
+  "short_name": "BinaSmart",
+  "description": "Ask for any building, shop, hotel or service in Ethiopia and get walked there in 3D — plus verified tenders, news, insurance, rides and more. In Amharic & English.",
+  "lang": "am",
+  "dir": "auto",
+  "start_url": "/?src=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf8f4",
+  "theme_color": "#059669",
+  "categories": ["business", "productivity", "travel"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Tenders · ጨረታ", "short_name": "Tenders", "url": "/tenders" },
+    { "name": "News · ዜና", "short_name": "News", "url": "/news" },
+    { "name": "All buildings", "short_name": "Buildings", "url": "/" }
+  ]
+}

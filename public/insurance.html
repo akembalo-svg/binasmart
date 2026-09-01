@@ -1,0 +1,233 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Insurance · መድን — Compare & Buy in Ethiopia | BinaSmart</title>
+<meta name="description" content="Compare motor, health, property, travel and business insurance from Ethiopia's licensed insurers. Get an instant indicative estimate and buy through a trusted agent — in Amharic & English. የመኪና፣ ጤና፣ ንብረት መድን በቀላሉ።">
+<link rel="canonical" href="https://bina.et/insurance">
+<meta property="og:title" content="Insurance made simple — መድን በቀላሉ | BinaSmart">
+<meta property="og:description" content="Compare Ethiopia's licensed insurers, get an instant estimate, and buy through a trusted agent.">
+<meta property="og:image" content="https://bina.et/static/bina-news.png"><meta property="og:url" content="https://bina.et/insurance">
+<link rel="icon" href="/icon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--em:#0aa88f;--em2:#068f79;--ink:#0f2027;--mut:#5c7080;--bg:#f5f9f8;--card:#fff;--line:#e3ecea;--gold:#e0a400;--red:#e5484d}
+body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+.am{font-family:'Noto Sans Ethiopic','Plus Jakarta Sans',sans-serif}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+/* topbar */
+.top{position:sticky;top:0;z-index:50;background:rgba(245,249,248,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:14px}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.5px}.logo .g{color:var(--em)}
+.badge{font-size:12px;font-weight:700;color:var(--em);background:#e6f7f4;border-radius:999px;padding:4px 12px}
+.wa{margin-left:auto;background:#25D366;color:#fff;font-weight:700;font-size:14px;padding:9px 16px;border-radius:999px}
+/* hero */
+.hero{padding:52px 0 30px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.eyebrow{font-weight:700;color:var(--em);letter-spacing:.5px;font-size:14px}
+.hero h1{font-size:clamp(32px,5vw,50px);font-weight:800;line-height:1.08;letter-spacing:-1px;margin:12px 0}
+.hero p.sub{font-size:18px;color:var(--mut);max-width:520px}
+.trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px}
+.trust span{font-size:13.5px;color:var(--mut);font-weight:600;display:flex;align-items:center;gap:6px}
+.trust b{color:var(--em)}
+/* quote card */
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 20px 50px -20px rgba(15,32,39,.18)}
+.qcard h3{font-size:19px;font-weight:800;margin-bottom:4px}
+.qcard .qsub{font-size:13.5px;color:var(--mut);margin-bottom:18px}
+.seg{display:flex;background:#eef4f3;border-radius:12px;padding:4px;margin-bottom:16px}
+.seg button{flex:1;border:0;background:transparent;padding:10px;border-radius:9px;font-weight:700;font-size:14px;color:var(--mut);cursor:pointer;font-family:inherit}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+label.fl{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:12px 0 6px}
+.inp,select.inp{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15px;font-family:inherit;background:#fff;color:var(--ink)}
+.inp:focus{outline:0;border-color:var(--em)}
+.btn{width:100%;background:var(--em);color:#fff;border:0;border-radius:12px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;margin-top:16px;transition:.15s}
+.btn:hover{background:var(--em2)}
+.est{margin-top:16px;background:#e6f7f4;border:1px solid #bfeae2;border-radius:14px;padding:16px;display:none}
+.est.show{display:block}
+.est .big{font-size:26px;font-weight:800;color:var(--em2)}
+.est .note{font-size:12.5px;color:var(--mut);margin-top:4px}
+/* sections */
+section{padding:44px 0}
+.sec-h{text-align:center;margin-bottom:30px}
+.sec-h h2{font-size:clamp(26px,3.6vw,36px);font-weight:800;letter-spacing:-.5px}
+.sec-h p{color:var(--mut);margin-top:8px;font-size:16px}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;cursor:pointer;transition:.18s}
+.tcard:hover{transform:translateY(-4px);box-shadow:0 16px 34px -18px rgba(15,32,39,.25);border-color:#cfe6e1}
+.tcard .ico{font-size:34px}
+.tcard h4{font-size:18px;font-weight:800;margin:12px 0 4px}
+.tcard .amn{font-size:14px;color:var(--em);font-weight:700}
+.tcard p{font-size:13.5px;color:var(--mut);margin-top:6px}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{text-align:center;padding:10px}
+.step .n{width:46px;height:46px;border-radius:50%;background:var(--em);color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.step h4{font-size:17px;font-weight:800}.step p{font-size:14px;color:var(--mut);margin-top:6px}
+/* insurers */
+.ins-wrap{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px}
+.insurers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ipill{border:1px solid var(--line);border-radius:12px;padding:14px 12px;text-align:center;font-size:13.5px;font-weight:700;color:var(--ink);background:#fafcfb}
+.ipill span{display:block;font-size:11px;color:var(--mut);font-weight:600;margin-top:2px}
+/* form */
+.formcard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;max-width:620px;margin:0 auto;box-shadow:0 20px 50px -24px rgba(15,32,39,.2)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ok{display:none;text-align:center;padding:20px}
+.ok.show{display:block}.ok .ico{font-size:52px}
+.foot{text-align:center;padding:34px 20px;color:var(--mut);font-size:13.5px;border-top:1px solid var(--line);margin-top:20px}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr;gap:26px}.types,.steps,.insurers{grid-template-columns:1fr 1fr}.frow{grid-template-columns:1fr}.badge{display:none}}
+@media(max-width:520px){.insurers{grid-template-columns:1fr 1fr}}
+</style></head><body>
+
+<div class="top"><div class="in">
+  <a href="/" class="logo">Bina<span class="g">Smart</span></a>
+  <span class="badge am">መድን · Insurance</span>
+  <a class="wa" href="https://wa.me/251911244344?text=%E1%88%B0%E1%88%8B%E1%88%9D!%20%E1%88%98%E1%8B%B5%E1%8A%95%20(insurance)%20%E1%8A%A5%E1%8D%88%E1%88%8D%E1%8C%8B%E1%88%88%E1%88%81" target="_blank">💬 WhatsApp</a>
+</div></div>
+
+<div class="hero wrap"><div class="hero-grid">
+  <div>
+    <div class="eyebrow am">🛡️ በኢትዮጵያ ፈቃድ ካላቸው መድን ድርጅቶች</div>
+    <h1>Insurance,<br>made simple.</h1>
+    <p class="sub am">የመኪና፣ የጤና፣ የንብረት፣ የጉዞና የንግድ መድን — በአንድ ቦታ አወዳድሩ፣ ፈጣን ግምት ያግኙ፣ በታማኝ ወኪል ይግዙ። በአማርኛ።</p>
+    <div class="trust">
+      <span>✅ <b>Licensed</b> insurers only</span>
+      <span>💸 <b>Free</b> to compare</span>
+      <span class="am">🗣️ <b>በአማርኛ</b> ድጋፍ</span>
+    </div>
+  </div>
+  <div class="qcard">
+    <h3>🚗 Motor quick estimate</h3>
+    <div class="qsub am">የመኪና መድን ፈጣን ግምት — በሰከንዶች</div>
+    <div class="seg">
+      <button id="c3" class="on" onclick="setCover('tp')">Third-party<br><small class="am" style="font-weight:600;opacity:.7">ግዴታ</small></button>
+      <button id="cc" onclick="setCover('comp')">Comprehensive<br><small class="am" style="font-weight:600;opacity:.7">ሙሉ</small></button>
+    </div>
+    <label class="fl am" id="valLbl" style="display:none">የመኪናው ግምታዊ ዋጋ (birr) · Car value</label>
+    <input class="inp" id="carVal" type="number" placeholder="e.g. 1,500,000" style="display:none">
+    <button class="btn" onclick="estimate()">Get estimate →</button>
+    <div class="est" id="estBox">
+      <div class="big" id="estVal">—</div>
+      <div class="note am" id="estNote"></div>
+      <button class="btn" style="margin-top:12px;background:#0f2027" onclick="goForm('Motor')">Get exact quotes from insurers →</button>
+    </div>
+  </div>
+</div></div>
+
+<section class="wrap">
+  <div class="sec-h"><h2>Choose what to cover</h2><p class="am">ምን ማስከበር ይፈልጋሉ?</p></div>
+  <div class="types">
+    <div class="tcard" onclick="goForm('Motor')"><div class="ico">🚗</div><h4>Motor</h4><div class="amn am">የመኪና መድን</div><p>Mandatory third-party & full comprehensive cover.</p></div>
+    <div class="tcard" onclick="goForm('Health')"><div class="ico">🏥</div><h4>Health</h4><div class="amn am">የጤና መድን</div><p>Medical cover for you, family or staff.</p></div>
+    <div class="tcard" onclick="goForm('Property')"><div class="ico">🏠</div><h4>Property & Fire</h4><div class="amn am">የንብረት መድን</div><p>Home, building, shop, stock & fire cover.</p></div>
+    <div class="tcard" onclick="goForm('Business')"><div class="ico">💼</div><h4>Business</h4><div class="amn am">የንግድ መድን</div><p>Liability, engineering, marine & workmen.</p></div>
+    <div class="tcard" onclick="goForm('Travel')"><div class="ico">✈️</div><h4>Travel</h4><div class="amn am">የጉዞ መድን</div><p>Visa-ready travel & overseas medical cover.</p></div>
+    <div class="tcard" onclick="goForm('Life')"><div class="ico">❤️</div><h4>Life</h4><div class="amn am">የሕይወት መድን</div><p>Life & family protection plans.</p></div>
+  </div>
+  <div style="text-align:center;margin-top:18px;color:var(--mut);font-size:14px">
+    <b style="color:var(--ink)">We also arrange:</b>
+    🚢 Marine & Aviation · 🏗️ Engineering · 🌾 Agriculture & Livestock · 📜 Bonds & Money · ☪️ Takaful (Islamic)
+    &nbsp;— <a href="#request" onclick="document.getElementById('fType').value='Other'" style="color:var(--em);font-weight:700">request any cover →</a>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sec-h"><h2>How it works</h2><p class="am">እንዴት ይሠራል?</p></div>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h4>Tell us what you need</h4><p class="am">ምን መድን እንደሚፈልጉ ይንገሩን — በ30 ሰከንድ።</p></div>
+    <div class="step"><div class="n">2</div><h4>Get an estimate + matches</h4><p class="am">ፈጣን ግምት እናሳይዎታለን፤ ተስማሚ መድን ድርጅቶችን እናዛምዳለን።</p></div>
+    <div class="step"><div class="n">3</div><h4>Buy via a trusted agent</h4><p class="am">በWhatsApp በኩል ከታማኝ ወኪል ፖሊሲዎን ይግዙ።</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="ins-wrap">
+    <div class="sec-h" style="margin-bottom:20px"><h2 style="font-size:26px">Compare Ethiopia's insurers</h2><p class="am">ፈቃድ ካላቸው የኢትዮጵያ መድን ድርጅቶች</p></div>
+    <div class="insurers">
+      <div class="ipill">Ethiopian Insurance Corp.<span>EIC · state</span></div>
+      <div class="ipill">Awash Insurance</div>
+      <div class="ipill">Nyala Insurance</div>
+      <div class="ipill">Nib Insurance</div>
+      <div class="ipill">United Insurance</div>
+      <div class="ipill">Africa Insurance</div>
+      <div class="ipill">Oromia Insurance</div>
+      <div class="ipill">Nile Insurance</div>
+      <div class="ipill">Global Insurance</div>
+      <div class="ipill">Lion Insurance</div>
+      <div class="ipill">Abay Insurance</div>
+      <div class="ipill">Zemen Insurance</div>
+      <div class="ipill">Berhan Insurance</div>
+      <div class="ipill">National Insurance</div>
+      <div class="ipill">Tsehay Insurance</div>
+      <div class="ipill">Bunna Insurance</div>
+      <div class="ipill">Lucy Insurance</div>
+      <div class="ipill">Ethio-Life & General</div>
+      <div class="ipill" style="background:#e6f7f4;border-color:#bfeae2;color:var(--em2)">+ Takaful / Islamic</div>
+      <div class="ipill" style="background:#fff8e6;border-color:#f0e3b8;color:#8a6d00">Regulated by NBE</div>
+    </div>
+    <p style="text-align:center;font-size:12.5px;color:var(--mut);margin-top:16px" class="am">ሁሉም በኢትዮጵያ ብሔራዊ ባንክ ፈቃድ ያላቸው ናቸው። BinaSmart ገለልተኛ ማወዳደሪያ ነው።</p>
+  </div>
+</section>
+
+<section class="wrap" id="request">
+  <div class="sec-h"><h2>Get your quote</h2><p class="am">ግምትዎን ያግኙ — በነጻ</p></div>
+  <div class="formcard">
+    <div id="formInner">
+    <div class="frow">
+      <div><label class="fl">Insurance type · <span class="am">የመድን ዓይነት</span></label>
+        <select class="inp" id="fType"><option>Motor</option><option>Health</option><option>Property</option><option>Business</option><option>Travel</option><option>Life</option><option>Other</option></select></div>
+      <div><label class="fl">City · <span class="am">ከተማ</span></label><input class="inp" id="fCity" placeholder="Addis Ababa"></div>
+    </div>
+    <div class="frow">
+      <div><label class="fl">Full name · <span class="am">ሙሉ ስም</span></label><input class="inp" id="fName" placeholder="Your name"></div>
+      <div><label class="fl">Phone (WhatsApp) · <span class="am">ስልክ</span></label><input class="inp" id="fPhone" placeholder="09..."></div>
+    </div>
+    <label class="fl">Details · <span class="am">ዝርዝር</span> <span style="font-weight:600;color:var(--mut)">(vehicle, value, cover, etc.)</span></label>
+    <textarea class="inp" id="fNote" rows="3" placeholder="e.g. Comprehensive cover for a 2019 Toyota, value ~1.5M birr"></textarea>
+    <button class="btn" onclick="submitLead()">Request my quote →</button>
+    <p style="text-align:center;font-size:12px;color:var(--mut);margin-top:12px" class="am">ግምቶች አመላካች ናቸው። የመጨረሻው ዋጋ ከመድን ድርጅቱ ይረጋገጣል።</p>
+    </div>
+    <div class="ok" id="okBox"><div class="ico">✅</div><h3 style="margin:10px 0">Request received!</h3><p class="am" id="okMsg">በቅርቡ በWhatsApp እንደውልዎታለን።</p></div>
+  </div>
+</section>
+
+<section class="wrap"><div class="sec-h"><h2 style="font-size:24px">Insurance guides</h2><p class="am">የመድን መመሪያዎች</p></div>
+<div class="types" style="grid-template-columns:1fr 1fr">
+  <a class="tcard" href="/news/car-insurance-ethiopia-guide" style="text-decoration:none;color:inherit"><div class="ico">🚗</div><h4>Car insurance in Ethiopia</h4><div class="amn am">የመኪና መድን መመሪያ</div><p>Types, prices, the 17 insurers & how to buy.</p></a>
+  <a class="tcard" href="/news/health-insurance-ethiopia-guide" style="text-decoration:none;color:inherit"><div class="ico">🏥</div><h4>Health insurance in Ethiopia</h4><div class="amn am">የጤና መድን መመሪያ</div><p>Private, employer & CBHI options explained.</p></a>
+</div></section>
+<div style="text-align:center;padding:8px 20px 0"><a href="/for-insurers" style="font-size:13px;color:var(--em);font-weight:700">🤝 Are you an insurer? Partner with BinaSmart →</a></div>
+<div class="foot">
+  <div class="am">BinaSmart · bina.et · ሁሉንም በአንድ መድረክ</div>
+  <div style="margin-top:6px">BinaSmart is an independent comparison service. Estimates are indicative; final premiums are confirmed by the licensed insurer.</div>
+</div>
+
+<script>
+var cover='tp';
+function setCover(c){cover=c;document.getElementById('c3').classList.toggle('on',c==='tp');document.getElementById('cc').classList.toggle('on',c==='comp');
+  var show=(c==='comp');document.getElementById('valLbl').style.display=show?'block':'none';document.getElementById('carVal').style.display=show?'block':'none';document.getElementById('estBox').classList.remove('show');}
+function fmt(n){return n.toLocaleString('en-US');}
+function estimate(){
+  var box=document.getElementById('estBox'),v=document.getElementById('estVal'),note=document.getElementById('estNote');
+  if(cover==='tp'){v.textContent='Regulated flat rate';note.textContent='የግዴታ መድን ብሔራዊ ባንክ በሚወስነው ተመን ነው — ትክክለኛውን ዋጋ እናረጋግጥልዎታለን።';}
+  else{var val=parseFloat(document.getElementById('carVal').value);if(!val||val<10000){v.textContent='Enter car value ↑';note.textContent='';box.classList.add('show');return;}
+    var lo=Math.round(val*0.03/100)*100, hi=Math.round(val*0.04/100)*100;
+    v.textContent='≈ '+fmt(lo)+' – '+fmt(hi)+' birr / yr';note.textContent='አመላካች ግምት (የመኪናው ~3–4%)። የመጨረሻ ዋጋ ከመድን ድርጅቱ ይረጋገጣል።';}
+  box.classList.add('show');
+}
+function goForm(t){document.getElementById('fType').value=t;
+  if(cover==='comp'&&t==='Motor'){var val=document.getElementById('carVal').value;if(val)document.getElementById('fNote').value='Comprehensive motor cover, car value ~'+val+' birr';}
+  else if(cover==='tp'&&t==='Motor'){document.getElementById('fNote').value='Third-party motor cover';}
+  document.getElementById('request').scrollIntoView({behavior:'smooth'});setTimeout(function(){document.getElementById('fName').focus();},600);}
+function submitLead(){
+  var name=document.getElementById('fName').value.trim(),phone=document.getElementById('fPhone').value.trim();
+  if(!name||!phone){alert('Please enter your name and phone / ስም እና ስልክ ያስፈልጋል');return;}
+  var body={insType:document.getElementById('fType').value,name:name,phone:phone,city:document.getElementById('fCity').value.trim(),
+    coverType:cover==='comp'?'Comprehensive':'Third-party',note:document.getElementById('fNote').value.trim(),
+    vehicleValue:document.getElementById('carVal').value||''};
+  fetch('/api/insurance-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+   .then(function(r){return r.json()}).then(function(d){
+     document.getElementById('formInner').style.display='none';document.getElementById('okBox').classList.add('show');
+   }).catch(function(){alert('Something went wrong — please WhatsApp us.')});
+}
+</script></body></html>

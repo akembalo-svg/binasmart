@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Sign in · መግቢያ — BinaSmart</title>
+<link rel="icon" href="/icon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--em:#0aa88f;--em2:#068f79;--ink:#0f2027;--mut:#5c7080;--line:#e3ecea;--err:#e5484d}
+body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif;color:var(--ink);background:#eef4f3;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
+.am{font-family:'Noto Sans Ethiopic',sans-serif}
+.shell{display:grid;grid-template-columns:1fr 1fr;max-width:900px;width:100%;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(15,32,39,.35)}
+.brandp{background:radial-gradient(600px 300px at 20% 10%,rgba(118,185,0,.18),transparent 60%),linear-gradient(150deg,#0f2027,#0a3a34);color:#fff;padding:44px 38px;display:flex;flex-direction:column}
+.brandp .logo{font-size:26px;font-weight:800;letter-spacing:-.5px}.brandp .logo .g{color:#5fe3cf}
+.brandp .tag{color:#a9c4bf;font-size:14px;margin-top:6px}
+.brandp h2{font-size:26px;font-weight:800;line-height:1.2;margin:auto 0 18px}
+.feat{display:flex;flex-direction:column;gap:12px}.feat .f{display:flex;gap:11px;align-items:flex-start;font-size:14px;color:#dceeeb}.feat .f .i{font-size:18px}
+.formp{padding:44px 40px;display:flex;flex-direction:column;justify-content:center}
+.formp h1{font-size:24px;font-weight:800}.formp .sub{color:var(--mut);font-size:14px;margin:4px 0 24px}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--mut);margin:12px 0 6px}
+input{width:100%;padding:14px 15px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;font-family:inherit;font-weight:600;color:var(--ink);background:#fff}
+input:focus{outline:0;border-color:var(--em);box-shadow:0 0 0 3px rgba(10,168,143,.12)}
+button{width:100%;margin-top:20px;padding:15px;border:0;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;background:var(--em);color:#fff;transition:.15s}
+button:hover{background:var(--em2)}button:disabled{opacity:.6;cursor:wait}
+.err{display:none;background:#fef2f2;border:1.5px solid #fecaca;color:var(--err);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;margin-top:14px}
+.foot{color:var(--mut);font-size:12.5px;margin-top:22px;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
+.foot a{color:var(--em);font-weight:700;text-decoration:none}
+.back{display:inline-block;margin-top:14px;color:var(--mut);font-size:13px;text-decoration:none}
+@media(max-width:760px){.shell{grid-template-columns:1fr;max-width:440px}.brandp{padding:30px}.brandp h2{font-size:21px;margin:18px 0 16px}.formp{padding:32px 28px}}
+</style></head><body>
+<div class="shell">
+  <div class="brandp">
+    <div class="logo">Bina<span class="g">ዜና</span></div>
+    <div class="tag am">ሁሉንም በአንድ መድረክ · All-in-one platform</div>
+    <h2>Welcome back.</h2>
+    <div class="feat">
+      <div class="f"><span class="i">🏢</span><span>Your buildings, invoices, tenants & more — one dashboard.</span></div>
+      <div class="f"><span class="i">🔒</span><span>Secure sign-in · your data stays private.</span></div>
+      <div class="f am"><span class="i">🗣️</span><span>በአማርኛ ድጋፍ ይገኛል።</span></div>
+    </div>
+  </div>
+  <div class="formp">
+    <h1>Sign in</h1>
+    <div class="sub am">የባለቤት መግቢያ — በኢሜይልዎ ይግቡ</div>
+    <label for="email">Email · <span class="am">ኢሜይል</span></label>
+    <input id="email" type="email" autocomplete="email" inputmode="email" placeholder="owner@example.com">
+    <label for="password">Password · <span class="am">የይለፍ ቃል</span></label>
+    <input id="password" type="password" autocomplete="current-password" placeholder="••••••••">
+    <div class="err" id="err"></div>
+    <button id="go" onclick="signIn()">Sign in →</button>
+    <div class="foot am">መለያ የለዎትም? የBinaSmart አስተዳዳሪን ያነጋግሩ።<br>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif">No account? Contact your BinaSmart administrator, or</span>
+      <a href="/owner">sign in with phone →</a></div>
+    <a class="back" href="/">← BinaSmart</a>
+  </div>
+</div>
+<script>
+const PREFIX = location.pathname.replace(/\/login\/?$/,'');
+const err = document.getElementById('err');
+const btn = document.getElementById('go');
+async function signIn(){
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  err.style.display = 'none';
+  if (!email || !password){ return showErr('Enter email and password · ኢሜይል እና የይለፍ ቃል ያስገቡ'); }
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  try{
+    const r = await fetch('/api/auth/sign-in/email', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, password }) });
+    if (!r.ok){ showErr('Wrong email or password · ኢሜይል ወይም የይለፍ ቃል ትክክል አይደለም'); btn.disabled=false; btn.textContent='Sign in →'; return; }
+    const s = await (await fetch('/api/auth/get-session')).json();
+    const slug = s && s.user && s.user.buildingSlug;
+    if (slug){ location.href = PREFIX + '/owner/' + slug; } else { location.href = PREFIX + '/owner/darulle'; }
+  }catch(e){ showErr('Connection failed. Try again · ግንኙነት አልተሳካም'); btn.disabled=false; btn.textContent='Sign in →'; }
+}
+function showErr(m){ err.textContent = m; err.style.display = 'block'; }
+document.addEventListener('keydown', e => { if (e.key === 'Enter') signIn(); });
+document.getElementById('email').focus();
+</script></body></html>

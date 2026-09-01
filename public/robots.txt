@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /owner/
+Disallow: /api/
+Sitemap: https://bina.et/sitemap.xml

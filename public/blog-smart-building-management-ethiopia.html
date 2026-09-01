@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Building Management in Ethiopia: QR & 3D Guide | BinaSmart</title>
+<meta name="description" content="How QR building directories, 3D voice navigation and digital rent collection work in Ethiopia — a real case study of JJ Darule Building, Addis Ababa (G+10, 71 tenants). Learn how to digitize your building.">
+<link rel="canonical" href="https://bina.et/blog/smart-building-management-ethiopia">
+<meta property="og:title" content="Smart Building Management in Ethiopia — QR Directories, 3D Navigation & the JJ Darule Case Study">
+<meta property="og:description" content="A real Addis Ababa G+10 building with 71 tenants runs on QR directories, 3D voice navigation and WhatsApp rent invoices. Here is how it works.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bina.et/blog/smart-building-management-ethiopia">
+<link rel="icon" href="/icon-32.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Smart Building Management in Ethiopia: How QR Directories and 3D Navigation Work (JJ Darule Case Study)","description":"How QR building directories, 3D voice navigation and digital rent collection work in Ethiopia, with a real case study of JJ Darule Building in Addis Ababa.","inLanguage":["en","am"],"author":{"@type":"Organization","name":"BinaSmart Ethiopia","url":"https://bina.et"},"publisher":{"@type":"Organization","name":"BinaSmart Ethiopia","url":"https://bina.et"},"datePublished":"2026-07-16","dateModified":"2026-07-16","mainEntityOfPage":"https://bina.et/blog/smart-building-management-ethiopia","about":[{"@type":"Thing","name":"Building management software Ethiopia"},{"@type":"Thing","name":"QR building directory"},{"@type":"Place","name":"Addis Ababa, Ethiopia"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is BinaSmart Ethiopia?","acceptedAnswer":{"@type":"Answer","text":"BinaSmart is a QR-powered smart building management platform made for Ethiopia. Every building gets a public digital directory with an interactive 3D view and voice-guided navigation, and the owner gets a management dashboard for rent invoicing, Ethiopian VAT accounting, sub-metered utility billing, maintenance work orders and automatic tenant notifications via WhatsApp and Telegram, in Amharic and English."}},
+{"@type":"Question","name":"Is BinaSmart Ethiopia related to Bina Smart Business (Romania)?","acceptedAnswer":{"@type":"Answer","text":"No. BinaSmart Ethiopia (bina.et) is an independent building-management platform for the Ethiopian market. Bina Smart Business is an unrelated Romanian retail-management ERP."}},
+{"@type":"Question","name":"What is a QR building directory?","acceptedAnswer":{"@type":"Answer","text":"A poster with a QR code at the building entrance. Visitors scan it with any phone — no app needed — and instantly see every shop and office in the building, which are open right now, and get voice-guided 3D walking directions in Amharic to the exact floor and unit they need."}},
+{"@type":"Question","name":"Does BinaSmart work in Amharic?","acceptedAnswer":{"@type":"Answer","text":"Yes. Shop names, invoices, e-receipts, tenant notifications and the 3D navigation voice guidance are all available in Amharic (አማርኛ) alongside English."}},
+{"@type":"Question","name":"How do tenants receive invoices and receipts?","acceptedAnswer":{"@type":"Answer","text":"The owner presses Send on any invoice and the tenant receives it on WhatsApp or Telegram under the building's own name — amount, due date, the building's bank accounts and a payment reference code. When the owner marks it paid, the tenant automatically receives a bilingual e-receipt."}},
+{"@type":"Question","name":"Does BinaSmart handle Ethiopian VAT?","acceptedAnswer":{"@type":"Answer","text":"Yes. The accounting module follows Ethiopia's VAT Proclamation 1341/2024: 15% VAT on rent, output and input VAT tracking, a printable monthly VAT return report, expense records and staff payroll — designed for the monthly filing deadline at the end of the following month."}}]}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#faf8f4;color:#1e293b;line-height:1.75;font-size:16.5px}
+.top{background:linear-gradient(135deg,#065f46,#059669);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.top a{color:#fff;text-decoration:none;font-weight:900;font-size:17px}
+.top .gold{color:#fcd34d}
+main{max-width:760px;margin:0 auto;padding:36px 22px 60px}
+.kicker{color:#059669;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+h1{font-size:31px;font-weight:900;line-height:1.25;letter-spacing:-.5px;margin:10px 0 14px}
+.meta{color:#94a3b8;font-size:13px;margin-bottom:26px}
+h2{font-size:23px;font-weight:900;margin:38px 0 12px;letter-spacing:-.3px}
+h3{font-size:17.5px;font-weight:800;margin:22px 0 8px}
+p{margin:0 0 16px}
+ul,ol{margin:0 0 16px 22px}
+li{margin-bottom:7px}
+a{color:#047857;font-weight:700}
+.hero{width:100%;border-radius:18px;margin:6px 0 26px;box-shadow:0 18px 40px -18px rgba(15,23,42,.35)}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 24px}
+.stat{background:#fff;border:1.5px solid #e7e2d8;border-radius:16px;padding:14px 10px;text-align:center}
+.stat b{display:block;font-size:21px;color:#059669;font-weight:900}
+.stat span{font-size:11.5px;color:#64748b;font-weight:700}
+.callout{background:#ecfdf5;border-left:4px solid #059669;border-radius:0 14px 14px 0;padding:14px 16px;margin:0 0 18px;font-size:15px}
+.warn{background:#fffbeb;border-left-color:#d4a017}
+table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:14px;background:#fff;border-radius:14px;overflow:hidden}
+th{background:#0f172a;color:#fff;text-align:left;padding:10px 12px;font-size:12.5px}
+td{padding:10px 12px;border-bottom:1px solid #f1ede4;vertical-align:top}
+.am-section{background:#fff;border:1.5px solid #e7e2d8;border-radius:20px;padding:24px;margin:34px 0}
+.faq h3{color:#065f46}
+.cta{background:linear-gradient(135deg,#065f46,#059669);color:#fff;border-radius:20px;padding:28px 24px;text-align:center;margin-top:40px}
+.cta h2{margin-top:0;color:#fff}
+.cta a.btn{display:inline-block;background:#fcd34d;color:#0f172a;font-weight:900;padding:12px 28px;border-radius:999px;text-decoration:none;margin-top:10px}
+footer{text-align:center;color:#94a3b8;font-size:12px;padding:26px}
+@media(max-width:520px){h1{font-size:25px}h2{font-size:20px}.stat b{font-size:17px}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/">🏢 Bina<span class="gold">Smart</span></a><span style="opacity:.7;font-size:12px">· Ethiopia</span></div>
+<main>
+<div class="kicker">Guide · Case Study · Addis Ababa</div>
+<h1>Smart Building Management in Ethiopia: How QR Directories and 3D Navigation Work — the JJ Darule Case Study</h1>
+<div class="meta">By BinaSmart Ethiopia · Published 16 July 2026 · English + አማርኛ</div>
+
+<img class="hero" src="/static/photos/darulle/hero.jpg" alt="JJ Darule Building (ጄጄ ዳሩሌ ህንፃ) — G+10 commercial building in Addis Ababa, Ethiopia, managed on BinaSmart" onerror="this.style.display='none'">
+
+<p>Walk into almost any commercial building in Addis Ababa and you will meet the same two problems. Visitors wander the corridors asking guards where a shop is. And somewhere upstairs, the owner is managing dozens of tenancies — renewals, rent, penalties, electricity bills — in a paper ledger or a fragile Excel file.</p>
+<p>This article explains a different way to run a building, using a real one: <strong>JJ Darule Building (ጄጄ ዳሩሌ ህንፃ)</strong>, a G+10 commercial building in Addis Ababa with 71 active tenants, which now runs on <strong>BinaSmart</strong> — a QR-powered smart building management platform built for Ethiopia.</p>
+
+<div class="stat-row">
+  <div class="stat"><b>G+10</b><span>floors</span></div>
+  <div class="stat"><b>71</b><span>active tenants</span></div>
+  <div class="stat"><b>2.84M ETB</b><span>monthly rent roll digitized</span></div>
+</div>
+
+<h2>Why building management in Ethiopia is still mostly manual</h2>
+<p>Ethiopia's commercial real estate has grown far faster than the tools used to manage it. In most buildings — even new towers — the daily reality looks like this:</p>
+<ul>
+<li><strong>Paper tenant registers.</strong> One notebook (or one Excel file on one laptop) holds every contract, deposit and phone number.</li>
+<li><strong>Missed renewals.</strong> Nobody notices a lease expiring until the tenant mentions it — or leaves.</li>
+<li><strong>Rent chasing by phone call.</strong> Every month the owner or a staff member calls tenants one by one.</li>
+<li><strong>One electricity meter, many tenants.</strong> Utility costs get split by argument instead of by measurement.</li>
+<li><strong>Lost visitors.</strong> A customer looking for an office on floor 7 asks three people before finding it — or gives up, which costs the tenant business.</li>
+</ul>
+<p>Existing property software in Ethiopia mostly addresses the back office: rent ledgers and lease records. What has been missing is the <em>front door</em> — the building's public face — and communication that reaches tenants where they actually are: <strong>WhatsApp and Telegram, in Amharic</strong>.</p>
+
+<h2>What is a QR building directory?</h2>
+<p>A QR building directory turns the building entrance into a digital reception desk. It works like this:</p>
+<ol>
+<li>An A4 poster with a QR code hangs at the entrance.</li>
+<li>A visitor scans it with any phone camera. <strong>No app to install.</strong></li>
+<li>The phone opens the building's live page: every shop and office, floor by floor, with photos, phone numbers, opening hours — and a green "open now" badge computed on Addis Ababa time.</li>
+<li>The visitor taps one button to call the shop, chat on WhatsApp or Telegram, or be <em>walked</em> to it in 3D.</li>
+</ol>
+<p>You can try the real one now: the <a href="/b/darulle">JJ Darule Building live directory</a> is public, in Amharic and English, and updates the moment the owner's records change — because it is generated from the same database that runs the owner's dashboard, not a separate website that goes stale.</p>
+
+<h2>3D navigation with Amharic voice guidance</h2>
+<p>The part visitors remember is the <a href="/nav">3D walking navigation</a>. Choose any of the 71 tenants and a small guide figure walks you through a 3D model of the actual building — in through the entrance, to the elevators and stairs where they really are, up to the correct floor, to the unit door — while a voice speaks each step in Amharic: which way to turn, which floor to press, where the shop is.</p>
+<p>For a G+10 building this changes daily life in small but constant ways: deliveries find offices, first-time customers don't give up, and the guard stops being a human directory.</p>
+<div class="callout">💡 <strong>Why it matters for tenants:</strong> a shop on floor 8 pays the same rent as street level but gets a fraction of the walk-in traffic. Navigation that takes visitors straight to upper floors makes upper-floor space more valuable — which is ultimately the owner's revenue.</div>
+
+<h2>Case study: digitizing JJ Darule Building</h2>
+<p>JJ Darule (JJ Darule Construction PLC) is a G+10 commercial building in Addis Ababa near Semen Hotel (ሰሜን ሆቴል). In July 2026 its complete tenant register — 71 active tenancies representing a monthly rent roll of <strong>2,837,391 birr</strong> — was moved onto BinaSmart. What the owner runs today:</p>
+<table>
+<tr><th>Before</th><th>Now on BinaSmart</th></tr>
+<tr><td>Paper register + memory</td><td>Live dashboard: every unit, contract, deposit and phone number, searchable in Amharic or English</td></tr>
+<tr><td>Renewals noticed late</td><td>Automatic alerts 90 days before any contract expires, sent to tenant and owner</td></tr>
+<tr><td>Rent chased by phone</td><td>One tap sends the invoice to the tenant's WhatsApp/Telegram — with the building's bank accounts (CBE, Oromia, Wegagen) and a payment reference code</td></tr>
+<tr><td>Payment status in someone's head</td><td>Color payment board: green paid, amber pending, red overdue — for all 71 units at a glance</td></tr>
+<tr><td>Receipts handwritten</td><td>Automatic bilingual e-receipt to the tenant the moment a payment is recorded</td></tr>
+<tr><td>Utilities split by argument</td><td>Per-unit electricity and water sub-metering with automatic bills and leak flags</td></tr>
+<tr><td>Repairs requested verbally</td><td>Tenants report issues from the building page; owner tracks digital work orders and each asset's repair history</td></tr>
+</table>
+<p>Visitors, meanwhile, get the public side: the entrance QR poster, the live directory and the voice-guided 3D walk. Two audiences, one system, one database.</p>
+
+<h2>Accounting built for Ethiopian rules, not imported ones</h2>
+<p>Generic international property software does not know Ethiopian tax law. BinaSmart's accounting module is built around it:</p>
+<ul>
+<li><strong>VAT per Proclamation 1341/2024:</strong> 15% VAT on commercial rent, output-VAT and input-VAT tracking, and a printable monthly VAT return — matched to the filing deadline at the end of the following month.</li>
+<li><strong>TIN and bank details on every invoice</strong>, under the building's own name.</li>
+<li><strong>Staff payroll:</strong> guards, cleaners and facility staff paid monthly with one idempotent action (salaries are VAT-exempt and recorded as expenses).</li>
+<li><strong>Audit trail:</strong> every payment, reversal and change is logged — nothing silently disappears, which is exactly what a tax audit wants to see.</li>
+<li><strong>Late-payment penalties</strong> applied automatically per the contract, only after the owner switches them on.</li>
+</ul>
+
+<h2>How to put your building on BinaSmart</h2>
+<ol>
+<li><strong>Send your tenant register</strong> — even a paper photo or an Excel file works. It becomes your live dashboard, usually within a day.</li>
+<li><strong>Hang the QR poster</strong> we print for your entrance.</li>
+<li><strong>Log in with your phone number</strong> and manage everything — invoices, renewals, meters, staff, VAT — from your phone in Amharic or English.</li>
+</ol>
+
+<div class="am-section">
+<h2 style="margin-top:0">ብልህ የህንፃ አስተዳደር በኢትዮጵያ — ማጠቃለያ (አማርኛ)</h2>
+<p><strong>ቢናስማርት (BinaSmart)</strong> ለኢትዮጵያ የተሰራ በ QR ኮድ የሚሰራ ዘመናዊ የህንፃ አስተዳደር ስርዓት ነው። የ<strong>ጄጄ ዳሩሌ ህንፃ</strong> (አዲስ አበባ፣ ከሰሜን ሆቴል ተሻግሮ፣ G+10፣ 71 ተከራዮች) ሙሉ በሙሉ በዚህ ስርዓት ይተዳደራል።</p>
+<ul>
+<li><strong>የመግቢያ QR ፖስተር</strong> — ጎብኚ በስልኩ ስካን ያደርጋል፤ የህንፃውን ሱቆች በሙሉ ከፎቅ ከፎቅ ያያል፤ መተግበሪያ መጫን አያስፈልግም።</li>
+<li><strong>የ3D ድምፅ መመሪያ</strong> — ወደሚፈልጉት ሱቅ ድረስ በአማርኛ ድምፅ እየመራ በ3D ያስጉዛል።</li>
+<li><strong>የኪራይ ክፍያ</strong> — ባለቤቱ ኢንቮይስ በአንድ ጠቅታ ወደ ተከራዩ ዋትስአፕ/ቴሌግራም ይልካል፤ የባንክ ሂሳብ ቁጥሮችና የክፍያ መለያ ኮድ አብሮ ይላካል፤ ሲከፈል ደረሰኝ በራስ-ሰር ይደርሳል።</li>
+<li><strong>የክፍያ ሰሌዳ</strong> — የከፈለ አረንጓዴ፣ በሂደት ያለ ቢጫ፣ ያለፈበት ቀይ — 71ዱም ክፍሎች በአንድ እይታ።</li>
+<li><strong>የውል ማሳሰቢያ</strong> — ውል ከማለቁ ከ90 ቀናት በፊት በራስ-ሰር ማስታወቂያ።</li>
+<li><strong>ቫት (VAT) ሂሳብ</strong> — በአዋጅ 1341/2024 መሠረት 15% ቫት፣ ወርሃዊ የቫት ሪፖርት፣ የሰራተኞች ደመወዝ እና የወጪ መዝገብ።</li>
+<li><strong>ቆጣሪ ንባብ</strong> — የመብራትና የውሃ ንባብ በክፍል፣ ራስ-ሰር ክፍያ ሂሳብ፣ የፍሳሽ ማስጠንቀቂያ።</li>
+</ul>
+<p>ህንፃዎን በቢናስማርት ለማስተዳደር፦ የተከራዮች መዝገብዎን ይላኩ (ወረቀትም ቢሆን ፎቶ በቂ ነው)፤ በአንድ ቀን ውስጥ የእርስዎ ዳሽቦርድ ዝግጁ ይሆናል።</p>
+</div>
+
+<div class="faq">
+<h2>Frequently asked questions</h2>
+<h3>What is BinaSmart Ethiopia?</h3>
+<p>A QR-powered smart building management platform made for Ethiopia: a public digital directory with 3D voice navigation for visitors, and a full management dashboard (rent, VAT, payroll, sub-metering, maintenance, WhatsApp/Telegram notifications) for building owners — in Amharic and English.</p>
+<h3>Is BinaSmart Ethiopia related to "Bina Smart Business" (Romania)?</h3>
+<p>No. BinaSmart Ethiopia (bina.et) is an independent platform built for the Ethiopian market. Bina Smart Business is an unrelated Romanian retail-management ERP.</p>
+<h3>Do visitors need to install an app?</h3>
+<p>No. Scanning the entrance QR opens the directory in the phone's browser instantly — including the 3D navigation and Amharic voice guidance.</p>
+<h3>How do tenants receive invoices?</h3>
+<p>On WhatsApp or Telegram, sent under the building's own name: amount, due date, the building's bank accounts and a payment reference code. A bilingual e-receipt follows automatically when the payment is recorded.</p>
+<h3>Does it handle Ethiopian VAT?</h3>
+<p>Yes — 15% VAT per Proclamation 1341/2024, output/input VAT tracking, a printable monthly VAT return, expenses and staff payroll, with a full audit trail.</p>
+</div>
+
+<div class="cta">
+<h2>See it live, then digitize your building</h2>
+<p>Open the real JJ Darule directory and walk the building in 3D — then put your own building on the same system.</p>
+<a class="btn" href="/b/darulle">Open the live demo →</a>
+<p style="margin-top:14px;font-size:13.5px;opacity:.9">WhatsApp: +251 911 244 344 · Amharic & English</p>
+</div>
+</main>
+<footer>© 2026 BinaSmart Ethiopia · <a href="/" style="color:#94a3b8">bina.et</a></footer>
+</body>
+</html>

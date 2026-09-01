@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Flight Poster — Hanud Travel</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#e5e7eb}
+.a4{width:210mm;height:297mm;margin:0 auto;background:linear-gradient(160deg,#1e1b4b 0%,#312e81 45%,#4f46e5 100%);color:#fff;display:flex;flex-direction:column;align-items:center;padding:16mm 14mm;position:relative;overflow:hidden}
+.a4::before{content:'✈️';position:absolute;font-size:120mm;opacity:.07;right:-30mm;bottom:-20mm;transform:rotate(-18deg)}
+.a4::after{content:'';position:absolute;top:0;left:0;right:0;height:3mm;background:linear-gradient(90deg,#fcd34d,#d4a017)}
+.kick{font-size:5mm;font-weight:900;letter-spacing:2mm;color:#fcd34d;text-transform:uppercase}
+h1{font-size:13mm;font-weight:900;text-align:center;line-height:1.15;margin-top:4mm}
+.am{font-size:7.5mm;color:#c7d2fe;font-weight:800;margin-top:2mm;text-align:center}
+.office{margin-top:5mm;background:rgba(255,255,255,.14);border:.6mm solid rgba(255,255,255,.35);border-radius:99mm;padding:3mm 10mm;font-size:6mm;font-weight:900}
+.qrbox{margin-top:9mm;background:#fff;border-radius:10mm;padding:8mm;box-shadow:0 8mm 20mm rgba(0,0,0,.35)}
+.qrbox img{width:80mm;height:80mm;display:block}
+.scan{margin-top:7mm;font-size:9mm;font-weight:900;text-align:center}
+.scanam{font-size:6.5mm;color:#fcd34d;font-weight:900;margin-top:1mm;text-align:center}
+.steps{display:flex;gap:5mm;margin-top:9mm}
+.st{background:rgba(255,255,255,.12);border:.5mm solid rgba(255,255,255,.28);border-radius:6mm;padding:5mm 6mm;text-align:center;width:52mm}
+.st .n{font-size:8mm;font-weight:900;color:#fcd34d}
+.st b{display:block;font-size:4.4mm;margin-top:1mm}
+.st span{display:block;font-size:3.6mm;color:#c7d2fe;font-weight:700;margin-top:.5mm}
+.dest{margin-top:8mm;font-size:4.2mm;font-weight:800;color:#c7d2fe;text-align:center;line-height:1.7}
+.foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;width:100%;font-size:4mm;font-weight:800;color:#c7d2fe}
+.foot b{color:#fff}
+@media print{body{background:#fff}.a4{margin:0}@page{size:A4;margin:0}}
+</style>
+</head>
+<body>
+<div class="a4">
+  <div class="kick">✈️ Flight Tickets · የበረራ ትኬት</div>
+  <h1>Hanud Travel Agency</h1>
+  <div class="am">ሀኑድ የጉዞ ወኪል ኃ/የተ/የግ/ማህበር</div>
+  <div class="office">🏢 JJ Darule Building · Office 708 · 7ኛ ፎቅ</div>
+  <div class="qrbox"><img src="/static/qr-flights-hanud.png" alt="Scan for flight tickets"></div>
+  <div class="scan">SCAN — Get your fare on WhatsApp</div>
+  <div class="scanam">ስካን ያድርጉ — ዋጋዎን በዋትስአፕ ይቀበሉ</div>
+  <div class="steps">
+    <div class="st"><div class="n">1</div><b>Send your route</b><span>መስመርዎን ይላኩ</span></div>
+    <div class="st"><div class="n">2</div><b>We price it live</b><span>በአየር መንገድ ሲስተም</span></div>
+    <div class="st"><div class="n">3</div><b>Fare on WhatsApp</b><span>ዋጋ በዋትስአፕ</span></div>
+  </div>
+  <div class="dest">🌍 Dubai · Jeddah · Riyadh · Doha · Istanbul · Nairobi · London · Washington · Guangzhou<br>+ all Ethiopian domestic routes · የሀገር ውስጥ በረራዎች</div>
+  <div class="foot"><span>☎️ <b>+251 910 921 274</b></span><span>bina.et/flights/hanud</span><span>Powered by <b>BinaSmart</b></span></div>
+</div>
+</body>
+</html>
