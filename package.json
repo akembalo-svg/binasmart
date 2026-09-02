@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "dependencies": {
     "@fastify/cors": "^11.3.0",
     "@fastify/static": "^10.1.0",
