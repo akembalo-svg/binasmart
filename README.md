@@ -111,4 +111,8 @@ Production runs behind nginx, served by the Node process on `127.0.0.1:4210` and
 
 ## License
 
-Proprietary — © BinaSmart. All rights reserved.
+Proprietary — © 2026 BinaSmart. All rights reserved. See [LICENSE](LICENSE).
+
+The source is published for transparency and reference only; no permission is
+granted to use, copy, modify, or redistribute it without written permission
+from BinaSmart. For licensing inquiries: [bina.et](https://bina.et) · info@bina.et
