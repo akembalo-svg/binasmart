@@ -990,6 +990,7 @@ model Rider {
   rating     Float    @default(5)
   rides      Ride[]
   createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Driver {
@@ -1001,7 +1002,7 @@ model Driver {
   tier            String
   vehicleMake     String?
   vehicleColour   String?
-  plate           String
+  plate           String    // not unique: a vehicle may be reassigned between drivers
   licenceUrl      String?
   registrationUrl String?
   status          String    @default("pending") // pending | approved | suspended
@@ -1011,9 +1012,10 @@ model Driver {
   lastSeenAt      DateTime?
   rating          Float     @default(5)
   ridesCount      Int       @default(0)
-  commissionPct   Float?
+  commissionPct   Float?    // percent (15 = 15%); overrides RideSetting.commissionPct. Phase 2 only — driverTakeEtb is fixed at request time, before assignment.
   rides           Ride[]
   createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 }
 
 model Ride {
@@ -1024,8 +1026,8 @@ model Ride {
   driverId      String?
   driver        Driver?   @relation(fields: [driverId], references: [id])
   tier          String
-  pickup        Json
-  dropoff       Json
+  pickup        Json      // { lat, lng, label }
+  dropoff       Json      // { lat, lng, label }
   distanceM     Int
   durationS     Int
   fareEtb       Int
@@ -1036,8 +1038,8 @@ model Ride {
   cancelledBy   String?
   concierge     Boolean   @default(false)
   estimate      Boolean   @default(false)
-  riderName     String
-  riderPhone    String
+  riderName     String    // snapshot at request time — do not backfill from Rider
+  riderPhone    String    // snapshot at request time
   riderRating   Int?
   driverRating  Int?
   requestedAt   DateTime  @default(now())
@@ -1049,6 +1051,7 @@ model Ride {
 
   @@index([status])
   @@index([riderId])
+  @@index([driverId])
 }
 
 model RideSetting {
