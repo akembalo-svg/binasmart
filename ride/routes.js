@@ -14,8 +14,9 @@ function limiter(windowMs, max) {
     return true;
   };
 }
-// Behind nginx req.ip is 127.0.0.1 for everyone; use the forwarded client address for rate limiting.
-function clientIp(req) { const xf = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim(); return xf || req.ip; }
+// Behind nginx req.ip is 127.0.0.1 for everyone; X-Real-IP is set by nginx from $remote_addr and,
+// unlike X-Forwarded-For, cannot be appended to by the client.
+function clientIp(req) { return String(req.headers['x-real-ip'] || req.ip); }
 const num = (v, lo, hi) => { const n = Number(v); return Number.isFinite(n) && n >= lo && n <= hi ? n : null; };
 function point(p) {
   if (!p || typeof p !== 'object') return null;
@@ -35,6 +36,7 @@ function pubRide(ride) {
 
 module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY }) {
   const quoteRL = limiter(600000, 60), requestRL = limiter(600000, 5), searchRL = limiter(60000, 40);
+  const lookupRL = limiter(60000, 120);
   const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
 
   // ---- pages ----
@@ -76,20 +78,31 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     const [r, s] = await Promise.all([geo.route(from, to), settings.get()]); // fare is computed server-side and locked
     const q = quoteFare(s, tier, r.distanceM, r.durationS);
     const rider = await prisma.rider.upsert({ where: { phone }, update: { name }, create: { phone, name } });
-    const ride = await prisma.ride.create({ data: {
-      idemKey, riderId: rider.id, tier, pickup: from, dropoff: to, distanceM: r.distanceM, durationS: r.durationS, estimate: r.estimate,
-      fareEtb: q.fareEtb, driverTakeEtb: q.driverTakeEtb, paymentMethod, status: 'dispatching', riderName: name, riderPhone: phone } });
+    let ride;
+    try {
+      ride = await prisma.ride.create({ data: {
+        idemKey, riderId: rider.id, tier, pickup: from, dropoff: to, distanceM: r.distanceM, durationS: r.durationS, estimate: r.estimate,
+        fareEtb: q.fareEtb, driverTakeEtb: q.driverTakeEtb, paymentMethod, status: 'dispatching', riderName: name, riderPhone: phone } });
+    } catch (e) {
+      if (e.code === 'P2002' && idemKey) {
+        const dup = await prisma.ride.findUnique({ where: { idemKey }, include: { driver: true } });
+        if (dup) return { ok: true, ride: pubRide(dup), duplicate: true };
+      }
+      throw e;
+    }
     dispatch.start(ride.id).catch(err => console.error('[ride/routes] dispatch.start failed:', err.message));
     return { ok: true, ride: pubRide({ ...ride, driver: null }) };
   });
 
   fastify.get('/api/ride/:id', async (req, reply) => {
+    if (!lookupRL(req.params.id)) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const ride = await prisma.ride.findUnique({ where: { id: req.params.id }, include: { driver: true } });
     if (!ride || normPhone(req.query.phone) !== ride.riderPhone) return reply.code(404).send({ ok: false, error: 'not_found' });
     return { ok: true, ride: pubRide(ride) };
   });
 
   fastify.post('/api/ride/:id/cancel', async (req, reply) => {
+    if (!lookupRL(req.params.id)) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const ride = await prisma.ride.findUnique({ where: { id: req.params.id } });
     if (!ride || normPhone((req.body || {}).phone) !== ride.riderPhone) return reply.code(404).send({ ok: false, error: 'not_found' });
     if (!['requested', 'dispatching', 'assigned', 'arriving', 'arrived'].includes(ride.status)) return reply.code(409).send({ ok: false, error: 'cannot_cancel_now' });
@@ -100,6 +113,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
   });
 
   fastify.post('/api/ride/:id/rate', async (req, reply) => {
+    if (!lookupRL(req.params.id)) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const b = req.body || {}; const stars = num(b.stars, 1, 5);
     const ride = await prisma.ride.findUnique({ where: { id: req.params.id } });
     if (!ride || normPhone(b.phone) !== ride.riderPhone) return reply.code(404).send({ ok: false, error: 'not_found' });
@@ -166,7 +180,9 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
 
   fastify.post('/api/ride/ops/:id/paid', async (req, reply) => {
     if (!ops(req, reply)) return;
-    const upd = await prisma.ride.update({ where: { id: req.params.id }, data: { paymentStatus: 'paid' }, include: { driver: true } });
+    const res = await prisma.ride.updateMany({ where: { id: req.params.id }, data: { paymentStatus: 'paid' } });
+    if (res.count === 0) return reply.code(404).send({ ok: false, error: 'not_found' });
+    const upd = await prisma.ride.findUnique({ where: { id: req.params.id }, include: { driver: true } });
     return { ok: true, ride: pubRide(upd) };
   });
 

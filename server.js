@@ -596,7 +596,7 @@ fastify.post('/api/assistant', async (req, reply) => {
   const b = req.body || {};
   const msg = String(b.message || '').slice(0, 1200).trim();
   if (!msg) return reply.code(400).send({ error: 'message required' });
-  const ip = String((req.headers['x-forwarded-for'] || '').split(',')[0] || req.ip || 'x').trim();
+  const ip = String(req.headers['x-real-ip'] || req.ip);
   const now = Date.now();
   const hits = (_assistRL.get(ip) || []).filter(t => now - t < 600000); // 10 min window
   if (hits.length >= 25) return reply.send({ reply: 'ትንሽ ቆይተው እንደገና ይሞክሩ 🙏 ወይም በ WhatsApp ያግኙን፦ https://wa.me/251911244344' });
