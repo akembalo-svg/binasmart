@@ -209,7 +209,34 @@ buildings/hotels/events/flights, Bini answering ride questions.
 - **Real-device checks** on Android Chrome and the Telegram Mini App before each
   phase ships.
 
-## 14. Out of scope (for now)
+## 14. Robustness & performance additions
+
+- **3D auto-degrade.** Detect weak devices (low `deviceMemory`, few CPU cores,
+  or measured low frame rate in the first seconds) and switch off 3D building
+  extrusions and pitch, keeping the same style flat. Keeps cheap Androids fast.
+- **Driver keep-open UX + Wake Lock.** While a driver is online or on a trip,
+  request the Screen Wake Lock API so the screen doesn't sleep, and show a
+  persistent "Keep this page open while online" banner. If GPS updates stop
+  for >30 s the driver is marked *away* (not offered rides) and pinged on
+  Telegram; they return to online automatically when updates resume.
+- **Map tile caching.** Tiles and the map engine are served with long-lived
+  immutable cache headers (reusing the existing static-asset caching hook) and
+  pre-cached by a service worker for central Addis, so repeat opens are
+  instant and the map stays usable on flaky data.
+- **Idempotent ride creation.** The rider client sends a generated idempotency
+  key with each request; a double tap or a retried request on a bad connection
+  never creates two rides.
+- **Anti-abuse.** Per-phone and per-IP rate limits on quotes and ride requests;
+  a rider with repeated no-shows/cancels is throttled. Protects drivers' time
+  during the zero-supply phase.
+- **OSRM health + cached quotes.** Health check every minute; quotes for the
+  same pickup/dropoff pair are cached briefly; on OSRM failure the straight-line
+  fallback (§10) kicks in without user-visible errors.
+- **Instant feel.** Route is fetched the moment a destination is chosen (before
+  the tier cards animate in); search is debounced and directory results are
+  served from memory.
+
+## 15. Out of scope (for now)
 
 Scheduled/advance bookings, multi-stop rides, ride pooling, in-app chat (Call +
 WhatsApp cover it), native iOS/Android apps, cities beyond Addis Ababa.
