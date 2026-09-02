@@ -78,6 +78,41 @@ java -Xmx3g -jar graphhopper-web-10.0.jar import config.yml
 pm2 restart gh-routing
 ```
 
+## Turn costs — what you actually get
+
+Turn costs are on (`turn_costs.vehicle_types: [motorcar, motor_vehicle]`,
+`u_turn_costs: 60`), but temper expectations about what that buys:
+
+- The Ethiopia extract currently contains only **46 turn-cost entries** in
+  the whole country (`grep -i "turn cost entries" /tmp/gh-import*.log`), so
+  turn costs mainly encode those explicit OSM `no_u_turn`/`no_left_turn`-style
+  restrictions plus a flat **60 s penalty for an unrestricted U-turn**
+  (turning around on the same edge). There is **no per-turn time penalty**
+  by default (no added cost for an ordinary left/right turn) — only the
+  U-turn case and explicit restrictions are modeled.
+- **`u_turn_costs` cannot make a U-turn "cheap" where the road itself won't
+  allow one.** It only discounts the cost of turning around on a
+  *bidirectional* edge. If the road between two points is one-way (very
+  common on primary/secondary distributor roads), there is no reverse edge
+  to turn onto at all — the router has to route to the nearest legal
+  turnaround (a roundabout, a median break, a side street) regardless of
+  the `u_turn_costs` value. Confirmed on this deployment: the probe
+  `9.0200,38.7620 → 9.0195,38.7618` still returns 961 m via "At roundabout,
+  take exit 4" after setting `u_turn_costs: 60` (previously infinite) —
+  `details=road_class,street_name` shows the segment is a `secondary`/
+  `primary` road (Yohanes Street), consistent with a one-way distributor,
+  not a turn-cost artifact. The reverse direction (46 m, direct) confirms
+  the edge is legally traversable only in that one direction. This was
+  verified by inspecting `DefaultTurnCostProvider.class` bytecode — a
+  positive `u_turn_costs` value is read and branches away from the
+  infinite-cost path, so the setting is wired in correctly; it simply
+  doesn't apply to this particular one-way segment.
+- Cost of turning this on: **+~104 MB graph** (edge-based CH shortcuts
+  roughly quintuple vs. node-based CH) and **~7.5–8.5 min import** instead
+  of ~1.5 min. Kept anyway because re-importing later (once OSM coverage
+  and turn-restriction tagging for Addis improves) is disruptive — better
+  to have the machinery in place now than retrofit it under time pressure.
+
 ## pm2 process
 
 Defined in `ecosystem.config.js` in this directory (mirrors the live
