@@ -15,8 +15,10 @@ function makeTelegram({ sendTg, ownerChat, baseUrl, ownerKey }) {
       'Rider: ' + ride.riderName + ' · ' + ride.riderPhone,
       'Assign: ' + baseUrl + '/ride-ops?key=' + ownerKey + '&ride=' + ride.id
     ].join('\n');
-    if (silent()) { console.log('[ride] TG SILENT:\n' + text); return true; }
-    return sendTg(ownerChat, text);
+    if (silent()) { console.log('[ride] TG SILENT:\n' + text.split(ownerKey).join('<key>')); return true; }
+    const ok = await sendTg(ownerChat, text);
+    if (!ok) console.error('[ride/telegram] concierge alert send returned false for ride ' + ride.id);
+    return ok;
   }
 
   async function ownerNote(text) {

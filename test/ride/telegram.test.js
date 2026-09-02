@@ -33,3 +33,17 @@ test('silent mode logs instead of sending', async () => {
   assert.ok(logs.some(l => l.includes('TG SILENT') && l.includes('(estimate)')));
   assert.ok(logs.some(l => l.includes('hello')));
 });
+
+test('silent log redacts the owner key; a false send is reported', async () => {
+  const logs = [], errs = [];
+  const ol = console.log, oe = console.error; console.log = (...a) => logs.push(a.join(' ')); console.error = (...a) => errs.push(a.join(' '));
+  try {
+    const t = makeTelegram({ sendTg: async () => false, ownerChat: '42', baseUrl: 'https://bina.et', ownerKey: 'SECRETKEY' });
+    process.env.RIDE_TG_SILENT = '1';
+    await t.conciergeAlert(RIDE);
+    delete process.env.RIDE_TG_SILENT;
+    assert.ok(logs.some(l => l.includes('<key>')) && !logs.some(l => l.includes('SECRETKEY')));
+    assert.equal(await t.conciergeAlert(RIDE), false);
+    assert.ok(errs.some(l => l.includes('r1')));
+  } finally { delete process.env.RIDE_TG_SILENT; console.log = ol; console.error = oe; }
+});
