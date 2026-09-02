@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ride Ops · BinaSmart</title><meta name="robots" content="noindex,nofollow">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#0b1220;color:#e5eef3;padding:14px}
+h1{font-size:18px;margin-bottom:10px}h2{font-size:14px;color:#9fb3c8;margin:18px 0 8px;text-transform:uppercase;letter-spacing:1px}
+.card{background:#111c2f;border:1px solid #1f2d45;border-radius:14px;padding:12px;margin-bottom:10px}
+.card.con{border-color:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,.25)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+button,select,input{font-family:inherit;font-size:13px;border-radius:9px;border:1px solid #2b3d5a;background:#0f1a2c;color:#e5eef3;padding:8px 10px}
+button{cursor:pointer;background:#059669;border-color:#059669;color:#fff;font-weight:800}button.sec{background:#1f2d45;border-color:#2b3d5a}button.red{background:#b91c1c;border-color:#b91c1c}
+.tag{font-size:11px;font-weight:900;padding:3px 8px;border-radius:999px;background:#1f2d45}.tag.con{background:#f59e0b;color:#000}
+.mut{color:#9fb3c8;font-size:12.5px}a{color:#5fe3cf}textarea{width:100%;min-height:200px;font-family:monospace;font-size:12px;background:#0f1a2c;color:#e5eef3;border:1px solid #2b3d5a;border-radius:9px;padding:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+#keybox{display:none}
+</style></head><body>
+<h1>🚕 BinaSmart Ride · Ops <span class="mut" id="clock"></span></h1>
+<div class="card" id="keybox"><div class="row"><b>Owner key</b><input id="keyIn" type="password" placeholder="paste OWNER_KEY" autocomplete="off"><button id="keyGo">Unlock</button><span class="mut">Stored in this tab only (sessionStorage), never in the URL.</span></div></div>
+<div class="card"><div class="row"><b>Add / update driver</b></div>
+  <div class="row"><input id="dName" placeholder="Name"><input id="dPhone" placeholder="Phone 09…"><input id="dPlate" placeholder="Plate"><select id="dTier"><option>economy</option><option>moto</option><option>bajaj</option><option>comfort</option><option>xl</option></select><input id="dMake" placeholder="Vehicle e.g. Toyota Vitz"><input id="dColour" placeholder="Colour"><button id="dSave">Save driver</button></div>
+</div>
+<h2>Active rides <span id="nActive"></span></h2><div id="active"></div>
+<h2>Recent</h2><div id="recent"></div>
+<h2>Drivers</h2><div id="drivers" class="card grid"></div>
+<h2>Settings (fares & knobs — JSON)</h2><div class="card"><textarea id="settings" aria-label="Settings JSON"></textarea><div class="row"><button id="saveSettings">Save settings</button><span class="mut" id="settingsMsg">Prices in ETB. Changes apply to new quotes immediately.</span></div></div>
+<script>
+// --- key handling: move ?key= out of the URL into sessionStorage, send it as a header ---
+var params=new URLSearchParams(location.search), FOCUS=params.get('ride')||'';
+try{ if(params.get('key')){ sessionStorage.setItem('bina_ops_key', params.get('key')); } }catch(e){}
+if(params.has('key')){ history.replaceState({}, '', location.pathname + (FOCUS ? '?ride='+encodeURIComponent(FOCUS) : '')); }
+function getKey(){ try{ return sessionStorage.getItem('bina_ops_key')||''; }catch(e){ return ''; } }
+function api(p,b){ return fetch(p, Object.assign({ headers: Object.assign({ 'x-owner-key': getKey() }, b ? { 'content-type':'application/json' } : {}) }, b ? { method:'POST', body: JSON.stringify(b) } : {})).then(function(r){ return r.json(); }); }
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var DRIVERS=[], TIMER=null;
+function rideCard(r,active){
+  var next={requested:['cancelled'],dispatching:['cancelled'],assigned:['arriving','arrived','cancelled'],arriving:['arrived','cancelled'],arrived:['ontrip','cancelled'],ontrip:['completed']}[r.status]||[];
+  var osm='https://www.openstreetmap.org/?mlat='+r.pickup.lat+'&mlon='+r.pickup.lng+'#map=17/'+r.pickup.lat+'/'+r.pickup.lng;
+  var needs=r.concierge&&!r.driver;
+  var h='<div class="card'+(needs?' con':'')+'" id="r-'+esc(r.id)+'"><div class="row"><span class="tag'+(needs?' con':'')+'">'+(needs?'NEEDS DRIVER':esc(r.status.toUpperCase()))+'</span><b>'+esc(r.tier.toUpperCase())+'</b> · <b>'+esc(r.fareEtb)+' ETB</b> <span class="mut">('+esc(r.paymentMethod)+' · '+esc(r.paymentStatus)+')</span><span class="mut">'+new Date(r.requestedAt).toLocaleTimeString()+'</span></div>';
+  h+='<div class="mut">From: <a target="_blank" rel="noopener" href="'+esc(osm)+'">'+esc(r.pickup.label)+'</a><br>To: '+esc(r.dropoff.label)+' · '+(r.distanceM/1000).toFixed(1)+' km'+(r.estimate?' (est.)':'')+'</div>';
+  h+='<div class="mut">Rider: <b>'+esc(r.riderName)+'</b> <a href="tel:'+esc(r.riderPhone)+'">'+esc(r.riderPhone)+'</a></div>';
+  if(r.driver) h+='<div class="mut">Driver: <b>'+esc(r.driver.name)+'</b> '+esc(r.driver.plate)+' · '+esc(r.driver.phone)+'</div>';
+  if(active){
+    if(!r.driver&&['requested','dispatching'].includes(r.status)){
+      var opts=DRIVERS.filter(function(d){return d.status==='approved';}).map(function(d){return '<option value="'+esc(d.id)+'">'+esc(d.name)+' · '+esc(d.plate)+' · '+esc(d.tier)+'</option>';}).join('');
+      h+='<div class="row">'+(opts?'<select id="sel-'+esc(r.id)+'">'+opts+'</select><button data-act="assign" data-id="'+esc(r.id)+'">Assign</button>':'<span class="mut">No approved drivers — add one above.</span>')+'</div>';
+    }
+    h+='<div class="row">'+next.map(function(s){return '<button class="'+(s==='cancelled'?'red':'sec')+'" data-act="status" data-id="'+esc(r.id)+'" data-s="'+s+'">'+s+'</button>';}).join('')+(r.status==='ontrip'?'<button data-act="status" data-id="'+esc(r.id)+'" data-s="completed" data-cash="1">completed + cash paid</button>':'')+(r.paymentStatus!=='paid'?'<button class="sec" data-act="paid" data-id="'+esc(r.id)+'">mark paid</button>':'')+'</div>';
+  }
+  return h+'</div>';
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('button[data-act]'); if(!b) return;
+  var id=b.dataset.id, act=b.dataset.act;
+  if(act==='assign'){ var sel=document.getElementById('sel-'+id); api('/api/ride/ops/'+id+'/assign',{driverId:sel&&sel.value}).then(function(d){ if(!d.ok) alert(d.error||'failed'); load(); }); }
+  else if(act==='status'){ if(b.dataset.s==='cancelled'&&!confirm('Cancel this ride?')) return; api('/api/ride/ops/'+id+'/status',{status:b.dataset.s,cashPaid:b.dataset.cash==='1'}).then(function(d){ if(!d.ok) alert(d.error||'failed'); load(); }); }
+  else if(act==='paid'){ api('/api/ride/ops/'+id+'/paid',{}).then(function(d){ if(!d.ok) alert(d.error||'failed'); load(); }); }
+});
+function showKeyBox(show){ document.getElementById('keybox').style.display=show?'block':'none'; }
+function load(){
+  if(!getKey()){ showKeyBox(true); return; }
+  api('/api/ride/ops/drivers').then(function(d){
+    if(!d.ok){ showKeyBox(true); document.getElementById('active').innerHTML='<div class="mut">Unauthorized — enter the owner key.</div>'; return null; }
+    showKeyBox(false);
+    DRIVERS=d.drivers||[];
+    document.getElementById('drivers').innerHTML=DRIVERS.map(function(x){return '<div><b>'+esc(x.name)+'</b><div class="mut">'+esc(x.plate)+' · '+esc(x.tier)+' · '+esc(x.status)+' · ★'+esc(x.rating)+' · '+esc(x.ridesCount)+' rides</div></div>';}).join('')||'<span class="mut">No drivers yet — add one above.</span>';
+    return api('/api/ride/ops/queue');
+  }).then(function(d){
+    if(!d) return;
+    if(!d.ok){ document.getElementById('active').innerHTML='<div class="mut">'+esc(d.error||'error')+'</div>'; return; }
+    document.getElementById('nActive').textContent='('+d.active.length+')';
+    document.getElementById('active').innerHTML=d.active.map(function(r){return rideCard(r,true);}).join('')||'<div class="mut">No active rides.</div>';
+    document.getElementById('recent').innerHTML=d.recent.map(function(r){return rideCard(r,false);}).join('')||'<div class="mut">—</div>';
+    if(FOCUS){var el=document.getElementById('r-'+FOCUS);if(el){el.scrollIntoView({block:'center'});FOCUS='';}}
+    document.getElementById('clock').textContent='· updated '+new Date().toLocaleTimeString();
+  }).catch(function(){ document.getElementById('clock').textContent='· offline'; });
+}
+function loadSettings(){ if(!getKey()) return; api('/api/ride/ops/settings').then(function(d){ if(d.ok) document.getElementById('settings').value=JSON.stringify(d.settings,null,2); }).catch(function(){}); }
+document.getElementById('keyGo').onclick=function(){ var v=document.getElementById('keyIn').value.trim(); if(!v) return; try{ sessionStorage.setItem('bina_ops_key', v); }catch(e){} document.getElementById('keyIn').value=''; load(); loadSettings(); };
+document.getElementById('dSave').onclick=function(){ var g=function(id){return document.getElementById(id).value;}; api('/api/ride/ops/drivers',{name:g('dName'),phone:g('dPhone'),plate:g('dPlate'),tier:g('dTier'),vehicleMake:g('dMake'),vehicleColour:g('dColour'),status:'approved'}).then(function(d){ if(!d.ok) return alert(d.error||'failed'); ['dName','dPhone','dPlate','dMake','dColour'].forEach(function(id){document.getElementById(id).value='';}); load(); }); };
+document.getElementById('saveSettings').onclick=function(){ var v; try{ v=JSON.parse(document.getElementById('settings').value); }catch(e){ return alert('Invalid JSON'); } api('/api/ride/ops/settings',v).then(function(d){ document.getElementById('settingsMsg').textContent = d.ok ? '✅ Saved '+new Date().toLocaleTimeString() : '❌ '+(d.error||'failed'); if(d.ok) document.getElementById('settings').value=JSON.stringify(d.settings,null,2); }); };
+load(); loadSettings(); TIMER=setInterval(load,5000);
+document.addEventListener('visibilitychange',function(){ if(document.hidden){ clearInterval(TIMER); TIMER=null; } else if(!TIMER){ load(); TIMER=setInterval(load,5000); } });
+</script></body></html>
