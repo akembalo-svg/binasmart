@@ -37,7 +37,7 @@
   </div>
 
   <div class="screen hidden" id="s-search">
-    <div class="srow"><button class="back" id="closeSearch">‹</button><input id="q" placeholder="ሆቴል፣ ህንፃ፣ ሱቅ… · hotel, building, shop, street" autocomplete="off"></div>
+    <div class="srow"><button class="back" id="closeSearch">‹</button><input id="q" aria-label="Destination" placeholder="ሆቴል፣ ህንፃ፣ ሱቅ… · hotel, building, shop, street" autocomplete="off"></div>
     <div class="small" id="searchMode">Searching destination · <button id="pinMode" class="link">or tap the map</button></div>
     <ul id="results" class="results"></ul>
   </div>
@@ -56,8 +56,8 @@
 
   <div class="screen hidden" id="s-who">
     <h2>ስምዎ እና ስልክዎ <small>Your name & phone — once</small></h2>
-    <input id="whoName" placeholder="ስም · Name" autocomplete="name">
-    <input id="whoPhone" placeholder="09… · Phone" inputmode="tel" autocomplete="tel">
+    <input id="whoName" aria-label="Name" placeholder="ስም · Name" autocomplete="name">
+    <input id="whoPhone" aria-label="Phone" placeholder="09… · Phone" inputmode="tel" autocomplete="tel">
     <div class="small">ሹፌሩ ይደውልልዎታል · The driver will call this number.</div>
     <button class="cta" id="whoGo">ቀጥል · Continue</button>
   </div>
@@ -88,7 +88,7 @@
     <h2>ደረሱ! <small>You've arrived</small> 🎉</h2>
     <div class="fareline big">Total · ጠቅላላ <b id="doneFare"></b></div>
     <div id="payBox"></div>
-    <div class="stars" id="stars"><button data-s="1">★</button><button data-s="2">★</button><button data-s="3">★</button><button data-s="4">★</button><button data-s="5">★</button></div>
+    <div class="stars" id="stars"><button data-s="1" aria-label="1 star">★</button><button data-s="2" aria-label="2 stars">★</button><button data-s="3" aria-label="3 stars">★</button><button data-s="4" aria-label="4 stars">★</button><button data-s="5" aria-label="5 stars">★</button></div>
     <div class="small" id="rateMsg">ሹፌሩን ይገምግሙ · Rate your driver</div>
     <div class="row2"><button class="btn" id="again">🔁 Ride again</button><button class="btn" id="returnTrip">↩️ Return trip</button></div>
   </div>

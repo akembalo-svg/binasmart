@@ -70,16 +70,39 @@
   // ---- quote ----
   function quote() {
     if (!S.pickup || !S.dropoff) return;
+    var seq = (S.qSeq = (S.qSeq || 0) + 1);
     show('s-quote'); $('qFrom').textContent = label(S.pickup); $('qTo').textContent = label(S.dropoff); $('tiers').innerHTML = '<div class="small">ዋጋ እያሰላን ነው… · Calculating…</div>';
     api('/api/ride/quote', { pickup: S.pickup, dropoff: S.dropoff }).then(function (d) {
+      if (seq !== S.qSeq) return;
       if (!d.ok) { toast(d.error || 'Could not quote'); return show('s-home'); }
-      S.quote = d; BinaMap.drawRoute(d.geometry, 360);
+      S.quote = d;
       $('qMeta').textContent = (d.distanceM / 1000).toFixed(1) + ' km · ~' + Math.round(d.durationS / 60) + ' min' + (d.estimate ? ' · estimate' : '');
       $('tiers').innerHTML = d.quotes.map(function (q) {
-        return '<div class="tier' + (q.tier === S.tier ? ' sel' : '') + '" data-t="' + q.tier + '"><div class="ic">' + q.icon + '</div><div><b>' + esc(q.label) + ' · ' + esc(q.labelAm) + '</b><div class="sub">' + q.seats + ' seats · ~' + q.etaMin + ' min</div></div><div class="price">' + q.fareEtb + ' ETB</div></div>';
+        return '<div class="tier' + (q.tier === S.tier ? ' sel' : '') + '" data-t="' + q.tier + '"><div class="ic">' + esc(q.icon) + '</div><div><b>' + esc(q.label) + ' · ' + esc(q.labelAm) + '</b><div class="sub">' + q.seats + ' seats · ~' + q.etaMin + ' min</div></div><div class="price">' + q.fareEtb + ' ETB</div></div>';
       }).join('');
       $('tiers').querySelectorAll('.tier').forEach(function (el) { el.addEventListener('click', function () { S.tier = el.dataset.t; $('tiers').querySelectorAll('.tier').forEach(function (x) { x.classList.toggle('sel', x === el); }); setCta(); }); });
       setCta();
+      // Pad the fit past the sheet. The sheet is bottom-anchored, so its offsetHeight IS the hidden band;
+      // measured after the tiers are in. The cap must stay ABOVE the sheet's 72vh max-height, or it would
+      // shrink the pad back under the sheet and hide the route again.
+      BinaMap.drawRoute(d.geometry, Math.min($('sheet').offsetHeight + 56, Math.round(innerHeight * 0.82)));
+      liftAboveSheet();
+    }).catch(function () { if (seq !== S.qSeq) return; toast('Network error — try again'); show('s-home'); });
+  }
+  // MapLibre resolves fitBounds padding in the FLAT projection and applies pitch afterwards, so on a
+  // pitched camera the fitted content still settles lower than asked and slides behind the sheet
+  // (measured: -49px at pitch 55 vs +59px at pitch 0, same zoom and padding). Correct it by measuring
+  // where the markers actually landed once the fit settles, then panning up by the shortfall.
+  // A pitched panBy under-corrects (screen pixels compress toward the horizon), so re-measure and
+  // repeat, bounded to 3 passes so it always terminates.
+  function liftAboveSheet(pass) {
+    var m = BinaMap.map; if (!m) return;
+    m.once('moveend', function () {
+      var limit = $('sheet').getBoundingClientRect().top - 28, low = -Infinity;
+      document.querySelectorAll('.bm-mk').forEach(function (el) { low = Math.max(low, el.getBoundingClientRect().bottom); });
+      if (low <= limit) return;
+      if ((pass || 0) < 2) liftAboveSheet((pass || 0) + 1);   // register before panning, to catch its moveend
+      m.panBy([0, low - limit], { duration: 300 });
     });
   }
   function selQuote() { return (S.quote && S.quote.quotes.find(function (q) { return q.tier === S.tier; })) || null; }
@@ -108,6 +131,7 @@
   // ---- live status (poll every 4 s) ----
   function startPoll() { stopPoll(); tick(); S.poll = setInterval(tick, 4000); }
   function stopPoll() { if (S.poll) clearInterval(S.poll); S.poll = null; }
+  document.addEventListener('visibilitychange', function () { if (!S.ride) return; if (document.hidden) stopPoll(); else if (!['completed', 'cancelled'].includes(S.ride.status)) startPoll(); });
   function tick() {
     if (!S.ride) return;
     api('/api/ride/' + S.ride.id + '?phone=' + encodeURIComponent(ME.phone)).then(function (d) { if (d.ok) render(d.ride); }).catch(function () {});
@@ -139,14 +163,15 @@
   }
   function payNow() {
     api('/api/pay/init', { amount: S.ride.fareEtb, name: ME.name, phone: ME.phone, purpose: 'BinaSmart Ride ' + S.ride.id, bt: 'ride', bc: S.ride.id })
-      .then(function (d) { if (d.ok && d.checkout_url) location.href = d.checkout_url; else toast(d.error || 'Payment unavailable — pay cash'); });
+      .then(function (d) { if (d.ok && d.checkout_url) location.href = d.checkout_url; else toast(d.error || 'Payment unavailable — pay cash'); })
+      .catch(function () { toast('Payment unavailable — pay cash'); });
   }
 
   // ---- cancel / rate / again ----
-  function cancel() { if (!S.ride) return; if (!confirm('ጉዞውን ይሰርዙ? · Cancel this ride?')) return; api('/api/ride/' + S.ride.id + '/cancel', { phone: ME.phone }).then(function (d) { if (d.ok) render(d.ride); else toast(d.error || 'Cannot cancel now'); }); }
+  function cancel() { if (!S.ride) return; if (!confirm('ጉዞውን ይሰርዙ? · Cancel this ride?')) return; api('/api/ride/' + S.ride.id + '/cancel', { phone: ME.phone }).then(function (d) { if (d.ok) render(d.ride); else toast(d.error || 'Cannot cancel now'); }).catch(function () { toast('Network error'); }); }
   $('cancelFinding').addEventListener('click', cancel); $('cancelAssigned').addEventListener('click', cancel);
   function markStars(n) { $('stars').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', +b.dataset.s <= n); }); }
-  $('stars').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { var n = +b.dataset.s; markStars(n); api('/api/ride/' + S.ride.id + '/rate', { phone: ME.phone, stars: n }).then(function () { $('rateMsg').textContent = 'አመሰግናለሁ! · Thank you!'; }); }); });
+  $('stars').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { var n = +b.dataset.s; markStars(n); api('/api/ride/' + S.ride.id + '/rate', { phone: ME.phone, stars: n }).then(function () { $('rateMsg').textContent = 'አመሰግናለሁ! · Thank you!'; }).catch(function () { toast('Network error'); }); }); });
   function reset(swap) {
     var a = S.pickup, b = S.dropoff; S.ride = null; S.quote = null; BinaMap.clearRoute();
     if (swap && a && b) { setPickup({ lat: b.lat, lng: b.lng, label: b.label }); S.dropoff = { lat: a.lat, lng: a.lng, label: a.label }; BinaMap.setDrop(S.dropoff); return quote(); }
