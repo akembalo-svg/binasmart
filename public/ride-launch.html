@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BinaSmart Ride · ራይድ — Get a ride in Addis Ababa | BinaSmart</title>
+<meta name="description" content="BinaSmart Ride — book a ride in Addis Ababa in seconds. No app to download, one fixed price (no surge), pay cash or Telebirr. Launching soon. በሰከንዶች ውስጥ መኪና ይያዙ።">
+<link rel="canonical" href="https://bina.et/ride">
+<meta property="og:title" content="BinaSmart Ride — a ride in seconds, no app needed"><meta property="og:image" content="https://bina.et/static/bina-news.png">
+<link rel="icon" href="/icon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--em:#0aa88f;--em2:#068f79;--ink:#0f2027;--mut:#5c7080;--bg:#f5f9f8;--card:#fff;--line:#e3ecea;--gold:#e0a400}
+body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+.am{font-family:'Noto Sans Ethiopic',sans-serif}a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.top{position:sticky;top:0;z-index:50;background:rgba(15,32,39,.96);backdrop-filter:blur(10px)}
+.top .in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:12px;color:#fff}
+.logo{font-weight:800;font-size:20px}.logo .g{color:#5fe3cf}
+.badge{font-size:12px;font-weight:700;color:#5fe3cf;background:rgba(95,227,207,.14);border-radius:999px;padding:4px 12px}
+.soon{margin-left:auto;font-size:12px;font-weight:800;color:#0f2027;background:var(--gold);border-radius:999px;padding:5px 13px}
+/* hero with stylized map */
+.hero{position:relative;background:linear-gradient(160deg,#0f2027,#0a3a34);color:#fff;overflow:hidden}
+.map{position:absolute;inset:0;opacity:.5;background:
+  repeating-linear-gradient(0deg,transparent 0 38px,rgba(255,255,255,.05) 38px 40px),
+  repeating-linear-gradient(90deg,transparent 0 46px,rgba(255,255,255,.05) 46px 48px)}
+.route{position:absolute;top:0;left:0;width:100%;height:100%}
+.hero .in{position:relative;max-width:1080px;margin:0 auto;padding:56px 20px 46px;display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center}
+.hero h1{font-size:clamp(32px,5vw,50px);font-weight:800;line-height:1.08;letter-spacing:-1px}
+.hero .sub{font-size:18px;color:#c9dbd7;margin-top:14px;max-width:460px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.badges span{font-size:13px;font-weight:700;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:8px 14px}
+/* booking card */
+.book{background:#fff;color:var(--ink);border-radius:22px;padding:22px;box-shadow:0 30px 70px -25px rgba(0,0,0,.55)}
+.book h3{font-size:19px;font-weight:800;margin-bottom:4px}
+.book .bs{font-size:13px;color:var(--mut);margin-bottom:16px}
+.field{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:13px;padding:13px 14px;margin-bottom:10px;background:#fbfdfc}
+.field .dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto}
+.dot.a{background:var(--em)}.dot.b{background:var(--gold)}
+.field input{border:0;background:transparent;font-size:15px;font-family:inherit;font-weight:600;color:var(--ink);width:100%}
+.field input:focus{outline:0}
+.rtypes{display:flex;gap:8px;margin:14px 0 4px;overflow-x:auto;padding-bottom:4px}
+.rt{flex:0 0 auto;border:1.5px solid var(--line);border-radius:13px;padding:10px 12px;text-align:center;min-width:88px;cursor:pointer;transition:.15s}
+.rt.on{border-color:var(--em);background:#e6f7f4}
+.rt .ic{font-size:24px}.rt .nm{font-size:12.5px;font-weight:800;margin-top:2px}.rt .pr{font-size:12px;color:var(--em2);font-weight:700}
+.bookbtn{width:100%;margin-top:14px;background:var(--gold);color:#0f2027;border:0;border-radius:13px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;position:relative}
+.bookbtn small{display:block;font-weight:600;font-size:11.5px;opacity:.75;margin-top:1px}
+.fineprint{font-size:11.5px;color:var(--mut);text-align:center;margin-top:10px}
+/* sections */
+section{padding:44px 0}.sec-h{text-align:center;margin-bottom:28px}.sec-h h2{font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.5px}.sec-h p{color:var(--mut);margin-top:6px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}.g .i{font-size:32px}.g h3{font-size:17px;font-weight:800;margin:10px 0 4px}.g p{font-size:14px;color:var(--mut)}
+/* driver band */
+.driver{background:linear-gradient(135deg,#0aa88f,#068f79);border-radius:24px;padding:40px;color:#fff}
+.driver .d-in{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}
+.driver h2{font-size:30px;font-weight:800;line-height:1.1}
+.driver p{color:#e0f5f1;margin:12px 0 0;font-size:16px}
+.dperks{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.dperks .p{display:flex;gap:10px;align-items:center;font-size:15px;font-weight:600}
+.dcta{background:#0f2027;border-radius:18px;padding:24px;text-align:center}
+.dcta h4{font-size:19px;font-weight:800}.dcta p{color:#a9c4bf;font-size:13.5px;margin:6px 0 16px}
+.dcta a{display:block;background:#25D366;color:#fff;font-weight:800;padding:14px;border-radius:12px;font-size:15px}
+.foot{text-align:center;padding:34px 20px;color:var(--mut);font-size:13px;border-top:1px solid var(--line);margin-top:24px}
+/* coming soon modal */
+.modal{position:fixed;inset:0;background:rgba(15,32,39,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
+.modal.show{display:flex}
+.mbox{background:#fff;border-radius:22px;padding:34px 28px;max-width:380px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.mbox .mi{font-size:52px}.mbox h3{font-size:22px;font-weight:800;margin:10px 0 6px}.mbox p{color:var(--mut);font-size:14.5px}
+.mbox .mbtns{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.mbox a{padding:13px;border-radius:12px;font-weight:800;font-size:14.5px}
+.mbox .wa{background:#25D366;color:#fff}.mbox .close{background:#eef4f3;color:var(--ink)}
+@media(max-width:860px){.hero .in{grid-template-columns:1fr;gap:26px}.book{order:-1}.grid3{grid-template-columns:1fr}.driver .d-in{grid-template-columns:1fr;gap:22px}.badge{display:none}}
+</style></head><body>
+
+<div class="top"><div class="in">
+  <a href="/" class="logo">Bina<span class="g">Smart</span></a><span class="badge am">🚗 Ride · ራይድ</span>
+  <span class="soon">🚧 Launching soon</span>
+</div></div>
+
+<div class="hero"><div class="map"></div>
+  <svg class="route" viewBox="0 0 1080 400" preserveAspectRatio="none">
+    <path d="M120,330 C300,300 340,150 560,150 S860,120 960,70" fill="none" stroke="#5fe3cf" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round" opacity=".8"/>
+    <circle cx="120" cy="330" r="9" fill="#0aa88f" stroke="#fff" stroke-width="3"/>
+    <circle cx="960" cy="70" r="9" fill="#e0a400" stroke="#fff" stroke-width="3"/>
+  </svg>
+  <div class="in">
+    <div>
+      <h1>A ride in seconds.<br>No app to download.</h1>
+      <p class="sub am">በአዲስ አበባ በሰከንዶች ውስጥ መኪና ይያዙ — መተግበሪያ ማውረድ አያስፈልግም። አንድ ቋሚ ዋጋ (surge የለም)፣ በጥሬ ገንዘብ ወይም በቴሌብር ይክፈሉ።</p>
+      <div class="badges">
+        <span>📲 No app needed</span><span>💸 Fixed price · no surge</span><span>💵 Cash or Telebirr</span><span class="am">🇪🇹 አዲስ አበባ</span>
+      </div>
+    </div>
+    <div class="book">
+      <h3>Where to?</h3><div class="bs am">መድረሻዎን ያስገቡ — ዋጋ ወዲያውኑ ያሳያል</div>
+      <div class="field"><span class="dot a"></span><input id="from" placeholder="Pickup · መነሻ (current location)"></div>
+      <div class="field"><span class="dot b"></span><input id="to" placeholder="Where to? · መድረሻ"></div>
+      <div class="rtypes">
+        <div class="rt on" onclick="pick(this)"><div class="ic">🛵</div><div class="nm">Moto</div><div class="pr">from 60</div></div>
+        <div class="rt" onclick="pick(this)"><div class="ic">🛺</div><div class="nm">Bajaj</div><div class="pr">from 80</div></div>
+        <div class="rt" onclick="pick(this)"><div class="ic">🚗</div><div class="nm">Economy</div><div class="pr">from 150</div></div>
+        <div class="rt" onclick="pick(this)"><div class="ic">🚙</div><div class="nm">Comfort</div><div class="pr">from 230</div></div>
+        <div class="rt" onclick="pick(this)"><div class="ic">🚐</div><div class="nm">XL / Van</div><div class="pr">from 350</div></div>
+      </div>
+      <button class="bookbtn" onclick="soon()">Request BinaSmart Ride <small>🚧 Coming soon</small></button>
+      <div class="fineprint am">ዋጋዎች አመላካች ናቸው · Prices are estimates. Launching soon.</div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="sec-h"><h2>Why BinaSmart Ride</h2><p class="am">ለምን BinaSmart Ride?</p></div>
+  <div class="grid3">
+    <div class="g"><div class="i">📲</div><h3>No app to download</h3><p class="am">በWhatsApp ወይም በድር ብቻ ይያዙ — ቦታ የሚበላ መተግበሪያ የለም። ስልክዎ ላይ ቀላል።</p></div>
+    <div class="g"><div class="i">💸</div><h3>One fixed price</h3><p class="am">ከመሳፈርዎ በፊት ዋጋውን ያውቃሉ — surge የለም፣ ድንገተኛ ጭማሪ የለም።</p></div>
+    <div class="g"><div class="i">🔗</div><h3>Part of BinaSmart</h3><p class="am">በረራ፣ ዝግጅት ወይም ሆቴል ሲይዙ — ወዲያውኑ መኪና ይያዙ። ከህንፃዎም “ወደ ቤት” በአንድ ጠቅታ።</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="driver"><div class="d-in">
+    <div>
+      <h2>Drive with BinaSmart.<br>Earn more. Keep more.</h2>
+      <p class="am">ከBinaSmart ጋር ይንዱ — ፍትሃዊ ኮሚሽን፣ ፈጣን ክፍያ፣ ተጨማሪ ገቢ። የራስዎ ጊዜ፣ የራስዎ ውሳኔ።</p>
+      <div class="dperks">
+        <div class="p">✅ <span class="am">ፍትሃዊ ዝቅተኛ ኮሚሽን — ብዙ ገቢዎን ይያዙ</span></div>
+        <div class="p">✅ <span class="am">ፈጣን ክፍያ (cash / Telebirr)</span></div>
+        <div class="p">✅ <span class="am">ተለዋዋጭ የሥራ ሰዓት — መቼም ይንዱ</span></div>
+        <div class="p">✅ <span class="am">ከBinaSmart ህንፃዎችና ደንበኞች ቀጥታ ጥሪ</span></div>
+      </div>
+    </div>
+    <div class="dcta">
+      <h4>🚕 Become a driver</h4><p class="am">ቀድመው ይመዝገቡ — ስንጀምር የመጀመሪያ ተጠቃሚ ይሁኑ።</p>
+      <a href="https://wa.me/251911244344?text=%E1%88%B0%E1%88%8B%E1%88%9D!%20%E1%8A%A5%E1%8A%94%20%E1%88%B4%E1%8A%A9%E1%88%AD%20%E1%8A%90%E1%8A%9D%E1%8D%A2%20%E1%8A%A8BinaSmart%20Ride%20%E1%8C%8B%E1%88%AD%20%E1%88%98%E1%8A%95%E1%8B%B3%E1%89%B5%20%E1%8A%A5%E1%8D%88%E1%88%8D%E1%8C%8B%E1%88%88%E1%88%81" target="_blank">💬 Join as a driver →</a>
+    </div>
+  </div></div>
+</section>
+
+<div class="foot"><span class="am">BinaSmart Ride · bina.et · ሁሉንም በአንድ መድረክ</span> — Fixed-price rides in Addis Ababa. Launching soon.</div>
+
+<div class="modal" id="modal"><div class="mbox">
+  <div class="mi">🚧</div><h3>Launching soon!</h3>
+  <p class="am">BinaSmart Ride በቅርቡ ይጀምራል። ቀድመው ለመመዝገብ ወይም ሹፌር ለመሆን ያግኙን።</p>
+  <div class="mbtns">
+    <a class="wa" href="https://wa.me/251911244344?text=BinaSmart%20Ride%20-%20%E1%8A%A0%E1%88%B3%E1%8B%8D%E1%89%81%E1%8A%9D" target="_blank">💬 Notify me / Join</a>
+    <a class="close" href="#" onclick="document.getElementById('modal').classList.remove('show');return false">Close</a>
+  </div>
+</div></div>
+
+<script>
+function pick(el){document.querySelectorAll('.rt').forEach(function(r){r.classList.remove('on')});el.classList.add('on')}
+function soon(){document.getElementById('modal').classList.add('show')}
+</script></body></html>
