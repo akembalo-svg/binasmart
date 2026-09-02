@@ -82,11 +82,14 @@
       }).join('');
       $('tiers').querySelectorAll('.tier').forEach(function (el) { el.addEventListener('click', function () { S.tier = el.dataset.t; $('tiers').querySelectorAll('.tier').forEach(function (x) { x.classList.toggle('sel', x === el); }); setCta(); }); });
       setCta();
-      // Pad the fit past the sheet. The sheet is bottom-anchored, so its offsetHeight IS the hidden band;
-      // measured after the tiers are in. The cap must stay ABOVE the sheet's 72vh max-height, or it would
-      // shrink the pad back under the sheet and hide the route again.
-      BinaMap.drawRoute(d.geometry, Math.min($('sheet').offsetHeight + 56, Math.round(innerHeight * 0.82)));
-      liftAboveSheet();
+      // Pitched fitBounds ignores most of the bottom padding anyway (liftAboveSheet does the real work),
+      // so keep the pad modest — an oversized pad only buys a zoomed-out smudge of a route.
+      // Guard the geometry: without a polyline drawRoute is meaningless AND liftAboveSheet's pass-0
+      // once('moveend') would stay attached and fire on the user's next pan.
+      if (d.geometry && d.geometry.length > 1) {
+        BinaMap.drawRoute(d.geometry, Math.min($('sheet').offsetHeight, Math.round(innerHeight * 0.58)));
+        liftAboveSheet();
+      }
     }).catch(function () { if (seq !== S.qSeq) return; toast('Network error — try again'); show('s-home'); });
   }
   // MapLibre resolves fitBounds padding in the FLAT projection and applies pitch afterwards, so on a
@@ -94,14 +97,14 @@
   // (measured: -49px at pitch 55 vs +59px at pitch 0, same zoom and padding). Correct it by measuring
   // where the markers actually landed once the fit settles, then panning up by the shortfall.
   // A pitched panBy under-corrects (screen pixels compress toward the horizon), so re-measure and
-  // repeat, bounded to 3 passes so it always terminates.
+  // repeat, bounded to 5 passes so it always terminates (still well under 2 s).
   function liftAboveSheet(pass) {
     var m = BinaMap.map; if (!m) return;
     m.once('moveend', function () {
       var limit = $('sheet').getBoundingClientRect().top - 28, low = -Infinity;
       document.querySelectorAll('.bm-mk').forEach(function (el) { low = Math.max(low, el.getBoundingClientRect().bottom); });
       if (low <= limit) return;
-      if ((pass || 0) < 2) liftAboveSheet((pass || 0) + 1);   // register before panning, to catch its moveend
+      if ((pass || 0) < 4) liftAboveSheet((pass || 0) + 1);   // register before panning, to catch its moveend
       m.panBy([0, low - limit], { duration: 300 });
     });
   }
