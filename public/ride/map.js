@@ -6,7 +6,9 @@ window.BinaMap = (function () {
     try { return (navigator.deviceMemory && navigator.deviceMemory < 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2); }
     catch (e) { return false; }
   }
-  function wants3D() { var s = localStorage.getItem('bina_map_3d'); return s == null ? !weakDevice() : s === '1'; }
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function wants3D() { var s = lsGet('bina_map_3d'); return s == null ? !weakDevice() : s === '1'; }
 
   function init(container, onLoad) {
     var protocol = new pmtiles.Protocol();
@@ -27,7 +29,7 @@ window.BinaMap = (function () {
 
   function set3D(on) {
     if (!map) return;
-    localStorage.setItem('bina_map_3d', on ? '1' : '0');
+    lsSet('bina_map_3d', on ? '1' : '0');
     map.setLayoutProperty('buildings-3d', 'visibility', on ? 'visible' : 'none');
     map.easeTo({ pitch: on ? 55 : 0, bearing: on ? -17 : 0, duration: 600 });
   }
@@ -46,6 +48,7 @@ window.BinaMap = (function () {
   }
 
   function drawRoute(coords, bottomPad) {
+    if (!map || !coords || coords.length < 2) return;
     var gj = { type: 'Feature', geometry: { type: 'LineString', coordinates: coords } };
     if (map.getSource('route')) map.getSource('route').setData(gj);
     else {
@@ -57,10 +60,11 @@ window.BinaMap = (function () {
     map.fitBounds(b, { padding: { top: 90, bottom: bottomPad || 340, left: 40, right: 40 }, pitch: map.getPitch(), duration: 900 });
   }
   function clearRoute() {
+    if (!map) return;
     if (map.getLayer('route-line')) { map.removeLayer('route-line'); map.removeLayer('route-casing'); map.removeSource('route'); }
   }
-  function flyTo(p, zoom) { map.flyTo({ center: [p.lng, p.lat], zoom: zoom || 15.5, duration: 900 }); }
-  function onClick(fn) { map.on('click', function (e) { fn({ lat: e.lngLat.lat, lng: e.lngLat.lng }); }); }
+  function flyTo(p, zoom) { if (!map) return; map.flyTo({ center: [p.lng, p.lat], zoom: zoom || 15.5, duration: 900 }); }
+  function onClick(fn) { if (!map) return; map.on('click', function (e) { fn({ lat: e.lngLat.lat, lng: e.lngLat.lng }); }); }
 
   return { init: init, set3D: set3D, is3D: is3D, setPickup: setPickup, setDrop: setDrop, drawRoute: drawRoute, clearRoute: clearRoute, flyTo: flyTo, onClick: onClick, get map() { return map; } };
 })();

@@ -44,7 +44,11 @@
         "nature_reserve",
         "recreation_ground",
         "pitch",
-        "farmland"
+        "farmland",
+        "scrub",
+        "meadow",
+        "village_green",
+        "grassland"
       ],
       "paint": {
         "fill-color": "#d6efdf"
@@ -69,7 +73,7 @@
         "aerodrome"
       ],
       "paint": {
-        "fill-color": "#eceff0"
+        "fill-color": "#e6eaeb"
       }
     },
     {
@@ -79,6 +83,42 @@
       "source-layer": "water",
       "paint": {
         "fill-color": "#bfe0ea"
+      }
+    },
+    {
+      "id": "roads-casing",
+      "type": "line",
+      "source": "protomaps",
+      "source-layer": "roads",
+      "filter": [
+        "in",
+        "kind",
+        "minor_road",
+        "other",
+        "path",
+        "major_road",
+        "highway"
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#d8e0db",
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            1.6
+          ],
+          [
+            "zoom"
+          ],
+          11,
+          1.5,
+          18,
+          22
+        ]
       }
     },
     {
@@ -214,6 +254,65 @@
           1.5,
           18,
           20
+        ]
+      }
+    },
+    {
+      "id": "rail",
+      "type": "line",
+      "source": "protomaps",
+      "source-layer": "roads",
+      "filter": [
+        "==",
+        "kind",
+        "rail"
+      ],
+      "paint": {
+        "line-color": "#9aa8a1",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          12,
+          0.6,
+          16,
+          2
+        ],
+        "line-dasharray": [
+          3,
+          2
+        ]
+      }
+    },
+    {
+      "id": "aeroway",
+      "type": "line",
+      "source": "protomaps",
+      "source-layer": "roads",
+      "filter": [
+        "==",
+        "kind",
+        "aeroway"
+      ],
+      "paint": {
+        "line-color": "#dfe4e2",
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            1.4
+          ],
+          [
+            "zoom"
+          ],
+          11,
+          2,
+          16,
+          18
         ]
       }
     },
