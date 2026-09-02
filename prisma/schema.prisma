@@ -980,3 +980,79 @@ model WalletTxn {
   status    String   @default("success")
   createdAt DateTime @default(now())
 }
+
+// ===== BinaSmart Ride =====
+model Rider {
+  id         String   @id @default(cuid())
+  phone      String   @unique
+  name       String
+  telegramId String?
+  rating     Float    @default(5)
+  rides      Ride[]
+  createdAt  DateTime @default(now())
+}
+
+model Driver {
+  id              String    @id @default(cuid())
+  name            String
+  phone           String    @unique
+  photo           String?
+  telegramId      String?
+  tier            String
+  vehicleMake     String?
+  vehicleColour   String?
+  plate           String
+  licenceUrl      String?
+  registrationUrl String?
+  status          String    @default("pending") // pending | approved | suspended
+  online          Boolean   @default(false)
+  lat             Float?
+  lng             Float?
+  lastSeenAt      DateTime?
+  rating          Float     @default(5)
+  ridesCount      Int       @default(0)
+  commissionPct   Float?
+  rides           Ride[]
+  createdAt       DateTime  @default(now())
+}
+
+model Ride {
+  id            String    @id @default(cuid())
+  idemKey       String?   @unique
+  riderId       String
+  rider         Rider     @relation(fields: [riderId], references: [id])
+  driverId      String?
+  driver        Driver?   @relation(fields: [driverId], references: [id])
+  tier          String
+  pickup        Json
+  dropoff       Json
+  distanceM     Int
+  durationS     Int
+  fareEtb       Int
+  driverTakeEtb Int
+  paymentMethod String    @default("cash")    // cash | chapa | telebirr | wallet
+  paymentStatus String    @default("unpaid")  // unpaid | paid
+  status        String    @default("requested") // requested|dispatching|assigned|arriving|arrived|ontrip|completed|cancelled
+  cancelledBy   String?
+  concierge     Boolean   @default(false)
+  estimate      Boolean   @default(false)
+  riderName     String
+  riderPhone    String
+  riderRating   Int?
+  driverRating  Int?
+  requestedAt   DateTime  @default(now())
+  assignedAt    DateTime?
+  arrivedAt     DateTime?
+  startedAt     DateTime?
+  completedAt   DateTime?
+  cancelledAt   DateTime?
+
+  @@index([status])
+  @@index([riderId])
+}
+
+model RideSetting {
+  id        String   @id
+  json      String
+  updatedAt DateTime @updatedAt
+}
