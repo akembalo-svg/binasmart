@@ -49,6 +49,7 @@ Mounted from `server.js` in one line. Fastify + Prisma + PostgreSQL (existing).
   labels), 3D building extrusions, pitched camera, fly-to animations.
 - **Ethiopia vector tiles** as a single PMTiles file served from the VPS.
 - **OSRM** on the VPS with the Ethiopia OSM extract for routing, distance, ETA.
+- **Routing engine amendment (2026-09-02):** the VPS has no Docker, so routing runs on **GraphHopper 10** (Java 21 is installed) instead of OSRM. Same role and guarantees: self-hosted, free, ~10–50 ms responses, distance + time + geometry.
 
 ### Reused from BinaSmart
 Chapa, telebirr and the BinaSmart wallet for payment; the existing Telegram bot
