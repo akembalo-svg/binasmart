@@ -27,6 +27,13 @@ QR code per unit, online rent collection via **telebirr** and **Chapa**, tenant 
 ### 📚 Digital Ethiopia guides
 Bilingual, step-by-step guides with structured schema (Article + HowTo + FAQ): Fayda, telebirr, CBE Birr, e-Passport, eVisa, TIN, business licence, VAT/TOT, customs & import duty, driving licence, car import, Yellow Card, bank account, birth/marriage certificate, utility bills — plus interactive tools (income-tax & customs-duty calculators).
 
+### 🚕 BinaSmart Ride
+Fixed-price rides in Addis Ababa — no surge, no app to download. A BinaSmart-styled 3D map (self-hosted OpenStreetMap vector tiles + GraphHopper routing, both on our own server, so there are no per-ride map costs), directory-aware pickup/dropoff search that knows every building and shop on the platform, five tiers (Moto · Bajaj · Economy · Comfort · XL), and payment by cash or telebirr/Chapa.
+
+Phase 1 dispatches to online drivers and falls back to a **concierge queue** — if no driver accepts, the request is sent to the owner's Telegram and assigned by hand from `/ride-ops`, so rides work from day one with no drivers signed up yet. Rider app at `/ride`, owner console at `/ride-ops`.
+
+Design: `docs/superpowers/specs/2026-09-02-binasmart-ride-design.md` · Plan: `docs/superpowers/plans/2026-09-02-binasmart-ride-phase1.md` · Ops runbooks: `ops/routing/`, `ops/map/`
+
 ### 📋 Free Ethiopian tenders
 Government, bank and NGO tenders, updated daily, free to browse — with deadline reminders.
 
