@@ -8,8 +8,10 @@ fastify.addHook('onSend', async (req, reply, payload) => {
   reply.header('X-Content-Type-Options', 'nosniff');
   reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
   const u = String(req.raw.url || '').split('?')[0];
-  if (/\.(png|jpe?g|webp|gif|svg|ico|woff2?|ttf)$/i.test(u)) reply.header('Cache-Control', 'public, max-age=2592000, immutable');
-  else if (/\.(js|css|webmanifest|pmtiles|pbf)$/i.test(u)) reply.header('Cache-Control', 'public, max-age=86400');
+  if (reply.statusCode < 400) {
+    if (/\.(png|jpe?g|webp|gif|svg|ico|woff2?|ttf|pmtiles)$/i.test(u)) reply.header('Cache-Control', 'public, max-age=2592000, immutable');
+    else if (/\.(js|css|webmanifest|pbf)$/i.test(u)) reply.header('Cache-Control', 'public, max-age=86400');
+  }
   return payload;
 });
 
