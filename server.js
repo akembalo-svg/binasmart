@@ -147,6 +147,7 @@ fastify.get('/favicon-16.png', async (req, reply) => reply.sendFile('icon-32.png
 fastify.get('/favicon-32.png', async (req, reply) => reply.sendFile('icon-32.png'));
 fastify.get('/apple-touch-icon.png', async (req, reply) => reply.sendFile('icon-192.png'));
 fastify.get('/icon-192.png', async (req, reply) => reply.sendFile('icon-192.png'));
+fastify.get('/icon-32.png', async (req, reply) => reply.sendFile('icon-32.png'));
 fastify.get('/icon-512.png', async (req, reply) => reply.sendFile('icon-512.png'));
 fastify.get('/binasmart2026indexnow1784112792.txt', async (req, reply) => reply.sendFile('binasmart2026indexnow1784112792.txt'));
 // ===== RESTAURANT: menu + QR table ordering =====
@@ -542,6 +543,7 @@ WHAT BINASMART OFFERS:
 - 📋 Free Ethiopian tenders (government, banks, NGOs), updated daily, free: /free-ethiopian-tenders (live list /tenders).
 - 📚 Digital Ethiopia guides (A-Z, bilingual): Fayda /fayda, telebirr /telebirr, CBE Birr /cbe-birr-guide, e-Passport /passport, eVisa /ethiopia-evisa, Telesign /telesign, Mesob /mesob, TIN /tin-registration-ethiopia, business licence /business-registration-ethiopia, VAT/TOT /vat-registration-ethiopia, customs /customs-import-duty-ethiopia, driving licence /driving-licence-ethiopia, import a car (EV) /import-car-to-ethiopia, Yellow Card /ethiopian-origin-id-yellow-card, bank account /open-bank-account-ethiopia, birth/marriage certificate /birth-marriage-certificate-ethiopia, utility bills /pay-utility-bills-ethiopia (hub /guides). Tools: income-tax calculator /ethiopia-income-tax-calculator.
 - Also: events & cinema, hotel & travel booking, online payments and a wallet.
+- 🚕 BinaSmart Ride (/ride): fixed upfront price, no surge, no app to download; Moto, Bajaj, Economy, Comfort, XL; pay cash or telebirr/Chapa; Addis Ababa only. To get a price, open /ride and enter the destination — never guess or state fares yourself.
 
 VAT — BE PRECISE (two different things):
 - "BinaSmart's VAT accounting" = a BUILDING-OWNER feature inside /owner: it automatically tracks input & output VAT from the owner's invoices and prepares the VAT-return figures. When someone asks how BinaSmart's VAT accounting works, describe THIS and point to /owner (owners sign in there).
