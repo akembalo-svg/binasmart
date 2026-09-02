@@ -17,7 +17,7 @@ hotel and restaurant on the BinaSmart platform.
 |---|---|
 | Driver supply at launch | **None yet** — build the full two-sided platform to attract drivers |
 | Fulfilment before drivers exist | **Auto-dispatch first, concierge fallback** — if no driver accepts within ~60 s, the request goes to the owner's Telegram for manual assignment; the rider never hits a dead end |
-| Map engine | **OpenStreetMap + MapLibre GL**, self-hosted Ethiopia vector tiles and OSRM routing on the VPS — zero per-use cost, no API keys |
+| Map engine | **OpenStreetMap + MapLibre GL**, self-hosted Ethiopia vector tiles and GraphHopper routing on the VPS — zero per-use cost, no API keys |
 | Map look | BinaSmart palette (emerald/gold), Amharic labels, 3D building extrusions, tilted camera, fly-to animations |
 | Driver side | **Driver PWA + Telegram bot pings + Telegram Mini App** |
 | Rider side | Web / PWA + Telegram Mini App (Telegram provides verified identity and pushes) |
@@ -42,13 +42,13 @@ Mounted from `server.js` in one line. Fastify + Prisma + PostgreSQL (existing).
 | `ride/ws.js` | WebSockets (`@fastify/websocket`): live driver GPS → rider, ride status → both, offers → drivers |
 | `ride/fare.js` | Fixed upfront price (see §7) |
 | `ride/telegram.js` | Driver pings (Accept/Decline), rider status pushes, concierge alerts, Mini App auth validation |
-| `ride/geo.js` | OSRM routing/ETA; place search — BinaSmart directory first, then OSM |
+| `ride/geo.js` | GraphHopper routing/ETA; place search — BinaSmart directory first, then OSM |
 
 ### Maps stack (self-hosted, zero per-use cost)
 - **MapLibre GL** in the browser; custom BinaSmart style (emerald/gold, Amharic
   labels), 3D building extrusions, pitched camera, fly-to animations.
 - **Ethiopia vector tiles** as a single PMTiles file served from the VPS.
-- **OSRM** on the VPS with the Ethiopia OSM extract for routing, distance, ETA.
+- **GraphHopper 10** running on the VPS with the Ethiopia OSM extract for routing, distance, ETA.
 - **Routing engine amendment (2026-09-02):** the VPS has no Docker, so routing runs on **GraphHopper 10** (Java 21 is installed) instead of OSRM. Same role and guarantees: self-hosted, free, ~10–50 ms responses, distance + time + geometry.
 
 ### Reused from BinaSmart
@@ -96,7 +96,7 @@ confirmation, a "🚕 Get a ride here" button pre-fills the destination.
   distance to pickup, trip distance, fixed fare and driver's take, payment
   method. Accept / Decline. A Telegram message with the same buttons arrives
   simultaneously; whichever is tapped first wins.
-- **On trip.** Navigation view with OSRM route; buttons *Arrived → Start trip →
+- **On trip.** Navigation view with GraphHopper route; buttons *Arrived → Start trip →
   Complete*. Cash rides: driver confirms cash received. Digital: driver sees
   "paid".
 - **Earnings.** Daily/weekly ledger, commission shown transparently, settlement
@@ -106,7 +106,7 @@ confirmation, a "🚕 Get a ride here" button pre-fills the destination.
 
 1. Ride requested → find **online, approved drivers of the requested tier**
    within a radius: 3 km, widening to 6 km, then 10 km.
-2. Rank by ETA to pickup (OSRM), then rating. **Offer to the nearest driver
+2. Rank by ETA to pickup (GraphHopper), then rating. **Offer to the nearest driver
    only**, 20 s window. Decline or timeout → next driver. One-at-a-time
    prevents two drivers racing to one rider.
 3. Accept → ride `assigned`; rider notified instantly; other pending offers
@@ -163,7 +163,7 @@ flaky mobile connection never leaves a stale screen.
 
 ## 10. Error handling
 
-- **OSRM down** → fare from straight-line distance × 1.3 road factor, flagged
+- **GraphHopper down** → fare from straight-line distance × 1.3 road factor, flagged
   as an estimate; rides still work.
 - **Telegram API down** → offers still flow over WebSocket; concierge alert also
   emailed as backup.
@@ -185,7 +185,7 @@ new driver signups.
 ## 12. Phases (each shippable on its own)
 
 **Phase 1 — Rider app + concierge (rides work on day one).** 3D map, directory
-+ OSM search, OSRM routing, fixed-fare quote for all 5 tiers, ride request,
++ OSM search, GraphHopper routing, fixed-fare quote for all 5 tiers, ride request,
 concierge fallback to owner's Telegram, driver-assigned screen (details entered
 by owner), completion + rating. Payment: cash + telebirr/Chapa link. Ops
 console: concierge queue + settings.
@@ -230,8 +230,8 @@ buildings/hotels/events/flights, Bini answering ride questions.
 - **Anti-abuse.** Per-phone and per-IP rate limits on quotes and ride requests;
   a rider with repeated no-shows/cancels is throttled. Protects drivers' time
   during the zero-supply phase.
-- **OSRM health + cached quotes.** Health check every minute; quotes for the
-  same pickup/dropoff pair are cached briefly; on OSRM failure the straight-line
+- **GraphHopper health + cached quotes.** Health check every minute; quotes for the
+  same pickup/dropoff pair are cached briefly; on GraphHopper failure the straight-line
   fallback (§10) kicks in without user-visible errors.
 - **Instant feel.** Route is fetched the moment a destination is chosen (before
   the tier cards animate in); search is debounced and directory results are
