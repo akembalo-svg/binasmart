@@ -230,7 +230,6 @@ fastify.post('/api/diaspora-lead', async (req, reply) => {
 fastify.get('/diaspora', async (req, reply) => reply.sendFile('diaspora.html'));
 fastify.get('/insurance', async (req, reply) => reply.sendFile('insurance.html'));
 fastify.get('/for-insurers', async (req, reply) => reply.sendFile('for-insurers.html'));
-fastify.get('/ride', async (req, reply) => reply.sendFile('ride.html'));
 // ===== CARS + REAL ESTATE marketplace (partner-supplied) =====
 fastify.get('/cars', async (req, reply) => reply.sendFile('cars.html'));
 fastify.get('/property', async (req, reply) => reply.sendFile('property.html'));
@@ -2346,6 +2345,7 @@ async function chapaApi(path, method, body){
 function chapaRef(){ return 'bina-'+Date.now()+'-'+Math.random().toString(36).slice(2,8); }
 async function markBookingPaid(type, code){
   try{
+    if(type==='ride'){ await prisma.ride.updateMany({ where:{ id: code }, data:{ paymentStatus:'paid' } }); return; }
     if(type==='hotel') await prisma.hotelBooking.updateMany({ where:{ code }, data:{ status:'PAID' } });
     else if(type==='event') await prisma.eventTicket.updateMany({ where:{ code }, data:{ status:'PAID' } });
     else if(type==='travel') await prisma.travelTicket.updateMany({ where:{ code }, data:{ status:'PAID' } });
@@ -2598,6 +2598,14 @@ fastify.post('/api/wallet/pay', async (req, reply) => {
   return { ok:true, balance:nw.balance };
 });
 fastify.get('/wallet', async (req, reply) => reply.type('text/html').send(WALLET_HTML));
+
+// ===== BinaSmart Ride (Phase 1: rider app + concierge) =====
+require('./ride')(fastify, {
+  prisma, sendTg, OWNER_KEY,
+  OWNER_CHAT: '8096525984',
+  ROUTER_URL: process.env.ROUTER_URL || 'http://127.0.0.1:8989',
+  BASE_URL: 'https://bina.et'
+});
 
 fastify.listen({ port: PORT, host: '127.0.0.1' })
   .then(() => console.log('BinaSmart API v0.2 on :' + PORT))
