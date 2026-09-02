@@ -27,6 +27,10 @@ Hotel & travel booking, cinema & events ticketing, hospital directory, insurance
 ### 🤖 Bini — the 24/7 AI assistant
 "Bini" (ቢኒ) is BinaSmart's bilingual assistant, available as a homepage search-box and a floating chat widget on every guide page.
 
+<p align="center">
+  <img src="docs/screenshot-bini.png" alt="Bini — the floating 24/7 AI chat widget with bilingual greeting and conversation-starter chips" width="300">
+</p>
+
 - **Brain:** Google **Gemini 2.5 Flash-Lite** via the OpenAI-compatible endpoint, with a **local GLM model as automatic fallback** so Bini never goes dark.
 - **Grounded & honest:** answers only from BinaSmart's real services; never invents prices, numbers or government portal names — it routes to the verified guide or WhatsApp instead.
 - **Human & multi-turn:** empathy-first on problems, remembers the conversation, and offers conversation-starter chips.
