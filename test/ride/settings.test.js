@@ -45,3 +45,17 @@ test('update() rejects non-numeric or out-of-range knobs and persists nothing', 
   assert.equal(p._store.row, null);
   assert.equal((await s.get()).tiers.economy.base, DEFAULTS.tiers.economy.base);
 });
+
+test('get() falls back to DEFAULTS when the row is corrupt, and never aliases DEFAULTS', async () => {
+  for (const json of ['{not json', 'null', JSON.stringify({ tiers: { economy: { base: 'BAD' } } })]) {
+    const s = makeSettings(fakePrisma({ id: 'default', json }));
+    const v = await s.get();
+    assert.equal(v.tiers.economy.base, DEFAULTS.tiers.economy.base);
+    assert.notEqual(v, DEFAULTS);
+    assert.notEqual(v.tiers.economy, DEFAULTS.tiers.economy);
+  }
+  const s2 = makeSettings(fakePrisma(null));
+  await assert.rejects(() => s2.update({ tiers: { economy: { seats: 0 } } }), /invalid_settings: tiers\.economy\.seats/);
+  await assert.rejects(() => s2.update([1, 2]), /invalid_settings: patch/);
+  try { await s2.update({ commissionPct: 150 }); } catch (e) { assert.equal(e.statusCode, 400); }
+});
