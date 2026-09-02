@@ -22,13 +22,20 @@
   });
   $('btn3d').addEventListener('click', function () { var on = !BinaMap.is3D(); BinaMap.set3D(on); $('btn3d').classList.toggle('off', !on); });
 
+  // A rider who denies the location prompt (or never answers it) must still be able to book:
+  // some browsers call NEITHER callback in that case, so a hard timer guarantees a pickup exists.
+  var DEFAULT_PICKUP = { lat: 9.0108, lng: 38.7578, label: 'Bole, Addis Ababa (tap Change)' };
   function locate() {
-    if (!navigator.geolocation) return setPickup({ lat: 9.0108, lng: 38.7578, label: 'Bole, Addis Ababa' });
+    var settled = false;
+    function settle(p) { if (settled) return; settled = true; setPickup(p); }
+    if (!navigator.geolocation) return settle(DEFAULT_PICKUP);
+    setTimeout(function () { settle(DEFAULT_PICKUP); }, 9000);
     navigator.geolocation.getCurrentPosition(function (pos) {
+      if (settled) return;
       var p = { lat: pos.coords.latitude, lng: pos.coords.longitude, label: 'የእርስዎ ቦታ · Your location' };
-      if (p.lat < 8.5 || p.lat > 9.5 || p.lng < 38.4 || p.lng > 39.2) { toast('BinaSmart Ride is Addis Ababa only for now'); p = { lat: 9.0108, lng: 38.7578, label: 'Bole, Addis Ababa' }; }
-      setPickup(p); BinaMap.flyTo(p, 15.5);
-    }, function () { setPickup({ lat: 9.0108, lng: 38.7578, label: 'Bole, Addis Ababa (tap Change)' }); }, { enableHighAccuracy: true, timeout: 8000 });
+      if (p.lat < 8.5 || p.lat > 9.5 || p.lng < 38.4 || p.lng > 39.2) { toast('BinaSmart Ride is Addis Ababa only for now'); p = DEFAULT_PICKUP; }
+      settle(p); BinaMap.flyTo(p, 15.5);
+    }, function () { settle(DEFAULT_PICKUP); }, { enableHighAccuracy: true, timeout: 8000 });
   }
   function setPickup(p) { S.pickup = p; BinaMap.setPickup(p); $('fromLabel').textContent = p.label; }
 
@@ -69,7 +76,8 @@
 
   // ---- quote ----
   function quote() {
-    if (!S.pickup || !S.dropoff) return;
+    if (!S.dropoff) return;
+    if (!S.pickup) { setPickup(DEFAULT_PICKUP); toast('የመነሻ ቦታ ተቀምጧል · Pickup set to Bole — tap Change to move it'); }
     var seq = (S.qSeq = (S.qSeq || 0) + 1);
     show('s-quote'); $('qFrom').textContent = label(S.pickup); $('qTo').textContent = label(S.dropoff); $('tiers').innerHTML = '<div class="small">ዋጋ እያሰላን ነው… · Calculating…</div>';
     api('/api/ride/quote', { pickup: S.pickup, dropoff: S.dropoff }).then(function (d) {
@@ -87,7 +95,10 @@
       // Guard the geometry: without a polyline drawRoute is meaningless AND liftAboveSheet's pass-0
       // once('moveend') would stay attached and fire on the user's next pan.
       if (d.geometry && d.geometry.length > 1) {
-        BinaMap.drawRoute(d.geometry, Math.min($('sheet').offsetHeight, Math.round(innerHeight * 0.58)));
+        // Clamp the pad so top+bottom can never swallow the canvas: MapLibre silently skips the fit
+        // when padding leaves no room (seen on short/landscape viewports), stranding the route off-screen.
+        var pad = Math.min($('sheet').offsetHeight, Math.round(innerHeight * 0.58), Math.max(60, innerHeight - 90 - 120));
+        BinaMap.drawRoute(d.geometry, pad);
         liftAboveSheet();
       }
     }).catch(function () { if (seq !== S.qSeq) return; toast('Network error — try again'); show('s-home'); });
