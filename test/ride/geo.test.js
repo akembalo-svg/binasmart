@@ -40,3 +40,11 @@ test('searchPlaces() puts directory results first and filters OSM to Addis', asy
   assert.equal(res[0].kind, 'building'); assert.equal(res[0].labelAm, 'ጄጄ ዳሩሌ');
   assert.equal(res.length, 2); assert.equal(res[1].label, 'Edna Mall');
 });
+
+test('route() leaves no pending timer when the router fails', async () => {
+  const geo = makeGeo({ routerUrl: 'http://x', fetchFn: async () => { throw new Error('down'); }, prisma: {} });
+  const n = () => process.getActiveResourcesInfo().filter(x => x === 'Timeout').length;
+  const before = n();
+  await geo.route(A, B);
+  assert.equal(n(), before);
+});

@@ -4,6 +4,7 @@
 const ADDIS = { lat: 9.02, lng: 38.75 };
 const ADDIS_BOX = { minLat: 8.5, maxLat: 9.5, minLng: 38.4, maxLng: 39.2 };
 const CITY_MPS = 25000 / 3600; // 25 km/h average city speed for the fallback ETA
+const ROUTE_TIMEOUT_MS = 4000, PHOTON_TIMEOUT_MS = 3500, PHOTON_TTL_MS = 600000, PHOTON_CACHE_MAX = 500;
 
 function haversineM(a, b) {
   const R = 6371000, toR = x => x * Math.PI / 180;
@@ -11,61 +12,80 @@ function haversineM(a, b) {
   const s = Math.sin(dLat / 2) ** 2 + Math.cos(toR(a.lat)) * Math.cos(toR(b.lat)) * Math.sin(dLng / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(s));
 }
+function likeEscape(s) { return s.replace(/[%_\\]/g, c => '\\' + c); }
 
 function makeGeo({ routerUrl, fetchFn, prisma }) {
   const f = fetchFn || fetch;
+  let lastRouteWarn = 0;
+
+  async function fetchJson(url, opts, timeoutMs) {
+    const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), timeoutMs);
+    try {
+      const r = await f(url, { ...(opts || {}), signal: ctrl.signal });
+      if (r.ok === false) throw new Error('http_' + r.status);
+      return await r.json();
+    } finally { clearTimeout(t); }
+  }
 
   async function route(from, to) {
     try {
       const u = routerUrl + '/route?point=' + from.lat + ',' + from.lng + '&point=' + to.lat + ',' + to.lng +
         '&profile=car&points_encoded=false&instructions=false';
-      const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 4000);
-      const r = await f(u, { signal: ctrl.signal }); clearTimeout(t);
-      const d = await r.json(); const p = d && d.paths && d.paths[0];
+      const d = await fetchJson(u, {}, ROUTE_TIMEOUT_MS);
+      const p = d && d.paths && d.paths[0];
       if (!p) throw new Error('no_path');
       return { distanceM: Math.round(p.distance), durationS: Math.round(p.time / 1000),
         geometry: (p.points && p.points.coordinates) || [], estimate: false };
     } catch (e) {
+      if (Date.now() - lastRouteWarn > 60000) { lastRouteWarn = Date.now(); console.error('[ride/geo] router fallback:', e.message); }
       const distanceM = Math.round(haversineM(from, to) * 1.3);
       return { distanceM, durationS: Math.round(distanceM / CITY_MPS),
         geometry: [[from.lng, from.lat], [to.lng, to.lat]], estimate: true };
     }
   }
 
-  const photonCache = new Map(); // q -> { t, v }
+  const photonCache = new Map(); // key -> { t, v }
+  function cacheSet(key, v) {
+    if (photonCache.size >= PHOTON_CACHE_MAX) {
+      const now = Date.now();
+      for (const [k, e] of photonCache) if (now - e.t > PHOTON_TTL_MS) photonCache.delete(k);
+      if (photonCache.size >= PHOTON_CACHE_MAX) photonCache.delete(photonCache.keys().next().value);
+    }
+    photonCache.set(key, { t: Date.now(), v });
+  }
+
   async function searchPlaces(q, bias) {
-    q = (q || '').trim();
+    q = (q || '').trim().slice(0, 80);
     if (q.length < 2) return [];
+    const like = likeEscape(q);
     const [bs, shops] = await Promise.all([
       prisma.building.findMany({
-        where: { lat: { not: null }, OR: [{ name: { contains: q, mode: 'insensitive' } }, { nameAm: { contains: q } }] },
+        where: { lat: { not: null }, lng: { not: null }, OR: [{ name: { contains: like, mode: 'insensitive' } }, { nameAm: { contains: like } }] },
         select: { name: true, nameAm: true, qrSlug: true, lat: true, lng: true, city: true }, take: 5 }),
       prisma.shop.findMany({
-        where: { tenancy: { active: true }, OR: [{ name: { contains: q, mode: 'insensitive' } }, { nameAm: { contains: q } }] },
+        where: { tenancy: { active: true, unit: { building: { lat: { not: null }, lng: { not: null } } } }, OR: [{ name: { contains: like, mode: 'insensitive' } }, { nameAm: { contains: like } }] },
         include: { tenancy: { include: { unit: { include: { building: { select: { name: true, nameAm: true, qrSlug: true, lat: true, lng: true } } } } } } }, take: 5 })
     ]);
     const dir = [
       ...bs.map(b => ({ kind: 'building', label: b.name, labelAm: b.nameAm, sub: b.city || 'Addis Ababa', lat: b.lat, lng: b.lng, slug: b.qrSlug })),
-      ...shops.filter(s => s.tenancy.unit.building.lat != null).map(s => {
-        const b = s.tenancy.unit.building;
-        return { kind: 'shop', label: s.name, labelAm: s.nameAm, sub: b.name + ' · ' + s.tenancy.unit.number, lat: b.lat, lng: b.lng, slug: b.qrSlug };
-      })
+      ...shops.map(s => { const b = s.tenancy.unit.building;
+        return { kind: 'shop', label: s.name, labelAm: s.nameAm, sub: b.name + ' · ' + s.tenancy.unit.number, lat: b.lat, lng: b.lng, slug: b.qrSlug }; })
     ];
     let osm = [];
     try {
-      const key = q.toLowerCase(); const c = photonCache.get(key);
-      if (c && Date.now() - c.t < 600000) osm = c.v;
+      const lat = (bias && bias.lat) || ADDIS.lat, lng = (bias && bias.lng) || ADDIS.lng;
+      const key = q.toLowerCase() + '|' + lat.toFixed(2) + ',' + lng.toFixed(2);
+      const c = photonCache.get(key);
+      if (c && Date.now() - c.t < PHOTON_TTL_MS) osm = c.v;
       else {
-        const lat = (bias && bias.lat) || ADDIS.lat, lng = (bias && bias.lng) || ADDIS.lng;
         const u = 'https://photon.komoot.io/api/?q=' + encodeURIComponent(q) + '&limit=5&lat=' + lat + '&lon=' + lng + '&lang=en';
-        const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 3500);
-        const r = await f(u, { signal: ctrl.signal, headers: { 'User-Agent': 'BinaSmart-Ride/1.0 (https://bina.et)' } }); clearTimeout(t);
-        const d = await r.json();
+        const d = await fetchJson(u, { headers: { 'User-Agent': 'BinaSmart-Ride/1.0 (https://bina.et)' } }, PHOTON_TIMEOUT_MS);
         osm = (d.features || []).map(ft => {
-          const p = ft.properties || {}, c2 = ft.geometry.coordinates;
+          const p = ft.properties || {}, c2 = ft.geometry && ft.geometry.coordinates;
+          if (!c2 || c2.length < 2) return null;
           return { kind: 'osm', label: p.name || p.street || q, labelAm: '', sub: [p.street, p.district, p.city].filter(Boolean).join(', '), lat: c2[1], lng: c2[0] };
-        }).filter(x => x.lat > ADDIS_BOX.minLat && x.lat < ADDIS_BOX.maxLat && x.lng > ADDIS_BOX.minLng && x.lng < ADDIS_BOX.maxLng);
-        photonCache.set(key, { t: Date.now(), v: osm });
+        }).filter(x => x && x.lat > ADDIS_BOX.minLat && x.lat < ADDIS_BOX.maxLat && x.lng > ADDIS_BOX.minLng && x.lng < ADDIS_BOX.maxLng);
+        cacheSet(key, osm);
       }
     } catch (e) { osm = []; }
     return [...dir, ...osm].slice(0, 10);
