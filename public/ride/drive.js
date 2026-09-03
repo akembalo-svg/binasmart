@@ -5,15 +5,21 @@
 (function () {
   'use strict';
 
-  var PING_MS = 4000, OFFER_WINDOW_S = 25, RING = 119.4;
+  var PING_MS = 4000, OFFER_WINDOW_S = 25, RING = 119.4; // OFFER_WINDOW_S is only a fallback
   var $ = function (id) { return document.getElementById(id); };
   // TG.initData is a function in the shim, and it returns null outside Telegram.
   var initData = (window.TG && window.TG.initData && window.TG.initData()) || '';
+  // Distinguish "not in Telegram at all" from "in Telegram but it gave us no identity": the second
+  // is an old client or a Mini App opened from a link rather than a button, and needs a different fix.
+  // The SDK defines window.Telegram.WebApp in a plain browser too, with platform 'unknown'.
+  // Only a real Telegram client reports android/ios/tdesktop/weba, so platform is the honest test.
+  var tgPlatform = (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.platform) || 'unknown';
+  var inTelegram = tgPlatform !== 'unknown';
   // The shim paints the rider app's green; the cockpit is night-dark.
   try { window.Telegram.WebApp.setHeaderColor('#0b1220'); window.Telegram.WebApp.setBackgroundColor('#0b1220'); } catch (e) {}
   var st = {
     driver: null, job: null, offer: null, offerEndsAt: 0,
-    pos: null, gpsOk: false, lastPingOk: 0, busy: false, lock: null, routeFor: '',
+    pos: null, gpsOk: false, lastPingOk: 0, busy: false, lock: null, routeFor: '', offerTotal: 0,
   };
   var carMk = null, map = null;
 
@@ -154,8 +160,9 @@
   }
   function tickRing() {
     var left = Math.max(0, Math.round((st.offerEndsAt - Date.now()) / 1000));
+    var total = st.offerTotal || OFFER_WINDOW_S;
     $('ocount').textContent = left;
-    $('oarc').style.strokeDashoffset = String(RING * (1 - left / OFFER_WINDOW_S));
+    $('oarc').style.strokeDashoffset = String(RING * (1 - Math.min(1, left / total)));
     if (!st.offer) return;
     if (left <= 0) { st.offer = null; render(); return; }
     setTimeout(tickRing, 400);
@@ -199,7 +206,9 @@
     var next = (j.offers && j.offers.length) ? j.offers[0] : null;
     if (next && (!st.offer || st.offer.rideId !== next.rideId)) {
       st.offer = next;
-      st.offerEndsAt = Date.now() + (next.expiresInS != null ? next.expiresInS : OFFER_WINDOW_S) * 1000;
+      // The server owns both the window and how much of it is left.
+      st.offerTotal = next.windowS || OFFER_WINDOW_S;
+      st.offerEndsAt = Date.now() + (next.expiresInS != null ? next.expiresInS : st.offerTotal) * 1000;
     } else if (!next) { st.offer = null; }
     render();
   }
@@ -282,7 +291,9 @@
     // The city map goes up first in every state. A blank black rectangle reads as a broken app.
     ensureMap();
     if (!initData) {
-      return gate('Open this in Telegram', 'The driver app runs inside @binasmartdriverbot so we know it is really you. Open the bot and tap the button.\nመተግበሪያው በቴሌግራም ውስጥ ይሰራል።', 'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot');
+      return inTelegram
+        ? gate('Reopen from the bot', 'Telegram opened this page without signing you in. Go back to @binasmartdriverbot and tap the "Open the driver app" button in a message rather than a plain link.\nከቦቱ ውስጥ ያለውን አዝራር ተጭነው ይክፈቱ።', 'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot')
+        : gate('Open this in Telegram', 'The driver app runs inside @binasmartdriverbot so we know it is really you. Open the bot and tap the button.\nመተግበሪያው በቴሌግራም ውስጥ ይሰራል።', 'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot');
     }
     post('/api/drive/session').then(function (j) {
       if (j._status === 404) {

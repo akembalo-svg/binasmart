@@ -14,7 +14,7 @@ const ADDIS_TZ_OFFSET_MS = 3 * 3600 * 1000; // UTC+3, no DST — the earnings da
 function addisDay(ms) { return new Date(Math.floor((ms + ADDIS_TZ_OFFSET_MS) / 86400000) * 86400000 - ADDIS_TZ_OFFSET_MS); }
 const num = (v, lo, hi) => { const n = Number(v); return Number.isFinite(n) && n >= lo && n <= hi ? n : null; };
 
-function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, riderNotify, geo, now }) {
+function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, riderNotify, geo, settings, now }) {
   const clock = now || Date.now;
 
   function pubDriver(d) {
@@ -53,12 +53,17 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
 
   async function openOffers(driver) {
     const rows = await prisma.rideOffer.findMany({ where: { driverId: driver.id, status: 'open' }, orderBy: { createdAt: 'asc' } });
+    // The window is a live setting. Hardcoding 25 here would make the app's countdown ring lie the
+    // moment the window is changed in /ride-ops, and ride/offers.js expire() is the real authority.
+    const s = settings ? await settings.get() : null;
+    const windowS = (s && s.offerWindowS) || 25;
     const out = [];
     for (const o of rows) {
       const ride = await prisma.ride.findUnique({ where: { id: o.rideId } });
       if (!ride || ride.driverId || !['requested', 'dispatching'].includes(ride.status)) continue;
       out.push({ rideId: ride.id, etaS: o.etaS, distanceM: o.distanceM, round: o.round,
-        expiresInS: Math.max(0, Math.round((new Date(o.createdAt).getTime() + 25000 - clock()) / 1000)),
+        expiresInS: Math.max(0, Math.round((new Date(o.createdAt).getTime() + windowS * 1000 - clock()) / 1000)),
+        windowS: windowS,
         tier: ride.tier, pickup: ride.pickup, dropoff: ride.dropoff, fareEtb: ride.fareEtb,
         driverTakeEtb: ride.driverTakeEtb, tripDistanceM: ride.distanceM, tripDurationS: ride.durationS });
     }

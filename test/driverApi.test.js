@@ -29,6 +29,7 @@ function world() {
       { id: 'r1', status: 'dispatching', tier: 'economy', pickup: PICKUP, dropoff: DROP, distanceM: 5000, durationS: 900, fareEtb: 295, driverTakeEtb: 295, paymentMethod: 'cash', riderName: 'Sara', riderPhone: '+251933333333', bookedBy: null, driverId: null, requestedAt: new Date(1_700_000_000_000) },
     ],
     offers: [],
+    windowS: 25,
   };
   const notified = [], ownerNotes = [];
   const prisma = {
@@ -90,6 +91,7 @@ function world() {
   };
   const api = makeDriverApi({
     prisma, driverBotToken: TOKEN, location, offers,
+    settings: { get: async () => ({ offerWindowS: state.windowS || 25 }) },
     geo: { route: async (from, to) => { if (to.label === 'boom') throw new Error('router down'); return { geometry: [[38.76, 9.01], [38.75, 9.04]], distanceM: 5200, durationS: 780 }; } },
     telegram: { ownerNote: async t => { ownerNotes.push(t); return true; } },
     riderNotify: { notify: async (id, ev) => { notified.push(ev); return true; } },
@@ -319,4 +321,22 @@ test('route needs an active ride and a position', async () => {
   const b = reply();
   await w.api.route(w.req({ body: {} }), b);
   assert.equal(b.statusCode, 400);
+});
+
+test('the countdown comes from the live offer window, not a hardcoded 25', async () => {
+  const w = world();
+  w.state.offers.push({ id: 'o1', rideId: 'r1', driverId: 'd1', status: 'open', etaS: 180, distanceM: 900, round: 1, createdAt: new Date(w.clockRef.t - 10000) });
+
+  var res = await w.api.ping(w.req({ body: { lat: 9.012, lng: 38.762 } }), reply());
+  assert.equal(res.offers[0].windowS, 25);
+  assert.equal(res.offers[0].expiresInS, 15, '25 s window, 10 s elapsed');
+
+  w.state.windowS = 60;
+  res = await w.api.ping(w.req({ body: { lat: 9.0121, lng: 38.7621 } }), reply());
+  assert.equal(res.offers[0].windowS, 60, 'the app is told the real window');
+  assert.equal(res.offers[0].expiresInS, 50, 'and the real time left');
+
+  w.state.windowS = 5;
+  res = await w.api.ping(w.req({ body: { lat: 9.0122, lng: 38.7622 } }), reply());
+  assert.equal(res.offers[0].expiresInS, 0, 'a window already past reads as zero, never negative');
 });
