@@ -1,0 +1,74 @@
+<!doctype html>
+<!-- Example card for ops/og/render-card.sh. Copy it, swap the category pill, headline, lede,
+     chips and the emoji, keep html/body at 1200x630, then:
+       ops/og/render-card.sh /root/my-card.html <post-slug>
+     Keep the headline max-width clear of the artwork on the right. Use only facts from the post -
+     these cards are shared on their own, so an invented number travels without its correction. -->
+
+<html lang="am"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@600;800;900&family=Noto+Sans+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    font-family:'Noto Sans Ethiopic','Noto Serif Ethiopic',system-ui,sans-serif;
+    color:#141a24; position:relative;
+    background:
+      radial-gradient(900px 520px at 88% 6%, rgba(218,18,26,.10) 0%, transparent 62%),
+      radial-gradient(700px 480px at 4% 98%, rgba(7,137,48,.08) 0%, transparent 62%),
+      #fbfaf8;
+  }
+  /* the faint dot texture the other cards carry */
+  .dots{position:absolute;inset:0;
+    background-image:radial-gradient(rgba(20,26,36,.10) 1.1px, transparent 1.1px);
+    background-size:26px 26px;opacity:.5}
+  .wrap{position:absolute;inset:0;padding:44px 56px;display:flex;flex-direction:column}
+
+  .mast{display:flex;align-items:center;justify-content:space-between}
+  .brandrow{display:flex;align-items:center;gap:16px}
+  .brand{font-family:'Noto Serif Ethiopic',serif;font-size:31px;font-weight:900;letter-spacing:-.5px}
+  .brand .et{color:#078930}
+  .brand .zena{color:#DA121A;margin-left:5px}
+  .pill{background:#141a24;color:#fff;font-size:17px;font-weight:700;padding:7px 20px;border-radius:999px}
+  .date{font-size:19px;color:#7b8494;font-weight:600}
+  .rule{width:210px;height:3px;background:#141a24;margin:24px 0 30px}
+
+  h1{font-family:'Noto Serif Ethiopic',serif;font-size:59px;font-weight:900;line-height:1.24;letter-spacing:-.5px;max-width:12.6em}
+  h1 .hl{color:#DA121A}
+  p.lede{margin-top:22px;font-size:23px;line-height:1.62;color:#4b5565;max-width:17.5em}
+
+  .chips{margin-top:auto;display:flex;align-items:center;gap:13px}
+  .chip{background:#fff;border:1px solid #e6e2d9;border-radius:14px;padding:13px 21px;
+    box-shadow:0 1px 3px rgba(20,26,36,.06);font-size:19px;font-weight:700;color:#141a24}
+  .chip small{display:block;font-size:13.5px;font-weight:600;color:#7b8494;margin-top:2px}
+  .site{margin-left:auto;font-family:'Noto Serif Ethiopic',serif;font-size:21px;font-weight:800;color:#141a24}
+
+  .art{position:absolute;right:66px;top:46%;transform:translateY(-50%);font-size:232px;line-height:1;
+    filter:drop-shadow(0 26px 46px rgba(20,26,36,.22))}
+</style></head>
+<body>
+<div class="dots"></div>
+<div class="wrap">
+  <div class="mast">
+    <div class="brandrow">
+      <span class="brand">Bina<span class="et">.et</span><span class="zena">ዜና</span></span>
+      <span class="pill">መመሪያ</span>
+    </div>
+    <span class="date">ነሐሴ 2026</span>
+  </div>
+  <div class="rule"></div>
+
+  <h1>ፋይዳ ምንድን ነው?<br><span class="hl">እንዴት መመዝገብ</span> እና መጠቀም</h1>
+  <p class="lede">ፋይዳ የኢትዮጵያ ብሔራዊ ዲጂታል መታወቂያ ነው። እንዴት መመዝገብ፣ FIN ማግኘት እና መጠቀም — ሙሉ የአማርኛ መመሪያ።</p>
+
+  <div class="chips">
+    <span class="chip">ብሔራዊ መታወቂያ<small>ዲጂታል</small></span>
+    <span class="chip">FIN<small>የፋይዳ ቁጥር</small></span>
+    <span class="chip">5 ደቂቃ<small>ንባብ</small></span>
+    <span class="site">bina.et/news</span>
+  </div>
+</div>
+<div class="art">🪪</div>
+</body></html>
