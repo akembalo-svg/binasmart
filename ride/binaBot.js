@@ -30,10 +30,10 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername }
   // Bini writes markdown links like [text](/ride); Telegram plain text needs full URLs.
   function forTelegram(text) {
     return String(text || '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
       .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '$1 — $2')
       .replace(/\[([^\]]+)\]\((\/[^)]*)\)/g, (m, t, p) => t + ' — ' + baseUrl + p)
-      .replace(/(^|[\s(])(\/[a-z0-9][a-z0-9\-\/]*)(?=[\s.,)]|$)/gi, (m, pre, p) => pre + baseUrl + p)
-      .replace(/\*\*([^*]+)\*\*/g, '$1');
+      .replace(/(^|[\s(])(\/[a-z0-9][a-z0-9\-\/]*)(?=[\s.,)]|$)/gi, (m, pre, p) => pre + baseUrl + p);
   }
 
   async function askBini(chatId, message) {
