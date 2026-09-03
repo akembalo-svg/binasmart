@@ -48,3 +48,37 @@ test('route() leaves no pending timer when the router fails', async () => {
   await geo.route(A, B);
   assert.equal(n(), before);
 });
+
+test('route(from, to, {instructions:true}) asks the router for turns and keeps only what a banner needs', async () => {
+  const calls = [];
+  const fetchFn = async (url) => {
+    calls.push(url);
+    return { ok: true, json: async () => ({ paths: [{
+      distance: 2329.5, time: 224206,
+      points: { coordinates: [[38.758, 9.011], [38.757, 9.010], [38.756, 9.008], [38.747, 9.001]] },
+      instructions: [
+        { distance: 236.06, sign: 0, interval: [0, 1], text: 'Continue', time: 42492, street_name: '' },
+        { distance: 19.03, sign: -2, interval: [1, 2], text: 'Turn left', time: 3425, street_name: 'Ring Road' },
+        { distance: 0, sign: 4, interval: [3, 3], text: 'Arrive at destination', time: 0, street_name: '' },
+      ] }] }) };
+  };
+  const geo = makeGeo({ routerUrl: 'http://r', fetchFn });
+
+  const plain = await geo.route({ lat: 9.011, lng: 38.758 }, { lat: 9.001, lng: 38.747 });
+  assert.match(calls[0], /instructions=false/, 'a fare quote must not pay for turn-by-turn');
+  assert.equal(plain.instructions, undefined);
+
+  const withSteps = await geo.route({ lat: 9.011, lng: 38.758 }, { lat: 9.001, lng: 38.747 }, { instructions: true });
+  assert.match(calls[1], /instructions=true/);
+  assert.equal(withSteps.instructions.length, 3);
+  assert.deepEqual(withSteps.instructions[1], { sign: -2, distanceM: 19, durationS: 3, street: 'Ring Road', text: 'Turn left', interval: [1, 2], exitNumber: null });
+  assert.equal(withSteps.instructions[2].sign, 4, 'the arrival step survives');
+});
+
+test('when the router is down there are no invented turns', async () => {
+  const geo = makeGeo({ routerUrl: 'http://r', fetchFn: async () => { throw new Error('down'); } });
+  const r = await geo.route({ lat: 9.011, lng: 38.758 }, { lat: 9.001, lng: 38.747 }, { instructions: true });
+  assert.equal(r.estimate, true);
+  assert.deepEqual(r.instructions, [], 'an empty list, never a guess');
+  assert.ok(r.distanceM > 0);
+});

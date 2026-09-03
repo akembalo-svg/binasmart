@@ -92,7 +92,7 @@ function world() {
   const api = makeDriverApi({
     prisma, driverBotToken: TOKEN, location, offers,
     settings: { get: async () => ({ offerWindowS: state.windowS || 25 }) },
-    geo: { route: async (from, to) => { if (to.label === 'boom') throw new Error('router down'); return { geometry: [[38.76, 9.01], [38.75, 9.04]], distanceM: 5200, durationS: 780 }; } },
+    geo: { route: async (from, to, opts) => { if (to.label === 'boom') throw new Error('router down'); return { geometry: [[38.76, 9.01], [38.75, 9.04]], distanceM: 5200, durationS: 780, instructions: (opts && opts.instructions) ? [{ sign: 0, distanceM: 200, interval: [0, 1], street: 'Bole Rd', text: 'Continue' }, { sign: 2, distanceM: 50, interval: [1, 2], street: '', text: 'Turn right' }] : undefined }; } },
     telegram: { ownerNote: async t => { ownerNotes.push(t); return true; } },
     riderNotify: { notify: async (id, ev) => { notified.push(ev); return true; } },
     now: () => clockRef.t,
@@ -339,4 +339,17 @@ test('the countdown comes from the live offer window, not a hardcoded 25', async
   w.state.windowS = 5;
   res = await w.api.ping(w.req({ body: { lat: 9.0122, lng: 38.7622 } }), reply());
   assert.equal(res.offers[0].expiresInS, 0, 'a window already past reads as zero, never negative');
+});
+
+test('the driver route carries Amharic-translatable turn instructions', async () => {
+  const w = world();
+  w.state.rides[0].driverId = 'd1'; w.state.rides[0].status = 'assigned';
+  w.state.drivers[0].onRideId = 'r1';
+  const res = await w.api.route(w.req({ body: { lat: 9.011, lng: 38.761, to: 'pickup' } }), reply());
+  assert.equal(res.instructions.length, 2, 'the app gets the manoeuvres');
+  assert.equal(res.instructions[1].sign, 2, 'sign codes, not English prose, so the app owns the language');
+
+  w.state.rides[0].pickup = { lat: 9.01, lng: 38.76, label: 'boom' };
+  const down = await w.api.route(w.req({ body: { lat: 9.011, lng: 38.761 } }), reply());
+  assert.deepEqual(down.instructions, [], 'a router outage yields no turns, never wrong ones');
 });

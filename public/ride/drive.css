@@ -120,3 +120,23 @@ body.drv #map::after{content:'';position:absolute;inset:0;background:rgba(11,18,
 /* Navigate is how a driver actually drives there, so give it real weight. */
 .tacts .ghost{font-size:14px}
 #tetaP{color:#fbbf24;font-weight:800;font-size:12.5px}
+
+/* ---- Amharic turn banner ---- */
+.dnav{position:fixed;top:calc(56px + env(safe-area-inset-top));left:10px;right:10px;z-index:7;
+  display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:16px;
+  background:rgba(21,31,51,.97);border:1px solid var(--nline);
+  box-shadow:0 14px 36px -14px #000;backdrop-filter:blur(6px)}
+.dnav.now{background:#f59e0b;border-color:#fbbf24}
+.dnav.off{background:#7c2d12;border-color:#9a3412}
+.dnavIc{font-size:30px;line-height:1;flex:none;width:38px;text-align:center;color:var(--amb)}
+.dnav.now .dnavIc,.dnav.off .dnavIc{color:#fff}
+.dnavTxt{flex:1;min-width:0}
+.dnavTxt b{display:block;font-size:16px;font-weight:900;color:#fff;line-height:1.28}
+.dnavTxt small{display:block;font-size:11px;color:var(--nmut);margin-top:2px}
+.dnav.now .dnavTxt b{color:#3b2600}
+.dnav.now .dnavTxt small{color:#7c4a03}
+.dnavRem{flex:none;font-size:12px;font-weight:900;color:var(--nmut);text-align:right}
+.dnav.now .dnavRem{color:#7c4a03}
+.dghost.off{color:#64748b}
+/* The banner sits above the map but must never cover the trip card. */
+@media(max-height:600px){.dnavTxt b{font-size:14.5px}.dnavIc{font-size:25px;width:32px}}

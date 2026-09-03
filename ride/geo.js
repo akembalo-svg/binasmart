@@ -27,20 +27,38 @@ function makeGeo({ routerUrl, fetchFn, prisma }) {
     } finally { clearTimeout(t); }
   }
 
-  async function route(from, to) {
+  // opts.instructions asks GraphHopper for turn-by-turn. Off by default: a fare quote needs only
+  // distance and time, and instructions triple the response size for nothing.
+  async function route(from, to, opts) {
+    const wantSteps = !!(opts && opts.instructions);
     try {
       const u = routerUrl + '/route?point=' + from.lat + ',' + from.lng + '&point=' + to.lat + ',' + to.lng +
-        '&profile=car&points_encoded=false&instructions=false';
+        '&profile=car&points_encoded=false&instructions=' + (wantSteps ? 'true' : 'false');
       const d = await fetchJson(u, {}, ROUTE_TIMEOUT_MS);
       const p = d && d.paths && d.paths[0];
       if (!p) throw new Error('no_path');
-      return { distanceM: Math.round(p.distance), durationS: Math.round(p.time / 1000),
+      const out = { distanceM: Math.round(p.distance), durationS: Math.round(p.time / 1000),
         geometry: (p.points && p.points.coordinates) || [], estimate: false };
+      if (wantSteps) {
+        // Keep only what a turn banner needs. `sign` is the manoeuvre code; the app translates it,
+        // so no GraphHopper locale is involved and Amharic is ours to control.
+        out.instructions = (p.instructions || []).map(i => ({
+          sign: i.sign, distanceM: Math.round(i.distance), durationS: Math.round(i.time / 1000),
+          street: String(i.street_name || '').slice(0, 60), text: String(i.text || '').slice(0, 90),
+          interval: Array.isArray(i.interval) ? i.interval : null,
+          exitNumber: i.exit_number != null ? i.exit_number : null,
+        })).filter(i => i.interval);
+      }
+      return out;
     } catch (e) {
       if (Date.now() - lastRouteWarn > 60000) { lastRouteWarn = Date.now(); console.error('[ride/geo] router fallback:', e.message); }
       const distanceM = Math.round(haversineM(from, to) * 1.3);
-      return { distanceM, durationS: Math.round(distanceM / CITY_MPS),
+      const fb = { distanceM, durationS: Math.round(distanceM / CITY_MPS),
         geometry: [[from.lng, from.lat], [to.lng, to.lat]], estimate: true };
+      // No router means no turns. An empty list is honest; a fabricated one would send a driver
+      // down the wrong street.
+      if (wantSteps) fb.instructions = [];
+      return fb;
     }
   }
 

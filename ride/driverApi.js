@@ -180,12 +180,13 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     if (!ride) return reply.code(404).send({ ok: false, error: 'not_found' });
     const to = b.to === 'dropoff' ? ride.dropoff : ride.pickup;
     try {
-      const r = await geo.route(from, to);
-      return { ok: true, geometry: r.geometry || [], distanceM: r.distanceM, durationS: r.durationS, estimate: !!r.estimate };
+      const r = await geo.route(from, to, { instructions: true });
+      return { ok: true, geometry: r.geometry || [], instructions: r.instructions || [],
+        distanceM: r.distanceM, durationS: r.durationS, estimate: !!r.estimate };
     } catch (e) {
-      // A routing outage must not blind the driver: the app falls back to a bearing arrow.
+      // A routing outage must not blind the driver: the app falls back to distance and a bearing.
       console.error('[ride/driverApi] route failed: ' + e.message);
-      return { ok: true, geometry: [], distanceM: null, durationS: null, estimate: true };
+      return { ok: true, geometry: [], instructions: [], distanceM: null, durationS: null, estimate: true };
     }
   }
 

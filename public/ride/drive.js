@@ -20,7 +20,7 @@
   var st = {
     driver: null, job: null, offer: null, offerEndsAt: 0,
     pos: null, gpsOk: false, lastPingOk: 0, busy: false, lock: null, routeFor: '', offerTotal: 0,
-    routeFrom: null, routeAt: 0, fitted: '',
+    routeFrom: null, routeAt: 0, fitted: '', alertTimer: 0, saidStep: -1, saidNear: '', legSpoken: '',
   };
   var carMk = null, map = null, pickMk = null, dropMk = null;
 
@@ -31,6 +31,10 @@
       body: JSON.stringify(Object.assign({ initData: initData }, body || {})),
     }).then(function (r) { return r.json().then(function (j) { j._status = r.status; return j; }); });
   }
+  // Mobile browsers stay silent until the user touches the page, so the first tap opens the audio.
+  document.addEventListener('click', function () { window.DNav.unlock(); }, { once: true });
+  document.addEventListener('touchstart', function () { window.DNav.unlock(); }, { once: true });
+
   function banner(text, ok) {
     var b = $('banner');
     if (!text) { b.classList.add('hidden'); return; }
@@ -124,7 +128,17 @@
       window.BinaMap.drawRoute(j.geometry, st.fitted === fitKey ? -1 : 400);
       st.fitted = fitKey;
       if (j.distanceM != null) { st.legRoadM = j.distanceM; st.legRoadS = j.durationS; }
+      window.DNav.plan(j.instructions || [], j.geometry);
+      st.saidNear = '';
+      // One spoken sentence per leg, naming who or where — then silence until a turn.
+      var legKey = st.job.id + ':' + leg;
+      if (st.legSpoken !== legKey) {
+        st.legSpoken = legKey;
+        var who = (st.job.riderName || '').split(' ')[0];
+        window.DNav.say(leg === 'dropoff' ? 'ወደ መድረሻው ይሂዱ' : 'ወደ ተሳፋሪው ' + who + ' ይሂዱ');
+      }
       paintLegLine();
+      paintNav();
     }).catch(function () { st.routeFor = ''; });
   }
 
@@ -138,10 +152,14 @@
     var far = road != null ? road : (straight != null ? Math.round(straight * 1.35) : null);
     var eta = secs != null ? secs : (far != null ? Math.round(far / 6.1) : null);
     var who = (j.riderName || 'the passenger').split(' ')[0];
-    if (!st.pos) { $('tetaP').textContent = onTrip ? 'Waiting for GPS…' : 'Waiting for GPS — tap Navigate to drive there'; return; }
-    if (straight != null && straight < 80 && !onTrip) { $('tetaP').textContent = '📍 You are at the pickup — call ' + who + ' if you cannot see them'; return; }
-    $('tetaP').textContent = (onTrip ? '🏁 ' : '🙋 ') + km(far) + ' · about ' + Math.max(1, Math.round((eta || 0) / 60)) + ' min '
-      + (onTrip ? 'to the destination' : 'to ' + who);
+    if (!st.pos) { $('tetaP').textContent = 'ጂፒኤስ እየተጠበቀ ነው · waiting for GPS'; return; }
+    if (straight != null && straight < 80 && !onTrip) {
+      $('tetaP').textContent = '📍 ተሳፋሪው ጋር ደርሰዋል — ካላዩት ይደውሉ · you are at the pickup, call ' + who;
+      return;
+    }
+    var m = Math.max(1, Math.round((eta || 0) / 60));
+    $('tetaP').textContent = (onTrip ? '🏁 ' : '🙋 ') + km(far) + ' · ' + m + ' ደቂቃ '
+      + (onTrip ? 'ወደ መድረሻው' : 'ወደ ' + who) + ' · ' + m + ' min';
   }
 
   // ---------- GPS ----------
@@ -156,7 +174,7 @@
         accuracy: g.coords.accuracy,
       };
       ensureMap(); drawCar(st.pos);
-      if (st.job) { drawLeg(); paintLegLine(); }
+      if (st.job) { drawLeg(); paintLegLine(); paintNav(); }
       banner('');
     }, function (e) {
       st.gpsOk = false;
@@ -173,10 +191,10 @@
     $('trips').textContent = d.ridesCount || 0;
   }
   var STAGE = {
-    assigned: { pill: 'Go to pickup', btn: "I'm on my way", next: 'arriving' },
-    arriving: { pill: 'On the way', btn: 'I have arrived', next: 'arrived' },
-    arrived: { pill: 'At pickup', btn: 'Start the trip', next: 'ontrip' },
-    ontrip: { pill: 'On trip', btn: 'Complete the trip', next: 'completed' },
+    assigned: { pill: 'ወደ ተሳፋሪው · to pickup', btn: 'ተነሳሁ · On my way', next: 'arriving' },
+    arriving: { pill: 'በመንገድ ላይ · on the way', btn: 'ደረስኩ · I have arrived', next: 'arrived' },
+    arrived: { pill: 'ተሳፋሪው ጋር · at pickup', btn: 'ጉዞ ጀምር · Start the trip', next: 'ontrip' },
+    ontrip: { pill: 'በጉዞ ላይ · on trip', btn: 'ጉዞ ጨርስ · Complete', next: 'completed' },
   };
   function paintTrip() {
     var j = st.job; if (!j) return;
@@ -203,6 +221,19 @@
     show('trip');
     drawLeg();
   }
+  // A driver is not staring at the screen. Repeat the alert until the card is answered or expires.
+  function startAlert() {
+    stopAlert();
+    window.DNav.chime('offer');
+    window.DNav.buzz([220, 110, 220, 110, 340]);
+    st.alertTimer = setInterval(function () {
+      if (!st.offer) { stopAlert(); return; }
+      window.DNav.chime('offer');
+      window.DNav.buzz([200, 100, 200]);
+    }, 3500);
+  }
+  function stopAlert() { if (st.alertTimer) { clearInterval(st.alertTimer); st.alertTimer = 0; } }
+
   function paintOffer(o) {
     $('otier').textContent = String(o.tier || '').toUpperCase();
     $('oaway').textContent = mins(o.etaS) + ' away · ' + km(o.distanceM);
@@ -214,6 +245,7 @@
     $('oskip').dataset.ride = o.rideId;
     show('offer');
     haptic('warning');
+    startAlert();
     tickRing();
   }
   function tickRing() {
@@ -225,6 +257,38 @@
     if (left <= 0) { st.offer = null; render(); return; }
     setTimeout(tickRing, 400);
   }
+  // The turn banner. Amharic is the instruction; English is the subtitle.
+  function paintNav() {
+    var box = $('nav');
+    if (!st.job || !st.pos || !window.DNav.ready()) { box.classList.add('hidden'); return; }
+    var nav = window.DNav.update(st.pos);
+    if (!nav) { box.classList.add('hidden'); return; }
+    if (nav.offRoute) {
+      // Do not show a stale instruction: say so and let drawLeg() fetch a fresh plan.
+      $('navIc').textContent = '↻';
+      $('navAm').textContent = 'መንገዱን ለቀዋል — አዲስ መንገድ እየተፈለገ ነው';
+      $('navEn').textContent = 'Off route (' + nav.offBy + ' m) — recalculating';
+      $('navRem').textContent = '';
+      box.className = 'dnav off';
+      st.routeFor = '';
+      return;
+    }
+    $('navIc').textContent = nav.icon;
+    $('navAm').textContent = nav.amharic;
+    $('navEn').textContent = nav.english;
+    $('navRem').textContent = nav.remainingM != null ? km(nav.remainingM) : '';
+    box.className = 'dnav' + (nav.metresToTurn < 40 ? ' now' : '');
+
+    // Speak each manoeuvre twice at most: once on approach, once at the turn.
+    var phase = nav.metresToTurn < 40 ? 'at' : (nav.metresToTurn < 220 ? 'near' : '');
+    var key = nav.stepIndex + ':' + phase;
+    if (phase && st.saidNear !== key) {
+      st.saidNear = key;
+      window.DNav.chime(nav.arrived ? 'arrive' : 'turn');
+      window.DNav.say(nav.spokenAm || nav.amharic);
+    }
+  }
+
   function paintIdle() {
     var d = st.driver;
     $('iname').textContent = d.name;
@@ -251,6 +315,7 @@
     paintStats();
     if (st.job) return paintTrip();
     if (st.offer) return paintOffer(st.offer);
+    stopAlert(); $('nav').classList.add('hidden');
     window.BinaMap.clearRoute(); window.BinaMap.setDrop(null); clearTargets();
     st.routeFor = ''; st.routeFrom = null; st.fitted = ''; st.legRoadM = null; st.legRoadS = null;
     paintIdle();
@@ -294,8 +359,9 @@
     var id = this.dataset.ride, self = this;
     act(self, function () {
       return post('/api/drive/offer/' + id + '/accept').then(function (j) {
-        if (j.ok) { haptic('success'); st.offer = null; absorb(j); return; }
+        if (j.ok) { haptic('success'); stopAlert(); window.DNav.chime('accepted'); st.offer = null; st.legSpoken = ''; absorb(j); return; }
         haptic('error');
+        stopAlert(); window.DNav.chime('warn');
         banner(j.error === 'taken' ? '😔 Another driver got that one.' : j.error === 'no_offer' ? '⌛ That offer expired.' : '⚠️ ' + j.error);
         st.offer = null; render();
       });
@@ -304,7 +370,7 @@
   $('oskip').addEventListener('click', function () {
     var id = this.dataset.ride, self = this;
     act(self, function () {
-      return post('/api/drive/offer/' + id + '/decline').then(function () { st.offer = null; render(); });
+      return post('/api/drive/offer/' + id + '/decline').then(function () { stopAlert(); st.offer = null; render(); });
     });
   });
   $('tnext').addEventListener('click', function () {
@@ -322,7 +388,9 @@
         if (!j.ok) { banner('⚠️ ' + (j.error || 'could not update')); return ping(); }
         haptic('success');
         if (next === 'completed') {
-          st.job = null; st.driver = j.driver;
+          window.DNav.chime('done');
+          window.DNav.say('ጉዞው ተጠናቋል። አመሰግናለን።');
+          st.job = null; st.driver = j.driver; st.legSpoken = '';
           banner('✅ Trip complete · ' + (j.driver.earningsTodayEtb || 0) + ' ETB today', true);
           render();
         } else { st.job = j.job; st.driver = j.driver; render(); }
@@ -342,6 +410,19 @@
       });
     });
   });
+  function paintMute() {
+    var m = window.DNav.isMuted();
+    $('mute').textContent = m ? '🔇' : '🔔';
+    $('mute').classList.toggle('off', m);
+  }
+  $('mute').addEventListener('click', function () {
+    window.DNav.unlock();
+    var m = window.DNav.setMuted(!window.DNav.isMuted());
+    paintMute();
+    if (!m) { window.DNav.chime('turn'); banner('🔔 ድምጽ በርቷል · sound on', true); }
+    else banner('🔇 ድምጽ ጠፍቷል · sound off', true);
+  });
+  paintMute();
   $('recenter').addEventListener('click', function () { follow(st.pos); });
   $('tcancel').addEventListener('click', function () { window.open('https://t.me/binasmartdriverbot', '_blank'); });
 

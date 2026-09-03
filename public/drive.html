@@ -9,7 +9,7 @@
 <link rel="icon" href="/icon-32.png">
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
 <link rel="stylesheet" href="/static/ride/ui.css?v=7">
-<link rel="stylesheet" href="/static/ride/drive.css?v=3">
+<link rel="stylesheet" href="/static/ride/drive.css?v=4">
 </head>
 <body class="drv">
 <div id="map"></div>
@@ -20,8 +20,16 @@
     <div class="dstat"><span id="earn">0</span><small>ETB today</small></div>
     <div class="dstat"><span id="trips">0</span><small>trips</small></div>
   </div>
+  <button id="mute" class="dghost" aria-label="Sound on or off">🔔</button>
   <button id="recenter" class="dghost" aria-label="Recentre the map">◎</button>
 </header>
+
+<!-- Amharic turn-by-turn: what to do next, in the driver's language, before the English -->
+<section id="nav" class="dnav hidden" aria-live="polite">
+  <div class="dnavIc" id="navIc">⬆</div>
+  <div class="dnavTxt"><b id="navAm">—</b><small id="navEn">—</small></div>
+  <div class="dnavRem" id="navRem"></div>
+</section>
 
 <!-- GPS / connection banner -->
 <div id="banner" class="dbanner hidden"></div>
@@ -80,6 +88,7 @@
 <script src="/static/vendor/pmtiles.js"></script>
 <script src="/static/ride/tg.js?v=2"></script>
 <script src="/static/ride/map.js?v=3"></script>
-<script src="/static/ride/drive.js?v=6"></script>
+<script src="/static/ride/drivenav.js?v=1"></script>
+<script src="/static/ride/drive.js?v=7"></script>
 </body>
 </html>
