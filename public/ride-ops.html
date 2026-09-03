@@ -63,7 +63,13 @@ function load(){
     if(!d.ok){ showKeyBox(true); document.getElementById('active').innerHTML='<div class="mut">Unauthorized — enter the owner key.</div>'; return null; }
     showKeyBox(false);
     DRIVERS=d.drivers||[];
-    document.getElementById('drivers').innerHTML=DRIVERS.map(function(x){return '<div><b>'+esc(x.name)+'</b><div class="mut">'+esc(x.plate)+' · '+esc(x.tier)+' · '+esc(x.status)+' · ★'+esc(x.rating)+' · '+esc(x.ridesCount)+' rides</div></div>';}).join('')||'<span class="mut">No drivers yet — add one above.</span>';
+    document.getElementById('drivers').innerHTML=DRIVERS.map(function(x){
+  var st = x.status==='approved'?'✅':x.status==='pending'?'🕒':'⛔';
+  var lic = x.licenceUrl ? ' · <a href="'+esc(x.licenceUrl)+'?key='+encodeURIComponent(getKey())+'" target="_blank" rel="noopener">licence 📄</a>' : '';
+  var btns = (x.status!=='approved'?'<button data-dstat="approved" data-did="'+esc(x.id)+'">Approve</button>':'')+(x.status!=='suspended'?'<button data-dstat="suspended" data-did="'+esc(x.id)+'" class="danger">Suspend</button>':'');
+  return '<div><b>'+esc(x.name)+'</b> '+st+' '+esc(x.status)+'<div class="mut">'+esc(x.plate)+' · '+esc(x.tier)+' · '+esc(x.vehicleMake||'')+' · '+esc(x.phone)+' · ★'+esc(x.rating)+' · '+esc(x.ridesCount)+' rides'+lic+(x.telegramId?' · TG':'')+'</div><div class="row">'+btns+'</div></div>';
+}).join('')||'<span class="mut">No drivers yet — add one above or let them register in @binasmartdriverbot.</span>';
+document.querySelectorAll('[data-dstat]').forEach(function(b){ b.onclick=function(){ if(!confirm(b.dataset.dstat+' this driver?')) return; api('/api/ride/ops/drivers/'+b.dataset.did+'/status',{status:b.dataset.dstat}).then(function(d){ if(!d.ok) return alert(d.error||'failed'); load(); }); }; });
     return api('/api/ride/ops/queue');
   }).then(function(d){
     if(!d) return;
