@@ -194,8 +194,11 @@ async function main() {
     const delDrv = await prisma.driver.deleteMany({ where: { id: { in: made.drivers } } });
     const delRdr = await prisma.rider.deleteMany({ where: { id: made.rider } });
     console.log('  deleted ' + delLoc.count + ' locations, ' + delOff.count + ' offers, ' + delRide.count + ' rides, ' + delDrv.count + ' drivers, ' + delRdr.count + ' rider');
-    const leftDrv = await prisma.driver.count({ where: { phone: { startsWith: SIM } } });
-    const leftRdr = await prisma.rider.count({ where: { phone: { startsWith: SIM } } });
+    // Exact phones, not the prefix: a prefix net also catches unrelated test rows created by hand
+    // and reports a leak that is not ours.
+    const MINE = [SIM + '01', SIM + '02', SIM + '03'];
+    const leftDrv = await prisma.driver.count({ where: { phone: { in: MINE } } });
+    const leftRdr = await prisma.rider.count({ where: { phone: { in: MINE } } });
     console.log('  sim rows still in the database: ' + (leftDrv + leftRdr) + ' (must be 0)');
     if (leftDrv + leftRdr > 0) bad++;
     console.log('\nTelegram messages actually sent to the network: 0 (all stubbed; ' + sent.length + ' captured)');
