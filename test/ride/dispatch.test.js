@@ -74,3 +74,20 @@ test('sweepStale escalates only stale, un-escalated, still-dispatching rides; co
   assert.equal(await z.d.start('r1'), true);
   assert.equal(z.timers.length, 0);
 });
+
+test('with online drivers, start() opens offers; only when none can be offered does it fall back to concierge', async () => {
+  const prisma = { driver: { count: async () => 2 }, ride: { updateMany: async () => ({ count: 1 }), findUnique: async () => ({ id: 'r1' }) } };
+  const settings = { get: async () => ({ conciergeAfterS: 60 }) };
+  const mk = (offers, alerts) => makeDispatch({ prisma, settings, offers,
+    telegram: { conciergeAlert: async r => { alerts.push(r.id); return true; } },
+    setTimeoutFn: () => ({}), clearTimeoutFn: () => {} });
+
+  const opened = [], alertsA = [];
+  assert.equal(await mk({ open: async id => { opened.push(id); return 3; } }, alertsA).start('r1'), 'waiting');
+  assert.deepEqual(opened, ['r1'], 'the auction was opened');
+  assert.deepEqual(alertsA, [], 'no owner alert while drivers are considering');
+
+  const alertsB = [];
+  assert.equal(await mk({ open: async () => 0 }, alertsB).start('r1'), true, 'nobody offerable → concierge now');
+  assert.deepEqual(alertsB, ['r1']);
+});

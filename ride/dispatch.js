@@ -1,12 +1,16 @@
 'use strict';
-// Phase 1 dispatch. There is no driver app yet, so:
-//  - no approved driver online  -> concierge immediately (Telegram to owner)
-//  - some drivers online        -> wait the concierge window (Phase 2 will offer rides in between), then concierge
-// Timers are injectable so tests run instantly. Timers live in memory, so sweepStale() (scheduled by index.js)
-// escalates any ride a restart would otherwise strand in 'dispatching'.
-function makeDispatch({ prisma, telegram, settings, setTimeoutFn, clearTimeoutFn }) {
+// Dispatch decides who is asked and who escalates.
+//  - nobody offerable (no approved driver online, or none reachable in any radius) -> concierge now
+//  - somebody offerable -> ride/offers.js runs the auction, and the concierge window becomes a
+//    safety net: if no driver has accepted by then, a human takes over.
+// Timers are injectable so tests run instantly. Timers live in memory, so sweepStale() (scheduled by
+// index.js) escalates any ride a restart would otherwise strand in 'dispatching'.
+// offers is injected late (setOffers) because ride/offers.js needs toConcierge and cancel from here.
+function makeDispatch({ prisma, telegram, settings, offers, setTimeoutFn, clearTimeoutFn }) {
   const st = setTimeoutFn || setTimeout, ct = clearTimeoutFn || clearTimeout;
   const timers = new Map(); // rideId -> timer handle
+  let auction = offers || null;
+  function setOffers(o) { auction = o; }
 
   async function windowS() { const s = await settings.get(); return typeof s.conciergeAfterS === 'number' ? s.conciergeAfterS : 60; }
 
@@ -26,6 +30,14 @@ function makeDispatch({ prisma, telegram, settings, setTimeoutFn, clearTimeoutFn
     const after = await windowS();
     const online = await prisma.driver.count({ where: { status: 'approved', online: true } });
     if (online === 0 || after === 0) return toConcierge(rideId);
+    // Broadcast to the nearest drivers. Nobody reachable in any radius -> escalate straight away
+    // rather than making the rider wait out a window that cannot produce a driver.
+    if (auction) {
+      let asked = 0;
+      try { asked = await auction.open(rideId, 1); }
+      catch (e) { console.error('[ride/dispatch] auction failed for ride ' + rideId + ': ' + e.message); }
+      if (asked === 0) return toConcierge(rideId);
+    }
     const h = st(() => toConcierge(rideId).catch(e => console.error('[ride/dispatch] concierge escalation error:', e.message)), after * 1000);
     timers.set(rideId, h);
     return 'waiting';
@@ -50,7 +62,7 @@ function makeDispatch({ prisma, telegram, settings, setTimeoutFn, clearTimeoutFn
     return n;
   }
 
-  return { start, cancel, toConcierge, sweepStale };
+  return { start, cancel, toConcierge, sweepStale, setOffers };
 }
 
 module.exports = { makeDispatch };
