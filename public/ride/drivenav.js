@@ -110,6 +110,10 @@ window.DNav = (function () {
 
     var sign = next ? String(next.sign) : '4';
     var t = TURN[sign] || TURN['0'];
+    // The manoeuvre after the next one. Drivers plan two moves ahead at a junction; showing only one
+    // is why cheap navigation feels blind.
+    var after = steps[k + 2] || null;
+    var t2 = after ? (TURN[String(after.sign)] || null) : null;
     var street = (next && next.street) || '';
     var am = t.am, en = t.en;
     if (next && next.sign === 6 && next.exitNumber && ORDINAL_AM[next.exitNumber]) {
@@ -123,6 +127,7 @@ window.DNav = (function () {
       amharic: (next ? distAm(toTurn) + ' ' : '') + am,
       english: (next ? distEn(toTurn) + ' · ' : '') + en,
       spokenAm: (toTurn < 30 || !next ? '' : distAm(toTurn) + ' ') + t.am,
+      then: t2 ? { icon: t2.ic, amharic: t2.am, english: t2.en } : null,
       metresToTurn: next ? toTurn : 0,
       // The finish is itself a manoeuvre (sign 4), so "arrived" cannot mean "no next step" — it means
       // the next manoeuvre is the finish and we are on top of it.

@@ -165,3 +165,35 @@ body.navmode .dnavTxt small{font-size:12px}
 body.navmode .dstats{opacity:.55}
 body.navmode #map{filter:brightness(.7) saturate(.8) contrast(1.05)}
 @media(max-height:620px){body.navmode .dnavTxt b{font-size:17px}.nhInfo b{font-size:19px}}
+
+/* ---- the driver's own car: their photo, upright, with a nose that points down the road ---- */
+.dcar{position:relative;width:50px;height:50px}
+.dcarRing{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:3px solid #fbbf24;
+  background:#1e2a42;box-shadow:0 6px 20px -6px rgba(0,0,0,.75),0 0 0 1px rgba(0,0,0,.35);
+  display:flex;align-items:center;justify-content:center}
+.dcarRing img{width:100%;height:100%;object-fit:cover;display:block}
+.dcarRing.noPhoto b{font-size:25px}
+.dcarNose{position:absolute;inset:0;transition:transform .8s ease-out;pointer-events:none}
+.dcarNose::before{content:'';position:absolute;left:50%;top:-13px;transform:translateX(-50%);
+  width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;
+  border-bottom:13px solid #fbbf24;filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}
+
+/* ---- banner extras ---- */
+.dnavRemWrap{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.dnavThen{font-size:11px;font-weight:800;color:var(--nmut);background:#1e2a42;
+  border:1px solid var(--nline);border-radius:7px;padding:2px 6px;white-space:nowrap}
+.dnav.now .dnavThen{background:#b45309;color:#fff7ed;border-color:#d97706}
+
+/* ---- speed ---- */
+.nhSpeed{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-width:46px;padding:5px 6px;border-radius:12px;background:#1e2a42;border:1px solid var(--nline)}
+.nhSpeed b{font-size:17px;font-weight:900;color:#fff;line-height:1}
+.nhSpeed small{font-size:8.5px;color:var(--nmut);letter-spacing:.04em}
+
+/* A soft vignette while navigating: it lifts the banner and the HUD off the map without hiding it. */
+body.navmode::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:4;
+  background:radial-gradient(120% 65% at 50% 42%,transparent 55%,rgba(3,7,18,.55) 100%)}
+
+/* Addis street names are long. Two lines maximum, or the banner eats the map. */
+.dnavTxt b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.dnavTxt small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

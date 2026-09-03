@@ -141,3 +141,14 @@ test('speech is refused when the phone has no Amharic voice', () => {
   assert.equal(v.amharic, false, 'no speechSynthesis in this environment');
   assert.equal(DNav.say('ወደ ቀኝ ይታጠፉ'), false, 'Amharic through a non-Amharic voice would be gibberish');
 });
+
+test('the banner previews the manoeuvre after the next one, and nothing when there is none', () => {
+  DNav.plan(STEPS, GEOM);
+  const early = DNav.update(at(0));
+  assert.ok(early.then, 'two moves ahead exist at the start');
+  assert.equal(early.then.amharic, 'ደረሱ', 'after the right turn comes the arrival');
+  assert.equal(early.then.icon, '🏁');
+
+  const late = DNav.update(at(4));
+  assert.equal(late.then, null, 'nothing follows the arrival');
+});

@@ -21,7 +21,7 @@
     driver: null, job: null, offer: null, offerEndsAt: 0,
     pos: null, gpsOk: false, lastPingOk: 0, busy: false, lock: null, routeFor: '', offerTotal: 0,
     routeFrom: null, routeAt: 0, fitted: '', alertTimer: 0, saidStep: -1, saidNear: '', legSpoken: '',
-    nav: false, freeCam: 0,
+    nav: false, freeCam: 0, carFrom: null, carTo: null, carAt: 0, carRaf: 0, flowTimer: 0, flowStep: 0,
   };
   var carMk = null, map = null, pickMk = null, dropMk = null;
 
@@ -73,18 +73,58 @@
     if (map) return;
     map = window.BinaMap.init('map', function () { window.BinaMap.set3D(false); });
   }
+  // Weak phones get the same information without the animation budget.
+  var WEAK = (function () {
+    try { return (navigator.deviceMemory && navigator.deviceMemory < 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2); }
+    catch (e) { return false; }
+  })();
+
   function drawCar(p) {
     if (!map || !p) return;
     if (!carMk) {
+      var photo = st.driver && st.driver.carPhoto;
       var el = document.createElement('div');
       el.className = 'dcar';
-      el.innerHTML = '<span class="dhalo"></span><span class="dcarico">🚗</span>';
-      carMk = new maplibregl.Marker({ element: el, anchor: 'center', rotationAlignment: 'map' })
-        .setLngLat([p.lng, p.lat]).addTo(map);
+      el.innerHTML = '<span class="dhalo"></span>'
+        + '<span class="dcarRing' + (photo ? '' : ' noPhoto') + '">' + (photo ? '<img alt="">' : '<b>🚗</b>') + '</span>'
+        + '<span class="dcarNose"></span>';
+      if (photo) el.querySelector('img').src = photo;
+      carMk = new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([p.lng, p.lat]).addTo(map);
+      st.carTo = { lat: p.lat, lng: p.lng };
     } else {
-      carMk.setLngLat([p.lng, p.lat]);
+      glideCar(p);
     }
-    if (p.bearing != null) carMk.setRotation(p.bearing);
+    noseCar(p.bearing);
+  }
+
+  // GPS lands every four seconds. Jumping the marker looks broken; interpolating between fixes is
+  // what makes it read as a car driving down a road.
+  function glideCar(p) {
+    var cur = st.carTo || { lat: p.lat, lng: p.lng };
+    var far = Math.abs(p.lat - cur.lat) + Math.abs(p.lng - cur.lng);
+    st.carFrom = cur;
+    st.carTo = { lat: p.lat, lng: p.lng };
+    if (WEAK || far > 0.02) { carMk.setLngLat([p.lng, p.lat]); st.carFrom = null; return; }
+    st.carAt = Date.now();
+    if (st.carRaf) cancelAnimationFrame(st.carRaf);
+    st.carRaf = requestAnimationFrame(stepCar);
+  }
+  function stepCar() {
+    if (!carMk || !st.carFrom || !st.carTo) return;
+    var t = Math.min(1, (Date.now() - st.carAt) / PING_MS);
+    var e = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    carMk.setLngLat([
+      st.carFrom.lng + (st.carTo.lng - st.carFrom.lng) * e,
+      st.carFrom.lat + (st.carTo.lat - st.carFrom.lat) * e,
+    ]);
+    if (t < 1) st.carRaf = requestAnimationFrame(stepCar);
+  }
+  // The photo must stay upright to be recognisable, so only the nose turns — and it turns relative to
+  // the map, which is itself rotated while navigating.
+  function noseCar(bearing) {
+    if (!carMk || bearing == null) return;
+    var n = carMk.getElement().querySelector('.dcarNose');
+    if (n) n.style.transform = 'rotate(' + (bearing - (map ? map.getBearing() : 0)) + 'deg)';
   }
   function follow(p) { if (map && p) map.easeTo({ center: [p.lng, p.lat], duration: 900 }); }
 
@@ -98,7 +138,43 @@
       bearing: p.bearing != null ? p.bearing : map.getBearing(),
       pitch: 55, zoom: 17, duration: 900, essential: true,
     });
+    // The map turned, so the nose has to turn with it or it points at the wrong street.
+    noseCar(st.pos && st.pos.bearing);
   }
+  // A flat line tells a driver where the road is. A moving one tells them which way it goes.
+  var DASH = [[0, 4, 3], [0.5, 4, 2.5], [1, 4, 2], [1.5, 4, 1.5], [2, 4, 1], [2.5, 4, 0.5], [3, 4, 0],
+              [0, 0.5, 3, 3.5], [0, 1, 3, 3], [0, 1.5, 3, 2.5], [0, 2, 3, 2], [0, 2.5, 3, 1.5], [0, 3, 3, 1], [0, 3.5, 3, 0.5]];
+  function navSkin() {
+    if (!map || !map.getSource('route')) return;
+    try {
+      map.setPaintProperty('route-line', 'line-color', '#fbbf24');
+      map.setPaintProperty('route-line', 'line-width', 6);
+      map.setPaintProperty('route-casing', 'line-color', '#78350f');
+      map.setPaintProperty('route-casing', 'line-width', 12);
+      map.setPaintProperty('route-casing', 'line-opacity', 0.55);
+      if (!map.getLayer('route-glow')) {
+        map.addLayer({ id: 'route-glow', type: 'line', source: 'route',
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: { 'line-color': '#f59e0b', 'line-width': 20, 'line-opacity': 0.16, 'line-blur': 10 } }, 'route-casing');
+      }
+      if (!map.getLayer('route-flow')) {
+        map.addLayer({ id: 'route-flow', type: 'line', source: 'route',
+          layout: { 'line-cap': 'butt', 'line-join': 'round' },
+          paint: { 'line-color': '#fffbeb', 'line-width': 3.4, 'line-opacity': 0.92, 'line-dasharray': [0, 4, 3] } });
+      }
+      startFlow();
+    } catch (e) { /* the style is still loading; the next route call retries */ }
+  }
+  function startFlow() {
+    if (st.flowTimer || WEAK) return;
+    st.flowTimer = setInterval(function () {
+      if (!map || !map.getLayer('route-flow')) { stopFlow(); return; }
+      try { map.setPaintProperty('route-flow', 'line-dasharray', DASH[st.flowStep % DASH.length]); } catch (e) {}
+      st.flowStep++;
+    }, 95);
+  }
+  function stopFlow() { if (st.flowTimer) { clearInterval(st.flowTimer); st.flowTimer = 0; } }
+
   function watchPan() {
     if (!map || map.__panWatched) return;
     map.__panWatched = true;
@@ -146,6 +222,7 @@
       var fitKey = st.job.id + ':' + leg;
       window.BinaMap.drawRoute(j.geometry, st.fitted === fitKey ? -1 : 400);
       st.fitted = fitKey;
+      navSkin();
       if (j.distanceM != null) { st.legRoadM = j.distanceM; st.legRoadS = j.durationS; }
       window.DNav.plan(j.instructions || [], j.geometry);
       st.saidNear = '';
@@ -297,6 +374,12 @@
     $('navAm').textContent = nav.amharic;
     $('navEn').textContent = nav.english;
     $('navRem').textContent = nav.remainingM != null ? km(nav.remainingM) : '';
+    var then = $('navThen');
+    if (nav.then) {
+      then.textContent = 'ቀጥሎ ' + nav.then.icon;
+      then.title = nav.then.english;
+      then.classList.remove('hidden');
+    } else { then.classList.add('hidden'); }
     box.className = 'dnav' + (nav.metresToTurn < 40 ? ' now' : '');
 
     // Speak each manoeuvre twice at most: once on approach, once at the turn.
@@ -325,6 +408,7 @@
   }
   function exitNav() {
     st.nav = false;
+    stopFlow();
     document.body.classList.remove('navmode');
     $('navhud').classList.add('hidden');
     if (map) map.easeTo({ pitch: 0, bearing: 0, zoom: 15, duration: 700 });
@@ -344,6 +428,11 @@
     $('nhRem').textContent = rem != null ? km(rem) : '—';
     $('nhEta').textContent = (secs != null ? Math.max(1, Math.round(secs / 60)) + ' ደቂቃ · min' : 'ጂፒኤስ · GPS')
       + ' → ' + (onTrip ? 'መድረሻ' : (st.job.riderName || 'ተሳፋሪ').split(' ')[0]);
+    var sp = $('nhSpeed');
+    if (st.pos && st.pos.speedKph != null) {
+      sp.querySelector('b').textContent = Math.round(st.pos.speedKph);
+      sp.classList.remove('hidden');
+    } else { sp.classList.add('hidden'); }
   }
 
   function paintIdle() {
@@ -372,7 +461,7 @@
     paintStats();
     if (st.job) return paintTrip();
     if (st.offer) return paintOffer(st.offer);
-    stopAlert(); $('nav').classList.add('hidden');
+    stopAlert(); stopFlow(); $('nav').classList.add('hidden');
     if (st.nav) { st.nav = false; document.body.classList.remove('navmode'); $('navhud').classList.add('hidden'); }
     window.BinaMap.clearRoute(); window.BinaMap.setDrop(null); clearTargets();
     st.routeFor = ''; st.routeFrom = null; st.fitted = ''; st.legRoadM = null; st.legRoadS = null;
