@@ -3,7 +3,7 @@
 // update() validates every numeric knob so a stray string (e.g. "80") can never reach the fare math.
 const DEFAULTS = {
   commissionPct: 15,
-  offerWindowS: 20,
+  offerWindowS: 25,
   conciergeAfterS: 60,
   freeCancelMin: 2,
   cancelFeeEtb: 30,

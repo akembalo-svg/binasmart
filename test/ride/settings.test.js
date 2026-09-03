@@ -59,3 +59,10 @@ test('get() falls back to DEFAULTS when the row is corrupt, and never aliases DE
   await assert.rejects(() => s2.update([1, 2]), /invalid_settings: patch/);
   try { await s2.update({ commissionPct: 150 }); } catch (e) { assert.equal(e.statusCode, 400); }
 });
+
+test('offerWindowS defaults to 25 s and the radii stay numeric', async () => {
+  const s = await makeSettings(fakePrisma(null)).get();
+  assert.equal(s.offerWindowS, 25);
+  assert.deepEqual(s.radiiKm, [3, 6, 10]);
+  assert.equal(typeof s.radiiKm[0], 'number');
+});

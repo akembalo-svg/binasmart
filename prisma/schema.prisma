@@ -1014,7 +1014,15 @@ model Driver {
   rating          Float     @default(5)
   ridesCount      Int       @default(0)
   commissionPct   Float?    // percent (15 = 15%); overrides RideSetting.commissionPct. Phase 2 only — driverTakeEtb is fixed at request time, before assignment.
+  bearing         Float?    // degrees, 0 = north, from the last fix
+  speedKph        Float?
+  away            Boolean   @default(false)  // online but no fix for 45 s: gets no offers
+  onRideId        String?   // set inside the accept transaction; must be null to be a candidate
+  earningsTodayEtb Int      @default(0)
+  earningsDay     DateTime?
   rides           Ride[]
+  offers          RideOffer[]
+  locations       DriverLocation[]
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 }
@@ -1044,6 +1052,9 @@ model Ride {
   riderPhone    String    // snapshot at request time
   riderRating   Int?
   driverRating  Int?
+  driverAcceptedAt DateTime?
+  offers        RideOffer[]
+  locations     DriverLocation[]
   requestedAt   DateTime  @default(now())
   assignedAt    DateTime?
   arrivedAt     DateTime?
@@ -1060,4 +1071,40 @@ model RideSetting {
   id        String   @id
   json      String
   updatedAt DateTime @updatedAt
+}
+
+model RideOffer {
+  id        String   @id @default(cuid())
+  rideId    String
+  ride      Ride     @relation(fields: [rideId], references: [id])
+  driverId  String
+  driver    Driver   @relation(fields: [driverId], references: [id])
+  status    String   @default("open")   // open | accepted | declined | expired | lost
+  etaS      Int?                        // driving seconds to pickup when offered
+  distanceM Int?
+  round     Int      @default(1)        // 1 = 3 km, 2 = 6 km, 3 = 10 km
+  tgMsgId   Int?
+  createdAt DateTime @default(now())
+  decidedAt DateTime?
+
+  @@unique([rideId, driverId])
+  @@index([rideId, status])
+  @@index([driverId, status])
+  @@index([status, createdAt])
+}
+
+model DriverLocation {
+  id        String   @id @default(cuid())
+  driverId  String
+  driver    Driver   @relation(fields: [driverId], references: [id])
+  rideId    String?
+  ride      Ride?    @relation(fields: [rideId], references: [id])
+  lat       Float
+  lng       Float
+  bearing   Float?
+  speedKph  Float?
+  at        DateTime @default(now())
+
+  @@index([driverId, at])
+  @@index([rideId, at])
 }
