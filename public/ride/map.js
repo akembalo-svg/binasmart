@@ -61,9 +61,17 @@ window.BinaMap = (function () {
     var b = coords.reduce(function (bb, c) { return bb.extend(c); }, new maplibregl.LngLatBounds(coords[0], coords[0]));
     map.fitBounds(b, { padding: { top: 90, bottom: bottomPad || 340, left: 40, right: 40 }, pitch: map.getPitch(), duration: 900 });
   }
+  // Remove EVERY layer drawn on the route source, not just the two this file created. The driver app
+  // adds a glow and a flowing line on the same source, and MapLibre refuses to drop a source that any
+  // layer still uses — which silently left the old route painted after a trip ended.
   function clearRoute() {
-    if (!map) return;
-    if (map.getLayer('route-line')) { map.removeLayer('route-line'); map.removeLayer('route-casing'); map.removeSource('route'); }
+    if (!map || !map.getSource('route')) return;
+    var style = map.getStyle();
+    var layers = (style && style.layers) || [];
+    for (var i = layers.length - 1; i >= 0; i--) {
+      if (layers[i].source === 'route' && map.getLayer(layers[i].id)) map.removeLayer(layers[i].id);
+    }
+    if (map.getSource('route')) map.removeSource('route');
   }
   function flyTo(p, zoom) { if (!map) return; map.flyTo({ center: [p.lng, p.lat], zoom: zoom || 15.5, duration: 900 }); }
   function onClick(fn) { if (!map) return; map.on('click', function (e) { fn({ lat: e.lngLat.lat, lng: e.lngLat.lng }); }); }

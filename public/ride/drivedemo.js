@@ -80,11 +80,16 @@ window.DDemo = (function () {
     if (timer) clearInterval(timer);
     timer = setInterval(function () {
       if (path.length > 1 && idx < path.length - 1) {
-        var a = path[idx], b = path[idx + 1];
-        var seg = Math.max(1, metres(a, b));
-        frac += MPS / seg;
-        while (frac >= 1 && idx < path.length - 1) { frac -= 1; idx++; a = path[idx]; b = path[Math.min(idx + 1, path.length - 1)]; seg = Math.max(1, metres(a, b)); }
-        b = path[Math.min(idx + 1, path.length - 1)];
+        // Carry leftover METRES across vertices, not leftover fraction: a fraction of a 20 m segment
+        // is not a fraction of the next 200 m one, and treating it as such halves the real speed.
+        var left = MPS;
+        while (left > 0 && idx < path.length - 1) {
+          var seg = Math.max(0.5, metres(path[idx], path[idx + 1]));
+          var need = (1 - frac) * seg;
+          if (left < need) { frac += left / seg; left = 0; }
+          else { left -= need; idx++; frac = 0; }
+        }
+        var a = path[idx], b = path[Math.min(idx + 1, path.length - 1)];
         pos = { lat: a.lat + (b.lat - a.lat) * frac, lng: a.lng + (b.lng - a.lng) * frac };
         bearing = bearingOf(a, b);
       }
