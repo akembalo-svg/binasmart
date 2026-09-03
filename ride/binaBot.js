@@ -33,7 +33,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername }
       .replace(/\*\*([^*]+)\*\*/g, '$1')
       .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '$1 — $2')
       .replace(/\[([^\]]+)\]\((\/[^)]*)\)/g, (m, t, p) => t + ' — ' + baseUrl + p)
-      .replace(/(^|[\s(])(\/[a-z0-9][a-z0-9\-\/]*)(?=[\s.,)]|$)/gi, (m, pre, p) => pre + baseUrl + p);
+      .replace(/(^|[\s(])(\/[a-z0-9][a-z0-9\-\/]*?)(?![a-z0-9\-\/])/gi, (m, pre, p) => pre + baseUrl + p);
   }
 
   async function askBini(chatId, message) {
