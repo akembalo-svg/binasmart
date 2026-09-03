@@ -61,3 +61,8 @@ h2{font-size:20px;font-weight:900}
 .bm-pulse{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:rgba(5,150,105,.35);animation:ping 2s ease-out infinite}
 .bm-pin{font-size:30px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
 @media(prefers-reduced-motion:reduce){.radar span,.bm-pulse{animation:none}}
+
+.forother{display:flex;align-items:center;gap:8px;font-size:14px;margin:6px 0 4px;font-weight:600}
+.passenger{display:flex;flex-direction:column;gap:8px;margin:4px 0 8px}
+.passenger input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit}
+body.tg .cta#request{display:none}

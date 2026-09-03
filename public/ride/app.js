@@ -6,6 +6,16 @@
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function lsDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
   var ME = null; try { ME = JSON.parse(lsGet('bina_ride_me') || 'null'); } catch (e) { ME = null; }
+  // Telegram Mini App mode (window.TG from tg.js). Outside Telegram every TG call is a no-op.
+  var TG = window.TG || null, IN_TG = !!(TG && TG.isTelegram());
+  if (IN_TG) document.body.classList.add('tg');
+  $('forOther').addEventListener('change', function () { $('passenger').classList.toggle('hidden', !this.checked); });
+  function passengerBody() {
+    if (!$('forOther').checked) return null;
+    var n = $('pName').value.trim(), p = $('pPhone').value.replace(/\s/g, '');
+    if (n.length < 2 || !/^(\+?251|0)9\d{8}$/.test(p)) { toast('የተሳፋሪ ስም እና ስልክ ያስገቡ · Enter the passenger name and Ethiopian phone'); return false; }
+    return { name: n, phone: p };
+  }
 
   function show(id) { document.querySelectorAll('.screen').forEach(function (s) { s.classList.add('hidden'); }); $(id).classList.remove('hidden'); }
   function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.remove('hidden'); clearTimeout(t._t); t._t = setTimeout(function () { t.classList.add('hidden'); }, 2600); }
@@ -90,6 +100,7 @@
       }).join('');
       $('tiers').querySelectorAll('.tier').forEach(function (el) { el.addEventListener('click', function () { S.tier = el.dataset.t; $('tiers').querySelectorAll('.tier').forEach(function (x) { x.classList.toggle('sel', x === el); }); setCta(); }); });
       setCta();
+      if (IN_TG) TG.back(function () { $('cancelQuote').click(); });
       // Pitched fitBounds ignores most of the bottom padding anyway (liftAboveSheet does the real work),
       // so keep the pad modest — an oversized pad only buys a zoomed-out smudge of a route.
       // Guard the geometry: without a polyline drawRoute is meaningless AND liftAboveSheet's pass-0
@@ -120,26 +131,44 @@
     });
   }
   function selQuote() { return (S.quote && S.quote.quotes.find(function (q) { return q.tier === S.tier; })) || null; }
-  function setCta() { var q = selQuote(); $('ctaFare').textContent = q ? '· ' + q.fareEtb + ' ETB' : ''; }
-  $('cancelQuote').addEventListener('click', function () { S.dropoff = null; BinaMap.setDrop(null); BinaMap.clearRoute(); show('s-home'); });
+  function setCta() { var q = selQuote(); $('ctaFare').textContent = q ? '· ' + q.fareEtb + ' ETB' : ''; if (IN_TG) TG.main('ጉዞ ይጠይቁ · Confirm ride' + (q ? ' · ' + q.fareEtb + ' ETB' : ''), function () { $('request').click(); }); }
+  $('cancelQuote').addEventListener('click', function () { S.dropoff = null; BinaMap.setDrop(null); BinaMap.clearRoute(); if (IN_TG) { TG.mainHide(); TG.backHide(); } show('s-home'); });
 
   // ---- identity + request ----
-  $('request').addEventListener('click', function () { if (!ME) return show('s-who'); request(); });
+  $('request').addEventListener('click', function () {
+    var pb = passengerBody(); if (pb === false) return;
+    if (ME) return request(pb);
+    if (IN_TG) {
+      TG.requestContact(function (ok) {
+        var u = TG.user() || {};
+        var nm = [u.first_name, u.last_name].filter(Boolean).join(' ');
+        if (ok) { ME = { name: nm || 'Telegram user', phone: null, tg: true }; lsSet('bina_ride_me', JSON.stringify(ME)); request(pb); }
+        else { if (nm) $('whoName').value = nm; show('s-who'); }
+      });
+      return;
+    }
+    show('s-who');
+  });
   $('whoGo').addEventListener('click', function () {
     var name = $('whoName').value.trim(), phone = $('whoPhone').value.trim();
     if (name.length < 2 || !/^(\+?251|0)9\d{8}$/.test(phone.replace(/\s/g, ''))) return toast('ስም እና ትክክለኛ ስልክ ያስገቡ · Enter your name and a valid phone');
-    ME = { name: name, phone: phone }; lsSet('bina_ride_me', JSON.stringify(ME)); request();
+    ME = { name: name, phone: phone }; lsSet('bina_ride_me', JSON.stringify(ME)); request(passengerBody() || null);
   });
-  function request() {
+  function request(pb) {
     var q = selQuote(); if (!q) return;
     var pay = (document.querySelector('input[name=pay]:checked') || {}).value || 'cash';
-    $('request').disabled = true;
-    api('/api/ride/request', { idemKey: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())), tier: S.tier, pickup: S.pickup, dropoff: S.dropoff, paymentMethod: pay, riderName: ME.name, riderPhone: ME.phone })
+    $('request').disabled = true; if (IN_TG) TG.main('…', function () {});
+    var body = { idemKey: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())), tier: S.tier, pickup: S.pickup, dropoff: S.dropoff, paymentMethod: pay, riderName: ME.name, riderPhone: ME.phone || undefined };
+    if (pb) body.passenger = pb;
+    if (IN_TG) body.tg = { initData: TG.initData(), contact: TG.contact() || undefined };
+    api('/api/ride/request', body)
       .then(function (d) {
         $('request').disabled = false;
-        if (!d.ok) return toast(d.error || 'Could not request');
+        if (!d.ok) { if (IN_TG) setCta(); return toast(d.error || 'Could not request'); }
+        if (d.phone) { ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME)); }
         S.ride = d.ride; lsSet('bina_ride_active', d.ride.id); show('s-finding'); startPoll();
-      }).catch(function () { $('request').disabled = false; toast('Network error — try again'); });
+        if (IN_TG) { TG.backHide(); TG.main('ሰርዝ · Cancel ride', cancel); TG.haptic(); }
+      }).catch(function () { $('request').disabled = false; if (IN_TG) setCta(); toast('Network error — try again'); });
   }
 
   // ---- live status (poll every 4 s) ----
@@ -152,6 +181,7 @@
   }
   function render(r) {
     S.ride = r;
+    if (IN_TG) { if (['requested', 'dispatching', 'assigned', 'arriving', 'arrived'].indexOf(r.status) >= 0) TG.main('ሰርዝ · Cancel ride', cancel); else TG.mainHide(); }
     if (r.status === 'dispatching' || r.status === 'requested') {
       show('s-finding');
       $('findTitle').innerHTML = r.concierge ? 'ሹፌር እየመደብንልዎ ነው <small>A dispatcher is assigning your driver</small>' : 'ሹፌር እየፈለግን ነው… <small>Finding your driver…</small>';
@@ -182,11 +212,13 @@
   }
 
   // ---- cancel / rate / again ----
-  function cancel() { if (!S.ride) return; if (!confirm('ጉዞውን ይሰርዙ? · Cancel this ride?')) return; api('/api/ride/' + S.ride.id + '/cancel', { phone: ME.phone }).then(function (d) { if (d.ok) render(d.ride); else toast(d.error || 'Cannot cancel now'); }).catch(function () { toast('Network error'); }); }
+  function cancel() { if (!S.ride) return; var go = function (yes) { if (!yes) return; api('/api/ride/' + S.ride.id + '/cancel', { phone: ME.phone }).then(function (d) { if (d.ok) render(d.ride); else toast(d.error || 'Cannot cancel now'); }).catch(function () { toast('Network error'); }); }; if (IN_TG) TG.confirm('ጉዞውን ይሰርዙ? · Cancel this ride?', go); else go(confirm('ጉዞውን ይሰርዙ? · Cancel this ride?')); }
   $('cancelFinding').addEventListener('click', cancel); $('cancelAssigned').addEventListener('click', cancel);
   function markStars(n) { $('stars').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', +b.dataset.s <= n); }); }
   $('stars').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { var n = +b.dataset.s; markStars(n); api('/api/ride/' + S.ride.id + '/rate', { phone: ME.phone, stars: n }).then(function () { $('rateMsg').textContent = 'አመሰግናለሁ! · Thank you!'; }).catch(function () { toast('Network error'); }); }); });
   function reset(swap) {
+    if (IN_TG) { TG.mainHide(); TG.backHide(); }
+    $('forOther').checked = false; $('passenger').classList.add('hidden');
     var a = S.pickup, b = S.dropoff; S.ride = null; S.quote = null; BinaMap.clearRoute();
     if (swap && a && b) { setPickup({ lat: b.lat, lng: b.lng, label: b.label }); S.dropoff = { lat: a.lat, lng: a.lng, label: a.label }; BinaMap.setDrop(S.dropoff); return quote(); }
     S.dropoff = null; BinaMap.setDrop(null); show('s-home');
@@ -196,5 +228,13 @@
 
   // ---- resume an active ride after reload ----
   var active = lsGet('bina_ride_active');
-  if (active && ME) { S.ride = { id: active }; startPoll(); }
+  var urlId = new URLSearchParams(location.search).get('id');
+  if (IN_TG) {
+    api('/api/ride/mine?initData=' + encodeURIComponent(TG.initData())).then(function (d) {
+      if (d.ok && d.ride) {
+        ME = ME || { name: (TG.user() || {}).first_name || 'Telegram user', tg: true }; ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME));
+        S.ride = { id: d.ride.id }; lsSet('bina_ride_active', d.ride.id); render(d.ride); startPoll();
+      }
+    }).catch(function () {});
+  } else if ((urlId || active) && ME) { S.ride = { id: urlId || active }; startPoll(); }
 })();

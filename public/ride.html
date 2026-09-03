@@ -46,6 +46,12 @@
     <div class="tripline"><div><span class="dot"></span> <b id="qFrom"></b></div><div><span class="pin">📍</span> <b id="qTo"></b></div></div>
     <div class="small" id="qMeta"></div>
     <div id="tiers" class="tiers"></div>
+    <label class="forother"><input type="checkbox" id="forOther"> ለሌላ ሰው ይያዙ · Book for someone else</label>
+    <div id="passenger" class="passenger hidden">
+      <input id="pName" aria-label="Passenger name" placeholder="የተሳፋሪ ስም · Passenger name" autocomplete="off">
+      <input id="pPhone" aria-label="Passenger phone" placeholder="09… · Passenger phone (Ethiopia)" inputmode="tel">
+      <div class="small">ሹፌሩ ለተሳፋሪው ይደውላል · The driver calls the passenger; you get the updates.</div>
+    </div>
     <div class="payrow">
       <label><input type="radio" name="pay" value="cash" checked> 💵 Cash · ጥሬ ገንዘብ</label>
       <label><input type="radio" name="pay" value="chapa"> 📱 telebirr / Chapa</label>
@@ -101,9 +107,11 @@
 
 <div id="toast" class="toast hidden"></div>
 
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="/static/vendor/maplibre-gl.js"></script>
 <script src="/static/vendor/pmtiles.js"></script>
 <script src="/static/ride/map.js?v=2"></script>
-<script src="/static/ride/app.js?v=3"></script>
+<script src="/static/ride/tg.js?v=4"></script>
+<script src="/static/ride/app.js?v=4"></script>
 </body>
 </html>
