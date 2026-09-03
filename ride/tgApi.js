@@ -19,6 +19,7 @@ function makeTgApi({ token, fetchImpl, apiBase, timeoutMs }) {
   return {
     call,
     sendMessage: (chat_id, text, extra) => call('sendMessage', Object.assign({ chat_id, text }, extra || {})),
+    sendChatAction: (chat_id, action) => call('sendChatAction', { chat_id, action: action || 'typing' }),
     getFile: file_id => call('getFile', { file_id }),
     downloadFile,
     setWebhook: (url, secret_token) => call('setWebhook', { url, secret_token, allowed_updates: ['message', 'callback_query'] }),

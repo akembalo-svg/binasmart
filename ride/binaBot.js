@@ -56,6 +56,8 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername }
     const text = String(msg.text || '').trim();
     if (!text || /^\/start\b/.test(text) || /^\/(help|menu)\b/.test(text)) {
       hist.delete(chatId);
+      const u = msg.from || {};
+      console.log('[binaBot] start chat=' + chatId + ' user=' + (u.username ? '@' + u.username : '') + ' ' + [u.first_name, u.last_name].filter(Boolean).join(' ') + ' lang=' + (u.language_code || '?'));
       return api.sendMessage(chatId, WELCOME, { reply_markup: { inline_keyboard: [...menuMarkup().inline_keyboard, [{ text: '📣 Share BinaSmart · ያጋሩ', url: share }]] } });
     }
     const cmd = /^\/(\w+)/.exec(text);
@@ -64,6 +66,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername }
       return api.sendMessage(chatId, 'Open it here · እዚህ ይክፈቱ 👇', { reply_markup: { inline_keyboard: [[{ text: '🔗 ' + baseUrl.replace('https://', '') + path, web_app: { url: baseUrl + path } }]] } });
     }
     if (cmd) return api.sendMessage(chatId, 'Unknown command. Type /menu to see all services, or just ask me a question. · /menu ይጻፉ');
+    if (api.sendChatAction) api.sendChatAction(chatId, 'typing').catch(() => {});
     const reply = await askBini(chatId, text.slice(0, 1200));
     if (!reply) return api.sendMessage(chatId, 'Bini is busy for a moment — please try again in a minute, or open bina.et. · ቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ።', { reply_markup: menuMarkup() });
     const wantsRide = /ride|taxi|ታክሲ|ጉዞ|\/ride/i.test(reply + ' ' + text);
