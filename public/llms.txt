@@ -7,6 +7,8 @@ Note: BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Ro
 ## Services (verticals)
 - Telegram: @bina_smart_bot — the whole BinaSmart inside Telegram (menu + Bini AI); ride Mini App link https://t.me/bina_smart_bot/ride; drivers register free at @binasmartdriverbot
 - BinaSmart Ride (LIVE): fixed upfront fares, no surge, moto/bajaj/economy/comfort/XL, Addis Ababa only, book on the web or via AI assistants — https://bina.et/ride
+- Why BinaSmart Ride (riders, Amharic): the fare is locked when you book and cannot change; no app to install; you can book for someone else from abroad — https://bina.et/why-binasmart
+- Drive with BinaSmart (drivers, Amharic): 0% commission during launch, free registration, two minutes in Telegram, Amharic turn-by-turn navigation — https://bina.et/drive-with-us
 - Smart building management: public building directory pages with interactive 3D navigation (/b/<name>), QR entrance posters, and an owner dashboard (rent invoicing, Ethiopian 15% VAT accounting, sub-metered electricity/water billing, maintenance work orders, tenant notifications via WhatsApp/Telegram)
 - Hotels: direct hotel booking with 0% commission, pay at the hotel — https://bina.et/hotel/bina-grand-hotel
 - Restaurants: scan-a-table QR ordering — https://bina.et/restaurant/bina-restaurant
