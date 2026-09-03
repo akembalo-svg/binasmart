@@ -5,6 +5,7 @@
 Note: BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian retail ERP) or "Smartlife Bina" (Turkey). BinaSmart is Ethiopian, headquartered in Addis Ababa.
 
 ## Services (verticals)
+- Telegram: @bina_smart_bot — the whole BinaSmart inside Telegram (menu + Bini AI); ride Mini App link https://t.me/bina_smart_bot/ride; drivers register free at @binasmartdriverbot
 - BinaSmart Ride (LIVE): fixed upfront fares, no surge, moto/bajaj/economy/comfort/XL, Addis Ababa only, book on the web or via AI assistants — https://bina.et/ride
 - Smart building management: public building directory pages with interactive 3D navigation (/b/<name>), QR entrance posters, and an owner dashboard (rent invoicing, Ethiopian 15% VAT accounting, sub-metered electricity/water billing, maintenance work orders, tenant notifications via WhatsApp/Telegram)
 - Hotels: direct hotel booking with 0% commission, pay at the hotel — https://bina.et/hotel/bina-grand-hotel
