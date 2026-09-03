@@ -6,6 +6,7 @@
 // the open offers plus the current ride. Ethiopian mobile data is metered and latency is high, so one
 // request every 4 s beats three.
 const tgauth = require('./tgauth');
+const dstate = require('./driverState');
 const { haversineM } = require('./geo');
 
 const DRIVER_STATES = { assigned: ['arriving', 'arrived'], arriving: ['arrived'], arrived: ['ontrip'], ontrip: ['completed'] };
@@ -163,11 +164,7 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     const upd = await prisma.ride.update({ where: { id: ride.id }, data });
 
     if (want === 'completed') {
-      const today = addisDay(clock());
-      const carry = sameDay(drv) ? drv.earningsTodayEtb : 0;
-      await prisma.driver.update({ where: { id: drv.id }, data: {
-        onRideId: null, ridesCount: { increment: 1 },
-        earningsTodayEtb: carry + ride.driverTakeEtb, earningsDay: today } });
+      await dstate.complete(prisma, drv, ride, clock());
       if (telegram) telegram.ownerNote('✅ Ride ' + ride.id + ' completed by ' + drv.name + ' · ' + ride.fareEtb + ' ETB ' + ride.paymentMethod).catch(() => {});
     }
     if (riderNotify) riderNotify.notify(ride.id, want).catch(e => console.error('[ride/driverApi] rider notify failed: ' + e.message));

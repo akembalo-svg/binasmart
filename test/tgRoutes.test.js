@@ -10,6 +10,7 @@ function fakePrisma() {
   const rides = [], riders = [], drivers = [{ id: 'd1', name: 'Abel', phone: '+251900000000', plate: 'A1', status: 'pending', telegramId: '555', tier: 'economy' }];
   const inc = { rides, riders, drivers };
   const ACTIVE = ['requested', 'dispatching', 'assigned', 'arriving', 'arrived', 'ontrip'];
+  const apply = (row, data) => { for (const [k, v] of Object.entries(data)) row[k] = (v && typeof v === 'object' && 'increment' in v) ? (row[k] || 0) + v.increment : v; };
   return { _: inc,
     rider: { upsert: async ({ where, update, create }) => { let r = riders.find(x => x.phone === where.phone); if (r) Object.assign(r, update); else { r = { id: 'u' + (riders.length + 1), telegramId: null, ...create }; riders.push(r); } return r; },
              update: async ({ where, data }) => { const r = riders.find(x => x.id === where.id); Object.assign(r, data); return r; } },
@@ -17,7 +18,19 @@ function fakePrisma() {
             create: async ({ data }) => { const r = { id: 'r' + (rides.length + 1), status: 'dispatching', requestedAt: new Date(), ...data }; rides.push(r); return r; },
             findFirst: async ({ where }) => { const tg = where.OR[0].rider.telegramId; const r = rides.slice().reverse().find(x => ACTIVE.includes(x.status) && ((riders.find(u => u.id === x.riderId) || {}).telegramId === tg || (x.bookedBy && x.bookedBy.telegramId === tg))); return r ? { ...r, driver: null } : null; },
             updateMany: async () => ({ count: 1 }), update: async ({ where, data }) => { const r = rides.find(x => x.id === where.id); Object.assign(r, data); return { ...r, driver: null }; } },
-    driver: { findUnique: async ({ where }) => drivers.find(d => d.id === where.id || d.phone === where.phone) || null, update: async ({ where, data }) => { const d = drivers.find(x => x.id === where.id); Object.assign(d, data); return d; }, count: async () => 0, findMany: async () => drivers },
+    driver: {
+      findUnique: async ({ where }) => drivers.find(d => d.id === where.id || d.phone === where.phone) || null,
+      update: async ({ where, data }) => { const d = drivers.find(x => x.id === where.id); apply(d, data); return d; },
+      // onRideId guards are the whole point of these paths, so the fake must honour them.
+      updateMany: async ({ where, data }) => {
+        const d = drivers.find(x => x.id === where.id && (!('onRideId' in where) || x.onRideId === where.onRideId));
+        if (!d) return { count: 0 };
+        apply(d, data);
+        return { count: 1 };
+      },
+      count: async () => 0, findMany: async () => drivers,
+    },
+    rideOffer: { updateMany: async () => ({ count: 0 }), findMany: async () => [] },
   };
 }
 const geo = { route: async () => ({ distanceM: 5000, durationS: 900, estimate: false, geometry: [] }), searchPlaces: async () => [] };
@@ -26,7 +39,9 @@ const settings = { get: async () => ({ tiers: { moto: tier('Moto', 'ሞተር', 
 const telegram = { conciergeAlert: async () => true, ownerNote: async () => true };
 const dispatch = { start: async () => 'ok', cancel: () => {} };
 const notified = []; const riderNotify = { notify: async (id, ev) => { notified.push(ev); return true; } };
-const driverStatus = []; const driverBot = { handleUpdate: async () => { driverStatus.push('dupdate'); }, notifyStatus: async (d, s) => { driverStatus.push(s); return true; } };
+const driverStatus = []; const driverTold = [];
+const driverBot = { handleUpdate: async () => { driverStatus.push('dupdate'); }, notifyStatus: async (d, s) => { driverStatus.push(s); return true; },
+  tell: async (d, text) => { driverTold.push(text); return true; } };
 const riderBot = { handleUpdate: async () => {} };
 
 const prisma = fakePrisma();
@@ -93,4 +108,65 @@ test('ops assign / status / rider cancel call riderNotify with the right event',
   await app.inject({ method: 'POST', url: '/api/ride/r2/cancel', payload: { phone: '0922333444' } });
   await new Promise(res => setImmediate(res));
   assert.deepEqual(notified, ['assigned', 'arrived', 'cancelled']);
+});
+
+// ---- Phase 2 regressions: onRideId is set and cleared on EVERY path, not just the driver app ----
+
+test('a rider cancelling an assigned ride frees the driver and warns them', async () => {
+  const d = prisma._.drivers[0];
+  d.status = 'approved'; d.onRideId = 'r9';
+  prisma._.rides.push({ id: 'r9', status: 'assigned', riderId: 'u1', riderPhone: '+251922333444', riderName: 'Almaz',
+    driverId: 'd1', tier: 'moto', pickup: pt, dropoff: pt2, distanceM: 1, durationS: 1, fareEtb: 100, driverTakeEtb: 100 });
+  driverTold.length = 0;
+
+  const r = await app.inject({ method: 'POST', url: '/api/ride/r9/cancel', payload: { phone: '0922333444' } });
+  assert.equal(r.statusCode, 200);
+  assert.equal(d.onRideId, null, 'the driver must not stay busy forever');
+  assert.equal(driverTold.length, 1, 'the driver is told the passenger cancelled');
+  assert.match(driverTold[0], /cancelled/i);
+  assert.match(driverTold[0], /ተጓዡ ጉዞውን ሰርዞታል/, 'and told in Amharic first');
+});
+
+test('a late cancellation cannot free a driver who has moved on to another ride', async () => {
+  const d = prisma._.drivers[0];
+  d.status = 'approved'; d.onRideId = 'r-new';
+  prisma._.rides.push({ id: 'r10', status: 'assigned', riderId: 'u1', riderPhone: '+251922333444', riderName: 'Almaz',
+    driverId: 'd1', tier: 'moto', pickup: pt, dropoff: pt2, distanceM: 1, durationS: 1, fareEtb: 100, driverTakeEtb: 100 });
+  await app.inject({ method: 'POST', url: '/api/ride/r10/cancel', payload: { phone: '0922333444' } });
+  assert.equal(d.onRideId, 'r-new', 'the newer ride is untouched');
+});
+
+test('ops assignment marks the driver busy so the auction cannot double-book them', async () => {
+  const d = prisma._.drivers[0];
+  d.status = 'approved'; d.onRideId = null;
+  prisma._.rides.push({ id: 'r11', status: 'dispatching', riderId: 'u1', riderPhone: '+251922333444', riderName: 'Almaz',
+    tier: 'moto', pickup: pt, dropoff: pt2, distanceM: 1, durationS: 1, fareEtb: 100, driverTakeEtb: 100 });
+  const r = await app.inject({ method: 'POST', url: '/api/ride/ops/r11/assign', headers: { 'x-owner-key': 'OWNERKEY' }, payload: { driverId: 'd1' } });
+  assert.equal(r.statusCode, 200);
+  assert.equal(d.onRideId, 'r11', 'ops assignment must claim the driver');
+});
+
+test('ops completion frees the driver, counts the trip and banks the fare', async () => {
+  const d = prisma._.drivers[0];
+  d.status = 'approved'; d.onRideId = 'r12'; d.ridesCount = 3; d.earningsTodayEtb = 0; d.earningsDay = null;
+  prisma._.rides.push({ id: 'r12', status: 'ontrip', riderId: 'u1', riderPhone: '+251922333444', riderName: 'Almaz',
+    driverId: 'd1', tier: 'moto', pickup: pt, dropoff: pt2, distanceM: 1, durationS: 1, fareEtb: 100, driverTakeEtb: 100 });
+  const r = await app.inject({ method: 'POST', url: '/api/ride/ops/r12/status', headers: { 'x-owner-key': 'OWNERKEY' }, payload: { status: 'completed' } });
+  assert.equal(r.statusCode, 200);
+  assert.equal(d.onRideId, null, 'freed');
+  assert.equal(d.ridesCount, 4, 'counted');
+  assert.equal(d.earningsTodayEtb, 100, 'paid — the ops panel used to bank nothing');
+  assert.ok(d.earningsDay, 'the earnings day is stamped');
+});
+
+test('ops cancellation frees the driver and warns them too', async () => {
+  const d = prisma._.drivers[0];
+  d.status = 'approved'; d.onRideId = 'r13';
+  prisma._.rides.push({ id: 'r13', status: 'assigned', riderId: 'u1', riderPhone: '+251922333444', riderName: 'Almaz',
+    driverId: 'd1', tier: 'moto', pickup: pt, dropoff: pt2, distanceM: 1, durationS: 1, fareEtb: 100, driverTakeEtb: 100 });
+  driverTold.length = 0;
+  await app.inject({ method: 'POST', url: '/api/ride/ops/r13/status', headers: { 'x-owner-key': 'OWNERKEY' }, payload: { status: 'cancelled' } });
+  assert.equal(d.onRideId, null);
+  assert.equal(driverTold.length, 1);
+  assert.match(driverTold[0], /do not continue/i);
 });

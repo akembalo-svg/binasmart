@@ -2,6 +2,7 @@
 const { quoteAll, quoteFare, TIERS } = require('./fare');
 const fs = require('fs'); const path = require('path');
 const tgauth = require('./tgauth');
+const dstate = require('./driverState');
 
 const ACTIVE = ['requested', 'dispatching', 'assigned', 'arriving', 'arrived', 'ontrip'];
 const NEXT = { assigned: ['arriving', 'arrived', 'cancelled'], arriving: ['arrived', 'cancelled'], arrived: ['ontrip', 'cancelled'], ontrip: ['completed'], dispatching: ['cancelled'], requested: ['cancelled'] };
@@ -141,6 +142,16 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     if (!['requested', 'dispatching', 'assigned', 'arriving', 'arrived'].includes(ride.status)) return reply.code(409).send({ ok: false, error: 'cannot_cancel_now' });
     dispatch.cancel(ride.id);
     const upd = await prisma.ride.update({ where: { id: ride.id }, data: { status: 'cancelled', cancelledBy: 'rider', cancelledAt: new Date() }, include: { driver: true } });
+    // Free the driver, or they stay marked busy forever and silently stop receiving every future
+    // offer — and tell them, or they drive to a pickup that no longer exists.
+    if (ride.driverId) {
+      await dstate.release(prisma, ride.driverId, ride.id);
+      await prisma.rideOffer.updateMany({ where: { rideId: ride.id, status: 'open' }, data: { status: 'expired', decidedAt: new Date() } });
+      const drv = upd.driver || await prisma.driver.findUnique({ where: { id: ride.driverId } });
+      if (driverBot && drv) {
+        driverBot.tell(drv, '❌ ተጓዡ ጉዞውን ሰርዞታል። ወደዚያ አይሂዱ።\nThe passenger cancelled this ride — do not continue to the pickup. You are back online for new offers.').catch(() => {});
+      }
+    }
     telegram.ownerNote('❌ Rider cancelled ride ' + ride.id + ' (' + ride.riderName + ')').catch(() => {});
     fireNotify(ride.id, 'cancelled');
     return { ok: true, ride: pubRide(upd) };
@@ -259,6 +270,10 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     if (!drv || drv.status !== 'approved') return reply.code(400).send({ ok: false, error: 'approved driver required' });
     const res = await prisma.ride.updateMany({ where: { id: req.params.id, status: { in: ['requested', 'dispatching'] } }, data: { driverId: drv.id, status: 'assigned', assignedAt: new Date() } });
     if (res.count === 0) return reply.code(409).send({ ok: false, error: 'ride not assignable' });
+    // Mark them busy, or the auction will hand them a second ride at the same time.
+    const claimed = await dstate.claim(prisma, drv.id, req.params.id);
+    if (!claimed) console.error('[ride/routes] ops assigned ' + drv.id + ' to ' + req.params.id + ' but they were already on ' + drv.onRideId);
+    await prisma.rideOffer.updateMany({ where: { rideId: req.params.id, status: 'open' }, data: { status: 'lost', decidedAt: new Date() } });
     dispatch.cancel(req.params.id);
     const ride = await prisma.ride.findUnique({ where: { id: req.params.id }, include: { driver: true } });
     fireNotify(req.params.id, 'assigned');
@@ -277,7 +292,16 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     if (to === 'completed') { data.completedAt = new Date(); if (b.cashPaid === true) data.paymentStatus = 'paid'; }
     if (to === 'cancelled') { data.cancelledAt = new Date(); data.cancelledBy = 'ops'; dispatch.cancel(ride.id); }
     const upd = await prisma.ride.update({ where: { id: ride.id }, data, include: { driver: true } });
-    if (to === 'completed' && ride.driverId) await prisma.driver.update({ where: { id: ride.driverId }, data: { ridesCount: { increment: 1 } } });
+    // The ops panel must leave the driver in exactly the state the driver app would.
+    const opsDrv = ride.driverId ? (upd.driver || await prisma.driver.findUnique({ where: { id: ride.driverId } })) : null;
+    if (to === 'completed' && opsDrv) await dstate.complete(prisma, opsDrv, ride, Date.now());
+    if (to === 'cancelled' && ride.driverId) {
+      await dstate.release(prisma, ride.driverId, ride.id);
+      await prisma.rideOffer.updateMany({ where: { rideId: ride.id, status: 'open' }, data: { status: 'expired', decidedAt: new Date() } });
+      if (driverBot && opsDrv) {
+        driverBot.tell(opsDrv, '❌ ይህ ጉዞ ተሰርዟል። ወደዚያ አይሂዱ።\nThis ride was cancelled by BinaSmart — do not continue. You are back online for new offers.').catch(() => {});
+      }
+    }
     if (['arrived', 'completed', 'cancelled'].includes(to)) fireNotify(ride.id, to);
     return { ok: true, ride: pubRide(upd) };
   });

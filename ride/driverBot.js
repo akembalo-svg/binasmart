@@ -158,6 +158,13 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
     catch (e) { console.error('[ride/driverBot] notifyStatus failed: ' + e.message); return false; }
   }
 
-  return { handleUpdate, notifyStatus, driverHome, decide, _sessions: sessions };
+  // Used when a ride a driver is holding disappears under them.
+  async function tell(driver, text, extra) {
+    if (!driver || !driver.telegramId || !text) return false;
+    try { await api.sendMessage(String(driver.telegramId), text, extra || {}); return true; }
+    catch (e) { console.error('[ride/driverBot] tell failed: ' + e.message); return false; }
+  }
+
+  return { handleUpdate, notifyStatus, driverHome, decide, tell, _sessions: sessions };
 }
 module.exports = { makeDriverBot, TIERS };
