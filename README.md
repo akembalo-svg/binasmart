@@ -132,3 +132,12 @@ Proprietary — © 2026 BinaSmart. All rights reserved. See [LICENSE](LICENSE).
 The source is published for transparency and reference only; no permission is
 granted to use, copy, modify, or redistribute it without written permission
 from BinaSmart. For licensing inquiries: [bina.et](https://bina.et) · info@bina.et
+
+## MCP server (AI assistants)
+
+`https://bina.et/mcp` — public, no-auth Model Context Protocol server so Claude, ChatGPT and Gemini can use BinaSmart directly: `quote_ride`, `request_ride`, `get_ride_status`, `cancel_ride`, `search_places`, `get_hotel_rooms`, `get_hospital_departments`, `list_events`, `get_ethiopia_guide`. Code in [`mcp-server/`](mcp-server/), runs as pm2 `bina-mcp` on :3021 behind nginx. Listed in the [MCP Registry](https://registry.modelcontextprotocol.io/v0.1/servers?search=binasmart) as `et.bina/binasmart`.
+
+```bash
+claude mcp add --transport http binasmart https://bina.et/mcp
+cd mcp-server && npm install && node --test
+```
