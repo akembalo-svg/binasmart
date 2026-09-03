@@ -22,12 +22,25 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
     name: chatId => api.sendMessage(chatId, 'What is your full name? · ሙሉ ስምዎን ይላኩ'),
     phone: chatId => api.sendMessage(chatId, 'Share your phone number · ስልክ ቁጥርዎን ያጋሩ', { reply_markup: { keyboard: [[{ text: '📱 Share my phone · ስልኬን አጋራ', request_contact: true }]], resize_keyboard: true, one_time_keyboard: true } }),
     tier: chatId => api.sendMessage(chatId, 'Which vehicle do you drive? · የሚያሽከረክሩት ተሽከርካሪ', { reply_markup: { inline_keyboard: Object.keys(TIERS).map(t => [{ text: TIERS[t], callback_data: 'tier:' + t }]) } }),
-    vehicle: chatId => api.sendMessage(chatId, 'Car make and colour? e.g. "Toyota Vitz white" · የመኪና አይነት እና ቀለም'),
+    vehicle: chatId => api.sendMessage(chatId, 'What make and model? e.g. "Toyota Vitz" · የተሽከርካሪው አይነት\n\n(Just the model — we ask the colour next.)'),
+    colour: chatId => api.sendMessage(chatId, 'What colour? · ቀለሙ', { reply_markup: { inline_keyboard: COLOUR_ROWS } }),
     plate: chatId => api.sendMessage(chatId, 'Plate number? · ታርጋ ቁጥር (ለምሳሌ A12345)'),
     licence: chatId => api.sendMessage(chatId, '📄 Step 1 of 2 — send a PHOTO of your driving licence\nየመንጃ ፈቃድዎን ፎቶ ይላኩ\n\n(Private — only BinaSmart sees this.)', { reply_markup: { remove_keyboard: true } }),
     car: chatId => api.sendMessage(chatId, '📸 Step 2 of 2 — now send a photo of the FRONT of your car, with the plate clearly visible.\nየመኪናዎን የፊት ፎቶ ይላኩ — ታርጋው በደንብ እንዲታይ።\n\nRiders will see this photo so they can recognise your car. Take it in daylight if you can.\nተጓዦች መኪናዎን ለመለየት ይህን ፎቶ ያያሉ።'),
   };
   const ask = (chatId, step) => ASK[step](chatId);
+
+  // Riders read the colour at the kerb before anything else, so it must be a clean single word.
+  const COLOURS = {
+    white: 'White · ነጭ', silver: 'Silver · ብር', grey: 'Grey · ግራጫ', black: 'Black · ጥቁር',
+    blue: 'Blue · ሰማያዊ', red: 'Red · ቀይ', green: 'Green · አረንጓዴ', other: 'Other · ሌላ',
+  };
+  const COLOUR_ROWS = (function () {
+    const keys = Object.keys(COLOURS), rows = [];
+    for (let i = 0; i < keys.length; i += 2) rows.push(keys.slice(i, i + 2).map(k => ({ text: COLOURS[k], callback_data: 'col:' + k })));
+    return rows;
+  })();
+  const colourLabel = k => (COLOURS[k] || '').split(' · ')[0];
 
   async function savePhoto(chatId, fileId, driverId, kind) {
     const f = await api.getFile(fileId);
@@ -44,6 +57,11 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
       if (offer) return decide(chatId, cq, offer[1], offer[2]);
       const s = sess(chatId); const m = /^tier:(\w+)$/.exec(cq.data || '');
       if (s.step === 'tier' && m && TIERS[m[1]]) { s.data.tier = m[1]; s.step = 'vehicle'; return ask(chatId, 'vehicle'); }
+      const col = /^col:(\w+)$/.exec(cq.data || '');
+      if (s.step === 'colour' && col && COLOURS[col[1]]) {
+        s.data.colour = col[1] === 'other' ? null : colourLabel(col[1]);
+        s.step = 'plate'; return ask(chatId, 'plate');
+      }
       return ask(chatId, s.step);
     }
     const msg = update.message; if (!msg || !msg.chat) return;
@@ -70,7 +88,14 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
       case 'tier': return ask(chatId, 'tier');
       case 'vehicle':
         if (text.length < 3) return ask(chatId, 'vehicle');
-        s.data.vehicle = text.slice(0, 70); s.step = 'plate'; return ask(chatId, 'plate');
+        s.data.vehicle = text.slice(0, 70); s.step = 'colour'; return ask(chatId, 'colour');
+      case 'colour': {
+        // A typed colour is fine too, but the buttons are the fast path.
+        const typed = text.trim().toLowerCase();
+        const hit = Object.keys(COLOURS).find(k => k !== 'other' && (k === typed || colourLabel(k).toLowerCase() === typed));
+        s.data.colour = hit ? colourLabel(hit) : text.slice(0, 20);
+        s.step = 'plate'; return ask(chatId, 'plate');
+      }
       case 'plate':
         if (text.length < 3) return ask(chatId, 'plate');
         s.data.plate = text.slice(0, 20).toUpperCase(); s.step = 'licence'; return ask(chatId, 'licence');
@@ -84,7 +109,7 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
         const photos = msg.photo;
         if (!photos || !photos.length) return api.sendMessage(chatId, 'Please send a photo of the front of your car, plate visible · የመኪናዎን የፊት ፎቶ ይላኩ');
         const d = s.data;
-        const drv = await prisma.driver.create({ data: { name: d.name, phone: d.phone, tier: d.tier, plate: d.plate, vehicleMake: d.vehicle, vehicleColour: null, status: 'pending', telegramId: chatId } });
+        const drv = await prisma.driver.create({ data: { name: d.name, phone: d.phone, tier: d.tier, plate: d.plate, vehicleMake: d.vehicle, vehicleColour: d.colour || null, status: 'pending', telegramId: chatId } });
         const saved = { licence: false, car: false };
         try { await savePhoto(chatId, d.licenceFileId, drv.id, 'licence'); saved.licence = true; } catch (e) { console.error('[ride/driverBot] licence save failed for ' + drv.id + ': ' + e.message); }
         try { await savePhoto(chatId, photos[photos.length - 1].file_id, drv.id, 'car'); saved.car = true; } catch (e) { console.error('[ride/driverBot] car photo save failed for ' + drv.id + ': ' + e.message); }
@@ -92,8 +117,9 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
           licenceUrl: saved.licence ? '/api/ride/ops/driver-doc/' + drv.id + '?kind=licence' : null,
           carPhotoUrl: saved.car ? '/api/ride/car/' + drv.id + '.jpg' : null } });
         sessions.delete(chatId);
-        await api.sendMessage(chatId, '✅ ' + d.name + ' · ' + TIERS[d.tier] + ' · ' + d.vehicle + ' · ' + d.plate + '\n\nThank you! We will call you within 24 hours to activate your account. Registration is free and there is 0% commission during our launch.\nአመሰግናለን! በ24 ሰዓት ውስጥ እንደውልልዎታለን። ምዝገባው ነጻ ነው፤ ኮሚሽን የለም።', { reply_markup: { remove_keyboard: true } });
-        telegram.ownerNote('🧑‍✈️ NEW DRIVER (pending): ' + d.name + ' · ' + TIERS[d.tier] + ' · ' + d.vehicle + ' · plate ' + d.plate + ' · ' + d.phone
+        const vehicleLine = [d.colour, d.vehicle].filter(Boolean).join(' ');
+        await api.sendMessage(chatId, '✅ ' + d.name + ' · ' + TIERS[d.tier] + ' · ' + vehicleLine + ' · ' + d.plate + '\n\nThank you! We will call you within 24 hours to activate your account. Registration is free and there is 0% commission during our launch.\nአመሰግናለን! በ24 ሰዓት ውስጥ እንደውልልዎታለን። ምዝገባው ነጻ ነው፤ ኮሚሽን የለም።', { reply_markup: { remove_keyboard: true } });
+        telegram.ownerNote('🧑‍✈️ NEW DRIVER (pending): ' + d.name + ' · ' + TIERS[d.tier] + ' · ' + vehicleLine + ' · plate ' + d.plate + ' · ' + d.phone
           + '\nPhotos: licence ' + (saved.licence ? '✅' : '❌') + ' · car ' + (saved.car ? '✅' : '❌')
           + '\nApprove: ' + baseUrl + '/ride-ops').catch(() => {});
         return;

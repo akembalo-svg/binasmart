@@ -33,7 +33,7 @@ const tap = data => ({ callback_query: { id: 'cq1', data, message: offerCard() }
 const msg = (text, extra) => ({ message: Object.assign({ chat: { id: 555 }, text }, extra || {}) });
 const photo = id => msg(undefined, { photo: [{ file_id: 'small' }, { file_id: id }] });
 
-test('happy path: name → contact → tier → vehicle → plate → licence photo → CAR photo → pending driver, both files, owner alert', async () => {
+test('happy path: name → contact → tier → model → colour → plate → licence photo → CAR photo → pending driver, both files, owner alert', async () => {
   const { api, prisma, notes, dir, b } = bot();
   await b.handleUpdate(msg('/start'));
   assert.match(api.sent.at(-1).text, /0% commission/i);
@@ -42,7 +42,11 @@ test('happy path: name → contact → tier → vehicle → plate → licence ph
   await b.handleUpdate(msg(undefined, { contact: { phone_number: '251911244344', user_id: 555 } }));
   assert.deepEqual(api.sent.at(-1).extra.reply_markup.inline_keyboard.flat().map(x => x.callback_data), ['tier:moto', 'tier:bajaj', 'tier:economy', 'tier:comfort', 'tier:xl']);
   await b.handleUpdate({ callback_query: { id: 'cq1', data: 'tier:economy', message: { chat: { id: 555 } } } });
-  await b.handleUpdate(msg('Toyota Vitz white'));
+  await b.handleUpdate(msg('Toyota Vitz'));
+  assert.match(api.sent.at(-1).text, /colour/i, 'colour is its own step');
+  const cols = api.sent.at(-1).extra.reply_markup.inline_keyboard.flat().map(x => x.callback_data);
+  assert.ok(cols.includes('col:white') && cols.includes('col:black') && cols.includes('col:other'), 'colour buttons: ' + cols.join(','));
+  await b.handleUpdate({ callback_query: { id: 'cq2', data: 'col:white', message: { chat: { id: 555 } } } });
   await b.handleUpdate(msg('A12345'));
   assert.match(api.sent.at(-1).text, /Step 1 of 2/); assert.match(api.sent.at(-1).text, /licence/i);
   await b.handleUpdate(photo('licenceBig'));
@@ -52,6 +56,8 @@ test('happy path: name → contact → tier → vehicle → plate → licence ph
   assert.equal(prisma.drivers.length, 1);
   const d = prisma.drivers[0];
   assert.equal(d.status, 'pending'); assert.equal(d.phone, '+251911244344'); assert.equal(d.tier, 'economy'); assert.equal(d.plate, 'A12345'); assert.equal(d.telegramId, '555');
+  assert.equal(d.vehicleMake, 'Toyota Vitz', 'the model alone');
+  assert.equal(d.vehicleColour, 'White', 'the colour in its own column — riders read it first');
   assert.equal(d.licenceUrl, '/api/ride/ops/driver-doc/d1?kind=licence');
   assert.equal(d.carPhotoUrl, '/api/ride/car/d1.jpg');
   assert.ok(fs.existsSync(path.join(dir, 'd1.jpg')), 'licence file');
@@ -100,7 +106,9 @@ test('a failed car download still creates the driver, with carPhotoUrl null and 
   await b.handleUpdate(msg('/start')); await b.handleUpdate(msg('Abel'));
   await b.handleUpdate(msg(undefined, { contact: { phone_number: '0911244344' } }));
   await b.handleUpdate({ callback_query: { id: 'c', data: 'tier:xl', message: { chat: { id: 555 } } } });
-  await b.handleUpdate(msg('Hiace white')); await b.handleUpdate(msg('C12345'));
+  await b.handleUpdate(msg('Hiace'));
+  await b.handleUpdate({ callback_query: { id: 'c2', data: 'col:white', message: { chat: { id: 555 } } } });
+  await b.handleUpdate(msg('C12345'));
   await b.handleUpdate(photo('lic')); await b.handleUpdate(photo('car'));
   assert.equal(prisma.drivers.length, 1);
   assert.equal(prisma.drivers[0].carPhotoUrl, null);
@@ -173,4 +181,27 @@ test('/start does not restart registration for an existing driver', async () => 
   await t.b.handleUpdate(msg('/start'));
   assert.match(t.api.sent[1].text, /registration is with us/i);
   assert.equal(t.prisma.drivers.length, 1, 'no duplicate driver was created');
+});
+
+test('a typed colour is accepted and normalised; "Other" leaves the column empty rather than wrong', async () => {
+  const t = bot();
+  await t.b.handleUpdate(msg('/start')); await t.b.handleUpdate(msg('Abel'));
+  await t.b.handleUpdate(msg(undefined, { contact: { phone_number: '0911244344' } }));
+  await t.b.handleUpdate({ callback_query: { id: 'c', data: 'tier:moto', message: { chat: { id: 555 } } } });
+  await t.b.handleUpdate(msg('Bajaj RE'));
+  await t.b.handleUpdate(msg('blue'));            // typed, not tapped
+  await t.b.handleUpdate(msg('B12345'));
+  await t.b.handleUpdate(photo('lic')); await t.b.handleUpdate(photo('car'));
+  assert.equal(t.prisma.drivers[0].vehicleColour, 'Blue', 'normalised to the canonical spelling');
+  assert.equal(t.prisma.drivers[0].vehicleMake, 'Bajaj RE');
+
+  const u = bot();
+  await u.b.handleUpdate(msg('/start')); await u.b.handleUpdate(msg('Sara'));
+  await u.b.handleUpdate(msg(undefined, { contact: { phone_number: '0911244355' } }));
+  await u.b.handleUpdate({ callback_query: { id: 'c', data: 'tier:moto', message: { chat: { id: 555 } } } });
+  await u.b.handleUpdate(msg('Vitz'));
+  await u.b.handleUpdate({ callback_query: { id: 'c3', data: 'col:other', message: { chat: { id: 555 } } } });
+  await u.b.handleUpdate(msg('B99999'));
+  await u.b.handleUpdate(photo('lic')); await u.b.handleUpdate(photo('car'));
+  assert.equal(u.prisma.drivers[0].vehicleColour, null, '"Other" stores nothing rather than the word Other');
 });
