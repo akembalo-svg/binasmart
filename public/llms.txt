@@ -37,4 +37,5 @@ Note: BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Ro
 - 3D building directory example: https://bina.et/b/darulle
 
 ## Developer resources
+- Use BinaSmart inside ChatGPT, Claude, Perplexity or Gemini (setup page): https://bina.et/ai — paste the MCP link, no login.
 - MCP server (Claude, ChatGPT, Gemini): https://bina.et/mcp — quote/book rides, search the directory, read the guides. Docs at that URL.

@@ -502,6 +502,7 @@ fastify.get('/guides', async (req, reply) => reply.sendFile('guides.html'));
 fastify.get('/privacy', async (req, reply) => reply.sendFile('privacy.html'));
 fastify.get('/terms', async (req, reply) => reply.sendFile('terms.html'));
 fastify.get('/support', async (req, reply) => reply.sendFile('support.html'));
+fastify.get('/ai', async (req, reply) => reply.sendFile('ai.html'));
 fastify.get('/tin-registration-ethiopia', async (req, reply) => reply.sendFile('tin-registration-ethiopia.html'));
 fastify.get('/business-registration-ethiopia', async (req, reply) => reply.sendFile('business-registration-ethiopia.html'));
 fastify.get('/driving-licence-ethiopia', async (req, reply) => reply.sendFile('driving-licence-ethiopia.html'));

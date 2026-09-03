@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Use BinaSmart inside ChatGPT, Claude, Gemini and Perplexity | BinaSmart</title>
+<meta name="description" content="Connect BinaSmart to your AI assistant: quote and book fixed-price rides in Addis Ababa, search the directory and read Ethiopia guides from ChatGPT, Claude, Perplexity or Gemini. Free, no login. MCP server at bina.et/mcp.">
+<link rel="canonical" href="https://bina.et/ai">
+<link rel="icon" href="/icon-32.png">
+<meta property="og:title" content="Use BinaSmart inside your AI assistant">
+<meta property="og:description" content="Book rides, search Addis Ababa and read Ethiopia guides from ChatGPT, Claude, Perplexity or Gemini. Paste one link.">
+<meta property="og:image" content="https://bina.et/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+Ethiopic:wght@500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Connect BinaSmart to your AI assistant","description":"Add the BinaSmart MCP server to ChatGPT, Claude, Perplexity or Gemini to book rides and search Addis Ababa by chat.","step":[{"@type":"HowToStep","name":"Copy the link","text":"Copy https://bina.et/mcp"},{"@type":"HowToStep","name":"Add it as a custom connector","text":"In your assistant, open Connectors (or Plugins), choose Add custom connector, paste the link, choose No authentication."},{"@type":"HowToStep","name":"Ask","text":"Ask for a ride quote, a pharmacy, a hotel, or a guide. Booking is confirmed with your Ethiopian phone number."}]}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#faf8f4;--card:#fff;--line:#e9e4da;--ink:#0f172a;--txt:#1e293b;--mut:#64748b;--em:#059669;--em2:#047857;--gold:#d4a017;--grad:linear-gradient(135deg,#064e3b,#059669 55%,#10b981)}
+body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--em2);text-decoration:none}a:hover{text-decoration:underline}
+.top{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:16px 18px}
+.logo{font-weight:800;font-size:19px;color:var(--ink)}.logo b{color:var(--em)}
+.top a.back{margin-left:auto;font-size:13px;font-weight:700;color:var(--mut)}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 56px}
+.hero{background:var(--grad);border-radius:24px;padding:30px 26px;color:#fff;box-shadow:0 22px 50px -26px rgba(5,150,105,.6);margin-top:8px}
+.hero .kick{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+.hero h1{font-size:clamp(26px,5.5vw,40px);font-weight:800;letter-spacing:-.5px;line-height:1.12;margin:8px 0 8px}
+.hero p{max-width:60ch;opacity:.95;font-weight:500}
+.hero .am{display:block;font-size:.85em;opacity:.9;margin-top:6px}
+.link{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.link code{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;padding:10px 14px;border-radius:12px;font-size:15px;font-weight:700;font-family:ui-monospace,Consolas,monospace}
+.link button{background:#fff;color:var(--em2);border:none;font:inherit;font-weight:800;padding:10px 16px;border-radius:12px;cursor:pointer}
+h2{font-size:22px;color:var(--ink);margin:34px 0 12px;letter-spacing:-.3px}
+.grid{display:grid;gap:14px}
+@media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.card h3{font-size:17px;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.card ol{margin:6px 0 0 20px;font-size:15px}
+.card li{margin:5px 0}
+.card .note{font-size:13px;color:var(--mut);margin-top:10px}
+.card code{background:#f1f5f9;padding:1px 6px;border-radius:6px;font-size:.92em}
+pre{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:12px 14px;font-size:13.5px;overflow-x:auto;margin-top:8px}
+.tools{display:grid;gap:10px}
+@media(min-width:680px){.tools{grid-template-columns:1fr 1fr 1fr}}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14px}
+.tool b{display:block;color:var(--ink)}
+.tool .w{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#b45309;background:#fef3c7;padding:1px 7px;border-radius:99px;margin-left:6px}
+.ask{background:#ecfdf5;border:1.5px solid #a7f3d0;border-radius:18px;padding:18px 20px}
+.ask li{margin:6px 0 6px 18px}
+.dir a{display:inline-block;margin:4px 8px 4px 0;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:14px;font-weight:700}
+footer{max-width:900px;margin:0 auto;padding:18px;color:var(--mut);font-size:13px;display:flex;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line)}
+footer a{color:var(--mut);font-weight:700}
+</style>
+</head>
+<body>
+<div class="top"><a class="logo" href="/">🏢 Bina<b>Smart</b></a><a class="back" href="/">← Home</a></div>
+<main class="wrap">
+<div class="hero">
+  <div class="kick">AI assistants · MCP</div>
+  <h1>Use BinaSmart inside ChatGPT, Claude, Perplexity or Gemini</h1>
+  <p>Book a fixed-price ride in Addis Ababa, find a pharmacy or hotel, or ask how to get a TIN, without leaving your AI chat. Free, no login.
+  <span class="am" lang="am">ቢናስማርትን በ ChatGPT፣ Claude፣ Perplexity ወይም Gemini ውስጥ ይጠቀሙ — ታክሲ ይያዙ፣ ፋርማሲ ይፈልጉ፣ መመሪያ ያንብቡ።</span></p>
+  <div class="link"><code id="mcpurl">https://bina.et/mcp</code><button type="button" onclick="navigator.clipboard&&navigator.clipboard.writeText('https://bina.et/mcp').then(function(){var b=event.target;b.textContent='Copied ✓';setTimeout(function(){b.textContent='Copy link'},1500)})">Copy link</button></div>
+</div>
+
+<h2>Connect in one minute</h2>
+<div class="grid">
+  <div class="card"><h3>🟢 Claude (claude.ai)</h3>
+    <ol><li>Open <b>Customize → Connectors</b> and click <b>Add</b> (Add custom connector).</li><li>Name: <code>BinaSmart</code>. URL: <code>https://bina.et/mcp</code>. Continue.</li><li>Authentication: <b>None</b> (detected). Click <b>Add</b>, then <b>Connect</b>.</li></ol>
+    <div class="note">Claude Code: <code>claude mcp add --transport http binasmart https://bina.et/mcp</code></div></div>
+  <div class="card"><h3>⚫ ChatGPT</h3>
+    <ol><li>Settings → <b>Security and login</b> → turn on <b>Developer mode</b>.</li><li>Open <b>Plugins</b> (left menu) → <b>Create app</b>.</li><li>Name <code>BinaSmart</code>, Server URL <code>https://bina.et/mcp</code>, Authentication <b>No Auth</b>, tick “I understand”, <b>Create</b>.</li><li>In a chat, press <b>+</b>, choose BinaSmart, then <b>Connect</b> the first time.</li></ol>
+    <div class="note">BinaSmart is also submitted to the ChatGPT app directory; once approved, no developer mode is needed.</div></div>
+  <div class="card"><h3>🔵 Perplexity (Pro, Max or Enterprise)</h3>
+    <ol><li>Profile → Settings → <b>Connectors</b>.</li><li><b>+ Custom connector</b> → <b>Remote</b>.</li><li>Paste <code>https://bina.et/mcp</code>, no credentials, save.</li></ol></div>
+  <div class="card"><h3>🔴 Gemini</h3>
+    <ol><li>gemini.google.com → Settings → <b>Connected apps</b>.</li><li>Under <b>Custom apps for Spark</b>, paste <code>https://bina.et/mcp</code>.</li></ol>
+    <div class="note">Google currently allows custom apps only for Gemini Ultra subscribers in the US. BinaSmart is ready the day Google opens it wider.</div></div>
+</div>
+
+<h2>What your assistant can do</h2>
+<div class="tools">
+  <div class="tool"><b>Quote a ride</b>Fixed fare for moto, bajaj, economy, comfort and XL between any two places in Addis Ababa. No surge.</div>
+  <div class="tool"><b>Book a ride <span class="w">books</span></b>Confirms pickup, drop-off, fare and your Ethiopian phone, then a dispatcher assigns a driver. Pay the driver in cash or telebirr.</div>
+  <div class="tool"><b>Track or cancel</b>Status, driver, plate and a live tracking link. Cancel free before the trip starts.</div>
+  <div class="tool"><b>Search the directory</b>Buildings, hotels, hospitals, cafés, restaurants, pharmacies, banks, gyms, salons, clinics, with Amharic names.</div>
+  <div class="tool"><b>Hotels, hospitals, events</b>Room prices, departments and appointment slots, upcoming events with tickets.</div>
+  <div class="tool"><b>Ethiopia guides</b>22 bilingual guides: Fayda, telebirr, CBE Birr, TIN, VAT, eVisa, driving licence, car import, bank account and more.</div>
+</div>
+
+<h2>Try asking</h2>
+<div class="ask"><ul>
+  <li>“How much is a BinaSmart ride from Bole Airport to Piassa?”</li>
+  <li>“Book me a bajaj from Edna Mall to Sarbet. My number is 09…”</li>
+  <li>“Find a pharmacy near Bole on BinaSmart.”</li>
+  <li>“What documents do I need for an Ethiopian TIN?”</li>
+  <li lang="am">“ከኤድና ሞል ወደ ፒያሳ ስንት ነው?”</li>
+</ul></div>
+
+<h2>For developers</h2>
+<p>BinaSmart is a public <a href="https://modelcontextprotocol.io/">Model Context Protocol</a> server: Streamable HTTP, no authentication, 9 tools with read-only and write annotations, rate-limited. Documentation and health check at <a href="/mcp">bina.et/mcp</a>. Booking is limited per phone number; ride bookings from assistants land in the same dispatch queue as the website.</p>
+<p class="dir" style="margin-top:12px">
+  <a href="https://registry.modelcontextprotocol.io/v0.1/servers?search=binasmart">Official MCP Registry</a>
+  <a href="https://smithery.ai/servers/info-3nzf/binasmart">Smithery</a>
+  <a href="https://glama.ai/mcp/connectors?query=binasmart">Glama</a>
+  <a href="https://github.com/akembalo-svg/binasmart">Source on GitHub</a>
+</p>
+<p style="margin-top:16px;font-size:14px;color:var(--mut)">Privacy: your assistant sends only what the action needs, for example the pickup, drop-off, your name and phone for a booking. See the <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>. Help: <a href="/support">bina.et/support</a>.</p>
+</main>
+<footer><a href="/">BinaSmart</a><a href="/ride">Ride</a><a href="/guides">Guides</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/support">Support</a><span>© 2026 BinaSmart · Addis Ababa</span></footer>
+<script src="/static/bina-assistant.js?v=2" defer></script>
+</body>
+</html>
