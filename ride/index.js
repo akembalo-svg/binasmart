@@ -5,7 +5,7 @@ const { makeGeo } = require('./geo');
 const { makeTelegram } = require('./telegram');
 const { makeDispatch } = require('./dispatch');
 const { makeTgApi } = require('./tgApi');
-const { makeRiderBot } = require('./riderBot');
+const { makeBinaBot } = require('./binaBot');
 const { makeDriverBot } = require('./driverBot');
 const { makeRiderNotify } = require('./riderNotify');
 const routes = require('./routes');
@@ -20,7 +20,9 @@ module.exports = function registerRide(fastify, deps) {
   const riderBotToken = process.env.BINA_RIDER_BOT_TOKEN || '', driverBotToken = process.env.BINA_DRIVER_BOT_TOKEN || '';
   const riderApi = makeTgApi({ token: riderBotToken }), driverApi = makeTgApi({ token: driverBotToken });
   const uploadsDir = path.join(__dirname, '..', 'uploads', 'drivers');
-  const riderBot = makeRiderBot({ api: riderApi, baseUrl: deps.BASE_URL, botUsername: process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot' });
+  // @bina_smart_bot is the whole BinaSmart: service menu + Bini (via the app's own /api/assistant on localhost).
+  const riderBot = makeBinaBot({ api: riderApi, baseUrl: deps.BASE_URL, botUsername: process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot',
+    assistantUrl: 'http://127.0.0.1:' + (process.env.PORT || 4210) + '/api/assistant' });
   const driverBot = makeDriverBot({ prisma: deps.prisma, api: driverApi, telegram, uploadsDir, baseUrl: deps.BASE_URL });
   const riderNotify = makeRiderNotify({ prisma: deps.prisma, api: riderApi, baseUrl: deps.BASE_URL });
   routes(fastify, { prisma: deps.prisma, settings, geo, telegram, dispatch, OWNER_KEY: deps.OWNER_KEY,

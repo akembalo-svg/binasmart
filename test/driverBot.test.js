@@ -3,7 +3,6 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs'); const os = require('os'); const path = require('path');
 const { makeDriverBot } = require('../ride/driverBot');
-const { makeRiderBot } = require('../ride/riderBot');
 
 function fakeApi() {
   const sent = [];
@@ -87,13 +86,4 @@ test('notifyStatus messages the driver on approval, nothing without telegramId',
   assert.equal(await b.notifyStatus({ id: 'd1', telegramId: '555' }, 'approved'), true);
   assert.match(api.sent.at(-1).text, /Approved/);
   assert.equal(await b.notifyStatus({ id: 'd2', telegramId: null }, 'approved'), false);
-});
-
-test('rider bot /start replies with a Book a ride web_app button', async () => {
-  const api = fakeApi();
-  const rb = makeRiderBot({ api, baseUrl: 'https://bina.et', botUsername: 'bina_smart_bot' });
-  await rb.handleUpdate({ message: { chat: { id: 7 }, text: '/start' } });
-  const kb = api.sent[0].extra.reply_markup.inline_keyboard;
-  assert.equal(kb[0][0].web_app.url, 'https://bina.et/ride');
-  assert.match(api.sent[0].text, /BinaSmart/);
 });
