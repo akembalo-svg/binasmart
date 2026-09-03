@@ -13,6 +13,9 @@
   // is an old client or a Mini App opened from a link rather than a button, and needs a different fix.
   // The SDK defines window.Telegram.WebApp in a plain browser too, with platform 'unknown'.
   // Only a real Telegram client reports android/ios/tdesktop/weba, so platform is the honest test.
+  // /drive?demo=1 replays a real Addis route locally. It never reaches the server, so the whole
+  // driving experience can be reviewed from outside Ethiopia, where the geofence rejects GPS.
+  var DEMO = !!(window.DDemo && window.DDemo.active);
   var tgPlatform = (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.platform) || 'unknown';
   var inTelegram = tgPlatform !== 'unknown';
   // The shim paints the rider app's green; the cockpit is night-dark.
@@ -27,6 +30,7 @@
 
   // ---------- plumbing ----------
   function post(path, body) {
+    if (DEMO) return window.DDemo.post(path, body);
     return fetch(path, {
       method: 'POST', headers: { 'content-type': 'application/json' },
       body: JSON.stringify(Object.assign({ initData: initData }, body || {})),
@@ -259,20 +263,23 @@
   }
 
   // ---------- GPS ----------
+  // One handler, whether the fix comes from the phone or from the demo player.
+  function onFix(g) {
+    st.gpsOk = true;
+    st.pos = {
+      lat: g.coords.latitude, lng: g.coords.longitude,
+      bearing: (g.coords.heading != null && !isNaN(g.coords.heading)) ? g.coords.heading : (st.pos ? st.pos.bearing : null),
+      speedKph: g.coords.speed != null && !isNaN(g.coords.speed) ? Math.max(0, g.coords.speed * 3.6) : null,
+      accuracy: g.coords.accuracy,
+    };
+    ensureMap(); drawCar(st.pos);
+    if (st.job) { drawLeg(); paintLegLine(); paintNav(); paintNavHud(); navCamera(st.pos); }
+    banner('');
+  }
   function startGps() {
+    if (DEMO) { window.DDemo._onFix = onFix; window.DDemo.driveAlong(onFix); return; }
     if (!navigator.geolocation) { banner('This phone cannot share its location. · ስልኩ ቦታ ማጋራት አይችልም።'); return; }
-    navigator.geolocation.watchPosition(function (g) {
-      st.gpsOk = true;
-      st.pos = {
-        lat: g.coords.latitude, lng: g.coords.longitude,
-        bearing: (g.coords.heading != null && !isNaN(g.coords.heading)) ? g.coords.heading : (st.pos ? st.pos.bearing : null),
-        speedKph: g.coords.speed != null && !isNaN(g.coords.speed) ? Math.max(0, g.coords.speed * 3.6) : null,
-        accuracy: g.coords.accuracy,
-      };
-      ensureMap(); drawCar(st.pos);
-      if (st.job) { drawLeg(); paintLegLine(); paintNav(); paintNavHud(); navCamera(st.pos); }
-      banner('');
-    }, function (e) {
+    navigator.geolocation.watchPosition(onFix, function (e) {
       st.gpsOk = false;
       banner(e.code === 1
         ? '📍 Location is blocked. Allow it in your phone settings, or you cannot receive rides.'
@@ -598,7 +605,8 @@
   function boot() {
     // The city map goes up first in every state. A blank black rectangle reads as a broken app.
     ensureMap();
-    if (!initData) {
+    if (DEMO) { window.DDemo.badge(); }
+    if (!initData && !DEMO) {
       return inTelegram
         ? gate('Reopen from the bot', 'Telegram opened this page without signing you in. Go back to @binasmartdriverbot and tap the "Open the driver app" button in a message rather than a plain link.\nከቦቱ ውስጥ ያለውን አዝራር ተጭነው ይክፈቱ።', 'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot')
         : gate('Open this in Telegram', 'The driver app runs inside @binasmartdriverbot so we know it is really you. Open the bot and tap the button.\nመተግበሪያው በቴሌግራም ውስጥ ይሰራል።', 'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot');

@@ -59,3 +59,23 @@ stubbed, then deletes every row it created. Expect `ALL 37 CHECKS PASSED` and
 ### Live dispatch settings
 `offerWindowS 25` · `conciergeAfterS 60` · `radiiKm 3/6/10` · `commissionPct 0`.
 Change them in `/ride-ops` → Settings, never by editing `ride/settings.js` defaults (the DB row wins).
+
+### Demo mode — reviewing the driving view from outside Ethiopia
+`https://bina.et/drive?demo=1` replays a **real baked Addis route** (Bole Medhanealem → Piassa,
+4.4 km, 12 manoeuvres including roundabouts) through the real app code. Needed because
+`ride/location.js` rejects every GPS fix outside the Addis box, which makes the driving view
+impossible to judge from abroad.
+
+It answers every `/api/drive/*` call locally in `public/ride/drivedemo.js`. The only network request
+is the static `demo-route.json` (plus the car photo image). **No Telegram sign-in, no server writes,
+no fake position ever stored** — verified: a full demo run issues zero `/api/drive/*` requests.
+
+Options: `?speed=<m/s>` (default 14, so ~50 km/h), `?car=<file>` or `?car=none` for the marker photo,
+`?name=<label>`. A purple **DEMO** badge is always on screen so it cannot be mistaken for a real trip.
+
+Flow: idle → offer card with sound after 2.5 s → Accept → short leg to the passenger →
+ተነሳ”/ደረስክሩ/ጁዝ ጀምር → the full 12-turn Amharic route → ጁዝ ጣርስ. Declining or letting it
+expire brings the offer back a few seconds later, so the loop can be replayed without reloading.
+
+To re-bake the route after a map update, re-run the generator against the live router (see git history
+for `gen-demo-route.js`) and commit `public/ride/demo-route.json`.

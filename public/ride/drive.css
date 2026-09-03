@@ -197,3 +197,10 @@ body.navmode::after{content:'';position:fixed;inset:0;pointer-events:none;z-inde
 /* Addis street names are long. Two lines maximum, or the banner eats the map. */
 .dnavTxt b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .dnavTxt small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---- demo mode ---- */
+.demoBadge{position:fixed;left:50%;transform:translateX(-50%);z-index:10;
+  top:calc(6px + env(safe-area-inset-top));
+  background:#7c3aed;color:#fff;font-size:10px;font-weight:900;letter-spacing:.1em;
+  padding:3px 9px;border-radius:999px;box-shadow:0 6px 18px -8px #000;pointer-events:none}
+body.navmode .demoBadge{opacity:.65}
