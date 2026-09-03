@@ -37,9 +37,9 @@ their cache expires; new shares get the new one. Facebook's Sharing Debugger can
 
 ## A starting point
 
- is the light house style used by the recent Amharic cards: brand, category
+`ops/og/example-card.html` is the light house style used by the recent Amharic cards: brand, category
 pill, date, rule, headline with one phrase in red, lede, three chips and the emoji artwork. Copy it,
-change the words, keep  at 1200x630.
+change the words, and keep `html,body` at 1200x630.
 
 Only put facts from the post on a card. A share image travels on its own, so a number invented to
 fill a tile has no article around it to correct it.
