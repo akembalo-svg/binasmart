@@ -14,11 +14,13 @@ const routes = require('./routes');
 module.exports = function registerRide(fastify, deps) {
   const settings = makeSettings(deps.prisma);
   const geo = makeGeo({ routerUrl: deps.ROUTER_URL, prisma: deps.prisma });
-  const telegram = makeTelegram({ sendTg: deps.sendTg, ownerChat: deps.OWNER_CHAT, baseUrl: deps.BASE_URL, ownerKey: deps.OWNER_KEY });
-  const dispatch = makeDispatch({ prisma: deps.prisma, telegram, settings });
   // Telegram bots (rider @bina_smart_bot, driver @binasmartdriverbot). Tokens only from .env.
   const riderBotToken = process.env.BINA_RIDER_BOT_TOKEN || '', driverBotToken = process.env.BINA_DRIVER_BOT_TOKEN || '';
   const riderApi = makeTgApi({ token: riderBotToken }), driverApi = makeTgApi({ token: driverBotToken });
+  // Owner alerts go through the BinaSmart bot to BINA_OWNER_TG_CHAT when set; legacy shared bot is the fallback.
+  const telegram = makeTelegram({ sendTg: deps.sendTg, ownerChat: deps.OWNER_CHAT, baseUrl: deps.BASE_URL, ownerKey: deps.OWNER_KEY,
+    api: riderBotToken ? riderApi : null, ownerChatNew: process.env.BINA_OWNER_TG_CHAT || '' });
+  const dispatch = makeDispatch({ prisma: deps.prisma, telegram, settings });
   const uploadsDir = path.join(__dirname, '..', 'uploads', 'drivers');
   // @bina_smart_bot is the whole BinaSmart: service menu + Bini (via the app's own /api/assistant on localhost).
   const riderBot = makeBinaBot({ api: riderApi, baseUrl: deps.BASE_URL, botUsername: process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot',
