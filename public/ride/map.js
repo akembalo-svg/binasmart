@@ -56,6 +56,8 @@ window.BinaMap = (function () {
       map.addLayer({ id: 'route-casing', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#064e3b', 'line-width': 9, 'line-opacity': 0.35 } });
       map.addLayer({ id: 'route-line', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#059669', 'line-width': 5 } });
     }
+    // bottomPad < 0 means "just update the line, leave my camera alone" — used while driving.
+    if (bottomPad < 0) return;
     var b = coords.reduce(function (bb, c) { return bb.extend(c); }, new maplibregl.LngLatBounds(coords[0], coords[0]));
     map.fitBounds(b, { padding: { top: 90, bottom: bottomPad || 340, left: 40, right: 40 }, pitch: map.getPitch(), duration: 900 });
   }

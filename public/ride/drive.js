@@ -20,8 +20,9 @@
   var st = {
     driver: null, job: null, offer: null, offerEndsAt: 0,
     pos: null, gpsOk: false, lastPingOk: 0, busy: false, lock: null, routeFor: '', offerTotal: 0,
+    routeFrom: null, routeAt: 0, fitted: '',
   };
-  var carMk = null, map = null;
+  var carMk = null, map = null, pickMk = null, dropMk = null;
 
   // ---------- plumbing ----------
   function post(path, body) {
@@ -39,7 +40,16 @@
   function show(which) {
     ['offer', 'trip', 'idle', 'gate'].forEach(function (id) { $(id).classList.toggle('hidden', id !== which); });
   }
-  function km(m) { return m == null ? '—' : (Math.round(m / 100) / 10) + ' km'; }
+  function km(m) { return m == null ? '—' : (m < 950 ? Math.round(m / 10) * 10 + ' m' : (Math.round(m / 100) / 10) + ' km'); }
+  // Straight-line metres. Good enough for "how far to the passenger"; the road route comes from the server.
+  function metres(a, b) {
+    if (!a || !b) return null;
+    var R = 6371000, p = Math.PI / 180;
+    var dLat = (b.lat - a.lat) * p, dLng = (b.lng - a.lng) * p;
+    var la = a.lat * p, lb = b.lat * p;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(la) * Math.cos(lb) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    return Math.round(2 * R * Math.asin(Math.sqrt(h)));
+  }
   function mins(s) { return s == null ? '—' : Math.max(1, Math.round(s / 60)) + ' min'; }
   function haptic(kind) { try { window.Telegram.WebApp.HapticFeedback.notificationOccurred(kind); } catch (e) {} }
 
@@ -73,19 +83,65 @@
   }
   function follow(p) { if (map && p) map.easeTo({ center: [p.lng, p.lat], duration: 900 }); }
 
-  // Ask the server for road geometry once per leg, not on every ping.
+  // A pin alone does not tell a driver anything. These carry who and what, and the active leg glows.
+  function pin(kind, point, label) {
+    var el = document.createElement('div');
+    el.className = 'dpin dpin-' + kind;
+    el.innerHTML = '<span class="dpinDot"></span><span class="dpinLabel">' + label + '</span>';
+    return new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat([point.lng, point.lat]).addTo(map);
+  }
+  function setTargets(job) {
+    if (!map || !job) return;
+    var who = (job.riderName || 'Passenger').split(' ')[0];
+    if (pickMk) pickMk.remove();
+    if (dropMk) dropMk.remove();
+    pickMk = pin('pick', job.pickup, '🙋 ' + who);
+    dropMk = pin('drop', job.dropoff, '🏁 ' + ((job.dropoff && job.dropoff.label) || 'Drop-off'));
+    var onTrip = job.status === 'ontrip';
+    pickMk.getElement().classList.toggle('active', !onTrip);
+    dropMk.getElement().classList.toggle('active', onTrip);
+  }
+  function clearTargets() {
+    if (pickMk) { pickMk.remove(); pickMk = null; }
+    if (dropMk) { dropMk.remove(); dropMk = null; }
+  }
+
+  // Re-route when the leg changes, when the driver has moved 150 m, or every 25 s — a line that does
+  // not follow the car is worse than no line, because the driver trusts it.
   function drawLeg() {
     if (!st.job || !st.pos) return;
     var leg = st.job.status === 'ontrip' ? 'dropoff' : 'pickup';
     var key = st.job.id + ':' + leg;
-    if (st.routeFor === key) return;
-    st.routeFor = key;
+    var moved = st.routeFrom ? metres(st.routeFrom, st.pos) : 9999;
+    var oldEnough = Date.now() - st.routeAt > 25000;
+    if (st.routeFor === key && moved < 150 && !oldEnough) return;
+    st.routeFor = key; st.routeFrom = { lat: st.pos.lat, lng: st.pos.lng }; st.routeAt = Date.now();
+    setTargets(st.job);
     post('/api/drive/route', { lat: st.pos.lat, lng: st.pos.lng, to: leg }).then(function (j) {
-      if (!j.ok) return;
-      var target = leg === 'dropoff' ? st.job.dropoff : st.job.pickup;
-      window.BinaMap.setDrop(target);
-      if (j.geometry && j.geometry.length > 1) window.BinaMap.drawRoute(j.geometry, 380);
+      if (!j.ok || !j.geometry || j.geometry.length < 2) return;
+      // Fit the whole leg once so the driver sees where they are going, then stop stealing the camera.
+      var fitKey = st.job.id + ':' + leg;
+      window.BinaMap.drawRoute(j.geometry, st.fitted === fitKey ? -1 : 400);
+      st.fitted = fitKey;
+      if (j.distanceM != null) { st.legRoadM = j.distanceM; st.legRoadS = j.durationS; }
+      paintLegLine();
     }).catch(function () { st.routeFor = ''; });
+  }
+
+  // The live "how far to the passenger" line. Recomputed on every GPS fix, so it never looks frozen.
+  function paintLegLine() {
+    var j = st.job; if (!j) return;
+    var onTrip = j.status === 'ontrip';
+    var target = onTrip ? j.dropoff : j.pickup;
+    var straight = metres(st.pos, target);
+    var road = st.legRoadM, secs = st.legRoadS;
+    var far = road != null ? road : (straight != null ? Math.round(straight * 1.35) : null);
+    var eta = secs != null ? secs : (far != null ? Math.round(far / 6.1) : null);
+    var who = (j.riderName || 'the passenger').split(' ')[0];
+    if (!st.pos) { $('tetaP').textContent = onTrip ? 'Waiting for GPS…' : 'Waiting for GPS — tap Navigate to drive there'; return; }
+    if (straight != null && straight < 80 && !onTrip) { $('tetaP').textContent = '📍 You are at the pickup — call ' + who + ' if you cannot see them'; return; }
+    $('tetaP').textContent = (onTrip ? '🏁 ' : '🙋 ') + km(far) + ' · about ' + Math.max(1, Math.round((eta || 0) / 60)) + ' min '
+      + (onTrip ? 'to the destination' : 'to ' + who);
   }
 
   // ---------- GPS ----------
@@ -100,6 +156,7 @@
         accuracy: g.coords.accuracy,
       };
       ensureMap(); drawCar(st.pos);
+      if (st.job) { drawLeg(); paintLegLine(); }
       banner('');
     }, function (e) {
       st.gpsOk = false;
@@ -136,8 +193,9 @@
     $('tdrop').textContent = (j.dropoff && j.dropoff.label) || '—';
     $('tfare').textContent = j.driverTakeEtb + ' ETB to you · ' + km(j.distanceM) + ' · ' + mins(j.durationS);
     var target = j.status === 'ontrip' ? j.dropoff : j.pickup;
-    $('tetaP').textContent = j.status === 'ontrip' ? 'Drop the passenger here' : 'Collect the passenger here';
     $('tnav').href = 'https://www.google.com/maps/dir/?api=1&destination=' + target.lat + ',' + target.lng + '&travelmode=driving';
+    $('tnav').textContent = j.status === 'ontrip' ? '🧭 Navigate to drop-off' : '🧭 Navigate to pickup';
+    paintLegLine();
     if (j.bookedBy && j.bookedBy.name) {
       $('tbooked').textContent = '📞 Booked by ' + j.bookedBy.name + (j.bookedBy.phone ? ' · ' + j.bookedBy.phone : '') + ' (not the passenger)';
       $('tbooked').classList.remove('hidden');
@@ -193,7 +251,8 @@
     paintStats();
     if (st.job) return paintTrip();
     if (st.offer) return paintOffer(st.offer);
-    window.BinaMap.clearRoute(); window.BinaMap.setDrop(null); st.routeFor = '';
+    window.BinaMap.clearRoute(); window.BinaMap.setDrop(null); clearTargets();
+    st.routeFor = ''; st.routeFrom = null; st.fitted = ''; st.legRoadM = null; st.legRoadS = null;
     paintIdle();
   }
 

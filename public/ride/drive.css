@@ -103,3 +103,20 @@ body.drv #map::after{content:'';position:absolute;inset:0;background:rgba(11,18,
 @keyframes dpulse{0%{transform:scale(.6);opacity:.85}100%{transform:scale(1.5);opacity:0}}
 
 @media(max-height:620px){.dbtn.big{padding:15px;font-size:17px}.dcard{max-height:86vh}}
+
+/* ---- driver map pins: who and where, not just a dot ---- */
+.dpin{display:flex;flex-direction:column;align-items:center;gap:2px;transform:translateY(-4px)}
+.dpinLabel{background:#151f33;color:#fff;border:1px solid #33415c;border-radius:8px;
+  padding:3px 7px;font-size:11px;font-weight:800;white-space:nowrap;max-width:150px;overflow:hidden;
+  text-overflow:ellipsis;box-shadow:0 4px 12px -4px rgba(0,0,0,.7);order:-1}
+.dpinDot{width:14px;height:14px;border-radius:50%;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.5)}
+.dpin-pick .dpinDot{background:#f59e0b}
+.dpin-drop .dpinDot{background:#38bdf8}
+.dpin.active .dpinDot{animation:dpinp 1.8s ease-in-out infinite}
+.dpin.active .dpinLabel{background:#f59e0b;color:#3b2600;border-color:#fbbf24}
+.dpin-drop.active .dpinLabel{background:#0ea5e9;color:#04283b;border-color:#38bdf8}
+@keyframes dpinp{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+
+/* Navigate is how a driver actually drives there, so give it real weight. */
+.tacts .ghost{font-size:14px}
+#tetaP{color:#fbbf24;font-weight:800;font-size:12.5px}
