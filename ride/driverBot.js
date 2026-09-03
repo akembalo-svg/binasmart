@@ -1,5 +1,7 @@
 'use strict';
-// @binasmartdriverbot: six-step registration → Driver(status:'pending'). Phase 1 only registers; Phase 2 adds online/offers.
+// @binasmartdriverbot: seven-step registration → Driver(status:'pending'). Phase 1 only registers; Phase 2 adds online/offers.
+// Two photos: the driving licence (private, owner-key only) and the front of the car with the plate visible
+// (shown to riders once the driver is approved, so they can match the car at the kerb).
 const fs = require('fs'); const path = require('path');
 const { normPhone } = require('./phone');
 
@@ -21,9 +23,17 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, now }) {
     tier: chatId => api.sendMessage(chatId, 'Which vehicle do you drive? · የሚያሽከረክሩት ተሽከርካሪ', { reply_markup: { inline_keyboard: Object.keys(TIERS).map(t => [{ text: TIERS[t], callback_data: 'tier:' + t }]) } }),
     vehicle: chatId => api.sendMessage(chatId, 'Car make and colour? e.g. "Toyota Vitz white" · የመኪና አይነት እና ቀለም'),
     plate: chatId => api.sendMessage(chatId, 'Plate number? · ታርጋ ቁጥር (ለምሳሌ A12345)'),
-    licence: chatId => api.sendMessage(chatId, 'Send a PHOTO of your driving licence · የመንጃ ፈቃድዎን ፎቶ ይላኩ', { reply_markup: { remove_keyboard: true } }),
+    licence: chatId => api.sendMessage(chatId, '📄 Step 1 of 2 — send a PHOTO of your driving licence\nየመንጃ ፈቃድዎን ፎቶ ይላኩ\n\n(Private — only BinaSmart sees this.)', { reply_markup: { remove_keyboard: true } }),
+    car: chatId => api.sendMessage(chatId, '📸 Step 2 of 2 — now send a photo of the FRONT of your car, with the plate clearly visible.\nየመኪናዎን የፊት ፎቶ ይላኩ — ታርጋው በደንብ እንዲታይ።\n\nRiders will see this photo so they can recognise your car. Take it in daylight if you can.\nተጓዦች መኪናዎን ለመለየት ይህን ፎቶ ያያሉ።'),
   };
   const ask = (chatId, step) => ASK[step](chatId);
+
+  async function savePhoto(chatId, fileId, driverId, kind) {
+    const f = await api.getFile(fileId);
+    const buf = await api.downloadFile(f.file_path);
+    await fs.promises.mkdir(uploadsDir, { recursive: true });
+    await fs.promises.writeFile(path.join(uploadsDir, driverId + (kind === 'car' ? '-car' : '') + '.jpg'), buf);
+  }
 
   async function handleUpdate(update) {
     if (update.callback_query) {
@@ -59,20 +69,25 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, now }) {
       case 'licence': {
         const photos = msg.photo;
         if (!photos || !photos.length) return api.sendMessage(chatId, 'Please send a photo (not a file or text) of your licence · እባክዎ የፈቃድዎን ፎቶ ይላኩ');
+        s.data.licenceFileId = photos[photos.length - 1].file_id;
+        s.step = 'car'; return ask(chatId, 'car');
+      }
+      case 'car': {
+        const photos = msg.photo;
+        if (!photos || !photos.length) return api.sendMessage(chatId, 'Please send a photo of the front of your car, plate visible · የመኪናዎን የፊት ፎቶ ይላኩ');
         const d = s.data;
         const drv = await prisma.driver.create({ data: { name: d.name, phone: d.phone, tier: d.tier, plate: d.plate, vehicleMake: d.vehicle, vehicleColour: null, status: 'pending', telegramId: chatId } });
-        let licenceUrl = null;
-        try {
-          const f = await api.getFile(photos[photos.length - 1].file_id);
-          const buf = await api.downloadFile(f.file_path);
-          await fs.promises.mkdir(uploadsDir, { recursive: true });
-          await fs.promises.writeFile(path.join(uploadsDir, drv.id + '.jpg'), buf);
-          licenceUrl = '/api/ride/ops/driver-doc/' + drv.id;
-          await prisma.driver.update({ where: { id: drv.id }, data: { licenceUrl } });
-        } catch (e) { console.error('[ride/driverBot] licence save failed for ' + drv.id + ': ' + e.message); }
+        const saved = { licence: false, car: false };
+        try { await savePhoto(chatId, d.licenceFileId, drv.id, 'licence'); saved.licence = true; } catch (e) { console.error('[ride/driverBot] licence save failed for ' + drv.id + ': ' + e.message); }
+        try { await savePhoto(chatId, photos[photos.length - 1].file_id, drv.id, 'car'); saved.car = true; } catch (e) { console.error('[ride/driverBot] car photo save failed for ' + drv.id + ': ' + e.message); }
+        await prisma.driver.update({ where: { id: drv.id }, data: {
+          licenceUrl: saved.licence ? '/api/ride/ops/driver-doc/' + drv.id + '?kind=licence' : null,
+          carPhotoUrl: saved.car ? '/api/ride/car/' + drv.id + '.jpg' : null } });
         sessions.delete(chatId);
         await api.sendMessage(chatId, '✅ ' + d.name + ' · ' + TIERS[d.tier] + ' · ' + d.vehicle + ' · ' + d.plate + '\n\nThank you! We will call you within 24 hours to activate your account. Registration is free and there is 0% commission during our launch.\nአመሰግናለን! በ24 ሰዓት ውስጥ እንደውልልዎታለን። ምዝገባው ነጻ ነው፤ ኮሚሽን የለም።', { reply_markup: { remove_keyboard: true } });
-        telegram.ownerNote('🧑‍✈️ NEW DRIVER (pending): ' + d.name + ' · ' + TIERS[d.tier] + ' · ' + d.vehicle + ' · plate ' + d.plate + ' · ' + d.phone + (licenceUrl ? '\nLicence photo: in /ride-ops → Drivers' : '\n(licence photo failed to save)') + '\nApprove: ' + baseUrl + '/ride-ops').catch(() => {});
+        telegram.ownerNote('🧑‍✈️ NEW DRIVER (pending): ' + d.name + ' · ' + TIERS[d.tier] + ' · ' + d.vehicle + ' · plate ' + d.plate + ' · ' + d.phone
+          + '\nPhotos: licence ' + (saved.licence ? '✅' : '❌') + ' · car ' + (saved.car ? '✅' : '❌')
+          + '\nApprove: ' + baseUrl + '/ride-ops').catch(() => {});
         return;
       }
       default: sessions.delete(chatId); return ask(chatId, 'name');

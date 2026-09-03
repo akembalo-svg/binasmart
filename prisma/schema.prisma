@@ -1004,6 +1004,7 @@ model Driver {
   vehicleColour   String?
   plate           String    // not unique: a vehicle may be reassigned between drivers
   licenceUrl      String?
+  carPhotoUrl     String?   // front of the car with the plate — shown to riders once approved
   registrationUrl String?
   status          String    @default("pending") // pending | approved | suspended
   online          Boolean   @default(false)

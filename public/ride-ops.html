@@ -65,7 +65,9 @@ function load(){
     DRIVERS=d.drivers||[];
     document.getElementById('drivers').innerHTML=DRIVERS.map(function(x){
   var st = x.status==='approved'?'✅':x.status==='pending'?'🕒':'⛔';
-  var lic = x.licenceUrl ? ' · <a href="'+esc(x.licenceUrl)+'?key='+encodeURIComponent(getKey())+'" target="_blank" rel="noopener">licence 📄</a>' : '';
+  var k = encodeURIComponent(getKey());
+  var lic = (x.licenceUrl ? ' · <a href="/api/ride/ops/driver-doc/'+esc(x.id)+'?kind=licence&key='+k+'" target="_blank" rel="noopener">licence 📄</a>' : ' · <span class="mut">no licence</span>')
+          + (x.carPhotoUrl ? ' · <a href="/api/ride/ops/driver-doc/'+esc(x.id)+'?kind=car&key='+k+'" target="_blank" rel="noopener">car 📸</a>' : ' · <span class="mut">no car photo</span>');
   var btns = (x.status!=='approved'?'<button data-dstat="approved" data-did="'+esc(x.id)+'">Approve</button>':'')+(x.status!=='suspended'?'<button data-dstat="suspended" data-did="'+esc(x.id)+'" class="danger">Suspend</button>':'');
   return '<div><b>'+esc(x.name)+'</b> '+st+' '+esc(x.status)+'<div class="mut">'+esc(x.plate)+' · '+esc(x.tier)+' · '+esc(x.vehicleMake||'')+' · '+esc(x.phone)+' · ★'+esc(x.rating)+' · '+esc(x.ridesCount)+' rides'+lic+(x.telegramId?' · TG':'')+'</div><div class="row">'+btns+'</div></div>';
 }).join('')||'<span class="mut">No drivers yet — add one above or let them register in @binasmartdriverbot.</span>';

@@ -192,6 +192,13 @@
       $('aStatus').textContent = { assigned: 'ሹፌር ተመድቧል · Driver assigned', arriving: 'ሹፌርዎ እየመጣ ነው · Driver on the way', arrived: 'ሹፌርዎ ደርሷል · Driver has arrived', ontrip: 'በጉዞ ላይ · On trip' }[r.status];
       $('dName').textContent = d.name || ''; $('dCar').textContent = [d.vehicle, r.tier].filter(Boolean).join(' · '); $('dRating').textContent = d.rating ? '★ ' + Number(d.rating).toFixed(1) : '';
       $('dPlate').textContent = d.plate || ''; $('dPhoto').innerHTML = d.photo ? '<img src="' + esc(d.photo) + '" alt="">' : '🚗';
+      var cc = $('carCard');
+      if (d.carPhoto) {
+        if ($('carImg').getAttribute('src') !== d.carPhoto) $('carImg').src = d.carPhoto;
+        $('carPlate').textContent = d.plate || '';
+        $('carMeta').textContent = [d.vehicle, d.name].filter(Boolean).join(' · ');
+        cc.classList.remove('hidden');
+      } else { cc.classList.add('hidden'); }
       $('dCall').href = d.phone ? 'tel:' + d.phone : '#'; $('dWa').href = d.phone ? 'https://wa.me/' + String(d.phone).replace(/\D/g, '') : '#';
       $('aFare').textContent = r.fareEtb + ' ETB'; $('aPay').textContent = '· ' + (r.paymentMethod === 'cash' ? 'cash' : 'telebirr/Chapa');
       $('cancelAssigned').classList.toggle('hidden', r.status === 'ontrip');

@@ -1,10 +1,13 @@
 'use strict';
 // Status pushes to the person who booked (bookedBy.telegramId), else the rider's Telegram. Fire-and-forget:
 // never throws, never blocks a ride. Only riders who came through Telegram have an id, so web riders are untouched.
+// On assignment we send the car photo itself, so the rider can match the car at the kerb.
 function makeRiderNotify({ prisma, api, baseUrl }) {
   const vehicle = d => [d.vehicleColour, d.vehicleMake].filter(Boolean).join(' ');
   const TEXT = {
-    assigned: r => '🚗 Driver ' + r.driver.name + ' is on the way\n' + vehicle(r.driver) + ' · plate ' + r.driver.plate + ' · ' + r.driver.phone + '\nሹፌርዎ እየመጣ ነው። ' + (r.pickup && r.pickup.label ? 'Pickup: ' + r.pickup.label : ''),
+    assigned: r => '🚗 Driver ' + r.driver.name + ' is on the way\n' + vehicle(r.driver) + ' · plate ' + r.driver.plate + ' · ' + r.driver.phone
+      + '\nሹፌርዎ እየመጣ ነው። ' + (r.pickup && r.pickup.label ? 'Pickup: ' + r.pickup.label : '')
+      + '\n\n👀 Match the plate before you get in · ከመግባትዎ በፊት ታርጋውን ያረጋግጡ',
     arrived: r => '📍 Your driver has arrived' + (r.pickup && r.pickup.label ? ' at ' + r.pickup.label : '') + '.\nሹፌርዎ ደርሷል።',
     completed: r => '✅ Trip complete · ' + r.fareEtb + ' ETB' + (r.paymentStatus === 'paid' ? ' (paid)' : ' — pay the driver') + '\nጉዞው ተጠናቅቋል። Please rate your driver in the app. አመሰግናለን!',
     cancelled: r => '❌ Ride cancelled.' + (r.cancelledBy === 'ops' ? ' Our dispatcher could not find a driver this time — sorry.' : '') + '\nጉዞው ተሰርዟል።',
@@ -17,7 +20,14 @@ function makeRiderNotify({ prisma, api, baseUrl }) {
       const chat = (ride.bookedBy && ride.bookedBy.telegramId) || (ride.rider && ride.rider.telegramId);
       if (!chat) return false;
       if (event === 'assigned' && !ride.driver) return false;
-      await api.sendMessage(String(chat), fn(ride), { reply_markup: { inline_keyboard: [[{ text: '📍 Open tracking · መከታተያ', web_app: { url: baseUrl + '/ride?id=' + ride.id } }]] } });
+      const text = fn(ride);
+      const markup = { inline_keyboard: [[{ text: '📍 Open tracking · መከታተያ', web_app: { url: baseUrl + '/ride?id=' + ride.id } }]] };
+      const carPhoto = event === 'assigned' && ride.driver && ride.driver.carPhotoUrl ? baseUrl + ride.driver.carPhotoUrl : null;
+      if (carPhoto && api.sendPhoto) {
+        try { await api.sendPhoto(String(chat), carPhoto, text, { reply_markup: markup }); return true; }
+        catch (e) { console.error('[ride/riderNotify] car photo send failed (' + e.message + '), sending text'); }
+      }
+      await api.sendMessage(String(chat), text, { reply_markup: markup });
       return true;
     } catch (e) { console.error('[ride/riderNotify] ' + event + ' for ' + rideId + ' failed: ' + e.message); return false; }
   }

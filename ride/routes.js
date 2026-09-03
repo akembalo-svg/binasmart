@@ -33,7 +33,7 @@ function pubRide(ride) {
     distanceM: ride.distanceM, durationS: ride.durationS, fareEtb: ride.fareEtb, estimate: ride.estimate,
     paymentMethod: ride.paymentMethod, paymentStatus: ride.paymentStatus, requestedAt: ride.requestedAt, assignedAt: ride.assignedAt,
     completedAt: ride.completedAt, cancelledAt: ride.cancelledAt, driverRating: ride.driverRating,
-    driver: d ? { name: d.name, phone: d.phone, photo: d.photo, plate: d.plate, vehicle: [d.vehicleColour, d.vehicleMake].filter(Boolean).join(' '), rating: d.rating, tier: d.tier } : null };
+    driver: d ? { name: d.name, phone: d.phone, photo: d.photo, carPhoto: d.carPhotoUrl || null, plate: d.plate, vehicle: [d.vehicleColour, d.vehicleMake].filter(Boolean).join(' '), rating: d.rating, tier: d.tier } : null };
 }
 
 module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY, riderBotToken, webhookSecret, riderBot, driverBot, riderNotify, uploadsDir }) {
@@ -204,11 +204,26 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     return { ok: true, driver: drv };
   });
 
+  // Owner-only documents. kind=licence (default) is private for ever; kind=car is also public via /api/ride/car/:id.jpg.
   fastify.get('/api/ride/ops/driver-doc/:id', async (req, reply) => {
     if (!ops(req, reply)) return;
-    const p = path.join(uploadsDir, String(req.params.id).replace(/[^a-z0-9]/gi, '') + '.jpg');
+    const id = String(req.params.id).replace(/[^a-z0-9]/gi, '');
+    const suffix = String(req.query.kind || 'licence') === 'car' ? '-car' : '';
+    const p = path.join(uploadsDir, id + suffix + '.jpg');
     if (!fs.existsSync(p)) return reply.code(404).send({ ok: false, error: 'no_document' });
     reply.type('image/jpeg'); return fs.createReadStream(p);
+  });
+
+  // Public car photo — riders must see the car to match it at the kerb. Only for approved drivers.
+  fastify.get('/api/ride/car/:file', async (req, reply) => {
+    const id = String(req.params.file).replace(/\.jpg$/i, '').replace(/[^a-z0-9]/gi, '');
+    if (!id) return reply.code(404).send({ ok: false, error: 'not_found' });
+    const drv = await prisma.driver.findUnique({ where: { id } });
+    if (!drv || drv.status !== 'approved') return reply.code(404).send({ ok: false, error: 'not_found' });
+    const p = path.join(uploadsDir, id + '-car.jpg');
+    if (!fs.existsSync(p)) return reply.code(404).send({ ok: false, error: 'no_photo' });
+    reply.type('image/jpeg').header('Cache-Control', 'public, max-age=86400');
+    return fs.createReadStream(p);
   });
 
   fastify.post('/api/ride/ops/:id/assign', async (req, reply) => {

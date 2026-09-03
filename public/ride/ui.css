@@ -69,3 +69,17 @@ body.tg .cta#request{display:none}
 
 .tglink{margin:6px 0 0;opacity:.85}.tglink a{font-weight:700}
 body.tg .tglink{display:none}
+
+/* Driver's car — the rider matches this against the kerb before getting in. */
+.carCard{margin:10px 0 14px;border-radius:18px;overflow:hidden;position:relative;background:#0f172a;
+  box-shadow:0 18px 40px -22px rgba(6,78,59,.55);animation:carIn .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes carIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.carCard{animation:none}}
+.carCard img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.carCard figcaption{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:10px;
+  padding:26px 12px 10px;background:linear-gradient(to top,rgba(15,23,42,.92),rgba(15,23,42,0))}
+.carCard .plateBig{font-weight:800;font-size:17px;letter-spacing:1.5px;color:#0f172a;background:#fbbf24;
+  border:2px solid #fff;border-radius:8px;padding:4px 10px;font-variant-numeric:tabular-nums}
+.carCard .carMeta{color:#e2e8f0;font-size:14px;font-weight:600}
+.carCard .matchHint{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.94);color:#064e3b;
+  font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px}
