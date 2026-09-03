@@ -102,3 +102,7 @@ ChatGPT interactive UI widgets (Apps SDK `outputTemplate`), OAuth, food ordering
 ## 9. Amendments (2026-09-03, planning)
 1. Directory tools use the `pg` driver with explicit SQL and column lists instead of a second Prisma client — a second `prisma generate` against `../prisma/schema.prisma` would write into the main app's `node_modules`. Same read-only guarantee, no shared build artefacts.
 2. CORS headers are open on every `/mcp` method (as on gccdomestic's server) so browser-based MCP clients can connect. The server has no auth and no secrets in responses, so this exposes nothing extra.
+
+## 9. Amendments (2026-09-03, planning)
+1. Directory tools use the `pg` driver with explicit SQL and column lists instead of a second Prisma client — a second `prisma generate` against `../prisma/schema.prisma` would write into the main app's `node_modules`. Same read-only guarantee, no shared build artefacts.
+2. CORS headers are open on every `/mcp` method (as on gccdomestic's server) so browser-based MCP clients can connect. The server has no auth and no secrets in responses, so this exposes nothing extra.
