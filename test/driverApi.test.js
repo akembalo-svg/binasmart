@@ -90,6 +90,7 @@ function world() {
   };
   const api = makeDriverApi({
     prisma, driverBotToken: TOKEN, location, offers,
+    geo: { route: async (from, to) => { if (to.label === 'boom') throw new Error('router down'); return { geometry: [[38.76, 9.01], [38.75, 9.04]], distanceM: 5200, durationS: 780 }; } },
     telegram: { ownerNote: async t => { ownerNotes.push(t); return true; } },
     riderNotify: { notify: async (id, ev) => { notified.push(ev); return true; } },
     now: () => clockRef.t,
@@ -289,4 +290,33 @@ test('track marks a position stale when the last fix is over a minute old', asyn
   const res = await w.api.track({ params: { id: 'r1' }, query: {} }, reply(), () => true);
   assert.equal(res.live.position.stale, true);
   assert.equal(res.live.position.ageS, 130);
+});
+
+test('route gives the driver real road geometry, and survives a router outage', async () => {
+  const w = world();
+  w.state.rides[0].driverId = 'd1'; w.state.rides[0].status = 'assigned';
+  w.state.drivers[0].onRideId = 'r1';
+  const res = await w.api.route(w.req({ body: { lat: 9.011, lng: 38.761, to: 'pickup' } }), reply());
+  assert.equal(res.ok, true);
+  assert.equal(res.geometry.length, 2);
+  assert.equal(res.distanceM, 5200);
+
+  w.state.rides[0].pickup = { lat: 9.01, lng: 38.76, label: 'boom' };
+  const down = await w.api.route(w.req({ body: { lat: 9.011, lng: 38.761 } }), reply());
+  assert.equal(down.ok, true, 'a routing outage is not an error for the driver');
+  assert.deepEqual(down.geometry, []);
+  assert.equal(down.estimate, true);
+});
+
+test('route needs an active ride and a position', async () => {
+  const w = world();
+  const a = reply();
+  await w.api.route(w.req({ body: { lat: 9.011, lng: 38.761 } }), a);
+  assert.equal(a.statusCode, 409);
+  assert.equal(a.body.error, 'no_active_ride');
+
+  w.state.drivers[0].onRideId = 'r1';
+  const b = reply();
+  await w.api.route(w.req({ body: {} }), b);
+  assert.equal(b.statusCode, 400);
 });

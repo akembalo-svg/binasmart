@@ -1,0 +1,105 @@
+/* BinaSmart Driver cockpit. Amber, not green: a driver must never mistake this for the rider app.
+   Dark chrome because most driving is at dusk or night and a white sheet blinds the windscreen. */
+:root{--amb:#f59e0b;--amb2:#d97706;--night:#0b1220;--night2:#151f33;--nline:#243149;--nmut:#94a3b8}
+body.drv{background:var(--night);color:#e8eef8}
+/* The shared map style is daylight-light. A scrim keeps the cockpit readable at night without
+   maintaining a second map style, and CSS filters keep the roads legible. */
+body.drv #map{filter:brightness(.62) saturate(.75) contrast(1.05)}
+body.drv #map::after{content:'';position:absolute;inset:0;background:rgba(11,18,32,.28);pointer-events:none}
+
+.dtop{position:fixed;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;gap:10px;
+  padding:calc(9px + env(safe-area-inset-top)) 12px 9px;
+  background:linear-gradient(180deg,rgba(11,18,32,.94),rgba(11,18,32,.72) 70%,transparent)}
+.dbrand{font-weight:900;font-size:15px;color:#fff;white-space:nowrap}
+.dbrand b{color:var(--amb)}
+.dstats{display:flex;gap:8px;margin-left:auto}
+.dstat{background:rgba(21,31,51,.9);border:1px solid var(--nline);border-radius:12px;padding:5px 10px;text-align:center;min-width:66px}
+.dstat span{display:block;font-weight:900;font-size:15px;color:var(--amb);line-height:1.1}
+.dstat small{font-size:9.5px;color:var(--nmut);letter-spacing:.03em}
+.dghost{border:1px solid var(--nline);background:rgba(21,31,51,.9);color:#e8eef8;width:38px;height:38px;
+  border-radius:12px;font-size:19px;cursor:pointer;flex:none}
+
+.dbanner{position:fixed;top:calc(58px + env(safe-area-inset-top));left:12px;right:12px;z-index:7;
+  background:#7c2d12;color:#fff;border-radius:12px;padding:9px 12px;font-size:12.5px;font-weight:700;
+  box-shadow:0 10px 30px -12px #000;text-align:center}
+.dbanner.ok{background:#065f46}
+
+/* Cards share the sheet geometry with the rider app but in night colours. */
+.dcard{position:fixed;left:0;right:0;bottom:0;z-index:8;background:var(--night2);
+  border-radius:22px 22px 0 0;border-top:1px solid var(--nline);
+  box-shadow:0 -18px 50px -20px #000;padding:10px 16px calc(16px + env(safe-area-inset-bottom));
+  max-height:80vh;overflow-y:auto;animation:dup .28s cubic-bezier(.2,.9,.25,1)}
+@keyframes dup{from{transform:translateY(101%)}to{transform:translateY(0)}}
+.tgrip{width:42px;height:5px;border-radius:5px;background:#33415c;margin:2px auto 12px}
+.dcard h2{font-size:19px;font-weight:900;color:#fff;margin-bottom:6px}
+
+.orow{display:flex;gap:11px;align-items:flex-start;padding:8px 0}
+.orow i{width:11px;height:11px;border-radius:50%;flex:none;margin-top:5px}
+.odotp{background:var(--amb);box-shadow:0 0 0 3px rgba(245,158,11,.22)}
+.odotd{background:#38bdf8;box-shadow:0 0 0 3px rgba(56,189,248,.2)}
+.orow b{display:block;font-size:15px;font-weight:800;color:#fff;line-height:1.3}
+.orow small{font-size:11.5px;color:var(--nmut)}
+
+/* ---- offer ---- */
+.doffer{border-top:2px solid var(--amb);animation:dup .28s cubic-bezier(.2,.9,.25,1),oglow 1.6s ease-in-out infinite}
+@keyframes oglow{0%,100%{box-shadow:0 -18px 50px -20px #000}50%{box-shadow:0 -18px 60px -14px rgba(245,158,11,.45)}}
+.oring{position:absolute;right:16px;top:14px;width:46px;height:46px}
+.oring svg{width:46px;height:46px;transform:rotate(-90deg)}
+.oring circle{fill:none;stroke-width:4}
+.obg{stroke:#243149}
+.oarc{stroke:var(--amb);stroke-linecap:round;stroke-dasharray:119.4;transition:stroke-dashoffset .95s linear}
+.oring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:var(--amb)}
+.ohead{display:flex;gap:8px;align-items:center;margin:2px 56px 6px 0}
+.opill{background:var(--amb);color:#3b2600;font-weight:900;font-size:11px;letter-spacing:.06em;padding:4px 9px;border-radius:999px}
+.oaway{font-size:12px;color:var(--nmut);font-weight:700}
+.ofare{display:flex;align-items:baseline;gap:10px;margin:10px 0 4px;padding-top:10px;border-top:1px solid var(--nline)}
+.ofare b{font-size:24px;font-weight:900;color:var(--amb)}
+.ofare small{font-size:12px;color:var(--nmut)}
+.obtns{display:flex;gap:9px;margin-top:12px}
+.obtns .dbtn{flex:1}
+.obtns .go{flex:1.7}
+
+/* ---- buttons ---- */
+.dbtn{border:0;border-radius:15px;padding:15px 12px;font-size:15.5px;font-weight:900;font-family:inherit;
+  cursor:pointer;text-align:center;text-decoration:none;display:block;transition:transform .08s,opacity .15s}
+.dbtn:active{transform:scale(.975)}
+.dbtn.go{color:#3b2600;background:linear-gradient(135deg,#fbbf24,#f59e0b 60%,#d97706);
+  box-shadow:0 12px 28px -12px rgba(245,158,11,.75)}
+.dbtn.ghost{background:#1e2a42;color:#cbd5e1;border:1px solid var(--nline)}
+.dbtn.big{padding:19px;font-size:19px;letter-spacing:.02em;margin:6px 0 10px}
+.dbtn[disabled]{opacity:.5;pointer-events:none}
+
+/* ---- trip ---- */
+.thead{display:flex;align-items:center;margin-bottom:8px}
+.tstage{background:#0e7490;color:#fff;font-weight:900;font-size:11px;letter-spacing:.06em;padding:4px 9px;border-radius:999px;text-transform:uppercase}
+.tcall{margin-left:auto;color:var(--amb);font-weight:900;font-size:14px;text-decoration:none}
+.trider{display:flex;gap:11px;align-items:center;padding:10px 0;border-bottom:1px solid var(--nline)}
+.tav{width:38px;height:38px;border-radius:50%;background:var(--amb);color:#3b2600;font-weight:900;
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+.trider b{display:block;font-size:15px;color:#fff}
+.trider small{font-size:12px;color:var(--nmut)}
+.tpay{margin-left:auto;font-size:10.5px;font-weight:900;letter-spacing:.06em;color:#a7f3d0;
+  border:1px solid #065f46;background:#04352a;border-radius:8px;padding:4px 8px}
+.tbooked{background:#1e2a42;border:1px dashed var(--nline);border-radius:12px;padding:8px 10px;
+  font-size:12px;color:#cbd5e1;margin:8px 0}
+.tacts{display:flex;gap:9px;margin-top:12px}
+.tacts .ghost{flex:1;padding:15px 8px}
+.tacts .go{flex:2}
+.tlink{display:block;margin:11px auto 0;background:none;border:0;color:var(--nmut);
+  font-size:12px;font-family:inherit;text-decoration:underline;cursor:pointer}
+
+/* ---- idle ---- */
+.ihead{display:flex;align-items:baseline;gap:8px}
+.ihead b{font-size:18px;color:#fff;font-weight:900}
+.ihead span{font-size:12.5px;color:var(--nmut)}
+.istate{font-size:13.5px;color:#cbd5e1;margin:8px 0 4px;line-height:1.5}
+.ifoot{font-size:11px;color:var(--nmut);text-align:center;line-height:1.6}
+.online .istate{color:#6ee7b7}
+
+/* ---- the driver's own car on the map ---- */
+.dcar{width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  font-size:27px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));transition:transform .9s ease-out}
+.dhalo{position:absolute;inset:-9px;border-radius:50%;background:rgba(245,158,11,.22);animation:dpulse 2.2s ease-out infinite}
+@keyframes dpulse{0%{transform:scale(.6);opacity:.85}100%{transform:scale(1.5);opacity:0}}
+
+@media(max-height:620px){.dbtn.big{padding:15px;font-size:17px}.dcard{max-height:86vh}}

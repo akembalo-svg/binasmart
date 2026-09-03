@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<title>BinaSmart Driver · የቢናስማርት ሹፌር</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/icon-32.png">
+<link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
+<link rel="stylesheet" href="/static/ride/ui.css?v=7">
+<link rel="stylesheet" href="/static/ride/drive.css?v=2">
+</head>
+<body class="drv">
+<div id="map"></div>
+
+<header class="dtop">
+  <div class="dbrand">🚗 <b>Driver</b></div>
+  <div class="dstats">
+    <div class="dstat"><span id="earn">0</span><small>ETB today</small></div>
+    <div class="dstat"><span id="trips">0</span><small>trips</small></div>
+  </div>
+  <button id="recenter" class="dghost" aria-label="Recentre the map">◎</button>
+</header>
+
+<!-- GPS / connection banner -->
+<div id="banner" class="dbanner hidden"></div>
+
+<!-- Offer card -->
+<section id="offer" class="dcard doffer hidden" aria-live="assertive">
+  <div class="oring"><svg viewBox="0 0 44 44"><circle class="obg" cx="22" cy="22" r="19"></circle><circle id="oarc" class="oarc" cx="22" cy="22" r="19"></circle></svg><b id="ocount">25</b></div>
+  <div class="ohead"><span class="opill" id="otier">ECONOMY</span><span class="oaway" id="oaway">3 min away</span></div>
+  <div class="orow"><i class="odotp"></i><div><b id="opick">—</b><small>Pickup · መነሻ</small></div></div>
+  <div class="orow"><i class="odotd"></i><div><b id="odrop">—</b><small>Drop-off · መድረሻ</small></div></div>
+  <div class="ofare"><b id="oearn">0 ETB</b><small id="otrip">— km · — min</small></div>
+  <div class="obtns">
+    <button id="oskip" class="dbtn ghost">Skip · አትቀበል</button>
+    <button id="oacc" class="dbtn go">ACCEPT · ተቀበል</button>
+  </div>
+</section>
+
+<!-- Active trip -->
+<section id="trip" class="dcard hidden">
+  <div class="tgrip"></div>
+  <div class="thead">
+    <span class="tstage" id="tstage">On the way</span>
+    <a id="tcall" class="tcall" href="#">📞 Call</a>
+  </div>
+  <div class="trider"><span class="tav" id="tav">S</span><div><b id="tname">—</b><small id="tphone">—</small></div><span class="tpay" id="tpay">CASH</span></div>
+  <div id="tbooked" class="tbooked hidden"></div>
+  <div class="orow"><i class="odotp"></i><div><b id="tpick">—</b><small id="tetaP">—</small></div></div>
+  <div class="orow"><i class="odotd"></i><div><b id="tdrop">—</b><small id="tfare">—</small></div></div>
+  <div class="tacts">
+    <a id="tnav" class="dbtn ghost" target="_blank" rel="noopener">🧭 Navigate</a>
+    <button id="tnext" class="dbtn go">I'm on my way</button>
+  </div>
+  <button id="tcancel" class="tlink">Problem with this trip? Call us</button>
+</section>
+
+<!-- Idle / GO -->
+<section id="idle" class="dcard hidden">
+  <div class="tgrip"></div>
+  <div class="ihead"><b id="iname">Driver</b><span id="ivehicle">—</span></div>
+  <p class="istate" id="istate">You are offline.</p>
+  <button id="igo" class="dbtn go big">GO ONLINE · ስራ ጀምር</button>
+  <p class="ifoot">0% commission during launch · Keep this screen open to receive offers.<br>በመክፈቻ ወቅት ኮሚሽን የለም። ጥሪ ለመቀበል ይህን ገጽ ክፈት ያድርጉ።</p>
+</section>
+
+<!-- Blocked states -->
+<section id="gate" class="dcard hidden">
+  <div class="tgrip"></div>
+  <h2 id="gtitle">—</h2>
+  <p class="istate" id="gbody">—</p>
+  <a id="gcta" class="dbtn go" href="https://t.me/binasmartdriverbot">Open @binasmartdriverbot</a>
+</section>
+
+<script src="/static/vendor/maplibre-gl.js"></script>
+<script src="/static/vendor/pmtiles.js"></script>
+<script src="/static/ride/tg.js?v=2"></script>
+<script src="/static/ride/map.js?v=2"></script>
+<script src="/static/ride/drive.js?v=2"></script>
+</body>
+</html>

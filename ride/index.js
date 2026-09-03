@@ -39,7 +39,7 @@ module.exports = function registerRide(fastify, deps) {
     baseUrl: deps.BASE_URL });
   dispatch.setOffers(offers);
   const driverBot = makeDriverBot({ prisma: deps.prisma, api: driverTgApi, telegram, uploadsDir, baseUrl: deps.BASE_URL, offers });
-  const drive = makeDriverApi({ prisma: deps.prisma, driverBotToken, location, offers, telegram, riderNotify });
+  const drive = makeDriverApi({ prisma: deps.prisma, driverBotToken, location, offers, telegram, riderNotify, geo });
   routes(fastify, { prisma: deps.prisma, settings, geo, telegram, dispatch, OWNER_KEY: deps.OWNER_KEY,
     riderBotToken, webhookSecret: process.env.TG_WEBHOOK_SECRET || '', riderBot, driverBot, riderNotify, uploadsDir, drive, location });
   // Three background loops, all idempotent and all safe to miss a beat:

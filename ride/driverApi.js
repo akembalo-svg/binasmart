@@ -14,7 +14,7 @@ const ADDIS_TZ_OFFSET_MS = 3 * 3600 * 1000; // UTC+3, no DST — the earnings da
 function addisDay(ms) { return new Date(Math.floor((ms + ADDIS_TZ_OFFSET_MS) / 86400000) * 86400000 - ADDIS_TZ_OFFSET_MS); }
 const num = (v, lo, hi) => { const n = Number(v); return Number.isFinite(n) && n >= lo && n <= hi ? n : null; };
 
-function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, riderNotify, now }) {
+function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, riderNotify, geo, now }) {
   const clock = now || Date.now;
 
   function pubDriver(d) {
@@ -162,6 +162,28 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     return { ok: true, job: pubJob(upd), driver: pubDriver(fresh || drv) };
   }
 
+  // POST /api/drive/route { to: 'pickup'|'dropoff', lat, lng } — road geometry for the driver's map.
+  // The driver app must not draw straight lines across buildings, and GraphHopper is not public.
+  async function route(req, reply) {
+    const drv = await auth(req, reply);
+    if (!drv) return;
+    const b = req.body || {};
+    const from = { lat: Number(b.lat), lng: Number(b.lng) };
+    if (!Number.isFinite(from.lat) || !Number.isFinite(from.lng)) return reply.code(400).send({ ok: false, error: 'need_lat_lng' });
+    if (!drv.onRideId) return reply.code(409).send({ ok: false, error: 'no_active_ride' });
+    const ride = await prisma.ride.findUnique({ where: { id: drv.onRideId } });
+    if (!ride) return reply.code(404).send({ ok: false, error: 'not_found' });
+    const to = b.to === 'dropoff' ? ride.dropoff : ride.pickup;
+    try {
+      const r = await geo.route(from, to);
+      return { ok: true, geometry: r.geometry || [], distanceM: r.distanceM, durationS: r.durationS, estimate: !!r.estimate };
+    } catch (e) {
+      // A routing outage must not blind the driver: the app falls back to a bearing arrow.
+      console.error('[ride/driverApi] route failed: ' + e.message);
+      return { ok: true, geometry: [], distanceM: null, durationS: null, estimate: true };
+    }
+  }
+
   // GET /api/ride/:id/track?phone= — what the rider's map polls. Phone must match the ride, exactly
   // like /api/ride/:id, and only an active ride exposes a position.
   async function track(req, reply, riderPhoneMatches) {
@@ -189,7 +211,7 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     return { ok: true, live };
   }
 
-  return { session, online, ping, accept, decline, status, track, _auth: auth, _pubDriver: pubDriver, addisDay };
+  return { session, online, ping, accept, decline, status, track, route, _auth: auth, _pubDriver: pubDriver, addisDay };
 }
 
 module.exports = { makeDriverApi, DRIVER_STATES, num };

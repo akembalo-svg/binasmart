@@ -183,6 +183,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     fastify.post('/api/drive/offer/:id/accept', dr(drive.accept));
     fastify.post('/api/drive/offer/:id/decline', dr(drive.decline));
     fastify.post('/api/drive/ride/:id/status', dr(drive.status));
+    fastify.post('/api/drive/route', dr(drive.route));
 
     // The rider's live map. Same ownership rule as GET /api/ride/:id: the phone must match the ride.
     fastify.get('/api/ride/:id/track', async (req, reply) => {
