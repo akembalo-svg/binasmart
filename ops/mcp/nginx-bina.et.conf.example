@@ -7,6 +7,11 @@ server {
 
     location /.well-known/acme-challenge/ { root /var/www/html; }
 
+    location = /.well-known/openai-apps-challenge {
+        alias /var/www/connectcare/binasmart/public/.well-known/openai-apps-challenge;
+        default_type text/plain;
+    }
+
     location = /.well-known/mcp-registry-auth {
         alias /var/www/connectcare/binasmart/public/.well-known/mcp-registry-auth;
         default_type text/plain;
