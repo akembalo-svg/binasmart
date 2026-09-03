@@ -6,7 +6,7 @@
   "description": "Public MCP server for BinaSmart (bina.et): quote and book rides in Addis Ababa, search the building/shop directory, read the Digital Ethiopia guides.",
   "main": "server.mjs",
   "scripts": {
-    "start": "node server.mjs",
+    "start": "node start.mjs",
     "test": "node --test"
   },
   "dependencies": {

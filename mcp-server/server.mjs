@@ -82,7 +82,8 @@ export function createApp({ rideApi, db, guides, callLimit = { windowMs: 60_000,
   return app;
 }
 
-async function main() {
+// Entry point is start.mjs (pm2 runs scripts through its own wrapper, so an argv[1] "run if main" check never fires).
+export async function main() {
   const [{ default: pg }, { databaseUrl }, { makeRideApi }] = await Promise.all([import('pg'), import('./lib/env.mjs'), import('./lib/rideApi.mjs')]);
   const PORT = Number(process.env.PORT || 3021);
   const db = new pg.Pool({ connectionString: databaseUrl(), max: 4, idleTimeoutMillis: 30_000 });
@@ -92,5 +93,3 @@ async function main() {
   const app = createApp({ rideApi, db, guides });
   app.listen(PORT, '127.0.0.1', () => console.log(`binasmart MCP server on 127.0.0.1:${PORT}, guides loaded: ${guides.size}`));
 }
-
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch(e => { console.error(e); process.exit(1); });
