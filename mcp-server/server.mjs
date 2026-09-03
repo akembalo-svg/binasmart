@@ -70,7 +70,13 @@ export function createApp({ rideApi, db, guides, callLimit = { windowMs: 60_000,
       if (!res.headersSent) res.status(500).json({ jsonrpc: '2.0', error: { code: -32603, message: 'Internal error' }, id: null });
     }
   });
-  app.get('/mcp', (_req, res) => { res.setHeader('Content-Type', 'text/markdown; charset=utf-8'); res.setHeader('Cache-Control', 'public, max-age=3600'); res.send(DOCS_MD); });
+  // MCP clients open GET /mcp with Accept: text/event-stream for server→client notifications. This
+  // stateless server has none; answering 405 (allowed by the spec) stops clients re-polling every second.
+  // Browsers and crawlers (Accept: text/html or */*) get the docs.
+  app.get('/mcp', (req, res) => {
+    if (/text\/event-stream/i.test(req.headers.accept || '')) return res.sendStatus(405);
+    res.setHeader('Content-Type', 'text/markdown; charset=utf-8'); res.setHeader('Cache-Control', 'public, max-age=3600'); res.send(DOCS_MD);
+  });
   app.delete('/mcp', (_req, res) => res.sendStatus(405));
   app.get('/mcp/health', async (_req, res) => {
     const out = { ok: true, db: true, ride_api: true };
