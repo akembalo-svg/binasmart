@@ -490,6 +490,12 @@
       if (j._status === 403) return boot();
       if (!j.ok) return;
       st.lastPingOk = Date.now();
+      // A rejected fix used to fail silently, which is indistinguishable from a broken app. Say why.
+      if (j.fix === 'outside_addis') {
+        banner('📍 ከአዲስ አበባ ውጭ ነዎት — ቀጥታ ክትትል አይሰራም · outside Addis, live tracking is off');
+      } else if (j.fix === 'inaccurate') {
+        banner('📍 የጂፒኤስ ምልክት ደካማ ነው — ወደ ክፍት ቦታ ይውጡ · weak GPS, move to open sky');
+      }
       absorb(j);
     }).catch(function () {
       if (Date.now() - st.lastPingOk > 20000) banner('📡 No connection. Trying again… · ኢንተርኔት አልተገኘም።');
