@@ -11,23 +11,32 @@ function makeLocation({ prisma, api, now, staleMs }) {
   const clock = now || Date.now;
   const stale = staleMs || 45000;
   const last = new Map();   // driverId -> { lat, lng, bearing, speedKph, t }
+  // Why a driver's last fix was refused. Without this the away sweep can only say "you went
+  // quiet", which is wrong and confusing when the real cause is being outside the service area.
+  const rejects = new Map(); // driverId -> { error, t }
   const trails = new Map(); // rideId   -> { pts: [{lat,lng,bearing,t}], t }
 
   function inAddis(lat, lng) {
     return lat > ADDIS_BOX.minLat && lat < ADDIS_BOX.maxLat && lng > ADDIS_BOX.minLng && lng < ADDIS_BOX.maxLng;
   }
 
+  function refuse(driverId, error) {
+    rejects.set(driverId, { error, t: clock() });
+    if (rejects.size > 2000) for (const [k, v] of rejects) if (clock() - v.t > 3600000) rejects.delete(k);
+    return { ok: false, error };
+  }
+
   async function record(driverId, fix, rideId) {
     const lat = Number(fix && fix.lat), lng = Number(fix && fix.lng);
-    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return { ok: false, error: 'bad_coords' };
-    if (!inAddis(lat, lng)) return { ok: false, error: 'outside_addis' };
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return refuse(driverId, 'bad_coords');
+    if (!inAddis(lat, lng)) return refuse(driverId, 'outside_addis');
     const acc = Number(fix.accuracy);
-    if (Number.isFinite(acc) && acc > MAX_ACCURACY_M) return { ok: false, error: 'inaccurate' };
+    if (Number.isFinite(acc) && acc > MAX_ACCURACY_M) return refuse(driverId, 'inaccurate');
     const t = clock();
     const prev = last.get(driverId);
     if (prev && prev.lat != null) {
       const dt = Math.max(1, (t - prev.t) / 1000);
-      if (haversineM(prev, { lat, lng }) / dt > MAX_SPEED_MPS) return { ok: false, error: 'teleport' };
+      if (haversineM(prev, { lat, lng }) / dt > MAX_SPEED_MPS) return refuse(driverId, 'teleport');
     }
     const bearing = Number.isFinite(Number(fix.bearing)) ? Number(fix.bearing) : (prev ? prev.bearing : null);
     const speedKph = Number.isFinite(Number(fix.speedKph)) ? Math.max(0, Number(fix.speedKph)) : null;
@@ -38,6 +47,7 @@ function makeLocation({ prisma, api, now, staleMs }) {
       tr.t = t; trails.set(rideId, tr);
       if (trails.size > 500) for (const [k, v] of trails) if (t - v.t > TRAIL_TTL_MS) trails.delete(k);
     }
+    rejects.delete(driverId); // a good fix clears the reason
     await prisma.driver.update({ where: { id: driverId }, data: { lat, lng, bearing, speedKph, lastSeenAt: new Date(t), away: false } });
     prisma.driverLocation.create({ data: { driverId, rideId: rideId || null, lat, lng, bearing, speedKph, at: new Date(t) } })
       .catch(e => console.error('[ride/location] breadcrumb failed: ' + e.message));
@@ -67,7 +77,7 @@ function makeLocation({ prisma, api, now, staleMs }) {
       await prisma.driver.update({ where: { id: d.id }, data: { away: true } });
       n++;
       if (d.telegramId && api) {
-        api.sendMessage(String(d.telegramId), '📴 You have gone quiet, so you are not receiving ride offers. Open the BinaSmart Driver app and keep it open to come back online.\nየBinaSmart ሹፌር መተግበሪያውን ከፍተው ይጠብቁ።')
+        api.sendMessage(String(d.telegramId), awayMessage(d.id))
           .catch(e => console.error('[ride/location] away ping failed: ' + e.message));
       }
     }
@@ -75,9 +85,28 @@ function makeLocation({ prisma, api, now, staleMs }) {
     return n;
   }
 
-  function forget(driverId) { last.delete(driverId); }
+  // The reason a driver stopped receiving offers, while it is still fresh enough to be the cause.
+  function lastReject(driverId) {
+    const r = rejects.get(driverId);
+    return (r && clock() - r.t < 5 * 60 * 1000) ? { error: r.error, ageS: Math.round((clock() - r.t) / 1000) } : null;
+  }
+  function awayMessage(driverId) {
+    const r = lastReject(driverId);
+    if (r && r.error === 'outside_addis') {
+      return '📍 ከአዲስ አበባ ውጭ ነዎት። BinaSmart Ride በአዲስ አበባ ብቻ ይሠራል፣ ስለዚህ ጥሪ አይደርስዎትም።\n'
+        + 'You are outside Addis Ababa. BinaSmart Ride operates in Addis only, so you are not receiving ride offers.';
+    }
+    if (r && r.error === 'inaccurate') {
+      return '📍 የጂፒኤስ ምልክትዎ ደካማ ነው። ወደ ክፍት ቦታ ይውጡ።\n'
+        + 'Your GPS signal is too weak to place you, so offers have paused. Move to open sky.';
+    }
+    return '📴 ስልክዎ ምልክት አላገኘንም፤ ጥሪ አይደርስዎትም። መተግበሪያውን ከፍተው ይጠብቁ።\n'
+      + 'We stopped hearing from your phone, so you are not receiving offers. Open the driver app and keep it open.';
+  }
 
-  return { record, latest, trail, staleSweep, forget };
+  function forget(driverId) { last.delete(driverId); rejects.delete(driverId); }
+
+  return { record, latest, trail, staleSweep, forget, lastReject, awayMessage };
 }
 
 module.exports = { makeLocation, TRAIL_MAX };

@@ -81,7 +81,7 @@ test('staleSweep marks silent drivers away and pings each of them once', async (
   assert.equal(await loc.staleSweep(), 1);
   assert.equal(f.drivers[0].away, true);
   assert.equal(f.pings.length, 1);
-  assert.match(f.pings[0].text, /gone quiet|away/i);
+  assert.match(f.pings[0].text, /stopped hearing from your phone/i, 'the generic silence message');
   assert.equal(await loc.staleSweep(), 0, 'not pinged twice');
 });
 
@@ -93,4 +93,52 @@ test('a driver seen for the first time gets one grace period, then is marked awa
   now += 60000;
   assert.equal(await loc.staleSweep(), 1);
   assert.equal(f.drivers[0].away, true);
+});
+
+test('a driver outside Addis is told THAT, not that they went quiet', async () => {
+  const f = fakes();
+  let now = 1_000_000;
+  const loc = makeLocation({ prisma: f.prisma, api: f.api, now: () => now, staleMs: 45000 });
+
+  // A good fix first, so the sweep has seen this driver before.
+  await loc.record('d1', ADDIS);
+  now += 5000;
+  const abroad = await loc.record('d1', { lat: 25.2048, lng: 55.2708 }); // Dubai
+  assert.equal(abroad.ok, false);
+  assert.equal(abroad.error, 'outside_addis');
+  assert.equal(loc.lastReject('d1').error, 'outside_addis', 'the reason is remembered');
+
+  now += 60000;
+  assert.equal(await loc.staleSweep(), 1);
+  assert.equal(f.drivers[0].away, true);
+  assert.match(f.pings[0].text, /outside Addis Ababa/, 'the message names the real cause');
+  assert.match(f.pings[0].text, /ከአዲስ አበባ ውጭ/, 'and says it in Amharic first');
+  assert.doesNotMatch(f.pings[0].text, /stopped hearing/, 'not the misleading silence message');
+});
+
+test('weak GPS gets its own message, and a good fix clears the reason', async () => {
+  const f = fakes();
+  let now = 1_000_000;
+  const loc = makeLocation({ prisma: f.prisma, api: f.api, now: () => now, staleMs: 45000 });
+  await loc.record('d1', ADDIS);
+  now += 5000;
+  await loc.record('d1', { lat: ADDIS.lat, lng: ADDIS.lng, accuracy: 900 });
+  assert.equal(loc.lastReject('d1').error, 'inaccurate');
+  assert.match(loc.awayMessage('d1'), /GPS signal is too weak/);
+
+  now += 5000;
+  await loc.record('d1', { lat: ADDIS.lat + 0.0001, lng: ADDIS.lng });
+  assert.equal(loc.lastReject('d1'), null, 'a good fix clears it');
+  assert.match(loc.awayMessage('d1'), /stopped hearing/, 'back to the generic message');
+});
+
+test('a stale reason is not blamed for a fresh silence', async () => {
+  const f = fakes();
+  let now = 1_000_000;
+  const loc = makeLocation({ prisma: f.prisma, api: f.api, now: () => now, staleMs: 45000 });
+  await loc.record('d1', { lat: 25.2048, lng: 55.2708 });
+  assert.equal(loc.lastReject('d1').error, 'outside_addis');
+  now += 6 * 60 * 1000; // six minutes later it is no longer the explanation
+  assert.equal(loc.lastReject('d1'), null);
+  assert.match(loc.awayMessage('d1'), /stopped hearing/);
 });

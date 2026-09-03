@@ -26,6 +26,13 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
   function sameDay(d) {
     return d.earningsDay && new Date(d.earningsDay).getTime() === addisDay(clock()).getTime();
   }
+  // Why offers stopped, in the app's own words rather than a generic silence.
+  function awayReason(d) {
+    if (!d || !d.away || !location || !location.lastReject) return null;
+    const r = location.lastReject(d.id);
+    return r ? r.error : 'silent';
+  }
+
   function pubJob(ride) {
     return { id: ride.id, status: ride.status, tier: ride.tier, pickup: ride.pickup, dropoff: ride.dropoff,
       distanceM: ride.distanceM, durationS: ride.durationS, fareEtb: ride.fareEtb, driverTakeEtb: ride.driverTakeEtb,
@@ -82,7 +89,7 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
   async function session(req, reply) {
     const drv = await auth(req, reply, { allowPending: true });
     if (!drv) return;
-    return { ok: true, driver: pubDriver(drv), job: await currentJob(drv), offers: await openOffers(drv) };
+    return { ok: true, driver: pubDriver(drv), awayReason: awayReason(drv), job: await currentJob(drv), offers: await openOffers(drv) };
   }
 
   // POST /api/drive/online { online: true|false }
@@ -112,6 +119,7 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     // Re-read: record() may have cleared `away`, and an offer may have arrived a moment ago.
     const fresh = await prisma.driver.findUnique({ where: { id: drv.id } });
     return { ok: true, fix: fix.ok ? 'stored' : fix.error, driver: pubDriver(fresh || drv),
+      awayReason: awayReason(fresh || drv),
       job: await currentJob(fresh || drv), offers: await openOffers(drv), serverTime: clock() };
   }
 

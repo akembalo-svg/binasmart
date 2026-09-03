@@ -24,6 +24,7 @@
     driver: null, job: null, offer: null, offerEndsAt: 0,
     pos: null, gpsOk: false, lastPingOk: 0, busy: false, lock: null, routeFor: '', offerTotal: 0,
     routeFrom: null, routeAt: 0, fitted: '', alertTimer: 0, saidStep: -1, saidNear: '', legSpoken: '',
+    awayReason: null,
     nav: false, freeCam: 0, carFrom: null, carTo: null, carAt: 0, carRaf: 0, flowTimer: 0, flowStep: 0,
   };
   var carMk = null, map = null, pickMk = null, dropMk = null;
@@ -448,9 +449,16 @@
     $('ivehicle').textContent = String(d.tier || '').toUpperCase() + ' · ' + d.plate;
     var on = d.online && !d.away;
     $('idle').classList.toggle('online', on);
+    var why = {
+      outside_addis: '📍 ከአዲስ አበባ ውጭ ነዎት — BinaSmart Ride በአዲስ አበባ ብቻ ይሠራል።\nYou are outside Addis Ababa, so offers cannot reach you. This is not a fault.',
+      inaccurate: '📍 የጂፒኤስ ምልክት ደካማ ነው — ወደ ክፍት ቦታ ይውጡ።\nWeak GPS: we cannot place you accurately. Move to open sky.',
+      teleport: '📍 የቦታ ምልክቱ አልተረጋገጠም — ጥቂት ይጠብቁ።\nYour position jumped implausibly, so it was ignored. It should settle in a moment.',
+      bad_coords: '📍 ስልኩ ቦታ አልላከም።\nYour phone sent no usable location.',
+    };
     $('istate').textContent = on
       ? '🟢 Online. Keep this screen open — offers arrive here and in Telegram.'
-      : (d.away ? '⚪ You went quiet, so offers stopped. Tap GO to come back.' : '⚪ You are offline.');
+      : (d.away ? (why[st.awayReason] || '⚪ ምልክት አላገኘንም — ጥሪ ቆሟል። GO ይጫኑ።\nWe stopped hearing from your phone, so offers paused. Tap GO to come back.')
+                : '⚪ You are offline.');
     $('igo').textContent = on ? 'GO OFFLINE · አቁም' : 'GO ONLINE · ስራ ጀምር';
     $('igo').className = 'dbtn big ' + (on ? 'ghost' : 'go');
     show('idle');
@@ -478,6 +486,7 @@
   // ---------- server sync ----------
   function absorb(j) {
     if (j.driver) st.driver = j.driver;
+    if ('awayReason' in j) st.awayReason = j.awayReason;
     var wasJob = st.job && st.job.id, wasStatus = st.job && st.job.status;
     st.job = j.job || null;
     if (st.job && (st.job.id !== wasJob || st.job.status !== wasStatus)) st.routeFor = '';
