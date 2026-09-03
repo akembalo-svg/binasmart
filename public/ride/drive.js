@@ -531,7 +531,12 @@
         if (j.ok) { haptic('success'); stopAlert(); window.DNav.chime('accepted'); st.offer = null; st.legSpoken = ''; absorb(j); return; }
         haptic('error');
         stopAlert(); window.DNav.chime('warn');
-        banner(j.error === 'taken' ? '😔 Another driver got that one.' : j.error === 'no_offer' ? '⌛ That offer expired.' : '⚠️ ' + j.error);
+        banner(j.error === 'taken' ? '😔 ሌላ ሹፌር ቀድሞ ወሰደው · another driver got that one'
+          : j.error === 'expired' ? '⌛ ጊዜው አልፎበታል · that offer expired'
+          : j.error === 'no_offer' ? '⌛ ያ ጥሪ ከእንግዲህ የለም · that offer is no longer available'
+          : j.error === 'already_yours' ? '✅ ይህ ጉዞ የእርስዎ ነው · this ride is already yours'
+          : j.error === 'busy' ? '🚗 በጉዞ ላይ ነዎት · you are already on a ride'
+          : '⚠️ ' + j.error);
         st.offer = null; render();
       });
     });

@@ -92,7 +92,15 @@ function makeOffers({ prisma, geo, settings, api, concierge, cancelTimer, riderN
 
   async function accept(rideId, driverId) {
     const offer = await prisma.rideOffer.findFirst({ where: { rideId, driverId, status: 'open' } });
-    if (!offer) return { ok: false, error: 'no_offer' };
+    if (!offer) {
+      // Losing the race closes this driver's offer, so a tap a moment too late finds nothing open.
+      // "no_offer" would read like a fault; the driver deserves to know somebody simply beat them.
+      const prior = await prisma.rideOffer.findFirst({ where: { rideId, driverId } });
+      if (!prior || prior.status === 'declined') return { ok: false, error: 'no_offer' };
+      if (prior.status === 'expired') return { ok: false, error: 'expired' };
+      if (prior.status === 'accepted') return { ok: false, error: 'already_yours' };
+      return { ok: false, error: 'taken' };
+    }
     const drv = await prisma.driver.findUnique({ where: { id: driverId } });
     if (!drv || drv.status !== 'approved') return { ok: false, error: 'not_approved' };
     if (drv.onRideId) return { ok: false, error: 'busy' };

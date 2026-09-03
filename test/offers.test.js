@@ -213,8 +213,38 @@ test('accept is refused without an open offer or after the ride is taken', async
   await offers.open('r1');
   assert.equal((await offers.accept('r1', 'dD')).error, 'no_offer', 'dD was never asked');
   assert.equal((await offers.accept('r1', 'dA')).ok, true);
-  // Once a winner is recorded the other offers are already closed, so a late tap reads as no_offer.
-  // "taken" is reserved for the true race, where the loser still holds an open offer (test 3).
-  assert.equal((await offers.accept('r1', 'dB')).error, 'no_offer');
-  assert.equal((await offers.accept('r1', 'dA')).error, 'no_offer', 'the winner cannot accept twice');
+  // A late tap is told the truth: somebody beat them. It used to read as "no_offer", which looks
+  // like a fault in the app rather than a race the driver simply lost.
+  assert.equal((await offers.accept('r1', 'dB')).error, 'taken');
+  assert.equal((await offers.accept('r1', 'dA')).error, 'already_yours', 'the winner already has it');
+});
+
+test('a driver who taps Accept a moment too late is told it was taken, not that there is no offer', async () => {
+  const w = world();
+  const offers = w.make();
+  await offers.open('r1');
+
+  // Exactly what the winner does to the losers' offers, applied before the loser's own read.
+  const win = await offers.accept('r1', 'dA');
+  assert.equal(win.ok, true);
+  assert.equal(w.state.offers.find(o => o.driverId === 'dB').status, 'lost', 'the loser offer is closed');
+
+  const late = await offers.accept('r1', 'dB');
+  assert.equal(late.ok, false);
+  assert.equal(late.error, 'taken', 'not "no_offer" — somebody beat them, and they should hear that');
+});
+
+test('an expired offer says expired, a skipped one says no offer, and a stranger still gets no offer', async () => {
+  const w = world();
+  const offers = w.make();
+  await offers.open('r1');
+
+  await offers.decline('r1', 'dB');
+  assert.equal((await offers.accept('r1', 'dB')).error, 'no_offer', 'they gave it up themselves');
+
+  w.clockRef.t += 40_000;
+  await offers.expire();
+  assert.equal((await offers.accept('r1', 'dA')).error, 'expired', 'the window closed on them');
+
+  assert.equal((await offers.accept('r1', 'dZZ')).error, 'no_offer', 'never offered at all');
 });

@@ -63,6 +63,10 @@ const LANDMARKS = [
     alias: ['shiro meda', 'shiromeda', 'shero meda', 'sheromeda', 'ሽሮ ሜዳ'] },
   { label: 'Kotebe', labelAm: 'ኮተቤ', lat: 9.03713, lng: 38.83985, sub: 'Kotebe, Addis Ababa',
     alias: ['kotebe', 'kotebbe', 'ኮተቤ'] },
+  // Two candidates 2.5 km apart: the St George church and the condominium site. Riders mean the
+  // condominium, so that is what is pinned.
+  { label: 'Bole Bulbula', labelAm: 'ቦሌ ቡልቡላ', lat: 8.94827, lng: 38.79320, sub: 'Bole Bulbula condominium, Addis Ababa',
+    alias: ['bole bulbula', 'bulbula', 'bole bulbulla', 'ቦሌ ቡልቡላ'] },
 ];
 const normPlace = t => String(t || '').toLowerCase().replace(/[^\p{L}\p{N} ]/gu, '').replace(/\s+/g, ' ').trim();
 const LANDMARK_BY_ALIAS = new Map();
