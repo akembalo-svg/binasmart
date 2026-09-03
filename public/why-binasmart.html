@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BinaSmart Ride · ዋጋው አይለወጥም · አዲስ አበባ</title>
+<meta name="description" content="በአዲስ አበባ በቋሚ ዋጋ መኪና ይያዙ። ዋጋው ሲያዙ ተቆልፎ ይነገርዎታል፤ በኋላ አይለወጥም። መተግበሪያ ማውረድ አያስፈልግም — በቴሌግራም ውስጥ ይሠራል።">
+<link rel="canonical" href="https://bina.et/why-binasmart">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bina.et/why-binasmart">
+<meta property="og:title" content="ዋጋው አይለወጥም · BinaSmart Ride">
+<meta property="og:description" content="ከመሳፈርዎ በፊት ዋጋውን ያውቃሉ። መተግበሪያ ማውረድ አያስፈልግም።">
+<meta property="og:image" content="https://bina.et/static/ride/why-binasmart-og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root{
+    --bg:#fbfaf7; --panel:#fff; --line:#e6e2d9; --line2:#f0ede6;
+    --ink:#141a24; --mut:#68717f;
+    --grn:#047857; --grn-bg:#ecfdf5; --grn-line:#a7f3d0;
+    --amb:#b45309; --amb-bg:#fff7e6;
+    --sky:#0369a1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Noto Sans Ethiopic",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 18px}
+  .en{display:block;font-size:.82em;color:var(--mut);font-weight:500;line-height:1.5}
+
+  .hero{padding:48px 0 44px;border-bottom:1px solid var(--line);
+    background:radial-gradient(110% 80% at 86% 6%,#e6f7ef 0%,transparent 58%),
+      radial-gradient(80% 60% at 4% 100%,#fff3dc 0%,transparent 60%),var(--panel)}
+  .brand{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:800}
+  .brand b{color:var(--grn)}
+  .kick{display:inline-block;margin:24px 0 14px;padding:6px 14px;border-radius:999px;
+    background:var(--grn-bg);border:1px solid var(--grn-line);color:var(--grn);font-size:13px;font-weight:800}
+  h1{font-size:clamp(30px,7.2vw,47px);font-weight:800;line-height:1.18;letter-spacing:-.015em}
+  h1 span{color:var(--grn)}
+  .lede{margin-top:15px;font-size:clamp(15.5px,3.8vw,18.5px);max-width:33em}
+  .lede b{font-weight:800}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;text-decoration:none;
+    background:linear-gradient(180deg,#10b981 0%,#059669 100%);color:#fff;font-weight:800;font-size:17.5px;
+    padding:15px 27px;border-radius:13px;box-shadow:0 12px 26px -12px rgba(5,150,105,.7)}
+  .cta.alt{background:linear-gradient(180deg,#38bdf8 0%,#0284c7 100%);box-shadow:0 12px 26px -12px rgba(2,132,199,.7)}
+  .ctas{display:flex;flex-wrap:wrap;gap:11px;align-items:center}
+  .under{margin-top:11px;font-size:13px;color:var(--mut)}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(21px,5.2vw,29px);font-weight:800;line-height:1.32}
+  .intro{margin-top:12px;max-width:39em;color:#3c4553}
+
+  .grid{display:grid;gap:12px;margin-top:22px;grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+  .c{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px;
+    box-shadow:0 1px 2px rgba(20,26,36,.04)}
+  .c .i{font-size:25px;line-height:1}
+  .c h3{margin:9px 0 5px;font-size:16.5px;font-weight:800}
+  .c p{font-size:14px;color:#3c4553}
+
+  .quote{margin-top:22px;background:var(--grn-bg);border:1px solid var(--grn-line);
+    border-radius:16px;padding:20px 22px}
+  .quote b{display:block;font-size:19px;font-weight:800;color:var(--grn)}
+  .quote p{margin-top:7px;font-size:14.5px;color:#20503f}
+
+  .scroll{overflow-x:auto;margin-top:20px;border:1px solid var(--line);border-radius:15px;background:var(--panel)}
+  table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+  th,td{padding:12px 14px;text-align:right;border-bottom:1px solid var(--line2);vertical-align:top}
+  thead th{background:#faf8f3;font-size:12.5px;color:var(--mut);white-space:nowrap;font-weight:700}
+  thead th.us{color:var(--grn);background:var(--grn-bg)}
+  tbody th{text-align:right;font-weight:700;white-space:nowrap}
+  td.us{background:var(--grn-bg);font-weight:800}
+  tr:last-child th,tr:last-child td{border-bottom:0}
+  .yes{color:var(--grn);font-weight:800}
+  .no{color:#96a0ae}
+  .note{margin-top:12px;font-size:12.5px;color:var(--mut);line-height:1.72}
+  .note a{color:var(--sky)}
+
+  .steps{counter-reset:s;margin-top:20px;display:grid;gap:10px}
+  .step{display:flex;gap:14px;align-items:flex-start;background:var(--panel);
+    border:1px solid var(--line);border-radius:13px;padding:15px 17px;box-shadow:0 1px 2px rgba(20,26,36,.04)}
+  .step::before{counter-increment:s;content:counter(s);flex:none;width:27px;height:27px;border-radius:50%;
+    background:var(--grn);color:#fff;font-weight:800;font-size:14px;display:grid;place-items:center}
+  .step b{display:block;font-size:15.5px;font-weight:800}
+
+  .end{text-align:center;padding:46px 0}
+  footer{padding:0 0 44px;color:var(--mut);font-size:12.5px;line-height:1.75}
+  footer a{color:var(--sky)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="brand">🚕 Bina<b>Smart</b> Ride</div>
+    <div class="kick">ቋሚ ዋጋ · አዲስ አበባ</div>
+    <h1>ከመሳፈርዎ በፊት<br><span>ዋጋውን ያውቃሉ።</span></h1>
+    <p class="lede">
+      ጉዞውን ሲያዙ ዋጋው ተሰልቶ <b>ይቆለፋል</b>። በትራፊክም፣ በዝናብም፣ በፍላጎት መጨመርም አይለወጥም።
+      መተግበሪያ ማውረድ አያስፈልግም — በቴሌግራም ውስጥ ይሠራል።
+      <span class="en">The price is locked when you book and cannot change. No app to install.</span>
+    </p>
+    <div class="ctas">
+      <a class="cta" href="https://t.me/bina_smart_bot">🚕 ጉዞ ይያዙ</a>
+      <a class="cta alt" href="https://bina.et/ride">🌐 በድር ላይ</a>
+    </div>
+    <div class="under">በቴሌግራም ወይም በአሳሽ · @bina_smart_bot</div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>ሜትር የለም። ድርድር የለም።<span class="en">No meter. No haggling. No surprises.</span></h2>
+    <p class="intro">
+      በሜትር በሚሠራ አገልግሎት ጉዞው እስኪያልቅ ድረስ ስንት እንደሚሆን አያውቁም። ትራፊክ ሲበዛ ዋጋው ይጨምራል።
+      በBinaSmart ግን ብሩ አስቀድሞ ይነገርዎታል — እና ያ ብቻ ነው የሚከፍሉት።
+    </p>
+    <div class="quote">
+      <b>ሁልጊዜ ርካሹ ነን አንልም።</b>
+      <p>ግን ዋጋው አይለወጥም። ከመሳፈርዎ በፊት የሚያዩት ብር በመጨረሻ የሚከፍሉት ብር ነው — ሁሌም።</p>
+      <span class="en">We do not claim to always be the cheapest. We claim the price cannot change on you.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>ለምን BinaSmart<span class="en">What you get</span></h2>
+    <div class="grid">
+      <div class="c"><div class="i">🔒</div><h3>ዋጋው ተቆልፎ ነው</h3>
+        <p>ጉዞውን ሲያዙ ዋጋው ይሰላል፤ ይቆለፋል። በመጨረሻ ክርክር የለም።</p></div>
+      <div class="c"><div class="i">📲</div><h3>መተግበሪያ አያስፈልግም</h3>
+        <p>በቴሌግራም ውስጥ ይሠራል። ማውረድ የለም፣ የስልክ ቦታ አይበላም።</p></div>
+      <div class="c"><div class="i">🚗</div><h3>የሹፌሩን መኪና ያያሉ</h3>
+        <p>የመኪናው ፎቶ፣ ታርጋና ሲቃረብ በካርታው ላይ የሚንቀሳቀስ ቦታው ይታይዎታል።</p></div>
+      <div class="c"><div class="i">🌍</div><h3>ለሌላ ሰው ማዘዝ ይችላሉ</h3>
+        <p>ከውጭ ሆነው ለቤተሰብዎ ጉዞ ማዘዝ ይችላሉ። ስማቸውንና ስልካቸውን ብቻ ያስገቡ።</p></div>
+      <div class="c"><div class="i">🤖</div><h3>AI ጉዞ ይይዝልዎታል</h3>
+        <p>ChatGPT፣ Claude ወይም Gemini ላይ “በአዲስ አበባ መኪና ያዝልኝ” ብለው መጠየቅ ይችላሉ።</p></div>
+      <div class="c"><div class="i">💵</div><h3>በጥሬ ገንዘብ</h3>
+        <p>ለሹፌሩ በቀጥታ ይከፍላሉ። የተስማሙበት ብር ብቻ።</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>ንጽጽር<span class="en">How we differ — on experience, not price</span></h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>&nbsp;</th><th class="us">BinaSmart</th><th>Ride</th><th>Feres</th><th>Yango</th></tr></thead>
+        <tbody>
+          <tr><th>ዋጋው ሲያዙ ይቆለፋል</th>
+            <td class="us"><span class="yes">አዎ</span></td>
+            <td class="no">በሜትር</td><td class="no">በሜትር</td><td class="no">ዋጋ ሊጨምር ይችላል</td></tr>
+          <tr><th>መተግበሪያ ማውረድ</th>
+            <td class="us"><span class="yes">አያስፈልግም</span></td>
+            <td>ያስፈልጋል</td><td>ያስፈልጋል</td><td>ያስፈልጋል</td></tr>
+          <tr><th>ለሌላ ሰው ማዘዝ</th>
+            <td class="us"><span class="yes">አዎ</span></td>
+            <td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><th>በAI ማዘዝ</th>
+            <td class="us"><span class="yes">አዎ</span></td>
+            <td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><th>ባለቤትነት</th>
+            <td class="us"><span class="yes">ኢትዮጵያዊ</span></td>
+            <td>ኢትዮጵያዊ</td><td>ኢትዮጵያዊ</td><td>የውጭ — Yandex</td></tr>
+          <tr><th>ስፋትና ልምድ</th>
+            <td class="us">አዲስ — አዲስ አበባ ብቻ</td>
+            <td>በሀገር አቀፍ</td><td>ሰፊ መረብ</td><td>በብዙ ከተሞች</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">
+      ዋጋን አላነጻጸርንም፤ ምክንያቱም ሁልጊዜ ርካሹ አይደለንም። የምንለየው በዋጋው መጠን ሳይሆን ዋጋው በማይለወጥ መሆኑ ነው።
+      Ride እና Feres የኢትዮጵያ ኩባንያዎች ናቸው፤ Yango የYandex (ሩሲያ) ንብረት ነው።
+      የእኛን ዋጋ ከመያዝዎ በፊት በ<a href="https://bina.et/ride">bina.et/ride</a> ማየት ይችላሉ።
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>እንዴት ይያዛሉ<span class="en">How it works</span></h2>
+    <div class="steps">
+      <div class="step"><div><b>@bina_smart_bot ይክፈቱ</b><span class="en">ወይም bina.et/ride ይጎብኙ። ማውረድ አያስፈልግም።</span></div></div>
+      <div class="step"><div><b>የት እንደሚሄዱ ይንገሩን</b><span class="en">መነሻና መድረሻ ይምረጡ — በፍለጋ ወይም ካርታውን በመንካት።</span></div></div>
+      <div class="step"><div><b>ዋጋውን አይተው ያረጋግጡ</b><span class="en">የእያንዳንዱ አይነት መኪና ዋጋ ይታይዎታል። የመረጡት ዋጋ ይቆለፋል።</span></div></div>
+      <div class="step"><div><b>ሹፌሩ ሲመጣ ይከታተሉ</b><span class="en">የመኪናው ፎቶና ታርጋ ይታይዎታል፤ በካርታው ላይ ሲቃረብ ያያሉ።</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="end">
+  <div class="wrap">
+    <h2>አሁን ይሞክሩት።<span class="en">Try it now — the price you see is the price you pay.</span></h2>
+    <div class="ctas" style="justify-content:center">
+      <a class="cta" href="https://t.me/bina_smart_bot">🚕 ጉዞ ይያዙ</a>
+      <a class="cta alt" href="https://bina.et/ride">🌐 በድር ላይ</a>
+    </div>
+    <div class="under">አገልግሎቱ አሁን በአዲስ አበባ ብቻ ነው።</div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    BinaSmart · <a href="https://bina.et">bina.et</a> · አዲስ አበባ፣ ኢትዮጵያ ·
+    <a href="https://bina.et/drive-with-us">ሹፌር ነዎት? ይመዝገቡ</a><br>
+    ክፍያ አሁን በጥሬ ገንዘብ ብቻ ነው። ዋጋው የሚሰላው ጉዞው ሲጠየቅ ሲሆን ከዚያ በኋላ አይለወጥም።
+  </div>
+</footer>
+
+</body>
+</html>

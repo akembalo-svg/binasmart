@@ -170,3 +170,26 @@ test('ops cancellation frees the driver and warns them too', async () => {
   assert.equal(driverTold.length, 1);
   assert.match(driverTold[0], /do not continue/i);
 });
+
+test('a chapa booking falls back to cash while the integration is on test keys', async () => {
+  const was = process.env.CHAPA_MODE;
+
+  process.env.CHAPA_MODE = 'test';
+  let r = await app.inject({ method: 'POST', url: '/api/ride/request',
+    payload: { tier: 'moto', pickup: pt, dropoff: pt2, riderName: 'Almaz', riderPhone: '0911111111', paymentMethod: 'chapa' } });
+  assert.equal(r.statusCode, 200);
+  assert.equal(prisma._.rides.at(-1).paymentMethod, 'cash', 'test keys must never book a chapa ride');
+
+  // An unset mode is treated as test — the safe default.
+  delete process.env.CHAPA_MODE;
+  r = await app.inject({ method: 'POST', url: '/api/ride/request',
+    payload: { tier: 'moto', pickup: pt, dropoff: pt2, riderName: 'Almaz', riderPhone: '0911111111', paymentMethod: 'chapa' } });
+  assert.equal(prisma._.rides.at(-1).paymentMethod, 'cash', 'unset mode defaults to cash');
+
+  process.env.CHAPA_MODE = 'live';
+  r = await app.inject({ method: 'POST', url: '/api/ride/request',
+    payload: { tier: 'moto', pickup: pt, dropoff: pt2, riderName: 'Almaz', riderPhone: '0911111111', paymentMethod: 'chapa' } });
+  assert.equal(prisma._.rides.at(-1).paymentMethod, 'chapa', 'live keys allow it through');
+
+  if (was === undefined) delete process.env.CHAPA_MODE; else process.env.CHAPA_MODE = was;
+});

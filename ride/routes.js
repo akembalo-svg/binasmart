@@ -56,6 +56,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
   fastify.get('/ride-ops', async (req, reply) => reply.sendFile('ride-ops.html'));
   fastify.get('/drive', async (req, reply) => reply.sendFile('drive.html'));
   fastify.get('/drive-with-us', async (req, reply) => reply.sendFile('drive-with-us.html'));
+  fastify.get('/why-binasmart', async (req, reply) => reply.sendFile('why-binasmart.html'));
 
   // ---- public ----
   fastify.get('/api/ride/settings', async () => {
@@ -83,7 +84,10 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     const b = req.body || {};
     const from = point(b.pickup), to = point(b.dropoff);
     const tier = TIERS.includes(b.tier) ? b.tier : null;
-    const paymentMethod = ['cash', 'chapa'].includes(b.paymentMethod) ? b.paymentMethod : 'cash';
+    // Chapa is only offered once CHAPA_MODE=live. On test keys a payment can appear to succeed
+    // without money moving, so we fall back to cash rather than trust the client.
+    const chapaLive = String(process.env.CHAPA_MODE || 'test').toLowerCase() === 'live';
+    const paymentMethod = (b.paymentMethod === 'chapa' && chapaLive) ? 'chapa' : 'cash';
     const idemKey = String(b.idemKey || '').slice(0, 64) || null;
     // Telegram identity (optional): signed initData proves who is booking; signed contact proves the phone.
     let tg = null, contact = null;

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
 <title>BinaSmart Ride · ራይድ — Fixed-price rides in Addis Ababa</title>
-<meta name="description" content="Get a ride in Addis Ababa in seconds. Fixed upfront price, no surge, no app to download. Pay cash, telebirr or Chapa. · በአዲስ አበባ በቋሚ ዋጋ መኪና ይያዙ።">
+<meta name="description" content="Get a ride in Addis Ababa in seconds. Fixed upfront price, no surge, no app to download. Pay the driver in cash. · በአዲስ አበባ በቋሚ ዋጋ መኪና ይያዙ።">
 <link rel="canonical" href="https://bina.et/ride">
 <meta property="og:title" content="BinaSmart Ride · ራይድ — Fixed-price rides in Addis">
 <meta property="og:description" content="Fixed upfront price. No surge. No app to download. Moto · Bajaj · Economy · Comfort · XL.">
@@ -34,7 +34,7 @@
     <button class="field" id="openSearch"><span>🔍</span><span class="ph">መድረሻዎን ያስገቡ · Enter destination</span></button>
     <div class="from"><span class="dot"></span><span id="fromLabel">Locating you… · ቦታዎን እየፈለግን ነው</span><button id="editFrom">Change</button></div>
     <div class="small tglink">✈️ Also in Telegram · በቴሌግራምም: <a href="https://t.me/bina_smart_bot/ride" target="_blank" rel="noopener">t.me/bina_smart_bot/ride</a></div>
-    <div class="hint">💸 Fixed price · no surge &nbsp;·&nbsp; 📲 No app needed &nbsp;·&nbsp; 💵 Cash / telebirr</div>
+    <div class="hint">💸 Fixed price · no surge &nbsp;·&nbsp; 📲 No app needed &nbsp;·&nbsp; 💵 Pay in cash</div>
   </div>
 
   <div class="screen hidden" id="s-search">
@@ -55,7 +55,8 @@
     </div>
     <div class="payrow">
       <label><input type="radio" name="pay" value="cash" checked> 💵 Cash · ጥሬ ገንዘብ</label>
-      <label><input type="radio" name="pay" value="chapa"> 📱 telebirr / Chapa</label>
+      <!-- Re-enable once CHAPA_MODE=live; the server refuses chapa until then. -->
+      <label class="hidden"><input type="radio" name="pay" value="chapa"> 📱 telebirr / Chapa</label>
     </div>
     <button class="cta" id="request">ጉዞ ይጠይቁ · Request ride <span id="ctaFare"></span></button>
     <button class="link" id="cancelQuote">Change destination</button>
@@ -120,6 +121,6 @@
 <script src="/static/ride/map.js?v=4"></script>
 <script src="/static/ride/tg.js?v=5"></script>
 <script src="/static/ride/track.js?v=1"></script>
-<script src="/static/ride/app.js?v=6"></script>
+<script src="/static/ride/app.js?v=7"></script>
 </body>
 </html>
