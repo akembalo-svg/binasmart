@@ -1,5 +1,7 @@
 'use strict';
 const { quoteAll, quoteFare, TIERS } = require('./fare');
+const fs = require('fs'); const path = require('path');
+const tgauth = require('./tgauth');
 
 const ACTIVE = ['requested', 'dispatching', 'assigned', 'arriving', 'arrived', 'ontrip'];
 const NEXT = { assigned: ['arriving', 'arrived', 'cancelled'], arriving: ['arrived', 'cancelled'], arrived: ['ontrip', 'cancelled'], ontrip: ['completed'], dispatching: ['cancelled'], requested: ['cancelled'] };
@@ -34,10 +36,16 @@ function pubRide(ride) {
     driver: d ? { name: d.name, phone: d.phone, photo: d.photo, plate: d.plate, vehicle: [d.vehicleColour, d.vehicleMake].filter(Boolean).join(' '), rating: d.rating, tier: d.tier } : null };
 }
 
-module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY }) {
+module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY, riderBotToken, webhookSecret, riderBot, driverBot, riderNotify, uploadsDir }) {
   const quoteRL = limiter(600000, 60), requestRL = limiter(600000, 5), searchRL = limiter(60000, 40);
   const lookupRL = limiter(60000, 120);
   const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
+  const fireNotify = (id, ev) => { if (riderNotify) setImmediate(() => riderNotify.notify(id, ev).catch(() => {})); };
+  const tgHook = handler => async (req, reply) => {
+    if (!webhookSecret || req.headers['x-telegram-bot-api-secret-token'] !== webhookSecret) return reply.code(401).send({ ok: false });
+    reply.send({ ok: true }); // answer Telegram fast; process after
+    setImmediate(() => handler(req.body || {}).catch(e => console.error('[ride/tg] webhook handler error: ' + e.message)));
+  };
 
   // ---- pages ----
   fastify.get('/ride', async (req, reply) => reply.sendFile('ride.html'));
@@ -68,30 +76,51 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
   fastify.post('/api/ride/request', async (req, reply) => {
     const b = req.body || {};
     const from = point(b.pickup), to = point(b.dropoff);
-    const phone = normPhone(b.riderPhone); const name = String(b.riderName || '').trim().slice(0, 60);
     const tier = TIERS.includes(b.tier) ? b.tier : null;
     const paymentMethod = ['cash', 'chapa'].includes(b.paymentMethod) ? b.paymentMethod : 'cash';
     const idemKey = String(b.idemKey || '').slice(0, 64) || null;
-    if (!from || !to || !phone || !name || !tier) return reply.code(400).send({ ok: false, error: 'tier, pickup, dropoff, riderName, riderPhone(+251…) required' });
-    if (idemKey) { const dup = await prisma.ride.findUnique({ where: { idemKey }, include: { driver: true } }); if (dup) return { ok: true, ride: pubRide(dup), duplicate: true }; }
-    if (!requestRL(phone) || !requestRL('ip:' + clientIp(req))) return reply.code(429).send({ ok: false, error: 'too_many_requests' });
+    // Telegram identity (optional): signed initData proves who is booking; signed contact proves the phone.
+    let tg = null, contact = null;
+    if (b.tg && b.tg.initData) {
+      tg = tgauth.verifyInitData(b.tg.initData, riderBotToken);
+      if (!tg) return reply.code(401).send({ ok: false, error: 'Telegram sign-in expired — please reopen BinaSmart from the bot' });
+      if (b.tg.contact) contact = tgauth.verifyContact(b.tg.contact, riderBotToken);
+    }
+    const bookerName = String(b.riderName || (tg && [tg.user.first_name, tg.user.last_name].filter(Boolean).join(' ')) || '').trim().slice(0, 60);
+    const bookerRaw = contact ? contact.phone : b.riderPhone;
+    const bookerPhone = normPhone(bookerRaw) || (bookerRaw ? String(bookerRaw).replace(/[^\d+]/g, '').slice(0, 20) : null);
+    // Book for someone else: the passenger is the ride's rider; the booker is recorded in bookedBy.
+    let passenger = null;
+    if (b.passenger && (b.passenger.name || b.passenger.phone)) {
+      passenger = { name: String(b.passenger.name || '').trim().slice(0, 60), phone: normPhone(b.passenger.phone) };
+      if (!passenger.name || !passenger.phone) return reply.code(400).send({ ok: false, error: 'passenger name and an Ethiopian passenger phone (09…) are required' });
+    }
+    const phone = passenger ? passenger.phone : normPhone(bookerRaw);
+    const name = passenger ? passenger.name : bookerName;
+    if (!from || !to || !tier) return reply.code(400).send({ ok: false, error: 'tier, pickup and dropoff inside Addis required' });
+    if (!phone || !name) return reply.code(400).send({ ok: false, error: contact && !passenger ? 'Your Telegram number is not Ethiopian — use "Book for someone else" and enter the passenger\'s Ethiopian number' : 'riderName and riderPhone(+251…) required' });
+    if (idemKey) { const dup = await prisma.ride.findUnique({ where: { idemKey }, include: { driver: true } }); if (dup) return { ok: true, ride: pubRide(dup), duplicate: true, phone: tg ? dup.riderPhone : undefined }; }
+    const bookerKey = tg ? 'tg:' + tg.user.id : 'ph:' + (bookerPhone || phone);
+    if (!requestRL(phone) || !requestRL(bookerKey) || !requestRL('ip:' + clientIp(req))) return reply.code(429).send({ ok: false, error: 'too_many_requests' });
     const [r, s] = await Promise.all([geo.route(from, to), settings.get()]); // fare is computed server-side and locked
     const q = quoteFare(s, tier, r.distanceM, r.durationS);
     const rider = await prisma.rider.upsert({ where: { phone }, update: { name }, create: { phone, name } });
+    if (tg && !passenger && rider.telegramId !== String(tg.user.id)) await prisma.rider.update({ where: { id: rider.id }, data: { telegramId: String(tg.user.id) } });
+    const bookedBy = passenger ? { name: bookerName || null, phone: bookerPhone || null, telegramId: tg ? String(tg.user.id) : null } : null;
     let ride;
     try {
       ride = await prisma.ride.create({ data: {
         idemKey, riderId: rider.id, tier, pickup: from, dropoff: to, distanceM: r.distanceM, durationS: r.durationS, estimate: r.estimate,
-        fareEtb: q.fareEtb, driverTakeEtb: q.driverTakeEtb, paymentMethod, status: 'dispatching', riderName: name, riderPhone: phone } });
+        fareEtb: q.fareEtb, driverTakeEtb: q.driverTakeEtb, paymentMethod, status: 'dispatching', riderName: name, riderPhone: phone, bookedBy } });
     } catch (e) {
       if (e.code === 'P2002' && idemKey) {
         const dup = await prisma.ride.findUnique({ where: { idemKey }, include: { driver: true } });
-        if (dup) return { ok: true, ride: pubRide(dup), duplicate: true };
+        if (dup) return { ok: true, ride: pubRide(dup), duplicate: true, phone: tg ? dup.riderPhone : undefined };
       }
       throw e;
     }
     dispatch.start(ride.id).catch(err => console.error('[ride/routes] dispatch.start failed:', err.message));
-    return { ok: true, ride: pubRide({ ...ride, driver: null }) };
+    return { ok: true, ride: pubRide({ ...ride, driver: null }), phone: tg ? phone : undefined };
   });
 
   fastify.get('/api/ride/:id', async (req, reply) => {
@@ -109,6 +138,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     dispatch.cancel(ride.id);
     const upd = await prisma.ride.update({ where: { id: ride.id }, data: { status: 'cancelled', cancelledBy: 'rider', cancelledAt: new Date() }, include: { driver: true } });
     telegram.ownerNote('❌ Rider cancelled ride ' + ride.id + ' (' + ride.riderName + ')').catch(() => {});
+    fireNotify(ride.id, 'cancelled');
     return { ok: true, ride: pubRide(upd) };
   });
 
@@ -125,6 +155,19 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     }
     return { ok: true };
   });
+
+  // Telegram: resume the active ride for this user (booker or rider). Auth = signed initData.
+  fastify.get('/api/ride/mine', async (req, reply) => {
+    const tg = tgauth.verifyInitData(String(req.query.initData || ''), riderBotToken);
+    if (!tg) return reply.code(401).send({ ok: false, error: 'telegram_auth_invalid' });
+    const id = String(tg.user.id);
+    const ride = await prisma.ride.findFirst({ where: { status: { in: ACTIVE }, OR: [{ rider: { telegramId: id } }, { bookedBy: { path: ['telegramId'], equals: id } }] }, include: { driver: true }, orderBy: { requestedAt: 'desc' } });
+    return { ok: true, ride: ride ? pubRide(ride) : null, phone: ride ? ride.riderPhone : null };
+  });
+
+  // Telegram webhooks (secret header set at setWebhook time).
+  fastify.post('/api/tg/rider', tgHook(u => riderBot.handleUpdate(u)));
+  fastify.post('/api/tg/driver', tgHook(u => driverBot.handleUpdate(u)));
 
   // ---- ops (owner) ----
   fastify.get('/api/ride/ops/queue', async (req, reply) => {
@@ -151,6 +194,23 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     return { ok: true, driver: drv };
   });
 
+  fastify.post('/api/ride/ops/drivers/:id/status', async (req, reply) => {
+    if (!ops(req, reply)) return;
+    const to = String((req.body || {}).status || '');
+    if (!['pending', 'approved', 'suspended'].includes(to)) return reply.code(400).send({ ok: false, error: 'status must be pending|approved|suspended' });
+    const drv = await prisma.driver.update({ where: { id: req.params.id }, data: { status: to } }).catch(() => null);
+    if (!drv) return reply.code(404).send({ ok: false, error: 'not_found' });
+    if (driverBot) driverBot.notifyStatus(drv, to).catch(() => {});
+    return { ok: true, driver: drv };
+  });
+
+  fastify.get('/api/ride/ops/driver-doc/:id', async (req, reply) => {
+    if (!ops(req, reply)) return;
+    const p = path.join(uploadsDir, String(req.params.id).replace(/[^a-z0-9]/gi, '') + '.jpg');
+    if (!fs.existsSync(p)) return reply.code(404).send({ ok: false, error: 'no_document' });
+    reply.type('image/jpeg'); return fs.createReadStream(p);
+  });
+
   fastify.post('/api/ride/ops/:id/assign', async (req, reply) => {
     if (!ops(req, reply)) return;
     const drv = await prisma.driver.findUnique({ where: { id: String((req.body || {}).driverId || '') } });
@@ -159,6 +219,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     if (res.count === 0) return reply.code(409).send({ ok: false, error: 'ride not assignable' });
     dispatch.cancel(req.params.id);
     const ride = await prisma.ride.findUnique({ where: { id: req.params.id }, include: { driver: true } });
+    fireNotify(req.params.id, 'assigned');
     return { ok: true, ride: pubRide(ride) };
   });
 
@@ -175,6 +236,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     if (to === 'cancelled') { data.cancelledAt = new Date(); data.cancelledBy = 'ops'; dispatch.cancel(ride.id); }
     const upd = await prisma.ride.update({ where: { id: ride.id }, data, include: { driver: true } });
     if (to === 'completed' && ride.driverId) await prisma.driver.update({ where: { id: ride.driverId }, data: { ridesCount: { increment: 1 } } });
+    if (['arrived', 'completed', 'cancelled'].includes(to)) fireNotify(ride.id, to);
     return { ok: true, ride: pubRide(upd) };
   });
 

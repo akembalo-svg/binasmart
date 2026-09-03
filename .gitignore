@@ -20,3 +20,4 @@ pids
 # os
 .DS_Store
 Thumbs.db
+uploads/
