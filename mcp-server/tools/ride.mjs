@@ -80,25 +80,29 @@ export function registerRideTools(server, { api, wrap, json }) {
 
   server.registerTool('request_ride', {
     title: 'Book a BinaSmart ride',
-    description: 'Books a ride in Addis Ababa at the fixed fare from quote_ride. ALWAYS confirm pickup, drop-off, tier, fare and the rider\'s Ethiopian phone number with the user before calling. A dispatcher assigns a driver; the rider is contacted on the phone given. Returns the ride id and a live tracking link.',
+    description: 'Books a ride in Addis Ababa at the fixed fare from quote_ride. ALWAYS confirm pickup, drop-off, tier, fare and the rider\'s Ethiopian phone number with the user before calling. A dispatcher assigns a driver; the rider is contacted on the phone given. Returns the ride id and a live tracking link. To book for someone else (e.g. a relative in Addis while you are abroad), pass passenger_name and passenger_phone; rider_name/rider_phone are then the booker and may be a foreign number.',
     inputSchema: {
       tier: z.enum(TIERS).describe('Vehicle tier from quote_ride'),
       pickup: z.string().min(2).max(120).describe(placeDesc('Pickup') + ' Prefer the pickup_coords from quote_ride.'),
       dropoff: z.string().min(2).max(120).describe(placeDesc('Drop-off') + ' Prefer the dropoff_coords from quote_ride.'),
-      rider_name: z.string().min(1).max(60).describe('Rider\'s name'),
-      rider_phone: z.string().min(9).max(20).describe('Ethiopian mobile: 09XXXXXXXX or +2519XXXXXXXX'),
+      rider_name: z.string().min(1).max(60).describe('Rider\'s name (or the booker\'s name when booking for someone else)'),
+      rider_phone: z.string().min(9).max(20).describe('Ethiopian mobile: 09XXXXXXXX or +2519XXXXXXXX (any number if booking for someone else)'),
       payment_method: z.enum(['cash', 'chapa']).optional().describe('cash (default) or chapa (telebirr/card link)'),
+      passenger_name: z.string().min(1).max(60).optional().describe('Book for someone else: the passenger\'s name (the driver calls the passenger)'),
+      passenger_phone: z.string().min(9).max(20).optional().describe('Book for someone else: the passenger\'s Ethiopian mobile (09… or +2519…)'),
     },
     annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-  }, wrap('request_ride', async ({ tier, pickup, dropoff, rider_name, rider_phone, payment_method }) => {
-    const phone = normPhone(rider_phone);
-    if (!phone) return toolError(PHONE_MSG);
+  }, wrap('request_ride', async ({ tier, pickup, dropoff, rider_name, rider_phone, payment_method, passenger_name, passenger_phone }) => {
+    const passenger = (passenger_name || passenger_phone) ? { name: String(passenger_name || '').trim(), phone: normPhone(passenger_phone) } : null;
+    if (passenger && (!passenger.name || !passenger.phone)) return toolError('To book for someone else, give both passenger_name and an Ethiopian passenger_phone (09XXXXXXXX or +2519XXXXXXXX).');
+    const phone = passenger ? String(rider_phone || '').replace(/[^\d+]/g, '') : normPhone(rider_phone);
+    if (!phone) return toolError(PHONE_MSG + ' If the booker is abroad, use passenger_name and passenger_phone for the person riding.');
     try {
       const r = await resolveBoth(api, pickup, dropoff); if (r.err) return r.err;
-      const res = await api.request({ tier, pickup: r.from, dropoff: r.to, riderName: String(rider_name).trim(), riderPhone: phone, paymentMethod: payment_method || 'cash', idemKey: idemKey(phone, r.from, r.to) });
+      const res = await api.request({ tier, pickup: r.from, dropoff: r.to, riderName: String(rider_name).trim(), riderPhone: phone, paymentMethod: payment_method || 'cash', idemKey: idemKey(passenger ? passenger.phone : phone, r.from, r.to), ...(passenger ? { passenger } : {}) });
       const ride = pubRide(res.ride);
-      return json({ ...ride, duplicate: !!res.duplicate,
-        next_step: `Read the fare (${ride.fare_etb} ETB) and ride id back to the user. A BinaSmart dispatcher will call ${phone} to confirm the driver. Track at ${ride.tracking_url}.`,
+      return json({ ...ride, duplicate: !!res.duplicate, booked_for: passenger ? passenger.name : undefined,
+        next_step: `Read the fare (${ride.fare_etb} ETB) and ride id back to the user. A BinaSmart dispatcher will call ${passenger ? passenger.phone + ' (the passenger)' : phone} to confirm the driver. Track at ${ride.tracking_url}.`,
         source_url: `${BASE}/ride`, whatsapp: WHATSAPP });
     } catch (e) { return apiErrorToTool(e); }
   }));

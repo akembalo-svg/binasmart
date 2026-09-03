@@ -34,7 +34,7 @@ export function makeRideApi({ baseUrl, timeoutMs = 8000, fetchImpl = fetch } = {
   return {
     search: (q, bias) => call('GET', `/api/ride/search?q=${enc(q)}` + (bias ? `&lat=${bias.lat}&lng=${bias.lng}` : '')),
     quote: (pickup, dropoff) => call('POST', '/api/ride/quote', { body: { pickup, dropoff } }),
-    request: b => call('POST', '/api/ride/request', { body: b, phone: b.riderPhone }),
+    request: b => call('POST', '/api/ride/request', { body: b, phone: (b.passenger && b.passenger.phone) || b.riderPhone }),
     status: (id, phone) => call('GET', `/api/ride/${enc(id)}?phone=${enc(phone)}`),
     cancel: (id, phone) => call('POST', `/api/ride/${enc(id)}/cancel`, { body: { phone }, phone }),
     settings: () => call('GET', '/api/ride/settings'),

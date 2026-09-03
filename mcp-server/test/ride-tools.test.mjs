@@ -66,6 +66,18 @@ test('request_ride validates phone and tier, books, returns tracking url', async
   assert.match(ok.next_step, /read the fare/i);
 });
 
+test('request_ride can book for someone else: passenger becomes the rider, booker phone may be foreign', async () => {
+  let sent = null;
+  const t = tools(fakeApi({ request: async b => { sent = b; return { ok: true, ride: { id: 'r9', status: 'dispatching', fareEtb: 250, tier: b.tier, pickup: b.pickup, dropoff: b.dropoff, driver: null } }; } }));
+  const ok = out(await t.request_ride({ tier: 'economy', pickup: 'edna', dropoff: '9.03,38.75', rider_name: 'Ibrahim', rider_phone: '+447700900123', passenger_name: 'Almaz', passenger_phone: '0922333444' }));
+  assert.equal(ok.ride_id, 'r9');
+  assert.deepEqual(sent.passenger, { name: 'Almaz', phone: '+251922333444' });
+  assert.equal(sent.riderPhone, '+447700900123');
+  assert.equal(ok.booked_for, 'Almaz');
+  const bad = await t.request_ride({ tier: 'economy', pickup: 'edna', dropoff: '9.03,38.75', rider_name: 'Ibrahim', rider_phone: '+447700900123' });
+  assert.equal(bad.isError, true, 'foreign booker without a passenger is rejected');
+});
+
 test('get_ride_status / cancel_ride pass phone through and map errors', async () => {
   const t = tools(fakeApi());
   const s = out(await t.get_ride_status({ ride_id: 'r1', rider_phone: '0911244344' }));
