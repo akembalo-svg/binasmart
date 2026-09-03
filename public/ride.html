@@ -14,7 +14,7 @@
 <link rel="icon" href="/icon-32.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
-<link rel="stylesheet" href="/static/ride/ui.css?v=7">
+<link rel="stylesheet" href="/static/ride/ui.css?v=8">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
 </head>
 <body>
@@ -78,6 +78,7 @@
 
   <div class="screen hidden" id="s-assigned">
     <div class="status" id="aStatus">ሹፌርዎ እየመጣ ነው · Driver on the way</div>
+    <div class="etaLive hidden" id="etaLive" aria-live="polite"></div>
     <figure class="carCard hidden" id="carCard">
       <img id="carImg" alt="Your driver's car" loading="lazy">
       <figcaption><span class="plateBig" id="carPlate"></span><span class="carMeta" id="carMeta"></span></figcaption>
@@ -118,6 +119,7 @@
 <script src="/static/vendor/pmtiles.js"></script>
 <script src="/static/ride/map.js?v=2"></script>
 <script src="/static/ride/tg.js?v=5"></script>
-<script src="/static/ride/app.js?v=5"></script>
+<script src="/static/ride/track.js?v=1"></script>
+<script src="/static/ride/app.js?v=6"></script>
 </body>
 </html>

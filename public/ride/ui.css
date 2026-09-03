@@ -84,3 +84,22 @@ body.tg .tglink{display:none}
 .carCard .matchHint{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.94);color:#064e3b;
   font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:99px;white-space:nowrap;
   max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 8px rgba(15,23,42,.18)}
+
+/* ---- live tracking (Phase 2) ---- */
+.etaLive{margin:8px 0 2px;padding:10px 12px;border-radius:14px;font-size:13.5px;font-weight:800;
+  background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;line-height:1.4}
+.etaLive.here{background:#fffbeb;color:#92400e;border-color:#fde68a}
+.etaLive.warn{background:#f1f5f9;color:#475569;border-color:#e2e8f0;font-weight:700}
+
+/* The driver's real car photo, moving. The ring stays upright; only the nose turns. */
+.trkCar{position:relative;width:54px;height:54px}
+.trkPulse{position:absolute;inset:-6px;border-radius:50%;background:rgba(5,150,105,.2);animation:trkp 2.4s ease-out infinite}
+@keyframes trkp{0%{transform:scale(.65);opacity:.9}100%{transform:scale(1.45);opacity:0}}
+.trkRing{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:3px solid #fff;
+  background:#ecfdf5;box-shadow:0 6px 18px -6px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center}
+.trkRing img{width:100%;height:100%;object-fit:cover;display:block}
+.trkRing.noPhoto b{font-size:26px}
+.trkRing.stale{filter:grayscale(1) opacity(.6)}
+.trkNose{position:absolute;inset:0;transition:transform .9s ease-out}
+.trkNose::before{content:'';position:absolute;left:50%;top:-11px;transform:translateX(-50%);
+  width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:11px solid var(--em)}

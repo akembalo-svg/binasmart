@@ -175,9 +175,18 @@
   function startPoll() { stopPoll(); tick(); S.poll = setInterval(tick, 4000); }
   function stopPoll() { if (S.poll) clearInterval(S.poll); S.poll = null; }
   document.addEventListener('visibilitychange', function () { if (!S.ride) return; if (document.hidden) stopPoll(); else if (!['completed', 'cancelled'].includes(S.ride.status)) startPoll(); });
+  var LIVE = ['assigned', 'arriving', 'arrived', 'ontrip'];
   function tick() {
     if (!S.ride) return;
-    api('/api/ride/' + S.ride.id + '?phone=' + encodeURIComponent(ME.phone)).then(function (d) { if (d.ok) render(d.ride); }).catch(function () {});
+    var id = S.ride.id, ph = encodeURIComponent(ME.phone);
+    api('/api/ride/' + id + '?phone=' + ph).then(function (d) { if (d.ok) render(d.ride); }).catch(function () {});
+    // The live position is a separate, cheaper endpoint so the driver's map data never waits on
+    // fare and payment fields the rider already has.
+    if (LIVE.indexOf(S.ride.status) >= 0) {
+      api('/api/ride/' + id + '/track?phone=' + ph)
+        .then(function (d) { if (d.ok && S.ride) window.BinaTrack.update(S.ride, d.live); })
+        .catch(function () {});
+    }
   }
   function render(r) {
     S.ride = r;
@@ -202,15 +211,17 @@
       $('dCall').href = d.phone ? 'tel:' + d.phone : '#'; $('dWa').href = d.phone ? 'https://wa.me/' + String(d.phone).replace(/\D/g, '') : '#';
       $('aFare').textContent = r.fareEtb + ' ETB'; $('aPay').textContent = '· ' + (r.paymentMethod === 'cash' ? 'cash' : 'telebirr/Chapa');
       $('cancelAssigned').classList.toggle('hidden', r.status === 'ontrip');
+      // Once a driver is on the way the map belongs to the car, not the quoted route.
+      window.BinaMap.clearRoute();
     } else if (r.status === 'completed') {
-      stopPoll(); lsDel('bina_ride_active'); show('s-done');
+      stopPoll(); window.BinaTrack.stop(); lsDel('bina_ride_active'); show('s-done');
       $('doneFare').textContent = r.fareEtb + ' ETB';
       $('payBox').innerHTML = r.paymentStatus === 'paid' ? '<div class="small">✅ ተከፍሏል · Paid</div>'
         : (r.paymentMethod === 'cash' ? '<div class="small">💵 ለሹፌሩ በጥሬ ገንዘብ ይክፈሉ · Pay the driver in cash</div>'
         : '<button class="cta" id="payNow">📱 Pay ' + r.fareEtb + ' ETB · telebirr / Chapa</button>');
       var pn = $('payNow'); if (pn) pn.addEventListener('click', payNow);
       if (r.driverRating) markStars(r.driverRating);
-    } else if (r.status === 'cancelled') { stopPoll(); lsDel('bina_ride_active'); show('s-cancelled'); }
+    } else if (r.status === 'cancelled') { stopPoll(); window.BinaTrack.stop(); lsDel('bina_ride_active'); show('s-cancelled'); }
   }
   function payNow() {
     api('/api/pay/init', { amount: S.ride.fareEtb, name: ME.name, phone: ME.phone, purpose: 'BinaSmart Ride ' + S.ride.id, bt: 'ride', bc: S.ride.id })
