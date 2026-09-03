@@ -36,9 +36,12 @@ function pubRide(ride) {
     driver: d ? { name: d.name, phone: d.phone, photo: d.photo, carPhoto: d.carPhotoUrl || null, plate: d.plate, vehicle: [d.vehicleColour, d.vehicleMake].filter(Boolean).join(' '), rating: d.rating, tier: d.tier } : null };
 }
 
-module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY, riderBotToken, webhookSecret, riderBot, driverBot, riderNotify, uploadsDir }) {
+module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY, riderBotToken, webhookSecret, riderBot, driverBot, riderNotify, uploadsDir, drive, location }) {
   const quoteRL = limiter(600000, 60), requestRL = limiter(600000, 5), searchRL = limiter(60000, 40);
   const lookupRL = limiter(60000, 120);
+  // The driver app heartbeats every 4 s (15/min) and the rider map polls every 3 s (20/min);
+  // these ceilings leave room for a retry storm on a bad connection without inviting abuse.
+  const driveRL = limiter(60000, 60), trackRL = limiter(60000, 90);
   const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
   const fireNotify = (id, ev) => { if (riderNotify) setImmediate(() => riderNotify.notify(id, ev).catch(() => {})); };
   const tgHook = handler => async (req, reply) => {
@@ -50,6 +53,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
   // ---- pages ----
   fastify.get('/ride', async (req, reply) => reply.sendFile('ride.html'));
   fastify.get('/ride-ops', async (req, reply) => reply.sendFile('ride-ops.html'));
+  fastify.get('/drive', async (req, reply) => reply.sendFile('drive.html'));
 
   // ---- public ----
   fastify.get('/api/ride/settings', async () => {
@@ -164,6 +168,28 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     const ride = await prisma.ride.findFirst({ where: { status: { in: ACTIVE }, OR: [{ rider: { telegramId: id } }, { bookedBy: { path: ['telegramId'], equals: id } }] }, include: { driver: true }, orderBy: { requestedAt: 'desc' } });
     return { ok: true, ride: ride ? pubRide(ride) : null, phone: ride ? ride.riderPhone : null };
   });
+
+  // ---- driver app (/drive) ----
+  // Auth is Telegram initData inside driverApi; the limiter is keyed on the IP because a request that
+  // fails to authenticate has no driver id yet.
+  if (drive) {
+    const dr = h => async (req, reply) => {
+      if (!driveRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
+      return h(req, reply);
+    };
+    fastify.post('/api/drive/session', dr(drive.session));
+    fastify.post('/api/drive/online', dr(drive.online));
+    fastify.post('/api/drive/ping', dr(drive.ping));
+    fastify.post('/api/drive/offer/:id/accept', dr(drive.accept));
+    fastify.post('/api/drive/offer/:id/decline', dr(drive.decline));
+    fastify.post('/api/drive/ride/:id/status', dr(drive.status));
+
+    // The rider's live map. Same ownership rule as GET /api/ride/:id: the phone must match the ride.
+    fastify.get('/api/ride/:id/track', async (req, reply) => {
+      if (!trackRL(req.params.id)) return reply.code(429).send({ ok: false, error: 'slow_down' });
+      return drive.track(req, reply, ride => normPhone(req.query.phone) === ride.riderPhone);
+    });
+  }
 
   // Telegram webhooks (secret header set at setWebhook time).
   fastify.post('/api/tg/rider', tgHook(u => riderBot.handleUpdate(u)));

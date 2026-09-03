@@ -5,10 +5,11 @@ const fs = require('fs'); const os = require('os'); const path = require('path')
 const { makeDriverBot } = require('../ride/driverBot');
 
 function fakeApi() {
-  const sent = [], files = [];
-  return { sent, files,
+  const sent = [], files = [], answers = [], edits = [];
+  return { sent, files, answers, edits,
     sendMessage: async (chat, text, extra) => { sent.push({ chat, text, extra }); return { message_id: sent.length }; },
-    answerCallbackQuery: async () => true,
+    answerCallbackQuery: async (id, text, alert) => { answers.push({ id, text, alert: !!alert }); return true; },
+    editMessageText: async (chat, message_id, text, extra) => { edits.push({ chat, message_id, text, extra }); return true; },
     getFile: async id => { files.push(id); return { file_path: 'photos/' + id + '.jpg' }; },
     downloadFile: async () => Buffer.from([0xff, 0xd8, 0xff]) };
 }
@@ -16,15 +17,19 @@ function fakePrisma() {
   const drivers = [];
   return { drivers, driver: {
     findUnique: async ({ where }) => drivers.find(d => d.phone === where.phone) || null,
+    findFirst: async ({ where }) => drivers.find(d => d.telegramId === where.telegramId) || null,
     create: async ({ data }) => { const d = { id: 'd' + (drivers.length + 1), rating: 5, ridesCount: 0, ...data }; drivers.push(d); return d; },
     update: async ({ where, data }) => { const d = drivers.find(x => x.id === where.id); Object.assign(d, data); return d; } } };
 }
-function bot() {
+function bot(offers) {
   const api = fakeApi(), prisma = fakePrisma(), notes = [];
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'lic-'));
-  const b = makeDriverBot({ prisma, api, telegram: { ownerNote: async t => { notes.push(t); return true; } }, uploadsDir: dir, baseUrl: 'https://bina.et' });
+  const b = makeDriverBot({ prisma, api, telegram: { ownerNote: async t => { notes.push(t); return true; } }, uploadsDir: dir, baseUrl: 'https://bina.et', offers });
   return { api, prisma, notes, dir, b };
 }
+// An offer card as the auction sends it, plus the tap that answers it.
+const offerCard = () => ({ message_id: 77, chat: { id: 555 }, text: '\u{1F695} NEW RIDE \u00b7 ECONOMY\n\n\u{1F4CD} Pickup: Edna Mall\n   0.9 km away\n\u{1F3C1} Drop-off: Piassa\n\u{1F6E3} Trip: 5 km\n\u{1F4B0} You earn 295 ETB\n\nFirst to accept gets it' });
+const tap = data => ({ callback_query: { id: 'cq1', data, message: offerCard() } });
 const msg = (text, extra) => ({ message: Object.assign({ chat: { id: 555 }, text }, extra || {}) });
 const photo = id => msg(undefined, { photo: [{ file_id: 'small' }, { file_id: id }] });
 
@@ -108,4 +113,64 @@ test('notifyStatus messages the driver on approval, nothing without telegramId',
   assert.equal(await b.notifyStatus({ id: 'd1', telegramId: '555' }, 'approved'), true);
   assert.match(api.sent.at(-1).text, /Approved/);
   assert.equal(await b.notifyStatus({ id: 'd2', telegramId: null }, 'approved'), false);
+});
+
+
+test('an approved driver taps Accept: the card settles, the popup confirms, and the trip link follows', async () => {
+  const taken = [];
+  const t = bot({ accept: async (rideId, driverId) => { taken.push([rideId, driverId]); return { ok: true, rideId, driverId }; },
+                  decline: async () => ({ ok: true }) });
+  t.prisma.drivers.push({ id: 'd9', name: 'Abel', telegramId: '555', tier: 'economy', plate: 'AA 1', status: 'approved', online: true, away: false, rating: 5, ridesCount: 3, earningsTodayEtb: 0 });
+  await t.b.handleUpdate(tap('acc:r1'));
+  assert.deepEqual(taken, [['r1', 'd9']]);
+  assert.equal(t.api.answers.length, 1, 'the tap is answered exactly once');
+  assert.match(t.api.answers[0].text, /Yours/);
+  assert.equal(t.api.edits.length, 1, 'the offer card is rewritten so it no longer looks live');
+  assert.match(t.api.edits[0].text, /YOURS/);
+  assert.match(t.api.edits[0].text, /Edna Mall/, 'the trip details are kept');
+  const last = t.api.sent[t.api.sent.length - 1];
+  assert.equal(last.extra.reply_markup.inline_keyboard[0][0].web_app.url, 'https://bina.et/drive');
+});
+
+test('losing the race is explained, not silently dropped', async () => {
+  const t = bot({ accept: async () => ({ ok: false, error: 'taken' }), decline: async () => ({ ok: true }) });
+  t.prisma.drivers.push({ id: 'd9', name: 'Abel', telegramId: '555', tier: 'economy', plate: 'AA 1', status: 'approved', online: true, away: false, rating: 5, ridesCount: 3, earningsTodayEtb: 0 });
+  await t.b.handleUpdate(tap('acc:r1'));
+  assert.match(t.api.edits[0].text, /Another driver got this one/);
+  assert.equal(t.api.answers[0].alert, true, 'a popup, because the driver was expecting the ride');
+});
+
+test('Skip closes the offer; an expired one says so', async () => {
+  let first = true;
+  const t = bot({ accept: async () => ({ ok: true }),
+                  decline: async () => { if (first) { first = false; return { ok: true }; } return { ok: false, error: 'no_offer' }; } });
+  t.prisma.drivers.push({ id: 'd9', name: 'Abel', telegramId: '555', tier: 'economy', plate: 'AA 1', status: 'approved', online: true, away: false, rating: 5, ridesCount: 3, earningsTodayEtb: 0 });
+  await t.b.handleUpdate(tap('dec:r1'));
+  assert.match(t.api.edits[0].text, /Skipped/);
+  await t.b.handleUpdate(tap('dec:r1'));
+  assert.match(t.api.edits[1].text, /already closed/);
+});
+
+test('a pending or unregistered driver cannot accept anything', async () => {
+  const t = bot({ accept: async () => { throw new Error('must not be called'); }, decline: async () => ({ ok: true }) });
+  await t.b.handleUpdate(tap('acc:r1'));
+  assert.match(t.api.answers[0].text, /Register first/);
+  t.prisma.drivers.push(Object.assign({}, { id: 'd9', name: 'Abel', telegramId: '555', tier: 'economy', plate: 'AA 1', status: 'approved', online: true, away: false, rating: 5, ridesCount: 3, earningsTodayEtb: 0 }, { status: 'pending' }));
+  await t.b.handleUpdate(tap('acc:r1'));
+  assert.match(t.api.answers[1].text, /not active yet/);
+});
+
+test('/start does not restart registration for an existing driver', async () => {
+  const t = bot();
+  t.prisma.drivers.push(Object.assign({}, { id: 'd9', name: 'Abel', telegramId: '555', tier: 'economy', plate: 'AA 1', status: 'approved', online: true, away: false, rating: 5, ridesCount: 3, earningsTodayEtb: 0 }, { ridesCount: 7, earningsTodayEtb: 640 }));
+  await t.b.handleUpdate(msg('/start'));
+  const home = t.api.sent[0];
+  assert.match(home.text, /online and receiving offers/);
+  assert.match(home.text, /640 ETB/);
+  assert.equal(home.extra.reply_markup.inline_keyboard[0][0].web_app.url, 'https://bina.et/drive');
+
+  t.prisma.drivers[0].status = 'pending';
+  await t.b.handleUpdate(msg('/start'));
+  assert.match(t.api.sent[1].text, /registration is with us/i);
+  assert.equal(t.prisma.drivers.length, 1, 'no duplicate driver was created');
 });

@@ -26,7 +26,9 @@ function makeTgApi({ token, fetchImpl, apiBase, timeoutMs }) {
     setWebhook: (url, secret_token) => call('setWebhook', { url, secret_token, allowed_updates: ['message', 'callback_query'] }),
     setChatMenuButton: (url, text) => call('setChatMenuButton', { menu_button: { type: 'web_app', text, web_app: { url } } }),
     setMyCommands: commands => call('setMyCommands', { commands }),
-    answerCallbackQuery: callback_query_id => call('answerCallbackQuery', { callback_query_id }),
+    answerCallbackQuery: (callback_query_id, text, show_alert) => call('answerCallbackQuery', { callback_query_id, text, show_alert: !!show_alert }),
+    // Turning a live offer card into a settled one is the clearest signal a driver can get.
+    editMessageText: (chat_id, message_id, text, extra) => call('editMessageText', Object.assign({ chat_id, message_id, text }, extra || {})),
   };
 }
 module.exports = { makeTgApi };

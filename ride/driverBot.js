@@ -1,5 +1,6 @@
 'use strict';
-// @binasmartdriverbot: seven-step registration → Driver(status:'pending'). Phase 1 only registers; Phase 2 adds online/offers.
+// @binasmartdriverbot: seven-step registration → Driver(status:'pending'), then the working bot for an
+// approved driver: ride offers arrive here as Accept/Skip cards and /start opens the driver app.
 // Two photos: the driving licence (private, owner-key only) and the front of the car with the plate visible
 // (shown to riders once the driver is approved, so they can match the car at the kerb).
 const fs = require('fs'); const path = require('path');
@@ -8,7 +9,7 @@ const { normPhone } = require('./phone');
 const TIERS = { moto: '🏍 Moto', bajaj: '🛺 Bajaj', economy: '🚗 Economy', comfort: '🚙 Comfort', xl: '🚐 XL / Van' };
 const TTL_MS = 3600 * 1000;
 
-function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, now }) {
+function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now }) {
   const clock = now || Date.now;
   const sessions = new Map(); // chatId -> { step, data, t }
   function sess(chatId) {
@@ -38,7 +39,9 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, now }) {
   async function handleUpdate(update) {
     if (update.callback_query) {
       const cq = update.callback_query; const chatId = String(cq.message.chat.id);
-      try { await api.answerCallbackQuery(cq.id); } catch (e) { /* ignore */ }
+      if (!/^(acc|dec):/.test(cq.data || '')) { try { await api.answerCallbackQuery(cq.id); } catch (e) { /* ignore */ } }
+      const offer = /^(acc|dec):(.+)$/.exec(cq.data || '');
+      if (offer) return decide(chatId, cq, offer[1], offer[2]);
       const s = sess(chatId); const m = /^tier:(\w+)$/.exec(cq.data || '');
       if (s.step === 'tier' && m && TIERS[m[1]]) { s.data.tier = m[1]; s.step = 'vehicle'; return ask(chatId, 'vehicle'); }
       return ask(chatId, s.step);
@@ -46,7 +49,12 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, now }) {
     const msg = update.message; if (!msg || !msg.chat) return;
     const chatId = String(msg.chat.id);
     const text = String(msg.text || '').trim();
-    if (text.startsWith('/start')) { sessions.delete(chatId); sess(chatId); return api.sendMessage(chatId, WELCOME); }
+    if (text.startsWith('/start') || text === '/app' || text === '/online') {
+      const known = await prisma.driver.findFirst({ where: { telegramId: chatId } });
+      if (known && known.status === 'approved') return driverHome(chatId, known);
+      if (known) return api.sendMessage(chatId, '⏳ Your registration is with us. We will message you here the moment it is approved.\nምዝገባዎ በእጃችን ነው፤ ሲጸድቅ እናሳውቅዎታለን።', { reply_markup: { remove_keyboard: true } });
+      sessions.delete(chatId); sess(chatId); return api.sendMessage(chatId, WELCOME);
+    }
     const s = sess(chatId);
     switch (s.step) {
       case 'name':
@@ -94,15 +102,62 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, now }) {
     }
   }
 
+  // What an approved driver sees. The app button is the whole product; the text is only a fallback
+  // for a Telegram client too old for Mini Apps.
+  function driverHome(chatId, drv) {
+    const on = drv.online && !drv.away;
+    return api.sendMessage(chatId,
+      '🚗 ' + drv.name + ' · ' + (TIERS[drv.tier] || drv.tier) + ' · ' + drv.plate + '\n' +
+      (on ? '🟢 You are online and receiving offers.' : '⚪ You are offline. Open the app and tap GO to start receiving offers.') +
+      '\n\nToday: ' + (drv.earningsTodayEtb || 0) + ' ETB · ' + drv.ridesCount + ' trips total · ⭐ ' + drv.rating +
+      '\n\nOpen the app to go online, see the map and accept rides.\nመተግበሪያውን ክፈቱ።',
+      { reply_markup: { inline_keyboard: [[{ text: '🚗 Open the driver app · መተግበሪያ', web_app: { url: baseUrl + '/drive' } }]] } });
+  }
+
+  // Accept / Skip straight from the offer card. The auction owns the race; this only reports it.
+  async function decide(chatId, cq, what, rideId) {
+    const ans = (t, alert) => api.answerCallbackQuery(cq.id, t, !!alert).catch(() => {});
+    const drv = await prisma.driver.findFirst({ where: { telegramId: chatId } });
+    if (!drv) return ans('Register first · መጀመሪያ ይመዝገቡ', true);
+    if (drv.status !== 'approved') return ans('Your account is not active yet', true);
+    if (!offers) return ans('Offers are not running right now', true);
+    const msgId = cq.message && cq.message.message_id;
+    const settle = extra => {
+      if (!msgId) return;
+      api.editMessageText(chatId, msgId, String(cq.message.text || '').split('\n').slice(0, 6).join('\n') + '\n\n' + extra, {}).catch(() => {});
+    };
+    if (what === 'dec') {
+      const r = await offers.decline(rideId, drv.id);
+      settle(r.ok ? '⏭ Skipped.' : '⌛ This offer had already closed.');
+      return ans(r.ok ? 'Skipped' : 'Already closed');
+    }
+    const r = await offers.accept(rideId, drv.id);
+    if (r.ok) {
+      settle('✅ YOURS — open the app for the map and the passenger\'s number.');
+      await ans('Yours! Open the app 🚗');
+      return api.sendMessage(chatId, '✅ Ride accepted. Open the app for turn-by-turn and the passenger\'s phone.\nጉዞው የእርስዎ ነው። መተግበሪያውን ክፈቱ።',
+        { reply_markup: { inline_keyboard: [[{ text: '🗺 Open the trip · ጉዞውን ክፈት', web_app: { url: baseUrl + '/drive' } }]] } });
+    }
+    const why = r.error === 'taken' ? '😔 Another driver got this one.'
+      : r.error === 'busy' ? '⚠️ Finish your current ride first.'
+      : r.error === 'no_offer' ? '⌛ This offer has expired.'
+      : '⚠️ ' + r.error;
+    settle(why);
+    return ans(why.replace(/^\S+\s/, ''), true);
+  }
+
   async function notifyStatus(driver, status) {
     if (!driver || !driver.telegramId) return false;
-    const text = status === 'approved' ? '✅ Approved! Welcome to BinaSmart. We will message you here when trips start. Registration is free, 0% commission during launch.\nጸድቋል! እንኳን ደህና መጡ። ጉዞዎች ሲጀምሩ እዚህ እናሳውቅዎታለን።'
+    const text = status === 'approved' ? '✅ Approved! Welcome to BinaSmart.\n\nOpen the driver app, tap GO, and ride offers will come to you. Registration is free and commission is 0% during our launch.\nጸድቋል! እንኳን ደህና መጡ። መተግበሪያውን ከፍተው GO ይጫኑ።'
       : status === 'suspended' ? 'Your BinaSmart driver account is paused. Contact support: https://bina.et/support' : null;
     if (!text) return false;
-    try { await api.sendMessage(String(driver.telegramId), text); return true; }
+    const extra = status === 'approved'
+      ? { reply_markup: { inline_keyboard: [[{ text: '🚗 Open the driver app · መተግበሪያ', web_app: { url: baseUrl + '/drive' } }]] } }
+      : {};
+    try { await api.sendMessage(String(driver.telegramId), text, extra); return true; }
     catch (e) { console.error('[ride/driverBot] notifyStatus failed: ' + e.message); return false; }
   }
 
-  return { handleUpdate, notifyStatus, _sessions: sessions };
+  return { handleUpdate, notifyStatus, driverHome, decide, _sessions: sessions };
 }
 module.exports = { makeDriverBot, TIERS };
