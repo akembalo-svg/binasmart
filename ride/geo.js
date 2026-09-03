@@ -14,6 +14,55 @@ function haversineM(a, b) {
 }
 function likeEscape(s) { return s.replace(/[%_\\]/g, c => '\\' + c); }
 
+// ---- canonical Addis landmarks -------------------------------------------------------------
+// Photon/OSM ranks by string similarity, not by what a rider means. Left to itself it sends
+// "Bole Airport" to a mosque 2.3 km from the terminal, "Bole Medhanealem" to a bank branch, and
+// "Ayat" to a person called Hayat 14 km away. These are the places people actually name in Addis,
+// with coordinates taken from the search data itself (the correct hit, not the top-ranked one).
+// A match here is put FIRST; the usual results still follow, so nothing is hidden.
+const LANDMARKS = [
+  { label: 'Bole Airport', labelAm: 'ቦሌ አየር መንገድ', lat: 8.97919, lng: 38.79658, sub: 'Addis Ababa Bole International Airport',
+    alias: ['bole airport', 'addis ababa bole international airport', 'bole international airport', 'airport', 'add airport', 'ቦሌ አየር መንገድ'] },
+  { label: 'Bole Medhanealem', labelAm: 'ቦሌ መድኃኔዓለም', lat: 8.99672, lng: 38.78833, sub: 'Bole, Addis Ababa',
+    alias: ['bole medhanealem', 'bole medhane alem', 'bole medhanialem', 'medhanealem', 'ቦሌ መድኃኔዓለም'] },
+  { label: 'Ayat', labelAm: 'አያት', lat: 9.02179, lng: 38.87702, sub: 'Ayat, Addis Ababa',
+    alias: ['ayat', 'ayat square', 'ayat condominium', 'አያት'] },
+  { label: 'Megenagna', labelAm: 'መገናኛ', lat: 9.01961, lng: 38.80167, sub: 'Megenagna, Addis Ababa',
+    alias: ['megenagna', 'meganagna', 'መገናኛ'] },
+  { label: 'Piassa', labelAm: 'ፒያሳ', lat: 9.03459, lng: 38.75494, sub: 'Piassa, Addis Ababa',
+    alias: ['piassa', 'piazza', 'ፒያሳ'] },
+  { label: 'Meskel Square', labelAm: 'መስቀል አደባባይ', lat: 9.01060, lng: 38.76150, sub: 'Meskel Square, Addis Ababa',
+    alias: ['meskel square', 'meskel adebabay', 'መስቀል አደባባይ'] },
+  { label: 'Mexico', labelAm: 'ሜክሲኮ', lat: 9.01039, lng: 38.74455, sub: 'Mexico, Addis Ababa',
+    alias: ['mexico', 'mexico square', 'ሜክሲኮ'] },
+  { label: 'Sarbet', labelAm: 'ሳር ቤት', lat: 8.99541, lng: 38.73771, sub: 'Sarbet, Addis Ababa',
+    alias: ['sarbet', 'sar bet', 'ሳር ቤት'] },
+  { label: 'Arat Kilo', labelAm: 'አራት ኪሎ', lat: 9.03295, lng: 38.76338, sub: 'Arat Kilo, Addis Ababa',
+    alias: ['arat kilo', '4 kilo', 'አራት ኪሎ'] },
+  { label: 'Merkato', labelAm: 'መርካቶ', lat: 9.02919, lng: 38.73926, sub: 'Merkato, Addis Ababa',
+    alias: ['merkato', 'mercato', 'merkato market', 'መርካቶ'] },
+  { label: 'CMC', labelAm: 'ሲኤምሲ', lat: 9.01977, lng: 38.84758, sub: 'CMC, Addis Ababa',
+    alias: ['cmc', 'ሲኤምሲ'] },
+  { label: 'Summit', labelAm: 'ሰሚት', lat: 9.01739, lng: 38.82530, sub: 'Summit, Addis Ababa',
+    alias: ['summit', 'ሰሚት'] },
+  { label: 'Gerji', labelAm: 'ገርጂ', lat: 8.99538, lng: 38.80948, sub: 'Gerji, Addis Ababa',
+    alias: ['gerji', 'gerchi', 'ገርጂ'] },
+  { label: 'Kality', labelAm: 'ቃሊቲ', lat: 8.93801, lng: 38.76306, sub: 'Kality, Addis Ababa',
+    alias: ['kality', 'kaliti', 'ቃሊቲ'] },
+  { label: 'Edna Mall', labelAm: 'እድና ሞል', lat: 8.99723, lng: 38.78668, sub: 'Bole, Addis Ababa',
+    alias: ['edna mall', 'edna', 'እድና ሞል'] },
+];
+const normPlace = t => String(t || '').toLowerCase().replace(/[^\p{L}\p{N} ]/gu, '').replace(/\s+/g, ' ').trim();
+const LANDMARK_BY_ALIAS = new Map();
+for (const L of LANDMARKS) for (const a of L.alias) LANDMARK_BY_ALIAS.set(normPlace(a), L);
+function landmarkFor(q) {
+  const n = normPlace(q);
+  if (!n) return null;
+  const hit = LANDMARK_BY_ALIAS.get(n);
+  return hit ? { label: hit.label, labelAm: hit.labelAm, lat: hit.lat, lng: hit.lng, sub: hit.sub, landmark: true } : null;
+}
+
+
 function makeGeo({ routerUrl, fetchFn, prisma }) {
   const f = fetchFn || fetch;
   let lastRouteWarn = 0;
@@ -75,6 +124,8 @@ function makeGeo({ routerUrl, fetchFn, prisma }) {
   async function searchPlaces(q, bias) {
     q = (q || '').trim().slice(0, 80);
     if (q.length < 2) return [];
+    // A named landmark answers for itself. Everything else still follows it in the list.
+    const pinned = landmarkFor(q);
     const like = likeEscape(q);
     const [bs, shops] = await Promise.all([
       prisma.building.findMany({
@@ -106,7 +157,10 @@ function makeGeo({ routerUrl, fetchFn, prisma }) {
         cacheSet(key, osm);
       }
     } catch (e) { osm = []; }
-    return [...dir, ...osm].slice(0, 10);
+    const rest = [...dir, ...osm];
+    if (!pinned) return rest.slice(0, 10);
+    const dupe = h => haversineM({ lat: pinned.lat, lng: pinned.lng }, { lat: h.lat, lng: h.lng }) < 200;
+    return [pinned, ...rest.filter(h => !dupe(h))].slice(0, 10);
   }
 
   return { route, searchPlaces, haversineM };

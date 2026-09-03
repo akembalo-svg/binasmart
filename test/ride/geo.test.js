@@ -82,3 +82,61 @@ test('when the router is down there are no invented turns', async () => {
   assert.deepEqual(r.instructions, [], 'an empty list, never a guess');
   assert.ok(r.distanceM > 0);
 });
+
+// ---- landmark resolution -------------------------------------------------------------------
+// Photon ranks by string similarity, which sent "Bole Airport" to a mosque 2.3 km from the
+// terminal and "Ayat" to a person named Hayat 14 km away. These pin the places people name.
+function geoWithOsm(osmHits) {
+  const prisma = { building: { findMany: async () => [] }, shop: { findMany: async () => [] } };
+  const fetchFn = async () => ({ ok: true, json: async () => ({ features: (osmHits || []).map(h => ({
+    properties: { name: h.label, street: h.sub || '' },
+    geometry: { coordinates: [h.lng, h.lat] } })) }) });
+  return makeGeo({ routerUrl: 'http://r', fetchFn, prisma });
+}
+
+test('a named landmark answers first, whatever the search engine ranks highest', async () => {
+  // The real failure: the top OSM hit for "Bole Airport" is a mosque on Ring Road.
+  const geo = geoWithOsm([{ label: 'Bole Airport Mosque', lat: 8.97846, lng: 38.77592, sub: 'Ring Road' }]);
+  const r = await geo.searchPlaces('Bole Airport');
+  assert.equal(r[0].label, 'Bole Airport', 'the terminal, not the mosque');
+  assert.equal(r[0].landmark, true);
+  assert.ok(Math.abs(r[0].lat - 8.97919) < 0.001 && Math.abs(r[0].lng - 38.79658) < 0.001);
+  assert.ok(haversineM(r[0], { lat: 8.97846, lng: 38.77592 }) > 2000, 'the mosque was 2 km+ away');
+  assert.equal(r.some(h => h.label === 'Bole Airport Mosque'), true, 'the other hits are still offered');
+});
+
+test('"Ayat" resolves to the Ayat area, not to a person with a similar name', async () => {
+  const geo = geoWithOsm([{ label: 'Hayat Mohammed Abdurahman', lat: 8.95, lng: 38.70, sub: '' }]);
+  const r = await geo.searchPlaces('Ayat');
+  assert.equal(r[0].label, 'Ayat');
+  assert.ok(haversineM(r[0], { lat: 9.02179, lng: 38.87702 }) < 100);
+});
+
+test('"Bole Medhanealem" resolves to the area, not to a bank branch named after it', async () => {
+  const geo = geoWithOsm([{ label: 'Zemen Bank Bole MedhaneAlem Branch', lat: 8.99441, lng: 38.79021, sub: 'Cameroon Street' }]);
+  const r = await geo.searchPlaces('bole medhane alem');
+  assert.equal(r[0].label, 'Bole Medhanealem', 'an alias spelling still resolves');
+  assert.equal(r[0].labelAm, 'ቦሌ መድኃኔዓለም');
+});
+
+test('a hit within 200 m of the landmark is dropped: for a pickup they are the same place', async () => {
+  const geo = geoWithOsm([
+    { label: 'Piassa (piazza)', lat: 9.03370, lng: 38.75475, sub: '' },   // ~100 m — same place
+    { label: 'Piassa Atekelet Tera', lat: 9.03442, lng: 38.74753, sub: '' }, // ~800 m — a real alternative
+  ]);
+  const r = await geo.searchPlaces('Piassa');
+  assert.equal(r[0].label, 'Piassa');
+  assert.equal(r.some(h => h.label === 'Piassa (piazza)'), false, 'the near-duplicate is collapsed');
+  assert.equal(r.some(h => h.label === 'Piassa Atekelet Tera'), true, 'the genuinely different one survives');
+});
+
+test('Amharic names and loose spellings hit the same landmark; unknown places are untouched', async () => {
+  const geo = geoWithOsm([{ label: 'Some Cafe', lat: 9.01, lng: 38.76, sub: '' }]);
+  for (const q of ['መገናኛ', 'megenagna', '  Megenagna  ', 'MEGENAGNA']) {
+    const r = await geo.searchPlaces(q);
+    assert.equal(r[0].label, 'Megenagna', 'failed for ' + JSON.stringify(q));
+  }
+  const other = await geo.searchPlaces('Some Cafe');
+  assert.equal(other[0].label, 'Some Cafe', 'a normal search is not hijacked');
+  assert.equal(other[0].landmark, undefined);
+});
