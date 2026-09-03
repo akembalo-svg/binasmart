@@ -141,3 +141,9 @@ from BinaSmart. For licensing inquiries: [bina.et](https://bina.et) · info@bina
 claude mcp add --transport http binasmart https://bina.et/mcp
 cd mcp-server && npm install && node --test
 ```
+
+## Telegram Mini App + bots
+
+- **Riders:** [@bina_smart_bot](https://t.me/bina_smart_bot) opens `bina.et/ride` as a Telegram Mini App: one-tap verified phone, Telegram main button, status pushes (assigned / arrived / completed / cancelled). Anyone can **book for someone else** (passenger name + Ethiopian phone; the booker gets the updates) — including from abroad.
+- **Drivers:** [@binasmartdriverbot](https://t.me/binasmartdriverbot) registers drivers in six steps (name, phone, vehicle, plate, licence photo) into the pending list; approve in `/ride-ops`. Registration is free, 0% commission during launch.
+- Server modules: `ride/tgauth.js`, `ride/tgApi.js`, `ride/riderBot.js`, `ride/driverBot.js`, `ride/riderNotify.js`; webhooks `/api/tg/rider`, `/api/tg/driver` (secret header). Runbook: [`ops/telegram/README.md`](ops/telegram/README.md).
