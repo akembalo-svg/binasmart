@@ -1038,6 +1038,7 @@ model Ride {
   cancelledBy   String?
   concierge     Boolean   @default(false)
   estimate      Boolean   @default(false)
+  bookedBy      Json?     // { name, phone, telegramId } when the booker is not the passenger (diaspora etc.)
   riderName     String    // snapshot at request time — do not backfill from Rider
   riderPhone    String    // snapshot at request time
   riderRating   Int?
