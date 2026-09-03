@@ -1,0 +1,63 @@
+# ── bina.et — BinaSmart (pre-migration bootstrap; certbot will add SSL) ──
+server {
+    server_name bina.et www.bina.et;
+    access_log /var/log/nginx/bina.access.log;
+    server_tokens off;
+    client_max_body_size 8m;
+
+    location /.well-known/acme-challenge/ { root /var/www/html; }
+
+    location = /.well-known/mcp-registry-auth {
+        alias /var/www/connectcare/binasmart/public/.well-known/mcp-registry-auth;
+        default_type text/plain;
+    }
+
+    location ^~ /mcp {
+        proxy_pass         http://127.0.0.1:3021;
+        proxy_http_version 1.1;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   Connection "";
+        proxy_buffering    off;
+        proxy_read_timeout 120s;
+    }
+
+    location / {
+        proxy_pass         http://127.0.0.1:4210;
+        proxy_http_version 1.1;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    listen [::]:443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/bina.et/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/bina.et/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+}
+
+server {
+    if ($host = www.bina.et) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = bina.et) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    listen [::]:80;
+    server_name bina.et www.bina.et;
+    return 404; # managed by Certbot
+
+
+
+
+}

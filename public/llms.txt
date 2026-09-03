@@ -34,3 +34,6 @@ Note: BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Ro
 - Tenders: https://bina.et/tenders
 - News: https://bina.et/news
 - 3D building directory example: https://bina.et/b/darulle
+
+## Developer resources
+- MCP server (Claude, ChatGPT, Gemini): https://bina.et/mcp — quote/book rides, search the directory, read the guides. Docs at that URL.
