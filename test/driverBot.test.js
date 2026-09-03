@@ -53,7 +53,7 @@ test('happy path: /start → name → contact → tier button → vehicle → pl
   assert.equal(notes.length, 1); assert.match(notes[0], /Abel Tesfaye/); assert.match(notes[0], /A12345/);
 });
 
-test('wrong input re-asks the current step; duplicate phone ends politely; a new session then starts at name', async () => {
+test('wrong input re-asks the current step; duplicate phone ends politely; the next message starts a fresh registration', async () => {
   const { api, prisma, b } = bot();
   prisma.drivers.push({ id: 'd0', phone: '+251911244344', status: 'approved' });
   await b.handleUpdate(msg('/start'));
@@ -64,8 +64,9 @@ test('wrong input re-asks the current step; duplicate phone ends politely; a new
   assert.match(api.sent.at(-1).text, /Ethiopian number|phone/i);
   await b.handleUpdate(msg('0911244344'));
   assert.match(api.sent.at(-1).text, /already registered/i);
-  await b.handleUpdate(msg('anything'));
-  assert.match(api.sent.at(-1).text, /name/i);
+  await b.handleUpdate(msg('Another Driver'));   // fresh session: taken as the name → asks for the phone
+  assert.match(api.sent.at(-1).text, /phone/i);
+  assert.equal(b._sessions.get('555').step, 'phone');
 });
 
 test('licence step: sending text instead of a photo is refused and no driver is created', async () => {
