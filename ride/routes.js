@@ -55,6 +55,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
   fastify.get('/ride', async (req, reply) => reply.sendFile('ride.html'));
   fastify.get('/ride-ops', async (req, reply) => reply.sendFile('ride-ops.html'));
   fastify.get('/drive', async (req, reply) => reply.sendFile('drive.html'));
+  fastify.get('/drive-with-us', async (req, reply) => reply.sendFile('drive-with-us.html'));
 
   // ---- public ----
   fastify.get('/api/ride/settings', async () => {
