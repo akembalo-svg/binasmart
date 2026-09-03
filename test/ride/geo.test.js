@@ -140,3 +140,26 @@ test('Amharic names and loose spellings hit the same landmark; unknown places ar
   assert.equal(other[0].label, 'Some Cafe', 'a normal search is not hijacked');
   assert.equal(other[0].landmark, undefined);
 });
+
+test('the second batch of neighbourhood names resolves, including the one search got wrong', async () => {
+  // Tor Hailoch is the real failure here: the top hit is on Chad Street near Mexico.
+  const geo = geoWithOsm([{ label: 'Torhailoch, Abenet', lat: 9.01069, lng: 38.74262, sub: 'Chad Street, Mexico' }]);
+  const tor = await geo.searchPlaces('Torhailoch');
+  assert.equal(tor[0].label, 'Tor Hailoch');
+  assert.ok(haversineM(tor[0], { lat: 9.01069, lng: 38.74262 }) > 2000, 'the Mexico hit was 2 km+ away');
+
+  const plain = geoWithOsm([]);
+  const expect = {
+    'Lebu': [8.96114, 38.72542], 'ለቡ': [8.96114, 38.72542],
+    'Jemo': [8.95996, 38.71148], 'jemo 1': [8.95996, 38.71148],
+    'Shiro Meda': [9.05840, 38.75983], 'sheromeda': [9.05840, 38.75983],
+    'Kotebe': [9.03713, 38.83985], 'ኮተቤ': [9.03713, 38.83985],
+    'tor hayloch': [9.01140, 38.72291],
+  };
+  for (const [q, [lat, lng]] of Object.entries(expect)) {
+    const r = await plain.searchPlaces(q);
+    assert.ok(r.length, 'no result for ' + q);
+    assert.equal(r[0].landmark, true, q + ' should be a pinned landmark');
+    assert.ok(haversineM(r[0], { lat, lng }) < 50, q + ' resolved to the wrong point');
+  }
+});

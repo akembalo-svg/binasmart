@@ -51,6 +51,18 @@ const LANDMARKS = [
     alias: ['kality', 'kaliti', 'ቃሊቲ'] },
   { label: 'Edna Mall', labelAm: 'እድና ሞል', lat: 8.99723, lng: 38.78668, sub: 'Bole, Addis Ababa',
     alias: ['edna mall', 'edna', 'እድና ሞል'] },
+  { label: 'Lebu', labelAm: 'ለቡ', lat: 8.96114, lng: 38.72542, sub: 'Lebu, Addis Ababa',
+    alias: ['lebu', 'lebu condominium', 'ለቡ'] },
+  { label: 'Jemo', labelAm: 'ጀሞ', lat: 8.95996, lng: 38.71148, sub: 'Jemo, Addis Ababa',
+    alias: ['jemo', 'jemo 1', 'jemo1', 'jemo one', 'ጀሞ'] },
+  // The top search hit for this one sits on Chad Street near Mexico, 2.2 km from the real
+  // Tor Hailoch cluster on Smuts Avenue. Pinned to the cluster.
+  { label: 'Tor Hailoch', labelAm: 'ጦር ኃይሎች', lat: 9.01140, lng: 38.72291, sub: 'Tor Hailoch, Addis Ababa',
+    alias: ['tor hailoch', 'torhailoch', 'tor hayloch', 'torhayloch', 'tor haylock', 'ጦር ኃይሎች'] },
+  { label: 'Shiro Meda', labelAm: 'ሽሮ ሜዳ', lat: 9.05840, lng: 38.75983, sub: 'Shiro Meda, Addis Ababa',
+    alias: ['shiro meda', 'shiromeda', 'shero meda', 'sheromeda', 'ሽሮ ሜዳ'] },
+  { label: 'Kotebe', labelAm: 'ኮተቤ', lat: 9.03713, lng: 38.83985, sub: 'Kotebe, Addis Ababa',
+    alias: ['kotebe', 'kotebbe', 'ኮተቤ'] },
 ];
 const normPlace = t => String(t || '').toLowerCase().replace(/[^\p{L}\p{N} ]/gu, '').replace(/\s+/g, ' ').trim();
 const LANDMARK_BY_ALIAS = new Map();
