@@ -792,6 +792,17 @@ const escH = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').r
 const amDate = d => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 
 
+// A post's share card, if it has one, in both sizes. The grid uses the 600x315 thumb (~20 KB) so a
+// page of 24 cards costs half a megabyte rather than one and a half; the hero and the article use the
+// full card. Same filename convention as ogFor(): og-<slug>.png, and og-<slug>-thumb.png beside it.
+function cardFor(slug){
+  try {
+    const dir = require('path').join(__dirname, 'public');
+    const full = 'og-' + slug + '.png', thumb = 'og-' + slug + '-thumb.png';
+    if (!fs.existsSync(require('path').join(dir, full))) return null;
+    return { full: '/static/' + full, thumb: fs.existsSync(require('path').join(dir, thumb)) ? '/static/' + thumb : '/static/' + full };
+  } catch (e) { return null; }
+}
 function ogFor(slug, fallback){ try { return fs.existsSync(require('path').join(__dirname,'public','og-'+slug+'.png')) ? 'https://bina.et/static/og-'+slug+'.png' : fallback; } catch(e){ return fallback; } }
 function newsShell({ title, desc, canonical, extraHead = '', body, active = 'news', ogImage = 'https://bina.et/static/bina-news.png' }) {
   return `<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -836,6 +847,13 @@ main{max-width:1080px;margin:0 auto;padding:0 20px}
 .hero-a p{color:var(--mut);font-size:16px}
 .meta{display:flex;gap:14px;align-items:center;color:var(--mut);font-size:12.5px;margin-top:14px}
 .hero-vis{aspect-ratio:4/3;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:96px;box-shadow:inset 0 0 0 1px var(--line)}
+.hero-vis.img{aspect-ratio:1200/630;overflow:hidden;font-size:0;background:#fff}
+.hero-vis.img img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb{display:block;aspect-ratio:1200/630;border-radius:14px;overflow:hidden;margin-bottom:14px;background:#f3f1ec;box-shadow:inset 0 0 0 1px var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.thumb:hover img{transform:scale(1.03)}
+.art-hero{display:block;aspect-ratio:1200/630;border-radius:18px;overflow:hidden;margin:26px 0 30px;box-shadow:0 18px 44px -22px rgba(0,0,0,.35),inset 0 0 0 1px var(--line);background:#fff}
+.art-hero img{width:100%;height:100%;object-fit:cover;display:block}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:0 0 40px}
 .card{padding:30px 26px;border-bottom:1px solid var(--line)}
 .card:nth-child(3n+1){padding-left:0}
@@ -927,8 +945,11 @@ fastify.get('/news', async (req, reply) => {
       <h2><a href="/news/${hero.slug}">${escH(hero.title)}</a></h2>
       <p>${escH(hero.excerpt)}</p>
       <div class="meta sans"><span>${escH(hero.author)}</span><span>·</span><span>${amDate(hero.publishedAt)}</span><span>·</span><span>${hero.readMinutes} ደቂቃ ንባብ</span></div>
-    </div><div class="hero-vis" style="background:${(NEWS_CATS[hero.category] || '#888')}12">${hero.heroEmoji || '📰'}</div></div>` : '';
-  const cards = rest.map(p => `<div class="card">${catPill(p.category)}<h3><a href="/news/${p.slug}">${escH(p.title)}</a></h3><p>${escH(p.excerpt).slice(0, 140)}…</p><div class="meta sans"><span>${amDate(p.publishedAt)}</span><span>·</span><span>${p.readMinutes} ደቂቃ</span></div></div>`).join('');
+    </div>${(() => { const c = cardFor(hero.slug); return c
+      ? `<a class="hero-vis img" href="/news/${hero.slug}"><img src="${c.full}" width="1200" height="630" alt="${escH(hero.title)}" fetchpriority="high" decoding="async"></a>`
+      : `<div class="hero-vis" style="background:${(NEWS_CATS[hero.category] || '#888')}12">${hero.heroEmoji || '📰'}</div>`; })()}</div>` : '';
+  const thumbOf = p => { const c = cardFor(p.slug); return c ? `<a class="thumb" href="/news/${p.slug}"><img src="${c.thumb}" width="600" height="315" alt="" loading="lazy" decoding="async"></a>` : ''; };
+  const cards = rest.map(p => `<div class="card">${thumbOf(p)}${catPill(p.category)}<h3><a href="/news/${p.slug}">${escH(p.title)}</a></h3><p>${escH(p.excerpt).slice(0, 140)}…</p><div class="meta sans"><span>${amDate(p.publishedAt)}</span><span>·</span><span>${p.readMinutes} ደቂቃ</span></div></div>`).join('');
   const body = `<main>
     <div class="phero" style="--pg:linear-gradient(135deg,#0f2027,#155e75);--wm:'📰'"><h1>ዜና · News</h1><div class="am sans">ቴክኖሎጂ · ግንባታ · ንግድ · ሪል እስቴት</div><div class="sub sans">Ethiopian tech, construction &amp; business news — in Amharic, politics-free.</div></div>
     <div class="chips" style="--chipon:#155e75">${chips}</div>
@@ -947,12 +968,13 @@ fastify.get('/news/:slug', async (req, reply) => {
   const share = encodeURIComponent('https://bina.et/news/' + p.slug);
   const shareT = encodeURIComponent(p.title);
   const others = await prisma.newsPost.findMany({ where: { published: true, slug: { not: p.slug } }, orderBy: { publishedAt: 'desc' }, take: 3 });
-  const rel = others.map(o => `<div class="card">${catPill(o.category)}<h3><a href="/news/${o.slug}">${escH(o.title)}</a></h3><div class="meta sans"><span>${amDate(o.publishedAt)}</span></div></div>`).join('');
+  const rel = others.map(o => { const c = cardFor(o.slug); return `<div class="card">${c ? `<a class="thumb" href="/news/${o.slug}"><img src="${c.thumb}" width="600" height="315" alt="" loading="lazy" decoding="async"></a>` : ''}${catPill(o.category)}<h3><a href="/news/${o.slug}">${escH(o.title)}</a></h3><div class="meta sans"><span>${amDate(o.publishedAt)}</span></div></div>`; }).join('');
   const body = `<main><article class="art">
     ${catPill(p.category)}
     <h1>${escH(p.title)}</h1>
     <p class="lead">${escH(p.excerpt)}</p>
     <div class="rule sans"><span>${escH(p.author)}</span><span>·</span><span>${amDate(p.publishedAt)}</span><span>·</span><span>${p.readMinutes} ደቂቃ ንባብ</span></div>
+    ${(() => { const c = cardFor(p.slug); return c ? `<figure class="art-hero"><img src="${c.full}" width="1200" height="630" alt="${escH(p.title)}" fetchpriority="high" decoding="async"></figure>` : ''; })()}
     <div class="body-t">${p.bodyHtml}</div>
     <div class="share sans">
       <a href="https://t.me/share/url?url=${share}&text=${shareT}">📣 Telegram</a>

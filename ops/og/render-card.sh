@@ -56,6 +56,12 @@ if [ -f "$OUT" ]; then
 fi
 cp "$TMP/opt.png" "$OUT"
 
+# The news grid shows a 600x315 thumb (~20 KB) so a page of cards stays light on mobile data.
+THUMB="$ROOT/public/og-$SLUG-thumb.png"
+convert "$OUT" -resize 600x315 -strip "$TMP/thumb.png" 2>/dev/null \
+  && pngquant --quality=65-90 --speed 1 --force --output "$TMP/thumb.png" "$TMP/thumb.png" 2>/dev/null \
+  && cp "$TMP/thumb.png" "$THUMB" && echo "  thumb $(identify -format '%wx%h' "$THUMB") $(echo "$(stat -c%s "$THUMB")/1024" | bc) KB"
+
 printf 'wrote %s\n  %s  %.0f KB raw -> %.0f KB\n' "$OUT" "$DIM" "$(echo "$RAW/1024" | bc -l)" "$(echo "$(stat -c%s "$OUT")/1024" | bc -l)"
 echo "  og:image will be https://bina.et/static/og-$SLUG.png"
 echo "  it is served only if the post slug is exactly: $SLUG"
