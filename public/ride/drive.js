@@ -21,6 +21,7 @@
     driver: null, job: null, offer: null, offerEndsAt: 0,
     pos: null, gpsOk: false, lastPingOk: 0, busy: false, lock: null, routeFor: '', offerTotal: 0,
     routeFrom: null, routeAt: 0, fitted: '', alertTimer: 0, saidStep: -1, saidNear: '', legSpoken: '',
+    nav: false, freeCam: 0,
   };
   var carMk = null, map = null, pickMk = null, dropMk = null;
 
@@ -86,6 +87,24 @@
     if (p.bearing != null) carMk.setRotation(p.bearing);
   }
   function follow(p) { if (map && p) map.easeTo({ center: [p.lng, p.lat], duration: 900 }); }
+
+  // Navigation camera: close in, tilted, and rotated so the road ahead is up the screen. If the
+  // driver drags the map we stop fighting them for ten seconds, then resume.
+  function navCamera(p) {
+    if (!map || !p || !st.nav) return;
+    if (Date.now() - st.freeCam < 10000) return;
+    map.easeTo({
+      center: [p.lng, p.lat],
+      bearing: p.bearing != null ? p.bearing : map.getBearing(),
+      pitch: 55, zoom: 17, duration: 900, essential: true,
+    });
+  }
+  function watchPan() {
+    if (!map || map.__panWatched) return;
+    map.__panWatched = true;
+    map.on('dragstart', function () { st.freeCam = Date.now(); });
+    map.on('rotatestart', function () { st.freeCam = Date.now(); });
+  }
 
   // A pin alone does not tell a driver anything. These carry who and what, and the active leg glows.
   function pin(kind, point, label) {
@@ -174,7 +193,7 @@
         accuracy: g.coords.accuracy,
       };
       ensureMap(); drawCar(st.pos);
-      if (st.job) { drawLeg(); paintLegLine(); paintNav(); }
+      if (st.job) { drawLeg(); paintLegLine(); paintNav(); paintNavHud(); navCamera(st.pos); }
       banner('');
     }, function (e) {
       st.gpsOk = false;
@@ -212,12 +231,13 @@
     $('tfare').textContent = j.driverTakeEtb + ' ETB to you · ' + km(j.distanceM) + ' · ' + mins(j.durationS);
     var target = j.status === 'ontrip' ? j.dropoff : j.pickup;
     $('tnav').href = 'https://www.google.com/maps/dir/?api=1&destination=' + target.lat + ',' + target.lng + '&travelmode=driving';
-    $('tnav').textContent = j.status === 'ontrip' ? '🧭 Navigate to drop-off' : '🧭 Navigate to pickup';
+    $('tgo').textContent = j.status === 'ontrip' ? '🧭 አቅጣጫ ወደ መድረሻ · Navigate' : '🧭 አቅጣጫ ወደ ተሳፋሪው · Navigate';
     paintLegLine();
     if (j.bookedBy && j.bookedBy.name) {
       $('tbooked').textContent = '📞 Booked by ' + j.bookedBy.name + (j.bookedBy.phone ? ' · ' + j.bookedBy.phone : '') + ' (not the passenger)';
       $('tbooked').classList.remove('hidden');
     } else { $('tbooked').classList.add('hidden'); }
+    if (st.nav) { paintNavHud(); drawLeg(); return; } // nav mode owns the screen
     show('trip');
     drawLeg();
   }
@@ -289,6 +309,43 @@
     }
   }
 
+  // ---------- in-app navigation ----------
+  function enterNav() {
+    if (!st.job) return;
+    st.nav = true; st.freeCam = 0;
+    document.body.classList.add('navmode');
+    $('navhud').classList.remove('hidden');
+    window.DNav.unlock();
+    watchPan();
+    st.routeFor = ''; // force a fresh plan for the leg we are about to drive
+    if (st.pos) { drawLeg(); navCamera(st.pos); }
+    var who = (st.job.riderName || '').split(' ')[0];
+    window.DNav.say(st.job.status === 'ontrip' ? 'ወደ መድረሻው ይሂዱ' : 'ወደ ተሳፋሪው ' + who + ' ይሂዱ');
+    paintNavHud();
+  }
+  function exitNav() {
+    st.nav = false;
+    document.body.classList.remove('navmode');
+    $('navhud').classList.add('hidden');
+    if (map) map.easeTo({ pitch: 0, bearing: 0, zoom: 15, duration: 700 });
+    render();
+  }
+  function paintNavHud() {
+    if (!st.nav || !st.job) return;
+    var s = STAGE[st.job.status] || STAGE.assigned;
+    $('nhAct').textContent = s.btn;
+    $('nhAct').dataset.next = s.next;
+    var nav = (st.pos && window.DNav.ready()) ? window.DNav.update(st.pos) : null;
+    var onTrip = st.job.status === 'ontrip';
+    var target = onTrip ? st.job.dropoff : st.job.pickup;
+    var rem = (nav && !nav.offRoute) ? nav.remainingM
+      : (st.pos ? Math.round(metres(st.pos, target) * 1.35) : null);
+    var secs = rem != null ? Math.round(rem / 6.1) : null;
+    $('nhRem').textContent = rem != null ? km(rem) : '—';
+    $('nhEta').textContent = (secs != null ? Math.max(1, Math.round(secs / 60)) + ' ደቂቃ · min' : 'ጂፒኤስ · GPS')
+      + ' → ' + (onTrip ? 'መድረሻ' : (st.job.riderName || 'ተሳፋሪ').split(' ')[0]);
+  }
+
   function paintIdle() {
     var d = st.driver;
     $('iname').textContent = d.name;
@@ -316,6 +373,7 @@
     if (st.job) return paintTrip();
     if (st.offer) return paintOffer(st.offer);
     stopAlert(); $('nav').classList.add('hidden');
+    if (st.nav) { st.nav = false; document.body.classList.remove('navmode'); $('navhud').classList.add('hidden'); }
     window.BinaMap.clearRoute(); window.BinaMap.setDrop(null); clearTargets();
     st.routeFor = ''; st.routeFrom = null; st.fitted = ''; st.legRoadM = null; st.legRoadS = null;
     paintIdle();
@@ -393,7 +451,7 @@
           st.job = null; st.driver = j.driver; st.legSpoken = '';
           banner('✅ Trip complete · ' + (j.driver.earningsTodayEtb || 0) + ' ETB today', true);
           render();
-        } else { st.job = j.job; st.driver = j.driver; render(); }
+        } else { st.job = j.job; st.driver = j.driver; st.routeFor = ''; st.legSpoken = ''; render(); paintNavHud(); }
       });
     });
   }
@@ -423,7 +481,22 @@
     else banner('🔇 ድምጽ ጠፍቷል · sound off', true);
   });
   paintMute();
-  $('recenter').addEventListener('click', function () { follow(st.pos); });
+  $('tgo').addEventListener('click', enterNav);
+  $('nhExit').addEventListener('click', exitNav);
+  // The ladder button is duplicated in the HUD so a driver never leaves navigation to advance a trip.
+  $('nhAct').addEventListener('click', function () {
+    var self = this, next = self.dataset.next, id = st.job && st.job.id;
+    if (!id || !next) return;
+    if (next === 'completed') {
+      return window.TG.confirm('ጉዞውን ጨርሰው ' + st.job.fareEtb + ' ብር ይሰብስቡ? · Complete and collect ' + st.job.fareEtb + ' ETB?',
+        function (yes) { if (yes) send(self, id, next); });
+    }
+    send(self, id, next);
+  });
+  $('recenter').addEventListener('click', function () {
+    st.freeCam = 0;
+    if (st.nav) navCamera(st.pos); else follow(st.pos);
+  });
   $('tcancel').addEventListener('click', function () { window.open('https://t.me/binasmartdriverbot', '_blank'); });
 
   // ---------- boot ----------

@@ -140,3 +140,28 @@ body.drv #map::after{content:'';position:absolute;inset:0;background:rgba(11,18,
 .dghost.off{color:#64748b}
 /* The banner sits above the map but must never cover the trip card. */
 @media(max-height:600px){.dnavTxt b{font-size:14.5px}.dnavIc{font-size:25px;width:32px}}
+
+/* ---- in-app navigation mode ---- */
+.taltnav{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.taltnav a{color:var(--nmut);font-size:11.5px;text-decoration:underline}
+.taltnav .tlink{margin:0}
+
+.dnavhud{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:9;
+  display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:18px;
+  background:rgba(21,31,51,.97);border:1px solid var(--nline);box-shadow:0 -12px 40px -16px #000}
+.nhInfo{flex:1;min-width:0}
+.nhInfo b{display:block;font-size:21px;font-weight:900;color:var(--amb);line-height:1.1}
+.nhInfo small{display:block;font-size:11.5px;color:var(--nmut);margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dbtn.nhAct{flex:0 0 auto;padding:13px 16px;font-size:14px;max-width:52%}
+.dnavhud .dghost{width:34px;height:34px;font-size:15px}
+
+/* In navigation the map is the interface: the banner grows, the rest gets out of the way. */
+body.navmode #trip,body.navmode #idle{display:none!important}
+body.navmode .dnav{top:calc(52px + env(safe-area-inset-top));padding:14px 15px}
+body.navmode .dnavIc{font-size:38px;width:46px}
+body.navmode .dnavTxt b{font-size:19px}
+body.navmode .dnavTxt small{font-size:12px}
+body.navmode .dstats{opacity:.55}
+body.navmode #map{filter:brightness(.7) saturate(.8) contrast(1.05)}
+@media(max-height:620px){body.navmode .dnavTxt b{font-size:17px}.nhInfo b{font-size:19px}}

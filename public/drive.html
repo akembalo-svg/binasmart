@@ -9,7 +9,7 @@
 <link rel="icon" href="/icon-32.png">
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
 <link rel="stylesheet" href="/static/ride/ui.css?v=7">
-<link rel="stylesheet" href="/static/ride/drive.css?v=4">
+<link rel="stylesheet" href="/static/ride/drive.css?v=5">
 </head>
 <body class="drv">
 <div id="map"></div>
@@ -59,10 +59,23 @@
   <div class="orow"><i class="odotp"></i><div><b id="tpick">—</b><small id="tetaP">—</small></div></div>
   <div class="orow"><i class="odotd"></i><div><b id="tdrop">—</b><small id="tfare">—</small></div></div>
   <div class="tacts">
-    <a id="tnav" class="dbtn ghost" target="_blank" rel="noopener">🧭 Navigate</a>
-    <button id="tnext" class="dbtn go">I'm on my way</button>
+    <button id="tgo" class="dbtn ghost">🧭 አቅጣጫ · Navigate</button>
+    <button id="tnext" class="dbtn go">ተነሳሁ · On my way</button>
   </div>
-  <button id="tcancel" class="tlink">Problem with this trip? Call us</button>
+  <div class="taltnav">
+    <a id="tnav" href="#" target="_blank" rel="noopener">Google Maps ↗</a>
+    <button id="tcancel" class="tlink">Problem with this trip? Call us</button>
+  </div>
+</section>
+
+<!-- In-app navigation HUD (Amharic). The turn banner above doubles as the instruction. -->
+<section id="navhud" class="dnavhud hidden">
+  <div class="nhInfo">
+    <b id="nhRem">—</b>
+    <small id="nhEta">—</small>
+  </div>
+  <button id="nhAct" class="dbtn go nhAct">—</button>
+  <button id="nhExit" class="dghost" aria-label="Leave navigation">✕</button>
 </section>
 
 <!-- Idle / GO -->
@@ -89,6 +102,6 @@
 <script src="/static/ride/tg.js?v=2"></script>
 <script src="/static/ride/map.js?v=3"></script>
 <script src="/static/ride/drivenav.js?v=1"></script>
-<script src="/static/ride/drive.js?v=7"></script>
+<script src="/static/ride/drive.js?v=8"></script>
 </body>
 </html>
