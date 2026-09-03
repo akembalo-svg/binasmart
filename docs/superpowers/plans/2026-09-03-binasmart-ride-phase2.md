@@ -1,6 +1,6 @@
 # BinaSmart Ride Phase 2 Implementation Plan — driver app, auto-dispatch, live tracking
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Approved drivers go online in their own app at `bina.et/drive` (also a Telegram Mini App), ride requests are broadcast to the nearest three of them, and the rider watches the driver's own car photo glide along the road with a live ETA — while the existing concierge fallback stays intact.
 
@@ -48,7 +48,7 @@
 - Modify: `prisma/schema.prisma`, `ride/settings.js`
 - Test: `test/settings.test.js` (existing file — add one case)
 
-- [ ] **Step 1: Add the two models and the new columns**
+- [x] **Step 1: Add the two models and the new columns**
 
 Write locally and `scp` to `/tmp/p2-schema.py`, then run `python3 /tmp/p2-schema.py`:
 
@@ -120,16 +120,16 @@ open(p, "w").write(s)
 print("schema patched")
 ```
 
-- [ ] **Step 2: Push the schema**
+- [x] **Step 2: Push the schema**
 
 Run: `cd /var/www/connectcare/binasmart && npx prisma db push 2>&1 | grep -iE "in sync|error" && npx prisma generate 2>&1 | grep -i generated`
 Expected: `Your database is now in sync with your Prisma schema.` and `Generated Prisma Client`.
 
-- [ ] **Step 3: Offer window default 20 → 25 s**
+- [x] **Step 3: Offer window default 20 → 25 s**
 
 In `ride/settings.js`, change the line `  offerWindowS: 20,` to `  offerWindowS: 25,`.
 
-- [ ] **Step 4: Add the settings test case**
+- [x] **Step 4: Add the settings test case**
 
 Append to `test/settings.test.js`:
 
@@ -150,12 +150,12 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 ```
 
-- [ ] **Step 5: Run the suite**
+- [x] **Step 5: Run the suite**
 
 Run: `npm test 2>&1 | grep -E "^# (tests|pass|fail)"`
 Expected: `# fail 0`, total 85 or more.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /var/www/connectcare/binasmart && git add prisma/schema.prisma ride/settings.js test/settings.test.js && git commit -q -m "feat(ride): Phase 2 schema — RideOffer, DriverLocation, driver tracking columns" && git log --oneline -1
@@ -168,7 +168,7 @@ cd /var/www/connectcare/binasmart && git add prisma/schema.prisma ride/settings.
 **Files:**
 - Create: `ride/location.js`, `test/location.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 // test/location.test.js
@@ -261,12 +261,12 @@ test('staleSweep marks silent drivers away and pings each of them once', async (
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `cd /var/www/connectcare/binasmart && node --test test/location.test.js 2>&1 | grep -E "^# (pass|fail)|Cannot find"`
 Expected: `Cannot find module '../ride/location'`.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```js
 // ride/location.js
@@ -355,12 +355,12 @@ function makeLocation({ prisma, api, now, staleMs }) {
 module.exports = { makeLocation, TRAIL_MAX };
 ```
 
-- [ ] **Step 4: Run the test**
+- [x] **Step 4: Run the test**
 
 Run: `node --test test/location.test.js 2>&1 | grep -E "^# (pass|fail)"`
 Expected: `# pass 5`, `# fail 0`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add ride/location.js test/location.test.js && git commit -q -m "feat(ride): driver location module — validated fixes, trail, away sweep" && git log --oneline -1
@@ -373,7 +373,7 @@ git add ride/location.js test/location.test.js && git commit -q -m "feat(ride): 
 **Files:**
 - Create: `ride/offers.js`, `test/offers.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 // test/offers.test.js
@@ -547,12 +547,12 @@ test('accept on an assigned ride, an unknown driver or without an open offer is 
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test test/offers.test.js 2>&1 | grep -E "Cannot find"`
 Expected: `Cannot find module '../ride/offers'`.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```js
 // ride/offers.js
@@ -687,12 +687,12 @@ function makeOffers({ prisma, geo, settings, api, telegram, riderNotify, baseUrl
 module.exports = { makeOffers };
 ```
 
-- [ ] **Step 4: Run the test**
+- [x] **Step 4: Run the test**
 
 Run: `node --test test/offers.test.js 2>&1 | grep -E "^# (pass|fail)|^not ok"`
 Expected: `# pass 7`, `# fail 0`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add ride/offers.js test/offers.test.js && git commit -q -m "feat(ride): broadcast dispatch — nearest 3, first-accept-wins mutex, widen, concierge fallback" && git log --oneline -1
@@ -705,7 +705,7 @@ git add ride/offers.js test/offers.test.js && git commit -q -m "feat(ride): broa
 **Files:**
 - Create: `ride/driverApi.js`, `test/driverApi.test.js`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 // test/driverApi.test.js
@@ -819,12 +819,12 @@ test('accept and decline delegate to the offers module and pass its refusal thro
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test test/driverApi.test.js 2>&1 | grep -E "Cannot find"`
 Expected: `Cannot find module '../ride/driverApi'`.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```js
 // ride/driverApi.js
@@ -955,12 +955,12 @@ function registerDriverApi(fastify, { prisma, location, offers, riderNotify, dri
 module.exports = { registerDriverApi, ACTIVE };
 ```
 
-- [ ] **Step 4: Run the test**
+- [x] **Step 4: Run the test**
 
 Run: `node --test test/driverApi.test.js 2>&1 | grep -E "^# (pass|fail)|^not ok"`
 Expected: `# pass 5`, `# fail 0`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add ride/driverApi.js test/driverApi.test.js && git commit -q -m "feat(ride): driver REST API — online, location, job steps, earnings" && git log --oneline -1
@@ -974,7 +974,7 @@ git add ride/driverApi.js test/driverApi.test.js && git commit -q -m "feat(ride)
 - Modify: `ride/dispatch.js`, `ride/index.js`, `ride/routes.js`, `ride/driverBot.js`
 - Test: `test/dispatch.test.js` (existing — add one case)
 
-- [ ] **Step 1: `ride/dispatch.js` — hand off to offers when drivers are online**
+- [x] **Step 1: `ride/dispatch.js` — hand off to offers when drivers are online**
 
 Replace the body of `start` with:
 
@@ -998,7 +998,7 @@ and change the factory signature line to accept `offers`:
 function makeDispatch({ prisma, telegram, settings, offers, setTimeoutFn, clearTimeoutFn }) {
 ```
 
-- [ ] **Step 2: Add the dispatch test case**
+- [x] **Step 2: Add the dispatch test case**
 
 Append to `test/dispatch.test.js` (create with the two-line header from Task 1 Step 4 if it does not exist):
 
@@ -1019,7 +1019,7 @@ test('with online drivers, start() opens offers and only falls back to concierge
 });
 ```
 
-- [ ] **Step 3: `ride/index.js` — wire the new modules**
+- [x] **Step 3: `ride/index.js` — wire the new modules**
 
 Apply with a local Python script `scp`'d to `/tmp/p2-index.py`:
 
@@ -1091,7 +1091,7 @@ module.exports = function registerRide(fastify, deps) {
 };
 ```
 
-- [ ] **Step 4: `ride/routes.js` — driver position on the rider poll, and `/drive`**
+- [x] **Step 4: `ride/routes.js` — driver position on the rider poll, and `/drive`**
 
 Apply with `/tmp/p2-routes.py`:
 
@@ -1129,7 +1129,7 @@ open(p, "w").write(s)
 print("routes patched")
 ```
 
-- [ ] **Step 5: Driver bot — Accept/Decline buttons and a Drive button**
+- [x] **Step 5: Driver bot — Accept/Decline buttons and a Drive button**
 
 Apply with `/tmp/p2-driverbot.py`:
 
@@ -1185,7 +1185,7 @@ open(p, "w").write(s)
 print("driverBot patched")
 ```
 
-- [ ] **Step 6: Run the whole suite and restart**
+- [x] **Step 6: Run the whole suite and restart**
 
 Run:
 ```bash
@@ -1197,7 +1197,7 @@ curl -s -o /dev/null -w "drive api no auth: %{http_code}\n" -X POST https://bina
 ```
 Expected: all checks silent, `# fail 0`, the log line ends `Phase 2 dispatch active`, `/` `/ride` `/ai` = 200, `/drive` = 404 for now (the page arrives in Task 6), and `drive api no auth: 401`.
 
-- [ ] **Step 7: Commit and push**
+- [x] **Step 7: Commit and push**
 
 ```bash
 git add ride/dispatch.js ride/index.js ride/routes.js ride/driverBot.js test/dispatch.test.js && git commit -q -m "feat(ride): wire Phase 2 — offers into dispatch, driver API, live position on the rider poll" && git push -q origin main && git log --oneline -1
@@ -1210,7 +1210,7 @@ git add ride/dispatch.js ride/index.js ride/routes.js ride/driverBot.js test/dis
 **Files:**
 - Create: `public/drive.html`, `public/drive/app.js`, `public/drive/ui.css`
 
-- [ ] **Step 1: `public/drive.html`**
+- [x] **Step 1: `public/drive.html`**
 
 ```html
 <!DOCTYPE html>
@@ -1289,7 +1289,7 @@ git add ride/dispatch.js ride/index.js ride/routes.js ride/driverBot.js test/dis
 </html>
 ```
 
-- [ ] **Step 2: `public/drive/ui.css`**
+- [x] **Step 2: `public/drive/ui.css`**
 
 ```css
 /* BinaSmart Driver — one thumb, bright, high contrast for daylight in a car. */
@@ -1345,7 +1345,7 @@ p{color:var(--mut);line-height:1.55}
   font-size:14.5px;text-align:center;z-index:9}
 ```
 
-- [ ] **Step 3: `public/drive/app.js`**
+- [x] **Step 3: `public/drive/app.js`**
 
 ```js
 /* BinaSmart Driver app. Telegram Mini App (or plain browser) → /api/drive/*.
@@ -1516,7 +1516,7 @@ p{color:var(--mut);line-height:1.55}
 })();
 ```
 
-- [ ] **Step 4: Verify the page loads and is honest without auth**
+- [x] **Step 4: Verify the page loads and is honest without auth**
 
 Run:
 ```bash
@@ -1525,7 +1525,7 @@ curl -s https://bina.et/drive | grep -c "GO ONLINE"
 ```
 Expected: three 200s and `1`. Then open `https://bina.et/drive` in the Claude browser pane at mobile size: it must show **"Open from Telegram"**, never a blank screen, because there is no `initData`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add public/drive.html public/drive/app.js public/drive/ui.css && git commit -q -m "feat(drive): driver app — online switch, offer card, job steps, earnings" && git log --oneline -1
@@ -1539,7 +1539,7 @@ git add public/drive.html public/drive/app.js public/drive/ui.css && git commit 
 - Create: `public/ride/track.js`, `test/track.test.js`
 - Modify: `public/ride/map.js`, `public/ride/app.js`, `public/ride.html`
 
-- [ ] **Step 1: Write the failing test for the pure maths**
+- [x] **Step 1: Write the failing test for the pure maths**
 
 ```js
 // test/track.test.js
@@ -1582,12 +1582,12 @@ test('arrivalNear triggers inside 80 m and not outside', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test test/track.test.js 2>&1 | grep -E "Cannot find"`
 Expected: `Cannot find module '../public/ride/track-math.js'`.
 
-- [ ] **Step 3: Create `public/ride/track-math.js` (shared, testable, no DOM)**
+- [x] **Step 3: Create `public/ride/track-math.js` (shared, testable, no DOM)**
 
 ```js
 /* Pure tracking maths — loaded by the browser as a plain script and by Node in tests. */
@@ -1630,12 +1630,12 @@ Expected: `Cannot find module '../public/ride/track-math.js'`.
 });
 ```
 
-- [ ] **Step 4: Run the maths test**
+- [x] **Step 4: Run the maths test**
 
 Run: `node --test test/track.test.js 2>&1 | grep -E "^# (pass|fail)"`
 Expected: `# pass 4`, `# fail 0`.
 
-- [ ] **Step 5: `public/ride/map.js` — the animated car marker**
+- [x] **Step 5: `public/ride/map.js` — the animated car marker**
 
 Append inside the IIFE, immediately before the `return {` line, and add the three names to the returned object:
 
@@ -1704,7 +1704,7 @@ Add the marker styles to `public/ride/ui.css`:
 .etaLine.stale{background:#fff7ed;border-color:#fed7aa;color:#b45309}
 ```
 
-- [ ] **Step 6: `public/ride/track.js` — the rider-side controller**
+- [x] **Step 6: `public/ride/track.js` — the rider-side controller**
 
 ```js
 /* Rider live tracking: consumes each status poll, moves the car, keeps the ETA line honest.
@@ -1769,7 +1769,7 @@ Add the marker styles to `public/ride/ui.css`:
 })();
 ```
 
-- [ ] **Step 7: Wire it into `public/ride/app.js` and `public/ride.html`**
+- [x] **Step 7: Wire it into `public/ride/app.js` and `public/ride.html`**
 
 In `public/ride/app.js`, inside `tick()`, after the existing `render(d.ride)` call add the tracking call. Apply with `/tmp/p2-track.py`:
 
@@ -1806,7 +1806,7 @@ In `public/ride.html`, load the two new scripts and bump the versions of everyth
 
 and the stylesheet line must become `<link rel="stylesheet" href="/static/ride/ui.css?v=8">`.
 
-- [ ] **Step 8: Verify assets and that a concierge ride still looks normal**
+- [x] **Step 8: Verify assets and that a concierge ride still looks normal**
 
 Run:
 ```bash
@@ -1832,7 +1832,7 @@ Then in the Claude browser pane at mobile size, open `https://bina.et/ride` and 
 ```
 Expected: `marker ✔` and an ETA line reading `🚗 Abel is N min away · white Toyota Vitz · A12345`.
 
-- [ ] **Step 9: Commit and push**
+- [x] **Step 9: Commit and push**
 
 ```bash
 git add public/ride/track-math.js public/ride/track.js public/ride/map.js public/ride/app.js public/ride/ui.css public/ride.html test/track.test.js && git commit -q -m "feat(ride): live driver tracking — animated car marker, live ETA, arrival cue" && git push -q origin main && git log --oneline -1
@@ -1845,7 +1845,7 @@ git add public/ride/track-math.js public/ride/track.js public/ride/map.js public
 **Files:**
 - Modify: `ops/telegram/README.md`, `public/ai.html`, `public/ride.html`
 
-- [ ] **Step 1: Set the driver bot's menu button and commands**
+- [x] **Step 1: Set the driver bot's menu button and commands**
 
 ```bash
 cd /var/www/connectcare/binasmart && D=$(grep -o "^BINA_DRIVER_BOT_TOKEN=.*" .env | cut -d= -f2)
@@ -1855,7 +1855,7 @@ curl -s -X POST "https://api.telegram.org/bot$D/setMyCommands" -H "Content-Type:
 ```
 Expected: both `True`.
 
-- [ ] **Step 2: Link the driver app from the public pages**
+- [x] **Step 2: Link the driver app from the public pages**
 
 In `public/ride.html`, the Telegram line under the pickup row becomes:
 
@@ -1871,7 +1871,7 @@ Drivers: <a href="https://t.me/binasmartdriverbot">@binasmartdriverbot</a> — r
 
 Bump `public/ride.html` to `/static/ride/app.js?v=7` and `ui.css?v=9` so the change reaches cached browsers.
 
-- [ ] **Step 3: Append the runbook section to `ops/telegram/README.md`**
+- [x] **Step 3: Append the runbook section to `ops/telegram/README.md`**
 
 ```markdown
 ## Phase 2 — driver app and dispatch
@@ -1884,7 +1884,7 @@ Bump `public/ride.html` to `/static/ride/app.js?v=7` and `ui.css?v=9` so the cha
 - Settings knobs live in `RideSetting` and are editable from `/ride-ops`: `offerWindowS`, `conciergeAfterS`, `radiiKm`, `commissionPct`.
 ```
 
-- [ ] **Step 4: Verify and commit**
+- [x] **Step 4: Verify and commit**
 
 Run: `curl -s https://bina.et/ride | grep -c binasmartdriverbot` → `1`.
 
@@ -1899,7 +1899,7 @@ git add public/ride.html public/ai.html ops/telegram/README.md && git commit -q 
 **Files:**
 - Create: `ride/simulate.js`, `test/simulate.test.js`
 
-- [ ] **Step 1: Write the failing test (the simulator's pure parts)**
+- [x] **Step 1: Write the failing test (the simulator's pure parts)**
 
 ```js
 // test/simulate.test.js
@@ -1926,12 +1926,12 @@ test('walk() on a degenerate line does not loop for ever', () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `node --test test/simulate.test.js 2>&1 | grep -E "Cannot find"`
 Expected: `Cannot find module '../ride/simulate'`.
 
-- [ ] **Step 3: Implement `ride/simulate.js`**
+- [x] **Step 3: Implement `ride/simulate.js`**
 
 ```js
 'use strict';
@@ -2006,12 +2006,12 @@ if (require.main === module) main().catch(e => { console.error(e); process.exit(
 module.exports = { walk, planFrom, bearingOf, PREFIX };
 ```
 
-- [ ] **Step 4: Run the test**
+- [x] **Step 4: Run the test**
 
 Run: `node --test test/simulate.test.js 2>&1 | grep -E "^# (pass|fail)"`
 Expected: `# pass 2`, `# fail 0`.
 
-- [ ] **Step 5: Prove dispatch end to end on the live server**
+- [x] **Step 5: Prove dispatch end to end on the live server**
 
 This is the one place a real ride row is created — deliberately, with a simulated rider phone, and cleaned up straight after. `RIDE_TG_SILENT=1` is **not** used here because the offer push to the fake drivers has no Telegram id, so nothing is sent to a human.
 
@@ -2057,7 +2057,7 @@ K=$(grep -o "^OWNER_KEY=.*" .env | cut -d= -f2 | tr -d '"'); curl -s -H "x-owner
 ```
 Expected: `quote tiers: 5`; a ride id with status `dispatching`; **`offers:` listing three SIMDRIVER names with ETAs**; `mutex: winners = 1`; an `assigned to:` name; `cleaned the simulated ride`; `removed 3 simulated driver(s)`; `drivers left: 0`.
 
-- [ ] **Step 6: Commit and push**
+- [x] **Step 6: Commit and push**
 
 ```bash
 git add ride/simulate.js test/simulate.test.js && git commit -q -m "feat(ride): driver simulator + end-to-end dispatch proof" && git push -q origin main && git log --oneline -1
@@ -2071,7 +2071,7 @@ git add ride/simulate.js test/simulate.test.js && git commit -q -m "feat(ride): 
 - Modify: `README.md`
 - Memory: `project_binasmart_ride.md`, `MEMORY.md`
 
-- [ ] **Step 1: README section**
+- [x] **Step 1: README section**
 
 Append to `README.md`:
 
@@ -2084,7 +2084,7 @@ Append to `README.md`:
 - Modules: `ride/location.js`, `ride/offers.js`, `ride/driverApi.js`, `ride/simulate.js`; rider side `public/ride/track.js` + `track-math.js`. Runbook: [`ops/telegram/README.md`](ops/telegram/README.md).
 ```
 
-- [ ] **Step 2: Full health check**
+- [x] **Step 2: Full health check**
 
 ```bash
 cd /var/www/connectcare/binasmart && npm test 2>&1 | grep -E "^# (tests|pass|fail)"
@@ -2095,17 +2095,17 @@ pm2 list | grep -E "binasmart-api|bina-mcp|gh-routing" | awk -F'│' '{print $3,
 ```
 Expected: `# fail 0`; `/` `/ride` `/drive` `/ai` `/mcp/health` = 200 and `/ride-ops` = 200 (it asks for the key in the page); `drive api unauth: 401`; no new errors; three services online.
 
-- [ ] **Step 3: Commit, push**
+- [x] **Step 3: Commit, push**
 
 ```bash
 git add README.md && git commit -q -m "docs: Ride Phase 2 in the README" && git push -q origin main && git log --oneline -1
 ```
 
-- [ ] **Step 4: Write memory**
+- [x] **Step 4: Write memory**
 
 Update `project_binasmart_ride.md` with: Phase 2 live; the four new modules and what each owns; the broadcast-3 + mutex decision and why; polling not WebSockets and where to change it; the `away` rule; that a rider sees a position only while that driver is on their ride; the simulator commands including `--clean`; and the asset-version trap (bump `ui.css` too). Add the driver app URL and the driver bot menu button to the existing bot section. Keep the `MEMORY.md` pointer line for the ride project current.
 
-- [ ] **Step 5: Hand the go-live steps to Ibrahim**
+- [x] **Step 5: Hand the go-live steps to Ibrahim**
 
 Report, in plain language: the driver app is live but only approved drivers can enter, and there are none, so riders are unaffected today. To go live with a real driver: they register in @binasmartdriverbot (7 steps, two photos), Ibrahim approves them in `/ride-ops`, the driver opens "🚗 Drive", goes ONLINE, and the next request reaches them within seconds. Mention that the concierge alert still arrives if nobody accepts, and that `offerWindowS`, `radiiKm` and `commissionPct` are editable in the ops console without a deploy.
 
