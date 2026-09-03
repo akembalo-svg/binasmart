@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const { makeDriverApi } = require('../ride/driverApi');
 const tgauth = require('../ride/tgauth');
 
-const TOKEN = '8726715201:TEST-DRIVER-BOT-TOKEN';
+const TOKEN = '111111111:TEST-DRIVER-BOT-TOKEN'; // fake id: a real bot id here reads like a leaked token
 const PICKUP = { lat: 9.010, lng: 38.760, label: 'Edna Mall' };
 const DROP = { lat: 9.040, lng: 38.750, label: 'Piassa' };
 
