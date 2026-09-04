@@ -53,6 +53,7 @@ module.exports = function registerWatch(fastify, deps) {
 
   // ---------- pages ----------
   fastify.get('/ops/watch', async (req, reply) => reply.sendFile('ops-watch.html'));
+  fastify.get('/for-filmmakers', async (req, reply) => reply.sendFile('for-filmmakers.html'));
   async function page(slug) {
     let html = fs.readFileSync(shellPath, 'utf8');
     if (!slug) return html;
