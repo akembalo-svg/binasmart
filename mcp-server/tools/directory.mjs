@@ -32,6 +32,9 @@ const SQL = {
                   COALESCE((SELECT SUM(cardinality(t.seats)) FROM "Ticket" t WHERE t."showId" = s.id AND t.status IN ('RESERVED','CONFIRMED','CHECKED_IN')), 0)::int AS sold
            FROM "Show" s JOIN "Event" e ON e.id = s."eventId" JOIN "Hall" h ON h.id = s."hallId" JOIN "Venue" v ON v.id = h."venueId"
            WHERE s.status = 'onsale' AND s."startsAt" > now() ORDER BY s."startsAt" LIMIT 50`,
+  films: `SELECT slug, title, "titleAm", year, "runtimeMin", rating, language, genre, descr, "posterUrl", "sourceKind", "priceEtb", "rentHours", views, "createdAt"
+          FROM "Film" WHERE status = 'public' AND rights IS NOT NULL AND rights <> '' AND ("rightsUntil" IS NULL OR "rightsUntil" > now())
+          AND ($1::text IS NULL OR title ILIKE $1 OR "titleAm" LIKE $1 OR genre ILIKE $1) ORDER BY "createdAt" DESC LIMIT $2`,
   building: `SELECT id, name, "nameAm", city, "subCity", "buildingType" FROM "Building" WHERE "qrSlug" = $1`,
   rooms: `SELECT name, "nameAm", description, "pricePerNight", capacity, amenities, "totalRooms" FROM "RoomType" WHERE "buildingId" = $1 AND active = true ORDER BY "pricePerNight"`,
   departments: `SELECT id, name, "nameAm", floor, room, fee, doctors, "openHours", "slotsPerDay" FROM "Department" WHERE "buildingId" = $1 AND active = true ORDER BY floor, name`,
@@ -84,6 +87,20 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
         price_from_etb: vals.length ? Math.min(...vals) : undefined, prices_etb: prices, seats_left: Math.max(0, (s.capacity || 0) - (s.sold || 0)), url: `${BASE}/cinema/${s.id}` };
     });
     return json({ count: events.length, events, book_hint: 'Seats are chosen and paid on the url (Chapa or at the counter); the ticket is a QR code.', source_url: `${BASE}/cinema` });
+  })));
+
+  server.registerTool('list_films', {
+    title: 'Amharic films to watch online',
+    description: 'Licensed Amharic (Ethiopian) films that can be watched online on BinaSmart Watch (bina.et/watch): title in Amharic and English, year, genre, whether it is free or rented for 48 hours (ETB), and the watch url. Free titles are public YouTube releases played through the YouTube player; rentals need Chapa. Optional search by title or genre.',
+    inputSchema: { query: z.string().max(60).optional().describe('Title (Amharic or English) or genre to filter by; omit for the latest films'), limit: z.number().int().min(1).max(50).optional().describe('Max films, default 20') },
+    annotations: { readOnlyHint: true, openWorldHint: false },
+  }, wrap('list_films', guard(async ({ query, limit }) => {
+    const { rows } = await db.query(SQL.films, [query ? like(query) : null, limit || 20]);
+    const films = rows.map(f => ({ slug: f.slug, title: f.title, title_am: f.titleAm || undefined, year: f.year || undefined, runtime_min: f.runtimeMin || undefined, rating: f.rating || undefined, language: f.language, genre: f.genre || undefined,
+      description: f.descr || undefined, poster_url: f.posterUrl || undefined, source: f.sourceKind === 'youtube' ? 'YouTube player' : 'stream', free: !f.priceEtb,
+      rental: f.priceEtb ? { price_etb: f.priceEtb, hours: f.rentHours } : undefined, views: f.views, url: `${BASE}/watch/${f.slug}` }));
+    if (!films.length) return toolError(query ? `No film matching "${query}" on BinaSmart Watch. Browse ${BASE}/watch.` : `No films on BinaSmart Watch yet. Browse ${BASE}/watch.`);
+    return json({ count: films.length, films, watch_hint: 'Open the url to watch; free films play at once, rentals are paid on Chapa for 48 hours.', source_url: `${BASE}/watch` });
   })));
 
   server.registerTool('get_hotel_rooms', {

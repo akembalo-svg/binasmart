@@ -30,7 +30,7 @@ test('initialize + tools/list exposes exactly the 9 tools with annotations', asy
   assert.match(init.result.instructions, /Addis Ababa/);
   const list = await rpc('tools/list', {});
   const names = list.result.tools.map(t => t.name).sort();
-  assert.deepEqual(names, ['cancel_ride', 'get_ethiopia_guide', 'get_hospital_departments', 'get_hotel_rooms', 'get_ride_status', 'list_events', 'quote_ride', 'request_ride', 'search_places']);
+  assert.deepEqual(names, ['cancel_ride', 'get_ethiopia_guide', 'get_hospital_departments', 'get_hotel_rooms', 'get_ride_status', 'list_events', 'list_films', 'quote_ride', 'request_ride', 'search_places']);
   const req = list.result.tools.find(t => t.name === 'request_ride');
   assert.equal(req.annotations.readOnlyHint, false);
   assert.equal(list.result.tools.find(t => t.name === 'cancel_ride').annotations.destructiveHint, true);

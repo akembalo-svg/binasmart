@@ -14,7 +14,8 @@ BinaSmart (bina.et) is Ethiopia's all-in-one digital platform: fixed-price ride-
 | `search_places` | buildings, hotels, hospitals, shops (cafés, restaurants, pharmacies, banks…) | no |
 | `get_hotel_rooms` | room types and nightly prices | no |
 | `get_hospital_departments` | departments, fees, slots left | no |
-| `list_events` | upcoming events, prices, seats left | no |
+| `list_events` | upcoming films, concerts and events on sale, prices, seats left | no |
+| `list_films` | Amharic films to watch online: free or 48-hour rental, watch url | no |
 | `get_ethiopia_guide` | 22 step-by-step guides: Fayda, telebirr, TIN, VAT, eVisa, driving licence… | no |
 
 ## Connect

@@ -71,6 +71,7 @@ const CHECKS = {
   'Driver page': async () => { const s = await fetchStatus('https://bina.et/drive'); return s === 200 ? null : 'HTTP ' + s; },
   'Cinema page': async () => { if (!CINEMA_ON) return null; const s = await fetchStatus('https://bina.et/cinema'); return s === 200 ? null : 'HTTP ' + s; },
   'Cinema API': async () => { if (!CINEMA_ON) return null; const r = await fetchJson('https://bina.et/api/cinema/shows'); return r.json && r.json.ok ? null : 'shows endpoint HTTP ' + r.status; },
+  'Watch API': async () => { if (!CINEMA_ON) return null; const r = await fetchJson('https://bina.et/api/watch/films'); return r.json && r.json.ok ? null : 'films endpoint HTTP ' + r.status; },
   'pm2 processes': async () => {
     const list = JSON.parse(execSync('pm2 jlist', { encoding: 'utf8' }));
     const want = ['binasmart-api', 'bina-mcp', 'gh-routing'];
