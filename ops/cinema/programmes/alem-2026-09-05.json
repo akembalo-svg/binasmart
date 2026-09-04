@@ -1,0 +1,14 @@
+{
+  "venue": "alem-cinema",
+  "sourceName": "Alem Cinema Facebook page (weekend post)",
+  "sourceUrl": "https://www.facebook.com/alemcinema/",
+  "postedAt": "2026-09-04",
+  "entries": [
+    { "titleAm": "ሐምራዊት", "title": "Hamrawit", "notes": "አዲስ ፊልም · new film · a film by Fuad Mustefa · Natay Getachew, Ayu Germa, Kidest Mulualem, Solomon Tesfaye · 1h36", "dateFrom": "2026-09-05", "dateTo": "2026-09-06", "times": ["14:00", "16:10", "18:20", "20:20"] },
+    { "titleAm": "ፈረንጁ ሀበሻ", "title": "Ferenju Habesha", "notes": "ፊልም · a film by Ermias Tadesse · 1h42", "dateFrom": "2026-09-05", "dateTo": "2026-09-06", "times": ["13:00", "15:00"] },
+    { "titleAm": "ሳላያት", "title": "Salayat", "notes": "አስቂኝ ፊልም · comedy · 1h38 · ቅዳሜ", "dateFrom": "2026-09-05", "dateTo": "2026-09-05", "times": ["19:10"] },
+    { "titleAm": "ሳላያት", "title": "Salayat", "notes": "አስቂኝ ፊልም · comedy · 1h38 · እሁድ", "dateFrom": "2026-09-06", "dateTo": "2026-09-06", "times": ["17:10"] },
+    { "titleAm": "ቀን ዘራፊ", "title": "Ken Zerafi", "notes": "ድርጊት ፊልም · action · a film by Mulualem Getachew · 1h45 · ቅዳሜ", "dateFrom": "2026-09-05", "dateTo": "2026-09-05", "times": ["17:10"], "trailerUrl": "https://www.youtube.com/watch?v=VnGiiB155LU" },
+    { "titleAm": "ቀን ዘራፊ", "title": "Ken Zerafi", "notes": "ድርጊት ፊልም · action · a film by Mulualem Getachew · 1h45 · እሁድ", "dateFrom": "2026-09-06", "dateTo": "2026-09-06", "times": ["19:10"], "trailerUrl": "https://www.youtube.com/watch?v=VnGiiB155LU" }
+  ]
+}
