@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Watch ops | BinaSmart</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=4">
+<style>
+.wrap{max-width:980px;padding-bottom:40px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;color:var(--mute)}
+.mini{font-size:11px;color:var(--mute)}textarea{min-height:90px}h2{margin-top:0}.btn.sm{margin:2px 2px 2px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="/watch">Bina<span>Smart</span> ▶️ ops</a><span class="sp"></span><a class="lnk" id="cinLnk" href="/ops/cinema">🎬 cinema ops</a></div>
+  <div id="auth" class="card" hidden><label>Owner key</label><input id="key" type="password"><button class="btn sm" id="keyGo" style="margin-top:8px">Enter</button></div>
+  <div id="main" hidden>
+    <div class="grid">
+      <div class="card"><h2 id="formTitle">New film</h2>
+        <input type="hidden" id="eSlug">
+        <label>Title</label><input id="eTitle"><label>ርዕስ (Amharic)</label><input id="eTitleAm">
+        <div class="row"><div><label>Year</label><input id="eYear" type="number"></div><div><label>Runtime (min)</label><input id="eRun" type="number"></div><div><label>Rating</label><input id="eRating" placeholder="PG-13"></div></div>
+        <div class="row"><div><label>Language</label><input id="eLang" value="Amharic"></div><div><label>Genre</label><input id="eGenre" placeholder="Drama"></div></div>
+        <label>Poster URL (2:3, https)</label><input id="ePoster">
+        <label>Video source</label><div class="row"><select id="eKind" style="max-width:130px"><option value="youtube">YouTube</option><option value="mp4">mp4 link</option><option value="hls">HLS (.m3u8)</option></select><input id="eUrl" placeholder="https://youtu.be/… or https://your-server/film.mp4"></div>
+        <div class="row"><div><label>Price ETB (0 = free)</label><input id="ePrice" type="number" value="0" min="0"></div><div><label>Rental hours</label><input id="eHours" type="number" value="48" min="1" max="720"></div></div>
+        <label>Rights note (required before public) — who licensed it, for where, signed when</label><textarea id="eRights" placeholder="Licence from Producer X (0911…), streaming Ethiopia, signed 2026-09-04, until 2027-09-04"></textarea>
+        <label>Rights until (optional)</label><input id="eUntil" type="date">
+        <label>Status</label><select id="eStatus"><option value="draft">draft (hidden)</option><option value="public">public</option></select>
+        <label>Description</label><textarea id="eDescr"></textarea>
+        <div class="err" id="eErr"></div><button class="btn" id="eGo" style="margin-top:8px">Save film</button><button class="btn ghost" id="eNew" style="margin-top:8px" hidden>+ New film</button></div>
+      <div><div class="card"><h2>Films <span class="pill" id="chapaPill"></span></h2><div id="films"></div></div>
+        <div class="card" style="margin-top:14px"><h2>Rentals</h2><div id="rentals"></div></div></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var KEY = new URLSearchParams(location.search).get('key') || sessionStorage.getItem('bina_owner_key') || '';
+  var TZ = 'Africa/Addis_Ababa';
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function when(d) { return d ? new Date(d).toLocaleString('en-GB', { timeZone: TZ, day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—'; }
+  var tt; function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { t.classList.remove('on'); }, 2500); }
+  function api(p, body) { return fetch(p, { method: body ? 'POST' : 'GET', headers: { 'x-owner-key': KEY, 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined }).then(function (r) { return r.json(); }); }
+  var FILMS = [];
+  function boot() {
+    if (!KEY) { $('auth').hidden = false; return; }
+    sessionStorage.setItem('bina_owner_key', KEY); $('cinLnk').href = '/ops/cinema?key=' + encodeURIComponent(KEY);
+    api('/api/watch/ops/films').then(function (j) {
+      if (!j.ok) { $('auth').hidden = false; toast(j.error); return; }
+      FILMS = j.films; $('auth').hidden = true; $('main').hidden = false; $('chapaPill').textContent = j.chapa.enabled ? 'Chapa ' + j.chapa.mode : 'Chapa off — rentals disabled';
+      $('films').innerHTML = j.films.length ? '<table><tr><th>Film</th><th>Source</th><th>Price</th><th>Status</th><th>Views</th><th></th></tr>' + j.films.map(function (f) { return '<tr><td><b>' + esc(f.titleAm || f.title) + '</b><div class="mini">' + esc(f.title) + (f.year ? ' · ' + f.year : '') + '</div></td><td>' + f.kind + '</td><td>' + (f.priceEtb ? f.priceEtb + ' / ' + f.rentHours + 'h' : 'free') + '</td><td><span class="pill ' + (f.public ? 'ok' : f.status === 'public' ? 'bad' : 'mute') + '">' + (f.public ? 'public' : f.status === 'public' ? 'public but NO RIGHTS' : 'draft') + '</span>' + (!f.rights ? '<div class="mini" style="color:#dc2626">no rights note</div>' : '') + '</td><td>' + f.views + '</td><td><button class="btn sm ghost" data-edit="' + f.slug + '">edit</button><a class="btn sm ghost" href="/watch/' + f.slug + '" target="_blank">open</a></td></tr>'; }).join('') + '</table>' : '<div class="sub">No films yet.</div>';
+    });
+    api('/api/watch/ops/rentals').then(function (j) { if (!j.ok) return; $('rentals').innerHTML = j.rentals.length ? '<table><tr><th>Code</th><th>Film</th><th>Who</th><th>ETB</th><th>Status</th><th>Until</th></tr>' + j.rentals.map(function (r) { return '<tr><td>' + r.code + (r.telegram ? ' ✈️' : '') + '</td><td>' + esc(r.film ? (r.film.titleAm || r.film.title) : '') + '</td><td>' + esc(r.name) + '<div class="mini">' + esc(r.phone) + '</div></td><td>' + r.priceEtb + '</td><td><span class="pill ' + (r.status === 'ACTIVE' ? 'ok' : r.status === 'PENDING' ? 'warn' : 'mute') + '">' + r.status + '</span></td><td>' + when(r.expiresAt) + '</td></tr>'; }).join('') + '</table>' : '<div class="sub">No rentals yet.</div>'; });
+  }
+  function fill(f) {
+    $('formTitle').textContent = f ? 'Edit: ' + (f.titleAm || f.title) : 'New film'; $('eNew').hidden = !f;
+    $('eSlug').value = f ? f.slug : ''; $('eTitle').value = f ? f.title : ''; $('eTitleAm').value = f ? f.titleAm || '' : ''; $('eYear').value = f && f.year || ''; $('eRun').value = f && f.runtimeMin || ''; $('eRating').value = f && f.rating || '';
+    $('eLang').value = f ? f.language || 'Amharic' : 'Amharic'; $('eGenre').value = f && f.genre || ''; $('ePoster').value = f && f.posterUrl || ''; $('eKind').value = f ? f.kind : 'youtube'; $('eUrl').value = f && f.sourceUrl || '';
+    $('ePrice').value = f ? f.priceEtb : 0; $('eHours').value = f ? f.rentHours : 48; $('eRights').value = f && f.rights || ''; $('eUntil').value = f && f.rightsUntil ? String(f.rightsUntil).slice(0, 10) : ''; $('eStatus').value = f ? f.status : 'draft'; $('eDescr').value = f && f.descr || '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b && b.dataset.edit) fill(FILMS.find(function (x) { return x.slug === b.dataset.edit; })); });
+  $('eNew').addEventListener('click', function () { fill(null); });
+  $('eGo').addEventListener('click', function () {
+    var body = { title: $('eTitle').value, titleAm: $('eTitleAm').value, year: $('eYear').value || null, runtimeMin: $('eRun').value || null, rating: $('eRating').value, language: $('eLang').value, genre: $('eGenre').value, posterUrl: $('ePoster').value, sourceKind: $('eKind').value, sourceUrl: $('eUrl').value, priceEtb: Number($('ePrice').value) || 0, rentHours: Number($('eHours').value) || 48, rights: $('eRights').value, rightsUntil: $('eUntil').value || null, status: $('eStatus').value, descr: $('eDescr').value };
+    var slug = $('eSlug').value;
+    api('/api/watch/ops/films' + (slug ? '/' + slug : ''), body).then(function (j) { $('eErr').textContent = j.ok ? '' : j.error; if (j.ok) { toast('Saved: /watch/' + j.film.slug); fill(null); boot(); } });
+  });
+  $('keyGo').addEventListener('click', function () { KEY = $('key').value.trim(); boot(); });
+  boot();
+})();
+</script>
+</body>
+</html>

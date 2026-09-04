@@ -1192,3 +1192,46 @@ model Ticket {
   @@index([showId, status])
   @@index([phone])
 }
+
+// ---------------- Watch: licensed films, video hosted elsewhere (Phase B) ----------------
+model Film {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  titleAm     String?
+  year        Int?
+  runtimeMin  Int?
+  rating      String?
+  language    String    @default("Amharic")
+  genre       String?
+  descr       String?
+  posterUrl   String?
+  sourceKind  String    // youtube | mp4 | hls
+  sourceUrl   String    // never a file on this server
+  priceEtb    Int       @default(0)   // 0 = free
+  rentHours   Int       @default(48)
+  rights      String?   // who licensed it, for where, signed when — required before public
+  rightsUntil DateTime?
+  status      String    @default("draft")   // draft | public
+  views       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  rentals     Rental[]
+}
+
+model Rental {
+  id         String    @id @default(cuid())
+  code       String    @unique
+  filmId     String
+  film       Film      @relation(fields: [filmId], references: [id])
+  name       String
+  phone      String
+  telegramId String?
+  priceEtb   Int
+  chapaRef   String?
+  status     String    @default("PENDING")   // PENDING | ACTIVE | EXPIRED | CANCELLED
+  startsAt   DateTime?
+  expiresAt  DateTime?
+  createdAt  DateTime  @default(now())
+  @@index([phone])
+  @@index([filmId, status])
+}

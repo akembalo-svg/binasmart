@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>የአማርኛ ፊልሞች በመስመር ላይ ይመልከቱ | BinaSmart Watch</title>
+<meta name="description" content="የአማርኛ ፊልሞችን በመስመር ላይ ይመልከቱ — ፈቃድ ያላቸው ፊልሞች፣ ነፃ ወይም ለ48 ሰዓት ኪራይ። Watch licensed Amharic films online on BinaSmart: free titles, or rent a film for 48 hours.">
+<link rel="canonical" href="https://bina.et/watch">
+<meta property="og:title" content="BinaSmart Watch — የአማርኛ ፊልሞች">
+<meta property="og:description" content="ፈቃድ ያላቸው የአማርኛ ፊልሞች፣ ነፃ ወይም ለ48 ሰዓት ኪራይ። Licensed Amharic films, free or rented for 48 hours.">
+<meta property="og:url" content="https://bina.et/watch">
+<meta property="og:image" content="https://bina.et/og-cinema.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b2a26">
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+Ethiopic:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=4">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.film{display:block;text-decoration:none;color:var(--ink)}
+.film .p{aspect-ratio:2/3;border-radius:14px;background:linear-gradient(160deg,#0b2a26,#068c78);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:var(--sh);position:relative}
+.film .p img{width:100%;height:100%;object-fit:cover}
+.film .p .tag{position:absolute;left:8px;bottom:8px;background:#fff;color:var(--ink);border-radius:999px;padding:3px 9px;font-size:11px;font-weight:900}
+.film .p .tag.free{background:#d1fae5;color:#065f46}
+.film .t{font-weight:900;font-size:14px;margin-top:8px;line-height:1.25}
+.film .m{font-size:12px;color:var(--mute)}
+.player{background:#000;border-radius:16px;overflow:hidden;aspect-ratio:16/9;position:relative;box-shadow:var(--sh)}
+.player video,.player iframe{width:100%;height:100%;border:0;display:block}
+.player .cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0b2a26 center/cover;cursor:pointer}
+.player .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.player .cover .play{position:relative;width:78px;height:78px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--ink);box-shadow:0 10px 30px -10px #000}
+.rent{margin-top:12px}
+.rent .price{font-size:26px;font-weight:900;color:var(--brand)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px;margin-top:10px}.kv b{color:var(--mute);font-size:11px;font-weight:800}
+.wrap{padding-bottom:40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="/">Bina<span>Smart</span> ▶️</a><span class="sp"></span><a class="lnk" href="/cinema">🎬 ሲኒማ</a>&nbsp;&nbsp;<a class="lnk" href="/ride">🚕 Ride</a></div>
+  <div id="view"><div class="skel"></div></div>
+  <p class="foot">BinaSmart Watch · ፊልሞቹ በፈቃድ የቀረቡ ናቸው። ፊልም ሰሪ ነዎት? <a href="https://t.me/bina_smart_bot">@bina_smart_bot</a> · All films are licensed. Filmmaker? Talk to us.</p>
+</div>
+<div class="sheet" id="sheet"><div class="pane">
+  <div class="grab"></div>
+  <h2 style="margin-top:0">ለ<span id="shHours">48</span> ሰዓት ይከራዩ · Rent for <span id="shHours2">48</span> hours</h2>
+  <div class="sub" id="shFilm"></div>
+  <label>ስም · Name</label><input id="fName" maxlength="60" autocomplete="name">
+  <label>ስልክ · Phone (09…)</label><input id="fPhone" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="09xx xxx xxx">
+  <div class="tot"><span>ዋጋ · Price</span><span id="shPrice"></span></div>
+  <div class="err" id="shErr"></div>
+  <button class="btn" id="shGo">💳 በChapa ይክፈሉ · Pay with Chapa</button>
+  <button class="btn ghost" id="shBack" style="margin-top:8px">← ተመለስ · Back</button>
+</div></div>
+<div class="toast" id="toast"></div>
+<script src="/static/ride/tg.js?v=3"></script>
+<script src="/static/watch/app.js?v=1"></script>
+</body>
+</html>

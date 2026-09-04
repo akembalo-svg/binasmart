@@ -42,5 +42,5 @@ module.exports = function registerCinema(fastify, deps) {
     t1.unref(); t2.unref();
   }
   console.log('[cinema] mounted' + (api ? ' (Telegram delivery on)' : ' (no rider bot token)') + (deps.chapa && deps.chapa.enabled ? ' chapa=' + deps.chapa.mode : ' chapa=off'));
-  return { holds, tickets, checkin, confirmChapa: r.confirmChapa, notify };
+  return { holds, tickets, checkin, confirmChapa: r.confirmChapa, notify, chapa: deps.chapa || null };
 };
