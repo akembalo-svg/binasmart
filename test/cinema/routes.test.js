@@ -36,7 +36,7 @@ function fakeDb() {
     return r;
   };
   const model = name => ({
-    create: async ({ data, include }) => { for (const u of UNIQ[name] || []) if (u.every(k => data[k] != null) && T[name].some(r => u.every(k => r[k] === data[k]))) throw p2002(); const row = { id: nid(name[0]), createdAt: new Date(), ...data }; T[name].push(row); return inc(name, row, include); },
+    create: async ({ data, include }) => { for (const u of UNIQ[name] || []) if (u.every(k => data[k] != null) && T[name].some(r => u.every(k => r[k] === data[k]))) throw p2002(); const row = { id: nid(name[0]), createdAt: new Date(), ...(name === 'venue' ? { active: true } : {}), ...data }; T[name].push(row); return inc(name, row, include); },
     findUnique: async ({ where, include }) => inc(name, T[name].find(r => match(r, where)) || null, include),
     findFirst: async ({ where, include }) => inc(name, T[name].find(r => match(r, where)) || null, include),
     findMany: async ({ where, include, orderBy, take } = {}) => { let rows = T[name].filter(r => match(r, where)); if (orderBy) { const [[k, d]] = Object.entries(orderBy); rows = rows.slice().sort((a, b) => (a[k] > b[k] ? 1 : a[k] < b[k] ? -1 : 0) * (d === 'desc' ? -1 : 1)); } if (take) rows = rows.slice(0, take); return rows.map(r => inc(name, r, include)); },
