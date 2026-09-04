@@ -39,6 +39,7 @@ h2{margin-top:0}
       <label>Film title</label><input id="pTitle" placeholder="Spider-Man: Brand New Day"><label>ርዕስ (Amharic, optional)</label><input id="pTitleAm">
       <div class="row"><div><label>Hall (as posted)</label><input id="pHall" placeholder="Gold 2 2D"></div><div><label>Price (as posted)</label><input id="pPrice" placeholder="300 ብር"></div></div>
       <label>Showtimes (HH:MM, comma or space separated)</label><input id="pTimes" placeholder="12:00, 15:00, 18:00, 21:00">
+      <label style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="pEth" style="width:auto"> Times above are in the <b>Ethiopian clock</b> (e.g. Alem posts "7:00" = 13:00) — convert on save</label>
       <div class="row"><div><label>From (date)</label><input id="pFrom" type="date"></div><div><label>To (date)</label><input id="pTo" type="date"></div></div>
       <label>Notes (genre · runtime · rating)</label><input id="pNotes" placeholder="Action · 2h25m · PG"><label>Trailer (YouTube link, optional — also used as poster if none)</label><input id="pTrailer" placeholder="https://youtu.be/…"><label>Poster URL (optional)</label><input id="pPoster">
       <div class="row"><div><label>Source name</label><input id="pSrcName" placeholder="Gast Cinema Telegram channel"></div><div><label>Source link</label><input id="pSrcUrl" placeholder="https://t.me/gastcinema"></div></div>
@@ -134,8 +135,11 @@ h2{margin-top:0}
     });
   }
   document.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b && b.dataset.pdel && confirm('Remove this entry?')) api('/api/cinema/ops/programme/' + b.dataset.pdel + '/delete', {}).then(function () { loadProg(); }); });
+  // Ethiopian clock -> international: Ethiopian 1:00 = 07:00, 7:00 = 13:00, 12:00 = 18:00 (daytime posting assumed).
+  function fromEth(list) { return list.split(/[,\s]+/).filter(Boolean).map(function (t) { var m = /^(\d{1,2}):(\d{2})$/.exec(t); if (!m) return t; var h = (Number(m[1]) % 12) + 6; return String(h).padStart(2, '0') + ':' + m[2]; }).join(', '); }
   $('pGo').addEventListener('click', function () {
-    api('/api/cinema/ops/programme', { venueId: $('pVenue').value, title: $('pTitle').value, titleAm: $('pTitleAm').value, hallName: $('pHall').value, priceText: $('pPrice').value, times: $('pTimes').value, dateFrom: $('pFrom').value, dateTo: $('pTo').value || $('pFrom').value, notes: $('pNotes').value, posterUrl: $('pPoster').value, trailerUrl: $('pTrailer').value, sourceName: $('pSrcName').value, sourceUrl: $('pSrcUrl').value, postedAt: $('pPosted').value || null })
+    var times = $('pEth').checked ? fromEth($('pTimes').value) : $('pTimes').value;
+    api('/api/cinema/ops/programme', { venueId: $('pVenue').value, title: $('pTitle').value, titleAm: $('pTitleAm').value, hallName: $('pHall').value, priceText: $('pPrice').value, times: times, dateFrom: $('pFrom').value, dateTo: $('pTo').value || $('pFrom').value, notes: $('pNotes').value, posterUrl: $('pPoster').value, trailerUrl: $('pTrailer').value, sourceName: $('pSrcName').value, sourceUrl: $('pSrcUrl').value, postedAt: $('pPosted').value || null })
       .then(function (j) { $('pErr').textContent = j.ok ? '' : j.error; if (j.ok) { toast('Added'); $('pTitle').value = ''; $('pTimes').value = ''; $('pHall').value = ''; loadProg(); } });
   });
   document.addEventListener('click', function (e) {
