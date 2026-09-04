@@ -133,6 +133,44 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
       halls: v.halls.length, nextShowAt: next[v.id] || null })) };
   });
 
+  // ---------- programme listing (information only; tickets at the cinema) ----------
+  const TZ_DAY = () => { const d = new Date(Date.now() + 3 * 3600000); return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - 3 * 3600000); }; // 00:00 Addis today, in UTC
+  const pubProg = p => ({ id: p.id, title: p.title, titleAm: p.titleAm, hallName: p.hallName, times: p.times, dateFrom: p.dateFrom, dateTo: p.dateTo, priceText: p.priceText, posterUrl: p.posterUrl, notes: p.notes, sourceName: p.sourceName, sourceUrl: p.sourceUrl, postedAt: p.postedAt,
+    venue: p.venue ? { id: p.venue.id, slug: p.venue.slug, name: p.venue.name, nameAm: p.venue.nameAm, address: p.venue.address, phone: p.venue.phone } : undefined });
+  fastify.get('/api/cinema/programme', async () => {
+    const rows = await prisma.programme.findMany({ where: { active: true, dateTo: { gte: TZ_DAY() } }, include: { venue: true }, orderBy: { dateFrom: 'asc' }, take: 500 });
+    const byVenue = {};
+    for (const p of rows) { const v = p.venue; if (!v || !v.active) continue; (byVenue[v.id] = byVenue[v.id] || { venue: pubProg(p).venue, films: [] }).films.push(pubProg({ ...p, venue: null })); }
+    return { ok: true, today: TZ_DAY(), venues: Object.values(byVenue).sort((a, b) => a.venue.name.localeCompare(b.venue.name)) };
+  });
+  fastify.post('/api/cinema/ops/programme', async (req, reply) => {
+    if (!ops(req, reply)) return;
+    const b = req.body || {};
+    const venue = b.venueId ? await prisma.venue.findUnique({ where: { id: String(b.venueId) } }) : null;
+    if (!venue) return reply.code(400).send({ ok: false, error: 'venueId required' });
+    const title = str(b.title, 120); if (!title) return reply.code(400).send({ ok: false, error: 'title required' });
+    const times = [...new Set((Array.isArray(b.times) ? b.times : String(b.times || '').split(/[,\s]+/)).map(t => String(t).trim()).filter(t => /^\d{1,2}:\d{2}$/.test(t)).map(t => t.padStart(5, '0')))].sort();
+    if (!times.length) return reply.code(400).send({ ok: false, error: 'at least one showtime (HH:MM)' });
+    const day = s => (s && /^\d{4}-\d{2}-\d{2}$/.test(String(s))) ? new Date(s + 'T00:00:00+03:00') : null;
+    const dateFrom = day(b.dateFrom), dateTo = day(b.dateTo || b.dateFrom);
+    if (!dateFrom || !dateTo || dateTo < dateFrom) return reply.code(400).send({ ok: false, error: 'dateFrom/dateTo (YYYY-MM-DD) required' });
+    const sourceUrl = str(b.sourceUrl, 400), sourceName = str(b.sourceName, 80);
+    if (!sourceUrl || !/^https?:\/\//.test(sourceUrl) || !sourceName) return reply.code(400).send({ ok: false, error: 'sourceName and a sourceUrl (the cinema\'s own post) are required' });
+    const postedAt = b.postedAt && !isNaN(Date.parse(b.postedAt)) ? new Date(b.postedAt) : new Date();
+    const p = await prisma.programme.create({ data: { venueId: venue.id, title, titleAm: str(b.titleAm, 120), hallName: str(b.hallName, 40), times, dateFrom, dateTo: new Date(dateTo.getTime() + 86400000 - 1), priceText: str(b.priceText, 40), posterUrl: str(b.posterUrl, 400), notes: str(b.notes, 200), sourceName, sourceUrl, postedAt }, include: { venue: true } });
+    return { ok: true, programme: pubProg(p) };
+  });
+  fastify.get('/api/cinema/ops/programme', async (req, reply) => {
+    if (!ops(req, reply)) return;
+    const rows = await prisma.programme.findMany({ where: { active: true }, include: { venue: true }, orderBy: { dateFrom: 'desc' }, take: 500 });
+    return { ok: true, programme: rows.map(pubProg) };
+  });
+  fastify.post('/api/cinema/ops/programme/:id/delete', async (req, reply) => {
+    if (!ops(req, reply)) return;
+    const r = await prisma.programme.updateMany({ where: { id: String(req.params.id), active: true }, data: { active: false } });
+    return { ok: true, removed: r.count };
+  });
+
   fastify.get('/api/cinema/shows/:id', async (req, reply) => {
     if (!ipRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const show = await loadShow(req.params.id);

@@ -10,7 +10,7 @@ const TOKEN = '111:RIDERTOKEN', KEY = 'owner-secret';
 // In-memory Prisma with the guards that matter: unique (showId, seat), unique ticket code/idemKey,
 // unique slugs; `in`/`gte`/`lt` filters; the includes the routes ask for.
 function fakeDb() {
-  const T = { venue: [], hall: [], event: [], show: [], seatHold: [], ticket: [] };
+  const T = { venue: [], hall: [], event: [], show: [], seatHold: [], ticket: [], programme: [] };
   let seq = 0; const nid = p => p + (++seq);
   const p2002 = () => Object.assign(new Error('unique'), { code: 'P2002' });
   const UNIQ = { seatHold: [['showId', 'seat']], ticket: [['code'], ['idemKey']], venue: [['slug']], event: [['slug']] };
@@ -33,10 +33,11 @@ function fakeDb() {
     }
     if (name === 'ticket' && include.show) r.show = inc('show', T.show.find(s => s.id === r.showId), include.show.include || null);
     if (name === 'venue' && include.halls) r.halls = T.hall.filter(h => h.venueId === r.id);
+    if (name === 'programme' && include.venue) r.venue = T.venue.find(v => v.id === r.venueId) || null;
     return r;
   };
   const model = name => ({
-    create: async ({ data, include }) => { for (const u of UNIQ[name] || []) if (u.every(k => data[k] != null) && T[name].some(r => u.every(k => r[k] === data[k]))) throw p2002(); const row = { id: nid(name[0]), createdAt: new Date(), ...(name === 'venue' ? { active: true } : {}), ...data }; T[name].push(row); return inc(name, row, include); },
+    create: async ({ data, include }) => { for (const u of UNIQ[name] || []) if (u.every(k => data[k] != null) && T[name].some(r => u.every(k => r[k] === data[k]))) throw p2002(); const row = { id: nid(name[0]), createdAt: new Date(), ...(name === 'venue' || name === 'programme' ? { active: true } : {}), ...data }; T[name].push(row); return inc(name, row, include); },
     findUnique: async ({ where, include }) => inc(name, T[name].find(r => match(r, where)) || null, include),
     findFirst: async ({ where, include }) => inc(name, T[name].find(r => match(r, where)) || null, include),
     findMany: async ({ where, include, orderBy, take } = {}) => { let rows = T[name].filter(r => match(r, where)); if (orderBy) { const [[k, d]] = Object.entries(orderBy); rows = rows.slice().sort((a, b) => (a[k] > b[k] ? 1 : a[k] < b[k] ? -1 : 0) * (d === 'desc' ? -1 : 1)); } if (take) rows = rows.slice(0, take); return rows.map(r => inc(name, r, include)); },
@@ -290,6 +291,26 @@ test('SEO: /cinema carries an ItemList of ScreeningEvents; a show page gets its 
   assert.match(page.body, /"@type":"MovieTheater","name":"Bina Hall"/);
   const gone = await f.inject({ method: 'GET', url: '/cinema/nope' });
   assert.equal(gone.statusCode, 200); assert.doesNotMatch(gone.body, /ld\+json">\{"@context":"https:\/\/schema.org","@type":"ScreeningEvent"/);
+  await f.close();
+});
+
+// ---- programme listing ----
+test('programme: ops creates entries with a source; public groups by venue; expired entries disappear; delete hides', async () => {
+  const { f, db } = await app();
+  const v = (await f.inject({ method: 'POST', url: '/api/cinema/ops/venues', headers: OPS, payload: { name: 'Gast Cinema', nameAm: 'ጋስት', phone: '0930113377' } })).json().venue;
+  const today = new Date(Date.now() + 3 * 3600000).toISOString().slice(0, 10);
+  const bad = await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Mutiny', times: '12:00', dateFrom: today, sourceName: 'Gast' } });
+  assert.equal(bad.statusCode, 400); assert.match(bad.json().error, /sourceUrl/);
+  const ok = await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Mutiny', hallName: 'Gold 2 2D', times: '12:00, 14:00 12:00 7:00', dateFrom: today, dateTo: today, priceText: '300 ብር', sourceName: 'Gast Cinema Telegram', sourceUrl: 'https://t.me/gastcinema', postedAt: '2026-09-02' } });
+  assert.equal(ok.statusCode, 200, ok.body); assert.deepEqual(ok.json().programme.times, ['07:00', '12:00', '14:00']);
+  await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Old Film', times: '19:00', dateFrom: '2026-01-01', dateTo: '2026-01-02', sourceName: 'Gast', sourceUrl: 'https://t.me/gastcinema' } });
+  const pub = (await f.inject({ method: 'GET', url: '/api/cinema/programme' })).json();
+  assert.equal(pub.venues.length, 1); assert.equal(pub.venues[0].venue.nameAm, 'ጋስት'); assert.equal(pub.venues[0].venue.phone, '0930113377');
+  assert.deepEqual(pub.venues[0].films.map(x => x.title), ['Mutiny'], 'expired entry hidden');
+  assert.equal(pub.venues[0].films[0].sourceUrl, 'https://t.me/gastcinema');
+  assert.equal((await f.inject({ method: 'POST', url: '/api/cinema/ops/programme/' + ok.json().programme.id + '/delete', headers: OPS, payload: {} })).json().removed, 1);
+  assert.equal((await f.inject({ method: 'GET', url: '/api/cinema/programme' })).json().venues.length, 0);
+  assert.equal((await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', payload: {} })).statusCode, 401);
   await f.close();
 });
 

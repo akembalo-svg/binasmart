@@ -65,8 +65,30 @@
       var films = order.filter(function (k) { return groups[k].ev.kind === 'FILM'; }), events = order.filter(function (k) { return groups[k].ev.kind !== 'FILM'; });
       if (films.length) html += '<h2>🎬 ፊልሞች · Films</h2>' + films.map(cardFor).join('');
       if (events.length) html += '<h2>🎟️ ዝግጅቶች · Events</h2><p class="sub" style="margin:-4px 0 10px">ኮንሰርት፣ ቲያትር፣ ስብሰባ — ትኬትዎን ይምረጡ · concerts, theatre, meetings</p>' + events.map(cardFor).join('');
-      view.innerHTML = html + '<div id="venues"></div>';
+      view.innerHTML = html + '<div id="programme"></div><div id="venues"></div>';
+      renderProgramme();
       renderVenues();
+    });
+  }
+  // What the cinemas themselves published: information only, tickets at the cinema.
+  function renderProgramme() {
+    api('/api/cinema/programme').then(function (j) {
+      var box = $('programme'); if (!box || !j.ok || !j.venues.length) return;
+      var day = function (d) { return new Date(d).toLocaleDateString('en-GB', { timeZone: TZ, day: 'numeric', month: 'short' }); };
+      var html = '<h2 id="whatson" style="margin-top:22px">📅 አሁን የሚታዩ · What\'s on in Addis</h2><p class="sub">ሲኒማ ቤቶቹ ራሳቸው እንደለጠፉት፤ ትኬት በሲኒማ ቤቱ። · As the cinemas posted it; tickets at the cinema, confirm before you go.</p>';
+      j.venues.forEach(function (g) {
+        var v = g.venue;
+        html += '<div class="card" style="margin-bottom:12px"><div style="display:flex;gap:10px;align-items:flex-start"><div style="flex:1"><div style="font-weight:900;font-size:16px">' + esc(v.nameAm || v.name) + '</div><div class="sub">' + esc(v.name) + (v.address ? ' · ' + esc(v.address) : '') + '</div></div>' + (v.phone ? '<a class="btn ghost sm" href="tel:' + esc(v.phone) + '">📞 ' + esc(v.phone) + '</a>' : '') + '</div>';
+        g.films.forEach(function (p) {
+          html += '<div style="border-top:1px solid var(--line);margin-top:10px;padding-top:10px;display:flex;gap:10px"><div style="width:48px;height:66px;border-radius:8px;background:linear-gradient(160deg,#0b2a26,#068c78);flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:22px">' + (p.posterUrl ? '<img src="' + esc(p.posterUrl) + '" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '🎬') + '</div><div style="flex:1;min-width:0">'
+            + '<div style="font-weight:900">' + esc(p.titleAm || p.title) + (p.titleAm && p.title !== p.titleAm ? ' <small class="sub">' + esc(p.title) + '</small>' : '') + '</div>'
+            + '<div class="sub" style="font-size:12px">' + [p.notes, p.hallName, p.priceText].filter(Boolean).map(esc).join(' · ') + '</div>'
+            + '<div class="times">' + p.times.map(function (t) { return '<span style="border:1.5px solid var(--line);border-radius:10px;padding:5px 9px;font-size:12px;font-weight:800;background:#fff">' + esc(t) + '</span>'; }).join('') + '</div>'
+            + '<div class="sub" style="font-size:11px;margin-top:6px">' + day(p.dateFrom) + (day(p.dateTo) !== day(p.dateFrom) ? ' – ' + day(p.dateTo) : '') + ' · ' + esc(p.sourceName) + ', ' + day(p.postedAt) + ' · <a href="' + esc(p.sourceUrl) + '" target="_blank" rel="noopener nofollow">ምንጭ · source</a></div></div></div>';
+        });
+        html += '<div class="sub" style="font-size:12px;margin-top:10px">🎟️ ትኬት በሲኒማ ቤቱ · Tickets at the cinema. ' + (v.name ? '<a href="/for-cinemas">' + esc(v.name) + ' ትኬት እዚህ መሸጥ ይችላል →</a>' : '') + '</div></div>';
+      });
+      box.innerHTML = html;
     });
   }
   // Directory of Addis cinemas: every active venue, with or without a show on sale.

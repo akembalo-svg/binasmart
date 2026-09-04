@@ -1130,6 +1130,7 @@ model Venue {
   notes     String?   // halls/seats/source as researched; verify before the first show
   active    Boolean   @default(true)
   halls     Hall[]
+  programme Programme[]
   createdAt DateTime  @default(now())
 }
 
@@ -1234,4 +1235,27 @@ model Rental {
   createdAt  DateTime  @default(now())
   @@index([phone])
   @@index([filmId, status])
+}
+
+// Programme listing: what a cinema is showing, as the cinema itself published it. Information only —
+// tickets are bought at the cinema until the owner joins and the film becomes a Show with seats.
+model Programme {
+  id         String    @id @default(cuid())
+  venueId    String
+  venue      Venue     @relation(fields: [venueId], references: [id])
+  title      String
+  titleAm    String?
+  hallName   String?   // "Gold 2 2D"
+  times      String[]  // ["13:00", "16:00", "19:00"] Addis time
+  dateFrom   DateTime
+  dateTo     DateTime
+  priceText  String?   // exactly as posted, e.g. "300 ብር"
+  posterUrl  String?
+  notes      String?   // "Action · 2h25m · PG"
+  sourceName String    // "Gast Cinema Telegram channel"
+  sourceUrl  String
+  postedAt   DateTime
+  active     Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  @@index([venueId, dateTo])
 }
