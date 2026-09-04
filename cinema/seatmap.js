@@ -2,7 +2,7 @@
 // The hall template is the ONLY source of seats. The server expands it; the client draws it; nobody
 // invents a seat id. Pure (no DB, no IO) so it is trivially testable and safe to call anywhere.
 const MAX_ROWS = 26, MAX_PER_ROW = 40;
-const ROW_RE = /^([A-Z]{1,2}|R\d{1,2})$/;
+const ROW_RE = /^[A-Z]{1,2}$/;
 
 function validateLayout(L) {
   if (!L || typeof L !== 'object') return { ok: false, error: 'layout must be an object' };
@@ -28,7 +28,7 @@ function validateLayout(L) {
 }
 
 function splitId(id) {
-  const m = typeof id === 'string' && id.match(/^([A-Z]{1,2}|R\d{1,2}?)(\d{1,2})$/);
+  const m = typeof id === 'string' && id.match(/^([A-Z]{1,2})(\d{1,2})$/);
   return m ? { row: m[1], n: Number(m[2]) } : null;
 }
 
