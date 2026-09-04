@@ -8,6 +8,7 @@ const path = require('path');
 const tgauth = require('../ride/tgauth');
 const { validateLayout, capacityOf, isGa, summarise } = require('./seatmap');
 const { HOLD_MS, MAX_SEATS, MAX_GA, SOLD_STATES } = require('./holds');
+const { makePosters } = require('./posters');
 
 function limiter(windowMs, max) {
   const m = new Map();
@@ -50,6 +51,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
   // neighbourhoods behind one address, so an IP is a crowd, not a person.
   const holdRL = limiter(60000, 60), buyRL = limiter(600000, 5), buyIpRL = limiter(600000, 80), lookupRL = limiter(60000, 120), ipRL = limiter(60000, 600);
   const chapaOn = !!(chapa && chapa.enabled);
+  const posters = makePosters({});   // TMDB when TMDB_API_KEY is set; otherwise a no-op
   const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
   const holderOf = req => { const h = String(req.headers['x-holder'] || (req.query && req.query.holder) || ''); return HOLDER_RE.test(h) ? h : null; };
   const loadShow = id => prisma.show.findUnique({ where: { id: String(id) }, include: SHOW_INCLUDE });
@@ -141,7 +143,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const rows = await prisma.programme.findMany({ where: { active: true, dateTo: { gte: TZ_DAY() } }, include: { venue: true }, orderBy: { dateFrom: 'asc' }, take: 500 });
     const byVenue = {};
     for (const p of rows) { const v = p.venue; if (!v || !v.active) continue; (byVenue[v.id] = byVenue[v.id] || { venue: pubProg(p).venue, films: [] }).films.push(pubProg({ ...p, venue: null })); }
-    return { ok: true, today: TZ_DAY(), venues: Object.values(byVenue).sort((a, b) => a.venue.name.localeCompare(b.venue.name)) };
+    return { ok: true, today: TZ_DAY(), tmdb: posters.enabled, venues: Object.values(byVenue).sort((a, b) => a.venue.name.localeCompare(b.venue.name)) };
   });
   fastify.post('/api/cinema/ops/programme', async (req, reply) => {
     if (!ops(req, reply)) return;
@@ -157,7 +159,9 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const sourceUrl = str(b.sourceUrl, 400), sourceName = str(b.sourceName, 80);
     if (!sourceUrl || !/^https?:\/\//.test(sourceUrl) || !sourceName) return reply.code(400).send({ ok: false, error: 'sourceName and a sourceUrl (the cinema\'s own post) are required' });
     const postedAt = b.postedAt && !isNaN(Date.parse(b.postedAt)) ? new Date(b.postedAt) : new Date();
-    const p = await prisma.programme.create({ data: { venueId: venue.id, title, titleAm: str(b.titleAm, 120), hallName: str(b.hallName, 40), times, dateFrom, dateTo: new Date(dateTo.getTime() + 86400000 - 1), priceText: str(b.priceText, 40), posterUrl: str(b.posterUrl, 400), notes: str(b.notes, 200), sourceName, sourceUrl, postedAt }, include: { venue: true } });
+    let posterUrl = str(b.posterUrl, 400);
+    if (!posterUrl && posters.enabled) { const hit = await posters.search(title, b.year ? Number(b.year) : undefined); if (hit) posterUrl = hit.posterUrl; }
+    const p = await prisma.programme.create({ data: { venueId: venue.id, title, titleAm: str(b.titleAm, 120), hallName: str(b.hallName, 40), times, dateFrom, dateTo: new Date(dateTo.getTime() + 86400000 - 1), priceText: str(b.priceText, 40), posterUrl, notes: str(b.notes, 200), sourceName, sourceUrl, postedAt }, include: { venue: true } });
     return { ok: true, programme: pubProg(p) };
   });
   fastify.get('/api/cinema/ops/programme', async (req, reply) => {

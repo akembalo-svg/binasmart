@@ -88,6 +88,7 @@
         });
         html += '<div class="sub" style="font-size:12px;margin-top:10px">🎟️ ትኬት በሲኒማ ቤቱ · Tickets at the cinema. ' + (v.name ? '<a href="/for-cinemas">' + esc(v.name) + ' ትኬት እዚህ መሸጥ ይችላል →</a>' : '') + '</div></div>';
       });
+      if (j.tmdb) html += '<p class="sub" style="font-size:11px">Film posters and data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a>. This product uses the TMDB API but is not endorsed or certified by TMDB.</p>';
       box.innerHTML = html;
     });
   }

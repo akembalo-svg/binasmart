@@ -9,6 +9,7 @@ const tgauth = require('../ride/tgauth');
 const { normPhone } = require('../ride/phone');
 const { makeTgApi } = require('../ride/tgApi');
 const { isPublic, canPlay, embedFor } = require('./rules');
+const { makePosters } = require('../cinema/posters');
 
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const makeCode = () => { const b = crypto.randomBytes(6); let s = ''; for (let i = 0; i < 6; i++) s += ALPHABET[b[i] % 32]; return 'BW-' + s; };
@@ -53,7 +54,6 @@ module.exports = function registerWatch(fastify, deps) {
 
   // ---------- pages ----------
   fastify.get('/ops/watch', async (req, reply) => reply.sendFile('ops-watch.html'));
-  fastify.get('/for-filmmakers', async (req, reply) => reply.sendFile('for-filmmakers.html'));
   async function page(slug) {
     let html = fs.readFileSync(shellPath, 'utf8');
     if (!slug) return html;
@@ -166,9 +166,11 @@ module.exports = function registerWatch(fastify, deps) {
     const films = await prisma.film.findMany({ orderBy: { createdAt: 'desc' }, take: 500 });
     return { ok: true, chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null }, films: films.map(f => ({ ...pubFilm(f), sourceUrl: f.sourceUrl, rights: f.rights, rightsUntil: f.rightsUntil, status: f.status, public: isPublic(f, clock()) })) };
   });
+  const posters = makePosters({});
   fastify.post('/api/watch/ops/films', async (req, reply) => {
     if (!ops(req, reply)) return;
     const d = filmData(req.body || {}); const err = validate(d); if (err) return reply.code(400).send({ ok: false, error: err });
+    if (!d.posterUrl && posters.enabled) { const hit = await posters.search(d.title, d.year || undefined); if (hit) d.posterUrl = hit.posterUrl; }
     const slug = (slugify((req.body || {}).slug || d.title) || 'film') + (await prisma.film.findUnique({ where: { slug: slugify((req.body || {}).slug || d.title) || 'film' } }) ? '-' + crypto.randomBytes(2).toString('hex') : '');
     const f = await prisma.film.create({ data: { slug, ...d } });
     return { ok: true, film: { ...pubFilm(f), status: f.status, rights: f.rights } };
