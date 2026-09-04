@@ -75,6 +75,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand)}
 .bar .cd{font-variant-numeric:tabular-nums;font-weight:900;color:var(--warn);font-size:12px}
 .bar .cd.low{color:var(--bad)}
 .bar .btn{width:auto;padding:12px 18px;flex:none}
+/* programme accordion per cinema */
+details.vprog{margin-bottom:10px;padding:0}
+details.vprog summary{list-style:none;display:flex;align-items:center;gap:10px;padding:14px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+details.vprog summary::-webkit-details-marker{display:none}
+details.vprog .chev{font-size:18px;color:var(--mute);transition:transform .2s}
+details.vprog[open] .chev{transform:rotate(180deg)}
+details.vprog .vbody{padding:0 14px 12px}
+.dayhdr{font-size:12px;font-weight:900;color:var(--brand);margin-top:8px}
 /* general admission tiers */
 .tier{display:flex;align-items:center;gap:12px;margin-bottom:10px}
 .tier.out{opacity:.5}
