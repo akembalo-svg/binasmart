@@ -21,6 +21,9 @@ const STATE = '/root/storage/bina-health.json';
 const TIMEOUT_MS = 8000;
 const ADDIS_OFFSET_MIN = 180; // UTC+3, no DST
 const SUMMARY_HOUR_ADDIS = 8;
+const CONFIRM_RUNS = 2;           // consecutive failing runs before a page goes out (2 x 5 min)
+// Dry-run only: pretend the named checks failed, so the streak logic can be proven without an outage.
+const FAKE_FAIL = DRY ? String(process.env.HEALTH_FAKE_FAIL || '').split(',').map(s => s.trim()).filter(Boolean) : [];
 
 const RIDER = process.env.BINA_RIDER_BOT_TOKEN, DRIVER = process.env.BINA_DRIVER_BOT_TOKEN;
 const OWNER = process.env.BINA_OWNER_TG_CHAT;
@@ -113,7 +116,8 @@ async function send(text) {
   const failing = [];
   const lines = names.map((n, i) => {
     const r = results[i];
-    const reason = r.status === 'fulfilled' ? r.value : (r.reason && r.reason.name === 'AbortError' ? 'timed out' : String(r.reason && r.reason.message || r.reason));
+    let reason = r.status === 'fulfilled' ? r.value : (r.reason && r.reason.name === 'AbortError' ? 'timed out' : String(r.reason && r.reason.message || r.reason));
+    if (FAKE_FAIL.includes(n)) reason = 'simulated failure (dry run)';
     if (reason) failing.push({ name: n, reason });
     return (reason ? '🔴 ' : '🟢 ') + n + (reason ? ' — ' + reason : '');
   });
@@ -122,32 +126,39 @@ async function send(text) {
   console.log(addisDay(now) + ' ' + addisClock(now) + ' Addis · ' + failing.length + ' failing of ' + names.length + ' · ' + ms + 'ms' + (failing.length ? ' · ' + failing.map(f => f.name).join(', ') : ''));
 
   const state = loadState();
+  state.streak = state.streak || {};
+
+  // A check has to fail on two consecutive runs (10 minutes) before it pages. A one-minute host stall
+  // at 3 AM woke the owner for a fault that had healed before the message was read; the log still
+  // records every run, so nothing is lost - only the page is withheld until the fault is real.
+  const rawNow = new Set(failing.map(f => f.name));
+  for (const n of names) state.streak[n] = rawNow.has(n) ? (state.streak[n] || 0) + 1 : 0;
+  const confirmed = new Set(names.filter(n => state.streak[n] >= CONFIRM_RUNS));
   const before = new Set(state.failing || []);
-  const after = new Set(failing.map(f => f.name));
-  const changed = before.size !== after.size || [...after].some(n => !before.has(n));
+  const changed = before.size !== confirmed.size || [...confirmed].some(n => !before.has(n));
+  const pending = failing.filter(f => !confirmed.has(f.name)).map(f => f.name);
+  if (pending.length) console.log('  not paging yet (1st miss, needs ' + CONFIRM_RUNS + ' in a row): ' + pending.join(', '));
 
   if (changed) {
-    if (after.size) {
-      const fresh = failing.filter(f => !before.has(f.name));
-      const head = fresh.length === failing.length ? '🚨 BinaSmart: ' + failing.length + ' check' + (failing.length > 1 ? 's' : '') + ' failing' : '🚨 BinaSmart: now ' + failing.length + ' failing';
-      await send(head + '\n\n' + lines.join('\n') + '\n\n' + addisClock(now) + ' Addis · re-checks every 5 min, next message only on change');
-      state.since = state.since || Date.now();
+    if (confirmed.size) {
+      const shown = lines.filter((_, i) => confirmed.has(names[i]) || !rawNow.has(names[i]));
+      const head = '🚨 BinaSmart: ' + confirmed.size + ' check' + (confirmed.size > 1 ? 's' : '') + ' failing for ' + (CONFIRM_RUNS * 5) + '+ min';
+      await send(head + '\n\n' + shown.join('\n') + '\n\n' + addisClock(now) + ' Addis · re-checks every 5 min, next message only on change');
+      state.since = state.since || Date.now() - (CONFIRM_RUNS - 1) * 5 * 60000;
     } else {
       const mins = state.since ? Math.round((Date.now() - state.since) / 60000) : null;
       await send('✅ BinaSmart: all clear again' + (mins != null ? ' after ' + mins + ' min' : '') + '\n\n' + lines.join('\n'));
       state.since = null;
     }
-    state.failing = [...after];
-  } else if (after.size && state.since) {
-    // Still broken and already announced: stay quiet. The recovery message will say how long it lasted.
+    state.failing = [...confirmed];
   }
 
   // One line a day so silence is known to mean "fine" rather than "dead".
   const today = addisDay(now);
-  if (!after.size && !changed && now.getUTCHours() >= SUMMARY_HOUR_ADDIS && state.lastSummaryDay !== today) {
+  if (!rawNow.size && !changed && now.getUTCHours() >= SUMMARY_HOUR_ADDIS && state.lastSummaryDay !== today) {
     await send('✅ BinaSmart daily check · ' + today + '\nAll ' + names.length + ' checks green: API, MCP, router, both bot webhooks, both pages, pm2, disk.');
     state.lastSummaryDay = today;
   }
   saveState(state);
-  process.exitCode = after.size ? 1 : 0;
+  process.exitCode = rawNow.size ? 1 : 0;
 })().catch(e => { console.error('health check crashed: ' + (e.stack || e)); process.exitCode = 2; });
