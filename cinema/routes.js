@@ -3,6 +3,8 @@
 // verify. Ops (owner key): venues, halls, events, shows, tickets, check-in. The client is never
 // trusted for seats or prices: holds live in the DB, prices come from the Show.
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 const tgauth = require('../ride/tgauth');
 const { validateLayout, capacityOf, isGa, summarise } = require('./seatmap');
 const { HOLD_MS, MAX_SEATS, MAX_GA, SOLD_STATES } = require('./holds');
@@ -54,9 +56,61 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
   const tell = async (ticket, text) => { if (!notify) return false; try { return await notify(ticket, text); } catch (e) { console.error('[cinema] notify: ' + e.message); return false; } };
 
   // ---------- pages ----------
-  for (const [p, f] of [['/cinema', 'cinema.html'], ['/cinema/:showId', 'cinema.html'], ['/ticket/:code', 'ticket.html'], ['/scan', 'scan.html'], ['/ops/cinema', 'ops-cinema.html']]) {
+  for (const [p, f] of [['/ticket/:code', 'ticket.html'], ['/scan', 'scan.html'], ['/ops/cinema', 'ops-cinema.html'], ['/for-cinemas', 'for-cinemas.html']]) {
     fastify.get(p, async (req, reply) => reply.sendFile(f));
   }
+  // /cinema and /cinema/<id> are the static shell with Event schema (Google rich results) and, for a
+  // single show, its own title/description/canonical injected server-side. Any failure falls back to
+  // the plain file, so SEO can never take the page down.
+  const shellPath = path.join(__dirname, '..', 'public', 'cinema.html');
+  const ldFor = (s, seatsLeft) => {
+    const e = s.event || {}, h = s.hall || {}, v = h.venue || {};
+    const prices = Object.values(s.prices || {}).map(Number).filter(Number.isFinite);
+    const url = base + '/cinema/' + s.id;
+    const o = { '@type': e.kind === 'FILM' ? 'ScreeningEvent' : 'Event', '@id': url + '#event', name: e.titleAm || e.title, alternateName: e.titleAm && e.title !== e.titleAm ? e.title : undefined,
+      description: e.descr || undefined, image: e.posterUrl || undefined, url, startDate: new Date(s.startsAt).toISOString(), eventStatus: 'https://schema.org/' + (s.status === 'cancelled' ? 'EventCancelled' : 'EventScheduled'),
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode', inLanguage: e.language || 'am',
+      location: { '@type': e.kind === 'FILM' ? 'MovieTheater' : 'Place', name: v.name, alternateName: v.nameAm || undefined, telephone: v.phone || undefined,
+        address: { '@type': 'PostalAddress', streetAddress: v.address || undefined, addressLocality: 'Addis Ababa', addressCountry: 'ET' },
+        geo: v.lat && v.lng ? { '@type': 'GeoCoordinates', latitude: v.lat, longitude: v.lng } : undefined },
+      organizer: { '@type': 'Organization', name: 'BinaSmart', url: base },
+      offers: prices.length ? { '@type': 'Offer', url, price: Math.min(...prices), priceCurrency: 'ETB', availability: 'https://schema.org/' + (seatsLeft > 0 ? 'InStock' : 'SoldOut'), validFrom: new Date(s.createdAt || Date.now()).toISOString() } : undefined };
+    if (e.kind === 'FILM') o.workPresented = { '@type': 'Movie', name: e.title, alternateName: e.titleAm || undefined, duration: e.runtimeMin ? 'PT' + e.runtimeMin + 'M' : undefined, contentRating: e.rating || undefined };
+    return o;
+  };
+  const escAttr = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  async function cinemaPage(showId) {
+    let html = fs.readFileSync(shellPath, 'utf8');
+    let ld;
+    if (showId) {
+      const s = await loadShow(showId);
+      if (!s || !s.hall || !s.event) return html;
+      const sold = (await prisma.ticket.findMany({ where: { showId: s.id, status: { in: SOLD_STATES } } })).reduce((n, t) => n + (t.seats || []).length, 0);
+      ld = ldFor(s, (s.hall.capacity || 0) - sold);
+      const v = s.hall.venue || {}, e = s.event;
+      const when = new Date(s.startsAt).toLocaleString('en-GB', { timeZone: 'Africa/Addis_Ababa', weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+      const title = (e.titleAm || e.title) + ' · ' + when + ' · ' + (v.nameAm || v.name || '') + ' | BinaSmart Cinema';
+      const desc = (e.titleAm || e.title) + (e.title !== e.titleAm && e.titleAm ? ' (' + e.title + ')' : '') + ' — ' + when + ' በ' + (v.name || '') + '። ወንበርዎን ይምረጡ፣ ከ' + Math.min(...Object.values(s.prices || {}).map(Number)) + ' ብር። Pick your seat online, QR ticket, pay on Chapa or at the counter.';
+      html = html.replace(/<title>[^<]*<\/title>/, '<title>' + escAttr(title) + '</title>')
+        .replace(/<meta name="description" content="[^"]*">/, '<meta name="description" content="' + escAttr(desc) + '">')
+        .replace('<link rel="canonical" href="https://bina.et/cinema">', '<link rel="canonical" href="' + base + '/cinema/' + s.id + '">')
+        .replace(/<meta property="og:title" content="[^"]*">/, '<meta property="og:title" content="' + escAttr((e.titleAm || e.title) + ' · ' + when) + '">')
+        .replace(/<meta property="og:description" content="[^"]*">/, '<meta property="og:description" content="' + escAttr(desc) + '">')
+        .replace('<meta property="og:url" content="https://bina.et/cinema">', '<meta property="og:url" content="' + base + '/cinema/' + s.id + '">');
+      if (e.posterUrl) html = html.replace(/<meta property="og:image" content="[^"]*">/, '<meta property="og:image" content="' + escAttr(e.posterUrl) + '">');
+    } else {
+      const shows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date(Date.now() - 3600000) } }, include: SHOW_INCLUDE, orderBy: { startsAt: 'asc' }, take: 50 });
+      const ids = shows.map(s => s.id);
+      const sold = ids.length ? await prisma.ticket.findMany({ where: { showId: { in: ids }, status: { in: SOLD_STATES } } }) : [];
+      const taken = {}; for (const t of sold) taken[t.showId] = (taken[t.showId] || 0) + (t.seats || []).length;
+      const items = shows.filter(s => s.hall && s.event).map(s => ldFor(s, (s.hall.capacity || 0) - (taken[s.id] || 0)));
+      ld = items.length ? { '@type': 'ItemList', '@id': base + '/cinema#shows', name: 'Shows on sale · BinaSmart Cinema', itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, item: it })) } : null;
+    }
+    if (ld) html = html.replace('</head>', '<script type="application/ld+json">' + JSON.stringify({ '@context': 'https://schema.org', ...ld }).replace(/</g, '\\u003c') + '</script>\n</head>');
+    return html;
+  }
+  fastify.get('/cinema', async (req, reply) => { try { return reply.type('text/html; charset=utf-8').send(await cinemaPage(null)); } catch (e) { console.error('[cinema] page: ' + e.message); return reply.sendFile('cinema.html'); } });
+  fastify.get('/cinema/:showId', async (req, reply) => { try { return reply.type('text/html; charset=utf-8').send(await cinemaPage(String(req.params.showId))); } catch (e) { console.error('[cinema] show page: ' + e.message); return reply.sendFile('cinema.html'); } });
 
   // ---------- public ----------
   fastify.get('/api/cinema/shows', async () => {

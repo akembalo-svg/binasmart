@@ -73,7 +73,7 @@
   function renderVenues() {
     api('/api/cinema/venues').then(function (j) {
       var box = $('venues'); if (!box || !j.ok || !j.venues.length) return;
-      var html = '<h2 style="margin-top:22px">ሲኒማ ቤቶች በአዲስ አበባ · Cinemas in Addis Ababa</h2><p class="sub">' + j.venues.length + ' ቦታዎች · ' + j.venues.length + ' venues. ሲኒማ ቤት ነዎት? ወንበር ካርታዎን ይላኩልን፣ ትኬት እዚህ ይሸጡ። · Run a cinema? Send us your seat plan and sell tickets here — <a href="https://t.me/bina_smart_bot">@bina_smart_bot</a>.</p>';
+      var html = '<h2 style="margin-top:22px">ሲኒማ ቤቶች በአዲስ አበባ · Cinemas in Addis Ababa</h2><p class="sub">' + j.venues.length + ' ቦታዎች · ' + j.venues.length + ' venues. ሲኒማ ቤት ወይም አዘጋጅ ነዎት? <a href="/for-cinemas"><b>ትኬትዎን እዚህ ይሽጡ — በጅምር ወቅት ነፃ →</b></a> · Run a cinema or events? <a href="/for-cinemas">Sell tickets here, free during launch.</a></p>';
       j.venues.forEach(function (v) {
         var maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(v.name + ', Addis Ababa');
         html += '<div class="card" style="margin-bottom:10px;padding:12px 14px"><div style="display:flex;gap:10px;align-items:flex-start"><div style="flex:1;min-width:0"><div style="font-weight:900;font-size:15px">' + esc(v.nameAm || v.name) + '</div>'

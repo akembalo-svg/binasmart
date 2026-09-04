@@ -273,7 +273,23 @@ test('cancelling a show cancels live tickets, frees holds, tells Telegram buyers
 
 test('pages are served', async () => {
   const { f } = await app();
-  for (const u of ['/cinema', '/cinema/abc', '/ticket/BINA-ABCDEF', '/scan', '/ops/cinema']) assert.equal((await f.inject({ method: 'GET', url: u })).statusCode, 200, u);
+  for (const u of ['/cinema', '/cinema/abc', '/ticket/BINA-ABCDEF', '/scan', '/ops/cinema', '/for-cinemas']) assert.equal((await f.inject({ method: 'GET', url: u })).statusCode, 200, u);
+  await f.close();
+});
+
+test('SEO: /cinema carries an ItemList of ScreeningEvents; a show page gets its own title, canonical and Event schema', async () => {
+  const { f } = await app();
+  const { show } = await seed(f);
+  const list = await f.inject({ method: 'GET', url: '/cinema' });
+  assert.match(list.headers['content-type'], /text\/html/);
+  assert.match(list.body, /"@type":"ItemList"/); assert.match(list.body, /"@type":"ScreeningEvent"/); assert.match(list.body, /"priceCurrency":"ETB"/); assert.match(list.body, /"price":300/);
+  const page = await f.inject({ method: 'GET', url: '/cinema/' + show.id });
+  assert.match(page.body, new RegExp('<title>ላምብ · .* | BinaSmart Cinema</title>'));
+  assert.match(page.body, new RegExp('<link rel="canonical" href="https://bina.et/cinema/' + show.id + '">'));
+  assert.match(page.body, /"workPresented":\{"@type":"Movie","name":"Lamb"/); assert.match(page.body, /"availability":"https:\/\/schema.org\/InStock"/);
+  assert.match(page.body, /"@type":"MovieTheater","name":"Bina Hall"/);
+  const gone = await f.inject({ method: 'GET', url: '/cinema/nope' });
+  assert.equal(gone.statusCode, 200); assert.doesNotMatch(gone.body, /ld\+json">\{"@context":"https:\/\/schema.org","@type":"ScreeningEvent"/);
   await f.close();
 });
 
