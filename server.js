@@ -787,7 +787,7 @@ fastify.get('/hotel/:slug', async (req, reply) => reply.sendFile('hotel.html'));
 
 // ===== BINA NEWS + TENDERS (server-rendered, bina.et) =====
 const NEWS_CATS = { 'ቴክኖሎጂ': '#2563eb', 'ግንባታ': '#c2410c', 'ንግድ': '#059669', 'ሪል እስቴት': '#7c3aed', 'መመሪያ': '#0e7490' };
-const TENDER_CATS = ['ግንባታ Construction', 'አቅርቦት Supply', 'አገልግሎት Services', 'ማማከር Consultancy', 'ጤና Health', 'ትራንስፖርት Transport'];
+const TENDER_CATS = ['ግንባታ Construction', 'አቅርቦት Supply', 'አገልግሎት Services', 'ማማከር Consultancy', 'ጤና Health', 'ትራንስፖርት Transport', 'ሽያጭ ጨረታ Disposal auction'];
 const escH = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const amDate = d => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 
