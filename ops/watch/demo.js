@@ -14,7 +14,7 @@ const SLUGS = ['demo-big-buck-bunny', 'demo-paid-example'];
   } else {
     await prisma.film.upsert({ where: { slug: SLUGS[0] }, update: {}, create: { slug: SLUGS[0], title: 'Big Buck Bunny (demo)', titleAm: 'ቢግ ባክ ባኒ (ማሳያ)', year: 2008, runtimeMin: 10, rating: 'G', language: 'No dialogue', genre: 'Animation',
       descr: 'ማሳያ ፊልም። ይህ የBlender Foundation ነፃ ፊልም ነው (Creative Commons BY 3.0)፤ ማጫወቻው እንዴት እንደሚሠራ ለማየት ብቻ። · Demo only: a Creative Commons short by the Blender Foundation, here to show the player works. Real Amharic films appear once licensed.',
-      posterUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Big_buck_bunny_poster_big.jpg/480px-Big_buck_bunny_poster_big.jpg', sourceKind: 'mp4', sourceUrl: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
+      posterUrl: 'https://archive.org/services/img/BigBuckBunny_124', sourceKind: 'mp4', sourceUrl: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
       priceEtb: 0, rentHours: 48, rights: 'Creative Commons Attribution 3.0 — (c) copyright 2008, Blender Foundation / www.bigbuckbunny.org', status: 'public' } });
     await prisma.film.upsert({ where: { slug: SLUGS[1] }, update: {}, create: { slug: SLUGS[1], title: 'Paid example (draft)', titleAm: 'የኪራይ ምሳሌ (ረቂቅ)', sourceKind: 'youtube', sourceUrl: 'https://youtu.be/dQw4w9WgXcQ', priceEtb: 80, rentHours: 48, rights: null, status: 'draft',
       descr: 'Example of a paid film row. No rights note, so it can never become public until one is added.' } });
