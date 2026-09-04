@@ -1,0 +1,22 @@
+{
+  "venue": "addis-cinema-complex",
+  "sourceName": "Addis Ababa Cinema Houses Administration Enterprise — official stamped weekly programme (ነሐሴ 29 – ጳጉሜ 05, 2018 ዓ.ም)",
+  "postedAt": "2026-09-04",
+  "films": {
+    "ሐምራዊት": { "title": "Hamrawit", "notes": "ፊልም · a film by Fuad Mustefa" },
+    "ሳላያት": { "title": "Salayat", "notes": "አስቂኝ ፊልም · comedy" },
+    "ፈረንጁ ሀበሻ": { "title": "Ferenju Habesha", "notes": "ፊልም · a film by Ermias Tadesse" }
+  },
+  "grid": {
+    "columns": ["12:00", "14:00", "16:00", "18:00"],
+    "days": {
+      "2026-09-04": [null, null, "ሐምራዊት", null],
+      "2026-09-05": [null, null, "ፈረንጁ ሀበሻ", null],
+      "2026-09-06": [null, null, "ሐምራዊት", null],
+      "2026-09-07": [null, null, "ፈረንጁ ሀበሻ", null],
+      "2026-09-08": [null, null, "ሳላያት", null],
+      "2026-09-09": [null, "ፈረንጁ ሀበሻ", null, null],
+      "2026-09-10": [null, "ሐምራዊት", null, null]
+    }
+  }
+}

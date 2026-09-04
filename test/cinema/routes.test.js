@@ -299,8 +299,10 @@ test('programme: ops creates entries with a source; public groups by venue; expi
   const { f, db } = await app();
   const v = (await f.inject({ method: 'POST', url: '/api/cinema/ops/venues', headers: OPS, payload: { name: 'Gast Cinema', nameAm: 'ጋስት', phone: '0930113377' } })).json().venue;
   const today = new Date(Date.now() + 3 * 3600000).toISOString().slice(0, 10);
-  const bad = await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Mutiny', times: '12:00', dateFrom: today, sourceName: 'Gast' } });
-  assert.equal(bad.statusCode, 400); assert.match(bad.json().error, /sourceUrl/);
+  const bad = await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Mutiny', times: '12:00', dateFrom: today } });
+  assert.equal(bad.statusCode, 400); assert.match(bad.json().error, /sourceName/);
+  const doc = await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Doc Film', times: '12:00', dateFrom: '2026-01-01', sourceName: 'Official stamped programme, Cinema Houses Enterprise' } });
+  assert.equal(doc.statusCode, 200, 'a named official document is a valid source without a link'); assert.equal(doc.json().programme.sourceUrl, '');
   const ok = await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Mutiny', hallName: 'Gold 2 2D', times: '12:00, 14:00 12:00 7:00', dateFrom: today, dateTo: today, priceText: '300 ብር', sourceName: 'Gast Cinema Telegram', sourceUrl: 'https://t.me/gastcinema', postedAt: '2026-09-02' } });
   assert.equal(ok.statusCode, 200, ok.body); assert.deepEqual(ok.json().programme.times, ['07:00', '12:00', '14:00']);
   const tr = await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Trailered', times: '18:00', dateFrom: today, sourceName: 'Gast', sourceUrl: 'https://t.me/gastcinema', trailerUrl: 'https://youtu.be/dQw4w9WgXcQ' } });

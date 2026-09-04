@@ -1,0 +1,23 @@
+{
+  "venue": "cinema-ethiopia",
+  "sourceName": "Addis Ababa Cinema Houses Administration Enterprise — official stamped weekly programme (ነሐሴ 29 – ጳጉሜ 05, 2018 ዓ.ም)",
+  "postedAt": "2026-09-04",
+  "films": {
+    "ሐምራዊት": { "title": "Hamrawit", "notes": "ፊልም · a film by Fuad Mustefa" },
+    "ሳላያት": { "title": "Salayat", "notes": "አስቂኝ ፊልም · comedy" },
+    "ፈረንጁ ሀበሻ": { "title": "Ferenju Habesha", "notes": "ፊልም · a film by Ermias Tadesse" },
+    "ዶሎቪያ": { "title": "Dolovia", "notes": "ፊልም · 2026", "trailerUrl": "https://www.youtube.com/watch?v=c8wx16sRmJU" }
+  },
+  "grid": {
+    "columns": ["14:00", "16:00", "18:00"],
+    "days": {
+      "2026-09-04": ["ሐምራዊት", "ሳላያት", "ሐምራዊት"],
+      "2026-09-05": ["ሳላያት", "ሐምራዊት", "ፈረንጁ ሀበሻ"],
+      "2026-09-06": ["ሐምራዊት", "ሐምራዊት", "ሳላያት"],
+      "2026-09-07": ["ፈረንጁ ሀበሻ", "ሐምራዊት", "ዶሎቪያ"],
+      "2026-09-08": ["ሳላያት", "ፈረንጁ ሀበሻ", "ሐምራዊት"],
+      "2026-09-09": ["ሐምራዊት", "ሳላያት", "ዶሎቪያ"],
+      "2026-09-10": ["ዶሎቪያ", "ሐምራዊት", "ፈረንጁ ሀበሻ"]
+    }
+  }
+}
