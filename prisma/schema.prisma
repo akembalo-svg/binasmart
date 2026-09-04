@@ -836,6 +836,12 @@ model Event {
   tiers      Json
   active     Boolean  @default(true)
   tickets    EventTicket[]
+  kind        String   @default("FILM")   // FILM | CONCERT | THEATER | MEETUP | OTHER
+  posterUrl   String?
+  runtimeMin  Int?
+  rating      String?                     // "PG-13", "18+"
+  language    String?                     // "Amharic", "English (Amharic subtitles)"
+  shows       Show[]
 }
 
 model EventTicket {
@@ -1107,4 +1113,80 @@ model DriverLocation {
 
   @@index([driverId, at])
   @@index([rideId, at])
+}
+
+// ---------------- Cinema & events: seat booking (Phase A) ----------------
+model Venue {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  nameAm    String?
+  address   String?
+  lat       Float?
+  lng       Float?
+  phone     String?
+  scanKey   String?   // reserved for per-venue door staff (Phase C)
+  active    Boolean   @default(true)
+  halls     Hall[]
+  createdAt DateTime  @default(now())
+}
+
+model Hall {
+  id        String   @id @default(cuid())
+  venueId   String
+  venue     Venue    @relation(fields: [venueId], references: [id])
+  name      String
+  layout    Json     // { rows, seatsPerRow, aisles, blocked, wheelchair, sections }
+  capacity  Int
+  shows     Show[]
+}
+
+model Show {
+  id               String    @id @default(cuid())
+  eventId          String
+  event            Event     @relation(fields: [eventId], references: [id])
+  hallId           String
+  hall             Hall      @relation(fields: [hallId], references: [id])
+  startsAt         DateTime
+  prices           Json      // { "VIP": 500, "Regular": 300 }  ETB per seat by section name
+  status           String    @default("onsale")   // onsale | soldout | cancelled | closed
+  counterCutoffMin Int       @default(30)
+  holds            SeatHold[]
+  tickets          Ticket[]
+  @@index([startsAt])
+  @@index([status])
+}
+
+// One seat, one row. Holding is an INSERT; the unique constraint refuses the second person.
+model SeatHold {
+  id        String   @id @default(cuid())
+  showId    String
+  show      Show     @relation(fields: [showId], references: [id])
+  seat      String
+  holderKey String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  @@unique([showId, seat])
+  @@index([expiresAt])
+  @@index([holderKey])
+}
+
+model Ticket {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  showId      String
+  show        Show      @relation(fields: [showId], references: [id])
+  seats       String[]
+  name        String
+  phone       String
+  telegramId  String?
+  total       Int
+  status      String    @default("RESERVED")   // RESERVED | CONFIRMED | CHECKED_IN | CANCELLED
+  payMethod   String    @default("counter")    // counter | chapa
+  chapaRef    String?
+  idemKey     String?   @unique
+  checkedInAt DateTime?
+  createdAt   DateTime  @default(now())
+  @@index([showId, status])
+  @@index([phone])
 }
