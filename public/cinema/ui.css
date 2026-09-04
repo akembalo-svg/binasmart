@@ -50,9 +50,9 @@ input:focus,select:focus,textarea:focus{border-color:var(--brand)}
 .mapwrap{overflow-x:auto;padding:4px 0 8px;-webkit-overflow-scrolling:touch}
 /* --sw is set by app.js so a whole row fits the phone width; margin:auto centres when it fits and
    left-aligns (scrollable) when it cannot, instead of clipping the left seats. */
-.map{display:grid;gap:5px;width:max-content;margin:0 auto;--sw:34px;--aisle:14px}
-.rowl{display:grid;grid-auto-flow:column;align-items:center;gap:4px}
-.rowl .lab{width:16px;font-size:10px;font-weight:900;color:var(--mute);text-align:center}
+.map{display:grid;gap:4px;width:max-content;margin:0 auto;--sw:34px;--aisle:14px;--gap:4px}
+.rowl{display:grid;grid-auto-flow:column;align-items:center;gap:var(--gap)}
+.rowl .lab{width:12px;font-size:9px;font-weight:900;color:var(--mute);text-align:center}
 .seat{width:var(--sw);height:calc(var(--sw) * .94);border-radius:26% 26% 14% 14%;border:1.5px solid #c9d6d2;background:var(--free);font-size:calc(var(--sw) * .3);font-weight:800;color:var(--mute);display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .08s;padding:0}
 .seat:active{transform:scale(.92)}
 .seat.aisle{margin-right:var(--aisle)}
