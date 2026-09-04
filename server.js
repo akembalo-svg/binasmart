@@ -136,7 +136,7 @@ fastify.get('/sitemap.xml', async (req, reply) => {
   const bs = await prisma.building.findMany({ select: { qrSlug: true, buildingType: true }, orderBy: { createdAt: 'asc' } });
   const posts = await prisma.newsPost.findMany({ where: { published: true }, select: { slug: true } });
   const tnds = await prisma.tender.findMany({ where: { published: true }, select: { slug: true } });
-  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/events', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug)];
+  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/events', 'https://bina.et/cinema', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug)];
   reply.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + urls.map(u => '<url><loc>' + u + '</loc></url>').join('\n') + '\n</urlset>');
 });
@@ -2425,7 +2425,7 @@ fastify.post('/api/pay/init', async (req, reply) => {
 });
 // Webhook (server-to-server) -> verify + mark paid
 fastify.post('/api/chapa/webhook', async (req, reply) => {
-  try{ const b=req.body||{}; const ref=b.tx_ref||b.trx_ref||b.reference||(req.query&&req.query.ref); if(ref) await chapaVerify(ref); }catch(e){}
+  try{ const b=req.body||{}; const ref=b.tx_ref||b.trx_ref||b.reference||(req.query&&req.query.ref); if(ref) await chapaVerify(ref); if(ref && cinema && /^bina-cin-/.test(String(ref))) await cinema.confirmChapa(ref); }catch(e){}
   reply.send({ received:true });
 });
 // Return URL (user redirected back)
@@ -2633,6 +2633,21 @@ require('./ride')(fastify, {
   OWNER_CHAT: '8096525984',
   ROUTER_URL: process.env.ROUTER_URL || 'http://127.0.0.1:8989',
   BASE_URL: 'https://bina.et'
+});
+
+// ===== BinaSmart Cinema & Events: seat booking (Phase A). Mounted only when CINEMA_ENABLED=1 =====
+const cinema = require('./cinema')(fastify, {
+  prisma, OWNER_KEY, BASE_URL: 'https://bina.et',
+  chapa: {
+    enabled: !!CHAPA_SECRET, mode: process.env.CHAPA_MODE === 'live' ? 'live' : 'test',
+    init: async ({ amount, ref, name, phone, returnUrl, title }) => {
+      const init = await chapaApi('/transaction/initialize', 'POST', { amount: String(amount), currency: 'ETB', email: 'cinema@bina.et',
+        first_name: String(name || 'BinaSmart').split(' ')[0].slice(0, 30), last_name: 'Cinema', phone_number: phone, tx_ref: ref,
+        callback_url: 'https://bina.et/api/chapa/webhook', return_url: returnUrl, 'customization[title]': 'BinaSmart', 'customization[description]': String(title || 'Ticket').slice(0, 50) });
+      return init && init.data && init.data.checkout_url ? init.data.checkout_url : null;
+    },
+    verify: async ref => { const v = await chapaApi('/transaction/verify/' + encodeURIComponent(ref), 'GET'); return !!(v && v.status === 'success' && v.data && v.data.status === 'success'); },
+  },
 });
 
 fastify.listen({ port: PORT, host: '127.0.0.1' })
