@@ -91,3 +91,50 @@ test('availability merges holds, tickets and the template for the map', async ()
   await h.hold(show, 'A3', 'me');
   assert.equal((await h.availability(show, 'me')).find(s => s.id === 'A3').state, 'mine');
 });
+
+// ---- general admission ----
+const { MAX_GA } = require('../../cinema/holds');
+const GA = { kind: 'ga', sections: [{ name: 'VIP', nameAm: 'ቪአይፒ', capacity: 2 }, { name: 'Regular', nameAm: 'መደበኛ', capacity: 12 }] };
+const gshow = { id: 'g1', status: 'onsale', hall: { layout: GA } };
+
+test('GA: holdMany takes the lowest free places and reports what is left', async () => {
+  const prisma = fakePrisma(); const h = makeHolds({ prisma, now: () => 1_000_000 });
+  const r = await h.holdMany(gshow, 'Regular', 3, 'me');
+  assert.equal(r.ok, true); assert.deepEqual(r.seats, ['REGULAR-001', 'REGULAR-002', 'REGULAR-003']);
+  const t = await h.tiers(gshow, 'me');
+  assert.deepEqual(t, [{ name: 'VIP', nameAm: 'ቪአይፒ', capacity: 2, left: 2, mine: 0 }, { name: 'Regular', nameAm: 'መደበኛ', capacity: 12, left: 9, mine: 3 }]);
+});
+test('GA: asking for more than is left is refused with the real number, nothing partially held', async () => {
+  const prisma = fakePrisma(); const h = makeHolds({ prisma, now: () => 1_000_000 });
+  await h.holdMany(gshow, 'VIP', 1, 'you');
+  const r = await h.holdMany(gshow, 'VIP', 2, 'me');
+  assert.equal(r.ok, false); assert.equal(r.error, 'sold_out'); assert.equal(r.left, 1);
+  assert.equal(prisma._.holds.filter(x => x.holderKey === 'me').length, 0);
+});
+test('GA: two buyers race for the last place — one wins, the other is told sold out with 0 left', async () => {
+  const prisma = fakePrisma(); const h = makeHolds({ prisma, now: () => 1_000_000 });
+  await h.holdMany(gshow, 'VIP', 1, 'early');
+  const [a, b] = await Promise.all([h.holdMany(gshow, 'VIP', 1, 'me'), h.holdMany(gshow, 'VIP', 1, 'you')]);
+  assert.equal([a, b].filter(x => x.ok).length, 1);
+  const loser = [a, b].find(x => !x.ok); assert.equal(loser.error, 'sold_out'); assert.equal(loser.left, 0);
+  assert.equal(prisma._.holds.filter(x => x.seat.startsWith('VIP')).length, 2);
+});
+test('GA: sold places are not free, the cap is MAX_GA, unknown tier / bad qty / seated hall are refused', async () => {
+  const prisma = fakePrisma(); prisma._.tickets.push({ showId: 'g1', seats: ['VIP-001', 'VIP-002'], status: 'CONFIRMED' });
+  const h = makeHolds({ prisma, now: () => 1 });
+  assert.equal((await h.holdMany(gshow, 'VIP', 1, 'me')).error, 'sold_out');
+  assert.equal(MAX_GA, 10);
+  assert.equal((await h.holdMany(gshow, 'Regular', 11, 'me')).error, 'too_many');
+  assert.equal((await h.holdMany(gshow, 'Regular', 10, 'me')).ok, true);
+  assert.equal((await h.holdMany(gshow, 'Regular', 1, 'me')).error, 'too_many');
+  assert.equal((await h.holdMany(gshow, 'Balcony', 1, 'x')).error, 'no_such_section');
+  assert.equal((await h.holdMany(gshow, 'VIP', 0, 'x')).error, 'bad_qty');
+  assert.equal((await h.holdMany(show, 'VIP', 1, 'x')).error, 'not_ga');
+});
+test('GA: releaseSome frees that many of my places in a tier, highest first', async () => {
+  const prisma = fakePrisma(); const h = makeHolds({ prisma, now: () => 1 });
+  await h.holdMany(gshow, 'Regular', 3, 'me'); await h.holdMany(gshow, 'Regular', 1, 'you');
+  assert.equal(await h.releaseSome('g1', 'me', 'Regular', 2), 2);
+  assert.deepEqual(prisma._.holds.map(x => x.seat + ':' + x.holderKey), ['REGULAR-001:me', 'REGULAR-004:you']);
+  assert.equal(await h.releaseSome('g1', 'me', 'VIP', 5), 0);
+});

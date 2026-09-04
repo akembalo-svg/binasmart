@@ -43,3 +43,35 @@ test('isSeat only accepts ids the template actually contains', () => {
   assert.equal(isSeat(LAYOUT, 42), false);
   assert.equal(isSeat(LAYOUT, 'b4'), false, 'case matters: ids are canonical');
 });
+
+// ---- general admission (tiers, no chairs) ----
+const { isGa, gaId, summarise } = require('../../cinema/seatmap');
+const GA = { kind: 'ga', sections: [{ name: 'VIP', nameAm: 'ቪአይፒ', capacity: 3 }, { name: 'Regular', nameAm: 'መደበኛ', capacity: 5 }] };
+
+test('GA: template expands into synthetic ids per tier, capacity is the sum', () => {
+  assert.equal(isGa(GA), true); assert.equal(isGa(LAYOUT), false);
+  const s = seatsFor(GA);
+  assert.equal(s.length, 8);
+  assert.deepEqual(s[0], { id: 'VIP-001', row: null, n: 1, section: 'VIP', blocked: false, wheelchair: false, aisleAfter: false });
+  assert.equal(s[7].id, 'REGULAR-005');
+  assert.equal(capacityOf(GA), 8);
+  assert.equal(gaId('Front Row!', 12), 'FRONTROW-012');
+});
+test('GA: isSeat / sectionOf / priceOf work on synthetic ids and refuse the rest', () => {
+  assert.equal(isSeat(GA, 'VIP-003'), true); assert.equal(isSeat(GA, 'VIP-004'), false); assert.equal(isSeat(GA, 'VIP-000'), false);
+  assert.equal(isSeat(GA, 'A1'), false); assert.equal(isSeat(LAYOUT, 'VIP-001'), false);
+  assert.equal(sectionOf(GA, 'REGULAR-002'), 'Regular');
+  assert.equal(priceOf(GA, { VIP: 800, Regular: 300 }, 'REGULAR-002'), 300);
+});
+test('GA: validation', () => {
+  assert.equal(validateLayout(GA).ok, true);
+  assert.match(validateLayout({ kind: 'ga', sections: [] }).error, /section/);
+  assert.match(validateLayout({ kind: 'ga', sections: [{ name: 'VIP', capacity: 0 }] }).error, /capacity/);
+  assert.match(validateLayout({ kind: 'ga', sections: [{ name: 'VIP', capacity: 5001 }] }).error, /capacity/);
+  assert.match(validateLayout({ kind: 'ga', sections: [{ name: 'VIP', capacity: 1 }, { name: 'vip', capacity: 1 }] }).error, /duplicate/);
+  assert.match(validateLayout({ kind: 'ga', sections: Array.from({ length: 21 }, (_, i) => ({ name: 'T' + i, capacity: 1 })) }).error, /20/);
+});
+test('summarise groups seats by tier in layout order, for GA and seated halls', () => {
+  assert.deepEqual(summarise(GA, ['REGULAR-002', 'VIP-001', 'REGULAR-001']), [{ section: 'VIP', nameAm: 'ቪአይፒ', count: 1 }, { section: 'Regular', nameAm: 'መደበኛ', count: 2 }]);
+  assert.deepEqual(summarise(LAYOUT, ['B1', 'C2']), [{ section: 'Regular', nameAm: 'መደበኛ', count: 2 }]);
+});
