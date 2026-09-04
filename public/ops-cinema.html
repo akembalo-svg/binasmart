@@ -40,7 +40,7 @@ h2{margin-top:0}
       <div class="row"><div><label>Hall (as posted)</label><input id="pHall" placeholder="Gold 2 2D"></div><div><label>Price (as posted)</label><input id="pPrice" placeholder="300 ብር"></div></div>
       <label>Showtimes (HH:MM, comma or space separated)</label><input id="pTimes" placeholder="12:00, 15:00, 18:00, 21:00">
       <div class="row"><div><label>From (date)</label><input id="pFrom" type="date"></div><div><label>To (date)</label><input id="pTo" type="date"></div></div>
-      <label>Notes (genre · runtime · rating)</label><input id="pNotes" placeholder="Action · 2h25m · PG"><label>Poster URL (optional)</label><input id="pPoster">
+      <label>Notes (genre · runtime · rating)</label><input id="pNotes" placeholder="Action · 2h25m · PG"><label>Trailer (YouTube link, optional — also used as poster if none)</label><input id="pTrailer" placeholder="https://youtu.be/…"><label>Poster URL (optional)</label><input id="pPoster">
       <div class="row"><div><label>Source name</label><input id="pSrcName" placeholder="Gast Cinema Telegram channel"></div><div><label>Source link</label><input id="pSrcUrl" placeholder="https://t.me/gastcinema"></div></div>
       <label>Posted on</label><input id="pPosted" type="date">
       <div class="err" id="pErr"></div><button class="btn" id="pGo" style="margin-top:8px">Add entry</button></div>
@@ -135,7 +135,7 @@ h2{margin-top:0}
   }
   document.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b && b.dataset.pdel && confirm('Remove this entry?')) api('/api/cinema/ops/programme/' + b.dataset.pdel + '/delete', {}).then(function () { loadProg(); }); });
   $('pGo').addEventListener('click', function () {
-    api('/api/cinema/ops/programme', { venueId: $('pVenue').value, title: $('pTitle').value, titleAm: $('pTitleAm').value, hallName: $('pHall').value, priceText: $('pPrice').value, times: $('pTimes').value, dateFrom: $('pFrom').value, dateTo: $('pTo').value || $('pFrom').value, notes: $('pNotes').value, posterUrl: $('pPoster').value, sourceName: $('pSrcName').value, sourceUrl: $('pSrcUrl').value, postedAt: $('pPosted').value || null })
+    api('/api/cinema/ops/programme', { venueId: $('pVenue').value, title: $('pTitle').value, titleAm: $('pTitleAm').value, hallName: $('pHall').value, priceText: $('pPrice').value, times: $('pTimes').value, dateFrom: $('pFrom').value, dateTo: $('pTo').value || $('pFrom').value, notes: $('pNotes').value, posterUrl: $('pPoster').value, trailerUrl: $('pTrailer').value, sourceName: $('pSrcName').value, sourceUrl: $('pSrcUrl').value, postedAt: $('pPosted').value || null })
       .then(function (j) { $('pErr').textContent = j.ok ? '' : j.error; if (j.ok) { toast('Added'); $('pTitle').value = ''; $('pTimes').value = ''; $('pHall').value = ''; loadProg(); } });
   });
   document.addEventListener('click', function (e) {

@@ -40,6 +40,7 @@
         + (F.descr ? '<div class="card" style="margin-top:12px;font-size:14px">' + esc(F.descr).replace(/\n/g, '<br>') + '</div>' : '');
       view.innerHTML = html;
       paintRent(r, chapaOn);
+      if (F.trailerEmbed) { var rb = $('rent'); rb.insertAdjacentHTML('afterend', '<button type="button" class="btn ghost sm" id="trailerBtn" style="margin-top:8px">▶ ትሬለር · Trailer</button>'); $('trailerBtn').addEventListener('click', function () { $('player').innerHTML = '<iframe src="' + esc(F.trailerEmbed) + '&autoplay=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>'; }); }
       $('cover').addEventListener('click', play);
       if (r && r.status === 'PENDING' && q.get('paid') === '1') verify(r.code, 0);
     });

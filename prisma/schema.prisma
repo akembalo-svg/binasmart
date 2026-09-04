@@ -1207,6 +1207,7 @@ model Film {
   genre       String?
   descr       String?
   posterUrl   String?
+  trailerUrl  String?   // YouTube trailer, playable without renting
   sourceKind  String    // youtube | mp4 | hls
   sourceUrl   String    // never a file on this server
   priceEtb    Int       @default(0)   // 0 = free
@@ -1251,6 +1252,7 @@ model Programme {
   dateTo     DateTime
   priceText  String?   // exactly as posted, e.g. "300 ብር"
   posterUrl  String?
+  trailerUrl String?   // YouTube trailer (embedded with the YouTube player)
   notes      String?   // "Action · 2h25m · PG"
   sourceName String    // "Gast Cinema Telegram channel"
   sourceUrl  String

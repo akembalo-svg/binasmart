@@ -9,6 +9,8 @@ const tgauth = require('../ride/tgauth');
 const { validateLayout, capacityOf, isGa, summarise } = require('./seatmap');
 const { HOLD_MS, MAX_SEATS, MAX_GA, SOLD_STATES } = require('./holds');
 const { makePosters } = require('./posters');
+const { youtubeId } = require('../watch/rules');
+const trailerOf = url => { const id = youtubeId(url); return id ? { trailerId: id, trailerEmbed: 'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&modestbranding=1', trailerThumb: 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg' } : {}; };
 
 function limiter(windowMs, max) {
   const m = new Map();
@@ -106,7 +108,13 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
       const sold = ids.length ? await prisma.ticket.findMany({ where: { showId: { in: ids }, status: { in: SOLD_STATES } } }) : [];
       const taken = {}; for (const t of sold) taken[t.showId] = (taken[t.showId] || 0) + (t.seats || []).length;
       const items = shows.filter(s => s.hall && s.event).map(s => ldFor(s, (s.hall.capacity || 0) - (taken[s.id] || 0)));
-      ld = items.length ? { '@type': 'ItemList', '@id': base + '/cinema#shows', name: 'Shows on sale · BinaSmart Cinema', itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, item: it })) } : null;
+      // Programme trailers as VideoObjects (Google video rich results); one per distinct trailer.
+      const progs = await prisma.programme.findMany({ where: { active: true, dateTo: { gte: TZ_DAY() }, NOT: { trailerUrl: null } }, include: { venue: true }, take: 100 });
+      const seen = new Set(); const videos = [];
+      for (const p of progs) { const t = trailerOf(p.trailerUrl); if (!t.trailerId || seen.has(t.trailerId)) continue; seen.add(t.trailerId);
+        videos.push({ '@type': 'VideoObject', '@id': base + '/cinema#trailer-' + t.trailerId, name: (p.titleAm || p.title) + ' — trailer', description: (p.titleAm || p.title) + (p.venue ? ' · ' + p.venue.name + ' · ' + p.times.join(', ') : ''), thumbnailUrl: [t.trailerThumb], uploadDate: new Date(p.postedAt || p.createdAt).toISOString(), embedUrl: t.trailerEmbed, contentUrl: 'https://www.youtube.com/watch?v=' + t.trailerId, url: base + '/cinema#whatson' }); }
+      const graph = []; if (items.length) graph.push({ '@type': 'ItemList', '@id': base + '/cinema#shows', name: 'Shows on sale · BinaSmart Cinema', itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, item: it })) });
+      ld = graph.length || videos.length ? { '@graph': [...graph, ...videos] } : null;
     }
     if (ld) html = html.replace('</head>', '<script type="application/ld+json">' + JSON.stringify({ '@context': 'https://schema.org', ...ld }).replace(/</g, '\\u003c') + '</script>\n</head>');
     return html;
@@ -137,7 +145,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
 
   // ---------- programme listing (information only; tickets at the cinema) ----------
   const TZ_DAY = () => { const d = new Date(Date.now() + 3 * 3600000); return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - 3 * 3600000); }; // 00:00 Addis today, in UTC
-  const pubProg = p => ({ id: p.id, title: p.title, titleAm: p.titleAm, hallName: p.hallName, times: p.times, dateFrom: p.dateFrom, dateTo: p.dateTo, priceText: p.priceText, posterUrl: p.posterUrl, notes: p.notes, sourceName: p.sourceName, sourceUrl: p.sourceUrl, postedAt: p.postedAt,
+  const pubProg = p => ({ id: p.id, title: p.title, titleAm: p.titleAm, hallName: p.hallName, times: p.times, dateFrom: p.dateFrom, dateTo: p.dateTo, priceText: p.priceText, posterUrl: p.posterUrl, trailerUrl: p.trailerUrl, ...trailerOf(p.trailerUrl), notes: p.notes, sourceName: p.sourceName, sourceUrl: p.sourceUrl, postedAt: p.postedAt,
     venue: p.venue ? { id: p.venue.id, slug: p.venue.slug, name: p.venue.name, nameAm: p.venue.nameAm, address: p.venue.address, phone: p.venue.phone } : undefined });
   fastify.get('/api/cinema/programme', async () => {
     const rows = await prisma.programme.findMany({ where: { active: true, dateTo: { gte: TZ_DAY() } }, include: { venue: true }, orderBy: { dateFrom: 'asc' }, take: 500 });
@@ -161,7 +169,10 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const postedAt = b.postedAt && !isNaN(Date.parse(b.postedAt)) ? new Date(b.postedAt) : new Date();
     let posterUrl = str(b.posterUrl, 400);
     if (!posterUrl && posters.enabled) { const hit = await posters.search(title, b.year ? Number(b.year) : undefined); if (hit) posterUrl = hit.posterUrl; }
-    const p = await prisma.programme.create({ data: { venueId: venue.id, title, titleAm: str(b.titleAm, 120), hallName: str(b.hallName, 40), times, dateFrom, dateTo: new Date(dateTo.getTime() + 86400000 - 1), priceText: str(b.priceText, 40), posterUrl, notes: str(b.notes, 200), sourceName, sourceUrl, postedAt }, include: { venue: true } });
+    const trailerUrl = b.trailerUrl && youtubeId(b.trailerUrl) ? 'https://www.youtube.com/watch?v=' + youtubeId(b.trailerUrl) : null;
+    if (b.trailerUrl && !trailerUrl) return reply.code(400).send({ ok: false, error: 'trailerUrl must be a YouTube link' });
+    if (!posterUrl && trailerUrl) posterUrl = 'https://i.ytimg.com/vi/' + youtubeId(trailerUrl) + '/hqdefault.jpg';
+    const p = await prisma.programme.create({ data: { venueId: venue.id, title, titleAm: str(b.titleAm, 120), hallName: str(b.hallName, 40), times, dateFrom, dateTo: new Date(dateTo.getTime() + 86400000 - 1), priceText: str(b.priceText, 40), posterUrl, trailerUrl, notes: str(b.notes, 200), sourceName, sourceUrl, postedAt }, include: { venue: true } });
     return { ok: true, programme: pubProg(p) };
   });
   fastify.get('/api/cinema/ops/programme', async (req, reply) => {

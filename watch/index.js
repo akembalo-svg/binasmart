@@ -21,8 +21,10 @@ const escAttr = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/
 function limiter(windowMs, max) { const m = new Map(); return key => { const now = Date.now(); const hits = (m.get(key) || []).filter(t => now - t < windowMs); if (hits.length >= max) return false; hits.push(now); m.set(key, hits); return true; }; }
 const clientIp = req => String(req.headers['x-real-ip'] || req.ip);
 
+const { youtubeId } = require('./rules');
+const trailerOf = url => { const id = youtubeId(url); return id ? { trailerId: id, trailerEmbed: 'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&modestbranding=1', trailerThumb: 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg' } : {}; };
 function pubFilm(f, extra) {
-  return { slug: f.slug, title: f.title, titleAm: f.titleAm, year: f.year, runtimeMin: f.runtimeMin, rating: f.rating, language: f.language, genre: f.genre, descr: f.descr, posterUrl: f.posterUrl,
+  return { slug: f.slug, title: f.title, titleAm: f.titleAm, year: f.year, runtimeMin: f.runtimeMin, rating: f.rating, language: f.language, genre: f.genre, descr: f.descr, posterUrl: f.posterUrl, trailerUrl: f.trailerUrl || null, ...trailerOf(f.trailerUrl),
     priceEtb: f.priceEtb, rentHours: f.rentHours, free: !f.priceEtb, kind: f.sourceKind, views: f.views, createdAt: f.createdAt, ...(extra || {}) };
 }
 const pubRental = r => ({ code: r.code, status: r.status, priceEtb: r.priceEtb, startsAt: r.startsAt, expiresAt: r.expiresAt, film: r.film ? pubFilm(r.film) : undefined });
@@ -64,6 +66,8 @@ module.exports = function registerWatch(fastify, deps) {
     const ld = { '@context': 'https://schema.org', '@type': 'Movie', name: f.titleAm || f.title, alternateName: f.title !== f.titleAm ? f.title : undefined, description: f.descr || undefined, image: f.posterUrl || undefined, inLanguage: f.language,
       duration: f.runtimeMin ? 'PT' + f.runtimeMin + 'M' : undefined, contentRating: f.rating || undefined, url: base + '/watch/' + f.slug,
       offers: { '@type': 'Offer', price: f.priceEtb, priceCurrency: 'ETB', url: base + '/watch/' + f.slug, category: f.priceEtb ? 'rental' : 'free' } };
+    const tr = trailerOf(f.trailerUrl);
+    if (tr.trailerId) ld.trailer = { '@type': 'VideoObject', name: (f.titleAm || f.title) + ' — trailer', description: f.descr || (f.titleAm || f.title) + ' trailer', thumbnailUrl: [tr.trailerThumb], uploadDate: new Date(f.createdAt).toISOString(), embedUrl: tr.trailerEmbed, contentUrl: f.trailerUrl };
     html = html.replace(/<title>[^<]*<\/title>/, '<title>' + escAttr(title) + '</title>')
       .replace(/<meta name="description" content="[^"]*">/, '<meta name="description" content="' + escAttr(desc) + '">')
       .replace('<link rel="canonical" href="https://bina.et/watch">', '<link rel="canonical" href="' + base + '/watch/' + f.slug + '">')
@@ -157,7 +161,8 @@ module.exports = function registerWatch(fastify, deps) {
     const kind = KINDS.includes(b.sourceKind) ? b.sourceKind : (existing ? existing.sourceKind : 'youtube');
     const d = { title: str(b.title, 120), titleAm: str(b.titleAm, 120), year: b.year ? intOr(b.year, null) : null, runtimeMin: b.runtimeMin ? intOr(b.runtimeMin, null) : null, rating: str(b.rating, 12), language: str(b.language, 40) || 'Amharic', genre: str(b.genre, 60),
       descr: str(b.descr, 3000), posterUrl: str(b.posterUrl, 400), sourceKind: kind, sourceUrl: str(b.sourceUrl, 600), priceEtb: Math.max(0, intOr(b.priceEtb, 0)), rentHours: Math.min(720, Math.max(1, intOr(b.rentHours, 48))),
-      rights: str(b.rights, 600), rightsUntil: b.rightsUntil && !isNaN(Date.parse(b.rightsUntil)) ? new Date(b.rightsUntil) : null, status: b.status === 'public' ? 'public' : 'draft' };
+      rights: str(b.rights, 600), rightsUntil: b.rightsUntil && !isNaN(Date.parse(b.rightsUntil)) ? new Date(b.rightsUntil) : null, status: b.status === 'public' ? 'public' : 'draft',
+      trailerUrl: b.trailerUrl && youtubeId(b.trailerUrl) ? 'https://www.youtube.com/watch?v=' + youtubeId(b.trailerUrl) : null };
     return d;
   };
   const validate = d => { if (!d.title) return 'title required'; if (!d.sourceUrl) return 'sourceUrl required'; if (!embedFor(d)) return 'sourceUrl is not a valid ' + d.sourceKind + ' link (https, or a YouTube URL/id)'; if (d.status === 'public' && !d.rights) return 'a rights note is required before a film can be public'; return null; };

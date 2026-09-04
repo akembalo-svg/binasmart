@@ -83,13 +83,20 @@
           html += '<div style="border-top:1px solid var(--line);margin-top:10px;padding-top:10px;display:flex;gap:10px"><div style="width:48px;height:66px;border-radius:8px;background:linear-gradient(160deg,#0b2a26,#068c78);flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:22px">' + (p.posterUrl ? '<img src="' + esc(p.posterUrl) + '" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '🎬') + '</div><div style="flex:1;min-width:0">'
             + '<div style="font-weight:900">' + esc(p.titleAm || p.title) + (p.titleAm && p.title !== p.titleAm ? ' <small class="sub">' + esc(p.title) + '</small>' : '') + '</div>'
             + '<div class="sub" style="font-size:12px">' + [p.notes, p.hallName, p.priceText].filter(Boolean).map(esc).join(' · ') + '</div>'
-            + '<div class="times">' + p.times.map(function (t) { return '<span style="border:1.5px solid var(--line);border-radius:10px;padding:5px 9px;font-size:12px;font-weight:800;background:#fff">' + esc(t) + '</span>'; }).join('') + '</div>'
+            + '<div class="times">' + p.times.map(function (t) { return '<span style="border:1.5px solid var(--line);border-radius:10px;padding:5px 9px;font-size:12px;font-weight:800;background:#fff">' + esc(t) + '</span>'; }).join('') + (p.trailerEmbed ? '<button type="button" class="trailer" data-embed="' + esc(p.trailerEmbed) + '" style="border:1.5px solid var(--brand);color:var(--brand);border-radius:10px;padding:5px 9px;font-size:12px;font-weight:900;background:#fff;font-family:inherit;cursor:pointer">▶ ትሬለር · Trailer</button>' : '') + '</div>'
+            + (p.trailerEmbed ? '<div class="trbox" hidden style="margin-top:8px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000"></div>' : '')
             + '<div class="sub" style="font-size:11px;margin-top:6px">' + day(p.dateFrom) + (day(p.dateTo) !== day(p.dateFrom) ? ' – ' + day(p.dateTo) : '') + ' · ' + esc(p.sourceName) + ', ' + day(p.postedAt) + ' · <a href="' + esc(p.sourceUrl) + '" target="_blank" rel="noopener nofollow">ምንጭ · source</a></div></div></div>';
         });
         html += '<div class="sub" style="font-size:12px;margin-top:10px">🎟️ ትኬት በሲኒማ ቤቱ · Tickets at the cinema. ' + (v.name ? '<a href="/for-cinemas">' + esc(v.name) + ' ትኬት እዚህ መሸጥ ይችላል →</a>' : '') + '</div></div>';
       });
       if (j.tmdb) html += '<p class="sub" style="font-size:11px">Film posters and data from <a href="https://www.themoviedb.org" target="_blank" rel="noopener">TMDB</a>. This product uses the TMDB API but is not endorsed or certified by TMDB.</p>';
       box.innerHTML = html;
+      box.addEventListener('click', function (ev) {
+        var b = ev.target.closest && ev.target.closest('button.trailer'); if (!b) return;
+        var tb = b.closest('div').parentElement.querySelector('.trbox'); if (!tb) return;
+        if (!tb.hidden) { tb.hidden = true; tb.innerHTML = ''; return; }
+        tb.hidden = false; tb.innerHTML = '<iframe src="' + b.getAttribute('data-embed') + '&autoplay=1" style="width:100%;height:100%;border:0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+      });
     });
   }
   // Directory of Addis cinemas: every active venue, with or without a show on sale.

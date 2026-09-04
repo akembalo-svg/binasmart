@@ -21,7 +21,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;p
         <label>Title</label><input id="eTitle"><label>ርዕስ (Amharic)</label><input id="eTitleAm">
         <div class="row"><div><label>Year</label><input id="eYear" type="number"></div><div><label>Runtime (min)</label><input id="eRun" type="number"></div><div><label>Rating</label><input id="eRating" placeholder="PG-13"></div></div>
         <div class="row"><div><label>Language</label><input id="eLang" value="Amharic"></div><div><label>Genre</label><input id="eGenre" placeholder="Drama"></div></div>
-        <label>Poster URL (2:3, https)</label><input id="ePoster">
+        <label>Poster URL (2:3, https)</label><input id="ePoster"><label>Trailer (YouTube link, optional)</label><input id="eTrailer" placeholder="https://youtu.be/…">
         <label>Video source</label><div class="row"><select id="eKind" style="max-width:130px"><option value="youtube">YouTube</option><option value="mp4">mp4 link</option><option value="hls">HLS (.m3u8)</option></select><input id="eUrl" placeholder="https://youtu.be/… or https://your-server/film.mp4"></div>
         <div class="row"><div><label>Price ETB (0 = free)</label><input id="ePrice" type="number" value="0" min="0"></div><div><label>Rental hours</label><input id="eHours" type="number" value="48" min="1" max="720"></div></div>
         <label>Rights note (required before public) — who licensed it, for where, signed when</label><textarea id="eRights" placeholder="Licence from Producer X (0911…), streaming Ethiopia, signed 2026-09-04, until 2027-09-04"></textarea>
@@ -58,14 +58,14 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;p
   function fill(f) {
     $('formTitle').textContent = f ? 'Edit: ' + (f.titleAm || f.title) : 'New film'; $('eNew').hidden = !f;
     $('eSlug').value = f ? f.slug : ''; $('eTitle').value = f ? f.title : ''; $('eTitleAm').value = f ? f.titleAm || '' : ''; $('eYear').value = f && f.year || ''; $('eRun').value = f && f.runtimeMin || ''; $('eRating').value = f && f.rating || '';
-    $('eLang').value = f ? f.language || 'Amharic' : 'Amharic'; $('eGenre').value = f && f.genre || ''; $('ePoster').value = f && f.posterUrl || ''; $('eKind').value = f ? f.kind : 'youtube'; $('eUrl').value = f && f.sourceUrl || '';
+    $('eLang').value = f ? f.language || 'Amharic' : 'Amharic'; $('eGenre').value = f && f.genre || ''; $('ePoster').value = f && f.posterUrl || ''; $('eTrailer').value = f && f.trailerUrl || ''; $('eKind').value = f ? f.kind : 'youtube'; $('eUrl').value = f && f.sourceUrl || '';
     $('ePrice').value = f ? f.priceEtb : 0; $('eHours').value = f ? f.rentHours : 48; $('eRights').value = f && f.rights || ''; $('eUntil').value = f && f.rightsUntil ? String(f.rightsUntil).slice(0, 10) : ''; $('eStatus').value = f ? f.status : 'draft'; $('eDescr').value = f && f.descr || '';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   document.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b && b.dataset.edit) fill(FILMS.find(function (x) { return x.slug === b.dataset.edit; })); });
   $('eNew').addEventListener('click', function () { fill(null); });
   $('eGo').addEventListener('click', function () {
-    var body = { title: $('eTitle').value, titleAm: $('eTitleAm').value, year: $('eYear').value || null, runtimeMin: $('eRun').value || null, rating: $('eRating').value, language: $('eLang').value, genre: $('eGenre').value, posterUrl: $('ePoster').value, sourceKind: $('eKind').value, sourceUrl: $('eUrl').value, priceEtb: Number($('ePrice').value) || 0, rentHours: Number($('eHours').value) || 48, rights: $('eRights').value, rightsUntil: $('eUntil').value || null, status: $('eStatus').value, descr: $('eDescr').value };
+    var body = { title: $('eTitle').value, titleAm: $('eTitleAm').value, year: $('eYear').value || null, runtimeMin: $('eRun').value || null, rating: $('eRating').value, language: $('eLang').value, genre: $('eGenre').value, posterUrl: $('ePoster').value, trailerUrl: $('eTrailer').value, sourceKind: $('eKind').value, sourceUrl: $('eUrl').value, priceEtb: Number($('ePrice').value) || 0, rentHours: Number($('eHours').value) || 48, rights: $('eRights').value, rightsUntil: $('eUntil').value || null, status: $('eStatus').value, descr: $('eDescr').value };
     var slug = $('eSlug').value;
     api('/api/watch/ops/films' + (slug ? '/' + slug : ''), body).then(function (j) { $('eErr').textContent = j.ok ? '' : j.error; if (j.ok) { toast('Saved: /watch/' + j.film.slug); fill(null); boot(); } });
   });
