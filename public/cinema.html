@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ሲኒማ ትኬት · ወንበር መርጠው ይግዙ | BinaSmart Cinema — Addis Ababa</title>
+<meta name="description" content="በአዲስ አበባ የሲኒማና የዝግጅት ትኬት በመስመር ላይ ይግዙ፤ ወንበርዎን በካርታው ላይ ይምረጡ፣ በ Chapa ወይም በካውንተር ይክፈሉ፣ QR ትኬት ያግኙ። Book cinema and event seats in Addis Ababa: pick your exact seat, pay on Chapa or at the counter, get a QR ticket.">
+<link rel="canonical" href="https://bina.et/cinema">
+<meta property="og:title" content="BinaSmart Cinema — ወንበር መርጠው ትኬት ይግዙ">
+<meta property="og:description" content="Pick your exact seat on a live seat map. Addis Ababa cinemas and events, Amharic first.">
+<meta property="og:url" content="https://bina.et/cinema">
+<meta property="og:image" content="https://bina.et/static/ride/why-binasmart-og.png">
+<meta name="theme-color" content="#0b2a26">
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+Ethiopic:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=2">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"BinaSmart Cinema — seat booking in Addis Ababa","url":"https://bina.et/cinema","inLanguage":["am","en"],
+ "isPartOf":{"@type":"WebSite","name":"BinaSmart","url":"https://bina.et"},
+ "about":{"@type":"Service","name":"Cinema and event seat booking","areaServed":"Addis Ababa, Ethiopia","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"}}}
+</script>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="top"><a class="logo" href="/">Bina<span>Smart</span> 🎬</a><span class="sp"></span><a class="lnk" href="/ride">🚕 Ride</a>&nbsp;&nbsp;<a class="lnk" href="/events">ዝግጅቶች</a></div>
+  <div id="view"><div class="skel"></div></div>
+  <p class="foot">BinaSmart Cinema · ትኬትዎ QR ነው፤ በበሩ ላይ ይቃኛል። · Your ticket is a QR code scanned at the door. · <a href="/why-binasmart">ስለ ቢና</a></p>
+</div>
+<div class="bar" id="bar" hidden><div class="in"><div class="sel"><div class="s" id="barSeats">—</div><div class="m"><span id="barTotal"></span> <span class="cd" id="barCd"></span></div></div><button class="btn" id="barGo" disabled>ይቀጥሉ · Continue</button></div></div>
+<div class="sheet" id="sheet"><div class="pane">
+  <div class="grab"></div>
+  <h2 style="margin-top:0">ትኬት ያውጡ · Your ticket</h2>
+  <div class="sub" id="shSeats"></div>
+  <label>ስም · Name</label><input id="fName" maxlength="60" autocomplete="name">
+  <label>ስልክ · Phone (09…)</label><input id="fPhone" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="09xx xxx xxx">
+  <label style="display:flex;align-items:center;gap:8px;margin-top:14px"><input type="checkbox" id="fGuest" style="width:auto"> ለሌላ ሰው ነው · Booking for someone else</label>
+  <div id="guestBox" hidden><div class="row"><div><label>የተመልካቹ ስም · Their name</label><input id="gName" maxlength="60"></div><div><label>ስልካቸው · Their phone (09…)</label><input id="gPhone" inputmode="tel" maxlength="20"></div></div></div>
+  <label>ክፍያ · Payment</label>
+  <div class="pay" id="pay"></div>
+  <div class="tot"><span>ጠቅላላ · Total</span><span id="shTotal"></span></div>
+  <div class="err" id="shErr"></div>
+  <button class="btn" id="shGo">🎟️ ትኬት ይግዙ · Get ticket</button>
+  <button class="btn ghost" id="shBack" style="margin-top:8px">← ወደ ወንበሮች · Back to seats</button>
+</div></div>
+<div class="toast" id="toast"></div>
+<script src="/static/ride/tg.js?v=3"></script>
+<script src="/static/cinema/app.js?v=2"></script>
+</body>
+</html>

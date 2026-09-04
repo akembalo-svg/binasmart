@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>በር · Door scanner | BinaSmart Cinema</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b2a26">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=2">
+<style>
+body{background:#0b2a26;color:#fff}
+.wrap{padding-bottom:20px}
+.top .logo,.top a.lnk{color:#fff}
+select,input{background:#fff;color:#0b2a26}
+.cam{position:relative;background:#000;border-radius:16px;overflow:hidden;aspect-ratio:1/1;max-height:60vh;margin-top:10px}
+.cam video{width:100%;height:100%;object-fit:cover}
+.cam .box{position:absolute;inset:14%;border:3px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:0 0 0 999px rgba(0,0,0,.35)}
+.res{position:fixed;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;z-index:70}
+.res.on{display:flex}
+.res.ok{background:#059669}.res.no{background:#dc2626}
+.res .big{font-size:96px;line-height:1}
+.res .t{font-size:26px;font-weight:900;margin-top:10px}
+.res .s{font-size:18px;margin-top:6px;opacity:.95}
+.res .seats{font-size:44px;font-weight:900;letter-spacing:2px;margin-top:8px}
+.cnt{display:flex;gap:10px;margin-top:10px}
+.cnt div{flex:1;background:rgba(255,255,255,.08);border-radius:12px;padding:10px;text-align:center}
+.cnt b{display:block;font-size:22px}
+.cnt small{opacity:.7;font-size:11px}
+.manual{display:flex;gap:8px;margin-top:10px}
+.manual input{font-family:ui-monospace,monospace;text-transform:uppercase;letter-spacing:1px}
+.log{font-size:12px;opacity:.8;margin-top:12px;max-height:120px;overflow:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="logo">Bina<span style="color:#7ee2cf">Smart</span> 🎟️ በር</span><span class="sp"></span><a class="lnk" href="/ops/cinema" id="opsLnk">ops</a></div>
+  <label style="color:#cfe7e1">ትርዒት · Show</label><select id="show"><option value="">— ሁሉም · any show —</option></select>
+  <div class="cnt"><div><b id="cIn">–</b><small>ገብተዋል · in</small></div><div><b id="cSold">–</b><small>ተሽጧል · sold</small></div><div><b id="cLeft">–</b><small>ይጠበቃሉ · expected</small></div></div>
+  <div class="cam" id="cam"><video id="video" playsinline muted autoplay></video><div class="box"></div></div>
+  <div class="manual"><input id="code" placeholder="BINA-XXXXXX" maxlength="12" autocomplete="off"><button class="btn sm" id="go">✓</button></div>
+  <div class="sub" id="hint" style="color:#cfe7e1">ካሜራው ካልሰራ ኮዱን ይተይቡ · If the camera does not work, type the code.</div>
+  <div class="log" id="log"></div>
+</div>
+<div class="res" id="res"><div class="big" id="rIco">✅</div><div class="t" id="rT"></div><div class="seats" id="rSeats"></div><div class="s" id="rS"></div></div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), KEY = q.get('key') || '';
+  var $ = function (id) { return document.getElementById(id); };
+  if (!KEY) { $('hint').textContent = 'የባለቤት ቁልፍ ያስፈልጋል · owner key required: /scan?key=…'; }
+  $('opsLnk').href = '/ops/cinema?key=' + encodeURIComponent(KEY);
+  var REASON = { unknown: ['ያልታወቀ ትኬት', 'Unknown ticket'], unpaid: ['አልተከፈለም — ካውንተር', 'Reserved but UNPAID — send to counter'], cancelled: ['ተሰርዟል', 'Ticket cancelled'], wrong_show: ['የተሳሳተ ትርዒት', 'Ticket is for another show'], already_checked_in: ['አስቀድሞ ገብቷል', 'Already checked in'], unauthorized: ['ቁልፍ የለም', 'No owner key'] };
+  function api(path, opts) { opts = opts || {}; return fetch(path + (path.indexOf('?') < 0 ? '?' : '&') + 'key=' + encodeURIComponent(KEY), { method: opts.body ? 'POST' : 'GET', headers: opts.body ? { 'content-type': 'application/json' } : {}, body: opts.body ? JSON.stringify(opts.body) : undefined }).then(function (r) { return r.json(); }); }
+  var TZ = 'Africa/Addis_Ababa';
+  api('/api/cinema/ops/overview').then(function (j) {
+    if (!j.ok) return;
+    j.shows.filter(function (s) { return s.status === 'onsale' || s.status === 'closed' || s.status === 'soldout'; }).forEach(function (s) {
+      var o = document.createElement('option'); o.value = s.id; o.textContent = (s.event.titleAm || s.event.title) + ' · ' + new Date(s.startsAt).toLocaleString('en-GB', { timeZone: TZ, weekday: 'short', hour: '2-digit', minute: '2-digit' }) + ' · ' + s.hall.name; $('show').appendChild(o);
+      if (s.stats) { s._stats = s.stats; }
+    });
+    var pick = j.shows.filter(function (s) { return s.status === 'onsale'; }).sort(function (a, b) { return Math.abs(new Date(a.startsAt) - Date.now()) - Math.abs(new Date(b.startsAt) - Date.now()); })[0];
+    if (pick) { $('show').value = pick.id; counts(pick.stats); }
+  });
+  function counts(c) { if (!c) return; var sold = c.seats != null ? c.seats : c.sold, inn = c.checkedIn != null ? c.checkedIn : (c.CHECKED_IN || 0); $('cIn').textContent = inn; $('cSold').textContent = sold; $('cLeft').textContent = Math.max(0, sold - inn); }
+  var lock = false, last = '', lastAt = 0;
+  function beep(ok) { try { var ac = new (window.AudioContext || window.webkitAudioContext)(); var o = ac.createOscillator(), g = ac.createGain(); o.connect(g); g.connect(ac.destination); o.frequency.value = ok ? 880 : 220; g.gain.value = .2; o.start(); o.stop(ac.currentTime + (ok ? .12 : .35)); } catch (e) {} if (navigator.vibrate) navigator.vibrate(ok ? 60 : [120, 60, 120]); }
+  function show(ok, t, seats, s) { var r = $('res'); r.className = 'res on ' + (ok ? 'ok' : 'no'); $('rIco').textContent = ok ? '✅' : '✕'; $('rT').textContent = t; $('rSeats').textContent = seats || ''; $('rS').textContent = s || ''; beep(ok); setTimeout(function () { r.className = 'res'; lock = false; }, ok ? 2200 : 3200); }
+  function scan(code) {
+    code = String(code || '').trim().toUpperCase(); if (!code || lock) return;
+    if (code === last && Date.now() - lastAt < 4000) return;
+    last = code; lastAt = Date.now(); lock = true;
+    api('/api/cinema/ops/checkin', { body: { code: code, showId: $('show').value || undefined } }).then(function (j) {
+      if (j.counts) counts(j.counts);
+      var tk = j.ticket || {};
+      if (j.ok) { show(true, tk.name || '', (tk.seats || []).join('  '), 'ይግቡ · Welcome'); }
+      else { var r = REASON[j.error] || [j.error, '']; show(false, r[0], (tk.seats || []).join('  '), r[1] + (j.at ? ' · ' + new Date(j.at).toLocaleTimeString('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }) : '') + (tk.name ? ' · ' + tk.name : '')); }
+      var l = document.createElement('div'); l.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: TZ }) + ' ' + code + ' → ' + (j.ok ? 'OK' : j.error); $('log').prepend(l);
+    }).catch(function () { show(false, 'ግንኙነት የለም', '', 'No connection'); });
+  }
+  $('go').addEventListener('click', function () { scan($('code').value); $('code').value = ''; });
+  $('code').addEventListener('keydown', function (e) { if (e.key === 'Enter') { scan($('code').value); $('code').value = ''; } });
+  // Camera: BarcodeDetector (Chrome/Android, Safari 17+). Falls back to manual entry elsewhere.
+  var video = $('video');
+  if ('BarcodeDetector' in window && navigator.mediaDevices) {
+    var det = new BarcodeDetector({ formats: ['qr_code'] });
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }).then(function (st) {
+      video.srcObject = st;
+      (function loop() { if (video.readyState >= 2 && !lock) det.detect(video).then(function (codes) { if (codes.length) scan(codes[0].rawValue); }).catch(function () {}); setTimeout(loop, 350); })();
+    }).catch(function () { $('cam').style.display = 'none'; $('hint').textContent = 'ካሜራ አልተፈቀደም፤ ኮዱን ይተይቡ · Camera not allowed — type the code.'; });
+  } else { $('cam').style.display = 'none'; $('hint').textContent = 'ይህ ብራውዘር QR አያነብም (Chrome ይጠቀሙ)፤ ኮዱን ይተይቡ · This browser cannot scan QR (use Chrome) — type the code.'; }
+})();
+</script>
+</body>
+</html>

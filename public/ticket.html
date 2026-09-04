@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ትኬት · Ticket | BinaSmart Cinema</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b2a26">
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+Ethiopic:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=2">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+.tk{max-width:420px;margin:0 auto;background:#fff;border:1.5px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--sh)}
+.tk .hd{background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;padding:18px 18px 14px}
+.tk .hd .t{font-size:20px;font-weight:900;line-height:1.2}
+.tk .hd .s{opacity:.85;font-size:13px;margin-top:4px}
+.tk .qr{padding:18px;display:flex;flex-direction:column;align-items:center;gap:8px;border-bottom:2px dashed var(--line);position:relative}
+.tk .qr img{width:230px;height:230px;image-rendering:pixelated}
+.tk .qr .code{font-family:ui-monospace,Menlo,monospace;font-weight:900;font-size:20px;letter-spacing:2px}
+.tk .qr::before,.tk .qr::after{content:'';position:absolute;bottom:-12px;width:22px;height:22px;border-radius:50%;background:var(--bg)}
+.tk .qr::before{left:-11px}.tk .qr::after{right:-11px}
+.tk .body{padding:16px 18px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.kv b{color:var(--mute);font-weight:800;font-size:12px}
+.seats{font-size:26px;font-weight:900;letter-spacing:1px;color:var(--brand)}
+.st{margin:12px 0}
+.acts{display:grid;gap:8px;margin-top:14px}
+.dim{opacity:.35;filter:grayscale(1)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="/cinema">Bina<span>Smart</span> 🎬</a><span class="sp"></span><a class="lnk" href="/cinema">ሌላ ትርዒት · More shows</a></div>
+  <div id="view"><div class="skel"></div></div>
+  <p class="foot">ይህን ገጽ በበሩ ላይ ያሳዩ · Show this page at the door · BinaSmart</p>
+</div>
+<div class="toast" id="toast"></div>
+<script src="/static/ride/tg.js?v=3"></script>
+<script>
+(function () {
+  var view = document.getElementById('view'), TZ = 'Africa/Addis_Ababa';
+  var code = (location.pathname.match(/\/ticket\/([A-Za-z0-9-]+)/) || [])[1] || '';
+  var q = new URLSearchParams(location.search);
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function when(d) { return new Date(d).toLocaleString('en-GB', { timeZone: TZ, weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
+  function cutoff(sh) { return new Date(new Date(sh.startsAt).getTime() - (sh.counterCutoffMin || 30) * 60000).toLocaleTimeString('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }); }
+  var STATUS = {
+    RESERVED: function (t) { return t.payMethod === 'chapa' ? '<span class="pill warn">⏳ Chapa ክፍያ በመጠበቅ ላይ · awaiting Chapa payment</span>' : '<span class="pill warn">🏪 በካውንተር ይክፈሉ · pay at the counter before ' + cutoff(t.show) + '</span>'; },
+    CONFIRMED: function () { return '<span class="pill ok">✅ ተከፍሏል · paid — ready for the door</span>'; },
+    CHECKED_IN: function (t) { return '<span class="pill mute">🎬 ገብተዋል · checked in ' + (t.checkedInAt ? when(t.checkedInAt) : '') + '</span>'; },
+    CANCELLED: function () { return '<span class="pill bad">❌ ተሰርዟል · cancelled</span>'; }
+  };
+  function render(t) {
+    var sh = t.show || {}, e = sh.event || {}, v = sh.venue || {};
+    var dim = t.status === 'CANCELLED' || t.status === 'CHECKED_IN';
+    view.innerHTML = '<div class="tk"><div class="hd"><div class="t">' + esc(e.titleAm || e.title) + '</div><div class="s">' + (e.titleAm && e.title !== e.titleAm ? esc(e.title) + ' · ' : '') + when(sh.startsAt) + '</div></div>'
+      + '<div class="qr' + (dim ? ' dim' : '') + '"><img src="/api/cinema/tickets/' + esc(t.code) + '/qr.svg" alt="QR ' + esc(t.code) + '" width="230" height="230"><div class="code">' + esc(t.code) + '</div></div>'
+      + '<div class="body"><div class="st">' + (STATUS[t.status] || esc(t.status))(t) + '</div>'
+      + '<div class="seats">' + esc((t.seats || []).join(' · ')) + '</div>'
+      + '<div class="kv" style="margin-top:12px"><b>ስም · Name</b><span>' + esc(t.name) + '</span><b>ቦታ · Venue</b><span>' + esc(v.nameAm || v.name) + ' · ' + esc((sh.hall || {}).name) + (v.address ? '<br><small>' + esc(v.address) + '</small>' : '') + '</span><b>ጠቅላላ · Total</b><span>' + Number(t.total).toLocaleString('en-US') + ' ብር · ' + (t.payMethod === 'chapa' ? 'Chapa' : 'ካውንተር · counter') + '</span>' + (v.phone ? '<b>ስልክ · Venue</b><span><a href="tel:' + esc(v.phone) + '">' + esc(v.phone) + '</a></span>' : '') + '</div>'
+      + (q.get('chapa') === 'failed' ? '<div class="err">የ Chapa ክፍያ ገጽ አልተከፈተም፤ በካውንተር መክፈል ይችላሉ። · Chapa did not open; you can pay at the counter.</div>' : '')
+      + '<div class="acts">'
+      + (t.status === 'RESERVED' && t.payMethod === 'chapa' ? '<button class="btn" id="verify">🔄 ክፍያውን አረጋግጥ · Check payment</button>' : '')
+      + '<a class="btn ghost" href="https://t.me/bina_smart_bot?start=ticket_' + esc(t.code) + '">✈️ ወደ ቴሌግራም ላክ · Send to Telegram</a>'
+      + '<a class="btn ghost" href="/cinema">🎬 ሌላ ትርዒት · More shows</a></div></div></div>';
+    var vb = document.getElementById('verify'); if (vb) vb.addEventListener('click', verify);
+  }
+  function load() { return fetch('/api/cinema/tickets/' + encodeURIComponent(code)).then(function (r) { return r.json(); }).then(function (j) { if (!j.ok) { view.innerHTML = '<div class="card">ትኬቱ አልተገኘም · Ticket not found. <a href="/cinema">← Shows</a></div>'; return null; } render(j.ticket); return j.ticket; }); }
+  var tries = 0;
+  function verify() { fetch('/api/cinema/tickets/' + encodeURIComponent(code) + '/verify-chapa', { method: 'POST' }).then(function (r) { return r.json(); }).then(function (j) { if (j.status === 'CONFIRMED') load(); else if (q.get('paid') === '1' && tries++ < 6) setTimeout(verify, 3000); }); }
+  load().then(function (t) { if (t && t.status === 'RESERVED' && t.payMethod === 'chapa' && q.get('paid') === '1') verify(); });
+})();
+</script>
+</body>
+</html>

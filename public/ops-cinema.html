@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cinema ops | BinaSmart</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=2">
+<style>
+.wrap{max-width:980px;padding-bottom:40px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;color:var(--mute)}
+.mini{font-size:11px;color:var(--mute)}
+.prev{display:grid;gap:3px;margin-top:8px;overflow:auto}
+.prev div{display:flex;gap:3px;align-items:center}
+.prev i{width:14px;height:12px;border-radius:3px 3px 1px 1px;border:1px solid #c9d6d2;background:#fff;display:inline-block}
+.prev i.v{background:#fff7e6;border-color:#f5c469}.prev i.b{visibility:hidden}.prev i.a{margin-right:8px}
+.prev span{width:14px;font-size:9px;color:var(--mute);text-align:center}
+.btn.sm{margin:2px 2px 2px 0}
+textarea{font-family:ui-monospace,monospace;font-size:12px;min-height:120px}
+h2{margin-top:0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.tabs button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-weight:800;font-family:inherit;cursor:pointer;font-size:13px}
+.tabs button.on{border-color:var(--brand);background:#f3faf7;color:var(--brand)}
+.ok{color:var(--ok);font-weight:800}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="/cinema">Bina<span>Smart</span> 🎬 ops</a><span class="sp"></span><a class="lnk" id="scanLnk" href="/scan">🎟️ door scanner</a>&nbsp;&nbsp;<a class="lnk" href="/ride-ops">🚕 ride ops</a></div>
+  <div id="auth" class="card" hidden><label>Owner key</label><input id="key" type="password"><button class="btn sm" id="keyGo" style="margin-top:8px">Enter</button><div class="mini">Or open /ops/cinema?key=…</div></div>
+  <div id="main" hidden>
+    <div class="tabs"><button class="on" data-t="shows">Shows</button><button data-t="new">New show</button><button data-t="venue">Venues & halls</button><button data-t="event">Events (films)</button></div>
+    <div id="t-shows">
+      <div class="card"><h2>Upcoming shows <span class="pill" id="chapaPill"></span></h2><div id="shows"></div></div>
+      <div class="card" id="tk" style="margin-top:14px" hidden><h2 id="tkTitle"></h2><div id="tkList"></div></div>
+    </div>
+    <div id="t-new" hidden><div class="card"><h2>New show</h2>
+      <label>Event</label><select id="sEvent"></select>
+      <label>Hall</label><select id="sHall"></select>
+      <label>Starts at (Addis time)</label><input id="sStart" type="datetime-local">
+      <div id="sPrices"></div>
+      <label>Counter cutoff (minutes before showtime; unpaid reservations are released)</label><input id="sCut" type="number" value="30" min="0" max="1440">
+      <div class="err" id="sErr"></div><button class="btn" id="sGo" style="margin-top:8px">Put on sale</button></div></div>
+    <div id="t-venue" hidden><div class="grid">
+      <div class="card"><h2>New venue</h2><label>Name</label><input id="vName"><label>ስም (Amharic)</label><input id="vNameAm"><label>Address</label><input id="vAddr"><label>Phone (shown on tickets for counter payment)</label><input id="vPhone"><div class="row"><div><label>Lat</label><input id="vLat" inputmode="decimal"></div><div><label>Lng</label><input id="vLng" inputmode="decimal"></div></div><div class="err" id="vErr"></div><button class="btn" id="vGo" style="margin-top:8px">Create venue</button></div>
+      <div class="card"><h2>New hall</h2><label>Venue</label><select id="hVenue"></select><label>Hall name</label><input id="hName" placeholder="Hall 1"><div class="row"><div><label>Rows (A…)</label><input id="hRows" type="number" value="8" min="1" max="26"></div><div><label>Seats per row</label><input id="hPer" type="number" value="14" min="1" max="40"></div></div>
+        <label>Aisle after seat numbers (comma)</label><input id="hAisles" placeholder="4, 10"><label>VIP rows (comma; the rest are Regular)</label><input id="hVip" placeholder="A, B"><label>Blocked seats (comma)</label><input id="hBlocked" placeholder="A1, A14"><label>Wheelchair seats (comma)</label><input id="hWc" placeholder="H1, H14">
+        <div class="prev" id="hPrev"></div><div class="mini" id="hCap"></div><div class="err" id="hErr"></div><button class="btn" id="hGo" style="margin-top:8px">Create hall</button></div>
+    </div><div class="card" style="margin-top:14px"><h2>Venues</h2><div id="venues"></div></div></div>
+    <div id="t-event" hidden><div class="grid"><div class="card"><h2>New event / film</h2><label>Title</label><input id="eTitle"><label>ርዕስ (Amharic)</label><input id="eTitleAm"><label>Kind</label><select id="eKind"><option>FILM</option><option>CONCERT</option><option>THEATER</option><option>MEETUP</option><option>OTHER</option></select>
+      <div class="row"><div><label>Runtime (min)</label><input id="eRun" type="number"></div><div><label>Rating</label><input id="eRating" placeholder="PG-13"></div></div><label>Language</label><input id="eLang" placeholder="Amharic"><label>Poster URL (2:3, https)</label><input id="ePoster"><label>Emoji (if no poster)</label><input id="eEmoji" maxlength="4" value="🎬"><label>Description</label><textarea id="eDescr"></textarea>
+      <div class="err" id="eErr"></div><button class="btn" id="eGo" style="margin-top:8px">Create event</button></div><div class="card"><h2>Events</h2><div id="events"></div></div></div></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var KEY = new URLSearchParams(location.search).get('key') || sessionStorage.getItem('bina_owner_key') || '';
+  var TZ = 'Africa/Addis_Ababa', OV = null;
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function when(d) { return new Date(d).toLocaleString('en-GB', { timeZone: TZ, weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
+  var tt; function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { t.classList.remove('on'); }, 2500); }
+  function api(path, body, method) { return fetch(path, { method: method || (body ? 'POST' : 'GET'), headers: { 'x-owner-key': KEY, 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined }).then(function (r) { return r.json(); }); }
+  function list(v) { return String(v || '').split(',').map(function (x) { return x.trim().toUpperCase(); }).filter(Boolean); }
+  function rowsFor(n) { var out = []; for (var i = 0; i < n; i++) out.push(String.fromCharCode(65 + i)); return out; }
+  function layoutFromForm() {
+    var rows = rowsFor(Math.max(1, Math.min(26, Number($('hRows').value) || 0))), vip = list($('hVip').value).filter(function (r) { return rows.indexOf(r) >= 0; });
+    var sections = []; if (vip.length) sections.push({ name: 'VIP', nameAm: 'ቪአይፒ', rows: vip });
+    var rest = rows.filter(function (r) { return vip.indexOf(r) < 0; }); if (rest.length) sections.push({ name: 'Regular', nameAm: 'መደበኛ', rows: rest });
+    return { rows: rows, seatsPerRow: Math.max(1, Math.min(40, Number($('hPer').value) || 0)), aisles: list($('hAisles').value).map(Number).filter(function (n) { return Number.isInteger(n); }), blocked: list($('hBlocked').value), wheelchair: list($('hWc').value), sections: sections };
+  }
+  function preview(L, el, capEl) {
+    var html = ''; var cap = 0;
+    L.rows.forEach(function (r) { html += '<div><span>' + r + '</span>'; for (var n = 1; n <= L.seatsPerRow; n++) { var id = r + n, b = L.blocked.indexOf(id) >= 0; if (!b) cap++; html += '<i class="' + (b ? 'b ' : '') + (L.sections[0] && L.sections[0].name === 'VIP' && L.sections[0].rows.indexOf(r) >= 0 ? 'v ' : '') + (L.aisles.indexOf(n) >= 0 ? 'a' : '') + '"></i>'; } html += '</div>'; });
+    el.innerHTML = html; if (capEl) capEl.textContent = 'Capacity ' + cap + ' · sections: ' + L.sections.map(function (s) { return s.name + ' (' + s.rows.join('') + ')'; }).join(', ');
+  }
+  ['hRows', 'hPer', 'hAisles', 'hVip', 'hBlocked', 'hWc'].forEach(function (id) { $(id).addEventListener('input', function () { preview(layoutFromForm(), $('hPrev'), $('hCap')); }); });
+
+  function boot() {
+    if (!KEY) { $('auth').hidden = false; return; }
+    sessionStorage.setItem('bina_owner_key', KEY);
+    $('scanLnk').href = '/scan?key=' + encodeURIComponent(KEY);
+    api('/api/cinema/ops/overview').then(function (j) {
+      if (!j.ok) { $('auth').hidden = false; $('main').hidden = true; toast(j.error || 'unauthorized'); return; }
+      OV = j; $('auth').hidden = true; $('main').hidden = false;
+      $('chapaPill').textContent = j.chapa.enabled ? 'Chapa ' + j.chapa.mode : 'Chapa off';
+      $('shows').innerHTML = j.shows.length ? '<table><tr><th>When</th><th>Event</th><th>Hall</th><th>Status</th><th>Sold</th><th>Rev.</th><th></th></tr>' + j.shows.map(function (s) { var st = s.stats; return '<tr><td>' + when(s.startsAt) + '</td><td><b>' + esc(s.event.titleAm || s.event.title) + '</b><div class="mini">' + esc(s.event.title) + '</div></td><td>' + esc(s.venue.name) + ' · ' + esc(s.hall.name) + '<div class="mini">cap ' + s.hall.capacity + '</div></td><td><span class="pill ' + (s.status === 'onsale' ? 'ok' : s.status === 'cancelled' ? 'bad' : 'mute') + '">' + s.status + '</span></td><td>' + st.seats + '<div class="mini">R' + st.RESERVED + ' C' + st.CONFIRMED + ' In' + st.CHECKED_IN + '</div></td><td>' + st.revenue.toLocaleString() + '</td><td><button class="btn sm ghost" data-tk="' + s.id + '">tickets</button><a class="btn sm ghost" href="/cinema/' + s.id + '" target="_blank">map</a>' + (s.status === 'onsale' ? '<button class="btn sm ghost" data-st="closed" data-id="' + s.id + '">close</button><button class="btn sm ghost" data-st="cancelled" data-id="' + s.id + '">cancel</button>' : s.status !== 'cancelled' ? '<button class="btn sm ghost" data-st="onsale" data-id="' + s.id + '">reopen</button>' : '') + '</td></tr>'; }).join('') + '</table>' : '<div class="sub">No upcoming shows. Create one in "New show".</div>';
+      $('venues').innerHTML = j.venues.length ? j.venues.map(function (v) { return '<div style="margin-bottom:8px"><b>' + esc(v.name) + '</b> <span class="mini">' + esc(v.nameAm || '') + ' · ' + esc(v.address || '') + ' · ' + esc(v.phone || '') + '</span><div class="mini">' + (v.halls.map(function (h) { return h.name + ' (' + h.capacity + ')'; }).join(' · ') || 'no halls yet') + '</div></div>'; }).join('') : '<div class="sub">No venues yet.</div>';
+      $('events').innerHTML = j.events.length ? j.events.map(function (e) { return '<div style="margin-bottom:6px"><b>' + esc(e.titleAm || e.title) + '</b> <span class="mini">' + esc(e.title) + ' · ' + e.kind + (e.runtimeMin ? ' · ' + e.runtimeMin + ' min' : '') + '</span></div>'; }).join('') : '<div class="sub">No events yet.</div>';
+      $('hVenue').innerHTML = j.venues.map(function (v) { return '<option value="' + v.id + '">' + esc(v.name) + '</option>'; }).join('');
+      $('sEvent').innerHTML = j.events.map(function (e) { return '<option value="' + e.id + '">' + esc(e.titleAm || e.title) + ' — ' + esc(e.title) + '</option>'; }).join('');
+      var halls = []; j.venues.forEach(function (v) { v.halls.forEach(function (h) { halls.push({ id: h.id, name: v.name + ' · ' + h.name, layout: h.layout }); }); });
+      $('sHall').innerHTML = halls.map(function (h) { return '<option value="' + h.id + '">' + esc(h.name) + '</option>'; }).join('');
+      $('sHall').onchange = function () { var h = halls.filter(function (x) { return x.id === $('sHall').value; })[0]; $('sPrices').innerHTML = h ? h.layout.sections.map(function (s) { return '<label>Price ' + esc(s.name) + ' (ETB)</label><input class="price" data-s="' + esc(s.name) + '" type="number" min="0" value="' + (s.name === 'VIP' ? 500 : 300) + '">'; }).join('') : ''; };
+      $('sHall').onchange();
+      preview(layoutFromForm(), $('hPrev'), $('hCap'));
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.t) { Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function (x) { x.classList.toggle('on', x === b); }); ['shows', 'new', 'venue', 'event'].forEach(function (t) { $('t-' + t).hidden = t !== b.dataset.t; }); }
+    if (b.dataset.st) { if (b.dataset.st === 'cancelled' && !confirm('Cancel this show? Every ticket is cancelled and buyers are messaged.')) return; api('/api/cinema/ops/shows/' + b.dataset.id + '/status', { status: b.dataset.st }).then(function (j) { toast(j.ok ? 'Show ' + b.dataset.st + (j.cancelled ? ' · ' + j.cancelled + ' tickets cancelled' : '') : j.error); boot(); }); }
+    if (b.dataset.tk) { api('/api/cinema/ops/shows/' + b.dataset.tk + '/tickets').then(function (j) { if (!j.ok) return toast(j.error); $('tk').hidden = false; $('tkTitle').textContent = (j.show.event.titleAm || j.show.event.title) + ' · ' + when(j.show.startsAt) + ' · holds now: ' + j.holds.length; $('tkList').innerHTML = j.tickets.length ? '<table><tr><th>Code</th><th>Seats</th><th>Name / phone</th><th>Total</th><th>Status</th><th></th></tr>' + j.tickets.map(function (t) { return '<tr><td><a href="/ticket/' + t.code + '" target="_blank">' + t.code + '</a>' + (t.telegram ? ' ✈️' : '') + '</td><td><b>' + t.seats.join(', ') + '</b></td><td>' + esc(t.name) + '<div class="mini">' + esc(t.phone) + '</div></td><td>' + t.total + '<div class="mini">' + t.payMethod + '</div></td><td><span class="pill ' + (t.status === 'CONFIRMED' ? 'ok' : t.status === 'RESERVED' ? 'warn' : t.status === 'CANCELLED' ? 'bad' : 'mute') + '">' + t.status + '</span></td><td>' + (t.status === 'RESERVED' ? '<button class="btn sm" data-paid="' + t.code + '" data-show="' + b.dataset.tk + '">paid ✓</button>' : '') + (t.status === 'RESERVED' || t.status === 'CONFIRMED' ? '<button class="btn sm ghost" data-cancel="' + t.code + '" data-show="' + b.dataset.tk + '">cancel</button>' : '') + '</td></tr>'; }).join('') + '</table>' : '<div class="sub">No tickets yet.</div>'; $('tk').scrollIntoView({ behavior: 'smooth' }); }); }
+    if (b.dataset.paid) { api('/api/cinema/ops/tickets/' + b.dataset.paid + '/paid', {}).then(function (j) { toast(j.ok ? 'Marked paid' : j.error); document.querySelector('[data-tk="' + b.dataset.show + '"]').click(); }); }
+    if (b.dataset.cancel) { if (!confirm('Cancel ticket ' + b.dataset.cancel + '?')) return; api('/api/cinema/ops/tickets/' + b.dataset.cancel + '/cancel', {}).then(function (j) { toast(j.ok ? 'Cancelled' : j.error); document.querySelector('[data-tk="' + b.dataset.show + '"]').click(); }); }
+  });
+  $('keyGo').addEventListener('click', function () { KEY = $('key').value.trim(); boot(); });
+  $('vGo').addEventListener('click', function () { api('/api/cinema/ops/venues', { name: $('vName').value, nameAm: $('vNameAm').value, address: $('vAddr').value, phone: $('vPhone').value, lat: $('vLat').value || null, lng: $('vLng').value || null }).then(function (j) { $('vErr').textContent = j.ok ? '' : j.error; if (j.ok) { toast('Venue created'); boot(); } }); });
+  $('hGo').addEventListener('click', function () { api('/api/cinema/ops/halls', { venueId: $('hVenue').value, name: $('hName').value, layout: layoutFromForm() }).then(function (j) { $('hErr').textContent = j.ok ? '' : j.error; if (j.ok) { toast('Hall created · capacity ' + j.hall.capacity); boot(); } }); });
+  $('eGo').addEventListener('click', function () { api('/api/cinema/ops/events', { title: $('eTitle').value, titleAm: $('eTitleAm').value, kind: $('eKind').value, runtimeMin: $('eRun').value || null, rating: $('eRating').value, language: $('eLang').value, posterUrl: $('ePoster').value, emoji: $('eEmoji').value, descr: $('eDescr').value }).then(function (j) { $('eErr').textContent = j.ok ? '' : j.error; if (j.ok) { toast('Event created'); boot(); } }); });
+  $('sGo').addEventListener('click', function () {
+    var prices = {}; Array.prototype.forEach.call(document.querySelectorAll('.price'), function (i) { prices[i.dataset.s] = Number(i.value); });
+    // datetime-local has no zone; treat the typed time as Addis (UTC+3) time.
+    var local = $('sStart').value; if (!local) { $('sErr').textContent = 'startsAt required'; return; }
+    var startsAt = new Date(local + ':00+03:00').toISOString();
+    api('/api/cinema/ops/shows', { eventId: $('sEvent').value, hallId: $('sHall').value, startsAt: startsAt, prices: prices, counterCutoffMin: Number($('sCut').value) }).then(function (j) { $('sErr').textContent = j.ok ? '' : j.error; if (j.ok) { toast('On sale: /cinema/' + j.show.id); document.querySelector('[data-t="shows"]').click(); boot(); } });
+  });
+  boot();
+})();
+</script>
+</body>
+</html>
