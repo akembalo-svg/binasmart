@@ -9,7 +9,7 @@ const MENU = [
   [{ text: '🚗 Cars · መኪና', path: '/cars' }, { text: '🛡 Insurance · ኢንሹራንስ', path: '/insurance' }],
   [{ text: '📚 Guides · መመሪያዎች', path: '/guides' }, { text: '🏢 Buildings · ህንፃ', path: '/b/darulle' }],
 ];
-const COMMANDS = { ride: '/ride', hotels: '/hotel/bina-grand-hotel', restaurants: '/restaurant/bina-restaurant', hospitals: '/hospital/bina-general-hospital', events: '/events', property: '/property', cars: '/cars', insurance: '/insurance', guides: '/guides', ai: '/ai' };
+const COMMANDS = { cinema: '/cinema', ride: '/ride', hotels: '/hotel/bina-grand-hotel', restaurants: '/restaurant/bina-restaurant', hospitals: '/hospital/bina-general-hospital', events: '/events', property: '/property', cars: '/cars', insurance: '/insurance', guides: '/guides', ai: '/ai' };
 const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 
 function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername }) {
@@ -49,11 +49,27 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername }
     finally { clearTimeout(timer); }
   }
 
+  // /start ticket_BINA-XXXXXX comes from the "Send to Telegram" button on /ticket/<code>.
+  async function sendTicket(chatId, code) {
+    const F = typeof f === 'function' ? f : fetch;
+    try {
+      const r = await F(baseUrl + '/api/cinema/tickets/' + code); const d = await r.json().catch(() => ({}));
+      if (!d.ok) return api.sendMessage(chatId, 'ትኬት አልተገኘም · Ticket not found: ' + code);
+      const t = d.ticket, sh = t.show || {}, e = sh.event || {}, v = sh.venue || {};
+      const when = new Date(sh.startsAt).toLocaleString('en-GB', { timeZone: 'Africa/Addis_Ababa', weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+      const st = { RESERVED: t.payMethod === 'chapa' ? '⏳ Chapa · awaiting payment' : '🏪 በካውንተር ይክፈሉ · pay at the counter', CONFIRMED: '✅ ተከፍሏል · paid', CHECKED_IN: '🎬 ገብተዋል · checked in', CANCELLED: '❌ ተሰርዟል · cancelled' }[t.status] || t.status;
+      const text = ['🎟️ ' + (e.titleAm || e.title || 'Ticket'), '📍 ' + (v.nameAm || v.name || '') + (sh.hall && sh.hall.name ? ' · ' + sh.hall.name : ''), '🕒 ' + when, '💺 ' + (t.seats || []).join(', '), '💰 ' + t.total + ' ብር · ' + st, '', 'ኮድ · Code: ' + t.code].join('\n');
+      return api.sendMessage(chatId, text, { reply_markup: { inline_keyboard: [[{ text: '🎟️ ትኬቴን ክፈት · Open ticket (QR)', web_app: { url: baseUrl + '/ticket/' + t.code } }], [{ text: '🎬 ሌላ ትርዒት · More shows', web_app: { url: baseUrl + '/cinema' } }]] } });
+    } catch (err) { console.error('[binaBot] ticket ' + code + ': ' + err.message); return api.sendMessage(chatId, baseUrl + '/ticket/' + code); }
+  }
+
   async function handleUpdate(update) {
     const msg = update && update.message;
     if (!msg || !msg.chat) return;
     const chatId = String(msg.chat.id);
     const text = String(msg.text || '').trim();
+    const tk = /^\/start\s+ticket_(BINA-?[A-Z0-9]{6})\b/i.exec(text);
+    if (tk) return sendTicket(chatId, tk[1].toUpperCase().replace(/^BINA-?/, 'BINA-'));
     if (!text || /^\/start\b/.test(text) || /^\/(help|menu)\b/.test(text)) {
       hist.delete(chatId);
       const u = msg.from || {};

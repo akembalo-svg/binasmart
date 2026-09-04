@@ -42,6 +42,7 @@ async function fetchStatus(url) {
   finally { clearTimeout(t); }
 }
 
+const CINEMA_ON = process.env.CINEMA_ENABLED === '1' || (() => { try { return /^CINEMA_ENABLED=1/m.test(require('fs').readFileSync(require('path').join(__dirname, '..', '..', '.env'), 'utf8')); } catch (e) { return false; } })();
 // Each check returns null when healthy, or a short reason when not.
 const CHECKS = {
   'API': async () => {
@@ -68,6 +69,8 @@ const CHECKS = {
   'Driver bot webhook': async () => webhookOk(DRIVER, '/api/tg/driver'),
   'Rider page': async () => { const s = await fetchStatus('https://bina.et/ride'); return s === 200 ? null : 'HTTP ' + s; },
   'Driver page': async () => { const s = await fetchStatus('https://bina.et/drive'); return s === 200 ? null : 'HTTP ' + s; },
+  'Cinema page': async () => { if (!CINEMA_ON) return null; const s = await fetchStatus('https://bina.et/cinema'); return s === 200 ? null : 'HTTP ' + s; },
+  'Cinema API': async () => { if (!CINEMA_ON) return null; const r = await fetchJson('https://bina.et/api/cinema/shows'); return r.json && r.json.ok ? null : 'shows endpoint HTTP ' + r.status; },
   'pm2 processes': async () => {
     const list = JSON.parse(execSync('pm2 jlist', { encoding: 'utf8' }));
     const want = ['binasmart-api', 'bina-mcp', 'gh-routing'];
