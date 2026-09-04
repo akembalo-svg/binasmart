@@ -4,8 +4,8 @@
 // trusted for seats or prices: holds live in the DB, prices come from the Show.
 const crypto = require('crypto');
 const tgauth = require('../ride/tgauth');
-const { validateLayout, capacityOf } = require('./seatmap');
-const { HOLD_MS, MAX_SEATS, SOLD_STATES } = require('./holds');
+const { validateLayout, capacityOf, isGa, summarise } = require('./seatmap');
+const { HOLD_MS, MAX_SEATS, MAX_GA, SOLD_STATES } = require('./holds');
 
 function limiter(windowMs, max) {
   const m = new Map();
@@ -30,13 +30,15 @@ function pubShow(s) {
   return { id: s.id, startsAt: s.startsAt, status: s.status, prices: s.prices, counterCutoffMin: s.counterCutoffMin,
     event: { id: e.id, slug: e.slug, title: e.title, titleAm: e.titleAm, kind: e.kind, posterUrl: e.posterUrl, runtimeMin: e.runtimeMin, rating: e.rating, language: e.language, descr: e.descr, emoji: e.emoji },
     venue: { id: v.id, slug: v.slug, name: v.name, nameAm: v.nameAm, address: v.address, phone: v.phone, lat: v.lat, lng: v.lng },
-    hall: { id: h.id, name: h.name, capacity: h.capacity, sections: (h.layout && h.layout.sections) || [] } };
+    hall: { id: h.id, name: h.name, capacity: h.capacity, sections: (h.layout && h.layout.sections) || [] }, ga: isGa(h.layout || {}) };
 }
-function pubTicket(t) {
-  return { code: t.code, status: t.status, seats: t.seats, name: t.name, phone: t.phone, total: t.total, payMethod: t.payMethod,
-    chapaPending: t.payMethod === 'chapa' && t.status === 'RESERVED', createdAt: t.createdAt, checkedInAt: t.checkedInAt, show: t.show ? pubShow(t.show) : null };
+function pubTicket(t, show) {
+  const sh = t.show || show || null;
+  const L = sh && sh.hall && sh.hall.layout;
+  return { code: t.code, status: t.status, seats: t.seats, summary: L ? summarise(L, t.seats) : null, name: t.name, phone: t.phone, total: t.total, payMethod: t.payMethod,
+    chapaPending: t.payMethod === 'chapa' && t.status === 'RESERVED', createdAt: t.createdAt, checkedInAt: t.checkedInAt, show: sh ? pubShow(sh) : null };
 }
-const ERR_CODE = { taken: 409, sold: 409, hold_expired: 409, already_checked_in: 409, unpaid: 409, cancelled: 409, wrong_show: 409,
+const ERR_CODE = { taken: 409, sold: 409, sold_out: 409, no_such_section: 400, not_ga: 400, bad_qty: 400, hold_expired: 409, already_checked_in: 409, unpaid: 409, cancelled: 409, wrong_show: 409,
   show_closed: 410, no_show: 404, unknown: 404, no_such_seat: 400, too_many: 400, no_seats: 400, phone: 400, name: 400, holder: 400 };
 const fail = (reply, r) => reply.code(ERR_CODE[r.error] || 400).send({ ok: false, ...r });
 
@@ -80,9 +82,11 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const show = await loadShow(req.params.id);
     if (!show || !show.hall || !show.event) return fail(reply, { error: 'no_show' });
     const holder = holderOf(req);
-    const seats = await holds.availability(show, holder);
+    const ga = isGa(show.hall.layout);
+    const seats = ga ? [] : await holds.availability(show, holder);
+    const tiers = ga ? (await holds.tiers(show, holder)).map(t => ({ ...t, price: Number((show.prices || {})[t.name]) })) : null;
     const mine = holder ? await holds.mine(show.id, holder) : [];
-    return { ok: true, show: pubShow(show), layout: show.hall.layout, seats, holdMs: HOLD_MS, maxSeats: MAX_SEATS,
+    return { ok: true, show: pubShow(show), layout: show.hall.layout, seats, tiers, holdMs: HOLD_MS, maxSeats: ga ? MAX_GA : MAX_SEATS,
       mine: mine.map(h => h.seat), holdExpiresAt: mine.length ? new Date(Math.min(...mine.map(h => h.expiresAt.getTime()))) : null,
       chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null } };
   });
@@ -92,13 +96,16 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     if (!holdRL(holder) || !ipRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const show = await loadShow(req.params.id);
     if (!show || !show.hall) return fail(reply, { error: 'no_show' });
-    const r = await holds.hold(show, String((req.body || {}).seat || ''), holder);
+    const b = req.body || {};
+    const r = b.section != null ? await holds.holdMany(show, String(b.section), b.qty, holder) : await holds.hold(show, String(b.seat || ''), holder);
     return r.ok ? r : fail(reply, r);
   });
 
   fastify.post('/api/cinema/shows/:id/release', async (req, reply) => {
     const holder = holderOf(req); if (!holder) return fail(reply, { error: 'holder' });
-    const seats = Array.isArray((req.body || {}).seats) ? req.body.seats.map(String).slice(0, MAX_SEATS) : null;
+    const b = req.body || {};
+    if (b.section != null) return { ok: true, released: await holds.releaseSome(String(req.params.id), holder, String(b.section), b.qty) };
+    const seats = Array.isArray(b.seats) ? b.seats.map(String).slice(0, MAX_GA) : null;
     return { ok: true, released: await holds.release(String(req.params.id), holder, seats) };
   });
 
@@ -208,8 +215,10 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const name = str(b.name, 60); if (!name) return reply.code(400).send({ ok: false, error: 'name required' });
     const layout = b.layout;
     const v = validateLayout(layout); if (!v.ok) return reply.code(400).send({ ok: false, error: 'layout: ' + v.error });
-    const clean = { rows: layout.rows, seatsPerRow: layout.seatsPerRow, aisles: (layout.aisles || []).map(Number).filter(Number.isInteger), blocked: (layout.blocked || []).map(String),
-      wheelchair: (layout.wheelchair || []).map(String), sections: layout.sections.map(s => ({ name: String(s.name).slice(0, 30), nameAm: s.nameAm ? String(s.nameAm).slice(0, 30) : null, rows: s.rows })) };
+    const clean = isGa(layout)
+      ? { kind: 'ga', sections: layout.sections.map(s => ({ name: String(s.name).slice(0, 30), nameAm: s.nameAm ? String(s.nameAm).slice(0, 30) : null, capacity: s.capacity })) }
+      : { kind: 'seats', rows: layout.rows, seatsPerRow: layout.seatsPerRow, aisles: (layout.aisles || []).map(Number).filter(Number.isInteger), blocked: (layout.blocked || []).map(String),
+        wheelchair: (layout.wheelchair || []).map(String), sections: layout.sections.map(s => ({ name: String(s.name).slice(0, 30), nameAm: s.nameAm ? String(s.nameAm).slice(0, 30) : null, rows: s.rows })) };
     const hall = await prisma.hall.create({ data: { venueId: venue.id, name, layout: clean, capacity: capacityOf(clean) } });
     return { ok: true, hall };
   });
@@ -264,7 +273,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     if (!show) return fail(reply, { error: 'no_show' });
     const [ts, hs] = await Promise.all([prisma.ticket.findMany({ where: { showId: show.id }, orderBy: { createdAt: 'desc' } }), prisma.seatHold.findMany({ where: { showId: show.id } })]);
     const now = Date.now();
-    return { ok: true, show: pubShow(show), tickets: ts.map(t => ({ ...pubTicket(t), telegram: !!t.telegramId, chapaRef: t.chapaRef })), holds: hs.filter(h => h.expiresAt.getTime() > now).map(h => ({ seat: h.seat, expiresAt: h.expiresAt })) };
+    return { ok: true, show: pubShow(show), tickets: ts.map(t => ({ ...pubTicket(t, show), telegram: !!t.telegramId, chapaRef: t.chapaRef })), holds: hs.filter(h => h.expiresAt.getTime() > now).map(h => ({ seat: h.seat, expiresAt: h.expiresAt })) };
   });
 
   fastify.post('/api/cinema/ops/tickets/:code/paid', async (req, reply) => {

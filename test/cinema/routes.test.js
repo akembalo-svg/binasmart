@@ -276,3 +276,57 @@ test('pages are served', async () => {
   for (const u of ['/cinema', '/cinema/abc', '/ticket/BINA-ABCDEF', '/scan', '/ops/cinema']) assert.equal((await f.inject({ method: 'GET', url: u })).statusCode, 200, u);
   await f.close();
 });
+
+// ---- general admission ----
+const GA = { kind: 'ga', sections: [{ name: 'VIP', nameAm: 'ቪአይፒ', capacity: 2 }, { name: 'Regular', nameAm: 'መደበኛ', capacity: 20 }] };
+async function seedGa(f) {
+  const v = (await f.inject({ method: 'POST', url: '/api/cinema/ops/venues', headers: OPS, payload: { name: 'Ghion Hall' } })).json();
+  const h = (await f.inject({ method: 'POST', url: '/api/cinema/ops/halls', headers: OPS, payload: { venueId: v.venue.id, name: 'Main', layout: GA } })).json();
+  assert.equal(h.hall.capacity, 22, JSON.stringify(h));
+  const e = (await f.inject({ method: 'POST', url: '/api/cinema/ops/events', headers: OPS, payload: { title: 'Jazz Night', titleAm: 'ጃዝ ምሽት', kind: 'CONCERT' } })).json();
+  const s = (await f.inject({ method: 'POST', url: '/api/cinema/ops/shows', headers: OPS, payload: { eventId: e.event.id, hallId: h.hall.id, startsAt: inTwoHours(), prices: { VIP: 800, Regular: 300 } } })).json();
+  assert.equal(s.ok, true, JSON.stringify(s));
+  return { show: s.show, hall: h.hall };
+}
+
+test('GA: listing flags ga, the show payload carries tiers, hold by quantity, oversell refused with left', async () => {
+  const { f } = await app();
+  const { show } = await seedGa(f);
+  const list = (await f.inject({ method: 'GET', url: '/api/cinema/shows' })).json();
+  assert.equal(list.shows[0].ga, true); assert.equal(list.shows[0].seatsLeft, 22); assert.equal(list.shows[0].event.kind, 'CONCERT');
+  const url = '/api/cinema/shows/' + show.id;
+  const g = (await f.inject({ method: 'GET', url, headers: H('holder-aaaaaaaa') })).json();
+  assert.equal(g.layout.kind, 'ga'); assert.deepEqual(g.tiers.map(t => [t.name, t.price, t.left, t.mine]), [['VIP', 800, 2, 0], ['Regular', 300, 20, 0]]); assert.deepEqual(g.seats, []); assert.equal(g.maxSeats, 10);
+  const h1 = await f.inject({ method: 'POST', url: url + '/hold', headers: H('holder-aaaaaaaa'), payload: { section: 'VIP', qty: 2 } });
+  assert.equal(h1.statusCode, 200, h1.body); assert.deepEqual(h1.json().seats, ['VIP-001', 'VIP-002']);
+  const h2 = await f.inject({ method: 'POST', url: url + '/hold', headers: H('holder-bbbbbbbb'), payload: { section: 'VIP', qty: 1 } });
+  assert.equal(h2.statusCode, 409); assert.equal(h2.json().error, 'sold_out'); assert.equal(h2.json().left, 0);
+  assert.equal((await f.inject({ method: 'POST', url: url + '/hold', headers: H('holder-bbbbbbbb'), payload: { section: 'Balcony', qty: 1 } })).statusCode, 400);
+  const g2 = (await f.inject({ method: 'GET', url, headers: H('holder-aaaaaaaa') })).json();
+  assert.deepEqual(g2.tiers[0], { name: 'VIP', nameAm: 'ቪአይፒ', price: 800, capacity: 2, left: 0, mine: 2 }); assert.deepEqual(g2.mine, ['VIP-001', 'VIP-002']);
+  const rel = await f.inject({ method: 'POST', url: url + '/release', headers: H('holder-aaaaaaaa'), payload: { section: 'VIP', qty: 1 } });
+  assert.equal(rel.json().released, 1);
+  await f.close();
+});
+
+test('GA: checkout prices per place, ticket and door carry a "VIP x 2" summary', async () => {
+  const { f } = await app();
+  const { show } = await seedGa(f);
+  const url = '/api/cinema/shows/' + show.id;
+  await f.inject({ method: 'POST', url: url + '/hold', headers: H('holder-aaaaaaaa'), payload: { section: 'VIP', qty: 2 } });
+  await f.inject({ method: 'POST', url: url + '/hold', headers: H('holder-aaaaaaaa'), payload: { section: 'Regular', qty: 1 } });
+  const r = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: show.id, seats: ['VIP-001', 'VIP-002', 'REGULAR-001'], name: 'Sara', phone: '0911223344', payMethod: 'counter', idemKey: 'ga-1' } })).json();
+  assert.equal(r.ok, true, JSON.stringify(r)); assert.equal(r.ticket.total, 1900);
+  assert.deepEqual(r.ticket.summary, [{ section: 'VIP', nameAm: 'ቪአይፒ', count: 2 }, { section: 'Regular', nameAm: 'መደበኛ', count: 1 }]);
+  assert.equal(r.ticket.show.ga, true);
+  const g = (await f.inject({ method: 'GET', url: '/api/cinema/tickets/' + r.ticket.code })).json();
+  assert.equal(g.ticket.summary[0].count, 2);
+  await f.inject({ method: 'POST', url: '/api/cinema/ops/tickets/' + r.ticket.code + '/paid', headers: OPS, payload: {} });
+  const d = (await f.inject({ method: 'POST', url: '/api/cinema/ops/checkin', headers: OPS, payload: { code: r.ticket.code, showId: show.id } })).json();
+  assert.equal(d.ok, true); assert.deepEqual(d.ticket.summary.map(x => x.count), [2, 1]); assert.deepEqual(d.counts, { sold: 3, checkedIn: 3 });
+  const list = (await f.inject({ method: 'GET', url: '/api/cinema/shows' })).json();
+  assert.equal(list.shows[0].seatsLeft, 19);
+  const ops = (await f.inject({ method: 'GET', url: '/api/cinema/ops/shows/' + show.id + '/tickets', headers: OPS })).json();
+  assert.deepEqual(ops.tickets[0].summary.map(x => x.count), [2, 1]);
+  await f.close();
+});
