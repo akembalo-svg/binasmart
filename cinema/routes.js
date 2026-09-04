@@ -44,7 +44,9 @@ const fail = (reply, r) => reply.code(ERR_CODE[r.error] || 400).send({ ok: false
 
 module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checkin, OWNER_KEY, riderBotToken, chapa, BASE_URL, notify }) {
   const base = (BASE_URL || 'https://bina.et').replace(/\/$/, '');
-  const holdRL = limiter(60000, 60), buyRL = limiter(600000, 5), lookupRL = limiter(60000, 120), ipRL = limiter(60000, 300);
+  // Per-holder limits are tight; per-IP limits are loose on purpose: Ethio telecom puts whole
+  // neighbourhoods behind one address, so an IP is a crowd, not a person.
+  const holdRL = limiter(60000, 60), buyRL = limiter(600000, 5), buyIpRL = limiter(600000, 80), lookupRL = limiter(60000, 120), ipRL = limiter(60000, 600);
   const chapaOn = !!(chapa && chapa.enabled);
   const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
   const holderOf = req => { const h = String(req.headers['x-holder'] || (req.query && req.query.holder) || ''); return HOLDER_RE.test(h) ? h : null; };
@@ -121,7 +123,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const name = str(b.name, 60) || (tg ? [tg.user.first_name, tg.user.last_name].filter(Boolean).join(' ') : '');
     const phone = contact ? contact.phone : b.phone;
     const ipKey = 'ip:' + clientIp(req);
-    if (!buyRL(holder) || !buyRL(ipKey)) return reply.code(429).send({ ok: false, error: 'too_many_requests' });
+    if (!buyRL(holder) || !buyIpRL(ipKey)) return reply.code(429).send({ ok: false, error: 'too_many_requests' });
     const method = b.payMethod === 'chapa' && chapaOn ? 'chapa' : 'counter';   // server-side gate, as Ride does
     const r = await tickets.checkout({ showId: String(b.showId || ''), holderKey: holder, seats: b.seats, name, phone, guest: b.guest, payMethod: method,
       telegramId: tg ? tg.user.id : null, idemKey: str(b.idemKey, 80) });

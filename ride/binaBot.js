@@ -5,11 +5,11 @@
 const MENU = [
   [{ text: '🚕 Ride · ታክሲ', path: '/ride' }, { text: '🏨 Hotels · ሆቴል', path: '/hotel/bina-grand-hotel' }],
   [{ text: '🍽 Restaurants · ምግብ ቤት', path: '/restaurant/bina-restaurant' }, { text: '🏥 Hospitals · ሆስፒታል', path: '/hospital/bina-general-hospital' }],
-  [{ text: '🎟 Events · ዝግጅቶች', path: '/events' }, { text: '🏠 Property · ቤት', path: '/property' }],
+  [{ text: '🎟 Events · ዝግጅቶች', path: '/cinema' }, { text: '🏠 Property · ቤት', path: '/property' }],
   [{ text: '🚗 Cars · መኪና', path: '/cars' }, { text: '🛡 Insurance · ኢንሹራንስ', path: '/insurance' }],
   [{ text: '📚 Guides · መመሪያዎች', path: '/guides' }, { text: '🏢 Buildings · ህንፃ', path: '/b/darulle' }],
 ];
-const COMMANDS = { cinema: '/cinema', ride: '/ride', hotels: '/hotel/bina-grand-hotel', restaurants: '/restaurant/bina-restaurant', hospitals: '/hospital/bina-general-hospital', events: '/events', property: '/property', cars: '/cars', insurance: '/insurance', guides: '/guides', ai: '/ai' };
+const COMMANDS = { cinema: '/cinema', ride: '/ride', hotels: '/hotel/bina-grand-hotel', restaurants: '/restaurant/bina-restaurant', hospitals: '/hospital/bina-general-hospital', events: '/cinema', property: '/property', cars: '/cars', insurance: '/insurance', guides: '/guides', ai: '/ai' };
 const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 
 function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername }) {

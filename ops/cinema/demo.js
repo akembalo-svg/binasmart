@@ -33,12 +33,17 @@ async function create() {
     runtimeMin: 110, rating: 'PG-13', language: 'Amharic', startsAt: new Date(Date.now() + 3 * 3600000), durationMin: 110, tiers: {} } });
   const show = await prisma.show.create({ data: { eventId: event.id, hallId: hall.id, startsAt: new Date(Date.now() + 3 * 3600000), prices: { VIP: 500, Regular: 300 }, counterCutoffMin: 30, status: 'onsale' } });
   const show2 = await prisma.show.create({ data: { eventId: event.id, hallId: hall.id, startsAt: new Date(Date.now() + 27 * 3600000), prices: { VIP: 500, Regular: 300 }, counterCutoffMin: 30, status: 'onsale' } });
-  return { show, show2 };
+  // A general-admission concert so the Events group and the tier picker can be seen.
+  const gaHall = await prisma.hall.create({ data: { venueId: venue.id, name: 'Main Hall', layout: { kind: 'ga', sections: [{ name: 'VIP', nameAm: 'ቪአይፒ', capacity: 20 }, { name: 'Regular', nameAm: 'መደበኛ', capacity: 100 }] }, capacity: 120 } });
+  const concert = await prisma.event.create({ data: { slug: SLUG + '-concert-' + Date.now().toString(36), title: 'Demo Concert (test)', titleAm: 'ማሳያ ኮንሰርት (ሙከራ)', type: 'CINEMA', kind: 'CONCERT', venue: venue.name, descr: 'Test concert for the general-admission demo.', emoji: '🎤',
+    startsAt: new Date(Date.now() + 30 * 3600000), durationMin: 180, tiers: {} } });
+  const show3 = await prisma.show.create({ data: { eventId: concert.id, hallId: gaHall.id, startsAt: new Date(Date.now() + 30 * 3600000), prices: { VIP: 800, Regular: 300 }, counterCutoffMin: 60, status: 'onsale' } });
+  return { show, show2, show3 };
 }
 
 (async () => {
   try {
     if (process.argv.includes('--clean')) { console.log('cleaned', JSON.stringify(await clean())); }
-    else { const { show, show2 } = await create(); console.log('demo show: https://bina.et/cinema/' + show.id); console.log('second:    https://bina.et/cinema/' + show2.id); }
+    else { const { show, show2, show3 } = await create(); console.log('demo show: https://bina.et/cinema/' + show.id); console.log('second:    https://bina.et/cinema/' + show2.id); console.log('concert:   https://bina.et/cinema/' + show3.id); }
   } finally { await prisma.$disconnect(); }
 })().catch(e => { console.error(e.message); process.exit(1); });

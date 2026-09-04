@@ -27,10 +27,11 @@ const SQL = {
           JOIN "Building" b ON b.id = u."buildingId"
           WHERE t.active = true AND ($1::text IS NULL OR s.name ILIKE $1 OR s."nameAm" LIKE $1) AND ($2::text IS NULL OR s.category::text = $2)
           ORDER BY s."avgRating" DESC, s.name LIMIT $3`,
-  events: `SELECT e.slug, e.title, e."titleAm", e.type, e.venue, e.city, e.descr, e."startsAt", e."durationMin", e.tiers,
-                  COALESCE((SELECT json_agg(json_build_object('tier', x.tier, 'qty', x.q)) FROM
-                    (SELECT tier, SUM(qty) AS q FROM "EventTicket" WHERE "eventId" = e.id AND status <> 'CANCELLED' GROUP BY tier) x), '[]'::json) AS sold
-           FROM "Event" e WHERE e.active = true AND e."startsAt" > now() ORDER BY e."startsAt" LIMIT 30`,
+  events: `SELECT s.id, s."startsAt", s.prices, e.slug, e.title, e."titleAm", e.kind, e.descr, e."runtimeMin", h.name AS hall, h.capacity, h.layout,
+                  v.name AS venue, v."nameAm" AS "venueAm", v.address,
+                  COALESCE((SELECT SUM(cardinality(t.seats)) FROM "Ticket" t WHERE t."showId" = s.id AND t.status IN ('RESERVED','CONFIRMED','CHECKED_IN')), 0)::int AS sold
+           FROM "Show" s JOIN "Event" e ON e.id = s."eventId" JOIN "Hall" h ON h.id = s."hallId" JOIN "Venue" v ON v.id = h."venueId"
+           WHERE s.status = 'onsale' AND s."startsAt" > now() ORDER BY s."startsAt" LIMIT 50`,
   building: `SELECT id, name, "nameAm", city, "subCity", "buildingType" FROM "Building" WHERE "qrSlug" = $1`,
   rooms: `SELECT name, "nameAm", description, "pricePerNight", capacity, amenities, "totalRooms" FROM "RoomType" WHERE "buildingId" = $1 AND active = true ORDER BY "pricePerNight"`,
   departments: `SELECT id, name, "nameAm", floor, room, fee, doctors, "openHours", "slotsPerDay" FROM "Department" WHERE "buildingId" = $1 AND active = true ORDER BY floor, name`,
@@ -70,20 +71,19 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
 
   server.registerTool('list_events', {
     title: 'Upcoming events',
-    description: 'Upcoming events on BinaSmart (concerts, cinema, festivals) in Addis Ababa with venue, start time, ticket price from and seats left. Tickets are bought at the link returned.',
+    description: 'Upcoming films, concerts, theatre and events on BinaSmart in Addis Ababa with venue, hall, start time, prices per tier and seats left. Seats are chosen and paid at the url returned (Chapa or at the counter); the ticket is a QR code.',
     inputSchema: {},
     annotations: { readOnlyHint: true, openWorldHint: false },
   }, wrap('list_events', guard(async () => {
     const { rows } = await db.query(SQL.events, []);
-    const events = rows.map(e => {
-      const tiers = Array.isArray(e.tiers) ? e.tiers : [];
-      const sold = Object.fromEntries((e.sold || []).map(x => [x.tier, Number(x.qty) || 0]));
-      const left = tiers.reduce((n, t) => n + Math.max(0, (t.seats || 0) - (sold[t.name] || 0)), 0);
-      return { slug: e.slug, title: e.title, title_am: e.titleAm || undefined, type: e.type, venue: e.venue, city: e.city, description: e.descr || undefined,
-        starts_at: e.startsAt, duration_min: e.durationMin, price_from_etb: tiers.length ? Math.min(...tiers.map(t => t.price)) : undefined,
-        seats_left: left, tiers: tiers.map(t => ({ name: t.name, price_etb: t.price, seats_left: Math.max(0, (t.seats || 0) - (sold[t.name] || 0)) })), url: `${BASE}/events` };
+    const events = rows.map(s => {
+      const prices = s.prices && typeof s.prices === 'object' ? s.prices : {};
+      const vals = Object.values(prices).map(Number).filter(Number.isFinite);
+      return { show_id: s.id, slug: s.slug, title: s.title, title_am: s.titleAm || undefined, kind: s.kind, venue: s.venue, venue_am: s.venueAm || undefined, address: s.address || undefined, hall: s.hall,
+        description: s.descr || undefined, starts_at: s.startsAt, runtime_min: s.runtimeMin || undefined, general_admission: !!(s.layout && s.layout.kind === 'ga'),
+        price_from_etb: vals.length ? Math.min(...vals) : undefined, prices_etb: prices, seats_left: Math.max(0, (s.capacity || 0) - (s.sold || 0)), url: `${BASE}/cinema/${s.id}` };
     });
-    return json({ count: events.length, events, source_url: `${BASE}/events` });
+    return json({ count: events.length, events, book_hint: 'Seats are chosen and paid on the url (Chapa or at the counter); the ticket is a QR code.', source_url: `${BASE}/cinema` });
   })));
 
   server.registerTool('get_hotel_rooms', {

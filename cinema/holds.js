@@ -94,19 +94,26 @@ function makeHolds({ prisma, now }) {
     const t = clock();
     const already = (await prisma.seatHold.findMany({ where: { showId: show.id, holderKey } })).filter(h => h.expiresAt.getTime() > t).length;
     if (already + qty > MAX_GA) return { ok: false, error: 'too_many', max: MAX_GA };
-    const free = await gaFree(show, sec, t);
-    if (free.length < qty) return { ok: false, error: 'sold_out', left: free.length };
-    const expiresAt = new Date(t + HOLD_MS); const got = [];
-    for (const id of free) {
-      if (got.length === qty) break;
-      try { await prisma.seatHold.create({ data: { showId: show.id, seat: id, holderKey, expiresAt } }); got.push(id); }
-      catch (e) { if (!e || e.code !== 'P2002') throw e; }   // someone else took this one: try the next id
-    }
-    if (got.length < qty) {
+    const expiresAt = new Date(t + HOLD_MS);
+    // Two buyers who each want 2 of the last 2 places can leapfrog each other (A gets 001, B gets 002,
+    // both fall short, both roll back). So: roll back, wait a random few ms, and try again — up to 5
+    // times. Whoever re-scans first then takes both; the other is told the truth (0 left).
+    let left = 0;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const free = await gaFree(show, sec, clock());
+      if (free.length < qty) return { ok: false, error: 'sold_out', left: free.length };
+      const got = [];
+      for (const id of free) {
+        if (got.length === qty) break;
+        try { await prisma.seatHold.create({ data: { showId: show.id, seat: id, holderKey, expiresAt } }); got.push(id); }
+        catch (e) { if (!e || e.code !== 'P2002') throw e; }   // someone else took this one: try the next id
+      }
+      if (got.length === qty) return { ok: true, seats: got, expiresAt };
       if (got.length) await prisma.seatHold.deleteMany({ where: { showId: show.id, holderKey, seat: { in: got } } });
-      return { ok: false, error: 'sold_out', left: (await gaFree(show, sec, clock())).length };
+      left = free.length - got.length;
+      await new Promise(r => setTimeout(r, 5 + Math.floor(Math.random() * 40)));
     }
-    return { ok: true, seats: got, expiresAt };
+    return { ok: false, error: 'sold_out', left: Math.min(left, (await gaFree(show, sec, clock())).length) };
   }
 
   async function releaseSome(showId, holderKey, section, qty) {

@@ -119,6 +119,14 @@ test('GA: two buyers race for the last place — one wins, the other is told sol
   const loser = [a, b].find(x => !x.ok); assert.equal(loser.error, 'sold_out'); assert.equal(loser.left, 0);
   assert.equal(prisma._.holds.filter(x => x.seat.startsWith('VIP')).length, 2);
 });
+test('GA: two buyers each want the last 2 places at once — one gets both, the other gets sold_out 0 (no leapfrog deadlock)', async () => {
+  const prisma = fakePrisma(); const h = makeHolds({ prisma, now: () => 1_000_000 });
+  const [a, b] = await Promise.all([h.holdMany(gshow, 'VIP', 2, 'me'), h.holdMany(gshow, 'VIP', 2, 'you')]);
+  assert.equal([a, b].filter(x => x.ok).length, 1, JSON.stringify([a, b]));
+  const w = [a, b].find(x => x.ok), l = [a, b].find(x => !x.ok);
+  assert.deepEqual(w.seats, ['VIP-001', 'VIP-002']); assert.equal(l.error, 'sold_out'); assert.equal(l.left, 0);
+  assert.equal(prisma._.holds.length, 2);
+});
 test('GA: sold places are not free, the cap is MAX_GA, unknown tier / bad qty / seated hall are refused', async () => {
   const prisma = fakePrisma(); prisma._.tickets.push({ showId: 'g1', seats: ['VIP-001', 'VIP-002'], status: 'CONFIRMED' });
   const h = makeHolds({ prisma, now: () => 1 });

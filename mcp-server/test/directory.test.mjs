@@ -46,14 +46,15 @@ test('search_places rejects an unknown category', async () => {
   assert.equal(r.isError, true);
 });
 
-test('list_events computes price_from and seats_left', async () => {
-  const db = fakeDb(sql => /FROM "Event"/.test(sql)
-    ? [{ slug: 'jazz', title: 'Jazz Night', titleAm: null, type: 'CONCERT', venue: 'Skylight', city: 'Addis Ababa', startsAt: '2026-10-01T18:00:00Z', durationMin: 120, tiers: [{ name: 'VIP', price: 1500, seats: 50 }, { name: 'Regular', price: 500, seats: 200 }], sold: [{ tier: 'VIP', qty: 10 }] }]
+test('list_events reads shows on sale: price_from, seats_left, url per show', async () => {
+  const db = fakeDb(sql => /FROM "Show"/.test(sql)
+    ? [{ id: 'sh1', slug: 'jazz', title: 'Jazz Night', titleAm: null, kind: 'CONCERT', venue: 'Skylight', venueAm: null, address: 'Bole', hall: 'Main', capacity: 250, layout: { kind: 'ga' }, startsAt: '2026-10-01T18:00:00Z', prices: { VIP: 1500, Regular: 500 }, sold: 10, descr: null, runtimeMin: null }]
     : []);
   const r = out(await tools(db).list_events({}));
   assert.equal(r.events[0].price_from_etb, 500);
   assert.equal(r.events[0].seats_left, 240);
-  assert.equal(r.events[0].url, 'https://bina.et/events');
+  assert.equal(r.events[0].general_admission, true);
+  assert.equal(r.events[0].url, 'https://bina.et/cinema/sh1');
 });
 
 test('get_hotel_rooms and get_hospital_departments', async () => {

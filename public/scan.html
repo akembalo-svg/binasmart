@@ -6,7 +6,7 @@
 <title>በር · Door scanner | BinaSmart Cinema</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0b2a26">
-<link rel="stylesheet" href="/static/cinema/ui.css?v=2">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=4">
 <style>
 body{background:#0b2a26;color:#fff}
 .wrap{padding-bottom:20px}
@@ -71,8 +71,9 @@ select,input{background:#fff;color:#0b2a26}
     api('/api/cinema/ops/checkin', { body: { code: code, showId: $('show').value || undefined } }).then(function (j) {
       if (j.counts) counts(j.counts);
       var tk = j.ticket || {};
-      if (j.ok) { show(true, tk.name || '', (tk.seats || []).join('  '), 'ይግቡ · Welcome'); }
-      else { var r = REASON[j.error] || [j.error, '']; show(false, r[0], (tk.seats || []).join('  '), r[1] + (j.at ? ' · ' + new Date(j.at).toLocaleTimeString('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }) : '') + (tk.name ? ' · ' + tk.name : '')); }
+      var seatsText = tk.show && tk.show.ga && tk.summary && tk.summary.length ? tk.summary.map(function (s) { return (s.nameAm || s.section) + ' × ' + s.count; }).join('  ') : (tk.seats || []).join('  ');
+      if (j.ok) { show(true, tk.name || '', seatsText, 'ይግቡ · Welcome'); }
+      else { var r = REASON[j.error] || [j.error, '']; show(false, r[0], seatsText, r[1] + (j.at ? ' · ' + new Date(j.at).toLocaleTimeString('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }) : '') + (tk.name ? ' · ' + tk.name : '')); }
       var l = document.createElement('div'); l.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: TZ }) + ' ' + code + ' → ' + (j.ok ? 'OK' : j.error); $('log').prepend(l);
     }).catch(function () { show(false, 'ግንኙነት የለም', '', 'No connection'); });
   }

@@ -9,7 +9,8 @@
     taken: 'ይቅርታ፣ ይህ ወንበር አሁን ተያዘ · Sorry, that seat was just taken',
     sold: 'ይህ ወንበር ተሽጧል · That seat is sold',
     hold_expired: 'ጊዜው አልፏል፤ ወንበሮቹ ተለቀዋል፣ እንደገና ይምረጡ · Your hold expired — pick again',
-    too_many: 'በአንድ ትዕዛዝ እስከ 8 ወንበር · Up to 8 seats per order',
+    too_many: 'በአንድ ትዕዛዝ ከሚፈቀደው በላይ · Too many for one order',
+    sold_out: 'ተሽጦ አልቋል · Sold out — {n} ቀርተዋል · left',
     show_closed: 'ይህ ትርዒት ተዘግቷል · This show is closed',
     no_show: 'ትርዒቱ አልተገኘም · Show not found',
     phone: 'የኢትዮጵያ ስልክ (09…) ያስፈልጋል · An Ethiopian phone (09…) is required',
@@ -52,15 +53,18 @@
       j.shows.forEach(function (s) { var k = s.event.id; if (!groups[k]) { groups[k] = { ev: s.event, venue: s.venue, shows: [] }; order.push(k); } groups[k].shows.push(s); });
       var html = '<h1>ሲኒማ እና ዝግጅቶች</h1><p class="sub">ወንበርዎን በካርታው ላይ ይምረጡ፣ QR ትኬት ያግኙ · Pick your exact seat, get a QR ticket.' + (j.chapa && j.chapa.enabled && j.chapa.mode !== 'live' ? ' <span class="pill warn">🧪 Chapa TEST</span>' : '') + '</p>';
       if (!order.length) html += '<div class="card" style="margin-top:14px"><b>በቅርቡ · Coming soon.</b><div class="sub" style="margin-top:6px">ገና ትርዒት አልተለቀቀም። ሲኒማ ቤት ወይም የዝግጅት አዘጋጅ ነዎት? <a href="https://t.me/bina_smart_bot">@bina_smart_bot</a> ያነጋግሩን። · No shows on sale yet. Run a cinema or events? Talk to us.</div></div>';
-      order.forEach(function (k) {
-        var g = groups[k], e = g.ev;
-        html += '<div class="card ev"><div class="poster">' + (e.posterUrl ? '<img src="' + esc(e.posterUrl) + '" alt="" loading="lazy">' : esc(e.emoji || '🎬')) + '</div><div>'
+      var cardFor = function (k) {
+        var g = groups[k], e = g.ev, isFilm = e.kind === 'FILM';
+        return '<div class="card ev"><div class="poster">' + (e.posterUrl ? '<img src="' + esc(e.posterUrl) + '" alt="" loading="lazy">' : esc(e.emoji || (isFilm ? '🎬' : '🎟️'))) + '</div><div>'
           + '<div class="t">' + esc(e.titleAm || e.title) + (e.titleAm && e.title !== e.titleAm ? '<small>' + esc(e.title) + '</small>' : '') + '</div>'
           + '<div class="meta">' + (KIND[e.kind] || KIND.OTHER) + (e.runtimeMin ? ' · ' + e.runtimeMin + ' ደቂቃ' : '') + (e.rating ? ' · ' + esc(e.rating) : '') + (e.language ? ' · ' + esc(e.language) : '') + '</div>'
           + '<div class="meta">📍 ' + esc(g.venue.nameAm || g.venue.name) + '</div>'
-          + '<div class="times">' + g.shows.map(function (s) { return '<a href="/cinema/' + esc(s.id) + '"' + (s.seatsLeft <= 10 ? ' class="few"' : '') + '>' + fmtDay(s.startsAt) + ' ' + fmtTime(s.startsAt) + '<b>ከ ' + birr(s.from) + (s.seatsLeft <= 10 ? ' · ' + s.seatsLeft + ' ቀርተዋል' : '') + '</b></a>'; }).join('') + '</div>'
+          + '<div class="times">' + g.shows.map(function (s) { var few = s.seatsLeft <= (s.ga ? 20 : 10); return '<a href="/cinema/' + esc(s.id) + '"' + (few ? ' class="few"' : '') + '>' + fmtDay(s.startsAt) + ' ' + fmtTime(s.startsAt) + '<b>ከ ' + birr(s.from) + (few ? ' · ' + s.seatsLeft + ' ቀርተዋል' : '') + '</b></a>'; }).join('') + '</div>'
           + '</div></div>';
-      });
+      };
+      var films = order.filter(function (k) { return groups[k].ev.kind === 'FILM'; }), events = order.filter(function (k) { return groups[k].ev.kind !== 'FILM'; });
+      if (films.length) html += '<h2>🎬 ፊልሞች · Films</h2>' + films.map(cardFor).join('');
+      if (events.length) html += '<h2>🎟️ ዝግጅቶች · Events</h2><p class="sub" style="margin:-4px 0 10px">ኮንሰርት፣ ቲያትር፣ ስብሰባ — ትኬትዎን ይምረጡ · concerts, theatre, meetings</p>' + events.map(cardFor).join('');
       view.innerHTML = html + '<div id="venues"></div>';
       renderVenues();
     });
@@ -84,16 +88,25 @@
   }
 
   // ---------------- seat map ----------------
-  var S = { show: null, layout: null, seats: [], mine: [], prices: {}, expiresAt: null, chapa: null, poll: null, tick: null, busy: {} };
+  var S = { show: null, layout: null, seats: [], tiers: null, mine: [], prices: {}, expiresAt: null, chapa: null, poll: null, tick: null, busy: {} };
   function sectionPrice(seat) { return S.prices[seat.section] != null ? S.prices[seat.section] : 0; }
   function seatById(id) { for (var i = 0; i < S.seats.length; i++) if (S.seats[i].id === id) return S.seats[i]; return null; }
-  function total() { return S.mine.reduce(function (n, id) { var s = seatById(id); return n + (s ? sectionPrice(s) : 0); }, 0); }
+  function total() {
+    if (S.tiers) return S.tiers.reduce(function (n, t) { return n + t.mine * (t.price || 0); }, 0);
+    return S.mine.reduce(function (n, id) { var s = seatById(id); return n + (s ? sectionPrice(s) : 0); }, 0);
+  }
+  // "VIP × 2 · Regular × 1" for general admission, "A5, C7" for seated halls.
+  function mineText() {
+    if (S.tiers) return S.tiers.filter(function (t) { return t.mine; }).map(function (t) { return (t.nameAm || t.name) + ' × ' + t.mine; }).join(' · ');
+    return S.mine.slice().sort().join(', ');
+  }
+  function paint() { if (S.tiers) paintTiers(); else paintSeats(); }
 
   function load(showId, quiet) {
     return api('/api/cinema/shows/' + encodeURIComponent(showId)).then(function (j) {
       if (!j.ok) { if (!quiet) view.innerHTML = '<div class="card">' + esc(T[j.error] || T.net) + ' <a href="/cinema">← ሁሉም ትርዒቶች</a></div>'; return false; }
-      S.show = j.show; S.layout = j.layout; S.seats = j.seats; S.mine = j.mine || []; S.prices = j.show.prices || {}; S.expiresAt = j.holdExpiresAt ? new Date(j.holdExpiresAt).getTime() : null; S.chapa = j.chapa; S.maxSeats = j.maxSeats || 8;
-      if (!quiet) renderShow(); else paintSeats();
+      S.show = j.show; S.layout = j.layout; S.seats = j.seats || []; S.tiers = j.tiers || null; S.mine = j.mine || []; S.prices = j.show.prices || {}; S.expiresAt = j.holdExpiresAt ? new Date(j.holdExpiresAt).getTime() : null; S.chapa = j.chapa; S.maxSeats = j.maxSeats || 8;
+      if (!quiet) renderShow(); else paint();
       paintBar();
       return true;
     });
@@ -106,13 +119,34 @@
       + '<h1 style="font-size:19px">' + esc(e.titleAm || e.title) + '</h1><div class="sub">' + (e.titleAm && e.title !== e.titleAm ? esc(e.title) + ' · ' : '') + fmtDay(sh.startsAt) + ' ' + fmtTime(sh.startsAt) + '</div>'
       + '<div class="sub">📍 ' + esc(v.nameAm || v.name) + ' · ' + esc(sh.hall.name) + '</div>'
       + (sh.status !== 'onsale' ? '<span class="pill bad">' + esc(T.show_closed) + '</span>' : '') + '</div></div>'
-      + '<h2>ወንበር ይምረጡ · Pick your seats</h2><div class="legend">'
-      + secs.map(function (s) { return '<span><i class="' + (s.name === 'VIP' ? 'vip' : '') + '"></i>' + esc(s.nameAm || s.name) + ' ' + birr(S.prices[s.name] || 0) + '</span>'; }).join('')
-      + '<span><i class="mine"></i>የእርስዎ · yours</span><span><i class="held"></i>ተይዟል · held</span><span><i class="sold"></i>ተሽጧል · sold</span></div>'
-      + '<div class="card" style="padding:12px 6px"><div class="screen"></div><div class="screen-l">ስክሪን · SCREEN</div><div class="mapwrap"><div class="map" id="map"></div></div></div>'
-      + '<p class="sub" style="margin-top:10px">ወንበር ሲነኩ ለ10 ደቂቃ ይያዝልዎታል። · Tapping a seat holds it for you for 10 minutes.</p>';
+      + (S.tiers
+        ? '<h2>ትኬት ይምረጡ · Pick your tickets</h2><div id="tiers"></div><p class="sub" style="margin-top:10px">የመረጡት ለ10 ደቂቃ ይያዝልዎታል፤ እስከ ' + S.maxSeats + ' በአንድ ትዕዛዝ። · Held for you for 10 minutes; up to ' + S.maxSeats + ' per order.</p>'
+        : '<h2>ወንበር ይምረጡ · Pick your seats</h2><div class="legend">'
+          + secs.map(function (s) { return '<span><i class="' + (s.name === 'VIP' ? 'vip' : '') + '"></i>' + esc(s.nameAm || s.name) + ' ' + birr(S.prices[s.name] || 0) + '</span>'; }).join('')
+          + '<span><i class="mine"></i>የእርስዎ · yours</span><span><i class="held"></i>ተይዟል · held</span><span><i class="sold"></i>ተሽጧል · sold</span></div>'
+          + '<div class="card" style="padding:12px 6px"><div class="screen"></div><div class="screen-l">ስክሪን · SCREEN</div><div class="mapwrap"><div class="map" id="map"></div></div></div>'
+          + '<p class="sub" style="margin-top:10px">ወንበር ሲነኩ ለ10 ደቂቃ ይያዝልዎታል። · Tapping a seat holds it for you for 10 minutes.</p>');
     view.innerHTML = html;
-    paintSeats();
+    paint();
+  }
+  // General admission: one card per tier with a − / + stepper. The server decides what is left.
+  function paintTiers() {
+    var box = $('tiers'); if (!box || !S.tiers) return;
+    var count = S.tiers.reduce(function (n, t) { return n + t.mine; }, 0);
+    box.innerHTML = S.tiers.map(function (t) {
+      var out = t.left === 0 && t.mine === 0;
+      return '<div class="tier card' + (out ? ' out' : '') + '"><div class="ti"><div class="tn">' + esc(t.nameAm || t.name) + (t.nameAm ? ' <small>' + esc(t.name) + '</small>' : '') + '</div><div class="tp">' + birr(t.price) + '</div><div class="tl">' + (out ? 'ተሽጦ አልቋል · sold out' : t.left + ' ቀርተዋል · left') + '</div></div>'
+        + '<div class="step"><button type="button" data-t="' + esc(t.name) + '" data-d="-1"' + (t.mine ? '' : ' disabled') + ' aria-label="less ' + esc(t.name) + '">−</button><b>' + t.mine + '</b><button type="button" data-t="' + esc(t.name) + '" data-d="1"' + (t.left && count < S.maxSeats ? '' : ' disabled') + ' aria-label="more ' + esc(t.name) + '">+</button></div></div>';
+    }).join('');
+  }
+  function onTierTap(ev) {
+    var b = ev.target.closest && ev.target.closest('.step button'); if (!b || b.disabled) return;
+    var sec = b.getAttribute('data-t'), d = b.getAttribute('data-d'); if (S.busy[sec]) return; S.busy[sec] = true;
+    var p = d === '1' ? api('/api/cinema/shows/' + S.show.id + '/hold', { body: { section: sec, qty: 1 } }) : api('/api/cinema/shows/' + S.show.id + '/release', { body: { section: sec, qty: 1 } });
+    p.then(function (j) {
+      if (!j.ok) toast(j.error === 'sold_out' ? T.sold_out.replace('{n}', j.left) : (T[j.error] || j.error || T.net));
+      return load(S.show.id, true);
+    }).then(function () { delete S.busy[sec]; });
   }
   function paintSeats() {
     var map = $('map'); if (!map) return;
@@ -138,8 +172,8 @@
     if (!S.show) return;
     bar.hidden = false;
     var n = S.mine.length;
-    $('barSeats').textContent = n ? S.mine.slice().sort().join(', ') : 'ወንበር ይምረጡ · pick seats';
-    $('barTotal').textContent = n ? birr(total()) + ' · ' + n + ' ወንበር' : '';
+    $('barSeats').textContent = n ? mineText() : (S.tiers ? 'ትኬት ይምረጡ · pick tickets' : 'ወንበር ይምረጡ · pick seats');
+    $('barTotal').textContent = n ? birr(total()) + ' · ' + n + (S.tiers ? ' ትኬት' : ' ወንበር') : '';
     $('barGo').disabled = !n || S.show.status !== 'onsale';
     paintCd();
   }
@@ -171,7 +205,7 @@
   function openSheet() {
     if (!S.mine.length) return;
     idem = idem || ('c-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8));
-    $('shSeats').textContent = (S.show.event.titleAm || S.show.event.title) + ' · ' + S.mine.slice().sort().join(', ') + ' · ' + fmtDay(S.show.startsAt) + ' ' + fmtTime(S.show.startsAt);
+    $('shSeats').textContent = (S.show.event.titleAm || S.show.event.title) + ' · ' + mineText() + ' · ' + fmtDay(S.show.startsAt) + ' ' + fmtTime(S.show.startsAt);
     $('shTotal').textContent = birr(total());
     var u = window.TG && TG.user && TG.user();
     if (u && !$('fName').value) $('fName').value = [u.first_name, u.last_name].filter(Boolean).join(' ');
@@ -208,6 +242,7 @@
     load(m[1]).then(function (ok) {
       if (!ok) return;
       view.addEventListener('click', onSeatTap);
+      view.addEventListener('click', onTierTap);
       S.poll = setInterval(function () { if (!sheet.classList.contains('on')) load(S.show.id, true); }, 5000);
       S.tick = setInterval(paintCd, 1000);
     });

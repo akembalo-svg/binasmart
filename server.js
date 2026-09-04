@@ -137,7 +137,7 @@ fastify.get('/sitemap.xml', async (req, reply) => {
   const posts = await prisma.newsPost.findMany({ where: { published: true }, select: { slug: true } });
   const tnds = await prisma.tender.findMany({ where: { published: true }, select: { slug: true } });
   const cshows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date() } }, select: { id: true } }).catch(() => []);
-  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/events', 'https://bina.et/cinema', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug)];
+  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug)];
   reply.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + urls.map(u => '<url><loc>' + u + '</loc></url>').join('\n') + '\n</urlset>');
 });
@@ -455,45 +455,12 @@ fastify.get('/api/owner/:slug/flight-requests', async (req, reply) => {
 fastify.get('/flights/:slug', async (req, reply) => reply.sendFile('flights.html'));
 
 // ===== EVENTS: cinema + event tickets (tiered seating) =====
-async function tierAvailability(eventId, tiers) {
-  const sold = await prisma.eventTicket.groupBy({ by: ['tier'],
-    where: { eventId, status: { not: 'CANCELLED' } }, _sum: { qty: true } });
-  const smap = Object.fromEntries(sold.map(s => [s.tier, s._sum.qty || 0]));
-  return tiers.map(t => ({ ...t, available: t.seats - (smap[t.name] || 0) }));
-}
 
-fastify.get('/api/events', async () => {
-  const events = await prisma.event.findMany({ where: { active: true, startsAt: { gt: new Date() } }, orderBy: { startsAt: 'asc' }, take: 30 });
-  const out = [];
-  for (const e of events) {
-    const tiers = await tierAvailability(e.id, e.tiers);
-    out.push({ slug: e.slug, title: e.title, titleAm: e.titleAm, type: e.type, venue: e.venue, city: e.city,
-      descr: e.descr, emoji: e.emoji, startsAt: e.startsAt, durationMin: e.durationMin,
-      priceFrom: Math.min(...e.tiers.map(t => t.price)),
-      totalLeft: tiers.reduce((s, t) => s + Math.max(0, t.available), 0), tiers });
-  }
-  return { events: out };
-});
+fastify.get('/api/events', async (req, reply) => reply.code(410).send({ ok: false, error: 'moved', url: '/cinema', api: '/api/cinema/shows' }));
 
-fastify.post('/api/events/:slug/book', async (req, reply) => {
-  const { tier, qty, name, phone } = req.body || {};
-  if (!tier || !name || !phone) return reply.code(400).send({ error: 'missing_fields' });
-  const n = parseInt(qty) || 1;
-  if (n < 1 || n > 10) return reply.code(400).send({ error: 'max_10_tickets' });
-  const e = await prisma.event.findUnique({ where: { slug: req.params.slug } });
-  if (!e || !e.active) return reply.code(404).send({ error: 'not_found' });
-  if (new Date(e.startsAt) < new Date()) return reply.code(400).send({ error: 'event_started' });
-  const tiers = await tierAvailability(e.id, e.tiers);
-  const t = tiers.find(x => x.name === tier);
-  if (!t) return reply.code(400).send({ error: 'bad_tier' });
-  if (t.available < n) return reply.code(409).send({ error: 'not_available', available: Math.max(0, t.available) });
-  const code = 'EV-' + Math.random().toString(36).slice(2, 6).toUpperCase() + '-' + Date.now().toString(36).slice(-4).toUpperCase();
-  const tk = await prisma.eventTicket.create({ data: { eventId: e.id, code, name, phone: String(phone).trim(), tier, qty: n, total: n * t.price } });
-  await audit(null, 'EVENT_TICKET', name + ' · ' + e.title + ' · ' + tier + ' ×' + n + ' · ' + code, tk.total).catch(() => {});
-  return { ok: true, code, event: e.title, eventAm: e.titleAm, venue: e.venue, startsAt: e.startsAt, tier, qty: n, total: tk.total };
-});
+fastify.post('/api/events/:slug/book', async (req, reply) => reply.code(410).send({ ok: false, error: 'moved', url: '/cinema' }));
 
-fastify.get('/events', async (req, reply) => reply.sendFile('events.html'));
+fastify.get('/events', async (req, reply) => reply.redirect('/cinema', 301));   // retired 2026-09-04: films + events live on /cinema
 fastify.get('/fayda', async (req, reply) => reply.sendFile('fayda.html'));
 fastify.get('/telebirr', async (req, reply) => reply.sendFile('telebirr.html'));
 fastify.get('/telesign', async (req, reply) => reply.sendFile('telesign.html'));

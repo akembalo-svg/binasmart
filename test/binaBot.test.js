@@ -20,7 +20,7 @@ test('/start shows the service menu as web_app buttons plus share', async () => 
   await b.handleUpdate(msg('/start'));
   const kb = api.sent[0].extra.reply_markup.inline_keyboard;
   const urls = kb.flat().map(x => x.web_app && x.web_app.url).filter(Boolean);
-  assert.ok(urls.includes('https://bina.et/ride')); assert.ok(urls.includes('https://bina.et/events')); assert.ok(urls.includes('https://bina.et/guides'));
+  assert.ok(urls.includes('https://bina.et/ride')); assert.ok(urls.includes('https://bina.et/cinema')); assert.ok(urls.includes('https://bina.et/guides'));
   assert.ok(kb.at(-1)[0].url.includes('t.me/share'));
   assert.match(api.sent[0].text, /BinaSmart/);
 });
@@ -48,7 +48,7 @@ test('ride-related answers get a Book a ride web_app button', async () => {
 test('/ride /events commands open the page; unknown command explains; Bini failure gives a polite fallback', async () => {
   const { api, b } = bot(null);
   await b.handleUpdate(msg('/events'));
-  assert.equal(api.sent[0].extra.reply_markup.inline_keyboard[0][0].web_app.url, 'https://bina.et/events');
+  assert.equal(api.sent[0].extra.reply_markup.inline_keyboard[0][0].web_app.url, 'https://bina.et/cinema');
   await b.handleUpdate(msg('/whatever'));
   assert.match(api.sent[1].text, /Unknown command/);
   await b.handleUpdate(msg('hello'));

@@ -9,7 +9,7 @@
 <link rel="icon" href="/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+Ethiopic:wght@500;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/cinema/ui.css?v=2">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=4">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
 .tk{max-width:420px;margin:0 auto;background:#fff;border:1.5px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--sh)}
@@ -58,7 +58,7 @@
     view.innerHTML = '<div class="tk"><div class="hd"><div class="t">' + esc(e.titleAm || e.title) + '</div><div class="s">' + (e.titleAm && e.title !== e.titleAm ? esc(e.title) + ' · ' : '') + when(sh.startsAt) + '</div></div>'
       + '<div class="qr' + (dim ? ' dim' : '') + '"><img src="/api/cinema/tickets/' + esc(t.code) + '/qr.svg" alt="QR ' + esc(t.code) + '" width="230" height="230"><div class="code">' + esc(t.code) + '</div></div>'
       + '<div class="body"><div class="st">' + (STATUS[t.status] || esc(t.status))(t) + '</div>'
-      + '<div class="seats">' + esc((t.seats || []).join(' · ')) + '</div>'
+      + '<div class="seats">' + esc(sh.ga && t.summary && t.summary.length ? t.summary.map(function (s) { return (s.nameAm || s.section) + ' × ' + s.count; }).join(' · ') : (t.seats || []).join(' · ')) + '</div>'
       + '<div class="kv" style="margin-top:12px"><b>ስም · Name</b><span>' + esc(t.name) + '</span><b>ቦታ · Venue</b><span>' + esc(v.nameAm || v.name) + ' · ' + esc((sh.hall || {}).name) + (v.address ? '<br><small>' + esc(v.address) + '</small>' : '') + '</span><b>ጠቅላላ · Total</b><span>' + Number(t.total).toLocaleString('en-US') + ' ብር · ' + (t.payMethod === 'chapa' ? 'Chapa' : 'ካውንተር · counter') + '</span>' + (v.phone ? '<b>ስልክ · Venue</b><span><a href="tel:' + esc(v.phone) + '">' + esc(v.phone) + '</a></span>' : '') + '</div>'
       + (q.get('chapa') === 'failed' ? '<div class="err">የ Chapa ክፍያ ገጽ አልተከፈተም፤ በካውንተር መክፈል ይችላሉ። · Chapa did not open; you can pay at the counter.</div>' : '')
       + '<div class="acts">'

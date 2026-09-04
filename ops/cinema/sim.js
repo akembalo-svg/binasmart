@@ -127,6 +127,36 @@ async function cleanup() {
     const gone = await http('POST', '/api/cinema/shows/' + SH + '/hold', { seat: 'C2' }, H(other));
     check('cancel: holds refused (410)', gone.status === 410, gone.j);
     check('cancel: no longer listed', !(await http('GET', '/api/cinema/shows')).j.shows.some(x => x.id === SH), null);
+
+    // ---- general admission: tiers instead of chairs, same guarantees
+    const gh = await ops('POST', '/api/cinema/ops/halls', { venueId: v.j.venue.id, name: 'Main Hall', layout: { kind: 'ga', sections: [{ name: 'VIP', nameAm: 'ቪአይፒ', capacity: 2 }, { name: 'Regular', nameAm: 'መደበኛ', capacity: 5 }] } });
+    check('GA: hall created, capacity 7', gh.j.ok && gh.j.hall.capacity === 7, gh.j); ids.hall.push(gh.j.hall.id);
+    const ge = await ops('POST', '/api/cinema/ops/events', { title: 'Sim Concert ' + tag, titleAm: 'ሲም ኮንሰርት', kind: 'CONCERT' });
+    ids.event.push(ge.j.event.id);
+    const gs = await ops('POST', '/api/cinema/ops/shows', { eventId: ge.j.event.id, hallId: gh.j.hall.id, startsAt: new Date(Date.now() + 7200000).toISOString(), prices: { VIP: 800, Regular: 300 } });
+    check('GA: show on sale, listed with ga flag', gs.j.ok && (await http('GET', '/api/cinema/shows')).j.shows.some(x => x.id === gs.j.show.id && x.ga === true && x.seatsLeft === 7), gs.j); const GS = gs.j.show.id; ids.show.push(GS);
+    const [ga1, ga2] = await Promise.all([http('POST', '/api/cinema/shows/' + GS + '/hold', { section: 'VIP', qty: 2 }, H('sim-ga-aaaa')), http('POST', '/api/cinema/shows/' + GS + '/hold', { section: 'VIP', qty: 2 }, H('sim-ga-bbbb'))]);
+    const gcodes = [ga1.status, ga2.status].sort();
+    check('GA race: two buyers want the last 2 VIP places -> one 200, one 409 sold_out', gcodes[0] === 200 && gcodes[1] === 409 && [ga1, ga2].find(x => x.status === 409).j.error === 'sold_out', [ga1.j, ga2.j]);
+    const gw = ga1.status === 200 ? 'sim-ga-aaaa' : 'sim-ga-bbbb';
+    const over = await http('POST', '/api/cinema/shows/' + GS + '/hold', { section: 'Regular', qty: 8 }, H(gw));
+    check('GA: asking for 8 Regular of 5 -> 409 sold_out with left 5', over.status === 409 && over.j.error === 'sold_out' && over.j.left === 5, over.j);
+    const cap = await http('POST', '/api/cinema/shows/' + GS + '/hold', { section: 'Regular', qty: 9 }, H(gw));
+    check('GA: 2 held + 9 more exceeds the 10-per-order cap -> 400 too_many', cap.status === 400 && cap.j.error === 'too_many', cap.j);
+    const reg = await http('POST', '/api/cinema/shows/' + GS + '/hold', { section: 'Regular', qty: 1 }, H(gw));
+    check('GA: 1 Regular held', reg.status === 200 && reg.j.seats[0] === 'REGULAR-001', reg.j);
+    const gmap = await http('GET', '/api/cinema/shows/' + GS, null, H(gw));
+    check('GA: show payload has tiers with left/mine and prices', gmap.j.tiers && gmap.j.tiers[0].mine === 2 && gmap.j.tiers[0].left === 0 && gmap.j.tiers[1].left === 4 && gmap.j.tiers[0].price === 800, gmap.j.tiers);
+    const gco = await http('POST', '/api/cinema/tickets', { showId: GS, seats: gmap.j.mine, name: 'GA Buyer', phone: '0911223388', payMethod: 'counter', idemKey: tag + '-ga' }, H(gw));
+    check('GA: checkout 2 VIP + 1 Regular = 1900, summary VIP×2 Regular×1', gco.status === 200 && gco.j.ticket.total === 1900 && gco.j.ticket.summary.map(x => x.count).join() === '2,1', gco.j);
+    await ops('POST', '/api/cinema/ops/tickets/' + gco.j.ticket.code + '/paid', {});
+    const gd = await ops('POST', '/api/cinema/ops/checkin', { code: gco.j.ticket.code, showId: GS });
+    check('GA door: admitted with the summary', gd.status === 200 && gd.j.ticket.summary[0].count === 2 && gd.j.counts.sold === 3, gd.j);
+    // ---- the old events page is retired
+    const oldPage = await fetch(BASE + '/events', { redirect: 'manual' });
+    check('/events -> 301 /cinema', oldPage.status === 301 && /\/cinema$/.test(oldPage.headers.get('location') || ''), oldPage.status + ' ' + oldPage.headers.get('location'));
+    const oldApi = await http('GET', '/api/events');
+    check('/api/events -> 410 moved', oldApi.status === 410 && oldApi.j.url === '/cinema', oldApi);
   } catch (err) { failed++; console.error('  CRASH ' + err.stack); }
   const c = await cleanup();
   const left = (await prisma.venue.count({ where: { slug: tag } })) + (await prisma.show.count({ where: { id: { in: ids.show } } })) + (await prisma.ticket.count({ where: { showId: { in: ids.show } } }));

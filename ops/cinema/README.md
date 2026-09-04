@@ -21,6 +21,12 @@ Mounted by `server.js` through `cinema/index.js` only when `.env` has `CINEMA_EN
 3. **Event** (the film): title, Amharic title, kind, runtime, rating, language, poster URL.
 4. **Show**: event + hall + start time (typed as Addis time) + price per section + counter cutoff (default 30 min).
 
+## General admission (concerts, theatre, meetings)
+
+A hall can be **tiers instead of chairs**: `{ "kind": "ga", "sections": [{ "name": "VIP", "nameAm": "ቪአይፒ", "capacity": 50 }, …] }` (ops page: "General admission" switch). The server turns each tier into invisible numbered places (`VIP-001 …`), so a buyer's "2 VIP" holds two of them under the same unique guard — the last place can never be sold twice. Up to 10 places per order. Tickets and the door show `VIP × 2` instead of chair ids. The listing groups Films and Events by `Event.kind`.
+
+The old `/events` page is retired: `/events` → 301 `/cinema`, `/api/events*` → 410. `ops/cinema/retire-old-events.js` removed the pre-cinema demo events.
+
 ## Ticket states
 
 `RESERVED` (counter: unpaid; chapa: awaiting) → `CONFIRMED` (ops "paid ✓" or Chapa verify/webhook) → `CHECKED_IN` (first scan) · `CANCELLED` (ops, show cancel, or counter cutoff sweep).

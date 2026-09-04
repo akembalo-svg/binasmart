@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Cinema ops | BinaSmart</title>
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="/static/cinema/ui.css?v=2">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=4">
 <style>
 .wrap{max-width:980px;padding-bottom:40px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -47,8 +47,11 @@ h2{margin-top:0}
       <div class="err" id="sErr"></div><button class="btn" id="sGo" style="margin-top:8px">Put on sale</button></div></div>
     <div id="t-venue" hidden><div class="grid">
       <div class="card"><h2>New venue</h2><label>Name</label><input id="vName"><label>ስም (Amharic)</label><input id="vNameAm"><label>Address</label><input id="vAddr"><label>Phone (shown on tickets for counter payment)</label><input id="vPhone"><div class="row"><div><label>Lat</label><input id="vLat" inputmode="decimal"></div><div><label>Lng</label><input id="vLng" inputmode="decimal"></div></div><div class="err" id="vErr"></div><button class="btn" id="vGo" style="margin-top:8px">Create venue</button></div>
-      <div class="card"><h2>New hall</h2><label>Venue</label><select id="hVenue"></select><label>Hall name</label><input id="hName" placeholder="Hall 1"><div class="row"><div><label>Rows (A…)</label><input id="hRows" type="number" value="8" min="1" max="26"></div><div><label>Seats per row</label><input id="hPer" type="number" value="14" min="1" max="40"></div></div>
-        <label>Aisle after seat numbers (comma)</label><input id="hAisles" placeholder="4, 10"><label>VIP rows (comma; the rest are Regular)</label><input id="hVip" placeholder="A, B"><label>Blocked seats (comma)</label><input id="hBlocked" placeholder="A1, A14"><label>Wheelchair seats (comma)</label><input id="hWc" placeholder="H1, H14">
+      <div class="card"><h2>New hall</h2><label>Venue</label><select id="hVenue"></select><label>Hall name</label><input id="hName" placeholder="Hall 1">
+        <label style="display:flex;gap:8px;align-items:center;margin-top:12px"><input type="checkbox" id="hGa" style="width:auto"> General admission — tiers with capacity, no seat map (concerts, meetings)</label>
+        <div id="gaBox" hidden><div id="gaRows"></div><button class="btn sm ghost" id="gaAdd" type="button" style="margin-top:6px">+ tier</button></div>
+        <div id="seatBox"><div class="row"><div><label>Rows (A…)</label><input id="hRows" type="number" value="8" min="1" max="26"></div><div><label>Seats per row</label><input id="hPer" type="number" value="14" min="1" max="40"></div></div>
+        <label>Aisle after seat numbers (comma)</label><input id="hAisles" placeholder="4, 10"><label>VIP rows (comma; the rest are Regular)</label><input id="hVip" placeholder="A, B"><label>Blocked seats (comma)</label><input id="hBlocked" placeholder="A1, A14"><label>Wheelchair seats (comma)</label><input id="hWc" placeholder="H1, H14"></div>
         <div class="prev" id="hPrev"></div><div class="mini" id="hCap"></div><div class="err" id="hErr"></div><button class="btn" id="hGo" style="margin-top:8px">Create hall</button></div>
     </div><div class="card" style="margin-top:14px"><h2>Venues</h2><div id="venues"></div></div></div>
     <div id="t-event" hidden><div class="grid"><div class="card"><h2>New event / film</h2><label>Title</label><input id="eTitle"><label>ርዕስ (Amharic)</label><input id="eTitleAm"><label>Kind</label><select id="eKind"><option>FILM</option><option>CONCERT</option><option>THEATER</option><option>MEETUP</option><option>OTHER</option></select>
@@ -68,7 +71,15 @@ h2{margin-top:0}
   function api(path, body, method) { return fetch(path, { method: method || (body ? 'POST' : 'GET'), headers: { 'x-owner-key': KEY, 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined }).then(function (r) { return r.json(); }); }
   function list(v) { return String(v || '').split(',').map(function (x) { return x.trim().toUpperCase(); }).filter(Boolean); }
   function rowsFor(n) { var out = []; for (var i = 0; i < n; i++) out.push(String.fromCharCode(65 + i)); return out; }
+  // General-admission tiers: rows of name / Amharic / capacity.
+  function gaRow(n, am, cap) { var d = document.createElement('div'); d.className = 'row'; d.style.marginTop = '6px'; d.innerHTML = '<input class="gaName" placeholder="VIP" value="' + esc(n || '') + '"><input class="gaAm" placeholder="ቪአይፒ" value="' + esc(am || '') + '"><input class="gaCap" type="number" min="1" max="5000" placeholder="capacity" value="' + (cap || '') + '" style="max-width:110px"><button type="button" class="btn sm ghost gaDel" style="width:auto">✕</button>'; return d; }
+  function gaTiers() { return Array.prototype.map.call(document.querySelectorAll('#gaRows .row'), function (r) { return { name: r.querySelector('.gaName').value.trim(), nameAm: r.querySelector('.gaAm').value.trim() || null, capacity: Number(r.querySelector('.gaCap').value) }; }).filter(function (t) { return t.name; }); }
+  $('gaAdd').addEventListener('click', function () { $('gaRows').appendChild(gaRow('', '', '')); });
+  $('gaRows').addEventListener('click', function (e) { if (e.target.classList.contains('gaDel')) { e.target.parentElement.remove(); preview(layoutFromForm(), $('hPrev'), $('hCap')); } });
+  $('gaRows').addEventListener('input', function () { preview(layoutFromForm(), $('hPrev'), $('hCap')); });
+  $('hGa').addEventListener('change', function () { var on = $('hGa').checked; $('gaBox').hidden = !on; $('seatBox').hidden = on; if (on && !$('gaRows').children.length) { $('gaRows').appendChild(gaRow('VIP', 'ቪአይፒ', 50)); $('gaRows').appendChild(gaRow('Regular', 'መደበኛ', 200)); } preview(layoutFromForm(), $('hPrev'), $('hCap')); });
   function layoutFromForm() {
+    if ($('hGa').checked) return { kind: 'ga', sections: gaTiers() };
     var rows = rowsFor(Math.max(1, Math.min(26, Number($('hRows').value) || 0))), vip = list($('hVip').value).filter(function (r) { return rows.indexOf(r) >= 0; });
     var sections = []; if (vip.length) sections.push({ name: 'VIP', nameAm: 'ቪአይፒ', rows: vip });
     var rest = rows.filter(function (r) { return vip.indexOf(r) < 0; }); if (rest.length) sections.push({ name: 'Regular', nameAm: 'መደበኛ', rows: rest });
@@ -76,6 +87,7 @@ h2{margin-top:0}
   }
   function preview(L, el, capEl) {
     var html = ''; var cap = 0;
+    if (L.kind === 'ga') { el.innerHTML = ''; if (capEl) capEl.textContent = L.sections.map(function (s) { return s.name + ' ' + (s.capacity || 0); }).join(' · ') + ' · capacity ' + L.sections.reduce(function (n, s) { return n + (s.capacity || 0); }, 0); return; }
     L.rows.forEach(function (r) { html += '<div><span>' + r + '</span>'; for (var n = 1; n <= L.seatsPerRow; n++) { var id = r + n, b = L.blocked.indexOf(id) >= 0; if (!b) cap++; html += '<i class="' + (b ? 'b ' : '') + (L.sections[0] && L.sections[0].name === 'VIP' && L.sections[0].rows.indexOf(r) >= 0 ? 'v ' : '') + (L.aisles.indexOf(n) >= 0 ? 'a' : '') + '"></i>'; } html += '</div>'; });
     el.innerHTML = html; if (capEl) capEl.textContent = 'Capacity ' + cap + ' · sections: ' + L.sections.map(function (s) { return s.name + ' (' + s.rows.join('') + ')'; }).join(', ');
   }
