@@ -1126,6 +1126,8 @@ model Venue {
   lng       Float?
   phone     String?
   scanKey   String?   // reserved for per-venue door staff (Phase C)
+  website   String?
+  notes     String?   // halls/seats/source as researched; verify before the first show
   active    Boolean   @default(true)
   halls     Hall[]
   createdAt DateTime  @default(now())

@@ -66,6 +66,15 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
         from: Math.min(...Object.values(s.prices || {}).map(Number).filter(Number.isFinite)) })) };
   });
 
+  // Public directory of venues (all active cinemas, with or without shows on sale).
+  fastify.get('/api/cinema/venues', async () => {
+    const venues = await prisma.venue.findMany({ where: { active: true }, include: { halls: true }, orderBy: { name: 'asc' } });
+    const shows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date(Date.now() - 3600000) } }, include: { hall: true } });
+    const next = {}; for (const s of shows) { const v = s.hall && s.hall.venueId; if (v && (!next[v] || s.startsAt < next[v])) next[v] = s.startsAt; }
+    return { ok: true, venues: venues.map(v => ({ id: v.id, slug: v.slug, name: v.name, nameAm: v.nameAm, address: v.address, phone: v.phone, website: v.website, notes: v.notes, lat: v.lat, lng: v.lng,
+      halls: v.halls.length, nextShowAt: next[v.id] || null })) };
+  });
+
   fastify.get('/api/cinema/shows/:id', async (req, reply) => {
     if (!ipRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const show = await loadShow(req.params.id);

@@ -61,7 +61,25 @@
           + '<div class="times">' + g.shows.map(function (s) { return '<a href="/cinema/' + esc(s.id) + '"' + (s.seatsLeft <= 10 ? ' class="few"' : '') + '>' + fmtDay(s.startsAt) + ' ' + fmtTime(s.startsAt) + '<b>ከ ' + birr(s.from) + (s.seatsLeft <= 10 ? ' · ' + s.seatsLeft + ' ቀርተዋል' : '') + '</b></a>'; }).join('') + '</div>'
           + '</div></div>';
       });
-      view.innerHTML = html;
+      view.innerHTML = html + '<div id="venues"></div>';
+      renderVenues();
+    });
+  }
+  // Directory of Addis cinemas: every active venue, with or without a show on sale.
+  function renderVenues() {
+    api('/api/cinema/venues').then(function (j) {
+      var box = $('venues'); if (!box || !j.ok || !j.venues.length) return;
+      var html = '<h2 style="margin-top:22px">ሲኒማ ቤቶች በአዲስ አበባ · Cinemas in Addis Ababa</h2><p class="sub">' + j.venues.length + ' ቦታዎች · ' + j.venues.length + ' venues. ሲኒማ ቤት ነዎት? ወንበር ካርታዎን ይላኩልን፣ ትኬት እዚህ ይሸጡ። · Run a cinema? Send us your seat plan and sell tickets here — <a href="https://t.me/bina_smart_bot">@bina_smart_bot</a>.</p>';
+      j.venues.forEach(function (v) {
+        var maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(v.name + ', Addis Ababa');
+        html += '<div class="card" style="margin-bottom:10px;padding:12px 14px"><div style="display:flex;gap:10px;align-items:flex-start"><div style="flex:1;min-width:0"><div style="font-weight:900;font-size:15px">' + esc(v.nameAm || v.name) + '</div>'
+          + (v.nameAm ? '<div class="sub">' + esc(v.name) + '</div>' : '')
+          + (v.address ? '<div class="sub" style="margin-top:4px">📍 ' + esc(v.address) + '</div>' : '')
+          + (v.notes ? '<div class="sub" style="margin-top:2px;font-size:12px">' + esc(v.notes) + '</div>' : '')
+          + '</div>' + (v.nextShowAt ? '<span class="pill ok">🎟️ ትኬት አለ</span>' : '<span class="pill mute">ትኬት በቅርቡ</span>') + '</div>'
+          + '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">' + (v.phone ? '<a class="btn ghost sm" href="tel:' + esc(v.phone) + '">📞 ' + esc(v.phone) + '</a>' : '') + '<a class="btn ghost sm" href="' + maps + '" target="_blank" rel="noopener">🗺️ ካርታ · Map</a>' + (v.website ? '<a class="btn ghost sm" href="' + esc(v.website) + '" target="_blank" rel="noopener nofollow">🌐 ድረ-ገጽ</a>' : '') + '</div></div>';
+      });
+      box.innerHTML = html;
     });
   }
 
@@ -100,8 +118,9 @@
     var map = $('map'); if (!map) return;
     var rows = S.layout.rows, per = S.layout.seatsPerRow, aisles = S.layout.aisles || [];
     // Size seats so one full row fits the container (min 22px, max 34px); wider halls scroll.
-    var avail = (map.parentElement.clientWidth || 340) - 2 * 20 - 8, aisle = per > 12 ? 10 : 14;
-    var sw = Math.max(22, Math.min(34, Math.floor((avail - aisles.length * aisle - (per - 1) * 4) / per)));
+    var avail = (map.parentElement.clientWidth || 340) - 2 * 12 - 4, aisle = per > 12 ? 8 : 14, gap = per > 12 ? 3 : 4;
+    var sw = Math.max(17, Math.min(34, Math.floor((avail - aisles.length * aisle - (per - 1) * gap) / per)));
+    map.style.setProperty('--gap', gap + 'px');
     map.style.setProperty('--sw', sw + 'px'); map.style.setProperty('--aisle', aisle + 'px');
     var html = '';
     rows.forEach(function (r) {

@@ -115,6 +115,18 @@ test('listing shows upcoming onsale shows with seats left and the lowest price',
   await f.close();
 });
 
+test('the public venue directory lists active venues, with the next show when one is on sale', async () => {
+  const { f } = await app();
+  const { show } = await seed(f);
+  await f.inject({ method: 'POST', url: '/api/cinema/ops/venues', headers: OPS, payload: { name: 'Quiet Cinema', address: 'Piassa', phone: '0111565029' } });
+  const r = (await f.inject({ method: 'GET', url: '/api/cinema/venues' })).json();
+  assert.equal(r.ok, true); assert.equal(r.venues.length, 2);
+  const bina = r.venues.find(v => v.slug === 'bina-hall'), quiet = r.venues.find(v => v.slug === 'quiet-cinema');
+  assert.equal(bina.halls, 1); assert.equal(new Date(bina.nextShowAt).toISOString(), new Date(show.startsAt).toISOString());
+  assert.equal(quiet.halls, 0); assert.equal(quiet.nextShowAt, null); assert.equal(quiet.address, 'Piassa');
+  await f.close();
+});
+
 test('the seat map endpoint returns layout + live states; unknown show is 404', async () => {
   const { f } = await app();
   const { show } = await seed(f);
