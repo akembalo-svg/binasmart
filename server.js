@@ -921,7 +921,7 @@ document.querySelectorAll('[data-deadline]').forEach(el=>{
   else{b.textContent=days; s.textContent=days===1?'ቀን ቀርቷል · day left':'ቀናት ቀርተዋል · days left';
     el.className='dl '+(days<3?'hot':days<=7?'mid':'ok');}
 });
-</script><script src="/static/bina-footer.js?v=3" defer></script></body></html>`;
+</script><script src="/static/bina-footer.js?v=4" defer></script></body></html>`;
 }
 
 function catPill(cat) {
@@ -978,6 +978,7 @@ fastify.get('/news/:slug', async (req, reply) => {
       <a href="https://x.com/intent/tweet?url=${share}&text=${shareT}">𝕏</a>
       <a href="#" onclick="navigator.clipboard.writeText('https://bina.et/news/${p.slug}');this.textContent='✓ Copied';return false">🔗 Copy link</a>
     </div>
+    <a class="sans" href="https://t.me/binasmart" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;margin:18px 0 6px;padding:14px 18px;border-radius:14px;background:#e7f3fb;border:1.5px solid #bfe0f5;color:#0f4c75;text-decoration:none"><span style="font-size:30px;line-height:1">📢</span><span><b style="display:block;font-size:15px">ቢናsmart ቻናልን ይቀላቀሉ · Follow on Telegram</b><span style="font-size:13px;color:#3d6e8f">አዲስ ዜና፣ መመሪያ እና የሕግ ለውጦች በቀጥታ — @binasmart</span></span><span style="margin-left:auto;font-weight:900">→</span></a>
     <div class="cta-band sans"><div><h3>🏢 ህንፃ አለዎት?</h3><p>BinaSmart — ሙሉ የህንፃ አስተዳደር ሲስተም በ24 ሰዓት።</p></div><a href="/diaspora">ይጀምሩ →</a></div>
   </article>
   <div style="max-width:1080px;margin:0 auto;border-top:3px double var(--line)"><h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);padding:22px 0 0;text-transform:uppercase">ተጨማሪ ያንብቡ · Read more</h2><div class="grid">${rel}</div></div></main>`;
@@ -1208,7 +1209,7 @@ function pub(){
      setTimeout(()=>location.reload(),1200);
    }).catch(e=>document.getElementById('cnt').textContent='Error: '+e);
 }
-</script><script src="/static/bina-footer.js?v=3" defer></script></body></html>`);
+</script><script src="/static/bina-footer.js?v=4" defer></script></body></html>`);
 });
 
 fastify.post('/api/admin/tender-queue/publish', async (req, reply) => {
@@ -1561,7 +1562,7 @@ fastify.get('/owner/:slug/report', async (req, reply) => {
     + '<tr><td>Owner dashboard</td><td>https://bina.et/owner/' + b.qrSlug + '</td></tr>'
     + '<tr><td>Printable entrance poster</td><td>https://bina.et/static/qr-poster.html?b=' + b.qrSlug + '</td></tr></table>'
     + '<footer>Confidential — prepared for the owner of ' + b.name + ' · BinaSmart Building Management · bina.et</footer>'
-    + '<script src="/static/bina-footer.js?v=3" defer></script></body></html>';
+    + '<script src="/static/bina-footer.js?v=4" defer></script></body></html>';
   reply.type('text/html').send(html);
 });
 
@@ -1984,7 +1985,7 @@ fastify.get('/owner/:slug/vat-report', async (req, reply) => {
     + '<h2>2 · Input — Expenses (' + expenses.length + ')</h2><table><tr><th>Date</th><th>Vendor</th><th>Category</th><th>Receipt</th><th>Amount</th><th>VAT</th></tr>' + expRows
     + '<tr><th colspan="4">TOTAL</th><th class="r">' + fmt(expTotal) + '</th><th class="r">' + fmt(inputVat) + '</th></tr></table>'
     + '<footer>Prepared by BinaSmart · bina.et · Based on VAT Proclamation No. 1341/2024 (15%). This is a management summary — please verify with your accountant before filing with the Ministry of Revenues.</footer>'
-    + '<script src="/static/bina-footer.js?v=3" defer></script></body></html>';
+    + '<script src="/static/bina-footer.js?v=4" defer></script></body></html>';
   reply.type('text/html').send(html);
 });
 
@@ -2433,7 +2434,7 @@ fastify.get('/pay/callback', async (req, reply) => {
   const body='<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+(ok?'ክፍያ ተሳክቷል':'ክፍያ በመጠባበቅ ላይ')+' · BinaSmart</title>'+
   '<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=Noto+Sans+Ethiopic:wght@600;800&display=swap" rel="stylesheet">'+
   '<style>*{margin:0;box-sizing:border-box}body{font-family:\'Plus Jakarta Sans\',\'Noto Sans Ethiopic\',sans-serif;background:#f6faf9;color:#0b2a26;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.c{background:#fff;border:1.5px solid #e2ece9;border-radius:24px;padding:34px 26px;max-width:400px;text-align:center;box-shadow:0 20px 50px -26px rgba(11,42,38,.4)}.ic{width:84px;height:84px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff;background:'+(ok?'linear-gradient(135deg,#059669,#0aa88f)':'linear-gradient(135deg,#d97706,#f59e0b)')+'}h1{font-size:22px;font-weight:800}p{color:#5c7371;font-size:14px;margin-top:8px}.amt{font-size:30px;font-weight:800;color:#057461;margin:14px 0}a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;font-weight:800;border-radius:999px;padding:13px 28px;text-decoration:none}</style></head>'+
-  '<body><div class="c"><div class="ic">'+(ok?'✓':'⏳')+'</div><h1 class="am">'+(ok?'ክፍያ ተሳክቷል!':'ክፍያ በመጠባበቅ ላይ ነው')+'</h1>'+(amt?'<div class="amt">ETB '+amt+'</div>':'')+'<p class="am">'+(ok?('የ'+ (purpose||'BinaSmart') +' ክፍያዎ ተከፍሏል። እናመሰግናለን!'):'ክፍያዎ ገና አልተረጋገጠም። ካጠናቀቁ ትንሽ ቆይተው ይሞክሩ።')+'</p><p style="font-size:11px;margin-top:10px">Ref: '+(ref||'')+'</p><a href="/" class="am">← ወደ BinaSmart</a></div><script src="/static/bina-footer.js?v=3" defer></script></body></html>';
+  '<body><div class="c"><div class="ic">'+(ok?'✓':'⏳')+'</div><h1 class="am">'+(ok?'ክፍያ ተሳክቷል!':'ክፍያ በመጠባበቅ ላይ ነው')+'</h1>'+(amt?'<div class="amt">ETB '+amt+'</div>':'')+'<p class="am">'+(ok?('የ'+ (purpose||'BinaSmart') +' ክፍያዎ ተከፍሏል። እናመሰግናለን!'):'ክፍያዎ ገና አልተረጋገጠም። ካጠናቀቁ ትንሽ ቆይተው ይሞክሩ።')+'</p><p style="font-size:11px;margin-top:10px">Ref: '+(ref||'')+'</p><a href="/" class="am">← ወደ BinaSmart</a></div><script src="/static/bina-footer.js?v=4" defer></script></body></html>';
   reply.type('text/html').send(body);
 });
 // Test checkout page
@@ -2458,7 +2459,7 @@ fastify.get('/pay', async (req, reply) => {
   'function body(){return{amount:amount(),name:document.getElementById("name").value,email:document.getElementById("email").value,phone:document.getElementById("phone").value,purpose:PURPOSE,bt:BT,bc:BC};}'+
   'async function payChapa(){var e=document.getElementById("err");e.textContent="";var amt=amount();if(!amt||amt<1){e.textContent="ትክክለኛ መጠን ያስገቡ";return;}var b=document.getElementById("cbtn");b.disabled=true;b.textContent="…";try{var r=await fetch("/api/pay/init",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body())});var j=await r.json();if(j.ok&&j.checkout_url){location.href=j.checkout_url;}else{e.textContent=(j.error||"አልተሳካም");b.disabled=false;b.textContent="💳 በ Chapa ይክፈሉ →";}}catch(x){e.textContent="ስህተት";b.disabled=false;b.textContent="💳 በ Chapa ይክፈሉ →";}}'+
   'async function payWallet(){var e=document.getElementById("err");e.textContent="";var amt=amount();if(!amt||amt<1){e.textContent="ትክክለኛ መጠን ያስገቡ";return;}var tok=localStorage.getItem("bina_wallet_tok");if(!tok){if(confirm("ወደ ዋሌትዎ መግባት ያስፈልጋል። አሁን ይግቡ?"))location.href="/wallet";return;}var b=document.getElementById("wbtn");b.disabled=true;b.textContent="…";try{var r=await fetch("/api/wallet/pay",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:tok,amount:amt,bt:BT,bc:BC,purpose:PURPOSE})});var j=await r.json();if(j.ok){location.href="/pay/callback?ref=wallet&ok=1&amt="+amt;}else if(r.status===402){e.textContent="በ ዋሌትዎ በቂ ገንዘብ የለም። ";if(confirm("ገንዘብ ይሙሉ?"))location.href="/wallet";b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}else if(r.status===401){location.href="/wallet";}else{e.textContent=(j.error||"አልተሳካም");b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}}catch(x){e.textContent="ስህተት";b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}}'+
-  '</script><script src="/static/bina-footer.js?v=3" defer></script></body></html>';
+  '</script><script src="/static/bina-footer.js?v=4" defer></script></body></html>';
   reply.type('text/html').send(body);
 });
 
@@ -2567,7 +2568,7 @@ function logout(){localStorage.removeItem('bina_wallet_tok');T='';$('dashView').
   if(T){showDash();}else{$('authView').classList.remove('hide');setMode('login');}
 })();
 </script>
-</div><script src="/static/bina-footer.js?v=3" defer></script></body></html>`;
+</div><script src="/static/bina-footer.js?v=4" defer></script></body></html>`;
 
 // ===== BINASMART WALLET (phone + PIN, Chapa top-up) =====
 function walletTok(){ return cryptoMod.randomBytes(24).toString('hex'); }

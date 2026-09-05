@@ -20,7 +20,7 @@
     ]],
     ['ስለ እኛ', 'About', [
       ['ስለ ቢና', 'About us', '/why-binasmart'], ['🔒 ግላዊነት', 'Privacy', '/privacy'], ['📄 ውል', 'Terms', '/terms'],
-      ['💬 እገዛ', 'Support', '/support'], ['✈️ ቴሌግራም', '@bina_smart_bot', 'https://t.me/bina_smart_bot'],
+      ['💬 እገዛ', 'Support', '/support'], ['✈️ ቴሌግራም', '@bina_smart_bot', 'https://t.me/bina_smart_bot'], ['📢 ቻናል', '@binasmart', 'https://t.me/binasmart'],
       ['💻 ኮዳችን', 'GitHub', 'https://github.com/akembalo-svg/binasmart'],
     ]],
   ];
