@@ -96,6 +96,8 @@ module.exports = function registerBusiness(fastify, deps) {
   fastify.get('/business', async (req, reply) => reply.sendFile('business.html'));
   fastify.get('/ops/business', async (req, reply) => reply.sendFile('ops-business.html'));
   fastify.get('/for-business', async (req, reply) => reply.sendFile('for-business.html'));
+  // A tablet menu board inside the restaurant, fed by the same catalogue the owner edits.
+  fastify.get('/menu/:slug', async (req, reply) => reply.sendFile('menu.html'));
   fastify.get('/shop/:slug', async (req, reply) => {
     let html = fs.readFileSync(path.join(__dirname, '..', 'public', 'shop.html'), 'utf8');
     try {

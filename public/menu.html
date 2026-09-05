@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ሜኑ · Menu | BinaSmart</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b2a26">
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=Noto+Sans+Ethiopic:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+/* A menu board for a tablet on the wall or the table: big type, no chrome, refreshes itself.
+   Light by default, ?dark=1 for a dark board, ?cols=2|3|4, ?speed=0 to stop auto-paging. */
+:root{--bg:#f6faf9;--card:#fff;--line:#e2ece9;--ink:#0b2a26;--mute:#5c7371;--brand:#068c78}
+html[data-dark]{--bg:#08201c;--card:#0e2a25;--line:#1c4139;--ink:#f2fbf8;--mute:#8fb8b0;--brand:#5fd7bd}
+*{margin:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Noto Sans Ethiopic','Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased}
+.wrap{height:100%;display:flex;flex-direction:column;padding:2.2vmin 2.6vmin}
+header{display:flex;align-items:center;gap:2vmin;padding-bottom:1.6vmin;border-bottom:2px solid var(--line)}
+header .logo{width:9vmin;height:9vmin;border-radius:2vmin;background:var(--line);overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;font-size:4.5vmin}
+header .logo img{width:100%;height:100%;object-fit:cover}
+header h1{font-size:4.4vmin;font-weight:900;line-height:1.1}
+header .sub{font-size:2.1vmin;color:var(--mute);font-weight:700}
+header .right{margin-left:auto;text-align:right;font-size:2vmin;color:var(--mute);font-weight:800}
+main{flex:1;overflow:hidden;padding-top:1.8vmin}
+.cols{column-count:var(--cols,3);column-gap:3vmin;height:100%}
+.grp{break-inside:avoid;margin-bottom:1.2vmin}
+.grp h2{font-size:2.4vmin;font-weight:900;color:var(--brand);letter-spacing:.04em;text-transform:uppercase;margin:1.4vmin 0 .8vmin}
+.it{display:flex;align-items:baseline;gap:1vmin;break-inside:avoid;padding:.65vmin 0}
+.it .n{font-weight:800;font-size:2.35vmin;line-height:1.25}
+.it .n small{display:block;font-size:1.6vmin;color:var(--mute);font-weight:700}
+.it .dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-.5vmin)}
+.it .p{font-weight:900;font-size:2.5vmin;color:var(--brand);white-space:nowrap;font-variant-numeric:tabular-nums}
+.it.out .n,.it.out .p{opacity:.4;text-decoration:line-through}
+footer{display:flex;align-items:center;gap:2vmin;padding-top:1.4vmin;border-top:2px solid var(--line);font-size:1.9vmin;color:var(--mute);font-weight:800}
+footer img{height:11vmin;width:11vmin;border-radius:1.4vmin;background:#fff;padding:.6vmin}
+.pill{background:var(--brand);color:#fff;border-radius:99px;padding:.5vmin 1.6vmin;font-size:1.8vmin}
+.off{background:#fffbeb;color:#92400e;border:2px solid #fcd34d;border-radius:1.4vmin;padding:1vmin 1.6vmin;font-size:2vmin;font-weight:900;margin-bottom:1vmin;break-inside:avoid}
+html[data-dark] .off{background:#3a2c07;color:#fcd34d}
+.page{position:absolute;right:2.6vmin;bottom:2.6vmin;font-size:1.7vmin;color:var(--mute);font-weight:800}
+.msg{display:flex;height:100%;align-items:center;justify-content:center;font-size:3vmin;color:var(--mute);font-weight:800;text-align:center;padding:6vmin}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo" id="logo">🍽️</div>
+    <div><h1 id="name">…</h1><div class="sub" id="where"></div></div>
+    <div class="right"><div id="clock"></div><div id="openState"></div></div>
+  </header>
+  <main id="main"><div class="msg">…</div></main>
+  <footer>
+    <img id="qr" alt="">
+    <div><div id="cta">ስልክዎን አቅርበው ከጠረጴዛዎ ያዙ · Scan to order from your table</div><div id="url" style="color:var(--brand)"></div></div>
+    <div class="right" style="margin-left:auto" id="phone"></div>
+  </footer>
+</div>
+<div class="page" id="pager"></div>
+<script src="/static/business/menu.js?v=1"></script>
+</body>
+</html>
