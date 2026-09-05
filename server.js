@@ -1723,10 +1723,12 @@ async function sendTg(chatId, text){
     return (await r.json()).ok === true;
   }catch(e){ return false; }
 }
+let tenantMisses = 0;   // per building per daily run — see runDailyChecks
 async function notifyTenant(user, text, channel){
   // Telegram first, WhatsApp as backup, one message not two. No admin copy — see notifyQuiet.
   if (!user) return false;
   const r = await notifyQuiet({ id: user.id, name: user.name || user.phone, phone: user.phone, tgChatId: user.telegramChatId || null }, text, channel);
+  if (!r.ok) tenantMisses++;
   return r.ok;
 }
 async function alreadyAudited(buildingId, action, detailContains){
@@ -1739,6 +1741,7 @@ async function runDailyChecks(onlySlug){
   const now = new Date();
   for (const b of buildings) {
     const res = { slug: b.qrSlug, renewals: 0, dueSoon: 0, penalties: 0, notified: false };
+    tenantMisses = 0;
     const canSend = NOTIFY_WHITELIST.includes(b.qrSlug);
     const bChan = WA_CHANNEL[b.qrSlug];
     let tenantSendBudget = 8; // max tenant messages per building per run — spread over days, avoids WhatsApp spam bans
@@ -1785,6 +1788,7 @@ async function runDailyChecks(onlySlug){
       if (canSend && b.notifyTenants && tenantSendBudget-- > 0) await notifyTenant(i.tenancy.user, 'ማሳሰቢያ: የ' + b.nameAm + ' ኪራይ ክፍያዎ አልፏል። ቅጣት ' + fee.toLocaleString() + ' ብር ታክሏል። — BinaSmart');
       res.penalties++;
     }
+    if (tenantMisses) { ownerMsgs.push('📵 ' + tenantMisses + ' tenant(s) could not be reached — no Telegram link and WhatsApp failed'); res.tenantsUnreached = tenantMisses; }
     if (canSend && ownerMsgs.length && b.owner) {
       res.notified = (await notifyParty({ name: b.owner.name || (b.name + ' owner'), phone: b.owner.phone, tgChatId: b.owner.telegramId || null }, '🏢 ' + b.name + ' — BinaSmart daily report:\n\n' + ownerMsgs.slice(0, 15).join('\n') + (ownerMsgs.length > 15 ? '\n…+' + (ownerMsgs.length - 15) + ' more' : '') + '\n\n📊 bina.et/owner', WA_CHANNEL[b.qrSlug], 'owner not on Telegram yet')).ok;
     }

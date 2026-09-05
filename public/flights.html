@@ -120,12 +120,12 @@ async function fares(){
   const f = codeOf($('from').value), t = codeOf($('to').value);
   const fb = $('farebox');
   if (!f || !t || !$('dd').value){ fb.style.display = 'none'; return; }
-  $('farelist').innerHTML = '<div style="font-size:12px;color:#6b7280;font-weight:700">Searching live fares…</div>';
-  fb.style.display = '';
+  fb.style.display = 'none';   // shown only once real offers arrive — no empty promise while fares are off
   const q = '?from=' + f + '&to=' + t + '&date=' + $('dd').value + (TRIP === 'ROUND' && $('rd').value ? '&ret=' + $('rd').value : '') + '&pax=' + $('px').value;
   try {
     const d = await (await fetch('/api/flights-price' + q)).json();
     if (!d.available || !d.offers.length){ fb.style.display = 'none'; return; }
+    fb.style.display = '';
     $('farelist').innerHTML = d.offers.map(o =>
       '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #e0e7ff;font-size:13px">'
       + '<span style="font-weight:800">' + o.carrier + ' <span style="color:#6b7280;font-weight:700;font-size:11px">' + (o.stops === 0 ? 'non-stop' : o.stops + ' stop') + ' · ' + o.duration + '</span></span>'
