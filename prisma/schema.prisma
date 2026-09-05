@@ -340,6 +340,16 @@ model Shop {
   reviews       Review[]
   favorites     Favorite[]
   jobPosts      JobPost[]
+  slug          String?  @unique     // public page: /shop/<slug>
+  ownerPhone    String?              // the phone that may claim this shop
+  logoUrl       String?
+  about         String?              // longer description shown on the page
+  aboutAm       String?
+  mapUrl        String?
+  address       String?
+  status        String   @default("live")   // live | hidden | pending
+  claims        OwnerClaim[]
+  sessions      OwnerSession[]
 }
 
 enum ShopCategory {
@@ -1132,6 +1142,8 @@ model Venue {
   halls     Hall[]
   programme Programme[]
   createdAt DateTime  @default(now())
+  claims    OwnerClaim[]
+  sessions  OwnerSession[]
 }
 
 model Hall {
@@ -1260,4 +1272,41 @@ model Programme {
   active     Boolean   @default(true)
   createdAt  DateTime  @default(now())
   @@index([venueId, dateTo])
+}
+
+// ---------------- BinaSmart Business: owners manage their own page ----------------
+// A claim proves the caller holds the phone already on the shop/venue record. Approval is either a
+// 6-digit code delivered in Telegram, or Ibrahim approving from ops when there is no Telegram id.
+model OwnerClaim {
+  id         String   @id @default(cuid())
+  kind       String   // shop | venue
+  shopId     String?
+  shop       Shop?    @relation(fields: [shopId], references: [id])
+  venueId    String?
+  venue      Venue?   @relation(fields: [venueId], references: [id])
+  phone      String
+  name       String?
+  code       String
+  telegramId String?
+  status     String   @default("PENDING")   // PENDING | VERIFIED | REJECTED | EXPIRED
+  tries      Int      @default(0)
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+  @@index([phone, status])
+}
+
+model OwnerSession {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  kind      String   // shop | venue
+  shopId    String?
+  shop      Shop?    @relation(fields: [shopId], references: [id])
+  venueId   String?
+  venue     Venue?   @relation(fields: [venueId], references: [id])
+  phone     String
+  createdAt DateTime @default(now())
+  lastSeen  DateTime @default(now())
+  expiresAt DateTime
+  @@index([phone])
+  @@index([expiresAt])
 }
