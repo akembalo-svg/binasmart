@@ -1,44 +1,58 @@
-# BinaSmart (bina.et) — Ethiopia's all-in-one digital platform
+# BinaSmart (bina.et)
 
-> BinaSmart is an all-in-one digital services platform for Ethiopia, based in Addis Ababa. It brings many everyday services onto one platform, in Amharic and English: smart building management, hotel booking, restaurant QR ordering, hospital appointments, bus & flight tickets, cinema & event tickets, verified government/company tenders, Amharic business news, an insurance comparison marketplace, and car and property marketplaces. Customers reach it on the web, WhatsApp and Telegram.
+> BinaSmart is Ethiopia's all-in-one digital platform, based in Addis Ababa, in Amharic and English: fixed-price ride-hailing, cinema and event tickets, films, shop pages with ordering, flight tickets, smart building management, hotels, restaurants, hospitals, insurance comparison, car and property marketplaces, verified tenders, Amharic news and Digital Ethiopia guides. Customers reach it on the web, in Telegram (@bina_smart_bot) and through AI assistants over MCP.
 
-Note: BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian retail ERP) or "Smartlife Bina" (Turkey). BinaSmart is Ethiopian, headquartered in Addis Ababa.
+BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian retail ERP) or "Smartlife Bina" (Turkey). BinaSmart is Ethiopian, headquartered at JJ Darule Building, Addis Ababa. It is a neutral platform: airlines, agencies, insurers, dealers, cinemas and shops supply their own products and prices; BinaSmart does not issue tickets or hold customer money. No fare, price or seat map on the site is invented — each comes from the provider.
 
-## Services (verticals)
-- Telegram: @bina_smart_bot — the whole BinaSmart inside Telegram (menu + Bini AI); ride Mini App link https://t.me/bina_smart_bot/ride; drivers register free at @binasmartdriverbot
-- BinaSmart Ride (LIVE): fixed upfront fares, no surge, moto/bajaj/economy/comfort/XL, Addis Ababa only, book on the web or via AI assistants — https://bina.et/ride
-- Why BinaSmart Ride (riders, Amharic): the fare is locked when you book and cannot change; no app to install; you can book for someone else from abroad — https://bina.et/why-binasmart
-- Drive with BinaSmart (drivers, Amharic): 0% commission during launch, free registration, two minutes in Telegram, Amharic turn-by-turn navigation — https://bina.et/drive-with-us
-- Smart building management: public building directory pages with interactive 3D navigation (/b/<name>), QR entrance posters, and an owner dashboard (rent invoicing, Ethiopian 15% VAT accounting, sub-metered electricity/water billing, maintenance work orders, tenant notifications via WhatsApp/Telegram)
-- Hotels: direct hotel booking with 0% commission, pay at the hotel — https://bina.et/hotel/bina-grand-hotel
-- Restaurants: scan-a-table QR ordering — https://bina.et/restaurant/bina-restaurant
-- Hospitals: find departments, floors and fees; book a visit — https://bina.et/hospital/bina-general-hospital
-- Bus & travel tickets — https://bina.et/travel
-- Flight tickets (via a licensed IATA travel agency) — https://bina.et/flights/hanud
-- Cinema & event tickets (tiered seating) — https://bina.et/events
-- Insurance: compare Ethiopia's licensed insurers (motor, health, property, business, travel, life), get an instant indicative estimate, buy via a trusted agent — https://bina.et/insurance
-- Cars: buy and sell cars from trusted Ethiopian dealers, with 1-tap insurance — https://bina.et/cars
-- Property / real estate: verified homes, land and commercial property for sale and rent, diaspora-friendly — https://bina.et/property
-- Verified Ethiopian tenders (free for bidders, updated daily) — https://bina.et/tenders
-- Amharic news: technology, construction and business, politics-free — https://bina.et/news
-- For diaspora building owners: manage your Ethiopian building from abroad — https://bina.et/diaspora
-- For insurance companies, car dealers and estate agents: partner to receive qualified leads — https://bina.et/for-insurers
+## Services
+
+- [Ride](https://bina.et/ride): fixed upfront fares in Addis Ababa, no surge; moto, bajaj, economy, comfort, XL; book for someone else from abroad; also in Telegram at https://t.me/bina_smart_bot/ride
+- [Drive with BinaSmart](https://bina.et/drive-with-us): drivers register free in Telegram (@binasmartdriverbot), 0% commission during launch, Amharic turn-by-turn navigation
+- [Cinema](https://bina.et/cinema): seat and general-admission tickets for Addis Ababa cinemas and events, QR ticket, pay at the counter or by Chapa; programmes for Alem, Gast and city cinemas
+- [Watch](https://bina.et/watch): Ethiopian films online — free YouTube-embedded titles and 48-hour rentals
+- [Flights](https://bina.et/flights): pay in birr on Ethiopian Airlines (telebirr, CBE Birr) or send a route to a licensed Addis travel agency for a WhatsApp quote; Emirates, Qatar, Etihad, Turkish, flydubai for international cards
+- [Business pages](https://bina.et/business): any shop, café, restaurant or office gets a free page with products, prices, offers, orders and a tablet menu for restaurants — see [For business](https://bina.et/for-business)
+- [Buildings](https://bina.et/b/darulle): public directory pages with 3D navigation, QR entrance posters and an owner dashboard (rent invoicing, 15% VAT accounting, sub-metered utilities, maintenance, tenant notices)
+- [Hotels](https://bina.et/hotel/bina-grand-hotel): direct booking, 0% commission, pay at the hotel
+- [Restaurants](https://bina.et/restaurant/bina-restaurant): scan-a-table QR ordering
+- [Hospitals](https://bina.et/hospital/bina-general-hospital): departments, floors, fees; book a visit
+- [Insurance](https://bina.et/insurance): compare Ethiopia's licensed insurers, instant indicative estimate, buy through a trusted agent
+- [Cars](https://bina.et/cars): buy and sell from trusted Ethiopian dealers, with 1-tap insurance
+- [Property](https://bina.et/property): verified homes, land and commercial property for sale and rent; diaspora-friendly
+- [Tenders](https://bina.et/tenders): verified Ethiopian government and company tenders, free for bidders, updated daily
+- [News](https://bina.et/news): Amharic technology, business and construction news, politics-free; Telegram channel https://t.me/binasmart
+- [Guides](https://bina.et/guides): Digital Ethiopia guides — Fayda ID, telebirr, e-Passport, TIN, VAT, business registration, driving licence, customs and import duty
+
+## Ethiopian law and regulation on BinaSmart
+
+- [Customs Proclamation 1425/2026 explained](https://bina.et/news/customs-proclamation-1425-2026): the July 2026 amendment to Customs Proclamation 859/2014 — partial release, 45/30-day storage limits, valuation databases not minimum values, NBE rate on the acceptance date, one-year refund window, 50% pre-payment for appeals; verified against the Federal Negarit Gazette
+- [Customs and import duty](https://bina.et/customs-import-duty-ethiopia): how duty, excise, VAT, surtax and withholding stack; calculator; legal basis
+- [Importing a car](https://bina.et/import-car-to-ethiopia): steps, duty, the 2026 customs rules that affect vehicles
+
+## For partners
+
+- [For business owners](https://bina.et/for-business): how to claim a shop page, add products, take orders, show a tablet menu, get alerts on Telegram
+- [For cinemas](https://bina.et/for-cinemas): sell seats online with your real hall layout and QR door check-in
+- [For filmmakers](https://bina.et/for-filmmakers): list a film for free viewing or 48-hour rental with a signed licence
+- [For insurers, dealers and agents](https://bina.et/for-insurers): receive qualified leads
+- [For diaspora building owners](https://bina.et/diaspora): manage an Ethiopian building from abroad
+
+## Developer and AI resources
+
+- [Use BinaSmart inside ChatGPT, Claude, Gemini or Perplexity](https://bina.et/ai): paste the MCP link, no login
+- [MCP server](https://bina.et/mcp): quote and request rides, search the directory, list films and events, read the guides; documentation at that URL
+- [Sitemap](https://bina.et/sitemap.xml): every public page
 
 ## Facts
-- Country: Ethiopia. City: Addis Ababa. Languages: Amharic and English.
-- Contact / WhatsApp: +251 911 244 344
-- Flagship building: JJ Darule Building (ጄጄ ዳሩሌ ህንፃ), Addis Ababa — G+10, 71 tenants: https://bina.et/b/darulle
-- Model: BinaSmart is a neutral platform/marketplace and comparison layer; insurers, dealers and agents supply their own products and listings.
 
-## Key pages
-- Home: https://bina.et/
-- Insurance comparison: https://bina.et/insurance
-- Cars marketplace: https://bina.et/cars
-- Property marketplace: https://bina.et/property
-- Tenders: https://bina.et/tenders
-- News: https://bina.et/news
-- 3D building directory example: https://bina.et/b/darulle
+- Country: Ethiopia. City: Addis Ababa. Languages: Amharic and English. Currency: Ethiopian birr (ETB).
+- Payments: telebirr, CBE Birr, Chapa (test mode), cash at the counter or hotel; BinaSmart never holds a customer's money.
+- Contact: Telegram @bina_smart_bot (preferred); WhatsApp +251 911 244 344.
+- Flagship building: JJ Darule Building (ጄጄ ዳሩሌ ህንፃ), Arada, Addis Ababa — 11 floors, 71 units.
+- Source code: https://github.com/akembalo-svg/binasmart
 
-## Developer resources
-- Use BinaSmart inside ChatGPT, Claude, Perplexity or Gemini (setup page): https://bina.et/ai — paste the MCP link, no login.
-- MCP server (Claude, ChatGPT, Gemini): https://bina.et/mcp — quote/book rides, search the directory, read the guides. Docs at that URL.
+## Optional
+
+- [Why BinaSmart Ride](https://bina.et/why-binasmart): the fare is locked when you book; no app to install
+- [Privacy](https://bina.et/privacy) and [Terms](https://bina.et/terms)
+- [Support](https://bina.et/support)
