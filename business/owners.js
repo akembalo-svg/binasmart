@@ -14,30 +14,38 @@ const TOKEN = () => crypto.randomBytes(32).toString('base64url');
 function makeOwners({ prisma, now, notify }) {
   const clock = now || Date.now;
 
-  // Find the shop or venue that this phone may claim. Shops match on ownerPhone or the public phone.
-  async function findTarget(phone) {
-    const shop = await prisma.shop.findFirst({ where: { OR: [{ ownerPhone: phone }, { phone }], status: { not: 'hidden' } } });
-    if (shop) return { kind: 'shop', shop };
-    const venue = await prisma.venue.findFirst({ where: { phone, active: true } });
-    if (venue) return { kind: 'venue', venue };
+  // Everything this phone may claim. A tenant who rents several offices holds several shops, so the
+  // claim carries the list and the owner picks one (JJ Darule has four such phones).
+  async function findTargets(phone) {
+    const shops = await prisma.shop.findMany({ where: { OR: [{ ownerPhone: phone }, { phone }], status: 'live' } });
+    if (shops.length) return { kind: 'shop', shops };
+    const venues = await prisma.venue.findMany({ where: { phone, active: true } });
+    if (venues.length) return { kind: 'venue', venues };
     return null;
+  }
+  async function findTarget(phone) {
+    const t = await findTargets(phone);
+    if (!t) return null;
+    return t.kind === 'shop' ? { kind: 'shop', shop: t.shops[0] } : { kind: 'venue', venue: t.venues[0] };
   }
 
   // Step 1: someone says "this is my shop".
   async function startClaim(rawPhone, name) {
     const phone = normPhone(rawPhone);
     if (!phone) return { ok: false, error: 'phone' };
-    const t = await findTarget(phone);
-    if (!t) return { ok: false, error: 'no_match', phone };   // -> registration form
+    const all = await findTargets(phone);
+    if (!all) return { ok: false, error: 'no_match', phone };   // -> registration form
+    const list = all.kind === 'shop' ? all.shops : all.venues;
+    const target = list[0];
     const code = CODE();
-    const telegramId = t.kind === 'shop' ? (t.shop.telegram && /^\d+$/.test(t.shop.telegram) ? t.shop.telegram : null) : null;
+    const telegramId = all.kind === 'shop' ? (target.telegram && /^\d+$/.test(target.telegram) ? target.telegram : null) : null;
     await prisma.ownerClaim.updateMany({ where: { phone, status: 'PENDING' }, data: { status: 'EXPIRED' } });
-    const claim = await prisma.ownerClaim.create({ data: { kind: t.kind, shopId: t.kind === 'shop' ? t.shop.id : null, venueId: t.kind === 'venue' ? t.venue.id : null,
+    const claim = await prisma.ownerClaim.create({ data: { kind: all.kind, shopId: all.kind === 'shop' ? target.id : null, venueId: all.kind === 'venue' ? target.id : null,
       phone, name: name || null, code, telegramId, expiresAt: new Date(clock() + CLAIM_MS) } });
-    const target = t.kind === 'shop' ? t.shop : t.venue;
     let sent = false;
     if (notify) sent = await notify({ claim, target, code, phone });
-    return { ok: true, claimId: claim.id, kind: t.kind, name: target.nameAm || target.name, sent };
+    return { ok: true, claimId: claim.id, kind: all.kind, name: target.nameAm || target.name, sent,
+      others: list.slice(1).map(x => ({ id: x.id, name: x.nameAm || x.name })) };
   }
 
   // Step 2: they type the code (or Ibrahim approves the claim from ops).
@@ -84,6 +92,24 @@ function makeOwners({ prisma, now, notify }) {
     return venue && venue.active ? { kind: 'venue', venue, session: s } : null;
   }
 
+  // Every page this session's phone may manage, so the dashboard can offer a switcher.
+  async function pagesFor(session) {
+    const t = await findTargets(session.phone);
+    if (!t) return [];
+    return (t.kind === 'shop' ? t.shops : t.venues).map(x => ({ id: x.id, kind: t.kind, name: x.nameAm || x.name, current: x.id === (session.shopId || session.venueId) }));
+  }
+
+  // Switch the session to another page the same phone owns. Never trusts the id alone.
+  async function switchTo(token, id) {
+    const s = await prisma.ownerSession.findUnique({ where: { token } });
+    if (!s || s.expiresAt.getTime() <= clock()) return { ok: false, error: 'expired' };
+    const t = await findTargets(s.phone);
+    const found = t && (t.kind === 'shop' ? t.shops : t.venues).find(x => x.id === String(id || ''));
+    if (!found) return { ok: false, error: 'not_yours' };
+    await prisma.ownerSession.update({ where: { id: s.id }, data: t.kind === 'shop' ? { kind: 'shop', shopId: found.id, venueId: null } : { kind: 'venue', venueId: found.id, shopId: null } });
+    return { ok: true, kind: t.kind, id: found.id, name: found.nameAm || found.name };
+  }
+
   async function signOut(token) {
     if (!token) return 0;
     return (await prisma.ownerSession.deleteMany({ where: { token } })).count;
@@ -95,7 +121,7 @@ function makeOwners({ prisma, now, notify }) {
     return { sessions: n1, claims: n2 };
   }
 
-  return { startClaim, verify, approveById, session, signOut, sweep, findTarget };
+  return { startClaim, verify, approveById, session, signOut, sweep, findTarget, findTargets, pagesFor, switchTo };
 }
 
 module.exports = { makeOwners, CLAIM_MS, SESSION_MS, MAX_TRIES };

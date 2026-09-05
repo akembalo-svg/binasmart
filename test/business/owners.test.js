@@ -92,6 +92,21 @@ test('ops can approve a pending claim without the code; sessions expire and can 
   assert.equal(await o.session(v2.token), null, 'expired session');
   assert.equal((await o.sweep()).sessions, 1);
 });
+test('one phone renting several offices: the claim lists them all and the owner can switch between them', async () => {
+  const w = world();
+  w.prisma._.shop.push({ id: 's3', name: 'Office B-020', phone: '+251911223344', status: 'live' });
+  w.prisma._.shop.push({ id: 's4', name: 'Office 103', phone: '+251911223344', status: 'live' });
+  const s = await w.o.startClaim('0911223344');
+  assert.equal(s.name, 'ታወር ካፌ');
+  assert.deepEqual(s.others.map(x => x.name), ['Office B-020', 'Office 103']);
+  const v = await w.o.verify(s.claimId, w.sent[0].code);
+  const pages = await w.o.pagesFor((await w.o.session(v.token)).session);
+  assert.deepEqual(pages.map(p => [p.name, p.current]), [['ታወር ካፌ', true], ['Office B-020', false], ['Office 103', false]]);
+  const sw = await w.o.switchTo(v.token, 's4');
+  assert.equal(sw.ok, true); assert.equal((await w.o.session(v.token)).shop.id, 's4');
+  assert.equal((await w.o.switchTo(v.token, 's2')).error, 'not_yours', 'another owner\'s shop is refused');
+});
+
 test('a hidden shop cannot be claimed and its live session stops working', async () => {
   const w = world();
   const s = await w.o.startClaim('0911223344');
