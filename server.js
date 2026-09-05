@@ -2664,7 +2664,7 @@ const cinema = require('./cinema')(fastify, {
 const watch = require('./watch')(fastify, { prisma, OWNER_KEY, BASE_URL: 'https://bina.et', chapa: cinema ? cinema.chapa : null });
 
 // ===== BinaSmart Business: shop, office and venue owners manage their own page (BUSINESS_ENABLED=1) =====
-require('./business')(fastify, { prisma, OWNER_KEY, BASE_URL: 'https://bina.et' });
+require('./business')(fastify, { notifyShop, prisma, OWNER_KEY, BASE_URL: 'https://bina.et' });
 
 fastify.listen({ port: PORT, host: '127.0.0.1' })
   .then(() => console.log('BinaSmart API v0.2 on :' + PORT))

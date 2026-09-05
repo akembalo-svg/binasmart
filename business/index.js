@@ -161,11 +161,13 @@ module.exports = function registerBusiness(fastify, deps) {
     if (!items.length) return reply.code(400).send({ ok: false, error: 'no_items' });
     const order = await prisma.order.create({ data: { shopId: s.id, customerName: name, customerPhone: phone, note: str(b.note, 300), total, source: 'WEB', items: { create: items.map(i => ({ productId: i.productId, qty: i.qty, unitPrice: i.unitPrice })) } }, include: { items: true } });
     await prisma.product.updateMany({ where: { id: { in: items.map(i => i.productId) } }, data: { orderCount: { increment: 1 } } });
-    // Tell the owner if we can reach them; the page always shows the order in the dashboard anyway.
-    if (api && s.telegram && /^\d+$/.test(s.telegram)) {
-      api.sendMessage(String(s.telegram), '🧾 አዲስ ትዕዛዝ · new order\n' + name + ' · ' + phone + '\n' + items.map(i => i.label + ' ×' + i.qty).join('\n') + '\n💰 ' + total + ' ብር\n' + base + '/business')
-        .catch(e => console.error('[business] order ping: ' + e.message));
-    }
+    // Tell the owner: Telegram if linked, WhatsApp as backup, admin copy always. The dashboard shows
+    // the order regardless. A numeric Telegram id typed into the profile still works as the chat.
+    const text = '🧾 አዲስ ትዕዛዝ · new order OD-' + order.id.slice(-6).toUpperCase() + '\n' + name + ' · ' + phone + '\n'
+      + items.map(i => i.label + ' ×' + i.qty).join('\n') + '\n💰 ' + total.toLocaleString() + ' ETB' + (b.note ? '\n📝 ' + str(b.note, 300) : '') + '\n' + base + '/business';
+    const party = { id: s.id, name: s.nameAm || s.name, phone: s.phone, tgChatId: s.tgChatId || (/^\d+$/.test(s.telegram || '') ? s.telegram : null) };
+    if (deps.notifyShop) deps.notifyShop(party, text).catch(e => console.error('[business] order notify: ' + e.message));
+    else if (api && party.tgChatId) api.sendMessage(String(party.tgChatId), text).catch(e => console.error('[business] order ping: ' + e.message));
     return { ok: true, order: { id: order.id, total: order.total, status: order.status } };
   });
 
