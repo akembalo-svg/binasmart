@@ -1,34 +1,47 @@
 'use strict';
-// Where a shop's notification goes, and the rule that nothing is lost quietly.
+// Where a notification goes, and the rule that nothing is lost quietly.
 //
-// Order: Telegram first (if the owner pressed the bot's link), WhatsApp second (the sender number
-// gets banned by Meta from time to time, so it is the backup, not the main road), and whatever
-// happened, a copy to the admin chat stamped with the outcome. Before this, sendWa swallowed its
-// failure and a customer's flight request or order could sit in the database with nobody told —
-// the page said "sent", the row existed, and the owner never heard.
+// Order: Telegram first (if the party has linked the bot), WhatsApp second (the sender number gets
+// banned by Meta from time to time, so it is the backup, not the main road), and whatever happened,
+// a copy to the admin chats stamped with the outcome. Before this, sendWa swallowed its failure and
+// a customer's flight request, order or maintenance call could sit in the database with nobody
+// told — the page said "sent", the row existed, and the owner never heard.
 //
 // Pure: both senders are injected, so the order and the fallback are tested without a network.
-function makeNotify({ sendTg, sendWa, adminChatId, log }) {
+function makeNotify({ sendTg, sendWa, adminChatId, adminChatIds, log }) {
   const say = log || (() => {});
   const tryTg = (chat, text) => sendTg(chat, text).catch(() => false);
   const tryWa = (phone, text, ch) => sendWa(phone, text, ch).catch(() => false);
+  // one or several admin chats; duplicates and blanks dropped
+  const admins = [...new Set([].concat(adminChatIds || [], adminChatId || []).map(x => String(x || '').trim()).filter(Boolean))];
 
-  // shop: { id, name, phone, tgChatId }. Returns { ok, via } — via is 'telegram', 'whatsapp' or null.
-  async function notifyShop(shop, text, waChannel) {
+  // party: { id, name, phone, tgChatId }. Returns { ok, via } — via is 'telegram', 'whatsapp' or null.
+  // linkHint: what to tell the admin the party can do to get on Telegram (e.g. '/start shop_<id>').
+  async function notifyParty(party, text, waChannel, linkHint) {
     let via = null;
-    if (shop && shop.tgChatId && await tryTg(shop.tgChatId, text)) via = 'telegram';
-    if (!via && shop && shop.phone && await tryWa(shop.phone, text, waChannel)) via = 'whatsapp';
-    if (adminChatId) {
-      const who = (shop && (shop.name || shop.id)) || 'unknown shop';
-      const head = via
-        ? '✅ ' + who + ' — notified via ' + via
-        : '⚠️ COULD NOT REACH ' + who + ' (' + ((shop && shop.phone) || 'no phone') + ')'
-          + (shop && shop.id ? ' — they can link Telegram with /start shop_' + shop.id : '');
-      await tryTg(adminChatId, head + '\n\n' + text);
-    }
-    if (!via) say('[notify] unreachable shop ' + (shop && shop.id) + ': ' + String(text).slice(0, 80));
+    if (party && party.tgChatId && await tryTg(party.tgChatId, text)) via = 'telegram';
+    if (!via && party && party.phone && await tryWa(party.phone, text, waChannel)) via = 'whatsapp';
+    const who = (party && (party.name || party.id)) || 'unknown';
+    const head = via
+      ? '✅ ' + who + ' — notified via ' + via
+      : '⚠️ COULD NOT REACH ' + who + ' (' + ((party && party.phone) || 'no phone') + ')' + (linkHint ? ' — ' + linkHint : '');
+    for (const a of admins) await tryTg(a, head + '\n\n' + text);
+    if (!via) say('[notify] unreachable ' + who + ': ' + String(text).slice(0, 80));
     return { ok: !!via, via };
   }
-  return { notifyShop };
+
+  // A shop: same thing, with the dashboard's link command as the hint.
+  const notifyShop = (shop, text, waChannel) =>
+    notifyParty(shop, text, waChannel, shop && shop.id ? 'they can link Telegram with /start shop_' + shop.id : '');
+
+  // Something only the admins need to know (a lead, a report). Returns how many chats took it.
+  async function notifyAdmins(text) {
+    let n = 0;
+    for (const a of admins) if (await tryTg(a, text)) n++;
+    if (!n && admins.length) say('[notify] no admin chat reachable: ' + String(text).slice(0, 80));
+    return n;
+  }
+
+  return { notifyParty, notifyShop, notifyAdmins, admins };
 }
 module.exports = { makeNotify };

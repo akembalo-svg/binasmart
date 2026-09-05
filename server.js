@@ -227,7 +227,7 @@ fastify.post('/api/diaspora-lead', async (req, reply) => {
     country: country ? String(country).slice(0, 40) : null, city: city ? String(city).slice(0, 40) : null,
     building: building ? String(building).slice(0, 120) : null, units: units ? String(units).slice(0, 20) : null,
     note: note ? String(note).slice(0, 500) : null } });
-  sendTg('8096525984', '🌍 NEW DIASPORA LEAD — BinaSmart\n👤 ' + lead.name + ' (' + lead.phone + ')\n📍 Lives in: ' + (lead.country || '?') + '\n🏢 Building: ' + (lead.building || '?') + ' · ' + (lead.city || 'Addis Ababa') + ' · ' + (lead.units || '?') + ' units\n📝 ' + (lead.note || '—')).catch(() => {});
+  notifyAdmins('🌍 NEW DIASPORA LEAD — BinaSmart\n👤 ' + lead.name + ' (' + lead.phone + ')\n📍 Lives in: ' + (lead.country || '?') + '\n🏢 Building: ' + (lead.building || '?') + ' · ' + (lead.city || 'Addis Ababa') + ' · ' + (lead.units || '?') + ' units\n📝 ' + (lead.note || '—')).catch(() => {});
   return { ok: true };
 });
 
@@ -272,7 +272,7 @@ fastify.post('/api/market-lead', async (req, reply) => {
     phone: String(b.phone).slice(0,30), budget: b.budget ? String(b.budget).slice(0,40) : null,
     note: b.note ? String(b.note).slice(0,500) : null } });
   const emoji = lead.kind === 'car' ? '\uD83D\uDE97' : '\uD83C\uDFE0';
-  sendTg('8096525984', emoji + ' NEW ' + lead.kind.toUpperCase() + ' LEAD \u2014 BinaSmart\n\uD83D\uDC64 ' + lead.name + ' (' + lead.phone + ')' + (lead.listingRef ? '\n\uD83D\uDCCC ' + lead.listingRef : '') + (lead.budget ? '\n\uD83D\uDCB0 Budget: ' + lead.budget : '') + '\n\uD83D\uDCDD ' + (lead.note || '\u2014')).catch(() => {});
+  notifyAdmins(emoji + ' NEW ' + lead.kind.toUpperCase() + ' LEAD \u2014 BinaSmart\n\uD83D\uDC64 ' + lead.name + ' (' + lead.phone + ')' + (lead.listingRef ? '\n\uD83D\uDCCC ' + lead.listingRef : '') + (lead.budget ? '\n\uD83D\uDCB0 Budget: ' + lead.budget : '') + '\n\uD83D\uDCDD ' + (lead.note || '\u2014')).catch(() => {});
   sendWa(lead.phone, 'BinaSmart \u2014 \u1325\u12eB\u1244\u12CE\u1295 \u1270\u1240\u1265\u1208\u1293\u1362 \u1260\u1240\u122D\u1265 \u12A5\u1295\u12F0\u12CD\u120B\u1208\u1295\u1362 (bina.et)').catch(() => {});
   return { ok: true };
 });
@@ -355,7 +355,7 @@ fastify.post('/api/insurance-lead', async (req, reply) => {
     if (match.length) routed = '\n\uD83E\uDD1D Route to: ' + match.map(p => p.name + (p.commissionPct ? ' (' + p.commissionPct + ')' : '')).join(', ');
     else if (partners.length) routed = '\n\u26A0\uFE0F No active partner for ' + lead.insType + ' yet';
   } catch (e) {}
-  sendTg('8096525984', '\uD83D\uDEE1\uFE0F NEW INSURANCE LEAD \u2014 BinaSmart\n\uD83D\uDCCB ' + lead.insType + (lead.coverType ? ' (' + lead.coverType + ')' : '') + '\n\uD83D\uDC64 ' + lead.name + ' (' + lead.phone + ')\n\uD83D\uDCCD ' + (lead.city || '?') + (lead.vehicleValue ? '\n\uD83D\uDCB0 Car value: ' + lead.vehicleValue : '') + '\n\uD83D\uDCDD ' + (lead.note || '\u2014') + routed).catch(() => {});
+  notifyAdmins('\uD83D\uDEE1\uFE0F NEW INSURANCE LEAD \u2014 BinaSmart\n\uD83D\uDCCB ' + lead.insType + (lead.coverType ? ' (' + lead.coverType + ')' : '') + '\n\uD83D\uDC64 ' + lead.name + ' (' + lead.phone + ')\n\uD83D\uDCCD ' + (lead.city || '?') + (lead.vehicleValue ? '\n\uD83D\uDCB0 Car value: ' + lead.vehicleValue : '') + '\n\uD83D\uDCDD ' + (lead.note || '\u2014') + routed).catch(() => {});
   sendWa(lead.phone, 'BinaSmart \uD83D\uDEE1\uFE0F \u12e8' + lead.insType + ' \u1218\u12f5\u1295 \u1325\u12eB\u1244\u12CE\u1295 \u1270\u1240\u1265\u1208\u1293\u1362 \u1260\u1240\u122D\u1265 \u1270\u1235\u121B\u121A \u12A8\u1218\u12F5\u1295 \u12F5\u122D\u1305\u1276\u127D \u130B\u122D \u12A5\u1295\u12F0\u12CD\u120B\u1208\u1295\u1362').catch(() => {});
   return { ok: true };
 });
@@ -1070,7 +1070,7 @@ async function autopostAll({ emoji, title, excerpt, url, tags, linkedin, ogImage
   out.push('Facebook ' + (fb.ok ? '✅' : fb.skipped ? '⏸ (no token yet)' : '❌ ' + fb.error));
   let confirm = '✅ Published: ' + title + '\n' + url + '\n\n' + out.join('\n');
   if (linkedin) confirm += '\n\n💼 LinkedIn — copy-paste this:\n──────────\n' + linkedin + '\n──────────';
-  sendTg('8096525984', confirm).catch(() => {});
+  notifyAdmins(confirm).catch(() => {});
   return out;
 }
 
@@ -1439,9 +1439,9 @@ fastify.post('/api/b/:slug/maintenance', async (req, reply) => {
   }});
   if (NOTIFY_WHITELIST.includes(req.params.slug)) {
     const bb = await prisma.building.findUnique({ where: { id: b.id }, include: { owner: true } });
-    if (bb.owner && bb.owner.phone) sendWa(bb.owner.phone, '🔧 New maintenance request — ' + bb.name + '\n' + (type || 'GENERAL') + ': ' + String(description).slice(0, 120) + (unit ? '\nUnit: ' + unit : '') + '\nBy: ' + (name || '') + ' ' + phone + '\n\n📊 bina.et/owner');
+    if (bb.owner) notifyParty({ name: bb.owner.name || (bb.name + ' owner'), phone: bb.owner.phone, tgChatId: bb.owner.telegramId || null }, '🔧 New maintenance request — ' + bb.name + '\n' + (type || 'GENERAL') + ': ' + String(description).slice(0, 120) + (unit ? '\nUnit: ' + unit : '') + '\nBy: ' + (name || '') + ' ' + phone + '\n\n📊 bina.et/owner');
     const tech = await prisma.staffMember.findFirst({ where: { buildingId: b.id, active: true, role: { in: ['MAINTENANCE', 'TECHNICIAN', 'LIFT'] } } });
-    if (tech && tech.phone) sendWa(tech.phone, '🔧 ' + (type || 'GENERAL') + ': ' + String(description).slice(0, 120) + (unit ? ' — Unit ' + unit : '') + ' / አዲስ የጥገና ጥያቄ');
+    if (tech) notifyParty({ name: tech.name || 'technician', phone: tech.phone, tgChatId: tech.telegramId || null }, '🔧 ' + (type || 'GENERAL') + ': ' + String(description).slice(0, 120) + (unit ? ' — Unit ' + unit : '') + ' / አዲስ የጥገና ጥያቄ');
   }
   return { ok: true, id: m.id };
 });
@@ -1708,7 +1708,10 @@ const TG_TOKEN = process.env.BINA_RIDER_BOT_TOKEN || process.env.BINASMART_TG_TO
 const { makeNotify } = require('./notify/notify');
 const ADMIN_TG_CHAT = process.env.BINASMART_ADMIN_TG_CHAT || '';
 // Telegram first, WhatsApp as backup, admin copy always — see notify/notify.js
-const { notifyShop } = makeNotify({ sendTg, sendWa, adminChatId: ADMIN_TG_CHAT, log: console.log });
+// 8096525984 is the ride ops account ("81171") that has received lead alerts since launch; kept as a
+// second admin so nothing that used to reach it stops reaching it.
+const OPS_TG_CHAT = process.env.BINASMART_OPS_TG_CHAT || '8096525984';
+const { notifyShop, notifyParty, notifyAdmins } = makeNotify({ sendTg, sendWa, adminChatIds: [ADMIN_TG_CHAT, OPS_TG_CHAT], log: console.log });
 async function sendTg(chatId, text){
   if (!TG_TOKEN || !chatId) return false;
   try{
