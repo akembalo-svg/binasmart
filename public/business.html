@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>የእኔ ገጽ · My BinaSmart page</title>
+<meta name="description" content="የሱቅዎን ወይም የቢሮዎን ገጽ ያስተዳድሩ — ምርቶች፣ ቅናሽ፣ ትዕዛዞች። Manage your BinaSmart shop page: products, offers and orders.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b2a26">
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+Ethiopic:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=5">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+.wrap{max-width:720px;padding-bottom:60px}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:12px 0;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.tabs button{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:9px 14px;font-weight:800;font-family:inherit;font-size:13px;cursor:pointer;color:var(--ink)}
+.tabs button.on{border-color:var(--brand);background:#f3faf7;color:var(--brand)}
+.tabs button .n{display:inline-block;background:var(--brand);color:#fff;border-radius:999px;padding:0 6px;font-size:11px;margin-left:4px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+.item{display:flex;gap:10px;align-items:center;border-top:1px solid var(--line);padding:10px 0}
+.item .ph{width:56px;height:56px;border-radius:10px;background:#eef3f1;flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:22px}
+.item .ph img{width:100%;height:100%;object-fit:cover}
+.item .b{flex:1;min-width:0}
+.item .b b{display:block;font-size:15px}
+.item .b small{color:var(--mute);font-size:12px}
+.price{font-weight:900;color:var(--brand);white-space:nowrap}
+.hours{display:grid;grid-template-columns:auto 1fr 1fr auto;gap:6px;align-items:center;font-size:13px}
+.hours input[type=time]{padding:8px}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:8px}
+.photos .p{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:#eef3f1}
+.photos .p img{width:100%;height:100%;object-fit:cover}
+.photos .p button{position:absolute;top:4px;right:4px;border:0;background:rgba(0,0,0,.6);color:#fff;border-radius:8px;width:24px;height:24px;font-size:14px;cursor:pointer}
+.st{font-size:11px;font-weight:900;border-radius:999px;padding:3px 8px}
+.st.NEW{background:#fef3c7;color:#92400e}.st.ACCEPTED{background:#dbeafe;color:#1e40af}.st.IN_PROGRESS{background:#e0e7ff;color:#3730a3}
+.st.DELIVERED{background:#d1fae5;color:#065f46}.st.COMPLETED{background:#ecfdf5;color:#047857}.st.CANCELLED,.st.REJECTED{background:#fee2e2;color:#991b1b}
+.empty{color:var(--mute);font-size:14px;padding:14px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="/">Bina<span>Smart</span> 🏪</a><span class="sp"></span><span id="who" class="sub"></span></div>
+
+  <div id="signin">
+    <div class="card">
+      <h1 style="font-size:22px">የእኔ ገጽ · My page</h1>
+      <p class="sub" style="margin-top:6px">የሱቅዎ ወይም የቢሮዎ ስልክ ቁጥር ያስገቡ። · Enter the phone number on your shop or office record.</p>
+      <label>ስልክ · Phone</label><input id="inPhone" inputmode="tel" placeholder="09xx xxx xxx" maxlength="20">
+      <div class="err" id="siErr"></div>
+      <button class="btn" id="siGo">ቀጥል · Continue</button>
+      <div id="codeBox" hidden>
+        <label style="margin-top:14px">የማረጋገጫ ኮድ · Code (Telegram)</label><input id="inCode" inputmode="numeric" maxlength="6" placeholder="123456">
+        <button class="btn" id="siVerify" style="margin-top:8px">ግባ · Sign in</button>
+      </div>
+      <div id="waitBox" hidden class="card" style="margin-top:12px;background:#fffbeb;border-color:#fcd34d">
+        ⏳ ጥያቄዎ ደርሶናል። BinaSmart ካረጋገጠ በኋላ እንደገና ይሞክሩ — በስልክ እናገኝዎታለን።
+        <span class="en" style="display:block;color:var(--mute);font-size:13px;margin-top:4px">Your request reached us. We confirm by phone, then you can sign in here.</span>
+      </div>
+      <p class="sub" style="margin-top:14px">ገና አልተመዘገቡም? <a href="/for-business">ስለ አገልግሎቱ ያንብቡ →</a></p>
+    </div>
+  </div>
+
+  <div id="app" hidden>
+    <div id="switcher"></div>
+    <div class="tabs" id="tabs"></div>
+
+    <div id="t-page" class="tab">
+      <div class="card">
+        <h2>የገጼ መረጃ · My details</h2>
+        <div class="row2"><div><label>ስም (አማርኛ)</label><input id="fNameAm" maxlength="80"></div><div><label>Name (English)</label><input id="fName" maxlength="80"></div></div>
+        <label>ዓይነት · Category</label><select id="fCat"></select>
+        <label>መግለጫ · About (አማርኛ)</label><textarea id="fAboutAm" rows="3" maxlength="3000"></textarea>
+        <label>About (English)</label><textarea id="fAbout" rows="3" maxlength="3000"></textarea>
+        <div class="row2"><div><label>ስልክ · Phone</label><input id="fPhone" inputmode="tel" maxlength="20"></div><div><label>ቴሌግራም · Telegram</label><input id="fTg" maxlength="60" placeholder="@name ወይም id"></div></div>
+        <div class="row2"><div><label>አድራሻ · Address</label><input id="fAddr" maxlength="200"></div><div><label>ካርታ · Map link</label><input id="fMap" maxlength="300" placeholder="https://maps.google.com/..."></div></div>
+        <label>ሌላ ገጽ · Website / social</label><input id="fSocial" maxlength="300" placeholder="https://...">
+        <div class="err" id="pfErr"></div>
+        <button class="btn" id="pfSave" style="margin-top:10px">አስቀምጥ · Save</button>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <h2>የስራ ሰዓት · Opening hours</h2>
+        <div class="hours" id="hours"></div>
+        <button class="btn ghost" id="hSave" style="margin-top:10px">ሰዓቱን አስቀምጥ · Save hours</button>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <h2>ፎቶዎች · Photos <span class="sub" style="font-weight:600">(እስከ 8)</span></h2>
+        <div class="photos" id="photos"></div>
+        <div class="row2" style="margin-top:10px"><button class="btn ghost" id="addPhoto">📷 ፎቶ ጨምር</button><button class="btn ghost" id="addLogo">🏷️ ሎጎ</button></div>
+        <input type="file" id="fileIn" accept="image/*" hidden>
+      </div>
+    </div>
+
+    <div id="t-products" class="tab" hidden>
+      <div class="card">
+        <h2>ምርት ጨምር · Add a product</h2>
+        <div class="row2"><div><label>ስም (አማርኛ)</label><input id="prNameAm" maxlength="80"></div><div><label>Name (English)</label><input id="prName" maxlength="80"></div></div>
+        <div class="row2"><div><label>ዋጋ (ብር) · Price</label><input id="prPrice" type="number" min="0" inputmode="numeric"></div><div><label>ክፍል · Group</label><input id="prCat" maxlength="40" placeholder="ቁርስ / drinks"></div></div>
+        <label>መግለጫ · Description</label><input id="prDesc" maxlength="500">
+        <label>ፎቶ · Photo</label><input type="file" id="prFile" accept="image/*">
+        <div class="err" id="prErr"></div>
+        <button class="btn" id="prGo" style="margin-top:8px">➕ ጨምር · Add</button>
+      </div>
+      <div class="card" style="margin-top:12px"><h2>ምርቶቼ · My products <span class="sub" id="prCount"></span></h2><div id="prList"></div></div>
+    </div>
+
+    <div id="t-offers" class="tab" hidden>
+      <div class="card"><h2>ቅናሽ ጨምር · Add an offer</h2>
+        <label>ርዕስ · Title</label><input id="ofTitle" maxlength="100" placeholder="20% ቅናሽ">
+        <label>መግለጫ · Description</label><input id="ofDesc" maxlength="400">
+        <div class="row2"><div><label>ከ · From</label><input id="ofFrom" type="date"></div><div><label>እስከ · To</label><input id="ofTo" type="date"></div></div>
+        <div class="err" id="ofErr"></div><button class="btn" id="ofGo" style="margin-top:8px">➕ ጨምር</button>
+      </div>
+      <div class="card" style="margin-top:12px"><h2>ቅናሾቼ · My offers</h2><div id="ofList"></div></div>
+    </div>
+
+    <div id="t-orders" class="tab" hidden>
+      <div class="card"><h2>ትዕዛዞች · Orders</h2><div id="orList"></div></div>
+    </div>
+
+    <div id="t-prog" class="tab" hidden>
+      <div class="card"><h2>ፕሮግራም ጨምር · Add to my programme</h2>
+        <div class="row2"><div><label>ፊልም (አማርኛ)</label><input id="pgTitleAm" maxlength="120"></div><div><label>Film (English)</label><input id="pgTitle" maxlength="120"></div></div>
+        <div class="row2"><div><label>አዳራሽ · Hall</label><input id="pgHall" maxlength="40"></div><div><label>ዋጋ · Price</label><input id="pgPrice" maxlength="40" placeholder="300 ብር"></div></div>
+        <label>ሰዓቶች · Showtimes (13:00, 16:00 …)</label><input id="pgTimes" placeholder="13:00, 16:00, 19:00">
+        <div class="row2"><div><label>ከ · From</label><input id="pgFrom" type="date"></div><div><label>እስከ · To</label><input id="pgTo" type="date"></div></div>
+        <div class="err" id="pgErr"></div><button class="btn" id="pgGo" style="margin-top:8px">➕ ጨምር</button>
+      </div>
+      <div class="card" style="margin-top:12px"><h2>የእኔ ፕሮግራም</h2><div id="pgList"></div></div>
+    </div>
+
+    <div id="t-qr" class="tab" hidden>
+      <div class="card" style="text-align:center">
+        <h2>የገጼ QR · My QR</h2>
+        <p class="sub">ይህን አትመው በሱቅዎ በር ላይ ይለጥፉ። ደንበኞች ስልካቸውን አቅርበው ገጽዎን ይከፍታሉ።<span class="en" style="display:block">Print it and put it on your door; customers scan it to open your page.</span></p>
+        <img id="qrImg" alt="QR" style="width:250px;height:250px;margin:12px auto;display:block">
+        <div id="myUrl" style="font-weight:900"></div>
+        <a class="btn ghost" id="openPage" style="margin-top:10px" target="_blank">👀 ገጼን ክፈት · Open my page</a>
+        <button class="btn ghost" id="copyUrl" style="margin-top:8px">🔗 ሊንኩን ቅዳ · Copy link</button>
+      </div>
+      <button class="btn ghost" id="signOut" style="margin-top:12px">ውጣ · Sign out</button>
+    </div>
+  </div>
+  <p class="foot">BinaSmart · <a href="/for-business">ስለ አገልግሎቱ</a> · <a href="https://t.me/bina_smart_bot">እገዛ · help</a></p>
+</div>
+<div class="toast" id="toast"></div>
+<script src="/static/ride/tg.js?v=3"></script>
+<script src="/static/business/app.js?v=1"></script>
+</body>
+</html>
