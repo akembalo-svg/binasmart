@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Flight Tickets from Addis Ababa — Pay in Birr | BinaSmart</title>
+<meta name="description" content="Book flights from Addis Ababa. Pay with telebirr or CBE Birr on Ethiopian Airlines, or send your route to a partner travel agency in Addis and get a price on WhatsApp. Emirates, Qatar, Etihad and Turkish for international cards.">
+<link rel="canonical" href="https://bina.et/flights">
+<link rel="icon" href="/icon-32.png">
+<meta property="og:title" content="Flight Tickets from Addis Ababa — Pay in Birr | BinaSmart">
+<meta property="og:description" content="Pay with telebirr or CBE Birr, or get a price from a travel agency in Addis.">
+<meta property="og:url" content="https://bina.et/flights">
+<meta property="og:type" content="website">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#faf8f4;color:#1e293b;min-height:100vh}
+.top{display:flex;align-items:center;gap:8px;padding:14px 18px;max-width:680px;margin:0 auto}
+.top a{text-decoration:none;color:#1e293b;font-weight:900;font-size:17px}
+.top .g{color:#d4a017}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.hero{background:linear-gradient(135deg,#312e81,#4f46e5);border-radius:22px;padding:22px 18px;color:#fff;position:relative;overflow:hidden}
+.hero::after{content:'✈️';position:absolute;right:-8px;bottom:-14px;font-size:90px;opacity:.15;transform:rotate(-20deg)}
+.hero h1{font-size:23px;font-weight:900;line-height:1.25;position:relative}
+.hero .am{color:#c7d2fe;font-weight:800;font-size:14px;display:block;margin-top:4px}
+.hero .sub{font-size:12px;opacity:.92;margin-top:8px;line-height:1.6;position:relative}
+h2{font-size:16px;font-weight:900;margin:26px 0 4px;display:flex;align-items:center;gap:7px}
+h2 .am{font-size:12px;color:#64748b;font-weight:800}
+.lead{font-size:12.5px;color:#64748b;line-height:1.65;margin-bottom:10px}
+.card{background:#fff;border:1.5px solid #e9e4da;border-radius:20px;padding:16px;margin-top:10px}
+.card.best{border-color:#059669;border-width:2px}
+.tag{display:inline-block;font-size:10px;font-weight:900;border-radius:999px;padding:3px 9px;letter-spacing:.4px}
+.tag.birr{background:#d1fae5;color:#065f46}
+.tag.card{background:#e0e7ff;color:#3730a3}
+.al{display:flex;align-items:center;gap:11px}
+.al .nm{font-weight:900;font-size:15px}
+.al .nm .am{display:block;font-size:11.5px;color:#64748b;font-weight:700}
+.al .pay{font-size:11px;color:#94a3b8;font-weight:700;margin-top:3px}
+.go{margin-left:auto;background:#312e81;color:#fff;text-decoration:none;font-weight:900;font-size:12.5px;border-radius:999px;padding:9px 15px;white-space:nowrap}
+.go.g2{background:#059669}
+.grid{display:grid;gap:8px;margin-top:10px}
+.mini{background:#fff;border:1.5px solid #e9e4da;border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.mini .nm{font-weight:900;font-size:13.5px}
+.mini .nm .am{display:block;font-size:10.5px;color:#94a3b8;font-weight:700}
+.routes{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.routes button{border:1.5px solid #e9e4da;background:#fff;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:900;font-family:inherit;color:#312e81;cursor:pointer}
+.routes button:hover{border-color:#4f46e5}
+label{font-size:11px;font-weight:900;color:#64748b;display:block;margin:12px 0 4px;text-transform:uppercase;letter-spacing:1px}
+input,select,textarea{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:11px 12px;font-size:15px;font-family:inherit;background:#faf8f4;color:#1e293b}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.trip{display:flex;gap:8px;margin-bottom:2px}
+.tt{flex:1;text-align:center;border:1.5px solid #e9e4da;border-radius:12px;padding:10px;font-weight:900;font-size:13px;cursor:pointer;color:#64748b;background:#fff}
+.tt.on{background:#312e81;color:#fff;border-color:#312e81}
+.obtn{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-weight:900;font-size:15px;margin-top:14px;cursor:pointer;font-family:inherit}
+.obtn:disabled{opacity:.55}
+.note{font-size:11px;color:#94a3b8;line-height:1.6;margin-top:8px}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.hw{background:#fff;border:1.5px solid #e9e4da;border-radius:16px;padding:12px 8px;text-align:center}
+.hw b{display:block;font-size:11.5px;color:#312e81}
+.hw span{font-size:9.5px;color:#94a3b8;font-weight:700}
+.faq{background:#fff;border:1.5px solid #e9e4da;border-radius:16px;padding:14px;margin-top:8px}
+.faq b{font-size:13px;display:block;margin-bottom:4px}
+.faq p{font-size:12.5px;color:#64748b;line-height:1.7}
+.conf{text-align:center;padding:14px 0}
+.conf .big{font-size:52px}
+.conf h3{font-size:20px;font-weight:900;margin-top:4px}
+.code{font-size:24px;font-weight:900;letter-spacing:2px;color:#312e81;background:#eef2ff;border:2px dashed #4f46e5;border-radius:14px;padding:12px;margin:12px 0}
+.conf p{font-size:13px;color:#64748b;line-height:1.7}
+.wa{display:inline-block;background:#25D366;color:#fff;font-weight:900;border-radius:999px;padding:12px 26px;text-decoration:none;margin-top:10px;font-size:14px}
+.err{background:#fef2f2;border:1.5px solid #fecaca;color:#991b1b;border-radius:12px;padding:10px;font-size:12.5px;font-weight:700;margin-top:10px;display:none}
+</style>
+</head>
+<body>
+<div class="top"><a href="/">🏢 Bina<span class="g">Smart</span></a><span style="margin-left:auto;font-size:11px;font-weight:800;color:#4f46e5">✈️ Flights · በረራ</span></div>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>Flight tickets from Addis Ababa
+      <span class="am">የበረራ ትኬት — ከአዲስ አበባ</span></h1>
+    <div class="sub">Pay with <b>telebirr</b> or <b>CBE Birr</b>, or send your route to a travel agency in Addis and get a price on WhatsApp.<br>
+      <span style="color:#c7d2fe">በtelebirr ወይም በCBE ብር ይክፈሉ — ወይም መንገድዎን ልከው ዋጋ በWhatsApp ይቀበሉ።</span></div>
+  </div>
+
+  <h2>💚 Pay in birr <span class="am">· በብር ይክፈሉ</span></h2>
+  <p class="lead">These are the two ways a customer inside Ethiopia can actually complete the payment.
+    <span style="display:block;color:#94a3b8">በኢትዮጵያ ውስጥ ሆነው ክፍያ መፈጸም የሚችሉባቸው ሁለት መንገዶች።</span></p>
+  <div id="birr"></div>
+
+  <div class="card best" id="askbox">
+    <div style="display:flex;align-items:center;gap:8px"><span style="font-size:22px">🧑‍💼</span>
+      <div><div style="font-weight:900;font-size:15px">Ask a travel agency for a price</div>
+        <div style="font-size:11.5px;color:#64748b;font-weight:700">ከወኪል ዋጋ ይጠይቁ — ውስብስብ ጉዞ፣ ቤተሰብ፣ ቪዛ</div></div></div>
+    <p class="note" style="margin-top:8px">Best for multi-airline trips, families, Umrah, visa questions, or paying cash in person. An agency in Addis prices it in their airline system and replies on WhatsApp.</p>
+
+    <div class="routes" id="routes"></div>
+
+    <div class="trip" style="margin-top:12px">
+      <div class="tt on" id="ttR" onclick="setTrip('ROUND')">🔁 Round trip</div>
+      <div class="tt" id="ttO" onclick="setTrip('ONEWAY')">➡️ One way</div>
+    </div>
+    <div class="row2">
+      <div><label>From · ከ</label><input id="from" placeholder="Addis Ababa (ADD)" value="Addis Ababa (ADD)"></div>
+      <div><label>To · ወደ</label><input id="to" placeholder="Dubai (DXB)"></div>
+    </div>
+    <div class="row2">
+      <div><label>Depart · መነሻ ቀን</label><input id="dd" type="date"></div>
+      <div id="rdWrap"><label>Return · መመለሻ</label><input id="rd" type="date"></div>
+    </div>
+    <div class="row2">
+      <div><label>Passengers · ተጓዦች</label><select id="px"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+      <div><label>Cabin · ክፍል</label><select id="cabin"><option value="ECONOMY">Economy</option><option value="BUSINESS">Business</option></select></div>
+    </div>
+    <div class="row2">
+      <div><label>Your name · ስም</label><input id="nm" placeholder="Full name"></div>
+      <div><label>WhatsApp phone · ስልክ</label><input id="ph" type="tel" placeholder="09..."></div>
+    </div>
+    <label>Note (optional) · ማስታወሻ</label><input id="note" placeholder="e.g. flexible dates, 1 child">
+    <div class="err" id="err"></div>
+    <button class="obtn" id="send" onclick="submitReq()">✈️ Get my price · ዋጋዬን ላክልኝ</button>
+    <p class="note" id="agencyNote"></p>
+  </div>
+
+  <h2>🌍 Paying from abroad <span class="am">· በዓለም አቀፍ ካርድ</span></h2>
+  <p class="lead">These airlines need an international card, so they are for the diaspora or anyone with a Visa/Mastercard that works outside Ethiopia. Book direct on the airline's own site.
+    <span style="display:block;color:#94a3b8">እነዚህ አየር መንገዶች ዓለም አቀፍ ካርድ ይፈልጋሉ።</span></p>
+  <div class="grid" id="cardonly"></div>
+
+  <h2>How it works <span class="am">· እንዴት እንደሚሰራ</span></h2>
+  <div class="how">
+    <div class="hw"><b>1 · Send</b><span>route + dates<br>መንገድና ቀን</span></div>
+    <div class="hw"><b>2 · Price</b><span>agency replies<br>ወኪል ዋጋ ይልካል</span></div>
+    <div class="hw"><b>3 · Pay</b><span>birr or card<br>በብር ወይም ካርድ</span></div>
+  </div>
+
+  <h2>Questions <span class="am">· ጥያቄዎች</span></h2>
+  <div class="faq"><b>Can I pay with telebirr?</b><p>Yes — for Ethiopian Airlines. Their website accepts telebirr and CBE Birr. Other airlines listed here need an international card, so for those use a partner agency instead.</p></div>
+  <div class="faq"><b>በtelebirr መክፈል እችላለሁ?</b><p>አዎ — ለኢትዮጵያ አየር መንገድ። ድረ ገጻቸው telebirr እና CBE ብር ይቀበላል። ሌሎቹ ዓለም አቀፍ ካርድ ስለሚፈልጉ በወኪል በኩል ይሂዱ።</p></div>
+  <div class="faq"><b>Does BinaSmart issue the ticket?</b><p>No. A licensed travel agency issues your ticket, or you buy direct from the airline. BinaSmart connects you and does not hold your money.</p></div>
+  <div class="faq"><b>Is the price final?</b><p>No price on this page is final. Fares change until the ticket is issued — the agency or the airline confirms the real price before you pay.</p></div>
+
+  <p class="note" style="margin:16px 0 30px">BinaSmart is not an airline and not a ticket seller. Some links on this page may earn us a commission at no extra cost to you.
+    <span style="display:block">ቢናስማርት አየር መንገድ አይደለም፤ ትኬትም አይሸጥም።</span></p>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I pay for a flight with telebirr in Ethiopia?","acceptedAnswer":{"@type":"Answer","text":"Yes, for Ethiopian Airlines — their website accepts telebirr and CBE Birr. Other airlines require an international card, so for those use a travel agency in Addis Ababa."}},
+{"@type":"Question","name":"Does BinaSmart issue flight tickets?","acceptedAnswer":{"@type":"Answer","text":"No. A licensed travel agency issues the ticket, or you buy direct from the airline. BinaSmart connects you and does not hold your money."}},
+{"@type":"Question","name":"Is the fare shown final?","acceptedAnswer":{"@type":"Answer","text":"No. Fares change until the ticket is issued. The agency or airline confirms the real price before you pay."}}]}
+</script>
+<script src="/static/bina-footer.js?v=3" defer></script>
+<script>
+var TRIP = 'ROUND', PARTNER = null;
+var $ = function (id) { return document.getElementById(id); };
+var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+function setTrip(t) {
+  TRIP = t;
+  $('ttR').className = 'tt' + (t === 'ROUND' ? ' on' : '');
+  $('ttO').className = 'tt' + (t === 'ONEWAY' ? ' on' : '');
+  $('rdWrap').style.display = t === 'ROUND' ? '' : 'none';
+}
+
+var ROUTES = [['Dubai (DXB)', '🇦🇪'], ['Jeddah (JED)', '🇸🇦'], ['Istanbul (IST)', '🇹🇷'], ['Nairobi (NBO)', '🇰🇪'],
+  ['Cairo (CAI)', '🇪🇬'], ['Doha (DOH)', '🇶🇦'], ['London (LHR)', '🇬🇧'], ['Washington (IAD)', '🇺🇸']];
+function fillRoutes() {
+  $('routes').innerHTML = ROUTES.map(function (r) {
+    return '<button type="button" onclick="pick(' + JSON.stringify(r[0]).replace(/"/g, '&quot;') + ')">' + r[1] + ' ' + esc(r[0].split(' (')[0]) + '</button>';
+  }).join('');
+}
+function pick(dest) { $('to').value = dest; $('to').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+
+function airlineRow(a, big) {
+  var l = a.link;
+  return '<div class="' + (big ? 'card' : 'mini') + '"><div class="al">'
+    + '<span style="font-size:' + (big ? 26 : 20) + 'px">✈️</span>'
+    + '<div class="nm">' + esc(a.name) + '<span class="am">' + esc(a.nameAm) + '</span>'
+    + (big ? '<div class="pay">' + esc(a.payNote) + '</div>' : '') + '</div>'
+    + '<a class="go' + (big ? ' g2' : '') + '" href="' + esc(l.url) + '" target="_blank" rel="' + esc(l.rel) + '">Book direct</a>'
+    + '</div></div>';
+}
+
+async function load() {
+  try {
+    var d = await (await fetch('/api/flights-options')).json();
+    $('birr').innerHTML = (d.birr || []).map(function (a) {
+      return '<div class="card best"><span class="tag birr">PAY IN BIRR · በብር</span>'
+        + '<div class="al" style="margin-top:8px"><span style="font-size:26px">✈️</span>'
+        + '<div class="nm">' + esc(a.name) + '<span class="am">' + esc(a.nameAm) + '</span>'
+        + '<div class="pay">' + esc(a.payNote) + ' · ' + esc(a.payNoteAm) + '</div></div>'
+        + '<a class="go g2" href="' + esc(a.link.url) + '" target="_blank" rel="' + esc(a.link.rel) + '">Book direct</a></div></div>';
+    }).join('');
+    $('cardonly').innerHTML = (d.cardOnly || []).map(function (a) { return airlineRow(a, false); }).join('');
+
+    PARTNER = (d.partners || [])[0] || null;
+    if (PARTNER) {
+      $('agencyNote').innerHTML = 'Your request goes to <b>' + esc(PARTNER.name) + '</b>, a travel agency on BinaSmart.';
+    } else {
+      $('send').disabled = true;
+      $('agencyNote').textContent = 'No partner agency is accepting requests right now.';
+    }
+  } catch (e) {
+    $('send').disabled = true;
+    $('agencyNote').textContent = 'Could not load airlines. Please reload.';
+  }
+}
+
+async function submitReq() {
+  var e = $('err'); e.style.display = 'none';
+  if (!PARTNER) return;
+  var body = { tripType: TRIP, fromCity: $('from').value.trim(), toCity: $('to').value.trim(),
+    departDate: $('dd').value, returnDate: TRIP === 'ROUND' ? ($('rd').value || null) : null,
+    passengers: parseInt($('px').value, 10) || 1, cabin: $('cabin').value,
+    name: $('nm').value.trim(), phone: $('ph').value.trim(), note: $('note').value.trim() || null };
+  if (!body.toCity || !body.departDate || !body.name || !body.phone) {
+    e.textContent = 'Please fill destination, date, name and phone. · መድረሻ፣ ቀን፣ ስም እና ስልክ ይሙሉ።';
+    e.style.display = 'block'; return;
+  }
+  $('send').disabled = true; $('send').textContent = 'Sending…';
+  try {
+    var r = await fetch('/api/flights/' + PARTNER.id + '/request', { method: 'POST',
+      headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    var d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'failed');
+    var wa = 'https://wa.me/' + String(d.agencyPhone || '').replace(/[^0-9]/g, '')
+      + '?text=' + encodeURIComponent('Hello ' + (d.agency || '') + ', my BinaSmart flight request is ' + d.code
+        + ' — ' + body.fromCity + ' to ' + body.toCity + ' on ' + body.departDate + ', ' + body.passengers + ' passenger(s).');
+    $('askbox').innerHTML = '<div class="conf"><div class="big">✈️</div><h3>Request sent</h3>'
+      + '<div class="code">' + esc(d.code) + '</div>'
+      + '<p><b>' + esc(d.agency || 'The agency') + '</b> will price it and reply on WhatsApp.<br>'
+      + 'ወኪሉ ዋጋ አስልቶ በWhatsApp ይመልስልዎታል።</p>'
+      + (d.agencyPhone ? '<a class="wa" href="' + esc(wa) + '" target="_blank" rel="noopener">💬 Message them now</a>' : '')
+      + '<p class="note" style="margin-top:12px">Keep this code. The price is confirmed by the agency before you pay.</p></div>';
+    $('askbox').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (err) {
+    $('send').disabled = false; $('send').textContent = '✈️ Get my price · ዋጋዬን ላክልኝ';
+    e.textContent = 'Could not send. Please check your phone number and try again.';
+    e.style.display = 'block';
+  }
+}
+
+setTrip('ROUND');
+fillRoutes();
+$('dd').min = new Date().toISOString().slice(0, 10);
+$('rd').min = $('dd').min;
+load();
+</script>
+</body>
+</html>

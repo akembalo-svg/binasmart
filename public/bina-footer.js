@@ -11,7 +11,7 @@
   var COLS = [
     ['አገልግሎቶች', 'Services', [
       ['🚕 ጉዞ', 'Ride', '/ride'], ['🎬 ሲኒማ', 'Cinema', '/cinema'], ['▶️ ፊልም', 'Watch', '/watch'],
-      ['🏪 ሱቆች', 'Businesses', '/business'], ['🏢 ንብረት', 'Property', '/property'], ['🏨 ሆቴል', 'Hotels', '/hotel/bina-grand-hotel'],
+      ['🏪 ሱቆች', 'Businesses', '/business'], ['✈️ በረራ', 'Flights', '/flights'], ['🏢 ንብረት', 'Property', '/property'], ['🏨 ሆቴል', 'Hotels', '/hotel/bina-grand-hotel'],
       ['📋 ጨረታ', 'Tenders', '/tenders'], ['📰 ዜና', 'News', '/news'], ['📚 መመሪያ', 'Guides', '/guides'],
     ]],
     ['ይቀላቀሉን', 'Join us', [

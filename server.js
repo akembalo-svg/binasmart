@@ -139,7 +139,7 @@ fastify.get('/sitemap.xml', async (req, reply) => {
   const shopUrls = (await prisma.shop.findMany({ where: { status: 'live', NOT: { slug: null } }, select: { slug: true } }).catch(() => [])).map(x => 'https://bina.et/shop/' + x.slug);
   const cshows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date() } }, select: { id: true } }).catch(() => []);
   const films = await prisma.film.findMany({ where: { status: 'public', NOT: { rights: null } }, select: { slug: true } }).catch(() => []);
-  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug)];
+  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug)];
   reply.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + urls.map(u => '<url><loc>' + u + '</loc></url>').join('\n') + '\n</urlset>');
 });
@@ -362,6 +362,7 @@ fastify.post('/api/insurance-lead', async (req, reply) => {
 
 
 // ===== FLIGHTS: live indicative fares (Amadeus self-service; off until AMADEUS_KEY set) =====
+const AIRLINES = require('./flights/airlines');
 const AMA_BASE = process.env.AMADEUS_ENV === 'prod' ? 'https://api.amadeus.com' : 'https://test.api.amadeus.com';
 let amaToken = null, amaTokenExp = 0;
 const fareCache = new Map();
@@ -415,7 +416,7 @@ fastify.get('/api/flights-price', async (req) => {
 fastify.get('/api/flights/:slug', async (req, reply) => {
   const q = req.params.slug.replace(/-/g, ' ');
   const shop = await prisma.shop.findFirst({
-    where: { name: { contains: q, mode: 'insensitive' }, tenancy: { active: true } },
+    where: { name: { contains: q, mode: 'insensitive' }, tenancy: { active: true }, status: 'live' },
     include: { tenancy: { include: { unit: { include: { building: { select: { name: true, nameAm: true, qrSlug: true } } } } } } } });
   if (!shop) return reply.code(404).send({ error: 'not_found' });
   return { agency: { id: shop.id, name: shop.name, nameAm: shop.nameAm, phone: shop.phone,
@@ -452,6 +453,31 @@ fastify.get('/api/owner/:slug/flight-requests', async (req, reply) => {
     where: { shop: undefined, shopId: { in: (await prisma.shop.findMany({ where: { tenancy: { unit: { buildingId: b.id } } }, select: { id: true } })).map(s => s.id) } },
     orderBy: { createdAt: 'desc' }, take: 100 });
   return { requests };
+});
+
+fastify.get('/flights', async (req, reply) => reply.sendFile('flights-hub.html'));
+
+// Airlines (with affiliate links resolved from the environment) plus the travel agencies that can
+// take a request. An agency qualifies by being a live shop whose trade is travel; FLIGHT_PARTNERS
+// can name slugs explicitly when a partner's name does not say "travel".
+fastify.get('/api/flights-options', async () => {
+  const rows = AIRLINES.resolve(process.env);
+  const named = String(process.env.FLIGHT_PARTNERS || '').split(',').map(x => x.trim()).filter(Boolean);
+  const shops = await prisma.shop.findMany({
+    where: { tenancy: { active: true }, status: 'live', NOT: { slug: null } },
+    select: { id: true, name: true, nameAm: true, phone: true, slug: true, category: true },
+  }).catch(() => []);
+  // "air" on its own matched a spa and "ticket" a park ticket office, so the test names the trade.
+  const TRADE = /travel|tour|ጉዞ/i;
+  const partners = shops.filter(sh => named.includes(sh.slug || '')
+    || TRADE.test((sh.name || '') + ' ' + (sh.nameAm || '')));
+  // An explicitly named partner outranks one matched by its name.
+  partners.sort((a, b) => (named.indexOf(b.slug) - named.indexOf(a.slug)));
+  return {
+    birr: AIRLINES.payableInBirr(rows),
+    cardOnly: AIRLINES.cardOnly(rows),
+    partners: partners.map(p => ({ id: p.id, name: p.name, nameAm: p.nameAm, slug: p.slug })),
+  };
 });
 
 fastify.get('/flights/:slug', async (req, reply) => reply.sendFile('flights.html'));
@@ -895,7 +921,7 @@ document.querySelectorAll('[data-deadline]').forEach(el=>{
   else{b.textContent=days; s.textContent=days===1?'ቀን ቀርቷል · day left':'ቀናት ቀርተዋል · days left';
     el.className='dl '+(days<3?'hot':days<=7?'mid':'ok');}
 });
-</script><script src="/static/bina-footer.js?v=2" defer></script></body></html>`;
+</script><script src="/static/bina-footer.js?v=3" defer></script></body></html>`;
 }
 
 function catPill(cat) {
@@ -1182,7 +1208,7 @@ function pub(){
      setTimeout(()=>location.reload(),1200);
    }).catch(e=>document.getElementById('cnt').textContent='Error: '+e);
 }
-</script><script src="/static/bina-footer.js?v=2" defer></script></body></html>`);
+</script><script src="/static/bina-footer.js?v=3" defer></script></body></html>`);
 });
 
 fastify.post('/api/admin/tender-queue/publish', async (req, reply) => {
@@ -1535,7 +1561,7 @@ fastify.get('/owner/:slug/report', async (req, reply) => {
     + '<tr><td>Owner dashboard</td><td>https://bina.et/owner/' + b.qrSlug + '</td></tr>'
     + '<tr><td>Printable entrance poster</td><td>https://bina.et/static/qr-poster.html?b=' + b.qrSlug + '</td></tr></table>'
     + '<footer>Confidential — prepared for the owner of ' + b.name + ' · BinaSmart Building Management · bina.et</footer>'
-    + '<script src="/static/bina-footer.js?v=2" defer></script></body></html>';
+    + '<script src="/static/bina-footer.js?v=3" defer></script></body></html>';
   reply.type('text/html').send(html);
 });
 
@@ -1958,7 +1984,7 @@ fastify.get('/owner/:slug/vat-report', async (req, reply) => {
     + '<h2>2 · Input — Expenses (' + expenses.length + ')</h2><table><tr><th>Date</th><th>Vendor</th><th>Category</th><th>Receipt</th><th>Amount</th><th>VAT</th></tr>' + expRows
     + '<tr><th colspan="4">TOTAL</th><th class="r">' + fmt(expTotal) + '</th><th class="r">' + fmt(inputVat) + '</th></tr></table>'
     + '<footer>Prepared by BinaSmart · bina.et · Based on VAT Proclamation No. 1341/2024 (15%). This is a management summary — please verify with your accountant before filing with the Ministry of Revenues.</footer>'
-    + '<script src="/static/bina-footer.js?v=2" defer></script></body></html>';
+    + '<script src="/static/bina-footer.js?v=3" defer></script></body></html>';
   reply.type('text/html').send(html);
 });
 
@@ -2407,7 +2433,7 @@ fastify.get('/pay/callback', async (req, reply) => {
   const body='<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+(ok?'ክፍያ ተሳክቷል':'ክፍያ በመጠባበቅ ላይ')+' · BinaSmart</title>'+
   '<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=Noto+Sans+Ethiopic:wght@600;800&display=swap" rel="stylesheet">'+
   '<style>*{margin:0;box-sizing:border-box}body{font-family:\'Plus Jakarta Sans\',\'Noto Sans Ethiopic\',sans-serif;background:#f6faf9;color:#0b2a26;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.c{background:#fff;border:1.5px solid #e2ece9;border-radius:24px;padding:34px 26px;max-width:400px;text-align:center;box-shadow:0 20px 50px -26px rgba(11,42,38,.4)}.ic{width:84px;height:84px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff;background:'+(ok?'linear-gradient(135deg,#059669,#0aa88f)':'linear-gradient(135deg,#d97706,#f59e0b)')+'}h1{font-size:22px;font-weight:800}p{color:#5c7371;font-size:14px;margin-top:8px}.amt{font-size:30px;font-weight:800;color:#057461;margin:14px 0}a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;font-weight:800;border-radius:999px;padding:13px 28px;text-decoration:none}</style></head>'+
-  '<body><div class="c"><div class="ic">'+(ok?'✓':'⏳')+'</div><h1 class="am">'+(ok?'ክፍያ ተሳክቷል!':'ክፍያ በመጠባበቅ ላይ ነው')+'</h1>'+(amt?'<div class="amt">ETB '+amt+'</div>':'')+'<p class="am">'+(ok?('የ'+ (purpose||'BinaSmart') +' ክፍያዎ ተከፍሏል። እናመሰግናለን!'):'ክፍያዎ ገና አልተረጋገጠም። ካጠናቀቁ ትንሽ ቆይተው ይሞክሩ።')+'</p><p style="font-size:11px;margin-top:10px">Ref: '+(ref||'')+'</p><a href="/" class="am">← ወደ BinaSmart</a></div><script src="/static/bina-footer.js?v=2" defer></script></body></html>';
+  '<body><div class="c"><div class="ic">'+(ok?'✓':'⏳')+'</div><h1 class="am">'+(ok?'ክፍያ ተሳክቷል!':'ክፍያ በመጠባበቅ ላይ ነው')+'</h1>'+(amt?'<div class="amt">ETB '+amt+'</div>':'')+'<p class="am">'+(ok?('የ'+ (purpose||'BinaSmart') +' ክፍያዎ ተከፍሏል። እናመሰግናለን!'):'ክፍያዎ ገና አልተረጋገጠም። ካጠናቀቁ ትንሽ ቆይተው ይሞክሩ።')+'</p><p style="font-size:11px;margin-top:10px">Ref: '+(ref||'')+'</p><a href="/" class="am">← ወደ BinaSmart</a></div><script src="/static/bina-footer.js?v=3" defer></script></body></html>';
   reply.type('text/html').send(body);
 });
 // Test checkout page
@@ -2432,7 +2458,7 @@ fastify.get('/pay', async (req, reply) => {
   'function body(){return{amount:amount(),name:document.getElementById("name").value,email:document.getElementById("email").value,phone:document.getElementById("phone").value,purpose:PURPOSE,bt:BT,bc:BC};}'+
   'async function payChapa(){var e=document.getElementById("err");e.textContent="";var amt=amount();if(!amt||amt<1){e.textContent="ትክክለኛ መጠን ያስገቡ";return;}var b=document.getElementById("cbtn");b.disabled=true;b.textContent="…";try{var r=await fetch("/api/pay/init",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body())});var j=await r.json();if(j.ok&&j.checkout_url){location.href=j.checkout_url;}else{e.textContent=(j.error||"አልተሳካም");b.disabled=false;b.textContent="💳 በ Chapa ይክፈሉ →";}}catch(x){e.textContent="ስህተት";b.disabled=false;b.textContent="💳 በ Chapa ይክፈሉ →";}}'+
   'async function payWallet(){var e=document.getElementById("err");e.textContent="";var amt=amount();if(!amt||amt<1){e.textContent="ትክክለኛ መጠን ያስገቡ";return;}var tok=localStorage.getItem("bina_wallet_tok");if(!tok){if(confirm("ወደ ዋሌትዎ መግባት ያስፈልጋል። አሁን ይግቡ?"))location.href="/wallet";return;}var b=document.getElementById("wbtn");b.disabled=true;b.textContent="…";try{var r=await fetch("/api/wallet/pay",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:tok,amount:amt,bt:BT,bc:BC,purpose:PURPOSE})});var j=await r.json();if(j.ok){location.href="/pay/callback?ref=wallet&ok=1&amt="+amt;}else if(r.status===402){e.textContent="በ ዋሌትዎ በቂ ገንዘብ የለም። ";if(confirm("ገንዘብ ይሙሉ?"))location.href="/wallet";b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}else if(r.status===401){location.href="/wallet";}else{e.textContent=(j.error||"አልተሳካም");b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}}catch(x){e.textContent="ስህተት";b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}}'+
-  '</script><script src="/static/bina-footer.js?v=2" defer></script></body></html>';
+  '</script><script src="/static/bina-footer.js?v=3" defer></script></body></html>';
   reply.type('text/html').send(body);
 });
 
@@ -2541,7 +2567,7 @@ function logout(){localStorage.removeItem('bina_wallet_tok');T='';$('dashView').
   if(T){showDash();}else{$('authView').classList.remove('hide');setMode('login');}
 })();
 </script>
-</div><script src="/static/bina-footer.js?v=2" defer></script></body></html>`;
+</div><script src="/static/bina-footer.js?v=3" defer></script></body></html>`;
 
 // ===== BINASMART WALLET (phone + PIN, Chapa top-up) =====
 function walletTok(){ return cryptoMod.randomBytes(24).toString('hex'); }
