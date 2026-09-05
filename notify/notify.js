@@ -34,6 +34,16 @@ function makeNotify({ sendTg, sendWa, adminChatId, adminChatIds, log }) {
   const notifyShop = (shop, text, waChannel) =>
     notifyParty(shop, text, waChannel, shop && shop.id ? 'they can link Telegram with /start shop_' + shop.id : '');
 
+  // Same ladder, no admin copy: for the many small messages to tenants (rent reminders, receipts)
+  // where a copy of each one would bury the admins. Failures are logged and returned, not mirrored.
+  async function notifyQuiet(party, text, waChannel) {
+    let via = null;
+    if (party && party.tgChatId && await tryTg(party.tgChatId, text)) via = 'telegram';
+    if (!via && party && party.phone && await tryWa(party.phone, text, waChannel)) via = 'whatsapp';
+    if (!via) say('[notify] unreachable ' + ((party && (party.name || party.id)) || 'unknown') + ': ' + String(text).slice(0, 80));
+    return { ok: !!via, via };
+  }
+
   // Something only the admins need to know (a lead, a report). Returns how many chats took it.
   async function notifyAdmins(text) {
     let n = 0;
@@ -42,6 +52,6 @@ function makeNotify({ sendTg, sendWa, adminChatId, adminChatIds, log }) {
     return n;
   }
 
-  return { notifyParty, notifyShop, notifyAdmins, admins };
+  return { notifyParty, notifyShop, notifyQuiet, notifyAdmins, admins };
 }
 module.exports = { makeNotify };

@@ -752,7 +752,8 @@ fastify.post('/api/hotel/:slug/book', async (req, reply) => {
   await audit(rt.buildingId, 'BOOKING_CREATED', guestName + ' · ' + rt.name + ' ×' + nRooms + ' · ' + nights + ' nights · ' + code, total);
   if (NOTIFY_WHITELIST.includes(rt.building.qrSlug) && rt.building.owner) {
     const msg = '🏨 አዲስ ቦታ ማስያዝ / NEW BOOKING\n' + rt.building.name + '\n👤 ' + guestName + ' (' + guestPhone + ')\n🛏 ' + rt.name + ' ×' + nRooms + '\n📅 ' + checkIn + ' → ' + checkOut + ' (' + nights + ' nights)\n💰 ' + total.toLocaleString() + ' ETB\n#️⃣ ' + code;
-    sendWa(rt.building.owner.phone, msg, WA_CHANNEL[rt.building.qrSlug]).catch(() => {});
+    notifyParty({ name: rt.building.owner.name || (rt.building.name + ' owner'), phone: rt.building.owner.phone, tgChatId: rt.building.owner.telegramId || null },
+      msg, WA_CHANNEL[rt.building.qrSlug], 'owner not on Telegram yet').catch(() => {});
   }
   return { ok: true, code, nights, total, status: 'PENDING',
     hotel: rt.building.name, room: rt.name };
@@ -1711,7 +1712,7 @@ const ADMIN_TG_CHAT = process.env.BINASMART_ADMIN_TG_CHAT || '';
 // 8096525984 is the ride ops account ("81171") that has received lead alerts since launch; kept as a
 // second admin so nothing that used to reach it stops reaching it.
 const OPS_TG_CHAT = process.env.BINASMART_OPS_TG_CHAT || '8096525984';
-const { notifyShop, notifyParty, notifyAdmins } = makeNotify({ sendTg, sendWa, adminChatIds: [ADMIN_TG_CHAT, OPS_TG_CHAT], log: console.log });
+const { notifyShop, notifyParty, notifyQuiet, notifyAdmins } = makeNotify({ sendTg, sendWa, adminChatIds: [ADMIN_TG_CHAT, OPS_TG_CHAT], log: console.log });
 async function sendTg(chatId, text){
   if (!TG_TOKEN || !chatId) return false;
   try{
@@ -1723,10 +1724,10 @@ async function sendTg(chatId, text){
   }catch(e){ return false; }
 }
 async function notifyTenant(user, text, channel){
-  let sent = false;
-  if (user.phone) sent = await sendWa(user.phone, text, channel);
-  if (user.telegramChatId) { const t = await sendTg(user.telegramChatId, text); sent = sent || t; }
-  return sent;
+  // Telegram first, WhatsApp as backup, one message not two. No admin copy — see notifyQuiet.
+  if (!user) return false;
+  const r = await notifyQuiet({ id: user.id, name: user.name || user.phone, phone: user.phone, tgChatId: user.telegramChatId || null }, text, channel);
+  return r.ok;
 }
 async function alreadyAudited(buildingId, action, detailContains){
   const hit = await prisma.auditLog.findFirst({ where: { buildingId, action, detail: { contains: detailContains } } });
@@ -1784,8 +1785,8 @@ async function runDailyChecks(onlySlug){
       if (canSend && b.notifyTenants && tenantSendBudget-- > 0) await notifyTenant(i.tenancy.user, 'ማሳሰቢያ: የ' + b.nameAm + ' ኪራይ ክፍያዎ አልፏል። ቅጣት ' + fee.toLocaleString() + ' ብር ታክሏል። — BinaSmart');
       res.penalties++;
     }
-    if (canSend && ownerMsgs.length && b.owner && b.owner.phone) {
-      res.notified = await sendWa(b.owner.phone, '🏢 ' + b.name + ' — BinaSmart daily report:\n\n' + ownerMsgs.slice(0, 15).join('\n') + (ownerMsgs.length > 15 ? '\n…+' + (ownerMsgs.length - 15) + ' more' : '') + '\n\n📊 bina.et/owner');
+    if (canSend && ownerMsgs.length && b.owner) {
+      res.notified = (await notifyParty({ name: b.owner.name || (b.name + ' owner'), phone: b.owner.phone, tgChatId: b.owner.telegramId || null }, '🏢 ' + b.name + ' — BinaSmart daily report:\n\n' + ownerMsgs.slice(0, 15).join('\n') + (ownerMsgs.length > 15 ? '\n…+' + (ownerMsgs.length - 15) + ' more' : '') + '\n\n📊 bina.et/owner', WA_CHANNEL[b.qrSlug], 'owner not on Telegram yet')).ok;
     }
     results.push(res);
   }
