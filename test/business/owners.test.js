@@ -71,8 +71,11 @@ test('claims expire after 15 minutes and starting a new claim kills the old one'
   assert.equal((await o.verify(a.claimId, w.sent[0].code)).error, 'expired', 'the first claim was replaced');
   t += CLAIM_MS + 1;
   assert.equal((await o.verify(b.claimId, w.sent[1].code)).error, 'expired');
-  const sw = await o.sweep();
-  assert.equal(sw.claims >= 1, true);
+  // A claim nobody ever tried stays PENDING until the sweep retires it.
+  const c = await o.startClaim('0911223344');
+  t += CLAIM_MS + 1;
+  assert.equal((await o.sweep()).claims, 1);
+  assert.equal((await o.verify(c.claimId, w.sent[2].code)).error, 'expired');
 });
 test('ops can approve a pending claim without the code; sessions expire and can be signed out', async () => {
   let t = 1_000_000;
