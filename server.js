@@ -806,8 +806,7 @@ function newsShell({ title, desc, canonical, extraHead = '', body, active = 'new
 <title>${escH(title)}</title><meta name="description" content="${escH(desc)}"><link rel="canonical" href="${canonical}">
 <meta property="og:title" content="${escH(title)}"><meta property="og:description" content="${escH(desc)}"><meta property="og:url" content="${canonical}"><meta property="og:site_name" content="Bina ዜና"><meta property="og:type" content="article"><meta property="og:image" content="${ogImage}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${ogImage}">
 <link rel="icon" href="/icon-32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=1">
 ${extraHead}
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -2445,7 +2444,7 @@ fastify.get('/pay/callback', async (req, reply) => {
   else if(ref){ try{ const r=await chapaVerify(ref); paid=r.ok; const p=await prisma.payment.findUnique({ where:{ txRef:ref } }); if(p){ amt=p.amount; purpose=p.purpose||''; } }catch(e){} }
   const ok=paid;
   const body='<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+(ok?'ክፍያ ተሳክቷል':'ክፍያ በመጠባበቅ ላይ')+' · BinaSmart</title>'+
-  '<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=Noto+Sans+Ethiopic:wght@600;800&display=swap" rel="stylesheet">'+
+  ''+
   '<style>*{margin:0;box-sizing:border-box}body{font-family:\'Plus Jakarta Sans\',\'Noto Sans Ethiopic\',sans-serif;background:#f6faf9;color:#0b2a26;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.c{background:#fff;border:1.5px solid #e2ece9;border-radius:24px;padding:34px 26px;max-width:400px;text-align:center;box-shadow:0 20px 50px -26px rgba(11,42,38,.4)}.ic{width:84px;height:84px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff;background:'+(ok?'linear-gradient(135deg,#059669,#0aa88f)':'linear-gradient(135deg,#d97706,#f59e0b)')+'}h1{font-size:22px;font-weight:800}p{color:#5c7371;font-size:14px;margin-top:8px}.amt{font-size:30px;font-weight:800;color:#057461;margin:14px 0}a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;font-weight:800;border-radius:999px;padding:13px 28px;text-decoration:none}</style></head>'+
   '<body><div class="c"><div class="ic">'+(ok?'✓':'⏳')+'</div><h1 class="am">'+(ok?'ክፍያ ተሳክቷል!':'ክፍያ በመጠባበቅ ላይ ነው')+'</h1>'+(amt?'<div class="amt">ETB '+amt+'</div>':'')+'<p class="am">'+(ok?('የ'+ (purpose||'BinaSmart') +' ክፍያዎ ተከፍሏል። እናመሰግናለን!'):'ክፍያዎ ገና አልተረጋገጠም። ካጠናቀቁ ትንሽ ቆይተው ይሞክሩ።')+'</p><p style="font-size:11px;margin-top:10px">Ref: '+(ref||'')+'</p><a href="/" class="am">← ወደ BinaSmart</a></div><script src="/static/bina-footer.js?v=4" defer></script></body></html>';
   reply.type('text/html').send(body);
@@ -2456,7 +2455,7 @@ fastify.get('/pay', async (req, reply) => {
   const locked = !!(amt && bc);
   const esc=v=>String(v).replace(/"/g,'&quot;');
   const body='<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ክፍያ · Pay · BinaSmart</title>'+
-  '<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=Noto+Sans+Ethiopic:wght@600;800&display=swap" rel="stylesheet">'+
+  ''+
   '<style>*{margin:0;box-sizing:border-box}body{font-family:\'Plus Jakarta Sans\',\'Noto Sans Ethiopic\',sans-serif;background:#f6faf9;color:#0b2a26;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.c{background:#fff;border:1.5px solid #e2ece9;border-radius:24px;padding:26px 22px;max-width:420px;width:100%;box-shadow:0 20px 50px -26px rgba(11,42,38,.4)}h1{font-size:21px;font-weight:800;display:flex;align-items:center;gap:8px}.sub{color:#5c7371;font-size:13px;margin:6px 0 16px}.amtbox{background:#f3faf7;border:1.5px solid #dbeee8;border-radius:16px;padding:14px 16px;margin-bottom:6px}.amtbox .l{font-size:11px;color:#5c7371;font-weight:800}.amtbox .v{font-size:26px;font-weight:800;color:#057461}label{font-size:12px;font-weight:800;display:block;margin:12px 0 5px}input{width:100%;border:1.5px solid #e2ece9;border-radius:12px;padding:12px 14px;font-size:15px;font-family:inherit;outline:none}input:focus{border-color:#068c78}.btn{width:100%;border:0;border-radius:14px;padding:15px;margin-top:12px;font-weight:800;font-size:16px;cursor:pointer;font-family:inherit;color:#fff}.chapa{background:linear-gradient(135deg,#0b2a26,#068c78)}.wallet{background:linear-gradient(135deg,#059669,#0aa88f)}.or{text-align:center;color:#94a3b8;font-size:12px;margin:12px 0 2px}.err{color:#dc2626;font-size:13px;margin-top:10px;text-align:center;min-height:16px}.badge{display:inline-block;background:#fef3c7;color:#92700a;border:1px solid #f2d98a;border-radius:999px;padding:4px 12px;font-size:11px;font-weight:800;margin-top:12px}.pw{text-align:center;font-size:11px;color:#94a3b8;margin-top:12px}</style></head>'+
   '<body><div class="c"><h1 class="am">💳 ክፍያ</h1><div class="sub am">'+(purpose?esc(purpose):'BinaSmart')+(bc?(' · #'+esc(bc)):'')+'</div>'+
   (locked?('<div class="amtbox am"><div class="l">የሚከፈል · Amount</div><div class="v">ETB '+esc(amt)+'</div></div>'):'<label class="am">የክፍያ መጠን (ETB)</label><input id="amount" type="number" min="1" value="'+esc(amt)+'" placeholder="100">')+
@@ -2480,7 +2479,6 @@ const WALLET_HTML = `<!DOCTYPE html>
 <html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>የኔ ዋሌት · BinaSmart Wallet</title>
 <link rel="icon" href="/icon-32.png">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Noto+Sans+Ethiopic:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',sans-serif;background:#f6faf9;color:#0b2a26;min-height:100vh;padding:18px}
