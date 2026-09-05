@@ -254,5 +254,6 @@ function binaInstall(){var b=document.getElementById('installBtn');if(!binaDefer
 addEventListener('appinstalled',function(){var b=document.getElementById('installBtn');if(b)b.style.display='none';});
 </script>
 <script>(function(){try{var t=localStorage.getItem("bina_wallet_tok");if(!t)return;fetch("/api/wallet/me?token="+encodeURIComponent(t)).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.ok){var c=document.getElementById("walletChip");if(c){c.textContent="👛 ETB "+Number(j.balance).toLocaleString();c.style.background="#059669";c.style.color="#fff";c.style.borderColor="#059669";}}}).catch(function(){});}catch(e){}})();</script>
+  <script src="/static/bina-footer.js" defer></script>
 </body>
 </html>

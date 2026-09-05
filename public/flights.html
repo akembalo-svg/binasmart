@@ -135,5 +135,6 @@ async function fares(){
 ['from','to','dd','rd','px'].forEach(id => $(id).addEventListener('change', () => { clearTimeout(fareT); fareT = setTimeout(fares, 400); }));
 load().then(fares);
 </script>
+  <script src="/static/bina-footer.js" defer></script>
 </body>
 </html>

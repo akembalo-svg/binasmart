@@ -376,6 +376,31 @@ module.exports = function registerBusiness(fastify, deps) {
   });
 
   // ---------- ops ----------
+  fastify.get('/api/business/ops/overview', async (req, reply) => {
+    if (!ops(req, reply)) return;
+    const [live, demo, hidden, products, orders, claimedIds] = await Promise.all([
+      prisma.shop.count({ where: { status: 'live' } }),
+      prisma.shop.count({ where: { status: 'demo' } }),
+      prisma.shop.count({ where: { status: 'hidden' } }),
+      prisma.product.count(),
+      prisma.order.count(),
+      prisma.ownerSession.findMany({ where: { expiresAt: { gt: new Date(clock()) } }, select: { shopId: true } }),
+    ]);
+    const claimed = new Set(claimedIds.map(x => x.shopId).filter(Boolean));
+    const shops = await prisma.shop.findMany({ where: { status: { not: 'demo' } }, orderBy: { name: 'asc' }, take: 500,
+      include: { tenancy: { include: { unit: { include: { building: true } } } }, _count: { select: { products: true } } } });
+    const claims = await prisma.ownerClaim.findMany({ where: { status: 'PENDING', expiresAt: { gt: new Date(clock() - 7 * 86400000) } }, orderBy: { createdAt: 'desc' }, take: 100, include: { shop: true, venue: true } });
+    const recent = await prisma.order.findMany({ orderBy: { createdAt: 'desc' }, take: 50, include: { shop: true, items: true } });
+    return { ok: true,
+      counts: { live, demo, hidden, products, orders, claimed: claimed.size },
+      shops: shops.map(s2 => ({ id: s2.id, name: s2.name, nameAm: s2.nameAm, slug: s2.slug, phone: s2.phone, status: s2.status, products: s2._count.products,
+        claimed: claimed.has(s2.id), building: s2.tenancy && s2.tenancy.unit && s2.tenancy.unit.building ? s2.tenancy.unit.building.name : null,
+        unit: s2.tenancy && s2.tenancy.unit ? s2.tenancy.unit.number : null })),
+      claims: claims.map(c => ({ id: c.id, kind: c.kind, phone: c.phone, name: c.name, createdAt: c.createdAt, expiresAt: c.expiresAt,
+        target: c.shop ? (c.shop.nameAm || c.shop.name) : c.venue ? (c.venue.nameAm || c.venue.name) : null })),
+      orders: recent.map(o => ({ id: o.id, createdAt: o.createdAt, shop: o.shop ? (o.shop.nameAm || o.shop.name) : '', customerName: o.customerName, customerPhone: o.customerPhone, items: o.items.length, total: o.total, status: o.status })) };
+  });
+
   fastify.get('/api/business/ops/claims', async (req, reply) => {
     if (!ops(req, reply)) return;
     const rows = await prisma.ownerClaim.findMany({ where: { status: 'PENDING' }, orderBy: { createdAt: 'desc' }, take: 100, include: { shop: true, venue: true } });

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business ops | BinaSmart</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=5">
+<style>
+.wrap{max-width:980px;padding-bottom:40px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;color:var(--mute)}
+.mini{font-size:11px;color:var(--mute)}
+.btn.sm{margin:2px 2px 2px 0}
+h2{margin-top:0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.tabs button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-weight:800;font-family:inherit;cursor:pointer;font-size:13px;color:var(--ink)}
+.tabs button.on{border-color:var(--brand);background:#f3faf7;color:var(--brand)}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:12px}
+.stat div{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-size:22px}
+.stat small{color:var(--mute);font-size:11px}
+input[type=search]{margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="/business">Bina<span>Smart</span> 🏪 ops</a><span class="sp"></span><a class="lnk" id="cinLnk" href="/ops/cinema">🎬 cinema ops</a>&nbsp;&nbsp;<a class="lnk" href="/owner">🏢 building owner</a></div>
+  <div id="auth" class="card" hidden><label>Owner key</label><input id="key" type="password"><button class="btn sm" id="keyGo" style="margin-top:8px">Enter</button><div class="mini">Or open /ops/business?key=…</div></div>
+  <div id="main" hidden>
+    <div class="stat" id="stat"></div>
+    <div class="tabs"><button class="on" data-t="claims">Claims <span id="cN"></span></button><button data-t="shops">Shops</button><button data-t="orders">Orders</button></div>
+
+    <div id="t-claims">
+      <div class="card"><h2>Pending claims</h2>
+        <div class="mini" style="margin-bottom:8px">Someone entered a phone that matches a shop or venue. Approve only if you know the person: approving hands them full control of that page.</div>
+        <div id="claims"></div></div>
+    </div>
+
+    <div id="t-shops" hidden>
+      <div class="card"><h2>Shops</h2>
+        <input type="search" id="q" placeholder="Search name or phone…">
+        <div class="mini" style="margin-bottom:8px">live = public page + claimable · demo = seeded rows, never public · hidden = removed from the site.</div>
+        <div id="shops"></div></div>
+    </div>
+
+    <div id="t-orders" hidden><div class="card"><h2>Recent orders</h2><div id="orders"></div></div></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var KEY = new URLSearchParams(location.search).get('key') || sessionStorage.getItem('bina_owner_key') || '';
+  var TZ = 'Africa/Addis_Ababa', SHOPS = [];
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function when(d) { return d ? new Date(d).toLocaleString('en-GB', { timeZone: TZ, day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—'; }
+  var tt; function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { t.classList.remove('on'); }, 2600); }
+  function api(p, body) { return fetch(p, { method: body ? 'POST' : 'GET', headers: { 'x-owner-key': KEY, 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined }).then(function (r) { return r.json(); }); }
+
+  function boot() {
+    if (!KEY) { $('auth').hidden = false; $('main').hidden = true; return; }
+    sessionStorage.setItem('bina_owner_key', KEY);
+    $('cinLnk').href = '/ops/cinema?key=' + encodeURIComponent(KEY);
+    api('/api/business/ops/overview').then(function (j) {
+      if (!j.ok) { $('auth').hidden = false; $('main').hidden = true; toast(j.error || 'unauthorized'); return; }
+      $('auth').hidden = true; $('main').hidden = false;
+      SHOPS = j.shops;
+      $('stat').innerHTML = '<div><b>' + j.counts.live + '</b><small>live shops</small></div>'
+        + '<div><b>' + j.counts.claimed + '</b><small>claimed</small></div>'
+        + '<div><b>' + j.counts.products + '</b><small>products</small></div>'
+        + '<div><b>' + j.counts.orders + '</b><small>orders</small></div>'
+        + '<div><b>' + j.counts.demo + '</b><small>demo (never public)</small></div>';
+      $('cN').textContent = j.claims.length ? '(' + j.claims.length + ')' : '';
+      $('claims').innerHTML = j.claims.length ? '<table><tr><th>Business</th><th>Phone</th><th>Asked</th><th>Expires</th><th></th></tr>' + j.claims.map(function (c) {
+        return '<tr><td><b>' + esc(c.target || '—') + '</b><div class="mini">' + c.kind + (c.name ? ' · ' + esc(c.name) : '') + '</div></td><td><a href="tel:' + esc(c.phone) + '">' + esc(c.phone) + '</a></td><td>' + when(c.createdAt) + '</td><td>' + when(c.expiresAt) + '</td>'
+          + '<td><button class="btn sm" data-ap="' + c.id + '">✅ approve</button></td></tr>'; }).join('') + '</table>' : '<div class="sub">No pending claims.</div>';
+      paintShops();
+      $('orders').innerHTML = j.orders.length ? '<table><tr><th>When</th><th>Shop</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th></tr>' + j.orders.map(function (o) {
+        return '<tr><td>' + when(o.createdAt) + '</td><td>' + esc(o.shop) + '</td><td>' + esc(o.customerName || '') + '<div class="mini">' + esc(o.customerPhone || '') + '</div></td><td>' + o.items + '</td><td>' + o.total + ' ብር</td><td><span class="pill ' + (o.status === 'NEW' ? 'warn' : o.status === 'COMPLETED' ? 'ok' : 'mute') + '">' + o.status + '</span></td></tr>'; }).join('') + '</table>' : '<div class="sub">No orders yet.</div>';
+    });
+  }
+  function paintShops() {
+    var q = ($('q').value || '').toLowerCase();
+    var rows = SHOPS.filter(function (s) { return !q || (s.name + ' ' + (s.nameAm || '') + ' ' + s.phone).toLowerCase().indexOf(q) >= 0; }).slice(0, 200);
+    $('shops').innerHTML = '<table><tr><th>Shop</th><th>Phone</th><th>Building</th><th>Products</th><th>Status</th><th></th></tr>' + rows.map(function (s) {
+      return '<tr><td><b>' + esc(s.nameAm || s.name) + '</b><div class="mini">' + esc(s.name) + (s.claimed ? ' · <b>claimed</b>' : '') + '</div></td><td>' + esc(s.phone) + '</td><td>' + esc(s.building || '—') + '<div class="mini">' + esc(s.unit || '') + '</div></td><td>' + s.products + '</td>'
+        + '<td><span class="pill ' + (s.status === 'live' ? 'ok' : s.status === 'demo' ? 'mute' : 'bad') + '">' + s.status + '</span></td>'
+        + '<td>' + (s.slug && s.status === 'live' ? '<a class="btn sm ghost" href="/shop/' + esc(s.slug) + '" target="_blank">page</a><a class="btn sm ghost" href="/menu/' + esc(s.slug) + '" target="_blank">menu</a>' : '')
+        + '<button class="btn sm ghost" data-st="' + (s.status === 'live' ? 'hidden' : 'live') + '" data-id="' + s.id + '">' + (s.status === 'live' ? 'hide' : 'make live') + '</button></td></tr>'; }).join('') + '</table>'
+      + (rows.length === 200 ? '<div class="mini">showing the first 200 — use search</div>' : '');
+  }
+  $('q').addEventListener('input', paintShops);
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.t) { Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function (x) { x.classList.toggle('on', x === b); }); ['claims', 'shops', 'orders'].forEach(function (t) { $('t-' + t).hidden = t !== b.dataset.t; }); }
+    if (b.dataset.ap) { if (!confirm('Approve this claim? They get full control of that page.')) return; api('/api/business/ops/claims/' + b.dataset.ap + '/approve', {}).then(function (j) { toast(j.ok ? 'Approved — they can sign in now' : (j.error || 'failed')); boot(); }); }
+    if (b.dataset.st) { api('/api/business/ops/shops/' + b.dataset.id + '/status', { status: b.dataset.st }).then(function (j) { toast(j.ok ? 'Now ' + b.dataset.st : (j.error || 'failed')); boot(); }); }
+  });
+  $('keyGo').addEventListener('click', function () { KEY = $('key').value.trim(); boot(); });
+  boot();
+})();
+</script>
+</body>
+</html>
