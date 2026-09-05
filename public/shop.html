@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ሱቅ · Shop | BinaSmart</title>
+<meta name="description" content="የሱቁ ገጽ በBinaSmart — ምርቶች፣ ዋጋ፣ የስራ ሰዓት፣ ስልክ እና ካርታ። A BinaSmart business page: products, prices, opening hours, phone and map.">
+<link rel="canonical" href="https://bina.et/business">
+<meta property="og:type" content="website"><meta property="og:locale" content="am_ET"><meta property="og:site_name" content="BinaSmart">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="geo.region" content="ET-AA"><meta name="geo.placename" content="Addis Ababa">
+<meta property="og:title" content="BinaSmart">
+<meta property="og:description" content="ምርቶች፣ ዋጋ፣ የስራ ሰዓት፣ ስልክ። Products, prices, opening hours, phone.">
+<meta property="og:url" content="https://bina.et/business">
+<meta property="og:image" content="https://bina.et/og-cinema.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b2a26">
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+Ethiopic:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/cinema/ui.css?v=5">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+.wrap{max-width:720px;padding-bottom:110px}
+.hero{display:flex;gap:12px;align-items:flex-start}
+.hero .logo-img{width:64px;height:64px;border-radius:16px;background:#eef3f1;flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px}
+.hero .logo-img img{width:100%;height:100%;object-fit:cover}
+.hero h1{font-size:22px;font-weight:900;line-height:1.2}
+.hero .en{display:block;font-size:14px;color:var(--mute);font-weight:600}
+.gal{display:flex;gap:8px;overflow-x:auto;margin-top:12px;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.gal img{height:150px;border-radius:12px;flex:none;object-fit:cover}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:12px}
+.acts a{display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:11px;font-weight:800;font-size:13px;text-decoration:none;color:var(--ink)}
+.menu{display:grid;gap:0}
+.prod{display:flex;gap:10px;align-items:center;border-top:1px solid var(--line);padding:11px 0}
+.prod .ph{width:60px;height:60px;border-radius:10px;background:#eef3f1;flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:24px}
+.prod .ph img{width:100%;height:100%;object-fit:cover}
+.prod .b{flex:1;min-width:0}
+.prod .b b{display:block;font-size:15px}
+.prod .b small{color:var(--mute);font-size:12px;display:block}
+.prod .price{font-weight:900;color:var(--brand);white-space:nowrap;margin-right:6px}
+.qtybox{display:flex;align-items:center;gap:6px}
+.qtybox button{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-size:18px;font-weight:900;cursor:pointer;font-family:inherit;color:var(--ink)}
+.qtybox button:disabled{opacity:.3}
+.qtybox b{min-width:16px;text-align:center;font-variant-numeric:tabular-nums}
+.grp{font-size:12px;font-weight:900;color:var(--brand);margin-top:14px}
+.hours-t{width:100%;border-collapse:collapse;font-size:14px}
+.hours-t td{padding:6px 0;border-bottom:1px solid var(--line)}
+.hours-t td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.hours-t tr.today td{font-weight:900;color:var(--brand)}
+.offer{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:14px;padding:12px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="/">Bina<span>Smart</span></a><span class="sp"></span><a class="lnk" href="/for-business">ሱቅ አለዎት?</a></div>
+  <div id="view"><div class="skel"></div></div>
+  <p class="foot" id="foot"></p>
+</div>
+<div class="bar" id="bar" hidden><div class="in"><div class="sel"><div class="s" id="barItems">—</div><div class="m" id="barTotal"></div></div><button class="btn" id="barGo">ይዘዙ · Order</button></div></div>
+<div class="sheet" id="sheet"><div class="pane">
+  <div class="grab"></div>
+  <h2 style="margin-top:0">ትዕዛዝ · Your order</h2>
+  <div class="sub" id="shItems"></div>
+  <label>ስም · Name</label><input id="fName" maxlength="60" autocomplete="name">
+  <label>ስልክ · Phone (09…)</label><input id="fPhone" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="09xx xxx xxx">
+  <label>ማስታወሻ · Note</label><input id="fNote" maxlength="300" placeholder="ስኳር የለም …">
+  <div class="tot"><span>ጠቅላላ · Total</span><span id="shTotal"></span></div>
+  <p class="sub" style="font-size:12px">ክፍያ የለም — ሱቁ ደውሎ ያረጋግጣል። · No online payment; the shop calls you back to confirm.</p>
+  <div class="err" id="shErr"></div>
+  <button class="btn" id="shGo">📞 ትዕዛዝ ላክ · Send order</button>
+  <button class="btn ghost" id="shBack" style="margin-top:8px">← ተመለስ</button>
+</div></div>
+<div class="toast" id="toast"></div>
+<script src="/static/business/shop.js?v=1"></script>
+</body>
+</html>
