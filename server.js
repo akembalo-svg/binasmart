@@ -810,7 +810,7 @@ function newsShell({ title, desc, canonical, extraHead = '', body, active = 'new
 ${extraHead}
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#faf8f4;--ink:#141414;--mut:#6f6a60;--line:#e8e2d6;--em:#059669;--gold:#b8860b}
+:root{--bg:#faf8f4;--ink:#141414;--mut:#6f6a60;--line:#e8e2d6;--em:#059669;--gold:#8a6a00}
 body{font-family:'Noto Serif Ethiopic',Georgia,'Segoe UI',serif;background:var(--bg);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased}
 .sans{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif}
 a{color:inherit;text-decoration:none}
