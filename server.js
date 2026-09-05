@@ -864,7 +864,7 @@ main{max-width:1080px;margin:0 auto;padding:0 20px}
 .cta-band{background:var(--ink);color:#fff;border-radius:24px;padding:34px 30px;margin:44px 0;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .cta-band h3{font-size:22px;font-weight:900}
 .cta-band p{color:#b9b4a9;font-size:14px;margin-top:4px}
-.cta-band a{background:var(--em);color:#fff;font-weight:800;border-radius:999px;padding:13px 26px;font-size:14px;flex-shrink:0}
+.cta-band a{background:#047857;color:#fff;font-weight:800;border-radius:999px;padding:13px 26px;font-size:14px;flex-shrink:0}
 footer{border-top:3px double var(--line);margin-top:20px}
 .ft-in{max-width:1080px;margin:0 auto;padding:30px 20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--mut);font-size:13px}
 /* article */
@@ -921,12 +921,19 @@ document.querySelectorAll('[data-deadline]').forEach(el=>{
   else{b.textContent=days; s.textContent=days===1?'ቀን ቀርቷል · day left':'ቀናት ቀርተዋል · days left';
     el.className='dl '+(days<3?'hot':days<=7?'mid':'ok');}
 });
-</script><script src="/static/bina-footer.js?v=5" defer></script></body></html>`;
+</script><script src="/static/bina-footer.js?v=6" defer></script></body></html>`;
 }
 
+// A post whose body starts at <h3> under the article's <h1> skips a level. Promote at render time.
+function promoteHeadings(html) {
+  const h = String(html || '');
+  if (/<h2[\s>]/i.test(h)) return h;
+  return h.replace(/<(\/?)h3([\s>])/gi, '<$1h2$2').replace(/<(\/?)h4([\s>])/gi, '<$1h3$2');
+}
 function catPill(cat) {
   const c = NEWS_CATS[cat] || '#6f6a60';
-  return `<span class="cat sans" style="color:${c}">${escH(cat)}</span>`;
+  // colour as a dot, text dark: the coloured text failed contrast (green on white 3.8:1)
+  return `<span class="cat sans"><i aria-hidden="true" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${c};margin-right:7px;vertical-align:1px"></i>${escH(cat)}</span>`;
 }
 
 // ---- NEWS HUB ----
@@ -964,14 +971,14 @@ fastify.get('/news/:slug', async (req, reply) => {
   const share = encodeURIComponent('https://bina.et/news/' + p.slug);
   const shareT = encodeURIComponent(p.title);
   const others = await prisma.newsPost.findMany({ where: { published: true, slug: { not: p.slug } }, orderBy: { publishedAt: 'desc' }, take: 3 });
-  const rel = others.map(o => { const c = cardFor(o.slug); return `<div class="card">${c ? `<a class="thumb" href="/news/${o.slug}"><img src="${c.thumb}" width="600" height="315" alt="" loading="lazy" decoding="async"></a>` : ''}${catPill(o.category)}<h3><a href="/news/${o.slug}">${escH(o.title)}</a></h3><div class="meta sans"><span>${amDate(o.publishedAt)}</span></div></div>`; }).join('');
+  const rel = others.map(o => { const c = cardFor(o.slug); return `<div class="card">${c ? `<a class="thumb" href="/news/${o.slug}" aria-label="${escH(o.title)}"><img src="${c.thumb}" width="600" height="315" alt="" loading="lazy" decoding="async"></a>` : ''}${catPill(o.category)}<h3><a href="/news/${o.slug}">${escH(o.title)}</a></h3><div class="meta sans"><span>${amDate(o.publishedAt)}</span></div></div>`; }).join('');
   const body = `<main><article class="art">
     ${catPill(p.category)}
     <h1>${escH(p.title)}</h1>
     <p class="lead">${escH(p.excerpt)}</p>
     <div class="rule sans"><span>${escH(p.author)}</span><span>·</span><span>${amDate(p.publishedAt)}</span><span>·</span><span>${p.readMinutes} ደቂቃ ንባብ</span></div>
     ${(() => { const c = cardFor(p.slug); return c ? `<figure class="art-hero"><img src="${c.full}" width="1200" height="630" alt="${escH(p.title)}" fetchpriority="high" decoding="async"></figure>` : ''; })()}
-    <div class="body-t">${p.bodyHtml}</div>
+    <div class="body-t">${promoteHeadings(p.bodyHtml)}</div>
     <div class="share sans">
       <a href="https://t.me/share/url?url=${share}&text=${shareT}">📣 Telegram</a>
       <a href="https://wa.me/?text=${shareT}%0A${share}">💬 WhatsApp</a>
@@ -1209,7 +1216,7 @@ function pub(){
      setTimeout(()=>location.reload(),1200);
    }).catch(e=>document.getElementById('cnt').textContent='Error: '+e);
 }
-</script><script src="/static/bina-footer.js?v=5" defer></script></body></html>`);
+</script><script src="/static/bina-footer.js?v=6" defer></script></body></html>`);
 });
 
 fastify.post('/api/admin/tender-queue/publish', async (req, reply) => {
@@ -1562,7 +1569,7 @@ fastify.get('/owner/:slug/report', async (req, reply) => {
     + '<tr><td>Owner dashboard</td><td>https://bina.et/owner/' + b.qrSlug + '</td></tr>'
     + '<tr><td>Printable entrance poster</td><td>https://bina.et/static/qr-poster.html?b=' + b.qrSlug + '</td></tr></table>'
     + '<footer>Confidential — prepared for the owner of ' + b.name + ' · BinaSmart Building Management · bina.et</footer>'
-    + '<script src="/static/bina-footer.js?v=5" defer></script></body></html>';
+    + '<script src="/static/bina-footer.js?v=6" defer></script></body></html>';
   reply.type('text/html').send(html);
 });
 
@@ -1997,7 +2004,7 @@ fastify.get('/owner/:slug/vat-report', async (req, reply) => {
     + '<h2>2 · Input — Expenses (' + expenses.length + ')</h2><table><tr><th>Date</th><th>Vendor</th><th>Category</th><th>Receipt</th><th>Amount</th><th>VAT</th></tr>' + expRows
     + '<tr><th colspan="4">TOTAL</th><th class="r">' + fmt(expTotal) + '</th><th class="r">' + fmt(inputVat) + '</th></tr></table>'
     + '<footer>Prepared by BinaSmart · bina.et · Based on VAT Proclamation No. 1341/2024 (15%). This is a management summary — please verify with your accountant before filing with the Ministry of Revenues.</footer>'
-    + '<script src="/static/bina-footer.js?v=5" defer></script></body></html>';
+    + '<script src="/static/bina-footer.js?v=6" defer></script></body></html>';
   reply.type('text/html').send(html);
 });
 
@@ -2446,7 +2453,7 @@ fastify.get('/pay/callback', async (req, reply) => {
   const body='<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+(ok?'ክፍያ ተሳክቷል':'ክፍያ በመጠባበቅ ላይ')+' · BinaSmart</title>'+
   ''+
   '<style>*{margin:0;box-sizing:border-box}body{font-family:\'Plus Jakarta Sans\',\'Noto Sans Ethiopic\',sans-serif;background:#f6faf9;color:#0b2a26;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.c{background:#fff;border:1.5px solid #e2ece9;border-radius:24px;padding:34px 26px;max-width:400px;text-align:center;box-shadow:0 20px 50px -26px rgba(11,42,38,.4)}.ic{width:84px;height:84px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff;background:'+(ok?'linear-gradient(135deg,#059669,#0aa88f)':'linear-gradient(135deg,#d97706,#f59e0b)')+'}h1{font-size:22px;font-weight:800}p{color:#5c7371;font-size:14px;margin-top:8px}.amt{font-size:30px;font-weight:800;color:#057461;margin:14px 0}a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;font-weight:800;border-radius:999px;padding:13px 28px;text-decoration:none}</style></head>'+
-  '<body><div class="c"><div class="ic">'+(ok?'✓':'⏳')+'</div><h1 class="am">'+(ok?'ክፍያ ተሳክቷል!':'ክፍያ በመጠባበቅ ላይ ነው')+'</h1>'+(amt?'<div class="amt">ETB '+amt+'</div>':'')+'<p class="am">'+(ok?('የ'+ (purpose||'BinaSmart') +' ክፍያዎ ተከፍሏል። እናመሰግናለን!'):'ክፍያዎ ገና አልተረጋገጠም። ካጠናቀቁ ትንሽ ቆይተው ይሞክሩ።')+'</p><p style="font-size:11px;margin-top:10px">Ref: '+(ref||'')+'</p><a href="/" class="am">← ወደ BinaSmart</a></div><script src="/static/bina-footer.js?v=5" defer></script></body></html>';
+  '<body><div class="c"><div class="ic">'+(ok?'✓':'⏳')+'</div><h1 class="am">'+(ok?'ክፍያ ተሳክቷል!':'ክፍያ በመጠባበቅ ላይ ነው')+'</h1>'+(amt?'<div class="amt">ETB '+amt+'</div>':'')+'<p class="am">'+(ok?('የ'+ (purpose||'BinaSmart') +' ክፍያዎ ተከፍሏል። እናመሰግናለን!'):'ክፍያዎ ገና አልተረጋገጠም። ካጠናቀቁ ትንሽ ቆይተው ይሞክሩ።')+'</p><p style="font-size:11px;margin-top:10px">Ref: '+(ref||'')+'</p><a href="/" class="am">← ወደ BinaSmart</a></div><script src="/static/bina-footer.js?v=6" defer></script></body></html>';
   reply.type('text/html').send(body);
 });
 // Test checkout page
@@ -2471,7 +2478,7 @@ fastify.get('/pay', async (req, reply) => {
   'function body(){return{amount:amount(),name:document.getElementById("name").value,email:document.getElementById("email").value,phone:document.getElementById("phone").value,purpose:PURPOSE,bt:BT,bc:BC};}'+
   'async function payChapa(){var e=document.getElementById("err");e.textContent="";var amt=amount();if(!amt||amt<1){e.textContent="ትክክለኛ መጠን ያስገቡ";return;}var b=document.getElementById("cbtn");b.disabled=true;b.textContent="…";try{var r=await fetch("/api/pay/init",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body())});var j=await r.json();if(j.ok&&j.checkout_url){location.href=j.checkout_url;}else{e.textContent=(j.error||"አልተሳካም");b.disabled=false;b.textContent="💳 በ Chapa ይክፈሉ →";}}catch(x){e.textContent="ስህተት";b.disabled=false;b.textContent="💳 በ Chapa ይክፈሉ →";}}'+
   'async function payWallet(){var e=document.getElementById("err");e.textContent="";var amt=amount();if(!amt||amt<1){e.textContent="ትክክለኛ መጠን ያስገቡ";return;}var tok=localStorage.getItem("bina_wallet_tok");if(!tok){if(confirm("ወደ ዋሌትዎ መግባት ያስፈልጋል። አሁን ይግቡ?"))location.href="/wallet";return;}var b=document.getElementById("wbtn");b.disabled=true;b.textContent="…";try{var r=await fetch("/api/wallet/pay",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:tok,amount:amt,bt:BT,bc:BC,purpose:PURPOSE})});var j=await r.json();if(j.ok){location.href="/pay/callback?ref=wallet&ok=1&amt="+amt;}else if(r.status===402){e.textContent="በ ዋሌትዎ በቂ ገንዘብ የለም። ";if(confirm("ገንዘብ ይሙሉ?"))location.href="/wallet";b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}else if(r.status===401){location.href="/wallet";}else{e.textContent=(j.error||"አልተሳካም");b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}}catch(x){e.textContent="ስህተት";b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}}'+
-  '</script><script src="/static/bina-footer.js?v=5" defer></script></body></html>';
+  '</script><script src="/static/bina-footer.js?v=6" defer></script></body></html>';
   reply.type('text/html').send(body);
 });
 
@@ -2579,7 +2586,7 @@ function logout(){localStorage.removeItem('bina_wallet_tok');T='';$('dashView').
   if(T){showDash();}else{$('authView').classList.remove('hide');setMode('login');}
 })();
 </script>
-</div><script src="/static/bina-footer.js?v=5" defer></script></body></html>`;
+</div><script src="/static/bina-footer.js?v=6" defer></script></body></html>`;
 
 // ===== BINASMART WALLET (phone + PIN, Chapa top-up) =====
 function walletTok(){ return cryptoMod.randomBytes(24).toString('hex'); }
