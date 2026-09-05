@@ -81,6 +81,11 @@
       var url = j.url || (location.origin + '/shop/' + (j.shop && j.shop.slug));
       $('myUrl').textContent = url.replace(/^https?:\/\//, '');
       $('openPage').href = url;
+      var tgA = $('tgAlert');
+      if (tgA) tgA.innerHTML = j.kind !== 'shop' ? '' : (j.tgLinked
+        ? '<b style="color:#065f46">✅ ተገናኝቷል · Linked — orders and requests arrive on Telegram.</b>'
+        : '<a class="btn" style="display:inline-block;text-decoration:none" target="_blank" rel="noopener" href="https://t.me/bina_smart_bot?start=shop_' + j.shopId + '">✈️ በቴሌግራም አገናኝ · Connect Telegram</a>'
+          + '<div class="sub" style="margin-top:6px">ከተጫኑ በኋላ በቦቱ ላይ Start ይንኩ። · Press Start in the bot, then reload this page.</div>');
       $('qrImg').src = 'https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=10&data=' + encodeURIComponent(url);
       $('copyUrl').onclick = function () { navigator.clipboard.writeText(url).then(function () { toast('ተቀድቷል · copied'); }); };
     });

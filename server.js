@@ -189,9 +189,9 @@ fastify.post('/api/restaurant/:shopId/order', async (req, reply) => {
   const b = shop.tenancy.unit.building;
   const code = 'OD-' + order.id.slice(-6).toUpperCase();
   await audit(b.id, 'FOOD_ORDER', shop.name + (table ? ' · Table ' + table : '') + ' · ' + code, total);
-  if (NOTIFY_WHITELIST.includes(b.qrSlug)) {
+  if (shop.status === 'live') {
     const summary = lines.map(l => { const p = prods.find(x => x.id === l.productId); return l.qty + '× ' + (p.nameAm || p.name); }).join(', ');
-    sendWa(shop.phone, '🍽️ አዲስ ትዕዛዝ / NEW ORDER ' + code + (table ? ' · Table ' + table : '') + '\n' + summary + '\n💰 ' + total.toLocaleString() + ' ETB', WA_CHANNEL[b.qrSlug]).catch(() => {});
+    notifyShop(shop, '🍽️ አዲስ ትዕዛዝ / NEW ORDER ' + code + (table ? ' · Table ' + table : '') + '\n' + summary + '\n💰 ' + total.toLocaleString() + ' ETB', WA_CHANNEL[b.qrSlug]).catch(() => {});
   }
   return { ok: true, code, orderId: order.id, total };
 });
@@ -440,8 +440,8 @@ fastify.post('/api/flights/:shopId/request', async (req, reply) => {
     cabin: ['BUSINESS'].includes(cabin) ? cabin : 'ECONOMY', name, phone: phone.trim(), note: note || null, code } });
   const b = shop.tenancy.unit.building;
   await audit(b.id, 'FLIGHT_REQUEST', name + ' · ' + fromCity + '→' + toCity + ' ×' + pax + ' · ' + code, 0);
-  if (NOTIFY_WHITELIST.includes(b.qrSlug)) {
-    sendWa(shop.phone, '✈️ አዲስ የበረራ ጥያቄ / NEW FLIGHT REQUEST ' + code + '\n👤 ' + name + ' (' + phone + ')\n🛫 ' + fromCity + ' → ' + toCity + (tripType === 'ONEWAY' ? ' (one-way)' : ' 🔁 return ' + (returnDate || '')) + '\n📅 ' + departDate + ' · ' + pax + ' pax · ' + (cabin || 'ECONOMY') + (note ? '\n📝 ' + note : '') + '\n\nReply with your best price to win this customer. / ዋጋ ይላኩ።', WA_CHANNEL[b.qrSlug]).catch(() => {});
+  if (shop.status === 'live') {
+    notifyShop(shop, '✈️ አዲስ የበረራ ጥያቄ / NEW FLIGHT REQUEST ' + code + '\n👤 ' + name + ' (' + phone + ')\n🛫 ' + fromCity + ' → ' + toCity + (tripType === 'ONEWAY' ? ' (one-way)' : ' 🔁 return ' + (returnDate || '')) + '\n📅 ' + departDate + ' · ' + pax + ' pax · ' + (cabin || 'ECONOMY') + (note ? '\n📝 ' + note : '') + '\n\nReply with your best price to win this customer. / ዋጋ ይላኩ።', WA_CHANNEL[b.qrSlug]).catch(() => {});
   }
   return { ok: true, code, agency: shop.name, agencyPhone: shop.phone };
 });
@@ -1704,6 +1704,10 @@ async function sendWa(phone, message, channel){
   return false;
 }
 const TG_TOKEN = process.env.BINASMART_TG_TOKEN || '';
+const { makeNotify } = require('./notify/notify');
+const ADMIN_TG_CHAT = process.env.BINASMART_ADMIN_TG_CHAT || '';
+// Telegram first, WhatsApp as backup, admin copy always — see notify/notify.js
+const { notifyShop } = makeNotify({ sendTg, sendWa, adminChatId: ADMIN_TG_CHAT, log: console.log });
 async function sendTg(chatId, text){
   if (!TG_TOKEN || !chatId) return false;
   try{

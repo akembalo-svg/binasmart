@@ -196,7 +196,7 @@ module.exports = function registerBusiness(fastify, deps) {
       prisma.offer.count({ where: { shopId: shop.id, active: true } }),
       prisma.order.count({ where: { shopId: shop.id, status: 'NEW' } }),
     ]);
-    return { ok: true, kind: 'shop', pages, shop: pubShop({ ...shop, slug }), counts: { products, offers, newOrders: orders }, url: base + '/shop/' + slug, categories: CATEGORIES.map(c => ({ value: c, am: CAT_AM[c] })) };
+    return { ok: true, kind: 'shop', pages, shopId: shop.id, tgLinked: !!shop.tgChatId, shop: pubShop({ ...shop, slug }), counts: { products, offers, newOrders: orders }, url: base + '/shop/' + slug, categories: CATEGORIES.map(c => ({ value: c, am: CAT_AM[c] })) };
   });
   fastify.post('/api/business/switch', async (req, reply) => {
     const s = await me(req, reply); if (!s) return;

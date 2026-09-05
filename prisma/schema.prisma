@@ -341,6 +341,7 @@ model Shop {
   favorites     Favorite[]
   jobPosts      JobPost[]
   slug          String?  @unique     // public page: /shop/<slug>
+  tgChatId      String?              // Telegram chat that gets orders/requests (owner pressed the bot link)
   ownerPhone    String?              // the phone that may claim this shop
   logoUrl       String?
   about         String?              // longer description shown on the page

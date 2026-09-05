@@ -13,7 +13,7 @@ const MENU = [
 const COMMANDS = { cinema: '/cinema', watch: '/watch', films: '/watch', ride: '/ride', hotels: '/hotel/bina-grand-hotel', restaurants: '/restaurant/bina-restaurant', hospitals: '/hospital/bina-general-hospital', events: '/cinema', property: '/property', cars: '/cars', insurance: '/insurance', guides: '/guides', ai: '/ai' };
 const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 
-function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername }) {
+function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
   const hist = new Map(); // chatId -> { turns: [{role, content}], t }
   const menuMarkup = () => ({ inline_keyboard: MENU.map(row => row.map(b => ({ text: b.text, web_app: { url: baseUrl + b.path } }))) });
@@ -69,6 +69,15 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername }
     if (!msg || !msg.chat) return;
     const chatId = String(msg.chat.id);
     const text = String(msg.text || '').trim();
+    // A shop owner pressed the dashboard's link: t.me/bina_smart_bot?start=shop_<id>. From now on that
+    // shop's orders and requests come to this chat instead of a WhatsApp number that may be banned.
+    const sl = /^\/start\s+shop_([A-Za-z0-9]+)\b/.exec(text);
+    if (sl && linkShop) {
+      const shop = await linkShop(sl[1], chatId).catch(() => null);
+      return api.sendMessage(chatId, shop
+        ? '🔔 ' + (shop.nameAm || shop.name) + ' — ትዕዛዞችና ጥያቄዎች ከአሁን ጀምሮ እዚህ ይደርሱዎታል።\nOrders and requests for this page will arrive here from now on.'
+        : 'ይህ ገጽ አልተገኘም። · That page was not found. Open bina.et/business and press the Telegram button again.');
+    }
     const tk = /^\/start\s+ticket_(BINA-?[A-Z0-9]{6})\b/i.exec(text);
     if (tk) return sendTicket(chatId, tk[1].toUpperCase().replace(/^BINA-?/, 'BINA-'));
     if (!text || /^\/start\b/.test(text) || /^\/(help|menu)\b/.test(text)) {
