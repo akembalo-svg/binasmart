@@ -36,10 +36,10 @@ const last = (s, re) => { const m = [...String(s).matchAll(re)]; return m.length
 
   // 1. links (the long one: ~10 min, one host at a time on purpose)
   const l = run('node ops/link-audit.js', 25 * 60 * 1000);
-  const lm = last(l.out, /checked (\d+) links on (\d+) pages across (\d+) hosts: (\d+) broken, (\d+) refused the crawler, (\d+) redirecting/g);
+  const lm = last(l.out, /checked (\d+) links on (\d+) pages across (\d+) hosts: (\d+) broken, (\d+) refused the crawler, (\d+) unreachable from the server, (\d+) redirecting/g);
   if (lm) {
     const broken = Number(lm[4]);
-    lines.push((broken ? '⚠️' : '✅') + ' Links: ' + lm[1] + ' checked, ' + broken + ' broken, ' + lm[5] + ' refused the crawler');
+    lines.push((broken ? '⚠️' : '✅') + ' Links: ' + lm[1] + ' checked, ' + broken + ' broken, ' + lm[5] + ' refused the crawler, ' + lm[6] + ' Ethiopian gov hosts unreachable from Paris (fine in Ethiopia)');
     if (broken) { problems.push('links'); const sect = l.out.split('=== BROKEN')[1] || ''; lines.push(sect.split('\n').slice(1, 7).filter(x => x.trim()).map(x => '   ' + x.trim().slice(0, 90)).join('\n')); }
   } else { lines.push('⚠️ Links: audit did not finish'); problems.push('links'); }
 

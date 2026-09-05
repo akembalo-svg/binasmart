@@ -20,6 +20,10 @@ const ONLY_INTERNAL = process.argv.includes('--internal');
 // that does not look like one, which tells us nothing about whether the link works for a person.
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36 BinaSmartLinkAudit/1.1 (+https://bina.et)';
 const HOST_GAP_MS = 900;   // minimum spacing between two requests to the same host
+// Ethiopian government and bank hosts that the Paris server cannot reach but that answer normally
+// from Ethiopia and from the UAE (checked by hand, 5 Sep 2026). A failure here is the server's
+// route, not a dead link, so they are reported in their own section instead of as broken.
+const UNREACHABLE_FROM_SERVER = ['ecc.gov.et', 'etrade.gov.et', 'ics.gov.et', 'mor.gov.et', 'www.ethiotelecom.et', 'ethiotelecom.et', 'combanketh.et'];
 
 const get = async (url, method = 'GET') => {
   const c = new AbortController(); const t = setTimeout(() => c.abort(), 20000);
@@ -73,6 +77,18 @@ function isRealLink(raw) {
       links.get(u).add(p.replace(BASE, '') || '/');
     }
   }
+  // The footer is injected by /static/bina-footer.js, so its links never appear in the fetched HTML.
+  // /for-filmmakers was a 404 on all 61 pages for days and this audit said "clean". Read the
+  // footer's link table directly and count every entry as appearing on every page.
+  try {
+    const fjs = await text(BASE + '/static/bina-footer.js');
+    for (const m of fjs.matchAll(/\[\s*'[^']*',\s*'[^']*',\s*'([^']+)'\s*\]/g)) {
+      const u = new URL(m[1], BASE).toString().replace(/#.*$/, '');
+      if (!/^https?:/.test(u) || (ONLY_INTERNAL && !u.startsWith(BASE))) continue;
+      if (!links.has(u)) links.set(u, new Set());
+      links.get(u).add('(footer, every page)');
+    }
+  } catch (e) { console.log('  !! could not read the footer script: ' + e.message); }
   console.log('unique links found: ' + links.size);
 
   // Group by host so each host is checked by exactly one worker, spaced out. Different hosts still
@@ -84,7 +100,7 @@ function isRealLink(raw) {
     byHost.get(h).push(u);
   }
   const hosts = [...byHost.keys()];
-  const bad = [], redirects = [], blocked = [];
+  const bad = [], redirects = [], blocked = [], geo = [];
   let checked = 0, hi = 0;
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   await Promise.all(Array.from({ length: Math.min(10, hosts.length) }, async () => {
@@ -99,6 +115,7 @@ function isRealLink(raw) {
         const seen = links.get(u);
         const on = [...seen].slice(0, 3).join(', ') + (seen.size > 3 ? ' +' + (seen.size - 3) : '');
         if (r.status === 403 || r.status === 429) blocked.push({ u, status: r.status, on });
+        else if (r.status === 0 && UNREACHABLE_FROM_SERVER.includes(host)) geo.push({ u, status: r.error, on });
         else if (r.status >= 400 || r.status === 0) bad.push({ u, status: r.status || r.error, on });
         else if (r.status >= 300) redirects.push({ u, status: r.status, to: r.location, on });
         if ((checked % 50) === 0) process.stdout.write('  checked ' + checked + '/' + links.size + '\n');
@@ -116,8 +133,11 @@ function isRealLink(raw) {
   blocked.forEach(x => { const h = new URL(x.u).host; hostCount[h] = (hostCount[h] || 0) + 1; });
   Object.entries(hostCount).forEach(([h, n]) => console.log('  ' + h + ' — ' + n + ' link(s)'));
 
+  console.log('\n=== UNREACHABLE FROM THIS SERVER, fine from Ethiopia (' + geo.length + ') ===');
+  geo.forEach(x => console.log('  ' + x.u));
+
   console.log('\n=== REDIRECTS (' + redirects.length + ') ===');
   redirects.forEach(x => console.log(fmt(x)));
   console.log('\nchecked ' + links.size + ' links on ' + pages.length + ' pages across ' + hosts.length
-    + ' hosts: ' + bad.length + ' broken, ' + blocked.length + ' refused the crawler, ' + redirects.length + ' redirecting');
+    + ' hosts: ' + bad.length + ' broken, ' + blocked.length + ' refused the crawler, ' + geo.length + ' unreachable from the server, ' + redirects.length + ' redirecting');
 })();
