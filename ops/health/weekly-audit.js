@@ -40,7 +40,7 @@ const last = (s, re) => { const m = [...String(s).matchAll(re)]; return m.length
   if (lm) {
     const broken = Number(lm[4]);
     lines.push((broken ? '⚠️' : '✅') + ' Links: ' + lm[1] + ' checked, ' + broken + ' broken, ' + lm[5] + ' refused the crawler, ' + lm[6] + ' Ethiopian gov hosts unreachable from Paris (fine in Ethiopia)');
-    if (broken) { problems.push('links'); const sect = l.out.split('=== BROKEN')[1] || ''; lines.push(sect.split('\n').slice(1, 7).filter(x => x.trim()).map(x => '   ' + x.trim().slice(0, 90)).join('\n')); }
+    if (broken) { problems.push('links'); const sect = (l.out.split('=== BROKEN')[1] || '').split('\n===')[0]; lines.push(sect.split('\n').slice(1, 7).filter(x => x.trim()).map(x => '   ' + x.trim().slice(0, 90)).join('\n')); }
   } else { lines.push('⚠️ Links: audit did not finish'); problems.push('links'); }
 
   // 2. buttons

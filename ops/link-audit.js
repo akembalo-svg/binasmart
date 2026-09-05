@@ -115,7 +115,7 @@ function isRealLink(raw) {
         const seen = links.get(u);
         const on = [...seen].slice(0, 3).join(', ') + (seen.size > 3 ? ' +' + (seen.size - 3) : '');
         if (r.status === 403 || r.status === 429) blocked.push({ u, status: r.status, on });
-        else if (r.status === 0 && UNREACHABLE_FROM_SERVER.includes(host)) geo.push({ u, status: r.error, on });
+        else if (r.status === 0 && UNREACHABLE_FROM_SERVER.some(h => host === h || host.endsWith('.' + h))) geo.push({ u, status: r.error, on });
         else if (r.status >= 400 || r.status === 0) bad.push({ u, status: r.status || r.error, on });
         else if (r.status >= 300) redirects.push({ u, status: r.status, to: r.location, on });
         if ((checked % 50) === 0) process.stdout.write('  checked ' + checked + '/' + links.size + '\n');
