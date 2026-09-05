@@ -1703,7 +1703,8 @@ async function sendWa(phone, message, channel){
   }
   return false;
 }
-const TG_TOKEN = process.env.BINASMART_TG_TOKEN || '';
+// Must be @bina_smart_bot: owners link through that bot, and Telegram only lets the same bot message them.
+const TG_TOKEN = process.env.BINA_RIDER_BOT_TOKEN || process.env.BINASMART_TG_TOKEN || '';
 const { makeNotify } = require('./notify/notify');
 const ADMIN_TG_CHAT = process.env.BINASMART_ADMIN_TG_CHAT || '';
 // Telegram first, WhatsApp as backup, admin copy always — see notify/notify.js
