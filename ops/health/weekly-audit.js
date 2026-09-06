@@ -13,6 +13,7 @@
 //   ops/button-audit.js     buttons and handlers that cannot reach any code
 //   ops/js-clash-audit.js   two top-level declarations sharing a name on one page
 //   + a grep that no served file points at fonts.googleapis.com / fonts.gstatic.com again
+//   ops/link-graph.py       orphaned pages and news posts with no inbound link (link equity audit)
 //
 // Sends via the same bot the notifications use (@bina_smart_bot) to BINASMART_ADMIN_TG_CHAT and
 // BINASMART_OPS_TG_CHAT. Message says ✅ when everything is clean, ⚠️ with the counts otherwise.
@@ -60,6 +61,12 @@ const last = (s, re) => { const m = [...String(s).matchAll(re)]; return m.length
   const nf = Number((f.out || '').trim()) || 0;
   lines.push((nf ? '⚠️' : '✅') + ' Fonts: ' + (nf ? nf + ' file(s) point at Google Fonts again' : 'all served from bina.et'));
   if (nf) problems.push('fonts');
+
+  // 5. internal link graph: no editorial page may lose its last inbound link (6 Sep 2026 audit found 19)
+  const g = run('python3 ops/link-graph.py', 15 * 60 * 1000);
+  const gm = last(g.out, /linkgraph: (\d+) pages, (\d+) internal links, (\d+) orphaned editorial pages, (\d+) unreachable from home, (\d+) news posts with no inbound link/g);
+  if (gm) { const bad = Number(gm[3]) + Number(gm[5]); lines.push((bad ? '⚠️' : '✅') + ' Links in: ' + gm[1] + ' pages, ' + gm[3] + ' orphaned, ' + gm[5] + ' news posts with no way in'); if (bad) problems.push('internal links'); }
+  else { lines.push('⚠️ Links in: link graph did not finish'); problems.push('internal links'); }
 
   const head = problems.length ? '⚠️ BinaSmart weekly audit — ' + problems.length + ' area(s) need a look' : '✅ BinaSmart weekly audit — all clean';
   const text = head + '\n\n' + lines.filter(Boolean).join('\n') + '\n\n' + new Date().toISOString().slice(0, 10) + ' · ops/health/weekly-audit.js';
