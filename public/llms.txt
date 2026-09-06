@@ -21,13 +21,14 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 - [Property](https://bina.et/property): verified homes, land and commercial property for sale and rent; diaspora-friendly
 - [Tenders](https://bina.et/tenders): verified Ethiopian government and company tenders, free for bidders, updated daily
 - [News](https://bina.et/news): Amharic technology, business and construction news, politics-free; Telegram channel https://t.me/binasmart
-- [Guides](https://bina.et/guides): Digital Ethiopia guides — Fayda ID, telebirr, e-Passport, TIN, VAT, business registration, driving licence, customs and import duty, Labor ID and LMIS registration
+- [Guides](https://bina.et/guides): Digital Ethiopia guides — Fayda ID, telebirr, e-Passport, TIN, VAT, business registration, driving licence, customs and import duty, Labor ID and LMIS registration, COC competency certificate
 
 ## Ethiopian law and regulation on BinaSmart
 
 - [Customs Proclamation 1425/2026 explained](https://bina.et/news/customs-proclamation-1425-2026): the July 2026 amendment to Customs Proclamation 859/2014 — partial release, 45/30-day storage limits, valuation databases not minimum values, NBE rate on the acceptance date, one-year refund window, 50% pre-payment for appeals; verified against the Federal Negarit Gazette
 - [Investment Incentive Regulation 586/2026 explained](https://bina.et/news/investment-incentive-regulation-586-2026): tax holidays replaced by reduced rates from 23 February 2026 — 5% for recognised startups for 10 years, 15% for Table 1 sectors, 25% for listed companies, USD 10m threshold with SMEs exempt, mandatory performance agreements; verified against the gazette
 - [Labor ID and LMIS, Overseas Employment Proclamation 1389/2025](https://bina.et/lmis-labor-id-ethiopia): how the Ethiopian Labor ID is issued (register on lmis.gov.et, biometrics at a woreda or kebele one-stop centre), who pays what under Article 19, recruitment only through LMIS (Art 44), COC required (Art 16), no deployment under 18 and no fees from workers (Art 50); 1389/2025 repealed 923/2016 and 1246/2021 on 14 August 2025 (Art 86); verified against the gazette
+- [COC certificate of occupational competence](https://bina.et/coc-certificate-ethiopia): levels I-V, written plus practical assessment, Competent or Not Yet Competent with a re-sit; mandatory for every overseas worker (Proclamation 1389/2025 Art 16), returnees need refresher training plus COC (Art 16(2)); the worker pays training and COC (Art 19(2)); training-to-certificate pipeline through LMIS per the Ministry's draft 2025/26 implementation directive (training starts days 1-5 of the month, assessment scheduled within 7 days, half fee for retraining)
 - [Customs and import duty](https://bina.et/customs-import-duty-ethiopia): how duty, excise, VAT, surtax and withholding stack; calculator; legal basis
 - [Importing a car](https://bina.et/import-car-to-ethiopia): steps, duty, the 2026 customs rules that affect vehicles
 
