@@ -940,7 +940,16 @@ function catPill(cat) {
 // ---- NEWS HUB ----
 fastify.get('/news', async (req, reply) => {
   const cat = req.query.cat;
-  const posts = await prisma.newsPost.findMany({ where: { published: true, ...(cat ? { category: cat } : {}) }, orderBy: { publishedAt: 'desc' }, take: 25 });
+  // 25 per page with an older/newer pager: before this, posts past the 25th had no inbound link at all.
+  const PER = 25, pageNo = Math.max(1, parseInt(req.query.page, 10) || 1);
+  const whereN = { published: true, ...(cat ? { category: cat } : {}) };
+  const [posts, totalN] = await Promise.all([
+    prisma.newsPost.findMany({ where: whereN, orderBy: { publishedAt: 'desc' }, take: PER, skip: (pageNo - 1) * PER }),
+    prisma.newsPost.count({ where: whereN }),
+  ]);
+  if (pageNo > 1 && !posts.length) return reply.code(404).type('text/html').send(newsShell({ title: 'Not found', desc: '', canonical: 'https://bina.et/news', body: '<main><div class="empty"><div class="big">🗞️</div><h3>ገጹ የለም</h3><p class="sans"><a href="/news" style="color:var(--em)">← ወደ ዜና ገጽ</a></p></div></main>' })); // past the last page
+  const qCat = cat ? '&cat=' + encodeURIComponent(cat) : '';
+  const pager = totalN > PER ? `<div class="sans" style="display:flex;justify-content:space-between;align-items:center;gap:12px;max-width:1080px;margin:18px auto 0;padding:0 4px;font-weight:700">${pageNo > 1 ? `<a href="/news?page=${pageNo - 1}${qCat}">← አዲስ ዜናዎች · Newer</a>` : '<span></span>'}<span style="color:var(--mut);font-weight:600">ገጽ ${pageNo} / ${Math.ceil(totalN / PER)}</span>${pageNo * PER < totalN ? `<a href="/news?page=${pageNo + 1}${qCat}">የቀድሞ ዜናዎች · Older →</a>` : '<span></span>'}</div>` : '';
   const [hero, ...rest] = posts;
   const chips = ['ሁሉም', ...Object.keys(NEWS_CATS)].map(c =>
     `<a class="chip sans ${(!cat && c === 'ሁሉም') || cat === c ? 'on' : ''}" href="/news${c === 'ሁሉም' ? '' : '?cat=' + encodeURIComponent(c)}">${c}</a>`).join('');
@@ -959,9 +968,10 @@ fastify.get('/news', async (req, reply) => {
     <div class="chips" style="--chipon:#155e75">${chips}</div>
     ${heroHtml}
     <div class="grid">${cards}</div>
+    ${pager}
     <div class="cta-band sans"><div><h3>📋 የግንባታ ጨረታዎችን ይከታተሉ</h3><p>Daily construction & supply tenders from across Ethiopia.</p></div><a href="/tenders">ጨረታዎችን ይመልከቱ →</a></div>
   </main>`;
-  reply.type('text/html').send(newsShell({ title: 'Bina ዜና — ቴክኖሎጂ፣ ግንባታ እና ንግድ ዜና በአማርኛ', desc: 'Ethiopian technology, construction and business news in Amharic — politics-free. ቴክኖሎጂ፣ ግንባታ እና ንግድ ዜና በአማርኛ።', canonical: 'https://bina.et/news', body, active: 'news' }));
+  reply.type('text/html').send(newsShell({ title: 'Bina ዜና — ቴክኖሎጂ፣ ግንባታ እና ንግድ ዜና በአማርኛ', desc: 'Ethiopian technology, construction and business news in Amharic — politics-free. ቴክኖሎጂ፣ ግንባታ እና ንግድ ዜና በአማርኛ።', canonical: 'https://bina.et/news' + (pageNo > 1 ? '?page=' + pageNo : ''), body, active: 'news' }));
 });
 
 // ---- ARTICLE ----
@@ -971,7 +981,17 @@ fastify.get('/news/:slug', async (req, reply) => {
   const schema = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': p.evergreen ? 'Article' : 'NewsArticle', headline: p.title, description: p.excerpt, inLanguage: p.lang, datePublished: p.publishedAt, author: { '@type': 'Organization', name: 'Bina ዜና — BinaSmart' }, publisher: { '@type': 'Organization', name: 'BinaSmart', url: 'https://bina.et' }, mainEntityOfPage: 'https://bina.et/news/' + p.slug })}</script><meta name="robots" content="max-image-preview:large">`;
   const share = encodeURIComponent('https://bina.et/news/' + p.slug);
   const shareT = encodeURIComponent(p.title);
-  const others = await prisma.newsPost.findMany({ where: { published: true, slug: { not: p.slug } }, orderBy: { publishedAt: 'desc' }, take: 3 });
+  // Related reading: same category first, then the newest of the rest, so a post is reachable from its own
+  // topic rather than only from whatever was published last; plus older/newer neighbours so the archive is
+  // a chain. Before this, the same three newest posts got every inbound link and 16 posts had none.
+  const sameCat = await prisma.newsPost.findMany({ where: { published: true, slug: { not: p.slug }, category: p.category }, orderBy: { publishedAt: 'desc' }, take: 3 });
+  const fill = sameCat.length < 3 ? await prisma.newsPost.findMany({ where: { published: true, slug: { notIn: [p.slug, ...sameCat.map(o => o.slug)] } }, orderBy: { publishedAt: 'desc' }, take: 3 - sameCat.length }) : [];
+  const others = [...sameCat, ...fill];
+  const [older, newer] = await Promise.all([
+    prisma.newsPost.findFirst({ where: { published: true, publishedAt: { lt: p.publishedAt } }, orderBy: { publishedAt: 'desc' }, select: { slug: true, title: true } }),
+    prisma.newsPost.findFirst({ where: { published: true, publishedAt: { gt: p.publishedAt } }, orderBy: { publishedAt: 'asc' }, select: { slug: true, title: true } }),
+  ]);
+  const neighbours = (older || newer) ? `<nav class="sans" aria-label="Newer and older posts" style="display:flex;justify-content:space-between;gap:14px;margin:22px 0 6px;font-size:14px;font-weight:700;line-height:1.4">${newer ? `<a href="/news/${newer.slug}" style="max-width:48%">← ${escH(newer.title)}</a>` : '<span></span>'}${older ? `<a href="/news/${older.slug}" style="max-width:48%;text-align:right">${escH(older.title)} →</a>` : '<span></span>'}</nav>` : '';
   const rel = others.map(o => { const c = cardFor(o.slug); return `<div class="card">${c ? `<a class="thumb" href="/news/${o.slug}" aria-label="${escH(o.title)}"><img src="${c.thumb}" width="600" height="315" alt="" loading="lazy" decoding="async"></a>` : ''}${catPill(o.category)}<h3><a href="/news/${o.slug}">${escH(o.title)}</a></h3><div class="meta sans"><span>${amDate(o.publishedAt)}</span></div></div>`; }).join('');
   const body = `<main><article class="art">
     ${catPill(p.category)}
@@ -987,6 +1007,7 @@ fastify.get('/news/:slug', async (req, reply) => {
       <a href="#" onclick="navigator.clipboard.writeText('https://bina.et/news/${p.slug}');this.textContent='✓ Copied';return false">🔗 Copy link</a>
     </div>
     <a class="sans" href="https://t.me/binasmart" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;margin:18px 0 6px;padding:14px 18px;border-radius:14px;background:#e7f3fb;border:1.5px solid #bfe0f5;color:#0f4c75;text-decoration:none"><span style="font-size:30px;line-height:1">📢</span><span><b style="display:block;font-size:15px">ቢናsmart ቻናልን ይቀላቀሉ · Follow on Telegram</b><span style="font-size:13px;color:#3d6e8f">አዲስ ዜና፣ መመሪያ እና የሕግ ለውጦች በቀጥታ — @binasmart</span></span><span style="margin-left:auto;font-weight:900">→</span></a>
+    ${neighbours}
     <div class="cta-band sans"><div><h3>🏢 ህንፃ አለዎት?</h3><p>BinaSmart — ሙሉ የህንፃ አስተዳደር ሲስተም በ24 ሰዓት።</p></div><a href="/diaspora">ይጀምሩ →</a></div>
   </article>
   <div style="max-width:1080px;margin:0 auto;border-top:3px double var(--line)"><h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);padding:22px 0 0;text-transform:uppercase">ተጨማሪ ያንብቡ · Read more</h2><div class="grid">${rel}</div></div></main>`;
