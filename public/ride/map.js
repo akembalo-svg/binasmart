@@ -77,7 +77,7 @@ window.BinaMap = (function () {
   }
   // ---- satellite: imagery under the roads. The painted ground (background, fills) hides while it is
   // on; roads, the route, pins and labels stay on top, so it reads like a hybrid map, not a photo. ----
-  var satCfg = null, satOn = false;
+  var satCfg = null, satOn = false, satRoadOpacity = {};
   function setSatelliteConfig(cfg) { satCfg = cfg && cfg.tiles ? cfg : null; }
   function hasSatellite() { return !!satCfg; }
   function wantsSatellite() { return lsGet('bina_map_sat') === '1'; }
@@ -92,6 +92,11 @@ window.BinaMap = (function () {
     if (map.getLayer('sat-layer')) map.setLayoutProperty('sat-layer', 'visibility', on ? 'visible' : 'none');
     ((map.getStyle() || {}).layers || []).forEach(function (l) {
       if (l.type === 'background' || (l.type === 'fill' && l.source === 'protomaps')) map.setLayoutProperty(l.id, 'visibility', on ? 'none' : 'visible');
+      // roads at 60% over the photo read as a hybrid map; the style's own value comes back when off
+      if (l.type === 'line' && /^roads-/.test(l.id)) {
+        if (!(l.id in satRoadOpacity)) { var o = map.getPaintProperty(l.id, 'line-opacity'); satRoadOpacity[l.id] = (o === undefined || o === null) ? 1 : o; }
+        map.setPaintProperty(l.id, 'line-opacity', on ? 0.6 : satRoadOpacity[l.id]);
+      }
     });
     satOn = !!on; return true;
   }
