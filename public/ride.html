@@ -18,12 +18,12 @@
 <script>
 /* "next" look (default since 7 Sep 2026): html.next + ride/next.css. ?v=classic remembers the old look; ?v=next restores.
    Kept inline and first so the glass sheet never flashes the old look. */
-(function(){try{var on=true,ls=localStorage.getItem('bina_ride_next');
-if(/[?&]v=classic\b/.test(location.search)){localStorage.setItem('bina_ride_next','0');on=false;}
-else if(/[?&]v=next\b/.test(location.search)){localStorage.setItem('bina_ride_next','1');}
+(function(){var on=true,ls=null,q=location.search||'';try{ls=localStorage.getItem('bina_ride_next');}catch(e){}
+if(/[?&]v=classic\b/.test(q)){on=false;try{localStorage.setItem('bina_ride_next','0');}catch(e){}}
+else if(/[?&]v=next\b/.test(q)){try{localStorage.setItem('bina_ride_next','1');}catch(e){}}
 else if(ls==='0'){on=false;}
-if(on){window.__rideNext=true;document.documentElement.classList.add('next');
-['/static/fonts/fonts.css?v=1','/static/ride/next.css?v=1'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}}catch(e){}})();
+if(on){window.__rideNext=true;document.documentElement.className+=' next';
+['/static/fonts/fonts.css?v=1','/static/ride/next.css?v=1'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
 </head>
