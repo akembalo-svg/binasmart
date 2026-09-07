@@ -100,6 +100,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     const bias = near ? { lat: near.lat, lng: near.lng } : null;
     async function resolve(name) {
       if (!name || typeof name !== 'string') return null;
+      if (/airport|ኤርፖርት|አየር\s*ማረፊያ|አየር\s*መንገድ|bole\s*int/i.test(name)) return { lat: 8.9779, lng: 38.7993, label: 'Bole International Airport', labelAm: 'ቦሌ አየር ማረፊያ', kind: 'landmark', said: name };
       const r = await geo.searchPlaces(name.slice(0, 120), bias).catch(() => []);
       return (r && r[0]) ? { lat: r[0].lat, lng: r[0].lng, label: r[0].label, labelAm: r[0].labelAm || null, kind: r[0].kind || null, said: name } : { said: name, unresolved: true };
     }
