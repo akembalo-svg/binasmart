@@ -19,7 +19,7 @@ html.next .chip3d.off::after{content:;position:absolute;left:12px;right:12px;top
 html.next .chip3d{position:relative}
 
 /* the sheet: see-through glass */
-html.next .sheet{background:rgba(255,255,255,.26);-webkit-backdrop-filter:blur(34px) saturate(190%);backdrop-filter:blur(34px) saturate(190%);border-radius:28px 28px 0 0;border-top:1px solid rgba(255,255,255,.7);box-shadow:0 -18px 50px -20px rgba(15,23,42,.45),inset 0 1px 0 rgba(255,255,255,.85);padding:6px 16px calc(10px + env(safe-area-inset-bottom))}
+html.next .sheet{background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(10px) saturate(160%) brightness(.9);backdrop-filter:blur(10px) saturate(160%) brightness(.9);border-radius:28px 28px 0 0;border-top:1px solid rgba(255,255,255,.7);box-shadow:0 -18px 50px -20px rgba(15,23,42,.45),inset 0 1px 0 rgba(255,255,255,.85);padding:6px 16px calc(10px + env(safe-area-inset-bottom))}
 html.next .grip{width:40px;height:4px;background:rgba(15,23,42,.28);margin:2px auto 8px}
 html.next h1{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.1}
 html.next h1 small,html.next h2 small{font-size:12.5px;font-weight:500;color:var(--mut);margin-top:3px}
@@ -105,3 +105,11 @@ html.next .biniGo{background:#14D8B4;color:#0F172A;border-radius:12px}
 html.next .biniSay{background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);color:#0F172A;border-radius:14px}
 html.next .biniSay small{color:#475569}
 html.next .biniSay.warn{background:rgba(255,247,237,.8);color:#9a3412}
+/* glass needs contrast under it: slightly darker secondary text, inner cards a touch stronger */
+html.next{--mut:#334155}
+html.next .field,html.next .driver,html.next .btn,html.next #q,html.next #whoName,html.next #whoPhone,html.next .passenger input{background:rgba(255,255,255,.7)}
+html.next .quick button{background:rgba(255,255,255,.62)}
+html.next .tier{background:rgba(255,255,255,.5)}
+html.next .biniSay{background:rgba(255,255,255,.66)}
+/* a browser without backdrop-filter gets a readable sheet instead of a see-through one */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html.next .sheet{background:rgba(255,255,255,.86)}}
