@@ -1,0 +1,107 @@
+/* BinaSmart Ride — site-wide "BinaSmart home" style, 7 Sep 2026 (replaces ride/next.css).
+   Loaded by ride.html when html.next is on (the default). Overrides ride/ui.css scoped to html.next.
+   Tokens from the BinaSmart Home design: #00C896 primary, #009688 deep, #0099FF / #6C63FF for Bini AI,
+   #081120 dark, #F8FAFC background, Plus Jakarta Sans + Noto Sans Ethiopic, Amharic first. */
+html.next{--em:#00C896;--em2:#009688;--ai:#0099FF;--ai2:#6C63FF;--ink:#081120;--mut:#475569;--line:rgba(255,255,255,.8);--gold:#FDE68A;--bg:rgba(248,250,252,.6)}
+html.next body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-font-smoothing:antialiased;color:var(--ink)}
+
+/* ---- top bar: dark glass pills, teal play logo ---- */
+html.next .top{padding-top:calc(12px + env(safe-area-inset-top))}
+html.next .top .brand{display:flex;align-items:center;gap:9px;background:rgba(8,17,32,.42);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.22);box-shadow:0 12px 30px -14px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14);padding:6px 14px 6px 6px;font-size:15px;letter-spacing:-.3px;font-weight:800;line-height:1}
+html.next .top .brand .logo{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#00C896,#009688);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -8px rgba(0,200,150,.9);flex:none}
+html.next .top .brand .logo svg{width:16px;height:16px;display:block}
+html.next .top .brand .bt{display:block;color:#fff;white-space:nowrap}
+html.next .top .brand .bt>span{color:#00C896}
+html.next .top .brand b{display:block;font-weight:700;font-size:10.5px;color:rgba(255,255,255,.82);margin:3px 0 0;opacity:1}
+html.next .chip3d{position:relative;width:46px;height:46px;padding:0;border-radius:50%;background:linear-gradient(135deg,#00C896,#009688);color:#fff;border:1px solid rgba(255,255,255,.35);font-size:12px;letter-spacing:.5px;box-shadow:0 12px 30px -12px rgba(0,200,150,.9)}
+html.next .chip3d.off{background:rgba(8,17,32,.42);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border-color:rgba(255,255,255,.22);color:rgba(255,255,255,.7);box-shadow:0 12px 30px -14px rgba(0,0,0,.6)}
+html.next .chip3d.off::after{content:'';position:absolute;left:12px;right:12px;top:50%;height:2px;background:rgba(255,255,255,.55);transform:rotate(-20deg)}
+html.next .chipsat{font-size:18px}
+html.next .chipsat.off{filter:grayscale(1) opacity(.85)}
+
+/* ---- the sheet: light glass, map still visible through it ---- */
+html.next .sheet{background:rgba(248,250,252,.58);-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);border-radius:30px 30px 0 0;border-top:1px solid rgba(255,255,255,.85);box-shadow:0 -18px 50px -20px rgba(8,17,32,.45),inset 0 1px 0 rgba(255,255,255,.95);padding:6px 16px calc(10px + env(safe-area-inset-bottom))}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html.next .sheet{background:rgba(248,250,252,.9)}}
+html.next .grip{width:44px;height:5px;background:#CBD5E1;margin:2px auto 8px}
+html.next h1{font-size:26px;font-weight:900;letter-spacing:-.4px;line-height:1.1;color:var(--ink)}
+html.next h1 small,html.next h2 small{font-size:12.5px;font-weight:600;color:var(--mut);margin-top:4px}
+html.next h2{font-size:22px;font-weight:800;letter-spacing:-.3px}
+html.next .small{color:var(--mut)}
+
+/* fields and cards */
+html.next .field{background:rgba(255,255,255,.8);border:1px solid rgba(8,17,32,.07);border-radius:16px;padding:13px 14px;font-weight:700;box-shadow:0 10px 24px -16px rgba(8,17,32,.35);margin:8px 0}
+html.next .field .ph{color:#64748B;font-weight:600}
+html.next .field .fi{width:22px;height:22px;flex:none;color:var(--em2)}
+html.next .from{font-size:12.5px;color:var(--mut);padding:0 2px;margin-top:2px}
+html.next .from button,html.next .link{color:var(--em2);font-weight:800}
+html.next .hint{font-size:10.5px;color:#64748B;font-weight:600;margin-top:6px}
+html.next .tglink{margin:4px 0 0;font-size:12px}
+html.next #q,html.next #whoName,html.next #whoPhone,html.next .passenger input{background:rgba(255,255,255,.85);border:1px solid rgba(8,17,32,.08);border-radius:14px;padding:13px 14px}
+html.next #q:focus,html.next #whoName:focus,html.next #whoPhone:focus{border-color:var(--em);box-shadow:0 0 0 3px rgba(0,200,150,.18)}
+html.next .back{background:rgba(255,255,255,.85);border:1px solid rgba(8,17,32,.07);border-radius:14px}
+html.next .results li{border-bottom-color:rgba(8,17,32,.08)}
+html.next .results .ic{background:rgba(0,200,150,.12);border-radius:12px}
+html.next .results .am{color:var(--em2)}
+
+/* quick destinations: white chips */
+html.next .quick{margin:0 0 8px}
+html.next .quick button{background:rgba(255,255,255,.85);border:1px solid rgba(8,17,32,.07);border-radius:999px;box-shadow:0 8px 20px -14px rgba(8,17,32,.35);padding:7px 12px 7px 9px}
+html.next .quick button b{font-weight:800}
+html.next .quick button small{color:var(--mut)}
+
+/* ---- Ask Bini: rainbow-border AI bar (gradient border, no wrapper needed) ---- */
+html.next .bini{position:relative;margin:0 0 8px;padding:5px 5px 5px 6px;border-radius:999px;border:2px solid transparent;background:linear-gradient(rgba(255,255,255,.94),rgba(255,255,255,.94)) padding-box,linear-gradient(90deg,#00C896,#0099FF,#6C63FF,#00C896) border-box;background-size:auto,300% 100%;animation:binigrad 6s linear infinite;box-shadow:0 16px 36px -18px rgba(0,153,255,.6);gap:6px}
+@keyframes binigrad{to{background-position:0 0,300% 0}}
+@media(prefers-reduced-motion:reduce){html.next .bini{animation:none}}
+html.next .bini::before{content:'';flex:none;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#0099FF,#6C63FF) center/20px 20px no-repeat;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='7' width='14' height='11' rx='4'/%3E%3Cpath d='M12 4v3M9 3.5h6'/%3E%3Ccircle cx='9.5' cy='12.5' r='1' fill='%23fff'/%3E%3Ccircle cx='14.5' cy='12.5' r='1' fill='%23fff'/%3E%3Cpath d='M9.5 15.5c1.5 1 3.5 1 5 0'/%3E%3C/svg%3E"),linear-gradient(135deg,#0099FF,#6C63FF);box-shadow:0 8px 18px -8px rgba(108,99,255,.9)}
+html.next .bini input{background:transparent;border:0;color:var(--ink);border-radius:12px;font-weight:700;font-size:13.5px;padding:10px 4px}
+html.next .bini input::placeholder{color:#64748B;font-weight:600}
+html.next .biniMic{width:38px;height:38px;border-radius:50%;background:rgba(8,17,32,.06);color:#334155;font-size:16px}
+html.next .biniMic.on{background:#ef4444;color:#fff}
+html.next .biniGo{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#00C896,#009688);color:#fff;font-size:16px;box-shadow:0 8px 18px -8px rgba(0,200,150,.9)}
+html.next .biniSay{background:rgba(255,255,255,.8);border:1px solid rgba(108,99,255,.18);color:var(--ink);border-radius:16px 16px 16px 6px}
+html.next .biniSay small{color:var(--mut)}
+html.next .biniSay.warn{background:rgba(255,247,237,.85);color:#9a3412}
+html.next .aiSpark{background:rgba(255,255,255,.85);border:1px solid rgba(8,17,32,.07)}
+
+/* tiers */
+html.next .tiers{gap:6px;margin:8px 0}
+html.next .tier{background:rgba(255,255,255,.7);border:1px solid rgba(8,17,32,.07);border-radius:16px;padding:9px 12px}
+html.next .tier.sel{background:rgba(0,200,150,.12);border:1.5px solid var(--em);box-shadow:0 10px 22px -12px rgba(0,200,150,.6)}
+html.next .tier b{font-size:14px;font-weight:800}
+html.next .tier .sub{color:var(--mut)}
+html.next .tier .price{color:var(--em2);font-weight:800}
+html.next .payrow{font-size:13px;font-weight:600;margin:4px 0 8px}
+html.next .forother{font-weight:600}
+
+/* buttons */
+html.next .cta{border-radius:18px;padding:15px;font-size:16px;font-weight:800;background:linear-gradient(135deg,#00C896,#009688);box-shadow:0 18px 34px -14px rgba(0,200,150,.8),inset 0 1px 0 rgba(255,255,255,.3);letter-spacing:-.2px}
+html.next .cta span{font-weight:700;opacity:.92}
+html.next .btn{background:rgba(255,255,255,.85);border:1px solid rgba(8,17,32,.07);border-radius:16px;font-weight:800}
+html.next .link.danger{color:#B91C1C}
+html.next .chipq{background:rgba(255,255,255,.85);border:1px solid rgba(8,17,32,.07);border-radius:999px;color:var(--em2)}
+html.next .about li{border-bottom-color:rgba(8,17,32,.08)}
+
+/* driver / assigned */
+html.next .status{color:var(--ink);font-size:20px;font-weight:900;letter-spacing:-.3px}
+html.next .driver{background:rgba(255,255,255,.85);border:1px solid rgba(8,17,32,.07);border-radius:18px;box-shadow:0 12px 26px -18px rgba(8,17,32,.4)}
+html.next .avatar{background:linear-gradient(135deg,#0099FF,#6C63FF);border:2px solid #fff;color:#fff}
+html.next .plate{background:#081120;color:#FDE68A;border-radius:10px;letter-spacing:1.2px;font-variant-numeric:tabular-nums}
+html.next .carCard .plateBig{background:#081120;color:#FDE68A;border-color:#00C896}
+html.next .carCard .matchHint{background:rgba(8,17,32,.72);color:#14D8B4;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+html.next .etaLive{background:linear-gradient(120deg,rgba(0,153,255,.14),rgba(108,99,255,.16));color:var(--ink);border:1px solid rgba(108,99,255,.2);border-radius:16px;box-shadow:none;padding-left:40px;position:relative}
+html.next .etaLive::before{content:'';position:absolute;left:12px;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;background:linear-gradient(135deg,#0099FF,#6C63FF);box-shadow:0 0 0 4px rgba(0,153,255,.18)}
+html.next .etaLive.here{background:linear-gradient(120deg,#92400e,#b45309);color:#fff;border:0}
+html.next .etaLive.warn{background:rgba(8,17,32,.7);color:#fff;border:0}
+html.next .fareline{color:var(--mut)}html.next .fareline b{color:var(--ink);font-weight:800}html.next .fareline.big b{color:var(--em2)}
+html.next .stars button.on{color:#F5B300}
+html.next .radar span{border-color:#00C896}
+
+/* map markers + toast */
+html.next .bm-dot{background:#00C896}
+html.next .bm-pulse{background:rgba(0,200,150,.4)}
+html.next .trkRing{border-color:#00C896;background:#081120}
+html.next .trkPulse{background:rgba(0,200,150,.28)}
+html.next .trkNose::before{border-bottom-color:#00C896}
+html.next .toast{background:rgba(8,17,32,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18)}
+html.next .dot{background:#00C896;box-shadow:0 0 0 3px rgba(0,200,150,.2)}

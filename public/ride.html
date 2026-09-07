@@ -10,7 +10,7 @@
 <meta property="og:description" content="Fixed upfront price. No surge. No app to download. Moto · Bajaj · Economy · Comfort · XL.">
 <meta property="og:image" content="https://bina.et/static/bina-property.png">
 <meta property="og:url" content="https://bina.et/ride">
-<meta name="theme-color" content="#059669">
+<meta name="theme-color" content="#009688">
 <link rel="icon" href="/icon-32.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
@@ -23,7 +23,7 @@ if(/[?&]v=classic\b/.test(q)){on=false;try{localStorage.setItem('bina_ride_next'
 else if(/[?&]v=next\b/.test(q)){try{localStorage.setItem('bina_ride_next','1');}catch(e){}}
 else if(ls==='0'){on=false;}
 if(on){window.__rideNext=true;document.documentElement.className+=' next';
-['/static/fonts/fonts.css?v=1','/static/ride/next.css?v=9'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
+['/static/fonts/fonts.css?v=1','/static/ride/v3.css?v=2'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
 </head>
@@ -31,7 +31,7 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
 <div id="map"></div>
 
 <header class="top">
-  <a class="brand" href="/">🏢 Bina<span>Smart</span> <b>Ride</b></a>
+  <a class="brand" href="/"><i class="logo"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"></path></svg></i><span class="bt">Bina<span>Ride</span><b>ራይድ · አዲስ አበባ</b></span></a>
   <div class="ctls">
     <button id="btnSat" class="chip3d chipsat off hidden" aria-label="Satellite view" title="Satellite · ሳተላይት">🛰️</button>
     <button id="btn3d" class="chip3d" aria-label="Toggle 3D">3D</button>
@@ -49,7 +49,7 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
         <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true"><defs><linearGradient id="sparkG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4285F4"></stop><stop offset=".55" stop-color="#9B72CB"></stop><stop offset="1" stop-color="#D96570"></stop></linearGradient></defs><path class="spk" d="M24 3c1.2 11.6 9.4 19.8 21 21-11.6 1.2-19.8 9.4-21 21-1.2-11.6-9.4-19.8-21-21 11.6-1.2 19.8-9.4 21-21z" fill="url(#sparkG)"></path><path class="spk2" d="M38 30c.4 3.9 3.1 6.6 7 7-3.9.4-6.6 3.1-7 7-.4-3.9-3.1-6.6-7-7 3.9-.4 6.6-3.1 7-7z" fill="url(#sparkG)"></path></svg>
       </button>
     </div>
-    <button class="field" id="openSearch"><span>🔍</span><span class="ph">መድረሻዎን ያስገቡ · Enter destination</span></button>
+    <button class="field" id="openSearch"><svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5a7 7 0 1 0-14 0C5 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg><span class="ph">መድረሻዎን ያስገቡ · Enter destination</span></button>
     <div id="quick" class="quick" aria-label="Quick destinations"></div>
     <form class="bini" id="biniForm" autocomplete="off">
       <button type="button" id="biniMic" class="biniMic hidden" aria-label="Speak · ይናገሩ" title="ይናገሩ · Speak">🎤</button>
