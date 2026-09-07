@@ -1,41 +1,167 @@
-/* BinaSmart Watch — grid (/watch) and player (/watch/<slug>). The video source only arrives from
-   the play call, after the server has checked the film is public and (if paid) the rental is active. */
+/* BinaWatch — home, live TV, radio, films, kids (/watch) and the film player (/watch/<slug>).
+   TV and kids play the broadcaster's own YouTube channel: the live stream when it is on, otherwise
+   its latest upload. Radio plays the station's own public stream. Films keep the rental flow: the
+   video source only arrives from the play call, after the server has checked the film is public and
+   (if paid) the rental is active. v3, 7 Sep 2026. */
 (function () {
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
   var view = $('view'), sheet = $('sheet'), toastEl = $('toast');
   var TZ = 'Africa/Addis_Ababa';
-  var T = { unavailable: 'ይህ ፊልም አሁን አይገኝም · This film is not available', rent: 'ለመመልከት ይከራዩ · Rent to watch', expired: 'ኪራዩ አልፏል · Your rental has expired', chapa_off: 'ኪራይ በቅርቡ · Rentals coming soon', phone: 'የኢትዮጵያ ስልክ (09…) ያስፈልጋል · Ethiopian phone required', name: 'ስም ያስፈልጋል · Name required', net: 'ግንኙነት የለም · No connection', chapa_failed: 'Chapa አልተከፈተም፤ እንደገና ይሞክሩ · Chapa did not open, try again' };
+  var T = { unavailable: 'ይህ ፊልም አሁን አይገኝም · This film is not available', rent: 'ለመመልከት ይከራዩ · Rent to watch', expired: 'ኪራዩ አልፏል · Your rental has expired', net: 'የአውታረ መረብ ችግር · Network error', phone: 'ትክክለኛ ስልክ ያስገቡ · Enter a valid phone', name: 'ስም ያስገቡ · Enter your name', chapa_off: 'ኪራይ ገና አልተከፈተም · Rentals not open yet', slow_down: 'ትንሽ ቆይተው ይሞክሩ · Please wait a moment' };
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function birr(n) { return Number(n).toLocaleString('en-US') + ' ብር'; }
   function when(d) { return new Date(d).toLocaleString('en-GB', { timeZone: TZ, weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
+  function ago(d) { if (!d) return ''; var days = Math.round((Date.now() - new Date(d).getTime()) / 86400000); return days <= 0 ? 'ዛሬ · today' : days === 1 ? 'ትናንት · yesterday' : days < 30 ? days + ' ቀን · ' + days + 'd ago' : Math.round(days / 30) + ' ወር · ' + Math.round(days / 30) + 'mo ago'; }
+  function views(n) { return n == null ? '' : (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? Math.round(n / 1e3) + 'K' : String(n)) + ' እይታ'; }
   var tt; function toast(m) { toastEl.textContent = m; toastEl.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { toastEl.classList.remove('on'); }, 2800); }
-  function api(p, body) { return fetch(p, { method: body ? 'POST' : 'GET', headers: body ? { 'content-type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }).then(function (r) { return r.json().catch(function () { return { ok: false, error: 'net' }; }); }).catch(function () { return { ok: false, error: 'net' }; }); }
+  function api(p, body) { return fetch(p, { method: body ? 'POST' : 'GET', headers: body ? { 'content-type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined }).then(function (r) { return r.json(); }); }
+  function yt(id, autoplay) { return 'https://www.youtube-nocookie.com/embed/' + esc(id) + '?rel=0&modestbranding=1&playsinline=1' + (autoplay ? '&autoplay=1' : ''); }
+  function initials(c) { var w = (c.name || '').replace(/[^A-Za-z0-9 ]/g, '').split(' ').filter(Boolean); if (w[0] && w[0].length <= 4 && w[0] === w[0].toUpperCase()) return esc(w[0]); return esc(w.slice(0, 2).map(function (x) { return x[0]; }).join('').toUpperCase() || '▶'); }
+  function liveTitle(c) { var t = (c.liveTitle || '').trim(); return t.length > 4 && !/^(test|live|stream)$/i.test(t) ? t : (c.name + ' · ቀጥታ ስርጭት · live broadcast'); }
   var q = new URLSearchParams(location.search);
+  var D = { live: null, radio: null, films: null };
 
+  // ---------- tabs ----------
+  var TABS = [['home', '🏠', 'መነሻ', 'Home'], ['tv', '📺', 'ቲቪ', 'Live TV'], ['radio', '📻', 'ራዲዮ', 'Radio'], ['films', '🎬', 'ፊልሞች', 'Films'], ['kids', '🧸', 'ልጆች', 'Kids']];
+  function paintTabs(on) {
+    var el = $('tabs'); if (!el) return;
+    el.innerHTML = TABS.map(function (t) { return '<a href="/watch#' + t[0] + '" class="' + (on === t[0] ? 'on' : '') + '"><i>' + t[1] + '</i>' + t[2] + '<small>' + t[3] + '</small></a>'; }).join('');
+  }
+  function loadLive() { return D.live ? Promise.resolve(D.live) : api('/api/watch/live').then(function (j) { D.live = j; return j; }); }
+  function loadRadio() { return D.radio ? Promise.resolve(D.radio) : api('/api/watch/radio').then(function (j) { D.radio = j; return j; }); }
+  function loadFilms() { return D.films ? Promise.resolve(D.films) : api('/api/watch/films').then(function (j) { D.films = j; return j; }); }
+
+  // ---------- pieces ----------
+  function chTile(c, big) {
+    return '<a class="ch" href="/watch#tv/' + esc(c.id) + '"><div class="tile" style="background:linear-gradient(135deg,' + esc(c.color) + ',#0F172A)">' + (c.live ? '<span class="live">LIVE</span>' : '') + initials(c) + '</div><div class="n">' + esc(c.nameAm || c.name) + '</div><div class="s">' + esc(c.live ? 'ቀጥታ · live now' : (c.tag || c.name)) + '</div></a>';
+  }
+  function vidTile(v, c) {
+    return '<a class="vid" href="/watch#tv/' + esc(c.id) + '/' + esc(v.id) + '"><div class="th"><img src="' + esc(v.thumb) + '" alt="" loading="lazy"><span class="d">' + esc(c.name) + '</span></div><div class="n">' + esc(v.title) + '</div><div class="s">' + esc([ago(v.published), views(v.views)].filter(Boolean).join(' · ')) + '</div></a>';
+  }
   function card(f) {
     return '<a class="film" href="/watch/' + esc(f.slug) + '"><div class="p">' + (f.posterUrl ? '<img src="' + esc(f.posterUrl) + '" alt="" loading="lazy">' : '🎞️') + '<span class="tag' + (f.free ? ' free' : '') + '">' + (f.free ? 'ነፃ · Free' : birr(f.priceEtb)) + '</span></div>'
       + '<div class="t">' + esc(f.titleAm || f.title) + '</div><div class="m">' + [f.titleAm && f.title !== f.titleAm ? f.title : null, f.year, f.runtimeMin ? f.runtimeMin + ' ደቂቃ' : null, f.genre].filter(Boolean).map(esc).join(' · ') + '</div></a>';
   }
-  function renderList() {
-    api('/api/watch/films').then(function (j) {
-      if (!j.ok) { view.innerHTML = '<div class="card">' + T.net + '</div>'; return; }
-      var html = '<h1>ይመልከቱ · Watch</h1><p class="sub">ፈቃድ ያላቸው የአማርኛ ፊልሞች — ነፃ ወይም ለ48 ሰዓት ኪራይ። · Licensed Amharic films: free, or rent for 48 hours.' + (j.chapa && j.chapa.enabled && j.chapa.mode !== 'live' ? ' <span class="pill warn">🧪 Chapa TEST</span>' : '') + '</p>';
-      html += j.films.length ? '<div class="grid" style="margin-top:14px">' + j.films.map(card).join('') + '</div>' : '<div class="card" style="margin-top:14px"><b>በቅርቡ · Coming soon.</b><div class="sub" style="margin-top:6px">የመጀመሪያዎቹ ፊልሞች በፈቃድ እየተዘጋጁ ነው። ፊልም ሰሪ ነዎት? <a href="https://t.me/bina_smart_bot">@bina_smart_bot</a> · The first licensed films are on their way.</div></div>';
+  function radioRow(r) {
+    var on = R.cur && R.cur.id === r.id && !R.audio.paused;
+    return '<div class="rad' + (on ? ' on' : '') + '" data-r="' + esc(r.id) + '"><div class="ic" style="background:linear-gradient(135deg,' + esc(r.color) + ',#0F172A)">' + initials(r) + '</div><div><b>' + esc(r.nameAm || r.name) + '</b><small>' + esc(r.tag || r.name) + (r.site ? ' · <a href="' + esc(r.site) + '" target="_blank" rel="noopener">' + esc(r.site.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')) + '</a>' : '') + '</small></div><div class="go">' + (on ? '❚❚' : '▶') + '</div></div>';
+  }
+
+  // ---------- home ----------
+  function renderHome() {
+    paintTabs('home');
+    view.innerHTML = '<div class="skel"></div>';
+    Promise.all([loadLive(), loadFilms(), loadRadio()]).then(function (a) {
+      var L = a[0], F = a[1], Rd = a[2];
+      var tv = (L.tv || []), kids = (L.kids || []), films = (F.films || []), radio = (Rd.radio || []);
+      var liveNow = tv.filter(function (c) { return c.live; });
+      var html = '';
+      var h = liveNow[0];
+      if (h) html += '<a class="hero" href="/watch#tv/' + esc(h.id) + '"><img src="https://i.ytimg.com/vi/' + esc(h.videoId) + '/hqdefault.jpg" alt=""><div class="sh"></div><div class="tx"><span class="live">ቀጥታ · LIVE</span><div class="t">' + esc(h.nameAm || h.name) + '</div><div class="m">' + esc(liveTitle(h)) + '</div><div class="act"><span class="btn">▶ አሁን ይመልከቱ · Watch now</span></div></div></a>';
+      else if (films[0]) { var f0 = films[0]; html += '<a class="hero" href="/watch/' + esc(f0.slug) + '">' + (f0.posterUrl ? '<img src="' + esc(f0.posterUrl) + '" alt="">' : '') + '<div class="sh"></div><div class="tx"><span class="k">አዲስ · New</span><div class="t">' + esc(f0.titleAm || f0.title) + '</div><div class="m">' + esc([f0.title !== f0.titleAm ? f0.title : null, f0.year, f0.genre].filter(Boolean).join(' · ')) + '</div><div class="act"><span class="btn">▶ ' + (f0.free ? 'ነፃ ይመልከቱ · Watch free' : 'ይከራዩ · Rent') + '</span></div></div></a>'; }
+      html += '<h2>📺 ቀጥታ ቲቪ <small>Live TV</small><a class="more" href="/watch#tv">ሁሉም →</a></h2><div class="rowx">' + tv.slice().sort(function (a, b) { return (b.live ? 1 : 0) - (a.live ? 1 : 0); }).map(function (c) { return chTile(c); }).join('') + '</div>';
+      var fresh = [].concat.apply([], tv.map(function (c) { return (c.latest || []).slice(0, 1).map(function (v) { return { v: v, c: c }; }); })).sort(function (a, b) { return (b.v.published || '').localeCompare(a.v.published || ''); }).slice(0, 10);
+      if (fresh.length) html += '<h2>🆕 ዛሬ የወጡ <small>Latest programmes</small></h2><div class="rowx">' + fresh.map(function (x) { return vidTile(x.v, x.c); }).join('') + '</div>';
+      if (films.length) html += '<h2>🎬 ፊልሞች <small>Films</small><a class="more" href="/watch#films">ሁሉም →</a></h2><div class="rowx frow">' + films.slice(0, 10).map(card).join('') + '</div>';
+      if (kids[0] && kids[0].latest && kids[0].latest.length) html += '<h2>🧸 ለልጆች <small>Kids</small><a class="more" href="/watch#kids">ሁሉም →</a></h2><div class="rowx">' + kids[0].latest.slice(0, 6).map(function (v) { return vidTile(v, kids[0]); }).join('') + '</div>';
+      if (radio.length) html += '<h2>📻 ራዲዮ <small>Radio</small><a class="more" href="/watch#radio">ሁሉም →</a></h2><div class="rowx">' + radio.map(function (r) { return '<a class="ch" href="/watch#radio/' + esc(r.id) + '"><div class="tile" style="background:linear-gradient(135deg,' + esc(r.color) + ',#0F172A)">' + initials(r) + '</div><div class="n">' + esc(r.nameAm || r.name) + '</div><div class="s">' + esc(r.tag || '') + '</div></a>'; }).join('') + '</div>';
+      html += '<p class="note">ቲቪ እና ራዲዮ የሚጫወቱት ከጣቢያዎቹ የራሳቸው ይፋዊ ዥረት ነው፤ ፊልሞቹ በፈቃድ የቀረቡ ናቸው። · TV and radio play from each broadcaster\'s own official stream; films are licensed.' + (L.updatedAt ? ' <span class="sub">ቀጥታ ሁኔታ ' + when(L.updatedAt) + '</span>' : '') + '</p>';
+      view.innerHTML = html;
+    }).catch(function () { view.innerHTML = '<div class="card">' + T.net + '</div>'; });
+  }
+
+  // ---------- TV ----------
+  function renderTV() {
+    paintTabs('tv'); view.innerHTML = '<div class="skel"></div>';
+    loadLive().then(function (L) {
+      var tv = (L.tv || []).slice().sort(function (a, b) { return (b.live ? 1 : 0) - (a.live ? 1 : 0); });
+      view.innerHTML = '<h1>ቀጥታ ቲቪ <span class="sub">· Live TV</span></h1><p class="sub">የኢትዮጵያ ጣቢያዎች — ቀጥታ ሲሆኑ ቀጥታ፣ ካልሆኑ የቅርብ ፕሮግራማቸው። · Ethiopian channels: live when they are on air, otherwise their latest programme.</p>'
+        + '<div class="cgrid" style="margin-top:14px">' + tv.map(function (c) { return chTile(c, true); }).join('') + '</div>';
+    });
+  }
+  function renderChannel(id, vidId, kind) {
+    paintTabs(kind === 'kids' ? 'kids' : 'tv'); view.innerHTML = '<div class="skel"></div>';
+    loadLive().then(function (L) {
+      var c = (L.tv || []).concat(L.kids || []).filter(function (x) { return x.id === id; })[0];
+      if (!c) { view.innerHTML = '<div class="card">ጣቢያው አልተገኘም · Channel not found. <a href="/watch#tv">← ቲቪ</a></div>'; return; }
+      var playing = vidId || (c.live ? c.videoId : (c.latest[0] && c.latest[0].id));
+      var isLive = c.live && playing === c.videoId;
+      var cur = (c.latest || []).filter(function (v) { return v.id === playing; })[0];
+      var html = '<a class="back" href="/watch#' + (kind === 'kids' ? 'kids' : 'tv') + '">‹ ' + (kind === 'kids' ? 'ልጆች' : 'ሁሉም ጣቢያዎች · All channels') + '</a>'
+        + '<div class="player">' + (playing ? '<iframe src="' + yt(playing, true) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" title="' + esc(c.name) + '"></iframe>' : '<div class="cover"><div class="play">▶</div></div>') + '</div>'
+        + '<div style="display:flex;align-items:center;gap:10px;margin-top:12px"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;background:linear-gradient(135deg,' + esc(c.color) + ',#0F172A)">' + initials(c) + '</div><div style="min-width:0"><h1 style="font-size:19px">' + esc(c.nameAm || c.name) + ' ' + (isLive ? '<span class="live">ቀጥታ · LIVE</span>' : '<span class="pill mute">አሁን ቀጥታ አይደለም · not live now</span>') + '</h1><div class="sub">' + esc(isLive ? liveTitle(c) : (cur ? cur.title : '')) + '</div></div></div>'
+        + (c.site ? '<div class="note">ይፋዊ ገጽ · Official: <a href="' + esc(c.site) + '" target="_blank" rel="noopener">' + esc(c.site.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')) + '</a> · <a href="https://www.youtube.com/channel/' + esc(c.yt) + '" target="_blank" rel="noopener">YouTube</a></div>' : '')
+        + '<h2>የቅርብ ፕሮግራሞች <small>Latest</small></h2><ul class="list">' + (c.latest || []).map(function (v) { return '<li class="' + (v.id === playing ? 'on' : '') + '" data-v="' + esc(v.id) + '"><div class="th"><img src="' + esc(v.thumb) + '" alt="" loading="lazy"></div><div><b>' + esc(v.title) + '</b><small>' + esc([ago(v.published), views(v.views)].filter(Boolean).join(' · ')) + '</small></div></li>'; }).join('') + '</ul>';
+      view.innerHTML = html;
+      view.querySelectorAll('.list li').forEach(function (li) { li.addEventListener('click', function () { location.hash = (kind === 'kids' ? '#kids/' : '#tv/') + c.id + '/' + li.dataset.v; }); });
+      window.scrollTo(0, 0);
+    });
+  }
+  function renderKids() {
+    paintTabs('kids'); view.innerHTML = '<div class="skel"></div>';
+    loadLive().then(function (L) {
+      var kids = L.kids || [];
+      var html = '<h1>ለልጆች <span class="sub">· Kids</span></h1><p class="sub">የአማርኛ የልጆች መዝሙሮችና ተረቶች ከጣቢያዎቹ ይፋዊ ቻናል። · Amharic songs and stories from the makers\' own channels.</p>';
+      kids.forEach(function (c) { html += '<h2>' + esc(c.nameAm || c.name) + ' <small>' + esc(c.name) + '</small><a class="more" href="/watch#kids/' + esc(c.id) + '">ሁሉም →</a></h2><div class="rowx">' + (c.latest || []).map(function (v) { return '<a class="vid" href="/watch#kids/' + esc(c.id) + '/' + esc(v.id) + '"><div class="th"><img src="' + esc(v.thumb) + '" alt="" loading="lazy"></div><div class="n">' + esc(v.title) + '</div><div class="s">' + esc(ago(v.published)) + '</div></a>'; }).join('') + '</div>'; });
+      if (!kids.length) html += '<div class="card">በቅርቡ · Coming soon.</div>';
       view.innerHTML = html;
     });
   }
 
+  // ---------- radio ----------
+  var R = { audio: new Audio(), cur: null };
+  R.audio.preload = 'none';
+  function playRadio(r) {
+    if (R.cur && R.cur.id === r.id && !R.audio.paused) { R.audio.pause(); paintNow(); return; }
+    R.cur = r; R.audio.src = r.stream; R.audio.play().catch(function () { toast('መጫወት አልተቻለም — ' + (r.site ? 'በጣቢያው ገጽ ይሞክሩ' : 'እንደገና ይሞክሩ') + ' · Could not play'); });
+    paintNow();
+  }
+  function paintNow() {
+    var n = $('now'); if (!n) return;
+    if (!R.cur) { n.className = 'now'; return; }
+    var on = !R.audio.paused;
+    n.className = 'now on';
+    n.innerHTML = '<div class="ic" style="background:linear-gradient(135deg,' + esc(R.cur.color) + ',#0F172A)">' + initials(R.cur) + '</div><div style="min-width:0"><b>' + esc(R.cur.nameAm || R.cur.name) + '</b><small>' + (on ? 'ቀጥታ · live radio' : 'ቆሟል · paused') + '</small></div>' + (on ? '<div class="bars"><i></i><i></i><i></i><i></i></div>' : '') + '<button type="button" id="nowBtn" aria-label="play/pause">' + (on ? '❚❚' : '▶') + '</button>';
+    $('nowBtn').addEventListener('click', function () { if (R.audio.paused) R.audio.play().catch(function () {}); else R.audio.pause(); paintNow(); });
+    view.querySelectorAll('.rad').forEach(function (el) { var isOn = el.dataset.r === R.cur.id && on; el.classList.toggle('on', isOn); el.querySelector('.go').textContent = isOn ? '❚❚' : '▶'; });
+  }
+  R.audio.addEventListener('play', paintNow); R.audio.addEventListener('pause', paintNow); R.audio.addEventListener('error', function () { toast('ዥረቱ አልተገኘም · Stream unavailable right now'); paintNow(); });
+  function renderRadio(autoId) {
+    paintTabs('radio'); view.innerHTML = '<div class="skel"></div>';
+    loadRadio().then(function (j) {
+      var radio = j.radio || [];
+      view.innerHTML = '<h1>ራዲዮ <span class="sub">· Radio</span></h1><p class="sub">የኢትዮጵያ ኤፍኤም ጣቢያዎች — ከየጣቢያው ይፋዊ ዥረት። ስልኩን ቆልፈው ማዳመጥ ይችላሉ። · Ethiopian FM stations from their own streams. Keeps playing with the screen off.</p><div style="margin-top:12px">' + radio.map(radioRow).join('') + '</div><p class="note">ራዲዮ በደቂቃ ~1 ሜባ ይጠቀማል። · Radio uses about 1 MB per minute.</p>';
+      view.querySelectorAll('.rad').forEach(function (el) { el.addEventListener('click', function (e) { if (e.target.tagName === 'A') return; var r = radio.filter(function (x) { return x.id === el.dataset.r; })[0]; if (r) playRadio(r); }); });
+      if (autoId) { var r0 = radio.filter(function (x) { return x.id === autoId; })[0]; if (r0 && !(R.cur && R.cur.id === r0.id)) playRadio(r0); }
+      paintNow();
+    });
+  }
+
+  // ---------- films (list) ----------
+  function renderFilms() {
+    paintTabs('films'); view.innerHTML = '<div class="skel"></div>';
+    loadFilms().then(function (j) {
+      if (!j.ok) { view.innerHTML = '<div class="card">' + T.net + '</div>'; return; }
+      var html = '<h1>ፊልሞች <span class="sub">· Films</span></h1><p class="sub">ፈቃድ ያላቸው የአማርኛ ፊልሞች — ነፃ ወይም ለ48 ሰዓት ኪራይ። · Licensed Amharic films: free, or rented for 48 hours.</p>';
+      html += j.films.length ? '<div class="grid" style="margin-top:14px">' + j.films.map(card).join('') + '</div>' : '<div class="card" style="margin-top:14px"><b>በቅርቡ · Coming soon.</b></div>';
+      html += '<p class="foot">ፊልም ሰሪ ነዎት? <a href="/for-filmmakers">ፊልምዎን ያቅርቡ →</a></p>';
+      view.innerHTML = html;
+    });
+  }
+
+  // ---------- film page (unchanged flow) ----------
   var F = null, rentalCode = null;
   function renderFilm(slug) {
+    paintTabs('films');
     try { rentalCode = q.get('rental') || localStorage.getItem('bw_' + slug) || null; } catch (e) { rentalCode = q.get('rental'); }
     api('/api/watch/films/' + encodeURIComponent(slug) + (rentalCode ? '?rental=' + encodeURIComponent(rentalCode) : '')).then(function (j) {
-      if (!j.ok) { view.innerHTML = '<div class="card">' + T.unavailable + ' <a href="/watch">← ሁሉም ፊልሞች</a></div>'; return; }
+      if (!j.ok) { view.innerHTML = '<div class="card">' + T.unavailable + ' <a href="/watch#films">← ሁሉም ፊልሞች</a></div>'; return; }
       F = j.film; var r = j.rental; var chapaOn = j.chapa && j.chapa.enabled;
       if (r && r.status === 'ACTIVE') { try { localStorage.setItem('bw_' + slug, r.code); } catch (e) {} }
-      var html = '<a href="/watch" class="sub">← ሁሉም ፊልሞች · All films</a>'
-        + '<div class="player" id="player" style="margin-top:8px"><div class="cover" id="cover">' + (F.posterUrl ? '<img src="' + esc(F.posterUrl) + '" alt="">' : '') + '<div class="play">▶</div></div></div>'
-        + '<h1 style="font-size:22px;margin-top:12px">' + esc(F.titleAm || F.title) + '</h1><div class="sub">' + [F.titleAm && F.title !== F.titleAm ? F.title : null, F.year, F.runtimeMin ? F.runtimeMin + ' ደቂቃ' : null, F.rating, F.genre, F.language].filter(Boolean).map(esc).join(' · ') + '</div>'
+      var html = '<a href="/watch#films" class="back">‹ ሁሉም ፊልሞች · All films</a>'
+        + '<div class="player" id="player"><div class="cover" id="cover">' + (F.posterUrl ? '<img src="' + esc(F.posterUrl) + '" alt="">' : '') + '<div class="play">▶</div></div></div>'
+        + '<h1 style="font-size:22px;margin-top:12px">' + esc(F.titleAm || F.title) + '</h1><div class="sub">' + [F.titleAm && F.title !== F.titleAm ? F.title : null, F.year, F.runtimeMin ? F.runtimeMin + ' ደቂቃ' : null, F.genre, F.language, F.rating].filter(Boolean).map(esc).join(' · ') + '</div>'
         + '<div id="rent" class="rent"></div>'
         + (F.descr ? '<div class="card" style="margin-top:12px;font-size:14px">' + esc(F.descr).replace(/\n/g, '<br>') + '</div>' : '');
       view.innerHTML = html;
@@ -49,7 +175,7 @@
     var box = $('rent'); if (!box) return;
     if (F.free) { box.innerHTML = '<span class="pill ok">ነፃ · Free</span>'; return; }
     if (r && r.status === 'ACTIVE') { box.innerHTML = '<span class="pill ok">✅ ተከራይተዋል · Rented</span> <span class="sub">እስከ ' + when(r.expiresAt) + ' · until ' + when(r.expiresAt) + '</span>'; return; }
-    if (r && r.status === 'PENDING') { box.innerHTML = '<span class="pill warn">⏳ ክፍያ በመጠበቅ ላይ · awaiting payment</span> <button class="btn sm ghost" id="chk">🔄 አረጋግጥ · Check</button>'; $('chk').addEventListener('click', function () { verify(r.code, 0); }); return; }
+    if (r && r.status === 'PENDING') { box.innerHTML = '<span class="pill warn">⏳ ክፍያ በመጠበቅ ላይ · awaiting payment</span> <button class="btn sm ghost" id="chk">🔄 አረጋግጥ · Check</button>'; $('chk').addEventListener('click', function () { verify(r.code, 99); }); return; }
     box.innerHTML = '<div class="card"><div class="price">' + birr(F.priceEtb) + ' <small style="font-size:13px;color:var(--mute)">/ ' + F.rentHours + ' ሰዓት · hours</small></div>'
       + (r && r.status === 'EXPIRED' ? '<div class="sub">' + T.expired + '</div>' : '')
       + '<button class="btn" id="rentBtn" style="margin-top:10px"' + (chapaOn ? '' : ' disabled') + '>' + (chapaOn ? '💳 ይከራዩ · Rent now' : '🔒 ኪራይ በቅርቡ · Rentals coming soon') + '</button></div>';
@@ -65,7 +191,7 @@
         p.innerHTML = '<video controls autoplay playsinline controlsList="nodownload" id="hlsv"></video>';
         var v = $('hlsv');
         if (v.canPlayType('application/vnd.apple.mpegurl')) { v.src = s.url; }
-        else { var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js'; sc.onload = function () { if (window.Hls && Hls.isSupported()) { var h = new Hls(); h.loadSource(s.url); h.attachMedia(v); } else toast('ይህ ብራውዘር HLS አያጫውትም · This browser cannot play HLS'); }; document.head.appendChild(sc); }
+        else { var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js'; sc.onload = function () { if (window.Hls && Hls.isSupported()) { var h = new Hls(); h.loadSource(s.url); h.attachMedia(v); } }; document.head.appendChild(sc); }
       }
     });
   }
@@ -94,7 +220,22 @@
       else toast('ክፍያው ገና አልተረጋገጠም · Payment not confirmed yet');
     });
   }
-  var m = location.pathname.match(/^\/watch\/([a-z0-9-]+)\/?$/);
-  if (m) { renderFilm(m[1]); $('shGo').addEventListener('click', submit); $('shBack').addEventListener('click', function () { sheet.classList.remove('on'); }); if (window.TG && TG.back) TG.back(function () { location.href = '/watch'; }); }
-  else renderList();
+
+  // ---------- router ----------
+  function route() {
+    var m = location.pathname.match(/^\/watch\/([a-z0-9-]+)\/?$/);
+    if (m) { renderFilm(m[1]); return; }
+    var h = (location.hash || '#home').slice(1).split('/');
+    if (h[0] === 'tv' && h[1]) renderChannel(h[1], h[2] || null, 'tv');
+    else if (h[0] === 'tv') renderTV();
+    else if (h[0] === 'radio') renderRadio(h[1] || null);
+    else if (h[0] === 'films') renderFilms();
+    else if (h[0] === 'kids' && h[1]) renderChannel(h[1], h[2] || null, 'kids');
+    else if (h[0] === 'kids') renderKids();
+    else renderHome();
+  }
+  window.addEventListener('hashchange', route);
+  if ($('shGo')) { $('shGo').addEventListener('click', submit); $('shBack').addEventListener('click', function () { sheet.classList.remove('on'); }); }
+  if (window.TG && TG.back) TG.back(function () { if (location.pathname !== '/watch') location.href = '/watch'; else if (location.hash && location.hash !== '#home') location.hash = '#home'; });
+  route();
 })();

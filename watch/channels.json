@@ -1,0 +1,30 @@
+{
+  "_note": "BinaWatch channels. tv/kids play the broadcaster's OWN YouTube channel (live stream when it is on, otherwise its latest upload). radio plays the station's own public stream (Zeno-hosted, as listed on the station site / radio directories). Only Ethiopian broadcasters and stations; verified 7 Sep 2026 by subscriber count against imitators. Add a channel = add a row; the checker picks it up on the next run.",
+  "tv": [
+    { "id": "ebs", "name": "EBS TV", "nameAm": "ኢቢኤስ ቲቪ", "yt": "UCVcc_sbg3AcXLV9vVufJrGg", "site": "https://www.ebstv.tv", "tag": "መዝናኛ · Entertainment", "color": "#e11d48" },
+    { "id": "etv", "name": "ETV · EBC", "nameAm": "ኢቲቪ", "yt": "UCOhrz3uRCOHmK6ueUstw7_Q", "site": "https://www.ebc.et", "tag": "ብሔራዊ · National", "color": "#2563eb" },
+    { "id": "fana", "name": "Fana TV", "nameAm": "ፋና ቲቪ", "yt": "UCZtXd8pSeqURf5MT2fqE51g", "site": "https://www.fanabc.com", "tag": "ዜና · News", "color": "#f59e0b" },
+    { "id": "kana", "name": "Kana TV", "nameAm": "ቃና ቲቪ", "yt": "UCvgODwKEq2GS7zxacxvYa6Q", "site": "https://kanatelevision.com", "tag": "ድራማ · Drama", "color": "#7c3aed" },
+    { "id": "ahadu", "name": "Ahadu TV", "nameAm": "አሐዱ ቲቪ", "yt": "UC-x3kCrGEczM1Dr0UOKy-BQ", "site": "https://ahadutv.com", "tag": "መዝናኛ · Entertainment", "color": "#0891b2" },
+    { "id": "arts", "name": "Arts TV", "nameAm": "አርትስ ቲቪ", "yt": "UCSnwxtpNr-2QupM0qi11Y6Q", "site": "https://artstvworld.com", "tag": "ጥበብ · Arts", "color": "#db2777" },
+    { "id": "obn", "name": "OBN", "nameAm": "ኦቢኤን", "yt": "UC-sZOi65unPqSK0Shl3Snyg", "site": "https://obn.et", "tag": "Afaan Oromoo", "color": "#16a34a" },
+    { "id": "etvoromo", "name": "ETV Afaan Oromoo", "nameAm": "ኢቲቪ አፋን ኦሮሞ", "yt": "UCMxIr0WxT9B3P7aCM0NsbKQ", "site": "https://www.ebc.et", "tag": "Afaan Oromoo", "color": "#0d9488" },
+    { "id": "nahoo", "name": "Nahoo TV", "nameAm": "ናሁ ቲቪ", "yt": "UCUhnQSskjPYay4TC_hq9uQQ", "site": "https://nahootv.com", "tag": "መዝናኛ · Entertainment", "color": "#ea580c" },
+    { "id": "balageru", "name": "Balageru TV", "nameAm": "ባላገሩ ቲቪ", "yt": "UCScCjYbR_WiJkQcxBvmvwtA", "site": "https://balagerutv.com", "tag": "ሙዚቃ · Music", "color": "#9333ea" },
+    { "id": "abbay", "name": "Abbay TV", "nameAm": "ዓባይ ቲቪ", "yt": "UClZPsyv-1PgxCqDHfBIq46A", "site": "https://abbaytv.com", "tag": "መዝናኛ · Entertainment", "color": "#0284c7" },
+    { "id": "amhara", "name": "Amhara TV", "nameAm": "አማራ ቲቪ", "yt": "UCx8pCDzeiIQaKuVsj46G3Dg", "site": "https://amharatv.com", "tag": "ክልል · Regional", "color": "#ca8a04" },
+    { "id": "tigrai", "name": "Tigrai TV", "nameAm": "ትግራይ ቲቪ", "yt": "UCW0FmkMO7KkYdIiNKXpY9Ng", "site": "https://tigraitv.com", "tag": "ትግርኛ · Tigrinya", "color": "#dc2626" }
+  ],
+  "kids": [
+    { "id": "tsehai", "name": "Tsehai Loves Learning", "nameAm": "ፀሐይ መማር ትወዳለች", "yt": "UCAJTrrbxbaMZtHh9sEH2U4w", "site": "https://www.whizkidsworkshop.com", "tag": "ለልጆች · Kids", "color": "#f59e0b" }
+  ],
+  "radio": [
+    { "id": "sheger", "name": "Sheger FM 102.1", "nameAm": "ሸገር ኤፍኤም 102.1", "stream": "https://stream.zeno.fm/y91n1vtbaw5tv", "site": "https://www.shegerfm.com", "yt": "UC9uvm3QhajePOVdct3Jv8Hg", "tag": "ዜና · ውይይት", "color": "#0ea5e9" },
+    { "id": "fmaddis", "name": "FM Addis 97.1", "nameAm": "ኤፍኤም አዲስ 97.1", "stream": "https://stream.zeno.fm/rb6wbrap7yzuv", "site": "https://www.ebc.et", "tag": "ኢቢሲ · EBC", "color": "#2563eb" },
+    { "id": "ebcradio", "name": "EBC Radio 104.7", "nameAm": "ኢቢሲ ራዲዮ 104.7", "stream": "https://stream-25.zeno.fm/2xguamap7yzuv", "site": "https://www.ebc.et", "tag": "ብሔራዊ · National", "color": "#1d4ed8" },
+    { "id": "ethiofm", "name": "Ethio FM 107.8", "nameAm": "ኢትዮ ኤፍኤም 107.8", "stream": "https://stream.zeno.fm/72y045deqeruv", "site": "https://zeno.fm/radio/ethiofm107_8/", "yt": "UCn4D20GPsAtNqN5bIC1BhFA", "tag": "ስፖርት · መዝናኛ", "color": "#16a34a" },
+    { "id": "jano", "name": "Jano FM", "nameAm": "ጃኖ ኤፍኤም", "stream": "https://stream-54.zeno.fm/1cyn1as4v68uv", "site": "https://zeno.fm/radio/jano-fm/", "tag": "ሙዚቃ · Music", "color": "#9333ea" },
+    { "id": "tizita", "name": "Tizita FM", "nameAm": "ትዝታ ኤፍኤም", "stream": "https://stream.zeno.fm/55nlq5yzqlftv", "site": "https://zeno.fm/radio/tizita-fm/", "tag": "የቆዩ ዘፈኖች · Oldies", "color": "#b45309" },
+    { "id": "taem", "name": "Taem Radio", "nameAm": "ጣዕም ሬድዮ", "stream": "https://stream.zeno.fm/ffg8htkh1k0uv", "site": "https://www.taemmedia.com", "tag": "መዝናኛ", "color": "#db2777" }
+  ]
+}

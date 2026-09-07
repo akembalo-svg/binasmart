@@ -82,6 +82,24 @@ module.exports = function registerWatch(fastify, deps) {
   fastify.get('/watch/:slug', async (req, reply) => { try { return reply.type('text/html; charset=utf-8').send(await page(req.params.slug)); } catch (e) { return reply.sendFile('watch.html'); } });
 
   // ---------- public API ----------
+  // ---------- live TV, kids, radio (watch/channels.json + watch/live-status.json from livecheck.js) ----------
+  const CHF = path.join(__dirname, 'channels.json'), LSF = path.join(__dirname, 'live-status.json');
+  let chCache = { t: 0, v: null };
+  function channelsNow() {
+    try {
+      const m = Math.max(fs.statSync(CHF).mtimeMs, fs.existsSync(LSF) ? fs.statSync(LSF).mtimeMs : 0);
+      if (chCache.v && chCache.t === m) return chCache.v;
+      const cfg = JSON.parse(fs.readFileSync(CHF, 'utf8'));
+      let st = { updatedAt: null, channels: {} }; try { st = JSON.parse(fs.readFileSync(LSF, 'utf8')); } catch (e) {}
+      const dress = (c, kind) => { const x = st.channels[c.id] || {}; return { id: c.id, kind, name: c.name, nameAm: c.nameAm, tag: c.tag || '', color: c.color || '#00B894', site: c.site || null, yt: c.yt || null, stream: c.stream || null,
+        live: !!x.live, videoId: x.videoId || null, liveTitle: x.liveTitle || null, latest: (x.latest || []).slice(0, 6), lastLiveAt: x.lastLiveAt || null }; };
+      chCache = { t: m, v: { updatedAt: st.updatedAt, tv: cfg.tv.map(c => dress(c, 'tv')), kids: cfg.kids.map(c => dress(c, 'kids')), radio: cfg.radio.map(c => dress(c, 'radio')) } };
+      return chCache.v;
+    } catch (e) { return { updatedAt: null, tv: [], kids: [], radio: [] }; }
+  }
+  fastify.get('/api/watch/live', async (req, reply) => { reply.header('Cache-Control', 'public, max-age=120'); const v = channelsNow(); return { ok: true, updatedAt: v.updatedAt, tv: v.tv, kids: v.kids }; });
+  fastify.get('/api/watch/radio', async (req, reply) => { reply.header('Cache-Control', 'public, max-age=600'); return { ok: true, radio: channelsNow().radio }; });
+
   fastify.get('/api/watch/films', async () => {
     const films = await prisma.film.findMany({ where: publicWhere(), orderBy: { createdAt: 'desc' }, take: 200 });
     return { ok: true, chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null }, films: films.filter(f => isPublic(f, clock())).map(f => pubFilm(f)) };
