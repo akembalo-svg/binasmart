@@ -81,8 +81,26 @@
   function choose(p) {
     S.pinMode = false;
     if (S.searchTarget === 'pickup') { setPickup({ lat: p.lat, lng: p.lng, label: p.label }); if (S.dropoff) return quote(); show('s-home'); return; }
-    S.dropoff = { lat: p.lat, lng: p.lng, label: p.label }; BinaMap.setDrop(S.dropoff); quote();
+    S.dropoff = { lat: p.lat, lng: p.lng, label: p.label }; BinaMap.setDrop(S.dropoff); remember(S.dropoff); quote();
   }
+
+  // ---- quick destinations: the airport, then the last two places this rider went ----
+  var AIRPORT = { lat: 8.9779, lng: 38.7993, label: 'Bole International Airport · ቦሌ አየር ማረፊያ' };
+  function recents() { try { return JSON.parse(lsGet('bina_ride_recent') || '[]'); } catch (e) { return []; } }
+  function remember(p) {
+    if (!p || !p.label || p.label === AIRPORT.label) return;
+    var r = recents().filter(function (x) { return x.label !== p.label; });
+    r.unshift({ lat: p.lat, lng: p.lng, label: p.label }); lsSet('bina_ride_recent', JSON.stringify(r.slice(0, 3))); renderQuick();
+  }
+  function renderQuick() {
+    var q = $('quick'); if (!q) return;
+    var items = [{ ic: '✈️', am: 'ኤርፖርት', en: 'Bole Airport', p: AIRPORT }].concat(recents().slice(0, 2).map(function (p) {
+      return { ic: '🕘', am: p.label.split(' · ')[0], en: 'ቅርብ · recent', p: p };
+    }));
+    q.innerHTML = items.map(function (it, i) { return '<button type="button" data-i="' + i + '"><span class="ic">' + it.ic + '</span><span><b>' + esc(it.am) + '</b><small>' + esc(it.en) + '</small></span></button>'; }).join('');
+    q.querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { S.searchTarget = 'dropoff'; choose(items[+b.dataset.i].p); }); });
+  }
+  renderQuick();
 
   // ---- quote ----
   function quote() {

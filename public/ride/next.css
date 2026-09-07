@@ -74,3 +74,8 @@ html.next .trkRing{border-color:#14D8B4;background:#0F172A}
 html.next .trkPulse{background:rgba(20,216,180,.28)}
 html.next .trkNose::before{border-bottom-color:#14D8B4}
 html.next .toast{background:rgba(15,23,42,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18)}
+
+/* quick destinations as glass cards */
+html.next .quick button{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.85);border-radius:16px;box-shadow:0 8px 20px -14px rgba(15,23,42,.25);padding:9px 12px 9px 10px}
+html.next .quick button b{font-weight:800}
+html.next .quick button small{color:var(--mut)}

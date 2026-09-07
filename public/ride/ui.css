@@ -103,3 +103,12 @@ body.tg .tglink{display:none}
 .trkNose{position:absolute;inset:0;transition:transform .9s ease-out}
 .trkNose::before{content:'';position:absolute;left:50%;top:-11px;transform:translateX(-50%);
   width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:11px solid var(--em)}
+
+/* ---- quick destinations: the airport, then the last two places the rider went ---- */
+.quick{display:flex;gap:8px;margin:0 0 10px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.quick::-webkit-scrollbar{display:none}
+.quick button{flex:none;display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:8px 12px 8px 10px;font:inherit;text-align:left;cursor:pointer;max-width:60%}
+.quick button .ic{font-size:18px;line-height:1}
+.quick button b{display:block;font-size:13px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
+.quick button small{display:block;font-size:10.5px;font-weight:600;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
+.quick:empty{display:none}
