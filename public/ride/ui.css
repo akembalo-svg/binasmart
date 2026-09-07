@@ -127,3 +127,17 @@ body.tg .tglink{display:none}
 .biniSay b{display:block;font-weight:800}.biniSay small{display:block;color:#3f7a66;margin-top:2px}
 .biniSay.warn{background:#fff7ed;color:#9a3412}.biniSay.warn small{color:#b45309}
 .biniSay.busy{background:#f1f5f9;color:#475569}.biniSay.busy small{color:#64748b}
+
+/* ---- the sparkle opposite "ወዴት?" and the About screen ---- */
+.h1row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.aiSpark{flex:none;width:46px;height:46px;border:0;border-radius:50%;background:#fff;box-shadow:0 8px 20px -10px rgba(15,23,42,.35);cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:-2px}
+.aiSpark .spk{transform-origin:24px 24px;animation:spkspin 9s linear infinite,spkpulse 2.6s ease-in-out infinite}
+.aiSpark .spk2{transform-origin:38px 37px;animation:spkspin 5s linear infinite reverse,spkpulse 2.6s ease-in-out infinite 1.3s}
+@keyframes spkspin{to{transform:rotate(360deg)}}
+@keyframes spkpulse{0%,100%{opacity:.85}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.aiSpark .spk,.aiSpark .spk2{animation:none}}
+.about{list-style:none;margin:10px 0 6px}
+.about li{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.45}
+.about li b{display:block;font-size:14.5px}.about li small{display:block;font-size:12px;color:var(--mut);margin-top:2px}
+.aboutChips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.chipq{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font:inherit;font-size:13px;font-weight:700;color:var(--em2);cursor:pointer}

@@ -19,7 +19,7 @@ html.next .chip3d.off::after{content:;position:absolute;left:12px;right:12px;top
 html.next .chip3d{position:relative}
 
 /* the sheet: see-through glass */
-html.next .sheet{background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(10px) saturate(160%) brightness(.9);backdrop-filter:blur(10px) saturate(160%) brightness(.9);border-radius:28px 28px 0 0;border-top:1px solid rgba(255,255,255,.7);box-shadow:0 -18px 50px -20px rgba(15,23,42,.45),inset 0 1px 0 rgba(255,255,255,.85);padding:6px 16px calc(10px + env(safe-area-inset-bottom))}
+html.next .sheet{background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(6px) saturate(160%) brightness(.9);backdrop-filter:blur(6px) saturate(160%) brightness(.9);border-radius:28px 28px 0 0;border-top:1px solid rgba(255,255,255,.7);box-shadow:0 -18px 50px -20px rgba(15,23,42,.45),inset 0 1px 0 rgba(255,255,255,.85);padding:6px 16px calc(10px + env(safe-area-inset-bottom))}
 html.next .grip{width:40px;height:4px;background:rgba(15,23,42,.28);margin:2px auto 8px}
 html.next h1{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.1}
 html.next h1 small,html.next h2 small{font-size:12.5px;font-weight:500;color:var(--mut);margin-top:3px}
@@ -113,3 +113,6 @@ html.next .tier{background:rgba(255,255,255,.5)}
 html.next .biniSay{background:rgba(255,255,255,.66)}
 /* a browser without backdrop-filter gets a readable sheet instead of a see-through one */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html.next .sheet{background:rgba(255,255,255,.86)}}
+html.next .aiSpark{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.85)}
+html.next .about li{border-bottom-color:rgba(15,23,42,.1)}
+html.next .chipq{background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.85);border-radius:14px}

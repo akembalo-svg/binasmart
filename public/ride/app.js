@@ -159,6 +159,20 @@
     }
   }
 
+  // ---- About Bina Ride: the sparkle opens it; the chips ask the site's Bini ----
+  if ($('aboutBtn')) {
+    $('aboutBtn').addEventListener('click', function () { show('s-about'); });
+    $('closeAbout').addEventListener('click', function () { show('s-home'); });
+    document.querySelectorAll('#s-about .chipq').forEach(function (c) {
+      c.addEventListener('click', function () {
+        var ans = $('aboutAns'); ans.className = 'biniSay busy'; ans.innerHTML = '<b>ቢኒ እያሰበ ነው…</b><small>Bini is thinking…</small>';
+        api('/api/assistant', { message: 'About BinaSmart Ride (bina.et/ride), answer in Amharic first then one English line, max 4 sentences, never invent a price: ' + c.dataset.q })
+          .then(function (d) { ans.className = 'biniSay ok'; ans.innerHTML = '<b>' + esc((d && d.reply) || '') .replace(/\n/g, '<br>') + '</b>'; })
+          .catch(function () { ans.className = 'biniSay warn'; ans.innerHTML = '<b>የአውታረ መረብ ችግር — እንደገና ይሞክሩ።</b><small>Network error — try again.</small>'; });
+      });
+    });
+  }
+
   // ---- quote ----
   function quote() {
     if (!S.dropoff) return;
