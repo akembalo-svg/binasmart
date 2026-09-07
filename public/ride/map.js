@@ -53,8 +53,10 @@ window.BinaMap = (function () {
     if (map.getSource('route')) map.getSource('route').setData(gj);
     else {
       map.addSource('route', { type: 'geojson', data: gj });
-      map.addLayer({ id: 'route-casing', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#064e3b', 'line-width': 9, 'line-opacity': 0.35 } });
-      map.addLayer({ id: 'route-line', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#059669', 'line-width': 5 } });
+      var nx = !!window.__rideNext; // the "next" look: cyan route with a soft glow under a dark keyline
+      if (nx) map.addLayer({ id: 'route-glow', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#14D8B4', 'line-width': 18, 'line-opacity': 0.35, 'line-blur': 6 } });
+      map.addLayer({ id: 'route-casing', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': nx ? '#0F172A' : '#064e3b', 'line-width': nx ? 10 : 9, 'line-opacity': nx ? 0.55 : 0.35 } });
+      map.addLayer({ id: 'route-line', type: 'line', source: 'route', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': nx ? '#14D8B4' : '#059669', 'line-width': nx ? 6 : 5 } });
     }
     // bottomPad < 0 means "just update the line, leave my camera alone" — used while driving.
     if (bottomPad < 0) return;
