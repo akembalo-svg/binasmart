@@ -19,18 +19,18 @@ html.next .chip3d.off::after{content:;position:absolute;left:12px;right:12px;top
 html.next .chip3d{position:relative}
 
 /* the sheet: see-through glass */
-html.next .sheet{background:var(--bg);-webkit-backdrop-filter:blur(36px) saturate(180%);backdrop-filter:blur(36px) saturate(180%);border-radius:34px 34px 0 0;border-top:1px solid rgba(255,255,255,.75);box-shadow:0 -18px 50px -20px rgba(15,23,42,.45),inset 0 1px 0 rgba(255,255,255,.9);padding:9px 18px calc(16px + env(safe-area-inset-bottom))}
-html.next .grip{width:44px;height:5px;background:#CBD5E1;margin:2px auto 10px}
-html.next h1{font-size:26px;font-weight:800;letter-spacing:-.4px}
-html.next h1 small,html.next h2 small{font-size:13px;font-weight:500;color:var(--mut);margin-top:4px}
+html.next .sheet{background:rgba(255,255,255,.36);-webkit-backdrop-filter:blur(40px) saturate(190%);backdrop-filter:blur(40px) saturate(190%);border-radius:30px 30px 0 0;border-top:1px solid rgba(255,255,255,.7);box-shadow:0 -18px 50px -20px rgba(15,23,42,.45),inset 0 1px 0 rgba(255,255,255,.85);padding:6px 16px calc(10px + env(safe-area-inset-bottom))}
+html.next .grip{width:40px;height:4px;background:rgba(15,23,42,.28);margin:2px auto 8px}
+html.next h1{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.1}
+html.next h1 small,html.next h2 small{font-size:12.5px;font-weight:500;color:var(--mut);margin-top:3px}
 html.next h2{font-size:22px;font-weight:800;letter-spacing:-.3px}
 
 /* fields and cards: translucent white */
-html.next .field{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.85);border-radius:20px;padding:15px 14px;font-weight:700;box-shadow:0 10px 24px -16px rgba(15,23,42,.35);margin:12px 0 10px}
+html.next .field{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.8);border-radius:18px;padding:13px 14px;font-weight:700;box-shadow:0 10px 24px -16px rgba(15,23,42,.35);margin:9px 0 8px}
 html.next .field .ph{color:#475569;font-weight:600}
 html.next .from{font-size:13px;color:var(--mut);padding:0 2px}
 html.next .from button,html.next .link{color:var(--em2);font-weight:800}
-html.next .hint{font-size:11px;color:#475569;font-weight:600;margin-top:12px}
+html.next .hint{font-size:10.5px;color:#475569;font-weight:600;margin-top:6px}
 html.next .small{color:var(--mut)}
 html.next #q,html.next #whoName,html.next #whoPhone{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.85);border-radius:16px;padding:13px 14px}
 html.next #q:focus,html.next #whoName:focus,html.next #whoPhone:focus{border-color:var(--em);box-shadow:0 0 0 3px rgba(0,184,148,.18)}
@@ -85,3 +85,13 @@ html.next .quick button b{font-weight:800}
 html.next .quick button small{color:var(--mut)}
 html.next .chipsat{font-size:18px}
 html.next .chipsat.off{filter:grayscale(1) opacity(.85)}
+/* shorter sheet: tighter rows, translucent inner cards */
+html.next .tglink{margin:4px 0 0;font-size:12px}
+html.next .from{font-size:12.5px;margin-top:2px}
+html.next .quick{margin:0 0 6px}
+html.next .quick button{background:rgba(255,255,255,.55);padding:7px 11px 7px 9px}
+html.next .tiers{gap:6px;margin:8px 0}
+html.next .tier{padding:8px 12px;background:rgba(255,255,255,.42)}
+html.next .driver,html.next .btn,html.next #q,html.next #whoName,html.next #whoPhone,html.next .passenger input{background:rgba(255,255,255,.6)}
+html.next .payrow{margin:4px 0 8px}
+html.next .cta{padding:14px}
