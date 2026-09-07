@@ -1,5 +1,5 @@
 // BinaSmart app-shell service worker
-const CACHE='bina-v1';
+const CACHE='bina-v2';
 const SHELL=['/','/icon-192.png','/icon-512.png','/icon-32.png'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL).catch(()=>{})));});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{const ks=await caches.keys();await Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim();})());});

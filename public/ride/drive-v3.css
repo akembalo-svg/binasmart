@@ -74,3 +74,25 @@ html.next .dpin-drop.active .dpinLabel{background:#00C896;color:#04283b;border-c
 html.next .odotp{background:#0099FF;box-shadow:0 0 0 3px rgba(0,153,255,.22)}
 html.next .odotd{background:#00C896;box-shadow:0 0 0 3px rgba(0,200,150,.22)}
 html.next .demoBadge{border-radius:999px;font-weight:800}
+
+/* v2 (7 Sep 2026): every control is glass — translucent, blurred, thin light border. The GO / accept buttons
+   keep an emerald tint so they still read as primary; the map and the dark card show through. */
+html.next .dbrand{background:rgba(8,17,32,.3);border-color:rgba(255,255,255,.24)}
+html.next .dbrand b{color:#fff}
+html.next .dbrand b span{color:#00C896}
+html.next .dstat,html.next .dghost{background:rgba(8,17,32,.32);border:1px solid rgba(255,255,255,.22);box-shadow:0 12px 30px -16px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14)}
+html.next .dbtn{-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);border:1px solid rgba(255,255,255,.2);color:#fff}
+html.next .dbtn.go{background:linear-gradient(135deg,rgba(0,200,150,.38),rgba(0,150,136,.24));border-color:rgba(0,200,150,.6);box-shadow:0 14px 30px -14px rgba(0,200,150,.6),inset 0 1px 0 rgba(255,255,255,.3)}
+html.next .dbtn.go:active{background:rgba(0,200,150,.5)}
+html.next .dbtn.ghost{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
+html.next .dbtn.ghost:active{background:rgba(255,255,255,.16)}
+html.next .tcall{background:rgba(0,200,150,.22);border:1px solid rgba(0,200,150,.55);color:#fff;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);padding:8px 12px;border-radius:12px}
+html.next .tpay,html.next .nhSpeed,html.next .dnavThen,html.next .opill,html.next .tstage{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.16)}
+html.next .opill,html.next .tstage{border-color:rgba(0,200,150,.45)}
+html.next .dnavIc{background:rgba(0,153,255,.32);border:1px solid rgba(147,197,253,.5)}
+html.next .dnav.now{background:rgba(0,153,255,.4);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border-color:rgba(147,197,253,.7)}
+html.next .dnav.now .dnavIc{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.35)}
+html.next .tav{background:rgba(0,153,255,.35);border:1px solid rgba(147,197,253,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+html.next .dcard{background:rgba(8,17,32,.62)}
+html.next .dpinLabel{background:rgba(8,17,32,.6)}
+html.next .dpin-drop.active .dpinLabel{background:rgba(0,200,150,.55);color:#fff;border-color:rgba(94,234,212,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
