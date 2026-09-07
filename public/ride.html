@@ -23,9 +23,18 @@ if(/[?&]v=classic\b/.test(q)){on=false;try{localStorage.setItem('bina_ride_next'
 else if(/[?&]v=next\b/.test(q)){try{localStorage.setItem('bina_ride_next','1');}catch(e){}}
 else if(ls==='0'){on=false;}
 if(on){window.__rideNext=true;document.documentElement.className+=' next';
-['/static/fonts/fonts.css?v=1','/static/ride/v3.css?v=3'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
+['/static/fonts/fonts.css?v=1','/static/ride/v3.css?v=4'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
+<script>
+/* theme resolver: ?theme=dark|light beats Telegram, Telegram beats the OS setting; follows live changes */
+(function(){var h=document.documentElement,P=new URLSearchParams(location.search),t=P.get('theme');
+function tg(){try{return window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.colorScheme}catch(e){return null}}
+function apply(){var s=tg(),d=t==='dark'||(t!=='light'&&(s==='dark'||(!s&&matchMedia('(prefers-color-scheme: dark)').matches)));h.classList.toggle('dark',!!d);var m=document.querySelector('meta[name=theme-color]');if(m)m.content=d?'#081120':'#009688';}
+apply();try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',apply)}catch(e){}
+try{if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.onEvent)window.Telegram.WebApp.onEvent('themeChanged',apply)}catch(e){}
+window.addEventListener('load',apply);})();
+</script>
 </head>
 <body>
 <div id="map"></div>

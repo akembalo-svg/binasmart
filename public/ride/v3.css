@@ -126,3 +126,38 @@ html.next .chip3d.off{background:rgba(8,17,32,.3);border-color:rgba(255,255,255,
 html.next .link{color:var(--em2);font-weight:800}
 html.next .link.danger{color:#b91c1c}
 html.next .stars button{background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.8);border-radius:12px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+
+/* v4 (8 Sep 2026): DARK MODE. html.dark is set by the resolver in ride.html (?theme=, Telegram colorScheme,
+   prefers-color-scheme). Dark navy glass over a dimmed map; emerald/teal accents; the CTA stays emerald glass. */
+html.next.dark{--ink:#F8FAFC;--mut:rgba(255,255,255,.62);--line:rgba(255,255,255,.12);--bg:#0B1220;--em:#14D8B4;--em2:#14D8B4;color-scheme:dark}
+html.next.dark body{background:#081120;color:#F8FAFC}
+html.next.dark #map{filter:brightness(.72) saturate(.8) contrast(1.05)}
+html.next.dark .top .brand{background:rgba(8,17,32,.55);border-color:rgba(255,255,255,.18);color:#fff}
+html.next.dark .top .brand .bt,html.next.dark .top .brand b{color:#fff}
+html.next.dark .sheet{background:rgba(8,17,32,.7);border-top:1px solid rgba(255,255,255,.14);box-shadow:0 -18px 50px -20px #000,inset 0 1px 0 rgba(255,255,255,.08)}
+html.next.dark .grip{background:#475569}
+html.next.dark h1,html.next.dark h2,html.next.dark .small,html.next.dark .payrow,html.next.dark .forother,html.next.dark .about li,html.next.dark .results b,html.next.dark .quick button b,html.next.dark .tier b,html.next.dark .driver,html.next.dark .fareline{color:#F8FAFC}
+html.next.dark h1 small,html.next.dark h2 small,html.next.dark .hint,html.next.dark .tier .sub,html.next.dark .quick button small,html.next.dark .biniSay small,html.next.dark .results small{color:rgba(255,255,255,.6)}
+html.next.dark .btn,html.next.dark .quick button,html.next.dark .tier,html.next.dark .chipq,html.next.dark .field,html.next.dark .back,html.next.dark .biniMic,html.next.dark .stars button{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);color:#F8FAFC;box-shadow:0 12px 30px -16px #000,inset 0 1px 0 rgba(255,255,255,.1)}
+html.next.dark .btn:active,html.next.dark .quick button:active,html.next.dark .chipq:active,html.next.dark .back:active{background:rgba(255,255,255,.18)}
+html.next.dark .field{background:rgba(255,255,255,.1)}
+html.next.dark .field .ph{color:rgba(255,255,255,.5)}
+html.next.dark .field .fi{color:#fff}
+html.next.dark .from button,html.next.dark .link,html.next.dark .tglink,html.next.dark .chipq,html.next.dark .results .am,html.next.dark .tier .price,html.next.dark .status{color:#14D8B4}
+html.next.dark .link.danger{color:#fca5a5}
+html.next.dark #q,html.next.dark #whoName,html.next.dark #whoPhone,html.next.dark .passenger input{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff}
+html.next.dark #q::placeholder,html.next.dark #whoName::placeholder,html.next.dark #whoPhone::placeholder{color:rgba(255,255,255,.45)}
+html.next.dark .results li{border-bottom-color:rgba(255,255,255,.1)}
+html.next.dark .results .ic{background:rgba(0,200,150,.18)}
+html.next.dark .tier.sel{background:rgba(0,200,150,.22);border:1.5px solid rgba(0,200,150,.7)}
+html.next.dark .bini{background:linear-gradient(rgba(8,17,32,.62),rgba(8,17,32,.62)) padding-box,linear-gradient(90deg,#00C896,#0099FF,#6C63FF,#00C896) border-box;background-size:auto,300% 100%}
+html.next.dark .bini input{color:#fff}
+html.next.dark .bini input::placeholder{color:rgba(255,255,255,.55)}
+html.next.dark .biniSay{background:rgba(255,255,255,.09);border:1px solid rgba(108,99,255,.35);color:#F8FAFC}
+html.next.dark .biniSay.warn{background:rgba(245,158,11,.16);color:#fcd34d}
+html.next.dark .about li{border-bottom-color:rgba(255,255,255,.1)}
+html.next.dark .driver{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
+html.next.dark .stars button{font-size:34px;color:rgba(255,255,255,.25);background:rgba(255,255,255,.06)}
+html.next.dark .stars button.on{color:#F59E0B}
+html.next.dark .toast{background:#F8FAFC;color:#081120}
+html.next.dark .chip3d.off{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25)}
