@@ -194,6 +194,18 @@ main{padding-bottom:110px}
   main{padding-bottom:120px}
 }
 </style>
+<style>
+/* glass controls (7 Sep 2026): pills, chips, prompts, service tiles and mini-app buttons are translucent glass */
+.nav .pill{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}.nav .pill:active{background:rgba(255,255,255,.7)}
+.nav .pill.go{background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));border:1px solid rgba(255,255,255,.6);color:#fff;text-shadow:0 1px 2px rgba(0,80,60,.35);box-shadow:0 16px 32px -14px rgba(0,200,150,.6),inset 0 1px 0 rgba(255,255,255,.45);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.chip{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}.chip:active{background:rgba(255,255,255,.7)}
+.prompt{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);border-radius:11px}
+.mini{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);background:rgba(255,255,255,.5);border-radius:18px}
+.send{background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));border:1px solid rgba(255,255,255,.6);color:#fff;text-shadow:0 1px 2px rgba(0,80,60,.35);box-shadow:0 16px 32px -14px rgba(0,200,150,.6),inset 0 1px 0 rgba(255,255,255,.45);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.app .btn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.45);color:#fff!important;-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.svc .ic,.svc .go,.svc .live{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.aiclose{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);border-radius:50%}
+</style>
 </head>
 <body>
 <header class="nav glass">
