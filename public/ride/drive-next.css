@@ -1,0 +1,61 @@
+/* BinaSmart Driver — "next" look, 7 Sep 2026. Same glass language as the rider app, but the cockpit
+   stays DARK and AMBER on purpose (drive.css: a driver must never mistake this for the rider app, and
+   a white sheet blinds a windscreen at night). What changes: the type, the glass, the radii, the route.
+   Scoped to html.next; drive.html adds the class by default, ?v=classic removes it. */
+html.next body.drv{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* top bar: stats and controls as dark glass pills */
+html.next .dtop{background:linear-gradient(180deg,rgba(11,18,32,.82),rgba(11,18,32,.5) 70%,transparent);padding-top:calc(11px + env(safe-area-inset-top))}
+html.next .dbrand{font-size:16px;letter-spacing:-.2px}
+html.next .dstat{background:rgba(21,31,51,.62);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.14);border-radius:14px;box-shadow:0 12px 30px -14px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08)}
+html.next .dstat span{font-weight:800}
+html.next .dghost{background:rgba(21,31,51,.62);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.14);border-radius:50%;width:42px;height:42px;box-shadow:0 12px 30px -14px rgba(0,0,0,.6)}
+html.next .dbanner{border-radius:14px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+
+/* cards: dark see-through glass, rider-app radius */
+html.next .dcard{background:rgba(21,31,51,.72);-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%);border-radius:30px 30px 0 0;border-top:1px solid rgba(255,255,255,.16);box-shadow:0 -18px 50px -20px #000,inset 0 1px 0 rgba(255,255,255,.08);padding:10px 18px calc(16px + env(safe-area-inset-bottom))}
+html.next .tgrip{width:44px;height:5px;background:#475569;margin:2px auto 10px}
+html.next .dcard h2{font-size:22px;font-weight:800;letter-spacing:-.3px}
+html.next .ihead b{font-size:22px;font-weight:800;letter-spacing:-.3px}
+html.next .orow b{font-weight:800}
+html.next .orow small{font-weight:500}
+
+/* offer: the amber ring, a rounder pill, the fare as the loudest thing */
+html.next .doffer{border-top:1.5px solid rgba(245,158,11,.8)}
+html.next .oring{width:54px;height:54px;top:12px}
+html.next .oring svg{width:54px;height:54px}
+html.next .oring circle{stroke-width:4.5}
+html.next .oring b{font-size:16px;font-weight:800}
+html.next .opill{font-weight:800;border-radius:999px;padding:5px 10px}
+html.next .ofare{margin-top:12px;padding:12px 14px;border:0;border-radius:16px;background:linear-gradient(120deg,rgba(245,158,11,.16),rgba(217,119,6,.08));gap:12px}
+html.next .ofare b{font-size:26px;font-weight:800}
+
+/* buttons: rider radius, amber stays */
+html.next .dbtn{border-radius:18px;font-weight:800;padding:15px 12px}
+html.next .dbtn.go{background:linear-gradient(135deg,#fbbf24,#f59e0b 60%,#d97706);box-shadow:0 18px 34px -14px rgba(245,158,11,.75),inset 0 1px 0 rgba(255,255,255,.35)}
+html.next .dbtn.ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#e2e8f0}
+html.next .dbtn.big{border-radius:20px}
+
+/* trip */
+html.next .tstage{border-radius:999px;font-weight:800}
+html.next .trider{border-bottom-color:rgba(255,255,255,.1)}
+html.next .tav{font-weight:800;box-shadow:0 0 0 3px rgba(245,158,11,.22)}
+html.next .tpay{border-radius:10px;font-weight:800}
+html.next .tbooked{background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.18);border-radius:14px}
+
+/* Amharic turn banner and HUD: glass over the map */
+html.next .dnav{background:rgba(21,31,51,.78);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border:1px solid rgba(255,255,255,.16);border-radius:22px;box-shadow:0 14px 36px -14px #000,inset 0 1px 0 rgba(255,255,255,.08)}
+html.next .dnav.now{background:linear-gradient(135deg,#fbbf24,#f59e0b);border-color:#fde68a}
+html.next .dnavTxt b{font-weight:800}
+html.next .dnavThen{border-radius:9px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+html.next .dnavhud{background:rgba(21,31,51,.78);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border:1px solid rgba(255,255,255,.16);border-radius:22px;box-shadow:0 -12px 40px -16px #000,inset 0 1px 0 rgba(255,255,255,.08)}
+html.next .nhInfo b{font-weight:800}
+html.next .nhSpeed{border-radius:14px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+html.next .nhSpeed b{font-weight:800}
+
+/* pins and the driver's car */
+html.next .dpinLabel{border-radius:10px;background:rgba(21,31,51,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:rgba(255,255,255,.18);font-weight:800}
+html.next .dpin-drop .dpinDot{background:#14D8B4}
+html.next .dpin-drop.active .dpinLabel{background:#14D8B4;color:#04283b;border-color:#5eead4}
+html.next .odotd{background:#14D8B4;box-shadow:0 0 0 3px rgba(20,216,180,.22)}
+html.next .demoBadge{border-radius:999px;font-weight:800}

@@ -10,6 +10,15 @@
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
 <link rel="stylesheet" href="/static/ride/ui.css?v=8">
 <link rel="stylesheet" href="/static/ride/drive.css?v=8">
+<script>
+/* "next" look (default since 7 Sep 2026): html.next + ride/drive-next.css. ?v=classic remembers the old look; ?v=next restores. */
+(function(){try{var on=true,ls=localStorage.getItem('bina_drive_next');
+if(/[?&]v=classic\b/.test(location.search)){localStorage.setItem('bina_drive_next','0');on=false;}
+else if(/[?&]v=next\b/.test(location.search)){localStorage.setItem('bina_drive_next','1');}
+else if(ls==='0'){on=false;}
+if(on){window.__rideNext=true;document.documentElement.classList.add('next');
+['/static/fonts/fonts.css?v=1','/static/ride/drive-next.css?v=1'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}}catch(e){}})();
+</script>
 </head>
 <body class="drv">
 <div id="map"></div>
@@ -104,7 +113,7 @@
 <script src="/static/vendor/maplibre-gl.js"></script>
 <script src="/static/vendor/pmtiles.js"></script>
 <script src="/static/ride/tg.js?v=2"></script>
-<script src="/static/ride/map.js?v=4"></script>
+<script src="/static/ride/map.js?v=5"></script>
 <script src="/static/ride/drivedemo.js?v=2"></script>
 <script src="/static/ride/drivenav.js?v=2"></script>
 <script src="/static/ride/drive.js?v=13"></script>
