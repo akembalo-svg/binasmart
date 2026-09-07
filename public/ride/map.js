@@ -75,8 +75,29 @@ window.BinaMap = (function () {
     }
     if (map.getSource('route')) map.removeSource('route');
   }
+  // ---- satellite: imagery under the roads. The painted ground (background, fills) hides while it is
+  // on; roads, the route, pins and labels stay on top, so it reads like a hybrid map, not a photo. ----
+  var satCfg = null, satOn = false;
+  function setSatelliteConfig(cfg) { satCfg = cfg && cfg.tiles ? cfg : null; }
+  function hasSatellite() { return !!satCfg; }
+  function wantsSatellite() { return lsGet('bina_map_sat') === '1'; }
+  function isSatellite() { return satOn; }
+  function setSatellite(on) {
+    if (!map || !satCfg) return false;
+    lsSet('bina_map_sat', on ? '1' : '0');
+    if (on && !map.getSource('sat')) {
+      map.addSource('sat', { type: 'raster', tiles: [satCfg.tiles], tileSize: 256, maxzoom: satCfg.maxzoom || 20, attribution: satCfg.attribution || '' });
+      map.addLayer({ id: 'sat-layer', type: 'raster', source: 'sat', paint: { 'raster-opacity': 1 } }, map.getLayer('roads-casing') ? 'roads-casing' : undefined);
+    }
+    if (map.getLayer('sat-layer')) map.setLayoutProperty('sat-layer', 'visibility', on ? 'visible' : 'none');
+    ((map.getStyle() || {}).layers || []).forEach(function (l) {
+      if (l.type === 'background' || (l.type === 'fill' && l.source === 'protomaps')) map.setLayoutProperty(l.id, 'visibility', on ? 'none' : 'visible');
+    });
+    satOn = !!on; return true;
+  }
   function flyTo(p, zoom) { if (!map) return; map.flyTo({ center: [p.lng, p.lat], zoom: zoom || 15.5, duration: 900 }); }
   function onClick(fn) { if (!map) return; map.on('click', function (e) { fn({ lat: e.lngLat.lat, lng: e.lngLat.lng }); }); }
 
-  return { init: init, set3D: set3D, is3D: is3D, setPickup: setPickup, setDrop: setDrop, drawRoute: drawRoute, clearRoute: clearRoute, flyTo: flyTo, onClick: onClick, get map() { return map; } };
+  return { init: init, set3D: set3D, is3D: is3D, setPickup: setPickup, setDrop: setDrop, drawRoute: drawRoute, clearRoute: clearRoute, flyTo: flyTo, onClick: onClick,
+    setSatelliteConfig: setSatelliteConfig, hasSatellite: hasSatellite, wantsSatellite: wantsSatellite, isSatellite: isSatellite, setSatellite: setSatellite, get map() { return map; } };
 })();

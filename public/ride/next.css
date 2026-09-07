@@ -83,3 +83,5 @@ html.next .toast{background:rgba(15,23,42,.9);-webkit-backdrop-filter:blur(12px)
 html.next .quick button{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.85);border-radius:16px;box-shadow:0 8px 20px -14px rgba(15,23,42,.25);padding:9px 12px 9px 10px}
 html.next .quick button b{font-weight:800}
 html.next .quick button small{color:var(--mut)}
+html.next .chipsat{font-size:18px}
+html.next .chipsat.off{filter:grayscale(1) opacity(.85)}

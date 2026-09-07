@@ -32,6 +32,17 @@
   });
   $('btn3d').addEventListener('click', function () { var on = !BinaMap.is3D(); BinaMap.set3D(on); $('btn3d').classList.toggle('off', !on); });
 
+  // ---- satellite (MapTiler imagery) — the button appears only when the server has a key ----
+  api('/api/ride/map-config').then(function (d) {
+    if (!d || !d.satellite || !$('btnSat')) return;
+    BinaMap.setSatelliteConfig(d.satellite);
+    var b = $('btnSat'); b.classList.remove('hidden');
+    function apply(on) { BinaMap.setSatellite(on); b.classList.toggle('off', !on); }
+    var m = BinaMap.map;
+    if (m && m.loaded()) apply(BinaMap.wantsSatellite()); else if (m) m.once('load', function () { apply(BinaMap.wantsSatellite()); });
+    b.addEventListener('click', function () { apply(!BinaMap.isSatellite()); });
+  }).catch(function () {});
+
   // A rider who denies the location prompt (or never answers it) must still be able to book:
   // some browsers call NEITHER callback in that case, so a hard timer guarantees a pickup exists.
   var DEFAULT_PICKUP = { lat: 9.0108, lng: 38.7578, label: 'Bole, Addis Ababa (tap Change)' };

@@ -71,6 +71,14 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     return { ok: true, results: await geo.searchPlaces(req.query.q, bias) };
   });
 
+  // Map extras the client may draw. The MapTiler key is public by nature (the browser fetches the
+  // tiles), so restrict it to bina.et in the MapTiler dashboard. No key -> no satellite button.
+  fastify.get('/api/ride/map-config', async (req, reply) => {
+    const key = (process.env.MAPTILER_KEY || '').trim();
+    reply.header('Cache-Control', 'public, max-age=300');
+    return { ok: true, satellite: key ? { tiles: 'https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=' + key, maxzoom: 20, attribution: '&copy; MapTiler &copy; OpenStreetMap contributors' } : null };
+  });
+
   fastify.post('/api/ride/quote', async (req, reply) => {
     if (!quoteRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const b = req.body || {}; const from = point(b.pickup), to = point(b.dropoff);
