@@ -12,7 +12,11 @@ html.next .top{padding-top:calc(12px + env(safe-area-inset-top))}
 html.next .top .brand{background:rgba(15,23,42,.42);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.22);box-shadow:0 12px 30px -14px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14);padding:9px 16px 9px 12px;font-size:15px;letter-spacing:-.2px}
 html.next .top .brand span{color:#14D8B4}
 html.next .chip3d{width:46px;height:46px;padding:0;border-radius:50%;background:rgba(15,23,42,.42);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:12px;letter-spacing:.5px;box-shadow:0 12px 30px -14px rgba(0,0,0,.6)}
-html.next .chip3d.off{color:rgba(255,255,255,.55)}
+/* 3D is a toggle: lit emerald when the buildings are up, dim glass when flat */
+html.next .chip3d{background:linear-gradient(135deg,#00B894,#14D8B4);color:#0F172A;border-color:rgba(255,255,255,.35);box-shadow:0 12px 30px -12px rgba(0,184,148,.9)}
+html.next .chip3d.off{background:rgba(15,23,42,.42);color:rgba(255,255,255,.7);box-shadow:0 12px 30px -14px rgba(0,0,0,.6)}
+html.next .chip3d.off::after{content:;position:absolute;left:12px;right:12px;top:50%;height:2px;background:rgba(255,255,255,.55);transform:rotate(-20deg)}
+html.next .chip3d{position:relative}
 
 /* the sheet: see-through glass */
 html.next .sheet{background:var(--bg);-webkit-backdrop-filter:blur(36px) saturate(180%);backdrop-filter:blur(36px) saturate(180%);border-radius:34px 34px 0 0;border-top:1px solid rgba(255,255,255,.75);box-shadow:0 -18px 50px -20px rgba(15,23,42,.45),inset 0 1px 0 rgba(255,255,255,.9);padding:9px 18px calc(16px + env(safe-area-inset-bottom))}
