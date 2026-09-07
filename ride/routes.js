@@ -109,6 +109,20 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
       reply: { am: String(parsed.reply_am || '').slice(0, 240), en: String(parsed.reply_en || '').slice(0, 240) } };
   });
 
+  // Satellite session counter: a beacon per phone per day. Read by ops/health/weekly-audit.js.
+  const SAT_FILE = path.join(__dirname, '..', 'ops', 'health', 'sat-sessions.json');
+  const satRL = limiter(86400000, 3);
+  fastify.post('/api/ride/sat-on', async (req, reply) => {
+    if (!satRL(clientIp(req))) return { ok: true };
+    try {
+      let d = {}; try { d = JSON.parse(fs.readFileSync(SAT_FILE, 'utf8')); } catch (e) { d = {}; }
+      const day = new Date().toISOString().slice(0, 10); d[day] = (d[day] || 0) + 1;
+      const keep = Object.keys(d).sort().slice(-60); const out = {}; keep.forEach(k => { out[k] = d[k]; });
+      fs.writeFileSync(SAT_FILE, JSON.stringify(out));
+    } catch (e) {}
+    return { ok: true };
+  });
+
   // Map extras the client may draw. The MapTiler key is public by nature (the browser fetches the
   // tiles), so restrict it to bina.et in the MapTiler dashboard. No key -> no satellite button.
   fastify.get('/api/ride/map-config', async (req, reply) => {

@@ -98,6 +98,7 @@ window.BinaMap = (function () {
         map.setPaintProperty(l.id, 'line-opacity', on ? 0.6 : satRoadOpacity[l.id]);
       }
     });
+    if (on && !satOn) { try { var k = 'bina_sat_day', d = new Date().toISOString().slice(0, 10); if (lsGet(k) !== d) { lsSet(k, d); (navigator.sendBeacon ? navigator.sendBeacon('/api/ride/sat-on', '') : fetch('/api/ride/sat-on', { method: 'POST' })); } } catch (e) {} }
     satOn = !!on; return true;
   }
   function flyTo(p, zoom) { if (!map) return; map.flyTo({ center: [p.lng, p.lat], zoom: zoom || 15.5, duration: 900 }); }

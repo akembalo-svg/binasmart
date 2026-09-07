@@ -14,6 +14,7 @@
 //   ops/js-clash-audit.js   two top-level declarations sharing a name on one page
 //   + a grep that no served file points at fonts.googleapis.com / fonts.gstatic.com again
 //   ops/link-graph.py       orphaned pages and news posts with no inbound link (link equity audit)
+//   + satellite sessions from ops/health/sat-sessions.json against the MapTiler free quota
 //
 // Sends via the same bot the notifications use (@bina_smart_bot) to BINASMART_ADMIN_TG_CHAT and
 // BINASMART_OPS_TG_CHAT. Message says ✅ when everything is clean, ⚠️ with the counts otherwise.
@@ -67,6 +68,15 @@ const last = (s, re) => { const m = [...String(s).matchAll(re)]; return m.length
   const gm = last(g.out, /linkgraph: (\d+) pages, (\d+) internal links, (\d+) orphaned editorial pages, (\d+) unreachable from home, (\d+) news posts with no inbound link/g);
   if (gm) { const bad = Number(gm[3]) + Number(gm[5]); lines.push((bad ? '⚠️' : '✅') + ' Links in: ' + gm[1] + ' pages, ' + gm[3] + ' orphaned, ' + gm[5] + ' news posts with no way in'); if (bad) problems.push('internal links'); }
   else { lines.push('⚠️ Links in: link graph did not finish'); problems.push('internal links'); }
+
+  // 6. MapTiler free quota (100k tiles/month): satellite sessions counted by /api/ride/sat-on, ~60 tiles each
+  try {
+    const sat = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'sat-sessions.json'), 'utf8'));
+    const days = Object.keys(sat).sort(); const week = days.slice(-7).reduce((a, d) => a + sat[d], 0), month = days.slice(-30).reduce((a, d) => a + sat[d], 0);
+    const est = month * 60; const warn = est > 70000;
+    lines.push((warn ? '⚠️' : '✅') + ' Satellite: ' + week + ' sessions this week, ' + month + ' in 30 days ≈ ' + est.toLocaleString() + ' tiles of the 100,000 MapTiler free quota');
+    if (warn) problems.push('maptiler quota');
+  } catch (e) { lines.push('✅ Satellite: no sessions recorded yet'); }
 
   const head = problems.length ? '⚠️ BinaSmart weekly audit — ' + problems.length + ' area(s) need a look' : '✅ BinaSmart weekly audit — all clean';
   const text = head + '\n\n' + lines.filter(Boolean).join('\n') + '\n\n' + new Date().toISOString().slice(0, 10) + ' · ops/health/weekly-audit.js';

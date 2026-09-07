@@ -21,3 +21,4 @@ pids
 .DS_Store
 Thumbs.db
 uploads/
+ops/health/sat-sessions.json
