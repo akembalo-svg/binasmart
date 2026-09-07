@@ -289,6 +289,6 @@ document.querySelectorAll('.dest').forEach(function(b){ b.addEventListener('clic
 (function(){ var box=document.getElementById('book'), bar=document.getElementById('sticky'); if(!('IntersectionObserver' in window)) return;
   new IntersectionObserver(function(es){ bar.classList.toggle('on', !es[0].isIntersecting && es[0].boundingClientRect.top < 0); },{threshold:0}).observe(box); })();
 </script>
-<script src="/static/bina-footer.js?v=7" defer></script>
+<script src="/static/bina-footer.js?v=8" defer></script>
 </body>
 </html>
