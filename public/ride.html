@@ -16,12 +16,13 @@
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
 <link rel="stylesheet" href="/static/ride/ui.css?v=8">
 <script>
-/* "next" look (7 Sep 2026): ?v=next or localStorage bina_ride_next=1 -> html.next + ride/next.css.
+/* "next" look (default since 7 Sep 2026): html.next + ride/next.css. ?v=classic remembers the old look; ?v=next restores.
    Kept inline and first so the glass sheet never flashes the old look. */
-(function(){try{var q=/[?&]v=next\b/.test(location.search),ls=localStorage.getItem('bina_ride_next');
-if(/[?&]v=classic\b/.test(location.search)){localStorage.removeItem('bina_ride_next');return;}
-if(q)localStorage.setItem('bina_ride_next','1');
-if(q||ls==='1'){window.__rideNext=true;document.documentElement.classList.add('next');
+(function(){try{var on=true,ls=localStorage.getItem('bina_ride_next');
+if(/[?&]v=classic\b/.test(location.search)){localStorage.setItem('bina_ride_next','0');on=false;}
+else if(/[?&]v=next\b/.test(location.search)){localStorage.setItem('bina_ride_next','1');}
+else if(ls==='0'){on=false;}
+if(on){window.__rideNext=true;document.documentElement.classList.add('next');
 ['/static/fonts/fonts.css?v=1','/static/ride/next.css?v=1'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}}catch(e){}})();
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
