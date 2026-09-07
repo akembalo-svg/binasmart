@@ -19,7 +19,7 @@ html.next .chip3d.off::after{content:;position:absolute;left:12px;right:12px;top
 html.next .chip3d{position:relative}
 
 /* the sheet: see-through glass */
-html.next .sheet{background:rgba(255,255,255,.36);-webkit-backdrop-filter:blur(40px) saturate(190%);backdrop-filter:blur(40px) saturate(190%);border-radius:30px 30px 0 0;border-top:1px solid rgba(255,255,255,.7);box-shadow:0 -18px 50px -20px rgba(15,23,42,.45),inset 0 1px 0 rgba(255,255,255,.85);padding:6px 16px calc(10px + env(safe-area-inset-bottom))}
+html.next .sheet{background:rgba(255,255,255,.26);-webkit-backdrop-filter:blur(34px) saturate(190%);backdrop-filter:blur(34px) saturate(190%);border-radius:28px 28px 0 0;border-top:1px solid rgba(255,255,255,.7);box-shadow:0 -18px 50px -20px rgba(15,23,42,.45),inset 0 1px 0 rgba(255,255,255,.85);padding:6px 16px calc(10px + env(safe-area-inset-bottom))}
 html.next .grip{width:40px;height:4px;background:rgba(15,23,42,.28);margin:2px auto 8px}
 html.next h1{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.1}
 html.next h1 small,html.next h2 small{font-size:12.5px;font-weight:500;color:var(--mut);margin-top:3px}
@@ -95,3 +95,13 @@ html.next .tier{padding:8px 12px;background:rgba(255,255,255,.42)}
 html.next .driver,html.next .btn,html.next #q,html.next #whoName,html.next #whoPhone,html.next .passenger input{background:rgba(255,255,255,.6)}
 html.next .payrow{margin:4px 0 8px}
 html.next .cta{padding:14px}
+/* Ask Bini as a dark band, the mic in the brand gradient */
+html.next .bini{padding:6px;border-radius:18px;background:linear-gradient(120deg,rgba(15,23,42,.94),rgba(11,122,98,.9));box-shadow:0 14px 30px -16px rgba(15,23,42,.7);margin:0 0 8px}
+html.next .bini input{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);color:#fff;border-radius:12px;font-weight:600}
+html.next .bini input::placeholder{color:rgba(255,255,255,.65)}
+html.next .biniMic{background:linear-gradient(135deg,#14D8B4,#00B894);color:#0F172A;border-radius:12px}
+html.next .biniMic.on{background:#ef4444;color:#fff}
+html.next .biniGo{background:#14D8B4;color:#0F172A;border-radius:12px}
+html.next .biniSay{background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);color:#0F172A;border-radius:14px}
+html.next .biniSay small{color:#475569}
+html.next .biniSay.warn{background:rgba(255,247,237,.8);color:#9a3412}

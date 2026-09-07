@@ -37,7 +37,7 @@ function pubRide(ride) {
     driver: d ? { name: d.name, phone: d.phone, photo: d.photo, carPhoto: d.carPhotoUrl || null, plate: d.plate, vehicle: [d.vehicleColour, d.vehicleMake].filter(Boolean).join(' '), rating: d.rating, tier: d.tier } : null };
 }
 
-module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY, riderBotToken, webhookSecret, riderBot, driverBot, riderNotify, uploadsDir, drive, location }) {
+module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY, riderBotToken, webhookSecret, riderBot, driverBot, riderNotify, uploadsDir, drive, location, askBini }) {
   const quoteRL = limiter(600000, 60), requestRL = limiter(600000, 5), searchRL = limiter(60000, 40);
   const lookupRL = limiter(60000, 120);
   // The driver app heartbeats every 4 s (15/min) and the rider map polls every 3 s (20/min);
@@ -69,6 +69,43 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     const lat = num(req.query.lat, 8.5, 9.5), lng = num(req.query.lng, 38.4, 39.2);
     const bias = (lat != null && lng != null) ? { lat, lng } : null;
     return { ok: true, results: await geo.searchPlaces(req.query.q, bias) };
+  });
+
+  // ---- Ask Bini: one sentence -> destination (+ tier, payment, for-someone-else), then the normal
+  // quote path. The model extracts words; the geocoder resolves them; the fare engine prices them.
+  // Bini is told never to state a price or a time, and the client shows only what the quote returns.
+  const intentRL = limiter(600000, 30);
+  const INTENT_SYS = 'You extract a ride request in Addis Ababa, Ethiopia from ONE sentence written or dictated in Amharic, English or Afaan Oromoo. '
+    + 'Reply with ONLY compact JSON, no prose: {"destination":string|null,"pickup":string|null,"tier":"moto"|"bajaj"|"economy"|"comfort"|"xl"|null,"passengers":number|null,"payment":"cash"|"chapa"|null,"forOther":boolean,"reply_am":string,"reply_en":string}. '
+    + 'destination and pickup are place names exactly as the user said them (keep the Amharic spelling), never invented; pickup null unless the user names where they are. '
+    + 'tier only when clearly stated: ሞተር/motor/bike=moto, ባጃጅ=bajaj, መደበኛ/normal/economy=economy, ምቾት/comfort=comfort, XL/ትልቅ/van=xl; 5 or more passengers=xl. '
+    + 'payment: ጥሬ ገንዘብ/cash=cash; ቴሌብር/telebirr/chapa=chapa; else null. forOther true only if the ride is for another person. '
+    + 'reply_am: ONE short warm Amharic sentence saying what you understood, or asking for the destination if missing. reply_en: the same in English. NEVER state a fare, a distance or a time.';
+  fastify.post('/api/ride/intent', async (req, reply) => {
+    if (!intentRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
+    const b = req.body || {};
+    const text = String(b.text || '').slice(0, 300).trim();
+    if (!text) return reply.code(400).send({ ok: false, error: 'text_required' });
+    if (!askBini) return { ok: false, error: 'unavailable' };
+    const near = point(b.near);
+    let parsed = null;
+    try {
+      const raw = await askBini(INTENT_SYS, [{ role: 'user', content: text }], 320);
+      const m = String(raw || '').match(/\{[\s\S]*\}/);
+      parsed = m ? JSON.parse(m[0]) : null;
+    } catch (e) { parsed = null; }
+    if (!parsed || typeof parsed !== 'object') return { ok: false, error: 'no_parse' };
+    const tier = TIERS.includes(parsed.tier) ? parsed.tier : (Number(parsed.passengers) >= 5 ? 'xl' : null);
+    const payment = parsed.payment === 'chapa' ? 'chapa' : (parsed.payment === 'cash' ? 'cash' : null);
+    const bias = near ? { lat: near.lat, lng: near.lng } : null;
+    async function resolve(name) {
+      if (!name || typeof name !== 'string') return null;
+      const r = await geo.searchPlaces(name.slice(0, 120), bias).catch(() => []);
+      return (r && r[0]) ? { lat: r[0].lat, lng: r[0].lng, label: r[0].label, labelAm: r[0].labelAm || null, kind: r[0].kind || null, said: name } : { said: name, unresolved: true };
+    }
+    const [destination, pickup] = await Promise.all([resolve(parsed.destination), resolve(parsed.pickup)]);
+    return { ok: true, text, destination, pickup, tier, payment, passengers: Number(parsed.passengers) || null, forOther: !!parsed.forOther,
+      reply: { am: String(parsed.reply_am || '').slice(0, 240), en: String(parsed.reply_en || '').slice(0, 240) } };
   });
 
   // Map extras the client may draw. The MapTiler key is public by nature (the browser fetches the

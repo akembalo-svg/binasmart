@@ -13,7 +13,7 @@ html.next .dghost{background:rgba(21,31,51,.62);-webkit-backdrop-filter:blur(18p
 html.next .dbanner{border-radius:14px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 
 /* cards: dark see-through glass, rider-app radius */
-html.next .dcard{background:rgba(21,31,51,.72);-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%);border-radius:30px 30px 0 0;border-top:1px solid rgba(255,255,255,.16);box-shadow:0 -18px 50px -20px #000,inset 0 1px 0 rgba(255,255,255,.08);padding:10px 18px calc(16px + env(safe-area-inset-bottom))}
+html.next .dcard{background:rgba(21,31,51,.72);-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%);border-radius:28px 28px 0 0;border-top:1px solid rgba(255,255,255,.16);box-shadow:0 -18px 50px -20px #000,inset 0 1px 0 rgba(255,255,255,.08);padding:10px 18px calc(16px + env(safe-area-inset-bottom))}
 html.next .tgrip{width:44px;height:5px;background:#475569;margin:2px auto 10px}
 html.next .dcard h2{font-size:22px;font-weight:800;letter-spacing:-.3px}
 html.next .ihead b{font-size:22px;font-weight:800;letter-spacing:-.3px}

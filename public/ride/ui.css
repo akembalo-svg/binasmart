@@ -114,3 +114,16 @@ body.tg .tglink{display:none}
 .quick button b{display:block;font-size:13px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
 .quick button small{display:block;font-size:10.5px;font-weight:600;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
 .quick:empty{display:none}
+
+/* ---- Ask Bini: one sentence, typed or spoken, becomes a booking ---- */
+.bini{display:flex;gap:8px;align-items:center;margin:0 0 8px}
+.bini input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:14px;padding:11px 12px;font:inherit;font-size:14px;outline:0;background:#fff}
+.bini input:focus{border-color:var(--em)}
+.biniMic,.biniGo{flex:none;width:44px;height:44px;border:0;border-radius:14px;font-size:18px;cursor:pointer;font-family:inherit}
+.biniMic{background:#0f172a;color:#fff}.biniMic.on{background:#b91c1c;animation:ping2 1.2s ease-out infinite}
+.biniGo{background:var(--em);color:#fff}.biniGo:disabled{opacity:.6}
+@keyframes ping2{0%{box-shadow:0 0 0 0 rgba(185,28,28,.45)}100%{box-shadow:0 0 0 12px rgba(185,28,28,0)}}
+.biniSay{margin:0 0 8px;padding:9px 12px;border-radius:12px;background:#ecfdf5;color:#065f46;font-size:13px;line-height:1.35}
+.biniSay b{display:block;font-weight:800}.biniSay small{display:block;color:#3f7a66;margin-top:2px}
+.biniSay.warn{background:#fff7ed;color:#9a3412}.biniSay.warn small{color:#b45309}
+.biniSay.busy{background:#f1f5f9;color:#475569}.biniSay.busy small{color:#64748b}

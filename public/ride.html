@@ -14,7 +14,7 @@
 <link rel="icon" href="/icon-32.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
-<link rel="stylesheet" href="/static/ride/ui.css?v=10">
+<link rel="stylesheet" href="/static/ride/ui.css?v=11">
 <script>
 /* "next" look (default since 7 Sep 2026): html.next + ride/next.css. ?v=classic remembers the old look; ?v=next restores.
    Kept inline and first so the glass sheet never flashes the old look. */
@@ -23,7 +23,7 @@ if(/[?&]v=classic\b/.test(q)){on=false;try{localStorage.setItem('bina_ride_next'
 else if(/[?&]v=next\b/.test(q)){try{localStorage.setItem('bina_ride_next','1');}catch(e){}}
 else if(ls==='0'){on=false;}
 if(on){window.__rideNext=true;document.documentElement.className+=' next';
-['/static/fonts/fonts.css?v=1','/static/ride/next.css?v=5'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
+['/static/fonts/fonts.css?v=1','/static/ride/next.css?v=6'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
 </head>
@@ -46,6 +46,12 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
     <h1>ወዴት? <small>Where to?</small></h1>
     <button class="field" id="openSearch"><span>🔍</span><span class="ph">መድረሻዎን ያስገቡ · Enter destination</span></button>
     <div id="quick" class="quick" aria-label="Quick destinations"></div>
+    <form class="bini" id="biniForm" autocomplete="off">
+      <button type="button" id="biniMic" class="biniMic hidden" aria-label="Speak · ይናገሩ" title="ይናገሩ · Speak">🎤</button>
+      <input id="biniQ" aria-label="Ask Bini" placeholder="ቢኒን ይጠይቁ… ወደ ቦሌ ውሰደኝ" maxlength="300">
+      <button type="submit" id="biniGo" class="biniGo" aria-label="Ask">➤</button>
+    </form>
+    <div id="biniSay" class="biniSay hidden" aria-live="polite"></div>
     <div class="from"><span class="dot"></span><span id="fromLabel">Locating you… · ቦታዎን እየፈለግን ነው</span><button id="editFrom">Change</button></div>
     <div class="small tglink">✈️ Also in Telegram · በቴሌግራምም: <a href="https://t.me/bina_smart_bot/ride" target="_blank" rel="noopener">t.me/bina_smart_bot/ride</a></div>
     <div class="hint">💸 Fixed price · no surge &nbsp;·&nbsp; 📲 No app needed &nbsp;·&nbsp; 💵 Pay in cash</div>
@@ -135,7 +141,7 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
 <script src="/static/ride/map.js?v=7"></script>
 <script src="/static/ride/tg.js?v=5"></script>
 <script src="/static/ride/track.js?v=1"></script>
-<script src="/static/ride/app.js?v=9"></script>
+<script src="/static/ride/app.js?v=10"></script>
 <nav style="max-width:560px;margin:0 auto;padding:18px;text-align:center;font-size:12.5px;line-height:1.9;color:#68717f">
   <a href="/why-binasmart" style="color:#0369a1">ለምን BinaSmart? · Why BinaSmart</a> ·
   <a href="/drive-with-us" style="color:#0369a1">ሹፌር ነዎት? ይመዝገቡ · Drive with us</a>

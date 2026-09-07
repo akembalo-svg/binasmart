@@ -2670,6 +2670,7 @@ require('./ride')(fastify, {
   prisma, sendTg, OWNER_KEY,
   OWNER_CHAT: '8096525984',
   ROUTER_URL: process.env.ROUTER_URL || 'http://127.0.0.1:8989',
+  askBini: callBini, // Bini's LLM adapter, for /api/ride/intent (Ask Bini)
   BASE_URL: 'https://bina.et'
 });
 

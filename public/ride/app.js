@@ -113,6 +113,52 @@
   }
   renderQuick();
 
+  // ---- Ask Bini: typed or spoken sentence -> destination + options -> the normal quote path ----
+  var TIER_AM = { moto: 'ሞተር', bajaj: 'ባጃጅ', economy: 'መደበኛ', comfort: 'ምቾት', xl: 'XL' };
+  function biniSay(am, en, tone) { var el = $('biniSay'); if (!el) return; el.className = 'biniSay' + (tone ? ' ' + tone : ''); el.innerHTML = '<b>' + esc(am) + '</b>' + (en ? '<small>' + esc(en) + '</small>' : ''); }
+  function askBini(text) {
+    text = String(text || '').trim(); if (!text) return;
+    var go = $('biniGo'); go.disabled = true; biniSay('ቢኒ እያሰበ ነው…', 'Bini is thinking…', 'busy');
+    api('/api/ride/intent', { text: text, near: S.pickup || undefined }).then(function (d) {
+      go.disabled = false;
+      if (!d || !d.ok) { biniSay('ይቅርታ፣ አልገባኝም። መድረሻዎን ይጻፉ ወይም ካርታውን ይንኩ።', 'Sorry, I did not catch that. Type the destination or tap the map.', 'warn'); return; }
+      if (d.tier) { S.tier = d.tier; }
+      if (d.payment) { var r = document.querySelector('input[name="pay"][value="' + d.payment + '"]'); if (r && !r.closest('label').classList.contains('hidden')) r.checked = true; }
+      if (d.forOther && $('forOther')) { $('forOther').checked = true; $('passenger').classList.remove('hidden'); }
+      if (d.pickup && !d.pickup.unresolved) setPickup({ lat: d.pickup.lat, lng: d.pickup.lng, label: d.pickup.label });
+      var note = (d.reply && d.reply.am) || '', noteEn = (d.reply && d.reply.en) || '';
+      if (d.tier) { note += ' · ' + TIER_AM[d.tier]; }
+      if (d.destination && !d.destination.unresolved) {
+        biniSay(note || ('እሺ፣ ወደ ' + d.destination.label), noteEn, 'ok');
+        S.searchTarget = 'dropoff'; choose({ lat: d.destination.lat, lng: d.destination.lng, label: d.destination.label });
+      } else if (d.destination && d.destination.unresolved) {
+        biniSay('"' + d.destination.said + '" አላገኘሁትም። ከዝርዝሩ ይምረጡ።', 'I could not find "' + d.destination.said + '" — pick it from the list.', 'warn');
+        S.searchTarget = 'dropoff'; openSearch(); $('q').value = d.destination.said; $('q').dispatchEvent(new Event('input'));
+      } else {
+        biniSay(note || 'ወዴት እንሂድ? መድረሻዎን ይንገሩኝ።', noteEn || 'Where to? Tell me the destination.', 'warn');
+      }
+    }).catch(function () { go.disabled = false; biniSay('የአውታረ መረብ ችግር — እንደገና ይሞክሩ።', 'Network error — try again.', 'warn'); });
+  }
+  if ($('biniForm')) {
+    $('biniForm').addEventListener('submit', function (e) { e.preventDefault(); askBini($('biniQ').value); });
+    // Voice: the browser's own recognizer (Chrome/Android and iOS Safari), Amharic first. No key, no
+    // upload from us: the phone does the listening. Hidden where the browser has no recognizer.
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SR) {
+      var mic = $('biniMic'); mic.classList.remove('hidden'); var rec = null, listening = false;
+      function startRec(lang) {
+        rec = new SR(); rec.lang = lang; rec.interimResults = true; rec.maxAlternatives = 1; listening = true; mic.classList.add('on');
+        $('biniQ').value = ''; $('biniQ').placeholder = 'እያዳመጥኩ ነው… · listening…';
+        rec.onresult = function (ev) { var t = ''; for (var i = ev.resultIndex; i < ev.results.length; i++) t += ev.results[i][0].transcript; $('biniQ').value = t; if (ev.results[ev.results.length - 1].isFinal) { stopRec(); askBini(t); } };
+        rec.onerror = function (ev) { stopRec(); if (ev.error === 'language-not-supported' && lang !== 'en-US') return startRec('en-US'); if (ev.error === 'not-allowed') biniSay('ማይክሮፎን አልተፈቀደም — ይጻፉ።', 'Microphone not allowed — type instead.', 'warn'); };
+        rec.onend = function () { stopRec(); };
+        try { rec.start(); } catch (e) { stopRec(); }
+      }
+      function stopRec() { listening = false; mic.classList.remove('on'); $('biniQ').placeholder = 'ቢኒን ይጠይቁ… ወደ ቦሌ ውሰደኝ'; try { rec && rec.stop && rec.stop(); } catch (e) {} }
+      mic.addEventListener('click', function () { if (listening) return stopRec(); startRec('am-ET'); });
+    }
+  }
+
   // ---- quote ----
   function quote() {
     if (!S.dropoff) return;

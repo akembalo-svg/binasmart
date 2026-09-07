@@ -44,7 +44,7 @@ module.exports = function registerRide(fastify, deps) {
   const driverBot = makeDriverBot({ prisma: deps.prisma, api: driverTgApi, telegram, uploadsDir, baseUrl: deps.BASE_URL, offers });
   const drive = makeDriverApi({ prisma: deps.prisma, driverBotToken, location, offers, telegram, riderNotify, geo, settings });
   routes(fastify, { prisma: deps.prisma, settings, geo, telegram, dispatch, OWNER_KEY: deps.OWNER_KEY,
-    riderBotToken, webhookSecret: process.env.TG_WEBHOOK_SECRET || '', riderBot, driverBot, riderNotify, uploadsDir, drive, location });
+    riderBotToken, webhookSecret: process.env.TG_WEBHOOK_SECRET || '', riderBot, driverBot, riderNotify, uploadsDir, drive, location, askBini: deps.askBini || null });
   // Three background loops, all idempotent and all safe to miss a beat:
   //  - sweep: in-memory concierge timers die with the process, so escalate anything a restart stranded
   //  - expiry: close offer windows and widen the radius (5 s granularity on a 25 s window)
