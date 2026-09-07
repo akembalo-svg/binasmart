@@ -130,7 +130,7 @@ fastify.get('/owner', async (req, reply) => reply.sendFile('owner-login.html'));
 fastify.get('/health', async () => ({ ok: true, service: 'binasmart-api', ts: new Date().toISOString() }));
 
 // ===== LANDING PAGE (connectcare.cc root) =====
-fastify.get('/', async (req, reply) => reply.sendFile('gemini-home.html')); // prior versions: coming-soon.html, index.html (full grid)
+fastify.get('/', async (req, reply) => reply.sendFile('home-v3.html')); // 7 Sep 2026 BinaSmart-home style; prior: gemini-home.html, coming-soon.html, index.html
 fastify.get('/robots.txt', async (req, reply) => reply.sendFile('robots.txt'));
 fastify.get('/sitemap.xml', async (req, reply) => {
   const bs = await prisma.building.findMany({ select: { qrSlug: true, buildingType: true }, orderBy: { createdAt: 'asc' } });

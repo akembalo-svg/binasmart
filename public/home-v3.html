@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BinaSmart — አንድ አፕ። ሁሉንም በኢትዮጵያ። | One App. Everything in Ethiopia.</title>
+<meta name="description" content="BinaSmart — Ethiopia's super app: ride, airport transfer, hotels, live TV and films, restaurants, property, insurance, cars, hospitals, bus and flight tickets, news, tenders, Digital Ethiopia guides — in Amharic and English, inside Google and Telegram. No download.">
+<meta property="og:title" content="BinaSmart — One App. Everything in Ethiopia.">
+<meta property="og:description" content="Ride, hotels, TV, food, property, hospitals, tickets, news, tenders, guides — Amharic first, in Google and Telegram, no download.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bina.et/">
+<meta property="og:image" content="https://bina.et/static/bina-property.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://bina.et/">
+<link rel="icon" href="/icon-32.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#009688">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BinaSmart">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="preload" as="image" href="/static/home/city-m.jpg" media="(max-width:899px)">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"BinaSmart","disambiguatingDescription":"BinaSmart Ethiopia (bina.et), based in Addis Ababa — not affiliated with \"Bina Smart Business\" (a Romanian retail ERP) or \"Smartlife Bina\" (Turkey).","alternateName":"BinaSmart Ethiopia — ብልህ የህንፃ አስተዳደር","url":"https://bina.et","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Ethiopia's all-in-one platform: ride-hailing, airport transfer, hotels, live TV and films, restaurants, property, insurance, cars, hospitals, bus and flight tickets, news, tenders, Digital Ethiopia guides, building management with 3D voice navigation.","areaServed":[{"@type":"Country","name":"Ethiopia"},{"@type":"Country","name":"United Arab Emirates"}],"availableLanguage":["am","en","ar"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"BinaSmart","disambiguatingDescription":"BinaSmart Ethiopia (bina.et), based in Addis Ababa — not affiliated with \"Bina Smart Business\" (a Romanian retail ERP) or \"Smartlife Bina\" (Turkey).","alternateName":"ቢናስማርት","url":"https://bina.et","logo":"https://bina.et/static/brand-logo.png","description":"BinaSmart is Ethiopia's all-in-one digital platform — ride, hotels, TV and films, restaurants, hospitals, travel, flights, events, tenders, news, insurance, cars and property — in Amharic and English.","email":"info@bina.et","telephone":"+251911244344","areaServed":{"@type":"Country","name":"Ethiopia"},"address":{"@type":"PostalAddress","addressLocality":"Addis Ababa","addressCountry":"ET"},"sameAs":["https://www.facebook.com/binasmartet","https://www.linkedin.com/company/144771046","https://t.me/binasmart"]}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#F8FAFC;--ink:#081120;--mut:#64748B;--em:#00C896;--em2:#009688;--ai:#0099FF;--ai2:#6C63FF;--line:rgba(8,17,32,.07)}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:var(--em2);text-decoration:none}
+.am{font-family:'Noto Sans Ethiopic','Plus Jakarta Sans',system-ui,sans-serif}
+.wrap{max-width:1320px;margin:0 auto;padding:0 14px}
+.glass{background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.9);box-shadow:0 20px 50px -28px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.95)}
+.hidden{display:none!important}
+/* ---- nav ---- */
+.nav{position:sticky;top:10px;z-index:30;margin:10px 14px 0;height:56px;border-radius:18px;display:flex;align-items:center;gap:10px;padding:0 8px 0 10px}
+.nav .logo{display:flex;align-items:center;gap:9px;color:var(--ink)}
+.nav .logo i{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -10px rgba(0,200,150,.9)}
+.nav .logo i svg{width:17px;height:17px}
+.nav .logo b{display:block;font-size:16px;font-weight:800;letter-spacing:-.3px;line-height:1}
+.nav .logo small{display:block;font-size:9.5px;font-weight:600;color:var(--mut);margin-top:3px}
+.nav .links{display:none}
+.nav .sp{flex:1}
+.nav .pill{display:flex;align-items:center;gap:6px;height:38px;padding:0 12px;border-radius:12px;background:rgba(8,17,32,.05);font-size:12px;font-weight:800;color:var(--ink);border:0;font-family:inherit;cursor:pointer;white-space:nowrap}
+.nav .pill.go{background:linear-gradient(135deg,var(--em),var(--em2));color:#fff}
+/* ---- hero ---- */
+.hero{position:relative;overflow:hidden;padding:130px 14px 0;min-height:520px}
+.hero picture{position:absolute;left:0;top:0;right:0;height:340px;z-index:-1;display:block}
+.hero .ph{width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block}
+.hero .fade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(248,250,252,.45) 0%,rgba(248,250,252,.05) 16%,rgba(248,250,252,.82) 46%,var(--bg) 58%)}
+.hero h1{font-size:40px;line-height:1.15;font-weight:900;letter-spacing:-.5px;text-shadow:0 4px 24px rgba(248,250,252,.9)}
+.hero .tag{margin-top:8px;font-size:17px;font-weight:800;background:linear-gradient(90deg,var(--em2),var(--ai),var(--ai2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:12.5px;font-weight:600;color:var(--mut);margin-top:3px}
+/* rainbow AI bar (shared by hero and the sticky bar) */
+.rb{position:relative;border-radius:999px;padding:2px;background:linear-gradient(90deg,#00C896,#0099FF,#6C63FF,#00C896);background-size:300% 100%;animation:grad 6s linear infinite;box-shadow:0 20px 44px -20px rgba(0,153,255,.55)}
+@keyframes grad{to{background-position:300% 0}}
+@media(prefers-reduced-motion:reduce){.rb{animation:none}}
+.rb .in{border-radius:999px;background:rgba(255,255,255,.94);display:flex;align-items:center;gap:6px;height:58px;padding:0 6px 0 8px}
+.rb .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--ai),var(--ai2));display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 8px 18px -8px rgba(108,99,255,.9)}
+.rb .av svg{width:20px;height:20px}
+.rb input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:14px;font-weight:700;color:var(--ink)}
+.rb input::placeholder{color:#64748B;font-weight:600}
+.rb button{width:40px;height:40px;border-radius:50%;border:0;background:rgba(8,17,32,.05);color:#334155;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;font-family:inherit}
+.rb button svg{width:18px;height:18px}
+.rb button.send{background:linear-gradient(135deg,var(--em),var(--em2));color:#fff;box-shadow:0 8px 18px -8px rgba(0,200,150,.9)}
+.rb button.on{background:#ef4444;color:#fff}
+/* chips */
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 0 4px;margin-top:10px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px 0 10px;border-radius:999px;background:rgba(255,255,255,.88);border:1px solid var(--line);box-shadow:0 8px 20px -14px rgba(8,17,32,.35);font:inherit;font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer;white-space:nowrap}
+.chip svg{width:16px;height:16px;color:var(--em2)}
+/* section heads */
+h2.sec{font-size:22px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:10px;margin:28px 0 2px}
+h2.sec::before{content:'';width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--em),var(--ai));flex:none}
+.sub2{font-size:12.5px;font-weight:600;color:var(--mut);margin:0 0 12px 20px}
+/* results */
+#results{margin:10px 0 0}
+.r{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px 14px;margin-bottom:9px;color:var(--ink);box-shadow:0 12px 30px -24px rgba(8,17,32,.3)}
+.r .ric{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(0,200,150,.12);flex-shrink:0}
+.r.shop .ric{background:rgba(245,158,11,.14)}
+.r b{font-size:14px;display:block}.r span{font-size:11.5px;color:var(--mut)}
+.r .go{margin-left:auto;font-size:12px;font-weight:900;color:var(--em2);flex-shrink:0}
+.empty{text-align:center;color:var(--mut);font-size:13px;padding:16px}
+/* big service cards */
+.svcs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.svc{position:relative;overflow:hidden;border-radius:22px;padding:16px;height:170px;display:flex;flex-direction:column;color:#fff;box-shadow:0 22px 44px -26px rgba(8,17,32,.55);border:1px solid rgba(255,255,255,.25);transition:transform .2s}
+.svc:active{transform:scale(.98)}
+.svc .blob{position:absolute;border-radius:50%;filter:blur(24px);opacity:.7;pointer-events:none;width:160px;height:160px;right:-50px;top:-60px}
+.svc .ic{width:46px;height:46px;border-radius:15px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;position:relative}
+.svc .ic svg{width:24px;height:24px}
+.svc .tx{margin-top:auto;position:relative}
+.svc .t{font-size:16px;font-weight:800;letter-spacing:-.2px}
+.svc .a{font-size:14px;font-weight:800;margin-top:2px}
+.svc .d{font-size:10.5px;font-weight:600;opacity:.85;margin-top:4px;line-height:1.3}
+.svc .go{position:absolute;right:12px;bottom:12px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center}
+.svc .go svg{width:15px;height:15px}
+.svc .live{position:absolute;right:12px;top:12px;height:22px;padding:0 8px;border-radius:999px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);font-size:9px;font-weight:800;letter-spacing:.06em;display:inline-flex;align-items:center;gap:5px}
+.svc .live::before{content:'';width:5px;height:5px;border-radius:50%;background:#fff;animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{50%{opacity:.3}}
+/* all services grid */
+.minis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.mini{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 14px 30px -24px rgba(8,17,32,.3);text-align:center;color:var(--ink);cursor:pointer}
+.mini .ic{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff}
+.mini .ic svg{width:21px;height:21px}
+.mini .a{font-size:12px;font-weight:800;line-height:1.2}
+.mini .e{font-size:9.5px;font-weight:600;color:var(--mut)}
+/* band */
+.band{position:relative;height:150px;border-radius:22px;overflow:hidden;background:#081120;color:#fff;margin-top:24px}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
+.band .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,17,32,.35),rgba(8,17,32,.92))}
+.band .tx{position:absolute;left:16px;right:16px;bottom:14px}
+.band .tx b{display:block;font-size:17px;font-weight:800}
+.band .tx small{display:block;font-size:11px;color:rgba(255,255,255,.7);font-weight:600}
+.band .tx .k{display:flex;gap:14px;font-size:11px;font-weight:700;margin-top:8px;flex-wrap:wrap}
+/* Bini card */
+.bini{border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.bini .hd{display:flex;align-items:center;gap:10px}
+.bini .av{position:relative;width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--ai),var(--ai2));display:flex;align-items:center;justify-content:center;flex:none}
+.bini .av svg{width:24px;height:24px}
+.bini .av i{position:absolute;right:-3px;bottom:-3px;width:12px;height:12px;border-radius:50%;background:var(--em);border:2px solid #fff}
+.bini .hd b{display:block;font-size:15px;font-weight:800}
+.bini .hd small{display:block;font-size:11px;font-weight:600;color:var(--mut)}
+.bini .bub{padding:12px 14px;border-radius:16px 16px 16px 6px;background:linear-gradient(135deg,rgba(0,153,255,.1),rgba(108,99,255,.1))}
+.bini .bub p{font-size:13.5px;font-weight:700;line-height:1.55}
+.bini .bub small{display:block;font-size:11.5px;color:var(--mut);margin-top:5px}
+.prompts{display:flex;flex-wrap:wrap;gap:6px}
+.prompt{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 11px;border-radius:11px;background:rgba(255,255,255,.85);border:1px solid var(--line);font:inherit;font-size:11.5px;font-weight:700;color:var(--ink);cursor:pointer;white-space:nowrap}
+.prompt svg{width:13px;height:13px;color:var(--ai2)}
+/* mini apps */
+.apps{display:grid;grid-template-columns:1fr;gap:10px;margin-top:24px}
+.app{border-radius:22px;padding:18px;color:#fff;display:flex;align-items:center;gap:14px;box-shadow:0 26px 60px -34px rgba(8,17,32,.7)}
+.app .ic{width:48px;height:48px;border-radius:15px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.app .ic svg{width:26px;height:26px}
+.app b{display:block;font-size:16px;font-weight:800}
+.app small{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,.78);margin-top:2px}
+.app .btn{margin-left:auto;height:40px;padding:0 14px;border-radius:12px;background:#fff;color:#081120;display:flex;align-items:center;font-weight:800;font-size:12px;flex-shrink:0}
+/* ask external AI (kept) */
+.aiask{margin:24px auto 0;background:linear-gradient(150deg,#081120,#0B3B31);border-radius:22px;padding:22px 18px;color:#fff;text-align:center;box-shadow:0 20px 50px -26px rgba(8,17,32,.6)}
+.aiask-title{font-weight:800;font-size:16px;letter-spacing:-.2px}
+.aiask-sub{color:#a9c4bf;font-size:12.5px;margin:4px 0 14px}
+.aiask-vp{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.aiask-track{display:flex;width:max-content;animation:aiask-scroll 30s linear infinite}
+.aiask-vp:hover .aiask-track,.aiask-vp:focus-within .aiask-track{animation-play-state:paused}
+.aiask-set{display:flex;gap:10px;padding-right:10px}
+@keyframes aiask-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.aiask-track{animation:none}.aiask-track,.aiask-set{flex-wrap:wrap;justify-content:center;width:auto}.aiask-set[aria-hidden]{display:none}}
+.aiask-set button{flex:none;white-space:nowrap;background:#fff;color:#081120;border:0;border-radius:999px;padding:11px 14px;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px}
+.aiask-note{font-size:12px;color:#5fe3cf;margin-top:10px;min-height:15px}
+/* sticky AI bar + answer */
+.askwrap{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 12px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 70%,transparent);transform:translateY(120%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.askwrap.on{transform:none}
+.askwrap .rb{max-width:720px;margin:0 auto}
+#aiAnswer{position:fixed;left:50%;transform:translateX(-50%);bottom:96px;width:min(720px,calc(100vw - 20px));z-index:60;display:none;max-height:58vh;overflow-y:auto}
+.aiclose{margin-left:auto;background:none;border:0;font-size:21px;color:#8a94a6;cursor:pointer;line-height:1;padding:0 2px}
+.aiwrap{background:#fff;border:1px solid rgba(108,99,255,.2);border-radius:20px;padding:16px 18px;box-shadow:0 20px 50px -24px rgba(108,99,255,.5);text-align:left}
+.aihd{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.aihd .aiav{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--ai),var(--ai2));display:flex;align-items:center;justify-content:center}
+.aihd .aiav svg{width:16px;height:16px}
+.aihd b{font-size:14px}.aihd small{font-size:11px;color:#8a94a6}
+.aiq{font-size:12.5px;color:#475569;font-weight:700;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:11px;padding:6px 11px;margin-bottom:9px;display:inline-block;max-width:100%;word-wrap:break-word}
+.aibody{font-size:14.5px;line-height:1.6;color:#1e293b;white-space:pre-wrap}
+.aibody a{color:#2563eb;font-weight:700}
+.aiblink{display:inline-block;width:7px;height:15px;background:var(--ai);border-radius:2px;animation:aiBlink 1s steps(2) infinite;vertical-align:middle}
+@keyframes aiBlink{50%{opacity:0}}
+.toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:#081120;color:#fff;padding:10px 16px;border-radius:12px;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:70;max-width:92vw;text-align:center}
+.toast.on{opacity:1}
+main{padding-bottom:110px}
+/* ---- desktop ---- */
+@media(min-width:900px){
+  .nav{margin:16px 40px 0;height:68px;border-radius:22px;padding:0 12px 0 16px;gap:22px}
+  .nav .logo i{width:42px;height:42px;border-radius:13px}.nav .logo b{font-size:20px}.nav .logo small{font-size:11px}
+  .nav .links{display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:rgba(8,17,32,.05)}
+  .nav .links a{display:flex;align-items:center;gap:8px;height:38px;padding:0 15px;border-radius:999px;font-size:13.5px;font-weight:700;color:#475569}
+  .nav .links a.on{background:linear-gradient(135deg,var(--em),var(--em2));color:#fff;box-shadow:0 10px 22px -10px rgba(0,200,150,.8)}
+  .nav .pill{height:42px;font-size:13px}
+  .hero{padding:120px 40px 0;min-height:640px;display:grid;grid-template-columns:minmax(0,1.2fr) 400px;gap:40px;align-items:start}
+  .hero picture{height:100%;bottom:0}.hero .ph{object-position:50% 40%}
+  .hero .fade{background:linear-gradient(100deg,rgba(248,250,252,.97) 0%,rgba(248,250,252,.86) 30%,rgba(248,250,252,.18) 54%,rgba(248,250,252,0) 70%),linear-gradient(180deg,rgba(248,250,252,.45) 0%,rgba(248,250,252,0) 18%,rgba(248,250,252,0) 74%,var(--bg) 100%)}
+  .hero h1{font-size:68px;text-shadow:none}
+  .hero .tag{font-size:24px}.hero .sub{font-size:15px}
+  .hero .box{max-width:640px}
+  .rb .in{height:66px}
+  .chips{flex-wrap:wrap;overflow:visible;max-width:660px}
+  .bini{margin-top:0;border-radius:28px;padding:22px}
+  .wrap{padding:0 40px}
+  h2.sec{font-size:32px;margin-top:40px}
+  .svcs{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  .svc{height:230px;padding:22px;border-radius:26px}.svc .t{font-size:21px}.svc .a{font-size:18px}.svc .d{font-size:12.5px}.svc .ic{width:58px;height:58px;border-radius:18px}.svc .ic svg{width:28px;height:28px}
+  .minis{grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}
+  .band{height:220px;border-radius:28px}.band .tx{left:36px;bottom:30px}.band .tx b{font-size:28px}.band .tx small{font-size:14px}.band .tx .k{font-size:13px;gap:24px}
+  .apps{grid-template-columns:1fr 1fr;gap:16px}.app{padding:26px;border-radius:26px}.app b{font-size:20px}
+  main{padding-bottom:120px}
+}
+</style>
+</head>
+<body>
+<header class="nav glass">
+  <a class="logo" href="/"><i><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg></i><span><b>BinaSmart</b><small>Smart. Together.</small></span></a>
+  <nav class="links"><a href="/" class="on">Home</a><a href="#services">Services</a><a href="/why-binasmart">About</a><a href="/support">Help</a></nav>
+  <span class="sp"></span>
+  <a id="walletChip" class="pill" href="/wallet">👛 <span class="am">ዋሌት</span></a>
+  <button id="installBtn" class="pill go" style="display:none" onclick="binaInstall()">📲 Install</button>
+  <a class="pill" href="/owner"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Login</span></a>
+</header>
+
+<main>
+<section class="hero">
+  <picture><source media="(min-width:900px)" srcset="/static/home/city.jpg"><img class="ph" src="/static/home/city-m.jpg" alt="Addis Ababa skyline" fetchpriority="high"></picture>
+  <div class="fade"></div>
+  <div class="box">
+    <h1 class="am">እንዴት ልንረዳዎት?</h1>
+    <div class="tag">One App. Everything in Ethiopia.</div>
+    <div class="sub">Ride · Airport · Hotels · TV · Food · Property · Hospitals · more — <span class="am">አማርኛ</span> first, no download</div>
+    <div class="rb" id="heroBox" style="margin-top:14px">
+      <div class="in">
+        <span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="11" rx="4"/><path d="M12 4v3M9 3.5h6"/><circle cx="9.5" cy="12.5" r="1" fill="#fff"/><circle cx="14.5" cy="12.5" r="1" fill="#fff"/><path d="M9.5 15.5c1.5 1 3.5 1 5 0"/></svg></span>
+        <input id="q" placeholder="Ask BinaSmart AI… ምን ልርዳዎት?" autocomplete="off" aria-label="Ask BinaSmart AI">
+        <button type="button" id="micBtn" aria-label="Speak · ይናገሩ" onclick="mic()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+        <button type="button" aria-label="Camera · ካሜራ" onclick="cam()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h2l1.5-2h4l1.5 2h2A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z"/><circle cx="12" cy="12.5" r="3.5"/></svg></button>
+        <button type="button" class="send" aria-label="Send" onclick="go()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+    <div class="chips" aria-label="Quick suggestions">
+      <a class="chip" href="/ride"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l1.5-6A2 2 0 0 1 8.4 8.5h7.2a2 2 0 0 1 1.9 1.5L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg>Ride</a>
+      <a class="chip" href="/watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>Watch</a>
+      <a class="chip" href="/ride?airport=1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16l4-1 4.5-6 6.5-4.5c1.4-.9 3 .6 2.2 2L16.5 11l-1 8-2.5-1-.5-4.5-3.5 2.5-.5 2.5-2.5.5z"/></svg>Airport</a>
+      <a class="chip" href="/hotel/bina-grand-hotel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8M3 14h18v4M3 12h8V9a2 2 0 0 1 2-2h5a3 3 0 0 1 3 3v2"/></svg>Hotels</a>
+      <a class="chip" href="/restaurant/bina-restaurant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18a9 9 0 0 1-18 0zM8 3l1 3M12 2l1 4M16 3l1 3"/></svg>Food</a>
+      <a class="chip" href="/property"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Property</a>
+      <a class="chip" href="/travel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="14" rx="3"/><path d="M4 10h16M8 18v2M16 18v2"/></svg>Bus</a>
+      <a class="chip" href="/hospital/bina-general-hospital"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/></svg>Hospital</a>
+      <a class="chip" href="/news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14H6a2 2 0 0 1-2-2zM7 9h7M7 13h7"/></svg>News</a>
+      <a class="chip" href="/tenders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 11h6M9 15h4"/></svg>Tenders</a>
+      <a class="chip" href="/b/darulle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg>Shopping</a>
+      <a class="chip" href="/guides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></svg>Guides</a>
+    </div>
+    <div id="results"></div>
+  </div>
+
+  <!-- Ask about us · Bini -->
+  <div class="bini glass" id="askus">
+    <div class="hd"><span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="11" rx="4"/><path d="M12 4v3M9 3.5h6"/><circle cx="9.5" cy="12.5" r="1" fill="#fff"/><circle cx="14.5" cy="12.5" r="1" fill="#fff"/><path d="M9.5 15.5c1.5 1 3.5 1 5 0"/></svg><i></i></span><div><b class="am">ሰላም 👋 እኔ ቢኒ ነኝ</b><small>Bina AI · about BinaSmart, Addis and Ethiopia · Amharic or English · fast</small></div></div>
+    <div class="bub"><p class="am">ዛሬ ምን ልርዳዎት? ስለ ቢና ስማርት፣ ስለ አዲስ አበባ ወይም ስለ ኢትዮጵያ አገልግሎቶች ይጠይቁኝ።</p><small>How can I help you today? Ask me anything about BinaSmart or any Ethiopian service.</small></div>
+    <div class="prompts" id="biniChips">
+      <button class="prompt" onclick="chip('ራይድ እንዴት እይዛለሁ? · How do I book a ride?')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg>Book a Ride</button>
+      <button class="prompt" onclick="chip('ሆቴል መያዝ እፈልጋለሁ · Find me a hotel')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg>Find a Hotel</button>
+      <button class="prompt" onclick="chip('የአማርኛ ፊልሞችን የት አያለሁ? · Watch Ethiopian movies')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg>Watch Ethiopian Movies</button>
+      <button class="prompt" onclick="chip('ሆስፒታል ፈልግልኝ · Find hospitals')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg>Find Hospitals</button>
+      <button class="prompt" onclick="chip('ህንፃ ፈልግ · Search buildings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg>Search Buildings</button>
+      <button class="prompt" onclick="chip('አቅጣጫ ስጠኝ · Get directions')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg>Get Directions</button>
+      <button class="prompt" onclick="chip('በረራ መያዝ እፈልጋለሁ · Book a flight')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg>Book Flight</button>
+      <button class="prompt" onclick="chip('ቤት ወይም መሬት ፈልግልኝ · Find property')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg>Find Property</button>
+      <button class="prompt" onclick="chip('ቢና ስማርት ምንድን ነው? ስለ እናንተ ንገረኝ · What is BinaSmart? Tell me about you')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg><span class="am">ስለ እኛ ይጠይቁ</span> · About us</button>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <h2 class="sec am" id="services">የእኛ አገልግሎቶች</h2>
+  <div class="sub2">Our Services · 25+ services, one login, pay with Telebirr, CBE Birr or Chapa</div>
+  <div class="svcs" id="cards">
+    <a class="svc" href="/ride" style="background:linear-gradient(150deg,#00C896 0%,#0F766E 60%,#081120 130%)"><span class="blob" style="background:#14D8B4"></span><span class="live">LIVE</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l1.5-6A2 2 0 0 1 8.4 8.5h7.2a2 2 0 0 1 1.9 1.5L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg></div><div class="tx"><div class="t">BinaRide</div><div class="a am">ራይድ · ቋሚ ዋጋ</div><div class="d">Fixed price · no surge · Ask Bini by voice</div></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="svc" href="/watch" style="background:linear-gradient(150deg,#6C63FF 0%,#3B2FA8 60%,#081120 130%)"><span class="blob" style="background:#A78BFA"></span><span class="live">LIVE TV</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z" fill="#fff"/></svg></div><div class="tx"><div class="t">BinaWatch</div><div class="a am">ቲቪ · ፊልም · ራዲዮ</div><div class="d">13 channels live · 49 series · films · radio</div></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="svc" href="/ride?airport=1" style="background:linear-gradient(150deg,#0099FF 0%,#1D4ED8 60%,#081120 130%)"><span class="blob" style="background:#7DD3FC"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16l4-1 4.5-6 6.5-4.5c1.4-.9 3 .6 2.2 2L16.5 11l-1 8-2.5-1-.5-4.5-3.5 2.5-.5 2.5-2.5.5z"/></svg></div><div class="tx"><div class="t">BinaAirport</div><div class="a am">የአየር ማረፊያ ትራንስፈር</div><div class="d">Bole T2 · fixed price · driver waits</div></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="svc" href="/hotel/bina-grand-hotel" style="background:linear-gradient(150deg,#F59E0B 0%,#DB2777 60%,#081120 130%)"><span class="blob" style="background:#FDE68A"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8M3 14h18v4M3 12h8V9a2 2 0 0 1 2-2h5a3 3 0 0 1 3 3v2"/></svg></div><div class="tx"><div class="t">BinaHotels</div><div class="a am">ሆቴሎች</div><div class="d">Book direct · 0% commission · pay at hotel</div></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="svc" href="/restaurant/bina-restaurant" style="background:linear-gradient(150deg,#FB923C 0%,#DC2626 60%,#081120 130%)"><span class="blob" style="background:#FDBA74"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18a9 9 0 0 1-18 0zM8 3l1 3M12 2l1 4M16 3l1 3"/></svg></div><div class="tx"><div class="t">BinaFood</div><div class="a am">ምግብ · ሬስቶራንት</div><div class="d">QR table ordering · scan, order, eat</div></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="svc" href="/cinema" style="background:linear-gradient(150deg,#14D8B4 0%,#0891B2 60%,#081120 130%)"><span class="blob" style="background:#A5F3FC"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></svg></div><div class="tx"><div class="t">BinaCinema</div><div class="a am">ሲኒማ · ዝግጅቶች</div><div class="d">Pick your seat · QR ticket · Chapa or counter</div></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="svc" href="/wallet" style="background:linear-gradient(150deg,#3B82F6 0%,#6C63FF 60%,#081120 130%)"><span class="blob" style="background:#C4B5FD"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M16 15h2"/></svg></div><div class="tx"><div class="t">BinaPay</div><div class="a am">ዋሌት · ክፍያ</div><div class="d">Telebirr · CBE Birr · Chapa · one wallet</div></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a class="svc" href="/b/darulle" style="background:linear-gradient(150deg,#A855F7 0%,#DB2777 60%,#081120 130%)"><span class="blob" style="background:#F0ABFC"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg></div><div class="tx"><div class="t">BinaShops</div><div class="a am">ሱቆች · ገበያ</div><div class="d">JJ Darule · 71 shops · 3D voice walk</div></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+  </div>
+
+  <h2 class="sec am">ሁሉም አገልግሎቶች</h2>
+  <div class="sub2">All services</div>
+  <div class="minis">
+    <a class="mini" href="/property"><span class="ic" style="background:linear-gradient(135deg,#00C896,#009688)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="a am">ንብረት</span><span class="e">Property</span></a>
+    <a class="mini" href="/property-management"><span class="ic" style="background:linear-gradient(135deg,#0099FF,#1D4ED8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h3a1 1 0 0 1 1 1v11"/></svg></span><span class="a am">አስተዳደር</span><span class="e">Prop. Mgmt</span></a>
+    <a class="mini" href="/insurance"><span class="ic" style="background:linear-gradient(135deg,#6C63FF,#4338CA)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span><span class="a am">መድን</span><span class="e">Insurance</span></a>
+    <a class="mini" href="/cars"><span class="ic" style="background:linear-gradient(135deg,#F59E0B,#DC2626)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l1.5-6A2 2 0 0 1 8.4 8.5h7.2a2 2 0 0 1 1.9 1.5L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg></span><span class="a am">መኪና</span><span class="e">Cars</span></a>
+    <a class="mini" href="/hospital/bina-general-hospital"><span class="ic" style="background:linear-gradient(135deg,#EF4444,#B91C1C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/></svg></span><span class="a am">ሆስፒታል</span><span class="e">Hospitals</span></a>
+    <a class="mini" href="/restaurant/bina-restaurant"><span class="ic" style="background:linear-gradient(135deg,#FB923C,#EA580C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 1-3 4-3 7h3v11"/></svg></span><span class="a am">ሬስቶራንት</span><span class="e">Restaurants</span></a>
+    <a class="mini" href="/travel"><span class="ic" style="background:linear-gradient(135deg,#0EA5E9,#0369A1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="14" rx="3"/><path d="M4 10h16M8 18v2M16 18v2"/></svg></span><span class="a am">አውቶቡስ</span><span class="e">Bus</span></a>
+    <a class="mini" href="/flights"><span class="ic" style="background:linear-gradient(135deg,#14D8B4,#0F766E)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16l4-1 4.5-6 6.5-4.5c1.4-.9 3 .6 2.2 2L16.5 11l-1 8-2.5-1-.5-4.5-3.5 2.5-.5 2.5-2.5.5z"/></svg></span><span class="a am">በረራ</span><span class="e">Flights</span></a>
+    <a class="mini" href="/news"><span class="ic" style="background:linear-gradient(135deg,#64748B,#334155)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14H6a2 2 0 0 1-2-2zM7 9h7M7 13h7"/></svg></span><span class="a am">ዜና</span><span class="e">News</span></a>
+    <a class="mini" href="/guides"><span class="ic" style="background:linear-gradient(135deg,#22C55E,#15803D)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></svg></span><span class="a am">መመሪያዎች</span><span class="e">Guides</span></a>
+    <a class="mini" href="/for-business"><span class="ic" style="background:linear-gradient(135deg,#A855F7,#7E22CE)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><span class="a am">ማውጫ</span><span class="e">Directory</span></a>
+    <a class="mini" href="/b/darulle"><span class="ic" style="background:linear-gradient(135deg,#EC4899,#BE185D)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg></span><span class="a am">ሱቆች</span><span class="e">Shops</span></a>
+    <a class="mini" href="/cinema"><span class="ic" style="background:linear-gradient(135deg,#6366F1,#3730A3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 4v16M17 4v16"/></svg></span><span class="a am">ሲኒማ</span><span class="e">Cinema</span></a>
+    <a class="mini" href="/cinema"><span class="ic" style="background:linear-gradient(135deg,#F97316,#C2410C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span class="a am">ዝግጅቶች</span><span class="e">Events</span></a>
+    <a class="mini" href="/ethiopia-income-tax-calculator"><span class="ic" style="background:linear-gradient(135deg,#0D9488,#115E59)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2"/></svg></span><span class="a am">ቫት · ግብር</span><span class="e">VAT · Tax</span></a>
+    <a class="mini" href="/tenders"><span class="ic" style="background:linear-gradient(135deg,#0891B2,#155E75)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 11h6M9 15h4"/></svg></span><span class="a am">ጨረታ</span><span class="e">Tenders</span></a>
+    <div class="mini" onclick="loadBuildings()"><span class="ic" style="background:linear-gradient(135deg,#475569,#1E293B)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5"/></svg></span><span class="a am">ህንፃዎች</span><span class="e">Buildings</span></div>
+    <a class="mini" href="/nav"><span class="ic" style="background:linear-gradient(135deg,#10B981,#047857)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14M15 6v14"/></svg></span><span class="a am">ካርታ · 3D</span><span class="e">Maps · Walk</span></a>
+    <a class="mini" href="/wallet"><span class="ic" style="background:linear-gradient(135deg,#3B82F6,#1E40AF)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 12h18"/></svg></span><span class="a am">ክፍያ</span><span class="e">Payments</span></a>
+    <a class="mini" href="/guides"><span class="ic" style="background:linear-gradient(135deg,#8B5CF6,#5B21B6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 10h16L12 4zM6 10v11M10 10v11M14 10v11M18 10v11"/></svg></span><span class="a am">መንግሥት</span><span class="e">Gov services</span></a>
+    <a class="mini" href="/diaspora"><span class="ic" style="background:linear-gradient(135deg,#F43F5E,#9F1239)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg></span><span class="a am">ዲያስፖራ</span><span class="e">Diaspora</span></a>
+    <a class="mini" href="/ai"><span class="ic" style="background:linear-gradient(135deg,#00C896,#0099FF)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/></svg></span><span class="a am">ቢና AI</span><span class="e">Bina AI</span></a>
+    <a class="mini" href="/drive-with-us"><span class="ic" style="background:linear-gradient(135deg,#0EA5E9,#6C63FF)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M3 12h18"/></svg></span><span class="a am">ሥራ</span><span class="e">Jobs · Drive</span></a>
+    <a class="mini" href="/for-business"><span class="ic" style="background:linear-gradient(135deg,#94A3B8,#475569)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></span><span class="a am">ተጨማሪ</span><span class="e">More</span></a>
+  </div>
+
+  <div class="band"><img src="/static/home/strip.jpg" alt="" loading="lazy"><div class="sh"></div><div class="tx"><b class="am">አንድ አፕ። አንድ ከተማ። ሁሉም አገልግሎት።</b><small>Your City. Your Services. All in One Place.</small><div class="k"><span style="color:#14D8B4">● Fast on 3G</span><span style="color:#7DD3FC">● Secure</span><span style="color:#C4B5FD">● Trusted</span><span style="color:#FCD34D">● 24/7 Telegram</span></div></div></div>
+
+  <div class="apps">
+    <div class="app" style="background:linear-gradient(135deg,#0F172A,#0B3B31 70%,#00C896 160%)"><span class="ic"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 14a6 6 0 0 1 0-3.9V7.5H3.1a10 10 0 0 0 0 9z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6 12 6z"/></svg></span><div><b>Google Mini App</b><small><span class="am">ማውረድ አያስፈልግም</span> · opens from Google Search · works instantly</small></div><a class="btn" href="https://www.google.com/search?q=bina.et" target="_blank" rel="noopener">Open</a></div>
+    <div class="app" style="background:linear-gradient(135deg,#0099FF,#1D4ED8 70%,#081120 170%)"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg></span><div><b>Telegram Mini App</b><small><span class="am">መጫን አያስፈልግም</span> · @bina_smart_bot · chat, explore, book</small></div><a class="btn" href="https://t.me/bina_smart_bot" target="_blank" rel="noopener" style="color:#0B4FB3">Open</a></div>
+  </div>
+
+  <div class="aiask">
+    <div class="aiask-title">✦ Ask any AI about BinaSmart</div>
+    <div class="aiask-sub am">የፈለጉትን AI ይጠይቁ — ኢትዮጵያ ለምን BinaSmart እየመረጠች እንደሆነ።</div>
+    <div class="aiask-vp"><div class="aiask-track"><div class="aiask-set">
+      <button onclick="askExternalAI('chatgpt')">Ask ChatGPT</button><button onclick="askExternalAI('claude')">Ask Claude</button><button onclick="askExternalAI('gemini')">Ask Gemini</button><button onclick="askExternalAI('perplexity')">Ask Perplexity</button><button onclick="askExternalAI('copilot')">Ask Copilot</button>
+    </div><div class="aiask-set" aria-hidden="true">
+      <button tabindex="-1" onclick="askExternalAI('chatgpt')">Ask ChatGPT</button><button tabindex="-1" onclick="askExternalAI('claude')">Ask Claude</button><button tabindex="-1" onclick="askExternalAI('gemini')">Ask Gemini</button><button tabindex="-1" onclick="askExternalAI('perplexity')">Ask Perplexity</button><button tabindex="-1" onclick="askExternalAI('copilot')">Ask Copilot</button>
+    </div></div></div>
+    <div class="aiask-note" id="aiNote"></div>
+  </div>
+</div>
+</main>
+
+<!-- sticky AI bar: appears when the hero box scrolls away -->
+<div class="askwrap" id="askwrap">
+  <div class="rb"><div class="in">
+    <span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="11" rx="4"/><path d="M12 4v3M9 3.5h6"/><circle cx="9.5" cy="12.5" r="1" fill="#fff"/><circle cx="14.5" cy="12.5" r="1" fill="#fff"/><path d="M9.5 15.5c1.5 1 3.5 1 5 0"/></svg></span>
+    <input id="q2" placeholder="Ask BinaSmart AI… ማንኛውንም ነገር ይጠይቁ" autocomplete="off" aria-label="Ask BinaSmart AI">
+    <button type="button" aria-label="Speak" onclick="mic()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+    <button type="button" class="send" aria-label="Send" onclick="go2()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div></div>
+</div>
+<div id="aiAnswer" class="am"></div>
+<div id="toast" class="toast"></div>
+<input type="file" id="camIn" accept="image/*" capture="environment" hidden>
+
+<script>
+const R = document.getElementById('results'), C = document.getElementById('cards'), Q = document.getElementById('q'), Q2 = document.getElementById('q2');
+let t, tt;
+function toast(m){ var el=document.getElementById('toast'); el.textContent=m; el.classList.add('on'); clearTimeout(tt); tt=setTimeout(function(){el.classList.remove('on');},2800); }
+Q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(search, 250); });
+Q.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+Q2.addEventListener('keydown', e => { if (e.key === 'Enter') go2(); });
+function go(){ var q=Q.value.trim(); if(q.length<2) return; askAI(q); search(); Q.value=''; }
+function go2(){ var q=Q2.value.trim(); if(q.length<2) return; Q2.value=''; askAI(q); }
+function chip(txt){ askAI(txt); }
+function cam(){ document.getElementById('camIn').click(); }
+document.getElementById('camIn').addEventListener('change', function(){ if(this.files && this.files[0]) toast('📷 ፎቶ ፍለጋ በቅርቡ · Photo search coming soon'); this.value=''; });
+/* voice: Amharic first, English fallback (same as Ride) */
+var rec=null;
+function mic(){
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition; var b=document.getElementById('micBtn');
+  if(!SR){ toast('🎤 ድምፅ በዚህ አሳሽ አይሰራም · Voice not supported here'); return; }
+  if(rec){ try{rec.stop();}catch(e){} rec=null; b.classList.remove('on'); return; }
+  rec=new SR(); rec.lang='am-ET'; rec.interimResults=false; rec.maxAlternatives=1; b.classList.add('on');
+  rec.onresult=function(e){ var s=e.results[0][0].transcript; Q.value=s; go(); };
+  rec.onerror=function(e){ if(e.error==='language-not-supported'){ rec.lang='en-US'; try{rec.start();}catch(x){} return; } toast('🎤 እንደገና ይሞክሩ · Try again'); };
+  rec.onend=function(){ b.classList.remove('on'); rec=null; };
+  try{ rec.start(); }catch(e){ b.classList.remove('on'); rec=null; }
+}
+function biniLinkify(x){ x=x.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); var _a=[]; x=x.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[a-z0-9][a-z0-9\-\/]*)\)/gi,function(m,txt,url){var ext=/^https?:/i.test(url); _a.push('<a href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+txt+'</a>'); return '\u0000'+(_a.length-1)+'\u0000';}); x=x.replace(/(https?:\/\/[^\s]+)/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>';}); x=x.replace(/(^|[\s(])(\/[a-z][a-z0-9\-\/]*)/g,function(m,p,path){return p+'<a href="'+path+'">'+path+'</a>';}); x=x.replace(/\u0000(\d+)\u0000/g,function(m,i){return _a[+i];}); return x; }
+async function askAI(qArg){ var q=(qArg!=null?qArg:Q.value).trim(); if(q.length<2) return; var A=document.getElementById('aiAnswer'); A.style.display='block'; A.innerHTML='<div class="aiwrap"><div class="aihd"><span class="aiav"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="11" rx="4"/><circle cx="9.5" cy="12.5" r="1" fill="#fff"/><circle cx="14.5" cy="12.5" r="1" fill="#fff"/></svg></span><b>ቢኒ · Bini</b><small>BinaSmart AI</small><button class="aiclose" onclick="document.getElementById(\'aiAnswer\').style.display=\'none\'">×</button></div><div class="aiq"></div><div class="aibody"><span class="aiblink"></span></div></div>'; A.querySelector('.aiq').textContent='🧑 '+q; try{ var r=await fetch('/api/assistant',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:q,history:(window._bh||[]).slice(-6)})}); var d=await r.json(); var rep=(d.reply||''); A.querySelector('.aibody').innerHTML=biniLinkify(rep); window._bh=(window._bh||[]); window._bh.push({role:'user',content:q}); window._bh.push({role:'assistant',content:rep}); if(window._bh.length>12)window._bh=window._bh.slice(-12); }catch(e){ A.querySelector('.aibody').textContent='ይቅርታ፣ በ WhatsApp ያግኙን፦ https://wa.me/251911244344'; } }
+async function search(){
+  const q = Q.value.trim();
+  if (q.length < 2){ R.innerHTML = ''; return; }
+  const d = await (await fetch('/api/search?q=' + encodeURIComponent(q))).json();
+  if (!d.results.length){ R.innerHTML = '<div class="empty">ምንም አልተገኘም · Nothing found for "' + q.replace(/</g,'&lt;') + '" — try a shop or building name</div>'; return; }
+  R.innerHTML = d.results.map(r => {
+    if (r.kind === 'building')
+      return '<a class="r" href="/b/' + r.slug + '"><div class="ric">🏢</div><div><b>' + r.name + '</b><span>' + (r.nameAm || '') + ' · ' + r.sub + '</span></div><div class="go">Open →</div></a>';
+    const href = r.slug === 'darulle'
+      ? '/nav?to=' + encodeURIComponent(r.unit) + '&floor=' + r.floor + '&name=' + encodeURIComponent(r.name)
+      : '/b/' + r.slug;
+    return '<a class="r shop" href="' + href + '"><div class="ric">🛍️</div><div><b>' + r.name + '</b><span>' + (r.nameAm || '') + ' · ' + r.building + ' · Unit ' + r.unit + '</span></div><div class="go">' + (r.slug === 'darulle' ? '🧭 Walk me →' : 'Open →') + '</div></a>';
+  }).join('');
+}
+async function loadBuildings(){
+  const d = await (await fetch('/api/buildings')).json();
+  const bs = d.buildings || d;
+  R.innerHTML = bs.map(b => '<a class="r" href="/b/' + (b.qrSlug || b.slug) + '"><div class="ric">🏢</div><div><b>' + b.name + '</b><span>' + (b.nameAm || '') + '</span></div><div class="go">Open →</div></a>').join('');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function askExternalAI(which){
+  var prompt="What is BinaSmart (bina.et)? It is Ethiopia's all-in-one digital platform — ride-hailing, airport transfer, hotels, live Ethiopian TV and films, restaurants, hospitals, insurance comparison, cars, property, verified tenders, Amharic news and building management, in Amharic and English, inside Google and Telegram. Why are businesses and people in Ethiopia choosing BinaSmart? Please give a short, clear summary.";
+  var q=encodeURIComponent(prompt);
+  var urls={chatgpt:'https://chatgpt.com/?q='+q, claude:'https://claude.ai/new?q='+q, perplexity:'https://www.perplexity.ai/search?q='+q, gemini:'https://www.google.com/search?udm=50&q='+q, copilot:'https://www.bing.com/search?q='+q};
+  try{ if(navigator.clipboard) navigator.clipboard.writeText(prompt); }catch(e){}
+  window.open(urls[which],'_blank','noopener');
+}
+/* sticky bar shows once the hero box is out of view */
+(function(){ var box=document.getElementById('heroBox'), bar=document.getElementById('askwrap'); if(!('IntersectionObserver' in window)){ bar.classList.add('on'); return; }
+  new IntersectionObserver(function(es){ bar.classList.toggle('on', !es[0].isIntersecting); },{threshold:0}).observe(box); })();
+/* most-used cards first (kept from the previous home) */
+(function(){
+  var grid=document.getElementById('cards'); if(!grid) return;
+  var cards=[].slice.call(grid.querySelectorAll('.svc'));
+  var keyOf=function(c){var t=c.querySelector('.t');return t?t.textContent.trim():(c.getAttribute('href')||'');};
+  var use={}; try{use=JSON.parse(localStorage.getItem('bina_card_use')||'{}')||{};}catch(e){}
+  try{ cards.map(function(c,i){return {c:c,i:i,n:use[keyOf(c)]||0};}).sort(function(a,b){return (b.n-a.n)||(a.i-b.i);}).forEach(function(o){grid.appendChild(o.c);}); }catch(e){}
+  cards.forEach(function(c){ c.addEventListener('click',function(){ var k=keyOf(c); use[k]=(use[k]||0)+1; try{localStorage.setItem('bina_card_use',JSON.stringify(use));}catch(e){} }); });
+})();
+if('serviceWorker' in navigator){addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
+var binaDeferred=null;
+addEventListener('beforeinstallprompt',function(e){e.preventDefault();binaDeferred=e;var b=document.getElementById('installBtn');if(b)b.style.display='';});
+function binaInstall(){var b=document.getElementById('installBtn');if(!binaDeferred){alert('ከአሳሽዎ ሜኑ ➔ "Add to Home screen" ይጫኑ። / Use your browser menu ➔ Add to Home screen');return;}binaDeferred.prompt();binaDeferred.userChoice.finally(function(){binaDeferred=null;if(b)b.style.display='none';});}
+addEventListener('appinstalled',function(){var b=document.getElementById('installBtn');if(b)b.style.display='none';});
+(function(){try{var t=localStorage.getItem("bina_wallet_tok");if(!t)return;fetch("/api/wallet/me?token="+encodeURIComponent(t)).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.ok){var c=document.getElementById("walletChip");if(c){c.textContent="👛 ETB "+Number(j.balance).toLocaleString();c.style.background="linear-gradient(135deg,#00C896,#009688)";c.style.color="#fff";}}}).catch(function(){});}catch(e){}})();
+</script>
+<script src="/static/bina-footer.js?v=6" defer></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* BinaSmart Driver — site-wide BinaSmart style, 7 Sep 2026 (replaces ride/drive-next.css).
+   The cockpit stays DARK (a white sheet blinds a windscreen at night) but takes the home tokens:
+   #081120 ink, #00C896 / #009688 primary, #0099FF -> #6C63FF for navigation, glass pills, 18-28px radii.
+   Scoped to html.next; drive.html adds the class by default, ?v=classic removes it. */
+html.next body.drv{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* top bar */
+html.next .dtop{background:linear-gradient(180deg,rgba(8,17,32,.85),rgba(8,17,32,.5) 70%,transparent);padding-top:calc(11px + env(safe-area-inset-top))}
+html.next .dbrand{display:flex;align-items:center;gap:8px;font-size:15px;letter-spacing:-.2px;background:rgba(8,17,32,.42);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 12px 5px 5px;font-weight:800;color:#fff}
+html.next .dbrand .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#00C896,#009688);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 8px 18px -8px rgba(0,200,150,.9)}
+html.next .dbrand .logo svg{width:15px;height:15px;display:block}
+html.next .dbrand b{font-weight:800}
+html.next .dbrand b span{color:#00C896}
+html.next .dbrand small{display:block;font-size:10px;font-weight:700;color:rgba(255,255,255,.75);margin-top:2px}
+html.next .dstat{background:rgba(8,17,32,.55);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.14);border-radius:14px;box-shadow:0 12px 30px -14px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08)}
+html.next .dstat span{font-weight:800;color:#00C896}
+html.next .dghost{background:rgba(8,17,32,.55);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.14);border-radius:50%;width:42px;height:42px;box-shadow:0 12px 30px -14px rgba(0,0,0,.6)}
+html.next .dbanner{border-radius:14px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+
+/* cards: dark glass, home radius */
+html.next .dcard{background:rgba(8,17,32,.74);-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%);border-radius:30px 30px 0 0;border-top:1px solid rgba(255,255,255,.16);box-shadow:0 -18px 50px -20px #000,inset 0 1px 0 rgba(255,255,255,.08);padding:10px 18px calc(16px + env(safe-area-inset-bottom))}
+html.next .tgrip{width:44px;height:5px;background:#475569;margin:2px auto 10px}
+html.next .dcard h2{font-size:22px;font-weight:800;letter-spacing:-.3px}
+html.next .ihead b{font-size:22px;font-weight:800;letter-spacing:-.3px}
+html.next .orow b{font-weight:800}
+html.next .orow small{font-weight:500}
+html.next .ifoot{color:rgba(255,255,255,.6)}
+
+/* offer: emerald ring, fare loudest */
+html.next .doffer{border-top:1.5px solid rgba(0,200,150,.8)}
+html.next .oring{width:54px;height:54px;top:12px}
+html.next .oring svg{width:54px;height:54px}
+html.next .oring circle{stroke-width:4.5}
+html.next .oring .oarc{stroke:#00C896}
+html.next .oring b{font-size:16px;font-weight:800;color:#00C896}
+html.next .opill{font-weight:800;border-radius:999px;padding:5px 10px;background:rgba(0,200,150,.16);color:#14D8B4}
+html.next .oaway{color:rgba(255,255,255,.7)}
+html.next .ofare{margin-top:12px;padding:12px 14px;border:0;border-radius:16px;background:linear-gradient(120deg,rgba(0,200,150,.16),rgba(0,153,255,.1));gap:12px}
+html.next .ofare b{font-size:26px;font-weight:800;color:#14D8B4}
+
+/* buttons */
+html.next .dbtn{border-radius:18px;font-weight:800;padding:15px 12px}
+html.next .dbtn.go{background:linear-gradient(135deg,#00C896,#009688);color:#fff;box-shadow:0 18px 34px -14px rgba(0,200,150,.8),inset 0 1px 0 rgba(255,255,255,.3)}
+html.next .dbtn.ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#e2e8f0}
+html.next .dbtn.big{border-radius:20px;font-size:17px}
+
+/* trip */
+html.next .tstage{border-radius:999px;font-weight:800;background:rgba(0,200,150,.16);color:#14D8B4}
+html.next .tcall{background:linear-gradient(135deg,#00C896,#009688);color:#fff;border-radius:12px;font-weight:800}
+html.next .trider{border-bottom-color:rgba(255,255,255,.1)}
+html.next .tav{font-weight:800;background:linear-gradient(135deg,#0099FF,#6C63FF);color:#fff;box-shadow:0 0 0 3px rgba(0,153,255,.22)}
+html.next .tpay{border-radius:10px;font-weight:800;background:rgba(255,255,255,.1);color:#fff}
+html.next .tbooked{background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.18);border-radius:14px}
+html.next .taltnav a{color:#14D8B4}
+html.next .tlink{color:rgba(255,255,255,.6)}
+
+/* Amharic turn banner and HUD: blue-violet navigation, like Bini */
+html.next .dnav{background:rgba(8,17,32,.8);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border:1px solid rgba(255,255,255,.16);border-radius:22px;box-shadow:0 14px 36px -14px #000,inset 0 1px 0 rgba(255,255,255,.08)}
+html.next .dnavIc{background:linear-gradient(135deg,#0099FF,#6C63FF);color:#fff;border-radius:14px}
+html.next .dnav.now{background:linear-gradient(135deg,#0099FF,#6C63FF);border-color:#93C5FD;color:#fff}
+html.next .dnav.now .dnavIc{background:rgba(255,255,255,.2)}
+html.next .dnavTxt b{font-weight:800}
+html.next .dnavThen{border-radius:9px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+html.next .dnavhud{background:rgba(8,17,32,.8);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border:1px solid rgba(255,255,255,.16);border-radius:22px;box-shadow:0 -12px 40px -16px #000,inset 0 1px 0 rgba(255,255,255,.08)}
+html.next .nhInfo b{font-weight:800;color:#14D8B4}
+html.next .nhSpeed{border-radius:14px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+html.next .nhSpeed b{font-weight:800}
+
+/* pins and the driver's car */
+html.next .dpinLabel{border-radius:10px;background:rgba(8,17,32,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:rgba(255,255,255,.18);font-weight:800}
+html.next .dpin-pick .dpinDot{background:#0099FF}
+html.next .dpin-drop .dpinDot{background:#00C896}
+html.next .dpin-drop.active .dpinLabel{background:#00C896;color:#04283b;border-color:#5eead4}
+html.next .odotp{background:#0099FF;box-shadow:0 0 0 3px rgba(0,153,255,.22)}
+html.next .odotd{background:#00C896;box-shadow:0 0 0 3px rgba(0,200,150,.22)}
+html.next .demoBadge{border-radius:999px;font-weight:800}
