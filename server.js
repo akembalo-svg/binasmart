@@ -909,10 +909,10 @@ footer{border-top:3px double var(--line);margin-top:20px}
 .dl span{font-size:10.5px;font-weight:700;letter-spacing:.5px}
 .dl.ok{background:#ecfdf5;color:#047857}.dl.mid{background:#fffbeb;color:#b45309}.dl.hot{background:#fef2f2;color:#dc2626}.dl.past{background:#f1f0ec;color:#9a948a}
 @media(max-width:820px){.hero-a{grid-template-columns:1fr;gap:18px}.grid{grid-template-columns:1fr}.card{padding:26px 0!important;border-left:0!important;border-right:0!important}.tb-nav{gap:12px;font-size:13px}.tb-cta{display:none}.t-card{grid-template-columns:1fr}.dl{justify-self:start}}
-</style></head><body>
+</style><link rel="stylesheet" href="/static/site-v3.css?v=2"><meta name="theme-color" content="#009688"></head><body>
 <div id="prog"></div>
 <div class="topbar sans"><div class="tb-in">
-  <a class="brand" href="/">Bina<span class="g">Smart</span><span class="zena"> ዜና</span></a>
+  <a class="brand" href="/"><i class="lg"></i>Bina<span class="g">Smart</span><span class="zena"> ዜና</span></a>
   <nav class="tb-nav">
     <a href="/news" class="${active === 'news' ? 'on' : ''}">ዜና News</a>
     <a href="/tenders" class="${active === 'tenders' ? 'on' : ''}">ጨረታ Tenders</a>
