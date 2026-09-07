@@ -48,7 +48,7 @@
   var DEFAULT_PICKUP = { lat: 9.0108, lng: 38.7578, label: 'Bole, Addis Ababa (tap Change)' };
   function locate() {
     var settled = false;
-    function settle(p) { if (settled) return; settled = true; setPickup(p); }
+    function settle(p) { if (settled) return; settled = true; if (S.pickupLocked) return; setPickup(p); }
     if (!navigator.geolocation) return settle(DEFAULT_PICKUP);
     setTimeout(function () { settle(DEFAULT_PICKUP); }, 9000);
     navigator.geolocation.getCurrentPosition(function (pos) {
@@ -112,6 +112,17 @@
     q.querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { S.searchTarget = 'dropoff'; choose(items[+b.dataset.i].p); }); });
   }
   renderQuick();
+
+  // ---- hand-off from /airport and deep links: ?airport=1 puts the pickup at Bole T2; ?to=&lat=&lng= presets
+  //      the drop-off; ?tier= picks the car. The normal quote path then shows the fixed price. ----
+  (function () {
+    var P = new URLSearchParams(location.search); if (!P.get('airport') && !P.get('to')) return;
+    var tier = P.get('tier'); if (/^(moto|bajaj|economy|comfort|xl)$/.test(tier || '')) S.tier = tier;
+    if (P.get('airport') === '1') { S.pickupLocked = true; setPickup({ lat: AIRPORT.lat, lng: AIRPORT.lng, label: 'Bole Airport · Terminal 2 · ቦሌ አየር ማረፊያ' }); }
+    var lat = parseFloat(P.get('lat')), lng = parseFloat(P.get('lng')), to = (P.get('to') || '').slice(0, 80);
+    if (to && isFinite(lat) && isFinite(lng) && lat > 8.5 && lat < 9.5 && lng > 38.4 && lng < 39.2) { S.searchTarget = 'dropoff'; choose({ lat: lat, lng: lng, label: to }); }
+    else if (P.get('airport') === '1') { S.searchTarget = 'dropoff'; openSearch(); }
+  })();
 
   // ---- Ask Bini: typed or spoken sentence -> destination + options -> the normal quote path ----
   var TIER_AM = { moto: 'ሞተር', bajaj: 'ባጃጅ', economy: 'መደበኛ', comfort: 'ምቾት', xl: 'XL' };
