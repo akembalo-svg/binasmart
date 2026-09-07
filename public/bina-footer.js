@@ -1,13 +1,13 @@
 /* One footer for the whole of bina.et. Any page that adds
-     <script src="/static/bina-footer.js?v=8" defer></script>
+     <script src="/static/bina-footer.js?v=9" defer></script>
    gets it, injected at the end of <body>.
-   v8 (7 Sep 2026): the BinaSmart home design footer — dark navy, teal play logo, tagline, nav row,
+   v9 (7 Sep 2026): new bi mark + Telegram Mini App init. v8: the BinaSmart home design footer — dark navy, teal play logo, tagline, nav row,
    social icons, three link columns (Amharic first, English on wide screens), bottom bar. */
 (function () {
   'use strict';
   if (window.__binaFooter) return; window.__binaFooter = 1;
   var here = location.pathname.replace(/\/+$/, '') || '/';
-  var PLAY = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>';
+  var PLAY = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><g transform="scale(0.024)"><path transform="translate(255,700) scale(0.62,-0.62)" d="M699 -82Q668 -82 645.5 -55.0Q623 -28 615 0H437V465Q437 551 408.0 597.5Q379 644 311 644Q236 644 208.5 595.0Q181 546 181 464V0H90V472Q90 586 144.0 655.0Q198 724 311 724Q426 724 477.0 658.5Q528 593 528 470V73H615Q623 101 645.5 127.5Q668 154 699 154H723L697 36L723 -82Z" fill="#fff" stroke="#fff" stroke-width="56" stroke-linejoin="round"/><path d="M800 150l24 62 62 24-62 24-24 62-24-62-62-24 62-24z" fill="#fff"/></g></svg>';
   // [Amharic, English, href]
   var COLS = [
     ['አገልግሎቶች', 'Services', [
@@ -78,6 +78,18 @@
     }).join('')
     + '</div><div class="bot"><span>© ' + new Date().getFullYear() + ' BinaSmart · አዲስ አበባ · bina.et</span><span class="sp"></span>'
     + '<span>Built for Ethiopia 🇪🇹 · fast on 3G</span><span class="lang">አማርኛ · English</span></div></div>';
+  // Inside the Telegram Mini App every page must call ready()+expand(), or Telegram shows it as a half-height sheet.
+  // Telegram marks the first URL with #tgWebApp...; later in-app navigation loses the hash, so remember it per tab.
+  (function () {
+    var tg = /tgWebApp/.test(location.hash);
+    try { if (tg) sessionStorage.setItem('bina_tg', '1'); else tg = sessionStorage.getItem('bina_tg') === '1'; } catch (e) {}
+    if (!tg) return;
+    document.documentElement.classList.add('in-telegram');
+    function init() { var W = window.Telegram && window.Telegram.WebApp; if (!W) return;
+      try { W.ready(); W.expand(); if (W.setHeaderColor) W.setHeaderColor('#F8FAFC'); if (W.setBackgroundColor) W.setBackgroundColor('#F8FAFC'); } catch (e) {} }
+    if (window.Telegram && window.Telegram.WebApp) return init();
+    var sc = document.createElement('script'); sc.src = 'https://telegram.org/js/telegram-web-app.js?58'; sc.onload = init; document.head.appendChild(sc);
+  })();
   var ft = document.createElement('footer');
   ft.className = 'bina-ft'; ft.innerHTML = html;
   document.body.appendChild(ft);

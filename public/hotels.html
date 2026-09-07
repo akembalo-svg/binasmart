@@ -115,7 +115,7 @@ h2.sec::before{content:'';width:10px;height:10px;border-radius:50%;background:li
   <picture><img class="ph" src="/static/hotels/sheraton.jpg" alt="Hotel in Addis Ababa" fetchpriority="high"></picture>
   <div class="sh1"></div>
   <header class="nav dglass">
-    <a class="logo" href="/"><i><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg></i><span><b>Bina<span>Hotels</span></b><small class="am">ሆቴሎች · አዲስ አበባ</small></span></a>
+    <a class="logo" href="/"><i><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><g transform="scale(0.024)"><path transform="translate(255,700) scale(0.62,-0.62)" d="M699 -82Q668 -82 645.5 -55.0Q623 -28 615 0H437V465Q437 551 408.0 597.5Q379 644 311 644Q236 644 208.5 595.0Q181 546 181 464V0H90V472Q90 586 144.0 655.0Q198 724 311 724Q426 724 477.0 658.5Q528 593 528 470V73H615Q623 101 645.5 127.5Q668 154 699 154H723L697 36L723 -82Z" fill="#fff" stroke="#fff" stroke-width="56" stroke-linejoin="round"/><path d="M800 150l24 62 62 24-62 24-24 62-24-62-62-24 62-24z" fill="#fff"/></g></svg></i><span><b>Bina<span>Hotels</span></b><small class="am">ሆቴሎች · አዲስ አበባ</small></span></a>
     <nav class="links"><a href="/">Home</a><a href="/hotels" class="on">Hotels</a><a href="/airport">Airport</a><a href="/ride">Ride</a><a href="/support">Contact</a></nav>
     <span class="sp"></span>
     <a class="pill" href="/airport"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16l4-1 4.5-6 6.5-4.5c1.4-.9 3 .6 2.2 2L16.5 11l-1 8-2.5-1-.5-4.5-3.5 2.5-.5 2.5-2.5.5z"/></svg><span class="am">አየር ማረፊያ</span></a>
@@ -178,6 +178,6 @@ fetch('/api/hotels').then(r => r.json()).then(d => {
     : '<p style="color:#94a3b8;padding:20px;text-align:center">No hotels yet.</p>';
 }).catch(() => { $('hotels').innerHTML = '<p style="color:#94a3b8;padding:20px;text-align:center">Could not load hotels.</p>'; });
 </script>
-<script src="/static/bina-footer.js?v=8" defer></script>
+<script src="/static/bina-footer.js?v=9" defer></script>
 </body>
 </html>
