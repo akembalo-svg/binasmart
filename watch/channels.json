@@ -1,30 +1,594 @@
 {
-  "_note": "BinaWatch channels. tv/kids play the broadcaster's OWN YouTube channel (live stream when it is on, otherwise its latest upload). radio plays the station's own public stream (Zeno-hosted, as listed on the station site / radio directories). Only Ethiopian broadcasters and stations; verified 7 Sep 2026 by subscriber count against imitators. Add a channel = add a row; the checker picks it up on the next run.",
-  "tv": [
-    { "id": "ebs", "name": "EBS TV", "nameAm": "ኢቢኤስ ቲቪ", "yt": "UCVcc_sbg3AcXLV9vVufJrGg", "site": "https://www.ebstv.tv", "tag": "መዝናኛ · Entertainment", "color": "#e11d48" },
-    { "id": "etv", "name": "ETV · EBC", "nameAm": "ኢቲቪ", "yt": "UCOhrz3uRCOHmK6ueUstw7_Q", "site": "https://www.ebc.et", "tag": "ብሔራዊ · National", "color": "#2563eb" },
-    { "id": "fana", "name": "Fana TV", "nameAm": "ፋና ቲቪ", "yt": "UCZtXd8pSeqURf5MT2fqE51g", "site": "https://www.fanabc.com", "tag": "ዜና · News", "color": "#f59e0b" },
-    { "id": "kana", "name": "Kana TV", "nameAm": "ቃና ቲቪ", "yt": "UCvgODwKEq2GS7zxacxvYa6Q", "site": "https://kanatelevision.com", "tag": "ድራማ · Drama", "color": "#7c3aed" },
-    { "id": "ahadu", "name": "Ahadu TV", "nameAm": "አሐዱ ቲቪ", "yt": "UC-x3kCrGEczM1Dr0UOKy-BQ", "site": "https://ahadutv.com", "tag": "መዝናኛ · Entertainment", "color": "#0891b2" },
-    { "id": "arts", "name": "Arts TV", "nameAm": "አርትስ ቲቪ", "yt": "UCSnwxtpNr-2QupM0qi11Y6Q", "site": "https://artstvworld.com", "tag": "ጥበብ · Arts", "color": "#db2777" },
-    { "id": "obn", "name": "OBN", "nameAm": "ኦቢኤን", "yt": "UC-sZOi65unPqSK0Shl3Snyg", "site": "https://obn.et", "tag": "Afaan Oromoo", "color": "#16a34a" },
-    { "id": "etvoromo", "name": "ETV Afaan Oromoo", "nameAm": "ኢቲቪ አፋን ኦሮሞ", "yt": "UCMxIr0WxT9B3P7aCM0NsbKQ", "site": "https://www.ebc.et", "tag": "Afaan Oromoo", "color": "#0d9488" },
-    { "id": "nahoo", "name": "Nahoo TV", "nameAm": "ናሁ ቲቪ", "yt": "UCUhnQSskjPYay4TC_hq9uQQ", "site": "https://nahootv.com", "tag": "መዝናኛ · Entertainment", "color": "#ea580c" },
-    { "id": "balageru", "name": "Balageru TV", "nameAm": "ባላገሩ ቲቪ", "yt": "UCScCjYbR_WiJkQcxBvmvwtA", "site": "https://balagerutv.com", "tag": "ሙዚቃ · Music", "color": "#9333ea" },
-    { "id": "abbay", "name": "Abbay TV", "nameAm": "ዓባይ ቲቪ", "yt": "UClZPsyv-1PgxCqDHfBIq46A", "site": "https://abbaytv.com", "tag": "መዝናኛ · Entertainment", "color": "#0284c7" },
-    { "id": "amhara", "name": "Amhara TV", "nameAm": "አማራ ቲቪ", "yt": "UCx8pCDzeiIQaKuVsj46G3Dg", "site": "https://amharatv.com", "tag": "ክልል · Regional", "color": "#ca8a04" },
-    { "id": "tigrai", "name": "Tigrai TV", "nameAm": "ትግራይ ቲቪ", "yt": "UCW0FmkMO7KkYdIiNKXpY9Ng", "site": "https://tigraitv.com", "tag": "ትግርኛ · Tigrinya", "color": "#dc2626" }
-  ],
-  "kids": [
-    { "id": "tsehai", "name": "Tsehai Loves Learning", "nameAm": "ፀሐይ መማር ትወዳለች", "yt": "UCAJTrrbxbaMZtHh9sEH2U4w", "site": "https://www.whizkidsworkshop.com", "tag": "ለልጆች · Kids", "color": "#f59e0b" }
-  ],
-  "radio": [
-    { "id": "sheger", "name": "Sheger FM 102.1", "nameAm": "ሸገር ኤፍኤም 102.1", "stream": "https://stream.zeno.fm/y91n1vtbaw5tv", "site": "https://www.shegerfm.com", "yt": "UC9uvm3QhajePOVdct3Jv8Hg", "tag": "ዜና · ውይይት", "color": "#0ea5e9" },
-    { "id": "fmaddis", "name": "FM Addis 97.1", "nameAm": "ኤፍኤም አዲስ 97.1", "stream": "https://stream.zeno.fm/rb6wbrap7yzuv", "site": "https://www.ebc.et", "tag": "ኢቢሲ · EBC", "color": "#2563eb" },
-    { "id": "ebcradio", "name": "EBC Radio 104.7", "nameAm": "ኢቢሲ ራዲዮ 104.7", "stream": "https://stream-25.zeno.fm/2xguamap7yzuv", "site": "https://www.ebc.et", "tag": "ብሔራዊ · National", "color": "#1d4ed8" },
-    { "id": "ethiofm", "name": "Ethio FM 107.8", "nameAm": "ኢትዮ ኤፍኤም 107.8", "stream": "https://stream.zeno.fm/72y045deqeruv", "site": "https://zeno.fm/radio/ethiofm107_8/", "yt": "UCn4D20GPsAtNqN5bIC1BhFA", "tag": "ስፖርት · መዝናኛ", "color": "#16a34a" },
-    { "id": "jano", "name": "Jano FM", "nameAm": "ጃኖ ኤፍኤም", "stream": "https://stream-54.zeno.fm/1cyn1as4v68uv", "site": "https://zeno.fm/radio/jano-fm/", "tag": "ሙዚቃ · Music", "color": "#9333ea" },
-    { "id": "tizita", "name": "Tizita FM", "nameAm": "ትዝታ ኤፍኤም", "stream": "https://stream.zeno.fm/55nlq5yzqlftv", "site": "https://zeno.fm/radio/tizita-fm/", "tag": "የቆዩ ዘፈኖች · Oldies", "color": "#b45309" },
-    { "id": "taem", "name": "Taem Radio", "nameAm": "ጣዕም ሬድዮ", "stream": "https://stream.zeno.fm/ffg8htkh1k0uv", "site": "https://www.taemmedia.com", "tag": "መዝናኛ", "color": "#db2777" }
-  ]
+ "_note": "BinaWatch channels. tv/kids play the broadcaster's OWN YouTube channel (live stream when it is on, otherwise its latest upload). radio plays the station's own public stream (Zeno-hosted, as listed on the station site / radio directories). Only Ethiopian broadcasters and stations; verified 7 Sep 2026 by subscriber count against imitators. Add a channel = add a row; the checker picks it up on the next run.",
+ "tv": [
+  {
+   "id": "ebs",
+   "name": "EBS TV",
+   "nameAm": "ኢቢኤስ ቲቪ",
+   "yt": "UCVcc_sbg3AcXLV9vVufJrGg",
+   "site": "https://www.ebstv.tv",
+   "tag": "መዝናኛ · Entertainment",
+   "color": "#e11d48"
+  },
+  {
+   "id": "etv",
+   "name": "ETV · EBC",
+   "nameAm": "ኢቲቪ",
+   "yt": "UCOhrz3uRCOHmK6ueUstw7_Q",
+   "site": "https://www.ebc.et",
+   "tag": "ብሔራዊ · National",
+   "color": "#2563eb"
+  },
+  {
+   "id": "fana",
+   "name": "Fana TV",
+   "nameAm": "ፋና ቲቪ",
+   "yt": "UCZtXd8pSeqURf5MT2fqE51g",
+   "site": "https://www.fanabc.com",
+   "tag": "ዜና · News",
+   "color": "#f59e0b"
+  },
+  {
+   "id": "kana",
+   "name": "Kana TV",
+   "nameAm": "ቃና ቲቪ",
+   "yt": "UCvgODwKEq2GS7zxacxvYa6Q",
+   "site": "https://kanatelevision.com",
+   "tag": "ድራማ · Drama",
+   "color": "#7c3aed"
+  },
+  {
+   "id": "ahadu",
+   "name": "Ahadu TV",
+   "nameAm": "አሐዱ ቲቪ",
+   "yt": "UC-x3kCrGEczM1Dr0UOKy-BQ",
+   "site": "https://ahadutv.com",
+   "tag": "መዝናኛ · Entertainment",
+   "color": "#0891b2"
+  },
+  {
+   "id": "arts",
+   "name": "Arts TV",
+   "nameAm": "አርትስ ቲቪ",
+   "yt": "UCSnwxtpNr-2QupM0qi11Y6Q",
+   "site": "https://artstvworld.com",
+   "tag": "ጥበብ · Arts",
+   "color": "#db2777"
+  },
+  {
+   "id": "obn",
+   "name": "OBN",
+   "nameAm": "ኦቢኤን",
+   "yt": "UC-sZOi65unPqSK0Shl3Snyg",
+   "site": "https://obn.et",
+   "tag": "Afaan Oromoo",
+   "color": "#16a34a"
+  },
+  {
+   "id": "etvoromo",
+   "name": "ETV Afaan Oromoo",
+   "nameAm": "ኢቲቪ አፋን ኦሮሞ",
+   "yt": "UCMxIr0WxT9B3P7aCM0NsbKQ",
+   "site": "https://www.ebc.et",
+   "tag": "Afaan Oromoo",
+   "color": "#0d9488"
+  },
+  {
+   "id": "nahoo",
+   "name": "Nahoo TV",
+   "nameAm": "ናሁ ቲቪ",
+   "yt": "UCUhnQSskjPYay4TC_hq9uQQ",
+   "site": "https://nahootv.com",
+   "tag": "መዝናኛ · Entertainment",
+   "color": "#ea580c"
+  },
+  {
+   "id": "balageru",
+   "name": "Balageru TV",
+   "nameAm": "ባላገሩ ቲቪ",
+   "yt": "UCScCjYbR_WiJkQcxBvmvwtA",
+   "site": "https://balagerutv.com",
+   "tag": "ሙዚቃ · Music",
+   "color": "#9333ea"
+  },
+  {
+   "id": "abbay",
+   "name": "Abbay TV",
+   "nameAm": "ዓባይ ቲቪ",
+   "yt": "UClZPsyv-1PgxCqDHfBIq46A",
+   "site": "https://abbaytv.com",
+   "tag": "መዝናኛ · Entertainment",
+   "color": "#0284c7"
+  },
+  {
+   "id": "amhara",
+   "name": "Amhara TV",
+   "nameAm": "አማራ ቲቪ",
+   "yt": "UCx8pCDzeiIQaKuVsj46G3Dg",
+   "site": "https://amharatv.com",
+   "tag": "ክልል · Regional",
+   "color": "#ca8a04"
+  },
+  {
+   "id": "tigrai",
+   "name": "Tigrai TV",
+   "nameAm": "ትግራይ ቲቪ",
+   "yt": "UCW0FmkMO7KkYdIiNKXpY9Ng",
+   "site": "https://tigraitv.com",
+   "tag": "ትግርኛ · Tigrinya",
+   "color": "#dc2626"
+  }
+ ],
+ "kids": [
+  {
+   "id": "tsehai",
+   "name": "Tsehai Loves Learning",
+   "nameAm": "ፀሐይ መማር ትወዳለች",
+   "yt": "UCAJTrrbxbaMZtHh9sEH2U4w",
+   "site": "https://www.whizkidsworkshop.com",
+   "tag": "ለልጆች · Kids",
+   "color": "#f59e0b"
+  }
+ ],
+ "radio": [
+  {
+   "id": "sheger",
+   "name": "Sheger FM 102.1",
+   "nameAm": "ሸገር ኤፍኤም 102.1",
+   "stream": "https://stream.zeno.fm/y91n1vtbaw5tv",
+   "site": "https://www.shegerfm.com",
+   "yt": "UC9uvm3QhajePOVdct3Jv8Hg",
+   "tag": "ዜና · ውይይት",
+   "color": "#0ea5e9"
+  },
+  {
+   "id": "fmaddis",
+   "name": "FM Addis 97.1",
+   "nameAm": "ኤፍኤም አዲስ 97.1",
+   "stream": "https://stream.zeno.fm/rb6wbrap7yzuv",
+   "site": "https://www.ebc.et",
+   "tag": "ኢቢሲ · EBC",
+   "color": "#2563eb"
+  },
+  {
+   "id": "ebcradio",
+   "name": "EBC Radio 104.7",
+   "nameAm": "ኢቢሲ ራዲዮ 104.7",
+   "stream": "https://stream-25.zeno.fm/2xguamap7yzuv",
+   "site": "https://www.ebc.et",
+   "tag": "ብሔራዊ · National",
+   "color": "#1d4ed8"
+  },
+  {
+   "id": "ethiofm",
+   "name": "Ethio FM 107.8",
+   "nameAm": "ኢትዮ ኤፍኤም 107.8",
+   "stream": "https://stream.zeno.fm/72y045deqeruv",
+   "site": "https://zeno.fm/radio/ethiofm107_8/",
+   "yt": "UCn4D20GPsAtNqN5bIC1BhFA",
+   "tag": "ስፖርት · መዝናኛ",
+   "color": "#16a34a"
+  },
+  {
+   "id": "jano",
+   "name": "Jano FM",
+   "nameAm": "ጃኖ ኤፍኤም",
+   "stream": "https://stream-54.zeno.fm/1cyn1as4v68uv",
+   "site": "https://zeno.fm/radio/jano-fm/",
+   "tag": "ሙዚቃ · Music",
+   "color": "#9333ea"
+  },
+  {
+   "id": "tizita",
+   "name": "Tizita FM",
+   "nameAm": "ትዝታ ኤፍኤም",
+   "stream": "https://stream.zeno.fm/55nlq5yzqlftv",
+   "site": "https://zeno.fm/radio/tizita-fm/",
+   "tag": "የቆዩ ዘፈኖች · Oldies",
+   "color": "#b45309"
+  },
+  {
+   "id": "taem",
+   "name": "Taem Radio",
+   "nameAm": "ጣዕም ሬድዮ",
+   "stream": "https://stream.zeno.fm/ffg8htkh1k0uv",
+   "site": "https://www.taemmedia.com",
+   "tag": "መዝናኛ",
+   "color": "#db2777"
+  }
+ ],
+ "series": [
+  {
+   "id": "derash",
+   "titleAm": "ደራሽ",
+   "title": "Derash",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU5H-Ty8sfIeZpmyecvv-UUa",
+   "kind": "drama"
+  },
+  {
+   "id": "yewef-gojo",
+   "titleAm": "የወፍ ጎጆ",
+   "title": "Yewef Gojo",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU6HLzBkmgIZfYD5NLezHPzy",
+   "kind": "drama"
+  },
+  {
+   "id": "sinkul-hiwot",
+   "titleAm": "ሥንኩል ሕይወት",
+   "title": "Sinkul Hiwot",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU5jt81tONdlRIIru7XOlHeC",
+   "kind": "drama"
+  },
+  {
+   "id": "senebet",
+   "titleAm": "ስንብት",
+   "title": "Senebet",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU7AuAMws90MAxlYUY-VgVHN",
+   "kind": "drama"
+  },
+  {
+   "id": "leleje",
+   "titleAm": "ለልጄ",
+   "title": "Leleje",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU54p07x_9bEaNXiXZeKn5b6",
+   "kind": "drama"
+  },
+  {
+   "id": "lijes",
+   "titleAm": "ልጄስ?",
+   "title": "Lijes?",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU4ixuKPE_vfCNLqMlHgmqvq",
+   "kind": "drama"
+  },
+  {
+   "id": "zuret",
+   "titleAm": "ዙረት",
+   "title": "Zuret",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU6R8tyJ3TFxGIx_XvJ5UWz1",
+   "kind": "drama"
+  },
+  {
+   "id": "weraj-ale",
+   "titleAm": "ወራጅ አለ",
+   "title": "Weraj Ale",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU7lFNr8M80WLi2mUs1x20Yw",
+   "kind": "drama"
+  },
+  {
+   "id": "boxegna",
+   "titleAm": "ቦክሰኛ",
+   "title": "Boxegna",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU4gsBGAqkAfCUSmCLHcBdKe",
+   "kind": "drama"
+  },
+  {
+   "id": "gebrye",
+   "titleAm": "ገብርዬ",
+   "title": "Gebrye",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU5UW3F8y8gsaZErpv7rrC_r",
+   "kind": "drama"
+  },
+  {
+   "id": "tekerayochu",
+   "titleAm": "ተከራዮቹ",
+   "title": "Tekerayochu",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU7MsStVfB5UBLe9amCrAGFf",
+   "kind": "drama"
+  },
+  {
+   "id": "tikur-ena-nech",
+   "titleAm": "ጥቁር እና ነጭ",
+   "title": "Tikur Ena Nech",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU7LH0tsXOQosOteyRmLFypl",
+   "kind": "drama"
+  },
+  {
+   "id": "baltefa",
+   "titleAm": "ባልጠፋ",
+   "title": "Baltefa",
+   "channel": "kana",
+   "pl": "PLKOu1TYR9yzc",
+   "kind": "drama"
+  },
+  {
+   "id": "zare-ke-kana",
+   "titleAm": "ዛሬ ከቃና",
+   "title": "Zare Ke-Kana",
+   "channel": "kana",
+   "pl": "PLvPKAwHJTVU7ahdyxSBwsyW0DBJTjCVhz",
+   "kind": "show"
+  },
+  {
+   "id": "yegir-esat",
+   "titleAm": "የእግር እሳት",
+   "title": "Yegir Esat",
+   "channel": "ebs",
+   "pl": "PLlv1_j3diEkufcCv3-62I9mdWMe71wt8l",
+   "kind": "drama"
+  },
+  {
+   "id": "sewnet",
+   "titleAm": "ሰውነት",
+   "title": "Sewnet",
+   "channel": "ebs",
+   "pl": "PLJ1vevlaWedc",
+   "kind": "drama"
+  },
+  {
+   "id": "besintu",
+   "titleAm": "በስንቱ",
+   "title": "Besintu",
+   "channel": "ebs",
+   "pl": "PLlv1_j3diEks6SA_hoJGO-Y72UXyBPyKb",
+   "kind": "drama"
+  },
+  {
+   "id": "rakeb",
+   "titleAm": "ራኬብ",
+   "title": "Rakeb",
+   "channel": "ebs",
+   "pl": "PLlv1_j3diEku1f23NdH9FMKHLF7G4Fn1T",
+   "kind": "drama"
+  },
+  {
+   "id": "zoro-mewchaye",
+   "titleAm": "ዞሮ መውጫዬ",
+   "title": "Zoro Mewchaye",
+   "channel": "ebs",
+   "pl": "PLlv1_j3diEksiE2C5MEaj_OdVlmE7gvf_",
+   "kind": "show"
+  },
+  {
+   "id": "man-yashenfal",
+   "titleAm": "ማን ያሸንፋል?",
+   "title": "Man Yashenfal",
+   "channel": "ebs",
+   "pl": "PLlv1_j3diEkujmyeCXDfT8ikORg6imnlb",
+   "kind": "show"
+  },
+  {
+   "id": "yebetseb-chewata",
+   "titleAm": "የቤተሰብ ጨዋታ",
+   "title": "Yebetseb Chewata",
+   "channel": "ebs",
+   "pl": "PLlv1_j3diEkvwPMH4lU4BxXuxJnyMbo6w",
+   "kind": "show"
+  },
+  {
+   "id": "fetagne-kushena",
+   "titleAm": "ፈታኝ ኩሽና",
+   "title": "Fetagne Kushena",
+   "channel": "ebs",
+   "pl": "PLlv1_j3diEksyzgv8wI9zVcB-ppii6Fir",
+   "kind": "show"
+  },
+  {
+   "id": "dagi-show",
+   "titleAm": "ዳጊ ሾው",
+   "title": "Dagi Show",
+   "channel": "ebs",
+   "pl": "PLlv1_j3diEktkeZcQwPAmP5H-6EFezNU4",
+   "kind": "show"
+  },
+  {
+   "id": "shik",
+   "titleAm": "ሽክ",
+   "title": "Shik",
+   "channel": "ebs",
+   "pl": "PLlv1_j3diEkuyb0nt3IX3LuKIw4ic4PmE",
+   "kind": "show"
+  },
+  {
+   "id": "sorene",
+   "titleAm": "ሶረኔ",
+   "title": "Sorene",
+   "channel": "arts",
+   "pl": "PL3nTdsiMImrwObZXD14BZFN1mD41k_498",
+   "kind": "drama"
+  },
+  {
+   "id": "behig-amlak",
+   "titleAm": "በሕግ አምላክ ምዕራፍ 3",
+   "title": "BeHig Amlak S3",
+   "channel": "arts",
+   "pl": "PL3nTdsiMImrwqU_0Ui0StSTmVftzy41bV",
+   "kind": "drama"
+  },
+  {
+   "id": "tobia",
+   "titleAm": "ጦቢያ",
+   "title": "Tobia",
+   "channel": "arts",
+   "pl": "PL3nTdsiMImrwRiCsoxA8IcMFCqUvwCQJ5",
+   "kind": "show"
+  },
+  {
+   "id": "kidame-meznagna",
+   "titleAm": "ቅዳሜ መዝናኛ",
+   "title": "Kidame Meznagna",
+   "channel": "arts",
+   "pl": "PL3nTdsiMImrwu450DFByTk6EAbRJ3OJOm",
+   "kind": "show"
+  },
+  {
+   "id": "meraf",
+   "titleAm": "ምዕራፍ",
+   "title": "Meraf",
+   "channel": "arts",
+   "pl": "PL3nTdsiMImryZ4UEwEBofutoMwgmMXofK",
+   "kind": "show"
+  },
+  {
+   "id": "400-fikir",
+   "titleAm": "400 ፍቅር",
+   "title": "400 Fikir",
+   "channel": "nahoo",
+   "pl": "PLVoQuMSotxvc1Ng2CCCof2ekS_OxLfA2e",
+   "kind": "drama"
+  },
+  {
+   "id": "yezibet-jegna",
+   "titleAm": "የዚቤት ጀግና",
+   "title": "Yezibet Jegna",
+   "channel": "nahoo",
+   "pl": "PLVoQuMSotxvd2miKY0nIljjHm5RAkCbP_",
+   "kind": "drama"
+  },
+  {
+   "id": "peter-show",
+   "titleAm": "ፒተር ሾው",
+   "title": "Peter Show",
+   "channel": "nahoo",
+   "pl": "PLVoQuMSotxvcfMMd4UGVyvLHp6qShdN1E",
+   "kind": "show"
+  },
+  {
+   "id": "nahoo-maleda",
+   "titleAm": "ናሁ ማለዳ",
+   "title": "Nahoo Maleda",
+   "channel": "nahoo",
+   "pl": "PLVoQuMSotxvdO82qZtzMvSHM3uImDa0aH",
+   "kind": "show"
+  },
+  {
+   "id": "katena",
+   "titleAm": "ካቴና",
+   "title": "Katena",
+   "channel": "abbay",
+   "pl": "PLM1o5wml9rzo10pe_TiZDjAHUgVa16lLd",
+   "kind": "drama"
+  },
+  {
+   "id": "gabchaw",
+   "titleAm": "ጋብቻው",
+   "title": "Gabchaw",
+   "channel": "abbay",
+   "pl": "PLM1o5wml9rzqOCxn4vtaJ_F33_vasF6Ad",
+   "kind": "drama"
+  },
+  {
+   "id": "sew-lesew",
+   "titleAm": "ሰው ለሰው",
+   "title": "Sew Lesew",
+   "channel": "abbay",
+   "pl": "PLWl6nHL1F2bw",
+   "kind": "drama"
+  },
+  {
+   "id": "sekela",
+   "titleAm": "ሰከላ ከራኬብ ጋር",
+   "title": "Sekela with Rakeb",
+   "channel": "abbay",
+   "pl": "PLM1o5wml9rzp0N01Geo7y9xXDhT475qFi",
+   "kind": "show"
+  },
+  {
+   "id": "mekdi-show",
+   "titleAm": "መቅዲ ሾው",
+   "title": "Mekdi Show",
+   "channel": "abbay",
+   "pl": "PLM1o5wml9rzqOwbJ1bPwm9e7tWjry61CV",
+   "kind": "show"
+  },
+  {
+   "id": "melhik",
+   "titleAm": "መልህቅ",
+   "title": "Melhik",
+   "channel": "ahadu",
+   "pl": "PL9bAnayWUQd3Z4nC-U5et95WyOuQqM0XK",
+   "kind": "show"
+  },
+  {
+   "id": "hulu-dehna",
+   "titleAm": "ሁሉ ደህና",
+   "title": "Hulu Dehna",
+   "channel": "ahadu",
+   "pl": "PL9bAnayWUQd2Rr-kzuAw60oKm3UHLD3yD",
+   "kind": "drama"
+  },
+  {
+   "id": "leza-ena-kum-neger",
+   "titleAm": "ለዛ እና ቁም ነገር",
+   "title": "Leza ena Kum Neger",
+   "channel": "ahadu",
+   "pl": "PL9bAnayWUQd1seX5U23cczRo1DvG9Ppd7",
+   "kind": "show"
+  },
+  {
+   "id": "obn-drama",
+   "titleAm": "OBN ድራማ",
+   "title": "OBN Drama",
+   "channel": "obn",
+   "pl": "PLDT_is-4LXBjyr_C0kIquNXqK_cv0Lj8m",
+   "kind": "drama"
+  },
+  {
+   "id": "negadras",
+   "titleAm": "ነጋድራስ ምዕራፍ 5",
+   "title": "Negadras S5",
+   "channel": "etv",
+   "pl": "PLWg7CeGN_G_o",
+   "kind": "show"
+  },
+  {
+   "id": "ethio-startup",
+   "titleAm": "ኢትዮ ስታርትአፕ",
+   "title": "Ethio Startup",
+   "channel": "etv",
+   "pl": "PLUn24IaqX1M8",
+   "kind": "show"
+  },
+  {
+   "id": "mintwab",
+   "titleAm": "ምንትዋብ",
+   "title": "Mintwab",
+   "channel": "fana",
+   "pl": "PL84RdiRVL3M_4uccA64RCHJdAtjrMDDK4",
+   "kind": "drama"
+  },
+  {
+   "id": "and-edil",
+   "titleAm": "አንድ ዕድል",
+   "title": "And Edil",
+   "channel": "fana",
+   "pl": "PL84RdiRVL3M8fZ0cVyg-4hQW650fM_17Z",
+   "kind": "show"
+  },
+  {
+   "id": "baletarikochu",
+   "titleAm": "ባለታሪኮቹ",
+   "title": "Baletarikochu",
+   "channel": "amhara",
+   "pl": "PLmCrONGfZd8Q-9QbaIVmpBq4CNZQ4Pksf",
+   "kind": "show"
+  },
+  {
+   "id": "friday-story-time",
+   "titleAm": "የዓርብ ተረት",
+   "title": "Friday Story Time",
+   "channel": "tsehai",
+   "pl": "PLQg18RCuFoWzDwf_902IElUEcJduCtk9P",
+   "kind": "kids"
+  },
+  {
+   "id": "tsehai-songs",
+   "titleAm": "የፀሐይ መዝሙሮች",
+   "title": "Tsehai's Songs",
+   "channel": "tsehai",
+   "pl": "PLQg18RCuFoWxqe509edk_98eTac6XE73N",
+   "kind": "kids"
+  }
+ ]
 }

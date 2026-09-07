@@ -27,12 +27,12 @@ function liveOf(html) {
   const title = html.match(/<meta name="title" content="([^"]*)"/);
   return { live, videoId: live && vid ? vid[1] : null, title: live && title ? title[1] : null };
 }
-function feedOf(xml) {
+function feedOf(xml, max) {
   const out = [];
   for (const e of xml.split('<entry>').slice(1)) {
     const id = e.match(/<yt:videoId>([^<]+)/), t = e.match(/<title>([^<]*)/), p = e.match(/<published>([^<]+)/), v = e.match(/views="(\d+)"/);
     if (id && t) out.push({ id: id[1], title: t[1].replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'").slice(0, 120), published: p ? p[1].slice(0, 10) : null, views: v ? Number(v[1]) : null, thumb: 'https://i.ytimg.com/vi/' + id[1] + '/hqdefault.jpg' });
-    if (out.length >= 8) break;
+    if (out.length >= (max || 8)) break;
   }
   return out;
 }
@@ -52,8 +52,22 @@ function feedOf(xml) {
     log((lv.live ? 'LIVE ' : 'off  ') + c.name.padEnd(20) + (lv.videoId || '-').padEnd(12) + ' latest:' + latest.length);
     await new Promise(r => setTimeout(r, 800));
   }
+  // series: one RSS fetch per playlist (latest 15 uploads), refreshed every 6 h or with --series
+  let prevAll = {}; try { prevAll = JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch (e) {}
+  let series = prevAll.series || {}, seriesAt = prevAll.seriesAt || null;
+  const stale = !seriesAt || (Date.now() - new Date(seriesAt).getTime()) > 6 * 3600e3 || process.argv.includes('--series');
+  if (stale && Array.isArray(cfg.series)) {
+    for (const sr of cfg.series) {
+      const xml = await get('https://www.youtube.com/feeds/videos.xml?playlist_id=' + sr.pl, 15000);
+      const latest = feedOf(xml, 15);
+      series[sr.id] = { latest: latest.length ? latest : ((series[sr.id] || {}).latest || []), checkedAt: new Date().toISOString() };
+      log('series ' + sr.id.padEnd(20) + ' latest:' + latest.length);
+      await new Promise(r => setTimeout(r, 500));
+    }
+    seriesAt = new Date().toISOString();
+  }
   const tmp = OUT + '.tmp';
-  fs.writeFileSync(tmp, JSON.stringify({ updatedAt: new Date().toISOString(), channels }));
+  fs.writeFileSync(tmp, JSON.stringify({ updatedAt: new Date().toISOString(), channels, series, seriesAt }));
   fs.renameSync(tmp, OUT);
   log('wrote ' + OUT + ' — ' + Object.values(channels).filter(c => c.live).length + ' live of ' + all.length);
 })().catch(e => { console.error('livecheck failed: ' + e.message); process.exit(1); });

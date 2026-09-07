@@ -20,16 +20,17 @@
   function initials(c) { var w = (c.name || '').replace(/[^A-Za-z0-9 ]/g, '').split(' ').filter(Boolean); if (w[0] && w[0].length <= 4 && w[0] === w[0].toUpperCase()) return esc(w[0]); return esc(w.slice(0, 2).map(function (x) { return x[0]; }).join('').toUpperCase() || '▶'); }
   function liveTitle(c) { var t = (c.liveTitle || '').trim(); return t.length > 4 && !/^(test|live|stream)$/i.test(t) ? t : (c.name + ' · ቀጥታ ስርጭት · live broadcast'); }
   var q = new URLSearchParams(location.search);
-  var D = { live: null, radio: null, films: null };
+  var D = { live: null, radio: null, films: null, series: null };
 
   // ---------- tabs ----------
-  var TABS = [['home', '🏠', 'መነሻ', 'Home'], ['tv', '📺', 'ቲቪ', 'Live TV'], ['radio', '📻', 'ራዲዮ', 'Radio'], ['films', '🎬', 'ፊልሞች', 'Films'], ['kids', '🧸', 'ልጆች', 'Kids']];
+  var TABS = [['home', '🏠', 'መነሻ', 'Home'], ['tv', '📺', 'ቲቪ', 'Live TV'], ['series', '🎞️', 'ተከታታይ', 'Series'], ['films', '🎬', 'ፊልሞች', 'Films'], ['radio', '📻', 'ራዲዮ', 'Radio']];
   function paintTabs(on) {
     var el = $('tabs'); if (!el) return;
     el.innerHTML = TABS.map(function (t) { return '<a href="/watch#' + t[0] + '" class="' + (on === t[0] ? 'on' : '') + '"><i>' + t[1] + '</i>' + t[2] + '<small>' + t[3] + '</small></a>'; }).join('');
   }
   function loadLive() { return D.live ? Promise.resolve(D.live) : api('/api/watch/live').then(function (j) { D.live = j; return j; }); }
   function loadRadio() { return D.radio ? Promise.resolve(D.radio) : api('/api/watch/radio').then(function (j) { D.radio = j; return j; }); }
+  function loadSeries() { return D.series ? Promise.resolve(D.series) : api('/api/watch/series').then(function (j) { D.series = j; return j; }); }
   function loadFilms() { return D.films ? Promise.resolve(D.films) : api('/api/watch/films').then(function (j) { D.films = j; return j; }); }
 
   // ---------- pieces ----------
@@ -38,6 +39,9 @@
   }
   function vidTile(v, c) {
     return '<a class="vid" href="/watch#tv/' + esc(c.id) + '/' + esc(v.id) + '"><div class="th"><img src="' + esc(v.thumb) + '" alt="" loading="lazy"><span class="d">' + esc(c.name) + '</span></div><div class="n">' + esc(v.title) + '</div><div class="s">' + esc([ago(v.published), views(v.views)].filter(Boolean).join(' · ')) + '</div></a>';
+  }
+  function srTile(sr, big) {
+    return '<a class="sr' + (big ? ' big' : '') + '" href="/watch#series/' + esc(sr.id) + '"><div class="th">' + (sr.cover ? '<img src="' + esc(sr.cover) + '" alt="" loading="lazy">' : '') + '<span class="d" style="background:' + esc(sr.color) + '">' + esc(sr.channelName) + '</span>' + (sr.latest.length ? '<span class="n">' + sr.latest.length + '+ ክፍል</span>' : '') + '</div><div class="t">' + esc(sr.titleAm || sr.title) + '</div><div class="m">' + esc([sr.title !== sr.titleAm ? sr.title : null, sr.kind === 'drama' ? 'ድራማ' : sr.kind === 'show' ? 'ሾው' : 'ልጆች'].filter(Boolean).join(' · ')) + '</div></a>';
   }
   function card(f) {
     return '<a class="film" href="/watch/' + esc(f.slug) + '"><div class="p">' + (f.posterUrl ? '<img src="' + esc(f.posterUrl) + '" alt="" loading="lazy">' : '🎞️') + '<span class="tag' + (f.free ? ' free' : '') + '">' + (f.free ? 'ነፃ · Free' : birr(f.priceEtb)) + '</span></div>'
@@ -52,8 +56,8 @@
   function renderHome() {
     paintTabs('home');
     view.innerHTML = '<div class="skel"></div>';
-    Promise.all([loadLive(), loadFilms(), loadRadio()]).then(function (a) {
-      var L = a[0], F = a[1], Rd = a[2];
+    Promise.all([loadLive(), loadFilms(), loadRadio(), loadSeries()]).then(function (a) {
+      var L = a[0], F = a[1], Rd = a[2], S = (a[3].series || []);
       var tv = (L.tv || []), kids = (L.kids || []), films = (F.films || []), radio = (Rd.radio || []);
       var liveNow = tv.filter(function (c) { return c.live; });
       var html = '';
@@ -61,6 +65,8 @@
       if (h) html += '<a class="hero" href="/watch#tv/' + esc(h.id) + '"><img src="https://i.ytimg.com/vi/' + esc(h.videoId) + '/hqdefault.jpg" alt=""><div class="sh"></div><div class="tx"><span class="live">ቀጥታ · LIVE</span><div class="t">' + esc(h.nameAm || h.name) + '</div><div class="m">' + esc(liveTitle(h)) + '</div><div class="act"><span class="btn">▶ አሁን ይመልከቱ · Watch now</span></div></div></a>';
       else if (films[0]) { var f0 = films[0]; html += '<a class="hero" href="/watch/' + esc(f0.slug) + '">' + (f0.posterUrl ? '<img src="' + esc(f0.posterUrl) + '" alt="">' : '') + '<div class="sh"></div><div class="tx"><span class="k">አዲስ · New</span><div class="t">' + esc(f0.titleAm || f0.title) + '</div><div class="m">' + esc([f0.title !== f0.titleAm ? f0.title : null, f0.year, f0.genre].filter(Boolean).join(' · ')) + '</div><div class="act"><span class="btn">▶ ' + (f0.free ? 'ነፃ ይመልከቱ · Watch free' : 'ይከራዩ · Rent') + '</span></div></div></a>'; }
       html += '<h2>📺 ቀጥታ ቲቪ <small>Live TV</small><a class="more" href="/watch#tv">ሁሉም →</a></h2><div class="rowx">' + tv.slice().sort(function (a, b) { return (b.live ? 1 : 0) - (a.live ? 1 : 0); }).map(function (c) { return chTile(c); }).join('') + '</div>';
+      var dramas = S.filter(function (x) { return x.kind === 'drama'; });
+      if (dramas.length) html += '<h2>🎞️ ተከታታይ ድራማ <small>Series</small><a class="more" href="/watch#series">ሁሉም →</a></h2><div class="rowx">' + dramas.slice(0, 12).map(function (x) { return srTile(x); }).join('') + '</div>';
       var fresh = [].concat.apply([], tv.map(function (c) { return (c.latest || []).slice(0, 1).map(function (v) { return { v: v, c: c }; }); })).sort(function (a, b) { return (b.v.published || '').localeCompare(a.v.published || ''); }).slice(0, 10);
       if (fresh.length) html += '<h2>🆕 ዛሬ የወጡ <small>Latest programmes</small></h2><div class="rowx">' + fresh.map(function (x) { return vidTile(x.v, x.c); }).join('') + '</div>';
       if (films.length) html += '<h2>🎬 ፊልሞች <small>Films</small><a class="more" href="/watch#films">ሁሉም →</a></h2><div class="rowx frow">' + films.slice(0, 10).map(card).join('') + '</div>';
@@ -81,7 +87,7 @@
     });
   }
   function renderChannel(id, vidId, kind) {
-    paintTabs(kind === 'kids' ? 'kids' : 'tv'); view.innerHTML = '<div class="skel"></div>';
+    paintTabs(kind === 'kids' ? 'home' : 'tv'); view.innerHTML = '<div class="skel"></div>';
     loadLive().then(function (L) {
       var c = (L.tv || []).concat(L.kids || []).filter(function (x) { return x.id === id; })[0];
       if (!c) { view.innerHTML = '<div class="card">ጣቢያው አልተገኘም · Channel not found. <a href="/watch#tv">← ቲቪ</a></div>'; return; }
@@ -99,10 +105,11 @@
     });
   }
   function renderKids() {
-    paintTabs('kids'); view.innerHTML = '<div class="skel"></div>';
-    loadLive().then(function (L) {
+    paintTabs('home'); view.innerHTML = '<div class="skel"></div>';
+    Promise.all([loadLive(), loadSeries()]).then(function (a) { var L = a[0];
       var kids = L.kids || [];
       var html = '<h1>ለልጆች <span class="sub">· Kids</span></h1><p class="sub">የአማርኛ የልጆች መዝሙሮችና ተረቶች ከጣቢያዎቹ ይፋዊ ቻናል። · Amharic songs and stories from the makers\' own channels.</p>';
+      (D.series && D.series.series ? D.series.series : []).filter(function (x) { return x.kind === 'kids'; }).forEach(function (sr) { html += '<h2>' + esc(sr.titleAm) + ' <small>' + esc(sr.title) + '</small><a class="more" href="/watch#series/' + esc(sr.id) + '">ሁሉም →</a></h2><div class="rowx">' + (sr.latest || []).slice(0, 8).map(function (v) { return '<a class="vid" href="/watch#series/' + esc(sr.id) + '/' + esc(v.id) + '"><div class="th"><img src="' + esc(v.thumb) + '" alt="" loading="lazy"></div><div class="n">' + esc(v.title) + '</div><div class="s">' + esc(ago(v.published)) + '</div></a>'; }).join('') + '</div>'; });
       kids.forEach(function (c) { html += '<h2>' + esc(c.nameAm || c.name) + ' <small>' + esc(c.name) + '</small><a class="more" href="/watch#kids/' + esc(c.id) + '">ሁሉም →</a></h2><div class="rowx">' + (c.latest || []).map(function (v) { return '<a class="vid" href="/watch#kids/' + esc(c.id) + '/' + esc(v.id) + '"><div class="th"><img src="' + esc(v.thumb) + '" alt="" loading="lazy"></div><div class="n">' + esc(v.title) + '</div><div class="s">' + esc(ago(v.published)) + '</div></a>'; }).join('') + '</div>'; });
       if (!kids.length) html += '<div class="card">በቅርቡ · Coming soon.</div>';
       view.innerHTML = html;
@@ -135,6 +142,38 @@
       view.querySelectorAll('.rad').forEach(function (el) { el.addEventListener('click', function (e) { if (e.target.tagName === 'A') return; var r = radio.filter(function (x) { return x.id === el.dataset.r; })[0]; if (r) playRadio(r); }); });
       if (autoId) { var r0 = radio.filter(function (x) { return x.id === autoId; })[0]; if (r0 && !(R.cur && R.cur.id === r0.id)) playRadio(r0); }
       paintNow();
+    });
+  }
+
+  // ---------- series ----------
+  var SR_KINDS = [['all', 'ሁሉም', 'All'], ['drama', 'ድራማ', 'Drama'], ['show', 'ሾው', 'Shows'], ['kids', 'ልጆች', 'Kids']];
+  function renderSeries(kind) {
+    paintTabs('series'); view.innerHTML = '<div class="skel"></div>'; kind = kind || 'all';
+    loadSeries().then(function (j) {
+      var all = j.series || [];
+      var list = kind === 'all' ? all : all.filter(function (x) { return x.kind === kind; });
+      var chips = SR_KINDS.map(function (k) { return '<a class="chip' + (k[0] === kind ? ' on' : '') + '" href="/watch#series' + (k[0] === 'all' ? '' : '/kind/' + k[0]) + '">' + k[1] + ' <small>' + k[2] + '</small></a>'; }).join('');
+      view.innerHTML = '<h1>ተከታታይ <span class="sub">· Series</span></h1><p class="sub">የኢትዮጵያ ተከታታይ ድራማዎችና ሾዎች — ከጣቢያዎቹ ይፋዊ ቻናል፣ ክፍል በክፍል። · Ethiopian drama series and shows, episode by episode, from the broadcasters\' own channels.</p><div class="chips">' + chips + '</div>'
+        + '<div class="sgrid">' + list.map(function (x) { return srTile(x, true); }).join('') + '</div>';
+      window.scrollTo(0, 0);
+    });
+  }
+  function renderSeriesOne(id, vidId) {
+    paintTabs('series'); view.innerHTML = '<div class="skel"></div>';
+    loadSeries().then(function (j) {
+      var sr = (j.series || []).filter(function (x) { return x.id === id; })[0];
+      if (!sr) { view.innerHTML = '<div class="card">አልተገኘም · Not found. <a href="/watch#series">← ተከታታይ</a></div>'; return; }
+      var eps = sr.latest || [];
+      var playing = vidId || null;
+      var src = playing ? 'https://www.youtube-nocookie.com/embed/' + esc(playing) + '?list=' + esc(sr.pl) + '&rel=0&modestbranding=1&playsinline=1&autoplay=1' : 'https://www.youtube-nocookie.com/embed/videoseries?list=' + esc(sr.pl) + '&rel=0&modestbranding=1&playsinline=1';
+      var html = '<a class="back" href="/watch#series/kind/' + esc(sr.kind) + '">‹ ተከታታይ · Series</a>'
+        + '<div class="player"><iframe src="' + src + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" title="' + esc(sr.title) + '"></iframe></div>'
+        + '<h1 style="font-size:21px;margin-top:12px">' + esc(sr.titleAm || sr.title) + '</h1><div class="sub">' + esc([sr.title !== sr.titleAm ? sr.title : null, sr.channelName, sr.kind === 'drama' ? 'ተከታታይ ድራማ · drama series' : sr.kind === 'show' ? 'ሾው · show' : 'ለልጆች · kids'].filter(Boolean).join(' · ')) + '</div>'
+        + '<div class="note">' + (playing ? '<a href="/watch#series/' + esc(sr.id) + '">▶ ከክፍል 1 ጀምሮ · Play from episode 1</a> · ' : 'ከመጀመሪያው ክፍል ይጫወታል፤ ቀጣዩ ራሱ ይቀጥላል። · Plays from episode 1 and continues automatically. ') + '<a href="https://www.youtube.com/playlist?list=' + esc(sr.pl) + '" target="_blank" rel="noopener">YouTube ↗</a></div>'
+        + '<h2>ክፍሎች <small>Episodes · latest ' + eps.length + '</small></h2><ul class="list">' + eps.map(function (v) { return '<li class="' + (v.id === playing ? 'on' : '') + '" data-v="' + esc(v.id) + '"><div class="th"><img src="' + esc(v.thumb) + '" alt="" loading="lazy"></div><div><b>' + esc(v.title) + '</b><small>' + esc([ago(v.published), views(v.views)].filter(Boolean).join(' · ')) + '</small></div></li>'; }).join('') + '</ul>';
+      view.innerHTML = html;
+      view.querySelectorAll('.list li').forEach(function (li) { li.addEventListener('click', function () { location.hash = '#series/' + sr.id + '/' + li.dataset.v; }); });
+      window.scrollTo(0, 0);
     });
   }
 
@@ -228,6 +267,9 @@
     var h = (location.hash || '#home').slice(1).split('/');
     if (h[0] === 'tv' && h[1]) renderChannel(h[1], h[2] || null, 'tv');
     else if (h[0] === 'tv') renderTV();
+    else if (h[0] === 'series' && h[1] === 'kind') renderSeries(h[2] || 'all');
+    else if (h[0] === 'series' && h[1]) renderSeriesOne(h[1], h[2] || null);
+    else if (h[0] === 'series') renderSeries('all');
     else if (h[0] === 'radio') renderRadio(h[1] || null);
     else if (h[0] === 'films') renderFilms();
     else if (h[0] === 'kids' && h[1]) renderChannel(h[1], h[2] || null, 'kids');

@@ -93,11 +93,15 @@ module.exports = function registerWatch(fastify, deps) {
       let st = { updatedAt: null, channels: {} }; try { st = JSON.parse(fs.readFileSync(LSF, 'utf8')); } catch (e) {}
       const dress = (c, kind) => { const x = st.channels[c.id] || {}; return { id: c.id, kind, name: c.name, nameAm: c.nameAm, tag: c.tag || '', color: c.color || '#00B894', site: c.site || null, yt: c.yt || null, stream: c.stream || null,
         live: !!x.live, videoId: x.videoId || null, liveTitle: x.liveTitle || null, latest: (x.latest || []).slice(0, 6), lastLiveAt: x.lastLiveAt || null }; };
-      chCache = { t: m, v: { updatedAt: st.updatedAt, tv: cfg.tv.map(c => dress(c, 'tv')), kids: cfg.kids.map(c => dress(c, 'kids')), radio: cfg.radio.map(c => dress(c, 'radio')) } };
+      const byId = {}; cfg.tv.concat(cfg.kids).forEach(c => { byId[c.id] = c; });
+      const series = (cfg.series || []).map(sr => { const x = (st.series || {})[sr.id] || {}; const ch = byId[sr.channel] || {}; const latest = (x.latest || []).slice(0, 15);
+        return { id: sr.id, title: sr.title, titleAm: sr.titleAm, kind: sr.kind, pl: sr.pl, channel: sr.channel, channelName: ch.nameAm || ch.name || sr.channel, color: ch.color || '#00B894', cover: latest[0] ? latest[0].thumb : null, latest, updatedAt: x.checkedAt || null }; });
+      chCache = { t: m, v: { updatedAt: st.updatedAt, tv: cfg.tv.map(c => dress(c, 'tv')), kids: cfg.kids.map(c => dress(c, 'kids')), radio: cfg.radio.map(c => dress(c, 'radio')), series } };
       return chCache.v;
-    } catch (e) { return { updatedAt: null, tv: [], kids: [], radio: [] }; }
+    } catch (e) { return { updatedAt: null, tv: [], kids: [], radio: [], series: [] }; }
   }
   fastify.get('/api/watch/live', async (req, reply) => { reply.header('Cache-Control', 'public, max-age=120'); const v = channelsNow(); return { ok: true, updatedAt: v.updatedAt, tv: v.tv, kids: v.kids }; });
+  fastify.get('/api/watch/series', async (req, reply) => { reply.header('Cache-Control', 'public, max-age=600'); return { ok: true, series: channelsNow().series }; });
   fastify.get('/api/watch/radio', async (req, reply) => { reply.header('Cache-Control', 'public, max-age=600'); return { ok: true, radio: channelsNow().radio }; });
 
   fastify.get('/api/watch/films', async () => {
