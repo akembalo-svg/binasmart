@@ -76,3 +76,21 @@ body>.top:not(:has(.in))>span{font-size:11.5px;font-weight:800;color:var(--em2)!
 .cta-band{background:linear-gradient(135deg,#0F172A,#0B3B31 70%,#00C896 160%);border-radius:26px}
 .cat{color:var(--em2)}
 .thumb,.art-hero,.hero-vis{border-radius:20px}
+
+/* ---- round 2: landing pages with a brand line in the hero (for-business, for-cinemas, for-filmmakers, why-binasmart, drive-with-us) ---- */
+body>.hero:has(.brand),body>header.hero:has(.brand){background:linear-gradient(135deg,#0F172A,#0B3B31 70%,#00C896 160%);color:#fff}
+body>.hero:has(.brand) .brand,body>header.hero:has(.brand) .brand{display:flex;align-items:center;font-weight:800;letter-spacing:-.3px}
+body>.hero:has(.brand) .brand b,body>header.hero:has(.brand) .brand b{color:#00C896}
+body>.hero:has(.brand) .kick,body>header.hero:has(.brand) .kick{color:#14D8B4}
+body>.hero:has(.brand) h1 span:not(.en),body>header.hero:has(.brand) h1 span:not(.en){color:#00C896}
+.cta,a.cta{background:linear-gradient(135deg,#00C896,#009688);color:#fff;border-radius:16px;box-shadow:0 16px 30px -14px rgba(0,200,150,.8)}
+.cta.ghost,a.cta.ghost{background:rgba(255,255,255,.12);color:#fff;box-shadow:none}
+/* ai / support / privacy / terms and the guide articles: same header shape */
+.top .logo{display:inline-flex;align-items:center;font-weight:800}
+.top .logo b{color:#00C896}
+/* owner login */
+.brandp .logo{display:inline-flex;align-items:center}
+.brandp .logo .g{color:#00C896}
+/* article bodies */
+.tag{border-radius:999px}
+.kick{color:#14D8B4}
