@@ -112,3 +112,15 @@ details.vprog .vbody{padding:0 14px 12px}
 .foot{color:var(--mute);font-size:11px;text-align:center;margin-top:22px}
 .trbox{border-radius:16px;overflow:hidden;box-shadow:var(--sh)}
 @media(min-width:900px){.wrap{padding:16px 24px 120px}h1{font-size:30px}}
+
+/* v3 (7 Sep 2026): glass controls — white glass chips, showtimes, steppers and payment rows; emerald glass primaries */
+.btn{background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));border:1px solid rgba(255,255,255,.6);color:#fff;text-shadow:0 1px 2px rgba(0,80,60,.35);box-shadow:0 16px 32px -14px rgba(0,200,150,.6),inset 0 1px 0 rgba(255,255,255,.45);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}.btn:active{background:rgba(0,200,150,.9)}
+.btn.ghost{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}.btn.ghost:active{background:rgba(255,255,255,.7)}
+.btn:disabled{background:rgba(148,163,184,.35);border-color:rgba(255,255,255,.5);color:#fff;text-shadow:none;opacity:1}
+.times a{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.times a.few{background:rgba(255,251,235,.6);border-color:rgba(252,211,77,.8)}
+.step button{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.pay label{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.pay label.on{background:rgba(0,200,150,.18);border-color:rgba(0,200,150,.7);box-shadow:0 0 0 3px rgba(0,200,150,.15),inset 0 1px 0 rgba(255,255,255,.9)}
+.pill{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(0,200,150,.25)}
+.pill.warn{border-color:rgba(245,158,11,.3)}
