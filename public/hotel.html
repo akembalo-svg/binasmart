@@ -1,81 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="am">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Book Direct — 0% Commission | BinaSmart Hotels</title>
-<meta name="description" content="Book hotel rooms direct — no commission, no credit card, instant WhatsApp confirmation. Prices in ETB. Powered by BinaSmart.">
+<title>ሆቴል ያስይዙ · Book Direct — 0% Commission | BinaSmart Hotels</title>
+<meta name="description" content="Book hotel rooms in Addis Ababa direct — 0% commission, no credit card, pay at the hotel, instant confirmation code. Prices in ETB. · ሆቴል በቀጥታ ያስይዙ፣ ኮሚሽን የለም።">
+<meta property="og:title" content="BinaSmart Hotels — Book direct, 0% commission">
+<meta property="og:description" content="Pick your dates, book direct, pay at the hotel. No card, no commission.">
+<meta property="og:image" content="https://bina.et/static/og-hotels.png">
+<meta name="theme-color" content="#009688">
 <link rel="icon" href="/icon-32.png">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=1">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#faf8f4;color:#1e293b;min-height:100vh}
-.top{display:flex;align-items:center;gap:8px;padding:14px 18px;max-width:680px;margin:0 auto}
-.top a{text-decoration:none;color:#1e293b;font-weight:900;font-size:17px}
-.top .g{color:#8a6a00}
-.wrap{max-width:680px;margin:0 auto;padding:0 16px 60px}
-.hero{border-radius:22px;overflow:hidden;position:relative;min-height:180px;background:linear-gradient(135deg,#065f46,#059669)}
-.hero img{width:100%;height:230px;object-fit:cover;display:block}
-.hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,6,23,.72),transparent 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
-.hero h1{color:#fff;font-size:24px;font-weight:900;letter-spacing:-.3px}
-.hero .am{color:#fcd34d;font-size:14px;font-weight:800}
-.hero .loc{color:#e2e8f0;font-size:12px;margin-top:3px}
+:root{--bg:#F8FAFC;--ink:#081120;--mut:#64748B;--em:#00C896;--em2:#009688;--ai:#0099FF;--ai2:#6C63FF;--line:rgba(8,17,32,.07)}
+body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:var(--em2);text-decoration:none}
+.am{font-family:'Noto Sans Ethiopic','Plus Jakarta Sans',system-ui,sans-serif}
+.glass{background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.9);box-shadow:0 20px 50px -28px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.95)}
+.nav{position:sticky;top:10px;z-index:30;margin:10px 14px 0;height:56px;border-radius:18px;display:flex;align-items:center;gap:10px;padding:0 8px 0 10px;max-width:960px}
+@media(min-width:990px){.nav{margin:16px auto 0}}
+.nav .logo{display:flex;align-items:center;gap:9px;color:var(--ink)}
+.nav .logo i{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -10px rgba(0,200,150,.9)}
+.nav .logo i svg{width:17px;height:17px}
+.nav .logo b{display:block;font-size:16px;font-weight:800;letter-spacing:-.3px;line-height:1}.nav .logo b span{color:var(--em)}
+.nav .logo small{display:block;font-size:9.5px;font-weight:700;color:var(--mut);margin-top:3px}
+.nav .sp{flex:1}
+.nav .pill{display:flex;align-items:center;gap:6px;height:38px;padding:0 12px;border-radius:12px;background:rgba(0,200,150,.12);font-size:11.5px;font-weight:800;color:var(--em2);white-space:nowrap}
+.wrap{max-width:960px;margin:0 auto;padding:14px 14px 80px}
+.hero{border-radius:26px;overflow:hidden;position:relative;min-height:220px;background:linear-gradient(135deg,#0B3B31,#081120);box-shadow:0 30px 70px -34px rgba(8,17,32,.6)}
+.hero img{width:100%;height:260px;object-fit:cover;display:block;opacity:.9}
+.hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,17,32,.85),rgba(8,17,32,.1) 60%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.hero .k{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;margin-bottom:8px}
+.hero h1{color:#fff;font-size:26px;font-weight:900;letter-spacing:-.3px;line-height:1.15}
+.hero .am2{color:#14D8B4;font-size:14px;font-weight:800;margin-top:2px}
+.hero .loc{color:rgba(255,255,255,.75);font-size:12px;margin-top:4px;font-weight:600}
 .why{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
-.w{background:#fff;border:1.5px solid #e9e4da;border-radius:16px;padding:10px 8px;text-align:center}
-.w b{display:block;font-size:12px;color:#059669}
-.w span{font-size:9.5px;color:#94a3b8;font-weight:700}
-.dates{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#fff;border:1.5px solid #e9e4da;border-radius:18px;padding:14px;margin-bottom:16px}
-.dates label{font-size:10.5px;font-weight:900;color:#64748b;text-transform:uppercase;letter-spacing:1px}
-.dates input{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:9px 10px;font-size:14px;font-family:inherit;margin-top:4px;background:#faf8f4}
-h2{font-size:18px;font-weight:900;margin:18px 0 10px}
-.room{background:#fff;border:1.5px solid #e9e4da;border-radius:20px;padding:16px;margin-bottom:12px}
+.w{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 8px;text-align:center;box-shadow:0 12px 30px -24px rgba(8,17,32,.3)}
+.w i{display:flex;width:34px;height:34px;border-radius:11px;margin:0 auto 6px;background:rgba(0,200,150,.12);color:var(--em2);align-items:center;justify-content:center}
+.w i svg{width:18px;height:18px}
+.w b{display:block;font-size:12px;color:var(--ink)}
+.w span{font-size:9.5px;color:var(--mut);font-weight:700}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:10px;border-radius:20px;padding:14px;margin-bottom:16px}
+.dates label{font-size:10.5px;font-weight:800;color:var(--mut);letter-spacing:.04em}
+.dates input{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:14px;font-family:inherit;font-weight:700;margin-top:5px;background:rgba(255,255,255,.9);color:var(--ink)}
+h2{font-size:20px;font-weight:800;letter-spacing:-.3px;margin:18px 0 10px;display:flex;align-items:center;gap:10px}
+h2::before{content:'';width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--em),var(--ai))}
+h2 small{font-size:12px;font-weight:600;color:var(--mut)}
+.room{background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:12px;box-shadow:0 16px 36px -28px rgba(8,17,32,.35)}
 .room .rh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.room .nm{font-weight:900;font-size:16px}
-.room .am{font-size:12.5px;color:#64748b}
+.room .nm{font-weight:800;font-size:16px}
+.room .am{font-size:12.5px;color:var(--mut);font-weight:600}
 .room .pr{text-align:right;flex-shrink:0}
-.room .pr b{font-size:19px;color:#059669}
-.room .pr span{font-size:10px;color:#94a3b8;display:block;font-weight:700}
+.room .pr b{font-size:19px;color:var(--em2);font-weight:800}
+.room .pr span{font-size:10px;color:var(--mut);display:block;font-weight:700}
 .room .ams{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-.room .ams span{font-size:10.5px;background:#f0fdf4;color:#047857;border-radius:999px;padding:4px 10px;font-weight:700}
+.room .ams span{font-size:10.5px;background:rgba(0,200,150,.1);color:var(--em2);border-radius:999px;padding:4px 10px;font-weight:700}
 .avail{font-size:11.5px;font-weight:800;margin-bottom:10px}
-.avail.ok{color:#059669}.avail.low{color:#d97706}.avail.no{color:#dc2626}
-.bkbtn{width:100%;border:0;border-radius:14px;padding:13px;background:linear-gradient(135deg,#059669,#047857);color:#fff;font-weight:900;font-size:14.5px;cursor:pointer;font-family:inherit}
-.bkbtn:disabled{background:#cbd5e1;cursor:not-allowed}
+.avail.ok{color:var(--em2)}.avail.low{color:#d97706}.avail.no{color:#dc2626}
+.bkbtn{width:100%;border:0;border-radius:16px;padding:14px;background:linear-gradient(135deg,var(--em),var(--em2));color:#fff;font-weight:800;font-size:14.5px;cursor:pointer;font-family:inherit;box-shadow:0 16px 32px -14px rgba(0,200,150,.8)}
+.bkbtn:disabled{background:#cbd5e1;box-shadow:none;cursor:not-allowed}
+.list{margin-top:6px;font-size:12.5px;color:var(--mut);font-weight:600;text-align:center}
 /* modal */
-#modal{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+#modal{position:fixed;inset:0;background:rgba(8,17,32,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
 #modal.on{display:flex}
-.sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:680px;padding:22px 20px calc(22px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto}
-.sheet h3{font-size:17px;font-weight:900;margin-bottom:12px}
-.sheet label{font-size:11px;font-weight:900;color:#64748b;display:block;margin:10px 0 4px;text-transform:uppercase;letter-spacing:1px}
-.sheet input,.sheet select{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:11px 12px;font-size:15px;font-family:inherit;background:#faf8f4}
-.tot{display:flex;justify-content:space-between;background:#f0fdf4;border-radius:14px;padding:12px 14px;margin-top:14px;font-weight:900}
-.tot b{color:#059669}
-.note{font-size:11px;color:#94a3b8;margin-top:8px;line-height:1.5}
-/* confirmation */
-.conf{text-align:center;padding:24px 0}
-.conf .big{font-size:52px}
-.conf h3{font-size:20px;font-weight:900;margin:8px 0}
-.conf .code{font-size:26px;font-weight:900;letter-spacing:2px;color:#059669;background:#f0fdf4;border-radius:14px;padding:12px;margin:12px 0;border:2px dashed #059669}
-.conf p{font-size:13px;color:#64748b;line-height:1.6}
-.wa{display:inline-block;background:#25D366;color:#fff;font-weight:900;border-radius:999px;padding:12px 26px;text-decoration:none;margin-top:12px;font-size:14px}
-.skel{background:linear-gradient(90deg,#eee 25%,#f7f5f0 50%,#eee 75%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:18px;height:120px;margin-bottom:12px}
+.sheet{background:rgba(248,250,252,.96);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border-radius:28px 28px 0 0;width:100%;max-width:680px;padding:12px 20px calc(22px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto;border-top:1px solid rgba(255,255,255,.9)}
+.sheet::before{content:'';display:block;width:44px;height:5px;border-radius:5px;background:#CBD5E1;margin:0 auto 12px}
+.sheet h3{font-size:17px;font-weight:800;margin-bottom:12px}
+.sheet label{font-size:11px;font-weight:800;color:var(--mut);display:block;margin:10px 0 4px;letter-spacing:.04em}
+.sheet input,.sheet select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:15px;font-family:inherit;background:#fff;color:var(--ink)}
+.tot{display:flex;justify-content:space-between;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.3);border-radius:14px;padding:12px 14px;margin-top:14px;font-weight:800}
+.tot b{color:var(--em2)}
+.note{font-size:11px;color:var(--mut);margin-top:8px;line-height:1.5}
+.conf{text-align:center;padding:20px 0}
+.conf .big{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 18px 40px -14px rgba(0,200,150,.9)}
+.conf .big svg{width:36px;height:36px}
+.conf h3{font-size:20px;font-weight:800;margin:12px 0 8px}
+.conf .code{font-size:26px;font-weight:800;letter-spacing:2px;color:var(--em2);background:rgba(0,200,150,.1);border-radius:14px;padding:12px;margin:12px 0;border:2px dashed var(--em)}
+.conf p{font-size:13px;color:var(--mut);line-height:1.6}
+.wa{display:inline-block;background:#25D366;color:#081120;font-weight:800;border-radius:999px;padding:12px 26px;text-decoration:none;margin-top:12px;font-size:14px}
+.pay{display:block;text-align:center;text-decoration:none;background:linear-gradient(135deg,#0099FF,#6C63FF);color:#fff;font-weight:800;border-radius:14px;padding:14px;margin:8px 0 10px}
+.skel{background:linear-gradient(90deg,rgba(8,17,32,.05),rgba(8,17,32,.1),rgba(8,17,32,.05));background-size:200% 100%;animation:sk 1.2s infinite;border-radius:20px;height:120px;margin-bottom:12px}
 @keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
+@media(min-width:700px){.hero img{height:340px}.hero h1{font-size:34px}.hero .ov{padding:26px}.rooms2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.room{margin:0}}
 </style>
 </head>
 <body>
-<div class="top"><a href="/">🏢 Bina<span class="g">Smart</span></a><span style="margin-left:auto;font-size:11px;font-weight:800;color:#059669">🏨 Book Direct · 0% commission</span></div>
+<header class="nav glass">
+  <a class="logo" href="/hotels"><i><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg></i><span><b>Bina<span>Hotels</span></b><small class="am">ሆቴሎች · አዲስ አበባ</small></span></a>
+  <span class="sp"></span>
+  <span class="pill"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7.5L9.5 18 4 12.5"/></svg>0% <span class="am">ኮሚሽን</span> · book direct</span>
+</header>
 <div class="wrap">
-  <div id="hero" class="hero"><div class="ov"><h1 id="hname">Loading…</h1><div class="am" id="hnameAm"></div><div class="loc" id="hloc"></div></div></div>
+  <div id="hero" class="hero"><div class="ov"><span class="k">BOOK DIRECT · <span class="am">በቀጥታ</span></span><h1 id="hname">Loading…</h1><div class="am am2" id="hnameAm"></div><div class="loc" id="hloc"></div></div></div>
   <div class="why">
-    <div class="w"><b>0% ኮሚሽን</b><span>Book direct — hotel keeps 100%</span></div>
-    <div class="w"><b>ካርድ አያስፈልግም</b><span>No credit card — pay at hotel</span></div>
-    <div class="w"><b>ዋትስአፕ ማረጋገጫ</b><span>Instant WhatsApp confirmation</span></div>
+    <div class="w"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7.5L9.5 18 4 12.5"/></svg></i><b class="am">0% ኮሚሽን</b><span>Hotel keeps 100%</span></div>
+    <div class="w"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/></svg></i><b class="am">ካርድ አያስፈልግም</b><span>Pay at the hotel</span></div>
+    <div class="w"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg></i><b class="am">ፈጣን ማረጋገጫ</b><span>Instant code · Telegram</span></div>
   </div>
-  <div class="dates">
-    <div><label>Check-in / መግቢያ</label><input type="date" id="ci"></div>
-    <div><label>Check-out / መውጫ</label><input type="date" id="co"></div>
+  <div class="dates glass">
+    <div><label>CHECK-IN · <span class="am">መግቢያ</span></label><input type="date" id="ci"></div>
+    <div><label>CHECK-OUT · <span class="am">መውጫ</span></label><input type="date" id="co"></div>
   </div>
-  <h2>Rooms · ክፍሎች</h2>
-  <div id="rooms"><div class="skel"></div><div class="skel"></div></div>
+  <h2><span class="am">ክፍሎች</span> <small>Rooms · price per night, total shown on the button</small></h2>
+  <div id="rooms" class="rooms2"><div class="skel"></div><div class="skel"></div></div>
+  <div class="list"><span class="am">ሆቴል አለዎት?</span> <a href="/for-business">List your hotel on BinaSmart — 0% commission →</a></div>
 </div>
 <div id="modal"><div class="sheet" id="sheet"></div></div>
 <script>
@@ -86,36 +115,39 @@ const today = new Date(); const d2s = d => d.toISOString().slice(0,10);
 $('ci').value = d2s(today); $('ci').min = d2s(today);
 const tm = new Date(today); tm.setDate(tm.getDate()+1);
 $('co').value = d2s(tm); $('co').min = d2s(tm);
+(function(){ const P = new URLSearchParams(location.search), i = P.get('in'), o = P.get('out');
+  if (i && o && /^\d{4}-\d{2}-\d{2}$/.test(i) && /^\d{4}-\d{2}-\d{2}$/.test(o) && i >= d2s(today) && o > i) { $('ci').value = i; $('co').value = o; } })();
 $('ci').onchange = $('co').onchange = load;
 function nights(){ return Math.max(1, Math.round((new Date($('co').value) - new Date($('ci').value)) / 86400000)); }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 async function load(){
   const r = await fetch('/api/hotel/' + slug + '?in=' + $('ci').value + '&out=' + $('co').value);
   if (!r.ok){ $('rooms').innerHTML = '<p style="color:#94a3b8;text-align:center;padding:20px">This building has no bookable rooms yet.</p>'; return; }
   const d = await r.json(); HOTEL = d.hotel; ROOMS = d.rooms;
   $('hname').textContent = HOTEL.name; $('hnameAm').textContent = HOTEL.nameAm || '';
   $('hloc').textContent = '📍 ' + (HOTEL.subCity ? HOTEL.subCity + ' · ' : '') + HOTEL.city;
-  document.title = HOTEL.name + ' — Book Direct | BinaSmart';
-  if (HOTEL.photo) $('hero').insertAdjacentHTML('afterbegin', '<img src="' + HOTEL.photo + '" alt="' + HOTEL.name + '">');
+  document.title = HOTEL.name + ' — Book Direct | BinaSmart Hotels';
+  if (HOTEL.photo && !$('hero').querySelector('img')) $('hero').insertAdjacentHTML('afterbegin', '<img src="' + esc(HOTEL.photo) + '" alt="' + esc(HOTEL.name) + '">');
   $('rooms').innerHTML = ROOMS.map(rm => {
-    const av = rm.available <= 0 ? '<div class="avail no">✖ Fully booked for these dates</div>'
+    const av = rm.available <= 0 ? '<div class="avail no">✖ Fully booked for these dates · ተይዟል</div>'
       : rm.available <= 2 ? '<div class="avail low">⚡ Only ' + rm.available + ' left for these dates</div>'
-      : '<div class="avail ok">✓ ' + rm.available + ' rooms available</div>';
-    return '<div class="room"><div class="rh"><div><div class="nm">' + rm.name + '</div><div class="am">' + (rm.nameAm || '') + ' · 👥 ' + rm.capacity + '</div></div>'
+      : '<div class="avail ok">✓ ' + rm.available + ' rooms available · ክፍሎች አሉ</div>';
+    return '<div class="room"><div class="rh"><div><div class="nm">' + esc(rm.name) + '</div><div class="am">' + esc(rm.nameAm || '') + ' · 👥 ' + rm.capacity + '</div></div>'
       + '<div class="pr"><b>' + rm.pricePerNight.toLocaleString() + ' ETB</b><span>per night · በሌሊት</span></div></div>'
-      + '<div class="ams">' + (rm.amenities || []).map(a => '<span>' + a + '</span>').join('') + '</div>' + av
-      + '<button class="bkbtn" ' + (rm.available <= 0 ? 'disabled' : '') + ' onclick="openBook(\'' + rm.id + '\')">Book · ያስይዙ — ' + (rm.pricePerNight * nights()).toLocaleString() + ' ETB total</button></div>';
+      + '<div class="ams">' + (rm.amenities || []).map(a => '<span>' + esc(a) + '</span>').join('') + '</div>' + av
+      + '<button class="bkbtn" ' + (rm.available <= 0 ? 'disabled' : '') + ' onclick="openBook(\'' + rm.id + '\')">ያስይዙ · Book — ' + (rm.pricePerNight * nights()).toLocaleString() + ' ETB total</button></div>';
   }).join('');
 }
 function openBook(id){
   const rm = ROOMS.find(x => x.id === id); if (!rm) return;
   $('modal').classList.add('on');
-  $('sheet').innerHTML = '<h3>🏨 ' + rm.name + ' — ' + $('ci').value + ' → ' + $('co').value + ' (' + nights() + ' nights)</h3>'
-    + '<label>Full name / ሙሉ ስም</label><input id="gn" placeholder="Your name">'
-    + '<label>Phone (WhatsApp) / ስልክ</label><input id="gp" placeholder="09… or +2519…" inputmode="tel">'
-    + '<label>Rooms / ክፍሎች</label><select id="gr">' + Array.from({length: Math.min(rm.available, 5)}, (_, i) => '<option>' + (i + 1) + '</option>').join('') + '</select>'
+  $('sheet').innerHTML = '<h3>🏨 ' + esc(rm.name) + ' — ' + $('ci').value + ' → ' + $('co').value + ' (' + nights() + ' nights)</h3>'
+    + '<label>FULL NAME · <span class="am">ሙሉ ስም</span></label><input id="gn" placeholder="Your name">'
+    + '<label>PHONE (WhatsApp / Telegram) · <span class="am">ስልክ</span></label><input id="gp" placeholder="09… or +2519…" inputmode="tel">'
+    + '<label>ROOMS · <span class="am">ክፍሎች</span></label><select id="gr">' + Array.from({length: Math.min(rm.available, 5)}, (_, i) => '<option>' + (i + 1) + '</option>').join('') + '</select>'
     + '<div class="tot"><span>Total · ጠቅላላ</span><b id="gt">' + (rm.pricePerNight * nights()).toLocaleString() + ' ETB</b></div>'
     + '<div class="note">Pay at the hotel — cash or telebirr. No prepayment, no card. Free cancellation by phone. / ክፍያ ሆቴሉ ላይ — ቅድመ ክፍያ የለም።</div>'
-    + '<button class="bkbtn" style="margin-top:12px" onclick="submitBook(\'' + rm.id + '\')">✓ Confirm booking · ያረጋግጡ</button>';
+    + '<button class="bkbtn" style="margin-top:12px" onclick="submitBook(\'' + rm.id + '\')">✓ ያረጋግጡ · Confirm booking</button>';
   $('gr').onchange = () => $('gt').textContent = (rm.pricePerNight * nights() * +$('gr').value).toLocaleString() + ' ETB';
   $('modal').onclick = e => { if (e.target === $('modal')) $('modal').classList.remove('on'); };
 }
@@ -127,15 +159,15 @@ async function submitBook(id){
   const d = await r.json();
   if (!d.ok){ alert(d.error === 'not_available' ? 'Sorry — just sold out for these dates. Only ' + d.available + ' left.' : '❌ ' + (d.error || 'error')); return; }
   const summary = '🏨 Booking ' + d.code + '\n' + d.hotel + '\n' + d.room + ' · ' + $('ci').value + ' → ' + $('co').value + '\nTotal: ' + d.total.toLocaleString() + ' ETB\nGuest: ' + gn;
-  $('sheet').innerHTML = '<div class="conf"><div class="big">🎉</div><h3>Booking received! · ተይዟል!</h3>'
-    + '<div class="code">' + d.code + '</div>'
-    + '<p>Show this code at reception.<br>' + d.room + ' · ' + nights() + ' nights · <b>' + d.total.toLocaleString() + ' ETB</b><br>Pay at the hotel — no prepayment.</p>'
-    + '<a href="/pay?amount=' + d.total + '&for=' + encodeURIComponent(d.hotel||'Hotel booking') + '&bt=hotel&bc=' + encodeURIComponent(d.code) + '" style="display:block;text-align:center;text-decoration:none;background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;font-weight:800;border-radius:14px;padding:14px;margin:8px 0 10px">💳 አሁን በኦንላይን ይክፈሉ · Pay online</a>'
+  $('sheet').innerHTML = '<div class="conf"><div class="big"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9.5 17.5 4 12"/></svg></div><h3>ተይዟል! · Booking received</h3>'
+    + '<div class="code">' + esc(d.code) + '</div>'
+    + '<p>Show this code at reception.<br>' + esc(d.room) + ' · ' + nights() + ' nights · <b>' + d.total.toLocaleString() + ' ETB</b><br>Pay at the hotel — no prepayment.</p>'
+    + '<a class="pay" href="/pay?amount=' + d.total + '&for=' + encodeURIComponent(d.hotel||'Hotel booking') + '&bt=hotel&bc=' + encodeURIComponent(d.code) + '">💳 አሁን በኦንላይን ይክፈሉ · Pay online</a>'
     + '<a class="wa" href="https://wa.me/?text=' + encodeURIComponent(summary) + '">💬 Save to WhatsApp</a></div>';
   load();
 }
 load();
 </script>
-  <script src="/static/bina-footer.js?v=6" defer></script>
+<script src="/static/bina-footer.js?v=6" defer></script>
 </body>
 </html>
