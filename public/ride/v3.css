@@ -105,3 +105,24 @@ html.next .trkPulse{background:rgba(0,200,150,.28)}
 html.next .trkNose::before{border-bottom-color:#00C896}
 html.next .toast{background:rgba(8,17,32,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18)}
 html.next .dot{background:#00C896;box-shadow:0 0 0 3px rgba(0,200,150,.2)}
+
+/* v3 (7 Sep 2026): glass controls. The sheet is light frosted glass, so buttons are translucent white with a
+   blur and a bright hairline; the request button and the 3D toggle keep an emerald tint so they stay primary. */
+html.next .btn,html.next .quick button,html.next .tier,html.next .chipq,html.next .field,html.next .back,html.next .biniMic{-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink)}
+html.next .btn:active,html.next .quick button:active,html.next .chipq:active{background:rgba(255,255,255,.7)}
+html.next .field{background:rgba(255,255,255,.5)}
+html.next .tier{background:rgba(255,255,255,.36)}
+html.next .tier.sel{background:rgba(0,200,150,.2);border:1.5px solid rgba(0,200,150,.7);box-shadow:0 10px 22px -12px rgba(0,200,150,.5),inset 0 1px 0 rgba(255,255,255,.9)}
+html.next .chipq{color:var(--em2)}
+html.next .cta{-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);background:linear-gradient(135deg,rgba(0,200,150,.62),rgba(0,150,136,.5));border:1px solid rgba(255,255,255,.6);color:#fff;text-shadow:0 1px 2px rgba(0,80,60,.35);box-shadow:0 16px 32px -14px rgba(0,200,150,.6),inset 0 1px 0 rgba(255,255,255,.45)}
+html.next .cta:active{background:rgba(0,200,150,.8)}
+html.next .cta:disabled{background:rgba(148,163,184,.35);color:#fff;text-shadow:none;box-shadow:none}
+html.next .biniGo{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);background:rgba(0,200,150,.55);border:1px solid rgba(255,255,255,.7);color:#fff;box-shadow:0 8px 18px -8px rgba(0,200,150,.7)}
+html.next .biniMic{background:rgba(255,255,255,.4);border-color:rgba(255,255,255,.8)}
+html.next .biniMic.on{background:rgba(239,68,68,.75);color:#fff}
+html.next .bini{background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.55)) padding-box,linear-gradient(90deg,#00C896,#0099FF,#6C63FF,#00C896) border-box;background-size:auto,300% 100%;-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%)}
+html.next .chip3d{-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);background:rgba(0,200,150,.55);border:1px solid rgba(255,255,255,.6);box-shadow:0 12px 30px -12px rgba(0,200,150,.7)}
+html.next .chip3d.off{background:rgba(8,17,32,.3);border-color:rgba(255,255,255,.35)}
+html.next .link{color:var(--em2);font-weight:800}
+html.next .link.danger{color:#b91c1c}
+html.next .stars button{background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.8);border-radius:12px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
