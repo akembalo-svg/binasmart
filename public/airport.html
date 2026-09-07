@@ -153,6 +153,17 @@ main{padding-bottom:100px}
   .wa{right:36px;bottom:40px;width:64px;height:64px}
 }
 </style>
+<style>
+/* glass controls (7 Sep 2026): translucent, blurred, hairline border; primary actions keep an emerald tint */
+.nav .pill{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:#fff;-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.app .btn,.owner .btn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:#fff;-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);color:#fff!important}
+.field{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);background:rgba(255,255,255,.5)}
+.cta{background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));border:1px solid rgba(255,255,255,.6);color:#fff;text-shadow:0 1px 2px rgba(0,80,60,.35);box-shadow:0 16px 32px -14px rgba(0,200,150,.6),inset 0 1px 0 rgba(255,255,255,.45);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}.cta:active{background:rgba(0,200,150,.8)}
+.seg{background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.65);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.seg button.on{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.95)}
+.dest .tag{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.wa{background:rgba(37,211,102,.72);border:1px solid rgba(255,255,255,.6);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+</style>
 </head>
 <body>
 <main>
