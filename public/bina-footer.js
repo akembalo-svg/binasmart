@@ -6,6 +6,9 @@
 (function () {
   'use strict';
   if (window.__binaFooter) return; window.__binaFooter = 1;
+  // App screens (Ride, driver: a map pinned to the viewport) have no room for a page footer.
+  var mapEl = document.getElementById('map');
+  if (document.body.hasAttribute('data-no-footer') || (mapEl && getComputedStyle(mapEl).position === 'fixed')) return;
   var here = location.pathname.replace(/\/+$/, '') || '/';
   var PLAY = '<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><g transform="scale(0.024)"><path transform="translate(255,700) scale(0.62,-0.62)" d="M699 -82Q668 -82 645.5 -55.0Q623 -28 615 0H437V465Q437 551 408.0 597.5Q379 644 311 644Q236 644 208.5 595.0Q181 546 181 464V0H90V472Q90 586 144.0 655.0Q198 724 311 724Q426 724 477.0 658.5Q528 593 528 470V73H615Q623 101 645.5 127.5Q668 154 699 154H723L697 36L723 -82Z" fill="#fff" stroke="#fff" stroke-width="56" stroke-linejoin="round"/><path d="M800 150l24 62 62 24-62 24-24 62-24-62-62-24 62-24z" fill="#fff"/></g></svg>';
   // [Amharic, English, href]
