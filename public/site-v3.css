@@ -94,3 +94,17 @@ body>.hero:has(.brand) h1 span:not(.en),body>header.hero:has(.brand) h1 span:not
 /* article bodies */
 .tag{border-radius:999px}
 .kick{color:#14D8B4}
+
+/* ---- v5 (7 Sep 2026): glass controls on every page this sheet covers ---- */
+.btn,.bkbtn,.obtn,.cbtn,.tb-cta,.b1,.cta,a.cta,.qty .add{background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));border:1px solid rgba(255,255,255,.6);color:#fff;text-shadow:0 1px 2px rgba(0,80,60,.35);box-shadow:0 16px 32px -14px rgba(0,200,150,.6),inset 0 1px 0 rgba(255,255,255,.45);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.btn:active,.bkbtn:active,.b1:active,.cta:active{background:rgba(0,200,150,.9)}
+.btn:disabled,.bkbtn:disabled{background:rgba(148,163,184,.35);border-color:rgba(255,255,255,.5);color:#fff;text-shadow:none;box-shadow:none}
+.cta.ghost,a.cta.ghost{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;text-shadow:none;box-shadow:none;-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.b2,.chip,.f,.cat,.tt,.top a.back,.inp{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.b2{color:var(--em2)}
+.chip:hover,.chip.on,.f.on,.cat.on,.tt.on{background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));border:1px solid rgba(255,255,255,.6);color:#fff;text-shadow:0 1px 2px rgba(0,80,60,.35);box-shadow:0 16px 32px -14px rgba(0,200,150,.6),inset 0 1px 0 rgba(255,255,255,.45);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);border-color:rgba(255,255,255,.7)}
+.seg{background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.7);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.seg button.on{background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.95);box-shadow:0 6px 16px -8px rgba(8,17,32,.35)}
+.inp{background:rgba(255,255,255,.55)}.inp:focus{border-color:rgba(0,200,150,.8);background:rgba(255,255,255,.75)}
+.wa{background:rgba(37,211,102,.55);border:1px solid rgba(255,255,255,.7);color:#081120;-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+.badge,body>.top:not(:has(.in))>span{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(0,200,150,.25)}
