@@ -2862,9 +2862,30 @@ fastify.get('/pool/:id', async (req, reply) => {
   return html;
 });
 
+// ===== telebirr (Ethio Telecom SuperApp) payments: web checkout + in-app (mini app). Sandbox until TELEBIRR_MODE=live =====
+const telebirrClient = require('./payments/telebirr').makeTelebirr({ mode: process.env.TELEBIRR_MODE || 'sandbox', baseUrl: process.env.TELEBIRR_BASE_URL, webBaseUrl: process.env.TELEBIRR_WEB_BASE_URL,
+  fabricAppId: process.env.TELEBIRR_FABRIC_APP_ID, appSecret: process.env.TELEBIRR_APP_SECRET, merchantAppId: process.env.TELEBIRR_MERCHANT_APP_ID, merchantCode: process.env.TELEBIRR_MERCHANT_CODE,
+  privateKey: process.env.TELEBIRR_PRIVATE_KEY, spPublicKey: process.env.TELEBIRR_SP_PUBLIC_KEY });
+let cinemaRef = null; // set right after the cinema module mounts (settle needs its ticket helpers)
+const telebirrRoutes = require('./payments/telebirrRoutes')(fastify, { telebirr: telebirrClient, prisma, BASE_URL: 'https://bina.et', OWNER_KEY,
+  // what is being paid for: amount comes from OUR record, never from the client
+  resolve: async (type, code) => {
+    if (type === 'cinema') { const t = await prisma.ticket.findUnique({ where: { code: String(code).toUpperCase() }, include: { show: { include: { event: true } } } }); if (!t) return null;
+      return { payable: t.status === 'RESERVED', reason: t.status === 'RESERVED' ? null : 'ticket_' + t.status.toLowerCase(), amountEtb: t.total, title: 'Ticket ' + (t.show && t.show.event ? (t.show.event.titleAm || t.show.event.title) : '') + ' ' + (t.seats || []).join(' '), redirectPath: '/ticket/' + t.code + '?paid=1', phone: t.phone, name: t.name }; }
+    if (type === 'ride') { const r = await prisma.ride.findUnique({ where: { id: String(code) } }); if (!r) return null;
+      return { payable: r.paymentStatus !== 'paid' && ['completed', 'arrived', 'on_trip', 'assigned'].includes(r.status), reason: r.paymentStatus === 'paid' ? 'already_paid' : 'ride_' + r.status, amountEtb: r.fareEtb, title: 'BinaRide fare', redirectPath: '/ride?id=' + r.id + '&paid=1', phone: r.riderPhone, name: r.riderName }; }
+    return null;
+  },
+  settle: async (type, code, info) => {
+    if (type === 'cinema' && cinemaRef) { await cinemaRef.tickets.markPaid(String(code).toUpperCase(), 'telebirr', info.orderId); const t = await prisma.ticket.findUnique({ where: { code: String(code).toUpperCase() } }); if (t) cinemaRef.notify(t, '✅ ' + t.code + ' በቴሌብር ተከፍሏል · paid with telebirr. ' + (t.seats || []).join(', ') + '\nhttps://bina.et/ticket/' + t.code).catch(() => {}); return; }
+    if (type === 'ride') { await prisma.ride.updateMany({ where: { id: String(code) }, data: { paymentStatus: 'paid', paymentMethod: 'telebirr' } }); return; }
+  },
+});
+const telebirrForModules = { enabled: telebirrClient.enabled, mode: telebirrClient.mode, initFor: telebirrRoutes.initFor, confirmFor: telebirrRoutes.confirmFor };
+console.log('[telebirr] ' + (telebirrClient.enabled ? 'enabled mode=' + telebirrClient.mode : 'off (no TELEBIRR_* config)'));
 // ===== BinaSmart Cinema & Events: seat booking (Phase A). Mounted only when CINEMA_ENABLED=1 =====
 const cinema = require('./cinema')(fastify, {
-  prisma, OWNER_KEY, BASE_URL: 'https://bina.et',
+  prisma, OWNER_KEY, BASE_URL: 'https://bina.et', telebirr: telebirrForModules,
   chapa: {
     enabled: !!CHAPA_SECRET, mode: process.env.CHAPA_MODE === 'live' ? 'live' : 'test',
     init: async ({ amount, ref, name, phone, returnUrl, title }) => {
@@ -2877,6 +2898,7 @@ const cinema = require('./cinema')(fastify, {
   },
 });
 
+cinemaRef = cinema;
 // ===== BinaSmart Watch: licensed films, video hosted elsewhere (Phase B). Same flag, same Chapa object =====
 const watch = require('./watch')(fastify, { prisma, OWNER_KEY, BASE_URL: 'https://bina.et', chapa: cinema ? cinema.chapa : null });
 

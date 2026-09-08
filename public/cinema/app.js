@@ -149,7 +149,7 @@
   function load(showId, quiet) {
     return api('/api/cinema/shows/' + encodeURIComponent(showId)).then(function (j) {
       if (!j.ok) { if (!quiet) view.innerHTML = '<div class="card">' + esc(T[j.error] || T.net) + ' <a href="/cinema">← ሁሉም ትርዒቶች</a></div>'; return false; }
-      S.show = j.show; S.layout = j.layout; S.seats = j.seats || []; S.tiers = j.tiers || null; S.mine = j.mine || []; S.prices = j.show.prices || {}; S.expiresAt = j.holdExpiresAt ? new Date(j.holdExpiresAt).getTime() : null; S.chapa = j.chapa; S.maxSeats = j.maxSeats || 8;
+      S.show = j.show; S.layout = j.layout; S.seats = j.seats || []; S.tiers = j.tiers || null; S.mine = j.mine || []; S.prices = j.show.prices || {}; S.expiresAt = j.holdExpiresAt ? new Date(j.holdExpiresAt).getTime() : null; S.chapa = j.chapa; S.telebirr = j.telebirr; S.maxSeats = j.maxSeats || 8;
       if (!quiet) renderShow(); else paint();
       paintBar();
       return true;
@@ -253,8 +253,9 @@
     $('shTotal').textContent = birr(total());
     var u = window.TG && TG.user && TG.user();
     if (u && !$('fName').value) $('fName').value = [u.first_name, u.last_name].filter(Boolean).join(' ');
-    var chapaOn = S.chapa && S.chapa.enabled;
+    var chapaOn = S.chapa && S.chapa.enabled, tbOn = S.telebirr && S.telebirr.enabled;
     $('pay').innerHTML = '<label class="on"><input type="radio" name="pm" value="counter" checked> <span>🏪 በካውንተር ይክፈሉ · Pay at the counter<small>ከትርዒቱ ' + (S.show.counterCutoffMin || 30) + ' ደቂቃ በፊት ካልተከፈለ ወንበሩ ይለቀቃል · unpaid ' + (S.show.counterCutoffMin || 30) + ' min before showtime = released</small></span></label>'
+      + (tbOn ? '<label><input type="radio" name="pm" value="telebirr"> <span>📱 telebirr · ቴሌብር' + (S.telebirr.mode !== 'live' ? ' <span class="pill warn">🧪 TEST</span>' : '') + '<small>በቴሌብር አፕ ወይም በድር ይክፈሉ፣ ወዲያውኑ ይረጋገጣል · pay in the telebirr app or web, confirmed instantly</small></span></label>' : '')
       + (chapaOn ? '<label><input type="radio" name="pm" value="chapa"> <span>💳 Chapa · ቴሌብር፣ CBE Birr፣ ካርድ' + (S.chapa.mode !== 'live' ? ' <span class="pill warn">🧪 TEST</span>' : '') + '<small>ወዲያውኑ ይረጋገጣል · confirmed instantly</small></span></label>' : '');
     Array.prototype.forEach.call(document.querySelectorAll('#pay label'), function (l) { l.addEventListener('click', function () { Array.prototype.forEach.call(document.querySelectorAll('#pay label'), function (x) { x.classList.remove('on'); }); l.classList.add('on'); }); });
     $('shErr').textContent = '';

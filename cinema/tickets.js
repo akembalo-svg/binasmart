@@ -38,7 +38,7 @@ function makeTickets({ prisma, holds, now, notify, baseUrl }) {
     if (guest && (guest.name || guest.phone)) who = { name: String(guest.name || '').trim().slice(0, 60), phone: normPhone(guest.phone) };
     if (!who.phone) return { ok: false, error: 'phone' };
     if (!who.name) return { ok: false, error: 'name' };
-    const method = payMethod === 'chapa' ? 'chapa' : 'counter';
+    const method = (payMethod === 'chapa' || payMethod === 'telebirr') ? payMethod : 'counter';
 
     const out = await prisma.$transaction(async tx => {
       const t = clock();
@@ -81,7 +81,7 @@ function makeTickets({ prisma, holds, now, notify, baseUrl }) {
   }
 
   async function markPaid(code, via, chapaRef) {
-    const data = { status: 'CONFIRMED', payMethod: via === 'chapa' ? 'chapa' : 'counter' };
+    const data = { status: 'CONFIRMED', payMethod: (via === 'chapa' || via === 'telebirr') ? via : 'counter' };
     if (chapaRef) data.chapaRef = chapaRef;
     const r = await prisma.ticket.updateMany({ where: { code, status: 'RESERVED' }, data });
     return r.count > 0;

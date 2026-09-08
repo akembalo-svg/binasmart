@@ -47,12 +47,13 @@ const ERR_CODE = { taken: 409, sold: 409, sold_out: 409, no_such_section: 400, n
   show_closed: 410, no_show: 404, unknown: 404, no_such_seat: 400, too_many: 400, no_seats: 400, phone: 400, name: 400, holder: 400 };
 const fail = (reply, r) => reply.code(ERR_CODE[r.error] || 400).send({ ok: false, ...r });
 
-module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checkin, OWNER_KEY, riderBotToken, chapa, BASE_URL, notify }) {
+module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checkin, OWNER_KEY, riderBotToken, chapa, telebirr: telebirrDep, BASE_URL, notify }) {
   const base = (BASE_URL || 'https://bina.et').replace(/\/$/, '');
   // Per-holder limits are tight; per-IP limits are loose on purpose: Ethio telecom puts whole
   // neighbourhoods behind one address, so an IP is a crowd, not a person.
   const holdRL = limiter(60000, 60), buyRL = limiter(600000, 5), buyIpRL = limiter(600000, 80), lookupRL = limiter(60000, 120), ipRL = limiter(60000, 600);
   const chapaOn = !!(chapa && chapa.enabled);
+  const telebirr = telebirrDep || null; const tbOn = !!(telebirr && telebirr.enabled);
   const posters = makePosters({});   // TMDB when TMDB_API_KEY is set; otherwise a no-op
   const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
   const holderOf = req => { const h = String(req.headers['x-holder'] || (req.query && req.query.holder) || ''); return HOLDER_RE.test(h) ? h : null; };
@@ -129,7 +130,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const ids = shows.map(s => s.id);
     const sold = ids.length ? await prisma.ticket.findMany({ where: { showId: { in: ids }, status: { in: SOLD_STATES } } }) : [];
     const taken = {}; for (const t of sold) taken[t.showId] = (taken[t.showId] || 0) + (t.seats || []).length;
-    return { ok: true, chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null },
+    return { ok: true, chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null }, telebirr: { enabled: tbOn, mode: tbOn ? telebirr.mode : null },
       shows: shows.filter(s => s.event && s.hall).map(s => ({ ...pubShow(s), seatsLeft: Math.max(0, (s.hall.capacity || 0) - (taken[s.id] || 0)),
         from: Math.min(...Object.values(s.prices || {}).map(Number).filter(Number.isFinite)) })) };
   });
@@ -199,7 +200,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const mine = holder ? await holds.mine(show.id, holder) : [];
     return { ok: true, show: pubShow(show), layout: show.hall.layout, seats, tiers, holdMs: HOLD_MS, maxSeats: ga ? MAX_GA : MAX_SEATS,
       mine: mine.map(h => h.seat), holdExpiresAt: mine.length ? new Date(Math.min(...mine.map(h => h.expiresAt.getTime()))) : null,
-      chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null } };
+      chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null }, telebirr: { enabled: tbOn, mode: tbOn ? telebirr.mode : null } };
   });
 
   fastify.post('/api/cinema/shows/:id/hold', async (req, reply) => {
@@ -233,7 +234,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const phone = contact ? contact.phone : b.phone;
     const ipKey = 'ip:' + clientIp(req);
     if (!buyRL(holder) || !buyIpRL(ipKey)) return reply.code(429).send({ ok: false, error: 'too_many_requests' });
-    const method = b.payMethod === 'chapa' && chapaOn ? 'chapa' : 'counter';   // server-side gate, as Ride does
+    const method = b.payMethod === 'chapa' && chapaOn ? 'chapa' : (b.payMethod === 'telebirr' && tbOn ? 'telebirr' : 'counter');   // server-side gate, as Ride does
     const r = await tickets.checkout({ showId: String(b.showId || ''), holderKey: holder, seats: b.seats, name, phone, guest: b.guest, payMethod: method,
       telegramId: tg ? tg.user.id : null, idemKey: str(b.idemKey, 80) });
     if (!r.ok) return fail(reply, r);
@@ -248,6 +249,15 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
       } catch (e) {
         console.error('[cinema] chapa init failed for ' + r.ticket.code + ': ' + e.message);
         out.chapaError = true;   // ticket stays RESERVED/chapa; ops sees it flagged, buyer can still pay at the counter
+      }
+    }
+    if (method === 'telebirr' && r.ticket.status === 'RESERVED') {
+      try {
+        const t = await telebirr.initFor('cinema', r.ticket.code, { inApp: b.inApp === true || b.inApp === 'true' });
+        out.checkoutUrl = t.checkoutUrl || null; out.rawRequest = t.rawRequest || null; out.telebirrOrderId = t.orderId;
+      } catch (e) {
+        console.error('[cinema] telebirr init failed for ' + r.ticket.code + ': ' + (e.error || e.message));
+        out.telebirrError = true;   // ticket stays RESERVED/telebirr; buyer can retry from the ticket page or pay at the counter
       }
     }
     return out;
@@ -280,6 +290,16 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     return { ok: true, status: 'CONFIRMED' };
   }
 
+  fastify.post('/api/cinema/tickets/:code/verify-telebirr', async (req, reply) => {
+    if (!lookupRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
+    const t = await loadTicket(req.params.code);
+    if (!t) return fail(reply, { error: 'unknown' });
+    if (t.status !== 'RESERVED') return { ok: true, status: t.status };
+    if (!tbOn) return reply.code(503).send({ ok: false, error: 'telebirr_off', status: t.status });
+    const r = await telebirr.confirmFor('cinema', t.code);
+    if (r.ok && r.paid) { const fresh = await loadTicket(t.code); return { ok: true, status: fresh ? fresh.status : 'CONFIRMED' }; }
+    return reply.code(402).send({ ok: false, error: r.error || 'unpaid', status: t.status });
+  });
   fastify.post('/api/cinema/tickets/:code/verify-chapa', async (req, reply) => {
     if (!lookupRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const t = await loadTicket(req.params.code);
@@ -301,7 +321,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const ids = shows.map(s => s.id);
     const ts = ids.length ? await prisma.ticket.findMany({ where: { showId: { in: ids } } }) : [];
     const stat = {}; for (const t of ts) { const s = stat[t.showId] = stat[t.showId] || { RESERVED: 0, CONFIRMED: 0, CHECKED_IN: 0, CANCELLED: 0, seats: 0, revenue: 0 }; s[t.status] = (s[t.status] || 0) + 1; if (SOLD_STATES.includes(t.status)) { s.seats += t.seats.length; s.revenue += t.total; } }
-    return { ok: true, chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null },
+    return { ok: true, chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null }, telebirr: { enabled: tbOn, mode: tbOn ? telebirr.mode : null },
       venues: venues.map(v => ({ ...v, halls: v.halls.map(h => ({ id: h.id, name: h.name, capacity: h.capacity, layout: h.layout })) })),
       events: events.map(e => ({ id: e.id, slug: e.slug, title: e.title, titleAm: e.titleAm, kind: e.kind, posterUrl: e.posterUrl, runtimeMin: e.runtimeMin, rating: e.rating, language: e.language })),
       shows: shows.filter(s => s.event && s.hall).map(s => ({ ...pubShow(s), stats: stat[s.id] || { RESERVED: 0, CONFIRMED: 0, CHECKED_IN: 0, CANCELLED: 0, seats: 0, revenue: 0 } })) };

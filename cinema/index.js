@@ -26,7 +26,7 @@ module.exports = function registerCinema(fastify, deps) {
   const holds = makeHolds({ prisma });
   const tickets = makeTickets({ prisma, holds, notify, baseUrl: base });
   const checkin = makeCheckin({ prisma });
-  const r = routes(fastify, { prisma, holds, tickets, checkin, OWNER_KEY: deps.OWNER_KEY, riderBotToken, chapa: deps.chapa || null, BASE_URL: base, notify });
+  const r = routes(fastify, { prisma, holds, tickets, checkin, OWNER_KEY: deps.OWNER_KEY, riderBotToken, chapa: deps.chapa || null, telebirr: deps.telebirr || null, BASE_URL: base, notify });
 
   if (!deps.noTimers) {
     // Two idempotent loops, both safe to miss a beat: expired holds go back on the map; unpaid
@@ -41,6 +41,6 @@ module.exports = function registerCinema(fastify, deps) {
     }, 60000);
     t1.unref(); t2.unref();
   }
-  console.log('[cinema] mounted' + (api ? ' (Telegram delivery on)' : ' (no rider bot token)') + (deps.chapa && deps.chapa.enabled ? ' chapa=' + deps.chapa.mode : ' chapa=off'));
+  console.log('[cinema] mounted' + (api ? ' (Telegram delivery on)' : ' (no rider bot token)') + (deps.chapa && deps.chapa.enabled ? ' chapa=' + deps.chapa.mode : ' chapa=off') + (deps.telebirr && deps.telebirr.enabled ? ' telebirr=' + deps.telebirr.mode : ' telebirr=off'));
   return { holds, tickets, checkin, confirmChapa: r.confirmChapa, notify, chapa: deps.chapa || null };
 };
