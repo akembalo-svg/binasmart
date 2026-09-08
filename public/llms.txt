@@ -7,6 +7,7 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 ## Services
 
 - [Ride](https://bina.et/ride): fixed upfront fares in Addis Ababa, no surge; moto, bajaj, economy, comfort, XL; book for someone else from abroad; also in Telegram at https://t.me/bina_smart_bot/ride
+- [BinaPool shared commute](https://bina.et/ride?pool=1): up to four riders share one Comfort car and pay per seat; corridors into Bole and Kazanchis (Megenagna, CMC, Piassa, Mexico), groups near me, daily groups for the office or school run, women-only groups, share a car by link at https://bina.et/pool/<id>; landing page https://bina.et/pool
 - [Drive with BinaSmart](https://bina.et/drive-with-us): drivers register free in Telegram (@binasmartdriverbot), 0% commission during launch, Amharic turn-by-turn navigation
 - [Cinema](https://bina.et/cinema): seat and general-admission tickets for Addis Ababa cinemas and events, QR ticket, pay at the counter or by Chapa; programmes for Alem, Gast and city cinemas
 - [Watch](https://bina.et/watch): Ethiopian films online — free YouTube-embedded titles and 48-hour rentals
@@ -43,7 +44,8 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 ## Developer and AI resources
 
 - [Use BinaSmart inside ChatGPT, Claude, Gemini or Perplexity](https://bina.et/ai): paste the MCP link, no login
-- [MCP server](https://bina.et/mcp): quote and request rides, search the directory, list films and events, read the guides; documentation at that URL
+- [MCP server](https://bina.et/mcp): quote and request rides, search the directory, list films and events, read the guides, BinaPool corridors and cars filling, and search_knowledge over every service and practical Addis Ababa knowledge; documentation at that URL
+- [Knowledge search](https://bina.et/api/knowledge/search?q=Megenagna): JSON passages with source urls, same index Bini uses
 - [Sitemap](https://bina.et/sitemap.xml): every public page
 
 ## Facts

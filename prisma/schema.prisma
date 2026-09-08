@@ -1089,6 +1089,25 @@ model Ride {
 
 // BinaPool: one car being filled on a commute corridor. Once dispatched it is carried by ONE Ride
 // (fare = the ladder's driver total); seats hold each rider's own price.
+// Bini knowledge index (RAG): one row per text chunk, Gemini embedding as float32 bytes (no pgvector needed;
+// the API keeps the matrix in RAM). hash = sha1(source|slug|text) so re-ingest only touches changed chunks.
+model KnowledgeChunk {
+  id        String   @id @default(cuid())
+  source    String   // skill | addis | guide | page | llms | docs
+  slug      String
+  url       String?
+  title     String
+  lang      String   @default("en")
+  ord       Int
+  hash      String   @unique
+  text      String
+  internal  Boolean  @default(false) // true = never served to the public search / MCP
+  embedding Bytes?
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  @@index([source, slug])
+}
+
 model Pool {
   id           String     @id @default(cuid())
   kind         String     @default("corridor") // corridor | custom ("group near me": any start -> any destination)

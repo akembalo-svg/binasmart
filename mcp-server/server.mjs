@@ -10,6 +10,7 @@ import { makeLimiter } from './lib/limiter.mjs';
 import { registerRideTools, toolError } from './tools/ride.mjs';
 import { registerDirectoryTools } from './tools/directory.mjs';
 import { registerGuideTools, loadGuides } from './tools/guides.mjs';
+import { registerKnowledgeTools } from './tools/knowledge.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const VERSION = JSON.parse(fs.readFileSync(path.join(here, 'package.json'), 'utf8')).version;
@@ -18,10 +19,12 @@ const DOCS_MD = fs.existsSync(path.join(here, 'docs.md')) ? fs.readFileSync(path
 const INSTRUCTIONS =
   'BinaSmart (bina.et) is Ethiopia\'s all-in-one digital platform. Tools: fixed-price ride-hailing in Addis Ababa only ' +
   '(quote_ride → request_ride → get_ride_status / cancel_ride), a directory of buildings, hotels, hospitals and shops ' +
-  '(search_places, get_hotel_rooms, get_hospital_departments), upcoming events (list_events) and 22 bilingual Digital ' +
-  'Ethiopia guides (get_ethiopia_guide). Before request_ride ALWAYS confirm pickup, drop-off, tier, fare and the rider\'s ' +
-  'Ethiopian phone with the user. Never invent fares or official portal names — quote_ride and the guides hold them. ' +
-  'Cite source_url in answers. Site guide: https://bina.et/llms.txt';
+  '(search_places, get_hotel_rooms, get_hospital_departments), upcoming events (list_events), 24 bilingual Digital ' +
+  'Ethiopia guides (get_ethiopia_guide), BinaPool shared commute (list_pool_corridors, find_pool_groups) and a knowledge ' +
+  'base about every BinaSmart service and practical Addis Ababa life (search_knowledge — call it first for any question ' +
+  'about BinaSmart, Ethiopian paperwork or getting around Addis). Before request_ride ALWAYS confirm pickup, drop-off, tier, ' +
+  'fare and the rider\'s Ethiopian phone with the user. Never invent fares or official portal names — quote_ride, the pool ' +
+  'board and the guides hold them. Cite source_url in answers. Site guide: https://bina.et/llms.txt';
 
 export function json(data) { return { content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] }; }
 
@@ -39,6 +42,7 @@ export function buildServer({ rideApi, db, guides, callerKey, callsRL, bookRL })
   registerRideTools(server, { api: rideApi, wrap, json });
   registerDirectoryTools(server, { db, wrap, json });
   registerGuideTools(server, { guides, wrap, json });
+  registerKnowledgeTools(server, { api: rideApi, wrap, json });
   return server;
 }
 

@@ -38,5 +38,7 @@ export function makeRideApi({ baseUrl, timeoutMs = 8000, fetchImpl = fetch } = {
     status: (id, phone) => call('GET', `/api/ride/${enc(id)}?phone=${enc(phone)}`),
     cancel: (id, phone) => call('POST', `/api/ride/${enc(id)}/cancel`, { body: { phone }, phone }),
     settings: () => call('GET', '/api/ride/settings'),
+    knowledge: (q, k) => call('GET', `/api/knowledge/search?q=${enc(q)}&k=${k || 4}`),
+    poolBoard: (lat, lng) => call('GET', '/api/pool/board' + (lat != null && lng != null ? `?lat=${lat}&lng=${lng}` : '')),
   };
 }

@@ -16,7 +16,10 @@ BinaSmart (bina.et) is Ethiopia's all-in-one digital platform: fixed-price ride-
 | `get_hospital_departments` | departments, fees, slots left | no |
 | `list_events` | upcoming films, concerts and events on sale, prices, seats left | no |
 | `list_films` | Amharic films to watch online: free or 48-hour rental, watch url | no |
-| `get_ethiopia_guide` | 22 step-by-step guides: Fayda, telebirr, TIN, VAT, eVisa, driving licence… | no |
+| `get_ethiopia_guide` | 24 step-by-step guides: Fayda, telebirr, TIN, VAT, eVisa, driving licence… | no |
+| `search_knowledge` | semantic search over every BinaSmart service, its rules, the guides and practical Addis Ababa knowledge; returns passages + source_url | no |
+| `list_pool_corridors` | BinaPool shared-commute corridors open now, stops, live seat-price ladder, cars filling | no |
+| `find_pool_groups` | cars filling within ~2.5 km of a point: seats left, price, women-only, share url | no |
 
 ## Connect
 - **Claude Code:** `claude mcp add --transport http binasmart https://bina.et/mcp`

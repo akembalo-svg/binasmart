@@ -597,6 +597,13 @@ async function callBini(system, messages, maxTokens){
   // Fallback / default: local GLM (Anthropic-compat)
   return await once('anthropic', process.env.GLM_BASE || 'http://127.0.0.1:4000', process.env.GLM_KEY || 'x', process.env.GLM_MODEL || 'glm-5-turbo');
 }
+// ===== Bini knowledge (RAG): skill + Addis Ababa notes + guide/service pages, Gemini embeddings, keyword fallback =====
+const knowledge = require('./knowledge').makeKnowledge({ prisma, apiKey: process.env.GEMINI_API_KEY || '', log: m => fastify.log.info(m) });
+knowledge.load().catch(e => fastify.log.warn('[knowledge] load: ' + e.message));
+setInterval(() => knowledge.load().catch(() => {}), 600000).unref(); // pick up nightly ingests without a restart
+require('./knowledge/routes')(fastify, { knowledge, OWNER_KEY });
+const ASSIST_FACTS = '\n\nFACTS RULE: when a "Relevant BinaSmart knowledge" block is present, its facts override anything you remember. If the block does not contain a price, fare, deadline, portal name or law number, say you do not have it and point to the page link or WhatsApp — never guess. BinaPool (ጋራ ጉዞ, shared commute, pay per seat) lives inside the Ride app: /ride?pool=1. Demo data on the site: the hotel, the hospital, the restaurant and shop, the bus trips — say so when asked.';
+
 const _assistRL = new Map(); // ip -> [timestamps]
 fastify.post('/api/assistant', async (req, reply) => {
   const b = req.body || {};
@@ -613,7 +620,8 @@ fastify.post('/api/assistant', async (req, reply) => {
   })).filter(m => m.content) : [];
   const FALLBACK = 'ይቅርታ፣ አሁን መልስ መስጠት አልቻልኩም። እባክዎ በ WhatsApp ያግኙን፦ https://wa.me/251911244344';
   try {
-    const text = await callBini(ASSIST_SYS, [...hist, { role: 'user', content: msg }], 700);
+    const ctx = await knowledge.contextFor(msg).catch(() => '');
+    const text = await callBini(ASSIST_SYS + ASSIST_FACTS + (ctx ? '\n\n' + ctx : ''), [...hist, { role: 'user', content: msg }], 700);
     return reply.send({ reply: text || FALLBACK });
   } catch (e) {
     req.log && req.log.warn && req.log.warn('assistant err ' + e);
