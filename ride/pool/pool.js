@@ -11,19 +11,35 @@ const { ladder, rowFor } = require('./ladder');
 const C = require('./corridors');
 
 const WAIT_S = 8 * 60;           // "wait to pay less" window
+const DRIVER_WAIT_S = 15 * 60;   // a driver filling a car at a station waits longer than a rider would
+const NOSHOW_STRIKES = 2;        // from the 2nd no-show in 30 days a rider can only "Go now" (no held seats)
+const NOSHOW_WINDOW_MS = 30 * 86400000;
 const QUOTE_TTL_MS = 30 * 60000;  // car-fare cache per pool spec
 const NEAR_M = 2500;              // "near me": pools whose boarding point is within this radius
 const JOIN_MAX_M = 3000;          // a custom group can be joined only from near its start
 const OPEN = ['filling', 'dispatching', 'assigned', 'arriving', 'arrived', 'ontrip'];
 
-function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS }) {
+function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS, dstate }) {
   const clock = now || Date.now;
   const wait = (waitS == null ? WAIT_S : waitS);
   const quotes = new Map(); // spec key -> { at, q }
 
+  // The no-show rule. A rider who let the car leave without them twice this month may still ride,
+  // but only by "Go now": they cannot hold a seat that others wait for.
+  async function strikes(phone) {
+    if (!prisma.rider || !prisma.rider.findUnique) return 0;
+    const r = await prisma.rider.findUnique({ where: { phone } }).catch(() => null);
+    if (!r || !r.noShows || !r.lastNoShowAt) return 0;
+    return (clock() - new Date(r.lastNoShowAt).getTime() < NOSHOW_WINDOW_MS) ? r.noShows : 0;
+  }
+  async function mayHold(phone, mode) {
+    if (mode === 'now') return null;
+    return (await strikes(phone)) >= NOSHOW_STRIKES ? { ok: false, error: 'go_now_only', strikes: await strikes(phone) } : null;
+  }
+
   // What a pool runs on: a corridor (stops, both ends fixed) or a custom start -> destination.
   function specOf(pool) {
-    if (pool.kind === 'custom') {
+    if (pool.kind === 'custom' || pool.kind === 'driver') {
       const from = { id: 'origin', label: pool.pickup.label, labelAm: pool.pickup.labelAm || pool.pickup.label, lat: pool.pickup.lat, lng: pool.pickup.lng };
       const to = { id: 'dest', label: pool.dropoff.label, labelAm: pool.dropoff.labelAm || pool.dropoff.label, lat: pool.dropoff.lat, lng: pool.dropoff.lng };
       return { key: 'custom:' + pool.id, kind: 'custom', tier: pool.tier, from, to, stops: [from, to], name: from.label + ' → ' + to.label, nameAm: from.labelAm + ' → ' + to.labelAm };
@@ -85,7 +101,8 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     for (const p of pools) {
       const spec = specOf(p); if (!spec) continue;
       const seats = await heldSeats(p.id);
-      if (!seats.length || seats.length >= p.seats) continue;
+      // an empty car is offered only when its driver is already there waiting
+      if ((!seats.length && !p.driverId) || seats.length >= p.seats) continue;
       const q = await quoteFor(spec);
       const board = spec.kind === 'custom' ? { stop: spec.from, distM: Math.round(C.haversineM({ lat, lng }, spec.from)) } : C.nearestStop(spec, lat, lng);
       if (!board || board.distM > R) continue;
@@ -142,6 +159,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     if (!name || !phone) return { ok: false, error: 'name_and_phone_required' };
     const mine = await mySeat(phone);
     if (mine) return { ok: true, duplicate: true, ...(await view(mine.poolId, phone)) };
+    const held = await mayHold(phone, mode); if (held) return held;
     const q = await corridorQuote(c);
     const ms = clock();
     let pool = await openPoolFor(c.key);
@@ -160,6 +178,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     if (C.haversineM(pickup, dropoff) < 400) return { ok: false, error: 'too_close' };
     const mine = await mySeat(phone);
     if (mine) return { ok: true, duplicate: true, ...(await view(mine.poolId, phone)) };
+    const held = await mayHold(phone, mode); if (held) return held;
     const s = await settings.get();
     const tier = C.TIER, seats = (s.tiers[tier] && s.tiers[tier].seats) || 4;
     const ms = clock();
@@ -179,6 +198,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     const mine = await mySeat(phone);
     if (mine) return { ok: true, duplicate: true, ...(await view(mine.poolId, phone)) };
     if (pool.womenOnly && female !== true) return { ok: false, error: 'women_only' };
+    const held = await mayHold(phone, mode); if (held) return held;
     if (pool.status !== 'filling' || new Date(pool.dispatchAt).getTime() <= clock()) return { ok: false, error: 'car_already_leaving' };
     if ((await heldSeats(pool.id)).length >= pool.seats) return { ok: false, error: 'car_full' };
     let sid = 'origin';
@@ -192,7 +212,61 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     return addSeat(pool, spec, { stopId: sid, mode, name, phone, telegramId, paymentMethod });
   }
 
-  // Turns a full/expired pool into one Ride and hands it to the auction. DB-level mutex on status.
+  // ---- driver-opened cars: a driver at a station fills a car like a minibus, at the fixed seat price ----
+  async function openByDriver(driver, { pickup, dropoff, womenOnly }) {
+    if (!driver || driver.status !== 'approved') return { ok: false, error: 'not_approved' };
+    if (driver.onRideId) return { ok: false, error: 'finish_your_ride_first' };
+    if (!pickup || !dropoff) return { ok: false, error: 'pickup_and_dropoff_required' };
+    if (C.haversineM(pickup, dropoff) < 400) return { ok: false, error: 'too_close' };
+    const open = await prisma.pool.findFirst({ where: { driverId: driver.id, status: 'filling' } });
+    if (open) return { ok: true, duplicate: true, ...(await driverView(open.id)) };
+    const s = await settings.get();
+    const tier = (s.tiers[driver.tier] ? driver.tier : C.TIER), seats = (s.tiers[tier] && s.tiers[tier].seats) || 4;
+    const ms = clock();
+    const pool = await prisma.pool.create({ data: { kind: 'driver', corridorKey: 'custom', tier, seats, status: 'filling', driverId: driver.id, womenOnly: !!womenOnly,
+      pickup: { lat: pickup.lat, lng: pickup.lng, label: pickup.label }, dropoff: { lat: dropoff.lat, lng: dropoff.lng, label: dropoff.label },
+      openedAt: new Date(ms), dispatchAt: new Date(ms + DRIVER_WAIT_S * 1000) } });
+    return { ok: true, ...(await driverView(pool.id)) };
+  }
+  // What the driver's screen shows while the car fills.
+  async function driverView(poolId) {
+    const pool = await prisma.pool.findUnique({ where: { id: poolId } });
+    if (!pool) return { pool: null };
+    const spec = specOf(pool), q = await quoteFor(spec), seats = await heldSeats(pool.id);
+    const n = seats.length, row = rowFor(q.ladder, Math.max(1, n));
+    return { pool: { id: pool.id, status: pool.status, name: spec.name, nameAm: spec.nameAm, from: spec.from, to: spec.to, seats: pool.seats, filled: n, womenOnly: !!pool.womenOnly,
+      leavesInS: pool.status === 'filling' ? Math.max(0, Math.round((new Date(pool.dispatchAt).getTime() - clock()) / 1000)) : 0,
+      seatFareEtb: pool.seatFareEtb || row.seatEtb, driverTakeEtb: n ? row.driverTakeEtb : 0, ladder: q.ladder.rows, rideId: pool.rideId,
+      riders: seats.map(s => ({ id: s.id, name: String(s.riderName || '').split(' ')[0], phone: s.riderPhone, status: s.status })) } };
+  }
+  async function driverOpenPool(driverId) {
+    if (!prisma.pool) return null;
+    const p = await prisma.pool.findFirst({ where: { driverId, status: 'filling' } });
+    return p ? (await driverView(p.id)).pool : null;
+  }
+  // "Leave now": the driver goes with whoever is in the car (at least one rider).
+  async function driverGo(poolId, driverId) {
+    const pool = await prisma.pool.findUnique({ where: { id: poolId } });
+    if (!pool || pool.driverId !== driverId) return { ok: false, error: 'not_your_pool' };
+    if (pool.status !== 'filling') return { ok: false, error: 'car_already_leaving' };
+    if (!(await heldSeats(poolId)).length) return { ok: false, error: 'no_riders_yet' };
+    await prisma.pool.update({ where: { id: poolId }, data: { dispatchAt: new Date(clock()) } });
+    const ride = await dispatchPool(poolId);
+    return ride ? { ok: true, rideId: ride.id } : { ok: false, error: 'car_already_leaving' };
+  }
+  // Close an unfilled car: riders already in it are told, the pool is cancelled.
+  async function driverClose(poolId, driverId) {
+    const pool = await prisma.pool.findUnique({ where: { id: poolId } });
+    if (!pool || pool.driverId !== driverId) return { ok: false, error: 'not_your_pool' };
+    if (pool.status !== 'filling') return { ok: false, error: 'car_already_leaving' };
+    await notifySeats(poolId, 'cancelled').catch(() => {});
+    await prisma.poolSeat.updateMany({ where: { poolId, status: 'held' }, data: { status: 'cancelled' } });
+    await prisma.pool.updateMany({ where: { id: poolId, status: 'filling' }, data: { status: 'cancelled' } });
+    return { ok: true };
+  }
+
+  // Turns a full/expired pool into one Ride: a driver-opened car goes straight to its driver, any other
+  // car goes to the auction. DB-level mutex on status.
   async function dispatchPool(poolId) {
     const won = await prisma.pool.updateMany({ where: { id: poolId, status: 'filling' }, data: { status: 'dispatching' } });
     if (won.count === 0) return null;
@@ -207,18 +281,24 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     const pickup = spec.stops[firstIdx], dropoff = spec.to;
     const label = s => s.labelAm && s.labelAm !== s.label ? s.label + ' · ' + s.labelAm : s.label;
     const lead = seats[0];
+    // The driver who opened the car takes it, if they are still free; otherwise the auction finds one.
+    let driverId = null;
+    if (pool.driverId && dstate) { if (await dstate.claim(prisma, pool.driverId, 'pool:' + poolId)) driverId = pool.driverId; }
+    const at = new Date(clock());
     const ride = await prisma.ride.create({ data: {
-      riderId: lead.riderId, tier: spec.tier,
+      riderId: lead.riderId, tier: spec.tier, driverId,
       pickup: { lat: pickup.lat, lng: pickup.lng, label: 'ጋራ · Pool · ' + label(pickup) },
       dropoff: { lat: dropoff.lat, lng: dropoff.lng, label: label(dropoff) },
       distanceM: q.distanceM, durationS: q.durationS, estimate: q.estimate,
-      fareEtb: row.driverTotalEtb, driverTakeEtb: row.driverTakeEtb, paymentMethod: 'cash', status: 'dispatching',
+      fareEtb: row.driverTotalEtb, driverTakeEtb: row.driverTakeEtb, paymentMethod: 'cash',
+      status: driverId ? 'arrived' : 'dispatching', assignedAt: driverId ? at : null, arrivedAt: driverId ? at : null, driverAcceptedAt: driverId ? at : null,
       riderName: 'Pool · ' + seats.length + ' riders · ' + lead.riderName, riderPhone: lead.riderPhone } });
-    await prisma.pool.update({ where: { id: poolId }, data: { rideId: ride.id, seatFareEtb: row.seatEtb, dispatchedAt: new Date(clock()) } });
+    if (driverId) await prisma.driver.updateMany({ where: { id: driverId }, data: { onRideId: ride.id } }); // swap the placeholder claim for the real ride id
+    await prisma.pool.update({ where: { id: poolId }, data: { rideId: ride.id, seatFareEtb: row.seatEtb, dispatchedAt: at } });
     await prisma.poolSeat.updateMany({ where: { poolId, status: { in: ['held', 'boarded'] } }, data: { fareEtb: row.seatEtb } });
-    if (dispatch) dispatch.start(ride.id).catch(e => console.error('[pool] dispatch.start failed for ride ' + ride.id + ': ' + e.message));
-    notifySeats(poolId, 'dispatched').catch(() => {});
-    console.log('[pool] ' + poolId + ' -> ride ' + ride.id + ' · ' + seats.length + ' seat(s) · ' + row.seatEtb + ' ETB each');
+    if (!driverId && dispatch) dispatch.start(ride.id).catch(e => console.error('[pool] dispatch.start failed for ride ' + ride.id + ': ' + e.message));
+    notifySeats(poolId, driverId ? 'assigned' : 'dispatched').catch(() => {});
+    console.log('[pool] ' + poolId + ' -> ride ' + ride.id + ' · ' + seats.length + ' seat(s) · ' + row.seatEtb + ' ETB each' + (driverId ? ' · driver ' + driverId + ' (station car)' : ''));
     return ride;
   }
 
@@ -290,8 +370,14 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     if (!pool) return { ok: false, error: 'not_a_pool' };
     const ride = await prisma.ride.findUnique({ where: { id: rideId } });
     if (!ride || ride.driverId !== driverId) return { ok: false, error: 'not_your_ride' };
+    const before = await prisma.poolSeat.findFirst({ where: { id: seatId, poolId: pool.id } });
     const n = await prisma.poolSeat.updateMany({ where: { id: seatId, poolId: pool.id, status: { in: ['held', 'boarded', 'noshow'] } }, data: { status } });
     if (!n.count) return { ok: false, error: 'not_found' };
+    // The no-show counter follows the tick: marking counts one, undoing gives it back.
+    if (before && prisma.rider && prisma.rider.updateMany) {
+      if (status === 'noshow' && before.status !== 'noshow') await prisma.rider.updateMany({ where: { phone: before.riderPhone }, data: { noShows: { increment: 1 }, lastNoShowAt: new Date(clock()) } }).catch(() => {});
+      else if (before.status === 'noshow' && status !== 'noshow') await prisma.rider.updateMany({ where: { phone: before.riderPhone, noShows: { gt: 0 } }, data: { noShows: { decrement: 1 } } }).catch(() => {});
+    }
     return { ok: true, pool: await seatsForRide(rideId) };
   }
 
@@ -345,7 +431,8 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     return pool ? notifySeats(pool.id, event) : 0;
   }
 
-  return { list, near, pub, join, create, joinById, dispatchPool, sweep, view, leave, board, mine, seatsForRide, phoneMayTrack, notifySeats, notifyRideEvent, corridorQuote, specOf, WAIT_S: wait };
+  return { list, near, pub, join, create, joinById, dispatchPool, sweep, view, leave, board, mine, seatsForRide, phoneMayTrack, notifySeats, notifyRideEvent, corridorQuote, specOf,
+    openByDriver, driverView, driverOpenPool, driverGo, driverClose, strikes, WAIT_S: wait, DRIVER_WAIT_S };
 }
 
-module.exports = { makePool, WAIT_S, OPEN, NEAR_M };
+module.exports = { makePool, WAIT_S, DRIVER_WAIT_S, NOSHOW_STRIKES, OPEN, NEAR_M };

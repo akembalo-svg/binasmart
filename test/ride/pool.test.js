@@ -69,6 +69,7 @@ function world() {
     poolSeat: table(db.seats, d => ({ id: id('s'), fareEtb: null, ...d })),
     rider: table(db.riders, d => ({ id: id('rd'), telegramId: null, ...d })),
     ride: table(db.rides, d => ({ id: id('r'), driverId: null, concierge: false, paymentStatus: 'unpaid', requestedAt: new Date(clock.t), ...d })),
+    driver: { updateMany: async ({ where, data }) => { db.driverUpdates = (db.driverUpdates || []).concat([[where, data]]); return { count: 1 }; } },
   };
   const started = [], sent = [];
   const settings = { get: async () => DEFAULTS };
@@ -239,4 +240,65 @@ test('share card is public and phone-free; women-only groups refuse riders who d
   await w.pool.leave(a.pool.id, '+25191100001'); await w.pool.leave(a.pool.id, '+25191100003');
   assert.equal((await w.pool.pub(a.pool.id)).open, false, 'a cancelled car is not open');
   assert.equal(await w.pool.pub('nope'), null);
+});
+
+test('driver-opened car: offered under near me while empty, riders join, the driver leaves now and gets the ride without an auction', async () => {
+  const w = world();
+  const claims = [];
+  const dstate = { claim: async (prisma, driverId, rideId) => { claims.push([driverId, rideId]); return driverId !== 'busy'; } };
+  const pool = makePool({ prisma: w.prisma, geo: { route: async () => ({ distanceM: 6200, durationS: 900, geometry: [], estimate: false }) }, settings: { get: async () => DEFAULTS }, dispatch: { start: async id => { w.started.push(id); } }, api: null, now: () => w.clock.t, dstate });
+  const drv = { id: 'dA', name: 'Abel Kebede', status: 'approved', online: true, tier: 'economy', onRideId: null };
+  const at = { lat: 9.0206, lng: 38.8010, label: 'Megenagna · Abel waiting' }, to = { lat: 8.9975, lng: 38.7876, label: 'Bole Medhanialem' };
+  const o = await pool.openByDriver(drv, { pickup: at, dropoff: to });
+  assert.equal(o.ok, true); assert.equal(o.pool.filled, 0); assert.equal(o.pool.leavesInS, 900); assert.equal(o.pool.seats, 4);
+  assert.equal((await pool.openByDriver(drv, { pickup: at, dropoff: to })).duplicate, true, 'one open car per driver');
+  const n = await pool.near(9.0210, 38.8005);
+  assert.equal(n.groups.length, 1); assert.equal(n.groups[0].driverWaiting, true); assert.equal(n.groups[0].filled, 0, 'an empty car is listed only because its driver is there');
+  assert.equal((await pool.driverGo(o.pool.id, 'dA')).error, 'no_riders_yet');
+  await pool.joinById(o.pool.id, { mode: 'wait', name: 'Sara', phone: '+25191100001', lat: 9.0210, lng: 38.8005 });
+  await pool.joinById(o.pool.id, { mode: 'wait', name: 'Beti', phone: '+25191100002', lat: 9.0210, lng: 38.8005 });
+  assert.equal((await pool.driverGo(o.pool.id, 'dZ')).error, 'not_your_pool');
+  const go = await pool.driverGo(o.pool.id, 'dA');
+  assert.equal(go.ok, true);
+  const ride = w.db.rides[0];
+  assert.equal(ride.driverId, 'dA'); assert.equal(ride.status, 'arrived', 'the driver is already at the kerb');
+  assert.equal(w.started.length, 0, 'no auction for a station car');
+  assert.deepEqual(claims[0], ['dA', 'pool:' + o.pool.id]);
+  assert.deepEqual(w.db.driverUpdates[0], [{ id: 'dA' }, { onRideId: ride.id }], 'the placeholder claim becomes the real ride id');
+  const v = await pool.view(o.pool.id, '+25191100001');
+  assert.equal(v.ride.status, 'arrived'); assert.equal(v.seat.fareEtb, v.pool.ladder[1].seatEtb);
+  // a driver already busy elsewhere: the car falls back to the auction
+  const drv2 = { id: 'busy', name: 'Busy', status: 'approved', online: true, tier: 'comfort', onRideId: null };
+  const o2 = await pool.openByDriver(drv2, { pickup: at, dropoff: to });
+  await pool.joinById(o2.pool.id, { mode: 'wait', name: 'Chala', phone: '+25191100003', lat: 9.0210, lng: 38.8005 });
+  await pool.driverGo(o2.pool.id, 'busy');
+  assert.equal(w.db.rides[1].driverId, null); assert.equal(w.started.length, 1);
+  // closing an unfilled car cancels it
+  const o3 = await pool.openByDriver({ id: 'dC', name: 'C', status: 'approved', online: true, tier: 'economy', onRideId: null }, { pickup: at, dropoff: to });
+  assert.equal((await pool.driverClose(o3.pool.id, 'dC')).ok, true);
+  assert.equal((await pool.near(9.0210, 38.8005)).groups.length, 0);
+});
+
+test('no-show rule: after two no-shows in 30 days a rider can only Go now', async () => {
+  const w = world();
+  // give the mock rider table the counters the real one has
+  w.prisma.rider.updateMany = async ({ where, data }) => { const r = w.db.riders.find(x => x.phone === where.phone); if (!r) return { count: 0 }; if (where.noShows && where.noShows.gt != null && !((r.noShows || 0) > where.noShows.gt)) return { count: 0 }; if (data.noShows && data.noShows.increment) r.noShows = (r.noShows || 0) + 1; if (data.noShows && data.noShows.decrement) r.noShows = (r.noShows || 0) - 1; if (data.lastNoShowAt) r.lastNoShowAt = data.lastNoShowAt; return { count: 1 }; };
+  await w.pool.join(rider('Sara', 1)); await w.pool.join({ ...rider('Beti', 2), mode: 'now' });
+  const ride = w.db.rides[0]; ride.driverId = 'dA'; ride.status = 'arrived';
+  const info = await w.pool.seatsForRide(ride.id);
+  const sara = info.seats.find(s => s.name === 'Sara');
+  await w.pool.board(ride.id, 'dA', sara.id, 'noshow');
+  assert.equal(await w.pool.strikes('+25191100001'), 1);
+  await w.pool.board(ride.id, 'dA', sara.id, 'held');   // driver undoes it
+  assert.equal(await w.pool.strikes('+25191100001'), 0);
+  await w.pool.board(ride.id, 'dA', sara.id, 'noshow');
+  await w.pool.board(ride.id, 'dA', sara.id, 'boarded'); // and back
+  await w.pool.board(ride.id, 'dA', sara.id, 'noshow');
+  w.db.riders.find(r => r.phone === '+25191100001').noShows = 2;
+  const blocked = await w.pool.join(rider('Sara', 1));
+  assert.equal(blocked.error, 'go_now_only');
+  const allowed = await w.pool.join({ ...rider('Sara', 1), mode: 'now' });
+  assert.equal(allowed.ok, true);
+  w.clock.t += 31 * 86400000;
+  assert.equal(await w.pool.strikes('+25191100001'), 0, 'strikes expire after 30 days');
 });

@@ -228,7 +228,7 @@ html.next .shrow .btn{flex:1;padding:9px 6px;font-size:12.5px;border-radius:12px
 html.next .wo{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;margin:4px 0 8px;padding:9px 12px;border-radius:14px;background:rgba(236,72,153,.08);border:1px solid rgba(236,72,153,.3)}
 html.next .wo input{width:18px;height:18px;accent-color:#db2777}
 html.next .wo small{font-weight:600;color:var(--mut);font-size:11px}
-html.next .grp.wo{border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.06)}
+html.next .grp.women{border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.06)}
 html.next .grp.inv{border:1.5px solid rgba(245,158,11,.7);background:rgba(245,158,11,.08)}
 html.next .gtag{font-size:11px;font-weight:800;color:#b45309;margin-bottom:4px}
 html.next.dark .wo{background:rgba(236,72,153,.14);color:#fff}

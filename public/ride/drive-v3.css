@@ -107,3 +107,21 @@ html.next .seatrow .seatbtn{grid-column:2;grid-row:1/3;padding:8px 10px;font-siz
 html.next .seatrow .seatno{grid-column:3;grid-row:1/3;font-size:11px;color:rgba(255,255,255,.55);background:none;border:0}
 html.next .seatrow.on .seatbtn{background:rgba(0,200,150,.38);border-color:rgba(0,200,150,.6)}
 html.next .seatrow.no b{text-decoration:line-through;color:rgba(255,255,255,.5)}
+
+/* v4 (8 Sep 2026): fill a car at a station */
+html.next .fillbox{margin:6px 0 4px}
+html.next .fillpick{margin-top:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:10px}
+html.next .fp-h{font-weight:800;color:#fff;margin-bottom:8px;font-size:14px}
+html.next .fp-chips{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+html.next .fp-chip{padding:9px 8px;font-size:13px;line-height:1.1;border-radius:12px;flex:none}
+html.next .fp-chip small{display:block;font-size:10px;color:rgba(255,255,255,.6);font-weight:600}
+html.next .fp-q{width:100%;margin-top:8px;padding:11px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:14px}
+html.next .fp-res{list-style:none;margin:6px 0 0;padding:0}
+html.next .fp-res li{padding:8px 4px;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer}
+html.next .fp-res li b{display:block;color:#fff;font-size:13.5px}html.next .fp-res li small{color:rgba(255,255,255,.55);font-size:11px}
+html.next .fp-wo{display:flex;align-items:center;gap:8px;margin:10px 0 4px;font-weight:800;color:#fff;font-size:13px}
+html.next .fp-wo input{width:18px;height:18px;accent-color:#ec4899}
+html.next .fl-left{margin-left:auto;font-weight:800;color:#14D8B4;font-variant-numeric:tabular-nums}
+html.next #filling .ihead b{font-size:19px}
+html.next #filling .ihead span{color:#14D8B4;font-weight:800}
+html.next #flRiders{margin:8px 0}

@@ -37,7 +37,7 @@ module.exports = function registerRide(fastify, deps) {
       return n.count ? deps.prisma.shop.findUnique({ where: { id: shopId }, select: { id: true, name: true, nameAm: true } }) : null; },
     assistantUrl: 'http://127.0.0.1:' + (process.env.PORT || 4210) + '/api/assistant' });
   // BinaPool shares the fare engine, the auction and the driver app; riderNotify fans ride events out to every seat.
-  const pool = makePool({ prisma: deps.prisma, geo, settings, dispatch, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL });
+  const pool = makePool({ prisma: deps.prisma, geo, settings, dispatch, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL, dstate: require('./driverState') });
   const riderNotify = makeRiderNotify({ prisma: deps.prisma, api: riderApi, baseUrl: deps.BASE_URL, pool });
   // offers needs dispatch (to escalate and to cancel its timer) and dispatch needs offers (to run the
   // auction), so dispatch is built first and told about the auction afterwards.

@@ -17,7 +17,7 @@ if(/[?&]v=classic\b/.test(q)){on=false;try{localStorage.setItem('bina_drive_next
 else if(/[?&]v=next\b/.test(q)){try{localStorage.setItem('bina_drive_next','1');}catch(e){}}
 else if(ls==='0'){on=false;}
 if(on){window.__rideNext=true;document.documentElement.className+=' next';
-['/static/fonts/fonts.css?v=1','/static/ride/drive-v3.css?v=3'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
+['/static/fonts/fonts.css?v=1','/static/ride/drive-v3.css?v=4'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
 </script>
 </head>
 <body class="drv">
@@ -97,7 +97,32 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
   <div class="ihead"><b id="iname">Driver</b><span id="ivehicle">—</span></div>
   <p class="istate" id="istate">You are offline.</p>
   <button id="igo" class="dbtn go big">GO ONLINE · ስራ ጀምር</button>
+  <div id="fillbox" class="fillbox hidden">
+    <button id="fillOpen" class="dbtn ghost big">🚏 መኪና እዚህ ሙላ · Fill a car here</button>
+    <div id="fillpick" class="fillpick hidden">
+      <div class="fp-h">ወዴት? · Where is this car going?</div>
+      <div class="fp-chips" id="fpChips"></div>
+      <input id="fpQ" class="fp-q" placeholder="ወይም ይጻፉ… · or type a place" autocomplete="off">
+      <ul id="fpRes" class="fp-res"></ul>
+      <label class="fp-wo"><input type="checkbox" id="fpWomen"> 👩 ሴቶች ብቻ · Women only</label>
+      <button id="fpCancel" class="tlink">ተመለስ · Back</button>
+    </div>
+  </div>
   <p class="ifoot">0% commission during launch · Keep this screen open to receive offers.<br>በመክፈቻ ወቅት ኮሚሽን የለም። ጥሪ ለመቀበል ይህን ገጽ ክፈት ያድርጉ።</p>
+</section>
+
+<!-- Filling a car at a station (BinaPool driver-opened car) -->
+<section id="filling" class="dcard hidden">
+  <div class="tgrip"></div>
+  <div class="thead"><span class="tstage">🚏 መኪና እየሞላ ነው · Filling</span><span class="fl-left" id="flLeft">15:00</span></div>
+  <div class="ihead"><b id="flTo">—</b><span id="flSeats">0/4</span></div>
+  <p class="istate" id="flState">ተሳፋሪዎች በአቅራቢያዎ ያዩዎታል · Riders nearby can see your car and join.</p>
+  <div id="flRiders" class="tbooked"></div>
+  <div class="ofare"><b id="flEarn">—</b><small id="flPrice">—</small></div>
+  <div class="tacts">
+    <button id="flClose" class="dbtn ghost">ዝጋ · Close</button>
+    <button id="flGo" class="dbtn go">ተነሳ · Leave now</button>
+  </div>
 </section>
 
 <!-- Blocked states -->
@@ -116,6 +141,6 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
 <script src="/static/ride/map.js?v=8"></script>
 <script src="/static/ride/drivedemo.js?v=2"></script>
 <script src="/static/ride/drivenav.js?v=2"></script>
-<script src="/static/ride/drive.js?v=14"></script>
+<script src="/static/ride/drive.js?v=15"></script>
 </body>
 </html>

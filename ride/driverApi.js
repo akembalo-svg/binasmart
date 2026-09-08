@@ -99,7 +99,42 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
   async function session(req, reply) {
     const drv = await auth(req, reply, { allowPending: true });
     if (!drv) return;
-    return { ok: true, driver: pubDriver(drv), awayReason: awayReason(drv), job: await currentJob(drv), offers: await openOffers(drv) };
+    return { ok: true, driver: pubDriver(drv), awayReason: awayReason(drv), job: await currentJob(drv), offers: await openOffers(drv), filling: await fillingPool(drv) };
+  }
+  // The car this driver is filling at a station, if any (BinaPool driver-opened car).
+  async function fillingPool(drv) {
+    if (!pool || !pool.driverOpenPool) return null;
+    try { return await pool.driverOpenPool(drv.id); } catch (e) { return null; }
+  }
+  // POST /api/drive/pool/open { lat, lng, label, to: { lat, lng, label }, womenOnly }
+  async function poolOpen(req, reply) {
+    const drv = await auth(req, reply);
+    if (!drv) return;
+    if (!pool || !pool.openByDriver) return reply.code(404).send({ ok: false, error: 'pool_unavailable' });
+    const b = req.body || {};
+    const pt = p => { if (!p || typeof p !== 'object') return null; const lat = num(p.lat, 8.5, 9.5), lng = num(p.lng, 38.4, 39.2); if (lat == null || lng == null) return null; return { lat, lng, label: String(p.label || '').slice(0, 120) || (lat.toFixed(5) + ', ' + lng.toFixed(5)) }; };
+    const pickup = pt({ lat: b.lat, lng: b.lng, label: b.label || (drv.name.split(' ')[0] + ' · ሹፌር · driver waiting here') }), to = pt(b.to);
+    if (!pickup || !to) return reply.code(400).send({ ok: false, error: 'your position and a destination inside Addis are required' });
+    if (!drv.online) return reply.code(409).send({ ok: false, error: 'go_online_first' });
+    const r = await pool.openByDriver(drv, { pickup, dropoff: to, womenOnly: b.womenOnly === true });
+    if (!r.ok) return reply.code(409).send(r);
+    return r;
+  }
+  // POST /api/drive/pool/:poolId/go | /close
+  async function poolGo(req, reply) {
+    const drv = await auth(req, reply);
+    if (!drv) return;
+    const r = await pool.driverGo(String(req.params.poolId), drv.id);
+    if (!r.ok) return reply.code(409).send(r);
+    const fresh = await prisma.driver.findUnique({ where: { id: drv.id } });
+    return { ok: true, job: await currentJob(fresh || drv), driver: pubDriver(fresh || drv) };
+  }
+  async function poolClose(req, reply) {
+    const drv = await auth(req, reply);
+    if (!drv) return;
+    const r = await pool.driverClose(String(req.params.poolId), drv.id);
+    if (!r.ok) return reply.code(409).send(r);
+    return { ok: true };
   }
 
   // POST /api/drive/online { online: true|false }
@@ -130,7 +165,7 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     const fresh = await prisma.driver.findUnique({ where: { id: drv.id } });
     return { ok: true, fix: fix.ok ? 'stored' : fix.error, driver: pubDriver(fresh || drv),
       awayReason: awayReason(fresh || drv),
-      job: await currentJob(fresh || drv), offers: await openOffers(drv), serverTime: clock() };
+      job: await currentJob(fresh || drv), offers: await openOffers(drv), filling: await fillingPool(fresh || drv), serverTime: clock() };
   }
 
   // POST /api/drive/offer/:id/accept
@@ -232,7 +267,7 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     return { ok: true, live };
   }
 
-  return { session, online, ping, accept, decline, status, track, route, _auth: auth, _pubDriver: pubDriver, addisDay };
+  return { session, online, ping, accept, decline, status, track, route, poolOpen, poolGo, poolClose, _auth: auth, _pubDriver: pubDriver, addisDay };
 }
 
 module.exports = { makeDriverApi, DRIVER_STATES, num };

@@ -48,7 +48,7 @@
     if (ok) setTimeout(function () { b.classList.add('hidden'); }, 2600);
   }
   function show(which) {
-    ['offer', 'trip', 'idle', 'gate'].forEach(function (id) { $(id).classList.toggle('hidden', id !== which); });
+    ['offer', 'trip', 'idle', 'gate', 'filling'].forEach(function (id) { $(id).classList.toggle('hidden', id !== which); });
   }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function km(m) { return m == null ? '—' : (m < 950 ? Math.round(m / 10) * 10 + ' m' : (Math.round(m / 100) / 10) + ' km'); }
@@ -487,8 +487,64 @@
                 : '⚪ You are offline.');
     $('igo').textContent = on ? 'GO OFFLINE · አቁም' : 'GO ONLINE · ስራ ጀምር';
     $('igo').className = 'dbtn big ' + (on ? 'ghost' : 'go');
+    $('fillbox').classList.toggle('hidden', !on);
     show('idle');
   }
+
+  // ---------- BinaPool: fill a car at a station ----------
+  var FP_TO = [
+    { am: 'ቦሌ መድኃኒዓለም', en: 'Bole Medhanialem', lat: 8.9975, lng: 38.7876 }, { am: 'ካዛንችስ', en: 'Kazanchis', lat: 9.0176, lng: 38.7635 },
+    { am: 'መገናኛ', en: 'Megenagna', lat: 9.0206, lng: 38.8010 }, { am: 'ፒያሳ', en: 'Piassa', lat: 9.0349, lng: 38.7514 },
+    { am: 'ሜክሲኮ', en: 'Mexico', lat: 9.0107, lng: 38.7440 }, { am: 'ሲኤምሲ', en: 'CMC', lat: 9.0186, lng: 38.8461 },
+    { am: 'አየር ማረፊያ', en: 'Bole Airport', lat: 8.9779, lng: 38.7993 }, { am: 'ጀሞ', en: 'Jemo', lat: 8.9600, lng: 38.7150 } ];
+  function fpOpen(on) { $('fillpick').classList.toggle('hidden', !on); $('fillOpen').classList.toggle('hidden', on); if (on) { $('fpQ').value = ''; $('fpRes').innerHTML = ''; } }
+  $('fpChips').innerHTML = FP_TO.map(function (t, i) { return '<button type="button" class="dbtn ghost fp-chip" data-i="' + i + '">' + t.am + '<small>' + t.en + '</small></button>'; }).join('');
+  $('fillOpen').addEventListener('click', function () { if (!st.pos) return banner('⚠️ ቦታዎን እየፈለግን ነው · Waiting for your GPS position — try again in a moment.'); fpOpen(true); });
+  $('fpCancel').addEventListener('click', function () { fpOpen(false); });
+  $('fpChips').querySelectorAll('.fp-chip').forEach(function (b) { b.addEventListener('click', function () { var t = FP_TO[+b.dataset.i]; openCar({ lat: t.lat, lng: t.lng, label: t.en + ' · ' + t.am }, b); }); });
+  var fpTimer;
+  $('fpQ').addEventListener('input', function () {
+    clearTimeout(fpTimer); var q = $('fpQ').value.trim(); if (q.length < 2) { $('fpRes').innerHTML = ''; return; }
+    fpTimer = setTimeout(function () {
+      fetch('/api/ride/search?q=' + encodeURIComponent(q) + (st.pos ? '&lat=' + st.pos.lat + '&lng=' + st.pos.lng : '')).then(function (r) { return r.json(); }).then(function (d) {
+        $('fpRes').innerHTML = (d.results || []).slice(0, 6).map(function (r, i) { return '<li data-i="' + i + '"><b>' + esc(r.label) + '</b><small>' + esc(r.sub || '') + '</small></li>'; }).join('') || '<li><small>ምንም አልተገኘም · nothing found</small></li>';
+        $('fpRes').querySelectorAll('li[data-i]').forEach(function (li) { li.addEventListener('click', function () { var r = d.results[+li.dataset.i]; openCar({ lat: r.lat, lng: r.lng, label: r.label }, li); }); });
+      }).catch(function () {});
+    }, 250);
+  });
+  function openCar(to, el) {
+    if (!st.pos) return banner('⚠️ ቦታዎን እየፈለግን ነው · Waiting for your GPS position.');
+    act(el, function () {
+      return post('/api/drive/pool/open', { lat: st.pos.lat, lng: st.pos.lng, to: to, womenOnly: $('fpWomen').checked }).then(function (j) {
+        if (!j.ok) { banner('⚠️ ' + ({ go_online_first: 'Go online first.', finish_your_ride_first: 'Finish your current trip first.', too_close: 'That destination is too close.' }[j.error] || j.error)); return; }
+        fpOpen(false); st.filling = j.pool; haptic('success'); render();
+      });
+    });
+  }
+  var flTimer;
+  function paintFilling() {
+    var p = st.filling; if (!p) return;
+    $('flTo').textContent = '→ ' + (p.to.labelAm && p.to.labelAm !== p.to.label ? p.to.labelAm + ' · ' : '') + p.to.label;
+    $('flSeats').textContent = p.filled + '/' + p.seats + (p.womenOnly ? ' · 👩' : '');
+    $('flState').textContent = p.filled ? p.filled + ' ተሳፋሪ በመኪናው · ' + p.filled + ' rider' + (p.filled > 1 ? 's' : '') + ' in the car — leave now, or wait for more.' : 'ተሳፋሪዎች በአቅራቢያዎ ያዩዎታል · Riders nearby see your car under "near you". Keep this screen open.';
+    var full = p.ladder[p.ladder.length - 1], cur = p.ladder[Math.max(0, p.filled - 1)];
+    $('flEarn').textContent = (p.filled ? cur.driverTakeEtb : full.driverTakeEtb) + ' ETB' + (p.filled ? '' : ' when full');
+    $('flPrice').textContent = 'ለተሳፋሪ · seat ' + (p.filled ? cur.seatEtb : full.seatEtb) + ' ETB · ' + p.ladder.map(function (r) { return r.n + ':' + r.driverTakeEtb; }).join(' · ');
+    $('flRiders').innerHTML = p.riders.length ? p.riders.map(function (r) { return '<div class="seatrow"><b>' + esc(r.name) + '</b><small>' + esc(r.phone) + '</small></div>'; }).join('') : '<div class="seatrow"><small>ገና ማንም አልገባም · nobody yet</small></div>';
+    $('flGo').disabled = !p.filled; $('flGo').textContent = p.filled ? 'ተነሳ · Leave now · ' + p.filled + ' rider' + (p.filled > 1 ? 's' : '') : 'ተነሳ · Leave now';
+    clearInterval(flTimer); var left = p.leavesInS;
+    var tick = function () { $('flLeft').textContent = Math.floor(left / 60) + ':' + ('0' + (left % 60)).slice(-2); if (left > 0) left--; };
+    tick(); flTimer = setInterval(tick, 1000);
+    show('filling');
+  }
+  $('flGo').addEventListener('click', function () {
+    var self = this, id = st.filling && st.filling.id; if (!id) return;
+    act(self, function () { return post('/api/drive/pool/' + id + '/go').then(function (j) { if (!j.ok) { banner('⚠️ ' + (j.error === 'no_riders_yet' ? 'Nobody has joined yet.' : j.error)); return; } st.filling = null; haptic('success'); absorb(j); }); });
+  });
+  $('flClose').addEventListener('click', function () {
+    var self = this, id = st.filling && st.filling.id; if (!id) return;
+    act(self, function () { return post('/api/drive/pool/' + id + '/close').then(function (j) { if (!j.ok) { banner('⚠️ ' + j.error); return; } st.filling = null; banner('ዝግ · Car closed.', true); render(); }); });
+  });
   function gate(title, body, ctaText, ctaHref) {
     $('gtitle').textContent = title;
     $('gbody').textContent = body;
@@ -501,6 +557,7 @@
     if (!st.driver) return;
     paintStats();
     if (st.job) return paintTrip();
+    if (st.filling) return paintFilling();
     if (st.offer) return paintOffer(st.offer);
     stopAlert(); stopFlow(); $('nav').classList.add('hidden');
     if (st.nav) { st.nav = false; document.body.classList.remove('navmode'); $('navhud').classList.add('hidden'); }
@@ -515,6 +572,7 @@
     if ('awayReason' in j) st.awayReason = j.awayReason;
     var wasJob = st.job && st.job.id, wasStatus = st.job && st.job.status;
     st.job = j.job || null;
+    if ('filling' in j) st.filling = j.filling || null;
     if (st.job && (st.job.id !== wasJob || st.job.status !== wasStatus)) st.routeFor = '';
     var next = (j.offers && j.offers.length) ? j.offers[0] : null;
     if (next && (!st.offer || st.offer.rideId !== next.rideId)) {

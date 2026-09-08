@@ -410,7 +410,7 @@
   }
   function groupCard(g, i, invited) {
     var dist = g.distM == null ? '' : (g.distM < 950 ? g.distM + ' m' : (g.distM / 1000).toFixed(1) + ' km') + ' ከእርስዎ · ';
-    return '<div class="grp' + (invited ? ' inv' : '') + (g.womenOnly ? ' wo' : '') + '" data-i="' + i + '">' + (invited ? '<div class="gtag">👋 ተጋብዘዋል · You were invited</div>' : '')
+    return '<div class="grp' + (invited ? ' inv' : '') + (g.womenOnly ? ' women' : '') + '" data-i="' + i + '">' + (invited ? '<div class="gtag">👋 ተጋብዘዋል · You were invited</div>' : '')
       + '<div class="gtop"><b>' + esc(g.nameAm) + '</b><span class="gseats">' + g.filled + '/' + g.seats + '</span></div>'
       + '<div class="gsub">' + (g.womenOnly ? '👩 ሴቶች ብቻ · women only · ' : '') + (g.driverWaiting ? '🚗 ሹፌር እየጠበቀ ነው · driver waiting · ' : '') + esc(g.riders.join(', ')) + ' · ' + (g.kind === 'custom' ? 'ከ ' + esc(g.board.label) : 'ማቆሚያ ' + esc(g.board.labelAm)) + ' · ' + dist + 'leaves in ' + fmtLeft(g.leavesInS) + '</div>'
       + '<div class="gact"><span class="gprice">' + g.seatIfJoinEtb + ' ETB<small>ከተቀላቀሉ · if you join · ' + g.seatIfFullEtb + ' when full</small></span><button type="button" class="cta gjoin">ተቀላቀል · Join</button></div></div>';
@@ -487,6 +487,7 @@
       if (!d.ok && d.error === 'car_full') { toast('መኪናው ሞልቷል · That car is full'); return loadNear(); }
       if (!d.ok && d.error === 'too_close') return toast('መድረሻው በጣም ቅርብ ነው · That destination is too close');
       if (!d.ok && d.error === 'women_only') return toast('ይህ ቡድን ለሴቶች ብቻ ነው · This group is women only');
+      if (!d.ok && d.error === 'go_now_only') return toast('ሁለት ጊዜ ሳይመጡ ቀርተዋል — አሁን "አሁን ሂድ" ብቻ · After two no-shows this month you can only Go now');
       S.invite = null;
       if (!d.ok) return toast(d.error || 'Could not join');
       if (d.phone) { ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME)); }

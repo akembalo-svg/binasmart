@@ -59,7 +59,7 @@ module.exports = function poolRoutes(fastify, { pool, riderBotToken, drive, limi
     return { name, phone, telegramId: tg ? tg.user.id : null, tg, mode: b.mode === 'now' ? 'now' : 'wait', paymentMethod: b.paymentMethod };
   }
   const point = p => { if (!p || typeof p !== 'object') return null; const lat = num(p.lat, 8.5, 9.5), lng = num(p.lng, 38.4, 39.2); if (lat == null || lng == null) return null; return { lat, lng, label: String(p.label || '').slice(0, 120) || (lat.toFixed(5) + ', ' + lng.toFixed(5)) }; };
-  const answer = (reply, r, w) => { if (!r.ok) return reply.code(r.error === 'not_found' ? 404 : (/leaving|full|far|women_only/.test(r.error) ? 409 : 400)).send(r); return { ...r, phone: w.tg ? w.phone : undefined }; };
+  const answer = (reply, r, w) => { if (!r.ok) return reply.code(r.error === 'not_found' ? 404 : (/leaving|full|far|women_only|go_now_only/.test(r.error) ? 409 : 400)).send(r); return { ...r, phone: w.tg ? w.phone : undefined }; };
 
   fastify.post('/api/pool/join', async (req, reply) => {
     const w = who(req, reply); if (!w) return;
@@ -106,8 +106,13 @@ module.exports = function poolRoutes(fastify, { pool, riderBotToken, drive, limi
     return { ok: true, ...(await pool.mine(String(tg.user.id))) };
   });
 
-  // Driver: tick a rider on / no-show. Same auth as the rest of /api/drive.
+  // Driver: open a car at a station, leave now, close; tick a rider on / no-show. Same auth as /api/drive.
   if (drive && drive._auth) {
+    if (drive.poolOpen) {
+      fastify.post('/api/drive/pool/open', drive.poolOpen);
+      fastify.post('/api/drive/pool/:poolId/go', drive.poolGo);
+      fastify.post('/api/drive/pool/:poolId/close', drive.poolClose);
+    }
     fastify.post('/api/drive/pool/:rideId/seat/:seatId', async (req, reply) => {
       const drv = await drive._auth(req, reply);
       if (!drv) return;
