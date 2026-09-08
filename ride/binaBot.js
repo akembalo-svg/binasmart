@@ -91,8 +91,9 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       const text = d && d.ok ? String(d.text || '').trim() : '';
       if (!text || /^\[unclear\]/i.test(text) || isNoise(text)) return api.sendMessage(chatId, 'ይቅርታ፣ ድምጹን መስማት አልቻልኩም። እባክዎ ይጻፉ ወይም እንደገና ይሞክሩ። · Sorry, I could not hear that. Please type it or try again.');
       const reply = await askBini(chatId, text.slice(0, 1200), msg.from);
-      if (!reply) return api.sendMessage(chatId, '🎤 «' + text.slice(0, 300) + '»\n\nቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ።');
-      return api.sendMessage(chatId, '🎤 «' + text.slice(0, 300) + '»\n\n' + forTelegram(reply), { reply_markup: replyMarkup(reply, text) });
+      // No transcript echo (Ibrahim, 9 Sep 2026): answer the voice note directly, like a typed message.
+      if (!reply) return api.sendMessage(chatId, 'ቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ።');
+      return api.sendMessage(chatId, forTelegram(reply), { reply_markup: replyMarkup(reply, text) });
     } catch (e) { console.error('[binaBot] voice: ' + e.message); return api.sendMessage(chatId, 'ይቅርታ፣ የድምጽ መልእክቱን ማንበብ አልቻልኩም። እባክዎ ይጻፉ። · Sorry, I could not read that voice note. Please type it.'); }
   }
 
