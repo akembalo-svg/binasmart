@@ -29,8 +29,18 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     return n.turns;
   }
 
+  // A station / channel answer should read like a player, not a link: drop the URL from the text (the button carries it).
+  function forMedia(text) {
+    const s = String(text || '');
+    if (!/\/watch\?open=(radio|tv|series|kids)\//.test(s)) return null;
+    return s.replace(/\[([^\]]+)\]\((?:https?:\/\/bina\.et)?\/watch\?open=[^)]+\)/g, '$1')
+      .replace(/(?:https?:\/\/bina\.et)?\/watch\?open=[a-z0-9\/_-]+[።.,]?/g, '')
+      .replace(/(ከታች ያለውን ሊንክ|ይህን ሊንክ|the link below|this link|linkii kana|liinkii kana)/gi, 'ከታች ያለውን ቁልፍ')
+      .replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim() + '\n\n👇';
+  }
   // Bini writes markdown links like [text](/ride); Telegram plain text needs full URLs.
   function forTelegram(text) {
+    const m = forMedia(text); if (m) return m;
     return String(text || '')
       .replace(/\*\*([^*]+)\*\*/g, '$1')
       .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '$1 — $2')
@@ -75,7 +85,8 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     const rows = [];
     const wantsRide = /ride|taxi|ታክሲ|ጉዞ|\/ride/i.test(r + ' ' + String(text));
     if (path && !/^\/ride\b/.test(path)) {
-      const label = /^\/watch/.test(path) ? '▶️ BinaWatch ክፈት · Open' : /^\/tenders/.test(path) ? '📋 ጨረታ · Open tender' : /^\/cinema/.test(path) ? '🎬 ሲኒማ · Open' : /^\/pool/.test(path) ? '👥 ጋራ ጉዞ · Open' : '🔗 ክፈት · Open ' + path.split(/[?#]/)[0];
+      const media = /^\/watch\?open=(radio|tv|series|kids)\//.exec(path);
+      const label = media ? (media[1] === 'radio' ? '▶️ አጫውት · Play' : '▶️ ክፈት · Open') : /^\/watch/.test(path) ? '▶️ BinaWatch ክፈት · Open' : /^\/tenders/.test(path) ? '📋 ጨረታ · Open tender' : /^\/cinema/.test(path) ? '🎬 ሲኒማ · Open' : /^\/pool/.test(path) ? '👥 ጋራ ጉዞ · Open' : '🔗 ክፈት · Open ' + path.split(/[?#]/)[0];
       rows.push([{ text: label.slice(0, 60), web_app: { url: baseUrl + path } }]);
     }
     if (wantsRide) rows.push([{ text: '🚕 Book a ride · ጉዞ ይያዙ', web_app: { url: baseUrl + (path && /^\/ride/.test(path) ? path : '/ride') } }]);
