@@ -105,8 +105,10 @@ function makeExecutor(ctx) {
       let data;
       try { data = JSON.parse(require('fs').readFileSync(ctx.channelsFile || require('path').join(__dirname, '..', 'watch', 'channels.json'), 'utf8')); } catch (e) { return { error: 'channel list unavailable' }; }
       const base = (ctx.publicBase || 'https://bina.et') + '/watch';
-      const term = String(q || '').trim().toLowerCase();
-      const hit = s => !term || String(s || '').toLowerCase().includes(term);
+      // Match on meaningful words only: "ደራሽ ድራማ" must find ደራሽ, "sheger radio" must find Sheger FM.
+      const STOP = /^(the|a|open|play|listen|watch|to|radio|tv|fm|channel|station|series|drama|show|me|please|ራዲዮ|ራድዮ|ቲቪ|ቻናል|ጣቢያ|ኤፍኤም|ድራማ|ተከታታይ|ፊልም|ክፈት|ክፈትልኝ|አሳየኝ|ማየት|እፈልጋለሁ|ልኝ|raadiyoo|televizhinii|banaa|bani|naaf|ilaaluu|dhaggeeffachuu|jira|jiraa)$/i;
+      const words = String(q || '').toLowerCase().split(/[\s,፣።·]+/).map(w => w.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '')).filter(w => w.length >= 2 && !STOP.test(w));
+      const hit = s => !words.length || words.some(w => String(s || '').toLowerCase().includes(w));
       const want = k => !kind || kind === 'all' || kind === k;
       const out = [];
       if (want('tv')) for (const c of data.tv || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'tv', name: c.name, nameAm: c.nameAm, tag: c.tag, openUrl: base + '#tv/' + c.id });

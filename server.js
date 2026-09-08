@@ -634,7 +634,7 @@ const COMPLAINT_RE = /ዘግይ|አያነሳ|አልመጣ|ችግር|ተበላሽ
 function biniGuards(text, msg, hist) {
   let t = String(text || '');
   const greeted = /^(hi|hello|hey|selam|salam|ሰላም|ጤና ይስጥልኝ|እንደምን)/i.test(String(msg || '').trim());
-  if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(?:እኔ\s+)?(ቢኒ\s+(?:ነኝ|እባላለሁ|እባላለው|ነኝ)[።!.,፣]?|Bini ነኝ[^\n]{0,4}|(?:Bini|ቢኒ) here[!,.]?(?: I can help with that[!.]?)?|I am Bini[!,.]?|I'm Bini[!,.]?|This is Bini[!,.]?|Ani Bini[,.]?)\s*/i, '');
+  if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(?:(?:ሰላም|Hello|Hi|Nagaa dha)[!።.,]?\s*)?(?:እኔ\s+)?(ቢኒ\s+(?:ነኝ|እባላለሁ|እባላለው|ነኝ)[።!.,፣]?|Bini ነኝ[^\n]{0,4}|(?:Bini|ቢኒ) here[!,.]?(?: I can help with that[!.]?)?|I am Bini[!,.]?|I'm Bini[!,.]?|This is Bini[!,.]?|Ani Bini[,.]?)\s*/i, '');
   t = t.replace(/^[\s\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}!።]+\n+/u, ''); // an emoji-only first line left behind by the intro strip
   t = t.replace(/^\s*(ቢኒ|Bini)\s*[:：]\s*/i, ''); // "ቢኒ: …" transcript-style prefix
   t = t.replace(/^[\s!።.,፣]+(?=\S)/, ''); // leftover punctuation after a stripped opener ("! ቤትዎ…")
@@ -689,8 +689,15 @@ fastify.post('/api/assistant', async (req, reply) => {
     // While forcing, the model may only choose an action tool: never contact_team (that spammed handovers), remember only on remember intent.
     const forcedTools = allTools.filter(t => t.function.name !== 'contact_team' && (rememberIntent ? t.function.name === 'remember' : t.function.name !== 'remember'));
     const opts = { tools: allTools, forcedTools, execute, toolChoice: forced ? 'required' : undefined };
+    // Media requests are looked up BEFORE the model runs (Gemini ignores tool forcing too often here): the result is
+    // handed in as context, so "open Sheger radio" in any language always gets the BinaWatch link.
+    let preTool = '';
+    if (/(radio|ራዲዮ|ራድዮ|ኤፍኤም|\bfm\b|\btv\b|ቲቪ|ቴሌቪዥን|channel|ቻናል|series|ድራማ|ተከታታይ|raadiyoo|televizhinii|diraamaa|\bwatch\b|listen)/i.test(msg)) {
+      const out = await execute('watch_channels', { q: msg.slice(0, 120), kind: 'all' }).catch(() => null);
+      if (out && !out.error) { opts.used = ['watch_channels']; preTool = '\n\nTOOL RESULT for watch_channels (already run for this message; answer from it, give the openUrl as the link, do not call it again):\n' + JSON.stringify(out).slice(0, 4000); if (out.count) opts.toolChoice = undefined; }
+    }
     const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
-    let text = await callBini(sys, [...hist, { role: 'user', content: msg }], 900, opts);
+    let text = await callBini(sys + preTool, [...hist, { role: 'user', content: msg }], 900, opts);
     toolsUsed = opts.used || [];
     // Gemini sometimes writes the call as text instead of calling it: "default_api.watch_channels(q='ደራሽ', kind='series')".
     const asText = /default_api\.(\w+)\(([^)]*)\)/.exec(text || '');
