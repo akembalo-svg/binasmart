@@ -170,6 +170,8 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     for (const d of docs) {
       const chunks = chunkDoc(d.text, d.title);
       const hashes = chunks.map(c => sha1(d.source + '|' + d.slug + '|' + c.text));
+      // identical chunks inside one page (repeated blocks on crawled sites) would collide on the unique hash: keep the first
+      const dupe = new Set(); for (let i = chunks.length - 1; i >= 0; i--) { if (dupe.has(hashes[i])) { chunks.splice(i, 1); hashes.splice(i, 1); } else dupe.add(hashes[i]); }
       const have = new Set((await prisma.knowledgeChunk.findMany({ where: { source: d.source, slug: d.slug }, select: { hash: true } })).map(x => x.hash));
       for (let i = 0; i < chunks.length; i++) {
         if (have.has(hashes[i])) continue;
