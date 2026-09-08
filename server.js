@@ -2693,6 +2693,27 @@ const rideMod = require('./ride')(fastify, {
   BASE_URL: 'https://bina.et'
 });
 
+// Daily group invite: /pool/g/<id>. Same 3 KB idea: OG preview, one Join button.
+fastify.get('/pool/g/:id', async (req, reply) => {
+  const id = String(req.params.id).replace(/[^a-z0-9]/gi, '').slice(0, 40);
+  const g = id && rideMod.groups ? await rideMod.groups.pub(id).catch(() => null) : null;
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  reply.type('text/html; charset=utf-8').header('Cache-Control', 'no-store');
+  if (!g || g.status !== 'active') return reply.code(404).send('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BinaPool</title><body style="font-family:system-ui;padding:24px;background:#F8FAFC;color:#081120"><h2>ቡድኑ አልተገኘም · Group not found or closed</h2><p><a href="/ride?pool=1" style="color:#009688;font-weight:800">ጋራ ጉዞ ይክፈቱ · Open BinaPool →</a></p></body>');
+  const title = g.name + ' · ' + g.daysLabel + ' ' + g.time + ' · ' + (g.full ? 'full' : (g.seats - g.members) + ' seats left');
+  const desc = '🔁 ቋሚ ቡድን · Daily group: ' + g.from.label + ' → ' + g.to.label + ', ' + g.daysLabel + ' at ' + g.time + '. Same car every day, pay per seat in cash. ' + g.members + '/' + g.seats + ' members.';
+  const html = '<!doctype html><html lang="am"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(title) + '</title>'
+    + '<meta property="og:title" content="' + esc(title) + '"><meta property="og:description" content="' + esc(desc) + '"><meta property="og:image" content="https://bina.et/static/og-pool.png"><meta property="og:url" content="https://bina.et/pool/g/' + esc(g.id) + '"><meta name="theme-color" content="#009688">'
+    + '<style>body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#F8FAFC;color:#081120;padding:18px}.c{max-width:420px;margin:0 auto;background:#fff;border:1px solid rgba(8,17,32,.08);border-radius:20px;padding:18px}.k{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.1em;color:#0B4FB3;background:rgba(0,153,255,.12);border-radius:999px;padding:5px 10px}h1{font-size:22px;margin:10px 0 4px;line-height:1.2}p{margin:6px 0;color:#475569;font-size:14px}.t{font-size:30px;font-weight:900;color:#009688;margin:10px 0 0}.t small{display:block;font-size:12px;color:#64748B;font-weight:600}.b{display:block;text-align:center;margin-top:14px;padding:15px;border-radius:16px;background:linear-gradient(135deg,#00C896,#009688);color:#fff;font-weight:800;text-decoration:none;font-size:16px}.g{background:#eef2f7;color:#081120}.w{background:#fff3f7;border:1px solid #f9a8d4;border-radius:12px;padding:8px 10px;font-size:13px;margin-top:8px}</style></head><body><div class="c">'
+    + '<span class="k">🔁 ቋሚ ቡድን · DAILY GROUP</span><h1>' + esc(g.name) + '</h1><p>' + esc(g.from.label) + ' → ' + esc(g.to.label) + '</p>'
+    + (g.womenOnly ? '<div class="w">👩 ሴቶች ብቻ · Women only</div>' : '')
+    + '<div class="t">' + esc(g.daysLabel) + ' · ' + esc(g.time) + '<small>' + g.members + '/' + g.seats + ' members · ' + esc(g.names.join(', ')) + ' · organised by ' + esc(g.organizer) + '</small></div>'
+    + '<p>Same car every day at the same time. Your seat is held automatically; tap "skip today" when you cannot come. Pay your seat to the driver in cash.</p>'
+    + (g.full ? '<a class="b g" href="/ride?pool=1">ቡድኑ ሞልቷል · Group is full — find another</a>' : '<a class="b" href="/ride?group=' + esc(g.id) + '">ተቀላቀል · Join this daily group</a><a class="b g" href="https://t.me/bina_smart_bot?startapp=g_' + esc(g.id) + '">✈️ በቴሌግራም · Open in Telegram</a>')
+    + '</div></body></html>';
+  return html;
+});
+
 // BinaPool share link: /pool/<id>. A 3 KB page with real OG tags (WhatsApp / Telegram previews show the
 // group and its price) and one button into the app. No fonts, no scripts: it must open on 2G.
 fastify.get('/pool/:id', async (req, reply) => {

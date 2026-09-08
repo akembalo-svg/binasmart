@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="am">
 <head>
-<script>/* Telegram Mini App start parameter -> the page it names (t.me/bina_smart_bot?startapp=pool) */(function(){var m=(location.hash+location.search).match(/tgWebAppStartParam=([A-Za-z0-9_-]+)/);var to={pool:"/ride?pool=1",ride:"/ride",airport:"/airport",hotels:"/hotels",watch:"/watch",cinema:"/cinema"};if(m){var v=m[1],j=v.match(/^j_([a-z0-9]+)$/i);if(j)location.replace("/ride?join="+j[1]+(location.hash||""));else if(to[v])location.replace(to[v]+(location.hash||""));}})();</script>
+<script>/* Telegram Mini App start parameter -> the page it names (t.me/bina_smart_bot?startapp=pool) */(function(){var m=(location.hash+location.search).match(/tgWebAppStartParam=([A-Za-z0-9_-]+)/);var to={pool:"/ride?pool=1",ride:"/ride",airport:"/airport",hotels:"/hotels",watch:"/watch",cinema:"/cinema"};if(m){var v=m[1],j=v.match(/^j_([a-z0-9]+)$/i),g=v.match(/^g_([a-z0-9]+)$/i);if(j)location.replace("/ride?join="+j[1]+(location.hash||""));else if(g)location.replace("/ride?group="+g[1]+(location.hash||""));else if(to[v])location.replace(to[v]+(location.hash||""));}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>BinaSmart — አንድ አፕ። ሁሉንም በኢትዮጵያ። | One App. Everything in Ethiopia.</title>

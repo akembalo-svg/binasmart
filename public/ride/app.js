@@ -73,10 +73,10 @@
   // ---- search ----
   $('openSearch').addEventListener('click', function () { S.searchTarget = 'dropoff'; openSearch(); });
   $('editFrom').addEventListener('click', function () { S.searchTarget = 'pickup'; openSearch(); });
-  $('closeSearch').addEventListener('click', function () { S.pinMode = false; show(S.searchTarget === 'pooldest' ? 's-pool' : 's-home'); });
+  $('closeSearch').addEventListener('click', function () { S.pinMode = false; show(S.searchTarget === 'pooldest' || S.searchTarget === 'groupdest' ? 's-pool' : 's-home'); });
   $('pinMode').addEventListener('click', function () { S.pinMode = true; toast(S.searchTarget === 'pickup' ? 'Tap the map to set pickup' : 'Tap the map to set destination'); });
   function openSearch() {
-    $('searchMode').firstChild.textContent = (S.searchTarget === 'pickup' ? 'Searching pickup' : (S.searchTarget === 'pooldest' ? 'የቡድኑ መድረሻ · Where is the group going?' : 'Searching destination')) + ' · ';
+    $('searchMode').firstChild.textContent = (S.searchTarget === 'pickup' ? 'Searching pickup' : (S.searchTarget === 'pooldest' || S.searchTarget === 'groupdest' ? 'የቡድኑ መድረሻ · Where is the group going?' : 'Searching destination')) + ' · ';
     $('q').value = ''; $('results').innerHTML = ''; show('s-search'); setTimeout(function () { $('q').focus(); }, 60);
   }
   var st;
@@ -96,6 +96,7 @@
   function choose(p) {
     S.pinMode = false;
     if (S.searchTarget === 'pooldest') { S.searchTarget = 'dropoff'; return joinPool({ create: true, dropoff: { lat: p.lat, lng: p.lng, label: p.label }, mode: 'wait' }); }
+    if (S.searchTarget === 'groupdest') { S.searchTarget = 'dropoff'; return createGroup({ lat: p.lat, lng: p.lng, label: p.label }); }
     if (S.searchTarget === 'pickup') { setPickup({ lat: p.lat, lng: p.lng, label: p.label }); if (S.dropoff) return quote(); show('s-home'); return; }
     S.dropoff = { lat: p.lat, lng: p.lng, label: p.label }; BinaMap.setDrop(S.dropoff); remember(S.dropoff); quote();
   }
@@ -259,6 +260,8 @@
     if (name.length < 2 || !/^(\+?251|0)9\d{8}$/.test(phone.replace(/\s/g, ''))) return toast('ስም እና ትክክለኛ ስልክ ያስገቡ · Enter your name and a valid phone');
     ME = { name: name, phone: phone }; lsSet('bina_ride_me', JSON.stringify(ME));
     if (S.pendingPool) { var pp = S.pendingPool; S.pendingPool = null; return joinPool(pp); }
+    if (S.pendingGroup) { var pg = S.pendingGroup; S.pendingGroup = null; return createGroup(pg); }
+    if (S.pendingGroupJoin) { var pj = S.pendingGroupJoin; S.pendingGroupJoin = null; return joinGroup(pj); }
     request(passengerBody() || null);
   });
   function request(pb) {
@@ -388,8 +391,80 @@
       if (!d.ok) { $('poolPeak').textContent = 'አልተሳካም · Could not load'; return; }
       POOL.corridors = d.corridors; POOL.waitS = d.waitS; POOL.groups = d.groups || []; POOL.located = !!d.located;
       $('poolPeak').innerHTML = (d.dir === 'in' ? '🌅 ጠዋት · ወደ ቦሌ / ካዛንችስ' : '🌇 ማታ · ከቦሌ / ካዛንችስ') + (d.peak ? ' · <b>peak · ብዙ ተጓዥ</b>' : ' · off-peak: 6–10 &amp; 16–20 busiest') + ' · ' + Math.round(d.waitS / 60) + ' ደቂቃ ጠብቆ ያንሳል';
-      renderNear(); renderCorridors();
+      renderNear(); renderCorridors(); loadGroups();
     }).catch(function () { $('poolPeak').textContent = 'የአውታረ መረብ ችግር · Network error — try again'; });
+  }
+  // ---- daily groups (contract commute) ----
+  var DAYS = [['ሰ', 'Mon', 1], ['ማ', 'Tue', 2], ['ረ', 'Wed', 4], ['ሐ', 'Thu', 8], ['ዓ', 'Fri', 16], ['ቅ', 'Sat', 32], ['እ', 'Sun', 64]];
+  var GF = { days: 31 };
+  function groupLine(g) { return '<b>' + esc(g.name) + '</b><small>' + esc(g.daysLabel) + ' · ' + esc(g.time) + ' · ' + g.members + '/' + g.seats + ' · ' + esc(g.names.join(', ')) + (g.womenOnly ? ' · 👩' : '') + (g.nextInMin != null ? ' · next in ' + (g.nextInMin >= 60 ? Math.floor(g.nextInMin / 60) + ' h ' + (g.nextInMin % 60) + ' min' : g.nextInMin + ' min') : '') + '</small><span class="gsub">' + esc(g.from.label) + ' → ' + esc(g.to.label) + '</span>'; }
+  function loadGroups() {
+    var box = $('dailyGroups'); if (!box) return;
+    var head = '<div class="nearhd" style="margin-top:12px">🔁 ቋሚ ቡድኖች <small>Daily groups · same car, same time, pay per seat</small></div>';
+    var done = function (gs) {
+      box.innerHTML = head + '<div id="ginvite"></div>' + (gs || []).map(function (g, i) {
+        return '<div class="grp gd" data-i="' + i + '">' + groupLine(g) + '<div class="shrow"><a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent('🔁 ' + g.name + ' · ' + g.daysLabel + ' ' + g.time + ' · ' + g.from.label + ' → ' + g.to.label + ' · join: ' + g.share) + '">💬 Invite</a><a class="btn sm" target="_blank" rel="noopener" href="https://t.me/share/url?url=' + encodeURIComponent(g.share) + '&text=' + encodeURIComponent('🔁 ' + g.name + ' · ' + g.daysLabel + ' ' + g.time) + '">✈️ Invite</a><button type="button" class="btn sm gleave">' + (g.organizerIsMe ? 'ዝጋ · Close' : 'ውጣ · Leave') + '</button></div></div>';
+      }).join('') + '<button type="button" class="cta wait gnew" id="newDaily">🔁 ቋሚ ቡድን ፍጠር <small>Create a daily group · for your office or school run</small></button>';
+      box.querySelectorAll('.gd').forEach(function (el) { var g = gs[+el.dataset.i]; el.querySelector('.gleave').addEventListener('click', function () {
+        var q = g.organizerIsMe ? 'ቡድኑን ይዝጉ? ሁሉም ይወጣሉ · Close this group for everyone?' : 'ከቡድኑ ይውጡ? · Leave this group?';
+        var go = function (yes) { if (!yes) return; api('/api/pool/groups/' + g.id + '/leave', { phone: ME.phone }).then(function (d) { if (d.ok) loadGroups(); else toast(d.error || 'failed'); }); };
+        if (IN_TG) TG.confirm(q, go); else go(confirm(q));
+      }); });
+      $('newDaily').addEventListener('click', function () { $('gform').classList.remove('hidden'); $('newDaily').classList.add('hidden'); renderDays(); $('gFrom').textContent = '📍 ከ · from: ' + (S.pickup ? S.pickup.label : 'your current position'); });
+      if (S.inviteGroup) showGroupInvite();
+    };
+    if (!ME || !ME.phone) return done([]);
+    api('/api/pool/groups/mine?phone=' + encodeURIComponent(ME.phone)).then(function (d) { done(d.ok ? d.groups : []); }).catch(function () { done([]); });
+  }
+  function renderDays() {
+    $('gDays').innerHTML = DAYS.map(function (d) { return '<button type="button" data-b="' + d[2] + '"' + ((GF.days & d[2]) ? ' class="on"' : '') + '>' + d[0] + '<small>' + d[1] + '</small></button>'; }).join('');
+    $('gDays').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { GF.days ^= +b.dataset.b; b.classList.toggle('on', !!(GF.days & +b.dataset.b)); }); });
+  }
+  $('gCancel').addEventListener('click', function () { $('gform').classList.add('hidden'); var nb = $('newDaily'); if (nb) nb.classList.remove('hidden'); });
+  $('gDest').addEventListener('click', function () {
+    var t = $('gTime').value; if (!/^\d\d:\d\d$/.test(t)) return toast('ሰዓት ይምረጡ · Pick a time');
+    if (!GF.days) return toast('ቀናት ይምረጡ · Pick the days');
+    S.searchTarget = 'groupdest'; openSearch();
+  });
+  function createGroup(dest) {
+    if (!ME) { S.pendingGroup = dest; show('s-who'); return; }
+    var t = $('gTime').value.split(':');
+    var body = { name: $('gName').value.trim(), pickup: S.pickup || DEFAULT_PICKUP, dropoff: dest, days: GF.days, timeMin: (+t[0]) * 60 + (+t[1]), womenOnly: $('gWomen').checked, riderName: ME.name, riderPhone: ME.phone || undefined };
+    if (IN_TG) body.tg = { initData: TG.initData(), contact: TG.contact() || undefined };
+    show('s-pool');
+    api('/api/pool/groups', body).then(function (d) {
+      if (!d.ok) return toast({ too_close: 'መድረሻው በጣም ቅርብ ነው · Destination too close', too_many_groups: 'ከ3 ቡድን በላይ · You already organise 3 groups', pick_days: 'ቀናት ይምረጡ · Pick the days' }[d.error] || d.error || 'failed');
+      if (d.phone) { ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME)); }
+      $('gform').classList.add('hidden'); $('gName').value = '';
+      toast('ቡድኑ ተፈጥሯል · Group created — invite your colleagues');
+      loadGroups();
+      var link = d.share, text = '🔁 ' + d.group.name + ' · ' + d.group.daysLabel + ' ' + d.group.time + ' · ' + d.group.from.label + ' → ' + d.group.to.label + ' · join: ' + link;
+      if (navigator.share) navigator.share({ title: 'BinaPool', text: text, url: link }).catch(function () {});
+    }).catch(function () { toast('Network error — try again'); });
+  }
+  function showGroupInvite() {
+    var id = S.inviteGroup; if (!id) return;
+    api('/api/pool/groups/' + id + '/public').then(function (d) {
+      var box = $('ginvite'); if (!box) return;
+      if (!d.ok || !d.group || d.group.status !== 'active') { box.innerHTML = '<div class="small">ይህ ቡድን አልተገኘም · That daily group was not found or is closed.</div>'; return; }
+      var g = d.group;
+      box.innerHTML = '<div class="grp inv gd"><div class="gtag">👋 ተጋብዘዋል · You were invited to a daily group</div>' + groupLine(g) + '<div class="gact"><span class="gprice">' + (g.full ? 'ሞልቷል · full' : (g.seats - g.members) + ' seats left') + '<small>pay per seat, cash to the driver</small></span>' + (g.full ? '' : '<button type="button" class="cta" id="gjoinBtn">ተቀላቀል · Join</button>') + '</div></div>';
+      var b = $('gjoinBtn'); if (b) b.addEventListener('click', function () { joinGroup(g); });
+    }).catch(function () {});
+  }
+  function joinGroup(g) {
+    if (!ME) { S.pendingGroupJoin = g; show('s-who'); return; }
+    var go = function (female) {
+      var body = { riderName: ME.name, riderPhone: ME.phone || undefined, female: !!female };
+      if (IN_TG) body.tg = { initData: TG.initData(), contact: TG.contact() || undefined };
+      api('/api/pool/groups/' + g.id + '/join', body).then(function (d) {
+        if (!d.ok) return toast({ group_full: 'ቡድኑ ሞልቷል · Group is full', women_only: 'ይህ ቡድን ለሴቶች ብቻ ነው · Women only' }[d.error] || d.error || 'failed');
+        if (d.phone) { ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME)); }
+        S.inviteGroup = null; toast('ተቀላቅለዋል · You are in — your seat is held every ' + g.daysLabel + ' at ' + g.time); loadGroups();
+      }).catch(function () { toast('Network error'); });
+    };
+    if (g.womenOnly) { var q = 'ይህ ቡድን ለሴቶች ብቻ ነው። ሴት ነዎት? · Women only. Are you a woman?'; if (IN_TG) TG.confirm(q, function (y) { if (y) go(true); }); else if (confirm(q)) go(true); return; }
+    go(false);
   }
   function loadNear() { loadBoard(); }
   function shareText(p) {
@@ -551,7 +626,8 @@
   var P0 = new URLSearchParams(location.search);
   var urlId = P0.get('id'), urlPool = P0.get('pool');
   S.invite = (P0.get('join') || '').replace(/[^a-z0-9]/gi, '').slice(0, 40) || null;
-  if (S.invite) urlPool = urlPool || '1';
+  S.inviteGroup = (P0.get('group') || '').replace(/[^a-z0-9]/gi, '').slice(0, 40) || null;
+  if (S.invite || S.inviteGroup) urlPool = urlPool || '1';
   if (IN_TG) {
     api('/api/pool/mine?initData=' + encodeURIComponent(TG.initData())).then(function (d) {
       if (d.ok && d.pool) {

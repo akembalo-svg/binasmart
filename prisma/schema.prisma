@@ -1098,6 +1098,7 @@ model Pool {
   createdBy    String?    // custom: the phone that started the group
   womenOnly    Boolean    @default(false)
   driverId     String?    // a driver-opened car: pre-assigned, no auction
+  groupId      String?    // a daily group's car for today
   tier         String
   seats        Int        // capacity
   status       String     @default("filling") // filling | dispatching | cancelled (afterwards: the Ride's status)
@@ -1112,6 +1113,43 @@ model Pool {
   @@index([status])
   @@index([corridorKey, status])
   @@index([driverId])
+}
+
+// Daily groups (contract commute): an organizer, a start, a destination, days and a time; members join once.
+model PoolGroup {
+  id             String   @id @default(cuid())
+  name           String
+  kind           String   @default("daily")
+  pickup         Json
+  dropoff        Json
+  days           Int      // bitmask Mon=1 … Sun=64
+  timeMin        Int      // departure, minutes after midnight, Addis time
+  seats          Int
+  tier           String
+  womenOnly      Boolean  @default(false)
+  organizerPhone String
+  organizerName  String?
+  status         String   @default("active") // active | closed
+  lastOpenedDay  String?  // YYYY-MM-DD (Addis) of the last car opened
+  members        PoolGroupMember[]
+  createdAt      DateTime @default(now())
+
+  @@index([status])
+  @@index([organizerPhone])
+}
+
+model PoolGroupMember {
+  id         String    @id @default(cuid())
+  groupId    String
+  group      PoolGroup @relation(fields: [groupId], references: [id])
+  riderName  String
+  riderPhone String
+  telegramId String?
+  status     String    @default("active") // active | left
+  joinedAt   DateTime  @default(now())
+
+  @@unique([groupId, riderPhone])
+  @@index([riderPhone])
 }
 
 model PoolSeat {

@@ -12,6 +12,7 @@ const { makeBinaBot } = require('./binaBot');
 const { makeDriverBot } = require('./driverBot');
 const { makeRiderNotify } = require('./riderNotify');
 const { makePool } = require('./pool/pool');
+const { makeGroups } = require('./pool/groups');
 const poolRoutes = require('./pool/routes');
 const routes = require('./routes');
 
@@ -39,6 +40,7 @@ module.exports = function registerRide(fastify, deps) {
   // BinaPool shares the fare engine, the auction and the driver app; riderNotify fans ride events out to every seat.
   const pool = makePool({ prisma: deps.prisma, geo, settings, dispatch, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL, dstate: require('./driverState') });
   const riderNotify = makeRiderNotify({ prisma: deps.prisma, api: riderApi, baseUrl: deps.BASE_URL, pool });
+  const groups = makeGroups({ prisma: deps.prisma, pool, settings, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL });
   // offers needs dispatch (to escalate and to cancel its timer) and dispatch needs offers (to run the
   // auction), so dispatch is built first and told about the auction afterwards.
   const offers = makeOffers({ prisma: deps.prisma, geo, settings, api: driverTgApi, riderNotify,
@@ -49,9 +51,10 @@ module.exports = function registerRide(fastify, deps) {
   const drive = makeDriverApi({ prisma: deps.prisma, driverBotToken, location, offers, telegram, riderNotify, geo, settings, pool });
   const helpers = routes(fastify, { prisma: deps.prisma, settings, geo, telegram, dispatch, OWNER_KEY: deps.OWNER_KEY,
     riderBotToken, webhookSecret: process.env.TG_WEBHOOK_SECRET || '', riderBot, driverBot, riderNotify, uploadsDir, drive, location, askBini: deps.askBini || null, pool });
-  poolRoutes(fastify, { pool, riderBotToken, drive, limiter: helpers.limiter, clientIp: helpers.clientIp, OWNER_KEY: deps.OWNER_KEY });
+  poolRoutes(fastify, { pool, groups, riderBotToken, drive, limiter: helpers.limiter, clientIp: helpers.clientIp, OWNER_KEY: deps.OWNER_KEY });
   const poolSweep = setInterval(() => pool.sweep().catch(e => console.error('[pool] sweep error:', e.message)), 10000);
-  poolSweep.unref();
+  const groupTick = setInterval(() => groups.tick().catch(e => console.error('[pool/groups] tick error:', e.message)), 60000);
+  poolSweep.unref(); groupTick.unref();
   // Three background loops, all idempotent and all safe to miss a beat:
   //  - sweep: in-memory concierge timers die with the process, so escalate anything a restart stranded
   //  - expiry: close offer windows and widen the radius (5 s granularity on a 25 s window)
@@ -61,5 +64,5 @@ module.exports = function registerRide(fastify, deps) {
   const awaySweep = setInterval(() => location.staleSweep().catch(e => console.error('[ride] away sweep error:', e.message)), 20000);
   sweep.unref(); expiry.unref(); awaySweep.unref();
   console.log('[ride] BinaSmart Ride module mounted' + (riderBotToken ? ' (Telegram bots on)' : ' (no Telegram bot tokens)'));
-  return { settings, geo, telegram, dispatch, riderNotify, offers, location, drive, pool };
+  return { settings, geo, telegram, dispatch, riderNotify, offers, location, drive, pool, groups };
 };

@@ -39,7 +39,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS, d
 
   // What a pool runs on: a corridor (stops, both ends fixed) or a custom start -> destination.
   function specOf(pool) {
-    if (pool.kind === 'custom' || pool.kind === 'driver') {
+    if (pool.kind === 'custom' || pool.kind === 'driver' || pool.kind === 'group') {
       const from = { id: 'origin', label: pool.pickup.label, labelAm: pool.pickup.labelAm || pool.pickup.label, lat: pool.pickup.lat, lng: pool.pickup.lng };
       const to = { id: 'dest', label: pool.dropoff.label, labelAm: pool.dropoff.labelAm || pool.dropoff.label, lat: pool.dropoff.lat, lng: pool.dropoff.lng };
       return { key: 'custom:' + pool.id, kind: 'custom', tier: pool.tier, from, to, stops: [from, to], name: from.label + ' → ' + to.label, nameAm: from.labelAm + ' → ' + to.labelAm };
