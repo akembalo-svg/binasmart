@@ -574,7 +574,11 @@ async function callBini(system, messages0, maxTokens, opts){
         { const _b = { model: model, max_tokens: maxTokens, messages: [{ role: 'system', content: system }].concat(messages) };
           if (/gemini/i.test(model)) _b.reasoning_effort = 'none';  // Gemini 2.5 thinking OFF — thinking tokens were eating the answer, cutting Amharic mid-word
           // A forced intent keeps forcing until a terminal tool (quote, pool, booking, status, tenders, cinema, remember, team) has run.
-          if (opts && opts.tools && opts.tools.length) { _b.tools = opts.tools; _b.tool_choice = (opts.toolChoice && (!opts.rounds || opts.keepForcing)) ? opts.toolChoice : 'auto'; }
+          if (opts && opts.tools && opts.tools.length) {
+            const forcing = !!(opts.toolChoice && (!opts.rounds || opts.keepForcing));
+            _b.tools = forcing && opts.forcedTools ? opts.forcedTools : opts.tools; // a forced round never gets to pick contact_team
+            _b.tool_choice = forcing ? opts.toolChoice : 'auto';
+          }
           body = JSON.stringify(_b); }
       } else {
         url = base.replace(/\/+$/, '') + '/v1/messages';
@@ -679,17 +683,30 @@ fastify.post('/api/assistant', async (req, reply) => {
       handover: h => biniHandover({ ...h, userKey, channel, lang, user: known || u, message: msg, history: hist }) });
     // Flash sometimes answers a price or "remember me" from memory; on those intents the first round must call a tool.
     const FORCE_TOOL_RE = /(remember|አስታውስ|አስታውሰኝ|yaadadh|ስንት ብር|ስንት ነው|ዋጋ|how much|fare|price|cost|gatii|meeqa|መቀመጫ|ጋራ ጉዞ|\bpool\b|imala waliinii|tender|ጨረታ|caalbaasii|cinema|ሲኒማ|film|ፊልም|showing|የት ደረሰ|ride status|my ride|where is (the|my) (car|driver)|radio|ራዲዮ|ራድዮ|\btv\b|ቲቪ|ቴሌቪዥን|channel|ቻናል|series|ድራማ|ተከታታይ|watch|listen|open the|play the|raadiyoo|televizhinii|ክፈት)/i;
-    const opts = { tools: biniTools.toOpenAI(), execute, toolChoice: FORCE_TOOL_RE.test(msg) ? 'required' : undefined };
+    const allTools = biniTools.toOpenAI();
+    const forced = FORCE_TOOL_RE.test(msg);
+    const rememberIntent = /(remember|አስታውስ|አስታውሰኝ|yaadadh)/i.test(msg);
+    // While forcing, the model may only choose an action tool: never contact_team (that spammed handovers), remember only on remember intent.
+    const forcedTools = allTools.filter(t => t.function.name !== 'contact_team' && (rememberIntent ? t.function.name === 'remember' : t.function.name !== 'remember'));
+    const opts = { tools: allTools, forcedTools, execute, toolChoice: forced ? 'required' : undefined };
     const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys, [...hist, { role: 'user', content: msg }], 900, opts);
     toolsUsed = opts.used || [];
-    // Flash occasionally answers a fare question in Amharic without ever quoting. One strict retry, then we accept.
-    const FARE_RE = /(ስንት|how much|meeqa|gatii|ዋጋ|fare|price)/i, RIDE_RE = /(ራይድ|ride|ጉዞ|imala|taxi|ታክሲ|መኪና|konkolaataa|ወደ\s|\bto\b|gara\s)/i;
-    if (opts.tools && FARE_RE.test(msg) && RIDE_RE.test(msg) && !toolsUsed.some(n => /^(quote_ride|pool_board)$/.test(n))) {
-      const retry = { tools: opts.tools, execute, toolChoice: 'required', used: [] };
-      const strict = sys + '\n\nSYSTEM CHECK: your previous draft answered a fare question without calling quote_ride or pool_board. Do it now: resolve the places (take the first search result for a known area; use the saved home/work coordinates when the user says home/work), call quote_ride (or pool_board for ጋራ ጉዞ), and answer with the exact numbers.';
+    // Gemini sometimes writes the call as text instead of calling it: "default_api.watch_channels(q='ደራሽ', kind='series')".
+    const asText = /default_api\.(\w+)\(([^)]*)\)/.exec(text || '');
+    if (asText && biniTools.DEFS.some(d => d.name === asText[1])) {
+      const args = {}; for (const m of asText[2].matchAll(/(\w+)\s*=\s*(?:'([^']*)'|"([^"]*)"|([-\d.]+))/g)) args[m[1]] = m[2] != null ? m[2] : (m[3] != null ? m[3] : Number(m[4]));
+      const out = await execute(asText[1], args); toolsUsed.push(asText[1]);
+      const t2 = await callBini(sys + '\n\nTOOL RESULT for ' + asText[1] + '(' + JSON.stringify(args) + '):\n' + JSON.stringify(out).slice(0, 6000) + '\n\nAnswer the user now from this result. Do not write function calls as text.', [...hist, { role: 'user', content: msg }], 900, { tools: null }).catch(() => '');
+      if (t2) text = t2;
+    }
+    // Flash occasionally answers a forced intent (fare, pool, TV/radio, tender…) without any tool. One strict retry, then we accept.
+    const TERMINAL = /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|cinema_programme|watch_channels|remember)$/;
+    if (forced && !toolsUsed.some(n => TERMINAL.test(n))) {
+      const retry = { tools: opts.tools, forcedTools, execute, toolChoice: 'required', used: [] };
+      const strict = sys + '\n\nSYSTEM CHECK: your previous draft answered without calling the tool this request needs. Do it now: fares → search_places (first result for a known area; saved home/work coordinates when the user says home/work) then quote_ride; ጋራ ጉዞ/pool → pool_board; TV, radio, series → watch_channels; tenders → search_tenders; cinema → cinema_programme; "remember" → remember. Then answer from the result with the exact link or numbers.';
       const t2 = await callBini(strict, [...hist, { role: 'user', content: msg }], 900, retry).catch(() => '');
-      if (retry.used && retry.used.some(n => /^(quote_ride|pool_board)$/.test(n)) && t2) { text = t2; toolsUsed = toolsUsed.concat(retry.used); }
+      if (retry.used && retry.used.some(n => TERMINAL.test(n)) && t2) { text = t2; toolsUsed = toolsUsed.concat(retry.used); }
     }
     // Backstop: a clearly stated fact gets saved even when the model forgot to call remember().
     if (!toolsUsed.includes('remember') && mem.persistent) for (const f of require('./assistant/memory').extractMemory(msg)) { await execute('remember', { field: f.field, value: f.value }).catch(() => {}); toolsUsed.push('remember*'); }
