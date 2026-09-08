@@ -586,6 +586,7 @@ async function callBini(system, messages0, maxTokens, opts){
       let text = '';
       if (fmt === 'openai') {
         const m = d && d.choices && d.choices[0] && d.choices[0].message;
+        if (opts && opts.tools) console.log('[bini] round ' + ((opts.rounds || 0) + 1) + ' finish=' + (d.choices && d.choices[0] && d.choices[0].finish_reason) + ' calls=' + (m && m.tool_calls ? m.tool_calls.map(t => t.function.name).join(',') : '-') + ' len=' + ((m && m.content) ? String(m.content).length : 0) + (d.error ? ' error=' + JSON.stringify(d.error).slice(0, 200) : ''));
         // Tool round: run every call, append the results and ask again (max 5 rounds per reply).
         if (m && Array.isArray(m.tool_calls) && m.tool_calls.length && opts && opts.execute && (opts.rounds = (opts.rounds || 0) + 1) <= 5) {
           const next = messages.concat([{ role: 'assistant', content: m.content || null, tool_calls: m.tool_calls }]);
@@ -679,6 +680,8 @@ fastify.post('/api/assistant', async (req, reply) => {
     const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys, [...hist, { role: 'user', content: msg }], 900, opts);
     toolsUsed = opts.used || [];
+    // Backstop: a clearly stated fact gets saved even when the model forgot to call remember().
+    if (!toolsUsed.includes('remember') && mem.persistent) for (const f of require('./assistant/memory').extractMemory(msg)) { await execute('remember', { field: f.field, value: f.value }).catch(() => {}); toolsUsed.push('remember*'); }
     text = biniGuards(text, msg, hist);
     const miss = biniMemory.isMiss(text) || biniMemory.wantsHuman(msg);
     mem.touch({ visit: true, lang: lang === 'am-latin' ? 'am' : lang, name: u.name }).catch(() => {});

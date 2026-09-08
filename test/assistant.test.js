@@ -91,3 +91,12 @@ test('memory: keys, profile text, miss and human detection, handover rate limit'
   assert.equal(await ho({ userKey: 'tg:1', channel: 'telegram', message: 'again', explicit: true, summary: 'refund' }), true, 'explicit always goes');
   assert.match(sent[0], /Reply: tg:\/\/user\?id=1/); assert.match(sent[1], /Summary: refund/);
 });
+
+test('extractMemory backstop parses English, Amharic and Oromo facts', () => {
+  const { extractMemory } = require('../assistant/memory');
+  assert.deepEqual(extractMemory('Please remember my name is Test Probe and my home is CMC.'), [{ field: 'name', value: 'Test Probe' }, { field: 'home', value: 'CMC' }]);
+  assert.deepEqual(extractMemory('remember my home is CMC'), [{ field: 'home', value: 'CMC' }]);
+  assert.deepEqual(extractMemory('ስሜ ሳራ ነው። ቤቴ ሲኤምሲ ነው።'), [{ field: 'name', value: 'ሳራ' }, { field: 'home', value: 'ሲኤምሲ' }]);
+  assert.deepEqual(extractMemory('manni koo Boolee dha'), [{ field: 'home', value: 'Boolee dha' }]);
+  assert.deepEqual(extractMemory('how much to Bole?'), []);
+});

@@ -85,4 +85,25 @@ function makeHandover({ sendTg, chatId, now }) {
   };
 }
 
-module.exports = { makeMemory, makeHandover, userKey, MISS_RE, HUMAN_RE };
+// Deterministic backstop: if the user clearly stated a fact to remember and the model did not call remember(),
+// we still save it. English, Amharic and Afaan Oromoo patterns; returns [{field, value}].
+function extractMemory(msg) {
+  const s = String(msg || '').trim(); const out = [];
+  const push = (field, v) => { v = String(v || '').replace(/[.።!?,]+$/, '').trim(); if (v && v.length <= 80 && !out.some(o => o.field === field)) out.push({ field, value: v }); };
+  let m;
+  const END = String.raw`([^,.።\n]+?)(?=\s+and\b|[,.።\n]|$)`;
+  if ((m = new RegExp(String.raw`\bmy name is ` + END, 'i').exec(s))) push('name', m[1]);
+  if ((m = new RegExp(String.raw`\bmy (?:home|house) is (?:in |at )?` + END, 'i').exec(s))) push('home', m[1]);
+  if ((m = new RegExp(String.raw`\bmy (?:work|office) is (?:in |at )?` + END, 'i').exec(s))) push('work', m[1]);
+  if ((m = /\bmy (?:phone|number) is (\+?[\d\s-]{9,15})/i.exec(s))) push('phone', m[1].replace(/[\s-]/g, ''));
+  if ((m = /ስሜ\s+([^\s።,]+(?:\s+[^\s።,]+)?)\s+(?:ነው|ይባላል|ነኝ)/.exec(s))) push('name', m[1]);
+  if ((m = /(?:ቤቴ|የምኖረው|መኖሪያዬ)\s+([^።,\n]+?)\s+(?:ነው|ነኝ)/.exec(s))) push('home', m[1]);
+  if ((m = /(?:ቢሮዬ|ሥራዬ|ስራዬ|የምሰራው)\s+([^።,\n]+?)\s+(?:ነው|ነኝ)/.exec(s))) push('work', m[1]);
+  if ((m = /(?:ስልኬ|ስልክ ቁጥሬ)\s+(\+?[\d\s-]{9,15})/.exec(s))) push('phone', m[1].replace(/[\s-]/g, ''));
+  if ((m = /\bmaqaan koo ([^,.\n]+)/i.exec(s))) push('name', m[1]);
+  if ((m = /\bmanni koo ([^,.\n]+)/i.exec(s))) push('home', m[1]);
+  if ((m = /\bhojiin koo ([^,.\n]+)/i.exec(s))) push('work', m[1]);
+  return out;
+}
+
+module.exports = { makeMemory, makeHandover, userKey, MISS_RE, HUMAN_RE, extractMemory };
