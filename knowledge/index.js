@@ -63,6 +63,20 @@ function chunkDoc(text, title) {
   }
   return out.map((c, i) => ({ ord: i, heading: c.heading, text: (title ? title + (c.heading ? ' › ' + c.heading : '') + '\n' : '') + c.text }));
 }
+// Latin-letter Amharic people actually type; two hits = Amharic.
+const LATIN_AM = /\b(selam|salam|sint|endet|endemin|yet|alegn|alesh|aleh|ebakih|ebakish|ebakwo|ameseginalehu|amesegnalehu|tadia|eshi|new|nesh|neh|nachu|min|man|wede|ke|lay|birr|awo|aydelem|yikirta|betam|dehna|dehena|chigir|yelem|alle|ale)\b/gi;
+function isAmharic(s) { s = String(s || ''); if (/[ሀ-፿]/.test(s)) return true; const m = s.match(LATIN_AM); return !!m && m.length >= 2; }
+let _voice = { mtime: 0, text: '' };
+// Glossary + voice rules = everything above "## Examples" in amharic-style.md; re-read when the file changes.
+function voiceBlock(root) {
+  const p = path.join(root || ROOT, 'knowledge', 'amharic-style.md');
+  try {
+    const st = fs.statSync(p); if (st.mtimeMs === _voice.mtime) return _voice.text;
+    const raw = fs.readFileSync(p, 'utf8'); const head = raw.split(/^## Examples\s*$/m)[0] || '';
+    _voice = { mtime: st.mtimeMs, text: head.replace(/^# .*\n/, '').replace(/^Everything above[^\n]*\n/m, '').trim() };
+  } catch (e) { _voice = { mtime: 0, text: '' }; }
+  return _voice.text;
+}
 function sha1(s) { return crypto.createHash('sha1').update(s).digest('hex'); }
 function tokens(s) { return String(s).toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter(t => t.length > 1); }
 
@@ -73,6 +87,7 @@ function readSources(root, only) {
   const rd = p => { try { return fs.readFileSync(p, 'utf8'); } catch (e) { return null; } };
   if (want('skill')) { const t = rd(path.join(root, 'skills', 'binasmart-system', 'SKILL.md')); if (t) docs.push({ source: 'skill', slug: 'binasmart-system', title: 'BinaSmart system', url: 'https://bina.et/llms.txt', lang: 'en', text: stripFrontmatter(t), internal: true }); }
   if (want('addis')) { const t = rd(path.join(root, 'knowledge', 'addis-ababa.md')); if (t) docs.push({ source: 'addis', slug: 'addis-ababa', title: 'Addis Ababa', url: 'https://bina.et/living-working-in-ethiopia-guide', lang: 'en', text: t }); }
+  if (want('style')) { const t = rd(path.join(root, 'knowledge', 'amharic-style.md')); if (t) { const ex = t.split(/^## Examples\s*$/m)[1] || ''; if (ex.trim()) docs.push({ source: 'style', slug: 'amharic-voice', title: 'Bini Amharic voice', url: null, lang: 'am', text: ex, internal: true }); } }
   if (want('llms')) { const t = rd(path.join(root, 'public', 'llms.txt')); if (t) docs.push({ source: 'llms', slug: 'llms', title: 'BinaSmart site guide', url: 'https://bina.et/llms.txt', lang: 'en', text: t }); }
   if (want('docs')) { const t = rd(path.join(root, 'mcp-server', 'docs.md')); if (t) docs.push({ source: 'docs', slug: 'mcp', title: 'BinaSmart MCP server', url: 'https://bina.et/mcp', lang: 'en', text: t }); }
   const pages = [];
@@ -170,7 +185,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   function keywordScore(qt, r) { let s = 0; for (const t of qt) if (r.toks.has(t)) s += 1; return qt.length ? s / qt.length : 0; }
 
   // Hybrid search: cosine on the embedding (when we can embed the query) plus keyword overlap.
-  async function search(q, { k = 4, sources, isPublic = false } = {}) {
+  async function search(q, { k = 4, sources, exclude, isPublic = false } = {}) {
     await ensureLoaded();
     stats.searches++;
     const query = String(q || '').trim(); if (!query) return [];
@@ -183,8 +198,9 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     if (!qv) stats.keywordOnly++;
     const scored = [];
     for (const r of rows) {
-      if (isPublic && r.source === 'skill') continue;
+      if (isPublic && (r.source === 'skill' || r.source === 'style')) continue;
       if (sources && !sources.includes(r.source)) continue;
+      if (exclude && exclude.includes(r.source)) continue;
       let cos = 0;
       if (qv && r.vec) { for (let i = 0; i < DIMS; i++) cos += qv[i] * r.vec[i]; }
       const kw = keywordScore(qt, r);
@@ -204,19 +220,28 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   }
 
   // The block Bini gets. Empty for greetings / very short messages so we never pad a "hello".
-  async function contextFor(message, { k = 3 } = {}) {
+  async function contextFor(message, { k = 3, styleK = 2 } = {}) {
     const m = String(message || '').trim();
     const words = m.split(/\s+/).filter(Boolean);
-    if (words.length < 2 && !/[ሀ-፿]/.test(m)) return '';
-    if (/^(hi|hello|hey|selam|ሰላም|salam|ok|thanks|thank you|አመሰግናለሁ)[!. ]*$/i.test(m)) return '';
-    const hits = await search(m, { k });
-    if (!hits.length) return '';
-    const lines = hits.map((h, i) => '[' + (i + 1) + '] ' + h.title + (h.url ? ' — ' + h.url : '') + '\n' + h.text.replace(/\n{2,}/g, '\n'));
-    return '## Relevant BinaSmart knowledge (facts here override anything you remember; cite the page link when useful)\n' + lines.join('\n\n');
+    const am = isAmharic(m);
+    const greeting = /^(hi|hello|hey|selam|ሰላም|salam|ok|thanks|thank you|አመሰግናለሁ)[!. ]*$/i.test(m);
+    const blocks = [];
+    if (!greeting && (words.length >= 2 || am)) {
+      const hits = await search(m, { k, exclude: ['style'] });
+      if (hits.length) {
+        const lines = hits.map((h, i) => '[' + (i + 1) + '] ' + h.title + (h.url ? ' — ' + h.url : '') + '\n' + h.text.replace(/\n{2,}/g, '\n'));
+        blocks.push('## Relevant BinaSmart knowledge (facts here override anything you remember; cite the page link when useful)\n' + lines.join('\n\n'));
+      }
+    }
+    if (am && styleK > 0) {
+      const ex = await search(m, { k: styleK, sources: ['style'] });
+      if (ex.length) blocks.push('## Amharic voice examples (match this voice and register; never copy a sentence verbatim, never reuse its opener)\n' + ex.map(h => h.text.replace(/^Bini Amharic voice › /, '').replace(/\n{2,}/g, '\n')).join('\n\n'));
+    }
+    return blocks.join('\n\n');
   }
 
   function health() { return { chunks: rows.length, embedded: rows.filter(r => r.vec).length, loadedAt, gemini: !!apiKey, ...stats }; }
-  return { load, ingest, search, contextFor, health, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
+  return { load, ingest, search, contextFor, health, voice: () => voiceBlock(root || ROOT), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf };
+module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, isAmharic, voiceBlock, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf };

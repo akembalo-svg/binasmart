@@ -82,3 +82,24 @@ test('without Gemini (no key, or the API down) search still works on keywords, a
   assert.equal(res.embedded, 0, 'embedding failure is logged, not fatal');
   assert.ok((await down.k.search('Merkato market', { k: 1 })).length, 'keyword search survives');
 });
+
+test('Amharic voice: detection, glossary block, style examples only for Amharic and never public', async () => {
+  const { isAmharic, voiceBlock } = require('../knowledge/index');
+  assert.equal(isAmharic('ጋራ ጉዞ ምንድን ነው'), true);
+  assert.equal(isAmharic('selam, ride sint new ke piassa wede bole?'), true);
+  assert.equal(isAmharic('How does BinaPool work?'), false);
+  const v = voiceBlock(path.join(__dirname, '..'));
+  assert.match(v, /Glossary/); assert.match(v, /Voice rules/); assert.equal(/## Examples/.test(v), false); assert.ok(v.length < 6000, 'voice block stays small: ' + v.length);
+  const w = world();
+  await w.k.ingest({ only: ['style', 'skill'] });
+  assert.ok(w.rows.filter(r => r.source === 'style').length >= 20, 'one chunk per example');
+  const am = await w.k.contextFor('ጋራ ጉዞ ላይ ስንት ደቂቃ እጠብቃለሁ?');
+  assert.match(am, /Amharic voice examples/); assert.match(am, /Relevant BinaSmart knowledge/);
+  assert.equal(/Bini Amharic voice/.test(am.split('## Amharic voice examples')[0]), false, 'facts block never contains style chunks');
+  const en = await w.k.contextFor('how long do I wait in a pool car');
+  assert.equal(/Amharic voice examples/.test(en), false);
+  const greet = await w.k.contextFor('ሰላም');
+  assert.match(greet, /Amharic voice examples/); assert.equal(/Relevant BinaSmart knowledge/.test(greet), false);
+  const pub = await w.k.search('ሰላም ወንድሜ', { k: 5, isPublic: true });
+  assert.ok(pub.every(x => x.source !== 'style'));
+});
