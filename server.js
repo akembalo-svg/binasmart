@@ -622,7 +622,7 @@ fastify.post('/api/assistant', async (req, reply) => {
   try {
     const ctx = await knowledge.contextFor(msg).catch(() => '');
     const voice = knowledge.isAmharic(msg) ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : '';
-    const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: you may say your name once, briefly.';
+    const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
     const text = await callBini(ASSIST_SYS + ASSIST_FACTS + voice + turn + (ctx ? '\n\n' + ctx : ''), [...hist, { role: 'user', content: msg }], 700);
     return reply.send({ reply: text || FALLBACK });
   } catch (e) {
