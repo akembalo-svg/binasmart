@@ -50,7 +50,7 @@ const esc = s => String(s).replace(/"/g, '\\"');
     while (queue.length && saved < max && tried < max * 3) {
       const u = queue.shift(); if (seen.has(u)) continue; seen.add(u); tried++;
       const page = await get(u); await sleep(1500);
-      if (!page) { if (tried === 1) break; continue; } // home unreachable: skip the whole site
+      if (!page) { if (u === src.url) break; continue; } // home unreachable: skip the whole site (a missing /am/ path is not fatal)
       const text = htmlToText(page.html);
       if (text.length >= 400) {
         const hash = crypto.createHash('sha1').update(page.url).digest('hex').slice(0, 12);
