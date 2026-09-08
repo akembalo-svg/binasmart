@@ -364,10 +364,23 @@
   $('closePool').addEventListener('click', function () { setMode('solo'); });
   function fmtLeft(s) { s = Math.max(0, s | 0); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
   var POOL = { corridors: [], pick: {} }; // pick[key] = stopId
+  // The map's load event normally triggers locate(); if the map is slow (3G, no WebGL) the Pool
+  // screen must not hang on "Locating you": ask the phone directly, then fall back to Bole.
+  function ensurePickup() {
+    if (S.pickup || S.pickupLocked) return;
+    var done = false, settle = function (p) { if (done || S.pickup) return; done = true; setPickup(p); };
+    setTimeout(function () { settle(DEFAULT_PICKUP); }, 6000);
+    if (!navigator.geolocation) return settle(DEFAULT_PICKUP);
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var p = { lat: pos.coords.latitude, lng: pos.coords.longitude, label: 'የእርስዎ ቦታ · Your location' };
+      if (p.lat < 8.5 || p.lat > 9.5 || p.lng < 38.4 || p.lng > 39.2) p = DEFAULT_PICKUP;
+      settle(p);
+    }, function () { settle(DEFAULT_PICKUP); }, { enableHighAccuracy: true, timeout: 5500 });
+  }
   function openPool() {
     show('s-pool'); $('poolPeak').textContent = 'የመንገዶች ዝርዝር እየጫንን ነው… · Loading corridors…';
     var q = S.pickup ? '?lat=' + S.pickup.lat + '&lng=' + S.pickup.lng : '';
-    loadNear();
+    loadNear(); ensurePickup();
     api('/api/pool/corridors' + q).then(function (d) {
       if (!d.ok) { $('poolPeak').textContent = 'አልተሳካም · Could not load corridors'; return; }
       POOL.corridors = d.corridors; POOL.waitS = d.waitS;
