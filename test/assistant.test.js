@@ -100,3 +100,10 @@ test('extractMemory backstop parses English, Amharic and Oromo facts', () => {
   assert.deepEqual(extractMemory('manni koo Boolee dha'), [{ field: 'home', value: 'Boolee dha' }]);
   assert.deepEqual(extractMemory('how much to Bole?'), []);
 });
+
+test('extractMemory never learns from questions or route phrases', () => {
+  const { extractMemory } = require('../assistant/memory');
+  assert.deepEqual(extractMemory('ከቤቴ ወደ ቦሌ ራይድ ስንት ነው?'), []);
+  assert.deepEqual(extractMemory('ቤቴ ሲኤምሲ ነው'), [{ field: 'home', value: 'ሲኤምሲ' }]);
+  assert.deepEqual(extractMemory('how much from home to Bole'), []);
+});

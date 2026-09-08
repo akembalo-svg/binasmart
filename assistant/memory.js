@@ -89,16 +89,19 @@ function makeHandover({ sendTg, chatId, now }) {
 // we still save it. English, Amharic and Afaan Oromoo patterns; returns [{field, value}].
 function extractMemory(msg) {
   const s = String(msg || '').trim(); const out = [];
-  const push = (field, v) => { v = String(v || '').replace(/[.።!?,]+$/, '').trim(); if (v && v.length <= 80 && !out.some(o => o.field === field)) out.push({ field, value: v }); };
+  // Questions are never facts ("ከቤቴ ወደ ቦሌ ስንት ነው?" must not overwrite home).
+  if (/\?|ስንት|how much|meeqa|\bwhere\b|የት\b|eessa/i.test(s)) return out;
+  const BAD = /ወደ|ከ\S|ራይድ|ride|ጉዞ|ስንት|http|\d{5,}/;
+  const push = (field, v) => { v = String(v || '').replace(/[.።!?,]+$/, '').trim(); if (v && v.length <= 60 && (field === 'phone' || !BAD.test(v)) && !out.some(o => o.field === field)) out.push({ field, value: v }); };
   let m;
   const END = String.raw`([^,.።\n]+?)(?=\s+and\b|[,.።\n]|$)`;
   if ((m = new RegExp(String.raw`\bmy name is ` + END, 'i').exec(s))) push('name', m[1]);
   if ((m = new RegExp(String.raw`\bmy (?:home|house) is (?:in |at )?` + END, 'i').exec(s))) push('home', m[1]);
   if ((m = new RegExp(String.raw`\bmy (?:work|office) is (?:in |at )?` + END, 'i').exec(s))) push('work', m[1]);
   if ((m = /\bmy (?:phone|number) is (\+?[\d\s-]{9,15})/i.exec(s))) push('phone', m[1].replace(/[\s-]/g, ''));
-  if ((m = /ስሜ\s+([^\s።,]+(?:\s+[^\s።,]+)?)\s+(?:ነው|ይባላል|ነኝ)/.exec(s))) push('name', m[1]);
-  if ((m = /(?:ቤቴ|የምኖረው|መኖሪያዬ)\s+([^።,\n]+?)\s+(?:ነው|ነኝ)/.exec(s))) push('home', m[1]);
-  if ((m = /(?:ቢሮዬ|ሥራዬ|ስራዬ|የምሰራው)\s+([^።,\n]+?)\s+(?:ነው|ነኝ)/.exec(s))) push('work', m[1]);
+  if ((m = /(?:^|[።.,]\s*)ስሜ\s+([^\s።,]+(?:\s+[^\s።,]+)?)\s+(?:ነው|ይባላል|ነኝ)/.exec(s))) push('name', m[1]);
+  if ((m = /(?:^|[።.,]\s*)(?:ቤቴ|የምኖረው|መኖሪያዬ)\s+([^።,\n]{2,40}?)\s+(?:ነው|ነኝ)/.exec(s))) push('home', m[1]);
+  if ((m = /(?:^|[።.,]\s*)(?:ቢሮዬ|ሥራዬ|ስራዬ|የምሰራው)\s+([^።,\n]{2,40}?)\s+(?:ነው|ነኝ)/.exec(s))) push('work', m[1]);
   if ((m = /(?:ስልኬ|ስልክ ቁጥሬ)\s+(\+?[\d\s-]{9,15})/.exec(s))) push('phone', m[1].replace(/[\s-]/g, ''));
   if ((m = /\bmaqaan koo ([^,.\n]+)/i.exec(s))) push('name', m[1]);
   if ((m = /\bmanni koo ([^,.\n]+)/i.exec(s))) push('home', m[1]);

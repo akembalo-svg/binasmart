@@ -573,7 +573,8 @@ async function callBini(system, messages0, maxTokens, opts){
         headers = { 'content-type': 'application/json', 'authorization': 'Bearer ' + key };
         { const _b = { model: model, max_tokens: maxTokens, messages: [{ role: 'system', content: system }].concat(messages) };
           if (/gemini/i.test(model)) _b.reasoning_effort = 'none';  // Gemini 2.5 thinking OFF — thinking tokens were eating the answer, cutting Amharic mid-word
-          if (opts && opts.tools && opts.tools.length) { _b.tools = opts.tools; _b.tool_choice = (opts.toolChoice && !opts.rounds) ? opts.toolChoice : 'auto'; } // first round may be forced
+          // A forced intent keeps forcing until a terminal tool (quote, pool, booking, status, tenders, cinema, remember, team) has run.
+          if (opts && opts.tools && opts.tools.length) { _b.tools = opts.tools; _b.tool_choice = (opts.toolChoice && (!opts.rounds || opts.keepForcing)) ? opts.toolChoice : 'auto'; }
           body = JSON.stringify(_b); }
       } else {
         url = base.replace(/\/+$/, '') + '/v1/messages';
@@ -596,6 +597,7 @@ async function callBini(system, messages0, maxTokens, opts){
             (opts.used = opts.used || []).push(tc.function.name);
             next.push({ role: 'tool', tool_call_id: tc.id, content: JSON.stringify(out).slice(0, 6000) });
           }
+          opts.keepForcing = opts.rounds < 3 && !(opts.used || []).some(n => /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|cinema_programme|remember|contact_team)$/.test(n));
           return await once(fmt, base, key, model, next);
         }
         text = (m && m.content) ? String(m.content).trim() : '';
@@ -680,6 +682,14 @@ fastify.post('/api/assistant', async (req, reply) => {
     const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys, [...hist, { role: 'user', content: msg }], 900, opts);
     toolsUsed = opts.used || [];
+    // Flash occasionally answers a fare question in Amharic without ever quoting. One strict retry, then we accept.
+    const FARE_RE = /(ስንት|how much|meeqa|gatii|ዋጋ|fare|price)/i, RIDE_RE = /(ራይድ|ride|ጉዞ|imala|taxi|ታክሲ|መኪና|konkolaataa|ወደ\s|\bto\b|gara\s)/i;
+    if (opts.tools && FARE_RE.test(msg) && RIDE_RE.test(msg) && !toolsUsed.some(n => /^(quote_ride|pool_board)$/.test(n))) {
+      const retry = { tools: opts.tools, execute, toolChoice: 'required', used: [] };
+      const strict = sys + '\n\nSYSTEM CHECK: your previous draft answered a fare question without calling quote_ride or pool_board. Do it now: resolve the places (take the first search result for a known area; use the saved home/work coordinates when the user says home/work), call quote_ride (or pool_board for ጋራ ጉዞ), and answer with the exact numbers.';
+      const t2 = await callBini(strict, [...hist, { role: 'user', content: msg }], 900, retry).catch(() => '');
+      if (retry.used && retry.used.some(n => /^(quote_ride|pool_board)$/.test(n)) && t2) { text = t2; toolsUsed = toolsUsed.concat(retry.used); }
+    }
     // Backstop: a clearly stated fact gets saved even when the model forgot to call remember().
     if (!toolsUsed.includes('remember') && mem.persistent) for (const f of require('./assistant/memory').extractMemory(msg)) { await execute('remember', { field: f.field, value: f.value }).catch(() => {}); toolsUsed.push('remember*'); }
     text = biniGuards(text, msg, hist);
