@@ -17,7 +17,7 @@ function knownPaths(root) {
 
 function pathsIn(text) {
   const out = [];
-  const re = /(?:https?:\/\/bina\.et)?(\/[a-z0-9][a-z0-9\-_/]*(?:\?[a-z0-9=&]+)?)/gi;
+  const re = /(?<![\w/:.])(?:https?:\/\/bina\.et)?(\/[a-z0-9][a-z0-9\-_/]*(?:\?[a-z0-9=&]+)?)/gi; // not "wa.me/x", "ChatGPT/Claude" or "://"
   let m; while ((m = re.exec(text))) { const p = m[1].replace(/[።,.)\]]+$/, ''); if (!/^\/\d/.test(p)) out.push(p); }
   return out;
 }

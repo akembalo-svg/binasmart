@@ -32,12 +32,17 @@ async function tg(method, body, isForm) {
   const d = await r.json(); if (!d.ok) throw new Error('telegram ' + method + ': ' + JSON.stringify(d).slice(0, 200)); return d.result;
 }
 
+// Telegram sendDocument has hung once; never let a stuck upload keep the cron process alive.
+function withTimeout(p, ms, what) { return Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(what + ' timeout')), ms))]); }
+
 (async () => {
   let items = JSON.parse(fs.readFileSync(path.join(__dirname, 'questions.json'), 'utf8'));
   if (limit) items = items.slice(0, limit);
-  const date = new Date().toISOString().slice(0, 10);
+  const resend = args.includes('--resend') ? args[args.indexOf('--resend') + 1] : '';
+  const date = resend || new Date().toISOString().slice(0, 10);
   const rows = [];
-  for (let i = 0; i < items.length; i++) {
+  if (resend) rows.push(...JSON.parse(fs.readFileSync(path.join(OUT_DIR, 'bini-amharic-' + resend + '.json'), 'utf8')));
+  for (let i = 0; i < (resend ? 0 : items.length); i++) {
     const t0 = Date.now();
     let reply = '', err = '';
     try { reply = await ask(items[i].q, i); } catch (e) { err = e.message; }
@@ -68,10 +73,11 @@ async function tg(method, body, isForm) {
   console.log(transcript);
   console.log('\n' + summary);
   if (dry) return;
-  await tg('sendMessage', { chat_id: CHAT, text: summary });
+  await withTimeout(tg('sendMessage', { chat_id: CHAT, text: summary }), 20000, 'sendMessage');
+  console.log('[bini-eval] summary sent to ' + CHAT);
   const form = new FormData();
   form.append('chat_id', CHAT);
   form.append('document', new Blob([transcript], { type: 'text/plain' }), 'bini-amharic-' + date + '.txt');
-  await tg('sendDocument', form, true);
-  console.log('[bini-eval] sent to ' + CHAT);
+  await withTimeout(tg('sendDocument', form, true), 60000, 'sendDocument');
+  console.log('[bini-eval] transcript sent to ' + CHAT);
 })().catch(e => { console.error('[bini-eval] failed:', e.message); process.exit(1); });

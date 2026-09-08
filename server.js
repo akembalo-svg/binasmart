@@ -602,7 +602,7 @@ const knowledge = require('./knowledge').makeKnowledge({ prisma, apiKey: process
 knowledge.load().catch(e => fastify.log.warn('[knowledge] load: ' + e.message));
 setInterval(() => knowledge.load().catch(() => {}), 600000).unref(); // pick up nightly ingests without a restart
 require('./knowledge/routes')(fastify, { knowledge, OWNER_KEY });
-const ASSIST_FACTS = '\n\nFACTS RULE: when a "Relevant BinaSmart knowledge" block is present, its facts override anything you remember. If the block does not contain a price, fare, deadline, portal name or law number, say you do not have it and point to the page link or WhatsApp — never guess. BinaPool (ጋራ ጉዞ, shared commute, pay per seat) lives inside the Ride app: /ride?pool=1. Demo data on the site: the hotel, the hospital, the restaurant and shop, the bus trips — say so when asked.';
+const ASSIST_FACTS = '\n\nFACTS RULE: when a "Relevant BinaSmart knowledge" block is present, its facts override anything you remember. If the block does not contain a price, fare, deadline, portal name or law number, say you do not have it and point to the page link or WhatsApp — never guess. BinaPool (ጋራ ጉዞ, shared commute, pay per seat) lives inside the Ride app: /ride?pool=1. DEMO DATA, always disclose when the topic comes up: BinaHotels lists ONE hotel (Bina Grand Hotel) and it is demo data — a booking there is not a real stay; the hospital departments, the restaurant/shop menus and the bus trips are demonstrations too. Real partners are being onboarded; for a real hotel today, offer WhatsApp.';
 
 // Deterministic guards the model cannot skip: no self-introduction mid-chat, no emoji on a complaint,
 // no placeholder links it made up (e.g. /ride?id=...).
@@ -613,7 +613,7 @@ function biniGuards(text, msg, hist) {
   if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(ቢኒ ነኝ[።!.,፣]?|ቢኒ እባላለሁ[።!.,፣]?|Bini ነኝ[^\n]{0,4}|(?:Bini|ቢኒ) here[!,.]?(?: I can help with that[!.]?)?|I am Bini[!,.]?|I'm Bini[!,.]?|This is Bini[!,.]?)\s*/i, '');
   t = t.replace(/^[\s\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}!።]+\n+/u, ''); // an emoji-only first line left behind by the intro strip
   if (COMPLAINT_RE.test(msg)) t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/[ \t]+\n/g, '\n');
-  t = t.replace(/\/ride\?id=\.{2,}|\(\/ride\?id=[^)]*\)/g, '/ride');
+  t = t.replace(/\(?\/ride\?id=[^\s)።]*\)?/g, '/ride');
   return t.trim();
 }
 const _assistRL = new Map(); // ip -> [timestamps]
