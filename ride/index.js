@@ -36,7 +36,7 @@ module.exports = function registerRide(fastify, deps) {
     // only a live, onboarded shop can be linked; a demo row or a guessed id links nothing
     linkShop: async (shopId, chatId) => { const n = await deps.prisma.shop.updateMany({ where: { id: shopId, status: 'live' }, data: { tgChatId: String(chatId) } });
       return n.count ? deps.prisma.shop.findUnique({ where: { id: shopId }, select: { id: true, name: true, nameAm: true } }) : null; },
-    assistantUrl: 'http://127.0.0.1:' + (process.env.PORT || 4210) + '/api/assistant' });
+    assistantUrl: 'http://127.0.0.1:' + (process.env.PORT || 4210) + '/api/assistant', internalKey: deps.OWNER_KEY });
   // BinaPool shares the fare engine, the auction and the driver app; riderNotify fans ride events out to every seat.
   const pool = makePool({ prisma: deps.prisma, geo, settings, dispatch, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL, dstate: require('./driverState') });
   const riderNotify = makeRiderNotify({ prisma: deps.prisma, api: riderApi, baseUrl: deps.BASE_URL, pool });

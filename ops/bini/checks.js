@@ -24,9 +24,10 @@ function pathsIn(text) {
 
 function check(item, reply, { known } = {}) {
   const tags = item.tags || [], r = String(reply || ''), fails = [];
-  const isEn = tags.includes('english'), isLatin = tags.includes('latin');
+  const isEn = tags.includes('english'), isLatin = tags.includes('latin'), isOm = tags.includes('om');
   if (!r.trim()) fails.push('empty');
   if (isEn) { if (ETHIOPIC.test(r.replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ/g, ''))) fails.push('english_drift_to_amharic'); }
+  else if (isOm) { if (ETHIOPIC.test(r.replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ/g, ''))) fails.push('oromo_drift_to_amharic'); if (!/(jira|dha|isin|gatii|imala|dandeessu|qabdu|akkam|nagaa|galatoom|keessan|irratti)/i.test(r)) fails.push('not_oromo'); }
   else if (!ETHIOPIC.test(r)) fails.push('no_amharic_script');
   if (isLatin && !/\([^)]*[a-z]{3,}[^)]*\)\s*$/i.test(r.trim())) fails.push('latin_gloss_missing');
   if (tags.includes('price') && /\d+\s*(ብር|birr|ETB)/i.test(r) && !/200 ብር/.test(r)) fails.push('birr_number_stated');

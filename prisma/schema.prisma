@@ -1091,6 +1091,39 @@ model Ride {
 // (fare = the ladder's driver total); seats hold each rider's own price.
 // Bini knowledge index (RAG): one row per text chunk, Gemini embedding as float32 bytes (no pgvector needed;
 // the API keeps the matrix in RAM). hash = sha1(source|slug|text) so re-ingest only touches changed chunks.
+// Bini per-user memory: key = tg:<telegramId> | web:<uid>. Home/work/lastPickup/lastDropoff = {label, lat, lng}.
+model AssistantUser {
+  key         String   @id
+  telegramId  String?
+  name        String?
+  phone       String?
+  lang        String?
+  home        Json?
+  work        Json?
+  lastPickup  Json?
+  lastDropoff Json?
+  notes       String?
+  visits      Int      @default(1)
+  seenAt      DateTime @default(now())
+  createdAt   DateTime @default(now())
+}
+
+// Every Bini turn: what was asked, what was answered, which tools ran, and whether it was a miss (for the weekly review).
+model AssistantLog {
+  id        String   @id @default(cuid())
+  userKey   String
+  channel   String   @default("web")
+  lang      String   @default("en")
+  message   String
+  reply     String
+  tools     String[] @default([])
+  miss      Boolean  @default(false)
+  ms        Int      @default(0)
+  createdAt DateTime @default(now())
+  @@index([createdAt])
+  @@index([miss, createdAt])
+}
+
 model KnowledgeChunk {
   id        String   @id @default(cuid())
   source    String   // skill | addis | guide | page | llms | docs

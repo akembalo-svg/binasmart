@@ -561,9 +561,10 @@ ALWAYS HONEST (never break):
 - Don't claim to be human and don't over-promise.
 - Give ONE relevant bina.et link when it genuinely helps (a /path).`;
 // ===== Bini LLM adapter — cloud API (OpenAI/Anthropic-compat) primary, local GLM fallback =====
-async function callBini(system, messages, maxTokens){
+async function callBini(system, messages0, maxTokens, opts){
   maxTokens = maxTokens || 500;
-  async function once(fmt, base, key, model){
+  async function once(fmt, base, key, model, messages){
+    messages = messages || messages0;
     const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 30000);
     try {
       let url, headers, body;
@@ -572,6 +573,7 @@ async function callBini(system, messages, maxTokens){
         headers = { 'content-type': 'application/json', 'authorization': 'Bearer ' + key };
         { const _b = { model: model, max_tokens: maxTokens, messages: [{ role: 'system', content: system }].concat(messages) };
           if (/gemini/i.test(model)) _b.reasoning_effort = 'none';  // Gemini 2.5 thinking OFF — thinking tokens were eating the answer, cutting Amharic mid-word
+          if (opts && opts.tools && opts.tools.length) { _b.tools = opts.tools; _b.tool_choice = 'auto'; }
           body = JSON.stringify(_b); }
       } else {
         url = base.replace(/\/+$/, '') + '/v1/messages';
@@ -582,7 +584,21 @@ async function callBini(system, messages, maxTokens){
       clearTimeout(to);
       const d = await r.json();
       let text = '';
-      if (fmt === 'openai') text = (d && d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content) ? String(d.choices[0].message.content).trim() : '';
+      if (fmt === 'openai') {
+        const m = d && d.choices && d.choices[0] && d.choices[0].message;
+        // Tool round: run every call, append the results and ask again (max 5 rounds per reply).
+        if (m && Array.isArray(m.tool_calls) && m.tool_calls.length && opts && opts.execute && (opts.rounds = (opts.rounds || 0) + 1) <= 5) {
+          const next = messages.concat([{ role: 'assistant', content: m.content || null, tool_calls: m.tool_calls }]);
+          for (const tc of m.tool_calls) {
+            let args = {}; try { args = JSON.parse(tc.function.arguments || '{}'); } catch (e) { args = {}; }
+            const out = await opts.execute(tc.function.name, args);
+            (opts.used = opts.used || []).push(tc.function.name);
+            next.push({ role: 'tool', tool_call_id: tc.id, content: JSON.stringify(out).slice(0, 6000) });
+          }
+          return await once(fmt, base, key, model, next);
+        }
+        text = (m && m.content) ? String(m.content).trim() : '';
+      }
       else text = (d && d.content && d.content[0] && d.content[0].text) ? String(d.content[0].text).trim() : '';
       if (!text) throw new Error('empty_llm_response');
       return text;
@@ -594,7 +610,8 @@ async function callBini(system, messages, maxTokens){
       return await once((process.env.BINI_API_FORMAT || 'openai').toLowerCase(), process.env.BINI_API_BASE, process.env.BINI_API_KEY || 'x', process.env.BINI_API_MODEL || 'gpt-4o-mini');
     } catch (e) { /* fall back to local GLM below so Bini never goes dark */ }
   }
-  // Fallback / default: local GLM (Anthropic-compat)
+  // Fallback / default: local GLM (Anthropic-compat) — no tools on this path
+  if (opts) { opts.tools = null; opts.execute = null; }
   return await once('anthropic', process.env.GLM_BASE || 'http://127.0.0.1:4000', process.env.GLM_KEY || 'x', process.env.GLM_MODEL || 'glm-5-turbo');
 }
 // ===== Bini knowledge (RAG): skill + Addis Ababa notes + guide/service pages, Gemini embeddings, keyword fallback =====
@@ -616,8 +633,18 @@ function biniGuards(text, msg, hist) {
   t = t.replace(/\(?\/ride\?id=[^\s)።]*\)?/g, '/ride');
   return t.trim();
 }
+// ===== Bini: tools (hands), per-user memory, conversation log, misses, handover, languages =====
+const biniLang = require('./assistant/lang');
+const biniTools = require('./assistant/tools');
+const { makeMemory, makeHandover } = require('./assistant/memory');
+const biniMemory = makeMemory({ prisma });
+const biniHandover = makeHandover({ sendTg: (chat, text) => sendTg(chat, text), chatId: process.env.BINI_HANDOVER_CHAT || '8825386029' });
+const biniTranscribe = require('./assistant/transcribe').makeTranscriber({ apiKey: process.env.GEMINI_API_KEY || '' });
+const BINI_TOOL_RULES = '\n\nTOOLS: you have real tools. For any fare, place, ride status, shared-ride price, cinema programme or tender question CALL THE TOOL and answer from its result; never answer such things from memory. Flow for a ride: search_places for pickup and drop-off (ask which match if unclear) → quote_ride → show the fares → only if the user says yes AND you have an Ethiopian phone number, request_ride with confirmed=true → give the ride id and tracking link. Never call request_ride without an explicit yes in this conversation. If a tool returns an error, say what is missing in one sentence. Use remember() when the user tells you their name, phone, home or work, or asks you to remember something. Use contact_team when a person is needed.';
+
 const _assistRL = new Map(); // ip -> [timestamps]
 fastify.post('/api/assistant', async (req, reply) => {
+  const t0 = Date.now();
   const b = req.body || {};
   const msg = String(b.message || '').slice(0, 1200).trim();
   if (!msg) return reply.code(400).send({ error: 'message required' });
@@ -631,19 +658,50 @@ fastify.post('/api/assistant', async (req, reply) => {
     content: String((m && m.content) || '').slice(0, 1200)
   })).filter(m => m.content) : [];
   const FALLBACK = 'ይቅርታ፣ አሁን መልስ መስጠት አልቻልኩም። እባክዎ በ WhatsApp ያግኙን፦ https://wa.me/251911244344';
+  // Who is talking: Telegram id (stable), a browser uid (stable per device), or just the IP (no memory).
+  const u = (b.user && typeof b.user === 'object') ? b.user : {};
+  const channel = u.telegramId ? 'telegram' : (u.uid ? 'web' : 'api');
+  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip });
+  const mem = biniMemory.forUser(userKey, { telegramId: u.telegramId, name: u.name });
+  const lang = biniLang.detect(msg);
+  const known = await mem.get().catch(() => null);
+  let toolsUsed = [];
   try {
-    const ctx = await knowledge.contextFor(msg).catch(() => '');
-    const am = knowledge.isAmharic(msg);
-    const latin = am && !/[ሀ-፿]/.test(msg);
-    const voice = am ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() + (latin ? '\n\nLANGUAGE: the user typed Amharic in LATIN letters. Reply in Amharic script (Ethiopic), then end with ONE short line in parentheses that gives the key point in Latin letters the way they typed, e.g. (Wagaw kwami new, /ride lay yasgebu.)' : '\n\nLANGUAGE: the user wrote in Amharic script. Reply in Amharic script.') : '\n\nLANGUAGE: the user wrote in ENGLISH. Reply in English only (Amharic words allowed only for product names). Do not switch to Amharic even if the knowledge block is in Amharic.';
+    const [ctx, profile] = await Promise.all([knowledge.contextFor(msg, { lang }).catch(() => ''), Promise.resolve(biniMemory.profileText(known))]);
+    const voice = (lang === 'am' || lang === 'am-latin') ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : (lang === 'om' ? '\n\n## Afaan Oromoo voice (glossary + rules)\n' + knowledge.voice('om') : '');
     const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
-    let text = await callBini(ASSIST_SYS + ASSIST_FACTS + voice + turn + (ctx ? '\n\n' + ctx : ''), [...hist, { role: 'user', content: msg }], 700);
+    const execute = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', prisma, memory: mem, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
+      handover: h => biniHandover({ ...h, userKey, channel, lang, user: known || u, message: msg, history: hist }) });
+    const opts = { tools: biniTools.toOpenAI(), execute };
+    const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
+    let text = await callBini(sys, [...hist, { role: 'user', content: msg }], 900, opts);
+    toolsUsed = opts.used || [];
     text = biniGuards(text, msg, hist);
-    return reply.send({ reply: text || FALLBACK });
+    const miss = biniMemory.isMiss(text) || biniMemory.wantsHuman(msg);
+    mem.touch({ visit: true, lang: lang === 'am-latin' ? 'am' : lang, name: u.name }).catch(() => {});
+    biniMemory.log({ userKey, channel, lang, message: msg, reply: text, tools: toolsUsed, miss, ms: Date.now() - t0 });
+    if (miss && !toolsUsed.includes('contact_team')) biniHandover({ userKey, channel, lang, user: known || u, message: msg, reply: text, history: hist, reason: biniMemory.wantsHuman(msg) ? 'user asked for a person' : 'Bini could not answer' }).catch(() => {});
+    return reply.send({ reply: text || FALLBACK, tools: toolsUsed, lang });
   } catch (e) {
     req.log && req.log.warn && req.log.warn('assistant err ' + e);
+    biniMemory.log({ userKey, channel, lang, message: msg, reply: '', tools: toolsUsed, miss: true, ms: Date.now() - t0 });
     return reply.send({ reply: FALLBACK });
   }
+});
+// Voice notes from the Telegram bot: OGG/Opus base64 in, transcript out. Internal only (owner key).
+fastify.post('/api/assistant/transcribe', { bodyLimit: 4 * 1024 * 1024 }, async (req, reply) => {
+  if ((req.headers['x-owner-key'] || '') !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
+  const b = req.body || {};
+  if (!b.audio || String(b.audio).length < 100) return reply.code(400).send({ ok: false, error: 'audio (base64) required' });
+  try { const text = await biniTranscribe(String(b.audio), String(b.mime || 'audio/ogg')); return { ok: true, text }; }
+  catch (e) { req.log && req.log.warn && req.log.warn('transcribe err ' + e.message); return reply.code(502).send({ ok: false, error: 'transcribe_failed' }); }
+});
+// Weekly numbers for the eval report and the ops page.
+fastify.get('/api/assistant/misses', async (req, reply) => {
+  if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
+  const days = Math.max(1, Math.min(90, Number(req.query.days) || 7));
+  const [stats, misses] = await Promise.all([biniMemory.stats(days), biniMemory.misses(days, 30)]);
+  return { ok: true, days, stats, misses };
 });
 fastify.get('/a702af430312f8dea0fa0412791d7a82.txt', async (req, reply) => reply.type('text/plain').send('a702af430312f8dea0fa0412791d7a82'));
 

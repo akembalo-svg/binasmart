@@ -51,6 +51,7 @@
   var msgs = wrap.querySelector('#biniMsgs');
   var txt = wrap.querySelector('#biniTxt');
   var history = [];
+  function biniUid(){ try { var k='bina_uid', v=localStorage.getItem(k); if(!v){ v='w'+Date.now().toString(36)+Math.random().toString(36).slice(2,10); localStorage.setItem(k,v);} return v; } catch(e){ return ''; } }
   var greeted = false;
 
   function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -106,7 +107,7 @@
     txt.value = ''; add('user', m); history.push({role:'user', content:m});
     var typing = document.createElement('div'); typing.id='biniTyping'; typing.textContent='ቢኒ እየጻፈ ነው…'; msgs.appendChild(typing); msgs.scrollTop = msgs.scrollHeight;
     fetch('/api/assistant', {method:'POST', headers:{'content-type':'application/json'},
-      body: JSON.stringify({message:m, history:history.slice(-6)})})
+      body: JSON.stringify({message:m, history:history.slice(-6), user:{uid:biniUid()}})})
       .then(function(r){return r.json();})
       .then(function(d){
         typing.remove();

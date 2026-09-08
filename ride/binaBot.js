@@ -14,7 +14,7 @@ const MENU = [
 const COMMANDS = { cinema: '/cinema', watch: '/watch', films: '/watch', ride: '/ride', hotels: '/hotel/bina-grand-hotel', restaurants: '/restaurant/bina-restaurant', hospitals: '/hospital/bina-general-hospital', events: '/cinema', property: '/property', cars: '/cars', insurance: '/insurance', guides: '/guides', ai: '/ai' };
 const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 
-function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop }) {
+function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
   const hist = new Map(); // chatId -> { turns: [{role, content}], t }
   const menuMarkup = () => ({ inline_keyboard: MENU.map(row => row.map(b => ({ text: b.text, web_app: { url: baseUrl + b.path } }))) });
@@ -38,11 +38,12 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       .replace(/(^|[\s(])(\/[a-z0-9][a-z0-9\-\/]*?)(?![a-z0-9\-\/])/gi, (m, pre, p) => pre + baseUrl + p);
   }
 
-  async function askBini(chatId, message) {
+  async function askBini(chatId, message, from) {
     const t = turns(chatId);
+    const user = from ? { telegramId: String(from.id || chatId), name: [from.first_name, from.last_name].filter(Boolean).join(' ').slice(0, 60), username: from.username || '' } : { telegramId: chatId };
     const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), 45000);
     try {
-      const r = await f(assistantUrl, { method: 'POST', headers: { 'content-type': 'application/json', 'x-real-ip': 'tg-' + chatId }, body: JSON.stringify({ message, history: t.slice(-HIST_MAX) }), signal: ctl.signal });
+      const r = await f(assistantUrl, { method: 'POST', headers: { 'content-type': 'application/json', 'x-real-ip': 'tg-' + chatId }, body: JSON.stringify({ message, history: t.slice(-HIST_MAX), user }), signal: ctl.signal });
       const d = await r.json().catch(() => ({}));
       const reply = d && d.reply ? String(d.reply) : null;
       if (reply) { t.push({ role: 'user', content: message }, { role: 'assistant', content: reply }); while (t.length > HIST_MAX * 2) t.shift(); }
@@ -65,6 +66,24 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     } catch (err) { console.error('[binaBot] ticket ' + code + ': ' + err.message); return api.sendMessage(chatId, baseUrl + '/ticket/' + code); }
   }
 
+  // A voice note: download from Telegram, transcribe through the app (Gemini), then answer it like typed text.
+  async function handleVoice(chatId, msg) {
+    const v = msg.voice || msg.audio;
+    if (!v || (v.duration && v.duration > 120)) return api.sendMessage(chatId, 'የድምጽ መልእክቱ በጣም ረጅም ነው (እስከ 2 ደቂቃ)። · Voice note too long (max 2 minutes).');
+    if (api.sendChatAction) api.sendChatAction(chatId, 'typing').catch(() => {});
+    try {
+      const file = await api.getFile(v.file_id);
+      const buf = await api.downloadFile(file.file_path);
+      const r = await f(assistantUrl.replace(/\/api\/assistant$/, '/api/assistant/transcribe'), { method: 'POST', headers: { 'content-type': 'application/json', 'x-owner-key': internalKey || '' }, body: JSON.stringify({ audio: buf.toString('base64'), mime: v.mime_type || 'audio/ogg' }) });
+      const d = await r.json().catch(() => ({}));
+      const text = d && d.ok ? String(d.text || '').trim() : '';
+      if (!text || /^\[unclear\]/i.test(text)) return api.sendMessage(chatId, 'ይቅርታ፣ ድምጹን መስማት አልቻልኩም። እባክዎ ይጻፉ ወይም እንደገና ይሞክሩ። · Sorry, I could not hear that. Please type it or try again.');
+      const reply = await askBini(chatId, text.slice(0, 1200), msg.from);
+      if (!reply) return api.sendMessage(chatId, '🎤 «' + text.slice(0, 300) + '»\n\nቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ።');
+      return api.sendMessage(chatId, '🎤 «' + text.slice(0, 300) + '»\n\n' + forTelegram(reply), { reply_markup: menuMarkup() });
+    } catch (e) { console.error('[binaBot] voice: ' + e.message); return api.sendMessage(chatId, 'ይቅርታ፣ የድምጽ መልእክቱን ማንበብ አልቻልኩም። እባክዎ ይጻፉ። · Sorry, I could not read that voice note. Please type it.'); }
+  }
+
   async function handleUpdate(update) {
     const msg = update && update.message;
     if (!msg || !msg.chat) return;
@@ -81,6 +100,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     }
     const tk = /^\/start\s+ticket_(BINA-?[A-Z0-9]{6})\b/i.exec(text);
     if (tk) return sendTicket(chatId, tk[1].toUpperCase().replace(/^BINA-?/, 'BINA-'));
+    if (!text && (msg.voice || msg.audio)) return handleVoice(chatId, msg);
     if (!text || /^\/start\b/.test(text) || /^\/(help|menu)\b/.test(text)) {
       hist.delete(chatId);
       const u = msg.from || {};
@@ -94,7 +114,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     }
     if (cmd) return api.sendMessage(chatId, 'Unknown command. Type /menu to see all services, or just ask me a question. · /menu ይጻፉ');
     if (api.sendChatAction) api.sendChatAction(chatId, 'typing').catch(() => {});
-    const reply = await askBini(chatId, text.slice(0, 1200));
+    const reply = await askBini(chatId, text.slice(0, 1200), msg.from);
     if (!reply) return api.sendMessage(chatId, 'Bini is busy for a moment — please try again in a minute, or open bina.et. · ቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ።', { reply_markup: menuMarkup() });
     const wantsRide = /ride|taxi|ታክሲ|ጉዞ|\/ride/i.test(reply + ' ' + text);
     return api.sendMessage(chatId, forTelegram(reply), { reply_markup: { inline_keyboard: wantsRide ? [[{ text: '🚕 Book a ride · ጉዞ ይያዙ', web_app: { url: baseUrl + '/ride' } }], [{ text: '☰ Menu · ዝርዝር', callback_data: 'menu' }]] : [[{ text: '☰ Menu · ዝርዝር', callback_data: 'menu' }]] }, disable_web_page_preview: true });

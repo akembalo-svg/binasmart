@@ -63,12 +63,24 @@ function withTimeout(p, ms, what) { return Promise.race([p, new Promise((_, rej)
   fs.writeFileSync(file, transcript);
   fs.writeFileSync(path.join(OUT_DIR, 'bini-amharic-' + date + '.json'), JSON.stringify(rows, null, 1));
 
+  // Real conversations this week: volume by language, and what Bini could not answer (for Ibrahim to teach)
+  let weekly = '';
+  try {
+    const r = await fetch(API + '/api/assistant/misses?days=7', { headers: { 'x-owner-key': process.env.OWNER_KEY || '' } });
+    const d = await r.json();
+    if (d && d.ok) weekly = '
+Real chats last 7 days: ' + d.stats.total + ' (' + Object.entries(d.stats.byLang || {}).map(([k, v]) => k + ' ' + v).join(', ') + ') · unanswered: ' + d.stats.miss + (d.misses.length ? '
+Unanswered (newest):
+' + d.misses.slice(0, 8).map(m => '• [' + m.lang + '/' + m.channel + '] ' + String(m.message).slice(0, 90)).join('
+') : '');
+  } catch (e) { weekly = '
+(real-chat stats unavailable: ' + e.message + ')'; }
   const bad = rows.filter(r => !r.ok);
   const summary = ['🧪 Bini Amharic check · ' + date, 'Score: ' + passed + '/' + rows.length + ' · avg ' + avgMs + ' ms',
     Object.keys(failCounts).length ? 'Flags: ' + Object.entries(failCounts).map(([k, v]) => k + ' ×' + v).join(', ') : 'Flags: none',
     '', ...bad.slice(0, 6).map(r => '#' + r.n + ' ' + r.q.slice(0, 40) + ' → ' + r.fails.join(', ')),
     bad.length > 6 ? '… +' + (bad.length - 6) + ' more in the file' : '',
-    '', 'Full transcript attached. Reply with the numbers of answers that sound weak or wrong and I will fix the examples.'].filter(s => s !== undefined).join('\n');
+    weekly, '', 'Full transcript attached. Reply with the numbers of answers that sound weak or wrong and I will fix the examples.'].filter(s => s !== undefined).join('\n');
 
   console.log(transcript);
   console.log('\n' + summary);
