@@ -119,9 +119,23 @@
   // ---------- radio ----------
   var R = { audio: new Audio(), cur: null };
   R.audio.preload = 'none';
+  // Android/Telegram webviews refuse audio that starts without a touch (NotAllowedError). When a deep link
+  // asked for a station, show one big "tap to play" sheet; the first touch anywhere starts the stream.
+  function armTapToPlay(r) {
+    var s = document.getElementById('tapPlay');
+    if (!s) { s = document.createElement('div'); s.id = 'tapPlay'; s.setAttribute('style', 'position:fixed;left:12px;right:12px;bottom:76px;z-index:60;background:linear-gradient(135deg,rgba(0,200,150,.96),rgba(0,150,136,.94));color:#fff;border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 34px rgba(0,0,0,.25);font-weight:800;font-size:17px;cursor:pointer'); document.body.appendChild(s); }
+    s.innerHTML = '<span style="font-size:30px">▶️</span><span>' + esc(r.nameAm || r.name) + '<br><small style="font-weight:600;opacity:.9">ለማጫወት ይንኩ · Tap to play</small></span>';
+    var go = function () { R.audio.play().catch(function () {}); s.remove(); document.removeEventListener('pointerdown', go, true); paintNow(); };
+    s.onclick = go;
+    document.addEventListener('pointerdown', go, true); // any first touch on the page counts
+  }
   function playRadio(r) {
     if (R.cur && R.cur.id === r.id && !R.audio.paused) { R.audio.pause(); paintNow(); return; }
-    R.cur = r; R.audio.src = r.stream; R.audio.play().catch(function () { toast('መጫወት አልተቻለም — ' + (r.site ? 'በጣቢያው ገጽ ይሞክሩ' : 'እንደገና ይሞክሩ') + ' · Could not play'); });
+    R.cur = r; R.audio.src = r.stream;
+    R.audio.play().catch(function (e) {
+      if (e && /NotAllowed/i.test(e.name || '')) { armTapToPlay(r); return; }
+      toast('መጫወት አልተቻለም — ' + (r.site ? 'በጣቢያው ገጽ ይሞክሩ' : 'እንደገና ይሞክሩ') + ' · Could not play');
+    });
     paintNow();
   }
   function paintNow() {
