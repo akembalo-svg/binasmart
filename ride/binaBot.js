@@ -66,6 +66,18 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     } catch (err) { console.error('[binaBot] ticket ' + code + ': ' + err.message); return api.sendMessage(chatId, baseUrl + '/ticket/' + code); }
   }
 
+  // Same small keyboard for typed and spoken questions: a ride button when the topic is a ride, else just Menu.
+  function replyMarkup(reply, text) {
+    const wantsRide = /ride|taxi|ታክሲ|ጉዞ|\/ride/i.test(String(reply) + ' ' + String(text));
+    return { inline_keyboard: wantsRide ? [[{ text: '🚕 Book a ride · ጉዞ ይያዙ', web_app: { url: baseUrl + '/ride' } }], [{ text: '☰ Menu · ዝርዝር', callback_data: 'menu' }]] : [[{ text: '☰ Menu · ዝርዝር', callback_data: 'menu' }]] };
+  }
+  // A hum or noise comes back from the transcriber as one repeated letter ("እህህህህ…"); treat it as unclear.
+  function isNoise(t) {
+    const s = String(t).replace(/[\s.…]/g, ''); if (s.length < 4) return false;
+    const counts = {}; for (const ch of s) counts[ch] = (counts[ch] || 0) + 1;
+    return Math.max(...Object.values(counts)) / s.length > 0.6;
+  }
+
   // A voice note: download from Telegram, transcribe through the app (Gemini), then answer it like typed text.
   async function handleVoice(chatId, msg) {
     const v = msg.voice || msg.audio;
@@ -77,10 +89,10 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       const r = await f(assistantUrl.replace(/\/api\/assistant$/, '/api/assistant/transcribe'), { method: 'POST', headers: { 'content-type': 'application/json', 'x-owner-key': internalKey || '' }, body: JSON.stringify({ audio: buf.toString('base64'), mime: v.mime_type || 'audio/ogg' }) });
       const d = await r.json().catch(() => ({}));
       const text = d && d.ok ? String(d.text || '').trim() : '';
-      if (!text || /^\[unclear\]/i.test(text)) return api.sendMessage(chatId, 'ይቅርታ፣ ድምጹን መስማት አልቻልኩም። እባክዎ ይጻፉ ወይም እንደገና ይሞክሩ። · Sorry, I could not hear that. Please type it or try again.');
+      if (!text || /^\[unclear\]/i.test(text) || isNoise(text)) return api.sendMessage(chatId, 'ይቅርታ፣ ድምጹን መስማት አልቻልኩም። እባክዎ ይጻፉ ወይም እንደገና ይሞክሩ። · Sorry, I could not hear that. Please type it or try again.');
       const reply = await askBini(chatId, text.slice(0, 1200), msg.from);
       if (!reply) return api.sendMessage(chatId, '🎤 «' + text.slice(0, 300) + '»\n\nቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ።');
-      return api.sendMessage(chatId, '🎤 «' + text.slice(0, 300) + '»\n\n' + forTelegram(reply), { reply_markup: menuMarkup() });
+      return api.sendMessage(chatId, '🎤 «' + text.slice(0, 300) + '»\n\n' + forTelegram(reply), { reply_markup: replyMarkup(reply, text) });
     } catch (e) { console.error('[binaBot] voice: ' + e.message); return api.sendMessage(chatId, 'ይቅርታ፣ የድምጽ መልእክቱን ማንበብ አልቻልኩም። እባክዎ ይጻፉ። · Sorry, I could not read that voice note. Please type it.'); }
   }
 
@@ -116,8 +128,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     if (api.sendChatAction) api.sendChatAction(chatId, 'typing').catch(() => {});
     const reply = await askBini(chatId, text.slice(0, 1200), msg.from);
     if (!reply) return api.sendMessage(chatId, 'Bini is busy for a moment — please try again in a minute, or open bina.et. · ቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ።', { reply_markup: menuMarkup() });
-    const wantsRide = /ride|taxi|ታክሲ|ጉዞ|\/ride/i.test(reply + ' ' + text);
-    return api.sendMessage(chatId, forTelegram(reply), { reply_markup: { inline_keyboard: wantsRide ? [[{ text: '🚕 Book a ride · ጉዞ ይያዙ', web_app: { url: baseUrl + '/ride' } }], [{ text: '☰ Menu · ዝርዝር', callback_data: 'menu' }]] : [[{ text: '☰ Menu · ዝርዝር', callback_data: 'menu' }]] }, disable_web_page_preview: true });
+    return api.sendMessage(chatId, forTelegram(reply), { reply_markup: replyMarkup(reply, text), disable_web_page_preview: true });
   }
 
   async function handleCallback(cq) {
