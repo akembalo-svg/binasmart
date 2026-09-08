@@ -634,7 +634,8 @@ fastify.post('/api/assistant', async (req, reply) => {
   try {
     const ctx = await knowledge.contextFor(msg).catch(() => '');
     const am = knowledge.isAmharic(msg);
-    const voice = am ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : '\n\nLANGUAGE: the user wrote in ENGLISH. Reply in English only (Amharic words allowed only for product names). Do not switch to Amharic even if the knowledge block is in Amharic.';
+    const latin = am && !/[ሀ-፿]/.test(msg);
+    const voice = am ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() + (latin ? '\n\nLANGUAGE: the user typed Amharic in LATIN letters. Reply in Amharic script (Ethiopic), then end with ONE short line in parentheses that gives the key point in Latin letters the way they typed, e.g. (Wagaw kwami new, /ride lay yasgebu.)' : '\n\nLANGUAGE: the user wrote in Amharic script. Reply in Amharic script.') : '\n\nLANGUAGE: the user wrote in ENGLISH. Reply in English only (Amharic words allowed only for product names). Do not switch to Amharic even if the knowledge block is in Amharic.';
     const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
     let text = await callBini(ASSIST_SYS + ASSIST_FACTS + voice + turn + (ctx ? '\n\n' + ctx : ''), [...hist, { role: 'user', content: msg }], 700);
     text = biniGuards(text, msg, hist);
