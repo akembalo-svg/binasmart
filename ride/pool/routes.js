@@ -16,6 +16,24 @@ module.exports = function poolRoutes(fastify, { pool, riderBotToken, drive, limi
     return { ok: true, ...(await pool.list(lat, lng)) };
   });
 
+  // ONE round trip for the Pool screen (slow networks): groups near me + today's corridors together.
+  fastify.get('/api/pool/board', async (req, reply) => {
+    if (!listRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
+    const lat = num(req.query.lat, 8.5, 9.5), lng = num(req.query.lng, 38.4, 39.2);
+    reply.header('Cache-Control', 'no-store');
+    const [l, n] = await Promise.all([pool.list(lat, lng), (lat != null && lng != null) ? pool.near(lat, lng) : Promise.resolve({ groups: [], radiusM: 0 })]);
+    return { ok: true, ...l, groups: n.groups, located: lat != null && lng != null };
+  });
+
+  // The share card behind /pool/<id>: public, no phones.
+  fastify.get('/api/pool/:id/public', async (req, reply) => {
+    if (!pollRL(req.params.id)) return reply.code(429).send({ ok: false, error: 'slow_down' });
+    const g = await pool.pub(String(req.params.id));
+    if (!g) return reply.code(404).send({ ok: false, error: 'not_found' });
+    reply.header('Cache-Control', 'no-store');
+    return { ok: true, group: g };
+  });
+
   // Groups near me: cars still filling whose boarding point is within ~2.5 km.
   fastify.get('/api/pool/near', async (req, reply) => {
     if (!listRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
@@ -41,7 +59,7 @@ module.exports = function poolRoutes(fastify, { pool, riderBotToken, drive, limi
     return { name, phone, telegramId: tg ? tg.user.id : null, tg, mode: b.mode === 'now' ? 'now' : 'wait', paymentMethod: b.paymentMethod };
   }
   const point = p => { if (!p || typeof p !== 'object') return null; const lat = num(p.lat, 8.5, 9.5), lng = num(p.lng, 38.4, 39.2); if (lat == null || lng == null) return null; return { lat, lng, label: String(p.label || '').slice(0, 120) || (lat.toFixed(5) + ', ' + lng.toFixed(5)) }; };
-  const answer = (reply, r, w) => { if (!r.ok) return reply.code(r.error === 'not_found' ? 404 : (/leaving|full|far/.test(r.error) ? 409 : 400)).send(r); return { ...r, phone: w.tg ? w.phone : undefined }; };
+  const answer = (reply, r, w) => { if (!r.ok) return reply.code(r.error === 'not_found' ? 404 : (/leaving|full|far|women_only/.test(r.error) ? 409 : 400)).send(r); return { ...r, phone: w.tg ? w.phone : undefined }; };
 
   fastify.post('/api/pool/join', async (req, reply) => {
     const w = who(req, reply); if (!w) return;
@@ -55,15 +73,15 @@ module.exports = function poolRoutes(fastify, { pool, riderBotToken, drive, limi
     const b = req.body || {};
     const pickup = point(b.pickup), dropoff = point(b.dropoff);
     if (!pickup || !dropoff) return reply.code(400).send({ ok: false, error: 'pickup and dropoff inside Addis required' });
-    return answer(reply, await pool.create({ pickup, dropoff, mode: w.mode, name: w.name, phone: w.phone, telegramId: w.telegramId, paymentMethod: w.paymentMethod }), w);
+    return answer(reply, await pool.create({ pickup, dropoff, mode: w.mode, name: w.name, phone: w.phone, telegramId: w.telegramId, paymentMethod: w.paymentMethod, womenOnly: b.womenOnly === true }), w);
   });
 
-  // Join one specific car from the "near me" list.
+  // Join one specific car from the "near me" list or a share link.
   fastify.post('/api/pool/:id/join', async (req, reply) => {
     const w = who(req, reply); if (!w) return;
     const b = req.body || {};
     return answer(reply, await pool.joinById(String(req.params.id), { stopId: String(b.stopId || ''), mode: w.mode, name: w.name, phone: w.phone, telegramId: w.telegramId, paymentMethod: w.paymentMethod,
-      lat: num(b.lat, 8.5, 9.5), lng: num(b.lng, 38.4, 39.2) }), w);
+      lat: num(b.lat, 8.5, 9.5), lng: num(b.lng, 38.4, 39.2), female: b.female === true }), w);
   });
 
   fastify.get('/api/pool/:id', async (req, reply) => {

@@ -220,3 +220,16 @@ html.next .gnew small{display:block;font-size:10.5px;font-weight:600;color:var(-
 html.next.dark .grp{background:rgba(0,153,255,.14);border-color:rgba(0,153,255,.35)}
 html.next.dark .gtop b{color:#fff}html.next.dark .gseats{color:#93C5FD}
 html.next.dark .gnew{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(0,200,150,.5)}
+
+/* v7 (8 Sep 2026): share row, women-only switch, invite card */
+html.next .share{margin:6px 0 2px}
+html.next .shrow{display:flex;gap:6px;margin-top:6px}
+html.next .shrow .btn{flex:1;padding:9px 6px;font-size:12.5px;border-radius:12px;text-align:center;justify-content:center;display:inline-flex}
+html.next .wo{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;margin:4px 0 8px;padding:9px 12px;border-radius:14px;background:rgba(236,72,153,.08);border:1px solid rgba(236,72,153,.3)}
+html.next .wo input{width:18px;height:18px;accent-color:#db2777}
+html.next .wo small{font-weight:600;color:var(--mut);font-size:11px}
+html.next .grp.wo{border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.06)}
+html.next .grp.inv{border:1.5px solid rgba(245,158,11,.7);background:rgba(245,158,11,.08)}
+html.next .gtag{font-size:11px;font-weight:800;color:#b45309;margin-bottom:4px}
+html.next.dark .wo{background:rgba(236,72,153,.14);color:#fff}
+html.next.dark .grp.inv{background:rgba(245,158,11,.14)}html.next.dark .gtag{color:#fcd34d}

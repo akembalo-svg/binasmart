@@ -1005,6 +1005,8 @@ model Rider {
   name       String
   telegramId String?
   rating     Float    @default(5)
+  noShows    Int      @default(0)   // pool no-shows in the current window
+  lastNoShowAt DateTime?
   rides      Ride[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -1094,6 +1096,8 @@ model Pool {
   pickup       Json?      // custom: { lat, lng, label }
   dropoff      Json?
   createdBy    String?    // custom: the phone that started the group
+  womenOnly    Boolean    @default(false)
+  driverId     String?    // a driver-opened car: pre-assigned, no auction
   tier         String
   seats        Int        // capacity
   status       String     @default("filling") // filling | dispatching | cancelled (afterwards: the Ride's status)
@@ -1107,6 +1111,7 @@ model Pool {
 
   @@index([status])
   @@index([corridorKey, status])
+  @@index([driverId])
 }
 
 model PoolSeat {

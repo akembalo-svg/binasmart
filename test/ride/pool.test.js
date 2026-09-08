@@ -221,3 +221,22 @@ test('groups near me: a custom group from anywhere; nearby riders see it and joi
   assert.equal((await w.pool.near(9.0325, 38.7605)).groups.length, 0, 'a leaving car is no longer offered');
   assert.equal((await w.pool.create({ pickup: here, dropoff: { lat: 9.0301, lng: 38.7601, label: 'next door' }, mode: 'wait', name: 'X', phone: '+25191100007' })).error, 'too_close');
 });
+
+test('share card is public and phone-free; women-only groups refuse riders who do not confirm', async () => {
+  const w = world();
+  const a = await w.pool.create({ pickup: { lat: 9.03, lng: 38.76, label: 'Sheraton gate' }, dropoff: { lat: 8.9975, lng: 38.7876, label: 'Bole' }, mode: 'wait', name: 'Sara Tesfaye', phone: '+25191100001', womenOnly: true });
+  assert.equal(a.pool.womenOnly, true);
+  const g = await w.pool.pub(a.pool.id);
+  assert.equal(g.open, true); assert.equal(g.womenOnly, true); assert.deepEqual(g.riders, ['Sara']);
+  assert.equal(JSON.stringify(g).indexOf('+2519'), -1, 'no phone numbers in the public card');
+  assert.equal(g.seatIfJoinEtb, a.pool.ladder[1].seatEtb);
+  const no = await w.pool.joinById(a.pool.id, { mode: 'wait', name: 'Abel', phone: '+25191100002', lat: 9.03, lng: 38.76 });
+  assert.equal(no.error, 'women_only');
+  const yes = await w.pool.joinById(a.pool.id, { mode: 'wait', name: 'Beti', phone: '+25191100003', lat: 9.03, lng: 38.76, female: true });
+  assert.equal(yes.ok, true); assert.equal(yes.pool.filled, 2);
+  const n = await w.pool.near(9.03, 38.76);
+  assert.equal(n.groups[0].womenOnly, true);
+  await w.pool.leave(a.pool.id, '+25191100001'); await w.pool.leave(a.pool.id, '+25191100003');
+  assert.equal((await w.pool.pub(a.pool.id)).open, false, 'a cancelled car is not open');
+  assert.equal(await w.pool.pub('nope'), null);
+});

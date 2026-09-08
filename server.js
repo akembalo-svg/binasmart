@@ -2685,12 +2685,36 @@ fastify.post('/api/wallet/pay', async (req, reply) => {
 fastify.get('/wallet', async (req, reply) => reply.type('text/html').send(WALLET_HTML));
 
 // ===== BinaSmart Ride (Phase 1: rider app + concierge) =====
-require('./ride')(fastify, {
+const rideMod = require('./ride')(fastify, {
   prisma, sendTg, OWNER_KEY,
   OWNER_CHAT: '8096525984',
   ROUTER_URL: process.env.ROUTER_URL || 'http://127.0.0.1:8989',
   askBini: callBini, // Bini's LLM adapter, for /api/ride/intent (Ask Bini)
   BASE_URL: 'https://bina.et'
+});
+
+// BinaPool share link: /pool/<id>. A 3 KB page with real OG tags (WhatsApp / Telegram previews show the
+// group and its price) and one button into the app. No fonts, no scripts: it must open on 2G.
+fastify.get('/pool/:id', async (req, reply) => {
+  const id = String(req.params.id).replace(/[^a-z0-9]/gi, '').slice(0, 40);
+  const g = id && rideMod.pool ? await rideMod.pool.pub(id).catch(() => null) : null;
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  reply.type('text/html; charset=utf-8').header('Cache-Control', 'no-store');
+  if (!g) return reply.code(404).send('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BinaPool</title><body style="font-family:system-ui;padding:24px;background:#F8FAFC;color:#081120"><h2>ቡድኑ አልተገኘም · Group not found</h2><p><a href="/ride?pool=1" style="color:#009688;font-weight:800">ጋራ ጉዞ ይክፈቱ · Open BinaPool →</a></p></body>');
+  const who = g.riders.length ? g.riders.join(', ') : 'BinaPool';
+  const left = g.seats - g.filled;
+  const title = (g.open ? who + ' · ' + g.name + ' · ' + left + ' seats left · ' + g.seatIfJoinEtb + ' ETB' : g.name + ' · this car has left');
+  const desc = g.open ? 'ጋራ ጉዞ · Share the car, pay per seat. ' + g.filled + '/' + g.seats + ' in the car, ' + g.seatIfJoinEtb + ' ETB if you join, ' + g.seatIfFullEtb + ' ETB when full. Leaves in ' + Math.ceil(g.leavesInS / 60) + ' min. Cash to the driver.' : 'Open BinaPool to find or start another group near you.';
+  const html = '<!doctype html><html lang="am"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(title) + '</title>'
+    + '<meta property="og:title" content="' + esc(title) + '"><meta property="og:description" content="' + esc(desc) + '"><meta property="og:image" content="https://bina.et/static/og-pool.png"><meta property="og:url" content="https://bina.et/pool/' + esc(g.id) + '"><meta name="theme-color" content="#009688">'
+    + '<style>body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#F8FAFC;color:#081120;padding:18px}.c{max-width:420px;margin:0 auto;background:#fff;border:1px solid rgba(8,17,32,.08);border-radius:20px;padding:18px}.k{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.1em;color:#009688;background:rgba(0,200,150,.12);border-radius:999px;padding:5px 10px}h1{font-size:22px;margin:10px 0 4px;line-height:1.2}p{margin:6px 0;color:#475569;font-size:14px}.pr{font-size:34px;font-weight:900;color:#009688;margin:10px 0 0}.pr small{display:block;font-size:12px;color:#64748B;font-weight:600}.b{display:block;text-align:center;margin-top:14px;padding:15px;border-radius:16px;background:linear-gradient(135deg,#00C896,#009688);color:#fff;font-weight:800;text-decoration:none;font-size:16px}.g{background:#eef2f7;color:#081120}.w{background:#fff3f7;border:1px solid #f9a8d4;border-radius:12px;padding:8px 10px;font-size:13px;margin-top:8px}</style></head><body><div class="c">'
+    + '<span class="k">👥 ጋራ ጉዞ · BINAPOOL</span><h1>' + esc(g.nameAm) + '</h1><p>' + esc(g.name) + (g.kind === 'custom' ? ' · from ' + esc(g.board.label) : ' · board at ' + esc(g.board.label)) + '</p>'
+    + (g.womenOnly ? '<div class="w">👩 ሴቶች ብቻ · Women only</div>' : '')
+    + (g.open ? '<p>' + esc(who) + ' · ' + g.filled + '/' + g.seats + ' በመኪናው · leaves in ' + Math.ceil(g.leavesInS / 60) + ' min' + (g.driverWaiting ? ' · 🚗 driver waiting' : '') + '</p><div class="pr">' + g.seatIfJoinEtb + ' ETB<small>ከተቀላቀሉ · if you join · ' + g.seatIfFullEtb + ' ETB when full · cash to the driver</small></div>'
+      + '<a class="b" href="/ride?join=' + esc(g.id) + '">ተቀላቀል · Join this group</a><a class="b g" href="https://t.me/bina_smart_bot?startapp=j_' + esc(g.id) + '">✈️ በቴሌግራም · Open in Telegram</a>'
+      : '<p>መኪናው ተነስቷል · This car has already left.</p><a class="b" href="/ride?pool=1">ሌላ ቡድን ፈልግ · Find another group</a>')
+    + '</div></body></html>';
+  return html;
 });
 
 // ===== BinaSmart Cinema & Events: seat booking (Phase A). Mounted only when CINEMA_ENABLED=1 =====

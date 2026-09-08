@@ -93,10 +93,28 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
       out.push({ id: p.id, kind: spec.kind, corridorKey: p.corridorKey, name: spec.name, nameAm: spec.nameAm, from: spec.from, to: spec.to,
         board: board.stop, distM: board.distM, filled: seats.length, seats: p.seats, leavesInS: Math.max(0, Math.round((new Date(p.dispatchAt).getTime() - ms) / 1000)),
         seatIfJoinEtb: nowRow.seatEtb, seatIfFullEtb: full.seatEtb, distanceM: q.distanceM, durationS: q.durationS,
+        womenOnly: !!p.womenOnly, driverWaiting: !!p.driverId,
         riders: seats.map(s => String(s.riderName || '').split(' ')[0]) });
     }
-    out.sort((a, b) => a.distM - b.distM);
+    // A car with its driver already waiting beats one still hoping for a driver; then nearest first.
+    out.sort((a, b) => (b.driverWaiting - a.driverWaiting) || (a.distM - b.distM));
     return { groups: out, radiusM: R };
+  }
+
+  // The public card behind a share link (/pool/<id>): no phones, no seat ids.
+  async function pub(poolId) {
+    const p = await prisma.pool.findUnique({ where: { id: poolId } });
+    if (!p) return null;
+    const spec = specOf(p); if (!spec) return null;
+    const seats = await heldSeats(p.id);
+    const q = await quoteFor(spec);
+    const ms = clock();
+    const open = p.status === 'filling' && new Date(p.dispatchAt).getTime() > ms && seats.length < p.seats;
+    const nowRow = rowFor(q.ladder, Math.min(q.seats, seats.length + 1)), full = rowFor(q.ladder, q.seats);
+    return { id: p.id, kind: spec.kind, status: p.status, open, name: spec.name, nameAm: spec.nameAm, board: spec.from, to: spec.to,
+      filled: seats.length, seats: p.seats, leavesInS: open ? Math.max(0, Math.round((new Date(p.dispatchAt).getTime() - ms) / 1000)) : 0,
+      seatIfJoinEtb: nowRow.seatEtb, seatIfFullEtb: full.seatEtb, womenOnly: !!p.womenOnly, driverWaiting: !!p.driverId,
+      riders: seats.map(s => String(s.riderName || '').split(' ')[0]), stops: spec.stops };
   }
 
   async function addSeat(pool, spec, { stopId, mode, name, phone, telegramId, paymentMethod }) {
@@ -136,7 +154,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
   }
 
   // Start a group from where I stand to anywhere in Addis. Others nearby see it under "near me".
-  async function create({ pickup, dropoff, mode, name, phone, telegramId, paymentMethod }) {
+  async function create({ pickup, dropoff, mode, name, phone, telegramId, paymentMethod, womenOnly }) {
     if (!pickup || !dropoff) return { ok: false, error: 'pickup_and_dropoff_required' };
     if (!name || !phone) return { ok: false, error: 'name_and_phone_required' };
     if (C.haversineM(pickup, dropoff) < 400) return { ok: false, error: 'too_close' };
@@ -145,7 +163,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     const s = await settings.get();
     const tier = C.TIER, seats = (s.tiers[tier] && s.tiers[tier].seats) || 4;
     const ms = clock();
-    const pool = await prisma.pool.create({ data: { kind: 'custom', corridorKey: 'custom', tier, seats, status: 'filling', createdBy: phone,
+    const pool = await prisma.pool.create({ data: { kind: 'custom', corridorKey: 'custom', tier, seats, status: 'filling', createdBy: phone, womenOnly: !!womenOnly,
       pickup: { lat: pickup.lat, lng: pickup.lng, label: pickup.label }, dropoff: { lat: dropoff.lat, lng: dropoff.lng, label: dropoff.label },
       openedAt: new Date(ms), dispatchAt: new Date(ms + (mode === 'now' ? 0 : wait) * 1000) } });
     return addSeat(pool, specOf(pool), { stopId: 'origin', mode, name, phone, telegramId, paymentMethod });
@@ -153,13 +171,14 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
 
   // Join a specific car from the "near me" list. Corridor cars take a boarding stop; custom groups
   // board at their start, and only riders actually near it may join.
-  async function joinById(poolId, { stopId, mode, name, phone, telegramId, paymentMethod, lat, lng }) {
+  async function joinById(poolId, { stopId, mode, name, phone, telegramId, paymentMethod, lat, lng, female }) {
     if (!name || !phone) return { ok: false, error: 'name_and_phone_required' };
     const pool = await prisma.pool.findUnique({ where: { id: poolId } });
     if (!pool) return { ok: false, error: 'not_found' };
     const spec = specOf(pool); if (!spec) return { ok: false, error: 'not_found' };
     const mine = await mySeat(phone);
     if (mine) return { ok: true, duplicate: true, ...(await view(mine.poolId, phone)) };
+    if (pool.womenOnly && female !== true) return { ok: false, error: 'women_only' };
     if (pool.status !== 'filling' || new Date(pool.dispatchAt).getTime() <= clock()) return { ok: false, error: 'car_already_leaving' };
     if ((await heldSeats(pool.id)).length >= pool.seats) return { ok: false, error: 'car_full' };
     let sid = 'origin';
@@ -235,7 +254,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     const n = seats.length;
     const row = rowFor(q.ladder, Math.max(1, n));
     const myStop = spec.stops.find(s => s.id === mine.stopId) || spec.from;
-    return { ok: true, pool: { id: pool.id, kind: spec.kind, status, corridor: { key: spec.key, name: spec.name, nameAm: spec.nameAm, stops: spec.stops, from: spec.from, to: spec.to },
+    return { ok: true, pool: { id: pool.id, kind: spec.kind, status, womenOnly: !!pool.womenOnly, driverWaiting: !!pool.driverId, corridor: { key: spec.key, name: spec.name, nameAm: spec.nameAm, stops: spec.stops, from: spec.from, to: spec.to },
       seats: pool.seats, filled: n, leavesInS: pool.status === 'filling' ? Math.max(0, Math.round((new Date(pool.dispatchAt).getTime() - clock()) / 1000)) : 0,
       seatFareEtb: pool.seatFareEtb || row.seatEtb, ladder: q.ladder.rows,
       riders: seats.map(s => ({ name: String(s.riderName || '').split(' ')[0], stopId: s.stopId, status: s.status, me: s.riderPhone === phone })) },
@@ -326,7 +345,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     return pool ? notifySeats(pool.id, event) : 0;
   }
 
-  return { list, near, join, create, joinById, dispatchPool, sweep, view, leave, board, mine, seatsForRide, phoneMayTrack, notifySeats, notifyRideEvent, corridorQuote, specOf, WAIT_S: wait };
+  return { list, near, pub, join, create, joinById, dispatchPool, sweep, view, leave, board, mine, seatsForRide, phoneMayTrack, notifySeats, notifyRideEvent, corridorQuote, specOf, WAIT_S: wait };
 }
 
 module.exports = { makePool, WAIT_S, OPEN, NEAR_M };
