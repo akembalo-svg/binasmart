@@ -610,7 +610,7 @@ const COMPLAINT_RE = /ዘግይ|አያነሳ|አልመጣ|ችግር|ተበላሽ
 function biniGuards(text, msg, hist) {
   let t = String(text || '');
   const greeted = /^(hi|hello|hey|selam|salam|ሰላም|ጤና ይስጥልኝ|እንደምን)/i.test(String(msg || '').trim());
-  if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(ቢኒ ነኝ[።!.,፣]?|ቢኒ እባላለሁ[።!.,፣]?|Bini ነኝ[^\n]{0,4}|Bini here[!,.]?|I am Bini[!,.]?|I'm Bini[!,.]?)\s*/i, '');
+  if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(ቢኒ ነኝ[።!.,፣]?|ቢኒ እባላለሁ[።!.,፣]?|Bini ነኝ[^\n]{0,4}|(?:Bini|ቢኒ) here[!,.]?(?: I can help with that[!.]?)?|I am Bini[!,.]?|I'm Bini[!,.]?|This is Bini[!,.]?)\s*/i, '');
   t = t.replace(/^[\s\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}!።]+\n+/u, ''); // an emoji-only first line left behind by the intro strip
   if (COMPLAINT_RE.test(msg)) t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/[ \t]+\n/g, '\n');
   t = t.replace(/\/ride\?id=\.{2,}|\(\/ride\?id=[^)]*\)/g, '/ride');
