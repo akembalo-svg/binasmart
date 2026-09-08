@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BinaPool · ጋራ ጉዞ — Share the car to work, pay per seat · Addis Ababa</title>
+<meta name="description" content="BinaPool: share a Comfort car on the Addis Ababa commute into Bole and Kazanchis. Fixed price per seat, the more riders the less you pay, the car leaves in 8 minutes or when full. Cash to the driver. · ጋራ ጉዞ፡ መኪናውን ተጋርተው በመቀመጫ ይክፈሉ።">
+<link rel="canonical" href="https://bina.et/pool">
+<meta property="og:title" content="BinaPool · ጋራ ጉዞ — Share the car, split the fare">
+<meta property="og:description" content="Megenagna, CMC, Piassa, Mexico → Bole and Kazanchis. 4 riders: pay a quarter. Leaves in 8 min or when full. No app, no download.">
+<meta property="og:image" content="https://bina.et/static/og-pool.png">
+<meta property="og:url" content="https://bina.et/pool">
+<meta name="theme-color" content="#009688">
+<link rel="icon" href="/icon-32.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaPool","alternateName":"ጋራ ጉዞ","serviceType":"Shared ride / carpool","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/pool"}</script>
+<style>
+:root{--em:#00C896;--em2:#009688;--ink:#081120;--mut:#64748B;--bg:#F8FAFC;--line:rgba(8,17,32,.08);--blue:#0099FF;--vio:#6C63FF}
+*{box-sizing:border-box;margin:0;padding:0}html{background:var(--bg)}
+body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',-apple-system,'Segoe UI',Roboto,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.nav{position:sticky;top:10px;z-index:50;margin:10px auto 0;max-width:1080px;height:56px;padding:0 8px 0 10px;display:flex;align-items:center;gap:10px;border-radius:18px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.9);box-shadow:0 20px 50px -28px rgba(8,17,32,.35)}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16px;letter-spacing:-.3px}
+.logo i{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -10px rgba(0,200,150,.9)}
+.logo i svg{width:17px;height:17px}.logo span{color:var(--em)}
+.sp{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 12px;border-radius:12px;font-size:12px;font-weight:800;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);white-space:nowrap}
+.hero{margin:14px auto 0;max-width:1080px;border-radius:28px;padding:34px 22px 26px;color:#fff;background:linear-gradient(135deg,#0F172A,#0B3B31 70%,#00C896 160%);position:relative;overflow:hidden;box-shadow:0 26px 60px -30px rgba(8,17,32,.6)}
+.hero .glow{position:absolute;right:-120px;top:-160px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(0,153,255,.35),rgba(0,153,255,0) 65%)}
+.kick{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.12em;color:#14D8B4;background:rgba(0,200,150,.14);border:1px solid rgba(0,200,150,.35);border-radius:999px;padding:6px 12px;position:relative}
+h1{font-size:34px;line-height:1.1;letter-spacing:-1px;margin:14px 0 6px;font-weight:900;position:relative}
+h1 small{display:block;font-size:17px;font-weight:700;color:#14D8B4;letter-spacing:0;margin-top:4px}
+.hero p{color:rgba(255,255,255,.8);max-width:560px;position:relative}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:54px;padding:0 20px;border-radius:16px;font-weight:800;font-size:15px;color:#fff;border:1px solid rgba(255,255,255,.6);background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 16px 32px -14px rgba(0,200,150,.6);text-shadow:0 1px 2px rgba(0,80,60,.35)}
+.cta.ghost{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4);text-shadow:none;box-shadow:none}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative}
+h2{font-size:22px;letter-spacing:-.5px;font-weight:900;margin:30px 0 4px}h2 small{display:block;font-size:13px;font-weight:600;color:var(--mut);letter-spacing:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 16px 36px -28px rgba(8,17,32,.3)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--line)}th{font-size:11px;letter-spacing:.08em;color:var(--mut);text-transform:uppercase}
+td b{color:var(--em2);font-size:16px}tr.hot td{background:rgba(0,200,150,.08)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+.step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}
+.step i{display:inline-flex;width:34px;height:34px;border-radius:11px;background:rgba(0,200,150,.12);color:var(--em2);align-items:center;justify-content:center;font-style:normal;font-weight:800;margin-bottom:8px}
+.step b{display:block;font-size:15px}.step small{display:block;color:var(--mut);font-size:12.5px;font-weight:600}.step p{font-size:13.5px;margin-top:6px;color:#334155}
+.corrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:10px}
+.corr{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}
+.corr b{display:block;font-size:15px}.corr small{display:block;color:var(--mut);font-weight:600;font-size:12px}
+.corr .st{margin-top:8px;font-size:12.5px;color:#334155}.corr .pr{margin-top:8px;font-weight:800;color:var(--em2)}
+.band{margin-top:30px;border-radius:24px;padding:22px;color:#fff;background:linear-gradient(135deg,#0099FF,#6C63FF)}
+.band b{font-size:19px;display:block}.band p{opacity:.9;margin:6px 0 12px;max-width:600px}
+.note{font-size:12.5px;color:var(--mut);margin-top:10px}
+@media(min-width:760px){h1{font-size:48px}.hero{padding:54px 44px 40px}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="logo" href="/"><i><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><g transform="scale(0.024)"><path transform="translate(255,700) scale(0.62,-0.62)" d="M699 -82Q668 -82 645.5 -55.0Q623 -28 615 0H437V465Q437 551 408.0 597.5Q379 644 311 644Q236 644 208.5 595.0Q181 546 181 464V0H90V472Q90 586 144.0 655.0Q198 724 311 724Q426 724 477.0 658.5Q528 593 528 470V73H615Q623 101 645.5 127.5Q668 154 699 154H723L697 36L723 -82Z" fill="#fff" stroke="#fff" stroke-width="56" stroke-linejoin="round"/><path d="M800 150l24 62 62 24-62 24-24 62-24-62-62-24 62-24z" fill="#fff"/></g></svg></i>Bina<span>Pool</span></a>
+  <span class="sp"></span>
+  <a class="pill" href="/ride">🚗 ራይድ · Ride</a>
+  <a class="pill" href="https://t.me/bina_smart_bot?startapp=pool" target="_blank" rel="noopener">✈️ Telegram</a>
+</header>
+
+<main class="wrap">
+<section class="hero">
+  <div class="glow"></div>
+  <span class="kick">ጋራ ጉዞ · BINAPOOL · ADDIS ABABA</span>
+  <h1>መኪናውን ተጋሩ፣ ዋጋውን ተካፈሉ። <small>Share the car to work. Pay per seat.</small></h1>
+  <p>ታክሲ መጠበቅ ሰልችቶዎታል? ብቻ መሄድ ውድ ነው? በጠዋት ወደ ቦሌ እና ካዛንችስ፣ ማታ ተመልሰው — ኮምፎርት መኪና በአራት ሰው ይጋሩ። ዋጋው ከመነሳትዎ በፊት ይታያል፤ ብዙ ሲሆኑ ያንሳል፤ መኪናው በ8 ደቂቃ ወይም ሲሞላ ይነሳል።</p>
+  <p style="margin-top:8px;font-size:13.5px">Tired of the taxi queue, and riding alone costs too much? Share a Comfort car on the commute into Bole and Kazanchis. Fixed price per seat, shown before you commit. The more riders, the less each pays. The car leaves in 8 minutes or when full. Cash to the driver.</p>
+  <div class="ctas">
+    <a class="cta" href="/ride?pool=1">👥 ጋራ ጉዞ ጀምር · Join a pool</a>
+    <a class="cta ghost" href="https://t.me/bina_smart_bot?startapp=pool" target="_blank" rel="noopener">✈️ በቴሌግራም · In Telegram</a>
+  </div>
+</section>
+
+<h2>ዋጋው እንዴት ይሰላል? <small>The fare ladder · one rule for riders and drivers</small></h2>
+<div class="card">
+  <table id="ladder">
+    <thead><tr><th>ተጓዦች · Riders</th><th>እያንዳንዱ ይከፍላል · Each pays</th><th>ሹፌሩ ያገኛል · Driver gets</th></tr></thead>
+    <tbody><tr><td colspan="3" style="color:var(--mut)">ዋጋ እየጫንን ነው… · Loading today's prices…</td></tr></tbody>
+  </table>
+  <div class="note" id="ladderNote">Every extra seat lowers your price and raises the driver's income, so everybody wants a full car. Prices come from the same fixed-fare engine as a solo ride; they never change with traffic or rain.</div>
+</div>
+
+<h2>እንዴት ይሠራል? <small>How it works</small></h2>
+<div class="steps">
+  <div class="step"><i>1</i><b>ማቆሚያ ይምረጡ</b><small>Pick your stop</small><p>Open Ride, tap ጋራ ጉዞ · Pool. We show the corridor nearest you and its stops. Walk to the stop; the car follows the line, it does not zigzag.</p></div>
+  <div class="step"><i>2</i><b>አሁን ሂድ ወይም ጠብቅ</b><small>Go now, or wait to pay less</small><p>"Go now" leaves with whoever is in the car at today's price for that count. "Wait" holds up to 8 minutes while others join and your price drops.</p></div>
+  <div class="step"><i>3</i><b>ታርጋውን ያረጋግጡ</b><small>Match the plate, pay your seat</small><p>You see the driver's name, car and plate before boarding, and the car live on the map. Pay only your seat, in cash to the driver.</p></div>
+</div>
+
+<h2>የመንገዶች ዝርዝር <small>Today's corridors · morning into town, evening back out</small></h2>
+<div class="corrs" id="corrs"><div class="corr"><b>እየጫንን ነው… · Loading…</b></div></div>
+<div class="note">ጠዋት 6–10 እና ማታ 16–20 በጣም ብዙ ተጓዥ አለ · Busiest 6–10 and 16–20. Pools run all day; outside peak you may wait for the full 8 minutes.</div>
+
+<div class="band">
+  <b>🚗 ሹፌር ነዎት? · Drivers: a full car pays more than a solo trip.</b>
+  <p>Four seats on one run earn more than one passenger on the same road, and the app does the sums: seat list, who paid, who boarded. No haggling at the kerb.</p>
+  <a class="cta" href="/drive-with-us">ሹፌር ይሁኑ · Drive with us</a>
+</div>
+<div class="note" style="margin:16px 0 30px">ጥያቄ አለዎት? በ WhatsApp <a href="https://wa.me/251911244344" style="color:var(--em2);font-weight:800">+251 911 244 344</a> · Women-only pools and monthly work groups are coming next.</div>
+</main>
+
+<script>
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  fetch('/api/pool/corridors').then(function(r){return r.json()}).then(function(d){
+    if(!d.ok||!d.corridors.length)return;
+    var c=d.corridors[0];
+    document.querySelector('#ladder tbody').innerHTML=c.ladder.map(function(r){return '<tr'+(r.n===c.ladder.length?' class="hot"':'')+'><td>'+r.n+' '+(r.n===1?'ሰው · rider':'ሰዎች · riders')+'</td><td><b>'+r.seatEtb+' ETB</b></td><td>'+r.driverTotalEtb+' ETB</td></tr>'}).join('');
+    document.getElementById('ladderNote').textContent='Example: '+c.name+' ('+(c.distanceM/1000).toFixed(1)+' km, Comfort). Every extra seat lowers your price and raises the driver’s income, so everybody wants a full car. Prices come from the same fixed-fare engine as a solo ride and never change with traffic or rain.';
+    document.getElementById('corrs').innerHTML=d.corridors.map(function(c){var full=c.ladder[c.ladder.length-1];return '<div class="corr"><b>'+esc(c.nameAm)+'</b><small>'+esc(c.name)+' · '+(c.distanceM/1000).toFixed(1)+' km · ~'+Math.round(c.durationS/60)+' min</small><div class="st">🚏 '+c.stops.map(function(s){return esc(s.labelAm)}).join(' → ')+'</div><div class="pr">'+full.seatEtb+' ETB per seat when full · '+c.carFareEtb+' ETB alone</div></div>'}).join('');
+  }).catch(function(){});
+})();
+</script>
+<script src="/static/bina-footer.js?v=9" defer></script>
+</body>
+</html>

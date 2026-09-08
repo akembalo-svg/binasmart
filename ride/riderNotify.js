@@ -2,7 +2,7 @@
 // Status pushes to the person who booked (bookedBy.telegramId), else the rider's Telegram. Fire-and-forget:
 // never throws, never blocks a ride. Only riders who came through Telegram have an id, so web riders are untouched.
 // On assignment we send the car photo itself, so the rider can match the car at the kerb.
-function makeRiderNotify({ prisma, api, baseUrl }) {
+function makeRiderNotify({ prisma, api, baseUrl, pool }) {
   const vehicle = d => [d.vehicleColour, d.vehicleMake].filter(Boolean).join(' ');
   const TEXT = {
     assigned: r => '🚗 Driver ' + r.driver.name + ' is on the way\n' + vehicle(r.driver) + ' · plate ' + r.driver.plate + ' · ' + r.driver.phone
@@ -17,6 +17,8 @@ function makeRiderNotify({ prisma, api, baseUrl }) {
       const fn = TEXT[event]; if (!fn) return false;
       const ride = await prisma.ride.findUnique({ where: { id: rideId }, include: { driver: true, rider: true } });
       if (!ride) return false;
+      // A pool ride has several riders, each with their own seat price: the pool module tells them all.
+      if (pool && prisma.pool) { const n = await pool.notifyRideEvent(rideId, event); if (n > 0) return true; }
       const chat = (ride.bookedBy && ride.bookedBy.telegramId) || (ride.rider && ride.rider.telegramId);
       if (!chat) return false;
       if (event === 'assigned' && !ride.driver) return false;

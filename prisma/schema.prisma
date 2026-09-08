@@ -1072,6 +1072,7 @@ model Ride {
   driverAcceptedAt DateTime?
   offers        RideOffer[]
   locations     DriverLocation[]
+  pool          Pool?
   requestedAt   DateTime  @default(now())
   assignedAt    DateTime?
   arrivedAt     DateTime?
@@ -1082,6 +1083,44 @@ model Ride {
   @@index([status])
   @@index([riderId])
   @@index([driverId])
+}
+
+// BinaPool: one car being filled on a commute corridor. Once dispatched it is carried by ONE Ride
+// (fare = the ladder's driver total); seats hold each rider's own price.
+model Pool {
+  id           String     @id @default(cuid())
+  corridorKey  String     // "<line>:<in|out>" — ride/pool/corridors.js
+  tier         String
+  seats        Int        // capacity
+  status       String     @default("filling") // filling | dispatching | cancelled (afterwards: the Ride's status)
+  seatFareEtb  Int?
+  rideId       String?    @unique
+  ride         Ride?      @relation(fields: [rideId], references: [id])
+  openedAt     DateTime   @default(now())
+  dispatchAt   DateTime
+  dispatchedAt DateTime?
+  poolSeats    PoolSeat[]
+
+  @@index([status])
+  @@index([corridorKey, status])
+}
+
+model PoolSeat {
+  id            String   @id @default(cuid())
+  poolId        String
+  pool          Pool     @relation(fields: [poolId], references: [id])
+  riderId       String?
+  riderName     String
+  riderPhone    String
+  telegramId    String?
+  stopId        String
+  status        String   @default("held") // held | boarded | noshow | cancelled
+  paymentMethod String   @default("cash")
+  fareEtb       Int?
+  joinedAt      DateTime @default(now())
+
+  @@index([poolId])
+  @@index([riderPhone])
 }
 
 model RideSetting {

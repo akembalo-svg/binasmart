@@ -252,7 +252,9 @@
   $('whoGo').addEventListener('click', function () {
     var name = $('whoName').value.trim(), phone = $('whoPhone').value.trim();
     if (name.length < 2 || !/^(\+?251|0)9\d{8}$/.test(phone.replace(/\s/g, ''))) return toast('ስም እና ትክክለኛ ስልክ ያስገቡ · Enter your name and a valid phone');
-    ME = { name: name, phone: phone }; lsSet('bina_ride_me', JSON.stringify(ME)); request(passengerBody() || null);
+    ME = { name: name, phone: phone }; lsSet('bina_ride_me', JSON.stringify(ME));
+    if (S.pendingPool) { var pp = S.pendingPool; S.pendingPool = null; return joinPool(pp); }
+    request(passengerBody() || null);
   });
   function request(pb) {
     var q = selQuote(); if (!q) return;
@@ -277,6 +279,7 @@
   document.addEventListener('visibilitychange', function () { if (!S.ride) return; if (document.hidden) stopPoll(); else if (!['completed', 'cancelled'].includes(S.ride.status)) startPoll(); });
   var LIVE = ['assigned', 'arriving', 'arrived', 'ontrip'];
   function tick() {
+    if (S.pool) return poolTick();
     if (!S.ride) return;
     var id = S.ride.id, ph = encodeURIComponent(ME.phone);
     api('/api/ride/' + id + '?phone=' + ph).then(function (d) { if (d.ok) render(d.ride); }).catch(function () {});
@@ -337,22 +340,141 @@
   function reset(swap) {
     if (IN_TG) { TG.mainHide(); TG.backHide(); }
     $('forOther').checked = false; $('passenger').classList.add('hidden');
-    var a = S.pickup, b = S.dropoff; S.ride = null; S.quote = null; BinaMap.clearRoute();
+    var a = S.pickup, b = S.dropoff; S.ride = null; S.quote = null; S.pool = null; lsDel('bina_pool_active'); BinaMap.clearRoute();
     if (swap && a && b) { setPickup({ lat: b.lat, lng: b.lng, label: b.label }); S.dropoff = { lat: a.lat, lng: a.lng, label: a.label }; BinaMap.setDrop(S.dropoff); return quote(); }
     S.dropoff = null; BinaMap.setDrop(null); show('s-home');
   }
   $('again').addEventListener('click', function () { reset(false); }); $('againC').addEventListener('click', function () { reset(false); });
   $('returnTrip').addEventListener('click', function () { reset(true); });
 
-  // ---- resume an active ride after reload ----
-  var active = lsGet('bina_ride_active');
-  var urlId = new URLSearchParams(location.search).get('id');
+  // ---- BinaPool: share the car on a commute corridor, pay per seat ----
+  // Screens: s-pool (corridors + ladder + Go now / Wait) -> s-poolwait (seats filling) -> the normal
+  // finding / assigned / done screens, driven by the pool view instead of /api/ride/:id.
+  var modeEl = $('mode');
+  function setMode(m) {
+    modeEl.querySelectorAll('button').forEach(function (b) { var on = b.dataset.m === m; b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    if (m === 'pool') openPool(); else show('s-home');
+  }
+  modeEl.querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { setMode(b.dataset.m); }); });
+  $('closePool').addEventListener('click', function () { setMode('solo'); });
+  function fmtLeft(s) { s = Math.max(0, s | 0); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  var POOL = { corridors: [], pick: {} }; // pick[key] = stopId
+  function openPool() {
+    show('s-pool'); $('poolPeak').textContent = 'የመንገዶች ዝርዝር እየጫንን ነው… · Loading corridors…';
+    var q = S.pickup ? '?lat=' + S.pickup.lat + '&lng=' + S.pickup.lng : '';
+    api('/api/pool/corridors' + q).then(function (d) {
+      if (!d.ok) { $('poolPeak').textContent = 'አልተሳካም · Could not load corridors'; return; }
+      POOL.corridors = d.corridors; POOL.waitS = d.waitS;
+      $('poolPeak').innerHTML = (d.dir === 'in' ? '🌅 ጠዋት · ወደ ቦሌ / ካዛንችስ' : '🌇 ማታ · ከቦሌ / ካዛንችስ') + (d.peak ? ' · <b>peak · ብዙ ተጓዥ</b>' : ' · off-peak: 6–10 &amp; 16–20 busiest') + ' · ' + Math.round(d.waitS / 60) + ' ደቂቃ ጠብቆ ያንሳል';
+      renderCorridors();
+    }).catch(function () { $('poolPeak').textContent = 'የአውታረ መረብ ችግር · Network error — try again'; });
+  }
+  function renderCorridors() {
+    $('corridors').innerHTML = POOL.corridors.map(function (c, i) {
+      var pick = POOL.pick[c.key] || (c.nearest && c.nearest.stop.id) || c.stops[0].id;
+      var full = c.ladder[c.ladder.length - 1], cur = c.ladder[Math.max(0, Math.min(c.ladder.length - 1, c.waiting))];
+      var near = c.nearest ? (c.nearest.distM < 950 ? c.nearest.distM + ' m' : (c.nearest.distM / 1000).toFixed(1) + ' km') : '';
+      return '<div class="cc" data-i="' + i + '"><h3><span>' + esc(c.nameAm) + '</span><small>' + (c.distanceM / 1000).toFixed(1) + ' km · ~' + Math.round(c.durationS / 60) + ' min</small></h3><span class="am">' + esc(c.name) + (near ? ' · ቅርብ ማቆሚያ ' + near : '') + '</span>'
+        + '<div class="stops">' + c.stops.slice(0, -1).map(function (s) { return '<button type="button" data-s="' + s.id + '"' + (s.id === pick ? ' class="on"' : '') + '>' + esc(s.labelAm) + '<small>' + esc(s.label) + '</small></button>'; }).join('') + '<button type="button" disabled>🏁 ' + esc(c.to.labelAm) + '<small>' + esc(c.to.label) + '</small></button></div>'
+        + '<div class="ladder">' + c.ladder.map(function (r) { return '<span' + (r.n === Math.max(1, c.waiting + 1) ? ' class="hot"' : '') + '>' + r.seatEtb + '<small>' + r.n + ' ' + (r.n === 1 ? 'ሰው' : 'ሰዎች') + '</small></span>'; }).join('') + '</div>'
+        + '<div class="wait">' + (c.waiting ? '👥 ' + c.waiting + ' ተጓዥ እየጠበቁ ነው · ' + c.waiting + ' waiting · leaves in ' + fmtLeft(c.leavesInS) : '🙋 የመጀመሪያው ይሁኑ · be the first — others join as you wait') + '</div>'
+        + '<div class="go2"><button type="button" class="cta wait" data-m="wait">ጠብቅ · Wait<small>ከ ' + full.seatEtb + ' ETB · up to ' + Math.round((POOL.waitS || 480) / 60) + ' min</small></button>'
+        + '<button type="button" class="cta" data-m="now">አሁን ሂድ · Go now<small>' + cur.seatEtb + ' ETB ' + (c.waiting ? '· with ' + c.waiting + ' others' : '· alone') + '</small></button></div></div>';
+    }).join('') || '<div class="small">አሁን ምንም መንገድ የለም · No corridors right now.</div>';
+    $('corridors').querySelectorAll('.cc').forEach(function (card) {
+      var c = POOL.corridors[+card.dataset.i];
+      card.querySelectorAll('.stops button[data-s]').forEach(function (b) { b.addEventListener('click', function () { POOL.pick[c.key] = b.dataset.s; card.querySelectorAll('.stops button').forEach(function (x) { x.classList.toggle('on', x === b); }); }); });
+      card.querySelectorAll('.go2 button').forEach(function (b) { b.addEventListener('click', function () {
+        var stopId = POOL.pick[c.key] || (c.nearest && c.nearest.stop.id) || c.stops[0].id;
+        joinPool({ corridorKey: c.key, stopId: stopId, mode: b.dataset.m });
+      }); });
+    });
+  }
+  function joinPool(p) {
+    if (!ME) {
+      S.pendingPool = p;
+      if (IN_TG) { TG.requestContact(function (ok) { var u = TG.user() || {}; var nm = [u.first_name, u.last_name].filter(Boolean).join(' '); if (ok) { ME = { name: nm || 'Telegram user', phone: null, tg: true }; lsSet('bina_ride_me', JSON.stringify(ME)); S.pendingPool = null; joinPool(p); } else { if (nm) $('whoName').value = nm; show('s-who'); } }); return; }
+      show('s-who'); return;
+    }
+    var body = { corridorKey: p.corridorKey, stopId: p.stopId, mode: p.mode, riderName: ME.name, riderPhone: ME.phone || undefined, paymentMethod: 'cash' };
+    if (IN_TG) body.tg = { initData: TG.initData(), contact: TG.contact() || undefined };
+    $('corridors').querySelectorAll('.go2 button').forEach(function (b) { b.disabled = true; });
+    api('/api/pool/join', body).then(function (d) {
+      $('corridors').querySelectorAll('.go2 button').forEach(function (b) { b.disabled = false; });
+      if (!d.ok) return toast(d.error || 'Could not join');
+      if (d.phone) { ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME)); }
+      S.pool = { id: d.pool.id }; S.ride = null; lsSet('bina_pool_active', d.pool.id); lsDel('bina_ride_active');
+      renderPool(d); startPoll(); if (IN_TG) TG.haptic();
+    }).catch(function () { $('corridors').querySelectorAll('.go2 button').forEach(function (b) { b.disabled = false; }); toast('Network error — try again'); });
+  }
+  function poolTick() {
+    if (!S.pool) return;
+    api('/api/pool/' + S.pool.id + '?phone=' + encodeURIComponent(ME.phone)).then(function (d) { if (d.ok) renderPool(d); else if (d.error === 'not_found') { stopPoll(); reset(false); } }).catch(function () {});
+    if (S.ride && LIVE.indexOf(S.ride.status) >= 0) {
+      api('/api/ride/' + S.ride.id + '/track?phone=' + encodeURIComponent(ME.phone)).then(function (d) { if (d.ok && S.ride) window.BinaTrack.update(S.ride, d.live); }).catch(function () {});
+    }
+  }
+  var pwTimer = null;
+  function renderPool(d) {
+    var p = d.pool, seat = d.seat, r = d.ride;
+    S.pool = { id: p.id, status: p.status, seat: seat };
+    if (seat && seat.stop) { setPickup({ lat: seat.stop.lat, lng: seat.stop.lng, label: 'ማቆሚያ · ' + seat.stop.labelAm + ' · ' + seat.stop.label }); S.dropoff = { lat: p.corridor.to.lat, lng: p.corridor.to.lng, label: p.corridor.to.label }; BinaMap.setDrop(S.dropoff); }
+    if (p.status === 'filling') {
+      show('s-poolwait');
+      $('pwSeats').innerHTML = p.riders.map(function (x) { return '<i class="on' + (x.me ? ' me' : '') + '" title="' + esc(x.name) + '">' + esc(x.name.charAt(0).toUpperCase()) + '</i>'; }).join('') + new Array(Math.max(0, p.seats - p.filled) + 1).join('<i>💺</i>');
+      $('pwFare').textContent = seat.fareEtb + ' ETB'; $('pwCount').textContent = '· ' + p.filled + '/' + p.seats + ' · ' + (p.filled < p.seats ? 'ሌላ ሲገባ ያንሳል · drops as riders join' : 'full');
+      $('pwStop').textContent = '📍 ' + seat.stop.labelAm + ' · ' + seat.stop.label + ' → ' + p.corridor.to.labelAm + ' · ' + p.corridor.to.label;
+      clearInterval(pwTimer); var left = p.leavesInS;
+      var paint = function () { $('pwSub').textContent = 'መኪናው በ ' + fmtLeft(left) + ' ውስጥ ወይም ሲሞላ ይነሳል · Car leaves in ' + fmtLeft(left) + ' or when full'; left--; };
+      paint(); pwTimer = setInterval(function () { if (left < 0) { clearInterval(pwTimer); return; } paint(); }, 1000);
+      if (IN_TG) { TG.backHide(); TG.main('ውጣ · Leave the pool', leavePool); }
+      return;
+    }
+    clearInterval(pwTimer);
+    if (!r) { if (p.status === 'cancelled') { stopPoll(); reset(false); show('s-cancelled'); } return; }
+    // From here the normal ride screens take over; the rider's own seat price replaces the car fare.
+    var mine = Object.assign({}, r, { fareEtb: seat.fareEtb, pickup: S.pickup || r.pickup });
+    S.ride = mine;
+    if (r.status === 'dispatching' || r.status === 'requested') {
+      show('s-finding');
+      $('findTitle').innerHTML = 'መኪናው ተነስቷል · ሹፌር እየፈለግን ነው <small>Car is leaving with ' + p.filled + ' riders · finding your driver…</small>';
+      $('findSub').textContent = 'ወደ ' + seat.stop.labelAm + ' ማቆሚያ ይሂዱ · Walk to ' + seat.stop.label + ' · your seat ' + seat.fareEtb + ' ETB';
+      $('cancelFinding').classList.add('hidden');
+      if (IN_TG) TG.mainHide();
+      return;
+    }
+    $('cancelFinding').classList.remove('hidden');
+    render(mine);
+    if (['assigned', 'arriving', 'arrived', 'ontrip'].indexOf(r.status) >= 0) { $('cancelAssigned').classList.add('hidden'); $('aFare').textContent = seat.fareEtb + ' ETB'; $('aPay').textContent = '· your seat · ' + p.filled + ' riders · cash'; if (IN_TG) TG.mainHide(); }
+    if (r.status === 'completed') { $('doneFare').textContent = seat.fareEtb + ' ETB'; $('payBox').innerHTML = '<div class="small">💵 የመቀመጫዎን ' + seat.fareEtb + ' ETB ለሹፌሩ ይክፈሉ · Pay your seat to the driver in cash</div>'; lsDel('bina_pool_active'); S.pool = null; }
+    if (r.status === 'cancelled') { lsDel('bina_pool_active'); S.pool = null; }
+  }
+  function leavePool() {
+    if (!S.pool) return;
+    var go = function (yes) { if (!yes) return; api('/api/pool/' + S.pool.id + '/leave', { phone: ME.phone }).then(function (d) { if (d.ok) { stopPoll(); clearInterval(pwTimer); reset(false); setMode('solo'); toast('ወጥተዋል · You left the pool'); } else toast(d.error === 'car_already_leaving' ? 'መኪናው ተነስቷል · The car is already leaving — call the driver' : (d.error || 'Cannot leave now')); }).catch(function () { toast('Network error'); }); };
+    if (IN_TG) TG.confirm('ከጋራ ጉዞው ይውጡ? · Leave the pool?', go); else go(confirm('ከጋራ ጉዞው ይውጡ? · Leave the pool?'));
+  }
+  $('pwLeave').addEventListener('click', leavePool);
+
+  // ---- resume an active ride or pool after reload ----
+  var active = lsGet('bina_ride_active'), activePool = lsGet('bina_pool_active');
+  var P0 = new URLSearchParams(location.search);
+  var urlId = P0.get('id'), urlPool = P0.get('pool');
   if (IN_TG) {
-    api('/api/ride/mine?initData=' + encodeURIComponent(TG.initData())).then(function (d) {
-      if (d.ok && d.ride) {
+    api('/api/pool/mine?initData=' + encodeURIComponent(TG.initData())).then(function (d) {
+      if (d.ok && d.pool) {
         ME = ME || { name: (TG.user() || {}).first_name || 'Telegram user', tg: true }; ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME));
-        S.ride = { id: d.ride.id }; lsSet('bina_ride_active', d.ride.id); render(d.ride); startPoll();
+        S.pool = { id: d.pool.id }; lsSet('bina_pool_active', d.pool.id); renderPool(d); startPoll(); return;
       }
+      return api('/api/ride/mine?initData=' + encodeURIComponent(TG.initData())).then(function (d) {
+        if (d.ok && d.ride) {
+          ME = ME || { name: (TG.user() || {}).first_name || 'Telegram user', tg: true }; ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME));
+          S.ride = { id: d.ride.id }; lsSet('bina_ride_active', d.ride.id); render(d.ride); startPoll();
+        } else if (urlPool === '1') setMode('pool');
+      });
     }).catch(function () {});
-  } else if ((urlId || active) && ME) { S.ride = { id: urlId || active }; startPoll(); }
+  } else if (urlPool && urlPool !== '1' && ME) { S.pool = { id: urlPool }; startPoll(); }
+  else if (activePool && ME) { S.pool = { id: activePool }; startPoll(); }
+  else if ((urlId || active) && ME) { S.ride = { id: urlId || active }; startPoll(); }
+  else if (urlPool === '1') setMode('pool');
 })();

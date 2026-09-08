@@ -3,7 +3,8 @@
 // Mini App) and Bini, the site's AI assistant, answering any typed message. Per-chat history is kept in
 // memory (last 8 turns, 1 h TTL). Bini is reached through the app's own /api/assistant on localhost.
 const MENU = [
-  [{ text: '🚕 Ride · ታክሲ', path: '/ride' }, { text: '🏨 Hotels · ሆቴል', path: '/hotel/bina-grand-hotel' }],
+  [{ text: '🚕 Ride · ታክሲ', path: '/ride' }, { text: '👥 Pool · ጋራ ጉዞ', path: '/ride?pool=1' }],
+  [{ text: '🏨 Hotels · ሆቴል', path: '/hotel/bina-grand-hotel' }, { text: '✈️ Airport · አየር ማረፊያ', path: '/airport' }],
   [{ text: '🍽 Restaurants · ምግብ ቤት', path: '/restaurant/bina-restaurant' }, { text: '🏥 Hospitals · ሆስፒታል', path: '/hospital/bina-general-hospital' }],
   [{ text: '🎟 Cinema · ሲኒማ', path: '/cinema' }, { text: '▶️ Watch · ፊልም', path: '/watch' }],
   [{ text: '🏠 Property · ቤት', path: '/property' }],

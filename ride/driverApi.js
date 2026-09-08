@@ -15,8 +15,13 @@ const ADDIS_TZ_OFFSET_MS = 3 * 3600 * 1000; // UTC+3, no DST — the earnings da
 function addisDay(ms) { return new Date(Math.floor((ms + ADDIS_TZ_OFFSET_MS) / 86400000) * 86400000 - ADDIS_TZ_OFFSET_MS); }
 const num = (v, lo, hi) => { const n = Number(v); return Number.isFinite(n) && n >= lo && n <= hi ? n : null; };
 
-function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, riderNotify, geo, settings, now }) {
+function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, riderNotify, geo, settings, now, pool }) {
   const clock = now || Date.now;
+  // A pool ride carries several riders; the driver app needs the seat list to tick them on.
+  async function poolInfo(rideId) {
+    if (!pool) return null;
+    try { return await pool.seatsForRide(rideId); } catch (e) { return null; }
+  }
 
   function pubDriver(d) {
     return { id: d.id, name: d.name, phone: d.phone, tier: d.tier, plate: d.plate, status: d.status,
@@ -69,11 +74,13 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     for (const o of rows) {
       const ride = await prisma.ride.findUnique({ where: { id: o.rideId } });
       if (!ride || ride.driverId || !['requested', 'dispatching'].includes(ride.status)) continue;
+      const pi = await poolInfo(ride.id);
       out.push({ rideId: ride.id, etaS: o.etaS, distanceM: o.distanceM, round: o.round,
         expiresInS: Math.max(0, Math.round((new Date(o.createdAt).getTime() + windowS * 1000 - clock()) / 1000)),
         windowS: windowS,
         tier: ride.tier, pickup: ride.pickup, dropoff: ride.dropoff, fareEtb: ride.fareEtb,
-        driverTakeEtb: ride.driverTakeEtb, tripDistanceM: ride.distanceM, tripDurationS: ride.durationS });
+        driverTakeEtb: ride.driverTakeEtb, tripDistanceM: ride.distanceM, tripDurationS: ride.durationS,
+        pool: pi ? { riders: pi.seats.length, corridor: pi.corridor.name, corridorAm: pi.corridor.nameAm, stops: pi.corridor.stops.map(s => s.label) } : null });
     }
     return out;
   }
@@ -82,7 +89,9 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     if (!driver.onRideId) return null;
     const ride = await prisma.ride.findUnique({ where: { id: driver.onRideId } });
     if (!ride) return null;
-    return pubJob(ride);
+    const job = pubJob(ride);
+    job.pool = await poolInfo(ride.id);
+    return job;
   }
 
   // GET/POST /api/drive/session — what the app needs on open. Pending drivers may call this (they get
@@ -169,7 +178,8 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     }
     if (riderNotify) riderNotify.notify(ride.id, want).catch(e => console.error('[ride/driverApi] rider notify failed: ' + e.message));
     const fresh = await prisma.driver.findUnique({ where: { id: drv.id } });
-    return { ok: true, job: pubJob(upd), driver: pubDriver(fresh || drv) };
+    const job = pubJob(upd); job.pool = await poolInfo(upd.id);
+    return { ok: true, job, driver: pubDriver(fresh || drv) };
   }
 
   // POST /api/drive/route { to: 'pickup'|'dropoff', lat, lng } — road geometry for the driver's map.
@@ -199,7 +209,7 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
   // like /api/ride/:id, and only an active ride exposes a position.
   async function track(req, reply, riderPhoneMatches) {
     const ride = await prisma.ride.findUnique({ where: { id: String(req.params.id) }, include: { driver: true } });
-    if (!ride || !riderPhoneMatches(ride)) return reply.code(404).send({ ok: false, error: 'not_found' });
+    if (!ride || !(await riderPhoneMatches(ride))) return reply.code(404).send({ ok: false, error: 'not_found' });
     const live = { status: ride.status, driver: null, position: null, trail: [], etaS: null, distanceM: null };
     if (!ride.driver || !['assigned', 'arriving', 'arrived', 'ontrip'].includes(ride.status)) return { ok: true, live };
     const d = ride.driver;

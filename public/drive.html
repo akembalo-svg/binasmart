@@ -17,7 +17,7 @@ if(/[?&]v=classic\b/.test(q)){on=false;try{localStorage.setItem('bina_drive_next
 else if(/[?&]v=next\b/.test(q)){try{localStorage.setItem('bina_drive_next','1');}catch(e){}}
 else if(ls==='0'){on=false;}
 if(on){window.__rideNext=true;document.documentElement.className+=' next';
-['/static/fonts/fonts.css?v=1','/static/ride/drive-v3.css?v=2'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
+['/static/fonts/fonts.css?v=1','/static/ride/drive-v3.css?v=3'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
 </script>
 </head>
 <body class="drv">
@@ -116,6 +116,6 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
 <script src="/static/ride/map.js?v=8"></script>
 <script src="/static/ride/drivedemo.js?v=2"></script>
 <script src="/static/ride/drivenav.js?v=2"></script>
-<script src="/static/ride/drive.js?v=13"></script>
+<script src="/static/ride/drive.js?v=14"></script>
 </body>
 </html>

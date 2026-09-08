@@ -50,6 +50,7 @@
   function show(which) {
     ['offer', 'trip', 'idle', 'gate'].forEach(function (id) { $(id).classList.toggle('hidden', id !== which); });
   }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function km(m) { return m == null ? '—' : (m < 950 ? Math.round(m / 10) * 10 + ' m' : (Math.round(m / 100) / 10) + ' km'); }
   // Straight-line metres. Good enough for "how far to the passenger"; the road route comes from the server.
   function metres(a, b) {
@@ -318,7 +319,32 @@
     $('tnav').href = 'https://www.google.com/maps/dir/?api=1&destination=' + target.lat + ',' + target.lng + '&travelmode=driving';
     $('tgo').textContent = j.status === 'ontrip' ? '🧭 አቅጣጫ ወደ መድረሻ · Navigate' : '🧭 አቅጣጫ ወደ ተሳፋሪው · Navigate';
     paintLegLine();
-    if (j.bookedBy && j.bookedBy.name) {
+    if (j.pool && j.pool.seats) {
+      // A pool: several riders board along the corridor. Tick each one on; a no-show stays visible.
+      var p = j.pool, n = p.seats.length;
+      $('tname').textContent = 'ጋራ ጉዞ · Pool · ' + n + ' riders';
+      $('tphone').textContent = (p.corridor && p.corridor.nameAm) || '';
+      $('tav').textContent = String(n);
+      $('tcall').href = 'tel:' + ((p.seats[0] && p.seats[0].phone) || '');
+      $('tfare').textContent = j.driverTakeEtb + ' ETB to you · ' + n + ' × ' + (p.seatFareEtb || '—') + ' ETB cash · ' + km(j.distanceM);
+      $('tbooked').innerHTML = p.seats.map(function (s) {
+        var st2 = s.status === 'boarded' ? 'on' : (s.status === 'noshow' ? 'no' : '');
+        return '<div class="seatrow ' + st2 + '" data-seat="' + s.id + '"><b>' + esc(s.name) + '</b><small>' + esc(s.stop.labelAm + ' · ' + s.stop.label) + ' · ' + (s.fareEtb || '') + ' ETB · ' + (s.phone || '') + '</small>'
+          + '<button type="button" class="dbtn ghost seatbtn" data-seat="' + s.id + '" data-to="' + (s.status === 'boarded' ? 'held' : 'boarded') + '">' + (s.status === 'boarded' ? '✅ ተሳፍሯል' : 'ተሳፈረ · Boarded') + '</button>'
+          + '<button type="button" class="tlink seatno" data-seat="' + s.id + '" data-to="' + (s.status === 'noshow' ? 'held' : 'noshow') + '">' + (s.status === 'noshow' ? '↩︎' : 'አልመጣም · No-show') + '</button></div>';
+      }).join('');
+      $('tbooked').classList.remove('hidden');
+      $('tbooked').querySelectorAll('button[data-seat]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var self = b;
+          act(self, function () {
+            return post('/api/drive/pool/' + j.id + '/seat/' + b.dataset.seat, { status: b.dataset.to }).then(function (r) {
+              if (r && r.ok && st.job) { st.job.pool = r.pool; paintTrip(); }
+            });
+          });
+        });
+      });
+    } else if (j.bookedBy && j.bookedBy.name) {
       $('tbooked').textContent = '📞 Booked by ' + j.bookedBy.name + (j.bookedBy.phone ? ' · ' + j.bookedBy.phone : '') + ' (not the passenger)';
       $('tbooked').classList.remove('hidden');
     } else { $('tbooked').classList.add('hidden'); }
@@ -340,7 +366,7 @@
   function stopAlert() { if (st.alertTimer) { clearInterval(st.alertTimer); st.alertTimer = 0; } }
 
   function paintOffer(o) {
-    $('otier').textContent = String(o.tier || '').toUpperCase();
+    $('otier').textContent = o.pool ? ('👥 POOL · ' + o.pool.riders + ' RIDERS · ' + String(o.tier || '').toUpperCase()) : String(o.tier || '').toUpperCase();
     $('oaway').textContent = mins(o.etaS) + ' away · ' + km(o.distanceM);
     $('opick').textContent = (o.pickup && o.pickup.label) || '—';
     $('odrop').textContent = (o.dropoff && o.dropoff.label) || '—';

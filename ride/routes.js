@@ -37,7 +37,7 @@ function pubRide(ride) {
     driver: d ? { name: d.name, phone: d.phone, photo: d.photo, carPhoto: d.carPhotoUrl || null, plate: d.plate, vehicle: [d.vehicleColour, d.vehicleMake].filter(Boolean).join(' '), rating: d.rating, tier: d.tier } : null };
 }
 
-module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY, riderBotToken, webhookSecret, riderBot, driverBot, riderNotify, uploadsDir, drive, location, askBini }) {
+module.exports = function routes(fastify, { prisma, settings, geo, telegram, dispatch, OWNER_KEY, riderBotToken, webhookSecret, riderBot, driverBot, riderNotify, uploadsDir, drive, location, askBini, pool }) {
   const quoteRL = limiter(600000, 60), requestRL = limiter(600000, 5), searchRL = limiter(60000, 40);
   const lookupRL = limiter(60000, 120);
   // The driver app heartbeats every 4 s (15/min) and the rider map polls every 3 s (20/min);
@@ -261,10 +261,12 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     fastify.post('/api/drive/ride/:id/status', dr(drive.status));
     fastify.post('/api/drive/route', dr(drive.route));
 
-    // The rider's live map. Same ownership rule as GET /api/ride/:id: the phone must match the ride.
+    // The rider's live map. Same ownership rule as GET /api/ride/:id: the phone must match the ride —
+    // or hold a seat in the pool this ride carries.
     fastify.get('/api/ride/:id/track', async (req, reply) => {
       if (!trackRL(req.params.id)) return reply.code(429).send({ ok: false, error: 'slow_down' });
-      return drive.track(req, reply, ride => normPhone(req.query.phone) === ride.riderPhone);
+      const ph = normPhone(req.query.phone);
+      return drive.track(req, reply, async ride => ph === ride.riderPhone || (pool ? pool.phoneMayTrack(ride.id, ph) : false));
     });
   }
 
@@ -385,4 +387,5 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     try { return { ok: true, settings: await settings.update(req.body || {}) }; }
     catch (e) { return reply.code(e.statusCode || 500).send({ ok: false, error: e.message }); }
   });
+  return { limiter, clientIp };
 };

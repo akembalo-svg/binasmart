@@ -161,3 +161,44 @@ html.next.dark .stars button{font-size:34px;color:rgba(255,255,255,.25);backgrou
 html.next.dark .stars button.on{color:#F59E0B}
 html.next.dark .toast{background:#F8FAFC;color:#081120}
 html.next.dark .chip3d.off{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25)}
+
+/* v5 (8 Sep 2026): BinaPool — mode switch, corridor cards, seat row */
+html.next .mode{display:flex;gap:6px;padding:5px;border-radius:16px;background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.65);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);margin:0 0 10px}
+html.next .mode button{flex:1;height:44px;border:1px solid transparent;border-radius:12px;background:transparent;font:inherit;font-size:13.5px;font-weight:800;color:#475569;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;cursor:pointer}
+html.next .mode button small{font-size:10px;font-weight:600;color:#94A3B8;margin-top:2px}
+html.next .mode button.on{background:rgba(255,255,255,.75);border-color:rgba(255,255,255,.95);color:var(--ink);box-shadow:0 6px 16px -8px rgba(8,17,32,.35)}
+html.next .mode button.on small{color:var(--em2)}
+html.next .corr{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+html.next .cc{border-radius:20px;padding:12px 14px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.9);box-shadow:0 12px 30px -20px rgba(8,17,32,.35);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%)}
+html.next .cc h3{margin:0;font-size:15.5px;font-weight:800;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+html.next .cc h3 small{font-size:11.5px;font-weight:700;color:var(--em2);white-space:nowrap}
+html.next .cc .am{display:block;font-size:12.5px;color:var(--mut);font-weight:600;margin-top:2px}
+html.next .stops{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:8px 0 6px;padding-bottom:2px}
+html.next .stops::-webkit-scrollbar{display:none}
+html.next .stops button{flex:none;border-radius:999px;padding:6px 11px;font:inherit;font-size:12px;font-weight:800;color:var(--ink);background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.9);cursor:pointer}
+html.next .stops button small{display:block;font-size:9.5px;font-weight:600;color:var(--mut)}
+html.next .stops button.on{background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));color:#fff;border-color:rgba(255,255,255,.7)}
+html.next .stops button.on small{color:rgba(255,255,255,.85)}
+html.next .ladder{display:flex;gap:4px;margin:4px 0 8px}
+html.next .ladder span{flex:1;text-align:center;border-radius:10px;padding:5px 2px;font-size:11px;font-weight:800;background:rgba(8,17,32,.05);color:var(--ink)}
+html.next .ladder span small{display:block;font-size:9px;font-weight:600;color:var(--mut)}
+html.next .ladder span.hot{background:rgba(0,200,150,.16);color:var(--em2)}
+html.next .cc .wait{font-size:12px;font-weight:700;color:var(--em2);margin-bottom:6px}
+html.next .cc .go2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+html.next .cc .go2 .cta{height:auto;padding:11px 8px;font-size:13.5px;border-radius:14px;line-height:1.15}
+html.next .cc .go2 .cta small{display:block;font-size:10.5px;font-weight:600;opacity:.92}
+html.next .cc .go2 .cta.wait{background:rgba(255,255,255,.55);color:var(--ink);text-shadow:none;border:1px solid rgba(255,255,255,.95)}
+html.next .cc .go2 .cta.wait small{color:var(--em2)}
+html.next .seatsrow{display:flex;justify-content:center;gap:10px;margin:8px 0 10px}
+html.next .seatsrow i{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:20px;background:rgba(255,255,255,.45);border:1px dashed rgba(8,17,32,.2)}
+html.next .seatsrow i.on{background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));border:1px solid rgba(255,255,255,.7);color:#fff;font-size:15px;font-weight:800}
+html.next .seatsrow i.me{box-shadow:0 0 0 3px rgba(0,153,255,.35)}
+html.next.dark .mode{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+html.next.dark .mode button{color:rgba(255,255,255,.6)}
+html.next.dark .mode button.on{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.25);color:#fff}
+html.next.dark .cc{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+html.next.dark .cc h3,html.next.dark .stops button,html.next.dark .ladder span{color:#F8FAFC}
+html.next.dark .stops button{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18)}
+html.next.dark .ladder span{background:rgba(255,255,255,.08)}
+html.next.dark .cc .go2 .cta.wait{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2)}
+html.next.dark .seatsrow i{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#fff}
