@@ -17,9 +17,15 @@ const args = process.argv.slice(2);
 const only = args.includes('--only') ? args[args.indexOf('--only') + 1].split(',') : null;
 const maxOverride = args.includes('--max') ? Number(args[args.indexOf('--max') + 1]) : 0;
 const UA = 'Mozilla/5.0 (compatible; BinaSmartBot/1.0; +https://bina.et/llms.txt)';
+// Several .gov.et hosts serve incomplete TLS chains that browsers tolerate and Node rejects; this crawler only READS public pages.
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-async function get(url) {
+async function get(url, tries = 2) {
+  for (let i = 0; i < tries; i++) { const r = await getOnce(url); if (r) return r; await sleep(2000); }
+  return null;
+}
+async function getOnce(url) {
   const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 12000);
   try {
     const r = await fetch(url, { signal: ctrl.signal, redirect: 'follow', headers: { 'user-agent': UA, 'accept-language': 'am,en;q=0.8' } });
@@ -49,7 +55,7 @@ const esc = s => String(s).replace(/"/g, '\\"');
     let saved = 0, tried = 0;
     while (queue.length && saved < max && tried < max * 3) {
       const u = queue.shift(); if (seen.has(u)) continue; seen.add(u); tried++;
-      const page = await get(u); await sleep(1500);
+      const page = await get(u, u === src.url ? 3 : 2); await sleep(1500);
       if (!page) { if (u === src.url) break; continue; } // home unreachable: skip the whole site (a missing /am/ path is not fatal)
       const text = htmlToText(page.html);
       if (text.length >= 400) {
