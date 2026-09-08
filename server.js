@@ -609,7 +609,8 @@ const ASSIST_FACTS = '\n\nFACTS RULE: when a "Relevant BinaSmart knowledge" bloc
 const COMPLAINT_RE = /ዘግይ|አያነሳ|አልመጣ|ችግር|ተበላሽ|ተሳስ|አጭበርባ|ጠፋ|ስርቆት|ተሰረቀ|አልደረሰ|ቅሬታ|late|not answer|no show|didn.?t come|complain|problem|scam|stole|lost my/i;
 function biniGuards(text, msg, hist) {
   let t = String(text || '');
-  if (hist && hist.length) t = t.replace(/^\s*(ቢኒ ነኝ[።!.,፣]?|ቢኒ እባላለሁ[።!.,፣]?|Bini here[!,.]?|I am Bini[!,.]?|I'm Bini[!,.]?)\s*/i, '');
+  const greeted = /^(hi|hello|hey|selam|salam|ሰላም|ጤና ይስጥልኝ|እንደምን)/i.test(String(msg || '').trim());
+  if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(ቢኒ ነኝ[።!.,፣]?|ቢኒ እባላለሁ[።!.,፣]?|Bini ነኝ[^\n]{0,4}|Bini here[!,.]?|I am Bini[!,.]?|I'm Bini[!,.]?)\s*/i, '');
   if (COMPLAINT_RE.test(msg)) t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/[ \t]+\n/g, '\n');
   t = t.replace(/\/ride\?id=\.{2,}|\(\/ride\?id=[^)]*\)/g, '/ride');
   return t.trim();
@@ -631,7 +632,8 @@ fastify.post('/api/assistant', async (req, reply) => {
   const FALLBACK = 'ይቅርታ፣ አሁን መልስ መስጠት አልቻልኩም። እባክዎ በ WhatsApp ያግኙን፦ https://wa.me/251911244344';
   try {
     const ctx = await knowledge.contextFor(msg).catch(() => '');
-    const voice = knowledge.isAmharic(msg) ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : '';
+    const am = knowledge.isAmharic(msg);
+    const voice = am ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : '\n\nLANGUAGE: the user wrote in ENGLISH. Reply in English only (Amharic words allowed only for product names). Do not switch to Amharic even if the knowledge block is in Amharic.';
     const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
     let text = await callBini(ASSIST_SYS + ASSIST_FACTS + voice + turn + (ctx ? '\n\n' + ctx : ''), [...hist, { role: 'user', content: msg }], 700);
     text = biniGuards(text, msg, hist);
