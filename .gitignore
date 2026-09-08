@@ -1,25 +1,23 @@
-# dependencies
-node_modules/
 
-# secrets & env
-.env
-.env.*
 !.env.example
-
 # backups created during edits
+# dependencies
+# logs & runtime
+# os
+# secrets & env
 *.bak
 *.bak-*
 *.bak_*
-
-# logs & runtime
 *.log
-npm-debug.log*
-pids
 *.pid
-
-# os
 .DS_Store
+.env
+.env.*
 Thumbs.db
-uploads/
+knowledge/web/
+node_modules/
+npm-debug.log*
 ops/health/sat-sessions.json
+pids
+uploads/
 watch/live-status.json
