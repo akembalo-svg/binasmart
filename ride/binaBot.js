@@ -67,9 +67,20 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
   }
 
   // Same small keyboard for typed and spoken questions: a ride button when the topic is a ride, else just Menu.
+  // The first bina.et link Bini mentions becomes a one-tap button (Mini App): a radio station, a tender, a guide…
   function replyMarkup(reply, text) {
-    const wantsRide = /ride|taxi|ታክሲ|ጉዞ|\/ride/i.test(String(reply) + ' ' + String(text));
-    return { inline_keyboard: wantsRide ? [[{ text: '🚕 Book a ride · ጉዞ ይያዙ', web_app: { url: baseUrl + '/ride' } }], [{ text: '☰ Menu · ዝርዝር', callback_data: 'menu' }]] : [[{ text: '☰ Menu · ዝርዝር', callback_data: 'menu' }]] };
+    const r = String(reply || '');
+    const m = /(?:https?:\/\/bina\.et)?(\/(?:watch|cinema|tenders|guides|pool|airport|hotels|insurance|property|cars|flights|news|[a-z0-9][a-z0-9\-]*)(?:\/[a-z0-9\-]+)*(?:\?[a-z0-9=&_-]+)?(?:#[a-z0-9\/\-]+)?)/i.exec(r);
+    const path = m && !/^\/(static|api|mcp)\b/.test(m[1]) ? m[1].replace(/[።.,)\]]+$/, '') : null;
+    const rows = [];
+    const wantsRide = /ride|taxi|ታክሲ|ጉዞ|\/ride/i.test(r + ' ' + String(text));
+    if (path && !/^\/ride\b/.test(path)) {
+      const label = /^\/watch/.test(path) ? '▶️ BinaWatch ክፈት · Open' : /^\/tenders/.test(path) ? '📋 ጨረታ · Open tender' : /^\/cinema/.test(path) ? '🎬 ሲኒማ · Open' : /^\/pool/.test(path) ? '👥 ጋራ ጉዞ · Open' : '🔗 ክፈት · Open ' + path.split(/[?#]/)[0];
+      rows.push([{ text: label.slice(0, 60), web_app: { url: baseUrl + path } }]);
+    }
+    if (wantsRide) rows.push([{ text: '🚕 Book a ride · ጉዞ ይያዙ', web_app: { url: baseUrl + (path && /^\/ride/.test(path) ? path : '/ride') } }]);
+    rows.push([{ text: '☰ Menu · ዝርዝር', callback_data: 'menu' }]);
+    return { inline_keyboard: rows };
   }
   // A hum or noise comes back from the transcriber as one repeated letter ("እህህህህ…"); treat it as unclear.
   function isNoise(t) {

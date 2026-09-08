@@ -26,6 +26,8 @@ const DEFS = [
     parameters: { type: 'object', properties: { venue: { type: 'string', description: 'optional venue name filter' } } } },
   { name: 'search_tenders', description: 'Search verified Ethiopian tenders that are still open (deadline not passed): by keyword, organisation or category. Returns title, organisation, category, deadline and the bina.et link.',
     parameters: { type: 'object', properties: { q: { type: 'string' }, category: { type: 'string' } } } },
+  { name: 'watch_channels', description: 'BinaWatch (bina.et/watch): live Ethiopian TV channels, FM radio stations (Sheger FM, etc.), series playlists and kids channels, each with a direct open link. Call it for any request to watch, listen, open, play a TV channel, radio station, series or drama; answer with the openUrl so the user taps once. Never send users to outside websites for TV or radio.',
+    parameters: { type: 'object', properties: { q: { type: 'string', description: 'channel, station or series name, e.g. "Sheger", "EBS", "ደራሽ"; empty = list all' }, kind: { type: 'string', enum: ['tv', 'radio', 'series', 'kids', 'all'] } } } },
   { name: 'remember', description: 'Save something about this user for next time: their name, phone, preferred language, home or work place, or a short note. For home/work pass the place NAME as value; this tool finds the coordinates itself, so do NOT call search_places first. Call it whenever the user says "remember", "my name is", "my home is", "my work is", "ቤቴ … ነው", "ስሜ … ነው", "manni koo …" — one call per fact.',
     parameters: { type: 'object', properties: { field: { type: 'string', enum: ['name', 'phone', 'lang', 'home', 'work', 'notes'] }, value: { type: 'string' }, lat: { type: 'number' }, lng: { type: 'number' } }, required: ['field', 'value'] } },
   { name: 'contact_team', description: 'Hand the conversation to the BinaSmart team (a person) with a short summary, when the user asks for a human, has a complaint you cannot resolve, or needs something only the team can do (pricing for businesses, a refund, a partner request). Tell the user the team will reply on this chat or on WhatsApp.',
@@ -98,6 +100,20 @@ function makeExecutor(ctx) {
       if (term) where.AND = [{ OR: [{ title: { contains: term, mode: 'insensitive' } }, { titleAm: { contains: term, mode: 'insensitive' } }, { org: { contains: term, mode: 'insensitive' } }, { summary: { contains: term, mode: 'insensitive' } }] }];
       const rows = await ctx.prisma.tender.findMany({ where, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }], take: 6 });
       return { count: rows.length, tenders: rows.map(t => ({ title: t.titleAm || t.title, org: t.org, category: t.category, region: t.region, deadline: t.deadline ? t.deadline.toISOString().slice(0, 10) : null, url: (ctx.publicBase || 'https://bina.et') + '/tenders/' + t.slug })), allUrl: (ctx.publicBase || 'https://bina.et') + '/tenders' };
+    },
+    async watch_channels({ q, kind }) {
+      let data;
+      try { data = JSON.parse(require('fs').readFileSync(ctx.channelsFile || require('path').join(__dirname, '..', 'watch', 'channels.json'), 'utf8')); } catch (e) { return { error: 'channel list unavailable' }; }
+      const base = (ctx.publicBase || 'https://bina.et') + '/watch';
+      const term = String(q || '').trim().toLowerCase();
+      const hit = s => !term || String(s || '').toLowerCase().includes(term);
+      const want = k => !kind || kind === 'all' || kind === k;
+      const out = [];
+      if (want('tv')) for (const c of data.tv || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'tv', name: c.name, nameAm: c.nameAm, tag: c.tag, openUrl: base + '#tv/' + c.id });
+      if (want('radio')) for (const c of data.radio || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'radio', name: c.name, nameAm: c.nameAm, tag: c.tag, openUrl: base + '#radio/' + c.id });
+      if (want('kids')) for (const c of data.kids || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'kids', name: c.name, nameAm: c.nameAm, openUrl: base + '#kids/' + c.id });
+      if (want('series')) for (const s of data.series || []) if (hit(s.title) || hit(s.titleAm) || hit(s.id)) out.push({ kind: 'series', name: s.title, nameAm: s.titleAm, genre: s.kind, openUrl: base + '#series/' + s.id });
+      return { count: out.length, items: out.slice(0, 12), allUrl: base, note: out.length ? 'Give the openUrl; it opens inside BinaWatch (free, Ethiopian content only).' : 'Not on BinaWatch; say so and offer the full list at /watch. Do not link outside sites.' };
     },
     async remember({ field, value, lat, lng }) {
       if (!ctx.memory || !ctx.memory.persistent) return { ok: false, note: 'This channel has no stable identity; nothing saved. Suggest the Telegram bot @bina_smart_bot for memory.' };

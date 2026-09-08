@@ -107,3 +107,13 @@ test('extractMemory never learns from questions or route phrases', () => {
   assert.deepEqual(extractMemory('ቤቴ ሲኤምሲ ነው'), [{ field: 'home', value: 'ሲኤምሲ' }]);
   assert.deepEqual(extractMemory('how much from home to Bole'), []);
 });
+
+test('watch_channels finds Sheger FM and EBS with BinaWatch open links', async () => {
+  const run = makeExecutor({ base: 'http://x', fetchImpl: async () => ({ ok: false, status: 404, json: async () => ({}) }) });
+  const r = await run('watch_channels', { q: 'sheger' });
+  assert.equal(r.count, 1); assert.equal(r.items[0].kind, 'radio'); assert.equal(r.items[0].openUrl, 'https://bina.et/watch#radio/sheger');
+  const tv = await run('watch_channels', { q: 'EBS', kind: 'tv' });
+  assert.equal(tv.items[0].openUrl, 'https://bina.et/watch#tv/ebs');
+  const none = await run('watch_channels', { q: 'bbc' });
+  assert.equal(none.count, 0); assert.match(none.note, /Not on BinaWatch/);
+});
