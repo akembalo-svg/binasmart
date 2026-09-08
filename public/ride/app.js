@@ -58,7 +58,11 @@
       settle(p); BinaMap.flyTo(p, 15.5);
     }, function () { settle(DEFAULT_PICKUP); }, { enableHighAccuracy: true, timeout: 8000 });
   }
-  function setPickup(p) { S.pickup = p; BinaMap.setPickup(p); $('fromLabel').textContent = p.label; }
+  function setPickup(p) {
+    S.pickup = p; BinaMap.setPickup(p); $('fromLabel').textContent = p.label;
+    // The Pool screen may already be open while the phone was still locating: refresh "near you" now.
+    if (!S.pool && $('s-pool') && !$('s-pool').classList.contains('hidden') && typeof loadNear === 'function') loadNear();
+  }
 
   BinaMap.onClick(function (p) {
     if (!S.pinMode) return;
