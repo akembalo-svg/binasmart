@@ -6,8 +6,16 @@ const { normPhone } = require('../phone');
 
 const num = (v, lo, hi) => { const n = Number(v); return Number.isFinite(n) && n >= lo && n <= hi ? n : null; };
 
-module.exports = function poolRoutes(fastify, { pool, riderBotToken, drive, limiter, clientIp }) {
+module.exports = function poolRoutes(fastify, { pool, riderBotToken, drive, limiter, clientIp, OWNER_KEY }) {
   const listRL = limiter(60000, 60), joinRL = limiter(600000, 8), pollRL = limiter(60000, 120);
+
+  // ---- ops (owner key, same as /api/ride/ops/*) ----
+  if (OWNER_KEY) {
+    const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
+    fastify.get('/api/pool/ops/list', async (req, reply) => { if (!ops(req, reply)) return; return { ok: true, pools: await pool.opsList() }; });
+    fastify.get('/api/pool/ops/stats', async (req, reply) => { if (!ops(req, reply)) return; return { ok: true, ...(await pool.opsStats(req.query.days)) }; });
+    fastify.post('/api/pool/ops/:id/cancel', async (req, reply) => { if (!ops(req, reply)) return; const r = await pool.opsCancel(String(req.params.id)); if (!r.ok) return reply.code(r.error === 'not_found' ? 404 : 409).send(r); return r; });
+  }
 
   fastify.get('/api/pool/corridors', async (req, reply) => {
     if (!listRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });

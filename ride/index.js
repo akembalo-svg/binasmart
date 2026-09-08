@@ -49,7 +49,7 @@ module.exports = function registerRide(fastify, deps) {
   const drive = makeDriverApi({ prisma: deps.prisma, driverBotToken, location, offers, telegram, riderNotify, geo, settings, pool });
   const helpers = routes(fastify, { prisma: deps.prisma, settings, geo, telegram, dispatch, OWNER_KEY: deps.OWNER_KEY,
     riderBotToken, webhookSecret: process.env.TG_WEBHOOK_SECRET || '', riderBot, driverBot, riderNotify, uploadsDir, drive, location, askBini: deps.askBini || null, pool });
-  poolRoutes(fastify, { pool, riderBotToken, drive, limiter: helpers.limiter, clientIp: helpers.clientIp });
+  poolRoutes(fastify, { pool, riderBotToken, drive, limiter: helpers.limiter, clientIp: helpers.clientIp, OWNER_KEY: deps.OWNER_KEY });
   const poolSweep = setInterval(() => pool.sweep().catch(e => console.error('[pool] sweep error:', e.message)), 10000);
   poolSweep.unref();
   // Three background loops, all idempotent and all safe to miss a beat:

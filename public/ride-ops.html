@@ -19,6 +19,8 @@ button{cursor:pointer;background:#059669;border-color:#059669;color:#fff;font-we
 <div class="card"><div class="row"><b>Add / update driver</b></div>
   <div class="row"><input id="dName" placeholder="Name"><input id="dPhone" placeholder="Phone 09…"><input id="dPlate" placeholder="Plate"><select id="dTier"><option>economy</option><option>moto</option><option>bajaj</option><option>comfort</option><option>xl</option></select><input id="dMake" placeholder="Vehicle e.g. Toyota Vitz"><input id="dColour" placeholder="Colour"><button id="dSave">Save driver</button></div>
 </div>
+<h2>👥 Pools · ጋራ ጉዞ <span id="nPools"></span></h2><div id="pools"></div>
+<div class="card"><div class="row"><b>Pool numbers</b><select id="statDays"><option value="1">today</option><option value="7" selected>7 days</option><option value="30">30 days</option></select><span class="mut">riders per car, fill rate and average wait tell you whether the 8-minute window and the 10 % bonus are right for each corridor.</span></div><div id="poolStats" class="mut" style="overflow-x:auto;margin-top:8px"></div></div>
 <h2>Active rides <span id="nActive"></span></h2><div id="active"></div>
 <h2>Recent</h2><div id="recent"></div>
 <h2>Drivers</h2><div id="drivers" class="card grid"></div>
@@ -57,7 +59,38 @@ document.addEventListener('click',function(e){
   else if(act==='paid'){ api('/api/ride/ops/'+id+'/paid',{}).then(function(d){ if(!d.ok) alert(d.error||'failed'); load(); }); }
 });
 function showKeyBox(show){ document.getElementById('keybox').style.display=show?'block':'none'; }
+function poolCard(p){
+  var when=function(t){ return t ? new Date(t).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) : '—'; };
+  var live=p.riders.filter(function(r){return r.status!=='cancelled';});
+  var h='<div class="card" id="p-'+esc(p.id)+'"><div class="row"><span class="tag'+(p.status==='filling'?' con':'')+'">'+esc(p.status.toUpperCase())+'</span><b>'+esc(p.nameAm)+'</b><span class="mut">'+esc(p.name)+' · '+esc(p.kind)+(p.womenOnly?' · 👩 women only':'')+(p.driverId?' · 🚗 driver-opened':'')+'</span></div>';
+  h+='<div class="mut">'+live.length+'/'+p.seats+' seats · seat '+(p.seatFareEtb||'—')+' ETB · opened '+when(p.openedAt)+(p.status==='filling'?' · leaves in '+Math.floor(p.leavesInS/60)+':'+('0'+p.leavesInS%60).slice(-2):' · left '+when(p.dispatchedAt))+(p.fareEtb?' · car fare '+p.fareEtb+' ETB':'')+'</div>';
+  h+='<div class="mut">Riders: '+(live.length?live.map(function(r){return '<b>'+esc(r.name)+'</b> <a href="tel:'+esc(r.phone)+'">'+esc(r.phone)+'</a> ('+esc(r.stopId)+(r.status!=='held'?' · '+esc(r.status):'')+')';}).join(' · '):'—')+'</div>';
+  if(p.driver) h+='<div class="mut">Driver: <b>'+esc(p.driver.name)+'</b> '+esc(p.driver.plate)+' · '+esc(p.driver.phone)+'</div>';
+  if(p.rideId) h+='<div class="mut">Ride: <a href="/ride-ops?ride='+esc(p.rideId)+'">'+esc(p.rideId)+'</a></div>';
+  if(p.status==='filling') h+='<div class="row"><button class="red" data-pact="cancel" data-pid="'+esc(p.id)+'">Cancel pool</button></div>';
+  return h+'</div>';
+}
+function loadPools(){
+  api('/api/pool/ops/list').then(function(d){
+    if(!d.ok) return;
+    var open=d.pools.filter(function(p){return ['filling','dispatching'].indexOf(p.status)>=0;});
+    document.getElementById('nPools').textContent='· '+open.length+' filling / dispatching';
+    document.getElementById('pools').innerHTML=d.pools.map(poolCard).join('')||'<div class="card mut">No pools in the last 24 h.</div>';
+    document.querySelectorAll('[data-pact]').forEach(function(b){ b.onclick=function(){ if(!confirm('Cancel this pool? Riders in it are told.')) return; api('/api/pool/ops/'+b.dataset.pid+'/cancel',{}).then(function(r){ if(!r.ok) alert(r.error||'failed'); loadPools(); }); }; });
+  }).catch(function(){});
+}
+function loadPoolStats(){
+  var days=document.getElementById('statDays').value;
+  api('/api/pool/ops/stats?days='+days).then(function(d){
+    if(!d.ok) return;
+    var cols=[['key','corridor'],['opened','opened'],['dispatched','left'],['cancelled','cancelled'],['ridersPerCar','riders/car'],['fillRate','fill'],['avgWaitS','avg wait'],['noShows','no-shows'],['boarded','boarded'],['seatRevenueEtb','seat ETB'],['driverPaidEtb','driver ETB']];
+    var fmt=function(k,v){ if(k==='avgWaitS') return Math.floor(v/60)+':'+('0'+v%60).slice(-2); if(k==='fillRate') return Math.round(v*100)+'%'; return v; };
+    document.getElementById('poolStats').innerHTML=d.rows.length?'<table style="border-collapse:collapse;font-size:12px;width:100%"><tr>'+cols.map(function(c){return '<th style="text-align:left;padding:4px 6px;border-bottom:1px solid #2b3d5a">'+c[1]+'</th>';}).join('')+'</tr>'+d.rows.map(function(r){return '<tr>'+cols.map(function(c){return '<td style="padding:4px 6px;border-bottom:1px solid #1f2d45;color:#e5eef3">'+esc(fmt(c[0],r[c[0]]))+'</td>';}).join('')+'</tr>';}).join('')+'</table>':'No pools in this window yet.';
+  }).catch(function(){});
+}
+document.getElementById('statDays').onchange=loadPoolStats;
 function load(){
+  loadPools();
   if(!getKey()){ showKeyBox(true); return; }
   api('/api/ride/ops/drivers').then(function(d){
     if(!d.ok){ showKeyBox(true); document.getElementById('active').innerHTML='<div class="mut">Unauthorized — enter the owner key.</div>'; return null; }
@@ -87,6 +120,6 @@ function loadSettings(){ if(!getKey()) return; api('/api/ride/ops/settings').the
 document.getElementById('keyGo').onclick=function(){ var v=document.getElementById('keyIn').value.trim(); if(!v) return; try{ sessionStorage.setItem('bina_ops_key', v); }catch(e){} document.getElementById('keyIn').value=''; load(); loadSettings(); };
 document.getElementById('dSave').onclick=function(){ var g=function(id){return document.getElementById(id).value;}; api('/api/ride/ops/drivers',{name:g('dName'),phone:g('dPhone'),plate:g('dPlate'),tier:g('dTier'),vehicleMake:g('dMake'),vehicleColour:g('dColour'),status:'approved'}).then(function(d){ if(!d.ok) return alert(d.error||'failed'); ['dName','dPhone','dPlate','dMake','dColour'].forEach(function(id){document.getElementById(id).value='';}); load(); }); };
 document.getElementById('saveSettings').onclick=function(){ var v; try{ v=JSON.parse(document.getElementById('settings').value); }catch(e){ return alert('Invalid JSON'); } api('/api/ride/ops/settings',v).then(function(d){ document.getElementById('settingsMsg').textContent = d.ok ? '✅ Saved '+new Date().toLocaleTimeString() : '❌ '+(d.error||'failed'); if(d.ok) document.getElementById('settings').value=JSON.stringify(d.settings,null,2); }); };
-load(); loadSettings(); TIMER=setInterval(load,5000);
+load(); loadSettings(); loadPoolStats(); TIMER=setInterval(load,5000);
 document.addEventListener('visibilitychange',function(){ if(document.hidden){ clearInterval(TIMER); TIMER=null; } else if(!TIMER){ load(); TIMER=setInterval(load,5000); } });
 </script></body></html>

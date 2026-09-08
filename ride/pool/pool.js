@@ -431,8 +431,70 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS, d
     return pool ? notifySeats(pool.id, event) : 0;
   }
 
+  // ---- ops (owner): what is filling now, what happened lately, and the numbers to tune the wait and the bonus ----
+  async function opsList() {
+    const ms = clock();
+    const rows = await prisma.pool.findMany({ where: { status: { in: ['filling', 'dispatching'] } }, orderBy: { openedAt: 'desc' }, take: 100 });
+    const recent = await prisma.pool.findMany({ where: { status: { in: ['cancelled'] }, openedAt: { gt: new Date(ms - 86400000) } }, orderBy: { openedAt: 'desc' }, take: 30 });
+    const dispatched = await prisma.pool.findMany({ where: { rideId: { not: null }, openedAt: { gt: new Date(ms - 86400000) } }, orderBy: { openedAt: 'desc' }, take: 60 });
+    const seen = new Set();
+    const shape = async p => {
+      if (seen.has(p.id)) return null; seen.add(p.id);
+      const spec = specOf(p); if (!spec) return null;
+      const seats = await prisma.poolSeat.findMany({ where: { poolId: p.id }, orderBy: { joinedAt: 'asc' } });
+      const ride = p.rideId ? await prisma.ride.findUnique({ where: { id: p.rideId }, include: { driver: true } }) : null;
+      return { id: p.id, kind: p.kind, status: ride ? ride.status : p.status, name: spec.name, nameAm: spec.nameAm, womenOnly: !!p.womenOnly, driverId: p.driverId,
+        seats: p.seats, seatFareEtb: p.seatFareEtb, openedAt: p.openedAt, dispatchAt: p.dispatchAt, dispatchedAt: p.dispatchedAt, rideId: p.rideId,
+        leavesInS: p.status === 'filling' ? Math.max(0, Math.round((new Date(p.dispatchAt).getTime() - ms) / 1000)) : 0,
+        riders: seats.map(s => ({ name: s.riderName, phone: s.riderPhone, stopId: s.stopId, status: s.status, fareEtb: s.fareEtb })),
+        driver: ride && ride.driver ? { name: ride.driver.name, plate: ride.driver.plate, phone: ride.driver.phone } : null, fareEtb: ride ? ride.fareEtb : null };
+    };
+    const out = [];
+    for (const p of rows.concat(dispatched, recent)) { const x = await shape(p); if (x) out.push(x); }
+    return out;
+  }
+  async function opsCancel(poolId) {
+    const pool = await prisma.pool.findUnique({ where: { id: poolId } });
+    if (!pool) return { ok: false, error: 'not_found' };
+    if (pool.status !== 'filling') return { ok: false, error: 'car_already_leaving' };
+    await notifySeats(poolId, 'cancelled').catch(() => {});
+    await prisma.poolSeat.updateMany({ where: { poolId, status: 'held' }, data: { status: 'cancelled' } });
+    await prisma.pool.updateMany({ where: { id: poolId, status: 'filling' }, data: { status: 'cancelled' } });
+    return { ok: true };
+  }
+  async function opsStats(days) {
+    const d = Math.max(1, Math.min(90, Math.round(Number(days) || 7)));
+    const since = new Date(clock() - d * 86400000);
+    const pools = await prisma.pool.findMany({ where: { openedAt: { gt: since } }, take: 5000 });
+    const seats = await prisma.poolSeat.findMany({ where: { pool: { openedAt: { gt: since } } }, take: 20000 });
+    const byPool = new Map(); for (const s of seats) { if (!byPool.has(s.poolId)) byPool.set(s.poolId, []); byPool.get(s.poolId).push(s); }
+    const groups = new Map();
+    const bucket = p => p.kind === 'corridor' ? p.corridorKey : (p.kind === 'driver' ? 'driver-opened' : 'group-near-me');
+    for (const p of pools) {
+      const k = bucket(p);
+      if (!groups.has(k)) groups.set(k, { key: k, opened: 0, dispatched: 0, cancelled: 0, riders: 0, seatsOffered: 0, waitS: [], noShows: 0, boarded: 0, seatEtb: 0, driverEtb: 0 });
+      const g = groups.get(k); g.opened++;
+      const ss = byPool.get(p.id) || [];
+      if (p.rideId) {
+        g.dispatched++;
+        const live = ss.filter(s => s.status !== 'cancelled');
+        g.riders += live.length; g.seatsOffered += p.seats;
+        if (p.dispatchedAt) g.waitS.push((new Date(p.dispatchedAt) - new Date(p.openedAt)) / 1000);
+        g.noShows += ss.filter(s => s.status === 'noshow').length; g.boarded += ss.filter(s => s.status === 'boarded').length;
+        g.seatEtb += live.reduce((a, s) => a + (s.fareEtb || 0), 0);
+      } else if (p.status === 'cancelled') g.cancelled++;
+    }
+    const rides = await prisma.ride.findMany({ where: { pool: { isNot: null }, requestedAt: { gt: since }, status: 'completed' }, select: { driverTakeEtb: true, pool: { select: { corridorKey: true, kind: true } } } }).catch(() => []);
+    for (const r of rides) { const k = r.pool ? bucket(r.pool) : null; if (k && groups.has(k)) groups.get(k).driverEtb += r.driverTakeEtb || 0; }
+    const rows = [...groups.values()].map(g => ({ key: g.key, opened: g.opened, dispatched: g.dispatched, cancelled: g.cancelled,
+      ridersPerCar: g.dispatched ? +(g.riders / g.dispatched).toFixed(2) : 0, fillRate: g.seatsOffered ? +(g.riders / g.seatsOffered).toFixed(2) : 0,
+      avgWaitS: g.waitS.length ? Math.round(g.waitS.reduce((a, b) => a + b, 0) / g.waitS.length) : 0,
+      noShows: g.noShows, boarded: g.boarded, seatRevenueEtb: g.seatEtb, driverPaidEtb: g.driverEtb })).sort((a, b) => b.opened - a.opened);
+    return { days: d, since, rows };
+  }
+
   return { list, near, pub, join, create, joinById, dispatchPool, sweep, view, leave, board, mine, seatsForRide, phoneMayTrack, notifySeats, notifyRideEvent, corridorQuote, specOf,
-    openByDriver, driverView, driverOpenPool, driverGo, driverClose, strikes, WAIT_S: wait, DRIVER_WAIT_S };
+    openByDriver, driverView, driverOpenPool, driverGo, driverClose, strikes, opsList, opsCancel, opsStats, WAIT_S: wait, DRIVER_WAIT_S };
 }
 
 module.exports = { makePool, WAIT_S, DRIVER_WAIT_S, NOSHOW_STRIKES, OPEN, NEAR_M };

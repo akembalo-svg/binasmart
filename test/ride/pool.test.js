@@ -302,3 +302,23 @@ test('no-show rule: after two no-shows in 30 days a rider can only Go now', asyn
   w.clock.t += 31 * 86400000;
   assert.equal(await w.pool.strikes('+25191100001'), 0, 'strikes expire after 30 days');
 });
+
+test('ops: list shows filling cars with riders, cancel tells them, stats aggregate per corridor', async () => {
+  const w = world();
+  await w.pool.join({ ...rider('Sara', 1), telegramId: 111 }); await w.pool.join(rider('Beti', 2));
+  const b = await w.pool.join({ ...rider('Chala', 3), corridorKey: 'piassa-kazanchis:in', stopId: 'piassa', mode: 'now' });
+  const list = await w.pool.opsList();
+  assert.equal(list.length, 2);
+  const filling = list.find(p => p.status === 'filling');
+  assert.equal(filling.riders.length, 2); assert.equal(filling.riders[0].phone, '+25191100001');
+  assert.equal((await w.pool.opsCancel('nope')).error, 'not_found');
+  assert.equal((await w.pool.opsCancel(b.pool.id)).error, 'car_already_leaving');
+  const c = await w.pool.opsCancel(filling.id);
+  assert.equal(c.ok, true);
+  await new Promise(r => setImmediate(r));
+  assert.ok(w.sent.some(m => /cancelled/.test(m.text)), 'the Telegram rider was told');
+  const st = await w.pool.opsStats(7);
+  const pk = st.rows.find(r => r.key === 'piassa-kazanchis:in'), mb = st.rows.find(r => r.key === 'megenagna-bole:in');
+  assert.equal(pk.dispatched, 1); assert.equal(pk.ridersPerCar, 1); assert.equal(pk.fillRate, 0.25);
+  assert.equal(mb.cancelled, 1); assert.equal(mb.dispatched, 0);
+});
