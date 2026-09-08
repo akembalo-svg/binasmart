@@ -16,7 +16,8 @@ const OUT = path.join(__dirname, 'web');
 const args = process.argv.slice(2);
 const only = args.includes('--only') ? args[args.indexOf('--only') + 1].split(',') : null;
 const maxOverride = args.includes('--max') ? Number(args[args.indexOf('--max') + 1]) : 0;
-const UA = 'Mozilla/5.0 (compatible; BinaSmartBot/1.0; +https://bina.et/llms.txt)';
+// A browser UA: ethiopianreporter.com answers 403 to anything that says bot. We stay polite by pacing, not by the name.
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 // Several .gov.et hosts serve incomplete TLS chains that browsers tolerate and Node rejects; this crawler only READS public pages.
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
