@@ -276,6 +276,14 @@
     else if (h[0] === 'kids') renderKids();
     else renderHome();
   }
+  // Deep links from Bini / Telegram use ?open=radio/sheger: inside a Telegram Mini App the URL hash is replaced by
+  // Telegram's own launch data, so a #radio/sheger link would land on Home. Translate the query into the hash once.
+  try {
+    var openParam = new URLSearchParams(location.search).get('open');
+    if (openParam && /^[a-z]+(\/[a-z0-9_-]+){0,2}$/i.test(openParam)) {
+      history.replaceState(null, '', location.pathname + '#' + openParam);
+    }
+  } catch (e) {}
   window.addEventListener('hashchange', route);
   if ($('shGo')) { $('shGo').addEventListener('click', submit); $('shBack').addEventListener('click', function () { sheet.classList.remove('on'); }); }
   if (window.TG && TG.back) TG.back(function () { if (location.pathname !== '/watch') location.href = '/watch'; else if (location.hash && location.hash !== '#home') location.hash = '#home'; });

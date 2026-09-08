@@ -111,17 +111,17 @@ test('extractMemory never learns from questions or route phrases', () => {
 test('watch_channels finds Sheger FM and EBS with BinaWatch open links', async () => {
   const run = makeExecutor({ base: 'http://x', fetchImpl: async () => ({ ok: false, status: 404, json: async () => ({}) }) });
   const r = await run('watch_channels', { q: 'sheger' });
-  assert.equal(r.count, 1); assert.equal(r.items[0].kind, 'radio'); assert.equal(r.items[0].openUrl, 'https://bina.et/watch#radio/sheger');
+  assert.equal(r.count, 1); assert.equal(r.items[0].kind, 'radio'); assert.equal(r.items[0].openUrl, 'https://bina.et/watch?open=radio/sheger');
   const tv = await run('watch_channels', { q: 'EBS', kind: 'tv' });
-  assert.equal(tv.items[0].openUrl, 'https://bina.et/watch#tv/ebs');
+  assert.equal(tv.items[0].openUrl, 'https://bina.et/watch?open=tv/ebs');
   const none = await run('watch_channels', { q: 'bbc' });
   assert.equal(none.count, 0); assert.match(none.note, /Not on BinaWatch/);
 });
 
 test('watch_channels matches on meaningful words and Oromo media requests are detected', async () => {
   const run = makeExecutor({ base: 'http://x', fetchImpl: async () => ({ ok: false, status: 404, json: async () => ({}) }) });
-  assert.equal((await run('watch_channels', { q: 'ደራሽ ድራማ ማየት እፈልጋለሁ' })).items[0].openUrl, 'https://bina.et/watch#series/derash');
-  assert.equal((await run('watch_channels', { q: 'Can you open the radio Sheger' })).items[0].openUrl, 'https://bina.et/watch#radio/sheger');
+  assert.equal((await run('watch_channels', { q: 'ደራሽ ድራማ ማየት እፈልጋለሁ' })).items[0].openUrl, 'https://bina.et/watch?open=series/derash');
+  assert.equal((await run('watch_channels', { q: 'Can you open the radio Sheger' })).items[0].openUrl, 'https://bina.et/watch?open=radio/sheger');
   assert.equal((await run('watch_channels', { q: 'Raadiyoo Sheger naaf banaa' })).items[0].kind, 'radio');
   assert.equal(lang.detect('Raadiyoo Sheger naaf banaa'), 'om');
 });

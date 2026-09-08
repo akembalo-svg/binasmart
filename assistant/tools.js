@@ -111,10 +111,10 @@ function makeExecutor(ctx) {
       const hit = s => !words.length || words.some(w => String(s || '').toLowerCase().includes(w));
       const want = k => !kind || kind === 'all' || kind === k;
       const out = [];
-      if (want('tv')) for (const c of data.tv || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'tv', name: c.name, nameAm: c.nameAm, tag: c.tag, openUrl: base + '#tv/' + c.id });
-      if (want('radio')) for (const c of data.radio || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'radio', name: c.name, nameAm: c.nameAm, tag: c.tag, openUrl: base + '#radio/' + c.id });
-      if (want('kids')) for (const c of data.kids || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'kids', name: c.name, nameAm: c.nameAm, openUrl: base + '#kids/' + c.id });
-      if (want('series')) for (const s of data.series || []) if (hit(s.title) || hit(s.titleAm) || hit(s.id)) out.push({ kind: 'series', name: s.title, nameAm: s.titleAm, genre: s.kind, openUrl: base + '#series/' + s.id });
+      if (want('tv')) for (const c of data.tv || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'tv', name: c.name, nameAm: c.nameAm, tag: c.tag, openUrl: base + '?open=tv/' + c.id });
+      if (want('radio')) for (const c of data.radio || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'radio', name: c.name, nameAm: c.nameAm, tag: c.tag, openUrl: base + '?open=radio/' + c.id });
+      if (want('kids')) for (const c of data.kids || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'kids', name: c.name, nameAm: c.nameAm, openUrl: base + '?open=kids/' + c.id });
+      if (want('series')) for (const s of data.series || []) if (hit(s.title) || hit(s.titleAm) || hit(s.id)) out.push({ kind: 'series', name: s.title, nameAm: s.titleAm, genre: s.kind, openUrl: base + '?open=series/' + s.id });
       return { count: out.length, items: out.slice(0, 12), allUrl: base, note: out.length ? 'Give the openUrl; it opens inside BinaWatch (free, Ethiopian content only).' : 'Not on BinaWatch; say so and offer the full list at /watch. Do not link outside sites.' };
     },
     async remember({ field, value, lat, lng }) {

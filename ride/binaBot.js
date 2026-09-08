@@ -70,7 +70,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
   // The first bina.et link Bini mentions becomes a one-tap button (Mini App): a radio station, a tender, a guide…
   function replyMarkup(reply, text) {
     const r = String(reply || '');
-    const m = /(?:https?:\/\/bina\.et)?(\/(?:watch|cinema|tenders|guides|pool|airport|hotels|insurance|property|cars|flights|news|[a-z0-9][a-z0-9\-]*)(?:\/[a-z0-9\-]+)*(?:\?[a-z0-9=&_-]+)?(?:#[a-z0-9\/\-]+)?)/i.exec(r);
+    const m = /(?:https?:\/\/bina\.et)?(\/(?:watch|cinema|tenders|guides|pool|airport|hotels|insurance|property|cars|flights|news|[a-z0-9][a-z0-9\-]*)(?:\/[a-z0-9\-]+)*(?:\?[a-z0-9=&_\/-]+)?(?:#[a-z0-9\/\-]+)?)/i.exec(r);
     const path = m && !/^\/(static|api|mcp)\b/.test(m[1]) ? m[1].replace(/[።.,)\]]+$/, '') : null;
     const rows = [];
     const wantsRide = /ride|taxi|ታክሲ|ጉዞ|\/ride/i.test(r + ' ' + String(text));
