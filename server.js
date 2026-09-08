@@ -608,7 +608,7 @@ async function callBini(system, messages0, maxTokens, opts){
   if (process.env.BINI_API_BASE && process.env.BINI_API_KEY) {
     try {
       return await once((process.env.BINI_API_FORMAT || 'openai').toLowerCase(), process.env.BINI_API_BASE, process.env.BINI_API_KEY || 'x', process.env.BINI_API_MODEL || 'gpt-4o-mini');
-    } catch (e) { /* fall back to local GLM below so Bini never goes dark */ }
+    } catch (e) { console.warn('[bini] cloud model failed, falling back to GLM: ' + (e && e.message || e)); }
   }
   // Fallback / default: local GLM (Anthropic-compat) — no tools on this path
   if (opts) { opts.tools = null; opts.execute = null; }
@@ -629,6 +629,7 @@ function biniGuards(text, msg, hist) {
   const greeted = /^(hi|hello|hey|selam|salam|ሰላም|ጤና ይስጥልኝ|እንደምን)/i.test(String(msg || '').trim());
   if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(ቢኒ ነኝ[።!.,፣]?|ቢኒ እባላለሁ[።!.,፣]?|Bini ነኝ[^\n]{0,4}|(?:Bini|ቢኒ) here[!,.]?(?: I can help with that[!.]?)?|I am Bini[!,.]?|I'm Bini[!,.]?|This is Bini[!,.]?)\s*/i, '');
   t = t.replace(/^[\s\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}!።]+\n+/u, ''); // an emoji-only first line left behind by the intro strip
+  t = t.replace(/^\s*(ቢኒ|Bini)\s*[:：]\s*/i, ''); // "ቢኒ: …" transcript-style prefix
   if (COMPLAINT_RE.test(msg)) t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/[ \t]+\n/g, '\n');
   t = t.replace(/\(?\/ride\?id=[^\s)።]*\)?/g, '/ride');
   return t.trim();
@@ -640,7 +641,7 @@ const { makeMemory, makeHandover } = require('./assistant/memory');
 const biniMemory = makeMemory({ prisma });
 const biniHandover = makeHandover({ sendTg: (chat, text) => sendTg(chat, text), chatId: process.env.BINI_HANDOVER_CHAT || '8825386029' });
 const biniTranscribe = require('./assistant/transcribe').makeTranscriber({ apiKey: process.env.GEMINI_API_KEY || '' });
-const BINI_TOOL_RULES = '\n\nTOOLS: you have real tools. For any fare, place, ride status, shared-ride price, cinema programme or tender question CALL THE TOOL and answer from its result; never answer such things from memory. Flow for a ride: search_places for pickup and drop-off (ask which match if unclear) → quote_ride → show the fares → only if the user says yes AND you have an Ethiopian phone number, request_ride with confirmed=true → give the ride id and tracking link. Never call request_ride without an explicit yes in this conversation. If a tool returns an error, say what is missing in one sentence. Use remember() when the user tells you their name, phone, home or work, or asks you to remember something — one call per fact; never claim you remembered without calling it. ጋራ ጉዞ / Imala Waliinii / pool / መቀመጫ (seat) price questions → pool_board. Use contact_team when a person is needed.';
+const BINI_TOOL_RULES = '\n\nTOOLS: you have real tools. For any fare, place, ride status, shared-ride price, cinema programme or tender question CALL THE TOOL and answer from its result; never answer such things from memory. Flow for a ride: search_places for pickup and drop-off → quote_ride. For well-known areas and landmarks (Megenagna, Bole, Bole Medhanialem, Piassa, Kazanchis, CMC, Mexico, Merkato, Sarbet, Saris, Kality, Jemo, Gerji, Arat Kilo, the airport…) take the FIRST result and quote at once, naming the place you used; ask "which one" only when the results are genuinely different places (e.g. two hotels with the same name). Never ask the user for coordinates. → quote_ride → show the fares → only if the user says yes AND you have an Ethiopian phone number, request_ride with confirmed=true → give the ride id and tracking link. Never call request_ride without an explicit yes in this conversation. If a tool returns an error, say what is missing in one sentence. Use remember() when the user tells you their name, phone, home or work, or asks you to remember something — one call per fact; never claim you remembered without calling it. ጋራ ጉዞ / Imala Waliinii / pool / መቀመጫ (seat) price questions → pool_board. Use contact_team when a person is needed.';
 
 const _assistRL = new Map(); // ip -> [timestamps]
 fastify.post('/api/assistant', async (req, reply) => {

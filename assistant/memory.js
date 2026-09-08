@@ -19,14 +19,15 @@ function makeMemory({ prisma, now }) {
     if (u.name) parts.push('name: ' + u.name);
     if (u.phone) parts.push('phone: ' + u.phone);
     if (u.lang) parts.push('preferred language: ' + u.lang);
-    if (u.home && u.home.label) parts.push('home: ' + u.home.label);
-    if (u.work && u.work.label) parts.push('work: ' + u.work.label);
-    if (u.lastPickup && u.lastPickup.label) parts.push('last pickup: ' + u.lastPickup.label);
-    if (u.lastDropoff && u.lastDropoff.label) parts.push('last drop-off: ' + u.lastDropoff.label);
+    const pl = p => p.label + (p.lat != null ? ' (lat ' + (+p.lat).toFixed(5) + ', lng ' + (+p.lng).toFixed(5) + ')' : '');
+    if (u.home && u.home.label) parts.push('home: ' + pl(u.home));
+    if (u.work && u.work.label) parts.push('work: ' + pl(u.work));
+    if (u.lastPickup && u.lastPickup.label) parts.push('last pickup: ' + pl(u.lastPickup));
+    if (u.lastDropoff && u.lastDropoff.label) parts.push('last drop-off: ' + pl(u.lastDropoff));
     if (u.notes) parts.push('notes: ' + u.notes);
     if (u.visits > 1) parts.push('visits: ' + u.visits);
     if (!parts.length) return '';
-    return '## What we know about this user (use it naturally, e.g. offer the usual route; never read the phone back aloud unless they ask)\n' + parts.join(' · ') + '\nHome/work coordinates are available to tools through remember(); when the user says "home" or "work", use those places.';
+    return '## What we know about this user (use it naturally, e.g. offer the usual route; never read the phone back aloud unless they ask)\n' + parts.join(' · ') + '\nWhen the user says "home", "work", "ቤት", "ቢሮ", "mana" or "hojii" and a place with coordinates is listed above, pass those coordinates straight to quote_ride or request_ride; never call search_places for the word "home".';
   }
   // A handle for one user: get() the row, touch(patch) to upsert a few fields.
   function forUser(key, seed = {}) {

@@ -102,8 +102,18 @@ function makeExecutor(ctx) {
     async remember({ field, value, lat, lng }) {
       if (!ctx.memory || !ctx.memory.persistent) return { ok: false, note: 'This channel has no stable identity; nothing saved. Suggest the Telegram bot @bina_smart_bot for memory.' };
       const patch = {};
-      if (field === 'home' || field === 'work') patch[field] = { label: String(value).slice(0, 80), lat: Number.isFinite(+lat) ? +lat : null, lng: Number.isFinite(+lng) ? +lng : null };
-      else patch[field] = String(value).slice(0, field === 'notes' ? 400 : 80);
+      if (field === 'home' || field === 'work') {
+        let place = { label: String(value).slice(0, 80), lat: Number.isFinite(+lat) ? +lat : null, lng: Number.isFinite(+lng) ? +lng : null };
+        if (place.lat == null) { // resolve the name ourselves so "remember my home is CMC" saves coordinates in one step
+          const s = await H.search_places({ q: value });
+          const first = s && s.results && s.results[0];
+          if (first) place = { label: first.name, lat: first.lat, lng: first.lng };
+        }
+        patch[field] = place;
+        await ctx.memory.touch(patch);
+        return { ok: true, saved: field, place: place.label, hasCoordinates: place.lat != null, note: place.lat == null ? 'Place not found on the map; saved the name only.' : 'Saved with coordinates; from now on quote_ride can use it directly.' };
+      }
+      patch[field] = String(value).slice(0, field === 'notes' ? 400 : 80);
       await ctx.memory.touch(patch);
       return { ok: true, saved: field };
     },
