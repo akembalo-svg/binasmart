@@ -573,7 +573,7 @@ async function callBini(system, messages0, maxTokens, opts){
         headers = { 'content-type': 'application/json', 'authorization': 'Bearer ' + key };
         { const _b = { model: model, max_tokens: maxTokens, messages: [{ role: 'system', content: system }].concat(messages) };
           if (/gemini/i.test(model)) _b.reasoning_effort = 'none';  // Gemini 2.5 thinking OFF — thinking tokens were eating the answer, cutting Amharic mid-word
-          if (opts && opts.tools && opts.tools.length) { _b.tools = opts.tools; _b.tool_choice = 'auto'; }
+          if (opts && opts.tools && opts.tools.length) { _b.tools = opts.tools; _b.tool_choice = (opts.toolChoice && !opts.rounds) ? opts.toolChoice : 'auto'; } // first round may be forced
           body = JSON.stringify(_b); }
       } else {
         url = base.replace(/\/+$/, '') + '/v1/messages';
@@ -640,7 +640,7 @@ const { makeMemory, makeHandover } = require('./assistant/memory');
 const biniMemory = makeMemory({ prisma });
 const biniHandover = makeHandover({ sendTg: (chat, text) => sendTg(chat, text), chatId: process.env.BINI_HANDOVER_CHAT || '8825386029' });
 const biniTranscribe = require('./assistant/transcribe').makeTranscriber({ apiKey: process.env.GEMINI_API_KEY || '' });
-const BINI_TOOL_RULES = '\n\nTOOLS: you have real tools. For any fare, place, ride status, shared-ride price, cinema programme or tender question CALL THE TOOL and answer from its result; never answer such things from memory. Flow for a ride: search_places for pickup and drop-off (ask which match if unclear) → quote_ride → show the fares → only if the user says yes AND you have an Ethiopian phone number, request_ride with confirmed=true → give the ride id and tracking link. Never call request_ride without an explicit yes in this conversation. If a tool returns an error, say what is missing in one sentence. Use remember() when the user tells you their name, phone, home or work, or asks you to remember something. Use contact_team when a person is needed.';
+const BINI_TOOL_RULES = '\n\nTOOLS: you have real tools. For any fare, place, ride status, shared-ride price, cinema programme or tender question CALL THE TOOL and answer from its result; never answer such things from memory. Flow for a ride: search_places for pickup and drop-off (ask which match if unclear) → quote_ride → show the fares → only if the user says yes AND you have an Ethiopian phone number, request_ride with confirmed=true → give the ride id and tracking link. Never call request_ride without an explicit yes in this conversation. If a tool returns an error, say what is missing in one sentence. Use remember() when the user tells you their name, phone, home or work, or asks you to remember something — one call per fact; never claim you remembered without calling it. ጋራ ጉዞ / Imala Waliinii / pool / መቀመጫ (seat) price questions → pool_board. Use contact_team when a person is needed.';
 
 const _assistRL = new Map(); // ip -> [timestamps]
 fastify.post('/api/assistant', async (req, reply) => {
@@ -672,7 +672,9 @@ fastify.post('/api/assistant', async (req, reply) => {
     const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
     const execute = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', prisma, memory: mem, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
       handover: h => biniHandover({ ...h, userKey, channel, lang, user: known || u, message: msg, history: hist }) });
-    const opts = { tools: biniTools.toOpenAI(), execute };
+    // Flash sometimes answers a price or "remember me" from memory; on those intents the first round must call a tool.
+    const FORCE_TOOL_RE = /(remember|አስታውስ|አስታውሰኝ|yaadadh|ስንት ብር|ስንት ነው|ዋጋ|how much|fare|price|cost|gatii|meeqa|መቀመጫ|ጋራ ጉዞ|\bpool\b|imala waliinii|tender|ጨረታ|caalbaasii|cinema|ሲኒማ|film|ፊልም|showing|የት ደረሰ|ride status|my ride|where is (the|my) (car|driver))/i;
+    const opts = { tools: biniTools.toOpenAI(), execute, toolChoice: FORCE_TOOL_RE.test(msg) ? 'required' : undefined };
     const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys, [...hist, { role: 'user', content: msg }], 900, opts);
     toolsUsed = opts.used || [];
