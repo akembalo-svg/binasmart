@@ -8,6 +8,9 @@ const known = new Set(['/ride', '/ride?pool=1', '/hotels', '/fayda', '/passport'
 test('rubric passes a good Amharic answer and flags the classic failures', () => {
   assert.deepEqual(check({ q: 'x', tags: ['price'] }, 'ዋጋው ቋሚ ነው፣ በ /ride ላይ ያስገቡ።', { known }).fails, []);
   assert.ok(check({ q: 'x', tags: ['price'] }, 'ወደ ቦሌ 350 ብር ነው።', { known }).fails.includes('birr_number_stated'));
+  assert.deepEqual(check({ q: 'x', tags: ['price'] }, 'ኮምፎርት 315 ብር፣ ኢኮኖሚ 250 ብር።', { known, tools: ['search_places', 'quote_ride'] }).fails, [], 'a fare from the tool is allowed');
+  assert.ok(check({ q: 'x', tags: ['om', 'price'] }, 'Gatiin dhaabbataa dha, /ride irratti ilaalaa.', { known }).fails.length === 0);
+  assert.ok(check({ q: 'x', tags: ['om'] }, 'ዋጋው ቋሚ ነው።', { known }).fails.includes('oromo_drift_to_amharic'));
   assert.ok(check({ q: 'x', tags: ['complaint'] }, 'ይቅርታ 😢 ይሰርዙ።', { known }).fails.includes('emoji_on_complaint'));
   assert.ok(check({ q: 'x', tags: ['pool'] }, 'ቢኒ ነኝ። አዎ አለ።', { known }).fails.includes('self_intro'));
   assert.deepEqual(check({ q: 'x', tags: ['greeting'] }, 'ሰላም! ቢኒ ነኝ።', { known }).fails, []);
