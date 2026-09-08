@@ -16,22 +16,54 @@ module.exports = function poolRoutes(fastify, { pool, riderBotToken, drive, limi
     return { ok: true, ...(await pool.list(lat, lng)) };
   });
 
-  fastify.post('/api/pool/join', async (req, reply) => {
+  // Groups near me: cars still filling whose boarding point is within ~2.5 km.
+  fastify.get('/api/pool/near', async (req, reply) => {
+    if (!listRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
+    const lat = num(req.query.lat, 8.5, 9.5), lng = num(req.query.lng, 38.4, 39.2);
+    if (lat == null || lng == null) return reply.code(400).send({ ok: false, error: 'lat and lng inside Addis required' });
+    reply.header('Cache-Control', 'no-store');
+    return { ok: true, ...(await pool.near(lat, lng)) };
+  });
+
+  // Who is booking: name + Ethiopian phone, or signed Telegram identity. Shared by join / create / join-by-id.
+  function who(req, reply) {
     const b = req.body || {};
     let tg = null, contact = null;
     if (b.tg && b.tg.initData) {
       tg = tgauth.verifyInitData(b.tg.initData, riderBotToken);
-      if (!tg) return reply.code(401).send({ ok: false, error: 'Telegram sign-in expired — please reopen BinaSmart from the bot' });
+      if (!tg) { reply.code(401).send({ ok: false, error: 'Telegram sign-in expired — please reopen BinaSmart from the bot' }); return null; }
       if (b.tg.contact) contact = tgauth.verifyContact(b.tg.contact, riderBotToken);
     }
     const name = String(b.riderName || (tg && [tg.user.first_name, tg.user.last_name].filter(Boolean).join(' ')) || '').trim().slice(0, 60);
     const phone = normPhone(contact ? contact.phone : b.riderPhone);
-    if (!name || !phone) return reply.code(400).send({ ok: false, error: 'riderName and an Ethiopian riderPhone (09…) are required' });
-    if (!joinRL(phone) || !joinRL('ip:' + clientIp(req))) return reply.code(429).send({ ok: false, error: 'too_many_requests' });
-    const r = await pool.join({ corridorKey: String(b.corridorKey || ''), stopId: String(b.stopId || ''), mode: b.mode === 'now' ? 'now' : 'wait',
-      name, phone, telegramId: tg ? tg.user.id : null, paymentMethod: b.paymentMethod });
-    if (!r.ok) return reply.code(r.error === 'not_found' ? 404 : 400).send(r);
-    return { ...r, phone: tg ? phone : undefined };
+    if (!name || !phone) { reply.code(400).send({ ok: false, error: 'riderName and an Ethiopian riderPhone (09…) are required' }); return null; }
+    if (!joinRL(phone) || !joinRL('ip:' + clientIp(req))) { reply.code(429).send({ ok: false, error: 'too_many_requests' }); return null; }
+    return { name, phone, telegramId: tg ? tg.user.id : null, tg, mode: b.mode === 'now' ? 'now' : 'wait', paymentMethod: b.paymentMethod };
+  }
+  const point = p => { if (!p || typeof p !== 'object') return null; const lat = num(p.lat, 8.5, 9.5), lng = num(p.lng, 38.4, 39.2); if (lat == null || lng == null) return null; return { lat, lng, label: String(p.label || '').slice(0, 120) || (lat.toFixed(5) + ', ' + lng.toFixed(5)) }; };
+  const answer = (reply, r, w) => { if (!r.ok) return reply.code(r.error === 'not_found' ? 404 : (/leaving|full|far/.test(r.error) ? 409 : 400)).send(r); return { ...r, phone: w.tg ? w.phone : undefined }; };
+
+  fastify.post('/api/pool/join', async (req, reply) => {
+    const w = who(req, reply); if (!w) return;
+    const b = req.body || {};
+    return answer(reply, await pool.join({ corridorKey: String(b.corridorKey || ''), stopId: String(b.stopId || ''), mode: w.mode, name: w.name, phone: w.phone, telegramId: w.telegramId, paymentMethod: w.paymentMethod }), w);
+  });
+
+  // Start a group from here to anywhere.
+  fastify.post('/api/pool/create', async (req, reply) => {
+    const w = who(req, reply); if (!w) return;
+    const b = req.body || {};
+    const pickup = point(b.pickup), dropoff = point(b.dropoff);
+    if (!pickup || !dropoff) return reply.code(400).send({ ok: false, error: 'pickup and dropoff inside Addis required' });
+    return answer(reply, await pool.create({ pickup, dropoff, mode: w.mode, name: w.name, phone: w.phone, telegramId: w.telegramId, paymentMethod: w.paymentMethod }), w);
+  });
+
+  // Join one specific car from the "near me" list.
+  fastify.post('/api/pool/:id/join', async (req, reply) => {
+    const w = who(req, reply); if (!w) return;
+    const b = req.body || {};
+    return answer(reply, await pool.joinById(String(req.params.id), { stopId: String(b.stopId || ''), mode: w.mode, name: w.name, phone: w.phone, telegramId: w.telegramId, paymentMethod: w.paymentMethod,
+      lat: num(b.lat, 8.5, 9.5), lng: num(b.lng, 38.4, 39.2) }), w);
   });
 
   fastify.get('/api/pool/:id', async (req, reply) => {

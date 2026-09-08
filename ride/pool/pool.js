@@ -1,6 +1,7 @@
 'use strict';
-// BinaPool lifecycle. A pool is a car being filled on one corridor: riders join a seat at a boarding
-// stop, the car leaves when it is full or when the wait runs out, then the normal ride machinery
+// BinaPool lifecycle. A pool is a car being filled: either on a fixed commute corridor (riders board at
+// its stops) or a "group near me" any rider starts from where they stand to any destination. Riders
+// join a seat; the car leaves when full or when the wait runs out; then the normal ride machinery
 // (dispatch auction, driver app, tracking) carries it as ONE Ride whose fare is the ladder's driver total.
 //   filling -> dispatching -> (the Ride's own status: assigned/arriving/arrived/ontrip/completed) | cancelled
 // Timers are not used: sweep() is scheduled by ride/index.js and dispatches anything whose time is up,
@@ -9,36 +10,53 @@ const { quoteFare } = require('../fare');
 const { ladder, rowFor } = require('./ladder');
 const C = require('./corridors');
 
-const WAIT_S = 8 * 60;          // "wait to pay less" window
-const QUOTE_TTL_MS = 30 * 60000; // corridor car-fare cache
+const WAIT_S = 8 * 60;           // "wait to pay less" window
+const QUOTE_TTL_MS = 30 * 60000;  // car-fare cache per pool spec
+const NEAR_M = 2500;              // "near me": pools whose boarding point is within this radius
+const JOIN_MAX_M = 3000;          // a custom group can be joined only from near its start
 const OPEN = ['filling', 'dispatching', 'assigned', 'arriving', 'arrived', 'ontrip'];
 
 function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS }) {
   const clock = now || Date.now;
   const wait = (waitS == null ? WAIT_S : waitS);
-  const quotes = new Map(); // corridor key -> { at, q }
+  const quotes = new Map(); // spec key -> { at, q }
 
-  // The car fare for the whole corridor, from the fixed-fare engine. Cached; a routing failure falls
-  // back to straight-line x 1.3 at 22 km/h so the pool never goes dark because GraphHopper hiccuped.
-  async function corridorQuote(c) {
-    const hit = quotes.get(c.key);
+  // What a pool runs on: a corridor (stops, both ends fixed) or a custom start -> destination.
+  function specOf(pool) {
+    if (pool.kind === 'custom') {
+      const from = { id: 'origin', label: pool.pickup.label, labelAm: pool.pickup.labelAm || pool.pickup.label, lat: pool.pickup.lat, lng: pool.pickup.lng };
+      const to = { id: 'dest', label: pool.dropoff.label, labelAm: pool.dropoff.labelAm || pool.dropoff.label, lat: pool.dropoff.lat, lng: pool.dropoff.lng };
+      return { key: 'custom:' + pool.id, kind: 'custom', tier: pool.tier, from, to, stops: [from, to], name: from.label + ' → ' + to.label, nameAm: from.labelAm + ' → ' + to.labelAm };
+    }
+    const c = C.byKey(pool.corridorKey);
+    return c ? { ...c, kind: 'corridor' } : null;
+  }
+
+  // The car fare for the whole run, from the fixed-fare engine. Cached; a routing failure falls back
+  // to straight-line x 1.3 at 22 km/h so the pool never goes dark because GraphHopper hiccuped.
+  async function quoteFor(spec) {
+    const hit = quotes.get(spec.key);
     if (hit && clock() - hit.at < QUOTE_TTL_MS) return hit.q;
     const s = await settings.get();
     let r;
-    try { r = await geo.route(c.from, c.to); }
-    catch (e) { const m = C.haversineM(c.from, c.to) * 1.3; r = { distanceM: Math.round(m), durationS: Math.round(m / 6.1), geometry: [], estimate: true }; }
-    const f = quoteFare(s, c.tier, r.distanceM, r.durationS);
-    const seats = (s.tiers[c.tier] && s.tiers[c.tier].seats) || 4;
+    try { r = await geo.route(spec.from, spec.to); }
+    catch (e) { const m = C.haversineM(spec.from, spec.to) * 1.3; r = { distanceM: Math.round(m), durationS: Math.round(m / 6.1), geometry: [], estimate: true }; }
+    const f = quoteFare(s, spec.tier, r.distanceM, r.durationS);
+    const seats = (s.tiers[spec.tier] && s.tiers[spec.tier].seats) || 4;
     const q = { distanceM: r.distanceM, durationS: r.durationS, estimate: !!r.estimate, geometry: r.geometry || [],
       carFareEtb: f.fareEtb, seats, ladder: ladder(f.fareEtb, seats, s.commissionPct) };
-    quotes.set(c.key, { at: clock(), q });
+    quotes.set(spec.key, { at: clock(), q });
     return q;
   }
+  const corridorQuote = c => quoteFor({ ...c, kind: 'corridor' });
 
   async function openPoolFor(key) {
     return prisma.pool.findFirst({ where: { corridorKey: key, status: 'filling', dispatchAt: { gt: new Date(clock()) } }, orderBy: { openedAt: 'asc' } });
   }
   async function heldSeats(poolId) { return prisma.poolSeat.findMany({ where: { poolId, status: { in: ['held', 'boarded'] } }, orderBy: { joinedAt: 'asc' } }); }
+  async function mySeat(phone) {
+    return prisma.poolSeat.findFirst({ where: { riderPhone: phone, status: { in: ['held', 'boarded'] }, pool: { status: { in: OPEN } } } });
+  }
 
   // What the rider sees before joining: every corridor today, nearest stop, the ladder, who is waiting.
   async function list(lat, lng) {
@@ -58,27 +76,32 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     return { peak: C.isPeak(ms), dir: C.directionNow(ms), waitS: wait, corridors: out };
   }
 
-  // Join (idempotent per phone: a second tap returns the seat already held).
-  async function join({ corridorKey, stopId, mode, name, phone, telegramId, paymentMethod }) {
-    const c = C.byKey(corridorKey);
-    if (!c) return { ok: false, error: 'unknown_corridor' };
-    if (c.dir !== C.directionNow(clock())) return { ok: false, error: 'corridor_not_running_now' };
-    const si = C.stopIndex(c, stopId);
-    if (si < 0 || si === c.stops.length - 1) return { ok: false, error: 'pick_a_boarding_stop' };
-    if (!name || !phone) return { ok: false, error: 'name_and_phone_required' };
-    const mine = await prisma.poolSeat.findFirst({ where: { riderPhone: phone, status: { in: ['held', 'boarded'] }, pool: { status: { in: OPEN } } }, include: { pool: true } });
-    if (mine) return { ok: true, duplicate: true, ...(await view(mine.poolId, phone)) };
-    const q = await corridorQuote(c);
+  // Groups near me: every car still filling whose boarding point is within reach, nearest first.
+  async function near(lat, lng, radiusM) {
     const ms = clock();
-    let pool = await openPoolFor(c.key);
-    if (pool) {
-      const n = (await heldSeats(pool.id)).length;
-      if (n >= pool.seats) pool = null; // full and about to leave: open the next car
+    const R = radiusM || NEAR_M;
+    const pools = await prisma.pool.findMany({ where: { status: 'filling', dispatchAt: { gt: new Date(ms) } }, orderBy: { openedAt: 'asc' }, take: 100 });
+    const out = [];
+    for (const p of pools) {
+      const spec = specOf(p); if (!spec) continue;
+      const seats = await heldSeats(p.id);
+      if (!seats.length || seats.length >= p.seats) continue;
+      const q = await quoteFor(spec);
+      const board = spec.kind === 'custom' ? { stop: spec.from, distM: Math.round(C.haversineM({ lat, lng }, spec.from)) } : C.nearestStop(spec, lat, lng);
+      if (!board || board.distM > R) continue;
+      const nowRow = rowFor(q.ladder, seats.length + 1), full = rowFor(q.ladder, q.seats);
+      out.push({ id: p.id, kind: spec.kind, corridorKey: p.corridorKey, name: spec.name, nameAm: spec.nameAm, from: spec.from, to: spec.to,
+        board: board.stop, distM: board.distM, filled: seats.length, seats: p.seats, leavesInS: Math.max(0, Math.round((new Date(p.dispatchAt).getTime() - ms) / 1000)),
+        seatIfJoinEtb: nowRow.seatEtb, seatIfFullEtb: full.seatEtb, distanceM: q.distanceM, durationS: q.durationS,
+        riders: seats.map(s => String(s.riderName || '').split(' ')[0]) });
     }
-    if (!pool) {
-      pool = await prisma.pool.create({ data: { corridorKey: c.key, tier: c.tier, seats: q.seats, status: 'filling',
-        openedAt: new Date(ms), dispatchAt: new Date(ms + (mode === 'now' ? 0 : wait) * 1000) } });
-    } else if (mode === 'now' && new Date(pool.dispatchAt).getTime() > ms) {
+    out.sort((a, b) => a.distM - b.distM);
+    return { groups: out, radiusM: R };
+  }
+
+  async function addSeat(pool, spec, { stopId, mode, name, phone, telegramId, paymentMethod }) {
+    const ms = clock();
+    if (mode === 'now' && new Date(pool.dispatchAt).getTime() > ms) {
       // "Go now" shortens the wait for everyone in this car: it leaves with whoever is in it.
       pool = await prisma.pool.update({ where: { id: pool.id }, data: { dispatchAt: new Date(ms) } });
     }
@@ -91,6 +114,65 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     return { ok: true, ...(await view(pool.id, phone)) };
   }
 
+  // Join a corridor pool (idempotent per phone: a second tap returns the seat already held).
+  async function join({ corridorKey, stopId, mode, name, phone, telegramId, paymentMethod }) {
+    const c = C.byKey(corridorKey);
+    if (!c) return { ok: false, error: 'unknown_corridor' };
+    if (c.dir !== C.directionNow(clock())) return { ok: false, error: 'corridor_not_running_now' };
+    const si = C.stopIndex(c, stopId);
+    if (si < 0 || si === c.stops.length - 1) return { ok: false, error: 'pick_a_boarding_stop' };
+    if (!name || !phone) return { ok: false, error: 'name_and_phone_required' };
+    const mine = await mySeat(phone);
+    if (mine) return { ok: true, duplicate: true, ...(await view(mine.poolId, phone)) };
+    const q = await corridorQuote(c);
+    const ms = clock();
+    let pool = await openPoolFor(c.key);
+    if (pool && (await heldSeats(pool.id)).length >= pool.seats) pool = null; // full and about to leave: open the next car
+    if (!pool) {
+      pool = await prisma.pool.create({ data: { kind: 'corridor', corridorKey: c.key, tier: c.tier, seats: q.seats, status: 'filling',
+        openedAt: new Date(ms), dispatchAt: new Date(ms + (mode === 'now' ? 0 : wait) * 1000) } });
+    }
+    return addSeat(pool, c, { stopId, mode, name, phone, telegramId, paymentMethod });
+  }
+
+  // Start a group from where I stand to anywhere in Addis. Others nearby see it under "near me".
+  async function create({ pickup, dropoff, mode, name, phone, telegramId, paymentMethod }) {
+    if (!pickup || !dropoff) return { ok: false, error: 'pickup_and_dropoff_required' };
+    if (!name || !phone) return { ok: false, error: 'name_and_phone_required' };
+    if (C.haversineM(pickup, dropoff) < 400) return { ok: false, error: 'too_close' };
+    const mine = await mySeat(phone);
+    if (mine) return { ok: true, duplicate: true, ...(await view(mine.poolId, phone)) };
+    const s = await settings.get();
+    const tier = C.TIER, seats = (s.tiers[tier] && s.tiers[tier].seats) || 4;
+    const ms = clock();
+    const pool = await prisma.pool.create({ data: { kind: 'custom', corridorKey: 'custom', tier, seats, status: 'filling', createdBy: phone,
+      pickup: { lat: pickup.lat, lng: pickup.lng, label: pickup.label }, dropoff: { lat: dropoff.lat, lng: dropoff.lng, label: dropoff.label },
+      openedAt: new Date(ms), dispatchAt: new Date(ms + (mode === 'now' ? 0 : wait) * 1000) } });
+    return addSeat(pool, specOf(pool), { stopId: 'origin', mode, name, phone, telegramId, paymentMethod });
+  }
+
+  // Join a specific car from the "near me" list. Corridor cars take a boarding stop; custom groups
+  // board at their start, and only riders actually near it may join.
+  async function joinById(poolId, { stopId, mode, name, phone, telegramId, paymentMethod, lat, lng }) {
+    if (!name || !phone) return { ok: false, error: 'name_and_phone_required' };
+    const pool = await prisma.pool.findUnique({ where: { id: poolId } });
+    if (!pool) return { ok: false, error: 'not_found' };
+    const spec = specOf(pool); if (!spec) return { ok: false, error: 'not_found' };
+    const mine = await mySeat(phone);
+    if (mine) return { ok: true, duplicate: true, ...(await view(mine.poolId, phone)) };
+    if (pool.status !== 'filling' || new Date(pool.dispatchAt).getTime() <= clock()) return { ok: false, error: 'car_already_leaving' };
+    if ((await heldSeats(pool.id)).length >= pool.seats) return { ok: false, error: 'car_full' };
+    let sid = 'origin';
+    if (spec.kind === 'corridor') {
+      const si = C.stopIndex(spec, stopId);
+      if (si < 0 || si === spec.stops.length - 1) return { ok: false, error: 'pick_a_boarding_stop' };
+      sid = stopId;
+    } else if (lat != null && lng != null && C.haversineM({ lat, lng }, spec.from) > JOIN_MAX_M) {
+      return { ok: false, error: 'too_far_from_group' };
+    }
+    return addSeat(pool, spec, { stopId: sid, mode, name, phone, telegramId, paymentMethod });
+  }
+
   // Turns a full/expired pool into one Ride and hands it to the auction. DB-level mutex on status.
   async function dispatchPool(poolId) {
     const won = await prisma.pool.updateMany({ where: { id: poolId, status: 'filling' }, data: { status: 'dispatching' } });
@@ -98,16 +180,16 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     const pool = await prisma.pool.findUnique({ where: { id: poolId } });
     const seats = await heldSeats(poolId);
     if (!seats.length) { await prisma.pool.update({ where: { id: poolId }, data: { status: 'cancelled' } }); return null; }
-    const c = C.byKey(pool.corridorKey);
-    const q = await corridorQuote(c);
+    const spec = specOf(pool);
+    const q = await quoteFor(spec);
     const row = rowFor(q.ladder, seats.length);
-    // Pickup = the earliest boarding stop anybody chose; drop-off = the corridor's end.
-    const firstIdx = Math.min(...seats.map(s => Math.max(0, C.stopIndex(c, s.stopId))));
-    const pickup = c.stops[firstIdx], dropoff = c.to;
-    const label = s => s.label + ' · ' + s.labelAm;
+    // Pickup = the earliest boarding stop anybody chose; drop-off = the run's end.
+    const firstIdx = Math.min(...seats.map(s => Math.max(0, C.stopIndex(spec, s.stopId))));
+    const pickup = spec.stops[firstIdx], dropoff = spec.to;
+    const label = s => s.labelAm && s.labelAm !== s.label ? s.label + ' · ' + s.labelAm : s.label;
     const lead = seats[0];
     const ride = await prisma.ride.create({ data: {
-      riderId: lead.riderId, tier: c.tier,
+      riderId: lead.riderId, tier: spec.tier,
       pickup: { lat: pickup.lat, lng: pickup.lng, label: 'ጋራ · Pool · ' + label(pickup) },
       dropoff: { lat: dropoff.lat, lng: dropoff.lng, label: label(dropoff) },
       distanceM: q.distanceM, durationS: q.durationS, estimate: q.estimate,
@@ -145,15 +227,15 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     const all = await prisma.poolSeat.findMany({ where: { poolId }, orderBy: { joinedAt: 'asc' } });
     const mine = all.find(s => s.riderPhone === phone);
     if (!mine) return { ok: false, error: 'not_found' };
-    const c = C.byKey(pool.corridorKey);
-    const q = await corridorQuote(c);
+    const spec = specOf(pool);
+    const q = await quoteFor(spec);
     const seats = all.filter(s => s.status === 'held' || s.status === 'boarded');
     const ride = pool.rideId ? await prisma.ride.findUnique({ where: { id: pool.rideId }, include: { driver: true } }) : null;
     const status = ride ? ride.status : pool.status;
     const n = seats.length;
     const row = rowFor(q.ladder, Math.max(1, n));
-    const myStop = c.stops.find(s => s.id === mine.stopId) || c.from;
-    return { ok: true, pool: { id: pool.id, status, corridor: { key: c.key, name: c.name, nameAm: c.nameAm, stops: c.stops, from: c.from, to: c.to },
+    const myStop = spec.stops.find(s => s.id === mine.stopId) || spec.from;
+    return { ok: true, pool: { id: pool.id, kind: spec.kind, status, corridor: { key: spec.key, name: spec.name, nameAm: spec.nameAm, stops: spec.stops, from: spec.from, to: spec.to },
       seats: pool.seats, filled: n, leavesInS: pool.status === 'filling' ? Math.max(0, Math.round((new Date(pool.dispatchAt).getTime() - clock()) / 1000)) : 0,
       seatFareEtb: pool.seatFareEtb || row.seatEtb, ladder: q.ladder.rows,
       riders: seats.map(s => ({ name: String(s.riderName || '').split(' ')[0], stopId: s.stopId, status: s.status, me: s.riderPhone === phone })) },
@@ -199,10 +281,10 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     if (!prisma.pool) return null;
     const pool = await prisma.pool.findUnique({ where: { rideId } });
     if (!pool) return null;
-    const c = C.byKey(pool.corridorKey);
+    const spec = specOf(pool);
     const seats = await prisma.poolSeat.findMany({ where: { poolId: pool.id, status: { in: ['held', 'boarded', 'noshow'] } }, orderBy: { joinedAt: 'asc' } });
-    return { poolId: pool.id, corridor: { key: c.key, name: c.name, nameAm: c.nameAm, stops: c.stops }, seatFareEtb: pool.seatFareEtb,
-      seats: seats.map(s => { const st = c.stops.find(x => x.id === s.stopId) || c.from; return { id: s.id, name: s.riderName, phone: s.riderPhone, status: s.status, paymentMethod: s.paymentMethod, fareEtb: s.fareEtb, stop: { id: st.id, label: st.label, labelAm: st.labelAm } }; }) };
+    return { poolId: pool.id, kind: spec.kind, corridor: { key: spec.key, name: spec.name, nameAm: spec.nameAm, stops: spec.stops }, seatFareEtb: pool.seatFareEtb,
+      seats: seats.map(s => { const st = spec.stops.find(x => x.id === s.stopId) || spec.from; return { id: s.id, name: s.riderName, phone: s.riderPhone, status: s.status, paymentMethod: s.paymentMethod, fareEtb: s.fareEtb, stop: { id: st.id, label: st.label, labelAm: st.labelAm } }; }) };
   }
   async function phoneMayTrack(rideId, phone) {
     const s = await seatsForRide(rideId);
@@ -225,11 +307,11 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     const seats = await prisma.poolSeat.findMany({ where: { poolId, status: { in: ['held', 'boarded'] } } });
     const ride = pool.rideId ? await prisma.ride.findUnique({ where: { id: pool.rideId }, include: { driver: true } }) : null;
     if (event === 'assigned' && !(ride && ride.driver)) return 0;
-    const c = C.byKey(pool.corridorKey);
+    const spec = specOf(pool);
     let n = 0;
     for (const s of seats) {
       if (!s.telegramId) continue;
-      const stop = c.stops.find(x => x.id === s.stopId) || c.from;
+      const stop = spec.stops.find(x => x.id === s.stopId) || spec.from;
       const text = fn({ filled: seats.length }, { fareEtb: s.fareEtb || pool.seatFareEtb, stop }, ride);
       const markup = pool.rideId ? { inline_keyboard: [[{ text: '📍 Open tracking · መከታተያ', web_app: { url: (baseUrl || 'https://bina.et') + '/ride?pool=' + pool.id } }]] } : undefined;
       try { await api.sendMessage(String(s.telegramId), text, markup ? { reply_markup: markup } : undefined); n++; }
@@ -244,7 +326,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS })
     return pool ? notifySeats(pool.id, event) : 0;
   }
 
-  return { list, join, dispatchPool, sweep, view, leave, board, mine, seatsForRide, phoneMayTrack, notifySeats, notifyRideEvent, corridorQuote, WAIT_S: wait };
+  return { list, near, join, create, joinById, dispatchPool, sweep, view, leave, board, mine, seatsForRide, phoneMayTrack, notifySeats, notifyRideEvent, corridorQuote, specOf, WAIT_S: wait };
 }
 
-module.exports = { makePool, WAIT_S, OPEN };
+module.exports = { makePool, WAIT_S, OPEN, NEAR_M };

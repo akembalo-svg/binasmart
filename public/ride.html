@@ -23,7 +23,7 @@ if(/[?&]v=classic\b/.test(q)){on=false;try{localStorage.setItem('bina_ride_next'
 else if(/[?&]v=next\b/.test(q)){try{localStorage.setItem('bina_ride_next','1');}catch(e){}}
 else if(ls==='0'){on=false;}
 if(on){window.__rideNext=true;document.documentElement.className+=' next';
-['/static/fonts/fonts.css?v=1','/static/ride/v3.css?v=5'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
+['/static/fonts/fonts.css?v=1','/static/ride/v3.css?v=6'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
 <script>
@@ -97,6 +97,8 @@ window.addEventListener('load',apply);})();
   <!-- BinaPool: share the car on a commute corridor, pay per seat -->
   <div class="screen hidden" id="s-pool">
     <div class="srow"><button class="back" id="closePool">‹</button><h2 style="margin:0">ጋራ ጉዞ <small>Pool · share the car, split the fare</small></h2></div>
+    <div id="nearGroups" class="near"></div>
+    <div class="nearhd" style="margin-top:12px">🚏 የጠዋት/ማታ መንገዶች <small>Commute corridors · fixed stops</small></div>
     <div class="small" id="poolPeak">የመንገዶች ዝርዝር እየጫንን ነው… · Loading corridors…</div>
     <div id="corridors" class="corr"></div>
     <div class="hint">🚘 ኮምፎርት · 4 መቀመጫ &nbsp;·&nbsp; 💸 ብዙ ሲሆኑ ያንሳል &nbsp;·&nbsp; 💵 ለሹፌሩ በጥሬ ገንዘብ</div>
@@ -196,7 +198,7 @@ window.addEventListener('load',apply);})();
 <script src="/static/ride/map.js?v=8"></script>
 <script src="/static/ride/tg.js?v=5"></script>
 <script src="/static/ride/track.js?v=1"></script>
-<script src="/static/ride/app.js?v=14"></script>
+<script src="/static/ride/app.js?v=15"></script>
 <nav style="max-width:560px;margin:0 auto;padding:18px;text-align:center;font-size:12.5px;line-height:1.9;color:#68717f">
   <a href="/why-binasmart" style="color:#0369a1">ለምን BinaSmart? · Why BinaSmart</a> ·
   <a href="/drive-with-us" style="color:#0369a1">ሹፌር ነዎት? ይመዝገቡ · Drive with us</a>

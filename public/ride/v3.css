@@ -202,3 +202,21 @@ html.next.dark .stops button{background:rgba(255,255,255,.1);border-color:rgba(2
 html.next.dark .ladder span{background:rgba(255,255,255,.08)}
 html.next.dark .cc .go2 .cta.wait{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2)}
 html.next.dark .seatsrow i{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#fff}
+
+/* v6 (8 Sep 2026): groups near me */
+html.next .nearhd{font-size:15px;font-weight:800;margin:2px 0 8px}
+html.next .nearhd small{display:block;font-size:11.5px;font-weight:600;color:var(--mut)}
+html.next .grp{border-radius:18px;padding:11px 13px;margin-bottom:8px;background:rgba(0,153,255,.08);border:1px solid rgba(0,153,255,.25);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+html.next .gtop{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+html.next .gtop b{font-size:14.5px;font-weight:800}
+html.next .gseats{font-size:12px;font-weight:800;color:#0B4FB3;background:rgba(0,153,255,.14);border-radius:999px;padding:3px 9px}
+html.next .gsub{font-size:12px;color:var(--mut);font-weight:600;margin-top:3px}
+html.next .gact{display:flex;align-items:center;gap:10px;margin-top:8px}
+html.next .gprice{flex:1;font-size:17px;font-weight:900;color:var(--em2);line-height:1.1}
+html.next .gprice small{display:block;font-size:10.5px;font-weight:600;color:var(--mut)}
+html.next .gact .cta{height:auto;padding:10px 16px;font-size:13.5px;border-radius:12px;width:auto}
+html.next .gnew{width:100%;height:auto;padding:11px 12px;font-size:14px;border-radius:14px;line-height:1.15;background:rgba(255,255,255,.55);color:var(--ink);text-shadow:none;border:1px dashed rgba(0,150,136,.6)}
+html.next .gnew small{display:block;font-size:10.5px;font-weight:600;color:var(--em2)}
+html.next.dark .grp{background:rgba(0,153,255,.14);border-color:rgba(0,153,255,.35)}
+html.next.dark .gtop b{color:#fff}html.next.dark .gseats{color:#93C5FD}
+html.next.dark .gnew{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(0,200,150,.5)}

@@ -187,3 +187,37 @@ test('telegram: dispatched and assigned pushes reach every seat that came throug
   assert.match(w.sent[w.sent.length - 1].text, /plate B12345/);
   assert.match(w.sent[w.sent.length - 1].text, /210 ETB|155 ETB|125 ETB|\d+ ETB/);
 });
+
+test('groups near me: a custom group from anywhere; nearby riders see it and join; far riders are refused', async () => {
+  const w = world();
+  const here = { lat: 9.0300, lng: 38.7600, label: 'Sheraton gate' }, to = { lat: 8.9975, lng: 38.7876, label: 'Bole Medhanialem' };
+  const a = await w.pool.create({ pickup: here, dropoff: to, mode: 'wait', name: 'Sara', phone: '+25191100001' });
+  assert.equal(a.ok, true); assert.equal(a.pool.kind, 'custom'); assert.equal(a.pool.status, 'filling'); assert.equal(a.seat.stop.id, 'origin');
+  assert.equal(a.pool.corridor.name, 'Sheraton gate → Bole Medhanialem');
+  // 300 m away: the group shows up under near me, priced for "if you join"
+  const n = await w.pool.near(9.0325, 38.7605);
+  assert.equal(n.groups.length, 1); assert.equal(n.groups[0].id, a.pool.id); assert.equal(n.groups[0].filled, 1);
+  assert.ok(n.groups[0].distM > 200 && n.groups[0].distM < 400);
+  assert.equal(n.groups[0].seatIfJoinEtb, a.pool.ladder[1].seatEtb);
+  assert.deepEqual(n.groups[0].riders, ['Sara']);
+  // 5 km away: not near, and cannot join
+  assert.equal((await w.pool.near(9.0700, 38.8000)).groups.length, 0);
+  const far = await w.pool.joinById(a.pool.id, { mode: 'wait', name: 'Far', phone: '+25191100009', lat: 9.0700, lng: 38.8000 });
+  assert.equal(far.error, 'too_far_from_group');
+  const b = await w.pool.joinById(a.pool.id, { mode: 'wait', name: 'Beti', phone: '+25191100002', lat: 9.0325, lng: 38.7605 });
+  assert.equal(b.ok, true); assert.equal(b.pool.filled, 2); assert.equal(b.seat.fareEtb, a.pool.ladder[1].seatEtb);
+  // a corridor car also appears under near me, with the nearest boarding stop
+  await w.pool.join({ ...rider('Chala', 3) });
+  const n2 = await w.pool.near(9.0206, 38.8010);
+  const corr = n2.groups.find(g => g.kind === 'corridor');
+  assert.ok(corr); assert.equal(corr.board.id, 'megenagna'); assert.equal(corr.distM, 0);
+  const c = await w.pool.joinById(corr.id, { stopId: 'imperial', mode: 'wait', name: 'Dawit', phone: '+25191100004' });
+  assert.equal(c.ok, true); assert.equal(c.pool.filled, 2);
+  assert.equal((await w.pool.joinById(corr.id, { stopId: 'bole', mode: 'wait', name: 'E', phone: '+25191100005' })).error, 'pick_a_boarding_stop');
+  // the custom group leaves when its wait runs out, as a normal ride from its start to its destination
+  w.clock.t += 481 * 1000; await w.pool.sweep();
+  const ride = w.db.rides.find(r => r.riderName.indexOf('Sara') > 0);
+  assert.ok(ride); assert.equal(ride.dropoff.label, 'Bole Medhanialem'); assert.match(ride.pickup.label, /Sheraton gate/);
+  assert.equal((await w.pool.near(9.0325, 38.7605)).groups.length, 0, 'a leaving car is no longer offered');
+  assert.equal((await w.pool.create({ pickup: here, dropoff: { lat: 9.0301, lng: 38.7601, label: 'next door' }, mode: 'wait', name: 'X', phone: '+25191100007' })).error, 'too_close');
+});

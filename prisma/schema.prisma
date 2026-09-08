@@ -1089,7 +1089,11 @@ model Ride {
 // (fare = the ladder's driver total); seats hold each rider's own price.
 model Pool {
   id           String     @id @default(cuid())
-  corridorKey  String     // "<line>:<in|out>" — ride/pool/corridors.js
+  kind         String     @default("corridor") // corridor | custom ("group near me": any start -> any destination)
+  corridorKey  String     // "<line>:<in|out>" — ride/pool/corridors.js; "custom" for a group near me
+  pickup       Json?      // custom: { lat, lng, label }
+  dropoff      Json?
+  createdBy    String?    // custom: the phone that started the group
   tier         String
   seats        Int        // capacity
   status       String     @default("filling") // filling | dispatching | cancelled (afterwards: the Ride's status)
