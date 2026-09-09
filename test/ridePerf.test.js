@@ -61,3 +61,10 @@ test('fonts.css ships each file once and every file exists', () => {
   }
   assert.ok(!rd('ride.html').includes('fonts.css?v=1'), 'the stylesheet version was bumped with its contents');
 });
+
+test('the ride page stays light unless ?theme=dark is asked for', () => {
+  const h = rd('ride.html');
+  assert.ok(!/prefers-color-scheme/.test(h), 'the phone dark mode no longer flips the sheet');
+  assert.ok(!/Telegram\.WebApp\.colorScheme/.test(h), 'the Telegram theme no longer flips the sheet');
+  assert.ok(h.includes("P.get('theme')==='dark'"), '?theme=dark is still the way in');
+});

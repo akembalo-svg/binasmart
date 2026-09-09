@@ -26,13 +26,13 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
 <script>
-/* theme resolver: ?theme=dark|light beats Telegram, Telegram beats the OS setting; follows live changes */
-(function(){var h=document.documentElement,P=new URLSearchParams(location.search),t=P.get('theme');
-function tg(){try{return window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.colorScheme}catch(e){return null}}
-function apply(){var s=tg(),d=t==='dark'||(t!=='light'&&(s==='dark'||(!s&&matchMedia('(prefers-color-scheme: dark)').matches)));h.classList.toggle('dark',!!d);var m=document.querySelector('meta[name=theme-color]');if(m)m.content=d?'#081120':'#009688';}
-apply();try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',apply)}catch(e){}
-try{if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.onEvent)window.Telegram.WebApp.onEvent('themeChanged',apply)}catch(e){}
-window.addEventListener('load',apply);})();
+/* Theme: BinaRide is a light app on purpose. A phone or a Telegram client set to dark used to
+   flip the whole sheet to dark navy, which is not the look we want riders to see, so the OS and
+   Telegram settings are no longer followed. ?theme=dark is kept as the only way in. */
+(function(){var h=document.documentElement,P=new URLSearchParams(location.search);
+var d=P.get('theme')==='dark';
+h.classList.toggle('dark',d);
+var m=document.querySelector('meta[name=theme-color]');if(m)m.content=d?'#081120':'#009688';})();
 </script>
 </head>
 <body>

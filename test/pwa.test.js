@@ -50,5 +50,5 @@ test('the service worker never stores the 10 MB basemap archive', () => {
   assert.ok(/NO_STORE\s*=\s*\/\\.pmtiles\$\//.test(src), 'pmtiles requests bypass the worker');
   assert.ok(src.includes('if (res.status !== 200) return;'), 'partial responses are never cached');
   assert.ok(src.includes('MAX_ENTRY'), 'oversized responses are never cached');
-  assert.ok(src.includes("VERSION = 'bina-v5'"), 'version bumped so the old 10 MB entry is dropped');
+  assert.ok(src.includes("VERSION = 'bina-v6'"), 'version bumped so the old 10 MB entry is dropped');
 });
