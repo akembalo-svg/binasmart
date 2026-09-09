@@ -83,6 +83,14 @@ module.exports = function telebirrRoutes(fastify, { telebirr, prisma, BASE_URL, 
     } catch (e) { return reply.code(502).send({ ok: false, error: 'telebirr_unavailable' }); }
   });
 
+  // Return pages: "did my payment for this item go through?" — confirms with telebirr and settles.
+  fastify.post('/api/telebirr/confirm', async (req, reply) => {
+    if (!rl(ip(req), 30)) return reply.code(429).send({ ok: false, error: 'slow_down' });
+    const b = req.body || {};
+    const r = await confirmFor(String(b.type || ''), String(b.code || ''));
+    return r.ok ? r : reply.code(404).send(r);
+  });
+
   // Ops: refund a paid order (owner key).
   fastify.post('/api/telebirr/refund', async (req, reply) => {
     if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });

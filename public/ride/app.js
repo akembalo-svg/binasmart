@@ -328,12 +328,31 @@
       stopPoll(); window.BinaTrack.stop(); lsDel('bina_ride_active'); show('s-done');
       $('doneFare').textContent = r.fareEtb + ' ETB';
       $('payBox').innerHTML = r.paymentStatus === 'paid' ? '<div class="small">✅ ተከፍሏል · Paid</div>'
-        : (r.paymentMethod === 'cash' ? '<div class="small">💵 ለሹፌሩ በጥሬ ገንዘብ ይክፈሉ · Pay the driver in cash</div>'
-        : '<button class="cta" id="payNow">📱 Pay ' + r.fareEtb + ' ETB · telebirr / Chapa</button>');
+        : ('<div class="small">💵 ለሹፌሩ በጥሬ ገንዘብ ይክፈሉ · Pay the driver in cash — ወይም · or</div>'
+          + '<button class="cta" id="payTelebirr">📱 ' + r.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr</button>'
+          + (r.paymentMethod === 'chapa' ? '<button class="cta ghost" id="payNow">💳 Chapa</button>' : ''));
       var pn = $('payNow'); if (pn) pn.addEventListener('click', payNow);
+      var pt = $('payTelebirr'); if (pt) pt.addEventListener('click', payTelebirr);
       if (r.driverRating) markStars(r.driverRating);
     } else if (r.status === 'cancelled') { stopPoll(); window.BinaTrack.stop(); lsDel('bina_ride_active'); show('s-cancelled'); }
   }
+  // telebirr: in the SuperApp this opens the PIN sheet; on the web it goes to telebirr's checkout and comes back to /ride?id=…&paid=1
+  function payTelebirr() {
+    if (!S.ride || !window.BinaTelebirr) return toast('telebirr unavailable — pay cash');
+    var b = $('payTelebirr'); if (b) { b.disabled = true; b.textContent = '📱 …'; }
+    BinaTelebirr.pay({ type: 'ride', code: S.ride.id }).then(function (p) {
+      if (p.paid) { toast('✅ ተከፍሏል · Paid with telebirr'); tick(); }
+      else if (!p.redirected) { toast('ክፍያው አልተጠናቀቀም · Payment not completed'); if (b) { b.disabled = false; b.textContent = '📱 ' + S.ride.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr'; } }
+    }).catch(function () { toast('telebirr unavailable — pay cash'); if (b) { b.disabled = false; b.textContent = '📱 ' + S.ride.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr'; } });
+  }
+  // Back from telebirr's web checkout: ?id=<ride>&paid=1 → confirm the payment, then show the ride as usual.
+  (function () {
+    var q; try { q = new URLSearchParams(location.search); } catch (e) { return; }
+    var id = q.get('id'); if (!id || q.get('paid') !== '1') return;
+    S.ride = { id: id, status: 'completed' }; S.pool = null; lsSet('bina_ride_active', id);
+    api('/api/telebirr/confirm', { type: 'ride', code: id }).catch(function () {}).then(function () { if (ME && ME.phone) startPoll(); else show('s-done'); });
+    try { history.replaceState(null, '', '/ride'); } catch (e) {}
+  })();
   function payNow() {
     api('/api/pay/init', { amount: S.ride.fareEtb, name: ME.name, phone: ME.phone, purpose: 'BinaSmart Ride ' + S.ride.id, bt: 'ride', bc: S.ride.id })
       .then(function (d) { if (d.ok && d.checkout_url) location.href = d.checkout_url; else toast(d.error || 'Payment unavailable — pay cash'); })
