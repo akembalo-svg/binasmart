@@ -21,6 +21,7 @@ button{cursor:pointer;background:#059669;border-color:#059669;color:#fff;font-we
 </div>
 <h2>👥 Pools · ጋራ ጉዞ <span id="nPools"></span></h2><div id="pools"></div>
 <div class="card"><div class="row"><b>Pool numbers</b><select id="statDays"><option value="1">today</option><option value="7" selected>7 days</option><option value="30">30 days</option></select><span class="mut">riders per car, fill rate and average wait tell you whether the 8-minute window and the 10 % bonus are right for each corridor.</span></div><div id="poolStats" class="mut" style="overflow-x:auto;margin-top:8px"></div></div>
+<h2>💳 Payments · telebirr / Chapa <span id="nPay"></span></h2><div id="payments" class="card"></div>
 <h2>Active rides <span id="nActive"></span></h2><div id="active"></div>
 <h2>Recent</h2><div id="recent"></div>
 <h2>Drivers</h2><div id="drivers" class="card grid"></div>
@@ -70,6 +71,20 @@ function poolCard(p){
   if(p.status==='filling') h+='<div class="row"><button class="red" data-pact="cancel" data-pid="'+esc(p.id)+'">Cancel pool</button></div>';
   return h+'</div>';
 }
+function loadPayments(){
+  api('/api/telebirr/ops/list?days=14').then(function(d){
+    if(!d.ok){ document.getElementById('payments').textContent = d.error || 'unauthorized'; return; }
+    document.getElementById('nPay').textContent = '· ' + d.count + ' in 14 days · paid ' + d.paidEtb + ' ETB' + (d.pending ? ' · ' + d.pending + ' pending' : '');
+    var st = { success:'✅ paid', pending:'⏳ pending', refunded:'↩︎ refunded', refunding:'↩︎ refunding', failed:'❌ failed' };
+    document.getElementById('payments').innerHTML = d.payments.length ? d.payments.map(function(x){
+      var when = new Date(x.createdAt).toLocaleString('en-GB',{timeZone:'Africa/Addis_Ababa',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+      var what = (x.purpose||'') + (x.code ? ' ' + x.code : '');
+      var link = x.purpose==='cinema' && x.code ? '/ticket/'+x.code : (x.purpose==='ride' && x.code ? '/ride-ops#'+x.code : '');
+      return '<div class="row" style="justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid #eee"><span><b>'+x.amount+' '+(x.currency||'ETB')+'</b> · '+(x.kind==='telebirr'?'📱 telebirr':'💳 Chapa')+' · '+(link?'<a href="'+link+'">'+what+'</a>':what)+'<br><small>'+when+' · '+(x.name||'')+' '+(x.phone||'')+' · order '+x.orderId+(x.transId?' · tx '+x.transId:'')+'</small></span><span>'+(st[x.status]||x.status)+(x.kind==='telebirr'&&x.status==='success'?' <button data-refund="'+x.orderId+'" data-amt="'+x.amount+'">Refund</button>':'')+'</span></div>';
+    }).join('') : '<small>No online payments in the last 14 days.</small>';
+    document.querySelectorAll('[data-refund]').forEach(function(b){ b.onclick=function(){ var oid=b.dataset.refund; var amt=prompt('Refund amount (ETB) for order '+oid, b.dataset.amt); if(amt===null) return; var why=prompt('Reason','customer request'); if(why===null) return; b.disabled=true; api('/api/telebirr/refund',{orderId:oid, amountEtb:Number(amt), reason:why}).then(function(r){ alert(r.ok ? 'Refund '+(r.status||'sent') : ('Refund failed: '+(r.error||''))); loadPayments(); }); }; });
+  }).catch(function(){ document.getElementById('payments').textContent='—'; });
+}
 function loadPools(){
   api('/api/pool/ops/list').then(function(d){
     if(!d.ok) return;
@@ -90,7 +105,7 @@ function loadPoolStats(){
 }
 document.getElementById('statDays').onchange=loadPoolStats;
 function load(){
-  loadPools();
+  loadPools(); loadPayments();
   if(!getKey()){ showKeyBox(true); return; }
   api('/api/ride/ops/drivers').then(function(d){
     if(!d.ok){ showKeyBox(true); document.getElementById('active').innerHTML='<div class="mut">Unauthorized — enter the owner key.</div>'; return null; }
