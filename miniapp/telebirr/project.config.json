@@ -1,0 +1,8 @@
+{
+  "description": "BinaSmart mini app for the telebirr SuperApp — one web-view on https://bina.et",
+  "appid": "REPLACE_WITH_APP_ID_FROM_MINI_PROGRAM_CLOUD_CONSOLE",
+  "projectname": "binasmart",
+  "setting": {
+    "es5": false
+  }
+}

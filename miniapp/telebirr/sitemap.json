@@ -1,0 +1,4 @@
+{
+  "desc": "All pages are indexable",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

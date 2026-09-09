@@ -1,0 +1,2 @@
+/* index.mass — the web-view fills the page; nothing else to style */
+page { background: #F8FAFC; }

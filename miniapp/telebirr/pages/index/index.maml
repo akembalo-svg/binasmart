@@ -1,0 +1,2 @@
+<!--index.maml — BinaSmart inside the telebirr SuperApp: one full-screen web-view-->
+<web-view ma:if="{{url}}" src="{{url}}" bindmessage="onMessage" />

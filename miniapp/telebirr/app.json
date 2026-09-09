@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#00C896",
+    "navigationBarTitleText": "BinaSmart · ቢናስማርት",
+    "navigationBarTextStyle": "white",
+    "capsuleTheme": "light",
+    "backgroundColor": "#F8FAFC"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
