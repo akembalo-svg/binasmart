@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="manifest" href="/manifest.webmanifest">
-<link rel="preconnect" href="https://telegram.org" crossorigin>
 <meta name="theme-color" content="#00C896">
 <title>ሲኒማ ትኬት · ወንበር መርጠው ይግዙ | BinaSmart Cinema — Addis Ababa</title>
 <meta name="description" content="በአዲስ አበባ የሲኒማና የዝግጅት ትኬት በመስመር ላይ ይግዙ፤ ወንበርዎን በካርታው ላይ ይምረጡ፣ በ Chapa ወይም በካውንተር ይክፈሉ፣ QR ትኬት ያግኙ። Book cinema and event seats in Addis Ababa: pick your exact seat, pay on Chapa or at the counter, get a QR ticket.">
@@ -17,9 +16,15 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#009688">
 <link rel="icon" href="/favicon-32.png">
-<link rel="stylesheet" href="/static/fonts/fonts.css?v=1">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
 <link rel="stylesheet" href="/static/cinema/ui-v3.css?v=4">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+/* Telegram's SDK loads only inside the mini app: Telegram always puts tgWebApp* in the URL and
+   exposes TelegramWebviewProxy. On the open web this saves a DNS + TLS handshake to another host. */
+(function(){var s=location.hash+location.search;
+if(!(/tgWebApp/i.test(s)||window.TelegramWebviewProxy||/Telegram/i.test(navigator.userAgent)))return;
+document.write('<scr'+'ipt src="https://telegram.org/js/telegram-web-app.js"><\/scr'+'ipt>');})();
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage","name":"BinaSmart Cinema — seat booking in Addis Ababa","url":"https://bina.et/cinema","inLanguage":["am","en"],
  "isPartOf":{"@type":"WebSite","name":"BinaSmart","url":"https://bina.et"},

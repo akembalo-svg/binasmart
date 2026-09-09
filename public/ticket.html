@@ -4,15 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="manifest" href="/manifest.webmanifest">
-<link rel="preconnect" href="https://telegram.org" crossorigin>
 <meta name="theme-color" content="#00C896">
 <title>ትኬት · Ticket | BinaSmart Cinema</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#009688">
 <link rel="icon" href="/favicon-32.png">
-<link rel="stylesheet" href="/static/fonts/fonts.css?v=1">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
 <link rel="stylesheet" href="/static/cinema/ui-v3.css?v=4">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+/* Telegram's SDK loads only inside the mini app: Telegram always puts tgWebApp* in the URL and
+   exposes TelegramWebviewProxy. On the open web this saves a DNS + TLS handshake to another host. */
+(function(){var s=location.hash+location.search;
+if(!(/tgWebApp/i.test(s)||window.TelegramWebviewProxy||/Telegram/i.test(navigator.userAgent)))return;
+document.write('<scr'+'ipt src="https://telegram.org/js/telegram-web-app.js"><\/scr'+'ipt>');})();
+</script>
 <style>
 .tk{max-width:420px;margin:0 auto;background:#fff;border:1.5px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--sh)}
 .tk .hd{background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;padding:18px 18px 14px}

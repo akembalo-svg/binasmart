@@ -4,11 +4,11 @@
 //   /api/ GET    : network first, cached copy when offline (marked with x-bina-cache: stale)
 //   telegram.org : stale-while-revalidate (mini app shell opens offline)
 //   map tiles    : cache first with a small LRU; Range requests (pmtiles) are never touched
-const VERSION = 'bina-v3';
+const VERSION = 'bina-v4';
 const SHELL = VERSION + '-shell', STATIC = VERSION + '-static', API = VERSION + '-api', TILES = VERSION + '-tiles';
 const PAGES = ['/', '/ride', '/pool', '/watch', '/cinema', '/hotels', '/airport', '/ai', '/offline'];
 const CORE = ['/icon-192.png', '/icon-512.png', '/icon-32.png', '/manifest.webmanifest',
-  '/static/vendor/maplibre-gl.js', '/static/vendor/maplibre-gl.css', '/static/vendor/pmtiles.js', '/static/fonts/fonts.css?v=1', '/static/ride/style.json'];
+  '/static/fonts/fonts.css?v=2', '/static/ride/style.json'];
 const API_SKIP = /\/api\/(assistant|telebirr|pay|knowledge|.*\/ops\/|auth)/;
 const TILE_HOST = /(^|\.)maptiler\.com$|(^|\.)tile\./;
 const TILE_MAX = 400;

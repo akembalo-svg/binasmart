@@ -949,7 +949,7 @@ function newsShell({ title, desc, canonical, extraHead = '', body, active = 'new
 <title>${escH(title)}</title><meta name="description" content="${escH(desc)}"><link rel="canonical" href="${canonical}">
 <meta property="og:title" content="${escH(title)}"><meta property="og:description" content="${escH(desc)}"><meta property="og:url" content="${canonical}"><meta property="og:site_name" content="Bina ዜና"><meta property="og:type" content="article"><meta property="og:image" content="${ogImage}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${ogImage}">
 <link rel="icon" href="/icon-32.png">
-<link rel="stylesheet" href="/static/fonts/fonts.css?v=1">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
 ${extraHead}
 <style>
 *{margin:0;padding:0;box-sizing:border-box}

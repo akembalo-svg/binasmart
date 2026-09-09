@@ -26,10 +26,9 @@
   function label(p) { return p ? p.label : ''; }
 
   // ---- map + location ----
-  BinaMap.init('map', function () {
-    $('btn3d').classList.toggle('off', !BinaMap.is3D());
-    locate();
-  });
+  BinaMap.init('map', function () { $('btn3d').classList.toggle('off', !BinaMap.is3D()); });
+  $('btn3d').classList.toggle('off', !BinaMap.is3D());
+  locate();
   $('btn3d').addEventListener('click', function () { var on = !BinaMap.is3D(); BinaMap.set3D(on); $('btn3d').classList.toggle('off', !on); });
 
   // ---- satellite (MapTiler imagery) — the button appears only when the server has a key ----
@@ -38,8 +37,7 @@
     BinaMap.setSatelliteConfig(d.satellite);
     var b = $('btnSat'); b.classList.remove('hidden');
     function apply(on) { BinaMap.setSatellite(on); b.classList.toggle('off', !on); }
-    var m = BinaMap.map;
-    if (m && m.loaded()) apply(BinaMap.wantsSatellite()); else if (m) m.once('load', function () { apply(BinaMap.wantsSatellite()); });
+    BinaMap.whenReady(function (m) { if (m.loaded()) apply(BinaMap.wantsSatellite()); else m.once('load', function () { apply(BinaMap.wantsSatellite()); }); });
     b.addEventListener('click', function () { apply(!BinaMap.isSatellite()); });
   }).catch(function () {});
 

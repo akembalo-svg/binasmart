@@ -1,6 +1,8 @@
 /* BinaSmart Ride — MapLibre wrapper: init, 3D with auto-degrade, markers, route line. */
 window.BinaMap = (function () {
-  var map = null, pickupMk = null, dropMk = null;
+  var map = null, pickupMk = null, dropMk = null, readyCbs = [];
+  // The engine is loaded on demand (see maplazy.js), so anything needing the live map waits here.
+  function whenReady(fn) { if (map) fn(map); else readyCbs.push(fn); }
 
   function weakDevice() {
     try { return (navigator.deviceMemory && navigator.deviceMemory < 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2); }
@@ -20,6 +22,7 @@ window.BinaMap = (function () {
       attributionControl: false
     });
     map.addControl(new maplibregl.AttributionControl({ compact: true }), 'top-right');
+    readyCbs.splice(0).forEach(function (f) { try { f(map); } catch (e) {} });
     map.on('load', function () {
       if (!three) map.setLayoutProperty('buildings-3d', 'visibility', 'none');
       if (onLoad) onLoad();
@@ -104,6 +107,6 @@ window.BinaMap = (function () {
   function flyTo(p, zoom) { if (!map) return; map.flyTo({ center: [p.lng, p.lat], zoom: zoom || 15.5, duration: 900 }); }
   function onClick(fn) { if (!map) return; map.on('click', function (e) { fn({ lat: e.lngLat.lat, lng: e.lngLat.lng }); }); }
 
-  return { init: init, set3D: set3D, is3D: is3D, setPickup: setPickup, setDrop: setDrop, drawRoute: drawRoute, clearRoute: clearRoute, flyTo: flyTo, onClick: onClick,
+  return { init: init, whenReady: whenReady, set3D: set3D, is3D: is3D, setPickup: setPickup, setDrop: setDrop, drawRoute: drawRoute, clearRoute: clearRoute, flyTo: flyTo, onClick: onClick,
     setSatelliteConfig: setSatelliteConfig, hasSatellite: hasSatellite, wantsSatellite: wantsSatellite, isSatellite: isSatellite, setSatellite: setSatellite, get map() { return map; } };
 })();
