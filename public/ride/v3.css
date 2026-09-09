@@ -255,3 +255,17 @@ html.next.dark .gdays button{background:rgba(255,255,255,.1);border-color:rgba(2
 html.next.dark .gd b{color:#fff}
 /* glass fallback */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html.next .driver{background:rgba(255,255,255,.86)}html.next #q,html.next #whoName,html.next #whoPhone,html.next .passenger input{background:rgba(255,255,255,.9)}html.next.dark .driver{background:rgba(8,17,32,.72)}}
+
+/* ---- optional dark glass sheet (?glass=dark) ---------------------------------------------
+   The basemap ground is near-white, so a light sheet over it reads white no matter how sheer it
+   is. A dark panel is the version that actually looks like glass over this map. ---- */
+html.next.glassdark .sheet{background:rgba(10,20,34,.52);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border-top:1px solid rgba(255,255,255,.18);box-shadow:0 -18px 50px -20px rgba(0,0,0,.55)}
+html.next.glassdark .sheet h1,html.next.glassdark .sheet h2,html.next.glassdark .sheet b,html.next.glassdark .sheet .small,html.next.glassdark .sheet label,html.next.glassdark .sheet .payrow,html.next.glassdark .sheet .forother{color:#fff}
+html.next.glassdark .sheet .small,html.next.glassdark .sheet .mut{color:rgba(255,255,255,.72)}
+html.next.glassdark .driver{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18)}
+html.next.glassdark .btn,html.next.glassdark .quick button,html.next.glassdark .tier,html.next.glassdark .chipq,html.next.glassdark .field,html.next.glassdark .back{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff}
+html.next.glassdark #q,html.next.glassdark #whoName,html.next.glassdark #whoPhone,html.next.glassdark .passenger input{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff}
+html.next.glassdark #q::placeholder,html.next.glassdark #whoName::placeholder,html.next.glassdark #whoPhone::placeholder{color:rgba(255,255,255,.5)}
+html.next.glassdark .grab{background:rgba(255,255,255,.35)}
+html.next.glassdark .cc,html.next.glassdark .gform,html.next.glassdark .mode{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html.next.glassdark .sheet{background:rgba(10,20,34,.88)}}
