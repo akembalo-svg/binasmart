@@ -22,7 +22,7 @@ if(/[?&]v=classic\b/.test(q)){on=false;try{localStorage.setItem('bina_ride_next'
 else if(/[?&]v=next\b/.test(q)){try{localStorage.setItem('bina_ride_next','1');}catch(e){}}
 else if(ls==='0'){on=false;}
 var g=null;try{g=localStorage.getItem('bina_ride_glass');}catch(e){}if(/[?&]glass=dark\b/.test(q)){g='dark';try{localStorage.setItem('bina_ride_glass','dark');}catch(e){}}else if(/[?&]glass=light\b/.test(q)){g=null;try{localStorage.removeItem('bina_ride_glass');}catch(e){}}if(g==='dark')document.documentElement.className+=' glassdark';if(on){window.__rideNext=true;document.documentElement.className+=' next';
-['/static/fonts/fonts.css?v=2','/static/ride/v3.css?v=11'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
+['/static/fonts/fonts.css?v=2','/static/ride/v3.css?v=12'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
 <script>
