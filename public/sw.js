@@ -4,7 +4,7 @@
 //   /api/ GET    : network first, cached copy when offline (marked with x-bina-cache: stale)
 //   telegram.org : stale-while-revalidate (mini app shell opens offline)
 //   map tiles    : cache first with a small LRU; Range requests (pmtiles) are never touched
-const VERSION = 'bina-v4';
+const VERSION = 'bina-v5';
 const SHELL = VERSION + '-shell', STATIC = VERSION + '-static', API = VERSION + '-api', TILES = VERSION + '-tiles';
 const PAGES = ['/', '/ride', '/pool', '/watch', '/cinema', '/hotels', '/airport', '/ai', '/offline'];
 const CORE = ['/icon-192.png', '/icon-512.png', '/icon-32.png', '/manifest.webmanifest',
@@ -12,6 +12,11 @@ const CORE = ['/icon-192.png', '/icon-512.png', '/icon-32.png', '/manifest.webma
 const API_SKIP = /\/api\/(assistant|telebirr|pay|knowledge|.*\/ops\/|auth)/;
 const TILE_HOST = /(^|\.)maptiler\.com$|(^|\.)tile\./;
 const TILE_MAX = 400;
+// Never put these in Cache Storage: the Addis basemap is a single 10 MB archive read by byte range.
+// A plain GET of it (pmtiles probes with one) was landing in the cache whole — 10 MB of a rider's
+// storage and data for a file the HTTP cache already keeps, immutable, for a year.
+const NO_STORE = /\.pmtiles$/;
+const MAX_ENTRY = 4 * 1024 * 1024;
 
 self.addEventListener('install', e => {
   self.skipWaiting();
@@ -32,7 +37,13 @@ self.addEventListener('activate', e => {
 self.addEventListener('message', e => { if (e.data === 'SKIP_WAITING') self.skipWaiting(); });
 
 function timeout(p, ms) { return Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms))]); }
-async function put(name, req, res) { try { const c = await caches.open(name); await c.put(req, res); } catch (e) {} }
+async function put(name, req, res) {
+  try {
+    if (res.status !== 200) return;                                   // 206 partials are not a whole file
+    if (Number(res.headers.get('content-length') || 0) > MAX_ENTRY) return;
+    const c = await caches.open(name); await c.put(req, res);
+  } catch (e) {}
+}
 function stale(res) {
   const h = new Headers(res.headers); h.set('x-bina-cache', 'stale');
   return res.body ? new Response(res.body, { status: res.status, statusText: res.statusText, headers: h }) : res;
@@ -50,6 +61,7 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET' || req.headers.has('range')) return;
   const url = new URL(req.url);
+  if (NO_STORE.test(url.pathname)) return;
 
   if (req.mode === 'navigate') {
     e.respondWith((async () => {
@@ -97,6 +109,6 @@ self.addEventListener('fetch', e => {
 async function swr(name, req) {
   const c = await caches.open(name);
   const hit = await c.match(req);
-  const net = fetch(req).then(res => { if (res.ok) c.put(req, res.clone()); return res; }).catch(() => null);
+  const net = fetch(req).then(res => { if (res.ok) put(name, req, res.clone()); return res; }).catch(() => null);
   return hit || (await net) || Response.error();
 }

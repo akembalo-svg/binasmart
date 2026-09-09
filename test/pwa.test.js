@@ -44,3 +44,11 @@ test('ride app queues requests when offline', () => {
   assert.ok(a.includes('function sendRide(') && a.includes('function onRideResult(') && a.includes('function onJoinResult('));
   assert.ok(a.includes("queueOffline('ride'") && a.includes("kind: 'pool'"));
 });
+
+test('the service worker never stores the 10 MB basemap archive', () => {
+  const src = rd('sw.js');
+  assert.ok(/NO_STORE\s*=\s*\/\\.pmtiles\$\//.test(src), 'pmtiles requests bypass the worker');
+  assert.ok(src.includes('if (res.status !== 200) return;'), 'partial responses are never cached');
+  assert.ok(src.includes('MAX_ENTRY'), 'oversized responses are never cached');
+  assert.ok(src.includes("VERSION = 'bina-v5'"), 'version bumped so the old 10 MB entry is dropped');
+});
