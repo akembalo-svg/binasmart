@@ -108,6 +108,28 @@ fastify.post('/api/me/phone', async (req, reply) => {
   return { ok: true, phone: r.phone, linked: r.linked, me: await identity.me(req.authUser.id) };
 });
 
+// One-shot install of the Google OAuth keys, straight from the Cloud Console tab to .env, so the
+// client secret never travels through a chat transcript or a shell argument. It is dead unless a
+// flag file exists (created over SSH for the minute it is needed) and it removes that flag on the
+// first successful write, so the route cannot be replayed.
+fastify.post('/api/admin/google-keys', async (req, reply) => {
+  const FLAG = '/tmp/bina-allow-gkey';
+  if (!fs.existsSync(FLAG)) return reply.code(403).send({ ok: false, error: 'closed' });
+  const b = req.body || {};
+  const id = String(b.clientId || '').trim(), secret = String(b.clientSecret || '').trim();
+  if (!/^\d+-[a-z0-9]+\.apps\.googleusercontent\.com$/.test(id)) return reply.code(400).send({ ok: false, error: 'bad_client_id' });
+  if (!/^GOCSPX-[A-Za-z0-9_-]{10,}$/.test(secret)) return reply.code(400).send({ ok: false, error: 'bad_secret' });
+  try {
+    const p = path.join(__dirname, '.env');
+    let env = fs.readFileSync(p, 'utf8');
+    const put = (k, v) => { const re = new RegExp('^' + k + '=.*$', 'm'); env = re.test(env) ? env.replace(re, k + '=' + v) : env.replace(/\s*$/, '\n') + k + '=' + v + '\n'; };
+    put('GOOGLE_CLIENT_ID', id); put('GOOGLE_CLIENT_SECRET', secret);
+    fs.writeFileSync(p, env);
+    fs.unlinkSync(FLAG);
+    return { ok: true, idChars: id.length, secretChars: secret.length, note: 'restart required' };
+  } catch (e) { return reply.code(500).send({ ok: false, error: 'write_failed' }); }
+});
+
 // Which sign-in doors are actually configured. /login asks this so it never shows a button that
 // cannot work: a missing Google key or bot token hides that door instead of failing on the click.
 fastify.get('/api/auth-methods', async (req, reply) => {
