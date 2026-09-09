@@ -27,7 +27,14 @@ fastify.register(require('@fastify/static'), {
   root: require('path').join(__dirname, 'public'),
   prefix: '/static/',
   // versioned assets (?v=) never change → a year, immutable; the service worker keeps them on the phone
-  setHeaders: (res) => { const u = (res.req && res.req.url) || ''; res.setHeader('Cache-Control', /[?&]v=/.test(u) ? 'public, max-age=31536000, immutable' : 'public, max-age=86400'); }
+  setHeaders: (res) => {
+    // @fastify/static hands over a Fastify reply here (no setHeader); older versions hand over the raw response. Never throw: a throw here hangs every sendFile.
+    try {
+      const u = (res.request && res.request.url) || (res.req && res.req.url) || (res.raw && res.raw.req && res.raw.req.url) || '';
+      const v = /[?&]v=/.test(u) ? 'public, max-age=31536000, immutable' : 'public, max-age=86400';
+      if (typeof res.setHeader === 'function') res.setHeader('Cache-Control', v); else if (typeof res.header === 'function') res.header('Cache-Control', v);
+    } catch (e) {}
+  }
 });
 
 // ===== BETTER AUTH WIRING =====
