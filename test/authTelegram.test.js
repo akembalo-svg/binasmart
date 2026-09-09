@@ -106,3 +106,10 @@ test('new accounts are not owners', async () => {
   assert.ok(/defaultValue:\s*'user'/.test(a), "role defaults to 'user', never 'owner'");
   assert.ok(a.includes('GOOGLE_CLIENT_ID'), 'google is env-gated');
 });
+
+test('a door the server has not configured stays hidden', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'public', 'login.html'), 'utf8');
+  // .gbtn is display:flex, which overrides the `hidden` attribute unless this rule exists
+  assert.ok(/\[hidden\]\{display:none!important\}/.test(h), 'hidden wins over the display rules');
+});
