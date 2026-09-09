@@ -55,6 +55,37 @@ fastify.route({
   }
 });
 
+// ===== ONE ACCOUNT =====
+// /api/me is the single answer to "who is this and what may they do". Everything the site used to
+// keep in four places — rider, driver, shop owner, building owner — hangs off the signed-in account.
+const { makeIdentity } = require('./auth/identity');
+const identity = makeIdentity({ prisma });
+const tgauthSrv = require('./ride/tgauth');
+
+fastify.get('/api/me', async (req, reply) => {
+  reply.header('Cache-Control', 'no-store');
+  if (!req.authUser) return reply.code(401).send({ ok: false, error: 'not_signed_in' });
+  // Reconcile once: a Telegram account whose number we already proved on a ride gets its profiles
+  // attached here rather than in the sign-in path, so it is retried on every visit until it lands.
+  if (req.authUser.telegramId && !req.authUser.phone) {
+    try { await identity.linkFromTelegram(req.authUser.id, req.authUser.telegramId); } catch (e) { fastify.log.warn('[me] link ' + e.message); }
+  }
+  const me = await identity.me(req.authUser.id);
+  return me ? { ok: true, me } : reply.code(404).send({ ok: false, error: 'no_account' });
+});
+
+// Prove a phone with a contact Telegram signed, then pull in the rider/driver rows that carry it.
+fastify.post('/api/me/phone', async (req, reply) => {
+  if (!req.authUser) return reply.code(401).send({ ok: false, error: 'not_signed_in' });
+  const contact = (req.body || {}).contact;
+  const token = process.env.BINA_RIDER_BOT_TOKEN || '';
+  const v = contact && token ? tgauthSrv.verifyContact(String(contact), token) : null;
+  if (!v) return reply.code(400).send({ ok: false, error: 'unverified_contact' });
+  const r = await identity.setVerifiedPhone(req.authUser.id, v.phone, 'telegram_contact');
+  if (!r.ok) return reply.code(r.error === 'phone_taken' ? 409 : 400).send(r);
+  return { ok: true, phone: r.phone, linked: r.linked, me: await identity.me(req.authUser.id) };
+});
+
 // Which sign-in doors are actually configured. /login asks this so it never shows a button that
 // cannot work: a missing Google key or bot token hides that door instead of failing on the click.
 fastify.get('/api/auth-methods', async (req, reply) => {
@@ -95,6 +126,7 @@ fastify.get('/nav', async (req, reply) => reply.sendFile('nav.html'));
 fastify.get('/airport', async (req, reply) => reply.sendFile('airport.html')); // Bina Airport transfer landing (7 Sep 2026) -> hands off to /ride
 fastify.get('/pool', async (req, reply) => reply.sendFile('pool.html')); // BinaPool landing (8 Sep 2026) -> hands off to /ride?pool=1
 fastify.get('/login', async (req, reply) => reply.sendFile('login.html'));
+fastify.get('/account', async (req, reply) => reply.header('Cache-Control','no-store').sendFile('account.html'));
 // ===== OWNER LOGIN: phone + password =====
 const cryptoMod = require('crypto');
 function hashPw(pw){
@@ -2924,7 +2956,15 @@ cinemaRef = cinema;
 const watch = require('./watch')(fastify, { prisma, OWNER_KEY, BASE_URL: 'https://bina.et', chapa: cinema ? cinema.chapa : null });
 
 // ===== BinaSmart Business: shop, office and venue owners manage their own page (BUSINESS_ENABLED=1) =====
-require('./business')(fastify, { notifyShop, prisma, OWNER_KEY, BASE_URL: 'https://bina.et' });
+require('./business')(fastify, {
+  notifyShop, prisma, OWNER_KEY, BASE_URL: 'https://bina.et',
+  // A verified claim becomes a membership on the signed-in account, and proves their phone.
+  onClaimVerified: async (req, r) => {
+    if (!req.authUser) return;
+    await identity.grantMembership(req.authUser.id, { kind: r.kind, shopId: r.shopId || null, venueId: r.venueId || null, role: 'owner' });
+    if (!req.authUser.phone && r.phone) await identity.setVerifiedPhone(req.authUser.id, r.phone, 'owner_claim');
+  }
+});
 
 fastify.listen({ port: PORT, host: '127.0.0.1' })
   .then(() => console.log('BinaSmart API v0.2 on :' + PORT))

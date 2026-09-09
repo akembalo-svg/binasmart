@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="am"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>የእኔ መለያ · My account — BinaSmart</title>
+<link rel="icon" href="/icon-32.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#00C896">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--em:#00C896;--ink:#081120;--mut:#64748B;--line:rgba(8,17,32,.09);--bg:#F8FAFC}
+body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif;color:var(--ink);background:var(--bg);padding:22px 16px 60px}
+.am{font-family:'Noto Sans Ethiopic',sans-serif}
+.wrap{max-width:560px;margin:0 auto}
+h1{font-size:22px;font-weight:800;margin-bottom:2px}
+.sub{color:var(--mut);font-size:14px;margin-bottom:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:12px}
+.who{display:flex;align-items:center;gap:14px}
+.who img,.who .ph{width:52px;height:52px;border-radius:50%;flex:none;object-fit:cover;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--mut);font-size:20px}
+.who b{display:block;font-size:17px}.who small{color:var(--mut)}
+h2{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:18px 0 8px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.row:last-child{border-bottom:0}
+.row span:last-child{color:var(--mut);text-align:right}
+.tag{display:inline-block;padding:4px 11px;border-radius:999px;background:rgba(0,200,150,.12);color:#047857;font-size:13px;font-weight:700;margin:0 6px 6px 0}
+.tag.warn{background:rgba(245,158,11,.14);color:#92400e}
+.btn{display:block;width:100%;text-align:center;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:700 15px inherit;text-decoration:none;margin-top:10px;cursor:pointer}
+.btn.primary{background:var(--em);color:#062;border-color:transparent}
+.muted{color:var(--mut);font-size:14px;line-height:1.5}
+a.back{display:inline-block;margin-top:18px;color:var(--mut);text-decoration:none;font-size:14px}
+</style></head>
+<body><div class="wrap" id="app"><div class="card muted am">በመጫን ላይ… · Loading…</div></div>
+<script>
+var $ = function (id) { return document.getElementById(id); };
+function esc(s){ return String(s == null ? '' : s).replace(/[<>&"]/g, function(c){ return ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'})[c]; }); }
+
+var LABEL = {
+  user: 'ተጠቃሚ · User', rider: 'ተጓዥ · Rider', driver: 'ሹፌር · Driver',
+  driver_pending: 'ሹፌር — በመጠባበቅ ላይ · Driver, pending approval',
+  business: 'ንግድ · Business', building_owner: 'የሕንፃ ባለቤት · Building owner', admin: 'አስተዳዳሪ · Admin'
+};
+
+fetch('/api/me').then(function (r) {
+  if (r.status === 401) { location.href = '/login?next=/account'; return null; }
+  return r.json();
+}).then(function (d) {
+  if (!d || !d.ok) return;
+  var me = d.me;
+  var initial = (me.name || '?').trim().charAt(0).toUpperCase();
+  var doors = me.signedInWith.map(function (p) { return p === 'telegram' ? 'Telegram' : p === 'google' ? 'Google' : p === 'credential' ? 'Email' : p; });
+  var pending = me.roles.indexOf('driver_pending') >= 0;
+
+  var html = '<h1>የእኔ መለያ · My account</h1>' +
+    '<div class="sub am">አንድ መለያ — ለጉዞ፣ ለሹፍርና ለንግድ።</div>' +
+    '<div class="card"><div class="who">' +
+      (me.image ? '<img src="' + esc(me.image) + '" alt="">' : '<div class="ph">' + esc(initial) + '</div>') +
+      '<div><b>' + esc(me.name) + '</b><small>' + (me.email ? esc(me.email) : doors.join(' · ') || 'BinaSmart') + '</small></div>' +
+    '</div></div>' +
+    '<h2>Who you are</h2><div class="card">' +
+      '<div class="row"><span class="am">ስልክ · Phone</span><span>' + (me.phone ? esc(me.phone) + (me.phoneVerified ? ' ✅' : '') : 'ገና አልተያያዘም · not linked') + '</span></div>' +
+      '<div class="row"><span>Signed in with</span><span>' + (doors.join(', ') || '—') + '</span></div>' +
+      '<div class="row"><span>Telegram</span><span>' + (me.telegramId ? 'connected' : '—') + '</span></div>' +
+    '</div>' +
+    '<h2>What you can do</h2><div class="card">' +
+      me.roles.map(function (r) { return '<span class="tag' + (r === 'driver_pending' ? ' warn' : '') + '">' + esc(LABEL[r] || r) + '</span>'; }).join('') +
+      (pending ? '<div class="muted am" style="margin-top:8px">የሹፍርና ማመልከቻዎ በምርመራ ላይ ነው። ሰነዶችዎ ሲረጋገጡ እናሳውቅዎታለን።</div>' : '') +
+    '</div>';
+
+  if (me.driver) html += '<h2>Driver</h2><div class="card">' +
+      '<div class="row"><span>Status</span><span>' + esc(me.driver.status) + '</span></div>' +
+      '<div class="row"><span>Vehicle</span><span>' + esc(me.driver.tier) + ' · ' + esc(me.driver.plate) + '</span></div>' +
+      '<div class="row"><span>Rating</span><span>' + esc(me.driver.rating) + '</span></div>' +
+      '<a class="btn" href="/drive">Open the driver app →</a></div>';
+
+  if (me.businesses.length) html += '<h2>Businesses</h2><div class="card">' +
+      me.businesses.map(function (b) { return '<div class="row"><span>' + esc(b.kind) + '</span><span>' + esc(b.role) + '</span></div>'; }).join('') +
+      '<a class="btn" href="/business">Manage →</a></div>';
+
+  if (me.buildingSlug) html += '<div class="card"><a class="btn" href="/owner/' + esc(me.buildingSlug) + '">Building dashboard →</a></div>';
+
+  if (!me.phone) html += '<h2>Link your phone</h2><div class="card"><div class="muted am">' +
+      'ስልክዎን ሲያገናኙ ጉዞዎችዎና ንግድዎ በዚሁ መለያ ሥር ይሰበሰባሉ። በቴሌግራም ቦቱ ውስጥ «ስልክ አጋራ» ሲሉ ራሱ ይያያዛል።' +
+      '</div><a class="btn" href="https://t.me/bina_smart_bot" target="_blank" rel="noopener">Open the Telegram bot →</a></div>';
+
+  html += '<button class="btn" onclick="signOut()">Sign out · <span class="am">ውጣ</span></button>' +
+          '<a class="back" href="/">← BinaSmart</a>';
+  $('app').innerHTML = html;
+}).catch(function () { $('app').innerHTML = '<div class="card muted">Could not load your account. <a href="/login">Sign in</a></div>'; });
+
+function signOut(){
+  fetch('/api/auth/sign-out', { method:'POST', headers:{'Content-Type':'application/json'}, body:'{}' })
+    .then(function(){ location.href = '/'; }).catch(function(){ location.href = '/'; });
+}
+</script>
+<script src="/static/pwa.js?v=1" defer></script>
+</body></html>

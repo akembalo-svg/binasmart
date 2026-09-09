@@ -174,7 +174,14 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     if (!requestRL(phone) || !requestRL(bookerKey) || !requestRL('ip:' + clientIp(req))) return reply.code(429).send({ ok: false, error: 'too_many_requests' });
     const [r, s] = await Promise.all([geo.route(from, to), settings.get()]); // fare is computed server-side and locked
     const q = quoteFare(s, tier, r.distanceM, r.durationS);
-    const rider = await prisma.rider.upsert({ where: { phone }, update: { name }, create: { phone, name } });
+    // Record HOW we got this number. `contact` means Telegram signed it, so it is proven and may
+    // later be used to attach this rider to an account; a typed number never earns that mark.
+    const proven = !!(contact && !passenger);
+    const rider = await prisma.rider.upsert({
+      where: { phone },
+      update: proven ? { name, phoneVerifiedAt: new Date() } : { name },
+      create: proven ? { phone, name, phoneVerifiedAt: new Date() } : { phone, name }
+    });
     if (tg && !passenger && rider.telegramId !== String(tg.user.id)) await prisma.rider.update({ where: { id: rider.id }, data: { telegramId: String(tg.user.id) } });
     const bookedBy = passenger ? { name: bookerName || null, phone: bookerPhone || null, telegramId: tg ? String(tg.user.id) : null } : null;
     let ride;

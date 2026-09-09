@@ -351,6 +351,7 @@ model Shop {
   status        String   @default("live")   // live | hidden | pending
   claims        OwnerClaim[]
   sessions      OwnerSession[]
+  memberships   Membership[]
 }
 
 enum ShopCategory {
@@ -621,7 +622,11 @@ model AuthUser {
   role          String   @default("owner")   // rows created before 9 Sep 2026; new accounts default to "user" in auth.mjs
   buildingSlug  String?
   telegramId    String?  @unique              // set when the account signed in with Telegram
-  phone         String?  @unique              // filled the first time they book and verify a number
+  phone         String?  @unique              // only ever set from a PROVEN number — see phoneVerifiedAt
+  phoneVerifiedAt DateTime?                   // null = never proven. A typed phone must never set this.
+  memberships   Membership[]
+  rider         Rider?
+  driver        Driver?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   sessions      AuthSession[]
@@ -1004,6 +1009,9 @@ model WalletTxn {
 model Rider {
   id         String   @id @default(cuid())
   phone      String   @unique
+  phoneVerifiedAt DateTime?      // set only when Telegram signed the contact, never when it was typed
+  authUserId String?  @unique
+  account    AuthUser? @relation(fields: [authUserId], references: [id])
   name       String
   telegramId String?
   rating     Float    @default(5)
@@ -1016,6 +1024,8 @@ model Rider {
 
 model Driver {
   id              String    @id @default(cuid())
+  authUserId      String?   @unique
+  account         AuthUser? @relation(fields: [authUserId], references: [id])
   name            String
   phone           String    @unique
   photo           String?
@@ -1286,6 +1296,7 @@ model Venue {
   createdAt DateTime  @default(now())
   claims    OwnerClaim[]
   sessions  OwnerSession[]
+  memberships Membership[]
 }
 
 model Hall {
@@ -1451,4 +1462,25 @@ model OwnerSession {
   expiresAt DateTime
   @@index([phone])
   @@index([expiresAt])
+}
+
+// One account can administer several things. This is the only place a business permission lives:
+// the login is the same for everyone, what differs is what hangs off it.
+model Membership {
+  id           String    @id @default(cuid())
+  userId       String
+  user         AuthUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind         String    // shop | venue | building
+  shopId       String?
+  shop         Shop?     @relation(fields: [shopId], references: [id])
+  venueId      String?
+  venue        Venue?    @relation(fields: [venueId], references: [id])
+  buildingSlug String?
+  role         String    @default("owner")   // owner | staff
+  status       String    @default("active")  // active | suspended
+  createdAt    DateTime  @default(now())
+  @@index([userId])
+  @@index([shopId])
+  @@index([venueId])
+  @@index([buildingSlug])
 }

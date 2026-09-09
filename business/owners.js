@@ -67,7 +67,8 @@ function makeOwners({ prisma, now, notify }) {
     const done = await prisma.ownerClaim.updateMany({ where: { id: claim.id, status: 'PENDING' }, data: { status: 'VERIFIED' } });
     if (!done.count) return { ok: false, error: 'used' };
     const session = await prisma.ownerSession.create({ data: { token: TOKEN(), kind: claim.kind, shopId: claim.shopId, venueId: claim.venueId, phone: claim.phone, expiresAt: new Date(clock() + SESSION_MS) } });
-    return { ok: true, token: session.token, kind: claim.kind, shopId: claim.shopId, venueId: claim.venueId };
+    // phone comes back too: entering a code we sent to it is a proof the account layer can use.
+    return { ok: true, token: session.token, kind: claim.kind, shopId: claim.shopId, venueId: claim.venueId, phone: claim.phone };
   }
 
   async function approveById(claimId) {

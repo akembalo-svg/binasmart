@@ -184,6 +184,9 @@ module.exports = function registerBusiness(fastify, deps) {
     const r = await owners.verify(b.claimId, b.code);
     if (!r.ok) return reply.code(r.error === 'bad_code' ? 401 : 410).send(r);
     setCookie(reply, r.token);
+    // The code was delivered to that number, so entering it proves the phone. If the person is also
+    // signed in, hand the claim to their account — that is what stops "one more login" appearing.
+    if (deps.onClaimVerified) { try { await deps.onClaimVerified(req, r); } catch (e) { console.error('[business] claim link: ' + e.message); } }
     return { ok: true, kind: r.kind, token: r.token };
   });
   fastify.post('/api/business/logout', async (req, reply) => { await owners.signOut(tokenOf(req)); reply.header('set-cookie', COOKIE + '=; Path=/; Max-Age=0'); return { ok: true }; });
