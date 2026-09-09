@@ -7,9 +7,11 @@ fastify.addHook('onSend', async (req, reply, payload) => {
   reply.header('Strict-Transport-Security', 'max-age=15768000');
   reply.header('X-Content-Type-Options', 'nosniff');
   reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
-  const u = String(req.raw.url || '').split('?')[0];
+  const full = String(req.raw.url || ''), u = full.split('?')[0];
   if (reply.statusCode < 400) {
-    if (/\.(png|jpe?g|webp|gif|svg|ico|woff2?|ttf|pmtiles)$/i.test(u)) reply.header('Cache-Control', 'public, max-age=2592000, immutable');
+    if (u === '/sw.js' || u === '/offline') reply.header('Cache-Control', 'no-cache'); // the service worker must always be re-checked
+    else if (/^\/static\//.test(u) && /[?&]v=/.test(full)) reply.header('Cache-Control', 'public, max-age=31536000, immutable'); // versioned: bump ?v= to change
+    else if (/\.(png|jpe?g|webp|gif|svg|ico|woff2?|ttf|pmtiles)$/i.test(u)) reply.header('Cache-Control', 'public, max-age=2592000, immutable');
     else if (/\.(js|css|webmanifest|pbf)$/i.test(u)) reply.header('Cache-Control', 'public, max-age=86400');
   }
   return payload;
@@ -25,16 +27,8 @@ fastify.register(require('@fastify/cors'), { origin: true });
 
 fastify.register(require('@fastify/static'), {
   root: require('path').join(__dirname, 'public'),
-  prefix: '/static/',
-  // versioned assets (?v=) never change → a year, immutable; the service worker keeps them on the phone
-  setHeaders: (res) => {
-    // @fastify/static hands over a Fastify reply here (no setHeader); older versions hand over the raw response. Never throw: a throw here hangs every sendFile.
-    try {
-      const u = (res.request && res.request.url) || (res.req && res.req.url) || (res.raw && res.raw.req && res.raw.req.url) || '';
-      const v = /[?&]v=/.test(u) ? 'public, max-age=31536000, immutable' : 'public, max-age=86400';
-      if (typeof res.setHeader === 'function') res.setHeader('Cache-Control', v); else if (typeof res.header === 'function') res.header('Cache-Control', v);
-    } catch (e) {}
-  }
+  prefix: '/static/'
+  // cache headers live in the onSend hook above (versioned ?v= assets are immutable for a year)
 });
 
 // ===== BETTER AUTH WIRING =====
