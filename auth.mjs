@@ -3,6 +3,7 @@ import 'dotenv/config';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { PrismaClient } from '@prisma/client';
+import { telegram } from './auth/telegram-plugin.mjs';
 
 const prisma = new PrismaClient();
 
@@ -17,11 +18,26 @@ export const auth = betterAuth({
     // flip to true after owner accounts are created:
     disableSignUp: process.env.AUTH_DISABLE_SIGNUP === '1',
   },
+  // Sign in with Google. Off until the two env vars exist, so a missing key can never take the site
+  // down — it just means the Google button is not offered.
+  socialProviders: (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) ? {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      // Google is the only place a real, verified email reaches us today.
+      mapProfileToUser: (p) => ({ name: p.name || p.given_name || 'BinaSmart user' }),
+    },
+  } : {},
+  plugins: [telegram({ botToken: process.env.BINA_RIDER_BOT_TOKEN })],
   user: {
     modelName: 'authUser',
     additionalFields: {
-      role: { type: 'string', defaultValue: 'owner', input: false },
+      // ⚠️ 'user', never 'owner'. Anyone can now create an account with Google or Telegram; the two
+      // privileged roles ('admin', and 'owner' with a buildingSlug) are granted by hand, not on signup.
+      role: { type: 'string', defaultValue: 'user', input: false },
       buildingSlug: { type: 'string', required: false, input: false },
+      telegramId: { type: 'string', required: false, input: false },
+      phone: { type: 'string', required: false, input: false },
     },
   },
   session: {

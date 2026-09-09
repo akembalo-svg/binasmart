@@ -618,8 +618,10 @@ model AuthUser {
   email         String   @unique
   emailVerified Boolean  @default(false)
   image         String?
-  role          String   @default("owner")
+  role          String   @default("owner")   // rows created before 9 Sep 2026; new accounts default to "user" in auth.mjs
   buildingSlug  String?
+  telegramId    String?  @unique              // set when the account signed in with Telegram
+  phone         String?  @unique              // filled the first time they book and verify a number
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   sessions      AuthSession[]

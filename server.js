@@ -55,6 +55,19 @@ fastify.route({
   }
 });
 
+// Which sign-in doors are actually configured. /login asks this so it never shows a button that
+// cannot work: a missing Google key or bot token hides that door instead of failing on the click.
+fastify.get('/api/auth-methods', async (req, reply) => {
+  reply.header('Cache-Control', 'public, max-age=60');
+  return {
+    google: !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),
+    telegram: !!process.env.BINA_RIDER_BOT_TOKEN,
+    telegramBot: process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot',
+    email: true,
+    sms: false   // the third door, once there is a provider
+  };
+});
+
 const OWNER_KEY = process.env.OWNER_KEY || 'change-me';
 const authFail = (req, reply) => {
   if (req.authUser && req.authUser.role === 'admin') return false; // session-based admin
