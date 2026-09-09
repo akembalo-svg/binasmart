@@ -389,7 +389,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS, d
     const spec = specOf(pool);
     const seats = await prisma.poolSeat.findMany({ where: { poolId: pool.id, status: { in: ['held', 'boarded', 'noshow'] } }, orderBy: { joinedAt: 'asc' } });
     return { poolId: pool.id, kind: spec.kind, corridor: { key: spec.key, name: spec.name, nameAm: spec.nameAm, stops: spec.stops }, seatFareEtb: pool.seatFareEtb,
-      seats: seats.map(s => { const st = spec.stops.find(x => x.id === s.stopId) || spec.from; return { id: s.id, name: s.riderName, phone: s.riderPhone, status: s.status, paymentMethod: s.paymentMethod, fareEtb: s.fareEtb, stop: { id: st.id, label: st.label, labelAm: st.labelAm } }; }) };
+      seats: seats.map(s => { const st = spec.stops.find(x => x.id === s.stopId) || spec.from; return { id: s.id, paid: !!s.paidAt, name: s.riderName, phone: s.riderPhone, status: s.status, paymentMethod: s.paymentMethod, fareEtb: s.fareEtb, stop: { id: st.id, label: st.label, labelAm: st.labelAm } }; }) };
   }
   async function phoneMayTrack(rideId, phone) {
     const s = await seatsForRide(rideId);
@@ -446,7 +446,7 @@ function makePool({ prisma, geo, settings, dispatch, api, baseUrl, now, waitS, d
       return { id: p.id, kind: p.kind, status: ride ? ride.status : p.status, name: spec.name, nameAm: spec.nameAm, womenOnly: !!p.womenOnly, driverId: p.driverId,
         seats: p.seats, seatFareEtb: p.seatFareEtb, openedAt: p.openedAt, dispatchAt: p.dispatchAt, dispatchedAt: p.dispatchedAt, rideId: p.rideId,
         leavesInS: p.status === 'filling' ? Math.max(0, Math.round((new Date(p.dispatchAt).getTime() - ms) / 1000)) : 0,
-        riders: seats.map(s => ({ name: s.riderName, phone: s.riderPhone, stopId: s.stopId, status: s.status, fareEtb: s.fareEtb })),
+        riders: seats.map(s => ({ name: s.riderName, phone: s.riderPhone, stopId: s.stopId, status: s.status, fareEtb: s.fareEtb, paid: !!s.paidAt })),
         driver: ride && ride.driver ? { name: ride.driver.name, plate: ride.driver.plate, phone: ride.driver.phone } : null, fareEtb: ride ? ride.fareEtb : null };
     };
     const out = [];

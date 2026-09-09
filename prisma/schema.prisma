@@ -1216,6 +1216,7 @@ model PoolSeat {
   status        String   @default("held") // held | boarded | noshow | cancelled
   paymentMethod String   @default("cash")
   fareEtb       Int?
+  paidAt        DateTime? // set when the seat was paid online (telebirr); cash seats stay null
   joinedAt      DateTime @default(now())
 
   @@index([poolId])

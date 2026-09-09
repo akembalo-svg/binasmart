@@ -329,7 +329,7 @@
       $('tfare').textContent = j.driverTakeEtb + ' ETB to you · ' + n + ' × ' + (p.seatFareEtb || '—') + ' ETB cash · ' + km(j.distanceM);
       $('tbooked').innerHTML = p.seats.map(function (s) {
         var st2 = s.status === 'boarded' ? 'on' : (s.status === 'noshow' ? 'no' : '');
-        return '<div class="seatrow ' + st2 + '" data-seat="' + s.id + '"><b>' + esc(s.name) + '</b><small>' + esc(s.stop.labelAm + ' · ' + s.stop.label) + ' · ' + (s.fareEtb || '') + ' ETB · ' + (s.phone || '') + '</small>'
+        return '<div class="seatrow ' + st2 + '" data-seat="' + s.id + '"><b>' + esc(s.name) + '</b><small>' + esc(s.stop.labelAm + ' · ' + s.stop.label) + ' · ' + (s.fareEtb || '') + ' ETB · ' + (s.paid ? '✅ ቴሌብር ተከፍሏል · ' : '') + (s.phone || '') + '</small>'
           + '<button type="button" class="dbtn ghost seatbtn" data-seat="' + s.id + '" data-to="' + (s.status === 'boarded' ? 'held' : 'boarded') + '">' + (s.status === 'boarded' ? '✅ ተሳፍሯል' : 'ተሳፈረ · Boarded') + '</button>'
           + '<button type="button" class="tlink seatno" data-seat="' + s.id + '" data-to="' + (s.status === 'noshow' ? 'held' : 'noshow') + '">' + (s.status === 'noshow' ? '↩︎' : 'አልመጣም · No-show') + '</button></div>';
       }).join('');

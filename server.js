@@ -2874,9 +2874,13 @@ const telebirrRoutes = require('./payments/telebirrRoutes')(fastify, { telebirr:
       return { payable: t.status === 'RESERVED', reason: t.status === 'RESERVED' ? null : 'ticket_' + t.status.toLowerCase(), amountEtb: t.total, title: 'Ticket ' + (t.show && t.show.event ? (t.show.event.titleAm || t.show.event.title) : '') + ' ' + (t.seats || []).join(' '), redirectPath: '/ticket/' + t.code + '?paid=1', phone: t.phone, name: t.name }; }
     if (type === 'ride') { const r = await prisma.ride.findUnique({ where: { id: String(code) } }); if (!r) return null;
       return { payable: r.paymentStatus !== 'paid' && ['completed', 'arrived', 'on_trip', 'assigned'].includes(r.status), reason: r.paymentStatus === 'paid' ? 'already_paid' : 'ride_' + r.status, amountEtb: r.fareEtb, title: 'BinaRide fare', redirectPath: '/ride?id=' + r.id + '&paid=1', phone: r.riderPhone, name: r.riderName }; }
+    if (type === 'poolseat') { const st = await prisma.poolSeat.findUnique({ where: { id: String(code) }, include: { pool: true } }); if (!st) return null;
+      const fare = st.fareEtb || (st.pool && st.pool.seatFareEtb) || 0; const ok = !st.paidAt && ['held', 'boarded'].includes(st.status) && fare > 0;
+      return { payable: ok, reason: st.paidAt ? 'already_paid' : 'seat_' + st.status, amountEtb: fare, title: 'BinaPool seat', redirectPath: '/ride?pool=' + st.poolId + '&seat=' + st.id + '&paid=1', phone: st.riderPhone, name: st.riderName }; }
     return null;
   },
   settle: async (type, code, info) => {
+    if (type === 'poolseat') { await prisma.poolSeat.updateMany({ where: { id: String(code) }, data: { paidAt: new Date(), paymentMethod: 'telebirr' } }); return; }
     if (type === 'cinema' && cinemaRef) { await cinemaRef.tickets.markPaid(String(code).toUpperCase(), 'telebirr', info.orderId); const t = await prisma.ticket.findUnique({ where: { code: String(code).toUpperCase() } }); if (t) cinemaRef.notify(t, '✅ ' + t.code + ' በቴሌብር ተከፍሏል · paid with telebirr. ' + (t.seats || []).join(', ') + '\nhttps://bina.et/ticket/' + t.code).catch(() => {}); return; }
     if (type === 'ride') { await prisma.ride.updateMany({ where: { id: String(code) }, data: { paymentStatus: 'paid', paymentMethod: 'telebirr' } }); return; }
   },

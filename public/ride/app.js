@@ -337,6 +337,20 @@
     } else if (r.status === 'cancelled') { stopPoll(); window.BinaTrack.stop(); lsDel('bina_ride_active'); show('s-cancelled'); }
   }
   // telebirr: in the SuperApp this opens the PIN sheet; on the web it goes to telebirr's checkout and comes back to /ride?id=…&paid=1
+  function payTelebirrSeat(seat) {
+    if (!seat || !window.BinaTelebirr) return toast('telebirr unavailable — pay cash');
+    var b = $('payTelebirrSeat'); if (b) { b.disabled = true; b.textContent = '📱 …'; }
+    BinaTelebirr.pay({ type: 'poolseat', code: seat.id }).then(function (p) {
+      if (p.paid) { toast('✅ ተከፍሏል · Seat paid with telebirr'); $('payBox').innerHTML = '<div class="small">✅ መቀመጫዎ ተከፍሏል · Seat paid with telebirr</div>'; lsDel('bina_pool_active'); S.pool = null; }
+      else if (!p.redirected) { toast('ክፍያው አልተጠናቀቀም · Payment not completed'); if (b) { b.disabled = false; b.textContent = '📱 ' + seat.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr'; } }
+    }).catch(function () { toast('telebirr unavailable — pay cash'); if (b) { b.disabled = false; b.textContent = '📱 ' + seat.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr'; } });
+  }
+  // Back from telebirr's web checkout for a seat: ?pool=<id>&seat=<seatId>&paid=1 → confirm, then the normal pool resume takes over.
+  (function () {
+    var q; try { q = new URLSearchParams(location.search); } catch (e) { return; }
+    var sid = q.get('seat'); if (!sid || q.get('paid') !== '1' || !q.get('pool')) return;
+    api('/api/telebirr/confirm', { type: 'poolseat', code: sid }).catch(function () {});
+  })();
   function payTelebirr() {
     if (!S.ride || !window.BinaTelebirr) return toast('telebirr unavailable — pay cash');
     var b = $('payTelebirr'); if (b) { b.disabled = true; b.textContent = '📱 …'; }
@@ -630,7 +644,7 @@
     $('cancelFinding').classList.remove('hidden');
     render(mine);
     if (['assigned', 'arriving', 'arrived', 'ontrip'].indexOf(r.status) >= 0) { $('cancelAssigned').classList.add('hidden'); $('aFare').textContent = seat.fareEtb + ' ETB'; $('aPay').textContent = '· your seat · ' + p.filled + ' riders · cash'; if (IN_TG) TG.mainHide(); }
-    if (r.status === 'completed') { $('doneFare').textContent = seat.fareEtb + ' ETB'; $('payBox').innerHTML = '<div class="small">💵 የመቀመጫዎን ' + seat.fareEtb + ' ETB ለሹፌሩ ይክፈሉ · Pay your seat to the driver in cash</div>'; lsDel('bina_pool_active'); S.pool = null; }
+    if (r.status === 'completed') { $('doneFare').textContent = seat.fareEtb + ' ETB'; $('payBox').innerHTML = seat.paid ? '<div class="small">✅ መቀመጫዎ ተከፍሏል · Seat paid with telebirr</div>' : ('<div class="small">💵 የመቀመጫዎን ' + seat.fareEtb + ' ETB ለሹፌሩ ይክፈሉ · Pay your seat to the driver in cash — ወይም · or</div><button class="cta" id="payTelebirrSeat">📱 ' + seat.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr</button>'); var ps = $('payTelebirrSeat'); if (ps) ps.addEventListener('click', function () { payTelebirrSeat(seat); }); if (seat.paid || !S.pool) { lsDel('bina_pool_active'); S.pool = null; } }
     if (r.status === 'cancelled') { lsDel('bina_pool_active'); S.pool = null; }
   }
   function leavePool() {
