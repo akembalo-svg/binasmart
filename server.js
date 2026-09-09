@@ -44,6 +44,28 @@ fastify.addHook('preHandler', async (req, reply) => {
   if (__auth) req.authUser = await __auth.getSessionUser(req);
 });
 
+// A sign-in that fails — or a callback URL opened directly, which has no sign-in to finish — used to
+// dump better-auth's raw error page. Send people back to the login page with a readable reason instead.
+fastify.get('/api/auth/error', async (req, reply) => {
+  const code = String((req.query || {}).error || '').replace(/[^a-z_]/gi, '').slice(0, 40);
+  const why = code === 'state_not_found'
+    ? 'ይህ አድራሻ በቀጥታ አይከፈትም · That address only works as the last step of a sign-in. Start here.'
+    : 'መግቢያው አልተሳካም · Sign-in did not complete. Please try again.';
+  reply.type('text/html; charset=utf-8').header('Cache-Control', 'no-store');
+  return '<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8">'
+    + '<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">'
+    + '<title>Sign-in · BinaSmart</title><link rel="icon" href="/icon-32.png">'
+    + '<link rel="stylesheet" href="/static/fonts/fonts.css?v=2"><style>'
+    + 'body{font-family:"Plus Jakarta Sans","Noto Sans Ethiopic",system-ui,sans-serif;background:#F8FAFC;color:#081120;'
+    + 'display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:24px}'
+    + '.c{max-width:420px;text-align:center}h1{font-size:20px;margin:0 0 8px}p{color:#64748B;line-height:1.5;margin:0 0 20px}'
+    + 'a{display:block;padding:14px;border-radius:12px;background:#00C896;color:#062;font-weight:800;text-decoration:none}'
+    + 'small{display:block;margin-top:14px;color:#94A3B8}</style></head><body><div class="c">'
+    + '<h1>መግቢያ · Sign in</h1><p>' + why + '</p>'
+    + '<a href="/login">ወደ መግቢያ ገጽ ይሂዱ · Go to the sign-in page</a>'
+    + '<small>' + (code || 'unknown') + '</small></div></body></html>';
+});
+
 // mount all better-auth endpoints
 fastify.route({
   method: ['GET', 'POST'],
