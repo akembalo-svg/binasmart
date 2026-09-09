@@ -267,7 +267,7 @@
   function submit() {
     var btn = $('shGo'), err = $('shErr'); err.textContent = '';
     var pm = (document.querySelector('input[name=pm]:checked') || {}).value || 'counter';
-    var body = { showId: S.show.id, seats: S.mine.slice(), name: $('fName').value.trim(), phone: $('fPhone').value.trim(), payMethod: pm, idemKey: idem };
+    var body = { showId: S.show.id, seats: S.mine.slice(), name: $('fName').value.trim(), phone: $('fPhone').value.trim(), payMethod: pm, idemKey: idem, inApp: !!(window.BinaTelebirr && BinaTelebirr.active()) };
     if ($('fGuest').checked) body.guest = { name: $('gName').value.trim(), phone: $('gPhone').value.trim() };
     if (window.TG && TG.initData && TG.initData()) body.tg = { initData: TG.initData(), contact: contactResp || undefined };
     if (!body.name && !(body.guest && body.guest.name)) { err.textContent = T.name; return; }
@@ -276,6 +276,7 @@
       btn.disabled = false; btn.textContent = '🎟️ ትኬት ይግዙ · Get ticket';
       if (!j.ok) { err.textContent = T[j.error] || j.error || T.net; if (j.error === 'hold_expired' || j.error === 'sold') { sheet.classList.remove('on'); S.mine = []; S.expiresAt = null; load(S.show.id, true); } return; }
       idem = null;
+      if (j.rawRequest && window.BinaTelebirr) { btn.disabled = true; btn.textContent = '📱 telebirr…'; BinaTelebirr.startPay(j.rawRequest, j.telebirrOrderId).then(function (p) { location.href = '/ticket/' + j.ticket.code + (p.paid ? '?paid=1' : ''); }, function () { location.href = '/ticket/' + j.ticket.code; }); return; }
       if (j.checkoutUrl) { location.href = j.checkoutUrl; return; }
       location.href = '/ticket/' + j.ticket.code + (j.chapaError ? '?chapa=failed' : '');
     });
