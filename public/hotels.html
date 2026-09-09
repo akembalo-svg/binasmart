@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#00C896">
 <title>BinaHotels — ሆቴሎች በአዲስ አበባ · Book direct, 0% commission | BinaSmart</title>
 <meta name="description" content="Hotels in Addis Ababa on BinaSmart: pick your dates, book direct with the hotel, pay at reception. No credit card, no commission, instant confirmation code. · ሆቴል በቀጥታ ያስይዙ።">
 <link rel="canonical" href="https://bina.et/hotels">
@@ -186,5 +188,6 @@ fetch('/api/hotels').then(r => r.json()).then(d => {
 }).catch(() => { $('hotels').innerHTML = '<p style="color:#94a3b8;padding:20px;text-align:center">Could not load hotels.</p>'; });
 </script>
 <script src="/static/bina-footer.js?v=9" defer></script>
+<script src="/static/pwa.js?v=1" defer></script>
 </body>
 </html>

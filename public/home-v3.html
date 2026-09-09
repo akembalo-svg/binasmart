@@ -448,7 +448,7 @@ function askExternalAI(which){
   try{ cards.map(function(c,i){return {c:c,i:i,n:use[keyOf(c)]||0};}).sort(function(a,b){return (b.n-a.n)||(a.i-b.i);}).forEach(function(o){grid.appendChild(o.c);}); }catch(e){}
   cards.forEach(function(c){ c.addEventListener('click',function(){ var k=keyOf(c); use[k]=(use[k]||0)+1; try{localStorage.setItem('bina_card_use',JSON.stringify(use));}catch(e){} }); });
 })();
-if('serviceWorker' in navigator){addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
+
 var binaDeferred=null;
 addEventListener('beforeinstallprompt',function(e){e.preventDefault();binaDeferred=e;var b=document.getElementById('installBtn');if(b)b.style.display='';});
 function binaInstall(){var b=document.getElementById('installBtn');if(!binaDeferred){alert('ከአሳሽዎ ሜኑ ➔ "Add to Home screen" ይጫኑ። / Use your browser menu ➔ Add to Home screen');return;}binaDeferred.prompt();binaDeferred.userChoice.finally(function(){binaDeferred=null;if(b)b.style.display='none';});}
@@ -457,5 +457,6 @@ addEventListener('appinstalled',function(){var b=document.getElementById('instal
 </script>
 <script src="/static/bina-footer.js?v=9" defer></script>
 <script src="/static/telebirr-bridge.js?v=1"></script>
+<script src="/static/pwa.js?v=1" defer></script>
 </body>
 </html>

@@ -271,14 +271,29 @@
     var body = { idemKey: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())), tier: S.tier, pickup: S.pickup, dropoff: S.dropoff, paymentMethod: pay, riderName: ME.name, riderPhone: ME.phone || undefined };
     if (pb) body.passenger = pb;
     if (IN_TG) body.tg = { initData: TG.initData(), contact: TG.contact() || undefined };
+    sendRide(body);
+  }
+  function offline() { return window.BinaOffline && BinaOffline.isOffline(); }
+  // No network: keep the request on the phone and send it the moment the connection returns (same idemKey → no duplicates).
+  function queueOffline(kind, url, body, msg) { if (!window.BinaOffline) return false; BinaOffline.clear(kind); BinaOffline.add({ kind: kind, url: url, body: body }); toast(msg); $('request').disabled = false; if (IN_TG) setCta(); return true; }
+  addEventListener('bina:sent', function (e) {
+    var it = e.detail.item, d = e.detail.result;
+    if (it.kind === 'ride') onRideResult(d); else if (it.kind === 'pool') onJoinResult(d, it.body);
+  });
+  function sendRide(body) {
+    if (offline()) return queueOffline('ride', '/api/ride/request', body, '📴 ከመስመር ውጭ — ኢንተርኔት ሲመለስ ጥያቄዎ ይላካል · Offline — your request will be sent when the network returns');
     api('/api/ride/request', body)
-      .then(function (d) {
+      .then(onRideResult)
+      .catch(function () { if (offline()) return queueOffline('ride', '/api/ride/request', body, '📴 ከመስመር ውጭ — ኢንተርኔት ሲመለስ ጥያቄዎ ይላካል · Offline — your request will be sent when the network returns'); $('request').disabled = false; if (IN_TG) setCta(); toast('Network error — try again'); });
+  }
+  function onRideResult(d) {
+    (function () {
         $('request').disabled = false;
         if (!d.ok) { if (IN_TG) setCta(); return toast(d.error || 'Could not request'); }
         if (d.phone) { ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME)); }
         S.ride = d.ride; lsSet('bina_ride_active', d.ride.id); show('s-finding'); startPoll();
         if (IN_TG) { TG.backHide(); TG.main('ሰርዝ · Cancel ride', cancel); TG.haptic(); }
-      }).catch(function () { $('request').disabled = false; if (IN_TG) setCta(); toast('Network error — try again'); });
+      })();
   }
 
   // ---- live status (poll every 4 s) ----
@@ -588,7 +603,11 @@
     else if (p.create) { url = '/api/pool/create'; body.pickup = S.pickup || DEFAULT_PICKUP; body.dropoff = p.dropoff; body.womenOnly = !!POOL.womenOnly; show('s-pool'); }
     if (IN_TG) body.tg = { initData: TG.initData(), contact: TG.contact() || undefined };
     $('corridors').querySelectorAll('.go2 button').forEach(function (b) { b.disabled = true; });
-    api(url, body).then(function (d) {
+    if (offline()) { $('corridors').querySelectorAll('.go2 button').forEach(function (b) { b.disabled = false; }); if (window.BinaOffline) { BinaOffline.clear('pool'); BinaOffline.add({ kind: 'pool', url: url, body: body }); } return toast('📴 ከመስመር ውጭ — ኢንተርኔት ሲመለስ ይቀላቀላሉ · Offline — you will join when the network returns'); }
+    api(url, body).then(function (d) { onJoinResult(d, body); }).catch(function () { $('corridors').querySelectorAll('.go2 button').forEach(function (b) { b.disabled = false; }); if (offline() && window.BinaOffline) { BinaOffline.clear('pool'); BinaOffline.add({ kind: 'pool', url: url, body: body }); return toast('📴 ከመስመር ውጭ — ኢንተርኔት ሲመለስ ይቀላቀላሉ · Offline — you will join when the network returns'); } toast('Network error — try again'); });
+  }
+  function onJoinResult(d, body) {
+    (function () {
       $('corridors').querySelectorAll('.go2 button').forEach(function (b) { b.disabled = false; });
       if (!d.ok && d.error === 'too_far_from_group') return toast('ከቡድኑ በጣም ርቀዋል · You are too far from that group');
       if (!d.ok && d.error === 'car_already_leaving') { toast('መኪናው ተነስቷል · That car already left'); return loadNear(); }
@@ -601,7 +620,7 @@
       if (d.phone) { ME.phone = d.phone; lsSet('bina_ride_me', JSON.stringify(ME)); }
       S.pool = { id: d.pool.id }; S.ride = null; lsSet('bina_pool_active', d.pool.id); lsDel('bina_ride_active');
       renderPool(d); startPoll(); if (IN_TG) TG.haptic();
-    }).catch(function () { $('corridors').querySelectorAll('.go2 button').forEach(function (b) { b.disabled = false; }); toast('Network error — try again'); });
+    })();
   }
   function poolTick() {
     if (!S.pool) return;

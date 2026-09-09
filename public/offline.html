@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ከመስመር ውጭ · Offline — BinaSmart</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/icon-32.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F8FAFC;color:#081120;font:16px/1.5 system-ui,"Noto Sans Ethiopic",sans-serif;padding:24px}
+.card{max-width:420px;width:100%;text-align:center}
+.card img{width:72px;height:72px;border-radius:18px;margin-bottom:14px}
+h1{font-size:22px;margin-bottom:6px}
+p{color:#64748B;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+a.b{display:block;padding:14px 10px;border-radius:14px;background:#fff;border:1px solid rgba(8,17,32,.08);color:#081120;text-decoration:none;font-weight:600}
+a.b span{display:block;font-size:22px;margin-bottom:4px}
+button{width:100%;border:0;border-radius:14px;padding:14px;background:#00C896;color:#062;font:700 16px system-ui,sans-serif}
+small{display:block;margin-top:14px;color:#94A3B8}
+</style>
+</head>
+<body>
+<div class="card">
+  <img src="/icon-192.png" alt="BinaSmart">
+  <h1>ከመስመር ውጭ ነዎት</h1>
+  <p>You are offline. ኢንተርኔት ሲመለስ ይህ ገጽ ራሱ ይቀጥላል · This page continues by itself when the network returns.</p>
+  <div class="grid">
+    <a class="b" href="/ride"><span>🚕</span>BinaRide</a>
+    <a class="b" href="/ride?pool=1"><span>👥</span>BinaPool</a>
+    <a class="b" href="/watch"><span>📺</span>BinaWatch</a>
+    <a class="b" href="/cinema"><span>🎬</span>Cinema</a>
+  </div>
+  <button onclick="location.reload()">እንደገና ይሞክሩ · Try again</button>
+  <small>BinaSmart · bina.et</small>
+</div>
+<script>addEventListener('online',function(){location.reload();});</script>
+</body>
+</html>

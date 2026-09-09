@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#00C896">
 <title>Bina Airport — ቦሌ አየር ማረፊያ ወደ ከተማ · Premium Airport Transfer Addis Ababa | BinaSmart</title>
 <meta name="description" content="Airport transfer from Bole International Airport to anywhere in Addis Ababa. Fixed price shown before you book, driver waits at Terminal 2, meet and greet, Telebirr or cash. · ከቦሌ አየር ማረፊያ ወደ ከተማ በቋሚ ዋጋ።">
 <link rel="canonical" href="https://bina.et/airport">
@@ -301,5 +303,6 @@ document.querySelectorAll('.dest').forEach(function(b){ b.addEventListener('clic
   new IntersectionObserver(function(es){ bar.classList.toggle('on', !es[0].isIntersecting && es[0].boundingClientRect.top < 0); },{threshold:0}).observe(box); })();
 </script>
 <script src="/static/bina-footer.js?v=9" defer></script>
+<script src="/static/pwa.js?v=1" defer></script>
 </body>
 </html>

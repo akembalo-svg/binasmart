@@ -25,7 +25,9 @@ fastify.register(require('@fastify/cors'), { origin: true });
 
 fastify.register(require('@fastify/static'), {
   root: require('path').join(__dirname, 'public'),
-  prefix: '/static/'
+  prefix: '/static/',
+  // versioned assets (?v=) never change → a year, immutable; the service worker keeps them on the phone
+  setHeaders: (res) => { const u = (res.req && res.req.url) || ''; res.setHeader('Cache-Control', /[?&]v=/.test(u) ? 'public, max-age=31536000, immutable' : 'public, max-age=86400'); }
 });
 
 // ===== BETTER AUTH WIRING =====
@@ -145,7 +147,8 @@ fastify.get('/sitemap.xml', async (req, reply) => {
   reply.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + urls.map(u => '<url><loc>' + u + '</loc></url>').join('\n') + '\n</urlset>');
 });
-fastify.get('/sw.js', async (req, reply) => reply.sendFile('sw.js'));
+fastify.get('/sw.js', async (req, reply) => reply.header('Cache-Control', 'no-cache').header('Service-Worker-Allowed', '/').sendFile('sw.js'));
+fastify.get('/offline', async (req, reply) => reply.header('Cache-Control', 'no-cache').sendFile('offline.html'));
 fastify.get('/manifest.webmanifest', async (req, reply) => reply.type('application/manifest+json').sendFile('manifest.webmanifest'));
 fastify.get('/favicon.ico', async (req, reply) => reply.sendFile('favicon.ico'));
 fastify.get('/favicon-16.png', async (req, reply) => reply.sendFile('icon-32.png'));
