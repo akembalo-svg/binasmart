@@ -82,6 +82,35 @@ function voiceBlock(root, which) {
 function sha1(s) { return crypto.createHash('sha1').update(s).digest('hex'); }
 function tokens(s) { return String(s).toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter(t => t.length > 1); }
 
+// ---------- crawled-site hygiene ----------
+// A crawler sees a site's nav, footer and "related links" on every single page. htmlToText only removes the
+// semantic <nav>/<footer> elements, which most Ethiopian sites don't use, so the template survived into every
+// page and became dozens of byte-identical chunks (ethiopianreporter's footer was in the index 55 times).
+// Those clones crowd real answers out of the top results. Any paragraph that appears on a large share of ONE
+// site's pages is template, not content, so we drop it before chunking. Self-tuning: no per-site rules.
+const paras = t => String(t).split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+const normPara = p => p.replace(/\s+/g, ' ').trim().toLowerCase();
+
+function stripBoilerplate(docs, { minPages = 4, ratio = 0.15 } = {}) {
+  const bySite = new Map();
+  for (const d of docs) { const site = String(d.slug).split('/')[0]; if (!bySite.has(site)) bySite.set(site, []); bySite.get(site).push(d); }
+  for (const ds of bySite.values()) {
+    if (ds.length < minPages) continue;                       // too few pages to tell template from content
+    const pages = new Map();
+    for (const d of ds) for (const p of new Set(paras(d.text).map(normPara))) pages.set(p, (pages.get(p) || 0) + 1);
+    const limit = Math.max(minPages, Math.ceil(ds.length * ratio));
+    const boiler = new Set([...pages].filter(([, n]) => n >= limit).map(([p]) => p));
+    if (!boiler.size) continue;
+    for (const d of ds) d.text = paras(d.text).filter(p => !boiler.has(normPara(p))).join('\n\n');
+  }
+  return docs;
+}
+
+// Some crawled government pages have been injected with gambling spam (moe.gov.et served a casino page).
+// Require two or more distinct markers, which always cluster, so a page mentioning one word in passing is safe.
+const SPAM = /(slot gacor|maxwin|situs (?:slot|judi|togel)|judi bola|togel online|rtp live|bandar (?:judi|togel)|pragmatic play|joker ?\d{2,}|scatter hitam)/gi;
+function isSpam(text) { return new Set(String(text).toLowerCase().match(SPAM) || []).size >= 2; }
+
 // ---------- sources ----------
 function readSources(root, only) {
   const docs = [];
@@ -94,13 +123,22 @@ function readSources(root, only) {
   if (want('web')) { // knowledge/web/<site>/<hash>.md written by knowledge/crawl.js (front matter: url, title, source_name, lang)
     const wdir = path.join(root, 'knowledge', 'web');
     let sites = []; try { sites = fs.readdirSync(wdir).filter(d => fs.statSync(path.join(wdir, d)).isDirectory()); } catch (e) { /* not crawled yet */ }
+    const web = [];
+    const hygiene = { spam: {}, boilerplateChars: 0 };
     for (const site of sites) for (const f of fs.readdirSync(path.join(wdir, site)).filter(f => f.endsWith('.md'))) {
       const raw = rd(path.join(wdir, site, f)); if (!raw) continue;
       const fm = /^---\n([\s\S]*?)\n---\n/.exec(raw); if (!fm) continue;
       const meta = {}; for (const line of fm[1].split('\n')) { const m = /^(\w+):\s*"?(.*?)"?\s*$/.exec(line); if (m) meta[m[1]] = m[2].replace(/\\"/g, '"'); }
-      const body = raw.slice(fm[0].length); if (body.trim().length < 400) continue;
-      docs.push({ source: 'web', slug: site + '/' + f.replace(/\.md$/, ''), title: (meta.source_name ? meta.source_name + ' · ' : '') + (meta.title || site), url: meta.url || null, lang: meta.lang || 'en', text: body.slice(0, 20000) });
+      const body = raw.slice(fm[0].length);
+      if (isSpam(body)) { hygiene.spam[site] = (hygiene.spam[site] || 0) + 1; continue; }   // hacked page serving casino spam
+      web.push({ source: 'web', slug: site + '/' + f.replace(/\.md$/, ''), title: (meta.source_name ? meta.source_name + ' · ' : '') + (meta.title || site), url: meta.url || null, lang: meta.lang || 'en', text: body.slice(0, 20000) });
     }
+    // strip the site template FIRST, then judge the minimum length on what real content is left
+    const before = web.reduce((n, d) => n + d.text.length, 0);
+    for (const d of stripBoilerplate(web)) if (d.text.trim().length >= 400) docs.push(d);
+    hygiene.boilerplateChars = before - web.reduce((n, d) => n + d.text.length, 0);
+    hygiene.dropped = web.length - web.filter(d => d.text.trim().length >= 400).length;
+    readSources.lastHygiene = hygiene;
   }
   if (want('llms')) { const t = rd(path.join(root, 'public', 'llms.txt')); if (t) docs.push({ source: 'llms', slug: 'llms', title: 'BinaSmart site guide', url: 'https://bina.et/llms.txt', lang: 'en', text: t }); }
   if (want('docs')) { const t = rd(path.join(root, 'mcp-server', 'docs.md')); if (t) docs.push({ source: 'docs', slug: 'mcp', title: 'BinaSmart MCP server', url: 'https://bina.et/mcp', lang: 'en', text: t }); }
@@ -194,6 +232,12 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
       }
     }
     await load();
+    const hy = readSources.lastHygiene;
+    if (hy && (Object.keys(hy.spam).length || hy.boilerplateChars)) {
+      const spam = Object.entries(hy.spam).map(([k, v]) => k + ':' + v).join(' ');
+      say('[knowledge] hygiene: ' + Math.round(hy.boilerplateChars / 1000) + 'k chars of site template stripped'
+        + (spam ? ', spam pages skipped ' + spam : '') + (hy.dropped ? ', ' + hy.dropped + ' pages left too thin' : ''));
+    }
     say('[knowledge] ingest: ' + docs.length + ' docs, +' + inserted + ' chunks, -' + deleted + ' stale, ' + embedded + ' embedded, ' + rows.length + ' total');
     return { docs: docs.length, inserted, deleted, embedded, total: rows.length };
   }
@@ -265,4 +309,4 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   return { load, ingest, search, contextFor, health, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, isAmharic, voiceBlock, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf };
+module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf };

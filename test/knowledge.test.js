@@ -2,7 +2,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('path');
-const { makeKnowledge, chunkDoc, htmlToText, readSources, DIMS, toBuf } = require('../knowledge/index');
+const { makeKnowledge, chunkDoc, htmlToText, readSources, stripBoilerplate, isSpam, DIMS, toBuf } = require('../knowledge/index');
 
 test('chunkDoc: heading-aware, bounded, carries the title into every chunk', () => {
   const md = '# Addis\n\nintro para that is long enough to count as a chunk of text for the index.\n\n## Bole\n\n' + 'Bole is the airport district. '.repeat(60) + '\n\n## Piassa\n\nOld town with St George Cathedral and the Taitu Hotel near Arada.';
@@ -102,4 +102,47 @@ test('Amharic voice: detection, glossary block, style examples only for Amharic 
   assert.match(greet, /Amharic voice examples/); assert.equal(/Relevant BinaSmart knowledge/.test(greet), false);
   const pub = await w.k.search('ሰላም ወንድሜ', { k: 5, isPublic: true });
   assert.ok(pub.every(x => x.source !== 'style'));
+});
+
+
+// ---- crawled-site hygiene: the site template must not become dozens of identical chunks ----
+const webDoc = (site, n, body) => ({ source: 'web', slug: site + '/p' + n, text: body });
+const FOOTER = 'About us. Camerun Street, Awlo Building 7th floor. Phone (+251) 11 12 34 56.';
+const NAV = 'Home - News - Politics - Business - Editorial - Sport';
+
+test('stripBoilerplate removes what repeats across one site and keeps what does not', () => {
+  const docs = [];
+  for (let i = 0; i < 10; i++) docs.push(webDoc('reporter', i, NAV + '\n\n' + 'Story number ' + i + ' about the coffee harvest in Jimma this season.\n\n' + FOOTER));
+  stripBoilerplate(docs);
+  assert.equal(docs.filter(d => d.text.includes(FOOTER)).length, 0, 'footer stripped from every page');
+  assert.equal(docs.filter(d => d.text.includes(NAV)).length, 0, 'nav stripped from every page');
+  assert.ok(docs.every((d, i) => d.text.includes('Story number ' + i)), 'the unique story survives');
+});
+
+test('stripBoilerplate leaves a small site alone and never touches another site', () => {
+  const small = [webDoc('mols', 1, FOOTER + '\n\nOne.'), webDoc('mols', 2, FOOTER + '\n\nTwo.')];
+  stripBoilerplate(small);
+  assert.ok(small.every(d => d.text.includes(FOOTER)), 'under minPages: untouched, too little evidence');
+
+  const mixed = [];
+  for (let i = 0; i < 10; i++) mixed.push(webDoc('reporter', i, FOOTER + '\n\nStory ' + i + ' body text here.'));
+  for (let i = 0; i < 6; i++) mixed.push(webDoc('nbe', i, FOOTER + '\n\nDirective ' + i + ' body text here.'));
+  stripBoilerplate(mixed);
+  assert.equal(mixed.filter(d => d.slug.startsWith('reporter') && d.text.includes(FOOTER)).length, 0);
+  assert.equal(mixed.filter(d => d.slug.startsWith('nbe') && d.text.includes(FOOTER)).length, 0, 'counted per site, both qualify on their own');
+});
+
+test('stripBoilerplate keeps a paragraph that only a minority of pages share', () => {
+  const docs = [];
+  for (let i = 0; i < 20; i++) docs.push(webDoc('ena', i, (i < 2 ? 'A shared note on the census.\n\n' : '') + 'Report ' + i + ' with its own content and enough words to matter.'));
+  stripBoilerplate(docs);
+  assert.equal(docs.filter(d => d.text.includes('shared note on the census')).length, 2, '2 of 20 is content, not template');
+});
+
+test('isSpam needs two markers, so a passing mention is safe', () => {
+  assert.equal(isSpam('JOKER77 situs slot gacor maxwin hari ini depo 5k'), true);
+  assert.equal(isSpam('The ministry published the 2026 education slot allocation for regional colleges'), false, 'one stray word is not spam');
+  assert.equal(isSpam('rtp live pragmatic play scatter hitam'), true);
+  assert.equal(isSpam('Togel is banned under Ethiopian law and the ministry issued a notice.'), false);
+  assert.equal(isSpam('የትምህርት ሚኒስቴር የ2026 የትምህርት ዕድል አዋጅ አወጣ።'), false);
 });
