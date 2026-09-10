@@ -21,3 +21,17 @@ ops/health/sat-sessions.json
 pids
 uploads/
 watch/live-status.json
+
+# BinaSmart's own work — kept out of the public repo on purpose (2026-09-11).
+# The CODE is public deliberately: it is the credibility, and the safety gates being readable is the
+# strongest support for what /amharic-ai claims. These are the things that took original work and
+# cannot be rebuilt from the code — the voice, the yardstick, and the graded questions behind it.
+# Backed up to /root/storage/binasmart-private/
+knowledge/amharic-style.md
+knowledge/oromo-style.md
+knowledge/sources-am.json
+ops/bini/questions.json
+ops/bini/amharic-eval.js
+ops/health/afiya-eval.js
+ops/law/asmat-eval.js
+ops/oromo-eval.js

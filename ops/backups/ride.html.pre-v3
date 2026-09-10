@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<title>BinaSmart Ride · ራይድ — Fixed-price rides in Addis Ababa</title>
+<meta name="description" content="Get a ride in Addis Ababa in seconds. Fixed upfront price, no surge, no app to download. Pay the driver in cash. · በአዲስ አበባ በቋሚ ዋጋ መኪና ይያዙ።">
+<link rel="canonical" href="https://bina.et/ride">
+<meta property="og:title" content="BinaSmart Ride · ራይድ — Fixed-price rides in Addis">
+<meta property="og:description" content="Fixed upfront price. No surge. No app to download. Moto · Bajaj · Economy · Comfort · XL.">
+<meta property="og:image" content="https://bina.et/static/bina-property.png">
+<meta property="og:url" content="https://bina.et/ride">
+<meta name="theme-color" content="#059669">
+<link rel="icon" href="/icon-32.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
+<link rel="stylesheet" href="/static/ride/ui.css?v=12">
+<script>
+/* "next" look (default since 7 Sep 2026): html.next + ride/next.css. ?v=classic remembers the old look; ?v=next restores.
+   Kept inline and first so the glass sheet never flashes the old look. */
+(function(){var on=true,ls=null,q=location.search||'';try{ls=localStorage.getItem('bina_ride_next');}catch(e){}
+if(/[?&]v=classic\b/.test(q)){on=false;try{localStorage.setItem('bina_ride_next','0');}catch(e){}}
+else if(/[?&]v=next\b/.test(q)){try{localStorage.setItem('bina_ride_next','1');}catch(e){}}
+else if(ls==='0'){on=false;}
+if(on){window.__rideNext=true;document.documentElement.className+=' next';
+['/static/fonts/fonts.css?v=1','/static/ride/next.css?v=9'].forEach(function(h){var l=document.createElement('link');l.rel='stylesheet';l.href=h;document.head.appendChild(l);});}})();
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"BinaSmart Ride","serviceType":"Ride hailing","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et"},"areaServed":{"@type":"City","name":"Addis Ababa"},"url":"https://bina.et/ride"}</script>
+</head>
+<body>
+<div id="map"></div>
+
+<header class="top">
+  <a class="brand" href="/">🏢 Bina<span>Smart</span> <b>Ride</b></a>
+  <div class="ctls">
+    <button id="btnSat" class="chip3d chipsat off hidden" aria-label="Satellite view" title="Satellite · ሳተላይት">🛰️</button>
+    <button id="btn3d" class="chip3d" aria-label="Toggle 3D">3D</button>
+  </div>
+</header>
+
+<!-- Bottom sheet: one element, screens swap inside -->
+<section id="sheet" class="sheet">
+  <div class="grip"></div>
+
+  <div class="screen" id="s-home">
+    <div class="h1row">
+      <h1>ወዴት? <small>Where to?</small></h1>
+      <button type="button" id="aboutBtn" class="aiSpark" aria-label="ስለ ቢና ራይድ · About Bina Ride" title="ስለ ቢና ራይድ · About Bina Ride">
+        <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true"><defs><linearGradient id="sparkG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4285F4"></stop><stop offset=".55" stop-color="#9B72CB"></stop><stop offset="1" stop-color="#D96570"></stop></linearGradient></defs><path class="spk" d="M24 3c1.2 11.6 9.4 19.8 21 21-11.6 1.2-19.8 9.4-21 21-1.2-11.6-9.4-19.8-21-21 11.6-1.2 19.8-9.4 21-21z" fill="url(#sparkG)"></path><path class="spk2" d="M38 30c.4 3.9 3.1 6.6 7 7-3.9.4-6.6 3.1-7 7-.4-3.9-3.1-6.6-7-7 3.9-.4 6.6-3.1 7-7z" fill="url(#sparkG)"></path></svg>
+      </button>
+    </div>
+    <button class="field" id="openSearch"><span>🔍</span><span class="ph">መድረሻዎን ያስገቡ · Enter destination</span></button>
+    <div id="quick" class="quick" aria-label="Quick destinations"></div>
+    <form class="bini" id="biniForm" autocomplete="off">
+      <button type="button" id="biniMic" class="biniMic hidden" aria-label="Speak · ይናገሩ" title="ይናገሩ · Speak">🎤</button>
+      <input id="biniQ" aria-label="Ask Bini" placeholder="ቢኒን ይጠይቁ… ወደ ቦሌ ውሰደኝ" maxlength="300">
+      <button type="submit" id="biniGo" class="biniGo" aria-label="Ask">➤</button>
+    </form>
+    <div id="biniSay" class="biniSay hidden" aria-live="polite"></div>
+    <div class="from"><span class="dot"></span><span id="fromLabel">Locating you… · ቦታዎን እየፈለግን ነው</span><button id="editFrom">Change</button></div>
+    <div class="small tglink">✈️ Also in Telegram · በቴሌግራምም: <a href="https://t.me/bina_smart_bot/ride" target="_blank" rel="noopener">t.me/bina_smart_bot/ride</a></div>
+    <div class="hint">💸 Fixed price · no surge &nbsp;·&nbsp; 📲 No app needed &nbsp;·&nbsp; 💵 Pay in cash</div>
+  </div>
+
+  <div class="screen hidden" id="s-about">
+    <div class="srow"><button class="back" id="closeAbout">‹</button><h2 style="margin:0">ስለ ቢና ራይድ <small>About Bina Ride</small></h2></div>
+    <ul class="about">
+      <li><b>💸 ቋሚ ዋጋ</b> ከመነሳትዎ በፊት ዋጋውን ያያሉ፤ ትራፊክ፣ ዝናብ፣ ሰዓት አይቀይረውም። <small>Fixed price shown before you go. No surge.</small></li>
+      <li><b>🚗 5 ደረጃ</b> ሞተር · ባጃጅ · መደበኛ · ምቾት · XL — እርስዎ ይመርጣሉ። <small>Five tiers, your choice.</small></li>
+      <li><b>📲 መተግበሪያ አያስፈልግም</b> በድር ወይም በቴሌግራም ይያዙ፤ ሹፌሩ ይደውልልዎታል። <small>Book on the web or in Telegram; the driver calls you.</small></li>
+      <li><b>👀 ታርጋ ማረጋገጫ</b> የሹፌሩ ስም፣ መኪናና ታርጋ ከመሳፈርዎ በፊት ይታያል። <small>Driver, car and plate shown before you get in.</small></li>
+      <li><b>💵 ክፍያ</b> ጥሬ ገንዘብ ለሹፌሩ፤ ቴሌብር በቅርቡ። <small>Cash to the driver; telebirr soon.</small></li>
+    </ul>
+    <div class="small">ጥያቄ አለዎት? ቢኒን ይጠይቁ · Ask Bini</div>
+    <div class="aboutChips">
+      <button type="button" class="chipq" data-q="ዋጋው እንዴት ይሰላል? · How is the fare calculated?">ዋጋው እንዴት ይሰላል?</button>
+      <button type="button" class="chipq" data-q="ሹፌሮች እንዴት ይመረጣሉ እና ይረጋገጣሉ? · How are drivers chosen and verified?">ሹፌሮች እንዴት ይመረጣሉ?</button>
+      <button type="button" class="chipq" data-q="ለሌላ ሰው ጉዞ እንዴት እይዛለሁ? · How do I book a ride for someone else?">ለሌላ ሰው መያዝ ይቻላል?</button>
+    </div>
+    <div id="aboutAns" class="biniSay hidden" aria-live="polite"></div>
+    <div class="small tglink">ወይም በ WhatsApp፦ <a href="https://wa.me/251911244344" target="_blank" rel="noopener">+251 911 244 344</a></div>
+  </div>
+
+  <div class="screen hidden" id="s-search">
+    <div class="srow"><button class="back" id="closeSearch">‹</button><input id="q" aria-label="Destination" placeholder="ሆቴል፣ ህንፃ፣ ሱቅ… · hotel, building, shop, street" autocomplete="off"></div>
+    <div class="small" id="searchMode">Searching destination · <button id="pinMode" class="link">or tap the map</button></div>
+    <ul id="results" class="results"></ul>
+  </div>
+
+  <div class="screen hidden" id="s-quote">
+    <div class="tripline"><div><span class="dot"></span> <b id="qFrom"></b></div><div><span class="pin">📍</span> <b id="qTo"></b></div></div>
+    <div class="small" id="qMeta"></div>
+    <div id="tiers" class="tiers"></div>
+    <label class="forother"><input type="checkbox" id="forOther"> ለሌላ ሰው ይያዙ · Book for someone else</label>
+    <div id="passenger" class="passenger hidden">
+      <input id="pName" aria-label="Passenger name" placeholder="የተሳፋሪ ስም · Passenger name" autocomplete="off">
+      <input id="pPhone" aria-label="Passenger phone" placeholder="09… · Passenger phone (Ethiopia)" inputmode="tel">
+      <div class="small">ሹፌሩ ለተሳፋሪው ይደውላል · The driver calls the passenger; you get the updates.</div>
+    </div>
+    <div class="payrow">
+      <label><input type="radio" name="pay" value="cash" checked> 💵 Cash · ጥሬ ገንዘብ</label>
+      <!-- Re-enable once CHAPA_MODE=live; the server refuses chapa until then. -->
+      <label class="hidden"><input type="radio" name="pay" value="chapa"> 📱 telebirr / Chapa</label>
+    </div>
+    <button class="cta" id="request">ጉዞ ይጠይቁ · Request ride <span id="ctaFare"></span></button>
+    <button class="link" id="cancelQuote">Change destination</button>
+  </div>
+
+  <div class="screen hidden" id="s-who">
+    <h2>ስምዎ እና ስልክዎ <small>Your name & phone — once</small></h2>
+    <input id="whoName" aria-label="Name" placeholder="ስም · Name" autocomplete="name">
+    <input id="whoPhone" aria-label="Phone" placeholder="09… · Phone" inputmode="tel" autocomplete="tel">
+    <div class="small">ሹፌሩ ይደውልልዎታል · The driver will call this number.</div>
+    <button class="cta" id="whoGo">ቀጥል · Continue</button>
+  </div>
+
+  <div class="screen hidden" id="s-finding">
+    <div class="radar"><span></span><span></span><span></span><b>🚕</b></div>
+    <h2 id="findTitle">ሹፌር እየፈለግን ነው… <small>Finding your driver…</small></h2>
+    <div class="small" id="findSub">Usually under a minute.</div>
+    <button class="link danger" id="cancelFinding">ሰርዝ · Cancel</button>
+  </div>
+
+  <div class="screen hidden" id="s-assigned">
+    <div class="status" id="aStatus">ሹፌርዎ እየመጣ ነው · Driver on the way</div>
+    <div class="etaLive hidden" id="etaLive" aria-live="polite"></div>
+    <figure class="carCard hidden" id="carCard">
+      <img id="carImg" alt="Your driver's car" loading="lazy">
+      <figcaption><span class="plateBig" id="carPlate"></span><span class="carMeta" id="carMeta"></span></figcaption>
+      <div class="matchHint">👀 ታርጋውን ያረጋግጡ · Check the plate</div>
+    </figure>
+    <div class="driver">
+      <div class="avatar" id="dPhoto">🚗</div>
+      <div><b id="dName"></b><div class="small" id="dCar"></div><div class="small" id="dRating"></div></div>
+      <div class="plate" id="dPlate"></div>
+    </div>
+    <div class="row2">
+      <a class="btn" id="dCall" href="#">📞 Call</a>
+      <a class="btn" id="dWa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+    </div>
+    <div class="fareline">Fare · ዋጋ <b id="aFare"></b> <span id="aPay"></span></div>
+    <button class="link danger" id="cancelAssigned">ሰርዝ · Cancel ride</button>
+  </div>
+
+  <div class="screen hidden" id="s-done">
+    <h2>ደረሱ! <small>You've arrived</small> 🎉</h2>
+    <div class="fareline big">Total · ጠቅላላ <b id="doneFare"></b></div>
+    <div id="payBox"></div>
+    <div class="stars" id="stars"><button data-s="1" aria-label="1 star">★</button><button data-s="2" aria-label="2 stars">★</button><button data-s="3" aria-label="3 stars">★</button><button data-s="4" aria-label="4 stars">★</button><button data-s="5" aria-label="5 stars">★</button></div>
+    <div class="small" id="rateMsg">ሹፌሩን ይገምግሙ · Rate your driver</div>
+    <div class="row2"><button class="btn" id="again">🔁 Ride again</button><button class="btn" id="returnTrip">↩️ Return trip</button></div>
+  </div>
+
+  <div class="screen hidden" id="s-cancelled">
+    <h2>ጉዞው ተሰርዟል <small>Ride cancelled</small></h2>
+    <button class="cta" id="againC">አዲስ ጉዞ · New ride</button>
+  </div>
+</section>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="/static/vendor/maplibre-gl.js"></script>
+<script src="/static/vendor/pmtiles.js"></script>
+<script src="/static/ride/map.js?v=8"></script>
+<script src="/static/ride/tg.js?v=5"></script>
+<script src="/static/ride/track.js?v=1"></script>
+<script src="/static/ride/app.js?v=11"></script>
+<nav style="max-width:560px;margin:0 auto;padding:18px;text-align:center;font-size:12.5px;line-height:1.9;color:#68717f">
+  <a href="/why-binasmart" style="color:#0369a1">ለምን BinaSmart? · Why BinaSmart</a> ·
+  <a href="/drive-with-us" style="color:#0369a1">ሹፌር ነዎት? ይመዝገቡ · Drive with us</a>
+</nav>
+  <script src="/static/bina-footer.js?v=6" defer></script>
+</body>
+</html>
