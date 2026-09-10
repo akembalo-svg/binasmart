@@ -4,6 +4,9 @@
 
 const MISS_RE = /(የለኝም|አላውቅም|ማረጋገጥ አልችልኩም|መረጃ የለም|I do(n't| not) have|not sure|can(no|')t (help|confirm|find)|don't know|hin qabu|hin beeku|wa\.me\/251911244344)/i;
 const HUMAN_RE = /(ሰው (ማነጋገር|መነጋገር|እፈልጋለሁ)|ከሰው ጋር|ኦፕሬተር|ደዋይ|human|real person|talk to (someone|a person|an agent|the team)|operator|manager|complain|ቅሬታ|refund|ገንዘቤ(ን)? መልስ|nama dhugaa|namaan|dubbachuu barbaada)/i;
+// A complaint always reaches a person. Money disputes matter most: the fare is fixed and shown before
+// booking, so a driver asking for more is both the commonest complaint and the most damaging.
+const COMPLAINT_RE = /ዘግይ|አያነሳ|አልመጣ|ችግር|ተበላሽ|ተሳስ|አጭበርባ|ጠፋ|ስርቆት|ተሰረቀ|አልደረሰ|ቅሬታ|በላይ ጠየቀ|በላይ አስከፈለ|ተጨማሪ ጠየቀ|ዋጋ ጨመረ|አስከፈለኝ|ከተስማማነው በላይ|አልመለሰልኝም|ገንዘቤ|late|not answer|no show|didn.?t come|complain|problem|scam|stole|lost my|overcharg|charged? me more|more than (the )?(agreed|quoted)|extra (money|charge)|refund|didn.?t refund/i;
 
 function userKey({ telegramId, uid, ip } = {}) {
   if (telegramId) return 'tg:' + String(telegramId).replace(/\D/g, '').slice(0, 20);
@@ -109,4 +112,4 @@ function extractMemory(msg) {
   return out;
 }
 
-module.exports = { makeMemory, makeHandover, userKey, MISS_RE, HUMAN_RE, extractMemory };
+module.exports = { makeMemory, makeHandover, userKey, MISS_RE, HUMAN_RE, COMPLAINT_RE, extractMemory };

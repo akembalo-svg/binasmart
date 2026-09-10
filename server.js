@@ -708,7 +708,7 @@ const ASSIST_FACTS = '\n\nFACTS RULE: when a "Relevant BinaSmart knowledge" bloc
 
 // Deterministic guards the model cannot skip: no self-introduction mid-chat, no emoji on a complaint,
 // no placeholder links it made up (e.g. /ride?id=...).
-const COMPLAINT_RE = /ዘግይ|አያነሳ|አልመጣ|ችግር|ተበላሽ|ተሳስ|አጭበርባ|ጠፋ|ስርቆት|ተሰረቀ|አልደረሰ|ቅሬታ|late|not answer|no show|didn.?t come|complain|problem|scam|stole|lost my/i;
+
 // Bini must never name the AI vendor behind it. The prompt says so, but a prompt is probabilistic, so this
 // is the deterministic backstop: a sentence that names one of them WHILE describing itself is dropped.
 // Keep in sync with ops/bini/checks.js (SELF_VENDOR) — test/biniChecks.test.js asserts they agree.
@@ -754,7 +754,7 @@ function biniGuards(text, msg, hist) {
 // ===== Bini: tools (hands), per-user memory, conversation log, misses, handover, languages =====
 const biniLang = require('./assistant/lang');
 const biniTools = require('./assistant/tools');
-const { makeMemory, makeHandover } = require('./assistant/memory');
+const { makeMemory, makeHandover, COMPLAINT_RE } = require('./assistant/memory');
 const biniMemory = makeMemory({ prisma });
 const biniHandover = makeHandover({ sendTg: (chat, text) => sendTg(chat, text), chatId: process.env.BINI_HANDOVER_CHAT || '8825386029' });
 const biniTranscribe = require('./assistant/transcribe').makeTranscriber({ apiKey: process.env.GEMINI_API_KEY || '' });
@@ -827,10 +827,14 @@ fastify.post('/api/assistant', async (req, reply) => {
     // Backstop: a clearly stated fact gets saved even when the model forgot to call remember().
     if (!toolsUsed.includes('remember') && mem.persistent) for (const f of require('./assistant/memory').extractMemory(msg)) { await execute('remember', { field: f.field, value: f.value }).catch(() => {}); toolsUsed.push('remember*'); }
     text = biniGuards(text, msg, hist);
-    const miss = biniMemory.isMiss(text) || biniMemory.wantsHuman(msg);
+    // A complaint goes to a person even when Bini sounded confident, and it is never rate-limited:
+    // a second complaint from the same rider is more urgent than the first, not less.
+    const always_handover = COMPLAINT_RE.test(msg) || biniMemory.wantsHuman(msg);
+    const miss = biniMemory.isMiss(text) || always_handover;
     mem.touch({ visit: true, lang: lang === 'am-latin' ? 'am' : lang, name: u.name }).catch(() => {});
-    biniMemory.log({ userKey, channel, lang, message: msg, reply: text, tools: toolsUsed, miss, ms: Date.now() - t0 });
-    if (miss && !toolsUsed.includes('contact_team')) biniHandover({ userKey, channel, lang, user: known || u, message: msg, reply: text, history: hist, reason: biniMemory.wantsHuman(msg) ? 'user asked for a person' : 'Bini could not answer' }).catch(() => {});
+    let handoverSent = false;
+    if (miss && !toolsUsed.includes('contact_team')) handoverSent = biniHandover({ userKey, channel, lang, user: known || u, message: msg, reply: text, history: hist, explicit: always_handover, reason: biniMemory.wantsHuman(msg) ? 'user asked for a person' : 'Bini could not answer' }).catch(() => {});
+    biniMemory.log({ userKey, channel, lang, message: msg, reply: text, tools: (await handoverSent) ? toolsUsed.concat('handover') : toolsUsed, miss, ms: Date.now() - t0 });
     return reply.send({ reply: text || FALLBACK, tools: toolsUsed, lang });
   } catch (e) {
     req.log && req.log.warn && req.log.warn('assistant err ' + e);

@@ -3,7 +3,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const lang = require('../assistant/lang');
 const { makeExecutor, toOpenAI, DEFS } = require('../assistant/tools');
-const { makeMemory, makeHandover, userKey } = require('../assistant/memory');
+const { makeMemory, makeHandover, userKey, COMPLAINT_RE } = require('../assistant/memory');
 
 test('language detection: Ethiopic, Latin Amharic, Afaan Oromoo, English', () => {
   assert.equal(lang.detect('ጋራ ጉዞ ምንድን ነው'), 'am');
@@ -124,4 +124,18 @@ test('watch_channels matches on meaningful words and Oromo media requests are de
   assert.equal((await run('watch_channels', { q: 'Can you open the radio Sheger' })).items[0].openUrl, 'https://bina.et/watch?open=radio/sheger');
   assert.equal((await run('watch_channels', { q: 'Raadiyoo Sheger naaf banaa' })).items[0].kind, 'radio');
   assert.equal(lang.detect('Raadiyoo Sheger naaf banaa'), 'om');
+});
+
+// Real messages from the 30-day log. A rider disputing the fare is the commonest complaint there is, and it
+// used to slip past this pattern entirely, so nobody was told.
+test('COMPLAINT_RE catches the disputes riders actually send, and leaves ordinary questions alone', () => {
+  for (const m of ['ሹፌሩ ከተስማማነው በላይ ጠየቀኝ', 'ሹፌሩ 15 ደቂቃ ዘግይቷል ስልክ አያነሳም', 'ሹፌሩ ተጨማሪ ጠየቀኝ',
+                   'the driver charged me more than the quoted fare', 'I want a refund', 'driver overcharged me',
+                   'ሹፌሩ አልመጣም', 'ገንዘቤ አልተመለሰም']) {
+    assert.ok(COMPLAINT_RE.test(m), 'should be a complaint: ' + m);
+  }
+  for (const m of ['ጋራ ጉዞ ምንድን ነው?', 'ከመገናኛ ወደ ቦሌ ስንት ነው?', 'What is BinaPool?', 'ፋይዳ እንዴት ማውጣት እችላለሁ?',
+                   'ሰላም', 'Is the hotel booking real?']) {
+    assert.equal(COMPLAINT_RE.test(m), false, 'should be ordinary: ' + m);
+  }
 });
