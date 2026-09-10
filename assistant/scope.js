@@ -9,8 +9,8 @@
 const HEALTH = /ሆስፒታል|ክሊኒክ|ሐኪም|ሀኪም|ዶክተር|ነርስ|ህክምና|ሕክምና|ትኩሳት|ህመም|ያመኛል|ያመዋል|ያማታል|መድሃኒት|ክኒን|ፋርማሲ|ላቦራቶሪ|ምርመራ|ክትባት|እርግዝና|ነፍሰ ጡር|ምጥ|ጥርስ|ራጅ|ደም ምርመራ|ቀዶ ጥገና|የጤና መድን|ጤና/i;
 const HEALTH_EN = /hospital|clinic|doctor|nurse|pharmac|medicine|medical|symptom|fever|pain|illness|disease|treatment|surgery|vaccin|pregnan|dental|x-?ray|lab (test|result)|health insurance|\bhealth\b|patient|caregiver|diagnos|\bopd\b|out-?patient|emergency (room|department)|\bicu\b|midwife|ambulance|\bward\b|referral letter/i;
 
-const LEGAL = /ሕግ|ህግ|አዋጅ|ደንብ|መመሪያ|ፍርድ ቤት|ችሎት|ጠበቃ|ክስ|ውል|ኮንትራት|ውርስ|ፍቺ|ጋብቻ ምዝገባ|ንብረት|ካሳ|ቅጣት|ይግባኝ|ምስክር|ሰነድ|ውክልና|የሥራ ውል|ኪራይ ውል|ግብር|ቫት|ንግድ ፈቃድ|ጉምሩክ|መብት|አከራይ|ተከራይ|ጉዳይ|ክርክር|ዳኛ|ዳኞች|ቅጣት|ዋስ|ውርስ|ኑዛዜ|አሳዳሪ|ሰበር|ውሳኔ|አስገዳጅ|መዝገብ|ችሎት|ጠበቃ|ከሳሽ|ተከሳሽ|ማስረጃ|ይግባኝ|ፍትሐብሔር|ወንጀል|ሥነ ሥርዓት|ስነ ስርዓት|አቤቱታ|ብይን|ፍርድ|ሕጋዊ|ህጋዊ|ሕገ መንግሥት|ህገ መንግስት|ደንብ ቁጥር|አዋጅ ቁጥር/i;
-const LEGAL_EN = /\blaw\b|legal|proclamation|regulation|court|judge|lawyer|advocate|attorney|lawsuit|sue\b|contract|agreement|inherit|divorce|custody|tenanc|lease|evict|compensation|penalty|appeal|witness|notar|power of attorney|employment contract|\btax\b|\bvat\b|business licen[cs]e|customs|\brights?\b|landlord|tenant|\bcase\b|dispute|claim|liabl|damages|settlement|hearing|prosecut|bail|\bfine\b|deed|guardian|cassation|precedent|binding decision|bench|judgment|judgement|ruling|verdict|plaintiff|defendant|evidence|testimony|jurisdiction|file (an? )?(appeal|case|claim|suit)|civil procedure|criminal procedure|statute|decree|gazette/i;
+const LEGAL = /ሕግ|ህግ|አዋጅ|ደንብ|መመሪያ|ፍርድ ቤት|ችሎት|ጠበቃ|ክስ|ውል|ኮንትራት|ውርስ|ፍቺ|ጋብቻ ምዝገባ|ንብረት|ካሳ|ቅጣት|ይግባኝ|ምስክር|ሰነድ|ውክልና|የሥራ ውል|ኪራይ ውል|ግብር|ቫት|ንግድ ፈቃድ|ጉምሩክ|መብት|አከራይ|ተከራይ|ጉዳይ|ክርክር|ዳኛ|ዳኞች|ቅጣት|ዋስ|ውርስ|ኑዛዜ|አሳዳሪ|ሰበር|ውሳኔ|አስገዳጅ|መዝገብ|ችሎት|ጠበቃ|ከሳሽ|ተከሳሽ|ማስረጃ|ይግባኝ|ፍትሐብሔር|ወንጀል|ሥነ ሥርዓት|ስነ ስርዓት|አቤቱታ|ብይን|ፍርድ|ሕጋዊ|ህጋዊ|ሕገ መንግሥት|ህገ መንግስት|ደንብ ቁጥር|አዋጅ ቁጥር|ግብር ከፋይ|ቲን|COC|የሙያ ብቃት|ማስረጃ ወረቀት|ፈቃድ|ምዝገባ|ማህበር|አክሲዮን|ጨረታ ውል/i;
+const LEGAL_EN = /\blaw\b|legal|proclamation|regulation|court|judge|lawyer|advocate|attorney|lawsuit|sue\b|contract|agreement|inherit|divorce|custody|tenanc|lease|evict|compensation|penalty|appeal|witness|notar|power of attorney|employment contract|\btax\b|\bvat\b|business licen[cs]e|customs|\brights?\b|landlord|tenant|\bcase\b|dispute|claim|liabl|damages|settlement|hearing|prosecut|bail|\bfine\b|deed|guardian|cassation|precedent|binding decision|bench|judgment|judgement|ruling|verdict|plaintiff|defendant|evidence|testimony|jurisdiction|file (an? )?(appeal|case|claim|suit)|civil procedure|criminal procedure|statute|decree|gazette|\btin\b|\bcoc\b|competence certificate|work permit|registration|licen[cs]e/i;
 
 function scores(msg) {
   const m = String(msg || '');
@@ -29,13 +29,20 @@ function topicOf(msg) {
   return 'other';
 }
 
+// What Bini plainly owns. A message has to look like one of these — or like the other specialist's subject —
+// before a specialist hands it away. Silence on all three means "no signal", and no signal is not a reason to
+// bounce someone off the page they deliberately opened.
+const BINI_OWN = /ራይድ|ጉዞ|ታክሲ|ሆቴል|ሲኒማ|ፊልም|ጨረታ|ሬዲዮ|ቲቪ|ምግብ ቤት|ካፌ|ህንፃ|ኪራይ ክፍያ|ride|taxi|hotel|cinema|film|tender|radio|\btv\b|restaurant|cafe|flight|booking|fare/i;
+
 // A greeting or a thank-you is not off-topic; it is a person being polite.
 const SOCIAL = /^\s*(ሰላም|ጤና ይስጥልኝ|እንደምን|hi|hello|hey|selam|nagaa|akkam|thank|ameseginalehu|አመሰግናለሁ|good (morning|afternoon|evening))(?![a-z])/i;
 
 function inScope(msg, domain) {
   if (SOCIAL.test(String(msg || '').trim())) return true;
   const t = topicOf(msg);
-  return t === domain || t === 'both';
+  if (t === domain || t === 'both') return true;
+  if (t === 'other' && !BINI_OWN.test(String(msg || ''))) return true;   // no signal: keep the person here
+  return false;
 }
 
 // Where an off-topic message should go, and what to say about it.

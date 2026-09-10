@@ -66,7 +66,7 @@ const CASE_ADVICE = [
   /ምን ላድርግ.{0,20}(ጉዳዬ|ክሴ|ችሎት)|what should i do (about|in) my (case|situation)|advise me on my case|ጉዳዬን እንዴት/i,
   /ጥፋተኛ ነው|ወንጀለኛ ነው|is he guilty|am i guilty|is (this|that) (illegal|a crime)|ወንጀል ነው ወይ/i,
   /ክስ ልመሰርት|ልክሰው|should i sue|should i take (him|her|them) to court|ፍርድ ቤት ልውሰደው/i,
-  /መከላከያ ጻፍልኝ|አቤቱታ ጻፍልኝ|draft (my|a) (defence|defense|claim|petition|affidavit|statement)|write my (case|appeal|complaint)/i,
+  /መከላከያ|አቤቱታ|ክስ/.source && /(መከላከያ|አቤቱታ|ክስ|ማመልከቻ)[ዬውንህሽ]{0,3}\s*(ጻፍ|ጻፍልኝ|አዘጋጅ|አዘጋጅልኝ)|draft (my|a) (defence|defense|claim|petition|affidavit|statement)|write my (case|appeal|complaint)/i,
   /ውሌ ተቀባይነት አለው|is my contract (valid|enforceable)|is this contract legal|ውሉ ይፀናል/i,
 ];
 function isCaseAdvice(msg) { const m = String(msg || ''); return CASE_ADVICE.some(re => re.test(m)); }
