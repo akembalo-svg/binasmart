@@ -242,6 +242,13 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     return { docs: docs.length, inserted, deleted, embedded, total: rows.length };
   }
 
+  // What BinaSmart wrote itself answers correctly 91.7% of the time; crawled sites manage 62.5%. Rank
+  // accordingly, with a tie-breaker rather than a thumb on the scale: a crawled page that is genuinely the
+  // better match still wins. Without this, a news article in the question's language outranks the guide that
+  // actually answers it — which is exactly what Afaan Oromoo questions were hitting.
+  const OWN_SOURCES = new Set(['guide', 'page', 'addis', 'skill', 'llms', 'docs']);
+  const OWN_BOOST = 0.06;
+
   function keywordScore(qt, r) { let s = 0; for (const t of qt) if (r.toks.has(t)) s += 1; return qt.length ? s / qt.length : 0; }
 
   // Hybrid search: cosine on the embedding (when we can embed the query) plus keyword overlap.
@@ -264,7 +271,8 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
       let cos = 0;
       if (qv && r.vec) { for (let i = 0; i < DIMS; i++) cos += qv[i] * r.vec[i]; }
       const kw = keywordScore(qt, r);
-      const score = qv ? cos + 0.15 * kw : kw;
+      const own = OWN_SOURCES.has(r.source) ? OWN_BOOST : 0;
+      const score = (qv ? cos + 0.15 * kw : kw) + (qv ? own : own * 0.5);
       if (score > 0) scored.push({ r, score, cos, kw });
     }
     scored.sort((a, b) => b.score - a.score);
