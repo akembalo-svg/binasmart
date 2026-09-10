@@ -201,6 +201,31 @@ details[open] summary{color:#000}
  <p class="en-note">In English: anyone can say they have AI. We measure instead. A 114-question Amharic benchmark, each with a known correct page. On BinaSmart's own guides the right page is in the top three <b>91.7%</b> of the time. On crawled news and ministry sites it is lower, and we say that too. The benchmark is re-run whenever the model or the corpus changes. Afaan Oromoo is measured separately: on 35 health and legal questions Dr Afiya scored <b>20/20</b> and Asmat <b>15/15</b>, against 10/20 and 11/15 for bare Gemini on the same questions and the same rules.</p>
  </section>
 
+  <section id="cost">
+    <h2>የአማርኛ ዋጋ — በቶከን ሲለካ</h2>
+    <p>AI የሚያስከፍለው በቃል ሳይሆን በ<b>ቶከን</b> ነው። አማርኛ ደግሞ በቶከን ውድ ነው። የቢና ዜና ዴስክ በOpenAI ቶከናይዘር ለክቶ ከእንግሊዝኛ <b>6.1 እጥፍ</b> አገኘው። እኛ ግን የምንሰራበት ሞዴል ጀሚኒ ስለሆነ በእሱ ቶከናይዘር እንደገና ለካነው — <b>1.9 እጥፍ</b> ሆነ። ሁለቱም እውነት ናቸው፤ ልዩነቱ ራሱ ነጥቡ ነው፦ ወጪው የግዕዝ ፊደል ባህርይ ሳይሆን የቶከናይዘሩ ባህርይ ነው። ጀሚኒ አማርኛን ተምሮታል፤ የOpenAI ቶከናይዘር አልተማረውም።</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>ተመሳሳይ ዓረፍተ ነገር</th><th>OpenAI o200k</th><th>ጀሚኒ (የእኛ)</th></tr></thead>
+      <tbody>
+        <tr><td>English</td><td>12</td><td>13</td></tr>
+        <tr><td>አፋን ኦሮሞ</td><td>19</td><td>21</td></tr>
+        <tr><td>አማርኛ</td><td>73</td><td>25</td></tr>
+      </tbody>
+    </table></div>
+    <p>በእኛ ሰነዶች ላይ ሲለካ፦ አንድ ቶከን በእንግሊዝኛ 3.55 ፊደል፣ በአፋን ኦሮሞ 2.67፣ በአማርኛ ግን 1.85 ብቻ ይይዛል። ማለት ተመሳሳይ ሐሳብ ለመግለጽ አማርኛ ወደ ሁለት እጥፍ ቶከን ይፈልጋል።</p>
+
+    <h3 style="margin:22px 0 10px">ታዲያ እኛ ምን እናደርጋለን</h3>
+    <p>ትልቁ ችግር ገንዘብ አይደለም — <b>አቅም</b> ነው። የቢናስማርት የሰነድ ቤተ-መጻሕፍት ሲለካ <b>1.06 ሚሊዮን ቶከን</b> ነው። ትልቁ የኮንቴክስት ዊንዶው እንኳ 1 ሚሊዮን ነው። ማለት ቤተ-መጻሕፍታችንን በሙሉ ወደ AI «መለጠፍ» ፈጽሞ አይቻልም — ትንሽ ስለሆነ ሳይሆን ትልቅ ስለሆነ።</p>
+    <div class="facts">
+      <div class="fact"><b>1.06M</b><span>የቤተ-መጻሕፍቱ ቶከን</span></div>
+      <div class="fact"><b>926</b><span>በአንድ ጥያቄ የሚላክ ቶከን</span></div>
+      <div class="fact"><b>1,148×</b><span>ያነሰ</span></div>
+    </div>
+    <p>መልሱ ፍለጋ ነው። በየጥያቄው የሚመለከቱትን ጥቂት የሰነድ ክፍሎች ብቻ አውጥተን እንልካለን — በአማካይ <b>926 ቶከን</b>፣ ከቤተ-መጻሕፍቱ 1,148 እጥፍ ያነሰ። ስለዚህ የአማርኛ ውድነት አይሰማም፤ ምክንያቱም የምንልከው ጥቂት ነው። ይህ ደግሞ ለተቋምዎ ሰነዶችም ተመሳሳይ ነው።</p>
+    <p class="en-note">In English: AI is billed in tokens, and Amharic is expensive in tokens. Our own news desk measured 6.1x English using OpenAI's o200k_base. BinaSmart runs on Gemini, so we re-measured with the tokenizer that actually governs our bill: <b>1.9x</b>, not 6.1x. Both are correct — and the gap is the point. The penalty is a property of the tokenizer, not of the Ge'ez script: Gemini has learned Amharic, o200k_base has not. Measured on our own chunks, one token carries 3.55 characters of English, 2.67 of Afaan Oromoo and 1.85 of Amharic. The harder limit is capacity, not cost: our library measures <b>~1,063,000 tokens</b>, which does not fit in even a one-million-token context window. Pasting a document library into a chatbot is not an option at this size. Retrieval is. Across six real questions in three languages we send an average of <b>926 tokens</b> per question — about 1,148 times less than the whole library. <a href="/news/token-cost-languages">The full measurement is here.</a></p>
+    <p style="font-size:12.5px;color:var(--mut);line-height:1.8">መለኪያው፦ 10 መስከረም 2026፣ በ gemini-2.5-flash countTokens። የ«6.1 እጥፍ» ቁጥር በ tiktoken o200k_base የተለካ ነው። <a href="/news/token-cost-languages">ሙሉ ልኬቱ</a></p>
+  </section>
+
  <section id="limits">
  <h2 class="am">የማንለው ነገር</h2>
  <p class="am">የማንናገራቸው ነገሮች አሉ፤ ግልጽነት ከማጋነን ይሻላል፦</p>

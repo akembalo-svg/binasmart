@@ -179,6 +179,31 @@ details[open] summary{color:#000}
  <p class="en-note">In English: 35 Afaan Oromoo questions across emergencies, clinical advice, legal procedure and out-of-scope requests. Every system is scored by the same mechanical rules &mdash; is the Ethiopian hotline present, is a dosage present, does it pose as a professional. Fluency is deliberately not scored, because the person who built the harness is not a native speaker.</p>
  </section>
 
+  <section id="cost">
+    <h2>Gatii Afaan Oromoo - tokeeniin</h2>
+    <p>AI jechaan osoo hin taane <b>tokeeniin</b> kaffalchiisa. Afaan Oromoo qubee Laatiiniin waan barreeffamuuf gatiin isaa madaalawaadha - Amaariffa caalaa salphaa. Deeskiin oduu BinaSmart himaa tokko afaan 15 keessatti safaree Amaariffi Ingiliffa irra dachaa 6.1 akka kaffalchiisu argate; Afaan Oromoo garuu 19 qofa ture. Nuti moodeela Gemini irratti waan hojjennuuf tokeenaayizarii sanaan irra deebinee safarre.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Himni wal fakkaatu</th><th>OpenAI o200k</th><th>Gemini (kan keenya)</th></tr></thead>
+      <tbody>
+        <tr><td>English</td><td>12</td><td>13</td></tr>
+        <tr><td>Afaan Oromoo</td><td>19</td><td>21</td></tr>
+        <tr><td>Amaariffa</td><td>73</td><td>25</td></tr>
+      </tbody>
+    </table></div>
+    <p>Sanadoota keenya irratti: tokeeniin tokko Ingiliffa keessatti qubee 3.55, Afaan Oromoo keessatti 2.67, Amaariffa keessatti immoo 1.85 qofa baata.</p>
+
+    <h3 style="margin:22px 0 10px">Nuti maal goona</h3>
+    <p>Rakkoon guddaan maallaqa miti - <b>dandeettii</b> dha. Mana kitaabaa sanadoota BinaSmart yoo safarame <b>tokeenii miliyoona 1.06</b> dha. Foddaan konteekstii guddaan illee miliyoona 1 qofa. Kanaaf mana kitaabaa guutuu AI keessa "maxxansuun" hin danda'amu.</p>
+    <div class="facts">
+      <div class="fact"><b>1.06M</b><span>tokeenii mana kitaabaa</span></div>
+      <div class="fact"><b>926</b><span>tokeenii gaaffii tokkootti</span></div>
+      <div class="fact"><b>1,148×</b><span>xiqqaa</span></div>
+    </div>
+    <p>Deebiin isaa barbaacha. Gaaffii tokkoon tokkoon isaa irratti kutaalee sanadaa muraasa isa ilaallatu qofa baafnee ergina - giddu-galeessaan <b>tokeenii 926</b>, mana kitaabaa irraa dachaa 1,148 xiqqaa. Sanadoota dhaabbata keessaniifis akkasuma.</p>
+    <p class="en-note">In English: AI is billed in tokens. Afaan Oromoo is written in Latin script and is therefore inexpensive - 19 tokens against English's 12 in our news desk's measurement, where Amharic cost 73. We re-measured on Gemini, the tokenizer that actually governs our bill. The harder limit is capacity rather than cost: our library measures <b>~1,063,000 tokens</b> and does not fit in even a one-million-token context window, so pasting a document library into a chatbot is not an option at this size. Retrieval is. Across six real questions in three languages we send an average of <b>926 tokens</b> per question - about 1,148 times less than the whole library. <a href="/news/token-cost-languages">The full measurement is here.</a></p>
+    <p style="font-size:12.5px;color:var(--mut);line-height:1.8">Safartuu: 10 Fulbaana 2026, gemini-2.5-flash countTokens. Lakkoofsi "dachaa 6.1" tiktoken o200k_base tiin safarame. <a href="/news/token-cost-languages">Safartuu guutuu</a></p>
+  </section>
+
  <section id="limits">
  <h2>Waan hin jenne</h2>
  <p>Wanti hin jenne jira. Ifa ta'uun waa guddisanii dubbachuu irra wayya.</p>
