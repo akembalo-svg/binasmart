@@ -26,6 +26,11 @@ const DEFS = [
     parameters: { type: 'object', properties: { venue: { type: 'string', description: 'optional venue name filter' } } } },
   { name: 'search_tenders', description: 'Search verified Ethiopian tenders that are still open (deadline not passed): by keyword, organisation or category. Returns title, organisation, category, deadline and the bina.et link.',
     parameters: { type: 'object', properties: { q: { type: 'string' }, category: { type: 'string' } } } },
+  { name: 'search_shops', description: 'Find a restaurant, cafe, pharmacy, bank, salon, gym, clinic or shop in Addis Ababa from the BinaSmart directory, with its page link, area and rating. Use whenever someone asks where to eat, for a recommendation, or for a business by name or kind. NEVER name a place this tool did not return.',
+    parameters: { type: 'object', properties: {
+      q: { type: 'string', description: 'Name or words to match, in Amharic or English, e.g. "Kaldi", "pizza", "Bole"' },
+      category: { type: 'string', enum: ['RESTAURANT', 'CAFE', 'PHARMACY', 'BANK', 'SALON', 'GYM', 'CLINIC', 'RETAIL', 'SERVICE', 'OFFICE'], description: 'Kind of business' },
+      limit: { type: 'number', description: 'How many to return, 1-10, default 6' } } } },
   { name: 'watch_channels', description: 'BinaWatch (bina.et/watch): live Ethiopian TV channels, FM radio stations (Sheger FM, etc.), series playlists and kids channels, each with a direct open link. Call it for any request to watch, listen, open, play a TV channel, radio station, series or drama; answer with the openUrl so the user taps once. Never send users to outside websites for TV or radio.',
     parameters: { type: 'object', properties: { q: { type: 'string', description: 'channel, station or series name, e.g. "Sheger", "EBS", "ደራሽ"; empty = list all' }, kind: { type: 'string', enum: ['tv', 'radio', 'series', 'kids', 'all'] } } } },
   { name: 'remember', description: 'Save something about this user for next time: their name, phone, preferred language, home or work place, or a short note. For home/work pass the place NAME as value; this tool finds the coordinates itself, so do NOT call search_places first. Call it whenever the user says "remember", "my name is", "my home is", "my work is", "ቤቴ … ነው", "ስሜ … ነው", "manni koo …" — one call per fact.',
@@ -100,6 +105,24 @@ function makeExecutor(ctx) {
       if (term) where.AND = [{ OR: [{ title: { contains: term, mode: 'insensitive' } }, { titleAm: { contains: term, mode: 'insensitive' } }, { org: { contains: term, mode: 'insensitive' } }, { summary: { contains: term, mode: 'insensitive' } }] }];
       const rows = await ctx.prisma.tender.findMany({ where, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }], take: 6 });
       return { count: rows.length, tenders: rows.map(t => ({ title: t.titleAm || t.title, org: t.org, category: t.category, region: t.region, deadline: t.deadline ? t.deadline.toISOString().slice(0, 10) : null, url: (ctx.publicBase || 'https://bina.et') + '/tenders/' + t.slug })), allUrl: (ctx.publicBase || 'https://bina.et') + '/tenders' };
+    },
+    async search_shops({ q, category, limit }) {
+      if (!ctx.prisma) return { error: 'directory unavailable' };
+      const term = String(q || '').trim().slice(0, 60);
+      const where = { status: 'live', NOT: { slug: null } };
+      if (category) where.category = String(category).toUpperCase().slice(0, 20);
+      if (term) where.OR = [{ name: { contains: term, mode: 'insensitive' } }, { nameAm: { contains: term, mode: 'insensitive' } },
+        { description: { contains: term, mode: 'insensitive' } }, { address: { contains: term, mode: 'insensitive' } }];
+      const rows = await ctx.prisma.shop.findMany({ where,
+        orderBy: [{ featured: 'desc' }, { reviewCount: 'desc' }, { avgRating: 'desc' }],
+        take: Math.max(1, Math.min(Number(limit) || 6, 10)),
+        select: { name: true, nameAm: true, category: true, address: true, phone: true, avgRating: true, reviewCount: true, isOpenNow: true, slug: true } });
+      const base = ctx.publicBase || 'https://bina.et';
+      return { count: rows.length, shops: rows.map(s => ({
+        name: s.nameAm || s.name, category: s.category, area: s.address || null, phone: s.phone || null,
+        // a rating with no reviews behind it is noise, and Bini must not quote one
+        rating: s.reviewCount > 0 ? s.avgRating : null, reviews: s.reviewCount, openNow: s.isOpenNow,
+        url: base + '/shop/' + s.slug })) };
     },
     async watch_channels({ q, kind }) {
       let data;

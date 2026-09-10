@@ -791,7 +791,7 @@ fastify.post('/api/assistant', async (req, reply) => {
     const execute = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', prisma, memory: mem, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
       handover: h => biniHandover({ ...h, userKey, channel, lang, user: known || u, message: msg, history: hist }) });
     // Flash sometimes answers a price or "remember me" from memory; on those intents the first round must call a tool.
-    const FORCE_TOOL_RE = /(remember|አስታውስ|አስታውሰኝ|yaadadh|ስንት ብር|ስንት ነው|ዋጋ|how much|fare|price|cost|gatii|meeqa|መቀመጫ|ጋራ ጉዞ|\bpool\b|imala waliinii|tender|ጨረታ|caalbaasii|cinema|ሲኒማ|film|ፊልም|showing|የት ደረሰ|ride status|my ride|where is (the|my) (car|driver)|radio|ራዲዮ|ራድዮ|\btv\b|ቲቪ|ቴሌቪዥን|channel|ቻናል|series|ድራማ|ተከታታይ|watch|listen|open the|play the|raadiyoo|televizhinii|ክፈት)/i;
+    const FORCE_TOOL_RE = /(remember|አስታውስ|አስታውሰኝ|yaadadh|ስንት ብር|ስንት ነው|ዋጋ|how much|fare|price|cost|gatii|meeqa|መቀመጫ|ጋራ ጉዞ|\bpool\b|imala waliinii|tender|ጨረታ|caalbaasii|cinema|ሲኒማ|film|ፊልም|showing|የት ደረሰ|ride status|my ride|where is (the|my) (car|driver)|radio|ራዲዮ|ራድዮ|\btv\b|ቲቪ|ቴሌቪዥን|channel|ቻናል|series|ድራማ|ተከታታይ|watch|listen|open the|play the|raadiyoo|televizhinii|ክፈት)|ምግብ ቤት|ሬስቶራንት|ካፌ|ቡና ቤት|ፋርማሲ|መድኃኒት ቤት|ሳሎን|ጂም|ክሊኒክ|የት ልብላ|የት እንብላ|restaurant|where (can i |to )?eat|pharmacy|cafe\b|coffee shop|gym\b|salon\b|recommend a place/i;
     const allTools = biniTools.toOpenAI();
     const forced = FORCE_TOOL_RE.test(msg);
     const rememberIntent = /(remember|አስታውስ|አስታውሰኝ|yaadadh)/i.test(msg);
@@ -805,6 +805,21 @@ fastify.post('/api/assistant', async (req, reply) => {
       const out = await execute('watch_channels', { q: msg.slice(0, 120), kind: 'all' }).catch(() => null);
       if (out && !out.error) { opts.used = ['watch_channels']; preTool = '\n\nTOOL RESULT for watch_channels (already run for this message; answer from it, give the openUrl as the link, do not call it again):\n' + JSON.stringify(out).slice(0, 4000); if (out.count) opts.toolChoice = undefined; }
     }
+    // Same reason as the media block above: on "where can I eat" Gemini answers from its own idea of Addis
+    // instead of calling the tool, which is also an overclaim because only the live shops are ours. So we
+    // look first and hand it the real list, empty or not.
+    const SHOP_RE = /(ምግብ ቤት|ሬስቶራንት|ካፌ|ቡና ቤት|ፋርማሲ|መድኃኒት ቤት|ሳሎን|ጂም|ክሊኒክ|የት ልብላ|የት እንብላ|restaurant|where (can i |to )?eat|pharmacy|cafe\b|coffee shop|gym\b|salon\b|recommend a place)/i;
+    if (!preTool && SHOP_RE.test(msg)) {
+      const CAT = [[/ምግብ ቤት|ሬስቶራንት|restaurant|eat\b/i, 'RESTAURANT'], [/ካፌ|ቡና ቤት|cafe|coffee/i, 'CAFE'],
+        [/ፋርማሲ|መድኃኒት ቤት|pharmacy/i, 'PHARMACY'], [/ሳሎን|salon/i, 'SALON'], [/ጂም|gym/i, 'GYM'], [/ክሊኒክ|clinic/i, 'CLINIC']];
+      const hit = CAT.find(c => c[0].test(msg));
+      const out = await execute('search_shops', { category: hit ? hit[1] : undefined, q: hit ? undefined : msg.slice(0, 60), limit: 6 }).catch(() => null);
+      if (out && !out.error) {
+        opts.used = (opts.used || []).concat('search_shops');
+        preTool = '\n\nTOOL RESULT for search_shops (already run for this message): ' + JSON.stringify(out).slice(0, 2500)
+          + '\n\nThese are the ONLY businesses BinaSmart has. Name none other. If the list is empty, say plainly that we do not have that kind of place listed yet, that we are signing them up, and offer WhatsApp — do NOT suggest places from your own knowledge and do NOT imply BinaSmart lists many.';
+      }
+    }
     const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys + preTool, [...hist, { role: 'user', content: msg }], 900, opts);
     toolsUsed = opts.used || [];
@@ -817,7 +832,7 @@ fastify.post('/api/assistant', async (req, reply) => {
       if (t2) text = t2;
     }
     // Flash occasionally answers a forced intent (fare, pool, TV/radio, tender…) without any tool. One strict retry, then we accept.
-    const TERMINAL = /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|cinema_programme|watch_channels|remember)$/;
+    const TERMINAL = /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|search_shops|cinema_programme|watch_channels|remember)$/;
     if (forced && !toolsUsed.some(n => TERMINAL.test(n))) {
       const retry = { tools: opts.tools, forcedTools, execute, toolChoice: 'required', used: [] };
       const strict = sys + '\n\nSYSTEM CHECK: your previous draft answered without calling the tool this request needs. Do it now: fares → search_places (first result for a known area; saved home/work coordinates when the user says home/work) then quote_ride; ጋራ ጉዞ/pool → pool_board; TV, radio, series → watch_channels; tenders → search_tenders; cinema → cinema_programme; "remember" → remember. Then answer from the result with the exact link or numbers.';
