@@ -37,7 +37,7 @@ const SQL = {
           AND ($1::text IS NULL OR title ILIKE $1 OR "titleAm" LIKE $1 OR genre ILIKE $1) ORDER BY "createdAt" DESC LIMIT $2`,
   building: `SELECT id, name, "nameAm", city, "subCity", "buildingType" FROM "Building" WHERE "qrSlug" = $1`,
   rooms: `SELECT name, "nameAm", description, "pricePerNight", capacity, amenities, "totalRooms" FROM "RoomType" WHERE "buildingId" = $1 AND active = true ORDER BY "pricePerNight"`,
-  departments: `SELECT id, name, "nameAm", floor, room, fee, doctors, "openHours", "slotsPerDay" FROM "Department" WHERE "buildingId" = $1 AND active = true ORDER BY floor, name`,
+  departments: `SELECT id, name, "nameAm", "nameOm", floor, room, fee, doctors, "openHours", "slotsPerDay" FROM "Department" WHERE "buildingId" = $1 AND active = true ORDER BY floor, name`,
   booked: `SELECT "departmentId", COUNT(*)::int AS n FROM "Appointment" WHERE "buildingId" = $1 AND status <> 'CANCELLED' AND date >= $2 AND date < $3 GROUP BY "departmentId"`,
 };
 
@@ -132,7 +132,7 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
     if (!deps.rows.length) return toolError(`"${b.name}" has no departments listed on BinaSmart.`);
     const used = Object.fromEntries(booked.rows.map(r => [r.departmentId, Number(r.n)]));
     return json({ hospital: { name: b.name, name_am: b.nameAm || undefined, city: b.city, sub_city: b.subCity || undefined }, date: day,
-      departments: deps.rows.map(d => ({ name: d.name, name_am: d.nameAm || undefined, floor: d.floor, room: d.room || undefined, fee_etb: d.fee ?? undefined, doctors: d.doctors || [], hours: d.openHours || undefined, slots_left: Math.max(0, d.slotsPerDay - (used[d.id] || 0)) })),
+      departments: deps.rows.map(d => ({ name: d.name, name_am: d.nameAm || undefined, name_om: d.nameOm || undefined, floor: d.floor, room: d.room || undefined, fee_etb: d.fee ?? undefined, doctors: d.doctors || [], hours: d.openHours || undefined, slots_left: Math.max(0, d.slotsPerDay - (used[d.id] || 0)) })),
       book_url: `${BASE}/hospital/${slug}`, source_url: `${BASE}/hospital/${slug}` });
   })));
 }

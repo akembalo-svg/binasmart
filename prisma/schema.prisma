@@ -746,6 +746,7 @@ model Department {
   building    Building @relation(fields: [buildingId], references: [id])
   name        String
   nameAm      String?
+  nameOm      String?
   icon        String?
   floor       Int      @default(0)
   room        String?

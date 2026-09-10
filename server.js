@@ -981,9 +981,15 @@ fastify.post('/api/afiya', async (req, reply) => {
     let depts = '';
     try {
       const rows = await prisma.department.findMany({ where: { active: true },
-        select: { name: true, nameAm: true, floor: true, room: true, fee: true, openHours: true }, take: 20 });
+        select: { name: true, nameAm: true, nameOm: true, floor: true, room: true, fee: true, openHours: true }, take: 20 });
+      // Name the department in the language the person wrote in. The Amharic stays in the brackets
+      // for an Oromo speaker on purpose: the sign above the door is in Amharic, so they need the
+      // name they can READ and the name they must RECOGNISE.
+      const deptLabel = d => l === 'om' && d.nameOm ? `${d.nameOm} (${d.name}${d.nameAm ? ' · ' + d.nameAm : ''})`
+        : (l === 'am' || l === 'am-latin') && d.nameAm ? `${d.nameAm} (${d.name})`
+        : `${d.name}${d.nameAm ? ' (' + d.nameAm + ')' : ''}`;
       if (rows.length) depts = '\n\n## Departments in the BinaSmart demo hospital (DEMO DATA — say so; it is not a real place to attend)\n'
-        + rows.map(d => `- ${d.nameAm || d.name} (${d.name}) · floor ${d.floor} room ${d.room}`
+        + rows.map(d => `- ${deptLabel(d)} · floor ${d.floor} room ${d.room}`
           + (d.fee ? ` · fee ${d.fee} ETB` : '') + (d.openHours ? ` · ${JSON.stringify(d.openHours).slice(0, 60)}` : '')).join('\n');
     } catch (e) { /* no departments, she simply has less to offer */ }
 
@@ -1035,7 +1041,7 @@ fastify.get('/api/hospital/:slug', async (req, reply) => {
     where: { buildingId: b.id, status: { not: 'CANCELLED' }, date: { gte: day, lt: next } }, _count: { id: true } });
   const cmap = Object.fromEntries(counts.map(c => [c.departmentId, c._count.id]));
   return { hospital: { name: b.name, nameAm: b.nameAm, city: b.city, subCity: b.subCity, slug: b.qrSlug, floors: b.floors },
-    departments: b.departments.map(d => ({ id: d.id, name: d.name, nameAm: d.nameAm, icon: d.icon, floor: d.floor,
+    departments: b.departments.map(d => ({ id: d.id, name: d.name, nameAm: d.nameAm, nameOm: d.nameOm, icon: d.icon, floor: d.floor,
       room: d.room, fee: d.fee, doctors: d.doctors, openHours: d.openHours,
       slotsLeft: Math.max(0, d.slotsPerDay - (cmap[d.id] || 0)) })) };
 });
@@ -1056,7 +1062,7 @@ fastify.post('/api/hospital/:slug/appointment', async (req, reply) => {
   await prisma.appointment.create({ data: { buildingId: d.buildingId, departmentId: d.id,
     name, phone: phone.trim(), date: day, note: note || null, code } });
   await audit(d.buildingId, 'APPOINTMENT_BOOKED', name + ' · ' + d.name + ' · ' + date + ' · ' + code, d.fee || 0);
-  return { ok: true, code, department: d.name, departmentAm: d.nameAm, floor: d.floor, room: d.room,
+  return { ok: true, code, department: d.name, departmentAm: d.nameAm, departmentOm: d.nameOm, floor: d.floor, room: d.room,
     fee: d.fee, date, queueNumber: taken + 1 };
 });
 

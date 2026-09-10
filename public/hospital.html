@@ -87,7 +87,7 @@ async function load(){
       : dp.slotsLeft <= 5 ? '<span class="slots low">⚡ ' + dp.slotsLeft + ' slots left today</span>'
       : '<span class="slots ok">✓ ' + dp.slotsLeft + ' slots today</span>';
     return '<div class="dept"><div class="dh"><div class="ic">' + (dp.icon || '🏥') + '</div>'
-      + '<div><div class="nm">' + dp.name + '</div><div class="am">' + (dp.nameAm || '') + '</div></div>'
+      + '<div><div class="nm">' + dp.name + '</div><div class="am">' + [dp.nameAm, dp.nameOm].filter(Boolean).join(' · ') + '</div></div>'
       + '<div class="loc"><b>' + (dp.room || '') + '</b><span>' + floorName(dp.floor) + '</span></div></div>'
       + '<div class="tags">' + (dp.fee ? '<span class="fee">💵 ' + dp.fee.toLocaleString() + ' ETB</span>' : '')
       + (dp.openHours ? '<span>🕐 ' + dp.openHours + '</span>' : '')
@@ -99,7 +99,7 @@ function openBook(id){
   const dp = DEPTS.find(x => x.id === id); if (!dp) return;
   const today = new Date().toISOString().slice(0, 10);
   $('modal').classList.add('on');
-  $('sheet').innerHTML = '<h3>' + (dp.icon || '🏥') + ' ' + dp.name + ' · ' + (dp.nameAm || '') + '</h3>'
+  $('sheet').innerHTML = '<h3>' + (dp.icon || '🏥') + ' ' + dp.name + ' · ' + [dp.nameAm, dp.nameOm].filter(Boolean).join(' · ') + '</h3>'
     + '<div class="sm">' + (dp.room || '') + ' · ' + floorName(dp.floor) + (dp.fee ? ' · ' + dp.fee.toLocaleString() + ' ETB' : '') + '</div>'
     + '<label>Date / ቀን</label><input type="date" id="ad" value="' + today + '" min="' + today + '">'
     + '<label>Full name / ሙሉ ስም</label><input id="an" placeholder="Patient name">'
