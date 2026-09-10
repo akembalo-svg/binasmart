@@ -923,7 +923,18 @@ fastify.post('/api/asmat', async (req, reply) => {
   try {
     const ctx = await knowledge.contextFor(msg, { lang: l }).catch(() => '');
     let sys = asmat.SYSTEM + '\n\n' + biniLang.directive(lang) + (ctx ? '\n\n## Information you may use\n' + ctx : '');
-    if (asmat.isCaseAdvice(msg)) sys += '\n\nTHIS MESSAGE ASKS FOR ADVICE ON THE PERSON OWN CASE, A PREDICTION, OR A DOCUMENT TO FILE. Decline in one warm sentence, then be immediately useful: the office or court, the procedure, the documents, and where the general rule is written. Do not say who is right, and do not draft anything.';
+    // Three different requests that used to share one refusal.
+    if (asmat.isDraftRequest(msg)) sys += '\n\nTHIS MESSAGE ASKS YOU TO WRITE A DOCUMENT (kind: '
+      + asmat.draftKind(msg) + '). Produce a BLANK TEMPLATE as described above: head it ናሙና, lay out the real'
+      + ' headings in order, and leave ______ wherever a fact, name, date or amount belongs. Fill in nothing,'
+      + ' not even a detail they mentioned. Put [የሚመለከተው አዋጅ — ጠበቃዎ ያረጋግጥ] where a law would be cited unless'
+      + ' the knowledge block above gives you the article. End by saying the receiving court or office may'
+      + ' require more, and that a lawyer should read it before it is filed.';
+    else if (asmat.isCaseAdvice(msg)) sys += '\n\nTHIS MESSAGE ASKS ABOUT THE PERSON OWN CASE. Weigh it as'
+      + ' described above: what the matter turns on, what is in their favour from what they told you, what is'
+      + ' against them or what the other side would argue, and which piece of evidence would settle it. Name'
+      + ' the weak side explicitly — an assessment that only lists strengths is how someone loses a case. No'
+      + ' percentages, no probabilities, no promise of an outcome.';
 
     let text = String(await callBini(sys, [{ role: 'user', content: msg }], 700, {}) || '').trim();
     const v = asmat.stripVerdict(text);
@@ -934,7 +945,12 @@ fastify.post('/api/asmat', async (req, reply) => {
     text = g.text;
 
     if (!text) text = asmat.caseNudge(l).trim();
-    if (asmat.isCaseAdvice(msg) && !/ጽ\/ቤት|ፍርድ ቤት|office|court|waajjira/i.test(text)) text += asmat.caseNudge(l);
+    // The caution rides along with every assessment, appended here rather than asked of the model, so
+    // it cannot be dropped by a reply that came out encouraging. The nudge toward a real office stays
+    // for the case where the answer named none.
+    if (asmat.isCaseAdvice(msg) && !asmat.isDraftRequest(msg)) text += asmat.assessmentCaution(l);
+    if ((asmat.isCaseAdvice(msg) || asmat.isDraftRequest(msg))
+        && !/ጽ\/ቤት|ፍርድ ቤት|office|court|waajjira|ጠበቃ|abukaat|lawyer/i.test(text)) text += asmat.caseNudge(l);
     text += '\n\n' + asmat.disclosure(l);
 
     biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['asmat'], miss: biniMemory.isMiss(text), ms: Date.now() - t0 });

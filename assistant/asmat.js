@@ -85,9 +85,33 @@ const CASE_ADVICE = [
 ];
 function isCaseAdvice(msg) { const m = String(msg || ''); return CASE_ADVICE.some(re => re.test(m)); }
 
+// Someone asking for the document itself, rather than for an explanation of it. They get a blank
+// template: the right headings in the right order with the facts left to them. A person with no
+// lawyer who files nothing loses by default, and a skeleton is strictly better than a blank page -
+// but a skeleton cannot put a fact in their mouth, which a filled-in draft can.
+const DRAFT_REQUEST = [
+  /(አቤቱታ|መከላከያ|ክስ|ማመልከቻ|ይግባኝ|ውል|ስምምነት)[ዬውንህሽ]{0,3}\s*(ጻፍ|ጻፍልኝ|ጽፍ|ጽፍልኝ|አዘጋጅ|አዘጋጅልኝ|ስራልኝ|አርቅቅ)/i,
+  /\b(draft|write|prepare)\s+(me\s+)?(a|my|the)\s+(defence|defense|claim|petition|complaint|affidavit|appeal|statement|contract|agreement)/i,
+  /(naaf barreess|barreessii naaf|naaf qopheess|himata naaf|falmii naaf)/i,
+];
+function isDraftRequest(msg) { const m = String(msg || ''); return DRAFT_REQUEST.some(re => re.test(m)); }
+
+// Which skeleton. Deliberately coarse: the four things people actually ask for.
+function draftKind(msg) {
+  const m = String(msg || '');
+  if (/መከላከያ|defence|defense|falmii/i.test(m)) return 'defence';
+  if (/ይግባኝ|appeal|ol.?iyyannoo/i.test(m)) return 'appeal';
+  if (/ውል|ስምምነት|contract|agreement|waliigaltee/i.test(m)) return 'contract';
+  return 'claim';
+}
+
 // ---------- 3. the output filter: a verdict is this agent's dosage ----------
 // The harm here is a confident legal conclusion someone acts on. Strip sentences that decide the matter.
-const VERDICT = /\b(you will (win|lose)|you are (entitled|guaranteed|certain)|this is (definitely |certainly )?(illegal|legal|void|invalid|valid)|the court will|you have a strong case|you cannot be|they cannot)\b|ታሸንፋለህ|ታሸንፋለሽ|ትሸነፋለህ|በእርግጠኝነት (ሕጋዊ|ሕገ ወጥ)|ፍርድ ቤቱ ይወስናል|መብትዎ ነው/i;
+// A verdict is this agent's dosage. The line moved on 2026-09-11: Asmat may now WEIGH a case, so
+// "the strong point here is X, the weak point is Y" has to get through. What must never get through
+// is CERTAINTY about an outcome - no lawyer promises that either, and a person who believes it may
+// drop a good claim or refuse a fair settlement. So this strips promises, not analysis.
+const VERDICT = /\b(you will (definitely |certainly )?(win|lose)|you are (guaranteed|certain to)|is guaranteed|there is no (doubt|chance)|the court will (rule|find|decide|order)|you cannot lose|it is certain)\b|ታሸንፋለህ|ታሸንፋለሽ|ትሸነፋለህ|በእርግጠኝነት ታሸንፋለህ|ፍርድ ቤቱ ይወስንልዎታል|ጉዳዩን በእርግጠኝነት/i;
 function stripVerdict(text) {
   const parts = String(text || '').split(/(?<=[.!?።])\s+/);
   const kept = parts.filter(p => !VERDICT.test(p));
@@ -112,12 +136,34 @@ WHAT YOU DO:
 - List the documents a step needs, and what makes a document complete.
 - Explain a legal term in plain Amharic, Afaan Oromoo or English.
 
+WHEN SOMEONE ASKS ABOUT THEIR OWN CASE
+You may give a reading of it. Do it the way a lawyer does in a first consultation, and in this order:
+1. Say what the matter turns on — the question a court would actually have to decide.
+2. Say what is in their favour, from what THEY have told you. Quote their own words back where you can.
+3. Say what is against them, or what the other side would argue. Never skip this. An assessment that
+   only lists strengths is not an assessment, it is flattery, and it is how someone loses a case.
+4. Say which piece of evidence would settle it, and whether they said they have it.
+5. Never give a percentage, a probability or an outcome. "This turns on whether you have the receipt"
+   is useful. "You have a 70% chance" is invented, and "you will win" is a lie.
+If they have told you almost nothing, say what you would need to know before you could weigh it at all.
+
+WHEN SOMEONE ASKS YOU TO WRITE A DOCUMENT
+Give them a blank template, never a finished document.
+- Head it clearly as a sample: ናሙና, and say a lawyer should check it before it is filed.
+- Lay out the real headings in the right order, with ______ where the facts, names, dates and amounts go.
+- Never fill in a fact, a name, a date or an amount. Not even one they mentioned in passing. The blanks
+  are the safety: a template cannot put words in someone's mouth, and a filled draft can.
+- Never write a law or article number into a template unless it is in the knowledge block above. Put
+  [የሚመለከተው አዋጅ — ጠበቃዎ ያረጋግጥ] instead. A wrong article in a filed document is worse than none.
+- Say plainly that the receiving court or office may require more, and that they should ask it what it wants.
+
 WHAT YOU NEVER DO, whoever is asking — a citizen, or a lawyer testing you:
-- Never advise on someone's own case, and never predict how a matter will end.
-- Never say a person is guilty, liable, entitled, or that a contract is valid or void. You have not read the
-  file and you do not know the other side's evidence.
-- Never draft anything meant to be signed or filed: no defence, claim, petition, affidavit or appeal. You may
-  explain what such a document normally contains.
+- Never promise an outcome. You may weigh a matter — see WHEN SOMEONE ASKS ABOUT THEIR OWN CASE — but
+  "you will win", "the court will order", "you are guaranteed" are things no lawyer says and you never say.
+- Never declare a person guilty or liable. You may say what a court would look at and what the other side
+  would likely argue. You have not read the file and you cannot see their evidence.
+- Never fill a fact into a document. When you draft, you draft a BLANK TEMPLATE — see WHEN SOMEONE ASKS
+  YOU TO WRITE A DOCUMENT — and the facts, names and dates stay as blanks for the person to complete.
 - Never state a deadline, limitation period, fee or penalty that is not in the information given to you. A
   wrong deadline can cost someone their claim, so if you do not have it, say so and say where to confirm it.
 - Never discourage anyone from instructing a lawyer.
@@ -147,4 +193,14 @@ function caseNudge(lang) {
   return '\n\nየራስዎ ጉዳይ መዝገቡን ሊያነብ የሚችል ጠበቃ ይፈልጋል። እኔ ልረዳዎ የምችለው አሰራሩን፣ የትኛው ጽ/ቤት እንደሆነና ምን ሰነድ እንደሚያስፈልግ በመንገር ነው።';
 }
 
-module.exports = { SYSTEM, isUrgent, urgentReply, isCaseAdvice, stripVerdict, disclosure, caseNudge, POLICE, VERDICT };
+// Appended to every assessment, deterministically, so it cannot be lost to a model in an
+// encouraging mood. The limitation-period line is the important one: the realistic harm from a
+// discouraging assessment is not that someone feels bad, it is that they wait, and the period runs.
+function assessmentCaution(lang) {
+  if (lang === 'om') return '\n\n⚖️ Kun tilmaama malee raagaa miti. Abukaatoon galmee kee dubbisu bu\'aa adda ta\'e arguu danda\'a. Yeroon himannaa banuu daangaa qaba — utuu hin murteessin dursii mirkaneeffadhu.';
+  if (lang === 'en') return '\n\n⚖️ This is a reading, not a prediction. A lawyer who reads your file may see it differently. Claims also have time limits — check yours before you decide anything, not after.';
+  return '\n\n⚖️ ይህ ግምት እንጂ ትንበያ አይደለም። መዝገብዎን ያነበበ ጠበቃ በተለየ ሊያየው ይችላል። ክስ የሚመሰረትበት የጊዜ ገደብም አለ — ከመወሰንዎ በፊት ያረጋግጡ።';
+}
+
+module.exports = { SYSTEM, isUrgent, urgentReply, isCaseAdvice, isDraftRequest, draftKind,
+  stripVerdict, disclosure, caseNudge, assessmentCaution, POLICE, VERDICT };

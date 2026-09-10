@@ -131,3 +131,74 @@ test('Afaan Oromoo: urgent situations, case advice and scope', () => {
   assert.equal(scope.topicOf("kutaan yaalaa daa'imaa eessa jira?"), 'health');
   assert.equal(scope.topicOf("imala Magannaa irraa gara Boolee meeqa?"), 'other');
 });
+
+
+// 2026-09-11: Asmat may now produce a blank template and weigh a case. Both were previously refused.
+// These pin the two halves of that line - what he will now do, and what he still must not.
+
+test('a request for the document itself is recognised, in all three languages', () => {
+  for (const q of [
+    'አቤቱታ ጻፍልኝ',
+    'መከላከያ አዘጋጅልኝ',
+    'የይግባኝ ማመልከቻ ጻፍልኝ',
+    'draft my defence',
+    'write me a petition',
+    'prepare a statement of claim',
+    'himata naaf barreessi',
+  ]) assert.equal(S.isDraftRequest(q), true, q);
+});
+
+// The informational form must NOT be treated as a drafting request: explaining what a document
+// contains was always allowed, and is the more common question.
+test('asking what a document contains is not a drafting request', () => {
+  for (const q of [
+    'አቤቱታ ሲጻፍ ምን ምን መያዝ አለበት?',
+    'የመከላከያ ጽሁፍ ውስጥ ምን ይካተታል?',
+    'what does a statement of defence normally contain?',
+    'ፍርድ ቤት ክስ ለመመስረት ምን ደረጃዎች አሉ?',
+  ]) assert.equal(S.isDraftRequest(q), false, q);
+});
+
+test('the kind of document is picked from the request', () => {
+  assert.equal(S.draftKind('መከላከያ አዘጋጅልኝ'), 'defence');
+  assert.equal(S.draftKind('draft my defence'), 'defence');
+  assert.equal(S.draftKind('የይግባኝ ማመልከቻ ጻፍልኝ'), 'appeal');
+  assert.equal(S.draftKind('የቤት ኪራይ ውል ጻፍልኝ'), 'contract');
+  assert.equal(S.draftKind('አቤቱታ ጻፍልኝ'), 'claim');
+});
+
+// The point of narrowing VERDICT was to let analysis through. If this test starts failing, the
+// assessment has been switched off again.
+test('weighing a case survives the verdict filter', () => {
+  for (const t of [
+    'From what you describe, the strong point is the signed receipt. The weak point is that you have no witness.',
+    'ይህ ጉዳይ የሚወሰነው ደረሰኙ ካለዎት ነው። ተከራካሪው ግን ውሉ አልተፈረመም ሊል ይችላል።',
+    'This usually turns on whether the contract was registered.',
+  ]) {
+    const r = S.stripVerdict(t);
+    assert.equal(r.removed, 0, 'must not be stripped: ' + t);
+  }
+});
+
+// And the half that must still be caught. A promise of an outcome is this agent's dosage.
+test('a promised outcome is still stripped', () => {
+  for (const t of [
+    'You will win this case.',
+    'You are guaranteed compensation.',
+    'The court will order him to pay.',
+    'There is no doubt about the result.',
+    'ታሸንፋለህ።',
+  ]) {
+    const r = S.stripVerdict(t);
+    assert.ok(r.removed > 0, 'must be stripped: ' + t);
+  }
+});
+
+// The realistic harm from a discouraging assessment is not hurt feelings, it is that someone waits
+// while a limitation period runs. That warning is appended by code, not asked of the model.
+test('every assessment carries the time-limit warning, in each language', () => {
+  assert.match(S.assessmentCaution('am'), /የጊዜ ገደብ/);
+  assert.match(S.assessmentCaution('en'), /time limits/i);
+  assert.match(S.assessmentCaution('om'), /daangaa/i);
+  for (const lg of ['am', 'en', 'om']) assert.ok(S.assessmentCaution(lg).length > 60, lg);
+});
