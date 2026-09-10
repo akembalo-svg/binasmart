@@ -100,3 +100,18 @@ test('an emergency is recognised whichever page it arrives on', () => {
   // …which is exactly why the route must check the emergency gate BEFORE the scope gate.
   assert.ok(afiya.emergencyReply('am').includes('907'));
 });
+
+// Twice now a plainly legal question was exiled because a word was missing from the list: first "landlord",
+// then "cassation". These are the words that actually appear in Asmat's corpus, so they are pinned here.
+test('the legal vocabulary covers what Asmat corpus is actually about', () => {
+  for (const m of ['የሰበር ውሳኔ አስገዳጅ የሚሆነው መቼ ነው?', 'የሰበር መዝገብ ቁጥር እንዴት አገኛለሁ?',
+                   'ችሎቱ ስንት ዳኞች አሉት?', 'ይግባኝ የት ነው የሚቀርበው?', 'ማስረጃ እንዴት ይቀርባል?',
+                   'የፍትሐብሔር ክርክር ሂደት ምንድነው?', 'will I win my case against my landlord?',
+                   'how does a cassation decision become binding?', 'where do I file an appeal?']) {
+    assert.notEqual(scope.topicOf(m), 'other', 'must be recognised as legal: ' + m);
+  }
+  // and the boundary still holds
+  for (const m of ['ከመገናኛ ወደ ቦሌ ራይድ ስንት ነው?', 'ሆቴል ማስያዝ እችላለሁ?']) {
+    assert.equal(scope.topicOf(m), 'other', 'must stay with Bini: ' + m);
+  }
+});
