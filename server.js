@@ -767,6 +767,7 @@ function biniGuards(text, msg, hist, grounding) {
 const biniLang = require('./assistant/lang');
 const biniTools = require('./assistant/tools');
 const { dropUngrounded } = require('./assistant/grounding');
+const afiya = require('./assistant/afiya');
 const { makeMemory, makeHandover, COMPLAINT_RE } = require('./assistant/memory');
 const biniMemory = makeMemory({ prisma });
 const biniHandover = makeHandover({ sendTg: (chat, text) => sendTg(chat, text), chatId: process.env.BINI_HANDOVER_CHAT || '8825386029' });
@@ -885,6 +886,72 @@ fastify.post('/api/assistant/transcribe', { bodyLimit: 4 * 1024 * 1024 }, async 
   catch (e) { req.log && req.log.warn && req.log.warn('transcribe err ' + e.message); return reply.code(502).send({ ok: false, error: 'transcribe_failed' }); }
 });
 // Weekly numbers for the eval report and the ops page.
+// ===== Dr Afiya (ዶ/ር አፍያ): health-system guide. Not a clinician, and built so she cannot act like one. =====
+// Order matters and is the whole design: an emergency is answered by assistant/afiya.js without the model,
+// because a model that is right 99 times in 100 is not good enough when the hundredth caller is having a
+// stroke. Everything else is grounded, stripped of any dosage, and closed with the disclosure.
+fastify.post('/api/afiya', async (req, reply) => {
+  const t0 = Date.now();
+  const b = req.body || {};
+  const msg = String(b.message || '').trim().slice(0, 2000);
+  if (!msg) return reply.code(400).send({ error: 'message required' });
+  const ip = req.headers['x-real-ip'] || req.ip;
+  const u = (b.user && typeof b.user === 'object') ? b.user : {};
+  const channel = u.telegramId ? 'telegram' : (u.uid ? 'web' : 'api');
+  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip });
+  const lang = biniLang.detect(msg);
+  const l = (lang === 'am' || lang === 'am-latin') ? 'am' : (lang === 'om' ? 'om' : 'en');
+
+  // 1. Emergency: fixed answer, no model, and a human is told straight away.
+  if (afiya.isEmergency(msg)) {
+    const text = afiya.emergencyReply(l);
+    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['emergency'], miss: false, ms: Date.now() - t0 });
+    biniHandover({ userKey, channel, lang: l, user: u, message: msg, reply: text, history: [],
+      explicit: true, reason: 'Dr Afiya: possible emergency' });
+    return { reply: text, emergency: true, ambulance: afiya.AMBULANCE };
+  }
+
+  try {
+    const ctx = await knowledge.contextFor(msg, { lang: l }).catch(() => '');
+    // The one hospital in the system is demo data; she must never present it as a real place to attend.
+    let depts = '';
+    try {
+      const rows = await prisma.department.findMany({ where: { active: true },
+        select: { name: true, nameAm: true, floor: true, room: true, fee: true, openHours: true }, take: 20 });
+      if (rows.length) depts = '\n\n## Departments in the BinaSmart demo hospital (DEMO DATA — say so; it is not a real place to attend)\n'
+        + rows.map(d => `- ${d.nameAm || d.name} (${d.name}) · floor ${d.floor} room ${d.room}`
+          + (d.fee ? ` · fee ${d.fee} ETB` : '') + (d.openHours ? ` · ${JSON.stringify(d.openHours).slice(0, 60)}` : '')).join('\n');
+    } catch (e) { /* no departments, she simply has less to offer */ }
+
+    const grounding = String(ctx || '') + ' ' + depts;
+    let sys = afiya.SYSTEM + '\n\n' + biniLang.directive(lang) + (ctx ? '\n\n## Information you may use\n' + ctx : '') + depts
+      + `\n\nEmergency numbers, if they are ever needed: ambulance ${afiya.AMBULANCE}, police ${afiya.POLICE}, fire ${afiya.FIRE}.`;
+    if (afiya.isClinical(msg)) sys += '\n\nTHIS MESSAGE ASKS YOU TO DIAGNOSE, PRESCRIBE OR REASSURE. Decline in one warm sentence, then be immediately useful: which department, what to bring, how soon. Do not name an illness, a medicine or a dose.';
+
+    let text = await callBini(sys, [{ role: 'user', content: msg }], 700, {});
+    text = String(text || '').trim();
+
+    const d = afiya.stripDosage(text);
+    if (d.removed) console.warn('[afiya] removed ' + d.removed + ' dosage sentence(s)');
+    text = d.text;
+    const g = dropUngrounded(text, grounding);
+    if (g.dropped.length) console.warn('[afiya] dropped ungrounded ' + g.dropped.map(x => x.text).join(', '));
+    text = g.text;
+
+    if (!text) text = afiya.clinicalNudge(l).trim();
+    if (afiya.isClinical(msg) && !/ክፍል|department|kutaa/i.test(text)) text += afiya.clinicalNudge(l);
+    text += '\n\n' + afiya.disclosure(l);
+
+    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['afiya'], miss: biniMemory.isMiss(text), ms: Date.now() - t0 });
+    return { reply: text, emergency: false };
+  } catch (e) {
+    req.log && req.log.error({ err: e }, 'afiya failed');
+    return { reply: afiya.disclosure(l) + '\n' + (l === 'am'
+      ? 'ይቅርታ፣ አሁን መልስ መስጠት አልቻልኩም። አስቸኳይ ከሆነ ' + afiya.AMBULANCE + ' ይደውሉ።'
+      : 'Sorry, I could not answer just now. If this is urgent, call ' + afiya.AMBULANCE + '.') };
+  }
+});
+
 fastify.get('/api/assistant/misses', async (req, reply) => {
   if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
   const days = Math.max(1, Math.min(90, Number(req.query.days) || 7));
