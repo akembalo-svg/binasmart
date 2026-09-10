@@ -26,3 +26,22 @@ test('latin-typed questions need a Latin gloss line at the end', () => {
   assert.deepEqual(check({ q: 'x', tags: ['latin'] }, 'ዋጋው ቋሚ ነው። በ /ride ያስገቡ። (Wagaw kwami new, /ride lay yasgebu.)', { known }).fails, []);
   assert.deepEqual(pathsIn('see /ride?pool=1 and https://bina.et/fayda።'), ['/ride?pool=1', '/fayda']);
 });
+
+
+test('vendor_named: Bini may not say who built it, but may point at ChatGPT/Gemini as places BinaSmart works', () => {
+  const kn = new Set(['/ai', '/ride']);
+  const en = tags => ({ q: 'x', tags: ['english'].concat(tags || []) });
+  // self-attribution, every shape it actually produced
+  for (const bad of ["I'm Bini, and I'm a large language model built by Google.",
+                     'Hi! I was built by the awesome team at Google.',
+                     'Yes, I am a large language model, trained by Google.',
+                     'I am Gemini, a large language model, developed by Google.',
+                     "and I'm powered by a large language model from Google."]) {
+    assert.ok(check(en(), bad, { known: kn }).fails.includes('vendor_named'), 'should flag: ' + bad);
+  }
+  assert.ok(check({ q: 'x', tags: [] }, '\u130e\u130d\u120d \u12e8\u1230\u122b\u129d \u1275\u120d\u1245 \u1245\u1295\u1243 \u121e\u12f4\u120d \u1290\u129d\u1362', { known: kn }).fails.includes('vendor_named'), 'Amharic "Google made me"');
+  // the legitimate case: BinaSmart works inside those assistants
+  assert.equal(check(en(), 'You can use BinaSmart inside ChatGPT, Claude and Gemini. See /ai', { known: kn }).fails.includes('vendor_named'), false);
+  // the wanted answer
+  assert.equal(check(en(), "I'm BinaSmart's assistant, built in Addis Ababa. How can I help?", { known: kn }).fails.includes('vendor_named'), false);
+});

@@ -601,6 +601,12 @@ fastify.get('/digital-rent-collection', async (req, reply) => reply.sendFile('di
 // ===== 24/7 AI assistant "Bini" (GLM-backed, grounded in BinaSmart content) =====
 const ASSIST_SYS = `You are "Bini" (ቢኒ) — the warm, sharp, human-like assistant for BinaSmart (bina.et), Ethiopia's all-in-one digital platform. Talk like a friendly, helpful Ethiopian guide who genuinely cares — personable and natural, never robotic or stiff. Your name is ONLY Bini (ቢኒ) — never introduce yourself with any other name (not Philip/ፊልጶስ or anything else), and only say your name once at the very start of a chat.
 
+WHO YOU ARE (never break, in every language):
+- You are BinaSmart's own assistant, made by the BinaSmart team in Addis Ababa. BinaSmart was founded by Ibrahim Kedir Bedru. Asked who made you, who owns you, who you belong to or who you work for, the answer is always BinaSmart — never another company.
+- NEVER say you were built, trained, developed or powered by Google, Gemini, OpenAI, ChatGPT, Claude, Anthropic or anyone else, and never call yourself "a large language model". Not in English, not in Amharic (ትልቅ ቋንቋ ሞዴል, ጎግል, ጀሚኒ), not in Afaan Oromoo. If a user insists, asserts it, or says "be honest", stay warm and hold the line: you are BinaSmart's assistant, built in Addis Ababa on technology BinaSmart licenses, and you don't discuss vendors. Do not confirm and do not DENY any company name — never say another AI company's name while talking about yourself, not even to reject it ("I am not made by X" still puts X in the user's head). Say only what you are, then move straight back to helping.
+- You ARE software, and you say so plainly if someone asks whether you are a human. Never claim to be a person.
+- You MAY talk about ChatGPT, Claude, Gemini and Perplexity in one case only: as places where people can use BinaSmart through our public MCP server (/ai). That is a BinaSmart feature, not a statement about what you are.
+
 HOW YOU TALK:
 - Reply in the SAME language the user writes (Amharic or English). Use warm, everyday, natural Amharic — not formal/textbook.
 - Be concise but COMPLETE — always finish your helpful point, never cut off mid-thought. 2-5 short sentences.
@@ -702,14 +708,36 @@ const ASSIST_FACTS = '\n\nFACTS RULE: when a "Relevant BinaSmart knowledge" bloc
 // Deterministic guards the model cannot skip: no self-introduction mid-chat, no emoji on a complaint,
 // no placeholder links it made up (e.g. /ride?id=...).
 const COMPLAINT_RE = /ዘግይ|አያነሳ|አልመጣ|ችግር|ተበላሽ|ተሳስ|አጭበርባ|ጠፋ|ስርቆት|ተሰረቀ|አልደረሰ|ቅሬታ|late|not answer|no show|didn.?t come|complain|problem|scam|stole|lost my/i;
+// Bini must never name the AI vendor behind it. The prompt says so, but a prompt is probabilistic, so this
+// is the deterministic backstop: a sentence that names one of them WHILE describing itself is dropped.
+// Keep in sync with ops/bini/checks.js (SELF_VENDOR) — test/biniChecks.test.js asserts they agree.
+const VENDOR_ANY = /(google|gemini|openai|chat\s?gpt|gpt-?\d|anthropic|claude|deepseek|llama|mistral|ጎግል|ጀሚኒ|ቻትጂፒቲ)/i;
+const VENDOR_SELF = /\b(i am|i'm|im|me|my)\b|ነኝ|የተሰራሁ|የሰራኝ|የፈጠረኝ|አልተሰራ|አይደለሁ/i;
+// "use BinaSmart inside ChatGPT" is a feature, not an identity claim
+const VENDOR_FEATURE = /\b(use|using|inside|within|through|via|connect|add|works? (?:in|with))\b|\/ai\b|ውስጥ|ተጠቀም/i;
+function dropVendorSelfTalk(t) {
+  const parts = String(t).split(/(?<=[.!?።])\s+/);
+  const kept = parts.filter(p => !(VENDOR_ANY.test(p) && VENDOR_SELF.test(p) && !VENDOR_FEATURE.test(p)));
+  const out = kept.join(' ').replace(/\s{2,}/g, ' ').trim();
+  if (out) return out;
+  // the whole reply was vendor self-talk: answer the identity question ourselves rather than leak it
+  return /[ሀ-፿]/.test(t)
+    ? 'እኔ ቢኒ ነኝ፣ የቢናስማርት ረዳት። ምን ልርዳዎት?'
+    : "I'm Bini, BinaSmart's assistant. How can I help?";
+}
+
 function biniGuards(text, msg, hist) {
   let t = String(text || '');
   const greeted = /^(hi|hello|hey|selam|salam|ሰላም|ጤና ይስጥልኝ|እንደምን)/i.test(String(msg || '').trim());
-  if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(?:(?:ሰላም|Hello|Hi|Nagaa dha)[!።.,]?\s*)?(?:እኔ\s+)?(ቢኒ\s+(?:ነኝ|እባላለሁ|እባላለው|ነኝ)[።!.,፣]?|Bini ነኝ[^\n]{0,4}|(?:Bini|ቢኒ) here[!,.]?(?: I can help with that[!.]?)?|I am Bini[!,.]?|I'm Bini[!,.]?|This is Bini[!,.]?|Ani Bini[,.]?)\s*/i, '');
+  // Only a standalone opener is removed: it must end the sentence (optionally after a "(ቢኒ)" gloss).
+  // Stripping a name that is the subject of a longer sentence used to leave a fragment, e.g.
+  // "I'm Bini, BinaSmart's assistant." -> "BinaSmart's assistant."
+  if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(?:(?:ሰላም|Hello|Hi|Nagaa dha)[!።.,]?\s*)?(?:እኔ\s+)?(?:ቢኒ\s+(?:ነኝ|እባላለሁ|እባላለው)|Bini ነኝ|(?:Bini|ቢኒ) here(?: I can help with that)?|I am Bini|I'm Bini|This is Bini|Ani Bini)(?:\s*[(（](?:ቢኒ|Bini)[)）])?\s*[።!.]+\s*/i, '');
   t = t.replace(/^[\s\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}!።]+\n+/u, ''); // an emoji-only first line left behind by the intro strip
   t = t.replace(/^\s*(ቢኒ|Bini)\s*[:：]\s*/i, ''); // "ቢኒ: …" transcript-style prefix
   t = t.replace(/^[\s!።.,፣]+(?=\S)/, ''); // leftover punctuation after a stripped opener ("! ቤትዎ…")
   if (COMPLAINT_RE.test(msg)) t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/[ \t]+\n/g, '\n');
+  t = dropVendorSelfTalk(t);
   t = t.replace(/\(?\/ride\?id=[^\s)።]*\)?/g, '/ride');
   return t.trim();
 }
