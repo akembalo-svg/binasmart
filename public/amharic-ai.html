@@ -77,6 +77,20 @@ details[open] summary{color:var(--em2)}details p{font-size:14px;color:var(--mut)
 .note{font-size:12px;color:var(--mut);margin-top:18px;line-height:1.6}
 footer{text-align:center;padding:34px 18px 46px;color:var(--mut);font-size:12.5px}footer a{color:var(--em2)}
 .disclaim{max-width:820px;margin:22px auto 0;padding:12px 18px;font-size:11.5px;color:var(--mut);line-height:1.6;background:#fff;border:1px dashed var(--line);border-radius:12px}</style>
+<style>
+#vs .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:14px;border-radius:16px;box-shadow:0 10px 30px -22px rgba(0,0,0,.35)}
+#vs table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse;font-size:13.5px;background:#fff;border-radius:16px;overflow:hidden}
+#vs col.lbl{width:31%}#vs col.gen{width:32%}#vs col.bin{width:37%}
+#vs th,#vs td{overflow-wrap:anywhere;word-break:normal;hyphens:auto}
+#vs th,#vs td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left;line-height:1.55}
+#vs th{background:var(--ink);color:#fff;font-size:12.5px;font-weight:800}
+#vs th:nth-child(3){background:var(--em2)}
+#vs td.gen{color:var(--mut)}
+#vs td.win{color:var(--ink);font-weight:600;background:#f0fdfa}
+#vs .en-s{font-size:11.5px;color:var(--mut);font-weight:400}
+#vs tr:last-child td{border-bottom:none}
+@media(max-width:560px){#vs th,#vs td{padding:9px 8px;font-size:12.5px}}
+</style>
 <link rel="stylesheet" href="/static/site-v3.css?v=5">
 <meta name="theme-color" content="#009688"></head>
 <body>
@@ -118,6 +132,35 @@ footer{text-align:center;padding:34px 18px 46px;color:var(--mut);font-size:12.5p
 <div class="use"><div class="ic">🌍</div><h3>ቋንቋ ሞዴሉ · The language model</h3><p>ዓረፍተ ነገር የመመስረት አቅም — ከዓለም አቀፍ አቅራቢ በፈቃድ የተወሰደ<br><b style="color:var(--mut)">በፈቃድ የተወሰደ · licensed</b></p></div>
     </div>
     <p class="en-note" style="margin-top:12px">In English: AI sovereignty is not a slogan, it is a list. The knowledge, the Amharic voice, the tools, the memory and the code are BinaSmart's, built in Addis Ababa. The ability to form sentences is licensed from an international provider, and we say so rather than imply otherwise. Replacing that last piece with a model BinaSmart runs itself is work in progress, and this page will be updated the day it ships — not before.</p>
+  </section>
+
+
+  <section id="vs">
+    <h2 class="am"><span class="e">⚖️</span> አጠቃላይ AI እና ቢኒ</h2>
+    <p class="am">ትልልቆቹ የAI ረዳቶች በአማርኛ አቀላጥፈው ይጽፋሉ — በዚያ አንወዳደርም። ልዩነቱ የቋንቋ ችሎታ ሳይሆን <b>መልሱ ከየት እንደሚመጣ</b> ነው። ስለ ኢትዮጵያ ሲጠየቁ ከትዝታቸው ይመልሳሉ፤ ቢኒ ግን ከሰነድ ያነባል።</p>
+    <p class="en-note">In English: the big assistants write fluent Amharic, and we do not compete on that. The difference is not language skill, it is <b>where the answer comes from</b>. Asked about Ethiopia they answer from memory. Bini reads a document first.</p>
+    <div class="tw"><table>
+      <colgroup><col class="lbl"><col class="gen"><col class="bin"></colgroup>
+      <thead><tr><th>&nbsp;</th><th>አጠቃላይ AI · General assistant</th><th>ቢኒ · Bini</th></tr></thead>
+      <tbody>
+<tr><td class="am"><b>መልሱ ከየት ይመጣል?</b><br><span class="en-s">Where the answer comes from</span></td><td class="am gen">ከአጠቃላይ ስልጠናው<br><span class="en-s">The model's general training</span></td><td class="am win">ከተመዘገቡ የኢትዮጵያ ሰነዶች<br><span class="en-s">An indexed library of Ethiopian documents</span></td></tr>
+<tr><td class="am"><b>ምንጭ ያሳያል?</b><br><span class="en-s">Shows you the source</span></td><td class="am gen">በፈተናችን 0/6<br><span class="en-s">0 of 6 in our test</span></td><td class="am win">በፈተናችን 5/6<br><span class="en-s">5 of 6 in our test</span></td></tr>
+<tr><td class="am"><b>የቤት ኪራይ ውል የሚገዛው አዋጅ</b><br><span class="en-s">Law governing a rental contract</span></td><td class="am gen">የ1960 ሲቪል ሕግ<br><span class="en-s">the 1960 Civil Code</span></td><td class="am win">አዋጅ 1320/2024<br><span class="en-s">Proclamation 1320/2024</span></td></tr>
+<tr><td class="am"><b>ያለ COC ማስረጃ ሠራተኛ ቢላክ</b><br><span class="en-s">Sending a worker abroad without a COC</span></td><td class="am gen">«እንደ ሀገሩ ሕግ ይለያያል»<br><span class="en-s">“varies by country”</span></td><td class="am win">ኤጀንሲው ለ3 ወር ይታገዳል — አዋጅ 1389/2017 አንቀጽ 50<br><span class="en-s">the agency is suspended 3 months, Proclamation 1389/2017 Article 50</span></td></tr>
+<tr><td class="am"><b>በአፋን ኦሮሞ «COC»</b><br><span class="en-s">“COC” in Afaan Oromoo</span></td><td class="am gen">Certificate of Conformity ብሎ ተረጎመው<br><span class="en-s">read it as Certificate of Conformity</span></td><td class="am win">አንቀጽ 50(2)(b) ጠቅሶ በአፋን ኦሮሞ መለሰ<br><span class="en-s">answered in Afaan Oromoo citing Article 50(2)(b)</span></td></tr>
+<tr><td class="am"><b>ጉዞ መጥራት፣ ጨረታ ማግኘት</b><br><span class="en-s">Book a ride, find a tender</span></td><td class="am gen">አይችልም<br><span class="en-s">cannot</span></td><td class="am win">13 መሳሪያዎች<br><span class="en-s">13 tools</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="am" style="margin-top:14px;font-size:12.5px;color:var(--mut);line-height:1.8">
+      🔬 <b>ፈተናው:</b> 10 መስከረም 2026፣ ስድስት ጥያቄዎች በአማርኛና በአፋን ኦሮሞ። «አጠቃላይ AI» የተባለው <b>Gemini 2.5 Flash</b> ነው — በAPI፣ ያለ ሰነድ ፍለጋ። <b>Claude እና ChatGPT አልፈተንንም</b>፤ ስላልለካናቸው ውጤት አንናገርም። መዋቅራዊው ነጥብ ግን አንድ ነው፦ የኢትዮጵያ የሰነድ ቤተ-መጻሕፍት የላቸውም።<br>
+      🙋 <b>የቢኒም ስህተት:</b> በዚያው ፈተና አንዱን የአፋን ኦሮሞ ጥያቄ በእንግሊዝኛ መለሰ። አፋን ኦሮሞ ገና አዲስ ነው፤ እያሻሻልነው ነው።
+    </p>
+    <p class="en-note">🔬 The test: 10 September 2026, six questions in Amharic and Afaan Oromoo. The general assistant was <b>Gemini 2.5 Flash</b> through the API with no retrieval. <b>We did not benchmark Claude or ChatGPT</b>, so we publish no result for them. The structural point is the same for any of them: none holds an index of Ethiopian government documents. 🙋 Bini's own miss in the same run: it answered one Afaan Oromoo question in English. Afaan Oromoo is newer for us and we are still improving it.</p>
+    <div class="use am" style="margin-top:16px;background:linear-gradient(135deg,#0f3d2e,#0d9488 60%);color:#fff">
+      <div class="ic">🤝</div>
+      <h3 style="color:#fff">…ግን ተቀናቃኞች አይደሉም</h3>
+      <p style="color:rgba(255,255,255,.92)">ቢናስማርት <b>በ ChatGPT፣ Claude፣ Gemini እና Perplexity ውስጥ</b> ይሰራል — በክፍት MCP ሰርቨራችን። እነሱ ቋንቋውን ያመጣሉ፣ እኛ የኢትዮጵያን እውቀትና እጆች እናመጣለን።<br><span style="font-size:12px;opacity:.9">BinaSmart runs inside ChatGPT, Claude, Gemini and Perplexity through our open MCP server. They bring the language, we bring the Ethiopian knowledge and the hands.</span><br><a href="/ai" style="color:#fff;text-decoration:underline;font-weight:700">እንዴት · How →</a></p>
+    </div>
   </section>
 
   <section id="measure">
