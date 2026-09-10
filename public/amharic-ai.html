@@ -166,7 +166,7 @@ footer{text-align:center;padding:34px 18px 46px;color:var(--mut);font-size:12.5p
   <section id="measure">
     <h2 class="am"><span class="e">📏</span> እንዴት እንለካለን</h2>
     <p class="am">ማንም «AI አለን» ማለት ይችላል። ስለዚህ እንለካለን። 114 የአማርኛ ጥያቄዎችን ፈተና አዘጋጅተናል — እያንዳንዱ ጥያቄ ትክክለኛ መልስ ያለበት ገጽ ተለይቶለታል። ቢኒ ሲፈትን፣ በቢናስማርት የራሱ መመሪያዎች ላይ ትክክለኛው ገጽ በመጀመሪያዎቹ ሦስት ውጤቶች ውስጥ የገባው በ<b>91.7%</b> ነው። ከውጭ ከተሰበሰቡ የዜናና የመንግሥት ገጾች ደግሞ ዝቅ ይላል — ያንንም እንናገራለን።</p>
-    <p class="en-note">In English: anyone can say they have AI. We measure instead. A 114-question Amharic benchmark, each with a known correct page. On BinaSmart's own guides the right page is in the top three <b>91.7%</b> of the time. On crawled news and ministry sites it is lower, and we say that too. The benchmark is re-run whenever the model or the corpus changes.</p>
+    <p class="en-note">In English: anyone can say they have AI. We measure instead. A 114-question Amharic benchmark, each with a known correct page. On BinaSmart's own guides the right page is in the top three <b>91.7%</b> of the time. On crawled news and ministry sites it is lower, and we say that too. The benchmark is re-run whenever the model or the corpus changes. Afaan Oromoo is measured separately: on 35 health and legal questions Dr Afiya scored <b>20/20</b> and Asmat <b>15/15</b>, against 10/20 and 11/15 for bare Gemini on the same questions and the same rules.</p>
   </section>
 
   <section id="limits">
@@ -187,6 +187,48 @@ footer{text-align:center;padding:34px 18px 46px;color:var(--mut);font-size:12.5p
       <div class="use"><div class="ic">🌐</div><h3>ድረ-ገጽ</h3><p>በ <a href="/">bina.et</a> ላይ ያለውን የውይይት አዝራር ይጫኑ።</p></div>
       <div class="use"><div class="ic">🤖</div><h3>ከሌላ AI ውስጥ</h3><p>ChatGPT, Claude, Gemini — በ MCP። <a href="/ai">እንዴት</a></p></div>
       <div class="use"><div class="ic">💚</div><h3>ነጻ</h3><p>ክፍያ የለም፤ መለያ መክፈት አያስፈልግም።</p></div>
+    </div>
+  </section>
+
+  <section id="api">
+    <h2 class="am"><span class="e">🏢</span> የራስዎ AI — ለተቋምዎ</h2>
+    <p class="am">ቢኒን የሚያንቀሳቅሰው ሞተር ለተቋምዎም ይገኛል። በራስዎ ድረ-ገጽ፣ በራስዎ የቴሌግራም ቦት ወይም በሲስተምዎ ውስጥ — <b>ከራስዎ ሰነዶች</b> እየመለሰ፣ በአማርኛ፣ በአፋን ኦሮሞና በእንግሊዝኛ። የተሰራውና የሚስተናገደው በአዲስ አበባ ነው።</p>
+    <p class="en-note">In English: the engine behind Bini is available to your organisation. Put it on your own website, your own Telegram bot, or inside your own systems — answering from <b>your documents</b>, in Amharic, Afaan Oromoo and English. Built and hosted in Addis Ababa.</p>
+
+    <h3 class="am" style="margin:22px 0 10px">ለማን</h3>
+    <div class="grid2 am">
+      <div class="use"><div class="ic">🏛️</div><h3>የመንግሥት ተቋማት</h3><p>ዜጎች በራሳቸው ቋንቋ ይጠይቃሉ፤ መልሱ ከእርስዎ መመሪያና አዋጅ ይመጣል — ምንጩ አብሮ ይታያል።</p></div>
+      <div class="use"><div class="ic">🏥</div><h3>ሆስፒታሎችና ክሊኒኮች</h3><p>የትኛው ክፍል፣ ምን ይዞ መምጣት፣ ክፍያ፣ ቀጠሮ። ድንገተኛ ጥያቄ ሞዴሉን ሳይጠብቅ ወዲያውኑ ይመለሳል።</p></div>
+      <div class="use"><div class="ic">⚖️</div><h3>ጠበቆችና የሕግ ጽሕፈት ቤቶች</h3><p>አሰራር፣ የሚያስፈልጉ ሰነዶች፣ የጊዜ ገደብ — ከራስዎ መዝገብ ውስጥ።</p></div>
+      <div class="use"><div class="ic">🏦</div><h3>ባንኮችና ትልልቅ ኩባንያዎች</h3><p>የደንበኞች ጥያቄ ከራስዎ የምርት ሰነድ ይመለሳል፤ ቀንም ሌሊትም፣ በሦስት ቋንቋ።</p></div>
+    </div>
+
+    <h3 class="am" style="margin:22px 0 10px">እንዴት ይገናኛል</h3>
+    <div class="grid2 am">
+      <div class="use"><div class="ic">🔌</div><h3>API</h3><p>አንድ የREST መጥሪያ — ወደ ድረ-ገጽዎ ወይም ወደ መተግበሪያዎ።</p></div>
+      <div class="use"><div class="ic">📱</div><h3>ቴሌግራም</h3><p>በተቋምዎ ስም የራስዎ ቦት።</p></div>
+      <div class="use"><div class="ic">💬</div><h3>የውይይት አዝራር</h3><p>በድረ-ገጽዎ ላይ የሚለጠፍ አጭር ኮድ።</p></div>
+      <div class="use"><div class="ic">🤖</div><h3>MCP</h3><p>በChatGPT፣ Claude ወይም Gemini ውስጥ ሆኖ እንዲሰራ።</p></div>
+    </div>
+
+    <div class="callout" style="margin-top:22px">
+      <h3>ለምን እኛ</h3>
+      <ul class="check am">
+        <li><b>የተለካ ነው</b> — በ114 የአማርኛ ጥያቄ ፈተና፣ በራሳችን መመሪያዎች ላይ 91.7%።</li>
+        <li><b>አፋን ኦሮሞ ይሰራል</b> — በ35 ጥያቄ ፈተና ቢናስማርት 20/20 እና 15/15፤ ተራ Gemini 10/20 እና 11/15።</li>
+        <li><b>ደህንነት የተገነባ ነው</b> — ድንገተኛ ጥያቄ ሞዴሉን ሳይጠይቅ ወዲያውኑ ይመለሳል፤ አምቡላንስ 907፣ ፖሊስ 991። በፈተናው ተራ Gemini ይህን ቁጥር አንድ ጊዜም አልሰጠም።</li>
+        <li><b>ሰነድዎ የእርስዎ ነው</b> — በአዲስ አበባ ሰርቨር ላይ፤ ለሌላ ደንበኛ አይጋራም።</li>
+      </ul>
+    </div>
+
+    <p class="en-note" style="margin-top:14px">How the comparison was run, so you can judge it: the same 35 Afaan Oromoo questions were put to BinaSmart and to Gemini with no system prompt — which is what a person gets if they simply open Gemini and type. Every system was scored by the same mechanical rules. The harness is public at <a href="https://github.com/akembalo-svg/binasmart">github.com/akembalo-svg/binasmart</a>, so you can re-run it. A team that wrapped Gemini in a good Ethiopian prompt would score higher than the bare model did.</p>
+
+    <div class="cta am" style="margin-top:22px">
+      <h3>ስለ ዋጋና ስለ አሰራር እናውራ</h3>
+      <p>ዋጋው እንደ ተቋሙ መጠንና እንደ ሰነዱ ብዛት ይለያያል። ይጻፉልን — ሰነዶችዎን አይተን በምን ያህል ጊዜ እንደሚጀመር እንነግርዎታለን።</p>
+      <a href="mailto:partners@bina.et">✉️ partners@bina.et</a>
+      <a href="https://t.me/binasmart">📱 ቴሌግራም</a>
+      <a href="tel:+251911244344">📞 +251 911 244 344</a>
     </div>
   </section>
 
