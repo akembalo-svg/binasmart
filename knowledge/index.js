@@ -19,7 +19,7 @@ const GUIDE_SLUGS = ['fayda', 'telebirr', 'cbe-birr-guide', 'passport', 'ethiopi
   'birth-marriage-certificate-ethiopia', 'pay-utility-bills-ethiopia', 'lmis-labor-id-ethiopia', 'coc-certificate-ethiopia',
   'rental-agreement-ethiopia', 'tenant-screening-ethiopia', 'living-working-in-ethiopia-guide', 'digital-ethiopia-2026'];
 const PAGE_SLUGS = ['pool', 'airport', 'hotels', 'insurance', 'cars', 'property', 'flights', 'travel', 'why-binasmart', 'drive-with-us',
-  'for-business', 'for-cinemas', 'for-filmmakers', 'for-insurers', 'diaspora', 'ai', 'support', 'guides', 'watch', 'cinema'];
+  'for-business', 'for-cinemas', 'for-filmmakers', 'for-insurers', 'diaspora', 'ai', 'amharic-ai', 'support', 'guides', 'watch', 'cinema'];
 
 // ---------- text helpers ----------
 const ENT = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', '#39': "'" };

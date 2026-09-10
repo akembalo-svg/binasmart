@@ -56,6 +56,8 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 - Flagship building: JJ Darule Building (ጄጄ ዳሩሌ ህንፃ), Arada, Addis Ababa — 11 floors, 71 units.
 - Source code: https://github.com/akembalo-svg/binasmart
 
+- [Amharic AI](https://bina.et/amharic-ai): how Bini answers in Amharic from an indexed library of Ethiopian law and government-service documents, what BinaSmart owns versus licenses, and the measured retrieval accuracy
+
 ## Optional
 
 - [Why BinaSmart Ride](https://bina.et/why-binasmart): the fare is locked when you book; no app to install
