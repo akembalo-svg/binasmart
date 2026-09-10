@@ -123,6 +123,11 @@ details[open] summary{color:#000}
 /* The chat launcher and the footer are injected by two site-wide scripts and carry their own emoji.
    They are not this page's markup, so they are toned down here rather than edited for all 56 pages. */
 #biniBtn{filter:grayscale(1)}
+/* The logo was the last colour on the page. The mark is a white glyph on a green gradient packed
+   into one background shorthand, so the shorthand is restated here with a dark gradient; the glyph
+   itself is read out of site-v3.css at build time rather than retyped. Page-scoped like the rest. */
+.lg{background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201000%201000'%3E%3Cpath%20transform='translate(255,700)%20scale(0.62,-0.62)'%20d='M699%20-82Q668%20-82%20645.5%20-55.0Q623%20-28%20615%200H437V465Q437%20551%20408.0%20597.5Q379%20644%20311%20644Q236%20644%20208.5%20595.0Q181%20546%20181%20464V0H90V472Q90%20586%20144.0%20655.0Q198%20724%20311%20724Q426%20724%20477.0%20658.5Q528%20593%20528%20470V73H615Q623%20101%20645.5%20127.5Q668%20154%20699%20154H723L697%2036L723%20-82Z'%20fill='%23fff'%20stroke='%23fff'%20stroke-width='56'%20stroke-linejoin='round'/%3E%3Cpath%20d='M800%20150l24%2062%2062%2024-62%2024-24%2062-24-62-62-24%2062-24z'%20fill='%23fff'/%3E%3C/svg%3E") center/64% no-repeat,linear-gradient(135deg,#3d3d3d,#0d0d0d);box-shadow:none}
+.top .logo b,.top .logo .g,.logo b,.logo .g{color:#0a0a0a}
 </style><meta name="theme-color" content="#009688"></head>
 <body><div class="top"><a class="logo am" href="/"><i class="lg"></i>Bina<b>Smart</b></a><a class="back" href="/ai">← AI</a></div>
 <div class="hero"><div class="phero am">
