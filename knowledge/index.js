@@ -120,6 +120,21 @@ function readSources(root, only) {
   if (want('addis')) { const t = rd(path.join(root, 'knowledge', 'addis-ababa.md')); if (t) docs.push({ source: 'addis', slug: 'addis-ababa', title: 'Addis Ababa', url: 'https://bina.et/living-working-in-ethiopia-guide', lang: 'en', text: t }); }
   if (want('style')) { const t = rd(path.join(root, 'knowledge', 'amharic-style.md')); if (t) { const ex = t.split(/^## Examples\s*$/m)[1] || ''; if (ex.trim()) docs.push({ source: 'style', slug: 'amharic-voice', title: 'Bini Amharic voice', url: null, lang: 'am', text: ex, internal: true }); } }
   if (want('style-om')) { const t = rd(path.join(root, 'knowledge', 'oromo-style.md')); if (t) { const ex = t.split(/^## Examples\s*$/m)[1] || ''; if (ex.trim()) docs.push({ source: 'style-om', slug: 'oromo-voice', title: 'Bini Afaan Oromoo voice', url: null, lang: 'om', text: ex, internal: true }); } }
+  if (want('law')) { // knowledge/law/*.md — curated statutes and court interpretations, added by hand.
+    // Deliberately NOT under knowledge/web: that directory belongs to the crawler, is gitignored, and
+    // its loader truncates every document at 20,000 characters. A statute must be indexed whole — the
+    // Constitution is 87 KB, so under the web loader four fifths of it was silently missing.
+    const ldir = path.join(root, 'knowledge', 'law');
+    let files = []; try { files = fs.readdirSync(ldir).filter(f => f.endsWith('.md')); } catch (e) { /* none yet */ }
+    for (const f of files) {
+      const raw = rd(path.join(ldir, f)); if (!raw) continue;
+      const fm = /^---\n([\s\S]*?)\n---\n/.exec(raw); if (!fm) continue;
+      const meta = {}; for (const line of fm[1].split('\n')) { const m = /^(\w+):\s*"?(.*?)"?\s*$/.exec(line); if (m) meta[m[1]] = m[2].replace(/\\"/g, '"'); }
+      docs.push({ source: 'law', slug: f.replace(/\.md$/, ''), title: meta.title || f,
+        url: meta.url || null, lang: meta.lang || 'am', text: raw.slice(fm[0].length) });
+    }
+  }
+
   if (want('web')) { // knowledge/web/<site>/<hash>.md written by knowledge/crawl.js (front matter: url, title, source_name, lang)
     const wdir = path.join(root, 'knowledge', 'web');
     let sites = []; try { sites = fs.readdirSync(wdir).filter(d => fs.statSync(path.join(wdir, d)).isDirectory()); } catch (e) { /* not crawled yet */ }
