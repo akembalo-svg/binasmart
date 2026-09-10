@@ -222,6 +222,27 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
       const del = await prisma.knowledgeChunk.deleteMany({ where: { source: d.source, slug: d.slug, hash: { notIn: hashes } } });
       deleted += del.count;
     }
+    // Chunks whose document no longer exists anywhere. See collectOrphans above the ingest for why this
+    // is fenced so carefully.
+    let orphaned = 0;
+    if (docs.length) {
+      const scope = only && only.length ? [...new Set(only)] : [...new Set(docs.map(d => d.source))];
+      const keep = new Set(docs.map(d => d.source + '\u0000' + d.slug));
+      const inScope = await prisma.knowledgeChunk.findMany({ where: { source: { in: scope } }, select: { id: true, source: true, slug: true } });
+      const dead = inScope.filter(r => !keep.has(r.source + '\u0000' + r.slug));
+      if (dead.length > inScope.length / 2 && inScope.length > 20) {
+        say('[knowledge] REFUSING to drop ' + dead.length + ' of ' + inScope.length + ' chunks in ' + scope.join(',')
+          + ' — that looks like a failed fetch, not a removal. Index left alone; re-run when the source is back.');
+      } else if (dead.length) {
+        for (let i = 0; i < dead.length; i += 200) {
+          await prisma.knowledgeChunk.deleteMany({ where: { id: { in: dead.slice(i, i + 200).map(r => r.id) } } });
+        }
+        orphaned = dead.length;
+        const where = [...new Set(dead.map(r => r.slug.split('/')[0]))].slice(0, 6).join(', ');
+        say('[knowledge] collected ' + orphaned + ' orphaned chunks from removed documents (' + where + ')');
+      }
+    }
+
     if (embed) {
       const pending = await prisma.knowledgeChunk.findMany({ where: { embedding: null }, select: { id: true, text: true }, take: 2000 });
       if (pending.length && apiKey) {
@@ -238,8 +259,8 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
       say('[knowledge] hygiene: ' + Math.round(hy.boilerplateChars / 1000) + 'k chars of site template stripped'
         + (spam ? ', spam pages skipped ' + spam : '') + (hy.dropped ? ', ' + hy.dropped + ' pages left too thin' : ''));
     }
-    say('[knowledge] ingest: ' + docs.length + ' docs, +' + inserted + ' chunks, -' + deleted + ' stale, ' + embedded + ' embedded, ' + rows.length + ' total');
-    return { docs: docs.length, inserted, deleted, embedded, total: rows.length };
+    say('[knowledge] ingest: ' + docs.length + ' docs, +' + inserted + ' chunks, -' + deleted + ' stale, -' + orphaned + ' orphaned, ' + embedded + ' embedded, ' + rows.length + ' total');
+    return { docs: docs.length, inserted, deleted, orphaned, embedded, total: rows.length };
   }
 
   // What BinaSmart wrote itself answers correctly 91.7% of the time; crawled sites manage 62.5%. Rank

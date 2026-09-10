@@ -31,13 +31,18 @@ test('readSources finds the skill, the Addis notes, llms.txt and guide pages in 
 });
 
 // in-memory prisma for the store + a fake Gemini that embeds by hashing tokens into DIMS buckets
-function world({ withKey = true, failEmbed = false } = {}) {
+function world({ withKey = true, failEmbed = false, root = null } = {}) {
   const rows = []; let seq = 0;
   const prisma = { knowledgeChunk: {
-    findMany: async ({ where, select, orderBy, take }) => rows.filter(r => !where || Object.keys(where).every(k => { const w = where[k]; if (w === null) return r[k] == null; if (w && typeof w === 'object' && 'notIn' in w) return !w.notIn.includes(r[k]); return r[k] === w; })).slice(0, take || 1e9).map(r => ({ ...r })),
+    findMany: async ({ where, select, orderBy, take }) => rows.filter(r => !where || Object.keys(where).every(k => { const w = where[k]; if (w === null) return r[k] == null; if (w && typeof w === 'object' && 'notIn' in w) return !w.notIn.includes(r[k]); if (w && typeof w === 'object' && 'in' in w) return w.in.includes(r[k]); return r[k] === w; })).slice(0, take || 1e9).map(r => ({ ...r })),
     create: async ({ data }) => { const r = { id: 'c' + (++seq), embedding: null, ...data }; rows.push(r); return { ...r }; },
     update: async ({ where, data }) => { const r = rows.find(x => x.id === where.id); Object.assign(r, data); return { ...r }; },
-    deleteMany: async ({ where }) => { const before = rows.length; for (let i = rows.length - 1; i >= 0; i--) { const r = rows[i]; if (r.source === where.source && r.slug === where.slug && !where.hash.notIn.includes(r.hash)) rows.splice(i, 1); } return { count: before - rows.length }; },
+    deleteMany: async ({ where }) => { const before = rows.length;
+      for (let i = rows.length - 1; i >= 0; i--) { const r = rows[i];
+        const byId = where.id && where.id.in ? where.id.in.includes(r.id) : false;
+        const byHash = where.hash && where.hash.notIn ? (r.source === where.source && r.slug === where.slug && !where.hash.notIn.includes(r.hash)) : false;
+        if (byId || byHash) rows.splice(i, 1); }
+      return { count: before - rows.length }; },
   } };
   const fakeVec = t => { const v = new Array(DIMS).fill(0); for (const w of String(t).toLowerCase().split(/\W+/)) { if (!w) continue; let h = 0; for (const c of w) h = (h * 31 + c.charCodeAt(0)) >>> 0; v[h % DIMS] += 1; } return v; };
   const calls = [];
@@ -48,8 +53,8 @@ function world({ withKey = true, failEmbed = false } = {}) {
     if (/batchEmbedContents/.test(url)) return { status: 200, json: async () => ({ embeddings: body.requests.map(r => ({ values: fakeVec(r.content.parts[0].text) })) }) };
     return { status: 200, json: async () => ({ embedding: { values: fakeVec(body.content.parts[0].text) } }) };
   };
-  const k = makeKnowledge({ prisma, apiKey: withKey ? 'k' : '', fetchImpl, root: path.join(__dirname, '..'), sleep: async () => {} });
-  return { k, rows, calls };
+  const k = makeKnowledge({ prisma, apiKey: withKey ? 'k' : '', fetchImpl, root: root || path.join(__dirname, '..'), sleep: async () => {} });
+  return { k, rows, calls, prisma };
 }
 
 test('ingest is idempotent, embeds only new chunks, and search finds the pool fare rule and Megenagna', async () => {
@@ -145,4 +150,70 @@ test('isSpam needs two markers, so a passing mention is safe', () => {
   assert.equal(isSpam('rtp live pragmatic play scatter hitam'), true);
   assert.equal(isSpam('Togel is banned under Ethiopian law and the ministry issued a notice.'), false);
   assert.equal(isSpam('የትምህርት ሚኒስቴር የ2026 የትምህርት ዕድል አዋጅ አወጣ።'), false);
+});
+
+
+// A document that disappears must take its chunks with it. Before this, deleting a source folder left its
+// chunks searchable for ever: 133 Afaan Oromoo news chunks had to be removed by hand once they were found
+// to be hurting retrieval, and nothing in the pipeline would ever have collected them.
+const os = require('os');
+const fsp = require('fs');
+
+function webTree(pages) {
+  const root = fsp.mkdtempSync(path.join(os.tmpdir(), 'bina-kn-'));
+  const dir = path.join(root, 'knowledge', 'web', 'site');
+  fsp.mkdirSync(dir, { recursive: true });
+  for (const [name, body] of Object.entries(pages)) {
+    fsp.writeFileSync(path.join(dir, name + '.md'),
+      '---\nurl: "https://example.et/' + name + '"\ntitle: "' + name + '"\nlang: "en"\n---\n\n' + body);
+  }
+  return { root, dir };
+}
+const long = w => (w + ' ').repeat(140);
+
+test('ingest collects the chunks of a document that has been removed', async () => {
+  const { root, dir } = webTree({ alpha: long('alpha'), bravo: long('bravo') });
+  const w = world({ root });
+
+  const first = await w.k.ingest({ only: ['web'], embed: false });
+  assert.ok(first.inserted >= 2, 'both pages indexed');
+  assert.equal(first.orphaned, 0, 'nothing to collect on a first run');
+  const afterFirst = w.rows.length;
+
+  fsp.rmSync(path.join(dir, 'bravo.md'));
+  const second = await w.k.ingest({ only: ['web'], embed: false });
+  assert.ok(second.orphaned > 0, 'the removed page left orphans and they were collected');
+  assert.equal(w.rows.some(r => r.slug.endsWith('bravo')), false, 'no chunk of the deleted page survives');
+  assert.ok(w.rows.some(r => r.slug.endsWith('alpha')), 'the page that remains is untouched');
+  assert.ok(w.rows.length < afterFirst, 'the index shrank');
+  fsp.rmSync(root, { recursive: true, force: true });
+});
+
+test('a partial run never collects outside the sources it rebuilt', async () => {
+  const { root } = webTree({ alpha: long('alpha') });
+  const w = world({ root });
+  await w.prisma.knowledgeChunk.create({ data: { source: 'guide', slug: 'fayda', url: null, title: 'Fayda',
+    lang: 'am', ord: 0, hash: 'keepme', text: 'guide text', internal: false } });
+  await w.k.ingest({ only: ['web'], embed: false });
+  assert.ok(w.rows.some(r => r.source === 'guide' && r.slug === 'fayda'),
+    'a web-only run must not touch another source');
+  fsp.rmSync(root, { recursive: true, force: true });
+});
+
+test('orphan collection refuses to empty an index when a fetch has failed', async () => {
+  // each page must chunk several times: the guard deliberately ignores sources under 20 chunks
+  const big = w => Array.from({ length: 8 }, (_, i) => 'Section ' + i + '. ' + long(w)).join('\n\n');
+  const { root, dir } = webTree({ a: big('alpha'), b: big('bravo'), c: big('charlie'), d: big('delta'), e: big('echo') });
+  const w = world({ root });
+  await w.k.ingest({ only: ['web'], embed: false });
+  const before = w.rows.length;
+  assert.ok(before > 20, 'need enough chunks for the guard to apply, got ' + before);
+  // simulate the source going away entirely, as a failed crawl would look
+  for (const f of fsp.readdirSync(dir)) fsp.rmSync(path.join(dir, f));
+  fsp.writeFileSync(path.join(dir, 'a.md'),
+    '---\nurl: "https://example.et/a"\ntitle: "a"\nlang: "en"\n---\n\n' + big('alpha'));
+  const r = await w.k.ingest({ only: ['web'], embed: false });
+  assert.equal(r.orphaned, 0, 'refused rather than dropping most of the index');
+  assert.equal(w.rows.length, before, 'the index is untouched');
+  fsp.rmSync(root, { recursive: true, force: true });
 });
