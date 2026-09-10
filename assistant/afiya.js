@@ -51,7 +51,7 @@ const EMERGENCY = [
   // consciousness
   /of wallaal|of hin beek|hin dammaq|dammaquu hin danda|ka'uu hin danda/i,
   // bleeding / injury
-  /dhiig[^.!?]{0,20}(hin dhaabbat|baay|yaa'|dhangala)|madaa cimaa/i,
+  /dhiig[^.!?]{0,20}(hin dhaabb|hin dhaabat|baay|yaa'|dhangala)|madaa cimaa/i,
   /balaa[^.!?]{0,18}(konkolaataa|geesse|qaqqabe)|konkolaataan rukut|kufe[^.!?]{0,18}(hin ka'|of wallaal)/i,
   // poisoning / burns
   /summii|qoricha[^.!?]{0,18}baay'ee (fudhate|liqimse)|gubaa cimaa|gube[^.!?]{0,12}cimaa/i,

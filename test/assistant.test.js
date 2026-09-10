@@ -139,3 +139,32 @@ test('COMPLAINT_RE catches the disputes riders actually send, and leaves ordinar
     assert.equal(COMPLAINT_RE.test(m), false, 'should be ordinary: ' + m);
   }
 });
+
+
+// Afaan Oromoo detection: short questions used to fall through to English, because the detector
+// wanted two dictionary words and a short question carries one. Each of these was a real reply sent
+// in the wrong language during the 2026-09-10 Oromo evaluation.
+test('short Afaan Oromoo questions are detected, not answered in English', () => {
+  for (const q of [
+    'Kaanserii qabaa?',
+    'Ati dhugumatti hakiima dhaa?',
+    'Yakka hojjedheeraa? Natti murteessi',
+    'Mucaan koo ho\'a qaba',
+    'Beellamni koo yoomi?',
+  ]) assert.equal(lang.detect(q), 'om', q);
+});
+
+// The other half of the same change: it must not start calling English or Amharic-in-Latin "Oromo".
+test('the wider Oromo rule does not swallow English or Amharic-in-Latin', () => {
+  for (const q of [
+    'Is the hotel booking real?',
+    'I need to see the free week schedule soon',
+    'Can you book a good room for three nights?',
+    'How much does a taxi to the airport cost?',
+  ]) assert.equal(lang.detect(q), 'en', q);
+  for (const q of [
+    'selam bini, ride sint new?',
+    'betam tiru new, ameseginalehu',
+    'yet new bete? min yashalal',
+  ]) assert.equal(lang.detect(q), 'am-latin', q);
+});

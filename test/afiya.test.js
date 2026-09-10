@@ -110,3 +110,15 @@ test('the system prompt refuses the roles it must refuse', () => {
     assert.ok(rule.test(A.SYSTEM), 'system prompt must contain: ' + rule);
   }
 });
+
+
+// Afaan Oromoo negatives conjugate: dhaabbat- becomes "hin dhaabbanne", not "hin dhaabbatu". The gate
+// was anchored on the finished form and so missed a real cry for help about bleeding.
+test('bleeding that will not stop fires the emergency gate in every Oromo negative form', () => {
+  for (const q of [
+    'Dhiigni hin dhaabbanne',
+    'Dhiigni hin dhaabbatu',
+    'Dhiigni hin dhaabne, baay\'ee dhiiga jira',
+    'dhiiga baay\'ee dhangala\'aa jira',
+  ]) assert.equal(A.isEmergency(q), true, q);
+});

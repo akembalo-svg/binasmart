@@ -4,11 +4,28 @@
 const OROMO = /\b(akkam|qoricha|dhukkub|dhukkubbii|hakiima|narsii|fayyaa|yaalaa|yaala|daa'ima|daa'imni|mucaa|mucaan|hafuura|onnee|dhiiga|dhiigni|summii|ulfa|da'umsa|kutaan|qorannoo|talaallii|seera|seeraa|labsii|abukaatoo|himata|waliigaltee|waliigalteen|mallatteess|hidhame|murtii|poolisii|ragaa|galmee|beellama|mirga|gibira|hayyama|kiraa|fudhadhu|fudhate|barbaada|ajjeesuu|lubbuu|du'uu|dhukkubsat|balaa|gargaarsa|ariifachiisaa|danda'a|dandeenye|hin|koo|kiyya|keessan|isaa|ishee|nagaa|nagaan|galatoomi|galatoomaa|galatoomaa|maal|maali|maaliif|eessa|eessatti|meeqa|gatii|gatiin|konkolaataa|konkolaachisaa|imala|imalaa|yeroo|daqiiqaa|teessoo|waliin|qarshii|birrii|har'a|bor|ganama|galgala|finfinnee|baankii|tajaajila|mootummaa|eenyummaa|hojii|barumsaa|hospitaala|dubartoota|qofa|karaa|gaaffii|deebii|jira|jirta|jirtu|jiraa|natti|nuuf|isin|isiniif|ani|nuti|kana|akkamitti|waan|qaba|qabna|qabda|qabdu|barbaada|barbaanna|barbaadda|fedha|danda'a|dandeenya|dandeessu|dhufa|deema|deemuu|dhufuu|bilbila|lakkoofsa|guyyaa|ji'a|waggaa|magaalaa|biyya|itoophiyaa|oromoo|afaan|kaffaltii|kaffaluu|maallaqa|mana|namoota|nama|garaa|gara|irraa|hanga|booda|dura|amma|kutaa|adeemsa|hayyama|mirga|seera|manni|murtii|abbaa|haadha|ijoollee|obboleessa|obboleettii|jaalala|fayyaa|nyaata|bishaan|daandii|taaksii|baajaajii|saffisaan|suuta|hedduu|xiqqoo|baay'ee|gaarii|hamaa|tole|eeyyee|lakki|miti|raadiyoo|raadiyoon|naaf|banaa|bani|banuu|televizhinii|ilaaluu|ilaali|dhaggeeffachuu|dhageeffadhu|sagalee|muuziqaa|fiilmii|diraamaa|gargaari|gargaarsa|barbaachisa|yaadadhu|maqaan|koo|keenya|kee|isaa|ishee)\b/gi;
 const AM_LATIN = /\b(selam|salam|sint|endet|endemin|yet|alegn|alesh|aleh|ebakih|ebakish|ebakwo|ameseginalehu|amesegnalehu|tadia|eshi|new|nesh|neh|nachu|min|man|wede|ke|lay|birr|awo|aydelem|yikirta|betam|dehna|dehena|chigir|yelem|alle|ale|endale|tiru|tilik|tinish|meche|lemin|manew|yihe|yih|ezih|eziya|bet|sira|wond|set|lij)\b/gi;
 
+// Afaan Oromoo is recognisable from its spelling, not only its vocabulary. Long vowels aa/uu/ii and
+// the digraphs dh/ny are ordinary in qubee and rare in English, which is what makes them usable as a
+// signal: "ee" and "oo" are NOT counted here, because English is full of them (see, need, book, good).
+// This exists because a short question carries only one dictionary word, and one was not enough:
+// "Kaanserii qabaa?" and "Ati dhugumatti hakiima dhaa?" were both answered in English to a speaker
+// who had written in Afaan Oromoo.
+const OM_SHAPE = /(aa|uu|ii|dh|ny)/gi;
+// Afaan Oromoo nouns inflect by suffix — beellama/Beellamni, kutaa/kutaan, mucaa/mucaan, dhukkuba/
+// dhukkubni — so a whole-word list cannot see the form people actually type. These are matched as
+// PREFIXES for that reason, and kept to words that carry the subject of a health or legal question.
+const OM_STEM = /\b(beellam|dhukkub|qorich|hakiim|narsii|abukaat|himat|waliigalt|ragaa|mirg|hayyam|kiraa|gibir|dhiig|hafuur|onnee|mucaa|daa'im|ulf|summi|gargaars|adeems|waajjir|kutaa|fayya|talaall|qorann|labs|poolis|galmee|eenyum|kaffalt|maallaq|konkolaat|baajaaj|hospitaal|buufata|inshuraans|beenyaa|abbaa seeraa|mana murt|mana hidh)/gi;
+
 function detect(text) {
   const s = String(text || '');
   if (/[ሀ-፿]/.test(s)) return 'am';
   const om = (s.match(OROMO) || []).length, am = (s.match(AM_LATIN) || []).length;
-  if (om >= 2 && om > am) return 'om';
+  const shape = (s.match(OM_SHAPE) || []).length;
+  const stem = (s.match(OM_STEM) || []).length;
+  if (om + stem >= 2 && om + stem > am) return 'om';
+  // A dictionary hit counts double, spelling counts single. Three is the bar. An English sentence
+  // scores 0-1 here unless it also contains an Afaan Oromoo word, and Amharic-in-Latin scores 0.
+  if ((om + stem) * 2 + shape >= 3 && om + stem + shape > am) return 'om';
   if (am >= 2) return 'am-latin';
   return 'en';
 }
