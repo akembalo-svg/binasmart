@@ -727,7 +727,7 @@ function dropVendorSelfTalk(t) {
     : "I'm Bini, BinaSmart's assistant. How can I help?";
 }
 
-function biniGuards(text, msg, hist) {
+function biniGuards(text, msg, hist, grounding) {
   let t = String(text || '');
   const greeted = /^(hi|hello|hey|selam|salam|ሰላም|ጤና ይስጥልኝ|እንደምን)/i.test(String(msg || '').trim());
   // Only a standalone opener is removed: it must end the sentence (optionally after a "(ቢኒ)" gloss).
@@ -749,11 +749,24 @@ function biniGuards(text, msg, hist) {
   if (COMPLAINT_RE.test(msg)) t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/[ \t]+\n/g, '\n');
   t = dropVendorSelfTalk(t);
   t = t.replace(/\(?\/ride\?id=[^\s)።]*\)?/g, '/ride');
+  // A figure with a unit must be traceable to a document or a tool result. Asked what a driver earns, Bini
+  // once answered with a 4.4 km trip and a 239 birr fare having called nothing — and the fare is the one
+  // number this product promises never to guess.
+  if (grounding !== undefined) {
+    const g = dropUngrounded(t, grounding);
+    if (g.dropped.length) {
+      console.warn('[bini] dropped ungrounded ' + g.dropped.map(d => d.text).join(', '));
+      t = g.text || (/[ሀ-፿]/.test(t)
+        ? 'ትክክለኛውን ቁጥር ማረጋገጥ ስላልቻልኩ መገመት አልፈልግም። እባክዎ በ WhatsApp ያግኙን፦ https://wa.me/251911244344'
+        : "I could not verify that number, and I would rather not guess. Please reach us on WhatsApp: https://wa.me/251911244344");
+    }
+  }
   return t.trim();
 }
 // ===== Bini: tools (hands), per-user memory, conversation log, misses, handover, languages =====
 const biniLang = require('./assistant/lang');
 const biniTools = require('./assistant/tools');
+const { dropUngrounded } = require('./assistant/grounding');
 const { makeMemory, makeHandover, COMPLAINT_RE } = require('./assistant/memory');
 const biniMemory = makeMemory({ prisma });
 const biniHandover = makeHandover({ sendTg: (chat, text) => sendTg(chat, text), chatId: process.env.BINI_HANDOVER_CHAT || '8825386029' });
@@ -788,8 +801,14 @@ fastify.post('/api/assistant', async (req, reply) => {
     const [ctx, profile] = await Promise.all([knowledge.contextFor(msg, { lang }).catch(() => ''), Promise.resolve(biniMemory.profileText(known))]);
     const voice = (lang === 'am' || lang === 'am-latin') ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : (lang === 'om' ? '\n\n## Afaan Oromoo voice (glossary + rules)\n' + knowledge.voice('om') : '');
     const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
-    const execute = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', prisma, memory: mem, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
+    let toolOut = '';   // every tool result this turn, so a figure can be traced to its source
+    const runTool = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', prisma, memory: mem, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
       handover: h => biniHandover({ ...h, userKey, channel, lang, user: known || u, message: msg, history: hist }) });
+    const execute = async (name, args) => {
+      const r = await runTool(name, args);
+      try { toolOut += ' ' + JSON.stringify(r); } catch (e) { /* not serialisable, nothing to ground with */ }
+      return r;
+    };
     // Flash sometimes answers a price or "remember me" from memory; on those intents the first round must call a tool.
     const FORCE_TOOL_RE = /(remember|አስታውስ|አስታውሰኝ|yaadadh|ስንት ብር|ስንት ነው|ዋጋ|how much|fare|price|cost|gatii|meeqa|መቀመጫ|ጋራ ጉዞ|\bpool\b|imala waliinii|tender|ጨረታ|caalbaasii|cinema|ሲኒማ|film|ፊልም|showing|የት ደረሰ|ride status|my ride|where is (the|my) (car|driver)|radio|ራዲዮ|ራድዮ|\btv\b|ቲቪ|ቴሌቪዥን|channel|ቻናል|series|ድራማ|ተከታታይ|watch|listen|open the|play the|raadiyoo|televizhinii|ክፈት)|ምግብ ቤት|ሬስቶራንት|ካፌ|ቡና ቤት|ፋርማሲ|መድኃኒት ቤት|ሳሎን|ጂም|ክሊኒክ|የት ልብላ|የት እንብላ|restaurant|where (can i |to )?eat|pharmacy|cafe\b|coffee shop|gym\b|salon\b|recommend a place/i;
     const allTools = biniTools.toOpenAI();
@@ -841,7 +860,7 @@ fastify.post('/api/assistant', async (req, reply) => {
     }
     // Backstop: a clearly stated fact gets saved even when the model forgot to call remember().
     if (!toolsUsed.includes('remember') && mem.persistent) for (const f of require('./assistant/memory').extractMemory(msg)) { await execute('remember', { field: f.field, value: f.value }).catch(() => {}); toolsUsed.push('remember*'); }
-    text = biniGuards(text, msg, hist);
+    text = biniGuards(text, msg, hist, String(ctx || '') + ' ' + preTool + ' ' + toolOut);
     // A complaint goes to a person even when Bini sounded confident, and it is never rate-limited:
     // a second complaint from the same rider is more urgent than the first, not less.
     const always_handover = COMPLAINT_RE.test(msg) || biniMemory.wantsHuman(msg);
