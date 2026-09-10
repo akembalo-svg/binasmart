@@ -733,8 +733,17 @@ function biniGuards(text, msg, hist) {
   // Only a standalone opener is removed: it must end the sentence (optionally after a "(ቢኒ)" gloss).
   // Stripping a name that is the subject of a longer sentence used to leave a fragment, e.g.
   // "I'm Bini, BinaSmart's assistant." -> "BinaSmart's assistant."
-  if ((hist && hist.length) || !greeted) t = t.replace(/^\s*(?:(?:ሰላም|Hello|Hi|Nagaa dha)[!።.,]?\s*)?(?:እኔ\s+)?(?:ቢኒ\s+(?:ነኝ|እባላለሁ|እባላለው)|Bini ነኝ|(?:Bini|ቢኒ) here(?: I can help with that)?|I am Bini|I'm Bini|This is Bini|Ani Bini)(?:\s*[(（](?:ቢኒ|Bini)[)）])?\s*[።!.]+\s*/i, '');
+  if ((hist && hist.length) || !greeted) for (let pass = 0; pass < 2; pass++) t = t.replace(/^\s*(?:(?:ሰላም|እንኳን ደህና መጡ|ጤና ይስጥልኝ|እንደምን ነዎት|Welcome|Hi there|Hello there|Hello|Hi|Hey|Nagaa dha|Akkam)[!።.,]?\s*)?(?:እኔ\s+)?(?:ቢኒ\s+(?:ነኝ|እባላለሁ|እባላለው)|Bini ነኝ|(?:Bini|ቢኒ) here(?: I can help with that)?|I am Bini|I'm Bini|This is Bini|Ani Bini)(?:\s*[(（](?:ቢኒ|Bini)[)）])?\s*[።!.]+\s*/i, '');
   t = t.replace(/^[\s\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}!።]+\n+/u, ''); // an emoji-only first line left behind by the intro strip
+  // The comma form ("I'm Bini, BinaSmart's assistant") is still a re-introduction, but cutting the whole
+  // clause leaves a fragment. So drop the name but keep the subject, and in Amharic drop the opener whole
+  // because the copula (ነኝ) is repeated in the clause that follows.
+  if ((hist && hist.length) || !greeted) {
+    // "…, and I was made by X" already has its own subject: drop the opener AND the conjunction.
+    t = t.replace(/^\s*(?:(?:Hi|Hello|Hey)\s+there[!,.]?\s*)?(?:I am|I'm)\s+Bini\s*(?:[(（][^)）]{1,12}[)）])?\s*,\s*(?:and|or)\s+/i, '');
+    t = t.replace(/^\s*(?:(?:Hi|Hello|Hey)\s+there[!,.]?\s*)?(I am|I'm)\s+Bini\s*(?:[(（][^)）]{1,12}[)）])?\s*,\s*/i, '$1 ');
+    t = t.replace(/^\s*(?:ሰላም[!።,፣]?\s*)?(?:እኔ\s+)?ቢኒ\s+(?:ነኝ|እባላለሁ|እባላለው)\s*[,፣]\s*/, '');
+  }
   t = t.replace(/^\s*(ቢኒ|Bini)\s*[:：]\s*/i, ''); // "ቢኒ: …" transcript-style prefix
   t = t.replace(/^[\s!።.,፣]+(?=\S)/, ''); // leftover punctuation after a stripped opener ("! ቤትዎ…")
   if (COMPLAINT_RE.test(msg)) t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/[ \t]+\n/g, '\n');
