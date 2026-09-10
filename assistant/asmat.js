@@ -31,6 +31,13 @@ const URGENT = [
   /ይደበድበኛል|ደበደበኝ|ዛተብኝ|ያስፈራራኛል|threatened me|beating me|domestic (violence|abuse)|he hit me|afraid for my (life|safety)/i,
   // a child taken
   /ልጄን ወሰዱ|ልጄን ወሰደ|took my child|child was taken|custody.{0,16}(taken|removed)/i,
+  // Afaan Oromoo
+  /hidhame|qabame|poolisiin[^.!?]{0,18}fudhate|mana hidhaa/i,
+  /amma mallatteess|mallatteessuu[^.!?]{0,18}dirqisiis|mallatteessi jedhan/i,
+  /bor mana murtii|har'a mana murtii|beellama bor|yeroon[^.!?]{0,14}dhumuuf/i,
+  /mana kiyyaa[^.!?]{0,18}baas|manaa na baas|qabeenya koo fudhat/i,
+  /na reeb|na dhaan|na doorsis|sodaadha[^.!?]{0,14}lubbuu/i,
+  /mucaa koo fudhat|ijoollee koo fudhat/i,
 ];
 function isUrgent(msg) { const m = String(msg || ''); return URGENT.some(re => re.test(m)); }
 
@@ -68,6 +75,13 @@ const CASE_ADVICE = [
   /ክስ ልመሰርት|ልክሰው|should i sue|should i take (him|her|them) to court|ፍርድ ቤት ልውሰደው/i,
   /መከላከያ|አቤቱታ|ክስ/.source && /(መከላከያ|አቤቱታ|ክስ|ማመልከቻ)[ዬውንህሽ]{0,3}\s*(ጻፍ|ጻፍልኝ|አዘጋጅ|አዘጋጅልኝ)|draft (my|a) (defence|defense|claim|petition|affidavit|statement)|write my (case|appeal|complaint)/i,
   /ውሌ ተቀባይነት አለው|is my contract (valid|enforceable)|is this contract legal|ውሉ ይፀናል/i,
+  // Afaan Oromoo: outcome, advice on my case, guilt, suing, drafting, validity
+  /nan mo'adhaa|ni mo'annaa|dhimmi koo[^.!?]{0,18}(mo'|injifat)|firiin isaa maal ta'a/i,
+  /maal godhu[^.!?]{0,18}dhimma koo|dhimma koo irratti gorsi/i,
+  /yakkamaadhaa|balleessaa qabaa|seeraan alaadhaa/i,
+  /himata banuu qabaa|mana murtiitti geessuu qabaa/i,
+  /naaf barreess|barreessii naaf|himata naaf qopheess/i,
+  /waliigalteen koo[^.!?]{0,18}(fudhatama|seera qabeess)/i,
 ];
 function isCaseAdvice(msg) { const m = String(msg || ''); return CASE_ADVICE.some(re => re.test(m)); }
 

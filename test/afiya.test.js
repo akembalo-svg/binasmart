@@ -27,11 +27,32 @@ test('an emergency is recognised in Amharic and English, in the words people rea
   assert.deepEqual(must.filter(m => !A.isEmergency(m)), [], 'every one of these must be an emergency');
 });
 
-// Known gap, stated rather than hidden: Afaan Oromoo emergency phrasing is not covered and needs a native
-// speaker before Dr Afiya is offered in that language. Until then the language must not be advertised.
-test('the Afaan Oromoo gap is real and documented', () => {
-  assert.equal(A.isEmergency("namni kun of wallaalee hin dammaqu"), false,
-    'if this ever starts passing, remove this test and the warning that goes with it');
+// Afaan Oromoo, added 2026-09-10. Oromo inflects heavily and attaches the definite -n to nouns
+// (kutaa yaalaa -> kutaan yaalaa), so these match stems, and the emergency side is deliberately generous:
+// a false alarm costs a phone call. NOT yet reviewed by a native speaker.
+test('Afaan Oromoo: emergencies are recognised', () => {
+  const must = [
+    "abbaan koo onneen isaa dhukkuba, hafuura baafachuu hin dandeenye",  // chest pain, cannot breathe
+    "mucaan koo of wallaalee hin dammaqu",                                // child unconscious
+    "daa'imni hin harganu",                                              // infant not breathing
+    "dhiigni hin dhaabbatu baay'ee yaa'aa jira",                         // bleeding will not stop
+    "balaan konkolaataa nu qaqqabe",                                     // car accident
+    "summii liqimseera",                                                 // swallowed poison
+    "ulfa turte dhiigni irraa yaa'aa jira",                              // bleeding in pregnancy
+    "of ajjeesuu barbaada",                                              // self-harm
+  ];
+  assert.deepEqual(must.filter(m => !A.isEmergency(m)), [], 'every one of these must be an emergency');
+});
+
+test('Afaan Oromoo: clinical requests are refused, ordinary ones are not', () => {
+  for (const m of ["dhukkubni koo maali?", "qoricha maal fudhadhu?", "hangam fudhadhu?",
+                   "bu'aan qorannoo koo maal jechuudha?", "cimaadhaa?"]) {
+    assert.ok(A.isClinical(m), 'must be refused: ' + m);
+  }
+  for (const m of ["kutaan yaalaa daa'imaa eessa jira?", "inshuraansiin fayyaa akkam hojjeta?"]) {
+    assert.equal(A.isEmergency(m), false, 'not an emergency: ' + m);
+    assert.equal(A.isClinical(m), false, 'answerable: ' + m);
+  }
 });
 
 test('ordinary health-system questions are NOT treated as emergencies', () => {

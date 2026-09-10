@@ -115,3 +115,19 @@ test('the legal vocabulary covers what Asmat corpus is actually about', () => {
     assert.equal(scope.topicOf(m), 'other', 'must stay with Bini: ' + m);
   }
 });
+
+// Afaan Oromoo, added 2026-09-10. Same caveat as Dr Afiya's: stems not whole forms, generous on the urgent
+// side, and not yet reviewed by a native speaker.
+test('Afaan Oromoo: urgent situations, case advice and scope', () => {
+  for (const m of ["obboleessi koo hidhame poolisiin fudhate", "amma mallatteessi jedhanii na dirqisiisaa jiru",
+                   "bor mana murtii beellama qaba", "mana kiyyaa na baasaa jiru", "abbaan manaa koo na reeba"]) {
+    assert.ok(S.isUrgent(m), 'must be urgent: ' + m);
+  }
+  for (const m of ["dhimmi koo nan mo'adhaa?", "himata banuu qabaa?", "himata naaf qopheessi",
+                   "waliigalteen koo seera qabeessaa?"]) {
+    assert.ok(S.isCaseAdvice(m), 'must be refused: ' + m);
+  }
+  assert.equal(scope.topicOf("waliigalteen kiraa eessatti galmaa'a?"), 'legal');
+  assert.equal(scope.topicOf("kutaan yaalaa daa'imaa eessa jira?"), 'health');
+  assert.equal(scope.topicOf("imala Magannaa irraa gara Boolee meeqa?"), 'other');
+});

@@ -43,7 +43,26 @@ const EMERGENCY = [
   // infant
   /ህፃኑ|ህፃኗ|ልጄ/.source && /(ህፃኑ|ህፃኗ|ልጁ|ልጅ|ልጄ)[^።.!?]{0,20}(አይተነፍስም|አልነቃም|ደነዘዘ|ራሱን ስቶ|አይንቀሳቀስም)/,
   /baby.{0,20}(not breathing|unresponsive|limp|blue|won'?t wake)/i,
+  // Afaan Oromoo. Stems, not whole forms, because the verbs inflect: dhukkub-, danda'-, dammaq-.
+  // cardiac / chest
+  /onnee[^.!?]{0,20}(dhukkub|jabaa|dhaabbate)|laphee[^.!?]{0,18}dhukkub|dhukkubbii onnee/i,
+  // breathing
+  /hafuura[^.!?]{0,22}(hin baafat|baafachuu hin danda|dhaabbate|hin argat|rakkat)|hin hargan|harganuu hin danda/i,
+  // consciousness
+  /of wallaal|of hin beek|hin dammaq|dammaquu hin danda|ka'uu hin danda/i,
+  // bleeding / injury
+  /dhiig[^.!?]{0,20}(hin dhaabbat|baay|yaa'|dhangala)|madaa cimaa/i,
+  /balaa[^.!?]{0,18}(konkolaataa|geesse|qaqqabe)|konkolaataan rukut|kufe[^.!?]{0,18}(hin ka'|of wallaal)/i,
+  // poisoning / burns
+  /summii|qoricha[^.!?]{0,18}baay'ee (fudhate|liqimse)|gubaa cimaa|gube[^.!?]{0,12}cimaa/i,
+  // obstetric
+  /da'umsa[^.!?]{0,20}dhiiga|ulfa[^.!?]{0,22}dhiig|dhiiga ulfaa/i,
+  // infant
+  /(mucaa|daa'ima|ilma)[^.!?]{0,24}(hin hargan|hafuura hin|hin dammaq|of wallaal|hin socho)/i,
   // self-harm
+  /of ajjeesuu|of ajjeesuun|ofin ajjeesa|du'uu barbaad|lubbuu koo/i,
+  // self-harm
+
   /ራሴን ማጥፋት|ራሱን ሊያጠፋ|ራሷን ልታጠፋ|ራሴን ልገድል|መሞት እፈልጋለሁ/,
   /suicide|kill myself|end my life|want to die|harm myself/i,
 ];
@@ -53,7 +72,7 @@ function isEmergency(msg) { const m = String(msg || ''); return EMERGENCY.some(r
 // A fixed answer. No model, no retrieval, no variation.
 function emergencyReply(lang) {
   if (lang === 'om') {
-    return `⚠️ Kun haala ariifachiisaa fakkaata. Amma bilbili: **አምቡላንስ ${AMBULANCE}** (Ambulaansii).\n`
+    return `⚠️ Kun haala ariifachiisaa fakkaata. Amma bilbili: **Ambulaansii ${AMBULANCE}**.\n`
       + `Poolisii ${POLICE} · Ibidda ${FIRE}\n\n`
       + `Yoo dandeessan gara hospitaala dhiyootti jiru deemaa. Namicha/dubartii sana kophaa hin dhiisinaa.\n\n`
       + `Ani gargaartuu odeeffannoo qofa — ogeessa fayyaa miti. Amma bilbiluun caalaa barbaachisaadha.`;
@@ -80,6 +99,10 @@ const CLINICAL = [
   /ውጤቴን|የላብራቶሪ ውጤት|test result|lab result|x-?ray (result|show)|ውጤቱ ምን ማለት|what does (my|this) (result|scan) mean/i,
   /አደገኛ ነው|ከባድ ነው ወይ|is (it|this) serious|should i (worry|be worried)|is it dangerous|life threatening/i,
   /ማርገዝ|እርግዝና.{0,14}(አቋርጥ|ማስወረድ)|abortion|terminate.{0,12}pregnan/i,
+  // Afaan Oromoo: diagnosis, medicine, dose, results, "is it serious"
+  /dhukkubni koo maali|dhukkuba maalii|maal na qabe|qoricha maalii|qoricha maal fudhadh|qoricha naaf/i,
+  /hangam fudhadh|meeqa fudhadh|safartuu qorichaa|bu'aan qorannoo|firiin qorannoo maal/i,
+  /cimaadhaa|balaa qaba|yaaddessaadha|nan du'aa/i,
 ];
 function isClinical(msg) { const m = String(msg || ''); return CLINICAL.some(re => re.test(m)); }
 
