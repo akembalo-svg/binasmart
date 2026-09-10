@@ -211,7 +211,7 @@ fastify.get('/sitemap.xml', async (req, reply) => {
   const shopUrls = (await prisma.shop.findMany({ where: { status: 'live', NOT: { slug: null } }, select: { slug: true } }).catch(() => [])).map(x => 'https://bina.et/shop/' + x.slug);
   const cshows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date() } }, select: { id: true } }).catch(() => []);
   const films = await prisma.film.findMany({ where: { status: 'public', NOT: { rights: null } }, select: { slug: true } }).catch(() => []);
-  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug)];
+  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug)];
   reply.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + urls.map(u => '<url><loc>' + u + '</loc></url>').join('\n') + '\n</urlset>');
 });
@@ -573,6 +573,8 @@ fastify.get('/terms', async (req, reply) => reply.sendFile('terms.html'));
 fastify.get('/support', async (req, reply) => reply.sendFile('support.html'));
 fastify.get('/ai', async (req, reply) => reply.sendFile('ai.html'));
 fastify.get('/amharic-ai', async (req, reply) => reply.sendFile('amharic-ai.html'));
+fastify.get('/afiya', async (req, reply) => reply.sendFile('afiya.html'));
+fastify.get('/asmat', async (req, reply) => reply.sendFile('asmat.html'));
 fastify.get('/tin-registration-ethiopia', async (req, reply) => reply.sendFile('tin-registration-ethiopia.html'));
 fastify.get('/business-registration-ethiopia', async (req, reply) => reply.sendFile('business-registration-ethiopia.html'));
 fastify.get('/driving-licence-ethiopia', async (req, reply) => reply.sendFile('driving-licence-ethiopia.html'));
@@ -768,6 +770,8 @@ const biniLang = require('./assistant/lang');
 const biniTools = require('./assistant/tools');
 const { dropUngrounded } = require('./assistant/grounding');
 const afiya = require('./assistant/afiya');
+const asmat = require('./assistant/asmat');
+const scope = require('./assistant/scope');
 const { makeMemory, makeHandover, COMPLAINT_RE } = require('./assistant/memory');
 const biniMemory = makeMemory({ prisma });
 const biniHandover = makeHandover({ sendTg: (chat, text) => sendTg(chat, text), chatId: process.env.BINI_HANDOVER_CHAT || '8825386029' });
@@ -886,6 +890,60 @@ fastify.post('/api/assistant/transcribe', { bodyLimit: 4 * 1024 * 1024 }, async 
   catch (e) { req.log && req.log.warn && req.log.warn('transcribe err ' + e.message); return reply.code(502).send({ ok: false, error: 'transcribe_failed' }); }
 });
 // Weekly numbers for the eval report and the ops page.
+// ===== Asmat (አስማት): Ethiopian legal procedure and documents. Not a lawyer, and built so he cannot act like one. =====
+fastify.post('/api/asmat', async (req, reply) => {
+  const t0 = Date.now();
+  const b = req.body || {};
+  const msg = String(b.message || '').trim().slice(0, 2000);
+  if (!msg) return reply.code(400).send({ error: 'message required' });
+  const ip = req.headers['x-real-ip'] || req.ip;
+  const u = (b.user && typeof b.user === 'object') ? b.user : {};
+  const channel = u.telegramId ? 'telegram' : (u.uid ? 'web' : 'api');
+  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip });
+  const lang = biniLang.detect(msg);
+  const l = (lang === 'am' || lang === 'am-latin') ? 'am' : (lang === 'om' ? 'om' : 'en');
+
+  // 1. A medical emergency reaches the ambulance even here. Being on the wrong page is not the person's problem.
+  if (afiya.isEmergency(msg)) {
+    const text = afiya.emergencyReply(l);
+    biniHandover({ userKey, channel, lang: l, user: u, message: msg, reply: text, history: [], explicit: true, reason: 'Asmat page: possible medical emergency' });
+    return { reply: text, emergency: true, ambulance: afiya.AMBULANCE };
+  }
+  if (asmat.isUrgent(msg)) {
+    const text = asmat.urgentReply(l);
+    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['urgent'], miss: false, ms: Date.now() - t0 });
+    biniHandover({ userKey, channel, lang: l, user: u, message: msg, reply: text, history: [], explicit: true, reason: 'Asmat: urgent legal situation' });
+    return { reply: text, urgent: true };
+  }
+  // 2. Asmat keeps to legal procedure; everything else goes back with a link.
+  // A request for case advice is a legal question by definition: decline it here, never exile it.
+  if (!asmat.isCaseAdvice(msg) && !scope.inScope(msg, 'legal')) return { reply: scope.redirect(msg, 'legal', l), redirected: true };
+
+  try {
+    const ctx = await knowledge.contextFor(msg, { lang: l }).catch(() => '');
+    let sys = asmat.SYSTEM + '\n\n' + biniLang.directive(lang) + (ctx ? '\n\n## Information you may use\n' + ctx : '');
+    if (asmat.isCaseAdvice(msg)) sys += '\n\nTHIS MESSAGE ASKS FOR ADVICE ON THE PERSON OWN CASE, A PREDICTION, OR A DOCUMENT TO FILE. Decline in one warm sentence, then be immediately useful: the office or court, the procedure, the documents, and where the general rule is written. Do not say who is right, and do not draft anything.';
+
+    let text = String(await callBini(sys, [{ role: 'user', content: msg }], 700, {}) || '').trim();
+    const v = asmat.stripVerdict(text);
+    if (v.removed) console.warn('[asmat] removed ' + v.removed + ' verdict sentence(s)');
+    text = v.text;
+    const g = dropUngrounded(text, ctx);
+    if (g.dropped.length) console.warn('[asmat] dropped ungrounded ' + g.dropped.map(x => x.text).join(', '));
+    text = g.text;
+
+    if (!text) text = asmat.caseNudge(l).trim();
+    if (asmat.isCaseAdvice(msg) && !/ጽ\/ቤት|ፍርድ ቤት|office|court|waajjira/i.test(text)) text += asmat.caseNudge(l);
+    text += '\n\n' + asmat.disclosure(l);
+
+    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['asmat'], miss: biniMemory.isMiss(text), ms: Date.now() - t0 });
+    return { reply: text, urgent: false };
+  } catch (e) {
+    req.log && req.log.error({ err: e }, 'asmat failed');
+    return { reply: asmat.disclosure(l) };
+  }
+});
+
 // ===== Dr Afiya (ዶ/ር አፍያ): health-system guide. Not a clinician, and built so she cannot act like one. =====
 // Order matters and is the whole design: an emergency is answered by assistant/afiya.js without the model,
 // because a model that is right 99 times in 100 is not good enough when the hundredth caller is having a
@@ -910,6 +968,12 @@ fastify.post('/api/afiya', async (req, reply) => {
       explicit: true, reason: 'Dr Afiya: possible emergency' });
     return { reply: text, emergency: true, ambulance: afiya.AMBULANCE };
   }
+
+  // An urgent legal situation typed at the health desk still gets the legal answer.
+  if (asmat.isUrgent(msg)) return { reply: asmat.urgentReply(l), urgent: true };
+  // Otherwise Dr Afiya keeps to health, and hands everything else on with a link.
+  // A clinical question is a health question by definition: decline it here, never exile it.
+  if (!afiya.isClinical(msg) && !scope.inScope(msg, 'health')) return { reply: scope.redirect(msg, 'health', l), redirected: true };
 
   try {
     const ctx = await knowledge.contextFor(msg, { lang: l }).catch(() => '');

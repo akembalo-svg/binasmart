@@ -58,6 +58,9 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 
 - [Amharic AI](https://bina.et/amharic-ai): how Bini answers in Amharic from an indexed library of Ethiopian law and government-service documents, what BinaSmart owns versus licenses, and the measured retrieval accuracy
 
+- [Dr Afiya](https://bina.et/afiya): health-system guide for Ethiopia — which department, what to bring, when to be seen. Not a clinician: does not diagnose, prescribe or read results. Emergencies are answered with the ambulance number 907.
+- [Asmat](https://bina.et/asmat): Ethiopian legal procedure and documents — which office or court, which proclamation, what paperwork. Not a lawyer: does not advise on a case, predict an outcome, or draft filings.
+
 ## Optional
 
 - [Why BinaSmart Ride](https://bina.et/why-binasmart): the fare is locked when you book; no app to install
