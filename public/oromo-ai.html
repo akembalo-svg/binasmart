@@ -106,9 +106,9 @@ details[open] summary{color:#000}
 #vs td.win{background:#f2f2f2}
 .use{box-shadow:none}
 .disclaim{background:#fff;border:1px solid var(--line)}
-/* The chat launcher and the footer are injected by two site-wide scripts and carry their own emoji.
-   They are not this page's markup, so they are toned down here rather than edited for all 56 pages. */
-#biniBtn{filter:grayscale(1)}
+/* The chat launcher is not loaded on this page at all - the bina-assistant script is omitted from
+   the foot rather than the button being hidden, so nothing is injected and then covered up. The
+   footer script stays: it is the shared site footer, and it is the same on every page. */
 /* The logo was the last colour on the page. The mark is a white glyph on a green gradient packed
    into one background shorthand, so the shorthand is restated here with a dark gradient; the glyph
    itself is read out of site-v3.css at build time rather than retyped. Page-scoped like the rest. */
@@ -243,7 +243,6 @@ details[open] summary{color:#000}
  <p>&copy; BinaSmart &middot; <a href="/">bina.et</a> &mdash; Waltajjii Dijitaalaa Itoophiyaa</p>
  <p style="margin-top:6px"><a href="/">Mana</a> &middot; <a href="/guides">Qajeelfamoota</a> &middot; <a href="/ai">AI</a> &middot; <a href="/amharic-ai">Amaariffaan</a> &middot; <a href="/afiya">Dr Afiya</a> &middot; <a href="/asmat">Asmat</a></p>
 </footer>
-<script src="/static/bina-assistant.js?v=3" defer></script>
 <script src="/static/bina-footer.js?v=9" defer></script>
 </body>
 </html>
