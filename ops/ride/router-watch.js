@@ -48,26 +48,25 @@ async function check() {
 }
 
 async function tg(text) {
-  // Delivery is tried in order and stops at the first success. This is not belt-and-braces: on
-  // 2026-09-11 the app's own admin chat turned out to be unreachable by the bot configured for it
-  // (@gccandconectbot -> 8825386029 returns "chat not found"), so alerts addressed to Ibrahim have
-  // been going nowhere. A monitor that cannot raise an alarm is worse than no monitor, because it
-  // buys false confidence — so it verifies the route rather than assuming it.
-  const routes = [
-    ['driver bot -> Ibrahim', process.env.BINA_DRIVER_BOT_TOKEN, '8825386029'],
-    ['main bot -> ops', process.env.BINASMART_TG_TOKEN, process.env.BINASMART_OPS_TG_CHAT || '8096525984'],
-    ['main bot -> admin', process.env.BINASMART_TG_TOKEN, process.env.BINASMART_ADMIN_TG_CHAT],
-  ].filter(r => r[1] && r[2]);
+  // Same token resolution as server.js sendTg, so the monitor alerts from the bot the platform
+  // already uses and there is one place to change it. The ops chat is the second destination
+  // because it has received operational alerts since launch.
+  const token = process.env.BINA_RIDER_BOT_TOKEN || process.env.BINASMART_TG_TOKEN;
+  const chats = [process.env.BINASMART_ADMIN_TG_CHAT, process.env.BINASMART_OPS_TG_CHAT || '8096525984']
+    .map(c => String(c || '').trim()).filter(Boolean);
+  if (!token || !chats.length) { console.error('[router-watch] no telegram token/chat configured'); return false; }
 
-  for (const [label, token, chat] of routes) {
+  let delivered = false;
+  for (const chat of chats) {
     const r = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
       method: 'POST', headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ chat_id: chat, text }),
     }).catch(() => null);
-    if (r && r.ok) { console.log('[router-watch] alerted via ' + label); return true; }
+    if (r && r.ok) delivered = true;
   }
-  console.error('[router-watch] NO DELIVERY ROUTE WORKED — the alarm is mute');
-  return false;
+  // An alarm that cannot ring is worse than no alarm, so say so rather than failing quietly.
+  if (!delivered) console.error('[router-watch] NO DELIVERY ROUTE WORKED — the alarm is mute');
+  return delivered;
 }
 
 (async () => {
