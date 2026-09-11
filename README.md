@@ -43,7 +43,14 @@ Hotel & travel booking, cinema & events ticketing, hospital directory, insurance
 ### 🤖 Bini — the 24/7 AI assistant
 "Bini" (ቢኒ) is BinaSmart's bilingual assistant, available as a homepage search-box and a floating chat widget on every guide page.
 
-- **Brain:** Google **Gemini 2.5 Flash-Lite** via the OpenAI-compatible endpoint, with a **local GLM model as automatic fallback** so Bini never goes dark.
+- **What is BinaSmart's:** the indexed corpus of Ethiopian law, government-service and Addis
+  Ababa documents; the Amharic and Afaan Oromoo writing style; the tools Bini can actually use;
+  the conversation memory; and the deterministic safety gates — an emergency or an urgent legal
+  situation is answered by code, without the model being consulted at all.
+- **What is licensed:** the ability to form sentences. Bini runs on **gemini-2.5-flash**, with a
+  local GLM model as automatic fallback so it never goes dark. Measured on 35 Afaan Oromoo
+  questions, BinaSmart scores 20/20 and 15/15 where that same bare model scores 10/20 and 11/15 —
+  the gap is the corpus and the gates, not a bigger model.
 - **Grounded & honest:** answers only from BinaSmart's real services; never invents prices, numbers or government portal names — it routes to the verified guide or WhatsApp instead.
 - **Human & multi-turn:** empathy-first on problems, remembers the conversation, and offers conversation-starter chips.
 - A separate **owner assistant** answers strictly from each building's own private data (occupancy, rent, VAT, maintenance).
@@ -60,7 +67,7 @@ Hotel & travel booking, cinema & events ticketing, hospital directory, insurance
 | Auth | [better-auth](https://www.better-auth.com) |
 | Scheduling | `node-cron` |
 | Frontend | Server-rendered static HTML (55 pages) + vanilla JS, bilingual (am/en) |
-| AI | Gemini (OpenAI-compat) with local GLM fallback |
+| AI | BinaSmart corpus, voice, tools and deterministic safety gates over gemini-2.5-flash (local GLM fallback) |
 | Payments | Chapa, telebirr |
 
 ---

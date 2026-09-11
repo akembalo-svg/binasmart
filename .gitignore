@@ -35,3 +35,7 @@ ops/bini/amharic-eval.js
 ops/health/afiya-eval.js
 ops/law/asmat-eval.js
 ops/oromo-eval.js
+
+# Working backups. Old snapshots of a live server do not belong in a public
+# repo, and git already holds the history.
+ops/backups/
