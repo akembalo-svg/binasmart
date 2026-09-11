@@ -109,6 +109,17 @@ function stripBoilerplate(docs, { minPages = 4, ratio = 0.15 } = {}) {
 // Some crawled government pages have been injected with gambling spam (moe.gov.et served a casino page).
 // Require two or more distinct markers, which always cluster, so a page mentioning one word in passing is safe.
 const SPAM = /(slot gacor|maxwin|situs (?:slot|judi|togel)|judi bola|togel online|rtp live|bandar (?:judi|togel)|pragmatic play|joker ?\d{2,}|scatter hitam)/gi;
+// Paid placement dressed as editorial. A page that announces itself as sponsored is advertising, and
+// a patient asking where to get cancer treatment must not be handed an advertisement — which is
+// exactly what happened on 2026-09-11: "የካንሰር ሕክምና የት ይሰጣል?" was answered with a private hospital
+// chain in Turkey, from 11 chunks of one Ethiopian Reporter page titled "ስፖንሰር የተደረጉ" (Sponsored).
+// Judged on the TITLE: an article that discusses advertising is legitimate; one that declares itself
+// sponsored is not.
+const ADVERT = /ስፖንሰር|sponsored|advertorial|paid (content|partnership)|promoted content/i;
+function isAdvertorial(meta) {
+  return ADVERT.test(String(meta.title || '') + ' ' + String(meta.source_name || ''));
+}
+
 function isSpam(text) { return new Set(String(text).toLowerCase().match(SPAM) || []).size >= 2; }
 
 // ---------- sources ----------
@@ -153,13 +164,14 @@ function readSources(root, only) {
     const wdir = path.join(root, 'knowledge', 'web');
     let sites = []; try { sites = fs.readdirSync(wdir).filter(d => fs.statSync(path.join(wdir, d)).isDirectory()); } catch (e) { /* not crawled yet */ }
     const web = [];
-    const hygiene = { spam: {}, boilerplateChars: 0 };
+    const hygiene = { spam: {}, advert: {}, boilerplateChars: 0 };
     for (const site of sites) for (const f of fs.readdirSync(path.join(wdir, site)).filter(f => f.endsWith('.md'))) {
       const raw = rd(path.join(wdir, site, f)); if (!raw) continue;
       const fm = /^---\n([\s\S]*?)\n---\n/.exec(raw); if (!fm) continue;
       const meta = {}; for (const line of fm[1].split('\n')) { const m = /^(\w+):\s*"?(.*?)"?\s*$/.exec(line); if (m) meta[m[1]] = m[2].replace(/\\"/g, '"'); }
       const body = raw.slice(fm[0].length);
       if (isSpam(body)) { hygiene.spam[site] = (hygiene.spam[site] || 0) + 1; continue; }   // hacked page serving casino spam
+      if (isAdvertorial(meta)) { hygiene.advert[site] = (hygiene.advert[site] || 0) + 1; continue; }  // paid placement, not editorial
       web.push({ source: 'web', slug: site + '/' + f.replace(/\.md$/, ''), title: (meta.source_name ? meta.source_name + ' · ' : '') + (meta.title || site), url: meta.url || null, lang: meta.lang || 'en', text: body.slice(0, 20000) });
     }
     // strip the site template FIRST, then judge the minimum length on what real content is left
