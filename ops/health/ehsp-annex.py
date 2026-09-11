@@ -58,11 +58,22 @@ for page in t.split(chr(12)):
         bare = s.strip()
         if not bare or HDR.search(s):
             continue
-        # a programme-area heading: a short bare line, no row number, no X marks
-        if not re.match(r'^\d{1,4}\s', bare) and not XMARK.search(s) and len(bare) < 60:
-            if re.match(r"^[A-Z][A-Za-z /&,'-]{2,58}$", bare) and not bare.lower().startswith(
-                    ('table', 'annex', 'ic ', 'level', 'pay', 'sub')):
-                program = bare
+        # A programme heading is identified by WHERE IT SITS, not by how it reads. Measured in the
+        # extracted text: real headings sit at indent 0-8, wrapped intervention text at 29+. The
+        # first version judged on length and capitalisation alone and promoted wrapped table text to
+        # a programme area — which is how the corpus ended up with interventions labelled
+        # "(ACE inhibitors, and mineralocorticoid antagonists; Asthma)". The columns were solved by
+        # geometry; the headings should have been too.
+        if not re.match(r'^\d{1,4}\s', bare) and not XMARK.search(s):
+            col0 = len(s) - len(s.lstrip())
+            if col0 <= 8:
+                head = re.split(r'\s{3,}', bare)[0].strip()   # cut column bleed sharing the line
+                if (re.match(r"^[A-Z][A-Za-z0-9 /&,'.-]{2,57}$", head)
+                        and head.count(')') <= head.count('(')   # a tail, not a heading
+                        and not head.lower().startswith(
+                            ('table', 'annex', 'ic ', 'level', 'pay', 'sub', 'components',
+                             'list of', 'contents', 'interventions'))):
+                    program = head
             continue
         if not re.match(r'^\s*\d{1,4}\s', s):
             continue

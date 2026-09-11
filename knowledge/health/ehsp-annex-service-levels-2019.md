@@ -331,35 +331,23 @@ Nutrition for adolescent girls in special situation (HIV, emergency, (Breastfeed
 Management of acute malnutrition in adolescents (Breastfeeding women; Nutrition: Adolescent (10 - 19 years)) is provided at health posts and health centres, free of charge.
 Promote adolescent RH services (Breastfeeding women; Nutrition: Adolescent (10 - 19 years)) is provided at health posts, health centres and primary hospitals, free of charge.
 Nutrition assessment, counselling and support for HIV+, TB and other (Breastfeeding women; Nutrition: Productive work force (19-65 yrs):) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote healthy dietary behaviours and exercise to prevent (Breastfeeding women; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
-Promote salt, alcohol, cigarettes, chat and sugar restrictions (Breastfeeding women; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
 
 ## Communicable and NCD
 
+Promote healthy dietary behaviours and exercise to prevent (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
+Promote salt, alcohol, cigarettes, chat and sugar restrictions (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
 Enforce taxation of alcohol, cigarette, chat and sugary beverages (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
 Utilize tax recovery to support nutrition (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
 Link HIV+ and TB clients with IGAs and other nutrition sensitive (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts, health centres and primary hospitals, free of charge.
 Promote local food processing factories to produce RUTF and RUSF for (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
 Promote nutrition education for improve nutrition behaviour and (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
-
-## Communicable and NCD                            practices
-
-promote nutrition education, healthy eating and Exercises at industry (Communicable and NCD                            practices; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
-
-## Communicable and NCD                            parks
-
-promote and ensure food safety and quality to the general population (Communicable and NCD                            parks; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
-
-## Communicable and NCD
-
+promote nutrition education, healthy eating and Exercises at industry (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
+promote and ensure food safety and quality to the general population (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
 Promote production and consumption of organic foods (Communicable and NCD; Nutrition: Productive work force (19-65 yrs):) is provided at health posts and health centres, free of charge.
 Nutrition assessment, counselling and support to elderly people (Communicable and NCD; Nutrition: Elderly (>65 yrs)) is provided at health posts and health centres, free of charge.
 Promote healthy eating and exercise to prevent obesity/reduce risk of (Communicable and NCD; Nutrition: Elderly (>65 yrs)) is provided at health posts and health centres, free of charge.
-
-## NCDs
-
-Strengthen community care and support for the elderly (NCDs; Nutrition: Elderly (>65 yrs)) is provided at health posts and health centres, free of charge.
-Extended nutrition intervention in older hospitalized patients (NCDs; Nutrition: Elderly (>65 yrs)) is provided at health posts and health centres, free of charge.
+Strengthen community care and support for the elderly (Communicable and NCD; Nutrition: Elderly (>65 yrs)) is provided at health posts and health centres, free of charge.
+Extended nutrition intervention in older hospitalized patients (Communicable and NCD; Nutrition: Elderly (>65 yrs)) is provided at health posts and health centres, free of charge.
 
 ## Multi-sectoral nutrition interventions
 
@@ -368,14 +356,8 @@ Promote production and consumption of fruits and vegetables (Multi-sectoral nutr
 ## Livestock sector
 
 Promote production and consumption of nutrient dese cereals and (Livestock sector; Nutrition multisector: With agriculture and), free of charge.
-
-## Livestock sector                               pulses
-
-Promote production and consumption of animal source foods (meat, (Livestock sector                               pulses; Nutrition multisector: With agriculture and), free of charge.
-Promote homestead and school gardening (Livestock sector                               pulses; Nutrition multisector: With agriculture and), free of charge.
-
-## Livestock sector
-
+Promote production and consumption of animal source foods (meat, (Livestock sector; Nutrition multisector: With agriculture and), free of charge.
+Promote homestead and school gardening (Livestock sector; Nutrition multisector: With agriculture and), free of charge.
 Promote and support urban agriculture (Livestock sector; Nutrition multisector: With agriculture and), free of charge.
 Promote production and consumption of bio fortified foods (Livestock sector; Nutrition multisector: With agriculture and), free of charge.
 Promote post-harvest management (Livestock sector; Nutrition multisector: With agriculture and), free of charge.
@@ -423,16 +405,16 @@ Employ fee waiver scheme for management of acute malnutrition (Livestock sector;
 Promote nutrition services for elderly and person with disability, (Livestock sector; Nutrition multisector: With Social Protection), free of charge.
 Strengthen and scale up early warning system for food and nutrition (Livestock sector; Nutrition multisector: With Disaster Risk), free of charge.
 
-## Management sector                               information
+## Management sector
 
-Support nutrition emergency response and recovery through (Management sector                               information; Nutrition multisector: With Disaster Risk), free of charge.
-Promote SBCC strategies to impart information about resilience to (Management sector                               information; Nutrition multisector: With Disaster Risk), free of charge.
-Certify competent food and nutrition product manufacturers, (Management sector                               information; Nutrition multisector: With Food and Drug), free of charge.
-Control the quality and safety of food products by developing (Management sector                               information; Nutrition multisector: With Food and Drug), free of charge.
-Enforce and regulate food manufacturers, importers and distributors (Management sector                               information; Nutrition multisector: With Food and Drug), free of charge.
+Support nutrition emergency response and recovery through (Management sector; Nutrition multisector: With Disaster Risk), free of charge.
+Promote SBCC strategies to impart information about resilience to (Management sector; Nutrition multisector: With Disaster Risk), free of charge.
+Certify competent food and nutrition product manufacturers, (Management sector; Nutrition multisector: With Food and Drug), free of charge.
 
 ## Authority sector
 
+Control the quality and safety of food products by developing (Authority sector; Nutrition multisector: With Food and Drug), free of charge.
+Enforce and regulate food manufacturers, importers and distributors (Authority sector; Nutrition multisector: With Food and Drug), free of charge.
 Ensure the quality and safety of infant formulas, complementary (Authority sector; Nutrition multisector: With Food and Drug), free of charge.
 Register and issue market authorization for nutritious food products (Authority sector; Nutrition multisector: With Food and Drug), free of charge.
 Ensure safety and quality of public and bottled water and food (Authority sector; Nutrition multisector: With Food and Drug), free of charge.
@@ -482,52 +464,31 @@ Screening and Treatment for Syphilis in Pregnancy (HIV/AIDS, TB, and Malaria; ST
 Adolescent friendly STI services (provision of condom, STI screening (HIV/AIDS, TB, and Malaria; STI: treatment) is provided at health centres, primary hospitals and general hospitals, free of charge.
 Treatment+Detection (smear + Xpert) +Drug Sensitivity analysis (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
 Treatment+Detection (smear + Xpert) +Drug Sensitivity analysis & ART (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-
-## Prioritization for TB cases
-
-Treatment+Detection (smear + Xpert) +Drug Sensitivity analysis & ART (Prioritization for TB cases; Tuberculosis: diagnosis) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Treatment+Detection (smear + Xpert) +Drug Sensitivity analysis & (Prioritization for TB cases; Tuberculosis: diagnosis) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-
-## Preventive therapy
-
-Treatment+Detection (smear + Xpert) +Drug Sensitivity analysis & (Preventive therapy; Tuberculosis: diagnosis) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-
-## Preventive therapy for children
-
-Treatment+Detection (smear generally and culture for MDR) +Drug (Preventive therapy for children; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
-
-## Sensitivity analysis
-
-Treatment+Detection (smear generally and culture for MDR) +Drug (Sensitivity analysis; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
-
-## Sensitivity analysis & ART Prioritization for TB cases
-
-Treatment+Detection (smear generally and culture for MDR) +Drug (Sensitivity analysis & ART Prioritization for TB cases; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Treatment+Detection (smear generally and culture for MDR) +Drug (Sensitivity analysis & ART Prioritization for TB cases; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
-
-## Sensitivity analysis & Preventive therapy
-
-Treatment+Detection (smear generally and culture for MDR) +Drug (Sensitivity analysis & Preventive therapy; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
-
-## Sensitivity analysis & Preventive therapy for children
-
-[Detection] and treatment of leprosy (Sensitivity analysis & Preventive therapy for children; Leprosy: Elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Treatment of drug resistant leprosy (Sensitivity analysis & Preventive therapy for children; Leprosy: Elimination) is provided at general hospitals and tertiary hospitals, free of charge.
-Chemoprophylaxis for contacts of leprosy cases (Sensitivity analysis & Preventive therapy for children; Leprosy: Elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Detection and management of disability due to leprosy (Sensitivity analysis & Preventive therapy for children; Leprosy: Elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Long Lasting Insecticide-Treated Nets (LLIN) (Sensitivity analysis & Preventive therapy for children; Malaria: Prevention) is provided at health posts and health centres, free of charge.
-Indoor residual spraying with propoxure (Sensitivity analysis & Preventive therapy for children; Malaria: Prevention) is provided at health posts, free of charge.
-Other vector control: Mosquito repellent (Sensitivity analysis & Preventive therapy for children; Malaria: Prevention) is provided at health posts, free of charge.
-Other vector control: window screening (Sensitivity analysis & Preventive therapy for children; Malaria: Prevention) is provided at health posts, free of charge.
-Other vector control: Larviciding (Sensitivity analysis & Preventive therapy for children; Malaria: Prevention) is provided at health posts, free of charge.
-Other vector control: drainage of breeding swampy and marshy (Sensitivity analysis & Preventive therapy for children; Malaria: Prevention), free of charge.
-Intermittent preventive treatments (pregnant women) (Sensitivity analysis & Preventive therapy for children; Malaria: Prevention) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Active surveillance of cases (Sensitivity analysis & Preventive therapy for children; Malaria: Prevention) is provided at health posts and health centres.
-Detection [RDT] and treatment of uncomplicated malaria (Sensitivity analysis & Preventive therapy for children; Malaria: case management) is provided at health posts and health centres, on a cost-sharing basis.
-Detection [Microscopy] and treatment of uncomplicated (Sensitivity analysis & Preventive therapy for children; Malaria: case management) is provided at health centres and primary hospitals, on a cost-sharing basis.
-Detection [RDT] and treatment of severe malaria (Sensitivity analysis & Preventive therapy for children; Malaria: case management) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Detection [Microscopy] and treatment of severe malaria (Sensitivity analysis & Preventive therapy for children; Malaria: case management) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-G6PD testing and radical cure treatment for vivax (Sensitivity analysis & Preventive therapy for children; Malaria: case management) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Treatment+Detection (smear + Xpert) +Drug Sensitivity analysis & ART (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Treatment+Detection (smear + Xpert) +Drug Sensitivity analysis & (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Treatment+Detection (smear + Xpert) +Drug Sensitivity analysis & (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Treatment+Detection (smear generally and culture for MDR) +Drug (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Treatment+Detection (smear generally and culture for MDR) +Drug (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Treatment+Detection (smear generally and culture for MDR) +Drug (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Treatment+Detection (smear generally and culture for MDR) +Drug (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Treatment+Detection (smear generally and culture for MDR) +Drug (HIV/AIDS, TB, and Malaria; Tuberculosis: diagnosis) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
+[Detection] and treatment of leprosy (HIV/AIDS, TB, and Malaria; Leprosy: Elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Treatment of drug resistant leprosy (HIV/AIDS, TB, and Malaria; Leprosy: Elimination) is provided at general hospitals and tertiary hospitals, free of charge.
+Chemoprophylaxis for contacts of leprosy cases (HIV/AIDS, TB, and Malaria; Leprosy: Elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Detection and management of disability due to leprosy (HIV/AIDS, TB, and Malaria; Leprosy: Elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Long Lasting Insecticide-Treated Nets (LLIN) (HIV/AIDS, TB, and Malaria; Malaria: Prevention) is provided at health posts and health centres, free of charge.
+Indoor residual spraying with propoxure (HIV/AIDS, TB, and Malaria; Malaria: Prevention) is provided at health posts, free of charge.
+Other vector control: Mosquito repellent (HIV/AIDS, TB, and Malaria; Malaria: Prevention) is provided at health posts, free of charge.
+Other vector control: window screening (HIV/AIDS, TB, and Malaria; Malaria: Prevention) is provided at health posts, free of charge.
+Other vector control: Larviciding (HIV/AIDS, TB, and Malaria; Malaria: Prevention) is provided at health posts, free of charge.
+Other vector control: drainage of breeding swampy and marshy (HIV/AIDS, TB, and Malaria; Malaria: Prevention), free of charge.
+Intermittent preventive treatments (pregnant women) (HIV/AIDS, TB, and Malaria; Malaria: Prevention) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Active surveillance of cases (HIV/AIDS, TB, and Malaria; Malaria: Prevention) is provided at health posts and health centres.
+Detection [RDT] and treatment of uncomplicated malaria (HIV/AIDS, TB, and Malaria; Malaria: case management) is provided at health posts and health centres, on a cost-sharing basis.
+Detection [Microscopy] and treatment of uncomplicated (HIV/AIDS, TB, and Malaria; Malaria: case management) is provided at health centres and primary hospitals, on a cost-sharing basis.
+Detection [RDT] and treatment of severe malaria (HIV/AIDS, TB, and Malaria; Malaria: case management) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Detection [Microscopy] and treatment of severe malaria (HIV/AIDS, TB, and Malaria; Malaria: case management) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+G6PD testing and radical cure treatment for vivax (HIV/AIDS, TB, and Malaria; Malaria: case management) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
 
 ## NTD
 
@@ -553,22 +514,19 @@ BCC for targeted areas (Promotion of use of toiles, hygiene and (NTD; NTD: Soil 
 Mass drug administration for PreSAC, SAC and women in reproductive (NTD; NTD: Soil Transmitted Helminths control), free of charge.
 Treatment of pregnant mothers (NTD; NTD: Soil Transmitted Helminths control) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
 Case management Soil Transmitted Helminths using Mebendazole and (NTD; NTD: Soil Transmitted Helminths control) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-
-## Albendazole
-
-Preventive chemotherapy via mass drug administration (Albendazole; NTD: Scabies control), free of charge.
-Case management of scabies using scabicides (Perimethrin, BBL, (Albendazole; NTD: Scabies control) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Early diagnosis and management of VL (Rapid test, DAT test, Splenic (Albendazole; NTD: Leishmaniasis control) is provided at general hospitals and tertiary hospitals, free of charge.
-Early diagnosis and management of CL (clinical examination and skin (Albendazole; NTD: Leishmaniasis control) is provided at general hospitals and tertiary hospitals, free of charge.
-Management of Guinea Worm disease (Albendazole; NTD: Guinea Worm Disease cases control) is provided at health centres, primary hospitals and general hospitals, free of charge.
-Treat unsafe water sources with ABATE (Albendazole; NTD: Guinea Worm Disease cases control), free of charge.
-Controlled immersion and bandaging for Guinea Worm Disease cases. (Albendazole; NTD: Guinea Worm Disease cases control) is provided at health posts, health centres and primary hospitals, free of charge.
-BCC for targeted areas (promotion of footwear use, hygiene) (Albendazole; NTD: Podoconiosis elimination) is provided at health posts, free of charge.
-Preventing episodes of dermato lymphangioadenitis among (Albendazole; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals and general hospitals, on a cost-sharing basis.
-Screening of patients with lower leg swelling (Albendazole; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals and general hospitals, on a cost-sharing basis.
-Lymphedema morbidity managemen (Albendazole; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Management of dermato-lymphangioadenitis with appropriate (Albendazole; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals and general hospitals, on a cost-sharing basis.
-Surgical nodulectomy for people with nodules (Albendazole; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Preventive chemotherapy via mass drug administration (NTD; NTD: Scabies control), free of charge.
+Case management of scabies using scabicides (Perimethrin, BBL, (NTD; NTD: Scabies control) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Early diagnosis and management of VL (Rapid test, DAT test, Splenic (NTD; NTD: Leishmaniasis control) is provided at general hospitals and tertiary hospitals, free of charge.
+Early diagnosis and management of CL (clinical examination and skin (NTD; NTD: Leishmaniasis control) is provided at general hospitals and tertiary hospitals, free of charge.
+Management of Guinea Worm disease (NTD; NTD: Guinea Worm Disease cases control) is provided at health centres, primary hospitals and general hospitals, free of charge.
+Treat unsafe water sources with ABATE (NTD; NTD: Guinea Worm Disease cases control), free of charge.
+Controlled immersion and bandaging for Guinea Worm Disease cases. (NTD; NTD: Guinea Worm Disease cases control) is provided at health posts, health centres and primary hospitals, free of charge.
+BCC for targeted areas (promotion of footwear use, hygiene) (NTD; NTD: Podoconiosis elimination) is provided at health posts, free of charge.
+Preventing episodes of dermato lymphangioadenitis among (NTD; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals and general hospitals, on a cost-sharing basis.
+Screening of patients with lower leg swelling (NTD; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals and general hospitals, on a cost-sharing basis.
+Lymphedema morbidity managemen (NTD; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Management of dermato-lymphangioadenitis with appropriate (NTD; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals and general hospitals, on a cost-sharing basis.
+Surgical nodulectomy for people with nodules (NTD; NTD: Podoconiosis elimination) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
 
 ## NCD
 
@@ -671,62 +629,53 @@ Follow up of AMI cases (NCD; Acute myocardial infarction (AMI)) is provided at p
 Management of acute coronary syndrome (NCD; Acute myocardial infarction (AMI)) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
 Treatment of cases with established ischemic heart disease (IHD) (NCD; Acute myocardial infarction (AMI)) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
 Prehospital and emergency care for suspected Acute Myocardial (NCD; Acute myocardial infarction (AMI)) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-
-## Infarction
-
-Treatment of new cases of MI with primary Percutaneous Coronary (Infarction; Acute myocardial infarction (AMI)) is provided at tertiary hospitals, on a cost-sharing basis.
-
-## Intervention
-
-Treatment of cases with MI with Coronary artery bypass graft (Intervention; Acute myocardial infarction (AMI)) is provided at tertiary hospitals, on a cost-sharing basis.
-Treatment of cases with MI with Percutaneous Coronary Intervention (Intervention; Acute myocardial infarction (AMI)) is provided at tertiary hospitals, on a cost-sharing basis.
-Prehospital and emergency care for suspected stroke (CVA) (Intervention; Acute myocardial infarction (AMI)) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Treatment of acute ischemic stroke with intravenous thrombolytic (Intervention; Acute myocardial infarction (AMI)) is provided at tertiary hospitals, on a cost-sharing basis.
-Treatment for those with established cerebrovascular disease and post (Intervention; Acute myocardial infarction (AMI)) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Management for acute critical limb ischemia with unfractionated (Intervention; Peripheral artery diseases) is provided at tertiary hospitals, on a cost-sharing basis.
-Treatment of acute suspected bacterial tonsilopharyngitis to prevent (Intervention; Rheumatic heart disease) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Treatment of cases with rheumatic heart disease (with benzathine (Intervention; Rheumatic heart disease) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Management of Rheumatic Heart Disease complications (Heart failure, (Intervention; Rheumatic heart disease) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Medical management of heart failure with diuretics, beta-blockers (Intervention; Heart Failure) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-
-## ACE inhibitors, and mineralocorticoid antagonists
-
-Asthma: Inhaled short acting beta agonist for intermittent asthma (ACE inhibitors, and mineralocorticoid antagonists; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Asthma: Low dose inhaled beclometasone + SABA (ACE inhibitors, and mineralocorticoid antagonists; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Asthma: High dose inhaled beclometasone + SABA (ACE inhibitors, and mineralocorticoid antagonists; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Asthma: Theophylline + High dose inhaled beclometasone + SABA (ACE inhibitors, and mineralocorticoid antagonists; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Asthma: Oral Prednisolone + Theophylline + High dose inhaled (ACE inhibitors, and mineralocorticoid antagonists; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-COPD: Smoking cessation (ACE inhibitors, and mineralocorticoid antagonists; Chronic respiratory disorders) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-COPD: Inhaled salbutamol (ACE inhibitors, and mineralocorticoid antagonists; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-COPD: Low-dose oral theophylline (ACE inhibitors, and mineralocorticoid antagonists; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-COPD: Ipratropium inhaler (ACE inhibitors, and mineralocorticoid antagonists; Chronic respiratory disorders) is provided at general hospitals and tertiary hospitals, on a cost-sharing basis.
-COPD: Exacerbation treatment with antibiotics (ACE inhibitors, and mineralocorticoid antagonists; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-COPD: Exacerbation treatment with oral prednisolone (ACE inhibitors, and mineralocorticoid antagonists; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-COPD: Exacerbation treatment with oxygen (ACE inhibitors, and mineralocorticoid antagonists; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Diagnosis, Management including rehabilitation for bronchiectasis (ACE inhibitors, and mineralocorticoid antagonists; Bronchiectasis) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Diagnosis, management and prevention of occupational lung diseases (ACE inhibitors, and mineralocorticoid antagonists; Occupational Lung Diseases) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Targeted screening for type 2 diabetes (ACE inhibitors, and mineralocorticoid antagonists; Diabetes mellitus treatment) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Healthy Life Style Counselling for management of diabetes (tobacco (ACE inhibitors, and mineralocorticoid antagonists; Diabetes mellitus treatment) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Comprehensive Management of Type 2 DM (ACE inhibitors, and mineralocorticoid antagonists; Diabetes mellitus treatment) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Diagnosis and Comprehensive Management of Type 1 DM (ACE inhibitors, and mineralocorticoid antagonists; Diabetes mellitus treatment) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Screening of people with diabetes for microvascular (ACE inhibitors, and mineralocorticoid antagonists; Diabetes mellitus treatment) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Screening of people with diabetes for macrovascular complications (ACE inhibitors, and mineralocorticoid antagonists; Diabetes mellitus treatment) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Dialysis for acute, reversible kidney injury (ACE inhibitors, and mineralocorticoid antagonists; Acute renal failure) is provided at tertiary hospitals, on a cost-sharing basis.
-Haemodialysis for chronic kidney failure (ACE inhibitors, and mineralocorticoid antagonists; Chronic Kidney Diseases) is provided at tertiary hospitals, on a cost-sharing basis.
-Peritoneal dialysis for chronic kidney failure (ACE inhibitors, and mineralocorticoid antagonists; Chronic Kidney Diseases) is provided at tertiary hospitals, on a cost-sharing basis.
-Screening for chronic kidney disease in high risk groups (ACE inhibitors, and mineralocorticoid antagonists; Chronic Kidney Diseases) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Diagnosis and treatment of CKD; treat comorbid (ACE inhibitors, and mineralocorticoid antagonists; Chronic Kidney Diseases) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Treatment of hypertension in kidney disease (ACE inhibitors, and mineralocorticoid antagonists; Chronic Kidney Diseases) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Management of Complications of CKD (ACE inhibitors, and mineralocorticoid antagonists; Chronic Kidney Diseases) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Kidney transplantation (ACE inhibitors, and mineralocorticoid antagonists; Chronic Kidney Diseases) is provided at tertiary hospitals, on a cost-sharing basis.
-Awareness creation and Screening for cataract (ACE inhibitors, and mineralocorticoid antagonists; Cataract), free of charge.
-Cataract surgery (ACE inhibitors, and mineralocorticoid antagonists; Cataract) is provided at general hospitals and tertiary hospitals, on a cost-sharing basis.
-Awareness creation of RE and Importance of eye glasses (ACE inhibitors, and mineralocorticoid antagonists; Refractive error), free of charge.
-School screening (ACE inhibitors, and mineralocorticoid antagonists; Refractive error), free of charge.
-Opportunistic screening for refractive errors in Adults in health (ACE inhibitors, and mineralocorticoid antagonists; Refractive error) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Correction of Refractive error with eye glass (ACE inhibitors, and mineralocorticoid antagonists; Refractive error) is provided at tertiary hospitals, on a cost-sharing basis.
-Awareness creation on glaucoma and screening for glaucoma for (ACE inhibitors, and mineralocorticoid antagonists; Glaucoma), free of charge.
-Medical and surgical treatment of glaucoma (ACE inhibitors, and mineralocorticoid antagonists; Glaucoma) is provided at tertiary hospitals, on a cost-sharing basis.
+Treatment of new cases of MI with primary Percutaneous Coronary (NCD; Acute myocardial infarction (AMI)) is provided at tertiary hospitals, on a cost-sharing basis.
+Treatment of cases with MI with Coronary artery bypass graft (NCD; Acute myocardial infarction (AMI)) is provided at tertiary hospitals, on a cost-sharing basis.
+Treatment of cases with MI with Percutaneous Coronary Intervention (NCD; Acute myocardial infarction (AMI)) is provided at tertiary hospitals, on a cost-sharing basis.
+Prehospital and emergency care for suspected stroke (CVA) (NCD; Acute myocardial infarction (AMI)) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Treatment of acute ischemic stroke with intravenous thrombolytic (NCD; Acute myocardial infarction (AMI)) is provided at tertiary hospitals, on a cost-sharing basis.
+Treatment for those with established cerebrovascular disease and post (NCD; Acute myocardial infarction (AMI)) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Management for acute critical limb ischemia with unfractionated (NCD; Peripheral artery diseases) is provided at tertiary hospitals, on a cost-sharing basis.
+Treatment of acute suspected bacterial tonsilopharyngitis to prevent (NCD; Rheumatic heart disease) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Treatment of cases with rheumatic heart disease (with benzathine (NCD; Rheumatic heart disease) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Management of Rheumatic Heart Disease complications (Heart failure, (NCD; Rheumatic heart disease) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Medical management of heart failure with diuretics, beta-blockers (NCD; Heart Failure) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Asthma: Inhaled short acting beta agonist for intermittent asthma (NCD; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Asthma: Low dose inhaled beclometasone + SABA (NCD; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Asthma: High dose inhaled beclometasone + SABA (NCD; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Asthma: Theophylline + High dose inhaled beclometasone + SABA (NCD; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Asthma: Oral Prednisolone + Theophylline + High dose inhaled (NCD; Asthma) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+COPD: Smoking cessation (NCD; Chronic respiratory disorders) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+COPD: Inhaled salbutamol (NCD; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+COPD: Low-dose oral theophylline (NCD; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+COPD: Ipratropium inhaler (NCD; Chronic respiratory disorders) is provided at general hospitals and tertiary hospitals, on a cost-sharing basis.
+COPD: Exacerbation treatment with antibiotics (NCD; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+COPD: Exacerbation treatment with oral prednisolone (NCD; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+COPD: Exacerbation treatment with oxygen (NCD; Chronic respiratory disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Diagnosis, Management including rehabilitation for bronchiectasis (NCD; Bronchiectasis) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Diagnosis, management and prevention of occupational lung diseases (NCD; Occupational Lung Diseases) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Targeted screening for type 2 diabetes (NCD; Diabetes mellitus treatment) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Healthy Life Style Counselling for management of diabetes (tobacco (NCD; Diabetes mellitus treatment) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Comprehensive Management of Type 2 DM (NCD; Diabetes mellitus treatment) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Diagnosis and Comprehensive Management of Type 1 DM (NCD; Diabetes mellitus treatment) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Screening of people with diabetes for microvascular (NCD; Diabetes mellitus treatment) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Screening of people with diabetes for macrovascular complications (NCD; Diabetes mellitus treatment) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Dialysis for acute, reversible kidney injury (NCD; Acute renal failure) is provided at tertiary hospitals, on a cost-sharing basis.
+Haemodialysis for chronic kidney failure (NCD; Chronic Kidney Diseases) is provided at tertiary hospitals, on a cost-sharing basis.
+Peritoneal dialysis for chronic kidney failure (NCD; Chronic Kidney Diseases) is provided at tertiary hospitals, on a cost-sharing basis.
+Screening for chronic kidney disease in high risk groups (NCD; Chronic Kidney Diseases) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Diagnosis and treatment of CKD; treat comorbid (NCD; Chronic Kidney Diseases) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Treatment of hypertension in kidney disease (NCD; Chronic Kidney Diseases) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Management of Complications of CKD (NCD; Chronic Kidney Diseases) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Kidney transplantation (NCD; Chronic Kidney Diseases) is provided at tertiary hospitals, on a cost-sharing basis.
+Awareness creation and Screening for cataract (NCD; Cataract), free of charge.
+Cataract surgery (NCD; Cataract) is provided at general hospitals and tertiary hospitals, on a cost-sharing basis.
+Awareness creation of RE and Importance of eye glasses (NCD; Refractive error), free of charge.
+School screening (NCD; Refractive error), free of charge.
+Opportunistic screening for refractive errors in Adults in health (NCD; Refractive error) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Correction of Refractive error with eye glass (NCD; Refractive error) is provided at tertiary hospitals, on a cost-sharing basis.
+Awareness creation on glaucoma and screening for glaucoma for (NCD; Glaucoma), free of charge.
+Medical and surgical treatment of glaucoma (NCD; Glaucoma) is provided at tertiary hospitals, on a cost-sharing basis.
 
 ## Mental, Neurological and substance use disorders
 
@@ -742,49 +691,46 @@ Psychosocial care for peri-natal depression (Mental, Neurological and substance 
 Diagnosis and management of psychosis with first generation and (Mental, Neurological and substance use disorders; Psychotic disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
 Basic psychosocial support and anti-psychotic medication (Mental, Neurological and substance use disorders; Psychotic disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
 CBT as adjunctive treatment for positive symptoms. Cognitive (Mental, Neurological and substance use disorders; Psychotic disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-
-## Psychoeducation reduces relapse, readmission,
-
-Basic psychosocial support and anti-psychotic medication (Psychoeducation reduces relapse, readmission,; Psychotic disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Psychosocial interventions to reducing the need (Psychoeducation reduces relapse, readmission,; Psychotic disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Intensive psychosocial support and anti-psychotic medication (Psychoeducation reduces relapse, readmission,; Psychotic disorders) is provided at tertiary hospitals, free of charge.
-Continuing care of schizophrenia (Psychoeducation reduces relapse, readmission,; Psychotic disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Management of refractory psychosis with clozapine (Psychoeducation reduces relapse, readmission,; Psychotic disorders) is provided at tertiary hospitals, free of charge.
-Basic psychosocial treatment, advice, and follow-up for bipolar (Psychoeducation reduces relapse, readmission,; Bipolar disorder) is provided at tertiary hospitals, free of charge.
-Intensive psychosocial intervention for bipolar disorder, plus mood- (Psychoeducation reduces relapse, readmission,; Bipolar disorder) is provided at tertiary hospitals, free of charge.
-Basic psychosocial treatment for anxiety disorders (mild cases) (Psychoeducation reduces relapse, readmission,; Anxiety disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Basic psychosocial treatment and anti-depressant medication for (Psychoeducation reduces relapse, readmission,; Anxiety disorders) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Intensive psychosocial treatment and anti-depressant medication for (Psychoeducation reduces relapse, readmission,; Anxiety disorders) is provided at tertiary hospitals, free of charge.
-Non-trauma focused CBT and eye movement (Psychoeducation reduces relapse, readmission,; Stress related disorders (PTSD)) is provided at tertiary hospitals, free of charge.
-Diagnosis and management of epilepsy (Psychoeducation reduces relapse, readmission,; Epilepsy) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Epilepsy: Basic psychosocial support, advice, and follow-up, plus anti- (Psychoeducation reduces relapse, readmission,; Epilepsy) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Diagnosis and management of dementia (Psychoeducation reduces relapse, readmission,; Dementia) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Opportunistic screening for detection of dementia (Psychoeducation reduces relapse, readmission,; Dementia) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Parenting programs in infancy to promote early child development (Psychoeducation reduces relapse, readmission,; Childhood and adolescent mental,), free of charge.
-Improve the quality of antenatal and perinatal care to reduce risk (Psychoeducation reduces relapse, readmission,; Childhood and adolescent mental,) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Screening for congenital hypothyroidism among infants (Psychoeducation reduces relapse, readmission,; Childhood and adolescent mental,) is provided at tertiary hospitals, free of charge.
-Family psychoeducation (Psychoeducation reduces relapse, readmission,; Developmental Disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Psychosocial interventions for treatment of behavioural disorders (Psychoeducation reduces relapse, readmission,; Behavioural Disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Diagnosis and treatment of ADHD including Methylphenidate (Psychoeducation reduces relapse, readmission,; ADHD) is provided at general hospitals and tertiary hospitals, free of charge.
-Family psychoeducation (ADHD) (Psychoeducation reduces relapse, readmission,; ADHD) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Identification of children with MNS disorders in schools (Psychoeducation reduces relapse, readmission,; Common Childhood Mental disorders), free of charge.
-Psychosocial interventions, treatment of emotional disorders (Psychoeducation reduces relapse, readmission,; Emotional Disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Antidepressants among adolescents with moderate-severe depressive (Psychoeducation reduces relapse, readmission,; Depression in Older children and adolescents) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Anxiety, post-traumatic stress disorder-Cognitive and behavioural (Psychoeducation reduces relapse, readmission,; Childhood and adolescent mental,) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Screening and brief interventions for alcohol use disorders (Psychoeducation reduces relapse, readmission,; Alcohol use disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Management of alcohol withdrawal (Psychoeducation reduces relapse, readmission,; Alcohol use disorders) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Relapse prevention medication for alcohol use/dependence (Psychoeducation reduces relapse, readmission,; Alcohol use disorders) is provided at tertiary hospitals, on a cost-sharing basis.
-Opioid substitution therapy (methadone and buprenorphine) for (Psychoeducation reduces relapse, readmission,; Opioid Use Disorder) is provided at tertiary hospitals, on a cost-sharing basis.
-Identification and assessment of new cases of drug use/dependence (Psychoeducation reduces relapse, readmission,; Others drug use disorders (illicit, cannabis,), on a cost-sharing basis.
-Brief interventions and follow-up for drug use/dependence (Psychoeducation reduces relapse, readmission,; Others drug use disorders (illicit, cannabis,) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Management of drug withdrawal (Psychoeducation reduces relapse, readmission,; Others drug use disorders (illicit, cannabis,) is provided at health centres, primary hospitals and general hospitals, on a cost-sharing basis.
-Management of tobacco (Nicotine) dependence (Psychoeducation reduces relapse, readmission,; Others drug use disorders (illicit, cannabis,), on a cost-sharing basis.
-Assess and care for person with self-harm (Psychoeducation reduces relapse, readmission,; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Basic psychosocial treatment, advice, and follow-up for self- (Psychoeducation reduces relapse, readmission,; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Safer storage of pesticides in the community and farming households (Psychoeducation reduces relapse, readmission,; Suicide and self-harm), on a cost-sharing basis.
-Emergency management of poisoning (Psychoeducation reduces relapse, readmission,; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Planned follow-up and monitoring of suicide attempters* (Psychoeducation reduces relapse, readmission,; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
-Treatment of comorbid mood and substance use disorder* (Psychoeducation reduces relapse, readmission,; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Basic psychosocial support and anti-psychotic medication (Mental, Neurological and substance use disorders; Psychotic disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Psychosocial interventions to reducing the need (Mental, Neurological and substance use disorders; Psychotic disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Intensive psychosocial support and anti-psychotic medication (Mental, Neurological and substance use disorders; Psychotic disorders) is provided at tertiary hospitals, free of charge.
+Continuing care of schizophrenia (Mental, Neurological and substance use disorders; Psychotic disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Management of refractory psychosis with clozapine (Mental, Neurological and substance use disorders; Psychotic disorders) is provided at tertiary hospitals, free of charge.
+Basic psychosocial treatment, advice, and follow-up for bipolar (Mental, Neurological and substance use disorders; Bipolar disorder) is provided at tertiary hospitals, free of charge.
+Intensive psychosocial intervention for bipolar disorder, plus mood- (Mental, Neurological and substance use disorders; Bipolar disorder) is provided at tertiary hospitals, free of charge.
+Basic psychosocial treatment for anxiety disorders (mild cases) (Mental, Neurological and substance use disorders; Anxiety disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Basic psychosocial treatment and anti-depressant medication for (Mental, Neurological and substance use disorders; Anxiety disorders) is provided at primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Intensive psychosocial treatment and anti-depressant medication for (Mental, Neurological and substance use disorders; Anxiety disorders) is provided at tertiary hospitals, free of charge.
+Non-trauma focused CBT and eye movement (Mental, Neurological and substance use disorders; Stress related disorders (PTSD)) is provided at tertiary hospitals, free of charge.
+Diagnosis and management of epilepsy (Mental, Neurological and substance use disorders; Epilepsy) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Epilepsy: Basic psychosocial support, advice, and follow-up, plus anti- (Mental, Neurological and substance use disorders; Epilepsy) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Diagnosis and management of dementia (Mental, Neurological and substance use disorders; Dementia) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Opportunistic screening for detection of dementia (Mental, Neurological and substance use disorders; Dementia) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Parenting programs in infancy to promote early child development (Mental, Neurological and substance use disorders; Childhood and adolescent mental,), free of charge.
+Improve the quality of antenatal and perinatal care to reduce risk (Mental, Neurological and substance use disorders; Childhood and adolescent mental,) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Screening for congenital hypothyroidism among infants (Mental, Neurological and substance use disorders; Childhood and adolescent mental,) is provided at tertiary hospitals, free of charge.
+Family psychoeducation (Mental, Neurological and substance use disorders; Developmental Disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Psychosocial interventions for treatment of behavioural disorders (Mental, Neurological and substance use disorders; Behavioural Disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Diagnosis and treatment of ADHD including Methylphenidate (Mental, Neurological and substance use disorders; ADHD) is provided at general hospitals and tertiary hospitals, free of charge.
+Family psychoeducation (ADHD) (Mental, Neurological and substance use disorders; ADHD) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Identification of children with MNS disorders in schools (Mental, Neurological and substance use disorders; Common Childhood Mental disorders), free of charge.
+Psychosocial interventions, treatment of emotional disorders (Mental, Neurological and substance use disorders; Emotional Disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Antidepressants among adolescents with moderate-severe depressive (Mental, Neurological and substance use disorders; Depression in Older children and adolescents) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Anxiety, post-traumatic stress disorder-Cognitive and behavioural (Mental, Neurological and substance use disorders; Childhood and adolescent mental,) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Screening and brief interventions for alcohol use disorders (Mental, Neurological and substance use disorders; Alcohol use disorders) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Management of alcohol withdrawal (Mental, Neurological and substance use disorders; Alcohol use disorders) is provided at primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Relapse prevention medication for alcohol use/dependence (Mental, Neurological and substance use disorders; Alcohol use disorders) is provided at tertiary hospitals, on a cost-sharing basis.
+Opioid substitution therapy (methadone and buprenorphine) for (Mental, Neurological and substance use disorders; Opioid Use Disorder) is provided at tertiary hospitals, on a cost-sharing basis.
+Identification and assessment of new cases of drug use/dependence (Mental, Neurological and substance use disorders; Others drug use disorders (illicit, cannabis,), on a cost-sharing basis.
+Brief interventions and follow-up for drug use/dependence (Mental, Neurological and substance use disorders; Others drug use disorders (illicit, cannabis,) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Management of drug withdrawal (Mental, Neurological and substance use disorders; Others drug use disorders (illicit, cannabis,) is provided at health centres, primary hospitals and general hospitals, on a cost-sharing basis.
+Management of tobacco (Nicotine) dependence (Mental, Neurological and substance use disorders; Others drug use disorders (illicit, cannabis,), on a cost-sharing basis.
+Assess and care for person with self-harm (Mental, Neurological and substance use disorders; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Basic psychosocial treatment, advice, and follow-up for self- (Mental, Neurological and substance use disorders; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Safer storage of pesticides in the community and farming households (Mental, Neurological and substance use disorders; Suicide and self-harm), on a cost-sharing basis.
+Emergency management of poisoning (Mental, Neurological and substance use disorders; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Planned follow-up and monitoring of suicide attempters* (Mental, Neurological and substance use disorders; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
+Treatment of comorbid mood and substance use disorder* (Mental, Neurological and substance use disorders; Suicide and self-harm) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, on a cost-sharing basis.
 
 ## Surgical, emergency, and critical care
 
@@ -1080,24 +1026,21 @@ Promote early visit of health facilities (Health Education and Promotion; HEP: I
 Promote adherence to medical recommendations (treatment and (Health Education and Promotion; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
 Promote supplementary feeding practices (Health Education and Promotion; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
 Promote visit of U5 children to facilities for GMP , deworming , Vitamin (Health Education and Promotion; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
-
-## A supplementation and screening programs
-
-Promote good feeding practice ( balanced diet, hygienic practice) (A supplementation and screening programs; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
-Conduct food demonstration for children with Severe Acute (A supplementation and screening programs; HEP: IMNCI) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Create awareness on the type of services provide at health facilities for (A supplementation and screening programs; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote child care including personal hygiene (proper baby WASH) (A supplementation and screening programs; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
-Create awareness on prevention of childhood accidents, injuries (A supplementation and screening programs; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
-Create awareness on the reduction of HTPs (A supplementation and screening programs; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
-Awareness creation on balanced diet (A supplementation and screening programs; HEP: Adolescent health and pre-conception) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote healthy and hygienic feeding practices (A supplementation and screening programs; HEP: Adolescent health and pre-conception) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote balanced diet and intake of micronutrients (A supplementation and screening programs; HEP: Pregnant and Breastfeeding women) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote use of fortified products (A supplementation and screening programs; HEP: Micronutrient supplementation and) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote adherence to medications (A supplementation and screening programs; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote healthy life style including physical exercise, feeding habits (A supplementation and screening programs; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote reduction of use of Alcohol, tobacco, sweetened beverages (A supplementation and screening programs; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
-Create awareness on impacts of saturated fat products (A supplementation and screening programs; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote the use of unsaturated fat products (A supplementation and screening programs; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote regular medical check-ups (A supplementation and screening programs; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
-Promote establishment of support groups for substance abusers, (A supplementation and screening programs; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
-Advocate for proper standards and protocols of products during (A supplementation and screening programs; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Promote good feeding practice ( balanced diet, hygienic practice) (Health Education and Promotion; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
+Conduct food demonstration for children with Severe Acute (Health Education and Promotion; HEP: IMNCI) is provided at health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Create awareness on the type of services provide at health facilities for (Health Education and Promotion; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote child care including personal hygiene (proper baby WASH) (Health Education and Promotion; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
+Create awareness on prevention of childhood accidents, injuries (Health Education and Promotion; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
+Create awareness on the reduction of HTPs (Health Education and Promotion; HEP: IMNCI) is provided at health posts, health centres and primary hospitals, free of charge.
+Awareness creation on balanced diet (Health Education and Promotion; HEP: Adolescent health and pre-conception) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote healthy and hygienic feeding practices (Health Education and Promotion; HEP: Adolescent health and pre-conception) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote balanced diet and intake of micronutrients (Health Education and Promotion; HEP: Pregnant and Breastfeeding women) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote use of fortified products (Health Education and Promotion; HEP: Micronutrient supplementation and) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote adherence to medications (Health Education and Promotion; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote healthy life style including physical exercise, feeding habits (Health Education and Promotion; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote reduction of use of Alcohol, tobacco, sweetened beverages (Health Education and Promotion; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
+Create awareness on impacts of saturated fat products (Health Education and Promotion; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote the use of unsaturated fat products (Health Education and Promotion; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote regular medical check-ups (Health Education and Promotion; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres and primary hospitals, free of charge.
+Promote establishment of support groups for substance abusers, (Health Education and Promotion; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.
+Advocate for proper standards and protocols of products during (Health Education and Promotion; HEP: all CVD, CRD, DM and RD) is provided at health posts, health centres, primary hospitals, general hospitals and tertiary hospitals, free of charge.

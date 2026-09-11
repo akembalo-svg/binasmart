@@ -60,20 +60,12 @@ function load(root) {
     groups.get(key).items.push({ name: name.trim(), sub, levels, payment: PAYMENT[pay] || '' });
   }
 
-  // The programme label on each line came from ops/health/ehsp-annex.py, whose heading detector
-  // sometimes mistook wrapped table text for a programme area — which is why "ACE inhibitors, and
-  // mineralocorticoid antagonists" and "Psychoeducation reduces relapse, readmission" appear
-  // beside RMNCH and NCD. Those are interventions, not programmes.
-  //
-  // No heuristic separates them cleanly — the real names are as varied as the false ones
-  // ("Livestock sector" and "Breastfeeding women" look exactly like sentence fragments). So the
-  // genuine programme areas are named here explicitly. It is a stopgap; the honest fix is to repair
-  // the converter's heading detection and regenerate, which would improve the corpus too.
-  const REAL = new Set(['rmnch', 'ncd', 'ntd', 'hiv/aids, tb, and malaria', 'breastfeeding women',
-    'surgical, emergency, and critical care', 'health education and promotion', 'livestock sector',
-    'multi-sectoral environmental health and hygiene', 'mental, neurological and substance use disorders']);
+  // Programme areas come from the data: every line carries its own in parentheses. The converter
+  // that produced them detects headings by POSITION in the source layout (indent 0-8; wrapped
+  // intervention text sits at 29+), so wrapped table text is no longer promoted to a programme.
+  // An allowlist lived here until 2026-09-12 and is gone: the fix belonged in the converter.
   const pages = [...groups.values()]
-    .filter(g => g.items.length >= 3 && REAL.has(g.name.toLowerCase().replace(/\s+/g, ' ').trim()))
+    .filter(g => g.items.length >= 3)
     .map(g => ({ ...g, slug: slugify(g.name), count: g.items.length }))
     .sort((a, b) => b.count - a.count);
   CACHE = { pages, source: SOURCE, levels: LEVELS, total: pages.reduce((n, p) => n + p.count, 0) };
