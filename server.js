@@ -1488,10 +1488,23 @@ fastify.get('/news', async (req, reply) => {
 });
 
 // ---- ARTICLE ----
+// Two of our own pages were competing for one search. Measured 2026-09-12 in Search Console:
+//   /fayda     1,037 words, average position 58.5   vs  /news/fayda-national-id-guide   349 words
+//   /passport    810 words, average position  7.2   vs  /news/ethiopian-epassport-guide 326 words
+// The guide is the better page in both cases and the news post is a thin restatement, so the post
+// declares the guide as its canonical. The post stays readable and linked — only the signals move,
+// accumulating on one url instead of splitting between two.
+// Add a pair here ONLY when the two pages genuinely answer the same query. Nearby-looking is not
+// enough: /news/iphone-duo-passport-foldables contains "passport" and is about foldable phones.
+const CANONICAL_TO = {
+  'fayda-national-id-guide': 'https://bina.et/fayda',
+  'ethiopian-epassport-guide': 'https://bina.et/passport',
+};
+
 fastify.get('/news/:slug', async (req, reply) => {
   const p = await prisma.newsPost.findUnique({ where: { slug: req.params.slug } });
   if (!p || !p.published) return reply.code(404).type('text/html').send(newsShell({ title: 'Not found', desc: '', canonical: 'https://bina.et/news', body: '<main><div class="empty"><div class="big">🗞️</div><h3>ጽሑፉ አልተገኘም</h3><p class="sans"><a href="/news" style="color:var(--em)">← ወደ ዜና ገጽ</a></p></div></main>' }));
-  const schema = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': p.evergreen ? 'Article' : 'NewsArticle', headline: p.title, description: p.excerpt, inLanguage: p.lang, datePublished: p.publishedAt, author: { '@type': 'Organization', name: 'Bina ዜና — BinaSmart' }, publisher: { '@type': 'Organization', name: 'BinaSmart', url: 'https://bina.et' }, mainEntityOfPage: 'https://bina.et/news/' + p.slug })}</script><meta name="robots" content="max-image-preview:large">`;
+  const schema = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': p.evergreen ? 'Article' : 'NewsArticle', headline: p.title, description: p.excerpt, inLanguage: p.lang, datePublished: p.publishedAt, author: { '@type': 'Organization', name: 'Bina ዜና — BinaSmart' }, publisher: { '@type': 'Organization', name: 'BinaSmart', url: 'https://bina.et' }, mainEntityOfPage: CANONICAL_TO[p.slug] || ('https://bina.et/news/' + p.slug) })}</script><meta name="robots" content="max-image-preview:large">`;
   const share = encodeURIComponent('https://bina.et/news/' + p.slug);
   const shareT = encodeURIComponent(p.title);
   // Related reading: same category first, then the newest of the rest, so a post is reachable from its own
@@ -1524,7 +1537,7 @@ fastify.get('/news/:slug', async (req, reply) => {
     <div class="cta-band sans"><div><h3>🏢 ህንፃ አለዎት?</h3><p>BinaSmart — ሙሉ የህንፃ አስተዳደር ሲስተም በ24 ሰዓት።</p></div><a href="/diaspora">ይጀምሩ →</a></div>
   </article>
   <div style="max-width:1080px;margin:0 auto;border-top:3px double var(--line)"><h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);padding:22px 0 0;text-transform:uppercase">ተጨማሪ ያንብቡ · Read more</h2><div class="grid">${rel}</div></div></main>`;
-  reply.type('text/html').send(newsShell({ title: p.title + ' — Bina ዜና', desc: p.excerpt, canonical: 'https://bina.et/news/' + p.slug, extraHead: schema, body, active: 'news', ogImage: ogFor(p.slug, 'https://bina.et/static/bina-news.png') }));
+  reply.type('text/html').send(newsShell({ title: p.title + ' — Bina ዜና', desc: p.excerpt, canonical: CANONICAL_TO[p.slug] || ('https://bina.et/news/' + p.slug), extraHead: schema, body, active: 'news', ogImage: ogFor(p.slug, 'https://bina.et/static/bina-news.png') }));
 });
 
 // ---- TENDERS HUB ----
