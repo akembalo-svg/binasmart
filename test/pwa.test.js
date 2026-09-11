@@ -50,5 +50,10 @@ test('the service worker never stores the 10 MB basemap archive', () => {
   assert.ok(/NO_STORE\s*=\s*\/\\.pmtiles\$\//.test(src), 'pmtiles requests bypass the worker');
   assert.ok(src.includes('if (res.status !== 200) return;'), 'partial responses are never cached');
   assert.ok(src.includes('MAX_ENTRY'), 'oversized responses are never cached');
-  assert.ok(src.includes("VERSION = 'bina-v6'"), 'version bumped so the old 10 MB entry is dropped');
+  // Not pinned to an exact version: the tile rebuild bumps this monthly by design, and a test that
+  // fails on a correct change gets ignored rather than fixed. What matters is that a version exists
+  // and is at or past v6, which is the one that stopped the 10 MB archive being cached.
+  const v = /VERSION\s*=\s*'bina-v(\d+)'/.exec(src);
+  assert.ok(v, 'the worker declares a cache version');
+  assert.ok(Number(v[1]) >= 6, 'version is at or past the bump that dropped the 10 MB entry, got v' + v[1]);
 });
