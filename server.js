@@ -207,7 +207,11 @@ fastify.get('/robots.txt', async (req, reply) => reply.sendFile('robots.txt'));
 fastify.get('/sitemap.xml', async (req, reply) => {
   const bs = await prisma.building.findMany({ select: { qrSlug: true, buildingType: true }, orderBy: { createdAt: 'asc' } });
   const posts = await prisma.newsPost.findMany({ where: { published: true }, select: { slug: true } });
-  const tnds = await prisma.tender.findMany({ where: { published: true }, select: { slug: true } });
+  // Only tenders that are still open. A sitemap is a list of pages worth crawling, and a closed
+  // tender can never satisfy the search that finds it — 101 of 244 had already expired.
+  const tnds = await prisma.tender.findMany({
+    where: { published: true, OR: [{ deadline: null }, { deadline: { gte: new Date() } }] },
+    select: { slug: true } });
   const shopUrls = (await prisma.shop.findMany({ where: { status: 'live', NOT: { slug: null } }, select: { slug: true } }).catch(() => [])).map(x => 'https://bina.et/shop/' + x.slug);
   const cshows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date() } }, select: { id: true } }).catch(() => []);
   const films = await prisma.film.findMany({ where: { status: 'public', NOT: { rights: null } }, select: { slug: true } }).catch(() => []);
@@ -1572,7 +1576,14 @@ fastify.get('/tenders', async (req, reply) => {
 fastify.get('/tenders/:slug', async (req, reply) => {
   const t = await prisma.tender.findUnique({ where: { slug: req.params.slug } });
   if (!t || !t.published) return reply.code(404).type('text/html').send(newsShell({ title: 'Not found', desc: '', canonical: 'https://bina.et/tenders', body: '<main><div class="empty"><div class="big">📋</div><h3>ጨረታው አልተገኘም</h3><p class="sans"><a href="/tenders" style="color:var(--em)">← ወደ ጨረታዎች</a></p></div></main>', active: 'tenders' }));
+  // A tender whose deadline has passed says so HERE, in the html, not only after the countdown
+  // script runs — a crawler and a slow connection both see the server's version first.
+  const tenderClosed = !!(t.deadline && new Date(t.deadline) < new Date());
+  const closedBanner = tenderClosed
+    ? `<div class="sans" style="display:flex;gap:12px;align-items:center;margin:0 0 22px;padding:14px 18px;border-radius:14px;background:#fdeaea;border:1.5px solid #f3bdbd;color:#8a1f1f"><span style="font-size:24px;line-height:1">🔒</span><span><b style="display:block;font-size:15px">ይህ ጨረታ ተዘግቷል · This tender has closed</b><span style="font-size:13px">ማብቂያው ${amDate(t.deadline)} ነበር። <a href="/tenders" style="color:#8a1f1f;font-weight:700">ክፍት ጨረታዎችን ይመልከቱ · See open tenders →</a></span></span></div>`
+    : '';
   const body = `<main><article class="art">
+    ${closedBanner}
     <span class="cat sans" style="color:var(--gold)">${escH(t.category)}</span>
     <h1>${escH(t.titleAm || t.title)}</h1>
     ${t.titleAm ? `<p class="sans" style="color:var(--mut);font-size:15px;margin:-6px 0 10px">${escH(t.title)}</p>` : ''}
@@ -1583,7 +1594,8 @@ fastify.get('/tenders/:slug', async (req, reply) => {
     ${t.sourceUrl ? `<p class="sans" style="font-size:13px;color:var(--mut)">ምንጭ · Source: <a href="${escH(t.sourceUrl)}" rel="nofollow" style="color:var(--em)">${escH(t.sourceName || t.sourceUrl)}</a></p>` : ''}
     <div class="cta-band sans"><div><h3>🔔 ተመሳሳይ ጨረታዎችን በWhatsApp ይቀበሉ</h3><p>Get tenders like this the moment they publish.</p></div><a href="https://wa.me/251911244344?text=${encodeURIComponent('ሰላም! የ' + t.category + ' ጨረታ ማሳወቂያ እፈልጋለሁ')}">Subscribe →</a></div>
   </article></main>`;
-  reply.type('text/html').send(newsShell({ title: t.title + ' — ጨረታ | Bina', desc: t.summary.slice(0, 155), canonical: 'https://bina.et/tenders/' + t.slug, body, active: 'tenders', ogImage: ogFor(t.slug, 'https://bina.et/static/bina-tenders.png') }));
+  // Say it before the click, not after. Discovering a dead deadline yourself is the unkind version.
+  reply.type('text/html').send(newsShell({ title: (tenderClosed ? 'ተዘግቷል · Closed — ' : '') + t.title + ' — ጨረታ | Bina', desc: (tenderClosed ? 'ተዘግቷል · This tender has closed. ' : '') + t.summary.slice(0, 155), canonical: 'https://bina.et/tenders/' + t.slug, body, active: 'tenders', ogImage: ogFor(t.slug, 'https://bina.et/static/bina-tenders.png') }));
 });
 
 
