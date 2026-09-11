@@ -1219,6 +1219,26 @@ async function roomAvailability(roomTypeId, totalRooms, checkIn, checkOut) {
   return totalRooms - (overlapping._sum.rooms || 0);
 }
 
+// Both rules fail quietly - a timezone is wrong for three hours a night, a disclosure is invisible
+// until it stops firing - so they live in a module with tests. See test/hotels.test.js.
+const { isDemo: hotelIsDemo, addisDay: addisToday } = require('./hotels/rules');
+// Booking is unauthenticated, costs nothing and takes rooms off the market: a PENDING booking counts
+// against availability and nothing expires it. ride/routes.js limits ride requests the same way, but
+// it is built later in this file, so the shape is repeated here rather than depending on that order.
+function hotelLimiter(windowMs, max) {
+  const m = new Map();
+  return key => {
+    const now = Date.now(); const hits = (m.get(key) || []).filter(t => now - t < windowMs);
+    if (hits.length >= max) return false;
+    hits.push(now); m.set(key, hits);
+    if (m.size > 5000) for (const [k, v] of m) { if (!v.length || now - v[v.length - 1] > windowMs) m.delete(k); }
+    return true;
+  };
+}
+const bookRL = hotelLimiter(600000, 5);
+// Behind nginx req.ip is 127.0.0.1 for everyone; X-Real-IP is set by nginx and the client cannot append to it.
+const bookIp = req => String(req.headers['x-real-ip'] || req.ip);
+
 fastify.get('/api/hotel/:slug', async (req, reply) => {
   const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug },
     include: { roomTypes: { where: { active: true } } } });
@@ -1233,17 +1253,18 @@ fastify.get('/api/hotel/:slug', async (req, reply) => {
       pricePerNight: rt.pricePerNight, capacity: rt.capacity, amenities: rt.amenities, photos: rt.photos, available });
   }
   return { hotel: { name: b.name, nameAm: b.nameAm, city: b.city, subCity: b.subCity, slug: b.qrSlug,
-    photo: b.facadePhotoUrl || null, floors: b.floors }, rooms };
+    photo: b.facadePhotoUrl || null, floors: b.floors, demo: hotelIsDemo(b) }, rooms };
 });
 
 fastify.post('/api/hotel/:slug/book', async (req, reply) => {
+  if (!bookRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const { roomTypeId, guestName, guestPhone, checkIn, checkOut, rooms } = req.body || {};
   if (!roomTypeId || !guestName || !guestPhone || !checkIn || !checkOut)
     return reply.code(400).send({ error: 'missing_fields' });
   const ci = new Date(checkIn), co = new Date(checkOut);
   const nRooms = Math.max(1, parseInt(rooms) || 1);
   if (!(co > ci)) return reply.code(400).send({ error: 'invalid_dates' });
-  if (ci < new Date(new Date().toISOString().slice(0, 10))) return reply.code(400).send({ error: 'past_date' });
+  if (ci < new Date(addisToday())) return reply.code(400).send({ error: 'past_date' });
   const rt = await prisma.roomType.findUnique({ where: { id: roomTypeId }, include: { building: { include: { owner: true } } } });
   if (!rt || rt.building.qrSlug !== req.params.slug) return reply.code(404).send({ error: 'room_not_found' });
   const available = await roomAvailability(rt.id, rt.totalRooms, ci, co);
@@ -1295,7 +1316,7 @@ fastify.get('/api/hotels', async (req, reply) => {
   return { hotels: bs.map(b => ({ slug: b.qrSlug, name: b.name, nameAm: b.nameAm, city: b.city, subCity: b.subCity,
     photo: b.facadePhotoUrl || null, rooms: b.roomTypes.length,
     fromPrice: Math.min(...b.roomTypes.map(r => r.pricePerNight)),
-    demo: /demo|sample/i.test((b.subCity || '') + ' ' + (b.name || '')) })) };
+    demo: hotelIsDemo(b) })) };
 });
 
 // ===== BINA NEWS + TENDERS (server-rendered, bina.et) =====

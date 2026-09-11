@@ -74,6 +74,10 @@ h2 small{font-size:12px;font-weight:600;color:var(--mut)}
 .tot{display:flex;justify-content:space-between;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.3);border-radius:14px;padding:12px 14px;margin-top:14px;font-weight:800}
 .tot b{color:var(--em2)}
 .note{font-size:11px;color:var(--mut);margin-top:8px;line-height:1.5}
+.demo{display:none;margin:14px 0 0;padding:13px 15px;border-radius:16px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.55);color:#7C4A03;font-size:13px;line-height:1.55;font-weight:600}
+.demo b{display:block;font-size:13.5px;font-weight:900;margin-bottom:3px}
+.demo.on{display:block}
+.conf .demo{margin:0 0 12px;text-align:left}
 .conf{text-align:center;padding:20px 0}
 .conf .big{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--em),var(--em2));display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 18px 40px -14px rgba(0,200,150,.9)}
 .conf .big svg{width:36px;height:36px}
@@ -108,6 +112,7 @@ h2 small{font-size:12px;font-weight:600;color:var(--mut)}
     <div class="w"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/></svg></i><b class="am">ካርድ አያስፈልግም</b><span>Pay at the hotel</span></div>
     <div class="w"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg></i><b class="am">ፈጣን ማረጋገጫ</b><span>Instant code · Telegram</span></div>
   </div>
+  <div id="demoNote" class="demo"></div>
   <div class="dates glass">
     <div><label>CHECK-IN · <span class="am">መግቢያ</span></label><input type="date" id="ci"></div>
     <div><label>CHECK-OUT · <span class="am">መውጫ</span></label><input type="date" id="co"></div>
@@ -121,7 +126,10 @@ h2 small{font-size:12px;font-weight:600;color:var(--mut)}
 const slug = location.pathname.split('/')[2];
 const $ = id => document.getElementById(id);
 let HOTEL = null, ROOMS = [];
-const today = new Date(); const d2s = d => d.toISOString().slice(0,10);
+// The hotel's day is the one in Addis Ababa. toISOString() is UTC, so between midnight and 3am
+// local it names yesterday — which both the default value and the min attribute would then offer.
+const d2s = d => d.toLocaleDateString('en-CA', { timeZone: 'Africa/Addis_Ababa' });
+const today = new Date();
 $('ci').value = d2s(today); $('ci').min = d2s(today);
 const tm = new Date(today); tm.setDate(tm.getDate()+1);
 $('co').value = d2s(tm); $('co').min = d2s(tm);
@@ -136,6 +144,13 @@ async function load(){
   const d = await r.json(); HOTEL = d.hotel; ROOMS = d.rooms;
   $('hname').textContent = HOTEL.name; $('hnameAm').textContent = HOTEL.nameAm || '';
   $('hloc').textContent = '📍 ' + (HOTEL.subCity ? HOTEL.subCity + ' · ' : '') + HOTEL.city;
+  // Say it in words. A location line is not a disclosure, and this one disappears the day somebody
+  // gives this hotel a real subCity.
+  if (HOTEL.demo) { $('demoNote').className = 'demo on';
+    $('demoNote').innerHTML = '<b>ማሳያ ሆቴል ነው · This hotel is a demonstration</b>'
+      + 'Bina Grand Hotel is sample data while real hotels are being onboarded. A booking here is not a real stay and no room is held for you. '
+      + 'ቢና ግራንድ ሆቴል የናሙና መረጃ ነው። እዚህ የሚያዙት ቦታ እውነተኛ አይደለም፤ ክፍል አልተያዘልዎትም።';
+  }
   document.title = HOTEL.name + ' — Book Direct | BinaSmart Hotels';
   if (HOTEL.photo && !$('hero').querySelector('img')) $('hero').insertAdjacentHTML('afterbegin', '<img src="' + esc(HOTEL.photo) + '" alt="' + esc(HOTEL.name) + '">');
   $('rooms').innerHTML = ROOMS.map(rm => {
@@ -171,6 +186,7 @@ async function submitBook(id){
   const summary = '🏨 Booking ' + d.code + '\n' + d.hotel + '\n' + d.room + ' · ' + $('ci').value + ' → ' + $('co').value + '\nTotal: ' + d.total.toLocaleString() + ' ETB\nGuest: ' + gn;
   $('sheet').innerHTML = '<div class="conf"><div class="big"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9.5 17.5 4 12"/></svg></div><h3>ተይዟል! · Booking received</h3>'
     + '<div class="code">' + esc(d.code) + '</div>'
+    + (HOTEL && HOTEL.demo ? '<div class="demo on"><b>ማሳያ · Demonstration</b>This booking is not real — no room is reserved and there is no hotel to arrive at. ይህ ማስያዣ እውነተኛ አይደለም።</div>' : '')
     + '<p>Show this code at reception.<br>' + esc(d.room) + ' · ' + nights() + ' nights · <b>' + d.total.toLocaleString() + ' ETB</b><br>Pay at the hotel — no prepayment.</p>'
     + '<a class="pay" href="/pay?amount=' + d.total + '&for=' + encodeURIComponent(d.hotel||'Hotel booking') + '&bt=hotel&bc=' + encodeURIComponent(d.code) + '">💳 አሁን በኦንላይን ይክፈሉ · Pay online</a>'
     + '<a class="wa" href="https://wa.me/?text=' + encodeURIComponent(summary) + '">💬 Save to WhatsApp</a></div>';
