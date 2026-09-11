@@ -40,4 +40,20 @@ function directive(lang) {
   return 'LANGUAGE: the user wrote in ENGLISH. Reply in English only (Amharic words allowed only for product names). Do not switch to Amharic even if the knowledge block is in Amharic.';
 }
 
-module.exports = { detect, directive, NAMES };
+// Amharic writes the same sound with several different characters: ሀ ሐ ኀ are all "ha", ሰ and ሠ are
+// both "sa", አ and ዐ both "a", ጸ and ፀ both "tsa". Writers use them interchangeably and none of them
+// is wrong. Any pattern that matches Amharic therefore has to fold them first, or it only catches
+// whichever spelling the person who wrote the pattern happened to use.
+// Measured: "ለልጄ መድኃኒት ስንት ልስጠው?" (how much medicine for my child) walked past the clinical gate
+// while "መድሃኒት" was caught. Same question, different letter.
+// The vowel order within a family is preserved - only the consonant family is folded.
+const FOLD = [[0x1210, 0x1200], [0x1280, 0x1200], [0x1220, 0x1230], [0x12D0, 0x12A0], [0x1340, 0x1338]];
+function foldEthiopic(s) {
+  return String(s || '').replace(/[ሐ-ሗሠ-ሧኀ-ኇዐ-዗ፀ-ፇ]/g, ch => {
+    const c = ch.codePointAt(0);
+    for (const [from, to] of FOLD) if (c >= from && c <= from + 7) return String.fromCodePoint(to + (c - from));
+    return ch;
+  });
+}
+
+module.exports = { detect, directive, NAMES, foldEthiopic };

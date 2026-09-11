@@ -122,3 +122,44 @@ test('bleeding that will not stop fires the emergency gate in every Oromo negati
     'dhiiga baay\'ee dhangala\'aa jira',
   ]) assert.equal(A.isEmergency(q), true, q);
 });
+
+
+// 2026-09-11. Amharic writes one sound with several characters - ሀ ሐ ኀ are all "ha", ሰ/ሠ, አ/ዐ and
+// ጸ/ፀ likewise - and no spelling is wrong. The clinical gate had been written with one of them, so
+// three everyday spellings of "medicine" walked past it. Separately the gate only knew the patient
+// asking for themselves (ልውሰድ, "should I take") and not the caregiver asking for a child (ልስጠው,
+// "should I give him") - Amharic marks the object on the verb, so they share no stem.
+// A parent asking a child's dose is where a wrong number does the most harm. Both are pinned here.
+test('the clinical gate hears every spelling of "medicine"', () => {
+  for (const q of ['ምን መድሃኒት ልውሰድ?', 'ምን መድኃኒት ልውሰድ?', 'ምን መድሀኒት ልውሰድ?'])
+    assert.ok(A.isClinical(q), 'must be caught: ' + q);
+});
+
+test('the dose gate hears a caregiver asking for a child, not only a patient asking for themselves', () => {
+  for (const q of ['ለልጄ መድኃኒት ስንት ልስጠው?', 'ለ2 ዓመት ልጄ ፓራሲታሞል ስንት ልስጠው?', 'ለሴት ልጄ ስንት ልስጣት?',
+                   'how much should I give my child?', 'hangam kennuufii qaba?'])
+    assert.ok(A.isClinical(q), 'must be caught: ' + q);
+});
+
+test('folding does not make the gate fire on navigation questions', () => {
+  for (const q of ['ሰላም', 'የጥርስ ሕክምና ክፍያ ስንት ነው?', 'ለቀጠሮ ምን ይዤ ልምጣ?', 'የቤተሰብ ምጣኔ አገልግሎት የት አገኛለሁ?'])
+    assert.ok(!A.isClinical(q), 'must NOT be caught: ' + q);
+});
+
+test('the emergency gate survives the same letter variants', () => {
+  for (const q of ['ልጄ ራሱን ሥቶ አልነቃም', 'ደም አይቆምም በጣም ይፈሣል', 'አባቴ ደረቱን ያመዋል እና እየተነፈሰ አይደለም'])
+    assert.ok(A.isEmergency(q), 'must be an emergency: ' + q);
+});
+
+test('a pattern written with any spelling still matches input written with any other', () => {
+  // Folding only the input would BREAK working patterns: several emergency patterns contain ህፃን, and
+  // folded input arrives as ህጻን, so they would match nothing. Patterns are folded at construction for
+  // that reason. This asserts both sides end up in the same space, whichever spelling either one uses.
+  const { foldEthiopic } = require('../assistant/lang');
+  assert.equal(foldEthiopic('ህፃኑ'), foldEthiopic('ህጻኑ'), 'ፃ and ጻ must fold together');
+  assert.equal(foldEthiopic('ሐኪም'), foldEthiopic('ሀኪም'), 'ሐ and ሀ must fold together');
+  assert.equal(foldEthiopic('መድኃኒት'), foldEthiopic('መድሃኒት'), 'ኃ and ሃ must fold together');
+  assert.notEqual(foldEthiopic('ሰላም'), foldEthiopic('ሶላም'), 'folding must not flatten different vowels');
+  for (const q of ['ህፃኑ አይተነፍስም', 'ህጻኑ አይተነፍስም', 'ሕጻኑ አይተነፍስም'])
+    assert.ok(A.isEmergency(q), 'must still be an emergency: ' + q);
+});

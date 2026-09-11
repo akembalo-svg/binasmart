@@ -1,4 +1,5 @@
 'use strict';
+const { foldEthiopic } = require('./lang');
 // Dr Afiya (ዶ/ር አፍያ) — BinaSmart's health guide for Ethiopia.
 //
 // What she is: a guide to the health SYSTEM. Which department treats what, what a visit costs and needs,
@@ -16,7 +17,13 @@
 // knowledge/addis-ababa.md. Never let these be generated.
 const AMBULANCE = '907', POLICE = '991', FIRE = '939';
 
-const EMERGENCY = [
+// Both sides of the comparison must be folded. foldEthiopic normalises the INPUT (ሐ→ሀ, ሠ→ሰ, ዐ→አ,
+// ፀ→ጸ); a pattern still written with one of the originals - ህፃን is the common one - could then never
+// match anything. So pattern sources are folded too, at construction, and a pattern may be written
+// with whatever spelling is natural.
+const foldRe = list => list.map(re => new RegExp(foldEthiopic(re.source), re.flags));
+
+const EMERGENCY = foldRe([
   // Amharic conjugates and negates around the stem, so match stems: ያመ- covers ያመኛል/ያመዋል/ያማል,
   // ተነፈሰ/ተንፈስ covers እየተነፈሰ አይደለም/መተንፈስ አልቻለም/አይተነፍስም.
   // cardiac / stroke
@@ -35,7 +42,7 @@ const EMERGENCY = [
   /ራሱን ስቶ|ራሷን ስታ|ራሱን ሳተ|አልነቃም|አትነቃም|መንቀጥቀጥ|ይንቀጠቀጣል|ደነዘዘ/,
   /unconscious|passed out|not waking|unresponsive|convulsion|seizure|fitting|collaps/i,
   // poisoning / burns
-  /መርዝ|ተመረዘ|ብዙ ክኒን[^።.!?]{0,14}ወሰደ|መድሃኒት[^።.!?]{0,10}በዛበት|ከባድ ቃጠሎ|ተቃጠለ/,
+  /መርዝ|ተመረዘ|ብዙ ክኒን[^።.!?]{0,14}ወሰደ|መድ[ሀሃ]ኒት[^።.!?]{0,10}በዛበት|ከባድ ቃጠሎ|ተቃጠለ/,
   /poison|overdose|swallowed.{0,18}(bleach|poison|pills)|severe burn|scalded/i,
   // obstetric
   /ምጥ[^።.!?]{0,16}(ደም|ችግር|ጀመረ)|ነፍሰ ጡር[^።.!?]{0,18}ደም|እርጉዝ[^።.!?]{0,18}ደም/,
@@ -65,9 +72,9 @@ const EMERGENCY = [
 
   /ራሴን ማጥፋት|ራሱን ሊያጠፋ|ራሷን ልታጠፋ|ራሴን ልገድል|መሞት እፈልጋለሁ/,
   /suicide|kill myself|end my life|want to die|harm myself/i,
-];
+]);
 
-function isEmergency(msg) { const m = String(msg || ''); return EMERGENCY.some(re => re.test(m)); }
+function isEmergency(msg) { const m = foldEthiopic(String(msg || '')); return EMERGENCY.some(re => re.test(m)); }
 
 // A fixed answer. No model, no retrieval, no variation.
 function emergencyReply(lang) {
@@ -92,19 +99,26 @@ function emergencyReply(lang) {
 // ---------- 2. clinical questions she must not answer ----------
 // Asking to be diagnosed, medicated, or reassured about a symptom. She redirects to a clinician and offers
 // the part she can help with: which department, what it costs, what to bring.
-const CLINICAL = [
+const CLINICAL = foldRe([
   /ምን በሽታ|በሽታዬ ምንድ|what (disease|do i have|is wrong with me)|do i have (cancer|hiv|tb|covid|diabetes)|diagnos/i,
-  /ምን መድሃኒት|የትኛው መድሃኒት|what medicine|which (medicine|drug|antibiotic)|should i take|ክኒን.{0,10}(ልውሰድ|እወስዳለሁ)|prescri/i,
-  /ስንት ልውሰድ|how (much|many).{0,20}(should i take|tablets|mg)|መጠን.{0,12}ስንት|dosage|dose/i,
+  /ምን መድ[ሀሃ]ኒት|የትኛው መድ[ሀሃ]ኒት|what medicine|which (medicine|drug|antibiotic)|should i take|ክኒን.{0,10}(ልውሰድ|እወስዳለሁ)|prescri/i,
+  // Amharic marks the object on the verb, so asking on someone else's behalf uses a different word
+  // entirely: ልስጠው / ልስጣት / ልስጣቸው (give him / her / them), never ልውሰድ (take). A parent asking a
+  // child's dose is the highest-stakes version of this question and it used to walk past the gate.
+  /ስንት[^።.!?]{0,14}(ልውሰድ|እወስዳለሁ|ልስጠው|ልስጣት|ልስጣቸው|ልጠጣ|ላጠጣው|ልውሰድለት)|how (much|many).{0,24}(should i (take|give)|tablets|mg|spoons?)|መጠን.{0,12}ስንት|dosage|dose/i,
+
   /ውጤቴን|የላብራቶሪ ውጤት|test result|lab result|x-?ray (result|show)|ውጤቱ ምን ማለት|what does (my|this) (result|scan) mean/i,
   /አደገኛ ነው|ከባድ ነው ወይ|is (it|this) serious|should i (worry|be worried)|is it dangerous|life threatening/i,
   /ማርገዝ|እርግዝና.{0,14}(አቋርጥ|ማስወረድ)|abortion|terminate.{0,12}pregnan/i,
   // Afaan Oromoo: diagnosis, medicine, dose, results, "is it serious"
   /dhukkubni koo maali|dhukkuba maalii|maal na qabe|qoricha maalii|qoricha maal fudhadh|qoricha naaf/i,
-  /hangam fudhadh|meeqa fudhadh|safartuu qorichaa|bu'aan qorannoo|firiin qorannoo maal/i,
+  /hangam fudhadh|meeqa fudhadh|hangam.{0,14}kenn|meeqa.{0,14}kenn|safartuu qorichaa|bu'aan qorannoo|firiin qorannoo maal/i,
+
   /cimaadhaa|balaa qaba|yaaddessaadha|nan du'aa/i,
-];
-function isClinical(msg) { const m = String(msg || ''); return CLINICAL.some(re => re.test(m)); }
+]);
+// Folded first: ሀ/ሐ/ኀ, ሰ/ሠ, አ/ዐ and ጸ/ፀ are the same sounds written differently, and a patient
+// uses whichever they were taught. See foldEthiopic in lang.js.
+function isClinical(msg) { const m = foldEthiopic(String(msg || '')); return CLINICAL.some(re => re.test(m)); }
 
 // ---------- 3. an output filter, because a prompt is a request and a filter is a rule ----------
 // Any dosage instruction is removed no matter how it arrived. This is the sentence that gets someone hurt.
