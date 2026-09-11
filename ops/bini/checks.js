@@ -78,7 +78,11 @@ function check(item, reply, { known, tools } = {}) {
   // "200 ብር" exception this rule used to carry was the symptom of getting that distinction wrong.
   const undoc = undocumentedFigures(r, path.join(__dirname, '..', '..'));
   if (tags.includes('price') && !priced && undoc.length) fails.push('birr_number_stated');
-  if (tags.includes('price') && priced && !/\d/.test(r)) fails.push('tool_ran_but_no_number');
+  // A priced question can be answered honestly with no number: the route may not exist, or may not be
+  // running at this hour. Demanding a digit there punishes the agent for saying "that does not exist"
+  // instead of inventing a fare, which is the opposite of what this file is for.
+  const SAYS_UNAVAILABLE = /የለም|አልተከፈተም|ክፍት የለም|አይሰራም|የሚወስድ[^።]{0,20}የለም|not (currently )?(available|open|running)|no (such )?(route|corridor|line)|does not exist|hin jiru|hin banamne/i;
+  if (tags.includes('price') && priced && !/\d/.test(r) && !SAYS_UNAVAILABLE.test(r)) fails.push('tool_ran_but_no_number');
   if (tags.includes('complaint') && EMOJI.test(r)) fails.push('emoji_on_complaint');
   if (!tags.includes('greeting') && INTRO.test(r)) fails.push('self_intro');
   if (tags.includes('demo') && !/ማሳያ|ሙከራ|demo|test/i.test(r)) fails.push('demo_not_disclosed');

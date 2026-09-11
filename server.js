@@ -650,6 +650,21 @@ async function callBini(system, messages0, maxTokens, opts){
           return await once(fmt, base, key, model, next);
         }
         text = (m && m.content) ? String(m.content).trim() : '';
+        // The model finished a tool round without writing anything. Throwing here sends the whole
+        // reply to the tool-less GLM fallback, which discards the fare quote_ride just fetched and
+        // answers the price question from memory — measured as "no fare" on 4 of 7 fare questions,
+        // and as an invented BinaPool corridor that the board does not contain.
+        // So ask once more with the tool results still in the conversation and tool calling OFF.
+        if (!text && opts && opts.rounds && !opts.answeredFromTools) {
+          opts.answeredFromTools = true;   // answer_from_tools: one attempt, never a loop
+          const finish = messages.concat([{ role: 'user', content:
+            'Write the answer now, using the tool results above. Do not call any more tools.' }]);
+          const saved = opts.tools;
+          opts.tools = null;               // no further tool calls, but the results stay in context
+          try { text = await once(fmt, base, key, model, finish); }
+          finally { opts.tools = saved; }
+          if (text) console.warn('[bini] wrote the answer from tool results after an empty round');
+        }
       }
       else text = (d && d.content && d.content[0] && d.content[0].text) ? String(d.content[0].text).trim() : '';
       if (!text) throw new Error('empty_llm_response');
@@ -787,7 +802,7 @@ fastify.post('/api/assistant', async (req, reply) => {
       return r;
     };
     // Flash sometimes answers a price or "remember me" from memory; on those intents the first round must call a tool.
-    const FORCE_TOOL_RE = /(remember|አስታውስ|አስታውሰኝ|yaadadh|ስንት ብር|ስንት ነው|ዋጋ|how much|fare|price|cost|gatii|meeqa|መቀመጫ|ጋራ ጉዞ|\bpool\b|imala waliinii|tender|ጨረታ|caalbaasii|cinema|ሲኒማ|film|ፊልም|showing|የት ደረሰ|ride status|my ride|where is (the|my) (car|driver)|radio|ራዲዮ|ራድዮ|\btv\b|ቲቪ|ቴሌቪዥን|channel|ቻናል|series|ድራማ|ተከታታይ|watch|listen|open the|play the|raadiyoo|televizhinii|ክፈት)|ምግብ ቤት|ሬስቶራንት|ካፌ|ቡና ቤት|ፋርማሲ|መድኃኒት ቤት|ሳሎን|ጂም|ክሊኒክ|የት ልብላ|የት እንብላ|restaurant|where (can i |to )?eat|pharmacy|cafe\b|coffee shop|gym\b|salon\b|recommend a place/i;
+    const FORCE_TOOL_RE = /(remember|አስታውስ|አስታውሰኝ|yaadadh|ስንት ብር|ስንት ነው|ስንት ይሆናል|ስንት ያስከፍላል|ስንት ያወጣል|ስንት ይከፈላል|ምን ያህል ነው|ምን ያህል ይሆናል|ስንት ነበር|ዋጋ|how much|fare|price|cost|gatii|meeqa|መቀመጫ|ጋራ ጉዞ|\bpool\b|imala waliinii|tender|ጨረታ|caalbaasii|cinema|ሲኒማ|film|ፊልም|showing|የት ደረሰ|ride status|my ride|where is (the|my) (car|driver)|radio|ራዲዮ|ራድዮ|\btv\b|ቲቪ|ቴሌቪዥን|channel|ቻናል|series|ድራማ|ተከታታይ|watch|listen|open the|play the|raadiyoo|televizhinii|ክፈት)|ምግብ ቤት|ሬስቶራንት|ካፌ|ቡና ቤት|ፋርማሲ|መድኃኒት ቤት|ሳሎን|ጂም|ክሊኒክ|የት ልብላ|የት እንብላ|restaurant|where (can i |to )?eat|pharmacy|cafe\b|coffee shop|gym\b|salon\b|recommend a place/i;
     const allTools = biniTools.toOpenAI();
     const forced = FORCE_TOOL_RE.test(msg);
     const rememberIntent = /(remember|አስታውስ|አስታውሰኝ|yaadadh)/i.test(msg);
@@ -800,6 +815,19 @@ fastify.post('/api/assistant', async (req, reply) => {
     if (/(radio|ራዲዮ|ራድዮ|ኤፍኤም|\bfm\b|\btv\b|ቲቪ|ቴሌቪዥን|channel|ቻናል|series|ድራማ|ተከታታይ|raadiyoo|televizhinii|diraamaa|\bwatch\b|listen)/i.test(msg)) {
       const out = await execute('watch_channels', { q: msg.slice(0, 120), kind: 'all' }).catch(() => null);
       if (out && !out.error) { opts.used = ['watch_channels']; preTool = '\n\nTOOL RESULT for watch_channels (already run for this message; answer from it, give the openUrl as the link, do not call it again):\n' + JSON.stringify(out).slice(0, 4000); if (out.count) opts.toolChoice = undefined; }
+    }
+    // Same reason again, and a worse failure: asked which BinaPool corridors exist, Bini answered from
+    // memory and INVENTED a CMC→Bole corridor that the board does not contain. The grounding guard
+    // cannot catch that — it checks figures, and a route name is not a figure. So look first.
+    if (!preTool && /(ጋራ ጉዞ|ኮሪደር|imala waliinii|pool|መቀመጫ|shared (ride|commute))/i.test(msg)) {
+      const out = await execute('pool_board', {}).catch(() => null);
+      if (out && !out.error) {
+        opts.used = ['pool_board'];
+        preTool = '\n\nTOOL RESULT for pool_board (already run for this message; answer ONLY from it, and if a'
+          + ' corridor is not listed here say it does not exist — never name a route that is absent):\n'
+          + JSON.stringify(out).slice(0, 4000);
+        opts.toolChoice = undefined;
+      }
     }
     // Same reason as the media block above: on "where can I eat" Gemini answers from its own idea of Addis
     // instead of calling the tool, which is also an overclaim because only the live shops are ours. So we
@@ -818,6 +846,17 @@ fastify.post('/api/assistant', async (req, reply) => {
     }
     const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys + preTool, [...hist, { role: 'user', content: msg }], 900, opts);
+    // tool_choice:'required' is advisory and this model ignores it often enough to matter — measured
+    // as a price question answered with no price, and as an invented BinaPool corridor. One retry,
+    // because the second attempt usually complies and a loop would be worse than a missing fare.
+    if (forced && !(opts.used || []).length) {
+      console.warn('[bini] forced intent called no tool; retrying once');
+      const again = { tools: allTools, forcedTools, execute, toolChoice: 'required' };
+      const t2 = await callBini(sys + preTool + '\n\nYou MUST call a tool before answering this'
+        + ' message. Do not answer a price, a corridor, a tender or a listing from memory.',
+        [...hist, { role: 'user', content: msg }], 900, again).catch(() => '');
+      if (t2 && (again.used || []).length) { text = t2; opts.used = again.used; }
+    }
     toolsUsed = opts.used || [];
     // Gemini sometimes writes the call as text instead of calling it: "default_api.watch_channels(q='ደራሽ', kind='series')".
     const asText = /default_api\.(\w+)\(([^)]*)\)/.exec(text || '');
