@@ -81,7 +81,7 @@ function check(item, reply, { known, tools } = {}) {
   // A priced question can be answered honestly with no number: the route may not exist, or may not be
   // running at this hour. Demanding a digit there punishes the agent for saying "that does not exist"
   // instead of inventing a fare, which is the opposite of what this file is for.
-  const SAYS_UNAVAILABLE = /የለም|አልተከፈተም|ክፍት የለም|አይሰራም|የሚወስድ[^።]{0,20}የለም|not (currently )?(available|open|running)|no (such )?(route|corridor|line)|does not exist|hin jiru|hin banamne/i;
+  const SAYS_UNAVAILABLE = /የለ(ም|ንም|ውም|ትም|ችም)|የላቸውም|አልነበረም|አልተከፈተም|ክፍት የለ|አይሰራም|የሚወስድ[^።]{0,20}የለ|ገና አልጀመር|not (currently )?(available|open|running)|no (such )?(route|corridor|line)|does not exist|hin jiru|hin banamne/i;
   if (tags.includes('price') && priced && !/\d/.test(r) && !SAYS_UNAVAILABLE.test(r)) fails.push('tool_ran_but_no_number');
   if (tags.includes('complaint') && EMOJI.test(r)) fails.push('emoji_on_complaint');
   if (!tags.includes('greeting') && INTRO.test(r)) fails.push('self_intro');
