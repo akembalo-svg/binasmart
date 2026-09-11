@@ -700,7 +700,14 @@ function biniGuards(text, msg, hist, grounding) {
   // Only a standalone opener is removed: it must end the sentence (optionally after a "(ቢኒ)" gloss).
   // Stripping a name that is the subject of a longer sentence used to leave a fragment, e.g.
   // "I'm Bini, BinaSmart's assistant." -> "BinaSmart's assistant."
-  if ((hist && hist.length) || !greeted) for (let pass = 0; pass < 2; pass++) t = t.replace(/^\s*(?:(?:ሰላም|እንኳን ደህና መጡ|ጤና ይስጥልኝ|እንደምን ነዎት|Welcome|Hi there|Hello there|Hello|Hi|Hey|Nagaa dha|Akkam)[!።.,]?\s*)?(?:እኔ\s+)?(?:ቢኒ\s+(?:ነኝ|እባላለሁ|እባላለው)|Bini ነኝ|(?:Bini|ቢኒ) here(?: I can help with that)?|I am Bini|I'm Bini|This is Bini|Ani Bini)(?:\s*[(（](?:ቢኒ|Bini)[)）])?\s*[።!.]+\s*/i, '');
+  // The opener pattern below is anchored with ^\s*, so it only fires when the name is the very
+  // first thing in the reply. Measured on 2026-09-11: on about 11% of replies the model opened with
+  // a stray "!" or an emoji, the name sat one character in, the pattern missed, and Bini
+  // re-introduced himself. Found by instrumenting this function — the gate was open every time and
+  // the pattern was right; only the position was wrong.
+  // The lookahead keeps this safe: leading punctuation is removed ONLY when the name follows it.
+  t = t.replace(/^[\s!.,\u1360-\u1368\u2018-\u201F\u2600-\u27BF\uFE0F\uD83C-\uDBFF\uDC00-\uDFFF]+(?=(?:\u12a5\u1294\s+)?(?:\u1262\u1292\s+(?:\u1290\u129d|\u12a5\u1263\u120b\u1208\u1201|\u12a5\u1263\u120b\u1208\u12cd)|Bini\b|I am Bini|I'm Bini|This is Bini|Ani Bini))/i, '');
+  if ((hist && hist.length) || !greeted) for (let pass = 0; pass < 2; pass++) t = t.replace(/^\s*(?:(?:ሰላም|እንኳን ደህና መጡ|ጤና ይስጥልኝ|እንደምን ነዎት|Welcome|Hi there|Hello there|Hello|Hi|Hey|Nagaa dha|Akkam)[!።.,፣፤]?\s*)?(?:እኔ\s+)?(?:ቢኒ\s+(?:ነኝ|እባላለሁ|እባላለው)|Bini ነኝ|(?:Bini|ቢኒ) here(?: I can help with that)?|I am Bini|I'm Bini|This is Bini|Ani Bini)(?:\s*[(（](?:ቢኒ|Bini)[)）])?\s*[።!.]+\s*/i, '');
   t = t.replace(/^[\s\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}!።]+\n+/u, ''); // an emoji-only first line left behind by the intro strip
   // The comma form ("I'm Bini, BinaSmart's assistant") is still a re-introduction, but cutting the whole
   // clause leaves a fragment. So drop the name but keep the subject, and in Amharic drop the opener whole

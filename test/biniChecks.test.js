@@ -45,3 +45,28 @@ test('vendor_named: Bini may not say who built it, but may point at ChatGPT/Gemi
   // the wanted answer
   assert.equal(check(en(), "I'm BinaSmart's assistant, built in Addis Ababa. How can I help?", { known: kn }).fails.includes('vendor_named'), false);
 });
+
+
+// 2026-09-11. Bini re-introduced himself on 11-17% of replies, and the cause was position, not
+// pattern: the opener strip is anchored with ^\s*, so it only fires when the name is the very first
+// thing. The model sometimes opened with a stray "!" or an Ethiopic comma "፣", the name sat one
+// character in, and the strip missed. Three earlier rounds of work on that regex never found it
+// because it cannot be reproduced by hand — it took instrumenting the guard in production.
+//
+// biniGuards is not exported from server.js, so these assert on the character classes themselves.
+// Narrowing either one brings the bug straight back.
+test('the opener strip tolerates punctuation before the name', () => {
+  const src = require('fs').readFileSync(require('path').join(__dirname, '..', 'server.js'), 'utf8');
+
+  // the pre-strip that eats leading punctuation when the name follows
+  assert.match(src, /\\u1360-\\u1368/,
+    'the pre-strip must cover the whole Ethiopic punctuation block, not just the full stop');
+
+  // the greeting suffix inside the main opener pattern: "ሰላም፣ ቢኒ ነኝ" must match too
+  const greet = /\)\[!።\.,፣፤\]\?/.exec(src);
+  assert.ok(greet, 'the greeting suffix class must accept the Ethiopic comma ፣ and colon ፤');
+
+  // and the pre-strip must be guarded by a lookahead, so punctuation is only removed when the name
+  // actually follows — otherwise a reply that legitimately opens "አዎ! …" gets mangled.
+  assert.match(src, /\(\?=\(\?:/, 'the pre-strip must use a lookahead for the name');
+});
