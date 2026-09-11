@@ -1547,7 +1547,19 @@ fastify.get('/news/:slug', async (req, reply) => {
 // ---- TENDERS HUB ----
 fastify.get('/tenders', async (req, reply) => {
   const cat = req.query.cat;
-  const tenders = await prisma.tender.findMany({ where: { published: true, ...(cat ? { category: cat } : {}) }, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: 200 });
+  // Measured 2026-09-12: the first TEN cards on this page had all closed, and 101 of the 200 shown
+  // had passed their deadline. There was no deadline filter, and `deadline: asc` sorts oldest first —
+  // so the tenders that closed longest ago led the page. A bidder wants what is still open, soonest
+  // closing first; the rest belongs in an archive, reachable but not in the way.
+  const showClosed = req.query.show === 'closed';
+  const now = new Date();
+  const where = { published: true, ...(cat ? { category: cat } : {}) };
+  const tenders = showClosed
+    ? await prisma.tender.findMany({ where: { ...where, deadline: { lt: now } },
+        orderBy: [{ deadline: 'desc' }], take: 200 })   // most recently closed first
+    : await prisma.tender.findMany({ where: { ...where, OR: [{ deadline: null }, { deadline: { gte: now } }] },
+        orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: 200 });
+  const closedCount = await prisma.tender.count({ where: { ...where, deadline: { lt: now } } });
   const chips = ['ሁሉም', ...TENDER_CATS].map(c =>
     `<a class="chip sans ${(!cat && c === 'ሁሉም') || cat === c ? 'on' : ''}" href="/tenders${c === 'ሁሉም' ? '' : '?cat=' + encodeURIComponent(c)}">${c}</a>`).join('');
   const rows = tenders.map(t => `<div class="t-card">
@@ -1565,7 +1577,9 @@ fastify.get('/tenders', async (req, reply) => {
   const body = `<main>
     <div class="phero" style="--pg:linear-gradient(135deg,#064e3b,#059669);--wm:'📋'"><h1>ጨረታዎች · Tenders</h1><div class="am sans">የተረጋገጡ የኢትዮጵያ ጨረታዎች — ግንባታ · አቅርቦት · አገልግሎት</div><div class="sub sans">Verified Ethiopian tenders with full details, contacts &amp; deadlines — updated daily, free.</div></div>
     <div class="chips" style="--chipon:#059669">${chips}</div>
+    ${showClosed ? `<div class="sans" style="display:flex;gap:12px;align-items:center;margin:0 0 18px;padding:13px 17px;border-radius:14px;background:#fdeaea;border:1.5px solid #f3bdbd;color:#8a1f1f"><span style="font-size:22px;line-height:1">🔒</span><span><b style="display:block;font-size:15px">የተዘጉ ጨረታዎች · Closed tenders</b><span style="font-size:13px">እነዚህ ማብቂያቸው አልፏል። <a href="/tenders" style="color:#8a1f1f;font-weight:700">ክፍት ጨረታዎች · Open tenders →</a></span></span></div>` : ''}
     ${rows || empty}
+    ${!showClosed && closedCount ? `<p class="sans" style="text-align:center;margin:26px 0 4px;font-size:13.5px"><a href="/tenders?show=closed${cat ? '&cat=' + encodeURIComponent(cat) : ''}" style="color:var(--mut)">🔒 ${closedCount} የተዘጉ ጨረታዎችን ይመልከቱ · View ${closedCount} closed tenders</a></p>` : ''}
     <div class="cta-band sans" style="background:var(--em)"><div><h3>📢 ጨረታዎን በነጻ ያውጡ · Post your tender FREE</h3><p>Organizations: we publish your tender at no cost — reach thousands of bidders.</p></div><a style="background:#fff;color:var(--em)" href="https://wa.me/251911244344?text=${encodeURIComponent('ሰላም! ጨረታ ማውጣት እፈልጋለሁ / I want to post a tender')}">WhatsApp us →</a></div>
     <div class="cta-band sans"><div><h3>📰 ዜናችንንም ያንብቡ</h3><p>Technology, construction & business — in Amharic, politics-free.</p></div><a href="/news">ወደ ዜና →</a></div>
   </main>`;
