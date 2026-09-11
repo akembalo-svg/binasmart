@@ -34,7 +34,7 @@ function world(opts) {
     },
   };
   const sent = [];
-  const now = () => 1_000_000;
+  const now = (opts && opts.now) || (() => 1_000_000);
   const holdsApi = makeHolds({ prisma, now });
   const tk = makeTickets({ prisma, holds: holdsApi, now, notify: async (t, text) => { sent.push({ t, text }); return true; }, baseUrl: 'https://bina.et' });
   return { prisma, tk, holds: holdsApi, show, sent };
@@ -126,4 +126,30 @@ test('QR is an SVG that encodes the ticket page URL', async () => {
 });
 test('makeCode never produces confusable characters', () => {
   for (let i = 0; i < 300; i++) assert.match(makeCode(), /^BINA-[A-HJ-NP-Z2-9]{6}$/);
+});
+
+// 2026-09-12. checkout() validated that the show exists, is onsale, and that the seats are held and
+// unsold — and never looked at the clock. A demo screening from 4 September was still selling on the
+// 12th. Only demo data was affected, because no real cinema has loaded a programme yet; the first one
+// will bring shows whose status nobody flips the moment they start.
+//
+// The hour of grace is the same boundary cinema/routes.js uses when it lists shows, so a late arrival
+// can still buy during the trailers and a stale link cannot.
+test('a screening that is over cannot be sold, however valid the hold', async () => {
+  // the helper's clock is ~16 minutes after the epoch, so the clock has to move for anything to be
+  // an hour in the past at all
+  const w = world({ now: () => 10_000_000, show: { startsAt: new Date(1_000_000) } });
+  await w.holds.hold(w.show, 'A1', 'me');
+  const r = await w.tk.checkout({ showId: 's1', holderKey: 'me', seats: ['A1'], ...buyer, idemKey: 'over1' });
+  assert.equal(r.ok, false);
+  assert.equal(r.error, 'show_over');
+  assert.equal(w.prisma._.tickets.length, 0, 'no ticket was created');
+  assert.equal(w.sent.length, 0, 'and nobody was told they had one');
+});
+
+test('a screening still to come sells normally', async () => {
+  const w = world();   // the default show starts after the test clock
+  await w.holds.hold(w.show, 'A1', 'me');
+  const r = await w.tk.checkout({ showId: 's1', holderKey: 'me', seats: ['A1'], ...buyer, idemKey: 'over2' });
+  assert.equal(r.ok, true, JSON.stringify(r));
 });

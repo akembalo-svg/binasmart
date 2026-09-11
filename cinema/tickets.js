@@ -31,6 +31,12 @@ function makeTickets({ prisma, holds, now, notify, baseUrl }) {
     const show = await prisma.show.findUnique({ where: { id: showId }, include: { hall: { include: { venue: true } }, event: true } });
     if (!show) return { ok: false, error: 'no_show' };
     if (show.status !== 'onsale') return { ok: false, error: 'show_closed' };
+    // ...and it must not already be over. Nothing here checked the clock, so a show left onsale
+    // after its start time kept selling — measured on 2026-09-12 with a screening from the 4th.
+    // The hour of grace is the same boundary cinema/routes.js uses when it lists shows, so a late
+    // arrival can still buy during the trailers and a stale link cannot.
+    if (show.startsAt && new Date(show.startsAt).getTime() < clock() - 3600000)
+      return { ok: false, error: 'show_over' };
     seats = [...new Set((Array.isArray(seats) ? seats : []).filter(s => isSeat(show.hall.layout, s)))];
     if (!seats.length) return { ok: false, error: 'no_seats' };
     // Who is the ticket for? Booking for someone else needs an Ethiopian number for the guest.
