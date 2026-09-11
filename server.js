@@ -1587,6 +1587,18 @@ fastify.get('/tenders', async (req, reply) => {
 });
 
 // ---- TENDER DETAIL ----
+// A <title> over about 60 characters is truncated in search results, and 209 of 244 tender titles
+// were longer than that — median 68, longest 140. Trim at a WORD boundary so the visible part is
+// still a readable phrase rather than a cut-off syllable. The h1 keeps the full title.
+function fitTitle(name, suffix, budget) {
+  const room = budget - suffix.length;
+  const n = String(name || '').trim();
+  if (n.length <= room) return n + suffix;
+  const cut = n.slice(0, room - 1);
+  const sp = cut.lastIndexOf(' ');
+  return (sp > room * 0.6 ? cut.slice(0, sp) : cut).replace(/[\s,;:\u2014-]+$/, '') + '…' + suffix;
+}
+
 fastify.get('/tenders/:slug', async (req, reply) => {
   const t = await prisma.tender.findUnique({ where: { slug: req.params.slug } });
   if (!t || !t.published) return reply.code(404).type('text/html').send(newsShell({ title: 'Not found', desc: '', canonical: 'https://bina.et/tenders', body: '<main><div class="empty"><div class="big">📋</div><h3>ጨረታው አልተገኘም</h3><p class="sans"><a href="/tenders" style="color:var(--em)">← ወደ ጨረታዎች</a></p></div></main>', active: 'tenders' }));
@@ -1604,12 +1616,18 @@ fastify.get('/tenders/:slug', async (req, reply) => {
     <div class="rule sans"><span>${escH(t.org)}</span><span>·</span><span>📍 ${escH(t.region)}</span></div>
     <div class="t-tags sans" style="margin-bottom:26px">${t.deadline ? `<span class="t-tag">🗓 Deadline: ${amDate(t.deadline)}</span>` : `<span class="t-tag">🗓 ማብቂያ፡ ሰነዱን ይመልከቱ · See document</span>`}${t.budget ? `<span class="t-tag">💰 ${escH(t.budget)}</span>` : ''}</div>
     ${t.deadline ? `<div class="dl sans" style="display:inline-block;margin-bottom:26px" data-deadline="${new Date(t.deadline).toISOString()}"><b></b><span></span></div>` : ''}
+    <h2 class="sans" style="font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin:26px 0 10px">ስለ ጨረታው · About this tender</h2>
     <div class="body-t"><p>${escH(t.summary)}</p>${t.bodyHtml || ''}</div>
+    ${t.sourceUrl ? `<h2 class="sans" style="font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin:26px 0 8px">ምንጭ · Source</h2>` : ''}
     ${t.sourceUrl ? `<p class="sans" style="font-size:13px;color:var(--mut)">ምንጭ · Source: <a href="${escH(t.sourceUrl)}" rel="nofollow" style="color:var(--em)">${escH(t.sourceName || t.sourceUrl)}</a></p>` : ''}
     <div class="cta-band sans"><div><h3>🔔 ተመሳሳይ ጨረታዎችን በWhatsApp ይቀበሉ</h3><p>Get tenders like this the moment they publish.</p></div><a href="https://wa.me/251911244344?text=${encodeURIComponent('ሰላም! የ' + t.category + ' ጨረታ ማሳወቂያ እፈልጋለሁ')}">Subscribe →</a></div>
   </article></main>`;
   // Say it before the click, not after. Discovering a dead deadline yourself is the unkind version.
-  reply.type('text/html').send(newsShell({ title: (tenderClosed ? 'ተዘግቷል · Closed — ' : '') + t.title + ' — ጨረታ | Bina', desc: (tenderClosed ? 'ተዘግቷል · This tender has closed. ' : '') + t.summary.slice(0, 155), canonical: 'https://bina.et/tenders/' + t.slug, body, active: 'tenders', ogImage: ogFor(t.slug, 'https://bina.et/static/bina-tenders.png') }));
+  // "| Bina" is dropped: Google appends the site name itself, and those were the characters being cut.
+  const closedPrefix = tenderClosed ? 'ተዘግቷል · ' : '';
+  // the budget covers the WHOLE tag, prefix included — otherwise a closed tender runs long again
+  const titleTag = closedPrefix + fitTitle(t.title, ' — ጨረታ', 60 - closedPrefix.length);
+  reply.type('text/html').send(newsShell({ title: titleTag, desc: (tenderClosed ? 'ተዘግቷል · This tender has closed. ' : '') + t.summary.slice(0, 155), canonical: 'https://bina.et/tenders/' + t.slug, body, active: 'tenders', ogImage: ogFor(t.slug, 'https://bina.et/static/bina-tenders.png') }));
 });
 
 
