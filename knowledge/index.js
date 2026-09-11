@@ -134,6 +134,20 @@ function readSources(root, only) {
         url: meta.url || null, lang: meta.lang || 'am', text: raw.slice(fm[0].length) });
     }
   }
+  if (want('health')) { // knowledge/health/*.md — curated Ethiopian health-system documents, added by hand.
+    // Deliberately NOT under knowledge/web: that directory belongs to the crawler, is gitignored, and
+    // its loader truncates every document at 20,000 characters. A statute must be indexed whole — the
+    // Constitution is 87 KB, so under the web loader four fifths of it was silently missing.
+    const ldir = path.join(root, 'knowledge', 'health');
+    let files = []; try { files = fs.readdirSync(ldir).filter(f => f.endsWith('.md')); } catch (e) { /* none yet */ }
+    for (const f of files) {
+      const raw = rd(path.join(ldir, f)); if (!raw) continue;
+      const fm = /^---\n([\s\S]*?)\n---\n/.exec(raw); if (!fm) continue;
+      const meta = {}; for (const line of fm[1].split('\n')) { const m = /^(\w+):\s*"?(.*?)"?\s*$/.exec(line); if (m) meta[m[1]] = m[2].replace(/\\"/g, '"'); }
+      docs.push({ source: 'health', slug: f.replace(/\.md$/, ''), title: meta.title || f,
+        url: meta.url || null, lang: meta.lang || 'am', text: raw.slice(fm[0].length) });
+    }
+  }
 
   if (want('web')) { // knowledge/web/<site>/<hash>.md written by knowledge/crawl.js (front matter: url, title, source_name, lang)
     const wdir = path.join(root, 'knowledge', 'web');
