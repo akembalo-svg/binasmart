@@ -84,7 +84,10 @@ function makeHandover({ sendTg, chatId, now }) {
     const who = [user && user.name, user && user.phone, userKey].filter(Boolean).join(' · ');
     const turns = (history || []).slice(-4).map(h => (h.role === 'user' ? 'U: ' : 'B: ') + String(h.content).slice(0, 160)).join('\n');
     const lines = ['🙋 Bini handover · ' + (channel || 'web') + ' · ' + (lang || '?'), who, reason ? 'Why: ' + reason : '', summary ? 'Summary: ' + summary : '', turns, 'U: ' + String(message || '').slice(0, 300), reply ? 'B: ' + String(reply || '').slice(0, 300) : '', /^tg:/.test(userKey) ? 'Reply: tg://user?id=' + userKey.slice(3) : ''].filter(Boolean);
-    try { await sendTg(chatId, lines.join('\n').slice(0, 3900)); return true; } catch (e) { return false; }
+    try { await sendTg(chatId, lines.join('\n').slice(0, 3900)); return true; }
+    // An emergency page that fails SILENTLY is worse than no page: nothing logged, no caller checks
+    // the return value, so the one path that fetches a human for a stroke could rot unnoticed.
+    catch (e) { console.warn('[handover] FAILED to page ' + chatId + ': ' + (e && e.message || e)); return false; }
   };
 }
 
