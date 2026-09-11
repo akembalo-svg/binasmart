@@ -1944,7 +1944,11 @@ fastify.get('/api/b/:slug', async (req, reply) => {
     const shop = u.tenancies[0]?.shop || null;
     return {
       id: u.id, number: u.number, floor: u.floor, areaSqm: u.areaSqm,
-      monthlyRent: u.monthlyRent, status: u.status,
+      // Rent is published only for a VACANT unit, where it advertises a price and there is no
+      // tenant to expose. It used to be returned for every unit — on JJ Darule that was 71 of 71
+      // occupied units handing out what each tenant pays, from one unauthenticated url. The page
+      // shows rent in exactly one place: the vacant unit advertises it on an "Interested" card.
+      monthlyRent: u.status === 'VACANT' ? u.monthlyRent : undefined, status: u.status,
       shop: shop ? {
         id: shop.id, name: shop.name, nameAm: shop.nameAm, icon: shop.icon,
         category: shop.category, phone: shop.phone,
