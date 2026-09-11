@@ -1503,6 +1503,12 @@ fastify.get('/news', async (req, reply) => {
 const CANONICAL_TO = {
   'fayda-national-id-guide': 'https://bina.et/fayda',
   'ethiopian-epassport-guide': 'https://bina.et/passport',
+  // Found by checking all 85 posts against the guide pages, not by noticing two by hand.
+  // Each guide wins its pair on length and structure: 649w/7h2 vs 315w/2h2, 773/9 vs 331/2,
+  // 932/8 vs 345/2. The stubs' titles all say "Full Guide", which is precisely the problem.
+  'mesob-one-stop-service-guide': 'https://bina.et/mesob',
+  'telesign-digital-signature-guide': 'https://bina.et/telesign',
+  'telebirr-mobile-money-guide': 'https://bina.et/telebirr',
 };
 
 fastify.get('/news/:slug', async (req, reply) => {
@@ -1541,7 +1547,10 @@ fastify.get('/news/:slug', async (req, reply) => {
     <div class="cta-band sans"><div><h3>🏢 ህንፃ አለዎት?</h3><p>BinaSmart — ሙሉ የህንፃ አስተዳደር ሲስተም በ24 ሰዓት።</p></div><a href="/diaspora">ይጀምሩ →</a></div>
   </article>
   <div style="max-width:1080px;margin:0 auto;border-top:3px double var(--line)"><h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);padding:22px 0 0;text-transform:uppercase">ተጨማሪ ያንብቡ · Read more</h2><div class="grid">${rel}</div></div></main>`;
-  reply.type('text/html').send(newsShell({ title: p.title + ' — Bina ዜና', desc: p.excerpt, canonical: CANONICAL_TO[p.slug] || ('https://bina.et/news/' + p.slug), extraHead: schema, body, active: 'news', ogImage: ogFor(p.slug, 'https://bina.et/static/bina-news.png') }));
+  // 77 of 85 news titles ran past the ~60 characters a search result shows, median 82. The
+  // ' — Bina ዜና' suffix is dropped: Google appends the site name itself, and those twelve
+  // characters sat at the end, exactly where the truncation lands.
+  reply.type('text/html').send(newsShell({ title: fitTitle(p.title, '', 60), desc: p.excerpt, canonical: CANONICAL_TO[p.slug] || ('https://bina.et/news/' + p.slug), extraHead: schema, body, active: 'news', ogImage: ogFor(p.slug, 'https://bina.et/static/bina-news.png') }));
 });
 
 // ---- TENDERS HUB ----
