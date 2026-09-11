@@ -132,4 +132,13 @@ function clinicalNudge(lang) {
   return '\n\nይህ እርስዎን በአካል ሊመረምር የሚችል ባለሙያ ይፈልጋል። እኔ ልረዳዎ የምችለው የትኛው ክፍል እንደሚያስፈልግና ምን ይዘው መሄድ እንዳለብዎ በመንገር ነው።';
 }
 
-module.exports = { SYSTEM, isEmergency, emergencyReply, isClinical, stripDosage, disclosure, clinicalNudge, AMBULANCE, POLICE, FIRE, DOSAGE };
+// Appended by the route when a reply repeats demo-hospital data without saying so. Deterministic for
+// the same reason the ambulance number is: a parent given a department and an opening time for a
+// hospital that does not exist is the concrete harm here, and a model in a helpful mood drops caveats.
+function demoNotice(lang) {
+  if (lang === 'om') return '\n\n\u26a0\ufe0f Yaadachiisa: hospitaalli fi kutaaleen armaan olii fakkeenya (demo) qofa — bakka dhugaa miti. Hospitaala dhugaa naannoo keessan jiru bira deemaa.';
+  if (lang === 'en') return '\n\n\u26a0\ufe0f Note: the hospital and departments above are demonstration data, not a real place. Go to a real hospital or health centre near you.';
+  return '\n\n\u26a0\ufe0f \u121b\u1233\u1230\u1262\u12eb\u1366 \u12a8\u120b\u12ed \u12eb\u1208\u12cd \u1206\u1235\u1352\u1273\u120d\u1293 \u12ad\u134d\u120e\u127d \u121b\u1233\u12eb (demo) \u1218\u1228\u1303 \u1290\u12cd \u2014 \u12a5\u12cd\u1290\u1270\u129b \u1264\u1275 \u12a0\u12ed\u12f0\u1208\u121d\u1362 \u1260\u12a0\u1245\u122b\u1262\u12ce \u12c8\u12f0\u121a\u1308\u129d \u1206\u1235\u1352\u1273\u120d \u12c8\u12ed\u121d \u12e8\u1320\u1293 \u1320\u1262\u12eb \u12ed\u1202\u12f1\u1362';
+}
+
+module.exports = { SYSTEM, demoNotice, isEmergency, emergencyReply, isClinical, stripDosage, disclosure, clinicalNudge, AMBULANCE, POLICE, FIRE, DOSAGE };

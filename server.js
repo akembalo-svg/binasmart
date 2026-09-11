@@ -966,9 +966,9 @@ fastify.post('/api/afiya', async (req, reply) => {
   try {
     const ctx = await knowledge.contextFor(msg, { lang: l }).catch(() => '');
     // The one hospital in the system is demo data; she must never present it as a real place to attend.
-    let depts = '';
+    let depts = '', demoRows = null;   // read again below, to enforce the demo disclosure
     try {
-      const rows = await prisma.department.findMany({ where: { active: true },
+      const rows = demoRows = await prisma.department.findMany({ where: { active: true },
         select: { name: true, nameAm: true, nameOm: true, floor: true, room: true, fee: true, openHours: true }, take: 20 });
       // Name the department in the language the person wrote in. The Amharic stays in the brackets
       // for an Oromo speaker on purpose: the sign above the door is in Amharic, so they need the
@@ -998,6 +998,12 @@ fastify.post('/api/afiya', async (req, reply) => {
 
     if (!text) text = afiya.clinicalNudge(l).trim();
     if (afiya.isClinical(msg) && !/ክፍል|department|kutaa/i.test(text)) text += afiya.clinicalNudge(l);
+    // If the reply repeats anything from the demo hospital it must say so. The prompt asks for
+    // this and the model complied in only 2 of 4 measured replies - not good enough when the reader
+    // is a parent deciding where to take a feverish child. Enforced here, like the ambulance number.
+    if (demoRows && demoRows.length && !/demo|fakkeenya|\u121b\u1233\u12eb|\u1219\u12a8\u122b/i.test(text)
+        && demoRows.some(d => [d.name, d.nameAm, d.nameOm, d.room].filter(Boolean).some(n => text.includes(n))))
+      text += afiya.demoNotice(l);
     text += '\n\n' + afiya.disclosure(l);
 
     biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['afiya'], miss: biniMemory.isMiss(text), ms: Date.now() - t0 });
