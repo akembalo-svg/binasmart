@@ -762,6 +762,9 @@ function biniGuards(text, msg, hist, grounding) {
 // ===== Bini: tools (hands), per-user memory, conversation log, misses, handover, languages =====
 const biniLang = require('./assistant/lang');
 const biniPolitics = require('./assistant/politics');
+// A harness sets this header. Opt-in rather than a guess at IP patterns: a pattern would rot the
+// first time a harness changed its ip, and rot invisibly.
+const isEval = req => String((req && req.headers && req.headers['x-binasmart-eval']) || '') === '1';
 const biniTools = require('./assistant/tools');
 const { dropUngrounded } = require('./assistant/grounding');
 const afiya = require('./assistant/afiya');
@@ -792,7 +795,7 @@ fastify.post('/api/assistant', async (req, reply) => {
   // Who is talking: Telegram id (stable), a browser uid (stable per device), or just the IP (no memory).
   const u = (b.user && typeof b.user === 'object') ? b.user : {};
   const channel = u.telegramId ? 'telegram' : (u.uid ? 'web' : 'api');
-  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip });
+  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip, evaluation: isEval(req) });
   const mem = biniMemory.forUser(userKey, { telegramId: u.telegramId, name: u.name });
   const lang = biniLang.detect(msg);
   // FIRST, above everything, and for the same reason it is first on the other two pages: a model that
@@ -939,7 +942,7 @@ fastify.post('/api/asmat', async (req, reply) => {
   const ip = req.headers['x-real-ip'] || req.ip;
   const u = (b.user && typeof b.user === 'object') ? b.user : {};
   const channel = u.telegramId ? 'telegram' : (u.uid ? 'web' : 'api');
-  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip });
+  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip, evaluation: isEval(req) });
   const lang = biniLang.detect(msg);
   const l = (lang === 'am' || lang === 'am-latin') ? 'am' : (lang === 'om' ? 'om' : 'en');
 
@@ -1028,7 +1031,7 @@ fastify.post('/api/afiya', async (req, reply) => {
   const ip = req.headers['x-real-ip'] || req.ip;
   const u = (b.user && typeof b.user === 'object') ? b.user : {};
   const channel = u.telegramId ? 'telegram' : (u.uid ? 'web' : 'api');
-  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip });
+  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip, evaluation: isEval(req) });
   const lang = biniLang.detect(msg);
   const l = (lang === 'am' || lang === 'am-latin') ? 'am' : (lang === 'om' ? 'om' : 'en');
 

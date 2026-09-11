@@ -28,11 +28,16 @@ function isMiss(reply, ctx) {
   return MISS_RE.test(String(reply || ''));
 }
 
-function userKey({ telegramId, uid, ip } = {}) {
-  if (telegramId) return 'tg:' + String(telegramId).replace(/\D/g, '').slice(0, 20);
-  if (uid && /^[A-Za-z0-9_-]{6,64}$/.test(String(uid))) return 'web:' + uid;
-  return 'ip:' + String(ip || '?').slice(0, 60);
+function userKey({ telegramId, uid, ip, evaluation } = {}) {
+  // An evaluation run exercises the real production path — that is the point of it — but it must not
+  // describe the product afterwards. Marked, not dropped, so a run is still readable; the prefix lets
+  // every report exclude it with one clause and needs no schema change.
+  const p = evaluation ? 'eval:' : '';
+  if (telegramId) return p + 'tg:' + String(telegramId).replace(/\D/g, '').slice(0, 20);
+  if (uid && /^[A-Za-z0-9_-]{6,64}$/.test(String(uid))) return p + 'web:' + uid;
+  return p + 'ip:' + String(ip || '?').slice(0, 60);
 }
+const REAL_USERS = { userKey: { not: { startsWith: 'eval:' } } };
 
 function makeMemory({ prisma, now }) {
   const clock = now || Date.now;
@@ -79,14 +84,14 @@ function makeMemory({ prisma, now }) {
   }
   async function misses(days = 7, take = 15) {
     const since = new Date(clock() - days * 86400000);
-    return prisma.assistantLog.findMany({ where: { miss: true, createdAt: { gte: since } }, orderBy: { createdAt: 'desc' }, take, select: { message: true, reply: true, lang: true, channel: true, createdAt: true } });
+    return prisma.assistantLog.findMany({ where: { miss: true, createdAt: { gte: since }, ...REAL_USERS }, orderBy: { createdAt: 'desc' }, take, select: { message: true, reply: true, lang: true, channel: true, createdAt: true } });
   }
   async function stats(days = 7) {
     const since = new Date(clock() - days * 86400000);
     const [total, miss, byLang] = await Promise.all([
-      prisma.assistantLog.count({ where: { createdAt: { gte: since } } }),
-      prisma.assistantLog.count({ where: { createdAt: { gte: since }, miss: true } }),
-      prisma.assistantLog.groupBy({ by: ['lang'], where: { createdAt: { gte: since } }, _count: { _all: true } }).catch(() => []),
+      prisma.assistantLog.count({ where: { createdAt: { gte: since }, ...REAL_USERS } }),
+      prisma.assistantLog.count({ where: { createdAt: { gte: since }, miss: true, ...REAL_USERS } }),
+      prisma.assistantLog.groupBy({ by: ['lang'], where: { createdAt: { gte: since }, ...REAL_USERS }, _count: { _all: true } }).catch(() => []),
     ]);
     return { total, miss, byLang: Object.fromEntries(byLang.map(b => [b.lang, b._count._all])) };
   }
@@ -135,4 +140,4 @@ function extractMemory(msg) {
   return out;
 }
 
-module.exports = { makeMemory, makeHandover, userKey, isMiss, MISS_RE, HUMAN_RE, COMPLAINT_RE, extractMemory };
+module.exports = { makeMemory, makeHandover, userKey, REAL_USERS, isMiss, MISS_RE, HUMAN_RE, COMPLAINT_RE, extractMemory };
