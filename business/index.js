@@ -102,11 +102,18 @@ module.exports = function registerBusiness(fastify, deps) {
     let html = fs.readFileSync(path.join(__dirname, '..', 'public', 'shop.html'), 'utf8');
     try {
       const s = await prisma.shop.findUnique({ where: { slug: String(req.params.slug) }, include: { tenancy: { include: { unit: { include: { building: true } } } }, products: { where: { visible: true, approved: true } } } });
+      // A shop is listed in search only if its owner has claimed it. 50 of the 72 pages were
+      // individuals' names with their mobile number in the snippet, and none of those people knew.
+      // Claiming is the consent signal; without it the page stays reachable but unlisted.
+      const shopClaimed = !!(s && (s.tgChatId || s.ownerPhone));
       if (s && s.status === 'live') {
         const b = s.tenancy && s.tenancy.unit && s.tenancy.unit.building;
         const where = b ? (b.nameAm || b.name) + (b.subCity ? ', ' + b.subCity : '') : (s.address || 'Addis Ababa');
         const title = (s.nameAm || s.name) + ' — ' + (CAT_AM[s.category] || s.category) + ' · ' + where + ' | BinaSmart';
-        const desc = (s.aboutAm || s.about || s.descriptionAm || s.description || (s.nameAm || s.name) + ' — ' + (CAT_AM[s.category] || s.category) + ' በ' + where + '። ስልክ ' + s.phone + '።').slice(0, 300);
+        // the phone goes in the snippet only for a claimed shop
+        const fallbackDesc = (s.nameAm || s.name) + ' — ' + (CAT_AM[s.category] || s.category) + ' በ' + where + '።'
+          + (shopClaimed ? ' ስልክ ' + s.phone + '።' : '');
+        const desc = (s.aboutAm || s.about || s.descriptionAm || s.description || fallbackDesc).slice(0, 300);
         const ld = { '@context': 'https://schema.org', '@type': 'LocalBusiness', '@id': base + '/shop/' + s.slug + '#business', name: s.nameAm || s.name, alternateName: s.name !== s.nameAm ? s.name : undefined,
           description: desc, telephone: s.phone, url: base + '/shop/' + s.slug, image: (s.photos || []).slice(0, 5), logo: s.logoUrl || undefined,
           address: { '@type': 'PostalAddress', streetAddress: s.address || (b ? b.name : undefined), addressLocality: 'Addis Ababa', addressRegion: b ? b.subCity : undefined, addressCountry: 'ET' },
@@ -120,7 +127,11 @@ module.exports = function registerBusiness(fastify, deps) {
           .replace(/<meta property="og:description" content="[^"]*">/, '<meta property="og:description" content="' + escAttr(desc) + '">')
           .replace('<meta property="og:url" content="https://bina.et/business">', '<meta property="og:url" content="' + base + '/shop/' + s.slug + '">');
         if ((s.photos || [])[0]) html = html.replace(/<meta property="og:image" content="[^"]*">/, '<meta property="og:image" content="' + escAttr(s.photos[0]) + '">');
-        html = html.replace('</head>', '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>\n</head>');
+        // LocalBusiness JSON-LD with a telephone is a machine-readable instruction to list this
+        // person as a business. Only for a shop whose owner asked to be listed.
+        html = shopClaimed
+          ? html.replace('</head>', '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>\n</head>')
+          : html.replace('</head>', '<meta name="robots" content="noindex,nofollow">\n</head>');
       }
     } catch (e) { console.error('[business] shop page: ' + e.message); }
     return reply.type('text/html; charset=utf-8').send(html);
