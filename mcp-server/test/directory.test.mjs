@@ -158,3 +158,57 @@ test('the hospital default date is the day in Addis Ababa, not the server day', 
   assert.equal(d.date, addis);
   assert.equal(asked, addis, 'and the booked-slots query is asked about the same day');
 });
+
+// 2026-09-12. search_places published every active shop's phone, with no check on status or on
+// whether anyone had claimed the listing. 71 of JJ Darule's tenants are named private individuals:
+//
+//   search_places({ query: 'Selamawit' })
+//   -> name 'Selamawit Kebede Adnew', phone '+2519...' in full, unit 'G-display', plus coordinates
+//
+// The website had already settled this — server.js:241 requires claimed for the sitemap, and
+// business/index.js:108 withholds the phone when `!(tgChatId || ownerPhone)`. This surface had not.
+test('a shop nobody has claimed keeps its phone number', async () => {
+  const db = fakeDb((sql) => {
+    if (/FROM "Shop" s/.test(sql)) return [
+      { name: 'Selamawit Kebede Adnew', nameAm: null, category: 'OFFICE', phone: '+251923636821',
+        status: 'live', tgChatId: null, ownerPhone: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
+        unit: 'G-display', building: 'JJ Darule Building', buildingAm: null, qrSlug: 'darulle', lat: 9.04, lng: 38.74, buildingType: 'COMMERCIAL' },
+      { name: 'Kaldi\'s Café', nameAm: null, category: 'CAFE', phone: '+251910530813',
+        status: 'live', tgChatId: '777', ownerPhone: null, isOpenNow: true, avgRating: 4.5, reviewCount: 12,
+        unit: 'G-003', building: 'JJ Darule Building', buildingAm: null, qrSlug: 'darulle', lat: 9.04, lng: 38.74, buildingType: 'COMMERCIAL' }];
+    return [];
+  });
+  const r = out(await tools(db).search_places({ query: 'a' }));
+  const [unclaimed, claimed] = ['Selamawit Kebede Adnew', 'Kaldi\'s Café'].map(n => r.results.find(x => x.name === n));
+
+  assert.equal(unclaimed.phone, undefined, 'an unclaimed listing must not publish the number');
+  assert.equal(unclaimed.name, 'Selamawit Kebede Adnew', 'but the shop is still findable');
+  assert.equal(unclaimed.unit, 'G-display');
+
+  assert.equal(claimed.phone, '+251910530813', 'a business that linked Telegram has published its own number');
+});
+
+// ownerPhone is the other half of the codebase's definition of claimed, so both must count.
+test('claiming by ownerPhone counts as well as by Telegram', async () => {
+  const db = fakeDb((sql) => /FROM "Shop" s/.test(sql)
+    ? [{ name: 'Shop B', nameAm: null, category: 'RETAIL', phone: '+251911000000', status: 'live',
+         tgChatId: null, ownerPhone: '+251911000000', isOpenNow: true, avgRating: 0, reviewCount: 0,
+         unit: '1', building: 'B', buildingAm: null, qrSlug: 'b', lat: null, lng: null, buildingType: 'COMMERCIAL' }]
+    : []);
+  const r = out(await tools(db).search_places({ query: 'b' }));
+  assert.equal(r.results[0].phone, '+251911000000');
+});
+
+// Bina Restaurant was status 'live' inside the demo hotel until 2026-09-12, so Bini and any other
+// assistant could offer it as a real place. Shop status is now the building's truth, and shows here.
+test('a demo shop is flagged to the assistant reading it', async () => {
+  const db = fakeDb((sql) => /FROM "Shop" s/.test(sql)
+    ? [{ name: 'Tomoca Coffee Corner', nameAm: null, category: 'CAFE', phone: '+251951000106', status: 'demo',
+         tgChatId: null, ownerPhone: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
+         unit: 'G-02', building: 'CBE Tower', buildingAm: null, qrSlug: 'cbe-tower', lat: null, lng: null, buildingType: 'COMMERCIAL' }]
+    : []);
+  const r = out(await tools(db).search_places({ query: 'tomoca' }));
+  assert.equal(r.results[0].demo, true);
+  assert.match(r.results[0].demo_notice, /NOT A REAL BUSINESS/);
+  assert.equal(r.results[0].phone, undefined, 'and a seeded number is never published either');
+});

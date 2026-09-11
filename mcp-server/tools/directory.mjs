@@ -31,7 +31,9 @@ const SQL = {
   buildings: `SELECT name, "nameAm", "qrSlug", city, "subCity", lat, lng, "buildingType"
               FROM "Building" b
               WHERE (name ILIKE $1 OR "nameAm" LIKE $1) ORDER BY name LIMIT $2`,
-  shops: `SELECT s.name, s."nameAm", s.category, s.phone, s."isOpenNow", s."avgRating", s."reviewCount",
+  // status, tgChatId and ownerPhone are read so the phone can be withheld from a listing nobody has
+  // claimed - the same rule server.js:241 and business/index.js:108 already apply on the website.
+  shops: `SELECT s.name, s."nameAm", s.category, s.phone, s.status, s."tgChatId", s."ownerPhone", s."isOpenNow", s."avgRating", s."reviewCount",
                  u.number AS unit, b.name AS building, b."nameAm" AS "buildingAm", b."qrSlug", b.lat, b.lng, b."buildingType"
           FROM "Shop" s
           JOIN "Tenancy" t ON t.id = s."tenancyId"
@@ -58,7 +60,7 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
 
   server.registerTool('search_places', {
     title: 'Search the BinaSmart directory',
-    description: 'Find buildings, hotels, hospitals and shops in Addis Ababa listed on BinaSmart (bina.et): cafés, restaurants, pharmacies, banks, gyms, salons, clinics, offices. Returns names (English + Amharic), building and unit, phone for shops, coordinates when known (usable as pickup/dropoff for quote_ride), and the bina.et page. Hotels and hospitals are flagged — use get_hotel_rooms / get_hospital_departments for details.',
+    description: 'Find buildings, hotels, hospitals and shops in Addis Ababa listed on BinaSmart (bina.et): cafés, restaurants, pharmacies, banks, gyms, salons, clinics, offices. Returns names (English + Amharic), building and unit, the phone only for shops that have claimed their listing, coordinates when known (usable as pickup/dropoff for quote_ride), and the bina.et page. Hotels and hospitals are flagged — use get_hotel_rooms / get_hospital_departments for details.',
     inputSchema: {
       query: z.string().min(1).max(80).describe('Name or part of a name, English or Amharic'),
       category: z.string().optional().describe('Shop category filter: ' + CATEGORIES.join(' | ')),
@@ -79,7 +81,12 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
       ...b.rows.map(r => ({ kind: 'building', name: r.name, name_am: r.nameAm || undefined, city: r.city, sub_city: r.subCity || undefined,
         demo: isDemo(r) || undefined, demo_notice: isDemo(r) ? DEMO_PLACE : undefined,
         is_hotel: r.buildingType === 'HOTEL', is_hospital: r.buildingType === 'HOSPITAL', slug: r.qrSlug, coords: coords(r), url: buildingUrl(r) })),
-      ...s.rows.map(r => ({ kind: 'shop', name: r.name, name_am: r.nameAm || undefined, category: String(r.category).toLowerCase(), phone: r.phone || undefined,
+      // A phone belongs to whoever answers it. Publishing an unclaimed tenant's mobile to every
+      // assistant on the internet is the shop-page leak again on a surface that never learned the rule:
+      // 71 of JJ Darule's tenants are named individuals, not businesses with a switchboard.
+      ...s.rows.map(r => ({ kind: 'shop', name: r.name, name_am: r.nameAm || undefined, category: String(r.category).toLowerCase(),
+        phone: (r.tgChatId || r.ownerPhone) ? (r.phone || undefined) : undefined,
+        demo: r.status === 'demo' || undefined, demo_notice: r.status === 'demo' ? DEMO_PLACE : undefined,
         open_now: r.isOpenNow, rating: r.reviewCount ? { average: Number(r.avgRating), count: r.reviewCount } : undefined,
         building: r.building, building_am: r.buildingAm || undefined, unit: r.unit, coords: coords(r),
         url: r.category === 'RESTAURANT' ? `${BASE}/restaurant/${restaurantSlug(r.name)}` : buildingUrl(r) })),
