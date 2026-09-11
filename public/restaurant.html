@@ -49,6 +49,9 @@ body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif
 .conf h3{font-size:20px}
 .conf .code{font-size:24px;font-weight:900;letter-spacing:2px;color:#7c2d12;background:#fff7ed;border:2px dashed #c2410c;border-radius:14px;padding:12px;margin:12px 0}
 .conf p{font-size:13px;color:#64748b;line-height:1.6}
+.demo{display:none;margin:12px 0 0;padding:12px 14px;border-radius:16px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.55);color:#7C4A03;font-size:12.5px;line-height:1.5;font-weight:600}
+.demo b{display:block;font-size:13px;font-weight:900;margin-bottom:2px}
+.demo.on{display:block}
 .skel{background:linear-gradient(90deg,#eee 25%,#f7f5f0 50%,#eee 75%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:18px;height:70px;margin-top:10px}
 @keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
 </style>
@@ -79,6 +82,12 @@ async function load(){
   const d = await r.json(); R = d.restaurant; MENU = d.menu;
   $('rname').textContent = R.name; $('rnameAm').textContent = R.nameAm || '';
   $('rsub').textContent = '📍 ' + R.building + ' · ' + R.unit + ' — order here, we bring it to you';
+  // The menu is real-looking, the order button works, and the building does not exist.
+  if (R.demo) { const n = document.createElement('div'); n.className = 'demo on';
+    n.innerHTML = '<b>ማሳያ ምናሌ ነው · This menu is a demonstration</b>'
+      + 'This restaurant is sample data while real partners are being onboarded. An order placed here will not reach a kitchen. '
+      + 'ይህ ምናሌ የናሙና ነው፤ የሚሰጠው ትዕዛዝ ወደ ማንም አይደርስም።';
+    $('rsub').insertAdjacentElement('afterend', n); }
   document.title = R.name + ' — Order by QR | BinaSmart';
   const cats = [...new Set(MENU.map(m => m.category))];
   $('cats').innerHTML = cats.map((c, i) => '<div class="cat' + (i === 0 ? ' on' : '') + '" onclick="setCat(this,\'' + c.replace(/'/g,"\\'") + '\')">' + c + '</div>').join('');

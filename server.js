@@ -143,6 +143,29 @@ async function authBuildingFail(req, reply, slug) {
   return true;
 }
 
+// ===== shared by the restaurant, hotel and owner routes below =====
+// Kept here rather than beside the hotel routes because the restaurant section is ~1,000 lines
+// earlier and builds its limiter at module-evaluation time, which a const declared later cannot serve.
+// Both rules fail quietly - a timezone is wrong for three hours a night, a disclosure is invisible
+// until it stops firing - so they live in a module with tests. See test/hotels.test.js.
+const { isDemo: hotelIsDemo, addisDay: addisToday } = require('./hotels/rules');
+// Booking is unauthenticated, costs nothing and takes rooms off the market: a PENDING booking counts
+// against availability and nothing expires it. ride/routes.js limits ride requests the same way, but
+// it is built later in this file, so the shape is repeated here rather than depending on that order.
+function hotelLimiter(windowMs, max) {
+  const m = new Map();
+  return key => {
+    const now = Date.now(); const hits = (m.get(key) || []).filter(t => now - t < windowMs);
+    if (hits.length >= max) return false;
+    hits.push(now); m.set(key, hits);
+    if (m.size > 5000) for (const [k, v] of m) { if (!v.length || now - v[v.length - 1] > windowMs) m.delete(k); }
+    return true;
+  };
+}
+const bookRL = hotelLimiter(600000, 5);
+// Behind nginx req.ip is 127.0.0.1 for everyone; X-Real-IP is set by nginx and the client cannot append to it.
+const bookIp = req => String(req.headers['x-real-ip'] || req.ip);
+
 // health
 fastify.get('/nav', async (req, reply) => reply.sendFile('nav.html'));
 fastify.get('/airport', async (req, reply) => reply.sendFile('airport.html')); // Bina Airport transfer landing (7 Sep 2026) -> hands off to /ride
@@ -239,14 +262,24 @@ fastify.get('/api/restaurant/:slug', async (req, reply) => {
   const shop = await prisma.shop.findFirst({
     where: { OR: [{ name: { equals: req.params.slug.replace(/-/g, ' '), mode: 'insensitive' } }], tenancy: { active: true } },
     include: { products: { where: { visible: true }, orderBy: { category: 'asc' } },
-      tenancy: { include: { unit: { include: { building: { select: { name: true, nameAm: true, qrSlug: true } } } } } } } });
-  if (!shop) return reply.code(404).send({ error: 'not_found' });
-  return { restaurant: { id: shop.id, name: shop.name, nameAm: shop.nameAm, phone: shop.phone,
+      tenancy: { include: { unit: { include: { building: { select: { name: true, nameAm: true, qrSlug: true, subCity: true } } } } } } } });
+  // A shop with no visible menu is not a restaurant, it is a tenant - and this route matches on name,
+  // so without this it answered for every one of JJ Darule's named individuals and handed out the
+  // mobile number and unit of whoever was asked for.
+  if (!shop || !shop.products.length) return reply.code(404).send({ error: 'not_found' });
+  // No phone. restaurant.html never read it, and the people behind these names did not publish it.
+  return { restaurant: { id: shop.id, name: shop.name, nameAm: shop.nameAm,
+    demo: hotelIsDemo(shop.tenancy.unit.building) || undefined,
     building: shop.tenancy.unit.building.name, buildingSlug: shop.tenancy.unit.building.qrSlug, unit: shop.tenancy.unit.number },
     menu: shop.products.map(p => ({ id: p.id, name: p.name, nameAm: p.nameAm, price: p.price, category: p.category || 'Menu' })) };
 });
 
+// An order is a message to a real business: notifyShop() fires for any shop with status 'live'.
+// Unauthenticated and unlimited, that is an open line into someone's Telegram. Same ceiling as the
+// ride and hotel paths.
+const orderRL = hotelLimiter(600000, 8);
 fastify.post('/api/restaurant/:shopId/order', async (req, reply) => {
+  if (!orderRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const { table, items, customerName, customerPhone, note } = req.body || {};
   if (!Array.isArray(items) || !items.length) return reply.code(400).send({ error: 'empty_order' });
   const shop = await prisma.shop.findUnique({ where: { id: req.params.shopId },
@@ -292,7 +325,15 @@ fastify.post('/api/owner/:slug/order/:id/status', async (req, reply) => {
   const st = (req.body && req.body.status || '').toUpperCase();
   if (!['ACCEPTED', 'IN_PROGRESS', 'DELIVERED', 'COMPLETED', 'CANCELLED', 'REJECTED'].includes(st))
     return reply.code(400).send({ error: 'bad_status' });
-  await prisma.order.update({ where: { id: req.params.id },
+  // Authenticating the building is not the same as owning the row. Every sibling route here -
+  // appointment, booking, expense, meter-reading, meter-bill, staff - looks the row up and 404s on
+  // mismatch; this one updated by id alone, so one building's key could cancel another's orders.
+  // 404 rather than 403, so a wrong id is not confirmed to exist.
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug } });
+  const o = await prisma.order.findUnique({ where: { id: req.params.id },
+    include: { shop: { select: { tenancy: { select: { unit: { select: { buildingId: true } } } } } } } });
+  if (!b || !o || o.shop.tenancy.unit.buildingId !== b.id) return reply.code(404).send({ error: 'not_found' });
+  await prisma.order.update({ where: { id: o.id },
     data: { status: st, completedAt: ['DELIVERED', 'COMPLETED'].includes(st) ? new Date() : undefined } });
   return { ok: true, status: st };
 });
@@ -1218,26 +1259,6 @@ async function roomAvailability(roomTypeId, totalRooms, checkIn, checkOut) {
     _sum: { rooms: true } });
   return totalRooms - (overlapping._sum.rooms || 0);
 }
-
-// Both rules fail quietly - a timezone is wrong for three hours a night, a disclosure is invisible
-// until it stops firing - so they live in a module with tests. See test/hotels.test.js.
-const { isDemo: hotelIsDemo, addisDay: addisToday } = require('./hotels/rules');
-// Booking is unauthenticated, costs nothing and takes rooms off the market: a PENDING booking counts
-// against availability and nothing expires it. ride/routes.js limits ride requests the same way, but
-// it is built later in this file, so the shape is repeated here rather than depending on that order.
-function hotelLimiter(windowMs, max) {
-  const m = new Map();
-  return key => {
-    const now = Date.now(); const hits = (m.get(key) || []).filter(t => now - t < windowMs);
-    if (hits.length >= max) return false;
-    hits.push(now); m.set(key, hits);
-    if (m.size > 5000) for (const [k, v] of m) { if (!v.length || now - v[v.length - 1] > windowMs) m.delete(k); }
-    return true;
-  };
-}
-const bookRL = hotelLimiter(600000, 5);
-// Behind nginx req.ip is 127.0.0.1 for everyone; X-Real-IP is set by nginx and the client cannot append to it.
-const bookIp = req => String(req.headers['x-real-ip'] || req.ip);
 
 fastify.get('/api/hotel/:slug', async (req, reply) => {
   const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug },
