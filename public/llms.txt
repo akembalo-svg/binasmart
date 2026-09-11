@@ -54,7 +54,7 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 - Payments: telebirr, CBE Birr, Chapa (test mode), cash at the counter or hotel; BinaSmart never holds a customer's money.
 - Contact: Telegram @bina_smart_bot (preferred); WhatsApp +251 911 244 344.
 - Flagship building: JJ Darule Building (ጄጄ ዳሩሌ ህንፃ), Arada, Addis Ababa — 11 floors, 71 units.
-- Source code: https://github.com/akembalo-svg/binasmart
+- Source code: proprietary, not public at this time
 
 - [Amharic AI](https://bina.et/amharic-ai): how Bini answers in Amharic from an indexed library of Ethiopian law and government-service documents, what BinaSmart owns versus licenses, and the measured retrieval accuracy
 
