@@ -1,4 +1,16 @@
 import { z } from 'zod';
+// The same rule the website uses, so the three surfaces cannot drift apart. See hotels/rules.js and
+// test/hotels.test.js in the parent app.
+import { isDemo, addisDay } from '../../hotels/rules.js';
+
+// Written to be read by a model, not a person: an agent relaying this must not turn it into a
+// recommendation. Emergency numbers as assistant/afiya.js:18 states them.
+const DEMO_PLACE = 'SAMPLE DATA, NOT A REAL BUSINESS. This listing was seeded to demonstrate BinaSmart '
+  + 'while real partners are being onboarded. Do not present it to a user as somewhere they can go, book '
+  + 'or travel to, and do not quote its prices as real. Offer bina.et or WhatsApp for a real one.';
+const DEMO_HOSPITAL = 'SAMPLE DATA, NOT A REAL HOSPITAL. This hospital does not exist: the departments, '
+  + 'doctors names, fees, opening hours and free slots below are all invented for a demonstration. Never '
+  + 'send a person here, least of all for urgent care. In Ethiopia: ambulance 907, police 991, fire 939.';
 import { toolError } from './ride.mjs';
 
 export const BASE = 'https://bina.et';
@@ -62,7 +74,10 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
       db.query(SQL.shops, [like(query), cat ? cat.toUpperCase() : null, lim]),
     ]);
     const results = [
+      // The coords below are offered to quote_ride by this tool's own description, so a demo building
+      // is one assistant away from a real driver being sent to it. Flag it here, not downstream.
       ...b.rows.map(r => ({ kind: 'building', name: r.name, name_am: r.nameAm || undefined, city: r.city, sub_city: r.subCity || undefined,
+        demo: isDemo(r) || undefined, demo_notice: isDemo(r) ? DEMO_PLACE : undefined,
         is_hotel: r.buildingType === 'HOTEL', is_hospital: r.buildingType === 'HOSPITAL', slug: r.qrSlug, coords: coords(r), url: buildingUrl(r) })),
       ...s.rows.map(r => ({ kind: 'shop', name: r.name, name_am: r.nameAm || undefined, category: String(r.category).toLowerCase(), phone: r.phone || undefined,
         open_now: r.isOpenNow, rating: r.reviewCount ? { average: Number(r.avgRating), count: r.reviewCount } : undefined,
@@ -113,7 +128,8 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
     if (!b) return toolError(`No hotel with slug "${slug}". Find it with search_places first.`);
     const { rows } = await db.query(SQL.rooms, [b.id]);
     if (!rows.length) return toolError(`"${b.name}" has no bookable rooms on BinaSmart.`);
-    return json({ hotel: { name: b.name, name_am: b.nameAm || undefined, city: b.city, sub_city: b.subCity || undefined },
+    return json({ demo: isDemo(b) || undefined, demo_notice: isDemo(b) ? DEMO_PLACE : undefined,
+      hotel: { name: b.name, name_am: b.nameAm || undefined, city: b.city, sub_city: b.subCity || undefined },
       rooms: rows.map(r => ({ name: r.name, name_am: r.nameAm || undefined, description: r.description || undefined, price_per_night_etb: r.pricePerNight, capacity: r.capacity, amenities: r.amenities || [], total_rooms: r.totalRooms })),
       book_url: `${BASE}/hotel/${slug}`, source_url: `${BASE}/hotel/${slug}` });
   })));
@@ -126,12 +142,15 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
   }, wrap('get_hospital_departments', guard(async ({ slug, date }) => {
     const b = (await db.query(SQL.building, [slug])).rows[0];
     if (!b) return toolError(`No hospital with slug "${slug}". Find it with search_places first.`);
-    const day = date || new Date().toISOString().slice(0, 10);
+    // toISOString() is UTC; the hospital keeps its appointment book in Addis Ababa at UTC+3, so for
+    // three hours every night 'today' resolved to yesterday and slots_left counted the wrong day.
+    const day = date || addisDay();
     const next = new Date(day + 'T00:00:00Z'); next.setUTCDate(next.getUTCDate() + 1);
     const [deps, booked] = await Promise.all([db.query(SQL.departments, [b.id]), db.query(SQL.booked, [b.id, day, next.toISOString().slice(0, 10)])]);
     if (!deps.rows.length) return toolError(`"${b.name}" has no departments listed on BinaSmart.`);
     const used = Object.fromEntries(booked.rows.map(r => [r.departmentId, Number(r.n)]));
-    return json({ hospital: { name: b.name, name_am: b.nameAm || undefined, city: b.city, sub_city: b.subCity || undefined }, date: day,
+    return json({ demo: isDemo(b) || undefined, demo_notice: isDemo(b) ? DEMO_HOSPITAL : undefined,
+      hospital: { name: b.name, name_am: b.nameAm || undefined, city: b.city, sub_city: b.subCity || undefined }, date: day,
       departments: deps.rows.map(d => ({ name: d.name, name_am: d.nameAm || undefined, name_om: d.nameOm || undefined, floor: d.floor, room: d.room || undefined, fee_etb: d.fee ?? undefined, doctors: d.doctors || [], hours: d.openHours || undefined, slots_left: Math.max(0, d.slotsPerDay - (used[d.id] || 0)) })),
       book_url: `${BASE}/hospital/${slug}`, source_url: `${BASE}/hospital/${slug}` });
   })));
