@@ -77,7 +77,7 @@ async function main() {
 
     if (u.shop.name === 'Tomoca Coffee Corner') {
       for (const [name, am, price] of [['Macchiato', 'ማኪያቶ', 90], ['Espresso', 'ኤስፕሬሶ', 70], ['Ethiopian Pour-over', 'የጀበና ቡና', 110]]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: true, orderCount: Math.floor(Math.random() * 50) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: true } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,

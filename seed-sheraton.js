@@ -85,7 +85,7 @@ async function main() {
         ['Club Room (per night)', 'ክለብ ክፍል', 26000],
         ['Weekend Escape (2 nights + brunch)', 'የቅዳሜ-እሁድ ጥቅል', 42000]
       ]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false, orderCount: Math.floor(Math.random() * 150) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,

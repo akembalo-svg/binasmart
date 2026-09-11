@@ -81,7 +81,7 @@ async function main() {
         ['Perfume Selection', 'ሽቶዎች', 4500],
         ['Ethiopian Honey Wine (Tej)', 'ጠጅ', 950]
       ]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false, orderCount: Math.floor(Math.random() * 80) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,

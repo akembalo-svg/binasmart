@@ -89,7 +89,7 @@ async function main() {
         ['Family Pack (4 tickets + popcorn)', 'የቤተሰብ ጥቅል', 1700],
         ['Premiere Night Seat', 'የፕሪሚየር መቀመጫ', 700]
       ]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false, orderCount: Math.floor(Math.random() * 140) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,

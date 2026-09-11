@@ -100,7 +100,7 @@ async function main() {
           ['Macchiato','ማኪያቶ',80],['Croissant','ክሮሳንት',120],['Special Tea','ልዩ ሻይ',50],['Fresh Juice','ጭማቂ',90]
         ];
         for (const [name, am, price] of prods) {
-          await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: true, orderCount: Math.floor(Math.random()*40) }});
+          await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: true }});
           prodCount++;
         }
         await prisma.offer.create({ data: {

@@ -80,7 +80,7 @@ async function main() {
         ['Kids Entry Ticket', 'የልጆች መግቢያ', 100],
         ['Foreign Visitor Ticket', 'የውጭ ጎብኚ መግቢያ', 600]
       ]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false, orderCount: Math.floor(Math.random() * 300) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,

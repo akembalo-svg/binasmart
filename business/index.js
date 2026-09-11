@@ -74,7 +74,10 @@ module.exports = function registerBusiness(fastify, deps) {
 
   const pubShop = (s, extra) => ({ id: s.id, slug: s.slug, name: s.name, nameAm: s.nameAm, category: s.category, categoryAm: CAT_AM[s.category] || null,
     description: s.description, descriptionAm: s.descriptionAm, about: s.about, aboutAm: s.aboutAm, phone: s.phone, telegram: s.telegram, socialLink: s.socialLink,
-    photos: s.photos || [], logoUrl: s.logoUrl, address: s.address, mapUrl: s.mapUrl, openingHours: s.openingHours, isOpenNow: s.isOpenNow,
+    photos: s.photos || [], logoUrl: s.logoUrl, address: s.address, mapUrl: s.mapUrl, openingHours: s.openingHours,
+    // Same rule as the phone above: isOpenNow defaults to true for every shop and nothing computes it,
+    // so an unclaimed listing is not in a position to tell anyone it is open.
+    isOpenNow: (s.tgChatId || s.ownerPhone) ? s.isOpenNow : undefined,
     avgRating: s.avgRating, reviewCount: s.reviewCount, status: s.status, ...(extra || {}) });
   const pubProduct = p => ({ id: p.id, name: p.name, nameAm: p.nameAm, description: p.description, price: p.price, category: p.category, photoUrl: p.photoUrl, deliverable: p.deliverable, visible: p.visible, orderCount: p.orderCount });
   const pubOffer = o => ({ id: o.id, title: o.title, titleAm: o.titleAm, description: o.description, startsAt: o.startsAt, endsAt: o.endsAt, active: o.active });

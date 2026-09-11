@@ -84,7 +84,7 @@ async function main() {
         ['Business Class Room (per night)', 'የቢዝነስ ክላስ ክፍል', 17500],
         ['Conference Delegate Package (room+meals)', 'የስብሰባ ተሳታፊ ጥቅል', 21000]
       ]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false, orderCount: Math.floor(Math.random() * 160) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,

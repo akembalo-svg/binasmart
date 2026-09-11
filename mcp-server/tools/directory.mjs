@@ -87,7 +87,11 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
       ...s.rows.map(r => ({ kind: 'shop', name: r.name, name_am: r.nameAm || undefined, category: String(r.category).toLowerCase(),
         phone: (r.tgChatId || r.ownerPhone) ? (r.phone || undefined) : undefined,
         demo: r.status === 'demo' || undefined, demo_notice: r.status === 'demo' ? DEMO_PLACE : undefined,
-        open_now: r.isOpenNow, rating: r.reviewCount ? { average: Number(r.avgRating), count: r.reviewCount } : undefined,
+        // "open now" is a claim about this minute. isOpenNow is Boolean @default(true), nothing
+        // computes it from a schedule, and no shop has openingHours set - so it is only worth
+        // reporting where a person could have set it, which is a claimed listing.
+        open_now: (r.tgChatId || r.ownerPhone) ? r.isOpenNow : undefined,
+        rating: r.reviewCount ? { average: Number(r.avgRating), count: r.reviewCount } : undefined,
         building: r.building, building_am: r.buildingAm || undefined, unit: r.unit, coords: coords(r),
         url: r.category === 'RESTAURANT' ? `${BASE}/restaurant/${restaurantSlug(r.name)}` : buildingUrl(r) })),
     ];

@@ -83,7 +83,7 @@ async function main() {
         ['Popcorn + Drink Combo', 'ፖፕኮርን + መጠጥ', 250],
         ['VIP Recliner Seat', 'ቪአይፒ መቀመጫ', 600]
       ]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false, orderCount: Math.floor(Math.random() * 150) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,

@@ -212,3 +212,32 @@ test('a demo shop is flagged to the assistant reading it', async () => {
   assert.match(r.results[0].demo_notice, /NOT A REAL BUSINESS/);
   assert.equal(r.results[0].phone, undefined, 'and a seeded number is never published either');
 });
+
+// 2026-09-12. Shop.isOpenNow is `Boolean @default(true)`, nothing computes it from a schedule, and
+// 0 of 416 shops have openingHours set — so every "open now" in this directory was the schema default
+// speaking. business/index.js already has the honest version, openNow(hours, clock), which returns
+// null when there are no hours; this field was the one sitting next to it saying true regardless.
+test('"open now" is only reported for a listing someone has claimed', async () => {
+  const row = (name, extra) => ({ name, nameAm: null, category: 'CAFE', phone: '+251911000000',
+    status: 'live', tgChatId: null, ownerPhone: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
+    unit: '1', building: 'B', buildingAm: null, qrSlug: 'b', lat: null, lng: null, buildingType: 'COMMERCIAL', ...extra });
+  const db = fakeDb((sql) => /FROM "Shop" s/.test(sql)
+    ? [row('Unclaimed'), row('Claimed by Telegram', { tgChatId: '777' }), row('Claimed by phone', { ownerPhone: '+251911000000' })]
+    : []);
+  const r = out(await tools(db).search_places({ query: 'a' }));
+  const by = n => r.results.find(x => x.name === n);
+
+  assert.equal(by('Unclaimed').open_now, undefined, 'nobody said this shop is open');
+  assert.equal(by('Claimed by Telegram').open_now, true);
+  assert.equal(by('Claimed by phone').open_now, true);
+});
+
+test('a claimed shop that says it is closed is reported closed, not hidden', async () => {
+  const db = fakeDb((sql) => /FROM "Shop" s/.test(sql)
+    ? [{ name: 'Shut', nameAm: null, category: 'CAFE', phone: '+251911000000', status: 'live',
+         tgChatId: '777', ownerPhone: null, isOpenNow: false, avgRating: 0, reviewCount: 0,
+         unit: '1', building: 'B', buildingAm: null, qrSlug: 'b', lat: null, lng: null, buildingType: 'COMMERCIAL' }]
+    : []);
+  const r = out(await tools(db).search_places({ query: 'shut' }));
+  assert.equal(r.results[0].open_now, false, 'false is an answer; undefined is the absence of one');
+});

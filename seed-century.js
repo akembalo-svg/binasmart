@@ -87,7 +87,7 @@ async function main() {
         ['Couple Seat + Combo', 'የጥንድ መቀመጫ + ኮምቦ', 1100],
         ['Popcorn Large', 'ትልቅ ፖፕኮርን', 200]
       ]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false, orderCount: Math.floor(Math.random() * 120) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,

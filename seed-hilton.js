@@ -85,7 +85,7 @@ async function main() {
         ['Executive Room (per night)', 'ኤግዘክዩቲቭ ክፍል', 19500],
         ['Diplomat Long-stay (monthly)', 'የዲፕሎማት የወር ቆይታ', 320000]
       ]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false, orderCount: Math.floor(Math.random() * 180) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,

@@ -87,7 +87,7 @@ async function main() {
         ['Executive Room (per night)', 'ኤግዘክዩቲቭ ክፍል', 14500],
         ['Airport Layover Day-room', 'የትራንዚት የቀን ክፍል', 5500]
       ]) {
-        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false, orderCount: Math.floor(Math.random() * 200) } });
+        await prisma.product.create({ data: { shopId: shop.id, name, nameAm: am, price, deliverable: false } });
       }
       await prisma.offer.create({ data: {
         shopId: shop.id,
