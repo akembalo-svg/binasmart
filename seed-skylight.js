@@ -73,8 +73,10 @@ async function main() {
     const shop = await prisma.shop.create({ data: {
       tenancyId: tenancy.id, name: u.shop.name, nameAm: u.shop.am,
       category: u.shop.cat, phone: tUser.phone, icon: u.shop.icon,
-      avgRating: Math.round((4.4 + Math.random() * 0.5) * 10) / 10,
-      reviewCount: 100 + Math.floor(Math.random() * 500),
+      // A rating nobody gave is invented social proof, and these listings carry
+      // real companies' names. The Review table is the only thing allowed to fill these.
+      avgRating: 0,
+      reviewCount: 0,
       isOpenNow: true
     }});
     shopCount++;
