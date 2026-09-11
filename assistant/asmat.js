@@ -157,6 +157,22 @@ function caseNudge(lang) {
 // Appended to every assessment, deterministically, so it cannot be lost to a model in an
 // encouraging mood. The limitation-period line is the important one: the realistic harm from a
 // discouraging assessment is not that someone feels bad, it is that they wait, and the period runs.
+// The label an assessment must carry, and the test for it. Exported so the route and the evaluation
+// share one definition - the harness used to keep its own copy, which is how a checker and the thing
+// it checks drift apart.
+// A heading is asked for rather than a quality: a model complies with "put this line in" far more
+// reliably than with "be balanced", and a heading is something code can actually verify.
+function weaknessLabel(lang) {
+  if (lang === 'om') return "Wanti si mormuu danda'u:";
+  if (lang === 'en') return 'What could go against you:';
+  return 'ሊከብድ የሚችለው፦';
+}
+function namesWeakness(text) {
+  const t = String(text || '');
+  return /ሊከብድ የሚችለው|What could go against you|Wanti si mormuu danda'u/i.test(t)
+    || /በተቃራኒው|ሊቀርብ የሚችለው|የሚያዳክመው|against (you|them)|the other side (would|will|may) argue|weak(ness)? point|ሊከራከር/i.test(t);
+}
+
 function assessmentCaution(lang) {
   if (lang === 'om') return '\n\n⚖️ Kun tilmaama malee raagaa miti. Abukaatoon galmee kee dubbisu bu\'aa adda ta\'e arguu danda\'a. Yeroon himannaa banuu daangaa qaba — utuu hin murteessin dursii mirkaneeffadhu.';
   if (lang === 'en') return '\n\n⚖️ This is a reading, not a prediction. A lawyer who reads your file may see it differently. Claims also have time limits — check yours before you decide anything, not after.';
@@ -164,4 +180,4 @@ function assessmentCaution(lang) {
 }
 
 module.exports = { SYSTEM, isUrgent, urgentReply, isCaseAdvice, isDraftRequest, draftKind,
-  stripVerdict, disclosure, caseNudge, assessmentCaution, POLICE, VERDICT };
+  stripVerdict, disclosure, caseNudge, assessmentCaution, namesWeakness, weaknessLabel, POLICE, VERDICT };

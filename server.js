@@ -905,9 +905,25 @@ fastify.post('/api/asmat', async (req, reply) => {
       + ' described above: what the matter turns on, what is in their favour from what they told you, what is'
       + ' against them or what the other side would argue, and which piece of evidence would settle it. Name'
       + ' the weak side explicitly — an assessment that only lists strengths is how someone loses a case. No'
-      + ' percentages, no probabilities, no promise of an outcome.';
+      + ' percentages, no probabilities, no promise of an outcome.'
+      // A required HEADING, not a described quality. Measured at 1-2 of 4 while it was only described.
+      + ' You MUST include a line that begins exactly "' + asmat.weaknessLabel(l) + '" followed by what'
+      + ' could count against this person, or what the other side would argue. If they have given you no'
+      + ' facts, say what generally counts against someone in a matter of this kind, then ask for the'
+      + ' detail that would sharpen it. Never omit that line.';
 
     let text = String(await callBini(sys, [{ role: 'user', content: msg }], 700, {}) || '').trim();
+    // One retry when an assessment came back without the weak side. The content has to come from the
+    // model - what counts against someone is specific to their matter - so only its presence is
+    // enforced here, and presence is the half that kept going missing.
+    if (asmat.isCaseAdvice(msg) && !asmat.isDraftRequest(msg) && text && !asmat.namesWeakness(text)) {
+      const strict = sys + '\n\nYour previous answer left out the weak side. Write it again, same content,'
+        + ' but it MUST contain a line beginning exactly "' + asmat.weaknessLabel(l) + '". Do not apologise,'
+        + ' and do not mention this instruction.';
+      const second = String(await callBini(strict, [{ role: 'user', content: msg }], 700, {}) || '').trim();
+      if (second && asmat.namesWeakness(second)) text = second;
+      else console.warn('[asmat] assessment named no weak side, even after a retry');
+    }
     const v = asmat.stripVerdict(text);
     if (v.removed) console.warn('[asmat] removed ' + v.removed + ' verdict sentence(s)');
     text = v.text;

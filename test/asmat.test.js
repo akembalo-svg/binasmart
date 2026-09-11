@@ -242,3 +242,31 @@ test('the gates fold Amharic homophones, as Afiya does', () => {
   // ሰ/ሠ, ሀ/ሐ/ኀ, አ/ዐ, ጸ/ፀ are the same sounds written differently and legal Amharic is full of them.
   assert.equal(S.isUrgent('ወንድሜ ታሰረ ፖሊስ ወሰደው'), S.isUrgent('ወንድሜ ታሠረ ፖሊስ ወሰደው'));
 });
+
+
+// 2026-09-11. An assessment that lists only strengths is how someone walks into a hearing confident
+// and loses. Measured at 1-2 of 4 while the prompt merely DESCRIBED the requirement; asking for a
+// named heading instead, and retrying once when it is absent, took it to 4/4 across three runs.
+// namesWeakness is exported so the route and the evaluation share ONE definition — the harness used
+// to keep its own copy, which is how a checker drifts away from the thing it checks.
+test('the weakness heading is defined for every language the agent speaks', () => {
+  for (const lang of ['am', 'en', 'om']) {
+    const label = S.weaknessLabel(lang);
+    assert.ok(label && label.length > 4, 'missing label for ' + lang);
+    assert.ok(S.namesWeakness('... ' + label + ' the notice was served late.'),
+      'a reply carrying the ' + lang + ' heading must count as naming the weak side');
+  }
+});
+
+test('naming the weak side is recognised from the heading or from plain wording', () => {
+  assert.ok(S.namesWeakness('ሊከብድ የሚችለው፦ በቂ ማስረጃ የለዎትም።'), 'the Amharic heading');
+  assert.ok(S.namesWeakness('the other side would argue the notice was late'), 'plain English wording');
+  assert.ok(S.namesWeakness('በተቃራኒው ሊቀርብ የሚችለው ክርክር አለ'), 'plain Amharic wording');
+});
+
+test('an answer that names no weakness is not mistaken for one that does', () => {
+  for (const t of ['የይግባኝ ጊዜ ገደቡ 60 ቀን ነው።',
+                   'Appeals are filed at the Federal Supreme Court.',
+                   'ውል በጽሁፍ መሆን አለበት።'])
+    assert.equal(S.namesWeakness(t), false, t);
+});
