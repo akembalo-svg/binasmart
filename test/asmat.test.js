@@ -202,3 +202,43 @@ test('every assessment carries the time-limit warning, in each language', () => 
   assert.match(S.assessmentCaution('om'), /daangaa/i);
   for (const lg of ['am', 'en', 'om']) assert.ok(S.assessmentCaution(lg).length > 60, lg);
 });
+
+
+// 2026-09-11. Amharic inflects, and every one of these gates had been written around a single form.
+// All of these were MEASURED walking past the gate on the live agent. The two urgent ones cost
+// something real: a person being evicted, or due in court tomorrow, got a generic procedure
+// explainer instead of the fixed reply telling them not to sign, to ask for a lawyer, and to keep
+// every document.
+test('urgent: the noun takes a possessive and the day is not next to the place', () => {
+  for (const q of ['ከቤቴ እያስወጡኝ ነው',          // ቤት -> ቤቴ, "from MY house"
+                   'ነገ ችሎት አለኝ',              // ችሎት (the session) not ፍርድ ቤት (the building)
+                   'ዛሬ ማታ ፍርድ ቤት መቅረብ አለብኝ'])  // ማታ sits between the day and the place
+    assert.ok(S.isUrgent(q), 'must be urgent: ' + q);
+});
+
+test('case advice: Amharic conjugates the person into the verb', () => {
+  for (const q of ['ጥፋተኛ ነኝ?',            // ነኝ (I am), not ነው (he is)
+                   'በዚህ ጉዳይ ማን ያሸንፋል?',   // ያሸንፋል (he wins), not አሸንፋለሁ (I win)
+                   'ዳኛው ምን ይወስናል?'])      // the same request in other words
+    assert.ok(S.isCaseAdvice(q), 'must be case advice: ' + q);
+});
+
+test('draft: a noun may sit between the subject and the verb', () => {
+  for (const q of ['የመከላከያ ሰነድ ጻፍልኝ', 'ደብዳቤ ጻፍልኝ'])
+    assert.ok(S.isDraftRequest(q), 'must be a draft request: ' + q);
+});
+
+test('the widened patterns do not hijack ordinary questions', () => {
+  // An over-firing urgent gate is its own harm: it answers a calm procedural question with an
+  // alarming fixed reply. These must all reach the normal path.
+  for (const q of ['ውል ሲዘጋጅ ምን መያዝ አለበት?', 'ክስ እንዴት ይመሰረታል?', 'አቤቱታ የት አቀርባለሁ?',
+                   'ችሎት ማለት ምንድን ነው?', 'ነገ የንግድ ፈቃድ ላወጣ እችላለሁ?', 'ዳኛ እንዴት ይሾማል?',
+                   'ወንጀል ምንድን ነው?', 'የሰበር ውሳኔ እንዴት አገኛለሁ?'])
+    assert.ok(!S.isUrgent(q) && !S.isCaseAdvice(q) && !S.isDraftRequest(q),
+      'must NOT fire any gate: ' + q);
+});
+
+test('the gates fold Amharic homophones, as Afiya does', () => {
+  // ሰ/ሠ, ሀ/ሐ/ኀ, አ/ዐ, ጸ/ፀ are the same sounds written differently and legal Amharic is full of them.
+  assert.equal(S.isUrgent('ወንድሜ ታሰረ ፖሊስ ወሰደው'), S.isUrgent('ወንድሜ ታሠረ ፖሊስ ወሰደው'));
+});

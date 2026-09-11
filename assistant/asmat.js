@@ -1,4 +1,5 @@
 'use strict';
+const { foldEthiopic } = require('./lang');
 // Asmat (አስማት) — BinaSmart's guide to Ethiopian legal procedure and documents.
 //
 // What he is: a guide to how things WORK. Which office or court, which proclamation governs a matter, what a
@@ -18,15 +19,25 @@
 // crisis is worse than no number.
 const POLICE = '991';
 
-const URGENT = [
+// Both sides folded, as in afiya.js: ሀ/ሐ/ኀ, ሰ/ሠ, አ/ዐ and ጸ/ፀ are the same sounds written
+// differently and legal Amharic is full of the pairs - ፍትሕ/ፍትህ, ሰነድ/ሠነድ, ዐቃቤ ሕግ/አቃቤ ህግ.
+const foldRe = list => list.map(re => new RegExp(foldEthiopic(re.source), re.flags));
+
+const URGENT = foldRe([
   // detention / arrest happening now
   /ታሰረ|ታስሯል|እስር ቤት|ፖሊስ ወሰደው|ተይዞ|arrested|in custody|detained|police (took|are holding)|held at the station/i,
   // asked to sign right now
   /አሁን ፈርም|እንድፈርም|ፈርመህ|ፈርመሽ|ውል እንድፈርም|sign (this|it) (now|today)|told me to sign|being forced to sign|pressuring me to sign/i,
   // a deadline or hearing that is upon them
-  /ነገ ፍርድ ቤት|ዛሬ ፍርድ ቤት|ቀጠሮ ነገ|court (tomorrow|today)|hearing (tomorrow|today)|deadline (is )?(today|tomorrow)|expires? (today|tomorrow)/i,
+  // ችሎት (the session) is commoner than ፍርድ ቤት (the building), and Amharic puts words between the
+  // day and the place - "ዛሬ ማታ ፍርድ ቤት". Measured: "ነገ ችሎት አለኝ" was not urgent.
+  /(ነገ|ዛሬ|ጠዋት|ማታ)[^።.!?]{0,14}(ፍርድ ቤት|ችሎት|ቀጠሮ)|(ፍርድ ቤት|ችሎት|ቀጠሮ)[^።.!?]{0,10}(ነገ|ዛሬ)|court (tomorrow|today)|hearing (tomorrow|today)|deadline (is )?(today|tomorrow)|expires? (today|tomorrow)/i,
+
   // eviction / property being taken now
-  /ከቤት እያስወጡኝ|ንብረቴን ወሰዱ|ዕቃዬን አወጡ|being evicted (now|today)|locked me out|throwing me out|bailiffs? (are|at)/i,
+  // Match the VERB, not the noun phrase: ቤት takes a possessive (ከቤቴ = from MY house) and the
+  // literal ከቤት stopped matching the moment someone spoke about their own home.
+  /(እያ|ሊያ|እያስ|ሊያስ)?አስወጡኝ|እያስወጡኝ|ሊያስወጡኝ|አስወጡኝ|ቤቴን ለቀህ|ንብረቴን ወሰዱ|ንብረቴን ሊወስዱ|ዕቃዬን አወጡ|being evicted|locked me out|throwing me out|bailiffs? (are|at)/i,
+
   // violence / abuse / threat
   /ይደበድበኛል|ደበደበኝ|ዛተብኝ|ያስፈራራኛል|threatened me|beating me|domestic (violence|abuse)|he hit me|afraid for my (life|safety)/i,
   // a child taken
@@ -38,8 +49,8 @@ const URGENT = [
   /mana kiyyaa[^.!?]{0,18}baas|manaa na baas|qabeenya koo fudhat/i,
   /na reeb|na dhaan|na doorsis|sodaadha[^.!?]{0,14}lubbuu/i,
   /mucaa koo fudhat|ijoollee koo fudhat/i,
-];
-function isUrgent(msg) { const m = String(msg || ''); return URGENT.some(re => re.test(m)); }
+]);
+function isUrgent(msg) { const m = foldEthiopic(String(msg || '')); return URGENT.some(re => re.test(m)); }
 
 function urgentReply(lang) {
   if (lang === 'om') {
@@ -68,10 +79,16 @@ function urgentReply(lang) {
 
 // ---------- 2. what he will not do ----------
 // Case advice, predictions, and anything meant to be filed.
-const CASE_ADVICE = [
-  /አሸንፋለሁ|እናሸንፋለን|will i win|do i have a case|chances? (of|in) (winning|court)|am i going to (win|lose)|ውጤቱ ምን ይሆናል/i,
+const CASE_ADVICE = foldRe([
+  // Amharic conjugates the person into the verb, so "who will win" (ያሸንፋል) shares no ending with
+  // "will I win" (አሸንፋለሁ). Asking what the judge will decide is the same request in other words.
+  /አሸንፋለሁ|እናሸንፋለን|ያሸንፋል|ታሸንፋለች|ማን ያሸንፋል|ዳኛው?[^።.!?]{0,12}(ይወስናል|ይፈርዳል)|ፍርድ ቤቱ[^።.!?]{0,12}(ይወስናል|ይፈርዳል)|will i win|who will win|do i have a case|chances? (of|in) (winning|court)|am i going to (win|lose)|what will the (judge|court) (decide|rule)|ውጤቱ ምን ይሆናል/i,
+
   /ምን ላድርግ.{0,20}(ጉዳዬ|ክሴ|ችሎት)|what should i do (about|in) my (case|situation)|advise me on my case|ጉዳዬን እንዴት/i,
-  /ጥፋተኛ ነው|ወንጀለኛ ነው|is he guilty|am i guilty|is (this|that) (illegal|a crime)|ወንጀል ነው ወይ/i,
+  // ነኝ (I am) / ነው (he is) / ነን (we are) / ነሽ (you are) are the same question about different
+  // people. Measured: "ጥፋተኛ ነኝ?" - am I guilty - walked past a gate that only knew ጥፋተኛ ነው.
+  /(ጥፋተኛ|ወንጀለኛ)\s*(ነኝ|ነው|ናት|ናቸው|ነን|ነሽ|ነህ|ነኝ\?)|is he guilty|am i guilty|are they guilty|is (this|that) (illegal|a crime)|ወንጀል ነው ወይ/i,
+
   /ክስ ልመሰርት|ልክሰው|should i sue|should i take (him|her|them) to court|ፍርድ ቤት ልውሰደው/i,
   /መከላከያ|አቤቱታ|ክስ/.source && /(መከላከያ|አቤቱታ|ክስ|ማመልከቻ)[ዬውንህሽ]{0,3}\s*(ጻፍ|ጻፍልኝ|አዘጋጅ|አዘጋጅልኝ)|draft (my|a) (defence|defense|claim|petition|affidavit|statement)|write my (case|appeal|complaint)/i,
   /ውሌ ተቀባይነት አለው|is my contract (valid|enforceable)|is this contract legal|ውሉ ይፀናል/i,
@@ -82,19 +99,22 @@ const CASE_ADVICE = [
   /himata banuu qabaa|mana murtiitti geessuu qabaa/i,
   /naaf barreess|barreessii naaf|himata naaf qopheess/i,
   /waliigalteen koo[^.!?]{0,18}(fudhatama|seera qabeess)/i,
-];
-function isCaseAdvice(msg) { const m = String(msg || ''); return CASE_ADVICE.some(re => re.test(m)); }
+]);
+function isCaseAdvice(msg) { const m = foldEthiopic(String(msg || '')); return CASE_ADVICE.some(re => re.test(m)); }
 
 // Someone asking for the document itself, rather than for an explanation of it. They get a blank
 // template: the right headings in the right order with the facts left to them. A person with no
 // lawyer who files nothing loses by default, and a skeleton is strictly better than a blank page -
 // but a skeleton cannot put a fact in their mouth, which a filled-in draft can.
-const DRAFT_REQUEST = [
-  /(አቤቱታ|መከላከያ|ክስ|ማመልከቻ|ይግባኝ|ውል|ስምምነት)[ዬውንህሽ]{0,3}\s*(ጻፍ|ጻፍልኝ|ጽፍ|ጽፍልኝ|አዘጋጅ|አዘጋጅልኝ|ስራልኝ|አርቅቅ)/i,
+const DRAFT_REQUEST = foldRe([
+  // "የመከላከያ ሰነድ ጻፍልኝ" - write me a defence DOCUMENT - put a noun between the subject and the
+  // verb, and only a space was allowed. ደብዳቤ (letter) was missing from the list entirely.
+  /(አቤቱታ|መከላከያ|ክስ|ማመልከቻ|ይግባኝ|ውል|ስምምነት|ደብዳቤ|ማስረጃ)[ዬውንህሽ]{0,3}[^።.!?]{0,16}(?<![ሲስሳለየበከእንደ])(ጻፍ|ጻፍልኝ|ጽፍ|ጽፍልኝ|አዘጋጅ|አዘጋጅልኝ|ስራልኝ|አርቅቅ)/i,
+
   /\b(draft|write|prepare)\s+(me\s+)?(a|my|the)\s+(defence|defense|claim|petition|complaint|affidavit|appeal|statement|contract|agreement)/i,
   /(naaf barreess|barreessii naaf|naaf qopheess|himata naaf|falmii naaf)/i,
-];
-function isDraftRequest(msg) { const m = String(msg || ''); return DRAFT_REQUEST.some(re => re.test(m)); }
+]);
+function isDraftRequest(msg) { const m = foldEthiopic(String(msg || '')); return DRAFT_REQUEST.some(re => re.test(m)); }
 
 // Which skeleton. Deliberately coarse: the four things people actually ask for.
 function draftKind(msg) {
