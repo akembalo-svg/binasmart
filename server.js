@@ -711,6 +711,13 @@ function dropVendorSelfTalk(t) {
 
 function biniGuards(text, msg, hist, grounding) {
   let t = String(text || '');
+  // Measured 2026-09-11: "የጤና ባለሙያ እንደመሆኔ መጠን ... እውቀት የለኝም" — AS A HEALTH PROFESSIONAL, I lack
+  // the knowledge to recommend a medicine. Bini is a general assistant; a claimed profession lends a
+  // refusal authority it does not have, and the next sentence might not decline at all.
+  // Rewritten, not dropped: deleting the sentence would take the refusal with it, and the refusal is
+  // the useful part. Dropping is for a sentence that should not exist, such as a dosage.
+  t = t.replace(/(የጤና ባለሙያ|የህክምና ባለሙያ|የሕክምና ባለሙያ|ሐኪም|ሀኪም|ዶክተር|ነርስ|ጠበቃ)\s*እንደመሆኔ(\s*መጠን)?/g,
+    (m, role) => 'እኔ ' + role + ' ስላልሆንኩ');
   const greeted = /^(hi|hello|hey|selam|salam|ሰላም|ጤና ይስጥልኝ|እንደምን)/i.test(String(msg || '').trim());
   // Only a standalone opener is removed: it must end the sentence (optionally after a "(ቢኒ)" gloss).
   // Stripping a name that is the subject of a longer sentence used to leave a fragment, e.g.
