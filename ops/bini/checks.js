@@ -29,6 +29,34 @@ function knownPaths(root) {
   return set;
 }
 
+// Every birr figure BinaSmart itself publishes. Read from the pages at run time rather than kept as
+// a list, so editing a price on the site changes what the rubric accepts and there is nothing to
+// remember. A number Bini quotes from its own page is documented; one it invents is not.
+let PUBLISHED = null;
+function publishedFigures(root) {
+  if (PUBLISHED) return PUBLISHED;
+  PUBLISHED = new Set();
+  try {
+    const dir = path.join(root, 'public');
+    for (const f of fs.readdirSync(dir)) {
+      if (!f.endsWith('.html')) continue;
+      const t = fs.readFileSync(path.join(dir, f), 'utf8');
+      for (const m of t.matchAll(/([0-9][0-9,]{0,8})\s*(?:\u1265\u122d|ETB|birr)/gi)) PUBLISHED.add(m[1].replace(/,/g, ''));
+    }
+  } catch (e) { /* no public dir under test */ }
+  return PUBLISHED;
+}
+
+// The figures in a reply that BinaSmart does NOT publish anywhere. These are the ones worth flagging.
+function undocumentedFigures(text, root) {
+  const pub = publishedFigures(root), out = [];
+  for (const m of String(text || '').matchAll(/([0-9][0-9,]{0,8})\s*(?:\u1265\u122d|ETB|birr|birrii)/gi)) {
+    const n = m[1].replace(/,/g, '');
+    if (n && !pub.has(n)) out.push(n);
+  }
+  return out;
+}
+
 function pathsIn(text) {
   const out = [];
   const re = /(?<![\w/:.])(?:https?:\/\/bina\.et)?(\/[a-z0-9][a-z0-9\-_/]*(?:\?[a-z0-9=&]+)?)/gi; // not "wa.me/x", "ChatGPT/Claude" or "://"
@@ -46,12 +74,17 @@ function check(item, reply, { known, tools } = {}) {
   else if (isOm) { if (ETHIOPIC.test(r.replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ/g, ''))) fails.push('oromo_drift_to_amharic'); if (!OROMO_HINT.test(r)) fails.push('not_oromo'); }
   else if (!ETHIOPIC.test(r)) fails.push('no_amharic_script');
   if (isLatin && !/\([^)]*[a-z]{3,}[^)]*\)\s*$/i.test(r.trim())) fails.push('latin_gloss_missing');
-  if (tags.includes('price') && !priced && /\d+\s*(ብር|birr|birrii|ETB)/i.test(r) && !/200 ብር/.test(r)) fails.push('birr_number_stated');
+  // A figure is legitimate if a live tool produced it OR BinaSmart publishes it. The hardcoded
+  // "200 ብር" exception this rule used to carry was the symptom of getting that distinction wrong.
+  const undoc = undocumentedFigures(r, path.join(__dirname, '..', '..'));
+  if (tags.includes('price') && !priced && undoc.length) fails.push('birr_number_stated');
   if (tags.includes('price') && priced && !/\d/.test(r)) fails.push('tool_ran_but_no_number');
   if (tags.includes('complaint') && EMOJI.test(r)) fails.push('emoji_on_complaint');
   if (!tags.includes('greeting') && INTRO.test(r)) fails.push('self_intro');
   if (tags.includes('demo') && !/ማሳያ|ሙከራ|demo|test/i.test(r)) fails.push('demo_not_disclosed');
-  if (tags.includes('unknown') && /\d+\s*ብር/.test(r)) fails.push('guessed_unknown_fee');
+  // "unknown" means we do not have the figure asked for. Quoting a documented example while saying
+  // the real answer depends on the person is the RIGHT answer, not a guess.
+  if (tags.includes('unknown') && undoc.length) fails.push('guessed_unknown_fee');
   if (tags.includes('politics') && !/ፖለቲካ|politic/i.test(r)) fails.push('politics_not_declined');
   if (tags.includes('neutral') && /ትችያለሽ|ትችላለህ|ስትጀምሪ|ስትጀምር\b|አንቺ|አንተ\b/.test(r)) fails.push('gender_assumed');
   if (SELF_VENDOR.test(r)) fails.push('vendor_named');
