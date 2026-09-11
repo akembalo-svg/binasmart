@@ -4,7 +4,7 @@
 //   /api/ GET    : network first, cached copy when offline (marked with x-bina-cache: stale)
 //   telegram.org : stale-while-revalidate (mini app shell opens offline)
 //   map tiles    : cache first with a small LRU; Range requests (pmtiles) are never touched
-const VERSION = 'bina-v6';
+const VERSION = 'bina-v10';
 const SHELL = VERSION + '-shell', STATIC = VERSION + '-static', API = VERSION + '-api', TILES = VERSION + '-tiles';
 const PAGES = ['/', '/ride', '/pool', '/watch', '/cinema', '/hotels', '/airport', '/ai', '/offline'];
 const CORE = ['/icon-192.png', '/icon-512.png', '/icon-32.png', '/manifest.webmanifest',

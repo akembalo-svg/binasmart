@@ -5,7 +5,7 @@
   "sources": {
     "protomaps": {
       "type": "vector",
-      "url": "pmtiles:///static/map/addis-20260901.pmtiles",
+      "url": "pmtiles:///static/map/addis-20260911.pmtiles",
       "attribution": "\u00a9 OpenStreetMap contributors \u00b7 Protomaps"
     }
   },
