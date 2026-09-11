@@ -8,6 +8,26 @@ const HUMAN_RE = /(ሰው (ማነጋገር|መነጋገር|እፈልጋለሁ)|�
 // booking, so a driver asking for more is both the commonest complaint and the most damaging.
 const COMPLAINT_RE = /ዘግይ|አያነሳ|አልመጣ|ችግር|ተበላሽ|ተሳስ|አጭበርባ|ጠፋ|ስርቆት|ተሰረቀ|አልደረሰ|ቅሬታ|በላይ ጠየቀ|በላይ አስከፈለ|ተጨማሪ ጠየቀ|ዋጋ ጨመረ|አስከፈለኝ|ከተስማማነው በላይ|አልመለሰልኝም|ገንዘቤ|late|not answer|no show|didn.?t come|complain|problem|scam|stole|lost my|overcharg|charged? me more|more than (the )?(agreed|quoted)|extra (money|charge)|refund|didn.?t refund/i;
 
+// A reply can contain "I do not have that" for three completely different reasons, and only one of
+// them is a failure worth acting on.
+//   • withheld BY DESIGN  — not a doctor, not a lawyer, no politics. The system working.
+//   • handed to a HUMAN   — a complaint or a request for a person. Also the system working.
+//   • could not answer    — the only one that should show up in a report.
+// Judged on the tools that ran, not on the wording, because the wording of a correct refusal and of
+// a real gap are the same sentence.
+const BY_DESIGN_TOOLS = /^(handover|contact_team|emergency|urgent|politics_declined|assessment|template)$/;
+const BY_DESIGN_TEXT = /(ሐኪም|ሀኪም|ነርስ|ፋርማሲስት|ጠበቃ|የህክምና ባለሙያ|የሕግ ባለሙያ)[^።]{0,24}(አይደለሁም|አይደለም)|መድሃኒት[^።]{0,14}(ማዘዝ|መንገር)[^።]{0,10}አልችልም|ፖለቲካ[^።]{0,20}(አይደለም|የለም)|not a (doctor|nurse|lawyer|medical|clinician)|cannot (prescribe|diagnose|predict)|do not discuss politics|(doktora|ogeessa fayyaa|abukaatoo|narsii|hakiima)[^.]{0,20}miti|qoricha[^.]{0,30}(himuu|kennuu)[^.]{0,10}hin danda'u|(yaaluu|qoruu|murteessuu|raaguu)[^.]{0,12}hin danda'u|siyaasa[^.]{0,24}(hin|miti)/i;
+const GREETING_ONLY = /^\s*(ሰላም|ጤና ይስጥልኝ|እንደምን|selam|salam|hi|hello|hey|akkam|nagaa)\s*[!?።.]*\s*$/i;
+
+// reply: what we said. ctx.tools: what ran. ctx.message: what they asked.
+function isMiss(reply, ctx) {
+  const c = ctx || {};
+  if ((c.tools || []).some(t => BY_DESIGN_TOOLS.test(String(t)))) return false;   // a human, or a deliberate refusal
+  if (GREETING_ONLY.test(String(c.message || ''))) return false;                  // nothing was asked
+  if (BY_DESIGN_TEXT.test(String(reply || ''))) return false;                     // declined by design
+  return MISS_RE.test(String(reply || ''));
+}
+
 function userKey({ telegramId, uid, ip } = {}) {
   if (telegramId) return 'tg:' + String(telegramId).replace(/\D/g, '').slice(0, 20);
   if (uid && /^[A-Za-z0-9_-]{6,64}$/.test(String(uid))) return 'web:' + uid;
@@ -70,7 +90,7 @@ function makeMemory({ prisma, now }) {
     ]);
     return { total, miss, byLang: Object.fromEntries(byLang.map(b => [b.lang, b._count._all])) };
   }
-  return { userKey, forUser, profileText, log, misses, stats, isMiss: r => MISS_RE.test(String(r || '')), wantsHuman: m => HUMAN_RE.test(String(m || '')) };
+  return { userKey, forUser, profileText, log, misses, stats, isMiss, wantsHuman: m => HUMAN_RE.test(String(m || '')) };
 }
 
 // Handover to Ibrahim on Telegram: at most once per user per 30 minutes; explicit (tool) calls always go.
@@ -115,4 +135,4 @@ function extractMemory(msg) {
   return out;
 }
 
-module.exports = { makeMemory, makeHandover, userKey, MISS_RE, HUMAN_RE, COMPLAINT_RE, extractMemory };
+module.exports = { makeMemory, makeHandover, userKey, isMiss, MISS_RE, HUMAN_RE, COMPLAINT_RE, extractMemory };

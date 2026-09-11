@@ -909,7 +909,7 @@ fastify.post('/api/assistant', async (req, reply) => {
     // A complaint goes to a person even when Bini sounded confident, and it is never rate-limited:
     // a second complaint from the same rider is more urgent than the first, not less.
     const always_handover = COMPLAINT_RE.test(msg) || biniMemory.wantsHuman(msg);
-    const miss = biniMemory.isMiss(text) || always_handover;
+    const miss = biniMemory.isMiss(text, { tools: toolsUsed, message: msg }) || always_handover;
     mem.touch({ visit: true, lang: lang === 'am-latin' ? 'am' : lang, name: u.name }).catch(() => {});
     let handoverSent = false;
     if (miss && !toolsUsed.includes('contact_team')) handoverSent = biniHandover({ userKey, channel, lang, user: known || u, message: msg, reply: text, history: hist, explicit: always_handover, reason: biniMemory.wantsHuman(msg) ? 'user asked for a person' : 'Bini could not answer' }).catch(() => {});
@@ -1008,7 +1008,7 @@ fastify.post('/api/asmat', async (req, reply) => {
         && !/ጽ\/ቤት|ፍርድ ቤት|office|court|waajjira|ጠበቃ|abukaat|lawyer/i.test(text)) text += asmat.caseNudge(l);
     text += '\n\n' + asmat.disclosure(l);
 
-    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['asmat'], miss: biniMemory.isMiss(text), ms: Date.now() - t0 });
+    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['asmat'], miss: biniMemory.isMiss(text, { tools: ['asmat'], message: msg }), ms: Date.now() - t0 });
     return { reply: text, urgent: false };
   } catch (e) {
     req.log && req.log.error({ err: e }, 'asmat failed');
@@ -1090,7 +1090,7 @@ fastify.post('/api/afiya', async (req, reply) => {
       text += afiya.demoNotice(l);
     text += '\n\n' + afiya.disclosure(l);
 
-    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['afiya'], miss: biniMemory.isMiss(text), ms: Date.now() - t0 });
+    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['afiya'], miss: biniMemory.isMiss(text, { tools: ['afiya'], message: msg }), ms: Date.now() - t0 });
     return { reply: text, emergency: false };
   } catch (e) {
     req.log && req.log.error({ err: e }, 'afiya failed');
