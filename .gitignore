@@ -43,3 +43,7 @@ ops/backups/
 # Operational prompts. The loader and the deterministic gates are public;
 # the tuned instructions are not. Backed up to /root/storage/binasmart-private/prompts/
 prompts/
+
+# Planetiler download scratch (1.5 GB). The tile rebuild uses pmtiles extract, not planetiler —
+# see ops/map/rebuild-tiles.sh. Left here once by an abandoned build; never commit it.
+data/
