@@ -761,6 +761,7 @@ function biniGuards(text, msg, hist, grounding) {
 }
 // ===== Bini: tools (hands), per-user memory, conversation log, misses, handover, languages =====
 const biniLang = require('./assistant/lang');
+const biniPolitics = require('./assistant/politics');
 const biniTools = require('./assistant/tools');
 const { dropUngrounded } = require('./assistant/grounding');
 const afiya = require('./assistant/afiya');
@@ -794,6 +795,27 @@ fastify.post('/api/assistant', async (req, reply) => {
   const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip });
   const mem = biniMemory.forUser(userKey, { telegramId: u.telegramId, name: u.name });
   const lang = biniLang.detect(msg);
+  // FIRST, above everything, and for the same reason it is first on the other two pages: a model that
+  // is right two times in three is not good enough when the third person is having a stroke.
+  // Measured 2026-09-12 before this existed — Bini gave the ambulance number for a child who would not
+  // wake, and NOT for chest pain with no breathing, and NOT for "I want to kill myself".
+  if (afiya.isEmergency(msg)) {
+    const sos = afiya.emergencyReply(lang);
+    biniMemory.log({ userKey, channel, lang, message: msg, reply: sos, tools: ['emergency'],
+      miss: false, ms: Date.now() - t0 });
+    biniHandover({ userKey, channel, lang, user: u, message: msg, reply: sos, history: hist,
+      explicit: true, reason: 'Bini: possible medical emergency' });
+    return reply.send({ reply: sos, emergency: true, ambulance: afiya.AMBULANCE });
+  }
+  // Politics is declined entirely — the subject, not only the opinion. Decided after measuring him
+  // withholding the opinion 7 times in 10 and then reporting election logistics out of crawled news.
+  // Deterministic and early: before retrieval, before the model, before any tool can run.
+  if (biniPolitics.isPolitical(msg)) {
+    const politeNo = biniPolitics.politicalReply(lang);
+    biniMemory.log({ userKey, channel, lang, message: msg, reply: politeNo,
+      tools: ['politics_declined'], miss: false, ms: Date.now() - t0 });
+    return reply.send({ reply: politeNo, declined: 'politics' });
+  }
   const known = await mem.get().catch(() => null);
   let toolsUsed = [];
   try {

@@ -14,7 +14,7 @@ const OM_SHAPE = /(aa|uu|ii|dh|ny)/gi;
 // Afaan Oromoo nouns inflect by suffix — beellama/Beellamni, kutaa/kutaan, mucaa/mucaan, dhukkuba/
 // dhukkubni — so a whole-word list cannot see the form people actually type. These are matched as
 // PREFIXES for that reason, and kept to words that carry the subject of a health or legal question.
-const OM_STEM = /\b(beellam|dhukkub|qorich|hakiim|narsii|abukaat|himat|waliigalt|ragaa|mirg|hayyam|kiraa|gibir|dhiig|hafuur|onnee|mucaa|daa'im|ulf|summi|gargaars|adeems|waajjir|kutaa|fayya|talaall|qorann|labs|poolis|galmee|eenyum|kaffalt|maallaq|konkolaat|baajaaj|hospitaal|buufata|inshuraans|beenyaa|abbaa seeraa|mana murt|mana hidh)/gi;
+const OM_STEM = /\b(beellam|dhukkub|qorich|hakiim|narsii|abukaat|himat|waliigalt|ragaa|mirg|hayyam|kiraa|gibir|dhiig|hafuur|onnee|mucaa|daa'im|ulf|summi|gargaars|adeems|waajjir|kutaa|fayya|talaall|qorann|labs|poolis|galmee|eenyum|kaffalt|maallaq|konkolaat|baajaaj|hospitaal|buufata|inshuraans|beenyaa|abbaa seeraa|mana murt|mana hidh|filannoo|paartii|siyaasa|mootummaa|sagalee kenn|mormitoota|waraana|yoom|eessa|eenyu|akkam|hangam|meeqa)/gi;
 
 function detect(text) {
   const s = String(text || '');
