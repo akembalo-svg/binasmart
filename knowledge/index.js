@@ -240,7 +240,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   let rows = [];            // { id, source, slug, url, title, lang, ord, text, vec (Float32Array|null), toks:Set }
   let loadedAt = 0;
   const qcache = new Map(); // query -> vec
-  const stats = { searches: 0, embedOk: 0, embedErr: 0, keywordOnly: 0 };
+  const stats = { searches: 0, embedOk: 0, embedErr: 0, keywordOnly: 0, rerankOk: 0, rerankErr: 0, rerankSkipped: 0 };
 
   async function load() {
     const all = await prisma.knowledgeChunk.findMany({ orderBy: [{ source: 'asc' }, { slug: 'asc' }, { ord: 'asc' }] });
@@ -319,7 +319,66 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   function keywordScore(qt, r) { let s = 0; for (const t of qt) if (r.toks.has(t)) s += 1; return qt.length ? s / qt.length : 0; }
 
   // Hybrid search: cosine on the embedding (when we can embed the query) plus keyword overlap.
-  async function search(q, { k = 4, sources, exclude, isPublic = false } = {}) {
+  // ---------- reranking ----------
+  // Vector similarity answers "is this chunk about the same topic", which is not the same question as
+  // "does this chunk answer what was asked". A page about lease payments and a page about lease PERIODS
+  // look nearly identical to an embedding. So: take a wider candidate pool, then have a small model read
+  // the question against each candidate and order them by whether they actually answer it.
+  //
+  // Deliberately fail-open. If the call errors, times out, or returns anything unexpected we return the
+  // candidates in their original order - a slightly worse answer beats a broken assistant. The 6s timeout
+  // is shorter than the reply the user is waiting for.
+  const RERANK_MODEL = process.env.RERANK_MODEL || 'gemini-2.5-flash';
+  // Rerank only when the retrieval has not already made up its mind.
+  //
+  // Measured on the 114-question gold set (ops/bini/rerank-eval.js, ops/bini/rerank-gate.js):
+  // reranking every message moved the right page to first 6 times and away from first 4 times —
+  // McNemar exact p = 0.754, which is a coin — while costing a median 464 ms and ~3,650 tokens on
+  // EVERY message, including the 98 of 114 where it changed nothing at all.
+  //
+  // But the 6 it helped were not spread evenly. They all sat where the top two pages were nearly
+  // tied: gaps 0.007 to 0.043, median 0.013, against a median 0.069 for the questions it left alone.
+  // The reranker is useful exactly when the score cannot separate the candidates, which is the only
+  // place a second opinion has anything to add.
+  //
+  // At a 0.03 gap the gate fires on 31 of 114 questions, keeps 5 of the 6 improvements and only 1 of
+  // the 4 regressions — a better net outcome than running it always, for 73% fewer calls.
+  const RERANK_GAP = Number(process.env.RERANK_GAP || 0.03);
+  const rrCache = new Map();
+
+  async function rerank(query, cands, k) {
+    if (!apiKey || cands.length <= k) return cands;
+    const ck = query + '|' + cands.map(c => c.source + '/' + c.slug).join(',');
+    if (rrCache.has(ck)) { const ord = rrCache.get(ck); return ord.map(i => cands[i]).filter(Boolean).slice(0, k); }
+    const list = cands.map((c, i) => '[' + i + '] ' + (c.title || '') + '\n' + String(c.text || '').slice(0, 420)).join('\n\n');
+    const prompt = 'Question:\n' + query + '\n\nPassages:\n' + list +
+      '\n\nReturn ONLY a JSON array of passage numbers, most useful first, keeping at most ' + k +
+      '. Judge whether a passage ANSWERS the question, not whether it shares its topic. Omit passages that do not help. No prose.';
+    // thinkingBudget 0: gemini-2.5-flash thinks by default and those tokens count against maxOutputTokens,
+    // so a small cap returns an empty string instead of the ordering.
+    const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 6000);
+    try {
+      const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + RERANK_MODEL + ':generateContent?key=' + apiKey, {
+        method: 'POST', signal: ctrl.signal, headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0, maxOutputTokens: 256, thinkingConfig: { thinkingBudget: 0 } } })
+      });
+      if (!r.ok) throw new Error('rerank ' + r.status);
+      const j = await r.json();
+      const txt = (((j.candidates || [])[0] || {}).content || {}).parts?.[0]?.text || '';
+      const m = txt.match(/\[[\s\S]*?\]/); if (!m) throw new Error('no array');
+      const ord = JSON.parse(m[0]).filter(n => Number.isInteger(n) && n >= 0 && n < cands.length);
+      if (!ord.length) throw new Error('empty order');
+      stats.rerankOk++;
+      if (rrCache.size > 300) rrCache.clear();
+      rrCache.set(ck, ord);
+      return ord.map(i => cands[i]).slice(0, k);
+    } catch (e) {
+      stats.rerankErr++;
+      return cands.slice(0, k);
+    } finally { clearTimeout(t); }
+  }
+
+  async function search(q, { k = 4, sources, exclude, isPublic = false, rerankTo = 0 } = {}) {
     await ensureLoaded();
     stats.searches++;
     const query = String(q || '').trim(); if (!query) return [];
@@ -344,14 +403,20 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     }
     scored.sort((a, b) => b.score - a.score);
     // one chunk per (source, slug) unless the same page clearly wins twice
+    const want = rerankTo ? Math.min(k, 20) : k;
     const out = [], seen = new Map();
     for (const s of scored) {
       const key = s.r.source + '/' + s.r.slug; const n = seen.get(key) || 0;
       if (n >= 2) continue; seen.set(key, n + 1);
       out.push({ source: s.r.source, slug: s.r.slug, url: s.r.url, title: s.r.title, lang: s.r.lang, score: +s.score.toFixed(4), text: s.r.text.slice(0, 900) });
-      if (out.length >= k) break;
+      if (out.length >= want) break;
     }
-    return out;
+    if (!rerankTo) return out;
+    // The gap between the two best PAGES, not the two best chunks: out may hold two chunks of one
+    // page, and a page arguing with itself is not a contest.
+    const best = []; for (const o of out) { if (!best.some(b => b.slug === o.slug)) best.push(o); if (best.length === 2) break; }
+    if (best.length === 2 && best[0].score - best[1].score >= RERANK_GAP) { stats.rerankSkipped++; return out.slice(0, rerankTo); }
+    return await rerank(query, out, rerankTo);
   }
 
   // The block Bini gets. Empty for greetings / very short messages so we never pad a "hello".
@@ -368,7 +433,9 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     const greeting = /^(hi|hello|hey|selam|ሰላም|salam|ok|thanks|thank you|አመሰግናለሁ)[!. ]*$/i.test(m);
     const blocks = [];
     if (!greeting && (words.length >= 2 || am || om)) {
-      const hits = await search(m, { k, exclude: ['style', 'style-om'] });
+      // Retrieve a wider pool, then rerank down to k. Style lookups below are deliberately NOT reranked:
+      // voice examples are chosen for register, not for whether they answer the question.
+      const hits = await search(m, { k: Math.min(k * 3, 18), exclude: ['style', 'style-om'], rerankTo: k });
       if (hits.length) {
         const lines = hits.map((h, i) => '[' + (i + 1) + '] ' + h.title + (h.url ? ' — ' + h.url : '') + '\n' + h.text.replace(/\n{2,}/g, '\n'));
         blocks.push('## Relevant BinaSmart knowledge (facts here override anything you remember; cite the page link when useful)\n' + lines.join('\n\n'));
