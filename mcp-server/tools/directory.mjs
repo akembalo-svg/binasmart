@@ -9,8 +9,8 @@ const DEMO_PLACE = 'SAMPLE DATA, NOT A REAL BUSINESS. This listing was seeded to
   + 'while real partners are being onboarded. Do not present it to a user as somewhere they can go, book '
   + 'or travel to, and do not quote its prices as real. Offer bina.et or WhatsApp for a real one.';
 const DEMO_HOSPITAL = 'SAMPLE DATA, NOT A REAL HOSPITAL. This hospital does not exist: the departments, '
-  + 'doctors names, fees, opening hours and free slots below are all invented for a demonstration. Never '
-  + 'send a person here, least of all for urgent care. In Ethiopia: ambulance 907, police 991, fire 939.';
+  + 'fees, opening hours, staffing and free slots below are all invented for a demonstration. Never send a '
+  + 'person here, least of all for urgent care. In Ethiopia: ambulance 907, police 991, fire 939.';
 import { toolError } from './ride.mjs';
 
 export const BASE = 'https://bina.et';
