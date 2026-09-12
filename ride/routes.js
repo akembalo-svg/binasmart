@@ -28,6 +28,9 @@ function point(p) {
   return { lat, lng, label: String(p.label || '').slice(0, 120) || (lat.toFixed(5) + ', ' + lng.toFixed(5)) };
 }
 const { normPhone } = require('./phone');
+// Which columns of Driver the ops list may publish — named, with the withheld ones and their reasons
+// beside them. See test/ride/pubDriver.test.js.
+const { pubOpsDriver } = require('./pubDriver');
 function pubRide(ride) {
   const d = ride.driver;
   return { id: ride.id, status: ride.status, concierge: ride.concierge, tier: ride.tier, pickup: ride.pickup, dropoff: ride.dropoff,
@@ -43,7 +46,10 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
   // The driver app heartbeats every 4 s (15/min) and the rider map polls every 3 s (20/min);
   // these ceilings leave room for a retry storm on a bad connection without inviting abuse.
   const driveRL = limiter(60000, 60), trackRL = limiter(60000, 90);
-  const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
+  // Header first, then the query. A query string is written to the access log, the address bar and
+  // any outgoing Referer; the parameter stays because the driver-document links are <a target="_blank">
+  // document navigations, which cannot send a header. server.js reads them in the same order.
+  const ops = (req, reply) => { if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
   const fireNotify = (id, ev) => { if (riderNotify) setImmediate(() => riderNotify.notify(id, ev).catch(() => {})); };
   const tgHook = handler => async (req, reply) => {
     if (!webhookSecret || req.headers['x-telegram-bot-api-secret-token'] !== webhookSecret) return reply.code(401).send({ ok: false });
@@ -295,7 +301,8 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
 
   fastify.get('/api/ride/ops/drivers', async (req, reply) => {
     if (!ops(req, reply)) return;
-    return { ok: true, drivers: await prisma.driver.findMany({ orderBy: { createdAt: 'desc' } }) };
+    const rows = await prisma.driver.findMany({ orderBy: { createdAt: 'desc' } });
+    return { ok: true, drivers: rows.map(pubOpsDriver) };
   });
 
   fastify.post('/api/ride/ops/drivers', async (req, reply) => {
