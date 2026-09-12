@@ -242,7 +242,12 @@ fastify.get('/sitemap.xml', async (req, reply) => {
     select: { slug: true } }).catch(() => [])).map(x => 'https://bina.et/shop/' + x.slug);
   const cshows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date() } }, select: { id: true } }).catch(() => []);
   const films = await prisma.film.findMany({ where: { status: 'public', NOT: { rights: null } }, select: { slug: true } }).catch(() => []);
-  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/oromo-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug), ...(fastify.healthServiceUrls ? fastify.healthServiceUrls() : [])];
+  // A page whose only content is "No trips found" is not worth crawling. Every demo trip departed on
+  // 21 August and /api/travel filters to future departures, so /travel has been empty since. Same
+  // rule as the tenders and the cinema shows above; this one was a hardcoded string and escaped it.
+  const tripsAhead = await prisma.travelTrip.count({ where: { active: true, departure: { gt: new Date() } } }).catch(() => 0);
+  const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/oromo-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), ...bs.map(b => 'https://bina.et/b/' + b.qrSlug), ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug), ...(fastify.healthServiceUrls ? fastify.healthServiceUrls() : [])]
+    .filter(u => u !== 'https://bina.et/travel' || tripsAhead);
   reply.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + urls.map(u => '<url><loc>' + u + '</loc></url>').join('\n') + '\n</urlset>');
 });
@@ -541,6 +546,7 @@ fastify.get('/api/flights-price', async (req) => {
 // FLIGHT_PARTNERS names slugs explicitly; otherwise the shop's trade has to say so. "air" on its own
 // matched a spa and "ticket" a park ticket office, so the test names the trade.
 const { isFlightPartner, partnerSlugs } = require('./flights/partners');
+const { rollDemoTrips } = require('./travel/demo-trips');
 // Naming partners is the only way in since the trade fallback was dropped, so an empty list is not a
 // quiet default — it takes /flights/:slug and the partner list offline. Say so rather than let a
 // missing variable look like "no agencies today".
@@ -1248,7 +1254,12 @@ fastify.get('/api/travel', async () => {
     seatsLeft: t.seats - t.tickets.reduce((s, x) => s + x.seats, 0) })) };
 });
 
+// A ticket is CONFIRMED the moment it is created and takes its seats with it — no payment, no
+// authentication, and no route anywhere to cancel one. Unlimited, that is 44 seats a stranger can
+// take off every bus. Same ceiling as the hotel and restaurant paths.
+const travelRL = hotelLimiter(600000, 8);
 fastify.post('/api/travel/:tripId/book', async (req, reply) => {
+  if (!travelRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const { name, phone, seats } = req.body || {};
   if (!name || !phone) return reply.code(400).send({ error: 'missing_fields' });
   const n = parseInt(seats) || 1;
@@ -3036,6 +3047,16 @@ cron.schedule('0 6 1 * *', async () => {
 }, { timezone: 'Africa/Addis_Ababa' });
 
 // ===== CRON: daily 08:00 — expire old offers =====
+// 03:40 Addis, before the first demo departure of the morning. /travel served No trips found
+// from 21 August because the sample timetable is three days long and those three days passed. Whole
+// days only, demo operators only — see travel/demo-trips.js and test/travel/demo-trips.test.js.
+cron.schedule('40 3 * * *', async () => {
+  try {
+    const r = await rollDemoTrips(prisma, hotelIsDemo);
+    if (r.moved) console.log('[cron] demo timetable rolled forward ' + r.days + ' day(s), ' + r.moved + ' trips');
+  } catch (e) { console.error('[cron] demo trips', e.message); }
+}, { timezone: 'Africa/Addis_Ababa' });
+
 cron.schedule('0 8 * * *', async () => {
   try {
     const r = await prisma.offer.updateMany({ where: { active: true, endsAt: { lt: new Date() } }, data: { active: false } });
