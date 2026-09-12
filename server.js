@@ -179,6 +179,28 @@ const { normPhone: etMobile, phoneKey } = require('./ride/phone');
 const loginRL = hotelLimiter(600000, 8);
 
 // health
+// /hotel/<anything>, /restaurant/<anything>, /hospital/<anything> and /flights/<anything> all served
+// the same 200 bytes as the real page - byte-identical, with no canonical anywhere in them. So the
+// number of indexable urls on this site was unbounded: one typo in one inbound link mints a new page
+// that Google will crawl, find substantial, and have no way to fold back into the original.
+//
+// Each route now asks the same question its own API asks, and answers 404 when the slug is not a
+// thing. A slug that IS a thing gets a self-referencing canonical, which these client-rendered pages
+// never had.
+const slugMiss = (what, back) => '<!doctype html><html lang="am"><head><meta charset="utf-8">'
+  + '<meta name="viewport" content="width=device-width,initial-scale=1"><title>' + what + ' አልተገኘም · Not found | BinaSmart</title>'
+  + '<meta name="robots" content="noindex"><style>body{font-family:system-ui,sans-serif;text-align:center;padding:80px 20px;color:#0f2027}'
+  + 'a{color:#00a884;font-weight:700}</style></head><body><div style="font-size:52px">🔍</div>'
+  + '<h1 style="font-size:22px">' + what + ' አልተገኘም · Not found</h1>'
+  + '<p><a href="' + back + '">← ' + back + '</a></p></body></html>';
+
+async function slugPage(reply, file, found, canonical, what, back) {
+  if (!found) return reply.code(404).type('text/html; charset=utf-8').send(slugMiss(what, back));
+  let html = fs.readFileSync(path.join(__dirname, 'public', file), 'utf8');
+  if (!/rel="canonical"/.test(html)) html = html.replace('</head>', '<link rel="canonical" href="' + canonical + '">\n</head>');
+  return reply.type('text/html; charset=utf-8').send(html);
+}
+
 fastify.get('/nav', async (req, reply) => reply.sendFile('nav.html'));
 fastify.get('/airport', async (req, reply) => reply.sendFile('airport.html')); // Bina Airport transfer landing (7 Sep 2026) -> hands off to /ride
 fastify.get('/pool', async (req, reply) => reply.sendFile('pool.html')); // BinaPool landing (8 Sep 2026) -> hands off to /ride?pool=1
@@ -382,7 +404,15 @@ fastify.post('/api/owner/:slug/order/:id/status', async (req, reply) => {
   return { ok: true, status: st };
 });
 
-fastify.get('/restaurant/:slug', async (req, reply) => reply.sendFile('restaurant.html'));
+fastify.get('/restaurant/:slug', async (req, reply) => {
+  // The same test /api/restaurant/:slug makes: a shop matched by name that actually has a menu. A
+  // tenant without one is not a restaurant, it is a person.
+  const slug = String(req.params.slug);
+  const shop = await prisma.shop.findFirst({ where: { name: { equals: slug.replace(/-/g, ' '), mode: 'insensitive' }, tenancy: { active: true } },
+    include: { products: { where: { visible: true }, select: { id: true }, take: 1 } } });
+  return slugPage(reply, 'restaurant.html', !!(shop && shop.products.length),
+    'https://bina.et/restaurant/' + slug, 'ሬስቶራንት · Restaurant', '/business');
+});
 
 // ===== DIASPORA: building-owner leads =====
 fastify.post('/api/diaspora-lead', async (req, reply) => {
@@ -709,7 +739,12 @@ fastify.get('/api/flights-options', async () => {
   };
 });
 
-fastify.get('/flights/:slug', async (req, reply) => reply.sendFile('flights.html'));
+fastify.get('/flights/:slug', async (req, reply) => {
+  const slug = String(req.params.slug);
+  const shop = await prisma.shop.findFirst({ where: { name: { contains: slug.replace(/-/g, ' '), mode: 'insensitive' }, tenancy: { active: true }, status: 'live' } });
+  return slugPage(reply, 'flights.html', isFlightPartner(shop),
+    'https://bina.et/flights/' + slug, 'ወኪል · Agency', '/flights');
+});
 
 // ===== EVENTS: cinema + event tickets (tiered seating) =====
 
@@ -1327,7 +1362,11 @@ fastify.post('/api/owner/:slug/appointment/:id/status', async (req, reply) => {
   return { ok: true, status: st };
 });
 
-fastify.get('/hospital/:slug', async (req, reply) => reply.sendFile('hospital.html'));
+fastify.get('/hospital/:slug', async (req, reply) => {
+  const slug = String(req.params.slug);
+  const b = await prisma.building.findFirst({ where: { qrSlug: slug, buildingType: 'HOSPITAL' }, select: { id: true } });
+  return slugPage(reply, 'hospital.html', !!b, 'https://bina.et/hospital/' + slug, 'ሆስፒታል · Hospital', '/');
+});
 
 // ===== TRAVEL: trips + tickets =====
 fastify.get('/api/travel', async () => {
@@ -1443,7 +1482,11 @@ fastify.post('/api/owner/:slug/booking/:id/status', async (req, reply) => {
   return { ok: true, status: st };
 });
 
-fastify.get('/hotel/:slug', async (req, reply) => reply.sendFile('hotel.html'));
+fastify.get('/hotel/:slug', async (req, reply) => {
+  const slug = String(req.params.slug);
+  const b = await prisma.building.findFirst({ where: { qrSlug: slug, buildingType: 'HOTEL' }, select: { id: true } });
+  return slugPage(reply, 'hotel.html', !!b, 'https://bina.et/hotel/' + slug, 'ሆቴል · Hotel', '/hotels');
+});
 fastify.get('/hotels', async (req, reply) => reply.sendFile('hotels.html')); // BinaHotels landing (7 Sep 2026)
 // Every building that has at least one active room type is a hotel on BinaSmart.
 fastify.get('/api/hotels', async (req, reply) => {
