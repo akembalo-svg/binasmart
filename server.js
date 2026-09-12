@@ -2018,6 +2018,21 @@ fastify.get('/blog/smart-building-management-ethiopia', async (req, reply) => re
 
 
 // ===== PUBLIC PAGE: what a QR code opens =====
+// A visit token for one building, for one hour.
+//
+// /api/b/:slug used to return every tenant's phone number to anyone who asked — 71 of them for JJ
+// Darule in one unauthenticated request. The phones are the point of the page (the Call button, the
+// WhatsApp order links, the directory listing), so they cannot simply go; what can go is handing all
+// 71 to a caller who never opened the page.
+//
+// The printed QR codes encode a bare /b/<slug>, so the token cannot live in the QR without reprinting
+// them. It is minted here instead, where the QR already lands, and spent by the page's own fetch.
+//
+// This ends the bulk dump. It does not stop someone who fetches the page and reads the token out of
+// it — that would need a secret in the printed code.
+const { makeVisit } = require('./building/visit');
+const { mint: visitTokenNow, check: visitOk } = makeVisit(process.env.VISIT_SECRET || OWNER_KEY || 'bina-visit-fallback');
+
 fastify.get('/b/:slug', async (req, reply) => {
   let html = fs.readFileSync(path.join(__dirname, 'public', 'building.html'), 'utf8');
   try {
@@ -2053,6 +2068,8 @@ fastify.get('/b/:slug', async (req, reply) => {
         + '<script type="application/ld+json">' + schema + '</script>');
     }
   } catch (e) {}
+  // The page came from the printed QR; hand it the token its own fetch will need for the phones.
+  html = html.replace('</head>', '<script>window.__visit=' + JSON.stringify(visitTokenNow(req.params.slug)) + ';</script>\n</head>');
   reply.type('text/html').send(html);
 });
 
@@ -2061,6 +2078,10 @@ fastify.get('/owner/:slug', async (req, reply) => reply.sendFile('owner.html'));
 
 // ===== PUBLIC: building by QR slug =====
 fastify.get('/api/b/:slug', async (req, reply) => {
+  // A phone number is returned only to a caller that opened the building page — see visitOk above.
+  // Without it this endpoint handed out all 71 of JJ Darule's real tenants, named individuals among
+  // them, in a single unauthenticated request. Everything else about the directory is unchanged.
+  const seen = visitOk(req.params.slug, req.query.v || req.headers['x-visit'] || '');
   const b = await prisma.building.findUnique({
     where: { qrSlug: req.params.slug },
     include: {
@@ -2090,9 +2111,13 @@ fastify.get('/api/b/:slug', async (req, reply) => {
       monthlyRent: u.status === 'VACANT' ? u.monthlyRent : undefined, status: u.status,
       shop: shop ? {
         id: shop.id, name: shop.name, nameAm: shop.nameAm, icon: shop.icon,
-        category: shop.category, phone: shop.phone,
+        category: shop.category,
+        phone: seen ? shop.phone : undefined,
         avgRating: Math.round(shop.avgRating * 10) / 10, reviewCount: shop.reviewCount,
-        isOpenNow: shop.isOpenNow,
+        // Boolean @default(true) with nothing computing it and no openingHours on any shop here, so
+        // this was the schema speaking, not a shopkeeper. Same rule as the shop pages and the MCP
+        // directory: only a claimed listing is in a position to say it is open.
+        isOpenNow: (shop.tgChatId || shop.ownerPhone) ? shop.isOpenNow : undefined,
         products: shop.products.map(p => ({ id: p.id, name: p.name, nameAm: p.nameAm, price: p.price, deliverable: p.deliverable })),
         offers: shop.offers.map(o => ({ id: o.id, title: o.title, titleAm: o.titleAm, endsAt: o.endsAt }))
       } : null

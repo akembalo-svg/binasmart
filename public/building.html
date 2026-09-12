@@ -291,7 +291,12 @@ input::placeholder{color:#94a3b8}
 
 <script>
 const slug = location.pathname.split('/').filter(Boolean).pop();
+// window.__visit is injected by the /b/:slug route. It is what tells the API this request came
+// from someone who opened the page rather than a script reading the endpoint directly, and it is
+// what the tenant phone numbers now require.
+const VISIT = typeof window.__visit === 'string' ? window.__visit : '';
 const API = '/api/b/' + slug;
+const API_MAIN = API + (VISIT ? '?v=' + encodeURIComponent(VISIT) : '');
 let DATA = null, leadUnitId = null, floorFilter = null;
 
 const CAT_ICON = { CAFE:'☕', RESTAURANT:'🍽️', PHARMACY:'💊', RETAIL:'🛒', SERVICE:'🧰', GYM:'💪', SALON:'💇‍♀️', CLINIC:'🏥', BANK:'🏦', OFFICE:'💼', OTHER:'🏬' };
@@ -501,7 +506,7 @@ function renderChips(){
 
 async function load(){
   try{
-    const r = await fetch(API);
+    const r = await fetch(API_MAIN);
     DATA = await r.json();
     document.title = DATA.name + ' — BinaSmart';
     document.getElementById('nameAm').textContent = DATA.nameAm;
