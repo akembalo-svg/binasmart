@@ -535,25 +535,39 @@ fastify.get('/api/flights-price', async (req) => {
 });
 
 // ===== FLIGHTS: travel agency ticket requests =====
+// One definition of "this shop can take a flight request". It lived inline inside
+// /api/flights-options, which meant the agency page — the one that publishes a phone, a unit and a
+// floor — had no idea what a partner was and answered for every tenant in the building.
+// FLIGHT_PARTNERS names slugs explicitly; otherwise the shop's trade has to say so. "air" on its own
+// matched a spa and "ticket" a park ticket office, so the test names the trade.
+const { isFlightPartner, partnerSlugs } = require('./flights/partners');
+// A flight request is limited the way an order is: it ends in a message to a real agency's phone.
+const flightRL = hotelLimiter(600000, 8);
+
 fastify.get('/api/flights/:slug', async (req, reply) => {
   const q = req.params.slug.replace(/-/g, ' ');
   const shop = await prisma.shop.findFirst({
     where: { name: { contains: q, mode: 'insensitive' }, tenancy: { active: true }, status: 'live' },
     include: { tenancy: { include: { unit: { include: { building: { select: { name: true, nameAm: true, qrSlug: true } } } } } } } });
-  if (!shop) return reply.code(404).send({ error: 'not_found' });
+  // `contains` is kept because the live page is /flights/hanud while the shop is
+  // hanud-travel-agency-plc. What was missing is any check that the match is an agency at all.
+  if (!isFlightPartner(shop)) return reply.code(404).send({ error: 'not_found' });
   return { agency: { id: shop.id, name: shop.name, nameAm: shop.nameAm, phone: shop.phone,
     building: shop.tenancy.unit.building.name, buildingAm: shop.tenancy.unit.building.nameAm,
     buildingSlug: shop.tenancy.unit.building.qrSlug, unit: shop.tenancy.unit.number, floor: shop.tenancy.unit.floor } };
 });
 
 fastify.post('/api/flights/:shopId/request', async (req, reply) => {
+  if (!flightRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const { tripType, fromCity, toCity, departDate, returnDate, passengers, cabin, name, phone, note } = req.body || {};
   if (!fromCity || !toCity || !departDate || !name || !phone) return reply.code(400).send({ error: 'missing_fields' });
   const shop = await prisma.shop.findUnique({ where: { id: req.params.shopId },
     include: { tenancy: { include: { unit: { include: { building: true } } } } } });
   if (!shop) return reply.code(404).send({ error: 'not_found' });
   const dep = new Date(departDate);
-  if (isNaN(dep) || dep < new Date(new Date().toISOString().slice(0, 10))) return reply.code(400).send({ error: 'bad_date' });
+  // The traveller's day is the one in Addis Ababa; toISOString() is UTC and would accept yesterday
+  // as a departure date between midnight and 3am local.
+  if (isNaN(dep) || dep < new Date(addisToday())) return reply.code(400).send({ error: 'bad_date' });
   const pax = Math.max(1, Math.min(9, parseInt(passengers) || 1));
   const code = 'FR-' + Math.random().toString(36).slice(2, 6).toUpperCase() + '-' + Date.now().toString(36).slice(-4).toUpperCase();
   await prisma.flightRequest.create({ data: { shopId: shop.id,
@@ -584,15 +598,12 @@ fastify.get('/flights', async (req, reply) => reply.sendFile('flights-hub.html')
 // can name slugs explicitly when a partner's name does not say "travel".
 fastify.get('/api/flights-options', async () => {
   const rows = AIRLINES.resolve(process.env);
-  const named = String(process.env.FLIGHT_PARTNERS || '').split(',').map(x => x.trim()).filter(Boolean);
+  const named = partnerSlugs();
   const shops = await prisma.shop.findMany({
     where: { tenancy: { active: true }, status: 'live', NOT: { slug: null } },
     select: { id: true, name: true, nameAm: true, phone: true, slug: true, category: true },
   }).catch(() => []);
-  // "air" on its own matched a spa and "ticket" a park ticket office, so the test names the trade.
-  const TRADE = /travel|tour|ጉዞ/i;
-  const partners = shops.filter(sh => named.includes(sh.slug || '')
-    || TRADE.test((sh.name || '') + ' ' + (sh.nameAm || '')));
+  const partners = shops.filter(sh => isFlightPartner(sh, named));
   // An explicitly named partner outranks one matched by its name.
   partners.sort((a, b) => (named.indexOf(b.slug) - named.indexOf(a.slug)));
   return {
