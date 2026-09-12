@@ -83,7 +83,12 @@ const SENTENCE = {
 
   // ---- what one question actually sends
   console.log('\n=== what one question actually costs ===');
-  const knowledge = require('/var/www/connectcare/binasmart/knowledge');
+  // require() hands back the module, whose export is a factory — knowledge.contextFor was undefined
+  // and the whole per-question section was being skipped by the .catch() below. Build the instance
+  // the way server.js does, and load the corpus once.
+  const { makeKnowledge } = require('/var/www/connectcare/binasmart/knowledge');
+  const knowledge = makeKnowledge({ prisma, apiKey: KEY });
+  await knowledge.load();
   const QS = [
     'ፓስፖርት ለማውጣት ስንት ብር ነው?',
     'የቤት ኪራይ ውል የት ይመዘገባል?',
@@ -91,7 +96,7 @@ const SENTENCE = {
   ];
   let ctxTokens = 0, n = 0;
   for (const q of QS) {
-    const ctx = await knowledge.contextFor(q, {}).catch(() => '');
+    const ctx = await knowledge.contextFor(q, {});   // no catch: a failure here is the measurement failing
     if (!ctx) continue;
     const t = await countTokens(ctx);
     ctxTokens += t; n++;
@@ -99,7 +104,7 @@ const SENTENCE = {
     await sleep(4000);
   }
   const avg = n ? Math.round(ctxTokens / n) : 0;
-  console.log('  average retrieved context: ' + avg + ' tokens');
+  console.log('  average retrieved context: ' + avg + ' tokens' + '   (k=' + (process.env.KNOWLEDGE_K || 'default') + ', whatever contextFor uses today)');
 
   console.log('\n=== the point ===');
   const WINDOW = 1000000; // gemini-2.5-flash context window
