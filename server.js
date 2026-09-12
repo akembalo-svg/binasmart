@@ -252,7 +252,9 @@ fastify.get('/sitemap.xml', async (req, reply) => {
     where: { status: 'live', NOT: { slug: null }, OR: [{ NOT: { tgChatId: null } }, { NOT: { ownerPhone: null } }] },
     select: { slug: true } }).catch(() => [])).map(x => 'https://bina.et/shop/' + x.slug);
   const cshows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date() } }, select: { id: true } }).catch(() => []);
-  const films = await prisma.film.findMany({ where: { status: 'public', NOT: { rights: null } }, select: { slug: true } }).catch(() => []);
+  const films = (await prisma.film.findMany({ where: { status: 'public' },
+    select: { slug: true, status: true, rights: true, rightsUntil: true } }).catch(() => []))
+    .filter(f => filmIsPublic(f));
   // A post that canonicalises to a guide page has resigned in favour of it; asking Google to index it
   // anyway is the site contradicting itself. CANONICAL_TO is declared much further down this file,
   // which is fine — a handler body runs at request time, not during module evaluation.
@@ -592,6 +594,10 @@ fastify.get('/api/flights-price', async (req) => {
 // matched a spa and "ticket" a park ticket office, so the test names the trade.
 const { isFlightPartner, partnerSlugs } = require('./flights/partners');
 const { rollDemoTrips } = require('./travel/demo-trips');
+// The one rule for whether a film may be shown — a non-blank rights note whose rightsUntil has not
+// passed. watch/index.js uses it on every route that serves a film; the sitemap used to carry a
+// looser copy of its own and would have advertised a film the application refuses to play.
+const { isPublic: filmIsPublic } = require('./watch/rules');
 // NOT the normPhone below: that one FORMATS and never fails — it returns "+" for "not a phone" and
 // passes +971558785151 straight through. This one validates, and returns null for anything that is
 // not a well-formed Ethiopian mobile. Use it before handing a number to the WhatsApp bridge.
