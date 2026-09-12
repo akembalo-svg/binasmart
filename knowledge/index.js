@@ -80,7 +80,12 @@ function voiceBlock(root, which) {
   return cur.text;
 }
 function sha1(s) { return crypto.createHash('sha1').update(s).digest('hex'); }
-function tokens(s) { return String(s).toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter(t => t.length > 1); }
+const { foldEthiopic } = require('../assistant/lang');
+// Ethiopic folding on the keyword side. \u1200/\u1210/\u1280, \u1230/\u1220, \u12a0/\u12d0 and \u1338/\u1340 are the same sounds written
+// differently, and Amharic prose uses the pairs interchangeably - \u134d\u1275\u1215/\u134d\u1275\u1205, \u1230\u1290\u12f5/\u1220\u1290\u12f5, \u12d0\u1240\u1264 \u1215\u130d/\u12a0\u1240\u1264 \u1205\u130d.
+// asmat.js and afiya.js already fold their patterns; without the same folding here a user who types
+// \u134d\u1275\u1205 never keyword-matches a chunk written \u134d\u1275\u1215, so real answers drop out of the hybrid score.
+function tokens(s) { return foldEthiopic(String(s).toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ')).split(/\s+/).filter(t => t.length > 1); }
 
 // ---------- crawled-site hygiene ----------
 // A crawler sees a site's nav, footer and "related links" on every single page. htmlToText only removes the
@@ -350,7 +355,12 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   }
 
   // The block Bini gets. Empty for greetings / very short messages so we never pad a "hello".
-  async function contextFor(message, { k = 3, styleK = 2, lang } = {}) {
+  // k was 3 and styleK 2. Three chunks out of a 6,500-chunk index is a thin slice, and the law library
+  // alone is ~1,000 chunks, so a legal question routinely needed more than three to be answerable.
+  // styleK was set when the style corpus was 30 chunks; it is now 70+ and carries the correction rules,
+  // so two examples under-uses what is there. Amharic costs ~2 tokens per character, so this is not free -
+  // revisit if latency or spend moves noticeably.
+  async function contextFor(message, { k = 6, styleK = 4, lang } = {}) {
     const m = String(message || '').trim();
     const words = m.split(/\s+/).filter(Boolean);
     const am = lang ? (lang === 'am' || lang === 'am-latin') : isAmharic(m);
