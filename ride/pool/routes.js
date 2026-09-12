@@ -42,7 +42,9 @@ module.exports = function poolRoutes(fastify, { pool, groups, riderBotToken, dri
       // limited only by how fast it can ask. who() already limits both ways for join and create.
       if (phone && !pollRL('ph:' + phone)) return reply.code(429).send({ ok: false, error: 'slow_down' });
       reply.header('Cache-Control', 'no-store');
-      if (phone) return { ok: true, groups: await groups.mine(phone) };
+      // A typed phone number proves nothing, so it gets the schedule without the addresses or the
+      // names. Signed Telegram identity — the same proof /api/pool/mine needs for seats — gets it all.
+      if (phone) return { ok: true, groups: await groups.mine(phone, false), limited: true };
       if (req.query.initData) { const tg = tgauth.verifyInitData(String(req.query.initData), riderBotToken); if (!tg) return reply.code(401).send({ ok: false, error: 'telegram_auth_invalid' }); return { ok: true, groups: await groups.mineByTelegram(String(tg.user.id)) }; }
       return { ok: true, groups: [] };
     });

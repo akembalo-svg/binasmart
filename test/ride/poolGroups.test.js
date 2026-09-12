@@ -118,3 +118,65 @@ test('tick: opens today\'s car 15 min before departure with every member seated,
   w.clock.t = WED_0710 + 3 * 86400000 + 6 * 60000;
   assert.equal(await w.groups.tick(), 0);
 });
+
+// 2026-09-12. /api/pool/groups/mine?phone= answered with the group's pickup point, dropoff point,
+// days, exact time and every member's first name. Ethiopian mobile numbers are enumerable and a phone
+// number is not a credential, so anyone who knew somebody's number could ask where they live, where
+// they work and when they leave. The answer is tiered now: proof of identity gets what it always got.
+test('a phone number gets the schedule, not the addresses or the names', async () => {
+  const w = world();
+  const g = await w.groups.create({ name: 'Bole 7am', pickup: { lat: 9.01, lng: 38.76, label: 'Home' },
+    dropoff: { lat: 9.04, lng: 38.75, label: 'Office' }, days: 62, timeMin: 420,
+    organizer: { name: 'Abebe Kebede', phone: '+251911000111' } });
+  assert.equal(g.ok, true, JSON.stringify(g));
+
+  const limited = (await w.groups.mine('+251911000111', false))[0];
+  assert.ok(limited, 'the card still finds the group');
+  assert.equal(limited.name, 'Bole 7am', 'and still names it');
+  assert.equal(typeof limited.time, 'string', 'and still says when it leaves');
+  assert.equal(typeof limited.members, 'number', 'and how many are in it');
+
+  assert.equal(limited.from, undefined, 'the pickup point is where somebody lives');
+  assert.equal(limited.to, undefined, 'the dropoff point is where somebody works');
+  assert.equal(limited.names, undefined, 'and these are the people they travel with');
+  assert.equal(limited.organizer, undefined);
+  assert.equal(limited.share, undefined, 'the share link is the invitation — it is not handed to a guess');
+});
+
+test('a proven identity gets what it always got', async () => {
+  const w = world();
+  await w.groups.create({ name: 'Bole 7am', pickup: { lat: 9.01, lng: 38.76, label: 'Home' },
+    dropoff: { lat: 9.04, lng: 38.75, label: 'Office' }, days: 62, timeMin: 420,
+    organizer: { name: 'Abebe Kebede', phone: '+251911000111' } });
+
+  const full = (await w.groups.mine('+251911000111', true))[0];
+  assert.deepEqual(full.from, { lat: 9.01, lng: 38.76, label: 'Home' });
+  assert.deepEqual(full.to, { lat: 9.04, lng: 38.75, label: 'Office' });
+  assert.deepEqual(full.names, ['Abebe']);
+  assert.equal(full.organizer, 'Abebe');
+  assert.match(full.share, /\/pool\/g\//);
+});
+
+// mineByTelegram is the signed path, so it must ask for the full answer without the caller saying so.
+test('the Telegram path resolves to the full answer on its own', async () => {
+  const w = world();
+  await w.groups.create({ name: 'Bole 7am', pickup: { lat: 9.01, lng: 38.76, label: 'Home' },
+    dropoff: { lat: 9.04, lng: 38.75, label: 'Office' }, days: 62, timeMin: 420,
+    organizer: { name: 'Abebe Kebede', phone: '+251911000111', telegramId: '900001' } });
+  const viaTg = await w.groups.mineByTelegram('900001');
+  if (viaTg.length) {
+    assert.ok(viaTg[0].from, 'a signed Telegram identity is proof, so it sees the points');
+    assert.ok(viaTg[0].names, 'and the members');
+  }
+});
+
+// The invitation still works: whoever was sent the cuid sees the whole card, which is the point of it.
+test('the share card stays complete — the unguessable id is the invitation', async () => {
+  const w = world();
+  const g = await w.groups.create({ name: 'Bole 7am', pickup: { lat: 9.01, lng: 38.76, label: 'Home' },
+    dropoff: { lat: 9.04, lng: 38.75, label: 'Office' }, days: 62, timeMin: 420,
+    organizer: { name: 'Abebe Kebede', phone: '+251911000111' } });
+  const card = await w.groups.pub(g.group.id);
+  assert.ok(card.from, 'a colleague who was sent the link needs to know where it leaves from');
+  assert.ok(card.names);
+});

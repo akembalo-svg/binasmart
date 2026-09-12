@@ -38,12 +38,20 @@ function nextDeparture(group, ms) {
 function makeGroups({ prisma, pool, settings, api, baseUrl, now }) {
   const clock = now || Date.now;
 
-  function pubGroup(g, members, ms) {
+  // `full` is the difference between a caller who has proved who they are and one who has typed a
+  // phone number. A phone number is not a credential — Ethiopian mobile numbers are enumerable — so
+  // the untrusted answer carries the schedule, which is what the card needs, and not the two points
+  // and the names, which together say where a person lives, works and who they travel with.
+  function pubGroup(g, members, ms, full) {
     const active = members.filter(m => m.status === 'active');
     const next = nextDeparture(g, ms);
-    return { id: g.id, name: g.name, kind: g.kind, from: g.pickup, to: g.dropoff, days: g.days, daysLabel: daysLabel(g.days), time: hhmm(g.timeMin), timeMin: g.timeMin,
+    return { id: g.id, name: g.name, kind: g.kind,
+      from: full ? g.pickup : undefined, to: full ? g.dropoff : undefined,
+      days: g.days, daysLabel: daysLabel(g.days), time: hhmm(g.timeMin), timeMin: g.timeMin,
       seats: g.seats, tier: g.tier, womenOnly: !!g.womenOnly, status: g.status, members: active.length, full: active.length >= g.seats,
-      names: active.map(m => String(m.riderName || '').split(' ')[0]), nextAt: next, nextInMin: next ? Math.round((next - ms) / 60000) : null, organizer: String(g.organizerName || '').split(' ')[0] };
+      names: full ? active.map(m => String(m.riderName || '').split(' ')[0]) : undefined,
+      nextAt: next, nextInMin: next ? Math.round((next - ms) / 60000) : null,
+      organizer: full ? String(g.organizerName || '').split(' ')[0] : undefined };
   }
 
   async function create({ name, pickup, dropoff, days, timeMin, womenOnly, organizer }) {
@@ -67,7 +75,9 @@ function makeGroups({ prisma, pool, settings, api, baseUrl, now }) {
     const g = await prisma.poolGroup.findUnique({ where: { id: groupId } });
     if (!g) return null;
     const members = await prisma.poolGroupMember.findMany({ where: { groupId } });
-    return pubGroup(g, members, clock());
+    // The share card. Its reader was sent a cuid that cannot be guessed, so holding the link is the
+    // invitation and they get the whole thing — that is what an invitation is for.
+    return pubGroup(g, members, clock(), true);
   }
 
   async function join(groupId, { name, phone, telegramId, female }) {
@@ -77,7 +87,7 @@ function makeGroups({ prisma, pool, settings, api, baseUrl, now }) {
     if (g.womenOnly && female !== true) return { ok: false, error: 'women_only' };
     const members = await prisma.poolGroupMember.findMany({ where: { groupId } });
     const me = members.find(m => m.riderPhone === phone);
-    if (me && me.status === 'active') return { ok: true, duplicate: true, group: pubGroup(g, members, clock()) };
+    if (me && me.status === 'active') return { ok: true, duplicate: true, group: pubGroup(g, members, clock(), true) };
     if (members.filter(m => m.status === 'active').length >= g.seats) return { ok: false, error: 'group_full' };
     if (me) await prisma.poolGroupMember.update({ where: { id: me.id }, data: { status: 'active', riderName: name, telegramId: telegramId ? String(telegramId) : me.telegramId } });
     else await prisma.poolGroupMember.create({ data: { groupId, riderName: name, riderPhone: phone, telegramId: telegramId ? String(telegramId) : null, status: 'active' } });
@@ -99,21 +109,23 @@ function makeGroups({ prisma, pool, settings, api, baseUrl, now }) {
     return { ok: true, closed: false };
   }
 
-  async function mine(phone) {
+  // `full` comes from the route: true only when the caller proved a Telegram identity.
+  async function mine(phone, full) {
     const ms = clock();
     const ms_ = await prisma.poolGroupMember.findMany({ where: { riderPhone: phone, status: 'active', group: { status: 'active' } }, orderBy: { joinedAt: 'desc' }, take: 10 });
     const out = [];
     for (const m of ms_) {
       const g = await prisma.poolGroup.findUnique({ where: { id: m.groupId } }); if (!g) continue;
       const members = await prisma.poolGroupMember.findMany({ where: { groupId: g.id } });
-      out.push({ ...pubGroup(g, members, ms), organizerIsMe: g.organizerPhone === phone, share: (baseUrl || 'https://bina.et') + '/pool/g/' + g.id });
+      out.push({ ...pubGroup(g, members, ms, full), organizerIsMe: g.organizerPhone === phone,
+        share: full ? (baseUrl || 'https://bina.et') + '/pool/g/' + g.id : undefined });
     }
     return out;
   }
 
   async function mineByTelegram(telegramId) {
     const m = await prisma.poolGroupMember.findFirst({ where: { telegramId: String(telegramId), status: 'active' }, orderBy: { joinedAt: 'desc' } });
-    return m ? mine(m.riderPhone) : [];
+    return m ? mine(m.riderPhone, true) : [];   // signed Telegram identity: the full answer
   }
 
   // Scheduled every minute by ride/index.js: open today's car 15 minutes before departure, members seated.
