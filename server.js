@@ -261,9 +261,9 @@ fastify.get('/sitemap.xml', async (req, reply) => {
   const tnds = await prisma.tender.findMany({
     where: { published: true, OR: [
       { deadline: null, publishedAt: { gte: new Date(Date.now() - 45 * 86400000) } },
-      { deadline: { gte: new Date() } },
+      { deadline: { gte: openSince() } },   // a bare date closes at midnight in Addis, not in UTC
     ] },
-    select: { slug: true } });
+    select: { slug: true, deadline: true } });
   // Only shops whose owner has claimed them. The rest are noindex — see business/claimed.js —
   // and a sitemap is a request to index. ownerPhone used to count here; it is ops noting who MAY
   // claim a shop, not the owner claiming it, so it never belonged in this test.
@@ -1731,12 +1731,17 @@ fastify.get('/tenders', async (req, reply) => {
   const showClosed = req.query.show === 'closed';
   const now = new Date();
   const where = { published: true, ...(cat ? { category: cat } : {}) };
+  // The query fetches generously and the rule decides exactly, so no SQL has to model a timezone:
+  // a deadline stored as a bare date is open until midnight in Addis, which is 21:00 UTC that day.
   const tenders = showClosed
-    ? await prisma.tender.findMany({ where: { ...where, deadline: { lt: now } },
-        orderBy: [{ deadline: 'desc' }], take: 200 })   // most recently closed first
-    : await prisma.tender.findMany({ where: { ...where, OR: [{ deadline: null }, { deadline: { gte: now } }] },
-        orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: 200 });
-  const closedCount = await prisma.tender.count({ where: { ...where, deadline: { lt: now } } });
+    ? (await prisma.tender.findMany({ where: { ...where, deadline: { lt: openSince(now) } },
+        orderBy: [{ deadline: 'desc' }], take: 260 }))   // most recently closed first
+      .filter(t => tenderClosedAt(t.deadline, now)).slice(0, 200)
+    : (await prisma.tender.findMany({ where: { ...where, OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }] },
+        orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: 260 }))
+      .filter(t => !tenderClosedAt(t.deadline, now)).slice(0, 200);
+  const closedCount = (await prisma.tender.findMany({ where: { ...where, deadline: { lt: openSince(now) } }, select: { deadline: true } }))
+    .filter(t => tenderClosedAt(t.deadline, now)).length;
   const chips = ['ሁሉም', ...TENDER_CATS].map(c =>
     `<a class="chip sans ${(!cat && c === 'ሁሉም') || cat === c ? 'on' : ''}" href="/tenders${c === 'ሁሉም' ? '' : '?cat=' + encodeURIComponent(c)}">${c}</a>`).join('');
   const rows = tenders.map(t => `<div class="t-card">
@@ -1746,7 +1751,7 @@ fastify.get('/tenders', async (req, reply) => {
       <div class="t-org sans">${escH(t.org)}</div>
       <div class="t-tags sans"><span class="t-tag">📍 ${escH(t.region)}</span>${t.budget ? `<span class="t-tag">💰 ${escH(t.budget)}</span>` : ''}${t.deadline ? `<span class="t-tag">🗓 Deadline: ${amDate(t.deadline)}</span>` : `<span class="t-tag">🗓 ማብቂያ፡ ሰነዱን ይመልከቱ</span>`}</div>
     </div>
-    ${t.deadline ? `<div class="dl sans" data-deadline="${new Date(t.deadline).toISOString()}"><b></b><span></span></div>` : ''}
+    ${t.deadline ? `<div class="dl sans" data-deadline="${closesAt(t.deadline).toISOString()}"><b></b><span></span></div>` : ''}
   </div>`).join('');
   const empty = `<div class="empty"><div class="big">📋</div><h3>የመጀመሪያዎቹ ጨረታዎች በቅርቡ ይለቀቃሉ</h3>
     <p class="sans" style="max-width:520px;margin:0 auto">Daily verified construction, supply and service tenders from across Ethiopia — every listing checked against its source before publishing. First listings go live this week.</p>
@@ -1781,7 +1786,7 @@ fastify.get('/tenders/:slug', async (req, reply) => {
   if (!t || !t.published) return reply.code(404).type('text/html').send(newsShell({ title: 'Not found', desc: '', canonical: 'https://bina.et/tenders', body: '<main><div class="empty"><div class="big">📋</div><h3>ጨረታው አልተገኘም</h3><p class="sans"><a href="/tenders" style="color:var(--em)">← ወደ ጨረታዎች</a></p></div></main>', active: 'tenders' }));
   // A tender whose deadline has passed says so HERE, in the html, not only after the countdown
   // script runs — a crawler and a slow connection both see the server's version first.
-  const tenderClosed = !!(t.deadline && new Date(t.deadline) < new Date());
+  const tenderClosed = tenderClosedAt(t.deadline);
   const closedBanner = tenderClosed
     ? `<div class="sans" style="display:flex;gap:12px;align-items:center;margin:0 0 22px;padding:14px 18px;border-radius:14px;background:#fdeaea;border:1.5px solid #f3bdbd;color:#8a1f1f"><span style="font-size:24px;line-height:1">🔒</span><span><b style="display:block;font-size:15px">ይህ ጨረታ ተዘግቷል · This tender has closed</b><span style="font-size:13px">ማብቂያው ${amDate(t.deadline)} ነበር። <a href="/tenders" style="color:#8a1f1f;font-weight:700">ክፍት ጨረታዎችን ይመልከቱ · See open tenders →</a></span></span></div>`
     : '';
@@ -1792,7 +1797,7 @@ fastify.get('/tenders/:slug', async (req, reply) => {
     ${t.titleAm ? `<p class="sans" style="color:var(--mut);font-size:15px;margin:-6px 0 10px">${escH(t.title)}</p>` : ''}
     <div class="rule sans"><span>${escH(t.org)}</span><span>·</span><span>📍 ${escH(t.region)}</span></div>
     <div class="t-tags sans" style="margin-bottom:26px">${t.deadline ? `<span class="t-tag">🗓 Deadline: ${amDate(t.deadline)}</span>` : `<span class="t-tag">🗓 ማብቂያ፡ ሰነዱን ይመልከቱ · See document</span>`}${t.budget ? `<span class="t-tag">💰 ${escH(t.budget)}</span>` : ''}</div>
-    ${t.deadline ? `<div class="dl sans" style="display:inline-block;margin-bottom:26px" data-deadline="${new Date(t.deadline).toISOString()}"><b></b><span></span></div>` : ''}
+    ${t.deadline ? `<div class="dl sans" style="display:inline-block;margin-bottom:26px" data-deadline="${closesAt(t.deadline).toISOString()}"><b></b><span></span></div>` : ''}
     <h2 class="sans" style="font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin:26px 0 10px">ስለ ጨረታው · About this tender</h2>
     <div class="body-t"><p>${escH(t.summary)}</p>${t.bodyHtml || ''}</div>
     ${t.sourceUrl ? `<h2 class="sans" style="font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin:26px 0 8px">ምንጭ · Source</h2>` : ''}
@@ -1897,6 +1902,11 @@ const pickFields = (body, fields) => { const d = {}; for (const f of fields) if 
 // The slug is concatenated into the sitemap and into every canonical without escaping, so an "&" in
 // one would make the sitemap invalid XML and Google would drop the whole file, not just that url.
 const badSlug = s => !SLUG_RE.test(String(s || ''));
+// sourceUrl is rendered as an href. escH stops it breaking out of the attribute but says nothing
+// about the scheme, so "javascript:..." would be a working link on the page. business/index.js
+// already refuses those for a shop's socialLink; tenders never learned it. All 244 rows are http
+// today - this is the guard.
+const httpUrl = u => { try { const p = new URL(String(u)); return p.protocol === 'http:' || p.protocol === 'https:'; } catch (e) { return false; } };
 
 fastify.post('/api/admin/news', async (req, reply) => {
   if (authFail(req, reply)) return;
@@ -1930,6 +1940,9 @@ fastify.post('/api/admin/tender', async (req, reply) => {
     const d = new Date(data.deadline);
     if (isNaN(d)) return reply.code(400).send({ error: 'deadline must be a date' });
     data.deadline = d;
+  }
+  if (data.sourceUrl !== undefined && data.sourceUrl !== null && !httpUrl(data.sourceUrl)) {
+    return reply.code(400).send({ error: 'sourceUrl must be http or https' });
   }
   const t = await prisma.tender.upsert({ where: { slug: data.slug }, update: data, create: data });
   const turl = 'https://bina.et/tenders/' + t.slug;
@@ -2025,13 +2038,14 @@ fastify.post('/api/admin/tender-queue/publish', async (req, reply) => {
   const cands = loadCands();
   const byId = Object.fromEntries(cands.map(c => [c.id, c]));
   const slugify = s => String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60);
-  let published = 0; const doneIds = [];
+  let published = 0; const doneIds = [], failed = [];
   for (const it of items) {
     const c = byId[it.id]; if (!c) continue;
     const slug = 'rt-' + slugify((c.org||'') + '-' + (it.title||c.title));
     const rec = { slug, title: (it.title||c.title).slice(0,140), category: it.category||'Supply',
       region: it.region||'Ethiopia', org: c.org || 'Ethiopia', summary: (it.summary||c.summary).slice(0,600),
-      deadline: new Date(it.deadline), sourceUrl: c.source, sourceName: c.sourceName, published: true };
+      deadline: new Date(it.deadline), sourceUrl: httpUrl(c.source) ? c.source : null, sourceName: c.sourceName, published: true };
+    if (isNaN(rec.deadline)) { failed.push({ id: it.id, why: 'deadline is not a date' }); continue; }
     try {
       const t = await prisma.tender.upsert({ where: { slug }, update: rec, create: rec });
       published++; doneIds.push(it.id);
@@ -2041,11 +2055,13 @@ fastify.post('/api/admin/tender-queue/publish', async (req, reply) => {
           excerpt: (t.org ? t.org + '\n' : '') + '⏰ Deadline: ' + dl + (t.region ? ' · 📍 ' + t.region : ''),
           url: 'https://bina.et/tenders/' + t.slug, tags: '#Tender #ጨረታ #Ethiopia' }).catch(()=>{});
       }
-    } catch(e) { /* skip bad row */ }
+    } catch(e) { failed.push({ id: it.id, why: String(e.message || e).slice(0, 140) }); }
   }
   const remaining = cands.filter(c => !doneIds.includes(c.id));
   saveCands(remaining);
-  return { published, remaining: remaining.length };
+  // A row that cannot be written stays in the queue. It used to do that silently, so "published: 3"
+  // out of five looked like a full run and the two that failed were never explained.
+  return { published, remaining: remaining.length, failed };
 });
 
 // ===== PUBLIC: universal search (buildings + shops) =====
@@ -2087,6 +2103,7 @@ fastify.get('/blog/smart-building-management-ethiopia', async (req, reply) => re
 // it — that would need a secret in the printed code.
 const { makeVisit } = require('./building/visit');
 const { isClaimed } = require('./business/claimed');
+const { closesAt, isClosed: tenderClosedAt, openSince } = require('./tenders/deadline');
 const { mint: visitTokenNow, check: visitOk } = makeVisit(process.env.VISIT_SECRET || OWNER_KEY || 'bina-visit-fallback');
 
 fastify.get('/b/:slug', async (req, reply) => {
