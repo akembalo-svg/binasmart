@@ -235,8 +235,16 @@ fastify.get('/sitemap.xml', async (req, reply) => {
   const posts = await prisma.newsPost.findMany({ where: { published: true }, select: { slug: true } });
   // Only tenders that are still open. A sitemap is a list of pages worth crawling, and a closed
   // tender can never satisfy the search that finds it — 101 of 244 had already expired.
+  // A tender with no deadline has nothing to compare against now, so it used to stay here forever.
+  // 38 of 244 have none. The 45-day cutoff comes from the 205 tenders that DO carry one: median 9
+  // days from publication to deadline, p90 22, only 2.4% longer than 30. It leans long on purpose —
+  // hiding a tender that is still open costs someone an opportunity, keeping a dead one costs an
+  // impression. The page stays reachable either way; this only withdraws the request to index it.
   const tnds = await prisma.tender.findMany({
-    where: { published: true, OR: [{ deadline: null }, { deadline: { gte: new Date() } }] },
+    where: { published: true, OR: [
+      { deadline: null, publishedAt: { gte: new Date(Date.now() - 45 * 86400000) } },
+      { deadline: { gte: new Date() } },
+    ] },
     select: { slug: true } });
   // Only shops whose owner has claimed them. The rest are noindex — see business/index.js —
   // and a sitemap is a request to index.
