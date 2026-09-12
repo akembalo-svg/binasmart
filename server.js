@@ -303,6 +303,9 @@ fastify.post('/api/restaurant/:shopId/order', async (req, reply) => {
   if (!orderRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const { table, items, customerName, customerPhone, note } = req.body || {};
   if (!Array.isArray(items) || !items.length) return reply.code(400).send({ error: 'empty_order' });
+  // The only one of these where a phone is optional, so the dimension applies only when given.
+  const orderPk = phoneKey(customerPhone);
+  if (orderPk && !orderRL(orderPk)) return reply.code(429).send({ error: 'too_many' });
   const shop = await prisma.shop.findUnique({ where: { id: req.params.shopId },
     include: { tenancy: { include: { unit: { include: { building: true } } } } } });
   if (!shop) return reply.code(404).send({ error: 'not_found' });
@@ -426,6 +429,8 @@ fastify.post('/api/market-lead', async (req, reply) => {
   if (!leadRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const b = req.body || {};
   if (!b.name || !b.phone || !b.kind) return reply.code(400).send({ error: 'missing' });
+  const leadPk = phoneKey(b.phone);
+  if (leadPk && !leadRL(leadPk)) return reply.code(429).send({ error: 'too_many' });
   const lead = await prisma.marketLead.create({ data: {
     kind: String(b.kind).slice(0,20), listingSlug: b.listingSlug ? String(b.listingSlug).slice(0,80) : null,
     listingRef: b.listingRef ? String(b.listingRef).slice(0,140) : null, name: String(b.name).slice(0,80),
@@ -512,6 +517,8 @@ fastify.post('/api/insurance-lead', async (req, reply) => {
   if (!insLeadRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const b = req.body || {};
   if (!b.name || !b.phone) return reply.code(400).send({ error: 'missing_fields' });
+  const insPk = phoneKey(b.phone);
+  if (insPk && !insLeadRL(insPk)) return reply.code(429).send({ error: 'too_many' });
   const lead = await prisma.insuranceLead.create({ data: {
     insType: String(b.insType || 'Other').slice(0, 30), name: String(b.name).slice(0, 80), phone: String(b.phone).slice(0, 30),
     city: b.city ? String(b.city).slice(0, 40) : null, coverType: b.coverType ? String(b.coverType).slice(0, 30) : null,
@@ -601,7 +608,10 @@ const { isPublic: filmIsPublic } = require('./watch/rules');
 // NOT the normPhone below: that one FORMATS and never fails — it returns "+" for "not a phone" and
 // passes +971558785151 straight through. This one validates, and returns null for anything that is
 // not a well-formed Ethiopian mobile. Use it before handing a number to the WhatsApp bridge.
-const { normPhone: etMobile } = require('./ride/phone');
+const { normPhone: etMobile, phoneKey } = require('./ride/phone');
+// Rate limits below key on the IP AND the caller's phone, copying /api/watch/rent. On Ethiopian
+// mobile networks an IP is shared by many people and cheap for one person to change, so either
+// dimension alone is weak. phoneKey is a key, not a validator — see ride/phone.js.
 // Naming partners is the only way in since the trade fallback was dropped, so an empty list is not a
 // quiet default — it takes /flights/:slug and the partner list offline. Say so rather than let a
 // missing variable look like "no agencies today".
@@ -626,6 +636,8 @@ fastify.post('/api/flights/:shopId/request', async (req, reply) => {
   if (!flightRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const { tripType, fromCity, toCity, departDate, returnDate, passengers, cabin, name, phone, note } = req.body || {};
   if (!fromCity || !toCity || !departDate || !name || !phone) return reply.code(400).send({ error: 'missing_fields' });
+  const flightPk = phoneKey(phone);
+  if (flightPk && !flightRL(flightPk)) return reply.code(429).send({ error: 'too_many' });
   const shop = await prisma.shop.findUnique({ where: { id: req.params.shopId },
     include: { tenancy: { include: { unit: { include: { building: true } } } } } });
   if (!shop) return reply.code(404).send({ error: 'not_found' });
@@ -1317,6 +1329,8 @@ fastify.post('/api/travel/:tripId/book', async (req, reply) => {
   if (!travelRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const { name, phone, seats } = req.body || {};
   if (!name || !phone) return reply.code(400).send({ error: 'missing_fields' });
+  const travelPk = phoneKey(phone);
+  if (travelPk && !travelRL(travelPk)) return reply.code(429).send({ error: 'too_many' });
   const n = parseInt(seats) || 1;
   if (n < 1 || n > 10) return reply.code(400).send({ error: 'max_10_seats' });
   const t = await prisma.travelTrip.findUnique({ where: { id: req.params.tripId },
@@ -1363,6 +1377,8 @@ fastify.post('/api/hotel/:slug/book', async (req, reply) => {
   const { roomTypeId, guestName, guestPhone, checkIn, checkOut, rooms } = req.body || {};
   if (!roomTypeId || !guestName || !guestPhone || !checkIn || !checkOut)
     return reply.code(400).send({ error: 'missing_fields' });
+  const bookPk = phoneKey(guestPhone);
+  if (bookPk && !bookRL(bookPk)) return reply.code(429).send({ error: 'too_many' });
   const ci = new Date(checkIn), co = new Date(checkOut);
   const nRooms = Math.max(1, parseInt(rooms) || 1);
   if (!(co > ci)) return reply.code(400).send({ error: 'invalid_dates' });
