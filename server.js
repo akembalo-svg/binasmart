@@ -186,6 +186,9 @@ function checkPw(pw, stored){
     return cryptoMod.timingSafeEqual(Buffer.from(h, 'hex'), cryptoMod.scryptSync(pw, salt, 32));
   }catch(e){ return false; }
 }
+// ⚠️ This FORMATS a phone number, it does not validate one: "not a phone" comes back as "+" and a
+// foreign number passes through unchanged. Fine for a database lookup, wrong for deciding whether to
+// send someone a message — use etMobile (ride/phone.js) for that.
 function normPhone(p){
   let d = String(p || '').replace(/\D/g, '');
   if (d.startsWith('0')) d = '251' + d.slice(1);
@@ -390,7 +393,11 @@ fastify.post('/api/admin/property', async (req, reply) => {
   const p = await prisma.propertyListing.upsert({ where: { slug: b.slug }, update: data, create: data });
   return { ok: true, url: 'https://bina.et/property#' + p.slug };
 });
+// This route ends in a WhatsApp message from BinaSmart's own number, to a number chosen by whoever
+// called it. Unlimited, that is an open relay and a way to get 0911244344 banned again.
+const leadRL = hotelLimiter(600000, 5);
 fastify.post('/api/market-lead', async (req, reply) => {
+  if (!leadRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const b = req.body || {};
   if (!b.name || !b.phone || !b.kind) return reply.code(400).send({ error: 'missing' });
   const lead = await prisma.marketLead.create({ data: {
@@ -400,7 +407,12 @@ fastify.post('/api/market-lead', async (req, reply) => {
     note: b.note ? String(b.note).slice(0,500) : null } });
   const emoji = lead.kind === 'car' ? '\uD83D\uDE97' : '\uD83C\uDFE0';
   notifyAdmins(emoji + ' NEW ' + lead.kind.toUpperCase() + ' LEAD \u2014 BinaSmart\n\uD83D\uDC64 ' + lead.name + ' (' + lead.phone + ')' + (lead.listingRef ? '\n\uD83D\uDCCC ' + lead.listingRef : '') + (lead.budget ? '\n\uD83D\uDCB0 Budget: ' + lead.budget : '') + '\n\uD83D\uDCDD ' + (lead.note || '\u2014')).catch(() => {});
-  sendWa(lead.phone, 'BinaSmart \u2014 \u1325\u12eB\u1244\u12CE\u1295 \u1270\u1240\u1265\u1208\u1293\u1362 \u1260\u1240\u122D\u1265 \u12A5\u1295\u12F0\u12CD\u120B\u1208\u1295\u1362 (bina.et)').catch(() => {});
+  // The lead is kept and the admin is told whatever the number looks like — /property is aimed at the
+  // diaspora, so a foreign number is a customer, not a mistake. But the outbound message only goes to
+  // a well-formed Ethiopian mobile, the numbers this bridge exists to serve. Without normPhone here,
+  // b.phone was an arbitrary string handed straight to the sender.
+  const waTo = etMobile(lead.phone);
+  if (waTo) sendWa(waTo, 'BinaSmart \u2014 \u1325\u12eB\u1244\u12CE\u1295 \u1270\u1240\u1265\u1208\u1293\u1362 \u1260\u1240\u122D\u1265 \u12A5\u1295\u12F0\u12CD\u120B\u1208\u1295\u1362 (bina.et)').catch(() => {});
   return { ok: true };
 });
 
@@ -547,6 +559,10 @@ fastify.get('/api/flights-price', async (req) => {
 // matched a spa and "ticket" a park ticket office, so the test names the trade.
 const { isFlightPartner, partnerSlugs } = require('./flights/partners');
 const { rollDemoTrips } = require('./travel/demo-trips');
+// NOT the normPhone below: that one FORMATS and never fails — it returns "+" for "not a phone" and
+// passes +971558785151 straight through. This one validates, and returns null for anything that is
+// not a well-formed Ethiopian mobile. Use it before handing a number to the WhatsApp bridge.
+const { normPhone: etMobile } = require('./ride/phone');
 // Naming partners is the only way in since the trade fallback was dropped, so an empty list is not a
 // quiet default — it takes /flights/:slug and the partner list offline. Say so rather than let a
 // missing variable look like "no agencies today".
