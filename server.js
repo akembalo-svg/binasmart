@@ -541,6 +541,10 @@ fastify.get('/api/flights-price', async (req) => {
 // FLIGHT_PARTNERS names slugs explicitly; otherwise the shop's trade has to say so. "air" on its own
 // matched a spa and "ticket" a park ticket office, so the test names the trade.
 const { isFlightPartner, partnerSlugs } = require('./flights/partners');
+// Naming partners is the only way in since the trade fallback was dropped, so an empty list is not a
+// quiet default — it takes /flights/:slug and the partner list offline. Say so rather than let a
+// missing variable look like "no agencies today".
+if (!partnerSlugs().length) console.warn('[flights] FLIGHT_PARTNERS is empty — no agency can take a flight request and /flights/:slug will 404 for everyone.');
 // A flight request is limited the way an order is: it ends in a message to a real agency's phone.
 const flightRL = hotelLimiter(600000, 8);
 
