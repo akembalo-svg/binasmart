@@ -37,6 +37,10 @@ module.exports = function poolRoutes(fastify, { pool, groups, riderBotToken, dri
     fastify.get('/api/pool/groups/mine', async (req, reply) => {
       if (!pollRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
       const phone = normPhone(req.query.phone);
+      // This answers "which commute groups is this person in" from a phone number, so the phone is the
+      // dimension that matters: on one address, walking a range of 09… numbers would otherwise be
+      // limited only by how fast it can ask. who() already limits both ways for join and create.
+      if (phone && !pollRL('ph:' + phone)) return reply.code(429).send({ ok: false, error: 'slow_down' });
       reply.header('Cache-Control', 'no-store');
       if (phone) return { ok: true, groups: await groups.mine(phone) };
       if (req.query.initData) { const tg = tgauth.verifyInitData(String(req.query.initData), riderBotToken); if (!tg) return reply.code(401).send({ ok: false, error: 'telegram_auth_invalid' }); return { ok: true, groups: await groups.mineByTelegram(String(tg.user.id)) }; }
@@ -63,7 +67,10 @@ module.exports = function poolRoutes(fastify, { pool, groups, riderBotToken, dri
 
   // ---- ops (owner key, same as /api/ride/ops/*) ----
   if (OWNER_KEY) {
-    const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
+    // Header first, then the query — matching server.js and ride/routes.js. A query string is written
+    // to the access log and the address bar; the parameter stays because some ops links are plain
+    // document navigations, which cannot carry a header.
+    const ops = (req, reply) => { if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
     fastify.get('/api/pool/ops/list', async (req, reply) => { if (!ops(req, reply)) return; return { ok: true, pools: await pool.opsList() }; });
     fastify.get('/api/pool/ops/stats', async (req, reply) => { if (!ops(req, reply)) return; return { ok: true, ...(await pool.opsStats(req.query.days)) }; });
     fastify.post('/api/pool/ops/:id/cancel', async (req, reply) => { if (!ops(req, reply)) return; const r = await pool.opsCancel(String(req.params.id)); if (!r.ok) return reply.code(r.error === 'not_found' ? 404 : 409).send(r); return r; });
