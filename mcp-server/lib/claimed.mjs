@@ -3,8 +3,8 @@
 // files and fails if they stop naming the same fields.
 //
 // Has the owner of this shop asked to be published? Only something the owner DID counts:
-//   claimedAt   they completed a claim — a code sent to the shop's phone and typed back, or ops
-//               approving it. Written by business/owners.js approve().
+//   claimedAt   they completed a claim with the code sent to the Telegram id on the shop record.
+//               Written by business/owners.js approve(). An ops approval does not write it.
 //   tgChatId    they pressed the link in the Telegram bot.
 //
 // ownerPhone does NOT count. The schema calls it "the phone that may claim this shop" — ops writing

@@ -343,7 +343,8 @@ model Shop {
   slug          String?  @unique     // public page: /shop/<slug>
   tgChatId      String?              // Telegram chat that gets orders/requests (owner pressed the bot link)
   ownerPhone    String?              // the phone that may claim this shop (a pre-authorisation, NOT proof)
-  // When the owner proved control: a verified claim code, or ops approving their claim. This is
+  // When the owner proved control: the claim code sent to the Telegram on record, typed back. NOT an
+  // ops approval, which only grants access. This is
   // the consent signal - the page is listed, publishes its phone and states its hours only with it.
   claimedAt     DateTime?
   logoUrl       String?

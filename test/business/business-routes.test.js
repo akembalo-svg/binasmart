@@ -247,3 +247,28 @@ test('the page carries one robots tag, and it says noindex until the owner claim
   assert.match(tags[0], /noindex/);
   assert.equal(/application\/ld\+json/.test(page.body), false, 'and no LocalBusiness markup for an unclaimed listing');
 });
+
+// 2026-09-13. An ops approval grants dashboard access; it is not the owner consenting to be published.
+// The claimant only typed a phone number, and the approval hands the session token to the ops page.
+// On 2026-09-12 an ops approval DID publish: Kaldi's Cafe got its phone on the API, an indexed page and
+// LocalBusiness markup, on a claim approved from ops in the same minute it was made, with no code sent.
+test('an ops-approved claim opens the dashboard but publishes nothing — access, not consent', async () => {
+  const { f, db } = await app();
+  // s2 has no Telegram id, so signIn goes through ops approval rather than a code.
+  const a = await signIn(f, '0911419313');
+  const me = (await f.inject({ method: 'GET', url: '/api/business/me', headers: a.H })).json();
+  assert.equal(me.ok, true, 'the owner can still get into their dashboard');
+
+  const row = db._.shop.find(x => x.id === 's2');
+  assert.equal(row.claimedAt, undefined, 'but the consent signal was not written');
+  const slug = me.shop.slug;
+  const pub = (await f.inject({ method: 'GET', url: '/api/shops/' + slug })).json();
+  assert.equal(pub.shop.claimed, false);
+  assert.equal(pub.shop.phone, undefined, 'and the number stays off the public API');
+});
+
+test('a claim proven with the code sent to the Telegram on record does publish', async () => {
+  const { f, db } = await app();
+  await signIn(f, '0910530813');   // s1 carries telegram 777, so this is the code path
+  assert.ok(db._.shop.find(x => x.id === 's1').claimedAt, 'the code reached the owner, so that is consent');
+});

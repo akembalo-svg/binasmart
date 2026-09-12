@@ -59,18 +59,26 @@ function makeOwners({ prisma, now, notify }) {
       const u = await prisma.ownerClaim.update({ where: { id: c.id }, data: { tries: { increment: 1 } } });
       return { ok: false, error: 'bad_code', left: Math.max(0, MAX_TRIES - u.tries) };
     }
-    return approve(c);
+    return approve(c, true);   // the code reached the Telegram on record: proven
   }
 
   // Shared by code-verify and ops approval: mark the claim used and open a session.
-  async function approve(claim) {
+  // `proven` says HOW the claim passed. A 6-digit code sent to the Telegram id already on the shop
+  // record and typed back is the owner proving control. Ibrahim approving from ops is not: the claimant
+  // typed a phone number — one that has been public on the shop page — and the approval returns the
+  // session token to the ops page, not to them. It grants dashboard access and nothing more.
+  async function approve(claim, proven) {
     const done = await prisma.ownerClaim.updateMany({ where: { id: claim.id, status: 'PENDING' }, data: { status: 'VERIFIED' } });
     if (!done.count) return { ok: false, error: 'used' };
     // The consent signal, written here and nowhere else. Four places decide whether to publish this
     // shop's phone, index its page, emit LocalBusiness JSON-LD and state its hours; all of them read
     // claimedAt. Before this, claiming wrote nothing, so an owner could pass the code, load the
     // dashboard and enter a full menu while their page stayed noindex with the phone stripped out.
-    if (claim.shopId) {
+    // The consent signal is written only for a code the owner received. On 2026-09-12 this ran for an
+    // ops approval too, and published Kaldi's Cafe: phone on the API, page indexed, LocalBusiness
+    // markup — on the strength of a claim approved from ops in the same minute it was made, with no
+    // code ever sent, against a menu a script had inserted seven weeks earlier.
+    if (claim.shopId && proven) {
       await prisma.shop.update({ where: { id: claim.shopId }, data: { claimedAt: new Date(clock()) } })
         .catch(e => console.error('[owners] claimedAt: ' + e.message));
     }
@@ -83,7 +91,7 @@ function makeOwners({ prisma, now, notify }) {
     const c = await prisma.ownerClaim.findUnique({ where: { id: String(claimId || '') } });
     if (!c) return { ok: false, error: 'unknown' };
     if (c.status !== 'PENDING') return { ok: false, error: 'used' };
-    return approve(c);
+    return approve(c, false);  // ops approval: access, not consent to publish
   }
 
   // Step 3: every dashboard request. Returns the owner's own row, or null.

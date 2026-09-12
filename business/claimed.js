@@ -11,8 +11,9 @@
 //
 // WHAT COUNTS AS PROOF. Something the owner DID.
 //
-//   claimedAt   they completed a claim - a code sent to the shop's phone and typed back, or Ibrahim
-//               approving their claim from ops. Written by owners.approve() and nowhere else.
+//   claimedAt   they completed a claim with the 6-digit code sent to the Telegram id already on the
+//               shop record. Written by owners.approve() and nowhere else. An ops approval does NOT
+//               write it: that grants dashboard access, and the claimant only typed a phone number.
 //   tgChatId    they pressed the link in the Telegram bot, which binds the shop to their chat.
 //
 // WHAT DOES NOT COUNT, and used to.

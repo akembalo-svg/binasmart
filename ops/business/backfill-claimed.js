@@ -19,7 +19,10 @@ const mask = s => (s ? String(s).slice(0, 4) + '…' + String(s).slice(-3) : '(n
 
 (async () => {
   const claims = await prisma.ownerClaim.findMany({
-    where: { status: 'VERIFIED', NOT: { shopId: null } },
+    // Only claims that were proven with a code. A code is sent only when the claim carries a Telegram
+    // id, so a VERIFIED claim without one was an ops approval — access, not consent. The first run of
+    // this script missed that and published Kaldi's Cafe on the strength of one.
+    where: { status: 'VERIFIED', NOT: { shopId: null }, telegramId: { not: null } },
     orderBy: { createdAt: 'asc' },
     include: { shop: true },
   });
