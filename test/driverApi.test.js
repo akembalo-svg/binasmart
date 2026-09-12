@@ -353,3 +353,56 @@ test('the driver route carries Amharic-translatable turn instructions', async ()
   const down = await w.api.route(w.req({ body: { lat: 9.011, lng: 38.761 } }), reply());
   assert.deepEqual(down.instructions, [], 'a router outage yields no turns, never wrong ones');
 });
+
+// 2026-09-12. ride/routes.js can only key its limiter on the IP — a request that fails Telegram auth
+// has no driver id yet — and public/ride/drive.js sends a fix every four seconds, about 15 calls a
+// minute. On Ethiopian mobile, drivers share carrier NAT addresses, so at 60/min a handful of drivers
+// behind one address spent the budget between them: 429 on ping, no fixes, `away` after 45 seconds,
+// and no offers. Nothing in the logs reads as a fault. The per-driver budget lives in auth(), the
+// first place an identity exists.
+test('a driver has their own call budget, not one shared with everyone on the same carrier IP', async () => {
+  const w = world();
+  // d1 spends the whole minute.
+  let last = null;
+  for (let i = 0; i < 121; i++) { last = reply(); await w.api.session(w.req(), last); }
+  assert.equal(last.statusCode, 429, 'the 121st call in a minute is refused');
+  assert.equal(last.body.error, 'slow_down');
+
+  // d2 is a different person. On the old IP-keyed limit they would already be locked out.
+  const other = reply();
+  const s2 = await w.api.session({ body: { initData: tgauth.sign({ auth_date: String(Math.floor(w.clockRef.t / 1000)), user: { id: 900002, first_name: 'Bekele' } }, TOKEN) }, query: {}, params: {} }, other);
+  // session() allows a pending driver through so the app can show "waiting for approval" rather than
+  // an error, so d2 gets a normal 200 — which is the point: d1 being out of budget does not touch them.
+  assert.equal(other.statusCode, 200, 'one driver exhausting their budget must not silence another');
+  assert.equal(s2.ok, true);
+  assert.equal(s2.driver.name, 'Bekele');
+});
+
+test('the budget refills once the minute has passed', async () => {
+  const w = world();
+  for (let i = 0; i < 121; i++) await w.api.session(w.req(), reply());
+  const blocked = reply();
+  await w.api.session(w.req(), blocked);
+  assert.equal(blocked.statusCode, 429);
+
+  w.clockRef.t += 61_000;                 // a minute and a second later
+  const after = reply();
+  const s = await w.api.session(w.req(), after);
+  assert.equal(after.statusCode, 200);
+  assert.equal(s.ok, true, 'the driver is working again without anyone intervening');
+});
+
+// The limit must never be what an attacker hits — unsigned traffic should be turned away before it
+// can spend a real driver's budget.
+test('forged initData is refused before it can touch anybody\'s budget', async () => {
+  const w = world();
+  for (let i = 0; i < 50; i++) {
+    const rp = reply();
+    await w.api.session({ body: { initData: 'user=%7B%22id%22%3A900001%7D&hash=' + 'b'.repeat(64) }, query: {}, params: {} }, rp);
+    assert.equal(rp.statusCode, 401);
+  }
+  const real = reply();
+  const s = await w.api.session(w.req(), real);
+  assert.equal(real.statusCode, 200, 'the real driver is unaffected by fifty forged attempts');
+  assert.equal(s.ok, true);
+});

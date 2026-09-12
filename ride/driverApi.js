@@ -15,8 +15,26 @@ const ADDIS_TZ_OFFSET_MS = 3 * 3600 * 1000; // UTC+3, no DST — the earnings da
 function addisDay(ms) { return new Date(Math.floor((ms + ADDIS_TZ_OFFSET_MS) / 86400000) * 86400000 - ADDIS_TZ_OFFSET_MS); }
 const num = (v, lo, hi) => { const n = Number(v); return Number.isFinite(n) && n >= lo && n <= hi ? n : null; };
 
+// One driver, one budget. The route wrapper in ride/routes.js can only key on the IP — a request
+// that fails Telegram auth has no driver id yet — and on Ethiopian mobile many drivers share one
+// carrier address. The app sends a fix every four seconds, so a handful of drivers behind one NAT
+// would spend a shared IP budget between them, start getting 429 on ping, and go `away` with no
+// offers and nothing in the logs that reads as a fault. This is the dimension that survives NAT.
+const DRIVER_CALLS_PER_MIN = 120;   // the app sends ~15; the rest is headroom for retries and bursts
+function makeDriverLimiter(windowMs, max, now) {
+  const m = new Map();
+  return key => {
+    const t = now(); const hits = (m.get(key) || []).filter(x => t - x < windowMs);
+    if (hits.length >= max) return false;
+    hits.push(t); m.set(key, hits);
+    if (m.size > 2000) for (const [k, v] of m) { if (!v.length || t - v[v.length - 1] > windowMs) m.delete(k); }
+    return true;
+  };
+}
+
 function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, riderNotify, geo, settings, now, pool }) {
   const clock = now || Date.now;
+  const driverRL = makeDriverLimiter(60000, DRIVER_CALLS_PER_MIN, clock);
   // A pool ride carries several riders; the driver app needs the seat list to tick them on.
   async function poolInfo(rideId) {
     if (!pool) return null;
@@ -57,6 +75,9 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     if (!tg) { reply.code(401).send({ ok: false, error: 'telegram_auth_invalid' }); return null; }
     const drv = await prisma.driver.findFirst({ where: { telegramId: String(tg.user.id) } });
     if (!drv) { reply.code(404).send({ ok: false, error: 'not_registered' }); return null; }
+    // The first moment there is an identity to limit. Before this there is only an address, and on
+    // this network an address is a neighbourhood rather than a person.
+    if (!driverRL(drv.id)) { reply.code(429).send({ ok: false, error: 'slow_down' }); return null; }
     if (drv.status !== 'approved' && !(opts && opts.allowPending)) {
       reply.code(403).send({ ok: false, error: drv.status === 'suspended' ? 'suspended' : 'awaiting_approval', driver: pubDriver(drv) });
       return null;

@@ -45,7 +45,11 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
   const lookupRL = limiter(60000, 120);
   // The driver app heartbeats every 4 s (15/min) and the rider map polls every 3 s (20/min);
   // these ceilings leave room for a retry storm on a bad connection without inviting abuse.
-  const driveRL = limiter(60000, 60), trackRL = limiter(60000, 90);
+  // 300, not 60: this guards the UNAUTHENTICATED case only — a request that fails Telegram auth has
+  // no driver id to key on. The real per-driver budget now lives in driverApi.auth(), which is the
+  // first place an identity exists. At 60 a handful of drivers behind one carrier NAT spent the
+  // budget between them and silently stopped receiving offers.
+  const driveRL = limiter(60000, 300), trackRL = limiter(60000, 90);
   // Header first, then the query. A query string is written to the access log, the address bar and
   // any outgoing Referer; the parameter stays because the driver-document links are <a target="_blank">
   // document navigations, which cannot send a header. server.js reads them in the same order.
