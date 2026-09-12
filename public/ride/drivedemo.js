@@ -4,9 +4,17 @@
  * the driving view impossible to review from abroad. Demo mode replays a REAL baked Addis route
  * through the REAL app code so the whole experience can be judged from anywhere.
  *
- * What it must never do: reach the server, touch a live ride, or store a fake position. It answers
- * every /api/drive/* call locally, and it needs no Telegram sign-in. The only network request is the
- * static demo-route.json.
+ * What it must never do: touch a live ride, or store a fake position. Every /api/drive/* call is
+ * answered locally — drive.js routes all of them through one post(), which short-circuits here — and
+ * it needs no Telegram sign-in.
+ *
+ * It DOES make two network requests, and the earlier version of this note said it made one:
+ *   /static/ride/demo-route.json   the baked route
+ *   /api/ride/search?q=…           the destination box, on purpose. It is read-only, rate limited
+ *                                  per address, needs no identity and writes nothing, and a demo of
+ *                                  the driver app should search the real Addis gazetteer — a local
+ *                                  stub would make the demo less true, not safer.
+ * test/drive-demo.test.js holds this list, so a third one cannot be added quietly.
  */
 window.DDemo = (function () {
   'use strict';
