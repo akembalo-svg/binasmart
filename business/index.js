@@ -7,7 +7,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { makeOwners } = require('./owners');
-const { normPhone } = require('../ride/phone');
+const { normPhone, phoneKey } = require('../ride/phone');
 const { makeTgApi } = require('../ride/tgApi');
 
 const CATEGORIES = ['CAFE', 'RESTAURANT', 'PHARMACY', 'RETAIL', 'SERVICE', 'GYM', 'SALON', 'CLINIC', 'BANK', 'OFFICE', 'OTHER'];
@@ -189,6 +189,11 @@ module.exports = function registerBusiness(fastify, deps) {
   fastify.post('/api/business/claim', async (req, reply) => {
     const b = req.body || {};
     if (!claimRL('ip:' + clientIp(req))) return reply.code(429).send({ ok: false, error: 'too_many_requests' });
+    // startClaim sends a code to the owner's Telegram AND expires their pending claim first, so an
+    // attacker rotating IPs could both bombard that person and keep the real owner from ever
+    // completing a claim. Limit the number being claimed, not just the caller's address.
+    const claimPk = phoneKey(b.phone);
+    if (claimPk && !claimRL(claimPk)) return reply.code(429).send({ ok: false, error: 'too_many_requests' });
     const r = await owners.startClaim(b.phone, str(b.name, 60));
     if (!r.ok) return reply.code(r.error === 'phone' ? 400 : 404).send(r);
     return r;

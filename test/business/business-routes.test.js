@@ -157,3 +157,46 @@ test('pages are served', async () => {
   for (const u of ['/business', '/ops/business', '/for-business']) assert.equal((await f.inject({ method: 'GET', url: u })).statusCode, 200, u);
   await f.close();
 });
+
+// 2026-09-12. /api/business/claim was limited by IP alone. startClaim() sends a six-digit code to the
+// owner's Telegram and, before it does, expires every pending claim for that phone. So an attacker
+// rotating IPs both bombards that person and stops the real owner ever completing a claim: they ask
+// for a code, the attacker asks for another, the first is dead before it can be typed.
+test('claiming is limited by the phone being claimed, not just the caller\'s IP', async () => {
+  const { f } = await app();
+  const phone = '+251910530813';                 // Kaldi's Café — the shop with a Telegram id
+  const claim = (ip) => f.inject({ method: 'POST', url: '/api/business/claim',
+    headers: { ...J, 'x-real-ip': ip }, payload: { phone } });
+
+  sent.length = 0;
+  const codes = [];
+  for (let i = 1; i <= 6; i++) codes.push((await claim('203.0.113.' + i)).statusCode);
+  assert.deepEqual(codes, [200, 200, 200, 200, 200, 200], 'six should be allowed');
+
+  const seventh = await claim('203.0.113.99');   // a seventh address, never seen before
+  assert.equal(seventh.statusCode, 429, 'a fresh IP must not buy another code for the same number');
+  assert.equal(sent.length, 6, 'and no seventh message reached the owner');
+});
+
+test('a different number from a fresh IP is unaffected — it is a limit, not a lockout', async () => {
+  const { f } = await app();
+  const claim = (ip, phone) => f.inject({ method: 'POST', url: '/api/business/claim',
+    headers: { ...J, 'x-real-ip': ip }, payload: { phone } });
+
+  for (let i = 1; i <= 6; i++) await claim('198.51.100.' + i, '+251910530813');
+  assert.equal((await claim('198.51.100.7', '+251910530813')).statusCode, 429);
+  // s2 in the fixture: a different tenant, a different number.
+  assert.equal((await claim('198.51.100.8', '+251911419313')).statusCode, 200,
+    'one number being rate limited must not lock out another owner');
+});
+
+// The same person retyping their number a different way is the same person.
+test('the phone limit collapses format variants', async () => {
+  const { f } = await app();
+  const claim = (ip, phone) => f.inject({ method: 'POST', url: '/api/business/claim',
+    headers: { ...J, 'x-real-ip': ip }, payload: { phone } });
+
+  for (let i = 1; i <= 6; i++) await claim('192.0.2.' + i, '+251910530813');
+  const other = await claim('192.0.2.50', '0910530813');   // same number, local form
+  assert.equal(other.statusCode, 429, 'writing it as 09… must not buy a fresh allowance');
+});
