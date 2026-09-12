@@ -9,24 +9,33 @@
 <!--
   Why this page exists.
 
-  /ride-ops linked each pickup to openstreetmap.org with the rider's exact coordinates in the URL:
+  /ride-ops linked each pickup to openstreetmap.org with the rider's coordinates in the URL:
 
       https://www.openstreetmap.org/?mlat=9.0108&mlon=38.7578#map=17/...
 
   Every time a dispatcher clicked "From", one rider's pickup point — usually their home — was sent to
-  a third party and written into that third party's logs. The tiles to avoid this were already on the
+  a third party and written into that third party's logs. The tiles to avoid it were already on the
   server: maplibre, pmtiles and addis-*.pmtiles are all served from bina.et.
 
-  Deliberately self-contained rather than reusing public/ride/map.js. That module carries pickup and
-  drop state, route drawing, 3D toggles and satellite handling, and its markers need ride/ui.css.
-  This page shows one point and nothing else, so it takes the twelve lines it needs instead of a
-  dependency on all of that.
+  Why the map is built on window.load rather than immediately.
+
+  The first version constructed the map inline and rendered blank: the container was 0x0 at that
+  instant, and maplibre treats a zero-size container as silence rather than an error, so the page sat
+  there pale and empty with no console output at all. /ride never hit this because ride/maplazy.js
+  defers the ~780 KB engine and builds its map after the page has settled. This copies that timing —
+  construct after load, then a frame — and keeps a ResizeObserver for the phone that rotates or the
+  in-app browser that expands its viewport afterwards.
+
+  Deliberately not reusing public/ride/map.js: that module carries pickup and drop state, route
+  drawing, 3D and satellite handling, and its markers need ride/ui.css. This page shows one point.
 -->
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
 <style>
   :root { color-scheme: light dark; }
   html, body { margin: 0; height: 100%; font-family: system-ui, 'Segoe UI', sans-serif; background: #0f1720; }
-  #map { position: absolute; inset: 0; }
+  /* Viewport units rather than inset:0 against html/body — in an embedded webview that height chain
+     does not always resolve, and an absolutely positioned child collapses to nothing. */
+  #map { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; }
   .bar { position: absolute; z-index: 2; top: 10px; left: 10px; right: 10px; display: flex; gap: 8px;
     align-items: center; background: rgba(15,23,32,.92); color: #e8edf2; border: 1px solid #26333f;
     border-radius: 12px; padding: 10px 12px; font-size: 13px; backdrop-filter: blur(8px); }
@@ -34,7 +43,8 @@
   .bar .co { color: #8aa0b2; font-variant-numeric: tabular-nums; margin-left: auto; white-space: nowrap; }
   .pin { width: 18px; height: 18px; border-radius: 50%; background: #00c896;
     box-shadow: 0 0 0 6px rgba(0,200,150,.28), 0 2px 8px rgba(0,0,0,.5); }
-  .err { position: absolute; inset: 0; display: grid; place-items: center; color: #8aa0b2; padding: 24px; text-align: center; }
+  .err { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
+    display: grid; place-items: center; color: #8aa0b2; padding: 24px; text-align: center; }
 </style>
 </head>
 <body>
@@ -48,8 +58,10 @@
   var q = new URLSearchParams(location.search);
   var lat = parseFloat(q.get('lat')), lng = parseFloat(q.get('lng'));
   var label = (q.get('label') || '').slice(0, 120);
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
 
-  // Addis and a generous margin around it. A point outside this is a mistake, not a place to fly to.
+  // Addis and a generous margin. A point outside this is a mistake, not a place to fly to.
   var ok = isFinite(lat) && isFinite(lng) && lat > 8.4 && lat < 9.6 && lng > 38.3 && lng < 39.3;
   if (!ok) {
     document.getElementById('map').outerHTML =
@@ -58,22 +70,40 @@
     return;
   }
 
-  document.getElementById('label').innerHTML = '<b>' + label.replace(/[&<>"]/g, function (c) {
-    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
-  }) + '</b>';
+  document.getElementById('label').innerHTML = '<b>' + esc(label) + '</b>';
   document.getElementById('coords').textContent = lat.toFixed(5) + ', ' + lng.toFixed(5);
 
-  maplibregl.addProtocol('pmtiles', new pmtiles.Protocol().tile);
-  var map = new maplibregl.Map({
-    container: 'map', style: '/static/ride/style.json',
-    center: [lng, lat], zoom: 16.5, attributionControl: false
-  });
-  map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
-  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
+  function start() {
+    var protocol = new pmtiles.Protocol();
+    maplibregl.addProtocol('pmtiles', protocol.tile);
 
-  var el = document.createElement('div');
-  el.className = 'pin';
-  new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([lng, lat]).addTo(map);
+    // The archive tops out at zoom 15 (max_zoom in the pmtiles header), so 16 overzooms those tiles —
+    // which is what a dispatcher wants when they are looking for a doorway.
+    var map = new maplibregl.Map({
+      container: 'map', style: '/static/ride/style.json',
+      center: [lng, lat], zoom: 16, attributionControl: false
+    });
+
+    // Left in on purpose: this page rendered blank for a while because the container was 0x0, and
+    // maplibre reports that as silence. These make the next diagnosis a one-liner.
+    window.__map = map; window.__mapErr = [];
+    map.on('error', function (e) { window.__mapErr.push(String((e && e.error && e.error.message) || e.type || e)); });
+
+    map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
+
+    try { new ResizeObserver(function () { map.resize(); }).observe(document.getElementById('map')); }
+    catch (e) { window.addEventListener('resize', function () { map.resize(); }); }
+    setTimeout(function () { map.resize(); }, 400);
+
+    var el = document.createElement('div');
+    el.className = 'pin';
+    new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([lng, lat]).addTo(map);
+  }
+
+  // Build after the page has finished laying out, the way ride/maplazy.js does.
+  if (document.readyState === 'complete') requestAnimationFrame(start);
+  else window.addEventListener('load', function () { requestAnimationFrame(start); });
 })();
 </script>
 </body>
