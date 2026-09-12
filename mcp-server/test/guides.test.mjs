@@ -4,7 +4,7 @@ import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { htmlToText, titleOf, descriptionOf } from '../lib/html.mjs';
-import { loadGuides } from '../tools/guides.mjs';
+import { loadGuides, GUIDE_SLUGS } from '../tools/guides.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const fx = path.join(here, 'fixtures');
@@ -37,4 +37,27 @@ test('loadGuides reads slug.html files, skips missing ones, caps text', async ()
   assert.equal(g.url, 'https://bina.et/guide');
   assert.ok(g.text.length <= 60 + 20, 'capped (plus the truncation marker)');
   assert.match(g.text, /…\[truncated\]$/);
+});
+
+// 2026-09-12. "The guides" is maintained by hand in three places — a route in server.js, a URL in the
+// sitemap array, and GUIDE_SLUGS. Diffing them found ethiopia-income-tax-calculator published and
+// indexed but absent here, so every assistant calling get_ethiopia_guide was blind to the PAYE bands.
+test('every slug in GUIDE_SLUGS names a page that exists', async () => {
+  const pub = path.join(here, '..', '..', 'public');
+  const missing = [];
+  for (const slug of GUIDE_SLUGS) {
+    try { await readFile(path.join(pub, slug + '.html'), 'utf8'); } catch { missing.push(slug); }
+  }
+  assert.deepEqual(missing, [], 'GUIDE_SLUGS names pages that do not exist: ' + missing.join(', '));
+});
+
+// The specific gap, pinned. Someone tidying this list should have to delete this line on purpose.
+test('the income-tax calculator is served to assistants', () => {
+  assert.ok(GUIDE_SLUGS.includes('ethiopia-income-tax-calculator'),
+    'it carries the 2025 PAYE bands and the 7% pension rate — a question assistants are asked constantly');
+});
+
+// And the one that looks like a gap but is not, so it does not get "fixed" back in.
+test('diaspora stays out: it is a product page, not a guide to a public service', () => {
+  assert.ok(!GUIDE_SLUGS.includes('diaspora'));
 });

@@ -13,7 +13,13 @@ export const GUIDE_SLUGS = [
   'driving-licence-ethiopia', 'ethiopian-origin-id-yellow-card', 'open-bank-account-ethiopia',
   'birth-marriage-certificate-ethiopia', 'pay-utility-bills-ethiopia', 'lmis-labor-id-ethiopia', 'coc-certificate-ethiopia', 'rental-agreement-ethiopia',
   'tenant-screening-ethiopia', 'living-working-in-ethiopia-guide', 'digital-ethiopia-2026',
+  // Added 2026-09-12. It was published and indexed but missing here, so no assistant could read the
+  // PAYE bands. Its text carries the whole 2025 table, the 7% pension and Proclamation 1395/2025.
+  'ethiopia-income-tax-calculator',
 ];
+// Deliberately NOT here: 'diaspora'. It is a landing page for the building-management product —
+// "Your building in Addis. Your life in Dubai." — not a guide to a government or banking service.
+// It shows up when this list is diffed against the sitemap; it is an absence by choice, not drift.
 export const TEXT_CAP = 12_000;
 
 export async function loadGuides(publicDir, slugs = GUIDE_SLUGS, cap = TEXT_CAP) {
