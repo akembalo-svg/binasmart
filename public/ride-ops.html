@@ -37,7 +37,9 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return
 var DRIVERS=[], TIMER=null;
 function rideCard(r,active){
   var next={requested:['cancelled'],dispatching:['cancelled'],assigned:['arriving','arrived','cancelled'],arriving:['arrived','cancelled'],arrived:['ontrip','cancelled'],ontrip:['completed']}[r.status]||[];
-  var osm='https://www.openstreetmap.org/?mlat='+r.pickup.lat+'&mlon='+r.pickup.lng+'#map=17/'+r.pickup.lat+'/'+r.pickup.lng;
+  // Our own tiles, not openstreetmap.org — a pickup point is usually somebody's home, and it has no
+  // business being written into a third party's access log every time ops clicks it.
+  var osm='/ops-map?lat='+encodeURIComponent(r.pickup.lat)+'&lng='+encodeURIComponent(r.pickup.lng)+'&label='+encodeURIComponent(r.pickup.label||'');
   var needs=r.concierge&&!r.driver;
   var h='<div class="card'+(needs?' con':'')+'" id="r-'+esc(r.id)+'"><div class="row"><span class="tag'+(needs?' con':'')+'">'+(needs?'NEEDS DRIVER':esc(r.status.toUpperCase()))+'</span><b>'+esc(r.tier.toUpperCase())+'</b> · <b>'+esc(r.fareEtb)+' ETB</b> <span class="mut">('+esc(r.paymentMethod)+' · '+esc(r.paymentStatus)+')</span><span class="mut">'+new Date(r.requestedAt).toLocaleTimeString()+'</span></div>';
   h+='<div class="mut">From: <a target="_blank" rel="noopener" href="'+esc(osm)+'">'+esc(r.pickup.label)+'</a><br>To: '+esc(r.dropoff.label)+' · '+(r.distanceM/1000).toFixed(1)+' km'+(r.estimate?' (est.)':'')+'</div>';

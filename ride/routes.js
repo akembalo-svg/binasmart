@@ -54,6 +54,9 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
   // ---- pages ----
   fastify.get('/ride', async (req, reply) => reply.sendFile('ride.html'));
   fastify.get('/ride-ops', async (req, reply) => reply.sendFile('ride-ops.html'));
+  // One pickup on our own tiles. It replaces a link to openstreetmap.org that carried the rider's
+  // coordinates off the platform every time a dispatcher clicked it. noindex, not in the sitemap.
+  fastify.get('/ops-map', async (req, reply) => reply.sendFile('ops-map.html'));
   fastify.get('/drive', async (req, reply) => reply.sendFile('drive.html'));
   fastify.get('/drive-with-us', async (req, reply) => reply.sendFile('drive-with-us.html'));
   fastify.get('/why-binasmart', async (req, reply) => reply.sendFile('why-binasmart.html'));

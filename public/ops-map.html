@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Ops map · BinaSmart</title>
+<!--
+  Why this page exists.
+
+  /ride-ops linked each pickup to openstreetmap.org with the rider's exact coordinates in the URL:
+
+      https://www.openstreetmap.org/?mlat=9.0108&mlon=38.7578#map=17/...
+
+  Every time a dispatcher clicked "From", one rider's pickup point — usually their home — was sent to
+  a third party and written into that third party's logs. The tiles to avoid this were already on the
+  server: maplibre, pmtiles and addis-*.pmtiles are all served from bina.et.
+
+  Deliberately self-contained rather than reusing public/ride/map.js. That module carries pickup and
+  drop state, route drawing, 3D toggles and satellite handling, and its markers need ride/ui.css.
+  This page shows one point and nothing else, so it takes the twelve lines it needs instead of a
+  dependency on all of that.
+-->
+<link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
+<style>
+  :root { color-scheme: light dark; }
+  html, body { margin: 0; height: 100%; font-family: system-ui, 'Segoe UI', sans-serif; background: #0f1720; }
+  #map { position: absolute; inset: 0; }
+  .bar { position: absolute; z-index: 2; top: 10px; left: 10px; right: 10px; display: flex; gap: 8px;
+    align-items: center; background: rgba(15,23,32,.92); color: #e8edf2; border: 1px solid #26333f;
+    border-radius: 12px; padding: 10px 12px; font-size: 13px; backdrop-filter: blur(8px); }
+  .bar b { font-weight: 700; }
+  .bar .co { color: #8aa0b2; font-variant-numeric: tabular-nums; margin-left: auto; white-space: nowrap; }
+  .pin { width: 18px; height: 18px; border-radius: 50%; background: #00c896;
+    box-shadow: 0 0 0 6px rgba(0,200,150,.28), 0 2px 8px rgba(0,0,0,.5); }
+  .err { position: absolute; inset: 0; display: grid; place-items: center; color: #8aa0b2; padding: 24px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="bar"><span id="label">—</span><span class="co" id="coords"></span></div>
+<div id="map"></div>
+
+<script src="/static/vendor/maplibre-gl.js"></script>
+<script src="/static/vendor/pmtiles.js"></script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var lat = parseFloat(q.get('lat')), lng = parseFloat(q.get('lng'));
+  var label = (q.get('label') || '').slice(0, 120);
+
+  // Addis and a generous margin around it. A point outside this is a mistake, not a place to fly to.
+  var ok = isFinite(lat) && isFinite(lng) && lat > 8.4 && lat < 9.6 && lng > 38.3 && lng < 39.3;
+  if (!ok) {
+    document.getElementById('map').outerHTML =
+      '<div class="err">No point to show.<br>Open this from the ops queue.</div>';
+    document.getElementById('label').textContent = 'No location';
+    return;
+  }
+
+  document.getElementById('label').innerHTML = '<b>' + label.replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+  }) + '</b>';
+  document.getElementById('coords').textContent = lat.toFixed(5) + ', ' + lng.toFixed(5);
+
+  maplibregl.addProtocol('pmtiles', new pmtiles.Protocol().tile);
+  var map = new maplibregl.Map({
+    container: 'map', style: '/static/ride/style.json',
+    center: [lng, lat], zoom: 16.5, attributionControl: false
+  });
+  map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
+
+  var el = document.createElement('div');
+  el.className = 'pin';
+  new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([lng, lat]).addTo(map);
+})();
+</script>
+</body>
+</html>
