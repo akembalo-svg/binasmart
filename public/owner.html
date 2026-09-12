@@ -134,6 +134,15 @@ button{cursor:pointer}
 <script>
 const params = new URLSearchParams(location.search);
 let KEY = params.get('key') || localStorage.getItem('bs_key') || '';
+// The key unlocks every /api/owner route for this building, so it should not be in the query string:
+// that writes it to the server's access log on every call. It travels as a header instead. Taking it
+// out of the address bar was already handled a few lines below — params.delete('key') and
+// replaceState, which correctly keeps any OTHER parameter; do not add a second copy of that here.
+function kfetch(url, opts) {
+  const o = Object.assign({}, opts || {});
+  o.headers = Object.assign({}, o.headers || {}, { 'x-owner-key': KEY });
+  return fetch(url, o);
+}
 if (params.get('key')) {
   localStorage.setItem('bs_key', params.get('key'));
   params.delete('key');
@@ -145,7 +154,7 @@ document.getElementById('pub-link').href = '/b/' + slug;
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 async function load(){
-  const r = await fetch('/api/owner/' + slug + '/overview?key=' + encodeURIComponent(KEY));
+  const r = await kfetch('/api/owner/' + slug + '/overview');
   if (r.status === 401) { // REDIR-TO-LOGIN
     localStorage.removeItem('bs_key'); KEY = '';
     const prefix = location.pathname.split('/owner/')[0];
@@ -171,7 +180,7 @@ async function load(){
 
 let D = null, UNITS = [], TAB = 'overview';
 function setTab(t){ TAB = t; document.querySelectorAll('.tabbtn').forEach(function(b){ b.classList.toggle('on', b.dataset.t === t); }); renderTab(); }
-async function loadUnits(){ UNITS = await (await fetch('/api/owner/' + slug + '/units?key=' + encodeURIComponent(KEY))).json(); }
+async function loadUnits(){ UNITS = await (await kfetch('/api/owner/' + slug + '/units')).json(); }
 
 let AI_MSGS = [];
 function aiEsc(s){ return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
@@ -203,7 +212,7 @@ async function ownerAiSend(){
   inp.value=''; AI_MSGS.push({r:'u',t:q}); aiBubble('u',q,box);
   var typing=document.createElement('div'); typing.className='text-left text-xs text-slate-400 px-1'; typing.textContent='ቢኒ እየጻፈ ነው…'; box.appendChild(typing); box.scrollTop=box.scrollHeight;
   try{
-    var r = await fetch('/api/owner/' + slug + '/ai?key=' + encodeURIComponent(KEY), {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:q})});
+    var r = await kfetch('/api/owner/' + slug + '/ai', {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:q})});
     var d = await r.json(); typing.remove();
     var rep = (d && d.reply) || 'ይቅርታ።'; AI_MSGS.push({r:'a',t:rep}); aiBubble('a',rep,box);
   }catch(e){ typing.remove(); aiBubble('a','ይቅርታ፣ የግንኙነት ችግር።',box); }
@@ -486,23 +495,23 @@ function renderTab(){
 
 let ACCT = null, ACCT_MONTH = new Date().toISOString().slice(0, 7);
 let STAFF = null, METERS = null;
-async function loadMeters(){ METERS = await (await fetch('/api/owner/' + slug + '/meters?key=' + encodeURIComponent(KEY))).json(); }
+async function loadMeters(){ METERS = await (await kfetch('/api/owner/' + slug + '/meters')).json(); }
 async function addReading(unitId, type, num){
   const v = prompt((type === 'ELECTRICITY' ? '💡 Electric' : '🚿 Water') + ' meter reading for ' + num + ' / የቆጣሪ ንባብ:'); if (!v) return;
-  const r = await (await fetch('/api/owner/' + slug + '/meter-reading?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ unitId: unitId, type: type, reading: v }) })).json();
+  const r = await (await kfetch('/api/owner/' + slug + '/meter-reading', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ unitId: unitId, type: type, reading: v }) })).json();
   if (r.consumption != null) alert('Usage: ' + r.consumption.toFixed(1) + (type === 'ELECTRICITY' ? ' kWh' : ' m³') + ' = ' + (r.charge || 0).toLocaleString() + ' ETB');
   METERS = null; renderTab();
 }
 async function billMeter(unitId, type, num, charge){
   if (!confirm('Bill ' + num + ' — ' + charge.toLocaleString() + ' ETB for ' + (type === 'ELECTRICITY' ? 'electricity' : 'water') + '? Creates an invoice.')) return;
-  const r = await (await fetch('/api/owner/' + slug + '/meter-bill?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ unitId: unitId, type: type }) })).json();
+  const r = await (await kfetch('/api/owner/' + slug + '/meter-bill', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ unitId: unitId, type: type }) })).json();
   alert(r.ok ? '✓ Invoice created: ' + r.code + ' — ' + r.amount.toLocaleString() + ' ETB' : 'Error: ' + r.error);
   METERS = null; load();
 }
 async function loadAcct(){
   const [a, s] = await Promise.all([
-    fetch('/api/owner/' + slug + '/accounting?month=' + ACCT_MONTH + '&key=' + encodeURIComponent(KEY)).then(r => r.json()),
-    fetch('/api/owner/' + slug + '/staff?key=' + encodeURIComponent(KEY)).then(r => r.json())
+    kfetch('/api/owner/' + slug + '/accounting?month=' + ACCT_MONTH).then(r => r.json()),
+    kfetch('/api/owner/' + slug + '/staff').then(r => r.json())
   ]);
   ACCT = a; STAFF = s;
 }
@@ -511,23 +520,23 @@ async function addStaff(){
   const role = prompt('Role: GUARD / CLEANER / LIFT / OFFICE / MANAGER / OTHER', 'GUARD') || 'OTHER';
   const salary = prompt('Monthly salary (ETB):'); if (!salary) return;
   const phone = prompt('Phone (optional):') || '';
-  await fetch('/api/owner/' + slug + '/staff?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, role: role, salary: salary, phone: phone }) });
+  await kfetch('/api/owner/' + slug + '/staff', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, role: role, salary: salary, phone: phone }) });
   ACCT = null; renderTab();
 }
 async function editStaff(id){
   const s = STAFF.staff.find(x => x.id === id);
   const salary = prompt('New salary for ' + s.name + ' (ETB):', s.salary); if (salary === null) return;
-  await fetch('/api/owner/' + slug + '/staff/' + id + '/update?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ salary: salary }) });
+  await kfetch('/api/owner/' + slug + '/staff/' + id + '/update', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ salary: salary }) });
   ACCT = null; renderTab();
 }
 async function removeStaff(id, name){
   if (!confirm('Remove ' + name + ' from staff? / ይሰረዝ?')) return;
-  await fetch('/api/owner/' + slug + '/staff/' + id + '/update?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ remove: true }) });
+  await kfetch('/api/owner/' + slug + '/staff/' + id + '/update', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ remove: true }) });
   ACCT = null; renderTab();
 }
 async function postSalaries(){
   if (!confirm('Post ALL staff salaries as ' + ACCT_MONTH + ' expenses? (once per month)')) return;
-  const r = await (await fetch('/api/owner/' + slug + '/post-salaries?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ month: ACCT_MONTH }) })).json();
+  const r = await (await kfetch('/api/owner/' + slug + '/post-salaries', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ month: ACCT_MONTH }) })).json();
   alert('Posted: ' + r.created + (r.skipped ? ', already posted: ' + r.skipped : ''));
   ACCT = null; renderTab();
 }
@@ -543,20 +552,20 @@ async function addExpense(){
   const vat = prompt('VAT shown on the receipt (ETB) — 0 if none:', Math.round(parseFloat(amount) * 15 / 115)); if (vat === null) return;
   const cat = prompt('Category: SALARY / CLEANING / SECURITY / REPAIRS / UTILITIES / OFFICE / OTHER', 'REPAIRS') || 'OTHER';
   const receipt = prompt('Receipt number (optional):') || '';
-  await fetch('/api/owner/' + slug + '/expense?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' },
+  await kfetch('/api/owner/' + slug + '/expense', { method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ vendor: vendor, amount: amount, vatAmount: vat, category: cat, receiptNo: receipt, date: ACCT_MONTH + '-' + String(new Date().getDate()).padStart(2, '0') }) });
   ACCT = null; renderTab();
 }
 async function delExpense(id){
   if (!confirm('Delete this expense?')) return;
-  await fetch('/api/owner/' + slug + '/expense/' + id + '/delete?key=' + encodeURIComponent(KEY), { method: 'POST' });
+  await kfetch('/api/owner/' + slug + '/expense/' + id + '/delete', { method: 'POST' });
   ACCT = null; renderTab();
 }
 async function vatSettings(){
   const reg = confirm('Is this building VAT-registered? OK = Yes, Cancel = No');
   let no = null;
   if (reg) no = prompt('VAT registration number (optional):', (ACCT && ACCT.vat.number) || '');
-  await fetch('/api/owner/' + slug + '/vat-settings?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' },
+  await kfetch('/api/owner/' + slug + '/vat-settings', { method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ vatRegistered: reg, vatNumber: no, vatInclusive: true }) });
   ACCT = null; renderTab();
 }
@@ -569,7 +578,7 @@ async function editUnit(id){
   const name = prompt('Tenant / shop name:', u.tenant.nameAm || u.tenant.name); if (name === null) return;
   const phone = prompt('Phone:', u.tenant.phone); if (phone === null) return;
   const rent = prompt('Monthly rent (ETB):', u.monthlyRent); if (rent === null) return;
-  await fetch('/api/owner/' + slug + '/unit/' + id + '/update?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tenantName: name, tenantPhone: phone, rent: rent }) });
+  await kfetch('/api/owner/' + slug + '/unit/' + id + '/update', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tenantName: name, tenantPhone: phone, rent: rent }) });
   await loadUnits(); renderTab();
 }
 async function vacateUnit(id, num){
@@ -577,7 +586,7 @@ async function vacateUnit(id, num){
   const typed = prompt('🔒 To confirm, TYPE the unit number exactly:\nለማረጋገጥ የክፍሉን ቁጥር ይጻፉ: ' + num);
   if (typed === null) return;
   if (typed.trim() !== num){ alert('❌ Did not match — cancelled. / አልተዛመደም — ተሰርዟል'); return; }
-  await fetch('/api/owner/' + slug + '/unit/' + id + '/vacate?key=' + encodeURIComponent(KEY), { method: 'POST' });
+  await kfetch('/api/owner/' + slug + '/unit/' + id + '/vacate', { method: 'POST' });
   alert('Unit ' + num + ' vacated. You can UNDO with the ↩️ Restore button. / በ↩️ መመለስ ይችላሉ');
   await loadUnits(); load();
 }
@@ -585,7 +594,7 @@ async function addUnit(){
   const number = prompt('New unit number (e.g. 305 or G-07) / የክፍል ቁጥር:'); if (!number) return;
   const floor = prompt('Floor (0 = Ground) / ፎቅ:', '1'); if (floor === null) return;
   const rent = prompt('Monthly rent (ETB) / ወርሃዊ ኪራይ:', '0'); if (rent === null) return;
-  const r = await (await fetch('/api/owner/' + slug + '/add-unit?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ number: number, floor: floor, rent: rent }) })).json();
+  const r = await (await kfetch('/api/owner/' + slug + '/add-unit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ number: number, floor: floor, rent: rent }) })).json();
   alert(r.ok ? '✓ Unit ' + number + ' created (vacant — use ➕ Add tenant to fill it)' : '❌ ' + (r.error === 'unit_number_exists' ? 'That unit number already exists' : r.error));
   await loadUnits(); renderTab();
 }
@@ -595,14 +604,14 @@ async function addBuilding(){
   const floors = prompt('Number of floors (G+? total) / ስንት ፎቅ:', '5'); if (!floors) return;
   const subCity = prompt('Area / Sub-city (e.g. Bole) / አካባቢ:') || '';
   if (!confirm('Create "' + name + '" (' + floors + ' floors, ' + (subCity || 'Addis Ababa') + ')?\nIt will appear on your login and on bina.et.')) return;
-  const r = await (await fetch('/api/owner/' + slug + '/add-building?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, nameAm: nameAm, floors: floors, subCity: subCity }) })).json();
+  const r = await (await kfetch('/api/owner/' + slug + '/add-building', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, nameAm: nameAm, floors: floors, subCity: subCity }) })).json();
   if (r.ok){
     alert('✅ ' + r.name + ' created!\n\n• Dashboard: bina.et/owner/' + r.slug + '\n• Its own access key: ' + r.key + '\n• It now appears when you login with your phone.\n\nNext: open it and use ➕ Unit to add its rooms.');
   } else alert('❌ ' + r.error);
 }
 async function restoreUnit(id, num){
   if (!confirm('↩️ Restore the previous tenant to unit ' + num + '? / የቀድሞውን ተከራይ መመለስ?')) return;
-  const r = await (await fetch('/api/owner/' + slug + '/unit/' + id + '/restore?key=' + encodeURIComponent(KEY), { method: 'POST' })).json();
+  const r = await (await kfetch('/api/owner/' + slug + '/unit/' + id + '/restore', { method: 'POST' })).json();
   alert(r.ok ? '✓ Restored: ' + r.restored : '❌ ' + (r.error === 'no_previous_tenant' ? 'No previous tenant on this unit' : r.error));
   await loadUnits(); load();
 }
@@ -610,24 +619,24 @@ async function occupyUnit(id, num){
   const name = prompt('New tenant name for ' + num + ':'); if (!name) return;
   const phone = prompt('Tenant phone (09… / +2519…):'); if (!phone) return;
   const rent = prompt('Monthly rent (ETB):'); if (rent === null) return;
-  await fetch('/api/owner/' + slug + '/unit/' + id + '/occupy?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, phone: phone, rent: rent }) });
+  await kfetch('/api/owner/' + slug + '/unit/' + id + '/occupy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, phone: phone, rent: rent }) });
   await loadUnits(); load();
 }
 async function unpayInvoice(id, label){
   if (!confirm('↩️ UNDO payment for ' + label + '?\nThe invoice will go back to UNPAID. / ክፍያው ይሰረዝና ወደ ያልተከፈለ ይመለሳል')) return;
   const typed = prompt('Type UNDO to confirm / ለማረጋገጥ UNDO ብለው ይጻፉ:');
   if ((typed || '').trim().toUpperCase() !== 'UNDO') { alert('Cancelled — nothing changed.'); return; }
-  const r = await (await fetch('/api/owner/' + slug + '/invoice/' + id + '/unpay?key=' + encodeURIComponent(KEY), { method: 'POST' })).json();
+  const r = await (await kfetch('/api/owner/' + slug + '/invoice/' + id + '/unpay', { method: 'POST' })).json();
   if (r.ok) { alert('✅ Reverted to ' + r.status); DATA = null; load(); } else alert('❌ ' + r.error);
 }
 async function sendInvoice(id, unit){
   if (!confirm('📤 Send this invoice to the tenant of ' + unit + ' by WhatsApp/Telegram? / ደረሰኙን ለተከራዩ ይላክ?')) return;
-  const r = await (await fetch('/api/owner/' + slug + '/invoice/' + id + '/send?key=' + encodeURIComponent(KEY), { method: 'POST' })).json();
+  const r = await (await kfetch('/api/owner/' + slug + '/invoice/' + id + '/send', { method: 'POST' })).json();
   alert(r.ok ? (r.delivered ? '✅ Sent to tenant / ተልኳል' : '⚠️ Message channel is offline right now — NOT delivered. Press Send again later. / ቻናሉ ጠፍቷል — አልደረሰም፣ በኋላ እንደገና ይላኩ') : '❌ ' + r.error);
 }
 async function genInvoices(){
   if (!confirm('Generate this month\'s invoices for all occupied units?')) return;
-  const r = await (await fetch('/api/admin/' + slug + '/generate-invoices?key=' + encodeURIComponent(KEY), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })).json();
+  const r = await (await kfetch('/api/admin/' + slug + '/generate-invoices', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })).json();
   alert('Created: ' + r.created + ', already existed: ' + r.skipped);
   load();
 }
@@ -647,7 +656,7 @@ function logoutKey(){
 
 const MAINT_ICON = { PLUMBING:'🚿', ELECTRIC:'💡', LIFT:'🛗', CLEANING:'🧹', SECURITY:'🛡️', GENERAL:'🔧' };
 async function setMaint(id, status){
-  const r = await fetch('/api/admin/maintenance/' + id + '/status?key=' + encodeURIComponent(KEY), {
+  const r = await kfetch('/api/admin/maintenance/' + id + '/status', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ status })
   });
@@ -661,7 +670,7 @@ function markPaid(id, label){
   document.getElementById('pay-modal').classList.add('open');
 }
 async function payWith(method){
-  const r = await fetch('/api/admin/invoices/' + payInvoiceId + '/pay?key=' + encodeURIComponent(KEY), {
+  const r = await kfetch('/api/admin/invoices/' + payInvoiceId + '/pay', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ method })
   });

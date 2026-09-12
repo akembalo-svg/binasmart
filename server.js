@@ -122,9 +122,14 @@ fastify.get('/api/auth-methods', async (req, reply) => {
 });
 
 const OWNER_KEY = process.env.OWNER_KEY || 'change-me';
+// The key may arrive as a header or, still, as a query parameter. The header is preferred because a
+// query string is written to the access log, the address bar and any outgoing Referer; the parameter
+// stays because two report links in the dashboard are document navigations, which cannot send one.
+// business/index.js has read x-owner-key for its ops routes all along — same name here.
+const keyOf = req => String(req.headers['x-owner-key'] || req.query.key || '');
 const authFail = (req, reply) => {
   if (req.authUser && req.authUser.role === 'admin') return false; // session-based admin
-  if ((req.query.key || '') !== OWNER_KEY) { reply.code(401).send({ error: 'unauthorized' }); return true; }
+  if (keyOf(req) !== OWNER_KEY) { reply.code(401).send({ error: 'unauthorized' }); return true; }
   return false;
 };
 // per-building owner key (scoped) OR global key
@@ -133,7 +138,7 @@ async function authBuildingFail(req, reply, slug) {
     if (req.authUser.role === 'admin') return false;
     if (req.authUser.buildingSlug && req.authUser.buildingSlug === slug) return false;
   }
-  const key = req.query.key || '';
+  const key = keyOf(req);
   if (key === OWNER_KEY) return false;
   if (key) {
     const b = await prisma.building.findUnique({ where: { qrSlug: slug }, select: { ownerKey: true } });
