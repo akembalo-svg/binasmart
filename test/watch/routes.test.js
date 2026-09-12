@@ -117,9 +117,45 @@ test('webhook path: confirmChapa activates a pending rental and messages a Teleg
 test('pages: /watch and /watch/<slug> are served; a public film gets Movie schema and its own title', async () => {
   const { f } = await app();
   await f.inject({ method: 'POST', url: '/api/watch/ops/films', headers: OPS, payload: FREE });
-  for (const u of ['/watch', '/watch/big-buck-bunny', '/watch/nope', '/ops/watch']) assert.equal((await f.inject({ method: 'GET', url: u })).statusCode, 200, u);
+  for (const u of ['/watch', '/watch/big-buck-bunny', '/ops/watch']) assert.equal((await f.inject({ method: 'GET', url: u })).statusCode, 200, u);
   const p = await f.inject({ method: 'GET', url: '/watch/big-buck-bunny' });
   assert.match(p.body, /"@type":"Movie","name":"ቢግ ባክ ባኒ"/); assert.match(p.body, /<title>ቢግ ባክ ባኒ \(Big Buck Bunny\) · 2008 \| BinaSmart Watch<\/title>/);
   assert.doesNotMatch(p.body, /cdn\.example\.com/, 'source never in HTML');
+  await f.close();
+});
+
+// 2026-09-13. /watch/<anything> used to answer 200 with the hub shell, while the API behind the same
+// slug answered 404 — the page and its own data disagreed about whether a film exists. Nothing was
+// ever indexed twice, because the shell's canonical points at /watch; it was the status code that
+// lied, and Search Console counts a soft 404.
+test('a film that is not there is a 404, and the miss does not ask to be indexed', async () => {
+  const { f } = await app();
+  await f.inject({ method: 'POST', url: '/api/watch/ops/films', headers: OPS, payload: FREE });
+
+  const miss = await f.inject({ method: 'GET', url: '/watch/nope' });
+  assert.equal(miss.statusCode, 404);
+  assert.match(miss.body, /noindex/, 'a page nobody should land on is not a page to index');
+  assert.doesNotMatch(miss.body, /BinaWatch — /, 'and it is not the hub wearing a film url');
+
+  // The API has always said this; now the page agrees with it.
+  assert.equal((await f.inject({ method: 'GET', url: '/api/watch/films/nope' })).statusCode, 404);
+  await f.close();
+});
+
+// A draft, or a film whose rights have run out, is not "not found by accident" — it must read the
+// same from outside as a slug that was never real, or the 404 becomes a list of what is coming.
+test('a draft film is a 404 too, not a hint that it exists', async () => {
+  const { f, db } = await app();
+  await f.inject({ method: 'POST', url: '/api/watch/ops/films', headers: OPS, payload: FREE });
+  const film = db._.film.find(x => x.slug === 'big-buck-bunny');
+  assert.equal((await f.inject({ method: 'GET', url: '/watch/big-buck-bunny' })).statusCode, 200);
+
+  film.status = 'draft';
+  const drafted = await f.inject({ method: 'GET', url: '/watch/big-buck-bunny' });
+  assert.equal(drafted.statusCode, 404);
+
+  film.status = 'public'; film.rights = null;
+  assert.equal((await f.inject({ method: 'GET', url: '/watch/big-buck-bunny' })).statusCode, 404,
+    'no rights note is no film, the same rule the listing uses');
   await f.close();
 });

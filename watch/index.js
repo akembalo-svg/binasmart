@@ -18,7 +18,19 @@ const str = (v, max) => String(v == null ? '' : v).trim().slice(0, max || 200) |
 const intOr = (v, d) => { const n = Math.round(Number(v)); return Number.isFinite(n) ? n : d; };
 const KINDS = ['youtube', 'mp4', 'hls'];
 const escAttr = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-function limiter(windowMs, max) { const m = new Map(); return key => { const now = Date.now(); const hits = (m.get(key) || []).filter(t => now - t < windowMs); if (hits.length >= max) return false; hits.push(now); m.set(key, hits); return true; }; }
+// Keyed by phone and by IP, so the map grows with every caller and never shrank: cinema/routes.js
+// prunes stale keys past 5,000 and this copy did not. A long-lived process is exactly where that
+// matters, and this one is only restarted on deploy.
+function limiter(windowMs, max) {
+  const m = new Map();
+  return key => {
+    const now = Date.now(); const hits = (m.get(key) || []).filter(t => now - t < windowMs);
+    if (hits.length >= max) return false;
+    hits.push(now); m.set(key, hits);
+    if (m.size > 5000) for (const [k, v] of m) { if (!v.length || now - v[v.length - 1] > windowMs) m.delete(k); }
+    return true;
+  };
+}
 const clientIp = req => String(req.headers['x-real-ip'] || req.ip);
 
 const { youtubeId } = require('./rules');
@@ -38,7 +50,7 @@ module.exports = function registerWatch(fastify, deps) {
   const riderBotToken = deps.riderBotToken != null ? deps.riderBotToken : (process.env.BINA_RIDER_BOT_TOKEN || '');
   const api = deps.tgApi || (riderBotToken ? makeTgApi({ token: riderBotToken }) : null);
   const ops = (req, reply) => { if ((req.headers['x-owner-key'] || req.query.key) !== deps.OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
-  const rentRL = limiter(600000, 10), playRL = limiter(60000, 60);
+  const rentRL = limiter(600000, 10), playRL = limiter(60000, 60), lookupRL = limiter(60000, 120);
   const shellPath = path.join(__dirname, '..', 'public', 'watch.html');
 
   const publicWhere = () => ({ status: 'public', NOT: { rights: null }, OR: [{ rightsUntil: null }, { rightsUntil: { gt: new Date(clock()) } }] });
@@ -57,11 +69,16 @@ module.exports = function registerWatch(fastify, deps) {
   // ---------- pages ----------
   fastify.get('/ops/watch', async (req, reply) => reply.sendFile('ops-watch.html'));
   fastify.get('/for-filmmakers', async (req, reply) => reply.sendFile('for-filmmakers.html'));
+  // Returns null when the slug is not a film anyone can watch, so the route can answer 404.
+  // /api/watch/films/:slug has always answered 404 for exactly this case; the PAGE returned 200 with
+  // the hub shell instead, which is a soft 404 - Search Console counts those, and it also meant a
+  // draft film's slug was indistinguishable from a typo. The canonical in the shell pointed at
+  // /watch, so nothing was ever indexed twice; it was the status code that lied.
   async function page(slug) {
     let html = fs.readFileSync(shellPath, 'utf8');
     if (!slug) return html;
     const f = await loadFilm(slug);
-    if (!f || !isPublic(f, clock())) return html;
+    if (!f || !isPublic(f, clock())) return null;
     const title = (f.titleAm || f.title) + (f.titleAm && f.title !== f.titleAm ? ' (' + f.title + ')' : '') + (f.year ? ' · ' + f.year : '') + ' | BinaSmart Watch';
     const desc = (f.descr || (f.titleAm || f.title) + ' — ' + (f.priceEtb ? f.priceEtb + ' ብር ለ' + f.rentHours + ' ሰዓት' : 'ነፃ · free') + ' በBinaSmart Watch።').slice(0, 300);
     const ld = { '@context': 'https://schema.org', '@type': 'Movie', name: f.titleAm || f.title, alternateName: f.title !== f.titleAm ? f.title : undefined, description: f.descr || undefined, image: f.posterUrl || undefined, inLanguage: f.language,
@@ -78,8 +95,22 @@ module.exports = function registerWatch(fastify, deps) {
     if (f.posterUrl) html = html.replace(/<meta property="og:image" content="[^"]*">/, '<meta property="og:image" content="' + escAttr(f.posterUrl) + '">');
     return html.replace('</head>', '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>\n</head>');
   }
+  // Marked noindex so the miss itself cannot be indexed, the same shape as the slug 404s in server.js.
+  const missPage = () => '<!doctype html><html lang="am"><head><meta charset="utf-8">'
+    + '<meta name="viewport" content="width=device-width,initial-scale=1"><title>\u134a\u120d\u1219 \u12a0\u120d\u1270\u1308\u129b\u121d \u00b7 Film not found | BinaWatch</title>'
+    + '<meta name="robots" content="noindex"><style>body{font-family:system-ui,sans-serif;text-align:center;padding:80px 20px;color:#0f2027}'
+    + 'a{color:#00a884;font-weight:700}</style></head><body><div style="font-size:52px">\ud83c\udfac</div>'
+    + '<h1 style="font-size:22px">\u134a\u120d\u1219 \u12a0\u120d\u1270\u1308\u129b\u121d \u00b7 Film not found</h1>'
+    + '<p><a href="/watch">\u2190 BinaWatch</a></p></body></html>';
+
   fastify.get('/watch', async (req, reply) => { try { return reply.type('text/html; charset=utf-8').send(await page(null)); } catch (e) { return reply.sendFile('watch.html'); } });
-  fastify.get('/watch/:slug', async (req, reply) => { try { return reply.type('text/html; charset=utf-8').send(await page(req.params.slug)); } catch (e) { return reply.sendFile('watch.html'); } });
+  fastify.get('/watch/:slug', async (req, reply) => {
+    try {
+      const html = await page(req.params.slug);
+      if (html === null) return reply.code(404).type('text/html; charset=utf-8').send(missPage());
+      return reply.type('text/html; charset=utf-8').send(html);
+    } catch (e) { return reply.sendFile('watch.html'); }
+  });
 
   // ---------- public API ----------
   // ---------- live TV, kids, radio (watch/channels.json + watch/live-status.json from livecheck.js) ----------
@@ -167,7 +198,11 @@ module.exports = function registerWatch(fastify, deps) {
     await activate(r);
     return { ok: true, status: 'ACTIVE', rental: pubRental(r) };
   }
+  // A rental code is what unlocks a paid film, so a lookup that says whether a code exists is worth
+  // a ceiling - cinema's ticket lookup has had one since it shipped. 2^30 codes makes guessing
+  // hopeless either way; this stops the guessing from being free.
   fastify.get('/api/watch/rentals/:code', async (req, reply) => {
+    if (!lookupRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const r = await expireIfDue(await loadRental(req.params.code));
     return r ? { ok: true, rental: pubRental(r) } : reply.code(404).send({ ok: false, error: 'unknown' });
   });
