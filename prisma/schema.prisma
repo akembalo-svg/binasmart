@@ -92,6 +92,7 @@ model Building {
   floors     Int
   qrSlug     String  @unique
   units      Unit[]
+  ownerKeys  OwnerKey[]
 
   threeD_style       String?
   threeD_facadeColor String?
@@ -104,7 +105,6 @@ model Building {
   entrancePhotoUrl String?
   logoUrl          String?
   signText         String?
-  ownerKey         String?
   tinNumber        String?
   vatRegistered    Boolean @default(false)
   vatNumber        String?
@@ -1492,4 +1492,18 @@ model Membership {
   @@index([shopId])
   @@index([venueId])
   @@index([buildingSlug])
+}
+
+// Owner dashboard keys, one per login, stored as sha256 — never the key. See building/ownerKeys.js.
+// Replaces Building.ownerKey, which held the key in plain text.
+model OwnerKey {
+  id         String    @id @default(cuid())
+  buildingId String
+  building   Building  @relation(fields: [buildingId], references: [id], onDelete: Cascade)
+  keyHash    String    @unique
+  label      String?   // login | add-building | migrated
+  createdAt  DateTime  @default(now())
+  lastUsedAt DateTime?
+
+  @@index([buildingId])
 }

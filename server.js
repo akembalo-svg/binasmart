@@ -133,6 +133,10 @@ const authFail = (req, reply) => {
   return false;
 };
 // per-building owner key (scoped) OR global key
+// Building owner keys live in OwnerKey as sha256 hashes — building/ownerKeys.js explains why a table and
+// not a hashed column. Building.ownerKey used to hold them in plain text, compared with ===.
+const { makeOwnerKeys } = require('./building/ownerKeys');
+const ownerKeys = makeOwnerKeys({ prisma });
 async function authBuildingFail(req, reply, slug) {
   if (req.authUser) {
     if (req.authUser.role === 'admin') return false;
@@ -140,10 +144,7 @@ async function authBuildingFail(req, reply, slug) {
   }
   const key = keyOf(req);
   if (key === OWNER_KEY) return false;
-  if (key) {
-    const b = await prisma.building.findUnique({ where: { qrSlug: slug }, select: { ownerKey: true } });
-    if (b && b.ownerKey && key === b.ownerKey) return false;
-  }
+  if (key && await ownerKeys.check(slug, key)) return false;   // a hash lookup, scoped to this building
   reply.code(401).send({ error: 'unauthorized' });
   return true;
 }
@@ -175,7 +176,7 @@ const bookIp = req => String(req.headers['x-real-ip'] || req.ip);
 const { normPhone: etMobile, phoneKey } = require('./ride/phone');
 // Both password routes below verify with scryptSync, which blocks the event loop — ten attempts
 // measured at 556 ms on this server. Unthrottled, that is a denial of service before it is ever a
-// brute force, and login hands back the ownerKey for every building the account owns.
+// brute force, and login issues an owner key for every building the account owns.
 const loginRL = hotelLimiter(600000, 8);
 
 // health
@@ -241,12 +242,10 @@ fastify.post('/api/owner/login', async (req, reply) => {
   const buildings = await prisma.building.findMany({ where: { ownerId: user.id } });
   if (!buildings.length) return reply.code(403).send({ error: 'no_buildings_for_this_account' });
   const out = [];
+  // Each login gets its own key. The stored one cannot be handed back — only its hash is kept — and
+  // replacing it would sign the owner out of every other device the moment they signed in on this one.
   for (const b of buildings) {
-    let key = b.ownerKey;
-    if (!key) {
-      key = b.qrSlug.slice(0, 3).toUpperCase() + '-' + cryptoMod.randomBytes(5).toString('hex').toUpperCase();
-      await prisma.building.update({ where: { id: b.id }, data: { ownerKey: key } });
-    }
+    const key = await ownerKeys.issue(b.id, b.qrSlug, 'login');
     out.push({ slug: b.qrSlug, name: b.name, key });
   }
   return { ok: true, buildings: out };
@@ -3035,17 +3034,17 @@ fastify.post('/api/owner/:slug/add-building', async (req, reply) => {
   let slug = String(name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'building';
   let n = 1, s = slug;
   while (await prisma.building.findUnique({ where: { qrSlug: s } })) s = slug + '-' + (++n);
-  const key = s.slice(0, 3).toUpperCase() + '-' + cryptoMod.randomBytes(5).toString('hex').toUpperCase();
   const b = await prisma.building.create({ data: {
     orgId: base.orgId, ownerId: base.ownerId,
     name: String(name).slice(0, 80), nameAm: nameAm || name,
     city: city || 'Addis Ababa', subCity: subCity || null,
     floors: Math.max(1, parseInt(floors) || 1), qrSlug: s,
-    signText: nameAm || name, ownerKey: key,
+    signText: nameAm || name,
     threeD_style: 'modern', threeD_facadeColor: '#a3b3c2', threeD_width: 14, threeD_depth: 11,
     marketplaceEnabled: true
   }});
   await audit(b.id, 'BUILDING_CREATED', name + ' by owner of ' + base.name);
+  const key = await ownerKeys.issue(b.id, s, 'add-building');   // shown once, in this response
   return { ok: true, slug: s, key, name: b.name };
 });
 // ===== OWNER: add a unit (for new/growing buildings) =====
