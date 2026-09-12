@@ -47,3 +47,31 @@ test('two doors scanning the same code at once: one admits, one is refused', asy
   assert.equal([a, b].filter(x => x.ok).length, 1);
   assert.equal([a, b].find(x => !x.ok).error, 'already_checked_in');
 });
+
+// 2026-09-12. A venue's door key authenticates the VENUE; the scan then acts on a TICKET by code,
+// which may belong to another cinema. Same shape as the IDORs found earlier today: the actor was
+// checked, the row was not. The venue is read off the ticket's own show, never off the request.
+test('a door may only admit its own cinema — a ticket from the cinema next door is refused by name', async () => {
+  const mine = { id: 's1', startsAt: new Date(1_000_000 + 3600_000), event: { title: 'Film' }, hall: { name: 'Hall 1', venueId: 'alem' } };
+  const theirs = { id: 's2', startsAt: new Date(1_000_000 + 3600_000), event: { title: 'Film' }, hall: { name: 'Screen 2', venueId: 'edna' } };
+  const { c } = world([
+    { code: 'BINA-AAAAAA', status: 'CONFIRMED', seats: ['A1'], name: 'Sara', showId: 's1', show: mine },
+    { code: 'BINA-BBBBBB', status: 'CONFIRMED', seats: ['B2'], name: 'Dawit', showId: 's2', show: theirs },
+  ]);
+  const other = await c.scan('BINA-BBBBBB', null, 'alem');
+  assert.equal(other.ok, false);
+  assert.equal(other.error, 'wrong_venue', 'not admitted, and the staff are told why');
+
+  const ours = await c.scan('BINA-AAAAAA', null, 'alem');
+  assert.equal(ours.ok, true, 'its own cinema still admits');
+
+  // The refusal must not have spent the ticket: the right door still admits it.
+  const rightDoor = await c.scan('BINA-BBBBBB', null, 'edna');
+  assert.equal(rightDoor.ok, true, 'a refusal at the wrong door does not burn the ticket');
+});
+
+test('with no venue given the scan is unscoped — that is the owner scanner, not a door key', async () => {
+  const show = { id: 's1', startsAt: new Date(1_000_000), event: { title: 'Film' }, hall: { name: 'Hall 1', venueId: 'alem' } };
+  const { c } = world([{ code: 'BINA-AAAAAA', status: 'CONFIRMED', seats: ['A1'], name: 'Sara', showId: 's1', show }]);
+  assert.equal((await c.scan('BINA-AAAAAA')).ok, true);
+});

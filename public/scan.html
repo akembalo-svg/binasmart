@@ -33,7 +33,7 @@ select,input{background:#fff;color:#0b2a26}
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><span class="logo">Bina<span style="color:#7ee2cf">Smart</span> 🎟️ በር</span><span class="sp"></span><a class="lnk" href="/ops/cinema" id="opsLnk">ops</a></div>
+  <div class="top"><span class="logo">Bina<span style="color:#7ee2cf">Smart</span> 🎟️ በር</span><span class="sp"></span><span id="who" style="font-size:13px;opacity:.85"></span><a class="lnk" href="/ops/cinema" id="opsLnk">ops</a></div>
   <label style="color:#cfe7e1">ትርዒት · Show</label><select id="show"><option value="">— ሁሉም · any show —</option></select>
   <div class="cnt"><div><b id="cIn">–</b><small>ገብተዋል · in</small></div><div><b id="cSold">–</b><small>ተሽጧል · sold</small></div><div><b id="cLeft">–</b><small>ይጠበቃሉ · expected</small></div></div>
   <div class="cam" id="cam"><video id="video" playsinline muted autoplay></video><div class="box"></div></div>
@@ -44,15 +44,35 @@ select,input{background:#fff;color:#0b2a26}
 <div class="res" id="res"><div class="big" id="rIco">✅</div><div class="t" id="rT"></div><div class="seats" id="rSeats"></div><div class="s" id="rS"></div></div>
 <script>
 (function () {
-  var q = new URLSearchParams(location.search), KEY = q.get('key') || '';
+  var q = new URLSearchParams(location.search), KEY = q.get('key') || '', SCAN = q.get('scan') || '';
   var $ = function (id) { return document.getElementById(id); };
-  if (!KEY) { $('hint').textContent = 'የባለቤት ቁልፍ ያስፈልጋል · owner key required: /scan?key=…'; }
+  // Two ways in. ?scan= is one cinema's door key and opens only that cinema. ?key= is the
+  // platform key and opens every venue — that is Ibrahim's scanner, not a door's.
+  // The key is remembered on this phone and taken out of the address bar: a door device gets
+  // reloaded, put down and picked up, and the URL is the one part of it everyone can read.
+  try {
+    if (SCAN) localStorage.setItem('bina.cinema.scanKey', SCAN);
+    else if (!KEY) SCAN = localStorage.getItem('bina.cinema.scanKey') || '';
+  } catch (e) {}
+  if (q.has('scan') || q.has('key')) { q.delete('scan'); history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q.toString() : '')); }
+  var DOOR = !KEY && !!SCAN;
+  if (!KEY && !SCAN) { $('hint').textContent = 'ቁልፍ ያስፈልጋል · a door key is required — open the link your cinema was given.'; }
   $('opsLnk').href = '/ops/cinema?key=' + encodeURIComponent(KEY);
-  var REASON = { unknown: ['ያልታወቀ ትኬት', 'Unknown ticket'], unpaid: ['አልተከፈለም — ካውንተር', 'Reserved but UNPAID — send to counter'], cancelled: ['ተሰርዟል', 'Ticket cancelled'], wrong_show: ['የተሳሳተ ትርዒት', 'Ticket is for another show'], already_checked_in: ['አስቀድሞ ገብቷል', 'Already checked in'], unauthorized: ['ቁልፍ የለም', 'No owner key'] };
-  function api(path, opts) { opts = opts || {}; return fetch(path + (path.indexOf('?') < 0 ? '?' : '&') + 'key=' + encodeURIComponent(KEY), { method: opts.body ? 'POST' : 'GET', headers: opts.body ? { 'content-type': 'application/json' } : {}, body: opts.body ? JSON.stringify(opts.body) : undefined }).then(function (r) { return r.json(); }); }
+  if (DOOR) { $('opsLnk').hidden = true; }   // door staff have no owner routes to go to
+  var REASON = { unknown: ['ያልታወቀ ትኬት', 'Unknown ticket'], unpaid: ['አልተከፈለም — ካውንተር', 'Reserved but UNPAID — send to counter'], cancelled: ['ተሰርዟል', 'Ticket cancelled'], wrong_show: ['የተሳሳተ ትርዒት', 'Ticket is for another show'], already_checked_in: ['አስቀድሞ ገብቷል', 'Already checked in'], wrong_venue: ['የሌላ ሲኒማ ትኬት', 'Ticket is for another cinema'],
+    unauthorized: ['ቁልፍ የለም', 'Key missing or no longer valid'], rate: ['ቀስ ይበሉ', 'Too many scans — wait a moment'] };
+  // The door sends its key as a header, not a query string: a query string is written to the
+  // access log and any outgoing Referer. The parameter only has to work for the first click.
+  function api(path, opts) {
+    opts = opts || {};
+    var url = DOOR ? path : path + (path.indexOf('?') < 0 ? '?' : '&') + 'key=' + encodeURIComponent(KEY);
+    var h = {}; if (DOOR) h['x-scan-key'] = SCAN; if (opts.body) h['content-type'] = 'application/json';
+    return fetch(url, { method: opts.body ? 'POST' : 'GET', headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined }).then(function (r) { return r.json(); });
+  }
   var TZ = 'Africa/Addis_Ababa';
-  api('/api/cinema/ops/overview').then(function (j) {
-    if (!j.ok) return;
+  api(DOOR ? '/api/cinema/scan/session' : '/api/cinema/ops/overview').then(function (j) {
+    if (!j.ok) { if (j.error === 'unauthorized') $('hint').textContent = 'ቁልፉ አልተቀበለም · this key is not valid any more — ask for a new link.'; return; }
+    if (j.venue) { $('who').textContent = j.venue.nameAm || j.venue.name; }
     j.shows.filter(function (s) { return s.status === 'onsale' || s.status === 'closed' || s.status === 'soldout'; }).forEach(function (s) {
       var o = document.createElement('option'); o.value = s.id; o.textContent = (s.event.titleAm || s.event.title) + ' · ' + new Date(s.startsAt).toLocaleString('en-GB', { timeZone: TZ, weekday: 'short', hour: '2-digit', minute: '2-digit' }) + ' · ' + s.hall.name; $('show').appendChild(o);
       if (s.stats) { s._stats = s.stats; }
@@ -68,7 +88,7 @@ select,input{background:#fff;color:#0b2a26}
     code = String(code || '').trim().toUpperCase(); if (!code || lock) return;
     if (code === last && Date.now() - lastAt < 4000) return;
     last = code; lastAt = Date.now(); lock = true;
-    api('/api/cinema/ops/checkin', { body: { code: code, showId: $('show').value || undefined } }).then(function (j) {
+    api(DOOR ? '/api/cinema/scan/checkin' : '/api/cinema/ops/checkin', { body: { code: code, showId: $('show').value || undefined } }).then(function (j) {
       if (j.counts) counts(j.counts);
       var tk = j.ticket || {};
       var seatsText = tk.show && tk.show.ga && tk.summary && tk.summary.length ? tk.summary.map(function (s) { return (s.nameAm || s.section) + ' × ' + s.count; }).join('  ') : (tk.seats || []).join('  ');

@@ -1288,7 +1288,11 @@ model Venue {
   lat       Float?
   lng       Float?
   phone     String?
-  scanKey   String?   // reserved for per-venue door staff (Phase C)
+  // The door key for this venue's staff, as sha256 of the key. The key itself is shown once when
+  // it is minted and is never stored, so a stolen database yields no working door key. Minting
+  // again replaces it, which is how a lost or leaked key is retired.
+  scanKeyHash String? @unique
+  scanKeyAt   DateTime?
   website   String?
   notes     String?   // halls/seats/source as researched; verify before the first show
   active    Boolean   @default(true)

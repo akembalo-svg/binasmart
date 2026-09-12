@@ -9,6 +9,7 @@ const tgauth = require('../ride/tgauth');
 const { validateLayout, capacityOf, isGa, summarise } = require('./seatmap');
 const { HOLD_MS, MAX_SEATS, MAX_GA, SOLD_STATES } = require('./holds');
 const { makePosters } = require('./posters');
+const { mintScanKey, hashScanKey, scanKeyFrom, pubScanVenue, pubOpsVenue, scanLink } = require('./scanKey');
 const { youtubeId } = require('../watch/rules');
 const trailerOf = url => { const id = youtubeId(url); return id ? { trailerId: id, trailerEmbed: 'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&modestbranding=1', trailerThumb: 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg' } : {}; };
 
@@ -43,7 +44,7 @@ function pubTicket(t, show) {
   return { code: t.code, status: t.status, seats: t.seats, summary: L ? summarise(L, t.seats) : null, name: t.name, phone: t.phone, total: t.total, payMethod: t.payMethod,
     chapaPending: t.payMethod === 'chapa' && t.status === 'RESERVED', createdAt: t.createdAt, checkedInAt: t.checkedInAt, show: sh ? pubShow(sh) : null };
 }
-const ERR_CODE = { taken: 409, sold: 409, sold_out: 409, no_such_section: 400, not_ga: 400, bad_qty: 400, hold_expired: 409, already_checked_in: 409, unpaid: 409, cancelled: 409, wrong_show: 409,
+const ERR_CODE = { taken: 409, sold: 409, sold_out: 409, no_such_section: 400, not_ga: 400, bad_qty: 400, hold_expired: 409, already_checked_in: 409, unpaid: 409, cancelled: 409, wrong_show: 409, wrong_venue: 409,
   show_closed: 410, no_show: 404, unknown: 404, no_such_seat: 400, too_many: 400, no_seats: 400, phone: 400, name: 400, holder: 400 };
 const fail = (reply, r) => reply.code(ERR_CODE[r.error] || 400).send({ ok: false, ...r });
 
@@ -56,6 +57,18 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
   const telebirr = telebirrDep || null; const tbOn = !!(telebirr && telebirr.enabled);
   const posters = makePosters({});   // TMDB when TMDB_API_KEY is set; otherwise a no-op
   const ops = (req, reply) => { if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
+  // The door. A venue key authenticates ONE cinema; the owner key authenticates the platform. The
+  // venue is found BY the key - a hash lookup - so it is never taken from anything the caller sends,
+  // and a key cannot be edited to point at another cinema.
+  const scanRL = limiter(60000, 300);   // a busy door; the queue is the real limit
+  async function door(req, reply) {
+    if (!ipRL(clientIp(req))) { reply.code(429).send({ ok: false, error: 'rate' }); return null; }
+    const hash = hashScanKey(scanKeyFrom(req));   // null for anything malformed: no query is made
+    const venue = hash ? await prisma.venue.findFirst({ where: { scanKeyHash: hash } }) : null;
+    if (!venue || !venue.active) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return null; }
+    if (!scanRL(venue.id)) { reply.code(429).send({ ok: false, error: 'rate' }); return null; }
+    return venue;
+  }
   const holderOf = req => { const h = String(req.headers['x-holder'] || (req.query && req.query.holder) || ''); return HOLDER_RE.test(h) ? h : null; };
   const loadShow = id => prisma.show.findUnique({ where: { id: String(id) }, include: SHOW_INCLUDE });
   const tell = async (ticket, text) => { if (!notify) return false; try { return await notify(ticket, text); } catch (e) { console.error('[cinema] notify: ' + e.message); return false; } };
@@ -310,6 +323,62 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     return r.ok ? r : reply.code(402).send(r);
   });
 
+  // ---------- the door ----------
+  // What door staff are shown. Not pubTicket: the buyer's phone number, what they paid and how they
+  // paid it are none of a doorkeeper's business. Who and which seats is what admits somebody.
+  const pubDoorTicket = t => {
+    const sh = t.show || null; const L = sh && sh.hall && sh.hall.layout;
+    return { code: t.code, status: t.status, seats: t.seats, summary: L ? summarise(L, t.seats) : null,
+      name: t.name, checkedInAt: t.checkedInAt, show: sh ? pubShow(sh) : null };
+  };
+  const doorWindow = () => ({ gte: new Date(Date.now() - 6 * 3600000), lte: new Date(Date.now() + 48 * 3600000) });
+
+  // What is on at this cinema around now, with the counts the door needs. Scoped by hall.venueId, so
+  // a key can never list another cinema's programme.
+  fastify.get('/api/cinema/scan/session', async (req, reply) => {
+    const venue = await door(req, reply); if (!venue) return;
+    const shows = await prisma.show.findMany({ where: { startsAt: doorWindow(), hall: { venueId: venue.id } },
+      include: SHOW_INCLUDE, orderBy: { startsAt: 'asc' }, take: 60 });
+    const ids = shows.map(s => s.id);
+    const ts = ids.length ? await prisma.ticket.findMany({ where: { showId: { in: ids }, status: { in: SOLD_STATES } } }) : [];
+    const stat = {};
+    for (const t of ts) { const c = stat[t.showId] = stat[t.showId] || { sold: 0, checkedIn: 0 }; c.sold += t.seats.length; if (t.status === 'CHECKED_IN') c.checkedIn += t.seats.length; }
+    return { ok: true, venue: pubScanVenue(venue),
+      shows: shows.filter(s => s.event && s.hall).map(s => ({ ...pubShow(s), stats: stat[s.id] || { sold: 0, checkedIn: 0 } })) };
+  });
+
+  fastify.post('/api/cinema/scan/checkin', async (req, reply) => {
+    const venue = await door(req, reply); if (!venue) return;
+    const b = req.body || {};
+    // venue.id, not anything from the body: the door admits for the cinema whose key it holds.
+    const r = await checkin.scan(b.code, b.showId ? String(b.showId) : null, venue.id);
+    const showId = (r.ok && r.ticket && r.ticket.showId) || (b.showId ? String(b.showId) : null);
+    let counts = null;
+    if (showId) {
+      const own = await prisma.show.findFirst({ where: { id: showId, hall: { venueId: venue.id } } });
+      if (own) {
+        const ts = await prisma.ticket.findMany({ where: { showId, status: { in: SOLD_STATES } } });
+        counts = { sold: ts.reduce((n, t) => n + t.seats.length, 0), checkedIn: ts.filter(t => t.status === 'CHECKED_IN').reduce((n, t) => n + t.seats.length, 0) };
+      }
+    }
+    const body = { ...r, ticket: r.ticket ? pubDoorTicket(r.ticket) : null, counts };
+    return r.ok ? body : reply.code(ERR_CODE[r.error] || 400).send(body);
+  });
+
+  // The counter, for the same staff. An unpaid ticket at the door is sent to the counter, and without
+  // this the venue would still need the platform key to finish that - which is the thing this commit
+  // exists to stop. Scoped to the venue on the ticket's own show. Cancelling is NOT here: that is a
+  // refund decision and it stays with the owner.
+  fastify.post('/api/cinema/scan/tickets/:code/paid', async (req, reply) => {
+    const venue = await door(req, reply); if (!venue) return;
+    const t = await loadTicket(req.params.code);
+    if (!t) return fail(reply, { error: 'unknown' });
+    if (!t.show || !t.show.hall || t.show.hall.venueId !== venue.id) return fail(reply, { error: 'wrong_venue' });
+    const changed = await tickets.markPaid(t.code, 'counter');
+    if (changed) tell(t, '✅ ' + t.code + ' ተከፍሏል · paid at the counter. ' + t.seats.join(', ') + '\n' + base + '/ticket/' + t.code);
+    return { ok: true, changed, status: changed ? 'CONFIRMED' : t.status };
+  });
+
   // ---------- ops ----------
   fastify.get('/api/cinema/ops/overview', async (req, reply) => {
     if (!ops(req, reply)) return;
@@ -322,7 +391,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const ts = ids.length ? await prisma.ticket.findMany({ where: { showId: { in: ids } } }) : [];
     const stat = {}; for (const t of ts) { const s = stat[t.showId] = stat[t.showId] || { RESERVED: 0, CONFIRMED: 0, CHECKED_IN: 0, CANCELLED: 0, seats: 0, revenue: 0 }; s[t.status] = (s[t.status] || 0) + 1; if (SOLD_STATES.includes(t.status)) { s.seats += t.seats.length; s.revenue += t.total; } }
     return { ok: true, chapa: { enabled: chapaOn, mode: chapaOn ? chapa.mode : null }, telebirr: { enabled: tbOn, mode: tbOn ? telebirr.mode : null },
-      venues: venues.map(v => ({ ...v, halls: v.halls.map(h => ({ id: h.id, name: h.name, capacity: h.capacity, layout: h.layout })) })),
+      venues: venues.map(v => ({ ...pubOpsVenue(v), halls: v.halls.map(h => ({ id: h.id, name: h.name, capacity: h.capacity, layout: h.layout })) })),
       events: events.map(e => ({ id: e.id, slug: e.slug, title: e.title, titleAm: e.titleAm, kind: e.kind, posterUrl: e.posterUrl, runtimeMin: e.runtimeMin, rating: e.rating, language: e.language })),
       shows: shows.filter(s => s.event && s.hall).map(s => ({ ...pubShow(s), stats: stat[s.id] || { RESERVED: 0, CONFIRMED: 0, CHECKED_IN: 0, CANCELLED: 0, seats: 0, revenue: 0 } })) };
   });
@@ -336,6 +405,26 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
       const v = await prisma.venue.create({ data: { slug, name, nameAm: str(b.nameAm, 80), address: str(b.address, 200), phone: str(b.phone, 30), lat: numOr(b.lat, null), lng: numOr(b.lng, null) } });
       return { ok: true, venue: v };
     } catch (e) { if (e.code === 'P2002') return reply.code(409).send({ ok: false, error: 'slug exists' }); throw e; }
+  });
+
+  // Mint the door key for one venue. Shown once, here, and never again: only its hash is stored.
+  // Minting again replaces the old one in the same write, which is how a lost or leaked key is retired.
+  fastify.post('/api/cinema/ops/venues/:id/scankey', async (req, reply) => {
+    if (!ops(req, reply)) return;
+    const venue = await prisma.venue.findUnique({ where: { id: String(req.params.id) } });
+    if (!venue) return reply.code(404).send({ ok: false, error: 'no such venue' });
+    const key = mintScanKey();
+    const v = await prisma.venue.update({ where: { id: venue.id }, data: { scanKeyHash: hashScanKey(key), scanKeyAt: new Date() } });
+    return { ok: true, venue: pubOpsVenue(v), key, link: scanLink(base, key),
+      note: 'Shown once. Only its hash is stored - if it is lost, mint another, which retires this one.' };
+  });
+
+  fastify.post('/api/cinema/ops/venues/:id/scankey/revoke', async (req, reply) => {
+    if (!ops(req, reply)) return;
+    const venue = await prisma.venue.findUnique({ where: { id: String(req.params.id) } });
+    if (!venue) return reply.code(404).send({ ok: false, error: 'no such venue' });
+    const v = await prisma.venue.update({ where: { id: venue.id }, data: { scanKeyHash: null, scanKeyAt: null } });
+    return { ok: true, venue: pubOpsVenue(v) };
   });
 
   fastify.post('/api/cinema/ops/halls', async (req, reply) => {

@@ -24,7 +24,12 @@ function fakeDb() {
     }
     return v === c;
   };
-  const match = (row, where) => Object.entries(where || {}).every(([k, c]) => k === 'OR' ? c.some(w => match(row, w)) : cmp(row[k], c));
+  const match = (row, where) => Object.entries(where || {}).every(([k, c]) => {
+    if (k === 'OR') return c.some(w => match(row, w));
+    // Relation filter, as the door uses to scope shows to one venue: { hall: { venueId } }.
+    if (k === 'hall' && c && typeof c === 'object' && !(c instanceof Date)) { const h = T.hall.find(x => x.id === row.hallId); return !!h && match(h, c); }
+    return cmp(row[k], c);
+  });
   const inc = (name, row, include) => {
     if (!row) return null; const r = { ...row }; if (!include) return r;
     if (name === 'show') {
@@ -372,5 +377,182 @@ test('GA: checkout prices per place, ticket and door carry a "VIP x 2" summary',
   assert.equal(list.shows[0].seatsLeft, 19);
   const ops = (await f.inject({ method: 'GET', url: '/api/cinema/ops/shows/' + show.id + '/tickets', headers: OPS })).json();
   assert.deepEqual(ops.tickets[0].summary.map(x => x.count), [2, 1]);
+  await f.close();
+});
+
+// ---------------------------------------------------------------------------------------------
+// 2026-09-12. Per-venue door keys. Before this, /api/cinema/ops/checkin was gated by the global
+// OWNER_KEY, so putting a cinema's door staff on the scanner meant handing them the key to every
+// owner route on the platform - building, ride, watch, payments. 24 venues, 0 with a key.
+// ---------------------------------------------------------------------------------------------
+
+// A second cinema, so "scoped to this venue" can be tested against something rather than asserted.
+async function seedTwo(f) {
+  const mk = async (name) => {
+    const v = (await f.inject({ method: 'POST', url: '/api/cinema/ops/venues', headers: OPS, payload: { name } })).json();
+    const h = (await f.inject({ method: 'POST', url: '/api/cinema/ops/halls', headers: OPS, payload: { venueId: v.venue.id, name: 'Hall 1', layout: LAYOUT } })).json();
+    const e = (await f.inject({ method: 'POST', url: '/api/cinema/ops/events', headers: OPS, payload: { title: name + ' Film' } })).json();
+    const sh = (await f.inject({ method: 'POST', url: '/api/cinema/ops/shows', headers: OPS, payload: { eventId: e.event.id, hallId: h.hall.id, startsAt: inTwoHours(), prices: { VIP: 500, Regular: 300 } } })).json();
+    assert.equal(sh.ok, true, JSON.stringify(sh));
+    return { venue: v.venue, hall: h.hall, show: sh.show };
+  };
+  return { a: await mk('Alem Cinema'), b: await mk('Edna Mall') };
+}
+
+const mintKey = async (f, venueId) => (await f.inject({ method: 'POST', url: '/api/cinema/ops/venues/' + venueId + '/scankey', headers: OPS, payload: {} })).json();
+
+// Sells one seat and pays for it at the counter, so there is a ticket a door can actually admit.
+async function soldTicket(f, show, seat, holder) {
+  await f.inject({ method: 'POST', url: '/api/cinema/shows/' + show.id + '/hold', headers: H(holder), payload: { seat } });
+  const t = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H(holder), payload: { showId: show.id, seats: [seat], name: 'Sara', phone: '0911223344', payMethod: 'counter', idemKey: holder } })).json().ticket;
+  await f.inject({ method: 'POST', url: '/api/cinema/ops/tickets/' + t.code + '/paid', headers: OPS, payload: {} });
+  return t;
+}
+
+test('minting a door key: shown once, only its hash is stored, and it is not the owner key', async () => {
+  const { f, db } = await app();
+  const { a } = await seedTwo(f);
+  assert.equal((await f.inject({ method: 'POST', url: '/api/cinema/ops/venues/' + a.venue.id + '/scankey', payload: {} })).statusCode, 401, 'minting is the owner\u2019s');
+  assert.equal((await f.inject({ method: 'POST', url: '/api/cinema/ops/venues/nope/scankey', headers: OPS, payload: {} })).statusCode, 404);
+
+  const m = await mintKey(f, a.venue.id);
+  assert.match(m.key, /^BSCAN-[A-Za-z0-9_-]{32}$/);
+  assert.notEqual(m.key, KEY, 'a door key is not the platform key');
+  assert.equal(m.link, 'https://bina.et/scan?scan=' + encodeURIComponent(m.key));
+  assert.equal(m.venue.hasScanKey, true);
+  assert.ok(m.venue.scanKeyAt);
+
+  const row = db._.venue.find(v => v.id === a.venue.id);
+  assert.equal(row.scanKey, undefined, 'the column that used to hold a key in the clear is gone');
+  assert.equal(row.scanKeyHash.length, 64);
+  assert.equal(row.scanKeyHash.includes(m.key.slice(6)), false, 'what is stored is not the key');
+  await f.close();
+});
+
+test('a door key opens its own cinema, by header or by link, and nothing without one', async () => {
+  const { f } = await app();
+  const { a } = await seedTwo(f);
+  const key = (await mintKey(f, a.venue.id)).key;
+
+  for (const bad of [{}, { headers: { 'x-scan-key': 'BSCAN-' + 'x'.repeat(32) } }, { headers: { 'x-scan-key': KEY } }, { url: '/api/cinema/scan/session?scan=nonsense' }]) {
+    const r = await f.inject({ method: 'GET', url: bad.url || '/api/cinema/scan/session', headers: bad.headers });
+    assert.equal(r.statusCode, 401, JSON.stringify(bad) + ' must not open a door');
+  }
+  // The owner key is not a door key and a door key is not the owner key: neither substitutes.
+  assert.equal((await f.inject({ method: 'GET', url: '/api/cinema/ops/overview', headers: { 'x-owner-key': key } })).statusCode, 401);
+
+  const byHeader = await f.inject({ method: 'GET', url: '/api/cinema/scan/session', headers: { 'x-scan-key': key } });
+  assert.equal(byHeader.statusCode, 200);
+  assert.equal(byHeader.json().venue.name, 'Alem Cinema');
+  // The parameter stays because the scanner is opened by navigating to a printed or texted link.
+  const byLink = await f.inject({ method: 'GET', url: '/api/cinema/scan/session?scan=' + encodeURIComponent(key) });
+  assert.equal(byLink.statusCode, 200);
+  await f.close();
+});
+
+test('the session lists this cinema and not the one next door', async () => {
+  const { f } = await app();
+  const { a, b } = await seedTwo(f);
+  const ka = (await mintKey(f, a.venue.id)).key, kb = (await mintKey(f, b.venue.id)).key;
+  const sa = (await f.inject({ method: 'GET', url: '/api/cinema/scan/session', headers: { 'x-scan-key': ka } })).json();
+  const sb = (await f.inject({ method: 'GET', url: '/api/cinema/scan/session', headers: { 'x-scan-key': kb } })).json();
+  assert.deepEqual(sa.shows.map(s => s.id), [a.show.id]);
+  assert.deepEqual(sb.shows.map(s => s.id), [b.show.id]);
+  assert.equal(sa.venue.id, a.venue.id);
+  assert.deepEqual(Object.keys(sa.venue).sort(), ['id', 'name', 'nameAm', 'slug']);
+  await f.close();
+});
+
+// The shape behind five IDORs fixed earlier today: the ACTOR is authenticated, then the row is acted
+// on by id. Here the actor is a venue and the row is a ticket that may belong to another cinema.
+test('a door admits its own cinema\u2019s ticket and refuses the one next door by name', async () => {
+  const { f } = await app();
+  const { a, b } = await seedTwo(f);
+  const ka = (await mintKey(f, a.venue.id)).key, kb = (await mintKey(f, b.venue.id)).key;
+  const tb = await soldTicket(f, b.show, 'A1', 'holder-bbbbbbbb');
+
+  const wrong = await f.inject({ method: 'POST', url: '/api/cinema/scan/checkin', headers: { 'x-scan-key': ka, 'content-type': 'application/json' }, payload: { code: tb.code } });
+  assert.equal(wrong.statusCode, 409);
+  assert.equal(wrong.json().error, 'wrong_venue');
+  assert.equal(wrong.json().counts, null, 'and it learns nothing about that show');
+
+  const right = await f.inject({ method: 'POST', url: '/api/cinema/scan/checkin', headers: { 'x-scan-key': kb, 'content-type': 'application/json' }, payload: { code: tb.code } });
+  assert.equal(right.statusCode, 200, 'the refusal at the wrong door did not burn the ticket');
+  assert.equal(right.json().ticket.status, 'CHECKED_IN');
+  assert.deepEqual(right.json().counts, { sold: 1, checkedIn: 1 });
+
+  // Naming another cinema's show in the body does not move the door there either.
+  const cross = await f.inject({ method: 'POST', url: '/api/cinema/scan/checkin', headers: { 'x-scan-key': ka, 'content-type': 'application/json' }, payload: { code: 'BINA-ZZZZZZ', showId: b.show.id } });
+  assert.equal(cross.json().counts, null, 'counts come from a show this venue owns, or not at all');
+  await f.close();
+});
+
+test('door staff are told who and which seats - not the buyer\u2019s phone number or what they paid', async () => {
+  const { f } = await app();
+  const { a } = await seedTwo(f);
+  const key = (await mintKey(f, a.venue.id)).key;
+  const t = await soldTicket(f, a.show, 'A1', 'holder-aaaaaaaa');
+  const r = (await f.inject({ method: 'POST', url: '/api/cinema/scan/checkin', headers: { 'x-scan-key': key, 'content-type': 'application/json' }, payload: { code: t.code } })).json();
+  assert.equal(r.ok, true);
+  assert.equal(r.ticket.name, 'Sara');
+  assert.deepEqual(r.ticket.seats, ['A1']);
+  assert.equal(r.ticket.phone, undefined, 'a doorkeeper does not need the buyer\u2019s phone number');
+  assert.equal(r.ticket.total, undefined);
+  assert.equal(r.ticket.payMethod, undefined);
+  assert.equal(JSON.stringify(r).includes('0911223344'), false);
+  await f.close();
+});
+
+// Unpaid at the door means "go to the counter". Without this the venue would still need the platform
+// key to finish that, which is the thing the door key exists to stop.
+test('the counter is the same staff: a venue key can mark its own ticket paid, never another cinema\u2019s', async () => {
+  const { f } = await app();
+  const { a, b } = await seedTwo(f);
+  const ka = (await mintKey(f, a.venue.id)).key;
+  await f.inject({ method: 'POST', url: '/api/cinema/shows/' + a.show.id + '/hold', headers: H('holder-aaaaaaaa'), payload: { seat: 'A1' } });
+  const ta = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: a.show.id, seats: ['A1'], name: 'Sara', phone: '0911223344', payMethod: 'counter', idemKey: 'p-a' } })).json().ticket;
+  await f.inject({ method: 'POST', url: '/api/cinema/shows/' + b.show.id + '/hold', headers: H('holder-bbbbbbbb'), payload: { seat: 'A1' } });
+  const tb = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-bbbbbbbb'), payload: { showId: b.show.id, seats: ['A1'], name: 'Dawit', phone: '0911223355', payMethod: 'counter', idemKey: 'p-b' } })).json().ticket;
+
+  const own = await f.inject({ method: 'POST', url: '/api/cinema/scan/tickets/' + ta.code + '/paid', headers: { 'x-scan-key': ka, 'content-type': 'application/json' }, payload: {} });
+  assert.equal(own.json().status, 'CONFIRMED');
+  const theirs = await f.inject({ method: 'POST', url: '/api/cinema/scan/tickets/' + tb.code + '/paid', headers: { 'x-scan-key': ka, 'content-type': 'application/json' }, payload: {} });
+  assert.equal(theirs.statusCode, 409);
+  assert.equal(theirs.json().error, 'wrong_venue');
+  // Cancelling is a refund decision and stays with the owner: there is no door route for it.
+  assert.equal((await f.inject({ method: 'POST', url: '/api/cinema/scan/tickets/' + ta.code + '/cancel', headers: { 'x-scan-key': ka, 'content-type': 'application/json' }, payload: {} })).statusCode, 404);
+  await f.close();
+});
+
+test('minting again retires the old key, and revoking closes the door', async () => {
+  const { f } = await app();
+  const { a } = await seedTwo(f);
+  const first = (await mintKey(f, a.venue.id)).key;
+  const open = () => f.inject({ method: 'GET', url: '/api/cinema/scan/session', headers: { 'x-scan-key': first } });
+  assert.equal((await open()).statusCode, 200);
+
+  const second = (await mintKey(f, a.venue.id)).key;
+  assert.notEqual(second, first);
+  assert.equal((await open()).statusCode, 401, 'a key that is lost is retired by minting another');
+  assert.equal((await f.inject({ method: 'GET', url: '/api/cinema/scan/session', headers: { 'x-scan-key': second } })).statusCode, 200);
+
+  const rev = (await f.inject({ method: 'POST', url: '/api/cinema/ops/venues/' + a.venue.id + '/scankey/revoke', headers: OPS, payload: {} })).json();
+  assert.equal(rev.venue.hasScanKey, false);
+  assert.equal((await f.inject({ method: 'GET', url: '/api/cinema/scan/session', headers: { 'x-scan-key': second } })).statusCode, 401);
+  await f.close();
+});
+
+test('ops is told a venue has a key and when - never the key, never its hash', async () => {
+  const { f } = await app();
+  const { a } = await seedTwo(f);
+  const m = await mintKey(f, a.venue.id);
+  const ov = await f.inject({ method: 'GET', url: '/api/cinema/ops/overview', headers: OPS });
+  assert.equal(ov.statusCode, 200);
+  assert.equal(ov.body.includes(m.key), false, 'the key is shown once, at mint, and never again');
+  assert.equal(ov.body.includes('scanKeyHash'), false);
+  const v = ov.json().venues.find(x => x.id === a.venue.id);
+  assert.equal(v.hasScanKey, true);
+  assert.ok(v.scanKeyAt);
+  assert.equal(ov.json().venues.find(x => x.name === 'Edna Mall').hasScanKey, false);
   await f.close();
 });
