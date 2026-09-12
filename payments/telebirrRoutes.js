@@ -93,7 +93,7 @@ module.exports = function telebirrRoutes(fastify, { telebirr, prisma, BASE_URL, 
 
   // Ops: recent online payments (telebirr + Chapa) for the ride-ops page (owner key).
   fastify.get('/api/telebirr/ops/list', async (req, reply) => {
-    if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
+    if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
     const days = Math.max(1, Math.min(90, Number(req.query.days) || 14));
     const rows = await prisma.payment.findMany({ where: { createdAt: { gte: new Date(Date.now() - days * 86400000) } }, orderBy: { createdAt: 'desc' }, take: 150 });
     const list = rows.map(p => { const m = safeMeta(p.meta); return { orderId: p.txRef, kind: p.kind === 'telebirr' ? 'telebirr' : (p.kind || 'chapa'), purpose: p.purpose, code: m.code || null, amount: p.amount, currency: p.currency, status: p.status, phone: p.phone, name: p.name, createdAt: p.createdAt, paymentOrderId: m.paymentOrderId || null, transId: m.transId || null, refund: m.refund || null }; });
@@ -103,7 +103,7 @@ module.exports = function telebirrRoutes(fastify, { telebirr, prisma, BASE_URL, 
 
   // Ops: refund a paid order (owner key).
   fastify.post('/api/telebirr/refund', async (req, reply) => {
-    if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
+    if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
     const b = req.body || {}; const oid = String(b.orderId || '').replace(/[^A-Za-z0-9]/g, '');
     const pay = await prisma.payment.findUnique({ where: { txRef: oid } });
     if (!pay || pay.status !== 'success') return reply.code(404).send({ ok: false, error: 'no_paid_order' });

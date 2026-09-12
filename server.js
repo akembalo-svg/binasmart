@@ -1263,7 +1263,7 @@ fastify.post('/api/afiya', async (req, reply) => {
 });
 
 fastify.get('/api/assistant/misses', async (req, reply) => {
-  if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
+  if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
   const days = Math.max(1, Math.min(90, Number(req.query.days) || 7));
   const [stats, misses] = await Promise.all([biniMemory.stats(days), biniMemory.misses(days, 30)]);
   return { ok: true, days, stats, misses };

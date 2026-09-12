@@ -55,7 +55,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
   const chapaOn = !!(chapa && chapa.enabled);
   const telebirr = telebirrDep || null; const tbOn = !!(telebirr && telebirr.enabled);
   const posters = makePosters({});   // TMDB when TMDB_API_KEY is set; otherwise a no-op
-  const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
+  const ops = (req, reply) => { if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
   const holderOf = req => { const h = String(req.headers['x-holder'] || (req.query && req.query.holder) || ''); return HOLDER_RE.test(h) ? h : null; };
   const loadShow = id => prisma.show.findUnique({ where: { id: String(id) }, include: SHOW_INCLUDE });
   const tell = async (ticket, text) => { if (!notify) return false; try { return await notify(ticket, text); } catch (e) { console.error('[cinema] notify: ' + e.message); return false; } };

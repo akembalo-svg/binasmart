@@ -37,7 +37,7 @@ module.exports = function registerWatch(fastify, deps) {
   const chapa = deps.chapa || null, chapaOn = !!(chapa && chapa.enabled);
   const riderBotToken = deps.riderBotToken != null ? deps.riderBotToken : (process.env.BINA_RIDER_BOT_TOKEN || '');
   const api = deps.tgApi || (riderBotToken ? makeTgApi({ token: riderBotToken }) : null);
-  const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== deps.OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
+  const ops = (req, reply) => { if ((req.headers['x-owner-key'] || req.query.key) !== deps.OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
   const rentRL = limiter(600000, 10), playRL = limiter(60000, 60);
   const shellPath = path.join(__dirname, '..', 'public', 'watch.html');
 

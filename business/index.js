@@ -48,7 +48,7 @@ module.exports = function registerBusiness(fastify, deps) {
   const ownerChat = deps.ownerChat || process.env.BINA_OWNER_TG_CHAT || '';
   const uploadsDir = deps.uploadsDir || path.join(__dirname, '..', 'uploads', 'shops');
   const claimRL = limiter(600000, 6), orderRL = limiter(600000, 8), ipRL = limiter(60000, 300);
-  const ops = (req, reply) => { if ((req.query.key || req.headers['x-owner-key']) !== deps.OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
+  const ops = (req, reply) => { if ((req.headers['x-owner-key'] || req.query.key) !== deps.OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
 
   // The code goes to the owner's Telegram when the shop record has one; otherwise Ibrahim approves.
   const notify = async ({ claim, target, code, phone }) => {
