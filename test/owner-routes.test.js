@@ -19,7 +19,10 @@ const SRC = fs.readFileSync(path.join(__dirname, '..', 'server.js'), 'utf8');
 // Slice each route from its declaration to the `});` that closes it at column 0.
 function routeBodies(source) {
   const out = [];
-  const re = /fastify\.post\('(\/api\/owner\/:slug\/[^']*:id[^']*)'/g;
+  // ANY parameter, not just one spelled ":id". The first version of this scan required a literal
+  // ':id' and so missed unit/:unitId/vacate, occupy, restore and update — the four most destructive
+  // routes here, each of which reached any unit in any building.
+  const re = /fastify\.post\('(\/api\/owner\/:slug\/[^']*\/:[A-Za-z]+\/[^']*)'/g;
   let m;
   while ((m = re.exec(source))) {
     const end = source.indexOf('\n});', m.index);
@@ -30,9 +33,12 @@ function routeBodies(source) {
 
 test('every owner route that acts on a row by id checks the row belongs to that building', () => {
   const routes = routeBodies(SRC);
-  assert.ok(routes.length >= 7, 'found only ' + routes.length + ' owner-by-id routes; the regex has drifted');
+  assert.ok(routes.length >= 11, 'found only ' + routes.length + ' owner-by-id routes; the regex has drifted');
 
-  const missing = routes.filter(r => !/buildingId !== b\.id/.test(r.body)).map(r => r.route);
+  // Any ownership comparison, not one written with a particular variable name. The first version
+  // demanded the identifier b.id specifically, which would have failed a correct route that called it
+  // anything else — a test should require the check, not the identifier.
+  const missing = routes.filter(r => !/buildingId !== \w+\.id/.test(r.body)).map(r => r.route);
   assert.deepEqual(missing, [],
     'These routes authenticate the building but then act on a row by id without checking it belongs ' +
     'to that building, so one owner can act on another owner\'s data:\n  ' + missing.join('\n  ') +
@@ -49,6 +55,9 @@ test('and every one of them authenticates first', () => {
 test('the scan actually finds the known routes', () => {
   const names = routeBodies(SRC).map(r => r.route);
   for (const expected of ['/api/owner/:slug/order/:id/status', '/api/owner/:slug/booking/:id/status',
-    '/api/owner/:slug/invoice/:id/send'])
+    '/api/owner/:slug/invoice/:id/send',
+    // the four the first version of this scan walked past
+    '/api/owner/:slug/unit/:unitId/vacate', '/api/owner/:slug/unit/:unitId/occupy',
+    '/api/owner/:slug/unit/:unitId/restore', '/api/owner/:slug/unit/:unitId/update'])
     assert.ok(names.includes(expected), 'scan missed ' + expected + '; found: ' + names.join(', '));
 });

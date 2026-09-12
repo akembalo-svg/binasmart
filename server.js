@@ -165,6 +165,13 @@ function hotelLimiter(windowMs, max) {
 const bookRL = hotelLimiter(600000, 5);
 // Behind nginx req.ip is 127.0.0.1 for everyone; X-Real-IP is set by nginx and the client cannot append to it.
 const bookIp = req => String(req.headers['x-real-ip'] || req.ip);
+// etMobile VALIDATES (null for anything not Ethiopian) and is what gates an outbound message;
+// phoneKey only IDENTIFIES, so a foreign number is still rate limited rather than refused.
+const { normPhone: etMobile, phoneKey } = require('./ride/phone');
+// Both password routes below verify with scryptSync, which blocks the event loop — ten attempts
+// measured at 556 ms on this server. Unthrottled, that is a denial of service before it is ever a
+// brute force, and login hands back the ownerKey for every building the account owns.
+const loginRL = hotelLimiter(600000, 8);
 
 // health
 fastify.get('/nav', async (req, reply) => reply.sendFile('nav.html'));
@@ -196,8 +203,11 @@ function normPhone(p){
   return '+' + d;
 }
 fastify.post('/api/owner/login', async (req, reply) => {
+  if (!loginRL('ip:' + bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const { phone, password } = req.body || {};
   if (!phone || !password) return reply.code(400).send({ error: 'phone_and_password_required' });
+  const loginPk = phoneKey(phone);
+  if (loginPk && !loginRL(loginPk)) return reply.code(429).send({ error: 'too_many' });
   const user = await prisma.user.findFirst({ where: { phone: normPhone(phone) } });
   if (!user || !user.passwordHash || !checkPw(password, user.passwordHash))
     return reply.code(401).send({ error: 'wrong_phone_or_password' });
@@ -215,8 +225,11 @@ fastify.post('/api/owner/login', async (req, reply) => {
   return { ok: true, buildings: out };
 });
 fastify.post('/api/owner/change-password', async (req, reply) => {
+  if (!loginRL('ip:' + bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const { phone, oldPassword, newPassword } = req.body || {};
   if (!phone || !oldPassword || !newPassword) return reply.code(400).send({ error: 'missing_fields' });
+  const pwPk = phoneKey(phone);
+  if (pwPk && !loginRL(pwPk)) return reply.code(429).send({ error: 'too_many' });
   if (String(newPassword).length < 6) return reply.code(400).send({ error: 'password_too_short_min_6' });
   const user = await prisma.user.findFirst({ where: { phone: normPhone(phone) } });
   if (!user || !user.passwordHash || !checkPw(oldPassword, user.passwordHash))
@@ -609,7 +622,6 @@ const { isPublic: filmIsPublic } = require('./watch/rules');
 // NOT the normPhone below: that one FORMATS and never fails — it returns "+" for "not a phone" and
 // passes +971558785151 straight through. This one validates, and returns null for anything that is
 // not a well-formed Ethiopian mobile. Use it before handing a number to the WhatsApp bridge.
-const { normPhone: etMobile, phoneKey } = require('./ride/phone');
 // Rate limits below key on the IP AND the caller's phone, copying /api/watch/rent. On Ethiopian
 // mobile networks an IP is shared by many people and cheap for one person to change, so either
 // dimension alone is weak. phoneKey is a key, not a validator — see ride/phone.js.
@@ -2810,9 +2822,12 @@ fastify.get('/api/owner/:slug/units', async (req, reply) => {
 fastify.post('/api/owner/:slug/unit/:unitId/update', async (req, reply) => {
   if (await authBuildingFail(req, reply, req.params.slug)) return;
   const { rent, tenantPhone, tenantName } = req.body || {};
+  // Owning a building is not owning every unit. Without this, one building's key reached any unit in
+  // any building — see test/owner-routes.test.js. 404 rather than 403, so a wrong id is not confirmed.
+  const ownB = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
   const u = await prisma.unit.findUnique({ where: { id: req.params.unitId },
     include: { tenancies: { where: { active: true }, include: { user: true, shop: true, contract: true } } } });
-  if (!u) return reply.code(404).send({ error: 'unit_not_found' });
+  if (!u || !ownB || u.buildingId !== ownB.id) return reply.code(404).send({ error: 'unit_not_found' });
   if (rent !== undefined && rent !== null && rent !== '') {
     const r = parseInt(rent);
     await prisma.unit.update({ where: { id: u.id }, data: { monthlyRent: r } });
@@ -2832,8 +2847,11 @@ fastify.post('/api/owner/:slug/unit/:unitId/update', async (req, reply) => {
 // ===== OWNER MGMT: vacate unit =====
 fastify.post('/api/owner/:slug/unit/:unitId/vacate', async (req, reply) => {
   if (await authBuildingFail(req, reply, req.params.slug)) return;
+  // Owning a building is not owning every unit. Without this, one building's key reached any unit in
+  // any building — see test/owner-routes.test.js. 404 rather than 403, so a wrong id is not confirmed.
+  const ownB = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
   const u = await prisma.unit.findUnique({ where: { id: req.params.unitId }, include: { tenancies: { where: { active: true } } } });
-  if (!u) return reply.code(404).send({ error: 'unit_not_found' });
+  if (!u || !ownB || u.buildingId !== ownB.id) return reply.code(404).send({ error: 'unit_not_found' });
   for (const t of u.tenancies) await prisma.tenancy.update({ where: { id: t.id }, data: { active: false, endDate: new Date(), endReason: 'vacated by owner' } });
   await prisma.unit.update({ where: { id: u.id }, data: { status: 'VACANT' } });
   await audit(u.buildingId, 'UNIT_VACATED', u.number);
@@ -2924,9 +2942,12 @@ fastify.post('/api/owner/:slug/add-unit', async (req, reply) => {
 // ===== OWNER MGMT: restore last tenant (undo vacate) =====
 fastify.post('/api/owner/:slug/unit/:unitId/restore', async (req, reply) => {
   if (await authBuildingFail(req, reply, req.params.slug)) return;
+  // Owning a building is not owning every unit. Without this, one building's key reached any unit in
+  // any building — see test/owner-routes.test.js. 404 rather than 403, so a wrong id is not confirmed.
+  const ownB = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
   const u = await prisma.unit.findUnique({ where: { id: req.params.unitId },
     include: { tenancies: { where: { active: false }, orderBy: { endDate: 'desc' }, take: 1, include: { shop: true, user: true } } } });
-  if (!u) return reply.code(404).send({ error: 'unit_not_found' });
+  if (!u || !ownB || u.buildingId !== ownB.id) return reply.code(404).send({ error: 'unit_not_found' });
   const t = u.tenancies[0];
   if (!t) return reply.code(404).send({ error: 'no_previous_tenant' });
   await prisma.tenancy.update({ where: { id: t.id }, data: { active: true, endDate: null, endReason: null } });
@@ -2940,8 +2961,11 @@ fastify.post('/api/owner/:slug/unit/:unitId/occupy', async (req, reply) => {
   if (await authBuildingFail(req, reply, req.params.slug)) return;
   const { name, phone, rent } = req.body || {};
   if (!name || !phone) return reply.code(400).send({ error: 'name_and_phone_required' });
+  // Owning a building is not owning every unit. Without this, one building's key reached any unit in
+  // any building — see test/owner-routes.test.js. 404 rather than 403, so a wrong id is not confirmed.
+  const ownB = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
   const u = await prisma.unit.findUnique({ where: { id: req.params.unitId }, include: { building: true } });
-  if (!u) return reply.code(404).send({ error: 'unit_not_found' });
+  if (!u || !ownB || u.buildingId !== ownB.id) return reply.code(404).send({ error: 'unit_not_found' });
   let user = await prisma.user.findFirst({ where: { phone } });
   if (!user) user = await prisma.user.create({ data: { orgId: u.building.orgId, phone, fullName: name.slice(0, 60), role: 'TENANT' } });
   const tenancy = await prisma.tenancy.create({ data: { unitId: u.id, userId: user.id, startDate: new Date(), active: true } });
