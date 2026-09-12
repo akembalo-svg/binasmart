@@ -35,8 +35,21 @@ function nextDeparture(group, ms) {
   return null;
 }
 
-function makeGroups({ prisma, pool, settings, api, baseUrl, now }) {
+function makeGroups({ prisma, pool, settings, api, baseUrl, now, secret }) {
   const clock = now || Date.now;
+
+  // The residual left open by the tiering change on 12 September, closed here.
+  //
+  // The limited answer carried the group id, because the card needs something to send to the leave
+  // button. But the id is also the invitation: /pool/g/<id> is the full share card — pickup point,
+  // dropoff point, every member's first name, the organiser. So a known phone number still led to
+  // the id, and the id still opened everything the tiering had just withheld.
+  //
+  // `ref` is an HMAC of the id. It leaves and it does nothing else: it cannot be turned back into an
+  // id, and the leave route resolves it only against groups that THIS phone is already a member of,
+  // so it is useless to anyone but the person it was handed to.
+  const REF_SECRET = secret || process.env.POOL_REF_SECRET || process.env.VISIT_SECRET || 'bina-pool-ref';
+  const refFor = groupId => require('crypto').createHmac('sha256', REF_SECRET).update('grp|' + String(groupId)).digest('base64url').slice(0, 22);
 
   // `full` is the difference between a caller who has proved who they are and one who has typed a
   // phone number. A phone number is not a credential — Ethiopian mobile numbers are enumerable — so
@@ -109,6 +122,16 @@ function makeGroups({ prisma, pool, settings, api, baseUrl, now }) {
     return { ok: true, closed: false };
   }
 
+  // Resolve a leave handle. An id is accepted because the proven path still has one; a ref is
+  // matched only against this phone's own active groups, so it can never name somebody else's.
+  async function resolveLeaveKey(key, phone) {
+    const k = String(key || '');
+    if (!k || !phone) return null;
+    const mine_ = await prisma.poolGroupMember.findMany({ where: { riderPhone: phone, status: 'active' }, select: { groupId: true }, take: 20 });
+    for (const m of mine_) if (m.groupId === k || refFor(m.groupId) === k) return m.groupId;
+    return null;
+  }
+
   // `full` comes from the route: true only when the caller proved a Telegram identity.
   async function mine(phone, full) {
     const ms = clock();
@@ -117,7 +140,10 @@ function makeGroups({ prisma, pool, settings, api, baseUrl, now }) {
     for (const m of ms_) {
       const g = await prisma.poolGroup.findUnique({ where: { id: m.groupId } }); if (!g) continue;
       const members = await prisma.poolGroupMember.findMany({ where: { groupId: g.id } });
-      out.push({ ...pubGroup(g, members, ms, full), organizerIsMe: g.organizerPhone === phone,
+      const pub = pubGroup(g, members, ms, full);
+      // The id goes only to a caller who proved who they are. Everyone else gets a ref.
+      if (!full) delete pub.id;
+      out.push({ ...pub, ref: refFor(g.id), organizerIsMe: g.organizerPhone === phone,
         share: full ? (baseUrl || 'https://bina.et') + '/pool/g/' + g.id : undefined });
     }
     return out;
@@ -166,7 +192,7 @@ function makeGroups({ prisma, pool, settings, api, baseUrl, now }) {
     return n;
   }
 
-  return { create, pub, join, leave, mine, mineByTelegram, tick, nextDeparture, daysLabel, hhmm, addisParts, DAY_BITS, WEEKDAYS, OPEN_BEFORE_MIN };
+  return { create, pub, join, leave, mine, mineByTelegram, tick, refFor, resolveLeaveKey, nextDeparture, daysLabel, hhmm, addisParts, DAY_BITS, WEEKDAYS, OPEN_BEFORE_MIN };
 }
 
 module.exports = { makeGroups, nextDeparture, daysLabel, hhmm, addisParts, DAY_BITS, WEEKDAYS, OPEN_BEFORE_MIN };

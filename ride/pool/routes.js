@@ -59,9 +59,15 @@ module.exports = function poolRoutes(fastify, { pool, groups, riderBotToken, dri
       const w = gwho(req, reply); if (!w) return;
       return gans(reply, await groups.join(String(req.params.id), { name: w.name, phone: w.phone, telegramId: w.telegramId, female: (req.body || {}).female === true }), w);
     });
-    fastify.post('/api/pool/groups/:id/leave', async (req, reply) => {
-      if (!pollRL(req.params.id)) return reply.code(429).send({ ok: false, error: 'slow_down' });
-      const r = await groups.leave(String(req.params.id), normPhone((req.body || {}).phone));
+    // :key is the group id for a caller who proved who they are, or the opaque ref the limited answer
+    // carries. Either way leave() is reached with an id this phone is actually a member of.
+    fastify.post('/api/pool/groups/:key/leave', async (req, reply) => {
+      if (!pollRL(req.params.key)) return reply.code(429).send({ ok: false, error: 'slow_down' });
+      const phone = normPhone((req.body || {}).phone);
+      if (!phone) return reply.code(400).send({ ok: false, error: 'phone' });
+      const id = await groups.resolveLeaveKey(String(req.params.key), phone);
+      if (!id) return reply.code(404).send({ ok: false, error: 'not_found' });
+      const r = await groups.leave(id, phone);
       if (!r.ok) return reply.code(404).send(r);
       return r;
     });

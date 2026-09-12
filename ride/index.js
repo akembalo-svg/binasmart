@@ -40,7 +40,10 @@ module.exports = function registerRide(fastify, deps) {
   // BinaPool shares the fare engine, the auction and the driver app; riderNotify fans ride events out to every seat.
   const pool = makePool({ prisma: deps.prisma, geo, settings, dispatch, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL, dstate: require('./driverState') });
   const riderNotify = makeRiderNotify({ prisma: deps.prisma, api: riderApi, baseUrl: deps.BASE_URL, pool });
-  const groups = makeGroups({ prisma: deps.prisma, pool, settings, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL });
+  // secret signs the leave handle the untrusted answer carries instead of the group id; same
+  // sourcing as building/visit.js, so it is a real secret in production rather than the fallback.
+  const groups = makeGroups({ prisma: deps.prisma, pool, settings, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL,
+    secret: process.env.POOL_REF_SECRET || process.env.VISIT_SECRET || deps.OWNER_KEY });
   // offers needs dispatch (to escalate and to cancel its timer) and dispatch needs offers (to run the
   // auction), so dispatch is built first and told about the auction afterwards.
   const offers = makeOffers({ prisma: deps.prisma, geo, settings, api: driverTgApi, riderNotify,

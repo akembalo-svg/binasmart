@@ -180,3 +180,81 @@ test('the share card stays complete — the unguessable id is the invitation', a
   assert.ok(card.from, 'a colleague who was sent the link needs to know where it leaves from');
   assert.ok(card.names);
 });
+
+// ---------------------------------------------------------------------------------------------
+// 2026-09-13. Two things, both follow-ups to the tiering change of the 12th.
+// ---------------------------------------------------------------------------------------------
+
+// The residual that commit wrote down and left open: the limited answer still carried the group id,
+// and /pool/g/<id> is the full share card — pickup point, dropoff point, member names, organiser. So
+// a known phone number still reached everything the tiering had just withheld.
+test('a typed phone number gets a handle that leaves, and not the id that invites', async () => {
+  const w = world();
+  const g = await w.groups.create({ name: 'Bole 7am', pickup: { lat: 9.01, lng: 38.76, label: 'Home' },
+    dropoff: { lat: 9.04, lng: 38.75, label: 'Office' }, days: 62, timeMin: 420,
+    organizer: { name: 'Abebe Kebede', phone: '+251911000111' } });
+  const id = g.group.id;
+
+  const limited = (await w.groups.mine('+251911000111', false))[0];
+  assert.equal(limited.id, undefined, 'the id is the invitation, so it is not handed to a guess');
+  assert.ok(limited.ref, 'but something has to work the leave button');
+  assert.notEqual(limited.ref, id);
+  assert.equal(String(limited.ref).includes(id), false, 'and the ref does not contain the id');
+
+  const full = (await w.groups.mine('+251911000111', true))[0];
+  assert.equal(full.id, id, 'a proven caller still gets the id');
+});
+
+test('the handle leaves only for the person it was given to', async () => {
+  const w = world();
+  const g = await w.groups.create({ name: 'Bole 7am', pickup: { lat: 9.01, lng: 38.76, label: 'Home' },
+    dropoff: { lat: 9.04, lng: 38.75, label: 'Office' }, days: 62, timeMin: 420,
+    organizer: { name: 'Abebe Kebede', phone: '+251911000111' } });
+  const ref = (await w.groups.mine('+251911000111', false))[0].ref;
+
+  assert.equal(await w.groups.resolveLeaveKey(ref, '+251911000111'), g.group.id);
+  assert.equal(await w.groups.resolveLeaveKey(ref, '+251911000222'), null,
+    'somebody else holding the same ref resolves nothing — it is matched against their own memberships');
+  assert.equal(await w.groups.resolveLeaveKey('made-up', '+251911000111'), null);
+  assert.equal(await w.groups.resolveLeaveKey(g.group.id, '+251911000111'), g.group.id, 'an id still works');
+});
+
+// And the regression this pair of commits actually caused. public/ride/app.js read g.names.join(),
+// g.from.label and g.to.label with no guard; the 12th stopped sending all three on the phone path, so
+// groupLine threw a TypeError and took the whole daily-groups panel down. Nobody saw it because the
+// only group in the database is closed, so mine() returned an empty list and the line never ran.
+//
+// Tested by running the page's own function, lifted out of the shipped file, against the answer the
+// module actually produces — not against a fixture written to match.
+test('the page can render what the server actually sends it', async () => {
+  const fs = require('node:fs'), path = require('node:path');
+  const src = fs.readFileSync(path.join(__dirname, '..', '..', 'public', 'ride', 'app.js'), 'utf8');
+  const at = src.indexOf('function groupLine(g)');
+  assert.ok(at > 0, 'groupLine not found in public/ride/app.js');
+  let depth = 0, end = -1;
+  for (let i = src.indexOf('{', at); i < src.length; i++) {
+    if (src[i] === '{') depth++;
+    else if (src[i] === '}') { depth--; if (!depth) { end = i + 1; break; } }
+  }
+  assert.ok(end > at, 'could not find the end of groupLine');
+  const groupLine = eval('(' + src.slice(at, end).replace(/^function /, 'function ') + ')');   // eslint-disable-line no-eval
+
+  const w = world();
+  await w.groups.create({ name: 'Bole 7am', pickup: { lat: 9.01, lng: 38.76, label: 'Home' },
+    dropoff: { lat: 9.04, lng: 38.75, label: 'Office' }, days: 62, timeMin: 420,
+    organizer: { name: 'Abebe Kebede', phone: '+251911000111' } });
+
+  global.esc = s2 => String(s2 == null ? '' : s2);
+  for (const full of [false, true]) {
+    const g = (await w.groups.mine('+251911000111', full))[0];
+    const html = groupLine(g);           // this threw for full=false before today
+    assert.match(html, /Bole 7am/);
+    assert.match(html, /07:00/);
+    if (full) assert.match(html, /Home/, 'a proven caller still sees where the car leaves from');
+    else {
+      assert.equal(/Home|Office|Abebe/.test(html), false, 'and a phone number still sees none of it');
+      assert.match(html, /Telegram/, 'but is told how to');
+    }
+  }
+  delete global.esc;
+});

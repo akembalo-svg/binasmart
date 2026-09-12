@@ -443,17 +443,33 @@
   // ---- daily groups (contract commute) ----
   var DAYS = [['ሰ', 'Mon', 1], ['ማ', 'Tue', 2], ['ረ', 'Wed', 4], ['ሐ', 'Thu', 8], ['ዓ', 'Fri', 16], ['ቅ', 'Sat', 32], ['እ', 'Sun', 64]];
   var GF = { days: 31 };
-  function groupLine(g) { return '<b>' + esc(g.name) + '</b><small>' + esc(g.daysLabel) + ' · ' + esc(g.time) + ' · ' + g.members + '/' + g.seats + ' · ' + esc(g.names.join(', ')) + (g.womenOnly ? ' · 👩' : '') + (g.nextInMin != null ? ' · next in ' + (g.nextInMin >= 60 ? Math.floor(g.nextInMin / 60) + ' h ' + (g.nextInMin % 60) + ' min' : g.nextInMin + ' min') : '') + '</small><span class="gsub">' + esc(g.from.label) + ' → ' + esc(g.to.label) + '</span>'; }
+  // A caller who only typed a phone number gets the schedule and not the two points or the names —
+  // see ride/pool/groups.js. So everything below the schedule is drawn only when it was sent; before
+  // this, g.names.join() threw on that answer and took the whole daily-groups panel down with it.
+  function groupLine(g) {
+    var who = g.names ? ' · ' + esc(g.names.join(', ')) : '';
+    var next = g.nextInMin != null ? ' · next in ' + (g.nextInMin >= 60 ? Math.floor(g.nextInMin / 60) + ' h ' + (g.nextInMin % 60) + ' min' : g.nextInMin + ' min') : '';
+    var where = (g.from && g.to) ? '<span class="gsub">' + esc(g.from.label) + ' → ' + esc(g.to.label) + '</span>'
+      : '<span class="gsub" style="opacity:.7">📍 ከቴሌግራም ይክፈቱ · open from Telegram to see the pickup point and invite people</span>';
+    return '<b>' + esc(g.name) + '</b><small>' + esc(g.daysLabel) + ' · ' + esc(g.time) + ' · ' + g.members + '/' + g.seats + who
+      + (g.womenOnly ? ' · 👩' : '') + next + '</small>' + where;
+  }
   function loadGroups() {
     var box = $('dailyGroups'); if (!box) return;
     var head = '<div class="nearhd" style="margin-top:12px">🔁 ቋሚ ቡድኖች <small>Daily groups · same car, same time, pay per seat</small></div>';
     var done = function (gs) {
       box.innerHTML = head + '<div id="ginvite"></div>' + (gs || []).map(function (g, i) {
-        return '<div class="grp gd" data-i="' + i + '">' + groupLine(g) + '<div class="shrow"><a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent('🔁 ' + g.name + ' · ' + g.daysLabel + ' ' + g.time + ' · ' + g.from.label + ' → ' + g.to.label + ' · join: ' + g.share) + '">💬 Invite</a><a class="btn sm" target="_blank" rel="noopener" href="https://t.me/share/url?url=' + encodeURIComponent(g.share) + '&text=' + encodeURIComponent('🔁 ' + g.name + ' · ' + g.daysLabel + ' ' + g.time) + '">✈️ Invite</a><button type="button" class="btn sm gleave">' + (g.organizerIsMe ? 'ዝጋ · Close' : 'ውጣ · Leave') + '</button></div></div>';
+        // The share link IS the invitation, so it is only sent to a caller who proved who they are.
+        // Without one there is nothing to invite with, and "undefined" was going into the message.
+        var invite = g.share
+          ? '<a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent('🔁 ' + g.name + ' · ' + g.daysLabel + ' ' + g.time + (g.from && g.to ? ' · ' + g.from.label + ' → ' + g.to.label : '') + ' · join: ' + g.share) + '">💬 Invite</a>'
+            + '<a class="btn sm" target="_blank" rel="noopener" href="https://t.me/share/url?url=' + encodeURIComponent(g.share) + '&text=' + encodeURIComponent('🔁 ' + g.name + ' · ' + g.daysLabel + ' ' + g.time) + '">✈️ Invite</a>'
+          : '';
+        return '<div class="grp gd" data-i="' + i + '">' + groupLine(g) + '<div class="shrow">' + invite + '<button type="button" class="btn sm gleave">' + (g.organizerIsMe ? 'ዝጋ · Close' : 'ውጣ · Leave') + '</button></div></div>';
       }).join('') + '<button type="button" class="cta wait gnew" id="newDaily">🔁 ቋሚ ቡድን ፍጠር <small>Create a daily group · for your office or school run</small></button>';
       box.querySelectorAll('.gd').forEach(function (el) { var g = gs[+el.dataset.i]; el.querySelector('.gleave').addEventListener('click', function () {
         var q = g.organizerIsMe ? 'ቡድኑን ይዝጉ? ሁሉም ይወጣሉ · Close this group for everyone?' : 'ከቡድኑ ይውጡ? · Leave this group?';
-        var go = function (yes) { if (!yes) return; api('/api/pool/groups/' + g.id + '/leave', { phone: ME.phone }).then(function (d) { if (d.ok) loadGroups(); else toast(d.error || 'failed'); }); };
+        var go = function (yes) { if (!yes) return; api('/api/pool/groups/' + (g.id || g.ref) + '/leave', { phone: ME.phone }).then(function (d) { if (d.ok) loadGroups(); else toast(d.error || 'failed'); }); };
         if (IN_TG) TG.confirm(q, go); else go(confirm(q));
       }); });
       $('newDaily').addEventListener('click', function () { $('gform').classList.remove('hidden'); $('newDaily').classList.add('hidden'); renderDays(); $('gFrom').textContent = '📍 ከ · from: ' + (S.pickup ? S.pickup.label : 'your current position'); });
