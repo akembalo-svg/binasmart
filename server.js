@@ -1460,6 +1460,11 @@ fastify.get('/api/hotels', async (req, reply) => {
 const NEWS_CATS = { 'ቴክኖሎጂ': '#2563eb', 'ግንባታ': '#c2410c', 'ንግድ': '#059669', 'ሪል እስቴት': '#7c3aed', 'መመሪያ': '#0e7490' };
 const TENDER_CATS = ['ግንባታ Construction', 'አቅርቦት Supply', 'አገልግሎት Services', 'ማማከር Consultancy', 'ጤና Health', 'ትራንስፖርት Transport', 'ሽያጭ ጨረታ Disposal auction'];
 const escH = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// JSON inside <script> is not JSON. A "</script>" anywhere in a string value ends the block early
+// and everything after it is parsed as HTML, so a headline is enough to inject markup. watch/,
+// cinema/ and business/ each escape "<" for this; the news article, the building page and
+// content-routes.js did not. No post carries one today - this is the guard, not a repair.
+const ldScript = obj => '<script type="application/ld+json">' + JSON.stringify(obj).replace(/</g, '\\u003c') + '</script>';
 const amDate = d => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 
 
@@ -1676,7 +1681,8 @@ const CANONICAL_TO = {
 fastify.get('/news/:slug', async (req, reply) => {
   const p = await prisma.newsPost.findUnique({ where: { slug: req.params.slug } });
   if (!p || !p.published) return reply.code(404).type('text/html').send(newsShell({ title: 'Not found', desc: '', canonical: 'https://bina.et/news', body: '<main><div class="empty"><div class="big">🗞️</div><h3>ጽሑፉ አልተገኘም</h3><p class="sans"><a href="/news" style="color:var(--em)">← ወደ ዜና ገጽ</a></p></div></main>' }));
-  const schema = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': p.evergreen ? 'Article' : 'NewsArticle', headline: p.title, description: p.excerpt, inLanguage: p.lang, datePublished: p.publishedAt, author: { '@type': 'Organization', name: 'Bina ዜና — BinaSmart' }, publisher: { '@type': 'Organization', name: 'BinaSmart', url: 'https://bina.et' }, mainEntityOfPage: CANONICAL_TO[p.slug] || ('https://bina.et/news/' + p.slug) })}</script><meta name="robots" content="max-image-preview:large">`;
+  const schema = ldScript({ '@context': 'https://schema.org', '@type': p.evergreen ? 'Article' : 'NewsArticle', headline: p.title, description: p.excerpt, inLanguage: p.lang, datePublished: p.publishedAt, author: { '@type': 'Organization', name: 'Bina ዜና — BinaSmart' }, publisher: { '@type': 'Organization', name: 'BinaSmart', url: 'https://bina.et' }, mainEntityOfPage: CANONICAL_TO[p.slug] || ('https://bina.et/news/' + p.slug) })
+    + '<meta name="robots" content="max-image-preview:large">';
   const share = encodeURIComponent('https://bina.et/news/' + p.slug);
   const shareT = encodeURIComponent(p.title);
   // Related reading: same category first, then the newest of the rest, so a post is reachable from its own
@@ -1847,6 +1853,7 @@ async function autopostAll({ emoji, title, excerpt, url, tags, linkedin, ogImage
 
 // ---- TEMP: FB token bootstrap form (remove after setup) ----
 fastify.get('/fb-setup-x7k2', async (req, reply) => {
+  if (authFail(req, reply)) return;   // the form in front of the .env writer, same gate as the writer
   reply.type('text/html').send(`<!doctype html><meta name=viewport content="width=device-width,initial-scale=1"><title>FB Setup</title>
   <body style="font-family:sans-serif;max-width:480px;margin:40px auto;padding:0 16px">
   <h2>🔐 BinaSmart Facebook Setup</h2>
@@ -1857,12 +1864,16 @@ fastify.get('/fb-setup-x7k2', async (req, reply) => {
   </form></body>`);
 });
 fastify.post('/fb-setup-x7k2', async (req, reply) => {
+  // This rewrites .env and sets process.env, and it had no gate at all - the obscure path was the
+  // only thing in front of it. The bootstrap it exists for ran on 28 August and the token has been in
+  // .env since, so it is kept for the next reconnect rather than deleted, behind the owner key.
+  if (authFail(req, reply)) return;
   const tok = String((req.body || {}).token || '').trim();
   if (!tok || tok.length < 40) return reply.code(400).type('text/html').send('<h2>❌ Missing/short token</h2>');
   const pageId = '1400749246446309';
   try {
     const r = await fetch('https://graph.facebook.com/v21.0/' + pageId + '?fields=access_token,name&access_token=' + encodeURIComponent(tok)).then(x => x.json());
-    if (r.error || !r.access_token) return reply.type('text/html').send('<h2>❌ ' + (r.error ? r.error.message : 'No page token — token may lack pages_manage_posts') + '</h2>');
+    if (r.error || !r.access_token) return reply.type('text/html').send('<h2>❌ ' + escH(r.error ? r.error.message : 'No page token — token may lack pages_manage_posts') + '</h2>');
     const pageTok = r.access_token;
     process.env.BINA_FB_PAGE_ID = pageId;
     process.env.BINA_FB_PAGE_TOKEN = pageTok;
@@ -1870,15 +1881,33 @@ fastify.post('/fb-setup-x7k2', async (req, reply) => {
     env += '\nBINA_FB_PAGE_ID=' + pageId + '\nBINA_FB_PAGE_TOKEN=' + pageTok + '\n';
     fs.writeFileSync('.env', env);
     fs.writeFileSync('/root/storage/binasmart-fb-bootstrap.json', JSON.stringify({ pageId: pageId, page: r.name, ok: true }));
-    reply.type('text/html').send('<body style="font-family:sans-serif;text-align:center;margin-top:80px"><h1>✅ Facebook connected!</h1><p>Page: <b>' + r.name + '</b></p><p>Tell Claude "saved".</p></body>');
-  } catch (e) { reply.type('text/html').send('<h2>❌ ' + String(e).slice(0, 100) + '</h2>'); }
+    reply.type('text/html').send('<body style="font-family:sans-serif;text-align:center;margin-top:80px"><h1>✅ Facebook connected!</h1><p>Page: <b>' + escH(r.name) + '</b></p><p>Tell Claude "saved".</p></body>');
+  } catch (e) { reply.type('text/html').send('<h2>❌ ' + escH(String(e).slice(0, 100)) + '</h2>'); }
 });
 
 // ---- ADMIN: add news / tender (global key) ----
+// Both of these used to spread the request body into Prisma: `const { silent, ...data } = b`. That is
+// the write-side twin of `return { rows }` - every column settable by the caller, no length caps, and
+// any column added to the model later silently joins the API. Owner-gated, so this is house style
+// rather than a hole, but it is the one shape this codebase has spent the day removing.
+const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const NEWS_FIELDS = ['slug', 'title', 'titleAm', 'category', 'excerpt', 'bodyHtml', 'lang', 'author', 'heroEmoji', 'readMinutes', 'evergreen', 'published', 'publishedAt'];
+const TENDER_FIELDS = ['slug', 'title', 'titleAm', 'category', 'region', 'org', 'summary', 'bodyHtml', 'deadline', 'budget', 'sourceUrl', 'sourceName', 'published', 'publishedAt'];
+const pickFields = (body, fields) => { const d = {}; for (const f of fields) if (body[f] !== undefined) d[f] = body[f]; return d; };
+// The slug is concatenated into the sitemap and into every canonical without escaping, so an "&" in
+// one would make the sitemap invalid XML and Google would drop the whole file, not just that url.
+const badSlug = s => !SLUG_RE.test(String(s || ''));
+
 fastify.post('/api/admin/news', async (req, reply) => {
   if (authFail(req, reply)) return;
-  const b = req.body;
-  const { silent, linkedin, ...data } = b;
+  const b = req.body || {};
+  const data = pickFields(b, NEWS_FIELDS);
+  if (badSlug(data.slug)) return reply.code(400).send({ error: 'slug must be lower-case letters, digits and single hyphens' });
+  if (data.publishedAt !== undefined) {
+    const d = new Date(data.publishedAt);
+    if (isNaN(d)) return reply.code(400).send({ error: 'publishedAt must be a date' });
+    data.publishedAt = d;
+  }
   const post = await prisma.newsPost.upsert({ where: { slug: data.slug }, update: data, create: data });
   const url = 'https://bina.et/news/' + post.slug;
   if (post.published && !b.silent) {
@@ -1892,9 +1921,16 @@ fastify.post('/api/admin/news', async (req, reply) => {
 });
 fastify.post('/api/admin/tender', async (req, reply) => {
   if (authFail(req, reply)) return;
-  const b = req.body;
-  const { silent, ...data } = b;
-  data.deadline = new Date(data.deadline);
+  const b = req.body || {};
+  const data = pickFields(b, TENDER_FIELDS);
+  if (badSlug(data.slug)) return reply.code(400).send({ error: 'slug must be lower-case letters, digits and single hyphens' });
+  // deadline stays optional - the model allows null and the tender pages already handle it - but a
+  // value that is present has to be a date, rather than becoming Invalid Date inside Prisma.
+  if (data.deadline !== undefined && data.deadline !== null) {
+    const d = new Date(data.deadline);
+    if (isNaN(d)) return reply.code(400).send({ error: 'deadline must be a date' });
+    data.deadline = d;
+  }
   const t = await prisma.tender.upsert({ where: { slug: data.slug }, update: data, create: data });
   const turl = 'https://bina.et/tenders/' + t.slug;
   if (!b.silent) {
@@ -2075,7 +2111,7 @@ fastify.get('/b/:slug', async (req, reply) => {
       const _bc = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'BinaSmart', item: 'https://bina.et/' },
         { '@type': 'ListItem', position: 2, name: b.name, item: url } ] };
-      const schema = JSON.stringify(_schemaObj) + '</script>\n<script type="application/ld+json">' + JSON.stringify(_bc);
+      const schema = ldScript(_schemaObj) + '\n' + ldScript(_bc);
       html = html.replace('<title>BinaSmart — Building</title>',
         '<title>' + title + '</title>\n'
         + '<meta name="description" content="' + desc + '">\n'
@@ -2085,7 +2121,7 @@ fastify.get('/b/:slug', async (req, reply) => {
         + '<meta property="og:type" content="website">\n'
         + '<meta property="og:url" content="' + url + '">\n'
         + (b.facadePhotoUrl ? '<meta property="og:image" content="https://bina.et' + b.facadePhotoUrl.replace('/static','/static') + '">\n' : '')
-        + '<script type="application/ld+json">' + schema + '</script>');
+        + schema);
     }
   } catch (e) {}
   // The page came from the printed QR; hand it the token its own fetch will need for the phones.

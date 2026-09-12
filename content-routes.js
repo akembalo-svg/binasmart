@@ -11,6 +11,7 @@
 // they are entitled to has to say where that came from.
 const library = require('./content-library');
 
+const ldJson = obj => JSON.stringify(obj).replace(/</g, '\\u003c');
 const escH = s => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -104,7 +105,9 @@ module.exports = function contentRoutes(fastify, { shell, root }) {
     const others = pages.filter(x => x.slug !== p.slug).slice(0, 8).map(x =>
       '<a href="/health-services/' + x.slug + '"><b>' + escH(x.name) + '</b><span>' + x.count + ' services</span></a>').join('');
 
-    const schema = '<script type="application/ld+json">' + JSON.stringify({
+    // A "</script>" inside any string value would end the block and the rest would be parsed as
+    // HTML. Same guard as watch/, cinema/ and business/, and now server.js.
+    const schema = '<script type="application/ld+json">' + ldJson({
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       name: p.name + ' services in Ethiopia — where they are provided and who pays',
