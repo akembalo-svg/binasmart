@@ -133,6 +133,11 @@ button{cursor:pointer}
 
 <script>
 const params = new URLSearchParams(location.search);
+// Everything a person typed — a stranger on the public maintenance or lead form, a shop owner, the
+// owner themselves — goes through one of these before it touches innerHTML. See test/owner-dashboard-escape.test.js.
+function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+// For a value inside onclick="fn('...')": escape for the JavaScript string first, then for the attribute.
+function jsq(v) { return esc(String(v == null ? '' : v).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\r?\n/g, '\\n')); }
 let KEY = params.get('key') || localStorage.getItem('bs_key') || '';
 // The key unlocks every /api/owner route for this building, so it should not be in the query string:
 // that writes it to the server's access log on every call. It travels as a header instead. Taking it
@@ -273,8 +278,8 @@ function renderTab(){
       <div class="flex items-end gap-1 h-16">${scanVals.map(v => `<div class="chart-bar" style="height:${Math.round(v / scanMax * 100)}%"></div>`).join('')}</div>
     </div>
     ${d.offers.length ? `<div class="card p-4"><div class="font-black text-sm mb-2 text-slate-800">🔥 Marketplace Offers</div>
-      <div class="space-y-2">${d.offers.map(o => `<div class="flex items-center gap-2 text-[11px]"><span>${o.icon || '🏬'}</span>
-        <div class="flex-1"><span class="font-bold text-slate-700">${o.title}</span></div>
+      <div class="space-y-2">${d.offers.map(o => `<div class="flex items-center gap-2 text-[11px]"><span>${esc(o.icon || '🏬')}</span>
+        <div class="flex-1"><span class="font-bold text-slate-700">${esc(o.title)}</span></div>
         <span class="tag bg-slate-100 text-slate-500">👁 ${o.views}</span><span class="tag bg-amber-100 text-amber-700">🎟 ${o.claims}</span></div>`).join('')}</div></div>` : ''}`;
   }
 
@@ -282,19 +287,19 @@ function renderTab(){
     const payColor = { PAID: '#10b981', PENDING: '#f59e0b', OVERDUE: '#ef4444', NONE: '#cbd5e1' };
     const rows = UNITS.map(u => `
       <div class="mrow" style="border-left:4px solid ${u.tenant ? payColor[u.pay] || '#cbd5e1' : '#cbd5e1'};border-radius:6px">
-        <div style="min-width:52px"><div class="font-black text-[12px]">${u.number}</div>
+        <div style="min-width:52px"><div class="font-black text-[12px]">${esc(u.number)}</div>
           <div class="text-[9px] text-slate-400">${u.floor === 0 ? 'Ground' : 'F' + u.floor}</div></div>
         <div class="flex-1" style="min-width:0">
-          ${u.tenant ? `<div class="text-[11px] font-bold text-slate-800" style="line-height:1.3">${u.tenant.nameAm || u.tenant.name}${u.contractDays !== null && u.contractDays <= 60 ? ' <span class="tag bg-red-100 text-red-600">📋 ' + u.contractDays + 'd</span>' : ''}</div>
-            <div class="text-[9px] text-slate-400">${u.tenant.name !== u.tenant.nameAm ? u.tenant.name + ' • ' : ''}${u.tenant.phone}</div>`
+          ${u.tenant ? `<div class="text-[11px] font-bold text-slate-800" style="line-height:1.3">${esc(u.tenant.nameAm || u.tenant.name)}${u.contractDays !== null && u.contractDays <= 60 ? ' <span class="tag bg-red-100 text-red-600">📋 ' + u.contractDays + 'd</span>' : ''}</div>
+            <div class="text-[9px] text-slate-400">${esc(u.tenant.name !== u.tenant.nameAm ? u.tenant.name + ' • ' : '')}${esc(u.tenant.phone)}</div>`
           : '<div class="text-[11px] font-black text-amber-600">VACANT / ባዶ</div>'}
           <div class="text-[10px] font-black text-emerald-600">${fmtETB(u.monthlyRent)}/mo</div>
         </div>
         <div class="flex flex-col gap-1">
           ${u.tenant ? `<button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="editUnit('${u.id}')">✏️ Edit</button>
-            <button class="mbtn bg-slate-200 text-slate-600" onclick="vacateUnit('${u.id}','${u.number}')">🚪 Vacate</button>`
-          : `<button class="mbtn" style="background:#059669;color:#fff" onclick="occupyUnit('${u.id}','${u.number}')">➕ Add tenant</button>
-            <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="restoreUnit('${u.id}','${u.number}')">↩️ Restore</button>`}
+            <button class="mbtn bg-slate-200 text-slate-600" onclick="vacateUnit('${u.id}','${jsq(u.number)}')">🚪 Vacate</button>`
+          : `<button class="mbtn" style="background:#059669;color:#fff" onclick="occupyUnit('${u.id}','${jsq(u.number)}')">➕ Add tenant</button>
+            <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="restoreUnit('${u.id}','${jsq(u.number)}')">↩️ Restore</button>`}
         </div>
       </div>`).join('');
     app.innerHTML = `<div class="card p-2">
@@ -316,19 +321,19 @@ function renderTab(){
     ${unpaid.length ? `<div class="card p-4"><div class="font-black text-sm mb-2 text-red-500">⏰ Unpaid (${unpaid.length})</div>
       <div class="space-y-2">${unpaid.map(i => `
       <div class="rounded-xl p-2.5 flex items-center gap-2" style="background:#fef2f2;border:1px solid #fecaca">
-        <div class="flex-1"><div class="text-[11px] font-black">${i.shop?.name || 'Unit'} • ${i.unit}</div>
-        <div class="text-[9px] text-slate-400">code: ${i.paymentCode || '—'}</div></div>
+        <div class="flex-1"><div class="text-[11px] font-black">${esc(i.shop?.name || 'Unit')} • ${esc(i.unit)}</div>
+        <div class="text-[9px] text-slate-400">code: ${esc(i.paymentCode || '—')}</div></div>
         <div class="text-right"><div class="text-[11px] font-black text-red-500">${fmtETB(i.amount)}</div>
         <div class="flex gap-1 mt-1 justify-end">
-        <button onclick="sendInvoice('${i.id}','${i.unit}')" class="tag" style="background:#25D366;color:#fff">📤 Send</button>
-        <button onclick="markPaid('${i.id}','${(i.shop?.name || 'Unit').replace(/'/g,'')} ${i.unit} — ${i.amount.toLocaleString()} ETB')" class="tag bg-emerald-600 text-white">✓ Paid</button></div></div>
+        <button onclick="sendInvoice('${i.id}','${jsq(i.unit)}')" class="tag" style="background:#25D366;color:#fff">📤 Send</button>
+        <button onclick="markPaid('${i.id}','${jsq(i.shop?.name || 'Unit')} ${jsq(i.unit)} — ${i.amount.toLocaleString()} ETB')" class="tag bg-emerald-600 text-white">✓ Paid</button></div></div>
       </div>`).join('')}</div></div>` : '<div class="card p-4 text-center text-sm text-emerald-600 font-black">✅ All invoices paid!</div>'}
     ${paid.length ? `<div class="card p-4"><div class="font-black text-sm mb-2 text-slate-800">✅ Paid (${paid.length})</div>
       <div class="space-y-1.5">${paid.map(i => `<div class="flex items-center gap-2 text-[10px]">
-        <span class="font-bold flex-1">${i.shop?.name || ''} ${i.unit}</span>
-        <span class="text-slate-400">${i.method || ''}</span>
+        <span class="font-bold flex-1">${esc(i.shop?.name || '')} ${esc(i.unit)}</span>
+        <span class="text-slate-400">${esc(i.method || '')}</span>
         <span class="font-black text-emerald-600">${fmtETB(i.amount)}</span>
-        <button onclick="unpayInvoice('${i.id}','${(i.shop?.name || 'Unit').replace(/'/g,'')} ${i.unit}')" class="tag bg-slate-200 text-slate-500">↩️</button></div>`).join('')}</div></div>` : ''}`;
+        <button onclick="unpayInvoice('${i.id}','${jsq(i.shop?.name || 'Unit')} ${jsq(i.unit)}')" class="tag bg-slate-200 text-slate-500">↩️</button></div>`).join('')}</div></div>` : ''}`;
   }
 
   if (TAB === 'acct'){
@@ -353,14 +358,14 @@ function renderTab(){
         <div class="rounded-xl p-2 text-center" style="background:#fef3c7;border:1px solid #fcd34d"><div class="text-[9px] text-amber-700 font-bold">${v.netVat >= 0 ? 'NET VAT PAYABLE' : 'VAT CREDIT'}</div><div class="text-sm font-black text-amber-700">${fmtETB(Math.abs(v.netVat))}</div></div>
       </div>
       <div class="flex items-center justify-between mt-2">
-        <div class="text-[10px] ${daysLeft < 10 ? 'text-red-500 font-black' : 'text-slate-500'}">⏰ File by ${v.filingDue}${daysLeft >= 0 ? ' (' + daysLeft + ' days)' : ' — OVERDUE'}</div>
-        <a class="mbtn" style="background:#0aa88f;color:#fff" target="_blank" href="/owner/${slug}/vat-report?month=${a.month}&key=${encodeURIComponent(KEY)}">🖨️ VAT report</a>
+        <div class="text-[10px] ${daysLeft < 10 ? 'text-red-500 font-black' : 'text-slate-500'}">⏰ File by ${esc(v.filingDue)}${daysLeft >= 0 ? ' (' + daysLeft + ' days)' : ' — OVERDUE'}</div>
+        <a class="mbtn" style="background:#0aa88f;color:#fff" target="_blank" href="/owner/${esc(slug)}/vat-report?month=${esc(a.month)}&key=${encodeURIComponent(KEY)}">🖨️ VAT report</a>
       </div>
       <button class="mbtn" style="background:#1e293b;color:#fff;width:100%;margin-top:8px" onclick="copyVatReturn()">📋 Copy VAT return for eTax</button>
       <div class="text-[9px] text-slate-400 mt-1.5 leading-snug">👉 Paste these figures into <b>etax.mor.gov.et</b> to file your monthly VAT return. BinaSmart prepares the return; you submit it. (Fully-automatic clearance filing needs MOR e-invoicing certification — Directive 1142.)</div>
     </div>
     <div class="card p-4">
-      <div class="font-black text-sm mb-2">📒 Profit & Loss — ${a.month}</div>
+      <div class="font-black text-sm mb-2">📒 Profit & Loss — ${esc(a.month)}</div>
       <div class="grid grid-cols-2 gap-2 text-center">
         <div class="rounded-xl p-2" style="background:#ecfdf5;border:1px solid #a7f3d0"><div class="text-[9px] text-emerald-700 font-bold">COLLECTED</div><div class="text-sm font-black text-emerald-600">${fmtETB(a.income.collected)}</div></div>
         <div class="rounded-xl p-2" style="background:#fef2f2;border:1px solid #fecaca"><div class="text-[9px] text-red-600 font-bold">EXPENSES</div><div class="text-sm font-black text-red-500">${fmtETB(a.expenseTotal)}</div></div>
@@ -374,11 +379,11 @@ function renderTab(){
           ${STAFF && STAFF.staff.length ? `<button class="mbtn" style="background:${STAFF.postedThisMonth ? '#e2e8f0;color:#64748b' : '#059669;color:#fff'}" onclick="postSalaries()">${STAFF.postedThisMonth ? '✓ Salaries posted' : '⚡ Post month salaries'}</button>` : ''}
         </div></div>
       ${STAFF && STAFF.staff.length ? `<div class="space-y-1.5">${STAFF.staff.map(s => `
-        <div class="mrow"><div class="flex-1"><div class="text-[11px] font-bold">${s.name} <span class="tag bg-slate-100 text-slate-500">${s.role}</span></div>
-          ${s.phone ? `<div class="text-[9px] text-slate-400">${s.phone}</div>` : ''}</div>
+        <div class="mrow"><div class="flex-1"><div class="text-[11px] font-bold">${esc(s.name)} <span class="tag bg-slate-100 text-slate-500">${esc(s.role)}</span></div>
+          ${s.phone ? `<div class="text-[9px] text-slate-400">${esc(s.phone)}</div>` : ''}</div>
           <div class="text-[11px] font-black">${fmtETB(s.salary)}<span class="text-[9px] text-slate-400 font-normal">/mo</span></div>
           <button class="mbtn bg-slate-200 text-slate-500" onclick="editStaff('${s.id}')">✏️</button>
-          <button class="mbtn bg-slate-200 text-slate-500" onclick="removeStaff('${s.id}','${s.name.replace(/'/g,'')}')">🗑</button></div>`).join('')}
+          <button class="mbtn bg-slate-200 text-slate-500" onclick="removeStaff('${s.id}','${jsq(s.name)}')">🗑</button></div>`).join('')}
         <div class="text-right text-[10px] text-slate-500 mt-1">Total payroll: <b>${fmtETB(STAFF.monthlyTotal)} ETB/mo</b> · salaries are VAT-exempt</div></div>`
       : '<div class="text-xs text-slate-400">Add guards, cleaners, lift operator, office staff — then post all salaries each month with one tap.</div>'}
     </div>
@@ -386,8 +391,8 @@ function renderTab(){
       <div class="flex items-center justify-between mb-2"><div class="font-black text-sm">🧾 Expenses (${a.expenses.length})</div>
         <button class="mbtn" style="background:#059669;color:#fff" onclick="addExpense()">➕ Add expense</button></div>
       ${a.expenses.length ? `<div class="space-y-1.5">${a.expenses.map(e => `
-        <div class="mrow"><div class="flex-1"><div class="text-[11px] font-bold">${e.vendor} <span class="tag bg-slate-100 text-slate-500">${e.category}</span></div>
-          <div class="text-[9px] text-slate-400">${e.date}${e.receiptNo ? ' • #' + e.receiptNo : ''}${e.description ? ' • ' + e.description : ''}</div></div>
+        <div class="mrow"><div class="flex-1"><div class="text-[11px] font-bold">${esc(e.vendor)} <span class="tag bg-slate-100 text-slate-500">${esc(e.category)}</span></div>
+          <div class="text-[9px] text-slate-400">${esc(e.date)}${esc(e.receiptNo ? ' • #' + e.receiptNo : '')}${esc(e.description ? ' • ' + e.description : '')}</div></div>
           <div class="text-right"><div class="text-[11px] font-black text-red-500">${fmtETB(e.amount)}</div><div class="text-[9px] text-slate-400">VAT ${fmtETB(e.vatAmount)}</div></div>
           <button class="mbtn bg-slate-200 text-slate-500" onclick="delExpense('${e.id}')">🗑</button></div>`).join('')}</div>`
       : '<div class="text-xs text-slate-400">No expenses this month — add electricity, cleaning, guards, repairs…</div>'}
@@ -396,9 +401,9 @@ function renderTab(){
       <div class="font-black text-sm mb-2">🔎 Audit Trail (${a.audit.length})</div>
       <div class="space-y-1" style="max-height:260px;overflow-y:auto">${a.audit.map(x => `
         <div class="flex items-center gap-2 text-[10px] py-1" style="border-bottom:1px solid #e9f0ee">
-          <span class="text-slate-400" style="min-width:88px">${x.at}</span>
-          <span class="tag ${x.action.includes('PAID') ? 'bg-emerald-100 text-emerald-700' : x.action.includes('DELETED') || x.action.includes('VACATED') ? 'bg-red-100 text-red-600' : 'bg-slate-100 text-slate-600'}">${x.action}</span>
-          <span class="flex-1 text-slate-600" style="min-width:0;overflow:hidden;text-overflow:ellipsis">${x.detail || ''}</span>
+          <span class="text-slate-400" style="min-width:88px">${esc(x.at)}</span>
+          <span class="tag ${x.action.includes('PAID') ? 'bg-emerald-100 text-emerald-700' : x.action.includes('DELETED') || x.action.includes('VACATED') ? 'bg-red-100 text-red-600' : 'bg-slate-100 text-slate-600'}">${esc(x.action)}</span>
+          <span class="flex-1 text-slate-600" style="min-width:0;overflow:hidden;text-overflow:ellipsis">${esc(x.detail || '')}</span>
           ${x.amount != null ? '<b>' + fmtETB(x.amount) + '</b>' : ''}</div>`).join('') || '<div class="text-xs text-slate-400">No activity yet</div>'}
       </div>
     </div>`;
@@ -413,15 +418,15 @@ function renderTab(){
         <span class="flex-1">${m.last != null ? 'last: <b>' + m.last.toLocaleString() + '</b> (' + m.lastAt + ')' : '<em class="text-slate-400">no reading yet</em>'}
         ${m.consumption != null ? ' · Δ <b>' + m.consumption.toLocaleString() + ' ' + unitTxt + '</b> = <b class="text-emerald-600">' + fmtETB(m.charge) + '</b>' : ''}
         ${m.high ? ' <span class="tag bg-red-100 text-red-600">⚠ HIGH — check leak/waste</span>' : ''}</span>
-        <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="addReading('${u.unitId}','${type === 'electricity' ? 'ELECTRICITY' : 'WATER'}','${u.number}')">📥 Read</button>
-        ${m.consumption ? `<button class="mbtn" style="background:#059669;color:#fff" onclick="billMeter('${u.unitId}','${type === 'electricity' ? 'ELECTRICITY' : 'WATER'}','${u.number}',${m.charge})">💡 Bill</button>` : ''}
+        <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="addReading('${u.unitId}','${type === 'electricity' ? 'ELECTRICITY' : 'WATER'}','${jsq(u.number)}')">📥 Read</button>
+        ${m.consumption ? `<button class="mbtn" style="background:#059669;color:#fff" onclick="billMeter('${u.unitId}','${type === 'electricity' ? 'ELECTRICITY' : 'WATER'}','${jsq(u.number)}',${m.charge})">💡 Bill</button>` : ''}
       </div>`;
     };
     app.innerHTML = `
     <div class="card p-3 text-[10px] text-slate-500">⚡ Tariffs: electricity <b>${METERS.tariffs.electricity} ETB/kWh</b> · water <b>${METERS.tariffs.water} ETB/m³</b> · Enter each meter's number monthly → the system computes usage & bills the tenant. ⚠ red rows = suspiciously high (possible leakage / ብክነት).</div>
     <div class="card p-2">${METERS.units.map(u => `
       <div class="p-2" style="border-bottom:2px solid #e9f0ee">
-        <div class="text-[11px] font-black">${u.number} <span class="text-slate-400 font-normal">· ${u.tenant}</span></div>
+        <div class="text-[11px] font-black">${esc(u.number)} <span class="text-slate-400 font-normal">· ${esc(u.tenant)}</span></div>
         ${mrow(u, 'electricity', '💡', 'kWh')}
         ${mrow(u, 'water', '🚿', 'm³')}
       </div>`).join('')}</div>`;
@@ -434,11 +439,11 @@ function renderTab(){
       <div class="font-black text-sm mb-2">🔧 Open Requests (${open.length})</div>
       ${open.length ? `<div class="space-y-2">${open.map(m => `
         <div class="rounded-xl p-2.5" style="background:#fffbeb;border:1px solid #fcd34d">
-          <div class="text-[11px] font-black">${MAINT_ICON[m.type] || '🔧'} ${m.type} <span class="tag ${m.status==='OPEN'?'bg-red-100 text-red-600':'bg-blue-100 text-blue-700'}">${m.status.replace('_',' ')}</span></div>
-          <div class="text-[10px] text-slate-500 mt-0.5">${m.description}</div>
-          <div class="text-[9px] text-slate-400">${m.name || ''} ${m.phone || ''} • ${new Date(m.createdAt).toLocaleDateString()}</div>
+          <div class="text-[11px] font-black">${MAINT_ICON[m.type] || '🔧'} ${esc(m.type)} <span class="tag ${m.status==='OPEN'?'bg-red-100 text-red-600':'bg-blue-100 text-blue-700'}">${esc(m.status.replace('_',' '))}</span></div>
+          <div class="text-[10px] text-slate-500 mt-0.5">${esc(m.description)}</div>
+          <div class="text-[9px] text-slate-400">${esc(m.name || '')} ${esc(m.phone || '')} • ${new Date(m.createdAt).toLocaleDateString()}</div>
           <div class="flex gap-1.5 mt-1.5 justify-end">
-            ${m.phone ? `<a href="tel:${m.phone}" class="tag bg-slate-600 text-white">📞</a>` : ''}
+            ${m.phone ? `<a href="tel:${esc(m.phone)}" class="tag bg-slate-600 text-white">📞</a>` : ''}
             ${m.status === 'OPEN' ? `<button onclick="setMaint('${m.id}','IN_PROGRESS')" class="tag bg-blue-600 text-white">▶ Start</button>` : ''}
             <button onclick="setMaint('${m.id}','DONE')" class="tag bg-emerald-600 text-white">✓ Done</button>
           </div></div>`).join('')}</div>` : '<div class="text-xs text-slate-400">No open requests 🎉</div>'}
@@ -450,7 +455,7 @@ function renderTab(){
         const keys = Object.keys(byType);
         if (!keys.length) return '<div class="text-xs text-slate-400">No history yet — asset health builds as requests come in.</div>';
         return keys.map(k => `<div class="flex items-center gap-2 text-[11px] py-1" style="border-bottom:1px solid #e9f0ee">
-          <span class="flex-1 font-bold">${MAINT_ICON[k] || '🔧'} ${k}</span>
+          <span class="flex-1 font-bold">${MAINT_ICON[k] || '🔧'} ${esc(k)}</span>
           <span class="tag bg-slate-100 text-slate-500">${byType[k].n}× total</span>
           ${byType[k].open ? '<span class="tag bg-amber-100 text-amber-700">' + byType[k].open + ' open</span>' : ''}
           ${byType[k].n >= 3 ? '<span class="tag bg-red-100 text-red-600">⚠ recurring — consider replacement / መቀየር ይታሰብ</span>' : ''}</div>`).join('');
@@ -462,29 +467,29 @@ function renderTab(){
     app.innerHTML = `
     <div class="card p-4"><div class="font-black text-sm mb-2">🈳 Vacant Units (${vac.length})</div>
       ${vac.length ? `<div class="space-y-2">${vac.map(u => `<div class="mrow" style="border:1px dashed #6ee7b7;border-radius:12px;background:#f0fdf9">
-        <div class="flex-1"><div class="font-black text-[12px] text-emerald-700">${u.number} • ${u.floor===0?'Ground':'F'+u.floor}</div>
+        <div class="flex-1"><div class="font-black text-[12px] text-emerald-700">${esc(u.number)} • ${u.floor===0?'Ground':'F'+u.floor}</div>
         <div class="text-[10px] text-slate-500">${u.areaSqm} m² • ${fmtETB(u.monthlyRent)}/mo</div></div>
-        <button class="mbtn" style="background:#059669;color:#fff" onclick="occupyUnit('${u.id}','${u.number}')">➕ Add</button>
-        <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="restoreUnit('${u.id}','${u.number}')">↩️</button></div>`).join('')}</div>` : '<div class="text-xs text-slate-400">Fully occupied 💪</div>'}</div>
+        <button class="mbtn" style="background:#059669;color:#fff" onclick="occupyUnit('${u.id}','${jsq(u.number)}')">➕ Add</button>
+        <button class="mbtn" style="background:#d7f2ec;color:#068f79" onclick="restoreUnit('${u.id}','${jsq(u.number)}')">↩️</button></div>`).join('')}</div>` : '<div class="text-xs text-slate-400">Fully occupied 💪</div>'}</div>
     <div class="card p-4"><div class="font-black text-sm mb-2">🎯 Leads from QR page (${d.leads.length})</div>
       ${d.leads.length ? `<div class="space-y-2">${d.leads.map(l => `<div class="mrow">
-        <div class="flex-1"><div class="text-[11px] font-black">${l.name}</div>
-        <div class="text-[9px] text-slate-400">wants ${l.unit} • ${new Date(l.createdAt).toLocaleDateString()}</div></div>
-        <a href="tel:${l.phone}" class="tag bg-purple-600 text-white">📞 ${l.phone}</a></div>`).join('')}</div>` : '<div class="text-xs text-slate-400">No leads yet — the QR poster brings them!</div>'}</div>`;
+        <div class="flex-1"><div class="text-[11px] font-black">${esc(l.name)}</div>
+        <div class="text-[9px] text-slate-400">wants ${esc(l.unit)} • ${new Date(l.createdAt).toLocaleDateString()}</div></div>
+        <a href="tel:${esc(l.phone)}" class="tag bg-purple-600 text-white">📞 ${esc(l.phone)}</a></div>`).join('')}</div>` : '<div class="text-xs text-slate-400">No leads yet — the QR poster brings them!</div>'}</div>`;
   }
 
   if (TAB === 'settings'){
     app.innerHTML = `
     <div class="card p-4"><div class="font-black text-sm mb-2">🏦 Payment Accounts</div>
       ${(d.bankAccounts || []).map(a => `<div class="flex justify-between text-[11px] py-1 border-b" style="border-color:#e9f0ee">
-        <span class="text-slate-600">${a.bank}</span><span class="font-black">${a.account}</span></div>`).join('')}
-      ${d.tinNumber ? `<div class="flex justify-between text-[11px] py-1"><span class="text-slate-600">TIN</span><span class="font-black">${d.tinNumber}</span></div>` : ''}</div>
+        <span class="text-slate-600">${esc(a.bank)}</span><span class="font-black">${esc(a.account)}</span></div>`).join('')}
+      ${d.tinNumber ? `<div class="flex justify-between text-[11px] py-1"><span class="text-slate-600">TIN</span><span class="font-black">${esc(d.tinNumber)}</span></div>` : ''}</div>
     <div class="card p-4 space-y-2">
       <div class="font-black text-sm mb-1">🔗 Links</div>
-      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/b/${slug}" target="_blank">🏢 Public building page</a>
+      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/b/${esc(slug)}" target="_blank">🏢 Public building page</a>
       <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/nav" target="_blank">🚶 3D walk (entrance QR)</a>
-      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/owner/${slug}/report?key=${encodeURIComponent(KEY)}" target="_blank">📄 Full printable report</a>
-      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/static/qr-poster.html?b=${slug}" target="_blank">🖨️ QR poster</a>
+      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/owner/${esc(slug)}/report?key=${encodeURIComponent(KEY)}" target="_blank">📄 Full printable report</a>
+      <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/static/qr-poster.html?b=${esc(slug)}" target="_blank">🖨️ QR poster</a>
       <button class="mbtn w-full" style="background:#059669;color:#fff;padding:10px" onclick="addBuilding()">🏢 ➕ Add another building / ሌላ ህንፃ ጨምር</button>
       <a class="mbtn w-full block text-center" style="background:#fef3c7;color:#92400e;padding:10px" href="/owner">🔑 Change password / የይለፍ ቃል</a>
       <button class="mbtn w-full" style="background:#fee2e2;color:#dc2626;padding:10px" onclick="logoutKey()">🚪 Logout / ውጣ</button>

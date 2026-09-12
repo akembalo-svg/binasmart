@@ -2280,11 +2280,31 @@ fastify.get('/api/b/:slug/vacancies', async (req, reply) => {
   });
 });
 
+// The two public forms behind a building's QR poster — a lead for a vacant unit, and a maintenance
+// request. Both land in the owner dashboard. On 2026-09-13 a maintenance description written as
+// <img onerror> ran inside that dashboard and read the owner key from localStorage; owner.html now
+// escapes what it renders. These limits are the other half: neither form had one, and every
+// maintenance request for a messaging building also messages the owner and the technician.
+// The IP ceiling is loose on purpose — Ethio telecom puts a whole building behind one address.
+const formIpRL = hotelLimiter(600000, 30), formPhoneRL = hotelLimiter(600000, 5);
+// A phone number, not "anything under 20 characters". Landlines and spacing both pass; markup does not.
+const PHONE_SHAPE = /^\+?[\d\s-]{7,20}$/;
+const phoneOk = p => { const t = String(p == null ? '' : p).trim(); return PHONE_SHAPE.test(t) && !!phoneKey(t); };
+
 // ===== PUBLIC: create lead =====
 fastify.post('/api/units/:unitId/leads', async (req, reply) => {
+  if (!formIpRL(bookIp(req))) return reply.code(429).send({ error: 'too_many_requests' });
   const { name, phone, budgetMax } = req.body || {};
-  if (!name || !phone) return reply.code(400).send({ error: 'name_and_phone_required' });
-  const lead = await prisma.lead.create({ data: { unitId: req.params.unitId, name, phone, budgetMax: budgetMax || null, source: 'QR' } });
+  const nm = String(name == null ? '' : name).trim().slice(0, 60);   // was stored with no length limit at all
+  if (!nm || !phone) return reply.code(400).send({ error: 'name_and_phone_required' });
+  if (!phoneOk(phone)) return reply.code(400).send({ error: 'phone' });
+  if (!formPhoneRL(phoneKey(phone))) return reply.code(429).send({ error: 'too_many_requests' });
+  // A unit that does not exist used to surface as a Prisma foreign-key 500.
+  const unit = await prisma.unit.findUnique({ where: { id: String(req.params.unitId) }, select: { id: true } });
+  if (!unit) return reply.code(404).send({ error: 'unit_not_found' });
+  const bm = Number(budgetMax);
+  const lead = await prisma.lead.create({ data: { unitId: unit.id, name: nm, phone: String(phone).trim().slice(0, 20),
+    budgetMax: Number.isFinite(bm) && bm > 0 ? Math.round(bm) : null, source: 'QR' } });
   return { ok: true, leadId: lead.id };
 });
 
@@ -2321,10 +2341,13 @@ fastify.post('/api/offers/:id/claim', async (req, reply) => {
 
 // ===== PUBLIC: report a maintenance problem =====
 fastify.post('/api/b/:slug/maintenance', async (req, reply) => {
+  if (!formIpRL(bookIp(req))) return reply.code(429).send({ error: 'too_many_requests' });
   const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
   if (!b) return reply.code(404).send({ error: 'building_not_found' });
   const { name, phone, unit, type, description } = req.body || {};
   if (!phone || !description) return reply.code(400).send({ error: 'phone_and_description_required' });
+  if (!phoneOk(phone)) return reply.code(400).send({ error: 'phone' });
+  if (!formPhoneRL(phoneKey(phone))) return reply.code(429).send({ error: 'too_many_requests' });
   const m = await prisma.maintenanceRequest.create({ data: {
     buildingId: b.id,
     type: String(type || 'GENERAL').slice(0, 30).toUpperCase(),
