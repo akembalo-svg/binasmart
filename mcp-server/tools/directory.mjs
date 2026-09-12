@@ -12,6 +12,7 @@ const DEMO_HOSPITAL = 'SAMPLE DATA, NOT A REAL HOSPITAL. This hospital does not 
   + 'fees, opening hours, staffing and free slots below are all invented for a demonstration. Never send a '
   + 'person here, least of all for urgent care. In Ethiopia: ambulance 907, police 991, fire 939.';
 import { toolError } from './ride.mjs';
+import { isClaimed } from '../lib/claimed.mjs';
 
 export const BASE = 'https://bina.et';
 export const CATEGORIES = ['cafe', 'restaurant', 'pharmacy', 'retail', 'service', 'gym', 'salon', 'clinic', 'bank', 'office', 'other'];
@@ -31,9 +32,9 @@ const SQL = {
   buildings: `SELECT name, "nameAm", "qrSlug", city, "subCity", lat, lng, "buildingType"
               FROM "Building" b
               WHERE (name ILIKE $1 OR "nameAm" LIKE $1) ORDER BY name LIMIT $2`,
-  // status, tgChatId and ownerPhone are read so the phone can be withheld from a listing nobody has
+  // status and the claim columns are read so the phone can be withheld from a listing nobody has
   // claimed - the same rule server.js:241 and business/index.js:108 already apply on the website.
-  shops: `SELECT s.name, s."nameAm", s.category, s.phone, s.status, s."tgChatId", s."ownerPhone", s."isOpenNow", s."avgRating", s."reviewCount",
+  shops: `SELECT s.name, s."nameAm", s.category, s.phone, s.status, s."claimedAt", s."tgChatId", s."isOpenNow", s."avgRating", s."reviewCount",
                  u.number AS unit, b.name AS building, b."nameAm" AS "buildingAm", b."qrSlug", b.lat, b.lng, b."buildingType"
           FROM "Shop" s
           JOIN "Tenancy" t ON t.id = s."tenancyId"
@@ -85,12 +86,12 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
       // assistant on the internet is the shop-page leak again on a surface that never learned the rule:
       // 71 of JJ Darule's tenants are named individuals, not businesses with a switchboard.
       ...s.rows.map(r => ({ kind: 'shop', name: r.name, name_am: r.nameAm || undefined, category: String(r.category).toLowerCase(),
-        phone: (r.tgChatId || r.ownerPhone) ? (r.phone || undefined) : undefined,
+        phone: isClaimed(r) ? (r.phone || undefined) : undefined,
         demo: r.status === 'demo' || undefined, demo_notice: r.status === 'demo' ? DEMO_PLACE : undefined,
         // "open now" is a claim about this minute. isOpenNow is Boolean @default(true), nothing
         // computes it from a schedule, and no shop has openingHours set - so it is only worth
         // reporting where a person could have set it, which is a claimed listing.
-        open_now: (r.tgChatId || r.ownerPhone) ? r.isOpenNow : undefined,
+        open_now: isClaimed(r) ? r.isOpenNow : undefined,
         rating: r.reviewCount ? { average: Number(r.avgRating), count: r.reviewCount } : undefined,
         building: r.building, building_am: r.buildingAm || undefined, unit: r.unit, coords: coords(r),
         url: r.category === 'RESTAURANT' ? `${BASE}/restaurant/${restaurantSlug(r.name)}` : buildingUrl(r) })),

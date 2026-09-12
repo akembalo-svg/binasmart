@@ -7,6 +7,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { makeOwners } = require('./owners');
+const { isClaimed } = require('./claimed');
 const { normPhone, phoneKey } = require('../ride/phone');
 const { makeTgApi } = require('../ride/tgApi');
 
@@ -73,11 +74,16 @@ module.exports = function registerBusiness(fastify, deps) {
   }
 
   const pubShop = (s, extra) => ({ id: s.id, slug: s.slug, name: s.name, nameAm: s.nameAm, category: s.category, categoryAm: CAT_AM[s.category] || null,
-    description: s.description, descriptionAm: s.descriptionAm, about: s.about, aboutAm: s.aboutAm, phone: s.phone, telegram: s.telegram, socialLink: s.socialLink,
+    description: s.description, descriptionAm: s.descriptionAm, about: s.about, aboutAm: s.aboutAm, telegram: s.telegram, socialLink: s.socialLink,
     photos: s.photos || [], logoUrl: s.logoUrl, address: s.address, mapUrl: s.mapUrl, openingHours: s.openingHours,
-    // Same rule as the phone above: isOpenNow defaults to true for every shop and nothing computes it,
-    // so an unclaimed listing is not in a position to tell anyone it is open.
-    isOpenNow: (s.tgChatId || s.ownerPhone) ? s.isOpenNow : undefined,
+    // A phone belongs to whoever answers it. The page snippet, the sitemap and the MCP directory all
+    // withhold an unclaimed shop's number already; this is the fourth door onto the same field, and
+    // it was the one handing out 64 people's mobiles to anyone who fetched the slug.
+    phone: isClaimed(s) ? s.phone : undefined,
+    // Same rule: isOpenNow defaults to true for every shop and nothing computes it, so an unclaimed
+    // listing is not in a position to tell anyone it is open.
+    isOpenNow: isClaimed(s) ? s.isOpenNow : undefined,
+    claimed: isClaimed(s),
     avgRating: s.avgRating, reviewCount: s.reviewCount, status: s.status, ...(extra || {}) });
   const pubProduct = p => ({ id: p.id, name: p.name, nameAm: p.nameAm, description: p.description, price: p.price, category: p.category, photoUrl: p.photoUrl, deliverable: p.deliverable, visible: p.visible, orderCount: p.orderCount });
   const pubOffer = o => ({ id: o.id, title: o.title, titleAm: o.titleAm, description: o.description, startsAt: o.startsAt, endsAt: o.endsAt, active: o.active });
@@ -108,7 +114,7 @@ module.exports = function registerBusiness(fastify, deps) {
       // A shop is listed in search only if its owner has claimed it. 50 of the 72 pages were
       // individuals' names with their mobile number in the snippet, and none of those people knew.
       // Claiming is the consent signal; without it the page stays reachable but unlisted.
-      const shopClaimed = !!(s && (s.tgChatId || s.ownerPhone));
+      const shopClaimed = isClaimed(s);
       if (s && s.status === 'live') {
         const b = s.tenancy && s.tenancy.unit && s.tenancy.unit.building;
         const where = b ? (b.nameAm || b.name) + (b.subCity ? ', ' + b.subCity : '') : (s.address || 'Addis Ababa');
@@ -132,9 +138,12 @@ module.exports = function registerBusiness(fastify, deps) {
         if ((s.photos || [])[0]) html = html.replace(/<meta property="og:image" content="[^"]*">/, '<meta property="og:image" content="' + escAttr(s.photos[0]) + '">');
         // LocalBusiness JSON-LD with a telephone is a machine-readable instruction to list this
         // person as a business. Only for a shop whose owner asked to be listed.
+        // Replace the file's own robots tag rather than appending a second one. Google resolves two
+        // conflicting tags by taking the most restrictive, but nothing promises Bing or an AI crawler
+        // does - and these URLs went to Bing and Yandex through IndexNow before any of this was read.
         html = shopClaimed
           ? html.replace('</head>', '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>\n</head>')
-          : html.replace('</head>', '<meta name="robots" content="noindex,nofollow">\n</head>');
+          : html.replace(/<meta name="robots" content="[^"]*">/, '<meta name="robots" content="noindex,nofollow">');
       }
     } catch (e) { console.error('[business] shop page: ' + e.message); }
     return reply.type('text/html; charset=utf-8').send(html);

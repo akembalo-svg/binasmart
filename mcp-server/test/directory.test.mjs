@@ -171,7 +171,7 @@ test('a shop nobody has claimed keeps its phone number', async () => {
   const db = fakeDb((sql) => {
     if (/FROM "Shop" s/.test(sql)) return [
       { name: 'Selamawit Kebede Adnew', nameAm: null, category: 'OFFICE', phone: '+251923636821',
-        status: 'live', tgChatId: null, ownerPhone: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
+        status: 'live', claimedAt: null, tgChatId: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
         unit: 'G-display', building: 'JJ Darule Building', buildingAm: null, qrSlug: 'darulle', lat: 9.04, lng: 38.74, buildingType: 'COMMERCIAL' },
       { name: 'Kaldi\'s Café', nameAm: null, category: 'CAFE', phone: '+251910530813',
         status: 'live', tgChatId: '777', ownerPhone: null, isOpenNow: true, avgRating: 4.5, reviewCount: 12,
@@ -188,15 +188,27 @@ test('a shop nobody has claimed keeps its phone number', async () => {
   assert.equal(claimed.phone, '+251910530813', 'a business that linked Telegram has published its own number');
 });
 
-// ownerPhone is the other half of the codebase's definition of claimed, so both must count.
-test('claiming by ownerPhone counts as well as by Telegram', async () => {
-  const db = fakeDb((sql) => /FROM "Shop" s/.test(sql)
-    ? [{ name: 'Shop B', nameAm: null, category: 'RETAIL', phone: '+251911000000', status: 'live',
-         tgChatId: null, ownerPhone: '+251911000000', isOpenNow: true, avgRating: 0, reviewCount: 0,
-         unit: '1', building: 'B', buildingAm: null, qrSlug: 'b', lat: null, lng: null, buildingType: 'COMMERCIAL' }]
-    : []);
-  const r = out(await tools(db).search_places({ query: 'b' }));
-  assert.equal(r.results[0].phone, '+251911000000');
+// 2026-09-12. This test used to say ownerPhone counted as consent, because that was the codebase's
+// definition of claimed - it described the rule rather than judging it. The schema calls ownerPhone
+// "the phone that may claim this shop": ops writing down who is ALLOWED to claim, not the owner
+// claiming. Reading it as consent meant the moment ops noted a number, that person's mobile was
+// published to every assistant on the internet without them having done anything.
+test('a note in ops saying who MAY claim a shop does not publish that person\u2019s number', async () => {
+  const shop = extra => ({ name: 'Shop B', nameAm: null, category: 'RETAIL', phone: '+251911000000', status: 'live',
+    claimedAt: null, tgChatId: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
+    unit: '1', building: 'B', buildingAm: null, qrSlug: 'b', lat: null, lng: null, buildingType: 'COMMERCIAL', ...extra });
+  const ask = async extra => {
+    const db = fakeDb(sql => /FROM "Shop" s/.test(sql) ? [shop(extra)] : []);
+    return out(await tools(db).search_places({ query: 'b' })).results[0];
+  };
+
+  assert.equal((await ask({ ownerPhone: '+251911000000' })).phone, undefined,
+    'pre-authorising a number is not the owner asking to be listed');
+
+  // What does count is something the owner did: completing a claim, or pressing the bot link.
+  assert.equal((await ask({ claimedAt: new Date('2026-09-05T00:00:00Z') })).phone, '+251911000000');
+  assert.equal((await ask({ tgChatId: '900001' })).phone, '+251911000000');
+  assert.equal((await ask({})).phone, undefined);
 });
 
 // Bina Restaurant was status 'live' inside the demo hotel until 2026-09-12, so Bini and any other
@@ -204,7 +216,7 @@ test('claiming by ownerPhone counts as well as by Telegram', async () => {
 test('a demo shop is flagged to the assistant reading it', async () => {
   const db = fakeDb((sql) => /FROM "Shop" s/.test(sql)
     ? [{ name: 'Tomoca Coffee Corner', nameAm: null, category: 'CAFE', phone: '+251951000106', status: 'demo',
-         tgChatId: null, ownerPhone: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
+         claimedAt: null, tgChatId: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
          unit: 'G-02', building: 'CBE Tower', buildingAm: null, qrSlug: 'cbe-tower', lat: null, lng: null, buildingType: 'COMMERCIAL' }]
     : []);
   const r = out(await tools(db).search_places({ query: 'tomoca' }));
@@ -219,17 +231,21 @@ test('a demo shop is flagged to the assistant reading it', async () => {
 // null when there are no hours; this field was the one sitting next to it saying true regardless.
 test('"open now" is only reported for a listing someone has claimed', async () => {
   const row = (name, extra) => ({ name, nameAm: null, category: 'CAFE', phone: '+251911000000',
-    status: 'live', tgChatId: null, ownerPhone: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
+    status: 'live', claimedAt: null, tgChatId: null, isOpenNow: true, avgRating: 0, reviewCount: 0,
     unit: '1', building: 'B', buildingAm: null, qrSlug: 'b', lat: null, lng: null, buildingType: 'COMMERCIAL', ...extra });
   const db = fakeDb((sql) => /FROM "Shop" s/.test(sql)
-    ? [row('Unclaimed'), row('Claimed by Telegram', { tgChatId: '777' }), row('Claimed by phone', { ownerPhone: '+251911000000' })]
+    ? [row('Unclaimed'), row('Claimed by Telegram', { tgChatId: '777' }), row('Claimed by code', { claimedAt: new Date('2026-09-05T00:00:00Z') }),
+       row('Pre-authorised in ops', { ownerPhone: '+251911000000' })]
     : []);
   const r = out(await tools(db).search_places({ query: 'a' }));
   const by = n => r.results.find(x => x.name === n);
 
   assert.equal(by('Unclaimed').open_now, undefined, 'nobody said this shop is open');
   assert.equal(by('Claimed by Telegram').open_now, true);
-  assert.equal(by('Claimed by phone').open_now, true);
+  assert.equal(by('Claimed by code').open_now, true);
+  // This row passed before only because the fixture handed the tool a column the SQL does not
+  // select. ownerPhone is ops noting who may claim, and it speaks for nobody.
+  assert.equal(by('Pre-authorised in ops').open_now, undefined);
 });
 
 test('a claimed shop that says it is closed is reported closed, not hidden', async () => {

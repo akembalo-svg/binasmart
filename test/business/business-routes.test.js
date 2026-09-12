@@ -43,7 +43,7 @@ async function app() {
   const f = Fastify({ logger: false });
   f.decorateReply('sendFile', function (name) { this.type('text/html').send('<!-- ' + name + ' -->'); });
   const db = fakeDb();
-  db._.shop.push({ id: 's1', name: 'Kaldi\'s Café', nameAm: 'ካልዲስ ካፌ', category: 'CAFE', phone: '+251910530813', telegram: '777', status: 'live', photos: [], avgRating: 0, reviewCount: 0 });
+  db._.shop.push({ id: 's1', name: 'Kaldi\'s Café', nameAm: 'ካልዲስ ካፌ', category: 'CAFE', phone: '+251910530813', telegram: '777', status: 'live', photos: [], avgRating: 0, reviewCount: 0, slug: 'kaldis-cafe' });
   db._.shop.push({ id: 's2', name: 'Other Office', phone: '+251911419313', status: 'live', photos: [] });
   db._.shop.push({ id: 's3', name: 'Demo Bank Branch', phone: '+251953000100', status: 'demo', photos: [] });
   const b = registerBusiness(f, { prisma: db, OWNER_KEY: KEY, BASE_URL: 'https://bina.et', tgApi, riderBotToken: '1:x', force: true, uploadsDir: '/tmp/bina-test-shops' });
@@ -199,4 +199,51 @@ test('the phone limit collapses format variants', async () => {
   for (let i = 1; i <= 6; i++) await claim('192.0.2.' + i, '+251910530813');
   const other = await claim('192.0.2.50', '0910530813');   // same number, local form
   assert.equal(other.statusCode, 429, 'writing it as 09… must not buy a fresh allowance');
+});
+
+// ---------------------------------------------------------------------------------------------
+// 2026-09-12. Four surfaces decide whether to publish a shop's phone, index its page, emit
+// LocalBusiness JSON-LD and say it is open. All four read a consent signal the claim flow never
+// wrote. Kaldi's Cafe verified a claim on 5 September, entered a 32-item menu, and stayed
+// noindex,nofollow with its number stripped out of every surface for a week.
+// ---------------------------------------------------------------------------------------------
+
+test('completing a claim is what publishes the page - before this it published nothing', async () => {
+  const { f, db } = await app();
+  const before = (await f.inject({ method: 'GET', url: '/api/shops/kaldis-cafe' })).json();
+  assert.equal(before.shop.phone, undefined, 'a listing nobody claimed does not hand out the number');
+  assert.equal(before.shop.claimed, false);
+  assert.equal(before.shop.isOpenNow, undefined, 'nor say it is open');
+
+  await signIn(f, '0910530813');
+
+  assert.ok(db._.shop.find(s => s.id === 's1').claimedAt, 'claiming writes the consent signal');
+  const after = (await f.inject({ method: 'GET', url: '/api/shops/kaldis-cafe' })).json();
+  assert.equal(after.shop.phone, '+251910530813', 'and now the owner is published, because they asked');
+  assert.equal(after.shop.claimed, true);
+});
+
+test('the owner still sees their own number on their own dashboard', async () => {
+  const { f } = await app();
+  const a = await signIn(f, '0910530813');
+  const me = (await f.inject({ method: 'GET', url: '/api/business/me', headers: a.H })).json();
+  assert.equal(me.shop.phone, '+251910530813');
+});
+
+// ops noting who MAY claim a shop is a pre-authorisation, not the owner acting.
+test('a number written into ownerPhone publishes nothing on its own', async () => {
+  const { f, db } = await app();
+  db._.shop.find(s => s.id === 's1').ownerPhone = '+251910530813';
+  const r = (await f.inject({ method: 'GET', url: '/api/shops/kaldis-cafe' })).json();
+  assert.equal(r.shop.phone, undefined);
+  assert.equal(r.shop.claimed, false);
+});
+
+test('the page carries one robots tag, and it says noindex until the owner claims it', async () => {
+  const { f } = await app();
+  const page = await f.inject({ method: 'GET', url: '/shop/kaldis-cafe' });
+  const tags = page.body.match(/<meta name="robots"[^>]*>/g) || [];
+  assert.equal(tags.length, 1, 'two conflicting tags is a coin toss on every crawler but Google: ' + tags.join(' '));
+  assert.match(tags[0], /noindex/);
+  assert.equal(/application\/ld\+json/.test(page.body), false, 'and no LocalBusiness markup for an unclaimed listing');
 });

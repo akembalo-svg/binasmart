@@ -66,6 +66,14 @@ function makeOwners({ prisma, now, notify }) {
   async function approve(claim) {
     const done = await prisma.ownerClaim.updateMany({ where: { id: claim.id, status: 'PENDING' }, data: { status: 'VERIFIED' } });
     if (!done.count) return { ok: false, error: 'used' };
+    // The consent signal, written here and nowhere else. Four places decide whether to publish this
+    // shop's phone, index its page, emit LocalBusiness JSON-LD and state its hours; all of them read
+    // claimedAt. Before this, claiming wrote nothing, so an owner could pass the code, load the
+    // dashboard and enter a full menu while their page stayed noindex with the phone stripped out.
+    if (claim.shopId) {
+      await prisma.shop.update({ where: { id: claim.shopId }, data: { claimedAt: new Date(clock()) } })
+        .catch(e => console.error('[owners] claimedAt: ' + e.message));
+    }
     const session = await prisma.ownerSession.create({ data: { token: TOKEN(), kind: claim.kind, shopId: claim.shopId, venueId: claim.venueId, phone: claim.phone, expiresAt: new Date(clock() + SESSION_MS) } });
     // phone comes back too: entering a code we sent to it is a proof the account layer can use.
     return { ok: true, token: session.token, kind: claim.kind, shopId: claim.shopId, venueId: claim.venueId, phone: claim.phone };

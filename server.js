@@ -264,10 +264,11 @@ fastify.get('/sitemap.xml', async (req, reply) => {
       { deadline: { gte: new Date() } },
     ] },
     select: { slug: true } });
-  // Only shops whose owner has claimed them. The rest are noindex — see business/index.js —
-  // and a sitemap is a request to index.
+  // Only shops whose owner has claimed them. The rest are noindex — see business/claimed.js —
+  // and a sitemap is a request to index. ownerPhone used to count here; it is ops noting who MAY
+  // claim a shop, not the owner claiming it, so it never belonged in this test.
   const shopUrls = (await prisma.shop.findMany({
-    where: { status: 'live', NOT: { slug: null }, OR: [{ NOT: { tgChatId: null } }, { NOT: { ownerPhone: null } }] },
+    where: { status: 'live', NOT: { slug: null }, OR: [{ NOT: { claimedAt: null } }, { NOT: { tgChatId: null } }] },
     select: { slug: true } }).catch(() => [])).map(x => 'https://bina.et/shop/' + x.slug);
   const cshows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date() } }, select: { id: true } }).catch(() => []);
   const films = (await prisma.film.findMany({ where: { status: 'public' },
@@ -2049,6 +2050,7 @@ fastify.get('/blog/smart-building-management-ethiopia', async (req, reply) => re
 // This ends the bulk dump. It does not stop someone who fetches the page and reads the token out of
 // it — that would need a secret in the printed code.
 const { makeVisit } = require('./building/visit');
+const { isClaimed } = require('./business/claimed');
 const { mint: visitTokenNow, check: visitOk } = makeVisit(process.env.VISIT_SECRET || OWNER_KEY || 'bina-visit-fallback');
 
 fastify.get('/b/:slug', async (req, reply) => {
@@ -2108,7 +2110,7 @@ fastify.get('/api/b/:slug', async (req, reply) => {
         include: {
           tenancies: {
             where: { active: true },
-            include: { shop: { include: { products: { where: { visible: true } }, offers: { where: { active: true, endsAt: { gt: new Date() } } } } } }
+            include: { shop: { include: { products: { where: { visible: true, approved: true } }, offers: { where: { active: true, approved: true, endsAt: { gt: new Date() } } } } } }
           }
         }
       }
@@ -2135,7 +2137,7 @@ fastify.get('/api/b/:slug', async (req, reply) => {
         // Boolean @default(true) with nothing computing it and no openingHours on any shop here, so
         // this was the schema speaking, not a shopkeeper. Same rule as the shop pages and the MCP
         // directory: only a claimed listing is in a position to say it is open.
-        isOpenNow: (shop.tgChatId || shop.ownerPhone) ? shop.isOpenNow : undefined,
+        isOpenNow: isClaimed(shop) ? shop.isOpenNow : undefined,
         products: shop.products.map(p => ({ id: p.id, name: p.name, nameAm: p.nameAm, price: p.price, deliverable: p.deliverable })),
         offers: shop.offers.map(o => ({ id: o.id, title: o.title, titleAm: o.titleAm, endsAt: o.endsAt }))
       } : null
