@@ -34,7 +34,7 @@
       + ((s.photos || []).length ? '<div class="gal">' + s.photos.map(function (u) { return '<img src="' + esc(u) + '" alt="' + esc(s.nameAm || s.name) + '" loading="lazy">'; }).join('') + '</div>' : '')
       + ((s.aboutAm || s.about || s.descriptionAm || s.description) ? '<p class="sub" style="margin-top:12px;color:var(--ink)">' + esc(s.aboutAm || s.about || s.descriptionAm || s.description).replace(/\n/g, '<br>') + '</p>' : '')
       + '<div class="acts">'
-      + '<a href="tel:' + esc(s.phone) + '">📞 ደውሉ · Call</a>'
+      + (s.phone ? '<a href="tel:' + esc(s.phone) + '">📞 ደውሉ · Call</a>' : '')
       + (s.telegram && !/^\d+$/.test(s.telegram) ? '<a href="https://t.me/' + esc(String(s.telegram).replace(/^@/, '')) + '" target="_blank" rel="noopener">✈️ ቴሌግራም</a>' : '')
       + '<a href="' + esc(maps) + '" target="_blank" rel="noopener">🗺️ ካርታ · Map</a>'
       + (s.socialLink ? '<a href="' + esc(s.socialLink) + '" target="_blank" rel="noopener nofollow">🌐 ድረ-ገጽ</a>' : '')
@@ -61,7 +61,11 @@
       });
       html += '</div></div>';
     } else {
-      html += '<div class="card" style="margin-top:12px"><div class="sub">ገና ምርት አልተጨመረም። ለማዘዝ ይደውሉ። · No products listed yet — please call.</div></div>';
+      // "please call" only makes sense when the number is on the page. For a listing its owner has not
+      // claimed, the phone is withheld (business/claimed.js), so say what is actually true instead.
+      html += '<div class="card" style="margin-top:12px"><div class="sub">' + (s.phone
+        ? 'ገና ምርት አልተጨመረም። ለማዘዝ ይደውሉ። · No products listed yet — please call.'
+        : 'ይህ ንግድ ገጹን ገና አላዘጋጀም። · This business has not set up its page yet.') + '</div></div>';
     }
 
     if (s.openingHours) {
