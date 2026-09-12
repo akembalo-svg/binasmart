@@ -367,13 +367,26 @@ fastify.get('/for-insurers', async (req, reply) => reply.sendFile('for-insurers.
 // ===== CARS + REAL ESTATE marketplace (partner-supplied) =====
 fastify.get('/cars', async (req, reply) => reply.sendFile('cars.html'));
 fastify.get('/property', async (req, reply) => reply.sendFile('property.html'));
+// What a listing shows, and nothing else. dealerPhone is deliberately absent: cars.html never reads
+// it, and the page's contact route is the lead form, which passes the enquiry through the admin
+// rather than publishing a dealer's number. `return { cars }` would publish whatever the model grows
+// next — which is exactly how /api/restaurant/:slug ended up handing out a tenant's mobile.
+const pubCar = c => ({ slug: c.slug, title: c.title, make: c.make, model: c.model, year: c.year,
+  price: c.price, mileage: c.mileage, fuel: c.fuel, transmission: c.transmission, bodyType: c.bodyType,
+  condition: c.condition, city: c.city, imageUrl: c.imageUrl, dealer: c.dealer, featured: c.featured });
 fastify.get('/api/cars', async (req) => {
   const cars = await prisma.carListing.findMany({ where: { active: true }, orderBy: [{ featured: 'desc' }, { createdAt: 'desc' }], take: 60 });
-  return { cars };
+  return { cars: cars.map(pubCar) };
 });
+// Same rule, same reason. agencyPhone is not here because property.html does not read it and the
+// enquiry goes through the lead form. `verified` stays — the page renders a ✓ Verified badge from it —
+// but note it means "an admin ticked the box", not that anything was checked automatically.
+const pubProperty = p => ({ slug: p.slug, title: p.title, listingType: p.listingType,
+  propertyType: p.propertyType, price: p.price, beds: p.beds, baths: p.baths, area: p.area,
+  city: p.city, location: p.location, imageUrl: p.imageUrl, agency: p.agency, verified: p.verified });
 fastify.get('/api/properties', async (req) => {
   const props = await prisma.propertyListing.findMany({ where: { active: true }, orderBy: [{ verified: 'desc' }, { createdAt: 'desc' }], take: 60 });
-  return { properties: props };
+  return { properties: props.map(pubProperty) };
 });
 fastify.post('/api/admin/car', async (req, reply) => {
   if (authFail(req, reply)) return;
