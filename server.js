@@ -478,7 +478,12 @@ fastify.post('/api/admin/insurer/seed', async (req, reply) => {
   return { ok: true, added };
 });
 
+// The same relay as /api/market-lead: this ends in a WhatsApp from BinaSmart's own number to a
+// number the caller chose. Same ceiling, and the limit also stops notifyAdmins being used to bury
+// Ibrahim's Telegram.
+const insLeadRL = hotelLimiter(600000, 5);
 fastify.post('/api/insurance-lead', async (req, reply) => {
+  if (!insLeadRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const b = req.body || {};
   if (!b.name || !b.phone) return reply.code(400).send({ error: 'missing_fields' });
   const lead = await prisma.insuranceLead.create({ data: {
@@ -495,7 +500,11 @@ fastify.post('/api/insurance-lead', async (req, reply) => {
     else if (partners.length) routed = '\n\u26A0\uFE0F No active partner for ' + lead.insType + ' yet';
   } catch (e) {}
   notifyAdmins('\uD83D\uDEE1\uFE0F NEW INSURANCE LEAD \u2014 BinaSmart\n\uD83D\uDCCB ' + lead.insType + (lead.coverType ? ' (' + lead.coverType + ')' : '') + '\n\uD83D\uDC64 ' + lead.name + ' (' + lead.phone + ')\n\uD83D\uDCCD ' + (lead.city || '?') + (lead.vehicleValue ? '\n\uD83D\uDCB0 Car value: ' + lead.vehicleValue : '') + '\n\uD83D\uDCDD ' + (lead.note || '\u2014') + routed).catch(() => {});
-  sendWa(lead.phone, 'BinaSmart \uD83D\uDEE1\uFE0F \u12e8' + lead.insType + ' \u1218\u12f5\u1295 \u1325\u12eB\u1244\u12CE\u1295 \u1270\u1240\u1265\u1208\u1293\u1362 \u1260\u1240\u122D\u1265 \u1270\u1235\u121B\u121A \u12A8\u1218\u12F5\u1295 \u12F5\u122D\u1305\u1276\u127D \u130B\u122D \u12A5\u1295\u12F0\u12CD\u120B\u1208\u1295\u1362').catch(() => {});
+  // etMobile, not the normPhone in this file: that one formats and never fails, so it would have
+  // let +971… and even "not a phone" through to the sender. An enquiry from a foreign number is
+  // still kept and still reaches the admin — it just does not get an automated WhatsApp back.
+  const insWaTo = etMobile(lead.phone);
+  if (insWaTo) sendWa(insWaTo, 'BinaSmart \uD83D\uDEE1\uFE0F \u12e8' + lead.insType + ' \u1218\u12f5\u1295 \u1325\u12eB\u1244\u12CE\u1295 \u1270\u1240\u1265\u1208\u1293\u1362 \u1260\u1240\u122D\u1265 \u1270\u1235\u121B\u121A \u12A8\u1218\u12F5\u1295 \u12F5\u122D\u1305\u1276\u127D \u130B\u122D \u12A5\u1295\u12F0\u12CD\u120B\u1208\u1295\u1362').catch(() => {});
   return { ok: true };
 });
 
