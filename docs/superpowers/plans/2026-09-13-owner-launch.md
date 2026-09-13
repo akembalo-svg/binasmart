@@ -74,10 +74,10 @@ test('a figure counts whatever the separators', () => {
 });
 
 test('phones, tokens and Amharic', () => {
-  assert.equal(S.hasPhone('call 0911234567'), true);
-  assert.equal(S.hasPhone('call +251911234567'), true);
+  assert.equal(S.hasPhone('call 0900000001'), true);
+  assert.equal(S.hasPhone('call +251900000001'), true);
   assert.equal(S.hasPhone('invoiced 2165000 birr'), false);
-  assert.equal(S.hasPhone('call 0911 234 567'), true);
+  assert.equal(S.hasPhone('call 0900 000 001'), true);
   assert.equal(S.hasPhone('newest invoice due 2026-09-05'), false);
   assert.equal(S.hasTokens('[[P1]] owes'), true);
   assert.equal(S.hasTokens('Abebe owes'), false);
@@ -89,7 +89,7 @@ test('score applies exactly the checks a question asks for', () => {
   const q = { id: 'x', lang: 'am', kind: 'figure', expect: 'invoiced', records: true };
   const good = S.score(q, { status: 200, body: { reply: 'በመስከረም 2,165,000 ብር ኢንቮይስ ተደርጓል።\n\n📅 መዝገቡ፦ …' } }, { invoiced: [2165000] });
   assert.deepEqual(good.failed, []);
-  const bad = S.score(q, { status: 200, body: { reply: 'Invoiced 999 birr. Call 0911234567 [[P2]]' } }, { invoiced: [2165000] });
+  const bad = S.score(q, { status: 200, body: { reply: 'Invoiced 999 birr. Call 0900000001 [[P2]]' } }, { invoiced: [2165000] });
   assert.deepEqual(bad.failed.sort(), ['amharic', 'figure', 'noPhone', 'noTokens', 'records'].sort());
   const ro = S.score({ id: 'r', lang: 'en', kind: 'readOnly' }, { status: 200, body: { reply: 'I can only read', readOnly: true } }, {});
   assert.deepEqual(ro.failed, []);
