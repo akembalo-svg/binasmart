@@ -29,7 +29,8 @@ async function expectations(p, slug, other) {
   const unitNo = ((un.invoices || [])[0] || {}).unit || ((va.units || [])[0] || {}).number;
   const unit = await one(run, 'unit', { number: unitNo });
   const oov = await one(orun, 'overview'), orm = await one(orun, 'rent_month', { month });
-  return { buildingId: b.id, month, unit: unitNo, values: {
+  const buildingNames = [ov.building, oov.building].filter(Boolean);
+  return { buildingId: b.id, month, unit: unitNo, buildingNames, values: {
     invoiced: [rm.invoicedEtb], paid: [rm.paidEtb], unpaid: [rm.unpaidEtb], overdue: [rm.overdueCount],
     units: [ov.units], vacantCount: [va.count], expectedRent: [ov.expectedMonthlyRentEtb], owedTotal: [un.totalEtb],
     expired: [ce.expiredCount], unitRent: [unit.monthlyRentEtb, unit.contractRentEtb].filter(v => v != null),
@@ -65,7 +66,7 @@ async function expectations(p, slug, other) {
           headers: { 'content-type': 'application/json', 'x-owner-key': key, 'x-binasmart-eval': '1' }, body: JSON.stringify({ message: text }) });
         response = { status: r.status, body: await r.json().catch(() => ({})) };
       } catch (err) { response = { status: 0, body: {} }; }
-      const s = S.score(question, response, exp);
+      const s = S.score(question, response, exp, e.buildingNames);
       rows.push({ q, failed: s.failed, text, reply: response.body.reply || '' });
       process.stdout.write(s.failed.length ? 'x' : '.');
       await sleep(PACE_MS);

@@ -68,3 +68,28 @@ test('the summary applies the launch bars', () => {
   assert.equal(s.pass, false, 'figures below 90% fail the bar');
   assert.equal(S.summarise(rows.filter(r => !r.failed.length)).pass, true);
 });
+
+test('ethiopicRatio ignores parenthetical glosses, loan/unit words, and given building names', () => {
+  const reply = 'በ2026-09 የ Century Mall ህንፃ የገንዘብ መጠየቂያ (invoiced) መጠን 2,165,000.00 ETB ነው።';
+  assert.ok(S.ethiopicRatio(reply, ['Century Mall']) >= 0.5, 'building name and loan words must not sink a correct Amharic reply');
+  assert.ok(S.ethiopicRatio('Invoiced 2,165,000 birr.') < 0.1, 'an all-English reply must still score low');
+});
+
+test('score accepts an Amharic figure reply once the building name is passed as an ignore word', () => {
+  const q = { id: 'am-invoiced', lang: 'am', kind: 'figure', expect: 'invoiced' };
+  const reply = 'በ2026-09 የ Century Mall ህንፃ የገንዘብ መጠየቂያ (invoiced) መጠን 2,165,000.00 ETB ነው።';
+  const withIgnore = S.score(q, { status: 200, body: { reply } }, { invoiced: [2165000] }, ['Century Mall']);
+  assert.deepEqual(withIgnore.failed, []);
+});
+
+test('a stated zero is accepted only when every expected candidate is zero', () => {
+  const amQ = { id: 'am-paid', lang: 'am', kind: 'figure', expect: 'paid' };
+  const zeroReply = 'እስካሁን በ2026-09 ምንም ክፍያ አልተቀበሉም። 14 ደረሰኞች ወጥተው 2,165,000.00 ብር ገቢ ይጠበቃል።';
+  assert.deepEqual(S.score(amQ, { status: 200, body: { reply: zeroReply } }, { paid: [0] }).failed, []);
+
+  const enQ = { id: 'x', lang: 'en', kind: 'figure', expect: 'paid' };
+  assert.ok(S.score(enQ, { status: 200, body: { reply: '2,165,000 ETB was paid' } }, { paid: [0] }).failed.includes('figure'),
+    'no zero word present, so the zero candidate must not be granted for free');
+  assert.ok(S.score(enQ, { status: 200, body: { reply: 'no payment' } }, { paid: [5000] }).failed.includes('figure'),
+    'a zero word must not excuse a reply when the real expected figure is non-zero');
+});
