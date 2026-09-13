@@ -104,14 +104,15 @@ section{padding:32px 0}
 var ALL=[],curType='sale',curPt='';
 var PT=['Apartment','Condominium','House / Villa','Land','Commercial','Building'];
 document.getElementById('ptypes').innerHTML=PT.map(function(p){return '<span class="chip" onclick="filterPt(this,\''+p+'\')">'+p+'</span>'}).join('');
-function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function cssUrl(u){return /^https?:\/\//i.test(u||'')?String(u).replace(/[()'"\\\s]/g,function(c){return '%'+('0'+c.charCodeAt(0).toString(16)).slice(-2).toUpperCase()}):''}
 function card(p){
-  var ph=p.imageUrl?('style="background-image:url('+esc(p.imageUrl)+')"'):'';
+  var img=cssUrl(p.imageUrl),ph=img?('style="background-image:url('+esc(img)+')"'):'';
   var meta=[p.beds?p.beds+' bd':'',p.baths?p.baths+' ba':'',p.area].filter(Boolean).map(esc).join(' · ');
-  return '<div class="pc"><div class="ph" '+ph+'>'+(p.imageUrl?'':'🏠')+(p.verified?'<span class="vf">✓ Verified</span>':'')+'<span class="lt">'+(p.listingType==='rent'?'For rent':'For sale')+'</span></div>'+
+  return '<div class="pc"><div class="ph" '+ph+'>'+(img?'':'🏠')+(p.verified?'<span class="vf">✓ Verified</span>':'')+'<span class="lt">'+(p.listingType==='rent'?'For rent':'For sale')+'</span></div>'+
    '<div class="bd"><h3>'+esc(p.title)+'</h3>'+(p.price?'<div class="price">'+esc(p.price)+'</div>':'')+
    '<div class="meta">'+meta+'</div>'+((p.location||p.city)?'<div class="dl">📍 '+esc(p.location||p.city)+(p.agency?' · '+esc(p.agency):'')+'</div>':'')+
-   '<div class="btns"><button class="b1" onclick="enquire(\''+esc(p.title)+'\')">Enquire</button>'+
+   '<div class="btns"><button class="b1" data-t="'+esc(p.title)+'" onclick="enquire(this.getAttribute(\'data-t\'))">Enquire</button>'+
    '<button class="b2" onclick="location.href=\'/insurance\'">Insure</button></div></div></div>';
 }
 function view(){
@@ -125,14 +126,16 @@ function view(){
 function setType(t){curType=t;document.getElementById('sSale').classList.toggle('on',t==='sale');document.getElementById('sRent').classList.toggle('on',t==='rent');view()}
 function filterPt(chip,p){document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});if(curPt===p){curPt='';view();return}chip.classList.add('on');curPt=p;view()}
 function enquire(title){document.getElementById('rWhat').value=title;document.getElementById('request').scrollIntoView({behavior:'smooth'});setTimeout(function(){document.getElementById('rName').focus()},500)}
+var sending=false;
 function reqProp(){
   var name=document.getElementById('rName').value.trim(),phone=document.getElementById('rPhone').value.trim();
   if(!name||!phone){alert('Name and phone please · ስም እና ስልክ');return}
+  if(sending)return;sending=true;
   fetch('/api/market-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind:'property',
     name:name,phone:phone,budget:document.getElementById('rBudget').value.trim(),
     listingRef:document.getElementById('rWhat').value.trim(),note:document.getElementById('rWhat').value.trim()})})
-   .then(function(r){return r.json()}).then(function(){document.getElementById('reqInner').style.display='none';document.getElementById('reqOk').classList.add('show')})
-   .catch(function(){alert('Error — please WhatsApp us')});
+   .then(function(r){return r.json().catch(function(){return {}}).then(function(d){if(!r.ok)throw d;return d})}).then(function(){document.getElementById('reqInner').style.display='none';document.getElementById('reqOk').classList.add('show')})
+   .catch(function(d){sending=false;alert(d&&d.error==='phone'?'Please check the phone number · ስልክ ቁጥሩን ያረጋግጡ':d&&d.error==='too_many'?'Too many requests — please try again later · እባክዎ ትንሽ ቆይተው ይሞክሩ':'Error — please WhatsApp us')});
 }
 fetch('/api/properties').then(function(r){return r.json()}).then(function(d){ALL=d.properties||[];view()}).catch(function(){view()});
 </script>  <script src="/static/bina-footer.js?v=9" defer></script>

@@ -111,14 +111,15 @@ section{padding:34px 0}
 var ALL=[],curMake='';
 var MAKES=['Toyota','Suzuki','Hyundai','Nissan','Mitsubishi','Kia','Ford','Isuzu','Lifan','Mercedes'];
 document.getElementById('makes').innerHTML=MAKES.map(function(m){return '<span class="chip" onclick="filterMake(this,\''+m+'\')">'+m+'</span>'}).join('');
-function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function cssUrl(u){return /^https?:\/\//i.test(u||'')?String(u).replace(/[()'"\\\s]/g,function(c){return '%'+('0'+c.charCodeAt(0).toString(16)).slice(-2).toUpperCase()}):''}
 function card(c){
-  var ph=c.imageUrl?('style="background-image:url('+esc(c.imageUrl)+')"'):'';
+  var img=cssUrl(c.imageUrl),ph=img?('style="background-image:url('+esc(img)+')"'):'';
   var meta=[c.year,c.mileage,c.fuel,c.transmission].filter(Boolean).map(esc).join(' · ');
-  return '<div class="cc" id="'+esc(c.slug)+'"><div class="ph" '+ph+'>'+(c.imageUrl?'':'🚗')+(c.featured?'<span class="feat">Featured</span>':'')+'</div>'+
+  return '<div class="cc" id="'+esc(c.slug)+'"><div class="ph" '+ph+'>'+(img?'':'🚗')+(c.featured?'<span class="feat">Featured</span>':'')+'</div>'+
    '<div class="bd"><h3>'+esc(c.title)+'</h3>'+(c.price?'<div class="price">'+esc(c.price)+'</div>':'')+
    '<div class="meta">'+meta+'</div>'+(c.city?'<div class="dl">📍 '+esc(c.city)+(c.dealer?' · '+esc(c.dealer):'')+'</div>':(c.dealer?'<div class="dl">'+esc(c.dealer)+'</div>':''))+
-   '<div class="btns"><button class="b1" onclick="enquire(\''+esc(c.slug)+'\',\''+esc(c.title)+'\')">Enquire</button>'+
+   '<div class="btns"><button class="b1" data-t="'+esc(c.title)+'" onclick="enquire(\'\',this.getAttribute(\'data-t\'))">Enquire</button>'+
    '<button class="b2" onclick="location.href=\'/insurance\'">Insure</button></div></div></div>';
 }
 function render(list){
@@ -140,14 +141,16 @@ function doSearch(){var q=document.getElementById('q').value.toLowerCase().trim(
   document.getElementById('listTitle').textContent='Results for "'+q+'"';
   if(!f.length){document.getElementById('cars').innerHTML='<div class="empty" style="grid-column:1/-1">Nothing matched — <a href="#request" style="color:var(--em);font-weight:700">tell us and we\'ll find it →</a></div>';return}render(f)}
 function enquire(slug,title){document.getElementById('rWhat').value=title;document.getElementById('request').scrollIntoView({behavior:'smooth'});setTimeout(function(){document.getElementById('rName').focus()},500)}
+var sending=false;
 function reqCar(){
   var name=document.getElementById('rName').value.trim(),phone=document.getElementById('rPhone').value.trim();
   if(!name||!phone){alert('Name and phone please · ስም እና ስልክ');return}
+  if(sending)return;sending=true;
   fetch('/api/market-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind:'car',
     name:name,phone:phone,budget:document.getElementById('rBudget').value.trim(),
     listingRef:document.getElementById('rWhat').value.trim(),note:document.getElementById('rWhat').value.trim()})})
-   .then(function(r){return r.json()}).then(function(){document.getElementById('reqInner').style.display='none';document.getElementById('reqOk').classList.add('show')})
-   .catch(function(){alert('Error — please WhatsApp us')});
+   .then(function(r){return r.json().catch(function(){return {}}).then(function(d){if(!r.ok)throw d;return d})}).then(function(){document.getElementById('reqInner').style.display='none';document.getElementById('reqOk').classList.add('show')})
+   .catch(function(d){sending=false;alert(d&&d.error==='phone'?'Please check the phone number · ስልክ ቁጥሩን ያረጋግጡ':d&&d.error==='too_many'?'Too many requests — please try again later · እባክዎ ትንሽ ቆይተው ይሞክሩ':'Error — please WhatsApp us')});
 }
 load();
 </script>  <script src="/static/bina-footer.js?v=9" defer></script>

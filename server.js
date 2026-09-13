@@ -302,9 +302,13 @@ fastify.get('/sitemap.xml', async (req, reply) => {
   // 21 August and /api/travel filters to future departures, so /travel has been empty since. Same
   // rule as the tenders and the cinema shows above; this one was a hardcoded string and escaped it.
   const tripsAhead = await prisma.travelTrip.count({ where: { active: true, departure: { gt: new Date() } } }).catch(() => 0);
+  // Same for the marketplaces: with no active listing, /cars and /property are an empty grid and a form.
+  const carsListed = await prisma.carListing.count({ where: { active: true } }).catch(() => 0);
+  const propsListed = await prisma.propertyListing.count({ where: { active: true } }).catch(() => 0);
   const urls = ['https://bina.et/', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/oromo-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.filter(p => !CANONICAL_TO[p.slug]).map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), /* /b/:slug is noindex — it lists tenants by name, unit and phone — so it is not requested here.
      The hotel pages below are a different template and stay. */ ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug), ...(fastify.healthServiceUrls ? fastify.healthServiceUrls() : [])]
-    .filter(u => u !== 'https://bina.et/travel' || tripsAhead);
+    .filter(u => u !== 'https://bina.et/travel' || tripsAhead)
+    .filter(u => (u !== 'https://bina.et/cars' || carsListed) && (u !== 'https://bina.et/property' || propsListed));
   reply.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + urls.map(u => '<url><loc>' + u + '</loc></url>').join('\n') + '\n</urlset>');
 });
@@ -458,6 +462,7 @@ fastify.post('/api/admin/car', async (req, reply) => {
   const b = req.body || {}; if (!b.slug || !b.title) return reply.code(400).send({ error: 'slug+title' });
   const f = ['slug','title','make','model','year','price','mileage','fuel','transmission','bodyType','condition','city','imageUrl','dealer','dealerPhone'];
   const data = {}; f.forEach(k => { if (b[k] != null) data[k] = String(b[k]); });
+  if (data.imageUrl && !httpUrl(data.imageUrl)) return reply.code(400).send({ error: 'imageUrl' });
   data.featured = !!b.featured; if (b.active != null) data.active = !!b.active;
   const c = await prisma.carListing.upsert({ where: { slug: b.slug }, update: data, create: data });
   return { ok: true, url: 'https://bina.et/cars#' + c.slug };
@@ -467,6 +472,8 @@ fastify.post('/api/admin/property', async (req, reply) => {
   const b = req.body || {}; if (!b.slug || !b.title) return reply.code(400).send({ error: 'slug+title' });
   const f = ['slug','title','listingType','propertyType','price','beds','baths','area','city','location','imageUrl','agency','agencyPhone'];
   const data = {}; f.forEach(k => { if (b[k] != null) data[k] = String(b[k]); });
+  // The pages put imageUrl inside a CSS url(); only a web address belongs there.
+  if (data.imageUrl && !httpUrl(data.imageUrl)) return reply.code(400).send({ error: 'imageUrl' });
   data.verified = !!b.verified; if (b.active != null) data.active = !!b.active;
   const p = await prisma.propertyListing.upsert({ where: { slug: b.slug }, update: data, create: data });
   return { ok: true, url: 'https://bina.et/property#' + p.slug };
@@ -478,13 +485,18 @@ fastify.post('/api/market-lead', async (req, reply) => {
   if (!leadRL(bookIp(req))) return reply.code(429).send({ error: 'too_many' });
   const b = req.body || {};
   if (!b.name || !b.phone || !b.kind) return reply.code(400).send({ error: 'missing' });
-  const leadPk = phoneKey(b.phone);
-  if (leadPk && !leadRL(leadPk)) return reply.code(429).send({ error: 'too_many' });
+  if (b.kind !== 'car' && b.kind !== 'property') return reply.code(400).send({ error: 'kind' });
+  // phoneKey is null for input that identifies nobody, and the per-phone limit used to be skipped
+  // whenever it was — so a junk "phone" got the IP limit only, and was still stored and sent to the
+  // admin. phoneOk accepts any real-looking number, foreign ones included: the diaspora is the audience.
+  if (!phoneOk(b.phone)) return reply.code(400).send({ error: 'phone' });
+  if (!leadRL(phoneKey(String(b.phone).trim()))) return reply.code(429).send({ error: 'too_many' });
   const lead = await prisma.marketLead.create({ data: {
     kind: String(b.kind).slice(0,20), listingSlug: b.listingSlug ? String(b.listingSlug).slice(0,80) : null,
     listingRef: b.listingRef ? String(b.listingRef).slice(0,140) : null, name: String(b.name).slice(0,80),
-    phone: String(b.phone).slice(0,30), budget: b.budget ? String(b.budget).slice(0,40) : null,
-    note: b.note ? String(b.note).slice(0,500) : null } });
+    phone: String(b.phone).trim().slice(0,30), budget: b.budget ? String(b.budget).slice(0,40) : null,
+    // Both pages send the same box as listingRef and note, so the admin saw it twice.
+    note: b.note && b.note !== b.listingRef ? String(b.note).slice(0,500) : null } });
   const emoji = lead.kind === 'car' ? '\uD83D\uDE97' : '\uD83C\uDFE0';
   notifyAdmins(emoji + ' NEW ' + lead.kind.toUpperCase() + ' LEAD \u2014 BinaSmart\n\uD83D\uDC64 ' + lead.name + ' (' + lead.phone + ')' + (lead.listingRef ? '\n\uD83D\uDCCC ' + lead.listingRef : '') + (lead.budget ? '\n\uD83D\uDCB0 Budget: ' + lead.budget : '') + '\n\uD83D\uDCDD ' + (lead.note || '\u2014')).catch(() => {});
   // The lead is kept and the admin is told whatever the number looks like — /property is aimed at the
