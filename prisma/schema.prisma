@@ -1507,3 +1507,46 @@ model OwnerKey {
 
   @@index([buildingId])
 }
+
+// ===== Bini for owners on Telegram (owner Bini design §3) =====
+// Who may use an owner assistant for a business. Numbers are approved by ops (ops/owner/access.js).
+model OwnerAccess {
+  id        String    @id @default(cuid())
+  kind      String    // building (v1) | shop | venue | hotel | clinic
+  entityId  String
+  phoneKey  String    // ride/phone.js phoneKey() of the approved number
+  role      String    @default("owner") // owner | staff
+  label     String?
+  addedBy   String    // ops | owner:<id>
+  createdAt DateTime  @default(now())
+  revokedAt DateTime?
+
+  @@index([phoneKey])
+  @@index([kind, entityId])
+}
+
+// A Telegram account that proved, through Share-my-phone, that it holds an approved number.
+model OwnerTgLink {
+  id         String    @id @default(cuid())
+  telegramId String    @unique
+  chatId     String
+  phoneKey   String
+  mode       String    @default("owner") // owner | bini
+  linkedAt   DateTime  @default(now())
+  lastSeen   DateTime  @default(now())
+  revokedAt  DateTime?
+
+  @@index([phoneKey])
+}
+
+// An agent is on for a business only while this row exists and is not disabled.
+model AgentSwitch {
+  id         String    @id @default(cuid())
+  agent      String    // owner
+  kind       String    // building
+  entityId   String
+  enabledAt  DateTime  @default(now())
+  disabledAt DateTime?
+
+  @@unique([agent, kind, entityId])
+}
