@@ -14,12 +14,77 @@ const MENU = [
 const COMMANDS = { cinema: '/cinema', watch: '/watch', films: '/watch', ride: '/ride', hotels: '/hotel/bina-grand-hotel', restaurants: '/restaurant/bina-restaurant', hospitals: '/hospital/bina-general-hospital', events: '/cinema', property: '/property', cars: '/cars', insurance: '/insurance', guides: '/guides', ai: '/ai' };
 const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 
-function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey }) {
+function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey, owner }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
   const hist = new Map(); // chatId -> { turns: [{role, content}], t }
   const menuMarkup = () => ({ inline_keyboard: MENU.map(row => row.map(b => ({ text: b.text, web_app: { url: baseUrl + b.path } }))) });
   const WELCOME = 'ሰላም! 👋 BinaSmart — Ethiopia\'s all-in-one platform.\n🚕 Fixed-price rides · 🏨 hotels · 🍽 restaurants · 🏥 hospitals · 🎟 events · 🏠 property · 🚗 cars · 🛡 insurance · 📚 guides.\n\nPick a service below, or just type your question — Bini (ቢኒ), our assistant, answers in Amharic or English.\nከታች ይምረጡ ወይም ጥያቄዎን ይጻፉ — ቢኒ በአማርኛ ወይም በእንግሊዝኛ ይመልስልዎታል።';
   const share = 'https://t.me/share/url?url=' + encodeURIComponent('https://t.me/' + (botUsername || 'bina_smart_bot')) + '&text=' + encodeURIComponent('BinaSmart — fixed-price rides, hotels, guides and more, inside Telegram');
+
+  // ---- Bini for owners (owner Bini design §3). owner = { access, answer, health } from server.js; absent = off. ----
+  // Only ever in a private chat: tenants' names and money never go where others can read them.
+  const OWNER_START = '🏢 ቢኒ ለባለቤቶች · Bini for owners\n\nየተመዘገበውን ስልክ ቁጥርዎን ለማረጋገጥ ከታች «📱 ስልኬን አጋራ»ን ይጫኑ። ቴሌግራም ቁጥሩ የእርስዎ መሆኑን ያረጋግጣል።\nTap "📱 Share my phone" below. Telegram confirms the number is yours.';
+  const SHARE_KB = { keyboard: [[{ text: '📱 ስልኬን አጋራ · Share my phone', request_contact: true }]], resize_keyboard: true, one_time_keyboard: true };
+  const NO_KB = { remove_keyboard: true };
+  const NOT_LINKED = 'ከቢኒ ለባለቤቶች ጋር አልተገናኙም። ከባለቤት ዳሽቦርዱ «Connect Telegram»ን ይጫኑ። · You are not linked to Bini for owners. Use "Connect Telegram" in the owner dashboard.';
+  const REFUSAL = {
+    not_registered: 'ይህ ቁጥር ለማንኛውም ንግድ አልተመዘገበም። · This number is not registered for any business.',
+    too_many: 'ብዙ ሙከራዎች ተደርገዋል፤ ከ15 ደቂቃ በኋላ እንደገና ይሞክሩ። · Too many attempts — try again in 15 minutes.',
+    not_own_contact: 'እባክዎ የራስዎን ቁጥር በ«📱 ስልኬን አጋራ» ቁልፍ ያጋሩ። · Please share your own number with the button.',
+    not_private: 'ይህን በግል ቻት ብቻ ያድርጉ። · Please do this in a private chat with the bot.',
+    blocked: 'ይህ የቴሌግራም መለያ ከቢኒ ለባለቤቶች ተወግዷል። እባክዎ ቢናስማርትን ያነጋግሩ። · This Telegram account was removed from Bini for owners. Please contact BinaSmart.',
+  };
+  const isPrivate = msg => !!(msg && msg.chat && msg.chat.type === 'private');
+  const PASS = Symbol('not an owner command');   // sendMessage may resolve to anything; this cannot collide
+
+  async function ownerScopeFor(msg) {
+    if (!owner || !isPrivate(msg) || !msg.from) return null;
+    const s = await owner.access.scopeFor(msg.from.id).catch(e => { console.error('[binaBot] owner scope: ' + e.message); return null; });
+    return s && s.mode === 'owner' ? s : null;
+  }
+
+  async function answerOwner(chatId, text, from, scope) {
+    if (api.sendChatAction) api.sendChatAction(chatId, 'typing').catch(() => {});
+    const reply = await owner.answer({ text: text.slice(0, 1200), from, chatId, scope })
+      .catch(e => { console.error('[binaBot] owner answer: ' + e.message); return null; });
+    if (!reply) return api.sendMessage(chatId, 'ቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ። · Bini is busy — please try again in a minute.');
+    return api.sendMessage(chatId, forTelegram(reply), { disable_web_page_preview: true,
+      reply_markup: { inline_keyboard: [[{ text: '🏢 ዳሽቦርድ · Dashboard', url: baseUrl + '/owner' }]] } });
+  }
+
+  async function linkOwner(chatId, msg) {
+    let r;
+    try {
+      r = await owner.access.linkFromContact({ chat: msg.chat, from: msg.from, contact: msg.contact,
+        // forward_origin is the current Bot API; forward_from/forward_date are the legacy fields; via_bot means an
+        // inline bot composed it. None of these is the sender sharing their own number.
+        forwarded: !!(msg.forward_origin || msg.forward_from || msg.forward_date || msg.via_bot) });
+    } catch (e) {
+      console.error('[binaBot] owner link: ' + e.message);
+      return api.sendMessage(chatId, 'ይቅርታ፣ አሁን ማገናኘት አልተቻለም። · Sorry, linking failed just now.', { reply_markup: NO_KB });
+    }
+    if (!r || !r.ok) return api.sendMessage(chatId, REFUSAL[(r && r.reason) || 'not_registered'] || REFUSAL.not_registered, { reply_markup: NO_KB });
+    const report = await owner.health(r.scope).catch(() => null);
+    return api.sendMessage(chatId, '✅ ተገናኝቷል · Linked\n\n' + (report || ''), { reply_markup: NO_KB });
+  }
+
+  async function handleOwnerCommand(chatId, msg, text) {
+    if (/^\/start\s+owner\b/.test(text)) return api.sendMessage(chatId, OWNER_START, { reply_markup: SHARE_KB });
+    if (msg.contact) return linkOwner(chatId, msg);
+    if (/^\/logout\b/.test(text)) {
+      const done = await owner.access.unlink(msg.from.id).catch(() => false);
+      return api.sendMessage(chatId, done ? 'ከቢኒ ለባለቤቶች ወጥተዋል። · Signed out of Bini for owners.' : NOT_LINKED, { reply_markup: NO_KB });
+    }
+    const m = /^\/(bini|owner)\b/.exec(text);
+    if (m) {
+      const done = await owner.access.setMode(msg.from.id, m[1]).catch(() => false);
+      if (!done) return api.sendMessage(chatId, NOT_LINKED);
+      return api.sendMessage(chatId, m[1] === 'bini'
+        ? 'ቢኒ ለደንበኞች ተመልሷል። ወደ ባለቤት ቢኒ ለመመለስ /owner ይጻፉ። · Customer Bini is back. Type /owner to return to Bini for owners.'
+        : '🏢 ቢኒ ለባለቤቶች ተመልሷል። · Bini for owners is back.');
+    }
+    return PASS;
+  }
 
   function turns(chatId) {
     const h = hist.get(chatId);
@@ -112,6 +177,8 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       const d = await r.json().catch(() => ({}));
       const text = d && d.ok ? String(d.text || '').trim() : '';
       if (!text || /^\[unclear\]/i.test(text) || isNoise(text)) return api.sendMessage(chatId, 'ይቅርታ፣ ድምጹን መስማት አልቻልኩም። እባክዎ ይጻፉ ወይም እንደገና ይሞክሩ። · Sorry, I could not hear that. Please type it or try again.');
+      const ownerScope = await ownerScopeFor(msg);
+      if (ownerScope) return answerOwner(chatId, text, msg.from, ownerScope);
       const reply = await askBini(chatId, text.slice(0, 1200), msg.from);
       // No transcript echo (Ibrahim, 9 Sep 2026): answer the voice note directly, like a typed message.
       if (!reply) return api.sendMessage(chatId, 'ቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ።');
@@ -124,6 +191,12 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     if (!msg || !msg.chat) return;
     const chatId = String(msg.chat.id);
     const text = String(msg.text || '').trim();
+    // Bini for owners: /start owner, the shared contact, /logout, /bini, /owner — private chats only, and only
+    // when server.js passes the owner service.
+    if (owner && isPrivate(msg) && msg.from) {
+      const handled = await handleOwnerCommand(chatId, msg, text);
+      if (handled !== PASS) return handled;
+    }
     // A shop owner pressed the dashboard's link: t.me/bina_smart_bot?start=shop_<id>. From now on that
     // shop's orders and requests come to this chat instead of a WhatsApp number that may be banned.
     const sl = /^\/start\s+shop_([A-Za-z0-9]+)\b/.exec(text);
@@ -148,6 +221,8 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       return api.sendMessage(chatId, 'Open it here · እዚህ ይክፈቱ 👇', { reply_markup: { inline_keyboard: [[{ text: '🔗 ' + baseUrl.replace('https://', '') + path, web_app: { url: baseUrl + path } }]] } });
     }
     if (cmd) return api.sendMessage(chatId, 'Unknown command. Type /menu to see all services, or just ask me a question. · /menu ይጻፉ');
+    const ownerScope = await ownerScopeFor(msg);
+    if (ownerScope) return answerOwner(chatId, text, msg.from, ownerScope);
     if (api.sendChatAction) api.sendChatAction(chatId, 'typing').catch(() => {});
     const reply = await askBini(chatId, text.slice(0, 1200), msg.from);
     if (!reply) return api.sendMessage(chatId, 'Bini is busy for a moment — please try again in a minute, or open bina.et. · ቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ።', { reply_markup: menuMarkup() });
