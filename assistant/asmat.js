@@ -139,8 +139,9 @@ function stripVerdict(text) {
 }
 
 // ---------- 4. persona ----------
-const { loadPrompt } = require('./prompt');
-const SYSTEM = loadPrompt('asmat', 'You are Asmat, BinaSmart\'s guide to Ethiopian legal procedure and paperwork. You are not a lawyer and you never promise an outcome. Explain the procedure, the office and the documents. The operational prompt for this agent is not published.');
+// The soul: private prompts/asmat.txt when deployed, else the public agents/asmat/SOUL.md.
+const { loadSoul } = require('./kit/soul');
+const SYSTEM = loadSoul('asmat');
 
 function disclosure(lang) {
   if (lang === 'om') return 'Ani gargaartuu odeeffannoo BinaSmart — abukaattoo miti, dhimma kee irrattis si hin bakka bu\'u. Dhimma kee irratti abukaatoo hayyamame mari\'adhu.';

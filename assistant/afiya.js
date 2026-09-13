@@ -130,8 +130,9 @@ function stripDosage(text) {
 }
 
 // ---------- 4. the persona and the rules the model does get ----------
-const { loadPrompt } = require('./prompt');
-const SYSTEM = loadPrompt('afiya', 'You are Dr Afiya, BinaSmart\'s guide to the Ethiopian health system. You are not a clinician and you never give a diagnosis, a medicine or a dose. Say which KIND of department treats the problem, what to bring and how soon. The operational prompt for this agent is not published.');
+// The soul: private prompts/afiya.txt when deployed, else the public agents/afiya/SOUL.md.
+const { loadSoul } = require('./kit/soul');
+const SYSTEM = loadSoul('afiya');
 
 // The line that closes every substantive answer, in the user's language.
 function disclosure(lang) {
