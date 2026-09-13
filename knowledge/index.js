@@ -1,6 +1,6 @@
 'use strict';
 // BinaSmart knowledge index (RAG). Sources: the binasmart-system skill, the Addis Ababa notes, the guide
-// and service pages in public/, llms.txt and the MCP docs. Chunks are stored in Postgres (KnowledgeChunk)
+// and service pages in public/, llms.txt, the MCP docs and BinaSmart's own published news (NewsPost). Chunks are stored in Postgres (KnowledgeChunk)
 // with a Gemini embedding; the whole matrix lives in RAM and search is a cosine scan plus a keyword score,
 // so a Gemini outage degrades to keyword search instead of going dark. Everything is injectable for tests.
 const crypto = require('crypto');
@@ -127,6 +127,43 @@ function isAdvertorial(meta) {
 
 function isSpam(text) { return new Set(String(text).toLowerCase().match(SPAM) || []).size >= 2; }
 
+// BinaSmart's own articles live in the NewsPost table and are indexed whole by the `news` source below.
+// If a crawl ever picks up bina.et/news pages, the web loader must drop them: otherwise every article is
+// in the index twice, once truncated at 20,000 characters and stripped of its publication date.
+const OWN_NEWS_URL = /^https?:\/\/(www\.)?bina\.et\/news\//i;
+function isOwnNewsUrl(url) { return OWN_NEWS_URL.test(String(url || '')); }
+
+// ---------- news (BinaSmart's own published articles, from the database) ----------
+// The date an article appeared, on the Addis Ababa calendar day (UTC+3), not the UTC one.
+function addisDate(d) { const t = new Date(d).getTime(); return Number.isFinite(t) ? new Date(t + 3 * 3600e3).toISOString().slice(0, 10) : ''; }
+// Pure: NewsPost rows -> index documents. Only published posts whose publication time has come; a post
+// that is unpublished (or scheduled for later) produces no document, so the next ingest collects its chunks.
+// Not truncated: the chunker handles length. The date goes into the title as well as the first line, because
+// the title is carried into every chunk and printed with every hit, so any retrieved passage can say how recent it is.
+function newsDocs(posts, now = new Date()) {
+  const docs = [];
+  for (const p of posts || []) {
+    if (!p || !p.published || !p.slug) continue;
+    const at = p.publishedAt ? new Date(p.publishedAt) : null;
+    if (!at || !(at.getTime() <= new Date(now).getTime())) continue;
+    const date = addisDate(at);
+    const name = String(p.titleAm || p.title || p.slug).trim();
+    const lines = ['Published: ' + date];
+    if (p.title && p.titleAm && p.title.trim() !== p.titleAm.trim()) lines.push(p.title.trim()); // English title: lets English questions find it
+    if (p.excerpt) lines.push('', String(p.excerpt).trim());
+    const body = htmlToText(p.bodyHtml || '');
+    docs.push({ source: 'news', slug: p.slug, title: name + ' (' + date + ')', url: 'https://bina.et/news/' + p.slug,
+      lang: p.lang || 'am', text: lines.join('\n') + '\n\n' + body });
+  }
+  return docs;
+}
+async function readNewsSources(prisma, now = new Date()) {
+  if (!prisma || !prisma.newsPost) return [];
+  const posts = await prisma.newsPost.findMany({ where: { published: true, publishedAt: { lte: now } },
+    select: { slug: true, title: true, titleAm: true, excerpt: true, bodyHtml: true, lang: true, published: true, publishedAt: true } });
+  return newsDocs(posts, now);
+}
+
 // ---------- sources ----------
 function readSources(root, only) {
   const docs = [];
@@ -177,6 +214,7 @@ function readSources(root, only) {
       const body = raw.slice(fm[0].length);
       if (isSpam(body)) { hygiene.spam[site] = (hygiene.spam[site] || 0) + 1; continue; }   // hacked page serving casino spam
       if (isAdvertorial(meta)) { hygiene.advert[site] = (hygiene.advert[site] || 0) + 1; continue; }  // paid placement, not editorial
+      if (isOwnNewsUrl(meta.url)) { hygiene.ownNews = (hygiene.ownNews || 0) + 1; continue; }         // indexed whole by the news source
       web.push({ source: 'web', slug: site + '/' + f.replace(/\.md$/, ''), title: (meta.source_name ? meta.source_name + ' · ' : '') + (meta.title || site), url: meta.url || null, lang: meta.lang || 'en', text: body.slice(0, 20000) });
     }
     // strip the site template FIRST, then judge the minimum length on what real content is left
@@ -233,6 +271,18 @@ function makeEmbedder({ apiKey, fetchImpl, sleep }) {
 function toBuf(vec) { const f = Float32Array.from(vec); let n = 0; for (const v of f) n += v * v; n = Math.sqrt(n) || 1; for (let i = 0; i < f.length; i++) f[i] /= n; return Buffer.from(f.buffer); }
 function fromBuf(buf) { return new Float32Array(buf.buffer, buf.byteOffset, buf.byteLength / 4); }
 
+// ---------- ranking ----------
+// Guides and service pages get a small tie-breaking boost; news articles do not. Until 2026-09-14 the only
+// news in the index arrived as crawled `web` pages, so "no boost" was what news got. BinaSmart's own articles
+// now have their own `news` source and are deliberately NOT in OWN_SOURCES: they get exactly what a crawled
+// news article gets, so a guide still wins a close call against an article in the question's language.
+const OWN_SOURCES = new Set(['guide', 'page', 'addis', 'skill', 'llms', 'docs']);
+const OWN_BOOST = 0.06;
+function hybridScore({ cos = 0, kw = 0, source, hasVec = true }) {
+  const own = OWN_SOURCES.has(source) ? OWN_BOOST : 0;
+  return (hasVec ? cos + 0.15 * kw : kw) + (hasVec ? own : own * 0.5);
+}
+
 // ---------- the index ----------
 function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   const embedder = makeEmbedder({ apiKey, fetchImpl, sleep });
@@ -253,6 +303,13 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   // (Re)build the store: chunk every source, insert new hashes, embed only what has no embedding, drop stale.
   async function ingest({ only, embed = true } = {}) {
     const docs = readSources(root || ROOT, only);
+    // news comes from the database, not from files, so it is loaded here rather than in readSources.
+    // A failed read must not look like "every article was removed": it is left out of orphan collection.
+    const loaded = new Set(docs.map(d => d.source)), failed = new Set();
+    if ((!only || only.includes('news')) && prisma.newsPost) {
+      try { const nd = await readNewsSources(prisma); docs.push(...nd); loaded.add('news'); }
+      catch (e) { failed.add('news'); say('[knowledge] news source unavailable, left as it was: ' + e.message); }
+    }
     let inserted = 0, deleted = 0, embedded = 0;
     for (const d of docs) {
       const chunks = chunkDoc(d.text, d.title);
@@ -271,8 +328,9 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     // Chunks whose document no longer exists anywhere. See collectOrphans above the ingest for why this
     // is fenced so carefully.
     let orphaned = 0;
-    if (docs.length) {
-      const scope = only && only.length ? [...new Set(only)] : [...new Set(docs.map(d => d.source))];
+    if (docs.length || loaded.has('news')) {
+      // `loaded` includes news even when no article is published any more, so its last chunks still go.
+      const scope = (only && only.length ? [...new Set(only)] : [...loaded]).filter(s => !failed.has(s));
       const keep = new Set(docs.map(d => d.source + '\u0000' + d.slug));
       const inScope = await prisma.knowledgeChunk.findMany({ where: { source: { in: scope } }, select: { id: true, source: true, slug: true } });
       const dead = inScope.filter(r => !keep.has(r.source + '\u0000' + r.slug));
@@ -303,7 +361,8 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     if (hy && (Object.keys(hy.spam).length || hy.boilerplateChars)) {
       const spam = Object.entries(hy.spam).map(([k, v]) => k + ':' + v).join(' ');
       say('[knowledge] hygiene: ' + Math.round(hy.boilerplateChars / 1000) + 'k chars of site template stripped'
-        + (spam ? ', spam pages skipped ' + spam : '') + (hy.dropped ? ', ' + hy.dropped + ' pages left too thin' : ''));
+        + (spam ? ', spam pages skipped ' + spam : '') + (hy.dropped ? ', ' + hy.dropped + ' pages left too thin' : '')
+        + (hy.ownNews ? ', ' + hy.ownNews + ' crawled bina.et/news pages skipped (news source has them)' : ''));
     }
     say('[knowledge] ingest: ' + docs.length + ' docs, +' + inserted + ' chunks, -' + deleted + ' stale, -' + orphaned + ' orphaned, ' + embedded + ' embedded, ' + rows.length + ' total');
     return { docs: docs.length, inserted, deleted, orphaned, embedded, total: rows.length };
@@ -313,8 +372,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   // accordingly, with a tie-breaker rather than a thumb on the scale: a crawled page that is genuinely the
   // better match still wins. Without this, a news article in the question's language outranks the guide that
   // actually answers it — which is exactly what Afaan Oromoo questions were hitting.
-  const OWN_SOURCES = new Set(['guide', 'page', 'addis', 'skill', 'llms', 'docs']);
-  const OWN_BOOST = 0.06;
+  // (OWN_SOURCES, OWN_BOOST and hybridScore live at module level so the rule can be tested without a DB.)
 
   function keywordScore(qt, r) { let s = 0; for (const t of qt) if (r.toks.has(t)) s += 1; return qt.length ? s / qt.length : 0; }
 
@@ -397,8 +455,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
       let cos = 0;
       if (qv && r.vec) { for (let i = 0; i < DIMS; i++) cos += qv[i] * r.vec[i]; }
       const kw = keywordScore(qt, r);
-      const own = OWN_SOURCES.has(r.source) ? OWN_BOOST : 0;
-      const score = (qv ? cos + 0.15 * kw : kw) + (qv ? own : own * 0.5);
+      const score = hybridScore({ cos, kw, source: r.source, hasVec: !!qv });
       if (score > 0) scored.push({ r, score, cos, kw });
     }
     scored.sort((a, b) => b.score - a.score);
@@ -456,4 +513,4 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   return { load, ingest, search, contextFor, health, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf };
+module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf };

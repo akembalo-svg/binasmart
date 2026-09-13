@@ -217,3 +217,119 @@ test('orphan collection refuses to empty an index when a fetch has failed', asyn
   assert.equal(w.rows.length, before, 'the index is untouched');
   fsp.rmSync(root, { recursive: true, force: true });
 });
+
+
+// ---- news: BinaSmart's own published articles, indexed whole from the NewsPost table ----
+const { newsDocs, isOwnNewsUrl, hybridScore } = require('../knowledge/index');
+const NOW = new Date('2026-09-14T09:00:00Z');
+const post = (slug, extra = {}) => ({ slug, title: 'English title ' + slug, titleAm: 'የአማርኛ ርዕስ ' + slug, excerpt: 'አጭር መግቢያ ' + slug,
+  bodyHtml: '<p>የመጀመሪያ አንቀጽ ስለ ' + slug + ' የተጻፈ ረጅም ዓረፍተ ነገር ለመከፋፈል በቂ እንዲሆን።</p><h2>ክፍል</h2><p>ሁለተኛ አንቀጽ ስለ ' + slug + ' ተጨማሪ ዝርዝር የያዘ ጽሑፍ ነው።</p>', lang: 'am', published: true,
+  publishedAt: new Date('2026-09-13T12:17:07Z'), ...extra });
+
+test('newsDocs: one document per published post, with bina.et url, the post language and a date line', () => {
+  const docs = newsDocs([post('law-2-house-rent'), post('en-post', { lang: 'en', titleAm: null, title: 'Plain English' })], NOW);
+  assert.equal(docs.length, 2);
+  const d = docs[0];
+  assert.equal(d.source, 'news'); assert.equal(d.slug, 'law-2-house-rent');
+  assert.equal(d.url, 'https://bina.et/news/law-2-house-rent');
+  assert.equal(d.lang, 'am');
+  assert.ok(d.title.startsWith('የአማርኛ ርዕስ law-2-house-rent'), 'the Amharic title names the document');
+  assert.match(d.title, /\(2026-09-13\)$/, 'date in the title, so every chunk carries it');
+  assert.ok(d.text.startsWith('Published: 2026-09-13\n'), 'date line first');
+  assert.match(d.text, /English title law-2-house-rent/, 'English title kept for English questions');
+  assert.match(d.text, /አጭር መግቢያ/); assert.match(d.text, /## ክፍል/); assert.equal(/<p>/.test(d.text), false, 'html converted');
+  assert.equal(docs[1].lang, 'en'); assert.ok(docs[1].title.startsWith('Plain English'));
+  // the Addis calendar day: 22:30 UTC on the 13th is already the 14th in Addis Ababa
+  assert.match(newsDocs([post('late', { publishedAt: new Date('2026-09-13T22:30:00Z') })], NOW)[0].text, /^Published: 2026-09-14/);
+});
+
+test('newsDocs: a long article is indexed whole, not truncated like crawled pages', () => {
+  const para = '<p>' + 'የቤት ኪራይ ውል በ30 ቀን ውስጥ መመዝገብ አለበት። '.repeat(40) + '</p>';
+  const d = newsDocs([post('long', { bodyHtml: para.repeat(60) + '<p>የመጨረሻው ዓረፍተ ነገር እዚህ አለ።</p>' })], NOW)[0];
+  assert.ok(d.text.length > 40000, 'full length kept: ' + d.text.length);
+  assert.match(d.text, /የመጨረሻው ዓረፍተ ነገር/, 'the end of the article survives');
+  const chunks = chunkDoc(d.text, d.title);
+  assert.ok(chunks.length > 40 && chunks.every(c => c.text.includes('(2026-09-')), 'every chunk carries the dated title');
+});
+
+test('newsDocs: unpublished, scheduled and malformed posts produce nothing', () => {
+  const docs = newsDocs([
+    post('draft', { published: false }),
+    post('scheduled', { publishedAt: new Date('2026-09-20T00:00:00Z') }),
+    post('no-date', { publishedAt: null }),
+    { published: true, title: 'no slug', publishedAt: new Date('2026-01-01') },
+    post('ok'),
+  ], NOW);
+  assert.deepEqual(docs.map(d => d.slug), ['ok']);
+});
+
+test('the web loader drops crawled bina.et/news pages and keeps everything else', () => {
+  const root = fsp.mkdtempSync(path.join(os.tmpdir(), 'bina-kn-'));
+  const dir = path.join(root, 'knowledge', 'web', 'bina');
+  fsp.mkdirSync(dir, { recursive: true });
+  const page = (name, url) => fsp.writeFileSync(path.join(dir, name + '.md'), '---\nurl: "' + url + '"\ntitle: "' + name + '"\nlang: "am"\n---\n\n' + long(name));
+  page('article', 'https://bina.et/news/law-2-house-rent');
+  page('www', 'https://www.bina.et/news/ai-pros-cons-ethiopia');
+  page('guide', 'https://bina.et/fayda');
+  page('govnews', 'https://justice.gov.et/en/news/some-announcement/');
+  const docs = readSources(root, ['web']);
+  assert.deepEqual(docs.map(d => d.url).sort(), ['https://bina.et/fayda', 'https://justice.gov.et/en/news/some-announcement/'],
+    'own articles skipped; /news/ on another site is legitimate crawled content');
+  assert.equal(readSources.lastHygiene.ownNews, 2);
+  assert.equal(isOwnNewsUrl('https://bina.et/news/x'), true);
+  assert.equal(isOwnNewsUrl('https://bina.et/newsroom'), false);
+  assert.equal(isOwnNewsUrl('https://notbina.et/news/x'), false);
+  fsp.rmSync(root, { recursive: true, force: true });
+});
+
+test('ranking: a guide still beats a news article on a close call, whatever source the article came from', () => {
+  const guide = hybridScore({ cos: 0.60, kw: 0.5, source: 'guide' });
+  const ownNews = hybridScore({ cos: 0.63, kw: 0.5, source: 'news' });
+  const crawledNews = hybridScore({ cos: 0.63, kw: 0.5, source: 'web' });
+  assert.ok(guide > ownNews, 'close call goes to the guide');
+  assert.equal(ownNews, crawledNews, 'news gets exactly what a crawled news page got before');
+  assert.ok(hybridScore({ cos: 0.72, kw: 0.5, source: 'news' }) > guide, 'a clearly better article still wins');
+  assert.ok(hybridScore({ kw: 0.5, source: 'guide', hasVec: false }) > hybridScore({ kw: 0.5, source: 'news', hasVec: false }), 'keyword-only too');
+});
+
+function withNews(w, posts) {
+  w.prisma.newsPost = { findMany: async () => posts.map(p => ({ ...p })) };
+  return w;
+}
+
+test('ingest --source news indexes articles, and an unpublished article loses its chunks on the next run', async () => {
+  const posts = [post('one'), post('two'), post('three')];
+  const w = withNews(world({ withKey: false }), posts);
+  const a = await w.k.ingest({ only: ['news'], embed: false });
+  assert.equal(a.docs, 3); assert.ok(a.inserted >= 3);
+  assert.deepEqual([...new Set(w.rows.filter(r => r.source === 'news').map(r => r.slug))].sort(), ['one', 'three', 'two']);
+  assert.ok(w.rows.every(r => r.url === 'https://bina.et/news/' + r.slug));
+  const again = await w.k.ingest({ only: ['news'], embed: false });
+  assert.equal(again.inserted, 0); assert.equal(again.deleted, 0); assert.equal(again.orphaned, 0);
+
+  posts[1].published = false;
+  const b = await w.k.ingest({ only: ['news'], embed: false });
+  assert.ok(b.orphaned > 0, 'unpublished article collected');
+  assert.equal(w.rows.some(r => r.slug === 'two'), false);
+  assert.ok(w.rows.some(r => r.slug === 'one') && w.rows.some(r => r.slug === 'three'));
+
+  for (const p of posts) p.published = false;
+  const c = await w.k.ingest({ only: ['news', 'addis'], embed: false });
+  assert.equal(w.rows.some(r => r.source === 'news'), false, 'the last articles go too, even with no news docs left');
+  assert.ok(c.total > 0 && w.rows.some(r => r.source === 'addis'), 'the file sources were rebuilt in the same run');
+});
+
+test('news is untouched by a web-only run, and a failed news read deletes nothing', async () => {
+  const { root } = webTree({ alpha: long('alpha') });
+  const w = withNews(world({ withKey: false, root }), [post('one'), post('two')]);
+  await w.k.ingest({ only: ['news'], embed: false });
+  const n = w.rows.filter(r => r.source === 'news').length;
+  assert.ok(n >= 2);
+  await w.k.ingest({ only: ['web'], embed: false });
+  assert.equal(w.rows.filter(r => r.source === 'news').length, n, 'web-only run leaves news alone');
+  w.prisma.newsPost = { findMany: async () => { throw new Error('db down'); } };
+  const r = await w.k.ingest({ only: ['news', 'web'], embed: false });
+  assert.equal(w.rows.filter(x => x.source === 'news').length, n, 'failed read is not a removal');
+  assert.equal(r.orphaned, 0);
+  fsp.rmSync(root, { recursive: true, force: true });
+});

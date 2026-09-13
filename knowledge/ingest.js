@@ -3,6 +3,7 @@
 // Build or refresh the knowledge index. Run from the repo root:
 //   node --env-file=.env knowledge/ingest.js            # changed sources only (hash-based; embeds only new chunks)
 //   node --env-file=.env knowledge/ingest.js --source guide,addis
+//   node --env-file=.env knowledge/ingest.js --source news   # BinaSmart's own published articles (NewsPost table)
 //   node --env-file=.env knowledge/ingest.js --no-embed  # chunk into the DB without calling Gemini
 // Safe to run any time: unchanged chunks cost nothing. Nightly cron calls it; a deploy can call it too.
 const { PrismaClient } = require('@prisma/client');
