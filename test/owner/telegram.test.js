@@ -276,3 +276,13 @@ test('an owner command is answered exactly once even when sendMessage resolves t
   assert.equal(sent.length, 1);
   assert.equal(sent[0].extra.reply_markup.keyboard[0][0].request_contact, true);
 });
+
+test('a building-specific link (?start=owner_darulle) opens the same Share-my-phone step, and grants nothing by itself', async () => {
+  const { sent, calls, b } = harness();
+  await b.handleUpdate(pm('/start owner_darulle'));
+  assert.equal(sent[0].extra.reply_markup.keyboard[0][0].request_contact, true);
+  assert.equal(calls.link.length, 0, 'opening the link links nothing');
+  const other = harness();
+  await other.b.handleUpdate(pm('/start ownerdarulle'));
+  assert.equal(other.sent[0].extra.reply_markup.keyboard, undefined, 'only owner or owner_<name> is the owner link');
+});

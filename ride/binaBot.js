@@ -121,7 +121,9 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
   }
 
   async function handleOwnerCommand(chatId, msg, text) {
-    if (/^\/start\s+owner\b/.test(text)) {
+    // t.me/bina_smart_bot?start=owner or ?start=owner_<building> (e.g. owner_darulle, a link Ibrahim sends one owner).
+    // The suffix only makes the link recognisable; access is still decided by the approved phone number alone.
+    if (/^\/start\s+owner(?:_[A-Za-z0-9-]{1,40})?(?:\s|$)/.test(text)) {
       markPending(msg.from.id);
       return api.sendMessage(chatId, OWNER_START, { reply_markup: SHARE_KB });
     }
