@@ -2735,7 +2735,15 @@ fastify.post('/api/admin/:slug/run-daily', async (req, reply) => {
 });
 
 // ===== TELEGRAM LINKING (tenant opt-in bot) =====
+// Links a Telegram chat to a Darulle tenant from nothing but a unit number. Unit numbers are on doors
+// and contracts, and no bot has delivered updates here since the rider bot moved to /api/tg/rider, so
+// the only thing that could reach this route was a forged POST: send {chat: yours, text: "707"} and
+// unit 707's rent and contract reminders come to you instead of the tenant. Nothing was ever linked
+// (0 chats, 0 TG_LINKED audits). It now answers only Telegram itself, the same check as /api/tg/rider;
+// a real tenant link needs proof the chat belongs to the tenant, which is part of the owner-Bini work.
 fastify.post('/api/tg-webhook', async (req, reply) => {
+  const tgSecret = process.env.TG_WEBHOOK_SECRET || '';
+  if (!tgSecret || req.headers['x-telegram-bot-api-secret-token'] !== tgSecret) return reply.code(401).send({ ok: false });
   reply.send({ ok: true });
   try{
     const msg = (req.body || {}).message;
