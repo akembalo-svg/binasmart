@@ -71,10 +71,18 @@ test('a draft request gets the template instruction, no retry, no caution, and l
   assert.ok(out.reply.endsWith(asmat.disclosure('am')));
 });
 
-test('a case answer that names no office gets the nudge', async () => {
+test('a draft that names no office gets the nudge', async () => {
+  const { out } = await run('አቤቱታ ጻፍልኝ', { replies: ['ናሙና ይኸው። ስም፦ ______'] });
+  assert.ok(out.reply.includes(asmat.caseNudge('am').trim()));
+  assert.ok(out.reply.endsWith(asmat.disclosure('am')));
+});
+
+test('an assessment is not nudged, because its caution already names a lawyer (as the route did)', async () => {
   const reply = "Wanti si mormuu danda'u: ragaan hin jiru.";
   const { out } = await run('himata banuu qabaa?', { replies: [reply] });
-  assert.ok(out.reply.includes(asmat.caseNudge('om').trim()));
+  assert.ok(out.reply.includes(asmat.assessmentCaution('om').trim()));
+  assert.ok(!out.reply.includes(asmat.caseNudge('om').trim()));
+  assert.ok(out.reply.endsWith(asmat.disclosure('om')));
 });
 
 test('a successful answer is logged under the tool name the stats already use', async () => {

@@ -64,15 +64,11 @@ module.exports = {
 
   finish(c, text) {
     if (!text) text = asmat.caseNudge(c.l).trim();
-    // Whether an office was named is judged on the model's own words, before our caution is appended.
-    // (The route judged it on the text AFTER appending the caution — but assessmentCaution() names a
-    // lawyer in every language, so that check was always true and the nudge below was dead code in
-    // production. Fixed here to match the surrounding comment's own stated intent: "the nudge stays
-    // for the case where the answer named none" — the answer, not our own boilerplate.)
-    const namedOffice = OFFICE.test(text);
     // The caution rides along with every assessment, appended here so a hopeful reply cannot drop it.
     if (assessing(c)) text += asmat.assessmentCaution(c.l);
-    if ((asmat.isCaseAdvice(c.msg) || asmat.isDraftRequest(c.msg)) && !namedOffice) text += asmat.caseNudge(c.l);
+    // As in the route: the caution already names a lawyer, so for an assessment this nudge does not
+    // fire; it does for a draft that names no office.
+    if ((asmat.isCaseAdvice(c.msg) || asmat.isDraftRequest(c.msg)) && !OFFICE.test(text)) text += asmat.caseNudge(c.l);
     return text + '\n\n' + asmat.disclosure(c.l);
   },
 
