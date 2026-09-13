@@ -1139,175 +1139,24 @@ fastify.post('/api/assistant/transcribe', { bodyLimit: 4 * 1024 * 1024 }, async 
   catch (e) { req.log && req.log.warn && req.log.warn('transcribe err ' + e.message); return reply.code(502).send({ ok: false, error: 'transcribe_failed' }); }
 });
 // Weekly numbers for the eval report and the ops page.
-// ===== Asmat (አስማት): Ethiopian legal procedure and documents. Not a lawyer, and built so he cannot act like one. =====
-fastify.post('/api/asmat', async (req, reply) => {
-  const t0 = Date.now();
-  const b = req.body || {};
-  const msg = String(b.message || '').trim().slice(0, 2000);
-  if (!msg) return reply.code(400).send({ error: 'message required' });
-  const ip = req.headers['x-real-ip'] || req.ip;
-  const u = (b.user && typeof b.user === 'object') ? b.user : {};
-  const channel = u.telegramId ? 'telegram' : (u.uid ? 'web' : 'api');
-  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip, evaluation: isEval(req) });
-  const lang = biniLang.detect(msg);
-  const l = (lang === 'am' || lang === 'am-latin') ? 'am' : (lang === 'om' ? 'om' : 'en');
-
-  // 1. A medical emergency reaches the ambulance even here. Being on the wrong page is not the person's problem.
-  if (afiya.isEmergency(msg)) {
-    const text = afiya.emergencyReply(l);
-    biniHandover({ userKey, channel, lang: l, user: u, message: msg, reply: text, history: [], explicit: true, reason: 'Asmat page: possible medical emergency' });
-    return { reply: text, emergency: true, ambulance: afiya.AMBULANCE };
-  }
-  if (asmat.isUrgent(msg)) {
-    const text = asmat.urgentReply(l);
-    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['urgent'], miss: false, ms: Date.now() - t0 });
-    biniHandover({ userKey, channel, lang: l, user: u, message: msg, reply: text, history: [], explicit: true, reason: 'Asmat: urgent legal situation' });
-    return { reply: text, urgent: true };
-  }
-  // 2. Asmat keeps to legal procedure; everything else goes back with a link.
-  // A request for case advice is a legal question by definition: decline it here, never exile it.
-  if (!asmat.isCaseAdvice(msg) && !scope.inScope(msg, 'legal')) return { reply: scope.redirect(msg, 'legal', l), redirected: true };
-
-  try {
-    const ctx = await knowledge.contextFor(msg, { lang: l }).catch(() => '');
-    let sys = asmat.SYSTEM + '\n\n' + biniLang.directive(lang) + (ctx ? '\n\n## Information you may use\n' + ctx : '');
-    // Three different requests that used to share one refusal.
-    if (asmat.isDraftRequest(msg)) sys += '\n\nTHIS MESSAGE ASKS YOU TO WRITE A DOCUMENT (kind: '
-      + asmat.draftKind(msg) + '). Produce a BLANK TEMPLATE as described above: head it ናሙና, lay out the real'
-      + ' headings in order, and leave ______ wherever a fact, name, date or amount belongs. Fill in nothing,'
-      + ' not even a detail they mentioned. Put [የሚመለከተው አዋጅ — ጠበቃዎ ያረጋግጥ] where a law would be cited unless'
-      + ' the knowledge block above gives you the article. End by saying the receiving court or office may'
-      + ' require more, and that a lawyer should read it before it is filed.';
-    else if (asmat.isCaseAdvice(msg)) sys += '\n\nTHIS MESSAGE ASKS ABOUT THE PERSON OWN CASE. Weigh it as'
-      + ' described above: what the matter turns on, what is in their favour from what they told you, what is'
-      + ' against them or what the other side would argue, and which piece of evidence would settle it. Name'
-      + ' the weak side explicitly — an assessment that only lists strengths is how someone loses a case. No'
-      + ' percentages, no probabilities, no promise of an outcome.'
-      // A required HEADING, not a described quality. Measured at 1-2 of 4 while it was only described.
-      + ' You MUST include a line that begins exactly "' + asmat.weaknessLabel(l) + '" followed by what'
-      + ' could count against this person, or what the other side would argue. If they have given you no'
-      + ' facts, say what generally counts against someone in a matter of this kind, then ask for the'
-      + ' detail that would sharpen it. Never omit that line.';
-
-    let text = String(await callBini(sys, [{ role: 'user', content: msg }], 700, {}) || '').trim();
-    // One retry when an assessment came back without the weak side. The content has to come from the
-    // model - what counts against someone is specific to their matter - so only its presence is
-    // enforced here, and presence is the half that kept going missing.
-    if (asmat.isCaseAdvice(msg) && !asmat.isDraftRequest(msg) && text && !asmat.namesWeakness(text)) {
-      const strict = sys + '\n\nYour previous answer left out the weak side. Write it again, same content,'
-        + ' but it MUST contain a line beginning exactly "' + asmat.weaknessLabel(l) + '". Do not apologise,'
-        + ' and do not mention this instruction.';
-      const second = String(await callBini(strict, [{ role: 'user', content: msg }], 700, {}) || '').trim();
-      if (second && asmat.namesWeakness(second)) text = second;
-      else console.warn('[asmat] assessment named no weak side, even after a retry');
-    }
-    const v = asmat.stripVerdict(text);
-    if (v.removed) console.warn('[asmat] removed ' + v.removed + ' verdict sentence(s)');
-    text = v.text;
-    const g = dropUngrounded(text, ctx);
-    if (g.dropped.length) console.warn('[asmat] dropped ungrounded ' + g.dropped.map(x => x.text).join(', '));
-    text = g.text;
-
-    if (!text) text = asmat.caseNudge(l).trim();
-    // The caution rides along with every assessment, appended here rather than asked of the model, so
-    // it cannot be dropped by a reply that came out encouraging. The nudge toward a real office stays
-    // for the case where the answer named none.
-    if (asmat.isCaseAdvice(msg) && !asmat.isDraftRequest(msg)) text += asmat.assessmentCaution(l);
-    if ((asmat.isCaseAdvice(msg) || asmat.isDraftRequest(msg))
-        && !/ጽ\/ቤት|ፍርድ ቤት|office|court|waajjira|ጠበቃ|abukaat|lawyer/i.test(text)) text += asmat.caseNudge(l);
-    text += '\n\n' + asmat.disclosure(l);
-
-    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['asmat'], miss: biniMemory.isMiss(text, { tools: ['asmat'], message: msg }), ms: Date.now() - t0 });
-    return { reply: text, urgent: false };
-  } catch (e) {
-    req.log && req.log.error({ err: e }, 'asmat failed');
-    return { reply: asmat.disclosure(l) };
-  }
+// ===== The agent kit: every specialist agent runs through one engine (assistant/kit/engine.js) =====
+// The order an agent answers in lives there; what each agent says and refuses lives in agents/<name>/rules.js.
+const { makeEngine } = require('./assistant/kit/engine');
+const afiyaAgent = require('./agents/afiya/rules');
+const asmatAgent = require('./agents/asmat/rules');
+const runAgent = makeEngine({
+  callModel: callBini, contextFor: (q, o) => knowledge.contextFor(q, o), lang: biniLang, memory: biniMemory,
+  handover: biniHandover, dropUngrounded, isEval, prisma,
 });
+
+// ===== Asmat (አስማት): Ethiopian legal procedure and documents. Not a lawyer, and built so he cannot act like one. =====
+fastify.post('/api/asmat', (req, reply) => runAgent(asmatAgent, req, reply));
 
 // ===== Dr Afiya (ዶ/ር አፍያ): health-system guide. Not a clinician, and built so she cannot act like one. =====
 // Order matters and is the whole design: an emergency is answered by assistant/afiya.js without the model,
 // because a model that is right 99 times in 100 is not good enough when the hundredth caller is having a
 // stroke. Everything else is grounded, stripped of any dosage, and closed with the disclosure.
-fastify.post('/api/afiya', async (req, reply) => {
-  const t0 = Date.now();
-  const b = req.body || {};
-  const msg = String(b.message || '').trim().slice(0, 2000);
-  if (!msg) return reply.code(400).send({ error: 'message required' });
-  const ip = req.headers['x-real-ip'] || req.ip;
-  const u = (b.user && typeof b.user === 'object') ? b.user : {};
-  const channel = u.telegramId ? 'telegram' : (u.uid ? 'web' : 'api');
-  const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip, evaluation: isEval(req) });
-  const lang = biniLang.detect(msg);
-  const l = (lang === 'am' || lang === 'am-latin') ? 'am' : (lang === 'om' ? 'om' : 'en');
-
-  // 1. Emergency: fixed answer, no model, and a human is told straight away.
-  if (afiya.isEmergency(msg)) {
-    const text = afiya.emergencyReply(l);
-    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['emergency'], miss: false, ms: Date.now() - t0 });
-    biniHandover({ userKey, channel, lang: l, user: u, message: msg, reply: text, history: [],
-      explicit: true, reason: 'Dr Afiya: possible emergency' });
-    return { reply: text, emergency: true, ambulance: afiya.AMBULANCE };
-  }
-
-  // An urgent legal situation typed at the health desk still gets the legal answer.
-  if (asmat.isUrgent(msg)) return { reply: asmat.urgentReply(l), urgent: true };
-  // Otherwise Dr Afiya keeps to health, and hands everything else on with a link.
-  // A clinical question is a health question by definition: decline it here, never exile it.
-  if (!afiya.isClinical(msg) && !scope.inScope(msg, 'health')) return { reply: scope.redirect(msg, 'health', l), redirected: true };
-
-  try {
-    const ctx = await knowledge.contextFor(msg, { lang: l }).catch(() => '');
-    // The one hospital in the system is demo data; she must never present it as a real place to attend.
-    let depts = '', demoRows = null;   // read again below, to enforce the demo disclosure
-    try {
-      const rows = demoRows = await prisma.department.findMany({ where: { active: true },
-        select: { name: true, nameAm: true, nameOm: true, floor: true, room: true, fee: true, openHours: true }, take: 20 });
-      // Name the department in the language the person wrote in. The Amharic stays in the brackets
-      // for an Oromo speaker on purpose: the sign above the door is in Amharic, so they need the
-      // name they can READ and the name they must RECOGNISE.
-      const deptLabel = d => l === 'om' && d.nameOm ? `${d.nameOm} (${d.name}${d.nameAm ? ' · ' + d.nameAm : ''})`
-        : (l === 'am' || l === 'am-latin') && d.nameAm ? `${d.nameAm} (${d.name})`
-        : `${d.name}${d.nameAm ? ' (' + d.nameAm + ')' : ''}`;
-      if (rows.length) depts = '\n\n## Departments in the BinaSmart demo hospital (DEMO DATA — say so; it is not a real place to attend)\n'
-        + rows.map(d => `- ${deptLabel(d)} · floor ${d.floor} room ${d.room}`
-          + (d.fee ? ` · fee ${d.fee} ETB` : '') + (d.openHours ? ` · ${JSON.stringify(d.openHours).slice(0, 60)}` : '')).join('\n');
-    } catch (e) { /* no departments, she simply has less to offer */ }
-
-    const grounding = String(ctx || '') + ' ' + depts;
-    let sys = afiya.SYSTEM + '\n\n' + biniLang.directive(lang) + (ctx ? '\n\n## Information you may use\n' + ctx : '') + depts
-      + `\n\nEmergency numbers, if they are ever needed: ambulance ${afiya.AMBULANCE}, police ${afiya.POLICE}, fire ${afiya.FIRE}.`;
-    if (afiya.isClinical(msg)) sys += '\n\nTHIS MESSAGE ASKS YOU TO DIAGNOSE, PRESCRIBE OR REASSURE. Decline in one warm sentence, then be immediately useful: which department, what to bring, how soon. Do not name an illness, a medicine or a dose.';
-
-    let text = await callBini(sys, [{ role: 'user', content: msg }], 700, {});
-    text = String(text || '').trim();
-
-    const d = afiya.stripDosage(text);
-    if (d.removed) console.warn('[afiya] removed ' + d.removed + ' dosage sentence(s)');
-    text = d.text;
-    const g = dropUngrounded(text, grounding);
-    if (g.dropped.length) console.warn('[afiya] dropped ungrounded ' + g.dropped.map(x => x.text).join(', '));
-    text = g.text;
-
-    if (!text) text = afiya.clinicalNudge(l).trim();
-    if (afiya.isClinical(msg) && !/ክፍል|department|kutaa/i.test(text)) text += afiya.clinicalNudge(l);
-    // If the reply repeats anything from the demo hospital it must say so. The prompt asks for
-    // this and the model complied in only 2 of 4 measured replies - not good enough when the reader
-    // is a parent deciding where to take a feverish child. Enforced here, like the ambulance number.
-    if (demoRows && demoRows.length && !/demo|fakkeenya|\u121b\u1233\u12eb|\u1219\u12a8\u122b/i.test(text)
-        && demoRows.some(d => [d.name, d.nameAm, d.nameOm, d.room].filter(Boolean).some(n => text.includes(n))))
-      text += afiya.demoNotice(l);
-    text += '\n\n' + afiya.disclosure(l);
-
-    biniMemory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: ['afiya'], miss: biniMemory.isMiss(text, { tools: ['afiya'], message: msg }), ms: Date.now() - t0 });
-    return { reply: text, emergency: false };
-  } catch (e) {
-    req.log && req.log.error({ err: e }, 'afiya failed');
-    return { reply: afiya.disclosure(l) + '\n' + (l === 'am'
-      ? 'ይቅርታ፣ አሁን መልስ መስጠት አልቻልኩም። አስቸኳይ ከሆነ ' + afiya.AMBULANCE + ' ይደውሉ።'
-      : 'Sorry, I could not answer just now. If this is urgent, call ' + afiya.AMBULANCE + '.') };
-  }
-});
+fastify.post('/api/afiya', (req, reply) => runAgent(afiyaAgent, req, reply));
 
 fastify.get('/api/assistant/misses', async (req, reply) => {
   if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
