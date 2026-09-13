@@ -3,18 +3,30 @@
 // Each tool is a pure function over the records loadBuildings() returned for the owner's scope, so the only
 // database access — and the only place scope and privacy are enforced — is ../building-data.js. Outputs
 // project named fields explicitly: nothing is passed through whole.
+//
+// An owner must read the same number from Bini as from the owner dashboard, so where server.js already
+// computes a figure these tools follow it, and say which endpoint beside the code.
 const { loadBuildings } = require('../building-data');
 
 const DAY = 86400000;
 const VAT_RATE = 0.15;                     // the same rate as server.js (VAT Proclamation 1341/2024); a test pins it
 const MONTH = /^\d{4}-(0[1-9]|1[0-2])$/;
-const OPEN = new Set(['OPEN', 'ASSIGNED', 'IN_PROGRESS']);
+const OPEN = new Set(['OPEN', 'ASSIGNED', 'IN_PROGRESS']);   // /api/owner/:slug/overview openMaintenance
+// The options of the public QR maintenance form (public/building.html #m-type; server.js /api/b/:slug/maintenance
+// stores whatever is posted, upper-cased). Anything else a stranger typed is reported as OTHER.
+const REPAIR_TYPES = new Set(['PLUMBING', 'ELECTRIC', 'LIFT', 'CLEANING', 'SECURITY', 'GENERAL']);
+const RESULT_LIMIT = 5000;                 // callBini cuts a tool result at 6000 characters
 
 const iso = d => d ? new Date(d).toISOString().slice(0, 10) : null;
 const monthOf = d => new Date(d).toISOString().slice(0, 7);
 const sum = (rows, f) => rows.reduce((s, r) => s + (f(r) || 0), 0);
 const daysSince = (d, now) => Math.max(0, Math.floor((now - d) / DAY));
 const occupant = t => t ? (t.shop ? (t.shop.nameAm || t.shop.name) : (t.user && t.user.fullName) || null) : null;
+const repairType = t => { const k = String(t == null ? '' : t).trim().toUpperCase(); return REPAIR_TYPES.has(k) ? k : 'OTHER'; };
+// The contract's dates, falling back to the tenancy's only when a tenancy has no Contract row.
+const contractEnd = t => (t.contract && t.contract.endDate) || t.endDate || null;
+const contractStart = t => (t.contract && t.contract.startDate) || t.startDate || null;
+const notPaid = i => i.status !== 'PAID';
 
 // The records of one building out of a (possibly multi-building) load.
 function view(data, b) {
@@ -40,73 +52,109 @@ function asOf(v) {
   return { newestInvoice: iso(inv), newestPayment: iso(pay) };
 }
 
+// Open repairs two ways. openRepairs is the dashboard's tile: requests carrying the building id (the QR form)
+// that are OPEN, ASSIGNED or IN_PROGRESS. openRepairsAll adds requests filed against a tenancy with no
+// building id, which the dashboard does not show.
+function openRepairs(v) {
+  const open = v.repairs.filter(r => OPEN.has(r.status));
+  return { openRepairs: open.filter(r => r.buildingId === v.b.id).length, openRepairsAll: open.length };
+}
+
 function currentOccupant(v, unitId, tenancyId) {
   const t = ((v.byUnit.get(unitId) || {}).tenancies || [])[0];
   return t && t.id === tenancyId ? occupant(t) : null;   // an old tenancy's invoice names nobody
 }
+
+// Invoice statuses: /overview and /accounting count every status, CANCELLED included — invoiced is the sum of
+// all of a month's invoices, collected is PAID, outstanding is everything not PAID. The tools do the same and
+// report cancelledCount beside it. No code path sets an invoice to CANCELLED today (13 Sep 2026), so the
+// count is 0 in practice; if one is ever added, change the dashboard and these tools together.
+function monthInvoices(v, month) { return v.invoices.filter(i => monthOf(i.dueDate) === month); }
 
 const TOOLS = {
   data_health(v, a, now) {
     const rentMonths = new Set(v.invoices.filter(i => i.type === 'RENT').map(i => monthOf(i.dueDate)));
     const missing = [];
     for (let k = 0; k < 3; k++) {
+      // This month's rent invoices fall due on the 5th (generateInvoicesForBuilding); not missing before the 6th.
+      if (k === 0 && now.getUTCDate() < 6) continue;
       const m = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - k, 1)).toISOString().slice(0, 7);
       if (!rentMonths.has(m)) missing.push(m);
     }
+    let expired = 0;
+    for (const u of v.units) for (const t of u.tenancies) { const e = contractEnd(t); if (e && e < now) expired++; }
     return { units: v.units.length, activeTenancies: v.units.filter(u => u.tenancies.length).length,
       invoices: v.invoices.length, invoicesPaid: v.invoices.filter(i => i.status === 'PAID').length,
       rentMonthsWithoutInvoices: missing, expensesRecorded: v.expenses.length,
-      openRepairs: v.repairs.filter(r => OPEN.has(r.status)).length, ...asOf(v) };
+      ...openRepairs(v), contractsExpiredStillActive: expired, ...asOf(v) };
   },
 
+  // /api/owner/:slug/overview stats: expectedMonthly sums Unit.monthlyRent of OCCUPIED units; vacant is
+  // units - occupied (so a RESERVED or MAINTENANCE unit counts as vacant there too — otherStatus says how many).
   overview(v) {
-    const occupied = v.units.filter(u => u.status === 'OCCUPIED').length;
-    const vacant = v.units.filter(u => u.status === 'VACANT').length;
-    return { units: v.units.length, occupied, vacant, otherStatus: v.units.length - occupied - vacant,
-      expectedMonthlyRentEtb: sum(v.units, u => u.monthlyRent), openRepairs: v.repairs.filter(r => OPEN.has(r.status)).length, ...asOf(v) };
+    const occ = v.units.filter(u => u.status === 'OCCUPIED');
+    const vacantOnly = v.units.filter(u => u.status === 'VACANT').length;
+    return { units: v.units.length, occupied: occ.length, vacant: v.units.length - occ.length,
+      otherStatus: v.units.length - occ.length - vacantOnly,
+      expectedMonthlyRentEtb: sum(occ, u => u.monthlyRent), rentIfAllLetEtb: sum(v.units, u => u.monthlyRent),
+      ...openRepairs(v), ...asOf(v) };
   },
 
+  // /api/owner/:slug/overview collection for the current month (invoiceCount, paidCount, collected, outstanding):
+  // invoices by due date in the UTC calendar month, every type and status.
   rent_month(v, a, now) {
     const month = a.month || monthOf(now);
-    const live = v.invoices.filter(i => monthOf(i.dueDate) === month && i.status !== 'CANCELLED');
-    const paid = live.filter(i => i.status === 'PAID');
-    const unpaid = live.filter(i => i.status !== 'PAID');
-    const overdue = unpaid.filter(i => i.dueDate < now);
-    return { month, invoices: live.length, invoicedEtb: sum(live, i => i.amount),
+    const all = monthInvoices(v, month);
+    const paid = all.filter(i => i.status === 'PAID');
+    const unpaid = all.filter(notPaid);
+    const overdue = unpaid.filter(i => i.dueDate < now);   // /units marks a not-PAID invoice past its due date OVERDUE
+    return { month, invoices: all.length, invoicedEtb: sum(all, i => i.amount),
       paidCount: paid.length, paidEtb: sum(paid, i => i.amount),
       unpaidCount: unpaid.length, unpaidEtb: sum(unpaid, i => i.amount),
       overdueCount: overdue.length, overdueEtb: sum(overdue, i => i.amount),
-      partialCount: live.filter(i => i.status === 'PARTIAL').length, lateFeesEtb: sum(live, i => i.lateFee), ...asOf(v) };
+      partialCount: all.filter(i => i.status === 'PARTIAL').length, cancelledCount: all.filter(i => i.status === 'CANCELLED').length,
+      lateFeesEtb: sum(all, i => i.lateFee), ...asOf(v) };
   },
 
+  // Every invoice not PAID, as /overview's outstanding; overdue = due date passed, as /units.
   unpaid(v, a, now) {
     const list = v.invoices
-      .filter(i => i.status !== 'PAID' && i.status !== 'CANCELLED' && (!a.month || monthOf(i.dueDate) === a.month))
+      .filter(i => notPaid(i) && (!a.month || monthOf(i.dueDate) === a.month))
       .map(i => ({ unit: (v.byUnit.get(i.tenancy.unitId) || {}).number || null, occupant: currentOccupant(v, i.tenancy.unitId, i.tenancyId),
-        type: i.type, amountEtb: i.amount, dueDate: iso(i.dueDate), daysLate: i.dueDate < now ? daysSince(i.dueDate, now) : 0, status: i.status }))
+        type: i.type, amountEtb: i.amount, dueDate: iso(i.dueDate), daysLate: i.dueDate < now ? daysSince(i.dueDate, now) : 0, status: i.status,
+        overdue: i.dueDate < now }))
       .sort((x, y) => y.daysLate - x.daysLate);
-    return { count: list.length, totalEtb: sum(list, r => r.amountEtb), invoices: list.slice(0, 40), truncated: list.length > 40, ...asOf(v) };
+    const overdue = list.filter(r => r.overdue);
+    return { count: list.length, totalEtb: sum(list, r => r.amountEtb), overdueCount: overdue.length, overdueEtb: sum(overdue, r => r.amountEtb),
+      invoices: list.slice(0, 40).map(({ overdue: _o, ...r }) => r), truncated: list.length > 40, ...asOf(v) };
   },
 
+  // Rent as /units shows it (Unit.monthlyRent); contract dates and rent from Contract, as /units and the report.
   unit(v, a) {
     const n = String(a.number || '').trim().toLowerCase();
     const u = v.units.find(x => String(x.number).toLowerCase() === n);
     if (!u) return { found: false };
     const t = u.tenancies[0];
     return { found: true, number: u.number, floor: u.floor, areaSqm: u.areaSqm, monthlyRentEtb: u.monthlyRent, status: u.status, type: u.unitType,
-      occupant: occupant(t), contractStart: t ? iso(t.startDate) : null, contractEnd: t ? iso(t.endDate) : null,
+      occupant: occupant(t), contractStart: t ? iso(contractStart(t)) : null, contractEnd: t ? iso(contractEnd(t)) : null,
+      contractRentEtb: t && t.contract ? t.contract.monthlyRent : null,
       invoices: v.invoices.filter(i => i.tenancy.unitId === u.id).sort((x, y) => y.dueDate - x.dueDate).slice(0, 12)
         .map(i => ({ type: i.type, amountEtb: i.amount, dueDate: iso(i.dueDate), paidDate: iso(i.paidDate), status: i.status })),
+      // requests filed against this unit's tenancy; QR-form requests carry the unit only in their free text
       openRepairs: v.repairs.filter(r => OPEN.has(r.status) && r.tenancy && r.tenancy.unit && r.tenancy.unit.number === u.number).length };
   },
 
+  // No dashboard equivalent. Marking an invoice paid (/api/admin/invoices/:id/pay) writes paidDate but never
+  // daysLate, so a paid invoice's lateness is paidDate - dueDate. Cancelled invoices are not late payments.
   late_payers(v, a, now) {
     const months = Math.min(Math.max(parseInt(a.months, 10) || 3, 1), 12);
     const from = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - months + 1, 1));
     const rows = new Map();
     for (const i of v.invoices) {
       if (i.type !== 'RENT' || i.status === 'CANCELLED' || i.dueDate < from || i.dueDate > now) continue;
-      const days = i.status === 'PAID' ? (i.daysLate || 0) : daysSince(i.dueDate, now);
+      const days = i.status === 'PAID'
+        ? (i.paidDate ? Math.max(0, Math.floor((i.paidDate - i.dueDate) / DAY)) : (i.daysLate || 0))
+        : daysSince(i.dueDate, now);
       const r = rows.get(i.tenancy.unitId) || { invoices: 0, late: 0, days: 0 };
       r.invoices++;
       if (days > 0) { r.late++; r.days += days; }
@@ -119,37 +167,52 @@ const TOOLS = {
     return { months, from: iso(from), units: units.slice(0, 40), ...asOf(v) };
   },
 
+  // Every unit that is not OCCUPIED, so count = /overview stats.vacant; status tells VACANT from RESERVED etc.
   vacant(v) {
     const endedAt = new Map();
     for (const t of v.ended) if (t.endDate && (!endedAt.has(t.unitId) || t.endDate > endedAt.get(t.unitId))) endedAt.set(t.unitId, t.endDate);
-    const units = v.units.filter(u => u.status === 'VACANT')
-      .map(u => ({ number: u.number, floor: u.floor, areaSqm: u.areaSqm, monthlyRentEtb: u.monthlyRent,
+    const units = v.units.filter(u => u.status !== 'OCCUPIED')
+      .map(u => ({ number: u.number, floor: u.floor, areaSqm: u.areaSqm, monthlyRentEtb: u.monthlyRent, status: u.status,
         vacantSince: iso(endedAt.get(u.id)), enquiries: u._count ? u._count.leads : 0 }))
       .sort((x, y) => String(x.number).localeCompare(String(y.number), undefined, { numeric: true }));
     return { count: units.length, units: units.slice(0, 60) };
   },
 
+  // Contract.endDate, as the daily renewal report (runDailyChecks: active tenancies whose contract ends between
+  // now and now + 90 days) and /units contractDays. ending = end date from now to now + N days; expired = end
+  // date already passed while the tenancy is still active. The dashboard's red contract tag (contractDays <= 60)
+  // covers both lists.
   contracts_ending(v, a, now) {
     const days = Math.min(Math.max(parseInt(a.days, 10) || 60, 1), 365);
     const until = new Date(now.getTime() + days * DAY);
-    const contracts = [];
-    for (const u of v.units) for (const t of u.tenancies)
-      if (t.endDate && t.endDate >= now && t.endDate <= until) contracts.push({ unit: u.number, occupant: occupant(t), endDate: iso(t.endDate) });
-    contracts.sort((x, y) => x.endDate.localeCompare(y.endDate));
-    return { days, count: contracts.length, contracts: contracts.slice(0, 40) };
+    const ending = [], expired = [];
+    for (const u of v.units) for (const t of u.tenancies) {
+      const end = contractEnd(t);
+      if (!end) continue;
+      const row = { unit: u.number, occupant: occupant(t), endDate: iso(end) };
+      if (end < now) expired.push(row);
+      else if (end <= until) ending.push(row);
+    }
+    ending.sort((x, y) => x.endDate.localeCompare(y.endDate));
+    expired.sort((x, y) => x.endDate.localeCompare(y.endDate));
+    return { days, endingCount: ending.length, ending: ending.slice(0, 40), expiredCount: expired.length, expired: expired.slice(0, 40) };
   },
 
+  // Every in-scope request (QR form and tenancy-filed). Its open count is openRepairsAll; overview's openRepairs
+  // is the dashboard tile.
   repairs(v, a) {
     const all = String(a.status || 'open') === 'all';
     const list = v.repairs.filter(r => all || OPEN.has(r.status)).sort((x, y) => y.createdAt - x.createdAt)
-      .map(r => ({ unit: r.tenancy && r.tenancy.unit ? r.tenancy.unit.number : null, type: r.type, status: r.status,
+      .map(r => ({ unit: r.tenancy && r.tenancy.unit ? r.tenancy.unit.number : null, type: repairType(r.type), status: r.status,
         reported: iso(r.createdAt), resolved: iso(r.resolvedAt), assigned: !!r.assignedTo }));
     return { count: list.length, repairs: list.slice(0, 40) };
   },
 
+  // /api/owner/:slug/accounting: invoiced = every invoice due in the month, collected = PAID,
+  // outstanding = invoiced - collected, output VAT on invoiced, input VAT from expenses.
   money(v, a, now) {
     const month = a.month || monthOf(now);
-    const inv = v.invoices.filter(i => monthOf(i.dueDate) === month && i.status !== 'CANCELLED');
+    const inv = monthInvoices(v, month);
     const invoiced = sum(inv, i => i.amount);
     const collected = sum(inv.filter(i => i.status === 'PAID'), i => i.amount);
     const exps = v.expenses.filter(e => monthOf(e.date) === month);
@@ -158,7 +221,9 @@ const TOOLS = {
     const expenses = sum(exps, e => e.amount);
     const outputVat = v.b.vatRegistered ? Math.round(v.b.vatInclusive ? invoiced * VAT_RATE / (1 + VAT_RATE) : invoiced * VAT_RATE) : 0;
     const inputVat = v.b.vatRegistered ? sum(exps, e => e.vatAmount) : 0;
-    return { month, invoicedEtb: invoiced, collectedEtb: collected, expensesEtb: expenses, expensesByCategory: byCategory,
+    return { month, invoicedEtb: invoiced, collectedEtb: collected, outstandingEtb: invoiced - collected,
+      cancelledCount: inv.filter(i => i.status === 'CANCELLED').length,
+      expensesEtb: expenses, expensesByCategory: byCategory,
       vatRegistered: !!v.b.vatRegistered, outputVatEtb: outputVat, inputVatEtb: inputVat, netVatEtb: outputVat - inputVat,
       collectedMinusExpensesEtb: collected - expenses, ...asOf(v) };
   },
@@ -170,24 +235,55 @@ const def = (name, description, properties = {}) =>
   ({ type: 'function', function: { name, description, parameters: { type: 'object', properties: Object.assign({ building: BUILDING }, properties) } } });
 
 const DEFS = [
-  def('data_health', 'What the records of the building contain and what is missing: units, tenancies, invoices, payments, months with no rent invoices, expenses, open repairs, and how recent the records are. Call it first for a general question, or when figures look incomplete.'),
-  def('overview', 'Units occupied and vacant, expected monthly rent of all units, open repairs, and how recent the records are.'),
-  def('rent_month', 'Rent and other invoices due in one month: how many, invoiced, paid, unpaid and overdue amounts in ETB, late fees.', { month: MONTH_ARG }),
-  def('unpaid', 'Invoices not paid yet, oldest first: unit, tenant or shop, amount in ETB, due date, days late.', { month: { type: 'string', description: 'Optional YYYY-MM to limit to one month.' } }),
-  def('unit', 'One unit by its number: rent, size, floor, status, tenant or shop, contract dates, last 12 invoices, open repairs.', { number: { type: 'string', description: 'The unit number as written on the contract, e.g. 707 or G-003.' } }),
+  def('data_health', 'What the records of the building contain and what is missing: units, tenancies, invoices, payments, months with no rent invoices, expenses, open repairs, contracts past their end date, and how recent the records are. Call it first for a general question, or when figures look incomplete.'),
+  def('overview', 'Units occupied and vacant (vacant = not occupied, as on the dashboard), expected monthly rent of the occupied units (the dashboard figure), rent if every unit were let, open repairs (openRepairs is the dashboard figure; openRepairsAll adds requests filed by tenants), and how recent the records are.'),
+  def('rent_month', 'All invoices due in one month, as on the dashboard: how many, invoiced, paid, unpaid (the dashboard\'s outstanding) and overdue amounts in ETB, cancelled invoices, late fees.', { month: MONTH_ARG }),
+  def('unpaid', 'Invoices not paid yet, oldest first: unit, tenant or shop, amount in ETB, due date, days late; total unpaid and how much of it is already overdue.', { month: { type: 'string', description: 'Optional YYYY-MM to limit to one month.' } }),
+  def('unit', 'One unit by its number: rent, size, floor, status, tenant or shop, contract start, end and rent, last 12 invoices, open repairs filed by its tenant.', { number: { type: 'string', description: 'The unit number as written on the contract, e.g. 707 or G-003.' } }),
   def('late_payers', 'Units that paid rent late (or have not paid) at least twice in the last N months, with average days late.', { months: { type: 'integer', description: 'How many recent months, 1-12. Default 3.' } }),
-  def('vacant', 'Vacant units: number, floor, size, rent, vacant since, enquiries received.'),
-  def('contracts_ending', 'Contracts that end within the next N days: unit, tenant or shop, end date.', { days: { type: 'integer', description: '1-365. Default 60.' } }),
-  def('repairs', 'Repair requests: unit, type, status, reported and resolved dates, whether someone is assigned.', { status: { type: 'string', enum: ['open', 'all'], description: 'open (default) or all.' } }),
-  def('money', 'One month of money: invoiced, collected, expenses by category, VAT collected, VAT paid on expenses, net VAT, collected minus expenses. Figures only, not tax advice.', { month: MONTH_ARG }),
+  def('vacant', 'Units that are not occupied: number, floor, size, rent, status, vacant since, enquiries received.'),
+  def('contracts_ending', 'Contracts that end within the next N days (ending) and contracts whose end date has already passed while the tenant is still in the unit (expired): unit, tenant or shop, end date.', { days: { type: 'integer', description: '1-365. Default 60.' } }),
+  def('repairs', 'Repair requests: unit, category, status, reported and resolved dates, whether someone is assigned.', { status: { type: 'string', enum: ['open', 'all'], description: 'open (default) or all.' } }),
+  def('money', 'One month of money, as the dashboard\'s accounting tab: invoiced, collected, outstanding, cancelled invoices, expenses by category, VAT collected, VAT paid on expenses, net VAT, collected minus expenses. Figures only, not tax advice.', { month: MONTH_ARG }),
 ];
+
+// Exact slug, name or Amharic name first; part of a name only when nothing matches exactly and the owner
+// wrote at least three characters (so "Test Plaza" is not also "Test Plaza Annex", and "a" is nobody).
+function pickBuildings(buildings, building) {
+  const q = building == null ? '' : String(building).trim().toLowerCase();
+  if (!q) return buildings;
+  const names = b => [b.qrSlug, b.name, b.nameAm].filter(Boolean).map(n => String(n).toLowerCase());
+  const exact = buildings.filter(b => names(b).includes(q));
+  if (exact.length || q.length < 3) return exact;
+  return buildings.filter(b => names(b).some(n => n.includes(q)));
+}
+
+// Shorten list arrays, longest first, until the whole result fits RESULT_LIMIT. Totals, counts and dates
+// are never touched; a shortened building and the result say truncated: true.
+function fit(result) {
+  let size = JSON.stringify(result).length;
+  if (size <= RESULT_LIMIT) return result;
+  const lists = [];
+  for (const b of result.buildings) for (const k of Object.keys(b)) if (Array.isArray(b[k])) lists.push([b, k]);
+  while (size > RESULT_LIMIT) {
+    let best = null;
+    for (const l of lists) if (l[0][l[1]].length && (!best || l[0][l[1]].length > best[0][best[1]].length)) best = l;
+    if (!best) break;
+    const [b, k] = best;
+    b[k] = b[k].slice(0, Math.floor(b[k].length * 3 / 4));
+    b.truncated = true;
+    size = JSON.stringify(result).length;
+  }
+  result.truncated = true;
+  return result;
+}
 
 function makeExecutor({ prisma, now = () => new Date(), warn = m => console.warn(m) }) {
   return function bind(scope) {
     let loading = null;   // one load per question, however many tools the model calls
     return async function execute(name, args) {
+      if (typeof name !== 'string' || !Object.hasOwn(TOOLS, name)) return { error: 'unknown tool ' + String(name) };
       const fn = TOOLS[name];
-      if (!fn) return { error: 'unknown tool ' + name };
       args = args && typeof args === 'object' ? args : {};
       if (args.month != null && !MONTH.test(String(args.month))) return { error: 'month must look like 2026-09' };
       const t = now();
@@ -200,12 +296,11 @@ function makeExecutor({ prisma, now = () => new Date(), warn = m => console.warn
         warn('[owner] records unavailable: ' + (e && e.message || e));
         return { error: 'records unavailable' };
       }
-      const q = args.building ? String(args.building).toLowerCase() : null;
-      const bs = q ? data.buildings.filter(b => [b.qrSlug, b.name, b.nameAm].filter(Boolean).some(n => n.toLowerCase().includes(q))) : data.buildings;
+      const bs = pickBuildings(data.buildings, args.building);
       if (!bs.length) return { error: 'no such building for this owner' };
-      return { buildings: bs.map(b => Object.assign({ building: b.name, buildingAm: b.nameAm || null }, fn(view(data, b), args, t))) };
+      return fit({ buildings: bs.map(b => Object.assign({ building: b.name, buildingAm: b.nameAm || null }, fn(view(data, b), args, t))) });
     };
   };
 }
 
-module.exports = { TOOLS, DEFS, VAT_RATE, view, makeExecutor };
+module.exports = { TOOLS, DEFS, VAT_RATE, REPAIR_TYPES, view, makeExecutor };
