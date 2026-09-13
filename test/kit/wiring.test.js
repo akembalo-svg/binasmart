@@ -30,3 +30,28 @@ test('no Afiya or Asmat pipeline step is left in server.js', () => {
   for (const step of ['afiya.stripDosage(', 'asmat.stripVerdict(', 'asmat.assessmentCaution(', 'afiya.demoNotice('])
     assert.equal(src.includes(step), false, step + ' is still called from server.js');
 });
+
+test('the owner route authenticates, then hands the engine a scope taken from the key, never from the body', () => {
+  const at = src.indexOf("fastify.post('/api/owner/:slug/ai'");
+  assert.ok(at > 0, 'owner route not found');
+  const body = src.slice(at, src.indexOf('\n});', at));
+  const auth = body.indexOf('authBuildingFail(req, reply, req.params.slug)');
+  const run = body.indexOf("runAgent(ownerAgent, req, reply, { scope: { buildingIds: [b.id] }, channel: 'owner-web' })");
+  assert.ok(auth > 0 && run > auth, 'must authenticate before running the agent, with the key-derived scope');
+  assert.equal(/req\.body/.test(body), false, 'the scope must not come from the request body');
+  assert.equal(/callBini\(/.test(body), false, 'the owner route must not call the model directly any more');
+  const engine = src.slice(src.indexOf('const runAgent = makeEngine('), src.indexOf('});', src.indexOf('const runAgent = makeEngine(')));
+  assert.ok(engine.includes('audit'), 'the engine needs audit for the owner agent');
+  assert.ok(src.includes("const ownerAgent = require('./agents/owner/rules');"));
+});
+
+test('the accounting audit trail leaves out owner Bini questions, so they cannot push payments and expenses off it', () => {
+  const at = src.indexOf("fastify.get('/api/owner/:slug/accounting'");
+  assert.ok(at > 0, 'accounting route not found');
+  const body = src.slice(at, src.indexOf('\n});', at));
+  const q = body.slice(body.indexOf('prisma.auditLog.findMany('), body.indexOf('\n', body.indexOf('prisma.auditLog.findMany(')));
+  assert.ok(q.length > 0, 'the accounting route no longer reads the audit log');
+  assert.ok(q.includes("action: { not: 'OWNER_BINI_Q' }"), 'the accounting audit query must exclude OWNER_BINI_Q');
+  // every audit list in server.js is the accounting one; a new one must decide about OWNER_BINI_Q too
+  assert.equal(src.split('prisma.auditLog.findMany(').length - 1, 1, 'a new audit list must exclude OWNER_BINI_Q where owners see it');
+});

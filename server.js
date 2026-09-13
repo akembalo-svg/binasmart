@@ -1144,9 +1144,10 @@ fastify.post('/api/assistant/transcribe', { bodyLimit: 4 * 1024 * 1024 }, async 
 const { makeEngine } = require('./assistant/kit/engine');
 const afiyaAgent = require('./agents/afiya/rules');
 const asmatAgent = require('./agents/asmat/rules');
+const ownerAgent = require('./agents/owner/rules');
 const runAgent = makeEngine({
   callModel: callBini, contextFor: (q, o) => knowledge.contextFor(q, o), lang: biniLang, memory: biniMemory,
-  handover: biniHandover, dropUngrounded, isEval, prisma,
+  handover: biniHandover, dropUngrounded, isEval, prisma, audit,
 });
 
 // ===== Asmat (አስማት): Ethiopian legal procedure and documents. Not a lawyer, and built so he cannot act like one. =====
@@ -2372,7 +2373,8 @@ fastify.get('/api/owner/:slug/accounting', async (req, reply) => {
   const inputVat = b.vatRegistered ? expenses.reduce((s, e) => s + e.vatAmount, 0) : 0;
   const netVat = outputVat - inputVat;
   const due = new Date(Date.UTC(y, mo + 1, 0)); // last day of following month
-  const auditRows = await prisma.auditLog.findMany({ where: { buildingId: b.id }, orderBy: { createdAt: 'desc' }, take: 40 });
+  // Owner Bini questions are audited too; left out here so they cannot push payments and expenses off the trail.
+  const auditRows = await prisma.auditLog.findMany({ where: { buildingId: b.id, action: { not: 'OWNER_BINI_Q' } }, orderBy: { createdAt: 'desc' }, take: 40 });
   return {
     month: m, vat: { registered: b.vatRegistered, number: b.vatNumber, inclusive: b.vatInclusive, rate: VAT_RATE,
       taxable, outputVat, inputVat, netVat, filingDue: due.toISOString().slice(0, 10) },
@@ -2418,51 +2420,14 @@ fastify.post('/api/owner/:slug/vat-settings', async (req, reply) => {
   return { ok: true };
 });
 
-// ===== Owner AI agent — GLM-backed, scoped to THIS owner's building only =====
+// ===== Owner AI agent — scoped to THIS owner's building only =====
+// Bini for the owner of this building, answer only: agents/owner reads this building through scoped,
+// read-only tools. The scope comes from the owner key checked here, never from the request.
 fastify.post('/api/owner/:slug/ai', async (req, reply) => {
   if (await authBuildingFail(req, reply, req.params.slug)) return;
-  const msg = String((req.body || {}).message || '').slice(0, 800).trim();
-  if (!msg) return reply.code(400).send({ error: 'message_required' });
-  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, include: { units: true } });
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
   if (!b) return reply.code(404).send({ error: 'not_found' });
-  const now = new Date();
-  const m = now.toISOString().slice(0, 7); const [y, mo] = m.split('-').map(Number);
-  const start = new Date(Date.UTC(y, mo - 1, 1)), end = new Date(Date.UTC(y, mo, 1));
-  const units = b.units || [];
-  const occupied = units.filter(u => u.status === 'OCCUPIED').length;
-  const vacant = units.filter(u => u.status === 'VACANT').length;
-  const expectedRent = units.reduce((s, u) => s + (u.monthlyRent || 0), 0);
-  const vacantList = units.filter(u => u.status === 'VACANT').map(u => u.number).slice(0, 30).join(', ') || 'none';
-  let invoiced = 0, collected = 0, outstanding = 0, overdueN = 0, overdueAmt = 0, outputVat = 0, inputVat = 0, netVat = 0, openMaint = 0;
-  try {
-    const invs = await prisma.invoice.findMany({ where: { tenancy: { unit: { buildingId: b.id } }, dueDate: { gte: start, lt: end } } });
-    invoiced = invs.reduce((s, i) => s + i.amount, 0);
-    collected = invs.filter(i => i.status === 'PAID').reduce((s, i) => s + i.amount, 0);
-    outstanding = invoiced - collected;
-    const od = invs.filter(i => i.status !== 'PAID' && i.dueDate < now);
-    overdueN = od.length; overdueAmt = od.reduce((s, i) => s + i.amount, 0);
-    outputVat = b.vatRegistered ? Math.round(b.vatInclusive ? invoiced * VAT_RATE / (1 + VAT_RATE) : invoiced * VAT_RATE) : 0;
-    const exps = await prisma.expense.findMany({ where: { buildingId: b.id, date: { gte: start, lt: end } } });
-    inputVat = b.vatRegistered ? exps.reduce((s, e) => s + (e.vatAmount || 0), 0) : 0;
-    netVat = outputVat - inputVat;
-  } catch (e) {}
-  try { openMaint = await prisma.maintenanceRequest.count({ where: { unit: { buildingId: b.id }, status: { not: 'DONE' } } }); } catch (e) {}
-  const data = `Building: ${b.name}${b.nameAm ? ' / ' + b.nameAm : ''} (${b.city || ''}).
-Units: ${units.length} total — ${occupied} occupied, ${vacant} vacant. Vacant unit numbers: ${vacantList}.
-Expected monthly rent (all units): ${expectedRent} ETB.
-This month (${m}): invoiced ${invoiced} ETB, collected ${collected} ETB, outstanding ${outstanding} ETB.
-Overdue invoices: ${overdueN} (total ${overdueAmt} ETB).
-Open maintenance requests: ${openMaint}.
-VAT registered: ${b.vatRegistered ? ('yes, no. ' + (b.vatNumber || '-')) : 'no'}. This month output VAT ${outputVat} ETB, input VAT ${inputVat} ETB, net VAT payable ${netVat} ETB (rate ${Math.round(VAT_RATE*100)}%).
-TIN: ${b.tinNumber || '-'}.`;
-  const SYS = `You are "Bini", the BinaSmart assistant for the OWNER of this building. Answer ONLY from the DATA below about THIS building — never invent numbers. Reply in the user's language (Amharic or English), short and concrete, and give exact figures from the data (amounts in ETB). If the answer isn't in the data, say so briefly and point to the relevant dashboard tab (Overview, Rent Collection, Accounting, Maintenance). Do not give tax-filing or legal advice beyond the figures shown.
-DATA:
-${data}`;
-  const FALLBACK = 'ይቅርታ፣ አሁን መልስ መስጠት አልቻልኩም። እባክዎ ዳሽቦርዱን ይመልከቱ።';
-  try {
-    const text = await callBini(SYS, [{ role: 'user', content: msg }], 700);
-    return reply.send({ reply: text || FALLBACK });
-  } catch (e) { return reply.send({ reply: FALLBACK }); }
+  return runAgent(ownerAgent, req, reply, { scope: { buildingIds: [b.id] }, channel: 'owner-web' });
 });
 
 // ===== SMART NOTIFICATIONS + PENALTIES (daily engine) =====
