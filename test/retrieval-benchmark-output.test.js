@@ -8,7 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { resultName, writeResult } = require('../ops/bini/rerun-retrieval-benchmark');
+const { resultName, writeResult, goldPath, goldTag, latestName, pagesContaining, GOLD } = require('../ops/bini/rerun-retrieval-benchmark');
 
 test('the file name carries the UTC date and time to the second', () => {
   assert.equal(resultName(new Date('2026-09-13T22:09:55.990Z')), 'retrieval-20260913-220955.json');
@@ -48,4 +48,33 @@ test('requiring the script does not run the benchmark', () => {
   // it would open a DB connection and spend Gemini calls just by being tested
   const mod = require('../ops/bini/rerun-retrieval-benchmark');
   assert.equal(typeof mod.writeResult, 'function');
+});
+
+// A second gold set (v2, 14 September) must be selectable without changing what a plain run measures,
+// and its results must never land in the files the v1 figures are read from.
+test('the gold set defaults to v1; --gold beats $BINI_GOLD', () => {
+  assert.equal(goldPath(['node', 'x'], {}), GOLD);
+  assert.equal(goldPath(['node', 'x'], { BINI_GOLD: '/tmp/g2.json' }), '/tmp/g2.json');
+  assert.equal(goldPath(['node', 'x', '--gold', '/tmp/g3.json'], { BINI_GOLD: '/tmp/g2.json' }), '/tmp/g3.json');
+});
+
+test('v1 keeps its file names; another gold set gets its own dated file and its own latest', () => {
+  assert.equal(goldTag(GOLD), '');
+  assert.equal(goldTag('/root/storage/bina-embed/eval/gold-v2.json'), 'gold-v2');
+  assert.equal(resultName(new Date('2026-09-14T10:15:00Z'), 'gold-v2'), 'retrieval-gold-v2-20260914-101500.json');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bini-eval-'));
+  writeResult(dir, { run: 'v1' }, new Date('2026-09-13T22:18:25Z'));
+  writeResult(dir, { run: 'v2' }, new Date('2026-09-14T10:15:00Z'), { tag: 'gold-v2' });
+  assert.equal(JSON.parse(fs.readFileSync(path.join(dir, 'retrieval-latest.json'), 'utf8')).run, 'v1');
+  assert.equal(JSON.parse(fs.readFileSync(path.join(dir, latestName('gold-v2')), 'utf8')).run, 'v2');
+});
+
+test('"any page" finds every page holding the passage, across line breaks, and nothing else', () => {
+  const chunks = [
+    { slug: 'ena/a', text: 'ዜና\nኡስማን ደምቤሌ   የወቅቱ\nየባሎን ዶር አሸናፊ ነው።' },
+    { slug: 'fana/b', text: 'ኡስማን ደምቤሌ የወቅቱ የባሎን ዶር አሸናፊ ነው' },
+    { slug: 'ebc/c', text: 'ኡስማን ደምቤሌ ተጫዋች ነው' },
+  ];
+  assert.deepEqual([...pagesContaining(chunks, 'ኡስማን ደምቤሌ የወቅቱ የባሎን ዶር አሸናፊ ነው')].sort(), ['ena/a', 'fana/b']);
+  assert.equal(pagesContaining(chunks, '').size, 0);
 });
