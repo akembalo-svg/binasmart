@@ -77,6 +77,7 @@ test('unit gives one unit with its contract dates from the Contract, and a unit 
   assert.equal(u.contractStart, '2025-10-16'); assert.equal(u.contractEnd, '2026-10-15');
   assert.deepEqual(u.invoices.map(i => i.dueDate), ['2026-07-01', '2026-06-01', '2026-06-01']);
   assert.equal(u.openRepairs, 1);
+  assert.equal(u.newestInvoice, '2026-07-01'); assert.equal(u.newestPayment, '2026-07-03');
   assert.deepEqual(one('unit', { number: '999' }), { found: false });
   const data = fixture();
   data.units[0].tenancies[0].contract = null;
@@ -197,6 +198,34 @@ test('the executor loads once per question, checks arguments, and never leaves t
   assert.deepEqual(await run('overview', { building: 'somewhere else' }), { error: 'no such building for this owner' });
 });
 
+test('the executor never hands the model a tenant or shop name: occupants become tokens it can map back', async () => {
+  const run = B.makeExecutor({ prisma: fakePrisma().prisma, now: () => NOW })({ buildingIds: ['b1'] });
+  assert.ok(run.names instanceof Map);
+  assert.equal(run.names.size, 0);
+  const unpaid = (await run('unpaid', {})).buildings[0];
+  assert.deepEqual(unpaid.invoices.map(i => [i.unit, i.occupant]), [['102', '[[P1]]'], ['101', '[[P2]]'], ['102', '[[P1]]']]);
+  const unit = (await run('unit', { number: '101' })).buildings[0];
+  assert.equal(unit.occupant, '[[P2]]', 'the same tenant keeps the same token for the whole question');
+  const late = (await run('late_payers', { months: 4 })).buildings[0];
+  assert.deepEqual(late.units.map(x => [x.unit, x.occupant]), [['102', '[[P1]]'], ['101', '[[P2]]']]);
+  const ending = (await run('contracts_ending', { days: 60 })).buildings[0];
+  assert.deepEqual(ending.ending.map(x => [x.unit, x.occupant]), [['101', '[[P2]]']]);
+  assert.deepEqual(ending.expired.map(x => [x.unit, x.occupant]), [['102', '[[P1]]']]);
+  assert.deepEqual([...run.names], [['[[P1]]', 'Test Cafe'], ['[[P2]]', 'Abebe Test']]);
+  const everything = [];
+  for (const n of Object.keys(B.TOOLS)) everything.push(await run(n, n === 'unit' ? { number: '101' } : { months: 12, days: 365, status: 'all' }));
+  everything.push(await run('unit', { number: '102' }), await run('unpaid', { month: '2026-06' }));
+  assert.doesNotMatch(JSON.stringify(everything), /Abebe|Test Cafe|Owner Of Cafe/);
+  assert.equal(run.names.size, 2);
+  const fresh = B.makeExecutor({ prisma: fakePrisma().prisma, now: () => NOW })({ buildingIds: ['b1'] });
+  assert.equal(fresh.names.size, 0, 'each question starts with no tokens');
+  // a second building's tenant gets a token of its own
+  const both = B.makeExecutor({ prisma: fakePrisma(twoBuildings()).prisma, now: () => NOW })({ buildingIds: ['b1', 'b2'] });
+  const units = (await both('unit', { number: '101' })).buildings.map(b => b.occupant);
+  assert.deepEqual(units, ['[[P1]]', '[[P2]]']);
+  assert.deepEqual([...both.names.values()], ['Abebe Test', 'Annex Tenant']);
+});
+
 test('a building is chosen by exact name first, and by part of a name only from three characters', async () => {
   const run = B.makeExecutor({ prisma: fakePrisma(twoBuildings()).prisma, now: () => NOW })({ buildingIds: ['b1', 'b2'] });
   const names = async building => {
@@ -221,7 +250,8 @@ function manyUnpaid(data, tenancyId, unitId, n) {
 
 test('a long answer is shortened to fit, keeping its totals, and says so', async () => {
   const data = fixture();
-  data.units[0].tenancies[0].shop = { name: 'A Deliberately Long Shop Name For The Size Check', nameAm: null };
+  // names reach the model as short tokens, so a long unit number is what makes these rows long
+  data.units[0].number = 'A-DELIBERATELY-LONG-UNIT-NUMBER-FOR-THE-SIZE-CHECK';
   manyUnpaid(data, 't1', 'u1', 200);
   const r = await B.makeExecutor({ prisma: fakePrisma(data).prisma, now: () => NOW })({ buildingIds: ['b1'] })('unpaid', {});
   assert.ok(JSON.stringify(r).length <= 5000, 'length ' + JSON.stringify(r).length);

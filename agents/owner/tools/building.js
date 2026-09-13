@@ -141,7 +141,8 @@ const TOOLS = {
       invoices: v.invoices.filter(i => i.tenancy.unitId === u.id).sort((x, y) => y.dueDate - x.dueDate).slice(0, 12)
         .map(i => ({ type: i.type, amountEtb: i.amount, dueDate: iso(i.dueDate), paidDate: iso(i.paidDate), status: i.status })),
       // requests filed against this unit's tenancy; QR-form requests carry the unit only in their free text
-      openRepairs: v.repairs.filter(r => OPEN.has(r.status) && r.tenancy && r.tenancy.unit && r.tenancy.unit.number === u.number).length };
+      openRepairs: v.repairs.filter(r => OPEN.has(r.status) && r.tenancy && r.tenancy.unit && r.tenancy.unit.number === u.number).length,
+      ...asOf(v) };
   },
 
   // No dashboard equivalent. Marking an invoice paid (/api/admin/invoices/:id/pay) writes paidDate but never
@@ -278,10 +279,32 @@ function fit(result) {
   return result;
 }
 
+// Tenants' and shops' names never go to the model, which runs outside the server. Before a result leaves the
+// executor every occupant in it is replaced by a token such as [[P1]] — the same name keeps the same token for
+// the whole question — and execute.names maps each token back, so the agent puts names into the finished reply
+// on the server. Every tool reports a tenant or shop under the key `occupant`; a tool that reports a name
+// under any other key must be added to NAME_KEYS (test/owner/building-tools.test.js scans every tool's
+// executor output for the fixture's names).
+const NAME_KEYS = new Set(['occupant']);
+
+function tokenize(value, tokens, names) {
+  if (Array.isArray(value)) return value.map(x => tokenize(x, tokens, names));
+  if (!value || typeof value !== 'object' || Object.getPrototypeOf(value) !== Object.prototype) return value;
+  const out = {};
+  for (const [k, x] of Object.entries(value)) {
+    if (NAME_KEYS.has(k) && typeof x === 'string' && x) {
+      if (!tokens.has(x)) { const token = '[[P' + (tokens.size + 1) + ']]'; tokens.set(x, token); names.set(token, x); }
+      out[k] = tokens.get(x);
+    } else out[k] = tokenize(x, tokens, names);
+  }
+  return out;
+}
+
 function makeExecutor({ prisma, now = () => new Date(), warn = m => console.warn(m) }) {
   return function bind(scope) {
     let loading = null;   // one load per question, however many tools the model calls
-    return async function execute(name, args) {
+    const tokens = new Map(), names = new Map();   // name -> token and token -> name, for this question only
+    async function execute(name, args) {
       if (typeof name !== 'string' || !Object.hasOwn(TOOLS, name)) return { error: 'unknown tool ' + String(name) };
       const fn = TOOLS[name];
       args = args && typeof args === 'object' ? args : {};
@@ -298,9 +321,13 @@ function makeExecutor({ prisma, now = () => new Date(), warn = m => console.warn
       }
       const bs = pickBuildings(data.buildings, args.building);
       if (!bs.length) return { error: 'no such building for this owner' };
-      return fit({ buildings: bs.map(b => Object.assign({ building: b.name, buildingAm: b.nameAm || null }, fn(view(data, b), args, t))) });
-    };
+      // tokens before fit, so the size checked is the size the model is sent
+      return fit({ buildings: bs.map(b => Object.assign({ building: b.name, buildingAm: b.nameAm || null },
+        tokenize(fn(view(data, b), args, t), tokens, names))) });
+    }
+    execute.names = names;
+    return execute;
   };
 }
 
-module.exports = { TOOLS, DEFS, VAT_RATE, REPAIR_TYPES, view, makeExecutor };
+module.exports = { TOOLS, DEFS, VAT_RATE, REPAIR_TYPES, NAME_KEYS, view, makeExecutor };
