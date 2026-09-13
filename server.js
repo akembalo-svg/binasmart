@@ -2430,6 +2430,47 @@ fastify.post('/api/owner/:slug/ai', async (req, reply) => {
   return runAgent(ownerAgent, req, reply, { scope: { buildingIds: [b.id] }, channel: 'owner-web' });
 });
 
+// ===== Bini for owners on Telegram (owner Bini design §3) =====
+// @bina_smart_bot links an owner by Share-my-phone (agents/owner/access.js) and answers through the same agent as
+// the dashboard. The scope is re-read from OwnerAccess × AgentSwitch on every message.
+const { makeOwnerAccess, makeOwnerAccessStore } = require('./agents/owner/access');
+const { healthMessage } = require('./agents/owner/health-report');
+const ownerAccess = makeOwnerAccess({ store: makeOwnerAccessStore(prisma), audit });
+const ownerTelegram = {
+  access: ownerAccess,
+  async answer({ text, from, chatId, scope }) {
+    const req = { body: { message: text, user: { telegramId: String(from && from.id) } }, headers: {}, ip: 'tg-' + chatId, log: fastify.log };
+    const res = { code() { return this; }, send(o) { return o; } };
+    const out = await runAgent(ownerAgent, req, res, { scope, channel: 'owner-telegram' });
+    return out && out.reply ? String(out.reply) : null;
+  },
+  async health(scope) {
+    return healthMessage(await require('./agents/owner/tools/building').makeExecutor({ prisma })(scope)('data_health', {}));
+  },
+};
+
+// The dashboard's view of those links. Remove signs one Telegram account out; the number stays approved until
+// ops revoke it (ops/owner/access.js revoke).
+fastify.get('/api/owner/:slug/telegram-links', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
+  if (!b) return reply.code(404).send({ error: 'not_found' });
+  const on = await prisma.agentSwitch.findFirst({ where: { agent: 'owner', kind: 'building', entityId: b.id, disabledAt: null }, select: { id: true } });
+  return { enabled: !!on, bot: 'https://t.me/' + (process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot') + '?start=owner',
+    links: await ownerAccess.linksForBuilding(b.id) };
+});
+fastify.post('/api/owner/:slug/telegram-links/:id/remove', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
+  if (!b) return reply.code(404).send({ error: 'not_found' });
+  // Ownership, as every sibling route checks it: only a link this building's dashboard lists can be removed here.
+  const shown = (await ownerAccess.linksForBuilding(b.id)).find(l => l.id === String(req.params.id));
+  const row = { buildingId: shown ? b.id : null };
+  if (row.buildingId !== b.id) return reply.code(404).send({ error: 'not_found' });
+  if (!(await ownerAccess.revokeForBuilding(b.id, req.params.id))) return reply.code(404).send({ error: 'not_found' });
+  return { ok: true };
+});
+
 // ===== SMART NOTIFICATIONS + PENALTIES (daily engine) =====
 const NOTIFY_WHITELIST = ['darulle']; // real buildings only — demo owners have fake numbers
 const WA_CHANNEL = { darulle: 'darulle' }; // per-building sender (owner's own number once linked)
@@ -3415,6 +3456,7 @@ const rideMod = require('./ride')(fastify, {
   OWNER_CHAT: '8096525984',
   ROUTER_URL: process.env.ROUTER_URL || 'http://127.0.0.1:8989',
   askBini: callBini, // Bini's LLM adapter, for /api/ride/intent (Ask Bini)
+  ownerTelegram, // Bini for owners in @bina_smart_bot (agents/owner/access.js)
   BASE_URL: 'https://bina.et'
 });
 

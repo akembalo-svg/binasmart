@@ -484,6 +484,7 @@ function renderTab(){
       ${(d.bankAccounts || []).map(a => `<div class="flex justify-between text-[11px] py-1 border-b" style="border-color:#e9f0ee">
         <span class="text-slate-600">${esc(a.bank)}</span><span class="font-black">${esc(a.account)}</span></div>`).join('')}
       ${d.tinNumber ? `<div class="flex justify-between text-[11px] py-1"><span class="text-slate-600">TIN</span><span class="font-black">${esc(d.tinNumber)}</span></div>` : ''}</div>
+    <div id="tg-links" class="card p-4"><div class="text-[11px] text-slate-400">✈️ Bini on Telegram…</div></div>
     <div class="card p-4 space-y-2">
       <div class="font-black text-sm mb-1">🔗 Links</div>
       <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/b/${esc(slug)}" target="_blank">🏢 Public building page</a>
@@ -495,6 +496,7 @@ function renderTab(){
       <button class="mbtn w-full" style="background:#fee2e2;color:#dc2626;padding:10px" onclick="logoutKey()">🚪 Logout / ውጣ</button>
     </div>
     <div class="text-center text-[10px] text-slate-400">Support: <a class="font-bold text-violet" href="https://wa.me/251911244344">WhatsApp +251 911 244 344</a></div>`;
+    loadTgLinks();
   }
 }
 
@@ -565,6 +567,29 @@ async function delExpense(id){
   if (!confirm('Delete this expense?')) return;
   await kfetch('/api/owner/' + slug + '/expense/' + id + '/delete', { method: 'POST' });
   ACCT = null; renderTab();
+}
+// Bini for owners on Telegram: the building's linked accounts, with Remove (signs that account out).
+async function loadTgLinks(){
+  const box = document.getElementById('tg-links'); if (!box) return;
+  try {
+    const r = await kfetch('/api/owner/' + slug + '/telegram-links'); if (!r.ok) { box.innerHTML = ''; return; }
+    const d = await r.json();
+    const head = '<div class="font-black text-sm mb-2">✈️ Bini on Telegram · ቢኒ በቴሌግራም</div>';
+    const connect = d.enabled
+      ? '<a class="mbtn w-full block text-center" style="background:#e0f2fe;color:#0369a1;padding:10px" href="' + esc(d.bot) + '" target="_blank" rel="noopener">📱 Connect Telegram · ቴሌግራም ያገናኙ</a>'
+      : '<div class="text-[11px] text-slate-500">Not switched on for this building yet — ask BinaSmart. · ለዚህ ህንፃ ገና አልተከፈተም።</div>';
+    const rows = (d.links || []).map(function (l) {
+      return '<div class="flex justify-between items-center text-[11px] py-1 border-b" style="border-color:#e9f0ee"><span>'
+        + esc(l.role) + (l.label ? ' · ' + esc(l.label) : '') + ' · …' + esc(l.phoneLast4) + ' · ' + esc(new Date(l.lastSeen).toLocaleDateString('en-GB'))
+        + '</span><button class="mbtn" style="background:#fee2e2;color:#dc2626" onclick="removeTgLink(\'' + jsq(l.id) + '\')">Remove</button></div>';
+    }).join('');
+    box.innerHTML = head + connect + (rows || '<div class="text-[11px] text-slate-500 mt-2">No Telegram account linked. · ምንም የተገናኘ የለም።</div>');
+  } catch (e) { box.innerHTML = ''; }
+}
+async function removeTgLink(id){
+  if (!confirm('Sign this Telegram account out of Bini for owners?')) return;
+  await kfetch('/api/owner/' + slug + '/telegram-links/' + encodeURIComponent(id) + '/remove', { method: 'POST' });
+  loadTgLinks();
 }
 async function vatSettings(){
   const reg = confirm('Is this building VAT-registered? OK = Yes, Cancel = No');

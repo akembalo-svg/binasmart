@@ -55,3 +55,26 @@ test('the accounting audit trail leaves out owner Bini questions, so they cannot
   // every audit list in server.js is the accounting one; a new one must decide about OWNER_BINI_Q too
   assert.equal(src.split('prisma.auditLog.findMany(').length - 1, 1, 'a new audit list must exclude OWNER_BINI_Q where owners see it');
 });
+
+test('Bini for owners on Telegram answers through the same agent, with the scope from the access rules', () => {
+  const at = src.indexOf('const ownerTelegram = {');
+  assert.ok(at > 0, 'ownerTelegram not built');
+  const block = src.slice(at, src.indexOf('\n};', at));
+  assert.match(block, /runAgent\(ownerAgent, req, res, \{ scope, channel: 'owner-telegram' \}\)/);
+  assert.match(block, /healthMessage\(/);
+  assert.ok(src.indexOf('const ownerTelegram = {') < src.indexOf("require('./ride')(fastify"), 'must exist before the ride module mounts');
+  const ride = src.slice(src.indexOf("require('./ride')(fastify"), src.indexOf('});', src.indexOf("require('./ride')(fastify")));
+  assert.match(ride, /ownerTelegram/);
+});
+
+test('the dashboard Telegram routes authenticate first and remove only through the building check', () => {
+  for (const sig of ["fastify.get('/api/owner/:slug/telegram-links'", "fastify.post('/api/owner/:slug/telegram-links/:id/remove'"]) {
+    const at = src.indexOf(sig);
+    assert.ok(at > 0, sig + ' missing');
+    const body = src.slice(at, src.indexOf('\n});', at));
+    assert.ok(body.indexOf('authBuildingFail(req, reply, req.params.slug)') > 0, sig + ' must authenticate');
+    assert.doesNotMatch(body, /req\.body/, sig + ' must never read the request body: the building comes from the owner key and the slug');
+  }
+  const rm = src.slice(src.indexOf("fastify.post('/api/owner/:slug/telegram-links/:id/remove'"));
+  assert.match(rm.slice(0, 900), /ownerAccess\.revokeForBuilding\(b\.id, req\.params\.id\)/);
+});
