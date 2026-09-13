@@ -3,6 +3,7 @@
 //
 //   node ops/owner/access.js list    <slug>
 //   node ops/owner/access.js add     <slug> <phone> <owner|staff> [label]
+//   node ops/owner/access.js add-account-owner <slug>
 //   node ops/owner/access.js revoke  <slug> <accessId>
 //   node ops/owner/access.js enable  <slug>
 //   node ops/owner/access.js disable <slug>
@@ -12,15 +13,17 @@
 // Remove in the owner dashboard only signs one Telegram account out; the number stays approved. `revoke` here is
 // what ends a person's access: the approval is withdrawn, and when the number holds no other approval its
 // Telegram accounts are signed out too (agents/owner/access.js revokeAccess, the one place that rule lives).
-// Nothing is switched on for a building until `enable`. Every change goes to the building's audit log (actor ops).
+// `add-account-owner` approves the building owner account's own number as an owner, read from the account so
+// nobody types it. Nothing is switched on for a building until `enable`. Every change goes to the building's audit log (actor ops).
 // Nothing prints more than the last four digits of a number, and Telegram ids are never printed.
 const { phoneKey } = require('../../ride/phone');
 const { toE164, makeOwnerAccess, makeOwnerAccessStore } = require('../../agents/owner/access');
 
 const USAGE = 'usage: node ops/owner/access.js list|enable|disable <slug>\n'
   + '       node ops/owner/access.js add <slug> <phone> <owner|staff> [label]\n'
+  + '       node ops/owner/access.js add-account-owner <slug>\n'
   + '       node ops/owner/access.js revoke <slug> <accessId>';
-const COMMANDS = ['list', 'add', 'revoke', 'enable', 'disable'];
+const COMMANDS = ['list', 'add', 'add-account-owner', 'revoke', 'enable', 'disable'];
 const last4 = s => String(s || '').replace(/\D/g, '').slice(-4);
 const day = d => new Date(d).toISOString().slice(0, 10);
 
@@ -44,7 +47,9 @@ function parseArgs(argv) {
 }
 
 async function run(args, { prisma: p, out = console.log }) {
-  const bld = await p.building.findUnique({ where: { qrSlug: args.slug }, select: { id: true, name: true } });
+  const withOwner = args.cmd === 'add-account-owner';
+  const bld = await p.building.findUnique({ where: { qrSlug: args.slug },
+    select: { id: true, name: true, ...(withOwner ? { owner: { select: { phone: true } } } : {}) } });
   if (!bld) return { error: 'building not found: ' + args.slug + '\n' + USAGE };
   const log = (buildingId, action, detail) =>
     p.auditLog.create({ data: { buildingId, actor: 'ops', action, detail: String(detail).slice(0, 200) } });
@@ -64,14 +69,24 @@ async function run(args, { prisma: p, out = console.log }) {
     return { ok: true };
   }
 
-  if (args.cmd === 'add') {
-    const dup = await p.ownerAccess.findFirst({ where: { kind: 'building', entityId: bld.id, phoneE164: args.phoneE164, revokedAt: null } });
+  // One approval path for `add` and `add-account-owner`: a duplicate prints the existing id, never a second row.
+  const approve = async ({ phoneE164, phoneKey: key, role, label }) => {
+    const dup = await p.ownerAccess.findFirst({ where: { kind: 'building', entityId: bld.id, phoneE164, revokedAt: null } });
     if (dup) { out('already approved: ' + dup.id + ' · ' + dup.role + ' · …' + last4(dup.phoneE164)); return { ok: true }; }
-    const r = await p.ownerAccess.create({ data: { kind: 'building', entityId: bld.id, phoneE164: args.phoneE164,
-      phoneKey: args.phoneKey, role: args.role, label: args.label, addedBy: 'ops' } });
-    await log(bld.id, 'OWNER_ACCESS_ADDED', args.role + ' · phone …' + last4(args.phoneE164));
-    out('added ' + r.id + ' · ' + args.role + ' · …' + last4(args.phoneE164));
+    const r = await p.ownerAccess.create({ data: { kind: 'building', entityId: bld.id, phoneE164,
+      phoneKey: key, role, label, addedBy: 'ops' } });
+    await log(bld.id, 'OWNER_ACCESS_ADDED', role + ' · phone …' + last4(phoneE164));
+    out('added ' + r.id + ' · ' + role + ' · …' + last4(phoneE164));
     return { ok: true };
+  };
+
+  if (args.cmd === 'add') return approve(args);
+
+  if (args.cmd === 'add-account-owner') {
+    // The number comes from the owner account itself: never typed, never printed or logged in full.
+    const phoneE164 = toE164(bld.owner && bld.owner.phone, { from: 'ops' });
+    if (!phoneE164) return { error: 'the owner account has no usable phone number' };
+    return approve({ phoneE164, phoneKey: phoneKey(phoneE164), role: 'owner', label: 'account owner' });
   }
 
   if (args.cmd === 'revoke') {
