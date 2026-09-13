@@ -82,7 +82,7 @@ function makeEngine(deps) {
       const run = Array.isArray(agent.tools) && agent.tools.length ? agent.executor(c, deps) : null;
       const ask = async system => {
         const startLen = toolResults.length;
-        const o = run ? { tools: agent.tools, execute: async (name, args) => {
+        const o = run ? { tools: agent.tools, label: agent.name, execute: async (name, args) => {
           let out;
           try { out = await run(name, args); }
           catch (e) { warn('[' + agent.name + '] tool ' + name + ' failed: ' + (e && e.message || e)); out = { error: 'tool failed' }; }

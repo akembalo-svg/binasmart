@@ -835,6 +835,8 @@ async function callBini(system, messages0, maxTokens, opts){
       const r = await fetch(url, { method: 'POST', signal: ctrl.signal, headers: headers, body: body });
       clearTimeout(to);
       const d = await r.json();
+      // Token counts for labelled calls (tool agents: the owner agent). Counts only — never the prompt.
+      if (opts && opts.label && d && d.usage) console.log('[bini] usage ' + opts.label + ' prompt=' + d.usage.prompt_tokens + ' completion=' + d.usage.completion_tokens);
       let text = '';
       if (fmt === 'openai') {
         const m = d && d.choices && d.choices[0] && d.choices[0].message;

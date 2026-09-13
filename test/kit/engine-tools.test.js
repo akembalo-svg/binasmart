@@ -223,3 +223,12 @@ test('a failure after a tool ran is still audited, with the tools that ran', asy
   assert.equal(out.reply, 'sorry-fallback');
   assert.deepEqual(audits, [['rent']]);
 });
+
+test('a tool agent labels its model calls with its name; an agent without tools still sends {}', async () => {
+  const h = harness({ reply: 'x' });
+  const tools = [{ type: 'function', function: { name: 'rent' } }];
+  await h.handle(base({ tools, executor: () => async () => ({}) }), req('q'), res, { scope: { buildingIds: ['b1'] } });
+  assert.equal(h.calls.model[0].opts.label, 'demo');
+  await h.handle(base(), req('q'), res);
+  assert.deepEqual(h.calls.model[1].opts, {});
+});

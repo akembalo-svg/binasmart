@@ -78,3 +78,9 @@ test('the dashboard Telegram routes authenticate first and remove only through t
   const rm = src.slice(src.indexOf("fastify.post('/api/owner/:slug/telegram-links/:id/remove'"));
   assert.match(rm.slice(0, 900), /ownerAccess\.revokeForBuilding\(b\.id, req\.params\.id\)/);
 });
+
+test('callBini logs token usage for labelled calls, without the prompt', () => {
+  const at = src.indexOf('async function callBini(');
+  const body = src.slice(at, src.indexOf('\n}\n', at));
+  assert.match(body, /\[bini\] usage ' \+ opts\.label \+ ' prompt=' \+ d\.usage\.prompt_tokens \+ ' completion=' \+ d\.usage\.completion_tokens/);
+});
