@@ -27,6 +27,7 @@ module.exports = {
 
   // The one hospital in the system is demo data; she must never present it as a real place to attend.
   async context(c, { prisma }) {
+    if (!prisma) console.warn('[afiya] engine built without prisma: departments and the demo notice are off');
     let depts = '', demoRows = null;
     try {
       const rows = demoRows = await prisma.department.findMany({ where: { active: true },

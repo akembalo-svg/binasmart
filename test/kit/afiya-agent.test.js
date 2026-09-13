@@ -7,6 +7,7 @@ const { makeEngine } = require('../../assistant/kit/engine');
 const { dropUngrounded } = require('../../assistant/grounding');
 const lang = require('../../assistant/lang');
 const afiya = require('../../assistant/afiya');
+const scope = require('../../assistant/scope');
 const agent = require('../../agents/afiya/rules');
 
 function run(message, { replies = ['ok'], departments = [], throwModel = false } = {}) {
@@ -108,4 +109,60 @@ test('a failing department query still gets an answer, not the fallback', async 
   assert.doesNotMatch(calls.model[0], /DEMO DATA/);
   assert.match(out.reply, /ጤና ጣቢያ/);
   assert.equal(out.emergency, false);
+});
+
+test('someone arrested AND having a heart attack gets the ambulance, not the legal answer', async () => {
+  const { out, calls } = await run('I was arrested and I am having a heart attack');
+  assert.equal(out.emergency, true);
+  assert.equal(out.reply, afiya.emergencyReply('en'));
+  assert.equal(calls.handovers[0].reason, 'Dr Afiya: possible emergency');
+  assert.equal(calls.model.length, 0);
+});
+
+test('a clinical question stays with Dr Afiya even when it mentions something off-topic', async () => {
+  const { out, calls } = await run('should I take ibuprofen before my ride',
+    { replies: ['I cannot advise on medicine. The pharmacy department can help.'] });
+  assert.equal(out.redirected, undefined);
+  assert.equal(calls.model.length, 1);
+  assert.match(calls.model[0], /THIS MESSAGE ASKS YOU TO DIAGNOSE, PRESCRIBE OR REASSURE/);
+});
+
+test('the system prompt keeps departments, then emergency numbers, then the clinical instruction', async () => {
+  const departments = [{ name: 'Pediatrics', nameAm: null, nameOm: null, floor: 1, room: '101', fee: 150, openHours: null }];
+  const { calls } = await run('qoricha maal fudhadhu?', { departments, replies: ['Kutaa dhukkuba keessaa deemi.'] });
+  const sys = calls.model[0];
+  const iDemo = sys.indexOf('DEMO DATA'), iAmb = sys.indexOf('ambulance 907'), iClinical = sys.indexOf('THIS MESSAGE ASKS YOU TO DIAGNOSE');
+  assert.ok(iDemo >= 0 && iAmb >= 0 && iClinical >= 0);
+  assert.ok(iDemo < iAmb && iAmb < iClinical);
+});
+
+test('an off-topic question is redirected in the language it was asked in', async () => {
+  const { out } = await run('ከመገናኛ ወደ ቦሌ ራይድ ስንት ነው?');
+  assert.equal(out.reply, scope.redirect('ከመገናኛ ወደ ቦሌ ራይድ ስንት ነው?', 'health', 'am'));
+});
+
+test('a reply that already says it is demo data gets no second notice', async () => {
+  const departments = [{ name: 'Pediatrics', nameAm: null, nameOm: null, floor: 1, room: '101', fee: 150, openHours: null }];
+  const { out } = await run('ልጄ ትኩሳት አለበት', { departments, replies: ['ወደ Pediatrics ይሂዱ (demo)።'] });
+  assert.ok(!out.reply.includes(afiya.demoNotice('am').trim()));
+});
+
+test('building the engine without prisma is reported, not silent', async () => {
+  const originalWarn = console.warn;
+  const warnings = [];
+  console.warn = m => warnings.push(m);
+  try {
+    const handle = makeEngine({
+      callModel: async () => 'ወደ ጤና ጣቢያ ይሂዱ።',
+      contextFor: async () => '', lang,
+      memory: { userKey: () => 'ip:t', log: () => {}, isMiss: () => false },
+      handover: () => Promise.resolve(true), dropUngrounded, isEval: () => false, warn: () => {},
+    });
+    const res = { code() { return this; }, send(o) { return o; } };
+    const out = await handle(agent, { body: { message: 'ልጄ ትኩሳት አለበት' }, headers: {}, ip: '10.0.0.1', log: { error() {} } }, res);
+    assert.ok(warnings.some(w => /without prisma/.test(w)));
+    assert.ok(out.reply);
+  } finally {
+    console.warn = originalWarn;
+  }
 });
