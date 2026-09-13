@@ -103,3 +103,123 @@ test('an agent with tools but no executor is refused loudly', async () => {
   const h = harness();
   await assert.rejects(() => h.handle(base({ tools: [{}] }), req('q'), res), /agent demo has tools but no executor/);
 });
+
+test('body.scope can never smuggle a scope in; only options.scope reaches c.scope', async () => {
+  const h = harness();
+  let seenScope = 'unset';
+  const agent = base({ gates: [{ test: c => { seenScope = c.scope; return true; }, answer: () => ({ body: { reply: 'gated' } }) }] });
+  const out = await h.handle(agent, { body: { message: 'hi', scope: { buildingIds: ['evil'] } }, headers: {}, ip: '10.0.0.1', log: { error() {} } }, res);
+  assert.equal(out.reply, 'gated');
+  assert.equal(seenScope, null);
+});
+
+test('each ask gets its own opts: a first-call fallback does not poison the retry call\'s tools', async () => {
+  const modelCalls = [];
+  const deps = {
+    callModel: async (sys, messages, maxTokens, opts) => {
+      modelCalls.push(opts);
+      if (modelCalls.length === 1) { opts.tools = null; opts.execute = null; return 'first'; }
+      return 'second, done';
+    },
+    contextFor: async () => '',
+    lang: { detect: () => 'en', directive: () => 'D' },
+    memory: { userKey: () => 'ip:x', log: () => {}, isMiss: () => false },
+    handover: () => Promise.resolve(true),
+    dropUngrounded, isEval: () => false,
+    warn: () => {},
+  };
+  const handle = makeEngine(deps);
+  const tools = [{ type: 'function', function: { name: 'rent' } }];
+  const agent = base({
+    tools, executor: () => async () => ({ ok: true }),
+    retry: { needed: () => true, suffix: () => ' retry', accepts: () => true, warning: 'retry rejected' },
+  });
+  await handle(agent, req('q'), res, { scope: { buildingIds: ['b1'] } });
+  assert.equal(modelCalls.length, 2);
+  assert.equal(modelCalls[0].tools, null);
+  assert.deepEqual(modelCalls[1].tools, tools);
+  assert.equal(typeof modelCalls[1].execute, 'function');
+});
+
+test('a figure only in a tool call\'s args (not its result) is dropped', async () => {
+  const h = harness({ call: { name: 'rent', args: { amount: 777 } }, reply: 'It is 777 birr.' });
+  const agent = base({ tools: [{ type: 'function', function: { name: 'rent' } }], executor: () => async () => ({ ok: true }) });
+  const out = await h.handle(agent, req('q'), res, { scope: { buildingIds: ['b1'] } });
+  assert.doesNotMatch(out.reply, /777/);
+});
+
+test('the GLM fallback discards the tool results gathered before it', async () => {
+  let seenState = null;
+  const deps = {
+    callModel: async (sys, messages, maxTokens, opts) => {
+      await opts.execute('rent', {});
+      opts.tools = null; opts.execute = null;
+      return 'Invoiced 30,000 birr.';
+    },
+    contextFor: async () => '',
+    lang: { detect: () => 'en', directive: () => 'D' },
+    memory: { userKey: () => 'ip:x', log: () => {}, isMiss: () => false },
+    handover: () => Promise.resolve(true),
+    dropUngrounded, isEval: () => false,
+    warn: () => {},
+  };
+  const handle = makeEngine(deps);
+  const agent = base({
+    tools: [{ type: 'function', function: { name: 'rent' } }],
+    executor: () => async () => ({ invoicedEtb: 30000 }),
+    finish: (c, t, state) => { seenState = state.toolResults; return t; },
+  });
+  const out = await handle(agent, req('q'), res, { scope: { buildingIds: ['b1'] } });
+  assert.doesNotMatch(out.reply, /30,000/);
+  assert.deepEqual(seenState, []);
+});
+
+test('a tool result past the 6000-char cut cannot ground a figure', async () => {
+  const filler = 'x'.repeat(6100);
+  const h = harness({ call: { name: 'rent', args: {} }, reply: 'Total 424242 birr.' });
+  const agent = base({ tools: [{ type: 'function', function: { name: 'rent' } }],
+    executor: () => async () => ({ filler, total: 424242 }) });
+  const out = await h.handle(agent, req('q'), res, { scope: { buildingIds: ['b1'] } });
+  assert.doesNotMatch(out.reply, /424242/);
+});
+
+test('a throwing executor does not reject the handle; the model sees a tool-failed result', async () => {
+  let seenToolResults = null;
+  const h = harness({ call: { name: 'rent', args: {} }, reply: 'ok' });
+  const agent = base({
+    tools: [{ type: 'function', function: { name: 'rent' } }],
+    executor: () => async () => { throw new Error('boom'); },
+    finish: (c, t, state) => { seenToolResults = state.toolResults; return t; },
+  });
+  const out = await h.handle(agent, req('q'), res, { scope: { buildingIds: ['b1'] } });
+  assert.equal(out.reply, 'ok');
+  assert.deepEqual(seenToolResults[0].out, { error: 'tool failed' });
+  assert.ok(h.calls.warns.some(w => w.includes('rent') && w.includes('failed')));
+});
+
+test('a failure after a tool ran is still audited, with the tools that ran', async () => {
+  const audits = [];
+  const deps = {
+    callModel: async (sys, messages, maxTokens, opts) => {
+      await opts.execute('rent', {});
+      throw new Error('model exploded');
+    },
+    contextFor: async () => '',
+    lang: { detect: () => 'en', directive: () => 'D' },
+    memory: { userKey: () => 'ip:x', log: () => {}, isMiss: () => false },
+    handover: () => Promise.resolve(true),
+    dropUngrounded, isEval: () => false,
+    warn: () => {},
+  };
+  const handle = makeEngine(deps);
+  const agent = base({
+    tools: [{ type: 'function', function: { name: 'rent' } }],
+    executor: () => async () => ({ n: 1 }),
+    audit: (c, info) => { audits.push(info.tools); },
+    fallback: () => 'sorry-fallback',
+  });
+  const out = await handle(agent, req('q'), res, { scope: { buildingIds: ['b1'] } });
+  await new Promise(r => setImmediate(r));
+  assert.equal(out.reply, 'sorry-fallback');
+  assert.deepEqual(audits, [['rent']]);
+});

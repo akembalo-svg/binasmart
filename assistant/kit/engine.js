@@ -10,9 +10,12 @@
 // content. Nothing here knows about health, law or buildings.
 //
 // Options a route may pass: scope (what the agent may read — decided by the route's own authentication,
-// never by the model) and channel (how the request arrived, for the log and the audit).
+// never by the model) and channel (how the request arrived, for the log and the audit). A definition must
+// decide what it may read from c.scope alone, never from c.user or the request body — both are attacker
+// controlled, and the engine never derives scope from either.
 
 const REQUIRED = ['name', 'soul', 'gates', 'inScope', 'redirect', 'finish', 'fallback'];
+const TOOL_RESULT_LIMIT = 6000; // callBini sends JSON.stringify(out).slice(0, 6000) to the model
 
 function makeEngine(deps) {
   const { callModel, contextFor, lang: L, memory, handover, dropUngrounded, isEval } = deps;
@@ -20,7 +23,8 @@ function makeEngine(deps) {
 
   return async function handle(agent, req, reply, options = {}) {
     for (const k of REQUIRED) if (agent[k] == null) throw new Error('agent ' + (agent.name || '?') + ' is missing ' + k);
-    if (agent.tools && typeof agent.executor !== 'function') throw new Error('agent ' + agent.name + ' has tools but no executor');
+    if (Array.isArray(agent.tools) && agent.tools.length && typeof agent.executor !== 'function')
+      throw new Error('agent ' + agent.name + ' has tools but no executor');
     const t0 = Date.now();
     const b = req.body || {};
     const msg = String(b.message || '').trim().slice(0, 2000);
@@ -31,9 +35,12 @@ function makeEngine(deps) {
     const userKey = memory.userKey({ telegramId: user.telegramId, uid: user.uid, ip, evaluation: isEval(req) });
     const lang = L.detect(msg);
     const l = (lang === 'am' || lang === 'am-latin') ? 'am' : (lang === 'om' ? 'om' : 'en');
+    // scope is options.scope alone (set by the route from its own auth) — the request body is never consulted.
     const c = { msg, lang, l, user, channel, userKey, scope: options.scope || null };
 
-    // 1. Gates: answered without the model. The first that matches is the answer.
+    // 1. Gates: answered without the model. The first that matches is the answer. A gate's own `log` (not
+    // agent.log) still writes to the chat log even when agent.log === false: gates answer fixed texts they
+    // own, never model output, so there is nothing private in them for log: false to keep out.
     for (const gate of agent.gates) {
       if (!gate.test(c)) continue;
       const g = gate.answer(c);
@@ -47,6 +54,14 @@ function makeEngine(deps) {
     // 2. Scope: anything off-subject goes back with a link, and costs nothing.
     if (!agent.inScope(c)) return { reply: agent.redirect(c), redirected: true };
 
+    // Declared before the try so a failure after tools ran can still be audited with what they did.
+    const toolResults = [];
+    const runAudit = () => {
+      const tools = toolResults.map(r => r.name);
+      Promise.resolve().then(() => agent.audit(c, { tools }, deps))
+        .catch(e => warn('[' + agent.name + '] audit failed: ' + (e && e.message || e)));
+    };
+
     try {
       // 3. Prompt.
       const ctx = agent.knowledge === false ? ''
@@ -59,15 +74,25 @@ function makeEngine(deps) {
       const maxTokens = agent.maxTokens || 700;
 
       // Tools: read-only functions bound to c.scope by the definition. Every call and result is kept, because
-      // the results are the only place a figure in the answer may come from.
-      const toolResults = [];
-      const run = agent.tools && agent.tools.length ? agent.executor(c, deps) : null;
-      const optsFor = () => run ? { tools: agent.tools, execute: async (name, args) => {
-        const out = await run(name, args);
-        toolResults.push({ name, args, out });
-        return out;
-      } } : {};
-      const ask = async system => String(await callModel(system, [{ role: 'user', content: msg }], maxTokens, optsFor()) || '').trim();
+      // the results are the only place a figure in the answer may come from — except a round the cloud model
+      // never finished. callBini clears opts.tools and opts.execute on this same options object when it falls
+      // back to GLM with no tools; each ask below gets its own opts object so that a fallback on one round
+      // never disqualifies another, and this round's own tool calls are discarded (never credited to an answer
+      // that was written without seeing them) the moment the fallback shows on its opts.
+      const run = Array.isArray(agent.tools) && agent.tools.length ? agent.executor(c, deps) : null;
+      const ask = async system => {
+        const startLen = toolResults.length;
+        const o = run ? { tools: agent.tools, execute: async (name, args) => {
+          let out;
+          try { out = await run(name, args); }
+          catch (e) { warn('[' + agent.name + '] tool ' + name + ' failed: ' + (e && e.message || e)); out = { error: 'tool failed' }; }
+          toolResults.push({ name, args, out });
+          return out;
+        } } : {};
+        const text = String(await callModel(system, [{ role: 'user', content: msg }], maxTokens, o) || '').trim();
+        if (o.tools === null || o.execute === null) toolResults.length = startLen; // GLM fallback: discard this ask's calls
+        return text;
+      };
 
       // 4. Model, and one retry when the definition says the answer is missing something it must carry.
       let text = await ask(sys);
@@ -84,9 +109,13 @@ function makeEngine(deps) {
         text = f.text;
       }
 
-      // 6. Grounding: a figure nobody gave the model — not a document, not a tool — is dropped.
+      // 6. Grounding: a figure nobody gave the model — not a document, not a tool — is dropped. Each tool
+      // result is cut to the same length callBini actually sent the model, so a figure past that cut (one the
+      // model itself never saw) can't ground anything either.
       const documents = extra.grounding != null ? String(ctx || '') + ' ' + extra.grounding : ctx;
-      const grounding = toolResults.length ? String(documents || '') + ' ' + JSON.stringify(toolResults.map(r => r.out)) : documents;
+      const grounding = toolResults.length
+        ? String(documents || '') + ' ' + toolResults.map(r => JSON.stringify(r.out).slice(0, TOOL_RESULT_LIMIT)).join(' ')
+        : documents;
       const g = dropUngrounded(text, grounding);
       if (g.dropped.length) warn('[' + agent.name + '] dropped ungrounded ' + g.dropped.map(x => x.text).join(', '));
       text = g.text;
@@ -98,14 +127,11 @@ function makeEngine(deps) {
       // audited instead: who asked, when, which tools — never the answer.
       if (agent.log !== false) memory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: [agent.name],
         miss: memory.isMiss(text, { tools: [agent.name], message: msg }), ms: Date.now() - t0 });
-      if (agent.audit) {
-        const tools = toolResults.map(r => r.name);
-        Promise.resolve().then(() => agent.audit(c, { tools }, deps))
-          .catch(e => warn('[' + agent.name + '] audit failed: ' + (e && e.message || e)));
-      }
+      if (agent.audit) runAudit();
       return Object.assign({ reply: text }, agent.okFlags || {});
     } catch (e) {
       req.log && req.log.error({ err: e }, agent.name + ' failed');
+      if (agent.audit && toolResults.length) runAudit();
       return { reply: agent.fallback(c) };
     }
   };
