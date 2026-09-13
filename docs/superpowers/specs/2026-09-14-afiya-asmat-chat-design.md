@@ -94,8 +94,30 @@ One shared chat front-end (`public/static/agent-chat.js` + `agent-chat.css`) dri
 
 Conversation memory in the engine; company-branded versions and their routes; Oromo UI strings beyond what exists; answer feedback buttons; sharing a chat.
 
-## 11. Open points for Ibrahim
+## 11. Decisions (Ibrahim, 14 September 2026: "do your recommend")
 
-1. **Voice goes to Google for transcription**, as Telegram voice notes already do. Accept for the web pages too?
-2. **Follow-up questions don't remember earlier turns in v1** (§3). Acceptable for the first version?
-3. **Avatars:** simple illustrated faces (a woman health guide, a man legal guide) or symbols only (stethoscope, scales)?
+1. **Voice:** accepted — transcription through the same Gemini path as Telegram voice notes.
+2. **Conversation memory:** not in v1; follow-up chips are complete questions. Memory is a later change.
+3. **Avatars:** original illustrated faces — a woman health guide (Afiya) and a man legal guide (Asmat), drawn for BinaSmart, friendly and professional, no resemblance to any existing product's mascot or to real people.
+4. **Plans:** free plan plus a paid plan for people, and paid branded versions for companies (§12). Everything is open during launch.
+
+## 12. Plans: free, paid, and company versions
+
+**The fixed rule:** emergency and urgent answers are free forever and never counted against any limit. They are answered by code (Afiya's 907/991/939 reply, Asmat's arrest/eviction reply), cost nothing to serve, and no one in an emergency ever sees a limit or a payment screen. Redirects to other services are not counted either.
+
+| Plan | Who | What | When |
+|---|---|---|---|
+| **Launch** | everyone | Everything open: unlimited questions, voice, history on the phone | From v1 until Ibrahim ends the launch period |
+| **Free** | people | A daily number of questions (set by Ibrahim; suggested starting point 10 per day), text answers, history on the phone; emergencies unlimited | After launch |
+| **Plus** (paid) | people | Many more questions per day, voice, chat history saved to the account across devices, longer answers, priority when busy | After launch, once payments are live |
+| **Company** (paid) | hospitals, law firms, clinics | Their own branded guide (name, avatar, colours, suggestions) with their own data in scope — e.g. a hospital's real departments, hours and fees — on bina.et and in Telegram | Separate plan, after the pages ship |
+
+Prices in birr, set by Ibrahim. Plan names and numbers above are placeholders until he sets them.
+
+**Phases (each its own plan):**
+1. **v1 — the chat pages (this design).** No limits enforced, no paywall. Usage is already recorded per anonymous user in `AssistantLog` (with evaluation traffic excluded), which gives real numbers for choosing the free daily limit. The front-end keeps a slot for a future "questions left today" line and an upgrade card, hidden in v1.
+2. **v2 — accounts and limits.** Needs working sign-in on bina.et (Telegram and Google doors exist; still waiting on the BotFather domain setting and Google OAuth keys from Ibrahim). Count questions per account per day (anonymous visitors counted per device with a lower limit), exclude emergency/urgent/redirect answers from the count, show "questions left today", and a clear upgrade card when the limit is reached — never mid-emergency.
+3. **v3 — payments.** Needs a live payment provider (Chapa is in test mode; telebirr needs BinaSmart's own merchant key). Subscription purchase, renewal, cancellation, receipts, and what happens when a payment fails (fall back to Free, never lose the person's chats on their phone).
+4. **Company versions.** A company config plus a scoped agent on the server (§6), onboarding with proven ownership, and billing per company.
+
+**Honesty rules for paid plans:** the paid plan buys more use and convenience, never better safety — the same gates, disclosures and figure checks apply on every plan; the page never implies a paid answer is medical or legal advice.
