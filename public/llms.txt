@@ -18,7 +18,7 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 - [Restaurants](https://bina.et/restaurant/bina-restaurant): scan-a-table QR ordering
 - [Hospitals](https://bina.et/hospital/bina-general-hospital): departments, floors, fees; book a visit
 - [Insurance](https://bina.et/insurance): compare Ethiopia's licensed insurers, instant indicative estimate, buy through a trusted agent
-- [Cars](https://bina.et/cars): buy and sell from trusted Ethiopian dealers, with 1-tap insurance
+- [Cars](https://bina.et/cars): cars for sale in Ethiopia; tell us the car you want and we look for it, with 1-tap insurance
 - [Property](https://bina.et/property): verified homes, land and commercial property for sale and rent; diaspora-friendly
 - [Tenders](https://bina.et/tenders): verified Ethiopian government and company tenders, free for bidders, updated daily
 - [News](https://bina.et/news): Amharic technology, business and construction news, politics-free; Telegram channel https://t.me/binasmart

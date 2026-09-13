@@ -29,7 +29,7 @@ This file is read by three consumers: Bini (the assistant on bina.et and in @bin
 | BinaCinema | ሲኒማ | /cinema | Addis cinema programmes from the cinema houses' own weekly schedules, seat maps from the venues (never guessed), QR ticket, pay by Chapa or at the counter. |
 | Restaurants & shops | ሬስቶራንት · ሱቆች | /restaurant/<slug>, /shop/<slug>, /business | Scan a QR at the table or door, order in Amharic/English, the business gets it on Telegram. Free onboarding at /for-business. **The demo restaurant is Bina Restaurant; the demo shop is Kaldi's Café (/shop/kaldis-cafe).** |
 | Buildings | ህንፃዎች | /b/<slug>, /nav, /owner | Building directory pages with 3D navigation, QR posters, owner dashboard: rent invoices, 15 % VAT accounting, sub-metered utilities, maintenance, tenant notices. Diaspora owners: /diaspora. |
-| Property | ንብረት | /property | Homes, land and commercial property for sale and rent from verified agents; property insurance link. |
+| Property | ንብረት | /property | Homes, land and commercial property for sale and rent; a request form (we search for the visitor) and a property insurance link. "✓ Verified" on a listing means an admin checked it — never describe agents as verified. |
 | Cars | መኪና | /cars | Buy and sell from dealers, one-tap car insurance. |
 | Insurance | መድን | /insurance | Compare licensed Ethiopian insurers: motor, health, property and fire, business, travel, life; quick motor estimate; buy through the insurer. |
 | Flights | በረራ | /flights | Ethiopian Airlines: book direct and pay in birr (Telebirr, CBE Birr). Other airlines: a licensed Addis travel agency prices the route and replies on WhatsApp. BinaSmart does not issue tickets. |

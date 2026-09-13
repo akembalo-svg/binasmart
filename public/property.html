@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Property for sale & rent in Ethiopia · ቤት ግዢና ኪራይ | BinaSmart</title>
-<meta name="description" content="Verified apartments, houses, land and commercial property for sale and rent in Ethiopia — from trusted agents. Diaspora-friendly, with property insurance in one tap. የቤት ግዢና ኪራይ በቀላሉ።">
+<meta name="description" content="Apartments, houses, land and commercial property for sale and rent in Ethiopia. Tell us what you are looking for and we search for it. Diaspora-friendly, with property insurance in one tap. የቤት ግዢና ኪራይ በቀላሉ።">
 <link rel="canonical" href="https://bina.et/property">
 <meta property="og:title" content="Property for sale & rent in Ethiopia — ቤት | BinaSmart"><meta property="og:image" content="https://bina.et/static/bina-news.png">
 <link rel="icon" href="/icon-32.png">
@@ -64,10 +64,10 @@ section{padding:32px 0}
 
 <div class="hero wrap">
   <h1>Homes you can trust.</h1>
-  <p class="am">ከታማኝና ከተረጋገጡ ወኪሎች ቤት፣ ኮንዶሚኒየም፣ መሬትና የንግድ ቦታ — ለግዢና ለኪራይ። ለዲያስፖራ ምቹ።</p>
+  <p class="am">ቤት፣ ኮንዶሚኒየም፣ መሬትና የንግድ ቦታ — ለግዢና ለኪራይ። የሚፈልጉትን ይንገሩን፣ እኛ እናፈላልጋለን። ለዲያስፖራ ምቹ።</p>
   <div class="seg"><button id="sSale" class="on" onclick="setType('sale')">For sale · ሽያጭ</button><button id="sRent" onclick="setType('rent')">For rent · ኪራይ</button></div>
   <div class="types" id="ptypes"></div>
-  <div class="trust"><span>✅ <b style="color:var(--em)">Verified</b> agents</span><span class="am">🌍 <b style="color:var(--em)">ዲያስፖራ</b> ምቹ</span><span>🛡️ property insurance</span></div>
+  <div class="trust"><span>🔎 <b style="color:var(--em)">We search</b> for you</span><span class="am">🌍 <b style="color:var(--em)">ዲያስፖራ</b> ምቹ</span><span>🛡️ property insurance</span></div>
 </div>
 
 <section class="wrap">
@@ -77,7 +77,7 @@ section{padding:32px 0}
 
 <section class="wrap"><div class="two">
   <div class="promo ins"><h3>🛡️ Protect your property</h3><p class="am">የቤት/ንብረት መድን በአንድ ጠቅታ — ከእሳት፣ ስርቆትና አደጋ ይከላከሉ።</p><a href="/insurance">Get property insurance →</a></div>
-  <div class="promo ag"><h3>🤝 Agents & owners</h3><p class="am">ንብረትዎን በነጻ ያስተዋውቁ — የተረጋገጠ ዝርዝር፣ በሺዎች ገዢዎች።</p><a href="https://wa.me/251911244344?text=%E1%8A%A5%E1%8A%94%20%E1%8B%88%E1%8A%AA%E1%88%8D%2F%E1%89%A3%E1%88%88%E1%89%A4%E1%89%B5%20%E1%8A%90%E1%8A%9D%E1%8D%A2%20%E1%8A%95%E1%89%A5%E1%88%A8%E1%89%B5%20%E1%88%88%E1%88%98%E1%8C%A8%E1%88%98%E1%88%AD%20%E1%8D%88%E1%88%8D%E1%8C%8B%E1%88%88%E1%88%81" target="_blank">List a property →</a></div>
+  <div class="promo ag"><h3>🤝 Agents & owners</h3><p class="am">ንብረትዎን በነጻ ያስተዋውቁ — ዝርዝሩን በWhatsApp ይላኩልን፣ እኛ እናወጣዋለን።</p><a href="https://wa.me/251911244344?text=%E1%8A%A5%E1%8A%94%20%E1%8B%88%E1%8A%AA%E1%88%8D%2F%E1%89%A3%E1%88%88%E1%89%A4%E1%89%B5%20%E1%8A%90%E1%8A%9D%E1%8D%A2%20%E1%8A%95%E1%89%A5%E1%88%A8%E1%89%B5%20%E1%88%88%E1%88%98%E1%8C%A8%E1%88%98%E1%88%AD%20%E1%8D%88%E1%88%8D%E1%8C%8B%E1%88%88%E1%88%81" target="_blank">List a property →</a></div>
 </div></section>
 
 <section class="wrap" id="request">
@@ -98,7 +98,7 @@ section{padding:32px 0}
   </div>
 </section>
 
-<div class="foot"><span class="am">BinaSmart · bina.et · ሁሉንም በአንድ መድረክ</span> — Listings by verified agents & owners. BinaSmart connects buyers, renters and sellers.</div>
+<div class="foot"><span class="am">BinaSmart · bina.et · ሁሉንም በአንድ መድረክ</span> — Listings come from agents and owners. A ✓ Verified badge means BinaSmart has checked that listing. BinaSmart connects buyers, renters and sellers.</div>
 
 <script>
 var ALL=[],curType='sale',curPt='';
@@ -109,7 +109,7 @@ function cssUrl(u){return /^https?:\/\//i.test(u||'')?String(u).replace(/[()'"\\
 function card(p){
   var img=cssUrl(p.imageUrl),ph=img?('style="background-image:url('+esc(img)+')"'):'';
   var meta=[p.beds?p.beds+' bd':'',p.baths?p.baths+' ba':'',p.area].filter(Boolean).map(esc).join(' · ');
-  return '<div class="pc"><div class="ph" '+ph+'>'+(img?'':'🏠')+(p.verified?'<span class="vf">✓ Verified</span>':'')+'<span class="lt">'+(p.listingType==='rent'?'For rent':'For sale')+'</span></div>'+
+  return '<div class="pc"><div class="ph" '+ph+'>'+(img?'':'🏠')+(p.verified?'<span class="vf" title="Checked by BinaSmart">✓ Verified</span>':'')+'<span class="lt">'+(p.listingType==='rent'?'For rent':'For sale')+'</span></div>'+
    '<div class="bd"><h3>'+esc(p.title)+'</h3>'+(p.price?'<div class="price">'+esc(p.price)+'</div>':'')+
    '<div class="meta">'+meta+'</div>'+((p.location||p.city)?'<div class="dl">📍 '+esc(p.location||p.city)+(p.agency?' · '+esc(p.agency):'')+'</div>':'')+
    '<div class="btns"><button class="b1" data-t="'+esc(p.title)+'" onclick="enquire(this.getAttribute(\'data-t\'))">Enquire</button>'+
@@ -120,7 +120,7 @@ function view(){
   if(curPt)list=list.filter(function(p){return (p.propertyType||'').toLowerCase().indexOf(curPt.toLowerCase().split(' ')[0])>=0});
   document.getElementById('listTitle').textContent=(curPt||'Properties')+' '+(curType==='rent'?'for rent':'for sale');
   var el=document.getElementById('props');
-  if(!list.length){el.innerHTML='<div class="empty" style="grid-column:1/-1"><div style="font-size:40px">🏠</div><b>No listings here yet.</b><br><span class="am">የሚፈልጉትን ከታች ይንገሩን — ከተረጋገጡ ወኪሎች እናፈላልጋለን።</span></div>';return}
+  if(!list.length){el.innerHTML='<div class="empty" style="grid-column:1/-1"><div style="font-size:40px">🏠</div><b>No listings here yet.</b><br><span class="am">የሚፈልጉትን ከታች ይንገሩን — እኛ እናፈላልግልዎታለን።</span></div>';return}
   el.innerHTML=list.map(card).join('');
 }
 function setType(t){curType=t;document.getElementById('sSale').classList.toggle('on',t==='sale');document.getElementById('sRent').classList.toggle('on',t==='rent');view()}
