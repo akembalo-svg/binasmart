@@ -18,18 +18,43 @@
 // re-measurable without re-pointing the gold set and is not reported here.
 //
 //   node --env-file=.env ops/bini/rerun-retrieval-benchmark.js [--limit N]
+//
+// Output: $BINI_EVAL_DIR (default /root/bini-eval)/retrieval-YYYYMMDD-HHMMSS.json (UTC), never overwritten,
+// plus retrieval-latest.json, a copy of the newest FULL run (a --limit run does not replace it).
+// Until 2026-09-14 the name was retrieval-<UTC date>.json, so two runs on one UTC day kept only the last.
 
 const fs = require('fs');
 const path = require('path');
-const { PrismaClient } = require('@prisma/client');
-const { makeKnowledge } = require('/var/www/connectcare/binasmart/knowledge');
 
 const GOLD = '/root/storage/bina-embed/eval/gold.json';
-const OUT = '/root/bini-eval';
-const limit = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : 0;
+const OUT = process.env.BINI_EVAL_DIR || '/root/bini-eval';
+const LATEST = 'retrieval-latest.json';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-(async () => {
+// retrieval-20260913-220955.json — UTC, to the second.
+function resultName(at = new Date()) {
+  const s = at.toISOString();
+  return 'retrieval-' + s.slice(0, 10).replace(/-/g, '') + '-' + s.slice(11, 19).replace(/:/g, '') + '.json';
+}
+
+// Write a run under a name no earlier run holds ('wx' fails instead of replacing; a same-second clash
+// gets -2, -3 …), then refresh retrieval-latest.json as a plain copy. Returns the dated path.
+function writeResult(dir, payload, at = new Date(), { latest = true } = {}) {
+  fs.mkdirSync(dir, { recursive: true });
+  const body = JSON.stringify(payload, null, 1);
+  const base = resultName(at).replace(/\.json$/, '');
+  for (let n = 1; ; n++) {
+    const f = path.join(dir, base + (n === 1 ? '' : '-' + n) + '.json');
+    try { fs.writeFileSync(f, body, { flag: 'wx' }); } catch (e) { if (e.code === 'EEXIST') continue; throw e; }
+    if (latest) fs.writeFileSync(path.join(dir, LATEST), body);
+    return f;
+  }
+}
+
+async function main() {
+  const { PrismaClient } = require('@prisma/client');
+  const { makeKnowledge } = require('/var/www/connectcare/binasmart/knowledge');
+  const limit = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : 0;
   const prisma = new PrismaClient();
   const k = makeKnowledge({ prisma, apiKey: process.env.GEMINI_API_KEY });
   await k.load();
@@ -87,9 +112,13 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     + (regressed.length ? '  [' + regressed.slice(0, 6).map(r => r.qid).join(', ') + ']' : ''));
   console.log('  found only after reranking: ' + rows.filter(r => !r.plain && r.shipped).length);
 
-  fs.mkdirSync(OUT, { recursive: true });
-  const f = path.join(OUT, 'retrieval-' + new Date().toISOString().slice(0, 10) + '.json');
-  fs.writeFileSync(f, JSON.stringify({ at: new Date().toISOString(), chunks: health.chunks, table, rows }, null, 1));
-  console.log('\n  written: ' + f);
+  const at = new Date();
+  const f = writeResult(OUT, { at: at.toISOString(), chunks: health.chunks, limit: limit || null, table, rows }, at, { latest: !limit });
+  console.log('\n  written: ' + f + (limit ? '  (--limit run: ' + LATEST + ' left alone)' : '  (and ' + LATEST + ')'));
   await prisma.$disconnect();
-})().catch(e => { console.error(e); process.exit(1); });
+}
+
+module.exports = { resultName, writeResult };
+
+// Only when run as a script: requiring it (the tests do) must not open the DB or spend Gemini calls.
+if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
