@@ -36,9 +36,58 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
   };
   const isPrivate = msg => !!(msg && msg.chat && msg.chat.type === 'private');
   const PASS = Symbol('not an owner command');   // sendMessage may resolve to anything; this cannot collide
+  const FAILED = Symbol('access lookup failed');
+  const SORRY = 'ይቅርታ፣ እንደገና ይሞክሩ። · Sorry, please try again.';
+  // When the records report cannot be built, the linked message still says what to do next.
+  const HEALTH_FALLBACK = 'ስለ መዝገብዎ ይጠይቁ — ለምሳሌ «በዚህ ወር ስንት ተከፈለ?» · Ask about your records, e.g. "How much was paid this month?"'
+    + '\n/bini — ቢኒ ለደንበኞች · customer Bini   /logout — ውጣ · sign out';
+
+  // A shared contact is an owner link attempt ONLY right after /start owner. The ride, pool, cinema and watch
+  // Mini Apps also drop the user's own contact into this chat (WebApp.requestContact); those keep their old reply
+  // and never touch the link (no silent re-link after /logout, no flip out of /bini mode).
+  const PENDING_MS = 10 * 60000;
+  const pendingLink = new Map();   // String(from.id) -> clock() when /start owner was sent
+  function markPending(fromId) {
+    const t = clock();
+    pendingLink.set(String(fromId), t);
+    if (pendingLink.size > 5000) for (const [k, v] of pendingLink) if (t - v > PENDING_MS) pendingLink.delete(k);
+  }
+  function takePending(fromId) {
+    const k = String(fromId), t = pendingLink.get(k);
+    if (t == null) return false;
+    pendingLink.delete(k);
+    return clock() - t <= PENDING_MS;
+  }
+
+  // Owner answers keep their slashes: "/bini", "ETB 12,000 /month" and "Units 101 /102" are not bina.et paths.
+  function forOwnerTelegram(text) {
+    return String(text || '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '$1 — $2');
+  }
+
+  // Telegram caps a message at 4096 characters; split on paragraph breaks into pieces of at most `max`.
+  function splitForTelegram(text, max = 3900) {
+    const out = [];
+    let cur = '';
+    for (let part of String(text).split('\n\n')) {
+      while (part.length > max) {                  // one paragraph longer than a message: cut at a line break
+        if (cur) { out.push(cur); cur = ''; }
+        let cut = part.lastIndexOf('\n', max);
+        if (cut <= 0) cut = max;
+        out.push(part.slice(0, cut));
+        part = part.slice(cut).replace(/^\n/, '');
+      }
+      if (!cur) cur = part;
+      else if (cur.length + 2 + part.length <= max) cur += '\n\n' + part;
+      else { out.push(cur); cur = part; }
+    }
+    if (cur) out.push(cur);
+    return out;
+  }
 
   async function ownerScopeFor(msg) {
-    if (!owner || !isPrivate(msg) || !msg.from) return null;
+    if (!owner || !isPrivate(msg) || !msg.from || String(msg.chat.id) !== String(msg.from.id)) return null;
     const s = await owner.access.scopeFor(msg.from.id).catch(e => { console.error('[binaBot] owner scope: ' + e.message); return null; });
     return s && s.mode === 'owner' ? s : null;
   }
@@ -48,7 +97,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     const reply = await owner.answer({ text: text.slice(0, 1200), from, chatId, scope })
       .catch(e => { console.error('[binaBot] owner answer: ' + e.message); return null; });
     if (!reply) return api.sendMessage(chatId, 'ቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ። · Bini is busy — please try again in a minute.');
-    return api.sendMessage(chatId, forTelegram(reply), { disable_web_page_preview: true,
+    return api.sendMessage(chatId, forOwnerTelegram(reply), { disable_web_page_preview: true,
       reply_markup: { inline_keyboard: [[{ text: '🏢 ዳሽቦርድ · Dashboard', url: baseUrl + '/owner' }]] } });
   }
 
@@ -64,20 +113,29 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       return api.sendMessage(chatId, 'ይቅርታ፣ አሁን ማገናኘት አልተቻለም። · Sorry, linking failed just now.', { reply_markup: NO_KB });
     }
     if (!r || !r.ok) return api.sendMessage(chatId, REFUSAL[(r && r.reason) || 'not_registered'] || REFUSAL.not_registered, { reply_markup: NO_KB });
-    const report = await owner.health(r.scope).catch(() => null);
-    return api.sendMessage(chatId, '✅ ተገናኝቷል · Linked\n\n' + (report || ''), { reply_markup: NO_KB });
+    const report = await owner.health(r.scope).catch(e => { console.error('[binaBot] owner health: ' + e.message); return null; });
+    const parts = splitForTelegram('✅ ተገናኝቷል · Linked\n\n' + (report || HEALTH_FALLBACK));
+    let last;
+    for (let i = 0; i < parts.length; i++) last = await api.sendMessage(chatId, parts[i], i === 0 ? { reply_markup: NO_KB } : {});
+    return last;
   }
 
   async function handleOwnerCommand(chatId, msg, text) {
-    if (/^\/start\s+owner\b/.test(text)) return api.sendMessage(chatId, OWNER_START, { reply_markup: SHARE_KB });
-    if (msg.contact) return linkOwner(chatId, msg);
+    if (/^\/start\s+owner\b/.test(text)) {
+      markPending(msg.from.id);
+      return api.sendMessage(chatId, OWNER_START, { reply_markup: SHARE_KB });
+    }
+    if (msg.contact) return takePending(msg.from.id) ? linkOwner(chatId, msg) : PASS;
     if (/^\/logout\b/.test(text)) {
-      const done = await owner.access.unlink(msg.from.id).catch(() => false);
+      pendingLink.delete(String(msg.from.id));
+      const done = await owner.access.unlink(msg.from.id).catch(e => { console.error('[binaBot] owner unlink: ' + e.message); return FAILED; });
+      if (done === FAILED) return api.sendMessage(chatId, SORRY, { reply_markup: NO_KB });
       return api.sendMessage(chatId, done ? 'ከቢኒ ለባለቤቶች ወጥተዋል። · Signed out of Bini for owners.' : NOT_LINKED, { reply_markup: NO_KB });
     }
     const m = /^\/(bini|owner)\b/.exec(text);
     if (m) {
-      const done = await owner.access.setMode(msg.from.id, m[1]).catch(() => false);
+      const done = await owner.access.setMode(msg.from.id, m[1]).catch(e => { console.error('[binaBot] owner mode: ' + e.message); return FAILED; });
+      if (done === FAILED) return api.sendMessage(chatId, SORRY);
       if (!done) return api.sendMessage(chatId, NOT_LINKED);
       return api.sendMessage(chatId, m[1] === 'bini'
         ? 'ቢኒ ለደንበኞች ተመልሷል። ወደ ባለቤት ቢኒ ለመመለስ /owner ይጻፉ። · Customer Bini is back. Type /owner to return to Bini for owners.'
@@ -235,6 +293,6 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     if (cq.data === 'menu') return api.sendMessage(String(cq.message.chat.id), 'Pick a service · አገልግሎት ይምረጡ 👇', { reply_markup: menuMarkup() });
   }
 
-  return { handleUpdate: u => (u && u.callback_query ? handleCallback(u.callback_query) : handleUpdate(u)), forTelegram, _hist: hist, MENU, COMMANDS };
+  return { handleUpdate: u => (u && u.callback_query ? handleCallback(u.callback_query) : handleUpdate(u)), forTelegram, forOwnerTelegram, _hist: hist, MENU, COMMANDS };
 }
 module.exports = { makeBinaBot, MENU, COMMANDS };
