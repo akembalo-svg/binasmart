@@ -27,7 +27,7 @@ test('what is stored is the hash, never the key', async () => {
   assert.equal(w.rows.length, 1);
   assert.equal(w.rows[0].keyHash, hashKey(key));
   assert.equal(JSON.stringify(w.rows).includes(key), false, 'the key appears nowhere in storage');
-  assert.equal(JSON.stringify(w.rows).includes(key.split('-')[1]), false);
+  assert.equal(JSON.stringify(w.rows).includes(key.slice(key.indexOf('-') + 1)), false);   // base64url secrets can contain '-'
 });
 
 test('a key opens its own building and no other', async () => {

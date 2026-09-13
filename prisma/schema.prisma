@@ -1514,7 +1514,8 @@ model OwnerAccess {
   id        String    @id @default(cuid())
   kind      String    // building (v1) | shop | venue | hotel | clinic
   entityId  String
-  phoneKey  String    // ride/phone.js phoneKey() of the approved number
+  phoneKey  String    // ride/phone.js phoneKey(): display and rate limits only, never matching
+  phoneE164 String    // the approved number in full (+2519…); all matching uses this
   role      String    @default("owner") // owner | staff
   label     String?
   addedBy   String    // ops | owner:<id>
@@ -1522,6 +1523,7 @@ model OwnerAccess {
   revokedAt DateTime?
 
   @@index([phoneKey])
+  @@index([phoneE164])
   @@index([kind, entityId])
 }
 
@@ -1530,13 +1532,16 @@ model OwnerTgLink {
   id         String    @id @default(cuid())
   telegramId String    @unique
   chatId     String
-  phoneKey   String
+  phoneKey   String    // display only
+  phoneE164  String    // the number Telegram vouched for, in full
   mode       String    @default("owner") // owner | bini
   linkedAt   DateTime  @default(now())
   lastSeen   DateTime  @default(now())
   revokedAt  DateTime?
+  revokedReason String? // self | dashboard | ops | replaced | access
 
   @@index([phoneKey])
+  @@index([phoneE164])
 }
 
 // An agent is on for a business only while this row exists and is not disabled.
