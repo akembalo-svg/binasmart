@@ -103,6 +103,9 @@ function makeHandover({ sendTg, chatId, now }) {
   const clock = now || Date.now; const last = new Map();
   return async function handover({ userKey, channel, lang, user, message, reply, history, summary, reason, explicit }) {
     if (!sendTg || !chatId) return false;
+    // An evaluation takes the real path on purpose, but it must not page a person: afiya-eval.js alone
+    // sends nine emergencies. userKey() prefixes every evaluation request with 'eval:'.
+    if (/^eval:/.test(String(userKey || ''))) { console.log('[handover] evaluation, not paged: ' + (reason || '-')); return false; }
     const t = clock();
     if (!explicit && last.has(userKey) && t - last.get(userKey) < 1800000) return false;
     last.set(userKey, t); if (last.size > 5000) last.clear();
