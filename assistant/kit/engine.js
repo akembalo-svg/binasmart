@@ -18,6 +18,17 @@ const REQUIRED = ['name', 'soul', 'gates', 'inScope', 'redirect', 'finish', 'fal
 const TOOL_RESULT_LIMIT = 6000; // callBini sends JSON.stringify(out).slice(0, 6000) to the model
 const { sourcesFrom } = require('./sources');
 
+// What the engine hands contextFor. Only the two list fields of a knowledge declaration are passed, copied, so a
+// definition can neither change k or the voice lookups nor be mutated by the index.
+function knowledgeOptions(agent, l) {
+  const o = { lang: l };
+  const kn = agent && agent.knowledge;
+  if (!kn || typeof kn !== 'object') return o;
+  if (Array.isArray(kn.prefer)) o.prefer = kn.prefer.slice();
+  if (Array.isArray(kn.exclude)) o.exclude = kn.exclude.slice();
+  return o;
+}
+
 function makeEngine(deps) {
   const { callModel, contextFor, lang: L, memory, handover, dropUngrounded, isEval } = deps;
   const warn = deps.warn || (m => console.warn(m));
@@ -69,9 +80,10 @@ function makeEngine(deps) {
     };
 
     try {
-      // 3. Prompt.
+      // 3. Prompt. An agent may declare knowledge: { prefer, exclude } (see knowledge/index.js, pageMatcher);
+      // an agent that declares nothing gets exactly the call every agent made before.
       const ctx = agent.knowledge === false ? ''
-        : await Promise.resolve().then(() => contextFor(msg, { lang: l })).catch(() => '');
+        : await Promise.resolve().then(() => contextFor(msg, knowledgeOptions(agent, l))).catch(() => '');
       const extra = agent.context ? (await agent.context(c, deps)) || {} : {};
       const sys = agent.soul + '\n\n' + L.directive(lang)
         + (ctx ? '\n\n## Information you may use\n' + ctx : '')
@@ -146,4 +158,4 @@ function makeEngine(deps) {
   };
 }
 
-module.exports = { makeEngine, REQUIRED };
+module.exports = { makeEngine, REQUIRED, knowledgeOptions };

@@ -11,6 +11,19 @@ module.exports = {
   soul: afiya.SYSTEM,
   maxTokens: 700,
 
+  // What she reads (knowledge/index.js, pageMatcher). From the gap audit of 2026-09-14 (120 probe questions):
+  // with the whole index and the own-source boost, the etrade BUSINESS licence checker answered "is this clinic /
+  // doctor licensed?" (a patient sent to the wrong register), the Mesob guide's "where is it" section answered
+  // Amharic "where can I get…" questions, and the amharic-ai and insurance marketing pages took slots from the
+  // health documents. None of the excluded pages produced a single good answer for her in that audit.
+  // Preferred: the health library and the MoH site (most of her good answers), the labour law (sick and maternity
+  // leave), the Addis notes (emergency numbers) and the one health regulator in the eServices directory.
+  knowledge: {
+    prefer: ['health', 'web:moh/*', 'law:labour-proclamation-1156-2019', 'addis', 'eservices:ethiopian-food-and-drug-authority'],
+    exclude: ['page', 'skill', 'llms', 'guide:business-registration-ethiopia', 'guide:how-to-start-a-business-in-ethiopia',
+      'guide:mesob', 'guide:telebirr', 'guide:tenant-screening-ethiopia'],
+  },
+
   gates: [
     // An emergency: fixed answer, no model, and a human is told straight away.
     { test: c => afiya.isEmergency(c.msg),

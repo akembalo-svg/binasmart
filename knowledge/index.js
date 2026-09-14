@@ -278,9 +278,47 @@ function fromBuf(buf) { return new Float32Array(buf.buffer, buf.byteOffset, buf.
 // news article gets, so a guide still wins a close call against an article in the question's language.
 const OWN_SOURCES = new Set(['guide', 'page', 'addis', 'skill', 'llms', 'docs']);
 const OWN_BOOST = 0.06;
-function hybridScore({ cos = 0, kw = 0, source, hasVec = true }) {
-  const own = OWN_SOURCES.has(source) ? OWN_BOOST : 0;
+// `preferred` is left undefined by every caller that has no preference, and then the rule is exactly the one
+// above. An agent that declares its own preference (knowledge: { prefer }) gets the same tie-breaker, moved
+// to the sources it named: the boost goes to what it prefers, and nothing else gets one.
+function hybridScore({ cos = 0, kw = 0, source, hasVec = true, preferred }) {
+  const boosted = preferred === undefined ? OWN_SOURCES.has(source) : !!preferred;
+  const own = boosted ? OWN_BOOST : 0;
   return (hasVec ? cos + 0.15 * kw : kw) + (hasVec ? own : own * 0.5);
+}
+
+// ---------- per-agent source preference ----------
+// An agent definition may say which documents it prefers and which must never be its context:
+//   knowledge: { prefer: ['health', 'web:moh/*'], exclude: ['page', 'guide:mesob'] }
+// An entry is a whole source ('health'), one page ('guide:mesob'), or every page whose slug starts with a prefix,
+// written with a trailing star ('web:moh/*', 'news:law-*').
+// Why this exists (gap audit, 2026-09-14): with the whole index and the own-source boost, Dr Afiya was handed
+// the etrade BUSINESS licence checker for "is this clinic licensed?" and Asmat the airport-transfer page for
+// "transfer a title deed". Returns null for an empty list, so "no list" and "empty list" cost nothing per row.
+function pageMatcher(list) {
+  const src = new Set(), pages = new Set(), prefixes = [];
+  for (const e of Array.isArray(list) ? list : []) {
+    const s = String(e || '').trim(); if (!s) continue;
+    const i = s.indexOf(':');
+    if (i < 0) { src.add(s); continue; }
+    const so = s.slice(0, i), sl = s.slice(i + 1);
+    if (!so || !sl) continue;
+    if (sl.endsWith('*')) { if (sl.length > 1) prefixes.push([so, sl.slice(0, -1)]); else src.add(so); }
+    else pages.add(so + ' ' + sl);
+  }
+  if (!src.size && !pages.size && !prefixes.length) return null;
+  return (source, slug) => src.has(source) || pages.has(source + ' ' + slug)
+    || prefixes.some(([so, p]) => so === source && String(slug).startsWith(p));
+}
+
+// The search options contextFor uses, in one place so an evaluation can run exactly the same retrieval.
+// With no prefer and no exclude this is, to the key, what contextFor passed before per-agent preferences existed.
+// The voice corpora are always excluded from the facts block, whatever an agent lists.
+function contextSearchOptions({ k = 6, prefer, exclude } = {}) {
+  const o = { k: Math.min(k * 3, 18), exclude: ['style', 'style-om'], rerankTo: k };
+  if (Array.isArray(exclude) && exclude.length) o.exclude = o.exclude.concat(exclude.map(String));
+  if (Array.isArray(prefer)) o.prefer = prefer.map(String);
+  return o;
 }
 
 // ---------- the index ----------
@@ -436,7 +474,9 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     } finally { clearTimeout(t); }
   }
 
-  async function search(q, { k = 4, sources, exclude, isPublic = false, rerankTo = 0 } = {}) {
+  // exclude: sources, or single pages as 'source:slug' (see pageMatcher). prefer: when given (even empty), the
+  // own-source boost goes only to what it names; when absent, ranking is exactly what it always was.
+  async function search(q, { k = 4, sources, exclude, isPublic = false, rerankTo = 0, prefer } = {}) {
     await ensureLoaded();
     stats.searches++;
     const query = String(q || '').trim(); if (!query) return [];
@@ -447,15 +487,17 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
       catch (e) { stats.embedErr++; qv = null; }
     }
     if (!qv) stats.keywordOnly++;
+    const excluded = pageMatcher(exclude);
+    const preferred = Array.isArray(prefer) ? (pageMatcher(prefer) || (() => false)) : null;
     const scored = [];
     for (const r of rows) {
       if (isPublic && (r.source === 'skill' || r.source === 'style' || r.source === 'style-om')) continue;
       if (sources && !sources.includes(r.source)) continue;
-      if (exclude && exclude.includes(r.source)) continue;
+      if (excluded && excluded(r.source, r.slug)) continue;
       let cos = 0;
       if (qv && r.vec) { for (let i = 0; i < DIMS; i++) cos += qv[i] * r.vec[i]; }
       const kw = keywordScore(qt, r);
-      const score = hybridScore({ cos, kw, source: r.source, hasVec: !!qv });
+      const score = hybridScore({ cos, kw, source: r.source, hasVec: !!qv, preferred: preferred ? preferred(r.source, r.slug) : undefined });
       if (score > 0) scored.push({ r, score, cos, kw });
     }
     scored.sort((a, b) => b.score - a.score);
@@ -482,7 +524,9 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   // styleK was set when the style corpus was 30 chunks; it is now 70+ and carries the correction rules,
   // so two examples under-uses what is there. Amharic costs ~2 tokens per character, so this is not free -
   // revisit if latency or spend moves noticeably.
-  async function contextFor(message, { k = 6, styleK = 4, lang } = {}) {
+  // prefer / exclude: an agent's own knowledge declaration (assistant/kit/engine.js passes it). Bini's route and
+  // every other caller pass neither and get exactly the retrieval they always had.
+  async function contextFor(message, { k = 6, styleK = 4, lang, prefer, exclude } = {}) {
     const m = String(message || '').trim();
     const words = m.split(/\s+/).filter(Boolean);
     const am = lang ? (lang === 'am' || lang === 'am-latin') : isAmharic(m);
@@ -492,7 +536,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     if (!greeting && (words.length >= 2 || am || om)) {
       // Retrieve a wider pool, then rerank down to k. Style lookups below are deliberately NOT reranked:
       // voice examples are chosen for register, not for whether they answer the question.
-      const hits = await search(m, { k: Math.min(k * 3, 18), exclude: ['style', 'style-om'], rerankTo: k });
+      const hits = await search(m, contextSearchOptions({ k, prefer, exclude }));
       if (hits.length) {
         const lines = hits.map((h, i) => '[' + (i + 1) + '] ' + h.title + (h.url ? ' — ' + h.url : '') + '\n' + h.text.replace(/\n{2,}/g, '\n'));
         blocks.push('## Relevant BinaSmart knowledge (facts here override anything you remember; cite the page link when useful)\n' + lines.join('\n\n'));
@@ -513,4 +557,4 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
   return { load, ingest, search, contextFor, health, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf };
+module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf };

@@ -13,6 +13,17 @@ module.exports = {
   soul: asmat.SYSTEM,
   maxTokens: 700,
 
+  // What he reads (knowledge/index.js, pageMatcher). From the gap audit of 2026-09-14 (120 probe questions): his
+  // good answers came from the law library, BinaSmart's legal guides and the law articles (news law-1, law-2);
+  // BinaSmart's service pages won questions they cannot answer — the airport-transfer page for "transfer a title
+  // deed", the property listings for condominium resale, amharic-ai, for-filmmakers — and the internal system notes
+  // and llms.txt filled slots without answering anything. The eServices directory says which office handles a
+  // service and where to apply (DARS contracts and powers of attorney, ICS, MoJ).
+  knowledge: {
+    prefer: ['law', 'guide', 'eservices', 'news:law-*'],
+    exclude: ['page', 'skill', 'llms'],
+  },
+
   gates: [
     // A medical emergency reaches the ambulance even here. Being on the wrong page is not the person's problem.
     { test: c => afiya.isEmergency(c.msg),
