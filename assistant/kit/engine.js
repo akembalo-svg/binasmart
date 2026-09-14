@@ -16,6 +16,7 @@
 
 const REQUIRED = ['name', 'soul', 'gates', 'inScope', 'redirect', 'finish', 'fallback'];
 const TOOL_RESULT_LIMIT = 6000; // callBini sends JSON.stringify(out).slice(0, 6000) to the model
+const { sourcesFrom } = require('./sources');
 
 function makeEngine(deps) {
   const { callModel, contextFor, lang: L, memory, handover, dropUngrounded, isEval } = deps;
@@ -128,7 +129,10 @@ function makeEngine(deps) {
       if (agent.log !== false) memory.log({ userKey, channel, lang: l, message: msg, reply: text, tools: [agent.name],
         miss: memory.isMiss(text, { tools: [agent.name], message: msg }), ms: Date.now() - t0 });
       if (agent.audit) runAudit();
-      return Object.assign({ reply: text }, agent.okFlags || {});
+      // The documents the answer's knowledge came from, for the chat page's "From:" line (at most two, public
+      // links only). Added only when there are some, so every other response keeps its exact shape.
+      const sources = agent.knowledge === false ? [] : sourcesFrom(ctx);
+      return Object.assign({ reply: text }, agent.okFlags || {}, sources.length ? { sources } : {});
     } catch (e) {
       req.log && req.log.error({ err: e }, agent.name + ' failed');
       if (agent.audit && toolResults.length) runAudit();
