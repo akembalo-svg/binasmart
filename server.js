@@ -1158,15 +1158,19 @@ const runAgent = makeEngine({
   callModel: callBini, contextFor: (q, o) => knowledge.contextFor(q, o), lang: biniLang, memory: biniMemory,
   handover: biniHandover, dropUngrounded, isEval, prisma, audit,
 });
+// Questions per hour on /afiya and /asmat (assistant/kit/limit.js): 30 per phone, 150 per address (many phones
+// share one Ethio Telecom address). The engine checks it after the emergency gates, so those are never refused.
+const { makeAgentLimit } = require('./assistant/kit/limit');
+const agentLimit = makeAgentLimit({ ipLimit: hotelLimiter(3600000, 150), uidLimit: hotelLimiter(3600000, 30) });
 
 // ===== Asmat (አስማት): Ethiopian legal procedure and documents. Not a lawyer, and built so he cannot act like one. =====
-fastify.post('/api/asmat', (req, reply) => runAgent(asmatAgent, req, reply));
+fastify.post('/api/asmat', (req, reply) => runAgent(asmatAgent, req, reply, { limit: agentLimit(req) }));
 
 // ===== Dr Afiya (ዶ/ር አፍያ): health-system guide. Not a clinician, and built so she cannot act like one. =====
 // Order matters and is the whole design: an emergency is answered by assistant/afiya.js without the model,
 // because a model that is right 99 times in 100 is not good enough when the hundredth caller is having a
 // stroke. Everything else is grounded, stripped of any dosage, and closed with the disclosure.
-fastify.post('/api/afiya', (req, reply) => runAgent(afiyaAgent, req, reply));
+fastify.post('/api/afiya', (req, reply) => runAgent(afiyaAgent, req, reply, { limit: agentLimit(req) }));
 
 fastify.get('/api/assistant/misses', async (req, reply) => {
   if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });

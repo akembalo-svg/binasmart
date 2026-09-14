@@ -69,5 +69,10 @@ module.exports = {
     ? 'ይቅርታ፣ አሁን መልስ መስጠት አልቻልኩም። አስቸኳይ ከሆነ ' + afiya.AMBULANCE + ' ይደውሉ።'
     : 'Sorry, I could not answer just now. If this is urgent, call ' + afiya.AMBULANCE + '.'),
 
+  // Too many questions in a short time (assistant/kit/limit.js). Emergencies never reach this.
+  limited: c => c.l === 'am'
+    ? 'በአጭር ጊዜ ብዙ ጥያቄዎች ደርሰውኛል። እባክዎ ትንሽ ቆይተው እንደገና ይጠይቁ። አስቸኳይ ከሆነ አሁኑኑ ' + afiya.AMBULANCE + ' ይደውሉ።'
+    : 'You have asked many questions in a short time. Please wait a little and ask again. If this is urgent, call ' + afiya.AMBULANCE + ' now.',
+
   okFlags: { emergency: false },
 };

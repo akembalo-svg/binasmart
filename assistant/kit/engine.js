@@ -55,6 +55,11 @@ function makeEngine(deps) {
     // 2. Scope: anything off-subject goes back with a link, and costs nothing.
     if (!agent.inScope(c)) return { reply: agent.redirect(c), redirected: true };
 
+    // 2b. Limit (options.limit, set by the route): checked only here, after the gates and the scope, so an
+    // emergency, an urgent answer or a redirect is never counted and never refused. Nothing below runs.
+    if (options.limit && !options.limit(c))
+      return { reply: (agent.limited || agent.fallback)(c), limited: true };
+
     // Declared before the try so a failure after tools ran can still be audited with what they did.
     const toolResults = [];
     const runAudit = () => {

@@ -73,5 +73,9 @@ module.exports = {
   },
 
   fallback: c => asmat.disclosure(c.l),
+  // Too many questions in a short time (assistant/kit/limit.js). Arrests and evictions never reach this.
+  limited: c => c.l === 'am'
+    ? 'በአጭር ጊዜ ብዙ ጥያቄዎች ደርሰውኛል። እባክዎ ትንሽ ቆይተው እንደገና ይጠይቁ። ማንም አደጋ ላይ ከሆነ ለፖሊስ ' + asmat.POLICE + ' ይደውሉ።'
+    : 'You have asked many questions in a short time. Please wait a little and ask again. If anyone is in danger, call the police on ' + asmat.POLICE + '.',
   okFlags: { urgent: false },
 };

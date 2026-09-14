@@ -13,8 +13,9 @@ function routeBody(signature) {
 }
 
 test('/api/afiya and /api/asmat delegate to the agent engine in one line', () => {
-  assert.equal(routeBody("fastify.post('/api/afiya'"), "fastify.post('/api/afiya', (req, reply) => runAgent(afiyaAgent, req, reply));");
-  assert.equal(routeBody("fastify.post('/api/asmat'"), "fastify.post('/api/asmat', (req, reply) => runAgent(asmatAgent, req, reply));");
+  assert.equal(routeBody("fastify.post('/api/afiya'"), "fastify.post('/api/afiya', (req, reply) => runAgent(afiyaAgent, req, reply, { limit: agentLimit(req) }));");
+  assert.equal(routeBody("fastify.post('/api/asmat'"), "fastify.post('/api/asmat', (req, reply) => runAgent(asmatAgent, req, reply, { limit: agentLimit(req) }));");
+  assert.ok(src.includes('const agentLimit = makeAgentLimit({ ipLimit: hotelLimiter(3600000, 150), uidLimit: hotelLimiter(3600000, 30) });'));
 });
 
 test('the engine is built from the production dependencies', () => {
