@@ -18,9 +18,10 @@ module.exports = {
   // BinaSmart's service pages won questions they cannot answer — the airport-transfer page for "transfer a title
   // deed", the property listings for condominium resale, amharic-ai, for-filmmakers — and the internal system notes
   // and llms.txt filled slots without answering anything. The eServices directory says which office handles a
-  // service and where to apply (DARS contracts and powers of attorney, ICS, MoJ).
+  // service and where to apply (DARS contracts and powers of attorney, ICS, MoJ). The Ministry of Justice's own pages
+  // are preferred too: they carried the only legal-aid answers (S39, S57), which the first run without them lost.
   knowledge: {
-    prefer: ['law', 'guide', 'eservices', 'news:law-*'],
+    prefer: ['law', 'guide', 'eservices', 'news:law-*', 'web:justice/*'],
     exclude: ['page', 'skill', 'llms'],
   },
 

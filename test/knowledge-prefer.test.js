@@ -132,7 +132,7 @@ test('Asmat never receives the airport-transfer page and prefers the law library
   assert.ok(asmat && Array.isArray(asmat.prefer) && Array.isArray(asmat.exclude));
   const ex = pageMatcher(asmat.exclude), pre = pageMatcher(asmat.prefer);
   for (const [s, slug] of [['page', 'airport'], ['page', 'property'], ['page', 'amharic-ai'], ['skill', 'binasmart-system']]) assert.equal(ex(s, slug), true, s + ':' + slug);
-  for (const [s, slug] of [['law', 'fdre-constitution'], ['guide', 'rental-agreement-ethiopia'], ['eservices', 'document-authentication-and-registration-service'], ['news', 'law-2-house-rent']]) assert.equal(pre(s, slug), true, s + ':' + slug);
+  for (const [s, slug] of [['law', 'fdre-constitution'], ['guide', 'rental-agreement-ethiopia'], ['eservices', 'document-authentication-and-registration-service'], ['news', 'law-2-house-rent'], ['web', 'justice/f5d8d49b9a49']]) assert.equal(pre(s, slug), true, s + ':' + slug);
   assert.equal(pre('news', 'celebrity'), false);
   const k = store(DOCS, { withKey: false });
   const ctx = await k.contextFor('how do I transfer a house title deed to a buyer', { lang: 'en', ...asmat });
