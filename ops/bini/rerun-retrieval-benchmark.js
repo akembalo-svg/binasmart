@@ -31,6 +31,15 @@
 // questions on single article pages whose answer passage is verified in the index (ops/bini/build-gold-v2.js).
 // A gold question that carries a `passage` also gets a second score: "any page" — is ANY page among the
 // top three one whose indexed text contains that passage (the same story often runs on two sites).
+//
+// v3 (gold-v3-agents.json, 14 September) is the 120 gap-audit questions asked of Dr Afiya and Asmat. It is an
+// object { questions, coverage_gaps }: each scored question names its agent, its grade (GOOD/PARTIAL) and one or
+// more gold pages (source + slug; an answer often sits in both the English and the Amharic text of a law), and
+// the NONE questions are listed as coverage gaps and never scored. An agent question is searched with exactly the
+// options contextFor builds from that agent's `knowledge` declaration (agents/<agent>/rules.js), with and without
+// the reranker, and a gold page matches on source AND slug. v3 adds per-agent and cross-lingual slices
+// (Amharic question, gold page in English) and the rank of the first gold page (for MRR) to the output.
+//   node --env-file=.env ops/bini/rerun-retrieval-benchmark.js --gold /root/storage/bina-embed/eval/gold-v3-agents.json
 
 const fs = require('fs');
 const path = require('path');
@@ -83,9 +92,40 @@ function pagesContaining(chunks, passage) {
   return out;
 }
 
+// v1/v2 are a list of questions with one gold page; v3 is { questions, coverage_gaps } with gold_pages.
+// Returns { questions: [...each with goldPages: [{source, slug}]], gaps: [...] }.
+function normalizeGold(raw) {
+  const list = Array.isArray(raw) ? raw : (raw && raw.questions) || [];
+  const gaps = Array.isArray(raw) ? [] : (raw && raw.coverage_gaps) || [];
+  const questions = list.map(q => ({ ...q,
+    goldPages: Array.isArray(q.gold_pages) && q.gold_pages.length
+      ? q.gold_pages.map(p => ({ source: p.source, slug: p.slug }))
+      : [{ source: q.gold_source, slug: q.gold_slug }] }));
+  return { questions, gaps };
+}
+// v1/v2 always matched on slug alone and keep doing so (their published figures depend on it); an agent
+// question (v3) matches on source and slug, so law:x is not guide:x.
+const strictGold = q => !!q.agent;
+function goldKeys(q) { return q.goldPages.map(p => (strictGold(q) ? p.source + ':' + p.slug : p.slug)); }
+// 1-based rank of the first gold page among the distinct pages of a hit list, or null.
+function pageRank(hits, keys, strict) {
+  const pages = [];
+  for (const h of hits) { const key = strict ? h.source + ':' + h.slug : h.slug; if (!pages.includes(key)) pages.push(key); }
+  const i = pages.findIndex(p => keys.includes(p));
+  return i < 0 ? null : i + 1;
+}
+// The two searches run per question. No agent: the options this benchmark always used. An agent: exactly what
+// contextFor passes for that agent (contextSearchOptions), as shipped, and the same without the reranker.
+function searchOptionsFor(q, { contextSearchOptions, knowledgeOf }) {
+  if (!q.agent) return { plain: { k: 18, exclude: ['style', 'style-om'] }, shipped: { k: 18, exclude: ['style', 'style-om'], rerankTo: 6 } };
+  const shipped = contextSearchOptions(knowledgeOf(q.agent) || {});
+  const plain = { ...shipped }; delete plain.rerankTo;
+  return { plain, shipped };
+}
+
 async function main() {
   const { PrismaClient } = require('@prisma/client');
-  const { makeKnowledge } = require('/var/www/connectcare/binasmart/knowledge');
+  const { makeKnowledge, contextSearchOptions } = require('/var/www/connectcare/binasmart/knowledge');
   const limit = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : 0;
   const prisma = new PrismaClient();
   const k = makeKnowledge({ prisma, apiKey: process.env.GEMINI_API_KEY });
@@ -95,14 +135,18 @@ async function main() {
 
   const goldFile = goldPath();
   const tag = goldTag(goldFile);
-  let gold = JSON.parse(fs.readFileSync(goldFile, 'utf8'));
+  const norm = normalizeGold(JSON.parse(fs.readFileSync(goldFile, 'utf8')));
+  let gold = norm.questions;
   if (limit) gold = gold.slice(0, limit);
   console.log('gold set: ' + goldFile + (tag ? '  (tag ' + tag + ')' : '  (v1)'));
+  if (norm.gaps.length) console.log('coverage gaps (no gold page, not scored): ' + norm.gaps.length);
+  const knowledgeOf = agent => require(path.join(__dirname, '..', '..', 'agents', agent, 'rules')).knowledge || {};
 
   // Which gold pages still exist? A question whose page was deleted cannot be found, and counting it
   // as a miss would understate the system while dropping it silently would flatter it. Report both.
-  const slugs = new Set((await prisma.knowledgeChunk.findMany({ select: { slug: true } })).map(r => r.slug));
-  const alive = q => slugs.has(q.gold_slug);
+  const pageRows = await prisma.knowledgeChunk.findMany({ select: { source: true, slug: true } });
+  const slugs = new Set(pageRows.map(r => r.slug)), pagesAlive = new Set(pageRows.map(r => r.source + ':' + r.slug));
+  const alive = q => goldKeys(q).some(key => (strictGold(q) ? pagesAlive : slugs).has(key));
   console.log('gold questions: ' + gold.length + ', whose gold page still exists: ' + gold.filter(alive).length);
 
   // "Any page containing the answer passage" — only for questions that carry one (v2's crawled-web slice).
@@ -120,17 +164,21 @@ async function main() {
   for (let i = 0; i < gold.length; i++) {
     const g = gold[i];
     let plain = [], shipped = [];
+    const opts = searchOptionsFor(g, { contextSearchOptions, knowledgeOf });
     try {
-      plain = await k.search(g.question, { k: 18, exclude: ['style', 'style-om'] });
-      shipped = await k.search(g.question, { k: 18, exclude: ['style', 'style-om'], rerankTo: 6 });
+      plain = await k.search(g.question, opts.plain);
+      shipped = await k.search(g.question, opts.shipped);
     } catch (e) { console.log('  ! ' + g.qid + ' ' + e.message); }
-    const pages = hits => { const out = []; for (const h of hits) if (!out.includes(h.slug)) out.push(h.slug); return out; };
-    const p3 = hits => pages(hits).slice(0, 3).includes(g.gold_slug);
+    const strict = strictGold(g), keys = goldKeys(g);
+    const pages = hits => { const out = []; for (const h of hits) { const p = strict ? h.source + ':' + h.slug : h.slug; if (!out.includes(p)) out.push(p); } return out; };
+    const p3 = hits => { const r = pageRank(hits, keys, strict); return r !== null && r <= 3; };
     const ans = answerPages.get(g.qid);
     const any3 = hits => ans ? pages(hits).slice(0, 3).some(s => ans.has(s)) : null;
     rows.push({ qid: g.qid, lang: g.lang, source: g.gold_source, slug: g.gold_slug, alive: alive(g),
       plain: p3(plain), shipped: p3(shipped), top: pages(shipped).slice(0, 3),
-      ...(ans ? { answerPages: [...ans], plainAny: any3(plain), shippedAny: any3(shipped), topPlain: pages(plain).slice(0, 3) } : {}) });
+      ...(ans ? { answerPages: [...ans], plainAny: any3(plain), shippedAny: any3(shipped), topPlain: pages(plain).slice(0, 3) } : {}),
+      ...(g.agent ? { agent: g.agent, grade: g.grade, gold: keys, crossLingual: !!g.crossLingual, strictCrossLingual: !!g.strictCrossLingual,
+        plainRank: pageRank(plain, keys, true), shippedRank: pageRank(shipped, keys, true), topPlain: pages(plain).slice(0, 3) } : {}) });
     if ((i + 1) % 20 === 0) console.log('  ' + (i + 1) + '/' + gold.length);
     await sleep(300);
   }
@@ -141,6 +189,9 @@ async function main() {
     const t = { name, n: list.length, plain: pct(list, r => r.plain), shipped: pct(list, r => r.shipped) };
     const scored = list.filter(r => r.plainAny !== undefined);
     if (withPassage.length) Object.assign(t, { nAny: scored.length, plainAny: pct(scored, r => r.plainAny), shippedAny: pct(scored, r => r.shippedAny) });
+    // v3 only: mean reciprocal rank of the first gold page (a miss counts 0)
+    const mrr = f => list.length ? (list.reduce((s, r) => s + (r[f] ? 1 / r[f] : 0), 0) / list.length).toFixed(3) : '—';
+    if (list.length && list.every(r => r.agent)) Object.assign(t, { mrrPlain: mrr('plainRank'), mrrShipped: mrr('shippedRank') });
     return t;
   };
 
@@ -153,9 +204,18 @@ async function main() {
     slice('Amharic', rows.filter(r => r.lang === 'am')),
     slice('English', rows.filter(r => r.lang === 'en')),
   ];
+  if (rows.some(r => r.agent)) {
+    for (const agent of [...new Set(rows.filter(r => r.agent).map(r => r.agent))]) {
+      table.push(slice(agent, rows.filter(r => r.agent === agent)));
+      for (const lang of ['am', 'en']) table.push(slice('  ' + agent + ' ' + lang, rows.filter(r => r.agent === agent && r.lang === lang)));
+    }
+    table.push(slice('am question, gold only in English', rows.filter(r => r.lang === 'am' && r.strictCrossLingual)));
+    table.push(slice('question + gold share a language', rows.filter(r => r.agent && !r.crossLingual)));
+  }
   console.log('\n  Page@3 — is the right page in the top three?\n');
   console.log('  ' + 'slice'.padEnd(36) + 'n'.padStart(5) + 'retrieval'.padStart(12) + 'as shipped'.padStart(13));
-  for (const t of table) console.log('  ' + t.name.padEnd(36) + String(t.n).padStart(5) + t.plain.padStart(12) + t.shipped.padStart(13));
+  for (const t of table) console.log('  ' + t.name.padEnd(36) + String(t.n).padStart(5) + t.plain.padStart(12) + t.shipped.padStart(13)
+    + (t.mrrPlain ? '   MRR ' + t.mrrPlain + ' / ' + t.mrrShipped : ''));
   if (withPassage.length) {
     console.log('\n  Any page@3 — is ANY page whose text holds the answer passage in the top three? (questions with a passage only)\n');
     console.log('  ' + 'slice'.padEnd(36) + 'n'.padStart(5) + 'retrieval'.padStart(12) + 'as shipped'.padStart(13));
@@ -178,7 +238,8 @@ async function main() {
   await prisma.$disconnect();
 }
 
-module.exports = { resultName, writeResult, goldPath, goldTag, latestName, normText, pagesContaining, GOLD };
+module.exports = { resultName, writeResult, goldPath, goldTag, latestName, normText, pagesContaining, GOLD,
+  normalizeGold, goldKeys, pageRank, searchOptionsFor };
 
 // Only when run as a script: requiring it (the tests do) must not open the DB or spend Gemini calls.
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });

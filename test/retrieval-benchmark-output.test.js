@@ -8,7 +8,8 @@ const assert = require('node:assert/strict');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { resultName, writeResult, goldPath, goldTag, latestName, pagesContaining, GOLD } = require('../ops/bini/rerun-retrieval-benchmark');
+const { resultName, writeResult, goldPath, goldTag, latestName, pagesContaining, GOLD,
+  normalizeGold, goldKeys, pageRank, searchOptionsFor } = require('../ops/bini/rerun-retrieval-benchmark');
 
 test('the file name carries the UTC date and time to the second', () => {
   assert.equal(resultName(new Date('2026-09-13T22:09:55.990Z')), 'retrieval-20260913-220955.json');
@@ -77,4 +78,47 @@ test('"any page" finds every page holding the passage, across line breaks, and n
   ];
   assert.deepEqual([...pagesContaining(chunks, 'ኡስማን ደምቤሌ የወቅቱ የባሎን ዶር አሸናፊ ነው')].sort(), ['ena/a', 'fana/b']);
   assert.equal(pagesContaining(chunks, '').size, 0);
+});
+
+// v3 (gold-v3-agents.json, 14 September): the 120 gap-audit questions asked of Dr Afiya and Asmat. It is an
+// object, not a list: scored questions (one or more gold pages each, graded GOOD or PARTIAL) plus the NONE
+// questions kept as coverage gaps that are never scored. Each question belongs to an agent and must be run
+// with that agent's own knowledge preference, or the benchmark measures a retrieval nobody ships.
+test('a v1/v2 list and a v3 object both normalise to questions with gold pages; v3 gaps stay out of the score', () => {
+  const v1 = normalizeGold([{ qid: 1, question: 'q', gold_slug: 'fayda', gold_source: 'guide', lang: 'am' }]);
+  assert.equal(v1.questions.length, 1);
+  assert.deepEqual(v1.questions[0].goldPages, [{ source: 'guide', slug: 'fayda' }]);
+  assert.deepEqual(v1.gaps, []);
+  const v3 = normalizeGold({ questions: [{ qid: 'A01', agent: 'afiya', question: 'q', lang: 'am', grade: 'GOOD',
+    gold_source: 'health', gold_slug: 'x', gold_pages: [{ source: 'health', slug: 'x', lang: 'en' }, { source: 'health', slug: 'x-am', lang: 'am' }] }],
+  coverage_gaps: [{ qid: 'A19', agent: 'afiya', question: 'yellow fever', lang: 'am', grade: 'NONE' }] });
+  assert.equal(v3.questions.length, 1);
+  assert.deepEqual(v3.questions[0].goldPages.map(p => p.slug), ['x', 'x-am']);
+  assert.equal(v3.gaps.length, 1);
+  assert.equal(v3.questions[0].agent, 'afiya');
+});
+
+test('v1/v2 match a gold page by slug, as they always did; v3 by source and slug', () => {
+  assert.deepEqual(goldKeys({ goldPages: [{ source: 'guide', slug: 'fayda' }] }), ['fayda']);
+  assert.deepEqual(goldKeys({ agent: 'asmat', goldPages: [{ source: 'law', slug: 'a' }, { source: 'news', slug: 'b' }] }), ['law:a', 'news:b']);
+});
+
+test('pageRank is the 1-based rank of the first gold PAGE, counting a page once however many chunks it has', () => {
+  const hits = [{ source: 'law', slug: 'a' }, { source: 'law', slug: 'a' }, { source: 'guide', slug: 'b' }, { source: 'news', slug: 'c' }];
+  assert.equal(pageRank(hits, ['news:c'], true), 3);
+  assert.equal(pageRank(hits, ['b'], false), 2);
+  assert.equal(pageRank(hits, ['law:zzz'], true), null);
+  // same slug under another source is not the gold page in v3
+  assert.equal(pageRank([{ source: 'guide', slug: 'a' }], ['law:a'], true), null);
+});
+
+test('a question without an agent gets the plain benchmark options; an agent question gets exactly what contextFor builds for that agent', () => {
+  const cso = ({ k = 6, prefer, exclude } = {}) => ({ k: k * 3, exclude: ['style', 'style-om'].concat(exclude || []), rerankTo: k, ...(prefer ? { prefer } : {}) });
+  const none = searchOptionsFor({}, { contextSearchOptions: cso, knowledgeOf: () => { throw new Error('not called'); } });
+  assert.deepEqual(none.plain, { k: 18, exclude: ['style', 'style-om'] });
+  assert.deepEqual(none.shipped, { k: 18, exclude: ['style', 'style-om'], rerankTo: 6 });
+  const agent = searchOptionsFor({ agent: 'afiya' }, { contextSearchOptions: cso, knowledgeOf: a => (a === 'afiya' ? { prefer: ['health'], exclude: ['page'] } : null) });
+  assert.deepEqual(agent.shipped, { k: 18, exclude: ['style', 'style-om', 'page'], rerankTo: 6, prefer: ['health'] });
+  assert.deepEqual(agent.plain, { k: 18, exclude: ['style', 'style-om', 'page'], prefer: ['health'] });
+  assert.equal('rerankTo' in agent.plain, false);
 });
