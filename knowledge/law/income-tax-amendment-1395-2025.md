@@ -4,12 +4,12 @@ title: "Federal Income Tax (Amendment) Proclamation No. 1395/2025 — salary tax
 source_name: "Federal Negarit Gazette via Ministry of Justice"
 lang: "en"
 fetched: "2026-09-14"
-source_note: "PDF: https://justice.gov.et/wp-content/uploads/2025/12/አዋጅ-ቁጥር-1395-2017.pdf (45 pages). English column only; Amharic column has glyph-mapping errors (373 wrong-letter hits) and lost table rows."
+source_note: "PDF: https://justice.gov.et/wp-content/uploads/2025/12/አዋጅ-ቁጥር-1395-2017.pdf (45 pages). English column. The Amharic column is in income-tax-amendment-1395-2025-am, taken from the Ministry of Revenue's copy of the same Gazette: its text layer has a one-letter shift in three rows of the Ethiopic script, repaired by a measured mapping, and its rate tables were checked row by row against this English column."
 ---
 
 # Federal Income Tax (Amendment) Proclamation No. 1395/2025 — the salary tax brackets — የፌዴራል የገቢ ግብር ማሻሻያ አዋጅ ቁጥር 1395/2017
 
-Federal Negarit Gazette 31st Year No. 64, Addis Ababa, 1 September 2025. Amends the Federal Income Tax Proclamation No. 979/2016. From the Ministry of Justice legal database (justice.gov.et; its page labels the number "1395/2024", the Gazette itself prints 1395/2025). English column only: the Amharic column of this PDF extracts with wrong letters (for example "ሊይ" for "ላይ") and drops rows of the rate tables, so it is not reproduced. The base Proclamation 979/2016 is not in this library: the MoJ copy is Amharic-only and its digits extract incorrectly.
+Federal Negarit Gazette 31st Year No. 64, Addis Ababa, 1 September 2025. Amends the Federal Income Tax Proclamation No. 979/2016. From the Ministry of Justice legal database (justice.gov.et; its page labels the number "1395/2024", the Gazette itself prints 1395/2025). This file holds the English column. The Amharic column extracts with shifted letters (for example "ሊይ" for "ላይ"); it is reproduced, with the letters repaired and the rate tables checked against the English, in the companion file income-tax-amendment-1395-2025-am. The base Proclamation 979/2016 is not in this library: the MoJ copy is Amharic-only and its digits extract incorrectly.
 
 ## What this amendment covers (in brief)
 

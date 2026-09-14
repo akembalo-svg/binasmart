@@ -14,6 +14,22 @@ summary and key articles in English and Amharic). What this adds to ops/law-inge
                    numbers it must find in order, and a text that loses them is refused.
   furniture        Gazette running heads ("Federal Negarit Gazette No. ...", the legacy-font Amharic head, page numbers)
                    are dropped from both columns.
+  column split     (mode cols-am / cols-en) Where the PDF's columns do NOT overlap, split by page geometry instead: the job
+                   measures the gutter (every Amharic word ends left of it, every English word starts right of it) and the
+                   band between the running head and the footer (top, bottom, page_top for the masthead page). The script
+                   split misroutes an English word that carries an Ethiopic colon ("follows፡", "Article፡") and a bare
+                   number; geometry does not. The running head is cut by position, so the furniture patterns are not
+                   applied (they also dropped a body line that names the "Federal Negarit Gazette", as in an effective-
+                   date article). The script prints any word that straddles the gutter inside the band.
+  remap            Some gazettes set the Amharic in a font whose text layer is off by one code point for a few rows
+                   (Visual Geez Unicode in 1395/2025: ሇ for ለ, ሌ for ል, ዴ for ድ, ንዐስ for ንዑስ). The job gives the font
+                   and the mapping measured against clean Amharic statutes; only words lying inside that font's spans
+                   (read with PyMuPDF) are remapped, so a signature block in another font is left alone.
+  sections         An ordered list of [paragraph prefix, heading]: a "### heading" is written before the first paragraph
+                   (after the previous match) that starts with the prefix. Headings are written by hand after reading the
+                   text; a prefix that is not found refuses the job. In the cols modes paragraphs are separated by a
+                   blank line (the chunker splits on those), and a job may add paragraph starts (breaks) and line
+                   starts that only continue a sentence (nobreak).
 
   python3 ops/mor/law-extract.py [out-name ...]     (no names: every job)
 """
@@ -94,11 +110,11 @@ FURNITURE = [
 ]
 
 
-def text_of(ws, extra_furniture=()):
+def text_of(ws, extra_furniture=(), furniture=True):
     out = []
     for line in lines_of(ws):
         s = " ".join(w[5] for w in line).strip()
-        if not s or any(p.search(s) for p in FURNITURE) or any(p.search(s) for p in extra_furniture):
+        if not s or (furniture and any(p.search(s) for p in FURNITURE)) or any(p.search(s) for p in extra_furniture):
             continue
         if re.search(r"\.{6,}|…{3,}", s):   # a contents line with dotted leaders
             continue
@@ -108,19 +124,78 @@ def text_of(ws, extra_furniture=()):
     return t
 
 
-def reflow(t):
-    """Join wrapped lines into paragraphs; keep a break before article headings and numbered items."""
+def reflow(t, extra_head=None, sep="\n", nobreak=None):
+    """Join wrapped lines into paragraphs; keep a break before article headings and numbered items.
+    extra_head: more line starts that open a paragraph; nobreak: line starts that never do (a wrapped "Article 62 is
+    deleted", "፱፻፸፱/፪ሺ፰" or "አንቀጽ (፪) ተተክቷል" continuing the sentence above)."""
     head = re.compile(r"^(Article\s+\d+|\d{1,3}\.\s+[A-Z]|PART|CHAPTER|SECTION|Schedule|አንቀጽ|ክፍል|ምዕራፍ|[፩-፼]+\.\s|\d{1,3}/|\(\d{1,2}\)|[a-z]\)|\([a-z]\)|[ሀለሐመሠረሰሸቀበተቸኀነኘአከኸወዐዘዠየደጀገጠጨጰጸፀፈፐ]\)|[፩-፼]+/)")
+    extra = re.compile(extra_head) if extra_head else None
+    nob = re.compile(nobreak) if nobreak else None
     paras, cur = [], ""
     for line in t.split("\n"):
         line = line.strip()
         if not line: continue
-        if cur and head.match(line):
+        if cur and (head.match(line) or (extra and extra.match(line))) and not (nob and nob.match(line)):
             paras.append(cur); cur = line
         else:
             cur = (cur + " " + line).strip() if cur else line
     if cur: paras.append(cur)
-    return "\n".join(paras)
+    return sep.join(paras)
+
+
+def split_by_columns(ws, job):
+    """-> (left_words, right_words, straddlers) by page geometry; words outside the band are dropped."""
+    gutter, top, bottom = job["gutter"], job["top"], job["bottom"]
+    page_top = {int(k): v for k, v in job.get("page_top", {}).items()}
+    left, right, straddle = [], [], []
+    for w in ws:
+        if w[2] < page_top.get(w[0], top) or w[2] > bottom:
+            continue
+        if w[1] < gutter < w[3]:
+            straddle.append(w)
+        ((left if (w[1] + w[3]) / 2 < gutter else right)).append(w)
+    return left, right, straddle
+
+
+def remap_words(pdf, ws, remap):
+    """Apply remap["map"] to the words that lie inside spans of remap["font"]. -> (words, stats)."""
+    import fitz
+    doc = fitz.open(pdf)
+    boxes = defaultdict(list)       # page -> [(x0, y0, x1, y1, font)]
+    for pno in sorted(set(w[0] for w in ws)):
+        for b in doc[pno - 1].get_text("rawdict")["blocks"]:
+            for l in b.get("lines", []):
+                for s in l["spans"]:
+                    if s["chars"] and ETH.search("".join(c["c"] for c in s["chars"])):
+                        boxes[pno].append(tuple(s["bbox"]) + (s["font"],))
+    table = {k: v for k, v in remap["map"].items()}
+    out, stats = [], defaultdict(int)
+    for w in ws:
+        if not ETH.search(w[5]):
+            out.append(w); continue
+        cx, cy = (w[1] + w[3]) / 2, (w[2] + w[4]) / 2
+        font = next((f for x0, y0, x1, y1, f in boxes[w[0]] if x0 - 1 <= cx <= x1 + 1 and y0 - 1 <= cy <= y1 + 1), None)
+        stats[font or "(no span)"] += 1
+        if font == remap["font"]:
+            t = "".join(table.get(c, c) for c in w[5])
+            if t != w[5]: stats["changed"] += 1
+            w = w[:5] + (t,) + w[6:]
+        out.append(w)
+    return out, dict(stats)
+
+
+def add_sections(body, sections, sep):
+    """Insert '### heading' before the paragraph starting with each prefix, in order. -> (body, missing)."""
+    paras, out, i, missing = body.split(sep), [], 0, []
+    for prefix, heading in sections:
+        j = i
+        while j < len(paras) and not paras[j].startswith(prefix):
+            j += 1
+        if j == len(paras):
+            missing.append(prefix); continue
+        out.extend(paras[i:j]); out.append("### " + heading); i = j
+    out.extend(paras[i:])
+    return sep.join(out), missing
 
 
 def check_numbers(body, must):
@@ -164,14 +239,29 @@ def build(job):
     elif mode == "right":   # legacy-font Amharic column (Latin gibberish): the English column by position instead
         frac = job.get("split", 0.5)
         ws = [w for w in ws if w[1] >= frac * w[6]]
-    if mode != "ocr":
+    stats = {}
+    sep = "\n\n" if mode in ("cols-am", "cols-en") else "\n"
+    if mode in ("cols-am", "cols-en"):
+        left, right, straddle = split_by_columns(ws, job)
+        ws = left if mode == "cols-am" else right
+        stats["straddling the gutter"] = [(w[0], w[5]) for w in straddle]
+        stats["other script in column"] = [(w[0], w[5]) for w in ws if (LAT if mode == "cols-am" else ETH).search(w[5])]
+        if job.get("remap"):
+            ws, stats["remap"] = remap_words(pdf, ws, job["remap"])
+    if mode in ("cols-am", "cols-en"):
+        body = reflow(text_of(ws, [re.compile(p) for p in job.get("furniture", [])], furniture=False), job.get("breaks"), sep, job.get("nobreak"))
+    elif mode != "ocr":
         body = reflow(text_of(ws, [re.compile(p) for p in job.get("furniture", [])]))
     # running heads that land on a body line: "፲፮ሺ፮ 16006 ነU¶T ፷፩ ነሐሴ ፲፭ ቀን ፪ሺ፲፮" and the page numbers of the 1434 column
     body = re.sub(r"\s*(?:[፩-፼]+\s+\d{4,5}\s+)?ነU¶T\s+[፩-፼]+\s+\S+\s+[፩-፼]+\s+ቀን\s+[፩-፼]+", " ", body)
     body = re.sub(r"\s*›\.M(?:\s+\d{5})?\s*", " ", body)
     body = re.sub(r"[ 	]{2,}", " ", body)
     for a, b in job.get("replace", []):
+        if a not in body: stats.setdefault("replace not found", []).append(a)
         body = body.replace(a, b)
+    missing_sections = []
+    if job.get("sections"):
+        body, missing_sections = add_sections(body, job["sections"], sep)
     # the repository is public: a cover letter's switchboard or a signatory's mobile number must not ride along
     phone = re.search(r"\+\s?251[\s\d/-]{6,}|\b0?9\d{8}\b|\b011[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}\b", body)
     eth = len(ETH.findall(body))
@@ -182,9 +272,13 @@ def build(job):
     if phone: problems.append("a phone number is in the text: %r (cut those pages with first/last)" % phone.group(0))
     missing = check_numbers(body, job.get("must", []))
     if missing: problems.append("numbers not found in order: %s" % ", ".join(missing[:6]))
+    if missing_sections: problems.append("section prefixes not found in order: %s" % "; ".join(missing_sections[:6]))
+    if stats.get("replace not found"): problems.append("replace strings not found: %s" % "; ".join(stats["replace not found"][:6]))
     hdr_path = HEADERS + job["out"]
     header = open(hdr_path, encoding="utf-8").read().strip() if os.path.exists(hdr_path) else None
     if header is None: problems.append("no header written yet (%s)" % hdr_path)
+    for k, v in stats.items():
+        print("  %s: %s" % (k, v if not isinstance(v, list) else (len(v), v[:12])))
     return r, body, eth, lat, problems, header
 
 

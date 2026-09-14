@@ -259,5 +259,518 @@
    "137/2010",
    "Directive no 189/2025"
   ]
+ },
+ {
+  "out": "customs-amendment-1425-2026",
+  "endpoint": "recent-custom-proclamations-regulations",
+  "id": 23,
+  "mode": "cols-en",
+  "lang": "en",
+  "title": "Customs Proclamation (as Amended) Further Amendment No. 1425/2026 — የጉምሩክ አዋጅ (እንደተሻሻለ) እንደገና ማሻሻያ አዋጅ ቁጥር 1425/2018",
+  "number": "1425/2026",
+  "quality": "English column of the bilingual Negarit Gazette, split from the Amharic by page geometry (gutter x=317 pt, running head and footer cut by position); text layer, no OCR",
+  "breaks": "^\\d{1,2}\\)\\s|^\\d{1,3}\\.\\s+[A-Z][a-z]",
+  "must": [
+   "1425/2026",
+   "859/2014",
+   "Article 155",
+   "Effective Date"
+  ],
+  "gutter": 317,
+  "top": 50,
+  "bottom": 770,
+  "page_top": {
+   "1": 285
+  },
+  "nobreak": "^\\(\\d{1,2}\\)\\s*(?:;|,|and\\b|are\\b)|^\\([a-z]\\) and\\b|^Article \\d+ (?:is|of|Sub-Article)",
+  "replace": [
+   [
+    "this Article፡",
+    "this Article:"
+   ],
+   [
+    "23 rd day of July 2026",
+    "23rd day of July 2026"
+   ]
+  ],
+  "note": "The Ministry's API lists this PDF under the title Higher Education Cost Sharing Proclamation; the document is Customs Proclamation (Further Amendment) No. 1425/2026. Amharic column in customs-amendment-1425-2026-am.",
+  "sections": [
+   [
+    "PROCLAMATION No.1425/2026",
+    "Preamble"
+   ],
+   [
+    "1. Short Title",
+    "Article 1. Short Title"
+   ],
+   [
+    "2. Amendment",
+    "Article 2. Amendment"
+   ],
+   [
+    "1) Article 23",
+    "Art. 2(1) — Article 23: examination of goods"
+   ],
+   [
+    "2) Sub-Article (4) of Article 25",
+    "Art. 2(2) — Article 25(4)–(5): release and partial release of goods"
+   ],
+   [
+    "3) Sub-Articles (1), (2), (7), and (8) of",
+    "Art. 2(3) — Article 51: time limits in temporary customs storage"
+   ],
+   [
+    "4) Sub-Article (2) paragraph (a) and (b)",
+    "Art. 2(4) — Article 62(2): cultural heritage goods and proceeds of contraband sales"
+   ],
+   [
+    "5) Article 89",
+    "Art. 2(5) — Article 89: principles of customs valuation"
+   ],
+   [
+    "6) Sub-Article (4) and (5) of Article 89",
+    "Art. 2(6) — Article 89(4)–(5): valuation directive and valuation databases"
+   ],
+   [
+    "7) The introduction part of Article 90",
+    "Art. 2(7) — Article 90(1): transaction value, related buyer and seller"
+   ],
+   [
+    "8) The following new Sub-Articles (4), (5) and",
+    "Art. 2(8) — Article 98(4)–(6): carrier media bearing software"
+   ],
+   [
+    "9) Article 99",
+    "Art. 2(9) — Article 99: additional information and evidence on customs value"
+   ],
+   [
+    "10) Article 101",
+    "Art. 2(10) — Article 101: exchange rate"
+   ],
+   [
+    "11) Article 107",
+    "Art. 2(11) — Article 107: origin marking"
+   ],
+   [
+    "12) Article 108",
+    "Art. 2(12) — Article 108: rules of origin under preferential trade agreements"
+   ],
+   [
+    "13) Sub-Article (1) of Article 118",
+    "Art. 2(13) — Article 118(1): forms of security"
+   ],
+   [
+    "14) Sub-Article (2) of Article 123",
+    "Art. 2(14) — Article 123(2): one-year limit for refund claims"
+   ],
+   [
+    "15) Sub-Article (3) of Article 133",
+    "Art. 2(15) — Article 133(3)–(4): rewards for informants, confidential valuation information"
+   ],
+   [
+    "16) Paragraphs (a) and (b)",
+    "Art. 2(16) — Article 147(3): means of transport carrying contraband, confiscation"
+   ],
+   [
+    "17) Sub-Article (2) of Article 155",
+    "Art. 2(17) — Article 155(2): appeal to the Federal Tax Appeal Commission, 50% payment first"
+   ],
+   [
+    "18) Sub-Article (3) of Article 157",
+    "Art. 2(18) — Article 157(3) deleted"
+   ],
+   [
+    "19) Article 160",
+    "Art. 2(19) — Article 160: obligations of carriers, transporting contraband, fines"
+   ],
+   [
+    "20) Article 161",
+    "Art. 2(20) — Article 161: customs warehouse licensee obligations, fines"
+   ],
+   [
+    "21) Transitory Provision",
+    "Art. 2(21) — Transitory provision"
+   ],
+   [
+    "3. Effective Date",
+    "Article 3. Effective Date"
+   ]
+  ]
+ },
+ {
+  "out": "customs-amendment-1425-2026-am",
+  "endpoint": "recent-custom-proclamations-regulations",
+  "id": 23,
+  "mode": "cols-am",
+  "lang": "am",
+  "title": "የጉምሩክ አዋጅ (እንደተሻሻለ) እንደገና ማሻሻያ አዋጅ ቁጥር 1425/2018 — Customs Proclamation Further Amendment No. 1425/2026 (Amharic)",
+  "number": "1425/2026",
+  "quality": "Amharic column of the bilingual Negarit Gazette, split from the English by page geometry (gutter x=317 pt); real Unicode Ethiopic with Ethiopic numerals; text layer, no OCR",
+  "breaks": "^[፩-፼]+\\)|^\\([ሀለሐመሠረሰሸቀበተቸኀነኘአከኸወዐዘዠየደጀገጠጨጰጸፀፈፐ]\\)|^[፩-፼]+\\.\\s",
+  "min_eth": 8000,
+  "must": [
+   "፩ሺ፬፻፳፭/፪ሺ፲፰",
+   "፰፻፶፱/፪ሺ፮",
+   "፩፻፶፭",
+   "የሚጸናበት"
+  ],
+  "gutter": 317,
+  "top": 50,
+  "bottom": 770,
+  "page_top": {
+   "1": 285
+  },
+  "nobreak": "^አንቀጽ\\s|^አንቀፅ\\s|^[፩-፼]+/[፩-፼]|^\\(ሀ\\) ድንጋጌ",
+  "note": "Amharic column of the same PDF as customs-amendment-1425-2026 (the Ministry's API mislabels it as a higher-education proclamation).",
+  "sections": [
+   [
+    "አዋጅ ቁጥር ፩ሺ፬፻፳፭/፪ሺ፲፰",
+    "መግቢያ"
+   ],
+   [
+    "፩. አጭር ርዕስ",
+    "አንቀጽ 1. አጭር ርዕስ"
+   ],
+   [
+    "፪. ማሻሻያ",
+    "አንቀጽ 2. ማሻሻያ"
+   ],
+   [
+    "፩) የአዋጁ አንቀጽ ፳፫",
+    "አንቀጽ 2(1) — አንቀጽ 23፦ የዕቃ ምርመራ"
+   ],
+   [
+    "፪) የአዋጁ አንቀጽ ፳፭",
+    "አንቀጽ 2(2) — አንቀጽ 25(4)–(5)፦ ዕቃዎችን መልቀቅና በክፍልፋይ መልቀቅ"
+   ],
+   [
+    "፫) የአዋጁ አንቀጽ ፶፩",
+    "አንቀጽ 2(3) — አንቀጽ 51፦ በጊዜያዊ የጉምሩክ ዕቃ ማከማቻ የሚቆይበት ጊዜ"
+   ],
+   [
+    "፬) የአዋጁ አንቀጽ ፷፪",
+    "አንቀጽ 2(4) — አንቀጽ 62(2)፦ ቅርስ የሆኑ ዕቃዎችና የኮንትሮባንድ ዕቃ ሽያጭ ገቢ"
+   ],
+   [
+    "፭) የአዋጁ አንቀጽ ፹፱",
+    "አንቀጽ 2(5) — አንቀጽ 89፦ የጉምሩክ ዋጋ አወሳሰን መርሆዎች"
+   ],
+   [
+    "፮) የአዋጁ አንቀጽ ፹፱",
+    "አንቀጽ 2(6) — አንቀጽ 89(4)–(5)፦ የዋጋ መመሪያና የዋጋ መረጃ ቋት"
+   ],
+   [
+    "፯) የአንቀጽ ፺",
+    "አንቀጽ 2(7) — አንቀጽ 90(1)፦ የግብይት ዋጋና ግንኙነት ያላቸው ገዥና ሻጭ"
+   ],
+   [
+    "፰) ከአንቀፅ ፺፰",
+    "አንቀጽ 2(8) — አንቀጽ 98(4)–(6)፦ ሶፍትዌር የተጫነባቸው የመረጃ ማከማቻዎች"
+   ],
+   [
+    "፱) የአዋጁ አንቀጽ ፺፱",
+    "አንቀጽ 2(9) — አንቀጽ 99፦ ተጨማሪ መረጃና ማስረጃ ስለማቅረብ"
+   ],
+   [
+    "፲) የአዋጁ አንቀጽ ፩፻፩",
+    "አንቀጽ 2(10) — አንቀጽ 101፦ የገንዘብ ምንዛሪ"
+   ],
+   [
+    "፲፩) የአዋጁ አንቀጽ ፻፯",
+    "አንቀጽ 2(11) — አንቀጽ 107፦ የዕቃዎች የሥሪት አገር መግለጫ"
+   ],
+   [
+    "፲፪) የአዋጁ አንቀጽ ፻፰",
+    "አንቀጽ 2(12) — አንቀጽ 108፦ የታሪፍ ቅናሽ የሚደረግላቸው ዕቃዎች የሥሪት አገር"
+   ],
+   [
+    "፲፫) የአዋጁ አንቀጽ ፻፲፰",
+    "አንቀጽ 2(13) — አንቀጽ 118(1)፦ የዋስትና ዓይነቶች"
+   ],
+   [
+    "፲፬) የአዋጁ አንቀጽ ፩፻፳፫",
+    "አንቀጽ 2(14) — አንቀጽ 123(2)፦ የቀረጥና ታክስ ተመላሽ ጥያቄ በአንድ ዓመት ውስጥ"
+   ],
+   [
+    "፲፭) የአዋጁ አንቀጽ ፩፻፴፫",
+    "አንቀጽ 2(15) — አንቀጽ 133(3)–(4)፦ ለጠቋሚዎች ወሮታና ሚስጥራዊ የዋጋ መረጃ"
+   ],
+   [
+    "፲፮) የአዋጁ አንቀጽ ፩፻፵፯",
+    "አንቀጽ 2(16) — አንቀጽ 147(3)፦ ኮንትሮባንድ የጫነ ማጓጓዣና መውረስ"
+   ],
+   [
+    "፲፯) የአዋጁ አንቀጽ ፩፻፶፭",
+    "አንቀጽ 2(17) — አንቀጽ 155(2)፦ ለፌዴራል ታክስ ይግባኝ ኮሚሽን ይግባኝ ከማለት በፊት 50 በመቶ ክፍያ"
+   ],
+   [
+    "፲፰) የአዋጁ አንቀጽ ፩፻፶፯",
+    "አንቀጽ 2(18) — አንቀጽ 157(3) ተሰርዟል"
+   ],
+   [
+    "፲፱) የአዋጁ አንቀጽ ፩፻፷",
+    "አንቀጽ 2(19) — አንቀጽ 160፦ የአጓጓዥ ግዴታዎች፣ ኮንትሮባንድ ማጓጓዝና መቀጮዎች"
+   ],
+   [
+    "፳) የአዋጁ አንቀጽ ፩፻፷፩",
+    "አንቀጽ 2(20) — አንቀጽ 161፦ የጉምሩክ መጋዘን ፈቃድ ግዴታዎችን ያለማክበርና መቀጮዎች"
+   ],
+   [
+    "፳፩) የመሸጋገሪያ ድንጋጌ",
+    "አንቀጽ 2(21) — የመሸጋገሪያ ድንጋጌ"
+   ],
+   [
+    "፫. አዋጁ የሚጸናበት ቀን",
+    "አንቀጽ 3. አዋጁ የሚጸናበት ቀን"
+   ]
+  ]
+ },
+ {
+  "out": "income-tax-amendment-1395-2025-am",
+  "endpoint": "domestic-proclamations",
+  "id": 31,
+  "mode": "cols-am",
+  "lang": "am",
+  "title": "የገቢ ግብር (ማሻሻያ) አዋጅ ቁጥር 1395/2017 — Income Tax (Amendment) Proclamation No. 1395/2025 (Amharic)",
+  "number": "1395/2025",
+  "quality": "Amharic column of the bilingual Negarit Gazette, split from the English by page geometry (gutter x=325 pt); text layer, no OCR. The text layer of the Visual Geez Unicode font is shifted by one code point in three rows (displayed ሇ-ሏ read as ለ-ሐ, ዯ-ድ as ደ-ዶ, ዏ-ዐ as ዐ-ዑ) and was remapped; all four rate tables (23 rows) and the numbers were checked against the English column",
+  "breaks": "^[፩-፼]+\\)|^\\([ሀለሐመሠረሰሸቀበተቸኀነኘአከኸወዐዘዠየደጀገጠጨጰጸፀፈፐ]\\)|^[፩-፼]+\\.\\s",
+  "min_eth": 15000,
+  "must": [
+   "፩ሺ፫፻፺፭/፪ሺ፲፯",
+   "፱፻፸፱/፪ሺ፰",
+   "0 -2,000 0%",
+   "ከ14,000 በላይ 35%",
+   "ከ168,000 በላይ 35%",
+   "1,500,001 – 2,000,000 9%",
+   "የሚጸናበት ቀን"
+  ],
+  "remap": {
+   "font": "Visual Geez Unicode",
+   "map": {
+    "ሇ": "ለ",
+    "ለ": "ሉ",
+    "ሉ": "ሊ",
+    "ሊ": "ላ",
+    "ላ": "ሌ",
+    "ሌ": "ል",
+    "ል": "ሎ",
+    "ሎ": "ሏ",
+    "ሏ": "ሐ",
+    "ዯ": "ደ",
+    "ደ": "ዱ",
+    "ዱ": "ዲ",
+    "ዲ": "ዳ",
+    "ዳ": "ዴ",
+    "ዴ": "ድ",
+    "ድ": "ዶ",
+    "ዏ": "ዐ",
+    "ዐ": "ዑ"
+   }
+  },
+  "gutter": 325,
+  "top": 45,
+  "bottom": 725,
+  "page_top": {
+   "1": 285
+  },
+  "nobreak": "^አንቀጽ\\s|^አንቀፅ\\s|^[፩-፼]+/[፩-፼]|^\\(ሀ\\) ድንጋጌ",
+  "note": "Same Gazette as income-tax-amendment-1395-2025 (English, from justice.gov.et). Letter-shift mapping measured against clean Amharic statutes in this library; the source's own misspellings are kept. Invisible stray glyphs in the PDF text layer (a hidden duplicate heading fragment on page 20, tiny marks on pages 23, 34 and 35) are removed.",
+  "sections": [
+   [
+    "አዋጅ ቁጥር ፩ሺ፫፻፺፭/፪ሺ፲፯",
+    "መግቢያ"
+   ],
+   [
+    "፩. አጭር ርዕስ",
+    "አንቀጽ 1. አጭር ርዕስ"
+   ],
+   [
+    "፪. ማሻሻያ",
+    "አንቀጽ 2. ማሻሻያ"
+   ],
+   [
+    "፩/ ከአዋጁ አንቀጽ ፪",
+    "አንቀጽ 2(1) — አንቀጽ 2(28)–(30)፦ ጠቅላላ የሽያጭ ገቢ፣ ከዲጂታል ይዘት ፈጠራ የሚገኝ ገቢ፣ የዲጂታል አገልግሎት"
+   ],
+   [
+    "፪/ የአዋጁ አንቀጽ ፫",
+    "አንቀጽ 2(2) — አንቀጽ 3፦ የግብር ከፋይ ደረጃዎች"
+   ],
+   [
+    "፫/ የአዋጁ አንቀጽ ፬",
+    "አንቀጽ 2(3) — አንቀጽ 4(2)(ሐ) እና (3)፦ በቋሚነት የሚሰራ ድርጅት"
+   ],
+   [
+    "፬/ ከአዋጁ አንቀጽ ፬",
+    "አንቀጽ 2(4) — አንቀጽ 4(6)፦ የቴክኒክ አገልግሎት"
+   ],
+   [
+    "፭/ ከአዋጁ አንቀጽ ፮",
+    "አንቀጽ 2(5) — አንቀጽ 6(6)፦ ነዋሪ ያልሆነ ሰው ከዲጂታል አገልግሎት የሚያገኘው ገቢ"
+   ],
+   [
+    "፮/ የአዋጁ አንቀጽ ፲፩",
+    "አንቀጽ 2(6) — አንቀጽ 11፦ በመቀጠር በሚገኝ ገቢ (ደመወዝ) ላይ የግብር መጣኔ"
+   ],
+   [
+    "፯/ ከአዋጁ አንቀድ ፲፪",
+    "አንቀጽ 2(7) — አንቀጽ 12(5)–(7)፦ የኤምባሲና የዓለም አቀፍ ድርጅት ሠራተኞች፣ የሥራ ፈቃድ መረጃ"
+   ],
+   [
+    "፰/ የአዋጁ አንቀጽ ፲፬",
+    "አንቀጽ 2(8) — አንቀጽ 14(2)፦ የኪራይ ገቢ ግብር መጣኔ"
+   ],
+   [
+    "፱/ ከአዋጁ አንቀፅ ፲፭",
+    "አንቀጽ 2(9) — አንቀጽ 15(8)፦ ከቤት ኪራይ የሚገኝ ገቢ"
+   ],
+   [
+    "፲/ የአዋጁ አንቀጽ ፲፱",
+    "አንቀጽ 2(10) — አንቀጽ 19(2)–(4)፦ የንግድ ሥራ ገቢ ግብር መጣኔ፣ የሽርክና ማህበርና የኢንቨስትመንት ፈንድ"
+   ],
+   [
+    "፲፩/ ከአዋጁ አንቀጽ ፳፩",
+    "አንቀጽ 2(11) — አዲስ አንቀጽ 22 እና 23፦ ከዲጂታል ይዘት ፈጠራ የሚገኝ ገቢና አማራጭ አነስተኛ ግብር"
+   ],
+   [
+    "፲፪/ የአዋጁ አንቀጽ ፳፬",
+    "አንቀጽ 2(12) — አንቀጽ 24 (አዲሱ 26)(1)(ለ) እና (2)፦ ተቀናሽ የሚደረግ ድጋፍ"
+   ],
+   [
+    "፲፫/ ከአዋጁ አንቀጽ ፳፯",
+    "አንቀጽ 2(13) — አንቀጽ 27 (አዲሱ 29)(1)(ኘ)፦ ከብር 50,000 በላይ በጥሬ ገንዘብ የተፈጸሙ ክፍያዎች"
+   ],
+   [
+    "፲፬/ የአዋጁ አንቀጽ ፴፫",
+    "አንቀጽ 2(14) — አንቀጽ 33 ተሰርዟል"
+   ],
+   [
+    "፲፭/ የአዋጁ አንቀጽ ፵፱",
+    "አንቀጽ 2(15) — አንቀጽ 49 (አዲሱ 50)፦ የደረጃ «ለ» ግብር ከፋዮች ግብር አከፋፈል"
+   ],
+   [
+    "፲፮/ የአዋጁ አንቀጽ ፶፩",
+    "አንቀጽ 2(16) — አንቀጽ 51 (አዲሱ 52)(2)፦ ነዋሪ ያልሆነ ሰው የግብር መጣኔ"
+   ],
+   [
+    "፲፯/ ከአዋጁ አንቀጽ ፶፩",
+    "አንቀጽ 2(17) — አዲስ አንቀጽ 53፦ የዲጂታል አገልግሎት ግብር"
+   ],
+   [
+    "፲፰/ የአዋጁ አንቀጽ ፶፫",
+    "አንቀጽ 2(18) — አንቀጽ 53 (አዲሱ 55)(1)፦ ነዋሪ ያልሆኑ የመዝናኛ አገልግሎት ሰጪዎች"
+   ],
+   [
+    "፲፱/ የአዋጁ አንቀጽ ፶፬",
+    "አንቀጽ 2(19) — አንቀጽ 54 (አዲሱ 56)(1)–(2)፦ የሮያልቲ ገቢ ግብር"
+   ],
+   [
+    "፳/ የአዋጁ አንቀጽ ፶፭",
+    "አንቀጽ 2(20) — አንቀጽ 55 (አዲሱ 57)፦ የትርፍ ድርሻ"
+   ],
+   [
+    "፳፩/ የአዋጁ አንቀጽ ፶፮",
+    "አንቀጽ 2(21) — አንቀጽ 56 (አዲሱ 58)፦ ወለድ"
+   ],
+   [
+    "፳፪/ የአዋጁ አንቀጽ ፶፯",
+    "አንቀጽ 2(22) — አንቀጽ 57 (አዲሱ 59)(1)፦ የዕድል ሙከራ ጨዋታዎች ገቢ"
+   ],
+   [
+    "፳፫/ የአዋጁ አንቀጽ ፶፱",
+    "አንቀጽ 2(23) — አንቀጽ 59 (አዲሱ 61)(2),(3),(7)፦ ሃብት በማስተላለፍ የሚገኝ ጥቅም"
+   ],
+   [
+    "፳፬/ ከአዋጁ አንቀጽ ፶፱",
+    "አንቀጽ 2(24) — አዲስ አንቀጽ 62፦ ከኢትዮጵያ ውጭ የሚፈጸም ቀጥተኛ ያልሆነ ዝውውር"
+   ],
+   [
+    "፳፭/ የአዋጁ አንቀጽ ፷፩",
+    "አንቀጽ 2(25) — አንቀጽ 61 (አዲሱ 64)፦ ያልተከፋፈለ ትርፍ"
+   ],
+   [
+    "፳፮/ የአዋጁ አንቀጽ ፷፪",
+    "አንቀጽ 2(26) — አንቀጽ 62 (አዲሱ 65)፦ በቋሚነት በሚሰራ ድርጅት የሚላክ ትርፍ"
+   ],
+   [
+    "፳፯/ ከአዋጁ አንቀጽ ፷፭",
+    "አንቀጽ 2(27) — አንቀጽ 65 (አዲሱ 68)(1)(ኸ)፣(ወ)፣(ዐ)፦ የተቀማጭ ገንዘብ መድን አረቦን፣ የአክሲዮን ፕሪሚየም፣ የኩባንያዎች የትርፍ ድርሻ"
+   ],
+   [
+    "፳፰/ ከአዋጁ አንቀጽ ፸፯",
+    "አንቀጽ 2(28) — አዲስ አንቀጽ 81፦ ክፍያ የሚፈጸምባቸው ዘዴዎች"
+   ],
+   [
+    "፳፱/ የአዋጁ አንቀጽ ፹፪",
+    "አንቀጽ 2(29) — አንቀጽ 82 (አዲሱ 86)(2) ተሰርዟል"
+   ],
+   [
+    "፴/ የአዋጁ አንቀጽ ፹፪",
+    "አንቀጽ 2(30) — አንቀጽ 82 (አዲሱ 86)(3)፦ የደረጃ «ለ» ግብር ከፋዮች የሂሳብ መዝገብ"
+   ],
+   [
+    "፴፩/ የአዋጁ አንቀጽ ፹፪",
+    "አንቀጽ 2(31) — አንቀጽ 82 (አዲሱ 86)(6),(8)–(10)፦ የሰነድ ማስረጃ፣ በግምት የሚወሰን ግብር፣ የብድር ወለድ"
+   ],
+   [
+    "፴፪/ በአዋጁ ከአንቀጽ ፹፪",
+    "አንቀጽ 2(32) — አንቀጽ 86(8)፦ ለእያንዳንዱ የሥራ መስክ የተለየ የሂሳብ መዝገብ"
+   ],
+   [
+    "፴፫/ የአዋጁ አንቀጽ ፹፫",
+    "አንቀጽ 2(33) — አንቀጽ 83 (አዲሱ 87)(2)–(3)፦ የተቀጣሪ ገቢ ማስታወቂያ"
+   ],
+   [
+    "፴፬/ ከአዋጁ አንቀጽ ፹፫",
+    "አንቀጽ 2(34) — አዲስ አንቀጽ 88፦ አስተዳደራዊ መቀጫ"
+   ],
+   [
+    "፴፭/ የአዋጁ አንቀጽ ፹፬",
+    "አንቀጽ 2(35) — አንቀጽ 84 (አዲሱ 89)(2),(4),(5)፦ ዓመታዊ ግብር በቅድሚያ አከፋፈል"
+   ],
+   [
+    "፴፮/ የአዋጁ አንቀጽ ፺፪",
+    "አንቀጽ 2(36) — አንቀጽ 92 (አዲሱ 97)(1)፦ 3% ቀንሶ ማስቀረት"
+   ],
+   [
+    "፴፯/ የአዋጁ አንቀጽ ፺፪",
+    "አንቀጽ 2(37) — አንቀጽ 92 (አዲሱ 97)(4)፦ የግብር ከፋይ መለያ ቁጥር ያልሰጠ አቅራቢ 30%"
+   ],
+   [
+    "፴፰/ ከአዋጁ አንቀጽ ፺፱",
+    "አንቀጽ 2(38) — አዲስ አንቀጽ 105፦ የገቢ ግብር ማበረታቻና ነፃ መብቶች"
+   ],
+   [
+    "፴፱/ ከአዋጁ አንቀጽ ፩፻",
+    "አንቀጽ 2(39) — አንቀጽ 100 (አዲሱ 106)(1)(መ)፦ የተርን ኦቨር ታክስ አዋጅ 308/1995"
+   ],
+   [
+    "፵/ ከአንቀጽ ፳፪",
+    "አንቀጽ 2(40) — የአንቀጾች ቁጥር ማሸጋሸግ"
+   ],
+   [
+    "፫. የመሸጋገሪያ ድንጋጌ",
+    "አንቀጽ 3. የመሸጋገሪያ ድንጋጌ"
+   ],
+   [
+    "፬. አዋጁ የሚጸናበት ቀን",
+    "አንቀጽ 4. አዋጁ የሚጸናበት ቀን"
+   ]
+  ],
+  "replace": [
+   [
+    "” ‹ ፩\n",
+    "”\n"
+   ],
+   [
+    "” ‹\n",
+    "”\n"
+   ],
+   [
+    "“፶. የ “ ፶. ደረጃ",
+    "“፶. ደረጃ"
+   ]
+  ]
  }
 ]
