@@ -1140,6 +1140,13 @@ fastify.post('/api/assistant/transcribe', { bodyLimit: 4 * 1024 * 1024 }, async 
   try { const text = await biniTranscribe(String(b.audio), String(b.mime || 'audio/ogg')); return { ok: true, text }; }
   catch (e) { req.log && req.log.warn && req.log.warn('transcribe err ' + e.message); return reply.code(502).send({ ok: false, error: 'transcribe_failed' }); }
 });
+// The microphone on /afiya and /asmat (assistant/voice.js): public, limited per ip and per phone, transcript
+// only - the page sends it as an ordinary question, so the emergency and urgent gates apply to speech too.
+// 30 per ip, not fewer: Ethio Telecom puts many phones behind one address. 10 per phone (uid).
+const { makeVoiceHandler, BODY_LIMIT: VOICE_BODY_LIMIT } = require('./assistant/voice');
+const voiceIpRL = hotelLimiter(600000, 30), voiceUidRL = hotelLimiter(600000, 10);
+const voiceHandler = makeVoiceHandler({ transcribe: biniTranscribe, ipLimit: voiceIpRL, uidLimit: voiceUidRL });
+fastify.post('/api/assistant/voice', { bodyLimit: VOICE_BODY_LIMIT }, voiceHandler);
 // Weekly numbers for the eval report and the ops page.
 // ===== The agent kit: every specialist agent runs through one engine (assistant/kit/engine.js) =====
 // The order an agent answers in lives there; what each agent says and refuses lives in agents/<name>/rules.js.
