@@ -1,0 +1,263 @@
+[
+ {
+  "out": "vat-proclamation-1341-2024",
+  "endpoint": "domestic-proclamations",
+  "id": 20,
+  "mode": "en",
+  "lang": "en",
+  "title": "Value Added Tax Proclamation No. 1341/2024 — የተጨማሪ እሴት ታክስ አዋጅ ቁጥር 1341/2016",
+  "number": "1341/2024",
+  "quality": "English column of the bilingual Negarit Gazette, split from the Amharic by script; text layer, no OCR",
+  "must": [
+   "Article\\s+1\\b|^1\\.\\s+Short",
+   "Article\\s+2\\b|^2\\.\\s+Definitions"
+  ]
+ },
+ {
+  "out": "vat-proclamation-1341-2024-am",
+  "endpoint": "domestic-proclamations",
+  "id": 20,
+  "mode": "am",
+  "lang": "am",
+  "title": "የተጨማሪ እሴት ታክስ አዋጅ ቁጥር 1341/2016 — Value Added Tax Proclamation No. 1341/2024 (Amharic)",
+  "number": "1341/2024",
+  "quality": "Amharic column of the bilingual Negarit Gazette, split from the English by script; real Unicode Ethiopic with Ethiopic numerals; text layer, no OCR",
+  "min_eth": 60000,
+  "must": [
+   "፲፪\\.",
+   "፲፫\\.",
+   "፷፪\\."
+  ]
+ },
+ {
+  "out": "tax-administration-amendment-1434-2026",
+  "endpoint": "domestic-proclamations",
+  "id": 32,
+  "mode": "en",
+  "lang": "en",
+  "title": "Tax Administration Proclamation (Amendment) No. 1434/2026 — የፌዴራል ታክስ አስተዳደር (ማሻሻያ) አዋጅ ቁጥር 1434/2018",
+  "number": "1434/2026",
+  "quality": "English column of the bilingual Negarit Gazette, split from the Amharic by script; text layer, no OCR",
+  "must": [
+   "1434/2026",
+   "Amendment",
+   "Effective Date"
+  ]
+ },
+ {
+  "out": "tax-administration-983-2016",
+  "endpoint": "domestic-proclamations",
+  "id": 25,
+  "mode": "full",
+  "lang": "en",
+  "title": "Federal Tax Administration Proclamation No. 983/2016 — የፌዴራል ታክስ አስተዳደር አዋጅ ቁጥር 983/2008",
+  "number": "983/2016",
+  "quality": "English-only PDF from the Ministry; text layer, no OCR",
+  "furniture": [
+   "^FEDERAL TAX ADMINISTRATION PROCLAMATION\\s*\\d*$"
+  ],
+  "must": [
+   "Short Title",
+   "Registration of Taxpayers",
+   "Cancellation of Registration",
+   "Tax Clearance",
+   "Late Filing Penalty",
+   "Late Payment Penalty"
+  ]
+ },
+ {
+  "out": "turnover-tax-308-2002",
+  "endpoint": "domestic-proclamations",
+  "id": 21,
+  "mode": "right",
+  "split": 0.5,
+  "lang": "en",
+  "title": "Turnover Tax Proclamation No. 308/2002 — የተርን ኦቨር ታክስ አዋጅ ቁጥር 308/1995",
+  "number": "308/2002",
+  "quality": "English column of an old scanned Negarit Gazeta with a text layer (OCR by the publisher); a few characters are misread; the Amharic column is a legacy font and is not reproduced",
+  "must": [
+   "Short Ti",
+   "Rate of Turnover Tax",
+   "2%",
+   "10%"
+  ]
+ },
+ {
+  "out": "tax-administration-regulation-407-2017",
+  "endpoint": "domestic-regulations",
+  "id": 10,
+  "mode": "ocr",
+  "ocr": "ocr/reg-407-en.txt",
+  "lang": "en",
+  "title": "Federal Tax Administration Regulation No. 407/2017 (OCR) — የፌዴራል ታክስ አስተዳደር ደንብ ቁጥር 407/2009",
+  "number": "407/2017",
+  "quality": "scan without text layer; English column read by OCR (tesseract eng, right 54% of each page) for this library; misread letters and stray fragments of the Amharic column remain",
+  "min_lat": 3000,
+  "furniture": [
+   "Negarit Gazette No",
+   "^\\d{4}\\s*$"
+  ],
+  "must": [
+   "407/2017",
+   "Biometric",
+   "10,000,000",
+   "Effective Date"
+  ]
+ },
+ {
+  "out": "income-tax-regulation-410-2017",
+  "endpoint": "domestic-regulations",
+  "id": 11,
+  "mode": "ocr",
+  "ocr": "ocr/reg-410-en.txt",
+  "last": 38,
+  "lang": "en",
+  "title": "Federal Income Tax Regulation No. 410/2017 (OCR) — የፌዴራል ገቢ ግብር ደንብ ቁጥር 410/2009",
+  "number": "410/2017",
+  "quality": "scan without text layer; English column of pages 1-38 read by OCR (tesseract eng) for this library; right-edge letters cut and stray Amharic-column fragments remain; tax tables not reproduced",
+  "min_lat": 30000,
+  "furniture": [
+   "Negarit Gazette No",
+   "Nogarit Gazette"
+  ],
+  "must": [
+   "410/2017",
+   "Fringe Benefits",
+   "Exempt Income",
+   "Effective Date"
+  ]
+ },
+ {
+  "out": "directive-taxpayer-registration-cancellation-3-2011",
+  "endpoint": "domestic-directives",
+  "id": 29,
+  "mode": "ocr",
+  "ocr": "ocr/dir-29-am.txt",
+  "lang": "am",
+  "title": "የታክስ ከፋይ ምዝገባ እና ሥረዛ የአፈጻጸም መመሪያ ቁጥር 3/2011 (በOCR የተነበበ — ቁጥሮችን ከዋናው ያረጋግጡ) — Taxpayer Registration and Cancellation Directive 3/2011 E.C.",
+  "number": "3/2011 E.C.",
+  "quality": "scan without text layer; Amharic read by OCR (tesseract amh) for this library; some letters and sub-article numbers misread",
+  "min_eth": 7000,
+  "furniture": [
+   "^የታክስ ከፋይ ምገ?[ዝዘየ፣]*ገ?ባ/"
+  ],
+  "must": [
+   "መመሪያ ቁጥር 3/2011",
+   "30 ቀናት",
+   "90 ቀናት",
+   "ሚያዝያ 1 ቀን 2011"
+  ]
+ },
+ {
+  "out": "directive-sales-register-machine-amendment-87-2005",
+  "endpoint": "domestic-directives",
+  "id": 17,
+  "mode": "ocr",
+  "ocr": "ocr/dir-17-am.txt",
+  "lang": "am",
+  "title": "የሽያጭ መመዝገቢያ መሣሪያ አጠቃቀም መመሪያ 46/99ን ለማሻሻል የወጣ መመሪያ ቁጥር 87/2005 (በOCR የተነበበ) — Sales Register Machine Directive amendment 87/2005 E.C.",
+  "number": "87/2005 E.C.",
+  "quality": "the PDF text layer uses a broken font encoding; Amharic read by OCR (tesseract amh) from the page images for this library; Schedule 4 is not in the PDF",
+  "min_eth": 3000,
+  "furniture": [],
+  "must": [
+   "87/2005",
+   "46/99",
+   "ዜድ ሪፖርት"
+  ]
+ },
+ {
+  "out": "directive-tax-complaint-review-office-171-2013-183-2016",
+  "endpoint": "domestic-directives",
+  "id": 59,
+  "mode": "ocr",
+  "ocr": [
+   [
+    "ocr/dir-59-am.txt",
+    3,
+    null
+   ],
+   [
+    "ocr/dir-63-am.txt",
+    3,
+    null
+   ]
+  ],
+  "lang": "am",
+  "title": "የታክስ ውሳኔ ቅሬታ አጣሪ ጽ/ቤት አሠራር መመሪያ ቁጥር 171/2013 እና ማሻሻያ 183/2016 (በOCR የተነበበ) — Tax Decision Complaint Review Office Directives 171/2013 and 183/2016 E.C.",
+  "number": "171/2013 and 183/2016 E.C.",
+  "quality": "scans without text layer; Amharic read by OCR (tesseract amh) for this library; cover letters and distribution lists left out; some letters and numbers misread",
+  "note": "Directive 183/2016 is mor.gov.et domestic-directives item 63; its text follows 171/2013 in this file.",
+  "min_eth": 8000,
+  "must": [
+   "171/2013",
+   "ሃያ አንድ ቀናት|ፃያ አንድ ቀናት",
+   "183/2016"
+  ]
+ },
+ {
+  "out": "directive-tax-clearance-certificate-180-2015",
+  "endpoint": "domestic-directives",
+  "id": 62,
+  "mode": "ocr",
+  "ocr": "ocr/dir-62-am.txt",
+  "first": 2,
+  "lang": "am",
+  "title": "የታክስ ክሊራንስ ምስክር ወረቀት አሰጣጥ መመሪያ ቁጥር 180/2015 (በOCR የተነበበ) — Tax Clearance Certificate Directive 180/2015 E.C.",
+  "number": "180/2015 E.C.",
+  "quality": "scan without text layer; Amharic read by OCR (tesseract amh) for this library; cover letter left out; some letters and numbers misread",
+  "min_eth": 6000,
+  "must": [
+   "180/2015",
+   "14 ቀናት",
+   "147/2011"
+  ]
+ },
+ {
+  "out": "directive-tax-receipts-149-2011",
+  "endpoint": "domestic-directives",
+  "id": 57,
+  "mode": "ocr",
+  "ocr": "ocr/dir-57-am.txt",
+  "last": 25,
+  "lang": "am",
+  "title": "የታክስ ደረሰኝ አጠቃቀም እና አስተዳደር መመሪያ ቁጥር 149/2011 (በOCR የተነበበ) — Tax Receipt Use and Administration Directive 149/2011 E.C.",
+  "number": "149/2011 E.C.",
+  "quality": "scan without text layer; Amharic of pages 1-25 read by OCR (tesseract amh) for this library; annexed forms left out; some letters and numbers misread; amending directives 188/2017, 1099/2017 and 1142/2018 not included",
+  "min_eth": 15000,
+  "must": [
+   "149/2011",
+   "ቦን",
+   "የግዥ ማረጋገጫ ደረሰኝ",
+   "110/2008"
+  ]
+ },
+ {
+  "out": "directive-penalty-waiver-189-2017",
+  "endpoint": "domestic-directives",
+  "id": 66,
+  "mode": "ocr",
+  "ocr": [
+   [
+    "ocr/dir-66-am.txt",
+    null,
+    10
+   ],
+   [
+    "ocr/dir-66-en.txt",
+    11,
+    null
+   ]
+  ],
+  "lang": "am",
+  "title": "የታክስ አስተዳደራዊ ቅጣት አነሳስ መመሪያ ቁጥር 189/2017 (በOCR የተነበበ) — Tax Administrative Penalty Waiver Directive 189/2017 E.C. (189/2025)",
+  "number": "189/2017 E.C. (189/2025)",
+  "quality": "scan without text layer; Amharic pages 1-10 (tesseract amh) and the English translation on pages 11-19 (tesseract eng) read by OCR for this library; table figures partly misread",
+  "min_eth": 5000,
+  "must": [
+   "189/2017",
+   "137/2010",
+   "Directive no 189/2025"
+  ]
+ }
+]

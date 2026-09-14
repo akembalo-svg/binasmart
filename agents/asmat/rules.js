@@ -20,8 +20,10 @@ module.exports = {
   // and llms.txt filled slots without answering anything. The eServices directory says which office handles a
   // service and where to apply (DARS contracts and powers of attorney, ICS, MoJ). The Ministry of Justice's own pages
   // are preferred too: they carried the only legal-aid answers (S39, S57), which the first run without them lost.
+  // The Ministry of Revenue's FAQs and forms list (source mor, 2026-09-14) answer the tax questions the statutes alone
+  // left thin: which form de-registers a TIN, what a sales register machine owner must do, where a form is downloaded.
   knowledge: {
-    prefer: ['law', 'guide', 'eservices', 'news:law-*', 'web:justice/*'],
+    prefer: ['law', 'guide', 'eservices', 'mor', 'news:law-*', 'web:justice/*'],
     exclude: ['page', 'skill', 'llms'],
   },
 

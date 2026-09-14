@@ -15,6 +15,9 @@
 .env.*
 Thumbs.db
 knowledge/web/
+# government PDFs hosted on bina.et (public/docs/mor, 2026-09-14): rebuilt from /root/legal-sources/mor by ops/mor/mor-to-md.js;
+# binaries, and their PDF metadata can carry the names of the officials who made them
+public/docs/
 node_modules/
 npm-debug.log*
 ops/health/sat-sessions.json

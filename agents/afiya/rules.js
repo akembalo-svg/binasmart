@@ -20,7 +20,7 @@ module.exports = {
   // leave), the Addis notes (emergency numbers) and the one health regulator in the eServices directory.
   knowledge: {
     prefer: ['health', 'web:moh/*', 'law:labour-proclamation-1156-2019', 'addis', 'eservices:ethiopian-food-and-drug-authority'],
-    exclude: ['page', 'skill', 'llms', 'guide:business-registration-ethiopia', 'guide:how-to-start-a-business-in-ethiopia',
+    exclude: ['page', 'skill', 'llms', 'mor', 'guide:business-registration-ethiopia', 'guide:how-to-start-a-business-in-ethiopia',
       'guide:mesob', 'guide:telebirr', 'guide:tenant-screening-ethiopia'],
   },
 
