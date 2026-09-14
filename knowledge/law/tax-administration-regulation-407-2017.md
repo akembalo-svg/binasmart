@@ -90,4 +90,4 @@ c) an individual who has been convicted of a mM ng criminal offence relating to 
 3/ The reference in Article 87(3)(b) of the Proclamation to a “tax law” shall include the repealed Proclamation.
 4/ If an appeal was filed with the former Commission and the appeal was not finalised before the former Commission ceased operations, the appeal shall be decided by the new Commission subject to any directions that the President of the new Commission may make.
 20. Power to Issue Directives The Minister may issue Directives for the proper implementation of this Regulation.
-21. Effective Date This Regulation shall enter in to force on the date of its Done at Addis Ababa, on this 9" day of August 2017 Hailemariam Dessalegn Prime Minister of the Federal Democratic Republic of Ethiopia
+21. Effective Date This Regulation shall enter in to force on the date of its publication in the Federal Negarit Gazette. Done at Addis Ababa, on this 9" day of August 2017 Hailemariam Dessalegn Prime Minister of the Federal Democratic Republic of Ethiopia

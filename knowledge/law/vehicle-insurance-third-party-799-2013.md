@@ -332,4 +332,4 @@ Council of Ministers Decision No.
 
 ### 554/2024, Article 6. Effective Date
 
-This Regulation shall come into force on the date Done at Addis Ababa this 30th day of July,2024 ABIY AHMED (Dr.) PRIME MINISTER OF THE FEDERAL DEMOCRATIC REPUBLIC OF ETHIOPIA
+This Regulation shall come into force on the date of publication in the Federal Negarit Gazeta. Done at Addis Ababa this 30th day of July,2024 ABIY AHMED (Dr.) PRIME MINISTER OF THE FEDERAL DEMOCRATIC REPUBLIC OF ETHIOPIA

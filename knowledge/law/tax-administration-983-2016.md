@@ -1364,6 +1364,6 @@ d) If the period for the making of an application and appeal had expired before 
 4/ The Obligatory Use of Sales Register Machines Council of Ministers Regulation No. 139/2007 shall continue to apply for the purposes of Article 20 of this Proclamation until replaced by new Regulation issued by the Council of Ministers.
 138. Inapplicable Laws Subject to the provisions of Article 137 of this proclamation, any law which is inconsistent with this proclamation shall not be applicable in respect of matters provided for in this proclamation.
 139. Effective Date
-1/ This Proclamation shall enter in to force on the date of its
+1/ This Proclamation shall enter in to force on the date of its Publication in the Federal Negarit Gazette.
 2/ Notwithstanding sub-article (1) of this Article, the provisions of Part Eleven and Part Fourteen of this proclamation shall begin to apply as from the date to be specified by the minister by notice to be published in a newspaper of wide circulation.
 3/ Notwithstanding sub-article (1) of this Article, the provisions of part fourteen of this proclamation shall begin to apply as from the date to be specified by the authority by notice to be published in a newspaper of wide circulation. Done at Addis Ababa, this 20 th day of August, 2016. MULATU TESHOME (DR.) PRESIDENT OF THE FEDERAL DEMOCRATIC REPUBLIC OF ETHIPOIA

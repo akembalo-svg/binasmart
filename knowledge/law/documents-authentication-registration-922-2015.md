@@ -398,7 +398,7 @@ Any notary or person who violets the provision of this Proclamation shall be pen
 
 ### Article 40. Effective Date
 
-This Proclamation shall enter into force on the date of Done at Addis Ababa, this 15th day of February , 2016. MULATU TESHOME (DR.) PRESIDENT OF THE FEDERAL DEMOCRATIC REPUBLIC OF ETHIOPIA
+This Proclamation shall enter into force on the date of publication in the Federal Negarit Gazette. Done at Addis Ababa, this 15th day of February , 2016. MULATU TESHOME (DR.) PRESIDENT OF THE FEDERAL DEMOCRATIC REPUBLIC OF ETHIOPIA
 
 ## Regulation — Fee Rates Payable for Service Provided by the Federal Documents Authentication and Registration Service, Regulation No. 543/2024
 

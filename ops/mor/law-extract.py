@@ -40,14 +40,17 @@ ROOT = "/var/www/connectcare/binasmart/"
 SRC = "/root/legal-sources/mor/"
 OUTDIR = ROOT + "knowledge/law/"
 HEADERS = ROOT + "ops/mor/headers/"
-MANIFEST = json.load(open(SRC + "manifest.json", encoding="utf-8"))
+_MANIFEST = None   # read on first use, so the text filters can be imported by a test without the harvest
 
 ETH = re.compile(r"[ሀ-፿]")
 LAT = re.compile(r"[A-Za-z]")
 
 
 def file_of(endpoint, id_):
-    for r in MANIFEST["files"].values():
+    global _MANIFEST
+    if _MANIFEST is None:
+        _MANIFEST = json.load(open(SRC + "manifest.json", encoding="utf-8"))
+    for r in _MANIFEST["files"].values():
         if r.get("ok") and r["endpoint"] == endpoint and r["id"] == id_:
             return r
     raise SystemExit("not downloaded: %s#%s" % (endpoint, id_))
@@ -104,17 +107,49 @@ def split_by_script(ws):
 
 
 FURNITURE = [
-    re.compile(r"Federal\s+Negarit\s+Ga[zs]ette", re.I), re.compile(r"FEDERAL NEGARIT GAZETTE", re.I),
-    re.compile(r"ፌዴራል\s*ነጋሪት\s*ጋዜጣ|ነጋሪት\s*ጋዜጣ"), re.compile(r"Ød‰L|Uz¤È|›\.M"), re.compile(r"^\s*page\s*\d*\s*$", re.I),
+    re.compile(r"Ød‰L|Uz¤È|›\.M"), re.compile(r"^\s*page\s*\d*\s*$", re.I),
     re.compile(r"^\s*[\d፩-፼፻ሺ]+\s*$"), re.compile(r"Negarit G\. P\.O\.Box", re.I), re.compile(r"ያንዱ ዋጋ|Unit Price", re.I),
 ]
+
+# The gazette's name is furniture only as a running head or masthead ("Federal Negarit Gazette No. 48, 30th July,
+# 2026..page", "FEDERAL NEGARIT GAZETTE EXTRAORDINARY ISSUE", "ፌደራል ነጋሪት ጋዜጣ"). Matching the name anywhere dropped
+# body lines that mention it: 1434/2026 Art. 3 lost "publication in the Federal Negarit Gazette." and read "shall enter
+# into force upon Done at Addis Ababa". A line is a head when nothing but OCR/legacy-font noise stands before the name
+# (no English word of 4+ letters, no Ethiopic letter) and after it comes a number ("No. 66"), or nothing but
+# "Extraordinary Issue" / "of the Federal Democratic Republic of Ethiopia" without closing punctuation.
+GAZETTE_EN = re.compile(r"Federal\s+Negarit\s+Ga[zs]ette", re.I)
+GAZETTE_AM = re.compile(r"(?:ፌዴራል|ፌደራል)?\s*ነጋሪት\s*ጋዜጣ")
+MASTHEAD_TAIL = re.compile(r"^\s*(?:extraordinary\s+issue|of\s+the\s+federal\s+democratic\s+republic\s+of\s+ethiopia)?\s*$", re.I)
+
+
+def is_running_head(s):
+    s = s.strip()
+    for name, lang in ((GAZETTE_EN, "en"), (GAZETTE_AM, "am")):
+        m = name.search(s)
+        if not m:
+            continue
+        before, after = s[:m.start()], s[m.end():]
+        if re.search(r"[A-Za-z]{4,}", before) or (lang == "am" and re.search(r"[ሀ-ፚ]", before)):
+            return False                      # a sentence that names the gazette
+        if lang == "en" and re.match(r"\s*No\b\.?\s*\d", after, re.I):
+            return True                       # "Federal Negarit Gazette No. 61, 21 August, 2024....page"
+        if lang == "am" and re.match(r"\s*(?:ቁጥር\s*)?[\d፩-፼]", after):
+            return True
+        if (lang == "en" and MASTHEAD_TAIL.match(after)) or (lang == "am" and re.fullmatch(r"\s*(?:ልዩ\s*እትም)?\s*", after)):
+            return not re.search(r"[.;,:።፤]\s*$", s)   # a masthead line, not the end of a wrapped sentence
+        return False
+    return False
+
+
+def is_furniture(s):
+    return is_running_head(s) or any(p.search(s) for p in FURNITURE)
 
 
 def text_of(ws, extra_furniture=(), furniture=True):
     out = []
     for line in lines_of(ws):
         s = " ".join(w[5] for w in line).strip()
-        if not s or (furniture and any(p.search(s) for p in FURNITURE)) or any(p.search(s) for p in extra_furniture):
+        if not s or (furniture and is_furniture(s)) or any(p.search(s) for p in extra_furniture):
             continue
         if re.search(r"\.{6,}|…{3,}", s):   # a contents line with dotted leaders
             continue
@@ -229,7 +264,7 @@ def build(job):
         keep = []
         for line in raw.split("\n"):
             s2 = line.strip()
-            if not s2 or any(p.search(s2) for p in FURNITURE) or any(re.search(p, s2) for p in job.get("furniture", [])):
+            if not s2 or is_furniture(s2) or any(re.search(p, s2) for p in job.get("furniture", [])):
                 continue
             keep.append(s2)
         body = reflow("\n".join(keep))

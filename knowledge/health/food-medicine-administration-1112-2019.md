@@ -1110,7 +1110,7 @@ The Health Professional Ethics Committee established by the Council of Ministers
 
 ### Article 74. Effective date
 
-1/ This Proclamation shall enter into force on the
+1/ This Proclamation shall enter into force on the date of publication in the Federal Negarit Gazette.
 
 2/ Notwithstanding to sub-article (1) of this article, article 53 (3), (5) and (7) of this proclamation requiring labeling of medicine and medical device to be in Amharic and English, requiring barcode and placing of retail price requirement shall come into effect at the eighteenth month from the date of adoption of this proclamation.
 
