@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="afiya-t">
+<title id="afiya-t">Dr Afiya</title>
+<clipPath id="afiya-c"><circle cx="60" cy="60" r="56"/></clipPath>
+<circle cx="60" cy="60" r="58" fill="#ccfbf1" stroke="#0d9488" stroke-width="4"/>
+<g clip-path="url(#afiya-c)">
+<path d="M31 60c0-23 12-37 29-37s29 14 29 37v24H31z" fill="#1c1208"/>
+<path d="M16 122c2-23 19-35 44-35s42 12 44 35z" fill="#ffffff" stroke="#8fd3ca" stroke-width="2"/>
+<path d="M49 88l11 15 11-15z" fill="#0d9488"/>
+<path d="M52 72h16v16l-8 6-8-6z" fill="#6f4220"/>
+<ellipse cx="60" cy="57" rx="19" ry="22" fill="#8a5528"/>
+<path d="M40 55c1-17 11-26 21-26 11 0 20 9 20 22-8-7-19-10-29-7-5 2-9 6-12 11z" fill="#1c1208"/>
+<circle cx="60" cy="22" r="9" fill="#1c1208"/>
+<circle cx="53" cy="59" r="2.3" fill="#1c1208"/>
+<circle cx="67" cy="59" r="2.3" fill="#1c1208"/>
+<path d="M53 68c4 4 10 4 14 0" fill="none" stroke="#3a1d0a" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M47 88c-3 12 3 21 13 21s16-9 13-21" fill="none" stroke="#134e4a" stroke-width="3" stroke-linecap="round"/>
+<path d="M73 95c9 2 13 8 11 14" fill="none" stroke="#134e4a" stroke-width="3" stroke-linecap="round"/>
+<circle cx="84" cy="112" r="5" fill="#134e4a"/>
+<circle cx="84" cy="112" r="2" fill="#99f6e4"/>
+</g>
+</svg>

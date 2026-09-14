@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="asmat-t">
+<title id="asmat-t">Asmat</title>
+<clipPath id="asmat-c"><circle cx="60" cy="60" r="56"/></clipPath>
+<circle cx="60" cy="60" r="58" fill="#dbeafe" stroke="#1e3a8a" stroke-width="4"/>
+<g clip-path="url(#asmat-c)">
+<path d="M15 122c2-23 20-35 45-35s43 12 45 35z" fill="#1e3a8a"/>
+<path d="M48 87l12 21 12-21z" fill="#ffffff"/>
+<path d="M57 92h6l2 4-3 14h-4l-3-14z" fill="#b45309"/>
+<path d="M52 71h16v15l-8 6-8-6z" fill="#5e3517"/>
+<ellipse cx="60" cy="55" rx="19" ry="22" fill="#744220"/>
+<path d="M41 52c0-17 8-27 19-27s19 10 19 27c-3-8-9-13-19-13s-16 5-19 13z" fill="#111827"/>
+<path d="M41 58c0 17 8 27 19 27s19-10 19-27c-3 8-9 12-19 12s-16-4-19-12z" fill="#111827"/>
+<circle cx="53" cy="57" r="2.3" fill="#111827"/>
+<circle cx="67" cy="57" r="2.3" fill="#111827"/>
+<path d="M54 73c4 2 8 2 12 0" fill="none" stroke="#e7d3bd" stroke-width="2.2" stroke-linecap="round"/>
+<g stroke="#f59e0b" stroke-width="2" stroke-linecap="round" fill="none">
+<path d="M84 94v13M79 107h10M76 97h16"/>
+<path d="M76 97l-3 6M76 97l3 6M92 97l-3 6M92 97l3 6"/>
+</g>
+<path d="M72 103h8a4 3 0 0 1-8 0zM88 103h8a4 3 0 0 1-8 0z" fill="#f59e0b"/>
+</g>
+</svg>
