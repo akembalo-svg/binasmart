@@ -584,7 +584,7 @@ l! 1/ Any health institution shall be registered by the Ministry or an appropria
 
 ### Article 41. Hygiene and Environmental Health Care
 
-1/ Every service provider has the obligation to provide a complete and toilets and other necessary hygiene materials to
+1/ Every service provider has the obligation to provide a complete and toilets and other necessary hygiene materials to users.
 
 2/ Every food and beverage service providing institution obliged to provide clean and hygienic food and beverage.
 
