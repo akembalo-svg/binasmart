@@ -38,6 +38,15 @@ const base = overrides => Object.assign({
   finish: (c, text) => text + ' [END]', fallback: () => 'sorry',
 }, overrides);
 
+test('a definition may add fields to the response, and can never replace the reply', async () => {
+  const h = harness();
+  const agent = base({ body: c => ({ ownerAction: { id: 'x', lang: c.l }, reply: 'not this' }) });
+  const out = await h.handle(agent, req('hello'), res());
+  assert.deepEqual(out, { reply: 'ok [END]', ownerAction: { id: 'x', lang: 'en' } });
+  const plain = await h.handle(base(), req('hello'), res());
+  assert.deepEqual(plain, { reply: 'ok [END]' }, 'an agent without body() answers exactly as before');
+});
+
 test('an empty message is refused before anything else runs', async () => {
   const h = harness(); const r = res();
   await h.handle(base(), req('   '), r);

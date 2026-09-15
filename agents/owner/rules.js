@@ -9,6 +9,9 @@ const { foldEthiopic } = require('../../assistant/lang');
 const afiya = require('../../assistant/afiya');
 const { loadSoul } = require('../../assistant/kit/soul');
 const building = require('./tools/building');
+const actionTools = require('./tools/actions');
+const actionCard = require('./actions/card');
+const { CATEGORY } = require('./actions/policy');
 
 // An emergency in a building, answered from code before anything else. afiya.isEmergency is written for
 // someone describing a patient and fires on ordinary owner wording ("take a screenshot", "new fittings",
@@ -85,6 +88,13 @@ function actionFor(msg) {
   return null;
 }
 const isChangeRequest = msg => actionFor(msg) !== null;
+// The requests Bini may PREPARE when the building's owner-actions switch is on (owner actions design §3.1): a message
+// or reminder, an invoice (send or create), a payment. The route puts the switched-on building ids in scope.actionsOn.
+// Every other change keeps its dashboard answer below.
+const PREPARABLE = new Set(['message', 'invoice', 'paid']);
+const actionsOn = c => !!(c.scope && Array.isArray(c.scope.actionsOn) && Array.isArray(c.scope.buildingIds)
+  && c.scope.actionsOn.some(id => c.scope.buildingIds.includes(id)));
+const preparable = c => { const a = actionFor(c.msg); return a !== null && PREPARABLE.has(a) && actionsOn(c) ? a : null; };
 
 const CANT = {
   message: ['ለተከራዮች መልእክት መላክ በዚህ ስሪት አልችልም። ዳሽቦርዱም ለሁሉም በአንድ ጊዜ የሚልክ ቁልፍ የለውም፦ በInvoices ገጽ በኢንቮይሱ ላይ ያለው «📤 Send» ኢንቮይሱን ለዚያ ክፍል ተከራይ በWhatsApp ወይም በቴሌግራም ይልካል፤ የእያንዳንዱ ተከራይ ስልክ በTenants ገጽ ከስሙ ስር አለ።',
@@ -135,6 +145,12 @@ const HELP = [
   'I don\'t see my earlier answers: I answer each message on its own, so please write your whole question. From your records I can answer: this month\'s rent, what is paid and unpaid, who has not paid, one unit by its number, the tenants on a floor (e.g. "floor 2"), a tenant by name, vacant units, contracts ending, repairs, income, expenses and VAT. I can\'t send messages, make calls or change records; do that in the owner dashboard.',
 ];
 
+// The same help when the building has owner actions on: what Bini answers, and what it prepares for ✅.
+const HELP_ACTIONS = [
+  'ቀደም ብዬ የመለስኩትን አላየውም፤ እያንዳንዱን መልእክት ለብቻው ነው የምመልሰው፣ ስለዚህ ጥያቄዎን ሙሉ በሙሉ ይጻፉልኝ። ከመዝገብዎ ልመልስ የምችለው፦ የወሩ ኪራይ፣ የተከፈለና ያልተከፈለ፣ ያልከፈሉ ክፍሎች፣ አንድ ክፍል በቁጥሩ፣ በአንድ ፎቅ ያሉ ተከራዮች (ለምሳሌ «2ኛ ፎቅ»)፣ ተከራይን በስሙ መፈለግ፣ ባዶ ክፍሎች፣ የሚያልቁ ውሎች፣ ጥገና፣ ገቢ፣ ወጪና ቫት። ማዘጋጀት የምችለው፦ ለተከራዮች መልእክት፣ ያልከፈሉትን ማስታወስ፣ ኢንቮይስ መላክ፣ የወር ኢንቮይሶችን ማዘጋጀትና ክፍያ መመዝገብ — ቅድመ እይታ አሳይዎታለሁ፤ የሚፈጸመው ✅ ሲጫኑ ብቻ ነው። ሌላ ለውጥ በባለቤት ዳሽቦርዱ ያድርጉ።',
+  'I don\'t see my earlier answers: I answer each message on its own, so please write your whole question. From your records I can answer: this month\'s rent, what is paid and unpaid, who has not paid, one unit by its number, the tenants on a floor (e.g. "floor 2"), a tenant by name, vacant units, contracts ending, repairs, income, expenses and VAT. I can also prepare a message to tenants, reminders to those who have not paid, sending an invoice, this month\'s invoices, or recording a payment: I show a preview and nothing happens until you press ✅. Other changes are made in the owner dashboard.',
+];
+
 const am = (c, amharic, english) => (c.l === 'am' ? amharic : english);
 const scopeIds = c => (c.scope && Array.isArray(c.scope.buildingIds) && c.scope.buildingIds.length ? c.scope.buildingIds : null);
 
@@ -181,25 +197,41 @@ module.exports = {
     { test: c => !scopeIds(c),
       answer: c => ({ body: { reply: am(c, 'ይቅርታ፣ የትኛው ህንፃ የእርስዎ እንደሆነ አልታወቀም። እባክዎ እንደገና ይግቡ።',
         'Sorry, I could not tell which building is yours. Please sign in again.') } }) },
-    { test: c => isFollowUp(c.msg), answer: c => ({ body: { help: true, reply: am(c, HELP[0], HELP[1]) } }) },
-    { test: c => actionFor(c.msg) !== null,
+    { test: c => isFollowUp(c.msg), answer: c => { const h = actionsOn(c) ? HELP_ACTIONS : HELP; return { body: { help: true, reply: am(c, h[0], h[1]) } }; } },
+    // A change Bini cannot prepare, or any change while the building's actions are off: the dashboard answer, no model.
+    { test: c => actionFor(c.msg) !== null && !preparable(c),
       answer: c => { const action = actionFor(c.msg); return { body: { readOnly: true, action, reply: actionReply(action, c.l) } }; } },
   ],
 
   inScope: () => true,
   redirect: () => '',
 
-  tools: building.DEFS,
+  tools: building.DEFS.concat(actionTools.DEFS),
   executor: (c, deps) => {
     // c.msg is the owner's own message, already on its way to the model; find_tenant may only search its words
-    const ex = building.makeExecutor({ prisma: deps.prisma })(c.scope, { question: c.msg });
-    c.names = ex.names;   // token -> name, filled as the tools run; read by finish()
-    return ex;
+    const read = building.makeExecutor({ prisma: deps.prisma })(c.scope, { question: c.msg });
+    c.names = read.names;   // token -> name, filled as the tools run; read by finish()
+    // prepare_* tools only store a pending action through deps.ownerActions (server.js); c.actionTurn is read by finish()
+    c.actionTurn = { calls: 0, prepared: null, refused: null };
+    const act = actionTools.bind({ actions: deps.ownerActions || null, scope: c.scope, channel: c.channel, turn: c.actionTurn });
+    const execute = (name, args) => (actionTools.NAMES.has(name) ? act(name, args) : read(name, args));
+    execute.names = read.names;
+    return execute;
   },
 
-  instruct: () => '\n\nToday is ' + new Date().toISOString().slice(0, 10) + '. Answer only from the tool results.',
+  instruct: c => '\n\nToday is ' + new Date().toISOString().slice(0, 10) + '. Answer only from the tool results.'
+    + (actionsOn(c)
+      ? ' Owner actions are ON for this building: when the owner asks you to message tenants, remind unpaid tenants, send an invoice, create a month\'s rent invoices or record a payment, call the matching prepare_ tool once. The system shows the owner a preview and nothing happens until the owner presses ✅; never say that anything was sent or recorded.'
+      : ' Owner actions are OFF for this building: do not call any prepare_ tool.'),
 
   finish(c, text, { toolResults = [] }) {
+    // An action turn is answered by code: the preview card, the refusal, or how to ask. The model's words are not used,
+    // so it can never tell the owner that something was sent.
+    const turn = c.actionTurn || {};
+    if (turn.prepared) return turn.prepared.card.text;
+    if (turn.refused) return turn.refused.error === 'actions_off' ? actionReply(CATEGORY[turn.refused.kind] || 'change', c.l) : actionCard.pick(actionCard.say(turn.refused), c.l);
+    const asked = preparable(c);
+    if (asked) return actionCard.help(asked, c.l);
     text = restoreNames(c, text);
     if (!text) text = am(c, 'ይቅርታ፣ ይህን በመዝገብዎ ውስጥ አላገኘሁትም። በሌላ መንገድ ይጠይቁ ወይም ዳሽቦርዱን ይክፈቱ።',
       'Sorry, I could not find that in your records. Ask another way, or open the dashboard.');
@@ -207,6 +239,16 @@ module.exports = {
   },
 
   fallback: c => am(c, 'ይቅርታ፣ አሁን መልስ መስጠት አልቻልኩም። እባክዎ ዳሽቦርዱን ይመልከቱ።', 'Sorry, I could not answer just now. Please check the dashboard.'),
+
+  // What the response carries besides the reply (assistant/kit/engine.js): the prepared action's id and buttons for the
+  // dashboard and the bot, or which refusal or help was given. Never a chat id, a phone number or a name.
+  body(c) {
+    const turn = c.actionTurn || {};
+    if (turn.prepared) return { ownerAction: { id: turn.prepared.id, kind: turn.prepared.kind, status: 'pending', ownerConfirms: !!turn.prepared.staff, buttons: turn.prepared.card.buttons } };
+    if (turn.refused) return turn.refused.error === 'actions_off' ? { readOnly: true, action: CATEGORY[turn.refused.kind] || 'change' } : { actionRefused: turn.refused.error };
+    const asked = preparable(c);
+    return asked ? { actionHelp: asked } : {};
+  },
 
   // Who asked, through which door, with which tools — never the answer.
   audit(c, { tools }, deps) {
@@ -220,4 +262,7 @@ module.exports = {
   actionFor,
   actionReply,
   isFollowUp,
+  actionsOn,
+  preparable,
+  PREPARABLE,
 };

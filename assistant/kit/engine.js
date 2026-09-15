@@ -149,7 +149,10 @@ function makeEngine(deps) {
       // The documents the answer's knowledge came from, for the chat page's "From:" line (at most two, public
       // links only). Added only when there are some, so every other response keeps its exact shape.
       const sources = agent.knowledge === false ? [] : sourcesFrom(ctx);
-      return Object.assign({ reply: text }, agent.okFlags || {}, sources.length ? { sources } : {});
+      // 9. What the definition adds to the response besides the reply (agent.body, optional): fields decided by code
+      // during this request, e.g. the owner agent's prepared action and its buttons. `reply` itself cannot be replaced.
+      const more = typeof agent.body === 'function' ? (agent.body(c) || {}) : {};
+      return Object.assign({ reply: text }, agent.okFlags || {}, sources.length ? { sources } : {}, more, { reply: text });
     } catch (e) {
       req.log && req.log.error({ err: e }, agent.name + ' failed');
       if (agent.audit && toolResults.length) runAudit();
