@@ -2489,6 +2489,45 @@ fastify.post('/api/owner/:slug/telegram-links/:id/remove', async (req, reply) =>
   return { ok: true };
 });
 
+// ===== Tenant notices on Telegram (owner actions and messaging design §2) =====
+// Tenants link @bina_smart_bot from the building's poster: /start tenant_<slug>, then Share my phone. The proof and the
+// match live in messaging/tenant-link.js; the bot (ride/binaBot.js) calls it only within ten minutes of that command.
+// The owner sees how many tenants linked, prints the poster, and can remove a unit's link.
+const QRCode = require('qrcode');
+const { makeTenantLink, makeTenantLinkStore } = require('./messaging/tenant-link');
+const { tenantPoster } = require('./messaging/tenant-poster');
+const tenantLink = makeTenantLink({ store: makeTenantLinkStore(prisma), audit });
+const tenantStartUrl = slug => 'https://t.me/' + (process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot') + '?start=tenant_' + slug;
+fastify.get('/api/owner/:slug/tenant-telegram', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true, qrSlug: true } });
+  if (!b) return reply.code(404).send({ error: 'not_found' });
+  const st = await tenantLink.statsForBuilding(b.id);
+  return { active: st.active, linked: st.linked, units: st.units, startLink: tenantStartUrl(b.qrSlug), poster: '/tenant-poster/' + b.qrSlug };
+});
+fastify.post('/api/owner/:slug/tenant-telegram/:tenancyId/remove', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
+  const t = await prisma.tenancy.findUnique({ where: { id: String(req.params.tenancyId) }, select: { id: true, unit: { select: { buildingId: true } } } });
+  // Ownership, as every sibling route checks it; 404 rather than 403, so a wrong id is not confirmed.
+  if (!b || !t || t.unit.buildingId !== b.id) return reply.code(404).send({ error: 'not_found' });
+  if (!(await tenantLink.removeForBuilding(b.id, t.id))) return reply.code(404).send({ error: 'not_linked' });
+  return { ok: true };
+});
+// Printable A4 page behind the building's owner key, like the owner reports (a document navigation, so the dashboard
+// opens it with ?key= or the owner session). It shows only the building name and the bot link; the QR is drawn here
+// by the qrcode package, no outside QR service.
+fastify.get('/tenant-poster/:slug', async (req, reply) => {
+  const slug = String(req.params.slug || '');
+  if (!/^[A-Za-z0-9-]{1,60}$/.test(slug)) return reply.code(404).type('text/html; charset=utf-8').send(slugMiss('ህንፃ · Building', '/'));
+  if (await authBuildingFail(req, reply, slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: slug }, select: { name: true, nameAm: true, qrSlug: true } });
+  if (!b) return reply.code(404).type('text/html; charset=utf-8').send(slugMiss('ህንፃ · Building', '/'));
+  const qrSvg = await QRCode.toString(tenantStartUrl(b.qrSlug), { type: 'svg', margin: 1, errorCorrectionLevel: 'M' });
+  return reply.header('X-Robots-Tag', 'noindex, nofollow').header('Cache-Control', 'no-store')
+    .type('text/html; charset=utf-8').send(tenantPoster({ building: b, startUrl: tenantStartUrl(b.qrSlug), qrSvg }));
+});
+
 // ===== SMART NOTIFICATIONS + PENALTIES (daily engine) =====
 const NOTIFY_WHITELIST = ['darulle']; // real buildings only — demo owners have fake numbers
 const WA_CHANNEL = { darulle: 'darulle' }; // per-building sender (owner's own number once linked)
@@ -2641,40 +2680,16 @@ fastify.post('/api/admin/:slug/run-daily', async (req, reply) => {
   return { ok: true, results: await runDailyChecks(req.params.slug) };
 });
 
-// ===== TELEGRAM LINKING (tenant opt-in bot) =====
-// Links a Telegram chat to a Darulle tenant from nothing but a unit number. Unit numbers are on doors
-// and contracts, and no bot has delivered updates here since the rider bot moved to /api/tg/rider, so
-// the only thing that could reach this route was a forged POST: send {chat: yours, text: "707"} and
-// unit 707's rent and contract reminders come to you instead of the tenant. Nothing was ever linked
-// (0 chats, 0 TG_LINKED audits). It now answers only Telegram itself, the same check as /api/tg/rider;
-// a real tenant link needs proof the chat belongs to the tenant, which is part of the owner-Bini work.
+// ===== Legacy tenant webhook (retired 15 Sep 2026) =====
+// This route linked a Telegram chat to a Darulle tenant from nothing but a unit number, which is written on doors. It
+// answered only Telegram's secret and no bot delivered here (0 links were ever made; on 15 Sep no bot token's webhook
+// pointed here and nginx logged no request to it). Tenants now link in @bina_smart_bot with Telegram's proof of their
+// phone number (messaging/tenant-link.js). The route stays so an old webhook registration gets a quiet 200 instead of
+// retries; it reads nothing and changes nothing.
 fastify.post('/api/tg-webhook', async (req, reply) => {
   const tgSecret = process.env.TG_WEBHOOK_SECRET || '';
   if (!tgSecret || req.headers['x-telegram-bot-api-secret-token'] !== tgSecret) return reply.code(401).send({ ok: false });
-  reply.send({ ok: true });
-  try{
-    const msg = (req.body || {}).message;
-    if (!msg || !msg.chat || !msg.text) return;
-    const chatId = String(msg.chat.id);
-    const text = msg.text.trim();
-    if (text.startsWith('/start')){
-      await sendTg(chatId, 'ሰላም! 🏢 BinaSmart — የጄጄ ዳሩሌ ህንፃ\n\nየክፍልዎን ቁጥር ይላኩ (ለምሳሌ: 707 ወይም G-003)\nPlease send your unit number (e.g. 707 or G-003) to receive rent & contract reminders here.');
-      return;
-    }
-    const b = await prisma.building.findUnique({ where: { qrSlug: 'darulle' } });
-    const unit = await prisma.unit.findFirst({
-      where: { buildingId: b.id, number: { equals: text, mode: 'insensitive' } },
-      include: { tenancies: { where: { active: true }, include: { user: true, shop: true } } }
-    });
-    if (!unit || !unit.tenancies[0]){
-      await sendTg(chatId, '❌ ክፍል "' + text.slice(0, 20) + '" አልተገኘም። እባክዎ በትክክል ይላኩ (ለምሳሌ: 112/01)\nUnit not found — please send it exactly as on your contract.');
-      return;
-    }
-    const t = unit.tenancies[0];
-    await prisma.user.update({ where: { id: t.userId }, data: { telegramChatId: chatId } });
-    await audit(b.id, 'TG_LINKED', unit.number + ' ' + (t.shop ? t.shop.name : t.user.fullName));
-    await sendTg(chatId, '✅ ተሳክቷል! ' + (t.shop ? (t.shop.nameAm || t.shop.name) : t.user.fullName) + ' — ክፍል ' + unit.number + '\n\nከአሁን በኋላ የኪራይ እና የውል ማሳሰቢያዎች እዚህ ይደርስዎታል። 🔔\nYou will now receive rent & contract reminders here on Telegram too.');
-  }catch(e){ console.error('[tg-webhook]', e.message); }
+  return { ok: true };
 });
 
 // ===== SUB-METERING =====
@@ -3520,6 +3535,7 @@ const rideMod = require('./ride')(fastify, {
   ROUTER_URL: process.env.ROUTER_URL || 'http://127.0.0.1:8989',
   askBini: callBini, // Bini's LLM adapter, for /api/ride/intent (Ask Bini)
   ownerTelegram, // Bini for owners in @bina_smart_bot (agents/owner/access.js)
+  tenantTelegram: tenantLink, // tenant notices: /start tenant_<slug> and /stop (messaging/tenant-link.js)
   BASE_URL: 'https://bina.et'
 });
 
