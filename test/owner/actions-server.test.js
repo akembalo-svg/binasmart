@@ -76,10 +76,11 @@ test('the confirm and cancel routes authenticate before they read anything, and 
   }
 });
 
-test('an id that is used up or has expired answers 409, and nothing about the stored row is sent back', () => {
+test('a press that did nothing — used up, expired — answers 409, and nothing about the stored row is sent back', () => {
   const reply = block('function ownerActionReply(', '\n}');
   assert.match(src, /const ACTION_SETTLED = \['done', 'failed', 'refused', 'cancelled', 'expired'\];/);
-  assert.match(reply, /if \(ACTION_SETTLED\.includes\(r\.status\)\) reply\.code\(409\);/);
+  // Only a press that CHANGED nothing is a conflict: a confirm that just ran comes back ok with the ordinary 200.
+  assert.match(reply, /if \(!r\.ok && ACTION_SETTLED\.includes\(r\.status\)\) reply\.code\(409\);/);
   assert.match(reply, /reply\.code\(r\.status === 'gone' \? 404 : 403\)/);
   // The card, its buttons and the id are the whole answer: no args, no fingerprint, no recipients, no access id.
   const keys = reply.match(/return \{[^}]*ok: r\.ok[^;]*;/)[0];

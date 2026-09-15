@@ -3169,12 +3169,13 @@ ownerTelegram.actions = ownerActions;
 cron.schedule('*/5 * * * *', () => { ownerActions.expireOld().catch(e => console.error('[owner-actions] expiry error: ' + errorKindOf(e))); });
 
 // The dashboard chat's ✅ / ⚠️ / ✖. The building comes from the owner key and the slug; the body only says whether ⚠️ was pressed.
-// A spent id (confirmed, cancelled, refused, failed or expired) answers 409 with the card that says so; a wrong id is
+// A press that changed nothing — the id was already confirmed, cancelled, refused, failed or expired — answers 409 with
+// the card that says so; a press that just ran the action is an ordinary 200 (r.ok). A wrong id is
 // the route's 404 below, so nothing here tells a caller whether an id exists.
 const ACTION_SETTLED = ['done', 'failed', 'refused', 'cancelled', 'expired'];
 function ownerActionReply(reply, r) {
   if (!r.card) return reply.code(r.status === 'gone' ? 404 : 403).send({ error: r.status, reply: r.toast });
-  if (ACTION_SETTLED.includes(r.status)) reply.code(409);
+  if (!r.ok && ACTION_SETTLED.includes(r.status)) reply.code(409);
   return { ok: r.ok, status: r.status, reply: r.card.text, ownerAction: { id: r.id, status: r.status, buttons: r.card.buttons } };
 }
 fastify.post('/api/owner/:slug/actions/:id/confirm', async (req, reply) => {
