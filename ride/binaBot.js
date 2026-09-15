@@ -145,13 +145,57 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     return s && s.mode === 'owner' ? s : null;
   }
 
+  // ---- Owner actions with ✅ confirm (owner actions design §3). owner.actions = agents/owner/actions/service.js. ----
+  // A button carries only 'oa:<c|x|u>:<pending action id>'; who pressed, and whether the action may run, is decided by
+  // owner.actions.press on the server — never by what the button says.
+  const VERB_CODE = { confirm: 'c', cancel: 'x', urgent: 'u' };
+  const CODE_VERB = { c: 'confirm', x: 'cancel', u: 'urgent' };
+  const actionKeyboard = (id, buttons) => ({ inline_keyboard: (buttons || []).length
+    ? [buttons.filter(b => VERB_CODE[b.verb]).map(b => ({ text: b.label, callback_data: 'oa:' + VERB_CODE[b.verb] + ':' + id }))] : [] });
+
   async function answerOwner(chatId, text, from, scope) {
     if (api.sendChatAction) api.sendChatAction(chatId, 'typing').catch(() => {});
-    const reply = await owner.answer({ text: text.slice(0, 1200), from, chatId, scope })
+    const out = await owner.answer({ text: text.slice(0, 1200), from, chatId, scope })
       .catch(e => { console.error('[binaBot] owner answer: ' + e.message); return null; });
+    const reply = out && typeof out === 'object' ? out.reply : out;
     if (!reply) return api.sendMessage(chatId, 'ቢኒ ትንሽ ተጠምዷል፣ እባክዎ በደቂቃ ውስጥ እንደገና ይሞክሩ። · Bini is busy — please try again in a minute.');
-    return api.sendMessage(chatId, forOwnerTelegram(reply), { disable_web_page_preview: true,
-      reply_markup: { inline_keyboard: [[{ text: '🏢 ዳሽቦርድ · Dashboard', url: baseUrl + '/owner' }]] } });
+    const action = out && typeof out === 'object' ? out.ownerAction : null;
+    const withButtons = !!(action && action.id && (action.buttons || []).length && owner.actions);
+    const sent = await api.sendMessage(chatId, forOwnerTelegram(reply), { disable_web_page_preview: true,
+      reply_markup: withButtons ? actionKeyboard(action.id, action.buttons)
+        : { inline_keyboard: [[{ text: '🏢 ዳሽቦርድ · Dashboard', url: baseUrl + '/owner' }]] } });
+    if (withButtons && sent && sent.message_id != null)
+      await owner.actions.attachCard(action.id, chatId, sent.message_id).catch(e => console.error('[binaBot] action card: ' + errKind(e)));
+    // Prepared by staff: the card with the buttons goes to the owner's own chat.
+    if (action && action.id && action.ownerConfirms && owner.actions) {
+      const cards = await owner.actions.ownerCards(action.id).catch(e => { console.error('[binaBot] owner cards: ' + errKind(e)); return []; });
+      for (const c of cards) {
+        const m = await api.sendMessage(c.chatId, forOwnerTelegram(c.text), { disable_web_page_preview: true, reply_markup: actionKeyboard(action.id, c.buttons) })
+          .catch(e => { console.error('[binaBot] owner card send: ' + errKind(e)); return null; });
+        if (m && m.message_id != null) await owner.actions.attachCard(action.id, c.chatId, m.message_id).catch(e => console.error('[binaBot] action card: ' + errKind(e)));
+      }
+    }
+    return sent;
+  }
+
+  async function pressOwnerAction(cq, code, id) {
+    const chat = cq.message.chat || {};
+    // Answered at once so the button stops spinning; sending to many tenants can take longer than Telegram waits.
+    try { await api.answerCallbackQuery(cq.id, '⏳'); } catch (e) { /* ignore */ }
+    if (chat.type !== 'private' || !cq.from) return null;
+    let r;
+    try {
+      r = await owner.actions.press({ id, verb: CODE_VERB[code],
+        actor: { channel: 'owner-telegram', telegramId: String(cq.from.id), chatId: String(chat.id), messageId: cq.message.message_id } });
+    } catch (e) {
+      console.error('[binaBot] owner action press: ' + errKind(e));
+      return api.sendMessage(String(chat.id), SORRY);
+    }
+    for (const e of (r && r.edits) || [])
+      await api.editMessageText(e.chatId, e.messageId, forOwnerTelegram(e.text), { disable_web_page_preview: true, reply_markup: actionKeyboard(e.id, e.buttons) })
+        .catch(err => console.error('[binaBot] action card edit: ' + errKind(err)));
+    if (r && r.toast && !(r.edits || []).length) return api.sendMessage(String(chat.id), r.toast);
+    return r;
   }
 
   async function linkOwner(chatId, msg) {
@@ -351,6 +395,8 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
 
   async function handleCallback(cq) {
     if (!cq || !cq.message) return;
+    const oa = /^oa:([cxu]):([A-Za-z0-9_-]{22})$/.exec(String(cq.data || ''));
+    if (oa && owner && owner.actions) return pressOwnerAction(cq, oa[1], oa[2]);
     try { await api.answerCallbackQuery(cq.id); } catch (e) { /* ignore */ }
     if (cq.data === 'menu') return api.sendMessage(String(cq.message.chat.id), 'Pick a service · አገልግሎት ይምረጡ 👇', { reply_markup: menuMarkup() });
   }
