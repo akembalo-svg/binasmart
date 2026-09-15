@@ -2514,7 +2514,7 @@ const ADMIN_TG_CHAT = process.env.BINASMART_ADMIN_TG_CHAT || '';
 // 8096525984 is the ride ops account ("81171") that has received lead alerts since launch; kept as a
 // second admin so nothing that used to reach it stops reaching it.
 const OPS_TG_CHAT = process.env.BINASMART_OPS_TG_CHAT || '8096525984';
-const { notifyShop, notifyParty, notifyQuiet, notifyAdmins } = makeNotify({ sendTg, sendWa, adminChatIds: [ADMIN_TG_CHAT, OPS_TG_CHAT], log: console.log });
+const { notifyShop, notifyParty, notifyAdmins } = makeNotify({ sendTg, sendWa, adminChatIds: [ADMIN_TG_CHAT, OPS_TG_CHAT], log: console.log });
 async function sendTg(chatId, text){
   if (!TG_TOKEN || !chatId) return false;
   try{
@@ -2525,13 +2525,46 @@ async function sendTg(chatId, text){
     return (await r.json()).ok === true;
   }catch(e){ return false; }
 }
+// ===== Tenant messages (owner actions and messaging design, 15 Sep 2026, §1) =====
+// Every message to a tenant goes through messaging/delivery.js: Telegram if the tenant linked @bina_smart_bot, otherwise
+// SMS, otherwise recorded as not delivered. One channel per message, every attempt in OutboundMessage. WhatsApp is no
+// longer tried for tenants: the bridge on 127.0.0.1:8081 does not answer (15 Sep 2026) and each failed try slept 3-5 s
+// inside the daily run. Owners, shops and admins keep notifyParty / notifyShop / notifyAdmins exactly as before.
+// SMS leaves the server only when SMS_MODE=live, SMS_API_TOKEN is set, the building is real (NOTIFY_WHITELIST and not a
+// demo) and its smsMonthlyLimit allows it; otherwise the row says `test`, or why it was not sent.
+const { makeSmsFromEnv, buildingSmsLabel, parsePriceTiers } = require('./messaging/sms');
+const { makeDelivery, makeDeliveryStore } = require('./messaging/delivery');
+const { makeInvoiceLinks } = require('./messaging/invoice-links');
+const { renderInvoicePage, renderGonePage } = require('./messaging/invoice-page');
+const invoiceText = require('./messaging/invoice-text');
+const errorKindOf = e => String((e && (e.code || e.name)) || 'Error').replace(/[^A-Za-z0-9_]/g, '').slice(0, 40) || 'Error';
+// Delivery reports come to a path only the SMS provider is given; without a long secret there is no report route.
+const SMS_CALLBACK_SECRET = process.env.SMS_CALLBACK_SECRET || '';
+const smsCallbackUrl = SMS_CALLBACK_SECRET.length >= 24 ? 'https://bina.et/api/sms/report/' + SMS_CALLBACK_SECRET : '';
+const tenantSms = makeSmsFromEnv(process.env, { log: m => console.log(m), callbackUrl: smsCallbackUrl });
+const delivery = makeDelivery({ store: makeDeliveryStore(prisma), sendTg, sms: tenantSms, botUsername: process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot',
+  priceTiers: parsePriceTiers(process.env.SMS_PRICE_TIERS), log: m => console.error(m) });
+const invoiceLinks = makeInvoiceLinks({ prisma });
+console.log('[sms] mode ' + tenantSms.mode + ' · ' + (tenantSms.provider || 'no provider'));
+// Every SMS starts "BinaSmart · <building name>፦ " until approved sender names exist; smsSender null = provider default.
+function tenantBuilding(b){
+  return { id: b.id, slug: b.qrSlug, real: NOTIFY_WHITELIST.includes(b.qrSlug) && !hotelIsDemo(b), smsLabel: buildingSmsLabel(b.name),
+    smsMonthlyLimit: b.smsMonthlyLimit == null ? 0 : b.smsMonthlyLimit, smsSender: b.smsSender || '' };
+}
 let tenantMisses = 0;   // per building per daily run — see runDailyChecks
-async function notifyTenant(user, text, channel){
-  // Telegram first, WhatsApp as backup, one message not two. No admin copy — see notifyQuiet.
-  if (!user) return false;
-  const r = await notifyQuiet({ id: user.id, name: user.name || user.phone, phone: user.phone, tgChatId: user.telegramChatId || null }, text, channel);
-  if (!r.ok) tenantMisses++;
-  return r.ok;
+// One message to the tenant of one tenancy ({ id, userId, user: { phone, telegramChatId } }). Never throws.
+async function notifyTenant(b, tenancy, { kind, source, actor, text, smsText, invoiceId }){
+  let r = null;
+  if (tenancy && tenancy.user) {
+    r = await delivery.sendToTenants({ building: tenantBuilding(b), kind, source, actor: actor || null,
+      recipients: [{ tenancyId: tenancy.id, userId: tenancy.userId, telegramChatId: tenancy.user.telegramChatId || null,
+        phone: tenancy.user.phone, text, smsText: smsText || text, invoiceId: invoiceId || null }] })
+      .catch(e => { console.error('[delivery] error: ' + errorKindOf(e)); return null; });
+  }
+  const one = r && r.results[0];
+  const delivered = !!one && (one.status === 'sent' || one.status === 'delivered');
+  if (!delivered) tenantMisses++;
+  return { delivered, status: one ? one.status : 'failed', channel: one ? one.channel : 'none', errorKind: one ? one.errorKind : (r ? r.error : 'error') };
 }
 async function alreadyAudited(buildingId, action, detailContains){
   const hit = await prisma.auditLog.findFirst({ where: { buildingId, action, detail: { contains: detailContains } } });
@@ -2545,7 +2578,6 @@ async function runDailyChecks(onlySlug){
     const res = { slug: b.qrSlug, renewals: 0, dueSoon: 0, penalties: 0, notified: false };
     tenantMisses = 0;
     const canSend = NOTIFY_WHITELIST.includes(b.qrSlug);
-    const bChan = WA_CHANNEL[b.qrSlug];
     let tenantSendBudget = 8; // max tenant messages per building per run — spread over days, avoids WhatsApp spam bans
     const ownerMsgs = [];
     const tenancies = await prisma.tenancy.findMany({
@@ -2558,7 +2590,7 @@ async function runDailyChecks(onlySlug){
       const days = Math.ceil((new Date(t.contract.endDate) - now) / 86400000);
       const who = (t.shop ? t.shop.nameAm || t.shop.name : t.user.fullName) + ' (' + t.unit.number + ')';
       ownerMsgs.push('📋 ' + who + ' — contract ends in ' + days + ' days (' + t.contract.endDate.toISOString().slice(0, 10) + ') / ውል በ' + days + ' ቀን ያበቃል');
-      if (canSend && b.notifyTenants && tenantSendBudget-- > 0) await notifyTenant(t.user, 'ሰላም! የ' + b.nameAm + ' ክፍል ' + t.unit.number + ' ውልዎ በ' + days + ' ቀናት ውስጥ ያበቃል። ለማደስ ያነጋግሩን። — BinaSmart', bChan);
+      if (canSend && b.notifyTenants && tenantSendBudget-- > 0) await notifyTenant(b, t, { kind: 'reminder', source: 'daily-renewal', actor: 'cron', text: 'ሰላም! የ' + b.nameAm + ' ክፍል ' + t.unit.number + ' ውልዎ በ' + days + ' ቀናት ውስጥ ያበቃል። ለማደስ ያነጋግሩን። — BinaSmart' });
       await audit(b.id, 'NOTIFY_RENEWAL', tag + ' ' + who);
       res.renewals++;
     }
@@ -2572,7 +2604,7 @@ async function runDailyChecks(onlySlug){
       if (await alreadyAudited(b.id, 'NOTIFY_DUE', tag)) continue;
       const who = (i.tenancy.shop ? i.tenancy.shop.nameAm || i.tenancy.shop.name : '') + ' ' + i.tenancy.unit.number;
       ownerMsgs.push('⏰ ' + who + ' — ' + i.amount.toLocaleString() + ' ETB due ' + i.dueDate.toISOString().slice(0, 10));
-      if (canSend && b.notifyTenants && tenantSendBudget-- > 0) await notifyTenant(i.tenancy.user, 'ሰላም! የ' + b.nameAm + ' ኪራይ ' + i.amount.toLocaleString() + ' ብር በ' + i.dueDate.toISOString().slice(0, 10) + ' ይከፈላል። ኮድ: ' + (i.paymentCode || '') + ' — BinaSmart');
+      if (canSend && b.notifyTenants && tenantSendBudget-- > 0) await notifyTenant(b, i.tenancy, { kind: 'reminder', source: 'daily-due', actor: 'cron', invoiceId: i.id, text: 'ሰላም! የ' + b.nameAm + ' ኪራይ ' + i.amount.toLocaleString() + ' ብር በ' + i.dueDate.toISOString().slice(0, 10) + ' ይከፈላል። ኮድ: ' + (i.paymentCode || '') + ' — BinaSmart' });
       await audit(b.id, 'NOTIFY_DUE', tag + ' ' + who, i.amount);
       res.dueSoon++;
     }
@@ -2587,10 +2619,10 @@ async function runDailyChecks(onlySlug){
       const who = (i.tenancy.shop ? i.tenancy.shop.nameAm || i.tenancy.shop.name : '') + ' ' + i.tenancy.unit.number;
       ownerMsgs.push('🔴 ' + who + ' — OVERDUE ' + daysLate + 'd, penalty +' + fee.toLocaleString() + ' ETB');
       await audit(b.id, 'PENALTY_APPLIED', who + ' +' + b.latePenaltyPct + '%', fee);
-      if (canSend && b.notifyTenants && tenantSendBudget-- > 0) await notifyTenant(i.tenancy.user, 'ማሳሰቢያ: የ' + b.nameAm + ' ኪራይ ክፍያዎ አልፏል። ቅጣት ' + fee.toLocaleString() + ' ብር ታክሏል። — BinaSmart');
+      if (canSend && b.notifyTenants && tenantSendBudget-- > 0) await notifyTenant(b, i.tenancy, { kind: 'reminder', source: 'daily-penalty', actor: 'cron', invoiceId: i.id, text: 'ማሳሰቢያ: የ' + b.nameAm + ' ኪራይ ክፍያዎ አልፏል። ቅጣት ' + fee.toLocaleString() + ' ብር ታክሏል። — BinaSmart' });
       res.penalties++;
     }
-    if (tenantMisses) { ownerMsgs.push('📵 ' + tenantMisses + ' tenant(s) could not be reached — no Telegram link and WhatsApp failed'); res.tenantsUnreached = tenantMisses; }
+    if (tenantMisses) { ownerMsgs.push('📵 ' + tenantMisses + ' tenant message(s) not delivered — no Telegram link, and SMS not available for them'); res.tenantsUnreached = tenantMisses; }
     if (canSend && ownerMsgs.length && b.owner) {
       res.notified = (await notifyParty({ name: b.owner.name || (b.name + ' owner'), phone: b.owner.phone, tgChatId: b.owner.telegramId || null }, '🏢 ' + b.name + ' — BinaSmart daily report:\n\n' + ownerMsgs.slice(0, 15).join('\n') + (ownerMsgs.length > 15 ? '\n…+' + (ownerMsgs.length - 15) + ' more' : '') + '\n\n📊 bina.et/owner', WA_CHANNEL[b.qrSlug], 'owner not on Telegram yet')).ok;
     }
@@ -2889,7 +2921,7 @@ fastify.post('/api/owner/:slug/invoice/:id/unpay', async (req, reply) => {
   return { ok: true, status };
 });
 
-// ===== OWNER: send invoice to tenant (WhatsApp + Telegram) =====
+// ===== OWNER: send invoice to tenant (Telegram, else SMS — messaging/delivery.js) =====
 fastify.post('/api/owner/:slug/invoice/:id/send', async (req, reply) => {
   if (await authBuildingFail(req, reply, req.params.slug)) return;
   const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug } });
@@ -2898,24 +2930,66 @@ fastify.post('/api/owner/:slug/invoice/:id/send', async (req, reply) => {
   if (!inv || inv.tenancy.unit.buildingId !== b.id) return reply.code(404).send({ error: 'not_found' });
   if (!NOTIFY_WHITELIST.includes(b.qrSlug)) return reply.code(403).send({ error: 'messaging_not_enabled_for_this_building' });
   const total = inv.amount + (inv.lateFee || 0);
-  const typeAm = { RENT: 'ኪራይ', ELECTRICITY: 'መብራት', WATER: 'ውሃ', PENALTY: 'ቅጣት', SERVICE: 'አገልግሎት', OTHER: 'ክፍያ' }[inv.type] || 'ክፍያ';
-  const banks = (b.bankAccounts || []).map(a => '• ' + a.bank + ': ' + a.account).join('\n');
-  const msg = '🧾 የክፍያ መጠየቂያ / INVOICE\n' +
-    '━━━━━━━━━━━━━━━\n' +
-    '🏢 ' + (b.nameAm || b.name) + '\n' + b.name + (b.tinNumber ? ' · TIN ' + b.tinNumber : '') + '\n' +
-    '━━━━━━━━━━━━━━━\n' +
-    '👤 ' + (inv.tenancy.shop ? (inv.tenancy.shop.nameAm || inv.tenancy.shop.name) : inv.tenancy.user.fullName) + ' — ክፍል ' + inv.tenancy.unit.number + '\n' +
-    '💰 ' + typeAm + ' / ' + inv.type + ': ' + inv.amount.toLocaleString() + ' ETB' +
-    (inv.lateFee ? '\n➕ ቅጣት / Late fee: ' + inv.lateFee.toLocaleString() + ' ETB' : '') +
-    '\n📌 ጠቅላላ / TOTAL: ' + total.toLocaleString() + ' ETB\n' +
-    '📅 መክፈያ ቀን / Due: ' + inv.dueDate.toISOString().slice(0, 10) + '\n' +
-    (banks ? '━━━━━━━━━━━━━━━\n🏦 የሚከፈልበት / Pay to:\n' + banks + '\n' : '') +
-    (inv.paymentCode ? '#️⃣ ማጣቀሻ / Reference: ' + inv.paymentCode + '\n' : '') +
-    '━━━━━━━━━━━━━━━\n' +
-    'ክፍያ ሲፈጽሙ ኮዱን እንደ ማጣቀሻ ይጠቀሙ። / Use the reference code with your transfer.\n— ' + b.name + ' · BinaSmart';
-  const sent = await notifyTenant(inv.tenancy.user, msg, WA_CHANNEL[b.qrSlug]);
-  await audit(b.id, 'INVOICE_SENT', (inv.tenancy.shop ? inv.tenancy.shop.name : '') + ' ' + inv.tenancy.unit.number + (sent ? '' : ' (delivery pending — channel down)'), total);
-  return { ok: true, delivered: sent };
+  const link = await invoiceLinks.linkFor(inv.id, 'invoice');
+  const r = await notifyTenant(b, inv.tenancy, { kind: 'invoice', source: 'dashboard-send', actor: 'dashboard', invoiceId: inv.id,
+    text: invoiceText.invoiceMessage({ building: b, invoice: inv, tenancy: inv.tenancy, link }),
+    smsText: invoiceText.invoiceSms({ building: b, invoice: inv, tenancy: inv.tenancy, link }) });
+  await audit(b.id, 'INVOICE_SENT', (inv.tenancy.shop ? inv.tenancy.shop.name : '') + ' ' + inv.tenancy.unit.number
+    + (r.delivered ? ' (' + r.channel + ')' : r.status === 'test' ? ' (test mode — not sent)' : ' (delivery pending — ' + (r.errorKind || 'not delivered') + ')'), total);
+  return { ok: true, delivered: r.delivered, channel: r.channel, status: r.status, reason: r.errorKind || null };
+});
+
+// ===== Invoices that did not reach the tenant (design §1.6) =====
+// The newest invoice message of each invoice, listed while it is not sent and the invoice is not paid. The dashboard's
+// "Send now" calls POST /api/owner/:slug/invoice/:id/send above, which uses the invoice as it is today.
+fastify.get('/api/owner/:slug/pending-deliveries', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
+  if (!b) return reply.code(404).send({ error: 'not_found' });
+  const rows = await prisma.outboundMessage.findMany({ where: { buildingId: b.id, kind: 'invoice', invoiceId: { not: null } },
+    orderBy: { createdAt: 'desc' }, take: 500, select: { invoiceId: true, status: true, errorKind: true, createdAt: true } });
+  const latest = new Map();
+  for (const m of rows) if (!latest.has(m.invoiceId)) latest.set(m.invoiceId, m);
+  const stuck = [...latest.values()].filter(m => m.status !== 'sent' && m.status !== 'delivered');
+  if (!stuck.length) return { invoices: [] };
+  const invs = await prisma.invoice.findMany({ where: { id: { in: stuck.map(m => m.invoiceId) }, status: { not: 'PAID' }, tenancy: { unit: { buildingId: b.id } } },
+    include: { tenancy: { include: { unit: { select: { number: true } } } } }, orderBy: { dueDate: 'asc' } });
+  return { invoices: invs.map(i => { const m = latest.get(i.id); return { id: i.id, unit: i.tenancy.unit.number, type: i.type,
+    amount: i.amount + (i.lateFee || 0), dueDate: i.dueDate.toISOString().slice(0, 10), lastTry: m.createdAt.toISOString().slice(0, 10),
+    reason: m.errorKind || m.status }; }) };
+});
+
+// ===== Short invoice and receipt links: bina.et/i/<token> (design §1.3) =====
+// One invoice or receipt, no login, no tenant name or phone, 60 days. Unknown, malformed and expired tokens get the same
+// page. Limited per client address (nginx sets X-Real-IP).
+const invoiceLinkRL = hotelLimiter(600000, 30);
+fastify.get('/i/:token', async (req, reply) => {
+  reply.header('X-Robots-Tag', 'noindex, nofollow').header('Cache-Control', 'no-store').header('Referrer-Policy', 'no-referrer');
+  if (!invoiceLinkRL(bookIp(req))) return reply.code(429).type('text/html; charset=utf-8').send(renderGonePage({ slow: true }));
+  const found = await invoiceLinks.resolve(req.params.token).catch(() => null);
+  if (!found) return reply.code(404).type('text/html; charset=utf-8').send(renderGonePage());
+  return reply.type('text/html; charset=utf-8').send(renderInvoicePage(found));
+});
+
+// ===== SMS delivery reports (the provider's `callback`, design §1.2) =====
+// https://bina.et/api/sms/report/<SMS_CALLBACK_SECRET>; anything without the secret gets 404. A report can only move an
+// SMS row we sent from queued/sent to delivered or failed; it is trusted for nothing else. The first report after a
+// restart logs its field names and types (never values), because GeezSMS does not document the payload.
+let smsReportShapeLogged = false;
+async function smsReport(req, reply){
+  const given = Buffer.from(String(req.params.secret || '')), want = Buffer.from(SMS_CALLBACK_SECRET);
+  if (!smsCallbackUrl || given.length !== want.length || !cryptoMod.timingSafeEqual(given, want)) return reply.code(404).send({ error: 'not_found' });
+  const body = Object.assign({}, req.query || {}, req.body && typeof req.body === 'object' ? req.body : {});
+  if (!smsReportShapeLogged) { smsReportShapeLogged = true; console.log('[sms] delivery report fields: ' + delivery.reportShape(body)); }
+  const updated = await delivery.applyDeliveryReport(body).catch(e => { console.error('[sms] report error: ' + errorKindOf(e)); return 0; });
+  return { ok: true, updated };
+}
+fastify.register(async function smsReportRoutes(f){
+  // Form posts are parsed inside this plugin only; the rest of the API still refuses them.
+  f.addContentTypeParser('application/x-www-form-urlencoded', { parseAs: 'string', bodyLimit: 16384 },
+    (req, body, done) => { try { done(null, Object.fromEntries(new URLSearchParams(body))); } catch (e) { done(e); } });
+  f.post('/api/sms/report/:secret', smsReport);
+  f.get('/api/sms/report/:secret', smsReport);
 });
 
 // ===== OWNER: add another building (same owner login) =====
@@ -3032,36 +3106,26 @@ fastify.post('/api/admin/invoices/:id/pay', async (req, reply) => {
     include: { tenancy: { include: { unit: { include: { building: { select: { qrSlug: true } } } } } } } });
   if (!inv0) return reply.code(404).send({ error: 'not found' });
   if (await authBuildingFail(req, reply, inv0.tenancy.unit.building.qrSlug)) return;
+  // A second tap re-stamped the payment and sent the tenant a second receipt; now it changes nothing.
+  if (inv0.status === 'PAID') return reply.code(409).send({ error: 'already_paid' });
   const { method } = req.body || {};
   const inv = await prisma.invoice.update({
     where: { id: req.params.id },
     data: { status: 'PAID', paidDate: new Date(), method: method || 'CASH' },
-    include: { tenancy: { include: { unit: true, shop: true } } }
+    include: { tenancy: { include: { unit: true, shop: true, user: true } } }
   });
   await audit(inv.tenancy.unit.buildingId, 'INVOICE_PAID', (inv.tenancy.shop ? inv.tenancy.shop.name : 'Unit') + ' ' + inv.tenancy.unit.number + ' via ' + (method || 'CASH'), inv.amount);
-  // e-receipt to the tenant, under the building's name
+  // e-receipt to the tenant, under the building's name — not awaited by the dashboard
   try{
     const bb = await prisma.building.findUnique({ where: { id: inv.tenancy.unit.buildingId } });
-    if (NOTIFY_WHITELIST.includes(bb.qrSlug)) {
-      const tu = await prisma.user.findUnique({ where: { id: inv.tenancy.userId } });
-      const total = inv.amount + (inv.lateFee || 0);
-      const typeAm = { RENT: 'ኪራይ', ELECTRICITY: 'መብራት', WATER: 'ውሃ', PENALTY: 'ቅጣት', SERVICE: 'አገልግሎት', OTHER: 'ክፍያ' }[inv.type] || 'ክፍያ';
-      const vatLine = bb.vatRegistered ? '\nVAT (15%): ' + Math.round(total * 0.15 / 1.15).toLocaleString() + ' ETB (ተካቷል/incl.)' : '';
-      const receipt = '🧾 ደረሰኝ / E-RECEIPT\n' +
-        '━━━━━━━━━━━━━━━\n' +
-        '🏢 ' + (bb.nameAm || bb.name) + '\n' + bb.name + (bb.tinNumber ? ' · TIN ' + bb.tinNumber : '') + '\n' +
-        '━━━━━━━━━━━━━━━\n' +
-        '👤 ' + (inv.tenancy.shop ? (inv.tenancy.shop.nameAm || inv.tenancy.shop.name) : tu.fullName) + ' — ክፍል ' + inv.tenancy.unit.number + '\n' +
-        '💰 ' + typeAm + ' / ' + inv.type + ': ' + inv.amount.toLocaleString() + ' ETB' +
-        (inv.lateFee ? '\n➕ ቅጣት / Late fee: ' + inv.lateFee.toLocaleString() + ' ETB' : '') +
-        '\n✅ ጠቅላላ የተከፈለ / TOTAL PAID: ' + total.toLocaleString() + ' ETB' + vatLine + '\n' +
-        '💳 በ: ' + (method || 'CASH') + ' · ' + new Date().toISOString().slice(0, 10) + '\n' +
-        (inv.paymentCode ? '#️⃣ ' + inv.paymentCode + '\n' : '') +
-        '━━━━━━━━━━━━━━━\n' +
-        'እናመሰግናለን! / Thank you!\n📊 BinaSmart · bina.et/b/' + bb.qrSlug;
-      if (tu) notifyTenant(tu, receipt, WA_CHANNEL[bb.qrSlug]);
+    if (NOTIFY_WHITELIST.includes(bb.qrSlug) && inv.tenancy.user) {
+      const link = await invoiceLinks.linkFor(inv.id, 'receipt');
+      notifyTenant(bb, inv.tenancy, { kind: 'receipt', source: 'receipt', actor: 'dashboard', invoiceId: inv.id,
+        text: invoiceText.receiptMessage({ building: bb, invoice: inv, tenancy: inv.tenancy, method: method || 'CASH', paidAt: inv.paidDate, link }),
+        smsText: invoiceText.receiptSms({ building: bb, invoice: inv, tenancy: inv.tenancy, link }) })
+        .catch(e => console.error('[receipt] error: ' + errorKindOf(e)));
     }
-  }catch(e){ console.error('[receipt]', e.message); }
+  }catch(e){ console.error('[receipt] error: ' + errorKindOf(e)); }
   return { ok: true, invoice: inv.id };
 });
 

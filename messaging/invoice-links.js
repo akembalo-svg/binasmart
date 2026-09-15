@@ -7,6 +7,8 @@ const crypto = require('crypto');
 const LINK_DAYS = 60;
 const REUSE_MIN_MS = 7 * 86400000;
 const TOKEN_RE = /^[A-Za-z0-9_-]{12,32}$/;
+const INVOICE_PAGE_SELECT = { id: true, type: true, amount: true, lateFee: true, dueDate: true, paymentCode: true, status: true, paidDate: true, method: true,
+  tenancy: { select: { unit: { select: { number: true, building: { select: { name: true, nameAm: true, tinNumber: true, bankAccounts: true } } } } } } };
 
 function makeInvoiceLinks({ prisma, now = () => new Date(), randomBytes = crypto.randomBytes }) {
   async function linkFor(invoiceId, kind) {
@@ -28,10 +30,10 @@ function makeInvoiceLinks({ prisma, now = () => new Date(), randomBytes = crypto
 
   async function resolve(token) {
     if (typeof token !== 'string' || !TOKEN_RE.test(token)) return null;
-    const l = await prisma.invoiceLink.findUnique({ where: { token } });
+    const l = await prisma.invoiceLink.findUnique({ where: { token }, select: { invoiceId: true, kind: true, expiresAt: true } });
     if (!l || new Date(l.expiresAt) <= now()) return null;
-    const invoice = await prisma.invoice.findUnique({ where: { id: l.invoiceId },
-      include: { tenancy: { include: { unit: { include: { building: true } } } } } });
+    // Only what the page shows: no tenant, no owner, no keys or other building fields can reach the page.
+    const invoice = await prisma.invoice.findUnique({ where: { id: l.invoiceId }, select: INVOICE_PAGE_SELECT });
     if (!invoice || !invoice.tenancy || !invoice.tenancy.unit) return null;
     return { kind: l.kind, invoice, unit: invoice.tenancy.unit, building: invoice.tenancy.unit.building };
   }
@@ -39,4 +41,4 @@ function makeInvoiceLinks({ prisma, now = () => new Date(), randomBytes = crypto
   return { linkFor, resolve };
 }
 
-module.exports = { makeInvoiceLinks, LINK_DAYS };
+module.exports = { makeInvoiceLinks, LINK_DAYS, INVOICE_PAGE_SELECT };
