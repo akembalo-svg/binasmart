@@ -45,3 +45,13 @@ test('Invoices lists what did not reach tenants with Send now, and Send tells se
   assert.match(send, /loadPending\(\);/);
   assert.doesNotMatch(send, /WhatsApp/);
 });
+
+test('Send says Telegram failed when that is the reason, before the test-mode note', () => {
+  const send = fn('sendInvoice');
+  assert.match(send, /r\.reason === 'tg_failed'/);
+  const tg = send.indexOf('Telegram failed'), testNote = send.indexOf('🧪 Test mode');
+  assert.ok(tg > 0 && testNote > tg, 'the Telegram note comes first');
+  assert.match(send, /alert\(tgNote \+ \(r\.delivered/);
+  assert.match(send, /String\(r\.reason \|\| 'not reachable'\)\.replace\(/, 'the reason is reduced to plain characters');
+  assert.doesNotMatch(send, /innerHTML/);
+});

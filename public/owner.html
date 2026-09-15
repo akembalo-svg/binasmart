@@ -721,9 +721,11 @@ async function sendInvoice(id, unit){
   if (!confirm('📤 Send this invoice to the tenant of ' + unit + ' by Telegram (or SMS once it is switched on)? / ደረሰኙን ለተከራዩ ይላክ?')) return;
   const r = await (await kfetch('/api/owner/' + slug + '/invoice/' + id + '/send', { method: 'POST' })).json();
   if (!r.ok) { alert('❌ ' + r.error); return; }
-  alert(r.delivered ? '✅ Sent by ' + (r.channel === 'sms' ? 'SMS' : 'Telegram') + ' / ተልኳል'
+  // Telegram refusing (the tenant blocked or left the bot) is said first, whatever happened after it.
+  const tgNote = r.reason === 'tg_failed' ? '⚠️ Telegram failed — the tenant\'s Telegram did not accept the message (they may have blocked or left the bot). / ቴሌግራም አልደረሰም\n\n' : '';
+  alert(tgNote + (r.delivered ? '✅ Sent by ' + (r.channel === 'sms' ? 'SMS' : 'Telegram') + ' / ተልኳል'
     : r.status === 'test' ? '🧪 Test mode — recorded only, NOT delivered: the tenant did not receive it (SMS is not switched on yet). It stays under "Waiting to be delivered". / የሙከራ ሁኔታ — ተመዝግቧል፣ ለተከራዩ አልደረሰም'
-    : '⚠️ NOT delivered (' + (r.reason || 'not reachable') + '): the tenant did not receive it. There is no working Telegram link for this tenant and SMS is not switched on yet. It stays under "Waiting to be delivered". / አልደረሰም');
+    : '⚠️ NOT delivered (' + String(r.reason || 'not reachable').replace(/[^A-Za-z0-9_ ]/g, '') + '): the tenant did not receive it. There is no working Telegram link for this tenant and SMS is not switched on yet. It stays under "Waiting to be delivered". / አልደረሰም'));
   loadPending();
 }
 async function genInvoices(){
