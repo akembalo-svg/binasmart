@@ -207,9 +207,42 @@ function renderAI(){
     + '</div>';
   var box = document.getElementById('ai-msgs');
   if (!AI_MSGS.length) AI_MSGS.push({r:'a', t:'ሰላም! ስለ ህንፃዎ ማንኛውንም ይጠይቁኝ — ኪራይ፣ ክፍት ክፍሎች፣ VAT፣ ጥገና።\nHi! Ask me anything about your building.'});
-  AI_MSGS.forEach(function(m){ aiBubble(m.r, m.t, box); });
+  AI_MSGS.forEach(function(m){ aiBubble(m.r, m.t, box); if (m.a) aiActionButtons(m.a, box, m); });
   box.scrollTop = box.scrollHeight;
   document.getElementById('ai-form').addEventListener('submit', function(e){ e.preventDefault(); ownerAiSend(); });
+}
+// An action Bini prepared: the buttons under the preview. Only the owner's press runs it, through the server's own
+// checks (agents/owner/actions/service.js press) — this page decides nothing.
+function aiActionButtons(action, box, msg){
+  if (!action || !action.id || !(action.buttons || []).length) return;
+  var row = document.createElement('div');
+  row.className = 'flex gap-2 mt-1';
+  action.buttons.forEach(function(b){
+    var btn = document.createElement('button');
+    btn.className = 'rounded-xl px-3 py-2 text-sm font-bold ' + (b.verb === 'cancel' ? 'bg-slate-200 text-slate-700' : b.verb === 'urgent' ? 'bg-amber-500 text-white' : 'bg-emerald-600 text-white');
+    btn.textContent = b.label;
+    btn.onclick = function(){ ownerActionPress(action.id, b.verb, row, msg); };
+    row.appendChild(btn);
+  });
+  box.appendChild(row);
+  box.scrollTop = box.scrollHeight;
+}
+async function ownerActionPress(id, verb, row, msg){
+  var box = document.getElementById('ai-msgs');
+  Array.prototype.forEach.call(row.querySelectorAll('button'), function(b){ b.disabled = true; });
+  if (msg) msg.a = null;
+  try{
+    var r = await kfetch('/api/owner/' + slug + '/actions/' + encodeURIComponent(id) + '/' + (verb === 'cancel' ? 'cancel' : 'confirm'),
+      { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ urgent: verb === 'urgent' }) });
+    var d = await r.json();
+    row.remove();
+    var text = (d && d.reply) || 'ይቅርታ።';
+    var m = { r:'a', t:text, a:(d && d.ownerAction && (d.ownerAction.buttons || []).length) ? d.ownerAction : null };
+    AI_MSGS.push(m); aiBubble('a', text, box);
+    if (m.a) aiActionButtons(m.a, box, m);
+    if (d && d.status === 'done') load();   // invoices, money and the activity log have changed
+  }catch(e){ aiBubble('a','ይቅርታ፣ የግንኙነት ችግር።', box); }
+  box.scrollTop = box.scrollHeight;
 }
 async function ownerAiSend(){
   var inp = document.getElementById('ai-in'); var q = inp.value.trim(); if(!q) return;
@@ -219,7 +252,10 @@ async function ownerAiSend(){
   try{
     var r = await kfetch('/api/owner/' + slug + '/ai', {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:q})});
     var d = await r.json(); typing.remove();
-    var rep = (d && d.reply) || 'ይቅርታ።'; AI_MSGS.push({r:'a',t:rep}); aiBubble('a',rep,box);
+    var rep = (d && d.reply) || 'ይቅርታ።';
+    var m = { r:'a', t:rep, a:(d && d.ownerAction && (d.ownerAction.buttons || []).length) ? d.ownerAction : null };
+    AI_MSGS.push(m); aiBubble('a',rep,box);
+    if (m.a) aiActionButtons(m.a, box, m);
   }catch(e){ typing.remove(); aiBubble('a','ይቅርታ፣ የግንኙነት ችግር።',box); }
   box.scrollTop = box.scrollHeight;
 }
