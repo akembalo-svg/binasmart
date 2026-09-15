@@ -2592,7 +2592,7 @@ function tenantBuilding(b){
   return { id: b.id, slug: b.qrSlug, real: NOTIFY_WHITELIST.includes(b.qrSlug) && !hotelIsDemo(b), smsLabel: buildingSmsLabel(b.name),
     smsMonthlyLimit: b.smsMonthlyLimit == null ? 0 : b.smsMonthlyLimit, smsSender: b.smsSender || '' };
 }
-let tenantMisses = 0;   // real, live failures only, per building per daily run — see runDailyChecks and isRealMiss
+let tenantMisses = 0;   // real failures only (failed Telegram, live SMS), per building per daily run — see runDailyChecks and isRealMiss
 // One message to the tenant of one tenancy ({ id, userId, user: { phone, telegramChatId } }). Never throws.
 async function notifyTenant(b, tenancy, { kind, source, actor, text, smsText, invoiceId }){
   const tb = tenantBuilding(b);
@@ -2605,7 +2605,7 @@ async function notifyTenant(b, tenancy, { kind, source, actor, text, smsText, in
   }
   const one = (r && r.results[0]) || null;
   const delivered = !!one && (one.status === 'sent' || one.status === 'delivered');
-  // The owner reads this count in the daily report: test-mode sends are never "not delivered".
+  // The owner reads this count in the daily report: test-mode SMS rows are never "not delivered"; a failed Telegram send is.
   if (isRealMiss({ real: tb.real, mode: tenantSms.mode }, one)) tenantMisses++;
   return { delivered, status: one ? one.status : 'failed', channel: one ? one.channel : 'none', errorKind: one ? one.errorKind : (r ? r.error : 'error') };
 }
@@ -2665,7 +2665,7 @@ async function runDailyChecks(onlySlug){
       if (canSend && b.notifyTenants && tenantSendBudget-- > 0) await notifyTenant(b, i.tenancy, { kind: 'reminder', source: 'daily-penalty', actor: 'cron', invoiceId: i.id, text: 'ማሳሰቢያ: የ' + b.nameAm + ' ኪራይ ክፍያዎ አልፏል። ቅጣት ' + fee.toLocaleString() + ' ብር ታክሏል። — BinaSmart' });
       res.penalties++;
     }
-    if (tenantMisses) { ownerMsgs.push('📵 ' + tenantMisses + ' tenant message(s) not delivered — no Telegram link, and SMS not available for them'); res.tenantsUnreached = tenantMisses; }
+    if (tenantMisses) { ownerMsgs.push('📵 ' + tenantMisses + ' tenant message(s) not delivered — no working Telegram link, and SMS not available for them'); res.tenantsUnreached = tenantMisses; }
     if (canSend && ownerMsgs.length && b.owner) {
       res.notified = (await notifyParty({ name: b.owner.name || (b.name + ' owner'), phone: b.owner.phone, tgChatId: b.owner.telegramId || null }, '🏢 ' + b.name + ' — BinaSmart daily report:\n\n' + ownerMsgs.slice(0, 15).join('\n') + (ownerMsgs.length > 15 ? '\n…+' + (ownerMsgs.length - 15) + ' more' : '') + '\n\n📊 bina.et/owner', WA_CHANNEL[b.qrSlug], 'owner not on Telegram yet')).ok;
     }

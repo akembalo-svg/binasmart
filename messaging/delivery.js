@@ -36,11 +36,14 @@ function addisMonthStart(now = new Date()) {
   return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1) - 3 * 3600000);
 }
 
-// The owner's daily report says how many tenant messages were not delivered. Only a real failure counts: the building is
-// real and SMS is live, and the send failed (no channel, Telegram refused with no SMS, the limit, the provider) or the
-// layer threw. In test mode nothing counts, whatever the row says, so a test run adds no "not delivered" line.
+// The owner's daily report says how many tenant messages were not delivered. Only a real building counts. Telegram is
+// live whatever SMS_MODE says, so a Telegram send that failed counts unless its SMS fallback really went (in test mode
+// that fallback is a `test` row that reached nobody). Otherwise only live SMS counts: the send failed (no channel, the
+// limit, the provider) or the layer threw; a test-mode SMS row adds no "not delivered" line.
 function isRealMiss(ctx, result) {
-  if (!ctx || ctx.real !== true || ctx.mode !== 'live') return false;
+  if (!ctx || ctx.real !== true) return false;
+  if (result && result.errorKind === 'tg_failed' && !DELIVERED.includes(result.status)) return true;
+  if (ctx.mode !== 'live') return false;
   if (!result) return true;
   return result.status === 'failed';
 }

@@ -100,7 +100,7 @@ test('this month’s usage counts from midnight Addis time; test rows never coun
   }
 });
 
-test('the owner report counts a message as not delivered only when a real, live send failed', () => {
+test('the owner report counts a message as not delivered when a real, live send failed; test-mode SMS rows never count', () => {
   const live = { real: true, mode: 'live' };
   assert.equal(isRealMiss(live, { status: 'failed', channel: 'none', errorKind: 'no_mobile' }), true);
   assert.equal(isRealMiss(live, { status: 'failed', channel: 'telegram', errorKind: 'tg_failed' }), true);
@@ -108,8 +108,19 @@ test('the owner report counts a message as not delivered only when a real, live 
   assert.equal(isRealMiss(live, null), true, 'the layer threw on a real send');
   for (const s of ['sent', 'delivered', 'test']) assert.equal(isRealMiss(live, { status: s }), false, s);
   for (const ctx of [{ real: true, mode: 'test' }, { real: false, mode: 'live' }, { real: false, mode: 'test' }, {}, null])
-    for (const r of [{ status: 'failed', channel: 'none', errorKind: 'no_contact' }, { status: 'failed', channel: 'telegram', errorKind: 'tg_failed' }, { status: 'test' }, null])
+    for (const r of [{ status: 'failed', channel: 'none', errorKind: 'no_contact' }, { status: 'test' }, null])
       assert.equal(isRealMiss(ctx, r), false, JSON.stringify(ctx) + ' ' + JSON.stringify(r));
+});
+
+test('a Telegram send that failed to a real tenant is not delivered, even while SMS is in test mode', () => {
+  const tgFailed = { status: 'failed', channel: 'telegram', errorKind: 'tg_failed' };
+  const smsTestFallback = { status: 'test', channel: 'sms', errorKind: 'tg_failed' };
+  for (const mode of ['test', 'live']) {
+    assert.equal(isRealMiss({ real: true, mode }, tgFailed), true, mode);
+    assert.equal(isRealMiss({ real: true, mode }, smsTestFallback), true, mode + ': a test-mode SMS fallback reached nobody');
+    assert.equal(isRealMiss({ real: true, mode }, { status: 'sent', channel: 'sms', errorKind: 'tg_failed' }), false, mode + ': the SMS fallback went');
+    for (const r of [tgFailed, smsTestFallback]) assert.equal(isRealMiss({ real: false, mode }, r), false, 'demo building, ' + mode);
+  }
 });
 
 test('when Telegram refuses, the same message goes by SMS on the same row, and says Telegram failed', async () => {
