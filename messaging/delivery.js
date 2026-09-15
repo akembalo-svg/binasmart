@@ -195,7 +195,10 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
     const m = await store.createMessage({ ...base, channel: 'sms', status: 'queued', smsParts: smsParts(body) });
     let s;
     try { s = await sms.send({ to, text: body, live: live === true }); } catch (e) { s = { status: 'failed', errorKind: 'provider_error' }; }
-    await store.updateMessage(m.id, { status: s.status, providerId: s.providerId || null, errorKind: s.errorKind || null });
+    // The send has happened: a failed record write must not turn it into a throw (a sign-in caller would send a second
+    // code). The row then stays queued, which counts as an SMS that may have gone.
+    try { await store.updateMessage(m.id, { status: s.status, providerId: s.providerId || null, errorKind: s.errorKind || null }); }
+    catch (e) { log('[delivery] error: ' + errKind(e)); }
     return { status: s.status, channel: 'sms', errorKind: s.errorKind || null, messageId: m.id };
   }
 

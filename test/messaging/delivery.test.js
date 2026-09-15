@@ -205,6 +205,19 @@ test('transactional SMS (sign-in codes): no building, the code is never stored, 
   assert.deepEqual(await live.d.sendTransactionalSms({ to: '0700000001', text: 'code 2', label: 'BinaSmart' }), { status: 'failed', channel: 'none', errorKind: 'sms_unsupported_number', messageId: live.store.s.messages[1].id });
 });
 
+test('transactional SMS: a record write that fails after the send neither throws nor hides that the SMS went', async () => {
+  const store = memStore(), provider = recorder(), logs = [];
+  store.updateMessage = async () => { const e = new Error('store down for +251900000001'); e.code = 'P1001'; throw e; };
+  const d = makeDelivery({ store, now: () => NOW, sms: makeSms({ mode: 'live', provider, supports: geezSupports }),
+    sendTg: async () => true, log: line => logs.push(line) });
+  const r = await d.sendTransactionalSms({ to: '0900000001', text: 'code 1', label: 'BinaSmart' });
+  assert.deepEqual([r.status, r.channel, provider.calls.length], ['sent', 'sms', 1], 'a caller that saw a throw would send a second code');
+  assert.equal(store.s.messages[0].status, 'queued', 'the row stays queued, which counts as an SMS that may have gone');
+  assert.equal(logs.length, 1);
+  assert.match(logs[0], /P1001/);
+  assert.doesNotMatch(logs.join(' '), /store down|900000001/);
+});
+
 test('an unexpected store error is logged by its kind only: no message text, no phone digits', async () => {
   const store = memStore(), logs = [];
   store.createMessage = async () => { const e = new Error('boom for +251900000001'); e.code = 'P2002'; throw e; };
