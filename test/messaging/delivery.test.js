@@ -115,6 +115,36 @@ test('the first SMS a tenant receives ends with the Telegram start link; later o
   assert.equal(provider.calls[1].text, 'BinaSmart · Darulle፦ short text');
 });
 
+test('one tenant with two units in a batch gets the Telegram link once, and only in a first-ever SMS', async () => {
+  const BASE = FIRST.split('\n')[0];
+  const { provider, d } = setup({ mode: 'live' });
+  const two = [rcpt({ tenancyId: 'a' }), rcpt({ tenancyId: 'b' })];
+  assert.equal((await d.plan({ building: REAL, recipients: two })).smsParts, smsParts(FIRST) + smsParts(BASE));
+  await send(d, REAL, two);
+  await send(d, REAL, two);
+  assert.deepEqual(provider.calls.map(c => c.text), [FIRST, BASE, BASE, BASE]);
+  const f = setup({ mode: 'live', tgOk: false });
+  await send(f.d, REAL, [rcpt({ tenancyId: 'a', telegramChatId: '1' }), rcpt({ tenancyId: 'b' })]);
+  assert.equal(f.provider.calls.length, 2);
+  assert.equal(f.provider.calls.filter(c => c.text === FIRST).length, 1, 'a Telegram fallback does not repeat the link');
+});
+
+test('a record never stays queued after an error: Telegram refused with no SMS label, or a failed store write', async () => {
+  const { store, provider, d } = setup({ mode: 'live', tgOk: false });
+  const r = await send(d, { ...REAL, smsLabel: '' }, [rcpt({ telegramChatId: '1' })]);
+  assert.deepEqual(r.results.map(x => [x.channel, x.status, x.errorKind]), [['telegram', 'failed', 'error']]);
+  assert.equal(r.results[0].messageId, store.s.messages[0].id);
+  assert.deepEqual(store.s.messages.map(m => [m.channel, m.status, m.errorKind]), [['telegram', 'failed', 'error']]);
+  assert.equal(provider.calls.length, 0);
+  const t = setup({ mode: 'live' });
+  const update = t.store.updateMessage;
+  let n = 0;
+  t.store.updateMessage = async (id, data) => { if (++n === 1) throw new Error('store down'); return update(id, data); };
+  const r2 = await send(t.d, REAL, [rcpt()]);
+  assert.deepEqual(r2.results.map(x => [x.status, x.errorKind]), [['failed', 'error']]);
+  assert.deepEqual(t.store.s.messages.map(m => [m.status, m.errorKind]), [['failed', 'error']]);
+});
+
 test('an SMS cannot be planned without a label; a Telegram-only send does not need one', async () => {
   const { d } = setup();
   await assert.rejects(send(d, { ...REAL, smsLabel: '' }, [rcpt()]), /label/);

@@ -53,11 +53,14 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
   const hadSmsStatuses = () => (sms.mode === 'live' ? DELIVERED : COUNTED_TEST);
 
   // The first SMS a tenant receives ends with the building's Telegram start link (design §2), if it still fits.
-  async function smsTextFor(building, r) {
+  // `seen` holds the users who already got the link in this batch: a tenant with two units gets it once.
+  async function smsTextFor(building, r, seen) {
     const base = labelled(building.smsLabel, String(r.smsText || r.text || ''));
-    if (!building.slug || !r.userId || await store.userHadSms(r.userId, hadSmsStatuses())) return base;
+    if (!building.slug || !r.userId || (seen && seen.has(r.userId)) || await store.userHadSms(r.userId, hadSmsStatuses())) return base;
     const hinted = base + '\nTelegram: t.me/' + botUsername + '?start=tenant_' + building.slug;
-    return hinted.length <= SMS_MAX_CHARS ? hinted : base;
+    if (hinted.length > SMS_MAX_CHARS) return base;
+    if (seen) seen.add(r.userId);
+    return hinted;
   }
 
   function noneReason(r) {
@@ -65,14 +68,14 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
     return normalizeEtMobile(r.phone) ? 'sms_unsupported_number' : 'no_mobile';
   }
 
-  async function plan({ building, recipients }) {
+  async function plan({ building, recipients }, seen = new Set()) {
     const rows = [];
     let parts = 0;
     for (const r of recipients || []) {
       const tenancyId = r.tenancyId || null;
       if (r.telegramChatId) rows.push({ tenancyId, channel: 'telegram', smsParts: 0 });
       else if (sms.supports(r.phone)) {
-        const smsText = await smsTextFor(building, r);
+        const smsText = await smsTextFor(building, r, seen);
         const n = smsParts(smsText);
         parts += n;
         rows.push({ tenancyId, channel: 'sms', smsParts: n, smsText });
@@ -92,7 +95,8 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
 
   async function sendToTenants({ building, kind, source, actor = null, text = null, recipients }) {
     const list = Array.isArray(recipients) ? recipients : [];
-    const p = await plan({ building, recipients: list });
+    const seen = new Set();
+    const p = await plan({ building, recipients: list }, seen);
     const batch = await store.createBatch({ buildingId: building.id, kind, source, actor, text: kind === 'notice' ? String(text || '') : null, total: list.length });
     const counts = { telegram: 0, sms: 0, none: 0, sent: 0, test: 0, failed: 0 };
     const results = [];
@@ -122,24 +126,26 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
       await store.updateMessage(messageId, { channel: 'sms', status: s.status, smsParts: n, providerId: s.providerId || null, errorKind });
       return result(r, messageId, 'sms', s.status, errorKind);
     };
-    const deliverOne = async (r, row) => {
+    // made.id is the record created for this recipient, so an error after it can still close it as failed.
+    const create = async (made, data) => { const m = await store.createMessage(data); made.id = m.id; return m; };
+    const deliverOne = async (r, row, made) => {
       if (row.channel === 'none') {
-        const m = await store.createMessage({ ...base(r), channel: 'none', status: 'failed', errorKind: row.errorKind });
+        const m = await create(made, { ...base(r), channel: 'none', status: 'failed', errorKind: row.errorKind });
         return result(r, m.id, 'none', 'failed', row.errorKind);
       }
       if (row.channel === 'sms') {
-        const m = await store.createMessage({ ...base(r), channel: 'sms', status: 'queued', smsParts: row.smsParts });
+        const m = await create(made, { ...base(r), channel: 'sms', status: 'queued', smsParts: row.smsParts });
         return sendSms(r, m.id, row.smsText, row.smsParts, null);
       }
       if (building.real !== true) {
-        const m = await store.createMessage({ ...base(r), channel: 'telegram', status: 'test' });
+        const m = await create(made, { ...base(r), channel: 'telegram', status: 'test' });
         return result(r, m.id, 'telegram', 'test');
       }
-      const m = await store.createMessage({ ...base(r), channel: 'telegram', status: 'queued' });
+      const m = await create(made, { ...base(r), channel: 'telegram', status: 'queued' });
       let ok = false;
       try { ok = (await sendTg(r.telegramChatId, String(r.text || ''))) === true; } catch (e) { ok = false; }
       if (ok) { await store.updateMessage(m.id, { status: 'sent' }); return result(r, m.id, 'telegram', 'sent'); }
-      const smsText = sms.supports(r.phone) ? await smsTextFor(building, r) : null;
+      const smsText = sms.supports(r.phone) ? await smsTextFor(building, r, seen) : null;
       const n = smsText ? smsParts(smsText) : 0;
       if (!smsText || n > remaining) {
         await store.updateMessage(m.id, { status: 'failed', errorKind: 'tg_failed' });
@@ -150,8 +156,16 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
 
     for (let i = 0; i < list.length; i++) {
       let res;
-      try { res = await deliverOne(list[i], p.rows[i]); }
-      catch (e) { log('[delivery] error: ' + errKind(e)); res = result(list[i], null, p.rows[i].channel, 'failed', 'error'); }
+      const made = { id: null };
+      try { res = await deliverOne(list[i], p.rows[i], made); }
+      catch (e) {
+        log('[delivery] error: ' + errKind(e));
+        if (made.id) {
+          try { await store.updateMessage(made.id, { status: 'failed', errorKind: 'error' }); }
+          catch (e2) { log('[delivery] error: ' + errKind(e2)); }
+        }
+        res = result(list[i], made.id, p.rows[i].channel, 'failed', 'error');
+      }
       tally(res);
     }
     return { ok: counts.failed === 0, batchId: batch.id, counts, results };
