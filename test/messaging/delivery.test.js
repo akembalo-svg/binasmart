@@ -189,6 +189,26 @@ test('tenant SMS: when the record write after a real send fails, the real status
   assert.doesNotMatch(logs.join(' '), /store down|900000001/);
 });
 
+test('Telegram: when the record write after a successful send fails, the result is sent and the row stays queued', async () => {
+  const store = memStore(), provider = recorder(), logs = [], tg = [];
+  const update = store.updateMessage;
+  store.updateMessage = async (id, data) => {
+    if (data.status === 'sent') { const e = new Error('store down for +251900000001'); e.code = 'P1001'; throw e; }
+    return update(id, data);
+  };
+  const d = makeDelivery({ store, now: () => NOW, sms: makeSms({ mode: 'live', provider, supports: geezSupports }),
+    sendTg: async (chat, text) => { tg.push(chat); return true; }, log: line => logs.push(line) });
+  const r = await send(d, REAL, [rcpt({ telegramChatId: '4242' })]);
+  assert.deepEqual([r.ok, r.counts.sent, tg.length, provider.calls.length], [true, 1, 1, 0], 'delivered once: not failed, no SMS fallback');
+  assert.deepEqual(r.results.map(x => [x.channel, x.status, x.errorKind]), [['telegram', 'sent', null]]);
+  assert.deepEqual(store.s.messages.map(m => [m.channel, m.status, m.errorKind]), [['telegram', 'queued', null]],
+    'queued rows are never offered again under Waiting to be delivered');
+  assert.equal(isRealMiss({ real: true, mode: 'test' }, r.results[0]), false);
+  assert.equal(logs.length, 1);
+  assert.match(logs[0], /P1001/);
+  assert.doesNotMatch(logs.join(' '), /store down|900000001/);
+});
+
 test('an SMS cannot be planned without a label; a Telegram-only send does not need one', async () => {
   const { d } = setup();
   await assert.rejects(send(d, { ...REAL, smsLabel: '' }, [rcpt()]), /label/);

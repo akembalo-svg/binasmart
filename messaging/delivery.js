@@ -162,7 +162,12 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
       const m = await create(made, { ...base(r), channel: 'telegram', status: 'queued' });
       let ok = false;
       try { ok = (await sendTg(r.telegramChatId, String(r.text || ''))) === true; } catch (e) { ok = false; }
-      if (ok) { await store.updateMessage(m.id, { status: 'sent' }); return result(r, m.id, 'telegram', 'sent'); }
+      if (ok) {
+        // Delivered: a failed write must not turn it into "failed" (it would be sent again). The row stays queued, which the
+        // pending list never offers again.
+        try { await store.updateMessage(m.id, { status: 'sent' }); } catch (e) { log('[delivery] error: ' + errKind(e)); }
+        return result(r, m.id, 'telegram', 'sent');
+      }
       const smsText = sms.supports(r.phone) ? await smsTextFor(building, r, seen) : null;
       const n = smsText ? smsParts(smsText) : 0;
       if (!smsText || n > remaining) {
