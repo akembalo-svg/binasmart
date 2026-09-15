@@ -81,14 +81,18 @@ function makeOwnerAccess({ store, audit = () => {}, now = () => new Date(), limi
   const ms = d => new Date(d).getTime();
 
   // Approved rows (optionally only those that existed at `asOf`) intersected with switched-on buildings.
-  // When one number holds several approvals for a building, owner outranks staff.
+  // When one number holds several approvals for a building, owner outranks staff. accessIds names the approval that
+  // gave the role: owner actions record it as the actor (owner actions design §3.3).
   async function grantsFor(rows, asOf) {
     rows = rows.filter(r => KINDS.includes(r.kind) && (asOf == null || ms(r.createdAt) <= ms(asOf)));
-    if (!rows.length) return { ids: [], roles: {} };
+    if (!rows.length) return { ids: [], roles: {}, accessIds: {} };
     const on = new Set(await store.enabledEntities('owner', 'building', [...new Set(rows.map(r => r.entityId))]));
-    const roles = {};
-    for (const r of rows) if (on.has(r.entityId) && roles[r.entityId] !== 'owner') roles[r.entityId] = r.role === 'owner' ? 'owner' : (r.role || 'staff');
-    return { ids: Object.keys(roles), roles };
+    const roles = {}, accessIds = {};
+    for (const r of rows) if (on.has(r.entityId) && roles[r.entityId] !== 'owner') {
+      roles[r.entityId] = r.role === 'owner' ? 'owner' : (r.role || 'staff');
+      accessIds[r.entityId] = r.id;
+    }
+    return { ids: Object.keys(roles), roles, accessIds };
   }
 
   async function linkFromContact({ chat, from, contact, forwarded }) {
@@ -104,7 +108,7 @@ function makeOwnerAccess({ store, audit = () => {}, now = () => new Date(), limi
     const prev = await store.linkByTelegram(telegramId);
     if (prev && prev.revokedAt && STICKY.includes(prev.revokedReason) && !approvals.some(a => ms(a.createdAt) > ms(prev.revokedAt)))
       return { ok: false, reason: 'blocked' };
-    const { ids, roles } = await grantsFor(approvals);
+    const { ids, roles, accessIds } = await grantsFor(approvals);
     if (!ids.length) return { ok: false, reason: 'not_registered' };    // never says which businesses exist
     const at = now();
     const link = await store.upsertLink({ telegramId, chatId: String(chat.id), phoneKey: phoneKey(e164), phoneE164: e164, at });
@@ -114,16 +118,16 @@ function makeOwnerAccess({ store, audit = () => {}, now = () => new Date(), limi
       for (const id of ids) await note(id, 'OWNER_TG_UNLINKED', 'telegram …' + last4(other.telegramId) + ' · replaced by a newer link');
     }
     for (const id of ids) await note(id, 'OWNER_TG_LINKED', 'telegram …' + last4(telegramId) + ' · phone …' + last4(e164));
-    return { ok: true, scope: { buildingIds: ids, roles, mode: 'owner', linkId: link.id } };
+    return { ok: true, scope: { buildingIds: ids, roles, accessIds, mode: 'owner', linkId: link.id } };
   }
 
   async function scopeFor(telegramId) {
     const link = await store.linkByTelegram(String(telegramId));
     if (!link || link.revokedAt) return null;
-    const { ids, roles } = await grantsFor(await store.activeAccessByPhone(link.phoneE164), link.linkedAt);
+    const { ids, roles, accessIds } = await grantsFor(await store.activeAccessByPhone(link.phoneE164), link.linkedAt);
     if (!ids.length) return null;
     if (!link.lastSeen || now() - new Date(link.lastSeen) > TOUCH_MS) Promise.resolve(store.touchLink(link.id, now())).catch(() => {});
-    return { buildingIds: ids, roles, mode: link.mode === 'bini' ? 'bini' : 'owner', linkId: link.id };
+    return { buildingIds: ids, roles, accessIds, mode: link.mode === 'bini' ? 'bini' : 'owner', linkId: link.id };
   }
 
   async function unlink(telegramId) {
@@ -156,6 +160,21 @@ function makeOwnerAccess({ store, audit = () => {}, now = () => new Date(), limi
       if (!held.length) continue;                                  // approved again after this link: not a live link here
       const r = held.find(x => x.role === 'owner') || held[0];
       out.push({ id: l.id, role: r.role, label: r.label || null, phoneLast4: last4(l.phoneE164), linkedAt: l.linkedAt, lastSeen: l.lastSeen, mode: l.mode });
+    }
+    return out;
+  }
+
+  // For owner actions prepared by staff: the private chats of the Telegram accounts whose live link holds an OWNER
+  // approval for this building (approved before the link was made, Bini for owners switched on). Server-side only:
+  // chat ids never go into a response.
+  async function ownerChatsForBuilding(buildingId) {
+    if (!(await store.enabledEntities('owner', 'building', [buildingId])).includes(buildingId)) return [];
+    const owners = (await store.accessForEntity('building', buildingId)).filter(r => KINDS.includes(r.kind) && r.role === 'owner');
+    if (!owners.length) return [];
+    const out = [];
+    for (const l of await store.linksForPhones([...new Set(owners.map(r => r.phoneE164))])) {
+      if (l.revokedAt || !owners.some(r => r.phoneE164 === l.phoneE164 && ms(r.createdAt) <= ms(l.linkedAt))) continue;
+      out.push({ telegramId: String(l.telegramId), chatId: String(l.chatId) });
     }
     return out;
   }
@@ -194,7 +213,7 @@ function makeOwnerAccess({ store, audit = () => {}, now = () => new Date(), limi
     return { ok: true, linksRevoked };
   }
 
-  return { linkFromContact, scopeFor, unlink, setMode, linksForBuilding, revokeForBuilding, revokeAccess };
+  return { linkFromContact, scopeFor, unlink, setMode, linksForBuilding, ownerChatsForBuilding, revokeForBuilding, revokeAccess };
 }
 
 // limiter is reused by messaging/tenant-link.js: the same attempt limit (its own counters) for tenant Share-my-phone links.

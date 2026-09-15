@@ -50,6 +50,32 @@ function setup() {
 const own = (phone, uid = 42) => ({ chat: { id: uid, type: 'private' }, from: { id: uid }, contact: { phone_number: phone, user_id: uid }, forwarded: false });
 const linkOf = (store, uid) => store.s.links.find(l => l.telegramId === String(uid));
 
+test('the scope names the approval that gave the role, so an owner action can be recorded against it', async () => {
+  const { store, access } = setup();
+  const a = store.addAccess('b1', '0900000001', 'owner');
+  const staff = store.addAccess('b2', '0900000001', 'staff');
+  store.enable('b1'); store.enable('b2');
+  const r = await access.linkFromContact(own('251900000001'));
+  assert.deepEqual(r.scope.accessIds, { b1: a.id, b2: staff.id });
+  assert.deepEqual((await access.scopeFor(42)).accessIds, { b1: a.id, b2: staff.id });
+  const both = store.addAccess('b1', '0900000001', 'staff');
+  assert.equal((await access.scopeFor(42)).accessIds.b1, a.id, 'owner outranks staff, and names the owner approval');
+  assert.ok(both.id);
+});
+
+test('the owners\' own chats, for a card a staff member prepared: live links holding an owner approval, nobody else', async () => {
+  const { store, access } = setup();
+  store.addAccess('b1', '0900000001', 'owner');
+  store.addAccess('b1', '0900000002', 'staff');
+  store.enable('b1');
+  assert.deepEqual(await access.ownerChatsForBuilding('b1'), [], 'nobody has linked yet');
+  await access.linkFromContact(own('251900000001', 42));
+  await access.linkFromContact(own('251900000002', 43));
+  assert.deepEqual(await access.ownerChatsForBuilding('b1'), [{ telegramId: '42', chatId: '42' }]);
+  await access.unlink(42);
+  assert.deepEqual(await access.ownerChatsForBuilding('b1'), [], 'a signed-out owner has no chat');
+});
+
 test('a number Telegram vouches for, approved and switched on, links the account', async () => {
   const { store, audits, access } = setup();
   store.addAccess('b1', '0900000001'); store.enable('b1');
