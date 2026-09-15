@@ -451,4 +451,4 @@ function makeExecutor({ prisma, now = () => new Date(), warn = m => console.warn
   };
 }
 
-module.exports = { TOOLS, DEFS, VAT_RATE, REPAIR_TYPES, NAME_KEYS, view, makeExecutor, parseFloor, nameScore, typedByOwner };
+module.exports = { TOOLS, DEFS, VAT_RATE, REPAIR_TYPES, NAME_KEYS, view, makeExecutor, pickBuildings, parseFloor, nameScore, typedByOwner };
