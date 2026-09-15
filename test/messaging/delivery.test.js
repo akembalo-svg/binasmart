@@ -1,0 +1,184 @@
+'use strict';
+// One road for every tenant message, over an in-memory store, a fake Telegram and a recording SMS provider.
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const { makeDelivery, addisMonthStart } = require('../../messaging/delivery');
+const { makeSms, geezSupports, smsParts } = require('../../messaging/sms');
+
+const NOW = new Date('2026-10-10T09:00:00Z');
+function memStore() {
+  const s = { batches: [], messages: [], seq: 0 };
+  return {
+    s,
+    createBatch: async d => { const b = { id: 'B' + (++s.seq), ...d }; s.batches.push(b); return { id: b.id }; },
+    createMessage: async d => { const m = { id: 'M' + (++s.seq), createdAt: NOW, smsParts: 0, providerId: null, errorKind: null, ...d }; s.messages.push(m); return { id: m.id }; },
+    updateMessage: async (id, d) => { Object.assign(s.messages.find(m => m.id === id), d); return { id }; },
+    smsPartsSinceAll: async (since, statuses) => s.messages.filter(m => m.channel === 'sms' && statuses.includes(m.status) && m.createdAt >= since).reduce((a, m) => a + (m.smsParts || 0), 0),
+    smsPartsSince: async (b, since, statuses) => s.messages.filter(m => m.buildingId === b && m.channel === 'sms' && statuses.includes(m.status) && m.createdAt >= since).reduce((a, m) => a + (m.smsParts || 0), 0),
+    userHadSms: async (u, statuses) => s.messages.some(m => m.userId === u && m.channel === 'sms' && statuses.includes(m.status)),
+    markByProvider: async (ids, status) => { let n = 0; for (const m of s.messages) if (ids.includes(m.providerId) && m.channel === 'sms' && ['queued', 'sent'].includes(m.status)) { m.status = status; n++; } return n; },
+  };
+}
+function recorder({ ok = true } = {}) {
+  const calls = [];
+  return { calls, name: 'fake', supports: geezSupports, send: async a => { calls.push(a); return ok ? { ok: true, providerId: 'P' + calls.length } : { ok: false, error: 'no' }; } };
+}
+function setup({ mode = 'test', tgOk = true } = {}) {
+  const store = memStore(), tg = [], provider = recorder();
+  const d = makeDelivery({ store, now: () => NOW, sms: makeSms({ mode, provider, supports: geezSupports }),
+    sendTg: async (chat, text) => { tg.push({ chat, text }); return tgOk; } });
+  return { store, tg, provider, d };
+}
+const REAL = { id: 'b1', slug: 'darulle', real: true, smsLabel: 'BinaSmart · Darulle', smsMonthlyLimit: 100, smsSender: '' };
+const DEMO = { id: 'b2', slug: 'century-mall', real: false, smsLabel: 'BinaSmart · Demo', smsMonthlyLimit: 100, smsSender: '' };
+const FIRST = 'BinaSmart · Darulle፦ short text\nTelegram: t.me/bina_smart_bot?start=tenant_darulle';   // a tenant's first SMS
+const rcpt = (o = {}) => ({ tenancyId: 't1', userId: 'u1', telegramChatId: null, phone: '0900000001', text: 'full text', smsText: 'short text', ...o });
+const send = (d, building, recipients, extra = {}) => d.sendToTenants({ building, kind: 'invoice', source: 'dashboard-send', actor: 'dashboard', recipients, ...extra });
+
+test('a tenant who linked Telegram gets the full text by Telegram, and nothing by SMS', async () => {
+  const { store, tg, provider, d } = setup();
+  const r = await send(d, REAL, [rcpt({ telegramChatId: '4242' })]);
+  assert.equal(r.ok, true);
+  assert.deepEqual(tg, [{ chat: '4242', text: 'full text' }]);
+  assert.equal(provider.calls.length, 0);
+  assert.deepEqual(r.results.map(x => [x.channel, x.status]), [['telegram', 'sent']]);
+  assert.deepEqual(store.s.messages.map(m => [m.channel, m.status, m.kind, m.invoiceId]), [['telegram', 'sent', 'invoice', null]]);
+  assert.deepEqual(r.counts, { telegram: 1, sms: 0, none: 0, sent: 1, test: 0, failed: 0 });
+});
+
+test('without Telegram, a mobile gets SMS — recorded as test while SMS is in test mode', async () => {
+  const { store, tg, provider, d } = setup();
+  const r = await send(d, REAL, [rcpt()]);
+  assert.deepEqual(r.results.map(x => [x.channel, x.status]), [['sms', 'test']]);
+  assert.equal(tg.length, 0);
+  assert.equal(provider.calls.length, 0);
+  assert.equal(store.s.messages[0].smsParts, smsParts(FIRST));
+  assert.equal(smsParts(FIRST), 2, 'label and Telegram link make the first SMS two Unicode parts');
+});
+
+test('no Telegram and no reachable mobile: recorded as not delivered, with the reason', async () => {
+  const { d } = setup();
+  const r = await send(d, REAL, [rcpt({ tenancyId: 'a', phone: '0700000001' }), rcpt({ tenancyId: 'b', phone: '0111234567' }), rcpt({ tenancyId: 'c', phone: null })]);
+  assert.deepEqual(r.results.map(x => [x.tenancyId, x.channel, x.status, x.errorKind]),
+    [['a', 'none', 'failed', 'sms_unsupported_number'], ['b', 'none', 'failed', 'no_mobile'], ['c', 'none', 'failed', 'no_contact']]);
+  assert.equal(r.ok, false);
+});
+
+test('a demo building reaches nobody: Telegram and SMS are both recorded as test, even with SMS live', async () => {
+  const { tg, provider, d } = setup({ mode: 'live' });
+  const r = await send(d, DEMO, [rcpt({ tenancyId: 'a', telegramChatId: '1' }), rcpt({ tenancyId: 'b', userId: 'u2' })]);
+  assert.deepEqual(r.results.map(x => [x.channel, x.status]), [['telegram', 'test'], ['sms', 'test']]);
+  assert.equal(tg.length, 0);
+  assert.equal(provider.calls.length, 0);
+});
+
+test('a batch that needs more SMS parts than the month has left is refused whole: nothing is sent', async () => {
+  const { store, tg, provider, d } = setup({ mode: 'live' });
+  const r = await send(d, { ...REAL, smsMonthlyLimit: 1 }, [rcpt({ tenancyId: 'a', telegramChatId: '1' }), rcpt({ tenancyId: 'b', userId: 'u2' }), rcpt({ tenancyId: 'c', userId: 'u3', phone: '0900000003' })]);
+  assert.equal(r.ok, false);
+  assert.equal(r.error, 'sms_limit');
+  assert.deepEqual([r.needed, r.remaining], [4, 1]);
+  assert.equal(tg.length + provider.calls.length, 0);
+  assert.deepEqual(store.s.messages.map(m => [m.channel, m.status, m.errorKind]), [['none', 'failed', 'sms_limit'], ['none', 'failed', 'sms_limit'], ['none', 'failed', 'sms_limit']]);
+  const zero = await send(d, { ...REAL, smsMonthlyLimit: 0 }, [rcpt({ userId: 'u9' })]);
+  assert.equal(zero.error, 'sms_limit', 'a building without a limit sends no SMS');
+});
+
+test('this month’s usage counts from midnight Addis time; test rows count only while SMS is in test mode', async () => {
+  assert.equal(addisMonthStart(NOW).toISOString(), '2026-09-30T21:00:00.000Z');
+  const t = setup();
+  t.store.s.messages.push({ id: 'old', buildingId: 'b1', channel: 'sms', status: 'test', smsParts: 5, createdAt: new Date('2026-09-30T20:59:00Z') });
+  t.store.s.messages.push({ id: 'new', buildingId: 'b1', channel: 'sms', status: 'test', smsParts: 5, createdAt: new Date('2026-09-30T21:00:00Z') });
+  assert.equal((await send(t.d, { ...REAL, smsMonthlyLimit: 7 }, [rcpt()])).ok, true, '5 used of 7, a two-part first SMS fits');
+  assert.equal((await send(t.d, { ...REAL, smsMonthlyLimit: 7 }, [rcpt({ userId: 'u2' })])).error, 'sms_limit', '7 used of 7');
+  const live = setup({ mode: 'live' });
+  live.store.s.messages.push({ id: 'x', buildingId: 'b1', channel: 'sms', status: 'test', smsParts: 50, createdAt: NOW });
+  assert.equal((await send(live.d, { ...REAL, smsMonthlyLimit: 2 }, [rcpt()])).ok, true, 'test rows do not use up the live limit');
+});
+
+test('when Telegram refuses, the same message goes by SMS on the same row, and says Telegram failed', async () => {
+  const { store, tg, provider, d } = setup({ mode: 'live', tgOk: false });
+  const r = await send(d, REAL, [rcpt({ telegramChatId: '1' })]);
+  assert.deepEqual(r.results.map(x => [x.channel, x.status, x.errorKind]), [['sms', 'sent', 'tg_failed']]);
+  assert.equal(tg.length, 1);
+  assert.equal(provider.calls.length, 1);
+  assert.equal(store.s.messages.length, 1);
+  const noPhone = await send(d, REAL, [rcpt({ telegramChatId: '1', phone: null })]);
+  assert.deepEqual(noPhone.results.map(x => [x.channel, x.status, x.errorKind]), [['telegram', 'failed', 'tg_failed']]);
+});
+
+test('the first SMS a tenant receives ends with the Telegram start link; later ones do not', async () => {
+  const { provider, d } = setup({ mode: 'live' });
+  await send(d, REAL, [rcpt()]);
+  await send(d, REAL, [rcpt()]);
+  assert.equal(provider.calls[0].text, FIRST);
+  assert.equal(provider.calls[1].text, 'BinaSmart · Darulle፦ short text');
+});
+
+test('an SMS cannot be planned without a label; a Telegram-only send does not need one', async () => {
+  const { d } = setup();
+  await assert.rejects(send(d, { ...REAL, smsLabel: '' }, [rcpt()]), /label/);
+  assert.equal((await send(d, { ...REAL, smsLabel: '' }, [rcpt({ telegramChatId: '1' })])).ok, true);
+});
+
+test('SMS live on a real building: the provider is called with the building’s sender, and its id is kept', async () => {
+  const { store, provider, d } = setup({ mode: 'live' });
+  const r = await send(d, { ...REAL, smsSender: 'DemoSender' }, [rcpt({ invoiceId: 'inv1' })]);
+  assert.deepEqual(r.results.map(x => [x.channel, x.status]), [['sms', 'sent']]);
+  assert.deepEqual([provider.calls[0].to, provider.calls[0].sender], ['+251900000001', 'DemoSender']);
+  assert.deepEqual([store.s.messages[0].providerId, store.s.messages[0].invoiceId, store.s.messages[0].status], ['P1', 'inv1', 'sent']);
+});
+
+test('a notice keeps its text once on the batch; nothing stored carries a phone number', async () => {
+  const { store, d } = setup();
+  await d.sendToTenants({ building: REAL, kind: 'notice', source: 'owner-action', actor: 'access-1', text: 'ነገ ውሃ ይቋረጣል', recipients: [rcpt(), rcpt({ tenancyId: 't2', userId: 'u2', telegramChatId: '9' })] });
+  await send(d, REAL, [rcpt()]);
+  assert.deepEqual(store.s.batches.map(b => [b.kind, b.text, b.total, b.actor]), [['notice', 'ነገ ውሃ ይቋረጣል', 2, 'access-1'], ['invoice', null, 1, 'dashboard']]);
+  assert.doesNotMatch(JSON.stringify(store.s), /900000001/);
+});
+
+test('plan() previews channels, parts and the limit without writing anything', async () => {
+  const { store, d } = setup();
+  const p = await d.plan({ building: { ...REAL, smsMonthlyLimit: 3 }, recipients: [rcpt({ telegramChatId: '1' }), rcpt({ userId: 'u2' }), rcpt({ phone: null })] });
+  assert.deepEqual(p.counts, { telegram: 1, sms: 1, none: 1 });
+  assert.deepEqual([p.smsParts, p.used, p.limit, p.remaining, p.withinLimit, p.mode], [2, 0, 3, 3, true, 'test']);
+  assert.deepEqual([p.unitPriceEtb, p.costEtb], [0.7475, Math.round(2 * 0.7475 * 100) / 100]);
+  assert.equal(store.s.batches.length + store.s.messages.length, 0);
+});
+
+test('transactional SMS (sign-in codes): no building, the code is never stored, test until live', async () => {
+  const t = setup();
+  await assert.rejects(t.d.sendTransactionalSms({ to: '0900000001', text: 'code 123456' }), /label/);
+  const r = await t.d.sendTransactionalSms({ to: '0900000001', text: 'code 123456', label: 'BinaSmart', kind: 'otp' });
+  assert.deepEqual([r.status, r.channel], ['test', 'sms']);
+  assert.deepEqual(t.store.s.batches.map(b => [b.buildingId, b.kind, b.source, b.text]), [[null, 'otp', 'transactional', null]]);
+  assert.doesNotMatch(JSON.stringify(t.store.s), /123456|900000001/);
+  const live = setup({ mode: 'live' });
+  assert.equal((await live.d.sendTransactionalSms({ to: '0900000001', text: 'code 1', label: 'BinaSmart' })).status, 'sent');
+  assert.deepEqual([live.provider.calls.length, live.provider.calls[0].text], [1, 'BinaSmart፦ code 1']);
+  assert.deepEqual(await live.d.sendTransactionalSms({ to: '0700000001', text: 'code 2', label: 'BinaSmart' }), { status: 'failed', channel: 'none', errorKind: 'sms_unsupported_number', messageId: live.store.s.messages[1].id });
+});
+
+test('an unexpected store error is logged by its kind only: no message text, no phone digits', async () => {
+  const store = memStore(), logs = [];
+  store.createMessage = async () => { const e = new Error('boom for +251900000001'); e.code = 'P2002'; throw e; };
+  const d = makeDelivery({ store, now: () => NOW, sms: makeSms({ mode: 'test', provider: recorder(), supports: geezSupports }),
+    sendTg: async () => true, log: line => logs.push(line) });
+  const r = await send(d, REAL, [rcpt({ telegramChatId: '1' })]);
+  assert.deepEqual(r.results.map(x => [x.channel, x.status, x.errorKind]), [['telegram', 'failed', 'error']]);
+  assert.equal(logs.length, 1);
+  assert.match(logs[0], /P2002/);
+  assert.doesNotMatch(logs.join(' '), /boom|900000001/);
+});
+
+test('delivery reports move a sent SMS to delivered or failed by provider id; the logged shape has no values', async () => {
+  const { store, d } = setup({ mode: 'live' });
+  await send(d, REAL, [rcpt(), rcpt({ tenancyId: 't2', userId: 'u2' })]);
+  assert.equal(await d.applyDeliveryReport({ api_log_id: 'P1', status: 'DELIVERED' }), 1);
+  assert.equal(await d.applyDeliveryReport({ log: 'P1', status: 'undelivered' }), 0, 'a delivered row is not moved back');
+  assert.equal(await d.applyDeliveryReport({ log: 'P2', delivery_status: 'Undelivered' }), 1);
+  assert.equal(await d.applyDeliveryReport({ foo: 1 }), 0);
+  assert.equal(await d.applyDeliveryReport({ api_log_id: 'P1', message_status: 'success' }), 0);
+  assert.deepEqual(store.s.messages.map(m => m.status), ['delivered', 'failed']);
+  assert.equal(d.reportShape({ api_log_id: 6569829, phone: '251900000001', status: 'x', list: [] }), 'api_log_id:number,phone:string,status:string,list:array');
+});
