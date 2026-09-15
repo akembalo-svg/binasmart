@@ -1153,6 +1153,9 @@ model KnowledgeChunk {
   text      String
   internal  Boolean  @default(false) // true = never served to the public search / MCP
   embedding Bytes?
+  // BGE-M3 (bina-embed, 127.0.0.1:3031): 1024 float32, L2-normalised, same byte layout as `embedding`. Used only when
+  // the Gemini query embedding fails. Added 2026-09-15 by prisma/sql/20260915_knowledge_chunk_embedding_local.up.sql.
+  embeddingLocal Bytes?
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
   @@index([source, slug])
