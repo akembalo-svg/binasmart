@@ -112,6 +112,8 @@ model Building {
   latePenaltyPct   Int     @default(10)
   penaltiesEnabled Boolean @default(false)
   notifyTenants    Boolean @default(false)
+  smsMonthlyLimit  Int     @default(500) // SMS parts per Addis calendar month; 0 = no SMS to tenants
+  smsSender        String?               // approved sender name (max 11 characters); null = provider default shortcode
   elecTariff       Float   @default(2.12)
   waterTariff      Float   @default(15)
   expenses         Expense[]
@@ -1557,4 +1559,55 @@ model AgentSwitch {
   disabledAt DateTime?
 
   @@unique([agent, kind, entityId])
+}
+
+// Tenant messages (owner actions and messaging design §1.5): one batch per send, one row per recipient.
+// A notice's text is kept once on the batch; invoices and receipts point at the invoice. No phone numbers here.
+model OutboundBatch {
+  id         String            @id @default(cuid())
+  buildingId String?           // null for transactional SMS (sign-in codes, Plan D)
+  kind       String            // notice | reminder | invoice | receipt | otp
+  source     String            // daily-renewal | daily-due | daily-penalty | dashboard-send | receipt | backfill-audit | transactional
+  actor      String?           // dashboard | cron | ops (Plan B: the owner access id)
+  text       String?           // notices only
+  total      Int               @default(0)
+  createdAt  DateTime          @default(now())
+  messages   OutboundMessage[]
+
+  @@index([buildingId, createdAt])
+}
+
+model OutboundMessage {
+  id         String        @id @default(cuid())
+  batchId    String
+  batch      OutboundBatch @relation(fields: [batchId], references: [id])
+  buildingId String?
+  tenancyId  String?
+  userId     String?
+  invoiceId  String?
+  kind       String
+  channel    String        // telegram | sms | none
+  status     String        // queued | sent | delivered | failed | test
+  smsParts   Int           @default(0)
+  providerId String?
+  errorKind  String?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([buildingId, createdAt])
+  @@index([invoiceId])
+  @@index([batchId])
+  @@index([providerId])
+}
+
+// bina.et/i/<token>: one invoice or receipt, 60 days (design §1.3).
+model InvoiceLink {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  invoiceId String
+  kind      String   // invoice | receipt
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([invoiceId])
 }
