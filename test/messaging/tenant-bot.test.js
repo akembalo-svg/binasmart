@@ -100,6 +100,19 @@ test('no match gets one neutral reply that names nothing; refusals say what to d
   assert.match(sent[1].text, /linking failed/);
 });
 
+test('a failing link or unlink service is logged by its error kind only, never its message', async () => {
+  const logs = [], orig = console.error;
+  console.error = (...a) => logs.push(a.join(' '));
+  try {
+    let h = harness({ linkThrows: true });
+    await h.b.handleUpdate(pm('/start tenant_darulle'));
+    await h.b.handleUpdate(contact());
+    h = harness({ unlinkThrows: true });
+    await h.b.handleUpdate(pm('/stop'));
+  } finally { console.error = orig; }
+  assert.deepEqual(logs, ['[binaBot] tenant link: Error', '[binaBot] tenant unlink: Error']);
+});
+
 test('the newest start command decides what a contact means: owner or tenant', async () => {
   let h = harness({ withOwner: true });
   await h.b.handleUpdate(pm('/start tenant_darulle'));

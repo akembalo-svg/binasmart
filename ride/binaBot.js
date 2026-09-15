@@ -13,6 +13,8 @@ const MENU = [
 ];
 const COMMANDS = { cinema: '/cinema', watch: '/watch', films: '/watch', ride: '/ride', hotels: '/hotel/bina-grand-hotel', restaurants: '/restaurant/bina-restaurant', hospitals: '/hospital/bina-general-hospital', events: '/cinema', property: '/property', cars: '/cars', insurance: '/insurance', guides: '/guides', ai: '/ai' };
 const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
+// Tenant-link errors are logged by kind (Prisma code or error name), never by message: messages can carry ids or numbers.
+const errKind = e => String((e && (e.code || e.name)) || 'Error').replace(/[^A-Za-z0-9_]/g, '').slice(0, 40) || 'Error';
 
 function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey, owner, tenant }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
@@ -76,7 +78,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       r = await tenant.linkFromContact({ slug, chat: msg.chat, from: msg.from, contact: msg.contact, startedAt,
         forwarded: !!(msg.forward_origin || msg.forward_from || msg.forward_date || msg.via_bot) });
     } catch (e) {
-      console.error('[binaBot] tenant link: ' + e.message);
+      console.error('[binaBot] tenant link: ' + errKind(e));
       return api.sendMessage(chatId, 'ይቅርታ፣ አሁን ማገናኘት አልተቻለም። · Sorry, linking failed just now.', { reply_markup: NO_KB });
     }
     if (r && r.ok) return api.sendMessage(chatId, '✅ ተገናኝቷል · Linked — ክፍል · unit ' + r.units.join(', ')
@@ -101,7 +103,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     }
     if (/^\/stop\b/.test(text)) {
       pendingTenant.delete(String(msg.from.id));
-      const n = await tenant.unlink(msg.from.id).catch(e => { console.error('[binaBot] tenant unlink: ' + e.message); return FAILED; });
+      const n = await tenant.unlink(msg.from.id).catch(e => { console.error('[binaBot] tenant unlink: ' + errKind(e)); return FAILED; });
       if (n === FAILED) return api.sendMessage(chatId, SORRY, { reply_markup: NO_KB });
       return api.sendMessage(chatId, n
         ? 'የህንፃ መልእክቶች ቆመዋል። እንደገና ለመጀመር የህንፃውን QR ይቃኙ። · Building notices stopped. Scan your building\'s QR code to start again.'
