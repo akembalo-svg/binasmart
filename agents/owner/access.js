@@ -197,4 +197,5 @@ function makeOwnerAccess({ store, audit = () => {}, now = () => new Date(), limi
   return { linkFromContact, scopeFor, unlink, setMode, linksForBuilding, revokeForBuilding, revokeAccess };
 }
 
-module.exports = { makeOwnerAccess, makeOwnerAccessStore, toE164, KINDS };
+// limiter is reused by messaging/tenant-link.js: the same attempt limit (its own counters) for tenant Share-my-phone links.
+module.exports = { makeOwnerAccess, makeOwnerAccessStore, toE164, KINDS, limiter };
