@@ -2,7 +2,7 @@
 // One road for every tenant message, over an in-memory store, a fake Telegram and a recording SMS provider.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { makeDelivery, addisMonthStart } = require('../../messaging/delivery');
+const { makeDelivery, addisMonthStart, isRealMiss } = require('../../messaging/delivery');
 const { makeSms, geezSupports, smsParts } = require('../../messaging/sms');
 
 const NOW = new Date('2026-10-10T09:00:00Z');
@@ -84,16 +84,32 @@ test('a batch that needs more SMS parts than the month has left is refused whole
   assert.equal(zero.error, 'sms_limit', 'a building without a limit sends no SMS');
 });
 
-test('this month’s usage counts from midnight Addis time; test rows count only while SMS is in test mode', async () => {
+test('this month’s usage counts from midnight Addis time; test rows never count against the limit, in any mode', async () => {
   assert.equal(addisMonthStart(NOW).toISOString(), '2026-09-30T21:00:00.000Z');
-  const t = setup();
-  t.store.s.messages.push({ id: 'old', buildingId: 'b1', channel: 'sms', status: 'test', smsParts: 5, createdAt: new Date('2026-09-30T20:59:00Z') });
-  t.store.s.messages.push({ id: 'new', buildingId: 'b1', channel: 'sms', status: 'test', smsParts: 5, createdAt: new Date('2026-09-30T21:00:00Z') });
-  assert.equal((await send(t.d, { ...REAL, smsMonthlyLimit: 7 }, [rcpt()])).ok, true, '5 used of 7, a two-part first SMS fits');
-  assert.equal((await send(t.d, { ...REAL, smsMonthlyLimit: 7 }, [rcpt({ userId: 'u2' })])).error, 'sms_limit', '7 used of 7');
-  const live = setup({ mode: 'live' });
-  live.store.s.messages.push({ id: 'x', buildingId: 'b1', channel: 'sms', status: 'test', smsParts: 50, createdAt: NOW });
-  assert.equal((await send(live.d, { ...REAL, smsMonthlyLimit: 2 }, [rcpt()])).ok, true, 'test rows do not use up the live limit');
+  for (const mode of ['test', 'live']) {
+    const t = setup({ mode });
+    t.store.s.messages.push({ id: 'old', buildingId: 'b1', channel: 'sms', status: 'sent', smsParts: 5, createdAt: new Date('2026-09-30T20:59:00Z') });
+    t.store.s.messages.push({ id: 'new', buildingId: 'b1', channel: 'sms', status: 'sent', smsParts: 5, createdAt: new Date('2026-09-30T21:00:00Z') });
+    t.store.s.messages.push({ id: 'tst', buildingId: 'b1', channel: 'sms', status: 'test', smsParts: 50, createdAt: NOW });
+    const p = await t.d.plan({ building: { ...REAL, smsMonthlyLimit: 7 }, recipients: [rcpt()] });
+    assert.deepEqual([p.used, p.remaining], [5, 2], mode + ': only the sent row of this month counts');
+    assert.equal((await send(t.d, { ...REAL, smsMonthlyLimit: 7 }, [rcpt()])).ok, true, mode + ': 5 used of 7, a two-part first SMS fits');
+    const second = await send(t.d, { ...REAL, smsMonthlyLimit: 7 }, [rcpt({ userId: 'u2' })]);
+    if (mode === 'test') assert.equal(second.ok, true, 'test: the first send was a test row, so it used nothing');
+    else assert.equal(second.error, 'sms_limit', 'live: the first send really went, 7 used of 7');
+  }
+});
+
+test('the owner report counts a message as not delivered only when a real, live send failed', () => {
+  const live = { real: true, mode: 'live' };
+  assert.equal(isRealMiss(live, { status: 'failed', channel: 'none', errorKind: 'no_mobile' }), true);
+  assert.equal(isRealMiss(live, { status: 'failed', channel: 'telegram', errorKind: 'tg_failed' }), true);
+  assert.equal(isRealMiss(live, { status: 'failed', channel: 'none', errorKind: 'sms_limit' }), true);
+  assert.equal(isRealMiss(live, null), true, 'the layer threw on a real send');
+  for (const s of ['sent', 'delivered', 'test']) assert.equal(isRealMiss(live, { status: s }), false, s);
+  for (const ctx of [{ real: true, mode: 'test' }, { real: false, mode: 'live' }, { real: false, mode: 'test' }, {}, null])
+    for (const r of [{ status: 'failed', channel: 'none', errorKind: 'no_contact' }, { status: 'failed', channel: 'telegram', errorKind: 'tg_failed' }, { status: 'test' }, null])
+      assert.equal(isRealMiss(ctx, r), false, JSON.stringify(ctx) + ' ' + JSON.stringify(r));
 });
 
 test('when Telegram refuses, the same message goes by SMS on the same row, and says Telegram failed', async () => {

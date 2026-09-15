@@ -21,8 +21,11 @@
 // recipient { tenancyId, userId, telegramChatId, phone, text, smsText, invoiceId }   (phone is used, never stored)
 const { normalizeEtMobile, smsParts, SMS_MAX_CHARS, labelled, smsUnitPrice, DEFAULT_PRICE_TIERS } = require('./sms');
 
-const COUNTED_LIVE = ['queued', 'sent', 'delivered'];
-const COUNTED_TEST = ['queued', 'sent', 'delivered', 'test'];
+// What uses up a building's monthly SMS limit (and sets the price tier): SMS that went or may have gone. A `test` row
+// never counts, in any mode, so test-mode runs cannot fill a real building's month before SMS goes live.
+const COUNTED = ['queued', 'sent', 'delivered'];
+// Whether a tenant already had an SMS (for the one-time Telegram link): in test mode a test row counts as had.
+const HAD_SMS_TEST = ['queued', 'sent', 'delivered', 'test'];
 const DELIVERED = ['sent', 'delivered'];
 // Logs name an error by its kind (Prisma code or error name), never its message: messages can carry phone numbers.
 const errKind = e => String((e && (e.code || e.name)) || 'Error').replace(/[^A-Za-z0-9_]/g, '').slice(0, 40) || 'Error';
@@ -31,6 +34,15 @@ const errKind = e => String((e && (e.code || e.name)) || 'Error').replace(/[^A-Z
 function addisMonthStart(now = new Date()) {
   const d = new Date(now.getTime() + 3 * 3600000);
   return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1) - 3 * 3600000);
+}
+
+// The owner's daily report says how many tenant messages were not delivered. Only a real failure counts: the building is
+// real and SMS is live, and the send failed (no channel, Telegram refused with no SMS, the limit, the provider) or the
+// layer threw. In test mode nothing counts, whatever the row says, so a test run adds no "not delivered" line.
+function isRealMiss(ctx, result) {
+  if (!ctx || ctx.real !== true || ctx.mode !== 'live') return false;
+  if (!result) return true;
+  return result.status === 'failed';
 }
 
 function makeDeliveryStore(prisma) {
@@ -49,8 +61,8 @@ function makeDeliveryStore(prisma) {
 }
 
 function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername = 'bina_smart_bot', priceTiers = DEFAULT_PRICE_TIERS, log = () => {} }) {
-  const counted = () => (sms.mode === 'live' ? COUNTED_LIVE : COUNTED_TEST);
-  const hadSmsStatuses = () => (sms.mode === 'live' ? DELIVERED : COUNTED_TEST);
+  const counted = () => COUNTED;
+  const hadSmsStatuses = () => (sms.mode === 'live' ? DELIVERED : HAD_SMS_TEST);
 
   // The first SMS a tenant receives ends with the building's Telegram start link (design §2), if it still fits.
   // `seen` holds the users who already got the link in this batch: a tenant with two units gets it once.
@@ -210,4 +222,4 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
   return { plan, sendToTenants, sendTransactionalSms, applyDeliveryReport, readReport, reportShape };
 }
 
-module.exports = { makeDelivery, makeDeliveryStore, addisMonthStart };
+module.exports = { makeDelivery, makeDeliveryStore, addisMonthStart, isRealMiss };

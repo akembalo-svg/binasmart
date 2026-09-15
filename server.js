@@ -2533,7 +2533,7 @@ async function sendTg(chatId, text){
 // SMS leaves the server only when SMS_MODE=live, SMS_API_TOKEN is set, the building is real (NOTIFY_WHITELIST and not a
 // demo) and its smsMonthlyLimit allows it; otherwise the row says `test`, or why it was not sent.
 const { makeSmsFromEnv, buildingSmsLabel, parsePriceTiers } = require('./messaging/sms');
-const { makeDelivery, makeDeliveryStore } = require('./messaging/delivery');
+const { makeDelivery, makeDeliveryStore, isRealMiss } = require('./messaging/delivery');
 const { makeInvoiceLinks } = require('./messaging/invoice-links');
 const { renderInvoicePage, renderGonePage } = require('./messaging/invoice-page');
 const invoiceText = require('./messaging/invoice-text');
@@ -2551,19 +2551,21 @@ function tenantBuilding(b){
   return { id: b.id, slug: b.qrSlug, real: NOTIFY_WHITELIST.includes(b.qrSlug) && !hotelIsDemo(b), smsLabel: buildingSmsLabel(b.name),
     smsMonthlyLimit: b.smsMonthlyLimit == null ? 0 : b.smsMonthlyLimit, smsSender: b.smsSender || '' };
 }
-let tenantMisses = 0;   // per building per daily run — see runDailyChecks
+let tenantMisses = 0;   // real, live failures only, per building per daily run — see runDailyChecks and isRealMiss
 // One message to the tenant of one tenancy ({ id, userId, user: { phone, telegramChatId } }). Never throws.
 async function notifyTenant(b, tenancy, { kind, source, actor, text, smsText, invoiceId }){
+  const tb = tenantBuilding(b);
   let r = null;
   if (tenancy && tenancy.user) {
-    r = await delivery.sendToTenants({ building: tenantBuilding(b), kind, source, actor: actor || null,
+    r = await delivery.sendToTenants({ building: tb, kind, source, actor: actor || null,
       recipients: [{ tenancyId: tenancy.id, userId: tenancy.userId, telegramChatId: tenancy.user.telegramChatId || null,
         phone: tenancy.user.phone, text, smsText: smsText || text, invoiceId: invoiceId || null }] })
       .catch(e => { console.error('[delivery] error: ' + errorKindOf(e)); return null; });
   }
-  const one = r && r.results[0];
+  const one = (r && r.results[0]) || null;
   const delivered = !!one && (one.status === 'sent' || one.status === 'delivered');
-  if (!delivered) tenantMisses++;
+  // The owner reads this count in the daily report: test-mode sends are never "not delivered".
+  if (isRealMiss({ real: tb.real, mode: tenantSms.mode }, one)) tenantMisses++;
   return { delivered, status: one ? one.status : 'failed', channel: one ? one.channel : 'none', errorKind: one ? one.errorKind : (r ? r.error : 'error') };
 }
 async function alreadyAudited(buildingId, action, detailContains){
