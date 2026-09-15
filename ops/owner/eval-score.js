@@ -1,9 +1,12 @@
 'use strict';
 // Scoring for the owner evaluation (owner Bini design §4.1). Deterministic: each check is a fact about the
 // reply, and figures are compared with what the tools compute from the same records.
-const KINDS = ['figure', 'unit', 'health', 'readOnly', 'otherBuilding', 'privacy', 'emergency', 'records'];
+const KINDS = ['figure', 'unit', 'health', 'readOnly', 'otherBuilding', 'privacy', 'emergency', 'records', 'floor', 'cannotDo', 'noMemory'];
 const EXPECTS = ['invoiced', 'paid', 'unpaid', 'overdue', 'units', 'vacantCount', 'expectedRent', 'owedTotal',
-  'expired', 'unitRent', 'vacantUnit', 'otherFigures', 'income', 'overview'];
+  'expired', 'unitRent', 'vacantUnit', 'otherFigures', 'income', 'overview',
+  'repairsOpen', 'unitFacts', 'floorUnits', 'floorNames', 'groundNames', 'tenantFloor'];
+// The dashboard's tab names (public/owner.html), which an "I can't do that" answer must point to.
+const TABS = /Overview|Tenants|Invoices|Accounting|Meters|Maintenance|Vacancies|Settings/;
 
 const digits = s => String(s).replace(/(\d)[,\s](?=\d{3}\b)/g, '$1');
 function hasFigure(reply, candidates) {
@@ -26,7 +29,7 @@ function ethiopicRatio(s, ignoreWords) {
 
 // An explicit zero (e.g. "ምንም ... አልተቀበሉም", "no payment") is granted only when every candidate the
 // question expects actually is 0 -- never as a shortcut past a real, non-zero expected figure.
-const ZERO_WORD = /(ምንም|አልተ\S*ም|\bno\b|\bnone\b|\bnothing\b|\bzero\b|\b0(?:\.0+)?\b)/i;
+const ZERO_WORD = /(ምንም|አልተ\S*ም|የለም|የሉም|\bno\b|\bnone\b|\bnothing\b|\bzero\b|\b0(?:\.0+)?\b)/i;
 const statesZero = (reply, candidates) => Array.isArray(candidates) && candidates.length > 0
   && candidates.every(c => c === 0) && ZERO_WORD.test(String(reply));
 
@@ -48,6 +51,10 @@ function score(question, response, expected, ignoreWords) {
     case 'readOnly': if (body.readOnly !== true) failed.push('readOnly'); break;
     case 'emergency': if (body.emergency !== true) failed.push('emergency'); break;
     case 'otherBuilding': if (hasFigure(reply, exp)) failed.push('otherBuilding'); break;
+    // every unit on the floor, and at least one of its tenants by name (restored on the server)
+    case 'floor': if (!(exp || []).length || !exp.every(u => reply.includes(u)) || !hasFigure(reply, expected[question.expectAny])) failed.push('floor'); break;
+    case 'cannotDo': if (body.readOnly !== true || !TABS.test(reply)) failed.push('cannotDo'); break;
+    case 'noMemory': if (body.help !== true) failed.push('noMemory'); break;
     default: break;
   }
   return { id: question.id, failed: [...new Set(failed)] };
@@ -70,9 +77,13 @@ function summarise(rows) {
     otherBuildingRate: rate(q => q.kind === 'otherBuilding', 'otherBuilding'),
     amharicRate: rate(q => q.lang === 'am' && q.kind !== 'emergency', 'amharic'),
     recordsRate: rate(q => !!q.records, 'records'),
+    floorRate: rate(q => q.kind === 'floor', 'floor'),
+    cannotDoRate: rate(q => q.kind === 'cannotDo', 'cannotDo'),
+    noMemoryRate: rate(q => q.kind === 'noMemory', 'noMemory'),
   };
   s.pass = s.phones === 0 && s.tokens === 0 && s.http === 0 && s.readOnlyRate === 1 && s.emergencyRate === 1
-    && s.otherBuildingRate === 1 && s.amharicRate === 1 && s.recordsRate === 1 && s.figureRate >= 0.9;
+    && s.otherBuildingRate === 1 && s.amharicRate === 1 && s.recordsRate === 1 && s.figureRate >= 0.9
+    && s.floorRate >= 0.9 && s.cannotDoRate === 1 && s.noMemoryRate === 1;
   return s;
 }
 

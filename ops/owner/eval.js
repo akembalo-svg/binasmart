@@ -30,7 +30,12 @@ async function expectations(p, slug, other) {
   const unit = await one(run, 'unit', { number: unitNo });
   const oov = await one(orun, 'overview'), orm = await one(orun, 'rent_month', { month });
   const buildingNames = [ov.building, oov.building].filter(Boolean);
-  return { buildingId: b.id, month, unit: unitNo, buildingNames, values: {
+  const real = await realShapes(p, b.id, unitNo);
+  const repairs = await one(run, 'repairs');
+  return { buildingId: b.id, month, unit: unitNo, buildingNames, fill: real.fill, values: Object.assign({
+    repairsOpen: [...new Set([repairs.count, ov.openRepairs].filter(v => v != null))],
+    unitFacts: [unit.monthlyRentEtb, unit.contractRentEtb, ...real.unitNames].filter(v => v != null && v !== ''),
+  }, real.values, {
     invoiced: [rm.invoicedEtb], paid: [rm.paidEtb], unpaid: [rm.unpaidEtb], overdue: [rm.overdueCount],
     units: [ov.units], vacantCount: [va.count], expectedRent: [ov.expectedMonthlyRentEtb], owedTotal: [un.totalEtb],
     expired: [ce.expiredCount], unitRent: [unit.monthlyRentEtb, unit.contractRentEtb].filter(v => v != null),
@@ -39,7 +44,51 @@ async function expectations(p, slug, other) {
     overview: [ov.units, ov.occupied].filter(v => v != null),
     otherFigures: [oov.expectedMonthlyRentEtb, orm.invoicedEtb].filter(v => v),
     healthMonths: health.rentMonthsWithoutInvoices || [],
-  } };
+  }) };
+}
+
+// The first real owner's question shapes, filled from the DEMO building's own records, read straight from the
+// database (not through the tools under test). Names stay on the server: they only score the reply.
+const VARIANT = [['ሀ', 'ሐ'], ['ሰ', 'ሠ'], ['አ', 'ዐ'], ['ጸ', 'ፀ'], ['ሃ', 'ሓ'], ['ሳ', 'ሣ']];
+async function realShapes(p, buildingId, unitNo) {
+  const units = await p.unit.findMany({ where: { buildingId }, orderBy: [{ floor: 'asc' }, { number: 'asc' }],
+    select: { number: true, floor: true, tenancies: { where: { active: true }, select: { shop: { select: { name: true, nameAm: true } }, user: { select: { fullName: true } } } } } });
+  const namesOf = u => { const t = u.tenancies[0]; return t ? [t.shop && t.shop.nameAm, t.shop && t.shop.name, !t.shop && t.user && t.user.fullName].filter(Boolean) : []; };
+  const byFloor = new Map();
+  for (const u of units) byFloor.set(u.floor, (byFloor.get(u.floor) || []).concat(u));
+  // floor 2 as the owner asked, else the first upper floor with two units or more
+  const floor = byFloor.has(2) && byFloor.get(2).length > 1 ? 2 : [...byFloor.keys()].find(f => f > 0 && byFloor.get(f).length > 1);
+  const onFloor = byFloor.get(floor) || [];
+  const ground = (byFloor.get(0) || []).find(u => u.tenancies.length) || null;
+  // a tenant on an upper floor whose Amharic name has a word no other tenant shares, written with a variant letter
+  const words = n => String(n || '').split(/\s+/).filter(w => w.length >= 3);
+  const count = new Map();
+  for (const u of units) for (const w of new Set(namesOf(u).flatMap(words))) count.set(w, (count.get(w) || 0) + 1);
+  const candidates = [];
+  for (const u of units) {
+    const t = u.tenancies[0];
+    if (!t || !t.shop || u.floor === 0 || !t.shop.nameAm) continue;
+    const am = words(t.shop.nameAm).filter(w => count.get(w) === 1).sort((a, b) => b.length - a.length);
+    const en = words(t.shop.name).filter(w => count.get(w) === 1 && /^[A-Za-z]+$/.test(w));
+    if (!am.length || !en.length) continue;
+    let w = am[0], varied = false;
+    for (const [from, to] of VARIANT) if (w.includes(from)) { w = w.replace(from, to); varied = true; break; }
+    candidates.push({ u, phrase: w, phraseEn: en[0].toLowerCase(), varied });
+  }
+  const pick = candidates.find(c => c.varied) || candidates[0] || {};
+  const target = pick.u || null, phrase = pick.phrase || null, phraseEn = pick.phraseEn || null;
+  const floorWords = f => f === 0 ? ['ምድር', 'ግራውንድ', 'Ground', 'ground'] : [f + 'ኛ', 'ፎቅ ' + f, 'floor ' + f, 'Floor ' + f, 'F' + f];
+  const unitRow = units.find(u => String(u.number) === String(unitNo));
+  return {
+    fill: { floor: floor, groundUnit: ground ? ground.number : '', phrase: phrase || '', phraseEn: phraseEn || '' },
+    unitNames: unitRow ? namesOf(unitRow) : [],
+    values: {
+      floorUnits: onFloor.map(u => String(u.number)),
+      floorNames: onFloor.flatMap(namesOf),
+      groundNames: ground ? namesOf(ground) : [],
+      tenantFloor: target ? [String(target.number), ...floorWords(target.floor)] : [],
+    },
+  };
 }
 
 (async () => {
@@ -50,6 +99,11 @@ async function expectations(p, slug, other) {
   let keyHash = null, buildingId = null;
   try {
     const e = await expectations(p, slug, other);
+    if (process.argv.includes('--dry')) {   // what the questions will be filled with, and how many values each check has
+      console.log(JSON.stringify({ month: e.month, unit: e.unit, fill: e.fill,
+        values: Object.fromEntries(Object.entries(e.values).map(([k, v]) => [k, Array.isArray(v) ? v.length : v])) }));
+      return;
+    }
     buildingId = e.buildingId;
     const values = Object.assign({}, e.values);
     const key = mintKey(slug);
@@ -57,7 +111,9 @@ async function expectations(p, slug, other) {
     await p.ownerKey.create({ data: { buildingId, keyHash, label: 'owner-eval' } });
     const rows = [];
     for (const q of QUESTIONS) {
-      const text = q.q.replace('{month}', e.month).replace('{unit}', String(e.unit));
+      const text = q.q.replace('{month}', e.month).replace('{unit}', String(e.unit))
+        .replace('{floor}', String(e.fill.floor)).replace('{groundUnit}', String(e.fill.groundUnit))
+        .replace('{phrase}', e.fill.phrase).replace('{phraseEn}', e.fill.phraseEn);
       const exp = q.kind === 'health' ? Object.assign({}, values, { [q.expect || 'healthMonths']: values.healthMonths }) : values;
       const question = q.kind === 'health' ? Object.assign({}, q, { expect: 'healthMonths' }) : q;
       let response;

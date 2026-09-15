@@ -45,17 +45,43 @@ test('score applies exactly the checks a question asks for', () => {
   assert.ok(http.failed.includes('http'));
 });
 
-test('the question file is well formed: 40 questions, 20 per language, known kinds and expectations', () => {
+test('the question file is well formed: the 40 launch questions, the first owner\'s 7 shapes and their English twins', () => {
   const qs = require('../../ops/owner/eval-questions.json');
-  assert.equal(qs.length, 40);
-  assert.equal(qs.filter(q => q.lang === 'en').length, 20);
-  assert.equal(qs.filter(q => q.lang === 'am').length, 20);
-  assert.equal(new Set(qs.map(q => q.id)).size, 40);
+  assert.equal(qs.length, 51);
+  assert.equal(qs.filter(q => q.lang === 'en').length, 24);
+  assert.equal(qs.filter(q => q.lang === 'am').length, 27);
+  assert.equal(new Set(qs.map(q => q.id)).size, 51);
+  assert.equal(qs.filter(q => q.real).length, 7, 'the seven shapes the first real owner asked, on demo records');
   for (const q of qs) {
     assert.ok(S.KINDS.includes(q.kind), q.id + ' kind ' + q.kind);
-    if (['figure', 'unit', 'otherBuilding'].includes(q.kind)) assert.ok(S.EXPECTS.includes(q.expect), q.id + ' expect ' + q.expect);
+    if (['figure', 'unit', 'otherBuilding', 'floor'].includes(q.kind)) assert.ok(S.EXPECTS.includes(q.expect), q.id + ' expect ' + q.expect);
+    if (q.kind === 'floor') assert.ok(S.EXPECTS.includes(q.expectAny), q.id + ' expectAny ' + q.expectAny);
     assert.equal(/0\d{9}|\+251/.test(q.q), false, q.id + ' must not contain a phone number');
+    assert.doesNotMatch(q.q, /darulle|ዳሩሌ/i, q.id + ' uses demo records only');
   }
+});
+
+test('a floor answer must name every unit on the floor and at least one of its tenants', () => {
+  const q = { id: 'f', lang: 'en', kind: 'floor', expect: 'floorUnits', expectAny: 'floorNames' };
+  const exp = { floorUnits: ['F2-01', 'F2-02'], floorNames: ['Shop One', 'ሱቅ አንድ'] };
+  assert.deepEqual(S.score(q, { status: 200, body: { reply: 'Floor 2: F2-01 ሱቅ አንድ, F2-02 vacant.' } }, exp).failed, []);
+  assert.deepEqual(S.score(q, { status: 200, body: { reply: 'Floor 2: F2-01 ሱቅ አንድ.' } }, exp).failed, ['floor']);
+  assert.deepEqual(S.score(q, { status: 200, body: { reply: '3 units are vacant: F2-01, F2-02.' } }, exp).failed, ['floor'],
+    'unit numbers without a tenant is the vacancy answer the first owner got');
+});
+
+test('an action Bini cannot do needs the read-only flag and a real dashboard tab; a follow-up without memory needs the help answer', () => {
+  const c = { id: 'c', lang: 'en', kind: 'cannotDo' };
+  assert.deepEqual(S.score(c, { status: 200, body: { readOnly: true, reply: 'I cannot send messages yet. Open the Invoices tab.' } }, {}).failed, []);
+  assert.deepEqual(S.score(c, { status: 200, body: { readOnly: true, reply: 'I cannot do that.' } }, {}).failed, ['cannotDo']);
+  assert.deepEqual(S.score(c, { status: 200, body: { reply: 'Sure, open the Invoices tab.' } }, {}).failed, ['cannotDo']);
+  const m = { id: 'm', lang: 'en', kind: 'noMemory' };
+  assert.deepEqual(S.score(m, { status: 200, body: { help: true, reply: 'I do not see earlier messages.' } }, {}).failed, []);
+  assert.deepEqual(S.score(m, { status: 200, body: { reply: 'I said 3 units are vacant.' } }, {}).failed, ['noMemory']);
+  const rows = [{ q: c, failed: [] }, { q: m, failed: ['noMemory'] }];
+  assert.equal(S.summarise(rows).cannotDoRate, 1);
+  assert.equal(S.summarise(rows).noMemoryRate, 0);
+  assert.equal(S.summarise(rows).pass, false);
 });
 
 test('the summary applies the launch bars', () => {
@@ -86,6 +112,9 @@ test('a stated zero is accepted only when every expected candidate is zero', () 
   const amQ = { id: 'am-paid', lang: 'am', kind: 'figure', expect: 'paid' };
   const zeroReply = 'እስካሁን በ2026-09 ምንም ክፍያ አልተቀበሉም። 14 ደረሰኞች ወጥተው 2,165,000.00 ብር ገቢ ይጠበቃል።';
   assert.deepEqual(S.score(amQ, { status: 200, body: { reply: zeroReply } }, { paid: [0] }).failed, []);
+
+  assert.deepEqual(S.score(amQ, { status: 200, body: { reply: 'እስካሁን ክፍት የሆነ የጥገና ጥያቄ የለም።' } }, { paid: [0] }).failed, [], '"there is none" states a zero');
+  assert.ok(S.score(amQ, { status: 200, body: { reply: 'ክፍት ጥያቄ የለም።' } }, { paid: [1] }).failed.includes('figure'));
 
   const enQ = { id: 'x', lang: 'en', kind: 'figure', expect: 'paid' };
   assert.ok(S.score(enQ, { status: 200, body: { reply: '2,165,000 ETB was paid' } }, { paid: [0] }).failed.includes('figure'),
