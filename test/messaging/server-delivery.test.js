@@ -29,9 +29,11 @@ test('the daily checks keep their switches and their budget of 8 tenant messages
 test('the dashboard invoice send keeps the whitelist check before anything is sent, and says what happened', () => {
   const body = block("fastify.post('/api/owner/:slug/invoice/:id/send'");
   const gate = body.indexOf("if (!NOTIFY_WHITELIST.includes(b.qrSlug)) return reply.code(403)");
-  assert.ok(gate > 0 && gate < body.indexOf('invoiceLinks.linkFor(') && gate < body.indexOf('notifyTenant('));
-  assert.match(body, /invoiceLinks\.linkFor\(inv\.id, 'invoice'\)/);
-  assert.match(body, /return \{ ok: true, delivered: r\.delivered, channel: r\.channel, status: r\.status, reason: r\.errorKind \|\| null \};/);
+  // The send itself is building/invoice-ops.js now — the same function Bini's confirmed action runs.
+  assert.ok(gate > 0 && gate < body.indexOf('invoiceOps.sendInvoice('));
+  assert.match(body, /invoiceOps\.sendInvoice\(\{ building: b, invoiceId: inv\.id, source: 'dashboard-send', actor: 'dashboard' \}\)/);
+  assert.match(body, /return \{ ok: true, delivered: r\.delivered, channel: r\.channel, status: r\.status, reason: r\.reason \|\| null \};/);
+  assert.match(src, /const invoiceOps = makeInvoiceOps\(\{ prisma, audit, notifyTenant, invoiceLinks, invoiceText, canMessage: b => !!b && NOTIFY_WHITELIST\.includes\(b\.qrSlug\)/);
 });
 
 test('only a whitelisted building that is not a demo may reach people, and every SMS carries the building label', () => {
@@ -44,9 +46,12 @@ test('only a whitelisted building that is not a demo may reach people, and every
 test('mark-paid refuses an invoice that is already paid before it writes, and sends the receipt through the layer', () => {
   const body = block("fastify.post('/api/admin/invoices/:id/pay'");
   const guard = body.indexOf("if (inv0.status === 'PAID') return reply.code(409)");
-  assert.ok(guard > 0 && guard < body.indexOf('prisma.invoice.update('));
-  assert.match(body, /notifyTenant\(bb, inv\.tenancy, \{ kind: 'receipt'/);
-  assert.match(body, /invoiceLinks\.linkFor\(inv\.id, 'receipt'\)/);
+  // The write, the audit row and the receipt are building/invoice-ops.js markPaid, which refuses an invoice that is
+  // already paid in the same statement that pays it (test/building/invoice-ops.test.js).
+  assert.ok(guard > 0 && guard < body.indexOf('invoiceOps.markPaid('));
+  assert.match(body, /invoiceOps\.markPaid\(\{ invoiceId: inv0\.id, method, actor: 'dashboard', source: 'receipt' \}\)/);
+  assert.match(body, /if \(r\.receipt\) r\.receipt\.catch\(/);
+  assert.equal(/prisma\.invoice\.update\(/.test(body), false, 'the route no longer writes the invoice itself');
 });
 
 test('/i/:token is rate limited before the lookup and never indexed or cached', () => {

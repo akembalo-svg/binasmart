@@ -2366,8 +2366,8 @@ fastify.get('/owner/:slug/report', async (req, reply) => {
 });
 
 // ===== AUDIT helper =====
-async function audit(buildingId, action, detail, amount){
-  try{ await prisma.auditLog.create({ data: { buildingId, action, detail: detail ? String(detail).slice(0, 200) : null, amount: amount != null ? Math.round(amount) : null } }); }catch(e){}
+async function audit(buildingId, action, detail, amount, actor){
+  try{ await prisma.auditLog.create({ data: { buildingId, action, actor: actor ? String(actor).slice(0, 60) : null, detail: detail ? String(detail).slice(0, 200) : null, amount: amount != null ? Math.round(amount) : null } }); }catch(e){}
 }
 
 // ===== ACCOUNTING: monthly VAT + P&L =====
@@ -2586,6 +2586,10 @@ const tenantSms = makeSmsFromEnv(process.env, { log: m => console.log(m), callba
 const delivery = makeDelivery({ store: makeDeliveryStore(prisma), sendTg, sms: tenantSms, botUsername: process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot',
   priceTiers: parsePriceTiers(process.env.SMS_PRICE_TIERS), log: m => console.error(m) });
 const invoiceLinks = makeInvoiceLinks({ prisma });
+// Mark-paid and invoice send, shared by the dashboard routes and Bini's confirmed owner actions (building/invoice-ops.js).
+const { makeInvoiceOps } = require('./building/invoice-ops');
+const invoiceOps = makeInvoiceOps({ prisma, audit, notifyTenant, invoiceLinks, invoiceText, canMessage: b => !!b && NOTIFY_WHITELIST.includes(b.qrSlug),
+  log: m => console.error(m) });
 console.log('[sms] mode ' + tenantSms.mode + ' · ' + (tenantSms.provider || 'no provider'));
 // Every SMS starts "BinaSmart · <building name>፦ " until approved sender names exist; smsSender null = provider default.
 function tenantBuilding(b){
@@ -2607,7 +2611,7 @@ async function notifyTenant(b, tenancy, { kind, source, actor, text, smsText, in
   const delivered = !!one && (one.status === 'sent' || one.status === 'delivered');
   // The owner reads this count in the daily report: test-mode SMS rows are never "not delivered"; a failed Telegram send is.
   if (isRealMiss({ real: tb.real, mode: tenantSms.mode }, one)) tenantMisses++;
-  return { delivered, status: one ? one.status : 'failed', channel: one ? one.channel : 'none', errorKind: one ? one.errorKind : (r ? r.error : 'error') };
+  return { delivered, status: one ? one.status : 'failed', channel: one ? one.channel : 'none', errorKind: one ? one.errorKind : (r ? r.error : 'error'), batchId: (r && r.batchId) || null };
 }
 async function alreadyAudited(buildingId, action, detailContains){
   const hit = await prisma.auditLog.findFirst({ where: { buildingId, action, detail: { contains: detailContains } } });
@@ -2948,14 +2952,9 @@ fastify.post('/api/owner/:slug/invoice/:id/send', async (req, reply) => {
     include: { tenancy: { include: { unit: true, shop: true, user: true } } } });
   if (!inv || inv.tenancy.unit.buildingId !== b.id) return reply.code(404).send({ error: 'not_found' });
   if (!NOTIFY_WHITELIST.includes(b.qrSlug)) return reply.code(403).send({ error: 'messaging_not_enabled_for_this_building' });
-  const total = inv.amount + (inv.lateFee || 0);
-  const link = await invoiceLinks.linkFor(inv.id, 'invoice');
-  const r = await notifyTenant(b, inv.tenancy, { kind: 'invoice', source: 'dashboard-send', actor: 'dashboard', invoiceId: inv.id,
-    text: invoiceText.invoiceMessage({ building: b, invoice: inv, tenancy: inv.tenancy, link }),
-    smsText: invoiceText.invoiceSms({ building: b, invoice: inv, tenancy: inv.tenancy, link }) });
-  await audit(b.id, 'INVOICE_SENT', (inv.tenancy.shop ? inv.tenancy.shop.name : '') + ' ' + inv.tenancy.unit.number
-    + (r.delivered ? ' (' + r.channel + ')' : r.status === 'test' ? ' (test mode — not sent)' : ' (delivery pending — ' + (r.errorKind || 'not delivered') + ')'), total);
-  return { ok: true, delivered: r.delivered, channel: r.channel, status: r.status, reason: r.errorKind || null };
+  const r = await invoiceOps.sendInvoice({ building: b, invoiceId: inv.id, source: 'dashboard-send', actor: 'dashboard' });
+  if (!r.ok) return reply.code(404).send({ error: 'not_found' });
+  return { ok: true, delivered: r.delivered, channel: r.channel, status: r.status, reason: r.reason || null };
 });
 
 // ===== Invoices that did not reach the tenant (design §1.6) =====
@@ -3129,24 +3128,12 @@ fastify.post('/api/admin/invoices/:id/pay', async (req, reply) => {
   // A second tap re-stamped the payment and sent the tenant a second receipt; now it changes nothing.
   if (inv0.status === 'PAID') return reply.code(409).send({ error: 'already_paid' });
   const { method } = req.body || {};
-  const inv = await prisma.invoice.update({
-    where: { id: req.params.id },
-    data: { status: 'PAID', paidDate: new Date(), method: method || 'CASH' },
-    include: { tenancy: { include: { unit: true, shop: true, user: true } } }
-  });
-  await audit(inv.tenancy.unit.buildingId, 'INVOICE_PAID', (inv.tenancy.shop ? inv.tenancy.shop.name : 'Unit') + ' ' + inv.tenancy.unit.number + ' via ' + (method || 'CASH'), inv.amount);
-  // e-receipt to the tenant, under the building's name — not awaited by the dashboard
-  try{
-    const bb = await prisma.building.findUnique({ where: { id: inv.tenancy.unit.buildingId } });
-    if (NOTIFY_WHITELIST.includes(bb.qrSlug) && inv.tenancy.user) {
-      const link = await invoiceLinks.linkFor(inv.id, 'receipt');
-      notifyTenant(bb, inv.tenancy, { kind: 'receipt', source: 'receipt', actor: 'dashboard', invoiceId: inv.id,
-        text: invoiceText.receiptMessage({ building: bb, invoice: inv, tenancy: inv.tenancy, method: method || 'CASH', paidAt: inv.paidDate, link }),
-        smsText: invoiceText.receiptSms({ building: bb, invoice: inv, tenancy: inv.tenancy, link }) })
-        .catch(e => console.error('[receipt] error: ' + errorKindOf(e)));
-    }
-  }catch(e){ console.error('[receipt] error: ' + errorKindOf(e)); }
-  return { ok: true, invoice: inv.id };
+  // building/invoice-ops.js: PAID only if still unpaid (one statement), the INVOICE_PAID audit, and the e-receipt for a
+  // building in NOTIFY_WHITELIST — not awaited by the dashboard.
+  const r = await invoiceOps.markPaid({ invoiceId: inv0.id, method, actor: 'dashboard', source: 'receipt' });
+  if (!r.ok) return reply.code(r.error === 'already_paid' ? 409 : 404).send({ error: r.error === 'already_paid' ? 'already_paid' : 'not found' });
+  if (r.receipt) r.receipt.catch(e => console.error('[receipt] error: ' + errorKindOf(e)));
+  return { ok: true, invoice: r.invoice.id };
 });
 
 // ===== OWNER: full overview =====
