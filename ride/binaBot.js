@@ -14,7 +14,7 @@ const MENU = [
 const COMMANDS = { cinema: '/cinema', watch: '/watch', films: '/watch', ride: '/ride', hotels: '/hotel/bina-grand-hotel', restaurants: '/restaurant/bina-restaurant', hospitals: '/hospital/bina-general-hospital', events: '/cinema', property: '/property', cars: '/cars', insurance: '/insurance', guides: '/guides', ai: '/ai' };
 const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 
-function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey, owner }) {
+function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey, owner, tenant }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
   const hist = new Map(); // chatId -> { turns: [{role, content}], t }
   const menuMarkup = () => ({ inline_keyboard: MENU.map(row => row.map(b => ({ text: b.text, web_app: { url: baseUrl + b.path } }))) });
@@ -57,6 +57,57 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     if (t == null) return false;
     pendingLink.delete(k);
     return clock() - t <= PENDING_MS;
+  }
+
+  // ---- Tenant notices (messaging design §2). tenant = messaging/tenant-link.js from server.js; absent = off. ----
+  // The building poster opens t.me/bina_smart_bot?start=tenant_<slug>. A shared contact is a tenant link attempt only
+  // within ten minutes of that command, and whichever start command came last (owner or tenant) decides.
+  const TENANT_START = '🏢 የኪራይ መልእክቶች በቴሌግራም · Rent notices on Telegram\n\nበህንፃው የተመዘገበውን ስልክ ቁጥርዎን ለማረጋገጥ ከታች «📱 ስልኬን አጋራ»ን ይጫኑ።\nTap "📱 Share my phone" below. Telegram confirms the number is yours, and we match it to your tenancy.';
+  const TENANT_NO_MATCH = 'ይህን ቁጥር ከህንፃው የተከራይ መዝገብ ጋር ማገናኘት አልተቻለም። ቁጥርዎ ከተቀየረ የህንፃውን አስተዳደር ያነጋግሩ። · We could not connect this number to the building\'s tenant records. If your number has changed, please ask the building management.';
+  // expired: the link service found the start too old (it checks the window again). Still neutral, plus what to do.
+  const TENANT_REFUSAL = { too_many: REFUSAL.too_many, not_own_contact: REFUSAL.not_own_contact, not_private: REFUSAL.not_private,
+    expired: TENANT_NO_MATCH + '\n\nእባክዎ የህንፃውን QR እንደገና ይቃኙ ወይም ሊንኩን እንደገና ይጫኑ። · Please scan the building\'s QR code or press the start link again.' };
+  const pendingTenant = new Map();   // String(from.id) -> { t: clock() when /start tenant_ was sent, slug }
+
+  async function linkTenant(chatId, msg, slug, startedAt) {
+    let r;
+    try {
+      // startedAt is required by messaging/tenant-link.js: without it the answer is 'expired', never a link.
+      r = await tenant.linkFromContact({ slug, chat: msg.chat, from: msg.from, contact: msg.contact, startedAt,
+        forwarded: !!(msg.forward_origin || msg.forward_from || msg.forward_date || msg.via_bot) });
+    } catch (e) {
+      console.error('[binaBot] tenant link: ' + e.message);
+      return api.sendMessage(chatId, 'ይቅርታ፣ አሁን ማገናኘት አልተቻለም። · Sorry, linking failed just now.', { reply_markup: NO_KB });
+    }
+    if (r && r.ok) return api.sendMessage(chatId, '✅ ተገናኝቷል · Linked — ክፍል · unit ' + r.units.join(', ')
+      + '\n\nየህንፃዎ የክፍያ መጠየቂያዎች፣ ደረሰኞችና ማሳሰቢያዎች ከአሁን በኋላ እዚህ ይደርሱዎታል። ለማቆም /stop ይጻፉ።\nInvoices, receipts and notices from your building will arrive here. Send /stop to stop.', { reply_markup: NO_KB });
+    return api.sendMessage(chatId, TENANT_REFUSAL[r && r.reason] || TENANT_NO_MATCH, { reply_markup: NO_KB });
+  }
+
+  async function handleTenantCommand(chatId, msg, text) {
+    const start = /^\/start\s+tenant_([A-Za-z0-9-]{1,60})(?:\s|$)/.exec(text);
+    if (start) {
+      const k = String(msg.from.id), t = clock();
+      pendingLink.delete(k);
+      pendingTenant.set(k, { t, slug: start[1] });
+      if (pendingTenant.size > 5000) for (const [key, v] of pendingTenant) if (t - v.t > PENDING_MS) pendingTenant.delete(key);
+      return api.sendMessage(chatId, TENANT_START, { reply_markup: SHARE_KB });
+    }
+    if (msg.contact) {
+      const k = String(msg.from.id), p = pendingTenant.get(k);
+      if (!p) return PASS;
+      pendingTenant.delete(k);
+      return clock() - p.t <= PENDING_MS ? linkTenant(chatId, msg, p.slug, p.t) : PASS;
+    }
+    if (/^\/stop\b/.test(text)) {
+      pendingTenant.delete(String(msg.from.id));
+      const n = await tenant.unlink(msg.from.id).catch(e => { console.error('[binaBot] tenant unlink: ' + e.message); return FAILED; });
+      if (n === FAILED) return api.sendMessage(chatId, SORRY, { reply_markup: NO_KB });
+      return api.sendMessage(chatId, n
+        ? 'የህንፃ መልእክቶች ቆመዋል። እንደገና ለመጀመር የህንፃውን QR ይቃኙ። · Building notices stopped. Scan your building\'s QR code to start again.'
+        : 'እዚህ የህንፃ መልእክቶችን አይቀበሉም ነበር። · You were not receiving building notices here.', { reply_markup: NO_KB });
+    }
+    return PASS;
   }
 
   // Owner answers keep their slashes: "/bini", "ETB 12,000 /month" and "Units 101 /102" are not bina.et paths.
@@ -124,6 +175,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     // t.me/bina_smart_bot?start=owner or ?start=owner_<building> (e.g. owner_darulle, a link Ibrahim sends one owner).
     // The suffix only makes the link recognisable; access is still decided by the approved phone number alone.
     if (/^\/start\s+owner(?:_[A-Za-z0-9-]{1,40})?(?:\s|$)/.test(text)) {
+      pendingTenant.delete(String(msg.from.id));   // the newest start command decides what a contact means
       markPending(msg.from.id);
       return api.sendMessage(chatId, OWNER_START, { reply_markup: SHARE_KB });
     }
@@ -251,6 +303,12 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     if (!msg || !msg.chat) return;
     const chatId = String(msg.chat.id);
     const text = String(msg.text || '').trim();
+    // Tenant notices: /start tenant_<slug>, the shared contact, /stop — private chats only, and only when server.js
+    // passes the tenant link service.
+    if (tenant && isPrivate(msg) && msg.from) {
+      const handled = await handleTenantCommand(chatId, msg, text);
+      if (handled !== PASS) return handled;
+    }
     // Bini for owners: /start owner, the shared contact, /logout, /bini, /owner — private chats only, and only
     // when server.js passes the owner service.
     if (owner && isPrivate(msg) && msg.from) {
