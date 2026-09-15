@@ -769,7 +769,13 @@ async function payWith(method){
     body: JSON.stringify({ method })
   });
   document.getElementById('pay-modal').classList.remove('open');
-  if ((await r.json()).ok) load();
+  const d = await r.json().catch(() => ({}));
+  if (d.ok) { load(); return; }
+  // A second tap or a stale list: the server refuses a second payment and sends no second receipt. Say so, show the list as it is.
+  if (r.status === 409 && d.error === 'already_paid') {
+    alert('ℹ️ This invoice is already marked paid — nothing changed and no second receipt was sent. / ይህ የክፍያ መጠየቂያ ቀድሞ እንደተከፈለ ተመዝግቧል፤ ምንም አልተቀየረም።');
+    DATA = null; load();
+  }
 }
 
 load();

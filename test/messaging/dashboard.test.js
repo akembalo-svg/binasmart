@@ -46,6 +46,15 @@ test('Invoices lists what did not reach tenants with Send now, and Send tells se
   assert.doesNotMatch(send, /WhatsApp/);
 });
 
+test('mark-paid refused as already paid says so in English and Amharic and reloads the list', () => {
+  const pay = fn('payWith');
+  assert.match(pay, /r\.status === 409 && d\.error === 'already_paid'/);
+  assert.match(pay, /already marked paid/);
+  assert.match(pay, /ቀድሞ/);
+  assert.match(pay, /DATA = null; load\(\);/);
+  assert.match(pay, /if \(d\.ok\) \{ load\(\); return; \}/);
+});
+
 test('Send says Telegram failed when that is the reason, before the test-mode note', () => {
   const send = fn('sendInvoice');
   assert.match(send, /r\.reason === 'tg_failed'/);
