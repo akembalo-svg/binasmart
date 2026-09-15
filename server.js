@@ -6,7 +6,8 @@ const fastify = require('fastify')({ logger: false, ignoreTrailingSlash: true })
 fastify.addHook('onSend', async (req, reply, payload) => {
   reply.header('Strict-Transport-Security', 'max-age=15768000');
   reply.header('X-Content-Type-Options', 'nosniff');
-  reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
+  // A route that chose its own Referrer-Policy keeps it (/i/:token and the tenant poster send no-referrer).
+  if (!reply.hasHeader('Referrer-Policy')) reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
   const full = String(req.raw.url || ''), u = full.split('?')[0];
   if (reply.statusCode < 400) {
     if (u === '/sw.js' || u === '/offline') reply.header('Cache-Control', 'no-cache'); // the service worker must always be re-checked
@@ -2514,8 +2515,9 @@ fastify.post('/api/owner/:slug/tenant-telegram/:tenancyId/remove', async (req, r
   if (!(await tenantLink.removeForBuilding(b.id, t.id))) return reply.code(404).send({ error: 'not_linked' });
   return { ok: true };
 });
-// Printable A4 page behind the building's owner key, like the owner reports (a document navigation, so the dashboard
-// opens it with ?key= or the owner session). It shows only the building name and the bot link; the QR is drawn here
+// Printable A4 page behind the building's owner key or the owner session. The dashboard fetches it with the key in the
+// x-owner-key header and writes it into a new window, so the key never sits in an address or the access log.
+// It shows only the building name and the bot link; the QR is drawn here
 // by the qrcode package, no outside QR service.
 fastify.get('/tenant-poster/:slug', async (req, reply) => {
   const slug = String(req.params.slug || '');
@@ -2524,7 +2526,7 @@ fastify.get('/tenant-poster/:slug', async (req, reply) => {
   const b = await prisma.building.findUnique({ where: { qrSlug: slug }, select: { name: true, nameAm: true, qrSlug: true } });
   if (!b) return reply.code(404).type('text/html; charset=utf-8').send(slugMiss('ህንፃ · Building', '/'));
   const qrSvg = await QRCode.toString(tenantStartUrl(b.qrSlug), { type: 'svg', margin: 1, errorCorrectionLevel: 'M' });
-  return reply.header('X-Robots-Tag', 'noindex, nofollow').header('Cache-Control', 'no-store')
+  return reply.header('X-Robots-Tag', 'noindex, nofollow').header('Cache-Control', 'no-store').header('Referrer-Policy', 'no-referrer')
     .type('text/html; charset=utf-8').send(tenantPoster({ building: b, startUrl: tenantStartUrl(b.qrSlug), qrSvg }));
 });
 

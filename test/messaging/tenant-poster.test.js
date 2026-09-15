@@ -8,8 +8,8 @@ test('the A4 poster carries the QR, the start link, Amharic and English, /stop, 
   for (const s of ['<svg id="qr"></svg>', 'https://t.me/bina_smart_bot?start=tenant_demo-tower', 'Get your rent notices on Telegram', 'የኪራይ መልእክቶችዎን በቴሌግራም ያግኙ', '/stop', 'ዴሞ ታወር · Demo Tower', '@page{size:A4'])
     assert.ok(html.includes(s), s);
   assert.match(html, /<meta name="robots" content="noindex,nofollow">/);
-  // The dashboard may open it with ?key=; the page must not pass that address on as a Referer (the onSend hook in
-  // server.js overwrites any Referrer-Policy header, so the page says it itself).
+  // The page must not pass its address on as a Referer. The route also sends the header, but the dashboard writes the
+  // fetched page into a new window, where only this meta tag applies.
   assert.match(html, /<meta name="referrer" content="no-referrer">/);
 });
 

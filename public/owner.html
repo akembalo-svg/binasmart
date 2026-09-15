@@ -318,6 +318,7 @@ function renderTab(){
     <div class="card p-4"><div class="flex items-center justify-between">
       <div class="font-black text-sm">🧾 ${new Date().toLocaleString('en',{month:'long'})} — ${d.collection.paidCount}/${d.collection.invoiceCount} paid</div>
       <button class="mbtn" style="background:#0aa88f;color:#fff" onclick="genInvoices()">⚡ Generate month invoices</button></div></div>
+    <div id="pending-deliv"></div>
     ${unpaid.length ? `<div class="card p-4"><div class="font-black text-sm mb-2 text-red-500">⏰ Unpaid (${unpaid.length})</div>
       <div class="space-y-2">${unpaid.map(i => `
       <div class="rounded-xl p-2.5 flex items-center gap-2" style="background:#fef2f2;border:1px solid #fecaca">
@@ -334,6 +335,7 @@ function renderTab(){
         <span class="text-slate-400">${esc(i.method || '')}</span>
         <span class="font-black text-emerald-600">${fmtETB(i.amount)}</span>
         <button onclick="unpayInvoice('${i.id}','${jsq(i.shop?.name || 'Unit')} ${jsq(i.unit)}')" class="tag bg-slate-200 text-slate-500">↩️</button></div>`).join('')}</div></div>` : ''}`;
+    loadPending();
   }
 
   if (TAB === 'acct'){
@@ -485,6 +487,7 @@ function renderTab(){
         <span class="text-slate-600">${esc(a.bank)}</span><span class="font-black">${esc(a.account)}</span></div>`).join('')}
       ${d.tinNumber ? `<div class="flex justify-between text-[11px] py-1"><span class="text-slate-600">TIN</span><span class="font-black">${esc(d.tinNumber)}</span></div>` : ''}</div>
     <div id="tg-links" class="card p-4"><div class="text-[11px] text-slate-400">✈️ Bini on Telegram…</div></div>
+    <div id="tenant-tg" class="card p-4"><div class="text-[11px] text-slate-400">📨 Tenant notices on Telegram…</div></div>
     <div class="card p-4 space-y-2">
       <div class="font-black text-sm mb-1">🔗 Links</div>
       <a class="mbtn w-full block text-center" style="background:#d7f2ec;color:#068f79;padding:10px" href="/b/${esc(slug)}" target="_blank">🏢 Public building page</a>
@@ -497,6 +500,7 @@ function renderTab(){
     </div>
     <div class="text-center text-[10px] text-slate-400">Support: <a class="font-bold text-violet" href="https://wa.me/251911244344">WhatsApp +251 911 244 344</a></div>`;
     loadTgLinks();
+    loadTenantTg();
   }
 }
 
@@ -591,6 +595,60 @@ async function removeTgLink(id){
   await kfetch('/api/owner/' + slug + '/telegram-links/' + encodeURIComponent(id) + '/remove', { method: 'POST' });
   loadTgLinks();
 }
+// Tenant notices on Telegram (messaging design §2): how many tenants linked, the printable poster and link, and Remove.
+async function loadTenantTg(){
+  const box = document.getElementById('tenant-tg'); if (!box) return;
+  try {
+    const r = await kfetch('/api/owner/' + slug + '/tenant-telegram'); if (!r.ok) { box.innerHTML = ''; return; }
+    const d = await r.json();
+    const rows = (d.units || []).map(function (u) {
+      return '<div class="flex justify-between items-center text-[11px] py-1 border-b" style="border-color:#e9f0ee"><span>ክፍል · Unit ' + esc(u.unit)
+        + '</span><button class="mbtn" style="background:#fee2e2;color:#dc2626" onclick="removeTenantTg(\'' + jsq(u.tenancyId) + '\',\'' + jsq(u.unit) + '\')">Remove</button></div>';
+    }).join('');
+    box.innerHTML = '<div class="font-black text-sm mb-1">📨 Tenant notices on Telegram · የተከራይ መልእክቶች በቴሌግራም</div>'
+      + '<div class="text-[11px] mb-2" style="color:#475569"><b>' + esc(d.linked) + ' / ' + esc(d.active) + '</b> tenants linked · ተከራዮች ተገናኝተዋል</div>'
+      + '<button class="mbtn w-full" style="background:#e0f2fe;color:#0369a1;padding:10px" onclick="openTenantPoster(\'' + jsq(d.poster) + '\')">🖨️ Print the tenant poster (A4) · ፖስተር አትም</button>'
+      + '<div class="text-[10px] text-slate-400 mt-1" style="word-break:break-all">' + esc(d.startLink) + '</div>'
+      + (rows ? '<div class="mt-2">' + rows + '</div>' : '');
+  } catch (e) { box.innerHTML = ''; }
+}
+async function removeTenantTg(id, unit){
+  if (!confirm('Stop Telegram notices for unit ' + unit + '? The tenant can link again from the poster.')) return;
+  await kfetch('/api/owner/' + slug + '/tenant-telegram/' + encodeURIComponent(id) + '/remove', { method: 'POST' });
+  loadTenantTg();
+}
+// The poster route needs the owner key, and a ?key= link would write it to the server's access log. So the page is
+// fetched with the key in the header, like every other owner call, and written into a window opened on the click itself
+// (before any await, so a popup blocker lets it through).
+async function openTenantPoster(posterPath){
+  if (!/^\/tenant-poster\/[A-Za-z0-9-]{1,60}$/.test(String(posterPath))) return;
+  const w = window.open('', '_blank');
+  if (!w) { alert('Allow pop-ups for this page to print the poster. / ፖስተሩን ለማተም ፖፕ-አፕ ይፍቀዱ'); return; }
+  try { w.opener = null; } catch (e) {}
+  w.document.write('<p style="font-family:sans-serif;padding:24px">Loading the poster… · በመጫን ላይ…</p>'); w.document.close();
+  try {
+    const r = await kfetch(posterPath);
+    if (!r.ok) { w.close(); alert('❌ Could not open the poster (' + r.status + '). / ፖስተሩ አልተከፈተም'); return; }
+    const html = await r.text();
+    w.document.open(); w.document.write(html); w.document.close();
+  } catch (e) { w.close(); alert('❌ Could not open the poster. Try again. / ፖስተሩ አልተከፈተም'); }
+}
+// Invoices whose send did not reach the tenant (messaging design §1.6). Send now uses the invoice as it is today.
+async function loadPending(){
+  const box = document.getElementById('pending-deliv'); if (!box) return;
+  try {
+    const r = await kfetch('/api/owner/' + slug + '/pending-deliveries'); if (!r.ok) { box.innerHTML = ''; return; }
+    const d = await r.json();
+    if (!d.invoices || !d.invoices.length) { box.innerHTML = ''; return; }
+    box.innerHTML = '<div class="card p-4"><div class="font-black text-sm mb-1 text-amber-700">📭 Waiting to be delivered · ያልደረሱ (' + d.invoices.length + ')</div>'
+      + '<div class="text-[10px] text-slate-500 mb-2">Sent before, but they did not reach the tenant. Send now uses the invoice as it is today. · አሁን ያለውን መረጃ ይልካል።</div>'
+      + d.invoices.map(function (i) {
+        return '<div class="flex items-center gap-2 text-[11px] py-1.5 border-b" style="border-color:#e9f0ee"><span class="flex-1"><b>' + esc(i.unit) + '</b> · ' + esc(i.type)
+          + ' · ' + fmtETB(i.amount) + ' · due ' + esc(i.dueDate) + '<br><span class="text-[9px] text-slate-400">last try ' + esc(i.lastTry) + ' · ' + esc(i.reason) + '</span></span>'
+          + '<button class="tag" style="background:#0088cc;color:#fff" onclick="sendInvoice(\'' + jsq(i.id) + '\',\'' + jsq(i.unit) + '\')">📤 Send now</button></div>';
+      }).join('') + '</div>';
+  } catch (e) { box.innerHTML = ''; }
+}
 async function vatSettings(){
   const reg = confirm('Is this building VAT-registered? OK = Yes, Cancel = No');
   let no = null;
@@ -660,9 +718,13 @@ async function unpayInvoice(id, label){
   if (r.ok) { alert('✅ Reverted to ' + r.status); DATA = null; load(); } else alert('❌ ' + r.error);
 }
 async function sendInvoice(id, unit){
-  if (!confirm('📤 Send this invoice to the tenant of ' + unit + ' by WhatsApp/Telegram? / ደረሰኙን ለተከራዩ ይላክ?')) return;
+  if (!confirm('📤 Send this invoice to the tenant of ' + unit + ' by Telegram (or SMS once it is switched on)? / ደረሰኙን ለተከራዩ ይላክ?')) return;
   const r = await (await kfetch('/api/owner/' + slug + '/invoice/' + id + '/send', { method: 'POST' })).json();
-  alert(r.ok ? (r.delivered ? '✅ Sent to tenant / ተልኳል' : '⚠️ Message channel is offline right now — NOT delivered. Press Send again later. / ቻናሉ ጠፍቷል — አልደረሰም፣ በኋላ እንደገና ይላኩ') : '❌ ' + r.error);
+  if (!r.ok) { alert('❌ ' + r.error); return; }
+  alert(r.delivered ? '✅ Sent by ' + (r.channel === 'sms' ? 'SMS' : 'Telegram') + ' / ተልኳል'
+    : r.status === 'test' ? '🧪 Test mode — recorded only, NOT delivered: the tenant did not receive it (SMS is not switched on yet). It stays under "Waiting to be delivered". / የሙከራ ሁኔታ — ተመዝግቧል፣ ለተከራዩ አልደረሰም'
+    : '⚠️ NOT delivered (' + (r.reason || 'not reachable') + '): the tenant did not receive it. There is no working Telegram link for this tenant and SMS is not switched on yet. It stays under "Waiting to be delivered". / አልደረሰም');
+  loadPending();
 }
 async function genInvoices(){
   if (!confirm('Generate this month\'s invoices for all occupied units?')) return;
