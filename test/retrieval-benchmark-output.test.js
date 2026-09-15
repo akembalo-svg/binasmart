@@ -9,7 +9,39 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { resultName, writeResult, goldPath, goldTag, latestName, pagesContaining, GOLD,
-  normalizeGold, goldKeys, pageRank, searchOptionsFor } = require('../ops/bini/rerun-retrieval-benchmark');
+  normalizeGold, goldKeys, pageRank, searchOptionsFor, forceFailMode, runTag, knowledgeOptions } = require('../ops/bini/rerun-retrieval-benchmark');
+
+// Forced embedder failure (2026-09-15): a test-only flag of this script, for measuring the BGE-M3 fallback and
+// keyword-only search. Without the flag the options are exactly what they were.
+test('--force-embed-fail: off by default, gemini or all, anything else refused', () => {
+  assert.equal(forceFailMode(['node', 'x']), '');
+  assert.equal(forceFailMode(['node', 'x', '--force-embed-fail', 'gemini']), 'gemini');
+  assert.equal(forceFailMode(['node', 'x', '--force-embed-fail', 'all']), 'all');
+  assert.throws(() => forceFailMode(['node', 'x', '--force-embed-fail']), /gemini or all/);
+  assert.throws(() => forceFailMode(['node', 'x', '--force-embed-fail', 'yes']), /gemini or all/);
+});
+
+test('a forced run gets its own file tag, so it can never be mistaken for a normal run', () => {
+  assert.equal(runTag('', ''), '');
+  assert.equal(runTag('gold-v3-agents', ''), 'gold-v3-agents');
+  assert.equal(runTag('gold-v3-agents', 'gemini'), 'gold-v3-agents-forced-gemini-fail');
+  assert.equal(runTag('gold-v3-agents', 'all'), 'gold-v3-agents-forced-keyword-only');
+  assert.equal(runTag('', 'gemini'), 'forced-gemini-fail');
+});
+
+test('knowledgeOptions: normal run passes only prisma and the key; forced runs fail only the query embedding', async () => {
+  const prisma = {};
+  assert.deepEqual(knowledgeOptions('', { prisma, apiKey: 'k' }), { prisma, apiKey: 'k' });
+  const seen = [];
+  const g = knowledgeOptions('gemini', { prisma, apiKey: 'k', fetchImpl: async url => { seen.push(url); return { ok: true }; } });
+  await assert.rejects(g.fetchImpl('https://x/models/gemini-embedding-001:embedContent?key=k', {}), /forced/);
+  await g.fetchImpl('https://x/models/gemini-embedding-001:batchEmbedContents?key=k', {});
+  assert.deepEqual(seen, ['https://x/models/gemini-embedding-001:batchEmbedContents?key=k']);
+  assert.equal(g.localEmbedder, undefined, 'the real bina-embed answers in the gemini mode');
+  assert.equal(g.localFallback, true);
+  const all = knowledgeOptions('all', { prisma, apiKey: 'k' });
+  await assert.rejects(all.localEmbedder.query('q'), /forced/);
+});
 
 test('the file name carries the UTC date and time to the second', () => {
   assert.equal(resultName(new Date('2026-09-13T22:09:55.990Z')), 'retrieval-20260913-220955.json');

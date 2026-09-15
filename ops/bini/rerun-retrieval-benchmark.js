@@ -61,6 +61,33 @@ function goldTag(p) {
 }
 const latestName = (tag = '') => 'retrieval-' + (tag ? tag + '-' : '') + 'latest.json';
 
+// TEST-ONLY outage simulation (2026-09-15), for measuring the fallbacks of knowledge/index.js search():
+//   --force-embed-fail gemini   the Gemini QUERY embedding throws, so search falls back to BGE-M3 via bina-embed
+//   --force-embed-fail all      bina-embed throws as well, so search is keyword-only
+// Injected into this script's own makeKnowledge only — never a production setting. The reranker is not touched
+// (it has its own fail-open path). A forced run writes under its own tag and never replaces a *-latest.json.
+function forceFailMode(argv = process.argv) {
+  const i = argv.indexOf('--force-embed-fail');
+  if (i === -1) return '';
+  const m = argv[i + 1];
+  if (m !== 'gemini' && m !== 'all') throw new Error('--force-embed-fail takes gemini or all');
+  return m;
+}
+function runTag(tag, mode) {
+  if (!mode) return tag;
+  return (tag ? tag + '-' : '') + (mode === 'all' ? 'forced-keyword-only' : 'forced-gemini-fail');
+}
+// The makeKnowledge options for a mode. fetchImpl only fails the single-query endpoint (:embedContent), so nothing
+// else this script could reach changes.
+function knowledgeOptions(mode, { prisma, apiKey, fetchImpl = (...a) => fetch(...a) }) {
+  const o = { prisma, apiKey };
+  if (!mode) return o;
+  o.fetchImpl = async (url, init) => { if (/:embedContent\?/.test(String(url))) throw new Error('forced: gemini query embedding down'); return fetchImpl(url, init); };
+  o.localFallback = true;
+  if (mode === 'all') o.localEmbedder = { query: async () => { throw new Error('forced: bina-embed down'); }, documents: async () => { throw new Error('forced: bina-embed down'); } };
+  return o;
+}
+
 // retrieval-20260913-220955.json — UTC, to the second. With a tag: retrieval-gold-v2-20260914-101500.json.
 function resultName(at = new Date(), tag = '') {
   const s = at.toISOString();
@@ -128,13 +155,16 @@ async function main() {
   const { makeKnowledge, contextSearchOptions } = require('/var/www/connectcare/binasmart/knowledge');
   const limit = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : 0;
   const prisma = new PrismaClient();
-  const k = makeKnowledge({ prisma, apiKey: process.env.GEMINI_API_KEY });
+  const mode = forceFailMode();
+  const k = makeKnowledge(knowledgeOptions(mode, { prisma, apiKey: process.env.GEMINI_API_KEY }));
+  if (mode) console.log('TEST-ONLY: --force-embed-fail ' + mode + (mode === 'all' ? ' (Gemini query embed and bina-embed both fail: keyword-only)' : ' (Gemini query embed fails: BGE-M3 fallback)'));
   await k.load();
   const health = k.health();
-  console.log('corpus: ' + health.chunks + ' chunks, ' + health.embedded + ' embedded, gemini=' + health.gemini);
+  console.log('corpus: ' + health.chunks + ' chunks, ' + health.embedded + ' embedded, gemini=' + health.gemini
+    + ', local vectors ' + health.embeddedLocal + (health.localFallback ? '' : ' (fallback off)'));
 
   const goldFile = goldPath();
-  const tag = goldTag(goldFile);
+  const tag = runTag(goldTag(goldFile), mode);
   const norm = normalizeGold(JSON.parse(fs.readFileSync(goldFile, 'utf8')));
   let gold = norm.questions;
   if (limit) gold = gold.slice(0, limit);
@@ -233,12 +263,17 @@ async function main() {
 
   const at = new Date();
   const LATEST = latestName(tag);
-  const f = writeResult(OUT, { at: at.toISOString(), gold: goldFile, chunks: health.chunks, limit: limit || null, table, rows }, at, { latest: !limit, tag });
-  console.log('\n  written: ' + f + (limit ? '  (--limit run: ' + LATEST + ' left alone)' : '  (and ' + LATEST + ')'));
+  // which query embedder each search actually used (embedOk = Gemini, localUsed = BGE-M3, keywordOnly = neither)
+  const hs = k.health();
+  const embedPaths = { embedOk: hs.embedOk, embedErr: hs.embedErr, localOk: hs.localOk, localErr: hs.localErr, localUsed: hs.localUsed, keywordOnly: hs.keywordOnly,
+    rerankOk: hs.rerankOk, rerankErr: hs.rerankErr, rerankSkipped: hs.rerankSkipped };
+  console.log('\n  query embed paths: ' + JSON.stringify(embedPaths));
+  const f = writeResult(OUT, { at: at.toISOString(), gold: goldFile, chunks: health.chunks, limit: limit || null, ...(mode ? { forceEmbedFail: mode } : {}), embedPaths, table, rows }, at, { latest: !limit && !mode, tag });
+  console.log('\n  written: ' + f + (mode ? '  (forced-failure run: no latest file)' : limit ?'  (--limit run: ' + LATEST + ' left alone)' : '  (and ' + LATEST + ')'));
   await prisma.$disconnect();
 }
 
-module.exports = { resultName, writeResult, goldPath, goldTag, latestName, normText, pagesContaining, GOLD,
+module.exports = { resultName, writeResult, goldPath, goldTag, latestName, normText, pagesContaining, GOLD, forceFailMode, runTag, knowledgeOptions,
   normalizeGold, goldKeys, pageRank, searchOptionsFor };
 
 // Only when run as a script: requiring it (the tests do) must not open the DB or spend Gemini calls.

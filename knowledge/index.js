@@ -2,7 +2,8 @@
 // BinaSmart knowledge index (RAG). Sources: the binasmart-system skill, the Addis Ababa notes, the guide
 // and service pages in public/, llms.txt, the MCP docs and BinaSmart's own published news (NewsPost). Chunks are stored in Postgres (KnowledgeChunk)
 // with a Gemini embedding; the whole matrix lives in RAM and search is a cosine scan plus a keyword score,
-// so a Gemini outage degrades to keyword search instead of going dark. Everything is injectable for tests.
+// so a Gemini outage degrades to our own BGE-M3 vectors (bina-embed, see below) and, if that is down too, to keyword
+// search instead of going dark. Everything is injectable for tests.
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -265,6 +266,43 @@ function makeEmbedder({ apiKey, fetchImpl, sleep }) {
   return { batch, query };
 }
 
+// ---------- own model (BGE-M3 on this server) ----------
+// bina-embed (pm2, FastAPI on 127.0.0.1:3031): POST /embed {texts, kind} -> {model, dim, vectors}, 1024-d, L2-normalised.
+// It is the FALLBACK query embedder: search uses it only when the Gemini query embedding throws or times out, and
+// then ranks with KnowledgeChunk.embeddingLocal instead of .embedding. Never mix the two: a Gemini query vector is
+// only ever compared with Gemini chunk vectors, a BGE query vector only with BGE chunk vectors.
+// Measured on gold v3 (2026-09-14): Page@3 96.4% Gemini, 85.6% BGE-M3, 59.5% keyword-only.
+// KNOWLEDGE_LOCAL_FALLBACK=0 turns every use of :3031 off (search fallback and the ingest's local embedding).
+const LOCAL_DIMS = 1024;
+const LOCAL_URL = 'http://127.0.0.1:3031/embed';
+const LOCAL_QUERY_TIMEOUT_MS = 3000;
+// The server's CPU is shared with ~40 apps and the host throttles on sustained load (0.41 chunks/s, steal up to 19%):
+// the ingest embeds at most 10 chunks per call, pauses between calls, and stops at 300 chunks per run. Anything
+// left over stays pending for the next run (still found by Gemini and by keywords) or for the laptop path
+// (ops/knowledge/local-embed-export.js -> embed on the laptop -> ops/knowledge/local-embed-import.js).
+const LOCAL_BATCH = 10, LOCAL_PAUSE_MS = 3000, LOCAL_MAX_PER_RUN = 300, LOCAL_DOC_TIMEOUT_MS = 120000;
+
+function makeLocalEmbedder({ fetchImpl, url } = {}) {
+  const f = fetchImpl || fetch;
+  async function embed(texts, kind, timeoutMs) {
+    const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), timeoutMs);
+    try {
+      // text[:4000] is what bina-embed itself truncates to and what the laptop vectors were computed from
+      const r = await f(url || LOCAL_URL, { method: 'POST', signal: ctrl.signal, headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ texts: texts.map(s => String(s).slice(0, 4000)), kind }) });
+      if (r.status !== 200) throw new Error('bina-embed ' + r.status);
+      const v = (await r.json() || {}).vectors;
+      if (!Array.isArray(v) || v.length !== texts.length || v.some(x => !Array.isArray(x) || x.length !== LOCAL_DIMS)) throw new Error('bina-embed: unexpected response');
+      return v;
+    } finally { clearTimeout(t); }
+  }
+  return {
+    query: async (q, timeoutMs) => (await embed([q], 'query', timeoutMs || LOCAL_QUERY_TIMEOUT_MS))[0],
+    documents: (texts, timeoutMs) => embed(texts, 'document', timeoutMs || LOCAL_DOC_TIMEOUT_MS),
+  };
+}
+function localFallbackEnabled(env = process.env) { return String(env.KNOWLEDGE_LOCAL_FALLBACK ?? '1').trim() !== '0'; }
+
 function toBuf(vec) { const f = Float32Array.from(vec); let n = 0; for (const v of f) n += v * v; n = Math.sqrt(n) || 1; for (let i = 0; i < f.length; i++) f[i] /= n; return Buffer.from(f.buffer); }
 function fromBuf(buf) { return new Float32Array(buf.buffer, buf.byteOffset, buf.byteLength / 4); }
 
@@ -319,24 +357,96 @@ function contextSearchOptions({ k = 6, prefer, exclude } = {}) {
 }
 
 // ---------- the index ----------
-function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
+// localEmbedder: { query(q, timeoutMs), documents(texts, timeoutMs) } — injectable; defaults to bina-embed over HTTP
+// (through fetchImpl when one is given, so a test's fake network is never bypassed).
+// localFallback: defaults to KNOWLEDGE_LOCAL_FALLBACK !== '0'. queryLog: where the per-search embed-path line goes
+// (defaults to log); it never contains the query text.
+function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbedder, localFallback, localUrl, queryLog }) {
   const embedder = makeEmbedder({ apiKey, fetchImpl, sleep });
   const say = log || (() => {});
-  let rows = [];            // { id, source, slug, url, title, lang, ord, text, vec (Float32Array|null), toks:Set }
+  const sayPath = queryLog || say;
+  const zz = sleep || (ms => new Promise(r => setTimeout(r, ms)));
+  const localOn = localFallback === undefined ? localFallbackEnabled() : !!localFallback;
+  const local = localEmbedder || makeLocalEmbedder({ fetchImpl, url: localUrl || process.env.KNOWLEDGE_LOCAL_URL });
+  let rows = [];            // { id, source, slug, url, title, lang, ord, text, vec (Float32Array|null), lvec (Float32Array|null), toks:Set }
   let loadedAt = 0;
-  const qcache = new Map(); // query -> vec
-  const stats = { searches: 0, embedOk: 0, embedErr: 0, keywordOnly: 0, rerankOk: 0, rerankErr: 0, rerankSkipped: 0 };
+  const qcache = new Map(); // query -> Gemini vec (768)
+  const lcache = new Map(); // query -> BGE-M3 vec (1024); a separate map so the two kinds can never be confused
+  const stats = { searches: 0, embedOk: 0, embedErr: 0, keywordOnly: 0, rerankOk: 0, rerankErr: 0, rerankSkipped: 0, localOk: 0, localErr: 0, localUsed: 0 };
 
   async function load() {
     const all = await prisma.knowledgeChunk.findMany({ orderBy: [{ source: 'asc' }, { slug: 'asc' }, { ord: 'asc' }] });
-    rows = all.map(r => ({ id: r.id, source: r.source, slug: r.slug, url: r.url, title: r.title, lang: r.lang, ord: r.ord, text: r.text, vec: r.embedding && r.embedding.length ? fromBuf(r.embedding) : null, toks: new Set(tokens(r.text)) }));
+    rows = all.map(r => ({ id: r.id, source: r.source, slug: r.slug, url: r.url, title: r.title, lang: r.lang, ord: r.ord, text: r.text, vec: r.embedding && r.embedding.length ? fromBuf(r.embedding) : null,
+      lvec: localOn && r.embeddingLocal && r.embeddingLocal.length === LOCAL_DIMS * 4 ? fromBuf(r.embeddingLocal) : null, toks: new Set(tokens(r.text)) }));
     loadedAt = Date.now();
     return rows.length;
+  }
+
+  async function countWhere(where) {
+    if (typeof prisma.knowledgeChunk.count === 'function') return prisma.knowledgeChunk.count({ where });
+    return (await prisma.knowledgeChunk.findMany({ where, select: { id: true } })).length;
+  }
+
+  // Gemini document embeddings for every chunk that has none, `take` at a time, until nothing is left.
+  // Until 2026-09-15 a run embedded at most 2,000 and left the rest for the next night. Stops cleanly after
+  // `maxFailures` consecutive failed batches (the embedder already retries 429/5xx inside a batch), and can never
+  // loop for ever: at most one successful round per `take` chunks that were pending at the start, plus one.
+  async function embedPendingGemini({ take = 2000, maxFailures = 2, pauseMs = 4000 } = {}) {
+    let embedded = 0, failures = 0, okRounds = 0, stopped = null, calls = 0;
+    const initial = await countWhere({ embedding: null });
+    const maxOk = Math.ceil(initial / take) + 1;
+    if (initial && apiKey) {
+      while (true) {
+        const pending = await prisma.knowledgeChunk.findMany({ where: { embedding: null }, select: { id: true, text: true }, take });
+        if (!pending.length) break;
+        if (okRounds >= maxOk) { stopped = 'max_rounds'; break; }
+        if (calls++) await zz(pauseMs); // the same pacing the embedder keeps between its 100-chunk requests
+        try {
+          const vecs = await embedder.batch(pending.map(p => p.text), 'RETRIEVAL_DOCUMENT');
+          if (!Array.isArray(vecs) || vecs.length !== pending.length) throw new Error('gemini returned ' + (vecs ? vecs.length : 0) + ' of ' + pending.length + ' embeddings');
+          for (let i = 0; i < pending.length; i++) { await prisma.knowledgeChunk.update({ where: { id: pending[i].id }, data: { embedding: toBuf(vecs[i]) } }); embedded++; }
+          okRounds++; failures = 0;
+        } catch (e) {
+          say('[knowledge] embedding failed, keyword search still works: ' + e.message);
+          if (++failures >= maxFailures) { stopped = 'gemini_failures'; break; }
+        }
+      }
+    }
+    const remaining = initial ? await countWhere({ embedding: null }) : 0;
+    if (remaining) say('[knowledge] ' + remaining + ' chunks still have no Gemini embedding' + (stopped ? ' (stopped: ' + stopped + ')' : '') + '; the next run continues');
+    return { embedded, remaining, stopped };
+  }
+
+  // BGE-M3 document embeddings (embeddingLocal) through bina-embed, in small paced batches, at most `max` per run.
+  async function embedPendingLocal({ max = LOCAL_MAX_PER_RUN, batch = LOCAL_BATCH, pauseMs = LOCAL_PAUSE_MS, maxFailures = 2, onProgress } = {}) {
+    let embedded = 0, failures = 0, calls = 0, stopped = null;
+    if (!localOn) return { embedded, pending: 0, stopped: 'disabled' };
+    const initial = await countWhere({ embeddingLocal: null });
+    const size = Math.max(1, Math.min(batch, LOCAL_BATCH));
+    while (initial && embedded < max) {
+      const todo = await prisma.knowledgeChunk.findMany({ where: { embeddingLocal: null }, select: { id: true, text: true }, orderBy: { id: 'asc' }, take: Math.min(size, max - embedded) });
+      if (!todo.length) break;
+      if (calls >= Math.ceil(initial / size) + maxFailures + 1) { stopped = 'max_rounds'; break; }
+      if (calls++) await zz(pauseMs);
+      try {
+        const vecs = await local.documents(todo.map(t => t.text));
+        for (let i = 0; i < todo.length; i++) { await prisma.knowledgeChunk.update({ where: { id: todo[i].id }, data: { embeddingLocal: toBuf(vecs[i]) } }); embedded++; }
+        failures = 0;
+        if (onProgress) onProgress({ embedded, of: Math.min(initial, max) });
+      } catch (e) {
+        say('[knowledge] local embedding failed (bina-embed): ' + e.message);
+        if (++failures >= maxFailures) { stopped = 'local_failures'; break; }
+      }
+    }
+    const pending = initial ? await countWhere({ embeddingLocal: null }) : 0;
+    if (pending) say('[knowledge] local embedding: ' + embedded + ' embedded, ' + pending + ' pending' + (stopped ? ' (stopped: ' + stopped + ')' : (embedded >= max ? ' (per-run cap ' + max + ')' : ''))
+      + ' — a later run continues; for thousands use the laptop path (ops/knowledge/local-embed-export.js, then local-embed-import.js)');
+    return { embedded, pending, stopped };
   }
   async function ensureLoaded() { if (!loadedAt) await load(); }
 
   // (Re)build the store: chunk every source, insert new hashes, embed only what has no embedding, drop stale.
-  async function ingest({ only, embed = true } = {}) {
+  async function ingest({ only, embed = true, embedTake = 2000, localMax = LOCAL_MAX_PER_RUN } = {}) {
     const docs = readSources(root || ROOT, only);
     // news comes from the database, not from files, so it is loaded here rather than in readSources.
     // A failed read must not look like "every article was removed": it is left out of orphan collection.
@@ -382,14 +492,11 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
       }
     }
 
+    let embedRemaining = 0, localEmbedded = 0, localPending = 0;
     if (embed) {
-      const pending = await prisma.knowledgeChunk.findMany({ where: { embedding: null }, select: { id: true, text: true }, take: 2000 });
-      if (pending.length && apiKey) {
-        try {
-          const vecs = await embedder.batch(pending.map(p => p.text), 'RETRIEVAL_DOCUMENT');
-          for (let i = 0; i < pending.length; i++) { await prisma.knowledgeChunk.update({ where: { id: pending[i].id }, data: { embedding: toBuf(vecs[i]) } }); embedded++; }
-        } catch (e) { say('[knowledge] embedding failed, keyword search still works: ' + e.message); }
-      }
+      const g = await embedPendingGemini({ take: embedTake });
+      embedded = g.embedded; embedRemaining = g.remaining;
+      if (localOn) { const l = await embedPendingLocal({ max: localMax }); localEmbedded = l.embedded; localPending = l.pending; }
     }
     await load();
     const hy = readSources.lastHygiene;
@@ -399,8 +506,9 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
         + (spam ? ', spam pages skipped ' + spam : '') + (hy.dropped ? ', ' + hy.dropped + ' pages left too thin' : '')
         + (hy.ownNews ? ', ' + hy.ownNews + ' crawled bina.et/news pages skipped (news source has them)' : ''));
     }
-    say('[knowledge] ingest: ' + docs.length + ' docs, +' + inserted + ' chunks, -' + deleted + ' stale, -' + orphaned + ' orphaned, ' + embedded + ' embedded, ' + rows.length + ' total');
-    return { docs: docs.length, inserted, deleted, orphaned, embedded, total: rows.length };
+    say('[knowledge] ingest: ' + docs.length + ' docs, +' + inserted + ' chunks, -' + deleted + ' stale, -' + orphaned + ' orphaned, ' + embedded + ' embedded, ' + rows.length + ' total'
+      + (embedRemaining ? ', ' + embedRemaining + ' still unembedded' : '') + (localOn && embed ? ', local ' + localEmbedded + ' embedded' + (localPending ? ' / ' + localPending + ' pending' : '') : ''));
+    return { docs: docs.length, inserted, deleted, orphaned, embedded, embedRemaining, localEmbedded, localPending, total: rows.length };
   }
 
   // What BinaSmart wrote itself answers correctly 91.7% of the time; crawled sites manage 62.5%. Rank
@@ -479,11 +587,26 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     const query = String(q || '').trim(); if (!query) return [];
     const qt = tokens(query);
     let qv = qcache.get(query) || null;
+    // Which vectors the cosine runs over: Gemini's (vec, 768) unless the Gemini query embed failed and bina-embed
+    // answered, then BGE-M3's (lvec, 1024). Everything after this block is the same code for both.
+    let dims = DIMS, useLocal = false;
     if (!qv && apiKey && rows.some(r => r.vec)) {
       try { qv = fromBuf(toBuf(await embedder.query(query))); stats.embedOk++; if (qcache.size > 500) qcache.clear(); qcache.set(query, qv); }
-      catch (e) { stats.embedErr++; qv = null; }
+      catch (e) {
+        stats.embedErr++; qv = null;
+        // Only here, when Gemini was asked and failed: never on a cache hit, a missing key or an unembedded index.
+        if (localOn && rows.some(r => r.lvec)) {
+          let lv = lcache.get(query) || null;
+          if (!lv) {
+            try { lv = fromBuf(toBuf(await local.query(query, LOCAL_QUERY_TIMEOUT_MS))); stats.localOk++; if (lcache.size > 500) lcache.clear(); lcache.set(query, lv); }
+            catch (e2) { stats.localErr++; lv = null; }
+          }
+          if (lv) { qv = lv; dims = LOCAL_DIMS; useLocal = true; stats.localUsed++; }
+        }
+      }
     }
     if (!qv) stats.keywordOnly++;
+    sayPath('[knowledge] query embed: ' + (useLocal ? 'local' : qv ? 'gemini' : 'keyword'));
     const excluded = pageMatcher(exclude);
     const preferred = Array.isArray(prefer) ? (pageMatcher(prefer) || (() => false)) : null;
     const scored = [];
@@ -492,7 +615,8 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
       if (sources && !sources.includes(r.source)) continue;
       if (excluded && excluded(r.source, r.slug)) continue;
       let cos = 0;
-      if (qv && r.vec) { for (let i = 0; i < DIMS; i++) cos += qv[i] * r.vec[i]; }
+      const rv = useLocal ? r.lvec : r.vec;
+      if (qv && rv) { for (let i = 0; i < dims; i++) cos += qv[i] * rv[i]; }
       const kw = keywordScore(qt, r);
       const score = hybridScore({ cos, kw, source: r.source, hasVec: !!qv, preferred: preferred ? preferred(r.source, r.slug) : undefined });
       if (score > 0) scored.push({ r, score, cos, kw });
@@ -550,8 +674,9 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep }) {
     return blocks.join('\n\n');
   }
 
-  function health() { return { chunks: rows.length, embedded: rows.filter(r => r.vec).length, loadedAt, gemini: !!apiKey, ...stats }; }
-  return { load, ingest, search, contextFor, health, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
+  function health() { return { chunks: rows.length, embedded: rows.filter(r => r.vec).length, embeddedLocal: rows.filter(r => r.lvec).length, loadedAt, gemini: !!apiKey, localFallback: localOn, ...stats }; }
+  return { load, ingest, search, contextFor, health, embedPendingGemini, embedPendingLocal, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf };
+module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
+  LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled };

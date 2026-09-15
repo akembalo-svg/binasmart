@@ -889,7 +889,9 @@ async function callBini(system, messages0, maxTokens, opts){
   return await once('anthropic', process.env.GLM_BASE || 'http://127.0.0.1:4000', process.env.GLM_KEY || 'x', process.env.GLM_MODEL || 'glm-5-turbo');
 }
 // ===== Bini knowledge (RAG): skill + Addis Ababa notes + guide/service pages, Gemini embeddings, keyword fallback =====
-const knowledge = require('./knowledge').makeKnowledge({ prisma, apiKey: process.env.GEMINI_API_KEY || '', log: m => fastify.log.info(m) });
+const knowledge = require('./knowledge').makeKnowledge({ prisma, apiKey: process.env.GEMINI_API_KEY || '', log: m => fastify.log.info(m),
+  // the fastify logger is off, so the per-search line "[knowledge] query embed: gemini|local|keyword" (no query text) goes to the pm2 log
+  queryLog: m => console.log(m) });
 knowledge.load().catch(e => fastify.log.warn('[knowledge] load: ' + e.message));
 setInterval(() => knowledge.load().catch(() => {}), 600000).unref(); // pick up nightly ingests without a restart
 require('./knowledge/routes')(fastify, { knowledge, OWNER_KEY });
