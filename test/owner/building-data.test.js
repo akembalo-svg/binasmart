@@ -36,7 +36,7 @@ test('each query selects exactly the allowlist, nothing more', async () => {
   await loadBuildings(prisma, ['b1'], NOW);
   const ids = { in: ['b1'] };
   assert.deepEqual(calls.building, { where: { id: ids },
-    select: { id: true, name: true, nameAm: true, qrSlug: true, vatRegistered: true, vatInclusive: true } });
+    select: { id: true, name: true, nameAm: true, qrSlug: true, floors: true, vatRegistered: true, vatInclusive: true } });
   assert.deepEqual(calls.unit, { where: { buildingId: ids },
     select: { id: true, buildingId: true, number: true, floor: true, areaSqm: true, monthlyRent: true, status: true, unitType: true,
       tenancies: { where: { active: true },

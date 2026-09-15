@@ -15,6 +15,8 @@ function block(b) {
     lines.push('⚠️ የኪራይ ኢንቮይስ ያልወጣባቸው ወራት — months with no rent invoices: ' + b.rentMonthsWithoutInvoices.join(', '));
   if (b.contractsExpiredStillActive)
     lines.push('⚠️ ጊዜያቸው ያለፈ ውሎች (ተከራዩ አሁንም አለ) — expired contracts, tenant still in: ' + b.contractsExpiredStillActive);
+  if (b.floorDataMissing)
+    lines.push('⚠️ የክፍሎቹ ፎቅ አልተመዘገበም (ሁሉም ምድር ቤት ላይ ናቸው) — no floor recorded for the units (all on ground)');
   lines.push((b.expensesRecorded ? '✅' : '⚠️') + ' የተመዘገቡ ወጪዎች ' + b.expensesRecorded + ' — expenses recorded');
   lines.push('🔧 ክፍት ጥገና ' + (b.openRepairs || 0) + ' — open repairs');
   lines.push('📅 የመጨረሻው ኢንቮይስ ' + none(b.newestInvoice) + ' · የመጨረሻው ክፍያ ' + none(b.newestPayment) + ' — newest invoice due · newest payment');

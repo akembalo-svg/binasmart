@@ -15,8 +15,9 @@ async function loadBuildings(prisma, buildingIds, now = new Date()) {
   const ids = { in: buildingIds };
   const since = new Date(now.getTime() - WINDOW_DAYS * DAY);
   const [buildings, units, ended, invoices, repairs, expenses] = await Promise.all([
+    // floors: the storey count, so a building whose units were all left on floor 0 reads as missing floor data
     prisma.building.findMany({ where: { id: ids },
-      select: { id: true, name: true, nameAm: true, qrSlug: true, vatRegistered: true, vatInclusive: true } }),
+      select: { id: true, name: true, nameAm: true, qrSlug: true, floors: true, vatRegistered: true, vatInclusive: true } }),
     // An active tenancy's endDate is its vacate date and is never set while it is active; the contract's own
     // dates are on Contract (what /units and the daily renewal report read).
     prisma.unit.findMany({ where: { buildingId: ids },

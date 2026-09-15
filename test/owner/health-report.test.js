@@ -25,6 +25,11 @@ test('nothing missing means no warning lines', () => {
   assert.doesNotMatch(m, /⚠️/);
 });
 
+test('units with no floor recorded are called out', () => {
+  assert.match(healthMessage(health({ floorDataMissing: true })), /⚠️.*ፎቅ.*floor/);
+  assert.doesNotMatch(healthMessage(health({ floorDataMissing: false })), /floor/);
+});
+
 test('expired contracts are called out', () => {
   assert.match(healthMessage(health({ contractsExpiredStillActive: 14 })), /⚠️.*14/);
 });

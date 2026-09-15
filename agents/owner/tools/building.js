@@ -7,6 +7,7 @@
 // An owner must read the same number from Bini as from the owner dashboard, so where server.js already
 // computes a figure these tools follow it, and say which endpoint beside the code.
 const { loadBuildings } = require('../building-data');
+const { foldEthiopic } = require('../../../assistant/lang');
 
 const DAY = 86400000;
 const VAT_RATE = 0.15;                     // the same rate as server.js (VAT Proclamation 1341/2024); a test pins it
@@ -71,6 +72,85 @@ function currentOccupant(v, unitId, tenancyId) {
 // count is 0 in practice; if one is ever added, change the dashboard and these tools together.
 function monthInvoices(v, month) { return v.invoices.filter(i => monthOf(i.dueDate) === month); }
 
+// ---- Floors. The owner dashboard shows Unit.floor as it is stored ("Ground" for 0, "F2" for 2; Tenants tab,
+// ordered by floor then number) and never reads a floor out of a unit number, so neither do these tools.
+// Unit.floor is a required column, so a building can only lack floor data by having every unit left on 0
+// while its Building.floors says it has more than one floor.
+const floorDataMissing = v => v.units.length > 1 && v.units.every(u => !u.floor) && Number(v.b.floors) > 1;
+const floorsInRecords = v => [...new Set(v.units.map(u => u.floor))].sort((x, y) => x - y);
+// The floor in words, so a reply says "1ኛ ፎቅ" or "ground floor" instead of misreading "floor": 1.
+const floorWords = f => (f === 0 ? { floorAm: 'ምድር ቤት (ግራውንድ)', floorEn: 'ground floor' }
+  : f < 0 ? { floorAm: 'ከርሰ ምድር ' + -f, floorEn: 'basement ' + -f } : { floorAm: f + 'ኛ ፎቅ', floorEn: 'floor ' + f });
+const byNumber = (x, y) => String(x.number).localeCompare(String(y.number), undefined, { numeric: true });
+
+// Ordinal and cardinal floor words, folded (ሦ→ሶ, ሥ→ስ …) like the input. Longest first, so ከርሰ ምድር wins over ምድር.
+const FLOOR_WORDS = [
+  ['ከርሰ ምድር', -1], ['basement', -1], ['underground', -1], ['ቤዝመንት', -1],
+  ['ምድር ቤት', 0], ['ምድር', 0], ['ግራውንድ', 0], ['ግራውንድ ፍሎር', 0], ['ground', 0], ['lobby', 0],
+  ['አንደኛ', 1], ['ሁለተኛ', 2], ['ሶስተኛ', 3], ['አራተኛ', 4], ['አምስተኛ', 5], ['ስድስተኛ', 6], ['ሰባተኛ', 7], ['ስምንተኛ', 8], ['ዘጠነኛ', 9], ['አስረኛ', 10],
+  ['first', 1], ['second', 2], ['third', 3], ['fourth', 4], ['fifth', 5], ['sixth', 6], ['seventh', 7], ['eighth', 8], ['ninth', 9], ['tenth', 10],
+  ['አንድ', 1], ['ሁለት', 2], ['ሶስት', 3], ['አራት', 4], ['አምስት', 5], ['ስድስት', 6], ['ሰባት', 7], ['ስምንት', 8], ['ዘጠኝ', 9], ['አስር', 10],
+].map(([w, n]) => [foldEthiopic(w), n]).sort((a, b) => b[0].length - a[0].length);
+
+// "2", 2, "2ፎቅ", "2ኛ ፎቅ", "floor 2", "F2", "2nd", "ሁለተኛ ፎቅ", "ground", "ግራውንድ", "ምድር ቤት", "G", "B1" → a number, or null.
+function parseFloor(x) {
+  if (typeof x === 'number') return Number.isFinite(x) ? Math.trunc(x) : null;
+  const s = foldEthiopic(String(x == null ? '' : x)).trim().toLowerCase();
+  if (!s) return null;
+  let m = /(?:^|[^a-z])b(\d{1,2})(?![\d])/.exec(s);
+  if (m) return -Number(m[1]);
+  m = /-?\d{1,3}/.exec(s);
+  if (m) return Number(m[0]);
+  if (/^(g|gf|g\.?f\.?)$/.test(s)) return 0;
+  for (const [w, n] of FLOOR_WORDS) if (s.includes(w)) return n;
+  return null;
+}
+
+// ---- Finding a tenant by the name the owner typed. The search runs here, on the server, over the names the
+// loader selected (shop name, shop Amharic name, the tenancy's person); the model gets back units, floors and
+// tokens, never a name. Written forms that are the same name to a reader compare equal: Ethiopic letter
+// families folded (ሀ/ሐ/ኀ, ሰ/ሠ, አ/ዐ, ጸ/ፀ), Latin case and accents, spaces and punctuation.
+const squash = s => foldEthiopic(String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '')).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
+const wordsOf = s => foldEthiopic(String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '')).toLowerCase()
+  .split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+// An Ethiopic syllable without its vowel (ዶ→ደ, ች→ቸ), so ሰነድ and ሰነዶች, ማረጋገጫ and ማረጋገጪያ share a stem.
+const skeleton = w => [...w].map(ch => { const c = ch.codePointAt(0); return c >= 0x1200 && c <= 0x135A ? String.fromCodePoint(c - ((c - 0x1200) % 8)) : ch; }).join('');
+// Words that say nothing about which tenant: generic business words, and words an owner's question carries.
+const SEARCH_STOP = new Set(['the', 'and', 'of', 'shop', 'store', 'office', 'plc', 'ltd', 'company', 'who', 'where', 'which', 'floor', 'unit',
+  'ሱቅ', 'ቢሮ', 'ቤት', 'ድርጅት', 'ኩባንያ', 'ማህበር', 'ሀላፊነቱ', 'የተወሰነ', 'የግል', 'ፎቅ', 'ክፍል', 'ስንተኛ', 'የት', 'ማን', 'ማናቸው', 'ነው', 'እሺ', 'ያለው', 'ያሉት']
+  .map(w => skeleton(squash(w))));
+const stems = s => wordsOf(s).flatMap(w => {
+  const k = skeleton(w);
+  // Amharic prefixes የ (of), ለ (to), በ (at), ከ (from) on a longer word
+  return /^[የለበከ]/.test(w) && [...k].length > 3 ? [k, k.slice(1)] : [k];
+}).filter(k => [...k].length >= 2 && !SEARCH_STOP.has(k));
+function stemMatch(a, b) {
+  if (a === b) return true;
+  const [s, l] = [...a].length <= [...b].length ? [a, b] : [b, a];
+  return [...s].length >= 3 && l.startsWith(s);
+}
+// 3 = the same name, 2 = the name contains what was typed, 1 = every typed word is in the name, below 1 = the
+// share of typed words that are.
+function nameScore(query, name) {
+  const q = squash(query), n = squash(name);
+  if (!q || !n) return 0;
+  if (q === n) return 3;
+  if ([...q].length >= 3 && n.includes(q)) return 2;
+  const qs = stems(query), ns = stems(name);
+  if (!qs.length || !ns.length) return 0;
+  const hit = qs.filter(a => ns.some(b => stemMatch(a, b))).length;
+  return hit === qs.length ? 1 : 0.9 * hit / qs.length;
+}
+const matchLabel = s => (s >= 3 ? 'same name' : s >= 2 ? 'name contains the words' : s >= 1 ? 'all words' : 'some words');
+
+// The owner's own message, folded the same way. A search term must be words the owner typed: the model can
+// neither search names the owner never wrote nor learn our spelling of a name letter by letter.
+function typedByOwner(name, question) {
+  const words = wordsOf(name).map(squash).filter(Boolean);
+  const q = squash(question);
+  return words.length > 0 && words.every(w => q.includes(w));
+}
+
 const TOOLS = {
   data_health(v, a, now) {
     const rentMonths = new Set(v.invoices.filter(i => i.type === 'RENT').map(i => monthOf(i.dueDate)));
@@ -86,7 +166,42 @@ const TOOLS = {
     return { units: v.units.length, activeTenancies: v.units.filter(u => u.tenancies.length).length,
       invoices: v.invoices.length, invoicesPaid: v.invoices.filter(i => i.status === 'PAID').length,
       rentMonthsWithoutInvoices: missing, expensesRecorded: v.expenses.length,
-      ...openRepairs(v), contractsExpiredStillActive: expired, ...asOf(v) };
+      ...openRepairs(v), contractsExpiredStillActive: expired, floorDataMissing: floorDataMissing(v), ...asOf(v) };
+  },
+
+  // The Tenants tab for one floor: every unit whose Unit.floor is that floor, as the dashboard lists them.
+  floor(v, a) {
+    const f = parseFloor(a.floor);
+    const floors = floorsInRecords(v);
+    if (floorDataMissing(v)) return { floor: f, floorDataMissing: true, floorsInRecords: floors, units: [] };
+    if (f == null) return { understood: false, floorsInRecords: floors, units: [] };
+    const units = v.units.filter(u => u.floor === f).sort(byNumber).map(u => {
+      const t = u.tenancies[0];
+      return { number: u.number, status: u.status, occupant: occupant(t), contractEnd: t ? iso(contractEnd(t)) : null,
+        monthlyRentEtb: u.monthlyRent, areaSqm: u.areaSqm, type: u.unitType };
+    });
+    return { floor: f, ...floorWords(f), count: units.length, occupied: units.filter(u => u.status === 'OCCUPIED').length,
+      vacant: units.filter(u => u.status !== 'OCCUPIED').length, units: units.slice(0, 60), floorsInRecords: floors };
+  },
+
+  // Tenants whose name matches what the owner typed. ctx.question is the owner's message (see typedByOwner).
+  find_tenant(v, a, now, ctx) {
+    const name = String(a.name == null ? '' : a.name).trim().slice(0, 80);
+    if (!name) return { error: 'name required' };
+    if (!typedByOwner(name, ctx && ctx.question)) return { error: 'copy the name exactly as the owner wrote it in this message' };
+    const rows = [];
+    for (const u of v.units) for (const t of u.tenancies) {
+      const fields = [['business', t.shop && t.shop.nameAm], ['business', t.shop && t.shop.name], ['person', t.user && t.user.fullName]];
+      let best = 0, on = null;
+      for (const [kind, n] of fields) { const s = n ? nameScore(name, n) : 0; if (s > best) { best = s; on = kind; } }
+      if (best > 0) rows.push({ score: best, row: { unit: u.number, floor: u.floor, ...floorWords(u.floor), occupant: occupant(t), status: u.status,
+        contractEnd: iso(contractEnd(t)), monthlyRentEtb: u.monthlyRent, match: matchLabel(best), matchedOn: on } });
+    }
+    rows.sort((x, y) => y.score - x.score || byNumber({ number: x.row.unit }, { number: y.row.unit }));
+    // the closest kind of match only: a same-name match is not diluted by every shop sharing one word with it
+    const top = rows.length ? rows[0].score : 0;
+    const kept = rows.filter(r => (top >= 1 ? r.score >= 1 : true));
+    return { found: kept.length > 0, count: kept.length, matches: kept.slice(0, 10).map(r => r.row), truncated: kept.length > 10 };
   },
 
   // /api/owner/:slug/overview stats: expectedMonthly sums Unit.monthlyRent of OCCUPIED units; vacant is
@@ -245,6 +360,10 @@ const DEFS = [
   def('vacant', 'Units that are not occupied: number, floor, size, rent, status, vacant since, enquiries received.'),
   def('contracts_ending', 'Contracts that end within the next N days (ending) and contracts whose end date has already passed while the tenant is still in the unit (expired): unit, tenant or shop, end date.', { days: { type: 'integer', description: '1-365. Default 60.' } }),
   def('repairs', 'Repair requests: unit, category, status, reported and resolved dates, whether someone is assigned.', { status: { type: 'string', enum: ['open', 'all'], description: 'open (default) or all.' } }),
+  def('floor', 'The units on one floor, as the Tenants tab lists them: unit number, status (occupied or vacant), tenant or shop, contract end, rent. Use it for "who is on floor 2", "2ፎቅ ያሉት ተከራዮች". floorsInRecords lists the floors that have units.',
+    { floor: { type: 'string', description: 'The floor as the owner said it: a number (0 = ground), "ground", "ግራውንድ", "ምድር ቤት", "2ፎቅ", "ሁለተኛ ፎቅ".' } }),
+  def('find_tenant', 'Find a tenant or business by the name the owner wrote ("which floor is X on", "where is X", "the unit of X"). The search runs on the server over the records, tolerant of spelling; it returns unit, floor, status, contract end, rent and the tenant as a token.',
+    { name: { type: 'string', description: 'The name copied exactly as the owner wrote it in this message, without other words. Do not translate or transliterate it.' } }),
   def('money', 'One month of money, as the dashboard\'s accounting tab: invoiced, collected, outstanding, cancelled invoices, expenses by category, VAT collected, VAT paid on expenses, net VAT, collected minus expenses. Figures only, not tax advice.', { month: MONTH_ARG }),
 ];
 
@@ -300,8 +419,10 @@ function tokenize(value, tokens, names) {
   return out;
 }
 
+// bind(scope, { question }): question is the owner's message for this turn, the only text find_tenant may search.
 function makeExecutor({ prisma, now = () => new Date(), warn = m => console.warn(m) }) {
-  return function bind(scope) {
+  return function bind(scope, ctx = {}) {
+    const turn = { question: String((ctx && ctx.question) || '') };
     let loading = null;   // one load per question, however many tools the model calls
     const tokens = new Map(), names = new Map();   // name -> token and token -> name, for this question only
     async function execute(name, args) {
@@ -323,11 +444,11 @@ function makeExecutor({ prisma, now = () => new Date(), warn = m => console.warn
       if (!bs.length) return { error: 'no such building for this owner' };
       // tokens before fit, so the size checked is the size the model is sent
       return fit({ buildings: bs.map(b => Object.assign({ building: b.name, buildingAm: b.nameAm || null },
-        tokenize(fn(view(data, b), args, t), tokens, names))) });
+        tokenize(fn(view(data, b), args, t, turn), tokens, names))) });
     }
     execute.names = names;
     return execute;
   };
 }
 
-module.exports = { TOOLS, DEFS, VAT_RATE, REPAIR_TYPES, NAME_KEYS, view, makeExecutor };
+module.exports = { TOOLS, DEFS, VAT_RATE, REPAIR_TYPES, NAME_KEYS, view, makeExecutor, parseFloor, nameScore, typedByOwner };

@@ -44,9 +44,16 @@ const p = new PrismaClient();
     check(m + ' cancelled', r.cancelledCount, cancelled);
   }
 
+  // floor: units per floor equal the database's count per Unit.floor (what the Tenants tab lists)
+  const perFloor = await p.unit.groupBy({ by: ['floor'], where: { buildingId: b.id }, _count: { _all: true } });
+  for (const g of perFloor.sort((x, y) => x.floor - y.floor))
+    check('floor ' + g.floor + ' units', (await run('floor', { floor: String(g.floor) })).buildings[0].count, g._count._all);
+  console.log('     floor data missing: ' + (await run('data_health', {})).buildings[0].floorDataMissing);
+
   const outputs = [];
   for (const name of ['data_health', 'overview', 'rent_month', 'unpaid', 'late_payers', 'vacant', 'contracts_ending', 'repairs', 'money'])
     outputs.push(JSON.stringify(await run(name, { months: 12, days: 365, status: 'all' })));
+  for (const g of perFloor) outputs.push(JSON.stringify(await run('floor', { floor: String(g.floor) })));
   const units = await p.unit.findMany({ where: { buildingId: b.id }, select: { number: true } });
   for (const u of units) outputs.push(JSON.stringify(await run('unit', { number: String(u.number) })));
   const text = outputs.join(' ');
@@ -59,8 +66,19 @@ const p = new PrismaClient();
   const names = new Set();
   for (const t of tenancies) for (const n of [t.user && t.user.fullName, t.shop && t.shop.name, t.shop && t.shop.nameAm])
     if (n && String(n).trim().length >= 3) names.add(String(n).trim());
+  // find_tenant: every tenant is found by its own name typed as the question, and the result carries no name
+  let found = 0, searched = 0;
+  const finds = [];
+  for (const n of names) {
+    const r = await makeExecutor({ prisma: p })({ buildingIds: [b.id] }, { question: n })('find_tenant', { name: n });
+    searched++;
+    if (r.buildings[0].found) found++;
+    finds.push(JSON.stringify(r));
+  }
+  check('tenants found by their own name', found, searched);
+  const findText = finds.join(' ');
   let leaks = 0;
-  for (const n of names) if (text.includes(n)) leaks++;
+  for (const n of names) if (text.includes(n) || findText.includes(n)) leaks++;
   console.log('     names checked: ' + names.size + ' · tokens in output: ' + new Set(text.match(/\[\[P\d+\]\]/g) || []).size);
   check('occupant names in tool output', leaks, 0);
 

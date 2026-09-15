@@ -8,14 +8,83 @@ const fs = require('fs'), path = require('path');
 const B = require('../../agents/owner/tools/building');
 const { fixture, twoBuildings, fakePrisma, NOW } = require('./fixture');
 
-const one = (name, args = {}, data = fixture(), now = NOW) => B.TOOLS[name](B.view(data, data.buildings[0]), args, now);
+const one = (name, args = {}, data = fixture(), now = NOW, ctx) => B.TOOLS[name](B.view(data, data.buildings[0]), args, now, ctx);
 const inv = (id, tenancyId, unitId, due, amount, status, paid = null) => ({ id, tenancyId, type: 'RENT', amount, lateFee: 0,
   dueDate: new Date(due), paidDate: paid ? new Date(paid) : null, daysLate: 0, status, tenancy: { unitId } });
 
 test('data_health says what is recorded and what is missing', () => {
   assert.deepEqual(one('data_health'), { units: 3, activeTenancies: 2, invoices: 6, invoicesPaid: 3,
     rentMonthsWithoutInvoices: ['2026-09', '2026-08'], expensesRecorded: 2, openRepairs: 1, openRepairsAll: 2,
-    contractsExpiredStillActive: 1, newestInvoice: '2026-07-01', newestPayment: '2026-07-03' });
+    contractsExpiredStillActive: 1, floorDataMissing: false, newestInvoice: '2026-07-01', newestPayment: '2026-07-03' });
+});
+
+test('floor lists a floor as the Tenants tab does: number, status, tenant, contract end, rent', () => {
+  const f1 = one('floor', { floor: '1' });
+  assert.deepEqual(f1, { floor: 1, floorAm: '1ኛ ፎቅ', floorEn: 'floor 1', count: 2, occupied: 2, vacant: 0, floorsInRecords: [1, 2], units: [
+    { number: '101', status: 'OCCUPIED', occupant: 'Abebe Test', contractEnd: '2026-10-15', monthlyRentEtb: 10000, areaSqm: 40, type: 'SHOP' },
+    { number: '102', status: 'OCCUPIED', occupant: 'Test Cafe', contractEnd: '2026-08-31', monthlyRentEtb: 20000, areaSqm: 80, type: 'SHOP' }] });
+  const f2 = one('floor', { floor: '2ፎቅ' });
+  assert.deepEqual(f2.units, [{ number: '103', status: 'VACANT', occupant: null, contractEnd: null, monthlyRentEtb: 15000, areaSqm: 60, type: 'OFFICE' }]);
+  assert.equal(f2.vacant, 1);
+  const ground = one('floor', { floor: 'ግራውንድ' });
+  assert.equal(ground.floor, 0); assert.equal(ground.count, 0);
+  assert.equal(ground.floorAm, 'ምድር ቤት (ግራውንድ)'); assert.equal(ground.floorEn, 'ground floor');
+  assert.equal(one('floor', { floor: 'B1' }).floorEn, 'basement 1'); assert.deepEqual(ground.floorsInRecords, [1, 2], 'an empty floor says which floors have units');
+  assert.deepEqual(one('floor', { floor: 'the roof garden' }), { understood: false, floorsInRecords: [1, 2], units: [] });
+});
+
+test('floor words the model will pass: numbers, ordinals, ground and basement, in Amharic and English', () => {
+  const cases = [[2, 2], ['2', 2], ['2ፎቅ', 2], ['2ኛ ፎቅ', 2], ['floor 2', 2], ['F2', 2], ['2nd', 2], ['ሁለተኛ ፎቅ', 2], ['ሦስተኛ', 3], ['third floor', 3],
+    ['ground', 0], ['Ground floor', 0], ['G', 0], ['ግራውንድ', 0], ['ምድር ቤት', 0], ['0', 0], ['basement', -1], ['B1', -1], ['ከርሰ ምድር', -1],
+    ['አሥረኛ', 10], ['', null], ['roof', null], [null, null]];
+  for (const [input, want] of cases) assert.equal(B.parseFloor(input), want, JSON.stringify(input));
+});
+
+test('a building whose units were all left on floor 0 says floor data is missing, and data_health says so too', () => {
+  const data = fixture();
+  data.buildings[0].floors = 5;
+  for (const u of data.units) u.floor = 0;
+  assert.deepEqual(one('floor', { floor: '2' }, data), { floor: 2, floorDataMissing: true, floorsInRecords: [0], units: [] });
+  assert.equal(one('floor', { floor: 'ground' }, data).floorDataMissing, true, 'not "every unit is on the ground floor"');
+  assert.equal(one('data_health', {}, data).floorDataMissing, true);
+  data.buildings[0].floors = 1;
+  assert.equal(one('data_health', {}, data).floorDataMissing, false, 'a one-storey building really is all ground floor');
+  assert.equal(one('floor', { floor: 'ground' }, data).count, 3);
+});
+
+// A shop with an Amharic name written with ሠ, as people write it; the owner types ሰ.
+function withAmharicShop() {
+  const data = fixture();
+  data.units[1].tenancies[0].shop = { name: 'Selam Test Printing', nameAm: 'የሠላም ቴስት ማተሚያ' };
+  return data;
+}
+const find = (name, question, data = withAmharicShop()) => one('find_tenant', { name }, data, NOW, { question });
+const oneCtx = (name, args, data, now, ctx) => B.TOOLS[name](B.view(data, data.buildings[0]), args, now, ctx);
+
+test('find_tenant finds a tenant by the name the owner typed: letter variants, prefixes, case, part of a name, the person', () => {
+  const am = find('ሰላም ቴስት', 'እሺ ሰላም ቴስት ስንተኛ ፎቅ ነው');
+  assert.equal(am.found, true); assert.equal(am.count, 1);
+  assert.deepEqual(am.matches, [{ unit: '102', floor: 1, floorAm: '1ኛ ፎቅ', floorEn: 'floor 1', occupant: 'የሠላም ቴስት ማተሚያ', status: 'OCCUPIED', contractEnd: '2026-08-31',
+    monthlyRentEtb: 20000, match: 'name contains the words', matchedOn: 'business' }]);
+  assert.equal(find('ሰላም ቴስት ማተሚያ', 'የሰላም ቴስት ማተሚያ የት ነው?').matches[0].unit, '102', 'the የ prefix and the stem still match');
+  assert.equal(find('ሠላሞች', 'ሠላሞች ስንተኛ ፎቅ ናቸው').matches[0].unit, '102', 'a suffix on an Amharic word keeps its stem');
+  assert.equal(find('selam test printing', 'Where is selam test printing?').matches[0].match, 'same name');
+  const person = find('ABEBE', 'which floor is ABEBE on');
+  assert.deepEqual(person.matches.map(m => [m.unit, m.matchedOn]), [['101', 'person']]);
+  const cafe = one('find_tenant', { name: 'test cafe' }, fixture(), NOW, { question: 'Where is Test-Cafe?' });
+  assert.equal(cafe.matches[0].unit, '102');
+  const both = one('find_tenant', { name: 'Test' }, fixture(), NOW, { question: 'Test' });
+  assert.deepEqual(both.matches.map(m => m.unit), ['101', '102'], 'a word two tenants share finds both');
+  assert.deepEqual(find('ዳዊት', 'ዳዊት የት ነው'), { found: false, count: 0, matches: [], truncated: false });
+});
+
+test('find_tenant only searches words the owner typed in this message', () => {
+  assert.deepEqual(find('Test Cafe', 'which floor is the cafe of my cousin on?'), { error: 'copy the name exactly as the owner wrote it in this message' });
+  assert.deepEqual(find('ሰላም', ''), { error: 'copy the name exactly as the owner wrote it in this message' });
+  assert.deepEqual(oneCtx('find_tenant', { name: 'Abebe' }, fixture(), NOW, undefined), { error: 'copy the name exactly as the owner wrote it in this message' });
+  assert.deepEqual(find('', 'where?'), { error: 'name required' });
+  assert.equal(B.typedByOwner('ሠላም', 'ሰላም የት ነው'), true, 'a folded letter is still what the owner typed');
+  assert.equal(B.typedByOwner('Selam', 'ሰላም የት ነው'), false, 'a transliteration is not');
 });
 
 test('data_health does not call this month missing before its rent falls due on the 5th', () => {
@@ -224,6 +293,24 @@ test('the executor never hands the model a tenant or shop name: occupants become
   const units = (await both('unit', { number: '101' })).buildings.map(b => b.occupant);
   assert.deepEqual(units, ['[[P1]]', '[[P2]]']);
   assert.deepEqual([...both.names.values()], ['Abebe Test', 'Annex Tenant']);
+});
+
+test('floor and find_tenant hand the model tokens, never the names they searched or listed', async () => {
+  const data = withAmharicShop();
+  const question = 'እሺ ሰላም ቴስት ስንተኛ ፎቅ ነው፤ 1ኛ ፎቅ ላይ ያሉትስ?';
+  const run = B.makeExecutor({ prisma: fakePrisma(data).prisma, now: () => NOW })({ buildingIds: ['b1'] }, { question });
+  const found = (await run('find_tenant', { name: 'ሰላም ቴስት' })).buildings[0];
+  assert.deepEqual(found.matches.map(m => [m.unit, m.floor, m.occupant]), [['102', 1, '[[P1]]']]);
+  const floor = (await run('floor', { floor: '1ኛ ፎቅ' })).buildings[0];
+  assert.deepEqual(floor.units.map(u => [u.number, u.occupant]), [['101', '[[P2]]'], ['102', '[[P1]]']]);
+  const sent = JSON.stringify([found, floor]);
+  assert.doesNotMatch(sent, /Abebe|Selam|Printing|Owner Of Cafe|ሠላም|ሰላም|ማተሚያ/);
+  assert.deepEqual([...run.names], [['[[P1]]', 'የሠላም ቴስት ማተሚያ'], ['[[P2]]', 'Abebe Test']]);
+  // the model searching a name the owner never typed learns nothing, not even whether it exists
+  const probe = await run('find_tenant', { name: 'Abebe' });
+  assert.deepEqual(probe.buildings[0], { building: 'Test Plaza', buildingAm: 'ቴስት ፕላዛ', error: 'copy the name exactly as the owner wrote it in this message' });
+  const noQuestion = B.makeExecutor({ prisma: fakePrisma(data).prisma, now: () => NOW })({ buildingIds: ['b1'] });
+  assert.match((await noQuestion('find_tenant', { name: 'ሰላም' })).buildings[0].error, /copy the name/);
 });
 
 test('a building is chosen by exact name first, and by part of a name only from three characters', async () => {
