@@ -1163,6 +1163,7 @@ const ownerAgent = require('./agents/owner/rules');
 const runAgent = makeEngine({
   callModel: callBini, contextFor: (q, o) => knowledge.contextFor(q, o), lang: biniLang, memory: biniMemory,
   handover: biniHandover, dropUngrounded, isEval, prisma, audit,
+  get ownerActions() { return ownerActions; },   // agents/owner/actions/service.js, built below with the delivery layer
 });
 // Questions per hour on /afiya and /asmat (assistant/kit/limit.js): 30 per phone, 150 per address (many phones
 // share one Ethio Telecom address). The engine checks it after the emergency gates, so those are never refused.
@@ -2446,7 +2447,8 @@ fastify.post('/api/owner/:slug/ai', async (req, reply) => {
   if (await authBuildingFail(req, reply, req.params.slug)) return;
   const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
   if (!b) return reply.code(404).send({ error: 'not_found' });
-  return runAgent(ownerAgent, req, reply, { scope: { buildingIds: [b.id] }, channel: 'owner-web' });
+  const sw = await actionSwitches([b.id]);   // owner actions (agents/owner/actions/store.js); never from the body
+  return runAgent(ownerAgent, req, reply, { scope: { buildingIds: [b.id], actionsOn: sw.on, staffConfirm: sw.staff }, channel: 'owner-web' });
 });
 
 // ===== Bini for owners on Telegram (owner Bini design §3) =====
@@ -2460,8 +2462,12 @@ const ownerTelegram = {
   async answer({ text, from, chatId, scope }) {
     const req = { body: { message: text, user: { telegramId: String(from && from.id) } }, headers: {}, ip: 'tg-' + chatId, log: fastify.log };
     const res = { code() { return this; }, send(o) { return o; } };
-    const out = await runAgent(ownerAgent, req, res, { scope, channel: 'owner-telegram' });
-    return out && out.reply ? String(out.reply) : null;
+    const sw = await actionSwitches(scope.buildingIds);
+    const full = Object.assign({}, scope, { actionsOn: sw.on, staffConfirm: sw.staff, telegramId: String(from && from.id) });
+    const out = await runAgent(ownerAgent, req, res, { scope: full, channel: 'owner-telegram' });
+    if (!out || !out.reply) return null;
+    // A prepared action comes back with its id and buttons; ride/binaBot.js shows them and passes presses to actions.press.
+    return out.ownerAction ? { reply: String(out.reply), ownerAction: out.ownerAction } : String(out.reply);
   },
   async health(scope) {
     return healthMessage(await require('./agents/owner/tools/building').makeExecutor({ prisma })(scope)('data_health', {}));
@@ -3134,6 +3140,58 @@ fastify.post('/api/admin/invoices/:id/pay', async (req, reply) => {
   if (!r.ok) return reply.code(r.error === 'already_paid' ? 409 : 404).send({ error: r.error === 'already_paid' ? 'already_paid' : 'not found' });
   if (r.receipt) r.receipt.catch(e => console.error('[receipt] error: ' + errorKindOf(e)));
   return { ok: true, invoice: r.invoice.id };
+});
+
+// ===== Owner actions in Bini with ✅ confirm (owner actions design §3) =====
+// Bini's prepare tools store a pending action (OwnerAction) and show a preview; only the owner's ✅ — in Telegram
+// (ride/binaBot.js) or in the dashboard chat (the two routes below) — runs it, through invoiceOps, the invoice generator
+// and the delivery layer. Actions depend on the building's 'owner-actions' switch (ops/owner/actions.js) and NEVER on
+// Building.notifyTenants: that switch is for the automatic daily checks only. Messages reach tenants only for a real
+// building (NOTIFY_WHITELIST and not a demo, see tenantBuilding); for any other building they are recorded as test.
+const { makeOwnerActions } = require('./agents/owner/actions/service');
+const { makeActionResolver } = require('./agents/owner/actions/resolve');
+const { makeOwnerActionStore, makeActionSwitches } = require('./agents/owner/actions/store');
+const actionSwitches = makeActionSwitches(prisma);
+const ownerActions = makeOwnerActions({
+  store: makeOwnerActionStore(prisma), resolver: makeActionResolver({ prisma }), delivery, access: ownerAccess, switches: actionSwitches, audit,
+  ops: {
+    tenantBuilding,
+    sendBatch: ({ building, kind, text, recipients, actor }) => delivery.sendToTenants({ building: tenantBuilding(building), kind, source: 'owner-action', actor, text, recipients }),
+    sendInvoice: async ({ buildingId, invoiceId, actor }) =>
+      invoiceOps.sendInvoice({ building: await prisma.building.findUnique({ where: { id: buildingId } }), invoiceId, source: 'owner-action', actor }),
+    markPaid: ({ invoiceId, method, actor }) => invoiceOps.markPaid({ invoiceId, method, actor, source: 'owner-action', receipt: 'always' }),
+    generateInvoices: (buildingId, month) => invoiceGen.generateInvoicesForBuilding(prisma, buildingId, invoiceGen.monthWhen(month)),
+    invoiceLink: (invoiceId, kind) => invoiceLinks.linkFor(invoiceId, kind),
+  },
+  log: m => console.error(m),
+});
+ownerTelegram.actions = ownerActions;
+cron.schedule('*/5 * * * *', () => { ownerActions.expireOld().catch(e => console.error('[owner-actions] expiry error: ' + errorKindOf(e))); });
+
+// The dashboard chat's ✅ / ⚠️ / ✖. The building comes from the owner key and the slug; the body only says whether ⚠️ was pressed.
+// A spent id (confirmed, cancelled, refused, failed or expired) answers 409 with the card that says so; a wrong id is
+// the route's 404 below, so nothing here tells a caller whether an id exists.
+const ACTION_SETTLED = ['done', 'failed', 'refused', 'cancelled', 'expired'];
+function ownerActionReply(reply, r) {
+  if (!r.card) return reply.code(r.status === 'gone' ? 404 : 403).send({ error: r.status, reply: r.toast });
+  if (ACTION_SETTLED.includes(r.status)) reply.code(409);
+  return { ok: r.ok, status: r.status, reply: r.card.text, ownerAction: { id: r.id, status: r.status, buttons: r.card.buttons } };
+}
+fastify.post('/api/owner/:slug/actions/:id/confirm', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
+  const a = await prisma.ownerAction.findUnique({ where: { id: String(req.params.id) }, select: { buildingId: true } });
+  // Ownership, as every sibling route checks it; 404 rather than 403, so a wrong id is not confirmed.
+  if (!b || !a || a.buildingId !== b.id) return reply.code(404).send({ error: 'not_found' });
+  const verb = (req.body || {}).urgent === true ? 'urgent' : 'confirm';
+  return ownerActionReply(reply, await ownerActions.press({ id: String(req.params.id), verb, actor: { channel: 'owner-web', buildingId: b.id } }));
+});
+fastify.post('/api/owner/:slug/actions/:id/cancel', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
+  const a = await prisma.ownerAction.findUnique({ where: { id: String(req.params.id) }, select: { buildingId: true } });
+  if (!b || !a || a.buildingId !== b.id) return reply.code(404).send({ error: 'not_found' });
+  return ownerActionReply(reply, await ownerActions.press({ id: String(req.params.id), verb: 'cancel', actor: { channel: 'owner-web', buildingId: b.id } }));
 });
 
 // ===== OWNER: full overview =====

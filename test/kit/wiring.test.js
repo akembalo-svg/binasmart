@@ -37,8 +37,10 @@ test('the owner route authenticates, then hands the engine a scope taken from th
   assert.ok(at > 0, 'owner route not found');
   const body = src.slice(at, src.indexOf('\n});', at));
   const auth = body.indexOf('authBuildingFail(req, reply, req.params.slug)');
-  const run = body.indexOf("runAgent(ownerAgent, req, reply, { scope: { buildingIds: [b.id] }, channel: 'owner-web' })");
+  const run = body.indexOf("runAgent(ownerAgent, req, reply, { scope: { buildingIds: [b.id], actionsOn: sw.on, staffConfirm: sw.staff }, channel: 'owner-web' })");
   assert.ok(auth > 0 && run > auth, 'must authenticate before running the agent, with the key-derived scope');
+  // Owner actions are on for a building only where ops switched them on, read here and never taken from the body.
+  assert.ok(body.indexOf('await actionSwitches([b.id])') > auth, 'the action switches must be read from the database');
   assert.equal(/req\.body/.test(body), false, 'the scope must not come from the request body');
   assert.equal(/callBini\(/.test(body), false, 'the owner route must not call the model directly any more');
   const engine = src.slice(src.indexOf('const runAgent = makeEngine('), src.indexOf('});', src.indexOf('const runAgent = makeEngine(')));
@@ -61,7 +63,11 @@ test('Bini for owners on Telegram answers through the same agent, with the scope
   const at = src.indexOf('const ownerTelegram = {');
   assert.ok(at > 0, 'ownerTelegram not built');
   const block = src.slice(at, src.indexOf('\n};', at));
-  assert.match(block, /runAgent\(ownerAgent, req, res, \{ scope, channel: 'owner-telegram' \}\)/);
+  assert.match(block, /runAgent\(ownerAgent, req, res, \{ scope: full, channel: 'owner-telegram' \}\)/);
+  // The Telegram answer carries the action's id and buttons when Bini prepared one; the scope keeps the access rules'
+  // building ids and adds the switches and the Telegram id the link was proved for.
+  assert.match(block, /actionsOn: sw\.on, staffConfirm: sw\.staff, telegramId: String\(from && from\.id\)/);
+  assert.match(block, /out\.ownerAction \? \{ reply: String\(out\.reply\), ownerAction: out\.ownerAction \} : String\(out\.reply\)/);
   assert.match(block, /healthMessage\(/);
   assert.ok(src.indexOf('const ownerTelegram = {') < src.indexOf("require('./ride')(fastify"), 'must exist before the ride module mounts');
   const ride = src.slice(src.indexOf("require('./ride')(fastify"), src.indexOf('});', src.indexOf("require('./ride')(fastify")));
