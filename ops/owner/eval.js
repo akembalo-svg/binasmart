@@ -9,6 +9,9 @@ const { mintKey, hashKey } = require('../../building/ownerKeys');
 const { makeExecutor } = require('../../agents/owner/tools/building');
 const S = require('./eval-score');
 const QUESTIONS = require('./eval-questions.json');
+const { ACTIONS_AGENT } = require('../../agents/owner/actions/store');
+const { OPEN, REMIND_AHEAD_DAYS } = require('../../agents/owner/actions/resolve');
+const invoiceGen = require('../../building/invoices');
 
 const BASE = 'http://127.0.0.1:' + (process.env.PORT || 4210);
 const PACE_MS = 4000;                        // the Gemini pacing used elsewhere
@@ -31,8 +34,9 @@ async function expectations(p, slug, other) {
   const oov = await one(orun, 'overview'), orm = await one(orun, 'rent_month', { month });
   const buildingNames = [ov.building, oov.building].filter(Boolean);
   const real = await realShapes(p, b.id, unitNo);
+  const act = await actionExpectations(p, b.id, real.fill.floor);
   const repairs = await one(run, 'repairs');
-  return { buildingId: b.id, month, unit: unitNo, buildingNames, fill: real.fill, values: Object.assign({
+  return { buildingId: b.id, month, unit: unitNo, buildingNames, fill: Object.assign({}, real.fill, act.fill), values: Object.assign({}, act.values, {
     repairsOpen: [...new Set([repairs.count, ov.openRepairs].filter(v => v != null))],
     unitFacts: [unit.monthlyRentEtb, unit.contractRentEtb, ...real.unitNames].filter(v => v != null && v !== ''),
   }, real.values, {
@@ -44,7 +48,47 @@ async function expectations(p, slug, other) {
     overview: [ov.units, ov.occupied].filter(v => v != null),
     otherFigures: [oov.expectedMonthlyRentEtb, orm.invoicedEtb].filter(v => v),
     healthMonths: health.rentMonthsWithoutInvoices || [],
+    actionUnit: [String(unitNo)],
   }) };
+}
+
+// What an action's preview must say, read straight from the database — not through the tools or the resolver under test.
+// The month asked for is the next one, so the answer does not depend on what this month already has.
+async function actionExpectations(p, buildingId, floor) {
+  const now = new Date();
+  const tenancies = await p.tenancy.findMany({ where: { active: true, unit: { buildingId } },
+    select: { id: true, unit: { select: { number: true, floor: true, monthlyRent: true } }, contract: { select: { monthlyRent: true } } } });
+  const open = await p.invoice.findMany({ where: { tenancyId: { in: tenancies.map(t => t.id) }, status: { in: OPEN } },
+    orderBy: [{ dueDate: 'asc' }, { id: 'asc' }], select: { id: true, tenancyId: true, amount: true, lateFee: true, dueDate: true } });
+  const total = i => i.amount + (i.lateFee || 0);
+  const due = open.filter(i => i.dueDate <= new Date(now.getTime() + REMIND_AHEAD_DAYS * 86400000));
+  const remindTenancies = [...new Set(due.map(i => i.tenancyId))];
+  const first = open[0] || null;
+  const unpaidUnit = first ? (tenancies.find(t => t.id === first.tenancyId) || {}).unit : null;
+  const newest = first ? open.filter(i => i.tenancyId === first.tenancyId).slice(-1)[0] : null;
+  const next = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1)).toISOString().slice(0, 7);
+  const plan = await invoiceGen.planInvoicesForBuilding(p, buildingId, invoiceGen.monthWhen(next));
+  return {
+    fill: { unpaidUnit: unpaidUnit ? unpaidUnit.number : '', unpaidAmount: first ? total(first) : 0, nextMonth: next },
+    values: {
+      actionAll: [tenancies.length],
+      actionFloor: [tenancies.filter(t => t.unit.floor === floor).length],
+      actionRemind: [remindTenancies.length, due.reduce((s2, i) => s2 + total(i), 0)],
+      actionInvoice: [newest ? total(newest) : 0],
+      actionCreate: [plan.create.length, plan.create.reduce((s2, r) => s2 + (r.amount || 0), 0)],
+      actionPay: [first ? total(first) : 0],
+    },
+  };
+}
+
+// Between the question and the answer, nothing may have been sent or written (design §5). Counted, not guessed.
+async function snapshot(p, buildingId) {
+  const [batches, invoices, paid] = await Promise.all([
+    p.outboundBatch.count({ where: { buildingId } }),
+    p.invoice.count({ where: { tenancy: { unit: { buildingId } } } }),
+    p.invoice.count({ where: { status: 'PAID', tenancy: { unit: { buildingId } } } }),
+  ]);
+  return { batches, invoices, paid };
 }
 
 // The first real owner's question shapes, filled from the DEMO building's own records, read straight from the
@@ -105,6 +149,8 @@ async function realShapes(p, buildingId, unitNo) {
       return;
     }
     buildingId = e.buildingId;
+    const on = await p.agentSwitch.findFirst({ where: { agent: ACTIONS_AGENT, kind: 'building', entityId: buildingId, disabledAt: null }, select: { id: true } });
+    if (!on) { console.log('owner actions are off for ' + slug + ': run  node ops/owner/actions.js on ' + slug + '  (demo buildings only)'); process.exitCode = 1; return; }
     const values = Object.assign({}, e.values);
     const key = mintKey(slug);
     keyHash = hashKey(key);
@@ -113,7 +159,11 @@ async function realShapes(p, buildingId, unitNo) {
     for (const q of QUESTIONS) {
       const text = q.q.replace('{month}', e.month).replace('{unit}', String(e.unit))
         .replace('{floor}', String(e.fill.floor)).replace('{groundUnit}', String(e.fill.groundUnit))
-        .replace('{phrase}', e.fill.phrase).replace('{phraseEn}', e.fill.phraseEn);
+        .replace('{phrase}', e.fill.phrase).replace('{phraseEn}', e.fill.phraseEn)
+        .replace('{unpaidUnit}', String(e.fill.unpaidUnit)).replace('{unpaidAmount}', String(e.fill.unpaidAmount))
+        .replace('{nextMonth}', String(e.fill.nextMonth));
+      const isAction = ['action', 'actionAsk'].includes(q.kind);
+      const before = isAction ? await snapshot(p, e.buildingId) : null;
       const exp = q.kind === 'health' ? Object.assign({}, values, { [q.expect || 'healthMonths']: values.healthMonths }) : values;
       const question = q.kind === 'health' ? Object.assign({}, q, { expect: 'healthMonths' }) : q;
       let response;
@@ -122,6 +172,10 @@ async function realShapes(p, buildingId, unitNo) {
           headers: { 'content-type': 'application/json', 'x-owner-key': key, 'x-binasmart-eval': '1' }, body: JSON.stringify({ message: text }) });
         response = { status: r.status, body: await r.json().catch(() => ({})) };
       } catch (err) { response = { status: 0, body: {} }; }
+      if (isAction) {
+        const after = await snapshot(p, e.buildingId);
+        response.writes = { batches: after.batches - before.batches, invoices: after.invoices - before.invoices, paid: after.paid - before.paid };
+      }
       const s = S.score(question, response, exp, e.buildingNames);
       rows.push({ q, failed: s.failed, text, reply: response.body.reply || '' });
       process.stdout.write(s.failed.length ? 'x' : '.');
@@ -138,7 +192,11 @@ async function realShapes(p, buildingId, unitNo) {
     process.exitCode = summary.pass ? 0 : 2;
   } finally {
     if (keyHash) await p.ownerKey.deleteMany({ where: { keyHash } });
-    if (buildingId) await p.auditLog.deleteMany({ where: { buildingId, action: 'OWNER_BINI_Q', createdAt: { gte: started } } });
+    if (buildingId) {
+      await p.auditLog.deleteMany({ where: { buildingId, action: { startsWith: 'OWNER_' }, createdAt: { gte: started } } });
+      // The previews this run prepared are cancelled and removed: none of them was confirmed, so nothing else exists.
+      await p.ownerAction.deleteMany({ where: { buildingId, createdAt: { gte: started } } });
+    }
     await p.$disconnect();
   }
 })();
