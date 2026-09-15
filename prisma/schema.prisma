@@ -1611,3 +1611,36 @@ model InvoiceLink {
 
   @@index([invoiceId])
 }
+
+// An owner action waiting for ✅ (owner actions design §3.2). Bini's prepare tools write one row and nothing else; the
+// owner's confirm moves it pending → running → done in one statement, so a second press, the expiry sweep or a second
+// server can never run it twice. No phone number and no tenant name is stored here: payload holds ids, unit numbers and
+// amounts, text holds the notice the owner confirmed, cardText the preview they read.
+model OwnerAction {
+  id           String    @id                  // 22 random URL-safe characters; the only thing a button carries
+  buildingId   String
+  kind         String    // message | remind_unpaid | send_invoice | create_invoices | record_payment
+  status       String    @default("pending")  // pending | running | done | failed | refused | cancelled | expired | replaced
+  channel      String    // owner-telegram | owner-web
+  preparedBy   String    // OwnerAccess id, or dashboard
+  preparedRole String    // owner | staff | dashboard
+  preparedTg   String?   // the Telegram id it was prepared from (owner-telegram only)
+  args         Json      // what the owner asked for, as the prepare tool validated it
+  payload      Json      // the resolved recipients and figures: tenancy, invoice ids, units, amounts
+  text         String?   // message: the exact notice text
+  cardText     String?   // the preview the owner read, kept so the result can be shown under it
+  fingerprint  String    // hash of the figures that must still hold at confirm
+  bulk         Boolean   @default(false)
+  urgent       Boolean   @default(false)
+  cards        Json?     // [{ chatId, messageId }] — the Telegram cards to edit with the result
+  confirmedBy  String?   // OwnerAccess id, or dashboard
+  confirmedAt  DateTime?
+  result       Json?     // counts, batch ids, or the error kind
+  expiresAt    DateTime
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([buildingId, createdAt])
+  @@index([status, expiresAt])
+  @@index([buildingId, bulk, confirmedAt])
+}
