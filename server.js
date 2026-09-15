@@ -3012,30 +3012,10 @@ fastify.post('/api/admin/maintenance/:id/status', async (req, reply) => {
   return { ok: true, status: m.status };
 });
 
-// ===== INVOICE GENERATOR (reusable) =====
+// ===== INVOICE GENERATOR (reusable) — building/invoices.js explains the August/September gap =====
+const invoiceGen = require('./building/invoices');
 async function generateInvoicesForBuilding(buildingId, when = new Date()) {
-  const y = when.getFullYear(), m = when.getMonth();
-  const monthStart = new Date(y, m, 1);
-  const monthEnd = new Date(y, m + 1, 1);
-  const tenancies = await prisma.tenancy.findMany({
-    where: { active: true, unit: { buildingId } },
-    include: { unit: true, contract: true }
-  });
-  let created = 0, skipped = 0;
-  for (const t of tenancies) {
-    const exists = await prisma.invoice.findFirst({
-      where: { tenancyId: t.id, type: 'RENT', dueDate: { gte: monthStart, lt: monthEnd } }
-    });
-    if (exists) { skipped++; continue; }
-    const amount = t.contract?.monthlyRent || t.unit.monthlyRent;
-    const code = 'BS-' + Math.floor(1000 + Math.random() * 9000) + '-' + t.unit.number.replace(/[^A-Za-z0-9]/g, '');
-    await prisma.invoice.create({ data: {
-      tenancyId: t.id, type: 'RENT', amount,
-      dueDate: new Date(y, m, 5), paymentCode: code, status: 'PENDING'
-    }});
-    created++;
-  }
-  return { created, skipped, month: (m + 1) + '/' + y };
+  return invoiceGen.generateInvoicesForBuilding(prisma, buildingId, when);
 }
 
 // manual trigger (owner)
@@ -3177,11 +3157,10 @@ fastify.get('/api/owner/:slug/overview', async (req, reply) => {
 // ===== CRON: 1st of every month 06:00 — generate rent invoices for ALL buildings =====
 cron.schedule('0 6 1 * *', async () => {
   try {
-    const buildings = await prisma.building.findMany({ select: { id: true, name: true } });
-    for (const b of buildings) {
-      const r = await generateInvoicesForBuilding(b.id);
-      console.log('[cron] invoices', b.name, JSON.stringify(r));
-    }
+    // Each building on its own: one failure is reported and the rest still get their invoices.
+    const r = await invoiceGen.runMonthlyInvoices(prisma, { log: m => console.log(m) });
+    if (r.failed.length) notifyAdmins('⚠️ Monthly rent invoices failed for ' + r.failed.length + ' building(s): '
+      + r.failed.map(f => f.name).join(', ') + '. The others were generated. Details: binasmart-api log, [cron] invoice error.').catch(() => {});
   } catch (e) { console.error('[cron] invoice error', e.message); }
 }, { timezone: 'Africa/Addis_Ababa' });
 
