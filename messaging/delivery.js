@@ -138,7 +138,10 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
       catch (e) { s = { status: 'failed', errorKind: 'provider_error' }; }
       if (s.status === 'sent' || s.status === 'test') remaining -= n;
       const errorKind = carried || s.errorKind || null;
-      await store.updateMessage(messageId, { channel: 'sms', status: s.status, smsParts: n, providerId: s.providerId || null, errorKind });
+      // The send has happened: a failed write must not turn a real SMS into "failed" (the owner would send it again). The
+      // row stays a queued SMS: it counts against the limit and is not listed as waiting to be delivered.
+      try { await store.updateMessage(messageId, { channel: 'sms', status: s.status, smsParts: n, providerId: s.providerId || null, errorKind }); }
+      catch (e) { log('[delivery] error: ' + errKind(e)); }
       return result(r, messageId, 'sms', s.status, errorKind);
     };
     // made.id is the record created for this recipient, so an error after it can still close it as failed.
@@ -166,6 +169,8 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
         await store.updateMessage(m.id, { status: 'failed', errorKind: 'tg_failed' });
         return result(r, m.id, 'telegram', 'failed', 'tg_failed');
       }
+      // The row becomes the SMS attempt before the provider is called, so a failed write after the send leaves a counted SMS.
+      await store.updateMessage(m.id, { channel: 'sms', status: 'queued', smsParts: n, errorKind: 'tg_failed' });
       return sendSms(r, m.id, smsText, n, 'tg_failed');
     };
 

@@ -70,6 +70,7 @@ test('the pending-delivery list authenticates and reads only the building behind
   assert.doesNotMatch(body, /req\.body/);
   assert.match(body, /where: \{ buildingId: b\.id, kind: 'invoice', invoiceId: \{ not: null \} \}/);
   assert.match(body, /status: \{ not: 'PAID' \}, tenancy: \{ unit: \{ buildingId: b\.id \} \}/);
+  assert.match(body, /filter\(m => !\['sent', 'delivered', 'queued'\]\.includes\(m\.status\)\)/, 'a queued row may have gone: not offered again');
 });
 
 // Carry-overs from the Task 4/5 reviews.

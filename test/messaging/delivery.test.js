@@ -156,20 +156,37 @@ test('one tenant with two units in a batch gets the Telegram link once, and only
   assert.equal(f.provider.calls.filter(c => c.text === FIRST).length, 1, 'a Telegram fallback does not repeat the link');
 });
 
-test('a record never stays queued after an error: Telegram refused with no SMS label, or a failed store write', async () => {
+test('a record never stays queued after an error before the send: Telegram refused with no SMS label', async () => {
   const { store, provider, d } = setup({ mode: 'live', tgOk: false });
   const r = await send(d, { ...REAL, smsLabel: '' }, [rcpt({ telegramChatId: '1' })]);
   assert.deepEqual(r.results.map(x => [x.channel, x.status, x.errorKind]), [['telegram', 'failed', 'error']]);
   assert.equal(r.results[0].messageId, store.s.messages[0].id);
   assert.deepEqual(store.s.messages.map(m => [m.channel, m.status, m.errorKind]), [['telegram', 'failed', 'error']]);
   assert.equal(provider.calls.length, 0);
-  const t = setup({ mode: 'live' });
-  const update = t.store.updateMessage;
-  let n = 0;
-  t.store.updateMessage = async (id, data) => { if (++n === 1) throw new Error('store down'); return update(id, data); };
-  const r2 = await send(t.d, REAL, [rcpt()]);
-  assert.deepEqual(r2.results.map(x => [x.status, x.errorKind]), [['failed', 'error']]);
-  assert.deepEqual(t.store.s.messages.map(m => [m.status, m.errorKind]), [['failed', 'error']]);
+});
+
+test('tenant SMS: when the record write after a real send fails, the real status is returned and the row stays a counted, queued SMS', async () => {
+  const store = memStore(), provider = recorder(), logs = [];
+  const update = store.updateMessage;
+  store.updateMessage = async (id, data) => {
+    if (data.status === 'sent') { const e = new Error('store down for +251900000001'); e.code = 'P1001'; throw e; }
+    return update(id, data);
+  };
+  const d = makeDelivery({ store, now: () => NOW, sms: makeSms({ mode: 'live', provider, supports: geezSupports }),
+    sendTg: async () => false, log: line => logs.push(line) });
+  const r = await send(d, REAL, [rcpt()]);
+  assert.deepEqual([r.ok, r.counts.sent, provider.calls.length], [true, 1, 1], 'the SMS went: not reported as failed, so it is not sent again');
+  assert.deepEqual(r.results.map(x => [x.channel, x.status]), [['sms', 'sent']]);
+  assert.deepEqual(store.s.messages.map(m => [m.channel, m.status, m.smsParts]), [['sms', 'queued', smsParts(FIRST)]]);
+  assert.equal((await d.plan({ building: REAL, recipients: [] })).used, smsParts(FIRST), 'the queued row counts against the limit');
+  // Telegram refused and the SMS fallback went: the row is already an SMS when the write after the send fails.
+  const f = await send(d, REAL, [rcpt({ tenancyId: 't2', userId: 'u2', telegramChatId: '9' })]);
+  assert.deepEqual(f.results.map(x => [x.channel, x.status, x.errorKind]), [['sms', 'sent', 'tg_failed']]);
+  const row = store.s.messages[1];
+  assert.deepEqual([row.channel, row.status, row.errorKind, row.smsParts], ['sms', 'queued', 'tg_failed', smsParts(FIRST)]);
+  assert.equal(logs.length, 2);
+  for (const l of logs) assert.match(l, /P1001/);
+  assert.doesNotMatch(logs.join(' '), /store down|900000001/);
 });
 
 test('an SMS cannot be planned without a label; a Telegram-only send does not need one', async () => {

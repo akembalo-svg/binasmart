@@ -2969,7 +2969,8 @@ fastify.get('/api/owner/:slug/pending-deliveries', async (req, reply) => {
     orderBy: { createdAt: 'desc' }, take: 500, select: { invoiceId: true, status: true, errorKind: true, createdAt: true } });
   const latest = new Map();
   for (const m of rows) if (!latest.has(m.invoiceId)) latest.set(m.invoiceId, m);
-  const stuck = [...latest.values()].filter(m => m.status !== 'sent' && m.status !== 'delivered');
+  // queued: the provider took it but the record write after failed (messaging/delivery.js), so it may have gone — not offered again.
+  const stuck = [...latest.values()].filter(m => !['sent', 'delivered', 'queued'].includes(m.status));
   if (!stuck.length) return { invoices: [] };
   const invs = await prisma.invoice.findMany({ where: { id: { in: stuck.map(m => m.invoiceId) }, status: { not: 'PAID' }, tenancy: { unit: { buildingId: b.id } } },
     include: { tenancy: { include: { unit: { select: { number: true } } } } }, orderBy: { dueDate: 'asc' } });
