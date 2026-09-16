@@ -31,9 +31,10 @@ test('the tenant poster opens with the owner key in a header, never in an addres
   assert.doesNotMatch(open, /key=|KEY|location\.href|\.location =/);
 });
 
-test('Invoices lists what did not reach tenants with Send now, and Send tells sent, test mode and not delivered apart', () => {
-  assert.ok(HTML.includes('<div id="pending-deliv"></div>'));
-  assert.match(HTML, /: ''\}`;\n    loadPending\(\);\n  \}/);
+test('Messages lists what did not reach tenants with Send now, and Send tells sent, test mode and not delivered apart', () => {
+  assert.ok(HTML.includes("+ '<div id=\"pending-deliv\"></div>'"), 'the list is rendered inside the Messages tab');
+  assert.match(HTML, /loadSmsMonth\(\); loadPending\(\); loadBatches\(\); loadActions\(\);/);
+  assert.match(HTML, /: ''\}`;\n    loadPendingCount\(\);\n  \}/, 'Invoices loads only the count line');
   const load = fn('loadPending');
   assert.match(load, /\/pending-deliveries'/);
   for (const v of ['esc(i.unit)', 'esc(i.type)', 'esc(i.dueDate)', 'esc(i.lastTry)', 'esc(i.reason)', 'jsq(i.id)', 'jsq(i.unit)', 'sendInvoice(']) assert.ok(load.includes(v), v);
@@ -42,7 +43,7 @@ test('Invoices lists what did not reach tenants with Send now, and Send tells se
   assert.match(send, /r\.delivered/);
   assert.match(send, /r\.status === 'test'/);
   assert.match(send, /NOT delivered: the tenant did not receive it/);
-  assert.match(send, /loadPending\(\);/);
+  assert.match(send, /loadPending\(\); loadPendingCount\(\);/, 'both the list and the count line are refreshed');
   assert.doesNotMatch(send, /WhatsApp/);
 });
 
@@ -63,4 +64,27 @@ test('Send says Telegram failed when that is the reason, before the test-mode no
   assert.match(send, /alert\(tgNote \+ \(r\.delivered/);
   assert.match(send, /String\(r\.reason \|\| 'not reachable'\)\.replace\(/, 'the reason is reduced to plain characters');
   assert.doesNotMatch(send, /innerHTML/);
+});
+
+// ===== Plan C: the two doors to the Messages tab =====
+
+test('Invoices keeps one line with the count, and it opens the Messages tab', () => {
+  assert.ok(HTML.includes('<div id="pending-line"></div>'));
+  const load = fn('loadPendingCount');
+  assert.match(load, /kfetch\('\/api\/owner\/' \+ slug \+ '\/pending-deliveries'\)/);
+  assert.match(load, /var n = \(d\.invoices \|\| \[\]\)\.length;/);
+  assert.ok(load.includes('esc(n)'), 'the count is escaped');
+  assert.match(load, /onclick="setTab\(\\'messages\\'\)"/);
+  assert.match(load, /ያልደረሱ/);
+  // Nothing to say when nothing is waiting.
+  assert.match(load, /: '';/);
+});
+
+test('the tenant Telegram card in Settings points at the Messages tab', () => {
+  const load = fn('loadTenantTg');
+  assert.match(load, /onclick="setTab\(\\'messages\\'\)"/);
+  assert.match(load, /📨 See all messages · ሁሉንም መልእክቶች ይመልከቱ/);
+  // The card still does everything Plan A gave it.
+  for (const v of ['esc(d.linked)', 'esc(d.active)', 'jsq(d.poster)', 'esc(d.startLink)', 'esc(u.unit)', 'jsq(u.tenancyId)'])
+    assert.ok(load.includes(v), v);
 });

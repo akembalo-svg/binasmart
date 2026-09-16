@@ -356,7 +356,7 @@ function renderTab(){
     <div class="card p-4"><div class="flex items-center justify-between">
       <div class="font-black text-sm">🧾 ${new Date().toLocaleString('en',{month:'long'})} — ${d.collection.paidCount}/${d.collection.invoiceCount} paid</div>
       <button class="mbtn" style="background:#0aa88f;color:#fff" onclick="genInvoices()">⚡ Generate month invoices</button></div></div>
-    <div id="pending-deliv"></div>
+    <div id="pending-line"></div>
     ${unpaid.length ? `<div class="card p-4"><div class="font-black text-sm mb-2 text-red-500">⏰ Unpaid (${unpaid.length})</div>
       <div class="space-y-2">${unpaid.map(i => `
       <div class="rounded-xl p-2.5 flex items-center gap-2" style="background:#fef2f2;border:1px solid #fecaca">
@@ -373,7 +373,7 @@ function renderTab(){
         <span class="text-slate-400">${esc(i.method || '')}</span>
         <span class="font-black text-emerald-600">${fmtETB(i.amount)}</span>
         <button onclick="unpayInvoice('${i.id}','${jsq(i.shop?.name || 'Unit')} ${jsq(i.unit)}')" class="tag bg-slate-200 text-slate-500">↩️</button></div>`).join('')}</div></div>` : ''}`;
-    loadPending();
+    loadPendingCount();
   }
 
   if (TAB === 'acct'){
@@ -647,6 +647,7 @@ async function loadTenantTg(){
       + '<div class="text-[11px] mb-2" style="color:#475569"><b>' + esc(d.linked) + ' / ' + esc(d.active) + '</b> tenants linked · ተከራዮች ተገናኝተዋል</div>'
       + '<button class="mbtn w-full" style="background:#e0f2fe;color:#0369a1;padding:10px" onclick="openTenantPoster(\'' + jsq(d.poster) + '\')">🖨️ Print the tenant poster (A4) · ፖስተር አትም</button>'
       + '<div class="text-[10px] text-slate-400 mt-1" style="word-break:break-all">' + esc(d.startLink) + '</div>'
+      + '<button class="mbtn w-full mt-1" style="background:#f1f5f9;color:#334155;padding:10px" onclick="setTab(\'messages\')">📨 See all messages · ሁሉንም መልእክቶች ይመልከቱ</button>'
       + (rows ? '<div class="mt-2">' + rows + '</div>' : '');
   } catch (e) { box.innerHTML = ''; }
 }
@@ -849,6 +850,18 @@ async function loadPending(){
       }).join('') + '</div>';
   } catch (e) { box.innerHTML = ''; }
 }
+// The same list, counted, for the Invoices tab. One line, or nothing at all when nothing is waiting.
+async function loadPendingCount(){
+  var box = document.getElementById('pending-line'); if (!box) return;
+  try{
+    var r = await kfetch('/api/owner/' + slug + '/pending-deliveries'); if (!r.ok) { box.innerHTML = ''; return; }
+    var d = await r.json();
+    var n = (d.invoices || []).length;
+    box.innerHTML = n ? '<div class="card p-3 flex items-center gap-2"><span class="flex-1 text-[11px] text-amber-700">📭 <b>'
+      + esc(n) + '</b> waiting to be delivered · ያልደረሱ</span>'
+      + '<button class="tag" style="background:#0088cc;color:#fff" onclick="setTab(\'messages\')">📨 Messages</button></div>' : '';
+  } catch (e) { box.innerHTML = ''; }
+}
 async function vatSettings(){
   const reg = confirm('Is this building VAT-registered? OK = Yes, Cancel = No');
   let no = null;
@@ -926,7 +939,7 @@ async function sendInvoice(id, unit){
   alert(tgNote + (r.delivered ? '✅ Sent by ' + (r.channel === 'sms' ? 'SMS' : 'Telegram') + ' / ተልኳል'
     : r.status === 'test' ? '🧪 Test mode — recorded only, NOT delivered: the tenant did not receive it (SMS is not switched on yet). It stays under "Waiting to be delivered". / የሙከራ ሁኔታ — ተመዝግቧል፣ ለተከራዩ አልደረሰም'
     : '⚠️ NOT delivered (' + String(r.reason || 'not reachable').replace(/[^A-Za-z0-9_ ]/g, '') + '): the tenant did not receive it. There is no working Telegram link for this tenant and SMS is not switched on yet. It stays under "Waiting to be delivered". / አልደረሰም'));
-  loadPending();
+  loadPending(); loadPendingCount();
 }
 async function genInvoices(){
   if (!confirm('Generate this month\'s invoices for all occupied units?')) return;
