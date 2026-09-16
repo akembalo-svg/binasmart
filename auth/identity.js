@@ -91,7 +91,7 @@ function makeIdentity({ prisma, now }) {
     return {
       id: u.id,
       name: u.name,
-      email: /@telegram\.bina\.et$/.test(u.email) ? null : u.email,   // a placeholder is not an address
+      email: /@telegram\.bina\.et$|@phone\.bina\.et$/.test(u.email) ? null : u.email,   // a placeholder is not an address
       image: u.image || null,
       phone: u.phone || null,
       phoneVerified: !!u.phoneVerifiedAt,

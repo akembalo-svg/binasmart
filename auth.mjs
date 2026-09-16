@@ -4,6 +4,12 @@ import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { PrismaClient } from '@prisma/client';
 import { telegram } from './auth/telegram-plugin.mjs';
+import { phoneCode } from './auth/phone-code-plugin.mjs';
+import { createRequire } from 'node:module';
+
+// The SMS sender is CommonJS (messaging/*), as auth/telegram-verify.js is; this is the same bridge.
+const require = createRequire(import.meta.url);
+const { makePhoneCodeSender } = require('./auth/phone-code-sender.js');
 
 const prisma = new PrismaClient();
 
@@ -28,7 +34,18 @@ export const auth = betterAuth({
       mapProfileToUser: (p) => ({ name: p.name || p.given_name || 'BinaSmart user' }),
     },
   } : {},
-  plugins: [telegram({ botToken: process.env.BINA_RIDER_BOT_TOKEN })],
+  // Sign in with a code sent by SMS. Like Google above, it is a door only when it is fully
+  // configured: no provider token, SMS switched off, or a pepper shorter than 32 characters and
+  // the flow answers 'not configured' to everything. The login page asks /api/auth-methods and
+  // does not draw a button it cannot use.
+  plugins: [
+    telegram({ botToken: process.env.BINA_RIDER_BOT_TOKEN }),
+    phoneCode({
+      prisma,
+      sender: makePhoneCodeSender({ prisma, env: process.env, log: m => console.log(m) }),
+      pepper: process.env.AUTH_PHONE_CODE_PEPPER || ''
+    })
+  ],
   user: {
     modelName: 'authUser',
     additionalFields: {
