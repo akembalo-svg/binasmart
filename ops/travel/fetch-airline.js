@@ -126,5 +126,111 @@ function extract(html) {
   return { ok: true, title: title || '(untitled)', text, chars: text.length };
 }
 
+// ---------- documents on disk ----------
+const crypto = require('crypto');
+const { stripBoilerplate } = require(path.join(ROOT, 'knowledge', 'index.js'));
+
+// The mega-menu and the site-wide notices (a Kigali roadworks advisory, a Russian card-payment notice, an
+// Israel transit notice) are on EVERY page, so they cannot be spotted from one page. knowledge/index.js
+// already solves this for crawled sites and is exported: any paragraph that appears on a large share of one
+// site's pages is template, not content. It groups by the first path segment of the slug, so the site id is
+// borrowed as that segment here and taken off again afterwards.
+function stripPackBoilerplate(pages) {
+  const wrapped = pages.map(p => ({ ...p, slug: p.siteId + '/' + p.slug }));
+  const stripped = stripBoilerplate(wrapped, { minPages: 4, ratio: 0.15 });
+  return stripped.map(p => ({ ...p, slug: p.slug.slice(p.siteId.length + 1), text: p.text.trim() }));
+}
+
+// Whitespace-insensitive so a reflowed paragraph is not "a change"; sensitive to everything else, because
+// 23 kg becoming 32 kg is exactly what the weekly check exists to catch.
+const normText = s => String(s || '').normalize('NFC').replace(/\s+/g, ' ').trim();
+function contentHash(text) { return crypto.createHash('sha1').update(normText(text)).digest('hex'); }
+
+const esc = s => String(s).replace(/"/g, '\\"');
+// knowledge/index.js parses front matter line by line with /^(\w+):\s*"?(.*?)"?\s*$/, so every key is a
+// single word and every value is one line. Order is fixed so a diff of two runs shows only what moved.
+const FM_KEYS = ['url', 'title', 'source_name', 'section', 'lang', 'status', 'fetchedAt', 'lastChecked',
+  'firstFetched', 'goneAt', 'contentHash', 'generated_by'];
+function frontMatter(meta) {
+  const lines = ['---'];
+  for (const k of FM_KEYS) if (meta[k] !== undefined && meta[k] !== null && meta[k] !== '') lines.push(k + ': "' + esc(meta[k]) + '"');
+  lines.push('---');
+  return lines.join('\n');
+}
+function readMeta(md) {
+  const fm = /^---\n([\s\S]*?)\n---\n/.exec(String(md));
+  if (!fm) return {};
+  const meta = {};
+  for (const line of fm[1].split('\n')) { const m = /^(\w+):\s*"?(.*?)"?\s*$/.exec(line); if (m) meta[m[1]] = m[2].replace(/\\"/g, '"'); }
+  return meta;
+}
+function bodyOf(md) { const fm = /^---\n[\s\S]*?\n---\n/.exec(String(md)); return fm ? String(md).slice(fm[0].length) : String(md); }
+
+// The header states provenance and nothing else. It must never contain a figure: a kilo or a fee in a header
+// written by this script would be a fact from memory, which is the one thing the design forbids.
+function header(page, site, today) {
+  const en = 'Source: ' + page.url + ' (official ' + site.name + ' page, in English), fetched ' + today
+    + '. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated.'
+    + ' Confirm on the page before travelling.';
+  const am = 'በአማርኛ፦ ይህ ገጽ ከ' + site.nameAm + ' ኦፊሴላዊ ድረ-ገጽ (' + page.url + ') የተወሰደ ነው። '
+    + (page.sectionTitleAm ? 'ክፍል፦ ' + page.sectionTitleAm + '። ' : '')
+    + 'አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።';
+  return en + '\n\n' + am;
+}
+
+function renderDoc(page, site, { today, firstFetched } = {}) {
+  const title = site.name + ' — ' + (page.title || page.slug);
+  const meta = { url: page.url, title, source_name: site.name, section: page.section || '', lang: site.lang || 'en',
+    status: 'live', fetchedAt: today, lastChecked: today, firstFetched: firstFetched && firstFetched !== today ? firstFetched : '',
+    contentHash: contentHash(page.text), generated_by: 'ops/travel/fetch-airline.js' };
+  return frontMatter(meta) + '\n\n# ' + title + '\n\n' + header(page, site, today) + '\n\n' + page.text.trim() + '\n';
+}
+
+// Rewrite exactly one line. Used when a page is unchanged: the body must stay byte-identical (so git shows
+// nothing and the ingest's hash finds nothing to do) while the record of when we last looked still advances.
+function touchLastChecked(file, today) {
+  const cur = fs.readFileSync(file, 'utf8');
+  fs.writeFileSync(file, cur.replace(/^lastChecked: ".*"$/m, 'lastChecked: "' + esc(today) + '"'));
+}
+
+// docs: [{ siteId, slug, path, url, title, section, sectionTitleAm, text }] for ONE site, already stripped.
+// Returns { added, changed, unchanged, gone, revived } as lists of slugs.
+function writePack(dir, docs, site, { today, dryRun = false } = {}) {
+  fs.mkdirSync(dir, { recursive: true });
+  const day = today || new Date().toISOString().slice(0, 10);
+  const r = { added: [], changed: [], unchanged: [], gone: [], revived: [] };
+  const wanted = new Map(docs.map(d => [d.slug, d]));
+  const onDisk = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
+
+  for (const [slug, d] of wanted) {
+    const file = path.join(dir, slug + '.md');
+    const old = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null;
+    const oldMeta = old ? readMeta(old) : null;
+    if (oldMeta && oldMeta.contentHash === contentHash(d.text) && oldMeta.status !== 'gone') {
+      r.unchanged.push(slug);
+      if (!dryRun && oldMeta.lastChecked !== day) touchLastChecked(file, day);
+      continue;
+    }
+    const first = (oldMeta && (oldMeta.firstFetched || oldMeta.fetchedAt)) || day;
+    if (!old) r.added.push(slug); else { r.changed.push(slug); if (oldMeta.status === 'gone') r.revived.push(slug); }
+    if (!dryRun) fs.writeFileSync(file, renderDoc(d, site, { today: day, firstFetched: first }));
+  }
+
+  for (const f of onDisk) {
+    const slug = f.replace(/\.md$/, '');
+    if (wanted.has(slug)) continue;
+    const cur = fs.readFileSync(path.join(dir, f), 'utf8');
+    const meta = readMeta(cur);
+    if (meta.source_name !== site.name) continue;        // another site's document in the same directory
+    if (meta.status === 'gone') continue;                // already marked, do not report it again every week
+    r.gone.push(slug);
+    if (dryRun) continue;
+    const next = { ...meta, status: 'gone', goneAt: day, lastChecked: day };
+    fs.writeFileSync(path.join(dir, f), frontMatter(next) + '\n' + bodyOf(cur));
+  }
+  return r;
+}
+
 module.exports = { sitemapUrls, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract,
+  stripPackBoilerplate, contentHash, frontMatter, readMeta, bodyOf, renderDoc, touchLastChecked, writePack,
   UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS };
