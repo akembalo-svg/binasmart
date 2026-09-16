@@ -1614,8 +1614,15 @@ model InvoiceLink {
 
 // An owner action waiting for ✅ (owner actions design §3.2). Bini's prepare tools write one row and nothing else; the
 // owner's confirm moves it pending → running → done in one statement, so a second press, the expiry sweep or a second
-// server can never run it twice. No phone number and no tenant name is stored here: payload holds ids, unit numbers and
-// amounts, text holds the notice the owner confirmed, cardText the preview they read.
+// server can never run it twice. No phone number is stored here: payload holds ids, unit numbers and amounts, text
+// holds the notice the owner confirmed, cardText the preview they read.
+//
+// cardText MAY HOLD AN OCCUPANT NAME. A preview for one unit reads back who it is about, and the owner is entitled to
+// see that — they typed it in. It is stored so the result can be shown under the card the owner already read.
+// It never reaches the model (the [[P1]] token rule in agents/owner replaces names before a turn), and it
+// never leaves in a response: agents/owner/actions/history.js, which is the only thing that reads this table for
+// the dashboard, does not select it. Anything new that reads OwnerAction must leave it, and args and payload, where
+// they are.
 model OwnerAction {
   id           String    @id                  // 22 random URL-safe characters; the only thing a button carries
   buildingId   String

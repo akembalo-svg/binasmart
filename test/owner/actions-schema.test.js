@@ -30,3 +30,17 @@ test('the SQL creates exactly that table, and the reverse drops it', () => {
   assert.match(down, /DROP TABLE IF EXISTS "OwnerAction"/);
   assert.match(down, /ops\/owner\/actions\.js off/, 'the reverse says to switch the actions off first');
 });
+
+// Plan C review: the comment above the table said no tenant name is stored in it, and cardText is a preview that can
+// hold one. Somebody reading the table has to be told, and told where that name may go.
+test('the comment says cardText may hold an occupant name, and where that name may not travel', () => {
+  const at = schema.indexOf('// An owner action waiting for');
+  assert.ok(at > 0, 'the comment above model OwnerAction is missing');
+  const note = schema.slice(at, schema.indexOf('model OwnerAction {', at));
+  assert.match(note, /cardText/);
+  assert.match(note, /occupant name/i);   // the comment shouts it: cardText MAY HOLD AN OCCUPANT NAME
+  assert.match(note, /never reaches the model/);
+  assert.match(note, /never leaves in a response/);
+  // The claim that has to go, because it was not true of cardText.
+  assert.equal(/no tenant name is stored here/.test(note), false);
+});
