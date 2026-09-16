@@ -19,6 +19,7 @@ test('the phone door is listed among the doors once the number is proven', () =>
 });
 
 test('changing a proven number is said, in both languages, to be out of scope here', () => {
+  assert.match(src, /ቁጥርዎ ተረጋግጧል፤ በዚህ ገጽ ቁጥር መቀየር አይቻልም።/, 'the corrected Amharic sentence, with no typo');
   assert.match(src, /ቁጥር መቀየር/, 'Amharic: changing the number');
   assert.match(src, /contact support/, 'English');
   assert.match(src, /if \(me\.phone\) html \+=/);
