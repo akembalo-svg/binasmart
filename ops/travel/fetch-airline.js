@@ -244,6 +244,137 @@ function writePack(dir, docs, site, { today, dryRun = false } = {}) {
   return r;
 }
 
+// ---------- the network ----------
+// One request at a time, the registry's crawl delay between them, a 40 s timeout, one retry for a 5xx or a
+// timeout and none for a 404. fetchImpl and sleep are injected so the tests never touch a network.
+function makeFetcher({ fetchImpl, sleep, delayMs = 5000, ua = UA, timeoutMs = 40000 } = {}) {
+  const f = fetchImpl || ((...a) => fetch(...a));
+  const zz = sleep || (ms => new Promise(r => setTimeout(r, ms)));
+  let first = true;
+  return async function get(url) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      if (first) first = false; else await zz(delayMs);
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), timeoutMs);
+      try {
+        const r = await f(url, { signal: ctrl.signal, redirect: 'follow',
+          headers: { 'user-agent': ua, 'accept-language': 'en', accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' } });
+        if (r.status === 404 || r.status === 410) return { ok: false, why: 'http_' + r.status };
+        if (r.status !== 200) { if (attempt) return { ok: false, why: 'http_' + r.status }; continue; }
+        const ct = String(r.headers.get('content-type') || '');
+        const buf = Buffer.from(await r.arrayBuffer());
+        if (/xml|gzip|octet-stream/.test(ct) || /\.(xml|gz)$/.test(new URL(url).pathname)) return { ok: true, buf, ct };
+        if (!/text\/html/.test(ct)) return { ok: false, why: 'not_html' };
+        return { ok: true, buf, ct, html: buf.toString('utf8') };
+      } catch (e) {
+        if (attempt) return { ok: false, why: e.name === 'AbortError' ? 'timeout' : String(e.message).slice(0, 60) };
+      } finally { clearTimeout(t); }
+    }
+    return { ok: false, why: 'unreachable' };
+  };
+}
+
+// Absolute, same-host, fragment-free links. Never another host: the pack is the airline's own pages.
+function linksOn(html, base) {
+  const out = new Set();
+  let host; try { host = new URL(base).host; } catch (e) { return []; }
+  for (const m of String(html).matchAll(/href\s*=\s*["']([^"'\s]+)["']/gi)) {
+    let u; try { u = new URL(m[1], base); } catch (e) { continue; }
+    if (u.host !== host || !/^https?:$/.test(u.protocol)) continue;
+    u.hash = ''; u.search = '';
+    out.add(u.toString().replace(/\/$/, ''));
+  }
+  return [...out];
+}
+
+// One site, start to finish. Returns { pages, failed, asked } where pages are ready for stripPackBoilerplate.
+async function fetchSite(site, { fetchImpl, sleep, limit = 0, log = () => {} } = {}) {
+  const get = makeFetcher({ fetchImpl, sleep, delayMs: (site.crawlDelaySeconds || 5) * 1000 });
+  const pages = [], failed = [];
+  let seeds = [];
+  if (site.fetch === 'sitemap') {
+    const queue = [site.sitemap];
+    const seen = new Set();
+    while (queue.length) {
+      const sm = queue.shift();
+      if (seen.has(sm)) continue; seen.add(sm);
+      const r = await get(sm);
+      if (!r.ok) { failed.push({ url: sm, why: r.why }); continue; }
+      const parsed = sitemapUrls(r.buf);
+      seeds.push(...parsed.urls);
+      for (const i of parsed.indexes) queue.push(i);
+    }
+  } else {
+    seeds = [...(site.urls || [])];
+  }
+  seeds.push(...(site.seeds || []));
+  let todo = selectUrls(site, seeds);
+  if (limit) todo = todo.slice(0, limit);
+  log('[travel] ' + site.id + ': ' + seeds.length + ' urls in the sitemap, ' + todo.length + ' selected');
+
+  const fetched = new Map();
+  const discovered = new Set();
+  const take = async (list, round) => {
+    for (let i = 0; i < list.length; i++) {
+      const p = list[i];
+      if (fetched.has(p.path)) continue;
+      const r = await get(p.url);
+      if (!r.ok) { failed.push({ url: p.url, why: r.why }); continue; }
+      if (round === 1 && site.discoverLinks) for (const l of linksOn(r.html, p.url)) discovered.add(l);
+      const ex = extract(r.html);
+      if (!ex.ok) { failed.push({ url: p.url, why: ex.why }); continue; }
+      fetched.set(p.path, { ...p, siteId: site.id, title: ex.title, text: ex.text });
+      if ((i + 1) % 10 === 0) log('[travel] ' + site.id + ' round ' + round + ': ' + (i + 1) + '/' + list.length);
+    }
+  };
+  await take(todo, 1);
+  if (site.discoverLinks && !limit) {
+    const extra = selectUrls(site, [...discovered]).filter(p => !fetched.has(p.path));
+    if (extra.length) log('[travel] ' + site.id + ': ' + extra.length + ' pages the sitemap did not list');
+    await take(extra, 2);   // one level only: round 2 never harvests links
+  }
+  pages.push(...assignSlugs([...fetched.values()]));
+  return { pages, failed };
+}
+
+// ---------- command line ----------
+//   node ops/travel/fetch-airline.js                       fetch every site in the registry and write the pack
+//   node ops/travel/fetch-airline.js --site ethiopian-airlines
+//   node ops/travel/fetch-airline.js --dry-run             fetch, report, write nothing
+//   node ops/travel/fetch-airline.js --limit 5 --dry-run   a five-page smoke test
+// About 120 pages at 5 s apiece is roughly 14 minutes, so run it detached and poll the log.
+async function main() {
+  const argv = process.argv.slice(2);
+  const only = argv.includes('--site') ? argv[argv.indexOf('--site') + 1] : '';
+  const limit = argv.includes('--limit') ? Number(argv[argv.indexOf('--limit') + 1]) : 0;
+  const dryRun = argv.includes('--dry-run');
+  const outDir = argv.includes('--out') ? argv[argv.indexOf('--out') + 1] : OUT_DIR;
+  const today = new Date().toISOString().slice(0, 10);
+  const reg = JSON.parse(fs.readFileSync(REGISTRY, 'utf8'));
+  const log = m => console.log(m);
+  let bad = 0;
+  for (const site of reg.sites) {
+    if (site.fetch === 'manual') { log('[travel] ' + site.id + ': manual (' + site.reach + ') — nothing fetched'); continue; }
+    if (only && site.id !== only) continue;
+    const t0 = Date.now();
+    const { pages, failed } = await fetchSite(site, { limit, log });
+    const docs = stripPackBoilerplate(pages);
+    const { kept, thin } = splitThin(docs);
+    const r = writePack(outDir, kept, site, { today, dryRun });
+    bad += failed.length;
+    log('[travel] ' + site.id + ': ' + kept.length + ' documents'
+      + ' (+' + r.added.length + ' added, ' + r.changed.length + ' changed, ' + r.unchanged.length + ' unchanged, '
+      + r.gone.length + ' gone, ' + thin.length + ' too thin after stripping, ' + failed.length + ' failed)'
+      + ' in ' + Math.round((Date.now() - t0) / 1000) + 's' + (dryRun ? '  [DRY RUN — nothing written]' : ''));
+    for (const f of failed.slice(0, 12)) log('        ! ' + f.why + '  ' + f.url);
+    for (const d of thin) log('        ~ thin after stripping  ' + d.slug);
+    console.log(JSON.stringify({ site: site.id, ...r, failed: failed.length, thin: thin.length }));
+  }
+  if (bad) log('[travel] ' + bad + ' page(s) produced no document — see the lines above');
+}
+
 module.exports = { sitemapUrls, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract,
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, renderDoc, touchLastChecked, writePack,
-  UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS };
+  makeFetcher, linksOn, fetchSite, main, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS };
+
+if (require.main === module) main().catch(e => { console.error('[travel] failed: ' + e.message); process.exit(1); });
