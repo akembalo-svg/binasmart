@@ -141,6 +141,15 @@ function stripPackBoilerplate(pages) {
   return stripped.map(p => ({ ...p, slug: p.slug.slice(p.siteId.length + 1), text: p.text.trim() }));
 }
 
+// Stripping the template can take a page under the floor: a page that was mostly mega-menu has almost
+// nothing left once the mega-menu goes. The floor is therefore checked again AFTER stripping, and such a
+// page is reported as thin rather than written to disk as a near-empty document.
+function splitThin(docs) {
+  const kept = [], thin = [];
+  for (const d of docs) (String(d.text || '').trim().length >= MIN_CHARS ? kept : thin).push(d);
+  return { kept, thin };
+}
+
 // Whitespace-insensitive so a reflowed paragraph is not "a change"; sensitive to everything else, because
 // 23 kg becoming 32 kg is exactly what the weekly check exists to catch.
 const normText = s => String(s || '').normalize('NFC').replace(/\s+/g, ' ').trim();
@@ -168,11 +177,15 @@ function bodyOf(md) { const fm = /^---\n[\s\S]*?\n---\n/.exec(String(md)); retur
 
 // The header states provenance and nothing else. It must never contain a figure: a kilo or a fee in a header
 // written by this script would be a fact from memory, which is the one thing the design forbids.
+// ሆ is the Amharic "from" prefix, and nameAm is የኢትዮጵያ ..., whose leading የ is itself a
+// prefix: ከየኢትዮጵያ is not a word. Drop that የ so the header reads ከኢትዮጵያ አየር መንገድ.
+const fromAm = name => 'ከ' + String(name || '').replace(/^የ/, '');
+
 function header(page, site, today) {
   const en = 'Source: ' + page.url + ' (official ' + site.name + ' page, in English), fetched ' + today
     + '. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated.'
     + ' Confirm on the page before travelling.';
-  const am = 'በአማርኛ፦ ይህ ገጽ ከ' + site.nameAm + ' ኦፊሴላዊ ድረ-ገጽ (' + page.url + ') የተወሰደ ነው። '
+  const am = 'በአማርኛ፦ ይህ ገጽ ' + fromAm(site.nameAm) + ' ኦፊሴላዊ ድረ-ገጽ (' + page.url + ') የተወሰደ ነው። '
     + (page.sectionTitleAm ? 'ክፍል፦ ' + page.sectionTitleAm + '። ' : '')
     + 'አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።';
   return en + '\n\n' + am;
@@ -232,5 +245,5 @@ function writePack(dir, docs, site, { today, dryRun = false } = {}) {
 }
 
 module.exports = { sitemapUrls, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract,
-  stripPackBoilerplate, contentHash, frontMatter, readMeta, bodyOf, renderDoc, touchLastChecked, writePack,
+  stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, renderDoc, touchLastChecked, writePack,
   UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS };

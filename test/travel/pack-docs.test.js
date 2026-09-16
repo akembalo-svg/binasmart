@@ -7,7 +7,7 @@ const assert = require('node:assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { stripPackBoilerplate, contentHash, frontMatter, renderDoc, readMeta, touchLastChecked, writePack } =
+const { stripPackBoilerplate, splitThin, MIN_CHARS, contentHash, frontMatter, renderDoc, readMeta, touchLastChecked, writePack } =
   require('../../ops/travel/fetch-airline');
 
 const SITE = { id: 'ethiopian-airlines', name: 'Ethiopian Airlines', nameAm: 'የኢትዮጵያ አየር መንገድ', lang: 'en' };
@@ -159,4 +159,26 @@ test('touchLastChecked changes exactly one line', () => {
   const diff = before.map((l, i) => [l, after[i]]).filter(([a, b]) => a !== b);
   assert.equal(diff.length, 1);
   assert.match(diff[0][1], /^lastChecked: "2026-10-01"$/);
+});
+
+test('the Amharic header says ከኢትዮጵያ, never ከየኢትዮጵያ', () => {
+  const md = renderDoc(pageOf('a', 'a page with enough words on it to be a real page.'), SITE, { today: '2026-09-16' });
+  assert.ok(md.includes('ከኢትዮጵያ አየር መንገድ'), 'the from-prefix was not applied');
+  assert.ok(!md.includes('ከየኢትዮጵያ'), 'two prefixes in a row is not Amharic');
+});
+
+test('splitThin keeps a page that survived stripping and reports one that did not', () => {
+  const fat = { slug: 'fat', text: 'x'.repeat(MIN_CHARS) };
+  const bare = { slug: 'bare', text: 'nothing left but a heading' };
+  const { kept, thin } = splitThin([fat, bare]);
+  assert.deepEqual(kept.map(d => d.slug), ['fat']);
+  assert.deepEqual(thin.map(d => d.slug), ['bare']);
+});
+
+test('a page that is all mega-menu is thin after stripping, not a near-empty document', () => {
+  const pages = ['a', 'b', 'c', 'd', 'e'].map((s, i) =>
+    pageOf(s, i === 0 ? 'Short.' : 'Only page ' + i + ' says this, at length, so it is content. '.repeat(20)));
+  const { kept, thin } = splitThin(stripPackBoilerplate(pages));
+  assert.deepEqual(thin.map(d => d.slug), ['a']);
+  assert.equal(kept.length, 4);
 });
