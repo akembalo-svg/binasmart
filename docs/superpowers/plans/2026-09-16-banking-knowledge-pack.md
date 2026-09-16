@@ -4,9 +4,9 @@
 
 **Goal:** Turn the public, reachable pages of Ethiopia's banks, the capital-market regulator and the national card switch into a dated, sourced, searchable knowledge library — `knowledge/banking/` — that Bini prefers for money questions, with 60 gold questions (40 Amharic, 20 English), a benchmark at or above 90 % Page@3, a weekly freshness check, and an explicit refusal to do anything but inform.
 
-**Architecture:** The airline pack's machinery is **generalised, not copied**. `ops/travel/fetch-airline.js`, `ops/travel/freshness.js` and `ops/travel/build-gold-travel.js` become three pack-agnostic modules — `ops/packs/fetch-pack.js`, `ops/packs/freshness.js`, `ops/packs/build-gold.js` — each taking `--pack <name>` and reading `knowledge/<pack>/sources.json`. The three airline entry points survive as thin shims that re-export the generalised modules bound to `travel`, so every existing test under `test/travel/` keeps passing against its original require path and the airline's 131 documents are never re-rendered (pinned by a byte-identity test and by re-running `--gold travel`). `banking` then joins `law`, `health`, `eservices`, `mor` and `travel` in `knowledge/index.js readSources`. Bini's per-message intent test is generalised into `assistant/intent.js`, keyed by pack; `assistant/travel.js` becomes a shim over it and `assistant/banking.js` is the second consumer. Dr Afiya and Asmat exclude `banking` the way they exclude `travel`; the owner agent has `knowledge: false` and cannot see it at all.
+**Architecture:** The airline pack's machinery is **generalised, not copied**. `ops/travel/fetch-airline.js`, `ops/travel/freshness.js` and `ops/travel/build-gold-travel.js` become three pack-agnostic modules — `ops/packs/fetch-pack.js`, `ops/packs/freshness.js`, `ops/packs/build-gold.js` — each taking `--pack <name>` and reading `knowledge/<pack>/sources.json`. The three airline entry points survive as thin shims that re-export the generalised modules bound to `travel`, so every existing test under `test/travel/` keeps passing against its original require path and the airline's 114 documents are never re-rendered (pinned by a byte-identity test and by re-running `--gold travel`). `banking` then joins `law`, `health`, `eservices`, `mor` and `travel` in `knowledge/index.js readSources`. Bini's per-message intent test is generalised into `assistant/intent.js`, keyed by pack; `assistant/travel.js` becomes a shim over it and `assistant/banking.js` is the second consumer. Dr Afiya and Asmat exclude `banking` the way they exclude `travel`; the owner agent has `knowledge: false` and cannot see it at all.
 
-**Tech Stack:** Node 20 on the live VPS (`31.97.176.180`, `/var/www/connectcare/binasmart`), `node:test` (`npm test` = 1372 passing today), Prisma + Postgres (`KnowledgeChunk`, 14,515 chunks), Gemini `gemini-embedding-001` for document and query vectors with BGE-M3 (`pm2 bina-embed`, 127.0.0.1:3031) as the local fallback, pm2 process `binasmart-api` on port 4210, Telegram bot `@bina_smart_bot`.
+**Tech Stack:** Node 20 on the live VPS (`31.97.176.180`, `/var/www/connectcare/binasmart`), `node:test` (`npm test` = 1372 passing at `cc3c690`), Prisma + Postgres (`KnowledgeChunk`, 14,460 chunks at the newest benchmark run), Gemini `gemini-embedding-001` for document and query vectors with BGE-M3 (`pm2 bina-embed`, 127.0.0.1:3031) as the local fallback, pm2 process `binasmart-api` on port 4210, Telegram bot `@bina_smart_bot`.
 
 ---
 
@@ -62,9 +62,11 @@ Nothing in this list is re-fetched by this pack; every one of them is named in `
 | v3 `gold-v3-agents.json` | 111 | 96.4 % | 98.2 % | 2026-09-16 16:05, 14,515 chunks |
 | v3 slice afiya | 54 | 96.3 % | 96.3 % | must not move at all |
 | v3 slice asmat | 57 | 96.5 % | 100.0 % | must not move at all |
-| travel `gold-travel.json` | 60 | **86.7 %** | **85.0 %** | 2026-09-16 16:07, 14,515 chunks — the figure the airline report accepted |
+| travel `gold-travel.json` | 60 | **86.7 %** | **85.0 %** | 2026-09-16 17:20, 14,460 chunks — the newest run, and the figure the airline report accepted |
 
-**A caution about the travel figure.** The same gold set was re-run at 17:14 the same day, after the "one bad fetch is not a deletion" commit changed the corpus to 14,460 chunks, and produced **86.7 % / 83.3 %** — retrieval identical, shipped one English question lower. So the airline regression gate in this plan is: **retrieval Page@3 must be exactly 86.7 %**, and shipped must be **≥ 83.3 %**. A retrieval number that is not 86.7 % means the generalisation changed the airline pack, and that stops the task.
+**A caution about the travel figure.** That gold set was run three times on 2026-09-16 while the airline pack was still being finished: 86.7 % / 85.0 % at 14,515 chunks, then 86.7 % / 83.3 % at 14,460, then 86.7 % / 85.0 % at 14,460 again. **Retrieval Page@3 was 86.7 % in all three**; the shipped figure moved by one English question as the corpus changed. So the airline regression gate in this plan is: **retrieval Page@3 must be exactly 86.7 %**, and shipped must be **≥ 83.3 %**. A retrieval number that is not 86.7 % means the generalisation changed the airline pack, and that stops the task.
+
+**The corpus is not frozen while this plan is executed.** Between the research for this plan and its commit, `f94b91c Travel pack: an aeroplane is not an answer` removed seventeen fleet and individual-aircraft documents from `knowledge/travel/`, taking it from 131 to **114**. Every figure above was re-measured against that commit. Task 0 re-records all of them: use what prints, not what is printed here.
 
 ---
 
@@ -93,7 +95,7 @@ These apply to all fourteen tasks. Read them once; they are not repeated.
 
 **Files:**
 - Create: `/tmp/extract_plan.py` (only if missing — it is not part of the repo)
-- Read: `/root/bini-eval/retrieval-latest.json`, `retrieval-gold-v2-latest.json`, `retrieval-gold-v3-agents-latest.json`, `retrieval-gold-travel-20260916-160703.json`
+- Read: `/root/bini-eval/retrieval-latest.json`, `retrieval-gold-v2-latest.json`, `retrieval-gold-v3-agents-latest.json`, `retrieval-gold-travel-latest.json`
 
 - [ ] **Step 1: Check whether the slicer is still there**
 
@@ -145,7 +147,7 @@ if out != '-':
 cd /var/www/connectcare/binasmart && git log --oneline -1 && ls ops/travel/ | grep -v bak && ls knowledge/travel/*.md | wc -l && ls test/travel/ | grep -v bak
 ```
 
-Expected: the newest commit is `d250a49 Travel pack: one bad fetch is not a deletion` or later; `ops/travel/` lists `build-gold-travel.js  fetch-airline.js  freshness.js  gold-travel-spec.json`; `131` documents; `test/travel/` lists eleven `.test.js` files including `pack-docs.test.js`, `fetch-run.test.js`, `freshness.test.js`, `gold-travel.test.js`, `sources.test.js`, `bini-travel-prefer.test.js`, `benchmark-travel.test.js`, `knowledge-travel.test.js`.
+Expected: the newest commit is `cc3c690 Plan: the banking and money knowledge pack` or later; `ops/travel/` lists `build-gold-travel.js  fetch-airline.js  freshness.js  gold-travel-spec.json`; `114` documents (it was 131 until `f94b91c` removed the fleet and individual-aircraft pages — **record whatever number prints and use that, not 114**); `test/travel/` lists eleven `.test.js` files including `pack-docs.test.js`, `fetch-run.test.js`, `freshness.test.js`, `gold-travel.test.js`, `sources.test.js`, `bini-travel-prefer.test.js`, `benchmark-travel.test.js`, `knowledge-travel.test.js`.
 
 **If `ops/packs/` already exists, stop and report** — someone started this work already.
 
@@ -164,7 +166,7 @@ Slice block 4 of this task to `/tmp/t0-baseline.sh` and run `bash /tmp/t0-baseli
 ```bash
 cd /var/www/connectcare/binasmart
 node -e '
-const files = ["retrieval-latest.json", "retrieval-gold-v2-latest.json", "retrieval-gold-v3-agents-latest.json", "retrieval-gold-travel-20260916-160703.json"];
+const files = ["retrieval-latest.json", "retrieval-gold-v2-latest.json", "retrieval-gold-v3-agents-latest.json", "retrieval-gold-travel-latest.json"];
 for (const f of files) {
   const j = require("/root/bini-eval/" + f);
   console.log(f, j.at, "chunks", j.chunks);
@@ -187,7 +189,7 @@ retrieval-gold-v3-agents-latest.json 2026-09-16T16:05:54.114Z chunks 14515
    afiya                                     54    96.3%    96.3%
    asmat                                     57    96.5%   100.0%
    am question, gold only in English         33    87.9%    93.9%
-retrieval-gold-travel-20260916-160703.json 2026-09-16T16:07:03.843Z chunks 14515
+retrieval-gold-travel-latest.json 2026-09-16T17:20:55.643Z chunks 14460
    all questions                             60    86.7%    85.0%
 ```
 
@@ -846,7 +848,7 @@ Expected: `2 files changed`, and the new commit's subject line printed.
 
 **The decision this task implements, and why.** The alternative was to copy `fetch-airline.js` to `fetch-banking.js` and edit the copy. Copying was rejected: the file is 471 lines of rules that took a day to get right — the two-strike `missedAt` gone rule, the mass-loss guard, the re-render-without-reporting-a-change rule, the boilerplate strip, the soft-404 refusal — and the *second* copy of those rules is the one that silently rots. It is also already 95 % pack-agnostic: it is driven entirely by `sources.json` and knows nothing about aeroplanes except four things — the registry path, the output directory, the `generated_by` string and the two sentences of the document header. So the generalisation is small and mechanical, which is what makes it the lower-risk option.
 
-The risk it carries is precise: **the airline's 131 documents must not change by one byte**, because a re-render would re-ingest, re-chunk and move the travel benchmark. That risk is bought off three ways — a characterization fixture in this task, a live `--dry-run` that must report `0 added, 0 changed, 0 re-rendered` in Task 3, and `--gold travel` at **86.7 % retrieval** in Task 13.
+The risk it carries is precise: **the airline's 114 documents must not change by one byte**, because a re-render would re-ingest, re-chunk and move the travel benchmark. That risk is bought off three ways — a characterization fixture in this task, a live `--dry-run` that must report `0 added, 0 changed, 0 re-rendered` in Task 3, and `--gold travel` at **86.7 % retrieval** in Task 13.
 
 - [ ] **Step 1: Write the patcher**
 
@@ -903,7 +905,7 @@ const out = renderDoc(page, site, { today: meta.fetchedAt, firstFetched: meta.fi
 
 const fixture = { _about: 'Frozen from ops/travel/fetch-airline.js on the day ops/packs/fetch-pack.js was '
   + 'split out of it. If this fixture stops matching, the banking generalisation has changed what the '
-  + 'airline pack writes, and 131 documents would be re-rendered and re-ingested. That is the failure this '
+  + 'airline pack writes, and every airline document would be re-rendered and re-ingested. That is the failure this '
   + 'file exists to catch.', page, site: site.id, opts: { today: meta.fetchedAt, firstFetched: meta.firstFetched || '' },
   expected: out, headerOnly: header(page, site, meta.fetchedAt), title: cleanTitle('Free Baggage Allowance | Ethiopian Airlines') };
 fs.mkdirSync(R + '/test/packs/fixtures', { recursive: true });
@@ -931,7 +933,7 @@ Slice block 4 of this task to `test/packs/airline-identity.test.js`.
 ```javascript
 'use strict';
 // The airline pack must not move. ops/packs/fetch-pack.js was split out of ops/travel/fetch-airline.js so the
-// banking pack could reuse it; the price of getting that wrong is 131 documents re-rendered, re-chunked and
+// banking pack could reuse it; the price of getting that wrong is every airline document re-rendered, re-chunked and
 // re-embedded, and a travel benchmark that moves for a reason that has nothing to do with the airline.
 // So: the renderer, the header and the title cleaner are held to exactly what they produced before the split.
 const test = require('node:test');
@@ -1844,7 +1846,7 @@ Expected: eight `patched` lines and `loads`.
 
 - [ ] **Step 6: Put the airline's exact wording into the travel registry**
 
-The two sentences that just left the code have to go back, character for character, or 131 documents change. Blocks 19/20.
+The two sentences that just left the code have to go back, character for character, or every airline document changes. Blocks 19/20.
 
 Old:
 
@@ -1958,7 +1960,7 @@ Expected: `test/packs/` `# pass 22`, `# fail 0`; `test/travel/` green and unchan
 
 - [ ] **Step 9: Prove it against the live site, not against a fixture**
 
-The fixture proves one document. This proves all 131, against the airline as it is today. It fetches about 120 pages at 5 s each, so it runs detached — about 14 minutes.
+The fixture proves one document. This proves all 114, against the airline as it is today. It fetches about 120 pages at 5 s each, so it runs detached — about 14 minutes.
 
 ```
 cd /var/www/connectcare/binasmart && rm -f /tmp/t3-dry.log && nohup node ops/travel/fetch-airline.js --dry-run > /tmp/t3-dry.log 2>&1 & echo started $!
@@ -1990,7 +1992,7 @@ header that tells a reader an Amharic page is in English is a lie in the
 one place we write rather than copy.
 
 Proved twice: the frozen fixture still matches byte for byte, and a live
-dry run over all 131 airline pages reports 0 added, 0 changed, 0
+dry run over every airline page reports 0 added, 0 changed, 0
 re-rendered.
 
 Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
@@ -2015,7 +2017,7 @@ Before 300 pages are fetched, the selection is checked without a network, then f
 
 The travel pack had one site that actually fetched, so a slug only had to be unique within that site. This pack has six, all writing into one flat directory, and they collide at once: ECMA and EthSwitch both have `/contact-us`, Zemen and Dashen both answer questions on a page whose last segment is a variant of `faq`, and every WordPress site has `/about-us`. `writePack` would let the second one overwrite the first without a word.
 
-So every document in a multi-site pack is named `<site-id>-<slug>`. It is also the readable thing: `zemen-tariff` and `cbe-misalliance-terms-and-tarrif` say whose tariff it is, which is exactly what a person asking "what does the bank charge" needs to see in an answer. The prefix is applied after `assignSlugs`, so the de-duplication rule inside it is untouched and the airline pack, which does not set the flag, keeps its 131 filenames.
+So every document in a multi-site pack is named `<site-id>-<slug>`. It is also the readable thing: `zemen-tariff` and `cbe-misalliance-terms-and-tarrif` say whose tariff it is, which is exactly what a person asking "what does the bank charge" needs to see in an answer. The prefix is applied after `assignSlugs`, so the de-duplication rule inside it is untouched and the airline pack, which does not set the flag, keeps its filenames exactly as they are.
 
 Two replacements in `ops/packs/fetch-pack.js` — blocks 0 (old) and 1 (new), then 2 and 3. The first old text is the line Task 2 Replacement 10 wrote, so it exists only after Task 2 has run.
 
@@ -2062,7 +2064,7 @@ New:
 
 ```javascript
 // ---------- slugs ----------
-// A pack with one fetched site needs no prefix and must not grow one: the airline's 131 filenames are in a
+// A pack with one fetched site needs no prefix and must not grow one: the airline's filenames are in a
 // gold set, in a benchmark and in the index. `slugPrefix: false` says so explicitly.
 const slugPrefixOf = site => (site && site.slugPrefix === false ? '' : ((site && (site.slugPrefix || site.id)) || '') + '-');
 const clean = s => String(s).toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/-{2,}/g, '-').replace(/^-|-$/g, '');
@@ -2911,7 +2913,7 @@ Poll with `tail -3 /tmp/t6-ingest.log`. Expected at the end:
 cd /var/www/connectcare/binasmart && node --env-file=.env -e "const {PrismaClient}=require('@prisma/client');(async()=>{const p=new PrismaClient();const rows=await p.knowledgeChunk.findMany({select:{source:true,slug:true}});const by={},pages={};for(const r of rows){by[r.source]=(by[r.source]||0)+1;(pages[r.source]=pages[r.source]||new Set()).add(r.slug);}console.log('total chunks',rows.length);for(const s of Object.keys(by).sort())console.log('  '+s.padEnd(12)+String(by[s]).padStart(6)+' chunks  '+String(pages[s].size).padStart(5)+' pages');await p.\$disconnect();})()"
 ```
 
-Expected: a `banking` line with the document count from Task 5 and roughly 8–15 chunks per document; `travel` unchanged at 131 pages; `total` up from 14,515 by the banking chunk count and by nothing else. **Write these figures down** — Task 14 quotes them.
+Expected: a `banking` line with the document count from Task 5 and roughly 8–15 chunks per document; `travel` unchanged at the page count Task 0 recorded; `total` up by the banking chunk count and by nothing else. **Write these figures down** — Task 14 quotes them.
 
 - [ ] **Step 8: Prove the exclusion works against the real index, not just the rules file**
 
@@ -4819,7 +4821,7 @@ Then the breakdown:
 cd /var/www/connectcare/binasmart && node --env-file=.env -e "const {PrismaClient}=require('@prisma/client');(async()=>{const p=new PrismaClient();const rows=await p.knowledgeChunk.findMany({select:{source:true,slug:true}});const by={},pages={};for(const r of rows){by[r.source]=(by[r.source]||0)+1;(pages[r.source]=pages[r.source]||new Set()).add(r.slug);}console.log('total chunks',rows.length);for(const s of Object.keys(by).sort())console.log('  '+s.padEnd(12)+String(by[s]).padStart(6)+' chunks  '+String(pages[s].size).padStart(5)+' pages');await p.\$disconnect();})()"
 ```
 
-Expected: a `banking` line at the Task 5 document count; **`travel` still at 131 pages**; every other source at the count it had in Task 0. Write all of it into the report.
+Expected: a `banking` line at the Task 5 document count; **`travel` still at the page count Task 0 recorded**; every other source at the count it had in Task 0. Write all of it into the report.
 
 - [ ] **Step 2: Re-run all four benchmarks, one after another**
 
