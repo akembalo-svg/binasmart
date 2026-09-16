@@ -985,6 +985,7 @@ function biniGuards(text, msg, hist, grounding) {
 // ===== Bini: tools (hands), per-user memory, conversation log, misses, handover, languages =====
 const biniLang = require('./assistant/lang');
 const biniPolitics = require('./assistant/politics');
+const biniTravel = require('./assistant/travel');
 // A harness sets this header. Opt-in rather than a guess at IP patterns: a pattern would rot the
 // first time a harness changed its ip, and rot invisibly.
 const isEval = req => String((req && req.headers && req.headers['x-binasmart-eval']) || '') === '1';
@@ -1045,7 +1046,11 @@ fastify.post('/api/assistant', async (req, reply) => {
   const known = await mem.get().catch(() => null);
   let toolsUsed = [];
   try {
-    const [ctx, profile] = await Promise.all([knowledge.contextFor(msg, { lang }).catch(() => ''), Promise.resolve(biniMemory.profileText(known))]);
+    // A travel question is pointed at the Ethiopian Airlines pack (assistant/travel.js): `prefer` moves the
+    // +0.06 tie-breaker to the pack and BinaSmart's own travel pages for this one message, and to nothing
+    // else. Every other message gets exactly the retrieval it got before, with no prefer key at all.
+    const travelPrefer = biniTravel.isTravelQuestion(msg) ? { prefer: biniTravel.PREFER } : {};
+    const [ctx, profile] = await Promise.all([knowledge.contextFor(msg, { lang, ...travelPrefer }).catch(() => ''), Promise.resolve(biniMemory.profileText(known))]);
     const voice = (lang === 'am' || lang === 'am-latin') ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : (lang === 'om' ? '\n\n## Afaan Oromoo voice (glossary + rules)\n' + knowledge.voice('om') : '');
     const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
     let toolOut = '';   // every tool result this turn, so a figure can be traced to its source

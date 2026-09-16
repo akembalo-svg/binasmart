@@ -24,7 +24,9 @@ module.exports = {
   // left thin: which form de-registers a TIN, what a sales register machine owner must do, where a form is downloaded.
   knowledge: {
     prefer: ['law', 'guide', 'eservices', 'mor', 'news:law-*', 'web:justice/*'],
-    exclude: ['page', 'skill', 'llms'],
+    // `travel` added 2026-09-16 with the Ethiopian Airlines pack: an airline's conditions of carriage are
+    // a commercial contract, not Ethiopian law, and must never be quoted as one.
+    exclude: ['page', 'skill', 'llms', 'travel'],
   },
 
   gates: [
