@@ -60,3 +60,51 @@ test('the filters send only a kind and a month, both url-encoded, and reset the 
   assert.match(f, /MSG\.page = 0; MSG\.open = null; loadBatches\(\);/);
   assert.match(HTML, /var MSG = \{ page: 0, kind: '', month: '', open: null, rpage: 0, apage: 0 \};/);
 });
+
+// ===== Task 7: the drill-down, the actions, the legend =====
+
+test('the drill-down shows unit, state, channel and reason, each escaped, and pages on its own', () => {
+  const open = fn('openBatch');
+  assert.match(open, /'\/api\/owner\/' \+ slug \+ '\/messages\/' \+ encodeURIComponent\(id\) \+ '\?page=' \+ \(MSG\.rpage \|\| 0\)/);
+  for (const v of ['esc(x.unit)', 'esc(x.channel)', 'esc(x.reason)', 'esc(msgLabel(MSG_STATE, x.present))', 'esc(d.text)'])
+    assert.ok(open.includes(v), v);
+  // A second tap on the same batch closes it; opening another one starts at its first page.
+  assert.match(open, /if \(MSG\.open === id && !keepPage\) \{ MSG\.open = null; box\.innerHTML = ''; return; \}/);
+  assert.match(open, /if \(!keepPage\) MSG\.rpage = 0;/);
+  assert.match(open, /msgPager\(d\.page, d\.pages, 'batchPage'\)/);
+  assert.match(fn('batchPage'), /MSG\.rpage = Math\.max\(0, \(MSG\.rpage \|\| 0\) \+ dir\); openBatch\(MSG\.open, true\);/);
+});
+
+test('nothing about a tenant but the unit number is ever written into the drill-down', () => {
+  const open = fn('openBatch');
+  for (const never of ['phone', 'tenancyId', 'userId', 'providerId', 'tenant', '.name'])
+    assert.equal(open.includes(never), false, never);
+  // A reason the server has not sent before is printed as text, not looked up and silently lost.
+  assert.match(open, /x\.reason \? ' · ' \+ esc\(x\.reason\) : ''/);
+});
+
+test('the action history names a role and a channel, never an id, and escapes every figure', () => {
+  const load = fn('loadActions');
+  assert.match(load, /'\/api\/owner\/' \+ slug \+ '\/owner-actions\?page=' \+ \(MSG\.apage \|\| 0\)/);
+  for (const v of ['esc(msgLabel(MSG_ACT, a.kind))', 'esc(msgLabel(MSG_ST, a.status))', 'esc(msgLabel(MSG_BY, a.preparedBy))',
+    'esc(msgLabel(MSG_BY, a.confirmedBy))', 'esc(msgLabel(MSG_CH, a.channel))', 'esc(c.sent)', 'esc(c.test)',
+    'esc(c.failed)', 'esc(c.notReachable)', 'esc(a.created)', 'esc(a.skipped)', 'esc(a.month)', 'esc(a.unit)',
+    'esc(a.totalEtb)', 'esc(a.reason)']) assert.ok(load.includes(v), v);
+  assert.match(load, /a\.notReached\.map\(function\(u\)\{ return esc\(u\); \}\)/);
+  assert.match(load, /No actions yet · እስካሁን የለም/);
+  assert.match(load, /msgPager\(d\.page, d\.pages, 'actPage'\)/);
+  assert.match(fn('actPage'), /MSG\.apage = Math\.max\(0, \(MSG\.apage \|\| 0\) \+ dir\); loadActions\(\);/);
+  // The page never asks for and never shows the things the route refuses to send.
+  for (const never of ['cardText', 'fingerprint', 'a.args', 'a.payload', 'a.id'])
+    assert.equal(load.includes(never), false, never);
+});
+
+test('the legend explains all six words, including the two an owner would otherwise misread', () => {
+  const r = fn('renderMessages');
+  assert.match(r, /ℹ️ What the words mean · ትርጉማቸው/);
+  for (const w of ['delivered · ደርሷል', 'sent · ተልኳል', 'queued · በመጠባበቅ', 'failed · አልተሳካም',
+    'not reachable · አልተደረሰም', 'test · ሙከራ']) assert.ok(r.includes(w), w);
+  // Queued is the one that looks like a bug and is not, and a reported failure has no reason to show.
+  assert.match(r, /it may have gone, so it is never sent again on its own/);
+  assert.match(r, /the operator reported it undelivered and gave no reason/);
+});

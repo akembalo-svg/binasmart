@@ -688,7 +688,16 @@ function renderMessages(){
   app.innerHTML = '<div class="card p-4" id="sms-month"><div class="text-[11px] text-slate-400">📱 SMS…</div></div>'
     + '<div id="pending-deliv"></div>'
     + '<div class="card p-4" id="msg-batches"><div class="text-[11px] text-slate-400">📨 …</div></div>'
-    + '<div class="card p-4" id="msg-actions"><div class="text-[11px] text-slate-400">✅ …</div></div>';
+    + '<div class="card p-4" id="msg-actions"><div class="text-[11px] text-slate-400">✅ …</div></div>'
+    + '<div class="card p-4"><div class="font-black text-sm mb-1">ℹ️ What the words mean · ትርጉማቸው</div>'
+    + '<div class="text-[10px] text-slate-500 space-y-1">'
+    + '<div>✅ <b>delivered · ደርሷል</b> — the mobile operator reported it delivered to the handset.</div>'
+    + '<div>📤 <b>sent · ተልኳል</b> — Telegram or the SMS provider accepted it. Most SMS stay here: a delivery report only arrives if the provider sends one.</div>'
+    + '<div>⏳ <b>queued · በመጠባበቅ</b> — the provider took it but the record was not written afterwards; it may have gone, so it is never sent again on its own.</div>'
+    + '<div>⚠️ <b>failed · አልተሳካም</b> — it did not go. With no reason beside it, the operator reported it undelivered and gave no reason.</div>'
+    + '<div>📭 <b>not reachable · አልተደረሰም</b> — no Telegram link and no mobile number the provider can reach.</div>'
+    + '<div>🧪 <b>test · ሙከራ</b> — recorded only. Nothing left the server.</div>'
+    + '</div></div>';
   loadSmsMonth(); loadPending(); loadBatches(); loadActions();
 }
 // This month against the building's limit. The parts counted are the ones the limit counts — queued, sent, delivered —
@@ -761,6 +770,69 @@ function msgFilter(){
   MSG.page = 0; MSG.open = null; loadBatches();
 }
 function msgPage(d){ MSG.page = Math.max(0, MSG.page + d); MSG.open = null; loadBatches(); }
+// One batch by unit. The server sends a unit number and nothing else about the tenant; the reason is whatever the
+// delivery layer or the operator recorded, shown as text because it has no fixed vocabulary.
+async function openBatch(id, keepPage){
+  var box = document.getElementById('batch-' + id); if (!box) return;
+  if (MSG.open === id && !keepPage) { MSG.open = null; box.innerHTML = ''; return; }
+  if (!keepPage) MSG.rpage = 0;
+  MSG.open = id;
+  box.innerHTML = '<div class="text-[10px] text-slate-400 mt-1">…</div>';
+  try{
+    var r = await kfetch('/api/owner/' + slug + '/messages/' + encodeURIComponent(id) + '?page=' + (MSG.rpage || 0));
+    if (!r.ok) { box.innerHTML = ''; return; }
+    var d = await r.json();
+    var rows = (d.rows || []).map(function(x){
+      return '<div class="flex items-center gap-2 text-[10px] py-1 border-b" style="border-color:#e9f0ee">'
+        + '<span class="font-black" style="width:64px">' + esc(x.unit) + '</span>'
+        + '<span class="flex-1">' + esc(msgLabel(MSG_STATE, x.present)) + ' · ' + esc(x.channel)
+        + (x.reason ? ' · ' + esc(x.reason) : '') + '</span></div>';
+    }).join('');
+    box.innerHTML = '<div class="mt-2 rounded-xl p-2" style="background:#fff;border:1px solid #e9f0ee">'
+      + (d.text ? '<div class="text-[10px] text-slate-600 mb-1" style="white-space:pre-wrap">' + esc(d.text) + '</div>' : '')
+      + (rows || '<div class="text-[10px] text-slate-400">No recipients recorded · የለም</div>')
+      + msgPager(d.page, d.pages, 'batchPage') + '</div>';
+  } catch (e) { box.innerHTML = ''; }
+}
+function batchPage(dir){ MSG.rpage = Math.max(0, (MSG.rpage || 0) + dir); openBatch(MSG.open, true); }
+var MSG_ACT = { message: 'መልእክት · message', remind_unpaid: 'ማስታወሻ · reminders', send_invoice: 'ደረሰኝ ላክ · send invoice',
+  create_invoices: 'ደረሰኞች አዘጋጅ · create invoices', record_payment: 'ክፍያ መዝግብ · record payment' };
+var MSG_ST = { done: '✅ ተከናውኗል · done', failed: '⚠️ አልተሳካም · failed', refused: '⛔ አልተፈቀደም · refused',
+  cancelled: '✖ ተሰርዟል · cancelled', expired: '⏱ ጊዜው አልፎበታል · expired', replaced: '🔄 ተቀይሯል · replaced',
+  pending: '⏳ በመጠባበቅ · waiting', running: '⏳ በሂደት · running' };
+var MSG_CH = { 'owner-telegram': 'Telegram', 'owner-web': 'dashboard' };
+// What came of the actions the owner confirmed in the Bini chat, after that chat is closed (design §3.3). The server
+// sends a role and a channel; there is no id here to press, and nothing that was in the preview card.
+async function loadActions(){
+  var box = document.getElementById('msg-actions'); if (!box) return;
+  try{
+    var r = await kfetch('/api/owner/' + slug + '/owner-actions?page=' + (MSG.apage || 0));
+    if (!r.ok) { box.innerHTML = ''; return; }
+    var d = await r.json();
+    var rows = (d.actions || []).map(function(a){
+      var c = a.counts, bits = [];
+      if (c) bits.push('📤 ' + esc(c.sent) + ' · 🧪 ' + esc(c.test) + ' · ⚠️ ' + esc(c.failed) + ' · 📭 ' + esc(c.notReachable));
+      if (a.created != null) bits.push('created ' + esc(a.created) + (a.skipped ? ', skipped ' + esc(a.skipped) : '')
+        + (a.month ? ' · ' + esc(a.month) : ''));
+      if (a.unit) bits.push('unit ' + esc(a.unit) + (a.totalEtb ? ' · ' + esc(a.totalEtb) + ' ETB' : ''));
+      if (a.notReached && a.notReached.length) bits.push('not reached: ' + a.notReached.map(function(u){ return esc(u); }).join(', '));
+      if (a.reason) bits.push('reason: ' + esc(a.reason));
+      return '<div class="flex items-start gap-2 text-[11px] py-1.5 border-b" style="border-color:#e9f0ee"><span class="flex-1">'
+        + '<b>' + esc(msgLabel(MSG_ACT, a.kind)) + '</b> · ' + esc(msgLabel(MSG_ST, a.status))
+        + '<br><span class="text-[9px] text-slate-400">' + esc(String(a.confirmedAt || a.at).slice(0, 10))
+        + ' · prepared by ' + esc(msgLabel(MSG_BY, a.preparedBy)) + ' · ' + esc(msgLabel(MSG_CH, a.channel))
+        + (a.confirmedBy ? ' · confirmed by ' + esc(msgLabel(MSG_BY, a.confirmedBy)) : '')
+        + (a.urgent ? ' · ⚠️ urgent' : '') + '</span>'
+        + (bits.length ? '<br><span class="text-[10px]" style="color:#475569">' + bits.join(' · ') + '</span>' : '')
+        + '</span></div>';
+    }).join('');
+    box.innerHTML = '<div class="font-black text-sm mb-1">✅ Actions you confirmed · ያረጋገጧቸው ትዕዛዞች (' + esc(d.total) + ')</div>'
+      + '<div class="text-[10px] text-slate-500 mb-2">What Bini prepared and what came of it. · ቢኒ ያዘጋጀው እና ውጤቱ።</div>'
+      + (rows || '<div class="text-xs text-slate-400">No actions yet · እስካሁን የለም</div>')
+      + msgPager(d.page, d.pages, 'actPage');
+  } catch (e) { box.innerHTML = ''; }
+}
+function actPage(dir){ MSG.apage = Math.max(0, (MSG.apage || 0) + dir); loadActions(); }
 // Invoices whose send did not reach the tenant (messaging design §1.6). Send now uses the invoice as it is today.
 async function loadPending(){
   const box = document.getElementById('pending-deliv'); if (!box) return;
