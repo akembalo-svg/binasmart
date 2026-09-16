@@ -21,15 +21,15 @@
 //   makeMessagesView({ store, now }).list({ buildingId, page, kind, month })   batches, newest first
 //                                   .one({ buildingId, batchId, page })        one batch, by unit
 //                                   .smsMonth({ buildingId, limit, real, mode, tiers })
-const { addisMonthStart } = require('./delivery');
+const { addisMonthStart, COUNTED } = require('./delivery');
 const { smsUnitPrice } = require('./sms');
 
 const KINDS = ['notice', 'reminder', 'invoice', 'receipt'];   // OutboundBatch.kind for a tenant message; otp is not a building's
 const PAGE = 20;            // batches per page (design §4: newest first, 20 per page)
 const ROWS_PAGE = 100;      // recipients per page inside one batch
 const MAX_MONTHS = 24;      // how far the month filter goes back
-// What uses up a building's monthly SMS limit. Fixed at these three in every mode — messaging/delivery.js COUNTED.
-const COUNTED = ['queued', 'sent', 'delivered'];
+// What uses up a building's monthly SMS limit is delivery.js's own list (queued, sent, delivered in every mode, never
+// a test row), imported above rather than copied, so the tab can never count a month differently from the sender.
 // Batch actors that are not an OwnerAccess id (server.js, building/invoice-ops.js, the daily checks, the ops scripts).
 const FIXED_ACTORS = ['dashboard', 'cron', 'ops'];
 const ADDIS_MS = 3 * 3600000;   // UTC+3, no daylight saving

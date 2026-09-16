@@ -204,3 +204,12 @@ test('the store selects counts, units and dates — never a phone, a user id or 
   assert.deepEqual(seen.find(x => x[0] === 'access.findMany')[1].where, { id: { in: ['a'] }, kind: 'building', entityId: 'b' });
   assert.deepEqual(seen.find(x => x[0] === 'batch.findFirst')[1].where, { id: 'x', buildingId: 'b' });
 });
+
+// The monthly SMS limit counts what the sender counts. A copy of the three statuses here could drift from
+// messaging/delivery.js without a test failing anywhere, so the view takes delivery.js's own list.
+test('COUNTED is the very list delivery.js counts, not a second copy of it', () => {
+  const view = require('../../messaging/messages-view');
+  const delivery = require('../../messaging/delivery');
+  assert.deepEqual(delivery.COUNTED, ['queued', 'sent', 'delivered']);
+  assert.equal(view.COUNTED, delivery.COUNTED);
+});

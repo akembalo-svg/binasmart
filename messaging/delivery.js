@@ -238,4 +238,4 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
   return { plan, sendToTenants, sendTransactionalSms, applyDeliveryReport, readReport, reportShape };
 }
 
-module.exports = { makeDelivery, makeDeliveryStore, addisMonthStart, isRealMiss };
+module.exports = { makeDelivery, makeDeliveryStore, COUNTED, addisMonthStart, isRealMiss };
