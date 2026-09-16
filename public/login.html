@@ -97,7 +97,7 @@ button:hover{background:var(--em2)}button:disabled{opacity:.6;cursor:wait}
       <button id="go" onclick="signIn()">Sign in &rarr;</button>
     </div>
 
-    <div class="foot am">አዲስ ተጠቃሚ ከሆኑ በስልክዎ ሲገቡ መለያዎ ራሱ ይፈጠራል።<br>
+    <div class="foot am"><span id="footPhone" hidden>አዲስ ተጠቃሚ ከሆኑ በስልክዎ ሲገቡ መለያዎ ራሱ ይፈጠራል።<br></span>
       <span style="font-family:'Plus Jakarta Sans',sans-serif">Drivers and businesses still need to register and be approved.</span>
       <a href="/drive-with-us">drive with us &rarr;</a></div>
     <a class="back" href="/">&larr; BinaSmart</a>
@@ -212,7 +212,7 @@ function ask(p){
       }
       if (r.status === 400) return showErr(T.notReach);
       if (r.status === 429) return showErr(T.tooMany);
-      if (r.status === 503) { $('phoneBox').hidden = true; $('featPhone').hidden = true; $('sub').textContent = SUB0; return showErr(T.noDoor); }
+      if (r.status === 503) { $('phoneBox').hidden = true; $('featPhone').hidden = true; $('footPhone').hidden = true; $('sub').textContent = SUB0; return showErr(T.noDoor); }
       showErr(T.offline);
     })
     .catch(function(){ btn.disabled = false; lbl.textContent = T.send; showErr(T.offline); });
@@ -273,6 +273,7 @@ fetch('/api/auth-methods').then(function(r){ return r.json(); }).then(function(m
   if (m.phone) {
     $('phoneBox').hidden = false;
     $('featPhone').hidden = false;
+    $('footPhone').hidden = false;
     $('sub').textContent = T.subPhone;
     $('phone').focus();
   }

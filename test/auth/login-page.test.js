@@ -39,6 +39,10 @@ test('the phone door is the first door, and it is not drawn until the server say
   assert.equal(/SMS|\u12a4\u1235\u12a4\u121d\u12a4\u1235|\u12ae\u12f5/.test(subLine), false, 'the subtitle in the markup promises nothing: ' + subLine);
   // A 503 from the server means the door was switched off while the page was open: take it away.
   assert.match(src, /if \(r\.status === 503\) \{ \$\('phoneBox'\)\.hidden = true;/);
+  // The footer's "a new account is made for you" line is a promise about the same door, so it is
+  // hidden with it: nothing on this page offers an SMS while the server says there is none.
+  assert.match(src, /<span id="footPhone" hidden>/);
+  assert.match(src, /\$\('footPhone'\)\.hidden = false;/);
 });
 
 test('a code travels in a POST body and never in a URL, and the phone is asked to fill it in', () => {
