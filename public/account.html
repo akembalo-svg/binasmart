@@ -33,6 +33,10 @@ a.back{display:inline-block;margin-top:18px;color:var(--mut);text-decoration:non
 var $ = function (id) { return document.getElementById(id); };
 function esc(s){ return String(s == null ? '' : s).replace(/[<>&"]/g, function(c){ return ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'})[c]; }); }
 
+// A proven number is shown back to its owner by its last four digits and no more. This screen is
+// read over a shoulder far more often than the database behind it is read at all.
+function mask(p){ var s = String(p == null ? '' : p); return s.length < 4 ? '' : '+251 ••• ' + s.slice(-4); }
+
 var LABEL = {
   user: 'ተጠቃሚ · User', rider: 'ተጓዥ · Rider', driver: 'ሹፌር · Driver',
   driver_pending: 'ሹፌር — በመጠባበቅ ላይ · Driver, pending approval',
@@ -47,6 +51,7 @@ fetch('/api/me').then(function (r) {
   var me = d.me;
   var initial = (me.name || '?').trim().charAt(0).toUpperCase();
   var doors = me.signedInWith.map(function (p) { return p === 'telegram' ? 'Telegram' : p === 'google' ? 'Google' : p === 'credential' ? 'Email' : p; });
+  if (me.phoneVerified) doors.push('Phone · ስልክ');
   var pending = me.roles.indexOf('driver_pending') >= 0;
 
   var html = '<h1>የእኔ መለያ · My account</h1>' +
@@ -56,7 +61,7 @@ fetch('/api/me').then(function (r) {
       '<div><b>' + esc(me.name) + '</b><small>' + (me.email ? esc(me.email) : doors.join(' · ') || 'BinaSmart') + '</small></div>' +
     '</div></div>' +
     '<h2>Who you are</h2><div class="card">' +
-      '<div class="row"><span class="am">ስልክ · Phone</span><span>' + (me.phone ? esc(me.phone) + (me.phoneVerified ? ' ✅' : '') : 'ገና አልተያያዘም · not linked') + '</span></div>' +
+      '<div class="row"><span class="am">ስልክ · Phone</span><span>' + (me.phone ? esc(mask(me.phone)) + (me.phoneVerified ? ' ✅' : '') : 'ገና አልተያያዘም · not linked') + '</span></div>' +
       '<div class="row"><span>Signed in with</span><span>' + (doors.join(', ') || '—') + '</span></div>' +
       '<div class="row"><span>Telegram</span><span>' + (me.telegramId ? 'connected' : '—') + '</span></div>' +
     '</div>' +
@@ -64,6 +69,11 @@ fetch('/api/me').then(function (r) {
       me.roles.map(function (r) { return '<span class="tag' + (r === 'driver_pending' ? ' warn' : '') + '">' + esc(LABEL[r] || r) + '</span>'; }).join('') +
       (pending ? '<div class="muted am" style="margin-top:8px">የሹፍርና ማመልከቻዎ በምርመራ ላይ ነው። ሰነዶችዎ ሲረጋገጡ እናሳውቅዎታለን።</div>' : '') +
     '</div>';
+
+  if (me.phone) html += '<div class="card muted am">'
+    + 'ቀጥርዎ ተረጋግጧ፤ በዚህ ገጽ ቁጥር መቀየር አይቻል። · '
+    + 'Your number is proven. Changing it is not possible here — please contact support.'
+    + '</div>';
 
   if (me.driver) html += '<h2>Driver</h2><div class="card">' +
       '<div class="row"><span>Status</span><span>' + esc(me.driver.status) + '</span></div>' +
@@ -79,7 +89,10 @@ fetch('/api/me').then(function (r) {
 
   if (!me.phone) html += '<h2>Link your phone</h2><div class="card"><div class="muted am">' +
       'ስልክዎን ሲያገናኙ ጉዞዎችዎና ንግድዎ በዚሁ መለያ ሥር ይሰበሰባሉ። በቴሌግራም ቦቱ ውስጥ «ስልክ አጋራ» ሲሉ ራሱ ይያያዛል።' +
-      '</div><a class="btn" href="https://t.me/bina_smart_bot" target="_blank" rel="noopener">Open the Telegram bot →</a></div>';
+      '</div><div class="muted am" style="margin-top:10px">'
+      + 'ወይም በሚቀጥለው ጊዜ በስልክ ቁጥርዎ ይግቡ። · Or sign in with your phone next time: we send a code by SMS. '
+      + 'ኮድ በኤስኤምኤስ ይላካል።'
+      + '</div><a class="btn" href="https://t.me/bina_smart_bot" target="_blank" rel="noopener">Open the Telegram bot →</a></div>';
 
   html += '<button class="btn" onclick="signOut()">Sign out · <span class="am">ውጣ</span></button>' +
           '<a class="back" href="/">← BinaSmart</a>';
