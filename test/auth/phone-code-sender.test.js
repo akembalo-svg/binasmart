@@ -59,6 +59,16 @@ test('an error inside the delivery layer is caught, named by kind, and never log
   assert.equal(lines[0].includes('483920'), false);
 });
 
+test('the tenant SMS switch does not close the sign-in door', () => {
+  const d = fakeDelivery({ status: 'test' });
+  const of = env => makePhoneCodeSender({ env, delivery: d });
+  assert.equal(of({ ...LIVE_ENV, SMS_TENANT_MODE: 'test' }).configured, true, 'a code is not a tenant message');
+  assert.equal(of({ ...LIVE_ENV, SMS_TENANT_MODE: 'live' }).configured, true);
+  assert.equal(of({ SMS_API_TOKEN: 'fake-token-for-tests', SMS_MODE: 'test', SMS_TENANT_MODE: 'live' }).configured, false,
+    'the provider switch is the one the door reads');
+  assert.equal(of({ ...LIVE_ENV, SMS_TENANT_MODE: 'test' }).mode, 'live', 'the mode it reports is the provider switch');
+});
+
 test('configured needs BOTH a token and live mode, and the reachable prefixes come from the SMS layer', () => {
   const d = fakeDelivery({ status: 'test' });
   const of = env => makePhoneCodeSender({ env, delivery: d });

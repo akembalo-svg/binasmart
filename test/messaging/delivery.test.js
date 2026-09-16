@@ -23,9 +23,9 @@ function recorder({ ok = true } = {}) {
   const calls = [];
   return { calls, name: 'fake', supports: geezSupports, send: async a => { calls.push(a); return ok ? { ok: true, providerId: 'P' + calls.length } : { ok: false, error: 'no' }; } };
 }
-function setup({ mode = 'test', tgOk = true } = {}) {
+function setup({ mode = 'test', tenantMode = mode, tgOk = true } = {}) {
   const store = memStore(), tg = [], provider = recorder();
-  const d = makeDelivery({ store, now: () => NOW, sms: makeSms({ mode, provider, supports: geezSupports }),
+  const d = makeDelivery({ store, now: () => NOW, sms: makeSms({ mode, tenantMode, provider, supports: geezSupports }),
     sendTg: async (chat, text) => { tg.push({ chat, text }); return tgOk; } });
   return { store, tg, provider, d };
 }
@@ -101,13 +101,14 @@ test('this month’s usage counts from midnight Addis time; test rows never coun
 });
 
 test('the owner report counts a message as not delivered when a real, live send failed; test-mode SMS rows never count', () => {
-  const live = { real: true, mode: 'live' };
+  const live = { real: true, tenantMode: 'live' };
   assert.equal(isRealMiss(live, { status: 'failed', channel: 'none', errorKind: 'no_mobile' }), true);
   assert.equal(isRealMiss(live, { status: 'failed', channel: 'telegram', errorKind: 'tg_failed' }), true);
   assert.equal(isRealMiss(live, { status: 'failed', channel: 'none', errorKind: 'sms_limit' }), true);
   assert.equal(isRealMiss(live, null), true, 'the layer threw on a real send');
   for (const s of ['sent', 'delivered', 'test']) assert.equal(isRealMiss(live, { status: s }), false, s);
-  for (const ctx of [{ real: true, mode: 'test' }, { real: false, mode: 'live' }, { real: false, mode: 'test' }, {}, null])
+  for (const ctx of [{ real: true, tenantMode: 'test' }, { real: false, tenantMode: 'live' }, { real: false, tenantMode: 'test' },
+    { real: true, mode: 'live' }, {}, null])
     for (const r of [{ status: 'failed', channel: 'none', errorKind: 'no_contact' }, { status: 'test' }, null])
       assert.equal(isRealMiss(ctx, r), false, JSON.stringify(ctx) + ' ' + JSON.stringify(r));
 });
@@ -116,10 +117,10 @@ test('a Telegram send that failed to a real tenant is not delivered, even while 
   const tgFailed = { status: 'failed', channel: 'telegram', errorKind: 'tg_failed' };
   const smsTestFallback = { status: 'test', channel: 'sms', errorKind: 'tg_failed' };
   for (const mode of ['test', 'live']) {
-    assert.equal(isRealMiss({ real: true, mode }, tgFailed), true, mode);
-    assert.equal(isRealMiss({ real: true, mode }, smsTestFallback), true, mode + ': a test-mode SMS fallback reached nobody');
-    assert.equal(isRealMiss({ real: true, mode }, { status: 'sent', channel: 'sms', errorKind: 'tg_failed' }), false, mode + ': the SMS fallback went');
-    for (const r of [tgFailed, smsTestFallback]) assert.equal(isRealMiss({ real: false, mode }, r), false, 'demo building, ' + mode);
+    assert.equal(isRealMiss({ real: true, tenantMode: mode }, tgFailed), true, mode);
+    assert.equal(isRealMiss({ real: true, tenantMode: mode }, smsTestFallback), true, mode + ': a test-mode SMS fallback reached nobody');
+    assert.equal(isRealMiss({ real: true, tenantMode: mode }, { status: 'sent', channel: 'sms', errorKind: 'tg_failed' }), false, mode + ': the SMS fallback went');
+    for (const r of [tgFailed, smsTestFallback]) assert.equal(isRealMiss({ real: false, tenantMode: mode }, r), false, 'demo building, ' + mode);
   }
 });
 
@@ -172,7 +173,7 @@ test('tenant SMS: when the record write after a real send fails, the real status
     if (data.status === 'sent') { const e = new Error('store down for +251900000001'); e.code = 'P1001'; throw e; }
     return update(id, data);
   };
-  const d = makeDelivery({ store, now: () => NOW, sms: makeSms({ mode: 'live', provider, supports: geezSupports }),
+  const d = makeDelivery({ store, now: () => NOW, sms: makeSms({ mode: 'live', tenantMode: 'live', provider, supports: geezSupports }),
     sendTg: async () => false, log: line => logs.push(line) });
   const r = await send(d, REAL, [rcpt()]);
   assert.deepEqual([r.ok, r.counts.sent, provider.calls.length], [true, 1, 1], 'the SMS went: not reported as failed, so it is not sent again');
@@ -203,7 +204,7 @@ test('Telegram: when the record write after a successful send fails, the result 
   assert.deepEqual(r.results.map(x => [x.channel, x.status, x.errorKind]), [['telegram', 'sent', null]]);
   assert.deepEqual(store.s.messages.map(m => [m.channel, m.status, m.errorKind]), [['telegram', 'queued', null]],
     'queued rows are never offered again under Waiting to be delivered');
-  assert.equal(isRealMiss({ real: true, mode: 'test' }, r.results[0]), false);
+  assert.equal(isRealMiss({ real: true, tenantMode: 'test' }, r.results[0]), false);
   assert.equal(logs.length, 1);
   assert.match(logs[0], /P1001/);
   assert.doesNotMatch(logs.join(' '), /store down|900000001/);
@@ -276,6 +277,43 @@ test('an unexpected store error is logged by its kind only: no message text, no 
   assert.equal(logs.length, 1);
   assert.match(logs[0], /P2002/);
   assert.doesNotMatch(logs.join(' '), /boom|900000001/);
+});
+
+test('a tenant SMS needs BOTH switches: the provider switch alone is recorded as test and calls nobody', async () => {
+  const BASE = FIRST.split('\n')[0];
+  const half = setup({ mode: 'live', tenantMode: 'test' });
+  assert.equal((await half.d.plan({ building: REAL, recipients: [rcpt()] })).mode, 'test', 'the confirm card says test');
+  const r = await send(half.d, REAL, [rcpt()]);
+  assert.deepEqual(r.results.map(x => [x.channel, x.status]), [['sms', 'test']]);
+  assert.equal(half.provider.calls.length, 0);
+  assert.equal(half.store.s.messages[0].status, 'test');
+  // A test row still counts as "this tenant has had an SMS", so the Telegram link is not repeated for ever.
+  assert.equal((await half.d.plan({ building: REAL, recipients: [rcpt()] })).smsParts, smsParts(BASE));
+
+  const off = setup({ mode: 'test', tenantMode: 'live' });
+  assert.deepEqual((await send(off.d, REAL, [rcpt()])).results.map(x => [x.channel, x.status]), [['sms', 'test']]);
+  assert.equal(off.provider.calls.length, 0, 'the tenant switch cannot send by itself');
+  assert.equal((await off.d.plan({ building: REAL, recipients: [rcpt()] })).mode, 'test');
+
+  const both = setup({ mode: 'live', tenantMode: 'live' });
+  assert.equal((await both.d.plan({ building: REAL, recipients: [rcpt()] })).mode, 'live');
+  const sent = await send(both.d, REAL, [rcpt()]);
+  assert.deepEqual(sent.results.map(x => [x.channel, x.status]), [['sms', 'sent']]);
+  assert.equal(both.provider.calls.length, 1);
+  // A demo building stays test whatever the two switches say.
+  assert.deepEqual((await send(both.d, DEMO, [rcpt({ userId: 'u9' })])).results.map(x => [x.channel, x.status]), [['sms', 'test']]);
+  assert.equal(both.provider.calls.length, 1);
+});
+
+test('a sign-in code is not a tenant message: it goes while tenant SMS is still switched off', async () => {
+  const half = setup({ mode: 'live', tenantMode: 'test' });
+  const r = await half.d.sendTransactionalSms({ to: '0900000001', text: 'code 1', label: 'BinaSmart', kind: 'signin', source: 'phone-code' });
+  assert.deepEqual([r.status, r.channel], ['sent', 'sms']);
+  assert.equal(half.provider.calls.length, 1);
+  assert.equal(half.provider.calls[0].text.endsWith('code 1'), true);
+  const off = setup({ mode: 'test', tenantMode: 'live' });
+  assert.equal((await off.d.sendTransactionalSms({ to: '0900000001', text: 'code 1', label: 'BinaSmart', kind: 'signin' })).status, 'test');
+  assert.equal(off.provider.calls.length, 0, 'the provider switch is the only door for a code too');
 });
 
 test('delivery reports move a sent SMS to delivered or failed by provider id; the logged shape has no values', async () => {

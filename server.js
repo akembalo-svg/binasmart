@@ -2586,8 +2586,9 @@ async function sendTg(chatId, text){
 // SMS, otherwise recorded as not delivered. One channel per message, every attempt in OutboundMessage. WhatsApp is no
 // longer tried for tenants: the bridge on 127.0.0.1:8081 does not answer (15 Sep 2026) and each failed try slept 3-5 s
 // inside the daily run. Owners, shops and admins keep notifyParty / notifyShop / notifyAdmins exactly as before.
-// SMS leaves the server only when SMS_MODE=live, SMS_API_TOKEN is set, the building is real (NOTIFY_WHITELIST and not a
-// demo) and its smsMonthlyLimit allows it; otherwise the row says `test`, or why it was not sent.
+// An SMS to a TENANT leaves the server only when SMS_MODE=live and SMS_TENANT_MODE=live, SMS_API_TOKEN is set, the
+// building is real (NOTIFY_WHITELIST and not a demo) and its smsMonthlyLimit allows it; otherwise the row says `test`,
+// or why it was not sent. Sign-in codes are transactional, not tenant messages: they need SMS_MODE only (Plan D).
 const { makeSmsFromEnv, buildingSmsLabel, parsePriceTiers } = require('./messaging/sms');
 const { makeDelivery, makeDeliveryStore, isRealMiss } = require('./messaging/delivery');
 const { makeInvoiceLinks } = require('./messaging/invoice-links');
@@ -2605,7 +2606,7 @@ const invoiceLinks = makeInvoiceLinks({ prisma });
 const { makeInvoiceOps } = require('./building/invoice-ops');
 const invoiceOps = makeInvoiceOps({ prisma, audit, notifyTenant, invoiceLinks, invoiceText, canMessage: b => !!b && NOTIFY_WHITELIST.includes(b.qrSlug),
   log: m => console.error(m) });
-console.log('[sms] mode ' + tenantSms.mode + ' · ' + (tenantSms.provider || 'no provider'));
+console.log('[sms] mode ' + tenantSms.mode + ' · tenant sms ' + tenantSms.tenantMode + ' · ' + (tenantSms.provider || 'no provider'));
 // Every SMS starts "BinaSmart · <building name>፦ " until approved sender names exist; smsSender null = provider default.
 function tenantBuilding(b){
   return { id: b.id, slug: b.qrSlug, real: NOTIFY_WHITELIST.includes(b.qrSlug) && !hotelIsDemo(b), smsLabel: buildingSmsLabel(b.name),
@@ -2625,7 +2626,7 @@ async function notifyTenant(b, tenancy, { kind, source, actor, text, smsText, in
   const one = (r && r.results[0]) || null;
   const delivered = !!one && (one.status === 'sent' || one.status === 'delivered');
   // The owner reads this count in the daily report: test-mode SMS rows are never "not delivered"; a failed Telegram send is.
-  if (isRealMiss({ real: tb.real, mode: tenantSms.mode }, one)) tenantMisses++;
+  if (isRealMiss({ real: tb.real, tenantMode: tenantSms.tenantMode }, one)) tenantMisses++;
   return { delivered, status: one ? one.status : 'failed', channel: one ? one.channel : 'none', errorKind: one ? one.errorKind : (r ? r.error : 'error'), batchId: (r && r.batchId) || null };
 }
 async function alreadyAudited(buildingId, action, detailContains){
@@ -3037,7 +3038,7 @@ fastify.get('/api/owner/:slug/sms-month', async (req, reply) => {
   if (!b) return reply.code(404).send({ error: 'not_found' });
   const tb = tenantBuilding(b);
   const [month, balance] = await Promise.all([
-    messagesView.smsMonth({ buildingId: b.id, limit: tb.smsMonthlyLimit, real: tb.real, mode: tenantSms.mode, tiers: smsTiers }),
+    messagesView.smsMonth({ buildingId: b.id, limit: tb.smsMonthlyLimit, real: tb.real, tenantMode: tenantSms.tenantMode, tiers: smsTiers }),
     smsBalance.read().catch(() => ({ state: 'unavailable' })),
   ]);
   return Object.assign({}, month, { balance });

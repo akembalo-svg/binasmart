@@ -171,13 +171,17 @@ test('only an invoice or receipt batch hides its text; the month is this month i
     source: 'dashboard-send', actor: 'dashboard', total: 1, text: null }) });
   const v = makeMessagesView({ store, now: () => D('2026-09-16T09:00:00Z') });
   assert.equal((await v.one({ buildingId: 'bld1', batchId: 'b2' })).text, '');
-  const m = await v.smsMonth({ buildingId: 'bld1', limit: 500, real: true, mode: 'live', tiers: [[10000, 0.7475], [null, 0.2875]] });
+  const m = await v.smsMonth({ buildingId: 'bld1', limit: 500, real: true, tenantMode: 'live', tiers: [[10000, 0.7475], [null, 0.2875]] });
   assert.deepEqual([m.mode, m.parts, m.testParts, m.limit, m.remaining], ['live', 120, 4, 500, 380]);
   assert.equal(m.unitPriceEtb, 0.7475);           // the tier comes from the whole account's 9,000 parts this month
   assert.equal(m.costEtb, Math.round(120 * 0.7475 * 100) / 100);
   // A building that is not real is in test mode whatever the provider says, exactly as delivery.plan() decides it.
-  assert.equal((await v.smsMonth({ buildingId: 'bld1', limit: 500, real: false, mode: 'live', tiers: [[null, 1]] })).mode, 'test');
-  assert.equal((await v.smsMonth({ buildingId: 'bld1', limit: null, real: true, mode: 'test', tiers: [[null, 1]] })).limit, 0);
+  assert.equal((await v.smsMonth({ buildingId: 'bld1', limit: 500, real: false, tenantMode: 'live', tiers: [[null, 1]] })).mode, 'test');
+  // The card's "Test mode - nothing was sent" line reads this field, and it is the TENANT switch: a live provider
+  // switch (sign-in codes) must never make the card claim a tenant SMS went out.
+  assert.equal((await v.smsMonth({ buildingId: 'bld1', limit: 500, real: true, tenantMode: 'test', tiers: [[null, 1]] })).mode, 'test');
+  assert.equal((await v.smsMonth({ buildingId: 'bld1', limit: 500, real: true, tiers: [[null, 1]] })).mode, 'test', 'unset is test');
+  assert.equal((await v.smsMonth({ buildingId: 'bld1', limit: null, real: true, tenantMode: 'test', tiers: [[null, 1]] })).limit, 0);
 });
 
 test('the store selects counts, units and dates — never a phone, a user id or a provider id', async () => {

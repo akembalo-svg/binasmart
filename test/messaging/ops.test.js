@@ -46,6 +46,36 @@ test('the batch line counts this month by kind, in a fixed order, and says so wh
   assert.equal(batchLine(null), 'batches this month · none');
 });
 
+// One switch became two, and a report that named only one of them would be read as a promise that nothing
+// goes to tenants - or that everything does.
+const { run: smsStatusRun } = require('../../ops/messaging/sms-status');
+const fakeSmsPrisma = () => ({
+  outboundMessage: { groupBy: async () => [] },
+  outboundBatch: { groupBy: async () => [] },
+  building: { findMany: async () => [] },
+});
+const statusLines = async env => { const out = []; await smsStatusRun({ prisma: fakeSmsPrisma(), env, out: m => out.push(m) }); return out; };
+
+test('the SMS status report names both switches, and never the token', async () => {
+  const T = 'fake-token-for-tests';
+  assert.match((await statusLines({ SMS_API_TOKEN: T, SMS_MODE: 'live', SMS_TENANT_MODE: 'live' }))[0],
+    /^mode live · tenant sms live · provider geezsms · token yes/);
+  assert.match((await statusLines({ SMS_API_TOKEN: T, SMS_MODE: 'live' }))[0], /^mode live · tenant sms test · /);
+  assert.match((await statusLines({ SMS_API_TOKEN: T, SMS_MODE: 'test', SMS_TENANT_MODE: 'live' }))[0], /^mode test · tenant sms test · /);
+  assert.match((await statusLines({}))[0], /^mode test · tenant sms test · provider none · token no/);
+  const out = await statusLines({ SMS_API_TOKEN: T, SMS_MODE: 'live' });
+  assert.equal(out.join(' ').includes(T), false, 'the token is never printed');
+  // Tenant SMS is off, so this month's parts are test rows: the line says so even with the provider switch live.
+  assert.match(out.find(l => l.startsWith('all buildings')), /test rows, nothing was sent/);
+  assert.equal(/test rows/.test((await statusLines({ SMS_API_TOKEN: T, SMS_MODE: 'live', SMS_TENANT_MODE: 'live' })).find(l => l.startsWith('all buildings'))), false);
+});
+
+test('the go-live SMS to Ibrahim is transactional: SMS_MODE alone opens it, never the tenant switch', () => {
+  const src = require('fs').readFileSync(require('path').join(__dirname, '..', '..', 'ops', 'messaging', 'sms-send-one.js'), 'utf8');
+  assert.match(src, /if \(sms\.mode !== 'live'\)/);
+  assert.equal(/sms\.tenantMode/.test(src), false, 'the tenant switch never gates this one SMS');
+});
+
 test('requiring the SMS status script connects to nothing and prints nothing', () => {
   const mod = require('../../ops/messaging/sms-status');
   assert.equal(typeof mod.batchLine, 'function');

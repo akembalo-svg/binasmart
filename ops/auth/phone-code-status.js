@@ -10,13 +10,18 @@
 const { addisMonthStart } = require('../../messaging/delivery');
 const pc = require('../../auth/phone-code');
 
+// The sign-in door depends on SMS_MODE only: a code is transactional, not a tenant message, so SMS_TENANT_MODE
+// neither opens nor closes it. It is named here all the same, because somebody reading one line about SMS should not
+// have to guess what the other switch is doing.
 function doorLine(env) {
   const token = !!env.SMS_API_TOKEN;
   const live = env.SMS_MODE === 'live';
+  const tenantLive = live && env.SMS_TENANT_MODE === 'live';
   const pepper = String(env.AUTH_PHONE_CODE_PEPPER || '').length >= pc.MIN_PEPPER;
   const ready = token && live && pepper;
   return { ready, line: 'phone sign-in · ' + (ready ? 'OPEN' : 'closed')
     + ' · sms mode ' + (live ? 'live' : 'test')
+    + ' · tenant sms ' + (tenantLive ? 'live' : 'test')
     + ' · provider token ' + (token ? 'yes' : 'no')
     + ' · pepper ' + (pepper ? 'yes' : 'no') };
 }

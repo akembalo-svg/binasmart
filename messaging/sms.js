@@ -2,12 +2,16 @@
 // SMS for tenant messages (and, in Plan D, sign-in codes). One provider interface; GeezSMS is the first provider.
 //
 //   provider = { name, send({ to, text, sender, callbackUrl }) → { ok, providerId, error }, balance(), supports(e164) }
-//   makeSms({ mode, provider, supports, sender, callbackUrl, log }).send({ to, text, sender, live })
+//   makeSms({ mode, tenantMode, provider, supports, sender, callbackUrl, log }).send({ to, text, sender, live })
 //     → { status: 'test' } | { status: 'sent', providerId } | { status: 'failed', errorKind }
 //
-// Nothing leaves the server unless SMS_MODE is 'live', a provider token is configured, AND the caller passes
-// live: true (a real building, or a transactional message). Credentials come only from the environment:
+// TWO SWITCHES, not one. SMS_MODE is the provider switch: nothing at all leaves the server unless it is 'live', a
+// provider token is configured, AND the caller passes live: true. SMS_TENANT_MODE is the second, narrower switch, read
+// by messaging/delivery.js: it decides whether a message to a TENANT may be one of those live: true calls. A sign-in
+// code (sendTransactionalSms) is not a tenant message and does not read it. This layer only reports `tenantMode`;
+// it never sends differently because of it. Credentials come only from the environment:
 //   SMS_PROVIDER=geezsms  SMS_API_TOKEN  SMS_SHORTCODE_ID (optional)  SMS_MODE=test|live (default test)
+//   SMS_TENANT_MODE=test|live (default test) - tenant-facing SMS, and only while SMS_MODE is live
 // Logs never carry a phone number, a token or the text.
 
 // GeezSMS: msg must be shorter than 335 characters.
@@ -73,8 +77,10 @@ function smsParts(text) {
 // digit runs of 6+ (phone numbers) are cut out of anything logged
 const clean = v => String(v == null ? '' : v).replace(/\+?\d[\d\s-]{4,}\d/g, '…').slice(0, 80);
 
-function makeSms({ mode = 'test', provider = null, supports = geezSupports, sender = '', callbackUrl = '', log = () => {} } = {}) {
+function makeSms({ mode = 'test', tenantMode = 'test', provider = null, supports = geezSupports, sender = '', callbackUrl = '', log = () => {} } = {}) {
   const live = mode === 'live' && !!provider;
+  // Tenant SMS is live only when BOTH switches are: the provider switch can be on for sign-in codes alone.
+  const tenantLive = live && tenantMode === 'live';
   async function send({ to, text, sender: s = '', live: mayGoLive = false } = {}) {
     const e164 = normalizeEtMobile(to);
     if (!e164) return { status: 'failed', errorKind: 'no_mobile' };
@@ -97,7 +103,7 @@ function makeSms({ mode = 'test', provider = null, supports = geezSupports, send
   // The owner dashboard shows the account balance when a token is configured (design §4). null means no provider
   // and therefore no balance to show — never a guess, never the token, never the provider's URL. Reading it is a GET
   // and is independent of SMS_MODE: the account exists even while sending is switched off.
-  return { send, supports: canReach, mode: live ? 'live' : 'test', provider: provider ? provider.name : null,
+  return { send, supports: canReach, mode: live ? 'live' : 'test', tenantMode: tenantLive ? 'live' : 'test', provider: provider ? provider.name : null,
     balance: provider && typeof provider.balance === 'function' ? () => provider.balance() : null };
 }
 
@@ -138,7 +144,7 @@ function makeSmsFromEnv(env = process.env, { fetchImpl, log, callbackUrl } = {})
   const provider = name === 'geezsms' && env.SMS_API_TOKEN
     ? makeGeezSms({ token: env.SMS_API_TOKEN, shortcodeId: env.SMS_SHORTCODE_ID || '', ...(fetchImpl ? { fetchImpl } : {}) })
     : null;
-  return makeSms({ mode: env.SMS_MODE === 'live' ? 'live' : 'test', provider, supports: geezSupports,
+  return makeSms({ mode: env.SMS_MODE === 'live' ? 'live' : 'test', tenantMode: env.SMS_TENANT_MODE === 'live' ? 'live' : 'test', provider, supports: geezSupports,
     sender: env.SMS_SHORTCODE_ID || '', callbackUrl: callbackUrl || '', log: log || (() => {}) });
 }
 

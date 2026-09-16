@@ -6,8 +6,10 @@
 // SMS attempt (errorKind tg_failed). WhatsApp is not on this road.
 //
 // Only a REAL building (in NOTIFY_WHITELIST and not a demo — server.js decides) can reach anyone; for any other
-// building every row is `test` and nothing is called. SMS also needs SMS_MODE=live (messaging/sms.js) and room in the
-// building's monthly limit: a batch that needs more parts than remain is refused whole, not half-sent.
+// building every row is `test` and nothing is called. A tenant SMS also needs BOTH switches — SMS_MODE=live (the
+// provider) and SMS_TENANT_MODE=live (tenant-facing sending), read here as sms.tenantMode — and room in the building's
+// monthly limit: a batch that needs more parts than remain is refused whole, not half-sent. A sign-in code
+// (sendTransactionalSms) is not a tenant message: it needs SMS_MODE only.
 //
 //   plan({ building, recipients })                              preview, writes nothing (Plan B's confirm card)
 //   sendToTenants({ building, kind, source, actor, text, recipients })
@@ -37,13 +39,14 @@ function addisMonthStart(now = new Date()) {
 }
 
 // The owner's daily report says how many tenant messages were not delivered. Only a real building counts. Telegram is
-// live whatever SMS_MODE says, so a Telegram send that failed counts unless its SMS fallback really went (in test mode
-// that fallback is a `test` row that reached nobody). Otherwise only live SMS counts: the send failed (no channel, the
-// limit, the provider) or the layer threw; a test-mode SMS row adds no "not delivered" line.
+// live whatever the SMS switches say, so a Telegram send that failed counts unless its SMS fallback really went (while
+// tenant SMS is in test mode that fallback is a `test` row that reached nobody). Otherwise only live tenant SMS counts:
+// the send failed (no channel, the limit, the provider) or the layer threw; a test-mode SMS row adds no "not delivered"
+// line. ctx.tenantMode is sms.tenantMode (both switches), never SMS_MODE on its own.
 function isRealMiss(ctx, result) {
   if (!ctx || ctx.real !== true) return false;
   if (result && result.errorKind === 'tg_failed' && !DELIVERED.includes(result.status)) return true;
-  if (ctx.mode !== 'live') return false;
+  if (ctx.tenantMode !== 'live') return false;
   if (!result) return true;
   return result.status === 'failed';
 }
@@ -65,7 +68,10 @@ function makeDeliveryStore(prisma) {
 
 function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername = 'bina_smart_bot', priceTiers = DEFAULT_PRICE_TIERS, log = () => {} }) {
   const counted = () => COUNTED;
-  const hadSmsStatuses = () => (sms.mode === 'live' ? DELIVERED : HAD_SMS_TEST);
+  // Tenant-facing sending, which is sms.tenantMode: SMS_MODE=live alone (sign-in codes) sends no tenant a thing.
+  // An sms layer without the field is test, so a caller that has not been taught the second switch cannot send.
+  const tenantLive = () => sms.tenantMode === 'live';
+  const hadSmsStatuses = () => (tenantLive() ? DELIVERED : HAD_SMS_TEST);
 
   // The first SMS a tenant receives ends with the building's Telegram start link (design §2), if it still fits.
   // `seen` holds the users who already got the link in this batch: a tenant with two units gets it once.
@@ -104,7 +110,7 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
     const accountUsed = parts ? await store.smsPartsSinceAll(addisMonthStart(now()), counted()) : 0;
     const unitPriceEtb = smsUnitPrice(accountUsed + parts, priceTiers);
     return { rows, counts: { telegram: count('telegram'), sms: count('sms'), none: count('none') },
-      smsParts: parts, used, limit, remaining, withinLimit: parts <= remaining, mode: building.real ? sms.mode : 'test',
+      smsParts: parts, used, limit, remaining, withinLimit: parts <= remaining, mode: building.real && tenantLive() ? 'live' : 'test',
       unitPriceEtb, costEtb: Math.round(parts * unitPriceEtb * 100) / 100 };
   }
 
@@ -134,7 +140,7 @@ function makeDelivery({ store, sendTg, sms, now = () => new Date(), botUsername 
     let remaining = p.remaining;
     const sendSms = async (r, messageId, smsText, n, carried) => {
       let s;
-      try { s = await sms.send({ to: r.phone, text: smsText, sender: building.smsSender || '', live: building.real === true }); }
+      try { s = await sms.send({ to: r.phone, text: smsText, sender: building.smsSender || '', live: building.real === true && tenantLive() }); }
       catch (e) { s = { status: 'failed', errorKind: 'provider_error' }; }
       if (s.status === 'sent' || s.status === 'test') remaining -= n;
       const errorKind = carried || s.errorKind || null;

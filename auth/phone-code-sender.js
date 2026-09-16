@@ -7,7 +7,8 @@
 //
 // Nothing leaves the server unless SMS_MODE is live AND a provider token is configured: in test mode
 // messaging/sms.js returns { status: 'test' } and the provider is never called. That is how every live
-// check in this plan is run without an SMS reaching anybody.
+// check in this plan is run without an SMS reaching anybody. SMS_TENANT_MODE is not read here and cannot
+// close this door: it governs messages to tenants, and a sign-in code is not one.
 //
 //   makePhoneCodeSender({ prisma, env, delivery, sms, log })
 //     .send({ phone, code })  → { ok, status: 'sent' | 'test' | 'failed', errorKind }

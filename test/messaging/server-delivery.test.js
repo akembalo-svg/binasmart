@@ -118,7 +118,7 @@ test('the link lookup selects only what the invoice page shows', async () => {
 
 test('the daily report counts only real, live failures: a test-mode send adds no not-delivered line', () => {
   const fn = block('async function notifyTenant(', '\n}\n');
-  assert.match(fn, /if \(isRealMiss\(\{ real: tb\.real, mode: tenantSms\.mode \}, one\)\) tenantMisses\+\+;/);
+  assert.match(fn, /if \(isRealMiss\(\{ real: tb\.real, tenantMode: tenantSms\.tenantMode \}, one\)\) tenantMisses\+\+;/);
   assert.equal(src.split('tenantMisses++').length - 1, 1);
   assert.match(src, /const \{ makeDelivery, makeDeliveryStore, isRealMiss \} = require\('\.\/messaging\/delivery'\);/);
   const daily = block('async function runDailyChecks(', '\n}\n');

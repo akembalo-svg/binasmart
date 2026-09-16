@@ -41,6 +41,20 @@ test('each missing switch is named, and a short pepper counts as missing', async
   assert.match((await lines({})).out[0], /^phone sign-in · closed/);
 });
 
+test('the sign-in door does not depend on the tenant SMS switch, but says which mode that is', async () => {
+  const open = (await lines(LIVE)).out[0];
+  assert.match(open, /^phone sign-in · OPEN/, 'tenant SMS unset, and the door is still open');
+  assert.match(open, /tenant sms test/);
+  const both = await lines({ ...LIVE, SMS_TENANT_MODE: 'live' });
+  assert.match(both.out[0], /^phone sign-in · OPEN/);
+  assert.match(both.out[0], /tenant sms live/);
+  assert.equal(both.r.ready, true);
+  const tenantOnly = await lines({ SMS_API_TOKEN: TOKEN, SMS_MODE: 'test', SMS_TENANT_MODE: 'live', AUTH_PHONE_CODE_PEPPER: PEPPER });
+  assert.match(tenantOnly.out[0], /^phone sign-in · closed/);
+  assert.match(tenantOnly.out[0], /tenant sms test/, 'the provider switch is off, so tenant SMS is not live either');
+  assert.equal(tenantOnly.r.ready, false);
+});
+
 test('a month with no codes in it reads as a sentence, not as an empty list', async () => {
   const { out } = await lines(LIVE);
   assert.equal(out[1], 'codes this month · none');

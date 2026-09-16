@@ -148,6 +148,34 @@ test('every SMS starts with a label; a sender over 11 characters falls back to t
   for (const bad of [undefined, '', 'nope', '[]', '[[1]]', '[["a",1]]']) assert.deepEqual(parsePriceTiers(bad), DEFAULT_PRICE_TIERS, String(bad));
 });
 
+test('two switches: SMS_MODE lets anything out at all, SMS_TENANT_MODE lets it out to tenants', async () => {
+  const pr = recorder();
+  const both = makeSms({ mode: 'live', tenantMode: 'live', provider: pr });
+  assert.deepEqual([both.mode, both.tenantMode], ['live', 'live']);
+  assert.equal(makeSms({ mode: 'live', provider: pr }).tenantMode, 'test', 'tenant SMS stays test until its own switch is set');
+  assert.equal(makeSms({ mode: 'live', tenantMode: 'test', provider: pr }).tenantMode, 'test');
+  assert.equal(makeSms({ mode: 'test', tenantMode: 'live', provider: pr }).tenantMode, 'test', 'the provider switch is off, so nothing is live');
+  assert.equal(makeSms({ mode: 'test', tenantMode: 'live', provider: pr }).mode, 'test');
+  assert.equal(makeSms({ mode: 'live', tenantMode: 'live', provider: null }).tenantMode, 'test', 'no token, no live anything');
+  // The tenant switch changes nothing inside send(): delivery.js is what reads it, per building and per message.
+  const half = makeSms({ mode: 'live', tenantMode: 'test', provider: pr });
+  assert.deepEqual(await half.send({ to: '0900000001', text: 'hi', live: true }), { status: 'sent', providerId: 'P1' });
+  assert.deepEqual(await half.send({ to: '0900000001', text: 'hi' }), { status: 'test' });
+  assert.equal(pr.calls.length, 1);
+});
+
+test('from the environment: the matrix of SMS_MODE, SMS_TENANT_MODE and a token', () => {
+  const T = 'fake-token-for-tests';
+  const of = env => { const s = makeSmsFromEnv(env); return [s.mode, s.tenantMode]; };
+  assert.deepEqual(of({ SMS_API_TOKEN: T, SMS_MODE: 'live', SMS_TENANT_MODE: 'live' }), ['live', 'live']);
+  assert.deepEqual(of({ SMS_API_TOKEN: T, SMS_MODE: 'live' }), ['live', 'test'], 'unset means test, which is what the server runs today');
+  assert.deepEqual(of({ SMS_API_TOKEN: T, SMS_MODE: 'live', SMS_TENANT_MODE: 'test' }), ['live', 'test']);
+  assert.deepEqual(of({ SMS_API_TOKEN: T, SMS_MODE: 'live', SMS_TENANT_MODE: 'LIVE' }), ['live', 'test'], 'only the exact word counts');
+  assert.deepEqual(of({ SMS_API_TOKEN: T, SMS_MODE: 'test', SMS_TENANT_MODE: 'live' }), ['test', 'test']);
+  assert.deepEqual(of({ SMS_MODE: 'live', SMS_TENANT_MODE: 'live' }), ['test', 'test'], 'no token');
+  assert.deepEqual(of({}), ['test', 'test']);
+});
+
 test('from the environment: live only with SMS_MODE=live and a GeezSMS token', () => {
   assert.deepEqual([makeSmsFromEnv({}).mode, makeSmsFromEnv({}).provider], ['test', null]);
   assert.equal(makeSmsFromEnv({ SMS_MODE: 'live' }).mode, 'test');

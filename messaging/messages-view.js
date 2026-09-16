@@ -20,7 +20,7 @@
 //   makeMessagesStore(prisma)                                 every query the tab makes, and nothing else
 //   makeMessagesView({ store, now }).list({ buildingId, page, kind, month })   batches, newest first
 //                                   .one({ buildingId, batchId, page })        one batch, by unit
-//                                   .smsMonth({ buildingId, limit, real, mode, tiers })
+//                                   .smsMonth({ buildingId, limit, real, tenantMode, tiers })
 const { addisMonthStart, COUNTED } = require('./delivery');
 const { smsUnitPrice } = require('./sms');
 
@@ -183,7 +183,10 @@ function makeMessagesView({ store, now = () => new Date() }) {
   // The SMS month as the limit itself counts it: queued, sent and delivered, never test. Test parts are returned
   // separately and labelled on the page, because counting them would tell an owner the month is full when the
   // server sent nothing at all. The tier is an estimate: GeezSMS prices by the whole account's monthly count.
-  async function smsMonth({ buildingId, limit, real, mode, tiers } = {}) {
+  // tenantMode is sms.tenantMode (SMS_MODE and SMS_TENANT_MODE both live), never SMS_MODE on its own: the card's
+  // "Test mode — nothing was sent" line is drawn from the mode returned here, and a live sign-in door sends no tenant
+  // anything. The field keeps the name `mode` because that is what /api/owner/:slug/sms-month answers.
+  async function smsMonth({ buildingId, limit, real, tenantMode, tiers } = {}) {
     const from = addisMonthStart(now());
     const [parts, testParts, accountParts] = await Promise.all([
       store.smsParts({ buildingId, channel: 'sms', status: { in: COUNTED }, createdAt: { gte: from } }),
@@ -192,7 +195,7 @@ function makeMessagesView({ store, now = () => new Date() }) {
     ]);
     const lim = Math.max(0, Math.floor(Number(limit) || 0));
     const unitPriceEtb = smsUnitPrice(accountParts, tiers);
-    return { mode: real === true ? (mode === 'live' ? 'live' : 'test') : 'test', parts, testParts, limit: lim,
+    return { mode: real === true ? (tenantMode === 'live' ? 'live' : 'test') : 'test', parts, testParts, limit: lim,
       remaining: Math.max(0, lim - parts), unitPriceEtb, costEtb: Math.round(parts * unitPriceEtb * 100) / 100 };
   }
 

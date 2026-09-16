@@ -5,7 +5,8 @@
 // Darulle's smsMonthlyLimit to 0 first and back afterwards.
 //   node ops/messaging/sms-send-one.js --to <his number> --approved-by-ibrahim
 // Goes through the delivery layer's transactional path (label "BinaSmart", recorded, text not stored). Prints the
-// status and error kind only.
+// status and error kind only. It is transactional, like a sign-in code, so SMS_MODE=live is the only switch it needs:
+// SMS_TENANT_MODE stays test and no tenant is touched by this one SMS.
 function parseArgs(argv) {
   const i = argv.indexOf('--to');
   const to = i >= 0 ? argv[i + 1] : null;

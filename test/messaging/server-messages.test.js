@@ -37,9 +37,12 @@ test('the balance is read through the cache, never from the provider, and never 
   assert.equal(/SMS_API_TOKEN|makeGeezSms|geezsms\.com|tenantSms\.balance\(\)/.test(body), false);
   // The month follows the same real/mode rule the delivery layer uses, so the tab cannot claim live when it is not.
   assert.match(body, /const tb = tenantBuilding\(b\);/);
-  assert.match(body, /real: tb\.real, mode: tenantSms\.mode, tiers: smsTiers/);
+  assert.match(body, /real: tb\.real, tenantMode: tenantSms\.tenantMode, tiers: smsTiers/);
   assert.match(src, /const smsBalance = makeSmsBalance\(\{ provider: tenantSms\.balance \? \{ balance: tenantSms\.balance \} : null/);
   assert.match(src, /const smsTiers = parsePriceTiers\(process\.env\.SMS_PRICE_TIERS\);/);
+  // The daily report counts a real miss by the tenant switch, not by the provider switch.
+  assert.match(src, /isRealMiss\(\{ real: tb\.real, tenantMode: tenantSms\.tenantMode \}, one\)/);
+  assert.equal(/isRealMiss\(\{ real: tb\.real, mode: tenantSms\.mode \}/.test(src), false);
   // Plan A's own wiring line is untouched (test/messaging/server-delivery.test.js pins it).
   assert.match(src, /priceTiers: parsePriceTiers\(process\.env\.SMS_PRICE_TIERS\)/);
 });

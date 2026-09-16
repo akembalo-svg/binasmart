@@ -1,5 +1,6 @@
 'use strict';
-// Read-only: how SMS is set up. Mode, whether a provider token / shortcode / report secret exist (yes or no, never the
+// Read-only: how SMS is set up. Both modes (the provider switch SMS_MODE and the tenant switch SMS_TENANT_MODE, which
+// only means anything while the first is live), whether a provider token / shortcode / report secret exist (yes or no, never the
 // values), each building's monthly limit and SMS parts this month with a cost estimate from the configured price tiers,
 // this month's messages by channel and status, the batches behind them by kind, and with --balance the GeezSMS balance
 // (numbers only). Sends nothing, writes nothing.
@@ -25,11 +26,13 @@ async function run({ prisma: p, env, out = console.log, balance = false }) {
   const { addisMonthStart } = require('../../messaging/delivery');
   const sms = makeSmsFromEnv(env);
   const tiers = parsePriceTiers(env.SMS_PRICE_TIERS);
-  out('mode ' + sms.mode + ' · provider ' + (sms.provider || 'none') + ' · token ' + (env.SMS_API_TOKEN ? 'yes' : 'no')
+  out('mode ' + sms.mode + ' · tenant sms ' + sms.tenantMode + ' · provider ' + (sms.provider || 'none') + ' · token ' + (env.SMS_API_TOKEN ? 'yes' : 'no')
     + ' · shortcode ' + (env.SMS_SHORTCODE_ID ? 'yes' : 'no (provider default)')
     + ' · report secret ' + ((env.SMS_CALLBACK_SECRET || '').length >= 24 ? 'yes' : 'no'));
   const since = addisMonthStart(new Date());
-  const statuses = sms.mode === 'live' ? ['queued', 'sent', 'delivered'] : ['queued', 'sent', 'delivered', 'test'];
+  // The parts a building's month is made of are tenant SMS, so it is the tenant switch that decides whether test rows
+  // are part of the picture: with tenant SMS off, every row is a test row and leaving them out would print a blank month.
+  const statuses = sms.tenantMode === 'live' ? ['queued', 'sent', 'delivered'] : ['queued', 'sent', 'delivered', 'test'];
   const byBuilding = await p.outboundMessage.groupBy({ by: ['buildingId'], where: { channel: 'sms', status: { in: statuses }, createdAt: { gte: since } }, _sum: { smsParts: true } });
   const total = byBuilding.reduce((a, r) => a + (r._sum.smsParts || 0), 0);
   const price = smsUnitPrice(total, tiers);
@@ -37,7 +40,7 @@ async function run({ prisma: p, env, out = console.log, balance = false }) {
   // real buildings: NOTIFY_WHITELIST in server.js (today darulle only)
   for (const b of await p.building.findMany({ where: { qrSlug: { in: ['darulle'] } }, select: { id: true, qrSlug: true, smsMonthlyLimit: true, smsSender: true } }))
     out(b.qrSlug + ' · limit ' + b.smsMonthlyLimit + ' · parts this month ' + (used.get(b.id) || 0) + ' · sender ' + (b.smsSender ? 'set' : 'provider default'));
-  out('all buildings · parts this month ' + total + ' · ' + price + ' ETB/SMS · estimate ' + (Math.round(total * price * 100) / 100) + ' ETB' + (sms.mode === 'test' ? ' (test rows, nothing was sent)' : ''));
+  out('all buildings · parts this month ' + total + ' · ' + price + ' ETB/SMS · estimate ' + (Math.round(total * price * 100) / 100) + ' ETB' + (sms.tenantMode === 'test' ? ' (test rows, nothing was sent)' : ''));
   const month = await p.outboundMessage.groupBy({ by: ['channel', 'status'], where: { createdAt: { gte: since } }, _count: true });
   out('this month · ' + (month.map(r => r.channel + '/' + r.status + ' ' + r._count).join(' · ') || 'no messages'));
   out(batchLine(await p.outboundBatch.groupBy({ by: ['kind'], where: { createdAt: { gte: since } }, _count: true })));
