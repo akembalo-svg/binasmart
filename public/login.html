@@ -19,15 +19,15 @@ body{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif;c
 label{display:block;font-size:12.5px;font-weight:700;color:var(--mut);margin:12px 0 6px}
 input{width:100%;padding:14px 15px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;font-family:inherit;font-weight:600;color:var(--ink);background:#fff}
 input:focus{outline:0;border-color:var(--em);box-shadow:0 0 0 3px rgba(10,168,143,.12)}
-button{width:100%;margin-top:20px;padding:15px;border:0;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;background:var(--em);color:#fff;transition:.15s}
+button{width:100%;margin-top:16px;padding:15px;border:0;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;background:var(--em);color:#fff;transition:.15s}
 button:hover{background:var(--em2)}button:disabled{opacity:.6;cursor:wait}
-.err{display:none;background:#fef2f2;border:1.5px solid #fecaca;color:var(--err);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;margin-top:14px}
+.err{display:none;background:#fef2f2;border:1.5px solid #fecaca;color:var(--err);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;margin-top:14px;line-height:1.5}
 .foot{color:var(--mut);font-size:12.5px;margin-top:22px;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
 .foot a{color:var(--em);font-weight:700;text-decoration:none}
 .back{display:inline-block;margin-top:14px;color:var(--mut);font-size:13px;text-decoration:none}
-@media(max-width:760px){.shell{grid-template-columns:1fr;max-width:440px}.brandp{padding:30px}.brandp h2{font-size:21px;margin:18px 0 16px}.formp{padding:32px 28px}}
+@media(max-width:760px){.shell{grid-template-columns:1fr;max-width:440px}.brandp{padding:26px 24px}.brandp h2{font-size:20px;margin:16px 0 14px}.formp{padding:28px 22px}}
 [hidden]{display:none!important}
-.door{margin-bottom:12px}.doorHint{font-size:13px;color:var(--mut);margin-bottom:8px}
+.door{margin-bottom:14px}.doorHint{font-size:13px;color:var(--mut);margin-bottom:8px;font-weight:700}
 #tgWidget{min-height:44px;display:flex;justify-content:center}
 .gbtn{width:100%;margin:0 0 10px;padding:13px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer}
 .gbtn:hover{background:#f7faf9}
@@ -36,6 +36,11 @@ button:hover{background:var(--em2)}button:disabled{opacity:.6;cursor:wait}
 .staffLink{display:block;text-align:center;color:var(--mut);font-size:14px;font-weight:600;text-decoration:none}
 .staffLink:hover{color:var(--em)}
 .doorNote{font-size:13px;color:var(--mut);text-align:center;padding:10px 0}
+.sent{font-size:13.5px;color:var(--mut);background:#f3f8f7;border:1px solid var(--line);border-radius:10px;padding:10px 12px;line-height:1.5;word-break:break-word}
+.resend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-size:13px}
+.resend a{color:var(--em);font-weight:700;text-decoration:none}
+.resend a[aria-disabled="true"]{color:var(--mut);cursor:default}
+#code{letter-spacing:.34em;font-size:19px;text-align:center}
 </style></head><body>
 <div class="shell">
   <div class="brandp">
@@ -43,16 +48,35 @@ button:hover{background:var(--em2)}button:disabled{opacity:.6;cursor:wait}
     <div class="tag am">ሁሉንም በአንድ መድረክ · All-in-one platform</div>
     <h2>Welcome back.</h2>
     <div class="feat">
-      <div class="f"><span class="i">🏢</span><span>Your buildings, invoices, tenants & more — one dashboard.</span></div>
+      <div class="f"><span class="i">📱</span><span>Sign in with your phone — <span class="am">በስልክ ቁጥርዎ ይግቡ።</span></span></div>
       <div class="f"><span class="i">🔒</span><span>Secure sign-in · your data stays private.</span></div>
       <div class="f am"><span class="i">🗣️</span><span>በአማርኛ ድጋፍ ይገኛል።</span></div>
     </div>
   </div>
   <div class="formp">
     <h1>Sign in · <span class="am">ይግቡ</span></h1>
-    <div class="sub am">በቴሌግራም ወይም በጉግል ይግቡ — የይለፍ ቃል አያስፈልግም</div>
+    <div class="sub am">የይለፍ ቃል አያስፈልግም — ኮድ በኤስኤምኤስ ይላካል</div>
 
     <div id="doors">
+      <div id="phoneBox" class="door" hidden>
+        <div class="doorHint am">በስልክ ይግቡ · Continue with your phone</div>
+        <div id="pStep1">
+          <label for="phone">Phone · <span class="am">ስልክ</span></label>
+          <input id="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="17" placeholder="09XX XXX XXX">
+          <button id="pSend" onclick="sendCode()"><span id="pSendT" class="am">ኮድ ላክ · Send code</span></button>
+        </div>
+        <div id="pStep2" hidden>
+          <div class="sent am" id="pSent"></div>
+          <label for="code">6-digit code · <span class="am">ባለ6 አኃዝ ኮድ</span></label>
+          <input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000">
+          <button id="pGo" onclick="signInCode()"><span id="pGoT" class="am">ግባ · Sign in</span></button>
+          <div class="resend">
+            <a href="#" id="pResend" onclick="resend();return false;"></a>
+            <a href="#" onclick="backToPhone();return false;" class="am">ቁጥር ይቀይሩ · change number</a>
+          </div>
+        </div>
+      </div>
+
       <div id="tgBox" class="door"><div class="doorHint am">በቴሌግራም ይግቡ · Continue with Telegram</div><div id="tgWidget"></div></div>
       <button id="googleBtn" class="gbtn" hidden onclick="signInGoogle()">
         <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45 24c0-1.6-.1-2.7-.4-4H24v7.5h12c-.2 2-1.6 5-4.5 7l6.9 5.3C42.5 36.2 45 30.6 45 24z"/><path fill="#34A853" d="M24 46c6 0 11-2 14.6-5.4l-6.9-5.3C29.8 36.5 27.2 37.4 24 37.4c-5.8 0-10.7-3.9-12.5-9.1l-7.1 5.5C8 40.9 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.5 28.3c-.5-1.4-.7-2.8-.7-4.3s.3-3 .7-4.3l-7.1-5.5C2.9 17 2 20.4 2 24s.9 7 2.4 9.8l7.1-5.5z"/><path fill="#EA4335" d="M24 10.6c3.3 0 6.2 1.1 8.5 3.3l6.1-6.1C34.9 4.3 30 2 24 2 15.4 2 8 7.1 4.4 14.2l7.1 5.5C13.3 14.5 18.2 10.6 24 10.6z"/></svg>
@@ -73,22 +97,57 @@ button:hover{background:var(--em2)}button:disabled{opacity:.6;cursor:wait}
       <button id="go" onclick="signIn()">Sign in &rarr;</button>
     </div>
 
-    <div class="foot am">አዲስ ተጠቃሚ ከሆኑ በቴሌግራም ወይም በጉግል ሲገቡ መለያዎ ራሱ ይፈጠራል።<br>
+    <div class="foot am">አዲስ ተጠቃሚ ከሆኑ በስልክዎ ሲገቡ መለያዎ ራሱ ይፈጠራል።<br>
       <span style="font-family:'Plus Jakarta Sans',sans-serif">Drivers and businesses still need to register and be approved.</span>
       <a href="/drive-with-us">drive with us &rarr;</a></div>
     <a class="back" href="/">&larr; BinaSmart</a>
   </div>
 </div>
 <script>
-// One account, several doors. Telegram and Google both land on the same session cookie; the email
-// form stays only for staff and building owners created by hand.
+// One account, several doors. A code by SMS, Telegram and Google all land on the same session cookie;
+// the email form stays only for staff and building owners created by hand.
+//
+// Nothing on this page is ever written as HTML. Every message goes through textContent, so a sentence
+// is a sentence and never markup — and there is no ?next, no code and no number in any URL.
 var NEXT = new URLSearchParams(location.search).get('next') || '/';
 if (!/^\/(?!\/)/.test(NEXT)) NEXT = '/';          // never bounce to another site
-var err = document.getElementById('err');
+function $(id){ return document.getElementById(id); }
+var err = $('err');
 function showErr(m){ err.textContent = m; err.style.display = 'block'; }
-function showStaff(){ var s=document.getElementById('staff'); s.hidden=false; document.getElementById('email').focus(); }
+function clearErr(){ err.textContent = ''; err.style.display = 'none'; }
+function showStaff(){ var s = $('staff'); s.hidden = false; $('email').focus(); }
 
-// after any successful sign-in, owners go to their building, everyone else to `next`
+// Every sentence this page can say, in Amharic and English, in one place.
+var T = {
+  badPhone: 'ትክክለኛ የኢትዮጵያ ስልክ ቁጥር ያስገቡ · Enter an Ethiopian mobile number, for example 0911 234 567',
+  notReach: 'ወደዚህ ቁጥር ኤስኤምኤስ መላክ አይቻልም · We cannot send an SMS to that number. Please use an Ethio Telecom number starting 09.',
+  tooMany: 'በጣም ብዙ ሙከራ · Too many requests. Please wait a few minutes and try again.',
+  offline: 'ግንኙነት አልተሳካም · Connection failed. Please try again.',
+  noDoor: 'በስልክ መግባት ገና አልተዘጋጀም · Signing in by phone is not available yet.',
+  badCode: 'ኮዱ ትክክል አይደለም ወይም ጊዜው አልፎበታል · That code is wrong or has expired. Ask for a new one.',
+  need6: 'ባለ6 አኃዝ ኮድ ያስገቡ · Enter the six digits from the SMS.',
+  sending: 'በመላክ ላይ… · Sending…',
+  send: 'ኮድ ላክ · Send code',
+  checking: 'በማረጋገጥ ላይ… · Checking…',
+  go: 'ግባ · Sign in',
+  again: 'እንደገና ላክ · Send the code again',
+  wrongPass: 'ኢሜይል ወይም የይለፍ ቃል ትክክል አይደለም · Wrong email or password',
+  needBoth: 'ኢሜይል እና የይለፍ ቃል ያስገቡ · Enter email and password'
+};
+// Two sentences take a number, so they are built rather than looked up. Both languages, same rule.
+function waitText(s){ return 'እንደገና ላክ · Send again in ' + s + 's'; }
+function sentToText(p){ return 'ኮድ ተልኳል ወደ · Code sent to ' + p + ' — 5 ደቂቃ/min'; }
+
+// Only for showing a number back to the person who typed it. The server decides what a number is.
+function e164(v){
+  var s = String(v || '').replace(/[^\d+]/g, '');
+  if (/^0\d{9}$/.test(s)) s = '+251' + s.slice(1);
+  if (/^251\d{9}$/.test(s)) s = '+' + s;
+  return /^\+251\d{9}$/.test(s) ? s : null;
+}
+function mask(p){ return '+251 ••• ' + String(p).slice(-4); }
+
+// after any successful sign-in, owners go to their building, everyone else to the "next" they came with
 async function land(){
   try{
     var s = await (await fetch('/api/auth/get-session')).json();
@@ -97,11 +156,93 @@ async function land(){
   }catch(e){ location.href = NEXT; }
 }
 
+// ---- the phone door ----
+var PHONE = '';        // the number this tab asked for a code for; never stored anywhere else
+var tick = null;
+
+function stopTick(){ if (tick) { clearInterval(tick); tick = null; } }
+function startTick(){
+  var left = 60, a = $('pResend');
+  stopTick();
+  a.textContent = waitText(left);
+  a.setAttribute('aria-disabled', 'true');
+  tick = setInterval(function(){
+    left--;
+    if (left > 0) { a.textContent = waitText(left); return; }
+    stopTick();
+    a.textContent = T.again;
+    a.removeAttribute('aria-disabled');
+  }, 1000);
+}
+function backToPhone(){
+  stopTick(); clearErr();
+  $('pStep2').hidden = true; $('pStep1').hidden = false;
+  $('code').value = ''; $('phone').focus();
+}
+function resend(){
+  if ($('pResend').getAttribute('aria-disabled') === 'true') return;
+  ask(PHONE);
+}
+function sendCode(){
+  var p = e164($('phone').value);
+  clearErr();
+  if (!p) return showErr(T.badPhone);
+  ask(p);
+}
+
+// One request whether it is the first code or another one; the server counts them the same way, and
+// answers a number it has never seen exactly as it answers one it knows.
+function ask(p){
+  clearErr();
+  var btn = $('pSend'), lbl = $('pSendT');
+  btn.disabled = true; lbl.textContent = T.sending;
+  fetch('/api/auth/sign-in/phone-code/send', { method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ phone: p }) })
+    .then(function(r){
+      btn.disabled = false; lbl.textContent = T.send;
+      if (r.ok) {
+        PHONE = p;
+        $('pSent').textContent = sentToText(mask(p));
+        $('pStep1').hidden = true; $('pStep2').hidden = false;
+        $('code').value = ''; $('code').focus();
+        startTick();
+        return;
+      }
+      if (r.status === 400) return showErr(T.notReach);
+      if (r.status === 429) return showErr(T.tooMany);
+      if (r.status === 503) { $('phoneBox').hidden = true; return showErr(T.noDoor); }
+      showErr(T.offline);
+    })
+    .catch(function(){ btn.disabled = false; lbl.textContent = T.send; showErr(T.offline); });
+}
+
+function signInCode(){
+  var c = String($('code').value || '').replace(/\D/g, '');
+  clearErr();
+  if (c.length !== 6) return showErr(T.need6);
+  var btn = $('pGo'), lbl = $('pGoT');
+  btn.disabled = true; lbl.textContent = T.checking;
+  fetch('/api/auth/sign-in/phone-code/verify', { method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ phone: PHONE, code: c }) })
+    .then(function(r){
+      if (r.ok) { stopTick(); return land(); }
+      btn.disabled = false; lbl.textContent = T.go;
+      $('code').value = ''; $('code').focus();
+      // Wrong, expired, never asked for, or five guesses gone: one sentence for all of them.
+      showErr(r.status === 429 ? T.tooMany : T.badCode);
+    })
+    .catch(function(){ btn.disabled = false; lbl.textContent = T.go; showErr(T.offline); });
+}
+
+$('phone').addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); sendCode(); } });
+$('code').addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); signInCode(); } });
+
+// ---- the other doors ----
 window.onTelegramAuth = function (user) {
   fetch('/api/auth/sign-in/telegram', { method:'POST', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({ widget: user, callbackURL: NEXT }) })
     .then(function(r){ return r.ok ? land() : showErr('Telegram sign-in failed. Please try again · አልተሳካም'); })
-    .catch(function(){ showErr('Connection failed · ግንኙነት አልተሳካም'); });
+    .catch(function(){ showErr(T.offline); });
 };
 
 function signInGoogle(){
@@ -109,37 +250,42 @@ function signInGoogle(){
     body: JSON.stringify({ provider:'google', callbackURL: location.origin + NEXT }) })
     .then(function(r){ return r.json(); })
     .then(function(d){ if (d && d.url) location.href = d.url; else showErr('Google sign-in is unavailable'); })
-    .catch(function(){ showErr('Connection failed · ግንኙነት አልተሳካም'); });
+    .catch(function(){ showErr(T.offline); });
 }
 
 async function signIn(){
-  var email=document.getElementById('email').value.trim(), password=document.getElementById('password').value;
-  err.style.display='none';
-  if(!email||!password) return showErr('Enter email and password · ኢሜይል እና የይለፍ ቃል ያስገቡ');
-  var btn=document.getElementById('go'); btn.disabled=true; btn.textContent='Signing in…';
+  var email = $('email').value.trim(), password = $('password').value;
+  clearErr();
+  if(!email || !password) return showErr(T.needBoth);
+  var btn = $('go'); btn.disabled = true; btn.textContent = 'Signing in…';
   try{
     var r = await fetch('/api/auth/sign-in/email', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, password }) });
-    if(!r.ok){ showErr('Wrong email or password · ኢሜይል ወይም የይለፍ ቃል ትክክል አይደለም'); btn.disabled=false; btn.textContent='Sign in \u2192'; return; }
+    if(!r.ok){ showErr(T.wrongPass); btn.disabled = false; btn.textContent = 'Sign in →'; return; }
     land();
-  }catch(e){ showErr('Connection failed. Try again · ግንኙነት አልተሳካም'); btn.disabled=false; btn.textContent='Sign in \u2192'; }
+  }catch(e){ showErr(T.offline); btn.disabled = false; btn.textContent = 'Sign in →'; }
 }
 
-// Only offer a door that is actually configured on the server.
+// Only offer a door that is actually configured on the server. A half-working button is worse than no
+// button: it looks like a broken site rather than a door that is not open yet.
 fetch('/api/auth-methods').then(function(r){ return r.json(); }).then(function(m){
-  if (m.google) document.getElementById('googleBtn').hidden = false;
+  if (m.phone) {
+    $('phoneBox').hidden = false;
+    $('phone').focus();
+  }
+  if (m.google) $('googleBtn').hidden = false;
   if (m.telegram && m.telegramBot) {
-    var s=document.createElement('script');
-    s.async=true; s.src='https://telegram.org/js/telegram-widget.js?22';
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://telegram.org/js/telegram-widget.js?22';
     s.setAttribute('data-telegram-login', m.telegramBot);
     s.setAttribute('data-size','large');
     s.setAttribute('data-radius','12');
     s.setAttribute('data-onauth','onTelegramAuth(user)');
     s.setAttribute('data-request-access','write');
-    document.getElementById('tgWidget').appendChild(s);
+    $('tgWidget').appendChild(s);
   } else {
-    document.getElementById('tgBox').hidden = true;
-    document.getElementById('tgNote').hidden = false;
+    $('tgBox').hidden = true;
+    if (!m.phone) $('tgNote').hidden = false;
   }
-  if (!m.google && !m.telegram) showStaff();
+  if (!m.phone && !m.google && !m.telegram) showStaff();
 }).catch(function(){ showStaff(); });
 </script></body></html>
