@@ -110,7 +110,12 @@ button:hover{background:var(--em2)}button:disabled{opacity:.6;cursor:wait}
 // Nothing on this page is ever written as HTML. Every message goes through textContent, so a sentence
 // is a sentence and never markup — and there is no ?next, no code and no number in any URL.
 var NEXT = new URLSearchParams(location.search).get('next') || '/';
-if (!/^\/(?!\/)/.test(NEXT)) NEXT = '/';          // never bounce to another site
+// Never bounce to another site. The URL parser drops tab, newline and carriage return before it
+// parses, and reads a backslash as a slash, so /\evil.com and /<tab>/evil.com both land on
+// evil.com if only a leading // is refused. Take those three characters out, then demand one
+// slash that does not begin an authority.
+NEXT = NEXT.replace(/[\t\n\r]/g, '');
+if (!/^\/(?![\/\\])/.test(NEXT)) NEXT = '/';
 function $(id){ return document.getElementById(id); }
 var err = $('err');
 var SUB0 = $('sub').textContent;   // the neutral subtitle, kept so a 503 can put it back

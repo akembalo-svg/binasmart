@@ -102,8 +102,7 @@ test('Telegram, Google and the staff email form still work exactly as they did',
   assert.match(src, /fetch\('\/api\/auth\/sign-in\/email', \{ method:'POST'/);
   assert.match(src, /s\.setAttribute\('data-telegram-login', m\.telegramBot\);/);
   assert.match(src, /telegram\.org\/js\/telegram-widget\.js\?22/);
-  // The open-redirect guard on ?next is untouched.
-  assert.match(src, /if \(!\/\^\\\/\(\?!\\\/\)\/\.test\(NEXT\)\) NEXT = '\/';/);
+  // The open-redirect guard on ?next has a test of its own below, which runs it.
 });
 
 test('the page is built for a phone first', () => {
@@ -113,4 +112,26 @@ test('the page is built for a phone first', () => {
   // No third-party script but Telegram's own widget, and it is only added when Telegram is configured.
   const scripts = src.match(/src="https?:[^"]+"/g) || [];
   assert.deepEqual(scripts, [], 'no external script tag in the markup');
+});
+
+test('?next never bounces a signed-in visitor to another site', () => {
+  // The guard is cut out of the shipped page and RUN, not matched as text. A guard that is pinned by
+  // its own source reads as tested while a hole in it stays open: /\\evil.com and a literal tab both
+  // walked straight past the old one, because the URL parser treats a backslash as a slash and drops
+  // tab, newline and carriage return before it parses anything.
+  const from = src.indexOf('var NEXT = new URLSearchParams');
+  const to = src.indexOf('function $(id)', from);
+  assert.ok(from > 0 && to > from, 'the ?next guard was not found');
+  const guard = new Function('search', 'var location = { search: search };\n' + src.slice(from, to) + '\nreturn NEXT;');
+  const off = ['//evil.com', '/\\evil.com', '/\\\\evil.com', '\\/evil.com', 'https://evil.com',
+    '///evil.com', '/\t/evil.com', '/\t\\evil.com', '/\n\\evil.com', '/\r//evil.com', 'javascript:alert(1)'];
+  for (const bad of off) {
+    const got = guard('?next=' + encodeURIComponent(bad));
+    assert.equal(new URL(got, 'https://bina.et/login').origin, 'https://bina.et',
+      JSON.stringify(bad) + ' escaped the guard as ' + JSON.stringify(got));
+  }
+  // and an ordinary destination is still carried through untouched
+  for (const good of ['/owner/acacia', '/', '/a/b?x=1']) {
+    assert.equal(guard('?next=' + encodeURIComponent(good)), good);
+  }
 });
