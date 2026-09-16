@@ -12,6 +12,7 @@
   "sites": [
     {
       "id": "ethiopian-airlines",
+      "slugPrefix": false,
       "name": "Ethiopian Airlines",
       "nameAm": "የኢትዮጵያ አየር መንገድ",
       "titleSuffix": "\\s*\\|\\s*(Ethiopian Airlines(\\s*\\|\\s*[A-Z]{2})?|Ethiopian Cargo Website)\\s*$",
@@ -88,6 +89,7 @@
     },
     {
       "id": "ethiopian-cargo",
+      "slugPrefix": false,
       "name": "Ethiopian Cargo and Logistics Services",
       "nameAm": "የኢትዮጵያ ካርጎ",
       "titleSuffix": "\\s*\\|\\s*(Ethiopian Airlines(\\s*\\|\\s*[A-Z]{2})?|Ethiopian Cargo Website)\\s*$",

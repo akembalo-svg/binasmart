@@ -74,7 +74,7 @@ test('fetchSite fetches the sitemap, follows the index it points at, and keeps o
       '<url><loc>' + H + '/et/home-page/save-10</loc></url></urlset>',
     [H + '/et/information/baggage-information/free-baggage-allowance']: html('Free Baggage Allowance', 'Maximum weight 23 kg.'),
   });
-  const site = { id: 'ethiopian-airlines', name: 'Ethiopian Airlines', nameAm: 'የኢትዮጵያ አየር መንገድ', host: 'www.ethiopianairlines.com',
+  const site = { id: 'ethiopian-airlines', slugPrefix: false, name: 'Ethiopian Airlines', nameAm: 'የኢትዮጵያ አየር መንገድ', host: 'www.ethiopianairlines.com',
     fetch: 'sitemap', sitemap: H + '/et/sitemap/sitemap-index.xml', discoverLinks: false, maxPages: 50, crawlDelaySeconds: 5,
     lang: 'en', allow: ['^/et/information(/|$)'], deny: ['^/et/home-page(/|$)'], sections: [{ key: 'baggage', titleAm: 'ሻንጣ', match: '^/et/information/baggage-information/' }] };
   const r = await fetchSite(site, { fetchImpl: n.impl, sleep: async () => {} });
@@ -91,7 +91,7 @@ test('fetchSite finds the pages the sitemap forgot, one level deep and no furthe
     [H + '/et/explore/et-specials/et-holidays']: html('Ethiopian Holidays', 'packages <a href="/et/information/baggage-information/deep">Deeper</a>'),
     [H + '/et/information/baggage-information/deep']: html('Deep', 'should never be fetched'),
   });
-  const site = { id: 'ethiopian-airlines', name: 'Ethiopian Airlines', nameAm: 'የኢትዮጵያ አየር መንገድ', host: 'www.ethiopianairlines.com',
+  const site = { id: 'ethiopian-airlines', slugPrefix: false, name: 'Ethiopian Airlines', nameAm: 'የኢትዮጵያ አየር መንገድ', host: 'www.ethiopianairlines.com',
     fetch: 'sitemap', sitemap: H + '/et/sitemap/sitemap.xml', discoverLinks: true, maxPages: 50, crawlDelaySeconds: 5,
     lang: 'en', allow: ['^/et/information(/|$)', '^/et/explore/et-specials(/|$)'], deny: [], sections: [] };
   const r = await fetchSite(site, { fetchImpl: n.impl, sleep: async () => {} });
@@ -108,7 +108,7 @@ test('fetchSite records why a page produced no document instead of losing it', a
     [H + '/et/information/a']: html('Page Not Found', 'nothing here at all but plenty of words'),
     [H + '/et/information/b']: 500,
   });
-  const site = { id: 'ethiopian-airlines', name: 'Ethiopian Airlines', nameAm: 'የኢትዮጵያ አየር መንገድ', host: 'www.ethiopianairlines.com',
+  const site = { id: 'ethiopian-airlines', slugPrefix: false, name: 'Ethiopian Airlines', nameAm: 'የኢትዮጵያ አየር መንገድ', host: 'www.ethiopianairlines.com',
     fetch: 'sitemap', sitemap: H + '/et/sitemap/sitemap.xml', discoverLinks: false, maxPages: 50, crawlDelaySeconds: 5,
     // The airline's title suffix moved out of the fetcher and into its registry entry, and the html() helper
     // above brands every fixture page with it. So this site fixture now says what the registry entry says;

@@ -88,6 +88,9 @@ function selectUrls(site, urls) {
 }
 
 // ---------- slugs ----------
+// A pack with one fetched site needs no prefix and must not grow one: the airline's filenames are in a
+// gold set, in a benchmark and in the index. `slugPrefix: false` says so explicitly.
+const slugPrefixOf = site => (site && site.slugPrefix === false ? '' : ((site && (site.slugPrefix || site.id)) || '') + '-');
 const clean = s => String(s).toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/-{2,}/g, '-').replace(/^-|-$/g, '');
 function segments(p) {
   const parts = String(p || '').split('/').filter(Boolean);
@@ -486,7 +489,11 @@ async function fetchSite(site, { fetchImpl, sleep, limit = 0, log = () => {} } =
     if (extra.length) log('[travel] ' + site.id + ': ' + extra.length + ' pages the sitemap did not list');
     await take(extra, 2);   // one level only: round 2 never harvests links
   }
-  pages.push(...assignSlugs([...fetched.values()], site));
+  // One flat directory, six institutions. ECMA and EthSwitch both publish /contact-us; every WordPress site
+  // publishes /about-us. Without the prefix the second site's document silently replaces the first's. With it,
+  // a filename also says whose page it is, which is what an answer about a fee has to say anyway.
+  const prefix = site.slugPrefix === false ? '' : (site.slugPrefix || site.id) + '-';
+  pages.push(...assignSlugs([...fetched.values()], site).map(p => ({ ...p, slug: prefix + p.slug })));
   return { pages, failed };
 }
 
@@ -569,7 +576,7 @@ function forPack(pack) {
     main: () => main({ pack, REGISTRY, OUT_DIR: dir }) };
 }
 
-module.exports = { sitemapUrls, sitemapsOf, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract, langFor, fill,
+module.exports = { sitemapUrls, sitemapsOf, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract, langFor, fill, slugPrefixOf,
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, clearMissed, writePack,
   makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR };
 
