@@ -29,7 +29,7 @@ Never two channels for the same message. WhatsApp is not used by this layer (bri
 ### 1.2 SMS provider
 - One adapter module (e.g. `messaging/sms.js`) with a provider interface: `send({ to, text, sender }) → { ok, providerId, error }` and a delivery-status check where the provider offers one. First provider: **AfroMessage** (Ethiopian, Amharic Unicode, sender IDs). Another provider can be added behind the same interface.
 - Credentials only from the server environment (`SMS_PROVIDER`, `SMS_API_KEY`, `SMS_SENDER`), entered by Ibrahim. Never in code, commits, logs or chat.
-- **Test mode** (`SMS_MODE=test`, the default until Ibrahim switches it): everything runs and is recorded as `test`, nothing leaves the server. Demo buildings are always test mode, whatever the setting.
+- **Test mode** (`SMS_MODE=test`, the default until Ibrahim switches it): everything runs and is recorded as `test`, nothing leaves the server. Demo buildings are always test mode, whatever the setting. *(16 Sep 2026: this became two switches. `SMS_MODE` is the provider switch — without it nothing leaves at all — and `SMS_TENANT_MODE`, default `test`, is what a message to a tenant needs on top of it. Sign-in codes (Plan D) and the one-SMS go-live test are transactional and need `SMS_MODE` only, so the phone door can open while every tenant message is still recorded as `test`.)*
 - Sender name per building when the provider has approved one (e.g. "Darulle"), otherwise the account default ("BinaSmart").
 
 ### 1.3 Short invoice links
@@ -110,7 +110,7 @@ Anything else that changes records (rent, contracts, vacate, expenses, staff) ke
 - **Model evaluation:** the owner eval on the demo building gains action questions — the model must call a prepare tool, the preview figures must match the database, and **no send or write may occur without a confirm step** (scored in code).
 - **No test sends to live channels.** SMS stays in test mode on every building until Ibrahim switches it on. Demo data uses fake numbers (`0900…`).
 - **Go-live order:** (1) Ibrahim enters the SMS key and approves; (2) **with his explicit permission, one first real SMS to his own phone** through a single-unit test tenancy he chooses; (3) Darulle's owner uses it; (4) the report (`ops/owner/report.js`) shows actions, deliveries and failures daily for the first week.
-- **Rollback:** `SMS_MODE=test` stops all SMS instantly; a per-building `ownerActions` switch turns the actions off while answers keep working.
+- **Rollback:** `SMS_TENANT_MODE=test` stops every tenant SMS instantly and leaves sign-in codes working; `SMS_MODE=test` stops all SMS of every kind; a per-building `ownerActions` switch turns the actions off while answers keep working.
 
 ## 6. Not in this version
 Tenants chatting with Bini about their own account; WhatsApp; changing rent/contracts/tenants from Telegram; paying online from the invoice link (Chapa/telebirr later); scheduled messages; message templates library; recalling a sent message.

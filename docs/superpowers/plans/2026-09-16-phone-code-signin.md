@@ -2877,15 +2877,16 @@ He adds these to `/var/www/connectcare/binasmart/.env`. **Nobody else reads, wri
 | Name | What it is |
 | --- | --- |
 | `AUTH_PHONE_CODE_PEPPER` | A new random secret, **at least 32 characters**, used only for hashing sign-in codes. Generate with `openssl rand -hex 32`. Changing it later invalidates every code in flight — that is all it does; it is not tied to any session or account. |
-| `SMS_MODE` | `live` (it is `test` today). This also switches on live SMS for tenant notices, which is a separate decision Plan A owns — if tenant SMS is not meant to go live on the same day, **stop here and say so**: the phone door and tenant SMS share one switch today. |
+| `SMS_MODE` | `live` (it is `test` today). The provider switch: with it live and a token set, a **sign-in code** can go out. Since 16 Sep 2026 it no longer sends anything to tenants by itself. |
+| `SMS_TENANT_MODE` | **Leave it unset.** Unset means `test`: tenant notices, reminders, invoices, receipts, daily checks and dashboard sends are recorded as `test` and reach nobody. Setting it to `live` is Plan A's separate go-live decision, made on its own day, after the one-SMS test — never as a side effect of opening the phone door. |
 
 Already set, nothing to do: `SMS_API_TOKEN`, `SMS_SHORTCODE_ID`, `SMS_PROVIDER`.
 Not used by this plan and not to be added: anything beginning `WA_` — there is no WhatsApp in this door.
 
 - [ ] **Step 2: Check the values are present without reading them**
 
-Run: `ssh root@31.97.176.180 "cd /var/www/connectcare/binasmart && grep -c '^AUTH_PHONE_CODE_PEPPER=' .env; grep -c '^SMS_API_TOKEN=' .env; grep -c '^SMS_MODE=live' .env"`  
-Expected: `1`, `1`, `1` — three counts, no values.
+Run: `ssh root@31.97.176.180 "cd /var/www/connectcare/binasmart && grep -c '^AUTH_PHONE_CODE_PEPPER=' .env; grep -c '^SMS_API_TOKEN=' .env; grep -c '^SMS_MODE=live' .env; grep -c '^SMS_TENANT_MODE=live' .env"`  
+Expected: `1`, `1`, `1`, `0` — four counts, no values. The last one is the point: the phone door opens and tenant SMS stays off.
 
 - [ ] **Step 3: Restart and read the door**
 
@@ -2893,7 +2894,11 @@ Run: `ssh root@31.97.176.180 "cd /var/www/connectcare/binasmart && pm2 restart b
 Expected: a JSON body whose first field is `ok` and `true`.
 
 Run: `ssh root@31.97.176.180 "cd /var/www/connectcare/binasmart && node ops/auth/phone-code-status.js"`  
-Expected first line: `phone sign-in · OPEN · sms mode live · provider token yes · pepper yes`.
+Expected first line: `phone sign-in · OPEN · sms mode live · tenant sms test · provider token yes · pepper yes`.
+
+Run: `ssh root@31.97.176.180 "cd /var/www/connectcare/binasmart && node ops/messaging/sms-status.js"`
+
+Expected first line: `mode live · tenant sms test · provider geezsms · token yes · …` — the same two switches, read from the other side.
 
 Run: `ssh root@31.97.176.180 "curl -s http://127.0.0.1:4210/api/auth-methods"`  
 Expected: `"phone":true` in the answer. The login page now draws the phone field for everybody.
@@ -2956,13 +2961,13 @@ Expected: the eleven Plan D commits, and no unexpected modified file. The coordi
 **Names, checked across tasks.** `pc.CODE_LEN / TTL_MS / MAX_ATTEMPTS / LOCK_MS / RESEND_MS / PHONE_WINDOW_MS / PHONE_MAX / IP_WINDOW_MS / IP_MAX / MIN_PEPPER / SMS_LABEL / PLACEHOLDER_DOMAIN`; `newCode · hashCode · sameHash · packValue · unpackValue · identifierFor · isLocked · tooSoon · checkCode · codeText · maskPhone · phonePlaceholderEmail · isPhonePlaceholderEmail · makeCodeLimiter` (Tasks 1–3) are used under exactly those names in Tasks 5, 6, 7 and 11. `makePhoneCodeSender` returns `{ send, configured, mode, supports }` in Task 4 and the flow reads `sender.configured`, `sender.supports` and `sender.send` in Task 5. `makePhoneCodeFlow` returns `{ send, ready }` in Task 5 and `{ send, verify, ready }` after Task 6, which is what Task 7's plugin calls. The flow's `store` has `find / create / remove / findUserByPhone / createUser` in Tasks 5, 6, 7 and 11. `authPhoneReady(env)` is defined and used in Task 8 and its three switches are the same three the flow's `ready()` and `ops/auth/phone-code-status.js doorLine()` check. `identity.setVerifiedPhone(userId, phone, 'sms')` is the existing signature, with `'sms'` already in `PROOF`.
 
 **Three things worth saying out loud.**
-1. **`SMS_MODE` is one switch for two things.** Turning it to `live` for sign-in codes also turns on live SMS to tenants. Task 12 stops rather than assuming. Splitting it (`SMS_MODE_AUTH`) is a change to Plan A's contract and belongs in its own plan.
+1. **`SMS_MODE` was one switch for two things — it is two switches since 16 Sep 2026.** `SMS_MODE` is the provider switch (nothing leaves the server without it, and it is what a sign-in code needs); `SMS_TENANT_MODE`, default `test`, is what a message to a tenant needs on top of it. The go-live order is `SMS_API_TOKEN` → `AUTH_PHONE_CODE_PEPPER` → `SMS_MODE=live` for the phone door, and `SMS_TENANT_MODE=live` later, on Plan A's own day.
 2. **Safaricom numbers cannot sign in.** GeezSMS reaches `+2519` only, so a `+2517` number is told plainly that an SMS cannot reach it. With WhatsApp out of scope there is no second channel for them; Telegram and Google remain. Whether GeezSMS can be made to carry `+2517` is a question for the provider, not for this code.
 3. **The dry run leaves one row behind.** `ops/auth/phone-code-dryrun.js` writes an `OutboundMessage` with `kind: 'signin'`, `status: 'test'`, `buildingId: null`. It is kept on purpose — it is the evidence — and it costs nothing and counts against no building's limit.
 
 ## Later plans
 
 - **A door for Safaricom numbers**, if GeezSMS or another provider will carry `+2517`.
-- **Splitting `SMS_MODE`** so sign-in codes and tenant notices can be switched on separately.
+- ~~**Splitting `SMS_MODE`** so sign-in codes and tenant notices can be switched on separately.~~ Done 16 Sep 2026: `SMS_TENANT_MODE`.
 - **Changing a proven number**, which needs a code to the old number and a code to the new one, and is a plan of its own.
 - **A code for the owner dashboard's separate owner-key login**, which today is a key in a link and not an account at all.
