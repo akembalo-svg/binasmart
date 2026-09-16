@@ -205,7 +205,7 @@ const esc = s => String(s).replace(/"/g, '\\"');
 // pack is never half one format and half the other - and a re-render is not reported as a change, because the
 // airline changed nothing.
 const PACK_FORMAT = '2';
-const FM_KEYS = ['url', 'title', 'source_name', 'section', 'lang', 'status', 'fetchedAt', 'lastChecked',
+const FM_KEYS = ['url', 'title', 'titleAm', 'source_name', 'section', 'lang', 'status', 'fetchedAt', 'lastChecked',
   'firstFetched', 'goneAt', 'missedAt', 'contentHash', 'generated_by', 'packFormat'];
 function frontMatter(meta) {
   const lines = ['---'];
@@ -221,6 +221,59 @@ function readMeta(md) {
   return meta;
 }
 function bodyOf(md) { const fm = /^---\n[\s\S]*?\n---\n/.exec(String(md)); return fm ? String(md).slice(fm[0].length) : String(md); }
+
+// ---------- the Amharic header sidecar ----------
+// Six of the seven fetched institutions in the banking pack publish nothing in Amharic, so every document of
+// theirs opens in English, and an Amharic question can keyword-match only the one templated Amharic sentence
+// the header already carries - which is word for word the same on every page, and therefore tells no two
+// documents apart. ops/packs/am-headers.js writes knowledge/<pack>/am-headers.json: for each English
+// document, an Amharic title and a two-or-three-sentence Amharic summary, generated from that page's own text
+// and checked digit by digit against it. This file only READS that sidecar; it generates nothing.
+// A pack asks for it with "amHeaders": true in its registry `pack` block. A pack that does not - travel -
+// renders exactly the bytes it rendered before any of this existed, which test/packs/airline-identity.test.js
+// holds it to.
+const AM_HEADERS = 'am-headers.json';
+function readAmHeaders(pack) {
+  try { return JSON.parse(fs.readFileSync(path.join(packDir(pack), AM_HEADERS), 'utf8')); } catch (e) { return null; }
+}
+// Which sidecar entry, if any, a document may use. English documents only: an Amharic page already opens in
+// Amharic, and giving it a second Amharic title would restate the bank's own words in ours.
+function amEntry(page, site, pack, amHeaders) {
+  if (!pack || !pack.amHeaders || !amHeaders) return null;
+  if ((page.lang || langFor(site, page.path)) !== 'en') return null;
+  const e = amHeaders[page.slug];
+  return e && (e.titleAm || e.summaryAm) ? e : null;
+}
+// The grounding rule, enforced in code rather than trusted to the model: every run of digits in an Amharic
+// title or summary must appear, digit for digit, in the page text. Thousands separators are normalised away
+// (a bank writes 1,000 where a sentence may write 1000) and Ethiopic punctuation and spacing never matter,
+// because only the digits are compared. A summary naming a figure its page does not name is not a summary of
+// that page and is refused: the generator keeps the title and drops the summary rather than publish a number
+// nobody published.
+const digitRuns = s => (String(s || '').match(/[0-9][0-9.,]*/g) || [])
+  .map(d => d.replace(/[.,]+$/, '').replace(/,/g, '')).filter(Boolean);
+function ungroundedFigures(text, ...strings) {
+  const have = new Set(digitRuns(text));
+  const bad = [];
+  for (const s of strings) for (const d of digitRuns(s)) if (!have.has(d) && !bad.includes(d)) bad.push(d);
+  return bad;
+}
+// The page text of a document already on disk: everything after the header. The header's last paragraph is
+// the one every registry's headerEnTemplate opens with, so the text starts after that paragraph however many
+// paragraphs the header has - three today, four once a sidecar entry adds a summary. null means the file was
+// not written by this renderer, and a caller must leave it alone rather than guess where its text begins.
+function bodyText(md) {
+  const parts = bodyOf(md).split('\n\n');
+  for (let i = 0; i < Math.min(parts.length, 8); i++) {
+    if (/^Source: https?:\/\//.test(parts[i].trim())) return parts.slice(i + 1).join('\n\n').trim();
+  }
+  return null;
+}
+// Two renders of one document differ in the two lines that move on their own: lastChecked advances every run,
+// and missedAt is cleared by a run that succeeds. Everything else - the front matter, the header, the text -
+// is what "did this document really change" means.
+const VOLATILE = /^(?:lastChecked|missedAt): ".*"\n/gm;
+const sameDoc = (a, b) => String(a).replace(VOLATILE, '') === String(b).replace(VOLATILE, '');
 
 // What the page itself says it is about: its own H1-H3 headings, copied, never invented. htmlToText leaves
 // some of this site's headings as a bare "##" with the label on the next line, so that shape is read too. A
@@ -277,7 +330,7 @@ function fill(tpl, vars) {
   return String(tpl || '').replace(/\{(\w+)\}/g, (m, k) => (vars[k] === undefined ? m : vars[k]));
 }
 
-function header(page, site, today, pack) {
+function header(page, site, today, pack, amh) {
   const heads = pageHeadings(page.text, page.title);
   const lang = page.lang || langFor(site, page.path);
   const vars = {
@@ -292,17 +345,23 @@ function header(page, site, today, pack) {
   const am = 'በአማርኛ፦ ' + (page.sectionTitleAm ? page.sectionTitleAm + ' — ' : '') + (page.title || page.slug) + '። '
     + fill(pack && pack.headerAmTemplate, vars);
   const en = fill(pack && pack.headerEnTemplate, vars);
-  return what + '\n\n' + am + '\n\n' + en;
+  // The Amharic summary of an English page belongs between the Amharic sentence and the Source line: after
+  // everything else said in Amharic, before the provenance. Every figure in it is a figure the page itself
+  // prints - ungroundedFigures above is what makes that true, and am-headers.js drops a summary that fails it.
+  return [what, am, (amh && amh.summaryAm) || null, en].filter(Boolean).join('\n\n');
 }
 
-function renderDoc(page, site, { today, firstFetched, pack } = {}) {
+function renderDoc(page, site, { today, firstFetched, pack, amHeaders } = {}) {
+  const amh = amEntry(page, site, pack, amHeaders);
+  const titleAm = (amh && amh.titleAm) || '';
   const title = site.name + ' — ' + (page.title || page.slug);
-  const meta = { url: page.url, title, source_name: site.name, section: page.section || '',
+  const meta = { url: page.url, title, titleAm, source_name: site.name, section: page.section || '',
     lang: page.lang || langFor(site, page.path),
     status: 'live', fetchedAt: today, lastChecked: today, firstFetched: firstFetched && firstFetched !== today ? firstFetched : '',
     contentHash: contentHash(page.text), generated_by: (pack && pack.generatedBy) || 'ops/travel/fetch-airline.js',
     packFormat: (pack && pack.packFormat) || PACK_FORMAT };
-  return frontMatter(meta) + '\n\n# ' + title + '\n\n' + header(page, site, today, pack) + '\n\n' + page.text.trim() + '\n';
+  return frontMatter(meta) + '\n\n# ' + title + (titleAm ? ' · ' + titleAm : '')
+    + '\n\n' + header(page, site, today, pack, amh) + '\n\n' + page.text.trim() + '\n';
 }
 
 // Rewrite exactly one line. Used when a page is unchanged: the body must stay byte-identical (so git shows
@@ -331,7 +390,7 @@ const normUrl = u => String(u || '').replace(/\/+$/, '');
 // docs: [{ siteId, slug, path, url, title, section, sectionTitleAm, text }] for ONE site, already stripped.
 // failed: [{ url, why }] exactly as fetchSite reports it - what did not come back this run, and why.
 // Returns { added, changed, unchanged, gone, goneWhy, missed, revived } as lists of slugs.
-function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack } = {}) {
+function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, amHeaders } = {}) {
   fs.mkdirSync(dir, { recursive: true });
   const day = today || new Date().toISOString().slice(0, 10);
   const r = { added: [], changed: [], unchanged: [], gone: [], goneWhy: {}, missed: [], revived: [], reformatted: [] };
@@ -346,23 +405,25 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack }
     const oldMeta = old ? readMeta(old) : null;
     if (oldMeta && oldMeta.contentHash === contentHash(d.text) && oldMeta.status !== 'gone') {
       r.unchanged.push(slug);
-      // The page did not change, but the way this script writes a page did. Re-render it from the text that
-      // just came off the site, keeping the day the content was fetched, and keep it out of `changed`: the
-      // weekly note is about what the airline did, not about what we did.
-      if (oldMeta.packFormat !== PACK_FORMAT && !dryRun) {
+      // The page did not change, but the way this script writes a page did - a new packFormat, or an Amharic
+      // header the sidecar did not hold last time. Re-render it from the text that just came off the site,
+      // keeping the day the content was fetched, and keep it out of `changed`: the weekly note is about what
+      // the airline did, not about what we did.
+      const fresh = renderDoc(d, site, { today: oldMeta.fetchedAt || day, firstFetched: oldMeta.firstFetched || oldMeta.fetchedAt || day, pack, amHeaders });
+      if (oldMeta.packFormat !== PACK_FORMAT || !sameDoc(fresh, old)) {
         r.reformatted.push(slug);
-        fs.writeFileSync(file, renderDoc(d, site, { today: oldMeta.fetchedAt || day, firstFetched: oldMeta.firstFetched || oldMeta.fetchedAt || day, pack }));
+        if (dryRun) continue;
+        fs.writeFileSync(file, fresh);
         touchLastChecked(file, day);
         continue;
       }
-      if (oldMeta.packFormat !== PACK_FORMAT) r.reformatted.push(slug);
       if (!dryRun && oldMeta.missedAt) clearMissed(file, day);
       else if (!dryRun && oldMeta.lastChecked !== day) touchLastChecked(file, day);
       continue;
     }
     const first = (oldMeta && (oldMeta.firstFetched || oldMeta.fetchedAt)) || day;
     if (!old) r.added.push(slug); else { r.changed.push(slug); if (oldMeta.status === 'gone') r.revived.push(slug); }
-    if (!dryRun) fs.writeFileSync(file, renderDoc(d, site, { today: day, firstFetched: first, pack }));
+    if (!dryRun) fs.writeFileSync(file, renderDoc(d, site, { today: day, firstFetched: first, pack, amHeaders }));
   }
 
   // A failed fetch must never look like a deleted site. If most of what is on disk is suddenly missing from
@@ -396,6 +457,43 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack }
     const next = { ...meta, status: 'gone', goneAt: day, lastChecked: day };
     delete next.missedAt;                                // the miss is spent
     fs.writeFileSync(path.join(dir, f), frontMatter(next) + '\n' + bodyOf(cur));
+  }
+  return r;
+}
+
+// ---------- re-render, without fetching ----------
+//   node ops/packs/fetch-pack.js --pack banking --rerender
+// Write every live document of a pack through renderDoc again, from the text already on disk. No network, and
+// no institution is bothered: this exists for a change to the HEADER - a new Amharic sidecar entry, a new
+// template - which must not look like a change to the page. contentHash, fetchedAt, firstFetched and
+// lastChecked are carried through exactly as they stood, so the ingest re-chunks the document while the
+// freshness record still says the institution changed nothing. Reported as re-rendered, never as changed.
+function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
+  const r = { rerendered: [], unchanged: [], skipped: [] };
+  const sites = new Map((reg.sites || []).map(s => [s.name, s]));
+  for (const f of fs.readdirSync(dir).filter(x => x.endsWith('.md')).sort()) {
+    const slug = f.replace(/\.md$/, '');
+    const file = path.join(dir, f);
+    const old = fs.readFileSync(file, 'utf8');
+    const meta = readMeta(old);
+    const site = sites.get(meta.source_name);
+    const text = site ? bodyText(old) : null;
+    // A document no site in this registry wrote, one this renderer did not produce, and one whose page is
+    // already gone are all left exactly as they are - and counted, because silence would be worse.
+    if (!site || !text || meta.status === 'gone') { r.skipped.push(slug); continue; }
+    const p = pathOf(meta.url);
+    const sec = sectionOf(site, p || '');
+    const pre = site.name + ' — ';
+    const page = { url: meta.url, path: p, slug, lang: meta.lang, text,
+      title: meta.title && meta.title.slice(0, pre.length) === pre ? meta.title.slice(pre.length) : meta.title,
+      section: meta.section || (sec ? sec.key : null), sectionTitleAm: sec ? sec.titleAm : null };
+    let fresh = renderDoc(page, site, { today: meta.fetchedAt, firstFetched: meta.firstFetched || meta.fetchedAt, pack: reg.pack, amHeaders });
+    // renderDoc writes lastChecked from the day it is given, and the day it is given here is the day the page
+    // was fetched. Put the record of when we last looked back exactly as it stood.
+    if (meta.lastChecked) fresh = fresh.replace(/^lastChecked: ".*"$/m, 'lastChecked: "' + esc(meta.lastChecked) + '"');
+    if (fresh === old) { r.unchanged.push(slug); continue; }
+    r.rerendered.push(slug);
+    if (!dryRun) fs.writeFileSync(file, fresh);
   }
   return r;
 }
@@ -516,6 +614,15 @@ async function main(bound = {}) {
   const reg = JSON.parse(fs.readFileSync(registry, 'utf8'));
   const tag = (reg.pack && reg.pack.logPrefix) || pack;
   const log = m => console.log(String(m).replace(/^\[travel\]/, '[' + tag + ']'));
+  const amHeaders = reg.pack && reg.pack.amHeaders ? readAmHeaders(pack) : null;
+  if (argv.includes('--rerender')) {
+    const rr = rerenderPack(outDir, reg, { dryRun, amHeaders });
+    const n = rr.rerendered.length + rr.unchanged.length + rr.skipped.length;
+    log('[travel] ' + pack + ': ' + n + ' documents (0 added, 0 changed, ' + rr.rerendered.length + ' re-rendered, '
+      + rr.unchanged.length + ' unchanged, ' + rr.skipped.length + ' skipped)' + (dryRun ? '  [DRY RUN — nothing written]' : ''));
+    console.log(JSON.stringify({ pack, rerendered: rr.rerendered.length, unchanged: rr.unchanged.length, skipped: rr.skipped }));
+    return;
+  }
   let bad = 0;
   for (const site of reg.sites) {
     if (site.fetch === 'manual') { log('[travel] ' + site.id + ': manual (' + site.reach + ') — nothing fetched'); continue; }
@@ -524,7 +631,7 @@ async function main(bound = {}) {
     const { pages, failed } = await fetchSite(site, { limit, log });
     const docs = stripPackBoilerplate(pages);
     const { kept, thin } = splitThin(docs);
-    const r = writePack(outDir, kept, site, { today, dryRun, failed, pack: reg.pack });
+    const r = writePack(outDir, kept, site, { today, dryRun, failed, pack: reg.pack, amHeaders });
     if (r.refused) { log('[travel] ' + site.id + ': REFUSED to update the pack — ' + r.refusedWhy + '. Nothing written.'); bad++; continue; }
     bad += failed.length;
     log('[travel] ' + site.id + ': ' + kept.length + ' documents'
@@ -566,17 +673,20 @@ function forPack(pack) {
   const REGISTRY = path.join(dir, 'sources.json');
   const dflt = packTitleSuffix(REGISTRY);
   const blk = packBlock(REGISTRY);
-  const withPack = opts => ({ ...opts, pack: opts && opts.pack !== undefined ? opts.pack : blk });
-  return { ...module.exports, pack, REGISTRY, OUT_DIR: dir,
+  const amh = blk.amHeaders ? readAmHeaders(pack) : null;
+  const withPack = opts => ({ ...opts, pack: opts && opts.pack !== undefined ? opts.pack : blk,
+    amHeaders: opts && opts.amHeaders !== undefined ? opts.amHeaders : amh });
+  return { ...module.exports, pack, REGISTRY, OUT_DIR: dir, amHeaders: amh,
     cleanTitle: (raw, titleSuffix) => cleanTitle(raw, titleSuffix === undefined ? dflt : titleSuffix),
     extract: (html, opts) => extract(html, { titleSuffix: opts && opts.titleSuffix !== undefined ? opts.titleSuffix : dflt }),
-    header: (page, site, today, pk) => header(page, site, today, pk === undefined ? blk : pk),
+    header: (page, site, today, pk, amEnt) => header(page, site, today, pk === undefined ? blk : pk, amEnt),
     renderDoc: (page, site, opts) => renderDoc(page, site, withPack(opts)),
     writePack: (outDir, docs, site, opts) => writePack(outDir, docs, site, withPack(opts)),
     main: () => main({ pack, REGISTRY, OUT_DIR: dir }) };
 }
 
-module.exports = { sitemapUrls, sitemapsOf, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract, langFor, fill, slugPrefixOf,
+module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract, langFor, fill, slugPrefixOf,
+  readAmHeaders, amEntry, ungroundedFigures, digitRuns, bodyText, sameDoc, rerenderPack, AM_HEADERS,
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, clearMissed, writePack,
   makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR };
 

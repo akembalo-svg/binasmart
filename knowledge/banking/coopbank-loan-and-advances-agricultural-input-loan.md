@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/loan-and-advances/agricultural-input-loan"
 title: "Cooperative Bank of Oromia — Agricultural Input Loan"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ የግብርና ግብዓት ብድር"
 source_name: "Cooperative Bank of Oromia"
 section: "loans"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Agricultural Input Loan
+# Cooperative Bank of Oromia — Agricultural Input Loan · የኦሮሚያ ኅብረት ሥራ ባንክ የግብርና ግብዓት ብድር
 
 Cooperative Bank of Oromia — loans — Agricultural Input Loan. On this page: For Farm Productivity and Profitability, Fertilizer Loan, Other Agricultural Input Loans.
 
 በአማርኛ፦ ብድር — Agricultural Input Loan። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው የግብርና ግብዓት ብድር ያብራራል። ብድሩ ለአጭር ጊዜ የሚሰጥ ሲሆን ማዳበሪያ፣ የተሻሻሉ ዘሮች እና አግሮኬሚካሎችን ለመግዛት ይውላል። ብድሩ ለኅብረት ሥራ ማህበራት፣ ማህበራት፣ የንግድ እርሻዎች፣ ግለሰቦች እና ክልላዊ መንግስታት ይሰጣል።
 
 Source: https://coopbankoromia.com.et/loan-and-advances/agricultural-input-loan (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/banking-service/personal-banking-2/foreign-currency-fcy-accounts"
 title: "Zemen Bank — Foreign Currency-FCY Accounts"
+titleAm: "የዘመን ባንክ ሂሳብና ተቀማጭ: የውጭ ምንዛሪ (FCY) ሂሳቦች"
 source_name: "Zemen Bank"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Foreign Currency-FCY Accounts
+# Zemen Bank — Foreign Currency-FCY Accounts · የዘመን ባንክ ሂሳብና ተቀማጭ: የውጭ ምንዛሪ (FCY) ሂሳቦች
 
 Zemen Bank — accounts — Foreign Currency-FCY Accounts. On this page: Foreign Currency-FCY, Type of FCY Accounts, Non Resident FCY Accounts, Foreign Currency account for Foreign Entities, Retention Accounts.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Foreign Currency-FCY Accounts። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዘመን ባንክ የውጭ ምንዛሪ (FCY) ሂሳቦችን በተመለከተ መረጃ ይሰጣል። ብቁ ግለሰቦች እና አካላት በUSD፣ GBP ወይም ዩሮ ሂሳቦችን መክፈት የሚችሉ ሲሆን፣ የመጀመሪያ የ100 ዶላር/ዩሮ/ፓውንድ ተቀማጭ ገንዘብ ያስፈልጋል። ሂሳብ ያዥዎች በሂሳብ ቀሪ ሂሳብ ላይ ማራኪ የወለድ ተመን ማግኘት የሚችሉ ሲሆን፣ ለተሻለ የወለድ ተመን ደግሞ ቢያንስ ለሶስት ወራት ጊዜ 5000 ዶላር ወይም ተመጣጣኝ የውጭ ምንዛሪ በጊዜ ተቀማጭ ማስቀመጥ ይችላሉ።
 
 Source: https://zemenbank.com/banking-service/personal-banking-2/foreign-currency-fcy-accounts (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

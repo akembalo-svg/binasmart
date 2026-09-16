@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/dashen-mobile-plus"
 title: "Dashen Bank — Dashen Mobile Plus"
+titleAm: "የዳሽን ባንክ ዳሽን ሞባይል ፕላስ"
 source_name: "Dashen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Dashen Mobile Plus
+# Dashen Bank — Dashen Mobile Plus · የዳሽን ባንክ ዳሽን ሞባይል ፕላስ
 
 Dashen Bank — digital — Dashen Mobile Plus. On this page: Dashen Mobile Plus Brand Propositions, Dashen Mobile Plus as an Omni-Channel, WH Questions about Dashen Mobile Plus, Contact Us Dashen Mobile Plus Services | Dashen Bank.
 
 በአማርኛ፦ ካርድ፣ ኤቲኤምና ሞባይል ባንክ — Dashen Mobile Plus። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክን የዳሽን ሞባይል ፕላስ አገልግሎት ያብራራል። ዳሽን ሞባይል ፕላስ ደንበኞች በሞባይል፣ በኢንተርኔት እና በUSSD አማካኝነት ከባንኩ ጋር እንዲገናኙ የሚያስችል ሁሉን አቀፍ የባንክ አገልግሎት ነው። ደንበኞች ሂሳባቸውን 24 x 7 መከታተል፣ ገንዘብ ማስተላለፍ፣ የክፍያ መጠየቂያዎችን መክፈል እና ሌሎች በርካታ አገልግሎቶችን ማግኘት ይችላሉ።
 
 Source: https://dashenbanksc.com/dashen-mobile-plus (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

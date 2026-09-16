@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/banking-service/personal-banking-2/certificate-of-deposit"
 title: "Zemen Bank — Certificate of Deposit"
+titleAm: "የዘመን ባንክ የሂሳብና ተቀማጭ አገልግሎት: ሰርተፍኬት ኦፍ ዲፖዚት"
 source_name: "Zemen Bank"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Certificate of Deposit
+# Zemen Bank — Certificate of Deposit · የዘመን ባንክ የሂሳብና ተቀማጭ አገልግሎት: ሰርተፍኬት ኦፍ ዲፖዚት
 
 Zemen Bank — accounts — Certificate of Deposit. On this page: Certificate of Deposit Products, What are the benefits of CD's?, Top CD Rates for Your Savings.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Certificate of Deposit። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዘመን ባንክ ስለሚያቀርበው ሰርተፍኬት ኦፍ ዲፖዚት (CDs) ምርት ያብራራል። ሲዲዎች ገንዘብን ለተወሰነ ጊዜ ለማስቀመጥ እና ከፍተኛ የወለድ ተመን ለማግኘት የሚያስችል መሳሪያ ናቸው። የዘመን ባንክ ሲዲዎች ዝቅተኛው የኢንቨስትመንት መጠን 1,000,000 ብር ሲሆን ወለዱን ወዲያውኑ የመክፈል ልዩ ጥቅም አላቸው።
 
 Source: https://zemenbank.com/banking-service/personal-banking-2/certificate-of-deposit (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

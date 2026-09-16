@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/murabaha-financing-working-capital"
 title: "Dashen Bank — Murabaha Financing – Working Capital"
+titleAm: "የዳሽን ባንክ ወጪና ገቢ ንግድ፡ Murabaha Financing – Working Capital"
 source_name: "Dashen Bank"
 section: "trade"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Murabaha Financing – Working Capital
+# Dashen Bank — Murabaha Financing – Working Capital · የዳሽን ባንክ ወጪና ገቢ ንግድ፡ Murabaha Financing – Working Capital
 
 Dashen Bank — trade — Murabaha Financing – Working Capital.
 
 በአማርኛ፦ ወጪና ገቢ ንግድ — Murabaha Financing – Working Capital። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ እስላማዊ የፋይናንስ አገልግሎት ደንበኞች የአሁን ንብረቶችን ለመደገፍ የሚያስችል የ Murabaha Financing – Working Capital የፋይናንስ ዝግጅትን ያብራራል። የፋይናንስ ጊዜው ቢበዛ 3 ዓመት ሲሆን ክፍያው በየወሩ፣ በየሩብ ዓመቱ፣ በየስድስት ወሩ ወይም በአንድ ጊዜ ሊሆን ይችላል። ከብር 5.0 ሚሊዮን በላይ ለሆኑ የፋይናንስ ጥያቄዎች ኦዲት የተደረጉ የፋይናንስ መግለጫዎች ያስፈልጋሉ።
 
 Source: https://dashenbanksc.com/murabaha-financing-working-capital (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/how-to-import-from-abroad"
 title: "Dashen Bank — How to Import from Abroad"
+titleAm: "የዳሽን ባንክ ወጪና ገቢ ንግድ: ከውጭ ሀገር እንዴት ማስመጣት ይቻላል?"
 source_name: "Dashen Bank"
 section: "trade"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — How to Import from Abroad
+# Dashen Bank — How to Import from Abroad · የዳሽን ባንክ ወጪና ገቢ ንግድ: ከውጭ ሀገር እንዴት ማስመጣት ይቻላል?
 
 Dashen Bank — trade — How to Import from Abroad.
 
 በአማርኛ፦ ወጪና ገቢ ንግድ — How to Import from Abroad። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ዳሽን ባንክ ከውጭ ሀገር ለሚያስመጡ ደንበኞች የንግድ መፍትሄዎችን ያቀርባል። ባንኩ የLCs፣ Documentary collection (CAD) እና ከ5,000 ዶላር በታች ለሆኑ ማስመጫዎች ፈጣን ክፍያዎችን ያመቻቻል። ሁሉም የማስመጫ ሰነዶች በባንኩ የንግድ አገልግሎት ማዕከል በፍጥነት ይጣራሉ።
 
 Source: https://dashenbanksc.com/how-to-import-from-abroad (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

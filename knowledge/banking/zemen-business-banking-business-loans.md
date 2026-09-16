@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/banking-service/business-banking/business-loans"
 title: "Zemen Bank — Business Loans"
+titleAm: "የዘመን ባንክ የንግድ ባንክ አገልግሎት የንግድ ብድሮች"
 source_name: "Zemen Bank"
 section: "business"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Business Loans
+# Zemen Bank — Business Loans · የዘመን ባንክ የንግድ ባንክ አገልግሎት የንግድ ብድሮች
 
 Zemen Bank — business — Business Loans. On this page: Loans, Loans & Credit Facilities, Term Loans, Line of Credit (Overdraft Facility), Merchandise Loan Facility, Pre-Shipment Export Finance, Sectors We Serve, Bank Guarantee.
 
 በአማርኛ፦ የንግድ ባንክ አገልግሎት — Business Loans። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+የዘመን ባንክ ለንግድ ስራዎች የስራ ማስኬጃ ካፒታል፣ የንብረት ፋይናንስ ወይም የፕሮጀክት ፋይናንስ የሚያስፈልጋቸውን የተለያዩ የብድር አማራጮችን ያቀርባል። የብድር ውሳኔዎች የሚሰጡት በሀገር ውስጥ ባለሙያዎች ሲሆን፣ ፈጣን ማፅደቅ እና ብጁ መፍትሄዎችን ያረጋግጣሉ። ባንኩ የአጭር ጊዜ (እስከ 12 ወራት)፣ የመካከለኛ ጊዜ (እስከ 5 ዓመታት) እና የረጅም ጊዜ (ከ 5 ዓመታት በላይ) ብድሮችን ያቀርባል።
 
 Source: https://zemenbank.com/banking-service/business-banking/business-loans (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

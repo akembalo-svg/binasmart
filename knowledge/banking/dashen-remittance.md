@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/remittance"
 title: "Dashen Bank — Remittance"
+titleAm: "የዳሽን ባንክ የገንዘብ ዝውውር አገልግሎት"
 source_name: "Dashen Bank"
 section: "remittance"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Remittance
+# Dashen Bank — Remittance · የዳሽን ባንክ የገንዘብ ዝውውር አገልግሎት
 
 Dashen Bank — remittance — Remittance. On this page: Outgoing Foreign Fund Transfer [SWIFT and TT], Incoming Foreign Fund Transfer [SWIFT and TT].
 
 በአማርኛ፦ ከውጭ የሚላክ ገንዘብ — Remittance። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ከውጭ የሚላክ ገንዘብ እና ወደ ውጭ የሚላክ ገንዘብ ዝውውር አገልግሎቶችን ያብራራል። ገቢ ገንዘብ በSWIFT – DASHETAA፣ WESTERN UNION፣ MoneyGram፣ Dahabshiil፣ TRANSFAST፣ WorldRemit፣ XPRESS MONEY፣ KAAH፣ EzRemit እና Ria በኩል መቀበል ይቻላል። ወጪ ገንዘብ ደግሞ ለተለያዩ አገልግሎቶች በSWIFT እና TT ይላካል።
 
 Source: https://dashenbanksc.com/remittance (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/card-services"
 title: "Dashen Bank — Card Services"
+titleAm: "የዳሽን ባንክ የካርድ አገልግሎቶች"
 source_name: "Dashen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Card Services
+# Dashen Bank — Card Services · የዳሽን ባንክ የካርድ አገልግሎቶች
 
 Dashen Bank — digital — Card Services. On this page: VISA Card, Dashen American Express Gold Debit Card, Dashen American Express Green Debit Card, ### Dashen Amex International Debit Card, Dashen Amex International Debit Card, Sharik Cards (IFB cards), Card Acquiring.
 
 በአማርኛ፦ ካርድ፣ ኤቲኤምና ሞባይል ባንክ — Card Services። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ የካርድ አገልግሎቶችን ያብራራል። የቪዛ ካርድ፣ የዳሽን አሜሪካን ኤክስፕረስ ጎልድ ዴቢት ካርድ እና የዳሽን አሜሪካን ኤክስፕረስ ግሪን ዴቢት ካርድን ያካትታል። የቪዛ ካርድ በቀን እስከ 15,000.00 ብር ማውጣት እና እስከ 200,000.00 ብር መግዛት ያስችላል።
 
 Source: https://dashenbanksc.com/card-services (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://combanketh.et/misalliance/terms-and-tarrif"
 title: "Commercial Bank of Ethiopia — Commercial Bank of Ethiopia"
+titleAm: "የኢትዮጵያ ንግድ ባንክ ክፍያዎችና ታሪፍ"
 source_name: "Commercial Bank of Ethiopia"
 section: "fees"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Commercial Bank of Ethiopia — Commercial Bank of Ethiopia
+# Commercial Bank of Ethiopia — Commercial Bank of Ethiopia · የኢትዮጵያ ንግድ ባንክ ክፍያዎችና ታሪፍ
 
 Commercial Bank of Ethiopia — fees — Commercial Bank of Ethiopia. On this page: Terms and Tariffs, Deposit Accounts Interest Rate, Domestic Banking Terms and Tariffs, Digital Banking Terms and Tariffs, International Banking Services, Credit Services, Fast Loan by CBE-Mobile Banking.
 
 በአማርኛ፦ ክፍያዎችና ታሪፍ — Commercial Bank of Ethiopia። ይህ ገጽ ከኢትዮጵያ ንግድ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኢትዮጵያ ንግድ ባንክ የሚያቀርባቸውን የተለያዩ አገልግሎቶች ክፍያዎችና ታሪፎች ያብራራል። ባንኩ እንደ ተቀማጭ ሂሳብ ወለድ፣ የሀገር ውስጥ የባንክ አገልግሎት ክፍያዎች እና ሌሎችም ዝርዝር መረጃዎችን ያቀርባል። ለምሳሌ፣ የቁጠባ ሂሳቦች ከ 7% እስከ 14% ወለድ ሲኖራቸው፣ የገንዘብ ማውጣት ክፍያዎች ከነጻ እስከ 60 ብር ይደርሳሉ።
 
 Source: https://combanketh.et/misalliance/terms-and-tarrif (official Commercial Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

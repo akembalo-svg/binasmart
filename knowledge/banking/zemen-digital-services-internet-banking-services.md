@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/digital-services/internet-banking-services"
 title: "Zemen Bank — Internet & Mobile Banking Services"
+titleAm: "የዘመን ባንክ የኢንተርኔት እና የሞባይል ባንኪንግ አገልግሎቶች"
 source_name: "Zemen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Internet & Mobile Banking Services
+# Zemen Bank — Internet & Mobile Banking Services · የዘመን ባንክ የኢንተርኔት እና የሞባይል ባንኪንግ አገልግሎቶች
 
 Zemen Bank — digital — Internet & Mobile Banking Services. On this page: Internet & Mobile.
 
 በአማርኛ፦ ዲጂታል አገልግሎቶች — Internet & Mobile Banking Services። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዘመን ባንክ የኢንተርኔት እና የሞባይል ባንኪንግ አገልግሎቶችን ያብራራል። እነዚህ አገልግሎቶች ደንበኞች የፋይናንስ መረጃቸውን በቀን 24 ሰዓት፣ በሳምንት 7 ቀን እንዲያገኙ ያስችላቸዋል። አገልግሎቶቹ የሂሳብ ቀሪ ሂሳብ ማየት፣ ገንዘብ ማስተላለፍ፣ የአየር ሰዓት መሙላት፣ የክፍያ መጠየቂያዎችን መክፈል እና ሌሎች በርካታ ተግባራትን ያካትታሉ።
 
 Source: https://zemenbank.com/digital-services/internet-banking-services (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

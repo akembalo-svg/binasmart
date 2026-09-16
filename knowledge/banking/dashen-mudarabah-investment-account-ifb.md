@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/mudarabah-investment-account-ifb"
 title: "Dashen Bank — Mudarabah Investment Account"
+titleAm: "የዳሽን ባንክ ወለድ አልባ ባንክ: Mudarabah Investment Account"
 source_name: "Dashen Bank"
 section: "ifb"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Mudarabah Investment Account
+# Dashen Bank — Mudarabah Investment Account · የዳሽን ባንክ ወለድ አልባ ባንክ: Mudarabah Investment Account
 
 Dashen Bank — ifb — Mudarabah Investment Account.
 
 በአማርኛ፦ ወለድ አልባ ባንክ — Mudarabah Investment Account። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ስለ Mudarabah Investment Account ያብራራል። ይህ አካውንት ለግለሰቦች እና ለህጋዊ አካላት የሚሆን ሲሆን፣ በትንሹ 50,000 ብር የመነሻ ኢንቨስትመንት ፈንድ ይከፈታል። የኢንቨስትመንት ጊዜው ከ6 ወር እስከ 24 ወር ሲሆን፣ የትርፍ ክፍፍል ጥምርታው ባንኩ 40% እና ደንበኛው 60% ነው።
 
 Source: https://dashenbanksc.com/mudarabah-investment-account-ifb (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/diaspora-banking/investment-financing"
 title: "Cooperative Bank of Oromia — Diaspora Investment Financing"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ኢንቨስትመንት ፋይናንስ"
 source_name: "Cooperative Bank of Oromia"
 section: "diaspora"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Diaspora Investment Financing
+# Cooperative Bank of Oromia — Diaspora Investment Financing · የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ኢንቨስትመንት ፋይናንስ
 
 Cooperative Bank of Oromia — diaspora — Diaspora Investment Financing. On this page: Diaspora Banking.
 
 በአማርኛ፦ የዲያስፖራ ሂሳቦች — Diaspora Investment Financing። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለዲያስፖራ የሚያቀርበውን የኢንቨስትመንት ፋይናንስ አገልግሎት ያብራራል። ባንኩ እስከ 80% የሚደርስ የፕሮጀክት ወጪን የሚሸፍን ሲሆን፣ ቀሪው 20% በባለሀብቱ የራሱ ድርሻ ይሸፈናል። ይህ ፋይናንስ ነባር ንግዶችን ለማስፋፋት ወይም በአዲስ ዘርፎች ለመሰማራት የሚያስችል ሲሆን፣ ፈጣን ሂደትና ማጽደቅ አለው።
 
 Source: https://coopbankoromia.com.et/diaspora-banking/investment-financing (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,0 +1,1423 @@
+{
+ "cbe-cbe-noor": {
+  "titleAm": "የኢትዮጵያ ንግድ ባንክ፡ ወለድ አልባ ባንክ (CBE Noor)",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ ንግድ ባንክ ወለድ አልባ የባንክ አገልግሎት ስለሆነው ስለ CBE Noor ያብራራል። CBE Noor በሸሪዓ ህግ መሰረት የሚሰራ ሲሆን ወለድን (ሪባን) የሚከለክል እና ፍትሃዊነትን፣ ግልጽነትን እና ስጋት መጋራትን የሚያጎላ ነው። አገልግሎቱ ለግለሰቦች፣ ለንግድ ድርጅቶች እና ለዲያስፖራ ማህበረሰቦች የተዘጋጀ ነው።",
+  "contentHash": "58791c81d1674fc6500ea24d7135c4bfaad70d4f",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "cbe-misalliance-account-opening": {
+  "titleAm": "የኢትዮጵያ ንግድ ባንክ: CBE Docs - ሂሳብ መክፈትና ተቀማጭ",
+  "summaryAm": "ይህ ገጽ ስለ CBE Docs፣ የኢትዮጵያ ንግድ ባንክ ዲጂታል መድረክ ያብራራል። CBE Docs ደንበኞች ሂሳብ በርቀት እንዲከፍቱ፣ የባንክ ቅጾችን በዲጂታል መንገድ እንዲሞሉና እንዲያስገቡ፣ ሰነዶችን በኤሌክትሮኒክ ፊርማ እንዲፈርሙ እና ሰነዶቻቸውን ከጫፍ እስከ ጫፍ እንዲከታተሉ ያስችላል። ይህ አገልግሎት ፈጣን፣ ደህንነቱ የተጠበቀ፣ በማንኛውም ጊዜና ቦታ ተደራሽ፣ ወረቀት አልባ እና ለሁሉም የተነደፈ ነው።",
+  "contentHash": "2c73f325fb4124cf65578265e1f72dcf18d4d093",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "cbe-misalliance-sitemap": {
+  "titleAm": "የኢትዮጵያ ንግድ ባንክ እገዛና ደኅንነት",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ ንግድ ባንክን በተመለከተ የእገዛና የድጋፍ መረጃዎችን ያቀርባል። ከእነዚህም መካከል የሂሳብ አከፋፈት፣ ተደጋጋሚ ጥያቄዎች (FAQ)፣ የብድር FAQ፣ የግላዊነት ፖሊሲ፣ የአጠቃቀም ውሎች እና ታሪፍ፣ የኢ-ባንኪንግ ውሎች እና ሁኔታዎች ይገኙበታል። በተጨማሪም የእውቂያ መረጃ፣ የጨረታዎች ዝርዝር፣ የአስተያየት ቅጽ፣ የማጭበርበር ቅሬታዎች እና የጥሪ ማዕከል አገልግሎቶች ተካተዋል።",
+  "contentHash": "5f19aef5153ae67580ae0067635e017d1ab2f3ad",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "cbe-misalliance-terms-and-tarrif": {
+  "titleAm": "የኢትዮጵያ ንግድ ባንክ ክፍያዎችና ታሪፍ",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ ንግድ ባንክ የሚያቀርባቸውን የተለያዩ አገልግሎቶች ክፍያዎችና ታሪፎች ያብራራል። ባንኩ እንደ ተቀማጭ ሂሳብ ወለድ፣ የሀገር ውስጥ የባንክ አገልግሎት ክፍያዎች እና ሌሎችም ዝርዝር መረጃዎችን ያቀርባል። ለምሳሌ፣ የቁጠባ ሂሳቦች ከ 7% እስከ 14% ወለድ ሲኖራቸው፣ የገንዘብ ማውጣት ክፍያዎች ከነጻ እስከ 60 ብር ይደርሳሉ።",
+  "contentHash": "bdfdd8cbac1838f062016ff96b10999d2cc932d8",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "cbe-mobile-privacy-notice": {
+  "titleAm": "የኢትዮጵያ ንግድ ባንክ፡ የግላዊነት ፖሊሲ እና የደንበኛ መረጃ ጥበቃ",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ ንግድ ባንክ (CBE) የግላዊነት ፖሊሲን ያብራራል። ባንኩ የግል መረጃን እንዴት እንደሚሰበስብ፣ እንደሚጠቀም፣ እንደሚያጋራ እና እንደሚጠብቅ ይዘረዝራል። ደንበኞች ስለመረጃቸው ያላቸውን መብቶች እና የባንኩን የደህንነት እርምጃዎች ያብራራል።",
+  "contentHash": "9993ab494f4c9d138196c442c5290bcab8e066bb",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-agricultural-mechanization": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የግብርና ሜካናይዜሽን ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለግብርና ሜካናይዜሽን የሚሰጠውን ብድር ያብራራል። ባንኩ የግብርና ማሽነሪዎችን እና መሳሪያዎችን ለመግዛት ብድር ይሰጣል፣ ከእነዚህም መካከል ትራክተሮች፣ ኮምባይነር ሃርቬስተር፣ ትራሸር እና ተሽከርካሪዎች ይገኙበታል። የብድር ወለድ ተመን፣ የጊዜ ገደብ እና የክፍያ ዘዴዎች በጣም ማራኪ ናቸው።",
+  "contentHash": "a73414386c8cbedcd30fd45de41af38cf80827ad",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-agro-processing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የግብርና ምርቶች ማቀነባበሪያ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለግብርና ምርቶች ማቀነባበሪያ ለኅብረት ሥራ ማኅበራት ስለሚሰጣቸው የፋይናንስ አገልግሎቶች ያብራራል። ባንኩ የግብርና ምርቶችን ከማቀነባበር እና ከመገበያየት ጋር ተያይዞ ያሉትን ዕድሎች ለማሳደግ የኅብረት ሥራ ማኅበራትን ያበረታታል። ለወተት ማቀነባበሪያ፣ ለቡና ማጠቢያ ማሽኖች እና ለሌሎች የግብርና ማቀነባበሪያ ንግዶች ማራኪ እና ተመጣጣኝ የብድር አገልግሎት ይሰጣል።",
+  "contentHash": "cd16221439055d5149819ef267e09926ea5cd389",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-cooperative-capacity-building-and-advisory-service": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የኅብረት ሥራ ማኅበራት አቅም ግንባታ እና የምክር አገልግሎት",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት የሚሰጠውን የአቅም ግንባታ እና የምክር አገልግሎት ያብራራል። ባንኩ ለኅብረት ሥራ ማኅበራት እና አባሎቻቸው ስልጠና፣ ትምህርት፣ ምርጥ ተሞክሮዎችን ማላመድ፣ ከልማት አጋሮች ጋር ማገናኘት፣ ወርክሾፖችን ማዘጋጀት እና የተለያዩ የምክር አገልግሎቶችን ይሰጣል። የባንኩ አገልግሎቶች የፋይናንስ ተደራሽነትን ማሻሻል፣ የኅብረት ሥራ ማኅበራትን አስተዳደር ማጠናከር እና ለኅብረት ሥራ ማኅበራት ምቹ ሁኔታ መፍጠርን ያለሙ ናቸው።",
+  "contentHash": "f14a0d13ab173a77a49ea8140e238e3cb6020c67",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-cooperative-saving": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት የቁጠባ ምርቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት የሚያቀርባቸውን የቁጠባ ምርቶች ያብራራል። ባንኩ የኅብረት ሥራ ማኅበራትን በማጠናከር ላይ ትኩረት ያደርጋል። የኅብረት ሥራ ማኅበራት የቁጠባ ሂሳብ ለመክፈት የሚያስፈልጉ መስፈርቶች እና የሂሳብ ዓይነቶች ተዘርዝረዋል።",
+  "contentHash": "2307be85f4266ee15697bab53413e742fb02d724",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-cooperatives-relationship-management-process": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት ግንኙነት አስተዳደር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ከኅብረት ሥራ ማኅበራት ጋር ያለውን ግንኙነት እንዴት እንደሚያስተዳድር ያብራራል። ባንኩ ለኅብረት ሥራ ማኅበራት የተለያዩ የፋይናንስ አማራጮችን እና የማማከር አገልግሎቶችን ይሰጣል። ከእነዚህም መካከል የሥራ ማስኬጃ ብድር፣ የግብርና ማሽነሪ ብድር፣ የግብርና ማቀነባበሪያ ብድር እና ሌሎችም ይገኙበታል።",
+  "contentHash": "0085371dde6bf91dfaa0ad925e73d03e90b0b0f4",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-export": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ ለኅብረት ሥራ ማኅበራት የኤክስፖርት ፋይናንስ አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት ስለሚሰጣቸው የኤክስፖርት ፋይናንስ አገልግሎቶች ያብራራል። ባንኩ ለቡና፣ ለጥራጥሬ፣ ለሰሊጥ እና ለሌሎችም የኤክስፖርት ምርቶች የቅድመ-ጭነት ብድር፣ የኤክስፖርት የጊዜ ብድር፣ የቅድሚያ ክፍያዎች፣ የብድር ደብዳቤ እና የሰነድ ክፍያ አገልግሎቶችን ይሰጣል። በአሁኑ ጊዜ 15 ሚሊዮን የሚገመቱ ኢትዮጵያውያን በቡና ኢንዱስትሪ ውስጥ ተቀጥረው የሚሰሩ ሲሆን፣ ባንኩ ከምርት እስከ ዓለም አቀፍ ገበያ ድረስ የቡና ኅብረት ሥራ ማኅበራት ታማኝ የፋይናንስ አጋር ነው።",
+  "contentHash": "dfeb671985aedd0314704391a31b10677f360786",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-intended-impact-of-ccbas": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት CCBAS የታሰበው ተፅዕኖ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት ንዑስ ሂደት ከተቋቋመበት ጊዜ ጀምሮ ያለውን ተልዕኮ እና ዋና እሴት (ለማህበረሰቡ መጨነቅ) ያብራራል። ባንኩ በገጠር እና በከተማ ማህበረሰቦች ማህበራዊና ኢኮኖሚያዊ የህብረት ስራ ማህበራት ላይ የሚያሳድረውን ተፅዕኖ ያሳያል። የገጹ ይዘት የባንኩን ተልዕኮ እውን ለማድረግ፣ የፋይናንስ ተደራሽነትን ለማሳደግ እና የህብረት ስራ ማህበራትን አቅም ለመገንባት ያለውን ቁርጠኝነት ያብራራል።",
+  "contentHash": "f0dd1be3ed0f1b3bd9abdf1c4d6dee2ec85fcd99",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-intended-impacts": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የአማካሪ አገልግሎቶች የታሰበው ተፅዕኖ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ የአማካሪ አገልግሎቶች የታሰበውን ተፅዕኖ ያብራራል። ባንኩ ከተቋቋመበት ጊዜ ጀምሮ በማህበረሰብ ላይ ያተኮረ ተልዕኮውን በመከተል በማህበረሰብ አቀፍ ድርጅቶች እና ሌሎች አጋሮች አማካኝነት የማህበረሰቦችን ማህበራዊና ኢኮኖሚያዊ አቅም ለማጎልበት ይሰራል። ባንኩ የፋይናንስ ተደራሽነትን ለማሻሻል፣ የኅብረት ሥራ ማኅበራትን አስተዳደር ለማጠናከር፣ የምርት እሴት መጨመርን ለማሳደግ እና ለኅብረት ሥራ ማኅበራት ምቹ ሁኔታ ለመፍጠር ያለመ ነው።",
+  "contentHash": "44745fcce6d8880694a84a77058233b5fbca7445",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-others": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የኅብረት ሥራ ማኅበራት ሌሎች አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት ከሚያቀርባቸው አገልግሎቶች መካከል “ሌሎች” በሚል ርዕስ ስር የሚገኙትን ያብራራል። ባንኩ ለኅብረት ሥራ ማኅበራት የተለያዩ ምርቶችን፣ ድጋፎችን፣ የምክር አገልግሎቶችን እና ማራኪ ፋሲሊቲዎችን ያቀርባል። ከእነዚህም መካከል የእንስሳት እርባታ ብድር፣ ለ SACCOs ብድር እና ለሸማቾች ኅብረት ሥራ ማኅበራት ብድር ይገኙበታል።",
+  "contentHash": "0f5af664025cf380772a292177b4cf205b489f52",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-product-services-ccbas": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: የኅብረት ሥራ ማኅበራት አገልግሎቶች CCBAS",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት የሚያቀርባቸውን አገልግሎቶች ይዘረዝራል። ባንኩ የኅብረት ሥራ ባንኪንግ፣ የግብርና እና የኅብረት ሥራ ግንኙነቶች፣ የኅብረት ሥራ ቁጠባ ምርቶች፣ የኅብረት ሥራ ፋይናንስ እና የኅብረት ሥራ ማኅበራት አቅም ግንባታ እና የምክር አገልግሎቶችን ይሰጣል። ከእነዚህም መካከል የሥልጠና፣ የትምህርት፣ የጥብቅና እና የምክር አገልግሎቶች ይገኙበታል።",
+  "contentHash": "060148802e492a4d976f7399e7735d5d5391e3df",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-services": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት የአቅም ግንባታ እና የምክር አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት ስለሚሰጣቸው የአቅም ግንባታ እና የምክር አገልግሎቶች ያብራራል። ባንኩ የኅብረት ሥራ ማኅበራትን ተግዳሮቶች ለመፍታት እና የሚያስፈልጋቸውን እሴት ለማቅረብ መዋቅር ዘርግቷል። ከሚሰጡት አገልግሎቶች መካከል ስልጠና እና ትምህርት፣ ምርጥ ተሞክሮዎችን ማላመድ፣ ከልማት አጋሮች ጋር ማገናኘት፣ ወርክሾፖችን ማዘጋጀት እና በተለያዩ ዘርፎች የምክር አገልግሎት መስጠት ይገኙበታል።",
+  "contentHash": "56ec5f1155e31e1404e51583c4b0cd4ea665d40b",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-stakeholders-to-partner-with-coopbank": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ከባለድርሻ አካላት ጋር የሚተባበርባቸው መንገዶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ የማኅበረሰቡን ማኅበራዊና ኢኮኖሚያዊ ልማት ለማጎልበት ከሚተባበርባቸው ባለድርሻ አካላት ጋር ያለውን ግንኙነት ያብራራል። ባንኩ የኅብረት ሥራ ማኅበራትን፣ የግብርና ንግዶችን እና የገጠር ማኅበረሰብን ለመደገፍ የተቋቋመ የመጀመሪያው ባንክ ነው። ከባንኩ ጋር የሚተባበሩ ባለድርሻ አካላት የኅብረት ሥራ ማስተዋወቂያ ኤጀንሲዎች፣ የአገር ውስጥ እና ዓለም አቀፍ መንግሥታዊ ያልሆኑ ድርጅቶች፣ የልማት አጋሮች እና ማኅበረሰብ አቀፍ ድርጅቶች፣ የትምህርት እና የምርምር ተቋማት፣ እና ዓለም አቀፍ የኅብረት ሥራ ጥምረት (ICA) ይገኙበታል።",
+  "contentHash": "6f21535866137c37965a1bfa05b4c0269a824313",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-stakeholders": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የኅብረት ሥራ ማኅበራት ባለድርሻ አካላት",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ከኅብረት ሥራ ማኅበራት ጋር ያለውን ግንኙነት ያብራራል። ባንኩ ለኅብረት ሥራ ማኅበራት የቁጠባ ምርቶችን፣ የፋይናንስ አገልግሎቶችን እና የአቅም ግንባታና የምክር አገልግሎቶችን ይሰጣል። ከእነዚህም መካከል የሥራ ማስኬጃ ብድር፣ የግብርና ሜካናይዜሽን፣ የግብርና ማቀነባበሪያ እና Export Financing Facilities ይገኙበታል።",
+  "contentHash": "15d99e0a4be273740f1567aea40d3fb0ac85556f",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperative-banking-working-capital": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት Working Capital Loan",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት ስለሚሰጠው የ Working Capital Loan ያብራራል። ባንኩ ለተለያዩ የምርት እንቅስቃሴዎች ለተሰማሩ የኅብረት ሥራ ማኅበራት የሥራ ማስኬጃ ካፒታል ፍላጎቶችን ይደግፋል። ብድሩ ማዳበሪያና ፀረ-ተባይ፣ ዘር፣ ነዳጅ፣ የቀጥታ እንስሳት ግዢ፣ የወተት ማቀዝቀዣ ታንኮች እና ሌሎች ወጪዎችን ለመሸፈን ታስቦ የተዘጋጀ ነው።",
+  "contentHash": "0783acbe90c8c93074227e81103d3c617a0d2829",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperatives-cooperative-advisory-and-consultancy": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት አቅም ግንባታ እና የምክር አገልግሎት",
+  "summaryAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ከፋይናንስ ባለፈ የኅብረት ሥራ ማኅበራትን በአቅም ግንባታ እና የምክር አገልግሎት ይደግፋል። ባንኩ ስልጠናዎችን፣ ምርጥ ተሞክሮዎችን፣ የቴክኒክ እና የፋይናንስ ድጋፍ ይሰጣል። የባንኩ አገልግሎት የገጠር ፋይናንስ ተደራሽነትን ለማስፋት፣ አስተዳደርን ለማጠናከር እና የገበያ ተደራሽነትን ለማሳደግ ያለመ ነው።",
+  "contentHash": "69ec5c233057b9f4f1360192332133c8a523a46e",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperatives-cooperative-banking": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት ቁጠባ ምርቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት የሚያቀርባቸውን የቁጠባ ምርቶች ያብራራል። ባንኩ ለኅብረት ሥራ ማኅበራት የተለያዩ የቁጠባ ምርቶችን ያቀርባል፤ ከእነዚህም መካከል Demand Deposit፣ Saving Deposit እና Fixed or Time Deposit ይገኙበታል። የኅብረት ሥራ ማኅበራት አካውንት ለመክፈት የሚያስፈልጉ ሰነዶችም ተዘርዝረዋል።",
+  "contentHash": "7eaf2dd0a11ecf1e174af454a72c51c038529f28",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperatives-cooperative-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት ፋይናንስ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት የሚያቀርባቸውን የፋይናንስ አገልግሎቶች ያብራራል። ባንኩ ለኅብረት ሥራ ማኅበራት የሥራ ማስኬጃ ብድር፣ የግብርና ሜካናይዜሽን፣ የግብርና ማቀነባበሪያ፣ የኤክስፖርት ፋይናንስ እና ሌሎች የፋይናንስ መፍትሄዎችን ይሰጣል። እነዚህ አገልግሎቶች የኅብረት ሥራ ማኅበራትን ዕድገትና ስኬት ለማረጋገጥ ታስበው የተዘጋጁ ናቸው።",
+  "contentHash": "15d0b704e715618425643e60d4d58e647abfa77b",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperatives-cooperatives-coopbank": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የግብርና እና የኅብረት ሥራ ማኅበራት ግንኙነት",
+  "summaryAm": "የኦሮሚያ ኅብረት ሥራ ባንክ በኢትዮጵያ የመጀመሪያው በገበሬዎች ባለቤትነት የተመሰረተ ባንክ ሲሆን፣ 5,212 የኅብረት ሥራ ማኅበራት ከ67% በላይ የሚሆነውን የተከፈለ ካፒታሉን ይዘዋል። ባንኩ ለኅብረት ሥራ ማኅበራት እና ለገበሬዎች የገንዘብ ድጋፍ፣ የግብርና ምርት ፋይናንስ፣ የዲጂታል መድረኮች እና የአቅም ግንባታ ፕሮግራሞችን ያቀርባል። ከ128 በላይ የግብርና ባንክ ባለሙያዎች ያሉት ሲሆን፣ እንደ Dairy Farming Loans እና Crop and Coffee Production Loans ያሉ የፋይናንስ ምርቶችን እንዲሁም Farm Pass እና SACCO-Link የተባሉ መፍትሄዎችን ይሰጣል።",
+  "contentHash": "63abad83809750f466eba16f5acb5c0c39f26520",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-cooperatives": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት የሚሰጣቸውን አገልግሎቶች ያብራራል። ባንኩ በኢትዮጵያ የመጀመሪያው ሲሆን፣ 5,212 የኅብረት ሥራ ማኅበራት የባንኩን 67%+ የተከፈለ ካፒታል ይይዛሉ። ባንኩ ለኅብረት ሥራ ማኅበራት የቁጠባ፣ የብድር፣ የአቅም ግንባታ እና የምክር አገልግሎቶችን ይሰጣል።",
+  "contentHash": "246b81938169411fa71b298a5cfd0cc360ffc54a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-demand-deposit-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የፍላጎት ተቀማጭ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የፍላጎት ተቀማጭ ሂሳብ ያብራራል። የፍላጎት ተቀማጭ ሂሳብ ወለድ የማይከፈልበት እና ከፍተኛ ፈሳሽነት ያለው ሂሳብ ነው። ግለሰቦች፣ ንግዶች እና ህጋዊ ወኪሎች በውክልና ስልጣን መክፈትና መጠቀም ይችላሉ።",
+  "contentHash": "ea94257e2df2bff101f69a97ba711a388b50218e",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-ecx-related-accounts": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የECX ተዛማጅ ሂሳቦች",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ ምርት ገበያ (ECX) አባላት የሸቀጦች ግብይትን ለማመቻቸት የሚያስችላቸውን የECX ተዛማጅ ሂሳቦች ያብራራል። ሂሳቡ የሚከፈተው በኤሌክትሮኒክስ የተገናኘ ቅርንጫፍ ሲሆን፣ የሂሳብ መክፈቻ ጥያቄው በECX በኩል ለባንኩ ይቀርባል። ሂሳቡ የብሔራዊ ባንክ እገዳ የሌለባቸው አባላት የሚከፍቱት ሲሆን፣ አባላት የውክልና ስልጣን እና የECX አባልነት ሰርተፍኬት ማቅረብ ይጠበቅባቸዋል።",
+  "contentHash": "1d313232dc8f76f778f9ce36e3b9312c7e79820a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-farmers-savings-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የገበሬዎች ቁጠባ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለገበሬዎች የነደፈውን የገበሬዎች ቁጠባ ሂሳብ ያብራራል። ሂሳቡ በግብርና፣ በእንስሳት እርባታ እና በአሳ ማጥመድ ለተሰማሩ ገበሬዎች የተዘጋጀ ሲሆን፣ ከ25 ብር ጀምሮ መክፈት ይቻላል። ከወትሮው ከፍ ያለ የወለድ ተመን እና በሎተሪ የሚሰጡ የግብርና ዘርፍ ሽልማቶች አሉት።",
+  "contentHash": "45631941011306a8bc0342918e2b0cd84ccb202d",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-fixed-time-deposit": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Fixed Time Deposit",
+  "summaryAm": "ይህ ገጽ ስለ Fixed Time Deposit ያብራራል። ይህ ተቀማጭ ገንዘብ ለተወሰነ ጊዜ የሚቀመጥ ሲሆን፣ የሚደራደር የወለድ መጠን አለው። ዝቅተኛው ተቀማጭ ገንዘብ ብር 500,000 ሲሆን፣ ከማብቂያው ቀን በፊት ገንዘብ ማውጣት አይፈቀድም።",
+  "contentHash": "fa8bd7dcb8c6e31b5a6d635ce010c9137100b92f",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-gamme-junior-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ Gamme-Junior Account ሂሳብና ተቀማጭ",
+  "summaryAm": "",
+  "contentHash": "5fb579e2b9e0f917c4c288133b07ff46c7b302af",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-gudunfa-saving-accounts": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ ጉዱንፋ የቁጠባ ሂሳቦች",
+  "summaryAm": "ጉዱንፋ የቁጠባ ሂሳብ ደንበኞች በንግድ ቦታቸው ገንዘብ የሚያስቀምጡበት ልዩ የቁጠባ ሣጥን የሚጠይቁበት የቁጠባ አይነት ነው። ሣጥኑን ለመክፈት 350 ብር የመጀመሪያ ተቀማጭ ገንዘብ ያስፈልጋል፣ ይህም የሣጥኑ ዋጋ ነው። ይህ የቁጠባ አይነት ደንበኞች ቅርንጫፎችን የመጎብኘት ድግግሞሽን በመቀነስ ገንዘባቸውን በንግድ ቦታቸው እንዲያስቀምጡ ያስችላቸዋል።",
+  "contentHash": "5d3e6e6c2dc60e9caf63216e747a2991bbfca6ad",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-ijaraha-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ Ijaraha ፋይናንስ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የIjaraha ፋይናንስ ያብራራል። Ijaraha የንብረት ፋይናንስ እና የአሠራር ኪራይ የሚመለከት የፋይናንስ ዓይነት ነው። በIjaraha ፋይናንስ ባንኩ ለምርት አምራች ወይም ገንቢ የምርቶችን ዋጋ ይከፍላል።",
+  "contentHash": "71f3d6e7fef65d161df36dab0cf885a5cec1ce72",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-investment-partnership-products-and-services": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የኢንቨስትመንት/ሽርክና ምርቶችና አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው የኢንቨስትመንት/ሽርክና ምርቶችና አገልግሎቶች ያብራራል። ባንኩ Mudarabah እና Musharaka የተባሉ የሃላል ሽርክናዎችን ያቀርባል። Mudarabah በባንኩና በደንበኛው መካከል ትርፍና ኪሳራ በተስማማው ጥምርታ የሚጋራበት ሽርክና ሲሆን፣ Musharaka ደግሞ የንብረት ወይም የንግድ ድርጅት የጋራ ባለቤትነት ነው።",
+  "contentHash": "1711960e3e2fdc2858959ac6d7e57186374ce4d0",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-ordinary-demand-deposit-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Ordinary Demand Deposit Account",
+  "summaryAm": "ይህ ገጽ ስለ Ordinary Demand Deposit Account እና Special Demand Deposit ያብራራል። Ordinary Demand Deposit Account ወለድ የሌለው የቼኪንግ አካውንት ሲሆን ለግለሰቦች ለመክፈት 500 ብር፣ ለድርጅቶች ደግሞ 1,000.00 ብር ዝቅተኛ ቀሪ ሂሳብ ያስፈልጋል። Special Demand Deposit ደግሞ ከቁጠባ ሂሳብ ዝቅተኛ የወለድ መጠን ባነሰ ወለድ የሚያስገኝ የቼኪንግ አካውንት ነው።",
+  "contentHash": "e6b2744e92416b5253317ba6e5c4eec2c7bddd88",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-ordinary-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Regular Saving Account",
+  "summaryAm": "ይህ ገጽ ስለ Regular Saving Account መረጃ ይሰጣል። ይህ ወለድ የሚያስገኝ ሂሳብ ሲሆን በትንሹ 50 ብር ወይም ዜሮ ቀሪ ሂሳብ ሊከፈት ይችላል። ሂሳቡን በፓስቡክ እና/ወይም በኤቲኤም ካርድ መጠቀም ይቻላል እንዲሁም በሞባይል እና ኢንተርኔት ባንኪንግ ለማስተዳደር ከCoopay-Ebirr ጋር ሊገናኝ ይችላል።",
+  "contentHash": "ae8e67ef60259b014e6c82a81c2fab6806381223",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-saving-account-2": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የቁጠባ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው የቁጠባ ሂሳብ ምርቶች ያብራራል። ባንኩ Ordinary Savings Account, Gamme-Junior Account, Youth Savings Account, Sinqe-Women’s Savings Account, Special Savings Account, Non-Interest-Bearing Savings Account, እና Gudunfa Saving Account ጨምሮ ሰባት የቁጠባ ሂሳብ አይነቶችን ያቀርባል። እነዚህ ሂሳቦች ለተፈጥሮ እና ህጋዊ ሰዎች የሚሰጡ ሲሆን፣ አብዛኛዎቹ ወለድ የሚያስገኙ ናቸው።",
+  "contentHash": "5eabe3df12696fd835bb59e15ca2d0ad8c4acd7f",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Saving Account",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው ወለድ የሚከፈልበት የቁጠባ ሂሳብ ያብራራል። ሂሳቡ በትንሹ 50 ብር ሊከፈት ይችላል፣ ነገር ግን ከባንክ አገልግሎት ጋር ግንኙነት ለመፍጠር ዜሮ ቀሪ ሂሳብ ሊኖረው ይችላል። ሂሳቡ በፓስቡክ ወይም በኤቲኤም ካርድ የሚሰራ ሲሆን፣ በወር ውስጥ ቢያንስ 25 ብር ማስገባት ያስፈልጋል።",
+  "contentHash": "3515907290dbe623c06ec58cb4648e5c0d00f98b",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-sinqee-womens-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Sinqe Women Savings Account",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Sinqe Women Savings Account ያብራራል። ሂሳቡ ከ 30 ዓመት በላይ ለሆኑ ሴቶች የተዘጋጀ ሲሆን፣ ዝቅተኛ የተቀማጭ ገንዘብ መስፈርት የለውም፣ ከመደበኛ የቁጠባ ሂሳብ የተሻለ የወለድ መጠን አለው፣ እና የግብይት ክፍያ የለውም። በአማካይ ለስድስት ወራት 30,000.00 ብር እና ከዚያ በላይ ያስቀመጡ የሂሳብ ባለቤቶች ለእያንዳንዱ እስከ ሶስት ልጆቻቸው 100.00 ብር ማበረታቻ ያገኛሉ።",
+  "contentHash": "09ee7c211a344bed6abc38e869608dbfbbe234bc",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-special-demand-deposit": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Special Demand Deposit ሂሳብና ተቀማጭ",
+  "summaryAm": "ይህ ገጽ Special Demand Deposit ተብሎ ስለሚጠራው የባንክ ሂሳብ አይነት ያብራራል። ይህ ሂሳብ ከቁጠባ ሂሳብ ዝቅተኛ የወለድ መጠን ባነሰ ወለድ የሚሰላ የቼኪንግ ሂሳብ ነው። ሂሳቡን ለመክፈት ደንበኛው በተበዳሪዎች ዝርዝር ውስጥ መሆን የለበትም፤ እንዲሁም በተቀማጭ ገንዘብ እና በሚወጣው ገንዘብ ብዛትና መጠን ላይ ምንም ገደብ የለውም።",
+  "contentHash": "2345afd9a4aab587ef9f16471d6b627974f147b9",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-special-saving-account-features": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ Special Saving Account",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Special Saving Account ያብራራል። Special Saving Account በግለሰብ ደንበኞች የሚከፈትና በቼክ የሚሰራ የወለድ ሂሳብ ነው። ይህ ሂሳብ ለባንኩ ታዋቂ ደንበኞች የተከፈተ ሲሆን፣ የሂሳብ ደብተር አያስፈልገውም።",
+  "contentHash": "b4214e4ce3e2808c72155c0924b9120e43527882",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-stisna": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: ኢስቲስና (Istisna) ሂሳብና ተቀማጭ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው ኢስቲስና (Istisna) የፋይናንስ አገልግሎት ያብራራል። ባንኩ እንደ አምራች ወይም ገንቢ ሆኖ የቤት ግንባታ፣ የፋብሪካ፣ የኃይል ማመንጫ ጣቢያ እና የመንገድ ፕሮጀክቶችን ያከናውናል። ደንበኞች ክፍያውን በክፍያ፣ በጅምላ ወይም ሥራው ከተጠናቀቀ በኋላ በክፍያ መፈጸም ይችላሉ።",
+  "contentHash": "861125267bd069e0d8692dc87a9259079a126575",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-wadiah-demand-deposit-current-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ Wadiah Demand Deposit/Current Account",
+  "summaryAm": "ይህ ገጽ Wadiah Demand Deposit/Current Account ተብሎ የሚጠራውን ወለድ አልባ የቁጠባ ሂሳብ ያብራራል። ሂሳቡ ለግለሰብ ደንበኞች 500.00 ብር እና ለድርጅት ደንበኞች 1000.00 ብር ዝቅተኛ የመክፈቻ መጠን ይጠይቃል። ባንኩ የተቀማጭ ገንዘብን በሙሉ ሲጠየቅ ለመክፈል ዋስትና ይሰጣል።",
+  "contentHash": "f749b2ff3fa2ae513a9b2e4ab65a7cc81df13614",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products-youth-saving": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የወጣቶች ቁጠባ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Youth Savings Account ያብራራል። ሂሳቡ ከ15-29 ዓመት ዕድሜ ክልል ውስጥ ላሉ ወጣቶች የተዘጋጀ ሲሆን፣ ከፍ ያለ የወለድ መጠን፣ ዜሮ ዝቅተኛ የተቀማጭ መስፈርት እና የግብይት ክፍያ የለውም። ሂሳቡ የወጣቶችን የቁጠባ ልማድ ለማሻሻል እና የፋይናንስ ነፃነትን ለመስጠት ያለመ ነው።",
+  "contentHash": "a046ea49ab9b65b983537e94dcf457281d109890",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-deposit-products": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ሂሳብና ተቀማጭ ምርቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ የሚያቀርባቸውን የተለያዩ የተቀማጭ ምርቶች ያብራራል። ከእነዚህም መካከል ወለድ የሚያስገኘው የቁጠባ ሂሳብ እና ወለድ የማያስገኘው ተራ የፍላጎት ተቀማጭ ሂሳብ ይገኙበታል። ተራ የፍላጎት ተቀማጭ ሂሳብ ለመክፈት ለግለሰቦች 500 ብር እና ለድርጅቶች 1,000.00 ብር ዝቅተኛ መጠን ያስፈልጋል።",
+  "contentHash": "333942a6152ef7db114a00edd5fbc9035a9c1066",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-automobile-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ሂሳቦች: አውቶሞቢል ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለዲያስፖራ የሚያቀርበውን የአውቶሞቢል ብድር ያብራራል። ብድሩ አዲስ ወይም ያገለገለ መኪና ለመግዛት የሚሰጥ ሲሆን፣ ባንኩ የማምረቻ ዓመቱ 7 ዓመት ወይም ከዚያ በታች ለሆኑ ያገለገሉ መኪኖች ብድር ይሰጣል። የብድር ክፍያ ጊዜ እስከ 10 ዓመት ሲሆን፣ ባንኩ የስድስት ወር የጸጋ ጊዜ ይሰጣል።",
+  "contentHash": "1ad90ba84361ae15d4b0a00c4e070661ae329489",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-diaspora-business-loans-2": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ቢዝነስ ብድሮች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለዲያስፖራዎች ስለሚያቀርባቸው የቢዝነስ ብድሮች ያብራራል። ባንኩ ዲያስፖራዎች በትውልድ አገራቸው ትርፋማ የሆኑ ኢንቨስትመንቶችን እንዲያደርጉ የኢንቨስትመንት ብድር ፋሲሊቲዎችን ያቀርባል። ከዲያስፖራ ቢዝነስ ብድሮች በተጨማሪ፣ ባንኩ የዲያስፖራ ተቀማጭ ሂሳብ፣ የቁጠባ ሂሳብ፣ የቋሚ ጊዜ ሂሳብ፣ ECOLFL Savings Account እና ሌሎች የብድር አይነቶችን ያቀርባል።",
+  "contentHash": "43a943f4fb87ff053f98c0a22f77b368d64f2d58",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-diaspora-business-loans": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ቁጠባ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የዲያስፖራ ቁጠባ ሂሳብ ያብራራል። ሂሳቡ በኢትዮጵያ ብር እና በውጭ ምንዛሪ (USD, GBP & EURO) የሚገኝ ሲሆን ማራኪ የወለድ ተመኖች አሉት። ገንዘቡ ወደ ውጭ ሊላክ የማይችል ሲሆን ለግል ብድሮች ዋስትና ሆኖ ሊያገለግል ይችላል።",
+  "contentHash": "77f43baafc368906588ee0635027498bb3a52f93",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-diaspora-consumer-loans": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ የፍጆታ ብድሮች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለዲያስፖራ ማህበረሰብ የሚያቀርባቸውን የፍጆታ ብድሮች ያብራራል። ባንኩ የቤት/ሞርጌጅ ብድር፣ የመኪና ብድር እና የግል ብድርን ጨምሮ ልዩ የብድር ዝግጅቶችን ያቀርባል። እነዚህ ብድሮች ለሪል እስቴት ግዢ ወይም ግንባታ፣ ለአዲስ ወይም ያገለገሉ መኪናዎች ግዢ እና እንደ የጉዞ፣ የህክምና ወይም የትምህርት ክፍያ ላሉ አስቸኳይ የገንዘብ ፍላጎቶች ያገለግላሉ።",
+  "contentHash": "e93fb103bacd610d21ff36d574b4e901509e57ec",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-diaspora-current-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ከረንት አካውንት",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የዲያስፖራ ከረንት አካውንት ያብራራል። አካውንቱ በሀገር ውስጥ እና በውጭ ምንዛሪ (GBP, USD, EURO) የሚገኝ ሲሆን፣ ቼክ በመጻፍ ወይም በባንኩ በተወሰነ አሰራር ገንዘብ ማውጣት ይቻላል። የውጭ ምንዛሪ ከረንት አካውንት ወለድ አይከፈልበትም።",
+  "contentHash": "9bf53bfa4e03605c1d06fe8ef477519736fb1e60",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-diaspora-deposit-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ የአሁን ሂሳብ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የዲያስፖራ የአሁን ሂሳብ ያብራራል። ሂሳቡ በሀገር ውስጥ እና በውጭ ምንዛሪ (GBP, USD, እና EURO) የሚገኝ ሲሆን፣ ቼክ ደብተር እና የዴቢት ካርድ ይሰጣል። የውጭ ምንዛሪ ግብይቶች ከክፍያ ነጻ ሲሆኑ፣ በሁሉም የባንኩ ቅርንጫፎች ግብይት ማድረግ ያስችላል።",
+  "contentHash": "f820d59e27a3a7c9b69e2260257ec0e1b4c86771",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-ethiopian-citizen-or-origin-living-in-foreign-land-ecolfl-savings-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ሂሳቦች: ECOLFL ቁጠባ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የECOLFL ቁጠባ ሂሳብ ያብራራል። ሂሳቡ በውጭ አገር የሚኖሩ ኢትዮጵያውያን ወይም የኢትዮጵያ ተወላጆች በውጭ ምንዛሪ ተቀማጭ በማድረግ በአገር ውስጥ ገንዘብ ለመጠቀም የሚያስችል ነው። ሂሳቡን ለመክፈት ዕድሜ 18 እና ከዚያ በላይ መሆን አለበት፣ እና እንደ የታደሰ ፓስፖርት እና የመኖሪያ ፈቃድ ያሉ ሰነዶች ያስፈልጋሉ።",
+  "contentHash": "8122c7393d434316052521d5e61ba97f30ba6368",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-fixed-time-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ሂሳቦች: Fixed time account",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የዲያስፖራ Fixed time account ያብራራል። ሂሳቡ በባንኩ እና በባለቤቱ መካከል በሚደረግ ስምምነት የሚለያይ የብስለት ጊዜ ያለው ሲሆን ዝቅተኛው የብስለት ጊዜ ሦስት ወር ነው። ሂሳቡ ቢያንስ በ USD 100 ወይም በተመጣጣኝ ገንዘብ ሊከፈት የሚችል ሲሆን፣ የወለድ ገቢው ከገቢ ግብር ነፃ ነው።",
+  "contentHash": "2cf04707515e28ca0511595334a81a67a4c46990",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-investment-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ኢንቨስትመንት ፋይናንስ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለዲያስፖራ የሚያቀርበውን የኢንቨስትመንት ፋይናንስ አገልግሎት ያብራራል። ባንኩ እስከ 80% የሚደርስ የፕሮጀክት ወጪን የሚሸፍን ሲሆን፣ ቀሪው 20% በባለሀብቱ የራሱ ድርሻ ይሸፈናል። ይህ ፋይናንስ ነባር ንግዶችን ለማስፋፋት ወይም በአዲስ ዘርፎች ለመሰማራት የሚያስችል ሲሆን፣ ፈጣን ሂደትና ማጽደቅ አለው።",
+  "contentHash": "abc97b590fbac6e88ed31f82e43b569e4e09ec03",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-mortgage-home-loan-2": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ የቤት/ሞርጌጅ ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኢትዮጵያ ዲያስፖራ ማህበረሰቦች የሚያቀርበውን የቤት/ሞርጌጅ ብድር ያብራራል። ብድሩ በኢትዮጵያ ውስጥ ሪል እስቴት እና ቤቶችን ለመግዛት ወይም ለመገንባት የሚያገለግል ሲሆን ብቁ ለሆኑ ዲያስፖራዎች የተረጋጋ ገቢ ላላቸው ይሰጣል። የብድር ጊዜው እስከ 20 ዓመት ሲሆን የባንኩ የወለድ ምጣኔ ከ 8.5% ይጀምራል።",
+  "contentHash": "3cb377f0bba4bdae015ece713869190cee645322",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-mortgage-home-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ሂሳቦች: Mortgage/Home Loan",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኢትዮጵያ ዲያስፖራ ማህበረሰቦች የሚያቀርበውን የሞርጌጅ/የቤት ብድር አገልግሎት ያብራራል። ብድሩ በኢትዮጵያ ውስጥ ሪል እስቴት እና ቤቶችን ለመግዛት ወይም ለመገንባት የሚሰጥ ሲሆን የብድር ጊዜው እስከ 20 ዓመት ሊደርስ ይችላል። የብድር ወለድ ምጣኔ በዓመት ከ 8.5% የሚጀምር ሲሆን የባንኩ የፍትሃዊነት መዋጮ ከ 20% ይጀምራል።",
+  "contentHash": "944e0886df69e0ab831005066c7be6fe902071a8",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-non-resident-accounts": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ሂሳቦች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው የዲያስፖራ ባንኪንግ አገልግሎቶች ያብራራል። በተለይም ስለ Non-Resident Accounts አይነቶች እና ለእነዚህ ሂሳቦች ብቁ የሆኑ አካላትን ይዘረዝራል።",
+  "contentHash": "e3f10ca360875495a25babc54c269531de9f601f",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-personal-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ Personal Loan",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለዲያስፖራ ማህበረሰብ የሚያቀርበውን Personal Loan ያብራራል። ብድር እስከ 5 ዓመት የሚቆይ ሲሆን፣ የብድሩ መጠን የሚወሰነው በባንኩ የመክፈል አቅም ላይ ተመስርቶ ነው። ብድሩ ለተለያዩ የግል ወጪዎች እንደ የጉዞ፣ የህክምና እና የትምህርት ክፍያዎችን ለመሸፈን ይረዳል።",
+  "contentHash": "639f3f172b85254fc67a08ad89e261e693c30808",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-diaspora-banking-working-capital-for-all-businesses": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ሂሳቦች Working Capital For All Businesses",
+  "summaryAm": "ይህ ገጽ በኢትዮጵያ ንግድ ለሚያካሂዱ ዲያስፖራዎች የሚሰጠውን Working Capital For All Businesses ብድር ያብራራል። ብድሩን ለማግኘት የንግድ ፈቃድ፣ ቲን፣ የታክስ ክሊራንስ፣ የፋይናንስ መግለጫዎች ወይም እቅዶች እና ለዋስትና የሚቀርቡ ሰነዶች ያስፈልጋሉ። ይህ ብድር ነባር ንግድን ለማስፋፋት እና በኢትዮጵያ ስላሉ የልማት እድሎች የምክር አገልግሎት ለማግኘት ይረዳል።",
+  "contentHash": "46d7df8cdbeff4e198e9bca7b901fbadf99725f5",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-financing-contracts": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የብድር ፋይናንስ ውሎች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው የብድር ፋይናንስ ውሎች ያብራራል። ባንኩ እስከ 80% የሚደርስ የፕሮጀክት ፋይናንስ ያቀርባል። ከዲያስፖራ ተቀማጭ ሂሳቦች በተጨማሪ የዲያስፖራ የፍጆታ ብድሮች፣ የቤት ብድሮች፣ የመኪና ብድሮች፣ የግል ብድሮች፣ የዲያስፖራ የንግድ ብድሮች እና የዲያስፖራ የኢንቨስትመንት ፋይናንስ አገልግሎቶችን ይሰጣል።",
+  "contentHash": "13accbf44469a6ba6a99a4fbe16bfff7062a95f0",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-gamme-junior-wadia-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ Gamme – Junior Wadia Saving Account",
+  "summaryAm": "ይህ ገጽ Gamme – Junior Wadia Saving Account የተባለውን የቁጠባ ሂሳብ ያብራራል። ሂሳቡ ከ0-15 ዓመት ለሆኑ ህጻናት የተዘጋጀ ሲሆን በወላጆች ወይም አሳዳጊዎች የሚተዳደር ነው። ከ18 ዓመት በኋላ ወደ ተራ የቁጠባ ሂሳብ ይቀየራል።",
+  "contentHash": "f57371e873e49ba679d63c30b19433413a39d5c0",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-banking-ifb-trade-service-products": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ IFB Trade Service Products",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ የሚያቀርባቸውን የIFB Trade Service Products ያብራራል። ከእነዚህም ውስጥ Wakalah Letter of Credit፣ Murabahah Letter of Credit፣ Musharakah Letter of Credit፣ Ijarah Letter of Credit፣ Qard/Loan Contracts እና Kafala (Letter of Guarantee) ይገኙበታል። አብዛኛዎቹ ምርቶች ገና በቅርቡ የሚቀርቡ ይሆናሉ።",
+  "contentHash": "44d7cdd847f512ece5090e9c3406c536e34113bc",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-banking-ifb-trade-service": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ IFB Trade Service",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ የሚያቀርባቸውን የIFB Trade Service አገልግሎቶችን ያብራራል። ከእነዚህም ውስጥ Wakalah Letter of Credit፣ Murabaha Import Letter of Credit፣ Musharaka Letter of Credit፣ Wakala Export Letter of Credit፣ Wakala Documentary Collection፣ Wakala Advance Payment እና Wakala Consignment Basis Payment ይገኙበታል። እነዚህ አገልግሎቶች ዓለም አቀፍ ንግድን ለማፋጠን የተነደፉ ናቸው።",
+  "contentHash": "0daf18aecf7925ddb5b22d2242126b4b40a1675b",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-banking-interest-free-deposit-products": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ተቀማጭ ገንዘብ ምርቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ የሚያቀርባቸውን ወለድ አልባ ተቀማጭ ገንዘብ ምርቶች ያብራራል። ምርቶቹ በሁለት ዋና ዋና ክፍሎች የተከፈሉ ናቸው፡- ወዲዓህ (አደራ) ላይ የተመሰረቱ ተቀማጭ ሂሳቦች እና ሙዳረባህ (ትርፍ-ተካፋይ) ላይ የተመሰረቱ ሂሳቦች። ገጹ 5 የወዲዓህ ሂሳቦችን እና 7 የሙዳረባህ ሂሳቦችን ጨምሮ የተለያዩ የቁጠባ እና የኢንቨስትመንት አማራጮችን ያቀርባል።",
+  "contentHash": "fd8ad94e8621c5502646ff33e9d1be3192ad5e51",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-banking-interest-free-financing-products": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ የፋይናንስ ምርቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ የሚያቀርባቸውን ወለድ አልባ የፋይናንስ ምርቶች ያብራራል። ምርቶቹ የሸሪዓ መርሆዎችን በጥንቃቄ የተከተሉ ሲሆን፣ ለንግድ ስራ ማስፋፊያ እና የስራ ካፒታል የሚያገለግሉ ናቸው። ከምርቶቹ መካከል ሙራባሃህ የጊዜ ፋይናንስ፣ ሙራባሃህ ሪቮልቪንግ ፋይናንስ፣ ሙራባሃህ አስመጪ የብድር ደብዳቤ ፋይናንስ፣ እና ሙራባሃህ ከመርከብ በፊት እና በኋላ የሚደረግ የኤክስፖርት ፋይናንስ ይገኙበታል።",
+  "contentHash": "c990d79dd7bf73ea037e6ccd33ccd5d68886ec26",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-banking-investment-partnership": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ: Investment Contracts",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ ስለሚያቀርባቸው Investment Contracts ያብራራል። በሸሪዓ መርሆዎች በጥንቃቄ የተተገበሩትን Musharakah Financing፣ Mudarabah Financing እና Qard/Loan Contracts ያካትታል። Musharakah በጋራ ትርፍና ኪሳራ መጋራት ሲሆን፣ Mudarabah ደግሞ አንድ አጋር ገንዘብ ሲሰጥ ሌላኛው ደግሞ ኢንቨስትመንቱን የሚያስተዳድርበት ልዩ የሽርክና አይነት ነው።",
+  "contentHash": "aada5a8031aa5bf383091fb4ff850444cab6a11d",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-banking-kafala-letter-of-guarantee": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ Kafala (የዋስትና ደብዳቤ)",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ ስለሚያቀርባቸው የKafala (የዋስትና ደብዳቤ) አገልግሎቶች ያብራራል። ከእነዚህም ውስጥ Bid Bond Guarantee፣ Advance Payment Guarantee፣ Performance Bond Guarantee፣ Customs Bond Guarantee እና Trade Based Credit Guarantee ይገኙበታል። በአሁኑ ጊዜ አብዛኛዎቹ የKafala አገልግሎቶች በቅርቡ እንደሚጀምሩ ተገልጿል።",
+  "contentHash": "2049bc34e0547415677381be462c3c42807c753a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-banking-loan-contracts": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ Qard ኮንትራቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ ስለሚያቀርባቸው የQard ኮንትራቶች ያብራራል። Qard ወለድ አልባ ብድር ሲሆን፣ ተበዳሪው የተበደረውን ዋና ገንዘብ ብቻ በተስማማው ጊዜ ውስጥ የሚመልስበት ነው። ይህ የፋይናንስ አገልግሎት ደንበኞች የገንዘብ ፍላጎታቸውን እንዲያሟሉ እና ከወለድ ክፍያ ነፃ እንዲሆኑ ያስችላል።",
+  "contentHash": "e02d39fc48169710293b8029924e2a9a5534722d",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-banking-wadiah-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ Wadiah Saving Account",
+  "summaryAm": "ይህ ገጽ ስለ Wadiah Saving Account ያብራራል። Wadiah ማለት ገንዘብን በአስተማማኝ ሁኔታ ለማስቀመጥ የሚያስችል ሲሆን፣ ባንኩ የተቀማጩን ገንዘብ በማንኛውም ጊዜ ያለገደብ እንዲያወጣ ያስችላል። አካውንት ለመክፈት ዝቅተኛው ቀሪ ሂሳብ ብር 50.00 ሲሆን፣ ለአንድ ወር ያህል በዜሮ ቀሪ ሂሳብ ሊከፈት ይችላል።",
+  "contentHash": "a8f0c8b7ac9aa682986d26dcb8f6e52ad4851319",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-banking": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ Coopbank Alhuda",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው ወለድ አልባ የባንክ አገልግሎቶች ያብራራል። ባንኩ በሸሪዓ ህግጋት መሰረት የሚሰጡ የተለያዩ የቁጠባ እና የኢንቨስትመንት ምርቶችን ያቀርባል። ከእነዚህም መካከል 5 የወዲዓህ ተቀማጭ ሂሳቦች እና 7 የሙዳረባህ ቁጠባ ሂሳቦች ይገኙበታል።",
+  "contentHash": "9a4e49b608b1d7f043791e7789bca5789b0664bf",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-deposit-products-gudunfa-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ - ጉዱንፋ ቁጠባ ሂሳብ",
+  "summaryAm": "ጉዱንፋ የሙዳረባ ቁጠባ አይነት ሲሆን የተጠራቀመውን ገንዘብ ወደ ሂሳባቸው ለማስገባት የተሰየመ ሣጥን ይጠቀማል። ይህ ሣጥን በባንኩ የሚቀርብ ሲሆን ለጥቃቅን ነጋዴዎች፣ ከፊል ክህሎት ላላቸው ሠራተኞች፣ ጫማ ጠራጊዎች እና በግል ወይም በመንግስት ድርጅቶች ውስጥ ለሚሰሩ ሌሎች ግለሰቦች የተዘጋጀ ነው። ይህ ሂሳብ እንደ ወዲዓ ቁጠባ ሂሳብ ወይም እንደ ትርፍ ተካፋይ ሙዳረባ ቁጠባ ሂሳብ ሊከፈት ይችላል።",
+  "contentHash": "b8503cb7b400a44e7df7c82d27df7e646d3ed16a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-deposit-products-ifb-foreign-currency-deposit-products": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ የውጭ ምንዛሪ ተቀማጭ ምርቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ የሚያቀርባቸውን የውጭ ምንዛሪ ተቀማጭ ምርቶች ያብራራል። ደንበኞች በUSD፣ ፓውንድ ስተርሊንግ እና ዩሮ የውጭ ምንዛሪ ሂሳቦችን መክፈት ይችላሉ። ከእነዚህም መካከል የዲያስፖራ ዋዲያ ቁጠባ ሂሳብ፣ የዲያስፖራ ዋዲያ የአሁን ሂሳብ፣ የዲያስፖራ ሙዳረባህ የውጭ ምንዛሪ ቁጠባ ሂሳብ፣ የዲያስፖራ ሙዳረባህ የውጭ ምንዛሪ የቋሚ ጊዜ ተቀማጭ ገንዘብ፣ ነዋሪ ያልሆኑ ሊተላለፉ የሚችሉ የውጭ ምንዛሪ ሂሳቦች (NRT FCY)፣ ነዋሪ ያልሆኑ ሊተላለፉ የሚችሉ የብር ሂሳቦች (NRT) እና ነዋሪ ያልሆኑ የማይተላለፉ የብር ሂሳቦች (NRNT) ይገኙበታል።",
+  "contentHash": "1a2eee75a5544f50acf009060b776250f9b78816",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-deposit-products-mudarabah-investment-time-deposit-accounts": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ Mudarabah ኢንቨስትመንት/የጊዜ ተቀማጭ ሂሳቦች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ ስለሚያቀርባቸው Mudarabah ኢንቨስትመንት/የጊዜ ተቀማጭ ሂሳቦች ያብራራል። Mudarabah ኢንቨስትመንት ተቀማጭ ገንዘብ ባለቤቶች ለተስማማ ጊዜ ገንዘባቸውን በማስቀመጥ ትርፍ ለማግኘት የሚፈልጉበት ነው። ባንኩ ከ 3, 6, 12, 18, 24 ወይም ከዚያ በላይ ወራት ተለዋዋጭ የጊዜ ገደብ ይጠቀማል፣ ትርፍን በተወሰኑ ጊዜያት የማውጣት አማራጭ አለው።",
+  "contentHash": "7a8a2212ee8ed5cc805a5f96b1edee075eff8418",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-deposit-products-wadiah-ecolfl-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ: Wadi'ah ECOLFL Saving Account",
+  "summaryAm": "ይህ ገጽ የኦሮሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ ስለሚያቀርበው Wadi'ah ECOLFL Saving Account ያብራራል። ይህ አገልግሎት በውጭ ለሚኖሩ ኢትዮጵያውያን ወይም የኢትዮጵያ ተወላጆች የሚሰጥ የአገር ውስጥ ገንዘብ ቁጠባ ሂሳብ ነው። ተቀማጭ ገንዘቦች በውጭ ምንዛሪ የሚደረጉ ሲሆን ለግል ወጪዎች፣ ለቤት ግዢ ወይም ግንባታ፣ ለንግድ እና ኢንቨስትመንት እንዲሁም ለመኪና ግዢ ሊውል ይችላል።",
+  "contentHash": "c31ecd1b33513d766f065e0b9243ed38cd2c13e1",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-deposit-products-wadiah-retention-accounts": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Wadi'ah Retention Accounts",
+  "summaryAm": "ይህ ገጽ ስለ Wadi'ah Retention Accounts ያብራራል። እነዚህ ሂሳቦች የሚከፈቱት በላኪዎች ሲሆን፣ ደንበኞች ከውጭ ንግድ ገቢ ብቻ ገንዘብ ማስገባት ይችላሉ። ሁለት ዓይነት የጥበቃ ሂሳቦች አሉ፡ የውጭ ምንዛሪ ማቆያ ሂሳብ A (10% የሚቀመጥበት) እና የውጭ ምንዛሪ ማቆያ ሂሳብ B (90% እስከ 28 ቀናት የሚቀመጥበት)።",
+  "contentHash": "703f97b7918f01d13db1d684b6668b57905069ee",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-financing-products-murabaha-import-letter-of-credit-settlement-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ Murabaha Import Letter of Credit Settlement Financing",
+  "summaryAm": "ይህ ገጽ Murabaha Import Letter of Credit Settlement Financing የተባለውን የፋይናንስ አገልግሎት ያብራራል። ይህ አገልግሎት ደንበኞች የሥራ ካፒታል እጥረት ሲያጋጥማቸው፣ የገቡትን የዕቃ ማስመጣት የብድር ደብዳቤ (L/C) ዋጋ እስከ 1 ዓመት በሚደርስ ጊዜ ውስጥ ወደ ሙራባሃ የጊዜ ፋይናንስ በመቀየር የሚሰጥ ነው። አገልግሎቱ ለባንኩ ነባር ከፍተኛ ዋጋ ላላቸው ደንበኞች የሚሰጥ ሲሆን፣ የፋይናንስ ስጋት ደረጃቸው 1፣ 2 ወይም 3 የሆኑ እና ጊዜያዊ የገንዘብ ፍሰት ችግር ላጋጠማቸው ነው።",
+  "contentHash": "513fb9be23a15744ce4383357afa1a79ae215e66",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-financing-products-murabaha-post-shipment-revolving-export-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ Murabaha Post Shipment/Revolving Export Financing",
+  "summaryAm": "ይህ ገጽ ስለ Murabaha Post Shipment/Revolving Export Financing ያብራራል። ይህ ፋይናንስ ለላኪዎች ተቀባይነት ያላቸውን የኤክስፖርት ሰነዶች ሲያቀርቡ የሚሰጥ ቅድሚያ ክፍያ ነው። ለዚህ ፋይናንስ ባንኩ እና ላኪው ቢያንስ ሁለት የተለያዩ ስምምነቶችን መፈረም ይጠበቅባቸዋል።",
+  "contentHash": "32114046f554e268915c9f3dff1fc16d57a2aa29",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-financing-products-murabahah-import-letter-of-credit-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ Murabahah Import Letter of Credit Financing",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Murabahah Import Letter of Credit Financing አገልግሎት ያብራራል። ባንኩ ይህንን ፋይናንስ ለገቢ ንግድ ወይም ለተለያዩ ዓላማዎች ለሚያስመጡ ደንበኞች በዜሮ በመቶ ህዳግ ይሰጣል። ደንበኛው 30% የሃሚሽ ጂዲያ ተቀማጭ ገንዘብ ማስገባት አለበት።",
+  "contentHash": "e257bdeb4107feeecc63f5e116057f8be0001bfa",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-financing-products-murabahah-pre-shipment-export-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ: Murabahah Pre-Shipment Export Financing",
+  "summaryAm": "ይህ ገጽ ስለ Murabahah Pre-Shipment Export Financing ያብራራል። ይህ ፋይናንስ ጥሬ ዕቃዎችን እና/ወይም ወደ ውጭ የሚላኩ ዕቃዎችን ለመግዛት የሚሰጥ አገልግሎት ነው። የሽያጭ ዋጋው በኢትዮጵያ ብሔራዊ ባንክ (NBE) ወይም በኢትዮጵያ ምርት ገበያ (ECX) ወይም በሚመለከተው የመንግስት አካል መረጋገጥ አለበት።",
+  "contentHash": "7cebb4bda3eb2a4ec71b7d41ffefe1b582581617",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-financing-products-murabahah-revolving-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ: Murabahah Revolving Financing",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ ስለሚያቀርበው Murabahah Revolving Financing ያብራራል። Murabahah Revolving Financing ደንበኞች የሥራ ካፒታል እጥረትን ለማሸነፍ ሸቀጦችን፣ ጥሬ ዕቃዎችን እና የፍጆታ ዕቃዎችን ለመግዛት የሚጠቀሙበት የአጭር ወይም የመካከለኛ ጊዜ የፋይናንስ አገልግሎት ነው። ይህ አገልግሎት ቢበዛ ለአንድ ዓመት የሚሰጥ ሲሆን በየዓመቱ ይገመገማል።",
+  "contentHash": "8d80db8c96787610e17dee8f1cd990f7c88753e3",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-interest-free-financing-products-murabahah-term-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ - Murabahah Term Financing",
+  "summaryAm": "ይህ ገጽ ስለ Murabahah Term Financing ያብራራል። Murabahah Term Financing ባንኩ/ሻጩ የተወሰኑ ዕቃዎችን ለደንበኛው/ገዢው በዋጋ እና በተስማማ ትርፍ የሚሸጥበት ውል ነው። ይህ ፋይናንስ ለሥራ ማስኬጃ ካፒታል እና/ወይም ለንግድ እና ተያያዥ ዓላማዎች ቋሚ ንብረቶችን ለማግኘት የሚሰጥ ሲሆን፣ በትርፍ በተወሰነ ጊዜ ውስጥ የሚከፈል ነው።",
+  "contentHash": "0e6595de17994bcda1cdf3f78bf462b0d280aa20",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-investment-partnership-mudarabah-investment": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ Mudarabah ፋይናንስ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Mudarabah ፋይናንስ ያብራራል። Mudarabah አንድ አጋር ለንግድ ኢንተርፕራይዝ ኢንቨስትመንት ገንዘብ የሚሰጥበት ልዩ የሽርክና ዓይነት ነው። ይህ አካውንት በቅርቡ የሚጀመር ሲሆን ከሸሪዓ መርሆዎች ጋር የተያያዙ ሁሉንም ነገሮች ከግምት ውስጥ ያስገባል።",
+  "contentHash": "fa1e3a2e7a5f3e28e60a981c7a0008567534db40",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-investment-partnership-murabaha-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ ሙራባሃ ፋይናንሲንግ",
+  "summaryAm": "ሙራባሃ ባንኩ ንብረቶችን ለመግዛት ያወጣውን ወጪ በግልፅ በመጥቀስ ለደንበኛው በባንኩ ውልና ታሪፍ መሰረት ትርፍ በመጨመር የሚሸጥበት ልዩ የሽያጭ አይነት ነው። የዕቃዎች ዋጋ እና የባንኩ ትርፍ በሙራባሃ ግብይት ወቅት ለሁለቱም ወገኖች የተስተካከለ እና የሚታወቅ መሆን አለበት። ሙራባሃ በሙራባሃ የጊዜ ፋይናንሲንግ፣ ሙራባሃ ሪቮልቪንግ ፋይናንሲንግ ፋሲሊቲ፣ ሙራባሃ አስመጪ የብድር ደብዳቤ ፋሲሊቲ፣ ሙራባሃ ከመርከብ በፊት የኤክስፖርት ፋይናንሲንግ ፋሲሊቲ፣ ሙራባሃ ከመርከብ በኋላ/ሪቮልቪንግ ኤክስፖርት ፋሲሊቲ እና ሙራባሃ አስመጪ የብድር ደብዳቤ ሰፈራ ፋይናንሲንግ መልክ ሊሰጥ ይችላል።",
+  "contentHash": "53cb026a7e68e6a82e5db4790e8172a631aa5072",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-investment-partnership-musharaka-investment": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ - Musharaka Financing",
+  "summaryAm": "ይህ ገጽ ስለ Musharaka Financing ያብራራል። Musharaka ማለት በጋራ ሥራ ወይም ኢንተርፕራይዝ የሚገኘውን ትርፍና ኪሳራ ለመጋራት በፓርቲዎች የጋራ ስምምነት በውል የተመሰረተ ግንኙነት ነው። ይህ አካውንት ከሸሪዓ መርሆዎች ጋር ተያይዞ በቅርቡ ይጀመራል።",
+  "contentHash": "e9aaa76e2521c3cc0b857afc8deb75b241413fd6",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-kafala": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ ከፋላ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው ከፋላ (የዋስትና ደብዳቤ) ያብራራል። ከፋላ ባንኩ ተጠቃሚውን ለመክፈል የሚሰጠው የጽሑፍ ቃል ሲሆን፣ ግዴታ ያለበት አካል ግዴታውን ሳይወጣ ሲቀር የሚፈጸም ነው። ባንኩ የተለያዩ የከፋላ/የዋስትና ደብዳቤ ዓይነቶችን ያቀርባል።",
+  "contentHash": "cf16b6392d3803872a71806376565bdf51a4ec7a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-agricultural-input-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የግብርና ግብዓት ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው የግብርና ግብዓት ብድር ያብራራል። ብድሩ ለአጭር ጊዜ የሚሰጥ ሲሆን ማዳበሪያ፣ የተሻሻሉ ዘሮች እና አግሮኬሚካሎችን ለመግዛት ይውላል። ብድሩ ለኅብረት ሥራ ማህበራት፣ ማህበራት፣ የንግድ እርሻዎች፣ ግለሰቦች እና ክልላዊ መንግስታት ይሰጣል።",
+  "contentHash": "32d0ff85c9528722781080cbcf4d084f859f0b0a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-agricultural-investment-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ Agricultural Investment Loan",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው Agricultural Investment Loan ያብራራል። ብድሩ ለአጭርና ለረጅም ጊዜ የሚሰጥ ሲሆን ለኅብረት ሥራ ማኅበራት፣ ለማኅበራት፣ ለንግድ እርሻዎች ወይም ለግለሰቦች የሥራ ካፒታል እንዲሁም ሕንፃዎችን፣ የግብርና ማቀነባበሪያ ማሽነሪዎችንና መሣሪያዎችን ለመግዛት ወይም ለማከራየት ነው። ባንኩ ለቡና እርሻዎች እስከ አምስት ዓመት እና ለሌሎች የግብርና እርሻዎች እስከ ሁለት ዓመት የሚደርስ የሞራቶሪየም ጊዜ ሊሰጥ ይችላል።",
+  "contentHash": "f07558831f95adc781e1ea6906f8205a2e8fc0e2",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-agricultural-machinery-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የግብርና ማሽነሪ ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው የግብርና ማሽነሪ ብድር ያብራራል። ብድሩ ለአነስተኛ፣ መካከለኛና የንግድ ደረጃ ገበሬዎች ወይም የግብርና ማሽነሪ ኪራይ ንግድ ለሚያካሂዱ ደንበኞች የግብርና ማቀነባበሪያ ማሽነሪዎችን ለመግዛት ይሰጣል። ለክሬዲት ስጋት ደረጃ 1 ወይም 2 አመልካቾች ዝቅተኛው የፍትሃዊነት መዋጮ 50% ሲሆን፣ ለደረጃ 3 እና 4 አመልካቾች ደግሞ 60% እና 70% ነው።",
+  "contentHash": "bb67980c9142e75bac4a676dd602264570848701",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-agricultural-term-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የግብርና የጊዜ ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው የግብርና ብድር ፓኬጆች ያብራራል። ባንኩ ለግለሰቦች፣ ለኅብረት ሥራ ማኅበራት እና ለግብርና ማኅበራት ማዳበሪያ፣ ግብዓት እና ኢንቨስትመንት ብድር ይሰጣል። የኢንቨስትመንት ብድር ለቡና እርሻዎች እስከ አምስት ዓመት እና ለሌሎች የግብርና ዓይነቶች እስከ ሁለት ዓመት የሚደርስ የመተንፈሻ ጊዜ አለው።",
+  "contentHash": "eec59c6cc573351d97027536ed80ae86eb9671b8",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-construction-machinery-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የግንባታ ማሽነሪ ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው የግንባታ ማሽነሪ ብድር ያብራራል። ብድሩ አዲስ የግንባታ ማሽነሪዎችን ለመግዛት የሚሰጥ ሲሆን፣ ለክሬዲት ስጋት ደረጃ 1 ወይም 2 አመልካቾች ዝቅተኛው የፍትሃዊነት መዋጮ 50% ነው። ለክሬዲት ስጋት ደረጃ 3 እና 4 አመልካቾች ደግሞ 60% እና 70% ነው።",
+  "contentHash": "ac25d695460bcc5a9f0ba8c38bbcebf0f72a95f6",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-consulting-firm-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ብድር: Consulting Firm Financing",
+  "summaryAm": "ይህ ገጽ Consulting Firm Financing የተሰኘውን የአጭር ጊዜ ብድር ያብራራል። ብድሩ እንደ ምህንድስና፣ አይሲቲ፣ ህግ፣ የሂሳብ አያያዝ፣ አስተዳደር፣ ስነ-ህንፃ እና ስነ-ጥበብ ባሉ ሙያዊ አገልግሎቶች ላይ ለተሰማሩ የንግድ ባለሙያዎች የሥራ ማስኬጃ ካፒታል ፋይናንስ ለማድረግ ይሰጣል። ብድሩን ለማግኘት አመልካቹ ከሚመለከተው የመንግስት አካል የተሰጠ ትክክለኛ የሙያ ፈቃድ፣ ቢያንስ የሁለት ዓመት ልምድ፣ ወቅታዊ የፋይናንስ መግለጫዎች እና ተቀባይነት ያለው ዋስትና ማቅረብ አለበት።",
+  "contentHash": "5029ccb30261d9efeea5e5fb6434c5814638a0df",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-equipment-machinery-lease-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የመሳሪያ/ማሽነሪ ሊዝ ፋይናንስ ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የመሳሪያ/ማሽነሪ ሊዝ ፋይናንስ ያብራራል። ባንኩ ይህንን ፋይናንስ ለተከራይ ወይም ለአከራይ ሊያቀርብ ይችላል። የካፒታል እቃዎች እንደ ምድር ቁፋሮ ማሽኖች፣ የግንባታ ተሽከርካሪዎች፣ ኮምባይነር እና ሃርቨስተሮች ያሉ በማንኛውም የኢኮኖሚ ዘርፍ ንግድ ለማካሄድ አስፈላጊ የሆኑትን ያካትታሉ።",
+  "contentHash": "b0ad53c39ff9e2dab45ca40cdd0aa3283b791786",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-idea-financing": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የአይዲያ ፋይናንሲንግ ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የአይዲያ ፋይናንሲንግ ብድር ያብራራል። ብድሩ ለግለሰቦች/ቡድኖች ሳይንሳዊ ጥናቶችን ለመተግበር የሚሰጥ የጊዜ ብድር ሲሆን፣ እስከ ሰባት ዓመት በሚደርስ ጊዜና የአንድ ዓመት የጸጋ ጊዜ ሊሰጥ ይችላል። አመልካቾች የአእምሯዊ ንብረት መብት ጥበቃ ጽሕፈት ቤት እውቅና ማረጋገጫ እና የፕሮጀክቱን አዋጭነት ጥናት ማቅረብ ይጠበቅባቸዋል።",
+  "contentHash": "84d44e65c846e9ab2c026d6963575c224eece6a8",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-import-letter-of-credit-facility": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Import Letter Of Credit Facility ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Import Letter Of Credit Facility ብድር ያብራራል። ባንኩ ይህንን የብድር ምርት ለገቢ ንግድ ለተሰማሩ ወይም ለተለያዩ ዓላማዎች ለሚያስመጡ ደንበኞች ይሰጣል። የብድር መጠኑ በደንበኛው የፋይናንስ ጥንካሬ እና በሚገቡት ዕቃዎች የገበያ ተፈላጊነት ላይ የተመሰረተ ነው።",
+  "contentHash": "1108df0370b98604ac6c56697559936b593b73e0",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-import-letter-of-credit-settlement-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Import Letter of Credit Settlement Loan",
+  "summaryAm": "ይህ ገጽ Import Letter of Credit Settlement Loanን በተመለከተ መረጃ ይሰጣል። ይህ ብድር ደንበኞች የገንዘብ እጥረት ሲያጋጥማቸው ያልተከፈለውን የገቢ ንግድ የብድር ሰነድ ዋጋ ወደ የሸቀጦች ብድር ወይም የጊዜ ብድር በመቀየር የሚሰጥ ነው። ብድሩ የሚሰጠው ለከፍተኛው አንድ ዓመት ሲሆን ደንበኛው በዓመት ከ 2 ጊዜ በላይ መጠቀም አይችልም።",
+  "contentHash": "314dde56e8b3c4f0d128291aa792c8e794c991c1",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-letter-of-guarantee-facility": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የ Letter of Guarantee Facility አገልግሎት",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው የ Letter of Guarantee Facility አገልግሎት ያብራራል። አገልግሎቱ አንድ ጊዜ የሚሰጡ ዋስትናዎችን እና በተደጋጋሚ ለሚያስፈልጉ ፍላጎቶች ታዳሽ ዋስትናዎችን ያቀርባል። ባንኩ 7 አይነት የዋስትና ደብዳቤዎችን ይሰጣል።",
+  "contentHash": "02da1d548345a36350433861f25a619de7bbc9d3",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-merchandise-loan-facility": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Merchandise Loan Facility",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው የMerchandise Loan Facility ያብራራል። ብድሩ ንግዶች በእቃዎቻቸው ላይ የታሰረ ገንዘብ እንዲፈቱ ይረዳቸዋል፣ ይህም የሥራ እንቅስቃሴያቸውን ያቀላጥፋል። ባንኩ ሦስት ዓይነት የMerchandise Loan ይሰጣል፤ እነሱም Revolving Merchandise Loan፣ One-time Merchandise Loan እና Merchandise Loan Against Warehouse Receipts or Important Documents ናቸው።",
+  "contentHash": "bf695e69d77960f7007cd4d9c4c6cf45c2df8b18",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-motor-vehicle-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Motor Vehicle Loan",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው Motor Vehicle Loan ያብራራል። ብድሩ አዲስ የሞተር ተሽከርካሪዎችን ለመግዛት የሚሰጥ ሲሆን መለዋወጫዎችን ወይም የቅንጦት ዕቃዎችን አያካትትም። አመልካቾች ከትራንስፖርት ሚኒስቴር መስፈርት ጋር የሚጣጣሙ አዲስ ብራንድ ተሽከርካሪዎችን መግዛት አለባቸው እንዲሁም ከህጋዊ ፈቃድ ካላቸው አቅራቢዎች ሁለት ፕሮፎርማ ኢንቮይስ ማቅረብ ይጠበቅባቸዋል።",
+  "contentHash": "118fbaef9d0c7c0437065941ba06c2b3cde4b546",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-overdraft-facility": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: ኦቨርድራፍት ፋሲሊቲ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው ኦቨርድራፍት ፋሲሊቲ ያብራራል። ኦቨርድራፍት ደንበኞች ከሂሳባቸው በላይ እንዲስቡ የሚያስችል የብድር ዓይነት ሲሆን፣ ወለድ የሚከፈለው በየቀኑ ባለው የተሳበው መጠን ላይ ነው። ይህ ፋሲሊቲ ብዙውን ጊዜ ለአንድ ዓመት የባንክ ግንኙነት ላላቸው ደንበኞች የሚሰጥ ሲሆን፣ ለአምስት ሚሊዮን ብር እና ከዚያ በላይ ለሚጠየቅ ኦቨርድራፍት ኦዲት የተደረገ የፋይናንስ መግለጫ ያስፈልጋል።",
+  "contentHash": "217c4f7cbaa5db71d4ca912f229d9a47c3b5e127",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-overdrawal-facility": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ Overdrawal Facility ብድር",
+  "summaryAm": "ይህ ገጽ ስለ Overdrawal Facility ያብራራል። Overdrawal Facility ደንበኞች ካላቸው የኦቨርድራፍት ገደብ በላይ ገንዘብ ማውጣት የሚያስችል ጊዜያዊ አገልግሎት ነው። ይህ አገልግሎት ቢበዛ ለሠላሳ ቀናት የሚቆይ ሲሆን በአሥራ ሁለት ወራት ውስጥ ሁለት ጊዜ ብቻ ሊፈቀድ ይችላል። አንድ ነጠላ Overdrawal መጠን ካለው የኦቨርድራፍት ገደብ 20% ወይም አስር ሚሊዮን ብር ከሁለቱ ዝቅተኛውን መብለጥ የለበትም።",
+  "contentHash": "60e324a080ecce10ffa205e572ea55062359a10b",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-partial-financing-for-acquired-and-foreclosed-collateral": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ብድር: ሌሎች የፋይናንስ አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ከብድር ውጪ የሚሰጣቸውን ሌሎች የፋይናንስ አገልግሎቶች ያብራራል። ከእነዚህም መካከል ለተያዙና በባንክ ለተገኙ ንብረቶች ከጨረታ ዋጋው ከፊሉን የሚሸፍን ፋይናንስ፣ ለመሳሪያዎችና ማሽነሪዎች የሊዝ ፋይናንስ፣ እንዲሁም የገቢ ንግድ L/C ሰፈራ ብድር ይገኙበታል። የL/C ሰፈራ ብድር እስከ አንድ ዓመት የሚቆይ ሲሆን በዓመት 2 ጊዜ የሚገኝ ሲሆን የብድር ስጋት ደረጃ 1, 2, ወይም 3 ለሆኑ ደንበኞች ብቻ ይሰጣል።",
+  "contentHash": "c8e4329b2650514f2c99f04f3a6aa50e8f8f4eef",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-pre-shipment-export-credit-facility": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ Pre-shipment Export Credit Facility ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው Pre-shipment Export Credit Facility ብድር ያብራራል። ባንኩ ለውጭ ንግድ አቅራቢዎች ጥሬ ዕቃዎችን ለመግዛት፣ ለማቀነባበር፣ ለማሸግ፣ ለማከማቸት እና ለማጓጓዝ የሚያስችል የአጭር ጊዜ ፋይናንስ ይሰጣል። ይህ ብድር በ 3 ዓይነት የሚሰጥ ሲሆን፣ ከእነዚህም ውስጥ በኢትዮጵያ ልማት ባንክ (DBE) ዋስትና የሚሰጠው አንዱ ነው።",
+  "contentHash": "5f47c666cb5fc5e25f1e7b92ace766526189f79a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-revolving-export-credit-facility": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ Revolving Export Credit Facility ብድር",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Revolving Export Credit Facility ያብራራል። ላኪዎች ጊዜያዊ የሥራ ካፒታል ፍላጎቶቻቸውን ለማሟላት ፈጣንና ተለዋዋጭ የገንዘብ ድጋፍ ያገኛሉ። ብቁ የሆኑ ላኪዎች እስከ 90% የሚሆነውን የገንዘብ መጠን ማግኘት ይችላሉ።",
+  "contentHash": "60d3ff3ef9eeecf92cb62034ac3d9656c15f45a4",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-temporary-overdraft-facility": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Temporary Overdraft Facility",
+  "summaryAm": "ይህ ገጽ ባንኩ ለተመረጡ እና ብድር ለመስጠት ብቁ ለሆኑ ደንበኞች የሚሰጠውን Temporary Overdraft Facility ያብራራል። ብድሩ ጊዜያዊ የሥራ ማስኬጃ ካፒታል እጥረቶችን ለማቃለል የሚውል ሲሆን የመክፈያ ጊዜው ከ 3 ወር መብለጥ የለበትም። ደንበኞች ለሁለተኛ ጊዜ ብድር ሲጠይቁ 25% የሚሆነውን ዋና ገንዘብ መክፈል አለባቸው።",
+  "contentHash": "668a5f760daf44bca185fa549e52dfbd0682e363",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances-term-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: ተርም ብድር",
+  "summaryAm": "ይህ ገጽ ስለ ተርም ብድር ያብራራል። ተርም ብድር ለሥራ ማስኬጃ ካፒታል ወይም ለፕሮጀክት ፋይናንስ የሚሰጥ ብድር ሲሆን በወለድ በተወሰነ ጊዜ ውስጥ የሚከፈል ነው። ባንኩ የአጭር ጊዜ፣ የመካከለኛ ጊዜ እና የረጅም ጊዜ ብድሮችን ይሰጣል።",
+  "contentHash": "5f9d76b8e3206757669d25622cd3e08ea3701379",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-loan-and-advances": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ብድር እና ቅድሚያ ክፍያዎች",
+  "summaryAm": "ባንኩ የኢኮኖሚውን እና የደንበኞቹን ፍላጎት ለማሟላት ሰፊ የብድር ምርቶችን ያቀርባል። ማንኛውም የብድር አመልካች ብድር ከማመልከቱ በፊት በባንኩ ቅርንጫፎች በአንዱ የቼኪንግ ወይም የቁጠባ ሂሳብ መክፈት አለበት። አመልካቾች የንግድ ፈቃድ፣ የግብር መለያ ቁጥር (TIN) እና የግብር ክሊራንስ ሰርተፍኬት ማቅረብ አለባቸው።",
+  "contentHash": "6f18bae83bccc87b39711da605ce20073ee13626",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-mudarabah-saving-accounts-cooperatives-mudarabah-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ: Labbaik Mudarabah Saving Account",
+  "summaryAm": "ይህ ገጽ ስለ Labbaik Mudarabah Saving Account ያብራራል። ይህ የቁጠባ ሂሳብ ለሐጅ እና ዑምራ ጉዞ የሚከፈት ሲሆን፣ ደንበኞች ትርፍ የሚያገኙበት እና ለጉዞው እንዲቆጥቡ የሚያስገድድ ነው። ባንኩ ለዚህ የቁጠባ ሂሳብ ከሌሎች መደበኛ የሙዳረባ ቁጠባ ሂሳቦች ጋር ሲነፃፀር ከፍ ያለ የትርፍ ክፍፍል መጠን ይመድባል።",
+  "contentHash": "b8558b285b339edfd0a813e3ad9cd489f0f7f87a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-mudarabah-saving-accounts-dargago-youth-mudarabah-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ Dargago የወጣቶች ሙዳረባ ቁጠባ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Dargago የወጣቶች ሙዳረባ ቁጠባ ሂሳብ ያብራራል። ሂሳቡ ከ15-29 ዓመት ዕድሜ ክልል ውስጥ ላሉ ወንዶችና ሴቶች፣ በተለይም ለተማሪዎች የተዘጋጀ ነው። ባንኩ ከተራ ሙዳረባ ቁጠባ ሂሳቦች ጋር ሲነጻጸር የተሻለ የትርፍ ክፍፍል ጥምርታ ይተገብራል።",
+  "contentHash": "19dfb315090b870ad28d8024cc508fdbe1d5a6c5",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-mudarabah-saving-accounts-gammee-junior-mudarabah-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ: Gammee – Junior Mudarabah Saving Account",
+  "summaryAm": "ይህ የቁጠባ ሂሳብ ከ0-15 ዓመት ዕድሜ ባላቸው ህጻናት ስም የሚከፈት ሲሆን በወላጆች/አሳዳጊዎች የሚተዳደር ነው። ተቀማጭ ገንዘብ እና/ወይም ገንዘብ ማውጣት በወላጆች/አሳዳጊዎች ቁጥጥር ስር ነው። ባንኩ ከተራ ሙዳረባ የቁጠባ ሂሳቦች ጋር ሲነፃፀር ለGammee – Junior Mudarabah የቁጠባ ሂሳብ ባለቤቶች ከፍተኛ የትርፍ ክፍፍል መጠን ይመድባል።",
+  "contentHash": "03254d2f864220957d7c2bb15bb9ce2d3c05d261",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-mudarabah-saving-accounts-mudarabah-saving-accounts-2": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ: Cooperatives Mudarabah Saving Account",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Cooperatives Mudarabah Saving Account ያብራራል። የኅብረት ሥራ ማኅበራት ለጋራ ጥቅማቸው የሚያስከፍቱት የቁጠባ ሂሳብ ሲሆን፣ ባንኩ ከተራ ሙዳረባ የቁጠባ ሂሳቦች ጋር ሲነጻጸር ከፍተኛ የትርፍ ክፍፍል መጠን ይመድባል። የኅብረት ሥራ ማኅበራት የቁጠባ መርህን እንዲከተሉ ለማበረታታት ያለመ ነው።",
+  "contentHash": "79b4b5a707ec130b5e06131e20f50053b42d7b24",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-mudarabah-saving-accounts-mudarabah-saving-ordinary-mudarabah-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ: Mudarabah Saving (Ordinary Mudarabah) Account",
+  "summaryAm": "ይህ ገጽ ስለ Mudarabah Saving (Ordinary Mudarabah) Account ያብራራል። ሙዳረባ አንድ ወገን ካፒታል የሚያቀርብበት እና ባንኩ አስተዳደር፣ ክህሎት ወይም የሰው ኃይል የሚያቀርብበት የትርፍ ሽርክና አይነት ነው። ደንበኞች ገንዘባቸውን ለትርፍ ክፍፍል ባልተወሰነ ጊዜ የሚያስቀምጡበት ሲሆን፣ ትርፉ የሚከፈለው በቅድሚያ በተስማማው የትርፍ ክፍፍል ጥምርታ እና በባንኩ አፈጻጸም መሰረት ነው።",
+  "contentHash": "fb16341add19ff31f3b82e539bf4feb250cc7e96",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-mudarabah-saving-accounts-sinqe-women-mudarabah-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ Sinqe – የሴቶች ሙዳረባ ቁጠባ ሂሳብ",
+  "summaryAm": "ይህ ገጽ Sinqe – የሴቶች ሙዳረባ ቁጠባ ሂሳብን በተመለከተ መረጃ ይሰጣል። ይህ የቁጠባ ሂሳብ ከ30 ዓመት በላይ ለሆኑ ሴቶች የተዘጋጀ ሲሆን የቁጠባ ባህላቸውን ለማሳደግ ያለመ ነው። የ Sinqe – የሴቶች ሙዳረባ ቁጠባ ሂሳብ ባለቤቶች ከተራ ሙዳረባ ቁጠባ ሂሳብ ጋር ሲነፃፀር ከፍተኛ የትርፍ ክፍፍል ያገኛሉ።",
+  "contentHash": "a6ad2025d47c627ecc51420a3d9668c73e17de10",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-mudharabah": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ - Mudharabah",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የ Mudharabah ኢንቨስትመንት ተቀማጭ ሂሳቦች ያብራራል። ደንበኞች ከባንኩ የፋይናንስ እና የኢንቨስትመንት እንቅስቃሴዎች የሚገኘውን ትርፍ ወይም ኪሳራ ለመካፈል ፍላጎት ካላቸው ይህንን አገልግሎት መጠቀም ይችላሉ። ሁለት ዓይነት የኢንቨስትመንት ተቀማጭ ሂሳቦች አሉ፡ Restricted Investment Deposit (Mudharabah Mutlaqah) እና Unrestricted Investment Deposit (Mudharabah muqayaddah)።",
+  "contentHash": "b45ccbc989795dd292067d12e01d78ec97a0e871",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-other-services": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: ሌሎች አገልግሎቶች እና ተደጋጋሚ ጥያቄዎች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው ሌሎች አገልግሎቶች መረጃ ይሰጣል። ከእነዚህም መካከል የቁጠባ ሂሳብ፣ የዳያስፖራ ባንኪንግ አገልግሎቶች እና የሂሳብ አከፋፈት ሂደቶች ይገኙበታል። በተጨማሪም ገንዘብ ወደ ባንኩ እንዴት መላክ እንደሚቻል እና በባንኩ የሚሰጡ የደንበኞች አገልግሎቶች ተብራርተዋል።",
+  "contentHash": "96880553fe616edb0db76128ed30de3dae69da01",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-saving-account-ordinary-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Ordinary Saving Account",
+  "summaryAm": "ይህ ገጽ ስለ Ordinary Saving Account ያብራራል። ሂሳቡ ወለድ የሚያስገኝ ሲሆን ለመክፈት ዝቅተኛው ቀሪ ሂሳብ 50.00 ብር ነው። ሂሳቡ በወር ውስጥ ቢያንስ 25.00 ብር መግባት አለበት።",
+  "contentHash": "a9cfa68d488b623a9884d057c1cf3ba17bd90c15",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-saving-account-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: የቁጠባ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው የቁጠባ ሂሳቦች ያብራራል። በተለይም ከ 0-15 ዓመት ለሆኑ ህጻናት የተዘጋጀውን Gamme-Junior Account ያብራራል። ይህ ሂሳብ ለመክፈት ዝቅተኛ የተቀማጭ ገንዘብ የማይፈልግ ሲሆን፣ የሂሳብ አያያዝ ክፍያ የለውም እንዲሁም ከሌሎች የቁጠባ ሂሳቦች የተሻለ የወለድ መጠን አለው።",
+  "contentHash": "9c3be07c7b5e39138cd869f104fd0487c27e9c7d",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-saving-account-youth-saving-account": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: Youth Saving Account ሂሳብና ተቀማጭ",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Youth Saving Account ያብራራል። ሂሳቡ ከ15-29 ዓመት ዕድሜ ክልል ውስጥ ላሉ ወጣቶች የተዘጋጀ ሲሆን፣ ሂሳብ ለመክፈት ዝቅተኛ የተቀማጭ ገንዘብ መስፈርት የለውም። ከዴቢት ካርድ ጋር የሚመጣ ሲሆን፣ የግብይት ክፍያ የለውም እንዲሁም ከመደበኛ የቁጠባ ሂሳብ የተሻለ የወለድ መጠን አለው።",
+  "contentHash": "d6981620007b6eb5d21e9f8a7a6603adfde95fa1",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-security-contracts": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የብድር ዋስትና ውሎች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው የብድር ዋስትና ውሎች ያብራራል። ባንኩ የአፈጻጸም ዋስትናዎችን፣ የአገር ውስጥ/የውጭ ገንዘብ ዝውውርን እና የዕዳ መያዣን በተመለከተ የተለያዩ የዋስትና ውሎችን ያቀርባል። እነዚህም የዋስትና (ከፋላ) ውሎችን፣ የዕዳ ዝውውር (ሐዋላ) ውሎችን፣ እና የመያዣና የሞርጌጅ (ራህን) ውሎችን ያካትታሉ።",
+  "contentHash": "8133f5948f2ec0ed75e295d14bb024cf493aa3bb",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-trade-service-process": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ: የ TRADE SERVICE ሂደት",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የ TRADE SERVICE ሂደት ያብራራል። አገልግሎቱ በሁሉም የባንኩ ቅርንጫፎች የሚሰጥ ሲሆን፣ የባንኩ የውጭ ምንዛሪ ሂሳቦች በ 3 ምንዛሬዎች ማለትም በ US dollar፣ Pound sterling እና Euro ሊቀመጡ ይችላሉ።",
+  "contentHash": "5f79be23a1968f23cbd95c924b0d454a66ac4bce",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-types-of-merchandise-loan": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ የMerchandise Loan አይነቶች",
+  "summaryAm": "ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው የMerchandise Loan አይነቶች ያብራራል። ባንኩ ሶስት አይነት የMerchandise Loan አይነቶችን ያቀርባል፤ እነሱም Revolving Merchandise Loan፣ One-time Merchandise Loan እና Merchandise Loan against warehouse receipts or import documents ናቸው። Revolving Merchandise Loan ለተወሰነ ጊዜ የሚታደስ ሲሆን፣ One-time Merchandise Loan ደግሞ እስከ አንድ ዓመት ለሚደርስ ጊዜ የሚሰጥ ነው።",
+  "contentHash": "a711067c0b1c394ade9b11b11bed72ec477b462a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-ufaqs-am-i-eligible-to-have-gudunfa": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ Gudunfa ለማግኘት ብቁ ነኝ?",
+  "summaryAm": "ይህ ገጽ ስለ Gudunfa የቁጠባ ማሰባሰቢያ አገልግሎት ብቁ ደንበኞች ያብራራል። አገልግሎቱን ማግኘት የሚችሉ ግለሰቦች ጥቃቅን ነጋዴዎች፣ ከፊል ክህሎት ያላቸው ሰራተኞች፣ አነስተኛ አርሶ አደሮች፣ ጫማ ጠራጊዎች፣ የመኪና አጣቢዎች፣ ተሸካሚዎች፣ የታክሲ ረዳቶች፣ የጎዳና ላይ ሻጮች እና በግል ወይም በመንግስት ድርጅቶች ውስጥ በየቀኑ ገቢ የሚያገኙ ግለሰቦች ናቸው። ወላጆችም ልጆቻቸውን ስለ ቁጠባ ለማስተማር Gudunfa መጠቀም ይችላሉ።",
+  "contentHash": "26ece3c171a8c9e4abb217bd05c1ed3baabf6150",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-ufaqs-can-i-debit-a-joint-account-separately": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የጋራ አካውንት በተናጠል ማውጣት ይቻላል?",
+  "summaryAm": "ይህ ገጽ የጋራ አካውንቶችን በተመለከተ ተደጋጋሚ ጥያቄዎችን ይመልሳል። የጋራ አካውንቶች በሁለት ወይም በሦስት ግለሰቦች ስም ሊከፈቱ ይችላሉ። “And Account” እና “And/or Account” የሚባሉ የጋራ አካውንት አይነቶች ሲኖሩ፣ “And/or” አካውንት ግለሰቦች በተናጠል ገንዘብ እንዲያወጡ ያስችላል።",
+  "contentHash": "51650955dd5c96fe2354c5f39e5c9801e559023d",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-ufaqs": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎች",
+  "summaryAm": "ይህ ገጽ ስለ የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎችን ያቀርባል። ስለ Coopbank Alhuda ሸሪዓ ተገዢነት፣ የተለያዩ የሙዳረባ አይነቶች፣ የቁጠባ ሂሳብ ለመክፈት የሚያስፈልገው ዝቅተኛ ተቀማጭ ገንዘብ እና ሌሎችም መረጃዎችን ያገኛሉ። በተጨማሪም ተቀባይነት ስላላቸው የዋስትና አይነቶች እና ለብድር የሚያስፈልጉ አጠቃላይ መስፈርቶች ተብራርተዋል።",
+  "contentHash": "4e3ac4928eab73b5ef421fd3dc0dce73be5e3339",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "coopbank-wadiah-saving-account-salam": {
+  "titleAm": "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ: Salam",
+  "summaryAm": "ይህ ገጽ Salam የተባለውን የገንዘብ ድጋፍ (ውል) ያብራራል። Salam ሻጩ/ደንበኛው ለገዢው/ባንኩ በተወሰነ የወደፊት ቀን የተወሰኑ ዕቃዎችን ለማቅረብ የሚወስድበት የገንዘብ ድጋፍ ሲሆን፣ ዋጋው ሙሉ በሙሉ አስቀድሞ የሚከፈል ነው። የኦሮሚያ ኅብረት ሥራ ባንክ እስላሚክ ለደንበኞች የ Salam ፋይናንስን በዋስትና ወይም በኢንሹራንስ ሽፋን ይሰጣል።",
+  "contentHash": "47ffdc6ff20f61b60c8295424d25a88f30fd3006",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-app-downloads": {
+  "titleAm": "የዳሽን ባንክ የሞባይል ባንኪንግ መተግበሪያዎች ማውረጃ",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክን የሞባይል ባንኪንግ መተግበሪያዎችን እንዴት ማውረድ እንደሚቻል ያብራራል። ለ Android እና iOS መሳሪያዎች Dashen Mobile Plus እና DubeAle መተግበሪያዎችን ከ Google Play Store እና App Store ለማውረድ የሚያስችሉ አገናኞችን ያቀርባል።",
+  "contentHash": "88badbb0fd5ced0c0629a923144ec4024f9a00fd",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-business-loan": {
+  "titleAm": "የዳሽን ባንክ የንግድ ብድር",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ የንግድ ብድር አገልግሎቶችን ያብራራል። የሥራ ማስኬጃ ካፒታል ብድር፣ የጊዜ ብድር እና ኦቨርድራፍት ፋሲሊቲን ጨምሮ የተለያዩ የብድር አይነቶችን ያቀርባል። የጊዜ ብድር ከ3 ወር እስከ 5 ዓመት የሚደርስ ሲሆን፣ ኦቨርድራፍት ፋሲሊቲ ደግሞ እስከ 12 ወር የሚቆይ ነው።",
+  "contentHash": "0638023f233c6ce6ea245fef27ea351870cdc836",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-card-services": {
+  "titleAm": "የዳሽን ባንክ የካርድ አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ የካርድ አገልግሎቶችን ያብራራል። የቪዛ ካርድ፣ የዳሽን አሜሪካን ኤክስፕረስ ጎልድ ዴቢት ካርድ እና የዳሽን አሜሪካን ኤክስፕረስ ግሪን ዴቢት ካርድን ያካትታል። የቪዛ ካርድ በቀን እስከ 15,000.00 ብር ማውጣት እና እስከ 200,000.00 ብር መግዛት ያስችላል።",
+  "contentHash": "3d55fa4dd3b068ec878dc4834fbd501666de67f6",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-consumer-loan": {
+  "titleAm": "የዳሽን ባንክ የብድር አገልግሎት: የሸማቾች ብድር",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ የሸማቾች ብድር አገልግሎቶችን ያብራራል። የሞርጌጅ ብድር ለግለሰቦች የመኖሪያ ቤት ግዢ ወይም ግንባታ የሚሰጥ ሲሆን እስከ 90% የሚሆነውን ወጪ ይሸፍናል። የመኪና ብድር ለአዲስ መኪና እስከ 80% እና ለአሮጌ መኪና እስከ 85% የሚሆነውን ወጪ የሚሸፍን ሲሆን ለሁለቱም ብድሮች ረጅም የመክፈያ ጊዜ እስከ 20 ዓመት ይሰጣል።",
+  "contentHash": "7cfc4911fd4b664da9979a217f2a1717682cc5cb",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-contact-dashen-bank": {
+  "titleAm": "የዳሽን ባንክ የእገዛ፣ ቅሬታና ደኅንነት አገልግሎት አድራሻዎች",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክን ለማግኘት የሚያስችሉ የተለያዩ የመገናኛ መንገዶችን ያቀርባል። ባንኩን በስልክ ቁጥር 6333፣ በዋትስአፕ +251 911575827፣ በፋክስ +251 11 557 8428፣ በፖ.ሳ.ቁ 12752፣ በኢሜል info@dashenbanksc.com እና በድረ-ገጽ www.dashenbanksc.com ማግኘት ይቻላል። በተጨማሪም በቴሌግራም፣ ፌስቡክ፣ ትዊተር፣ ሊንክድኢን፣ ኢንስታግራም እና ቲክቶክ ባሉ ይፋዊ የማህበራዊ ሚዲያ ገጾች ላይ ይገኛል።",
+  "contentHash": "959525dd3a0b6bf7d33dd5bda85975eb2bee383b",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-current-demand-deposit": {
+  "titleAm": "የዳሽን ባንክ ሂሳብና ተቀማጭ: Current / Demand Deposit",
+  "summaryAm": "ይህ ገጽ ያለቅድመ ማስጠንቀቂያ ገንዘብ ማውጣት ስለሚቻልበት የባንክ ሂሳብ ያብራራል። ሂሳቡ ደህንነቱ የተጠበቀ ሲሆን ወለድ አይከፍልም፤ እንዲሁም በግብይት መጠን ላይ ገደብ የለውም። ሂሳብ ለመክፈት 500 ብር የመጀመሪያ ተቀማጭ ገንዘብ ያስፈልጋል፤ ዝቅተኛው የሂሳብ ቀሪ ሂሳብ ከሶስት ወር በላይ ዜሮ መሆን የለበትም።",
+  "contentHash": "eb45aece7cdcf4db296345c5de8afc4d28a5c533",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-dashen-mobile-plus": {
+  "titleAm": "የዳሽን ባንክ ዳሽን ሞባይል ፕላስ",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክን የዳሽን ሞባይል ፕላስ አገልግሎት ያብራራል። ዳሽን ሞባይል ፕላስ ደንበኞች በሞባይል፣ በኢንተርኔት እና በUSSD አማካኝነት ከባንኩ ጋር እንዲገናኙ የሚያስችል ሁሉን አቀፍ የባንክ አገልግሎት ነው። ደንበኞች ሂሳባቸውን 24 x 7 መከታተል፣ ገንዘብ ማስተላለፍ፣ የክፍያ መጠየቂያዎችን መክፈል እና ሌሎች በርካታ አገልግሎቶችን ማግኘት ይችላሉ።",
+  "contentHash": "8a6a09a47e9a9fbb2468e00903eb4bb45894be6a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-diaspora-demand-current-account": {
+  "titleAm": "የዳሽን ባንክ የዲያስፖራ ሂሳቦች: Diaspora Demand / Current Account",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክን የዲያስፖራ Demand / Current Account ያብራራል። ሂሳቡ ያለወለድ ሲሆን፣ ገንዘብ ያለቅድመ ማስታወቂያ ማውጣት ይቻላል። የመጀመሪያ እና ዝቅተኛው የተቀማጭ ገንዘብ መጠን USD 100 ነው።",
+  "contentHash": "91ee9927a22095a224a9cf698435263261ed3a31",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-diaspora-fixed-time-deposit": {
+  "titleAm": "የዳሽን ባንክ የዲያስፖራ ሂሳቦች: Diaspora Fixed Time Deposit",
+  "summaryAm": "ይህ የዳሽን ባንክ የዲያስፖራ ሂሳብ ከፍተኛ ወለድ የሚያስገኝ፣ ለተወሰነ ጊዜ የታገደ እና በውጭ ምንዛሪ የተያዘ የቁጠባ ሂሳብ ነው። ሂሳቡ የሚከፈተው፣ የሚንቀሳቀሰው እና ዋናው ገንዘብ ከብስለት ጊዜ በኋላ ወደ ውጭ ሀገር ሊመለስ ይችላል። የመጀመሪያው ተቀማጭ ገንዘብ 5,000 የአሜሪካን ዶላር ሲሆን ዝቅተኛው የተቀማጭ ገንዘብ መጠን 5,000 የአሜሪካን ዶላር ነው።",
+  "contentHash": "8dce0516ae474618b1a12b388d98b9b50fc22e89",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-diaspora-mudarabah-fixed-time-deposit": {
+  "titleAm": "የዳሽን ባንክ የዲያስፖራ Mudarabah Fixed Time Deposit ሂሳብ",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ የዲያስፖራ Mudarabah Fixed Time Deposit ሂሳብን በተመለከተ መረጃ ይሰጣል። ሂሳቡ በውጭ ምንዛሪ የሚከፈት ሲሆን፣ ለኢትዮጵያውያን ዲያስፖራዎች የታሰበ ነው። የመጀመሪያው የተቀማጭ ገንዘብ መጠን USD 5,000 ሲሆን፣ ከሀገር ውስጥ ምንጭ ገንዘብ ማስገባት የተከለከለ ነው።",
+  "contentHash": "8fea562a75513141d05d7a83eeb3da2b668a3353",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-diaspora-non-repatriable-saving-account": {
+  "titleAm": "የዳሽን ባንክ የዲያስፖራ የማይመለስ የቁጠባ ሂሳብ",
+  "summaryAm": "ይህ የዳሽን ባንክ የዲያስፖራ ሂሳብ በኢትዮጵያ ብር የሚከፈት ከፍተኛ ወለድ የሚያስገኝ የቁጠባ ሂሳብ ነው። በውጭ ምንዛሪ ገቢ ተደርጎ በሀገር ውስጥ ብር ብቻ የሚወጣ ሲሆን ወደ ውጭ ምንዛሪ ሊለወጥ አይችልም። ሂሳቡ 14% ወለድ የሚያስገኝ ሲሆን የመጀመሪያው ተቀማጭ ገንዘብ USD 100 ነው።",
+  "contentHash": "263f668f7d41cfb237045d71a289242817461d4e",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-diaspora-qard-current-account": {
+  "titleAm": "የዳሽን ባንክ የዲያስፖራ ቃርድ የአሁን ሂሳብ",
+  "summaryAm": "ይህ የዲያስፖራ ቃርድ የአሁን ሂሳብ የውጭ ምንዛሪ ሂሳብ ሲሆን የሂሳብ ባለቤቶች ገንዘባቸውን በቀላሉ እንዲያገኙ ያስችላል። ሂሳቡ በ100 የአሜሪካን ዶላር መክፈት የሚቻል ሲሆን ወርሃዊ የሂሳብ መግለጫ በነጻ ይሰጣል።",
+  "contentHash": "5d4fe28137656fa5f1ad7d5f7edce1f2b0b626c4",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-diaspora-wadiah-saving-account": {
+  "titleAm": "የዳሽን ባንክ የዲያስፖራ Wadi’ah ቁጠባ ሂሳብ",
+  "summaryAm": "ይህ የዳሽን ባንክ የዲያስፖራ Wadi’ah ቁጠባ ሂሳብ የውጭ ምንዛሪ ሂሳብ ሲሆን፣ ባንኩ ከዲያስፖራ ደንበኞቹ ገንዘባቸውን በአስተማማኝ ሁኔታ ለማስቀመጥ እና ለመጠቀም ምቹ ሁኔታዎችን ይሰጣል። ሂሳቡ ትርፍ እና ኪሳራ የሌለው ሲሆን፣ ለሀገር ውስጥ ክፍያዎች ብቻ የሚያገለግል ነው። የመጀመሪያው ተቀማጭ ገንዘብ 100 ዶላር ሲሆን፣ ዕድሜያቸው 18 እና ከዚያ በላይ የሆኑ ግለሰቦች እንዲሁም ህጋዊ አካላት መክፈት ይችላሉ።",
+  "contentHash": "b7626fd9310d161925e6490e6a82ed10e0f8cd04",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-export": {
+  "titleAm": "የዳሽን ባንክ ወጪና ገቢ ንግድ: ኤክስፖርት አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክን የኤክስፖርት አገልግሎቶች ያብራራል። የቅድሚያ ክፍያ ዝውውር እና የዶክመንተሪ ሌተር ኦፍ ክሬዲት (LC) አገልግሎቶችን ያካትታል። የቅድሚያ ክፍያ ዝውውር ለአነስተኛ የኤክስፖርት ግብይቶች የሚያገለግል ሲሆን፣ ኤክስፖርተሩ ዕቃዎቹ ከመላካቸው በፊት ክፍያ እንዲቀበል ያስችላል። የዶክመንተሪ ሌተር ኦፍ ክሬዲት ደግሞ ባንክ በገዢው ስም ለኤክስፖርተሩ ክፍያ እንደሚፈጽም ዋስትና የሚሰጥበት ሲሆን፣ ይህም በ LC ውስጥ የተገለጹት ውሎች እና ሁኔታዎች መሟላታቸውን በሚያሳዩ ሰነዶች ላይ የተመሰረተ ነው።",
+  "contentHash": "34829bb7decd80a73886edca5ab7089791b4ebd5",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-financing-ifb": {
+  "titleAm": "የዳሽን ባንክ ወለድ አልባ ባንክ የፋይናንስ አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ ወለድ አልባ ባንክ የሚያቀርባቸውን የፋይናንስ አገልግሎቶች ያብራራል። ከእነዚህም መካከል ለሥራ ማስኬጃ የሚውል ሙራባሃ ፋይናንሲንግ እስከ 3 ዓመት፣ ለኢንቨስትመንት የሚውል ሙራባሃ ፋይናንሲንግ እስከ 5 ዓመት እና ለውጭ ንግድ የሚውል ቀርድ ቅድመ-ጭነት ኤክስፖርት ፋይናንሲንግ እስከ 4 ወር የሚቆዩ አገልግሎቶች ይገኙበታል። ከብር 5.0 ሚሊዮን በላይ ለሆኑ የፋይናንስ ጥያቄዎች ኦዲት የተደረጉ የፋይናንስ መግለጫዎች ያስፈልጋሉ።",
+  "contentHash": "f13521fd5c668590d26635592a98ee3d48beddb0",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-fixed-time-deposit": {
+  "titleAm": "የዳሽን ባንክ ሂሳብና ተቀማጭ: Fixed Time Deposit",
+  "summaryAm": "ይህ የዳሽን ባንክ ገጽ ስለ Fixed Time Deposit ያብራራል። ይህ የቁጠባ አይነት ከፍ ያለ ወለድ ያለው ሲሆን፣ ገንዘቡ እስከ ብስለት ቀን ድረስ መቆየት አለበት። ዝቅተኛው የተቀማጭ ገንዘብ መጠን 1,000,000 ብር ሲሆን፣ ዝቅተኛው የብስለት ጊዜ 6 ወር ነው።",
+  "contentHash": "162936db6cd83231e3084bb0a41d064d3bbbd7d6",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-frequently-asked-questions": {
+  "titleAm": "የዳሽን ባንክ እገዛ፣ ቅሬታና ደኅንነት፡ በተደጋጋሚ የሚነሱ ጥያቄዎች",
+  "summaryAm": "ይህ ገጽ ስለ ዳሽን ባንክ በተደጋጋሚ የሚነሱ ጥያቄዎችን ይመልሳል። ዶርማንት አካውንት እንዴት ማንቃት እንደሚቻል፣ SWIFT ለውጦች ምን ማለት እንደሆኑ እና የዳሽን እጣ (Dashen Edil) ሎተሪ ፕሮግራም እንዴት እንደሚሰራ ያብራራል። ለተጨማሪ ድጋፍ የደንበኞች አገልግሎት ቡድን በ 6333 በኩል 7/24 ይገኛል።",
+  "contentHash": "27e0c91deaf756b0b11d645495088aad7cbff98e",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-how-to-import-from-abroad": {
+  "titleAm": "የዳሽን ባንክ ወጪና ገቢ ንግድ: ከውጭ ሀገር እንዴት ማስመጣት ይቻላል?",
+  "summaryAm": "ዳሽን ባንክ ከውጭ ሀገር ለሚያስመጡ ደንበኞች የንግድ መፍትሄዎችን ያቀርባል። ባንኩ የLCs፣ Documentary collection (CAD) እና ከ5,000 ዶላር በታች ለሆኑ ማስመጫዎች ፈጣን ክፍያዎችን ያመቻቻል። ሁሉም የማስመጫ ሰነዶች በባንኩ የንግድ አገልግሎት ማዕከል በፍጥነት ይጣራሉ።",
+  "contentHash": "206ba7d3fa7ba4fb99e7738c7452e8d5c191aeea",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-how-to-transfer-money-from-abroad": {
+  "titleAm": "የዳሽን ባንክ፡ ከውጭ የሚላክ ገንዘብ እንዴት ማስተላለፍ ይቻላል?",
+  "summaryAm": "ይህ ገጽ ከውጭ ወደ ኢትዮጵያ ገንዘብ እንዴት ማስተላለፍ እንደሚቻል ያብራራል። ገንዘብ በThunes በኩል በመስመር ላይ መላክ፣ ወይም በSWIFT ወደ ኢትዮጵያ ባንኮች ማስተላለፍ ይቻላል። አገልግሎቶቹ ፈጣን የገንዘብ ዝውውርን፣ የጥሬ ገንዘብ ክፍያን፣ የባንክ ተቀማጭ ገንዘብን እና የኪስ ቦርሳ ተቀማጭ ገንዘብን ያካትታሉ።",
+  "contentHash": "a666d1a1317cc5f5920fbd92f1025ce7ee4c2897",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-how-to-transfer-money-using-dashen-mobile-plus": {
+  "titleAm": "የዳሽን ባንክ: ገንዘብ በዳሽን ሞባይል ፕላስ እንዴት ማስተላለፍ ይቻላል?",
+  "summaryAm": "ይህ ገጽ ገንዘብ በዳሽን ሞባይል ፕላስ እንዴት ማስተላለፍ እንደሚቻል ያብራራል። ገንዘብ ለማስተላለፍ 3 አማራጮች አሉ: USSD *996#, የዳሽን ሞባይል ፕላስ አፕሊኬሽን እና ዳሽን ዌብ። እያንዳንዱ አማራጭ ገንዘብ ለማስተላለፍ የሚያስፈልጉትን ደረጃዎች በዝርዝር ያሳያል።",
+  "contentHash": "df8f63e3da8af3bd815b83ec079b62fea1c0d29b",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-how-to-use-an-atm": {
+  "titleAm": "የዳሽን ባንክ ካርድ፣ ኤቲኤምና ሞባይል ባንክ፡ ከኤቲኤም ገንዘብ እንዴት ማውጣት ይቻላል?",
+  "summaryAm": "ይህ ገጽ ከኤቲኤም ገንዘብ ለማውጣት የሚያስፈልጉትን 9 ደረጃዎች ያብራራል። ካርድ ማስገባት፣ ቋንቋ መምረጥ፣ ባለ 4 አሃዝ ፒን ማስገባት እና የአገልግሎት አይነት መምረጥን ያካትታል። ገንዘብ ማውጣት፣ ሚኒ ስቴትመንት ማየት፣ ሂሳብ ማጣራት እና ገንዘብ ማስተላለፍ ከሚሰጡት አገልግሎቶች ውስጥ ናቸው።",
+  "contentHash": "e8fb70706efdb52b3cb088ed8e8b485b2993eec3",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-import": {
+  "titleAm": "የዳሽን ባንክ ወጪና ገቢ ንግድ: አስቀድሞ ክፍያ እና የሰነድ የብድር ደብዳቤ",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክን አስቀድሞ ክፍያ ማስተላለፍ እና የሰነድ የብድር ደብዳቤ አገልግሎቶችን ያብራራል። አስቀድሞ ክፍያ ማስተላለፍ ለአነስተኛ የወጪ ንግድ ግብይቶች የሚያገለግል ሲሆን፣ የሰነድ የብድር ደብዳቤ ደግሞ በዓለም አቀፍ ንግድ ውስጥ ከባንክ የሚሰጥ የክፍያ ዋስትና ነው። ገጹ ለእያንዳንዱ አገልግሎት የሚያስፈልጉትን መሰረታዊ መስፈርቶች በዝርዝር ያቀርባል፣ ለምሳሌ የገቢ ንግድ ማመልከቻ ቅጽ፣ የፕሮፎርማ ደረሰኝ፣ የንግድ ፈቃድ እና የቲን ሰርተፍኬት።",
+  "contentHash": "2decaa354d7e34bdab4b58ec41cd8879334ad1b9",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-international-foreign-guarantee": {
+  "titleAm": "የዳሽን ባንክ ወጪና ገቢ ንግድ፡ ኢንተርናሽናል [የውጭ] ዋስትና",
+  "summaryAm": "ይህ ገጽ ባንኩ በደንበኛ ጥያቄ ወይም መመሪያ የሚሰጣቸውን የጽሁፍ ዋስትናዎች ያብራራል። ከእነዚህም መካከል የመመለሻ ዋስትና፣ የቅድሚያ ክፍያ ዋስትና፣ የጨረታ ማስያዣ (ዋስትና) እና የአፈጻጸም ዋስትና ይገኙበታል። የጨረታ ማስያዣ ዋስትና የጨረታውን መጠን የተወሰነ መቶኛ ለምሳሌ 10% ሊሸፍን ይችላል።",
+  "contentHash": "5df32eb622c21a32faeb9f3effb0f7db93842e02",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-international-foreign-kafalah-ifb": {
+  "titleAm": "የዳሽን ባንክ ወጪና ገቢ ንግድ፡ ኢንተርናሽናል [የውጭ] ከፋላህ",
+  "summaryAm": "ይህ ገጽ ባንኩ በደንበኛ ጥያቄ ወይም መመሪያ የሚሰጣቸውን የክፍያ ዋስትናዎች ያብራራል። ከፋላህ የዋስትና ዓይነቶች የመመለሻ ከፋላህ፣ የቅድሚያ ክፍያ ከፋላህ፣ የጨረታ ማስያዣ (ከፋላህ) እና የአፈጻጸም ከፋላህ ያካትታሉ። የጨረታ ማስያዣ ከፋላህ የጨረታውን መጠን የተወሰነ መቶኛ ለምሳሌ 10% የሚሸፍን ሲሆን የአፈጻጸም ከፋላህ ደግሞ ሙሉውን የውል ዋጋ ሊሸፍን ይችላል።",
+  "contentHash": "a28099265f9b249d410e0ea42d355227c1edf501",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-local-guarantee-one-time-and-facility": {
+  "titleAm": "የዳሽን ባንክ የአገር ውስጥ ዋስትና (አንድ ጊዜ እና ፋሲሊቲ)",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ ስለሚያቀርባቸው የተለያዩ የአገር ውስጥ ዋስትናዎች ያብራራል። እነዚህም የቅድሚያ ክፍያ፣ የውል አፈጻጸም፣ የገንዘብ ማቆያ፣ የአቅርቦት፣ የትዕዛዝ፣ የኪራይ ክፍያ፣ የብድር አገልግሎት፣ የብድር ሽያጭ እና የጉምሩክ ቦንድ ዋስትናዎችን ያካትታሉ። ከብር 5.0 ሚሊዮን እና ከዚያ በላይ የሆኑ ጥያቄዎች በኦዲት የተደረጉ የፋይናንስ መግለጫዎች መደገፍ አለባቸው።",
+  "contentHash": "afb636477fbc5e247a0e6b2f7614d1e77d8913e1",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-local-kafalah-one-time-and-facility-ifb": {
+  "titleAm": "የዳሽን ባንክ ወጪና ገቢ ንግድ: Local Kafalah",
+  "summaryAm": "ይህ ገጽ ስለ Local Kafalah አገልግሎት ያብራራል። Local Kafalah ከሂሳብ ውጪ የሚደረግ ብድር ሲሆን፣ ለተለያዩ ዓላማዎች እንደ ቅድመ ክፍያ፣ የውል አፈጻጸም፣ የክፍያ ማቆያ፣ አቅርቦት፣ ትዕዛዝ፣ የኪራይ ክፍያ፣ የብድር አገልግሎት፣ የብድር ሽያጭ እና የጉምሩክ ቦንድ ዋስትና ይሰጣል። ከ 5.0 ሚሊዮን ብር እና ከዚያ በላይ ለሆኑ ጥያቄዎች የተጣራ የፋይናንስ መግለጫዎች ያስፈልጋሉ።",
+  "contentHash": "795722e6da3ff79df97f03332393c1324edd2e61",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-merchant-account-guide": {
+  "titleAm": "የዳሽን ባንክ የነጋዴ አካውንት መመሪያ",
+  "summaryAm": "ይህ ሰነድ ነጋዴዎች የዳሽን ባንክን የነጋዴ አካውንት እንዴት መጠቀም እንደሚችሉ ያብራራል። የነጋዴ አገልግሎቶች፣ አዲስ ነጋዴዎችን ለመመዝገብ የሚያስፈልጉ መስፈርቶች እና የግብይት ሂደት ስድስት (6) ደረጃዎች በዝርዝር ቀርበዋል።",
+  "contentHash": "9832aea3dd3bb4a8875bc79b5d206f4f6593ec5e",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-mudarabah-investment-account-ifb": {
+  "titleAm": "የዳሽን ባንክ ወለድ አልባ ባንክ: Mudarabah Investment Account",
+  "summaryAm": "ይህ ገጽ ስለ Mudarabah Investment Account ያብራራል። ይህ አካውንት ለግለሰቦች እና ለህጋዊ አካላት የሚሆን ሲሆን፣ በትንሹ 50,000 ብር የመነሻ ኢንቨስትመንት ፈንድ ይከፈታል። የኢንቨስትመንት ጊዜው ከ6 ወር እስከ 24 ወር ሲሆን፣ የትርፍ ክፍፍል ጥምርታው ባንኩ 40% እና ደንበኛው 60% ነው።",
+  "contentHash": "aa75b980d87c33e1dd6ae71e0bbc88231c320396",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-mudarabah-saving-account-ifb": {
+  "titleAm": "የዳሽን ባንክ ወለድ አልባ ባንክ፡ Mudarabah Saving Account",
+  "summaryAm": "ይህ ገጽ ስለ ዳሽን ባንክ Mudarabah Saving Account ያብራራል። ሂሳቡ በትንሹ 500 ብር ሊከፈት የሚችል ሲሆን፣ ለትርፍ ክፍፍል ብቁ ለመሆን ዝቅተኛው የሂሳብ ቀሪ ሂሳብ 5,000 ብር ነው። ባንኩ 60% እና ደንበኛው 40% የሚያገኝበት የትርፍ ክፍፍል ጥምርታ ያቀርባል።",
+  "contentHash": "45bcf47faac07c530c9ad22aca3be768cad4f41d",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-murabaha-financing-investment": {
+  "titleAm": "የዳሽን ባንክ ወጪና ገቢ ንግድ: Murabaha Financing – ኢንቨስትመንት",
+  "summaryAm": "ይህ የፋይናንስ ዝግጅት ለ IFB ደንበኞች የሚንቀሳቀሱ እና የማይንቀሳቀሱ ንብረቶችን ለማግኘት ያለመ ሲሆን የደንበኞችን የኢንቨስትመንት ፍላጎት ለመደገፍ በተለያዩ መንገዶች ይቀርባል። የብድር ጊዜው ቢበዛ 5 ዓመት ሲሆን ክፍያው በወር፣ በሩብ ዓመት፣ በግማሽ ዓመት ወይም በአንድ ጊዜ ሊሆን ይችላል። ከ 5.0 ሚሊዮን ብር በላይ የሆኑ የፋይናንስ ጥያቄዎች በኦዲት የተደረጉ የፋይናንስ መግለጫዎች መደገፍ አለባቸው።",
+  "contentHash": "3a83dffba60c288432c41f978b70af66afe76258",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-murabaha-financing-working-capital": {
+  "titleAm": "የዳሽን ባንክ ወጪና ገቢ ንግድ፡ Murabaha Financing – Working Capital",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ እስላማዊ የፋይናንስ አገልግሎት ደንበኞች የአሁን ንብረቶችን ለመደገፍ የሚያስችል የ Murabaha Financing – Working Capital የፋይናንስ ዝግጅትን ያብራራል። የፋይናንስ ጊዜው ቢበዛ 3 ዓመት ሲሆን ክፍያው በየወሩ፣ በየሩብ ዓመቱ፣ በየስድስት ወሩ ወይም በአንድ ጊዜ ሊሆን ይችላል። ከብር 5.0 ሚሊዮን በላይ ለሆኑ የፋይናንስ ጥያቄዎች ኦዲት የተደረጉ የፋይናንስ መግለጫዎች ያስፈልጋሉ።",
+  "contentHash": "7ddb443a428026fb39cf9426afee814c6550d31c",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-other-special-deposit-ifb": {
+  "titleAm": "የዳሽን ባንክ ወለድ አልባ ባንክ ልዩ የተቀማጭ ሂሳቦች",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ ወለድ አልባ ባንክ የሚያቀርባቸውን ልዩ የተቀማጭ ሂሳቦችን ያብራራል። ከእነዚህም መካከል ለሐጅ ጉዞ የሚውል የሐጅ ወዲዓ ቁጠባ፣ ለአካለ መጠን ያልደረሱ ልጆች የሚሆን የወጣቶች ወዲዓ ቁጠባ ሂሳብ፣ እና ለሴቶች የተዘጋጀ የአን-ኒሳ ወዲዓ ቁጠባ ሂሳብ ይገኙበታል። የሐጅ ወዲዓ ቁጠባ የመጀመሪያ ተቀማጭ ገንዘብ 500 ብር ሲሆን፣ የወጣቶች እና የአን-ኒሳ ወዲዓ ቁጠባ ሂሳቦች ደግሞ 100 ብር የመጀመሪያ ተቀማጭ ገንዘብ አላቸው።",
+  "contentHash": "1bddafa1ea0e84d698ab3f27bc00b351ce7c4677",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-other-special-deposit": {
+  "titleAm": "የዳሽን ባንክ ልዩ የሂሳብና ተቀማጭ አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ ዳሽን ባንክ ስለሚያቀርባቸው ልዩ የሂሳብና ተቀማጭ አገልግሎቶች ያብራራል። ከነዚህም ውስጥ ለውጭ ዜጎች፣ ለዓለም አቀፍ ድርጅቶች እና ለኤምባሲዎች የሚውሉ የNRT፣ NRNT እና NRFCY ሂሳቦች ይገኙበታል። እነዚህ ሂሳቦች ወለድ የሌላቸው ሲሆኑ፣ የNRT ሂሳብ የመጀመሪያ ተቀማጭ ገንዘብ USD 100 ነው።",
+  "contentHash": "2c47e59edf109a1655be9a3a59c5c30f0f7cda1e",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-pos-services": {
+  "titleAm": "የዳሽን ባንክ የካርድ፣ ኤቲኤምና ሞባይል ባንክ የPOS አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ የPOS አገልግሎቶችን ያብራራል። የPOS አገልግሎት ነጋዴዎች በአገር ውስጥ እና በዓለም አቀፍ ደረጃ የሚመጡ VISA፣ MasterCard፣ UnionPay እና American Express ካርዶችን በመጠቀም ክፍያዎችን እንዲቀበሉ ያስችላል። የዳሽን ባንክ ነጋዴ ለመሆን አካውንት መክፈት፣ የታደሱ ህጋዊ ሰነዶች እና መደበኛ ውል መፈረም ያስፈልጋል።",
+  "contentHash": "726b346fbbab3d3daffb92eb9bff8fdb9da5bfde",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-privacy-and-security": {
+  "titleAm": "የዳሽን ባንክ እገዛ፣ ቅሬታና ደኅንነት: ግላዊነት እና ደህንነት",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ፣ ቅርንጫፎቹ እና ተባባሪ ኩባንያዎች የግላዊነት መግለጫ ነው። ባንኩ የግል መረጃን የሚሰበስበው፣ የሚጠቀምበት እና የሚያጋራው በህግ በተፈቀደው መሰረት እና ከደንበኞች ፈቃድ ጋር ነው። ባንኩ የግል መረጃን የሚይዘው በህግ በተደነገገው መሰረት ሲሆን፣ የደህንነት ልምዶቹም መረጃን ለመጠበቅ የተነደፉ ናቸው።",
+  "contentHash": "e36a5d32faf87484b16efce41730cfcdacda370e",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-qard-current-account-ifb": {
+  "titleAm": "የዳሽን ባንክ ወለድ አልባ ባንክ Qard Current Account",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክን Qard Current Account ምርት ያብራራል። ይህ አካውንት በQard ውል ላይ የተመሰረተ ሲሆን ደንበኞች ገንዘባቸውን በቀላሉ እንዲያገኙ ያስችላል። የ100 ብር የመጀመሪያ ተቀማጭ ገንዘብ ያለው ሲሆን የቼክ ደብተር፣ የዴቢት ካርድ፣ የኢንተርኔት እና የሞባይል ባንኪንግ አገልግሎቶችን ያካትታል።",
+  "contentHash": "0a200a6a5628050e1d0cfdf60a94bdc6dfce1a4a",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-qard-pre-shipment-export-financing": {
+  "titleAm": "የዳሽን ባንክ ወጪና ገቢ ንግድ፡ Qard Pre-shipment Export Financing",
+  "summaryAm": "ይህ የፋይናንስ አገልግሎት ወደ ውጭ ለሚልኩ ነጋዴዎች ምርቶችን ለመግዛት፣ ለማቀነባበር፣ ለማምረት ወይም ለማሸግ የሚውል ነው። አገልግሎቱ በታማኝ የሽያጭ ውል ወይም በኤክስፖርት L/C ጥንካሬ የሚሰጥ ሲሆን፣ ነጋዴዎች ከውጭ ንግድ ጋር የተያያዙ ወጪዎችን ለመሸፈን ያስችላቸዋል። እያንዳንዱ ቅድመ ክፍያ ከሚመለከተው የኤክስፖርት L/C ገቢ የሚከፈል ሲሆን፣ የፋይናንስ ጥያቄዎች በኦዲት የተደረጉ የፋይናንስ መግለጫዎች መደገፍ አለባቸው።",
+  "contentHash": "0b015d55efec26bf6147ceb2af3efdfa9500f371",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-remittance": {
+  "titleAm": "የዳሽን ባንክ የገንዘብ ዝውውር አገልግሎት",
+  "summaryAm": "ይህ ገጽ ከውጭ የሚላክ ገንዘብ እና ወደ ውጭ የሚላክ ገንዘብ ዝውውር አገልግሎቶችን ያብራራል። ገቢ ገንዘብ በSWIFT – DASHETAA፣ WESTERN UNION፣ MoneyGram፣ Dahabshiil፣ TRANSFAST፣ WorldRemit፣ XPRESS MONEY፣ KAAH፣ EzRemit እና Ria በኩል መቀበል ይቻላል። ወጪ ገንዘብ ደግሞ ለተለያዩ አገልግሎቶች በSWIFT እና TT ይላካል።",
+  "contentHash": "cf663d19b0705dd10e5d07b62c2597ce4e42d959",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-saving-deposit": {
+  "titleAm": "የዳሽን ባንክ የቁጠባ ሂሳብና ተቀማጭ",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክን የቁጠባ ሂሳብ ያብራራል። ደንበኞች ገንዘብ የሚያስቀምጡበት፣ የሚያወጡበት እና ወለድ የሚያገኙበት መደበኛ የቁጠባ ሂሳብ ነው። ሂሳቡ በየወሩ ወለድ የሚያስገኝ ሲሆን፣ ለመክፈት 25 ብር የመጀመሪያ ተቀማጭ ገንዘብ ብቻ ያስፈልጋል።",
+  "contentHash": "472252303ac71542a15a024d117b9d7e832421c6",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-visa-cards": {
+  "titleAm": "የዳሽን ባንክ ቪዛ ካርዶች",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ ቪዛ ካርዶችን በተመለከተ መረጃ ይሰጣል። የቁጠባ ወይም የሂሳብ አካውንት ባለቤቶች በቀን እስከ 10,000.00 ብር ማውጣት እና እስከ 8,000.00 ብር መግዛት ይችላሉ። ካርድ ከጠፋብዎ ወዲያውኑ በ +251 115 18 0007, +251 115 18 0008, ወይም +251 115 18 0009 በመደወል ማሳወቅ አለብዎት።",
+  "contentHash": "9409f4a3c362f7bbd54f42d7bc158b93243b78a1",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-wadiah-saving-account-ifb": {
+  "titleAm": "የዳሽን ባንክ ወለድ አልባ ባንክ: Wadi’ah ቁጠባ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክን Wadi’ah ቁጠባ ሂሳብ ያብራራል። Wadi’ah ባንኩ ከደንበኞቹ ገንዘባቸውን በአስተማማኝ ሁኔታ ለማስቀመጥ እና ለመጠቀም ምቹ ሁኔታን የሚፈልጉ ተቀማጭ ገንዘብ የሚቀበልበት የውክልና ስምምነት ነው። ሂሳቡን ለመክፈት የሚያስፈልገው የመጀመሪያ ተቀማጭ ገንዘብ 25 ብር ሲሆን፣ ለግለሰቦች የህግ እድሜ (>= 18 ዓመት) መሆን እና ለድርጅቶች የታደሰ የንግድ ፈቃድ እና ሌሎች ሰነዶች ያስፈልጋሉ።",
+  "contentHash": "4e392e302c10c7658c4b2b04f73b769524c2fd76",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "dashen-welcome-home": {
+  "titleAm": "የዳሽን ባንክ የዲያስፖራ ሂሳቦች: እንኳን ደህና መጡ",
+  "summaryAm": "ይህ ገጽ የዳሽን ባንክ ለዲያስፖራ የሚያቀርባቸውን የባንክ አገልግሎቶች ያብራራል። ባንኩ ከ500 በላይ ቅርንጫፎች፣ 16 የውጭ ምንዛሪ መስኮቶች እና 9 የውጭ ምንዛሪ ቢሮዎች ያሉት ሲሆን፣ ከ462 ባንኮች ጋር የደብዳቤ ልውውጥ ግንኙነት አለው። ከእነዚህ አገልግሎቶች መካከል የውጭ ምንዛሪ ተቀማጭ ሂሳቦች እና የዲያስፖራ የሸማቾች ብድር (የመኪና፣ የቤት እና የግል ብድር) ይገኙበታል።",
+  "contentHash": "48e5c6c93a611af57e475ab9f60caf073c6e527d",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-about": {
+  "titleAm": "ስለ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA)",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA)ን ያስተዋውቃል። ECMA በሰኔ 2021 የተቋቋመ የኢትዮጵያ የካፒታል ገበያዎችን የሚቆጣጠር እና የሚያዳብር አካል ነው። ባለሥልጣኑ በፕሮክላሜሽን ቁጥር 1248/2021 የተቋቋመ ሲሆን፣ በነሐሴ 2024 ወ/ሮ ሃና ተሄልኩ ዋና ዳይሬክተር ሆነው ተሾመዋል።",
+  "contentHash": "25c7f93acc8233c6fef1cc0edb3af2b470838211",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-application-process-participation": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ የሙከራ ማዕቀፍ ማመልከቻ ሂደት እና ተሳትፎ",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ የሙከራ ማዕቀፍ ውስጥ ለመሳተፍ የሚያስፈልገውን የማመልከቻ ሂደት ያብራራል። ሂደቱ የመጀመሪያ ጥያቄ፣ የማመልከቻ ማስገባት፣ ግምገማ፣ ውሳኔ እና ግብረመልስ፣ የሙከራ እቅድ ልማት፣ የሙከራ ምዕራፍ እና ግምገማና መውጣትን ያካትታል።",
+  "contentHash": "ef585154f67320014f6add7897a2874d019b0661",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-eligibility-criteria": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን የሙከራ ማዕቀፍ ብቁነት መስፈርቶች",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ የቁጥጥር Sandbox ተሳትፎ ብቁነት መስፈርቶችን ያብራራል። አመልካቾች በአገልግሎት ወሰን፣ ፈጠራ፣ ለተጠቃሚዎች የሚሰጠው ጥቅም፣ ለ Sandbox አስፈላጊነት እና ለሙከራ ዝግጁነት ማሳየት አለባቸው። ተሳታፊዎች በ Sandbox ውስጥ ከተቀበሉ በኋላ በአጭር ጊዜ ውስጥ በእውነተኛ ደንበኞች ለመሞከር ዝግጁ መሆን አለባቸው።",
+  "contentHash": "2135bfac4ba4645c3e3ba44bf2553e083a638b1f",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-investor": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ ለባለሀብቶች መረጃ",
+  "summaryAm": "ይህ ገጽ ባለሀብቶችን ከማጭበርበር ለመጠበቅ እና ፍትሃዊ አያያዝን ለማረጋገጥ ያለመ ነው። ባለሀብቶች ከፈቃድ ካላቸው አቅራቢዎች እና ከተመዘገቡ ተቋማት ጋር ብቻ እንዲሰሩ፣ የአደጋ ስጋት መገለጫቸውን እንዲረዱ እና በመረጃ ላይ የተመሰረተ የኢንቨስትመንት ውሳኔ እንዲያደርጉ ይመክራል። እርዳታ ከፈለጉ ከፈቃድ ካለው ባለሙያ ምክር እንዲፈልጉ ያሳስባል።",
+  "contentHash": "ccdac7fa4e213d7f181c977d1e0ce8068de23ecc",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-laws-regulation": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ሕጎችና መመሪያዎች",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA) ያወጣቸውን ሕጎችና መመሪያዎች ያቀርባል። ሰነዶቹ መመሪያዎች፣ ረቂቅ መመሪያዎች፣ አዋጆች እና መመሪያዎችን ያካትታሉ። ለምሳሌ፣ የህዝብ አክሲዮን ማቅረብ እና የዋስትናዎች ንግድ መመሪያ 1030 -2017 (አማርኛ) 4609 ጊዜ የወረደ ሲሆን፣ የካፒታል ገበያ አዋጅ ቁጥር 1248-2021 ደግሞ 4189 ጊዜ ወርዷል።",
+  "contentHash": "d04368af3b0e076de43f0552489dc21f872b08c9",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-licensing": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ ፈቃድ አሰጣጥ",
+  "summaryAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA) ለአማላጆች ፈቃድ የመስጠት፣ ከዋስትና ሰጪዎች የሚቀርቡ ማመልከቻዎችን የመገምገም እና የተለያዩ የካፒታል ገበያ ምርቶችን የማጽደቅ ኃላፊነት አለበት። ፈቃድ ለማግኘት የራስ ምዘና ቅጽን ማጠናቀቅ፣ የንግድ እቅድ፣ የፋይናንስ መግለጫዎች እና መታወቂያ ሰነዶችን ማቅረብ ያስፈልጋል። ለበለጠ መረጃ በስልክ ቁጥር +251-11557-8250 ወይም በኢሜል licensing@ecma.gov.et ማግኘት ይቻላል።",
+  "contentHash": "4e8525421e9e5ba8c48cf8b13aca21d0b69813d1",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-regulatory-sandbox-frequently-asked-questions": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ የሙከራ ማዕቀፍ ተደጋጋሚ ጥያቄዎች",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA) ስላቋቋመው የሙከራ ማዕቀፍ (Regulatory Sandbox) ተደጋጋሚ ጥያቄዎችን ይመልሳል። ማዕቀፉ ንግዶች አዳዲስ የካፒታል ገበያ ምርቶችን እና አገልግሎቶችን በተቆጣጠረ አካባቢ እንዲሞክሩ ያስችላል። የሙከራው ምዕራፍ እስከ 12 ወራት ሊቆይ ይችላል።",
+  "contentHash": "a4f0b0c3f79e33a9efc22786edff965cc6401f1b",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-regulatory-sandbox-participants-sandbox": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን የሙከራ ማዕቀፍ ተሳታፊዎች",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA) የሙከራ ማዕቀፍ ተሳታፊዎችን ይዘረዝራል። ማዕቀፉ አዳዲስ የካፒታል ገበያ ምርቶችን፣ አገልግሎቶችን እና ቴክኖሎጂዎችን ለመፈተሽ፣ ለማጣራት እና ለማስፋት ያለመ ነው። ተሳታፊዎች ፈቃድ ያላቸው ድርጅቶች፣ ፈቃድ የሌላቸው ግን ፈቃድ ሊሰጣቸው የሚችሉ ተግባራትን የሚያከናውኑ ድርጅቶች፣ በአሁኑ ጊዜ ቁጥጥር ያልተደረገባቸው ግን ወደፊት ቁጥጥር ሊደረግባቸው የሚችሉ ተግባራትን የሚያከናውኑ ድርጅቶች፣ ቁጥጥር የሚደረግበትን እንቅስቃሴ የሚደግፉ ድርጅቶች እና ተቆጣጣሪዎችን ለመደገፍ የSupTech ቴክኖሎጂዎችን የሚያቀርቡ ድርጅቶችን ያካትታሉ።",
+  "contentHash": "418a4e37c6a6e2ae0fe532ea309f628e4a95d740",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-regulatory-sandbox-support-and-benefits": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን – የሙከራ ማዕቀፍ ድጋፍ እና ጥቅሞች",
+  "summaryAm": "የኢትዮጵያ የካፒታል ገበያ የሙከራ ማዕቀፍ ተሳታፊዎች የፈጠራ ምርቶችን እና አገልግሎቶችን ለመፈተሽ እና ለማልማት የሚያስችል የቁጥጥር ድጋፍ፣ መመሪያ እና ስልታዊ ጥቅሞችን ይሰጣል። እያንዳንዱ ተሳታፊ ልዩ ፈጠራን የሚያመጣ በመሆኑ፣ ማዕቀፉ በግለሰብ ደረጃ የተበጀ የቁጥጥር ድጋፍ፣ ስልታዊ መመሪያ እና ቀጥተኛ ጥቅሞችን ያቀርባል። የሙከራ ማዕቀፉ የቁጥጥር ድጋፍ መሳሪያዎችን ያቀርባል፣ ከእነዚህም መካከል Testing Approval Letters (TALs) እና በሂደት ላይ ያለ መደበኛ ያልሆነ ግንኙነት ይገኙበታል።",
+  "contentHash": "83dd8f98680636efb436c5321b2a2498894b69a4",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-regulatory-sandbox": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን የሙከራ ማዕቀፍ (Regulatory Sandbox)",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA) ከInnovative Finance Lab (IFL) ጋር በመተባበር ያዘጋጀውን የካፒታል ገበያ የሙከራ ማዕቀፍ (Regulatory Sandbox) ያስተዋውቃል። የሙከራ ማዕቀፉ አዳዲስ የካፒታል ገበያ ምርቶችን፣ አገልግሎቶችን እና የንግድ ሞዴሎችን ለመፈተሽ ደህንነቱ የተጠበቀ እና ቁጥጥር የሚደረግበት መድረክ ያቀርባል። ፈጠራዎችን በደህንነት ለመፈተሽ፣ የቁጥጥር መመሪያ ለማግኘት እና ወደ ገበያ የመግባት ሂደትን ለማፋጠን ያስችላል።",
+  "contentHash": "bbed6db1702bbf3ad0cf78cd297959c98f5569e0",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ecma-the-board": {
+  "titleAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ የዳይሬክተሮች ቦርድ",
+  "summaryAm": "ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን የዳይሬክተሮች ቦርድ አባላትን ያስተዋውቃል። ቦርዱ ከተለያዩ ተቋማት የተውጣጡ ባለሙያዎችን ያቀፈ ነው።",
+  "contentHash": "7b865858e57ff2b699ee17b8c818552439517d86",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ethswitch-about-us-2": {
+  "titleAm": "ኢትስዊች አ.ማ. የክፍያ መረብ: ስለ እኛ",
+  "summaryAm": "ኢትስዊች አ.ማ. በ2011 የተቋቋመ ሲሆን፣ በ2035 በአፍሪካ ውስጥ ምርጥ የክፍያ መረብ ለመሆን ያለመ ነው። የክፍያ አገልግሎት ሰጪዎችን እና የመጨረሻ ተጠቃሚዎችን ቀለል ያለ፣ ተመጣጣኝ፣ ደህንነቱ የተጠበቀ እና ቀልጣፋ የኢ-ክፍያ መሠረተ ልማት አገልግሎቶችን ይሰጣል። ከ2016 ጀምሮ የኤቲኤም እና የPOS ተርሚናሎች መስተጋብርን አስችሏል።",
+  "contentHash": "029ce308239602f396d783bc05c52e4730e9255c",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ethswitch-central-card-printing-personalization-and-issuance": {
+  "titleAm": "ኢትስዊች አ.ማ. የካርድ ማተሚያ፣ ግላዊነት ማላበስ እና የማውጣት አገልግሎት",
+  "summaryAm": "ኢትስዊች አ.ማ. ለኢትዮጵያ ባንኮች በሙሉ የሚያገለግል ዘመናዊ የካርድ ማተሚያ፣ ግላዊነት ማላበስ እና የፒን ሜይለር ቴክኖሎጂዎችን ይጠቀማል። እነዚህ ቴክኖሎጂዎች በቀን ከፍተኛ ቁጥር ያላቸውን ካርዶች ማምረት የሚችሉ ናቸው። ተቋሙ የካርድ ምርት አገልግሎቶችን ፍላጎት ለማሟላት በሌሎች ቴክኖሎጂዎች ላይ ኢንቨስት እያደረገ ነው።",
+  "contentHash": "41ab8633d7875db9cb0b73c45bada477bf2722dc",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ethswitch-electronic-retail-payment": {
+  "titleAm": "ኢትስዊች አ.ማ. የኤሌክትሮኒክስ የችርቻሮ ክፍያ መረብ",
+  "summaryAm": "ይህ ገጽ ኢትስዊች አ.ማ. ለፋይናንስ አገልግሎት ሰጪዎች (FSPs) ስለሚያቀርበው የኤሌክትሮኒክስ የችርቻሮ ክፍያ መቀያየርና ማጽዳት አገልግሎት ያብራራል። ኢትስዊች አ.ማ. የኤቲኤም፣ የPOS፣ የሞባይል ወይም የኢንተርኔት ባንኪንግ ስርዓቶችን በማቀናጀት ክፍያዎችን ቀላልና ተመጣጣኝ ያደርጋል። ይህ አገልግሎት ለፋይናንስ አገልግሎት ሰጪዎች፣ ለነጋዴዎችና ለመጨረሻ ተጠቃሚዎች ጠቃሚ ሲሆን የሀገር ውስጥ P2P እና P2G ግብይቶችን ያስችላል።",
+  "contentHash": "fcbcaebda6be98955a9f1a55c462a1f51add7a43",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ethswitch-ethiopay": {
+  "titleAm": "ኢትስዊች አ.ማ. የኢትዮፔ የክፍያ መረብ",
+  "summaryAm": "ኢትዮፔ የኢትዮጵያ የሀገር ውስጥ የካርድ ስኪም ሲሆን ኢትስዊች አ.ማ. ባለቤት ነው። ይህ ስኪም በኢትዮጵያ ውስጥ ላሉ ሁሉም ባንኮች የክፍያ ካርዶችን እንዲያወጡ እና እንዲቀበሉ ታስቦ የተሰራ ነው። ኢትዮፔ የክፍያ ፍቃዶችን እና የሰፈራ ጥያቄዎችን ለማስተላለፍ ደንቦችን ይገልጻል።",
+  "contentHash": "ba8b891f7349962c9cd6e162a2adbdf6aa4a3447",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "ethswitch-services": {
+  "titleAm": "ኢትስዊች አ.ማ. የክፍያ መረብ አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ ኢትስዊች አ.ማ. የሚያቀርባቸውን አገልግሎቶች ይዘረዝራል። ከእነዚህም መካከል የኢትዮፔ የሀገር ውስጥ የካርድ ስኪም ባለቤትነት፣ የኤሌክትሮኒክስ የችርቻሮ ክፍያ መቀያየርና ማጽዳት፣ እና የባንኮች ሲስተሞችን ማስተናገድ ይገኙበታል። በተጨማሪም ማዕከላዊ የካርድ ማተሚያ፣ የክርክር አያያዝ፣ የማጭበርበር ክትትል፣ እና የምክርና ስልጠና አገልግሎቶችን ይሰጣል።",
+  "contentHash": "e5ef835af5e677b3567575db7892d6fa889cd262",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-banking-service-business-banking": {
+  "titleAm": "የዘመን ባንክ የንግድ ባንክ አገልግሎት",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ ለንግድ ስራ የሚያቀርባቸውን የብድር እና የፋይናንስ አገልግሎቶች ያብራራል። ባንኩ የአጭር፣ የመካከለኛና የረጅም ጊዜ ብድሮችን እንዲሁም የክሬዲት መስመሮችን እና የሸቀጦች ብድሮችን ያቀርባል። በተጨማሪም የንግድ መሰረታዊ ሂሳብ፣ የቁጠባ ሂሳቦች እና የ24/7 የባንክ አገልግሎት ይሰጣል።",
+  "contentHash": "dde46f0dab35ce40bdc3afa742b8cd26ca1a18ab",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-banking-service-international-banking-2": {
+  "titleAm": "የዘመን ባንክ የውጭ ምንዛሪና ዓለም አቀፍ የባንክ አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ ዓለም አቀፍ የባንክ አገልግሎቶችን ያብራራል። ባንኩ ለውጭ ምንዛሪና ዓለም አቀፍ የንግድ ልውውጥ የሚያስፈልጉ እንደ ብድር ደብዳቤ ፋይናንስ፣ የገቢና ወጪ ሰነድ ስብስብ አገልግሎቶች፣ ዓለም አቀፍ የገንዘብ ዝውውሮች እና የውጭ ምንዛሪ አገልግሎት ይሰጣል። በተጨማሪም ለውጭ አካላት የውጭ ምንዛሪ ሂሳብ እና ለዕቃዎችና አገልግሎቶች ላኪዎች የሪቴንሽን ሂሳብ ያቀርባል።",
+  "contentHash": "9ddf09bd60fdd0052ceb945908a892e2e893ac65",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-banking-service-personal-banking-2": {
+  "titleAm": "የዘመን ባንክ የግል ባንኪንግ ሂሳብና ተቀማጭ ምርቶች",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክን የቁጠባ፣ የቼኪንግ፣ የጊዜ ተቀማጭ ሂሳቦችን እና የውጭ ምንዛሪ ሂሳቦችን ያብራራል። የባንኩ ተቀማጭ ምርቶች ለግለሰቦች እና ለንግድ ድርጅቶች የተከፋፈሉ ሲሆን፣ አብዛኛዎቹ የቁጠባ ሂሳብ እና የቼኪንግ ሂሳብ በጥቅል ያቀርባሉ። ለምሳሌ፣ መሰረታዊ የቁጠባ ሂሳብ በ5000 ብር የሚከፈት ሲሆን፣ የፕሬስቲጅ ቁጠባ ሂሳብ ደግሞ 100,000 ብር ወርሃዊ ዝቅተኛ ቀሪ ሂሳብ ለሚያስቀምጡ ደንበኞች ነው።",
+  "contentHash": "b1a1b386e0b75de29bcf3a03fe7d594ef69e6b2d",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-business-banking-business-loans": {
+  "titleAm": "የዘመን ባንክ የንግድ ባንክ አገልግሎት የንግድ ብድሮች",
+  "summaryAm": "የዘመን ባንክ ለንግድ ስራዎች የስራ ማስኬጃ ካፒታል፣ የንብረት ፋይናንስ ወይም የፕሮጀክት ፋይናንስ የሚያስፈልጋቸውን የተለያዩ የብድር አማራጮችን ያቀርባል። የብድር ውሳኔዎች የሚሰጡት በሀገር ውስጥ ባለሙያዎች ሲሆን፣ ፈጣን ማፅደቅ እና ብጁ መፍትሄዎችን ያረጋግጣሉ። ባንኩ የአጭር ጊዜ (እስከ 12 ወራት)፣ የመካከለኛ ጊዜ (እስከ 5 ዓመታት) እና የረጅም ጊዜ (ከ 5 ዓመታት በላይ) ብድሮችን ያቀርባል።",
+  "contentHash": "6588a94ba2dcc4cb5a4462ceb502d80857513efe",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-business-banking-business-product": {
+  "titleAm": "የዘመን ባንክ የንግድ ባንክ አገልግሎት ምርቶች",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ ለንግድ ስራ የሚያቀርባቸውን የተለያዩ የባንክ አገልግሎት ምርቶች ያብራራል። የንግድ መሰረታዊ ሂሳብ፣ የንግድ ቁጠባ ሂሳብ እና ኦቨርድራፍት ጥበቃን ጨምሮ የተለያዩ አማራጮችን ያቀርባል። ባንኩ የኢንተርኔት ባንኪንግ፣ የሞባይል ባንኪንግ እና የበር ላይ ባንኪንግን ጨምሮ ሁሉን አቀፍ የባንክ አገልግሎቶችን በ24/7 ተደራሽነት ያቀርባል።",
+  "contentHash": "6c9cd9a15b24ad422c64a60dc54431fa7cd9aa37",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-cybersecurity": {
+  "titleAm": "የዘመን ባንክ፡ እገዛ፣ ቅሬታና ደኅንነት - ሳይበር ደኅንነት",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ የደንበኞችን ሚስጥራዊ መረጃ ለመጠበቅ የሚወስዳቸውን እርምጃዎች ያብራራል። ደንበኞች የማንነት ስርቆት እና ማጭበርበር ሰለባ የመሆን እድላቸውን ለመቀነስ ሊወስዷቸው የሚገቡ ቅድመ ጥንቃቄዎችን ያሳያል። ባንኩ ደንበኞች መለያቸውን ለመጠበቅ እና የማንነት ስርቆትን ለመከላከል የሚረዱ ምክሮችን ይሰጣል።",
+  "contentHash": "8126030a89366efcd984c75203bad44bb9dad0a3",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-digital-services-atm-pos": {
+  "titleAm": "የዘመን ባንክ ዲጂታል አገልግሎቶች: ATM POS",
+  "summaryAm": "ባንኩ ለደንበኞች ምቾት ሲባል 300 ኤቲኤም እና ከ100 በላይ የPOS ማሽኖችን በመላ አገሪቱ እና በተለያዩ የነጋዴዎች ቦታዎች ላይ አስቀምጧል። እነዚህ ማሽኖች ሁሉንም የአገር ውስጥ ካርዶችን እንዲሁም ቪዛ እና ማስተር ካርዶችን ይቀበላሉ።",
+  "contentHash": "9b0391f8da18e2796f8e53e00f895ee44d325042",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-digital-services-card-services": {
+  "titleAm": "የዘመን ባንክ ዲጂታል አገልግሎቶች: የካርድ አገልግሎቶች",
+  "summaryAm": "የዘመን ባንክ የካርድ ግላዊነት ማላበስ አገልግሎቶችን ይሰጣል፣ በኢንዱስትሪው ውስጥ የራሱ የ PCI DSS ደረጃዎችን የሚያከብር የካርድ ግላዊነት ማላበሻ ቢሮ ካላቸው ጥቂት ባንኮች አንዱ ነው። ባንኩ የፕላቲነም ቅድመ ክፍያ የጉዞ ማስተርካርድን ጨምሮ የተለያዩ ምርቶችን ያቀርባል፣ ይህም ዓለም አቀፍ የጉዞ ካርድን ያስተዋወቀ የመጀመሪያው የኢትዮጵያ ባንክ ያደርገዋል። የዴቢት ካርዶች፣ የቅድመ ክፍያ የአገር ውስጥ ካርዶች እና የስጦታ ካርዶችን ጨምሮ የተለያዩ የካርድ አይነቶችን ያቀርባል።",
+  "contentHash": "07ff6175a75cd3f57f724b299cd126dbf6e757b0",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-digital-services-digital-remittance-services": {
+  "titleAm": "የዘመን ባንክ ዲጂታል የገንዘብ ልውውጥ አገልግሎቶች",
+  "summaryAm": "የዘመን ባንክ ከፊንቴክ ኩባንያዎች እና የክፍያ መሳሪያ አውጪዎች ጋር በመተባበር ዲጂታል የገንዘብ ልውውጥ አገልግሎት አስተዋውቋል። ይህ አገልግሎት በውጭ የሚኖሩ ግለሰቦች ከቤታቸው ሆነው ገንዘብ ወደ ኢትዮጵያ ለመላክ ያስችላል። አገልግሎቱ ፈጣን፣ ተመጣጣኝ እና ቀላል ሲሆን፣ ምንም አይነት የአገልግሎት ክፍያ ወይም ኮሚሽን የለውም።",
+  "contentHash": "3124cd9b34cdf77b74cb0873724afab836dee2c0",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-digital-services-digitalization-and-partnership": {
+  "titleAm": "የዘመን ባንክ ዲጂታል አገልግሎቶች: ዲጂታላይዜሽን እና ሽርክና",
+  "summaryAm": "የዘመን ባንክ በዲጂታላይዜሽን ከፍተኛ እድገት እያሳየ ሲሆን፣ የ MPGS ኢ-ኮሜርስ መድረክን በማስተርካርድ በመተባበር በሀገሪቱ የመጀመሪያው ባንክ ሆኗል። ባንኩ ከፊንቴክስ እና የክፍያ መሳሪያ አቅራቢዎች ጋር በርካታ ውህደቶችን በማድረግ እና የዲጂታል ቻናል አገልግሎቶችን በነጻ በማቅረብ የደንበኞችን ተሞክሮ አሻሽሏል። ከጠቅላላ የባንክ ግብይቶች ውስጥ አብዛኛዎቹ በዲጂታል ቻናሎች የተከናወኑ ሲሆን ይህም የባንኩን ስኬት ያሳያል።",
+  "contentHash": "9bb2b8fa63c62f6f313ddd7ffea61f7d9e527747",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-digital-services-internet-banking-services": {
+  "titleAm": "የዘመን ባንክ የኢንተርኔት እና የሞባይል ባንኪንግ አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ የኢንተርኔት እና የሞባይል ባንኪንግ አገልግሎቶችን ያብራራል። እነዚህ አገልግሎቶች ደንበኞች የፋይናንስ መረጃቸውን በቀን 24 ሰዓት፣ በሳምንት 7 ቀን እንዲያገኙ ያስችላቸዋል። አገልግሎቶቹ የሂሳብ ቀሪ ሂሳብ ማየት፣ ገንዘብ ማስተላለፍ፣ የአየር ሰዓት መሙላት፣ የክፍያ መጠየቂያዎችን መክፈል እና ሌሎች በርካታ ተግባራትን ያካትታሉ።",
+  "contentHash": "25be084e90d8bb14a266603995d38697f8f3b1e7",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-digital-services-z-school-payment-and-management": {
+  "titleAm": "የዘመን ባንክ ዲጂታል አገልግሎቶች: Z- School ክፍያ እና አስተዳደር",
+  "summaryAm": "ይህ ገጽ ወላጆች የትምህርት ቤት ክፍያዎችን እና ሌሎች ወጪዎችን በኦንላይን እንዲከፍሉ የሚያስችል የዘመን ባንክን Z- School ክፍያ እና አስተዳደር ስርዓት ያብራራል። ስርዓቱ የክፍያ ማስታወሻዎችን፣ የልጆችን የትምህርት ሂደት መረጃዎችን እና የዕለት ተዕለት ክትትል ሁኔታን በቴሌግራም ቦት በኩል ያቀርባል። አገልግሎቱ 24/7 የሚገኝ ሲሆን ወላጆች በዘመን ሞባይል እና ኢንተርኔት ባንኪንግ ወይም በባንክ ቅርንጫፍ በኩል ክፍያዎችን እንዲፈጽሙ ያስችላል።",
+  "contentHash": "4b690479777ca6b086ec97d4b48221568d7bb97b",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-digital-services": {
+  "titleAm": "የዘመን ባንክ ዲጂታል አገልግሎቶች",
+  "summaryAm": "የዘመን ባንክ ዲጂታል አገልግሎቶች በኦምኒ-ቻናል ባንኪንግ አማካኝነት ለደንበኞች ፍላጎት የተበጁ ናቸው። ባንኩ 300 ኤቲኤም እና ከ100 በላይ የPOS ማሽኖችን በመላ አገሪቱ በማሰማራት የ24 ሰዓት አገልግሎት ይሰጣል። በተጨማሪም የኢንተርኔት ባንኪንግ፣ የሞባይል ባንኪንግ፣ የዴቢት ካርዶች፣ የደመወዝ ካርዶች፣ የቅድመ ክፍያ ካርዶች እና የስጦታ ካርዶችን ያቀርባል።",
+  "contentHash": "552858e0268329521f9e14f1a21ab0530dca2999",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-faq": {
+  "titleAm": "የዘመን ባንክ፡ እገዛ፣ ቅሬታና ደኅንነት - በተደጋጋሚ የሚነሱ ጥያቄዎች",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክን በተመለከተ በተደጋጋሚ የሚነሱ ጥያቄዎችን ይመልሳል። ስለ ባንኩ የስራ ሰዓት፣ የእውቂያ መንገዶች (6500፣ customerservice@zemenbank.com)፣ የሂሳብ አይነቶች፣ የመስመር ላይ ባንኪንግ እና የሞባይል ባንኪንግ አገልግሎቶች መረጃ ይሰጣል። እንዲሁም ስለ ብድር አይነቶች አጭር መግለጫ ይዟል።",
+  "contentHash": "ed11d557e5e915eb1289935118805ff7b5d9c6e3",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-international-banking-2-forex-service": {
+  "titleAm": "የዘመን ባንክ የውጭ ምንዛሪና ዓለም አቀፍ አገልግሎት",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ ስለሚያቀርባቸው የውጭ ምንዛሪ አገልግሎቶች ያብራራል። ባንኩ ለውጭ አካላት፣ ለኢትዮጵያ ነዋሪዎች፣ ለውጭ ሀገር ነዋሪ ኢትዮጵያውያን እና ኢትዮጵያዊ ዝርያ ላላቸው ሰዎች የውጭ ምንዛሪ ሂሳቦችን ያቀርባል። በተጨማሪም፣ ለዕቃዎችና አገልግሎቶች ላኪዎች እንዲሁም በብሔራዊ ባንክ ፈቃድ ለተሰጣቸው ነጋዴዎች የ Retention Account አገልግሎት ይሰጣል።",
+  "contentHash": "b67f7ab92bb6d333268d4a2a4eba8e902dd98ebc",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-international-banking-2-import-and-export": {
+  "titleAm": "የዘመን ባንክ የውጭ ምንዛሪና ዓለም አቀፍ የንግድ አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ ስለሚያቀርባቸው የውጭ ምንዛሪና ዓለም አቀፍ የባንክ አገልግሎቶች ያብራራል። ባንኩ ለገቢና ወጪ ንግድ የሚያስፈልጉ የብድር ደብዳቤ (L/C) ምርቶችን፣ የገቢና ወጪ ንግድ ፋይናንስን እንዲሁም የክፍያ መሰብሰቢያ አገልግሎቶችን ይሰጣል። የዘመን ባንክ የብድር ደብዳቤ (L/C) ፋይናንስን፣ የቅድመ እና ድህረ ጭነት ፋይናንስን፣ የኤክስፖርት ዋስትናዎችን እና የ L/C on-Credit አገልግሎቶችን ያቀርባል።",
+  "contentHash": "8327726b9a574384887225cde5d0b82d8c05af1e",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-international-banking-2-international-wire-transfers": {
+  "titleAm": "የዘመን ባንክ የውጭ ምንዛሪና ዓለም አቀፍ የገንዘብ ዝውውር አገልግሎቶች",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ ስለሚያቀርባቸው የውጭ ምንዛሪና ዓለም አቀፍ የገንዘብ ዝውውር አገልግሎቶች ያብራራል። ባንኩ የገቢ የውጭ ምንዛሪዎችን በፍጥነት የሚቀበል ሲሆን፣ የውጭ ሀገር የገንዘብ ዝውውሮችንም በፍጥነት ያከናውናል። በተጨማሪም፣ ባንኩ እንደ የጨረታ ማስያዣ፣ የውል አፈጻጸም፣ የቅድሚያ ክፍያ እና የጉምሩክ ዋስትናዎችን የመሳሰሉ የተለያዩ የባንክ ዋስትናዎችን ይሰጣል።",
+  "contentHash": "620084ce72cba8991f1c64d377fa6ba3bbb45ef4",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-personal-banking-2-certificate-of-deposit": {
+  "titleAm": "የዘመን ባንክ የሂሳብና ተቀማጭ አገልግሎት: ሰርተፍኬት ኦፍ ዲፖዚት",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ ስለሚያቀርበው ሰርተፍኬት ኦፍ ዲፖዚት (CDs) ምርት ያብራራል። ሲዲዎች ገንዘብን ለተወሰነ ጊዜ ለማስቀመጥ እና ከፍተኛ የወለድ ተመን ለማግኘት የሚያስችል መሳሪያ ናቸው። የዘመን ባንክ ሲዲዎች ዝቅተኛው የኢንቨስትመንት መጠን 1,000,000 ብር ሲሆን ወለዱን ወዲያውኑ የመክፈል ልዩ ጥቅም አላቸው።",
+  "contentHash": "416ef5bad7bfb79c080f40406a08e65b28eb67d4",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-personal-banking-2-consumer-checking-deposit": {
+  "titleAm": "የዘመን ባንክ የሸማቾች የቼኪንግ ተቀማጭ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ ስለሚያቀርባቸው የሸማቾች የቼኪንግ ተቀማጭ ሂሳቦች ያብራራል። ሶስት አይነት የቼኪንግ ሂሳቦች አሉ፡ የግል ቼኪንግ፣ ፕሬስቲጅ ቼኪንግ እና Z-Club ቼኪንግ። እያንዳንዱ ሂሳብ ለመክፈት 5,000 ብር ዝቅተኛ ተቀማጭ ገንዘብ ይፈልጋል።",
+  "contentHash": "84f49f9f4169ed20c716d0bd21037b96bc63987e",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-personal-banking-2-consumer-deposit": {
+  "titleAm": "የዘመን ባንክ የሸማቾች ቁጠባ ተቀማጭ ሂሳብ",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ የሸማቾች ቁጠባ ተቀማጭ ምርቶችን ያብራራል። እነዚህም መሰረታዊ ቁጠባ፣ የግል ቁጠባ፣ Prestige Saving Account፣ Z-Club Special Saving Accounts፣ እና ሌሎችም ይገኙበታል። ሂሳብ ለመክፈት ዝቅተኛው የገንዘብ መጠን 5,000 ብር ሲሆን፣ ወለድ የሚሰላው በየቀኑ ዝቅተኛ ቀሪ ሂሳብ ላይ ነው።",
+  "contentHash": "915f95a661a134f7f88fe667eb477dbed476f4e5",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-personal-banking-2-foreign-currency-fcy-accounts": {
+  "titleAm": "የዘመን ባንክ ሂሳብና ተቀማጭ: የውጭ ምንዛሪ (FCY) ሂሳቦች",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ የውጭ ምንዛሪ (FCY) ሂሳቦችን በተመለከተ መረጃ ይሰጣል። ብቁ ግለሰቦች እና አካላት በUSD፣ GBP ወይም ዩሮ ሂሳቦችን መክፈት የሚችሉ ሲሆን፣ የመጀመሪያ የ100 ዶላር/ዩሮ/ፓውንድ ተቀማጭ ገንዘብ ያስፈልጋል። ሂሳብ ያዥዎች በሂሳብ ቀሪ ሂሳብ ላይ ማራኪ የወለድ ተመን ማግኘት የሚችሉ ሲሆን፣ ለተሻለ የወለድ ተመን ደግሞ ቢያንስ ለሶስት ወራት ጊዜ 5000 ዶላር ወይም ተመጣጣኝ የውጭ ምንዛሪ በጊዜ ተቀማጭ ማስቀመጥ ይችላሉ።",
+  "contentHash": "de42ce9d5b8e6e8166555daf64eaa897718baecd",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-tariff": {
+  "titleAm": "የዘመን ባንክ ክፍያዎችና ታሪፍ",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክን የተለያዩ አገልግሎቶች ክፍያዎችና ታሪፎች ያብራራል። የዴቢት ካርድ ለመጀመሪያ ጊዜ ሲወጣ ነፃ ሲሆን፣ እንደገና ለማውጣት 100 ብር ያስከፍላል። የZemen Platinum Travel Prepaid MasterCard ለመጀመሪያ ጊዜ ሲወጣ 500 ብር ሲሆን፣ ከFCY አካውንት ሲጫን 1.0% የአገልግሎት ክፍያ አለው።",
+  "contentHash": "f2754ffe88b33cd3d667efac6cf8ac7c5a09d385",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ },
+ "zemen-we-care": {
+  "titleAm": "የዘመን ባንክ: እገዛ፣ ቅሬታና ደኅንነት - We Care",
+  "summaryAm": "ይህ ገጽ የዘመን ባንክ አገልግሎቶችን ለሁሉም ተደራሽ ለማድረግ ያለውን ቁርጠኝነት ያሳያል። በተለይም የማየትና የመስማት ችግር ያለባቸው ግለሰቦች አገልግሎቶችን በቀላሉ እንዲያገኙ ለመርዳት ታስቦ የተዘጋጀ ነው። ገጹ ስለ Zemen Internet Banking፣ Z-Cash Purchase፣ Transfer Money to an External Account፣ Airtime Top up፣ How to Top up Telebirr እና Zemen Bank Mobile Banking መረጃዎችን ያቀርባል።",
+  "contentHash": "26cded94707e89074fdab83b3004b1352463fce3",
+  "generatedAt": "2026-09-16",
+  "model": "gemini-2.5-flash"
+ }
+}

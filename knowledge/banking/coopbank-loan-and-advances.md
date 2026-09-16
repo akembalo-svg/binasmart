@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/loan-and-advances"
 title: "Cooperative Bank of Oromia — Loan and Advances"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ ብድር እና ቅድሚያ ክፍያዎች"
 source_name: "Cooperative Bank of Oromia"
 section: "loans"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Loan and Advances
+# Cooperative Bank of Oromia — Loan and Advances · የኦሮሚያ ኅብረት ሥራ ባንክ ብድር እና ቅድሚያ ክፍያዎች
 
 Cooperative Bank of Oromia — loans — Loan and Advances. On this page: To Fit The Existing or Future Demands of The Economy.
 
 በአማርኛ፦ ብድር — Loan and Advances። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ባንኩ የኢኮኖሚውን እና የደንበኞቹን ፍላጎት ለማሟላት ሰፊ የብድር ምርቶችን ያቀርባል። ማንኛውም የብድር አመልካች ብድር ከማመልከቱ በፊት በባንኩ ቅርንጫፎች በአንዱ የቼኪንግ ወይም የቁጠባ ሂሳብ መክፈት አለበት። አመልካቾች የንግድ ፈቃድ፣ የግብር መለያ ቁጥር (TIN) እና የግብር ክሊራንስ ሰርተፍኬት ማቅረብ አለባቸው።
 
 Source: https://coopbankoromia.com.et/loan-and-advances (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

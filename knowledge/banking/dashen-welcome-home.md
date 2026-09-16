@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/welcome-home"
 title: "Dashen Bank — Welcome Home"
+titleAm: "የዳሽን ባንክ የዲያስፖራ ሂሳቦች: እንኳን ደህና መጡ"
 source_name: "Dashen Bank"
 section: "diaspora"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Welcome Home
+# Dashen Bank — Welcome Home · የዳሽን ባንክ የዲያስፖራ ሂሳቦች: እንኳን ደህና መጡ
 
 Dashen Bank — diaspora — Welcome Home. On this page: Conventional Diaspora Banking Products & Services, Interest Free Banking Diaspora Banking Products and Services, Dashen Bank S.C..
 
 በአማርኛ፦ የዲያስፖራ ሂሳቦች — Welcome Home። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ ለዲያስፖራ የሚያቀርባቸውን የባንክ አገልግሎቶች ያብራራል። ባንኩ ከ500 በላይ ቅርንጫፎች፣ 16 የውጭ ምንዛሪ መስኮቶች እና 9 የውጭ ምንዛሪ ቢሮዎች ያሉት ሲሆን፣ ከ462 ባንኮች ጋር የደብዳቤ ልውውጥ ግንኙነት አለው። ከእነዚህ አገልግሎቶች መካከል የውጭ ምንዛሪ ተቀማጭ ሂሳቦች እና የዲያስፖራ የሸማቾች ብድር (የመኪና፣ የቤት እና የግል ብድር) ይገኙበታል።
 
 Source: https://dashenbanksc.com/welcome-home (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

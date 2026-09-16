@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/other-services"
 title: "Cooperative Bank of Oromia — Other Services"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ: ሌሎች አገልግሎቶች እና ተደጋጋሚ ጥያቄዎች"
 source_name: "Cooperative Bank of Oromia"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Other Services
+# Cooperative Bank of Oromia — Other Services · የኦሮሚያ ኅብረት ሥራ ባንክ: ሌሎች አገልግሎቶች እና ተደጋጋሚ ጥያቄዎች
 
 Cooperative Bank of Oromia — help — Other Services. On this page: Diaspora Banking, How to open your account with us, Accompanying Documents, REMIT WITH CBO, At CBO.
 
 በአማርኛ፦ ተደጋጋሚ ጥያቄዎች — Other Services። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው ሌሎች አገልግሎቶች መረጃ ይሰጣል። ከእነዚህም መካከል የቁጠባ ሂሳብ፣ የዳያስፖራ ባንኪንግ አገልግሎቶች እና የሂሳብ አከፋፈት ሂደቶች ይገኙበታል። በተጨማሪም ገንዘብ ወደ ባንኩ እንዴት መላክ እንደሚቻል እና በባንኩ የሚሰጡ የደንበኞች አገልግሎቶች ተብራርተዋል።
 
 Source: https://coopbankoromia.com.et/other-services (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

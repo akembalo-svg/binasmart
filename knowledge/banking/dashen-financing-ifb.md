@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/financing-ifb"
 title: "Dashen Bank — Financing"
+titleAm: "የዳሽን ባንክ ወለድ አልባ ባንክ የፋይናንስ አገልግሎቶች"
 source_name: "Dashen Bank"
 section: "ifb"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Financing
+# Dashen Bank — Financing · የዳሽን ባንክ ወለድ አልባ ባንክ የፋይናንስ አገልግሎቶች
 
 Dashen Bank — ifb — Financing. On this page: Murabaha Financing – Working Capital, Murabaha Financing – Investment, Qard Pre-shipment Export Financing.
 
 በአማርኛ፦ ወለድ አልባ ባንክ — Financing። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ ወለድ አልባ ባንክ የሚያቀርባቸውን የፋይናንስ አገልግሎቶች ያብራራል። ከእነዚህም መካከል ለሥራ ማስኬጃ የሚውል ሙራባሃ ፋይናንሲንግ እስከ 3 ዓመት፣ ለኢንቨስትመንት የሚውል ሙራባሃ ፋይናንሲንግ እስከ 5 ዓመት እና ለውጭ ንግድ የሚውል ቀርድ ቅድመ-ጭነት ኤክስፖርት ፋይናንሲንግ እስከ 4 ወር የሚቆዩ አገልግሎቶች ይገኙበታል። ከብር 5.0 ሚሊዮን በላይ ለሆኑ የፋይናንስ ጥያቄዎች ኦዲት የተደረጉ የፋይናንስ መግለጫዎች ያስፈልጋሉ።
 
 Source: https://dashenbanksc.com/financing-ifb (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

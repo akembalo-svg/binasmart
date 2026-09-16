@@ -1,6 +1,7 @@
 ---
 url: "https://ecma.gov.et/regulatory-sandbox"
 title: "Ethiopian Capital Market Authority — Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website"
+titleAm: "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን የሙከራ ማዕቀፍ (Regulatory Sandbox)"
 source_name: "Ethiopian Capital Market Authority"
 section: "sandbox"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Ethiopian Capital Market Authority — Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website
+# Ethiopian Capital Market Authority — Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website · የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን የሙከራ ማዕቀፍ (Regulatory Sandbox)
 
 Ethiopian Capital Market Authority — sandbox — Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website. On this page: Regulatory Sandbox, Innovate, Test, Transform, Why Engage with the Regulatory Sandbox?, Regulatory Guidance, Safe Testing Environment, Faster Market Entry.
 
 በአማርኛ፦ የሙከራ ማዕቀፍ — Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website። ይህ ገጽ ከኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA) ከInnovative Finance Lab (IFL) ጋር በመተባበር ያዘጋጀውን የካፒታል ገበያ የሙከራ ማዕቀፍ (Regulatory Sandbox) ያስተዋውቃል። የሙከራ ማዕቀፉ አዳዲስ የካፒታል ገበያ ምርቶችን፣ አገልግሎቶችን እና የንግድ ሞዴሎችን ለመፈተሽ ደህንነቱ የተጠበቀ እና ቁጥጥር የሚደረግበት መድረክ ያቀርባል። ፈጠራዎችን በደህንነት ለመፈተሽ፣ የቁጥጥር መመሪያ ለማግኘት እና ወደ ገበያ የመግባት ሂደትን ለማፋጠን ያስችላል።
 
 Source: https://ecma.gov.et/regulatory-sandbox (official Ethiopian Capital Market Authority page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

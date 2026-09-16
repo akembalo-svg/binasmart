@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/contact-dashen-bank"
 title: "Dashen Bank — Contact Dashen Bank"
+titleAm: "የዳሽን ባንክ የእገዛ፣ ቅሬታና ደኅንነት አገልግሎት አድራሻዎች"
 source_name: "Dashen Bank"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Contact Dashen Bank
+# Dashen Bank — Contact Dashen Bank · የዳሽን ባንክ የእገዛ፣ ቅሬታና ደኅንነት አገልግሎት አድራሻዎች
 
 Dashen Bank — help — Contact Dashen Bank. On this page: Drop us a Message, Contact Address, Dashen Bank Headquarter.
 
 በአማርኛ፦ እገዛ፣ ቅሬታና ደኅንነት — Contact Dashen Bank። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክን ለማግኘት የሚያስችሉ የተለያዩ የመገናኛ መንገዶችን ያቀርባል። ባንኩን በስልክ ቁጥር 6333፣ በዋትስአፕ +251 911575827፣ በፋክስ +251 11 557 8428፣ በፖ.ሳ.ቁ 12752፣ በኢሜል info@dashenbanksc.com እና በድረ-ገጽ www.dashenbanksc.com ማግኘት ይቻላል። በተጨማሪም በቴሌግራም፣ ፌስቡክ፣ ትዊተር፣ ሊንክድኢን፣ ኢንስታግራም እና ቲክቶክ ባሉ ይፋዊ የማህበራዊ ሚዲያ ገጾች ላይ ይገኛል።
 
 Source: https://dashenbanksc.com/contact-dashen-bank (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

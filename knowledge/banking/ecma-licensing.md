@@ -1,6 +1,7 @@
 ---
 url: "https://ecma.gov.et/licensing"
 title: "Ethiopian Capital Market Authority — Licensing – Ethiopian Capital Market Authority (ECMA) | Official Website"
+titleAm: "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ ፈቃድ አሰጣጥ"
 source_name: "Ethiopian Capital Market Authority"
 section: "licensing"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Ethiopian Capital Market Authority — Licensing – Ethiopian Capital Market Authority (ECMA) | Official Website
+# Ethiopian Capital Market Authority — Licensing – Ethiopian Capital Market Authority (ECMA) | Official Website · የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ ፈቃድ አሰጣጥ
 
 Ethiopian Capital Market Authority — licensing — Licensing – Ethiopian Capital Market Authority (ECMA) | Official Website. On this page: Licensing, Overview, Submission of Applications, Required Documents, Contact Information.
 
 በአማርኛ፦ ፈቃድ አሰጣጥ — Licensing – Ethiopian Capital Market Authority (ECMA) | Official Website። ይህ ገጽ ከኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA) ለአማላጆች ፈቃድ የመስጠት፣ ከዋስትና ሰጪዎች የሚቀርቡ ማመልከቻዎችን የመገምገም እና የተለያዩ የካፒታል ገበያ ምርቶችን የማጽደቅ ኃላፊነት አለበት። ፈቃድ ለማግኘት የራስ ምዘና ቅጽን ማጠናቀቅ፣ የንግድ እቅድ፣ የፋይናንስ መግለጫዎች እና መታወቂያ ሰነዶችን ማቅረብ ያስፈልጋል። ለበለጠ መረጃ በስልክ ቁጥር +251-11557-8250 ወይም በኢሜል licensing@ecma.gov.et ማግኘት ይቻላል።
 
 Source: https://ecma.gov.et/licensing (official Ethiopian Capital Market Authority page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

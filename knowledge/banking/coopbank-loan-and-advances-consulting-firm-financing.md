@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/loan-and-advances/consulting-firm-financing"
 title: "Cooperative Bank of Oromia — Consulting Firm Financing"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ ብድር: Consulting Firm Financing"
 source_name: "Cooperative Bank of Oromia"
 section: "loans"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Consulting Firm Financing
+# Cooperative Bank of Oromia — Consulting Firm Financing · የኦሮሚያ ኅብረት ሥራ ባንክ ብድር: Consulting Firm Financing
 
 Cooperative Bank of Oromia — loans — Consulting Firm Financing. On this page: For Professional Services.
 
 በአማርኛ፦ ብድር — Consulting Firm Financing። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ Consulting Firm Financing የተሰኘውን የአጭር ጊዜ ብድር ያብራራል። ብድሩ እንደ ምህንድስና፣ አይሲቲ፣ ህግ፣ የሂሳብ አያያዝ፣ አስተዳደር፣ ስነ-ህንፃ እና ስነ-ጥበብ ባሉ ሙያዊ አገልግሎቶች ላይ ለተሰማሩ የንግድ ባለሙያዎች የሥራ ማስኬጃ ካፒታል ፋይናንስ ለማድረግ ይሰጣል። ብድሩን ለማግኘት አመልካቹ ከሚመለከተው የመንግስት አካል የተሰጠ ትክክለኛ የሙያ ፈቃድ፣ ቢያንስ የሁለት ዓመት ልምድ፣ ወቅታዊ የፋይናንስ መግለጫዎች እና ተቀባይነት ያለው ዋስትና ማቅረብ አለበት።
 
 Source: https://coopbankoromia.com.et/loan-and-advances/consulting-firm-financing (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://ecma.gov.et/regulatory-sandbox/support-and-benefits"
 title: "Ethiopian Capital Market Authority — Support and Benefits – Ethiopian Capital Market Authority (ECMA) | Official Website"
+titleAm: "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን – የሙከራ ማዕቀፍ ድጋፍ እና ጥቅሞች"
 source_name: "Ethiopian Capital Market Authority"
 section: "sandbox"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Ethiopian Capital Market Authority — Support and Benefits – Ethiopian Capital Market Authority (ECMA) | Official Website
+# Ethiopian Capital Market Authority — Support and Benefits – Ethiopian Capital Market Authority (ECMA) | Official Website · የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን – የሙከራ ማዕቀፍ ድጋፍ እና ጥቅሞች
 
 Ethiopian Capital Market Authority — sandbox — Support and Benefits – Ethiopian Capital Market Authority (ECMA) | Official Website. On this page: Support and Benefits, Regulatory Support Tools.
 
 በአማርኛ፦ የሙከራ ማዕቀፍ — Support and Benefits – Ethiopian Capital Market Authority (ECMA) | Official Website። ይህ ገጽ ከኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+የኢትዮጵያ የካፒታል ገበያ የሙከራ ማዕቀፍ ተሳታፊዎች የፈጠራ ምርቶችን እና አገልግሎቶችን ለመፈተሽ እና ለማልማት የሚያስችል የቁጥጥር ድጋፍ፣ መመሪያ እና ስልታዊ ጥቅሞችን ይሰጣል። እያንዳንዱ ተሳታፊ ልዩ ፈጠራን የሚያመጣ በመሆኑ፣ ማዕቀፉ በግለሰብ ደረጃ የተበጀ የቁጥጥር ድጋፍ፣ ስልታዊ መመሪያ እና ቀጥተኛ ጥቅሞችን ያቀርባል። የሙከራ ማዕቀፉ የቁጥጥር ድጋፍ መሳሪያዎችን ያቀርባል፣ ከእነዚህም መካከል Testing Approval Letters (TALs) እና በሂደት ላይ ያለ መደበኛ ያልሆነ ግንኙነት ይገኙበታል።
 
 Source: https://ecma.gov.et/regulatory-sandbox/support-and-benefits (official Ethiopian Capital Market Authority page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

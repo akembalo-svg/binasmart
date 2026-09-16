@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/international-foreign-guarantee"
 title: "Dashen Bank — International [Foreign] Guarantee"
+titleAm: "የዳሽን ባንክ ወጪና ገቢ ንግድ፡ ኢንተርናሽናል [የውጭ] ዋስትና"
 source_name: "Dashen Bank"
 section: "trade"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — International [Foreign] Guarantee
+# Dashen Bank — International [Foreign] Guarantee · የዳሽን ባንክ ወጪና ገቢ ንግድ፡ ኢንተርናሽናል [የውጭ] ዋስትና
 
 Dashen Bank — trade — International [Foreign] Guarantee.
 
 በአማርኛ፦ ወጪና ገቢ ንግድ — International [Foreign] Guarantee። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ባንኩ በደንበኛ ጥያቄ ወይም መመሪያ የሚሰጣቸውን የጽሁፍ ዋስትናዎች ያብራራል። ከእነዚህም መካከል የመመለሻ ዋስትና፣ የቅድሚያ ክፍያ ዋስትና፣ የጨረታ ማስያዣ (ዋስትና) እና የአፈጻጸም ዋስትና ይገኙበታል። የጨረታ ማስያዣ ዋስትና የጨረታውን መጠን የተወሰነ መቶኛ ለምሳሌ 10% ሊሸፍን ይችላል።
 
 Source: https://dashenbanksc.com/international-foreign-guarantee (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

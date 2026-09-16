@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/local-guarantee-one-time-and-facility"
 title: "Dashen Bank — Local Guarantee (One time and Facility)"
+titleAm: "የዳሽን ባንክ የአገር ውስጥ ዋስትና (አንድ ጊዜ እና ፋሲሊቲ)"
 source_name: "Dashen Bank"
 section: "trade"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Local Guarantee (One time and Facility)
+# Dashen Bank — Local Guarantee (One time and Facility) · የዳሽን ባንክ የአገር ውስጥ ዋስትና (አንድ ጊዜ እና ፋሲሊቲ)
 
 Dashen Bank — trade — Local Guarantee (One time and Facility).
 
 በአማርኛ፦ ወጪና ገቢ ንግድ — Local Guarantee (One time and Facility)። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ ስለሚያቀርባቸው የተለያዩ የአገር ውስጥ ዋስትናዎች ያብራራል። እነዚህም የቅድሚያ ክፍያ፣ የውል አፈጻጸም፣ የገንዘብ ማቆያ፣ የአቅርቦት፣ የትዕዛዝ፣ የኪራይ ክፍያ፣ የብድር አገልግሎት፣ የብድር ሽያጭ እና የጉምሩክ ቦንድ ዋስትናዎችን ያካትታሉ። ከብር 5.0 ሚሊዮን እና ከዚያ በላይ የሆኑ ጥያቄዎች በኦዲት የተደረጉ የፋይናንስ መግለጫዎች መደገፍ አለባቸው።
 
 Source: https://dashenbanksc.com/local-guarantee-one-time-and-facility (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

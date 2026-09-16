@@ -16,6 +16,14 @@
 // that is NOT contaminated says so: questions whose gold page is in the question's own language score
 // 70.0% as shipped and 83.3% on retrieval, against 40.0% for the thirty Amharic questions whose only
 // gold page is in English. Raise these thresholds when that gap is closed, never to make a run pass.
+//
+// 2026-09-17, Task 10b: the gap was narrowed, so the floors below are raised - to what a measured run
+// achieved, and not one tenth of a point further. Every English document of the pack now carries an
+// Amharic title and an Amharic key-fact summary in its header, generated from that page's own text by
+// ops/packs/am-headers.js and checked digit by digit against it. All 60: 66.7% retrieval, 61.7% as
+// shipped. Amharic: 60.0% as shipped. The thirty Amharic questions whose only gold page is English went
+// from 30.0% to 50.0% on retrieval; the ten on Amharic pages held at 90.0%. The design's 90.0% is still
+// not met and the cross-lingual gap is still 23.3 points: an Amharic header is not an Amharic page.
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('fs');
@@ -38,8 +46,9 @@ test('the right page is in the top three at least as often as it was measured', 
   const j = JSON.parse(fs.readFileSync(path.join(DIR, files[files.length - 1]), 'utf8'));
   const all = j.table.find(t => /^all questions/.test(t.name));
   const shipped = Number(String(all.shipped).replace('%', ''));
-  // The design's target was 90.0. Measured 2026-09-17: 55.0. See the note at the top of this file.
-  assert.ok(shipped >= 55, 'as shipped is ' + all.shipped + ', the measured floor is 55.0% (the design target was 90.0%)');
+  // The design's target was 90.0. Measured 2026-09-17: 55.0, then 61.7 once every English document
+  // carried an Amharic header. See the note at the top of this file.
+  assert.ok(shipped >= 61.7, 'as shipped is ' + all.shipped + ', the measured floor is 61.7% (the design target was 90.0%)');
 });
 
 test('the Amharic slice is not carried by the English one', { skip: !files.length && 'no banking benchmark yet' }, () => {
@@ -47,9 +56,9 @@ test('the Amharic slice is not carried by the English one', { skip: !files.lengt
   const am = j.table.find(t => /^\s*Amharic/.test(t.name));
   assert.ok(am && am.n === 40, 'the Amharic slice should hold 40 questions');
   const pct = Number(String(am.shipped).replace('%', ''));
-  // The design wanted 85. Measured 2026-09-17: 52.5, and the English slice is 60.0, so the Amharic slice
-  // is not being carried by the English one - both are low, and for the same reason.
-  assert.ok(pct >= 52.5, 'the Amharic slice is ' + am.shipped + '; the measured floor is 52.5% (the design target was 85%)');
+  // The design wanted 85. Measured 2026-09-17: 52.5, then 60.0 with the Amharic headers, against 65.0
+  // for the English slice - so the Amharic slice is still not being carried by the English one.
+  assert.ok(pct >= 60, 'the Amharic slice is ' + am.shipped + '; the measured floor is 60.0% (the design target was 85%)');
 });
 
 test('the same-language slice still beats the cross-lingual one', { skip: !files.length && 'no banking benchmark yet' }, () => {

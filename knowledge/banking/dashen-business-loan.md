@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/business-loan"
 title: "Dashen Bank — Business Loan"
+titleAm: "የዳሽን ባንክ የንግድ ብድር"
 source_name: "Dashen Bank"
 section: "loans"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Business Loan
+# Dashen Bank — Business Loan · የዳሽን ባንክ የንግድ ብድር
 
 Dashen Bank — loans — Business Loan. On this page: Working Capital Loan, Term Loan, Overdraft Facility, Advance on Letter of Credit (Advance on L/C), Merchandise Loan, Investment / Project Loan.
 
 በአማርኛ፦ ብድር — Business Loan። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ የንግድ ብድር አገልግሎቶችን ያብራራል። የሥራ ማስኬጃ ካፒታል ብድር፣ የጊዜ ብድር እና ኦቨርድራፍት ፋሲሊቲን ጨምሮ የተለያዩ የብድር አይነቶችን ያቀርባል። የጊዜ ብድር ከ3 ወር እስከ 5 ዓመት የሚደርስ ሲሆን፣ ኦቨርድራፍት ፋሲሊቲ ደግሞ እስከ 12 ወር የሚቆይ ነው።
 
 Source: https://dashenbanksc.com/business-loan (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/we-care"
 title: "Zemen Bank — We Care"
+titleAm: "የዘመን ባንክ: እገዛ፣ ቅሬታና ደኅንነት - We Care"
 source_name: "Zemen Bank"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — We Care
+# Zemen Bank — We Care · የዘመን ባንክ: እገዛ፣ ቅሬታና ደኅንነት - We Care
 
 Zemen Bank — help — We Care. On this page: We Care: Empowering Accessibility for All.
 
 በአማርኛ፦ እገዛ፣ ቅሬታና ደኅንነት — We Care። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዘመን ባንክ አገልግሎቶችን ለሁሉም ተደራሽ ለማድረግ ያለውን ቁርጠኝነት ያሳያል። በተለይም የማየትና የመስማት ችግር ያለባቸው ግለሰቦች አገልግሎቶችን በቀላሉ እንዲያገኙ ለመርዳት ታስቦ የተዘጋጀ ነው። ገጹ ስለ Zemen Internet Banking፣ Z-Cash Purchase፣ Transfer Money to an External Account፣ Airtime Top up፣ How to Top up Telebirr እና Zemen Bank Mobile Banking መረጃዎችን ያቀርባል።
 
 Source: https://zemenbank.com/we-care (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

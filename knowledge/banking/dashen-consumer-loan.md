@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/consumer-loan"
 title: "Dashen Bank — Consumer Loan"
+titleAm: "የዳሽን ባንክ የብድር አገልግሎት: የሸማቾች ብድር"
 source_name: "Dashen Bank"
 section: "loans"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Consumer Loan
+# Dashen Bank — Consumer Loan · የዳሽን ባንክ የብድር አገልግሎት: የሸማቾች ብድር
 
 Dashen Bank — loans — Consumer Loan. On this page: Mortgage Loan, Car Loan, Student Loan, Personal Loan.
 
 በአማርኛ፦ ብድር — Consumer Loan። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ የሸማቾች ብድር አገልግሎቶችን ያብራራል። የሞርጌጅ ብድር ለግለሰቦች የመኖሪያ ቤት ግዢ ወይም ግንባታ የሚሰጥ ሲሆን እስከ 90% የሚሆነውን ወጪ ይሸፍናል። የመኪና ብድር ለአዲስ መኪና እስከ 80% እና ለአሮጌ መኪና እስከ 85% የሚሆነውን ወጪ የሚሸፍን ሲሆን ለሁለቱም ብድሮች ረጅም የመክፈያ ጊዜ እስከ 20 ዓመት ይሰጣል።
 
 Source: https://dashenbanksc.com/consumer-loan (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

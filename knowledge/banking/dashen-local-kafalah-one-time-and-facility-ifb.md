@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/local-kafalah-one-time-and-facility-ifb"
 title: "Dashen Bank — Local Kafalah (One time and Facility)"
+titleAm: "የዳሽን ባንክ ወጪና ገቢ ንግድ: Local Kafalah"
 source_name: "Dashen Bank"
 section: "trade"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Local Kafalah (One time and Facility)
+# Dashen Bank — Local Kafalah (One time and Facility) · የዳሽን ባንክ ወጪና ገቢ ንግድ: Local Kafalah
 
 Dashen Bank — trade — Local Kafalah (One time and Facility).
 
 በአማርኛ፦ ወጪና ገቢ ንግድ — Local Kafalah (One time and Facility)። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ስለ Local Kafalah አገልግሎት ያብራራል። Local Kafalah ከሂሳብ ውጪ የሚደረግ ብድር ሲሆን፣ ለተለያዩ ዓላማዎች እንደ ቅድመ ክፍያ፣ የውል አፈጻጸም፣ የክፍያ ማቆያ፣ አቅርቦት፣ ትዕዛዝ፣ የኪራይ ክፍያ፣ የብድር አገልግሎት፣ የብድር ሽያጭ እና የጉምሩክ ቦንድ ዋስትና ይሰጣል። ከ 5.0 ሚሊዮን ብር እና ከዚያ በላይ ለሆኑ ጥያቄዎች የተጣራ የፋይናንስ መግለጫዎች ያስፈልጋሉ።
 
 Source: https://dashenbanksc.com/local-kafalah-one-time-and-facility-ifb (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

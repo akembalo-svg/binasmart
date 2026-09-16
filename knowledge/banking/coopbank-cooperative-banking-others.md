@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/cooperatives/cooperative-banking/others"
 title: "Cooperative Bank of Oromia — Others"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የኅብረት ሥራ ማኅበራት ሌሎች አገልግሎቶች"
 source_name: "Cooperative Bank of Oromia"
 section: "cooperatives"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Others
+# Cooperative Bank of Oromia — Others · የኦሮሚያ ኅብረት ሥራ ባንክ፡ የኅብረት ሥራ ማኅበራት ሌሎች አገልግሎቶች
 
 Cooperative Bank of Oromia — cooperatives — Others. On this page: Sustaining a Strong Relationship, Cooperative Banking.
 
 በአማርኛ፦ የኅብረት ሥራ ማኅበራት — Others። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት ከሚያቀርባቸው አገልግሎቶች መካከል “ሌሎች” በሚል ርዕስ ስር የሚገኙትን ያብራራል። ባንኩ ለኅብረት ሥራ ማኅበራት የተለያዩ ምርቶችን፣ ድጋፎችን፣ የምክር አገልግሎቶችን እና ማራኪ ፋሲሊቲዎችን ያቀርባል። ከእነዚህም መካከል የእንስሳት እርባታ ብድር፣ ለ SACCOs ብድር እና ለሸማቾች ኅብረት ሥራ ማኅበራት ብድር ይገኙበታል።
 
 Source: https://coopbankoromia.com.et/cooperatives/cooperative-banking/others (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

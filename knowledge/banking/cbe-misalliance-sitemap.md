@@ -1,6 +1,7 @@
 ---
 url: "https://combanketh.et/misalliance/sitemap"
 title: "Commercial Bank of Ethiopia — Commercial Bank of Ethiopia"
+titleAm: "የኢትዮጵያ ንግድ ባንክ እገዛና ደኅንነት"
 source_name: "Commercial Bank of Ethiopia"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Commercial Bank of Ethiopia — Commercial Bank of Ethiopia
+# Commercial Bank of Ethiopia — Commercial Bank of Ethiopia · የኢትዮጵያ ንግድ ባንክ እገዛና ደኅንነት
 
 Commercial Bank of Ethiopia — help — Commercial Bank of Ethiopia. On this page: Main, About Us, Products, Ways of Banking, CBE For You, Resources, Subsidiary Banks - Djibouti, Subsidiary Banks - South Sudan.
 
 በአማርኛ፦ እገዛና ደኅንነት — Commercial Bank of Ethiopia። ይህ ገጽ ከኢትዮጵያ ንግድ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኢትዮጵያ ንግድ ባንክን በተመለከተ የእገዛና የድጋፍ መረጃዎችን ያቀርባል። ከእነዚህም መካከል የሂሳብ አከፋፈት፣ ተደጋጋሚ ጥያቄዎች (FAQ)፣ የብድር FAQ፣ የግላዊነት ፖሊሲ፣ የአጠቃቀም ውሎች እና ታሪፍ፣ የኢ-ባንኪንግ ውሎች እና ሁኔታዎች ይገኙበታል። በተጨማሪም የእውቂያ መረጃ፣ የጨረታዎች ዝርዝር፣ የአስተያየት ቅጽ፣ የማጭበርበር ቅሬታዎች እና የጥሪ ማዕከል አገልግሎቶች ተካተዋል።
 
 Source: https://combanketh.et/misalliance/sitemap (official Commercial Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

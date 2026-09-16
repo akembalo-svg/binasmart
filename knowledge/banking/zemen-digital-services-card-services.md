@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/digital-services/card-services"
 title: "Zemen Bank — Card Services"
+titleAm: "የዘመን ባንክ ዲጂታል አገልግሎቶች: የካርድ አገልግሎቶች"
 source_name: "Zemen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Card Services
+# Zemen Bank — Card Services · የዘመን ባንክ ዲጂታል አገልግሎቶች: የካርድ አገልግሎቶች
 
 Zemen Bank — digital — Card Services. On this page: Debit Cards, Payroll cards, Prepaid cards, Gift cards, Zemen Platinum Travel Prepaid MasterCard, Cardless ATM Withdrawal, Digital Banking.
 
 በአማርኛ፦ ዲጂታል አገልግሎቶች — Card Services። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+የዘመን ባንክ የካርድ ግላዊነት ማላበስ አገልግሎቶችን ይሰጣል፣ በኢንዱስትሪው ውስጥ የራሱ የ PCI DSS ደረጃዎችን የሚያከብር የካርድ ግላዊነት ማላበሻ ቢሮ ካላቸው ጥቂት ባንኮች አንዱ ነው። ባንኩ የፕላቲነም ቅድመ ክፍያ የጉዞ ማስተርካርድን ጨምሮ የተለያዩ ምርቶችን ያቀርባል፣ ይህም ዓለም አቀፍ የጉዞ ካርድን ያስተዋወቀ የመጀመሪያው የኢትዮጵያ ባንክ ያደርገዋል። የዴቢት ካርዶች፣ የቅድመ ክፍያ የአገር ውስጥ ካርዶች እና የስጦታ ካርዶችን ጨምሮ የተለያዩ የካርድ አይነቶችን ያቀርባል።
 
 Source: https://zemenbank.com/digital-services/card-services (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

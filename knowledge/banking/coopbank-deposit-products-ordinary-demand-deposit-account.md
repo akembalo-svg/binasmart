@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/deposit-products/ordinary-demand-deposit-account"
 title: "Cooperative Bank of Oromia — Ordinary Demand Deposit Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ: Ordinary Demand Deposit Account"
 source_name: "Cooperative Bank of Oromia"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Ordinary Demand Deposit Account
+# Cooperative Bank of Oromia — Ordinary Demand Deposit Account · የኦሮሚያ ኅብረት ሥራ ባንክ: Ordinary Demand Deposit Account
 
 Cooperative Bank of Oromia — accounts — Ordinary Demand Deposit Account. On this page: Handle payments conveniently, systematically., Demand Deposit, Special Demand Deposit.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Ordinary Demand Deposit Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ስለ Ordinary Demand Deposit Account እና Special Demand Deposit ያብራራል። Ordinary Demand Deposit Account ወለድ የሌለው የቼኪንግ አካውንት ሲሆን ለግለሰቦች ለመክፈት 500 ብር፣ ለድርጅቶች ደግሞ 1,000.00 ብር ዝቅተኛ ቀሪ ሂሳብ ያስፈልጋል። Special Demand Deposit ደግሞ ከቁጠባ ሂሳብ ዝቅተኛ የወለድ መጠን ባነሰ ወለድ የሚያስገኝ የቼኪንግ አካውንት ነው።
 
 Source: https://coopbankoromia.com.et/deposit-products/ordinary-demand-deposit-account (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

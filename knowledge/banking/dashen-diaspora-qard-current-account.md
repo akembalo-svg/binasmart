@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/diaspora-qard-current-account"
 title: "Dashen Bank — Diaspora Qard Current Account"
+titleAm: "የዳሽን ባንክ የዲያስፖራ ቃርድ የአሁን ሂሳብ"
 source_name: "Dashen Bank"
 section: "diaspora"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Diaspora Qard Current Account
+# Dashen Bank — Diaspora Qard Current Account · የዳሽን ባንክ የዲያስፖራ ቃርድ የአሁን ሂሳብ
 
 Dashen Bank — diaspora — Diaspora Qard Current Account.
 
 በአማርኛ፦ የዲያስፖራ ሂሳቦች — Diaspora Qard Current Account። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ የዲያስፖራ ቃርድ የአሁን ሂሳብ የውጭ ምንዛሪ ሂሳብ ሲሆን የሂሳብ ባለቤቶች ገንዘባቸውን በቀላሉ እንዲያገኙ ያስችላል። ሂሳቡ በ100 የአሜሪካን ዶላር መክፈት የሚቻል ሲሆን ወርሃዊ የሂሳብ መግለጫ በነጻ ይሰጣል።
 
 Source: https://dashenbanksc.com/diaspora-qard-current-account (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

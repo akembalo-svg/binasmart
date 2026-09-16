@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/privacy-and-security"
 title: "Dashen Bank — Privacy and Security"
+titleAm: "የዳሽን ባንክ እገዛ፣ ቅሬታና ደኅንነት: ግላዊነት እና ደህንነት"
 source_name: "Dashen Bank"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Privacy and Security
+# Dashen Bank — Privacy and Security · የዳሽን ባንክ እገዛ፣ ቅሬታና ደኅንነት: ግላዊነት እና ደህንነት
 
 Dashen Bank — help — Privacy and Security.
 
 በአማርኛ፦ እገዛ፣ ቅሬታና ደኅንነት — Privacy and Security። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ፣ ቅርንጫፎቹ እና ተባባሪ ኩባንያዎች የግላዊነት መግለጫ ነው። ባንኩ የግል መረጃን የሚሰበስበው፣ የሚጠቀምበት እና የሚያጋራው በህግ በተፈቀደው መሰረት እና ከደንበኞች ፈቃድ ጋር ነው። ባንኩ የግል መረጃን የሚይዘው በህግ በተደነገገው መሰረት ሲሆን፣ የደህንነት ልምዶቹም መረጃን ለመጠበቅ የተነደፉ ናቸው።
 
 Source: https://dashenbanksc.com/privacy-and-security (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

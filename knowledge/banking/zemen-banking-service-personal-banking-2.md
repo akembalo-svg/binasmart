@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/banking-service/personal-banking-2"
 title: "Zemen Bank — Personal Banking"
+titleAm: "የዘመን ባንክ የግል ባንኪንግ ሂሳብና ተቀማጭ ምርቶች"
 source_name: "Zemen Bank"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Personal Banking
+# Zemen Bank — Personal Banking · የዘመን ባንክ የግል ባንኪንግ ሂሳብና ተቀማጭ ምርቶች
 
 Zemen Bank — accounts — Personal Banking. On this page: Deposit Products, Consumer Deposit, Consumer Saving Deposit Products, Personal Checking, Prestige Checking, Z-Club Checking, Consumer Special Deposit Products, Certificate of Deposit Products.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Personal Banking። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዘመን ባንክን የቁጠባ፣ የቼኪንግ፣ የጊዜ ተቀማጭ ሂሳቦችን እና የውጭ ምንዛሪ ሂሳቦችን ያብራራል። የባንኩ ተቀማጭ ምርቶች ለግለሰቦች እና ለንግድ ድርጅቶች የተከፋፈሉ ሲሆን፣ አብዛኛዎቹ የቁጠባ ሂሳብ እና የቼኪንግ ሂሳብ በጥቅል ያቀርባሉ። ለምሳሌ፣ መሰረታዊ የቁጠባ ሂሳብ በ5000 ብር የሚከፈት ሲሆን፣ የፕሬስቲጅ ቁጠባ ሂሳብ ደግሞ 100,000 ብር ወርሃዊ ዝቅተኛ ቀሪ ሂሳብ ለሚያስቀምጡ ደንበኞች ነው።
 
 Source: https://zemenbank.com/banking-service/personal-banking-2 (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

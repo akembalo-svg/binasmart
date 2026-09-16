@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/saving-deposit"
 title: "Dashen Bank — Saving Deposit"
+titleAm: "የዳሽን ባንክ የቁጠባ ሂሳብና ተቀማጭ"
 source_name: "Dashen Bank"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Saving Deposit
+# Dashen Bank — Saving Deposit · የዳሽን ባንክ የቁጠባ ሂሳብና ተቀማጭ
 
 Dashen Bank — accounts — Saving Deposit. On this page: Saving Account / Saving Deposit.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Saving Deposit። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክን የቁጠባ ሂሳብ ያብራራል። ደንበኞች ገንዘብ የሚያስቀምጡበት፣ የሚያወጡበት እና ወለድ የሚያገኙበት መደበኛ የቁጠባ ሂሳብ ነው። ሂሳቡ በየወሩ ወለድ የሚያስገኝ ሲሆን፣ ለመክፈት 25 ብር የመጀመሪያ ተቀማጭ ገንዘብ ብቻ ያስፈልጋል።
 
 Source: https://dashenbanksc.com/saving-deposit (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

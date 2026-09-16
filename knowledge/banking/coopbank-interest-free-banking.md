@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/interest-free-banking"
 title: "Cooperative Bank of Oromia — Coopbank Alhuda"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ Coopbank Alhuda"
 source_name: "Cooperative Bank of Oromia"
 section: "ifb"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Coopbank Alhuda
+# Cooperative Bank of Oromia — Coopbank Alhuda · የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ Coopbank Alhuda
 
 Cooperative Bank of Oromia — ifb — Coopbank Alhuda. On this page: Where principles of Sharia Laws applied carefully, Interest Free Deposit Products.
 
 በአማርኛ፦ ወለድ አልባ ባንክ — Coopbank Alhuda። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው ወለድ አልባ የባንክ አገልግሎቶች ያብራራል። ባንኩ በሸሪዓ ህግጋት መሰረት የሚሰጡ የተለያዩ የቁጠባ እና የኢንቨስትመንት ምርቶችን ያቀርባል። ከእነዚህም መካከል 5 የወዲዓህ ተቀማጭ ሂሳቦች እና 7 የሙዳረባህ ቁጠባ ሂሳቦች ይገኙበታል።
 
 Source: https://coopbankoromia.com.et/interest-free-banking (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

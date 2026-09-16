@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/wadiah-saving-account-ifb"
 title: "Dashen Bank — Wadi’ah Saving Account"
+titleAm: "የዳሽን ባንክ ወለድ አልባ ባንክ: Wadi’ah ቁጠባ ሂሳብ"
 source_name: "Dashen Bank"
 section: "ifb"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Wadi’ah Saving Account
+# Dashen Bank — Wadi’ah Saving Account · የዳሽን ባንክ ወለድ አልባ ባንክ: Wadi’ah ቁጠባ ሂሳብ
 
 Dashen Bank — ifb — Wadi’ah Saving Account.
 
 በአማርኛ፦ ወለድ አልባ ባንክ — Wadi’ah Saving Account። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክን Wadi’ah ቁጠባ ሂሳብ ያብራራል። Wadi’ah ባንኩ ከደንበኞቹ ገንዘባቸውን በአስተማማኝ ሁኔታ ለማስቀመጥ እና ለመጠቀም ምቹ ሁኔታን የሚፈልጉ ተቀማጭ ገንዘብ የሚቀበልበት የውክልና ስምምነት ነው። ሂሳቡን ለመክፈት የሚያስፈልገው የመጀመሪያ ተቀማጭ ገንዘብ 25 ብር ሲሆን፣ ለግለሰቦች የህግ እድሜ (>= 18 ዓመት) መሆን እና ለድርጅቶች የታደሰ የንግድ ፈቃድ እና ሌሎች ሰነዶች ያስፈልጋሉ።
 
 Source: https://dashenbanksc.com/wadiah-saving-account-ifb (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

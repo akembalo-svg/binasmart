@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/banking-service/international-banking-2"
 title: "Zemen Bank — International Banking"
+titleAm: "የዘመን ባንክ የውጭ ምንዛሪና ዓለም አቀፍ የባንክ አገልግሎቶች"
 source_name: "Zemen Bank"
 section: "international"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — International Banking
+# Zemen Bank — International Banking · የዘመን ባንክ የውጭ ምንዛሪና ዓለም አቀፍ የባንክ አገልግሎቶች
 
 Zemen Bank — international — International Banking. On this page: Export L/C Financing, Import L/C Financing, Custom Import & Export Collection Services, International Wire Transfers, Forex Service, Foreign Currency account for Foreign Entities, Retention Account, Reach us at.
 
 በአማርኛ፦ የውጭ ምንዛሪና ዓለም አቀፍ — International Banking። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዘመን ባንክ ዓለም አቀፍ የባንክ አገልግሎቶችን ያብራራል። ባንኩ ለውጭ ምንዛሪና ዓለም አቀፍ የንግድ ልውውጥ የሚያስፈልጉ እንደ ብድር ደብዳቤ ፋይናንስ፣ የገቢና ወጪ ሰነድ ስብስብ አገልግሎቶች፣ ዓለም አቀፍ የገንዘብ ዝውውሮች እና የውጭ ምንዛሪ አገልግሎት ይሰጣል። በተጨማሪም ለውጭ አካላት የውጭ ምንዛሪ ሂሳብ እና ለዕቃዎችና አገልግሎቶች ላኪዎች የሪቴንሽን ሂሳብ ያቀርባል።
 
 Source: https://zemenbank.com/banking-service/international-banking-2 (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

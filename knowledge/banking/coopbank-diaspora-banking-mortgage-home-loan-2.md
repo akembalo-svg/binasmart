@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/diaspora-banking/mortgage-home-loan-2"
 title: "Cooperative Bank of Oromia — Mortgage/Home Loan"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ የቤት/ሞርጌጅ ብድር"
 source_name: "Cooperative Bank of Oromia"
 section: "diaspora"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Mortgage/Home Loan
+# Cooperative Bank of Oromia — Mortgage/Home Loan · የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ የቤት/ሞርጌጅ ብድር
 
 Cooperative Bank of Oromia — diaspora — Mortgage/Home Loan. On this page: Diaspora Banking, Diaspora Mortgage/Home Loan, Features, Eligible, Benefits, Required Documents.
 
 በአማርኛ፦ የዲያስፖራ ሂሳቦች — Mortgage/Home Loan። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኢትዮጵያ ዲያስፖራ ማህበረሰቦች የሚያቀርበውን የቤት/ሞርጌጅ ብድር ያብራራል። ብድሩ በኢትዮጵያ ውስጥ ሪል እስቴት እና ቤቶችን ለመግዛት ወይም ለመገንባት የሚያገለግል ሲሆን ብቁ ለሆኑ ዲያስፖራዎች የተረጋጋ ገቢ ላላቸው ይሰጣል። የብድር ጊዜው እስከ 20 ዓመት ሲሆን የባንኩ የወለድ ምጣኔ ከ 8.5% ይጀምራል።
 
 Source: https://coopbankoromia.com.et/diaspora-banking/mortgage-home-loan-2 (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

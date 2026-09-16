@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/digital-services/z-school-payment-and-management"
 title: "Zemen Bank — Z- School Payment and Management"
+titleAm: "የዘመን ባንክ ዲጂታል አገልግሎቶች: Z- School ክፍያ እና አስተዳደር"
 source_name: "Zemen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Z- School Payment and Management
+# Zemen Bank — Z- School Payment and Management · የዘመን ባንክ ዲጂታል አገልግሎቶች: Z- School ክፍያ እና አስተዳደር
 
 Zemen Bank — digital — Z- School Payment and Management. On this page: Z- School Payment, Stay informed anytime, anywhere, Accessible at your fingertips.
 
 በአማርኛ፦ ዲጂታል አገልግሎቶች — Z- School Payment and Management። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ወላጆች የትምህርት ቤት ክፍያዎችን እና ሌሎች ወጪዎችን በኦንላይን እንዲከፍሉ የሚያስችል የዘመን ባንክን Z- School ክፍያ እና አስተዳደር ስርዓት ያብራራል። ስርዓቱ የክፍያ ማስታወሻዎችን፣ የልጆችን የትምህርት ሂደት መረጃዎችን እና የዕለት ተዕለት ክትትል ሁኔታን በቴሌግራም ቦት በኩል ያቀርባል። አገልግሎቱ 24/7 የሚገኝ ሲሆን ወላጆች በዘመን ሞባይል እና ኢንተርኔት ባንኪንግ ወይም በባንክ ቅርንጫፍ በኩል ክፍያዎችን እንዲፈጽሙ ያስችላል።
 
 Source: https://zemenbank.com/digital-services/z-school-payment-and-management (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/other-special-deposit-ifb"
 title: "Dashen Bank — Other Special Deposit"
+titleAm: "የዳሽን ባንክ ወለድ አልባ ባንክ ልዩ የተቀማጭ ሂሳቦች"
 source_name: "Dashen Bank"
 section: "ifb"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Other Special Deposit
+# Dashen Bank — Other Special Deposit · የዳሽን ባንክ ወለድ አልባ ባንክ ልዩ የተቀማጭ ሂሳቦች
 
 Dashen Bank — ifb — Other Special Deposit. On this page: Hadji wadi’ah saving, Youth Wadi’ah Saving Account, An-Nissa Wadi’ah saving Account, Qard Non-Resident Foreign Currency Account, Qard Foreign Exchange Retention Account A and B.
 
 በአማርኛ፦ ወለድ አልባ ባንክ — Other Special Deposit። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ ወለድ አልባ ባንክ የሚያቀርባቸውን ልዩ የተቀማጭ ሂሳቦችን ያብራራል። ከእነዚህም መካከል ለሐጅ ጉዞ የሚውል የሐጅ ወዲዓ ቁጠባ፣ ለአካለ መጠን ያልደረሱ ልጆች የሚሆን የወጣቶች ወዲዓ ቁጠባ ሂሳብ፣ እና ለሴቶች የተዘጋጀ የአን-ኒሳ ወዲዓ ቁጠባ ሂሳብ ይገኙበታል። የሐጅ ወዲዓ ቁጠባ የመጀመሪያ ተቀማጭ ገንዘብ 500 ብር ሲሆን፣ የወጣቶች እና የአን-ኒሳ ወዲዓ ቁጠባ ሂሳቦች ደግሞ 100 ብር የመጀመሪያ ተቀማጭ ገንዘብ አላቸው።
 
 Source: https://dashenbanksc.com/other-special-deposit-ifb (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

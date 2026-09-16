@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/fixed-time-deposit"
 title: "Dashen Bank — Fixed Time Deposit"
+titleAm: "የዳሽን ባንክ ሂሳብና ተቀማጭ: Fixed Time Deposit"
 source_name: "Dashen Bank"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Fixed Time Deposit
+# Dashen Bank — Fixed Time Deposit · የዳሽን ባንክ ሂሳብና ተቀማጭ: Fixed Time Deposit
 
 Dashen Bank — accounts — Fixed Time Deposit. On this page: Certificate of Deposit / Fixed Time Deposit.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Fixed Time Deposit። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ የዳሽን ባንክ ገጽ ስለ Fixed Time Deposit ያብራራል። ይህ የቁጠባ አይነት ከፍ ያለ ወለድ ያለው ሲሆን፣ ገንዘቡ እስከ ብስለት ቀን ድረስ መቆየት አለበት። ዝቅተኛው የተቀማጭ ገንዘብ መጠን 1,000,000 ብር ሲሆን፣ ዝቅተኛው የብስለት ጊዜ 6 ወር ነው።
 
 Source: https://dashenbanksc.com/fixed-time-deposit (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

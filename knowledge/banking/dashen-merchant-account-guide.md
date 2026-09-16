@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/merchant-account-guide"
 title: "Dashen Bank — Merchant Account Guide"
+titleAm: "የዳሽን ባንክ የነጋዴ አካውንት መመሪያ"
 source_name: "Dashen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Merchant Account Guide
+# Dashen Bank — Merchant Account Guide · የዳሽን ባንክ የነጋዴ አካውንት መመሪያ
 
 Dashen Bank — digital — Merchant Account Guide. On this page: Merchant Services, Selection Criteria on boarding New Merchants, How Does a Merchant Work?, Steps when we processed the Transaction.
 
 በአማርኛ፦ ካርድ፣ ኤቲኤምና ሞባይል ባንክ — Merchant Account Guide። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ ነጋዴዎች የዳሽን ባንክን የነጋዴ አካውንት እንዴት መጠቀም እንደሚችሉ ያብራራል። የነጋዴ አገልግሎቶች፣ አዲስ ነጋዴዎችን ለመመዝገብ የሚያስፈልጉ መስፈርቶች እና የግብይት ሂደት ስድስት (6) ደረጃዎች በዝርዝር ቀርበዋል።
 
 Source: https://dashenbanksc.com/merchant-account-guide (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

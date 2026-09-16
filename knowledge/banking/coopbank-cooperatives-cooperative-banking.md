@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/cooperatives/cooperative-banking"
 title: "Cooperative Bank of Oromia — Cooperatives Saving Products"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት ቁጠባ ምርቶች"
 source_name: "Cooperative Bank of Oromia"
 section: "cooperatives"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Cooperatives Saving Products
+# Cooperative Bank of Oromia — Cooperatives Saving Products · የኦሮሚያ ኅብረት ሥራ ባንክ የኅብረት ሥራ ማኅበራት ቁጠባ ምርቶች
 
 Cooperative Bank of Oromia — cooperatives — Cooperatives Saving Products. On this page: Cooperative Banking.
 
 በአማርኛ፦ የኅብረት ሥራ ማኅበራት — Cooperatives Saving Products። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለኅብረት ሥራ ማኅበራት የሚያቀርባቸውን የቁጠባ ምርቶች ያብራራል። ባንኩ ለኅብረት ሥራ ማኅበራት የተለያዩ የቁጠባ ምርቶችን ያቀርባል፤ ከእነዚህም መካከል Demand Deposit፣ Saving Deposit እና Fixed or Time Deposit ይገኙበታል። የኅብረት ሥራ ማኅበራት አካውንት ለመክፈት የሚያስፈልጉ ሰነዶችም ተዘርዝረዋል።
 
 Source: https://coopbankoromia.com.et/cooperatives/cooperative-banking (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

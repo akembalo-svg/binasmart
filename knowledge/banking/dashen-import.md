@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/import"
 title: "Dashen Bank — Import"
+titleAm: "የዳሽን ባንክ ወጪና ገቢ ንግድ: አስቀድሞ ክፍያ እና የሰነድ የብድር ደብዳቤ"
 source_name: "Dashen Bank"
 section: "trade"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Import
+# Dashen Bank — Import · የዳሽን ባንክ ወጪና ገቢ ንግድ: አስቀድሞ ክፍያ እና የሰነድ የብድር ደብዳቤ
 
 Dashen Bank — trade — Import. On this page: Advance Payment Transfer, Documentary Letter of Credit / Banker’s Commercial Credit, Franco Valuta Permit.
 
 በአማርኛ፦ ወጪና ገቢ ንግድ — Import። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክን አስቀድሞ ክፍያ ማስተላለፍ እና የሰነድ የብድር ደብዳቤ አገልግሎቶችን ያብራራል። አስቀድሞ ክፍያ ማስተላለፍ ለአነስተኛ የወጪ ንግድ ግብይቶች የሚያገለግል ሲሆን፣ የሰነድ የብድር ደብዳቤ ደግሞ በዓለም አቀፍ ንግድ ውስጥ ከባንክ የሚሰጥ የክፍያ ዋስትና ነው። ገጹ ለእያንዳንዱ አገልግሎት የሚያስፈልጉትን መሰረታዊ መስፈርቶች በዝርዝር ያቀርባል፣ ለምሳሌ የገቢ ንግድ ማመልከቻ ቅጽ፣ የፕሮፎርማ ደረሰኝ፣ የንግድ ፈቃድ እና የቲን ሰርተፍኬት።
 
 Source: https://dashenbanksc.com/import (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

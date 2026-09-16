@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/ufaqs"
 title: "Cooperative Bank of Oromia — FAQs Archive"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎች"
 source_name: "Cooperative Bank of Oromia"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — FAQs Archive
+# Cooperative Bank of Oromia — FAQs Archive · የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎች
 
 Cooperative Bank of Oromia — help — FAQs Archive. On this page: Archives FAQs, Is there any assurance for Coopbank Alhuda Sharia compliance?, What is a minimum deposit to open Labbaik Saving Account?, Does Coopbank Alhuda offer its services to Non-Muslims?, What types of collaterals are acceptable?, What are the general eligibility requirements for credit?, Am I eligible to have Gudunfa?, What should I do if I lost my passbook, Cheque or CPO?.
 
 በአማርኛ፦ ተደጋጋሚ ጥያቄዎች — FAQs Archive። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ስለ የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎችን ያቀርባል። ስለ Coopbank Alhuda ሸሪዓ ተገዢነት፣ የተለያዩ የሙዳረባ አይነቶች፣ የቁጠባ ሂሳብ ለመክፈት የሚያስፈልገው ዝቅተኛ ተቀማጭ ገንዘብ እና ሌሎችም መረጃዎችን ያገኛሉ። በተጨማሪም ተቀባይነት ስላላቸው የዋስትና አይነቶች እና ለብድር የሚያስፈልጉ አጠቃላይ መስፈርቶች ተብራርተዋል።
 
 Source: https://coopbankoromia.com.et/ufaqs (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

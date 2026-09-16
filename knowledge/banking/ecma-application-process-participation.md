@@ -1,6 +1,7 @@
 ---
 url: "https://ecma.gov.et/application-process-participation"
 title: "Ethiopian Capital Market Authority — Application Process and Participation – Ethiopian Capital Market Authority (ECMA) | Official Website"
+titleAm: "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ የሙከራ ማዕቀፍ ማመልከቻ ሂደት እና ተሳትፎ"
 source_name: "Ethiopian Capital Market Authority"
 section: "sandbox"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Ethiopian Capital Market Authority — Application Process and Participation – Ethiopian Capital Market Authority (ECMA) | Official Website
+# Ethiopian Capital Market Authority — Application Process and Participation – Ethiopian Capital Market Authority (ECMA) | Official Website · የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ የሙከራ ማዕቀፍ ማመልከቻ ሂደት እና ተሳትፎ
 
 Ethiopian Capital Market Authority — sandbox — Application Process and Participation – Ethiopian Capital Market Authority (ECMA) | Official Website. On this page: Application Process and Participation.
 
 በአማርኛ፦ የሙከራ ማዕቀፍ — Application Process and Participation – Ethiopian Capital Market Authority (ECMA) | Official Website። ይህ ገጽ ከኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ የሙከራ ማዕቀፍ ውስጥ ለመሳተፍ የሚያስፈልገውን የማመልከቻ ሂደት ያብራራል። ሂደቱ የመጀመሪያ ጥያቄ፣ የማመልከቻ ማስገባት፣ ግምገማ፣ ውሳኔ እና ግብረመልስ፣ የሙከራ እቅድ ልማት፣ የሙከራ ምዕራፍ እና ግምገማና መውጣትን ያካትታል።
 
 Source: https://ecma.gov.et/application-process-participation (official Ethiopian Capital Market Authority page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/diaspora-mudarabah-fixed-time-deposit"
 title: "Dashen Bank — Diaspora Mudarabah Fixed Time Deposit"
+titleAm: "የዳሽን ባንክ የዲያስፖራ Mudarabah Fixed Time Deposit ሂሳብ"
 source_name: "Dashen Bank"
 section: "diaspora"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Diaspora Mudarabah Fixed Time Deposit
+# Dashen Bank — Diaspora Mudarabah Fixed Time Deposit · የዳሽን ባንክ የዲያስፖራ Mudarabah Fixed Time Deposit ሂሳብ
 
 Dashen Bank — diaspora — Diaspora Mudarabah Fixed Time Deposit.
 
 በአማርኛ፦ የዲያስፖራ ሂሳቦች — Diaspora Mudarabah Fixed Time Deposit። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክ የዲያስፖራ Mudarabah Fixed Time Deposit ሂሳብን በተመለከተ መረጃ ይሰጣል። ሂሳቡ በውጭ ምንዛሪ የሚከፈት ሲሆን፣ ለኢትዮጵያውያን ዲያስፖራዎች የታሰበ ነው። የመጀመሪያው የተቀማጭ ገንዘብ መጠን USD 5,000 ሲሆን፣ ከሀገር ውስጥ ምንጭ ገንዘብ ማስገባት የተከለከለ ነው።
 
 Source: https://dashenbanksc.com/diaspora-mudarabah-fixed-time-deposit (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

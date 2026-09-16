@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/loan-and-advances/term-loan"
 title: "Cooperative Bank of Oromia — Term Loan"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ: ተርም ብድር"
 source_name: "Cooperative Bank of Oromia"
 section: "loans"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Term Loan
+# Cooperative Bank of Oromia — Term Loan · የኦሮሚያ ኅብረት ሥራ ባንክ: ተርም ብድር
 
 Cooperative Bank of Oromia — loans — Term Loan.
 
 በአማርኛ፦ ብድር — Term Loan። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ስለ ተርም ብድር ያብራራል። ተርም ብድር ለሥራ ማስኬጃ ካፒታል ወይም ለፕሮጀክት ፋይናንስ የሚሰጥ ብድር ሲሆን በወለድ በተወሰነ ጊዜ ውስጥ የሚከፈል ነው። ባንኩ የአጭር ጊዜ፣ የመካከለኛ ጊዜ እና የረጅም ጊዜ ብድሮችን ይሰጣል።
 
 Source: https://coopbankoromia.com.et/loan-and-advances/term-loan (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

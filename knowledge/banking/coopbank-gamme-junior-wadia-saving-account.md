@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/gamme-junior-wadia-saving-account"
 title: "Cooperative Bank of Oromia — Gamme – Junior Wadia Saving Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ Gamme – Junior Wadia Saving Account"
 source_name: "Cooperative Bank of Oromia"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Gamme – Junior Wadia Saving Account
+# Cooperative Bank of Oromia — Gamme – Junior Wadia Saving Account · የኦሮሚያ ኅብረት ሥራ ባንክ Gamme – Junior Wadia Saving Account
 
 Cooperative Bank of Oromia — accounts — Gamme – Junior Wadia Saving Account. On this page: Way of saving childhood memories!, Gammee – Junior Wadiah Saving account.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Gamme – Junior Wadia Saving Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ Gamme – Junior Wadia Saving Account የተባለውን የቁጠባ ሂሳብ ያብራራል። ሂሳቡ ከ0-15 ዓመት ለሆኑ ህጻናት የተዘጋጀ ሲሆን በወላጆች ወይም አሳዳጊዎች የሚተዳደር ነው። ከ18 ዓመት በኋላ ወደ ተራ የቁጠባ ሂሳብ ይቀየራል።
 
 Source: https://coopbankoromia.com.et/gamme-junior-wadia-saving-account (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

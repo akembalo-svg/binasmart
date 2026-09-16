@@ -1,6 +1,7 @@
 ---
 url: "https://ecma.gov.et/investor"
 title: "Ethiopian Capital Market Authority — Investor – Ethiopian Capital Market Authority (ECMA) | Official Website"
+titleAm: "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ ለባለሀብቶች መረጃ"
 source_name: "Ethiopian Capital Market Authority"
 section: "investors"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Ethiopian Capital Market Authority — Investor – Ethiopian Capital Market Authority (ECMA) | Official Website
+# Ethiopian Capital Market Authority — Investor – Ethiopian Capital Market Authority (ECMA) | Official Website · የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን፡ ለባለሀብቶች መረጃ
 
 Ethiopian Capital Market Authority — investors — Investor – Ethiopian Capital Market Authority (ECMA) | Official Website. On this page: Investor, Safeguarding Investors, What’s your Investor Profile?, Seek professional advice !.
 
 በአማርኛ፦ ለባለሀብቶች — Investor – Ethiopian Capital Market Authority (ECMA) | Official Website። ይህ ገጽ ከኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ባለሀብቶችን ከማጭበርበር ለመጠበቅ እና ፍትሃዊ አያያዝን ለማረጋገጥ ያለመ ነው። ባለሀብቶች ከፈቃድ ካላቸው አቅራቢዎች እና ከተመዘገቡ ተቋማት ጋር ብቻ እንዲሰሩ፣ የአደጋ ስጋት መገለጫቸውን እንዲረዱ እና በመረጃ ላይ የተመሰረተ የኢንቨስትመንት ውሳኔ እንዲያደርጉ ይመክራል። እርዳታ ከፈለጉ ከፈቃድ ካለው ባለሙያ ምክር እንዲፈልጉ ያሳስባል።
 
 Source: https://ecma.gov.et/investor (official Ethiopian Capital Market Authority page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

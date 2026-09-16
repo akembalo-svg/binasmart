@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/interest-free-banking/interest-free-deposit-products/mudarabah-saving-accounts/sinqe-women-mudarabah-saving-account"
 title: "Cooperative Bank of Oromia — Sinqe – Women Mudarabah Saving Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ፡ Sinqe – የሴቶች ሙዳረባ ቁጠባ ሂሳብ"
 source_name: "Cooperative Bank of Oromia"
 section: "ifb"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Sinqe – Women Mudarabah Saving Account
+# Cooperative Bank of Oromia — Sinqe – Women Mudarabah Saving Account · የኦሮሚያ ኅብረት ሥራ ባንክ፡ Sinqe – የሴቶች ሙዳረባ ቁጠባ ሂሳብ
 
 Cooperative Bank of Oromia — ifb — Sinqe – Women Mudarabah Saving Account.
 
 በአማርኛ፦ ወለድ አልባ ባንክ — Sinqe – Women Mudarabah Saving Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ Sinqe – የሴቶች ሙዳረባ ቁጠባ ሂሳብን በተመለከተ መረጃ ይሰጣል። ይህ የቁጠባ ሂሳብ ከ30 ዓመት በላይ ለሆኑ ሴቶች የተዘጋጀ ሲሆን የቁጠባ ባህላቸውን ለማሳደግ ያለመ ነው። የ Sinqe – የሴቶች ሙዳረባ ቁጠባ ሂሳብ ባለቤቶች ከተራ ሙዳረባ ቁጠባ ሂሳብ ጋር ሲነፃፀር ከፍተኛ የትርፍ ክፍፍል ያገኛሉ።
 
 Source: https://coopbankoromia.com.et/interest-free-banking/interest-free-deposit-products/mudarabah-saving-accounts/sinqe-women-mudarabah-saving-account (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

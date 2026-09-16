@@ -1,6 +1,7 @@
 ---
 url: "https://combanketh.et/misalliance/account-opening"
 title: "Commercial Bank of Ethiopia — Commercial Bank of Ethiopia"
+titleAm: "የኢትዮጵያ ንግድ ባንክ: CBE Docs - ሂሳብ መክፈትና ተቀማጭ"
 source_name: "Commercial Bank of Ethiopia"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Commercial Bank of Ethiopia — Commercial Bank of Ethiopia
+# Commercial Bank of Ethiopia — Commercial Bank of Ethiopia · የኢትዮጵያ ንግድ ባንክ: CBE Docs - ሂሳብ መክፈትና ተቀማጭ
 
 Commercial Bank of Ethiopia — accounts — Commercial Bank of Ethiopia. On this page: CBE Docs, CBE Docs – Secure, Fast and Paperless Digital Banking, What You Can Do with CBE Docs, Why CBE Docs?, Start Using CBE Docs Today.
 
 በአማርኛ፦ ሂሳብ መክፈትና ተቀማጭ — Commercial Bank of Ethiopia። ይህ ገጽ ከኢትዮጵያ ንግድ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ስለ CBE Docs፣ የኢትዮጵያ ንግድ ባንክ ዲጂታል መድረክ ያብራራል። CBE Docs ደንበኞች ሂሳብ በርቀት እንዲከፍቱ፣ የባንክ ቅጾችን በዲጂታል መንገድ እንዲሞሉና እንዲያስገቡ፣ ሰነዶችን በኤሌክትሮኒክ ፊርማ እንዲፈርሙ እና ሰነዶቻቸውን ከጫፍ እስከ ጫፍ እንዲከታተሉ ያስችላል። ይህ አገልግሎት ፈጣን፣ ደህንነቱ የተጠበቀ፣ በማንኛውም ጊዜና ቦታ ተደራሽ፣ ወረቀት አልባ እና ለሁሉም የተነደፈ ነው።
 
 Source: https://combanketh.et/misalliance/account-opening (official Commercial Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

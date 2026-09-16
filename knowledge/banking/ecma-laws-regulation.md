@@ -1,6 +1,7 @@
 ---
 url: "https://ecma.gov.et/laws-regulation"
 title: "Ethiopian Capital Market Authority — Laws & Regulation – Ethiopian Capital Market Authority (ECMA) | Official Website"
+titleAm: "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ሕጎችና መመሪያዎች"
 source_name: "Ethiopian Capital Market Authority"
 section: "rules"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Ethiopian Capital Market Authority — Laws & Regulation – Ethiopian Capital Market Authority (ECMA) | Official Website
+# Ethiopian Capital Market Authority — Laws & Regulation – Ethiopian Capital Market Authority (ECMA) | Official Website · የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ሕጎችና መመሪያዎች
 
 Ethiopian Capital Market Authority — rules — Laws & Regulation – Ethiopian Capital Market Authority (ECMA) | Official Website. On this page: Laws & Regulation.
 
 በአማርኛ፦ ሕጎችና መመሪያዎች — Laws & Regulation – Ethiopian Capital Market Authority (ECMA) | Official Website። ይህ ገጽ ከኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA) ያወጣቸውን ሕጎችና መመሪያዎች ያቀርባል። ሰነዶቹ መመሪያዎች፣ ረቂቅ መመሪያዎች፣ አዋጆች እና መመሪያዎችን ያካትታሉ። ለምሳሌ፣ የህዝብ አክሲዮን ማቅረብ እና የዋስትናዎች ንግድ መመሪያ 1030 -2017 (አማርኛ) 4609 ጊዜ የወረደ ሲሆን፣ የካፒታል ገበያ አዋጅ ቁጥር 1248-2021 ደግሞ 4189 ጊዜ ወርዷል።
 
 Source: https://ecma.gov.et/laws-regulation (official Ethiopian Capital Market Authority page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

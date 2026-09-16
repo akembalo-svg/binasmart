@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/deposit-products/saving-account"
 title: "Cooperative Bank of Oromia — Saving Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ: Saving Account"
 source_name: "Cooperative Bank of Oromia"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Saving Account
+# Cooperative Bank of Oromia — Saving Account · የኦሮሚያ ኅብረት ሥራ ባንክ: Saving Account
 
 Cooperative Bank of Oromia — accounts — Saving Account. On this page: Saving Deposit, Regular Saving Account, Account opening form, Conventional Account Opening Form.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Saving Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው ወለድ የሚከፈልበት የቁጠባ ሂሳብ ያብራራል። ሂሳቡ በትንሹ 50 ብር ሊከፈት ይችላል፣ ነገር ግን ከባንክ አገልግሎት ጋር ግንኙነት ለመፍጠር ዜሮ ቀሪ ሂሳብ ሊኖረው ይችላል። ሂሳቡ በፓስቡክ ወይም በኤቲኤም ካርድ የሚሰራ ሲሆን፣ በወር ውስጥ ቢያንስ 25 ብር ማስገባት ያስፈልጋል።
 
 Source: https://coopbankoromia.com.et/deposit-products/saving-account (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

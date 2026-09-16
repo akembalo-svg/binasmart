@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/export"
 title: "Dashen Bank — Export"
+titleAm: "የዳሽን ባንክ ወጪና ገቢ ንግድ: ኤክስፖርት አገልግሎቶች"
 source_name: "Dashen Bank"
 section: "trade"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Export
+# Dashen Bank — Export · የዳሽን ባንክ ወጪና ገቢ ንግድ: ኤክስፖርት አገልግሎቶች
 
 Dashen Bank — trade — Export. On this page: Advance Payment Transfer, Documentary Letter of Credit / Banker’s Commercial Credit.
 
 በአማርኛ፦ ወጪና ገቢ ንግድ — Export። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክን የኤክስፖርት አገልግሎቶች ያብራራል። የቅድሚያ ክፍያ ዝውውር እና የዶክመንተሪ ሌተር ኦፍ ክሬዲት (LC) አገልግሎቶችን ያካትታል። የቅድሚያ ክፍያ ዝውውር ለአነስተኛ የኤክስፖርት ግብይቶች የሚያገለግል ሲሆን፣ ኤክስፖርተሩ ዕቃዎቹ ከመላካቸው በፊት ክፍያ እንዲቀበል ያስችላል። የዶክመንተሪ ሌተር ኦፍ ክሬዲት ደግሞ ባንክ በገዢው ስም ለኤክስፖርተሩ ክፍያ እንደሚፈጽም ዋስትና የሚሰጥበት ሲሆን፣ ይህም በ LC ውስጥ የተገለጹት ውሎች እና ሁኔታዎች መሟላታቸውን በሚያሳዩ ሰነዶች ላይ የተመሰረተ ነው።
 
 Source: https://dashenbanksc.com/export (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

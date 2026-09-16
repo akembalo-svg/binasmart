@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/cooperatives/cooperatives-coopbank"
 title: "Cooperative Bank of Oromia — Agri and Cooperative Relations"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የግብርና እና የኅብረት ሥራ ማኅበራት ግንኙነት"
 source_name: "Cooperative Bank of Oromia"
 section: "cooperatives"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Agri and Cooperative Relations
+# Cooperative Bank of Oromia — Agri and Cooperative Relations · የኦሮሚያ ኅብረት ሥራ ባንክ፡ የግብርና እና የኅብረት ሥራ ማኅበራት ግንኙነት
 
 Cooperative Bank of Oromia — cooperatives — Agri and Cooperative Relations. On this page: Our Offerings, Farm Pass, Why Choose Coopbank?, Agri-Stakeholders.
 
 በአማርኛ፦ የኅብረት ሥራ ማኅበራት — Agri and Cooperative Relations። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+የኦሮሚያ ኅብረት ሥራ ባንክ በኢትዮጵያ የመጀመሪያው በገበሬዎች ባለቤትነት የተመሰረተ ባንክ ሲሆን፣ 5,212 የኅብረት ሥራ ማኅበራት ከ67% በላይ የሚሆነውን የተከፈለ ካፒታሉን ይዘዋል። ባንኩ ለኅብረት ሥራ ማኅበራት እና ለገበሬዎች የገንዘብ ድጋፍ፣ የግብርና ምርት ፋይናንስ፣ የዲጂታል መድረኮች እና የአቅም ግንባታ ፕሮግራሞችን ያቀርባል። ከ128 በላይ የግብርና ባንክ ባለሙያዎች ያሉት ሲሆን፣ እንደ Dairy Farming Loans እና Crop and Coffee Production Loans ያሉ የፋይናንስ ምርቶችን እንዲሁም Farm Pass እና SACCO-Link የተባሉ መፍትሄዎችን ይሰጣል።
 
 Source: https://coopbankoromia.com.et/cooperatives/cooperatives-coopbank (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

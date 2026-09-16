@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/loan-and-advances/construction-machinery-loan"
 title: "Cooperative Bank of Oromia — Construction Machinery Loan"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ የግንባታ ማሽነሪ ብድር"
 source_name: "Cooperative Bank of Oromia"
 section: "loans"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Construction Machinery Loan
+# Cooperative Bank of Oromia — Construction Machinery Loan · የኦሮሚያ ኅብረት ሥራ ባንክ የግንባታ ማሽነሪ ብድር
 
 Cooperative Bank of Oromia — loans — Construction Machinery Loan. On this page: Construction Machineries Loan.
 
 በአማርኛ፦ ብድር — Construction Machinery Loan። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚሰጠው የግንባታ ማሽነሪ ብድር ያብራራል። ብድሩ አዲስ የግንባታ ማሽነሪዎችን ለመግዛት የሚሰጥ ሲሆን፣ ለክሬዲት ስጋት ደረጃ 1 ወይም 2 አመልካቾች ዝቅተኛው የፍትሃዊነት መዋጮ 50% ነው። ለክሬዲት ስጋት ደረጃ 3 እና 4 አመልካቾች ደግሞ 60% እና 70% ነው።
 
 Source: https://coopbankoromia.com.et/loan-and-advances/construction-machinery-loan (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

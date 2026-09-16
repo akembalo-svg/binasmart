@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/digital-services/digital-remittance-services"
 title: "Zemen Bank — Digital Remittance Services"
+titleAm: "የዘመን ባንክ ዲጂታል የገንዘብ ልውውጥ አገልግሎቶች"
 source_name: "Zemen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Digital Remittance Services
+# Zemen Bank — Digital Remittance Services · የዘመን ባንክ ዲጂታል የገንዘብ ልውውጥ አገልግሎቶች
 
 Zemen Bank — digital — Digital Remittance Services. On this page: Digital Remittance, Key Features.
 
 በአማርኛ፦ ዲጂታል አገልግሎቶች — Digital Remittance Services። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+የዘመን ባንክ ከፊንቴክ ኩባንያዎች እና የክፍያ መሳሪያ አውጪዎች ጋር በመተባበር ዲጂታል የገንዘብ ልውውጥ አገልግሎት አስተዋውቋል። ይህ አገልግሎት በውጭ የሚኖሩ ግለሰቦች ከቤታቸው ሆነው ገንዘብ ወደ ኢትዮጵያ ለመላክ ያስችላል። አገልግሎቱ ፈጣን፣ ተመጣጣኝ እና ቀላል ሲሆን፣ ምንም አይነት የአገልግሎት ክፍያ ወይም ኮሚሽን የለውም።
 
 Source: https://zemenbank.com/digital-services/digital-remittance-services (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

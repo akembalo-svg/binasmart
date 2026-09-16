@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/diaspora-banking/ethiopian-citizen-or-origin-living-in-foreign-land-ecolfl-savings-account"
 title: "Cooperative Bank of Oromia — ECOLFL Savings Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ሂሳቦች: ECOLFL ቁጠባ ሂሳብ"
 source_name: "Cooperative Bank of Oromia"
 section: "diaspora"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — ECOLFL Savings Account
+# Cooperative Bank of Oromia — ECOLFL Savings Account · የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ ሂሳቦች: ECOLFL ቁጠባ ሂሳብ
 
 Cooperative Bank of Oromia — diaspora — ECOLFL Savings Account. On this page: Always there for your Diaspora Banking Needs!, Diaspora Banking.
 
 በአማርኛ፦ የዲያስፖራ ሂሳቦች — ECOLFL Savings Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የECOLFL ቁጠባ ሂሳብ ያብራራል። ሂሳቡ በውጭ አገር የሚኖሩ ኢትዮጵያውያን ወይም የኢትዮጵያ ተወላጆች በውጭ ምንዛሪ ተቀማጭ በማድረግ በአገር ውስጥ ገንዘብ ለመጠቀም የሚያስችል ነው። ሂሳቡን ለመክፈት ዕድሜ 18 እና ከዚያ በላይ መሆን አለበት፣ እና እንደ የታደሰ ፓስፖርት እና የመኖሪያ ፈቃድ ያሉ ሰነዶች ያስፈልጋሉ።
 
 Source: https://coopbankoromia.com.et/diaspora-banking/ethiopian-citizen-or-origin-living-in-foreign-land-ecolfl-savings-account (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

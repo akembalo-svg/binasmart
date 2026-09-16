@@ -1,6 +1,7 @@
 ---
 url: "https://ecma.gov.et/about"
 title: "Ethiopian Capital Market Authority — About – Ethiopian Capital Market Authority (ECMA) | Official Website"
+titleAm: "ስለ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA)"
 source_name: "Ethiopian Capital Market Authority"
 section: "regulator"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Ethiopian Capital Market Authority — About – Ethiopian Capital Market Authority (ECMA) | Official Website
+# Ethiopian Capital Market Authority — About – Ethiopian Capital Market Authority (ECMA) | Official Website · ስለ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA)
 
 Ethiopian Capital Market Authority — regulator — About – Ethiopian Capital Market Authority (ECMA) | Official Website. On this page: About, About Us, Our Purpose, Our Vision, Our Mission, Our Values, Accountability, Integrity.
 
 በአማርኛ፦ ስለ ባለሥልጣኑ — About – Ethiopian Capital Market Authority (ECMA) | Official Website። ይህ ገጽ ከኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA)ን ያስተዋውቃል። ECMA በሰኔ 2021 የተቋቋመ የኢትዮጵያ የካፒታል ገበያዎችን የሚቆጣጠር እና የሚያዳብር አካል ነው። ባለሥልጣኑ በፕሮክላሜሽን ቁጥር 1248/2021 የተቋቋመ ሲሆን፣ በነሐሴ 2024 ወ/ሮ ሃና ተሄልኩ ዋና ዳይሬክተር ሆነው ተሾመዋል።
 
 Source: https://ecma.gov.et/about (official Ethiopian Capital Market Authority page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

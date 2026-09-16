@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/interest-free-banking/wadiah-saving-account"
 title: "Cooperative Bank of Oromia — Wadiah Saving Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ Wadiah Saving Account"
 source_name: "Cooperative Bank of Oromia"
 section: "ifb"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Wadiah Saving Account
+# Cooperative Bank of Oromia — Wadiah Saving Account · የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ Wadiah Saving Account
 
 Cooperative Bank of Oromia — ifb — Wadiah Saving Account. On this page: A safe custody with instant access.
 
 በአማርኛ፦ ወለድ አልባ ባንክ — Wadiah Saving Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ስለ Wadiah Saving Account ያብራራል። Wadiah ማለት ገንዘብን በአስተማማኝ ሁኔታ ለማስቀመጥ የሚያስችል ሲሆን፣ ባንኩ የተቀማጩን ገንዘብ በማንኛውም ጊዜ ያለገደብ እንዲያወጣ ያስችላል። አካውንት ለመክፈት ዝቅተኛው ቀሪ ሂሳብ ብር 50.00 ሲሆን፣ ለአንድ ወር ያህል በዜሮ ቀሪ ሂሳብ ሊከፈት ይችላል።
 
 Source: https://coopbankoromia.com.et/interest-free-banking/wadiah-saving-account (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

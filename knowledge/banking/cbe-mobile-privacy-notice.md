@@ -1,6 +1,7 @@
 ---
 url: "https://combanketh.et/mobile-privacy-notice"
 title: "Commercial Bank of Ethiopia — Commercial Bank of Ethiopia"
+titleAm: "የኢትዮጵያ ንግድ ባንክ፡ የግላዊነት ፖሊሲ እና የደንበኛ መረጃ ጥበቃ"
 source_name: "Commercial Bank of Ethiopia"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Commercial Bank of Ethiopia — Commercial Bank of Ethiopia
+# Commercial Bank of Ethiopia — Commercial Bank of Ethiopia · የኢትዮጵያ ንግድ ባንክ፡ የግላዊነት ፖሊሲ እና የደንበኛ መረጃ ጥበቃ
 
 Commercial Bank of Ethiopia — help — Commercial Bank of Ethiopia. On this page: Privacy Policy, Privacy Policy & Customer Data Protection, Introduction, Data Collection, Data Use, Data Disclosure, Data Security, Data Retention.
 
 በአማርኛ፦ እገዛና ደኅንነት — Commercial Bank of Ethiopia። ይህ ገጽ ከኢትዮጵያ ንግድ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኢትዮጵያ ንግድ ባንክ (CBE) የግላዊነት ፖሊሲን ያብራራል። ባንኩ የግል መረጃን እንዴት እንደሚሰበስብ፣ እንደሚጠቀም፣ እንደሚያጋራ እና እንደሚጠብቅ ይዘረዝራል። ደንበኞች ስለመረጃቸው ያላቸውን መብቶች እና የባንኩን የደህንነት እርምጃዎች ያብራራል።
 
 Source: https://combanketh.et/mobile-privacy-notice (official Commercial Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

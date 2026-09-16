@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/loan-and-advances/import-letter-of-credit-facility"
 title: "Cooperative Bank of Oromia — Import Letter Of Credit Facility"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ: Import Letter Of Credit Facility ብድር"
 source_name: "Cooperative Bank of Oromia"
 section: "loans"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Import Letter Of Credit Facility
+# Cooperative Bank of Oromia — Import Letter Of Credit Facility · የኦሮሚያ ኅብረት ሥራ ባንክ: Import Letter Of Credit Facility ብድር
 
 Cooperative Bank of Oromia — loans — Import Letter Of Credit Facility. On this page: Secure Way of Importing, Import Letter of Credit Settlement Loan.
 
 በአማርኛ፦ ብድር — Import Letter Of Credit Facility። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Import Letter Of Credit Facility ብድር ያብራራል። ባንኩ ይህንን የብድር ምርት ለገቢ ንግድ ለተሰማሩ ወይም ለተለያዩ ዓላማዎች ለሚያስመጡ ደንበኞች ይሰጣል። የብድር መጠኑ በደንበኛው የፋይናንስ ጥንካሬ እና በሚገቡት ዕቃዎች የገበያ ተፈላጊነት ላይ የተመሰረተ ነው።
 
 Source: https://coopbankoromia.com.et/loan-and-advances/import-letter-of-credit-facility (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

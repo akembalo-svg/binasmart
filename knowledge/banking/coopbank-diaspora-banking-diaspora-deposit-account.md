@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/diaspora-banking/diaspora-deposit-account"
 title: "Cooperative Bank of Oromia — Diaspora Current Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ የአሁን ሂሳብ"
 source_name: "Cooperative Bank of Oromia"
 section: "diaspora"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Diaspora Current Account
+# Cooperative Bank of Oromia — Diaspora Current Account · የኦሮሚያ ኅብረት ሥራ ባንክ የዲያስፖራ የአሁን ሂሳብ
 
 Cooperative Bank of Oromia — diaspora — Diaspora Current Account. On this page: Always there for your Diaspora Banking Needs!, Diaspora Banking, DIASPORA ACCOUNT, DIASPORA BANKING ACCOUNT.
 
 በአማርኛ፦ የዲያስፖራ ሂሳቦች — Diaspora Current Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው የዲያስፖራ የአሁን ሂሳብ ያብራራል። ሂሳቡ በሀገር ውስጥ እና በውጭ ምንዛሪ (GBP, USD, እና EURO) የሚገኝ ሲሆን፣ ቼክ ደብተር እና የዴቢት ካርድ ይሰጣል። የውጭ ምንዛሪ ግብይቶች ከክፍያ ነጻ ሲሆኑ፣ በሁሉም የባንኩ ቅርንጫፎች ግብይት ማድረግ ያስችላል።
 
 Source: https://coopbankoromia.com.et/diaspora-banking/diaspora-deposit-account (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

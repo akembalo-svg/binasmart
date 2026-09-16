@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/interest-free-banking/investment-partnership/murabaha-financing"
 title: "Cooperative Bank of Oromia — Murabaha Financing"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ ሙራባሃ ፋይናንሲንግ"
 source_name: "Cooperative Bank of Oromia"
 section: "ifb"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Murabaha Financing
+# Cooperative Bank of Oromia — Murabaha Financing · የኦሮሚያ ኅብረት ሥራ ባንክ ወለድ አልባ ባንክ፡ ሙራባሃ ፋይናንሲንግ
 
 Cooperative Bank of Oromia — ifb — Murabaha Financing. On this page: Features.
 
 በአማርኛ፦ ወለድ አልባ ባንክ — Murabaha Financing። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ሙራባሃ ባንኩ ንብረቶችን ለመግዛት ያወጣውን ወጪ በግልፅ በመጥቀስ ለደንበኛው በባንኩ ውልና ታሪፍ መሰረት ትርፍ በመጨመር የሚሸጥበት ልዩ የሽያጭ አይነት ነው። የዕቃዎች ዋጋ እና የባንኩ ትርፍ በሙራባሃ ግብይት ወቅት ለሁለቱም ወገኖች የተስተካከለ እና የሚታወቅ መሆን አለበት። ሙራባሃ በሙራባሃ የጊዜ ፋይናንሲንግ፣ ሙራባሃ ሪቮልቪንግ ፋይናንሲንግ ፋሲሊቲ፣ ሙራባሃ አስመጪ የብድር ደብዳቤ ፋሲሊቲ፣ ሙራባሃ ከመርከብ በፊት የኤክስፖርት ፋይናንሲንግ ፋሲሊቲ፣ ሙራባሃ ከመርከብ በኋላ/ሪቮልቪንግ ኤክስፖርት ፋሲሊቲ እና ሙራባሃ አስመጪ የብድር ደብዳቤ ሰፈራ ፋይናንሲንግ መልክ ሊሰጥ ይችላል።
 
 Source: https://coopbankoromia.com.et/interest-free-banking/investment-partnership/murabaha-financing (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

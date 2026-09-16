@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/app-downloads"
 title: "Dashen Bank — App Downloads"
+titleAm: "የዳሽን ባንክ የሞባይል ባንኪንግ መተግበሪያዎች ማውረጃ"
 source_name: "Dashen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — App Downloads
+# Dashen Bank — App Downloads · የዳሽን ባንክ የሞባይል ባንኪንግ መተግበሪያዎች ማውረጃ
 
 Dashen Bank — digital — App Downloads. On this page: To Download Dashen Mobile Plus for Android Devices, To Download DubeAle for Apple’s iOS Devices such as iPhones and iPads.
 
 በአማርኛ፦ ካርድ፣ ኤቲኤምና ሞባይል ባንክ — App Downloads። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዳሽን ባንክን የሞባይል ባንኪንግ መተግበሪያዎችን እንዴት ማውረድ እንደሚቻል ያብራራል። ለ Android እና iOS መሳሪያዎች Dashen Mobile Plus እና DubeAle መተግበሪያዎችን ከ Google Play Store እና App Store ለማውረድ የሚያስችሉ አገናኞችን ያቀርባል።
 
 Source: https://dashenbanksc.com/app-downloads (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

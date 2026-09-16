@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/deposit-products/gamme-junior-account"
 title: "Cooperative Bank of Oromia — Gamme-Junior Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ Gamme-Junior Account ሂሳብና ተቀማጭ"
 source_name: "Cooperative Bank of Oromia"
 section: "accounts"
 lang: "en"
@@ -12,7 +13,7 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Gamme-Junior Account
+# Cooperative Bank of Oromia — Gamme-Junior Account · የኦሮሚያ ኅብረት ሥራ ባንክ Gamme-Junior Account ሂሳብና ተቀማጭ
 
 Cooperative Bank of Oromia — accounts — Gamme-Junior Account. On this page: Teach your child importance of saving from childhood!.
 

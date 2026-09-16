@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/other-special-deposit"
 title: "Dashen Bank — Other Special Deposit"
+titleAm: "የዳሽን ባንክ ልዩ የሂሳብና ተቀማጭ አገልግሎቶች"
 source_name: "Dashen Bank"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Other Special Deposit
+# Dashen Bank — Other Special Deposit · የዳሽን ባንክ ልዩ የሂሳብና ተቀማጭ አገልግሎቶች
 
 Dashen Bank — accounts — Other Special Deposit. On this page: Non Resident Transferable Birr account [NRT], Non Resident Non-Transferable Birr account (NRNT), Non Resident Foreign Currency Account (NRFCY), Foreign Exchange Retention Account A and B, Interest Plus Bonus Account, Saving Plus Account, Hybrid Account, Student Account.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Other Special Deposit። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ዳሽን ባንክ ስለሚያቀርባቸው ልዩ የሂሳብና ተቀማጭ አገልግሎቶች ያብራራል። ከነዚህም ውስጥ ለውጭ ዜጎች፣ ለዓለም አቀፍ ድርጅቶች እና ለኤምባሲዎች የሚውሉ የNRT፣ NRNT እና NRFCY ሂሳቦች ይገኙበታል። እነዚህ ሂሳቦች ወለድ የሌላቸው ሲሆኑ፣ የNRT ሂሳብ የመጀመሪያ ተቀማጭ ገንዘብ USD 100 ነው።
 
 Source: https://dashenbanksc.com/other-special-deposit (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

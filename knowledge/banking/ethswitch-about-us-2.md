@@ -1,6 +1,7 @@
 ---
 url: "https://ethswitch.com/about-us-2"
 title: "EthSwitch S.C. — the national payment switch — About Us"
+titleAm: "ኢትስዊች አ.ማ. የክፍያ መረብ: ስለ እኛ"
 source_name: "EthSwitch S.C. — the national payment switch"
 section: "switch"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# EthSwitch S.C. — the national payment switch — About Us
+# EthSwitch S.C. — the national payment switch — About Us · ኢትስዊች አ.ማ. የክፍያ መረብ: ስለ እኛ
 
 EthSwitch S.C. — the national payment switch — switch — About Us. On this page: OUR CORPORATE PHILOSOPHY, Integrity, Security, Innovative, Customer_focused, Enabler, Employee-Focused, Efficiently and Secured.
 
 በአማርኛ፦ የክፍያ መረብ — About Us። ይህ ገጽ ከኢትስዊች አ.ማ. ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ኢትስዊች አ.ማ. በ2011 የተቋቋመ ሲሆን፣ በ2035 በአፍሪካ ውስጥ ምርጥ የክፍያ መረብ ለመሆን ያለመ ነው። የክፍያ አገልግሎት ሰጪዎችን እና የመጨረሻ ተጠቃሚዎችን ቀለል ያለ፣ ተመጣጣኝ፣ ደህንነቱ የተጠበቀ እና ቀልጣፋ የኢ-ክፍያ መሠረተ ልማት አገልግሎቶችን ይሰጣል። ከ2016 ጀምሮ የኤቲኤም እና የPOS ተርሚናሎች መስተጋብርን አስችሏል።
 
 Source: https://ethswitch.com/about-us-2 (official EthSwitch S.C. — the national payment switch page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

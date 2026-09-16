@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/qard-pre-shipment-export-financing"
 title: "Dashen Bank — Qard Pre-shipment Export Financing"
+titleAm: "የዳሽን ባንክ ወጪና ገቢ ንግድ፡ Qard Pre-shipment Export Financing"
 source_name: "Dashen Bank"
 section: "trade"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Qard Pre-shipment Export Financing
+# Dashen Bank — Qard Pre-shipment Export Financing · የዳሽን ባንክ ወጪና ገቢ ንግድ፡ Qard Pre-shipment Export Financing
 
 Dashen Bank — trade — Qard Pre-shipment Export Financing.
 
 በአማርኛ፦ ወጪና ገቢ ንግድ — Qard Pre-shipment Export Financing። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ የፋይናንስ አገልግሎት ወደ ውጭ ለሚልኩ ነጋዴዎች ምርቶችን ለመግዛት፣ ለማቀነባበር፣ ለማምረት ወይም ለማሸግ የሚውል ነው። አገልግሎቱ በታማኝ የሽያጭ ውል ወይም በኤክስፖርት L/C ጥንካሬ የሚሰጥ ሲሆን፣ ነጋዴዎች ከውጭ ንግድ ጋር የተያያዙ ወጪዎችን ለመሸፈን ያስችላቸዋል። እያንዳንዱ ቅድመ ክፍያ ከሚመለከተው የኤክስፖርት L/C ገቢ የሚከፈል ሲሆን፣ የፋይናንስ ጥያቄዎች በኦዲት የተደረጉ የፋይናንስ መግለጫዎች መደገፍ አለባቸው።
 
 Source: https://dashenbanksc.com/qard-pre-shipment-export-financing (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/deposit-products/farmers-savings-account"
 title: "Cooperative Bank of Oromia — Farmers’ Savings Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የገበሬዎች ቁጠባ ሂሳብ"
 source_name: "Cooperative Bank of Oromia"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Farmers’ Savings Account
+# Cooperative Bank of Oromia — Farmers’ Savings Account · የኦሮሚያ ኅብረት ሥራ ባንክ፡ የገበሬዎች ቁጠባ ሂሳብ
 
 Cooperative Bank of Oromia — accounts — Farmers’ Savings Account. On this page: Better Interest with Attractive Prizes!.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Farmers’ Savings Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ለገበሬዎች የነደፈውን የገበሬዎች ቁጠባ ሂሳብ ያብራራል። ሂሳቡ በግብርና፣ በእንስሳት እርባታ እና በአሳ ማጥመድ ለተሰማሩ ገበሬዎች የተዘጋጀ ሲሆን፣ ከ25 ብር ጀምሮ መክፈት ይቻላል። ከወትሮው ከፍ ያለ የወለድ ተመን እና በሎተሪ የሚሰጡ የግብርና ዘርፍ ሽልማቶች አሉት።
 
 Source: https://coopbankoromia.com.et/deposit-products/farmers-savings-account (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

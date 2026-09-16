@@ -1,6 +1,7 @@
 ---
 url: "https://ecma.gov.et/regulatory-sandbox/participants-sandbox"
 title: "Ethiopian Capital Market Authority — Participants in the Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website"
+titleAm: "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን የሙከራ ማዕቀፍ ተሳታፊዎች"
 source_name: "Ethiopian Capital Market Authority"
 section: "sandbox"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Ethiopian Capital Market Authority — Participants in the Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website
+# Ethiopian Capital Market Authority — Participants in the Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website · የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን የሙከራ ማዕቀፍ ተሳታፊዎች
 
 Ethiopian Capital Market Authority — sandbox — Participants in the Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website. On this page: Participants in the Regulatory Sandbox, Who Can Participate?, Licensed Firms, Unlicensed Firms with a Licensable Activity, Currently Unregulated Activities Likely to be Regulated, Supporting a Regulated Activity, Supervisory Technology (SupTech) to Support Regulators.
 
 በአማርኛ፦ የሙከራ ማዕቀፍ — Participants in the Regulatory Sandbox – Ethiopian Capital Market Authority (ECMA) | Official Website። ይህ ገጽ ከኢትዮጵያ የካፒታል ገበያ ባለሥልጣን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን (ECMA) የሙከራ ማዕቀፍ ተሳታፊዎችን ይዘረዝራል። ማዕቀፉ አዳዲስ የካፒታል ገበያ ምርቶችን፣ አገልግሎቶችን እና ቴክኖሎጂዎችን ለመፈተሽ፣ ለማጣራት እና ለማስፋት ያለመ ነው። ተሳታፊዎች ፈቃድ ያላቸው ድርጅቶች፣ ፈቃድ የሌላቸው ግን ፈቃድ ሊሰጣቸው የሚችሉ ተግባራትን የሚያከናውኑ ድርጅቶች፣ በአሁኑ ጊዜ ቁጥጥር ያልተደረገባቸው ግን ወደፊት ቁጥጥር ሊደረግባቸው የሚችሉ ተግባራትን የሚያከናውኑ ድርጅቶች፣ ቁጥጥር የሚደረግበትን እንቅስቃሴ የሚደግፉ ድርጅቶች እና ተቆጣጣሪዎችን ለመደገፍ የSupTech ቴክኖሎጂዎችን የሚያቀርቡ ድርጅቶችን ያካትታሉ።
 
 Source: https://ecma.gov.et/regulatory-sandbox/participants-sandbox (official Ethiopian Capital Market Authority page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

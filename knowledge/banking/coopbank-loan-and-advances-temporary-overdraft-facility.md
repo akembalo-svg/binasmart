@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/loan-and-advances/temporary-overdraft-facility"
 title: "Cooperative Bank of Oromia — Temporary Overdraft Facility"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ: Temporary Overdraft Facility"
 source_name: "Cooperative Bank of Oromia"
 section: "loans"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Temporary Overdraft Facility
+# Cooperative Bank of Oromia — Temporary Overdraft Facility · የኦሮሚያ ኅብረት ሥራ ባንክ: Temporary Overdraft Facility
 
 Cooperative Bank of Oromia — loans — Temporary Overdraft Facility. On this page: To Relieve Temporary Working Capital Constraints.
 
 በአማርኛ፦ ብድር — Temporary Overdraft Facility። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ባንኩ ለተመረጡ እና ብድር ለመስጠት ብቁ ለሆኑ ደንበኞች የሚሰጠውን Temporary Overdraft Facility ያብራራል። ብድሩ ጊዜያዊ የሥራ ማስኬጃ ካፒታል እጥረቶችን ለማቃለል የሚውል ሲሆን የመክፈያ ጊዜው ከ 3 ወር መብለጥ የለበትም። ደንበኞች ለሁለተኛ ጊዜ ብድር ሲጠይቁ 25% የሚሆነውን ዋና ገንዘብ መክፈል አለባቸው።
 
 Source: https://coopbankoromia.com.et/loan-and-advances/temporary-overdraft-facility (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/banking-service/personal-banking-2/consumer-deposit"
 title: "Zemen Bank — Consumer Saving Deposit"
+titleAm: "የዘመን ባንክ የሸማቾች ቁጠባ ተቀማጭ ሂሳብ"
 source_name: "Zemen Bank"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Consumer Saving Deposit
+# Zemen Bank — Consumer Saving Deposit · የዘመን ባንክ የሸማቾች ቁጠባ ተቀማጭ ሂሳብ
 
 Zemen Bank — accounts — Consumer Saving Deposit. On this page: Consumer Saving, Consumer Saving Deposit Products, Basic Saving Account, Personal Saving Account, Prestige Saving Account, Z-Club, Z-Club Special, Executive Special.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Consumer Saving Deposit። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዘመን ባንክ የሸማቾች ቁጠባ ተቀማጭ ምርቶችን ያብራራል። እነዚህም መሰረታዊ ቁጠባ፣ የግል ቁጠባ፣ Prestige Saving Account፣ Z-Club Special Saving Accounts፣ እና ሌሎችም ይገኙበታል። ሂሳብ ለመክፈት ዝቅተኛው የገንዘብ መጠን 5,000 ብር ሲሆን፣ ወለድ የሚሰላው በየቀኑ ዝቅተኛ ቀሪ ሂሳብ ላይ ነው።
 
 Source: https://zemenbank.com/banking-service/personal-banking-2/consumer-deposit (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

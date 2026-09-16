@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/current-demand-deposit"
 title: "Dashen Bank — Current / Demand Deposit"
+titleAm: "የዳሽን ባንክ ሂሳብና ተቀማጭ: Current / Demand Deposit"
 source_name: "Dashen Bank"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Current / Demand Deposit
+# Dashen Bank — Current / Demand Deposit · የዳሽን ባንክ ሂሳብና ተቀማጭ: Current / Demand Deposit
 
 Dashen Bank — accounts — Current / Demand Deposit. On this page: Demand Deposit / Current Account / Checking account.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Current / Demand Deposit። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ያለቅድመ ማስጠንቀቂያ ገንዘብ ማውጣት ስለሚቻልበት የባንክ ሂሳብ ያብራራል። ሂሳቡ ደህንነቱ የተጠበቀ ሲሆን ወለድ አይከፍልም፤ እንዲሁም በግብይት መጠን ላይ ገደብ የለውም። ሂሳብ ለመክፈት 500 ብር የመጀመሪያ ተቀማጭ ገንዘብ ያስፈልጋል፤ ዝቅተኛው የሂሳብ ቀሪ ሂሳብ ከሶስት ወር በላይ ዜሮ መሆን የለበትም።
 
 Source: https://dashenbanksc.com/current-demand-deposit (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

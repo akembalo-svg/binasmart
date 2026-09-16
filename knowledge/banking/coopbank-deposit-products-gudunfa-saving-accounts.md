@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/deposit-products/gudunfa-saving-accounts"
 title: "Cooperative Bank of Oromia — Gudunfa Savings Accounts"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ፡ ጉዱንፋ የቁጠባ ሂሳቦች"
 source_name: "Cooperative Bank of Oromia"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Gudunfa Savings Accounts
+# Cooperative Bank of Oromia — Gudunfa Savings Accounts · የኦሮሚያ ኅብረት ሥራ ባንክ፡ ጉዱንፋ የቁጠባ ሂሳቦች
 
 Cooperative Bank of Oromia — accounts — Gudunfa Savings Accounts. On this page: Small box, big dream!.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Gudunfa Savings Accounts። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ጉዱንፋ የቁጠባ ሂሳብ ደንበኞች በንግድ ቦታቸው ገንዘብ የሚያስቀምጡበት ልዩ የቁጠባ ሣጥን የሚጠይቁበት የቁጠባ አይነት ነው። ሣጥኑን ለመክፈት 350 ብር የመጀመሪያ ተቀማጭ ገንዘብ ያስፈልጋል፣ ይህም የሣጥኑ ዋጋ ነው። ይህ የቁጠባ አይነት ደንበኞች ቅርንጫፎችን የመጎብኘት ድግግሞሽን በመቀነስ ገንዘባቸውን በንግድ ቦታቸው እንዲያስቀምጡ ያስችላቸዋል።
 
 Source: https://coopbankoromia.com.et/deposit-products/gudunfa-saving-accounts (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

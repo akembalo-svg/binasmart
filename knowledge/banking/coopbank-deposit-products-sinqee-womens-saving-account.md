@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/deposit-products/sinqee-womens-saving-account"
 title: "Cooperative Bank of Oromia — Sinqe Women Savings Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ: Sinqe Women Savings Account"
 source_name: "Cooperative Bank of Oromia"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Sinqe Women Savings Account
+# Cooperative Bank of Oromia — Sinqe Women Savings Account · የኦሮሚያ ኅብረት ሥራ ባንክ: Sinqe Women Savings Account
 
 Cooperative Bank of Oromia — accounts — Sinqe Women Savings Account. On this page: Empowering women, building the strongest community!, Sinqe Women’s Savings Account.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Sinqe Women Savings Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርበው Sinqe Women Savings Account ያብራራል። ሂሳቡ ከ 30 ዓመት በላይ ለሆኑ ሴቶች የተዘጋጀ ሲሆን፣ ዝቅተኛ የተቀማጭ ገንዘብ መስፈርት የለውም፣ ከመደበኛ የቁጠባ ሂሳብ የተሻለ የወለድ መጠን አለው፣ እና የግብይት ክፍያ የለውም። በአማካይ ለስድስት ወራት 30,000.00 ብር እና ከዚያ በላይ ያስቀመጡ የሂሳብ ባለቤቶች ለእያንዳንዱ እስከ ሶስት ልጆቻቸው 100.00 ብር ማበረታቻ ያገኛሉ።
 
 Source: https://coopbankoromia.com.et/deposit-products/sinqee-womens-saving-account (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

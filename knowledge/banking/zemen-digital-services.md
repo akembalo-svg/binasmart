@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/digital-services"
 title: "Zemen Bank — Digital Services"
+titleAm: "የዘመን ባንክ ዲጂታል አገልግሎቶች"
 source_name: "Zemen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Digital Services
+# Zemen Bank — Digital Services · የዘመን ባንክ ዲጂታል አገልግሎቶች
 
 Zemen Bank — digital — Digital Services. On this page: ATM & POS Services, Internet Banking, Mobile Banking, Debit Cards, Payroll cards, Prepaid cards, Gift cards, Zemen Platinum Travel Prepaid MasterCard.
 
 በአማርኛ፦ ዲጂታል አገልግሎቶች — Digital Services። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+የዘመን ባንክ ዲጂታል አገልግሎቶች በኦምኒ-ቻናል ባንኪንግ አማካኝነት ለደንበኞች ፍላጎት የተበጁ ናቸው። ባንኩ 300 ኤቲኤም እና ከ100 በላይ የPOS ማሽኖችን በመላ አገሪቱ በማሰማራት የ24 ሰዓት አገልግሎት ይሰጣል። በተጨማሪም የኢንተርኔት ባንኪንግ፣ የሞባይል ባንኪንግ፣ የዴቢት ካርዶች፣ የደመወዝ ካርዶች፣ የቅድመ ክፍያ ካርዶች እና የስጦታ ካርዶችን ያቀርባል።
 
 Source: https://zemenbank.com/digital-services (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

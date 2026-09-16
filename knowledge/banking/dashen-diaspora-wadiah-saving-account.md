@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/diaspora-wadiah-saving-account"
 title: "Dashen Bank — Diaspora Wadi’ah Saving Account"
+titleAm: "የዳሽን ባንክ የዲያስፖራ Wadi’ah ቁጠባ ሂሳብ"
 source_name: "Dashen Bank"
 section: "diaspora"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — Diaspora Wadi’ah Saving Account
+# Dashen Bank — Diaspora Wadi’ah Saving Account · የዳሽን ባንክ የዲያስፖራ Wadi’ah ቁጠባ ሂሳብ
 
 Dashen Bank — diaspora — Diaspora Wadi’ah Saving Account.
 
 በአማርኛ፦ የዲያስፖራ ሂሳቦች — Diaspora Wadi’ah Saving Account። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ የዳሽን ባንክ የዲያስፖራ Wadi’ah ቁጠባ ሂሳብ የውጭ ምንዛሪ ሂሳብ ሲሆን፣ ባንኩ ከዲያስፖራ ደንበኞቹ ገንዘባቸውን በአስተማማኝ ሁኔታ ለማስቀመጥ እና ለመጠቀም ምቹ ሁኔታዎችን ይሰጣል። ሂሳቡ ትርፍ እና ኪሳራ የሌለው ሲሆን፣ ለሀገር ውስጥ ክፍያዎች ብቻ የሚያገለግል ነው። የመጀመሪያው ተቀማጭ ገንዘብ 100 ዶላር ሲሆን፣ ዕድሜያቸው 18 እና ከዚያ በላይ የሆኑ ግለሰቦች እንዲሁም ህጋዊ አካላት መክፈት ይችላሉ።
 
 Source: https://dashenbanksc.com/diaspora-wadiah-saving-account (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://coopbankoromia.com.et/deposit-products/saving-account-2"
 title: "Cooperative Bank of Oromia — Saving Account"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ፡ የቁጠባ ሂሳብ"
 source_name: "Cooperative Bank of Oromia"
 section: "accounts"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — Saving Account
+# Cooperative Bank of Oromia — Saving Account · የኦሮሚያ ኅብረት ሥራ ባንክ፡ የቁጠባ ሂሳብ
 
 Cooperative Bank of Oromia — accounts — Saving Account. On this page: Regular Savings Account, Youth Savings Account, Gamme-Junior Account, Special Savings Account Features, Gudunfa Savings Account, Siinqee Women’s Savings Account, Farmer's Savings Account Features.
 
 በአማርኛ፦ ሂሳብና ተቀማጭ — Saving Account። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የኦሮሚያ ኅብረት ሥራ ባንክ ስለሚያቀርባቸው የቁጠባ ሂሳብ ምርቶች ያብራራል። ባንኩ Ordinary Savings Account, Gamme-Junior Account, Youth Savings Account, Sinqe-Women’s Savings Account, Special Savings Account, Non-Interest-Bearing Savings Account, እና Gudunfa Saving Account ጨምሮ ሰባት የቁጠባ ሂሳብ አይነቶችን ያቀርባል። እነዚህ ሂሳቦች ለተፈጥሮ እና ህጋዊ ሰዎች የሚሰጡ ሲሆን፣ አብዛኛዎቹ ወለድ የሚያስገኙ ናቸው።
 
 Source: https://coopbankoromia.com.et/deposit-products/saving-account-2 (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

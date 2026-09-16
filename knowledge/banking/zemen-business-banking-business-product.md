@@ -1,6 +1,7 @@
 ---
 url: "https://zemenbank.com/banking-service/business-banking/business-product"
 title: "Zemen Bank — Business Product"
+titleAm: "የዘመን ባንክ የንግድ ባንክ አገልግሎት ምርቶች"
 source_name: "Zemen Bank"
 section: "business"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Zemen Bank — Business Product
+# Zemen Bank — Business Product · የዘመን ባንክ የንግድ ባንክ አገልግሎት ምርቶች
 
 Zemen Bank — business — Business Product. On this page: Omni-Channel Banking, Doorstep Banking, Onsite Payroll Payment.
 
 በአማርኛ፦ የንግድ ባንክ አገልግሎት — Business Product። ይህ ገጽ ከዘመን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ የዘመን ባንክ ለንግድ ስራ የሚያቀርባቸውን የተለያዩ የባንክ አገልግሎት ምርቶች ያብራራል። የንግድ መሰረታዊ ሂሳብ፣ የንግድ ቁጠባ ሂሳብ እና ኦቨርድራፍት ጥበቃን ጨምሮ የተለያዩ አማራጮችን ያቀርባል። ባንኩ የኢንተርኔት ባንኪንግ፣ የሞባይል ባንኪንግ እና የበር ላይ ባንኪንግን ጨምሮ ሁሉን አቀፍ የባንክ አገልግሎቶችን በ24/7 ተደራሽነት ያቀርባል።
 
 Source: https://zemenbank.com/banking-service/business-banking/business-product (official Zemen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 

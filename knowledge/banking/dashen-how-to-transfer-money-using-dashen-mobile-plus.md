@@ -1,6 +1,7 @@
 ---
 url: "https://dashenbanksc.com/how-to-transfer-money-using-dashen-mobile-plus"
 title: "Dashen Bank — How to transfer money using Dashen Mobile Plus"
+titleAm: "የዳሽን ባንክ: ገንዘብ በዳሽን ሞባይል ፕላስ እንዴት ማስተላለፍ ይቻላል?"
 source_name: "Dashen Bank"
 section: "digital"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Dashen Bank — How to transfer money using Dashen Mobile Plus
+# Dashen Bank — How to transfer money using Dashen Mobile Plus · የዳሽን ባንክ: ገንዘብ በዳሽን ሞባይል ፕላስ እንዴት ማስተላለፍ ይቻላል?
 
 Dashen Bank — digital — How to transfer money using Dashen Mobile Plus.
 
 በአማርኛ፦ ካርድ፣ ኤቲኤምና ሞባይል ባንክ — How to transfer money using Dashen Mobile Plus። ይህ ገጽ ከዳሽን ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ገጽ ገንዘብ በዳሽን ሞባይል ፕላስ እንዴት ማስተላለፍ እንደሚቻል ያብራራል። ገንዘብ ለማስተላለፍ 3 አማራጮች አሉ: USSD *996#, የዳሽን ሞባይል ፕላስ አፕሊኬሽን እና ዳሽን ዌብ። እያንዳንዱ አማራጭ ገንዘብ ለማስተላለፍ የሚያስፈልጉትን ደረጃዎች በዝርዝር ያሳያል።
 
 Source: https://dashenbanksc.com/how-to-transfer-money-using-dashen-mobile-plus (official Dashen Bank page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
