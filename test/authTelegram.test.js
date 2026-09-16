@@ -113,3 +113,33 @@ test('a door the server has not configured stays hidden', () => {
   // .gbtn is display:flex, which overrides the `hidden` attribute unless this rule exists
   assert.ok(/\[hidden\]\{display:none!important\}/.test(h), 'hidden wins over the display rules');
 });
+
+// ----- Plan D final review, fix 2: a cross-site POST is not a sign-in -----
+// better-auth hangs originCheckMiddleware on every path, but its origin test gives up unless the
+// request carries a Cookie header -- and a cross-site POST carries none, because the session cookie
+// is SameSite=Lax. Its own /sign-in/email does not lean on that: it carries formCsrfMiddleware,
+// which reads the Origin whether there is a cookie or not. 46b974d put that guard on the two phone
+// endpoints. This door hands out the same session cookie, so it carries the same guard.
+
+test('a cross-site POST is refused at the Telegram door, and bina.et is not', async () => {
+  process.env.BINA_RIDER_BOT_TOKEN = process.env.BINA_RIDER_BOT_TOKEN || TOKEN;
+  const { auth } = await import('../auth.mjs');
+  // A forged payload on purpose: nothing here must ever reach the database. What is being measured
+  // is which request is stopped at the door and which one is stopped by the signature check.
+  const body = JSON.stringify({ widget: { id: 5, first_name: 'X', auth_date: AUTH_DATE, hash: 'a'.repeat(64) } });
+  const post = (origin) => {
+    const headers = { 'content-type': 'application/json' };
+    if (origin) headers.origin = origin;
+    return auth.handler(new Request('https://bina.et/api/auth/sign-in/telegram', { method: 'POST', headers, body }));
+  };
+  assert.strictEqual((await post('https://evil.example')).status, 403, 'a foreign origin is turned away at the door');
+  assert.notStrictEqual((await post('https://bina.et')).status, 403, 'the site itself still reaches the handler');
+  assert.notStrictEqual((await post(null)).status, 403, 'curl and a native app, carrying no Origin at all, still get in');
+});
+
+test('the Telegram door carries the guard in source, exactly as the phone door does', () => {
+  const fs = require('fs'), path = require('path');
+  const src = fs.readFileSync(path.join(__dirname, '..', 'auth', 'telegram-plugin.mjs'), 'utf8');
+  assert.ok(/formCsrfMiddleware.*from 'better-auth\/api'/.test(src), 'imported from the same place');
+  assert.ok(/use: \[formCsrfMiddleware\]/.test(src), 'and hung on the endpoint');
+});

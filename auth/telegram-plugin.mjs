@@ -9,7 +9,7 @@
 //
 // Telegram gives no email. We store a deterministic placeholder on a domain we own; the day the
 // person adds a real email or phone, that becomes the thing we contact them on.
-import { createAuthEndpoint, APIError } from 'better-auth/api';
+import { createAuthEndpoint, formCsrfMiddleware, APIError } from 'better-auth/api';
 import { setSessionCookie } from 'better-auth/cookies';
 import { handleOAuthUserInfo } from 'better-auth/oauth2';
 import * as z from 'zod';
@@ -18,6 +18,13 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const tg = require('./telegram-verify.js');
 
+// A cross-site POST is not a sign-in. better-auth hangs originCheckMiddleware on every path, but
+// its origin test gives up unless the request carries a Cookie header -- and a cross-site POST
+// carries none, because the session cookie is SameSite=Lax. Its own /sign-in/email does not lean
+// on that: it carries formCsrfMiddleware, which reads the Origin whether there is a cookie or not.
+// This door hands out the same session cookie the phone door does, so it carries the same guard.
+// A client with no Origin, no Referer and no Sec-Fetch-* header at all -- curl, a native app -- is
+// still let through, and the login page and the mini app are unchanged.
 export const telegram = (options = {}) => {
   const botToken = () => options.botToken || process.env.BINA_RIDER_BOT_TOKEN || '';
   return {
@@ -25,6 +32,7 @@ export const telegram = (options = {}) => {
     endpoints: {
       signInTelegram: createAuthEndpoint('/sign-in/telegram', {
         method: 'POST',
+        use: [formCsrfMiddleware],
         body: z.object({
           widget: z.record(z.string(), z.union([z.string(), z.number()])).optional(),
           initData: z.string().max(4096).optional(),
