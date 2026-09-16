@@ -26,7 +26,7 @@ module.exports = {
     prefer: ['law', 'guide', 'eservices', 'mor', 'news:law-*', 'web:justice/*'],
     // `travel` added 2026-09-16 with the Ethiopian Airlines pack: an airline's conditions of carriage are
     // a commercial contract, not Ethiopian law, and must never be quoted as one.
-    exclude: ['page', 'skill', 'llms', 'travel'],
+    exclude: ['page', 'skill', 'llms', 'travel', 'banking'],
   },
 
   gates: [

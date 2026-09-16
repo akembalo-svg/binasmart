@@ -22,7 +22,7 @@ module.exports = {
     prefer: ['health', 'web:moh/*', 'law:labour-proclamation-1156-2019', 'addis', 'eservices:ethiopian-food-and-drug-authority'],
     // `travel` added 2026-09-16 with the Ethiopian Airlines pack: baggage rules and lounge access are not
     // health answers, and a page about travelling while pregnant belongs to the airline, not to a clinician.
-    exclude: ['page', 'skill', 'llms', 'mor', 'travel', 'guide:business-registration-ethiopia', 'guide:how-to-start-a-business-in-ethiopia',
+    exclude: ['page', 'skill', 'llms', 'mor', 'travel', 'banking', 'guide:business-registration-ethiopia', 'guide:how-to-start-a-business-in-ethiopia',
       'guide:mesob', 'guide:telebirr', 'guide:tenant-screening-ethiopia'],
   },
 
