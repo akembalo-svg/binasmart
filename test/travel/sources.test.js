@@ -52,7 +52,8 @@ test('booking, account and promotional paths are denied on the airline site', ()
   const blocked = p => deny.some(r => r.test(p)) || !allow.some(r => r.test(p));
   for (const p of ['/et/book/booking/flight', '/et/home-page/save-10', '/et/home-page/flash-sales',
     '/et/customer-surveys/module-1/cc', '/et/blog/travel-tips', '/et/explore/deals-offers/top-flights',
-    '/et/ethiopian-offers', '/et/sitemap', '/et/supporttest', '/et/customer-survey-landing'])
+    '/et/ethiopian-offers', '/et/sitemap', '/et/supporttest', '/et/customer-survey-landing',
+    '/et/explore/et-specials/ado-partner-portal--authorized-users-only'])
     assert.ok(blocked(p), 'must not be fetched: ' + p);
 });
 

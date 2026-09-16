@@ -52,6 +52,7 @@
         "^/et/supporttest$",
         "^/et/services/help-and-contact/call-center-survey$",
         "^/et/explore/et-specials/apply-ethiopian-e-visa/apply",
+        "^/et/explore/et-specials/ado-partner-portal",
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
       ],
       "sections": [
