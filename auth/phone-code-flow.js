@@ -54,7 +54,43 @@ function makePhoneCodeFlow({ store, sender, linkPhone, normalise, pepper, now = 
     return { ok: true };
   }
 
-  return { send, ready };
+  // Spending a code. Everything that can go wrong is one answer; see the note at the top of the file.
+  async function verify({ phone, code } = {}) {
+    if (!ready()) return { ok: false, error: 'not_configured' };
+    const e164 = normalise(phone);
+    // Shape first: a request that cannot possibly be right costs one regular expression, not a query.
+    if (!e164 || !/^\d{6}$/.test(String(code == null ? '' : code))) return { ok: false, error: 'bad_code' };
+    const id = pc.identifierFor(e164);
+    const at = now();
+    const row = await store.find(id);
+    const r = pc.checkCode({ row, code: String(code), phone: e164, pepper, now: at });
+    // Spent or expired: the row goes. A counted wrong guess: the row is replaced, which is also what
+    // makes a code single-use — the old row is gone before the new one is written.
+    if (r.clear) await store.remove(id);
+    if (r.next) { await store.remove(id); await store.create({ identifier: id, value: r.next.value, expiresAt: r.next.expiresAt }); }
+    if (!r.ok) return { ok: false, error: 'bad_code' };
+
+    // The number is now PROVEN — an SMS to it was answered. One account, many doors: if some other
+    // door already proved this number, that is the account. Otherwise a new one, with the role every
+    // new account gets. 'admin', and 'owner' with a building, are granted by hand and never here.
+    let user = await store.findUserByPhone(e164);
+    let isRegister = false;
+    if (!user) {
+      user = await store.createUser({ email: pc.phonePlaceholderEmail(e164), name: pc.maskPhone(e164), role: 'user' });
+      isRegister = true;
+    }
+    // auth/identity.js writes phone + phoneVerifiedAt and attaches the Rider and Driver rows that
+    // carry the same number. It refuses to move a number another account holds; if it refuses, nobody
+    // is signed in — a half-linked account is worse than a failed sign-in.
+    const linked = await linkPhone(user.id, e164);
+    if (!linked || linked.ok !== true) {
+      log('[phone-code] link ' + String((linked && linked.error) || 'failed'));
+      return { ok: false, error: 'bad_code' };
+    }
+    return { ok: true, isRegister, user };
+  }
+
+  return { send, verify, ready };
 }
 
 module.exports = { makePhoneCodeFlow };

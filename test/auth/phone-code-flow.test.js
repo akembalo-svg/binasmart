@@ -130,3 +130,131 @@ test('an SMS that did not go is logged by its kind alone, and the visitor is sti
   assert.equal(b.logs[0].includes('251900000001'), false);
   assert.equal(b.logs[0].includes('483920'), false);
 });
+
+// ----- Task 6: spending a code -----
+const liveRow = (code, attempts, expiresAt) => ({
+  'phonecode:+251900000001': { value: pc.packValue(pc.hashCode(code, PHONE, PEPPER), attempts || 0), expiresAt: new Date(expiresAt === undefined ? NOW + pc.TTL_MS : expiresAt) }
+});
+
+test('the right code signs in the account that already holds the number, and the row is spent', async () => {
+  const store = fakeStore(liveRow('483920', 0));
+  store.users.push({ id: 'u9', name: 'Demo Rider', email: 'demo@example.com', phone: PHONE });
+  const b = build({ store });
+  const r = await b.flow.verify({ phone: '0900000001', code: '483920' });
+  assert.equal(r.ok, true);
+  assert.equal(r.isRegister, false, 'one account, many doors — no second account for a proven number');
+  assert.equal(r.user.id, 'u9');
+  assert.deepEqual(b.store.removed, ['phonecode:+251900000001']);
+  assert.equal(b.store.rows['phonecode:+251900000001'], undefined);
+});
+
+test('the same code cannot be spent twice', async () => {
+  const store = fakeStore(liveRow('483920', 0));
+  store.users.push({ id: 'u9', name: 'Demo Rider', email: 'demo@example.com', phone: PHONE });
+  const b = build({ store });
+  assert.equal((await b.flow.verify({ phone: '0900000001', code: '483920' })).ok, true);
+  assert.deepEqual(await b.flow.verify({ phone: '0900000001', code: '483920' }), { ok: false, error: 'bad_code' });
+});
+
+test('a number nobody has yet becomes a new account: role user, a placeholder address, a masked name', async () => {
+  const b = build({ store: fakeStore(liveRow('483920', 0)) });
+  const r = await b.flow.verify({ phone: '0900000001', code: '483920' });
+  assert.equal(r.ok, true);
+  assert.equal(r.isRegister, true);
+  assert.equal(r.user.email, 'p251900000001@phone.bina.et');
+  assert.equal(r.user.name, '+251 ••• 0001');
+  assert.equal(r.user.role, 'user', 'never owner, never admin — those are granted by hand');
+  assert.equal(r.user.phone, PHONE, 'the number is proven on the account before the session exists');
+});
+
+test('every way a code can fail is the same six words to the visitor', async () => {
+  const cases = [
+    ['no code was ever asked for', fakeStore(), '483920'],
+    ['the code ran out', fakeStore(liveRow('483920', 0, NOW - 1)), '483920'],
+    ['the wrong code', fakeStore(liveRow('483920', 0)), '000000'],
+    ['locked out', fakeStore(liveRow('483920', 5, NOW + pc.LOCK_MS)), '483920'],
+    ['not six digits', fakeStore(liveRow('483920', 0)), '48392'],
+    ['not digits at all', fakeStore(liveRow('483920', 0)), 'abcdef'],
+    ['nothing at all', fakeStore(liveRow('483920', 0)), '']
+  ];
+  for (const [what, store, code] of cases) {
+    const b = build({ store });
+    assert.deepEqual(await b.flow.verify({ phone: '0900000001', code }), { ok: false, error: 'bad_code' }, what);
+  }
+  const b = build({ store: fakeStore(liveRow('483920', 0)) });
+  assert.deepEqual(await b.flow.verify({ phone: '0700000001', code: '483920' }), { ok: false, error: 'bad_code' }, 'a number we cannot even normalise');
+});
+
+test('a code shaped wrongly never reaches the database', async () => {
+  const b = build({ store: fakeStore(liveRow('483920', 0)) });
+  let reads = 0;
+  const realFind = b.store.find;
+  b.store.find = async id => { reads++; return realFind(id); };
+  await b.flow.verify({ phone: '0900000001', code: 'abcdef' });
+  await b.flow.verify({ phone: '0900000001', code: '1234567' });
+  await b.flow.verify({ phone: 'nonsense', code: '483920' });
+  assert.equal(reads, 0);
+});
+
+test('a wrong code is counted against the same row, and the fifth locks the number', async () => {
+  const b = build({ store: fakeStore(liveRow('483920', 0)) });
+  for (let i = 1; i <= 4; i++) {
+    assert.deepEqual(await b.flow.verify({ phone: '0900000001', code: '000000' }), { ok: false, error: 'bad_code' }, 'guess ' + i);
+    assert.equal(pc.unpackValue(b.store.rows['phonecode:+251900000001'].value).attempts, i);
+  }
+  assert.deepEqual(await b.flow.verify({ phone: '0900000001', code: '000000' }), { ok: false, error: 'bad_code' }, 'the fifth');
+  const locked = b.store.rows['phonecode:+251900000001'];
+  assert.equal(pc.unpackValue(locked.value).attempts, 5);
+  assert.equal(locked.expiresAt.getTime(), NOW + pc.LOCK_MS);
+  assert.deepEqual(await b.flow.verify({ phone: '0900000001', code: '483920' }), { ok: false, error: 'bad_code' }, 'the right code, too late');
+});
+
+test('a code issued for one number does not open another', async () => {
+  const rows = liveRow('483920', 0);
+  rows['phonecode:+251900000002'] = { value: pc.packValue(pc.hashCode('483920', '+251900000002', PEPPER), 0), expiresAt: new Date(NOW + pc.TTL_MS) };
+  const b = build({ store: fakeStore(rows) });
+  // The hash is over (pepper, phone, code), so the same six digits are a different secret per number.
+  assert.notEqual(pc.hashCode('483920', PHONE, PEPPER), pc.hashCode('483920', '+251900000002', PEPPER));
+  assert.equal((await b.flow.verify({ phone: '0900000001', code: '483920' })).ok, true);
+  assert.equal(b.store.rows['phonecode:+251900000002'] !== undefined, true, 'the other number is untouched');
+});
+
+test('if the number cannot be proven on the account, nobody is signed in', async () => {
+  const store = fakeStore(liveRow('483920', 0));
+  store.users.push({ id: 'u9', name: 'Demo Rider', email: 'demo@example.com', phone: PHONE });
+  const logs = [];
+  const flow = makePhoneCodeFlow({
+    store, sender: fakeSender(), normalise: normPhone, pepper: PEPPER, now: () => new Date(NOW), newCode: () => '483920',
+    linkPhone: async () => ({ ok: false, error: 'phone_taken' }), log: m => logs.push(m)
+  });
+  assert.deepEqual(await flow.verify({ phone: '0900000001', code: '483920' }), { ok: false, error: 'bad_code' });
+  assert.deepEqual(logs, ['[phone-code] link phone_taken']);
+});
+
+// The account is reached only once the code is proven. A number that was merely typed must never be
+// looked up, never make an account, and above all never be linked — linkPhone is what writes
+// phoneVerifiedAt, and a number nobody answered an SMS on carrying a verified date would be a lie.
+test('a number that was only typed is never looked up, never makes an account and is never linked', async () => {
+  const cases = [
+    ['no code was ever asked for', fakeStore(), '0900000001', '483920'],
+    ['the code ran out', fakeStore(liveRow('483920', 0, NOW - 1)), '0900000001', '483920'],
+    ['the wrong code', fakeStore(liveRow('483920', 0)), '0900000001', '000000'],
+    ['locked out', fakeStore(liveRow('483920', 5, NOW + pc.LOCK_MS)), '0900000001', '483920'],
+    ['not six digits', fakeStore(liveRow('483920', 0)), '0900000001', '48392'],
+    ['a number we cannot normalise', fakeStore(liveRow('483920', 0)), '0700000001', '483920']
+  ];
+  for (const [what, store, phone, code] of cases) {
+    const touched = [];
+    store.findUserByPhone = async () => { touched.push('lookup'); return null; };
+    store.createUser = async () => { touched.push('create'); return { id: 'u0', phone: null }; };
+    const linked = [];
+    const flow = makePhoneCodeFlow({
+      store, sender: fakeSender(), normalise: normPhone, pepper: PEPPER,
+      now: () => new Date(NOW), newCode: () => '483920',
+      linkPhone: async () => { linked.push('link'); return { ok: true, phone, linked: {} }; }, log: () => {}
+    });
+    assert.deepEqual(await flow.verify({ phone, code }), { ok: false, error: 'bad_code' }, what);
+    assert.deepEqual(touched, [], what + ': no account row was read or written');
+    assert.deepEqual(linked, [], what + ': nothing was proven on an account');
+  }
+});
