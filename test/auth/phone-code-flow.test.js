@@ -258,3 +258,82 @@ test('a number that was only typed is never looked up, never makes an account an
     assert.deepEqual(linked, [], what + ': nothing was proven on an account');
   }
 });
+
+// ----- Plan D final review, fix 3: no orphan account -----
+// createUser ran before linkPhone. If the link then refused - or the database threw underneath it -
+// the account stayed: a row with a placeholder address, no phone and nobody who can reach it. And
+// because that address is derived from the number and the e-mail column is unique, the orphan is
+// exactly what the NEXT attempt on the same number collides with, so the number is locked out of
+// the site for good. The account this call created is now taken back before the refusal is returned.
+
+// A store whose createUser refuses a duplicate address, which is what the database does.
+function storeWithUniqueEmail(rows) {
+  const s = fakeStore(rows);
+  const create = s.createUser;
+  s.createUser = async u => {
+    if (s.users.some(x => x.email === u.email)) throw new Error('unique constraint failed on the fields: (email)');
+    return create(u);
+  };
+  s.deleted = [];
+  s.deleteUser = async id => { s.deleted.push(id); s.users = s.users.filter(u => u.id !== id); };
+  return s;
+}
+
+test('a link that throws leaves no account behind', async () => {
+  const store = storeWithUniqueEmail(liveRow('483920', 0));
+  const logs = [];
+  const flow = makePhoneCodeFlow({
+    store, sender: fakeSender(), normalise: normPhone, pepper: PEPPER,
+    now: () => new Date(NOW), newCode: () => '483920',
+    linkPhone: async () => { throw new Error('the database went away mid-link'); }, log: m => logs.push(m)
+  });
+  assert.deepEqual(await flow.verify({ phone: '0900000001', code: '483920' }), { ok: false, error: 'bad_code' });
+  assert.equal(store.users.length, 0, 'no orphan with a placeholder address is left behind');
+  assert.equal(store.deleted.length, 1, 'the account made a moment ago was taken back');
+  assert.deepEqual(logs, ['[phone-code] link threw'], 'a throw is one word, like every other refusal');
+});
+
+test('a refused link leaves nothing behind, so the same number can try again', async () => {
+  const store = storeWithUniqueEmail(liveRow('483920', 0));
+  const make = link => makePhoneCodeFlow({
+    store, sender: fakeSender(), normalise: normPhone, pepper: PEPPER,
+    now: () => new Date(NOW), newCode: () => '483920', linkPhone: link, log: () => {}
+  });
+  const refuses = make(async () => ({ ok: false, error: 'phone_taken' }));
+  assert.deepEqual(await refuses.verify({ phone: '0900000001', code: '483920' }), { ok: false, error: 'bad_code' });
+  assert.equal(store.users.length, 0, 'nothing persists from a sign-in that did not happen');
+
+  // The same person, a fresh code, and this time the link agrees. Before the fix this second attempt
+  // died on the unique e-mail column, and the number could never sign in again.
+  store.rows = liveRow('483920', 0);
+  const agrees = make(async (id, phone) => { store.users.forEach(u => { if (u.id === id) u.phone = phone; }); return { ok: true, phone, linked: {} }; });
+  const r = await agrees.verify({ phone: '0900000001', code: '483920' });
+  assert.equal(r.ok, true, 'the second attempt is not blocked by the first');
+  assert.equal(r.isRegister, true);
+  assert.equal(r.user.email, 'p251900000001@phone.bina.et');
+});
+
+test('only the account this call created is ever taken back', async () => {
+  // An account that already held the number: nothing was created, so nothing may be removed, even
+  // though the link refused.
+  const store = storeWithUniqueEmail(liveRow('483920', 0));
+  store.users.push({ id: 'u9', name: 'Demo Rider', email: 'demo@example.com', phone: PHONE });
+  const flow = makePhoneCodeFlow({
+    store, sender: fakeSender(), normalise: normPhone, pepper: PEPPER,
+    now: () => new Date(NOW), newCode: () => '483920',
+    linkPhone: async () => ({ ok: false, error: 'phone_taken' }), log: () => {}
+  });
+  assert.deepEqual(await flow.verify({ phone: '0900000001', code: '483920' }), { ok: false, error: 'bad_code' });
+  assert.deepEqual(store.deleted, [], 'an account that was already there is never deleted by a sign-in');
+  assert.equal(store.users.length, 1);
+});
+
+test('a store with no deleteUser still refuses cleanly rather than throwing at the visitor', async () => {
+  const store = fakeStore(liveRow('483920', 0));      // no deleteUser on it at all
+  const flow = makePhoneCodeFlow({
+    store, sender: fakeSender(), normalise: normPhone, pepper: PEPPER,
+    now: () => new Date(NOW), newCode: () => '483920',
+    linkPhone: async () => ({ ok: false, error: 'phone_taken' }), log: () => {}
+  });
+  assert.deepEqual(await flow.verify({ phone: '0900000001', code: '483920' }), { ok: false, error: 'bad_code' });
+});

@@ -283,3 +283,11 @@ test('the route says exactly what the flow would say, switch for switch', () => 
     assert.equal(authPhoneReady(env), flow.ready(), 'route and flow disagree for ' + Object.keys(env).join('+'));
   }
 });
+
+test('the store can take back an account, which is what the flow needs to leave no orphan', () => {
+  // auth/phone-code-flow.js removes the account it created a moment ago when linkPhone refuses.
+  // It can only do that if the glue hands it the adapter that does the removing.
+  const src = read('auth/phone-code-plugin.mjs');
+  assert.match(src, /deleteUser: id => ia\.deleteUser\(id\)/, 'the compensating step has something to call');
+  assert.match(src, /createUser: u => ia\.createUser\(/, 'and the creating one is still there');
+});

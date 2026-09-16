@@ -17,7 +17,8 @@
 // 2. Every way a code can fail is one answer, 'bad_code'. Never asked for, expired, wrong, locked out,
 //    the wrong number — telling them apart is telling an attacker how far a guess got.
 //
-// store { find(id), create({identifier,value,expiresAt}), remove(id), findUserByPhone(e164), createUser({email,name,role}) }
+// store { find(id), create({identifier,value,expiresAt}), remove(id), findUserByPhone(e164),
+//         createUser({email,name,role}), deleteUser(id) }
 const pc = require('./phone-code');
 
 function makePhoneCodeFlow({ store, sender, linkPhone, normalise, pepper, now = () => new Date(), log = () => {},
@@ -82,8 +83,24 @@ function makePhoneCodeFlow({ store, sender, linkPhone, normalise, pepper, now = 
     // auth/identity.js writes phone + phoneVerifiedAt and attaches the Rider and Driver rows that
     // carry the same number. It refuses to move a number another account holds; if it refuses, nobody
     // is signed in — a half-linked account is worse than a failed sign-in.
-    const linked = await linkPhone(user.id, e164);
+    let linked = null;
+    try {
+      linked = await linkPhone(user.id, e164);
+    } catch (e) {
+      linked = { ok: false, error: 'threw' };   // one word, like every other refusal
+    }
     if (!linked || linked.ok !== true) {
+      // The account was made a moment ago, for a number that could then not be proven on it.
+      // Leaving it is worse than never having made it: it is a row with a placeholder address,
+      // no phone and nobody who can reach it -- and because that address is derived from the
+      // number and the e-mail column is unique, the orphan is exactly what the NEXT attempt on
+      // the same number collides with, locking that number out of the site for good. So it is
+      // taken back. Only the account THIS call created is ever removed: an account that already
+      // held the number is somebody's, refusal or not.
+      if (isRegister && store.deleteUser) {
+        try { await store.deleteUser(user.id); }
+        catch (e) { log('[phone-code] orphan account not removed'); }
+      }
       log('[phone-code] link ' + String((linked && linked.error) || 'failed'));
       return { ok: false, error: 'bad_code' };
     }

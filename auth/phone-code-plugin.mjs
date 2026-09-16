@@ -68,7 +68,11 @@ export const phoneCode = (options = {}) => {
         create: v => ia.createVerificationValue(v),
         remove: id => ia.deleteVerificationByIdentifier(id),
         findUserByPhone: phone => ctx.context.adapter.findOne({ model: 'user', where: [{ field: 'phone', value: phone }] }),
-        createUser: u => ia.createUser({ ...u, emailVerified: false })
+        createUser: u => ia.createUser({ ...u, emailVerified: false }),
+        // The compensating step for a link that refuses: the flow takes back the account it made
+        // a moment ago rather than leave a row the unique e-mail column would then use to block
+        // every later attempt on that number. Only ever the account that one call created.
+        deleteUser: id => ia.deleteUser(id)
       }
     });
     return flow;
