@@ -143,3 +143,16 @@ test('a second code is refused inside a minute, and refused for the whole lock',
 test('a code of nothing but zeros keeps its leading zeros', () => {
   assert.equal(pc.newCode(() => 0), '000000');
 });
+
+test('a row with nothing in it is no code at all, and never reaches a compare', () => {
+  // sameHash of two empty strings is true, so an empty stored value must be named before the compare
+  // rather than by it. Nothing writes such a row today; this is the guard that keeps it that way.
+  const r = pc.checkCode({ row: { value: '', expiresAt: new Date(NOW + 60000) }, code: '483920', phone: PHONE, pepper: PEPPER, now: NOW });
+  assert.equal(r.ok, false);
+  assert.equal(r.reason, 'no_code');
+  assert.equal(r.clear, true, 'a row that holds no hash is junk, and junk is thrown away');
+  assert.equal(r.next, null);
+  const colon = pc.checkCode({ row: row('', 0, NOW + 60000), code: '483920', phone: PHONE, pepper: PEPPER, now: NOW });
+  assert.equal(colon.reason, 'no_code');
+  assert.equal(pc.sameHash('', ''), true, 'the reason the guard above has to exist');
+});

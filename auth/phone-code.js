@@ -88,6 +88,9 @@ function checkCode({ row, code, phone, pepper, now }) {
   const at = now instanceof Date ? now.getTime() : Number(now);
   if (!row) return { ok: false, reason: 'no_code', clear: false, next: null };
   const { hash, attempts } = unpackValue(row.value);
+  // A row with nothing in it is not a code. sameHash of two empty strings is true by design, so the
+  // empty case has to be named here, before any compare can reach it; a row holding no hash is junk.
+  if (!hash) return { ok: false, reason: 'no_code', clear: true, next: null };
   if (ms(row.expiresAt) <= at) return { ok: false, reason: 'expired', clear: true, next: null };
   if (attempts >= MAX_ATTEMPTS) return { ok: false, reason: 'locked', clear: false, next: null };
   if (sameHash(hash, hashCode(code, phone, pepper))) return { ok: true, reason: 'ok', clear: true, next: null };
