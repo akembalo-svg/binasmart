@@ -7,7 +7,9 @@
     "logPrefix": "banking",
     "packFormat": "2",
     "disclaimerEn": "Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure.",
-    "disclaimerAm": "የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።"
+    "disclaimerAm": "የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።",
+    "headerAmTemplate": "ይህ ገጽ {fromAm} ኦፊሴላዊ ድረ-ገጽ {langWordAm} የተወሰደ ነው። {disclaimerAm}",
+    "headerEnTemplate": "Source: {url} (official {siteName} page, {langWord}), fetched {today}. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. {disclaimerEn} BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything."
   },
   "sites": [
     {
@@ -23,6 +25,8 @@
       "robots": "https://zemenbank.com/robots.txt — 200, Yoast block, `User-agent: *` with an empty `Disallow:` (everything allowed) and `Sitemap: https://zemenbank.com/sitemap_index.xml`. No Crawl-delay is published, so the pack's own 5 s is used.",
       "lang": "en",
       "hasAmharic": true,
+      "titleSuffix": "\\s*[-–|]\\s*Zemen Bank\\s*$",
+      "langOverrides": [{ "match": "^/am/", "lang": "am" }],
       "langNote": "The only Ethiopian bank in this pack with a real Amharic locale. https://zemenbank.com/am/ pages carry genuine Amharic body text (the forex-service page extracted 2,611 characters with 1,176 Ethiopic characters on 2026-09-16), not a machine-translated menu. Amharic pages are fetched and get lang: am; English pages get lang: en.",
       "reach": "up",
       "checked": "2026-09-16",
@@ -63,6 +67,7 @@
       "id": "dashen",
       "name": "Dashen Bank",
       "nameAm": "የዳሽን ባንክ",
+      "titleSuffix": "\\s*[-–|]\\s*Dashen Bank\\s*$",
       "host": "dashenbanksc.com",
       "fetch": "sitemap",
       "sitemaps": ["https://dashenbanksc.com/wp-sitemap-posts-page-1.xml"],
@@ -108,6 +113,7 @@
       "id": "cbe",
       "name": "Commercial Bank of Ethiopia",
       "nameAm": "የኢትዮጵያ ንግድ ባንክ",
+      "titleSuffix": "\\s*[-–|]\\s*Commercial Bank of Ethiopia\\s*$",
       "host": "combanketh.et",
       "fetch": "urls",
       "urls": [
@@ -159,6 +165,7 @@
       "id": "coopbank",
       "name": "Cooperative Bank of Oromia",
       "nameAm": "የኦሮሚያ ኅብረት ሥራ ባንክ",
+      "titleSuffix": "\\s*[-–|]\\s*(Cooperative Bank of Oromia|Coopbank)\\s*$",
       "host": "coopbankoromia.com.et",
       "fetch": "sitemap",
       "sitemaps": [
@@ -202,6 +209,7 @@
       "id": "ecma",
       "name": "Ethiopian Capital Market Authority",
       "nameAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን",
+      "titleSuffix": "\\s*[-–|]\\s*Ethiopian Capital Market Authority \\(ECMA\\)( \\| Official)?\\s*$",
       "host": "ecma.gov.et",
       "fetch": "sitemap",
       "sitemaps": ["https://ecma.gov.et/wp-sitemap-posts-page-1.xml"],
@@ -238,6 +246,7 @@
       "id": "ethswitch",
       "name": "EthSwitch S.C. — the national payment switch",
       "nameAm": "ኢትስዊች አ.ማ.",
+      "titleSuffix": "\\s*[-–|]\\s*EthSwitch( S\\.C)?\\s*$",
       "host": "ethswitch.com",
       "fetch": "sitemap",
       "sitemaps": ["https://ethswitch.com/wp-sitemap-posts-page-1.xml"],

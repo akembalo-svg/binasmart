@@ -4,7 +4,9 @@
     "id": "travel",
     "generatedBy": "ops/travel/fetch-airline.js",
     "logPrefix": "travel",
-    "packFormat": "2"
+    "packFormat": "2",
+    "headerAmTemplate": "ይህ ገጽ {fromAm} ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።",
+    "headerEnTemplate": "Source: {url} (official {siteName} page, {langWord}), fetched {today}. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling."
   },
   "_about": "Official sources for the BinaSmart travel knowledge pack (design 2026-09-16, Piece 1). ops/travel/fetch-airline.js reads this file and nothing else: it fetches each site the way `fetch` says, keeps only paths matching `allow` and not matching `deny`, waits crawlDelaySeconds between requests, and writes knowledge/travel/<slug>.md. Booking, account, promotional and survey pages are never fetched. reach/checked are what was measured from this VPS on the stated date. A source we cannot reach is listed as manual, not deleted, so it is not quietly forgotten.",
   "sites": [

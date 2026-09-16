@@ -256,24 +256,50 @@ function pageHeadings(text, title, max = 8) {
 // prefix: ከየኢትዮጵያ is not a word. Drop that የ so the header reads ከኢትዮጵያ አየር መንገድ.
 const fromAm = name => 'ከ' + String(name || '').replace(/^የ/, '');
 
-function header(page, site, today) {
+// Which language a page is written in. Most sites are one language throughout and say so with `lang`. Zemen
+// is not: its /am/ pages are genuinely Amharic and the rest of the site is English, so it carries
+// langOverrides and a page's own path decides. This matters twice over — the header must not tell a reader
+// an Amharic page is in English, and knowledge/index.js scores a cross-lingual match differently.
+function langFor(site, p) {
+  for (const o of (site && site.langOverrides) || []) if (new RegExp(o.match).test(String(p || ''))) return o.lang;
+  return (site && site.lang) || 'en';
+}
+
+// The wording belongs to the pack, not to this file. The airline says "the airline publishes no Amharic page";
+// a bank says "rates and fees change, confirm before you act". Both are registry text, filled in here.
+// The placeholders, and nothing else, are substituted: {siteName} {sectionAm} {title} {fromAm} {url}
+// {langWord} {today} {disclaimerEn} {disclaimerAm}. Every one of them is copied from the page or the
+// registry, so the header can never contain a figure this code invented.
+function fill(tpl, vars) {
+  return String(tpl || '').replace(/\{(\w+)\}/g, (m, k) => (vars[k] === undefined ? m : vars[k]));
+}
+
+function header(page, site, today, pack) {
   const heads = pageHeadings(page.text, page.title);
+  const lang = page.lang || langFor(site, page.path);
+  const vars = {
+    siteName: site.name, sectionAm: page.sectionTitleAm || '', title: page.title || page.slug,
+    fromAm: fromAm(site.nameAm), url: page.url, today,
+    langWord: lang === 'am' ? 'in Amharic' : 'in English',
+    langWordAm: lang === 'am' ? 'በአማርኛ' : 'በእንግሊዝኛ',
+    disclaimerEn: (pack && pack.disclaimerEn) || '', disclaimerAm: (pack && pack.disclaimerAm) || '',
+  };
   const what = site.name + ' — ' + (page.section ? page.section + ' — ' : '') + (page.title || page.slug) + '.'
     + (heads.length ? ' On this page: ' + heads.join(', ') + '.' : '');
   const am = 'በአማርኛ፦ ' + (page.sectionTitleAm ? page.sectionTitleAm + ' — ' : '') + (page.title || page.slug) + '። '
-    + 'ይህ ገጽ ' + fromAm(site.nameAm) + ' ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።';
-  const en = 'Source: ' + page.url + ' (official ' + site.name + ' page, in English), fetched ' + today
-    + '. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated.'
-    + ' Confirm on the page before travelling.';
+    + fill(pack && pack.headerAmTemplate, vars);
+  const en = fill(pack && pack.headerEnTemplate, vars);
   return what + '\n\n' + am + '\n\n' + en;
 }
 
-function renderDoc(page, site, { today, firstFetched } = {}) {
+function renderDoc(page, site, { today, firstFetched, pack } = {}) {
   const title = site.name + ' — ' + (page.title || page.slug);
-  const meta = { url: page.url, title, source_name: site.name, section: page.section || '', lang: site.lang || 'en',
+  const meta = { url: page.url, title, source_name: site.name, section: page.section || '',
+    lang: page.lang || langFor(site, page.path),
     status: 'live', fetchedAt: today, lastChecked: today, firstFetched: firstFetched && firstFetched !== today ? firstFetched : '',
-    contentHash: contentHash(page.text), generated_by: 'ops/travel/fetch-airline.js', packFormat: PACK_FORMAT };
-  return frontMatter(meta) + '\n\n# ' + title + '\n\n' + header(page, site, today) + '\n\n' + page.text.trim() + '\n';
+    contentHash: contentHash(page.text), generated_by: (pack && pack.generatedBy) || 'ops/travel/fetch-airline.js',
+    packFormat: (pack && pack.packFormat) || PACK_FORMAT };
+  return frontMatter(meta) + '\n\n# ' + title + '\n\n' + header(page, site, today, pack) + '\n\n' + page.text.trim() + '\n';
 }
 
 // Rewrite exactly one line. Used when a page is unchanged: the body must stay byte-identical (so git shows
@@ -302,7 +328,7 @@ const normUrl = u => String(u || '').replace(/\/+$/, '');
 // docs: [{ siteId, slug, path, url, title, section, sectionTitleAm, text }] for ONE site, already stripped.
 // failed: [{ url, why }] exactly as fetchSite reports it - what did not come back this run, and why.
 // Returns { added, changed, unchanged, gone, goneWhy, missed, revived } as lists of slugs.
-function writePack(dir, docs, site, { today, dryRun = false, failed = [] } = {}) {
+function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack } = {}) {
   fs.mkdirSync(dir, { recursive: true });
   const day = today || new Date().toISOString().slice(0, 10);
   const r = { added: [], changed: [], unchanged: [], gone: [], goneWhy: {}, missed: [], revived: [], reformatted: [] };
@@ -322,7 +348,7 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [] } = {})
       // weekly note is about what the airline did, not about what we did.
       if (oldMeta.packFormat !== PACK_FORMAT && !dryRun) {
         r.reformatted.push(slug);
-        fs.writeFileSync(file, renderDoc(d, site, { today: oldMeta.fetchedAt || day, firstFetched: oldMeta.firstFetched || oldMeta.fetchedAt || day }));
+        fs.writeFileSync(file, renderDoc(d, site, { today: oldMeta.fetchedAt || day, firstFetched: oldMeta.firstFetched || oldMeta.fetchedAt || day, pack }));
         touchLastChecked(file, day);
         continue;
       }
@@ -333,7 +359,7 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [] } = {})
     }
     const first = (oldMeta && (oldMeta.firstFetched || oldMeta.fetchedAt)) || day;
     if (!old) r.added.push(slug); else { r.changed.push(slug); if (oldMeta.status === 'gone') r.revived.push(slug); }
-    if (!dryRun) fs.writeFileSync(file, renderDoc(d, site, { today: day, firstFetched: first }));
+    if (!dryRun) fs.writeFileSync(file, renderDoc(d, site, { today: day, firstFetched: first, pack }));
   }
 
   // A failed fetch must never look like a deleted site. If most of what is on disk is suddenly missing from
@@ -450,7 +476,7 @@ async function fetchSite(site, { fetchImpl, sleep, limit = 0, log = () => {} } =
       if (round === 1 && site.discoverLinks) for (const l of linksOn(r.html, p.url)) discovered.add(l);
       const ex = extract(r.html, { titleSuffix: site.titleSuffix });
       if (!ex.ok) { failed.push({ url: p.url, why: ex.why }); continue; }
-      fetched.set(p.path, { ...p, siteId: site.id, title: ex.title, text: ex.text });
+      fetched.set(p.path, { ...p, siteId: site.id, title: ex.title, text: ex.text, lang: langFor(site, p.path) });
       if ((i + 1) % 10 === 0) log('[travel] ' + site.id + ' round ' + round + ': ' + (i + 1) + '/' + list.length);
     }
   };
@@ -491,7 +517,7 @@ async function main(bound = {}) {
     const { pages, failed } = await fetchSite(site, { limit, log });
     const docs = stripPackBoilerplate(pages);
     const { kept, thin } = splitThin(docs);
-    const r = writePack(outDir, kept, site, { today, dryRun, failed });
+    const r = writePack(outDir, kept, site, { today, dryRun, failed, pack: reg.pack });
     if (r.refused) { log('[travel] ' + site.id + ': REFUSED to update the pack — ' + r.refusedWhy + '. Nothing written.'); bad++; continue; }
     bad += failed.length;
     log('[travel] ' + site.id + ': ' + kept.length + ' documents'
@@ -519,17 +545,31 @@ function packTitleSuffix(registry) {
   } catch (e) { return ''; }
 }
 
+// The header's wording now lives in the registry's `pack` block, and so does which fetcher a document says
+// generated it. A caller that reaches this module through forPack — the travel shim, every travel test, the
+// cron line — must get that block without having to name it, or the airline's documents would lose the two
+// sentences they have always opened with. The unbound module keeps the plan's semantics: no pack argument,
+// no template, and the header says only what the page itself says.
+function packBlock(registry) {
+  try { return JSON.parse(fs.readFileSync(registry, 'utf8')).pack || {}; } catch (e) { return {}; }
+}
+
 function forPack(pack) {
   const dir = packDir(pack);
   const REGISTRY = path.join(dir, 'sources.json');
   const dflt = packTitleSuffix(REGISTRY);
+  const blk = packBlock(REGISTRY);
+  const withPack = opts => ({ ...opts, pack: opts && opts.pack !== undefined ? opts.pack : blk });
   return { ...module.exports, pack, REGISTRY, OUT_DIR: dir,
     cleanTitle: (raw, titleSuffix) => cleanTitle(raw, titleSuffix === undefined ? dflt : titleSuffix),
     extract: (html, opts) => extract(html, { titleSuffix: opts && opts.titleSuffix !== undefined ? opts.titleSuffix : dflt }),
+    header: (page, site, today, pk) => header(page, site, today, pk === undefined ? blk : pk),
+    renderDoc: (page, site, opts) => renderDoc(page, site, withPack(opts)),
+    writePack: (outDir, docs, site, opts) => writePack(outDir, docs, site, withPack(opts)),
     main: () => main({ pack, REGISTRY, OUT_DIR: dir }) };
 }
 
-module.exports = { sitemapUrls, sitemapsOf, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract,
+module.exports = { sitemapUrls, sitemapsOf, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract, langFor, fill,
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, clearMissed, writePack,
   makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR };
 
