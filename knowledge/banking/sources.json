@@ -307,8 +307,11 @@
       "checked": "2026-09-16",
       "why": "EthSwitch runs the interoperable ATM and POS network every Ethiopian bank card rides on. It is the only source in the pack that can answer why a card from one bank works — or does not work — in another bank's machine. Small on purpose: 22 page URLs, of which the news, bids and job streams are denied.",
       "allow": [
-        "^/(about-us|contact-us|faq)$",
-        "^/(services|resources)(/|$)"
+        "^/(about-us-2|contact|services|members)$",
+        "^/(ethiopay|electronic-retail-payment|hosting)$",
+        "^/(central-card-printing-personalization-and-issuance|dispute-management-and-fraud-monitoring)$",
+        "^/advisory-training$",
+        "^/homepage/resourcesinformation$"
       ],
       "deny": [
         "^/(bids|news|blog|announcment|announcements|annual-report|jobpost|careers|portfolio|personnel)(/|$)",
