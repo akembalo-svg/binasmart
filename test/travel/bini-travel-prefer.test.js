@@ -99,6 +99,9 @@ test('Bini asks for the pack only when the message is about flying', () => {
   assert.ok(src.includes("const biniTravel = require('./assistant/travel');"), 'assistant/travel is not required');
   assert.ok(src.includes('const travelPrefer = biniTravel.isTravelQuestion(msg) ? { prefer: biniTravel.PREFER } : {};'),
     'the per-message preference is not computed');
-  assert.ok(src.includes('knowledge.contextFor(msg, { lang, ...travelPrefer })'), 'contextFor is not given the preference');
+  // The banking pack joined the travel pack behind the same call. Travel is computed first and wins a tie, so
+  // a question about changing a ticket still gets the airline's change-fee page and not a bank's tariff.
+  assert.ok(src.includes('const packPrefer = { ...travelPrefer, ...bankingPrefer };'), 'the two packs are not merged');
+  assert.ok(src.includes('knowledge.contextFor(msg, { lang, ...packPrefer })'), 'contextFor is not given the preference');
   assert.equal(src.includes('knowledge.contextFor(msg, { lang }).catch'), false, 'the old unconditional call is still there');
 });
