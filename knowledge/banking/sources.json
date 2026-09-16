@@ -27,7 +27,7 @@
       "hasAmharic": true,
       "titleSuffix": "\\s*[-–|]\\s*Zemen Bank\\s*$",
       "langOverrides": [{ "match": "^/am/", "lang": "am" }],
-      "langNote": "The only Ethiopian bank in this pack with a real Amharic locale. https://zemenbank.com/am/ pages carry genuine Amharic body text (the forex-service page extracted 2,611 characters with 1,176 Ethiopic characters on 2026-09-16), not a machine-translated menu. Amharic pages are fetched and get lang: am; English pages get lang: en.",
+      "langNote": "The only Ethiopian bank in this pack with a real Amharic locale. https://zemenbank.com/am/ pages carry genuine Amharic body text (the forex-service page extracted 2,611 characters with 1,176 Ethiopic characters on 2026-09-16), not a machine-translated menu. Amharic pages are fetched and get lang: am; English pages get lang: en. One exception, measured on 2026-09-16: /am/%e1%89%b3%e1%88%aa%e1%8d%8d (the Amharic tariff url) serves the English fee table under an Amharic breadcrumb - 277 of its 279 lines are identical to /tariff and only 166 of its 16,537 characters are Ethiopic - so it is denied. The same tariff is in the pack once, in English, as zemen-tariff.",
       "reach": "up",
       "checked": "2026-09-16",
       "allow": [
@@ -47,6 +47,7 @@
         "^/am/annual_report",
         "^/am/category(/|$)",
         "^/am/press-releases(/|$)",
+        "^/am/%e1%89%b3%e1%88%aa%e1%8d%8d$",
         "^/am/%e1%8b%98%e1%88%98%e1%8a%95",
         "^/am/%e1%8b%a8%e1%8b%9c%e1%8a%93-%e1%88%98%e1%8c%8d%e1%88%88%e1%8c%ab",
         "^/am/%e1%8b%a8%e1%89%a3%e1%88%88%e1%8a%a0%e1%8a%ad%e1%88%b2%e1%8b%ae%e1%8a%96%e1%89%bd",
