@@ -94,7 +94,11 @@ function makeSms({ mode = 'test', provider = null, supports = geezSupports, send
     }
   }
   const canReach = raw => { const e = normalizeEtMobile(raw); return !!e && !!supports(e); };
-  return { send, supports: canReach, mode: live ? 'live' : 'test', provider: provider ? provider.name : null };
+  // The owner dashboard shows the account balance when a token is configured (design §4). null means no provider
+  // and therefore no balance to show — never a guess, never the token, never the provider's URL. Reading it is a GET
+  // and is independent of SMS_MODE: the account exists even while sending is switched off.
+  return { send, supports: canReach, mode: live ? 'live' : 'test', provider: provider ? provider.name : null,
+    balance: provider && typeof provider.balance === 'function' ? () => provider.balance() : null };
 }
 
 function makeGeezSms({ token, shortcodeId = '', fetchImpl = fetch, baseUrl = GEEZ_BASE, timeoutMs = 15000 } = {}) {

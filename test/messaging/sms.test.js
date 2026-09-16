@@ -156,3 +156,23 @@ test('from the environment: live only with SMS_MODE=live and a GeezSMS token', (
   assert.equal(makeSmsFromEnv({ SMS_MODE: 'live', SMS_API_TOKEN: 't', SMS_PROVIDER: 'other' }).mode, 'test');
   assert.equal(makeSmsFromEnv({ SMS_MODE: 'test', SMS_API_TOKEN: 't' }).mode, 'test');
 });
+
+// The owner dashboard reads the provider balance on the server (design §4). makeSms is the only thing the server
+// holds, so it has to offer it — and offer nothing when no token is configured, which is what "off" means there.
+test('the balance is reachable only when a provider is configured, and never the token or the URL', () => {
+  const { makeSms, makeSmsFromEnv } = require('../../messaging/sms');
+  assert.equal(makeSms({ mode: 'live', provider: null }).balance, null);
+  assert.equal(makeSmsFromEnv({ SMS_PROVIDER: 'geezsms', SMS_MODE: 'live' }).balance, null, 'no token, no balance');
+  let asked = 0;
+  const provider = { name: 'fake', send: async () => ({ ok: true }), balance: async () => { asked++; return { ok: true, status: 200, body: { balance: 12 } }; } };
+  // Test mode still has a balance: the account exists, it is the sending that is switched off.
+  for (const mode of ['test', 'live']) {
+    const sms = makeSms({ mode, provider });
+    assert.equal(typeof sms.balance, 'function', mode);
+  }
+  const withToken = makeSmsFromEnv({ SMS_PROVIDER: 'geezsms', SMS_API_TOKEN: 'not-a-real-token', SMS_MODE: 'test' });
+  assert.equal(typeof withToken.balance, 'function');
+  assert.equal(JSON.stringify(Object.keys(withToken)).includes('token'), false);
+  assert.equal(String(makeSms({ mode: 'live', provider }).balance).includes('geezsms.com'), false);
+  assert.equal(asked, 0, 'building the adapter calls nothing');
+});
