@@ -41,3 +41,34 @@ test('everything on the page still goes through esc(), and it still reads and en
   const bare = src.match(/' \+ me\.[a-zA-Z.]+ \+ '/g) || [];
   assert.deepEqual(bare, [], 'unescaped value(s) on the page: ' + bare.join(', '));
 });
+
+// ----- Plan D final review, fix 1: a closed door is not advertised -----
+// The phone door is configured, not assumed: no pepper, no SMS provider, or the provider switched
+// off and there is no door at all. /api/auth-methods is the one place that knows, the login page
+// already reads it, and this page must not promise a door the server does not have.
+
+test('the page asks the server which doors are open before it offers the phone one', () => {
+  assert.match(src, /fetch\('\/api\/auth-methods'\)/, 'the same public, sixty-second-cached route the login page reads');
+  assert.match(src, /m\.phone === true/, 'only a true answer opens the door — not a truthy one');
+  assert.match(src, /\+ \(phoneDoor/, 'the sentence hangs off that answer instead of being printed unconditionally');
+  assert.match(src, /function loadAccount\(\)/, 'the account itself is still loaded, after the answer');
+});
+
+test('the SMS promise is the open-door branch and the neutral line is the other one', () => {
+  const tern = src.slice(src.indexOf('+ (phoneDoor'));
+  const open = tern.slice(0, tern.indexOf(": '"));
+  assert.ok(open.indexOf('we send a code by SMS') > 0, 'the SMS sentence is inside the open branch');
+  assert.ok(open.indexOf('ኮድ በኤስኤምኤስ ይላካል') > 0, 'and so is its Amharic half');
+  assert.equal(open.indexOf('not open yet'), -1, 'the closed-door line is not in the open branch');
+});
+
+test('with the phone door closed the page says nothing about a code', () => {
+  assert.match(src, /በስልክ ቁጥር መግባት ገና አልተከፈተም።/, 'Amharic: signing in by phone number is not open yet');
+  assert.match(src, /Signing in by phone number is not open yet/, 'English');
+});
+
+test('the inline script still parses, and still builds its html without a template literal', () => {
+  const inline = src.split('<script>')[1].split('<' + '/script>')[0];
+  new (require('vm').Script)(inline, { filename: 'account.html inline script' });
+  assert.equal(inline.includes('`'), false, 'no template literal is concatenated into innerHTML');
+});

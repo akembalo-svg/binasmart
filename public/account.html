@@ -43,7 +43,18 @@ var LABEL = {
   business: 'ንግድ · Business', building_owner: 'የሕንፃ ባለቤት · Building owner', admin: 'አስተዳዳሪ · Admin'
 };
 
-fetch('/api/me').then(function (r) {
+// The phone door is configured, not assumed: no pepper, no SMS provider, or the provider
+// switched off and there is no door at all. /api/auth-methods is the one place that knows, and
+// the login page already reads it -- public, cached sixty seconds, one small extra request. A
+// page that offers a door the server does not have reads as a broken site.
+var phoneDoor = false;
+fetch('/api/auth-methods').then(function (r) { return r.json(); })
+  .then(function (m) { phoneDoor = !!(m && m.phone === true); })
+  .catch(function () { phoneDoor = false; })
+  .then(function () { loadAccount(); });
+
+function loadAccount() {
+return fetch('/api/me').then(function (r) {
   if (r.status === 401) { location.href = '/login?next=/account'; return null; }
   return r.json();
 }).then(function (d) {
@@ -90,14 +101,17 @@ fetch('/api/me').then(function (r) {
   if (!me.phone) html += '<h2>Link your phone</h2><div class="card"><div class="muted am">' +
       'ስልክዎን ሲያገናኙ ጉዞዎችዎና ንግድዎ በዚሁ መለያ ሥር ይሰበሰባሉ። በቴሌግራም ቦቱ ውስጥ «ስልክ አጋራ» ሲሉ ራሱ ይያያዛል።' +
       '</div><div class="muted am" style="margin-top:10px">'
-      + 'ወይም በሚቀጥለው ጊዜ በስልክ ቁጥርዎ ይግቡ። · Or sign in with your phone next time: we send a code by SMS. '
-      + 'ኮድ በኤስኤምኤስ ይላካል።'
+      + (phoneDoor
+        ? 'ወይም በሚቀጥለው ጊዜ በስልክ ቁጥርዎ ይግቡ። · Or sign in with your phone next time: we send a code by SMS. '
+          + 'ኮድ በኤስኤምኤስ ይላካል።'
+        : 'በስልክ ቁጥር መግባት ገና አልተከፈተም። · Signing in by phone number is not open yet.')
       + '</div><a class="btn" href="https://t.me/bina_smart_bot" target="_blank" rel="noopener">Open the Telegram bot →</a></div>';
 
   html += '<button class="btn" onclick="signOut()">Sign out · <span class="am">ውጣ</span></button>' +
           '<a class="back" href="/">← BinaSmart</a>';
   $('app').innerHTML = html;
 }).catch(function () { $('app').innerHTML = '<div class="card muted">Could not load your account. <a href="/login">Sign in</a></div>'; });
+}
 
 function signOut(){
   fetch('/api/auth/sign-out', { method:'POST', headers:{'Content-Type':'application/json'}, body:'{}' })
