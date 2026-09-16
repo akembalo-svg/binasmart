@@ -99,4 +99,32 @@ function assignSlugs(pages) {
   return out;
 }
 
-module.exports = { sitemapUrls, pathOf, selectUrls, slugFor, assignSlugs, UA, REGISTRY, OUT_DIR, ROOT };
+// ---------- the extractor ----------
+// htmlToText is the index's own converter: it drops head, script, style, nav, footer, header, noscript, svg
+// and form, turns h1-h3 into markdown headings, li into "- ", and table cells into " | " rows. Using it
+// rather than a second implementation means a page reads in the pack exactly as it would read in the index.
+const { htmlToText } = require(path.join(ROOT, 'knowledge', 'index.js'));
+
+const SITE_SUFFIX = /\s*\|\s*(Ethiopian Airlines(\s*\|\s*[A-Z]{2})?|Ethiopian Cargo Website)\s*$/i;
+// The airline answers 200 with this title for a path that does not exist - /am/ (Armenia) does it today.
+const NOT_FOUND = /^(page not found|404|not found)$/i;
+const MIN_CHARS = 400;   // the same floor knowledge/index.js puts under a crawled page
+
+function cleanTitle(raw) {
+  return htmlToText('<p>' + String(raw || '') + '</p>').replace(/\s+/g, ' ').replace(SITE_SUFFIX, '').trim();
+}
+
+// { ok:true, title, text, chars } or { ok:false, why } where why is empty | soft_404 | thin.
+function extract(html) {
+  const s = String(html || '');
+  if (s.length < 200 || !/<html|<body|<div/i.test(s)) return { ok: false, why: 'empty' };
+  const m = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(s);
+  const title = cleanTitle(m ? m[1] : '');
+  if (NOT_FOUND.test(title)) return { ok: false, why: 'soft_404' };
+  const text = htmlToText(s);
+  if (text.trim().length < MIN_CHARS) return { ok: false, why: 'thin' };
+  return { ok: true, title: title || '(untitled)', text, chars: text.length };
+}
+
+module.exports = { sitemapUrls, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract,
+  UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS };
