@@ -78,6 +78,18 @@ test('the information sections the design names are allowed', () => {
     assert.ok(ok(p), 'must be fetched: ' + p);
 });
 
+test('the cargo site is manual, because what it publishes as a sitemap is an HTML page', () => {
+  // cargo.ethiopianairlines.com/sitemap.xml answers 200 as text/html, 61 KB, with no <loc> at all and the
+  // words Page Not Found in the body. There is no list of URLs to fetch politely, so the site is named and
+  // left manual rather than crawled blind or quietly dropped.
+  const cargo = reg.sites.find(s => s.id === 'ethiopian-cargo');
+  assert.equal(cargo.host, 'cargo.ethiopianairlines.com');
+  assert.equal(cargo.fetch, 'manual');
+  assert.ok(!cargo.sitemap, 'no sitemap url is claimed for it');
+  assert.match(cargo.why, /sitemap/i);
+  assert.match(cargo.why, /page not found/i);
+});
+
 test('the passenger-rights regulator is listed even though the server cannot reach it', () => {
   const ecaa = reg.sites.find(s => s.id === 'ecaa');
   assert.equal(ecaa.fetch, 'manual');
