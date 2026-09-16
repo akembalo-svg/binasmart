@@ -57,6 +57,30 @@ test('booking, account and promotional paths are denied on the airline site', ()
     assert.ok(blocked(p), 'must not be fetched: ' + p);
 });
 
+test('the per-aircraft seat-map and fleet index pages are denied, and the cabin pages beside them are not', () => {
+  // Thirteen pages, one per tail number, whose text is the list of the other twelve plus an airframe
+  // description; two hub pages above them that are link tiles and a duplicated corporate-travel FAQ. A
+  // passenger asks what the seat is like, not what the aeroplane is, so they are out of the fetch. The
+  // pages that do answer that question — the B787 cabin pages, one level deeper — must stay in.
+  const et = reg.sites.find(s => s.id === 'ethiopian-airlines');
+  const deny = et.deny.map(p => new RegExp(p));
+  const allow = et.allow.map(p => new RegExp(p));
+  const blocked = p => deny.some(r => r.test(p)) || !allow.some(r => r.test(p));
+  for (const p of ['/et/explore/fleet/seat-map',
+    '/et/explore/fleet/seat-map/plane',
+    '/et/explore/fleet/seat-map/plane/a350-900-et-atq',
+    '/et/explore/fleet/seat-map/plane/b787-9-et-axs',
+    '/et/explore/fleet/seat-map/plane/q-400-with-cloud-nine',
+    '/et/explore/fleet/modern-aircrafts',
+    '/et/explore/fleet/interior-features'])
+    assert.ok(blocked(p), 'must not be fetched: ' + p);
+  for (const p of ['/et/explore/fleet/interior-features/ethiopian-787-features',
+    '/et/explore/fleet/interior-features/ethiopian-b787-cabin-interior',
+    '/et/services/on-board-services/cloud-nine-services',
+    '/et/book/manage/upgrade-to-cloud-nine'])
+    assert.ok(!blocked(p), 'must still be fetched: ' + p);
+});
+
 test('the information sections the design names are allowed', () => {
   const et = reg.sites.find(s => s.id === 'ethiopian-airlines');
   const deny = et.deny.map(p => new RegExp(p));

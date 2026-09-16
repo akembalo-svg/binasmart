@@ -53,8 +53,12 @@
         "^/et/services/help-and-contact/call-center-survey$",
         "^/et/explore/et-specials/apply-ethiopian-e-visa/apply",
         "^/et/explore/et-specials/ado-partner-portal",
+        "^/et/explore/fleet/seat-map(/|$)",
+        "^/et/explore/fleet/modern-aircrafts$",
+        "^/et/explore/fleet/interior-features$",
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
       ],
+      "whyDenyFleet": "The per-aircraft seat-map pages (/explore/fleet/seat-map/plane/<tail>, one per registration: A350 x3, B737 x2, B777 x2, B787 x4, Q-400 x2) and the two index pages above them are the same navigation list of thirteen tail numbers printed thirteen more times, plus a paragraph of airframe description. They answer nothing a passenger asks: the seat map itself is a picture, so the text that reaches the index is the list, the legend and the aircraft's specification. The two hub pages, /explore/fleet/modern-aircrafts and /explore/fleet/interior-features, are link tiles padded with the corporate-travel FAQ that /book/special-deals/corporate-travel already carries in full. Denied from the fetch, so neither this script nor the weekly freshness job asks for them again, and the documents are removed from the pack rather than marked gone — they are not missing, they were never worth indexing. What a passenger CAN ask about stays: Cloud Nine cabin and seat features under /services/on-board-services and /book/manage/upgrade-to-cloud-nine, and the B787 cabin pages under /explore/fleet/interior-features/<page>, which the $ anchors above leave allowed.",
       "sections": [
         { "key": "baggage", "titleAm": "ሻንጣ", "match": "^/et/information/baggage-information(/|$)" },
         { "key": "rules", "titleAm": "ደንቦችና ሁኔታዎች", "match": "^/et/information/rules-and-regulations(/|$)" },

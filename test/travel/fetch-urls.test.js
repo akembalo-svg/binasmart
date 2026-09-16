@@ -59,6 +59,24 @@ test('selectUrls keeps information pages and drops booking, promo and the site r
   ]);
 });
 
+test('selectUrls drops the per-aircraft seat-map pages and keeps the baggage page beside them', () => {
+  // The registry denies /explore/fleet/seat-map and the two fleet hub pages; this is that rule seen from
+  // the fetcher's side, so a future edit to the allowlist cannot quietly let thirteen tail numbers back in.
+  const picked = selectUrls(ET, [
+    'https://www.ethiopianairlines.com/et/explore/fleet/seat-map',
+    'https://www.ethiopianairlines.com/et/explore/fleet/seat-map/plane',
+    'https://www.ethiopianairlines.com/et/explore/fleet/seat-map/plane/a350-900-et-atq',
+    'https://www.ethiopianairlines.com/et/explore/fleet/modern-aircrafts',
+    'https://www.ethiopianairlines.com/et/explore/fleet/interior-features',
+    'https://www.ethiopianairlines.com/et/explore/fleet/interior-features/ethiopian-b787-cabin-interior',
+    'https://www.ethiopianairlines.com/et/information/baggage-information/free-baggage-allowance',
+  ]);
+  assert.deepEqual(picked.map(p => p.path), [
+    '/et/explore/fleet/interior-features/ethiopian-b787-cabin-interior',
+    '/et/information/baggage-information/free-baggage-allowance',
+  ]);
+});
+
 test('selectUrls refuses another host, whatever the allowlist says', () => {
   const picked = selectUrls(ET, ['https://evil.example.com/et/information/baggage-information/x',
     'https://www.ethiopianairlines.com.evil.com/et/information/y']);
