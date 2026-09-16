@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "_about": "Official sources for the BinaSmart travel knowledge pack (design 2026-09-16, Piece 1). ops/travel/fetch-airline.js reads this file and nothing else: it fetches each site the way `fetch` says, keeps only paths matching `allow` and not matching `deny`, waits crawlDelaySeconds between requests, and writes knowledge/travel/<slug>.md. Booking, account, promotional and survey pages are never fetched. reach/checked are what was measured from this VPS on the stated date. A source we cannot reach is listed as manual, not deleted, so it is not quietly forgotten.",
+  "sites": [
+    {
+      "id": "ethiopian-airlines",
+      "name": "Ethiopian Airlines",
+      "nameAm": "የኢትዮጵያ አየር መንገድ",
+      "host": "www.ethiopianairlines.com",
+      "fetch": "sitemap",
+      "sitemap": "https://www.ethiopianairlines.com/et/sitemap/sitemap-index.xml",
+      "seeds": ["https://www.ethiopianairlines.com/et/information/baggage-information/free-baggage-allowance"],
+      "discoverLinks": true,
+      "maxPages": 200,
+      "crawlDelaySeconds": 5,
+      "robots": "https://www.ethiopianairlines.com/robots.txt — Crawl-delay: 5, information paths allowed",
+      "lang": "en",
+      "langNote": "No Amharic locale exists. /am/ is the Armenia country site and answers HTTP 200 with the title 'Page Not Found'. The hreflang set is ar,de,en,es,fr,it,ja,ko,pt,ru,tr,zh,x-default. The pack is therefore English, and every document says so in its own header.",
+      "reach": "up",
+      "checked": "2026-09-16",
+      "allow": [
+        "^/et/information(/|$)",
+        "^/et/services/add-on-services(/|$)",
+        "^/et/services/on-board-services(/|$)",
+        "^/et/services/services-at-the-airport(/|$)",
+        "^/et/services/help-and-contact(/|$)",
+        "^/et/services$",
+        "^/et/book/check-in(/|$)",
+        "^/et/book/manage(/|$)",
+        "^/et/book/booking/(flight-schedule|flight-status|rail-fly|charter-flights)(/|$)",
+        "^/et/book/special-deals/(medical-travel|corporate-travel|ethiopian-airlines-conventions)$",
+        "^/et/explore/fleet(/|$)",
+        "^/et/explore/network(/|$)",
+        "^/et/explore/et-specials(/|$)",
+        "^/et/travel-update(/|$)",
+        "^/et/tsa-pre-check$",
+        "^/et/ethiopian-app$",
+        "^/et/meet-and-greet-services-at-addis-ababa-airport$"
+      ],
+      "deny": [
+        "^/et/home-page(/|$)",
+        "^/et/customer-surveys(/|$)",
+        "^/et/customer-survey-landing$",
+        "^/et/blog(/|$)",
+        "^/et/book/booking/flight$",
+        "^/et/book/booking$",
+        "^/et/book$",
+        "^/et/explore/deals-offers(/|$)",
+        "^/et/ethiopian-offers$",
+        "^/et/ethiopian-airlines-brand-audit-questionnaire$",
+        "^/et/sitemap$",
+        "^/et/supporttest$",
+        "^/et/services/help-and-contact/call-center-survey$",
+        "^/et/explore/et-specials/apply-ethiopian-e-visa/apply",
+        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
+      ],
+      "sections": [
+        { "key": "baggage", "titleAm": "ሻንጣ", "match": "^/et/information/baggage-information(/|$)" },
+        { "key": "rules", "titleAm": "ደንቦችና ሁኔታዎች", "match": "^/et/information/rules-and-regulations(/|$)" },
+        { "key": "essential", "titleAm": "ከመብረርዎ በፊት", "match": "^/et/information/essential-information(/|$)" },
+        { "key": "special-assistance", "titleAm": "ልዩ እርዳታ", "match": "^/et/information/special-needs(/|$)" },
+        { "key": "check-in", "titleAm": "ቼክ ኢን", "match": "^/et/book/check-in(/|$)" },
+        { "key": "changes-refunds", "titleAm": "ለውጥና ተመላሽ ገንዘብ", "match": "^/et/book/manage(/|$)" },
+        { "key": "flight-info", "titleAm": "የበረራ መረጃ", "match": "^/et/book/booking(/|$)" },
+        { "key": "special-deals", "titleAm": "ልዩ ቅናሾችና የሕክምና ጉዞ", "match": "^/et/book/special-deals(/|$)" },
+        { "key": "transit-hub", "titleAm": "የአዲስ አበባ ማዕከል", "match": "^/et/services/services-at-the-airport(/|$)" },
+        { "key": "add-ons", "titleAm": "ተጨማሪ አገልግሎቶች", "match": "^/et/services/add-on-services(/|$)" },
+        { "key": "on-board", "titleAm": "በበረራ ላይ", "match": "^/et/services/on-board-services(/|$)" },
+        { "key": "help", "titleAm": "እገዛና አድራሻ", "match": "^/et/services/help-and-contact(/|$)" },
+        { "key": "et-specials", "titleAm": "ShebaMiles፣ ሆሊደይስና ስካይላይት", "match": "^/et/explore/et-specials(/|$)" },
+        { "key": "fleet-network", "titleAm": "አውሮፕላኖችና መዳረሻዎች", "match": "^/et/explore/(fleet|network)(/|$)" },
+        { "key": "updates", "titleAm": "የጉዞ ማሳሰቢያዎች", "match": "^/et/(travel-update|tsa-pre-check|ethiopian-app|meet-and-greet)" }
+      ]
+    },
+    {
+      "id": "ethiopian-cargo",
+      "name": "Ethiopian Cargo and Logistics Services",
+      "nameAm": "የኢትዮጵያ ካርጎ",
+      "host": "cargo.ethiopianairlines.com",
+      "fetch": "sitemap",
+      "sitemap": "https://cargo.ethiopianairlines.com/sitemap.xml",
+      "discoverLinks": false,
+      "maxPages": 40,
+      "crawlDelaySeconds": 5,
+      "robots": "none published (the request returns the site's own 404 page) — the airline's 5 s pacing is applied here too",
+      "lang": "en",
+      "reach": "up",
+      "checked": "2026-09-16",
+      "allow": [
+        "^/(cargo-services|products|services|special-cargo|information|customer-support|network)(/|$)"
+      ],
+      "deny": [
+        "^/(book|track|login|account|errors)(/|$)",
+        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
+      ],
+      "sections": [
+        { "key": "cargo", "titleAm": "ካርጎ", "match": "^/" }
+      ],
+      "note": "The homepage is an application shell: 95 KB of HTML, 5,042 characters of text, nearly all navigation. Pages under 400 characters of real text are dropped by the extractor, so a thin section simply produces no document rather than a document with nothing in it."
+    },
+    {
+      "id": "ecaa",
+      "name": "Ethiopian Civil Aviation Authority — passenger rights",
+      "nameAm": "የኢትዮጵያ ሲቪል አቪዬሽን ባለሥልጣን",
+      "host": "www.ecaa.gov.et",
+      "fetch": "manual",
+      "crawlDelaySeconds": 5,
+      "lang": "en",
+      "reach": "unreachable from this server",
+      "checked": "2026-09-16",
+      "why": "ecaa.gov.et resolves to 197.156.91.124 but every connection from this VPS times out, over http and https alike. This is the same behaviour ops/health/weekly-audit.js already records for Ethiopian government hosts, which answer inside Ethiopia and not from Paris. Until someone in Ethiopia saves the passenger-rights pages, the pack has no regulator text, and Bini must not imply it does."
+    }
+  ],
+  "references": [
+    {
+      "id": "bina-airport-guide",
+      "name": "BinaSmart Bole airport guide",
+      "url": "https://bina.et/airport",
+      "fetch": "none",
+      "note": "Already indexed as source `page`, slug `airport` (PAGE_SLUGS in knowledge/index.js). Referenced by the pack and preferred alongside it for travel questions; never re-crawled, because crawling our own page would put it in the index twice."
+    },
+    {
+      "id": "shebamiles-portal",
+      "name": "ShebaMiles member portal",
+      "url": "https://shebamiles.ethiopianairlines.com",
+      "fetch": "none",
+      "note": "An account site: sign-in, enrolment, balances. The design excludes account pages. ShebaMiles knowledge comes from the airline's own ShebaMiles FAQ and et-specials pages instead."
+    }
+  ]
+}
