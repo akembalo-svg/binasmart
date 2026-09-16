@@ -110,6 +110,10 @@ test('fetchSite records why a page produced no document instead of losing it', a
   });
   const site = { id: 'ethiopian-airlines', name: 'Ethiopian Airlines', nameAm: 'የኢትዮጵያ አየር መንገድ', host: 'www.ethiopianairlines.com',
     fetch: 'sitemap', sitemap: H + '/et/sitemap/sitemap.xml', discoverLinks: false, maxPages: 50, crawlDelaySeconds: 5,
+    // The airline's title suffix moved out of the fetcher and into its registry entry, and the html() helper
+    // above brands every fixture page with it. So this site fixture now says what the registry entry says;
+    // without it "Page Not Found | Ethiopian Airlines | ET" is not recognised as the soft 404 it is.
+    titleSuffix: '\\s*\\|\\s*(Ethiopian Airlines(\\s*\\|\\s*[A-Z]{2})?|Ethiopian Cargo Website)\\s*$',
     lang: 'en', allow: ['^/et/information(/|$)'], deny: [], sections: [] };
   const r = await fetchSite(site, { fetchImpl: n.impl, sleep: async () => {} });
   assert.equal(r.pages.length, 0);

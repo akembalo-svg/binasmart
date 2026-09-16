@@ -4,7 +4,14 @@
 // separately, live, in Task 3 Step 5 - a fixture proves the rule, a live page proves the site.
 const test = require('node:test');
 const assert = require('node:assert');
-const { cleanTitle, extract } = require('../../ops/travel/fetch-airline');
+const { cleanTitle: cleanTitleRaw, extract: extractRaw } = require('../../ops/travel/fetch-airline');
+const path = require('path');
+// The airline's title suffix used to be a constant inside the fetcher. It is now knowledge/travel/sources.json's,
+// because every bank in the banking pack brands its <title> differently. These two wrappers pass the airline's
+// own pattern, so every assertion below is asking exactly what it asked before.
+const SUFFIX = require(path.join(__dirname, '..', '..', 'knowledge', 'travel', 'sources.json')).sites[0].titleSuffix;
+const extract = html => extractRaw(html, { titleSuffix: SUFFIX });
+const cleanTitle = raw => cleanTitleRaw(raw, SUFFIX);
 
 const page = (title, body) => '<!DOCTYPE html><html lang="en"><head><title>' + title +
   '</title><meta name="x" content="y"><style>.a{color:red}</style></head><body>' +

@@ -1,11 +1,18 @@
 {
   "version": 1,
+  "pack": {
+    "id": "travel",
+    "generatedBy": "ops/travel/fetch-airline.js",
+    "logPrefix": "travel",
+    "packFormat": "2"
+  },
   "_about": "Official sources for the BinaSmart travel knowledge pack (design 2026-09-16, Piece 1). ops/travel/fetch-airline.js reads this file and nothing else: it fetches each site the way `fetch` says, keeps only paths matching `allow` and not matching `deny`, waits crawlDelaySeconds between requests, and writes knowledge/travel/<slug>.md. Booking, account, promotional and survey pages are never fetched. reach/checked are what was measured from this VPS on the stated date. A source we cannot reach is listed as manual, not deleted, so it is not quietly forgotten.",
   "sites": [
     {
       "id": "ethiopian-airlines",
       "name": "Ethiopian Airlines",
       "nameAm": "የኢትዮጵያ አየር መንገድ",
+      "titleSuffix": "\\s*\\|\\s*(Ethiopian Airlines(\\s*\\|\\s*[A-Z]{2})?|Ethiopian Cargo Website)\\s*$",
       "host": "www.ethiopianairlines.com",
       "fetch": "sitemap",
       "sitemap": "https://www.ethiopianairlines.com/et/sitemap/sitemap-index.xml",
@@ -81,6 +88,7 @@
       "id": "ethiopian-cargo",
       "name": "Ethiopian Cargo and Logistics Services",
       "nameAm": "የኢትዮጵያ ካርጎ",
+      "titleSuffix": "\\s*\\|\\s*(Ethiopian Airlines(\\s*\\|\\s*[A-Z]{2})?|Ethiopian Cargo Website)\\s*$",
       "host": "cargo.ethiopianairlines.com",
       "fetch": "manual",
       "why": "What the site publishes as a sitemap is not one. https://cargo.ethiopianairlines.com/sitemap.xml answers HTTP 200 as text/html, 61,073 bytes, with zero <loc> elements and the words Page Not Found in the body (fetched from this VPS, 2026-09-16). The site publishes no robots.txt either. So there is no list of cargo URLs that can be fetched politely, and the cargo site stays listed and unfetched until someone names its pages by hand, rather than being crawled blind or quietly dropped.",
