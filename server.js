@@ -2984,6 +2984,65 @@ fastify.get('/api/owner/:slug/pending-deliveries', async (req, reply) => {
     reason: m.errorKind || m.status }; }) };
 });
 
+// ===== The owner's Messages tab (owner actions and messaging design §4) =====
+// Four read-only routes behind the building's owner key. They answer with counts, dates and unit numbers — never a
+// phone number, a user id, a tenancy id, a provider id, an OwnerAccess id, a Telegram id or the id of a pending
+// action. The GeezSMS balance is read on the server behind a ten-minute cache (messaging/sms-balance.js): the token
+// and the provider's URL never reach the page, and a provider that is down shows "unavailable", not an error.
+// None of these routes writes, sends or confirms anything; the only button in the tab is the Invoices tab's own
+// Send now, which is POST /api/owner/:slug/invoice/:id/send and is unchanged.
+const { makeMessagesStore, makeMessagesView } = require('./messaging/messages-view');
+const { makeSmsBalance } = require('./messaging/sms-balance');
+const { makeActionHistory } = require('./agents/owner/actions/history');
+// Its own parse: the delivery layer's call above is pinned as a literal by test/messaging/server-delivery.test.js.
+const smsTiers = parsePriceTiers(process.env.SMS_PRICE_TIERS);
+const messagesView = makeMessagesView({ store: makeMessagesStore(prisma) });
+const smsBalance = makeSmsBalance({ provider: tenantSms.balance ? { balance: tenantSms.balance } : null, log: m => console.log(m) });
+const actionHistory = makeActionHistory({ prisma });
+
+fastify.get('/api/owner/:slug/messages', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
+  if (!b) return reply.code(404).send({ error: 'not_found' });
+  const q = req.query || {};
+  return messagesView.list({ buildingId: b.id, page: q.page, kind: String(q.kind || ''), month: String(q.month || '') });
+});
+
+// One batch by unit. The view looks it up with the building in the where, so a batch id from somewhere else is not
+// found — 404 rather than 403, so nothing here tells a caller whether an id exists.
+fastify.get('/api/owner/:slug/messages/:batchId', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
+  if (!b) return reply.code(404).send({ error: 'not_found' });
+  const one = await messagesView.one({ buildingId: b.id, batchId: req.params.batchId, page: (req.query || {}).page });
+  if (!one) return reply.code(404).send({ error: 'not_found' });
+  return one;
+});
+
+// This month's SMS against the building's limit, with the cost estimate and — only when a token is configured — the
+// provider's balance. tenantBuilding() decides real/test exactly as the delivery layer does, so the tab can never say
+// live for a building that reaches nobody.
+fastify.get('/api/owner/:slug/sms-month', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug } });
+  if (!b) return reply.code(404).send({ error: 'not_found' });
+  const tb = tenantBuilding(b);
+  const [month, balance] = await Promise.all([
+    messagesView.smsMonth({ buildingId: b.id, limit: tb.smsMonthlyLimit, real: tb.real, mode: tenantSms.mode, tiers: smsTiers }),
+    smsBalance.read().catch(() => ({ state: 'unavailable' })),
+  ]);
+  return Object.assign({}, month, { balance });
+});
+
+// What became of the actions the owner confirmed in Bini (design §3.3). Roles and counts only — see the list of
+// columns this must never read in agents/owner/actions/history.js.
+fastify.get('/api/owner/:slug/owner-actions', async (req, reply) => {
+  if (await authBuildingFail(req, reply, req.params.slug)) return;
+  const b = await prisma.building.findUnique({ where: { qrSlug: req.params.slug }, select: { id: true } });
+  if (!b) return reply.code(404).send({ error: 'not_found' });
+  return actionHistory.list({ buildingId: b.id, page: (req.query || {}).page });
+});
+
 // ===== Short invoice and receipt links: bina.et/i/<token> (design §1.3) =====
 // One invoice or receipt, no login, no tenant name or phone, 60 days. Unknown, malformed and expired tokens get the same
 // page. Limited per client address (nginx sets X-Real-IP).
