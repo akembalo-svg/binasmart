@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "2c55eea08bbe5611aeb5988c65b8eb87e12f86db"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Optional Service Charges
 
-Source: https://www.ethiopianairlines.com/et/information/essential-information/optional-service-charges (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — essential — Optional Service Charges.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/information/essential-information/optional-service-charges) የተወሰደ ነው። ክፍል፦ ከመብረርዎ በፊት። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ ከመብረርዎ በፊት — Optional Service Charges። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/information/essential-information/optional-service-charges (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 #
 Optional Service Charges

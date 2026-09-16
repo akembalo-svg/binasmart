@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "587704a247624612e66aed12da901861b0eabb3a"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Pregnancy Travel Guidelines
 
-Source: https://www.ethiopianairlines.com/et/information/special-needs/travelling-while-pregnant (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — special-assistance — Pregnancy Travel Guidelines. On this page: Traveling While Pregnant.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/information/special-needs/travelling-while-pregnant) የተወሰደ ነው። ክፍል፦ ልዩ እርዳታ። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ ልዩ እርዳታ — Pregnancy Travel Guidelines። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/information/special-needs/travelling-while-pregnant (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 #
 Pregnancy Travel Guidelines

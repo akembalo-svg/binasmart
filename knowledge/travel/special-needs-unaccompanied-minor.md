@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "03ab446cad04c7ae2ee911f923324146fdb8668d"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Unaccompanied Minors
 
-Source: https://www.ethiopianairlines.com/et/information/special-needs/unaccompanied-minor (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — special-assistance — Unaccompanied Minors. On this page: Infant Travel Guide.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/information/special-needs/unaccompanied-minor) የተወሰደ ነው። ክፍል፦ ልዩ እርዳታ። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ ልዩ እርዳታ — Unaccompanied Minors። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/information/special-needs/unaccompanied-minor (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 #
 Unaccompanied Minors

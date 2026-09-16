@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "05d97443e662431b3036a111cd02e6f685c21efb"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Ethiopian Airlines
 
-Source: https://www.ethiopianairlines.com/et/services/on-board-services/in-flight-experience (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — on-board — Ethiopian Airlines. On this page: The Pitt, Discover what's new this month, Project Hail Mary.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/services/on-board-services/in-flight-experience) የተወሰደ ነው። ክፍል፦ በበረራ ላይ። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ በበረራ ላይ — Ethiopian Airlines። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/services/on-board-services/in-flight-experience (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 Skip to content
 

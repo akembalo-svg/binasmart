@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "61f89f0b40dfd272eab3d73a332d3ab2711b982c"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Delayed, Lost or Damaged Baggage
 
-Source: https://www.ethiopianairlines.com/et/information/baggage-information/delayed-lost-or-damaged-baggage (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — baggage — Delayed, Lost or Damaged Baggage.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/information/baggage-information/delayed-lost-or-damaged-baggage) የተወሰደ ነው። ክፍል፦ ሻንጣ። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ ሻንጣ — Delayed, Lost or Damaged Baggage። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/information/baggage-information/delayed-lost-or-damaged-baggage (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 #
 Delayed, Lost or Damaged Baggage

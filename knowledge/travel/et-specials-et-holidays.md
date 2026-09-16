@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "be56eef17f60dbd4639b69e59dec6ab8778b7180"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Welcome to Ethiopian Holidays
 
-Source: https://www.ethiopianairlines.com/et/explore/et-specials/et-holidays (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — et-specials — Welcome to Ethiopian Holidays. On this page: Your Gateway to the Tranquil attractions, Discover Ethiopia’s Rich Heritage Landscapes, Start Your Adventure Today, Explore Our Most Popular Vacation Packages, Chebera Elephant Paw Lodge Tour, Honeymoon Package to Seychelles, Explore The Best Destinations.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/explore/et-specials/et-holidays) የተወሰደ ነው። ክፍል፦ ShebaMiles፣ ሆሊደይስና ስካይላይት። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ ShebaMiles፣ ሆሊደይስና ስካይላይት — Welcome to Ethiopian Holidays። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/explore/et-specials/et-holidays (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 ### Your Gateway to the Tranquil attractions
 

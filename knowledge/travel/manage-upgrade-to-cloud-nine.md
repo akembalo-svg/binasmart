@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "d10f11d8e99e2268ef43941ce0d4051e33fe209c"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Upgrade to Cloud Nine Business Class | Ethiopian Airlines Ethiopia | ET
 
-Source: https://www.ethiopianairlines.com/et/book/manage/upgrade-to-cloud-nine (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — changes-refunds — Upgrade to Cloud Nine Business Class | Ethiopian Airlines Ethiopia | ET. On this page: Upgrade to Cloud Nine, Upgrade to Cloud Nine Business Class!, Are you eligible for an upgrade?, What’s included?, Hurry!, How does the upgrade work?, Find Your Booking Reference:, Have questions? Click here to see the FAQs..
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/book/manage/upgrade-to-cloud-nine) የተወሰደ ነው። ክፍል፦ ለውጥና ተመላሽ ገንዘብ። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ ለውጥና ተመላሽ ገንዘብ — Upgrade to Cloud Nine Business Class | Ethiopian Airlines Ethiopia | ET። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/book/manage/upgrade-to-cloud-nine (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 ## Upgrade to Cloud Nine
 

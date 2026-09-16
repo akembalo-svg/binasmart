@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "ff44a0f0cbd3982ddcf77cb3c34d91e6bde9ebf4"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Addis Ababa Stopovers
 
-Source: https://www.ethiopianairlines.com/et/services/services-at-the-airport/addis-ababa-stopovers (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — transit-hub — Addis Ababa Stopovers. On this page: Transit Service, Skylight In-Terminal Hotel Service, Facilities at the Arrivals Hall, Who Qualifies for the Free Stopover Package, Do You Need a Visa to Leave the Airport?, Curated City Tours During Your Stopover, Make the Most of a Short Stopover.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/services/services-at-the-airport/addis-ababa-stopovers) የተወሰደ ነው። ክፍል፦ የአዲስ አበባ ማዕከል። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ የአዲስ አበባ ማዕከል — Addis Ababa Stopovers። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/services/services-at-the-airport/addis-ababa-stopovers (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 #
 Addis Ababa Stopovers

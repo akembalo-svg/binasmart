@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "8ca10d90e146f823ea9511c354f203f8c89474a4"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Luxury CIP Lounge Service | Comfort, Wi-Fi & Premium Refreshments | ET
 
-Source: https://www.ethiopianairlines.com/et/services/add-on-services/cip-lounge-pass (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — add-ons — Luxury CIP Lounge Service | Comfort, Wi-Fi & Premium Refreshments | ET. On this page: Book CIP Lounge Access, What’s the Experience Like at Our CIP Lounge, How Lounge Pass Work, Location.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/services/add-on-services/cip-lounge-pass) የተወሰደ ነው። ክፍል፦ ተጨማሪ አገልግሎቶች። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ ተጨማሪ አገልግሎቶች — Luxury CIP Lounge Service | Comfort, Wi-Fi & Premium Refreshments | ET። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/services/add-on-services/cip-lounge-pass (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 ## Book CIP Lounge Access
 

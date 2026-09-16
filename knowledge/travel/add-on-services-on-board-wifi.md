@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "b0268b97d6cb07316dac9b5510f72c533f74edc6"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Sheba SkyConnect On-board WiFi
 
-Source: https://www.ethiopianairlines.com/et/services/add-on-services/on-board-wifi (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — add-ons — Sheba SkyConnect On-board WiFi. On this page: Add ShebaSkyConnect Wi‑Fi, Stay Connected on Our State of the Art Aircrafts, Our Wi-Fi Packages, Wi-Fi is free for:, How to connect to the Wi-Fi.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/services/add-on-services/on-board-wifi) የተወሰደ ነው። ክፍል፦ ተጨማሪ አገልግሎቶች። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ ተጨማሪ አገልግሎቶች — Sheba SkyConnect On-board WiFi። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/services/add-on-services/on-board-wifi (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 # Add ShebaSkyConnect Wi‑Fi
 

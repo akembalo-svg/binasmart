@@ -161,8 +161,12 @@ function contentHash(text) { return crypto.createHash('sha1').update(normText(te
 const esc = s => String(s).replace(/"/g, '\\"');
 // knowledge/index.js parses front matter line by line with /^(\w+):\s*"?(.*?)"?\s*$/, so every key is a
 // single word and every value is one line. Order is fixed so a diff of two runs shows only what moved.
+// Bumped whenever renderDoc changes the shape of a document. writePack re-renders anything older, so the
+// pack is never half one format and half the other - and a re-render is not reported as a change, because the
+// airline changed nothing.
+const PACK_FORMAT = '2';
 const FM_KEYS = ['url', 'title', 'source_name', 'section', 'lang', 'status', 'fetchedAt', 'lastChecked',
-  'firstFetched', 'goneAt', 'contentHash', 'generated_by'];
+  'firstFetched', 'goneAt', 'contentHash', 'generated_by', 'packFormat'];
 function frontMatter(meta) {
   const lines = ['---'];
   for (const k of FM_KEYS) if (meta[k] !== undefined && meta[k] !== null && meta[k] !== '') lines.push(k + ': "' + esc(meta[k]) + '"');
@@ -178,27 +182,60 @@ function readMeta(md) {
 }
 function bodyOf(md) { const fm = /^---\n[\s\S]*?\n---\n/.exec(String(md)); return fm ? String(md).slice(fm[0].length) : String(md); }
 
-// The header states provenance and nothing else. It must never contain a figure: a kilo or a fee in a header
-// written by this script would be a fact from memory, which is the one thing the design forbids.
-// ሆ is the Amharic "from" prefix, and nameAm is የኢትዮጵያ ..., whose leading የ is itself a
+// What the page itself says it is about: its own H1-H3 headings, copied, never invented. htmlToText leaves
+// some of this site's headings as a bare "##" with the label on the next line, so that shape is read too. A
+// heading holding a digit is dropped - a figure in a header written by this script would be a fact restated
+// outside the page text, which the design forbids and the tests check for.
+function pageHeadings(text, title, max = 8) {
+  const lines = String(text || '').replace(/\r/g, '').split('\n');
+  const out = [];
+  const t = String(title || '').toLowerCase().trim();
+  for (let i = 0; i < lines.length; i++) {
+    const m = /^#{1,3}[ \t]*(.*)$/.exec(lines[i]);
+    if (!m) continue;
+    let h = m[1].trim();
+    if (!h) { let j = i + 1; while (j < lines.length && !lines[j].trim()) j++; h = (lines[j] || '').trim(); }
+    h = h.replace(/\s+/g, ' ').trim();
+    if (!h || h.length > 70 || /\d/.test(h)) continue;
+    if (h.toLowerCase() === t) continue;
+    if (!out.some(x => x.toLowerCase() === h.toLowerCase())) out.push(h);
+    if (out.length >= max) break;
+  }
+  return out;
+}
+
+// The header states provenance and what the page is, and nothing else. It must never contain a figure: a kilo
+// or a fee in a header written by this script would be a fact from memory, which is the one thing the design
+// forbids.
+//
+// Why "what the page is" comes first. Every document used to open with the same two provenance paragraphs, so
+// the first chunk of all ~125 pages read alike. knowledge/index.js shows its reranker a title and 420
+// characters of each candidate, and an Amharic question can only keyword-match the Amharic line - which was
+// also the same on every page. The first measured run of Task 10 retrieved the right page and then dropped it
+// nine times for exactly that reason. The page's own name, section and headings, first, are what tell one
+// document of this pack from another. Every word of it is copied from the page or from sources.json.
+//
+// ከ is the Amharic "from" prefix, and nameAm is የኢትዮጵያ ..., whose leading የ is itself a
 // prefix: ከየኢትዮጵያ is not a word. Drop that የ so the header reads ከኢትዮጵያ አየር መንገድ.
 const fromAm = name => 'ከ' + String(name || '').replace(/^የ/, '');
 
 function header(page, site, today) {
+  const heads = pageHeadings(page.text, page.title);
+  const what = site.name + ' — ' + (page.section ? page.section + ' — ' : '') + (page.title || page.slug) + '.'
+    + (heads.length ? ' On this page: ' + heads.join(', ') + '.' : '');
+  const am = 'በአማርኛ፦ ' + (page.sectionTitleAm ? page.sectionTitleAm + ' — ' : '') + (page.title || page.slug) + '። '
+    + 'ይህ ገጽ ' + fromAm(site.nameAm) + ' ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።';
   const en = 'Source: ' + page.url + ' (official ' + site.name + ' page, in English), fetched ' + today
     + '. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated.'
     + ' Confirm on the page before travelling.';
-  const am = 'በአማርኛ፦ ይህ ገጽ ' + fromAm(site.nameAm) + ' ኦፊሴላዊ ድረ-ገጽ (' + page.url + ') የተወሰደ ነው። '
-    + (page.sectionTitleAm ? 'ክፍል፦ ' + page.sectionTitleAm + '። ' : '')
-    + 'አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።';
-  return en + '\n\n' + am;
+  return what + '\n\n' + am + '\n\n' + en;
 }
 
 function renderDoc(page, site, { today, firstFetched } = {}) {
   const title = site.name + ' — ' + (page.title || page.slug);
   const meta = { url: page.url, title, source_name: site.name, section: page.section || '', lang: site.lang || 'en',
     status: 'live', fetchedAt: today, lastChecked: today, firstFetched: firstFetched && firstFetched !== today ? firstFetched : '',
-    contentHash: contentHash(page.text), generated_by: 'ops/travel/fetch-airline.js' };
+    contentHash: contentHash(page.text), generated_by: 'ops/travel/fetch-airline.js', packFormat: PACK_FORMAT };
   return frontMatter(meta) + '\n\n# ' + title + '\n\n' + header(page, site, today) + '\n\n' + page.text.trim() + '\n';
 }
 
@@ -214,7 +251,7 @@ function touchLastChecked(file, today) {
 function writePack(dir, docs, site, { today, dryRun = false } = {}) {
   fs.mkdirSync(dir, { recursive: true });
   const day = today || new Date().toISOString().slice(0, 10);
-  const r = { added: [], changed: [], unchanged: [], gone: [], revived: [] };
+  const r = { added: [], changed: [], unchanged: [], gone: [], revived: [], reformatted: [] };
   const wanted = new Map(docs.map(d => [d.slug, d]));
   const onDisk = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
 
@@ -224,6 +261,16 @@ function writePack(dir, docs, site, { today, dryRun = false } = {}) {
     const oldMeta = old ? readMeta(old) : null;
     if (oldMeta && oldMeta.contentHash === contentHash(d.text) && oldMeta.status !== 'gone') {
       r.unchanged.push(slug);
+      // The page did not change, but the way this script writes a page did. Re-render it from the text that
+      // just came off the site, keeping the day the content was fetched, and keep it out of `changed`: the
+      // weekly note is about what the airline did, not about what we did.
+      if (oldMeta.packFormat !== PACK_FORMAT && !dryRun) {
+        r.reformatted.push(slug);
+        fs.writeFileSync(file, renderDoc(d, site, { today: oldMeta.fetchedAt || day, firstFetched: oldMeta.firstFetched || oldMeta.fetchedAt || day }));
+        touchLastChecked(file, day);
+        continue;
+      }
+      if (oldMeta.packFormat !== PACK_FORMAT) r.reformatted.push(slug);
       if (!dryRun && oldMeta.lastChecked !== day) touchLastChecked(file, day);
       continue;
     }
@@ -375,7 +422,7 @@ async function main() {
     if (r.refused) { log('[travel] ' + site.id + ': REFUSED to update the pack — ' + r.refusedWhy + '. Nothing written.'); bad++; continue; }
     bad += failed.length;
     log('[travel] ' + site.id + ': ' + kept.length + ' documents'
-      + ' (+' + r.added.length + ' added, ' + r.changed.length + ' changed, ' + r.unchanged.length + ' unchanged, '
+      + ' (+' + r.added.length + ' added, ' + r.changed.length + ' changed, ' + r.unchanged.length + ' unchanged, ' + r.reformatted.length + ' re-rendered, '
       + r.gone.length + ' gone, ' + thin.length + ' too thin after stripping, ' + failed.length + ' failed)'
       + ' in ' + Math.round((Date.now() - t0) / 1000) + 's' + (dryRun ? '  [DRY RUN — nothing written]' : ''));
     for (const f of failed.slice(0, 12)) log('        ! ' + f.why + '  ' + f.url);
@@ -386,7 +433,7 @@ async function main() {
 }
 
 module.exports = { sitemapUrls, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract,
-  stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, renderDoc, touchLastChecked, writePack,
+  stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, writePack,
   makeFetcher, linksOn, fetchSite, main, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR };
 
 if (require.main === module) main().catch(e => { console.error('[travel] failed: ' + e.message); process.exit(1); });

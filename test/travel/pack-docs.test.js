@@ -7,7 +7,7 @@ const assert = require('node:assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { stripPackBoilerplate, splitThin, MIN_CHARS, contentHash, frontMatter, renderDoc, readMeta, touchLastChecked, writePack } =
+const { stripPackBoilerplate, splitThin, MIN_CHARS, contentHash, frontMatter, renderDoc, readMeta, touchLastChecked, writePack, pageHeadings, PACK_FORMAT } =
   require('../../ops/travel/fetch-airline');
 
 const SITE = { id: 'ethiopian-airlines', name: 'Ethiopian Airlines', nameAm: 'የኢትዮጵያ አየር መንገድ', lang: 'en' };
@@ -81,6 +81,45 @@ test('renderDoc states no fact of its own: every figure in it comes from the pag
   const head = md.split('Economy: 1 piece')[0];
   const numbers = (head.match(/\b\d+\s?(kg|kilo|cm|lbs?|birr|usd|hours?|days?)\b/gi) || []);
   assert.deepEqual(numbers, [], 'the header invented a figure: ' + numbers.join(', '));
+});
+
+test('pageHeadings copies the page own headings and never one carrying a figure', () => {
+  const text = '## Checked baggage\n\nsome words\n\n##\n\nBaggage calculator\n\nmore words\n\n## Maximum weight: 23 kg\n\nfigures live in the page, not in the header';
+  const heads = pageHeadings(text, 'Free Baggage Allowance');
+  assert.deepEqual(heads, ['Checked baggage', 'Baggage calculator']);
+});
+
+test('the header opens with what THIS page is, so two documents of the pack do not share their first 420 characters', () => {
+  // 420 is not arbitrary: knowledge/index.js shows the reranker a title and exactly 420 characters of a
+  // candidate. When every document opened with the same provenance paragraphs the reranker was choosing
+  // between passages it could not tell apart, and dropped the right page nine times in the Task 10 run.
+  const bags = { ...pageOf('free-baggage-allowance', '## Checked baggage\n\nHow much you may check in.'), title: 'Free Baggage Allowance' };
+  const sheba = { ...pageOf('shebamiles-faqs', '## How do I join ShebaMiles\n\nEnrolment is on the website.'),
+    title: 'ShebaMiles FAQ', section: 'shebamiles', sectionTitleAm: 'ሽበማይልስ' };
+  const a = renderDoc(bags, SITE, { today: '2026-09-16' });
+  const b = renderDoc(sheba, SITE, { today: '2026-09-16' });
+  const headOf = md => md.slice(md.indexOf('# Ethiopian')).slice(0, 420);
+  assert.notEqual(headOf(a), headOf(b), 'two pages opened with the same 420 characters');
+  assert.ok(headOf(a).includes('Free Baggage Allowance'), 'the first 420 characters do not name the page');
+  assert.ok(headOf(b).includes('ShebaMiles'), 'the first 420 characters do not name the page');
+  assert.ok(headOf(b).includes('ሽበማይልስ'), 'the first 420 characters carry no Amharic an Amharic question can match');
+  assert.ok(headOf(a).includes('Checked baggage'), 'the page own headings are not in the opening');
+});
+
+test('writePack re-renders a document written in an older pack format, and does not call it a change', () => {
+  const dir = tmp();
+  const page = pageOf('a', 'first page content, long enough to be real.');
+  writePack(dir, [page], SITE, { today: '2026-09-16' });
+  const file = path.join(dir, 'a.md');
+  // age the file back to the format that has no packFormat line at all
+  fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace(/^packFormat: .*\n/m, ''));
+  const r = writePack(dir, [page], SITE, { today: '2026-09-23' });
+  assert.deepEqual(r.changed, [], 'a re-render is not a change the airline made');
+  assert.deepEqual(r.reformatted, ['a']);
+  const after = readMeta(fs.readFileSync(file, 'utf8'));
+  assert.equal(after.packFormat, PACK_FORMAT);
+  assert.equal(after.fetchedAt, '2026-09-16', 'the day the content was fetched must survive a re-render');
+  assert.equal(after.lastChecked, '2026-09-23');
 });
 
 test('writePack adds a file that is not there', () => {

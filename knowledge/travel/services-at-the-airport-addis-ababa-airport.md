@@ -9,13 +9,16 @@ fetchedAt: "2026-09-16"
 lastChecked: "2026-09-16"
 contentHash: "a633c1bc2f1d00ce41477b02506b02e8bd7fd6a6"
 generated_by: "ops/travel/fetch-airline.js"
+packFormat: "2"
 ---
 
 # Ethiopian Airlines — Addis Ababa Bole International Airport
 
-Source: https://www.ethiopianairlines.com/et/services/services-at-the-airport/addis-ababa-airport (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Ethiopian Airlines — transit-hub — Addis Ababa Bole International Airport. On this page: Airport Terminal, Getting Around & Making the Most of Your Time at Bole, Dining, Shopping & Duty-Free, Transit Service & the Skylight In-Terminal Hotel, Lounges & Premium Passenger Services, Airport at a Glance.
 
-በአማርኛ፦ ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ (https://www.ethiopianairlines.com/et/services/services-at-the-airport/addis-ababa-airport) የተወሰደ ነው። ክፍል፦ የአዲስ አበባ ማዕከል። አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ኪሎዎች፣ ክፍያዎችና የጊዜ ገደቦች እንደተጻፉ ናቸው፤ ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+በአማርኛ፦ የአዲስ አበባ ማዕከል — Addis Ababa Bole International Airport። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
+
+Source: https://www.ethiopianairlines.com/et/services/services-at-the-airport/addis-ababa-airport (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 #
 Addis Ababa Bole International Airport
