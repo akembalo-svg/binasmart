@@ -166,7 +166,7 @@ const esc = s => String(s).replace(/"/g, '\\"');
 // airline changed nothing.
 const PACK_FORMAT = '2';
 const FM_KEYS = ['url', 'title', 'source_name', 'section', 'lang', 'status', 'fetchedAt', 'lastChecked',
-  'firstFetched', 'goneAt', 'contentHash', 'generated_by', 'packFormat'];
+  'firstFetched', 'goneAt', 'missedAt', 'contentHash', 'generated_by', 'packFormat'];
 function frontMatter(meta) {
   const lines = ['---'];
   for (const k of FM_KEYS) if (meta[k] !== undefined && meta[k] !== null && meta[k] !== '') lines.push(k + ': "' + esc(meta[k]) + '"');
@@ -246,12 +246,31 @@ function touchLastChecked(file, today) {
   fs.writeFileSync(file, cur.replace(/^lastChecked: ".*"$/m, 'lastChecked: "' + esc(today) + '"'));
 }
 
+// The page answered again, so the miss is over. Rewrite the front matter without missedAt, leaving the body
+// byte-identical: two misses a month apart are not two misses running.
+function clearMissed(file, today) {
+  const cur = fs.readFileSync(file, 'utf8');
+  const meta = readMeta(cur);
+  delete meta.missedAt;
+  meta.lastChecked = today;
+  fs.writeFileSync(file, frontMatter(meta) + '\n' + bodyOf(cur));
+}
+
+// The only three answers that mean a page is really not there any more. Everything else - a timeout, a 5xx,
+// a DNS blip, a page that went thin - is the network having a bad Sunday, and must never orphan the chunks
+// of a page that is still published. Those get one miss recorded and a week to come back.
+const DEAD = { http_404: '404', http_410: '410', soft_404: 'the page says not found' };
+const normUrl = u => String(u || '').replace(/\/+$/, '');
+
 // docs: [{ siteId, slug, path, url, title, section, sectionTitleAm, text }] for ONE site, already stripped.
-// Returns { added, changed, unchanged, gone, revived } as lists of slugs.
-function writePack(dir, docs, site, { today, dryRun = false } = {}) {
+// failed: [{ url, why }] exactly as fetchSite reports it - what did not come back this run, and why.
+// Returns { added, changed, unchanged, gone, goneWhy, missed, revived } as lists of slugs.
+function writePack(dir, docs, site, { today, dryRun = false, failed = [] } = {}) {
   fs.mkdirSync(dir, { recursive: true });
   const day = today || new Date().toISOString().slice(0, 10);
-  const r = { added: [], changed: [], unchanged: [], gone: [], revived: [], reformatted: [] };
+  const r = { added: [], changed: [], unchanged: [], gone: [], goneWhy: {}, missed: [], revived: [], reformatted: [] };
+  const deadUrls = new Map();
+  for (const f of failed || []) { const w = DEAD[f.why]; if (w) deadUrls.set(normUrl(f.url), w); }
   const wanted = new Map(docs.map(d => [d.slug, d]));
   const onDisk = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
 
@@ -271,7 +290,8 @@ function writePack(dir, docs, site, { today, dryRun = false } = {}) {
         continue;
       }
       if (oldMeta.packFormat !== PACK_FORMAT) r.reformatted.push(slug);
-      if (!dryRun && oldMeta.lastChecked !== day) touchLastChecked(file, day);
+      if (!dryRun && oldMeta.missedAt) clearMissed(file, day);
+      else if (!dryRun && oldMeta.lastChecked !== day) touchLastChecked(file, day);
       continue;
     }
     const first = (oldMeta && (oldMeta.firstFetched || oldMeta.fetchedAt)) || day;
@@ -294,9 +314,21 @@ function writePack(dir, docs, site, { today, dryRun = false } = {}) {
     const meta = readMeta(cur);
     if (meta.source_name !== site.name) continue;        // another site's document in the same directory
     if (meta.status === 'gone') continue;                // already marked, do not report it again every week
+    // A page is gone when the site SAYS it is gone, or when it has been missing two runs running. One
+    // timeout is not a deletion: record the miss, leave the document live and indexed, and let next
+    // Sunday decide. Anything else drops a week of answers on the floor over a network blip.
+    const dead = deadUrls.get(normUrl(meta.url));
+    if (!dead && !meta.missedAt) {
+      r.missed.push(slug);
+      if (dryRun) continue;
+      fs.writeFileSync(path.join(dir, f), frontMatter({ ...meta, missedAt: day, lastChecked: day }) + '\n' + bodyOf(cur));
+      continue;
+    }
     r.gone.push(slug);
+    r.goneWhy[slug] = dead || 'missing two runs running';
     if (dryRun) continue;
     const next = { ...meta, status: 'gone', goneAt: day, lastChecked: day };
+    delete next.missedAt;                                // the miss is spent
     fs.writeFileSync(path.join(dir, f), frontMatter(next) + '\n' + bodyOf(cur));
   }
   return r;
@@ -418,12 +450,12 @@ async function main() {
     const { pages, failed } = await fetchSite(site, { limit, log });
     const docs = stripPackBoilerplate(pages);
     const { kept, thin } = splitThin(docs);
-    const r = writePack(outDir, kept, site, { today, dryRun });
+    const r = writePack(outDir, kept, site, { today, dryRun, failed });
     if (r.refused) { log('[travel] ' + site.id + ': REFUSED to update the pack — ' + r.refusedWhy + '. Nothing written.'); bad++; continue; }
     bad += failed.length;
     log('[travel] ' + site.id + ': ' + kept.length + ' documents'
       + ' (+' + r.added.length + ' added, ' + r.changed.length + ' changed, ' + r.unchanged.length + ' unchanged, ' + r.reformatted.length + ' re-rendered, '
-      + r.gone.length + ' gone, ' + thin.length + ' too thin after stripping, ' + failed.length + ' failed)'
+      + r.gone.length + ' gone, ' + r.missed.length + ' kept after a failed fetch, ' + thin.length + ' too thin after stripping, ' + failed.length + ' failed)'
       + ' in ' + Math.round((Date.now() - t0) / 1000) + 's' + (dryRun ? '  [DRY RUN — nothing written]' : ''));
     for (const f of failed.slice(0, 12)) log('        ! ' + f.why + '  ' + f.url);
     for (const d of thin) log('        ~ thin after stripping  ' + d.slug);
@@ -433,7 +465,7 @@ async function main() {
 }
 
 module.exports = { sitemapUrls, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract,
-  stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, writePack,
+  stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, clearMissed, writePack,
   makeFetcher, linksOn, fetchSite, main, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR };
 
 if (require.main === module) main().catch(e => { console.error('[travel] failed: ' + e.message); process.exit(1); });

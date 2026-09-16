@@ -22,6 +22,9 @@ function dirWith(pages, today = '2026-09-16') {
 }
 // A fake fetchSite: returns the pages it was given, in the shape the real one returns.
 const fakeFetch = (pages, failed = []) => async () => ({ pages, failed });
+// A page that did not become a document, and why. http_404 is the site saying the page is gone; a timeout
+// is the site saying nothing at all.
+const dead = (slug, why = 'http_404') => ({ url: 'https://www.ethiopianairlines.com/et/x/' + slug, why });
 
 function harness(dir, pages, opts = {}) {
   const sent = [], ingested = [];
@@ -58,16 +61,17 @@ test('a changed page is rewritten, re-ingested and reported once', async () => {
   assert.ok(fs.readFileSync(path.join(dir, 'a.md'), 'utf8').includes('32 kg'));
 });
 
-test('a vanished page is marked gone, kept on disk, and named in the note', async () => {
+test('a page the site answers 404 for is marked gone, kept on disk, and named in the note', async () => {
   const before = [page('a', 'Maximum weight 23 kg.'), page('b', 'Carry-on 7 kg.')];
   const dir = dirWith(before);
-  const h = harness(dir, [page('a', 'Maximum weight 23 kg.')]);
+  const h = harness(dir, [page('a', 'Maximum weight 23 kg.')], { failed: [dead('b')] });
   const r = await h.run();
   assert.deepEqual(r.gone, ['b']);
   const b = fs.readFileSync(path.join(dir, 'b.md'), 'utf8');
   assert.match(b, /status: "gone"/);
   assert.ok(b.includes('Carry-on 7 kg.'), 'the last known text was deleted');
   assert.match(h.sent[0], /gone/i);
+  assert.match(h.sent[0], /404/, 'the note must say why the page is gone');
 });
 
 test('a dry run writes nothing, ingests nothing and sends nothing', async () => {
@@ -126,4 +130,72 @@ test('writePack still allows the first run, where everything is new', () => {
   const r = writePack(dir, many, SITE, { today: '2026-09-16' });
   assert.equal(r.refused, undefined);
   assert.equal(r.added.length, 30);
+});
+
+test('a page that does not answer once is kept, not marked gone, and the note says which it is', async () => {
+  const before = [page('a', 'Maximum weight 23 kg.'), page('b', 'Carry-on 7 kg.')];
+  const dir = dirWith(before);
+  const h = harness(dir, [page('a', 'Maximum weight 23 kg.')], { failed: [dead('b', 'timeout')] });
+  const r = await h.run();
+  assert.deepEqual(r.gone, []);
+  assert.deepEqual(r.missed, ['b']);
+  const b = fs.readFileSync(path.join(dir, 'b.md'), 'utf8');
+  assert.match(b, /status: "live"/, 'one timeout dropped a live page out of the index for a week');
+  assert.match(b, /missedAt: "2026-09-23"/);
+  assert.ok(b.includes('Carry-on 7 kg.'), 'the body must not move');
+  assert.equal(h.sent.length, 1, 'exactly one note');
+  assert.match(h.sent[0], /could not be fetched this week \(kept\)/);
+  assert.ok(!/gone from the site/.test(h.sent[0]), 'the note called a timeout a deletion: ' + h.sent[0]);
+  assert.deepEqual(h.ingested, [], 'nothing moved in the pack, so there is nothing to re-index');
+});
+
+test('a page missing two Sundays running is marked gone the second time, and the note says why', async () => {
+  const before = [page('a', 'Maximum weight 23 kg.'), page('b', 'Carry-on 7 kg.')];
+  const dir = dirWith(before);
+  await harness(dir, [page('a', 'Maximum weight 23 kg.')], { failed: [dead('b', 'timeout')] }).run();
+  const h = harness(dir, [page('a', 'Maximum weight 23 kg.')], { failed: [dead('b', 'timeout')], today: '2026-09-30' });
+  const r = await h.run();
+  assert.deepEqual(r.gone, ['b']);
+  assert.match(fs.readFileSync(path.join(dir, 'b.md'), 'utf8'), /status: "gone"/);
+  assert.match(h.sent[0], /gone from the site/);
+  assert.match(h.sent[0], /missing two runs running/);
+});
+
+test('a page that answers again the next week loses its miss and is never marked gone', async () => {
+  const both = [page('a', 'Maximum weight 23 kg.'), page('b', 'Carry-on 7 kg.')];
+  const dir = dirWith(both);
+  await harness(dir, [page('a', 'Maximum weight 23 kg.')], { failed: [dead('b', 'timeout')] }).run();
+  const h = harness(dir, both, { today: '2026-09-30' });
+  const r = await h.run();
+  assert.deepEqual(r.gone, []);
+  assert.deepEqual(r.missed, []);
+  assert.equal(r.quiet, true, 'a page that came back is not news');
+  const b = fs.readFileSync(path.join(dir, 'b.md'), 'utf8');
+  assert.ok(!/missedAt/.test(b), 'the miss was not cleared: ' + b);
+  assert.match(b, /status: "live"/);
+});
+
+test('a bad network is one line in the note, not six', async () => {
+  const before = [];
+  for (let i = 0; i < 8; i++) before.push(page('p' + i, 'Page ' + i + ' content.'));
+  const dir = dirWith(before);
+  const back = [page('p0', 'Page 0 content.'), page('p1', 'Page 1 content.')];
+  const h = harness(dir, back, { failed: before.slice(2).map(p => dead(p.slug, 'timeout')) });
+  const r = await h.run();
+  assert.deepEqual(r.gone, []);
+  assert.equal(r.missed.length, 6);
+  assert.match(h.sent[0], /6 page\(s\) could not be fetched this week \(kept\)/);
+  assert.equal((h.sent[0].match(/\u2022/g) || []).length, 1, 'six pages were listed one by one: ' + h.sent[0]);
+});
+
+test('a dry run records no miss and marks nothing gone', async () => {
+  const before = [page('a', 'Maximum weight 23 kg.'), page('b', 'Carry-on 7 kg.')];
+  const dir = dirWith(before);
+  const b0 = fs.readFileSync(path.join(dir, 'b.md'), 'utf8');
+  const h = harness(dir, [page('a', 'Maximum weight 23 kg.')], { dryRun: true, failed: [dead('b', 'timeout')] });
+  const r = await h.run();
+  assert.deepEqual(r.missed, ['b']);
+  assert.equal(fs.readFileSync(path.join(dir, 'b.md'), 'utf8'), b0, 'a dry run wrote to the pack');
+  assert.deepEqual(h.sent, []);
+  assert.deepEqual(h.ingested, []);
 });

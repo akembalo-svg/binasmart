@@ -18,6 +18,9 @@ const pageOf = (slug, body) => ({ siteId: 'ethiopian-airlines', slug, path: '/et
   sectionTitleAm: 'ሻንጣ', text: MENU + '\n\n' + body + '\n\n' + NOTICE });
 
 const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'travelpack-'));
+// What fetchSite reports for a page that did not become a document, and why. http_404 is the site saying
+// the page is gone; a timeout is the site saying nothing at all, which is not the same thing.
+const dead = (slug, why = 'http_404') => ({ url: 'https://www.ethiopianairlines.com/et/x/' + slug, why });
 
 test('stripPackBoilerplate removes what every page repeats and keeps what only one page says', () => {
   const pages = ['a', 'b', 'c', 'd', 'e', 'f'].map((s, i) => pageOf(s, 'Only page ' + i + ' says this, at length, so it is content.'));
@@ -157,7 +160,7 @@ test('writePack rewrites a changed page and keeps the date it was first seen', (
 test('writePack marks a vanished page gone instead of deleting what we last knew', () => {
   const dir = tmp();
   writePack(dir, [pageOf('a', 'still here and readable.'), pageOf('b', 'about to disappear from the site.')], SITE, { today: '2026-09-16' });
-  const r = writePack(dir, [pageOf('a', 'still here and readable.')], SITE, { today: '2026-09-23' });
+  const r = writePack(dir, [pageOf('a', 'still here and readable.')], SITE, { today: '2026-09-23', failed: [dead('b')] });
   assert.deepEqual(r.gone, ['b']);
   const meta = readMeta(fs.readFileSync(path.join(dir, 'b.md'), 'utf8'));
   assert.equal(meta.status, 'gone');
@@ -168,7 +171,7 @@ test('writePack marks a vanished page gone instead of deleting what we last knew
 test('writePack marks a page live again when it comes back', () => {
   const dir = tmp();
   writePack(dir, [pageOf('b', 'about to disappear from the site.')], SITE, { today: '2026-09-16' });
-  writePack(dir, [], SITE, { today: '2026-09-23' });
+  writePack(dir, [], SITE, { today: '2026-09-23', failed: [dead('b')] });
   const r = writePack(dir, [pageOf('b', 'about to disappear from the site.')], SITE, { today: '2026-09-30' });
   assert.deepEqual(r.changed, ['b']);
   assert.equal(readMeta(fs.readFileSync(path.join(dir, 'b.md'), 'utf8')).status, 'live');
@@ -220,4 +223,59 @@ test('a page that is all mega-menu is thin after stripping, not a near-empty doc
   const { kept, thin } = splitThin(stripPackBoilerplate(pages));
   assert.deepEqual(thin.map(d => d.slug), ['a']);
   assert.equal(kept.length, 4);
+});
+
+test('writePack does not mark a page gone on one failed fetch: it records the miss and leaves it live', () => {
+  const dir = tmp();
+  writePack(dir, [pageOf('a', 'still here and readable.'), pageOf('b', 'timed out this week.')], SITE, { today: '2026-09-16' });
+  const r = writePack(dir, [pageOf('a', 'still here and readable.')], SITE, { today: '2026-09-23', failed: [dead('b', 'timeout')] });
+  assert.deepEqual(r.gone, []);
+  assert.deepEqual(r.missed, ['b']);
+  const md = fs.readFileSync(path.join(dir, 'b.md'), 'utf8');
+  const meta = readMeta(md);
+  assert.equal(meta.status, 'live', 'one timeout orphaned the chunks of a page that is still published');
+  assert.equal(meta.missedAt, '2026-09-23');
+  assert.equal(meta.lastChecked, '2026-09-23');
+  assert.ok(md.includes('timed out this week.'), 'the body must not move');
+});
+
+test('writePack marks a page gone when it is missing a second run running', () => {
+  const dir = tmp();
+  writePack(dir, [pageOf('a', 'still here and readable.'), pageOf('b', 'about to disappear.')], SITE, { today: '2026-09-16' });
+  writePack(dir, [pageOf('a', 'still here and readable.')], SITE, { today: '2026-09-23', failed: [dead('b', 'timeout')] });
+  const r = writePack(dir, [pageOf('a', 'still here and readable.')], SITE, { today: '2026-09-30', failed: [dead('b', 'timeout')] });
+  assert.deepEqual(r.gone, ['b']);
+  assert.equal(r.goneWhy.b, 'missing two runs running');
+  const meta = readMeta(fs.readFileSync(path.join(dir, 'b.md'), 'utf8'));
+  assert.equal(meta.status, 'gone');
+  assert.equal(meta.goneAt, '2026-09-30');
+  assert.equal(meta.missedAt, undefined, 'the miss is spent once the page is gone');
+});
+
+test('a page that answers again clears its miss, so two bad weeks a month apart are not two in a row', () => {
+  const dir = tmp();
+  const b = pageOf('b', 'here, then not answering, then here again.');
+  writePack(dir, [b], SITE, { today: '2026-09-16' });
+  writePack(dir, [], SITE, { today: '2026-09-23', failed: [dead('b', 'timeout')] });
+  const r = writePack(dir, [b], SITE, { today: '2026-09-30' });
+  assert.deepEqual(r.unchanged, ['b'], 'the page never changed, so coming back is not a change');
+  const meta = readMeta(fs.readFileSync(path.join(dir, 'b.md'), 'utf8'));
+  assert.equal(meta.missedAt, undefined, 'the miss was not cleared');
+  assert.equal(meta.status, 'live');
+  assert.equal(meta.lastChecked, '2026-09-30');
+  const r2 = writePack(dir, [], SITE, { today: '2026-10-07', failed: [dead('b', 'timeout')] });
+  assert.deepEqual(r2.gone, [], 'the count did not start again from zero');
+  assert.deepEqual(r2.missed, ['b']);
+});
+
+test('writePack in dry-run records neither a miss nor a gone mark on disk', () => {
+  const dir = tmp();
+  writePack(dir, [pageOf('a', 'still here and readable.'), pageOf('b', 'did not answer.')], SITE, { today: '2026-09-16' });
+  const before = fs.readFileSync(path.join(dir, 'b.md'), 'utf8');
+  const r = writePack(dir, [pageOf('a', 'still here and readable.')], SITE, { today: '2026-09-23', dryRun: true, failed: [dead('b', 'timeout')] });
+  assert.deepEqual(r.missed, ['b']);
+  assert.equal(fs.readFileSync(path.join(dir, 'b.md'), 'utf8'), before, 'a dry run recorded a miss on disk');
+  const r2 = writePack(dir, [pageOf('a', 'still here and readable.')], SITE, { today: '2026-09-23', dryRun: true, failed: [dead('b')] });
+  assert.deepEqual(r2.gone, ['b']);
+  assert.equal(fs.readFileSync(path.join(dir, 'b.md'), 'utf8'), before, 'a dry run marked a page gone on disk');
 });

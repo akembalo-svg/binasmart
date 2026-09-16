@@ -13,6 +13,10 @@
 //
 // The exception is a failure. If the site could not be checked, that IS the news: a weekly check that fails
 // silently is worse than no check, because the pack goes stale while the calendar says it is fresh.
+//
+// A page that did not answer is NOT a page that vanished. One bad fetch records a miss and keeps the
+// document live; only an explicit 404/410/soft-404, or a second miss the following Sunday, marks it gone.
+// The note says which of the two happened, because they call for different things from the reader.
 const path = require('path');
 const { execFileSync } = require('child_process');
 const { fetchSite: realFetchSite, stripPackBoilerplate, writePack, readMeta, OUT_DIR, REGISTRY, MIN_CHARS } =
@@ -72,8 +76,16 @@ function noteFor(reports, { today } = {}) {
     }
     if (rep.gone.length) {
       lines.push('🗑 ' + rep.name + ': ' + rep.gone.length + ' page(s) gone from the site');
-      for (const s of rep.gone.slice(0, 6)) lines.push('   • ' + label(rep, s));
+      for (const s of rep.gone.slice(0, 6)) lines.push('   • ' + label(rep, s) + ' — ' + ((rep.goneWhy && rep.goneWhy[s]) || '404'));
       headline += rep.gone.length;
+    }
+    // Not gone: not fetched. A page that timed out is still live, still indexed, still on disk - and is
+    // named here so a second bad week is not a surprise when it marks the page gone.
+    if (rep.missed && rep.missed.length) {
+      lines.push('⏳ ' + rep.name + ': ' + rep.missed.length + ' page(s) could not be fetched this week (kept)');
+      if (rep.missed.length <= 5) for (const s of rep.missed) lines.push('   • ' + label(rep, s) + ' — kept, marked gone only if it is missing again next week');
+      else lines.push('   • kept as they are; any still missing next week is marked gone');
+      headline += rep.missed.length;
     }
     if (rep.revived.length) lines.push('↩️ ' + rep.name + ': ' + rep.revived.length + ' page(s) are back');
     if (rep.ingest) lines.push('   re-indexed: +' + rep.ingest.inserted + ' chunks, −' + rep.ingest.deleted + ' stale');
@@ -93,24 +105,26 @@ async function run({ dir = OUT_DIR, today, dryRun = false, sites, fetchSite = re
   for (const site of list) {
     const { pages, failed } = await fetchSite(site, { log });
     const docs = stripPackBoilerplate(pages).filter(d => d.text.trim().length >= MIN_CHARS);
-    const r = writePack(dir, docs, site, { today: day, dryRun });
+    const r = writePack(dir, docs, site, { today: day, dryRun, failed });
     const titles = {};
     for (const d of docs) titles[d.slug] = d.title;
     const total = r.added.length + r.changed.length + r.unchanged.length;
     const rep = { site: site.id, name: site.name, total, titles, failed: failed.length,
       added: r.added || [], changed: r.changed || [], unchanged: r.unchanged || [], gone: r.gone || [],
+      goneWhy: r.goneWhy || {}, missed: r.missed || [],
       revived: r.revived || [], refused: !!r.refused, refusedWhy: r.refusedWhy };
     if (rep.refused) anyRefused = true;
-    else if (rep.added.length || rep.changed.length || rep.gone.length || rep.revived.length) moved = true;
+    else if (rep.added.length || rep.changed.length || rep.gone.length || rep.revived.length || rep.missed.length) moved = true;
     log('[travel-freshness] ' + site.id + ': +' + rep.added.length + ' new, ' + rep.changed.length + ' changed, '
-      + rep.unchanged.length + ' unchanged, ' + rep.gone.length + ' gone, ' + rep.failed + ' failed'
+      + rep.unchanged.length + ' unchanged, ' + rep.gone.length + ' gone, ' + rep.missed.length + ' kept after a failed fetch, ' + rep.failed + ' failed'
       + (rep.refused ? '  REFUSED: ' + rep.refusedWhy : '') + (dryRun ? '  [DRY RUN]' : ''));
     reports.push(rep);
   }
 
   const quiet = !moved && !anyRefused;
   const result = { quiet, refused: anyRefused, reports,
-    added: reports.flatMap(r => r.added), changed: reports.flatMap(r => r.changed), gone: reports.flatMap(r => r.gone) };
+    added: reports.flatMap(r => r.added), changed: reports.flatMap(r => r.changed), gone: reports.flatMap(r => r.gone),
+    missed: reports.flatMap(r => r.missed) };
 
   if (quiet) { log('[travel-freshness] nothing changed — no note sent, which is the point'); return result; }
   if (dryRun) { log('[travel-freshness] would have sent:\n' + noteFor(reports, { today: day })); return result; }
