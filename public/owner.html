@@ -729,6 +729,15 @@ function msgCounts(c){
   });
   return out.join(' · ') || '<span class="text-slate-400">—</span>';
 }
+// Which door the batch went out of (design section 4: the channel split). countsOf has carried these since Task 1.
+// A channel nothing went by is not named at all, so a Telegram-only building never reads the word SMS.
+function msgChannels(c){
+  var out = [];
+  [['telegram', 'Telegram'], ['sms', 'SMS']].forEach(function(p){
+    if (c && c[p[0]]) out.push(esc(p[1]) + ' ' + esc(c[p[0]]));
+  });
+  return out.join(' · ');
+}
 function msgPager(page, pages, handler){
   if (!(pages > 1)) return '';
   return '<div class="flex items-center gap-2 mt-2 justify-center text-[11px]">'
@@ -749,12 +758,14 @@ async function loadBatches(){
     var monthOpts = '<option value="">all months · ሁሉም</option>' + (d.months || []).map(function(m){
       return '<option value="' + esc(m) + '"' + (m === d.month ? ' selected' : '') + '>' + esc(m) + '</option>'; }).join('');
     var rows = (d.batches || []).map(function(b){
+      var ch = msgChannels(b.counts);
       return '<div class="rounded-xl p-2.5 mb-1.5" style="background:#f8fafc;border:1px solid #e9f0ee">'
         + '<div class="flex items-center gap-2"><span class="flex-1 text-[11px]"><b>' + esc(String(b.at).slice(0, 10)) + '</b> · '
         + esc(msgLabel(MSG_KIND, b.kind)) + '<br><span class="text-[9px] text-slate-400">' + esc(b.total)
         + ' recipients · ' + esc(msgLabel(MSG_BY, b.by)) + ' · ' + esc(b.source) + '</span></span>'
         + '<button class="tag" style="background:#e0f2fe;color:#0369a1" onclick="openBatch(\'' + jsq(b.id) + '\')">🔍 Details</button></div>'
-        + '<div class="text-[10px] mt-1" style="color:#475569">' + msgCounts(b.counts) + '</div>'
+        + '<div class="text-[10px] mt-1" style="color:#475569">' + msgCounts(b.counts)
+        + (ch ? ' <span class="text-slate-400">· ' + ch + '</span>' : '') + '</div>'
         + '<div id="batch-' + esc(b.id) + '"></div></div>';
     }).join('');
     box.innerHTML = '<div class="font-black text-sm mb-2">📨 Sent messages · የተላኩ መልእክቶች (' + esc(d.total) + ')</div>'

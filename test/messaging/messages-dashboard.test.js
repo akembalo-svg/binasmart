@@ -61,6 +61,18 @@ test('the filters send only a kind and a month, both url-encoded, and reset the 
   assert.match(HTML, /var MSG = \{ page: 0, kind: '', month: '', open: null, rpage: 0, apage: 0 \};/);
 });
 
+// Design section 4 asks a batch line for the channel split as well as the delivered / failed / not reachable counts.
+// countsOf has carried telegram, sms and none since Task 1; this is the line that finally shows it.
+test('a batch line says which door the messages went out of', () => {
+  const ch = fn('msgChannels');
+  assert.match(ch, /\['telegram', 'Telegram'\], \['sms', 'SMS'\]/);
+  assert.match(ch, /esc\(p\[1\]\) \+ ' ' \+ esc\(c\[p\[0\]\]\)/);
+  const load = fn('loadBatches');
+  assert.ok(load.includes('var ch = msgChannels(b.counts);'), 'the batch row asks for the split');
+  assert.match(load, /\(ch \? ' <span class="text-slate-400">. ' \+ ch \+ '<\/span>' : ''\)/,
+    'and shows it only when there is one');
+});
+
 // ===== Task 7: the drill-down, the actions, the legend =====
 
 test('the drill-down shows unit, state, channel and reason, each escaped, and pages on its own', () => {
