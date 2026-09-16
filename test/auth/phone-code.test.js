@@ -65,3 +65,81 @@ test('the identifier is namespaced, so a code row can never be mistaken for anot
   assert.equal(pc.identifierFor(PHONE), 'phonecode:+251900000001');
   assert.equal(pc.identifierFor(null), 'phonecode:');
 });
+
+// ----- Task 2: expiry, wrong attempts and the lock -----
+const NOW = 1789000000000;                     // a fixed clock; nothing here reads the real one
+const row = (hash, attempts, expiresAt) => ({ value: pc.packValue(hash, attempts), expiresAt: new Date(expiresAt) });
+const good = () => pc.hashCode('483920', PHONE, PEPPER);
+
+test('the right code is accepted once and the row is thrown away', () => {
+  const r = pc.checkCode({ row: row(good(), 0, NOW + 60000), code: '483920', phone: PHONE, pepper: PEPPER, now: NOW });
+  assert.equal(r.ok, true);
+  assert.equal(r.reason, 'ok');
+  assert.equal(r.clear, true, 'a spent code is deleted, so it cannot be spent twice');
+  assert.equal(r.next, null);
+});
+
+test('no code was ever asked for', () => {
+  const r = pc.checkCode({ row: null, code: '483920', phone: PHONE, pepper: PEPPER, now: NOW });
+  assert.equal(r.ok, false);
+  assert.equal(r.reason, 'no_code');
+  assert.equal(r.clear, false);
+  assert.equal(r.next, null);
+});
+
+test('a code past its five minutes is gone, even if it is the right one', () => {
+  const r = pc.checkCode({ row: row(good(), 0, NOW - 1), code: '483920', phone: PHONE, pepper: PEPPER, now: NOW });
+  assert.equal(r.ok, false);
+  assert.equal(r.reason, 'expired');
+  assert.equal(r.clear, true);
+  assert.equal(pc.TTL_MS, 300000);
+});
+
+test('a wrong code counts up and keeps the same expiry, so guessing does not buy time', () => {
+  const h = good();
+  const r = pc.checkCode({ row: row(h, 1, NOW + 60000), code: '000000', phone: PHONE, pepper: PEPPER, now: NOW });
+  assert.equal(r.ok, false);
+  assert.equal(r.reason, 'wrong');
+  assert.equal(r.clear, false);
+  assert.deepEqual(pc.unpackValue(r.next.value), { hash: h, attempts: 2 });
+  assert.equal(r.next.expiresAt.getTime(), NOW + 60000);
+});
+
+test('the fifth wrong code locks the number for fifteen minutes', () => {
+  const h = good();
+  const r = pc.checkCode({ row: row(h, 4, NOW + 60000), code: '000000', phone: PHONE, pepper: PEPPER, now: NOW });
+  assert.equal(r.ok, false);
+  assert.equal(r.reason, 'locked');
+  assert.deepEqual(pc.unpackValue(r.next.value), { hash: h, attempts: 5 });
+  assert.equal(r.next.expiresAt.getTime(), NOW + pc.LOCK_MS);
+  assert.equal(pc.MAX_ATTEMPTS, 5);
+  assert.equal(pc.LOCK_MS, 900000);
+});
+
+test('while it is locked even the right code is refused, and the lock is not extended', () => {
+  const locked = row(good(), 5, NOW + pc.LOCK_MS);
+  const r = pc.checkCode({ row: locked, code: '483920', phone: PHONE, pepper: PEPPER, now: NOW });
+  assert.equal(r.ok, false);
+  assert.equal(r.reason, 'locked');
+  assert.equal(r.clear, false);
+  assert.equal(r.next, null, 'a locked row is left exactly as it is');
+  assert.equal(pc.isLocked(locked, NOW), true);
+  assert.equal(pc.isLocked(locked, NOW + pc.LOCK_MS + 1), false, 'the lock ends when the row expires');
+  assert.equal(pc.isLocked(null, NOW), false);
+});
+
+test('a second code is refused inside a minute, and refused for the whole lock', () => {
+  const fresh = row(good(), 0, NOW + pc.TTL_MS);                 // issued this instant
+  assert.equal(pc.tooSoon(fresh, NOW), true);
+  assert.equal(pc.tooSoon(fresh, NOW + pc.RESEND_MS), false, 'after sixty seconds a new code may be sent');
+  assert.equal(pc.tooSoon(row(good(), 0, NOW - 1), NOW), false, 'an expired code is not a recent one');
+  assert.equal(pc.tooSoon(row(good(), 5, NOW + pc.LOCK_MS), NOW), true, 'a lock cannot be escaped by asking again');
+  assert.equal(pc.tooSoon(null, NOW), false);
+  assert.equal(pc.RESEND_MS, 60000);
+});
+
+// Folded in from the Task 1 review: a code is six characters, not a number, so a run of zeros keeps
+// its leading zeros. '000000' is as valid a code as any other and must survive the round trip.
+test('a code of nothing but zeros keeps its leading zeros', () => {
+  assert.equal(pc.newCode(() => 0), '000000');
+});

@@ -60,6 +60,45 @@ function unpackValue(value) {
 // from ever being found — or consumed — by something that was looking for one of those.
 function identifierFor(phone) { return 'phonecode:' + String(phone == null ? '' : phone); }
 
+// A Date, a number of milliseconds or an ISO string, as milliseconds.
+const ms = d => (d instanceof Date ? d.getTime() : new Date(d).getTime());
+
+// Locked means: five wrong codes were tried, and the row that recorded them has not run out yet. The
+// row IS the lock. There is no second place where a lock is kept, and no way to clear it by asking for
+// another code, because tooSoon() refuses a new code while it exists.
+function isLocked(row, nowMs) { return !!row && unpackValue(row.value).attempts >= MAX_ATTEMPTS && ms(row.expiresAt) > nowMs; }
+
+// Whether a NEW code must be refused. A live code was issued at (expiresAt - TTL_MS); if that was less
+// than RESEND_MS ago, the person already has one and a second SMS would only cost money. An expired
+// code is not a recent one. A lock always is.
+function tooSoon(row, nowMs) {
+  if (!row) return false;
+  if (isLocked(row, nowMs)) return true;
+  if (ms(row.expiresAt) <= nowMs) return false;
+  return ms(row.expiresAt) - TTL_MS > nowMs - RESEND_MS;
+}
+
+// Every way a code can be wrong, decided in one place. The caller turns all of them into the same
+// answer for the visitor: how far a guess got is exactly what an attacker wants to know.
+//
+//   clear: true            the caller deletes the row (spent, or expired)
+//   next:  { value, ... }  the caller replaces the row with this one (a wrong guess, counted)
+//   neither                the caller leaves the row alone (never asked for, or locked)
+function checkCode({ row, code, phone, pepper, now }) {
+  const at = now instanceof Date ? now.getTime() : Number(now);
+  if (!row) return { ok: false, reason: 'no_code', clear: false, next: null };
+  const { hash, attempts } = unpackValue(row.value);
+  if (ms(row.expiresAt) <= at) return { ok: false, reason: 'expired', clear: true, next: null };
+  if (attempts >= MAX_ATTEMPTS) return { ok: false, reason: 'locked', clear: false, next: null };
+  if (sameHash(hash, hashCode(code, phone, pepper))) return { ok: true, reason: 'ok', clear: true, next: null };
+  const n = attempts + 1;
+  // The expiry is carried over unchanged on a wrong guess: guessing must not buy a longer window. On
+  // the fifth it becomes the lock instead.
+  return n >= MAX_ATTEMPTS
+    ? { ok: false, reason: 'locked', clear: false, next: { value: packValue(hash, MAX_ATTEMPTS), expiresAt: new Date(at + LOCK_MS) } }
+    : { ok: false, reason: 'wrong', clear: false, next: { value: packValue(hash, n), expiresAt: new Date(ms(row.expiresAt)) } };
+}
+
 module.exports = { CODE_LEN, TTL_MS, MAX_ATTEMPTS, LOCK_MS, RESEND_MS, PHONE_WINDOW_MS, PHONE_MAX, IP_WINDOW_MS, IP_MAX,
   MIN_PEPPER, SMS_LABEL, PLACEHOLDER_DOMAIN,
-  newCode, hashCode, sameHash, packValue, unpackValue, identifierFor };
+  newCode, hashCode, sameHash, packValue, unpackValue, identifierFor, isLocked, tooSoon, checkCode };
