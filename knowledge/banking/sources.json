@@ -1,0 +1,417 @@
+{
+  "version": 1,
+  "_about": "Official sources for the BinaSmart banking and money knowledge pack (the second sector pack; the method is design 2026-09-16-airline-travel-design.md section 1). ops/packs/fetch-pack.js --pack banking reads this file and nothing else: it fetches each site the way `fetch` says, keeps only paths matching `allow` and not matching `deny`, waits crawlDelaySeconds between requests, and writes knowledge/banking/<slug>.md. This pack INFORMS ONLY. No account page, no login page, no transaction page and no application form is ever fetched, because Bini must never look like a way to bank. reach/checked are what was measured from this VPS on the stated date; a source we cannot reach is listed as manual with the measurement and with what its absence costs, not deleted. `references` names what the repository already holds so the pack never fetches the same thing twice.",
+  "pack": {
+    "id": "banking",
+    "generatedBy": "ops/packs/fetch-pack.js --pack banking",
+    "logPrefix": "banking",
+    "packFormat": "2",
+    "disclaimerEn": "Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure.",
+    "disclaimerAm": "የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።"
+  },
+  "sites": [
+    {
+      "id": "zemen",
+      "name": "Zemen Bank",
+      "nameAm": "የዘመን ባንክ",
+      "host": "zemenbank.com",
+      "fetch": "sitemap",
+      "sitemaps": ["https://zemenbank.com/sitemap_index.xml"],
+      "discoverLinks": false,
+      "maxPages": 80,
+      "crawlDelaySeconds": 5,
+      "robots": "https://zemenbank.com/robots.txt — 200, Yoast block, `User-agent: *` with an empty `Disallow:` (everything allowed) and `Sitemap: https://zemenbank.com/sitemap_index.xml`. No Crawl-delay is published, so the pack's own 5 s is used.",
+      "lang": "en",
+      "hasAmharic": true,
+      "langNote": "The only Ethiopian bank in this pack with a real Amharic locale. https://zemenbank.com/am/ pages carry genuine Amharic body text (the forex-service page extracted 2,611 characters with 1,176 Ethiopic characters on 2026-09-16), not a machine-translated menu. Amharic pages are fetched and get lang: am; English pages get lang: en.",
+      "reach": "up",
+      "checked": "2026-09-16",
+      "allow": [
+        "^/(tariff|interest-rates|exchange-rates|faq|complaint|loan-calculators|we-care|cybersecurity)$",
+        "^/banking-service(/|$)",
+        "^/digital-services(/|$)",
+        "^/am/"
+      ],
+      "deny": [
+        "^/media-and-news(/|$)",
+        "^/press-releases(/|$)",
+        "^/annual_report",
+        "^/annual_report_categories",
+        "^/(category|author|elementskit_content|newsletter|atm-registration|branch-location|find-nearest-location|get-location-info)(/|$)",
+        "^/forms(/|$)",
+        "^/am/%e1%88%9a%e1%8b%b2%e1%8b%ab",
+        "^/am/%e1%8b%98%e1%88%98%e1%8a%95-%e1%89%a3%e1%8a%95%e1%8a%ad-%e1%89%b5%e1%88%9d%e1%88%85%e1%88%ad%e1%89%b5",
+        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
+      ],
+      "pathSlugs": {
+        "/am/%e1%8b%a8%e1%89%a3%e1%8a%95%e1%8a%ad-%e1%8a%a0%e1%8c%88%e1%88%8d%e1%8c%8d%e1%88%8e%e1%89%b5": "am-banking-service",
+        "/am/%e1%8b%a8%e1%8b%8d%e1%8c%ad-%e1%88%9d%e1%8a%95%e1%8b%9b%e1%88%aa-%e1%8a%a0%e1%8c%88%e1%88%8d%e1%8c%8d%e1%88%8e%e1%89%b5": "am-forex-service"
+      },
+      "pathSlugsNote": "Zemen's Amharic URLs are percent-encoded Ethiopic, which the slug rule would turn into a 200-character filename of hex. Every allowed /am/ path therefore needs an explicit, readable, ascii slug. Task 4 Step 2 generates the proposed table from the live sitemap with the decoded Amharic next to each line; a human reads it and pastes it here. The two entries above were decoded and their page titles read on 2026-09-16: `የባንክ አገልግሎት` and `የውጭ ምንዛሪ አገልግሎት`. A fetched /am/ path with no entry here makes the fetcher refuse the run.",
+      "sections": [
+        { "key": "accounts", "titleAm": "ሂሳብና ተቀማጭ", "match": "^/banking-service/personal-banking" },
+        { "key": "business", "titleAm": "የንግድ ባንክ አገልግሎት", "match": "^/banking-service/business-banking" },
+        { "key": "international", "titleAm": "የውጭ ምንዛሪና ዓለም አቀፍ", "match": "^/banking-service/international-banking" },
+        { "key": "digital", "titleAm": "ዲጂታል አገልግሎቶች", "match": "^/digital-services" },
+        { "key": "fees", "titleAm": "ክፍያዎችና ታሪፍ", "match": "^/tariff$" },
+        { "key": "rates", "titleAm": "የወለድና የምንዛሪ ተመን", "match": "^/(interest-rates|exchange-rates|loan-calculators)$" },
+        { "key": "help", "titleAm": "እገዛ፣ ቅሬታና ደኅንነት", "match": "^/(faq|complaint|we-care|cybersecurity)$" },
+        { "key": "amharic", "titleAm": "በአማርኛ", "match": "^/am/" }
+      ]
+    },
+    {
+      "id": "dashen",
+      "name": "Dashen Bank",
+      "nameAm": "የዳሽን ባንክ",
+      "host": "dashenbanksc.com",
+      "fetch": "sitemap",
+      "sitemaps": ["https://dashenbanksc.com/wp-sitemap-posts-page-1.xml"],
+      "discoverLinks": false,
+      "maxPages": 60,
+      "crawlDelaySeconds": 5,
+      "robots": "https://dashenbanksc.com/robots.txt — 200, `User-agent: *`, `Disallow: /wp-admin/`, `Allow: /wp-admin/admin-ajax.php`, `Sitemap: https://dashenbanksc.com/wp-sitemap.xml`. No Crawl-delay; the pack's own 5 s is used.",
+      "lang": "en",
+      "hasAmharic": false,
+      "langNote": "No Amharic locale. A few Amharic strings appear inside the English FAQ page (441 Ethiopic characters on 2026-09-16), which is the bank quoting its own product names, not an Amharic version of the page.",
+      "sitemapNote": "The published index at /wp-sitemap.xml lists four sitemaps, one of which holds 1,292 news posts. This registry points straight at the page sitemap (83 URLs) so that 1,292-entry file is never downloaded and no news post can slip through a future widening of the allow list.",
+      "reach": "up",
+      "checked": "2026-09-16",
+      "allow": [
+        "^/(saving-deposit|current-demand-deposit|fixed-time-deposit|other-special-deposit)$",
+        "^/(consumer-loan|business-loan|import|export|remittance)$",
+        "^/(card-services|pos-services|atm-services|dashen-mobile-plus|app-downloads|visa-cards)$",
+        "^/(frequently-asked-questions|privacy-and-security|complaint-and-feedback-section|e-forms|contact-dashen-bank)$",
+        "^/(how-to-import-from-abroad|how-to-use-an-atm|how-to-transfer-money-from-abroad|how-to-transfer-money-using-dashen-mobile-plus|merchant-account-guide)$",
+        "^/(financing-ifb|wadiah-saving-account-ifb|qard-current-account-ifb|mudarabah-saving-account-ifb|mudarabah-investment-account-ifb|other-special-deposit-ifb)$",
+        "^/(diaspora-wadiah-saving-account|diaspora-non-repatriable-saving-account|diaspora-demand-current-account|diaspora-fixed-time-deposit|diaspora-qard-current-account|diaspora-mudarabah-fixed-time-deposit|welcome-home)$",
+        "^/(international-foreign-guarantee|local-guarantee-one-time-and-facility|local-kafalah-one-time-and-facility-ifb|international-foreign-kafalah-ifb)$",
+        "^/(murabaha-financing-working-capital|murabaha-financing-investment|qard-pre-shipment-export-financing)$"
+      ],
+      "deny": [
+        "^/(careers|bids|press-releases|newsletters|annual-reports|photo-gallery|video-gallery|documents)(/|$)",
+        "^/(board-of-directors|executive-management|corporate-social-responsibility|organizational-structure|sharia-advisory-committee|company-profile|about-us|corporate-statement)(/|$)",
+        "^/(branch-network|atm-network|merchant-locations|find-a-branch|find-an-atm|official-social-media-accounts|quality-assurance-survey|visa-cards-2)(/|$)",
+        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
+      ],
+      "sections": [
+        { "key": "accounts", "titleAm": "ሂሳብና ተቀማጭ", "match": "^/(saving-deposit|current-demand-deposit|fixed-time-deposit|other-special-deposit)$" },
+        { "key": "loans", "titleAm": "ብድር", "match": "^/(consumer-loan|business-loan)$" },
+        { "key": "trade", "titleAm": "ወጪና ገቢ ንግድ", "match": "^/(import|export|how-to-import-from-abroad|international-foreign-guarantee|local-guarantee-one-time-and-facility|qard-pre-shipment-export-financing|murabaha-financing-working-capital|murabaha-financing-investment|local-kafalah-one-time-and-facility-ifb|international-foreign-kafalah-ifb)$" },
+        { "key": "remittance", "titleAm": "ከውጭ የሚላክ ገንዘብ", "match": "^/(remittance|how-to-transfer-money-from-abroad)$" },
+        { "key": "diaspora", "titleAm": "የዲያስፖራ ሂሳቦች", "match": "^/(diaspora-|welcome-home)" },
+        { "key": "digital", "titleAm": "ካርድ፣ ኤቲኤምና ሞባይል ባንክ", "match": "^/(card-services|pos-services|atm-services|dashen-mobile-plus|app-downloads|visa-cards|how-to-use-an-atm|how-to-transfer-money-using-dashen-mobile-plus|merchant-account-guide)$" },
+        { "key": "ifb", "titleAm": "ወለድ አልባ ባንክ", "match": "^/(financing-ifb|wadiah-saving-account-ifb|qard-current-account-ifb|mudarabah-saving-account-ifb|mudarabah-investment-account-ifb|other-special-deposit-ifb)$" },
+        { "key": "help", "titleAm": "እገዛ፣ ቅሬታና ደኅንነት", "match": "^/(frequently-asked-questions|privacy-and-security|complaint-and-feedback-section|e-forms|contact-dashen-bank)$" }
+      ]
+    },
+    {
+      "id": "cbe",
+      "name": "Commercial Bank of Ethiopia",
+      "nameAm": "የኢትዮጵያ ንግድ ባንክ",
+      "host": "combanketh.et",
+      "fetch": "urls",
+      "urls": [
+        "https://combanketh.et/misalliance/terms-and-tarrif",
+        "https://combanketh.et/misalliance/faq",
+        "https://combanketh.et/misalliance/sitemap",
+        "https://combanketh.et/misalliance/account-opening",
+        "https://combanketh.et/cbe-for-you/diaspora-accounts",
+        "https://combanketh.et/cbe-for-you/cbenoor-diaspora-accounts",
+        "https://combanketh.et/cbe-noor",
+        "https://combanketh.et/cbe-noor/noor-product/wadiah",
+        "https://combanketh.et/cbe-noor/noor-product/financing",
+        "https://combanketh.et/cbe-noor/noor-product/trade",
+        "https://combanketh.et/products/deposit",
+        "https://combanketh.et/mobile-privacy-notice",
+        "https://combanketh.et/call-center"
+      ],
+      "discoverLinks": false,
+      "maxPages": 20,
+      "crawlDelaySeconds": 5,
+      "robots": "none published. https://combanketh.et/robots.txt and /sitemap.xml both answer HTTP 404 rendering the site's own Next.js app shell (47,298 bytes), so there is no robots file and no sitemap to obey. The pack's 5 s pacing is applied anyway.",
+      "lang": "en",
+      "hasAmharic": false,
+      "langNote": "English, with a site-wide Amharic fraud-warning banner on every page (72 Ethiopic characters) that the boilerplate strip removes because it is on every page.",
+      "reach": "up",
+      "checked": "2026-09-16",
+      "why-urls": "There is no sitemap and no robots.txt, and the site is a Next.js application whose product pages render their content in the browser: /products/deposit extracted 462 characters and /cbe-for-you/diaspora-accounts 461, both of which are the banner plus the menu. Crawling this host blind would be impolite and would produce empty documents. So its pages are named by hand, taken from the links on /home as they were on 2026-09-16, and most of them are expected to be reported as thin. The one page that carries real content is /misalliance/terms-and-tarrif: 31,756 characters, the bank's whole published tariff.",
+      "reliabilityNote": "Intermittent from this VPS: 2 of 5 probes on 2026-09-16 timed out at 25 s while 3 returned 200. The two-strike `missedAt` rule in the writer exists for exactly this, and this site is the reason the mass-loss guard matters for this pack.",
+      "allow": [
+        "^/(misalliance|cbe-for-you|cbe-noor|products)(/|$)",
+        "^/(mobile-privacy-notice|call-center)$"
+      ],
+      "deny": [
+        "^/(cbe-resources|about-us|exchange-rates|Exchange-rate-documentation)(/|$)",
+        "^/misalliance/(careers|tenders|feedback-form|contact-us)$",
+        "/(apply|application-form)(/|$)",
+        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
+      ],
+      "probePaths": ["/misalliance/account-opening/apply", "/onlinebanking"],
+      "sections": [
+        { "key": "fees", "titleAm": "ክፍያዎችና ታሪፍ", "match": "^/misalliance/terms-and-tarrif" },
+        { "key": "accounts", "titleAm": "ሂሳብ መክፈትና ተቀማጭ", "match": "^/(products|misalliance/account-opening)" },
+        { "key": "diaspora", "titleAm": "የዲያስፖራ ሂሳቦች", "match": "^/cbe-for-you" },
+        { "key": "ifb", "titleAm": "ወለድ አልባ ባንክ", "match": "^/cbe-noor" },
+        { "key": "help", "titleAm": "እገዛና ደኅንነት", "match": "^/(misalliance/faq|misalliance/sitemap|mobile-privacy-notice|call-center)" }
+      ]
+    },
+    {
+      "id": "coopbank",
+      "name": "Cooperative Bank of Oromia",
+      "nameAm": "የኦሮሚያ ኅብረት ሥራ ባንክ",
+      "host": "coopbankoromia.com.et",
+      "fetch": "sitemap",
+      "sitemaps": [
+        "https://coopbankoromia.com.et/page-sitemap.xml",
+        "https://coopbankoromia.com.et/ufaq-sitemap.xml"
+      ],
+      "discoverLinks": false,
+      "maxPages": 140,
+      "crawlDelaySeconds": 6,
+      "robots": "https://coopbankoromia.com.et/robots.txt — 200, `User-agent: *`, `Disallow: /wp-admin/`, `Allow: /wp-admin/admin-ajax.php`. No Crawl-delay; 6 s is used here rather than 5 because this host was the slowest of the six on 2026-09-16 (/tariff/ timed out at 30 s).",
+      "lang": "en",
+      "hasAmharic": false,
+      "langNote": "The English pages are the product library. /home-amharic/ and /home-affan-oromo/ exist and are fetched; the Amharic and Afaan Oromoo material otherwise lives in the news stream, which this pack does not fetch.",
+      "sitemapNote": "The published index lists exchange_rate-sitemap1 through 7 — thousands of daily exchange-rate posts — plus job_listing, wpdmpro and portfolio sitemaps. None of them is fetched. Only page-sitemap.xml (249 URLs) and ufaq-sitemap.xml (18) are, because those are the two that hold the products and the answers.",
+      "reach": "up",
+      "checked": "2026-09-16",
+      "allow": [
+        "^/(deposit-products|loan-and-advances|interest-free-banking|diaspora-banking|cooperatives)(/|$)",
+        "^/ufaqs(/|$)",
+        "^/(open-a-new-account|other-services|other-products-and-services|trade-service-process|types-of-merchandise-loan|financing-contracts|security-contracts|upcoming-services|terms-conditions)$",
+        "^/(home-amharic|home-affan-oromo|wadiah-current-account|kafala|mudharabah|gamme-junior-wadia-saving-account)$"
+      ],
+      "deny": [
+        "^/(careers|tender|post-a-job|vacancy-advertisement|newsroom|blog|blog-2|tes|announcements|ifb-account-opening-form)(/|$)",
+        "^/ufaqs/.*(vacanc|job)",
+        "^/obbo-",
+        "^/exchange_rate",
+        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
+      ],
+      "sections": [
+        { "key": "accounts", "titleAm": "ሂሳብና ተቀማጭ", "match": "^/(deposit-products|open-a-new-account|wadiah-current-account|gamme-junior-wadia-saving-account)" },
+        { "key": "loans", "titleAm": "ብድር", "match": "^/(loan-and-advances|types-of-merchandise-loan|financing-contracts|security-contracts)" },
+        { "key": "ifb", "titleAm": "ወለድ አልባ ባንክ", "match": "^/(interest-free-banking|kafala|mudharabah)" },
+        { "key": "diaspora", "titleAm": "የዲያስፖራ ሂሳቦች", "match": "^/diaspora-banking" },
+        { "key": "cooperatives", "titleAm": "የኅብረት ሥራ ማኅበራት", "match": "^/cooperatives" },
+        { "key": "trade", "titleAm": "ወጪና ገቢ ንግድ", "match": "^/trade-service-process" },
+        { "key": "help", "titleAm": "ተደጋጋሚ ጥያቄዎች", "match": "^/(ufaqs|terms-conditions|other-services|other-products-and-services|upcoming-services|home-amharic|home-affan-oromo)" }
+      ]
+    },
+    {
+      "id": "ecma",
+      "name": "Ethiopian Capital Market Authority",
+      "nameAm": "የኢትዮጵያ የካፒታል ገበያ ባለሥልጣን",
+      "host": "ecma.gov.et",
+      "fetch": "sitemap",
+      "sitemaps": ["https://ecma.gov.et/wp-sitemap-posts-page-1.xml"],
+      "discoverLinks": false,
+      "maxPages": 25,
+      "crawlDelaySeconds": 6,
+      "robots": "NOT PUBLISHED OR NOT REACHABLE: https://ecma.gov.et/robots.txt timed out after 30 s from this VPS on 2026-09-16, twice, while the sitemap and the pages answered 200 in about 4 s. Because we could not read a robots file we could not be told a Crawl-delay either, so 6 s is used — more than the 5 s the airline's robots asked for, on the principle that an unread robots file is treated as the strictest one we have seen.",
+      "lang": "en",
+      "hasAmharic": false,
+      "langNote": "English only. A handful of Ethiopic characters appear in the titles of PDF directives listed on /laws-regulation/; the PDFs themselves are not fetched.",
+      "reach": "up",
+      "checked": "2026-09-16",
+      "allow": [
+        "^/(about|licensing|investor|laws-regulation|the-board|organizational-structure|strategic-plan|contact-us)$",
+        "^/regulatory-sandbox(/|$)",
+        "^/(eligibility-criteria|application-process-participation)$"
+      ],
+      "deny": [
+        "^/(events-2|all-events|performers|venues|booking|booking-details|my-bookings|login|user-profile|submit-event|event-types|event-organizers)(/|$)",
+        "^/(etn_category|etn-tags|etn-speaker-category|locations|categories|tags|event|media|tenders|registration|self-assessment|self-evaluation|eligible)(/|$)",
+        "^/step-[0-9]+$",
+        "^/elementor-",
+        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
+      ],
+      "sections": [
+        { "key": "regulator", "titleAm": "ስለ ባለሥልጣኑ", "match": "^/(about|the-board|organizational-structure|strategic-plan|contact-us)$" },
+        { "key": "licensing", "titleAm": "ፈቃድ አሰጣጥ", "match": "^/licensing$" },
+        { "key": "investors", "titleAm": "ለባለሀብቶች", "match": "^/investor$" },
+        { "key": "rules", "titleAm": "ሕጎችና መመሪያዎች", "match": "^/laws-regulation$" },
+        { "key": "sandbox", "titleAm": "የሙከራ ማዕቀፍ", "match": "^/(regulatory-sandbox|eligibility-criteria|application-process-participation)" }
+      ]
+    },
+    {
+      "id": "ethswitch",
+      "name": "EthSwitch S.C. — the national payment switch",
+      "nameAm": "ኢትስዊች አ.ማ.",
+      "host": "ethswitch.com",
+      "fetch": "sitemap",
+      "sitemaps": ["https://ethswitch.com/wp-sitemap-posts-page-1.xml"],
+      "discoverLinks": false,
+      "maxPages": 15,
+      "crawlDelaySeconds": 5,
+      "robots": "https://ethswitch.com/robots.txt — 200, `User-agent: *`, `Disallow: /wp-admin/`, `Allow: /wp-admin/admin-ajax.php`, `Sitemap: https://ethswitch.com/wp-sitemap.xml`, plus a disallow on one uploads JSON file. No Crawl-delay; 5 s is used.",
+      "lang": "en",
+      "hasAmharic": false,
+      "reach": "up",
+      "checked": "2026-09-16",
+      "why": "EthSwitch runs the interoperable ATM and POS network every Ethiopian bank card rides on. It is the only source in the pack that can answer why a card from one bank works — or does not work — in another bank's machine. Small on purpose: 22 page URLs, of which the news, bids and job streams are denied.",
+      "allow": [
+        "^/(about-us|contact-us|faq)$",
+        "^/(services|resources)(/|$)"
+      ],
+      "deny": [
+        "^/(bids|news|blog|announcment|announcements|annual-report|jobpost|careers|portfolio|personnel)(/|$)",
+        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
+      ],
+      "sections": [
+        { "key": "switch", "titleAm": "የክፍያ መረብ", "match": "^/" }
+      ]
+    },
+    {
+      "id": "nbe",
+      "name": "National Bank of Ethiopia",
+      "nameAm": "የኢትዮጵያ ብሔራዊ ባንክ",
+      "host": "nbe.gov.et",
+      "fetch": "manual",
+      "crawlDelaySeconds": 5,
+      "lang": "en",
+      "hasAmharic": true,
+      "reach": "blocked",
+      "checked": "2026-09-16",
+      "why": "nbe.gov.et is behind a web application firewall as of 2026-09-16. Every path — /, /mandates/directives/, /am/, /sitemap.xml, /wp-sitemap.xml — answers HTTP 200 with the same 1,318-byte single-page application titled `Gasha WAF`, whose only body is an empty <div id=\"root\">; /robots.txt times out entirely and two of four repeat probes returned no bytes at all. A Googlebot user agent got nothing either. This is new: knowledge/web/last-run.txt records `nbe: 60 pages` and those crawled documents carry `fetched: 2026-09-15`, so the site answered normally the day before. Nothing can be fetched through a challenge page, and writing 60 copies of a WAF screen into the pack would be worse than having no NBE source at all.",
+      "costsUs": "The pack cannot state a single directive by number: no forex rules, no KYC requirement, no mobile-money or payment-instrument-issuer rules, no interest-rate floor, no consumer-protection or complaint procedure from the regulator itself. Bini must answer those from the banks' own pages and say whose page it is quoting, never `the National Bank says`.",
+      "workaround": "knowledge/web/nbe holds 60 pages crawled on 2026-09-15, truncated at 20,000 characters each, already in the index as source `web`. They are a reference, not part of this pack (see references.web-nbe). Getting NBE properly needs either the WAF to allow the BinaSmart user agent, or somebody in Ethiopia to save the directive pages — both are Ibrahim's to ask for."
+    },
+    {
+      "id": "ethiotelecom",
+      "name": "Ethio telecom — telebirr",
+      "nameAm": "ኢትዮ ቴሌኮም — ቴሌብር",
+      "host": "www.ethiotelecom.et",
+      "fetch": "manual",
+      "crawlDelaySeconds": 5,
+      "lang": "en",
+      "reach": "unreachable from this server",
+      "checked": "2026-09-16",
+      "why": "www.ethiotelecom.et resolves to 196.189.90.58 and every connection from this VPS failed on 2026-09-16 — three https probes and one http probe, all returning no bytes. telebirr.et and superapp.ethiotelecom.et do not resolve at all. This is the Ethiopian-government-host pattern ops/health/weekly-audit.js already records: the site answers inside Ethiopia and not from Paris. knowledge/web/ethiotelecom holds 40 pages crawled on 2026-09-13, so the host was reachable three days earlier, which means this may be intermittent rather than permanent.",
+      "costsUs": "telebirr is the money service most Ethiopians actually use, and the pack has no source for its fees, its sending and holding limits, its agent network or its dispute procedure. Every telebirr answer Bini gives has to come from bina.et's own telebirr guide or the 2026-09-13 crawl, dated as such.",
+      "workaround": "Re-probe on every freshness run: the freshness job reports a manual source that has come back, so the day ethiotelecom answers again is the day this entry can become `fetch: sitemap`."
+    },
+    {
+      "id": "safaricom",
+      "name": "Safaricom Ethiopia — M-PESA",
+      "nameAm": "ሳፋሪኮም ኢትዮጵያ — ኤም-ፔሳ",
+      "host": "www.safaricom.et",
+      "fetch": "manual",
+      "crawlDelaySeconds": 5,
+      "lang": "en",
+      "reach": "up",
+      "checked": "2026-09-16",
+      "why": "Reachable but not fetchable in any honest way, measured 2026-09-16. safaricom.et answers 200 and publishes a 52-URL sitemap, but the site renders in the browser: an invented path (/en/definitely-not-a-page-xyz) returns HTTP 200 with the same 17 KB shell as every other unknown path and extracts as `thin`, so a soft 404 cannot be told from a real page by status code; /en/help-and-support/faq itself extracts as thin; and the two real pages that do extract (/en/personal/packages/data 1,501 characters, /en/personal/getting-started/get-sim-card 2,526) are marketing copy. M-PESA itself is not on this host: the homepage links to https://m-pesa.safaricom.et/, which returned no bytes from this VPS. Fetching this site would produce documents that look fetched and say nothing about money.",
+      "costsUs": "No M-PESA fees, limits, agent rules or dispute procedure. Given that telebirr is also unreachable, the pack has NO mobile-money source at all, which is the single biggest hole in it and must be said plainly in the report.",
+      "workaround": "M-PESA publishes a tariff PDF and a customer terms document; Ibrahim or anyone in Ethiopia can save them. Until then Bini says it does not have M-PESA's figures rather than guessing."
+    },
+    {
+      "id": "awash",
+      "name": "Awash Bank",
+      "nameAm": "አዋሽ ባንክ",
+      "host": "awashbank.com",
+      "fetch": "manual",
+      "doNotFetch": true,
+      "crawlDelaySeconds": 5,
+      "lang": "en",
+      "reach": "not this bank",
+      "checked": "2026-09-16",
+      "why": "DO NOT FETCH. On 2026-09-16 awashbank.com and www.awashbank.com both resolve to 67.23.252.122, which answers HTTP 200 by redirecting to https://technobros.au/blocked.html — a 363-byte page belonging to somebody else entirely. awashbank.com.et does not resolve. Whatever is on that address is not Awash Bank's website, and putting its bytes into a banking knowledge pack would be putting an unknown third party's page in Bini's mouth. This entry exists so that a later engineer who sees `awash` missing does not simply turn fetching on.",
+      "costsUs": "One of the largest private banks in Ethiopia is absent: no Awash tariff, account, loan or diaspora pages.",
+      "workaround": "Ibrahim confirms Awash Bank's current official domain from inside Ethiopia. Only a domain he confirms goes into this file."
+    },
+    {
+      "id": "abyssinia",
+      "name": "Bank of Abyssinia",
+      "nameAm": "የአቢሲንያ ባንክ",
+      "host": "bankofabyssinia.com",
+      "fetch": "manual",
+      "crawlDelaySeconds": 5,
+      "lang": "en",
+      "reach": "unreachable from this server",
+      "checked": "2026-09-16",
+      "why": "bankofabyssinia.com and www.bankofabyssinia.com resolve to 102.212.71.21 and every connection from this VPS failed on 2026-09-16, over https, in under half a second — a refusal rather than a timeout. bankofabyssinia.com.et and boa.com.et do not resolve. The same probe run reached Zemen, Dashen, Coop Bank, ECMA and EthSwitch without trouble, so this is that host and not this server's network.",
+      "costsUs": "No Abyssinia tariff, account, loan or diaspora pages.",
+      "workaround": "Re-probe on each freshness run; the freshness job reports a manual source that has come back."
+    },
+    {
+      "id": "hibret",
+      "name": "Hibret Bank",
+      "nameAm": "ሕብረት ባንክ",
+      "host": "hibretbank.com.et",
+      "fetch": "manual",
+      "crawlDelaySeconds": 5,
+      "lang": "en",
+      "reach": "unreachable from this server",
+      "checked": "2026-09-16",
+      "why": "hibretbank.com.et and www.hibretbank.com.et resolve to 197.156.92.18 and both probes from this VPS on 2026-09-16 returned no bytes. 197.156.x is the same Ethiopian address range as the government hosts that answer inside Ethiopia and not from Paris.",
+      "costsUs": "No Hibret tariff or product pages. The pack's four reachable banks are Zemen, Dashen, CBE and Coop Bank, which is a realistic subset, not the whole market.",
+      "workaround": "Re-probe on each freshness run."
+    },
+    {
+      "id": "edif",
+      "name": "Ethiopian Deposit Insurance Fund",
+      "nameAm": "የኢትዮጵያ የተቀማጭ ገንዘብ መድን ፈንድ",
+      "host": "edif.gov.et",
+      "fetch": "manual",
+      "crawlDelaySeconds": 5,
+      "lang": "en",
+      "reach": "unreachable from this server",
+      "checked": "2026-09-16",
+      "why": "edif.gov.et and www.edif.gov.et resolve to 213.55.96.152 and both probes timed out at 25 s on 2026-09-16. The alternative spelling edic.gov.et does not resolve at all. This is the same behaviour as the other 213.55.x government hosts in this file.",
+      "costsUs": "The pack cannot answer `is my money safe if my bank fails` — no coverage limit, no eligible-deposit definition, no payout procedure. That is a question customers genuinely ask, and Bini must say it does not have the figure rather than repeating a number from memory.",
+      "workaround": "Ibrahim or anyone in Ethiopia saves the coverage-limit page; it then becomes a curated document written by hand, with its source URL and the date it was saved."
+    },
+    {
+      "id": "fis",
+      "name": "Financial Intelligence Service",
+      "nameAm": "የገንዘብ መረጃ አገልግሎት",
+      "host": "fis.gov.et",
+      "fetch": "manual",
+      "crawlDelaySeconds": 5,
+      "lang": "en",
+      "reach": "unreachable from this server",
+      "checked": "2026-09-16",
+      "why": "fis.gov.et and www.fis.gov.et resolve to 196.189.23.50 and both probes timed out at 25 s on 2026-09-16, the same behaviour as ethiotelecom.et on the neighbouring 196.189.x address.",
+      "costsUs": "No official AML/KYC explanation for customers: what identification a bank must ask for, why a large cash deposit is questioned, what a suspicious-transaction report is. The pack answers the practical half of this from the banks' own account-opening and FAQ pages and attributes it to those banks.",
+      "workaround": "Re-probe on each freshness run."
+    }
+  ],
+  "references": [
+    {
+      "id": "web-nbe",
+      "name": "National Bank of Ethiopia, crawled",
+      "url": "https://nbe.gov.et/",
+      "fetch": "none",
+      "note": "knowledge/web/nbe holds 60 pages crawled by knowledge/crawl.js on 2026-09-15, loaded as source `web` and TRUNCATED AT 20,000 CHARACTERS by that loader. They include the summary of banks' foreign-exchange fees and charges, the directives and proclamation index pages, the independent forex bureaus list, the payment-instrument-issuers list and several /am/ pages. This pack must not write its own copies of them: one page in the index twice is the duplication the no-duplicate rule forbids, and it would split the retrieval score between two near-identical documents. If nbe.gov.et ever becomes fetchable again, the curated pack replaces the crawl for those paths and knowledge/crawl.js drops nbe — one or the other, never both."
+    },
+    {
+      "id": "web-ethiotelecom",
+      "name": "Ethio telecom, crawled",
+      "url": "https://www.ethiotelecom.et/",
+      "fetch": "none",
+      "note": "knowledge/web/ethiotelecom holds 40 pages crawled on 2026-09-13, loaded as source `web`, truncated at 20,000 characters. This is the only telebirr material the index has while the host is unreachable. It is dated 2026-09-13 and Bini must say so when quoting it."
+    },
+    {
+      "id": "eservices-cbe",
+      "name": "eServices portal entries for banks and ethio telecom",
+      "url": "https://www.eservices.gov.et/en/services",
+      "fetch": "none",
+      "note": "knowledge/eservices/commercial-bank-of-ethiopia.md (5 services) and knowledge/eservices/ethio-telecom.md are already curated, already bilingual, generated by ops/knowledge/eservices-to-md.js on 2026-09-14. They describe what each office lets you do online, which is a different question from what a bank charges, so they complement this pack rather than overlap it. Never edited by hand and never duplicated here."
+    },
+    {
+      "id": "law-tax",
+      "name": "Tax and commercial statutes",
+      "url": "https://bina.et/",
+      "fetch": "none",
+      "note": "knowledge/law holds the VAT proclamation 1341/2024 (English and Amharic), income tax amendment 1395/2025 (English and Amharic), income tax regulation 410/2017, tax administration 983/2016 and amendment 1434/2026, turnover tax 308/2002, stamp duty 110/1998 and 612/2008, the customs amendment 1425/2026 and the cheques and limitation material. Tax belongs to the law source and to Asmat, not to this pack. That is why tax words are OTHER_SERVICE words in assistant/banking.js: a VAT question must not be pulled into a bank tariff page."
+    },
+    {
+      "id": "bina-guides",
+      "name": "BinaSmart's own money pages",
+      "url": "https://bina.et/open-bank-account-ethiopia",
+      "fetch": "none",
+      "note": "Already indexed as source `guide` from public/*.html via GUIDE_SLUGS in knowledge/index.js: open-bank-account-ethiopia, vat-registration-ethiopia, ethiopia-income-tax-calculator, pay-utility-bills-ethiopia, customs-import-duty-ethiopia; and as source `page` via PAGE_SLUGS: diaspora. The banking PREFER list in assistant/banking.js names these alongside the pack so a money question sees both BinaSmart's own explanation and the bank's own page. Crawling our own site would put it in the index twice. Separately: public/cbe-birr-guide.html exists and is in NEITHER slug list, so it is indexed by nothing — flagged for Ibrahim in the report, not changed by this plan."
+    }
+  ]
+}
