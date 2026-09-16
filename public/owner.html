@@ -102,6 +102,7 @@ button{cursor:pointer}
   <button onclick="setTab('overview')" data-t="overview" class="tabbtn on">📊 Overview</button>
   <button onclick="setTab('tenants')" data-t="tenants" class="tabbtn">🏬 Tenants</button>
   <button onclick="setTab('invoices')" data-t="invoices" class="tabbtn">🧾 Invoices</button>
+  <button onclick="setTab('messages')" data-t="messages" class="tabbtn">📨 Messages</button>
   <button onclick="setTab('acct')" data-t="acct" class="tabbtn">💰 Accounting</button>
   <button onclick="setTab('meters')" data-t="meters" class="tabbtn">⚡ Meters</button>
   <button onclick="setTab('maint')" data-t="maint" class="tabbtn">🔧 Maintenance</button>
@@ -277,6 +278,7 @@ function copyVatReturn(){
 }
 function renderTab(){
   if (TAB === 'ai') { return renderAI(); }
+  if (TAB === 'messages') { return renderMessages(); }
   if (!D) return;
   const app = document.getElementById('app');
   const d = D;
@@ -669,6 +671,96 @@ async function openTenantPoster(posterPath){
     w.document.open(); w.document.write(html); w.document.close();
   } catch (e) { w.close(); alert('❌ Could not open the poster. Try again. / ፖስተሩ አልተከፈተም'); }
 }
+// ===== Messages (owner actions and messaging design §4) =====
+// Everything this building sent, what it cost in SMS against the month's limit, and what came of the actions the owner
+// confirmed in the Bini chat. Read only: the one button in this tab that does anything is Send now, which is the
+// Invoices tab's own send, unchanged. Every card here is built by string concatenation and every value goes through
+// esc() — or jsq() inside an onclick — because the template-literal scanner in owner-dashboard-escape.test.js cannot
+// see concatenated markup. test/messaging/messages-dashboard.test.js pins each one by name.
+var MSG = { page: 0, kind: '', month: '', open: null, rpage: 0, apage: 0 };
+var MSG_KIND = { notice: 'ማስታወቂያ · notice', reminder: 'ማስታወሻ · reminder', invoice: 'ክፍያ መጠየቂያ · invoice', receipt: 'ደረሰኝ · receipt' };
+var MSG_STATE = { delivered: '✅ ደርሷል', reached: '📤 ተልኳል', queued: '⏳ በመጠባበቅ', failed: '⚠️ አልተሳካም', notReachable: '📭 አልተደረሰም', test: '🧪 ሙከራ' };
+var MSG_BY = { owner: 'ባለቤት · owner', staff: 'ሰራተኛ · staff', dashboard: 'ዳሽቦርድ · dashboard', cron: 'በራሱ · automatic', ops: 'BinaSmart', unknown: '—' };
+// A word the server has not sent before is shown as it came, escaped — never dropped, never guessed at.
+function msgLabel(map, k){ return map[k] || String(k || ''); }
+function renderMessages(){
+  var app = document.getElementById('app');
+  app.innerHTML = '<div class="card p-4" id="sms-month"><div class="text-[11px] text-slate-400">📱 SMS…</div></div>'
+    + '<div id="pending-deliv"></div>'
+    + '<div class="card p-4" id="msg-batches"><div class="text-[11px] text-slate-400">📨 …</div></div>'
+    + '<div class="card p-4" id="msg-actions"><div class="text-[11px] text-slate-400">✅ …</div></div>';
+  loadSmsMonth(); loadPending(); loadBatches(); loadActions();
+}
+// This month against the building's limit. The parts counted are the ones the limit counts — queued, sent, delivered —
+// so test rows are shown separately and never make a month look full.
+async function loadSmsMonth(){
+  var box = document.getElementById('sms-month'); if (!box) return;
+  try{
+    var r = await kfetch('/api/owner/' + slug + '/sms-month'); if (!r.ok) { box.innerHTML = ''; return; }
+    var d = await r.json();
+    var pct = d.limit ? Math.min(100, Math.round(d.parts / d.limit * 100)) : 0;
+    var bal = !d.balance || d.balance.state === 'off' ? ''
+      : d.balance.state === 'ok' ? esc(String(d.balance.value)) + ' ETB'
+      : d.balance.state === 'unavailable' ? 'unavailable · አልተገኘም' : '';
+    box.innerHTML = '<div class="font-black text-sm mb-1">📱 SMS this month · የዚህ ወር ኤስኤምኤስ</div>'
+      + '<div class="text-[11px] mb-2" style="color:#475569"><b>' + esc(d.parts) + '</b> / ' + esc(d.limit)
+      + ' parts used · ' + esc(d.remaining) + ' left · ቀሪ</div>'
+      + '<div class="bar mb-2"><div style="width:' + pct + '%"></div></div>'
+      + '<div class="text-[10px] text-slate-500">≈ ' + esc(d.costEtb) + ' ETB at ' + esc(d.unitPriceEtb) + ' ETB/SMS — estimate · ግምት</div>'
+      + (bal ? '<div class="text-[10px] text-slate-500">Provider balance · የአቅራቢ ቀሪ ሂሳብ: ' + bal + '</div>' : '')
+      + (d.mode === 'test' ? '<div class="text-[10px] text-amber-700 mt-1">🧪 Test mode — nothing was sent · የሙከራ ሁኔታ፤ ምንም አልተላከም'
+        + (d.testParts ? ' (' + esc(d.testParts) + ' test parts)' : '') + '</div>' : '');
+  } catch (e) { box.innerHTML = ''; }
+}
+function msgCounts(c){
+  var out = [];
+  ['delivered', 'reached', 'queued', 'failed', 'notReachable', 'test'].forEach(function(k){
+    if (c && c[k]) out.push(esc(msgLabel(MSG_STATE, k)) + ' ' + esc(c[k]));
+  });
+  return out.join(' · ') || '<span class="text-slate-400">—</span>';
+}
+function msgPager(page, pages, handler){
+  if (!(pages > 1)) return '';
+  return '<div class="flex items-center gap-2 mt-2 justify-center text-[11px]">'
+    + '<button class="mbtn bg-slate-200 text-slate-600" ' + (page <= 0 ? 'disabled' : '') + ' onclick="' + handler + '(-1)">‹</button>'
+    + '<span>' + esc(page + 1) + ' / ' + esc(pages) + '</span>'
+    + '<button class="mbtn bg-slate-200 text-slate-600" ' + (page >= pages - 1 ? 'disabled' : '') + ' onclick="' + handler + '(1)">›</button></div>';
+}
+async function loadBatches(){
+  var box = document.getElementById('msg-batches'); if (!box) return;
+  try{
+    var url = '/api/owner/' + slug + '/messages?page=' + MSG.page
+      + (MSG.kind ? '&kind=' + encodeURIComponent(MSG.kind) : '')
+      + (MSG.month ? '&month=' + encodeURIComponent(MSG.month) : '');
+    var r = await kfetch(url); if (!r.ok) { box.innerHTML = ''; return; }
+    var d = await r.json();
+    var kindOpts = '<option value="">all kinds · ሁሉም</option>' + (d.kinds || []).map(function(k){
+      return '<option value="' + esc(k) + '"' + (k === d.kind ? ' selected' : '') + '>' + esc(msgLabel(MSG_KIND, k)) + '</option>'; }).join('');
+    var monthOpts = '<option value="">all months · ሁሉም</option>' + (d.months || []).map(function(m){
+      return '<option value="' + esc(m) + '"' + (m === d.month ? ' selected' : '') + '>' + esc(m) + '</option>'; }).join('');
+    var rows = (d.batches || []).map(function(b){
+      return '<div class="rounded-xl p-2.5 mb-1.5" style="background:#f8fafc;border:1px solid #e9f0ee">'
+        + '<div class="flex items-center gap-2"><span class="flex-1 text-[11px]"><b>' + esc(String(b.at).slice(0, 10)) + '</b> · '
+        + esc(msgLabel(MSG_KIND, b.kind)) + '<br><span class="text-[9px] text-slate-400">' + esc(b.total)
+        + ' recipients · ' + esc(msgLabel(MSG_BY, b.by)) + ' · ' + esc(b.source) + '</span></span>'
+        + '<button class="tag" style="background:#e0f2fe;color:#0369a1" onclick="openBatch(\'' + jsq(b.id) + '\')">🔍 Details</button></div>'
+        + '<div class="text-[10px] mt-1" style="color:#475569">' + msgCounts(b.counts) + '</div>'
+        + '<div id="batch-' + esc(b.id) + '"></div></div>';
+    }).join('');
+    box.innerHTML = '<div class="font-black text-sm mb-2">📨 Sent messages · የተላኩ መልእክቶች (' + esc(d.total) + ')</div>'
+      + '<div class="flex gap-2 mb-2">'
+      + '<select id="msg-kind" onchange="msgFilter()" class="text-[11px]" style="background:#f5f9f8;border:1.5px solid #e3ecea;border-radius:10px;padding:6px 8px">' + kindOpts + '</select>'
+      + '<select id="msg-month" onchange="msgFilter()" class="text-[11px]" style="background:#f5f9f8;border:1.5px solid #e3ecea;border-radius:10px;padding:6px 8px">' + monthOpts + '</select></div>'
+      + (rows || '<div class="text-xs text-slate-400">No messages yet · እስካሁን መልእክት የለም</div>')
+      + msgPager(d.page, d.pages, 'msgPage');
+  } catch (e) { box.innerHTML = ''; }
+}
+function msgFilter(){
+  MSG.kind = document.getElementById('msg-kind').value;
+  MSG.month = document.getElementById('msg-month').value;
+  MSG.page = 0; MSG.open = null; loadBatches();
+}
+function msgPage(d){ MSG.page = Math.max(0, MSG.page + d); MSG.open = null; loadBatches(); }
 // Invoices whose send did not reach the tenant (messaging design §1.6). Send now uses the invoice as it is today.
 async function loadPending(){
   const box = document.getElementById('pending-deliv'); if (!box) return;
