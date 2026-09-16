@@ -48,14 +48,14 @@ button:hover{background:var(--em2)}button:disabled{opacity:.6;cursor:wait}
     <div class="tag am">ሁሉንም በአንድ መድረክ · All-in-one platform</div>
     <h2>Welcome back.</h2>
     <div class="feat">
-      <div class="f"><span class="i">📱</span><span>Sign in with your phone — <span class="am">በስልክ ቁጥርዎ ይግቡ።</span></span></div>
+      <div class="f" id="featPhone" hidden><span class="i">📱</span><span>Sign in with your phone — <span class="am">በስልክ ቁጥርዎ ይግቡ።</span></span></div>
       <div class="f"><span class="i">🔒</span><span>Secure sign-in · your data stays private.</span></div>
       <div class="f am"><span class="i">🗣️</span><span>በአማርኛ ድጋፍ ይገኛል።</span></div>
     </div>
   </div>
   <div class="formp">
     <h1>Sign in · <span class="am">ይግቡ</span></h1>
-    <div class="sub am">የይለፍ ቃል አያስፈልግም — ኮድ በኤስኤምኤስ ይላካል</div>
+    <div class="sub am" id="sub">ወደ BinaSmart ይግቡ · Sign in to BinaSmart</div>
 
     <div id="doors">
       <div id="phoneBox" class="door" hidden>
@@ -113,6 +113,7 @@ var NEXT = new URLSearchParams(location.search).get('next') || '/';
 if (!/^\/(?!\/)/.test(NEXT)) NEXT = '/';          // never bounce to another site
 function $(id){ return document.getElementById(id); }
 var err = $('err');
+var SUB0 = $('sub').textContent;   // the neutral subtitle, kept so a 503 can put it back
 function showErr(m){ err.textContent = m; err.style.display = 'block'; }
 function clearErr(){ err.textContent = ''; err.style.display = 'none'; }
 function showStaff(){ var s = $('staff'); s.hidden = false; $('email').focus(); }
@@ -125,6 +126,7 @@ var T = {
   offline: 'ግንኙነት አልተሳካም · Connection failed. Please try again.',
   noDoor: 'በስልክ መግባት ገና አልተዘጋጀም · Signing in by phone is not available yet.',
   badCode: 'ኮዱ ትክክል አይደለም ወይም ጊዜው አልፎበታል · That code is wrong or has expired. Ask for a new one.',
+  subPhone: 'የይለፍ ቃል አያስፈልግም · No password needed — a code comes by SMS',
   need6: 'ባለ6 አኃዝ ኮድ ያስገቡ · Enter the six digits from the SMS.',
   sending: 'በመላክ ላይ… · Sending…',
   send: 'ኮድ ላክ · Send code',
@@ -210,7 +212,7 @@ function ask(p){
       }
       if (r.status === 400) return showErr(T.notReach);
       if (r.status === 429) return showErr(T.tooMany);
-      if (r.status === 503) { $('phoneBox').hidden = true; return showErr(T.noDoor); }
+      if (r.status === 503) { $('phoneBox').hidden = true; $('featPhone').hidden = true; $('sub').textContent = SUB0; return showErr(T.noDoor); }
       showErr(T.offline);
     })
     .catch(function(){ btn.disabled = false; lbl.textContent = T.send; showErr(T.offline); });
@@ -270,6 +272,8 @@ async function signIn(){
 fetch('/api/auth-methods').then(function(r){ return r.json(); }).then(function(m){
   if (m.phone) {
     $('phoneBox').hidden = false;
+    $('featPhone').hidden = false;
+    $('sub').textContent = T.subPhone;
     $('phone').focus();
   }
   if (m.google) $('googleBtn').hidden = false;

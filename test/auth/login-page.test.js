@@ -29,6 +29,14 @@ test('the phone door is the first door, and it is not drawn until the server say
   assert.ok(at('id="phoneBox"') < at('id="tgBox"'), 'phone before Telegram');
   assert.ok(at('id="tgBox"') < at('id="googleBtn"'), 'Telegram before Google');
   assert.ok(at('id="googleBtn"') < at('id="staff"'), 'the staff email form is last');
+  // Nothing promises an SMS while the door is shut: the brand-panel line and the subtitle are
+  // gated on the same answer, so a visitor is never offered a door that is not there.
+  assert.match(src, /<div class="f" id="featPhone" hidden>/);
+  assert.match(src, /\$\('featPhone'\)\.hidden = false;/);
+  assert.match(src, /\$\('sub'\)\.textContent = T\.subPhone;/);
+  const subAt = src.indexOf('id="sub"');
+  const subLine = src.slice(subAt, src.indexOf('</div>', subAt));
+  assert.equal(/SMS|\u12a4\u1235\u12a4\u121d\u12a4\u1235|\u12ae\u12f5/.test(subLine), false, 'the subtitle in the markup promises nothing: ' + subLine);
   // A 503 from the server means the door was switched off while the page was open: take it away.
   assert.match(src, /if \(r\.status === 503\) \{ \$\('phoneBox'\)\.hidden = true;/);
 });
