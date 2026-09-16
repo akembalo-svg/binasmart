@@ -21,6 +21,22 @@ test('the plugin offers exactly two POST endpoints, at the addresses the login p
   assert.equal(p.endpoints.verifyPhoneCode.options.method, 'POST', 'a code must never be able to travel in a URL');
 });
 
+test('both doors carry the cross-site check better-auth puts on its own sign-in routes', async () => {
+  // better-auth registers originCheckMiddleware on every path, but its validateOrigin gives up unless
+  // the request carries a Cookie header — and a cross-site POST carries none, because the session
+  // cookie is SameSite=Lax. So the global middleware waves a cross-site POST straight through.
+  // /sign-in/email does not rely on it: it carries formCsrfMiddleware, which checks the Origin whether
+  // there is a cookie or not. A door that hands out a session cookie needs the same guard.
+  const src = read('auth/phone-code-plugin.mjs');
+  assert.match(src, /formCsrfMiddleware.*from 'better-auth\/api'/);
+  const { phoneCode } = await import('../../auth/phone-code-plugin.mjs');
+  const p = phoneCode({ pepper: 'test-pepper-0000000000000000000000000000', sender: { configured: false, supports: () => true, send: async () => ({ ok: true }) } });
+  for (const name of ['sendPhoneCode', 'verifyPhoneCode']) {
+    const use = p.endpoints[name].options.use;
+    assert.ok(Array.isArray(use) && use.length >= 1, name + ' carries no middleware at all');
+  }
+});
+
 test('the plugin keeps one flow, so the limiters are a rate limit and not a decoration', () => {
   const src = read('auth/phone-code-plugin.mjs');
   assert.match(src, /let flow = null;/);

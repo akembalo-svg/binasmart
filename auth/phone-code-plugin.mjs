@@ -12,7 +12,7 @@
 // the plan: it stores the code in clear in auth_verification, its schema wants a second pair of
 // columns beside the phone / phoneVerifiedAt this site already has, its code flow reports OTP_EXPIRED
 // and INVALID_OTP and TOO_MANY_ATTEMPTS separately, and its rate limit cannot be keyed on X-Real-IP.
-import { createAuthEndpoint, APIError } from 'better-auth/api';
+import { createAuthEndpoint, formCsrfMiddleware, APIError } from 'better-auth/api';
 import { setSessionCookie } from 'better-auth/cookies';
 import * as z from 'zod';
 import { createRequire } from 'node:module';
@@ -32,6 +32,13 @@ function clientIp(ctx) {
 // One sentence for every way a code can fail. The login page turns it into Amharic and English.
 const NO = 'That code is wrong or has expired';
 
+// A cross-site POST is not a sign-in. better-auth hangs originCheckMiddleware on every path, but
+// its origin test gives up unless the request carries a Cookie header — and a cross-site POST
+// carries none, because the session cookie is SameSite=Lax. Its own /sign-in/email does not lean
+// on that: it carries formCsrfMiddleware, which reads the Origin whether there is a cookie or
+// not. Both doors here hand out a session cookie, so both carry it too. A client with no Origin,
+// no Referer and no Sec-Fetch-* header at all — curl, a native app — is still let through.
+//
 // Guessing is counted twice. auth/phone-code.js counts the wrong answers against ONE number and
 // locks it for fifteen minutes; that alone would let one address walk a thousand numbers, five
 // guesses each. So the verify door is also limited per address, on the same header nginx sets.
@@ -72,6 +79,7 @@ export const phoneCode = (options = {}) => {
     endpoints: {
       sendPhoneCode: createAuthEndpoint('/sign-in/phone-code/send', {
         method: 'POST',
+        use: [formCsrfMiddleware],
         body: z.object({ phone: z.string().max(24) })
       }, async (ctx) => {
         const r = await flowFor(ctx).send({ phone: ctx.body.phone, ip: clientIp(ctx) });
@@ -82,6 +90,7 @@ export const phoneCode = (options = {}) => {
       }),
       verifyPhoneCode: createAuthEndpoint('/sign-in/phone-code/verify', {
         method: 'POST',
+        use: [formCsrfMiddleware],
         body: z.object({ phone: z.string().max(24), code: z.string().max(12) })
       }, async (ctx) => {
         if (!verifyIpLimit(clientIp(ctx))) throw new APIError('TOO_MANY_REQUESTS', { message: 'rate_limited' });
