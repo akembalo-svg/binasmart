@@ -110,6 +110,15 @@ fastify.post('/api/me/phone', async (req, reply) => {
   return { ok: true, phone: r.phone, linked: r.linked, me: await identity.me(req.authUser.id) };
 });
 
+// Whether the phone door exists at all. Three switches, all of them needed, in one place: a
+// provider token (messaging/sms.js), SMS actually switched on, and a pepper long enough to hash a
+// code with (auth/phone-code.js MIN_PEPPER). Half a door is worse than none — a button that sends
+// nothing looks like a site that is broken. The answer is a boolean and only a boolean: no value,
+// no length, nothing that narrows a guess at either secret.
+function authPhoneReady(env) {
+  return !!(env.SMS_API_TOKEN && env.SMS_MODE === 'live' && String(env.AUTH_PHONE_CODE_PEPPER || '').length >= 32);
+}
+
 // Which sign-in doors are actually configured. /login asks this so it never shows a button that
 // cannot work: a missing Google key or bot token hides that door instead of failing on the click.
 fastify.get('/api/auth-methods', async (req, reply) => {
@@ -119,7 +128,7 @@ fastify.get('/api/auth-methods', async (req, reply) => {
     telegram: !!process.env.BINA_RIDER_BOT_TOKEN,
     telegramBot: process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot',
     email: true,
-    sms: false   // the third door, once there is a provider
+    phone: authPhoneReady(process.env)   // sign in with a code sent by SMS
   };
 });
 

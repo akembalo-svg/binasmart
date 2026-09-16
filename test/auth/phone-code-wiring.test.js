@@ -182,3 +182,88 @@ test('a refused send is logged as a kind, and the caller is told nothing either 
   const code = h.calls.created[0].value;
   assert.equal(/^[0-9a-f]{64}:0$/.test(code), true, 'what is stored is a hash and an attempt count');
 });
+
+// ----- Task 8: what the login page is allowed to draw -----
+// server.js starts a listener on require, so the route is pinned by reading it, exactly as
+// test/messaging/server-delivery.test.js does. The one expression that decides is then run on its own
+// against made-up environments, which is the part that could be wrong in an interesting way.
+const block = (src, sig, end = '\n});') => { const at = src.indexOf(sig); assert.ok(at > 0, sig + ' not found'); return src.slice(at, src.indexOf(end, at)); };
+
+test('auth-methods answers with the three doors and the bot username, cached for a minute', () => {
+  const body = block(read('server.js'), "fastify.get('/api/auth-methods'");
+  assert.match(body, /Cache-Control', 'public, max-age=60'/);
+  assert.match(body, /google: !!\(process\.env\.GOOGLE_CLIENT_ID && process\.env\.GOOGLE_CLIENT_SECRET\)/);
+  assert.match(body, /telegram: !!process\.env\.BINA_RIDER_BOT_TOKEN/);
+  assert.match(body, /telegramBot: process\.env\.BINA_RIDER_BOT_USERNAME/);
+  assert.match(body, /email: true/);
+  assert.match(body, /phone: authPhoneReady\(process\.env\)/);
+  assert.equal(/sms:/.test(body), false, 'the placeholder field is gone, not left beside its replacement');
+  // The two secrets this plan touches are read inside authPhoneReady and never named in the answer.
+  assert.equal(/SMS_API_TOKEN|AUTH_PHONE_CODE_PEPPER/.test(body), false, 'neither secret is named in a cached public route');
+});
+
+test('the phone door needs all three switches, and says so from one place', () => {
+  const src = read('server.js');
+  const fn = block(src, 'function authPhoneReady(', '\n}\n');
+  assert.equal((src.match(/function authPhoneReady\(/g) || []).length, 1, 'one rule, in one place');
+  // Run it: the source is a function declaration, so it can be evaluated on its own.
+  // eslint-disable-next-line no-new-func
+  const authPhoneReady = new Function('return (' + fn + '\n}\n)')();
+  const token = 'fake-token-for-tests';
+  const pepper = 'test-pepper-0000000000000000000000000000';
+  assert.equal(authPhoneReady({ SMS_API_TOKEN: token, SMS_MODE: 'live', AUTH_PHONE_CODE_PEPPER: pepper }), true);
+  assert.equal(authPhoneReady({ SMS_MODE: 'live', AUTH_PHONE_CODE_PEPPER: pepper }), false, 'no provider token');
+  assert.equal(authPhoneReady({ SMS_API_TOKEN: token, SMS_MODE: 'test', AUTH_PHONE_CODE_PEPPER: pepper }), false, 'SMS switched off');
+  assert.equal(authPhoneReady({ SMS_API_TOKEN: token, SMS_MODE: 'live' }), false, 'no pepper');
+  assert.equal(authPhoneReady({ SMS_API_TOKEN: token, SMS_MODE: 'live', AUTH_PHONE_CODE_PEPPER: 'short' }), false, 'a pepper too short to be one');
+  assert.equal(authPhoneReady({}), false);
+});
+
+test('the answer is a plain boolean — never the token, never the pepper, never their lengths', () => {
+  const src = read('server.js');
+  const fn = block(src, 'function authPhoneReady(', '\n}\n');
+  // eslint-disable-next-line no-new-func
+  const authPhoneReady = new Function('return (' + fn + '\n}\n)')();
+  const out = authPhoneReady({ SMS_API_TOKEN: 'fake-token-for-tests', SMS_MODE: 'live', AUTH_PHONE_CODE_PEPPER: 'test-pepper-0000000000000000000000000000' });
+  assert.equal(typeof out, 'boolean');
+  assert.equal(out, true);
+});
+
+// The route answers from its own copy of the rule, because server.js cannot reach into auth.mjs's
+// plugin. Two copies drift, and the drift is invisible: the page would draw a phone form the flow
+// then refuses with not_configured, or hide one that works. So the two are compared directly, over
+// the same environments, against the real flow's real ready().
+test('the route says exactly what the flow would say, switch for switch', () => {
+  const { makePhoneCodeSender } = require('../../auth/phone-code-sender');
+  const { makePhoneCodeFlow } = require('../../auth/phone-code-flow');
+  const fn = block(read('server.js'), 'function authPhoneReady(', '\n}\n');
+  // eslint-disable-next-line no-new-func
+  const authPhoneReady = new Function('return (' + fn + '\n}\n)')();
+  const token = 'fake-token-for-tests';
+  const long = 'test-pepper-0000000000000000000000000000';
+  const envs = [
+    {},
+    { SMS_API_TOKEN: token },
+    { SMS_MODE: 'live' },
+    { AUTH_PHONE_CODE_PEPPER: long },
+    { SMS_API_TOKEN: token, SMS_MODE: 'live' },
+    { SMS_API_TOKEN: token, AUTH_PHONE_CODE_PEPPER: long },
+    { SMS_MODE: 'live', AUTH_PHONE_CODE_PEPPER: long },
+    { SMS_API_TOKEN: token, SMS_MODE: 'test', AUTH_PHONE_CODE_PEPPER: long },
+    { SMS_API_TOKEN: token, SMS_MODE: 'live', AUTH_PHONE_CODE_PEPPER: 'short' },
+    { SMS_API_TOKEN: token, SMS_MODE: 'live', AUTH_PHONE_CODE_PEPPER: long.slice(0, 31) },
+    { SMS_API_TOKEN: token, SMS_MODE: 'live', AUTH_PHONE_CODE_PEPPER: long.slice(0, 32) },
+    { SMS_API_TOKEN: token, SMS_MODE: 'live', AUTH_PHONE_CODE_PEPPER: long }
+  ];
+  // Nothing outside is touched: the sender gets a fake provider and a fake road, so no Prisma client
+  // is opened and nothing is ever sent. Only `configured` is read, and that is computed from env.
+  const fakeSms = { mode: 'test', supports: () => true, send: async () => ({ status: 'test' }) };
+  const fakeRoad = { sendTransactionalSms: async () => ({ status: 'test' }) };
+  for (const env of envs) {
+    const sender = makePhoneCodeSender({ env, sms: fakeSms, delivery: fakeRoad });
+    const flow = makePhoneCodeFlow({
+      store: {}, sender, linkPhone: async () => {}, normalise: p => p, pepper: env.AUTH_PHONE_CODE_PEPPER
+    });
+    assert.equal(authPhoneReady(env), flow.ready(), 'route and flow disagree for ' + Object.keys(env).join('+'));
+  }
+});
