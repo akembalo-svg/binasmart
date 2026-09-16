@@ -109,6 +109,9 @@ const SITE_SUFFIX = /\s*\|\s*(Ethiopian Airlines(\s*\|\s*[A-Z]{2})?|Ethiopian Ca
 // The airline answers 200 with this title for a path that does not exist - /am/ (Armenia) does it today.
 const NOT_FOUND = /^(page not found|404|not found)$/i;
 const MIN_CHARS = 400;   // the same floor knowledge/index.js puts under a crawled page
+// Below this many live documents a pack is too small for "most of them vanished" to mean anything, so the
+// guard stays out of the way of a first run and of a small site.
+const MASS_LOSS_FLOOR = 20;
 
 function cleanTitle(raw) {
   return htmlToText('<p>' + String(raw || '') + '</p>').replace(/\s+/g, ' ').replace(SITE_SUFFIX, '').trim();
@@ -229,6 +232,14 @@ function writePack(dir, docs, site, { today, dryRun = false } = {}) {
     if (!dryRun) fs.writeFileSync(file, renderDoc(d, site, { today: day, firstFetched: first }));
   }
 
+  // A failed fetch must never look like a deleted site. If most of what is on disk is suddenly missing from
+  // the fetch, that is the network, not the airline: refuse the whole gone pass and say so. This is the same
+  // refusal knowledge/index.js makes before collecting orphaned chunks, for the same reason.
+  const live = onDisk.filter(f => readMeta(fs.readFileSync(path.join(dir, f), 'utf8')).source_name === site.name
+    && readMeta(fs.readFileSync(path.join(dir, f), 'utf8')).status !== 'gone');
+  if (live.length >= MASS_LOSS_FLOOR && wanted.size < live.length / 2) {
+    return { ...r, refused: true, refusedWhy: 'only ' + wanted.size + ' of ' + live.length + ' pages came back' };
+  }
   for (const f of onDisk) {
     const slug = f.replace(/\.md$/, '');
     if (wanted.has(slug)) continue;
@@ -361,6 +372,7 @@ async function main() {
     const docs = stripPackBoilerplate(pages);
     const { kept, thin } = splitThin(docs);
     const r = writePack(outDir, kept, site, { today, dryRun });
+    if (r.refused) { log('[travel] ' + site.id + ': REFUSED to update the pack — ' + r.refusedWhy + '. Nothing written.'); bad++; continue; }
     bad += failed.length;
     log('[travel] ' + site.id + ': ' + kept.length + ' documents'
       + ' (+' + r.added.length + ' added, ' + r.changed.length + ' changed, ' + r.unchanged.length + ' unchanged, '
@@ -375,6 +387,6 @@ async function main() {
 
 module.exports = { sitemapUrls, pathOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract,
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, renderDoc, touchLastChecked, writePack,
-  makeFetcher, linksOn, fetchSite, main, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS };
+  makeFetcher, linksOn, fetchSite, main, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR };
 
 if (require.main === module) main().catch(e => { console.error('[travel] failed: ' + e.message); process.exit(1); });
