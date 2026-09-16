@@ -48,16 +48,30 @@ const GOLD = '/root/storage/bina-embed/eval/gold.json';
 const OUT = process.env.BINI_EVAL_DIR || '/root/bini-eval';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-// --gold <path> beats $BINI_GOLD beats v1.
+// --gold <path> beats $BINI_GOLD beats v1. A bare name - no slash, no .json - is a gold set in the same
+// directory as v1: --gold travel is gold-travel.json there, --gold v2 is gold-v2.json. A path still behaves
+// exactly as it did, so the published v1 and v2 commands are unchanged.
+const GOLD_DIR = path.dirname(GOLD);
 function goldPath(argv = process.argv, env = process.env) {
   const i = argv.indexOf('--gold');
-  if (i !== -1 && argv[i + 1]) return argv[i + 1];
-  return env.BINI_GOLD || GOLD;
+  const v = (i !== -1 && argv[i + 1]) ? argv[i + 1] : (env.BINI_GOLD || '');
+  if (!v) return GOLD;
+  if (!/[\\/]/.test(v) && !/\.json$/i.test(v)) return path.join(GOLD_DIR, 'gold-' + v + '.json');
+  return v;
 }
 // '' for the default (v1) gold set, so its file names stay exactly what they were; otherwise the file's name.
 function goldTag(p) {
   if (!p || path.resolve(p) === path.resolve(GOLD)) return '';
   return path.basename(p).replace(/\.json$/i, '').replace(/[^A-Za-z0-9_-]+/g, '-');
+}
+// A gold set that is not on disk is a typo (--gold travel before Task 9 builds gold-travel.json), not a
+// crash: say which file was wanted, and what a bare name means, instead of an ENOENT from mid-run.
+function readGold(file, io = fs) {
+  if (!io.existsSync(file)) {
+    throw new Error('gold set not found: ' + file + '  (a bare --gold <name> means '
+      + path.join(GOLD_DIR, 'gold-<name>.json') + ')');
+  }
+  return JSON.parse(io.readFileSync(file, 'utf8'));
 }
 const latestName = (tag = '') => 'retrieval-' + (tag ? tag + '-' : '') + 'latest.json';
 
@@ -130,9 +144,9 @@ function normalizeGold(raw) {
       : [{ source: q.gold_source, slug: q.gold_slug }] }));
   return { questions, gaps };
 }
-// v1/v2 always matched on slug alone and keep doing so (their published figures depend on it); an agent
-// question (v3) matches on source and slug, so law:x is not guide:x.
-const strictGold = q => !!q.agent;
+// v1 and v2 match on slug alone and their published figures depend on it. A question that names gold_pages
+// - v3's agent questions, and the travel set - matches source AND slug, so travel:x is not guide:x.
+const strictGold = q => !!q.agent || (Array.isArray(q.gold_pages) && q.gold_pages.length > 0);
 function goldKeys(q) { return q.goldPages.map(p => (strictGold(q) ? p.source + ':' + p.slug : p.slug)); }
 // 1-based rank of the first gold page among the distinct pages of a hit list, or null.
 function pageRank(hits, keys, strict) {
@@ -144,6 +158,14 @@ function pageRank(hits, keys, strict) {
 // The two searches run per question. No agent: the options this benchmark always used. An agent: exactly what
 // contextFor passes for that agent (contextSearchOptions), as shipped, and the same without the reranker.
 function searchOptionsFor(q, { contextSearchOptions, knowledgeOf }) {
+  // A question may carry its own preference. Bini has no agents/<name>/rules.js to look up - his travel
+  // preference is decided per message in assistant/travel.js - so the travel gold set names the same list
+  // the route passes, and the benchmark measures exactly what a user gets.
+  if (Array.isArray(q.prefer) || Array.isArray(q.exclude)) {
+    const shipped = contextSearchOptions({ prefer: q.prefer, exclude: q.exclude });
+    const plain = { ...shipped }; delete plain.rerankTo;
+    return { plain, shipped };
+  }
   if (!q.agent) return { plain: { k: 18, exclude: ['style', 'style-om'] }, shipped: { k: 18, exclude: ['style', 'style-om'], rerankTo: 6 } };
   const shipped = contextSearchOptions(knowledgeOf(q.agent) || {});
   const plain = { ...shipped }; delete plain.rerankTo;
@@ -154,6 +176,10 @@ async function main() {
   const { PrismaClient } = require('@prisma/client');
   const { makeKnowledge, contextSearchOptions } = require('/var/www/connectcare/binasmart/knowledge');
   const limit = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : 0;
+  // Resolve and read the gold set before the corpus is loaded, so a name with no file behind it costs one
+  // line and a second, not a minute and a stack trace.
+  const goldFile = goldPath();
+  const goldRaw = readGold(goldFile);
   const prisma = new PrismaClient();
   const mode = forceFailMode();
   const k = makeKnowledge(knowledgeOptions(mode, { prisma, apiKey: process.env.GEMINI_API_KEY }));
@@ -163,9 +189,8 @@ async function main() {
   console.log('corpus: ' + health.chunks + ' chunks, ' + health.embedded + ' embedded, gemini=' + health.gemini
     + ', local vectors ' + health.embeddedLocal + (health.localFallback ? '' : ' (fallback off)'));
 
-  const goldFile = goldPath();
   const tag = runTag(goldTag(goldFile), mode);
-  const norm = normalizeGold(JSON.parse(fs.readFileSync(goldFile, 'utf8')));
+  const norm = normalizeGold(goldRaw);
   let gold = norm.questions;
   if (limit) gold = gold.slice(0, limit);
   console.log('gold set: ' + goldFile + (tag ? '  (tag ' + tag + ')' : '  (v1)'));
@@ -273,7 +298,7 @@ async function main() {
   await prisma.$disconnect();
 }
 
-module.exports = { resultName, writeResult, goldPath, goldTag, latestName, normText, pagesContaining, GOLD, forceFailMode, runTag, knowledgeOptions,
+module.exports = { resultName, writeResult, goldPath, goldTag, readGold, latestName, normText, pagesContaining, GOLD, forceFailMode, runTag, knowledgeOptions,
   normalizeGold, goldKeys, pageRank, searchOptionsFor };
 
 // Only when run as a script: requiring it (the tests do) must not open the DB or spend Gemini calls.
