@@ -156,3 +156,67 @@ test('a row with nothing in it is no code at all, and never reaches a compare', 
   assert.equal(colon.reason, 'no_code');
   assert.equal(pc.sameHash('', ''), true, 'the reason the guard above has to exist');
 });
+
+// ----- Task 3: the SMS text, the mask, the placeholder address and the limiter -----
+const { labelled, smsParts, SMS_MAX_CHARS } = require('../../messaging/sms');
+
+test('the whole SMS, label and all, is ONE part — a second part would be paid for on every sign-in', () => {
+  const body = labelled(pc.SMS_LABEL, pc.codeText('483920'));
+  assert.equal(pc.SMS_LABEL, 'BinaSmart');
+  assert.ok(body.startsWith('BinaSmart፦ '), 'every SMS starts with its label: ' + body);
+  // The label carries Ethiopic, so the operator counts the whole message as UCS-2: 70 characters is
+  // one part. Anything longer is two SMS for every code, on every retry, forever.
+  assert.ok(body.length <= 70, 'the message is ' + body.length + ' characters, which is more than one UCS-2 part');
+  assert.equal(smsParts(body), 1);
+  assert.ok(body.length < SMS_MAX_CHARS);
+});
+
+test('the text says the code, how long it lasts and not to share it, in both languages', () => {
+  const t = pc.codeText('483920');
+  assert.ok(t.includes('483920'), 'the code is in the text');
+  assert.ok(t.includes('code'), 'English: ' + t);
+  assert.ok(t.includes('min'), 'English: ' + t);
+  assert.ok(t.includes('የመግቢያ ኮድ'), 'Amharic: sign-in code');
+  assert.ok(t.includes('ደቂቃ'), 'Amharic: minutes');
+  assert.ok(t.includes('ለማንም አይንገሩ'), 'Amharic: tell no one');
+  assert.ok(!/http|bina\.et|\?|=/.test(t), 'a code never travels in a link: ' + t);
+});
+
+test('a phone is shown by its last four digits and nothing else', () => {
+  assert.equal(pc.maskPhone('+251900000001'), '+251 ••• 0001');
+  assert.equal(pc.maskPhone('+251911111234'), '+251 ••• 1234');
+  assert.equal(pc.maskPhone(''), '');
+  assert.equal(pc.maskPhone(null), '');
+  assert.ok(!pc.maskPhone('+251900000001').includes('90000000'), 'the middle of the number never appears');
+});
+
+test('a phone-only account gets a placeholder address on a domain we own, and it is recognisable', () => {
+  assert.equal(pc.phonePlaceholderEmail('+251900000001'), 'p251900000001@phone.bina.et');
+  assert.equal(pc.isPhonePlaceholderEmail('p251900000001@phone.bina.et'), true);
+  assert.equal(pc.isPhonePlaceholderEmail('ibrahim@example.com'), false);
+  assert.equal(pc.isPhonePlaceholderEmail('tg123@telegram.bina.et'), false);
+  assert.equal(pc.isPhonePlaceholderEmail(''), false);
+  assert.equal(pc.isPhonePlaceholderEmail(null), false);
+});
+
+test('the limiter lets max through in a window and refuses the rest, on its own clock', () => {
+  let at = NOW;
+  const limit = pc.makeCodeLimiter({ windowMs: 1000, max: 2, now: () => at });
+  assert.equal(limit('a'), true);
+  assert.equal(limit('a'), true);
+  assert.equal(limit('a'), false, 'the third inside the window is refused');
+  assert.equal(limit('b'), true, 'another key has its own budget');
+  at += 1001;
+  assert.equal(limit('a'), true, 'the window has moved on');
+});
+
+test('the two windows are the ones the design asked for, and an empty key is never one bucket for everyone', () => {
+  assert.equal(pc.PHONE_MAX, 3);
+  assert.equal(pc.PHONE_WINDOW_MS, 15 * 60 * 1000);
+  assert.equal(pc.IP_MAX, 20);
+  assert.equal(pc.IP_WINDOW_MS, 60 * 60 * 1000);
+  const limit = pc.makeCodeLimiter({ windowMs: 1000, max: 1, now: () => NOW });
+  assert.equal(limit(''), true);
+  assert.equal(limit(''), true, 'an unknown caller is not limited together with every other unknown caller');
+  assert.equal(limit(null), true);
+});

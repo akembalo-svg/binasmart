@@ -102,6 +102,47 @@ function checkCode({ row, code, phone, pepper, now }) {
     : { ok: false, reason: 'wrong', clear: false, next: { value: packValue(hash, n), expiresAt: new Date(ms(row.expiresAt)) } };
 }
 
+// One SMS part, and it has to stay that way. messaging/sms.js labelled() puts BinaSmart and an
+// Ethiopic colon in front of this, which makes the whole message UCS-2 to the operator: 70 characters
+// is one part, 67 per part after that. Label (11) + this text (47) = 58. Spelling out "never share"
+// in English would make it 72 and buy a second SMS on every code, on every retry, for ever.
+function codeText(code) { return 'የመግቢያ ኮድ · code ' + String(code) + ' · 5 ደቂቃ/min · ለማንም አይንገሩ'; }
+
+// A number is shown back to its owner, never in full: enough to recognise, not enough to read out.
+function maskPhone(e164) {
+  const s = String(e164 == null ? '' : e164);
+  return s.length < 4 ? '' : '+251 ••• ' + s.slice(-4);
+}
+
+// better-auth requires an e-mail on every account and it must be unique. A phone-only account gets a
+// deterministic address on a domain we own, exactly as a Telegram account gets one on telegram.bina.et,
+// so it can never collide with a real mailbox — and identity.me() hides it, because it is not an
+// address anybody can be written to.
+function phonePlaceholderEmail(e164) { return 'p' + String(e164 == null ? '' : e164).replace(/^\+/, '') + '@' + PLACEHOLDER_DOMAIN; }
+const PLACEHOLDER_RE = new RegExp('^p251\\d{9}@' + PLACEHOLDER_DOMAIN.replace(/\./g, '\\.') + '$');
+function isPhonePlaceholderEmail(email) { return PLACEHOLDER_RE.test(String(email == null ? '' : email)); }
+
+// The same shape as hotelLimiter in server.js, with an injectable clock so the windows can be tested
+// without waiting a quarter of an hour. It is not exported from server.js, and this code runs inside
+// auth.mjs, which is a different module — so it lives here rather than being reached across.
+//
+// An empty key is let through rather than counted: otherwise every caller we could not identify would
+// share one bucket, and the first twenty of them would lock out the twenty-first.
+function makeCodeLimiter({ windowMs, max, now = () => Date.now(), maxKeys = 5000 } = {}) {
+  const m = new Map();
+  return key => {
+    if (key == null || key === '') return true;
+    const at = now();
+    const hits = (m.get(key) || []).filter(t => at - t < windowMs);
+    if (hits.length >= max) { m.set(key, hits); return false; }
+    hits.push(at);
+    m.set(key, hits);
+    if (m.size > maxKeys) for (const [k, v] of m) { if (!v.length || at - v[v.length - 1] > windowMs) m.delete(k); }
+    return true;
+  };
+}
+
 module.exports = { CODE_LEN, TTL_MS, MAX_ATTEMPTS, LOCK_MS, RESEND_MS, PHONE_WINDOW_MS, PHONE_MAX, IP_WINDOW_MS, IP_MAX,
   MIN_PEPPER, SMS_LABEL, PLACEHOLDER_DOMAIN,
-  newCode, hashCode, sameHash, packValue, unpackValue, identifierFor, isLocked, tooSoon, checkCode };
+  newCode, hashCode, sameHash, packValue, unpackValue, identifierFor, isLocked, tooSoon, checkCode,
+  codeText, maskPhone, phonePlaceholderEmail, isPhonePlaceholderEmail, makeCodeLimiter };
