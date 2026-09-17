@@ -184,6 +184,29 @@ baseline in every slice: banking `-072113.json` = 71.1 / 72.2 with cross-lingual
 identical to `-053102.json`. The refactor that pulled the query embedding out of `search()` changed
 nothing.
 
+## 6.1 The live check, after the restart
+
+`pm2 restart binasmart-api`, `/health` 200, error log clean apart from the standing Fastify
+`ignoreTrailingSlash` deprecation warning. Three of the Amharic banking questions the cross-lingual slice
+misses, asked through `/api/assistant` with `x-binasmart-eval: 1`, four seconds apart — the texts posted
+from a file on the server, never typed:
+
+| qid | gold page | what Bini cited |
+|---|---|---|
+| bk-012 *"is there a monthly account maintenance fee?"* | `banking/zemen-tariff` (English) | Oromia Cooperative Bank's savings page (16 Sep 2026) and Dashen's diaspora current account — **not** the Zemen tariff. The miss, live. |
+| bk-030 *"what is a foreign currency retention account?"* | `banking/zemen-international-banking-2-forex-service` (English) | NBE directive FXD/04/2026, Zemen Bank (16 Sep 2026), Oromia Cooperative Bank Wadi'ah retention accounts. Correct, and dated from the Source line. |
+| bk-035 *"what types of bank card are there?"* | `banking/dashen-card-services` (English) | Zemen Bank throughout — debit, credit, prepaid, salary and gift cards. Answers the question from the wrong bank's page: the label's problem as much as retrieval's. |
+
+bk-012 is worth reading twice: it is exactly the failure this task set out to fix, still there with the
+flag off, and the flag would not have fixed it either — with bilingual on, bk-012 is one of the six that
+stayed missed.
+
+One non-emergency question per agent, to confirm the restart broke nothing: Dr Afiya on enrolling in
+community-based health insurance answered from Regulation 535/2023 and Proclamation 1273/2022 with the
+Meskerem 1 – Yekatit 30 window and the three-resident testimony rule; Asmat on registering a house rental
+contract answered from Proclamation 1320/2024 with the 30-day deadline, Article 4(4) and the up-to-three-
+months-rent penalty, both opening with their own guard sentence. Neither agent was asked anything urgent.
+
 ## 7. What still misses, and what would be worth trying next
 
 * **The 12 cross-lingual questions still missed as shipped with the flag on** are mostly Dashen and
