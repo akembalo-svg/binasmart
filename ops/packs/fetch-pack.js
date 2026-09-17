@@ -802,6 +802,11 @@ function readDirManifest(root, site) {
 // plainest one wins — no percent escapes, then the shortest — because that is the one a person can read.
 function selectDirEntries(site, entries, ocr = null) {
   const allow = rx(site.allow), deny = rx(site.deny), allowPdf = rx(site.allowPdf);
+  // One host, spelled two ways. The National Bank serves the same file at nbe.gov.et and at www.nbe.gov.et,
+  // and Directive ONPS/04/2021 - one of the documents this pack exists to be able to cite - is in the
+  // harvest only under the www spelling. A site may therefore NAME the other spellings of its own host, as
+  // a list and never as a pattern: `hostAliases` is an allowlist, so a look-alike domain is still refused.
+  const hosts = new Set([site.host, ...(Array.isArray(site.hostAliases) ? site.hostAliases : [])]);
   const okPdf = key => allowPdf.length > 0 && allowPdf.some(r => r.test(key)) && !deny.some(r => r.test(key));
   const rows = [], skipped = [];
   for (const e of entries || []) {
@@ -811,7 +816,7 @@ function selectDirEntries(site, entries, ocr = null) {
     const isPdf = ct === 'application/pdf';
     if (!isHtml && !isPdf) continue;
     let u; try { u = new URL(e.url); } catch (err) { continue; }
-    if (u.hostname !== site.host) continue;                  // never another host, never a look-alike
+    if (!hosts.has(u.hostname)) continue;                    // never another host, never a look-alike
     const key = dirKeyOf(e.url);
     if (!key || key === '/') continue;
     if (isHtml) { if (!allow.some(r => r.test(key)) || deny.some(r => r.test(key))) continue; }
@@ -849,7 +854,7 @@ function selectDirEntries(site, entries, ocr = null) {
       const key = dirKeyOf(o.url);
       if (!key || key === '/' || have.has(key) || o.duplicate_of || !okPdf(key)) continue;
       let u; try { u = new URL(o.url); } catch (err) { continue; }
-      if (u.hostname !== site.host) continue;
+      if (!hosts.has(u.hostname)) continue;
       have.add(key);
       keep.push({ e: { url: o.url, title: o.title, file: null, fetchedAt: o.generatedAt || '' },
         key, kind: 'pdf', ocrOnly: true });

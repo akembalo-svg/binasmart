@@ -85,12 +85,24 @@ test('a harvested site names the folder it is built from, its budget and, for pd
     assert.ok(/harvested from Ibrahim/i.test(s.why), s.id + ' why must say where the bytes came from');
     assert.notEqual(s.reach, 'up', s.id + ' a dir site is one this server cannot reach, so the weekly job must keep knocking');
     if (s.allowPdf) {
-      assert.ok(s.allowPdf.length <= 80, s.id + ' the pdf budget is 80');
+      assert.ok(s.allowPdf.length <= 200, s.id + ' the pdf budget is 200');
       for (const p of s.allowPdf) assert.match(p, /^\^\/wp-content\/uploads\//, s.id + ' a pdf rule names one file: ' + p);
     }
   }
   const nbe = dirs.find(s => s.id === 'nbe');
-  assert.equal(nbe.allowPdf.length, 45, 'the 45 measured, readable, consumer-relevant NBE pdfs');
+  // 45 PDFs with a text layer (Task 15a) + 99 the National Bank publishes only as photographs of paper,
+  // read by OCR and admitted in Task 15c. Still a list and not a pattern: every one is named.
+  assert.equal(nbe.allowPdf.length, 144, 'the 45 readable NBE pdfs plus the 99 OCR\u0027d ones');
+  assert.ok(/ocr/i.test(nbe.ocrNote || ''), 'and the registry says where the OCR text came from');
+  assert.deepEqual(nbe.hostAliases, ['www.nbe.gov.et'],
+    'ONPS/04/2021 is in the harvest only under the www spelling of the same host');
+  for (const k of ['consumer', 'licensing']) {
+    assert.ok((nbe.sections || []).some(s => s.key === k && s.titleAm), 'nbe needs a ' + k + ' section, with Amharic');
+  }
+  assert.ok(Object.keys(nbe.pdfTitles || {}).length >= 20,
+    'a PDF whose file name is not the number it gives itself is named by hand');
+  assert.equal(nbe.pdfTitles['/wp-content/uploads/2023/04/fxd-65-2020.pdf'].slice(0, 26), 'Directive No. FXD/80/2022 ',
+    'the National Bank serves the amendment at the base directive url, and the pack says what is inside the file');
   assert.ok(!dirs.find(s => s.id === 'ethiotelecom').allowPdf, 'ethio telecom publishes no pdf we read');
   const mpesa = dirs.find(s => s.id === 'safaricom');
   assert.equal(mpesa.host, 'm-pesa.safaricom.et', 'M-PESA is not on www.safaricom.et');

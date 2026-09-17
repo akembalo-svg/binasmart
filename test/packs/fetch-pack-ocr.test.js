@@ -232,6 +232,30 @@ test('the registry may name a document the National Bank filed under the wrong n
   fs.rmSync(root, { recursive: true, force: true });
 });
 
+// One host spelled two ways. The National Bank serves the same file at nbe.gov.et and at www.nbe.gov.et,
+// and ONPS/04/2021 - the payment-instrument-issuer directive - is in the harvest only under the www
+// spelling, so it silently became no document at all until the registry could say the two are one site.
+test('a site may name the other spelling of its own host, and only that one', () => {
+  const root = harvest();
+  const dir = path.join(root, 'example.et');
+  const m = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
+  fs.writeFileSync(path.join(dir, 'w.pdf'), '%PDF-1.4 the same directive, served under the www name');
+  m.push({ url: 'https://www.example.et/uploads/rules/On-The-Www-Host.pdf', file: 'w.pdf', status: 200,
+    contentType: 'application/pdf', sha256: 'w1', fetchedAt: '2026-09-16T18:40:00Z', title: 'On the www host', postType: 'media' });
+  m.push({ url: 'https://example.et.evil.example/uploads/rules/Look-Alike.pdf', file: 'd.pdf', status: 200,
+    contentType: 'application/pdf', sha256: 'x1', fetchedAt: '2026-09-16T18:41:00Z', title: 'Look alike', postType: 'media' });
+  fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(m));
+  const plain = P.fetchDir(SITE, { root, readPdf: () => pad(10) });
+  assert.ok(!plain.pages.some(p => /www\.example\.et/.test(p.url)), 'without the alias the www copy is refused');
+  const site = { ...SITE, hostAliases: ['www.example.et'] };
+  const withAlias = P.fetchDir(site, { root, readPdf: f => path.basename(f) + ' says: ' + pad(10) });
+  assert.ok(withAlias.pages.some(p => p.url === 'https://www.example.et/uploads/rules/On-The-Www-Host.pdf'),
+    'named, it is the same site');
+  assert.ok(!withAlias.pages.some(p => /evil\.example/.test(p.url)),
+    'and the allowlist is still an allowlist: a look-alike domain is refused either way');
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
 test('ocrTitleOf takes the extension off and invents nothing', () => {
   assert.equal(P.ocrTitleOf('FCP-01-2020.pdf'), 'FCP-01-2020');
   assert.equal(P.ocrTitleOf('Banking-Business-Proclamation-No.-13602025.pdf'), 'Banking-Business-Proclamation-No.-13602025');
