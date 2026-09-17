@@ -174,7 +174,11 @@ function searchOptionsFor(q, { contextSearchOptions, knowledgeOf }) {
 
 async function main() {
   const { PrismaClient } = require('@prisma/client');
-  const { makeKnowledge, contextSearchOptions } = require('/var/www/connectcare/binasmart/knowledge');
+  const { makeKnowledge, contextSearchOptions, bilingualEnabled, bilingualEn2AmEnabled } = require('/var/www/connectcare/binasmart/knowledge');
+  // Bilingual query retrieval (KNOWLEDGE_BILINGUAL_QUERY) is a flag on the production index, and this script
+  // runs the production index rather than a copy of it, so whatever the environment says here is what a user
+  // gets. Recorded in the result file so a run can never be mistaken for one made with the other setting.
+  const bilingual = { query: bilingualEnabled(), en2am: bilingualEn2AmEnabled(), fusion: String(process.env.KNOWLEDGE_BILINGUAL_FUSION || 'max').toLowerCase() };
   const limit = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : 0;
   // Resolve and read the gold set before the corpus is loaded, so a name with no file behind it costs one
   // line and a second, not a minute and a stack trace.
@@ -188,6 +192,8 @@ async function main() {
   const health = k.health();
   console.log('corpus: ' + health.chunks + ' chunks, ' + health.embedded + ' embedded, gemini=' + health.gemini
     + ', local vectors ' + health.embeddedLocal + (health.localFallback ? '' : ' (fallback off)'));
+
+  console.log('bilingual query retrieval: ' + (bilingual.query ? 'ON (fusion ' + bilingual.fusion + (bilingual.en2am ? ', en2am ON' : '') + ')' : 'off'));
 
   const tag = runTag(goldTag(goldFile), mode);
   const norm = normalizeGold(goldRaw);
@@ -216,13 +222,23 @@ async function main() {
   }
 
   const rows = [];
+  const msCold = [], msWarm = [];
   for (let i = 0; i < gold.length; i++) {
     const g = gold[i];
     let plain = [], shipped = [];
     const opts = searchOptionsFor(g, { contextSearchOptions, knowledgeOf });
     try {
+      // The FIRST search of a question is the cold one: it pays for the query embedding and, with bilingual
+      // retrieval on, for the rendering and the second embedding too. The second search of the SAME question
+      // is served out of both caches and additionally runs the reranker, so the two are reported apart and
+      // neither is called "the" latency. The user-facing number is contextFor, measured by
+      // ops/bini/bilingual-latency.js.
+      const t0 = Date.now();
       plain = await k.search(g.question, opts.plain);
+      msCold.push(Date.now() - t0);
+      const t1 = Date.now();
       shipped = await k.search(g.question, opts.shipped);
+      msWarm.push(Date.now() - t1);
     } catch (e) { console.log('  ! ' + g.qid + ' ' + e.message); }
     const strict = strictGold(g), keys = goldKeys(g);
     const pages = hits => { const out = []; for (const h of hits) { const p = strict ? h.source + ':' + h.slug : h.slug; if (!out.includes(p)) out.push(p); } return out; };
@@ -238,6 +254,8 @@ async function main() {
     if ((i + 1) % 20 === 0) console.log('  ' + (i + 1) + '/' + gold.length);
     await sleep(300);
   }
+  const quantile = (a, p) => { if (!a.length) return null; const s = [...a].sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.ceil(p * s.length) - 1)]; };
+  const latency = { n: msCold.length, coldP50: quantile(msCold, 0.5), coldP95: quantile(msCold, 0.95), cachedP50: quantile(msWarm, 0.5), cachedP95: quantile(msWarm, 0.95) };
 
   const pct = (list, f) => list.length ? (100 * list.filter(f).length / list.length).toFixed(1) + '%' : '—';
   const OWN = ['guide', 'page', 'addis', 'llms', 'docs', 'skill'];
@@ -300,9 +318,13 @@ async function main() {
   // which query embedder each search actually used (embedOk = Gemini, localUsed = BGE-M3, keywordOnly = neither)
   const hs = k.health();
   const embedPaths = { embedOk: hs.embedOk, embedErr: hs.embedErr, localOk: hs.localOk, localErr: hs.localErr, localUsed: hs.localUsed, keywordOnly: hs.keywordOnly,
-    rerankOk: hs.rerankOk, rerankErr: hs.rerankErr, rerankSkipped: hs.rerankSkipped };
+    rerankOk: hs.rerankOk, rerankErr: hs.rerankErr, rerankSkipped: hs.rerankSkipped,
+    // bilingual query retrieval (KNOWLEDGE_BILINGUAL_QUERY): how many searches asked for an other-language
+    // rendering, how many were served from the cache, and how many fell back to the single-query path.
+    bilingualOk: hs.bilingualOk, bilingualCached: hs.bilingualCached, bilingualSkipped: hs.bilingualSkipped, bilingualFused: hs.bilingualFused };
   console.log('\n  query embed paths: ' + JSON.stringify(embedPaths));
-  const f = writeResult(OUT, { at: at.toISOString(), gold: goldFile, chunks: health.chunks, limit: limit || null, ...(mode ? { forceEmbedFail: mode } : {}), embedPaths, table, rows }, at, { latest: !limit && !mode, tag });
+  console.log('  search latency ms: ' + JSON.stringify(latency));
+  const f = writeResult(OUT, { at: at.toISOString(), gold: goldFile, chunks: health.chunks, limit: limit || null, ...(mode ? { forceEmbedFail: mode } : {}), bilingual, embedPaths, latency, table, rows }, at, { latest: !limit && !mode, tag });
   console.log('\n  written: ' + f + (mode ? '  (forced-failure run: no latest file)' : limit ?'  (--limit run: ' + LATEST + ' left alone)' : '  (and ' + LATEST + ')'));
   await prisma.$disconnect();
 }

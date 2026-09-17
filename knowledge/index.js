@@ -319,6 +319,65 @@ function makeLocalEmbedder({ fetchImpl, url } = {}) {
 }
 function localFallbackEnabled(env = process.env) { return String(env.KNOWLEDGE_LOCAL_FALLBACK ?? '1').trim() !== '0'; }
 
+// ---------- bilingual query rendering ----------
+// The query side of the cross-lingual gap. Measured on the 90-question banking gold set (2026-09-17,
+// test/banking/benchmark-banking.test.js): 86.2% retrieval when the question and its gold page share a
+// language, 43.8% for the 32 Amharic questions whose only gold page is English. Only some institutions
+// publish Amharic at all — Dashen, CBE and CoopBank publish none — so an Amharic question is captured by
+// whatever Amharic page is nearest even when the right English page exists. The Amharic key-fact headers
+// (ops/packs/am-headers.js, +6.7 points) attacked that from the document side; this attacks it from the
+// query side: ask the same question twice, once in each language, and fuse the two candidate lists.
+//
+// One short gemini-2.5-flash call, cached, with a hard 1,500 ms timeout. It is a fail-open path in front of
+// a fail-open path: a timeout, an error or an empty answer leaves the search exactly as it was before this
+// existed, and says so in the log. Nothing after the fusion changes — the ≤2-chunks-per-page rule, the
+// reranker, its 0.03 gate and the +0.06 tie-breaker all run on the fused list unchanged.
+const BILINGUAL_MODEL = 'gemini-2.5-flash';
+const BILINGUAL_TIMEOUT_MS = 1500;
+const BILINGUAL_CACHE_MAX = 500;
+const BILINGUAL_MAX_CHARS = 600;
+// Fusion of the two candidate lists: 'max' keeps each chunk's better hybrid score under the two renderings;
+// 'rrf' orders by reciprocal rank instead while still carrying the max score, so the reranker's 0.03 gate
+// keeps reading the same quantity it always read. Both were measured; see the report.
+const BILINGUAL_FUSION = 'max';
+// 'union' is the design's reading (one token set for both renderings); 'per' gives each rendering its own
+// tokens and lets the max do the fusing. KNOWLEDGE_BILINGUAL_KEYWORD overrides. Both measured.
+const BILINGUAL_KEYWORD = 'union';
+const BILINGUAL_PROMPT = {
+  en: 'Translate this Amharic question into a short natural English search query; output only the query.',
+  am: 'Translate this English question into a short natural Amharic search query; output only the query.',
+};
+// Off unless asked for. A flag that defaults on would make the benchmark measure itself.
+function bilingualEnabled(env = process.env) { return /^(1|on|true|yes)$/i.test(String(env.KNOWLEDGE_BILINGUAL_QUERY ?? '0').trim()); }
+// The symmetric direction (English question -> Amharic rendering) is a separate switch, measured separately.
+function bilingualEn2AmEnabled(env = process.env) { return /^(1|on|true|yes)$/i.test(String(env.KNOWLEDGE_BILINGUAL_EN2AM ?? '0').trim()); }
+// The cache key: the same question typed with different spacing or capitals is the same question.
+function normaliseQuery(s) { return String(s || '').normalize('NFC').replace(/\s+/g, ' ').trim().toLowerCase(); }
+
+// translate(text, to) -> the rendering, or throws. Injectable; the tests pass their own.
+function makeQueryTranslator({ apiKey, fetchImpl, model, timeoutMs } = {}) {
+  const f = fetchImpl || ((...a) => fetch(...a));
+  return async function translate(text, to) {
+    if (!apiKey) throw new Error('no_gemini_key');
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), timeoutMs || BILINGUAL_TIMEOUT_MS);
+    try {
+      const r = await f('https://generativelanguage.googleapis.com/v1beta/models/' + (model || BILINGUAL_MODEL) + ':generateContent?key=' + apiKey, {
+        method: 'POST', signal: ctrl.signal, headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: (BILINGUAL_PROMPT[to] || BILINGUAL_PROMPT.en) + '\n\n' + String(text).slice(0, BILINGUAL_MAX_CHARS) }] }],
+          // thinkingBudget 0 for the same reason the reranker sets it: the thinking tokens count against
+          // maxOutputTokens, and a small cap would return an empty string instead of the query.
+          generationConfig: { temperature: 0, maxOutputTokens: 64, thinkingConfig: { thinkingBudget: 0 } } }) });
+      if (!r.ok) throw new Error('gemini ' + r.status);
+      const j = await r.json();
+      const parts = (((j.candidates || [])[0] || {}).content || {}).parts;
+      const raw = String((parts && parts[0] && parts[0].text) || '').replace(/\s+/g, ' ').trim().replace(/^["'“”]+|["'“”]+$/g, '');
+      if (!raw) throw new Error('empty');
+      return raw.slice(0, 300);
+    } finally { clearTimeout(t); }
+  };
+}
+
 function toBuf(vec) { const f = Float32Array.from(vec); let n = 0; for (const v of f) n += v * v; n = Math.sqrt(n) || 1; for (let i = 0; i < f.length; i++) f[i] /= n; return Buffer.from(f.buffer); }
 function fromBuf(buf) { return new Float32Array(buf.buffer, buf.byteOffset, buf.byteLength / 4); }
 
@@ -445,18 +504,27 @@ function sourceLine(hit, { root, am = false } = {}) {
 // (through fetchImpl when one is given, so a test's fake network is never bypassed).
 // localFallback: defaults to KNOWLEDGE_LOCAL_FALLBACK !== '0'. queryLog: where the per-search embed-path line goes
 // (defaults to log); it never contains the query text.
-function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbedder, localFallback, localUrl, queryLog }) {
+// bilingual / bilingualEn2Am: undefined means "read the environment" (KNOWLEDGE_BILINGUAL_QUERY,
+// KNOWLEDGE_BILINGUAL_EN2AM); translateQuery(text, to) is injectable so a test never reaches the network.
+function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbedder, localFallback, localUrl, queryLog, bilingual, bilingualEn2Am, translateQuery, bilingualTimeoutMs, bilingualFusion, bilingualKeywordMode }) {
   const embedder = makeEmbedder({ apiKey, fetchImpl, sleep });
   const say = log || (() => {});
   const sayPath = queryLog || say;
   const zz = sleep || (ms => new Promise(r => setTimeout(r, ms)));
   const localOn = localFallback === undefined ? localFallbackEnabled() : !!localFallback;
   const local = localEmbedder || makeLocalEmbedder({ fetchImpl, url: localUrl || process.env.KNOWLEDGE_LOCAL_URL });
+  const bilingualOn = bilingual === undefined ? bilingualEnabled() : !!bilingual;
+  const en2amOn = bilingualEn2Am === undefined ? bilingualEn2AmEnabled() : !!bilingualEn2Am;
+  const fusion = String(bilingualFusion || process.env.KNOWLEDGE_BILINGUAL_FUSION || BILINGUAL_FUSION).trim().toLowerCase() === 'rrf' ? 'rrf' : 'max';
+  const bilingualKeyword = String(bilingualKeywordMode || process.env.KNOWLEDGE_BILINGUAL_KEYWORD || BILINGUAL_KEYWORD).trim().toLowerCase() === 'per' ? 'per' : 'union';
+  const translate = translateQuery || makeQueryTranslator({ apiKey, fetchImpl, timeoutMs: bilingualTimeoutMs });
   let rows = [];            // { id, source, slug, url, title, lang, ord, text, vec (Float32Array|null), lvec (Float32Array|null), toks:Set }
   let loadedAt = 0;
   const qcache = new Map(); // query -> Gemini vec (768)
   const lcache = new Map(); // query -> BGE-M3 vec (1024); a separate map so the two kinds can never be confused
-  const stats = { searches: 0, embedOk: 0, embedErr: 0, keywordOnly: 0, rerankOk: 0, rerankErr: 0, rerankSkipped: 0, localOk: 0, localErr: 0, localUsed: 0 };
+  const tcache = new Map(); // "<to>\0<normalised query>" -> rendering. LRU, successes only: a failure must be retried.
+  const stats = { searches: 0, embedOk: 0, embedErr: 0, keywordOnly: 0, rerankOk: 0, rerankErr: 0, rerankSkipped: 0, localOk: 0, localErr: 0, localUsed: 0,
+    bilingualOk: 0, bilingualCached: 0, bilingualSkipped: 0, bilingualFused: 0 };
 
   async function load() {
     const all = await prisma.knowledgeChunk.findMany({ orderBy: [{ source: 'asc' }, { slug: 'asc' }, { ord: 'asc' }] });
@@ -665,32 +733,96 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
 
   // exclude: sources, or single pages as 'source:slug' (see pageMatcher). prefer: when given (even empty), the
   // own-source boost goes only to what it names; when absent, ranking is exactly what it always was.
-  async function search(q, { k = 4, sources, exclude, isPublic = false, rerankTo = 0, prefer } = {}) {
-    await ensureLoaded();
-    stats.searches++;
-    const query = String(q || '').trim(); if (!query) return [];
-    const qt = tokens(query);
-    let qv = qcache.get(query) || null;
-    // Which vectors the cosine runs over: Gemini's (vec, 768) unless the Gemini query embed failed and bina-embed
-    // answered, then BGE-M3's (lvec, 1024). Everything after this block is the same code for both.
-    let dims = DIMS, useLocal = false;
+  // The query embedding, exactly as it has always been worked out: Gemini's vector (768), and only when
+  // Gemini was ASKED and failed, BGE-M3's (1024) through bina-embed. `forceLocal` exists for the second
+  // rendering of a bilingual search: both renderings must be scored in the SAME vector space, because a
+  // Gemini cosine and a BGE-M3 cosine are not comparable numbers and a max over the two would be nonsense.
+  async function embedQuery(query, { forceLocal = false } = {}) {
+    let qv = null, dims = DIMS, useLocal = false;
+    const localVec = async () => {
+      let lv = lcache.get(query) || null;
+      if (!lv) {
+        try { lv = fromBuf(toBuf(await local.query(query, LOCAL_QUERY_TIMEOUT_MS))); stats.localOk++; if (lcache.size > 500) lcache.clear(); lcache.set(query, lv); }
+        catch (e2) { stats.localErr++; lv = null; }
+      }
+      return lv;
+    };
+    if (forceLocal) {
+      if (localOn && rows.some(r => r.lvec)) { const lv = await localVec(); if (lv) { qv = lv; dims = LOCAL_DIMS; useLocal = true; stats.localUsed++; } }
+      return { qv, dims, useLocal };
+    }
+    qv = qcache.get(query) || null;
     if (!qv && apiKey && rows.some(r => r.vec)) {
       try { qv = fromBuf(toBuf(await embedder.query(query))); stats.embedOk++; if (qcache.size > 500) qcache.clear(); qcache.set(query, qv); }
       catch (e) {
         stats.embedErr++; qv = null;
         // Only here, when Gemini was asked and failed: never on a cache hit, a missing key or an unembedded index.
-        if (localOn && rows.some(r => r.lvec)) {
-          let lv = lcache.get(query) || null;
-          if (!lv) {
-            try { lv = fromBuf(toBuf(await local.query(query, LOCAL_QUERY_TIMEOUT_MS))); stats.localOk++; if (lcache.size > 500) lcache.clear(); lcache.set(query, lv); }
-            catch (e2) { stats.localErr++; lv = null; }
-          }
-          if (lv) { qv = lv; dims = LOCAL_DIMS; useLocal = true; stats.localUsed++; }
-        }
+        if (localOn && rows.some(r => r.lvec)) { const lv = await localVec(); if (lv) { qv = lv; dims = LOCAL_DIMS; useLocal = true; stats.localUsed++; } }
       }
     }
+    return { qv, dims, useLocal };
+  }
+
+  // A voice-example lookup is about register, not about facts, so it is never rendered into another language.
+  const styleOnly = s => Array.isArray(s) && s.length > 0 && s.every(x => x === 'style' || x === 'style-om');
+
+  // The other-language rendering of a question, or null — and null is always safe: the caller then does
+  // exactly what it did before bilingual retrieval existed.
+  async function renderOther(query, sources) {
+    if (!bilingualOn || styleOnly(sources)) return null;
+    const am = isAmharic(query);
+    if (!am && !en2amOn) return null;
+    const to = am ? 'en' : 'am';
+    const key = to + ' ' + normaliseQuery(query);
+    if (tcache.has(key)) { const v = tcache.get(key); tcache.delete(key); tcache.set(key, v); stats.bilingualCached++; return v; }
+    let out = null;
+    try { out = await translate(query, to); }
+    catch (e) {
+      stats.bilingualSkipped++;
+      sayPath('[knowledge] bilingual: skipped (' + (e && e.name === 'AbortError' ? 'timeout' : String((e && e.message) || e)) + ')');
+      return null;
+    }
+    // A model that hands back the question unchanged has told us nothing, and paying for a second identical
+    // embedding would only slow the answer down.
+    const rendering = out && normaliseQuery(out) !== normaliseQuery(query) ? String(out) : null;
+    if (!rendering) { stats.bilingualSkipped++; sayPath('[knowledge] bilingual: skipped (no rendering)'); return null; }
+    stats.bilingualOk++;
+    tcache.set(key, rendering);
+    while (tcache.size > BILINGUAL_CACHE_MAX) tcache.delete(tcache.keys().next().value);
+    return rendering;
+  }
+
+  async function search(q, { k = 4, sources, exclude, isPublic = false, rerankTo = 0, prefer } = {}) {
+    await ensureLoaded();
+    stats.searches++;
+    const query = String(q || '').trim(); if (!query) return [];
+    // The other-language rendering first, because it costs nothing when the flag is off and because a
+    // failure here must leave everything below untouched.
+    const other = await renderOther(query, sources);
+    const { qv, dims, useLocal } = await embedQuery(query);
     if (!qv) stats.keywordOnly++;
     sayPath('[knowledge] query embed: ' + (useLocal ? 'local' : qv ? 'gemini' : 'keyword'));
+    // The second rendering's vector, kept only when it landed in the same space as the first. Its keywords
+    // are kept either way: the union of the two token sets is the keyword side of the fusion.
+    let qv2 = null, qt = tokens(query), qtB = null;
+    if (other) {
+      stats.bilingualFused++;
+      const otherToks = tokens(other);
+      // Two readings of "the keyword side of the fusion", both measured (see the report):
+      //   union  one token set for both renderings, the union of what the two ask for. The reading the
+      //          design named — and the one that divides a same-language question's keyword score by a
+      //          denominator that question never asked for: ask 4 Amharic words, get 7, and a page that
+      //          matched all four scores 4/7 instead of 4/4.
+      //   per    each rendering keeps its own tokens and its own denominator, and the max over the two
+      //          hybrid scores is what fuses them. Nothing a page earned under one rendering is diluted
+      //          by the other. (If the second embedding fails, `per` has nothing left to add and the
+      //          search is exactly the single-query one; `union` would still carry the extra keywords.)
+      if (bilingualKeyword === 'per') qtB = otherToks;
+      else { qt = [...new Set(qt.concat(otherToks))]; qtB = qt; }
+      const sec = await embedQuery(other, { forceLocal: useLocal });
+      if (sec.qv && sec.useLocal === useLocal) qv2 = sec.qv;
+      else if (sec.qv) sayPath('[knowledge] bilingual: skipped (embedder mismatch)');
+    }
     const excluded = pageMatcher(exclude);
     const preferred = Array.isArray(prefer) ? (pageMatcher(prefer) || (() => false)) : null;
     const scored = [];
@@ -702,10 +834,27 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
       const rv = useLocal ? r.lvec : r.vec;
       if (qv && rv) { for (let i = 0; i < dims; i++) cos += qv[i] * rv[i]; }
       const kw = keywordScore(qt, r);
-      const score = hybridScore({ cos, kw, source: r.source, hasVec: !!qv, preferred: preferred ? preferred(r.source, r.slug) : undefined });
-      if (score > 0) scored.push({ r, score, cos, kw });
+      const pref = preferred ? preferred(r.source, r.slug) : undefined;
+      const a = hybridScore({ cos, kw, source: r.source, hasVec: !!qv, preferred: pref });
+      // Fusion, before anything else runs: each chunk keeps the better of the two hybrid scores. The
+      // ≤2-chunks-per-page rule, the reranker, its 0.03 gate and the +0.06 tie-breaker are untouched below.
+      let b = null;
+      if (qv2 && rv) {
+        let c2 = 0; for (let i = 0; i < dims; i++) c2 += qv2[i] * rv[i];
+        b = hybridScore({ cos: c2, kw: qtB === qt ? kw : keywordScore(qtB, r), source: r.source, hasVec: true, preferred: pref });
+      }
+      const score = b !== null && b > a ? b : a;
+      if (score > 0) scored.push({ r, score, cos, kw, a, b });
     }
-    scored.sort((a, b) => b.score - a.score);
+    if (qv2 && fusion === 'rrf') {
+      // Reciprocal-rank fusion orders the candidates by their two ranks instead of their two scores. The
+      // score each candidate carries is still the max hybrid score, so the reranker's gate keeps reading the
+      // quantity it was tuned on rather than a reciprocal rank that is never 0.03 apart from anything.
+      const rr = new Map();
+      [...scored].sort((x, y) => y.a - x.a).forEach((s, i) => rr.set(s, 1 / (60 + i + 1)));
+      [...scored].sort((x, y) => (y.b === null ? -1 : y.b) - (x.b === null ? -1 : x.b)).forEach((s, i) => rr.set(s, (rr.get(s) || 0) + 1 / (60 + i + 1)));
+      scored.sort((x, y) => rr.get(y) - rr.get(x));
+    } else scored.sort((a, b) => b.score - a.score);
     // one chunk per (source, slug) unless the same page clearly wins twice
     const want = rerankTo ? Math.min(k, 20) : k;
     const out = [], seen = new Map();
@@ -773,4 +922,5 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
 }
 
 module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, docMeta, docMetaFile, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
-  LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled };
+  LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled,
+  bilingualEnabled, bilingualEn2AmEnabled, makeQueryTranslator, normaliseQuery, BILINGUAL_TIMEOUT_MS, BILINGUAL_CACHE_MAX };
