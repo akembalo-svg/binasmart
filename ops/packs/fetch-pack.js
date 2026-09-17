@@ -215,7 +215,8 @@ const esc = s => String(s).replace(/"/g, '\\"');
 // pack is never half one format and half the other - and a re-render is not reported as a change, because the
 // airline changed nothing.
 const PACK_FORMAT = '2';
-const FM_KEYS = ['url', 'title', 'titleAm', 'source_name', 'section', 'lang', 'status', 'fetchedAt', 'lastChecked',
+const FM_KEYS = ['url', 'title', 'titleAm', 'source_name', 'section', 'lang', 'part', 'pages', 'text_source',
+  'ocr_quality', 'status', 'fetchedAt', 'lastChecked',
   'firstFetched', 'goneAt', 'missedAt', 'contentHash', 'generated_by', 'packFormat'];
 function frontMatter(meta) {
   const lines = ['---'];
@@ -355,6 +356,9 @@ function header(page, site, today, pack, amh) {
     fromAm: fromAm(site.nameAm), url: page.url, today,
     langWord: lang === 'am' ? 'in Amharic' : 'in English',
     langWordAm: lang === 'am' ? 'በአማርኛ' : 'በእንግሊዝኛ',
+    ocrPages: page.ocrPages == null ? '' : String(page.ocrPages),
+    ocrQuality: page.ocrQuality || '',
+    part: page.parts > 1 ? String(page.part) : '', parts: page.parts > 1 ? String(page.parts) : '',
     disclaimerEn: (pack && pack.disclaimerEn) || '', disclaimerAm: (pack && pack.disclaimerAm) || '',
   };
   const what = site.name + ' — ' + (page.section ? page.section + ' — ' : '') + (page.title || page.slug) + '.'
@@ -365,7 +369,16 @@ function header(page, site, today, pack, amh) {
   // The Amharic summary of an English page belongs between the Amharic sentence and the Source line: after
   // everything else said in Amharic, before the provenance. Every figure in it is a figure the page itself
   // prints - ungroundedFigures above is what makes that true, and am-headers.js drops a summary that fails it.
-  return [what, am, (amh && amh.summaryAm) || null, en].filter(Boolean).join('\n\n');
+  //
+  // A document read by OCR says so, in the header where a reader will see it and not only in front matter a
+  // reader never opens. The National Bank wrote these rules; a machine read them off a photograph, and a
+  // figure in one of them may be a figure the machine got wrong. The wording is the pack's, like every other
+  // sentence here, and a pack that sets no ocrNoteEn adds nothing - which is how the travel pack renders
+  // exactly the bytes it always did. It goes BEFORE the Source paragraph because bodyText() finds the page
+  // text by that paragraph, and anything after it would be read back as part of the page.
+  const ocrNote = page.textSource === 'ocr' ? fill(pack && pack.ocrNoteEn, vars) || null : null;
+  const ocrNoteAm = page.textSource === 'ocr' ? fill(pack && pack.ocrNoteAm, vars) || null : null;
+  return [what, am, (amh && amh.summaryAm) || null, ocrNoteAm, ocrNote, en].filter(Boolean).join('\n\n');
 }
 
 function renderDoc(page, site, { today, firstFetched, pack, amHeaders } = {}) {
@@ -374,6 +387,12 @@ function renderDoc(page, site, { today, firstFetched, pack, amHeaders } = {}) {
   const title = site.name + ' — ' + (page.title || page.slug);
   const meta = { url: page.url, title, titleAm, source_name: site.name, section: page.section || '',
     lang: page.lang || langFor(site, page.path),
+    // A document split out of a long one says which part of it this is, and both parts carry the same url,
+    // so a citation still points at the one PDF the institution published. A document that was not split
+    // carries no part line at all.
+    part: page.parts > 1 && page.part ? page.part + ' of ' + page.parts : '',
+    pages: page.ocrPages == null ? '' : String(page.ocrPages),
+    text_source: page.textSource || '', ocr_quality: page.ocrQuality || '',
     status: 'live', fetchedAt: today, lastChecked: today, firstFetched: firstFetched && firstFetched !== today ? firstFetched : '',
     contentHash: contentHash(page.text), generated_by: (pack && pack.generatedBy) || 'ops/travel/fetch-airline.js',
     packFormat: (pack && pack.packFormat) || PACK_FORMAT };
@@ -514,9 +533,16 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
     // site in the travel pack included, this finds exactly the entry that wrote it.
     const sec = (meta.section && (site.sections || []).find(s => s.key === meta.section)) || sectionOf(site, p || '');
     const pre = site.name + ' — ';
+    // A re-render must not quietly drop what the document already records about where its text came from:
+    // an OCR document that came back as an ordinary one would lose its quality grade, its page count and the
+    // sentence telling a reader a machine read it off a photograph.
+    const pt = /^(\d+) of (\d+)$/.exec(meta.part || '');
     const page = { url: meta.url, path: p, slug, lang: meta.lang, text,
       title: meta.title && meta.title.slice(0, pre.length) === pre ? meta.title.slice(pre.length) : meta.title,
-      section: meta.section || (sec ? sec.key : null), sectionTitleAm: sec ? sec.titleAm : null };
+      section: meta.section || (sec ? sec.key : null), sectionTitleAm: sec ? sec.titleAm : null,
+      textSource: meta.text_source || '', ocrQuality: meta.ocr_quality || '',
+      ocrPages: meta.pages === undefined || meta.pages === '' ? null : meta.pages,
+      part: pt ? Number(pt[1]) : null, parts: pt ? Number(pt[2]) : 1 };
     let fresh = renderDoc(page, site, { today: meta.fetchedAt, firstFetched: meta.firstFetched || meta.fetchedAt, pack: reg.pack, amHeaders });
     // renderDoc writes lastChecked from the day it is given, and the day it is given here is the day the page
     // was fetched. Put the record of when we last looked back exactly as it stood.
@@ -649,6 +675,82 @@ const DIR_ROOT = '/root/storage/packs/banking-manual';
 // strategy is a policy document being indexed as if it were an answer to a question about a fee.
 const PDF_MAX_CHARS = 60000;
 
+// ---------- the scanned directives: the OCR sidecar ----------
+// A great many of the National Bank's rules are published as photographs of paper - a PDF with no text layer
+// at all, for which pdftotext returns not a thin page but zero characters. Until this task the importer wrote
+// no document for any of them, so the pack could not cite the Financial Consumer Protection directive, the
+// currency directives, the fraud directive, the payment-instrument-issuer directives or the 2025 banking
+// proclamation, and the previous report said so in those words.
+//
+// They were read by OCR on a workstation - this VPS's CPU is shared and throttled - and the text left beside
+// the PDFs in <host>/ocr/: one <sha1>.ocr.txt per PDF, pages separated by a form feed, with an
+// ocr-manifest.json giving each file its url, page count, language mode, the quality the run measured and,
+// for the sixteen files the National Bank uploaded twice, `duplicate_of` naming the copy to keep.
+//
+// This importer READS that sidecar and never runs OCR. A harvest with no ocr/ folder behaves exactly as it
+// did before, which is what the travel pack and every other `fetch: dir` site depend on.
+const OCR_SUB = 'ocr';
+const OCR_MANIFEST = 'ocr-manifest.json';
+// Twice the text-layer cap, because two of these documents are proclamations - the Banking Business
+// Proclamation 1360/2025 is 229,774 characters of OCR text - and a proclamation cut off at article 40 answers
+// nothing asked about article 60. Past this the document is split at a PAGE BREAK into parts that each carry
+// the same url and a part line, so the Source line stays true and a citation still points at the one PDF.
+const OCR_MAX_CHARS = 120000;
+
+function readOcrManifest(dir) {
+  let raw;
+  try { raw = JSON.parse(fs.readFileSync(path.join(dir, OCR_SUB, OCR_MANIFEST), 'utf8')); }
+  catch (e) { return null; }
+  const rows = Array.isArray(raw) ? raw : (raw.files || raw.documents || []);
+  if (!rows.length) return null;
+  const byKey = new Map(), byStem = new Map();
+  for (const f of rows) {
+    const stem = String(f.file || '').replace(/\.ocr\.txt$/i, '');
+    if (stem) byStem.set(stem, f);
+    const key = dirKeyOf(f.url);
+    if (key && !byKey.has(key)) byKey.set(key, f);
+  }
+  return { dir: path.join(dir, OCR_SUB), rows, byKey, byStem };
+}
+
+// The sidecar's title is the National Bank's own file name - FCP-01-2020.pdf, DIRECTVE_NO_MCR_02_2020.pdf -
+// or, for the four documents re-fetched past the harvester's 15 MB cap, a sentence somebody typed. Cleaned
+// means the extension off, the percent escapes decoded, the underscores made hyphens and the whitespace
+// collapsed. No word is added and no number is changed. Where the file name is not the directive's own
+// number - CMD-298-2023.pdf holds a directive numbered ከማዳ 3/2015, and fxd-65-2020.pdf holds FXD/80/2022 -
+// the registry names the document by hand in `pdfTitles`, because a file name is not evidence about what is
+// inside the file.
+function ocrTitleOf(raw) {
+  let t = String(raw || '').trim().replace(/\.pdf$/i, '');
+  try { t = decodeURIComponent(t); } catch (e) { /* leave it encoded */ }
+  return t.replace(/_+/g, '-').replace(/\s+/g, ' ').trim().slice(0, 120);
+}
+
+// Split at the form feeds the OCR run wrote between pages, never inside one. A part is filled until the next
+// page would take it past the cap. A single page longer than the cap goes into a part of its own and is left
+// whole: cutting a page in half is the one thing this function exists to prevent.
+function splitOcrParts(text, maxChars = OCR_MAX_CHARS) {
+  const s = String(text == null ? '' : text);
+  if (s.length <= maxChars) return [s];
+  const parts = [];
+  let cur = '';
+  for (const pg of s.split('\f')) {
+    if (cur && cur.length + 1 + pg.length > maxChars) { parts.push(cur); cur = pg; }
+    else cur = cur ? cur + '\f' + pg : pg;
+  }
+  if (cur.trim()) parts.push(cur);
+  return parts.length ? parts : [s];
+}
+
+// The language of a scanned directive is a fact about its text, not about the folder it was uploaded to: the
+// National Bank's currency directives are written in Amharic and sit on the same /wp-content/uploads/ path as
+// the English ones. The floor is AM_FLOOR, the same one every other language decision in this file uses.
+function ocrLangOf(text) {
+  const eth = ethiopicCount(text);
+  const lat = (String(text || '').match(/[A-Za-z]/g) || []).length;
+  return eth >= AM_FLOOR && eth > lat ? 'am' : 'en';
+}
+
 // The key a harvested page is selected, deduplicated and named by. Two things the ordinary path is not:
 //   - it keeps the query, because ethio telecom puts the language in ?lang=am and /telebirr/faq?lang=am is a
 //     different document in a different language from /telebirr/faq;
@@ -698,9 +800,10 @@ function readDirManifest(root, site) {
 // telebirr page is linked at /telebirr/withdraw, at /withdraw and under its Amharic slug, and three documents
 // of one page is the duplication the whole pack exists to avoid. Where the same bytes have several URLs the
 // plainest one wins — no percent escapes, then the shortest — because that is the one a person can read.
-function selectDirEntries(site, entries) {
+function selectDirEntries(site, entries, ocr = null) {
   const allow = rx(site.allow), deny = rx(site.deny), allowPdf = rx(site.allowPdf);
-  const rows = [];
+  const okPdf = key => allowPdf.length > 0 && allowPdf.some(r => r.test(key)) && !deny.some(r => r.test(key));
+  const rows = [], skipped = [];
   for (const e of entries || []) {
     if (Number(e.status) !== 200) continue;
     const ct = String(e.contentType || '').split(';')[0].trim().toLowerCase();
@@ -712,7 +815,16 @@ function selectDirEntries(site, entries) {
     const key = dirKeyOf(e.url);
     if (!key || key === '/') continue;
     if (isHtml) { if (!allow.some(r => r.test(key)) || deny.some(r => r.test(key))) continue; }
-    else { if (!allowPdf.length || !allowPdf.some(r => r.test(key)) || deny.some(r => r.test(key))) continue; }
+    else { if (!okPdf(key)) continue; }
+    // The National Bank uploads the same directive under several names: sixteen of the 156 OCR'd files are
+    // byte-identical to another and the sidecar says which copy to keep. A duplicate is not a document, and
+    // it is reported rather than dropped in silence.
+    const o = ocr && ocr.byKey.get(key);
+    if (o && o.duplicate_of) {
+      const kept = ocr.byStem.get(String(o.duplicate_of));
+      skipped.push({ url: e.url, why: 'ocr duplicate of ' + ((kept && kept.title) || o.duplicate_of) });
+      continue;
+    }
     rows.push({ e, key, kind: isHtml ? 'html' : 'pdf' });
   }
   const plainest = (a, b) => {
@@ -726,12 +838,29 @@ function selectDirEntries(site, entries) {
     bySha.set(sha, r); byKey.set(r.key, r);
   }
   const keep = [...byKey.values()];
+  // Four of these documents are in no harvest row this importer can use: the Money Laundering proclamation,
+  // the National Payment System amendment, the 2025 NBE proclamation and ONPS/09/2023 are 16 to 47 MB and the
+  // harvester refused them at its own 15 MB cap, leaving a row with a null status and no file. They were
+  // fetched again by hand and exist here only as OCR text, so the sidecar's own row is the entry. allowPdf
+  // still decides: a sidecar does not let a document in through the back door.
+  if (ocr) {
+    const have = new Set(keep.map(r => r.key));
+    for (const o of ocr.rows) {
+      const key = dirKeyOf(o.url);
+      if (!key || key === '/' || have.has(key) || o.duplicate_of || !okPdf(key)) continue;
+      let u; try { u = new URL(o.url); } catch (err) { continue; }
+      if (u.hostname !== site.host) continue;
+      have.add(key);
+      keep.push({ e: { url: o.url, title: o.title, file: null, fetchedAt: o.generatedAt || '' },
+        key, kind: 'pdf', ocrOnly: true });
+    }
+  }
   // maxPages is applied by fetchDir AFTER the duplicate texts have gone, so a site's budget counts documents
   // rather than URLs; maxPdfs is applied here, because opening a PDF costs a subprocess and the selection is
   // an explicit list rather than a pattern.
   const html = keep.filter(r => r.kind === 'html').sort((a, b) => (a.key < b.key ? -1 : 1));
   const pdf = keep.filter(r => r.kind === 'pdf').sort((a, b) => (a.key < b.key ? -1 : 1)).slice(0, Number(site.maxPdfs) || 0);
-  return { html, pdf };
+  return { html, pdf, skipped };
 }
 
 // The M-PESA transaction fee table is not in any HTML page: the site's own calculator fetches it from the
@@ -754,14 +883,18 @@ function tariffDocFrom(json, cfg) {
 
 // One harvested site, start to finish. Returns { pages, failed } in exactly the shape fetchSite returns, so
 // everything downstream — stripPackBoilerplate, splitThin, writePack — cannot tell the two apart.
-function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfText, limit = 0 } = {}) {
+function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfText, limit = 0,
+  ocrMaxChars = OCR_MAX_CHARS } = {}) {
   const { dir, entries } = readDirManifest(root, site);
-  const sel = selectDirEntries(site, entries);
+  const ocr = readOcrManifest(dir);
+  const sel = selectDirEntries(site, entries, ocr);
   const htmlRows = limit ? sel.html.slice(0, limit) : sel.html;
   const pdfRows = limit ? [] : sel.pdf;
   log('[' + tag + '] ' + site.id + ': ' + entries.length + ' entries in the harvest manifest, '
-    + htmlRows.length + ' pages and ' + pdfRows.length + ' pdfs selected');
-  const out = [], failed = [];
+    + htmlRows.length + ' pages and ' + pdfRows.length + ' pdfs selected'
+    + (ocr ? ' (' + ocr.rows.length + ' of them read by OCR, ' + (sel.skipped || []).length
+      + ' refused as duplicate uploads)' : ''));
+  const out = [], failed = [...(sel.skipped || [])];
   for (const r of htmlRows) {
     let ex;
     try { ex = extract(fs.readFileSync(path.join(dir, r.e.file), 'utf8'), { titleSuffix: site.titleSuffix }); }
@@ -784,14 +917,39 @@ function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfT
   }
   for (let i = 0; i < pdfRows.length; i++) {
     const r = pdfRows[i];
-    let text = '';
-    try { text = readPdf(path.join(dir, r.e.file)); }
-    catch (err) { failed.push({ url: r.e.url, why: 'pdftotext: ' + String(err.message).split('\n')[0].slice(0, 50) }); continue; }
-    text = String(text || '').replace(/\f/g, '\n').replace(/[ \t]+$/gm, '').replace(/\n{3,}/g, '\n\n').trim();
-    if (text.replace(/\s+/g, ' ').trim().length < MIN_CHARS) { failed.push({ url: r.e.url, why: 'no_text_layer' }); continue; }
-    const t = cleanTitle(r.e.title || '', site.titleSuffix) || pdfSlugOf(r.key);
-    out.push({ url: r.e.url, path: r.key, siteId: site.id, title: t, text,
-      lang: langFor(site, r.key), fetchedAt: String(r.e.fetchedAt || '').slice(0, 10), isPdf: true });
+    // The OCR text wins wherever there is any, and pdftotext is not called at all for that file: pdftotext
+    // returning nothing is the whole reason the file was OCR'd. This is a preference, not a fallback.
+    const o = ocr && ocr.byKey.get(r.key);
+    let bodies = null, prov = null, titleRaw = '';
+    if (o) {
+      let raw = '';
+      try { raw = fs.readFileSync(path.join(ocr.dir, o.file), 'utf8'); }
+      catch (err) { failed.push({ url: r.e.url, why: 'ocr text unreadable: ' + String(o.file) }); continue; }
+      bodies = splitOcrParts(raw, ocrMaxChars);
+      prov = { textSource: 'ocr', ocrQuality: o.ocr_quality || '', ocrPages: o.pages == null ? null : o.pages };
+      titleRaw = ocrTitleOf(o.title);
+    } else if (r.ocrOnly) {
+      failed.push({ url: r.e.url, why: 'selected from the ocr manifest but its text is missing' }); continue;
+    } else {
+      let text = '';
+      try { text = readPdf(path.join(dir, r.e.file)); }
+      catch (err) { failed.push({ url: r.e.url, why: 'pdftotext: ' + String(err.message).split('\n')[0].slice(0, 50) }); continue; }
+      bodies = [String(text || '')];
+      prov = { textSource: 'pdf', ocrQuality: '', ocrPages: null };
+      titleRaw = cleanTitle(r.e.title || '', site.titleSuffix);
+    }
+    const t = (site.pdfTitles && site.pdfTitles[r.key]) || titleRaw || pdfSlugOf(r.key);
+    for (let n = 0; n < bodies.length; n++) {
+      const text = String(bodies[n] || '').replace(/\f/g, '\n').replace(/[ \t]+$/gm, '').replace(/\n{3,}/g, '\n\n').trim();
+      if (text.replace(/\s+/g, ' ').trim().length < MIN_CHARS) {
+        failed.push({ url: r.e.url, why: o ? 'ocr text too thin' + (bodies.length > 1 ? ' (part ' + (n + 1) + ')' : '') : 'no_text_layer' });
+        continue;
+      }
+      out.push({ url: r.e.url, path: r.key, siteId: site.id, title: t, text,
+        lang: o ? ocrLangOf(text) : langFor(site, r.key),
+        fetchedAt: String(r.e.fetchedAt || '').slice(0, 10), isPdf: true,
+        part: bodies.length > 1 ? n + 1 : 1, parts: bodies.length, ...prov });
+    }
     if ((i + 1) % 10 === 0) log('[' + tag + '] ' + site.id + ' pdfs: ' + (i + 1) + '/' + pdfRows.length);
   }
   // A hand-shaped document, named by the registry, built from a captured JSON rather than from a page.
@@ -838,7 +996,9 @@ function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfT
   const prefix = site.slugPrefix === false ? '' : (site.slugPrefix || site.id) + '-';
   const pages = assignSlugs(out, site, { needsName: NEEDS_NAME_DIR,
     slugOf: p => p.fixedSlug || (p.isPdf ? pdfSlugOf(p.path) : null) })
-    .map(p => ({ ...p, slug: prefix + p.slug }));
+    // Parts of one long document share a path, so they are named after the document and then numbered. Part
+    // one keeps the document's own name, which is the name a gold set, a citation and a git diff already use.
+    .map(p => ({ ...p, slug: prefix + p.slug + (p.parts > 1 && p.part > 1 ? '-part-' + p.part : '') }));
   // Two documents with one filename is one document silently lost. The rule-made slugs cannot clash (the
   // lengthening loop sees to that), but two PDFs uploaded under the same basename in different months can, and
   // so can a hand-named slug that repeats one. Stop rather than overwrite.
@@ -960,6 +1120,7 @@ module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugF
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, clearMissed, writePack,
   makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR,
   dirKeyOf, pdfSlugOf, readPdfText, readDirManifest, selectDirEntries, tariffDocFrom, fetchDir, DIR_ROOT,
+  readOcrManifest, ocrTitleOf, splitOcrParts, ocrLangOf, OCR_MAX_CHARS,
   langOfText, ethiopicCount, AM_FLOOR,
   PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR };
 
