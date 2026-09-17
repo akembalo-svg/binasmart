@@ -354,6 +354,25 @@ function fill(tpl, vars) {
   return String(tpl || '').replace(/\{(\w+)\}/g, (m, k) => (vars[k] === undefined ? m : vars[k]));
 }
 
+// ---------- personal numbers ----------
+// The rule this serves: no full personal phone number enters the public repository. A registry site that sets
+// `maskPhones` is one whose pages carry people's mobile numbers - mols.gov.et publishes the manager's mobile
+// for each of the 1,222 licensed overseas employment agencies - and a register like that, once it sits in a
+// git repository, is a harvestable list rather than a page somebody has to visit. The number is not deleted:
+// the last four digits stay, so a person holding that number can still confirm an entry is theirs, and the
+// institution's own page still carries it in full.
+//
+// An Ethiopian mobile is distinguishable from an office line, and this uses that rather than guessing.
+// Mobiles are 09x (Ethio Telecom) and 07x (Safaricom Ethiopia), so in international form they are 251
+// followed by 9 or 7. Landlines are 011, 022, 025, 033, 034, 046, 047, 057, 058 - 251 followed by 1, 2, 3, 4
+// or 5 - so a switchboard like +251 11 551 0033 and a short code like 8482 or 6333 are left exactly as the
+// institution published them. Separators inside the number are allowed (+251-913-236-054), and a digit on
+// either side disqualifies the match, so a longer reference number is never half-masked.
+const MOBILE_RE = /(?<![0-9])(\+?251)[ -]?([79](?:[ -]?[0-9]){8})(?![0-9])/g;
+const MASKED_RE = /251\u2022{5}[0-9]{4}/;
+const maskPhones = text => String(text == null ? '' : text)
+  .replace(MOBILE_RE, m => '251' + '\u2022'.repeat(5) + m.replace(/[^0-9]/g, '').slice(-4));
+
 function header(page, site, today, pack, amh) {
   const heads = pageHeadings(page.text, page.title);
   const lang = page.lang || langFor(site, page.path);
@@ -384,7 +403,15 @@ function header(page, site, today, pack, amh) {
   // text by that paragraph, and anything after it would be read back as part of the page.
   const ocrNote = page.textSource === 'ocr' ? fill(pack && pack.ocrNoteEn, vars) || null : null;
   const ocrNoteAm = page.textSource === 'ocr' ? fill(pack && pack.ocrNoteAm, vars) || null : null;
-  return [what, am, (amh && amh.summaryAm) || null, ocrNoteAm, ocrNote, en].filter(Boolean).join('\n\n');
+  // A page whose numbers were masked says so, on the page, where a reader meets a number ending in bullets -
+  // and only if this page actually holds one, so a site that sets maskPhones does not stamp the note on the
+  // twenty pages of its own that never carried a mobile number. Like ocrNote it goes BEFORE the Source
+  // paragraph, because bodyText() finds the page text by that paragraph and anything after it is read back
+  // as part of the page.
+  const masked = !!(site && site.maskPhones && MASKED_RE.test(page.text || ''));
+  const maskNote = masked ? fill(pack && pack.maskNoteEn, vars) || null : null;
+  const maskNoteAm = masked ? fill(pack && pack.maskNoteAm, vars) || null : null;
+  return [what, am, (amh && amh.summaryAm) || null, ocrNoteAm, ocrNote, maskNoteAm, maskNote, en].filter(Boolean).join('\n\n');
 }
 
 function renderDoc(page, site, { today, firstFetched, pack, amHeaders } = {}) {
@@ -434,6 +461,10 @@ const normUrl = u => String(u || '').replace(/\/+$/, '');
 // Returns { added, changed, unchanged, gone, goneWhy, missed, revived } as lists of slugs.
 function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, amHeaders } = {}) {
   fs.mkdirSync(dir, { recursive: true });
+  // Masked BEFORE anything hashes or writes it, so contentHash is the hash of what the repository actually
+  // holds and the unchanged-check below compares like with like. Re-fetching the same page therefore reads
+  // as unchanged, rather than as 805 numbers that moved.
+  if (site && site.maskPhones) for (const d of docs) d.text = maskPhones(d.text);
   const day = today || new Date().toISOString().slice(0, 10);
   const r = { added: [], changed: [], unchanged: [], gone: [], goneWhy: {}, missed: [], revived: [], reformatted: [] };
   const deadUrls = new Map();
@@ -527,7 +558,10 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
     const old = fs.readFileSync(file, 'utf8');
     const meta = readMeta(old);
     const site = sites.get(meta.source_name);
-    const text = site ? bodyText(old) : null;
+    let text = site ? bodyText(old) : null;
+    // A re-render re-applies the mask, and that is what makes it durable: a document that reached the
+    // repository with full numbers is masked by the next --rerender rather than quietly kept as it is.
+    if (text && site.maskPhones) text = maskPhones(text);
     // A document no site in this registry wrote, one this renderer did not produce, and one whose page is
     // already gone are all left exactly as they are - and counted, because silence would be worse.
     if (!site || !text || meta.status === 'gone') { r.skipped.push(slug); continue; }
@@ -1177,7 +1211,7 @@ function forPack(pack) {
 }
 
 module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract, langFor, fill, slugPrefixOf,
-  readAmHeaders, amEntry, ungroundedFigures, digitRuns, bodyText, sameDoc, rerenderPack, AM_HEADERS,
+  readAmHeaders, amEntry, ungroundedFigures, digitRuns, maskPhones, MOBILE_RE, bodyText, sameDoc, rerenderPack, AM_HEADERS,
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, clearMissed, writePack,
   makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR,
   dirKeyOf, pdfSlugOf, readPdfText, readDirManifest, selectDirEntries, tariffDocFrom, fetchDir, DIR_ROOT,

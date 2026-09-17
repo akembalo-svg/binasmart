@@ -8,7 +8,7 @@ lang: "en"
 status: "live"
 fetchedAt: "2026-09-17"
 lastChecked: "2026-09-17"
-contentHash: "77124d22b094bba30a2dd19f1f5e31db96a57f4d"
+contentHash: "918706291ef85b6b2a7719096abd3404c3ec35c4"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
@@ -20,6 +20,10 @@ Ethiopian Investment Commission — about — Our Team | Ethiopian Investment Co
 በአማርኛ፦ ስለ ኮሚሽኑና ሕትመቶች — Our Team | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
 ይህ ገጽ የኢትዮጵያ ኢንቨስትመንት ኮሚሽንን ከፍተኛ አመራሮች እና ዳይሬክተሮችን ያስተዋውቃል። ከኮሚሽነሩ ዶ/ር ዘለቀ ተመስገን ጀምሮ የኢንቨስትመንት ኦፕሬሽንስ፣ ልዩ የኢኮኖሚ ዞንና ማስተዋወቅ፣ የኢንቨስትመንት ማስተዋወቅ፣ የኢንቨስትመንት መረጃና ቴክኖሎጂ፣ የአንድ ማዕከል አገልግሎት፣ የፖሊሲ ምርምርና የኢንቨስትመንት ምቹ ሁኔታ ማሻሻያ፣ የኢንቨስትመንት ፕሮጀክቶች ማመቻቸትና ድህረ-እንክብካቤ፣ የኢንቨስትመንት ስምምነቶችና የህግ ጉዳዮች፣ የኢንቨስትመንት ማበረታቻዎች፣ እቅድና ግምገማ፣ የኢንዱስትሪ ፓርክ አንድ ማዕከል አገልግሎት ማስተባበሪያ፣ የሴቶች፣ ህፃናትና ወጣቶች፣ የኢንዱስትሪ ፓርክ ደንብ፣ የሰው ሃብት ልማትና አስተዳደር፣ የወጪ ንግድ ማመቻቸት፣ አጠቃላይ አገልግሎትና ንብረት አስተዳደር፣ የኢንዱስትሪ ፓርክ ማመቻቸት፣ ፋይናንስ፣ የኢንቨስትመንት ማስተዋወቅ እና የግዥ ዳይሬክቶሬቶችን ያካትታል። ገጹ የእያንዳንዱን ዳይሬክተር ስም፣ የኢሜል አድራሻ እና የስልክ ቁጥር ያቀርባል።
+
+በዚህ ገጽ ላይ ያሉት የግል የሞባይል ስልክ ቁጥሮች ተሸፍነዋል፤ የሚታየው የመጨረሻዎቹ አራት አሃዞች ብቻ ናቸው (251•••••NNNN)። ቢና የሰዎችን የሞባይል ቁጥሮች ሙሉ በሙሉ አያሳትምም። ቁጥሩ የራሱ የሆነ ሰው የራሱን ረድፍ ለይቶ ማወቅ ይችላል። የመሥሪያ ቤት የስልክ መስመሮችና አጭር ቁጥሮች አልተነኩም። ተቋሙ ባሳተመው መልኩ ሙሉ ቁጥሮች ያሉበት ገጽ በhttps://investethiopia.gov.et/about-eic/our-team ይገኛል።
+
+Phone numbers on this page are masked. A personal mobile number is written 251•••••NNNN - only its last four digits - because BinaSmart does not republish people's mobile numbers in full: a page of them inside a public repository is a harvestable list rather than a page somebody has to visit. Whoever holds a number can still recognise their own entry. Office lines and short codes are untouched. The page as the institution published it, every number complete, is at https://investethiopia.gov.et/about-eic/our-team.
 
 Source: https://investethiopia.gov.et/about-eic/our-team (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
@@ -79,7 +83,7 @@ One-Stop-Service Directorate
 
 Email: Ahmednur.Yusuf@eic.gov.et
 
-Phone: +251-913-236-054
+Phone: 251•••••6054
 
 Office: +251-115-519-684
 
@@ -99,7 +103,7 @@ Investment Projects Facilitation and Aftercare Directorate
 
 Email: tassew.negewo@eic.gov.et
 
-Phone: +251-911-379-382
+Phone: 251•••••9382
 
 Office: +251-115-558-115
 
@@ -119,7 +123,7 @@ Investment Incentives Directorate
 
 Email: Mulatu.Kibrit@eic.gov.et
 
-Phone: +251-911-820-626
+Phone: 251•••••0626
 
 Office: +251-115-580-758
 
@@ -139,7 +143,7 @@ Industrial Park One-Stop-Service Coordination Directorate
 
 Email: abraham.lemma@eic.gov.et
 
-Phone: +251-913-103-009
+Phone: 251•••••3009
 
 Office:
 
@@ -159,7 +163,7 @@ Industry Park Regulation Directorate
 
 Email: Yisake.Demeke@eic.gov.et
 
-Phone: +251-939-703-971
+Phone: 251•••••3971
 
 Office: +251-115-157-412
 
@@ -169,7 +173,7 @@ Human Resource Development and Administration Directorate
 
 Email: bezayit.temesgen@eic.gov.et
 
-Phone: +251-917-80-42-86
+Phone: 251•••••4286
 
 Office: +251-115-519-719
 
@@ -179,7 +183,7 @@ Export Facilitation Directorate
 
 Email: Samuel.assefa@eic.gov.et
 
-Phone: +251-911-400-365
+Phone: 251•••••0365
 
 Office:
 
@@ -199,7 +203,7 @@ Industry Park Facilitation Directorate
 
 Email: Anbessaw.Serebe@eic.gov.et
 
-Phone: +251-911-810-896
+Phone: 251•••••0896
 
 Office:
 
@@ -219,7 +223,7 @@ Investment Promotion Directorate
 
 Email: aschalew.tadesse@eic.gov.et
 
-Phone: +251-912-076-122
+Phone: 251•••••6122
 
 Office: +251-115-507-131
 
@@ -239,7 +243,7 @@ Public Relations Directorate
 
 Email: henok.solomon@eic.gov.et
 
-Phone: +251913088716
+Phone: 251•••••8716
 
 Office: +251-115-580-753
 
@@ -269,7 +273,7 @@ Investment Promotion Directorate
 
 Email: Addisalem.birhanu@eic.gov.et
 
-Phone: +251-913-336-250
+Phone: 251•••••6250
 
 Office: +251-115-547-771
 
@@ -289,7 +293,7 @@ Investment Projects Facilitation and Aftercare Directorate
 
 Email: tassew.negewo@eic.gov.et
 
-Phone: +251-911-379-382
+Phone: 251•••••9382
 
 Office: +251-115-558-115
 
@@ -299,7 +303,7 @@ Export Facilitation Directorate
 
 Email: Samuel.assefa@eic.gov.et
 
-Phone: +251-911-400-365
+Phone: 251•••••0365
 
 Office:
 
@@ -319,7 +323,7 @@ Investment Incentives Directorate
 
 Email: Mulatu.Kibrit@eic.gov.et
 
-Phone: +251-912-015-129
+Phone: 251•••••5129
 
 Office: +251-115-580-758
 
@@ -329,7 +333,7 @@ Industrial Park One-Stop-Service Coordination Directorate
 
 Email: abraham.lemma@eic.gov.et
 
-Phone: +251-913-103-009
+Phone: 251•••••3009
 
 Office:
 
@@ -339,7 +343,7 @@ Industry Park Facilitation Directorate
 
 Email: Anbessaw.Serebe@eic.gov.et
 
-Phone: +251-911-810-896
+Phone: 251•••••0896
 
 Office:
 
@@ -349,7 +353,7 @@ Public Relations Directorate
 
 Email: henok.solomon@eic.gov.et
 
-Phone: +251913088716
+Phone: 251•••••8716
 
 Office: +251-115-580-753
 
@@ -377,7 +381,7 @@ Bole Lemi I Industrial Park
 
 Email: Anwar.Kemal@eic.gov.et
 
-Phone: +251-923-569-999
+Phone: 251•••••9999
 
 Office:
 
@@ -387,7 +391,7 @@ Kombolcha Industrial Park
 
 Email: yonimulugeta12@gmail.com
 
-Phone: +251-914-605-167
+Phone: 251•••••5167
 
 Office: +251-338-514-293
 
@@ -397,7 +401,7 @@ Bole Lemi II Industrial Park
 
 Email: abraham.lemma@eic.gov.et
 
-Phone: +251-913-103-009
+Phone: 251•••••3009
 
 Office:
 
@@ -407,7 +411,7 @@ Bahir Dar Industrial Park
 
 Email: nataniye.kassa@eic.gov.et
 
-Phone: +251-984-878-894
+Phone: 251•••••8894
 
 Office:
 
@@ -417,7 +421,7 @@ Kilinto Industrial Park
 
 Email: abraham.lemma@eic.gov.et
 
-Phone: +251-913-103-009
+Phone: 251•••••3009
 
 Office:
 
@@ -427,7 +431,7 @@ Debre Birhan Industrial Park
 
 Email: antenehlegesse26@gmail.com
 
-Phone: +251-913-894-820
+Phone: 251•••••4820
 
 Office:
 
@@ -437,7 +441,7 @@ Hawassa Industrial Park
 
 Email: belayhmtessema@gmail.com
 
-Phone: +251-916-825-493
+Phone: 251•••••5493
 
 Office: +251-462-122-039
 
@@ -447,7 +451,7 @@ Eastern Industrial Park
 
 Email: yosef.sultan@eic.gov.et
 
-Phone: +251-919-379-993
+Phone: 251•••••9993
 
 Office: +251-114-320-879
 
@@ -457,7 +461,7 @@ Mekelle Industrial Park
 
 Email: Goitom.Gebrekidan@eic.gov.et
 
-Phone: +251-914-732-657
+Phone: 251•••••2657
 
 Office: +251-342-403-957
 
@@ -467,7 +471,7 @@ Huajan Industrial Park
 
 Email: Abiyot.Ashagre@eic.gov.et
 
-Phone: +251-911-899-381
+Phone: 251•••••9381
 
 Office:
 
@@ -477,7 +481,7 @@ Dire Dawa Industrial Park
 
 Email: binyamfikru@yahoo.com
 
-Phone: +251-915-751-288
+Phone: 251•••••1288
 
 Office:
 
@@ -487,7 +491,7 @@ George Glory Industrial Park
 
 Email: metemateklu@gmail.com
 
-Phone: +251-912-689-870
+Phone: 251•••••9870
 
 Office:
 
@@ -497,7 +501,7 @@ Adama Industrial Park
 
 Email: abdelagebo@gmail.com
 
-Phone: +251-911-382-444
+Phone: 251•••••2444
 
 Office:
 
@@ -507,7 +511,7 @@ Vogue Industrial Park
 
 Email: leykunb2005@gmail.com
 
-Phone: +251-921-903-834
+Phone: 251•••••3834
 
 Office:
 
@@ -517,7 +521,7 @@ Jimma Industrial Park
 
 Email: mulugetaayana74@gmail.com
 
-Phone: +251-912-076-122
+Phone: 251•••••6122
 
 Office: +251-115-507-131
 
@@ -527,6 +531,6 @@ CCECC Dire Dawa Industrial Park
 
 Email: binyam.fikiru@eic.gov.et
 
-Phone: +251-915-751-288
+Phone: 251•••••1288
 
 Office:

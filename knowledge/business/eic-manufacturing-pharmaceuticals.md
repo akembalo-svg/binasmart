@@ -8,7 +8,7 @@ lang: "en"
 status: "live"
 fetchedAt: "2026-09-17"
 lastChecked: "2026-09-17"
-contentHash: "44e12559cf8e975901d73824c828d839f4cc206a"
+contentHash: "4094e6661728093e1cef5d5f62d4c5e49c65ed83"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
@@ -20,6 +20,10 @@ Ethiopian Investment Commission — sectors — Pharmaceuticals | Ethiopian Inve
 በአማርኛ፦ የኢንቨስትመንት ዘርፎች — Pharmaceuticals | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
 ይህ ገጽ በኢትዮጵያ የፋርማሲዩቲካል ዘርፍ ስላለው የኢንቨስትመንት ዕድሎች ያብራራል። የኢትዮጵያ የፋርማሲዩቲካል ገበያ 1 ቢሊዮን ዶላር ይገመታል፣ እና 85% የሚሆነው አቅርቦት ከውጭ የሚገባ ነው። ባለፉት 5 ዓመታት የፋርማሲዩቲካል ፍላጎት በአማካይ 15% አድጓል፣ በ2025 ወደ 1.8 ቢሊዮን ዶላር እና በ2030 ወደ 4 ቢሊዮን ዶላር ይደርሳል ተብሎ ይጠበቃል።
+
+በዚህ ገጽ ላይ ያሉት የግል የሞባይል ስልክ ቁጥሮች ተሸፍነዋል፤ የሚታየው የመጨረሻዎቹ አራት አሃዞች ብቻ ናቸው (251•••••NNNN)። ቢና የሰዎችን የሞባይል ቁጥሮች ሙሉ በሙሉ አያሳትምም። ቁጥሩ የራሱ የሆነ ሰው የራሱን ረድፍ ለይቶ ማወቅ ይችላል። የመሥሪያ ቤት የስልክ መስመሮችና አጭር ቁጥሮች አልተነኩም። ተቋሙ ባሳተመው መልኩ ሙሉ ቁጥሮች ያሉበት ገጽ በhttps://investethiopia.gov.et/key-sectors/manufacturing/pharmaceuticals ይገኛል።
+
+Phone numbers on this page are masked. A personal mobile number is written 251•••••NNNN - only its last four digits - because BinaSmart does not republish people's mobile numbers in full: a page of them inside a public repository is a harvestable list rather than a page somebody has to visit. Whoever holds a number can still recognise their own entry. Office lines and short codes are untouched. The page as the institution published it, every number complete, is at https://investethiopia.gov.et/key-sectors/manufacturing/pharmaceuticals.
 
 Source: https://investethiopia.gov.et/key-sectors/manufacturing/pharmaceuticals (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
@@ -73,11 +77,11 @@ The Ethiopian Investment Commission is providing all necessary services to inves
 
 Related publication: Invest in Ethiopia’s Pharmaceutical Manufacturing Sector
 
-Mr. Tariku GetachewInvestment Promotion Directorate +251922874914
+Mr. Tariku GetachewInvestment Promotion Directorate 251•••••4914
 
 Tariku.Getachew@eic.gov.et
 
-Mebrahtom GebreyesusIndustrial Parks Division +251919450078
+Mebrahtom GebreyesusIndustrial Parks Division 251•••••0078
 
 Mebrahtom.Gebreyesus@eic.gov.et
 

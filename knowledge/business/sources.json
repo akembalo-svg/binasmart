@@ -12,6 +12,9 @@
     "disclaimerAm": "ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።",
     "headerEnTemplate": "Source: {url} (official {siteName} page, {langWord}), fetched {today}. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. {disclaimerEn} BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.",
     "headerAmTemplate": "ይህ ገጽ {fromAm} ኦፊሴላዊ ድረ-ገጽ {langWordAm} የተወሰደ ነው። {disclaimerAm}",
+    "maskNoteEn": "Phone numbers on this page are masked. A personal mobile number is written 251•••••NNNN - only its last four digits - because BinaSmart does not republish people's mobile numbers in full: a page of them inside a public repository is a harvestable list rather than a page somebody has to visit. Whoever holds a number can still recognise their own entry. Office lines and short codes are untouched. The page as the institution published it, every number complete, is at {url}.",
+    "maskNoteAm": "በዚህ ገጽ ላይ ያሉት የግል የሞባይል ስልክ ቁጥሮች ተሸፍነዋል፤ የሚታየው የመጨረሻዎቹ አራት አሃዞች ብቻ ናቸው (251•••••NNNN)። ቢና የሰዎችን የሞባይል ቁጥሮች ሙሉ በሙሉ አያሳትምም። ቁጥሩ የራሱ የሆነ ሰው የራሱን ረድፍ ለይቶ ማወቅ ይችላል። የመሥሪያ ቤት የስልክ መስመሮችና አጭር ቁጥሮች አልተነኩም። ተቋሙ ባሳተመው መልኩ ሙሉ ቁጥሮች ያሉበት ገጽ በ{url} ይገኛል።",
+    "_maskNote": "maskPhones on a site masks every Ethiopian MOBILE number in its rendered body - 251 followed by 9 or 7, the Ethio Telecom and Safaricom ranges - down to its last four digits, and leaves office lines (251 followed by 1 to 5) and short codes such as 8482 or 6333 alone. The note above is added only to a document that actually holds a masked number, so the twenty pages of a maskPhones site that never carried a mobile number are not stamped with it. It is set on mols, whose /agencies register carries the personal mobile of the manager of each of 1,222 licensed overseas employment agencies, and on eic, whose about-eic pages carry named officials direct mobiles. The full numbers stay in the harvest at /root/storage/packs/business-manual/, which is not in the repository, and on the institutions own pages.",
     "_headerNote": "Added on 2026-09-17, after the Task 5 fetch wrote 62 documents and not one of them carried the disclaimer or the Source line: the registry had the two disclaimers but neither template, and header() fills templates - a pack with no template renders no header sentence at all. Found by reading a document, not by reading a log."
   },
   "sites": [
@@ -192,6 +195,7 @@
     },
     {
       "id": "eic",
+      "maskPhones": true,
       "name": "Ethiopian Investment Commission",
       "nameAm": "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን",
       "host": "investethiopia.gov.et",
@@ -271,6 +275,7 @@
     },
     {
       "id": "mols",
+      "maskPhones": true,
       "name": "Ministry of Labour and Skills",
       "nameAm": "የሥራና ክህሎት ሚኒስቴር",
       "host": "mols.gov.et",

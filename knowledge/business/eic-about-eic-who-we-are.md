@@ -8,7 +8,7 @@ lang: "en"
 status: "live"
 fetchedAt: "2026-09-17"
 lastChecked: "2026-09-17"
-contentHash: "6b65da54b7d3785089bf3ff940ef4f916d8538af"
+contentHash: "70e1e0725b03130116aea37fd3233c4357825253"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
@@ -20,6 +20,10 @@ Ethiopian Investment Commission — about — Who We Are | Ethiopian Investment 
 በአማርኛ፦ ስለ ኮሚሽኑና ሕትመቶች — Who We Are | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
 የኢትዮጵያ ኢንቨስትመንት ኮሚሽን (EIC) የኢትዮጵያ ዋና የኢንቨስትመንት ማስተዋወቂያ እና ማመቻቻ ኤጀንሲ ሲሆን፣ በ1994 የተቋቋመ ራሱን የቻለ የመንግስት ተቋም ነው። ኮሚሽኑ ኢትዮጵያን ለውጭ ቀጥተኛ ኢንቨስትመንት (FDI) ማራኪ መዳረሻ እንድትሆን ያስተዋውቃል፣ ኢንቨስትመንቶችን ያመቻቻል እንዲሁም ለመንግስት ምክር ይሰጣል። እ.ኤ.አ. በ2025/26 የበጀት ዓመት ኢትዮጵያ 4.4 ቢሊዮን ዶላር የሚጠጋ የውጭ ቀጥተኛ ኢንቨስትመንት ስቧል።
+
+በዚህ ገጽ ላይ ያሉት የግል የሞባይል ስልክ ቁጥሮች ተሸፍነዋል፤ የሚታየው የመጨረሻዎቹ አራት አሃዞች ብቻ ናቸው (251•••••NNNN)። ቢና የሰዎችን የሞባይል ቁጥሮች ሙሉ በሙሉ አያሳትምም። ቁጥሩ የራሱ የሆነ ሰው የራሱን ረድፍ ለይቶ ማወቅ ይችላል። የመሥሪያ ቤት የስልክ መስመሮችና አጭር ቁጥሮች አልተነኩም። ተቋሙ ባሳተመው መልኩ ሙሉ ቁጥሮች ያሉበት ገጽ በhttps://investethiopia.gov.et/about-eic/who-we-are ይገኛል።
+
+Phone numbers on this page are masked. A personal mobile number is written 251•••••NNNN - only its last four digits - because BinaSmart does not republish people's mobile numbers in full: a page of them inside a public repository is a harvestable list rather than a page somebody has to visit. Whoever holds a number can still recognise their own entry. Office lines and short codes are untouched. The page as the institution published it, every number complete, is at https://investethiopia.gov.et/about-eic/who-we-are.
 
 Source: https://investethiopia.gov.et/about-eic/who-we-are (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
@@ -204,7 +208,7 @@ Investment Promotion Directorate
 
 Email: Addisalem.birhanu@eic.gov.et
 
-Phone: +251-913-336-250
+Phone: 251•••••6250
 
 Office: +251-115-547-771
 
@@ -224,7 +228,7 @@ Investment Projects Facilitation and Aftercare Directorate
 
 Email: tassew.negewo@eic.gov.et
 
-Phone: +251-911-379-382
+Phone: 251•••••9382
 
 Office: +251-115-558-115
 
@@ -234,7 +238,7 @@ Export Facilitation Directorate
 
 Email: Ahmednur.yusuf@eic.gov.et
 
-Phone: +251-913-236-054
+Phone: 251•••••6054
 
 Office:
 
@@ -254,7 +258,7 @@ Investment Incentives Directorate
 
 Email: Mekonnen.melaku@eic.gov.et
 
-Phone: +251-927-551-098
+Phone: 251•••••1098
 
 Office: +251-115-580-758
 
@@ -274,7 +278,7 @@ Industry Park Facilitation Directorate
 
 Email: Tariku.getachew@eic.gov.et
 
-Phone: +251-922-874-914
+Phone: 251•••••4914
 
 Office:
 
@@ -284,7 +288,7 @@ Public Relations Directorate
 
 Email: Arage,Kibret@eic.gov.et
 
-Phone: +251900828775
+Phone: 251•••••8775
 
 Office: +251-115-580-753
 

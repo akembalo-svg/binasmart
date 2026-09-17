@@ -8,7 +8,7 @@ lang: "en"
 status: "live"
 fetchedAt: "2026-09-17"
 lastChecked: "2026-09-17"
-contentHash: "07cf1a1c8d120dbba26eac6c3698729fe89cbcc3"
+contentHash: "ef74229f55e42b1c415684f3a162a46897fa6c75"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
@@ -20,6 +20,10 @@ Ethiopian Investment Commission — industrial-parks — Integrated Agro-industr
 በአማርኛ፦ የኢንዱስትሪ ፓርኮች — Integrated Agro-industrial Parks | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
 የኢትዮጵያ መንግስት በግብርና ማቀነባበሪያ ኢንዱስትሪ ውስጥ ያሉ ባለሀብቶችን ፍላጎት ለማሟላት ሶስት የተቀናጁ የግብርና ኢንዱስትሪ ፓርኮችን (IAIPs) አቋቁሟል። እነዚህ ፓርኮች በቡሬ፣ ይርጋለም እና ቡልቡላ የሚገኙ ሲሆን፣ ባለሀብቶች የጋራ መሠረተ ልማት፣ ሎጂስቲክስ እና አገልግሎቶችን እንዲጠቀሙ ያስችላሉ። ፓርኮቹ እንደ 50 ሜጋ ዋት የኤሌክትሪክ አቅርቦት በUS$0.045/kwh ታሪፍ እና 12,000 ካሬ ሜትር/ቀን የውሃ አቅርቦት በUS$0.57/ካሬ ሜትር/ወር ታሪፍ ያሉ መሠረተ ልማቶችን ያካተቱ ናቸው።
+
+በዚህ ገጽ ላይ ያሉት የግል የሞባይል ስልክ ቁጥሮች ተሸፍነዋል፤ የሚታየው የመጨረሻዎቹ አራት አሃዞች ብቻ ናቸው (251•••••NNNN)። ቢና የሰዎችን የሞባይል ቁጥሮች ሙሉ በሙሉ አያሳትምም። ቁጥሩ የራሱ የሆነ ሰው የራሱን ረድፍ ለይቶ ማወቅ ይችላል። የመሥሪያ ቤት የስልክ መስመሮችና አጭር ቁጥሮች አልተነኩም። ተቋሙ ባሳተመው መልኩ ሙሉ ቁጥሮች ያሉበት ገጽ በhttps://investethiopia.gov.et/key-sectors/special-economic-zones/integrated-agro-industrial-parks ይገኛል።
+
+Phone numbers on this page are masked. A personal mobile number is written 251•••••NNNN - only its last four digits - because BinaSmart does not republish people's mobile numbers in full: a page of them inside a public repository is a harvestable list rather than a page somebody has to visit. Whoever holds a number can still recognise their own entry. Office lines and short codes are untouched. The page as the institution published it, every number complete, is at https://investethiopia.gov.et/key-sectors/special-economic-zones/integrated-agro-industrial-parks.
 
 Source: https://investethiopia.gov.et/key-sectors/special-economic-zones/integrated-agro-industrial-parks (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
@@ -103,7 +107,7 @@ Investors looking to set up their ventures inside IAIPs can do so in two ways:
 
 2. Build sheds on available lands inside IAIPs. Currently, the cost of leasing land for construction is US$1.2/square-meter annually.
 
-Mebrahatom Gebreyesus+251922874914
+Mebrahatom Gebreyesus251•••••4914
 
 Mebrahtom.Gebreyesus@eic.gov.et
 
