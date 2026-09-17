@@ -300,3 +300,172 @@ New and changed code:
 ---
 
 *Generated on the live server, 2026-09-17. Every figure in this report is quoted from a log, a result file or a document read on disk; where something did not work, it is written down here rather than left out.*
+
+---
+
+# §15b addendum — the date is in the context now, and the gold set can see the new sources
+
+**Date:** 2026-09-17 · **Task:** 15b, the two jobs §9 of this report handed on: put the provenance where Bini can read it, and write the second gold batch.
+**Commits:** `a2edc77` *Say where every retrieved page came from, and when it was fetched* · `136997c` *Ask the banking pack thirty questions about the sources it just gained*.
+**Logs and result files:** `/root/bini-eval/banking-manual/t15b-live.log` (the live answers), `/root/bini-eval/t15b-bench-*.log` and the four result files named in §15b.5.
+
+---
+
+## 15b.1 The Source line
+
+§7.3 found the root cause: the chunk header is `<title> › <heading>`, so 26 of the 27 chunks of `nbe-foreign-exchange.md` carry no date, and the guardrail was asking for something the context did not hold. §9.2 proposed putting the date in the chunk header. **It is not in the chunk header** — that would re-hash and re-embed all 18,611 chunks of every source, and it is not necessary. It is built at context-build time instead.
+
+`knowledge/index.js` → `contextFor` now prints one line at the top of each page's block:
+
+```
+[1] National Bank of Ethiopia — FX — https://nbe.gov.et/fx
+Source: National Bank of Ethiopia — https://nbe.gov.et/fx — fetched 2026-09-16 (checked 2026-09-17)
+How much foreign currency can a traveler receive from banks for each travel…
+```
+
+- **Where it is built:** `sourceLine(hit, { root, am })` in `knowledge/index.js`, from `docMeta(root, source, slug)`, which reads the document's front matter off disk and caches it per process. `fetchedAt` + `lastChecked` for a curated pack document (`ops/packs/fetch-pack.js`), `fetched` for a crawled page (`knowledge/crawl.js`). Never from the network.
+- **Amharic context:** `ምንጭ፦ <publisher> — <url> — የተወሰደበት ቀን 2026-09-16 (የተረጋገጠበት 2026-09-17)`.
+- **Once per PAGE**, not per chunk: the second chunk of a page already named does not repeat it. Measured on the live index for the travel-allowance question: blocks `[1]`, `[2]`, `[4]` and `[6]` carry a Source line and `[3]` and `[5]`, which are second chunks of pages already named, do not.
+- **Nothing is invented.** A page whose front matter holds no url and no date gets `Source: <title>` and stops. `(checked …)` is left out when it is the same day as the fetch. A slug that is not a plain file name reads nothing at all.
+- **Untouched:** chunking, hashes, embeddings, `hybridScore`, the +0.06 tie-breaker, the reranker. The numbered header line is byte-identical, so `assistant/kit/sources.js` still parses the "From:" line — `test/kit/sources.test.js` proves it.
+- **Tests:** `test/knowledge-source-line.test.js`, 8 of them — the format, the Amharic variant, a crawled page's front matter, the no-metadata case, the path-traversal refusal, and a fake chunk set through the real `contextFor` asserting the line appears exactly once for a page that contributes two chunks.
+
+### The second half of the fix, which was not a prompt problem
+
+§7.1 case 5 — the travel-allowance answer with no date — did not fix itself when the date arrived in the context. The reason was mechanical and is the same class of bug as "check my balance" a day earlier: **`isBankingQuestion("what is the NBE rule on how many dollars I can take abroad?")` was false.** `nbe` was in no list, `National Bank of Ethiopia` was in no list, and `dollars` is one WEAK word, so `assistant/banking.js` GUARDRAILS — including *EVERY FIGURE YOU STATE CARRIES ITS DATE* — were never added to the prompt at all. The pack now holds 96 National Bank documents; `nbe`, `national bank of ethiopia`, `ብሔራዊ ባንክ`, `travel allowance`, `franco valuta` and `retention account` are HARD banking words as of this task, with the measurement in the comment beside them.
+
+The guardrail also now names the Amharic form of the Source line and says to copy the date digit for digit rather than convert it to another calendar or read one out of the page's prose.
+
+---
+
+## 15b.2 The five live answers, with the page's real `fetchedAt` beside each
+
+`POST /api/assistant`, header `x-binasmart-eval: 1`, 4 s apart, after `pm2 restart binasmart-api` (`/health` HTTP 200, `{"ok":true,"service":"binasmart-api"}`). The Amharic question was read out of `/root/bini-eval/banking-manual/t15a-live.log` by the runner, never retyped. Full log: `/root/bini-eval/banking-manual/t15b-live.log`.
+
+**1. `የባንክ ብድር ወለድ ስንት ነው?` — the dates are now the real ones.** *(pages: `coopbank-diaspora-banking-mortgage-home-loan.md`, `cbe-misalliance-terms-and-tarrif.md`, Zemen's loan pages — every one `fetchedAt: "2026-09-16"`)*
+
+> "**የኦሮሚያ ህብረት ስራ ባንክ** በ**16 መስከረም 2026** እንደታተመው መረጃ መሠረት ለዲያስፖራ የቤት ብድር በዓመት ከ8.5% ጀምሮ ይሰጣል። [4] … **የኢትዮጵያ ንግድ ባንክ** በ**16 መስከረም 2026** እንደታተመው መረጃ መሠረት ለተቀማጭ ሂሳቦች ከ7% እስከ 14% ወለድ ሲሰጥ … **ዘመን ባንክ** በ**16 መስከረም 2026** እንደታተመው መረጃ መሠረት የወለድ መጠን የሚወሰነው በብድር ዓይነት … መሆኑን ይገልጻል። [1]"
+
+In §7.1 this same question gave *3 መስከረም 2026* and *25 ነሐሴ 2026* — dates read off the pages' own text. Three figures, three institutions, three correct dates.
+
+**2. "can you check my balance" — refusal, warning, then the how-to, each figure dated.** *(`ethiotelecom-*` and `zemen-*`, `fetchedAt: "2026-09-16"`)*
+
+> "I can't directly check your bank balance or any personal account information … **never share your account number, card number, PIN, one-time codes (OTP), or passwords with anyone in a chat, even if they say they are from your bank. Banks will never ask you for your PIN or OTP.** … Ethio telecom's telebirr lets you check your airtime balance by dialing \*804# **as of 16 September 2026** [1, 2] … Zemen Bank … by dialing \*844# after registering at a service center, **as of 16 September 2026** [5]."
+
+**3. "what does telebirr charge to send 1,000 birr to another telebirr user?" — dated and linked; the figure is still stripped, by design.** *(`ethiotelecom-telebirr-telebirr-pricing.md`, `fetchedAt: "2026-09-16"`)*
+
+> "This is according to Ethio telecom's telebirr pricing page, as published on **16 September 2026**. You can see more details on their official pricing page: https://www.ethiotelecom.et/telebirr/telebirr-pricing/"
+
+The date is now the page's own (§7.1 had *17 September 2026*, a day it was not fetched). The missing figure is unchanged and is the grounding guard doing its job: the tariff prints `501 to 1500 | 4`, the string `1,000` is nowhere in it, and `[bini] dropped ungrounded 1,000 Birr` is in the error log. §9.3 still stands and this task did not loosen the guard.
+
+**4. "how much can I keep in M-PESA?" — the exact fetch date.** *(`mpesa-faqs.md`, `fetchedAt: "2026-09-16"`)*
+
+> "the maximum balance you can hold across all your accounts is **30,000 Birr**, and your daily transaction limit is also 30,000 Birr. This information is from Safaricom Ethiopia's M-PESA FAQ page, **as fetched on 2026-09-16**. … if you have multiple M-PESA accounts under your name, the 30,000 Birr balance limit is shared across all of them [2]."
+
+§7.1 gave *17 September 2026* for the same page. The Level-2 100,000 Birr cap is still not the figure Bini reaches for.
+
+**5. "what is the NBE rule on how many dollars I can take abroad?" — FIXED.** *(`nbe-foreign-exchange.md`, `fetchedAt: "2026-09-16"`, `lastChecked: "2026-09-17"`)*
+
+> "For personal travel outside Ethiopia … banks can provide up to **USD 5,000** … For business travel, this limit increases to **USD 10,000**. **This is according to the National Bank of Ethiopia's FX page, fetched on 2026-09-16** [1]. Additionally, if you have a foreign currency account, you can take up to USD 10,000 … up to 10% of the outstanding balance … per trip"
+
+In §7.1 this answer had every figure right and **no date anywhere**. It has one now, and it is the page's own.
+
+### Afiya and Asmat, non-emergency, still citing sources
+
+Neither route was called with anything resembling an emergency.
+
+- **Asmat**, "what documents do I need for a business licence?" — "**TIN** … A TIN is mandatory for obtaining a business license [3], and the licensing authority cannot issue a license without it, according to **Federal Tax Administration Proclamation No. 983/2016** [4]. … verify the most current list on etrade.gov.et [1]", closing with its own "not a lawyer" line. Numbered citations and a statute by number, as before.
+- **Dr Afiya**, "how much water should an adult drink a day?" — refuses the individual recommendation ("please consult a healthcare professional"), then cites what the corpus does hold: "**Food and Medicine Administration Proclamation No. 1112/2019** states that any pipe or bottled water supplier must ensure compliance with Ethiopian safety standards [2]", health-facility potable-water rules [1, 3, 4], free surveillance at health posts [6]. Closing disclaimer intact.
+
+---
+
+## 15b.3 Batch 2 — thirty questions
+
+20 Amharic, 10 English, `batch: 2` in `knowledge/banking/gold-spec.json`, all 90 verified by `ops/packs/build-gold.js --pack banking --check` **and** by reading each page body with the rendered header and the disclaimer stripped — the Task 8 trap, where the disclaimer's own words ("interest rates, fees, tariffs and exchange rates change") can satisfy the three-content-word check on their own.
+
+| source | questions | pages used |
+| --- | --- | --- |
+| Ethio telecom — telebirr | **16** (15 am, 1 en) | am pricing ×3 (cash-in, cash-out, telebirr→bank), send, withdraw, deposit, registration ×2 (requirements, Level 1 cap), international remittance, Endekise, Sanduq, Sinq, Mela, virtual Visa card, utility bills; English pricing ×1 (P2P band) |
+| National Bank of Ethiopia | **8** (5 am, 3 en) | `nbe-am-mandates-of-the-bank`, `nbe-am-monetary-policies`, `nbe-fcpe-complaint`, `nbe-foreign-exchange` ×2 (travel allowance, exporter retention), `nbe-directive-no-nbe-int-13-2026-…`, `nbe-summary-of-banks-foreign-exchange-related-fees-and-charges`, `nbe-directive-no-fvd012026-import-on-franco-valuta`, `nbe-payment-instrument-issuers-system-operators` |
+| Safaricom Ethiopia — M-PESA | **6** (0 am, 6 en) | `mpesa-tariff` ×2 (send fee, withdrawal), `mpesa-faqs` (balance cap), `mpesa-retail-agent`, `mpesa-collect-payments` |
+
+**Fifteen of the twenty Amharic questions have a gold page that is itself Amharic** — the whole reason telebirr's 28 Amharic pages matter. **Three are deliberately Amharic questions whose only page is English** (the National Bank publishes its complaint procedure, its FX rules and its interest-rate directive in English only); they are kept rather than dropped so the cross-lingual gap stays measurable. M-PESA has no Amharic page at all, so all six of its questions are English — stating the absence rather than hiding it.
+
+One thing the batch found: **`test/banking/gold-banking.test.js` refused `mpesa-tariff` as a slug with no institution.** The test assumed a document's prefix is its registry `id`, and M-PESA's registry id is `safaricom` (the company) while its documents are `mpesa-…` (the product, and what a reader of a citation needs). The test now uses `slugPrefixOf` from the importer itself, so the rule is asserted in one place instead of two.
+
+---
+
+## 15b.4 The batch-1 repairs — two, not six
+
+§7.4 listed six questions the corpus moved. Both pages were read for each before deciding, and a label was moved only where the winner genuinely answers better.
+
+| question | old label | new label | why |
+| --- | --- | --- | --- |
+| **bk-004** (am, *"ከውጭ የተላከልኝን ገንዘብ በዲጂታል እንዴት እቀበላለሁ?"*) | `zemen-am-digital-remittance` | **`ethiotelecom-am-international-remittance`** | The question asks how to RECEIVE, and names no institution. Zemen's page is written from the sender's side — a diaspora customer paying with a Visa or Mastercard. telebirr's Amharic page opens by saying customers can receive money sent by relatives abroad on their phone, then gives the telebirr Remit steps. |
+| **bk-028** (am, *"ከውጭ ሀገር የተላከልኝን ገንዘብ የት እወስዳለሁ?"*) | `dashen-remittance` | **`ethiotelecom-am-international-remittance`** | Asked in Amharic, naming no bank. Dashen's page is English and answers for one bank's branches; telebirr's Amharic page answers the same question for the country's largest wallet. The Dashen page still answers bk-048, which names Dashen. |
+| bk-014 (am, cheque-book price) | `cbe-misalliance-terms-and-tarrif` | **kept** | What outranked it is a law on cheques and the P2M scheme rule book. Neither prices a cheque book. As shipped it is still rank 1. |
+| bk-018 (am, opening an account without a branch) | `cbe-misalliance-account-opening` | **kept** | telebirr's landing page is not a better answer to whether a BANK account can be opened remotely. |
+| bk-021 (am, overdraft) | `coopbank-…-overdraft-facility` | **kept** | Same page, same verdict; as shipped it improved to rank 1 on its own. |
+| bk-050 (en, diaspora FCY current account) | `dashen-diaspora-demand-current-account` | **kept** | `nbe-foreign-exchange` outranked it and is the regulator's rule, not the product. The Dashen page answers the question as asked. |
+
+Both repaired questions carry `label_replaced` and a `note` saying what moved and why.
+
+---
+
+## 15b.5 The benchmarks
+
+`node --env-file=.env ops/bini/rerun-retrieval-benchmark.js --gold <set>`, from `/root/bini-eval`, one at a time, on **18,611 chunks, 18,611 embedded**.
+
+**Banking, 90 questions.** Run twice, ten minutes apart, **identical in every slice** — `retrieval-gold-banking-20260917-052005.json` and `retrieval-gold-banking-20260917-053403.json`.
+
+| slice | n | retrieval | as shipped |
+| --- | ---: | ---: | ---: |
+| all questions | 90 | **71.1 %** | **72.2 %** |
+| Amharic | 60 | 65.0 % | 68.3 % |
+| English | 30 | 83.3 % | 80.0 % |
+| question + gold share a language | 58 | **86.2 %** | 84.5 % |
+| am question, gold only in English | 32 | **43.8 %** | 50.0 % |
+| batch 1 | 60 | 60.0 % | 61.7 % |
+|   batch 1 am / en | 40 / 20 | 52.5 % / 75.0 % | 57.5 % / 70.0 % |
+| **batch 2** | 30 | **93.3 %** | **93.3 %** |
+|   batch 2 am / en | 20 / 10 | 90.0 % / 100.0 % | 90.0 % / 100.0 % |
+
+The 60-question set read **56.7 % / 56.7 %** on this same corpus in §7.4. Batch 1 alone now reads 60.0 / 61.7 — three questions better as shipped, and the rows say which: **bk-004** and **bk-028**, the two repaired labels, and **bk-020**, where the reranker kept Dashen's business-loan page it had dropped in the §7.4 run. Nobody changed bk-020; it is the reranker's own variance, and it is named here rather than counted as a win.
+
+**The one number that matters, measured a second time.** Batch 2 scores 93.3 % and batch 1 scores 61.7 % in the same run, with the same retriever, on the same corpus. The difference is not the questions and not the retriever: fifteen of batch 2's twenty Amharic questions have a page in Amharic, against ten of batch 1's forty. The whole-set split says it again — 86.2 % when the question and its page share a language, 43.8 % when they do not. The design's 90.0 % target is met by batch 2 and by nothing else.
+
+**Travel, 60 questions.** `retrieval-gold-travel-20260917-052326.json`: **85.0 % retrieval / 81.7 % as shipped.** `retrieval-gold-travel-20260917-053102.json`: **85.0 % / 83.3 %.** Retrieval is identical in both, question for question, and identical to §7.4. The 1.7 points between them is exactly one question — **tv-015**, where the live reranker put the airline's online-check-in page in the top three instead of its check-in-process page, two sibling pages of the same section. `git status --short knowledge/travel` is empty. The accepted floor (85.0 / 83.3) is met by the second run and the honest reading is that "as shipped" carries ±1 question of reranker noise, which is now written into the new floor test rather than left in a report.
+
+**v3-agents, 111 questions** — `retrieval-gold-v3-agents-20260917-052600.json`: **96.4 % retrieval / 99.1 % as shipped**, with **Afiya 96.3 / 98.1** and **Asmat 96.5 / 100.0**, Amharic 94.5 / 98.6, English 100.0 / 100.0. Question for question what §7.4 measured. Both gates held.
+
+---
+
+## 15b.6 The floors, re-pinned
+
+`test/banking/benchmark-banking.test.js` — the two assertions §7.5 left red are now pinned to the 90-question measurement, with the history kept in the file: 55.0 → 61.7 (Amharic headers) → 56.7 (the corpus grew under a gold set that could not see the new sources) → **72.2**. The file asserts 90 questions, all-shipped ≥ 72.2 %, the Amharic slice (n = 60) ≥ 68.3 %, same-language > cross-lingual, and — new — batch 1 ≥ 61.7 % and batch 2 ≥ 93.3 % as separate floors, because one number over both hides which of them moved.
+
+`test/travel/benchmark-travel-floor.test.js` — **new**, because the airline pack had no floor test at all and §7.4's 86.7 → 85.0 fall had nothing to notice it. Retrieval ≥ 85.0 % (deterministic) and as shipped ≥ 81.7 % — the lower of the two runs, with the comment naming 83.3 % as the accepted number and tv-015 as the one question between them.
+
+`npm test`: **1,519 pass, 0 fail** (`/root/bini-eval/t15b-npmtest.log`). The suite started this task at 1,503 pass and 2 fail — 1,505 tests — so the fourteen new ones are this task's: eight for the Source line, four for the travel floor, one for the batch slices in the banking floor file and one for the batch fields in the gold spec. §7.5's two red assertions are green.
+
+---
+
+## 15b.7 What still misses, and why
+
+**Batch 2 misses two of thirty, and both were found by retrieval and dropped by the reranker.**
+
+- **bk-070** (am, *"በቴሌብር አካውንቴ ገንዘብ ሲያጥር ብድር ማግኘት እችላለሁ?"*, gold `ethiotelecom-am-endekise-overdraft`): the reranker preferred telebirr's *other* Amharic credit products — Wabi, Enderas — and the Awash Bank financial-service page. Four telebirr lending products in one language is a harder discrimination than the pack has faced before.
+- **bk-071** (am, *"የቴሌብር ሳንዱቅ ቁጠባ ወለድ ስንት ነው?"*, gold `ethiotelecom-am-sanduq-saving`): the reranker put the **English** Sanduq page first for an Amharic question. The right product, the wrong language, and the clearest single example of why this pack keeps measuring the language split.
+
+**Batch 1 misses 23 of 60**, and the classification of §7.4 stands: the gold set names one page, the pack holds six banks' versions of the same product, and an Amharic question lands on whatever Amharic page exists. Four of the six questions the corpus moved were left unrepaired on purpose (15b.4).
+
+**Unchanged and still open from §9:**
+
+1. **A figure inside a published band** (§9.3) — Bini still cannot say "1,000 birr costs 4 birr" from `501 to 1500 | 4`. Untouched here: it is a prompt change of its own, and the safer of the two options is still teaching Bini to answer with the band.
+2. **The 58 scanned directives** (§2.1, §9.4) — FCP-01-2020, the five currency-management directives, ONPS-02-2020 and ONPS/04/2021, the 2025 banking proclamation. Still photographs of paper; still a decision for Ibrahim about OCR.
+3. **The daily exchange rate** is still not in the pack (§3): `/exchange` renders in JavaScript.
+4. **tv-015 and tv-053** — the airline's Amharic questions that sit behind Amharic telebirr and check-in sibling pages. The floor test now records the variance rather than a report remembering it.
+
+---
+
+*Addendum generated on the live server, 2026-09-17. Every figure above is quoted from a log, a result file or a document read on disk; the two jobs that were not done — the band question and the OCR — are named here rather than left out.*
