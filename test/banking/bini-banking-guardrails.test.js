@@ -65,6 +65,10 @@ test('the balance clause says refuse FIRST and how-to only after', () => {
 
 test('the date must be the one written on the document, not today and not the bare year', () => {
   assert.match(GUARDRAILS, /Source: \.\.\. fetched YYYY-MM-DD/, 'it is told where to find the date');
+  // Task 15b put that line into the context for real (knowledge/index.js sourceLine), in both languages, so
+  // the prompt names the Amharic form too and says to copy the date rather than convert or re-read it.
+  assert.match(GUARDRAILS, /ምንጭ፦ \.\.\. የተወሰደበት ቀን YYYY-MM-DD/, 'the Amharic Source line is named as well');
+  assert.match(GUARDRAILS, /COPY IT AS IT IS WRITTEN/, 'the date is copied, not converted');
   assert.match(GUARDRAILS, /Not today's date, not the year on its own/);
   assert.match(GUARDRAILS, /read back every figure in it/, 'a check before sending, not a hope');
 });

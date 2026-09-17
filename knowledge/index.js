@@ -197,7 +197,9 @@ function readSources(root, only) {
   //              carry lang: am, so the default below is only a fallback. Curated rather than crawled for a
   //              concrete reason: the two tariff documents are 16,000 and 31,000 characters, and the web
   //              loader below truncates at 20,000 — one of them would lose half its table.
-  for (const [source, defaultLang] of [['law', 'am'], ['health', 'am'], ['eservices', 'en'], ['mor', 'am'], ['travel', 'en'], ['banking', 'en']]) {
+  // PACK_SOURCES is one list in one place: the loader below and the Source line's front-matter reader
+  // (docMetaFile) must agree about which sources are directories of markdown with front matter.
+  for (const [source, defaultLang] of PACK_SOURCES) {
     if (!want(source)) continue;
     const ldir = path.join(root, 'knowledge', source);
     let files = []; try { files = fs.readdirSync(ldir).filter(f => f.endsWith('.md')); } catch (e) { /* none yet */ }
@@ -368,6 +370,74 @@ function contextSearchOptions({ k = 6, prefer, exclude } = {}) {
   if (Array.isArray(exclude) && exclude.length) o.exclude = o.exclude.concat(exclude.map(String));
   if (Array.isArray(prefer)) o.prefer = prefer.map(String);
   return o;
+}
+
+// ---------- provenance: where a retrieved page came from, and when ----------
+// Bini's money guardrail (assistant/banking.js) tells it to put the institution and the page's date beside
+// every figure, and the grounding guard then strips any figure the context does not contain. Until 2026-09-17
+// the context contained no date to use: a chunk's header is "<title> › <heading>", and the measurement in
+// docs/superpowers/reports/2026-09-17-banking-manual-sources.md §7.3 is that 26 of the 27 chunks of
+// knowledge/banking/nbe-foreign-exchange.md carry no date at all, so a dated answer was Bini reading a date
+// out of the page's prose — and giving 3 መስከረም 2026 for a page fetched on 2026-09-16.
+//
+// So contextFor prints ONE line at the top of each page's block, read from the document's front matter on disk
+// at context-build time:
+//     Source: <source_name> — <url> — fetched YYYY-MM-DD (checked YYYY-MM-DD)
+// and in an Amharic context the same line with an Amharic label. Deliberately NOT in the chunk text: putting
+// the date in the chunk header would re-hash and re-embed all 18,611 chunks of every source, and this costs
+// nothing but a cached file read. Never from the network, and never invented — a page whose front matter holds
+// no url and no date gets its title and stops there.
+const PACK_SOURCES = [['law', 'am'], ['health', 'am'], ['eservices', 'en'], ['mor', 'am'], ['travel', 'en'], ['banking', 'en']];
+const PACK_DIRS = new Set(PACK_SOURCES.map(([s]) => s));
+const SAFE_SLUG = /^[A-Za-z0-9._\-/]+$/;
+const _docMeta = new Map();   // root\0source\0slug -> front matter | null
+
+// The file a (source, slug) was loaded from, or null for a source that is not a file with front matter
+// (guide, page, news, addis, llms, docs, skill). A slug is a file name the loaders wrote, but it arrives here
+// from the database, so it is checked rather than trusted: no '..', no backslash, no absolute path.
+function docMetaFile(root, source, slug) {
+  const s = String(slug || '');
+  if (!s || !SAFE_SLUG.test(s) || s.includes('..')) return null;
+  if (source === 'web') return s.includes('/') ? path.join(root, 'knowledge', 'web', s + '.md') : null;
+  if (PACK_DIRS.has(source)) return s.includes('/') ? null : path.join(root, 'knowledge', source, s + '.md');
+  return null;
+}
+// Front matter, cached per process. These files change only when a fetch or a crawl rewrites them, and both
+// are followed by an ingest and a pm2 restart, so a stale entry cannot outlive a deploy.
+function docMeta(root, source, slug) {
+  const key = (root || ROOT) + ' ' + source + ' ' + slug;
+  if (_docMeta.has(key)) return _docMeta.get(key);
+  const f = docMetaFile(root || ROOT, source, slug);
+  let meta = null;
+  if (f) {
+    try {
+      const raw = fs.readFileSync(f, 'utf8');
+      const fm = /^---\n([\s\S]*?)\n---\n/.exec(raw);
+      if (fm) { meta = {}; for (const line of fm[1].split('\n')) { const m = /^(\w+):\s*"?(.*?)"?\s*$/.exec(line); if (m) meta[m[1]] = m[2].replace(/\\"/g, '"'); } }
+    } catch (e) { meta = null; }   // a document that is gone is not an error here: the ingest collects its chunks
+  }
+  if (_docMeta.size > 4000) _docMeta.clear();
+  _docMeta.set(key, meta);
+  return meta;
+}
+// ops/packs/fetch-pack.js and ops/travel/fetch-airline.js write fetchedAt and lastChecked; knowledge/crawl.js
+// writes fetched. "(checked …)" is left out when it is the same day as the fetch, which it is for a page
+// fetched today: two identical dates read as noise, and the fetch date is the one the guardrail asks for.
+const SOURCE_WORDS = {
+  en: { label: 'Source:', fetched: 'fetched', checked: 'checked' },
+  am: { label: 'ምንጭ፦', fetched: 'የተወሰደበት ቀን', checked: 'የተረጋገጠበት' },
+};
+function sourceLine(hit, { root, am = false } = {}) {
+  const meta = docMeta(root || ROOT, hit.source, hit.slug) || {};
+  const w = am ? SOURCE_WORDS.am : SOURCE_WORDS.en;
+  const name = String(meta.source_name || hit.title || hit.slug || '').replace(/\s+/g, ' ').trim();
+  const url = String(meta.url || hit.url || '').trim();
+  const fetched = String(meta.fetchedAt || meta.fetched || '').trim();
+  const checked = String(meta.lastChecked || '').trim();
+  const bits = [name];
+  if (url) bits.push(url);
+  if (fetched) bits.push(w.fetched + ' ' + fetched + (checked && checked !== fetched ? ' (' + w.checked + ' ' + checked + ')' : ''));
+  return w.label + ' ' + bits.join(' — ');
 }
 
 // ---------- the index ----------
@@ -673,8 +743,18 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
       // voice examples are chosen for register, not for whether they answer the question.
       const hits = await search(m, contextSearchOptions({ k, prefer, exclude }));
       if (hits.length) {
-        const lines = hits.map((h, i) => '[' + (i + 1) + '] ' + h.title + (h.url ? ' — ' + h.url : '') + '\n' + h.text.replace(/\n{2,}/g, '\n'));
-        blocks.push('## Relevant BinaSmart knowledge (facts here override anything you remember; cite the page link when useful)\n' + lines.join('\n\n'));
+        // The numbered header line is untouched — assistant/kit/sources.js parses it for the "From:" line —
+        // and the Source line sits under it, once per PAGE: two chunks of one page are one page, and saying
+        // where it came from twice would only spend tokens.
+        const named = new Set();
+        const lines = hits.map((h, i) => {
+          const key = h.source + '/' + h.slug;
+          const src = named.has(key) ? '' : sourceLine(h, { root: root || ROOT, am }) + '\n';
+          named.add(key);
+          return '[' + (i + 1) + '] ' + h.title + (h.url ? ' — ' + h.url : '') + '\n' + src + h.text.replace(/\n{2,}/g, '\n');
+        });
+        blocks.push('## Relevant BinaSmart knowledge (facts here override anything you remember; cite the page link when useful; '
+          + 'each page\'s Source line gives the publisher and the date that page was fetched — that is the date to state)\n' + lines.join('\n\n'));
       }
     }
     if (om && styleK > 0) {
@@ -692,5 +772,5 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   return { load, ingest, search, contextFor, health, embedPendingGemini, embedPendingLocal, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
+module.exports = { makeKnowledge, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, docMeta, docMetaFile, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
   LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled };

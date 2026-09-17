@@ -23,6 +23,14 @@ const HARD = [
   'interest-free banking', 'interest free banking', 'islamic banking', 'murabaha', 'mudarabah', 'wadiah',
   'diaspora account', 'foreign currency account', 'treasury bill', 'capital market', 'stock exchange',
   'deposit insurance', 'cheque book', 'bank statement', 'bank tariff', 'bank charges',
+  // The regulator, by name, and the three things customers ask it about. Added 2026-09-17 (Task 15b) because
+  // "what is the NBE rule on how many dollars I can take abroad?" was NOT a banking question: `nbe` was in no
+  // list, `National Bank of Ethiopia` was in no list, and `dollars` on its own is one WEAK word. So the money
+  // guardrails — including EVERY FIGURE YOU STATE CARRIES ITS DATE — were never added to the prompt at all,
+  // and the answer gave USD 5,000 and USD 10,000 with a link and no date, which §7.1 of the 15a report
+  // recorded as an unexplained prompt failure. It was the same mechanical cause as "check my balance".
+  // The pack now holds 96 National Bank documents; its name is as hard a banking word as `bank` itself.
+  'nbe', 'national bank of ethiopia', 'ብሔራዊ ባንክ', 'travel allowance', 'franco valuta', 'retention account',
 ];
 // Another BinaSmart service, or another knowledge source, owns the question — unless a HARD word says
 // otherwise. `ግብር`, `tax`, `vat` and `ተ.እ.ታ` are here because tax is knowledge/law's and Asmat's: a VAT
@@ -105,7 +113,11 @@ const GUARDRAILS = '\n\n## Money questions — what you may and may not do\n'
   + 'rates change without notice; say so, and tell them to confirm with the institution. If the pack does not '
   + 'hold the figure, say plainly that you do not have it — never estimate a rate, a fee or a limit from memory.\n'
   + '- The date to use is the one written in the document you are quoting, on its "Source: ... fetched YYYY-MM-DD" '
-  + 'line. Not today\'s date, not the year on its own, not a date from anywhere else. Before you send a money '
+  + 'line — in an Amharic context the same line reads "ምንጭ፦ ... የተወሰደበት ቀን YYYY-MM-DD". Since 2026-09-17 every '
+  + 'page in the knowledge block carries one, so there is always a date to give. COPY IT AS IT IS WRITTEN, '
+  + 'digit for digit, and do not convert it to another calendar or read a date out of the page\'s own prose: '
+  + 'the page may print the day a rule was signed, which is not the day this text was fetched. '
+  + 'Not today\'s date, not the year on its own, not a date from anywhere else. Before you send a money '
   + 'answer, read back every figure in it: if any one of them has no institution and no fetched date beside it, '
   + 'put them there or take the figure out.\n'
   + '- A LINK IS NOT A DATE. "You can find more details at https://nbe.gov.et/fx" does not tell the reader '

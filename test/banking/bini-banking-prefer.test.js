@@ -30,6 +30,11 @@ const BANKING = [
   'my debit card was swallowed by the ATM',
   'what is telebirr and how do its limits work?',
   'how do I complain about my bank?',
+  // 2026-09-17, Task 15b: the regulator by name. These were not recognised, so the money guardrails never
+  // reached the prompt and the travel-allowance answer gave USD 5,000 with a link and no date at all.
+  'what is the NBE rule on how many dollars I can take abroad?',
+  'what travel allowance does the National Bank of Ethiopia permit?',
+  'የብሔራዊ ባንክ መመሪያ ምን ይላል?',
 ];
 
 const NOT_BANKING = [
