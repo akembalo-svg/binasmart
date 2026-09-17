@@ -130,7 +130,13 @@ function assignSlugs(pages, site, { needsName = NEEDS_NAME, slugOf = null } = {}
     taken.set(s, p);
   }
   const list = [...pages].sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
-  for (const p of list) if (!(slugOf && slugOf(p)) && needsName.test(String(p.path)) && !named[p.path]) {
+  // A path with no last segment produces the EMPTY string by rule, and an empty slug is a document written as
+  // "<prefix>-.md" that nothing can cite. Two paths do it: the root path, which a harvested site may now take
+  // (etrade.gov.et's home page IS its catalogue), and a path that is nothing but a two-letter locale, like the
+  // National Bank's /am - which was found by running it and naming it in pathSlugs after the fact. It stops
+  // here now, for the same reason and with the same remedy as a percent-encoded path.
+  for (const p of list) if (!(slugOf && slugOf(p)) && !named[p.path]
+    && (needsName.test(String(p.path)) || !slugFor(String(p.path)))) {
     throw new Error('this path needs a name in the site pathSlugs table, it cannot be slugged by rule: ' + p.path);
   }
   const out = list.map(p => ({ ...p, slug: named[p.path] || (slugOf && slugOf(p)) || slugFor(p.path) }));
@@ -729,18 +735,25 @@ function ocrTitleOf(raw) {
 // Split at the form feeds the OCR run wrote between pages, never inside one. A part is filled until the next
 // page would take it past the cap. A single page longer than the cap goes into a part of its own and is left
 // whole: cutting a page in half is the one thing this function exists to prevent.
-function splitOcrParts(text, maxChars = OCR_MAX_CHARS) {
+function splitLongParts(text, maxChars = OCR_MAX_CHARS, sep = '\n') {
   const s = String(text == null ? '' : text);
   if (s.length <= maxChars) return [s];
   const parts = [];
   let cur = '';
-  for (const pg of s.split('\f')) {
-    if (cur && cur.length + 1 + pg.length > maxChars) { parts.push(cur); cur = pg; }
-    else cur = cur ? cur + '\f' + pg : pg;
+  for (const pg of s.split(sep)) {
+    if (cur && cur.length + sep.length + pg.length > maxChars) { parts.push(cur); cur = pg; }
+    else cur = cur ? cur + sep + pg : pg;
   }
   if (cur.trim()) parts.push(cur);
   return parts.length ? parts : [s];
 }
+// A scanned document is split at the form feed the OCR run wrote between pages; an HTML page has no pages, so
+// it is split at a line break instead, which is what keeps one agency's row in the mols register whole.
+const splitOcrParts = (text, maxChars = OCR_MAX_CHARS) => splitLongParts(text, maxChars, '\f');
+// The same ceiling as an OCR'd proclamation, for the same reason: past it a document is a library rather than
+// an answer. mols.gov.et/agencies is 177,222 characters of licensed overseas employment agencies and becomes
+// two documents, both citing the one page they came from.
+const HTML_MAX_CHARS = 120000;
 
 // The language of a scanned directive is a fact about its text, not about the folder it was uploaded to: the
 // National Bank's currency directives are written in Amharic and sit on the same /wp-content/uploads/ path as
@@ -818,9 +831,26 @@ function selectDirEntries(site, entries, ocr = null) {
     let u; try { u = new URL(e.url); } catch (err) { continue; }
     if (!hosts.has(u.hostname)) continue;                    // never another host, never a look-alike
     const key = dirKeyOf(e.url);
-    if (!key || key === '/') continue;
-    if (isHtml) { if (!allow.some(r => r.test(key)) || deny.some(r => r.test(key))) continue; }
-    else { if (!okPdf(key)) continue; }
+    // The root path is normally not a document: everywhere else it is a landing page whose content lives
+    // elsewhere. etrade.gov.et is the exception this pack found - its home page IS the catalogue of all
+    // thirteen services, 14,602 characters against 909 on the only other page that holds anything - so a site
+    // may say dirAllowRoot, and only a site that says it gets one.
+    if (!key || (key === '/' && !site.dirAllowRoot)) continue;
+    if (isHtml) {
+      if (!allow.some(r => r.test(key)) || deny.some(r => r.test(key))) continue;
+      // The harvester measured both of these before it wrote the manifest. 71 of the 187 pages harvested from
+      // mols.gov.et answer 200 with 173 KB of Elementor chrome and no body at all - 12 MB of shell the
+      // importer does not read again to discover what somebody already counted, and a counted reason is the
+      // difference between "the crawl missed it" and "the ministry never published anything there".
+      if (e.empty) {
+        skipped.push({ url: e.url, why: 'the harvest measured this page as empty: ' + String(e.emptyReason || 'no reason given').slice(0, 90) });
+        continue;
+      }
+      if (e.bodyChars != null && Number(e.bodyChars) < MIN_CHARS) {
+        skipped.push({ url: e.url, why: 'the harvest measured ' + Number(e.bodyChars) + ' characters of body text, under the ' + MIN_CHARS + ' floor' });
+        continue;
+      }
+    } else { if (!okPdf(key)) continue; }
     // The National Bank uploads the same directive under several names: sixteen of the 156 OCR'd files are
     // byte-identical to another and the sidecar says which copy to keep. A duplicate is not a document, and
     // it is reported rather than dropped in silence.
@@ -889,8 +919,21 @@ function tariffDocFrom(json, cfg) {
 // One harvested site, start to finish. Returns { pages, failed } in exactly the shape fetchSite returns, so
 // everything downstream — stripPackBoilerplate, splitThin, writePack — cannot tell the two apart.
 function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfText, limit = 0,
-  ocrMaxChars = OCR_MAX_CHARS } = {}) {
+  ocrMaxChars = OCR_MAX_CHARS, htmlMaxChars = HTML_MAX_CHARS } = {}) {
   const { dir, entries } = readDirManifest(root, site);
+  // motri.gov.et completes a TLS handshake and then presents a wildcard certificate for *.mint.gov.et that
+  // expired on 2026-08-23, so its bytes could only be read with verification turned off. That is a fact about
+  // where these documents came from, and a fact that lives only inside a harvest manifest is one that gets
+  // lost the first time somebody copies the folder. A harvest that records a relaxed handshake must be
+  // DECLARED by the registry entry, in the harvest's own words, and the run stops until it is.
+  const tlsSeen = [...new Set((entries || []).map(e => String(e.tls || '')).filter(Boolean))];
+  if (tlsSeen.length) log('[' + tag + '] ' + site.id + ': the harvest records tls: ' + tlsSeen.join(', '));
+  for (const t of tlsSeen.filter(v => /disabled|expired|unverified|insecure/i.test(v))) {
+    if (String(site.tls || '') !== t) {
+      throw new Error('the harvest for ' + site.id + ' was taken with tls=' + t
+        + ' and the registry does not say so; add tls: "' + t + '" to its entry before these bytes become documents');
+    }
+  }
   const ocr = readOcrManifest(dir);
   const sel = selectDirEntries(site, entries, ocr);
   const htmlRows = limit ? sel.html.slice(0, limit) : sel.html;
@@ -912,13 +955,26 @@ function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfT
     if (site.titleFrom === 'heading') {
       const h = (String(ex.text).match(/^#{1,3}[ \t]*(\S.*)$/m) || [])[1];
       if (h) title = h.replace(/\s+/g, ' ').trim().slice(0, 90);
+    } else if (site.titleFrom === 'manifest-heading' && r.e.heading) {
+      // Every route of the etrade application carries one <title>, "e-Trade Online Trade Registration &
+      // License System", and the heading a visitor actually reads is written into the DOM by the application.
+      // The rendered capture recorded it per page, so the document is named what the page calls itself.
+      title = String(r.e.heading).replace(/\s+/g, ' ').trim().slice(0, 90);
     }
     const declared = langFor(site, r.key);
     const lang = langOfText(declared, ex.text);
     if (lang !== declared) log('[' + tag + '] ' + site.id + ': ' + r.key + ' is on the ' + declared
       + ' tree but holds only ' + ethiopicCount(ex.text) + ' Ethiopic characters — recorded as ' + lang);
-    out.push({ url: r.e.url, path: r.key, siteId: site.id, title, text: ex.text,
-      lang, fetchedAt: String(r.e.fetchedAt || '').slice(0, 10), isPdf: false });
+    // One page can be too long to be one document: mols.gov.et/agencies is the register of 1,222 licensed
+    // overseas employment agencies, 177,222 characters of table. It is split exactly as a long OCR'd
+    // proclamation is, at a break that is never inside a row, and every part carries the page's own url so a
+    // citation still points at the one page the text is on.
+    const bodies = splitLongParts(ex.text, htmlMaxChars, '\n');
+    for (let n = 0; n < bodies.length; n++) {
+      out.push({ url: r.e.url, path: r.key, siteId: site.id, title, text: bodies[n],
+        lang, fetchedAt: String(r.e.fetchedAt || '').slice(0, 10), isPdf: false,
+        part: n + 1, parts: bodies.length });
+    }
   }
   for (let i = 0; i < pdfRows.length; i++) {
     const r = pdfRows[i];
@@ -1125,7 +1181,7 @@ module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugF
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, clearMissed, writePack,
   makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR,
   dirKeyOf, pdfSlugOf, readPdfText, readDirManifest, selectDirEntries, tariffDocFrom, fetchDir, DIR_ROOT,
-  readOcrManifest, ocrTitleOf, splitOcrParts, ocrLangOf, OCR_MAX_CHARS,
+  readOcrManifest, ocrTitleOf, splitOcrParts, splitLongParts, ocrLangOf, OCR_MAX_CHARS, HTML_MAX_CHARS,
   langOfText, ethiopicCount, AM_FLOOR,
   PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR };
 
