@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "_about": "Official sources for the BinaSmart business-life knowledge pack (the third sector pack; the method is design 2026-09-16-airline-travel-design.md section 1, the scope is design 2026-09-17-business-pack-design.md). ops/packs/fetch-pack.js --pack business reads this file and nothing else: it fetches each site the way `fetch` says, keeps only paths matching `allow` and not matching `deny`, waits crawlDelaySeconds between requests, and writes knowledge/business/<slug>.md. This pack INFORMS ONLY. No page that files, submits, logs in, pays or applies is ever fetched, because Bini must never look like a way to register a business or lodge a declaration. reach/checked are what was measured from this VPS AND from a laptop in the UAE on the stated date; a source we cannot reach is listed as manual with the measurement and with what its absence costs, not deleted. `deadHosts` records domains that do not resolve so nobody chases them again. `references` names what the repository already holds so the pack never fetches the same thing twice - the repository rule is one source or the other, never both.",
+  "_about": "Official sources for the BinaSmart business-life knowledge pack (the third sector pack; the method is design 2026-09-16-airline-travel-design.md section 1, the scope is design 2026-09-17-business-pack-design.md). Four of its sites - motri, mols, poessa and etrade - are `fetch: \"dir\"`: their bytes were harvested by hand on 2026-09-17 from machines where those hosts answer, into /root/storage/packs/business-manual/<host>/, and the harvest never enters the repository. ops/packs/fetch-pack.js --pack business reads this file and nothing else: it fetches each site the way `fetch` says, keeps only paths matching `allow` and not matching `deny`, waits crawlDelaySeconds between requests, and writes knowledge/business/<slug>.md. This pack INFORMS ONLY. No page that files, submits, logs in, pays or applies is ever fetched, because Bini must never look like a way to register a business or lodge a declaration. reach/checked are what was measured from this VPS AND from a laptop in the UAE on the stated date; a source we cannot reach is listed as manual with the measurement and with what its absence costs, not deleted. `deadHosts` records domains that do not resolve so nobody chases them again. `references` names what the repository already holds so the pack never fetches the same thing twice - the repository rule is one source or the other, never both.",
   "pack": {
     "id": "business",
     "generatedBy": "ops/packs/fetch-pack.js --pack business",
@@ -20,46 +20,156 @@
       "name": "Ministry of Trade and Regional Integration",
       "nameAm": "የንግድና ቀጣናዊ ትስስር ሚኒስቴር",
       "host": "motri.gov.et",
-      "fetch": "urls",
-      "urls": [
-        "https://motri.gov.et/",
-        "https://motri.gov.et/am"
-      ],
-      "discoverLinks": true,
-      "maxPages": 60,
+      "fetch": "dir",
+      "dir": "motri.gov.et",
+      "harvestedAt": "2026-09-17",
+      "tls": "expired-cert-verification-disabled",
+      "tlsNote": "The certificate was read directly before any content was fetched. It is EXPIRED, not wrong-host: CN=*.mint.gov.et, issued by DigiCert Global G2 TLS RSA SHA256 2020 CA1, notAfter 2026-08-23, and its 59-entry shared Ethiopian-government SAN bundle does cover both *.motri.gov.et and the bare motri.gov.et. A verifying handshake fails with exactly one error, certificate has expired, and no other. Verification was disabled for THIS HOST ONLY; mols.gov.et and www.poessa.gov.et were fetched with verification on. ops/packs/fetch-pack.js refuses to build a site whose harvest records a relaxed handshake unless the registry declares it, which is what the tls field above is.",
       "crawlDelaySeconds": 6,
-      "robots": "https://motri.gov.et/robots.txt - 200, 1586 bytes, the stock Drupal file (Disallow: /core/, /admin/, /user/...). No Crawl-delay is published, so the pack uses 6 s.",
-      "sitemapNote": "There is no sitemap. /sitemap.xml answers 200 with HTML (Drupal with no sitemap module); /wp-sitemap.xml and /sitemap_index.xml are 404. Measured 2026-09-17.",
-      "lang": "am",
+      "robots": "https://motri.gov.et/robots.txt - 200, the stock Drupal file, re-read during the harvest of 2026-09-17. It disallows /core/, /profiles/, /admin/, /comment/reply/, /filter/tips, /node/add/, /search/, /user/register, /user/password, /user/login, /user/logout and their /index.php/ twins. Nothing in this harvest is disallowed. No Crawl-delay is published, so the harvest paced at 6 s.",
+      "sitemapNote": "There is no sitemap. /sitemap.xml answers 200 with HTML (Drupal with no sitemap module); /wp-sitemap.xml and /sitemap_index.xml are 404, and /en/sitemap.xml and /am/sitemap.xml are Drupal soft-404s. Discovery was link-following from the home page, in both languages. Measured 2026-09-17.",
+      "lang": "en",
+      "langOverrides": [
+        {
+          "match": "^/am(/|$)",
+          "lang": "am"
+        }
+      ],
       "hasAmharic": true,
-      "langNote": "The most Amharic of the core sources. The home page extracted 2,904 characters of which 1,258 are Ethiopic (43 percent), opening with the ministry name in Amharic and the words for online trade registration. The site is served at /am with lang=am on the html element. Amharic pages get lang: am; English pages get lang: en; the importer measures the Ethiopic share and only ever demotes.",
+      "langNote": "The most Amharic of the core sources. The home page extracts 2,904 characters of which 1,258 are Ethiopic (43 per cent), opening with the ministry name in Amharic and the words for online trade registration. The Amharic side of the site lives under /am and the English under /en, so the language is decided by the path and then checked against the text: the importer measures the Ethiopic share and only ever demotes am to en. Of the 38 Amharic pages in the harvest, all carry over 500 Ethiopic characters.",
+      "titleSuffix": "\\s*\\|\\s*Motri\\s*$",
+      "maxPages": 60,
+      "maxPdfs": 80,
       "reach": "up",
       "checked": "2026-09-17",
-      "reachNote": "UP from the VPS and from the laptop on 2026-09-17, although knowledge/sources-am.json still records this host as `timeout` from 2026-09-14. Individual deep paths DO time out when guessed (/am/node and /am/content/business-registration both timed out), which is why discoverLinks is true: the paths come from the home page links, not from a guess. | 2026-09-17, Task 4: THE HOST ANSWERS NOTHING THAT VERIFIES A CERTIFICATE. motri.gov.et completes a TLS handshake and then presents a wildcard certificate for *.mint.gov.et which EXPIRED on 2026-08-23 - wrong name and 25 days out of date (openssl s_client, from the VPS). Node fetch refuses it in 0.6 s with `fetch failed`, which is NOT a timeout and must not be retried as one; curl says `SSL certificate problem: certificate has expired`; plain http://motri.gov.et/ does not answer at all. The 2,904-character reading above was taken with a client that does not verify. The pack will not disable certificate verification to read a government page, so this site fetches 0 documents until the certificate is renewed - at which point nothing here needs to change. OPEN DECISION for the plan owner: either it stays a fetched site that contributes nothing this week, or it moves to `manual` and goes into the Task 3 harvest brief, which would leave poessa as the only Amharic source and break test/business/sources.test.js line 158 as written.",
+      "reachNote": "UP from a workstation and DEAD from this VPS, both measured on 2026-09-17. The host completes a TLS handshake and then presents a wildcard certificate for *.mint.gov.et that expired on 2026-08-23; Node fetch refuses it in 0.6 s with `fetch failed`, which is NOT a timeout and must not be retried as one, and plain http://motri.gov.et/ does not answer at all. The pack will not disable certificate verification to read a government page, so this site fetched 0 documents while it was a network site. It is now built from the harvest instead. Individual deep paths also time out when guessed - /am/node and /am/content/business-registration both did - which is why the harvest followed the home page links rather than guessing.",
+      "why": "Reachable, and not by this server. Measured 2026-09-17: motri.gov.et presents an expired wildcard certificate (see tls and reachNote), so the fetcher refuses it and the site contributed nothing for as long as it was a `sitemap`/`urls` entry. Its 79 pages and 66 PDFs were harvested on 2026-09-17 from a workstation where the host answers, with certificate verification disabled for this host alone, and copied to /root/storage/packs/business-manual/motri.gov.et (81.0 MB, every file SHA256-verified, 0 failures, 0 empty pages). The harvest never enters the repository; only the documents this importer writes are committed.",
+      "costsUs": "Nothing that the harvest does not now cover for the trade counter: the commercial-registration, trade-licence and trade-name service pages in both languages, the directorate and regional-office lists, and 19 of the ministry own proclamations, regulations and directives. What is still missing is everything the ministry publishes only as a photograph of paper - 21 of the 66 harvested PDFs, including Proclamation 1150/2019 (0 characters) and the file named 1343 (395 characters of CamScanner) - and the two bilingual gazettes whose Amharic column is a legacy non-Unicode font. See pdfNoTextLayerNote.",
       "allow": [
-        "^/(am/)?(node/\\d+|content/|page/)",
-        "^/(am/)?(services|service|about|faq|faqs|guideline|guidelines|directive|directives|regulation|regulations|trade-registration|business-licen[cs]e|investment|export|import|standards|consumer)"
+        "^/(am|en)$",
+        "^/(am|en)/(about|accountableinstitutions|directorates|regionaloffices)$",
+        "^/(am|en)/service_category/[^/]+/view$",
+        "^/(am|en)/sector/[^/]+/resources$",
+        "^/en/resource_types/(guide|regulation|proclamations)$"
       ],
       "deny": [
-        "^/(am/)?(news|press|media|gallery|event|events|vacancy|vacancies|tender|tenders|blog|archive|taxonomy|comment|search|contact|user|admin|core)(/|$)",
-        "^/(am/)?\\d{4}/\\d{2}/",
-        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
+        "^/(am|en)/(news|press|media|gallery|events?|vacanc|tender|blog|archive|taxonomy|comment|search|contact|user|admin|core)(/|$)",
+        "^/(am|en)/(privacy-policy|terms-conditions|the-minister|state-ministers|structure|achievements|available-api|faq|partners|service_category|sector)$",
+        "^/am/resource_types/",
+        "^/(am|en)/\\d{4}/\\d{2}/",
+        "^/index\\.php/"
       ],
+      "allowPdf": [
+        "^/sites/default/files/resource/1026_%e1%88%9b%e1%89%a5%e1%88%ab%e1%88%aa%e1%8b%ab_%e1%8b%a8%e1%89%85%e1%89%a3%e1%89%b5_%e1%8a%a5%e1%88%85%e1%88%8e%e1%89%bd_%e1%8a%a5%e1%8a%93_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8b%a8%e1%89%80%e1%8c%a5%e1%89%b3_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5_%e1%88%a5%e1%88%ad%e1%8b%93%e1%89%b5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_%e1%89%81%e1%8c%a5%e1%88%ad_1026\\.pdf$",
+        "^/sites/default/files/resource/1026_%e1%8b%a8%e1%89%85%e1%89%a3%e1%89%b5_%e1%8a%a5%e1%88%85%e1%88%8e%e1%89%bd_%e1%8a%a5%e1%8a%93_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8b%a8%e1%89%80%e1%8c%a5%e1%89%b3_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5_%e1%88%a5%e1%88%ad%e1%8b%93%e1%89%b5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_%e1%89%81%e1%8c%a5%e1%88%ad_1026_2017_1\\.pdf$",
+        "^/sites/default/files/resource/529_%e1%8b%a8%e1%8a%a2_%e1%8d%8c_%e1%8b%b2_%e1%88%aa_%e1%8a%95%e1%8c%8d%e1%8b%b5_%e1%88%9a%e1%8a%92%e1%88%b5%e1%89%b4%e1%88%ad_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_529_2013_0\\.pdf$",
+        "^/sites/default/files/resource/547_%e1%8a%a0%e1%8c%88%e1%88%ad_%e1%8a%a0%e1%89%80%e1%8d%8d_%e1%88%b5%e1%89%b3%e1%8a%95%e1%8b%b3%e1%88%ad%e1%8b%b5_%e1%8b%a8%e1%8c%8d%e1%89%a5%e1%8b%93%e1%89%b5_%e1%88%9d%e1%88%ad%e1%89%b5_%e1%8c%a5%e1%88%98%e1%88%ad%e1%89%b3_%e1%88%88%e1%88%98%e1%8b%88%e1%88%b0%e1%8a%95%e1%8a%93_%e1%88%88%e1%88%9b%e1%88%b5%e1%8d%88%e1%8c%b8%e1%88%9d_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_0\\.pdf$",
+        "^/sites/default/files/resource/548_%e1%8b%a8%e1%8b%98%e1%88%ad%e1%8d%8d%e1%8d%a3_%e1%8b%a8%e1%88%99%e1%8b%ab_%e1%88%9b%e1%8a%85%e1%89%a0%e1%88%ab%e1%89%b5_%e1%8a%a5%e1%8a%93_%e1%8b%a8%e1%8b%98%e1%88%ad%e1%8d%8d_%e1%88%9b%e1%8a%85%e1%89%a0%e1%88%ab%e1%89%b5_%e1%88%9d%e1%8a%ad%e1%88%ad_%e1%89%a4%e1%89%b5_%e1%8a%a0%e1%8b%b0%e1%88%a8%e1%8c%83%e1%8c%80%e1%89%b5%e1%8d%a3_%e1%8b%b5%e1%8c%8b%e1%8d%8d_%e1%8a%a0%e1%88%b0%e1%8c%a3%e1%8c%a5%e1%8a%93_%e1%8a%ad%e1%89%b5%e1%89%b5%e1%88%8d_0\\.pdf$",
+        "^/sites/default/files/resource/588_%e1%8b%a8%e1%8a%a2%e1%89%b5%e1%8b%ae%e1%8c%b5%e1%8b%ab_%e1%8b%a8%e1%8b%b0%e1%88%a8%e1%8c%83%e1%8b%8e%e1%89%bd_%e1%8a%a4%e1%8c%80%e1%8a%95%e1%88%b2_%e1%8b%a8%e1%8a%a2%e1%8b%b0_%e1%88%9d%e1%88%8d%e1%8a%ad%e1%89%b5_%e1%8a%a0%e1%8c%a0%e1%89%83%e1%89%80%e1%88%9d_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_0\\.pdf$",
+        "^/sites/default/files/resource/863_2014_%e1%8b%a8%e1%89%81%e1%88%9d_%e1%8a%a5%e1%8a%95%e1%88%b5%e1%88%b3%e1%89%b5_%e1%8a%a4%e1%8a%ad%e1%88%b5%e1%8d%96%e1%88%ad%e1%89%b5_%e1%8b%9d%e1%89%85%e1%89%b0%e1%8a%9b_%e1%8b%a8%e1%88%98%e1%88%b8%e1%8c%ab_%e1%8b%8b%e1%8c%8b_%e1%88%88%e1%88%98%e1%8b%88%e1%88%b0%e1%8a%95_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab\\.pdf$",
+        "^/sites/default/files/resource/891_2014_Pulses_Transaction_Amendment_Directive_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5\\.pdf$",
+        "^/sites/default/files/resource/892_2014_Sesame_and_White_Peabeans_Amendment_Directive_%e1%8b%a8%e1%88%b0%e1%88%8a%e1%8c%a5%e1%8a%93_%e1%8a%90%e1%8c%ad\\.pdf$",
+        "^/sites/default/files/resource/904_2014_%e1%8b%a8%e1%8a%90%e1%8b%b3%e1%8c%85_%e1%8b%8d%e1%8c%a4%e1%89%b6%e1%89%bd_%e1%8b%a8%e1%88%a5%e1%88%ad%e1%8c%ad%e1%89%b5_%e1%8b%a8%e1%88%ad%e1%8a%ad%e1%8a%ad%e1%89%a5%e1%8a%93_%e1%8b%a8%e1%88%bd%e1%8b%ab%e1%8c%ad_%e1%8a%a0%e1%8d%88%e1%8d%83%e1%8d%80%e1%88%9d_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab\\.pdf$",
+        "^/sites/default/files/resource/905_2014_%e1%8a%90%e1%8b%b3%e1%8c%85%e1%8a%95_%e1%8a%a8%e1%8a%a9%e1%89%a3%e1%8a%95%e1%8b%ab%e1%8b%8e%e1%89%bd_%e1%89%a0%e1%89%80%e1%8c%a5%e1%89%b3_%e1%89%a0%e1%88%98%e1%8c%8d%e1%8b%9b%e1%89%b5_%e1%88%88%e1%88%9a%e1%8c%a0%e1%89%80%e1%88%99_%e1%89%b0%e1%89%8b%e1%88%9b%e1%89%b5_%e1%8b%a8%e1%8d%88%e1%89%83%e1%8b%b5_%e1%8a%a0%e1%88%b0%e1%8c%a3%e1%8c%a5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab\\.pdf$",
+        "^/sites/default/files/resource/906_2014_%e1%8b%a8%e1%8a%90%e1%8b%b3%e1%8c%85_%e1%88%9b%e1%8b%b0%e1%8b%ab_%e1%89%a0%e1%88%8c%e1%88%88%e1%89%a3%e1%89%b8%e1%8b%8d_%e1%8a%a8%e1%89%b0%e1%88%9e%e1%89%bd_%e1%8a%a5%e1%8a%93_%e1%8a%a0%e1%8a%a8%e1%89%a3%e1%89%a2%e1%8b%8e%e1%89%bd_%e1%8b%a8%e1%8a%90%e1%8b%b3%e1%8c%85_%e1%8b%a8%e1%89%bd%e1%88%ad%e1%89%bb%e1%88%ae_%e1%8d%88%e1%89%83%e1%8b%b5_%e1%8a%a0%e1%88%b0%e1%8c%a3%e1%8c%a5%e1%8a%93_%e1%8b%a8%e1%89%81%e1%8c%a5%e1%8c%a5%e1%88%ad\\.pdf$",
+        "^/sites/default/files/resource/935_2015_Business_Licensing_and_Post_Licensing_Inspection_Directive\\.pdf$",
+        "^/sites/default/files/resource/940_2015_%e1%8b%a8%e1%88%b2%e1%88%9a%e1%8a%95%e1%89%b6_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5%e1%8a%95_%e1%88%88%e1%88%98%e1%89%86%e1%8c%a3%e1%8c%a0%e1%88%ad_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab\\.pdf$",
+        "^/sites/default/files/resource/962_2015_%e1%8b%a8%e1%8c%a8%e1%8b%8d_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5%e1%8a%95_%e1%88%88%e1%88%98%e1%89%86%e1%8c%a3%e1%8c%a0%e1%88%ad_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab\\.pdf$",
+        "^/sites/default/files/resource/983_2016_Ethio_South_Sudan_Border_Trade_Directive\\.pdf$",
+        "^/sites/default/files/resource/983_2016_Explanatory_Note_Ethio_South_Sudan_Directive_PDF_Tir_27\\.pdf$",
+        "^/sites/default/files/resource/Pulses-Transaction-Council-of-Ministers-Regulation-No\\.377-2016_0\\.pdf$",
+        "^/sites/default/files/resource/proclamation-no-980_2016_0\\.pdf$"
+      ],
+      "allowPdfNote": "A list, never a pattern: every one of the 19 rules above names one file. 66 PDFs were harvested from /sites/default/files/resource/ and each was read with pdftotext -layout on 2026-09-17 before it was allowed. 21 returned under 400 characters and are photographs of paper (see pdfNoTextLayerNote). 2 returned a long text layer whose Amharic column is a legacy non-Unicode font: 392_2016 (Commercial Registration and Licensing Council of Ministers Regulation No. 392/2016) gives 74,603 characters of which 154 are Ethiopic, and the Electronic Transaction Proclamation No. 1205/2020 gives 59,372 of which ONE is Ethiopic; the rest is punctuation soup, and the pack does not import text it cannot read. 24 are the Ethiopia Commodity Exchange own revised rules and their eleven amendments, which this registry already places out of scope for v1 under outOfScope ecx.com.et. The 19 that remain are the ministry own trade-registration, licensing, standards, fuel, cement, salt, pulses, sesame, livestock and border-trade instruments.",
+      "pdfNoTextLayerNote": "Photographs of paper, measured with pdftotext -layout on 2026-09-17 and NOT imported, with the characters each returned: proclamation_1150_2019 (0), 461-2012 Regulation (0), 1343 CamScanner 01-10-2025 (395), the file named mmriya (32), CamScanner 11-03-2025 (54), 535/2013 foreign trade fair licensing (17), 536/2013 chambers of commerce (8), 538/2013 khat export to Djibouti (17), 550/2013 merger directive (30), 552/2013 basic commodities - sugar, palm oil, wheat and wheat flour (17), 555/2013 impurity limits for exported oilseeds and pulses (26), 556/2013 the Ethiopian business licence classification schedule (26), 586/2013 standards technical committee allowances (17), 587/2013 WTO membership and regional trade negotiations (17), 869/2014 livestock trading system (26), the salt trading amendment draft 962/2015 (87), the cement trading repeal notice (32), the Ethiopian Metrology Institute establishment regulation (142), the Ethiopian Conformity Assessment Enterprise re-establishment regulation (43), the Ethiopian Standards Institute service fees regulation (109) and the standards preparation and implementation proclamation (395). Three of these - 556/2013, the licence classification schedule, and 535/2013 and 869/2014 - are exactly what a shopkeeper asks about, and the pack cannot answer from them. They are candidates for OCR on the same terms as the 99 National Bank directives of banking Task 15c: the files are in the harvest, nothing was invented for any of them, and no OCR was run in this task.",
+      "pdfTitles": {
+        "/sites/default/files/resource/1026_%e1%88%9b%e1%89%a5%e1%88%ab%e1%88%aa%e1%8b%ab_%e1%8b%a8%e1%89%85%e1%89%a3%e1%89%b5_%e1%8a%a5%e1%88%85%e1%88%8e%e1%89%bd_%e1%8a%a5%e1%8a%93_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8b%a8%e1%89%80%e1%8c%a5%e1%89%b3_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5_%e1%88%a5%e1%88%ad%e1%8b%93%e1%89%b5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_%e1%89%81%e1%8c%a5%e1%88%ad_1026.pdf": "ማብራሪያ — የቅባት እህሎች እና የጥራጥሬ ምርቶች የቀጥታ ግብይት ሥርዓት መመሪያ ቁጥር 1026/2017",
+        "/sites/default/files/resource/1026_%e1%8b%a8%e1%89%85%e1%89%a3%e1%89%b5_%e1%8a%a5%e1%88%85%e1%88%8e%e1%89%bd_%e1%8a%a5%e1%8a%93_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8b%a8%e1%89%80%e1%8c%a5%e1%89%b3_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5_%e1%88%a5%e1%88%ad%e1%8b%93%e1%89%b5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_%e1%89%81%e1%8c%a5%e1%88%ad_1026_2017_1.pdf": "የቅባት እህሎች እና የጥራጥሬ ምርቶች የቀጥታ ግብይት ሥርዓት መመሪያ ቁጥር 1026/2017",
+        "/sites/default/files/resource/529_%e1%8b%a8%e1%8a%a2_%e1%8d%8c_%e1%8b%b2_%e1%88%aa_%e1%8a%95%e1%8c%8d%e1%8b%b5_%e1%88%9a%e1%8a%92%e1%88%b5%e1%89%b4%e1%88%ad_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_529_2013_0.pdf": "የኢ.ፌ.ዲ.ሪ ንግድ ሚኒስቴር የጥራጥሬ ምርቶች ግብይት መመሪያ ቁጥር 529/2013",
+        "/sites/default/files/resource/547_%e1%8a%a0%e1%8c%88%e1%88%ad_%e1%8a%a0%e1%89%80%e1%8d%8d_%e1%88%b5%e1%89%b3%e1%8a%95%e1%8b%b3%e1%88%ad%e1%8b%b5_%e1%8b%a8%e1%8c%8d%e1%89%a5%e1%8b%93%e1%89%b5_%e1%88%9d%e1%88%ad%e1%89%b5_%e1%8c%a5%e1%88%98%e1%88%ad%e1%89%b3_%e1%88%88%e1%88%98%e1%8b%88%e1%88%b0%e1%8a%95%e1%8a%93_%e1%88%88%e1%88%9b%e1%88%b5%e1%8d%88%e1%8c%b8%e1%88%9d_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_0.pdf": "አገር አቀፍ ስታንዳርድ የግብዓት ምርት ጥመርታ ለመወሰንና ለማስፈጸም የወጣ መመሪያ ቁጥር 547/2013",
+        "/sites/default/files/resource/548_%e1%8b%a8%e1%8b%98%e1%88%ad%e1%8d%8d%e1%8d%a3_%e1%8b%a8%e1%88%99%e1%8b%ab_%e1%88%9b%e1%8a%85%e1%89%a0%e1%88%ab%e1%89%b5_%e1%8a%a5%e1%8a%93_%e1%8b%a8%e1%8b%98%e1%88%ad%e1%8d%8d_%e1%88%9b%e1%8a%85%e1%89%a0%e1%88%ab%e1%89%b5_%e1%88%9d%e1%8a%ad%e1%88%ad_%e1%89%a4%e1%89%b5_%e1%8a%a0%e1%8b%b0%e1%88%a8%e1%8c%83%e1%8c%80%e1%89%b5%e1%8d%a3_%e1%8b%b5%e1%8c%8b%e1%8d%8d_%e1%8a%a0%e1%88%b0%e1%8c%a3%e1%8c%a5%e1%8a%93_%e1%8a%ad%e1%89%b5%e1%89%b5%e1%88%8d_0.pdf": "የዘርፍ፣ የሙያ ማኅበራት እና የዘርፍ ማኅበራት ምክር ቤት አደረጃጀት፣ ድጋፍ አሰጣጥና ክትትል መመሪያ ቁጥር 548/2013",
+        "/sites/default/files/resource/588_%e1%8b%a8%e1%8a%a2%e1%89%b5%e1%8b%ae%e1%8c%b5%e1%8b%ab_%e1%8b%a8%e1%8b%b0%e1%88%a8%e1%8c%83%e1%8b%8e%e1%89%bd_%e1%8a%a4%e1%8c%80%e1%8a%95%e1%88%b2_%e1%8b%a8%e1%8a%a2%e1%8b%b0_%e1%88%9d%e1%88%8d%e1%8a%ad%e1%89%b5_%e1%8a%a0%e1%8c%a0%e1%89%83%e1%89%80%e1%88%9d_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_0.pdf": "የኢትዮጵያ የደረጃዎች ኤጀንሲ የኢደ ምልክት አጠቃቀም መመሪያ ቁጥር 588/2013",
+        "/sites/default/files/resource/863_2014_%e1%8b%a8%e1%89%81%e1%88%9d_%e1%8a%a5%e1%8a%95%e1%88%b5%e1%88%b3%e1%89%b5_%e1%8a%a4%e1%8a%ad%e1%88%b5%e1%8d%96%e1%88%ad%e1%89%b5_%e1%8b%9d%e1%89%85%e1%89%b0%e1%8a%9b_%e1%8b%a8%e1%88%98%e1%88%b8%e1%8c%ab_%e1%8b%8b%e1%8c%8b_%e1%88%88%e1%88%98%e1%8b%88%e1%88%b0%e1%8a%95_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "የቁም እንስሳት ኤክስፖርት ዝቅተኛ የመሸጫ ዋጋ ለመወሰን የወጣ መመሪያ ቁጥር 863/2014",
+        "/sites/default/files/resource/891_2014_Pulses_Transaction_Amendment_Directive_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5.pdf": "የጥራጥሬ ምርቶች ግብይት (ማሻሻያ) መመሪያ ቁጥር 891/2014 — Pulses Transaction Amendment Directive",
+        "/sites/default/files/resource/892_2014_Sesame_and_White_Peabeans_Amendment_Directive_%e1%8b%a8%e1%88%b0%e1%88%8a%e1%8c%a5%e1%8a%93_%e1%8a%90%e1%8c%ad.pdf": "የሰሊጥ እና ነጭ ቦሎቄ ግብይት አፈጻጸም (ማሻሻያ) መመሪያ ቁጥር 892/2014 — Sesame and White Peabeans Amendment Directive",
+        "/sites/default/files/resource/904_2014_%e1%8b%a8%e1%8a%90%e1%8b%b3%e1%8c%85_%e1%8b%8d%e1%8c%a4%e1%89%b6%e1%89%bd_%e1%8b%a8%e1%88%a5%e1%88%ad%e1%8c%ad%e1%89%b5_%e1%8b%a8%e1%88%ad%e1%8a%ad%e1%8a%ad%e1%89%a5%e1%8a%93_%e1%8b%a8%e1%88%bd%e1%8b%ab%e1%8c%ad_%e1%8a%a0%e1%8d%88%e1%8d%83%e1%8d%80%e1%88%9d_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "የነዳጅ ውጤቶች የሥርጭት የርክክብና የሽያጭ አፈፃፀም መመሪያ ቁጥር 904/2014",
+        "/sites/default/files/resource/905_2014_%e1%8a%90%e1%8b%b3%e1%8c%85%e1%8a%95_%e1%8a%a8%e1%8a%a9%e1%89%a3%e1%8a%95%e1%8b%ab%e1%8b%8e%e1%89%bd_%e1%89%a0%e1%89%80%e1%8c%a5%e1%89%b3_%e1%89%a0%e1%88%98%e1%8c%8d%e1%8b%9b%e1%89%b5_%e1%88%88%e1%88%9a%e1%8c%a0%e1%89%80%e1%88%99_%e1%89%b0%e1%89%8b%e1%88%9b%e1%89%b5_%e1%8b%a8%e1%8d%88%e1%89%83%e1%8b%b5_%e1%8a%a0%e1%88%b0%e1%8c%a3%e1%8c%a5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "ነዳጅን ከኩባንያዎች በቀጥታ በመግዛት ለሚጠቀሙ ተቋማት የፈቃድ አሰጣጥ መመሪያ ቁጥር 905/2014",
+        "/sites/default/files/resource/906_2014_%e1%8b%a8%e1%8a%90%e1%8b%b3%e1%8c%85_%e1%88%9b%e1%8b%b0%e1%8b%ab_%e1%89%a0%e1%88%8c%e1%88%88%e1%89%a3%e1%89%b8%e1%8b%8d_%e1%8a%a8%e1%89%b0%e1%88%9e%e1%89%bd_%e1%8a%a5%e1%8a%93_%e1%8a%a0%e1%8a%a8%e1%89%a3%e1%89%a2%e1%8b%8e%e1%89%bd_%e1%8b%a8%e1%8a%90%e1%8b%b3%e1%8c%85_%e1%8b%a8%e1%89%bd%e1%88%ad%e1%89%bb%e1%88%ae_%e1%8d%88%e1%89%83%e1%8b%b5_%e1%8a%a0%e1%88%b0%e1%8c%a3%e1%8c%a5%e1%8a%93_%e1%8b%a8%e1%89%81%e1%8c%a5%e1%8c%a5%e1%88%ad.pdf": "የነዳጅ ማደያ በሌለባቸው ከተሞች እና አከባቢዎች የነዳጅ የችርቻሮ ፈቃድ አሰጣጥና የቁጥጥር መመሪያ ቁጥር 906/2014",
+        "/sites/default/files/resource/935_2015_Business_Licensing_and_Post_Licensing_Inspection_Directive.pdf": "የንግድ ምዝገባ፣ ፈቃድ እና ድኅረ ፈቃድ ኢንስፔክሽን መመሪያ ቁጥር 935/2015 — A Directive to Provide for Commercial Registration, Business Licensing and Post Licensing Inspection",
+        "/sites/default/files/resource/940_2015_%e1%8b%a8%e1%88%b2%e1%88%9a%e1%8a%95%e1%89%b6_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5%e1%8a%95_%e1%88%88%e1%88%98%e1%89%86%e1%8c%a3%e1%8c%a0%e1%88%ad_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "የሲሚንቶ ግብይትን ለመቆጣጠር የወጣ መመሪያ ቁጥር 940/2015",
+        "/sites/default/files/resource/962_2015_%e1%8b%a8%e1%8c%a8%e1%8b%8d_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5%e1%8a%95_%e1%88%88%e1%88%98%e1%89%86%e1%8c%a3%e1%8c%a0%e1%88%ad_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "የጨው ግብይትን ለመቆጣጠር የወጣ መመሪያ ቁጥር 962/2015",
+        "/sites/default/files/resource/983_2016_Ethio_South_Sudan_Border_Trade_Directive.pdf": "መመሪያ ቁጥር 983/2016 — ኢትዮጵያ እና ደቡብ ሱዳን የተፈራረሙትን የጠረፍ ንግድ ፕሮቶኮል ለማስፈጸም የወጣ መመሪያ",
+        "/sites/default/files/resource/983_2016_Explanatory_Note_Ethio_South_Sudan_Directive_PDF_Tir_27.pdf": "ማብራሪያ — የኢትዮጵያና የደቡብ ሱዳን የጠረፍ ንግድ መመሪያ ቁጥር 983/2016",
+        "/sites/default/files/resource/Pulses-Transaction-Council-of-Ministers-Regulation-No.377-2016_0.pdf": "Pulses Transaction Council of Ministers Regulation No. 377/2016 — የጥራጥሬ ምርቶች ግብይት የሚኒስትሮች ምክር ቤት ደንብ ቁጥር 377/2008",
+        "/sites/default/files/resource/proclamation-no-980_2016_0.pdf": "Commercial Registration and Business Licensing Proclamation No. 980/2016 — የንግድ ምዝገባና ፈቃድ አዋጅ ቁጥር 980/2008"
+      },
+      "pdfTitlesNote": "The harvest manifest carries no title for any PDF, and the ministry file names are Amharic percent escapes, so each document is named here by hand. Sixteen are the ministry own file name, decoded and cleaned, with the directive number as the file writes it. Three are titled from the document own first page, read on 2026-09-17: Proclamation 980/2016 prints COMMERCIAL REGISTRATION AND BUSINESS LICENSING PROCLAMATION beside የንግድ ምዝገባና ፈቃድ አዋጅ; Regulation 377/2016 prints PULSES TRANSACTION COUNCIL OF MINISTERS REGULATION; and 935/2015 prints A DIRECTIVE TO PROVIDE FOR ... POST LICENSING INSPECTION beside its Amharic title. Nothing here is a summary and no number is changed.",
+      "pathSlugs": {
+        "/am": "am-home",
+        "/en": "en-home",
+        "/am/about": "am-about",
+        "/am/accountableinstitutions": "am-accountable-institutions",
+        "/am/directorates": "am-directorates",
+        "/am/regionaloffices": "am-regional-offices",
+        "/am/sector/--1/resources": "am-sector-quality-infrastructure-resources",
+        "/am/sector/--2/resources": "am-sector-trade-system-licensing-resources",
+        "/am/sector/--3/resources": "am-sector-trade-integration-resources",
+        "/am/service_category/-/view": "am-commercial-registration",
+        "/am/service_category/--1/view": "am-trade-licence",
+        "/am/service_category/--2/view": "am-trade-name",
+        "/en/accountableinstitutions": "accountable-institutions",
+        "/en/regionaloffices": "regional-offices",
+        "/en/resource_types/guide": "resources-guide",
+        "/en/resource_types/proclamations": "resources-proclamations",
+        "/en/resource_types/regulation": "resources-regulation",
+        "/en/sector/quality-infrastructure-development-and-confirmation-/resources": "sector-quality-infrastructure-resources",
+        "/en/sector/trade-integration-and-export-promotion-/resources": "sector-trade-integration-resources",
+        "/en/sector/trade-integration-and-export-promotion-sector-/resources": "sector-trade-integration-sector-resources",
+        "/en/sector/trade-system-and-licensing-/resources": "sector-trade-system-licensing-resources",
+        "/en/service_category/commercial-registration/view": "commercial-registration",
+        "/en/service_category/trade-license/view": "trade-license",
+        "/en/service_category/trade-name/view": "trade-name",
+        "/sites/default/files/resource/1026_%e1%88%9b%e1%89%a5%e1%88%ab%e1%88%aa%e1%8b%ab_%e1%8b%a8%e1%89%85%e1%89%a3%e1%89%b5_%e1%8a%a5%e1%88%85%e1%88%8e%e1%89%bd_%e1%8a%a5%e1%8a%93_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8b%a8%e1%89%80%e1%8c%a5%e1%89%b3_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5_%e1%88%a5%e1%88%ad%e1%8b%93%e1%89%b5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_%e1%89%81%e1%8c%a5%e1%88%ad_1026.pdf": "directive-1026-2017-direct-trading-explanatory-note",
+        "/sites/default/files/resource/1026_%e1%8b%a8%e1%89%85%e1%89%a3%e1%89%b5_%e1%8a%a5%e1%88%85%e1%88%8e%e1%89%bd_%e1%8a%a5%e1%8a%93_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8b%a8%e1%89%80%e1%8c%a5%e1%89%b3_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5_%e1%88%a5%e1%88%ad%e1%8b%93%e1%89%b5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_%e1%89%81%e1%8c%a5%e1%88%ad_1026_2017_1.pdf": "directive-1026-2017-oilseeds-pulses-direct-trading",
+        "/sites/default/files/resource/529_%e1%8b%a8%e1%8a%a2_%e1%8d%8c_%e1%8b%b2_%e1%88%aa_%e1%8a%95%e1%8c%8d%e1%8b%b5_%e1%88%9a%e1%8a%92%e1%88%b5%e1%89%b4%e1%88%ad_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_529_2013_0.pdf": "directive-529-2013-pulses-trading",
+        "/sites/default/files/resource/547_%e1%8a%a0%e1%8c%88%e1%88%ad_%e1%8a%a0%e1%89%80%e1%8d%8d_%e1%88%b5%e1%89%b3%e1%8a%95%e1%8b%b3%e1%88%ad%e1%8b%b5_%e1%8b%a8%e1%8c%8d%e1%89%a5%e1%8b%93%e1%89%b5_%e1%88%9d%e1%88%ad%e1%89%b5_%e1%8c%a5%e1%88%98%e1%88%ad%e1%89%b3_%e1%88%88%e1%88%98%e1%8b%88%e1%88%b0%e1%8a%95%e1%8a%93_%e1%88%88%e1%88%9b%e1%88%b5%e1%8d%88%e1%8c%b8%e1%88%9d_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_0.pdf": "directive-547-2013-input-output-ratio",
+        "/sites/default/files/resource/548_%e1%8b%a8%e1%8b%98%e1%88%ad%e1%8d%8d%e1%8d%a3_%e1%8b%a8%e1%88%99%e1%8b%ab_%e1%88%9b%e1%8a%85%e1%89%a0%e1%88%ab%e1%89%b5_%e1%8a%a5%e1%8a%93_%e1%8b%a8%e1%8b%98%e1%88%ad%e1%8d%8d_%e1%88%9b%e1%8a%85%e1%89%a0%e1%88%ab%e1%89%b5_%e1%88%9d%e1%8a%ad%e1%88%ad_%e1%89%a4%e1%89%b5_%e1%8a%a0%e1%8b%b0%e1%88%a8%e1%8c%83%e1%8c%80%e1%89%b5%e1%8d%a3_%e1%8b%b5%e1%8c%8b%e1%8d%8d_%e1%8a%a0%e1%88%b0%e1%8c%a3%e1%8c%a5%e1%8a%93_%e1%8a%ad%e1%89%b5%e1%89%b5%e1%88%8d_0.pdf": "directive-548-2013-sector-associations-chambers",
+        "/sites/default/files/resource/588_%e1%8b%a8%e1%8a%a2%e1%89%b5%e1%8b%ae%e1%8c%b5%e1%8b%ab_%e1%8b%a8%e1%8b%b0%e1%88%a8%e1%8c%83%e1%8b%8e%e1%89%bd_%e1%8a%a4%e1%8c%80%e1%8a%95%e1%88%b2_%e1%8b%a8%e1%8a%a2%e1%8b%b0_%e1%88%9d%e1%88%8d%e1%8a%ad%e1%89%b5_%e1%8a%a0%e1%8c%a0%e1%89%83%e1%89%80%e1%88%9d_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab_0.pdf": "directive-588-2013-standards-mark",
+        "/sites/default/files/resource/863_2014_%e1%8b%a8%e1%89%81%e1%88%9d_%e1%8a%a5%e1%8a%95%e1%88%b5%e1%88%b3%e1%89%b5_%e1%8a%a4%e1%8a%ad%e1%88%b5%e1%8d%96%e1%88%ad%e1%89%b5_%e1%8b%9d%e1%89%85%e1%89%b0%e1%8a%9b_%e1%8b%a8%e1%88%98%e1%88%b8%e1%8c%ab_%e1%8b%8b%e1%8c%8b_%e1%88%88%e1%88%98%e1%8b%88%e1%88%b0%e1%8a%95_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "directive-863-2014-livestock-export-price",
+        "/sites/default/files/resource/891_2014_Pulses_Transaction_Amendment_Directive_%e1%8b%a8%e1%8c%a5%e1%88%ab%e1%8c%a5%e1%88%ac_%e1%88%9d%e1%88%ad%e1%89%b6%e1%89%bd_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5.pdf": "directive-891-2014-pulses-amendment",
+        "/sites/default/files/resource/892_2014_Sesame_and_White_Peabeans_Amendment_Directive_%e1%8b%a8%e1%88%b0%e1%88%8a%e1%8c%a5%e1%8a%93_%e1%8a%90%e1%8c%ad.pdf": "directive-892-2014-sesame-white-pea-beans",
+        "/sites/default/files/resource/904_2014_%e1%8b%a8%e1%8a%90%e1%8b%b3%e1%8c%85_%e1%8b%8d%e1%8c%a4%e1%89%b6%e1%89%bd_%e1%8b%a8%e1%88%a5%e1%88%ad%e1%8c%ad%e1%89%b5_%e1%8b%a8%e1%88%ad%e1%8a%ad%e1%8a%ad%e1%89%a5%e1%8a%93_%e1%8b%a8%e1%88%bd%e1%8b%ab%e1%8c%ad_%e1%8a%a0%e1%8d%88%e1%8d%83%e1%8d%80%e1%88%9d_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "directive-904-2014-petroleum-distribution",
+        "/sites/default/files/resource/905_2014_%e1%8a%90%e1%8b%b3%e1%8c%85%e1%8a%95_%e1%8a%a8%e1%8a%a9%e1%89%a3%e1%8a%95%e1%8b%ab%e1%8b%8e%e1%89%bd_%e1%89%a0%e1%89%80%e1%8c%a5%e1%89%b3_%e1%89%a0%e1%88%98%e1%8c%8d%e1%8b%9b%e1%89%b5_%e1%88%88%e1%88%9a%e1%8c%a0%e1%89%80%e1%88%99_%e1%89%b0%e1%89%8b%e1%88%9b%e1%89%b5_%e1%8b%a8%e1%8d%88%e1%89%83%e1%8b%b5_%e1%8a%a0%e1%88%b0%e1%8c%a3%e1%8c%a5_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "directive-905-2014-fuel-direct-purchase",
+        "/sites/default/files/resource/906_2014_%e1%8b%a8%e1%8a%90%e1%8b%b3%e1%8c%85_%e1%88%9b%e1%8b%b0%e1%8b%ab_%e1%89%a0%e1%88%8c%e1%88%88%e1%89%a3%e1%89%b8%e1%8b%8d_%e1%8a%a8%e1%89%b0%e1%88%9e%e1%89%bd_%e1%8a%a5%e1%8a%93_%e1%8a%a0%e1%8a%a8%e1%89%a3%e1%89%a2%e1%8b%8e%e1%89%bd_%e1%8b%a8%e1%8a%90%e1%8b%b3%e1%8c%85_%e1%8b%a8%e1%89%bd%e1%88%ad%e1%89%bb%e1%88%ae_%e1%8d%88%e1%89%83%e1%8b%b5_%e1%8a%a0%e1%88%b0%e1%8c%a3%e1%8c%a5%e1%8a%93_%e1%8b%a8%e1%89%81%e1%8c%a5%e1%8c%a5%e1%88%ad.pdf": "directive-906-2014-fuel-retail-licence",
+        "/sites/default/files/resource/935_2015_Business_Licensing_and_Post_Licensing_Inspection_Directive.pdf": "directive-935-2015-business-licensing-inspection",
+        "/sites/default/files/resource/940_2015_%e1%8b%a8%e1%88%b2%e1%88%9a%e1%8a%95%e1%89%b6_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5%e1%8a%95_%e1%88%88%e1%88%98%e1%89%86%e1%8c%a3%e1%8c%a0%e1%88%ad_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "directive-940-2015-cement-trading",
+        "/sites/default/files/resource/962_2015_%e1%8b%a8%e1%8c%a8%e1%8b%8d_%e1%8c%8d%e1%89%a5%e1%8b%ad%e1%89%b5%e1%8a%95_%e1%88%88%e1%88%98%e1%89%86%e1%8c%a3%e1%8c%a0%e1%88%ad_%e1%8b%a8%e1%8b%88%e1%8c%a3_%e1%88%98%e1%88%98%e1%88%aa%e1%8b%ab.pdf": "directive-962-2015-salt-trading",
+        "/sites/default/files/resource/983_2016_Ethio_South_Sudan_Border_Trade_Directive.pdf": "directive-983-2016-south-sudan-border-trade",
+        "/sites/default/files/resource/983_2016_Explanatory_Note_Ethio_South_Sudan_Directive_PDF_Tir_27.pdf": "directive-983-2016-south-sudan-explanatory-note",
+        "/sites/default/files/resource/Pulses-Transaction-Council-of-Ministers-Regulation-No.377-2016_0.pdf": "regulation-377-2016-pulses-transaction",
+        "/sites/default/files/resource/proclamation-no-980_2016_0.pdf": "proclamation-980-2016-commercial-registration"
+      },
+      "pathSlugsNote": "Two kinds of path cannot be named by rule here. The Amharic pages of this Drupal site transliterate to bare hyphens - /am/sector/--1/resources, /am/service_category/-/view, /am/partners/--2 - which are the real upstream paths and not a mangling on our side, and the slug rule would name three different sectors sector-1, sector-2 and sector-3. Each is named from the page own Amharic <title> as the harvest manifest recorded it on 2026-09-17. And /am and /en are named because the slug rule treats a leading two-letter segment as a locale prefix and drops it, which would leave both home pages with no name at all. The 19 PDFs are named because their file names are percent-encoded Amharic.",
       "sections": [
+        {
+          "key": "rules",
+          "titleAm": "አዋጆች፣ ደንቦችና መመሪያዎች",
+          "match": "^/sites/default/files/resource/"
+        },
         {
           "key": "registration",
           "titleAm": "የንግድ ምዝገባ",
-          "match": "registration|register|ምዝገባ|መመዝገብ"
+          "match": "registration|register|ምዝገባ|^/am/service_category/-/view$"
         },
         {
           "key": "licensing",
           "titleAm": "የንግድ ፈቃድ",
-          "match": "licen[cs]e|licensing|ፈቃድ"
+          "match": "licen[cs]e|licensing|ፈቃድ|^/am/service_category/--1/view$"
         },
         {
           "key": "trade",
           "titleAm": "ንግድና ወጪ ንግድ",
-          "match": "export|import|trade|ንግድ|ወጪ|ገቢ"
+          "match": "export|import|trade|ንግድ|^/(am|en)/sector/|^/am/service_category/--2/view$"
         },
         {
           "key": "consumer",
@@ -69,14 +179,16 @@
         {
           "key": "help",
           "titleAm": "አገልግሎትና እገዛ",
-          "match": "faq|guide|contact|help|አገልግሎት|መመሪያ"
+          "match": "faq|guide|contact|help|resource|about|directorate|regionaloffice|accountable|^/(am|en)$"
         }
       ],
       "probePaths": [
         "/user/login",
         "/node/add",
-        "/am/user/login"
-      ]
+        "/am/user/login",
+        "/index.php/en/user/login"
+      ],
+      "_sectionNote": "sectionOf tests each regex against the PATH, and the Amharic paths of this site are bare hyphens, so the Amharic service-category pages are matched by their exact path rather than by a word. The rules section comes first because every allowed PDF sits under /sites/default/files/resource/ and its file name would otherwise fall into licensing or help by accident."
     },
     {
       "id": "eic",
@@ -162,30 +274,48 @@
       "name": "Ministry of Labour and Skills",
       "nameAm": "የሥራና ክህሎት ሚኒስቴር",
       "host": "mols.gov.et",
-      "fetch": "sitemap",
-      "sitemaps": [
-        "https://mols.gov.et/wp-sitemap-posts-page-1.xml"
-      ],
-      "discoverLinks": false,
-      "maxPages": 60,
+      "fetch": "dir",
+      "dir": "mols.gov.et",
+      "harvestedAt": "2026-09-17",
+      "tls": "valid-verification-enabled",
       "crawlDelaySeconds": 6,
-      "robots": "https://mols.gov.et/robots.txt TIMED OUT on 2026-09-17; wp-sitemap.xml answered 200. Same treatment as eic: the pack's own pacing and its own allow list.",
-      "sitemapNote": "wp-sitemap.xml lists 6 children (posts-post-1, posts-page-1, posts-elementskit_content-1, posts-elementor-hf-1 and two taxonomy sitemaps). ONLY wp-sitemap-posts-page-1.xml is taken; it held 53 URLs on 2026-09-17. The elementskit_content and elementor-hf sitemaps are page-builder fragments, not pages.",
+      "robots": "https://mols.gov.et/robots.txt - 200, re-read during the harvest of 2026-09-17: Disallow /wp-admin/ with Allow /wp-admin/admin-ajax.php, Disallow /wp-content/uploads/wpforms/, and Sitemap: https://mols.gov.et/wp-sitemap.xml. Nothing in this harvest is disallowed.",
+      "sitemapNote": "wp-sitemap.xml lists 6 children; wp-sitemap-posts-page-1.xml held 53 page URLs on 2026-09-17 and all 53 were harvested, along with the pages reachable from the home page and the language-switcher variants. The posts-post, posts-elementskit_content, posts-elementor-hf, taxonomies-category and users sub-sitemaps were deliberately not followed: news posts, page-builder fragments, and category and author archives.",
       "lang": "en",
+      "langOverrides": [
+        {
+          "match": "^/am(/|$)",
+          "lang": "am"
+        }
+      ],
       "hasAmharic": false,
-      "langNote": "Thin Amharic: the home page extracted 2,340 characters of which 287 are Ethiopic (12 percent), which is menu and footer rather than body text. Treated as an English source; depends on am-headers.js.",
+      "langNote": "Thin Amharic: the home page extracts 2,340 characters of which 287 are Ethiopic (12 per cent), which is menu and footer rather than body text. Treated as an English source; its one Amharic document is /am/about and it depends on ops/packs/am-headers.js for the rest.",
+      "titleFrom": "heading",
+      "titleFromNote": "The ministry <title> is the WordPress slug: this site titles its pages agencies, administration2 and about. The page own first heading is what a reader sees and what the document is named from - List of Oversees Employment Agencies, Profile, የሚኒስቴር መስሪያ ቤቱ አመሰራረት - which is still the page own words and never ours.",
+      "maxPages": 20,
       "reach": "up",
       "checked": "2026-09-17",
-      "reachNote": "UP from the VPS and from the laptop, although knowledge/sources-am.json records `timeout` from 2026-09-14 and knowledge/web/mols/ holds 37 pages from the 2026-09-08 crawl whose overseas-employment content may predate Proclamation 1389/2025. The page sitemap answered on the second attempt.",
+      "reachNote": "UP from a workstation on 2026-09-17, with a valid publicly-trusted certificate and verification left on. A NEW TCP connection to this host times out roughly half the time - the first wp-sitemap.xml attempt failed that way and the second succeeded on a warmed keep-alive session - which is what this pack has been reading as `timeout` since 2026-09-14. It is intermittent, not dead.",
+      "why": "Harvested rather than fetched, measured 2026-09-17. The host answers, but only about half of new connections complete, and the live fetch of Task 5 read all 53 sitemap URLs and produced ONE document, because most of this site is an unfilled Elementor shell. 189 files were harvested from a workstation on 2026-09-17 and copied to /root/storage/packs/business-manual/mols.gov.et (35.3 MB, every file SHA256-verified, 0 failures). The harvest is the measurement: 71 of its 187 HTML pages are shells, and the manifest says so page by page.",
+      "costsUs": "Very little that this ministry publishes at all. 71 of 187 harvested pages return 200 with about 173 KB of Elementor chrome and 9 to 120 characters of body text: /labor-identification-number/, /overseas-ethiopian-workers/, /licensed-requirement-agencies/, /download-forms/, /e-library/ and /researches-2/ among them. This was verified rather than assumed - no iframe, no admin-ajax loader, no deferred data-settings URL, and the Elementor widget set is the chrome-only set - so a headless browser would capture nothing more. The ministry has not published the work-permit procedure, the LMIS labour-identification procedure or the overseas-employment procedure anywhere a reader can see them, and the pack says so rather than pretending the crawl missed them. What the harvest DOES give is /agencies, the register of 1,222 licensed overseas employment agencies with each one allowed destination countries.",
       "allow": [
-        "^/(services?|service-.*|employment|employer|work-permit|labou?r|labor-.*|pension|social-security|skills?|training|coc|certificate-of-competence|lmis|about|faq|guidelines?|directives?|proclamations?|forms?)(/|$)",
-        "^/(online-services|overseas-ethiopian-workers|licensed-requirement-agencies|applications-and-appeals|appellate-authority-kereta-semi|download-forms|public-complaint|agencies|documents|e-library|key-statistics)$"
+        "^/(am/)?(about|agencies)$"
       ],
+      "allowNote": "Four documents, and that is the whole of what this ministry publishes with a body. /agencies is the register of 1,222 licensed overseas employment agencies (177,222 characters, split into two parts); /about and /am/about are the ministry own profile. DELIBERATELY NOT allowed, although they are in the harvest and have content: /ministry-proclamation, /law-and-order, /constitutional-provision and /international-labor-laws - the rule is knowledge/law and the counter is this pack, and that boundary is the reason the pack exists - and /administration through /administration8, which are photographs and biographies of the minister and state ministers.",
       "deny": [
-        "^/(news|press|media|events?|blog|gallery|job-openings?|vacanc|tender|author|category|tag|wp-content|wp-admin|feed|sample-page|contact)(/|$)",
+        "^/(oro|tig|som)(/|$)",
+        "^/(am/)?(news|press|media|events?|blog|gallery|job-openings?|vacanc|tender|author|category|tag|wp-content|wp-admin|feed|sample-page|contact|contact-us|magazine|messages|message|privacy|copyright|upcoming-events|projects|reports|researches|documents|minster-corner|who-is-who|law-and-order|ministry-proclamation|constitutional-provision|international-labor-laws|online-services|administration\\d*)(/|$)",
+        "^/(am/|oro/|tig/|som/)?%",
         "^/\\d{4}/\\d{2}/",
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
       ],
+      "denyNote": "The language switcher exposes Oromo, Tigrinya and Somali variants of every page and the harvest took them - 36 of the 189 files. They are dropped for v1: this pack is English and Amharic, the gold set is English and Amharic, and every one of those variants served the English text anyway (they hold 0 Ethiopic characters and read Profile, State Minister for Technical and Vocational, Contact Us). Nothing was deleted from the harvest; when the pack has an Oromo or Tigrinya slice the bytes are already on disk. The percent-escape rule drops the four Amharic news articles the ministry publishes as Ethiopic slugs.",
+      "pathSlugs": {
+        "/about": "about",
+        "/am/about": "am-about",
+        "/agencies": "agencies"
+      },
+      "pathSlugsNote": "The slug rule treats a leading two-letter segment as a locale prefix and drops it, so /about and /am/about both come out of it as \"about\" and the run stops rather than write one document over the other. It is the same trap the National Bank /am found in the banking pack, and the same remedy: name them. /agencies is named too, because it is the only document of this pack that arrives in two parts and its name is what a gold question, a citation and a git diff will all use.",
       "sections": [
         {
           "key": "employment",
@@ -216,10 +346,9 @@
       "probePaths": [
         "/wp-login.php",
         "/apply-online",
-        "/e-services/submit"
-      ],
-      "_allowNote": "Widened once, on 2026-09-17, after the live fetch of Task 5 read all 53 urls of wp-sitemap-posts-page-1.xml and the allow list selected 2 of them (/about and /labor-identification-number). Every name added is read from that sitemap: /overseas-ethiopian-workers and /licensed-requirement-agencies are the foreign-employment and recruitment-agency counters, /online-services, /applications-and-appeals, /appellate-authority-kereta-semi, /download-forms and /public-complaint are the procedure pages, /agencies, /documents, /e-library and /key-statistics are the ministry own libraries. DELIBERATELY NOT added, although they are in the sitemap: /international-labor-laws, /ministry-proclamation, /law-and-order and /constitutional-provision. The rule is knowledge/law - the counter is this pack. That boundary is the reason the pack exists.",
-      "_sectionNote": "The employment and help matches were extended on 2026-09-17 so that every newly allowed path lands in a section: without overseas and agenc, /overseas-ethiopian-workers and /licensed-requirement-agencies would have been written with no section at all."
+        "/e-services/submit",
+        "/oro/about"
+      ]
     },
     {
       "id": "eccsa",
@@ -345,63 +474,68 @@
       "name": "Private Organizations Employees Social Security Agency",
       "nameAm": "የግል ድርጅት ሠራተኞች ማህበራዊ ዋስትና አስተዳደር",
       "host": "www.poessa.gov.et",
-      "fetch": "urls",
-      "urls": [
-        "https://www.poessa.gov.et/"
-      ],
-      "discoverLinks": true,
-      "maxPages": 40,
+      "fetch": "dir",
+      "dir": "www.poessa.gov.et",
+      "harvestedAt": "2026-09-17",
+      "tls": "valid-verification-enabled",
       "crawlDelaySeconds": 6,
-      "robots": "Not measured clean on 2026-09-17. /sitemap.xml and /wp-sitemap.xml both return an 808-byte 404 page, so there is no sitemap. The pack paces at 6 s and takes only what its allow list names.",
-      "sitemapNote": "No sitemap. Paths come from the home page links (discoverLinks).",
+      "robots": "https://www.poessa.gov.et/robots.txt - 200, read during the harvest of 2026-09-17. It disallows only /dlm_uploads/ and the concrete5 scaffolding paths (/application/*, /concrete, /packages, /updates). Nothing in this harvest is disallowed, and there is no Sitemap directive.",
+      "sitemapNote": "No sitemap: /sitemap.xml and /wp-sitemap.xml both 404 on a warmed connection (the first attempt at each is recorded in the manifest as a connect timeout, which is this host habit). Paths came from the home page links. Every page of this site is a query string, /?page_id=N.",
       "lang": "am",
       "hasAmharic": true,
-      "langNote": "The most Amharic source in the pack after motri: the home page extracted 1,956 characters of which 1,208 are Ethiopic (62 percent), and the page TITLE itself is Amharic - የግል ድርጅት ሠራተኞች ማህበራዊ ዋስትና አስተዳደር። This is where the employer-pension questions of the Amharic gold slice will find an Amharic page.",
+      "langNote": "The most Amharic source in the pack after motri: the home page extracts 1,956 characters of which 1,208 are Ethiopic (62 per cent), and the page TITLE itself is Amharic. The pension page alone carries 11,118 Ethiopic characters of 15,605. The substantive text on this site is Amharic even where the page title is English, so the site language is am and the importer demotes the four pages whose Ethiopic count is under its floor.",
+      "titleSuffix": "\\s*[-–—]\\s*የግል ድርጅት ሠራተኞች ማህበራዊ ዋስትና አስተዳደር\\s*$",
+      "maxPages": 20,
       "reach": "up",
       "checked": "2026-09-17",
-      "reachNote": "The apex possa.gov.et and www.possa.gov.et are both ENOTFOUND. The working host is www.poessa.gov.et - two spellings, and the wrong one cost two probe rounds. Do not 'correct' it.",
+      "reachNote": "UP from a workstation on 2026-09-17 with a valid publicly-trusted certificate and verification on, and UNREACHABLE from this VPS on four attempts the same afternoon (connection timed out at 40 s, over https and over http). This host drops roughly half of NEW TCP connections; on a warmed keep-alive session it is reliable. The apex possa.gov.et and www.possa.gov.et are both ENOTFOUND - the working host is www.poessa.gov.et, note the extra e, and the wrong spelling cost two probe rounds. Do not correct it.",
+      "why": "Harvested rather than fetched, measured 2026-09-17: the host would not answer this VPS on any of four attempts that afternoon, so its home page links could not be read and the site contributed nothing. 33 files were harvested from a workstation on 2026-09-17 and copied to /root/storage/packs/business-manual/www.poessa.gov.et (47.9 MB, every file SHA256-verified, 3 recorded failures, 0 empty pages). Every ?download=NNN link is re-rendered with a fresh ?tmstv=<epoch> parameter on each page load, so the same file appears as an endless stream of new URLs; the harvest canonicalised them by stripping tmstv.",
+      "costsUs": "Nothing on the pension side: the harvest holds the agency own pension page, which states the contribution split verbatim - employee 7 per cent, private organisation 11 per cent, 18 per cent in total of gross monthly salary, remitted within 30 days of the end of the payroll month - along with its mandates, structure, history and its proclamation, regulation and forms listings. What it does not hold is the 10 PDFs and 7 Word documents behind the ?download=NNN links. They are in the harvest and are NOT imported: their URLs carry no file name at all, so each would need a hand-written title and slug, seven of the seventeen are .doc and .docx which this importer cannot read, one (?download=328) is a dead link the agency still publishes, and one (?download=322) answers 200 with a No Access interstitial rather than a file. They are a candidate for a later task, and nothing was invented for any of them.",
       "allow": [
-        "^/(am/)?(about|service|services|pension|contribution|benefit|benefits|employer|employee|registration|faq|guideline|guidelines|directive|directives|form|forms|contact-us|news-category-free)(/|$)",
-        "^/(am/)?(page|node)/"
+        "^/\\?page_id=(66|69|71|73|75|147|153|443)$"
       ],
+      "allowNote": "An explicit list of eight, because on this site a path is a number. Each was read through the pack own extract() on 2026-09-17 and each returns over 400 characters. NOT allowed, and each measured: ?page_id=41 is the News and Events index; ?page_id=160 (Job) and ?page_id=162 (Bid) are empty listings at 935 characters of chrome; ?page_id=166 (Customer Service), ?page_id=168 (Registration Status) and ?page_id=44 (Contact us) all extract under the 400-character floor. The site root is not taken either: it is a home page whose 1,956 characters are the menu and the chief executive greeting.",
       "deny": [
-        "^/(am/)?(news|press|media|event|events|gallery|vacanc|tender|blog|archive|search|login|user|admin|wp-admin)(/|$)",
-        "^/\\d{4}/\\d{2}/",
-        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
+        "^/\\?(p|author|s|download|tmstv)=",
+        "^/\\?page_id=(41|44|160|162|166|168)$",
+        "^/(am/)?(news|press|media|event|events|gallery|vacanc|tender|blog|archive|search|login|user|admin|wp-admin|dlm_uploads|application|concrete|packages|updates)(/|$)",
+        "^/\\d{4}/\\d{2}/"
       ],
+      "pathSlugs": {
+        "/?page_id=66": "history",
+        "/?page_id=69": "vision-and-mission",
+        "/?page_id=71": "mandates-and-functions",
+        "/?page_id=73": "strategic-plan",
+        "/?page_id=75": "organizational-structure",
+        "/?page_id=147": "proclamation-and-regulation",
+        "/?page_id=153": "guidelines-and-forms",
+        "/?page_id=443": "pension"
+      },
+      "pathSlugsNote": "Every page of this concrete5 site is a query string, and /?page_id=443 is not a filename anybody can find in a gold set, a Telegram note or a git diff. Each of the eight is named from the page own <title> as the harvest manifest recorded it on 2026-09-17.",
       "sections": [
         {
           "key": "pension",
           "titleAm": "ጡረታና ማህበራዊ ዋስትና",
-          "match": "pension|social security|ጡረታ|ዋስትና"
+          "match": "page_id=443"
         },
         {
-          "key": "contributions",
-          "titleAm": "የመዋጮ ምጣኔ",
-          "match": "contribution|rate|percent|መዋጮ"
+          "key": "rules",
+          "titleAm": "አዋጆች፣ ደንቦችና ቅጾች",
+          "match": "page_id=(147|153)"
         },
         {
-          "key": "employer",
-          "titleAm": "የአሠሪ ግዴታዎች",
-          "match": "employer|organization|register|አሠሪ"
-        },
-        {
-          "key": "benefits",
-          "titleAm": "ጥቅማ ጥቅሞች",
-          "match": "benefit|claim|retirement|ጥቅም"
-        },
-        {
-          "key": "help",
-          "titleAm": "አገልግሎትና እገዛ",
-          "match": "faq|guide|service|form|contact|አገልግሎት"
+          "key": "agency",
+          "titleAm": "ስለ አስተዳደሩ",
+          "match": "page_id=(66|69|71|73|75)"
         }
       ],
+      "_sectionNote": "sectionOf tests each regex against the path, and on this site a path is /?page_id=443. A section therefore names the page numbers it covers; there is no word in the URL to match on.",
       "probePaths": [
+        "/?page_id=160",
+        "/login",
         "/user/login",
-        "/am/user/login",
         "/apply"
-      ],
-      "_urlsNote": "Task 4, 2026-09-17: 1 url, 0 selected, for the same reason as ipdc - selectUrls() drops the root path before the allow list is consulted (fetch-pack.js line 82), so the home page cannot be a seed and link discovery has no round 1. The fix is the same as ipdc: name two or three allowed deep paths here. They are NOT named yet because the host would not answer on any of four attempts this afternoon (connection timed out at 40 s from the VPS, over https and over http), so its home page links could not be read, and this pack does not guess deep paths - the two that were guessed for motri and the two guessed for ipdc all returned timeouts or soft 404s. Re-probe with node /tmp/b4paths.js poessa on a day it answers, then paste the allowed paths in."
+      ]
     },
     {
       "id": "ipdc",
@@ -468,13 +602,63 @@
       "name": "Ethiopian Online Trade Registration and Licensing",
       "nameAm": "የመስመር ላይ የንግድ ምዝገባና ፈቃድ",
       "host": "etrade.gov.et",
-      "fetch": "manual",
-      "reach": "up but client-rendered",
-      "checked": "2026-09-17",
+      "fetch": "dir",
+      "dir": "etrade.gov.et",
+      "dirAllowRoot": true,
+      "dirAllowRootNote": "The ONLY site in any pack that takes its root path as a document, and the reason the option exists. This application home page is the whole public catalogue: thirteen service cards, each opening a Material dialog holding that service መስፈርቶች (required documents) and its የአጠቃቀም መመሪያ (step-by-step guide), none of which changes the URL, is a route, or appears in any sitemap. The rendered capture clicked each card and appended the thirteen dialogs into the captured home DOM, which is what takes that page from 2,379 characters to 14,602. Without dirAllowRoot this host would import one 909-character FAQ and nothing else.",
+      "harvestedAt": "2026-09-17",
+      "tls": "incomplete-chain-fetched-by-chromium",
+      "tlsNote": "This host serves an INCOMPLETE CERTIFICATE CHAIN, measured on 2026-09-17: curl refuses it outright with SSL certificate problem, unable to get local issuer certificate, and so will any Node fetch that verifies. Chromium accepts it because it fetches the missing intermediate itself, so the rendered capture never had to disable verification and nothing about this harvest was read insecurely. It is recorded because a reader of these documents is entitled to know that the plainest client on this box still cannot open the host.",
       "needsRenderedCapture": true,
       "crawlDelaySeconds": 6,
-      "why": "Reachable and still unfetchable, measured on 2026-09-17 from the VPS AND from a laptop in the UAE. https://etrade.gov.et/ answers HTTP 200 with about 45 KB from both machines, and through the pack own extract() it is `thin` - ZERO characters - from both. /business-license-checker is the same: 200, 45,445 bytes, thin. robots.txt is 404 and /sitemap.xml, /wp-sitemap.xml and /sitemap_index.xml are all 404. /api/services answers 405 Method Not Allowed, which says there is a JSON API behind the page. www.etrade.gov.et is a 315-byte 404. This is a client-rendered single-page application, not a reachability problem, so the banking pack --from-dir laptop-harvest route does NOT fix it: the laptop received the identical empty shell. Two ways in, both decisions for Ibrahim: (1) a rendered capture with the headless Chromium already on this VPS, saving the rendered DOM per URL into /root/storage/packs/business-manual/etrade.gov.et/ with a manifest.json in the banking harvest shape, then `--from-dir`; or (2) documented read access to the JSON API. Until one exists this entry stays manual and Bini says the pack does not hold it.",
-      "costsUs": "Online trade registration, the business licence checker, the fee schedule and the renewal calendar - the four things a shopkeeper asks about most, and the only authoritative answer to whether a licence is valid. Without it the pack must send the person to etrade.gov.et rather than answer, and Bini must never present bina.et/business-registration-ethiopia as though it were the register."
+      "robots": "https://etrade.gov.et/robots.txt is 404 - recorded in the harvest as robots.txt.note - so there is no crawl directive to obey and no ClaudeBot, GPTBot or anthropic clause of the kind efda.gov.et publishes. The 6 s delay comes from this registry, not from the host.",
+      "sitemapNote": "No sitemap: /sitemap.xml, /wp-sitemap.xml and /sitemap_index.xml are all 404. The application routes are the empty string, helpdesk, business-license-checker, faq, auth, main, denied, admin, company-name, customer-support, document-viewer and service-counter, read from the application own router.",
+      "lang": "am",
+      "hasAmharic": true,
+      "langNote": "Amharic only, and that is not a shortage of capture: the header language control offers አማርኛ and nothing else, its menu has no second option, ?lang=en changes nothing (the render is byte-identical) and there is no /en or /am route. The home page extracts 14,602 characters of which 10,773 are Ethiopic (74 per cent) and the FAQ 909 of which 708 are (78 per cent). The <html lang> attribute says en on every page and is simply wrong, which is why the language here is decided by the text.",
+      "titleFrom": "manifest-heading",
+      "titleFromNote": "Every route of this application carries one <title>, e-Trade Online Trade Registration & License System. Two documents with one title is two documents a reranker cannot tell apart, so each is named from the heading the rendered capture read off the page itself: የንግድ ምዝገባና የንግድ ፈቃድ መገልገያ በይነ መረብ for the catalogue and ጥያቄዎች for the FAQ.",
+      "maxPages": 10,
+      "reach": "up but client-rendered",
+      "checked": "2026-09-17",
+      "reachNote": "Answers 200 with about 45 KB from this VPS and from a laptop in the UAE, and extracts to ZERO characters from both, because it is an Angular application whose text is written into the DOM by main.e368a3b032913238.js after load. A second finding from the capture: this host serves an INCOMPLETE CERTIFICATE CHAIN. curl refuses it outright (unable to get local issuer certificate) and so will any Node fetch that verifies; Chromium accepts it because it fetches the missing intermediate itself. A rendered capture is therefore not only the way past the empty shell, it is currently the only client on this box that can read the host at all without disabling verification.",
+      "why": "Reachable and unfetchable, measured 2026-09-17 from the VPS AND from a laptop in the UAE: https://etrade.gov.et/ answers HTTP 200 with about 45 KB from both machines and through the pack own extract() it is `thin` - ZERO characters - from both, and /business-license-checker is the same at 45,445 bytes. robots.txt and all three sitemap paths are 404. /api/services answers 405 Method Not Allowed, which says a JSON API is behind the page. www.etrade.gov.et is a 315-byte 404. This is a client-rendered single-page application, not a reachability problem, so the banking pack laptop-harvest route did NOT fix it - the laptop received the identical empty shell. It was resolved on 2026-09-17 by option 1 of the two this entry used to name: a rendered capture with the headless Chromium already on this VPS, 1366x900, network idle plus 3 s, at least 6.5 s between page loads, saving document.documentElement.outerHTML per URL into /root/storage/packs/business-manual/etrade.gov.et with a manifest.json in the banking harvest shape. 5 pages, 0 failures. Option 2, documented read access to the JSON API, is still the cleaner long-term route and would give the services with stable identifiers instead of dialogs with none.",
+      "costsUs": "Less than it did, and the correction matters. Online trade registration IS now in the pack: the thirteen service dialogs give the required documents and the step-by-step guide for new registration, amendment, replacement and cancellation of a business registration, a trade licence and a trade name. THE FEE SCHEDULE AND THE RENEWAL CALENDAR ARE NOT, and they are not behind JavaScript either - they are not published anywhere a logged-out visitor can read them. The word ክፍያ appears on this host only as the sentence saying that once a request is approved the applicant gets a payment instruction by SMS and may pay at any commercial bank. Not one birr figure, not one tariff and not one processing time is public. The licence checker page is in the pack; a licence LOOKUP is not, because it needs a real TIN typed against a real business, which the harvest rules forbid, so Bini still cannot tell anyone whether a licence is valid. /service-counter renders 89,908 bytes and no text at all without a session, so whatever list of service counters it holds stays hidden.",
+      "allow": [
+        "^/$",
+        "^/faq$"
+      ],
+      "allowNote": "Two paths, because two pages hold text. /business-license-checker extracts 61 characters (a heading and a search box), /helpdesk 76 (a TIN field and a file upload) and /service-counter nothing at all; all three are in the harvest as the measurement and none is a document.",
+      "deny": [
+        "^/(auth|main|admin|customer-support|company-name|document-viewer|denied|service-counter|helpdesk|business-license-checker)(/|$)",
+        "\\?"
+      ],
+      "denyNote": "Nothing transactional was captured and nothing transactional is importable. /auth is account creation and sign-in; /customer-support 302s off-host to an OAuth login at id.etrade.gov.et and the crawler refuses any navigation that leaves the host; /company-name/search needs a name typed in; /main and /admin are the signed-in application; /document-viewer needs a document id; /denied is the application own Access Denied page. Every query string on this application is something a person types, so queries are denied wholesale - which is also what keeps /business-license-checker?tin= out.",
+      "pathSlugs": {
+        "/": "services-catalogue",
+        "/faq": "faq"
+      },
+      "pathSlugsNote": "The root path has no last segment, so the slug rule produces the empty string for it and ops/packs/fetch-pack.js stops rather than write a nameless document. The catalogue is named for what it is.",
+      "sections": [
+        {
+          "key": "registration",
+          "titleAm": "የንግድ ምዝገባና ፈቃድ",
+          "match": "^/$"
+        },
+        {
+          "key": "help",
+          "titleAm": "አገልግሎትና እገዛ",
+          "match": "^/faq$"
+        }
+      ],
+      "probePaths": [
+        "/auth/login",
+        "/main",
+        "/admin",
+        "/company-name/search",
+        "/business-license-checker?tin=",
+        "/document-viewer"
+      ]
     },
     {
       "id": "ecc",
