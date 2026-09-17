@@ -18,6 +18,16 @@
 // live model call, not the pack and not the retriever, so the shipped floor below is pinned at the lower of
 // the two runs and says so, while the retrieval floor - which is deterministic - is pinned at 85.0%.
 // Raise these when the number really improves, never to make a run pass.
+//
+// 2026-09-17, Task 15c: the corpus grew again, 19,419 chunks to 22,326, when the 102 OCR documents of the
+// National Bank went in. Travel was re-measured either side of that ingest, on the same 60-question gold
+// set, and the floors below did NOT move because travel did not fall:
+//   retrieval-gold-travel-20260917-104205.json  (19,419)  85.0% retrieval  81.7% as shipped
+//   retrieval-gold-travel-20260917-110706.json  (22,326)  85.0% retrieval  83.3% as shipped
+// Retrieval is identical question for question, as it was in Task 15a; the 1.7 points on the shipped line
+// is the same reranker variance on tv-015 described above, in the other direction this time. The shipped
+// floor stays pinned at the lower of the two, 81.7%, rather than being raised on a run that happened to
+// land on the better side of that one question.
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('fs');

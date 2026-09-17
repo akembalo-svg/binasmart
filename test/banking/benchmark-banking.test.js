@@ -51,6 +51,52 @@
 //   batch 1 (60)  60.0%            61.7%      batch 2 (30)   93.3% / 93.3%
 // The design's 90.0% is met by batch 2 and not by the pack as a whole, and the cross-lingual gap is now
 // 34.5 points on retrieval. Raise these thresholds when that gap is closed, never to make a run pass.
+//
+// 2026-09-17, Task 15c: 102 documents for the 99 National Bank directives that exist only as photographs
+// entered the pack by OCR (404 documents to 506; the corpus 19,419 chunks to 22,326), and the gold set
+// went from 90 questions to 110. Batch 3 is 20 questions (14 Amharic, 6 English) on the subjects those
+// directives answer and the pack could not answer before: the complaint procedure and its time limit,
+// fee disclosure, fraud reporting, the credit record, the currency directives, the payment-system rules
+// and the 2025 banking proclamation.
+// Measured on 22,326 chunks, twice, twenty-two minutes apart, identical in every slice but the third
+// decimal of one MRR: retrieval-gold-banking-20260917-110428.json and -112648.json. The baseline is the
+// run made on the same gold set immediately BEFORE the ingest, on 19,419 chunks:
+// retrieval-gold-banking-20260917-103939.json.
+//   slice            before (19,419)        after (22,326)
+//   all 110          58.2 / 59.1            71.8 / 71.8
+//   Amharic 74       52.7 / 55.4            64.9 / 67.6
+//   English 36       69.4 / 66.7            86.1 / 80.6
+//   same language    74.6 / 73.1            88.1 / 83.6
+//   cross-lingual    32.6 / 37.2            46.5 / 53.5
+//   batch 1 (60)     60.0 / 61.7            58.3 / 60.0
+//   batch 2 (30)     93.3 / 93.3            90.0 / 90.0
+//   batch 3 (20)      0.0 /  0.0            85.0 / 80.0
+// Batch 3 went from nothing to 80.0% as shipped, which is the whole point of the task: those questions
+// scored zero before because the documents that answer them were not in the pack at all.
+// TWO SLICES FELL AND THE FLOORS BELOW FALL WITH THEM, which is why it is written here rather than
+// averaged away: batch 1 lost 1.7 points as shipped (61.7 -> 60.0, one question) and batch 2 lost 3.3
+// (93.3 -> 90.0, one question). 102 new documents on the same host now compete for the top three, so a
+// question whose gold page was third can be fourth without anything in retrieval having changed -
+// hybridScore, the +0.06 tie-breaker, the reranker, the embedding model and the chunking are untouched.
+// The pack as a whole gained 12.7 points as shipped for those two questions. The floors are re-pinned to
+// the measured numbers, DOWN where the measurement went down; they are not held at the old values to
+// pretend nothing moved, and not rounded up to make a later run pass.
+//
+// A THIRD run landed while this was being written - retrieval-gold-banking-20260917-123617.json, made by
+// another session on 22,352 chunks - and it is why the shipped floors below are pinned LOWER than the two
+// runs above. Across all three:
+//   column                run 110428   run 112648   run 123617
+//   all, retrieval          71.8         71.8         71.8
+//   all, as shipped         71.8         71.8         70.9
+//   English, as shipped     80.6         80.6         77.8
+//   batch 1, as shipped     60.0         60.0         58.3
+//   same language           83.6         83.6         82.1
+// The retrieval column is identical in all three, question for question, including under the 26 extra
+// chunks of the third run: retrieval is deterministic and nothing in it moved. The shipped column is a
+// live reranker call and it moves by a question or two between runs, which is the same variance
+// test/travel/benchmark-travel-floor.test.js describes on tv-015. So the shipped floors are pinned at the
+// LOWEST of the three, and the deterministic retrieval floor is asserted separately below - a floor that
+// only the best run clears is not a floor.
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('fs');
@@ -77,9 +123,9 @@ test('a banking benchmark has been run', { skip: !files.length && 'no banking be
   assert.ok(files.length, 'run: node --env-file=.env ops/bini/rerun-retrieval-benchmark.js --gold banking');
 });
 
-test('the newest banking run answers 90 questions', { skip: !files.length && 'no banking benchmark yet' }, () => {
+test('the newest banking run answers 110 questions', { skip: !files.length && 'no banking benchmark yet' }, () => {
   const all = newest().table.find(t => /^all questions/.test(t.name));
-  assert.equal(all.n, 90);
+  assert.equal(all.n, 110);
 });
 
 test('the right page is in the top three at least as often as it was measured', { skip: !files.length && 'no banking benchmark yet' }, () => {
@@ -87,16 +133,18 @@ test('the right page is in the top three at least as often as it was measured', 
   // The design's target was 90.0. Measured 2026-09-17: 55.0, then 61.7 with the Amharic headers, then
   // 56.7 when the corpus grew under a gold set that could not see the new sources, and 72.2 once that
   // gold set was extended to 90 questions. See the note at the top of this file.
-  assert.ok(pct(all) >= 72.2, 'as shipped is ' + all.shipped + ', the measured floor is 72.2% (the design target was 90.0%)');
+  assert.ok(pct(all) >= 70.9, 'as shipped is ' + all.shipped + ', the measured floor is 70.9%, the lowest of three runs (the design target was 90.0%)');
+  // Retrieval is deterministic - identical in all three runs - so it is pinned exactly, not loosely.
+  assert.ok(Number(String(all.plain).replace('%', '')) >= 71.8, 'retrieval is ' + all.plain + ', the measured floor is 71.8%');
 });
 
 test('the Amharic slice is not carried by the English one', { skip: !files.length && 'no banking benchmark yet' }, () => {
   const am = newest().table.find(t => /^\s*Amharic/.test(t.name));
-  assert.ok(am && am.n === 60, 'the Amharic slice should hold 60 questions');
+  assert.ok(am && am.n === 74, 'the Amharic slice should hold 74 questions');
   // The design wanted 85. Measured 2026-09-17: 52.5, then 60.0 with the Amharic headers, then 68.3 with
   // batch 2 - whose Amharic questions are mostly answered by telebirr's own Amharic pages - against 80.0
   // for the English slice. Still not carried, and still short of the design.
-  assert.ok(pct(am) >= 68.3, 'the Amharic slice is ' + am.shipped + '; the measured floor is 68.3% (the design target was 85%)');
+  assert.ok(pct(am) >= 67.6, 'the Amharic slice is ' + am.shipped + '; the measured floor is 67.6% (the design target was 85%)');
 });
 
 test('the same-language slice still beats the cross-lingual one', { skip: !files.length && 'no banking benchmark yet' }, () => {
@@ -109,18 +157,28 @@ test('the same-language slice still beats the cross-lingual one', { skip: !files
   assert.ok(pct(same) > pct(cross), 'same-language ' + same.shipped + ' should beat cross-lingual ' + cross.shipped);
 });
 
-// The two batches are pinned separately because a single number over both hides which of them moved: batch 1
-// is the set written before the National Bank, telebirr and M-PESA were in the pack, batch 2 the set written
-// against them.
-test('both batches are in the run, and neither has fallen below what it measured', { skip: !files.length && 'no banking benchmark yet' }, () => {
+// The three batches are pinned separately because a single number over all of them hides which one moved:
+// batch 1 is the set written before the National Bank, telebirr and M-PESA were in the pack, batch 2 the set
+// written against them, batch 3 the set written against the directives that were only ever photographs.
+test('all three batches are in the run, and each is pinned to what it measured', { skip: !files.length && 'no banking benchmark yet' }, () => {
   const j = newest();
   const b1 = j.table.find(t => t.name === 'batch 1');
   const b2 = j.table.find(t => t.name === 'batch 2');
-  assert.ok(b1 && b2, 'the run should slice by batch (ops/bini/rerun-retrieval-benchmark.js)');
+  const b3 = j.table.find(t => t.name === 'batch 3');
+  assert.ok(b1 && b2 && b3, 'the run should slice by batch (ops/bini/rerun-retrieval-benchmark.js)');
   assert.equal(b1.n, 60);
   assert.equal(b2.n, 30);
-  assert.ok(pct(b1) >= 61.7, 'batch 1 is ' + b1.shipped + ', the measured floor is 61.7%');
-  // 93.3% is the design's 90.0% met, on the only slice of this pack that was written against sources whose
-  // Amharic pages exist. It is not a general claim about the pack.
-  assert.ok(pct(b2) >= 93.3, 'batch 2 is ' + b2.shipped + ', the measured floor is 93.3%');
+  assert.equal(b3.n, 20);
+  // Both of these floors are LOWER than they were before Task 15c: batch 1 61.7 -> 58.3 and batch 2
+  // 93.3 -> 90.0, measured before and after the same ingest on the same gold set. See the Task 15c note at
+  // the top. They are pinned to the lowest of the three runs made on the new corpus, not to what was hoped
+  // for and not to the run that read best.
+  assert.ok(pct(b1) >= 58.3, 'batch 1 is ' + b1.shipped + ', the measured floor is 58.3% (was 61.7% before Task 15c)');
+  // Batch 1 retrieval is 58.3% in all three runs, down from 60.0% before the ingest - one question.
+  assert.ok(Number(String(b1.plain).replace('%', '')) >= 58.3, 'batch 1 retrieval is ' + b1.plain + ', the measured floor is 58.3%');
+  // 90.0% is the design's 90.0% exactly, on the slice of this pack written against sources whose Amharic
+  // pages exist. It is not a general claim about the pack, and it is 3.3 points below what it was.
+  assert.ok(pct(b2) >= 90.0, 'batch 2 is ' + b2.shipped + ', the measured floor is 90.0% (was 93.3% before Task 15c)');
+  // Batch 3 scored 0.0% on the pre-ingest baseline because none of its documents were in the pack yet.
+  assert.ok(pct(b3) >= 80.0, 'batch 3 is ' + b3.shipped + ', the measured floor is 80.0% (0.0% before the OCR documents were ingested)');
 });

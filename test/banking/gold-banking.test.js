@@ -13,21 +13,40 @@ const ROOT = path.join(__dirname, '..', '..');
 const B = require(path.join(ROOT, 'ops', 'packs', 'build-gold.js'));
 const spec = JSON.parse(fs.readFileSync(path.join(ROOT, 'knowledge', 'banking', 'gold-spec.json'), 'utf8'));
 
-test('ninety questions, sixty Amharic and thirty English', () => {
-  assert.equal(spec.questions.length, 90);
-  assert.equal(spec.questions.filter(q => q.lang === 'am').length, 60);
-  assert.equal(spec.questions.filter(q => q.lang === 'en').length, 30);
+test('a hundred and ten questions, seventy-four Amharic and thirty-six English', () => {
+  assert.equal(spec.questions.length, 110);
+  assert.equal(spec.questions.filter(q => q.lang === 'am').length, 74);
+  assert.equal(spec.questions.filter(q => q.lang === 'en').length, 36);
 });
 
 // Batch 1 is the 60 questions written on 2026-09-16 against the six banks, the Capital Market Authority and
 // EthSwitch; batch 2 the 30 written on 2026-09-17 against the National Bank, telebirr and M-PESA once Task
-// 15a had added them. They are kept apart because a single number over both hides which of them moved.
-test('every question says which batch it belongs to, and batch 2 is twenty Amharic and ten English', () => {
-  for (const q of spec.questions) assert.ok(q.batch === 1 || q.batch === 2, q.qid + ' has no batch');
+// 15a had added them; batch 3 the 20 written on 2026-09-17 in Task 15c against the directives the National
+// Bank publishes only as photographs, once OCR had put them in the pack. They are kept apart because a
+// single number over all three hides which of them moved - and in Task 15c two of them moved down.
+test('every question says which batch it belongs to, and each batch is the size it was written at', () => {
+  for (const q of spec.questions) assert.ok([1, 2, 3].includes(q.batch), q.qid + ' has no batch');
   const b2 = spec.questions.filter(q => q.batch === 2);
   assert.equal(b2.length, 30);
   assert.equal(b2.filter(q => q.lang === 'am').length, 20);
   assert.equal(b2.filter(q => q.lang === 'en').length, 10);
+  const b3 = spec.questions.filter(q => q.batch === 3);
+  assert.equal(b3.length, 20);
+  assert.equal(b3.filter(q => q.lang === 'am').length, 14);
+  assert.equal(b3.filter(q => q.lang === 'en').length, 6);
+  // Three of batch 3's fourteen Amharic questions have a gold page that is itself in Amharic: the three
+  // currency directives the National Bank wrote in Amharic. The other eleven are Amharic questions whose
+  // only page is English, and they are kept rather than dropped - that gap is what this pack measures.
+  // The gold-spec _about said four and ten until 2026-09-17; it was counted here, off the pages' own
+  // front matter rather than off a topicAm that only happens to correlate, and it is three and eleven.
+  const pageLang = slug => {
+    const m = /^lang: "(\w+)"/m.exec(fs.readFileSync(path.join(ROOT, 'knowledge', 'banking', slug + '.md'), 'utf8'));
+    return m && m[1];
+  };
+  const b3Am = b3.filter(q => q.lang === 'am');
+  const b3AmOnAm = b3Am.filter(q => pageLang(q.slug) === 'am');
+  assert.equal(b3AmOnAm.length, 3, 'batch 3 should have three Amharic questions on an Amharic page');
+  assert.equal(b3Am.length - b3AmOnAm.length, 11, 'the other eleven Amharic questions of batch 3 are cross-lingual');
   // The point of batch 2: telebirr publishes 28 Amharic pages, so most of its Amharic questions can be
   // asked of a page in the language they are asked in. Not all - the National Bank publishes its complaint
   // procedure, its FX rules and its interest-rate directive in English only, and those stay cross-lingual
