@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2026/05/DIRECTIVE-NO.-FVD012026-IMPORT-ON-FRANCO-VALUTA.pdf"
 title: "National Bank of Ethiopia — directive-no-fvd012026-import-on-franco-valuta"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ፡ በፍራንኮ ቫሉታ ማስመጣት መመሪያ ቁጥር FVD/01/2026"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "e07cdcfa90c701e221e8f5744b12bcc03b0a34af"
+contentHash: "e8ff39f338b631bd06b28bdacfcde78ccc58c39d"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — directive-no-fvd012026-import-on-franco-valuta · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ፡ በፍራንኮ ቫሉታ ማስመጣት መመሪያ ቁጥር FVD/01/2026
+# National Bank of Ethiopia — directive-no-fvd012026-import-on-franco-valuta
 
 National Bank of Ethiopia — forex — directive-no-fvd012026-import-on-franco-valuta.
 
 በአማርኛ፦ የውጭ ምንዛሪ — directive-no-fvd012026-import-on-franco-valuta። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ መመሪያ ቁጥር FVD/01/2026 በፍራንኮ ቫሉታ ማስመጣትን የሚመለከት ሲሆን፣ የውጭ ምንዛሪ ክምችት ላይ ጫና ሳያሳድር ንግድንና ኢንቨስትመንትን ለማመቻቸት ያለመ ነው። መመሪያው በፍራንኮ ቫሉታ ግብይቶች ላይ ግልጽነትን፣ ተጠያቂነትን፣ ተቋማዊ ቅንጅትን እና የቴክኖሎጂ ቁጥጥር ዘዴዎችን ለማረጋገጥ የወጣ ነው። በብሔራዊ ባንክ አዋጅ ቁጥር 1359/2025 አንቀጽ 39(5)፣ 39(6) እና 53(2) መሰረት የወጣ ሲሆን፣ የፍራንኮ ቫሉታ ግብይቶችን የሚመራ የተዋሃደ የህግ ማዕቀፍ ያቋቁማል።
 
 Source: https://nbe.gov.et/wp-content/uploads/2026/05/DIRECTIVE-NO.-FVD012026-IMPORT-ON-FRANCO-VALUTA.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -64,6 +62,8 @@ System;
 
 from the domestic banking system is not payable;
 
+1
+
 2.5 “Investment Purpose” means capital goods and raw materials;
 
 2.6 “National Bank” means the National Bank of Ethiopia;
@@ -104,6 +104,8 @@ Directive, the following may utilize Franco Valuta:
    4. Development projects of strategic importance;
    5. Owners of personal effects;
 
+2
+
 6. Religious institutions, government Institutions, and civic societies receiving
       grants;
    7. Diplomatic corps and communities;
@@ -139,6 +141,8 @@ Franco Valuta may be permitted for:
       engaged in domestic trading, as per the Ministry of Trade and Regional
       Intergradation proclamation or regulation;
    2. Capital goods, inputs, spare parts, and other equipments for investments;
+
+3
 
 3. Importation of goods to special economic zone and free trade zone;
    4. Permanent import, temporary import, re-export, and re-import goods;
@@ -178,6 +182,8 @@ Investors and traders shall submit the following mandatory documents with their
 
 Violations include:
 
+4
+
 1. Misuse of Franco Valuta;
    2. False declaration;
    3. Circumvention or avoidance of controls.
@@ -199,6 +205,8 @@ Article 8, sub-article 8.1.3 of FXD/01/2024 is hereby repealed.
 14. Effective Date
 
 This Directive shall enter into force as of the 29th day of May 2026.
+
+5
 
 Procedures for importing goods on a Franco Valuta basis
 
@@ -232,6 +240,8 @@ S.No.          Type of goods imported on a Franco Valuta basis                Pe
            as gifts, aid, or donations                                                                                                         of Association)
 
 9.         Goods imported from abroad as gifts or aid exclusively for the     Non-commercial goods imported in quantities appropriate to       Authenticated certificate of donation or aid and the
+
+1
 
 S.No.        Type of goods imported on a Franco Valuta basis              Permitted quantity of goods and FOB value in US dollars          Supporting documents required to import goods
                                                                                           for import on a Franco Valuta basis                           on a Franco Valuta basis
@@ -267,6 +277,8 @@ S.No.        Type of goods imported on a Franco Valuta basis              Permit
          abroad and have an investment license from the appropriate
          government office
 
+2
+
 S.No.        Type of goods imported on a Franco Valuta basis                     Permitted quantity of goods and FOB value in US dollars             Supporting documents required to import goods
                                                                                               for import on a Franco Valuta basis                                 on a Franco Valuta basis
                                                                               Not of a commercial nature or quantity                              Certificate issued by the awarding body and
@@ -299,6 +311,8 @@ All goods and equipment imported solely for persons with            Confirmation
          institution or for an individual’s health where delay would              •     For vehicle spare parts, excluding engines, gearboxes,    •     For vehicle spare parts, submission of ownership
          cause serious disruption or imperil life                                       and differentials, limited to the extent of the damage          certificate (Libre)
 
+3
+
 S.No.        Type of goods imported on a Franco Valuta basis           Permitted quantity of goods and FOB value in US dollars         Supporting documents required to import goods
                                                                                     for import on a Franco Valuta basis                            on a Franco Valuta basis
                                                                        As per the list of personal effects issued by the relevant
@@ -309,3 +323,5 @@ S.No.        Type of goods imported on a Franco Valuta basis           Permitted
                                                                        As per the approval given by the recommending government     Supporting document from the relevant government
 24.      Fuel for own consumption by embassies, international          office                                                       office
          organizations, and FDI.
+
+4

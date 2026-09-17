@@ -7,7 +7,7 @@ lang: "am"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "59bb2c7345653cc7d05592d7ef295ab1b9d128b1"
+contentHash: "7bc7eaa48ea2a971e90f287d977d99c2cb612e62"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
@@ -97,11 +97,15 @@ ALL NEWS
 
 የማይክሮ ፋይናንስ ተቋማት
 
+6
+
 የካፒታል እቃዎች ፋይናንስ / የሊዝ ኩባንያዎች
 
 27
 
 የክፍያ መሣሪያ ሰጪዎች/የስርዓት ኦፕሬተሮች
+
+1
 
 ድጋሚ ኢንሹራንስ ኩባንያ
 

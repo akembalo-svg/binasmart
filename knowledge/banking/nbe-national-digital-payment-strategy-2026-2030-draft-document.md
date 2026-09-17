@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2025/12/NATIONAL_DIGITAL_PAYMENT_STRATEGY_2026-2030_Draft_Document.pdf"
 title: "National Bank of Ethiopia — national-digital-payment-strategy-2026-2030-draft-document"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት: NATIONAL DIGITAL PAYMENTS STRATEGY 2026-2030"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "395d1baf8c7331d2d3381f95f42dcbfbf39cac76"
+contentHash: "36aff773d3ac563b57c06a5fa24f9b766bf2ecea"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — national-digital-payment-strategy-2026-2030-draft-document · የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት: NATIONAL DIGITAL PAYMENTS STRATEGY 2026-2030
+# National Bank of Ethiopia — national-digital-payment-strategy-2026-2030-draft-document
 
 National Bank of Ethiopia — payments — national-digital-payment-strategy-2026-2030-draft-document.
 
 በአማርኛ፦ የክፍያ ሥርዓት — national-digital-payment-strategy-2026-2030-draft-document። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ረቂቅ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ ከ2026 እስከ 2030 የሚተገብረውን የዲጂታል ክፍያ ስትራቴጂ ያቀርባል። ስትራቴጂው በ2021-2024 የተጀመረውን የዲጂታል ክፍያ ጉዞ በመቀጠል፣ የፋይናንስ አካውንት ተደራሽነትን ከፍ ለማድረግ እና ንቁ አጠቃቀምን ለማሳደግ ያለመ ነው። ሰነዱ የስትራቴጂክ ማዕቀፍ፣ የአተገባበር እቅድ እና የክትትልና ግምገማ እቅድን ያካትታል።
 
 Source: https://nbe.gov.et/wp-content/uploads/2025/12/NATIONAL_DIGITAL_PAYMENT_STRATEGY_2026-2030_Draft_Document.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -42,6 +40,8 @@ PAYMENTS STRATEGY
 D R A F T
 
 D R A F T
+
+3
 
 CONTENTS
 
@@ -80,6 +80,8 @@ RISK AND MITIGATION PLAN  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  
 MONITORING, EVALUATION AND LEARNING PLAN  .  .  .  .  .  .  .  .  .  .  .                                  125
 
 D R A F T
+
+4
 
  .E. Dr. Eyob Tekalign Tolina (PhD)
 H
@@ -124,6 +126,8 @@ overcome the remaining barriers and build a resilient digital payment system tha
 every citizen and propels Ethiopia toward a more inclusive and prosperous future.
 
 D R A F T
+
+6
 
 D R A F T
 

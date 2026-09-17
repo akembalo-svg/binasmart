@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/FOREIGN-EXCHANGE-MARKET-GUIDELINE.pdf"
 title: "National Bank of Ethiopia — foreign-exchange-market-guideline"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ ገበያ መመሪያ"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "106903f7e8c8425c1ad24e7c4ecb39112e8b54e2"
+contentHash: "cdb85bcee411d97d7e5778174cc250feb3255440"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — foreign-exchange-market-guideline · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ ገበያ መመሪያ
+# National Bank of Ethiopia — foreign-exchange-market-guideline
 
 National Bank of Ethiopia — forex — foreign-exchange-market-guideline.
 
 በአማርኛ፦ የውጭ ምንዛሪ — foreign-exchange-market-guideline። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ መመሪያ የውጭ ምንዛሪ ገበያ መመሪያ ተብሎ የሚጠቀስ ሲሆን፣ በውጭ ምንዛሪ ግብይት ውስጥ የሚሳተፉ አካላትን እና የግብይት አይነቶችን ይገልጻል። መመሪያው እንደ የተፈቀደላቸው ባንኮች፣ የውጭ ምንዛሪ ቢሮዎች፣ የጨረታ ዋጋ፣ የሽያጭ ዋጋ፣ እና የቅጽበታዊ ግብይት (Spot Transaction) ያሉ ቁልፍ ቃላትን ትርጉም ይሰጣል። የቅጽበታዊ ግብይት ክፍያ በሁለት የስራ ቀናት (T+2) ውስጥ የሚፈጸም የውጭ ምንዛሪ ግብይት ነው።
 
 Source: https://nbe.gov.et/wp-content/uploads/2024/07/FOREIGN-EXCHANGE-MARKET-GUIDELINE.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -68,6 +66,8 @@ foreign payments.
 which is legal tender in any country outside Ethiopia as to which the National
 
 Bank has declared it to be acceptable for payment in Ethiopia;
+
+1
 
 2.7    Foreign Exchange means any foreign currency, cheques, bills of exchange,
 
@@ -123,6 +123,8 @@ transaction is conducted between market participants and their customers;
 
 3. Scope of Application
 
+2
+
 This guideline applies to all foreign exchange market participants.
 
 4. General Provision
@@ -174,6 +176,8 @@ authority to conduct foreign exchange transactions on behalf of them.
 
 and reputation, competence and capability.
 
+3
+
 4.11.   The dealing desk should be staffed throughout the official forex market
 
 hours and should have the necessary equipment and resources.
@@ -218,6 +222,8 @@ of forex for transaction. Any bank that seeks to transact forex is
 obliged to transact at least the minimum amount per single
 
 transaction at the quoted rate. However, a higher amount from
+
+4
 
 the minimum transaction, banks should quote two-way rates
 
@@ -273,6 +279,8 @@ to arrange for proper value to be applied (back valuation) or pay
 
 compensation costs.
 
+5
+
 i)    Compensation for a late receipt in foreign currency is the
 
 higher amount of;
@@ -326,6 +334,8 @@ Monitoring and Reserve Management Directorate at National
 Bank by 6:00 PM. The information should include the following
 
 (Use Annex 1, Tables 3 & 4):
+
+6
 
 a.   Name of the reporting bank;
 

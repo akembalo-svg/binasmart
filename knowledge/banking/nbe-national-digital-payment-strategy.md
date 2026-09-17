@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/National-Digital-Payment-Strategy.pdf"
 title: "National Bank of Ethiopia — national-digital-payment-strategy"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት፡ National Digital Payments Strategy"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "f16c7c93198f17c2366d5ef020d97f554e7977fd"
+contentHash: "800fcbfaff881dbcf492aefdcc52b848cb21fa4f"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — national-digital-payment-strategy · የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት፡ National Digital Payments Strategy
+# National Bank of Ethiopia — national-digital-payment-strategy
 
 National Bank of Ethiopia — payments — national-digital-payment-strategy.
 
 በአማርኛ፦ የክፍያ ሥርዓት — national-digital-payment-strategy። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ሰነድ የኢትዮጵያን ብሔራዊ የዲጂታል ክፍያ ስትራቴጂ (NDPS) ያቀርባል። ስትራቴጂው ከ2021 እስከ 2024 ያለውን ጊዜ የሚሸፍን ሲሆን፣ ኢትዮጵያን በ2025 ዲጂታል ለማድረግ ያለመ ነው። ሰነዱ በሦስት ዋና ዋና ክፍሎች የተዋቀረ ነው፡ አውድ፣ ስትራቴጂካዊ ማዕቀፍ እና የአፈጻጸም ማዕቀፍ።
 
 Source: https://nbe.gov.et/wp-content/uploads/2023/04/National-Digital-Payment-Strategy.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -72,6 +70,8 @@ Foreword
       Prime Minister
       Federal Democratic Republic of Ethiopia
 
+3
+
 This document lays out Ethiopia’s National Digital Payments Strategy
 (NDPS). It is structured in three main sections:
 Context, Strategic Framework, and Implementation Framework.
@@ -88,6 +88,8 @@ that follows.
 The Implementation Framework section contains the high-level
 implementation plan, governance structure, and monitoring and evaluation
 mechanism established to materialize the benefits from this strategy.
+
+4
 
 Contents
     Table of Figures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
@@ -135,6 +137,8 @@ B2.2 Strategic Pillar 2: Champion adoption of inclusive digital payments . . . .
     		 Action 21: Launch services and solutions targeting financially excluded segments. . . . . . . . . . . . . . . . . . . . 50
     		 Action 22: Encourage multi-language availability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
 
+5
+
 B2.3 Strategic Pillar 3: Build a robust and consistent regulatory and oversight framework . . . . . . . . . . . . . 51
 		 B2.3.1 Capacity. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
 		 Action 23: Strengthen regulation and oversight capacity. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
@@ -169,6 +173,8 @@ C3. MONITORING PLAN . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Glossary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
 References. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78
+
+6
 
 Table of Figures
 

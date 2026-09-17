@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2026/05/DIRECTIVE-NO.-FXD-05-2026-AMENDMENT-TO-FOREIGN-EXCHANGE-DIRECTIVE-NO.-FXD-01-2024-.pdf"
 title: "National Bank of Ethiopia — directive-no-fxd-05-2026-amendment-to-foreign-exchange-direc"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/05/2026"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "8935ccedc4e45e1ed2b9cf336251c3ea018165b6"
+contentHash: "ceab27eef41dbf636249564adf89ab0f464e7fda"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — directive-no-fxd-05-2026-amendment-to-foreign-exchange-direc · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/05/2026
+# National Bank of Ethiopia — directive-no-fxd-05-2026-amendment-to-foreign-exchange-direc
 
 National Bank of Ethiopia — forex — directive-no-fxd-05-2026-amendment-to-foreign-exchange-direc.
 
 በአማርኛ፦ የውጭ ምንዛሪ — directive-no-fxd-05-2026-amendment-to-foreign-exchange-direc። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ መመሪያ የውጭ ምንዛሪ አስተዳደርን ለማቃለል እና የንግዱ ማህበረሰብ በFX ማሻሻያ ላይ ያለውን እምነት ለማሳደግ የወጣ ነው። የንግድ ባንኮች የተለያዩ የንግድ ነክ ዘዴዎችን እና ጭነቶችን እንዲያፀድቁ ስልጣን በመስጠት የውጭ ምንዛሪ አስተዳደርን የበለጠ ያልተማከለ ያደርጋል። መመሪያው በብሔራዊ ባንክ የኢትዮጵያ ማቋቋሚያ (የተሻሻለው) አዋጅ ቁጥር 1359/2025 አንቀጽ 6 (2) እና (17) እና አንቀጽ 39 በተሰጠው ስልጣን መሰረት የወጣ ነው።
 
 Source: https://nbe.gov.et/wp-content/uploads/2026/05/DIRECTIVE-NO.-FXD-05-2026-AMENDMENT-TO-FOREIGN-EXCHANGE-DIRECTIVE-NO.-FXD-01-2024-.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -63,6 +61,8 @@ This Directive may be cited as the "Foreign Exchange Directive No. FXD/05/2026."
         2.6 "National Bank of Ethiopia (NBE)” means the National Bank of Ethiopia, which is
              the central bank of the country.
 
+1
+
 3. Amendments
 
 The articles of Foreign Exchange Directive No. FXD/01/2024 are hereby amended as
@@ -90,3 +90,5 @@ The articles of Foreign Exchange Directive No. FXD/01/2024 are hereby amended as
 4. Effective Date
 
 This Directive shall enter into force as of the 25th day of May 2026.
+
+2

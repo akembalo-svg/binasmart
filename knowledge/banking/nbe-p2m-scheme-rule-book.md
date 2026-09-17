@@ -5,6 +5,7 @@ titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የP2M የክፍያ ሥር�
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"

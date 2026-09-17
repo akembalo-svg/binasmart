@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/FXD012024-FOREIGN-EXCHANGE-PR-Amharic.pdf"
 title: "National Bank of Ethiopia — fxd012024-foreign-exchange-pr-amharic"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "e056b25c1abaa1023b9b503503b1889873a7133d"
+contentHash: "06d00e87ec98be3ac13595754d629176c8c717ae"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — fxd012024-foreign-exchange-pr-amharic · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ
+# National Bank of Ethiopia — fxd012024-foreign-exchange-pr-amharic
 
 National Bank of Ethiopia — forex — fxd012024-foreign-exchange-pr-amharic.
 
 በአማርኛ፦ የውጭ ምንዛሪ — fxd012024-foreign-exchange-pr-amharic። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ አዋጅን በተመለከተ ያወጣውን መመሪያ ያብራራል። መመሪያው የውጭ ምንዛሪ አጠቃቀምን፣ ግብይትን እና ቁጥጥርን የሚመለከቱ ዝርዝር ድንጋጌዎችን ይዟል። በተጨማሪም የውጭ ምንዛሪ ገበያን ለማረጋጋት እና ኢኮኖሚያዊ መረጋጋትን ለማስፈን ያለመ ነው።
 
 Source: https://nbe.gov.et/wp-content/uploads/2024/07/FXD012024-FOREIGN-EXCHANGE-PR-Amharic.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -106,6 +104,8 @@ E%(fn A%u2 xb¦ "?%1. aˆG]] <_ z[ LA"Fs •Z¬s <GŒ h°.
 A|Z¡G]] Lš_" =Kb± *Zt\ =%7| |ZiHs2 +5SNHs K ² abxG, =`³
 %7|%2 =¯NUt "ZHs% 5>)¯¯.w =3W I%ž).6%.% 56{N2 =STUV%
 
+2
+
 =3W "%QU ?"s. 5>{Y7 =K$6œ •‚vrs%2 hdHs% 3´\>b.
 fZn@\G]]
 *A%“}w *T*1 `YC`I% =3W "%QU 8Z&. 6fgTZ *Zt\ IABCAP
@@ -146,6 +146,8 @@ hŒ¢s% 1)T¦G]-
       57[ •Zl2 5IABC E|T. A1# 6Gt" E|Ms% •LlV"w =3W
       "%QU •‚vrs 7% *A%X%| z¾\rs >bm ab3 *6Tº\†3 >)KtL1
       >|d7 =7| aˆG]]
+
+3
 
 §   A")K¦]- =3W "%QU >DD13 =3W I%ž)K@s% *6{Nw =3W $h\
       I%ž).6%.% *>{Y7w =%7| 8Z&\s%%" LA F+s2 LA… STF. gZ
@@ -190,6 +192,8 @@ L;< =K•d•}. ŽX/s •B}"w Iq *° Œ|6 £7i. A|Z¡G]-
       cFK„s =‰@ ÇYb. 6Y C1 Y¢£ 56™6Z \)ÈG]] E%(z"w
       *LK>" ab *T9Z 5CTµ *C‚/% 5Cm9} Ab)K¦ T• ;;†3 ¹KI•s
 
+4
+
 =CYdT3 =Él½¾. EZX\ *LlK¦ Ydª E%(1|7 KYZ¡G]] =Ebš_
       EZ"ªrs £Z£Z A‹“Ê" *T%•N CÆ)¸Z *”G =CT5¤ <a2G]]
   §   »)K¦w =6%78.% =>_*FP `³ 56YTl2 53W EX ?l1 =C353
@@ -232,6 +236,8 @@ E|T.% 5>¯9%w =xg %d.% 5>ZTNw =q)tG AŒ"% 5>{Y7w =`³ %7|%2
 =3W I%ž).6%.% 5>)¯¯.2 =STUV% &5" A$l =3W "%QU 69+*°1
 ?"s. 5>{Y7 .GŒ A)Kx¤O <BF†xG]] E%(z" *šz .%*1 6cd.w
 
+5
+
 *>DD1 EZ"ªr« "?%1. *C$h[. AF. &6\. =I./01 ILBC *A>t<
 *8 *6H 1_G 1|gG, =xg %d. `Y 10 *6H =K9g <a2G, =\?) T•
 L9Œ;; =STZ 3)h "Z. 153 |ZD 11 *6H <YZ{G, =6%78. EX L9Œ;;
@@ -272,3 +278,5 @@ A%¥ 56a% *^6ds3 =53h Ž© =STFs% ~Gl =3W "%QU Kx2/s2 =+%”
 >_*dIN E%(z" Iq3 _NdKIN 5I./012 56; Ÿ£•Ð hŒ" v[ 5š_
 =3W "%QU A)KXYZ >DD1 )Å\>b. =*”;†3% |ZD E%(`œ hUAs%%
 E2)K;G¯5%]]
+
+6

@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/NBE_FC—AM—Financial-Education-Module-for-Youth-and-MSME-.pdf"
 title: "National Bank of Ethiopia — nbe-fc-am-financial-education-module-for-youth-and-msme"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የፋይናንስ ትምህርት ለወጣቶች፣ ለጥቃቅን፣ አነስተኛና መካከለኛ ኢንተርፕራይዞች"
 source_name: "National Bank of Ethiopia"
 section: "inclusion"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "3551a84ae2bf7f2a9dcc658656c40958fe5083ea"
+contentHash: "ac795ad5ea9308ab77267cc64f39173d490c6606"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — nbe-fc-am-financial-education-module-for-youth-and-msme · የኢትዮጵያ ብሔራዊ ባንክ የፋይናንስ ትምህርት ለወጣቶች፣ ለጥቃቅን፣ አነስተኛና መካከለኛ ኢንተርፕራይዞች
+# National Bank of Ethiopia — nbe-fc-am-financial-education-module-for-youth-and-msme
 
 National Bank of Ethiopia — inclusion — nbe-fc-am-financial-education-module-for-youth-and-msme.
 
 በአማርኛ፦ የፋይናንስ ተደራሽነትና ትምህርት — nbe-fc-am-financial-education-module-for-youth-and-msme። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ በ2016 ዓ.ም. ያዘጋጀው ለወጣቶች፣ ለጥቃቅን፣ አነስተኛና መካከለኛ ኢንተርፕራይዞች የተዘጋጀ የፋይናንስ ትምህርት መሠረታዊ ደረጃ ሞጁል ነው። ሰነዱ የንግድ እና ሥራ ፈጠራ መግቢያ፣ ግብ ማስቀመጥ እና በጀት አዘገጃጀት በሚሉ ሞጁሎች የተከፋፈለ ሲሆን፣ ሞጁል አንድ ከገጽ 1 እስከ 10፣ ሞጁል ሁለት ከገጽ 11 እስከ 26፣ እና ሞጁል ሦስት ከገጽ 27 ጀምሮ ይገኛሉ።
 
 Source: https://nbe.gov.et/wp-content/uploads/2024/07/NBE_FC—AM—Financial-Education-Module-for-Youth-and-MSME-.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -359,6 +357,8 @@ X መግቢያ
 
 የፋይናንስ ትምህርት ለወጣቶች፣ ለጥቃቅን፣ አነስተኛና መካከለኛ ኢንተርፕራይዞች
                                                                                        XI
+
+1
 
 1             ሞጁል
               አንድ

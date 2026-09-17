@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2026/01/DIRECTIVE-NO.NBE-INT-13-2026-INTEREST-RATES-AS-AMENDED-.pdf"
 title: "National Bank of Ethiopia — directive-no-nbe-int-13-2026-interest-rates-as-amended"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የወለድ ተመን መመሪያ ቁጥር NBE/INT/13/2026"
 source_name: "National Bank of Ethiopia"
 section: "rates"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "938daac9e77b3eea0ae14747b549debce28667d7"
+contentHash: "7af4b9ed854b0afde91071246eddc9c1eeebb6fd"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — directive-no-nbe-int-13-2026-interest-rates-as-amended · የኢትዮጵያ ብሔራዊ ባንክ የወለድ ተመን መመሪያ ቁጥር NBE/INT/13/2026
+# National Bank of Ethiopia — directive-no-nbe-int-13-2026-interest-rates-as-amended
 
 National Bank of Ethiopia — rates — directive-no-nbe-int-13-2026-interest-rates-as-amended.
 
 በአማርኛ፦ የወለድ ተመን — directive-no-nbe-int-13-2026-interest-rates-as-amended። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ መመሪያ የኢትዮጵያ ብሔራዊ ባንክ የወለድ ተመኖችን በተመለከተ ያወጣው ሲሆን፣ የገበያ ኃይሎች የወለድ ተመኖችን በነጻ እንዲወስኑ ለማስቻል የወለድ ተመን መመሪያውን ማሻሻል አስፈላጊ ሆኖ በመገኘቱ የወጣ ነው። መመሪያው በኢትዮጵያ ውስጥ ፈቃድ በተሰጣቸው ሁሉም ባንኮች ላይ ተፈጻሚ ይሆናል። የተቀማጭ ገንዘብ የወለድ ተመኖች (የፍላጎት፣ የቁጠባ እና የጊዜ ተቀማጭ) በእያንዳንዱ ባንክ በነጻ የሚወሰኑ ሲሆን፣ የአበዳሪነት የወለድ ተመኖችም በእያንዳንዱ ባንክ በነጻ ይወሰናሉ።
 
 Source: https://nbe.gov.et/wp-content/uploads/2026/01/DIRECTIVE-NO.NBE-INT-13-2026-INTEREST-RATES-AS-AMENDED-.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -62,6 +60,8 @@ This directive shall apply to all banks licensed by the National Bank of Ethiopi
    3.6 The deposit interest rate set by the Board of Directors of any bank under sub-
          article 3.4 and the criteria upon which they are based, as well as any
 
+1
+
 subsequent changes and the criteria upon which the changes are based shall
         be submitted to the National Bank of Ethiopia within five working days.
    3.7 Notwithstanding sub-article 3.6 of this article, banks shall calculate the
@@ -99,6 +99,8 @@ subsequent changes and the criteria upon which the changes are based shall
         monthly weighted average lending rate on loans and advances under sub-
         article 4.1, with possible disaggregation by sectors and shall be submitted to
 
+2
+
 the National Bank of Ethiopia within seven working days after the end of each
         calendar month as per Annex 2, which shall be part of this Directive.
    4.9 Unless the loan contract provides to the contrary, lending interest rates
@@ -113,6 +115,8 @@ repealed and replaced by these directives.
 6. Effective Date
 
 These directives shall be effective as of the 9th day of January 2026.
+
+3
 
 Annex 1
 
@@ -144,6 +148,8 @@ Note:
 •   The detailed methodology for weighted average calculation is available in the circulated Weighted Average Compilation Guideline.
    •   The details of sector names are available in the circulated Weighted Average Compilation Guideline.
 
+4
+
 Annex 1 (Cont.…)
                                      Table 2: Monthly Weighted Average Lending Profit Rates (Interest-Free Banks)
 Name of Bank: ___________________________________
@@ -170,6 +176,8 @@ Note:
 
 •   The detailed methodology for weighted average calculation is available in the circulated Weighted Average Compilation Guideline.
    •   The details of sector names are available in the circulated Weighted Average Compilation Guideline.
+
+5
 
 Annex 2
 
@@ -201,6 +209,8 @@ Note:
 
 •    The detailed methodology for weighted average calculation is available in the circulated Weighted Average Compilation Guideline.
    •    The details of deposit category names are available in the circulated Weighted Average Compilation Guideline.
+
+6
 
 Annex 2 (Cont.…)
 

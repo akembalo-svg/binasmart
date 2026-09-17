@@ -5,6 +5,7 @@ titleAm: "የኢትዮጵያ ብሔራዊ ባንክ፡ ለወጣቶችና ለአ
 source_name: "National Bank of Ethiopia"
 section: "inclusion"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"

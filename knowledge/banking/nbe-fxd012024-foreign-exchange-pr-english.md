@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/FXD012024-FOREIGN-EXCHANGE-PR-English.pdf"
 title: "National Bank of Ethiopia — fxd012024-foreign-exchange-pr-english"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ ማሻሻያ እና FXD/01/2024"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "147f801e2b45b9f67a1bb27c62538b64a54738d0"
+contentHash: "82d7be3272febd6830cf1303c73f952038575069"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — fxd012024-foreign-exchange-pr-english · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ ማሻሻያ እና FXD/01/2024
+# National Bank of Ethiopia — fxd012024-foreign-exchange-pr-english
 
 National Bank of Ethiopia — forex — fxd012024-foreign-exchange-pr-english.
 
 በአማርኛ፦ የውጭ ምንዛሪ — fxd012024-foreign-exchange-pr-english። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-የኢትዮጵያ ብሔራዊ ባንክ እ.ኤ.አ. ጁላይ 29 ቀን 2024 የውጭ ምንዛሪ ስርዓት ማሻሻያ ማድረጉን አስታውቋል። ይህ ማሻሻያ የገበያ ተኮር የምንዛሪ ተመን መወሰንን የሚያስተዋውቅ ሲሆን፣ በFXD/01/2024 መመሪያ የሚመራ ነው። ማሻሻያው የባንኮች የውጭ ምንዛሪ ግብይት ነፃነትን፣ የውጭ ምንዛሪ ማስረከብ መስፈርት ማብቃትን፣ የ38 ምርት ምድቦች ገደብ መነሳትን እና ላኪዎች 50 በመቶ የውጭ ምንዛሪ ገቢያቸውን እንዲይዙ መፍቀድን ያካትታል።
 
 Source: https://nbe.gov.et/wp-content/uploads/2024/07/FXD012024-FOREIGN-EXCHANGE-PR-English.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -69,6 +67,8 @@ in the following areas:
    8.   The simplification of rules governing foreign currency accounts, especially those
         currently held by foreign institutions, FDI companies, and the Diaspora.
 
+1
+
 9. The allowance for residents to open foreign currency accounts, based on remittance
        inflows, transfers from abroad, FX-based salary or rental income, and for other specified
        cases, as well as the ability to use such foreign currency accounts for foreign service
@@ -116,6 +116,8 @@ economic benefits can and will be realized:
        engaged in mining activities, particularly of gold; hundreds of thousands of manufacturing
        sector employees in exportable sectors; thousands of business engaged in the services and
        tourism sectors (especially those catering to international visitors); millions of individuals
+
+2
 
 who regularly receive remittances from relatives living abroad; and also hundreds of NGOs
     and private institutions who receive financing from external sources. Beyond these direct
@@ -165,6 +167,8 @@ who regularly receive remittances from relatives living abroad; and also hundred
     market exchange rates has also taken root in several segments of the economy, such that
     for many parts of the private business community as well as for remittance
 
+3
+
 senders/beneficiaries, transactions are already taking place at parallel market exchange
        rates. The FX reform being implemented today recognizes this market reality and will work
        to discourage such informal practices from here on with a switch expected towards the use
@@ -211,6 +215,8 @@ ahead. More specifically:
 •   The NBE has initiated new tools to conduct monetary policy and reduce inflation:
        Following up on measures put in place last year to limit credit growth, the NBE has recently
        introduced an interest-rate based monetary policy regime that will help better manage
+
+4
 
 monetary and credit developments in a way that is responsive to inflation and exchange
        rate developments.
@@ -259,6 +265,8 @@ be provided will be:
    •   Information on any foreign exchange auctions conducted by the NBE, including data on
        aggregate volumes, number of participants, and transaction exchange rates.
 
+5
+
 •   Information on any notable market developments, disruptions, misinformation or other
         issues that merit a formal response.
     •   Explanations and clarifications that may be needed on the new Foreign Exchange Directive
@@ -280,3 +288,5 @@ In closing, as Ethiopia marks this transformative moment in its economic journey
 among Africa’s most vibrant, open, and competitive economies, NBE calls upon all key players
 in the foreign exchange, banking, and business community as well as the broader public to play
 their part in making this reform a genuine success for the benefit of all Ethiopians.
+
+6

@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/12/National-Financial-Education-Strategy2021-2025.pdf"
 title: "National Bank of Ethiopia — national-financial-education-strategy2021-2025"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የፋይናንስ ትምህርት ስትራቴጂ 2021-2025"
 source_name: "National Bank of Ethiopia"
 section: "inclusion"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "8cbf70dfc7a861e0a087a4091243607c113b685f"
+contentHash: "b13c05b9fdfbd889051096c5305c296fda20a4d4"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — national-financial-education-strategy2021-2025 · የኢትዮጵያ ብሔራዊ ባንክ የፋይናንስ ትምህርት ስትራቴጂ 2021-2025
+# National Bank of Ethiopia — national-financial-education-strategy2021-2025
 
 National Bank of Ethiopia — inclusion — national-financial-education-strategy2021-2025.
 
 በአማርኛ፦ የፋይናንስ ተደራሽነትና ትምህርት — national-financial-education-strategy2021-2025። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ የፋይናንስ ትምህርት ስትራቴጂን ያቀርባል። ስትራቴጂው በነሐሴ 2020 የተዘጋጀ ሲሆን ከ2021 እስከ 2025 ያለውን ጊዜ ይሸፍናል። ሰነዱ የፋይናንስ ተደራሽነትን፣ ግንዛቤን፣ የቁጥር እውቀትን እና የገንዘብ አስተዳደርን ጨምሮ በኢትዮጵያ ያለውን የፋይናንስ አቅም ወቅታዊ ሁኔታ ይዳስሳል።
 
 Source: https://nbe.gov.et/wp-content/uploads/2023/12/National-Financial-Education-Strategy2021-2025.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -444,6 +442,8 @@ structured as follows:
       financial education progress; and
      Section 8 outlines priority actions of the NFES.
 
+3
+
 2. CURRENT STATE OF FINANCIAL CAPABILITY IN ETHIOPIA9
 
 2.1. Financial access and inclusion
@@ -481,6 +481,8 @@ Financial access varies greatly by region. Account access in Addis Ababa and Dir
  forms the basis of the analysis (unless otherwise noted), and was conducted using a nationally
  representative sample of 3500 Ethiopians across different regions. The survey was conducted in
  coordination with the NBE and CSA.
+
+4
 
 roughly 70 percent and 83 percent respectively; however, the percentage of adults that own an
 account drops greatly, outside of those two cities. Account ownership also varies by region, and
@@ -533,6 +535,8 @@ own an account have more than one account within the formal financial sector. Ap
     Among the 61 percent of urban adults, some might have an account at the Commercial Bank of Ethiopia and
  another account at a private bank.
 
+5
+
 percent of rural adults own an account and they mainly report owning an account either at the CBE
 (61 percent) or with an MFI (68 percent), and 22 percent own an account through a SACCO.
 Rates of account ownership of the CBE are consistent with NBE supply side data, as roughly
@@ -574,6 +578,8 @@ women). Lack of phone ownership or regular usage has implications on both access
 mobile products and services. In addition, if adults, predominantly rural adults, are not using
 mobile phones frequently it becomes difficult to attempt to deliver both financial services as well
 as financial education through mobile phones.
+
+6
 
 2.2. Barriers to financial access
 Roughly 82 percent of unbanked adults reported not owning an account due to a financial

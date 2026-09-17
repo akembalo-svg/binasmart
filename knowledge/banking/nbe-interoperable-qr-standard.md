@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/04/Interoperable-QR-Standard.pdf"
 title: "National Bank of Ethiopia — interoperable-qr-standard"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት: Interoperable QR Standard"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "80d3309f582459448b28e22b8567c84428f3a132"
+contentHash: "d639477f9fb7ca3e99f76de0d684dca757f3cf49"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — interoperable-qr-standard · የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት: Interoperable QR Standard
+# National Bank of Ethiopia — interoperable-qr-standard
 
 National Bank of Ethiopia — payments — interoperable-qr-standard.
 
 በአማርኛ፦ የክፍያ ሥርዓት — interoperable-qr-standard። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ሰነድ በQR ኮድ የሚደረጉ የክፍያ ሥርዓቶችን በተመለከተ የኢትዮጵያ ብሔራዊ ባንክ ያወጣውን መስፈርት ያብራራል። ሰነዱ የQR ኮድ ግብይት ፍሰቶችን፣ የQR ዝርዝር መስፈርቶችን እና የQR ኮድ ተፈጻሚነትን ያካትታል። በሰነዱ ውስጥ 22 ገጾች ያሉት ሲሆን፣ የQR ኮድ አጠቃቀምን በተመለከተ ዝርዝር መረጃዎችን ይሰጣል።
 
 Source: https://nbe.gov.et/wp-content/uploads/2024/04/Interoperable-QR-Standard.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -142,6 +140,8 @@ involves merchants generating QR codes with their details, consumers scanning th
 mobile app to initiate transactions, the app sending transaction requests to the network, and the
 network communicating the transaction outcome to both merchant and consumer. Below is a
 standard sequence of events to do a QR transaction.
+
+2
 
 Within the domain of QR transactions, two fundamental types of QR codes play a pivotal role: static
 and dynamic. These variations add a layer of versatility to the transaction process, each catering to

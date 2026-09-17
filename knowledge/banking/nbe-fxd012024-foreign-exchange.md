@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/FXD012024-FOREIGN-EXCHANGE-.pdf"
 title: "National Bank of Ethiopia — fxd012024-foreign-exchange"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/01/2024"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "ab5048534fc3e5f2d28d9b3f1e8b624e3d7686ef"
+contentHash: "a7ab99597849dc74df7e0d257c34b236b2b5e01c"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — fxd012024-foreign-exchange · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/01/2024
+# National Bank of Ethiopia — fxd012024-foreign-exchange
 
 National Bank of Ethiopia — forex — fxd012024-foreign-exchange.
 
 በአማርኛ፦ የውጭ ምንዛሪ — fxd012024-foreign-exchange። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/01/2024 ሲሆን፣ የውጭ ምንዛሪ ገበያ ተሳታፊዎችን፣ የግብይት አይነቶችን እና የውጭ ምንዛሪ ሂሳቦችን በተመለከተ ዝርዝር ድንጋጌዎችን ይዟል። መመሪያው በ 7 ክፍሎች የተከፈለ ሲሆን፣ ከውጭ ንግድ፣ አገልግሎቶች፣ የውጭ ምንዛሪ ቢሮዎች፣ የገንዘብ ዝውውሮች እና የካፒታል ሂሳብ ጋር የተያያዙ ጉዳዮችን ያብራራል። ሰነዱ በጠቅላላው 63 ገጾች ያሉት ሲሆን፣ 25 አንቀጾችን እና 6 አባሪዎችን ያካትታል።
 
 Source: https://nbe.gov.et/wp-content/uploads/2024/07/FXD012024-FOREIGN-EXCHANGE-.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -61,6 +59,8 @@ PART SIX: CAPITAL ACCOUNT                                                     39
        19. Special allowance for Offshore Accounts
        20. Foreign portfolio flows
 
+2
+
 PART SEVEN: MISCELLANEOUS ITEMS                                                53
        21. Special allowance for Industrial Parks and Special Economic Zones
        22. Cash Limits
@@ -75,6 +75,8 @@ ANNEXES                                                                        6
        4.   Annex Four: Bank-Affiliated Foreign Exchange Bureau Operations
        5.   Annex Five: Independent Foreign Exchange Bureau Operations
        6.   Annex Six: Dry Port Import and Export Procedures
+
+3
 
 FOREIGN EXCHANGE DIRECTIVE NO. FXD/01/2024
 
@@ -116,6 +118,8 @@ For the purpose of this Directive, unless the context requires otherwise:
          such as fertilizer, seed, pesticide and chemicals, animal feeds, and animal
          hybrids;
 
+4
+
 2.4.    “Airway Bill” means a document issued by an airline or its agent evidencing
         the receipt of cargo for conveyance by air to a specific destination and
         bearing a title document to the goods airlifted;
@@ -156,6 +160,8 @@ For the purpose of this Directive, unless the context requires otherwise:
 2.18.   “Customs Declaration" means a valid document issued by the Ethiopian
         Customs Commission;
 
+5
+
 2.19. “CPT” stands for “Carriage Paid to (…named place of destination)” means
       that the seller must pay the cost and freight necessary to ship the goods to
       the named place of destination. Risks of loss or damage to the goods pass
@@ -195,6 +201,8 @@ For the purpose of this Directive, unless the context requires otherwise:
       approved and registered by the National Bank of Ethiopia;
 2.30. “External loan in kind” means acquisition of capital goods from an eligible
       foreign lender in the form of sale with deferred payments, lease agreement,
+
+6
 
 or any other legal arrangement that may be approved by the National Bank
       of Ethiopia;

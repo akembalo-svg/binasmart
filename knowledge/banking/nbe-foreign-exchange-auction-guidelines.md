@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/Foreign-Exchange-Auction-Guidelines.pdf"
 title: "National Bank of Ethiopia — foreign-exchange-auction-guidelines"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ ጨረታ መመሪያዎች"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "2bc41a0961878cf5b88753113843df406e8395ce"
+contentHash: "a20ed1c9d7e08ecea2102e044c05b712cd8c2187"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — foreign-exchange-auction-guidelines · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ ጨረታ መመሪያዎች
+# National Bank of Ethiopia — foreign-exchange-auction-guidelines
 
 National Bank of Ethiopia — forex — foreign-exchange-auction-guidelines.
 
 በአማርኛ፦ የውጭ ምንዛሪ — foreign-exchange-auction-guidelines። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ በፕሮክላሜሽን ቁጥር 591/2008 አንቀጽ 21 መሰረት የሚያካሂደውን የውጭ ምንዛሪ ጨረታ መመሪያዎችን ያብራራል። መመሪያው የውጭ ምንዛሪ ገበያ መዛባትን ለመፍታት፣ ግልጽነትን ለማሳደግ እና የባንኩን የውጭ ምንዛሪ ክምችት ለመገንባት ያለመ ነው። ጨረታው የሚካሄደው በአሜሪካን ዶላር እና በኢትዮጵያ ብር ብቻ ሲሆን፣ የጨረታው ማስታወቂያ በባንኩ ድረ-ገጽ (www.nbe.gov.et) ይፋ ይደረጋል።
 
 Source: https://nbe.gov.et/wp-content/uploads/2024/07/Foreign-Exchange-Auction-Guidelines.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -73,6 +71,8 @@ deal on FX auctions.
 
 V.     Auction Currency
 
+1
+
 5. The NBE shall conduct FX auction only in US dollar and Ethiopian Birr.
 
 VI.     Reserved Rights
@@ -125,6 +125,8 @@ h) Auction Window Start Time:
 
 i)   Auction Window Closing Time;
 
+2
+
 j)   Time of announcement of the auction results;
 
 k) Settlement date for both Birr and foreign exchange;
@@ -175,6 +177,8 @@ stamp and authorized signature.
 
 completed information shall be acknowledged.
 
+3
+
 16. Submitted bids shall be binding, representing firm commitments of the
 
 authorized banks and a penalty shall be applicable if they are not able to
@@ -218,3 +222,5 @@ XII.   Penalties
 guidelines shall be suspended from the next two (2) successive FX
 
 auctions.
+
+4

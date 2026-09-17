@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/fxd-45-1.pdf"
 title: "National Bank of Ethiopia — fxd-45-1"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/45/2016"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "413d1bb86681fc7469b04418b58f302b3b4bf0d1"
+contentHash: "032ff1116adba237025681b14aefdac9f28434ed"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — fxd-45-1 · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/45/2016
+# National Bank of Ethiopia — fxd-45-1
 
 National Bank of Ethiopia — forex — fxd-45-1.
 
 በአማርኛ፦ የውጭ ምንዛሪ — fxd-45-1። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ አጠቃቀምን እና አስተዳደርን በተመለከተ ያወጣውን መመሪያ ቁጥር FXD/45/2016 ያብራራል። መመሪያው የውጭ ምንዛሪ ግልጽነት ባለው እና ትክክለኛ በሆነ መንገድ መመደቡን ለማረጋገጥ ያለመ ነው። ሰነዱ በብሔራዊ ባንክ ማቋቋሚያ አዋጅ ቁጥር 591/2008 አንቀጽ 20(3) እና 27(2) በተሰጠው ስልጣን መሰረት የወጣ ነው።
 
 Source: https://nbe.gov.et/wp-content/uploads/2023/04/fxd-45-1.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -81,6 +79,8 @@ For the purpose of these Directives, unless the context provides otherwise:
 2.13 "transaction in foreign exchange" means:
       a) the transfer, borrowing, lending, assignment, exchange, purchase, sale, receipt,
           payment or crediting of foreign exchange; and
+
+2
 
 b) the conclusion of any contract, agreement, arrangement or understanding, as a
                result of which any foreign exchange is transferred, borrowed, lent, assigned,
@@ -147,6 +147,8 @@ Bank of Ethiopia concerning the bank’s foreign currency open position and
 6.1 In the allocation of foreign currency a bank shall give priority to the following
         import items and payments, among them, on first come first served basis.
 
+4
+
 6.1.1   imports of essential goods, i.e., fuel, fertilizer and other agricultural inputs,
                     pharmaceutical     product,    factories’   requests    for   procurement     of
                     machineries, equipments, spare parts, raw materials and accessories;
@@ -180,6 +182,8 @@ Bank of Ethiopia concerning the bank’s foreign currency open position and
 
 8.   Reporting Requirements
 
+5
+
 8.1 Each bank shall submit to the National Bank of Ethiopia a weekly return of its
           Foreign Exchange Exposure. The return shall be duly signed by the reporting bank’s
           Senior Officer in charge or IBD and cover six business days of the week that is
@@ -209,6 +213,8 @@ Notwithstanding article 13 of these directives, a bank shall develop foreign exc
 
 11.1    Importers are strictly prohibited from lodging foreign currency request
               application in one import application on more than one bank.
+
+6
 
 11.2 Any importer who fails to comply with these directives will be black listed from
              six month up to two years.

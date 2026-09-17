@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2026/02/DIRECTIVE-NO.-FXD042026.pdf"
 title: "National Bank of Ethiopia — directive-no-fxd042026"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/04/2026"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "5fe7587a6ff0554641ca6add865e562e700783f0"
+contentHash: "09c7ba545746c3ab47c2c87e88724d0a84b36965"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — directive-no-fxd042026 · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/04/2026
+# National Bank of Ethiopia — directive-no-fxd042026
 
 National Bank of Ethiopia — forex — directive-no-fxd042026.
 
 በአማርኛ፦ የውጭ ምንዛሪ — directive-no-fxd042026። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ መመሪያ የውጭ ምንዛሪ አስተዳደርን ለማቃለል፣ የውጭ ምንዛሪ ገበያን ለማሳደግ እና የንግዱ ማህበረሰብ በውጭ ምንዛሪ ማሻሻያ ላይ ያለውን እምነት ለማሳደግ ያለመ ነው። የውጭ ምንዛሪ መመሪያ ቁጥር FXD/01/2024 አንቀጾች በዚህ መመሪያ ተሻሽለዋል። ባንኮች ለውጭ ምንዛሪ ግብይቶች የቅድሚያ ምንዛሪ ተመን እንዲጠቀሙ ተፈቅዶላቸዋል፣ ማንኛውም የአገልግሎት ላኪ 100 በመቶ የኤክስፖርት ገቢውን በውጭ ምንዛሪ ማቆያ ሂሳብ ውስጥ ላልተወሰነ ጊዜ እንዲይዝ ተፈቅዷል።
 
 Source: https://nbe.gov.et/wp-content/uploads/2026/02/DIRECTIVE-NO.-FXD042026.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -58,6 +56,8 @@ This Directive may be cited as the “Foreign Exchange Directive No. FXD/04/2026
           service, employment service, construction service, consulting service, royalties and
           any other related services generating foreign exchange.
 
+1
+
 3. Amendments
 
 The articles of Foreign Exchange Directive No. FXD/01/2024 are hereby amended as
@@ -94,6 +94,8 @@ The articles of Foreign Exchange Directive No. FXD/01/2024 are hereby amended as
          removed as follows: ‘the minimum amount of foreign currency required for FX
          account opening is hereby removed'.
 
+2
+
 3.7   Sub-article 14.5.1(5) of Foreign Exchange Directive No. FXD/01/2024 hereby
       amended as; ‘the requirements for cash notes declaration for an authorized dealer
       to accept/purchase or deposit an amount exceeding USD 10,000 or equivalent in
@@ -129,6 +131,8 @@ The articles of Foreign Exchange Directive No. FXD/01/2024 are hereby amended as
       by: ‘Banks are entitled to offer private foreign exchange loan guarantees that do not
       exceed 10% of the bank’s total capital. A guarantee is considered as a loan and
       hence also governed by the single borrower limit directive’
+
+3
 
 3.13. Sub-article 22.7 and 22.8 of Foreign Exchange Directive No. FXD/01/2024 is hereby
        amended by: ‘For amounts exceeding USD 10,000 or other equivalent currencies,
@@ -168,6 +172,8 @@ ii. State the type of commodity to be exported or the invoice number or the
       currency cash notes for Visa fee, immigration fees, license fees locally upon
       presentation of payment evidence by the customer’.
 
+4
+
 3.17. Annex 5, sub-article 2.3 of Foreign Exchange Directive No. FXD/01/2024 hereby
          amended as: ‘The National Bank of Ethiopia security deposit requirement for
          Independent Forex Bureaus (IFBs) of Birr 30 million shall be fully released after one
@@ -197,3 +203,5 @@ support upon application justifying the case(s).
 6. Effective Date
 
 This Directive shall enter into force as of the 12th day of February 2026.
+
+5

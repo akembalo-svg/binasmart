@@ -5,6 +5,7 @@ titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ ግ�
 source_name: "National Bank of Ethiopia"
 section: "rules"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"

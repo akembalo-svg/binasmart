@@ -1,25 +1,23 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/Foreign-Exchange-Market-Operation-Code-of-Conduct.pdf"
 title: "National Bank of Ethiopia — foreign-exchange-market-operation-code-of-conduct"
-titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ ገበያ አሰራር መመሪያ"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
-contentHash: "d75eda0b6e0e5b064a6affc8c8e8f0d6cf99cef6"
+contentHash: "2408cbdaefb3f0a577a9173f0e1a32b93797d9b7"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — foreign-exchange-market-operation-code-of-conduct · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ ገበያ አሰራር መመሪያ
+# National Bank of Ethiopia — foreign-exchange-market-operation-code-of-conduct
 
 National Bank of Ethiopia — forex — foreign-exchange-market-operation-code-of-conduct.
 
 በአማርኛ፦ የውጭ ምንዛሪ — foreign-exchange-market-operation-code-of-conduct። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
-
-ይህ ሰነድ የውጭ ምንዛሪ ገበያ አሰራር መመሪያን የሚመለከት ሲሆን፣ ቀደም ሲል የነበረው መመሪያ በገበያው ተለዋዋጭነት፣ በኢኮኖሚያዊና ፋይናንሺያል ለውጦች እና ብቅ ባሉ ስጋቶች ምክንያት እንዳልተገመገመ ይገልጻል። አሁን ያለው መመሪያ ከ 45 የ Global FX Code መርሆዎች ጋር የተጣጣመ ሲሆን፣ በ 54 አገሮች ተቀባይነት አግኝቷል። የዚህ መመሪያ ማሻሻያ ዓላማ በኢትዮጵያ ውስጥ ጠንካራና ውጤታማ የውጭ ምንዛሪ ገበያን ማጠናከር ነው።
 
 Source: https://nbe.gov.et/wp-content/uploads/2024/07/Foreign-Exchange-Market-Operation-Code-of-Conduct.pdf (official National Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
@@ -70,6 +68,8 @@ aligned with the Global FX Code to their forex market code of conduct.
     market practices, ensure equitable and healthy relationships between market participants and facilitate market
     efficiency.
 
+1
+
 The purpose of revising the existing forex market code of conduct is to holistically
 
 strengthen and promote a well-functioning forex market that could respond to
@@ -118,6 +118,8 @@ Retail foreign exchange market refers to a forex market where a spot foreign cur
 
 transaction is conducted among market participants and their customers.
 
+2
+
 Spot transaction means a currency transaction where settlement for both party is
 
 made with in two working days (T + 2) after confirmation of transaction.
@@ -165,6 +167,8 @@ ii. Market participants should act honestly and fairly in dealing with counterpa
 iii. Market participants should also act with integrity in all their forex dealings or
 
 activities.
+
+3
 
 2.2.Market participants should strive for the highest professional standards.
 
@@ -216,6 +220,8 @@ a) situations where personal or firm interests may conflict with those of a
 
 customer or other market participant, or where such a conflict arises for the
 
+4
+
 market participant because the interests of one customer may conflict with
 
 those of another;
@@ -261,6 +267,8 @@ activity), market participants should disclose sufficient details of the conflic
 enable the affected counterpart/customer to decide beforehand whether or not
 
 they wish to proceed with the transaction.
+
+5
 
 3. Governance
 Market participants are expected to have a sound and effective governance framework
@@ -312,6 +320,8 @@ a) expect senior management to be highly visible to relevant personnel of the
 market participant in articulating and modelling the desired practices,
 
 values, and conduct;
+
+6
 
 b) take appropriate steps to promote and reinforce all relevant personnel’s
 

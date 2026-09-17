@@ -3,8 +3,9 @@ url: "https://nbe.gov.et/wp-content/uploads/2024/10/NBE-GRANTS-OPERATIONAL-LICEN
 title: "National Bank of Ethiopia — nbe-grants-operational-licenses-to-five-non-bank-forex-burea"
 titleAm: "የኢትዮጵያ ብሔራዊ ባንክ ለአምስት የውጭ ምንዛሪ ቢሮዎች የሥራ ፈቃድ ሰጠ"
 source_name: "National Bank of Ethiopia"
-section: "rules"
+section: "licensing"
 lang: "en"
+text_source: "pdf"
 status: "live"
 fetchedAt: "2026-09-16"
 lastChecked: "2026-09-17"
@@ -15,9 +16,9 @@ packFormat: "2"
 
 # National Bank of Ethiopia — nbe-grants-operational-licenses-to-five-non-bank-forex-burea · የኢትዮጵያ ብሔራዊ ባንክ ለአምስት የውጭ ምንዛሪ ቢሮዎች የሥራ ፈቃድ ሰጠ
 
-National Bank of Ethiopia — rules — nbe-grants-operational-licenses-to-five-non-bank-forex-burea.
+National Bank of Ethiopia — licensing — nbe-grants-operational-licenses-to-five-non-bank-forex-burea.
 
-በአማርኛ፦ አዋጆችና መመሪያዎች — nbe-grants-operational-licenses-to-five-non-bank-forex-burea። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+በአማርኛ፦ የባንክ ፈቃድ አሰጣጥ — nbe-grants-operational-licenses-to-five-non-bank-forex-burea። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
 
 የኢትዮጵያ ብሔራዊ ባንክ ለአምስት የባንክ ያልሆኑ የውጭ ምንዛሪ ቢሮዎች የሥራ ፈቃድ መስጠቱን አስታውቋል። እነዚህ ቢሮዎች የውጭ ምንዛሪ መመሪያ ቁጥር FXD/01/2024ን በማሟላት ፈቃድ የተሰጣቸው ሲሆን፣ የጥሬ ገንዘብ ምንዛሪ ግዥና ሽያጭ ላይ ብቻ ያተኩራሉ። ቢሮዎቹ ከጉምሩክ መግለጫ ውጭ እስከ 10,000 ዶላር መግዛት የሚችሉ ሲሆን፣ ለግል ጉዞ እስከ 5,000 ዶላር እና ለንግድ ጉዞ እስከ 10,000 ዶላር መሸጥ ይችላሉ።
 
