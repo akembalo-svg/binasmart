@@ -7,6 +7,10 @@
 byte for byte what it was before. The experiment is switchable because it is worth re-running when the
 corpus changes; it is off because on the pack it was built for it moves the shipped number **down**.
 
+§1 is the first three fusion variants. **§2, appended later the same day, is two more** — `augment` and
+`augment-top`, which may only ADD pages the question never surfaced and never displace one it did. They are
+off as well, and §2.5 says by how much each gate missed.
+
 ---
 
 ## 1. What the gap was
@@ -238,3 +242,171 @@ KNOWLEDGE_BILINGUAL_QUERY=1 node --env-file=.env ops/bini/bilingual-latency.js  
 
 Run them detached (`setsid nohup … &`) and poll the log: a 90-question run is about five minutes, and a
 run started with a plain `&` over ssh was killed with the session once during this task.
+
+---
+
+# §2 — The rescue-only variants: `augment` and `augment-top`
+
+2026-09-17, later the same day, same live server, same `search()`. §7 above named the obvious next thing to
+try: *"run the rendering, but only let it add candidates it finds that the original query did not, rather
+than letting it outscore the original query's own candidates."* Both readings of that sentence were built
+and measured. **Neither is kept on.** `KNOWLEDGE_BILINGUAL_QUERY` still defaults to `0`; the two new fusion
+modes sit beside `max` and `rrf` behind `KNOWLEDGE_BILINGUAL_FUSION`, tested, for the day the corpus changes.
+
+## 2.1 What the two modes do
+
+* **`augment`.** The original query's ranked candidate list is kept exactly as it is with the flag off —
+  same scores, same order. The English rendering may only **append** pages that list does not already hold,
+  after it, each carrying the hybrid score the rendering gave it. A page the Amharic question already ranked
+  can be neither displaced nor re-scored. The `≤2-chunks-per-page` rule, the reranker, its 0.03 gate and the
+  +0.06 tie-breaker run on the extended list unchanged. At most `BILINGUAL_AUGMENT_MAX` = 12 chunks are
+  appended, because the list it extends is the reranker's prompt.
+* **`augment-top`.** The same rescue, but the appended pages are then merged into the list by their own
+  score with the original **top-1 pinned**: the page the question itself ranked first can never be
+  displaced; everything under it competes. That pin is the one protection max fusion did not give, and the
+  six Amharic pages max fusion lost (§4) are what it was aimed at.
+* **Keyword side.** Both modes force per-rendering tokens whatever `KNOWLEDGE_BILINGUAL_KEYWORD` says: the
+  union would change the keyword denominator of every page the question found for itself, and an augment
+  run promises those scores are untouched. A rescued page is scored on the English rendering's tokens alone,
+  which is what it was found by.
+* **Untouched, again:** `hybridScore`, its 0.15 keyword weight, the +0.06 own-source boost, the reranker and
+  its 0.03 gate.
+
+**One consequence, before any measurement.** This report's *retrieval* column is a search with
+`rerankTo` unset (`ops/bini/rerun-retrieval-benchmark.js`, `searchOptionsFor`: `{ k: 18 }` with no
+reranker), and it scores the first three distinct pages of that list. Under `augment` the rescued pages are
+strictly after the candidates that column reads. **`augment` therefore cannot move the retrieval number at
+all** — its entire effect is on what the reranker is shown. The gate "banking cross-lingual retrieval ≥ 55"
+was unreachable for it before the first question was asked. That is not a flaw in the measurement; it is
+what "may only append" means, and the runs below confirm the code does exactly that and nothing else.
+
+## 2.2 Banking (90 questions), 18,611 chunks
+
+| slice | n | baseline (off) | **augment** | **augment-top** | max + union (§3.1) |
+|---|---|---|---|---|---|
+| all questions | 90 | 71.1 / 72.2 | 71.1 / **73.3** | 66.7 / 71.1 | 72.2 / 70.0 |
+| Amharic | 60 | 65.0 / 68.3 | 65.0 / **70.0** | 58.3 / 66.7 | 66.7 / 65.0 |
+| English | 30 | 83.3 / 80.0 | 83.3 / 80.0 | 83.3 / 80.0 | 83.3 / 80.0 |
+| am question, gold only in English | 32 | 43.8 / 50.0 | 43.8 / **56.3** | 43.8 / 53.1 | 62.5 / 53.1 |
+| question + gold share a language | 58 | 86.2 / **84.5** | 86.2 / 82.8 | 79.3 / 81.0 | 77.6 / 79.3 |
+| batch 1 | 60 | 60.0 / 61.7 | 60.0 / **63.3** | 56.7 / 61.7 | 65.0 / 61.7 |
+| batch 2 | 30 | 93.3 / 93.3 | 93.3 / 93.3 | 86.7 / 90.0 | 86.7 / 86.7 |
+
+`/root/bini-eval/retrieval-gold-banking-20260917-053403.json` (baseline),
+`-074708.json` (augment), `-075149.json` (augment-top).
+
+The retrieval column of the augment run is **identical to the baseline in every slice**, which is the
+design's promise measured rather than asserted: a per-question diff of the two result files finds 0
+questions gained and 0 lost on `plain`, over all 90.
+
+## 2.3 Travel (60) and the two agents (111)
+
+| gold set | slice | n | baseline (off) | **augment** | **augment-top** |
+|---|---|---|---|---|---|
+| travel | all | 60 | 85.0 / **83.3** | 85.0 / 81.7 | 76.7 / 78.3 |
+| travel | am question, gold only in English | 40 | 87.5 / 82.5 | 87.5 / 80.0 | 75.0 / 75.0 |
+| travel | English | 20 | 80.0 / 85.0 | 80.0 / 85.0 | 80.0 / 85.0 |
+| v3-agents | all | 111 | 96.4 / 99.1 | 96.4 / 99.1 | — |
+| v3-agents | Afiya | 54 | **96.3** / 98.1 | 96.3 / 98.1 | — |
+| v3-agents | Asmat | 57 | **96.5** / 100.0 | 96.5 / 100.0 | — |
+| v3-agents | am question, gold only in English | 33 | 87.9 / 97.0 | 87.9 / 97.0 | — |
+
+`retrieval-gold-travel-20260917-053102.json` (baseline), `-075419.json` (augment), `-075724.json`
+(augment-top); `retrieval-gold-v3-agents-20260917-052600.json` (baseline), `-080129.json` (augment).
+On v3 the augment run is not merely equal in the slices: its per-question diff against the baseline is 0
+gained and 0 lost on **both** columns, all 111 questions.
+
+**The augment-top v3 run is on a different corpus, and says so.** Between 08:01 and 08:05 UTC, between the
+augment v3 run and the augment-top one, the index grew from **18,611 to 18,885 chunks** — from outside this
+task (`/var/log/bina-knowledge.log` has nothing after 03:43, so a manual ingest). Rather than compare
+across corpora — the mistake §3.2 records — a fresh **flag-off** v3 baseline was measured on 18,885:
+
+| v3-agents, 18,885 chunks | n | off (`-081451.json`) | **augment-top** (`-080502.json`) |
+|---|---|---|---|
+| all questions | 111 | 94.6 / 96.4 | 91.9 / 95.5 |
+| Afiya | 54 | 96.3 / 96.3 | 90.7 / 94.4 |
+| Asmat | 57 | 93.0 / 96.5 | 93.0 / 96.5 |
+| am question, gold only in English | 33 | 84.8 / 90.9 | 78.8 / 87.9 |
+
+Same corpus, same day: augment-top loses 3 questions on retrieval (A12, A20, A28) and 1 as shipped (A20),
+and gains none. The +274 chunks cost the flag-off baseline 1.8 points of retrieval on their own
+(96.4 → 94.6) — worth remembering the next time a number from this pack is quoted.
+
+## 2.4 Latency
+
+Search latency, from the benchmark runs themselves (`coldP50` / `coldP95`: the first search of each
+question, which pays for the rendering and the second embedding; no reranker):
+
+| run | n | cold p50 | cold p95 |
+|---|---|---|---|
+| flag off (v3, 18,885) | 111 | 317 ms | **459 ms** |
+| augment — banking | 90 | 957 ms | **1,238 ms** |
+| augment — travel | 60 | 961 ms | **1,245 ms** |
+| augment — v3-agents | 111 | 921 ms | **1,479 ms** |
+| augment-top — banking | 90 | 967 ms | 1,326 ms |
+| augment-top — travel | 60 | 998 ms | 1,297 ms |
+
+`contextFor` over the 90 banking questions under `augment`
+(`bilingual-latency-on-20260917-080941.json`): p50 1,469 ms, p95 2,093 ms, mean 1,324 ms — within a few
+milliseconds of the flag-on figure in §3.3 (1,441 / 2,078). The rescue itself costs nothing measurable; the
+translation call and the second embedding cost what they always cost.
+
+## 2.5 The decision, against the gates that were set
+
+| gate | required | **augment** | **augment-top** |
+|---|---|---|---|
+| banking overall as shipped | ≥ 72.2 | **73.3** pass | 71.1 — fail by 1.1 |
+| banking cross-lingual retrieval | ≥ 55 | **43.8 — fail by 11.2** | 43.8 — fail by 11.2 |
+| banking same-language as shipped | ≥ 84.5 | **82.8 — fail by 1.7** (1 question) | 81.0 — fail by 3.5 |
+| travel | ≥ 85.0 / 83.3 | 85.0 / **81.7 — fail by 1.6** (1 question) | 76.7 / 78.3 — fail by 8.3 / 5.0 |
+| v3 Afiya / Asmat retrieval | ≥ 96.3 / 96.5 | 96.3 / 96.5 pass | 90.7 / 93.0 — fail by 5.6 / 3.5 |
+| `search()` p95 | ≤ 1,200 ms | **1,238–1,479 ms — fail by 38–279 ms** | 1,297–1,326 ms — fail |
+
+**`augment` fails four of the six gates, `augment-top` fails all six. The flag stays off.** The code and the
+tests are committed anyway, for the same reason the first three variants were: the arithmetic turns on how
+much of the corpus is in the question's own language, and that changes.
+
+## 2.6 Per question, win by win
+
+**Banking, `augment` vs baseline** — `plain`: **0 gained, 0 lost**. `shipped`:
+
+* gained (3, all Amharic): bk-030 (`zemen-international-banking-2-forex-service`, English gold),
+  bk-039 (`coopbank-ufaqs`, English gold), bk-070 (`ethiotelecom-am-endekise-overdraft`, Amharic gold).
+* lost (2, both Amharic, both with **Amharic** gold pages): bk-007 (`zemen-am-digital-services`),
+  bk-075 (`ethiotelecom-am-mela-micro-credit`).
+
+Net +1 question overall (72.2 → 73.3) and +2 on the cross-lingual slice (50.0 → 56.3), paid for with 1
+same-language question (84.5 → 82.8). The pattern §4 found survives in miniature: **even when the English
+rendering is forbidden to displace anything, giving the reranker more English candidates still costs an
+Amharic page.** It is a far smaller price than max fusion's — 2 lost instead of 6 — but it is the same coin.
+
+**Banking, `augment-top` vs baseline** — `plain`: gained bk-039; lost bk-004, bk-006, bk-026, bk-066,
+bk-070. `shipped`: gained bk-018, bk-039; lost bk-007, bk-033, bk-074. Three of the five pages lost on
+retrieval (bk-004, bk-066, bk-070) are among the six max fusion lost, so **pinning first place does not
+save them**: they were not first, they were second or third, and a rescued English page merged in by score
+took the slot.
+
+**Travel, `augment`** — `plain` 0/0; `shipped` gained tv-030 (`special-needs-medical-case-passengers`),
+lost tv-014 and tv-015 (`check-in-check-in-at-the-airport`, `check-in-check-in-process`). Net −1.
+**Travel, `augment-top`** — `plain` lost 5 (tv-023, tv-039, tv-040, tv-045, tv-047), gained none.
+
+**v3-agents, `augment`** — 0 gained, 0 lost, both columns. **`augment-top`** (same-corpus comparison) —
+3 lost on retrieval, 1 as shipped, 0 gained.
+
+## 2.7 What the two runs actually taught
+
+1. **The promise held exactly.** Across 261 questions on three gold sets, `augment` changed the retrieval
+   column on **zero** of them. A fusion mode that says it will not touch the original ranking, and then does
+   not touch it on a live 18,611-chunk index, is worth having in the tree even switched off.
+2. **The rescue only reaches the reranker, and the reranker is not always called.** The 0.03 gate skipped
+   reranking on 28 of the 90 banking searches; on those the augment result is the baseline to the byte. The
+   whole variant lives in the 62 that were reranked, and there it is worth +3/−2.
+3. **Pinning top-1 is not enough.** The English rendering's scores are systematically higher than a
+   cross-lingual Amharic cosine, so once the rescued pages are allowed to merge by score they take second
+   and third place, which is where Page@3 is decided. `augment-top` protects one slot and loses the two
+   behind it: banking same-language retrieval 86.2 → 79.3, travel 85.0 → 76.7.
+4. **The cross-lingual gate needs a different lever.** The English gold page these 32 questions want is
+   usually already in the candidate pool and merely below third — `augment` cannot rescue what was never
+   missing. Moving it up means re-scoring it, which is max fusion, which sells the same-language slice.
+   Nothing on the query side has yet escaped that trade; §7's remaining suggestion — Amharic pages for
+   Dashen, CBE and CoopBank, i.e. the document side — is still the honest answer.
