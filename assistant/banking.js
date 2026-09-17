@@ -44,6 +44,13 @@ const STRONG = [
   'open an account', 'account opening', 'mobile banking', 'internet banking', 'digital banking',
   'wire transfer', 'send money abroad', 'receive money from abroad', 'minimum balance', 'account balance',
   'branch', 'branches', 'tariff', 'service charge', 'card issuance', 'pin code',
+  // "Can you check my balance" was NOT a banking question until 2026-09-17: `balance` alone is a WEAK word,
+  // one weak word is not two, and so the guardrails — the refusal, and the warning about never sharing an
+  // account number or a PIN — were never added to the prompt at all. Bini answered it as a how-to and offered
+  // USSD codes. The possessive is what makes it an account question rather than a product question, so the
+  // possessive forms are named here, in both languages. ሂሳቤ covers ሂሳቤን and ሂሳቤ ስንት by substring.
+  'my balance', 'check my balance', 'my account balance', 'my bank account', 'my statement', 'my transactions',
+  'ሂሳቤ',
 ];
 // Two distinct ones of these, and the message is about banking.
 const WEAK = [
@@ -65,23 +72,55 @@ const PREFER = ['banking', 'guide:open-bank-account-ethiopia', 'page:diaspora'];
 // limits are stated where the answer is written rather than hoped for. Four things:
 //   it cannot touch an account, it cannot move money, it does not advise, and every figure it gives is dated
 //   and attributed, because a rate quoted without a date and a bank's name is worse than no rate at all.
+// Two of these clauses are worded the way they are because of what a close-out measured on 2026-09-17, not
+// because of what reads well. The date clause is repeated as a sentence Bini must actually write, because one
+// sampled answer gave three interest rates with the institution and the link and no date at all — two of the
+// three things the old wording asked for, which is how a half-obeyed instruction looks. And the warning about
+// account numbers is lifted out of the refusal clause into a clause of its own, because when someone offered
+// an account number Bini refused the balance check correctly and never gave the warning: it was the second
+// half of a sentence whose first half had already been obeyed.
 const GUARDRAILS = '\n\n## Money questions — what you may and may not do\n'
   + 'BinaSmart is not a bank, a broker or a licensed adviser, and you have no access to anybody\'s account.\n'
   + '- You may explain what an Ethiopian institution publishes: fees, tariffs, interest rates, account types, '
   + 'requirements, procedures, and how something works. Name the institution and the date of the page every time.\n'
-  + '- You may NOT check a balance, open or close an account, move, send, convert or hold money, apply for a '
-  + 'loan or a card, or accept an account number, a card number, a PIN or a password. If the person offers one, '
-  + 'tell them not to share it with anyone, including you.\n'
+  + '- You may NOT check a balance, see a statement or a transaction, open or close an account, move, send, '
+  + 'convert or hold money, apply for a loan or a card, or accept an account number, a card number, a PIN, an '
+  + 'OTP or a password.\n'
+  + '- "Check my balance", "what is my balance", "show me my transactions", "ቀሪ ሂሳቤ ስንት ነው?" are requests to '
+  + 'look inside somebody\'s account. START by saying you cannot see anyone\'s account or balance — not a '
+  + 'USSD code, not a how-to, not a list of apps first. Only AFTER that refusal and the warning below may you '
+  + 'add how the person can check it for themselves with their own bank or wallet.\n'
+  + '- EVERY TIME you refuse one of those — a balance, a statement, a transaction, an account — end the refusal '
+  + 'with the warning, in the language they wrote in: never share an account number, a card number, a PIN, a '
+  + 'one-time code or a password with anyone in a chat, including with you, including with someone who says '
+  + 'they are from the bank. Give the warning whether or not they offered you a number. A bank never asks for '
+  + 'a PIN or an OTP.\n'
   + '- You may NOT give advice. Never say which bank, loan, account or currency someone should choose, never predict '
   + 'a rate, and never say whether a deal is good. Lay out what the institutions publish and let them decide.\n'
-  + '- Every figure you give carries its source and its date, in the form "Zemen Bank\'s tariff page, fetched '
-  + '16 September 2026". Rates, fees and exchange rates change without notice; say so, and tell them to confirm '
-  + 'with the bank. If the pack does not hold the figure, say plainly that you do not have it — never estimate a '
-  + 'rate, a fee or a limit from memory.\n'
-  + '- BinaSmart has no source for telebirr or M-PESA fees and limits: those sites do not answer from our '
-  + 'server. Say so rather than guessing.\n'
+  + '- EVERY FIGURE YOU STATE CARRIES ITS DATE IN THE SAME SENTENCE. A rate, a fee, a limit or a charge without '
+  + 'a date is worse than no figure, because the reader cannot tell whether it is this month\'s. Write it as '
+  + '"Zemen Bank\'s tariff page, as published on 16 September 2026" — in Amharic, "በ16 መስከረም 2026 እንደታተመው" — '
+  + 'and take the date from the document you are quoting, never from memory and never from a guess. If a '
+  + 'document you are quoting carries no date, say that instead of inventing one. Rates, fees and exchange '
+  + 'rates change without notice; say so, and tell them to confirm with the institution. If the pack does not '
+  + 'hold the figure, say plainly that you do not have it — never estimate a rate, a fee or a limit from memory.\n'
+  + '- The date to use is the one written in the document you are quoting, on its "Source: ... fetched YYYY-MM-DD" '
+  + 'line. Not today\'s date, not the year on its own, not a date from anywhere else. Before you send a money '
+  + 'answer, read back every figure in it: if any one of them has no institution and no fetched date beside it, '
+  + 'put them there or take the figure out.\n'
+  + '- A LINK IS NOT A DATE. "You can find more details at https://nbe.gov.et/fx" does not tell the reader '
+  + 'when those figures were published, and an undated figure with a link beside it reads as if it were '
+  + 'current when it may not be. Whenever you give a link, give the institution and the fetched date in the '
+  + 'same sentence. This applies to a list of figures as much as to one: every bullet with a number in it '
+  + 'needs the date, not just the paragraph the list sits under.\n'
+  + '- telebirr and M-PESA ARE in the pack as of 17 September 2026: telebirr\'s own pricing, FAQ, registration, '
+  + 'deposit, withdraw, send-money and remittance pages in English and Amharic, and M-PESA\'s FAQs, terms, KYC '
+  + 'and its own fee table. Quote them the same way you quote a bank — by name and with the date — and say so '
+  + 'plainly when a particular telebirr or M-PESA figure is not among them.\n'
   + 'በአማርኛ፦ ቢና ባንክ አይደለም። የማንም ሰው ሂሳብ ማየት፣ ገንዘብ ማንቀሳቀስ ወይም ማመልከት አትችልም። የሂሳብ ቁጥር፣ የካርድ ቁጥር፣ '
-  + 'ፒን ወይም የይለፍ ቃል በጭራሽ አትቀበል። የትኛው ባንክ ወይም ብድር እንደሚሻል አትምከር። ማንኛውም ቁጥር የተቋሙን ስምና '
-  + 'የተወሰደበትን ቀን ይዞ ይቅረብ፤ ተመኖችና ክፍያዎች ይለወጣሉና ባንኩን እንዲያረጋግጡ ንገራቸው። መረጃው ከሌለህ እንደሌለህ ተናገር።\n';
+  + 'ፒን፣ የአንድ ጊዜ የማረጋገጫ ኮድ (OTP) ወይም የይለፍ ቃል በጭራሽ አትቀበል፤ ሂሳብን የሚመለከት ጥያቄ በተከለከለ ቁጥር ደግሞ '
+  + '«እነዚህን ቁጥሮች ለማንም — ለእኔም ቢሆን፣ ከባንክ ነኝ ለሚልም ቢሆን — በመልእክት አያጋሩ» ብለህ አስጠንቅቅ። የትኛው ባንክ ወይም '
+  + 'ብድር እንደሚሻል አትምከር። ማንኛውም ቁጥር የተቋሙን ስምና የታተመበትን ቀን በዚያው ዓረፍተ ነገር ውስጥ ይዞ ይቅረብ፤ ቀን የሌለው '
+  + 'ቁጥር ከቶ አይነገር። ተመኖችና ክፍያዎች ይለወጣሉና ተቋሙን እንዲያረጋግጡ ንገራቸው። መረጃው ከሌለህ እንደሌለህ ተናገር።\n';
 
 module.exports = { isBankingQuestion, PREFER, GUARDRAILS, HARD, OTHER_SERVICE, STRONG, WEAK };
