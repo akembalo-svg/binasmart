@@ -135,6 +135,8 @@ function noteFor(reports, { today, pack, extra } = {}) {
     + '\n\n' + (today || new Date().toISOString().slice(0, 10)) + ' · ops/packs/freshness.js --pack ' + ((pack && pack.id) || '');
 }
 
+// Called with the manual AND the dir sources: both are hosts this server could not reach, and the difference
+// between them is only whether somebody has already fetched them by hand.
 // A manual source is one we could not reach when the registry was written. Five of the banking pack's seven
 // are unreachable hosts rather than blocked ones, so they may simply come back - and the day one does is the
 // day it can become a fetched source. Probing them costs one request a week each and is the only way that day
@@ -171,11 +173,15 @@ async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites,
   const reg = (pack && sites) ? null : JSON.parse(fs.readFileSync(packFile(packId), 'utf8'));
   const cfg = pack || (reg && reg.pack) || { id: packId };
   dir = dir || packDir(cfg.id || packId);
-  const list = sites || reg.sites.filter(s => s.fetch !== 'manual');
+  // A `dir` site is not fetched weekly either: its pages came off somebody's laptop, not off the network, and
+  // re-importing a harvest that has not changed would be a fetch of nothing. It IS still knocked on below,
+  // because the whole point of the door-knock is to notice the day nbe.gov.et answers this server reliably and
+  // the hand harvest can stop.
+  const list = sites || reg.sites.filter(s => s.fetch !== 'manual' && s.fetch !== 'dir');
   // A caller that names its own sites names its own manual sources too. Without that, a test that injects a
   // site list would still knock on every unreachable host in the registry on the real network, which is the
   // one thing every test here is built not to do.
-  const manual = manualSites || ((reg && !sites) ? reg.sites.filter(s => s.fetch === 'manual') : []);
+  const manual = manualSites || ((reg && !sites) ? reg.sites.filter(s => s.fetch === 'manual' || s.fetch === 'dir') : []);
   // The Amharic sidecar has to reach writePack, or every unchanged English document would be re-rendered
   // without the Amharic header ops/packs/am-headers.js wrote for it: the weekly check would quietly undo it.
   const amHeaders = cfg.amHeaders ? readSidecar(dir) : null;

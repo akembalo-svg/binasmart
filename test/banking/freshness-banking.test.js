@@ -89,15 +89,32 @@ test('a source marked doNotFetch is never probed', async () => {
   assert.deepEqual(probed, [], 'awashbank.com currently serves somebody else\'s page and must never be touched');
 });
 
-// safaricom.et is manual because it cannot be fetched honestly, not because it cannot be reached: it answers
-// 200 every time. Probing it would report "a source we could not reach now answers" every Sunday for ever,
-// which is precisely the weekly alert this whole design exists to avoid.
-test('a manual source that already answers is never probed either', async () => {
-  const safaricom = reg.sites.find(s => s.id === 'safaricom');
-  assert.equal(safaricom.reach, 'up');
+// A source that already answers every time is never probed: reporting "a source we could not reach now
+// answers" every Sunday for ever is precisely the weekly alert this whole design exists to avoid. No site in
+// the banking registry is in that state today — safaricom was until 2026-09-17, when the entry moved to
+// m-pesa.safaricom.et, which does not answer — so the rule is pinned on a fixture rather than deleted.
+test('a source that already answers is never probed either', async () => {
+  const up = { id: 'anything', name: 'Anything', host: 'example.et', fetch: 'manual', reach: 'up' };
   const probed = [];
-  await F.probeManual([safaricom], { get: async u => { probed.push(u); return { ok: true }; } });
+  await F.probeManual([up], { get: async u => { probed.push(u); return { ok: true }; } });
   assert.deepEqual(probed, [], 'a host that answers every week is not news any week');
+  assert.ok(!reg.sites.some(s => s.fetch === 'manual' && /^up$/i.test(String(s.reach || ''))),
+    'if a source is reachable it should be fetched, not listed as manual');
+});
+
+// A harvested (`fetch: dir`) source is not re-imported weekly — its bytes came off a laptop, not off the
+// network — but it IS knocked on, because the day nbe.gov.et answers this server reliably is the day the hand
+// harvest can stop. The knock is the only thing that will notice.
+test('a harvested source is skipped by the weekly fetch and still knocked on', async () => {
+  const dirSites = reg.sites.filter(s => s.fetch === 'dir');
+  assert.equal(dirSites.length, 3, 'nbe, ethiotelecom and safaricom');
+  const fetchedThisWeek = reg.sites.filter(s => s.fetch !== 'manual' && s.fetch !== 'dir').map(s => s.id);
+  for (const s of dirSites) assert.ok(!fetchedThisWeek.includes(s.id), s.id + ' must not be fetched weekly');
+  const probed = [];
+  await F.probeManual(dirSites, { get: async u => { probed.push(u); return { ok: true, html: 'x'.repeat(9) }; } });
+  assert.deepEqual(probed.sort(), ['https://m-pesa.safaricom.et/', 'https://nbe.gov.et/', 'https://www.ethiotelecom.et/'].sort());
+  const note = F.manualNote(dirSites, Object.fromEntries(dirSites.map(s => [s.id, { ok: true, chars: 9 }])));
+  assert.match(note, /National Bank of Ethiopia/, 'and a door that opens is said out loud');
 });
 
 test('the note for this pack says banking, the travel one says airline', () => {

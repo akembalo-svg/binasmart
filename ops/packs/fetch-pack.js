@@ -60,8 +60,12 @@ function pathOf(url) {
   } catch (e) { return null; }
 }
 const rx = list => (Array.isArray(list) ? list : []).map(p => new RegExp(p));
+// A section may name its own regular-expression flags. Nothing in the travel pack does, and nothing that does
+// not name them changes by a byte; the NBE harvest needs it because its PDF filenames are half SHOUTED
+// (DIRECTIVE-NO.-FXD042026) and half whispered (fxd-67-2020), and writing every alternation twice would be a
+// rule nobody could read.
 function sectionOf(site, p) {
-  for (const s of site.sections || []) if (new RegExp(s.match).test(p)) return s;
+  for (const s of site.sections || []) if (new RegExp(s.match, s.matchFlags || '').test(p)) return s;
   return null;
 }
 
@@ -112,7 +116,13 @@ function slugFor(p, take = 2) {
 // `pathSlugs` table, and if it is not, the run stops. Writing 200 characters of hex as a filename would be a
 // document nobody can find in a gold set, a Telegram note or a git diff.
 const NEEDS_NAME = /%[0-9a-f]{2}/i;
-function assignSlugs(pages, site) {
+// A harvested site is keyed by path AND query, because ethio telecom puts the page's language in ?lang=am and
+// the Amharic telebirr tariff is a different document from the English one at the same path. `telebirr-faq-lang-am`
+// is a filename a rule can produce and no human would choose, so in dir mode anything that is not plain ascii
+// path characters - a percent escape, a question mark, an equals sign - must be named in pathSlugs, and the run
+// stops if it is not. Exactly the rule Task 4 wrote for Zemen's Amharic locale, widened by two characters.
+const NEEDS_NAME_DIR = /[^a-zA-Z0-9/_.-]/;
+function assignSlugs(pages, site, { needsName = NEEDS_NAME, slugOf = null } = {}) {
   const named = (site && site.pathSlugs) || {};
   const taken = new Map();
   for (const [p, s] of Object.entries(named)) {
@@ -120,16 +130,16 @@ function assignSlugs(pages, site) {
     taken.set(s, p);
   }
   const list = [...pages].sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
-  for (const p of list) if (NEEDS_NAME.test(String(p.path)) && !named[p.path]) {
+  for (const p of list) if (!(slugOf && slugOf(p)) && needsName.test(String(p.path)) && !named[p.path]) {
     throw new Error('this path needs a name in the site pathSlugs table, it cannot be slugged by rule: ' + p.path);
   }
-  const out = list.map(p => ({ ...p, slug: named[p.path] || slugFor(p.path) }));
+  const out = list.map(p => ({ ...p, slug: named[p.path] || (slugOf && slugOf(p)) || slugFor(p.path) }));
   for (let take = 3; take <= 8; take++) {
     const count = new Map();
     for (const p of out) count.set(p.slug, (count.get(p.slug) || 0) + 1);
     const clashing = [...count].filter(([, n]) => n > 1).map(([s]) => s);
     if (!clashing.length) break;
-    for (const p of out) if (clashing.includes(p.slug) && !named[p.path]) p.slug = slugFor(p.path, take) || clean(p.path);
+    for (const p of out) if (clashing.includes(p.slug) && !named[p.path] && !(slugOf && slugOf(p))) p.slug = slugFor(p.path, take) || clean(p.path);
   }
   return out;
 }
@@ -428,9 +438,17 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
       else if (!dryRun && oldMeta.lastChecked !== day) touchLastChecked(file, day);
       continue;
     }
-    const first = (oldMeta && (oldMeta.firstFetched || oldMeta.fetchedAt)) || day;
+    // A document fetched over the network was fetched today. A document built from a harvest was fetched on
+    // the day the harvest captured those bytes, and saying otherwise would date a 2026-09-16 tariff to
+    // whatever day we happened to run the importer - which is the one thing every header in this pack promises
+    // not to do. `lastChecked` still means today: we looked at it today, at bytes captured then.
+    const dday = d.fetchedAt || day;
+    const first = (oldMeta && (oldMeta.firstFetched || oldMeta.fetchedAt)) || dday;
     if (!old) r.added.push(slug); else { r.changed.push(slug); if (oldMeta.status === 'gone') r.revived.push(slug); }
-    if (!dryRun) fs.writeFileSync(file, renderDoc(d, site, { today: day, firstFetched: first, pack, amHeaders }));
+    if (!dryRun) {
+      fs.writeFileSync(file, renderDoc(d, site, { today: dday, firstFetched: first, pack, amHeaders }));
+      if (dday !== day) touchLastChecked(file, day);
+    }
   }
 
   // A failed fetch must never look like a deleted site. If most of what is on disk is suddenly missing from
@@ -489,7 +507,12 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
     // already gone are all left exactly as they are - and counted, because silence would be worse.
     if (!site || !text || meta.status === 'gone') { r.skipped.push(slug); continue; }
     const p = pathOf(meta.url);
-    const sec = sectionOf(site, p || '');
+    // The document's own recorded section decides, and only a document that has none is matched again by
+    // path. A re-render must not move a page between sections: pathOf throws the query away, and the M-PESA
+    // fee table's url is a fragment on the home page rather than a path of its own, so matching by path alone
+    // would rename its section every Sunday. Where a document records the section it was written with, every
+    // site in the travel pack included, this finds exactly the entry that wrote it.
+    const sec = (meta.section && (site.sections || []).find(s => s.key === meta.section)) || sectionOf(site, p || '');
     const pre = site.name + ' — ';
     const page = { url: meta.url, path: p, slug, lang: meta.lang, text,
       title: meta.title && meta.title.slice(0, pre.length) === pre ? meta.title.slice(pre.length) : meta.title,
@@ -606,11 +629,236 @@ async function fetchSite(site, { fetchImpl, sleep, limit = 0, log = () => {}, ta
   return { pages, failed };
 }
 
+// ---------- the local harvest: --from-dir ----------
+// Three of the banking pack's sources do not answer this server at all: the National Bank sits behind a WAF,
+// ethio telecom and m-pesa.safaricom.et answer inside Ethiopia and not from Paris. Their pages were fetched
+// from a machine where they do answer and copied to /root/storage/packs/banking-manual/<host>/ — raw bytes,
+// one file per URL, plus a manifest.json giving each file its url, status, content-type, sha256 and the moment
+// it was captured.
+//
+// A site whose `fetch` is "dir" is built from that manifest instead of from the network. Nothing else about it
+// is special: the same extract, the same stripPackBoilerplate, the same renderDoc, the same writePack, the same
+// allow and deny discipline. What changes is where the bytes and the date come from — the manifest, not the
+// clock — so a document says it was fetched on the day the harvest captured it, which is the day it is true of.
+//
+// The harvest itself never enters the repository. It stays in /root/storage, outside knowledge/, and only the
+// curated documents this importer writes are committed.
+const { execFileSync } = require('child_process');
+const DIR_ROOT = '/root/storage/packs/banking-manual';
+// A directive is not a book. 60,000 characters is about 20 pages of a PDF, past which a national payment
+// strategy is a policy document being indexed as if it were an answer to a question about a fee.
+const PDF_MAX_CHARS = 60000;
+
+// The key a harvested page is selected, deduplicated and named by. Two things the ordinary path is not:
+//   - it keeps the query, because ethio telecom puts the language in ?lang=am and /telebirr/faq?lang=am is a
+//     different document in a different language from /telebirr/faq;
+//   - it lowercases the percent escapes, because the same Amharic URL was linked in both cases on that site
+//     (/%E1%89%B4... and /%e1%89%b4...) and they are the same page by the URI standard's own rule.
+function dirKeyOf(url) {
+  let u; try { u = new URL(url); } catch (e) { return null; }
+  if (!/^https?:$/.test(u.protocol)) return null;
+  const p = (u.pathname.replace(/\/+$/, '') || '/').replace(/%[0-9A-Fa-f]{2}/g, m => m.toLowerCase());
+  return p + (u.search || '');
+}
+
+// A PDF is named after its own file, decoded and cleaned: FXD012024-FOREIGN-EXCHANGE-.pdf becomes
+// fxd012024-foreign-exchange. The path it hangs off (/wp-content/uploads/2024/07/) says nothing about it.
+const pdfSlugOf = p => {
+  let b = String(p || '').split('?')[0].split('/').pop().replace(/\.pdf$/i, '');
+  try { b = decodeURIComponent(b); } catch (e) { /* leave it encoded */ }
+  return clean(b).slice(0, 60).replace(/-+$/, '');
+};
+
+// poppler's pdftotext, in layout mode so a fee table stays a table. A PDF with no text layer — and many of
+// the National Bank's older directives are photographs of paper — returns nothing, and the caller reports it
+// rather than writing an empty document.
+function readPdfText(file, { maxChars = PDF_MAX_CHARS } = {}) {
+  const out = execFileSync('pdftotext', ['-layout', '-q', file, '-'], { maxBuffer: 1 << 28, timeout: 180000 }).toString('utf8');
+  return out.length > maxChars ? out.slice(0, maxChars) : out;
+}
+
+// A page is Amharic because its text is Amharic, not because its url sits on the /am/ tree. Six of the
+// National Bank's Amharic pages are index screens whose links are all in English: /am/ህጎች/መመሪያዎች holds 173
+// Ethiopic characters, which is the header this script wrote and almost nothing else. Calling those Amharic
+// would tell an Amharic reader that a page is in their language when it is not, and would put six English
+// pages into the Amharic slice of every benchmark. The floor is the one knowledge/banking's own document test
+// already uses to decide whether a page marked Amharic really is.
+const AM_FLOOR = 300;
+const ethiopicCount = s => (String(s || '').match(/[ሀ-፿]/g) || []).length;
+const langOfText = (declared, text) => (declared === 'am' && ethiopicCount(text) < AM_FLOOR ? 'en' : declared);
+
+function readDirManifest(root, site) {
+  const dir = path.join(root || DIR_ROOT, site.dir || site.host);
+  const raw = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
+  return { dir, entries: Array.isArray(raw) ? raw : (raw.items || raw.files || []) };
+}
+
+// Which entries of a manifest become documents. Status 200 only; text/html through allow/deny; application/pdf
+// only through allowPdf, which a site that names none has none of. Identical bytes are written once: the same
+// telebirr page is linked at /telebirr/withdraw, at /withdraw and under its Amharic slug, and three documents
+// of one page is the duplication the whole pack exists to avoid. Where the same bytes have several URLs the
+// plainest one wins — no percent escapes, then the shortest — because that is the one a person can read.
+function selectDirEntries(site, entries) {
+  const allow = rx(site.allow), deny = rx(site.deny), allowPdf = rx(site.allowPdf);
+  const rows = [];
+  for (const e of entries || []) {
+    if (Number(e.status) !== 200) continue;
+    const ct = String(e.contentType || '').split(';')[0].trim().toLowerCase();
+    const isHtml = ct === 'text/html' || ct === 'application/xhtml+xml';
+    const isPdf = ct === 'application/pdf';
+    if (!isHtml && !isPdf) continue;
+    let u; try { u = new URL(e.url); } catch (err) { continue; }
+    if (u.hostname !== site.host) continue;                  // never another host, never a look-alike
+    const key = dirKeyOf(e.url);
+    if (!key || key === '/') continue;
+    if (isHtml) { if (!allow.some(r => r.test(key)) || deny.some(r => r.test(key))) continue; }
+    else { if (!allowPdf.length || !allowPdf.some(r => r.test(key)) || deny.some(r => r.test(key))) continue; }
+    rows.push({ e, key, kind: isHtml ? 'html' : 'pdf' });
+  }
+  const plainest = (a, b) => {
+    const enc = k => (/%[0-9a-f]{2}/.test(k) ? 1 : 0);
+    return enc(a.key) - enc(b.key) || a.key.length - b.key.length || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
+  };
+  const bySha = new Map(), byKey = new Map();
+  for (const r of [...rows].sort(plainest)) {
+    const sha = String(r.e.sha256 || r.e.file || r.key);
+    if (bySha.has(sha) || byKey.has(r.key)) continue;
+    bySha.set(sha, r); byKey.set(r.key, r);
+  }
+  const keep = [...byKey.values()];
+  // maxPages is applied by fetchDir AFTER the duplicate texts have gone, so a site's budget counts documents
+  // rather than URLs; maxPdfs is applied here, because opening a PDF costs a subprocess and the selection is
+  // an explicit list rather than a pattern.
+  const html = keep.filter(r => r.kind === 'html').sort((a, b) => (a.key < b.key ? -1 : 1));
+  const pdf = keep.filter(r => r.kind === 'pdf').sort((a, b) => (a.key < b.key ? -1 : 1)).slice(0, Number(site.maxPdfs) || 0);
+  return { html, pdf };
+}
+
+// The M-PESA transaction fee table is not in any HTML page: the site's own calculator fetches it from the
+// server band by band, and the saved homepage ships `charges: []`. It was captured from that calculator into a
+// JSON file whose provenance is written inside it. This turns that file into ONE document with the bands as a
+// table — no figure restated, no band merged, nothing added but the sentence saying where it came from.
+function tariffDocFrom(json, cfg) {
+  const rows = (json && (json.tariff || json.charges)) || [];
+  if (!rows.length) return null;
+  const cur = json.currency ? ' (' + json.currency + ')' : '';
+  const day = String(json.capturedAt || '').slice(0, 10);
+  const lines = ['## ' + (cfg.heading || 'Transaction fees') + cur, '',
+    'Action | Amount | Charge', '--- | --- | ---'];
+  for (const r of rows) lines.push([r.action, r.band, r.charge].map(x => String(x == null ? '' : x).replace(/\|/g, '/')).join(' | '));
+  lines.push('', 'Captured from the M-PESA site\'s own fee calculator on ' + day + '. '
+    + String(json.note || '').replace(/\s+/g, ' ').trim());
+  if (json.source) lines.push('', 'Calculator page: ' + json.source);
+  return { text: lines.join('\n'), fetchedAt: day };
+}
+
+// One harvested site, start to finish. Returns { pages, failed } in exactly the shape fetchSite returns, so
+// everything downstream — stripPackBoilerplate, splitThin, writePack — cannot tell the two apart.
+function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfText, limit = 0 } = {}) {
+  const { dir, entries } = readDirManifest(root, site);
+  const sel = selectDirEntries(site, entries);
+  const htmlRows = limit ? sel.html.slice(0, limit) : sel.html;
+  const pdfRows = limit ? [] : sel.pdf;
+  log('[' + tag + '] ' + site.id + ': ' + entries.length + ' entries in the harvest manifest, '
+    + htmlRows.length + ' pages and ' + pdfRows.length + ' pdfs selected');
+  const out = [], failed = [];
+  for (const r of htmlRows) {
+    let ex;
+    try { ex = extract(fs.readFileSync(path.join(dir, r.e.file), 'utf8'), { titleSuffix: site.titleSuffix }); }
+    catch (err) { failed.push({ url: r.e.url, why: 'unreadable' }); continue; }
+    if (!ex.ok) { failed.push({ url: r.e.url, why: ex.why }); continue; }
+    // Every page of m-pesa.safaricom.et carries the same <title>, "M-PESA Ethiopia |" — 24 pages, one title.
+    // A site that says so takes its document title from the page's own first heading instead, which is still
+    // the page's own words: "KYC Requirements as per M-PESA", "Frequently Asked Questions".
+    let title = ex.title;
+    if (site.titleFrom === 'heading') {
+      const h = (String(ex.text).match(/^#{1,3}[ \t]*(\S.*)$/m) || [])[1];
+      if (h) title = h.replace(/\s+/g, ' ').trim().slice(0, 90);
+    }
+    const declared = langFor(site, r.key);
+    const lang = langOfText(declared, ex.text);
+    if (lang !== declared) log('[' + tag + '] ' + site.id + ': ' + r.key + ' is on the ' + declared
+      + ' tree but holds only ' + ethiopicCount(ex.text) + ' Ethiopic characters — recorded as ' + lang);
+    out.push({ url: r.e.url, path: r.key, siteId: site.id, title, text: ex.text,
+      lang, fetchedAt: String(r.e.fetchedAt || '').slice(0, 10), isPdf: false });
+  }
+  for (let i = 0; i < pdfRows.length; i++) {
+    const r = pdfRows[i];
+    let text = '';
+    try { text = readPdf(path.join(dir, r.e.file)); }
+    catch (err) { failed.push({ url: r.e.url, why: 'pdftotext: ' + String(err.message).split('\n')[0].slice(0, 50) }); continue; }
+    text = String(text || '').replace(/\f/g, '\n').replace(/[ \t]+$/gm, '').replace(/\n{3,}/g, '\n\n').trim();
+    if (text.replace(/\s+/g, ' ').trim().length < MIN_CHARS) { failed.push({ url: r.e.url, why: 'no_text_layer' }); continue; }
+    const t = cleanTitle(r.e.title || '', site.titleSuffix) || pdfSlugOf(r.key);
+    out.push({ url: r.e.url, path: r.key, siteId: site.id, title: t, text,
+      lang: langFor(site, r.key), fetchedAt: String(r.e.fetchedAt || '').slice(0, 10), isPdf: true });
+    if ((i + 1) % 10 === 0) log('[' + tag + '] ' + site.id + ' pdfs: ' + (i + 1) + '/' + pdfRows.length);
+  }
+  // A hand-shaped document, named by the registry, built from a captured JSON rather than from a page.
+  const cfg = site.tariffDoc;
+  if (cfg && !limit) {
+    const hit = (entries || []).find(e => Number(e.status) === 200
+      && /application\/json/.test(String(e.contentType || '')) && String(e.postType || '') === cfg.postType);
+    if (!hit) log('[' + tag + '] ' + site.id + ': tariffDoc ' + cfg.slug + ' — no ' + cfg.postType + ' json in the harvest');
+    else {
+      const t = tariffDocFrom(JSON.parse(fs.readFileSync(path.join(dir, hit.file), 'utf8')), cfg);
+      if (!t) log('[' + tag + '] ' + site.id + ': tariffDoc ' + cfg.slug + ' — the json holds no bands');
+      else out.push({ url: hit.url, path: cfg.path || dirKeyOf(hit.url), siteId: site.id, title: cfg.title,
+        text: t.text, lang: 'en', fetchedAt: t.fetchedAt || String(hit.fetchedAt || '').slice(0, 10),
+        isPdf: false, fixedSlug: cfg.slug, fixedSection: cfg.section });
+    }
+  }
+  // The no-duplicate rule, applied to the text rather than to the bytes. ethio telecom publishes the Amharic
+  // telebirr pages twice — once at /telebirr/deposit?lang=am and once under the Ethiopic slug
+  // /ቴሌብር/ተቀማጭ-ገንዘብ?lang=am — and the two files are not byte-identical (their canonical link differs), so the
+  // sha check above cannot see it. What a reader would see is the same page, so it becomes one document, under
+  // the plainer of the two URLs, and the other is reported as a duplicate rather than written.
+  const byText = new Map();
+  const kept = [];
+  for (const p of [...out].sort((a, b) => {
+    const enc = k => (/%[0-9a-f]{2}/.test(k) ? 1 : 0);
+    return enc(a.path) - enc(b.path) || a.path.length - b.path.length || (a.path < b.path ? -1 : 1);
+  })) {
+    const h = contentHash(p.text);
+    if (byText.has(h)) { failed.push({ url: p.url, why: 'same text as ' + byText.get(h) }); continue; }
+    byText.set(h, p.path); kept.push(p);
+  }
+  const cap = Number(site.maxPages) || 200;
+  const htmlKept = kept.filter(p => !p.isPdf);
+  if (htmlKept.length > cap) {
+    for (const p of htmlKept.slice(cap)) failed.push({ url: p.url, why: 'over maxPages ' + cap });
+    const over = new Set(htmlKept.slice(cap));
+    out.length = 0; out.push(...kept.filter(p => !over.has(p)));
+  } else { out.length = 0; out.push(...kept); }
+  for (const p of out) {
+    const sec = p.fixedSection ? (site.sections || []).find(s => s.key === p.fixedSection) : sectionOf(site, p.path);
+    p.section = sec ? sec.key : (p.fixedSection || null);
+    p.sectionTitleAm = sec ? sec.titleAm : null;
+  }
+  const prefix = site.slugPrefix === false ? '' : (site.slugPrefix || site.id) + '-';
+  const pages = assignSlugs(out, site, { needsName: NEEDS_NAME_DIR,
+    slugOf: p => p.fixedSlug || (p.isPdf ? pdfSlugOf(p.path) : null) })
+    .map(p => ({ ...p, slug: prefix + p.slug }));
+  // Two documents with one filename is one document silently lost. The rule-made slugs cannot clash (the
+  // lengthening loop sees to that), but two PDFs uploaded under the same basename in different months can, and
+  // so can a hand-named slug that repeats one. Stop rather than overwrite.
+  const seen = new Map();
+  for (const p of pages) {
+    if (seen.has(p.slug)) throw new Error('two harvested pages want the same document name: ' + p.slug
+      + '  ' + seen.get(p.slug) + '  ' + p.path);
+    seen.set(p.slug, p.path);
+  }
+  return { pages, failed };
+}
+
 // ---------- command line ----------
 //   node ops/travel/fetch-airline.js                       fetch every site in the registry and write the pack
 //   node ops/travel/fetch-airline.js --site ethiopian-airlines
 //   node ops/travel/fetch-airline.js --dry-run             fetch, report, write nothing
 //   node ops/travel/fetch-airline.js --limit 5 --dry-run   a five-page smoke test
+//   node ops/packs/fetch-pack.js --pack banking --from-dir /root/storage/packs/banking-manual
+//                                                          build every `fetch: "dir"` site from the harvest
+//   node ops/packs/fetch-pack.js --pack banking --from-dir --site nbe --dry-run
 // About 120 pages at 5 s apiece is roughly 14 minutes, so run it detached and poll the log.
 async function main(bound = {}) {
   const argv = process.argv.slice(2);
@@ -620,6 +868,10 @@ async function main(bound = {}) {
   const only = argv.includes('--site') ? argv[argv.indexOf('--site') + 1] : '';
   const limit = argv.includes('--limit') ? Number(argv[argv.indexOf('--limit') + 1]) : 0;
   const dryRun = argv.includes('--dry-run');
+  // --from-dir with no value means the default harvest root; without the flag at all, no dir site is built.
+  const fromDir = argv.includes('--from-dir')
+    ? ((argv[argv.indexOf('--from-dir') + 1] || '').startsWith('-') ? DIR_ROOT : (argv[argv.indexOf('--from-dir') + 1] || DIR_ROOT))
+    : null;
   const outDir = argv.includes('--out') ? argv[argv.indexOf('--out') + 1] : defaultOut;
   const today = new Date().toISOString().slice(0, 10);
   const reg = JSON.parse(fs.readFileSync(registry, 'utf8'));
@@ -637,9 +889,16 @@ async function main(bound = {}) {
   let bad = 0;
   for (const site of reg.sites) {
     if (site.fetch === 'manual') { log('[travel] ' + site.id + ': manual (' + site.reach + ') — nothing fetched'); continue; }
+    // A dir site is only built when a harvest root is named, so the Sunday job and every ordinary run leave it
+    // exactly as it stands. Importing 200 documents is a deliberate act, not something a cron line does.
+    if (site.fetch === 'dir' && !fromDir) {
+      log('[travel] ' + site.id + ': dir (' + (site.dir || site.host) + ') — not built; pass --from-dir <root> to import the harvest'); continue;
+    }
     if (only && site.id !== only) continue;
     const t0 = Date.now();
-    const { pages, failed } = await fetchSite(site, { limit, log, tag });
+    const { pages, failed } = site.fetch === 'dir'
+      ? fetchDir(site, { root: fromDir, log, tag, limit })
+      : await fetchSite(site, { limit, log, tag });
     const docs = stripPackBoilerplate(pages);
     const { kept, thin } = splitThin(docs);
     const r = writePack(outDir, kept, site, { today, dryRun, failed, pack: reg.pack, amHeaders });
@@ -699,7 +958,10 @@ function forPack(pack) {
 module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract, langFor, fill, slugPrefixOf,
   readAmHeaders, amEntry, ungroundedFigures, digitRuns, bodyText, sameDoc, rerenderPack, AM_HEADERS,
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, clearMissed, writePack,
-  makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR };
+  makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR,
+  dirKeyOf, pdfSlugOf, readPdfText, readDirManifest, selectDirEntries, tariffDocFrom, fetchDir, DIR_ROOT,
+  langOfText, ethiopicCount, AM_FLOOR,
+  PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR };
 
 //   node ops/packs/fetch-pack.js --pack banking
 //   node ops/packs/fetch-pack.js --pack banking --site zemen --limit 5 --dry-run
