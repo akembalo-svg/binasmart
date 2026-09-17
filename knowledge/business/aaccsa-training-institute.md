@@ -1,6 +1,7 @@
 ---
 url: "https://addischamber.com/training-institute"
 title: "Addis Ababa Chamber of Commerce and Sectoral Associations — Addis Chamber Training Institute | ACTI"
+titleAm: "የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት | ACTI ስልጠና ኢንስቲትዩት"
 source_name: "Addis Ababa Chamber of Commerce and Sectoral Associations"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Addis Ababa Chamber of Commerce and Sectoral Associations — Addis Chamber Training Institute | ACTI
+# Addis Ababa Chamber of Commerce and Sectoral Associations — Addis Chamber Training Institute | ACTI · የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት | ACTI ስልጠና ኢንስቲትዩት
 
 Addis Ababa Chamber of Commerce and Sectoral Associations — help — Addis Chamber Training Institute | ACTI.
 
 በአማርኛ፦ አገልግሎትና እገዛ — Addis Chamber Training Institute | ACTI። ይህ ገጽ ከአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት ስር የሚገኘው የአዲስ ቻምበር ስልጠና ኢንስቲትዩት (ACTI) ስለሚሰጣቸው የንግድ ስልጠናዎች ያብራራል። ኢንስቲትዩቱ በ2019 የኢትዮጵያ የበጀት ዓመት መደበኛ ስልጠናዎችን፣ በደንበኞች ግቢ የሚሰጡ ስልጠናዎችን እና እንደ ፍላጎት የሚዘጋጁ ስልጠናዎችን ይሰጣል። በአሁኑ ጊዜ 3 ሰራተኞች ያሉት ሲሆን፣ በስልክ ቁጥር 011 551 38 82 / 011 552 82 04 / 011 551 80 55 ext. 229 ማግኘት ይቻላል።
 
 Source: https://addischamber.com/training-institute (official Addis Ababa Chamber of Commerce and Sectoral Associations page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

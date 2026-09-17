@@ -1,6 +1,7 @@
 ---
 url: "https://investethiopia.gov.et/key-sectors/manufacturing/pharmaceuticals"
 title: "Ethiopian Investment Commission — Pharmaceuticals | Ethiopian Investment Commission"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የኢንቨስትመንት ዘርፎች - Pharmaceuticals"
 source_name: "Ethiopian Investment Commission"
 section: "sectors"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — Pharmaceuticals | Ethiopian Investment Commission
+# Ethiopian Investment Commission — Pharmaceuticals | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የኢንቨስትመንት ዘርፎች - Pharmaceuticals
 
 Ethiopian Investment Commission — sectors — Pharmaceuticals | Ethiopian Investment Commission. On this page: PHARMACEUTICALS, The opportunity to locate in Ethiopia to access the Sub-Saharan market, Pharmaceuticals TESTIMONIAL, Dr. Lia Tadesse, Minister of Health Ministry, Ethiopia, Dr. Rajiv Modi, CMD, Cadila Pharmaceuticals Ltd, We are at your service.
 
 በአማርኛ፦ የኢንቨስትመንት ዘርፎች — Pharmaceuticals | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ በኢትዮጵያ የፋርማሲዩቲካል ዘርፍ ስላለው የኢንቨስትመንት ዕድሎች ያብራራል። የኢትዮጵያ የፋርማሲዩቲካል ገበያ 1 ቢሊዮን ዶላር ይገመታል፣ እና 85% የሚሆነው አቅርቦት ከውጭ የሚገባ ነው። ባለፉት 5 ዓመታት የፋርማሲዩቲካል ፍላጎት በአማካይ 15% አድጓል፣ በ2025 ወደ 1.8 ቢሊዮን ዶላር እና በ2030 ወደ 4 ቢሊዮን ዶላር ይደርሳል ተብሎ ይጠበቃል።
 
 Source: https://investethiopia.gov.et/key-sectors/manufacturing/pharmaceuticals (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

@@ -1,6 +1,7 @@
 ---
 url: "https://investethiopia.gov.et/get-started/live-and-work-in-ethiopia"
 title: "Ethiopian Investment Commission — Live And Work In Ethiopia | Ethiopian Investment Commission"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ በኢትዮጵያ ኑሩ እና ስሩ"
 source_name: "Ethiopian Investment Commission"
 section: "about"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — Live And Work In Ethiopia | Ethiopian Investment Commission
+# Ethiopian Investment Commission — Live And Work In Ethiopia | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ በኢትዮጵያ ኑሩ እና ስሩ
 
 Ethiopian Investment Commission — about — Live And Work In Ethiopia | Ethiopian Investment Commission. On this page: GET STARTED, Live And Work, Live And Work In Ethiopia, Visa and Immigration Requirements, Health Requirements, Public Holidays, Business Hours.
 
 በአማርኛ፦ ስለ ኮሚሽኑና ሕትመቶች — Live And Work In Ethiopia | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ በኢትዮጵያ ለመኖር እና ለመስራት የሚያስፈልጉትን መስፈርቶች ያብራራል። ስለ ቪዛ እና ኢሚግሬሽን፣ የጤና መስፈርቶች፣ የህዝብ በዓላት እና የስራ ሰዓቶች መረጃ ይሰጣል። ለምሳሌ፣ የመንግስት መስሪያ ቤቶች በሳምንት 39 ሰዓታት የሚሰሩ ሲሆን፣ ባንኮች ከሰኞ እስከ አርብ ከጠዋቱ 8:00 ሰዓት እስከ ምሽቱ 4:00 ሰዓት ክፍት ናቸው።
 
 Source: https://investethiopia.gov.et/get-started/live-and-work-in-ethiopia (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

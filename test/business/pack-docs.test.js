@@ -84,15 +84,18 @@ test('at least four institutions are represented', () => {
   assert.ok(ids.size >= 4, 'only ' + ids.size + ' institutions in the pack');
 });
 
-// The Amharic half of this pack rests on exactly two hosts, and on the day of the fetch NEITHER answered:
-// motri.gov.et presents a wildcard certificate for *.mint.gov.et that expired on 2026-08-23, so a verifying
-// client gets nothing from it, and www.poessa.gov.et timed out at 40-50 s on every attempt over https and
-// over http. The pack therefore holds 0 Amharic documents out of 62, and no allow list can change that.
+// The Amharic half of this pack rests on hosts that did not answer this server on the day of the first
+// fetch: motri.gov.et presents a wildcard certificate for *.mint.gov.et that expired on 2026-08-23, so a
+// verifying client gets nothing from it, and www.poessa.gov.et timed out at 40-50 s on every attempt over
+// https and over http. The pack held 0 Amharic documents out of 62, and no allow list could change that,
+// so this assertion was carried as a `todo` that printed in every run rather than being deleted, weakened
+// to zero or quietly skipped.
 //
-// This is declared `todo` rather than deleted, weakened to zero or quietly skipped: it must keep printing in
-// every run until one of those two hosts answers, because the 40-question Amharic gold slice of Task 8 cannot
-// be built without it. It is NOT a permission to ship the pack Amharic-less - see the Task 5 report.
-test('at least five Amharic documents exist', { todo: 'motri TLS-expired and poessa unreachable on 2026-09-17; 0 of 62 documents are Amharic' }, () => {
+// It stopped being a todo on 2026-09-17, when the four hosts were harvested by hand and imported: 16 of the
+// 113 documents are Amharic - etrade 2, motri 9, poessa 4, mols 1 - and etrade, whose home page extracts at
+// 74 per cent Ethiopic, was not even a source when the todo was written. The 40-question Amharic gold slice
+// of Task 8 can be built now.
+test('at least five Amharic documents exist', () => {
   const am = files.filter(f => meta(read(f)).lang === 'am');
   assert.ok(am.length >= 5, 'only ' + am.length + ' Amharic documents; motri and poessa were measured at 43% and 62% Ethiopic');
 });

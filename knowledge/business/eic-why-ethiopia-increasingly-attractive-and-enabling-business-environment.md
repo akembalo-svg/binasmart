@@ -1,6 +1,7 @@
 ---
 url: "https://investethiopia.gov.et/why-ethiopia/increasingly-attractive-and-enabling-business-environment"
 title: "Ethiopian Investment Commission — Increasingly attractive and enabling business environment | Ethiopian Investment Commission"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ ማራኪና ምቹ የንግድ አካባቢ"
 source_name: "Ethiopian Investment Commission"
 section: "about"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — Increasingly attractive and enabling business environment | Ethiopian Investment Commission
+# Ethiopian Investment Commission — Increasingly attractive and enabling business environment | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ ማራኪና ምቹ የንግድ አካባቢ
 
 Ethiopian Investment Commission — about — Increasingly attractive and enabling business environment | Ethiopian Investment Commission. On this page: Increasingly attractive and enabling business environment.
 
 በአማርኛ፦ ስለ ኮሚሽኑና ሕትመቶች — Increasingly attractive and enabling business environment | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ ኢትዮጵያ ከ2007 ዓ.ም ጀምሮ በዓመት ከ10% በላይ የእድገት ምጣኔ በማስመዝገብ ከዓለም ፈጣን ኢኮኖሚዎች አንዷ መሆኗን ይገልጻል። ከ2019 ጀምሮ የኢንቨስትመንት ምህዳሩን ለማሻሻል የተደረጉ ማሻሻያዎችን፣ የ2020 አዲስ የኢንቨስትመንት አዋጅን እና ስምንት አዳዲስ ህጎችንና 40 የአሰራር ማሻሻያዎችን ያብራራል። እነዚህ ጥረቶች በ2021 የWAIPA-World Bank 'Strengthening IPA’s Advocacy Services' ዓለም አቀፍ ውድድር የወርቅ ሽልማት አስገኝተዋል።
 
 Source: https://investethiopia.gov.et/why-ethiopia/increasingly-attractive-and-enabling-business-environment (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

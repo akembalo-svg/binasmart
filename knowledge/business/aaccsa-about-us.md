@@ -1,6 +1,7 @@
 ---
 url: "https://addischamber.com/about-us"
 title: "Addis Ababa Chamber of Commerce and Sectoral Associations — About us - addischamber"
+titleAm: "የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት - ስለ እኛ"
 source_name: "Addis Ababa Chamber of Commerce and Sectoral Associations"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Addis Ababa Chamber of Commerce and Sectoral Associations — About us - addischamber
+# Addis Ababa Chamber of Commerce and Sectoral Associations — About us - addischamber · የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት - ስለ እኛ
 
 Addis Ababa Chamber of Commerce and Sectoral Associations — help — About us - addischamber.
 
 በአማርኛ፦ አገልግሎትና እገዛ — About us - addischamber። ይህ ገጽ ከአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ በ1947 የተቋቋመው የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት (AACCSA) ከ19,000 በላይ አባላት ያሉት የበጎ ፈቃድ፣ መንግስታዊ ያልሆነ የንግድ ድርጅት መሆኑን ይገልጻል። AACCSA በኢትዮጵያ ውስጥ አንጋፋ፣ ትልቁ እና ጠንካራው ምክር ቤት ሲሆን፣ ከሀገሪቱ ንግዶች ከ60% በላይ የሚሆኑትን በአዲስ አበባ የሚገኙ ንግዶችን ይወክላል። ገጹ የድርጅቱን ራዕይ፣ ተልዕኮ፣ እሴቶች እና እንደ የንግድ መረጃ አቅርቦት፣ የግጭት አፈታት እና የአቅም ግንባታ ስልጠና የመሳሰሉ ዋና ዋና አገልግሎቶቹን ያብራራል።
 
 Source: https://addischamber.com/about-us (official Addis Ababa Chamber of Commerce and Sectoral Associations page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

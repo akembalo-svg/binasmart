@@ -1,6 +1,7 @@
 ---
 url: "https://investethiopia.gov.et/key-sectors/manufacturing/leather-and-leather-products"
 title: "Ethiopian Investment Commission — Leather & Leather Products | Ethiopian Investment Commission"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የቆዳና የቆዳ ውጤቶች"
 source_name: "Ethiopian Investment Commission"
 section: "sectors"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — Leather & Leather Products | Ethiopian Investment Commission
+# Ethiopian Investment Commission — Leather & Leather Products | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የቆዳና የቆዳ ውጤቶች
 
 Ethiopian Investment Commission — sectors — Leather & Leather Products | Ethiopian Investment Commission. On this page: Leather & Leather Products, Keep in touch.
 
 በአማርኛ፦ የኢንቨስትመንት ዘርፎች — Leather & Leather Products | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ኢትዮጵያ በአፍሪካ ትልቁ እና በዓለም 7ኛው ትልቁ የቀንድ ከብቶች አምራች ስትሆን፣ የከብት ቁጥሯ ወደ 200 ሚሊዮን ደርሷል። ይህ ዘርፍ በየዓመቱ ከ120 ሚሊዮን ዶላር በላይ ገቢ የሚያስገኝ ሲሆን፣ የቆዳ ኢንዱስትሪው በዓመት ከ500 ሚሊዮን ካሬ ጫማ በላይ የተጠናቀቀ ቆዳ የማምረት አቅም አለው። መንግስት እስከ 2030 ድረስ 300,000 ስራዎችን ለመፍጠር እና ኢትዮጵያን የቆዳ ምርቶች ዋና ዓለም አቀፍ አቅራቢ ለማድረግ ያለመ ነው።
 
 Source: https://investethiopia.gov.et/key-sectors/manufacturing/leather-and-leather-products (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

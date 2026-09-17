@@ -1,6 +1,7 @@
 ---
 url: "https://investethiopia.gov.et/key-sectors/mining"
 title: "Ethiopian Investment Commission — Mining | Ethiopian Investment Commission"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን | የኢንቨስትመንት ዘርፎች | ማዕድን"
 source_name: "Ethiopian Investment Commission"
 section: "sectors"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — Mining | Ethiopian Investment Commission
+# Ethiopian Investment Commission — Mining | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን | የኢንቨስትመንት ዘርፎች | ማዕድን
 
 Ethiopian Investment Commission — sectors — Mining | Ethiopian Investment Commission. On this page: Mining, Diverse opportunities, attractive potential.
 
 በአማርኛ፦ የኢንቨስትመንት ዘርፎች — Mining | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ ኢትዮጵያ በማዕድን ዘርፍ ያላትን ከፍተኛ የእድገት አቅም ያብራራል። እ.ኤ.አ. በ2021 የማዕድን ዘርፍ 115% ዕድገት አሳይቷል፣ የወርቅ ኤክስፖርት ገቢ ደግሞ 672 ሚሊዮን ዶላር ደርሷል። ኢትዮጵያ ከ30 በላይ የብረታ ብረት፣ የኢንዱስትሪ፣ የግብርና እና የኮንስትራክሽን ማዕድናት ክምችት ያላት ሲሆን፣ በ2030 የማዕድን ዘርፍ ለሀገር ውስጥ ምርት (GDP) የሚያበረክተው አስተዋጽኦ 14% እንደሚደርስ ይጠበቃል።
 
 Source: https://investethiopia.gov.et/key-sectors/mining (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

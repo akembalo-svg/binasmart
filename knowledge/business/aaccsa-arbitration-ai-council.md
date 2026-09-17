@@ -1,6 +1,7 @@
 ---
 url: "https://addischamber.com/arbitration/ai-council"
 title: "Addis Ababa Chamber of Commerce and Sectoral Associations — AI council - addischamber"
+titleAm: "የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት AI council - የግልግል ዳኝነት"
 source_name: "Addis Ababa Chamber of Commerce and Sectoral Associations"
 section: "arbitration"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Addis Ababa Chamber of Commerce and Sectoral Associations — AI council - addischamber
+# Addis Ababa Chamber of Commerce and Sectoral Associations — AI council - addischamber · የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት AI council - የግልግል ዳኝነት
 
 Addis Ababa Chamber of Commerce and Sectoral Associations — arbitration — AI council - addischamber.
 
 በአማርኛ፦ የግልግል ዳኝነት — AI council - addischamber። ይህ ገጽ ከአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት የግልግል ዳኝነት ተቋም የኮርፖሬት አስተዳደርን ስለማጠናከር ያብራራል። በ2010 ዓ.ም. መስከረም 21 በተካሄደው መደበኛ ስብሰባ፣ የዳይሬክተሮች ቦርድ 11 ባለሙያዎችን ለምክር ቤቱ አባላትነት አጽድቋል። በ2009 ዓ.ም. ሰኔ 16 የፀደቀው የአሰራር ደንብ ተቋሙን “ከAACCSA ጋር የተያያዘ” ነገር ግን “በተግባሩ ነፃ አካል” አድርጎታል።
 
 Source: https://addischamber.com/arbitration/ai-council (official Addis Ababa Chamber of Commerce and Sectoral Associations page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

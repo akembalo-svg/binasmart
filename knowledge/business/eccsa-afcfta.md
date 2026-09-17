@@ -1,6 +1,7 @@
 ---
 url: "https://ethiopianchamber.com/afcfta"
 title: "Ethiopian Chamber of Commerce and Sectoral Associations — AfCFTA - Ethiopian Chamber of Commerce and Sectoral Association"
+titleAm: "የኢትዮጵያ ንግድና ዘርፍ ማህበራት ምክር ቤት - AfCFTA"
 source_name: "Ethiopian Chamber of Commerce and Sectoral Associations"
 section: "trade"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Chamber of Commerce and Sectoral Associations — AfCFTA - Ethiopian Chamber of Commerce and Sectoral Association
+# Ethiopian Chamber of Commerce and Sectoral Associations — AfCFTA - Ethiopian Chamber of Commerce and Sectoral Association · የኢትዮጵያ ንግድና ዘርፍ ማህበራት ምክር ቤት - AfCFTA
 
 Ethiopian Chamber of Commerce and Sectoral Associations — trade — AfCFTA - Ethiopian Chamber of Commerce and Sectoral Association. On this page: AfCFTA, Brief, What is the, Documents.
 
 በአማርኛ፦ ንግድና የንግድ መረጃ — AfCFTA - Ethiopian Chamber of Commerce and Sectoral Association። ይህ ገጽ ከኢትዮጵያ ንግድና ዘርፍ ማህበራት ምክር ቤት ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ የአፍሪካ አህጉራዊ ነፃ የንግድ ቀጣና (AfCFTA) አጭር መግለጫ ያቀርባል። AfCFTA 55 የአፍሪካ ህብረት አገሮችን እና 8 የክልል ኢኮኖሚ ማህበረሰቦችን በማሰባሰብ በዓለም ትልቁ የነፃ ንግድ ቀጣና ነው። ስምምነቱ በሜይ 30, 2019 በሥራ ላይ የዋለ ሲሆን፣ ንግድ በጃንዋሪ 1, 2021 ተጀምሯል።
 
 Source: https://ethiopianchamber.com/afcfta (official Ethiopian Chamber of Commerce and Sectoral Associations page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

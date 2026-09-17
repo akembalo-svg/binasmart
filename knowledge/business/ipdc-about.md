@@ -1,6 +1,7 @@
 ---
 url: "https://ipdc.gov.et/about"
 title: "Industrial Parks Development Corporation — Industrial Parks Development Coorporation"
+titleAm: "የኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን አገልግሎትና እገዛ"
 source_name: "Industrial Parks Development Corporation"
 section: "help"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Industrial Parks Development Corporation — Industrial Parks Development Coorporation
+# Industrial Parks Development Corporation — Industrial Parks Development Coorporation · የኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን አገልግሎትና እገዛ
 
 Industrial Parks Development Corporation — help — Industrial Parks Development Coorporation. On this page: About Us, The Industrial Parks Development Coorporation, Mission, Vision, Values, Mandates, Organizational Structure.
 
 በአማርኛ፦ አገልግሎትና እገዛ — Industrial Parks Development Coorporation። ይህ ገጽ ከኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ የኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን (IPDC) በታህሳስ 2014 የተቋቋመ የህዝብ ድርጅት ሲሆን የኢትዮጵያን ኢንዱስትሪያላይዜሽን ለማሳደግ የሚሰራ መሆኑን ያብራራል። ኮርፖሬሽኑ 11 ልዩ የኢኮኖሚ ዞኖችን እና 3 የኢንዱስትሪ ፓርኮችን አዘጋጅቶ ያስተዳድራል፣ እንዲሁም ለባለሀብቶች የተቀናጀ መሠረተ ልማት ያቀርባል። የኮርፖሬሽኑ ተልዕኮ እስከ 2030 ድረስ ለኢትዮጵያ አጠቃላይ የሀገር ውስጥ ምርት አንድ በመቶ አስተዋጽኦ ማድረግ ነው።
 
 Source: https://ipdc.gov.et/about (official Industrial Parks Development Corporation page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

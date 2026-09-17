@@ -1,6 +1,7 @@
 ---
 url: "https://investethiopia.gov.et/key-sectors/special-economic-zones/integrated-agro-industrial-parks"
 title: "Ethiopian Investment Commission — Integrated Agro-industrial Parks | Ethiopian Investment Commission"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የተቀናጁ የግብርና ኢንዱስትሪ ፓርኮች"
 source_name: "Ethiopian Investment Commission"
 section: "industrial-parks"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — Integrated Agro-industrial Parks | Ethiopian Investment Commission
+# Ethiopian Investment Commission — Integrated Agro-industrial Parks | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የተቀናጁ የግብርና ኢንዱስትሪ ፓርኮች
 
 Ethiopian Investment Commission — industrial-parks — Integrated Agro-industrial Parks | Ethiopian Investment Commission. On this page: Integrated Agro-industrial Parks, Rural Transformation Centers: an easier way to source raw materials, Incentives for companies operating in IAIPs, Establishing businesses inside IAIPs.
 
 በአማርኛ፦ የኢንዱስትሪ ፓርኮች — Integrated Agro-industrial Parks | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+የኢትዮጵያ መንግስት በግብርና ማቀነባበሪያ ኢንዱስትሪ ውስጥ ያሉ ባለሀብቶችን ፍላጎት ለማሟላት ሶስት የተቀናጁ የግብርና ኢንዱስትሪ ፓርኮችን (IAIPs) አቋቁሟል። እነዚህ ፓርኮች በቡሬ፣ ይርጋለም እና ቡልቡላ የሚገኙ ሲሆን፣ ባለሀብቶች የጋራ መሠረተ ልማት፣ ሎጂስቲክስ እና አገልግሎቶችን እንዲጠቀሙ ያስችላሉ። ፓርኮቹ እንደ 50 ሜጋ ዋት የኤሌክትሪክ አቅርቦት በUS$0.045/kwh ታሪፍ እና 12,000 ካሬ ሜትር/ቀን የውሃ አቅርቦት በUS$0.57/ካሬ ሜትር/ወር ታሪፍ ያሉ መሠረተ ልማቶችን ያካተቱ ናቸው።
 
 Source: https://investethiopia.gov.et/key-sectors/special-economic-zones/integrated-agro-industrial-parks (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

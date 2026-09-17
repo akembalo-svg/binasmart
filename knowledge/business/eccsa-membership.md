@@ -1,6 +1,7 @@
 ---
 url: "https://ethiopianchamber.com/membership"
 title: "Ethiopian Chamber of Commerce and Sectoral Associations — Membership - Ethiopian Chamber of Commerce and Sectoral Association"
+titleAm: "የኢትዮጵያ ንግድና ዘርፍ ማህበራት ምክር ቤት አባልነት"
 source_name: "Ethiopian Chamber of Commerce and Sectoral Associations"
 section: "chamber"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Chamber of Commerce and Sectoral Associations — Membership - Ethiopian Chamber of Commerce and Sectoral Association
+# Ethiopian Chamber of Commerce and Sectoral Associations — Membership - Ethiopian Chamber of Commerce and Sectoral Association · የኢትዮጵያ ንግድና ዘርፍ ማህበራት ምክር ቤት አባልነት
 
 Ethiopian Chamber of Commerce and Sectoral Associations — chamber — Membership - Ethiopian Chamber of Commerce and Sectoral Association. On this page: Membership.
 
 በአማርኛ፦ የንግድ ምክር ቤት — Membership - Ethiopian Chamber of Commerce and Sectoral Association። ይህ ገጽ ከኢትዮጵያ ንግድና ዘርፍ ማህበራት ምክር ቤት ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ የኢትዮጵያ ንግድና ዘርፍ ማህበራት ምክር ቤት አባልነትን በተመለከተ መረጃ ይሰጣል። በህግ ቁጥር 341/2003 መሰረት የክልል፣ የብሔራዊ ዘርፍ እና የከተማ ንግድና ዘርፍ ማህበራት ምክር ቤቶች ተወካዮች አባላት ናቸው። አባልነት ምርቶችንና አገልግሎቶችን ለማግኘት፣ አቅም ለመገንባት፣ ትስስር ለመፍጠር እና ሌሎች ጥቅሞችን ያስገኛል።
 
 Source: https://ethiopianchamber.com/membership (official Ethiopian Chamber of Commerce and Sectoral Associations page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

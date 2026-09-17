@@ -1,6 +1,7 @@
 ---
 url: "https://investethiopia.gov.et/key-sectors/ict"
 title: "Ethiopian Investment Commission — ICT | Ethiopian Investment Commission"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የኢንቨስትመንት ዘርፎች - ICT"
 source_name: "Ethiopian Investment Commission"
 section: "sectors"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — ICT | Ethiopian Investment Commission
+# Ethiopian Investment Commission — ICT | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የኢንቨስትመንት ዘርፎች - ICT
 
 Ethiopian Investment Commission — sectors — ICT | Ethiopian Investment Commission. On this page: ICT.
 
 በአማርኛ፦ የኢንቨስትመንት ዘርፎች — ICT | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ኢትዮጵያ በICT ዘርፍ ለሚሰማሩ ባለሀብቶች ማራኪ የኢንቨስትመንት ዕድሎችን ታቀርባለች። ሀገሪቱ እያደገ የመጣ የቴክኖሎጂ እውቀት ያለው የሰው ኃይል፣ ዝቅተኛ የኤሌክትሪክ እና የሪል እስቴት ወጪዎች እንዲሁም በ200 ሄክታር ላይ ያረፈ የICT ኢንዱስትሪ ፓርክ አላት። የቴሌኮም ዘርፉ መከፈት እና እንደ Safaricom ያሉ ኩባንያዎች መግባታቸው ለዘርፉ እድገት አስተዋጽኦ አድርጓል።
 
 Source: https://investethiopia.gov.et/key-sectors/ict (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

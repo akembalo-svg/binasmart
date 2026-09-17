@@ -1,6 +1,7 @@
 ---
 url: "https://investethiopia.gov.et/get-started/invest-in-ethiopia"
 title: "Ethiopian Investment Commission — Invest in Ethiopia | Ethiopian Investment Commission"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን | በኢትዮጵያ ኢንቨስት ያድርጉ"
 source_name: "Ethiopian Investment Commission"
 section: "investment"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — Invest in Ethiopia | Ethiopian Investment Commission
+# Ethiopian Investment Commission — Invest in Ethiopia | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን | በኢትዮጵያ ኢንቨስት ያድርጉ
 
 Ethiopian Investment Commission — investment — Invest in Ethiopia | Ethiopian Investment Commission. On this page: GET STARTED, Invest in, Select the path you want to take and start your journey here., Investment Process, Start Your Company as a Sole Investor, Establish a PLC, Joint Venture, or Share Company, Open your branch in Ethiopia, Set-up in one of our SEZs.
 
 በአማርኛ፦ ኢንቨስትመንት — Invest in Ethiopia | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ በኢትዮጵያ ኢንቨስት ለማድረግ ለሚፈልጉ ባለሀብቶች መረጃ ይሰጣል። የኢትዮጵያ ኢንቨስትመንት ኮሚሽን (EIC) በ11 ክልሎች ውስጥ ያሉትን የተለያዩ የኢንቨስትመንት እድሎች በማመቻቸት የባለሀብቶችን ጉዞ ያቀላል። ገጹ እንደ ብቸኛ ባለሀብት ኩባንያ ስለመጀመር፣ PLC፣ የጋራ ሽርክና ወይም የአክሲዮን ኩባንያ ስለማቋቋም ያሉ የኢንቨስትመንት ሂደቶችን በደረጃ ያብራራል።
 
 Source: https://investethiopia.gov.et/get-started/invest-in-ethiopia (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 

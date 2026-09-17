@@ -1,6 +1,7 @@
 ---
 url: "https://investethiopia.gov.et/key-sectors/special-economic-zones"
 title: "Ethiopian Investment Commission — Special Economic Zones | Ethiopian Investment Commission"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የኢንዱስትሪ ፓርኮች እና ልዩ የኢኮኖሚ ዞኖች"
 source_name: "Ethiopian Investment Commission"
 section: "industrial-parks"
 lang: "en"
@@ -12,11 +13,13 @@ generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — Special Economic Zones | Ethiopian Investment Commission
+# Ethiopian Investment Commission — Special Economic Zones | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የኢንዱስትሪ ፓርኮች እና ልዩ የኢኮኖሚ ዞኖች
 
 Ethiopian Investment Commission — industrial-parks — Special Economic Zones | Ethiopian Investment Commission. On this page: SPECIAL ECONOMIC ZONES, Our SEZs.
 
 በአማርኛ፦ የኢንዱስትሪ ፓርኮች — Special Economic Zones | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
+
+ይህ ገጽ የኢትዮጵያ ኢንቨስትመንት ኮሚሽን በ2000ዎቹ መጀመሪያ ላይ የጀመረውን የኢንዱስትሪ ፓርኮች እና ልዩ የኢኮኖሚ ዞኖች (SEZs) ልማት ያብራራል። SEZs ኢትዮጵያን ቀጣዩ ዓለም አቀፍ የማምረቻ ማዕከል ለማድረግ ያለመ ሲሆን፣ በማምረቻ ዕድገት እና ዓለም አቀፍ ባለሀብቶችን በመሳብ ረገድ ማዕከላዊ ሚና ተጫውተዋል። እነዚህ ዞኖች በዘርፍ ስፔሻላይዜሽን፣ ውህደት፣ የኤክስፖርት ገበያ ብዝሃነት፣ ዘላቂነት እና የክህሎት ልማት መርሆዎች ላይ የተመሰረቱ ናቸው።
 
 Source: https://investethiopia.gov.et/key-sectors/special-economic-zones (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
