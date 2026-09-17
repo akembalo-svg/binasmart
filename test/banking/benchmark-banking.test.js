@@ -56,9 +56,21 @@ const assert = require('node:assert');
 const fs = require('fs');
 const path = require('path');
 
+//
+// 2026-09-17, bilingual query retrieval: the floors below did NOT move. The experiment is in the tree
+// (KNOWLEDGE_BILINGUAL_QUERY, knowledge/index.js) and is off by default because of what it measured here —
+// cross-lingual retrieval 43.8% -> 62.5%, but the whole pack as shipped 72.2% -> 70.0%, because the six
+// Amharic questions it newly sends to an English page are six questions whose gold page was Amharic. See
+// docs/superpowers/reports/2026-09-17-bilingual-query-retrieval.md. A run made with that flag on measures a
+// configuration that does not ship, so it is skipped below rather than allowed to move a floor in either
+// direction: runs written before the flag existed carry no `bilingual` block at all, and are shipped runs
+// by definition.
 const DIR = '/root/bini-eval';
-const files = fs.existsSync(DIR) ? fs.readdirSync(DIR).filter(f => /^retrieval-gold-banking-\d/.test(f)).sort() : [];
-const newest = () => JSON.parse(fs.readFileSync(path.join(DIR, files[files.length - 1]), 'utf8'));
+const read = f => JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8'));
+const shipped = j => !j.bilingual || j.bilingual.query === false;
+const files = (fs.existsSync(DIR) ? fs.readdirSync(DIR).filter(f => /^retrieval-gold-banking-\d/.test(f)).sort() : [])
+  .filter(f => { try { return shipped(read(f)); } catch (e) { return false; } });
+const newest = () => read(files[files.length - 1]);
 const pct = t => Number(String(t.shipped).replace('%', ''));
 
 test('a banking benchmark has been run', { skip: !files.length && 'no banking benchmark yet' }, () => {
