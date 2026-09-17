@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/NBE-INT-12-17.pdf"
-title: "National Bank of Ethiopia — Directives No. NBE/INT/12/2017 — Interest Rates (revised)"
+title: "National Bank of Ethiopia — Directives No. NBE/INT/12/2017 on interest rates — National Bank covering letter of October 12, 2017, Ref. MFAD/261/2017"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የወለድ ተመን መመሪያ ቁጥር NBE/INT/12/2017"
 source_name: "National Bank of Ethiopia"
 section: "rates"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Directives No. NBE/INT/12/2017 — Interest Rates (revised)
+# National Bank of Ethiopia — Directives No. NBE/INT/12/2017 on interest rates — National Bank covering letter of October 12, 2017, Ref. MFAD/261/2017 · የኢትዮጵያ ብሔራዊ ባንክ የወለድ ተመን መመሪያ ቁጥር NBE/INT/12/2017
 
-National Bank of Ethiopia — rates — Directives No. NBE/INT/12/2017 — Interest Rates (revised).
+National Bank of Ethiopia — rates — Directives No. NBE/INT/12/2017 on interest rates — National Bank covering letter of October 12, 2017, Ref. MFAD/261/2017.
 
-በአማርኛ፦ የወለድ ተመን — Directives No. NBE/INT/12/2017 — Interest Rates (revised)። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+በአማርኛ፦ የወለድ ተመን — Directives No. NBE/INT/12/2017 on interest rates — National Bank covering letter of October 12, 2017, Ref. MFAD/261/2017። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ የወለድ ተመኖች መመሪያ ቁጥር NBE/INT/12/2017 ነው። መመሪያው የተቀማጭ ገንዘብ የወለድ ተመኖች እና የአበዳሪነት የወለድ ተመኖች እንዴት እንደሚወሰኑ ያብራራል። ለቁጠባ እና ለጊዜ ተቀማጭ ገንዘብ ዝቅተኛው የወለድ ተመን 7.0 በመቶ በዓመት ነው።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 3፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

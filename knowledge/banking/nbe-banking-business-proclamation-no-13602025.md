@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2025/03/Banking-Business-Proclamation-No.-13602025.pdf"
 title: "National Bank of Ethiopia — Banking Business Proclamation No. 1360/2025"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የባንክ ፈቃድ አሰጣጥ አዋጅ ቁጥር 1360/2025"
 source_name: "National Bank of Ethiopia"
 section: "licensing"
 lang: "en"
@@ -16,11 +17,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Banking Business Proclamation No. 1360/2025
+# National Bank of Ethiopia — Banking Business Proclamation No. 1360/2025 · የኢትዮጵያ ብሔራዊ ባንክ የባንክ ፈቃድ አሰጣጥ አዋጅ ቁጥር 1360/2025
 
 National Bank of Ethiopia — licensing — Banking Business Proclamation No. 1360/2025.
 
 በአማርኛ፦ የባንክ ፈቃድ አሰጣጥ — Banking Business Proclamation No. 1360/2025። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ አዋጅ ቁጥር 1360/2025 ስለ ባንክ ሥራ የወጣ ሲሆን የባንክ ዘርፍን ደህንነት፣ ጤናማነትና መረጋጋት ለማረጋገጥ ያለመ ነው። አዋጁ የባንክ ፈቃድ አሰጣጥንና ቁጥጥርን የሚመለከት የተሟላ የሕግ ማዕቀፍ ያቀርባል። በኢትዮጵያ ፌደራላዊ ዲሞክራሲያዊ ሪፐብሊክ ሕገ መንግሥት አንቀጽ 55(1) መሠረት ታውጇል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 119፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/fxd-65-2020.pdf"
 title: "National Bank of Ethiopia — Directive No. FXD/80/2022 — Amendment to Directive No. FXD/65/2020 on Flower Export and Repatriation of the Export Proceeds"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/80/2022"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Directive No. FXD/80/2022 — Amendment to Directive No. FXD/65/2020 on Flower Export and Repatriation of the Export Proceeds
+# National Bank of Ethiopia — Directive No. FXD/80/2022 — Amendment to Directive No. FXD/65/2020 on Flower Export and Repatriation of the Export Proceeds · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/80/2022
 
 National Bank of Ethiopia — forex — Directive No. FXD/80/2022 — Amendment to Directive No. FXD/65/2020 on Flower Export and Repatriation of the Export Proceeds.
 
 በአማርኛ፦ የውጭ ምንዛሪ — Directive No. FXD/80/2022 — Amendment to Directive No. FXD/65/2020 on Flower Export and Repatriation of the Export Proceeds። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ የአበባ ምርት ወደ ውጭ መላክ እና የውጭ ምንዛሪ ገቢን ወደ ሀገር ውስጥ ማስገባት ላይ የወጣውን መመሪያ ቁጥር FXD/65/2020 የሚያሻሽል ነው። መመሪያው በአበባ ምርት ወደ ውጭ መላክ እና የውጭ ምንዛሪ ገቢን ወደ ሀገር ውስጥ ማስገባት ላይ የወጣውን መመሪያ ቁጥር FXD/41/2012 በአንቀጽ 5.1፣ 5.2 እና 5.3 ስር የተደነገገውን ዝቅተኛ የተጣራ የአበባ ሽያጭ ዋጋ ያሻሽላል። ይህ መመሪያ ከኤፕሪል 01, 2022 ጀምሮ ተግባራዊ ይሆናል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 2፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

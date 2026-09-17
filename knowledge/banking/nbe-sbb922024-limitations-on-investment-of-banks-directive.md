@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/SBB922024-LIMITATIONS-ON-INVESTMENT-OF-BANKS-DIRECTIVE-.pdf"
 title: "National Bank of Ethiopia — SBB922024-LIMITATIONS-ON-INVESTMENT-OF-BANKS-DIRECTIVE-"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ አዋጆችና መመሪያዎች SBB/92/2024"
 source_name: "National Bank of Ethiopia"
 section: "rules"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — SBB922024-LIMITATIONS-ON-INVESTMENT-OF-BANKS-DIRECTIVE-
+# National Bank of Ethiopia — SBB922024-LIMITATIONS-ON-INVESTMENT-OF-BANKS-DIRECTIVE- · የኢትዮጵያ ብሔራዊ ባንክ አዋጆችና መመሪያዎች SBB/92/2024
 
 National Bank of Ethiopia — rules — SBB922024-LIMITATIONS-ON-INVESTMENT-OF-BANKS-DIRECTIVE-.
 
 በአማርኛ፦ አዋጆችና መመሪያዎች — SBB922024-LIMITATIONS-ON-INVESTMENT-OF-BANKS-DIRECTIVE-። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የባንኮችን የኢንቨስትመንት ገደቦች የሚመለከት መመሪያ ቁጥር SBB/92/2024 ነው። ባንኮች በአዋጅ ቁጥር 592/2008 እና 1159/2019 መሰረት ኢንቨስትመንት ሲያደርጉ ሊከተሏቸው የሚገቡ መርሆችን ያብራራል። መመሪያው የካፒታል ገበያ አገልግሎት ሰጪዎችን ኢንቨስትመንት እና የባንኮችን ዋና የንግድ ስራ ላይ ማተኮር አስፈላጊነትን ያጎላል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 5፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

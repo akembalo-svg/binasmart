@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/12/FIS-04-2021-Requirments-fore-Under-taking-Accounts-Based-Transactions-Ensuring-of-Regulator.pdf"
 title: "National Bank of Ethiopia — FIS-04-2021-Requirments-fore-Under-taking-Accounts-Based-Transactions-Ensuring-of-Regulator"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የፋይናንስ ተደራሽነትና ትምህርት FIS/04/2021 መመሪያ"
 source_name: "National Bank of Ethiopia"
 section: "inclusion"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — FIS-04-2021-Requirments-fore-Under-taking-Accounts-Based-Transactions-Ensuring-of-Regulator
+# National Bank of Ethiopia — FIS-04-2021-Requirments-fore-Under-taking-Accounts-Based-Transactions-Ensuring-of-Regulator · የኢትዮጵያ ብሔራዊ ባንክ የፋይናንስ ተደራሽነትና ትምህርት FIS/04/2021 መመሪያ
 
 National Bank of Ethiopia — inclusion — FIS-04-2021-Requirments-fore-Under-taking-Accounts-Based-Transactions-Ensuring-of-Regulator.
 
 በአማርኛ፦ የፋይናንስ ተደራሽነትና ትምህርት — FIS-04-2021-Requirments-fore-Under-taking-Accounts-Based-Transactions-Ensuring-of-Regulator። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ በቁጥር FIS/04/2021 ያወጣው “Requirements for Undertaking Account Based Transactions and Ensuring of Regulatory Limits” የተሰኘ መመሪያ ነው። መመሪያው በባንክ ንግድ አዋጅ ቁጥር 592/2008፣ በጥቃቅን የፋይናንስ ንግድ አዋጅ ቁጥር 626/2009 እና በብሔራዊ የክፍያ ስርዓት አዋጅ ቁጥር 718/2011 መሰረት የወጣ ነው። ሰነዱ የደንበኞችን ማንነት የማወቅ (KYC) እና የደንበኛ ተገቢ ትጋት (CDD) ልምዶችን ያጠናክራል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 19፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

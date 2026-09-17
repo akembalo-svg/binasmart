@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/banking-business-proclamation-1159-2019.pdf"
 title: "National Bank of Ethiopia — Banking (Amendment) Proclamation No. 1159/2019"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የባንክ ፈቃድ አሰጣጥ አዋጅ ቁጥር 1159/2019"
 source_name: "National Bank of Ethiopia"
 section: "licensing"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Banking (Amendment) Proclamation No. 1159/2019
+# National Bank of Ethiopia — Banking (Amendment) Proclamation No. 1159/2019 · የኢትዮጵያ ብሔራዊ ባንክ የባንክ ፈቃድ አሰጣጥ አዋጅ ቁጥር 1159/2019
 
 National Bank of Ethiopia — licensing — Banking (Amendment) Proclamation No. 1159/2019. On this page: market terms and conditions;.
 
 በአማርኛ፦ የባንክ ፈቃድ አሰጣጥ — Banking (Amendment) Proclamation No. 1159/2019። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የባንክ (ማሻሻያ) አዋጅ ቁጥር 1159/2019 ሲሆን፣ የባንክ ሥራ አዋጅ ቁጥር 592/2008ን ያሻሽላል። አዋጁ የውጭ ሀገር ዜግነት ያላቸው ትውልደ ኢትዮጵያውያን በባንክ ዘርፍ እንዲሳተፉ የነበረውን ክልከላ ያነሳል። በተጨማሪም በዲጂታል ዘዴዎች የፋይናንስ አገልግሎት እና የወኪል ባንኪንግ አገልግሎት የመስጠት ተግባራትን ያካትታል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 14፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/Fee-for-National-Banks-PSOLicensingAuthorization-services-Directive-No.ONPS072022.pdf"
 title: "National Bank of Ethiopia — Fee-for-National-Banks-PSOLicensingAuthorization-services-Directive-No.ONPS072022"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት የፍቃድና የፈቃድ አሰጣጥ አገልግሎቶች ክፍያዎች መመሪያ ቁጥር ONPS/07/2022"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Fee-for-National-Banks-PSOLicensingAuthorization-services-Directive-No.ONPS072022
+# National Bank of Ethiopia — Fee-for-National-Banks-PSOLicensingAuthorization-services-Directive-No.ONPS072022 · የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት የፍቃድና የፈቃድ አሰጣጥ አገልግሎቶች ክፍያዎች መመሪያ ቁጥር ONPS/07/2022
 
 National Bank of Ethiopia — payments — Fee-for-National-Banks-PSOLicensingAuthorization-services-Directive-No.ONPS072022.
 
 በአማርኛ፦ የክፍያ ሥርዓት — Fee-for-National-Banks-PSOLicensingAuthorization-services-Directive-No.ONPS072022። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት ቁጥጥር፣ የፍቃድ አሰጣጥ እና የፈቃድ አገልግሎቶች ክፍያዎችን ያብራራል። መመሪያው በብሔራዊ የክፍያ ሥርዓት አዋጅ ቁጥር 718/2011 አንቀጽ 30 እና 37(2) መሰረት የወጣ ሲሆን፣ ለክፍያ መሣሪያ አውጪዎች እና ለክፍያ ሥርዓት ኦፕሬተሮች የሚተገበር ነው። አዲስ ፍቃድ ለማግኘት ወይም ነባር ፍቃድን ለማደስ የሚከፈሉ ክፍያዎች ከብር 20,000 እስከ ብር 300,000 ይደርሳሉ።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 4፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

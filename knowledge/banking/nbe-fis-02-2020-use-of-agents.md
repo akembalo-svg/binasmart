@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/12/FIS-02-2020-use-of-agents.pdf"
 title: "National Bank of Ethiopia — FIS-02-2020-use-of-agents"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የፋይናንስ ተደራሽነትና ትምህርት: FIS-02-2020-use-of-agents"
 source_name: "National Bank of Ethiopia"
 section: "inclusion"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — FIS-02-2020-use-of-agents
+# National Bank of Ethiopia — FIS-02-2020-use-of-agents · የኢትዮጵያ ብሔራዊ ባንክ የፋይናንስ ተደራሽነትና ትምህርት: FIS-02-2020-use-of-agents
 
 National Bank of Ethiopia — inclusion — FIS-02-2020-use-of-agents.
 
 በአማርኛ፦ የፋይናንስ ተደራሽነትና ትምህርት — FIS-02-2020-use-of-agents። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ መመሪያ ቁጥር FIS/02/2020 ሲሆን፣ የፋይናንስ ተቋማት ወኪሎችን በመጠቀም አገልግሎት እንዲሰጡ የሚያስችል ነው። መመሪያው የወኪል አገልግሎት አሰጣጥን፣ የደንበኛ ጥበቃን እና የአደጋ አስተዳደርን በተመለከተ ዝርዝር መመሪያዎችን ያቀርባል። ይህ መመሪያ በባንክ ንግድ አዋጅ ቁጥር 592/2008 እና ማይክሮፋይናንስ ንግድ አዋጅ ቁጥር 626/2009 መሰረት የወጣ ነው።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 33፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

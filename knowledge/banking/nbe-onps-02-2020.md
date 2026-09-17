@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/ONPS-02-2020.pdf"
 title: "National Bank of Ethiopia — Licensing and Authorization of Payment System Operators Directive No. ONPS/02/2020"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት ኦፕሬተሮች ፈቃድ እና ስልጣን አሰጣጥ መመሪያ ቁጥር ONPS/02/2020"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Licensing and Authorization of Payment System Operators Directive No. ONPS/02/2020
+# National Bank of Ethiopia — Licensing and Authorization of Payment System Operators Directive No. ONPS/02/2020 · የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት ኦፕሬተሮች ፈቃድ እና ስልጣን አሰጣጥ መመሪያ ቁጥር ONPS/02/2020
 
 National Bank of Ethiopia — payments — Licensing and Authorization of Payment System Operators Directive No. ONPS/02/2020.
 
 በአማርኛ፦ የክፍያ ሥርዓት — Licensing and Authorization of Payment System Operators Directive No. ONPS/02/2020። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ በነሐሴ 5 ቀን 2020 ዓ.ም. ያወጣው የክፍያ ሥርዓት ኦፕሬተሮች ፈቃድ እና ስልጣን አሰጣጥ መመሪያ ቁጥር ONPS/02/2020 ነው። መመሪያው በብሔራዊ የክፍያ ሥርዓት አዋጅ ቁጥር 718/2011 ንዑስ አንቀጽ 4(2a)/1, 4(2)/e, 6(6), 19(3), 20(2), 22(2) እና 37(2) መሰረት የወጣ ነው። የክፍያ ሥርዓት ኦፕሬተሮችን ለመፍቀድ እና ስልጣን ለመስጠት ግልጽ መስፈርቶችን ያስቀምጣል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 42፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/EATS-Fee-and-Penalities-Directive-No.EATSO012022.pdf"
 title: "National Bank of Ethiopia — Ethiopian Automated Transfer System (EATS) Fees and Penalties Directive No. EATSO/01/2022"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት፡ የEATS ክፍያዎች እና ቅጣቶች መመሪያ"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Ethiopian Automated Transfer System (EATS) Fees and Penalties Directive No. EATSO/01/2022
+# National Bank of Ethiopia — Ethiopian Automated Transfer System (EATS) Fees and Penalties Directive No. EATSO/01/2022 · የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት፡ የEATS ክፍያዎች እና ቅጣቶች መመሪያ
 
 National Bank of Ethiopia — payments — Ethiopian Automated Transfer System (EATS) Fees and Penalties Directive No. EATSO/01/2022.
 
 በአማርኛ፦ የክፍያ ሥርዓት — Ethiopian Automated Transfer System (EATS) Fees and Penalties Directive No. EATSO/01/2022። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ የኢትዮጵያ አውቶሜትድ የዝውውር ሥርዓት (EATS) ደህንነትን፣ ቅልጥፍናን እና አስተማማኝነትን ለማረጋገጥ የወጣ ነው። መመሪያው በብሔራዊ የክፍያ ሥርዓት አዋጅ ቁጥር 718/2011 አንቀጽ 4(2)(መ)/2/፣ 30፣ 34 እና 37(2) መሰረት የወጣ ሲሆን፣ EATS እና ACCOን ጨምሮ ለሁሉም ተሳታፊዎች ተፈጻሚ ይሆናል። መመሪያው EATS Fees and Penalties Directive No. EATSO/01/2022 ተብሎ ይጠራል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 7፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

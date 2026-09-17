@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/MFAD-IBM-03-2024-Interbank-Money-Market-Directive-as-amended.pdf"
 title: "National Bank of Ethiopia — MFAD-IBM-03-2024-Interbank-Money-Market-Directive-as-amended"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ፡ የኢንተርባንክ ገንዘብ ገበያ መመሪያ"
 source_name: "National Bank of Ethiopia"
 section: "regulator"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — MFAD-IBM-03-2024-Interbank-Money-Market-Directive-as-amended
+# National Bank of Ethiopia — MFAD-IBM-03-2024-Interbank-Money-Market-Directive-as-amended · የኢትዮጵያ ብሔራዊ ባንክ፡ የኢንተርባንክ ገንዘብ ገበያ መመሪያ
 
 National Bank of Ethiopia — regulator — MFAD-IBM-03-2024-Interbank-Money-Market-Directive-as-amended. On this page: ፎ ቻ. ነ.
 
 በአማርኛ፦ ተቆጣጣሪው ተቋም — MFAD-IBM-03-2024-Interbank-Money-Market-Directive-as-amended። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ ያወጣው የኢንተርባንክ ገንዘብ ገበያ መመሪያ ቁጥር MFAD/IBM/03/2024 ነው። መመሪያው ባንኮች የገንዘብ ፍላጎታቸውንና ፈሳሽነታቸውን በብድርና በአበዳሪነት እንዲያስተዳድሩ የሚያስችል ሲሆን፣ በብሔራዊ ባንክ ማቋቋሚያ አዋጅ ቁጥር 591/2008 አንቀጽ 5 (ንዑስ አንቀጽ 4 እና 11)፣ አንቀጽ 15 ንዑስ አንቀጽ 1(8(2)) እና አንቀጽ 27(2) መሰረት የወጣ ነው።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 11፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

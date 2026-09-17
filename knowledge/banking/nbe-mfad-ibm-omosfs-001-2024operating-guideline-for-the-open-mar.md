@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2024/07/MFAD-IBM-OMOSFs-001-2024Operating-Guideline-for-the-Open-Market-operations-and-Standing-Facilities-Guidline.pdf"
 title: "National Bank of Ethiopia — MFAD-IBM-OMOSFs-001-2024Operating-Guideline-for-the-Open-Market-operations-and-Standing-Facilities-Guidline"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍት ገበያ ስራዎች እና ቋሚ አገልግሎቶች መመሪያ"
 source_name: "National Bank of Ethiopia"
 section: "regulator"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — MFAD-IBM-OMOSFs-001-2024Operating-Guideline-for-the-Open-Market-operations-and-Standing-Facilities-Guidline
+# National Bank of Ethiopia — MFAD-IBM-OMOSFs-001-2024Operating-Guideline-for-the-Open-Market-operations-and-Standing-Facilities-Guidline · የኢትዮጵያ ብሔራዊ ባንክ የክፍት ገበያ ስራዎች እና ቋሚ አገልግሎቶች መመሪያ
 
 National Bank of Ethiopia — regulator — MFAD-IBM-OMOSFs-001-2024Operating-Guideline-for-the-Open-Market-operations-and-Standing-Facilities-Guidline.
 
 በአማርኛ፦ ተቆጣጣሪው ተቋም — MFAD-IBM-OMOSFs-001-2024Operating-Guideline-for-the-Open-Market-operations-and-Standing-Facilities-Guidline። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ የገንዘብ ፖሊሲን ለማካሄድ በፋይናንስ ስርዓት ውስጥ ያለውን የገንዘብ ፍሰት በብቃት ለማስተዳደር የወጣውን 'MFAD/OMO&SFs/001/2021' መመሪያን የሚተገብር የአሰራር መመሪያ ነው። ሁሉም የኢትዮጵያ ብሔራዊ ባንክ የሪዘርቭ መስፈርት የሚያሟሉ ባንኮች የቋሚ አገልግሎቶችን ለማግኘት እና በክፍት ገበያ ስራዎች ለመሳተፍ ብቁ ናቸው። ይህ መመሪያ በ2024 ዓ.ም. የወጣ ሲሆን፣ የክፍት ገበያ ስራዎች እና ቋሚ አገልግሎቶች መመሪያ ቁጥር MFAD /OMO&SFs /001/2024 ነው።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 16፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

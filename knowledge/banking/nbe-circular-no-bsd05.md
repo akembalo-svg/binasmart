@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/Circular-No-BSD05.pdf"
 title: "National Bank of Ethiopia — Circular-No-BSD05"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ አዋጆችና መመሪያዎች፡ Circular-No-BSD05"
 source_name: "National Bank of Ethiopia"
 section: "rules"
 lang: "en"
@@ -15,7 +16,7 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Circular-No-BSD05
+# National Bank of Ethiopia — Circular-No-BSD05 · የኢትዮጵያ ብሔራዊ ባንክ አዋጆችና መመሪያዎች፡ Circular-No-BSD05
 
 National Bank of Ethiopia — rules — Circular-No-BSD05.
 

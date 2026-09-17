@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2026/07/monetary-policy-committee-meeting-no-3.pdf"
 title: "National Bank of Ethiopia — monetary-policy-committee-meeting-no-3"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የገንዘብ ፖሊሲ ኮሚቴ ስብሰባ ቁጥር 3"
 source_name: "National Bank of Ethiopia"
 section: "regulator"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — monetary-policy-committee-meeting-no-3
+# National Bank of Ethiopia — monetary-policy-committee-meeting-no-3 · የኢትዮጵያ ብሔራዊ ባንክ የገንዘብ ፖሊሲ ኮሚቴ ስብሰባ ቁጥር 3
 
 National Bank of Ethiopia — regulator — monetary-policy-committee-meeting-no-3.
 
 በአማርኛ፦ ተቆጣጣሪው ተቋም — monetary-policy-committee-meeting-no-3። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+የኢትዮጵያ ብሔራዊ ባንክ የገንዘብ ፖሊሲ ኮሚቴ ሦስተኛ ስብሰባውን ሰኔ 30 ቀን 2025 አካሂዷል። ኮሚቴው የኤፕሪል እና ሜይ 2025 የዋጋ ግሽበት 14.4 በመቶ መሆኑን ገልጿል። የኮሚቴው ሪፖርት እንደሚያሳየው የምግብ ዋጋ ግሽበት ወደ 12.1 በመቶ ሲቀንስ፣ የምግብ ነክ ያልሆኑ ምርቶች ዋጋ ግሽበት ደግሞ 17.8 በመቶ ደርሷል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 3፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

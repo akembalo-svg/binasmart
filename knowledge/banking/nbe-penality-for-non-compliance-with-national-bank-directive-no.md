@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/Penality-for-non-compliance-with-National-Bank-Directive-No.ONPS082022.pdf"
 title: "National Bank of Ethiopia — Penality-for-non-compliance-with-National-Bank-Directive-No.ONPS082022"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት መመሪያ ቁጥር ONPS/08/2022ን አለማክበር ቅጣት"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Penality-for-non-compliance-with-National-Bank-Directive-No.ONPS082022
+# National Bank of Ethiopia — Penality-for-non-compliance-with-National-Bank-Directive-No.ONPS082022 · የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት መመሪያ ቁጥር ONPS/08/2022ን አለማክበር ቅጣት
 
 National Bank of Ethiopia — payments — Penality-for-non-compliance-with-National-Bank-Directive-No.ONPS082022.
 
 በአማርኛ፦ የክፍያ ሥርዓት — Penality-for-non-compliance-with-National-Bank-Directive-No.ONPS082022። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት መመሪያዎችን አለማክበር የሚያስከትለውን ቅጣት ይደነግጋል። መመሪያው የክፍያ መሣሪያ አውጪዎችን እና የክፍያ ሥርዓት ኦፕሬተሮችን ይመለከታል። ቅጣቶች እንደ ጥሰቱ አይነት ከብር 15,000 እስከ ብር 100,000 ወይም ከተቀመጠው የግብይት ወይም የሂሳብ ገደብ 25% ሊደርሱ ይችላሉ።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 2፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

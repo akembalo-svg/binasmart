@@ -1,6 +1,7 @@
 ---
 url: "https://www.nbe.gov.et/wp-content/uploads/2021/ONPS-04-2021.pdf"
 title: "National Bank of Ethiopia — Manner of Equity Investment by Foreign Nationals of Ethiopian Origin in Payment Instrument Issuance and Payment System Operator Directive No. ONPS/04/2021"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት መመሪያ ቁጥር ONPS/04/2021"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Manner of Equity Investment by Foreign Nationals of Ethiopian Origin in Payment Instrument Issuance and Payment System Operator Directive No. ONPS/04/2021
+# National Bank of Ethiopia — Manner of Equity Investment by Foreign Nationals of Ethiopian Origin in Payment Instrument Issuance and Payment System Operator Directive No. ONPS/04/2021 · የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት መመሪያ ቁጥር ONPS/04/2021
 
 National Bank of Ethiopia — payments — Manner of Equity Investment by Foreign Nationals of Ethiopian Origin in Payment Instrument Issuance and Payment System Operator Directive No. ONPS/04/2021.
 
 በአማርኛ፦ የክፍያ ሥርዓት — Manner of Equity Investment by Foreign Nationals of Ethiopian Origin in Payment Instrument Issuance and Payment System Operator Directive No. ONPS/04/2021። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ የኢትዮጵያ ዝርያ ያላቸው የውጭ ዜጎች እና ድርጅቶች በክፍያ መሣሪያ አውጪ እና የክፍያ ሥርዓት ኦፕሬተር ንግድ ላይ እንዴት የፍትሃዊነት ኢንቨስትመንት ማድረግ እንደሚችሉ ያብራራል። መመሪያው በብሔራዊ የክፍያ ሥርዓት አዋጅ ቁጥር 718/2011 አንቀጽ 4/2ሀ እና 37/2፣ በባንክ ሥራ (እንደተሻሻለው) አዋጅ ቁጥር 1159/2019 አንቀጽ 9 (1&2) እና 58፣ እንዲሁም በኢትዮጵያ ብሔራዊ ባንክ ማቋቋሚያ (እንደተሻሻለው) አዋጅ ቁጥር 591/2008 አንቀጽ 20 (2) እና 27 (2) መሠረት የወጣ ነው።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 10፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

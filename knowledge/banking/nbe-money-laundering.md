@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/Money-Laundering.pdf"
 title: "National Bank of Ethiopia — Prevention and Suppression of Money Laundering and Financing of Terrorism Proclamation No. 780/2013"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ፡ በወንጀል ድርጊት የተገኘ ገንዘብ ወይም ንብረት ሕጋዊ አስመስሎ ማቅረብን እና ሽብርተኝነትን በገንዘብ መርዳትን ለመከላከልና ለመቆጣጠር የወጣ አዋጅ ቁጥር ፯፻፹/፪ሺ፭"
 source_name: "National Bank of Ethiopia"
 section: "rules"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Prevention and Suppression of Money Laundering and Financing of Terrorism Proclamation No. 780/2013
+# National Bank of Ethiopia — Prevention and Suppression of Money Laundering and Financing of Terrorism Proclamation No. 780/2013 · የኢትዮጵያ ብሔራዊ ባንክ፡ በወንጀል ድርጊት የተገኘ ገንዘብ ወይም ንብረት ሕጋዊ አስመስሎ ማቅረብን እና ሽብርተኝነትን በገንዘብ መርዳትን ለመከላከልና ለመቆጣጠር የወጣ አዋጅ ቁጥር ፯፻፹/፪ሺ፭
 
 National Bank of Ethiopia — rules — Prevention and Suppression of Money Laundering and Financing of Terrorism Proclamation No. 780/2013.
 
 በአማርኛ፦ አዋጆችና መመሪያዎች — Prevention and Suppression of Money Laundering and Financing of Terrorism Proclamation No. 780/2013። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ አዋጆችና መመሪያዎች ክፍል ሲሆን፣ በወንጀል ድርጊት የተገኘ ገንዘብ ወይም ንብረት ሕጋዊ አስመስሎ ማቅረብን እና ሽብርተኝነትን በገንዘብ መርዳትን ለመከላከልና ለመቆጣጠር የወጣ አዋጅ ቁጥር ፯፻፹/፪ሺ፭ ነው። አዋጁ በጥር ፳፮ ቀን ፪ሺ፭ ዓ.ም የወጣ ሲሆን፣ በገጽ ፮፻፸፭፭ ላይ ይገኛል። አዋጁ በወንጀል ድርጊት የተገኘ ገንዘብ ወይም ንብረት ሕጋዊ አስመስሎ ማቅረብን እና ሽብርተኝነትን በገንዘብ መርዳትን ለመከላከልና ለመቆጣጠር የሚያስችል የሕግ ማዕቀፍ ያቀርባል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 23፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

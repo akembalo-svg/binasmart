@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/cmd-02-2021E.pdf"
 title: "National Bank of Ethiopia — Legal Tender Protection (Amendment) Directive No. CMD/02/2021"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ፡ የገንዘብና የባንክ ኖቶች ጥበቃ መመሪያ"
 source_name: "National Bank of Ethiopia"
 section: "currency"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Legal Tender Protection (Amendment) Directive No. CMD/02/2021
+# National Bank of Ethiopia — Legal Tender Protection (Amendment) Directive No. CMD/02/2021 · የኢትዮጵያ ብሔራዊ ባንክ፡ የገንዘብና የባንክ ኖቶች ጥበቃ መመሪያ
 
 National Bank of Ethiopia — currency — Legal Tender Protection (Amendment) Directive No. CMD/02/2021.
 
 በአማርኛ፦ ገንዘብና የባንክ ኖቶች — Legal Tender Protection (Amendment) Directive No. CMD/02/2021። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ የገንዘብና የባንክ ኖቶች ጥበቃ (ማሻሻያ) መመሪያ ቁጥር CMD/02/2021 ሲሆን፣ የባንክ ኖቶች ክምችት ገደብን የበለጠ ለመቀነስ ታስቦ የወጣ ነው። መመሪያው አንድ ግለሰብ በአንድ ጊዜ እስከ 100,000 ብር፣ ህጋዊ ሰው ደግሞ እስከ 200,000 ብር የባንክ ኖቶች መያዝ እንደሚችል ይደነግጋል። ከዚህ ገደብ በላይ የተከማቸ ገንዘብ በህግ ቁጥር 591/2008 ንዑስ አንቀጽ 26(1)(መ) መሰረት እንደሚወረስ ይገልጻል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 1፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

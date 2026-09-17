@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2026/07/monetary-policy-committee-meeting-no-5.pdf"
 title: "National Bank of Ethiopia — monetary-policy-committee-meeting-no-5"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የገንዘብ ፖሊሲ ኮሚቴ 5ኛ ስብሰባ"
 source_name: "National Bank of Ethiopia"
 section: "regulator"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — monetary-policy-committee-meeting-no-5
+# National Bank of Ethiopia — monetary-policy-committee-meeting-no-5 · የኢትዮጵያ ብሔራዊ ባንክ የገንዘብ ፖሊሲ ኮሚቴ 5ኛ ስብሰባ
 
 National Bank of Ethiopia — regulator — monetary-policy-committee-meeting-no-5.
 
 በአማርኛ፦ ተቆጣጣሪው ተቋም — monetary-policy-committee-meeting-no-5። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ የገንዘብ ፖሊሲ ኮሚቴ በታህሳስ 22 ቀን 2025 ዓ.ም. ያካሄደውን 5ኛ ስብሰባ አስመልክቶ የወጣ መግለጫ ነው። ኮሚቴው የዋጋ ግሽበትን፣ የኢኮኖሚ ዕድገትን እና ሌሎች የኢኮኖሚ ዘርፎችን ገምግሟል። በህዳር 2025 የዋጋ ግሽበት መጠን 10.9 በመቶ ሲሆን፣ እውነተኛው የሀገር ውስጥ ምርት በ2024/25 የበጀት ዓመት በ9.2 በመቶ አድጓል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 3፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

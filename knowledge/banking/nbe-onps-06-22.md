@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/onps-06-22.pdf"
 title: "National Bank of Ethiopia — Licensing and Authorization of Payment Instrument Issuer (Amendment) Directive No. ONPS/06/2022"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት መመሪያ ቁጥር ONPS/06/2022"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Licensing and Authorization of Payment Instrument Issuer (Amendment) Directive No. ONPS/06/2022
+# National Bank of Ethiopia — Licensing and Authorization of Payment Instrument Issuer (Amendment) Directive No. ONPS/06/2022 · የኢትዮጵያ ብሔራዊ ባንክ የክፍያ ሥርዓት መመሪያ ቁጥር ONPS/06/2022
 
 National Bank of Ethiopia — payments — Licensing and Authorization of Payment Instrument Issuer (Amendment) Directive No. ONPS/06/2022.
 
 በአማርኛ፦ የክፍያ ሥርዓት — Licensing and Authorization of Payment Instrument Issuer (Amendment) Directive No. ONPS/06/2022። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ የክፍያ መሣሪያ ሰጪዎችን ፈቃድ እና ፈቃድ አሰጣጥ (ማሻሻያ) መመሪያ ቁጥር ONPS/06/2022 ነው። መመሪያው የዲጂታል ክፍያዎችን ደህንነት፣ እድገትና ቅልጥፍና እንዲሁም የፋይናንስ ተደራሽነትን ለማሳደግ ታስቦ የወጣ ነው። መመሪያው የክፍያ መሣሪያ ሰጪዎች የኤሌክትሮኒክስ አካውንት ሲከፍቱ ሊያሟሏቸው የሚገቡ መስፈርቶችን እና የሂሳብ ቀሪ ሂሳብ ገደቦችን ያሻሽላል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 2፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

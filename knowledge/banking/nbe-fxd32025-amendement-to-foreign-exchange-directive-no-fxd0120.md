@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2025/05/FXD32025-AMENDEMENT-TO-FOREIGN-EXCHANGE-DIRECTIVE-No.-FXD012024.pdf"
 title: "National Bank of Ethiopia — FXD32025-AMENDEMENT-TO-FOREIGN-EXCHANGE-DIRECTIVE-No.-FXD012024"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ማሻሻያ"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — FXD32025-AMENDEMENT-TO-FOREIGN-EXCHANGE-DIRECTIVE-No.-FXD012024
+# National Bank of Ethiopia — FXD32025-AMENDEMENT-TO-FOREIGN-EXCHANGE-DIRECTIVE-No.-FXD012024 · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ማሻሻያ
 
 National Bank of Ethiopia — forex — FXD32025-AMENDEMENT-TO-FOREIGN-EXCHANGE-DIRECTIVE-No.-FXD012024.
 
 በአማርኛ፦ የውጭ ምንዛሪ — FXD32025-AMENDEMENT-TO-FOREIGN-EXCHANGE-DIRECTIVE-No.-FXD012024። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ ቁጥር FXD/03/2025 ሲሆን፣ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/01/2024ን ያሻሽላል። ማሻሻያው የቅድሚያ ክፍያ እና የውጭ ምንዛሪ ለጉዞ የሚፈቀዱትን ገደቦች ያሻሽላል። ለግል ተጓዦች እስከ 10,000 የአሜሪካን ዶላር በጥሬ ገንዘብ ወይም በዴቢት ካርድ እንዲወስዱ ይፈቅዳል፣ እንዲሁም የውጭ ምንዛሪ አካውንት ባለቤቶች እስከ 20% የሚሆነውን ቀሪ ሂሳባቸውን በዴቢት ካርድ እንዲወስዱ ያስችላል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 2፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

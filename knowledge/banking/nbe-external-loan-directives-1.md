@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/External-loan-directives-1.pdf"
 title: "National Bank of Ethiopia — Directives No. FXD/47/2017 — Amendment of External Loan and Supplier Credit Directives No. REL/05/2002"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ብድር እና የአቅራቢ ብድር መመሪያ ቁጥር FXD/47/2017"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Directives No. FXD/47/2017 — Amendment of External Loan and Supplier Credit Directives No. REL/05/2002
+# National Bank of Ethiopia — Directives No. FXD/47/2017 — Amendment of External Loan and Supplier Credit Directives No. REL/05/2002 · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ብድር እና የአቅራቢ ብድር መመሪያ ቁጥር FXD/47/2017
 
 National Bank of Ethiopia — forex — Directives No. FXD/47/2017 — Amendment of External Loan and Supplier Credit Directives No. REL/05/2002.
 
 በአማርኛ፦ የውጭ ምንዛሪ — Directives No. FXD/47/2017 — Amendment of External Loan and Supplier Credit Directives No. REL/05/2002። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ የውጭ ብድር እና የአቅራቢ ብድር መመሪያ ቁጥር REL/05/2002 ማሻሻያ መመሪያ ቁጥር FXD/47/2017 ነው። መመሪያው በፕሮክላሜሽን ቁጥር 591/2008 እና 679/2012 መሰረት የውጭ ምንዛሪን ለመቆጣጠር የወጣ ሲሆን፣ የውጭ ብድርን ስለመመዝገብ እና ስለተለያዩ የብድር አይነቶች ትርጓሜዎችን ያብራራል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 6፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

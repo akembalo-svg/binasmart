@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2025/01/Cyber-security-awareness-2.pdf"
 title: "National Bank of Ethiopia — Notification to Give Cyber Security Awareness to Your Customers — NBE circular ISMD/D/88/2023"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ፡ የሳይበር ደህንነት ግንዛቤ ለደንበኞች"
 source_name: "National Bank of Ethiopia"
 section: "consumer"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Notification to Give Cyber Security Awareness to Your Customers — NBE circular ISMD/D/88/2023
+# National Bank of Ethiopia — Notification to Give Cyber Security Awareness to Your Customers — NBE circular ISMD/D/88/2023 · የኢትዮጵያ ብሔራዊ ባንክ፡ የሳይበር ደህንነት ግንዛቤ ለደንበኞች
 
 National Bank of Ethiopia — consumer — Notification to Give Cyber Security Awareness to Your Customers — NBE circular ISMD/D/88/2023.
 
 በአማርኛ፦ የፋይናንስ ደንበኛ ጥበቃ — Notification to Give Cyber Security Awareness to Your Customers — NBE circular ISMD/D/88/2023። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ ባንኮች ለደንበኞቻቸው የሳይበር ደህንነት ግንዛቤ እንዲሰጡ የሚያሳስብ ማስታወቂያ ነው። የሳይበር ጥቃቶች እየጨመሩ በመምጣታቸው የፋይናንስ ተቋማትና ደንበኞቻቸው ዋነኛ ኢላማዎች ናቸው። ባንኮች በድረ-ገጻቸው፣ በኤቲኤም ማሽኖቻቸው፣ በማህበራዊ ሚዲያዎቻቸው እና በሌሎች ዘዴዎች ደንበኞቻቸውን እንዲያስተምሩ ይጠበቃል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 1፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

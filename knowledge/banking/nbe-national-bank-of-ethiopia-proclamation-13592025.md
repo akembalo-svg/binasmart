@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2025/03/National-Bank-of-Ethiopia-Proclamation-13592025.pdf"
 title: "National Bank of Ethiopia — National Bank of Ethiopia Proclamation No. 1359/2025"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ አዋጅ ቁጥር 1359/2025"
 source_name: "National Bank of Ethiopia"
 section: "regulator"
 lang: "en"
@@ -16,11 +17,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — National Bank of Ethiopia Proclamation No. 1359/2025
+# National Bank of Ethiopia — National Bank of Ethiopia Proclamation No. 1359/2025 · የኢትዮጵያ ብሔራዊ ባንክ አዋጅ ቁጥር 1359/2025
 
 National Bank of Ethiopia — regulator — National Bank of Ethiopia Proclamation No. 1359/2025. On this page: *#.አጭር ርዕስ ሙዴ.
 
 በአማርኛ፦ ተቆጣጣሪው ተቋም — National Bank of Ethiopia Proclamation No. 1359/2025። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ አዋጅ ቁጥር 1359/2025 ነው። አዋጁ የዋጋ መረጋጋትን እና ጤናማ የፋይናንስ ሥርዓትን ለማረጋገጥ፣ የባንኩን የቁጥጥር አቅም ለማጎልበት እና ተዓማኒነቱን፣ ተጠያቂነቱን፣ ግልጸኝነቱን እና አስተዳደሩን ለማጠናከር ያለመ ነው። አዋጁ የኢትዮጵያ ብሔራዊ ባንክን ሥልጣንና ተግባራት እንደገና ይወስናል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 84፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/12/DIRECTVE_NO_MCR_02_2020_CODIFICATION_VALUATION_AND_REGISTRATION-2.pdf"
 title: "National Bank of Ethiopia — Codification, Valuation and Registration of Movable Properties as Collateral for Credit Directive No. MCR/02/2020"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ፡ ተንቀሳቃሽ ንብረቶችን ለብድር መያዣነት ስለማስመዝገብ መመሪያ ቁጥር MCR/02/2020"
 source_name: "National Bank of Ethiopia"
 section: "rules"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Codification, Valuation and Registration of Movable Properties as Collateral for Credit Directive No. MCR/02/2020
+# National Bank of Ethiopia — Codification, Valuation and Registration of Movable Properties as Collateral for Credit Directive No. MCR/02/2020 · የኢትዮጵያ ብሔራዊ ባንክ፡ ተንቀሳቃሽ ንብረቶችን ለብድር መያዣነት ስለማስመዝገብ መመሪያ ቁጥር MCR/02/2020
 
 National Bank of Ethiopia — rules — Codification, Valuation and Registration of Movable Properties as Collateral for Credit Directive No. MCR/02/2020.
 
 በአማርኛ፦ አዋጆችና መመሪያዎች — Codification, Valuation and Registration of Movable Properties as Collateral for Credit Directive No. MCR/02/2020። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ ተንቀሳቃሽ ንብረቶችን ለብድር መያዣነት ስለማስመዝገብ፣ ስለመገምገም እና ስለመመዝገብ የወጣ ነው። መመሪያው በንብረት ዋስትና መብት አዋጅ ቁጥር 1147/2019 አንቀጽ 94(2) እና 95 መሰረት በኢትዮጵያ ብሔራዊ ባንክ የወጣ ነው። መመሪያው ቁጥር MCR/02/2020 ሲሆን በ2020 ዓ.ም. የወጣ ነው።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 22፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/National-Payment-SystemAmendement-Proclamation-No.1282-2023.pdf"
 title: "National Bank of Ethiopia — National Payment System (Amendment) Proclamation No. 1282/2023"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የብሔራዊ የክፍያ ሥርዓት (ማሻሻያ) አዋጅ ቁጥር ፳ሺጸ፪፻ጅ፪/፪ሺ፲፳"
 source_name: "National Bank of Ethiopia"
 section: "payments"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — National Payment System (Amendment) Proclamation No. 1282/2023
+# National Bank of Ethiopia — National Payment System (Amendment) Proclamation No. 1282/2023 · የኢትዮጵያ ብሔራዊ ባንክ የብሔራዊ የክፍያ ሥርዓት (ማሻሻያ) አዋጅ ቁጥር ፳ሺጸ፪፻ጅ፪/፪ሺ፲፳
 
 National Bank of Ethiopia — payments — National Payment System (Amendment) Proclamation No. 1282/2023.
 
 በአማርኛ፦ የክፍያ ሥርዓት — National Payment System (Amendment) Proclamation No. 1282/2023። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የብሔራዊ የክፍያ ሥርዓት (ማሻሻያ) አዋጅ ቁጥር ፳ሺጸ፪፻ጅ፪/፪ሺ፲፳ ሲሆን፣ የብሔራዊ የክፍያ ሥርዓት አዋጅ ቁጥር ፳፻፲2ቿ/፪ሺጀን ለማሻሻል የወጣ ነው። አዋጁ በብሔራዊ የክፍያ ሥርዓት ውስጥ የተደረጉ ለውጦችን፣ አድገቶችንና መሻሻሎችን ታሳቢ በማድረግ የወጣ ሲሆን፣ በኢትዮጵያ ፌደራላዊ ዲሞክራሲያዊ ሪፐብሊክ ሕገ መንግሥት አንቀጽ #ጵ (8) መሠረት ታውጇል። የአዋጁ አንቀጽ EATER በ8) [፪)| [/ (ኛጃፐ) እና (፳) ተሰርዞ በአዲስ ንዑስ-አንቀጽ (8): (፲፪)፤ (TZ) AG (፳) ተተክቷል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 16፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

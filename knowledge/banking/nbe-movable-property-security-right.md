@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/movable-property-security-right.pdf"
 title: "National Bank of Ethiopia — Movable Property Security Right Proclamation No. 1147/2019"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ፡ በተንቀሳቃሽ ንብረት ላይ የሚመሰረት የዋስትና መብት አዋጅ ቁጥር 1147/2019"
 source_name: "National Bank of Ethiopia"
 section: "rules"
 lang: "en"
@@ -16,11 +17,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Movable Property Security Right Proclamation No. 1147/2019
+# National Bank of Ethiopia — Movable Property Security Right Proclamation No. 1147/2019 · የኢትዮጵያ ብሔራዊ ባንክ፡ በተንቀሳቃሽ ንብረት ላይ የሚመሰረት የዋስትና መብት አዋጅ ቁጥር 1147/2019
 
 National Bank of Ethiopia — rules — Movable Property Security Right Proclamation No. 1147/2019.
 
 በአማርኛ፦ አዋጆችና መመሪያዎች — Movable Property Security Right Proclamation No. 1147/2019። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ የሕዝብ ተወካዮች ምክር ቤት ነሐሴ 8 ቀን 2019 ዓ.ም ያወጣው አዋጅ ቁጥር 1147/2019 ነው። አዋጁ በተንቀሳቃሽ ንብረት ላይ የሚመሰረት የዋስትና መብትን የሚመለከት ሲሆን፣ ዘመናዊ የብድር ሥርዓት ለመፍጠር እና ኢንቨስትመንትን ለማስፋፋት ያለመ ነው።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 59፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

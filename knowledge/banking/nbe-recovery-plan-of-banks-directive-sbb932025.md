@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2025/05/Recovery-Plan-of-Banks-Directive-SBB932025.pdf"
 title: "National Bank of Ethiopia — Recovery-Plan-of-Banks-Directive-SBB932025"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ አዋጆችና መመሪያዎች፡ የባንኮች የማገገሚያ እቅድ መመሪያ ቁጥር SBB/93/2025"
 source_name: "National Bank of Ethiopia"
 section: "rules"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Recovery-Plan-of-Banks-Directive-SBB932025
+# National Bank of Ethiopia — Recovery-Plan-of-Banks-Directive-SBB932025 · የኢትዮጵያ ብሔራዊ ባንክ አዋጆችና መመሪያዎች፡ የባንኮች የማገገሚያ እቅድ መመሪያ ቁጥር SBB/93/2025
 
 National Bank of Ethiopia — rules — Recovery-Plan-of-Banks-Directive-SBB932025.
 
 በአማርኛ፦ አዋጆችና መመሪያዎች — Recovery-Plan-of-Banks-Directive-SBB932025። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ መመሪያ ባንኮች ከቁጥጥር ጣልቃ ገብነት በፊት ከባድ የጭንቀት ሁኔታዎችን ለመቋቋም እና የፋይናንስና ኢኮኖሚያዊ አዋጭነታቸውን ለመመለስ እንዲዘጋጁ ያሳስባል። የኢትዮጵያ ብሔራዊ ባንክ በባንክ ንግድ አዋጅ ቁጥር 1360/2025 አንቀጽ 36(5)፣ 85 እና 91(2) መሰረት ይህንን መመሪያ አውጥቷል። መመሪያው የባንኮችን የማገገሚያ እቅድ ይዘትና ሌሎች ተያያዥ መስፈርቶችን ይወስናል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 27፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

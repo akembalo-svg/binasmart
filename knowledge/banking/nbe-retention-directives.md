@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2023/04/Retention-Directives.pdf"
 title: "National Bank of Ethiopia — Directives No. FXD/48/2017 — Amendment of Retention and Utilization of Export Earnings and Inward Remittances Directives No. FXD/11/1998"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/48/2017"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — Directives No. FXD/48/2017 — Amendment of Retention and Utilization of Export Earnings and Inward Remittances Directives No. FXD/11/1998
+# National Bank of Ethiopia — Directives No. FXD/48/2017 — Amendment of Retention and Utilization of Export Earnings and Inward Remittances Directives No. FXD/11/1998 · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ መመሪያ ቁጥር FXD/48/2017
 
 National Bank of Ethiopia — forex — Directives No. FXD/48/2017 — Amendment of Retention and Utilization of Export Earnings and Inward Remittances Directives No. FXD/11/1998.
 
 በአማርኛ፦ የውጭ ምንዛሪ — Directives No. FXD/48/2017 — Amendment of Retention and Utilization of Export Earnings and Inward Remittances Directives No. FXD/11/1998። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ መመሪያ ቁጥር FXD/48/2017 ሲሆን፣ የኤክስፖርት ገቢዎችን እና የገቢ የውጭ ምንዛሪዎችን አያያዝ እና አጠቃቀምን የሚመለከት ነው። መመሪያው የኤክስፖርት ገቢዎችን እና የገቢ የውጭ ምንዛሪዎችን የማቆየት እና የመጠቀም መብቶችን ያብራራል፣ እንዲሁም የውጭ ምንዛሪ ማቆያ ሂሳቦችን ስለመክፈት እና ስለ አይነታቸው ይገልጻል።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 5፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 

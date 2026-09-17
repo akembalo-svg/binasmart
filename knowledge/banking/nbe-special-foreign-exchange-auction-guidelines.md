@@ -1,6 +1,7 @@
 ---
 url: "https://nbe.gov.et/wp-content/uploads/2025/12/SPECIAL-FOREIGN-EXCHANGE-AUCTION-GUIDELINES.pdf"
 title: "National Bank of Ethiopia — SPECIAL-FOREIGN-EXCHANGE-AUCTION-GUIDELINES"
+titleAm: "የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ SPECIAL FOREIGN EXCHANGE AUCTION መመሪያዎች"
 source_name: "National Bank of Ethiopia"
 section: "forex"
 lang: "en"
@@ -15,11 +16,13 @@ generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# National Bank of Ethiopia — SPECIAL-FOREIGN-EXCHANGE-AUCTION-GUIDELINES
+# National Bank of Ethiopia — SPECIAL-FOREIGN-EXCHANGE-AUCTION-GUIDELINES · የኢትዮጵያ ብሔራዊ ባንክ የውጭ ምንዛሪ SPECIAL FOREIGN EXCHANGE AUCTION መመሪያዎች
 
 National Bank of Ethiopia — forex — SPECIAL-FOREIGN-EXCHANGE-AUCTION-GUIDELINES.
 
 በአማርኛ፦ የውጭ ምንዛሪ — SPECIAL-FOREIGN-EXCHANGE-AUCTION-GUIDELINES። ይህ ገጽ ከኢትዮጵያ ብሔራዊ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
+
+ይህ ሰነድ የኢትዮጵያ ብሔራዊ ባንክ (NBE) በፕሮክላሜሽን ቁጥር 1359/2025 አንቀጽ 40 ስር የሚያካሂደውን የውጭ ምንዛሪ ጨረታዎች ያብራራል። የጨረታዎቹ ዓላማዎች በውጭ ምንዛሪ ገበያ ውስጥ ያለውን ጊዜያዊ አለመረጋጋት መፍታት፣ ግልጽነትን ማሳደግ እና የባንኩን የውጭ ምንዛሪ ክምችት ማጠናከር ናቸው። በጨረታው ላይ መሳተፍ የሚችሉት የተፈቀደላቸው ባንኮች ብቻ ናቸው።
 
 ይህ ሰነድ ከብሔራዊ ባንክ የተገኘው በስካን (በምስል) መልክ ብቻ ስለሆነ በኦሲአር (OCR) ተነቦ ወደ ጽሑፍ ተቀይሯል፤ የገጽ ብዛት፦ 4፤ የንባቡ ጥራት «good» ተብሎ ተመዝኗል። ቃላቱ የብሔራዊ ባንክ ናቸው፤ ንባቡ ግን የማሽን ነው፤ ስለዚህ ማንኛውንም ቁጥር ከመጠቀምዎ በፊት ከዋናው ሰነድ ጋር ያመሳክሩ።
 
