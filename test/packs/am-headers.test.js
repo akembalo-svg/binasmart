@@ -18,8 +18,11 @@ const page = { url: 'https://zemenbank.com/tariff/', title: 'Tariff', slug: 'zem
   text: '## Digital-Channels Transaction on Fees and Charges\n\nA card costs 100 birr and the daily ATM limit is 20,000 birr.\n\n## Account Services\n\nsomething' };
 
 // A sidecar written by hand, so this test never calls Gemini and never depends on what a model said today.
+// The hash is the page's own: an entry stamped with any other text's hash is ignored by the renderer, which is
+// what keeps last week's summary off a page the bank edited this week.
 const fake = { 'zemen-tariff': { titleAm: 'የዘመን ባንክ ታሪፍ', summaryAm: 'ገጹ የካርድ ክፍያና የኤቲኤም ገደብ ያሳያል። የካርድ ዋጋ 100 ብር ነው።',
-  contentHash: 'x', generatedAt: '2026-09-17', model: 'gemini-2.5-flash' } };
+  contentHash: null, generatedAt: '2026-09-17', model: 'gemini-2.5-flash' } };
+fake['zemen-tariff'].contentHash = P.contentHash(page.text);
 const opts = { today: '2026-09-17', pack: banking.pack, amHeaders: fake };
 
 test('the banking registry asks for Amharic headers and the travel registry does not', () => {
@@ -89,6 +92,17 @@ test('a header-only difference is not the same document, so writePack re-renders
   const three = P.renderDoc(page, zemen, { today: '2026-09-17', pack: banking.pack });
   assert.equal(P.sameDoc(four, three), false);
   assert.equal(P.sameDoc(three, three.replace(/^lastChecked: ".*"$/m, 'lastChecked: "2026-12-25"')), true);
+});
+
+test('an entry written from text the page no longer has is ignored, not published', () => {
+  const edited = { ...page, text: page.text.replace('100 birr', '150 birr') };
+  const md = P.renderDoc(edited, zemen, opts);
+  assert.equal(md.includes(fake['zemen-tariff'].summaryAm), false,
+    'last week\'s Amharic summary was published on a page the bank has since edited');
+  assert.equal(/^titleAm:/m.test(md), false, 'the Amharic title was generated from the old text too');
+  const fresh = { 'zemen-tariff': { ...fake['zemen-tariff'], contentHash: P.contentHash(edited.text) } };
+  assert.match(P.renderDoc(edited, zemen, { ...opts, amHeaders: fresh }), /^titleAm: "የዘመን ባንክ ታሪፍ"$/m,
+    'the entry generated from the new text must be used');
 });
 
 test('the sidecar on disk holds only entries for English documents of this pack', () => {

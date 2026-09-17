@@ -242,7 +242,14 @@ function amEntry(page, site, pack, amHeaders) {
   if (!pack || !pack.amHeaders || !amHeaders) return null;
   if ((page.lang || langFor(site, page.path)) !== 'en') return null;
   const e = amHeaders[page.slug];
-  return e && (e.titleAm || e.summaryAm) ? e : null;
+  if (!e || !(e.titleAm || e.summaryAm)) return null;
+  // The entry was generated from ONE version of this page's text and stamped with that text's hash. When the
+  // institution edits the page, the summary describes last week's page - a fee that moved, a product that
+  // went - which is worse than no Amharic summary at all, because it reads like this week's. Such an entry is
+  // ignored until ops/packs/am-headers.js writes it again from the new text, which ops/packs/freshness.js
+  // makes it do in the same weekly run that noticed the change.
+  if (e.contentHash && e.contentHash !== contentHash(page.text)) return null;
+  return e;
 }
 // The grounding rule, enforced in code rather than trusted to the model: every run of digits in an Amharic
 // title or summary must appear, digit for digit, in the page text. Thousands separators are normalised away
@@ -542,7 +549,11 @@ function linksOn(html, base) {
 }
 
 // One site, start to finish. Returns { pages, failed, asked } where pages are ready for stripPackBoilerplate.
-async function fetchSite(site, { fetchImpl, sleep, limit = 0, log = () => {} } = {}) {
+// `tag` is the pack's own logPrefix, threaded in rather than rewritten by whoever reads the line afterwards:
+// a banking run whose progress says [travel] zemen: 233 urls reads as if the airline were being fetched, and
+// the person reading a Sunday log at 06:30 has no way to tell. It defaults to travel, which is what every
+// caller meant when travel was the only pack there was.
+async function fetchSite(site, { fetchImpl, sleep, limit = 0, log = () => {}, tag = 'travel' } = {}) {
   const get = makeFetcher({ fetchImpl, sleep, delayMs: (site.crawlDelaySeconds || 5) * 1000 });
   const pages = [], failed = [];
   let seeds = [];
@@ -564,7 +575,7 @@ async function fetchSite(site, { fetchImpl, sleep, limit = 0, log = () => {} } =
   seeds.push(...(site.seeds || []));
   let todo = selectUrls(site, seeds);
   if (limit) todo = todo.slice(0, limit);
-  log('[travel] ' + site.id + ': ' + seeds.length + ' urls in the sitemap, ' + todo.length + ' selected');
+  log('[' + tag + '] ' + site.id + ': ' + seeds.length + ' urls in the sitemap, ' + todo.length + ' selected');
 
   const fetched = new Map();
   const discovered = new Set();
@@ -578,13 +589,13 @@ async function fetchSite(site, { fetchImpl, sleep, limit = 0, log = () => {} } =
       const ex = extract(r.html, { titleSuffix: site.titleSuffix });
       if (!ex.ok) { failed.push({ url: p.url, why: ex.why }); continue; }
       fetched.set(p.path, { ...p, siteId: site.id, title: ex.title, text: ex.text, lang: langFor(site, p.path) });
-      if ((i + 1) % 10 === 0) log('[travel] ' + site.id + ' round ' + round + ': ' + (i + 1) + '/' + list.length);
+      if ((i + 1) % 10 === 0) log('[' + tag + '] ' + site.id + ' round ' + round + ': ' + (i + 1) + '/' + list.length);
     }
   };
   await take(todo, 1);
   if (site.discoverLinks && !limit) {
     const extra = selectUrls(site, [...discovered]).filter(p => !fetched.has(p.path));
-    if (extra.length) log('[travel] ' + site.id + ': ' + extra.length + ' pages the sitemap did not list');
+    if (extra.length) log('[' + tag + '] ' + site.id + ': ' + extra.length + ' pages the sitemap did not list');
     await take(extra, 2);   // one level only: round 2 never harvests links
   }
   // One flat directory, six institutions. ECMA and EthSwitch both publish /contact-us; every WordPress site
@@ -628,7 +639,7 @@ async function main(bound = {}) {
     if (site.fetch === 'manual') { log('[travel] ' + site.id + ': manual (' + site.reach + ') — nothing fetched'); continue; }
     if (only && site.id !== only) continue;
     const t0 = Date.now();
-    const { pages, failed } = await fetchSite(site, { limit, log });
+    const { pages, failed } = await fetchSite(site, { limit, log, tag });
     const docs = stripPackBoilerplate(pages);
     const { kept, thin } = splitThin(docs);
     const r = writePack(outDir, kept, site, { today, dryRun, failed, pack: reg.pack, amHeaders });

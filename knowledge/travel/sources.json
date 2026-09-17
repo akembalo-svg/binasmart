@@ -4,6 +4,7 @@
     "id": "travel",
     "generatedBy": "ops/travel/fetch-airline.js",
     "logPrefix": "travel",
+    "noteTitle": "✈️ Airline knowledge pack",
     "packFormat": "2",
     "headerAmTemplate": "ይህ ገጽ {fromAm} ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።",
     "headerEnTemplate": "Source: {url} (official {siteName} page, {langWord}), fetched {today}. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling."
