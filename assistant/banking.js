@@ -31,6 +31,12 @@ const HARD = [
   // recorded as an unexplained prompt failure. It was the same mechanical cause as "check my balance".
   // The pack now holds 96 National Bank documents; its name is as hard a banking word as `bank` itself.
   'nbe', 'national bank of ethiopia', 'ብሔራዊ ባንክ', 'travel allowance', 'franco valuta', 'retention account',
+  // The two wallets by their Amharic names. Added 2026-09-17 (§15d) because
+  // "ቴሌብር 1,000 ብር ለመላክ ስንት ያስከፍላል?" — what does telebirr charge to send 1,000 birr — was not a banking
+  // question at all: only the Latin `telebirr` was listed, ብር is one WEAK word, and one weak word is not two.
+  // So the guardrails — including EVERY FIGURE YOU STATE CARRIES ITS DATE — were never added to the prompt,
+  // the fee came back undated, and the forced-tool rule reached for quote_ride because a price word was in it.
+  'ቴሌብር', 'ቴሌ ብር', 'ኤም-ፔሳ', 'ኤምፔሳ', 'ሲቢኢ ብር',
 ];
 // Another BinaSmart service, or another knowledge source, owns the question — unless a HARD word says
 // otherwise. `ግብር`, `tax`, `vat` and `ተ.እ.ታ` are here because tax is knowledge/law's and Asmat's: a VAT

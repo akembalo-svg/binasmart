@@ -999,6 +999,7 @@ const biniLang = require('./assistant/lang');
 const biniPolitics = require('./assistant/politics');
 const biniTravel = require('./assistant/travel');
 const biniBanking = require('./assistant/banking');
+const biniForce = require('./assistant/force');
 // A harness sets this header. Opt-in rather than a guess at IP patterns: a pattern would rot the
 // first time a harness changed its ip, and rot invisibly.
 const isEval = req => String((req && req.headers && req.headers['x-binasmart-eval']) || '') === '1';
@@ -1083,9 +1084,9 @@ fastify.post('/api/assistant', async (req, reply) => {
       return r;
     };
     // Flash sometimes answers a price or "remember me" from memory; on those intents the first round must call a tool.
-    const FORCE_TOOL_RE = /(remember|አስታውስ|አስታውሰኝ|yaadadh|ስንት ብር|ስንት ነው|ስንት ይሆናል|ስንት ያስከፍላል|ስንት ያወጣል|ስንት ይከፈላል|ምን ያህል ነው|ምን ያህል ይሆናል|ስንት ነበር|ዋጋ|how much|fare|price|cost|gatii|meeqa|መቀመጫ|ጋራ ጉዞ|\bpool\b|imala waliinii|tender|ጨረታ|caalbaasii|cinema|ሲኒማ|film|ፊልም|showing|የት ደረሰ|ride status|my ride|where is (the|my) (car|driver)|radio|ራዲዮ|ራድዮ|\btv\b|ቲቪ|ቴሌቪዥን|channel|ቻናል|series|ድራማ|ተከታታይ|watch|listen|open the|play the|raadiyoo|televizhinii|ክፈት)|ምግብ ቤት|ሬስቶራንት|ካፌ|ቡና ቤት|ፋርማሲ|መድኃኒት ቤት|ሳሎን|ጂም|ክሊኒክ|የት ልብላ|የት እንብላ|restaurant|where (can i |to )?eat|pharmacy|cafe\b|coffee shop|gym\b|salon\b|recommend a place/i;
+    // Which intents those are, and why a price word is not one of them on its own any more (a bank and an airline charge too): assistant/force.js.
     const allTools = biniTools.toOpenAI();
-    const forced = FORCE_TOOL_RE.test(msg);
+    const forced = biniForce.shouldForceTool(msg);
     const rememberIntent = /(remember|አስታውስ|አስታውሰኝ|yaadadh)/i.test(msg);
     // While forcing, the model may only choose an action tool: never contact_team (that spammed handovers), remember only on remember intent.
     const forcedTools = allTools.filter(t => t.function.name !== 'contact_team' && (rememberIntent ? t.function.name === 'remember' : t.function.name !== 'remember'));
