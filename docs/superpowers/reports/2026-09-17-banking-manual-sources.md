@@ -604,3 +604,66 @@ Neither `/api/afiya` nor `/api/asmat` was called. Nothing was sent to Telegram.
 ---
 
 *§15c generated on the live server, 2026-09-17. Every figure above is quoted from a result file, a log, a database count or a document read on disk. The two slices that fell and the three defects in the live answers are named here rather than left out.*
+
+---
+
+# §15d addendum — the three defects in the live answers, fixed
+
+Commit: `58cdcf4`. Three defects §15c.7 and §15c.8 named in the **answer layer** — none of them in the pack, none of them in retrieval — closed on the live server the same day they were measured.
+
+## 15d.1 A Gregorian date must not wear the Ethiopian marker
+
+`ከመስከረም 16 ቀን 2026 ዓ.ም.` is the fetch date 2026-09-16 with `ዓ.ም.` after it. `ዓ.ም.` names the Ethiopian year, which runs seven to eight years behind, so the line said a year nobody meant — on the one sentence whose whole job was to say how current the rule is. Every dated Amharic citation was affected, not one answer.
+
+Two halves, because a prompt is probabilistic:
+
+- **The prompt.** `assistant/banking.js` GUARDRAILS gains *A FETCHED DATE IS A GREGORIAN DATE, AND IN AMHARIC IT CARRIES THE GREGORIAN MARKER* — write `እ.ኤ.አ. መስከረም 16 ቀን 2026` or `16 September 2026 (እ.ኤ.አ.)`, never `ዓ.ም.` after a Gregorian year, and use `ዓ.ም.` only when the document itself prints an Ethiopian date (2018 ዓ.ም.), copied as it stands. The Amharic half of the guardrail says the same in Amharic, and the old example `በ16 መስከረም 2026 እንደታተመው` is now `እ.ኤ.አ. በ16 መስከረም 2026 እንደታተመው`. `knowledge/amharic-style.md` — the voice rules sent with **every** Amharic message, not only a banking one — gains the same rule, so it reaches Bini on a law question and a health question too.
+- **The filter.** `assistant/grounding.js` `fixCalendarMarker(text, grounding)`: a year of 2020 or later followed within twelve **non-digit** characters by `ዓ.ም` or `ዓ/ም` has the marker rewritten to `(እ.ኤ.አ.)` — **unless the retrieved context itself writes that same year as an Ethiopian year**, in which case the source is quoted as it stands. The digit exclusion is what keeps `በ2026 እና በ2018 ዓ.ም.` alone: there the marker belongs to 2018. The marker is rewritten and the sentence kept, because the date is right and only its label is wrong; dropping is for a sentence that should not exist. It runs on **both** paths an answer can leave by — `biniGuards` in `server.js` and step 5b of `assistant/kit/engine.js` — so Dr Afiya and Asmat get it as well as Bini.
+
+## 15d.2 An Amharic answer names its document in the first reply
+
+§15c.7 measured the gap precisely: the English answer named Banking Business Proclamation No. 1360/2025 unprompted, the Amharic one named nothing until asked, and then produced FCP/01/2020 at once. The Source line was in the Amharic context all along.
+
+GUARDRAILS now carries *NAME THE DOCUMENT IN THE FIRST ANSWER, IN WHATEVER LANGUAGE YOU ARE WRITING*, with the form a directive number takes in Amharic (`የፋይናንስ ደንበኛ ጥበቃ መመሪያ ቁጥር FCP/01/2020`, `የባንክ ሥራ አዋጅ ቁጥር 1360/2025`) and the reason stated as a test: *being asked "where does that come from?" after an answer means the answer was incomplete.* The Amharic half says it in Amharic, and the general Amharic voice rules say it for every subject.
+
+## 15d.3 A bare year is a figure
+
+`FIGURE` in `assistant/grounding.js` wants a unit — money, distance, percent, a duration — and a year carries none, so *"in the last quarter of 2022 with a new bill"* went through untouched inside an answer that cited its proclamation correctly. A four-digit 19xx/20xx year standing on its own is now held to the same rule as a fee: it must appear in the retrieved context or in the user's own question. A year with a slash on either side is part of a document number (`1360/2025`, `FCP/01/2020`, an upload path `.../2020/03/`), not a date, and is left alone — those are in the context whenever the answer cites them and would pass on grounding alone, so the rule does not depend on that.
+
+**The false-positive risk, measured before it shipped.** All **25** stored Q/A samples in `/root/bini-eval/banking-pack/` (`t13-sample.txt`, `t13-refusals.txt`) and `/root/bini-eval/banking-manual/` (`t15a-live.log`, `t15b-live.log`) were re-grounded against the context each question retrieves today, through the production `knowledge/index.js` and the production preference:
+
+- **1 of 25** carries a sentence the new rule would drop, and it is not a false positive: *"These details are from Dashen Bank's FAQ page, fetched on February 13, 2024"* — the fabricated date the 15a close-out had already recorded on a document stamped 2026-09-16. The rule catches the exact failure it was written for.
+- **0 of 25** lose a correct dated citation. A fetched `2026-09-16` is on the Source line of every page in the context, so 2026 grounds itself, and the other 24 answers — including every one that dates a figure `በ16 መስከረም 2026 እንደታተመው`, in ten lines across the three logs that name 2026 — pass untouched.
+- **0 of 25** had a calendar marker rewritten: none of them carried one. The marker is pinned by unit test instead, on the exact sentence §15c.7 quoted.
+
+## 15d.4 The live answers
+
+`npm test`: **1,581 pass, 1 fail** (`/tmp/t15d-test2.log`). The one failure is `test/pwa.test.js` — `public/ai.html` is being rewritten by another task in this same working tree and its `pwa.js` tag is missing from the working copy; `git show HEAD:public/ai.html` still has it. Nothing in this commit touches that file. `pm2 restart binasmart-api`; `/health` **200** on `127.0.0.1:4210` and on `https://bina.et/health`; the error log carries no new line but the ordinary ones.
+
+`POST /api/assistant`, `x-binasmart-eval: 1`, 4 s apart, question text passed from a file so no Ethiopic went through a shell.
+
+**Amharic — the bank-complaint question of §15c.7, asked once and not asked again for its source:**
+
+> "ባንክዎ ላይ ቅሬታ ማቅረብ ሲፈልጉ መጀመሪያ ቅሬታዎን ለባንኩ ራሱ ማቅረብ አለብዎት። ባንኩ በ10 የስራ ቀናት ውስጥ ምላሽ የመስጠት ግዴታ አለበት። የኢትዮጵያ ብሔራዊ ባንክ (NBE) ባወጣው የፋይናንስ ደንበኛ ጥበቃ መመሪያ ቁጥር FCP/01/2020 (እ.ኤ.አ. መስከረም 16 ቀን 2026 እንደተወሰደው) መሰረት፣ በ10 የስራ ቀናት ውስጥ ከባንክዎ ምላሽ ካላገኙ ወይም በሰጡት ምላሽ ካልረኩ፣ ቅሬታዎን ለብሔራዊ ባንክ ማቅረብ ይችላሉ [1, 4, 5]።"
+
+The directive by number and the fetch date with `እ.ኤ.አ.`, in the **first** answer. Both defects of §15c.7 are gone from the same sentence that carried them. The model wrote `እ.ኤ.አ.` itself — the filter had nothing to rewrite.
+
+**English — the foreign-bank question:**
+
+> "According to the Ethiopian Investment Commission [1], a bill was approved in the last quarter of 2022 to allow foreign competition in the banking sector. … The National Bank of Ethiopia's Banking Business Proclamation No. 1360/2025 further outlines this [2]."
+
+The "2022" clause is still there, and this is the honest correction to §15c.7: it is **grounded**, and §15c.7 was wrong to say no page carries it. Searched through the production retrieval, the context this question builds contains it once, nearly verbatim — *"in the last quarter of 2022, we have approved a bill to open up the banking sector in Ethiopia for foreign competition"* — on an Ethiopian Investment Commission page in the pack. The answer now attributes it to that page by citation number, which the §15c answer did not. `findUngrounded` over the live answer with its real context returns `[]`: the new rule inspected the year, found it in the context and kept it. Had the page not been there, the sentence would have gone.
+
+**Amharic — a telebirr fee question:**
+
+> "የቴሌብር ገንዘብ መላኪያ ታሪፍ እንደምትልኩት የገንዘብ መጠን ይለያያል። ከ1 እስከ 100 ብር ለመላክ 1 ብር ሲሆን፣ ከ5001 እስከ 75,000 ብር ለመላክ ደግሞ 15 ብር ነው (እ.ኤ.አ. መስከረም 16 ቀን 2026 በኢትዮ ቴሌኮም እንደታተመው)።"
+
+Dated with `እ.ኤ.አ.` and attributed to the institution, unprompted.
+
+**One thing this did not fix, named rather than tidied away.** The same fee asked as `ቴሌብር 1,000 ብር ወደ ሌላ ቴሌብር ተጠቃሚ ለመላክ ስንት ያስከፍላል?` answered *"ለ1,000 ብር የሚከፈለው ታሪፍ 5 ብር ነው [4, 5]"* with **no date at all** and with `quote_ride` in its tool list: `ስንት ያስከፍላል` matches `FORCE_TOOL_RE` in `server.js`, the fare tool is forced on a telebirr tariff question, and the answer comes out of the forced-tool path where the money guardrail lands differently. That is a routing defect, older than this task and untouched by it, and it is why the telebirr check above is quoted from the tariff phrasing as well.
+
+Neither `/api/afiya` nor `/api/asmat` was called. Nothing was sent to Telegram.
+
+---
+
+*§15d generated on the live server, 2026-09-17. The false-positive measurement is a run over 25 stored answers, not an estimate; the three live answers are quoted whole from the response bodies.*
