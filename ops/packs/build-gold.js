@@ -118,6 +118,7 @@ function forPack(pack, { specFile, out, prefer, about } = {}) {
 const PREFER_OF = {
   travel: () => require(path.join(ROOT, 'assistant', 'travel.js')).PREFER,
   banking: () => require(path.join(ROOT, 'assistant', 'banking.js')).PREFER,
+  business: () => require(path.join(ROOT, 'assistant', 'business.js')).PREFER,
 };
 
 function main(argv = process.argv.slice(2)) {

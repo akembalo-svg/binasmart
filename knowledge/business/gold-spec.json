@@ -1,0 +1,551 @@
+{
+  "_about": "Sixty gold questions for the BinaSmart business-life knowledge pack, 40 Amharic and 20 English. Built by ops/packs/build-gold.js --pack business into /root/storage/bina-embed/eval/gold-business.json. A question may not enter the set unless the page it names is on disk, is live and actually discusses its subject: at least three English content words of `topic` must appear in the page text, and a `topicAm` is required as well wherever the gold page is itself Amharic. One unverifiable question and NOTHING is written. Every question here was written from what the pages were measured to contain after the Task 5 fetch, never from what a ministry might plausibly publish. The four people of design section 1 - the shopkeeper, the importer, the founder and the employer - each have a share. THE PACK IS 97 ENGLISH DOCUMENTS AND 16 AMHARIC ONES, so 16 of the 40 Amharic questions are deliberately cross-lingual: they ask in Amharic about an institution that publishes only in English (eic, ipdc, eccsa, aaccsa, and the mols overseas-employment register). The plan was written expecting more Amharic pages than the fetch produced; the questions were not moved onto Amharic pages to flatter the number, because the design's target is per language slice and the split is what the number means. Amharic labels are placed where Amharic pages exist: the etrade service catalogue and FAQ, the eight motri /am pages, the four poessa pages and the mols /am profile.",
+  "source": "business",
+  "qidPrefix": "bz",
+  "measured": {
+    "amQuestionsWithAmharicPage": 24,
+    "amQuestionsWithEnglishPageOnly": 16,
+    "note": "Measured against the pack as it stands on 2026-09-18: 113 documents, 97 English and 16 Amharic. 24 of the 40 Amharic questions land on an Amharic page and 16 cannot, because the institution that answers them publishes only in English. The banking pack measured 86.2 percent when a question and its page share a language and 43.8 percent when they do not, a gap of more than 40 points, so this 24/16 split predicts the whole-set score better than anything else here. motri, poessa, etrade and the mols /am profile are the only sources in this pack with Amharic pages; eic, ipdc, eccsa, aaccsa and the mols agency register are English and depend entirely on ops/packs/am-headers.js for their Amharic titles and key facts.",
+    "corpusChunksAtWriting": 23430,
+    "packChunks": 1704
+  },
+  "coverage_gaps": [
+    "Fees for trade registration and licensing: motri publishes requirements and prints `Processing Time: Online` for every service, and no fee figure at all. etrade says a payment order arrives by SMS after approval and can be settled at any commercial bank, but publishes no schedule of amounts. No question in this set asks what a trade licence costs, because no page in the pack answers it.",
+    "Processing times: same cause. `Online` is the only answer motri gives, so no question asks how many days a registration takes.",
+    "Customs procedure: ecc.gov.et timed out on every path from the VPS and from the laptop, so declaration, clearance, duty bands and franco valuta have no first-party page in this pack. The eic FAQ's customs-duty band (0-35 percent) is the Commission restating the tariff, not the Commission's own counter.",
+    "Intellectual property: eipo.gov.et timed out from both machines, so trademark and patent registration has no first-party source and no question.",
+    "21 motri PDFs are scans that pdftotext returned zero characters for; they are in /root/storage/packs/business-manual and are not documents of this pack, so nothing here is asked of them.",
+    "47 mols pages came back empty or below the 400-character floor and were not written, which is why the only mols documents are the profile, the /am profile and the two-part agency register.",
+    "eic-investment-process is lorem ipsum on the Commission's own site. It is on disk because it is live, and it is never a label."
+  ],
+  "questions": [
+    {
+      "qid": "bz-001",
+      "lang": "am",
+      "section": "pension",
+      "slug": "poessa-pension",
+      "goldLang": "am",
+      "topic": "pension contribution rate employer employee percent",
+      "topicAm": "የጡረታ መዋጮ ሠራተኛ ድርጅት",
+      "question": "የግል ድርጅት ሠራተኛ የጡረታ መዋጮ ምጣኔ ስንት በመቶ ነው?"
+    },
+    {
+      "qid": "bz-002",
+      "lang": "am",
+      "section": "pension",
+      "slug": "poessa-pension",
+      "goldLang": "am",
+      "topic": "pension contribution payment deadline days fund",
+      "topicAm": "የጡረታ መዋጮ ገቢ ቀናት",
+      "question": "የሠራተኞቼን የጡረታ መዋጮ ለፈንዱ ገቢ ማድረግ ያለብኝ በስንት ቀናት ውስጥ ነው?"
+    },
+    {
+      "qid": "bz-003",
+      "lang": "am",
+      "section": "pension",
+      "slug": "poessa-pension",
+      "goldLang": "am",
+      "topic": "late contribution penalty interest percent employer",
+      "topicAm": "ቅጣት ወለድ መዋጮ ገቢ",
+      "question": "መዋጮውን በጊዜው ካላስገባሁ ድርጅቴ ምን ቅጣት ይጠብቀዋል?"
+    },
+    {
+      "qid": "bz-004",
+      "lang": "am",
+      "section": "pension",
+      "slug": "poessa-pension",
+      "goldLang": "am",
+      "topic": "pension scheme coverage excluded domestic workers",
+      "topicAm": "የማይሸፈኑ የቤት ሰራተኞች ዐቅዱ",
+      "question": "የቤት ሰራተኞች በጡረታ ዐቅዱ ይሸፈናሉ ወይ?"
+    },
+    {
+      "qid": "bz-005",
+      "lang": "am",
+      "section": "pension",
+      "slug": "poessa-pension",
+      "goldLang": "am",
+      "topic": "early retirement age service years requirement",
+      "topicAm": "በራስ ፈቃድ ጡረታ ዕድሜ አገልግሎት",
+      "question": "በራሴ ፈቃድ ጡረታ ለመውጣት ስንት ዓመት ዕድሜና ስንት ዓመት አገልግሎት ያስፈልጋል?"
+    },
+    {
+      "qid": "bz-006",
+      "lang": "am",
+      "section": "pension",
+      "slug": "poessa-pension",
+      "goldLang": "am",
+      "topic": "survivor pension benefit spouse child percent",
+      "topicAm": "የተተኪዎች ጡረታ አበል ሚስት መጠን",
+      "question": "ሠራተኛው ቢሞት ለሚስቱና ለልጆቹ የሚከፈለው የጡረታ አበል ስንት በመቶ ነው?"
+    },
+    {
+      "qid": "bz-007",
+      "lang": "am",
+      "section": "pension",
+      "slug": "poessa-pension",
+      "goldLang": "am",
+      "topic": "employment injury notification days employer duty",
+      "topicAm": "የሥራ ላይ ጉዳት ማሳወቅ ቀናት",
+      "question": "ሠራተኛዬ በሥራ ላይ ጉዳት ደረሰበት፤ በስንት ቀናት ውስጥ ማሳወቅ አለብኝ?"
+    },
+    {
+      "qid": "bz-008",
+      "lang": "am",
+      "section": "registration",
+      "slug": "etrade-services-catalogue",
+      "goldLang": "am",
+      "topic": "online user account registration required documents",
+      "topicAm": "የግብር ከፋይ መለያ ቁጥር ሰርተፊኬት",
+      "question": "በመስመር ላይ የተጠቃሚ መለያ ለመክፈት ምን ሰነዶች ይዤ ልሂድ?"
+    },
+    {
+      "qid": "bz-009",
+      "lang": "am",
+      "section": "registration",
+      "slug": "etrade-services-catalogue",
+      "goldLang": "am",
+      "topic": "company name uniqueness check service",
+      "topicAm": "የድርጅት ስም ያጣሩ ማጣራት",
+      "question": "የመረጥኩት የድርጅት ስም በሌላ ድርጅት አለመወሰዱን እንዴት አጣራለሁ?"
+    },
+    {
+      "qid": "bz-010",
+      "lang": "am",
+      "section": "registration",
+      "slug": "etrade-services-catalogue",
+      "goldLang": "am",
+      "topic": "payment order bank after approval certificate",
+      "topicAm": "ክፍያ ትዕዛዝ ባንክ አጭር",
+      "question": "ጥያቄዬ ከጸደቀ በኋላ ክፍያውን የምፈጽመው እንዴት ነው?"
+    },
+    {
+      "qid": "bz-011",
+      "lang": "am",
+      "section": "registration",
+      "slug": "etrade-services-catalogue",
+      "goldLang": "am",
+      "topic": "replacement certificate lost damaged registration",
+      "topicAm": "የንግድ ምዝገባ ምትክ ምስክር ወረቀት",
+      "question": "የንግድ ምዝገባ ምስክር ወረቀቴ ጠፍቶብኛል፤ ምትክ ማግኘት እችላለሁ?"
+    },
+    {
+      "qid": "bz-012",
+      "lang": "am",
+      "section": "registration",
+      "slug": "etrade-services-catalogue",
+      "goldLang": "am",
+      "topic": "trade licence renewal online every year",
+      "topicAm": "የንግድ ፈቃድ እድሳት በየዓመቱ",
+      "question": "የንግድ ፈቃዴን በኦንላይን በየዓመቱ ማደስ እችላለሁ?"
+    },
+    {
+      "qid": "bz-013",
+      "lang": "am",
+      "section": "registration",
+      "slug": "etrade-services-catalogue",
+      "goldLang": "am",
+      "topic": "number managers added registration form",
+      "topicAm": "ስራ አስኪያጅ ማከል ሶስት",
+      "question": "በምዝገባዬ ላይ ስንት ስራ አስኪያጅ ማከል እችላለሁ?"
+    },
+    {
+      "qid": "bz-014",
+      "lang": "am",
+      "section": "registration",
+      "slug": "motri-am-commercial-registration",
+      "goldLang": "am",
+      "topic": "new commercial registration requirements documents",
+      "topicAm": "አዲስ የንግድ ምዝገባ መስፈርት",
+      "question": "አዲስ የንግድ ምዝገባ ለማድረግ ምን ምን መስፈርት ያስፈልጋል?"
+    },
+    {
+      "qid": "bz-015",
+      "lang": "am",
+      "section": "registration",
+      "slug": "motri-am-commercial-registration",
+      "goldLang": "am",
+      "topic": "foreign national investment permit requirement registration",
+      "topicAm": "የውጭ ሀገር ዜጋ የኢንሸትመንት ፈቃድ",
+      "question": "አመልካቹ የውጭ ሀገር ዜጋ ከሆነ ተጨማሪ ምን ይጠየቃል?"
+    },
+    {
+      "qid": "bz-016",
+      "lang": "am",
+      "section": "registration",
+      "slug": "motri-am-commercial-registration",
+      "goldLang": "am",
+      "topic": "commercial registration cancellation audit report",
+      "topicAm": "የንግድ ምዝገባ ስረዛ ኦዲት ሪፖርት",
+      "question": "የንግድ ምዝገባዬን ለመሰረዝ ምን ማቅረብ አለብኝ?"
+    },
+    {
+      "qid": "bz-017",
+      "lang": "am",
+      "section": "licensing",
+      "slug": "motri-am-trade-licence",
+      "goldLang": "am",
+      "topic": "trade licence renewal audit report tax clearance",
+      "topicAm": "የንግድ ፈቃድ እድሳት ኦዲት ሪፖርት",
+      "question": "የንግድ ፈቃዴን ለማደስ ምን ያስፈልጋል?"
+    },
+    {
+      "qid": "bz-018",
+      "lang": "am",
+      "section": "licensing",
+      "slug": "motri-am-trade-licence",
+      "goldLang": "am",
+      "topic": "new trade licence competency certificate requirement",
+      "topicAm": "አዲስ ንግድ ፈቃድ የብቃት ማረጋገጫ",
+      "question": "አዲስ የንግድ ሥራ ፈቃድ ለማውጣት ምን ይጠየቃል?"
+    },
+    {
+      "qid": "bz-019",
+      "lang": "am",
+      "section": "help",
+      "slug": "etrade-faq",
+      "goldLang": "am",
+      "topic": "more than one commercial registration regions",
+      "topicAm": "ከአንድ በላይ የንግድ ምዝገባ",
+      "question": "በተለያዩ ክልሎች ብሠራ ከአንድ በላይ የንግድ ምዝገባ ያስፈልገኛል?"
+    },
+    {
+      "qid": "bz-020",
+      "lang": "am",
+      "section": "help",
+      "slug": "etrade-faq",
+      "goldLang": "am",
+      "topic": "trade name business organization name difference",
+      "topicAm": "የንግድ ስም ማለት ነጋዴ",
+      "question": "የንግድ ስም እና የድርጅት ስም ልዩነታቸው ምንድን ነው?"
+    },
+    {
+      "qid": "bz-021",
+      "lang": "am",
+      "section": "help",
+      "slug": "motri-am-regional-offices",
+      "goldLang": "am",
+      "topic": "regional trade bureau address telephone",
+      "topicAm": "የክልል ቢሮዎች አዲስ አበባ ንግድ",
+      "question": "የአዲስ አበባ ከተማ አስተዳደር ንግድ ቢሮ ስልክ ቁጥር ስንት ነው?"
+    },
+    {
+      "qid": "bz-022",
+      "lang": "am",
+      "section": "help",
+      "slug": "mols-am-about",
+      "goldLang": "am",
+      "topic": "ministry labour skills established proclamation",
+      "topicAm": "የሥራና ክህሎት ሚኒስቴር አዋጅ ቁጥር",
+      "question": "የሥራና ክህሎት ሚኒስቴር በየትኛው አዋጅ ተቋቋመ?"
+    },
+    {
+      "qid": "bz-023",
+      "lang": "am",
+      "section": "trade",
+      "slug": "motri-am-sector-trade-integration-resources",
+      "goldLang": "am",
+      "topic": "cement trading directive document download",
+      "topicAm": "የሲሚንቶ ግብይትን መመሪያ ቁጥር",
+      "question": "የሲሚንቶ ግብይትን የሚቆጣጠረውን መመሪያ ከየት ማውረድ እችላለሁ?"
+    },
+    {
+      "qid": "bz-024",
+      "lang": "am",
+      "section": "agency",
+      "slug": "poessa-mandates-and-functions",
+      "goldLang": "am",
+      "topic": "administration powers duties pension fund",
+      "topicAm": "አስተዳደሩ ሥልጣንና ተግባራት ጡረታ ፈንድ",
+      "question": "የግል ድርጅት ሠራተኞች ማህበራዊ ዋስትና አስተዳደር ምን ሥልጣንና ተግባር አለው?"
+    },
+    {
+      "qid": "bz-025",
+      "lang": "am",
+      "section": "help",
+      "slug": "eic-faqs",
+      "topic": "minimum capital requirement foreign investor joint venture",
+      "question": "የውጭ ባለሀብት ኩባንያ ለመክፈት ዝቅተኛው የካፒታል መጠን ስንት ዶላር ነው?"
+    },
+    {
+      "qid": "bz-026",
+      "lang": "am",
+      "section": "help",
+      "slug": "eic-faqs",
+      "topic": "investment license cost birr renewed annually",
+      "question": "የኢንቨስትመንት ፈቃድ ምን ያህል ያስከፍላል? በስንት ጊዜስ ይታደሳል?"
+    },
+    {
+      "qid": "bz-027",
+      "lang": "am",
+      "section": "help",
+      "slug": "eic-faqs",
+      "topic": "work permit processing days expatriates hiring",
+      "question": "ለውጭ ባለሙያዬ የሥራ ፈቃድ ለማውጣት ስንት ቀን ይወስዳል?"
+    },
+    {
+      "qid": "bz-028",
+      "lang": "am",
+      "section": "help",
+      "slug": "eic-faqs",
+      "topic": "value added tax corporate income rate",
+      "question": "የተጨማሪ እሴት ታክስና የኩባንያ ገቢ ግብር ምጣኔ ስንት ነው?"
+    },
+    {
+      "qid": "bz-029",
+      "lang": "am",
+      "section": "investment",
+      "slug": "eic-get-started-invest-in-ethiopia",
+      "topic": "investment permit steps sole investor",
+      "question": "እንደ ግለሰብ ባለሀብት የኢንቨስትመንት ፈቃድ ለማግኘት ደረጃዎቹ ምንድናቸው?"
+    },
+    {
+      "qid": "bz-030",
+      "lang": "am",
+      "section": "investment",
+      "slug": "eic-get-started-invest-in-ethiopia",
+      "topic": "foreign currency account national bank permission",
+      "question": "የውጭ ምንዛሪ ሂሳብ የምከፍተው በየትኛው ባንክ ነው? ፈቃዱንስ ከማን አገኛለሁ?"
+    },
+    {
+      "qid": "bz-031",
+      "lang": "am",
+      "section": "employment",
+      "slug": "mols-agencies",
+      "topic": "AKLID foreign employment agency allowed country",
+      "question": "አክሊድ በውጭ አገር ስራና ሰራተኛ አገናኝ ኤጀንሲ ወደ የትኞቹ አገሮች መላክ ይፈቀድለታል?"
+    },
+    {
+      "qid": "bz-032",
+      "lang": "am",
+      "section": "employment",
+      "slug": "mols-agencies",
+      "topic": "NATHAN INTERNATIONAL BUSINESS agency address manager phone",
+      "question": "ናታን ኢንተርናሽናል ቢዝነስ ኤጀንሲ አድራሻውና የሥራ አስኪያጁ ስልክ የት ነው?"
+    },
+    {
+      "qid": "bz-033",
+      "lang": "am",
+      "section": "employment",
+      "slug": "mols-agencies-part-2",
+      "topic": "SIRAJ NUREYE foreign employment agency allowed country",
+      "question": "ሲራጅ ኑርየ ኤጀንሲ ሠራተኛ መላክ የሚፈቀድለት ወደ የትኞቹ አገሮች ነው?"
+    },
+    {
+      "qid": "bz-034",
+      "lang": "am",
+      "section": "help",
+      "slug": "ipdc-faq",
+      "topic": "industrial parks income tax exemption years developers",
+      "question": "በኢንዱስትሪ ፓርክ ውስጥ ለሚሠሩ አልሚዎች የገቢ ግብር ነፃ ጊዜው ስንት ዓመት ነው?"
+    },
+    {
+      "qid": "bz-035",
+      "lang": "am",
+      "section": "industrial-parks",
+      "slug": "eic-sezs",
+      "topic": "public private special economic zones built",
+      "question": "ኢትዮጵያ ስንት የመንግሥት ልዩ የኢኮኖሚ ዞኖች አሏት?"
+    },
+    {
+      "qid": "bz-036",
+      "lang": "am",
+      "section": "chamber",
+      "slug": "aaccsa-membership-benefits",
+      "topic": "membership benefits free legal advice arbitration",
+      "question": "የአዲስ አበባ ንግድ ምክር ቤት አባል ብሆን ምን ጥቅም አገኛለሁ?"
+    },
+    {
+      "qid": "bz-037",
+      "lang": "am",
+      "section": "chamber",
+      "slug": "eccsa-membership",
+      "topic": "chamber membership representatives sectoral associations proclamation",
+      "question": "የኢትዮጵያ ንግድ ምክር ቤት አባል መሆን የሚችለው ማን ነው?"
+    },
+    {
+      "qid": "bz-038",
+      "lang": "am",
+      "section": "arbitration",
+      "slug": "aaccsa-arbitration-about-arbitration-institute",
+      "topic": "arbitration institute commercial disputes mediation services",
+      "question": "የንግድ ክርክሬን በግልግል ዳኝነት ለመፍታት ወዴት ልሂድ?"
+    },
+    {
+      "qid": "bz-039",
+      "lang": "am",
+      "section": "trade",
+      "slug": "eccsa-afcfta",
+      "topic": "AfCFTA entered force trading commenced january",
+      "question": "የአፍሪካ አህጉር አቀፍ ነፃ የንግድ ቀጣና መቼ ሥራ ላይ ዋለ?"
+    },
+    {
+      "qid": "bz-040",
+      "lang": "am",
+      "section": "trade",
+      "slug": "aaccsa-trade-and-international-business-services",
+      "topic": "export promotion readiness market information services",
+      "question": "ምርቴን ወደ ውጭ ለመላክ ከምክር ቤቱ ምን ዓይነት ድጋፍ ማግኘት እችላለሁ?"
+    },
+    {
+      "qid": "bz-041",
+      "lang": "en",
+      "section": "help",
+      "slug": "eic-faqs",
+      "topic": "industrial park shed lease price month",
+      "question": "How much does a readymade factory shed in an industrial park cost per square metre?"
+    },
+    {
+      "qid": "bz-042",
+      "lang": "en",
+      "section": "help",
+      "slug": "eic-faqs",
+      "topic": "working hours week overtime pay wage",
+      "question": "What are the working hours and overtime rates for staff in Ethiopia?"
+    },
+    {
+      "qid": "bz-043",
+      "lang": "en",
+      "section": "help",
+      "slug": "eic-faqs",
+      "topic": "repatriation dividends profits foreign investor remittances",
+      "question": "Can a foreign investor send profits and dividends out of Ethiopia?"
+    },
+    {
+      "qid": "bz-044",
+      "lang": "en",
+      "section": "investment",
+      "slug": "eic-get-started-invest-in-ethiopia",
+      "topic": "investment permit application steps authentication tips",
+      "question": "What are the steps to get an investment permit as a sole investor?"
+    },
+    {
+      "qid": "bz-045",
+      "lang": "en",
+      "section": "industrial-parks",
+      "slug": "eic-sezs",
+      "topic": "public private special economic zones companies",
+      "question": "How many public and private special economic zones does Ethiopia have?"
+    },
+    {
+      "qid": "bz-046",
+      "lang": "en",
+      "section": "industrial-parks",
+      "slug": "eic-special-economic-zones-private-industrial-parks",
+      "topic": "private industrial parks developed companies services",
+      "question": "How many privately developed industrial parks are operating in Ethiopia?"
+    },
+    {
+      "qid": "bz-047",
+      "lang": "en",
+      "section": "help",
+      "slug": "ipdc-faq",
+      "topic": "special incentives investors industrial parks exemption",
+      "question": "What incentives does the government give investors inside the industrial parks?"
+    },
+    {
+      "qid": "bz-048",
+      "lang": "en",
+      "section": "industrial-parks",
+      "slug": "ipdc-parks-4",
+      "topic": "Adama park sheds machinery apparel garment",
+      "question": "Which sectors does the Adama industrial park specialise in?"
+    },
+    {
+      "qid": "bz-049",
+      "lang": "en",
+      "section": "registration",
+      "slug": "motri-commercial-registration",
+      "topic": "commercial registration requirement tax identification passport",
+      "question": "What documents do I need for a commercial registration?"
+    },
+    {
+      "qid": "bz-050",
+      "lang": "en",
+      "section": "registration",
+      "slug": "motri-commercial-registration",
+      "topic": "commercial registration amendment audit report bank",
+      "question": "What does amending a commercial registration require?"
+    },
+    {
+      "qid": "bz-051",
+      "lang": "en",
+      "section": "licensing",
+      "slug": "motri-trade-license",
+      "topic": "renewal trade license audit report tax clearance",
+      "question": "What do I need to renew my trade licence?"
+    },
+    {
+      "qid": "bz-052",
+      "lang": "en",
+      "section": "licensing",
+      "slug": "motri-trade-license",
+      "topic": "business activity valid license online service",
+      "question": "Can I start trading before my business licence is issued?"
+    },
+    {
+      "qid": "bz-053",
+      "lang": "en",
+      "section": "trade",
+      "slug": "motri-trade-name",
+      "topic": "trade name passport size photographs applicant",
+      "question": "What does a new trade name application require?"
+    },
+    {
+      "qid": "bz-054",
+      "lang": "en",
+      "section": "employment",
+      "slug": "mols-agencies",
+      "topic": "overseas employment agencies allowed country manager phone",
+      "question": "How do I check which countries an overseas employment agency is licensed to send workers to?"
+    },
+    {
+      "qid": "bz-055",
+      "lang": "en",
+      "section": "help",
+      "slug": "mols-about",
+      "topic": "ministry labour skills established proclamation reform",
+      "question": "Which proclamation established the Ministry of Labour and Skills?"
+    },
+    {
+      "qid": "bz-056",
+      "lang": "en",
+      "section": "agency",
+      "slug": "poessa-history",
+      "topic": "administration accountable national bank head office",
+      "question": "Which institution is the private organisation employees social security administration accountable to?"
+    },
+    {
+      "qid": "bz-057",
+      "lang": "en",
+      "section": "rules",
+      "slug": "poessa-proclamation-and-regulation",
+      "topic": "pension proclamation download file directive",
+      "question": "Where can I download the private organisation employees pension proclamation?"
+    },
+    {
+      "qid": "bz-058",
+      "lang": "en",
+      "section": "help",
+      "slug": "eccsa-frequently-asked-question",
+      "topic": "eccsa located mexico square chamber building",
+      "question": "Where is the Ethiopian Chamber of Commerce and Sectoral Associations located?"
+    },
+    {
+      "qid": "bz-059",
+      "lang": "en",
+      "section": "arbitration",
+      "slug": "aaccsa-arbitration-about-arbitration-institute",
+      "topic": "arbitration institute established alternative dispute resolution",
+      "question": "When was the Addis Ababa Chamber arbitration institute established and what does it do?"
+    },
+    {
+      "qid": "bz-060",
+      "lang": "en",
+      "section": "trade",
+      "slug": "eccsa-afcfta",
+      "topic": "afcfta countries african union free trade",
+      "question": "What is the AfCFTA and how many countries does it bring together?"
+    }
+  ]
+}
