@@ -230,6 +230,7 @@ async function main() {
     const ans = answerPages.get(g.qid);
     const any3 = hits => ans ? pages(hits).slice(0, 3).some(s => ans.has(s)) : null;
     rows.push({ qid: g.qid, lang: g.lang, source: g.gold_source, slug: g.gold_slug, alive: alive(g),
+      ...(g.batch === undefined ? {} : { batch: g.batch }),
       plain: p3(plain), shipped: p3(shipped), top: pages(shipped).slice(0, 3),
       ...(ans ? { answerPages: [...ans], plainAny: any3(plain), shippedAny: any3(shipped), topPlain: pages(plain).slice(0, 3) } : {}),
       ...(g.agent ? { agent: g.agent, grade: g.grade, gold: keys, crossLingual: !!g.crossLingual, strictCrossLingual: !!g.strictCrossLingual,
@@ -266,6 +267,14 @@ async function main() {
     }
     table.push(slice('am question, gold only in English', rows.filter(r => r.lang === 'am' && r.strictCrossLingual)));
     table.push(slice('question + gold share a language', rows.filter(r => r.agent && !r.crossLingual)));
+  }
+  // A gold set built in more than one sitting can be read one batch at a time: the banking set's batch 1 was
+  // written before the National Bank, telebirr and M-PESA were in the pack and batch 2 against them, and a
+  // single number over both would hide which of them moved.
+  const batches = [...new Set(rows.map(r => r.batch).filter(b => b !== undefined && b !== null))].sort();
+  if (batches.length > 1) for (const b of batches) {
+    table.push(slice('batch ' + b, rows.filter(r => r.batch === b)));
+    for (const lang of ['am', 'en']) table.push(slice('  batch ' + b + ' ' + lang, rows.filter(r => r.batch === b && r.lang === lang)));
   }
   console.log('\n  Page@3 — is the right page in the top three?\n');
   console.log('  ' + 'slice'.padEnd(36) + 'n'.padStart(5) + 'retrieval'.padStart(12) + 'as shipped'.padStart(13));

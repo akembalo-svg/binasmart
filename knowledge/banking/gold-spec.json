@@ -1,113 +1,244 @@
 {
-  "version": 1,
-  "_about": "The 60 gold questions for the BinaSmart banking and money pack (the sector-pack method, design 2026-09-16-airline-travel-design.md section 1.3): 40 Amharic, 20 English, each naming the document under knowledge/banking/ that answers it. `topic` is the English subject the page must discuss, and for a page that is itself in Amharic, `topicAm` is the Amharic one. ops/packs/build-gold.js refuses to write the gold file unless at least three of a topic's content words are in that page's text, so a question can never point at a page that does not talk about it. Questions were written from the pages as they were measured on 2026-09-16, never from memory. Ten of them ask an Amharic question of an Amharic page, which is the first same-language slice in any BinaSmart pack. Seventeen of the sixty were refused on the first run against the fetched pages and were repaired on 2026-09-17: eleven had their label moved to the page that really answers them, six named something no page in the pack answers and were replaced. Every one of the seventeen carries a note saying which, and a replaced question keeps its original wording in question_replaced.",
-  "coverage_gaps": [
-    { "subject": "published interest rates", "why": "Zemen's rate page is client-rendered and came back thin, so it is not in the pack, and no institution in the pack publishes a lending rate. The only rate figures on disk are deposit rates in Dashen's FAQ and Zemen's business product page.", "affected": ["bk-015", "bk-016", "bk-043"] },
-    { "subject": "exchange rate board", "why": "No page in the pack carries a buying/selling rate table. Zemen's exchange-rates page was not selected and CBE's is client-rendered.", "affected": ["bk-017", "bk-044"] },
-    { "subject": "loan calculator", "why": "The word calculator appears in no document in the pack; Zemen's calculator page renders in the browser and came back empty.", "affected": ["bk-018"] },
-    { "subject": "how to lodge a complaint", "why": "No page tells a customer how to complain. ቅሬታ appears only as a navigation link on zemen-am-home.", "affected": ["bk-010"] },
-    { "subject": "CBE diaspora accounts", "why": "Only five CBE pages survived the fetch and none of them is about diaspora accounts, so a question naming CBE could not be retargeted.", "affected": ["bk-034"] },
-    { "subject": "per-question CoopBank FAQ pages", "why": "CoopBank's individual ufaq URLs were not fetched as separate documents; the whole archive arrived as coopbank-ufaqs.", "affected": ["bk-026", "bk-027", "bk-039"] }
-  ],
-  "measured": {
-    "run": "/root/bini-eval/retrieval-gold-banking-20260916-215324.json",
-    "at": "2026-09-16T21:53:24.995Z",
-    "corpusChunks": 16117,
-    "target": "90.0% Page@3 as shipped (the design)",
-    "pageAt3": { "allRetrieval": "56.7%", "allShipped": "55.0%", "amharic": "52.5%", "english": "60.0%", "amQuestionEnglishGold": "40.0%", "sameLanguage": "70.0%" },
-    "theOneNumberThatMatters": "Split the same-language slice and the pack reaches the design target where the language matches. The ten Amharic questions whose gold page is itself Amharic score 90.0% on retrieval and 90.0% as shipped - the 90% the design asked for, met exactly. The twenty English questions on English pages score 80.0% retrieval and 60.0% as shipped. The thirty Amharic questions whose only gold page is English score 30.0% retrieval and 40.0% as shipped. The pack is not bad at Amharic; it is being asked to find English pages with Amharic questions in a corpus where one bank out of six publishes Amharic.",
-    "verdict": "The target was NOT met and no label was moved to make it look met. Twenty-two of the twenty-seven misses are the retriever returning a different institution's page on the same product, or the same Zemen page in the other language, for a question that names no bank; the gold set can only name one page, so those score zero even though the pack answered. Five are genuine retrieval failures where nothing in the top three answers.",
-    "whyAmharicIsWorse": "Zemen is the only institution in this pack with an Amharic locale (see sources.json langNote for zemen, dashen, cbe and coopbank). An Amharic question therefore lands on a Zemen Amharic page whatever bank its label names: a zemen-am- page is in the shipped top three for 32 of the 40 Amharic questions when only 10 of them have a zemen-am- gold page, and won rank one in 13 of the 19 Amharic misses. This is not fixable by fetching, because Dashen, CBE and CoopBank do not publish Amharic product pages at all. It is the argument for asking every Ethiopian institution to publish in Amharic, and it is the first time any BinaSmart pack has been able to measure it: 70.0% when the question and its gold page share a language, 40.0% when they do not.",
-    "remediesNotApplied": "Convention 14 allows four remedies. (a) Retargeting was refused: the plan forbids moving a label to whichever page happened to win, and Task 8 had already moved eleven labels and replaced six questions against the fetched pages. (b) Widening an allow list was refused: every gold page is already in the pack and was verified to contain its answer, so the pack is never missing the answer, and Task 10 is skipped for that reason. (c) The banking PREFER list was measured and left alone: a non-pack document (guide:open-bank-account-ethiopia, guide:telebirr, page:diaspora) is in the shipped top three for 7 of the 27 misses, but the gold page sits at rank 4 in only 3 of them, so removing BinaSmart's own account-opening guide from PREFER could gain at most 3 questions while taking the right answer away from real users. (d) The remaining misses are recorded, here and in the report. The shared reranker, the embedding model, hybridScore and the +0.06 tie-breaker were not touched; the airline gate re-ran at exactly 86.7% retrieval and 83.3% as shipped on the same corpus to prove it.",
-    "afterAmharicHeaders": {
-      "run": "/root/bini-eval/retrieval-gold-banking-20260916-225957.json",
-      "at": "2026-09-16T22:59:57.979Z",
-      "corpusChunks": 16155,
-      "what": "Task 10b gave every ENGLISH document of the pack a grounded Amharic title and a two-or-three-sentence Amharic key-fact summary in its header, which is the half of the sector-pack design (an English and Amharic header per document naming the key facts) the pack shipped without. 203 documents, generated by ops/packs/am-headers.js into knowledge/banking/am-headers.json from each page's own text and checked digit by digit against it; 202 got a title and a summary, 1 a title only, 1 summary was refused by the grounding check. No page was re-fetched, no label was moved, and the reranker, the embedding model, hybridScore and the +0.06 tie-breaker were not touched.",
-      "pageAt3": {
-        "allRetrieval": "66.7% (was 56.7%)",
-        "allShipped": "61.7% (was 55.0%)",
-        "amharic": "60.0% as shipped (was 52.5%), 60.0% retrieval (was 45.0%)",
-        "english": "65.0% as shipped (was 60.0%), 80.0% retrieval (unchanged)",
-        "amQuestionEnglishGold": "50.0% as shipped (was 40.0%), 50.0% retrieval (was 30.0%)",
-        "amQuestionAmharicGold": "90.0% / 90.0% (unchanged)",
-        "sameLanguage": "73.3% as shipped (was 70.0%), 83.3% retrieval (unchanged)"
-      },
-      "theOneNumberThatMatters": "The slice the Amharic header was written for is the slice that moved: the thirty Amharic questions whose only gold page is English went from 30.0% to 50.0% on retrieval and from 40.0% to 50.0% as shipped, while the ten Amharic questions on Amharic pages held at 90.0%/90.0% and the same-language retrieval slice did not move at all. Four questions net changed hands as shipped (bk-018, bk-019, bk-022, bk-029, bk-038 and bk-043 gained; bk-012 and bk-020 lost), and six of the nine questions the first run classed as amharicLocaleCapture are no longer captured. The gap between asking in the page's own language and asking across languages narrowed from 30 points to 23.3 and is not closed: an Amharic header is not an Amharic page, and the argument for asking every Ethiopian institution to publish in Amharic stands.",
-      "gatesHeld": "The airline pack was not touched by one byte (git status --short knowledge/travel empty, test/packs/airline-identity.test.js green, --rerender reporting 0 of its 114 documents changed) and its benchmark re-ran at exactly 86.7% retrieval and 83.3% as shipped. Dr Afiya and Asmat re-ran on gold-v3-agents at 96.4% retrieval and 98.2% as shipped, question for question identical to the run before this change.",
-      "cost": "The header change re-rendered 203 documents and moved 407 chunks of 1,657 (the header sits in the first section of each document, so only that section re-chunked); the corpus went from 16,117 to 16,155 chunks."
-    },
-    "missClasses": {
-      "amharicLocaleCapture": ["bk-018", "bk-019", "bk-022", "bk-024", "bk-027", "bk-032", "bk-034", "bk-035", "bk-037"],
-      "sameZemenPageInTheOtherLanguage": ["bk-030", "bk-040", "bk-043"],
-      "siblingPageOfTheSameInstitution": ["bk-001", "bk-046"],
-      "anotherInstitutionSameProduct": ["bk-025", "bk-038", "bk-047", "bk-049", "bk-050", "bk-051"],
-      "genuineRetrievalMiss": ["bk-016", "bk-017", "bk-031", "bk-039", "bk-044", "bk-054"],
-      "foundByRetrievalDroppedByTheReranker": ["bk-029"]
-    }
+ "version": 2,
+ "_about": "The 60 gold questions for the BinaSmart banking and money pack (the sector-pack method, design 2026-09-16-airline-travel-design.md section 1.3): 40 Amharic, 20 English, each naming the document under knowledge/banking/ that answers it. `topic` is the English subject the page must discuss, and for a page that is itself in Amharic, `topicAm` is the Amharic one. ops/packs/build-gold.js refuses to write the gold file unless at least three of a topic's content words are in that page's text, so a question can never point at a page that does not talk about it. Questions were written from the pages as they were measured on 2026-09-16, never from memory. Ten of them ask an Amharic question of an Amharic page, which is the first same-language slice in any BinaSmart pack. Seventeen of the sixty were refused on the first run against the fetched pages and were repaired on 2026-09-17: eleven had their label moved to the page that really answers them, six named something no page in the pack answers and were replaced. Every one of the seventeen carries a note saying which, and a replaced question keeps its original wording in question_replaced. BATCH 2 (2026-09-17, Task 15b): thirty more questions - 20 Amharic, 10 English - on the three sources Task 15a added, the National Bank of Ethiopia, telebirr and M-PESA. Fifteen of the twenty Amharic questions are answered by a page that is ITSELF in Amharic, because telebirr publishes 28 Amharic pages; three are deliberately Amharic questions whose only page is English (the National Bank publishes its complaint procedure, its FX rules and its interest-rate directive in English only), so the cross-lingual gap stays measurable rather than being designed away. Every label was verified twice: by ops/packs/build-gold.js --check, and by reading the page body with the rendered header and the disclaimer stripped, because the disclaimer alone can satisfy the three-content-word check. Questions carry batch: 1 or batch: 2 so the benchmark can slice them apart.",
+ "coverage_gaps": [
+  {
+   "subject": "published interest rates",
+   "why": "Zemen's rate page is client-rendered and came back thin, so it is not in the pack, and no institution in the pack publishes a lending rate. The only rate figures on disk are deposit rates in Dashen's FAQ and Zemen's business product page.",
+   "affected": [
+    "bk-015",
+    "bk-016",
+    "bk-043"
+   ]
   },
-  "questions": [
-    { "qid": "bk-001", "lang": "am", "section": "amharic", "slug": "zemen-am-forex-service", "topic": "foreign currency account forex service retention", "topicAm": "የውጭ ምንዛሪ ሂሳብ አገልግሎት", "question": "የውጭ ምንዛሪ ሂሳብ መክፈት እችላለሁ?" },
-    { "qid": "bk-002", "lang": "am", "section": "amharic", "slug": "zemen-am-faq", "topic": "account opening identification photograph minimum deposit branch", "topicAm": "ሂሳብ ለመክፈት መታወቂያ ፎቶግራፍ ተቀማጭ", "question": "የቁጠባ ሂሳብ ለመክፈት ምን ያስፈልጋል?", "note": "2026-09-17: label moved from zemen-am-banking-service, which is not in the pack. The Amharic FAQ answers this question outright: a legal ID, a passport-size photograph and a minimum deposit, at a branch." },
-    { "qid": "bk-003", "lang": "am", "section": "amharic", "slug": "zemen-am-savings-accounts", "topic": "zemen bank savings accounts deposit", "topicAm": "የዘመን ባንክ የቁጠባ ሂሳቦች", "question": "የዘመን ባንክ የቁጠባ ሂሳቦች ምን ምን ናቸው?" },
-    { "qid": "bk-004", "lang": "am", "section": "amharic", "slug": "zemen-am-digital-remittance", "topic": "digital remittance service receive money", "topicAm": "የዲጂታል ሐዋላ አገልግሎት ገንዘብ", "question": "ከውጭ የተላከልኝን ገንዘብ በዲጂታል እንዴት እቀበላለሁ?" },
-    { "qid": "bk-005", "lang": "am", "section": "amharic", "slug": "zemen-am-internet-banking", "topic": "internet banking services online", "topicAm": "የኢንተርኔት ባንኪንግ አገልግሎቶች ባንክ", "question": "የኢንተርኔት ባንኪንግ አገልግሎት እንዴት ልጀምር?" },
-    { "qid": "bk-006", "lang": "am", "section": "amharic", "slug": "zemen-am-business-loans", "topic": "business loans working capital term", "topicAm": "የቢዝነስ ብድር አገልግሎት ባንክ", "question": "ለንግድ ሥራዬ ብድር ማግኘት እችላለሁ?" },
-    { "qid": "bk-007", "lang": "am", "section": "amharic", "slug": "zemen-am-digital-services", "topic": "atm pos payment terminals card digital banking", "topicAm": "ኤቲኤም የክፍያ መፈጸሚያ ማሽኖች ፖስ", "question": "የኤቲኤምና የPOS አገልግሎት እንዴት ነው የሚሠራው?", "note": "2026-09-17: label moved from zemen-am-atm-pos, which is not in the pack; the Amharic digital-services page carries the ATM and POS section itself." },
-    { "qid": "bk-008", "lang": "am", "section": "amharic", "slug": "zemen-am-consumer-deposit", "topic": "consumer deposit account personal banking", "topicAm": "የኮንሲዩመር ቁጠባ ሂሳብ", "question": "የግል ተቀማጭ ሂሳብ አማራጮች ምንድን ናቸው?" },
-    { "qid": "bk-009", "lang": "am", "section": "amharic", "slug": "zemen-am-international-banking", "topic": "international banking trade services foreign", "topicAm": "ዓለም አቀፍ የባንክ አገልግሎት", "question": "ዓለም አቀፍ የባንክ አገልግሎት ምን ይጨምራል?" },
-    { "qid": "bk-010", "lang": "am", "section": "amharic", "slug": "zemen-am-import-export-trade", "topic": "import export trade letter of credit finance documentary collection", "topicAm": "የገቢ የወጪ ንግድ የክሬዲት ደብዳቤ", "question": "ለገቢና ወጪ ንግድ የክሬዲት ደብዳቤ አገልግሎት እንዴት ማግኘት እችላለሁ?", "note": "2026-09-17: the complaint question is a coverage gap, not a retarget. No page in the pack tells a customer how to lodge a complaint; the word ቅሬታ appears only as a navigation link on zemen-am-home. Replaced with an Amharic question the Amharic import/export page answers in full, so the same-language slice stays at ten." },
-
-    { "qid": "bk-011", "lang": "am", "section": "fees", "slug": "zemen-tariff", "topic": "card issuance fee charges digital channels", "question": "ካርድ ለማውጣት ባንኩ ስንት ያስከፍላል?" },
-    { "qid": "bk-012", "lang": "am", "section": "fees", "slug": "zemen-tariff", "topic": "account maintenance service charge monthly", "question": "የሂሳብ ማስተዳደሪያ ወርሃዊ ክፍያ አለ?" },
-    { "qid": "bk-013", "lang": "am", "section": "fees", "slug": "cbe-misalliance-terms-and-tarrif", "topic": "commercial bank tariff charges commission transfer", "question": "የኢትዮጵያ ንግድ ባንክ የአገልግሎት ክፍያ ታሪፍ የት አለ?" },
-    { "qid": "bk-014", "lang": "am", "section": "fees", "slug": "cbe-misalliance-terms-and-tarrif", "topic": "cheque book charge commission account", "question": "የቼክ መጽሐፍ ዋጋው ስንት ነው?" },
-    { "qid": "bk-015", "lang": "am", "section": "rates", "slug": "coopbank-loan-and-advances-overdraft-facility", "topic": "overdraft interest charged overdrawn amount daily basis", "question": "የኦቨርድራፍት ወለድ እንዴት ነው የሚታሰበው?", "note": "2026-09-17: zemen-interest-rates is not in the pack — Zemen's rate page was thin and was not selected. No institution in the pack publishes an overdraft rate either, so the figure question is a coverage gap. The question now asks how overdraft interest is charged, which CoopBank's overdraft page states: on the overdrawn amount outstanding, on a daily basis." },
-    { "qid": "bk-016", "lang": "am", "section": "rates", "slug": "dashen-frequently-asked-questions", "topic": "annual interest rate saving account monthly minimum balance", "question": "በቁጠባ ሂሳብ ላይ የሚከፈለው ወለድ ስንት ነው?", "note": "2026-09-17: label moved from zemen-interest-rates, which is not in the pack. Dashen's FAQ is the one page in the pack that publishes a savings figure — 7.00% a year on the monthly minimum balance, progressive up to 9%." },
-    { "qid": "bk-017", "lang": "am", "section": "rates", "slug": "zemen-digital-services-internet-banking-services", "topic": "alert notified transaction changes exchange rates internet banking", "question": "የምንዛሪ ተመን ሲቀየር ማሳወቂያ ማግኘት እችላለሁ?", "question_replaced": "የዛሬው የዶላር ምንዛሪ ተመን ስንት ነው?", "note": "2026-09-17: coverage gap. No page in the pack carries a rate board, so today's dollar rate cannot be answered and the question was not softened but replaced. Zemen's internet-banking page does say a customer can be alerted when exchange rates change." },
-    { "qid": "bk-018", "lang": "am", "section": "accounts", "slug": "cbe-misalliance-account-opening", "topic": "open accounts remotely online identity verification document upload", "question": "ሂሳብ ያለ ቅርንጫፍ ጉብኝት በመስመር ላይ መክፈት ይቻላል?", "question_replaced": "የብድር ወርሃዊ ክፍያዬን እንዴት ላስላ?", "note": "2026-09-17: coverage gap. The word calculator appears in no document in the pack — the Zemen calculator page is client-rendered and came back empty. Replaced with a question CBE's own account-opening page answers: accounts can be opened remotely, with identity verification and document upload, no branch visit." },
-    { "qid": "bk-019", "lang": "am", "section": "loans", "slug": "dashen-consumer-loan", "topic": "consumer loan mortgage vehicle personal collateral", "question": "የቤት ወይም የመኪና ብድር ለማግኘት ምን ያስፈልጋል?" },
-    { "qid": "bk-020", "lang": "am", "section": "loans", "slug": "dashen-business-loan", "topic": "business loan working capital investment term", "question": "የንግድ ብድር ዓይነቶች ምንድን ናቸው?" },
-    { "qid": "bk-021", "lang": "am", "section": "loans", "slug": "coopbank-loan-and-advances-overdraft-facility", "topic": "overdraft facility current account working capital collateral relationship", "question": "የኦቨርድራፍት አገልግሎት እንዴት ይሰጣል?", "note": "2026-09-17: slug corrected — the pack has coopbank-loan-and-advances-overdraft-facility; the overdraft-overdrawn-facility page the spec named does not exist." },
-    { "qid": "bk-022", "lang": "am", "section": "accounts", "slug": "dashen-saving-deposit", "topic": "saving deposit account minimum balance types", "question": "የቁጠባ ሂሳብ ለመክፈት ዝቅተኛው ተቀማጭ ስንት ነው?" },
-    { "qid": "bk-023", "lang": "am", "section": "accounts", "slug": "dashen-fixed-time-deposit", "topic": "fixed time deposit period interest minimum", "question": "ቋሚ የጊዜ ተቀማጭ ሂሳብ ለምን ያህል ጊዜ ነው?" },
-    { "qid": "bk-024", "lang": "am", "section": "accounts", "slug": "dashen-current-demand-deposit", "topic": "current demand deposit cheque account business", "question": "የተንቀሳቃሽ ሂሳብ ከቁጠባ ሂሳብ ልዩነቱ ምንድን ነው?" },
-    { "qid": "bk-025", "lang": "am", "section": "accounts", "slug": "coopbank-ufaqs", "topic": "minimum deposit open saving account valid card passport photographs", "question": "አዲስ ሂሳብ ለመክፈት ምን ምን ሰነድ ያስፈልጋል?", "note": "2026-09-17: label moved from coopbank-open-a-new-account, which is not in the pack. CoopBank's FAQ archive answers it: at least Birr 500, a valid ID card and two passport-size photographs." },
-    { "qid": "bk-026", "lang": "am", "section": "loans", "slug": "coopbank-ufaqs", "topic": "acceptable collaterals real properties motor vehicles machinery guarantee bonds", "question": "ለብድር ማስያዣ ተቀባይነት ያላቸው ንብረቶች ምንድን ናቸው?", "question_replaced": "የሀገር ውስጥ ተቀማጭ ሂሳብ ለመክፈት መስፈርቶቹ ምንድን ናቸው?", "note": "2026-09-17: the per-question CoopBank FAQ URLs the spec named were never fetched as separate pages; the whole archive came back as coopbank-ufaqs. That page answers the account-opening requirements already used by bk-025, so rather than ask the same question twice this one was replaced with the collateral question the same archive answers in detail." },
-    { "qid": "bk-027", "lang": "am", "section": "accounts", "slug": "coopbank-deposit-products-ordinary-saving-account", "topic": "regular saving account zero balance minimum birr unbanked", "question": "ያለ ምንም ገንዘብ ሂሳብ መክፈት ይቻላል?", "note": "2026-09-17: label moved from a per-question FAQ URL that is not in the pack. CoopBank's Regular Saving Account page says it outright: normally a minimum of Birr 50, but it can be opened with a zero balance for unbanked customers." },
-    { "qid": "bk-028", "lang": "am", "section": "remittance", "slug": "dashen-remittance", "topic": "remittance incoming outgoing transfer money agents", "question": "ከውጭ ሀገር የተላከልኝን ገንዘብ የት እወስዳለሁ?" },
-    { "qid": "bk-029", "lang": "am", "section": "remittance", "slug": "dashen-how-to-transfer-money-from-abroad", "topic": "transfer money from abroad steps receive branch", "question": "ከውጭ ገንዘብ ለመላክ ምን ማወቅ አለብኝ?" },
-    { "qid": "bk-030", "lang": "am", "section": "international", "slug": "zemen-international-banking-2-forex-service", "topic": "foreign currency account retention export forex", "question": "የውጭ ምንዛሪ ማቆያ ሂሳብ ምንድን ነው?" },
-    { "qid": "bk-031", "lang": "am", "section": "international", "slug": "zemen-international-banking-2-international-wire-transfers", "topic": "international wire transfer swift beneficiary", "question": "ወደ ውጭ ሀገር በስዊፍት ገንዘብ እንዴት እልካለሁ?" },
-    { "qid": "bk-032", "lang": "am", "section": "diaspora", "slug": "dashen-diaspora-non-repatriable-saving-account", "topic": "diaspora non repatriable saving account foreign currency", "question": "የዲያስፖራ ቁጠባ ሂሳብ እንዴት እከፍታለሁ?" },
-    { "qid": "bk-033", "lang": "am", "section": "diaspora", "slug": "dashen-diaspora-fixed-time-deposit", "topic": "diaspora fixed time deposit foreign currency interest", "question": "ዲያስፖራ ሆኜ በዶላር ቋሚ ተቀማጭ ማድረግ እችላለሁ?" },
-    { "qid": "bk-034", "lang": "am", "section": "diaspora", "slug": "coopbank-diaspora-banking-diaspora-deposit-account", "topic": "diaspora banking account reside outside country domestic international transfers", "question": "በውጭ ሀገር የምኖር ኢትዮጵያዊ የባንክ ሂሳብ መክፈት እችላለሁ?", "question_replaced": "የኢትዮጵያ ንግድ ባንክ የዲያስፖራ ሂሳብ ምን ይመስላል?", "note": "2026-09-17: coverage gap that could not be retargeted, because the question named the Commercial Bank of Ethiopia and only five CBE pages survived the fetch, none of them about diaspora accounts. The question was rewritten to name no bank and now points at CoopBank's diaspora account page." },
-    { "qid": "bk-035", "lang": "am", "section": "digital", "slug": "dashen-card-services", "topic": "card services debit visa atm issuance", "question": "የባንክ ካርድ ዓይነቶች ምንድን ናቸው?" },
-    { "qid": "bk-036", "lang": "am", "section": "digital", "slug": "dashen-how-to-use-an-atm", "topic": "how to use atm machine pin withdraw", "question": "ኤቲኤም እንዴት ነው የምጠቀመው?" },
-    { "qid": "bk-037", "lang": "am", "section": "digital", "slug": "dashen-dashen-mobile-plus", "topic": "mobile banking app transfer register", "question": "የሞባይል ባንኪንግ አገልግሎት እንዴት ልመዝገብ?" },
-    { "qid": "bk-038", "lang": "am", "section": "ifb", "slug": "dashen-wadiah-saving-account-ifb", "topic": "wadiah saving account interest free banking sharia", "question": "የወዲአ ቁጠባ ሂሳብ ምንድን ነው?" },
-    { "qid": "bk-039", "lang": "am", "section": "ifb", "slug": "coopbank-ufaqs", "topic": "interest free banking sharia services non muslims welcome", "question": "ወለድ አልባ ባንክ አገልግሎት ለሁሉም ሰው ክፍት ነው?", "note": "2026-09-17: label moved from a per-question FAQ URL that is not in the pack. The archive page carries the answer verbatim: yes, everyone interested in Interest Free Banking is welcome." },
-    { "qid": "bk-040", "lang": "am", "section": "help", "slug": "zemen-cybersecurity", "topic": "cybersecurity fraud phishing password protect", "question": "የባንክ መለያዬን ከማጭበርበር እንዴት ልጠብቅ?" },
-
-    { "qid": "bk-041", "lang": "en", "section": "fees", "slug": "zemen-tariff", "topic": "payment card issuance related services fees charges", "question": "What does Zemen Bank charge to issue a payment card?" },
-    { "qid": "bk-042", "lang": "en", "section": "fees", "slug": "cbe-misalliance-terms-and-tarrif", "topic": "commission service charge transfer tariff account", "question": "What is CBE's commission on a local transfer?" },
-    { "qid": "bk-043", "lang": "en", "section": "rates", "slug": "zemen-business-banking-business-product", "topic": "business saving account interest rate annum monthly minimum balance", "question": "What interest does a Zemen Bank business saving account earn?", "question_replaced": "What interest rate does Zemen Bank charge on an overdraft?", "note": "2026-09-17: coverage gap. zemen-interest-rates is not in the pack and no page in the pack publishes a lending rate, so the overdraft-rate question cannot be answered by anything on disk. The replacement asks for a rate the pack really carries: Zemen's business saving and business advantage accounts earn 7% a year on the monthly minimum balance." },
-    { "qid": "bk-044", "lang": "en", "section": "rates", "slug": "dashen-frequently-asked-questions", "topic": "exchange rates listed app opening page menu", "question": "Where can I see a bank's exchange rates in its mobile app?", "question_replaced": "Where does Zemen Bank publish its exchange rates?", "note": "2026-09-17: coverage gap. zemen-exchange-rates is not in the pack and Zemen's pages do not say where the rate board lives, so the question was rewritten to name no bank. Dashen's FAQ does answer it: rates are listed on the app's opening page under the Exchange Rate menu." },
-    { "qid": "bk-045", "lang": "en", "section": "loans", "slug": "dashen-consumer-loan", "topic": "mortgage vehicle personal loan collateral repayment period", "question": "What consumer loans does Dashen Bank offer?" },
-    { "qid": "bk-046", "lang": "en", "section": "accounts", "slug": "dashen-frequently-asked-questions", "topic": "minimum balance open account requirements documents", "question": "What do I need to open an account at Dashen Bank?" },
-    { "qid": "bk-047", "lang": "en", "section": "help", "slug": "dashen-frequently-asked-questions", "topic": "lost card blocked report branch call centre", "question": "What do I do if my bank card is lost or stolen?" },
-    { "qid": "bk-048", "lang": "en", "section": "remittance", "slug": "dashen-remittance", "topic": "outgoing foreign transfer incoming remittance agents money", "question": "Which remittance partners does Dashen Bank work with?" },
-    { "qid": "bk-049", "lang": "en", "section": "trade", "slug": "dashen-how-to-import-from-abroad", "topic": "import letter credit documents bank permit supplier", "question": "What does a bank need from me to open a letter of credit for an import?" },
-    { "qid": "bk-050", "lang": "en", "section": "diaspora", "slug": "dashen-diaspora-demand-current-account", "topic": "diaspora demand current account foreign currency eligibility", "question": "Can a diaspora member hold a foreign currency current account in Ethiopia?" },
-    { "qid": "bk-051", "lang": "en", "section": "ifb", "slug": "dashen-financing-ifb", "topic": "interest free financing murabaha sharia compliant facility", "question": "How does interest-free financing work at an Ethiopian bank?" },
-    { "qid": "bk-052", "lang": "en", "section": "digital", "slug": "zemen-digital-services-card-services", "topic": "card services personalisation debit issuance digital", "question": "What card services does Zemen Bank provide?" },
-    { "qid": "bk-053", "lang": "en", "section": "digital", "slug": "dashen-pos-services", "topic": "pos merchant terminal settlement acquiring", "question": "How does a shop get a POS machine from a bank?" },
-    { "qid": "bk-054", "lang": "en", "section": "switch", "slug": "ethswitch-about-us-2", "topic": "ethswitch national payment switch interoperability banks atms", "question": "Why does my card from one bank work in another bank's ATM?", "note": "2026-09-17: slug corrected — the fetched page is ethswitch-about-us-2. It answers the question directly: since 2016 EthSwitch has enabled interoperability of ATMs and POS terminals operated by all banks." },
-    { "qid": "bk-055", "lang": "en", "section": "regulator", "slug": "ecma-about", "topic": "capital market authority regulation development mandate", "question": "What does the Ethiopian Capital Market Authority do?" },
-    { "qid": "bk-056", "lang": "en", "section": "licensing", "slug": "ecma-licensing", "topic": "licensing intermediaries investment advisers requirements authority", "question": "Who has to be licensed by the Capital Market Authority?" },
-    { "qid": "bk-057", "lang": "en", "section": "rules", "slug": "ecma-laws-regulation", "topic": "directives proclamation guidelines capital market laws", "question": "Where are Ethiopia's capital market directives published?" },
-    { "qid": "bk-058", "lang": "en", "section": "sandbox", "slug": "ecma-regulatory-sandbox-frequently-asked-questions", "topic": "regulatory sandbox fintech test eligibility apply", "question": "What is the ECMA regulatory sandbox and who can join it?" },
-    { "qid": "bk-059", "lang": "en", "section": "cooperatives", "slug": "coopbank-cooperative-banking-product-services-ccbas", "topic": "cooperative banking capacity building advisory services saving financing", "question": "What does a bank's cooperative banking division offer to cooperatives?", "question_replaced": "What banking products exist for cooperative societies in Ethiopia?", "note": "2026-09-17: slug corrected (the pack has coopbank-cooperative-banking-product-services-ccbas, not the coopbank-cooperatives- prefix). The page turned out to be about capacity building and advisory services alongside the saving and financing products, so the question was widened to what the page actually holds rather than narrowed to products alone." },
-    { "qid": "bk-060", "lang": "en", "section": "help", "slug": "zemen-faq", "topic": "working hours branch customer service contact questions", "question": "What are a bank's working hours in Addis Ababa?" }
-  ]
+  {
+   "subject": "exchange rate board",
+   "why": "No page in the pack carries a buying/selling rate table. Zemen's exchange-rates page was not selected and CBE's is client-rendered.",
+   "affected": [
+    "bk-017",
+    "bk-044"
+   ]
+  },
+  {
+   "subject": "loan calculator",
+   "why": "The word calculator appears in no document in the pack; Zemen's calculator page renders in the browser and came back empty.",
+   "affected": [
+    "bk-018"
+   ]
+  },
+  {
+   "subject": "how to lodge a complaint",
+   "why": "No page tells a customer how to complain. ቅሬታ appears only as a navigation link on zemen-am-home.",
+   "affected": [
+    "bk-010"
+   ]
+  },
+  {
+   "subject": "CBE diaspora accounts",
+   "why": "Only five CBE pages survived the fetch and none of them is about diaspora accounts, so a question naming CBE could not be retargeted.",
+   "affected": [
+    "bk-034"
+   ]
+  },
+  {
+   "subject": "per-question CoopBank FAQ pages",
+   "why": "CoopBank's individual ufaq URLs were not fetched as separate documents; the whole archive arrived as coopbank-ufaqs.",
+   "affected": [
+    "bk-026",
+    "bk-027",
+    "bk-039"
+   ]
+  }
+ ],
+ "measured": {
+  "run": "/root/bini-eval/retrieval-gold-banking-20260916-215324.json",
+  "at": "2026-09-16T21:53:24.995Z",
+  "corpusChunks": 16117,
+  "target": "90.0% Page@3 as shipped (the design)",
+  "pageAt3": {
+   "allRetrieval": "56.7%",
+   "allShipped": "55.0%",
+   "amharic": "52.5%",
+   "english": "60.0%",
+   "amQuestionEnglishGold": "40.0%",
+   "sameLanguage": "70.0%"
+  },
+  "theOneNumberThatMatters": "Split the same-language slice and the pack reaches the design target where the language matches. The ten Amharic questions whose gold page is itself Amharic score 90.0% on retrieval and 90.0% as shipped - the 90% the design asked for, met exactly. The twenty English questions on English pages score 80.0% retrieval and 60.0% as shipped. The thirty Amharic questions whose only gold page is English score 30.0% retrieval and 40.0% as shipped. The pack is not bad at Amharic; it is being asked to find English pages with Amharic questions in a corpus where one bank out of six publishes Amharic.",
+  "verdict": "The target was NOT met and no label was moved to make it look met. Twenty-two of the twenty-seven misses are the retriever returning a different institution's page on the same product, or the same Zemen page in the other language, for a question that names no bank; the gold set can only name one page, so those score zero even though the pack answered. Five are genuine retrieval failures where nothing in the top three answers.",
+  "whyAmharicIsWorse": "Zemen is the only institution in this pack with an Amharic locale (see sources.json langNote for zemen, dashen, cbe and coopbank). An Amharic question therefore lands on a Zemen Amharic page whatever bank its label names: a zemen-am- page is in the shipped top three for 32 of the 40 Amharic questions when only 10 of them have a zemen-am- gold page, and won rank one in 13 of the 19 Amharic misses. This is not fixable by fetching, because Dashen, CBE and CoopBank do not publish Amharic product pages at all. It is the argument for asking every Ethiopian institution to publish in Amharic, and it is the first time any BinaSmart pack has been able to measure it: 70.0% when the question and its gold page share a language, 40.0% when they do not.",
+  "remediesNotApplied": "Convention 14 allows four remedies. (a) Retargeting was refused: the plan forbids moving a label to whichever page happened to win, and Task 8 had already moved eleven labels and replaced six questions against the fetched pages. (b) Widening an allow list was refused: every gold page is already in the pack and was verified to contain its answer, so the pack is never missing the answer, and Task 10 is skipped for that reason. (c) The banking PREFER list was measured and left alone: a non-pack document (guide:open-bank-account-ethiopia, guide:telebirr, page:diaspora) is in the shipped top three for 7 of the 27 misses, but the gold page sits at rank 4 in only 3 of them, so removing BinaSmart's own account-opening guide from PREFER could gain at most 3 questions while taking the right answer away from real users. (d) The remaining misses are recorded, here and in the report. The shared reranker, the embedding model, hybridScore and the +0.06 tie-breaker were not touched; the airline gate re-ran at exactly 86.7% retrieval and 83.3% as shipped on the same corpus to prove it.",
+  "afterAmharicHeaders": {
+   "run": "/root/bini-eval/retrieval-gold-banking-20260916-225957.json",
+   "at": "2026-09-16T22:59:57.979Z",
+   "corpusChunks": 16155,
+   "what": "Task 10b gave every ENGLISH document of the pack a grounded Amharic title and a two-or-three-sentence Amharic key-fact summary in its header, which is the half of the sector-pack design (an English and Amharic header per document naming the key facts) the pack shipped without. 203 documents, generated by ops/packs/am-headers.js into knowledge/banking/am-headers.json from each page's own text and checked digit by digit against it; 202 got a title and a summary, 1 a title only, 1 summary was refused by the grounding check. No page was re-fetched, no label was moved, and the reranker, the embedding model, hybridScore and the +0.06 tie-breaker were not touched.",
+   "pageAt3": {
+    "allRetrieval": "66.7% (was 56.7%)",
+    "allShipped": "61.7% (was 55.0%)",
+    "amharic": "60.0% as shipped (was 52.5%), 60.0% retrieval (was 45.0%)",
+    "english": "65.0% as shipped (was 60.0%), 80.0% retrieval (unchanged)",
+    "amQuestionEnglishGold": "50.0% as shipped (was 40.0%), 50.0% retrieval (was 30.0%)",
+    "amQuestionAmharicGold": "90.0% / 90.0% (unchanged)",
+    "sameLanguage": "73.3% as shipped (was 70.0%), 83.3% retrieval (unchanged)"
+   },
+   "theOneNumberThatMatters": "The slice the Amharic header was written for is the slice that moved: the thirty Amharic questions whose only gold page is English went from 30.0% to 50.0% on retrieval and from 40.0% to 50.0% as shipped, while the ten Amharic questions on Amharic pages held at 90.0%/90.0% and the same-language retrieval slice did not move at all. Four questions net changed hands as shipped (bk-018, bk-019, bk-022, bk-029, bk-038 and bk-043 gained; bk-012 and bk-020 lost), and six of the nine questions the first run classed as amharicLocaleCapture are no longer captured. The gap between asking in the page's own language and asking across languages narrowed from 30 points to 23.3 and is not closed: an Amharic header is not an Amharic page, and the argument for asking every Ethiopian institution to publish in Amharic stands.",
+   "gatesHeld": "The airline pack was not touched by one byte (git status --short knowledge/travel empty, test/packs/airline-identity.test.js green, --rerender reporting 0 of its 114 documents changed) and its benchmark re-ran at exactly 86.7% retrieval and 83.3% as shipped. Dr Afiya and Asmat re-ran on gold-v3-agents at 96.4% retrieval and 98.2% as shipped, question for question identical to the run before this change.",
+   "cost": "The header change re-rendered 203 documents and moved 407 chunks of 1,657 (the header sits in the first section of each document, so only that section re-chunked); the corpus went from 16,117 to 16,155 chunks."
+  },
+  "missClasses": {
+   "amharicLocaleCapture": [
+    "bk-018",
+    "bk-019",
+    "bk-022",
+    "bk-024",
+    "bk-027",
+    "bk-032",
+    "bk-034",
+    "bk-035",
+    "bk-037"
+   ],
+   "sameZemenPageInTheOtherLanguage": [
+    "bk-030",
+    "bk-040",
+    "bk-043"
+   ],
+   "siblingPageOfTheSameInstitution": [
+    "bk-001",
+    "bk-046"
+   ],
+   "anotherInstitutionSameProduct": [
+    "bk-025",
+    "bk-038",
+    "bk-047",
+    "bk-049",
+    "bk-050",
+    "bk-051"
+   ],
+   "genuineRetrievalMiss": [
+    "bk-016",
+    "bk-017",
+    "bk-031",
+    "bk-039",
+    "bk-044",
+    "bk-054"
+   ],
+   "foundByRetrievalDroppedByTheReranker": [
+    "bk-029"
+   ]
+  },
+  "afterBatch2": {
+   "run": "/root/bini-eval/retrieval-gold-banking-20260917-053403.json",
+   "alsoRun": "/root/bini-eval/retrieval-gold-banking-20260917-052005.json — the same run ten minutes earlier, identical in every slice",
+   "at": "2026-09-17T05:34:03Z",
+   "corpusChunks": 18611,
+   "questions": 90,
+   "what": "Task 15b. Thirty questions were added (batch 2: 20 Amharic, 10 English) on the National Bank of Ethiopia, telebirr and M-PESA, the three sources Task 15a folded into the pack, and two batch-1 labels were repaired. No page was re-fetched, no chunk was re-embedded, and the reranker, the embedding model, hybridScore and the +0.06 tie-breaker were not touched. The only production change in the task is that contextFor now prints a Source line — publisher, url, fetch date — at the top of every page block, which the benchmark does not use.",
+   "pageAt3": {
+    "allRetrieval": "71.1% (the 60-question set read 56.7% on this same corpus)",
+    "allShipped": "72.2% (was 56.7%)",
+    "amharic": "65.0% retrieval / 68.3% as shipped, n=60",
+    "english": "83.3% retrieval / 80.0% as shipped, n=30",
+    "amQuestionEnglishGold": "43.8% retrieval / 50.0% as shipped, n=32",
+    "sameLanguage": "86.2% retrieval / 84.5% as shipped, n=58",
+    "batch1": "60.0% retrieval / 61.7% as shipped, n=60",
+    "batch2": "93.3% retrieval / 93.3% as shipped, n=30 (Amharic 90.0/90.0, English 100.0/100.0)"
+   },
+   "theOneNumberThatMatters": "Batch 2 scores 93.3% and batch 1 scores 61.7% on the same corpus, with the same retriever, in the same run. The difference is not the questions and not the retriever: it is that fifteen of batch 2's twenty Amharic questions have a gold page that is ITSELF in Amharic, because telebirr publishes 28 Amharic pages, while batch 1 has ten such questions out of forty because Zemen is the only bank in the pack with an Amharic locale. The whole-set split says the same thing again: 86.2% when the question and its page share a language, 43.8% when they do not. This is now the second independent measurement of the same finding, and it is the argument for asking every Ethiopian institution to publish in Amharic.",
+   "repairs": "Two batch-1 labels were moved, both Amharic questions about receiving money from abroad that name no institution: bk-004 from zemen-am-digital-remittance and bk-028 from dashen-remittance, both to ethiotelecom-am-international-remittance, telebirr's own Amharic page, which answers the receiving side in the language the question is asked in. The other four questions the corpus moved in Task 15a — bk-014, bk-018, bk-021 and bk-050 — keep their labels and their misses, because what outranked them (a telebirr landing page, a law on cheques, the FX directive) does not answer better than the page already named. A label was never moved to whatever happened to win.",
+   "verdict": "The design target of 90.0% as shipped is met by batch 2 (93.3%) and not by the pack as a whole (72.2%). The gap is the cross-lingual one, and it is now measured at 34.5 points of retrieval between a question asked of a page in its own language and one asked across languages.",
+   "gatesHeld": "Dr Afiya and Asmat re-ran on gold-v3-agents at 96.4% retrieval / 99.1% as shipped, question for question what Task 15a measured (Afiya 96.3/98.1, Asmat 96.5/100.0). The airline pack re-ran at 85.0% retrieval both times it was run; as shipped was 81.7% on the first run and 83.3% on the second, a single question (tv-015) that the live reranker swapped for a sibling check-in page. git status --short knowledge/travel is empty."
+  }
+ },
+ "questions": [
+  {"qid": "bk-001", "lang": "am", "section": "amharic", "slug": "zemen-am-forex-service", "topic": "foreign currency account forex service retention", "topicAm": "የውጭ ምንዛሪ ሂሳብ አገልግሎት", "question": "የውጭ ምንዛሪ ሂሳብ መክፈት እችላለሁ?", "batch": 1},
+  {"qid": "bk-002", "lang": "am", "section": "amharic", "slug": "zemen-am-faq", "topic": "account opening identification photograph minimum deposit branch", "topicAm": "ሂሳብ ለመክፈት መታወቂያ ፎቶግራፍ ተቀማጭ", "question": "የቁጠባ ሂሳብ ለመክፈት ምን ያስፈልጋል?", "note": "2026-09-17: label moved from zemen-am-banking-service, which is not in the pack. The Amharic FAQ answers this question outright: a legal ID, a passport-size photograph and a minimum deposit, at a branch.", "batch": 1},
+  {"qid": "bk-003", "lang": "am", "section": "amharic", "slug": "zemen-am-savings-accounts", "topic": "zemen bank savings accounts deposit", "topicAm": "የዘመን ባንክ የቁጠባ ሂሳቦች", "question": "የዘመን ባንክ የቁጠባ ሂሳቦች ምን ምን ናቸው?", "batch": 1},
+  {"qid": "bk-004", "lang": "am", "section": "amharic", "slug": "ethiotelecom-am-international-remittance", "topic": "international remittance receive money telebirr app", "topicAm": "ዓለም አቀፍ ገንዘብ መቀበል ቴሌብር ሬሚት መተግበሪያ", "question": "ከውጭ የተላከልኝን ገንዘብ በዲጂታል እንዴት እቀበላለሁ?", "label_replaced": "zemen-am-digital-remittance", "note": "2026-09-17, Task 15b: retargeted. The question asks how to RECEIVE money sent from abroad, digitally, and names no institution. Zemen's Amharic digital-remittance page is written from the sender's side - a diaspora customer paying with a Visa or Mastercard - while telebirr's own Amharic page opens by saying customers can receive money sent by relatives abroad on their mobile phone, and then gives the telebirr Remit steps. Same language as the question, and the receiving side of it. The retrieval ran it first before the label was moved; the label was moved because the page answers better, not because it won.", "batch": 1},
+  {"qid": "bk-005", "lang": "am", "section": "amharic", "slug": "zemen-am-internet-banking", "topic": "internet banking services online", "topicAm": "የኢንተርኔት ባንኪንግ አገልግሎቶች ባንክ", "question": "የኢንተርኔት ባንኪንግ አገልግሎት እንዴት ልጀምር?", "batch": 1},
+  {"qid": "bk-006", "lang": "am", "section": "amharic", "slug": "zemen-am-business-loans", "topic": "business loans working capital term", "topicAm": "የቢዝነስ ብድር አገልግሎት ባንክ", "question": "ለንግድ ሥራዬ ብድር ማግኘት እችላለሁ?", "batch": 1},
+  {"qid": "bk-007", "lang": "am", "section": "amharic", "slug": "zemen-am-digital-services", "topic": "atm pos payment terminals card digital banking", "topicAm": "ኤቲኤም የክፍያ መፈጸሚያ ማሽኖች ፖስ", "question": "የኤቲኤምና የPOS አገልግሎት እንዴት ነው የሚሠራው?", "note": "2026-09-17: label moved from zemen-am-atm-pos, which is not in the pack; the Amharic digital-services page carries the ATM and POS section itself.", "batch": 1},
+  {"qid": "bk-008", "lang": "am", "section": "amharic", "slug": "zemen-am-consumer-deposit", "topic": "consumer deposit account personal banking", "topicAm": "የኮንሲዩመር ቁጠባ ሂሳብ", "question": "የግል ተቀማጭ ሂሳብ አማራጮች ምንድን ናቸው?", "batch": 1},
+  {"qid": "bk-009", "lang": "am", "section": "amharic", "slug": "zemen-am-international-banking", "topic": "international banking trade services foreign", "topicAm": "ዓለም አቀፍ የባንክ አገልግሎት", "question": "ዓለም አቀፍ የባንክ አገልግሎት ምን ይጨምራል?", "batch": 1},
+  {"qid": "bk-010", "lang": "am", "section": "amharic", "slug": "zemen-am-import-export-trade", "topic": "import export trade letter of credit finance documentary collection", "topicAm": "የገቢ የወጪ ንግድ የክሬዲት ደብዳቤ", "question": "ለገቢና ወጪ ንግድ የክሬዲት ደብዳቤ አገልግሎት እንዴት ማግኘት እችላለሁ?", "note": "2026-09-17: the complaint question is a coverage gap, not a retarget. No page in the pack tells a customer how to lodge a complaint; the word ቅሬታ appears only as a navigation link on zemen-am-home. Replaced with an Amharic question the Amharic import/export page answers in full, so the same-language slice stays at ten.", "batch": 1},
+  {"qid": "bk-011", "lang": "am", "section": "fees", "slug": "zemen-tariff", "topic": "card issuance fee charges digital channels", "question": "ካርድ ለማውጣት ባንኩ ስንት ያስከፍላል?", "batch": 1},
+  {"qid": "bk-012", "lang": "am", "section": "fees", "slug": "zemen-tariff", "topic": "account maintenance service charge monthly", "question": "የሂሳብ ማስተዳደሪያ ወርሃዊ ክፍያ አለ?", "batch": 1},
+  {"qid": "bk-013", "lang": "am", "section": "fees", "slug": "cbe-misalliance-terms-and-tarrif", "topic": "commercial bank tariff charges commission transfer", "question": "የኢትዮጵያ ንግድ ባንክ የአገልግሎት ክፍያ ታሪፍ የት አለ?", "batch": 1},
+  {"qid": "bk-014", "lang": "am", "section": "fees", "slug": "cbe-misalliance-terms-and-tarrif", "topic": "cheque book charge commission account", "question": "የቼክ መጽሐፍ ዋጋው ስንት ነው?", "batch": 1},
+  {"qid": "bk-015", "lang": "am", "section": "rates", "slug": "coopbank-loan-and-advances-overdraft-facility", "topic": "overdraft interest charged overdrawn amount daily basis", "question": "የኦቨርድራፍት ወለድ እንዴት ነው የሚታሰበው?", "note": "2026-09-17: zemen-interest-rates is not in the pack — Zemen's rate page was thin and was not selected. No institution in the pack publishes an overdraft rate either, so the figure question is a coverage gap. The question now asks how overdraft interest is charged, which CoopBank's overdraft page states: on the overdrawn amount outstanding, on a daily basis.", "batch": 1},
+  {"qid": "bk-016", "lang": "am", "section": "rates", "slug": "dashen-frequently-asked-questions", "topic": "annual interest rate saving account monthly minimum balance", "question": "በቁጠባ ሂሳብ ላይ የሚከፈለው ወለድ ስንት ነው?", "note": "2026-09-17: label moved from zemen-interest-rates, which is not in the pack. Dashen's FAQ is the one page in the pack that publishes a savings figure — 7.00% a year on the monthly minimum balance, progressive up to 9%.", "batch": 1},
+  {"qid": "bk-017", "lang": "am", "section": "rates", "slug": "zemen-digital-services-internet-banking-services", "topic": "alert notified transaction changes exchange rates internet banking", "question": "የምንዛሪ ተመን ሲቀየር ማሳወቂያ ማግኘት እችላለሁ?", "question_replaced": "የዛሬው የዶላር ምንዛሪ ተመን ስንት ነው?", "note": "2026-09-17: coverage gap. No page in the pack carries a rate board, so today's dollar rate cannot be answered and the question was not softened but replaced. Zemen's internet-banking page does say a customer can be alerted when exchange rates change.", "batch": 1},
+  {"qid": "bk-018", "lang": "am", "section": "accounts", "slug": "cbe-misalliance-account-opening", "topic": "open accounts remotely online identity verification document upload", "question": "ሂሳብ ያለ ቅርንጫፍ ጉብኝት በመስመር ላይ መክፈት ይቻላል?", "question_replaced": "የብድር ወርሃዊ ክፍያዬን እንዴት ላስላ?", "note": "2026-09-17: coverage gap. The word calculator appears in no document in the pack — the Zemen calculator page is client-rendered and came back empty. Replaced with a question CBE's own account-opening page answers: accounts can be opened remotely, with identity verification and document upload, no branch visit.", "batch": 1},
+  {"qid": "bk-019", "lang": "am", "section": "loans", "slug": "dashen-consumer-loan", "topic": "consumer loan mortgage vehicle personal collateral", "question": "የቤት ወይም የመኪና ብድር ለማግኘት ምን ያስፈልጋል?", "batch": 1},
+  {"qid": "bk-020", "lang": "am", "section": "loans", "slug": "dashen-business-loan", "topic": "business loan working capital investment term", "question": "የንግድ ብድር ዓይነቶች ምንድን ናቸው?", "batch": 1},
+  {"qid": "bk-021", "lang": "am", "section": "loans", "slug": "coopbank-loan-and-advances-overdraft-facility", "topic": "overdraft facility current account working capital collateral relationship", "question": "የኦቨርድራፍት አገልግሎት እንዴት ይሰጣል?", "note": "2026-09-17: slug corrected — the pack has coopbank-loan-and-advances-overdraft-facility; the overdraft-overdrawn-facility page the spec named does not exist.", "batch": 1},
+  {"qid": "bk-022", "lang": "am", "section": "accounts", "slug": "dashen-saving-deposit", "topic": "saving deposit account minimum balance types", "question": "የቁጠባ ሂሳብ ለመክፈት ዝቅተኛው ተቀማጭ ስንት ነው?", "batch": 1},
+  {"qid": "bk-023", "lang": "am", "section": "accounts", "slug": "dashen-fixed-time-deposit", "topic": "fixed time deposit period interest minimum", "question": "ቋሚ የጊዜ ተቀማጭ ሂሳብ ለምን ያህል ጊዜ ነው?", "batch": 1},
+  {"qid": "bk-024", "lang": "am", "section": "accounts", "slug": "dashen-current-demand-deposit", "topic": "current demand deposit cheque account business", "question": "የተንቀሳቃሽ ሂሳብ ከቁጠባ ሂሳብ ልዩነቱ ምንድን ነው?", "batch": 1},
+  {"qid": "bk-025", "lang": "am", "section": "accounts", "slug": "coopbank-ufaqs", "topic": "minimum deposit open saving account valid card passport photographs", "question": "አዲስ ሂሳብ ለመክፈት ምን ምን ሰነድ ያስፈልጋል?", "note": "2026-09-17: label moved from coopbank-open-a-new-account, which is not in the pack. CoopBank's FAQ archive answers it: at least Birr 500, a valid ID card and two passport-size photographs.", "batch": 1},
+  {"qid": "bk-026", "lang": "am", "section": "loans", "slug": "coopbank-ufaqs", "topic": "acceptable collaterals real properties motor vehicles machinery guarantee bonds", "question": "ለብድር ማስያዣ ተቀባይነት ያላቸው ንብረቶች ምንድን ናቸው?", "question_replaced": "የሀገር ውስጥ ተቀማጭ ሂሳብ ለመክፈት መስፈርቶቹ ምንድን ናቸው?", "note": "2026-09-17: the per-question CoopBank FAQ URLs the spec named were never fetched as separate pages; the whole archive came back as coopbank-ufaqs. That page answers the account-opening requirements already used by bk-025, so rather than ask the same question twice this one was replaced with the collateral question the same archive answers in detail.", "batch": 1},
+  {"qid": "bk-027", "lang": "am", "section": "accounts", "slug": "coopbank-deposit-products-ordinary-saving-account", "topic": "regular saving account zero balance minimum birr unbanked", "question": "ያለ ምንም ገንዘብ ሂሳብ መክፈት ይቻላል?", "note": "2026-09-17: label moved from a per-question FAQ URL that is not in the pack. CoopBank's Regular Saving Account page says it outright: normally a minimum of Birr 50, but it can be opened with a zero balance for unbanked customers.", "batch": 1},
+  {"qid": "bk-028", "lang": "am", "section": "remittance", "slug": "ethiotelecom-am-international-remittance", "topic": "receive money from abroad telebirr account mobile", "question": "ከውጭ ሀገር የተላከልኝን ገንዘብ የት እወስዳለሁ?", "label_replaced": "dashen-remittance", "topicAm": "ውጭ ሀገር ገንዘብ መቀበል ቴሌብር አካውንት", "note": "2026-09-17, Task 15b: retargeted. Asked in Amharic, naming no bank: where do I collect money sent from abroad. Dashen's remittance page is in English and answers it for one bank's branches; telebirr's Amharic page answers the same question for the country's largest wallet - the money arrives in your telebirr account on your phone. The Dashen page is still in the pack and still answers bk-048, which names Dashen.", "batch": 1},
+  {"qid": "bk-029", "lang": "am", "section": "remittance", "slug": "dashen-how-to-transfer-money-from-abroad", "topic": "transfer money from abroad steps receive branch", "question": "ከውጭ ገንዘብ ለመላክ ምን ማወቅ አለብኝ?", "batch": 1},
+  {"qid": "bk-030", "lang": "am", "section": "international", "slug": "zemen-international-banking-2-forex-service", "topic": "foreign currency account retention export forex", "question": "የውጭ ምንዛሪ ማቆያ ሂሳብ ምንድን ነው?", "batch": 1},
+  {"qid": "bk-031", "lang": "am", "section": "international", "slug": "zemen-international-banking-2-international-wire-transfers", "topic": "international wire transfer swift beneficiary", "question": "ወደ ውጭ ሀገር በስዊፍት ገንዘብ እንዴት እልካለሁ?", "batch": 1},
+  {"qid": "bk-032", "lang": "am", "section": "diaspora", "slug": "dashen-diaspora-non-repatriable-saving-account", "topic": "diaspora non repatriable saving account foreign currency", "question": "የዲያስፖራ ቁጠባ ሂሳብ እንዴት እከፍታለሁ?", "batch": 1},
+  {"qid": "bk-033", "lang": "am", "section": "diaspora", "slug": "dashen-diaspora-fixed-time-deposit", "topic": "diaspora fixed time deposit foreign currency interest", "question": "ዲያስፖራ ሆኜ በዶላር ቋሚ ተቀማጭ ማድረግ እችላለሁ?", "batch": 1},
+  {"qid": "bk-034", "lang": "am", "section": "diaspora", "slug": "coopbank-diaspora-banking-diaspora-deposit-account", "topic": "diaspora banking account reside outside country domestic international transfers", "question": "በውጭ ሀገር የምኖር ኢትዮጵያዊ የባንክ ሂሳብ መክፈት እችላለሁ?", "question_replaced": "የኢትዮጵያ ንግድ ባንክ የዲያስፖራ ሂሳብ ምን ይመስላል?", "note": "2026-09-17: coverage gap that could not be retargeted, because the question named the Commercial Bank of Ethiopia and only five CBE pages survived the fetch, none of them about diaspora accounts. The question was rewritten to name no bank and now points at CoopBank's diaspora account page.", "batch": 1},
+  {"qid": "bk-035", "lang": "am", "section": "digital", "slug": "dashen-card-services", "topic": "card services debit visa atm issuance", "question": "የባንክ ካርድ ዓይነቶች ምንድን ናቸው?", "batch": 1},
+  {"qid": "bk-036", "lang": "am", "section": "digital", "slug": "dashen-how-to-use-an-atm", "topic": "how to use atm machine pin withdraw", "question": "ኤቲኤም እንዴት ነው የምጠቀመው?", "batch": 1},
+  {"qid": "bk-037", "lang": "am", "section": "digital", "slug": "dashen-dashen-mobile-plus", "topic": "mobile banking app transfer register", "question": "የሞባይል ባንኪንግ አገልግሎት እንዴት ልመዝገብ?", "batch": 1},
+  {"qid": "bk-038", "lang": "am", "section": "ifb", "slug": "dashen-wadiah-saving-account-ifb", "topic": "wadiah saving account interest free banking sharia", "question": "የወዲአ ቁጠባ ሂሳብ ምንድን ነው?", "batch": 1},
+  {"qid": "bk-039", "lang": "am", "section": "ifb", "slug": "coopbank-ufaqs", "topic": "interest free banking sharia services non muslims welcome", "question": "ወለድ አልባ ባንክ አገልግሎት ለሁሉም ሰው ክፍት ነው?", "note": "2026-09-17: label moved from a per-question FAQ URL that is not in the pack. The archive page carries the answer verbatim: yes, everyone interested in Interest Free Banking is welcome.", "batch": 1},
+  {"qid": "bk-040", "lang": "am", "section": "help", "slug": "zemen-cybersecurity", "topic": "cybersecurity fraud phishing password protect", "question": "የባንክ መለያዬን ከማጭበርበር እንዴት ልጠብቅ?", "batch": 1},
+  {"qid": "bk-041", "lang": "en", "section": "fees", "slug": "zemen-tariff", "topic": "payment card issuance related services fees charges", "question": "What does Zemen Bank charge to issue a payment card?", "batch": 1},
+  {"qid": "bk-042", "lang": "en", "section": "fees", "slug": "cbe-misalliance-terms-and-tarrif", "topic": "commission service charge transfer tariff account", "question": "What is CBE's commission on a local transfer?", "batch": 1},
+  {"qid": "bk-043", "lang": "en", "section": "rates", "slug": "zemen-business-banking-business-product", "topic": "business saving account interest rate annum monthly minimum balance", "question": "What interest does a Zemen Bank business saving account earn?", "question_replaced": "What interest rate does Zemen Bank charge on an overdraft?", "note": "2026-09-17: coverage gap. zemen-interest-rates is not in the pack and no page in the pack publishes a lending rate, so the overdraft-rate question cannot be answered by anything on disk. The replacement asks for a rate the pack really carries: Zemen's business saving and business advantage accounts earn 7% a year on the monthly minimum balance.", "batch": 1},
+  {"qid": "bk-044", "lang": "en", "section": "rates", "slug": "dashen-frequently-asked-questions", "topic": "exchange rates listed app opening page menu", "question": "Where can I see a bank's exchange rates in its mobile app?", "question_replaced": "Where does Zemen Bank publish its exchange rates?", "note": "2026-09-17: coverage gap. zemen-exchange-rates is not in the pack and Zemen's pages do not say where the rate board lives, so the question was rewritten to name no bank. Dashen's FAQ does answer it: rates are listed on the app's opening page under the Exchange Rate menu.", "batch": 1},
+  {"qid": "bk-045", "lang": "en", "section": "loans", "slug": "dashen-consumer-loan", "topic": "mortgage vehicle personal loan collateral repayment period", "question": "What consumer loans does Dashen Bank offer?", "batch": 1},
+  {"qid": "bk-046", "lang": "en", "section": "accounts", "slug": "dashen-frequently-asked-questions", "topic": "minimum balance open account requirements documents", "question": "What do I need to open an account at Dashen Bank?", "batch": 1},
+  {"qid": "bk-047", "lang": "en", "section": "help", "slug": "dashen-frequently-asked-questions", "topic": "lost card blocked report branch call centre", "question": "What do I do if my bank card is lost or stolen?", "batch": 1},
+  {"qid": "bk-048", "lang": "en", "section": "remittance", "slug": "dashen-remittance", "topic": "outgoing foreign transfer incoming remittance agents money", "question": "Which remittance partners does Dashen Bank work with?", "batch": 1},
+  {"qid": "bk-049", "lang": "en", "section": "trade", "slug": "dashen-how-to-import-from-abroad", "topic": "import letter credit documents bank permit supplier", "question": "What does a bank need from me to open a letter of credit for an import?", "batch": 1},
+  {"qid": "bk-050", "lang": "en", "section": "diaspora", "slug": "dashen-diaspora-demand-current-account", "topic": "diaspora demand current account foreign currency eligibility", "question": "Can a diaspora member hold a foreign currency current account in Ethiopia?", "batch": 1},
+  {"qid": "bk-051", "lang": "en", "section": "ifb", "slug": "dashen-financing-ifb", "topic": "interest free financing murabaha sharia compliant facility", "question": "How does interest-free financing work at an Ethiopian bank?", "batch": 1},
+  {"qid": "bk-052", "lang": "en", "section": "digital", "slug": "zemen-digital-services-card-services", "topic": "card services personalisation debit issuance digital", "question": "What card services does Zemen Bank provide?", "batch": 1},
+  {"qid": "bk-053", "lang": "en", "section": "digital", "slug": "dashen-pos-services", "topic": "pos merchant terminal settlement acquiring", "question": "How does a shop get a POS machine from a bank?", "batch": 1},
+  {"qid": "bk-054", "lang": "en", "section": "switch", "slug": "ethswitch-about-us-2", "topic": "ethswitch national payment switch interoperability banks atms", "question": "Why does my card from one bank work in another bank's ATM?", "note": "2026-09-17: slug corrected — the fetched page is ethswitch-about-us-2. It answers the question directly: since 2016 EthSwitch has enabled interoperability of ATMs and POS terminals operated by all banks.", "batch": 1},
+  {"qid": "bk-055", "lang": "en", "section": "regulator", "slug": "ecma-about", "topic": "capital market authority regulation development mandate", "question": "What does the Ethiopian Capital Market Authority do?", "batch": 1},
+  {"qid": "bk-056", "lang": "en", "section": "licensing", "slug": "ecma-licensing", "topic": "licensing intermediaries investment advisers requirements authority", "question": "Who has to be licensed by the Capital Market Authority?", "batch": 1},
+  {"qid": "bk-057", "lang": "en", "section": "rules", "slug": "ecma-laws-regulation", "topic": "directives proclamation guidelines capital market laws", "question": "Where are Ethiopia's capital market directives published?", "batch": 1},
+  {"qid": "bk-058", "lang": "en", "section": "sandbox", "slug": "ecma-regulatory-sandbox-frequently-asked-questions", "topic": "regulatory sandbox fintech test eligibility apply", "question": "What is the ECMA regulatory sandbox and who can join it?", "batch": 1},
+  {"qid": "bk-059", "lang": "en", "section": "cooperatives", "slug": "coopbank-cooperative-banking-product-services-ccbas", "topic": "cooperative banking capacity building advisory services saving financing", "question": "What does a bank's cooperative banking division offer to cooperatives?", "question_replaced": "What banking products exist for cooperative societies in Ethiopia?", "note": "2026-09-17: slug corrected (the pack has coopbank-cooperative-banking-product-services-ccbas, not the coopbank-cooperatives- prefix). The page turned out to be about capacity building and advisory services alongside the saving and financing products, so the question was widened to what the page actually holds rather than narrowed to products alone.", "batch": 1},
+  {"qid": "bk-060", "lang": "en", "section": "help", "slug": "zemen-faq", "topic": "working hours branch customer service contact questions", "question": "What are a bank's working hours in Addis Ababa?", "batch": 1},
+  {"qid": "bk-061", "lang": "am", "section": "fees", "slug": "ethiotelecom-am-telebirr-pricing", "topic": "telebirr cash in tariff agent commission band", "topicAm": "ገንዘብ ገቢ የአገልግሎት ክፍያ የወኪሎች ኮሚሽን", "question": "በቴሌብር 1,000 ብር ገቢ ሳደርግ ስንት ይከፍለኛል?", "batch": 2},
+  {"qid": "bk-062", "lang": "am", "section": "fees", "slug": "ethiotelecom-am-telebirr-pricing", "topic": "telebirr cash out tariff band charge", "topicAm": "ገንዘብ ወጪ ለማድረግ የአገልግሎት ዋጋ", "question": "ከቴሌብር ገንዘብ ወጪ ሳደርግ የአገልግሎት ክፍያው ስንት ነው?", "batch": 2},
+  {"qid": "bk-063", "lang": "am", "section": "fees", "slug": "ethiotelecom-am-telebirr-pricing", "topic": "telebirr to bank transfer tariff band", "topicAm": "ከቴሌብር ወደ ባንክ ታሪፍ ባንድ", "question": "ከቴሌብር ወደ ባንክ ገንዘብ ማስተላለፍ ስንት ያስከፍላል?", "batch": 2},
+  {"qid": "bk-064", "lang": "am", "section": "mobile-money", "slug": "ethiotelecom-am-send-money", "topic": "telebirr send money steps pin recipient", "topicAm": "ገንዘብ ይላኩ ተቀባዩ ስልክ ቁጥር ምስጢር", "question": "በቴሌብር ለሌላ ሰው ገንዘብ እንዴት እልካለሁ?", "batch": 2},
+  {"qid": "bk-065", "lang": "am", "section": "mobile-money", "slug": "ethiotelecom-am-withdraw-cash", "topic": "telebirr withdraw cash agent voucher shop", "topicAm": "ጥሬ ገንዘብ ማውጣት ወኪል ቫውቸር", "question": "ከቴሌብር አካውንቴ ጥሬ ገንዘብ የት ማውጣት እችላለሁ?", "batch": 2},
+  {"qid": "bk-066", "lang": "am", "section": "mobile-money", "slug": "ethiotelecom-am-deposit-cash", "topic": "telebirr deposit cash agent sales centre", "topicAm": "ተቀማጭ ገንዘብ ወኪል የሽያጭ ማዕከል", "question": "ወደ ቴሌብር አካውንቴ ጥሬ ገንዘብ እንዴት አስገባለሁ?", "batch": 2},
+  {"qid": "bk-067", "lang": "am", "section": "help", "slug": "ethiotelecom-am-telebirr-registration", "topic": "telebirr registration requirements photo address name", "topicAm": "የምዝገባ መስፈርቶች ሙሉ ስም ፎቶ አድራሻ", "question": "ለቴሌብር አገልግሎት ለመመዝገብ ምን ያስፈልጋል?", "batch": 2},
+  {"qid": "bk-068", "lang": "am", "section": "help", "slug": "ethiotelecom-am-telebirr-registration", "topic": "telebirr level one account maximum balance limit", "topicAm": "ደረጃ ደንበኞች ከፍተኛው የገንዘብ መጠን ገደብ", "question": "የደረጃ 1 የቴሌብር አካውንት ከፍተኛው ገንዘብ መጠን ስንት ነው?", "batch": 2},
+  {"qid": "bk-069", "lang": "am", "section": "remittance", "slug": "ethiotelecom-am-international-remittance", "topic": "telebirr remit app receive money abroad", "topicAm": "ቴሌብር ሬሚት መተግበሪያ ገንዘብ መቀበል", "question": "ቴሌብር ሬሚት ምንድን ነው?", "batch": 2},
+  {"qid": "bk-070", "lang": "am", "section": "loans", "slug": "ethiotelecom-am-endekise-overdraft", "topic": "telebirr endekise overdraft credit eligibility", "topicAm": "እንደኪሴ ክሬዲት አገልግሎት የብድር አቅም", "question": "በቴሌብር አካውንቴ ገንዘብ ሲያጥር ብድር ማግኘት እችላለሁ?", "batch": 2},
+  {"qid": "bk-071", "lang": "am", "section": "accounts", "slug": "ethiotelecom-am-sanduq-saving", "topic": "telebirr sanduq saving interest rate per year", "topicAm": "ሳንዱቅ ቁጠባ ወለድ መጠን በዓመት", "question": "የቴሌብር ሳንዱቅ ቁጠባ ወለድ ስንት ነው?", "batch": 2},
+  {"qid": "bk-072", "lang": "am", "section": "accounts", "slug": "ethiotelecom-am-sinq-micro-saving", "topic": "telebirr sinq micro saving fixed interest", "topicAm": "ስንቅ አነስተኛ ቁጠባ ዝግ ወለድ ምጣኔ", "question": "ስንቅ የተባለው የቴሌብር ቁጠባ ምንድን ነው?", "batch": 2},
+  {"qid": "bk-073", "lang": "am", "section": "digital", "slug": "ethiotelecom-am-virtual-visa-card", "topic": "telebirr virtual visa card receive money abroad", "topicAm": "ቨርቹዋል ቪዛ ካርድ ገንዘብ መቀበል", "question": "በቴሌብር ቨርቹዋል ቪዛ ካርድ ከውጭ ገንዘብ መቀበል ይቻላል?", "batch": 2},
+  {"qid": "bk-074", "lang": "am", "section": "mobile-money", "slug": "ethiotelecom-am-utility-bill-payment", "topic": "telebirr utility bill payment water electricity", "topicAm": "በቴሌብር ይክፈሉ የውኃ የኢንሹራንስ ክፍያዎችን", "question": "የውኃና የመብራት ክፍያዬን በቴሌብር መክፈል እችላለሁ?", "batch": 2},
+  {"qid": "bk-075", "lang": "am", "section": "loans", "slug": "ethiotelecom-am-mela-micro-credit", "topic": "telebirr mela micro credit loan eligibility", "topicAm": "መላ ብድር አገልግሎት ደንበኞች", "question": "መላ የተባለው የቴሌብር ብድር እንዴት ይሰጣል?", "batch": 2},
+  {"qid": "bk-076", "lang": "am", "section": "regulator", "slug": "nbe-am-mandates-of-the-bank", "topic": "national bank mandates supervise banks exchange rate", "topicAm": "የወለድ መጠን የምንዛሪ ተመን ፖሊሲ ባንኮችን", "question": "የኢትዮጵያ ብሔራዊ ባንክ ምን ሥልጣንና ተግባር አለው?", "batch": 2},
+  {"qid": "bk-077", "lang": "am", "section": "regulator", "slug": "nbe-am-monetary-policies", "topic": "monetary policy inflation price stability interest rate", "topicAm": "የገንዘብ ፖሊሲ የዋጋ ንረት ወለድ ተመን", "question": "ብሔራዊ ባንኩ የዋጋ ንረትን ለመቀነስ ምን ፖሊሲ ይከተላል?", "batch": 2},
+  {"qid": "bk-078", "lang": "am", "section": "help", "slug": "nbe-fcpe-complaint", "topic": "complaint financial service provider business days submit", "question": "በባንኬ ላይ ቅሬታ ካለኝ ለብሔራዊ ባንክ እንዴት አቀርባለሁ?", "batch": 2},
+  {"qid": "bk-079", "lang": "am", "section": "forex", "slug": "nbe-foreign-exchange", "topic": "personal travel banks provide cash debit card traveler", "question": "ወደ ውጭ ሀገር ስጓዝ ስንት ዶላር መያዝ እችላለሁ?", "batch": 2},
+  {"qid": "bk-080", "lang": "am", "section": "rates", "slug": "nbe-directive-no-nbe-int-13-2026-interest-rates-as-amended", "topic": "interest rates directive amended market forces determine", "question": "የወለድ ተመንን ማን ይወስናል?", "batch": 2},
+  {"qid": "bk-081", "lang": "en", "section": "fees", "slug": "ethiotelecom-telebirr-telebirr-pricing", "topic": "telebirr p2p transfer tariff band cash", "question": "What is telebirr's tariff for sending money to another telebirr user in the 501 to 1500 birr band?", "batch": 2},
+  {"qid": "bk-082", "lang": "en", "section": "payments", "slug": "nbe-payment-instrument-issuers-system-operators", "topic": "payment instrument issuer license mobile money agents", "question": "Who licenses telebirr and M-PESA to issue a payment instrument in Ethiopia?", "batch": 2},
+  {"qid": "bk-083", "lang": "en", "section": "fees", "slug": "mpesa-tariff", "topic": "send money registered customer charge birr free", "question": "What does M-PESA charge to send money to another registered customer?", "batch": 2},
+  {"qid": "bk-084", "lang": "en", "section": "fees", "slug": "mpesa-tariff", "topic": "withdraw cash charge birr transaction fees", "question": "What does it cost to withdraw cash from M-PESA?", "batch": 2},
+  {"qid": "bk-085", "lang": "en", "section": "accounts", "slug": "mpesa-faqs", "topic": "maximum balance accounts daily transaction limit birr", "question": "What is the maximum balance I can hold in M-PESA?", "batch": 2},
+  {"qid": "bk-086", "lang": "en", "section": "agents", "slug": "mpesa-retail-agent", "topic": "retail agent cash in cash out commission register customers", "question": "What does an M-PESA retail agent do?", "batch": 2},
+  {"qid": "bk-087", "lang": "en", "section": "business", "slug": "mpesa-collect-payments", "topic": "accept digital payments business merchant collect suppliers", "question": "How can a shop accept M-PESA payments from its customers?", "batch": 2},
+  {"qid": "bk-088", "lang": "en", "section": "forex", "slug": "nbe-foreign-exchange", "topic": "exporter retention account export proceed converted birr", "question": "How much of an export payment may an exporter keep in a retention account?", "batch": 2},
+  {"qid": "bk-089", "lang": "en", "section": "forex", "slug": "nbe-summary-of-banks-foreign-exchange-related-fees-and-charges", "topic": "banks foreign exchange fees charges opening commission service", "question": "What do Ethiopian banks charge on a letter of credit for an import?", "batch": 2},
+  {"qid": "bk-090", "lang": "en", "section": "forex", "slug": "nbe-directive-no-fvd012026-import-on-franco-valuta", "topic": "franco valuta import directive arrangements foreign exchange", "question": "What are the rules for importing goods on franco valuta?", "batch": 2}
+ ]
 }

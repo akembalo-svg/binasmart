@@ -80,6 +80,10 @@ function buildGold(questions, dir, out, { source, prefer, about } = {}) {
       + 'Bini passes for a message of this kind, so the benchmark measures what a user gets.',
     questions: ok.map(q => ({
       qid: q.qid, lang: q.lang, question: q.question, section: q.section,
+      // Which batch of the spec a question came from, so a run can be sliced by it: batch 1 is the set
+      // written before the National Bank, telebirr and M-PESA were in the pack, batch 2 the set written
+      // against them (Task 15b). A spec question with no batch is batch 1.
+      batch: q.batch || 1,
       agent: 'bini', prefer,
       gold_source: source, gold_slug: q.slug,
       gold_pages: [{ source, slug: q.slug }],

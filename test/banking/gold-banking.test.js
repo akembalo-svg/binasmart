@@ -13,10 +13,27 @@ const ROOT = path.join(__dirname, '..', '..');
 const B = require(path.join(ROOT, 'ops', 'packs', 'build-gold.js'));
 const spec = JSON.parse(fs.readFileSync(path.join(ROOT, 'knowledge', 'banking', 'gold-spec.json'), 'utf8'));
 
-test('sixty questions, forty Amharic and twenty English', () => {
-  assert.equal(spec.questions.length, 60);
-  assert.equal(spec.questions.filter(q => q.lang === 'am').length, 40);
-  assert.equal(spec.questions.filter(q => q.lang === 'en').length, 20);
+test('ninety questions, sixty Amharic and thirty English', () => {
+  assert.equal(spec.questions.length, 90);
+  assert.equal(spec.questions.filter(q => q.lang === 'am').length, 60);
+  assert.equal(spec.questions.filter(q => q.lang === 'en').length, 30);
+});
+
+// Batch 1 is the 60 questions written on 2026-09-16 against the six banks, the Capital Market Authority and
+// EthSwitch; batch 2 the 30 written on 2026-09-17 against the National Bank, telebirr and M-PESA once Task
+// 15a had added them. They are kept apart because a single number over both hides which of them moved.
+test('every question says which batch it belongs to, and batch 2 is twenty Amharic and ten English', () => {
+  for (const q of spec.questions) assert.ok(q.batch === 1 || q.batch === 2, q.qid + ' has no batch');
+  const b2 = spec.questions.filter(q => q.batch === 2);
+  assert.equal(b2.length, 30);
+  assert.equal(b2.filter(q => q.lang === 'am').length, 20);
+  assert.equal(b2.filter(q => q.lang === 'en').length, 10);
+  // The point of batch 2: telebirr publishes 28 Amharic pages, so most of its Amharic questions can be
+  // asked of a page in the language they are asked in. Not all - the National Bank publishes its complaint
+  // procedure, its FX rules and its interest-rate directive in English only, and those stay cross-lingual
+  // rather than being quietly dropped.
+  const amOnAmharicPage = b2.filter(q => q.lang === 'am' && /-am-/.test(q.slug));
+  assert.ok(amOnAmharicPage.length >= 15, 'only ' + amOnAmharicPage.length + ' Amharic questions have an Amharic page');
 });
 
 test('every question has an id, a section, a slug, a topic and a question', () => {
@@ -41,7 +58,12 @@ test('every question has an id, a section, a slug, a topic and a question', () =
 
 test('every slug names a real institution, so a reader knows whose figure it is', () => {
   const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'knowledge', 'banking', 'sources.json'), 'utf8'));
-  const prefixes = reg.sites.filter(s => s.fetch !== 'manual').map(s => s.id + '-');
+  // slugPrefixOf, not `id + '-'`: a site may name its own prefix, and one does. M-PESA's registry id is
+  // `safaricom` (the company) while its documents are `mpesa-…` (the product), because that is what a
+  // reader of a gold set, a benchmark row or a citation needs to see. This test asked the question twice
+  // in two different ways until 2026-09-17, and the second way was wrong: bk-083 -> mpesa-tariff was
+  // refused although the pack had written that document itself.
+  const prefixes = reg.sites.filter(s => s.fetch !== 'manual').map(s => require(path.join(ROOT, 'ops', 'packs', 'fetch-pack.js')).slugPrefixOf(s));
   for (const q of spec.questions) assert.ok(prefixes.some(p => q.slug.startsWith(p)), q.qid + ' slug has no institution: ' + q.slug);
 });
 
