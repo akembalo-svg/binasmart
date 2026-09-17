@@ -462,7 +462,11 @@ function contextSearchOptions({ k = 6, prefer, exclude } = {}) {
 // the date in the chunk header would re-hash and re-embed all 18,611 chunks of every source, and this costs
 // nothing but a cached file read. Never from the network, and never invented — a page whose front matter holds
 // no url and no date gets its title and stops there.
-const PACK_SOURCES = [['law', 'am'], ['health', 'am'], ['eservices', 'en'], ['mor', 'am'], ['travel', 'en'], ['banking', 'en']];
+// `business` defaults to am rather than en, unlike travel and banking: etrade extracts at 74 per cent
+// Ethiopic, poessa at 62 and motri at 43, and the importer's own measurement only ever DEMOTES a document from
+// am to en when its Ethiopic count falls under the floor. A default of am is therefore the safe direction -
+// the wrong guess gets corrected by measurement, and the other way round it does not.
+const PACK_SOURCES = [['law', 'am'], ['health', 'am'], ['eservices', 'en'], ['mor', 'am'], ['travel', 'en'], ['banking', 'en'], ['business', 'am']];
 const PACK_DIRS = new Set(PACK_SOURCES.map(([s]) => s));
 const SAFE_SLUG = /^[A-Za-z0-9._\-/]+$/;
 const _docMeta = new Map();   // root\0source\0slug -> front matter | null
@@ -955,7 +959,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
           named.add(key);
           return '[' + (i + 1) + '] ' + h.title + (h.url ? ' — ' + h.url : '') + '\n' + src + h.text.replace(/\n{2,}/g, '\n');
         });
-        blocks.push('## Relevant BinaSmart knowledge (facts here override anything you remember; cite the page link when useful; '
+        blocks.push('## Relevant BinaSmart knowledge (facts here override anything you remember; do NOT write the bracket numbers or paste these links in your answer — name a law or an official document briefly in the sentence instead; '
           + 'each page\'s Source line gives the publisher and the date that page was fetched — that is the date to state)\n' + lines.join('\n\n'));
       }
     }

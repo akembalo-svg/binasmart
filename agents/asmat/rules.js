@@ -12,6 +12,8 @@ module.exports = {
   name: 'asmat',
   soul: asmat.SYSTEM,
   maxTokens: 700,
+  // Display names, so the engine can remove a self-introduction the model repeats on a later reply.
+  names: ['አስማት', 'Asmat'],
 
   // What he reads (knowledge/index.js, pageMatcher). From the gap audit of 2026-09-14 (120 probe questions): his
   // good answers came from the law library, BinaSmart's legal guides and the law articles (news law-1, law-2);
@@ -23,10 +25,22 @@ module.exports = {
   // The Ministry of Revenue's FAQs and forms list (source mor, 2026-09-14) answer the tax questions the statutes alone
   // left thin: which form de-registers a TIN, what a sales register machine owner must do, where a form is downloaded.
   knowledge: {
+    // `business` is NOT here, and that was decided by measurement rather than by argument. It was meant to be
+    // the third leg beside eservices, which says WHICH office, and mor, which says WHICH form: the business
+    // pack says what the office requires. But prefer moves the +0.06 tie-breaker onto a pack for EVERY legal
+    // question and not only for paperwork ones, so the plan gated it on his v3-agents slice, and on 2026-09-17,
+    // on one corpus of 23,430 chunks, three arms were run:
+    //     business in prefer    asmat 84.2% retrieval / 89.5% as shipped
+    //     business in neither   asmat 86.0% / 91.2%
+    //     business in exclude   asmat 86.0% / 91.2%
+    // Preferring it cost him one question of 57 on both measures, so by the plan's own rule it came out.
+    // Worth knowing before anyone reopens this: excluding it and simply not preferring it measure IDENTICALLY,
+    // so the exclusion buys nothing that removing the preference did not already buy, and the day somebody
+    // wants Asmat reading trade-licence pages again the change is to delete 'business' from the list below.
     prefer: ['law', 'guide', 'eservices', 'mor', 'news:law-*', 'web:justice/*'],
     // `travel` added 2026-09-16 with the Ethiopian Airlines pack: an airline's conditions of carriage are
     // a commercial contract, not Ethiopian law, and must never be quoted as one.
-    exclude: ['page', 'skill', 'llms', 'travel', 'banking'],
+    exclude: ['page', 'skill', 'llms', 'travel', 'banking', 'business'],
   },
 
   gates: [

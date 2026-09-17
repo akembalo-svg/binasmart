@@ -10,6 +10,8 @@ module.exports = {
   name: 'afiya',
   soul: afiya.SYSTEM,
   maxTokens: 700,
+  // Display names, so the engine can remove a self-introduction the model repeats on a later reply.
+  names: ['ዶ/ር አፍያ', 'ዶክተር አፍያ', 'Dr Afiya', 'Doctor Afiya', 'Afiya', 'አፍያ'],
 
   // What she reads (knowledge/index.js, pageMatcher). From the gap audit of 2026-09-14 (120 probe questions):
   // with the whole index and the own-source boost, the etrade BUSINESS licence checker answered "is this clinic /
@@ -22,7 +24,11 @@ module.exports = {
     prefer: ['health', 'web:moh/*', 'law:labour-proclamation-1156-2019', 'addis', 'eservices:ethiopian-food-and-drug-authority'],
     // `travel` added 2026-09-16 with the Ethiopian Airlines pack: baggage rules and lounge access are not
     // health answers, and a page about travelling while pregnant belongs to the airline, not to a clinician.
-    exclude: ['page', 'skill', 'llms', 'mor', 'travel', 'banking', 'guide:business-registration-ethiopia', 'guide:how-to-start-a-business-in-ethiopia',
+    // `business` added 2026-09-17 with the trade, labour and pension pack, and it is measured rather than
+    // assumed: the gap audit of 2026-09-14 found the etrade BUSINESS licence checker answering "is this clinic
+    // / doctor licensed?" - a patient sent to the wrong register - which is why the two bina.et business
+    // guides below were already excluded. The whole pack now follows them out.
+    exclude: ['page', 'skill', 'llms', 'mor', 'travel', 'banking', 'business', 'guide:business-registration-ethiopia', 'guide:how-to-start-a-business-in-ethiopia',
       'guide:mesob', 'guide:telebirr', 'guide:tenant-screening-ethiopia'],
   },
 
