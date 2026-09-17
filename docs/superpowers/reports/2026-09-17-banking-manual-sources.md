@@ -110,6 +110,8 @@ The rule the pack has always stated — *one or the other, never both* — was a
 3. The next ingest **collected 889 orphaned chunks** — `[knowledge] ingest: 1399 docs, +3196 chunks, -0 stale, -889 orphaned` — and a direct count of the index now returns **0** chunks whose source is `web` and whose slug begins `nbe/` or `ethiotelecom/`.
 4. `references.web-nbe` and `references.web-ethiotelecom` in `knowledge/banking/sources.json` are rewritten as RESOLVED, recording what was dropped and the fact that deleting the folder was necessary.
 
+**One caveat, stated plainly: `knowledge/sources-am.json` is gitignored** (`.gitignore:35`) and has never been tracked, exactly like `knowledge/web/` itself. So the crawler-registry half of this change is live on the server and **is not in any commit**. The two `references` entries in `knowledge/banking/sources.json`, which *are* committed, are therefore the durable record: they name the file, the two ids removed and the two directories deleted, so the next engineer can check the server against them. If that file is ever restored from a backup, `nbe` and `ethiotelecom` come back with it and the crawled duplicates return.
+
 ---
 
 ## 5. Two things the importer had to be taught, found by running it
