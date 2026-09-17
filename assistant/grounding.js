@@ -20,6 +20,17 @@ const TIME = 'ደቂቃ|minutes?|mins?|ሰዓት|hours?|ቀናት?|days?|ወራ�
 
 // number + unit
 const FIGURE = new RegExp('(\\d[\\d,.٬\']*)\\s*(' + MONEY + '|' + DISTANCE + '|' + PERCENT + '|' + TIME + ')', 'gi');
+// A bare four-digit year is a claim too, and it carries no unit, so the regex above never saw one. Measured on
+// 2026-09-17 inside an answer that cited Banking Business Proclamation No. 1360/2025 correctly: "This change
+// came about in the last quarter of 2022 with a new bill" — a date in no page of the pack, sitting inside a
+// cited answer, which is the most persuasive place an invented figure can sit. A year is a date the reader
+// will repeat, so it is held to the same rule as a fee: it must be in what the model was given.
+//
+// Only a year standing on its own is checked. The digits inside a document number — 1360/2025, FCP/01/2020,
+// an upload path .../2020/03/ — are part of a name, not a date, so a slash on either side disqualifies the
+// match. Those numbers are in the context whenever the answer is citing them, and would pass on grounding
+// alone; excluding them here means the rule does not depend on that.
+const YEAR = /(?<![\d/])((?:19|20)\d{2})(?![\d/])/g;
 // these are checked no matter how small: a wrong price or distance is a wrong fact
 const ALWAYS = new RegExp('^(' + MONEY + '|' + DISTANCE + '|' + PERCENT + ')$', 'i');
 // a duration or count below this is normal speech ("8 minutes", "2 days"), above it is a specific claim
@@ -58,7 +69,46 @@ function findUngrounded(text, grounding, question) {
     if (d.includes('.') && have.has(d.split('.')[0])) continue;
     bad.push({ value: m[1], unit, text: m[0] });
   }
+  // The same test for a bare year. A fetched date ("fetched 2026-09-16", "የተወሰደበት ቀን 2026-09-16") is on the
+  // Source line of every page in the context, so 2026 is grounded and a dated citation survives; a year the
+  // model brought with it from somewhere else is not, and the sentence carrying it goes.
+  for (const m of String(text || '').matchAll(YEAR)) {
+    if (have.has(m[1])) continue;
+    bad.push({ value: m[1], unit: 'year', text: m[1] });
+  }
   return bad;
+}
+
+// ---------- the calendar a date is written in ----------
+// Ethiopia keeps its own calendar, seven to eight years behind the Gregorian one, and `ዓ.ም.` after a year is
+// what says "this is the Ethiopian year". Measured on 2026-09-17: asked in Amharic where a rule came from,
+// Bini wrote "ከመስከረም 16 ቀን 2026 ዓ.ም." — the Gregorian fetch date 2026-09-16 with the Ethiopian marker after
+// it. To an Ethiopian reader that is a date seven years in the future, on an answer whose whole purpose was
+// to say how current the rule is. It affects every dated Amharic citation, not one answer.
+//
+// The prompt now says to write `እ.ኤ.አ.`; this is the deterministic half, because a prompt is probabilistic.
+// The marker is rewritten, never the sentence dropped: the date is right, only the calendar it is labelled
+// with is wrong, and dropping is for a sentence that should not exist.
+// The gap may not contain a digit: in "2026 እና 2018 ዓ.ም." the marker belongs to 2018, not to 2026.
+const EC_MARKER = /((?:20[2-9]\d|2[1-9]\d\d))([^\n\d]{0,12}?)(?:ዓ\/ም|ዓ\.ም)\.?/g;
+
+// The years the retrieved context itself writes as Ethiopian years. A document that really does print
+// "2018 ዓ.ም." is quoted as it stands — the rule only rewrites a marker nothing in the context put there.
+function ethiopicYears(grounding) {
+  const out = new Set();
+  for (const m of String(grounding || '').matchAll(EC_MARKER)) out.add(m[1]);
+  return out;
+}
+
+function fixCalendarMarker(text, grounding) {
+  const src = ethiopicYears(grounding);
+  let fixed = 0;
+  const out = String(text || '').replace(EC_MARKER, (whole, year, gap) => {
+    if (src.has(year)) return whole;      // the source says Ethiopian year; leave it exactly as the source has it
+    fixed++;
+    return year + gap + '(እ.ኤ.አ.)';
+  });
+  return { text: out, fixed };
 }
 
 // Drop only the sentences that carry an invented figure. A reply is never blanked: if nothing survives the
@@ -71,4 +121,4 @@ function dropUngrounded(text, grounding, question) {
   return { text: kept.join(' ').replace(/\s{2,}/g, ' ').trim(), dropped: bad };
 }
 
-module.exports = { findUngrounded, dropUngrounded, FIGURE, TRIVIAL };
+module.exports = { findUngrounded, dropUngrounded, fixCalendarMarker, FIGURE, YEAR, EC_MARKER, TRIVIAL };

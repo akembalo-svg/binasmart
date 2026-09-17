@@ -8,6 +8,11 @@ fastify.addHook('onSend', async (req, reply, payload) => {
   reply.header('X-Content-Type-Options', 'nosniff');
   // A route that chose its own Referrer-Policy keeps it (/i/:token and the tenant poster send no-referrer).
   if (!reply.hasHeader('Referrer-Policy')) reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
+  // Pages may be framed only by bina.et itself and by Telegram (the mini apps open inside web.telegram.org);
+  // any other site embedding a BinaSmart page is refused. Browser features stay limited to our own origin.
+  if (!reply.hasHeader('Content-Security-Policy') && /text\/html/i.test(String(reply.getHeader('content-type') || '')))
+    reply.header('Content-Security-Policy', "frame-ancestors 'self' https://web.telegram.org https://*.telegram.org");
+  if (!reply.hasHeader('Permissions-Policy')) reply.header('Permissions-Policy', 'camera=(self), microphone=(self), geolocation=(self), payment=(self), usb=()');
   const full = String(req.raw.url || ''), u = full.split('?')[0];
   if (reply.statusCode < 400) {
     if (u === '/sw.js' || u === '/offline') reply.header('Cache-Control', 'no-cache'); // the service worker must always be re-checked
@@ -972,6 +977,13 @@ function biniGuards(text, msg, hist, grounding) {
   // once answered with a 4.4 km trip and a 239 birr fare having called nothing — and the fare is the one
   // number this product promises never to guess.
   if (grounding !== undefined) {
+    // A Gregorian date written with the Ethiopian-calendar marker is a wrong date, not a wrong style:
+    // measured 2026-09-17, "ከመስከረም 16 ቀን 2026 ዓ.ም." for the fetch date 2026-09-16, which an Ethiopian
+    // reader takes as a year seven to eight years away. The prompt says to write እ.ኤ.አ.; this is the
+    // deterministic half. The marker is rewritten and the sentence kept — the date is right.
+    const cal = fixCalendarMarker(t, grounding);
+    if (cal.fixed) console.warn('[bini] rewrote ' + cal.fixed + ' Gregorian date(s) marked as Ethiopian');
+    t = cal.text;
     const g = dropUngrounded(t, grounding, msg);
     if (g.dropped.length) {
       console.warn('[bini] dropped ungrounded ' + g.dropped.map(d => d.text).join(', '));
@@ -991,7 +1003,7 @@ const biniBanking = require('./assistant/banking');
 // first time a harness changed its ip, and rot invisibly.
 const isEval = req => String((req && req.headers && req.headers['x-binasmart-eval']) || '') === '1';
 const biniTools = require('./assistant/tools');
-const { dropUngrounded } = require('./assistant/grounding');
+const { dropUngrounded, fixCalendarMarker } = require('./assistant/grounding');
 const afiya = require('./assistant/afiya');
 const asmat = require('./assistant/asmat');
 const scope = require('./assistant/scope');

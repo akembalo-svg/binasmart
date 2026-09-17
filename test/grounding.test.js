@@ -25,7 +25,40 @@ test('figures that came from a document are allowed, however they are written', 
 test('ordinary speech is left alone, money never is', () => {
   assert.deepEqual(findUngrounded('እስከ 4 ሰው ተጋርቶ፣ 8 ደቂቃ ይጠብቃል።', ''), [], 'small counts are not policed');
   assert.ok(findUngrounded('ዋጋው 20 ብር ነው።', '').length, 'even a small money figure must be grounded');
-  assert.deepEqual(findUngrounded('Open in 2026. Call 0911244344.', ''), [], 'a year or a phone number carries no unit');
+  assert.deepEqual(findUngrounded('Call 0911244344.', ''), [], 'a phone number is not four digits standing alone');
+});
+
+// Until 2026-09-17 a bare year went through untouched: it carries no unit, and the regex above wants a unit.
+// Measured that day inside an answer that cited Banking Business Proclamation No. 1360/2025 correctly —
+// "This change came about in the last quarter of 2022 with a new bill" — a date in no page of the pack,
+// sitting inside a cited answer.
+test('a year nobody gave the model is caught, a year from the page is not', () => {
+  const page = 'Source: https://nbe.gov.et/... fetched 2026-09-16. Banking Business Proclamation No. 1360/2025.';
+  const bad = findUngrounded('This change came about in the last quarter of 2022 with a new bill.', page);
+  assert.ok(bad.some(b => b.value === '2022' && b.unit === 'year'), 'the invented year must be caught');
+  assert.deepEqual(findUngrounded('The proclamation was fetched on 2026-09-16.', page), [],
+    'the fetched date on the Source line grounds itself');
+  assert.deepEqual(findUngrounded('Banking Business Proclamation No. 1360/2025 sets this out.', page), [],
+    'a document number is not a date, and is in the context anyway');
+  assert.deepEqual(findUngrounded('The directive is FCP/01/2020.', 'Financial Consumer Protection Directive FCP/01/2020'), [],
+    'nor is the year inside FCP/01/2020');
+});
+
+test('a year the user typed in the question is theirs', () => {
+  assert.deepEqual(findUngrounded('The 2018 proclamation was replaced.', '', 'what happened to the 2018 proclamation?'), [],
+    'the question grounds the year the user chose');
+  assert.ok(findUngrounded('The 2018 proclamation was replaced.', '', 'what changed?').length,
+    'and without it the year is still dropped');
+});
+
+test('the sentence with the ungrounded year goes, the cited one stays', () => {
+  const page = 'Source: https://nbe.gov.et/banking fetched 2026-09-16. Proclamation No. 1360/2025 opens the sector.';
+  const reply = 'A foreign bank may open a subsidiary or a branch. This came about in the last quarter of 2022 with a new bill. '
+    + 'Banking Business Proclamation No. 1360/2025 sets out how, fetched on 2026-09-16.';
+  const r = dropUngrounded(reply, page);
+  assert.equal(r.text.includes('2022'), false, 'the ungrounded year takes its sentence with it');
+  assert.ok(r.text.includes('1360/2025'), 'the cited proclamation survives');
+  assert.ok(r.text.includes('2026-09-16'), 'and so does the fetch date');
 });
 
 test('dropUngrounded removes only the offending sentence', () => {

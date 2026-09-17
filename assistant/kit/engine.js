@@ -17,6 +17,8 @@
 const REQUIRED = ['name', 'soul', 'gates', 'inScope', 'redirect', 'finish', 'fallback'];
 const TOOL_RESULT_LIMIT = 6000; // callBini sends JSON.stringify(out).slice(0, 6000) to the model
 const { sourcesFrom } = require('./sources');
+// Not a dep: every agent gets this filter, and no definition may choose to be without it.
+const { fixCalendarMarker } = require('../grounding');
 
 // What the engine hands contextFor. Only the two list fields of a knowledge declaration are passed, copied, so a
 // definition can neither change k or the voice lookups nor be mutated by the index.
@@ -136,6 +138,11 @@ function makeEngine(deps) {
       const grounding = toolResults.length
         ? String(documents || '') + ' ' + toolResults.map(r => JSON.stringify(r.out).slice(0, TOOL_RESULT_LIMIT)).join(' ')
         : documents;
+      // 5b. The calendar a date claims to be in. A Gregorian date carrying ዓ.ም. names a year seven to eight
+      // years from the one on the document; the marker is rewritten, never the sentence dropped.
+      const cal = fixCalendarMarker(text, grounding);
+      if (cal.fixed) warn('[' + agent.name + '] rewrote ' + cal.fixed + ' Gregorian date(s) marked as Ethiopian');
+      text = cal.text;
       const g = dropUngrounded(text, grounding, msg);
       if (g.dropped.length) warn('[' + agent.name + '] dropped ungrounded ' + g.dropped.map(x => x.text).join(', '));
       text = g.text;
