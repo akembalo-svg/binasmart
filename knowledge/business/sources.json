@@ -18,7 +18,10 @@
       "nameAm": "የንግድና ቀጣናዊ ትስስር ሚኒስቴር",
       "host": "motri.gov.et",
       "fetch": "urls",
-      "urls": ["https://motri.gov.et/", "https://motri.gov.et/am"],
+      "urls": [
+        "https://motri.gov.et/",
+        "https://motri.gov.et/am"
+      ],
       "discoverLinks": true,
       "maxPages": 60,
       "crawlDelaySeconds": 6,
@@ -29,7 +32,7 @@
       "langNote": "The most Amharic of the core sources. The home page extracted 2,904 characters of which 1,258 are Ethiopic (43 percent), opening with the ministry name in Amharic and the words for online trade registration. The site is served at /am with lang=am on the html element. Amharic pages get lang: am; English pages get lang: en; the importer measures the Ethiopic share and only ever demotes.",
       "reach": "up",
       "checked": "2026-09-17",
-      "reachNote": "UP from the VPS and from the laptop on 2026-09-17, although knowledge/sources-am.json still records this host as `timeout` from 2026-09-14. Individual deep paths DO time out when guessed (/am/node and /am/content/business-registration both timed out), which is why discoverLinks is true: the paths come from the home page links, not from a guess.",
+      "reachNote": "UP from the VPS and from the laptop on 2026-09-17, although knowledge/sources-am.json still records this host as `timeout` from 2026-09-14. Individual deep paths DO time out when guessed (/am/node and /am/content/business-registration both timed out), which is why discoverLinks is true: the paths come from the home page links, not from a guess. | 2026-09-17, Task 4: THE HOST ANSWERS NOTHING THAT VERIFIES A CERTIFICATE. motri.gov.et completes a TLS handshake and then presents a wildcard certificate for *.mint.gov.et which EXPIRED on 2026-08-23 - wrong name and 25 days out of date (openssl s_client, from the VPS). Node fetch refuses it in 0.6 s with `fetch failed`, which is NOT a timeout and must not be retried as one; curl says `SSL certificate problem: certificate has expired`; plain http://motri.gov.et/ does not answer at all. The 2,904-character reading above was taken with a client that does not verify. The pack will not disable certificate verification to read a government page, so this site fetches 0 documents until the certificate is renewed - at which point nothing here needs to change. OPEN DECISION for the plan owner: either it stays a fetched site that contributes nothing this week, or it moves to `manual` and goes into the Task 3 harvest brief, which would leave poessa as the only Amharic source and break test/business/sources.test.js line 158 as written.",
       "allow": [
         "^/(am/)?(node/\\d+|content/|page/)",
         "^/(am/)?(services|service|about|faq|faqs|guideline|guidelines|directive|directives|regulation|regulations|trade-registration|business-licen[cs]e|investment|export|import|standards|consumer)"
@@ -40,13 +43,37 @@
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
       ],
       "sections": [
-        { "key": "registration", "titleAm": "የንግድ ምዝገባ", "match": "registration|register|ምዝገባ|መመዝገብ" },
-        { "key": "licensing", "titleAm": "የንግድ ፈቃድ", "match": "licen[cs]e|licensing|ፈቃድ" },
-        { "key": "trade", "titleAm": "ንግድና ወጪ ንግድ", "match": "export|import|trade|ንግድ|ወጪ|ገቢ" },
-        { "key": "consumer", "titleAm": "የሸማቾች ጥበቃ", "match": "consumer|competition|ሸማች|ውድድር" },
-        { "key": "help", "titleAm": "አገልግሎትና እገዛ", "match": "faq|guide|contact|help|አገልግሎት|መመሪያ" }
+        {
+          "key": "registration",
+          "titleAm": "የንግድ ምዝገባ",
+          "match": "registration|register|ምዝገባ|መመዝገብ"
+        },
+        {
+          "key": "licensing",
+          "titleAm": "የንግድ ፈቃድ",
+          "match": "licen[cs]e|licensing|ፈቃድ"
+        },
+        {
+          "key": "trade",
+          "titleAm": "ንግድና ወጪ ንግድ",
+          "match": "export|import|trade|ንግድ|ወጪ|ገቢ"
+        },
+        {
+          "key": "consumer",
+          "titleAm": "የሸማቾች ጥበቃ",
+          "match": "consumer|competition|ሸማች|ውድድር"
+        },
+        {
+          "key": "help",
+          "titleAm": "አገልግሎትና እገዛ",
+          "match": "faq|guide|contact|help|አገልግሎት|መመሪያ"
+        }
       ],
-      "probePaths": ["/user/login", "/node/add", "/am/user/login"]
+      "probePaths": [
+        "/user/login",
+        "/node/add",
+        "/am/user/login"
+      ]
     },
     {
       "id": "eic",
@@ -54,7 +81,9 @@
       "nameAm": "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን",
       "host": "investethiopia.gov.et",
       "fetch": "sitemap",
-      "sitemaps": ["https://investethiopia.gov.et/page-sitemap.xml"],
+      "sitemaps": [
+        "https://investethiopia.gov.et/page-sitemap.xml"
+      ],
       "discoverLinks": false,
       "maxPages": 80,
       "crawlDelaySeconds": 6,
@@ -68,21 +97,51 @@
       "reachNote": "INTERMITTENT. page-sitemap.xml timed out on two of three attempts and answered 200 with 77 URLs on the third. knowledge/sources-am.json records this host as `timeout` from 2026-09-14 and knowledge/web/eic/ holds 35 stale pages from the 2026-09-08 crawl. A single timeout is not a dead host: retry.",
       "allow": [
         "^/(get-started|about-eic|why-ethiopia|investment-(opportunities|incentives|climate|guide)|sectors?|services|one-stop|osss|industrial-parks?|licen[cs]ing|permits?|faq|resources|laws?|regulations?|publications?)(/|$)",
-        "^/how-to-invest"
+        "^/how-to-invest",
+        "^/(investment|investment-process|investment-regulations|faqs|industry-parks)$",
+        "^/(key-sectors|sezs)(/|$)"
       ],
       "deny": [
         "^/(news|press|media|events?|blog|gallery|author|category|tag|wp-content|wp-admin|feed|contact|careers?|vacanc)(/|$)",
         "^/\\d{4}/\\d{2}/",
-        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
+        "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$",
+        "(^|/)[a-z0-9-]*-old(/|$)",
+        "^/dev-who-we-are$"
       ],
       "sections": [
-        { "key": "investment", "titleAm": "ኢንቨስትመንት", "match": "invest|investment|investor" },
-        { "key": "incentives", "titleAm": "የኢንቨስትመንት ማበረታቻዎች", "match": "incentive|exemption|duty.free|holiday" },
-        { "key": "licensing", "titleAm": "የኢንቨስትመንት ፈቃድ", "match": "licen[cs]e|permit|registration" },
-        { "key": "industrial-parks", "titleAm": "የኢንዱስትሪ ፓርኮች", "match": "industrial park|park|shed|zone" },
-        { "key": "help", "titleAm": "አገልግሎትና እገዛ", "match": "faq|guide|one.stop|service|resource" }
+        {
+          "key": "investment",
+          "titleAm": "ኢንቨስትመንት",
+          "match": "invest|investment|investor"
+        },
+        {
+          "key": "incentives",
+          "titleAm": "የኢንቨስትመንት ማበረታቻዎች",
+          "match": "incentive|exemption|duty.free|holiday"
+        },
+        {
+          "key": "licensing",
+          "titleAm": "የኢንቨስትመንት ፈቃድ",
+          "match": "licen[cs]e|permit|registration"
+        },
+        {
+          "key": "industrial-parks",
+          "titleAm": "የኢንዱስትሪ ፓርኮች",
+          "match": "industrial park|park|shed|zone"
+        },
+        {
+          "key": "help",
+          "titleAm": "አገልግሎትና እገዛ",
+          "match": "faq|guide|one.stop|service|resource"
+        }
       ],
-      "probePaths": ["/investor-portal/login", "/apply", "/e-services/submit"]
+      "probePaths": [
+        "/investor-portal/login",
+        "/apply",
+        "/e-services/submit"
+      ],
+      "_allowNote": "Widened once, on 2026-09-17, after the Task 4 dry run selected 24 of the 77 urls in page-sitemap.xml and every one of them was a why-invest-here page. The names added are read from that sitemap, not guessed: /investment-process (how an investment permit is actually obtained), /investment-regulations and /investment (the incentive rules, which knowledge/law does not hold - grep for 586/2026 returns nothing), /faqs, /industry-parks, and the /key-sectors and /sezs trees, which carry the sector-by-sector and zone-by-zone conditions. Nothing was widened by pattern.",
+      "_denyNote": "The dry run of 2026-09-17 selected /about-eic/who-we-are-old and wrote it as a document beside /about-eic/who-we-are. The site keeps -old copies of at least three pages (who-we-are-old, mining-old, tourism-old) and a /dev-who-we-are staging page. A stale duplicate of a page we already hold is exactly the duplication this pack exists to avoid, so they are denied by name."
     },
     {
       "id": "mols",
@@ -90,7 +149,9 @@
       "nameAm": "የሥራና ክህሎት ሚኒስቴር",
       "host": "mols.gov.et",
       "fetch": "sitemap",
-      "sitemaps": ["https://mols.gov.et/wp-sitemap-posts-page-1.xml"],
+      "sitemaps": [
+        "https://mols.gov.et/wp-sitemap-posts-page-1.xml"
+      ],
       "discoverLinks": false,
       "maxPages": 60,
       "crawlDelaySeconds": 6,
@@ -111,13 +172,37 @@
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
       ],
       "sections": [
-        { "key": "employment", "titleAm": "የሥራ ስምሪትና የሥራ ውል", "match": "employment|contract|employer|worker" },
-        { "key": "work-permit", "titleAm": "የሥራ ፈቃድ", "match": "work permit|permit|foreign" },
-        { "key": "pension", "titleAm": "ጡረታና ማህበራዊ ዋስትና", "match": "pension|social security|contribution" },
-        { "key": "skills", "titleAm": "ክህሎትና ሥልጠና", "match": "skill|training|coc|competence" },
-        { "key": "help", "titleAm": "አገልግሎትና እገዛ", "match": "faq|guide|service|form|about" }
+        {
+          "key": "employment",
+          "titleAm": "የሥራ ስምሪትና የሥራ ውል",
+          "match": "employment|contract|employer|worker"
+        },
+        {
+          "key": "work-permit",
+          "titleAm": "የሥራ ፈቃድ",
+          "match": "work permit|permit|foreign"
+        },
+        {
+          "key": "pension",
+          "titleAm": "ጡረታና ማህበራዊ ዋስትና",
+          "match": "pension|social security|contribution"
+        },
+        {
+          "key": "skills",
+          "titleAm": "ክህሎትና ሥልጠና",
+          "match": "skill|training|coc|competence"
+        },
+        {
+          "key": "help",
+          "titleAm": "አገልግሎትና እገዛ",
+          "match": "faq|guide|service|form|about"
+        }
       ],
-      "probePaths": ["/wp-login.php", "/apply-online", "/e-services/submit"]
+      "probePaths": [
+        "/wp-login.php",
+        "/apply-online",
+        "/e-services/submit"
+      ]
     },
     {
       "id": "eccsa",
@@ -125,7 +210,9 @@
       "nameAm": "የኢትዮጵያ ንግድና ዘርፍ ማህበራት ምክር ቤት",
       "host": "ethiopianchamber.com",
       "fetch": "sitemap",
-      "sitemaps": ["https://ethiopianchamber.com/page-sitemap.xml"],
+      "sitemaps": [
+        "https://ethiopianchamber.com/page-sitemap.xml"
+      ],
       "discoverLinks": false,
       "maxPages": 50,
       "crawlDelaySeconds": 5,
@@ -138,7 +225,8 @@
       "checked": "2026-09-17",
       "reachNote": "UP from the VPS and from the laptop. NOTE: knowledge/sources-am.json crawls `chamber.org.et`, which is ENOTFOUND from both machines. This host replaces it.",
       "allow": [
-        "^/(about|about-us|services?|membership|member-services?|arbitration|business-(information|development|support)|training|advocacy|publications?|faq|contact-us|departments?|managements?)(/|$)"
+        "^/(about|about-us|services?|membership|member-services?|arbitration|business-(information|development|support)|training|advocacy|publications?|faq|contact-us|departments?|managements?)(/|$)",
+        "^/(about-eccsa|frequently-asked-question|legal-and-arbitration|trade-and-investment|afcfta|training-programs)$"
       ],
       "deny": [
         "^/(news|press|media|events?|blog|gallery|portfolio|magazine|monthly-digital-magazine|author|category|tag|wp-content|wp-admin|feed|jobs?)(/|$)",
@@ -147,12 +235,33 @@
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
       ],
       "sections": [
-        { "key": "chamber", "titleAm": "የንግድ ምክር ቤት", "match": "chamber|membership|member|association" },
-        { "key": "arbitration", "titleAm": "የግልግል ዳኝነት", "match": "arbitration|mediation|dispute" },
-        { "key": "trade", "titleAm": "ንግድና የንግድ መረጃ", "match": "trade|business information|export|market" },
-        { "key": "help", "titleAm": "አገልግሎትና እገዛ", "match": "faq|service|about|contact|training" }
+        {
+          "key": "chamber",
+          "titleAm": "የንግድ ምክር ቤት",
+          "match": "chamber|membership|member|association"
+        },
+        {
+          "key": "arbitration",
+          "titleAm": "የግልግል ዳኝነት",
+          "match": "arbitration|mediation|dispute"
+        },
+        {
+          "key": "trade",
+          "titleAm": "ንግድና የንግድ መረጃ",
+          "match": "trade|business information|export|market"
+        },
+        {
+          "key": "help",
+          "titleAm": "አገልግሎትና እገዛ",
+          "match": "faq|service|about|contact|training"
+        }
       ],
-      "probePaths": ["/wp-login.php", "/membership/apply", "/my-account"]
+      "probePaths": [
+        "/wp-login.php",
+        "/membership/apply",
+        "/my-account"
+      ],
+      "_allowNote": "Widened once, on 2026-09-17, after the Task 4 dry run selected 5 of 50 sitemap urls and produced 3 documents. Each name is read from page-sitemap.xml: /frequently-asked-question (the allow list said faq and the site spells it out), /legal-and-arbitration (commercial dispute resolution, which nothing else in the repository covers), /trade-and-investment, /afcfta (the continental free trade area rules an exporter asks about), /training-programs and /about-eccsa. The news, gallery, event, booking, login, register and user-profile paths stay out."
     },
     {
       "id": "aaccsa",
@@ -160,7 +269,9 @@
       "nameAm": "የአዲስ አበባ ንግድና ዘርፍ ማህበራት ምክር ቤት",
       "host": "addischamber.com",
       "fetch": "sitemap",
-      "sitemaps": ["https://addischamber.com/page-sitemap.xml"],
+      "sitemaps": [
+        "https://addischamber.com/page-sitemap.xml"
+      ],
       "discoverLinks": false,
       "maxPages": 70,
       "crawlDelaySeconds": 5,
@@ -173,7 +284,8 @@
       "checked": "2026-09-17",
       "reachNote": "UP from the VPS and from the laptop.",
       "allow": [
-        "^/(about|about-us|about-us-2|services?|membership|member.*|business-(development|information|support)|training|arbitration|research|publications?|faq|departments?)(/|$)"
+        "^/(about|about-us|about-us-2|services?|membership|member.*|business-(development|information|support)|training|arbitration|research|publications?|faq|departments?)(/|$)",
+        "^/(trade-and-international-business-services|addis-chamber-export-portal|digital-services|services-2|training-institute)$"
       ],
       "deny": [
         "^/(news|news-2|press|media|events?|blog|gallery|jobs?|jobs_category|author|category|tag|wp-content|wp-admin|feed|home-2)(/|$)",
@@ -182,12 +294,33 @@
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
       ],
       "sections": [
-        { "key": "chamber", "titleAm": "የንግድ ምክር ቤት", "match": "chamber|membership|member|association" },
-        { "key": "trade", "titleAm": "ንግድና የንግድ መረጃ", "match": "trade|business|export|market|research" },
-        { "key": "arbitration", "titleAm": "የግልግል ዳኝነት", "match": "arbitration|mediation|dispute" },
-        { "key": "help", "titleAm": "አገልግሎትና እገዛ", "match": "faq|service|about|training|contact" }
+        {
+          "key": "chamber",
+          "titleAm": "የንግድ ምክር ቤት",
+          "match": "chamber|membership|member|association"
+        },
+        {
+          "key": "trade",
+          "titleAm": "ንግድና የንግድ መረጃ",
+          "match": "trade|business|export|market|research"
+        },
+        {
+          "key": "arbitration",
+          "titleAm": "የግልግል ዳኝነት",
+          "match": "arbitration|mediation|dispute"
+        },
+        {
+          "key": "help",
+          "titleAm": "አገልግሎትና እገዛ",
+          "match": "faq|service|about|training|contact"
+        }
       ],
-      "probePaths": ["/wp-login.php", "/membership/apply", "/my-account"]
+      "probePaths": [
+        "/wp-login.php",
+        "/membership/apply",
+        "/my-account"
+      ],
+      "_allowNote": "Widened once, on 2026-09-17, after the Task 4 dry run selected 9 of 71 sitemap urls and produced 5 documents. The names are read from page-sitemap.xml. /trade-and-international-business-services is the certificate-of-origin and export-document counter, which is the single most asked-about chamber service. NOT added: the five percent-encoded Ethiopic paths in that sitemap, which were read and are a Christmas greeting, a general-assembly notice and two copies of an about page - news, not procedure - and /complaints-raising-form, which is a form to submit."
     },
     {
       "id": "poessa",
@@ -195,7 +328,9 @@
       "nameAm": "የግል ድርጅት ሠራተኞች ማህበራዊ ዋስትና አስተዳደር",
       "host": "www.poessa.gov.et",
       "fetch": "urls",
-      "urls": ["https://www.poessa.gov.et/"],
+      "urls": [
+        "https://www.poessa.gov.et/"
+      ],
       "discoverLinks": true,
       "maxPages": 40,
       "crawlDelaySeconds": 6,
@@ -217,13 +352,38 @@
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
       ],
       "sections": [
-        { "key": "pension", "titleAm": "ጡረታና ማህበራዊ ዋስትና", "match": "pension|social security|ጡረታ|ዋስትና" },
-        { "key": "contributions", "titleAm": "የመዋጮ ምጣኔ", "match": "contribution|rate|percent|መዋጮ" },
-        { "key": "employer", "titleAm": "የአሠሪ ግዴታዎች", "match": "employer|organization|register|አሠሪ" },
-        { "key": "benefits", "titleAm": "ጥቅማ ጥቅሞች", "match": "benefit|claim|retirement|ጥቅም" },
-        { "key": "help", "titleAm": "አገልግሎትና እገዛ", "match": "faq|guide|service|form|contact|አገልግሎት" }
+        {
+          "key": "pension",
+          "titleAm": "ጡረታና ማህበራዊ ዋስትና",
+          "match": "pension|social security|ጡረታ|ዋስትና"
+        },
+        {
+          "key": "contributions",
+          "titleAm": "የመዋጮ ምጣኔ",
+          "match": "contribution|rate|percent|መዋጮ"
+        },
+        {
+          "key": "employer",
+          "titleAm": "የአሠሪ ግዴታዎች",
+          "match": "employer|organization|register|አሠሪ"
+        },
+        {
+          "key": "benefits",
+          "titleAm": "ጥቅማ ጥቅሞች",
+          "match": "benefit|claim|retirement|ጥቅም"
+        },
+        {
+          "key": "help",
+          "titleAm": "አገልግሎትና እገዛ",
+          "match": "faq|guide|service|form|contact|አገልግሎት"
+        }
       ],
-      "probePaths": ["/user/login", "/am/user/login", "/apply"]
+      "probePaths": [
+        "/user/login",
+        "/am/user/login",
+        "/apply"
+      ],
+      "_urlsNote": "Task 4, 2026-09-17: 1 url, 0 selected, for the same reason as ipdc - selectUrls() drops the root path before the allow list is consulted (fetch-pack.js line 82), so the home page cannot be a seed and link discovery has no round 1. The fix is the same as ipdc: name two or three allowed deep paths here. They are NOT named yet because the host would not answer on any of four attempts this afternoon (connection timed out at 40 s from the VPS, over https and over http), so its home page links could not be read, and this pack does not guess deep paths - the two that were guessed for motri and the two guessed for ipdc all returned timeouts or soft 404s. Re-probe with node /tmp/b4paths.js poessa on a day it answers, then paste the allowed paths in."
     },
     {
       "id": "ipdc",
@@ -231,7 +391,12 @@
       "nameAm": "የኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን",
       "host": "ipdc.gov.et",
       "fetch": "urls",
-      "urls": ["https://ipdc.gov.et/"],
+      "urls": [
+        "https://ipdc.gov.et/service",
+        "https://ipdc.gov.et/service/parks",
+        "https://ipdc.gov.et/about",
+        "https://ipdc.gov.et/faq"
+      ],
       "discoverLinks": true,
       "maxPages": 40,
       "crawlDelaySeconds": 6,
@@ -242,7 +407,7 @@
       "langNote": "417 Ethiopic characters of 3,918 (11 percent) on the home page, mostly menu. English source; depends on am-headers.js.",
       "reach": "up",
       "checked": "2026-09-17",
-      "reachNote": "UP from the VPS and from the laptop; individual paths timed out intermittently. CANDIDATE: keep this site only if the Task 4 dry run discovers at least 8 allowed paths that extract above the floor. If it does not, move it to manual with the measurement, rather than leaving a site in the registry that contributes nothing.",
+      "reachNote": "UP from the VPS and from the laptop; individual paths timed out intermittently. CANDIDATE: keep this site only if the Task 4 dry run discovers at least 8 allowed paths that extract above the floor. If it does not, move it to manual with the measurement, rather than leaving a site in the registry that contributes nothing. | 2026-09-17, Task 4: KEPT. The home page answered 200 with 147,353 bytes and 56 same-host links, 22 of which pass the allow list - well over the 8 the candidate rule asked for.",
       "allow": [
         "^/(about|about-us|parks?|industrial-parks?|investor-services?|services?|incentives?|why-.*|how-to-.*|faq|leasing|shed|one-stop|resources?|contact-us)(/|$)"
       ],
@@ -252,12 +417,33 @@
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|pptx?|mp4|mp3)$"
       ],
       "sections": [
-        { "key": "industrial-parks", "titleAm": "የኢንዱስትሪ ፓርኮች", "match": "park|shed|zone|industrial" },
-        { "key": "investment", "titleAm": "ኢንቨስትመንት", "match": "invest|investor|lease|leasing" },
-        { "key": "incentives", "titleAm": "ማበረታቻዎች", "match": "incentive|exemption|duty.free" },
-        { "key": "help", "titleAm": "አገልግሎትና እገዛ", "match": "faq|service|about|contact|one.stop" }
+        {
+          "key": "industrial-parks",
+          "titleAm": "የኢንዱስትሪ ፓርኮች",
+          "match": "park|shed|zone|industrial"
+        },
+        {
+          "key": "investment",
+          "titleAm": "ኢንቨስትመንት",
+          "match": "invest|investor|lease|leasing"
+        },
+        {
+          "key": "incentives",
+          "titleAm": "ማበረታቻዎች",
+          "match": "incentive|exemption|duty.free"
+        },
+        {
+          "key": "help",
+          "titleAm": "አገልግሎትና እገዛ",
+          "match": "faq|service|about|contact|one.stop"
+        }
       ],
-      "probePaths": ["/wp-login.php", "/apply", "/investor-portal"]
+      "probePaths": [
+        "/wp-login.php",
+        "/apply",
+        "/investor-portal"
+      ],
+      "_urlsNote": "These four are the seeds, not the home page. selectUrls() in ops/packs/fetch-pack.js drops the root path before any allow list is consulted (line 82, `if (!p || p === /) continue`), so the original seed https://ipdc.gov.et/ selected nothing, round 1 never ran and discoverLinks never had a page to harvest - which is why the Task 4 dry run reported 1 url, 0 selected. All four paths were read from the home page own links on 2026-09-17 and all four pass this site allow list; from them round 2 reaches the /service/parks/N and /service/service/N detail pages, 22 allowed paths in total. KEPT under the Step 4 rule, which asked for at least 8."
     },
     {
       "id": "etrade",
@@ -335,21 +521,73 @@
     }
   ],
   "deadHosts": [
-    { "host": "eic.gov.et", "what": "ENOTFOUND from the VPS and from the laptop, 2026-09-17. The Ethiopian Investment Commission is at investethiopia.gov.et.", "checked": "2026-09-17" },
-    { "host": "possa.gov.et", "what": "ENOTFOUND, apex and www. The Private Organizations Employees Social Security Agency is at www.poessa.gov.et - note the extra e.", "checked": "2026-09-17" },
-    { "host": "esa.gov.et", "what": "ENOTFOUND, apex and www. No replacement domain found for the Ethiopian Standards Agency; standards questions have no source in this pack.", "checked": "2026-09-17" },
-    { "host": "daro.gov.et", "what": "ENOTFOUND, apex and www. knowledge/sources-am.json still crawls www.daro.gov.et and saves 0 pages. Document authentication is answered from knowledge/eservices/document-authentication-and-registration-service.md and knowledge/law/documents-authentication-registration-922-2015.", "checked": "2026-09-17" },
-    { "host": "esla.gov.et", "what": "ENOTFOUND on www. Ethiopian Shipping and Logistics is in knowledge/eservices/ethiopian-shipping-and-logistics.md only.", "checked": "2026-09-17" },
-    { "host": "addisababa.gov.et", "what": "ENOTFOUND, apex and www, confirming the 2026-09-14 note in knowledge/sources-am.json. Addis Ababa city-level trade licensing therefore has NO reachable source and is out of scope for v1.", "checked": "2026-09-17" },
-    { "host": "chamber.org.et", "what": "ENOTFOUND. Still a live crawl target in knowledge/sources-am.json; it should be replaced there by ethiopianchamber.com, which is site eccsa of this pack.", "checked": "2026-09-17" },
-    { "host": "ecx.com.et", "what": "ENOTFOUND on the apex, timeout on www. The Ethiopian Commodity Exchange has no reachable source; commodity-trading questions are out of scope for v1.", "checked": "2026-09-17" },
-    { "host": "mint.gov.et", "what": "ENOTFOUND on the apex, timeout on www. knowledge/sources-am.json records it as timeout since 2026-09-14 and knowledge/web/mint/ is empty. The eservices portal it runs is curated separately.", "checked": "2026-09-17" },
-    { "host": "www.etrade.gov.et", "what": "404 with 315 bytes. The apex etrade.gov.et is the right host; see the etrade site entry.", "checked": "2026-09-17" }
+    {
+      "host": "eic.gov.et",
+      "what": "ENOTFOUND from the VPS and from the laptop, 2026-09-17. The Ethiopian Investment Commission is at investethiopia.gov.et.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "possa.gov.et",
+      "what": "ENOTFOUND, apex and www. The Private Organizations Employees Social Security Agency is at www.poessa.gov.et - note the extra e.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "esa.gov.et",
+      "what": "ENOTFOUND, apex and www. No replacement domain found for the Ethiopian Standards Agency; standards questions have no source in this pack.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "daro.gov.et",
+      "what": "ENOTFOUND, apex and www. knowledge/sources-am.json still crawls www.daro.gov.et and saves 0 pages. Document authentication is answered from knowledge/eservices/document-authentication-and-registration-service.md and knowledge/law/documents-authentication-registration-922-2015.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "esla.gov.et",
+      "what": "ENOTFOUND on www. Ethiopian Shipping and Logistics is in knowledge/eservices/ethiopian-shipping-and-logistics.md only.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "addisababa.gov.et",
+      "what": "ENOTFOUND, apex and www, confirming the 2026-09-14 note in knowledge/sources-am.json. Addis Ababa city-level trade licensing therefore has NO reachable source and is out of scope for v1.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "chamber.org.et",
+      "what": "ENOTFOUND. Still a live crawl target in knowledge/sources-am.json; it should be replaced there by ethiopianchamber.com, which is site eccsa of this pack.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "ecx.com.et",
+      "what": "ENOTFOUND on the apex, timeout on www. The Ethiopian Commodity Exchange has no reachable source; commodity-trading questions are out of scope for v1.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "mint.gov.et",
+      "what": "ENOTFOUND on the apex, timeout on www. knowledge/sources-am.json records it as timeout since 2026-09-14 and knowledge/web/mint/ is empty. The eservices portal it runs is curated separately.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "www.etrade.gov.et",
+      "what": "404 with 315 bytes. The apex etrade.gov.et is the right host; see the etrade site entry.",
+      "checked": "2026-09-17"
+    }
   ],
   "outOfScope": [
-    { "host": "ppa.gov.et", "what": "Federal Public Procurement and Property Authority. Reachable (home 4,777 characters, 14.7 percent Ethiopic, an Amharic title, an 18-child wp-sitemap.xml). Public procurement is BinaSmart own tender service, and pulling a procurement directive into a licence answer is exactly the cross-service confusion the intent tiers exist to prevent.", "checked": "2026-09-17" },
-    { "host": "mot.gov.et", "what": "Ministry of TOURISM, not Trade - a name collision worth writing down, because motri.gov.et is the trade ministry. Reachable and the most Amharic host measured all day (2,451 characters, 69 percent Ethiopic, a 57-URL page sitemap). A good candidate for a later tourism slice; out of v1 scope.", "checked": "2026-09-17" },
-    { "host": "id.gov.et", "what": "Fayda National ID. Already crawled as `fayda` in knowledge/sources-am.json (34 pages on disk) and summarised in public/fayda.html. Measured anyway: /services 2,673 characters and /faq 948 characters, ZERO Ethiopic in either.", "checked": "2026-09-17" }
+    {
+      "host": "ppa.gov.et",
+      "what": "Federal Public Procurement and Property Authority. Reachable (home 4,777 characters, 14.7 percent Ethiopic, an Amharic title, an 18-child wp-sitemap.xml). Public procurement is BinaSmart own tender service, and pulling a procurement directive into a licence answer is exactly the cross-service confusion the intent tiers exist to prevent.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "mot.gov.et",
+      "what": "Ministry of TOURISM, not Trade - a name collision worth writing down, because motri.gov.et is the trade ministry. Reachable and the most Amharic host measured all day (2,451 characters, 69 percent Ethiopic, a 57-URL page sitemap). A good candidate for a later tourism slice; out of v1 scope.",
+      "checked": "2026-09-17"
+    },
+    {
+      "host": "id.gov.et",
+      "what": "Fayda National ID. Already crawled as `fayda` in knowledge/sources-am.json (34 pages on disk) and summarised in public/fayda.html. Measured anyway: /services 2,673 characters and /faq 948 characters, ZERO Ethiopic in either.",
+      "checked": "2026-09-17"
+    }
   ],
   "references": [
     {
