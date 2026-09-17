@@ -121,7 +121,11 @@ test('Bini asks for the banking pack only when the message is about money at a b
   assert.ok(src.includes("const biniBanking = require('./assistant/banking');"), 'assistant/banking is not required');
   assert.ok(src.includes('const bankingPrefer = !travelPrefer.prefer && biniBanking.isBankingQuestion(msg) ? { prefer: biniBanking.PREFER } : {};'),
     'the per-message banking preference is not computed, or travel does not win a tie');
-  assert.ok(src.includes('const packPrefer = { ...travelPrefer, ...bankingPrefer };'), 'the two are not merged');
+  // The business pack joined the merge in Task 7 of the business plan. Banking still wins over a merely soft
+  // business signal; only a business HARD word (assistant/business.js hasBusinessHardWord) takes it back.
+  assert.ok(src.includes('const packPrefer = { ...travelPrefer, ...bankingPrefer, ...(businessWins ? businessPrefer : {}) };'), 'the three are not merged');
+  assert.ok(src.includes('const businessWins = !!businessPrefer.prefer && (!bankingPrefer.prefer || biniBusiness.hasBusinessHardWord(msg));'),
+    'a banking question with only soft business words must keep the banking preference');
   assert.ok(src.includes('knowledge.contextFor(msg, { lang, ...packPrefer })'), 'contextFor is not given the merged preference');
   assert.ok(src.includes('+ bankGuard'), 'the guardrail is not added to the system prompt');
 });

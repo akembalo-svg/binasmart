@@ -7,6 +7,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { shouldForceTool } = require('../assistant/force');
 const { isBankingQuestion } = require('../assistant/banking');
+const { isBusinessQuestion } = require('../assistant/business');
 
 test('a fee question at a wallet or a bank forces no tool', () => {
   assert.equal(shouldForceTool('ቴሌብር 1,000 ብር ለመላክ ስንት ያስከፍላል?'), false, 'the telebirr fee question that started this');
@@ -28,6 +29,18 @@ test('a ride fare question still forces a tool', () => {
 test('an airline fee question forces no tool either; the pack answers it', () => {
   assert.equal(shouldForceTool('ሻንጣ ለመጨመር ስንት ያስከፍላል?'), false);
   assert.equal(shouldForceTool('how much does Ethiopian Airlines charge for excess baggage'), false);
+});
+
+// An office charges too. A licence fee is in knowledge/business with the office and the fetched date on it;
+// quote_ride has nothing to say about it, and the two Ethiopic messages below carry a ride cue (ወደ, pick up)
+// that would otherwise have forced a taxi fare onto a trade-licence question.
+test('a licence or permit fee question forces no tool; the business pack answers it', () => {
+  assert.equal(shouldForceTool('how much does a trade licence cost'), false);
+  assert.equal(shouldForceTool('የንግድ ፈቃድ ለማደስ ወደ ንግድ ቢሮ ስንት ብር ይከፈላል?'), false, 'a ride cue in a licence question');
+  assert.equal(shouldForceTool('how much does a work permit cost, I will pick up the papers myself'), false);
+  // and the pack preference has to see the same messages, or the two can disagree
+  assert.equal(isBusinessQuestion('how much does a trade licence cost'), true);
+  assert.equal(isBusinessQuestion('የንግድ ፈቃድ ለማደስ ወደ ንግድ ቢሮ ስንት ብር ይከፈላል?'), true);
 });
 
 test('every other forced intent is untouched', () => {

@@ -16,9 +16,11 @@
 //
 //   1. A non-price intent still forces, exactly as before: remember, BinaPool, a tender, the cinema
 //      programme, a ride status, TV/radio, or a shop. Those words name their own tool.
-//   2. A banking or travel question never forces. Those are answered from a pack (knowledge/banking,
-//      knowledge/travel) with the institution and the date of the page — not from a tool, and never from
-//      a fare. Same two tests that point retrieval at the pack, so the two can never disagree.
+//   2. A banking, travel or business question never forces. Those are answered from a pack
+//      (knowledge/banking, knowledge/travel, knowledge/business) with the institution or the office and the
+//      date of the page — not from a tool, and never from a fare. An office charges for a licence the way a
+//      bank charges for a transfer. The same three tests that point retrieval at the pack, so the two can
+//      never disagree.
 //   3. A price word forces only when the same message also carries a ride cue — a vehicle, a driver, a
 //      pickup or a destination. quote_ride needs two points inside Addis; with no such word in the message
 //      there is nothing for it to quote, and forcing can only produce the wrong tool or none.
@@ -28,6 +30,7 @@
 // cheaper than a taxi fare quoted at someone asking about their bank.
 const banking = require('./banking');
 const travel = require('./travel');
+const business = require('./business');
 
 // A price word. Lifted verbatim from the old FORCE_TOOL_RE in server.js; on its own it now decides nothing.
 const PRICE_RE = /(ስንት ብር|ስንት ነው|ስንት ይሆናል|ስንት ያስከፍላል|ስንት ያወጣል|ስንት ይከፈላል|ምን ያህል ነው|ምን ያህል ይሆናል|ስንት ነበር|ዋጋ|how much|fare|price|cost|gatii|meeqa)/i;
@@ -49,7 +52,7 @@ function shouldForceTool(msg) {
   if (!s.trim()) return false;
   if (OTHER_FORCE_RE.test(s)) return true;
   if (!PRICE_RE.test(s)) return false;
-  if (banking.isBankingQuestion(s) || travel.isTravelQuestion(s)) return false;
+  if (banking.isBankingQuestion(s) || travel.isTravelQuestion(s) || business.isBusinessQuestion(s)) return false;
   return RIDE_CUE_RE.test(s);
 }
 

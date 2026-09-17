@@ -101,7 +101,10 @@ test('Bini asks for the pack only when the message is about flying', () => {
     'the per-message preference is not computed');
   // The banking pack joined the travel pack behind the same call. Travel is computed first and wins a tie, so
   // a question about changing a ticket still gets the airline's change-fee page and not a bank's tariff.
-  assert.ok(src.includes('const packPrefer = { ...travelPrefer, ...bankingPrefer };'), 'the two packs are not merged');
+  // The business pack joined them in Task 7 of the business plan; travel is still computed first and neither
+  // of the other two can take a tie from it.
+  assert.ok(src.includes('const packPrefer = { ...travelPrefer, ...bankingPrefer, ...(businessWins ? businessPrefer : {}) };'), 'the three packs are not merged');
+  assert.ok(src.includes('const businessPrefer = !travelPrefer.prefer && biniBusiness.isBusinessQuestion(msg)'), 'travel must win a tie with business too');
   assert.ok(src.includes('knowledge.contextFor(msg, { lang, ...packPrefer })'), 'contextFor is not given the preference');
   assert.equal(src.includes('knowledge.contextFor(msg, { lang }).catch'), false, 'the old unconditional call is still there');
 });

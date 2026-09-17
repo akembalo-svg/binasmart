@@ -999,6 +999,7 @@ const biniLang = require('./assistant/lang');
 const biniPolitics = require('./assistant/politics');
 const biniTravel = require('./assistant/travel');
 const biniBanking = require('./assistant/banking');
+const biniBusiness = require('./assistant/business');
 const biniForce = require('./assistant/force');
 // A harness sets this header. Opt-in rather than a guess at IP patterns: a pattern would rot the
 // first time a harness changed its ip, and rot invisibly.
@@ -1068,10 +1069,23 @@ fastify.post('/api/assistant', async (req, reply) => {
     // "what does the airline charge to change my ticket" says a fee word and is about a ticket, and the
     // airline's own change-fee page is the better answer than any bank's tariff.
     const bankingPrefer = !travelPrefer.prefer && biniBanking.isBankingQuestion(msg) ? { prefer: biniBanking.PREFER } : {};
-    const packPrefer = { ...travelPrefer, ...bankingPrefer };
+    // A licence, a permit, a registration or a customs question at an Ethiopian office points at
+    // knowledge/business (assistant/business.js) the same way. The collision with banking is real - "I paid
+    // the bank, but what does a trade licence renewal cost" is honestly both - so the rule is: a business
+    // HARD word, a word only that sector uses, takes the tie-breaker back from banking; with only soft
+    // business signal banking keeps it, because `bank`, `loan` and `interest rate` are OTHER_SERVICE words in
+    // assistant/business.js precisely because that question is the bank pack's. Travel still wins over both.
+    const businessPrefer = !travelPrefer.prefer && biniBusiness.isBusinessQuestion(msg) ? { prefer: biniBusiness.PREFER } : {};
+    const businessWins = !!businessPrefer.prefer && (!bankingPrefer.prefer || biniBusiness.hasBusinessHardWord(msg));
+    const packPrefer = { ...travelPrefer, ...bankingPrefer, ...(businessWins ? businessPrefer : {}) };
     // What Bini may not do with money, stated where the answer is written: no account access, no transaction,
     // no advice, every figure dated and attributed. Only on the message that asked.
     const bankGuard = bankingPrefer.prefer ? biniBanking.GUARDRAILS : '';
+    // And what it may not do with paperwork: file nothing on anybody's behalf, take no TIN or licence number,
+    // never call a licence valid, no fee without the office and the fetched date. A message that is both a
+    // bank question and a licence question gets BOTH blocks - only one pack can hold the +0.06 tie-breaker,
+    // but a limit is not a retrieval preference and a half-stated rule is a half-obeyed one.
+    const bizGuard = businessPrefer.prefer ? biniBusiness.GUARDRAILS : '';
     const [ctx, profile] = await Promise.all([knowledge.contextFor(msg, { lang, ...packPrefer }).catch(() => ''), Promise.resolve(biniMemory.profileText(known))]);
     const voice = (lang === 'am' || lang === 'am-latin') ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : (lang === 'om' ? '\n\n## Afaan Oromoo voice (glossary + rules)\n' + knowledge.voice('om') : '');
     const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
@@ -1126,7 +1140,7 @@ fastify.post('/api/assistant', async (req, reply) => {
           + '\n\nThese are the ONLY businesses BinaSmart has. Name none other. If the list is empty, say plainly that we do not have that kind of place listed yet, that we are signing them up, and offer WhatsApp — do NOT suggest places from your own knowledge and do NOT imply BinaSmart lists many.';
       }
     }
-    const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + bankGuard + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
+    const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + bankGuard + bizGuard + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys + preTool, [...hist, { role: 'user', content: msg }], 900, opts);
     // tool_choice:'required' is advisory and this model ignores it often enough to matter — measured
     // as a price question answered with no price, and as an invented BinaPool corridor. One retry,
