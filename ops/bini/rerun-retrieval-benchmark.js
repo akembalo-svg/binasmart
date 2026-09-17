@@ -321,7 +321,8 @@ async function main() {
     rerankOk: hs.rerankOk, rerankErr: hs.rerankErr, rerankSkipped: hs.rerankSkipped,
     // bilingual query retrieval (KNOWLEDGE_BILINGUAL_QUERY): how many searches asked for an other-language
     // rendering, how many were served from the cache, and how many fell back to the single-query path.
-    bilingualOk: hs.bilingualOk, bilingualCached: hs.bilingualCached, bilingualSkipped: hs.bilingualSkipped, bilingualFused: hs.bilingualFused };
+    // bilingualRescued: chunks an augment run appended because the question's own ranking never held their page.
+    bilingualOk: hs.bilingualOk, bilingualCached: hs.bilingualCached, bilingualSkipped: hs.bilingualSkipped, bilingualFused: hs.bilingualFused, bilingualRescued: hs.bilingualRescued };
   console.log('\n  query embed paths: ' + JSON.stringify(embedPaths));
   console.log('  search latency ms: ' + JSON.stringify(latency));
   const f = writeResult(OUT, { at: at.toISOString(), gold: goldFile, chunks: health.chunks, limit: limit || null, ...(mode ? { forceEmbedFail: mode } : {}), bilingual, embedPaths, latency, table, rows }, at, { latest: !limit && !mode, tag });

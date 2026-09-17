@@ -171,3 +171,58 @@ test('the voice corpora are searched in the question language only', async () =>
   await k.search('የካርድ ክፍያ ስንት ነው', { k: 4, sources: ['style'] });
   assert.equal(calls, 0, 'a voice-example lookup is about register, not about facts: no English rendering');
 });
+
+// ---------- augment: the rendering may rescue, never displace ----------
+// Max fusion bought one cross-lingual hit and sold one same-language hit (report §4: six Amharic questions
+// lost an Amharic gold page to the English rendering). These two modes keep the question's own ranking and
+// let the rendering add to it: `augment` strictly after it, `augment-top` merged in with first place pinned.
+
+test('fusion augment: the question keeps the ranking it has today, and the rendering only APPENDS a page it never held', async () => {
+  const q = 'የካርድ ክፍያ ስንት ነው';
+  const { k } = store(DOCS, { bilingual: true, bilingualFusion: 'augment', translateQuery: async () => 'card issuance fee' });
+  const hits = ranking(await k.search(q, { k: 5 }));
+  assert.deepEqual(hits.slice(0, 3), TODAY[q], 'the first three are the single-query ranking, scores and all');
+  assert.deepEqual(hits.slice(3), ['banking/zemen-tariff@0.8304'],
+    'and the English page the question never surfaced is appended after them, with its own score');
+});
+
+test('fusion augment: a page the question already ranked is neither re-scored nor appended a second time', async () => {
+  // The guide scores 0.06 under the Amharic question and 0.4401 under the English rendering. Under `augment`
+  // it must keep 0.06 and appear once: the rendering has no vote on a page the question already found.
+  const { k } = store(DOCS, { bilingual: true, bilingualFusion: 'augment', translateQuery: async () => 'card issuance fee' });
+  const hits = await k.search('የካርድ ክፍያ ስንት ነው', { k: 5 });
+  const guide = hits.filter(h => h.slug === 'open-bank-account-ethiopia');
+  assert.equal(guide.length, 1, 'once, not twice');
+  assert.equal(guide[0].score, 0.06, 'the score the question gave it, not the 0.4401 the rendering would');
+});
+
+test('fusion augment-top: the rescued page is merged in by its own score, and top-1 is pinned', async () => {
+  const q = 'የካርድ ክፍያ ስንት ነው';
+  const { k } = store(DOCS, { bilingual: true, bilingualFusion: 'augment-top', translateQuery: async () => 'card issuance fee' });
+  const hits = ranking(await k.search(q, { k: 5 }));
+  assert.equal(hits[0], TODAY[q][0], 'the page the question itself ranked first is still first');
+  assert.equal(hits[1], 'banking/zemen-tariff@0.8304', 'the rescued page takes the place its own score earns');
+  assert.deepEqual(hits.slice(2), TODAY[q].slice(1), 'everything under it keeps its score and its order');
+});
+
+test('fusion augment: the rescued pages obey the same two-chunks-per-page rule as everything else', async () => {
+  const many = DOCS.concat([0, 1, 2].map(i => ({ source: 'banking', slug: 'dashen-cards', title: 'Dashen cards ' + i, lang: 'en',
+    text: 'Dashen Bank card issuance fee schedule part ' + i + ' debit prepaid' })));
+  const { k } = store(many, { bilingual: true, bilingualFusion: 'augment', translateQuery: async () => 'card issuance fee' });
+  const hits = await k.search('የካርድ ክፍያ ስንት ነው', { k: 12 });
+  assert.equal(hits.filter(h => h.slug === 'dashen-cards').length, 2, 'two chunks of the rescued page, not three');
+});
+
+test('an unknown fusion name falls back to max rather than silently retrieving nothing', async () => {
+  const { k } = store(DOCS, { bilingual: true, bilingualFusion: 'augmentt', translateQuery: async () => 'card issuance fee' });
+  const hits = await k.search('የካርድ ክፍያ ስንት ነው', { k: 5 });
+  assert.equal(hits[0].slug, 'zemen-tariff', 'max fusion, which is what a typo must not turn into no fusion');
+});
+
+test('flag OFF beats any fusion setting: an augment run with the flag off is the single-query search', async () => {
+  let calls = 0;
+  const { k, embedded } = store(DOCS, { bilingual: false, bilingualFusion: 'augment-top', translateQuery: async () => { calls++; return 'card issuance fee'; } });
+  for (const [q, expected] of Object.entries(TODAY)) assert.deepEqual(ranking(await k.search(q, { k: 5 })), expected, q);
+  assert.equal(calls, 0);
+  assert.equal(embedded.length, 4);
+});

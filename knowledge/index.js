@@ -336,10 +336,26 @@ const BILINGUAL_MODEL = 'gemini-2.5-flash';
 const BILINGUAL_TIMEOUT_MS = 1500;
 const BILINGUAL_CACHE_MAX = 500;
 const BILINGUAL_MAX_CHARS = 600;
-// Fusion of the two candidate lists: 'max' keeps each chunk's better hybrid score under the two renderings;
-// 'rrf' orders by reciprocal rank instead while still carrying the max score, so the reranker's 0.03 gate
-// keeps reading the same quantity it always read. Both were measured; see the report.
+// Fusion of the two candidate lists. Four readings, all measured; see the report.
+//   max          every chunk keeps the better of its two hybrid scores. The English rendering can outscore
+//                the Amharic question's own candidates, which is why it sells a same-language hit for about
+//                every cross-lingual one it buys.
+//   rrf          ordered by reciprocal rank instead, still carrying the max score, so the reranker's 0.03
+//                gate keeps reading the quantity it was tuned on.
+//   augment      the original query's ranked list is kept exactly as it is today - same scores, same order -
+//                and the English rendering may only APPEND pages that list does not already hold, after it,
+//                each with its own hybrid score. A page the Amharic question already ranked can be neither
+//                displaced nor re-scored; the rendering can only rescue a page the question never surfaced.
+//                Nothing downstream changes, so where the reranker is not in play the result is the
+//                single-query one to the byte, and a rescued page can only arrive through the reranker.
+//   augment-top  the same rescue, but the appended pages are then merged in by their own score with the
+//                original TOP-1 pinned: the page the question itself ranked first can never be displaced,
+//                everything below it competes. That is the one protection max fusion did not give.
 const BILINGUAL_FUSION = 'max';
+const BILINGUAL_FUSIONS = new Set(['max', 'rrf', 'augment', 'augment-top']);
+// How many rescued chunks an augment run may append. The list it extends is the reranker's prompt, so this
+// is a latency budget as much as a retrieval one: 18 candidates plus 12 rescued is the most the 6 s call sees.
+const BILINGUAL_AUGMENT_MAX = 12;
 // 'union' is the design's reading (one token set for both renderings); 'per' gives each rendering its own
 // tokens and lets the max do the fusing. KNOWLEDGE_BILINGUAL_KEYWORD overrides. Both measured.
 const BILINGUAL_KEYWORD = 'union';
@@ -515,7 +531,11 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   const local = localEmbedder || makeLocalEmbedder({ fetchImpl, url: localUrl || process.env.KNOWLEDGE_LOCAL_URL });
   const bilingualOn = bilingual === undefined ? bilingualEnabled() : !!bilingual;
   const en2amOn = bilingualEn2Am === undefined ? bilingualEn2AmEnabled() : !!bilingualEn2Am;
-  const fusion = String(bilingualFusion || process.env.KNOWLEDGE_BILINGUAL_FUSION || BILINGUAL_FUSION).trim().toLowerCase() === 'rrf' ? 'rrf' : 'max';
+  const fusionAsked = String(bilingualFusion || process.env.KNOWLEDGE_BILINGUAL_FUSION || BILINGUAL_FUSION).trim().toLowerCase();
+  const fusion = BILINGUAL_FUSIONS.has(fusionAsked) ? fusionAsked : 'max';
+  // The two augment modes share one promise, and it is the whole point of them: the original query's
+  // candidates keep the exact scores and the exact order they have with the flag off.
+  const augment = fusion === 'augment' || fusion === 'augment-top';
   const bilingualKeyword = String(bilingualKeywordMode || process.env.KNOWLEDGE_BILINGUAL_KEYWORD || BILINGUAL_KEYWORD).trim().toLowerCase() === 'per' ? 'per' : 'union';
   const translate = translateQuery || makeQueryTranslator({ apiKey, fetchImpl, timeoutMs: bilingualTimeoutMs });
   let rows = [];            // { id, source, slug, url, title, lang, ord, text, vec (Float32Array|null), lvec (Float32Array|null), toks:Set }
@@ -524,7 +544,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   const lcache = new Map(); // query -> BGE-M3 vec (1024); a separate map so the two kinds can never be confused
   const tcache = new Map(); // "<to>\0<normalised query>" -> rendering. LRU, successes only: a failure must be retried.
   const stats = { searches: 0, embedOk: 0, embedErr: 0, keywordOnly: 0, rerankOk: 0, rerankErr: 0, rerankSkipped: 0, localOk: 0, localErr: 0, localUsed: 0,
-    bilingualOk: 0, bilingualCached: 0, bilingualSkipped: 0, bilingualFused: 0 };
+    bilingualOk: 0, bilingualCached: 0, bilingualSkipped: 0, bilingualFused: 0, bilingualRescued: 0 };
 
   async function load() {
     const all = await prisma.knowledgeChunk.findMany({ orderBy: [{ source: 'asc' }, { slug: 'asc' }, { ord: 'asc' }] });
@@ -817,7 +837,11 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
       //          hybrid scores is what fuses them. Nothing a page earned under one rendering is diluted
       //          by the other. (If the second embedding fails, `per` has nothing left to add and the
       //          search is exactly the single-query one; `union` would still carry the extra keywords.)
-      if (bilingualKeyword === 'per') qtB = otherToks;
+      //   augment   per-rendering tokens, always, whatever KNOWLEDGE_BILINGUAL_KEYWORD says: the union would
+      //             change the keyword denominator of every page the question found for itself, and an
+      //             augment run promises those scores are untouched. A rescued page's keyword score is
+      //             therefore the English rendering's tokens alone, which is what it was found by.
+      if (bilingualKeyword === 'per' || augment) qtB = otherToks;
       else { qt = [...new Set(qt.concat(otherToks))]; qtB = qt; }
       const sec = await embedQuery(other, { forceLocal: useLocal });
       if (sec.qv && sec.useLocal === useLocal) qv2 = sec.qv;
@@ -843,8 +867,12 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
         let c2 = 0; for (let i = 0; i < dims; i++) c2 += qv2[i] * rv[i];
         b = hybridScore({ cos: c2, kw: qtB === qt ? kw : keywordScore(qtB, r), source: r.source, hasVec: true, preferred: pref });
       }
-      const score = b !== null && b > a ? b : a;
-      if (score > 0) scored.push({ r, score, cos, kw, a, b });
+      // An augment run does NOT fuse the scores: the list is ordered by what the question itself scored,
+      // and the rendering's score is carried alongside for the rescue below.
+      const score = augment ? a : (b !== null && b > a ? b : a);
+      // ...which is why a chunk the question never reached (a <= 0) is still kept there: it is worth
+      // nothing to the ordering and is the only thing the rendering can rescue.
+      if (score > 0 || (augment && b !== null && b > 0)) scored.push({ r, score, cos, kw, a, b });
     }
     if (qv2 && fusion === 'rrf') {
       // Reciprocal-rank fusion orders the candidates by their two ranks instead of their two scores. The
@@ -858,13 +886,38 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     // one chunk per (source, slug) unless the same page clearly wins twice
     const want = rerankTo ? Math.min(k, 20) : k;
     const out = [], seen = new Map();
+    const hit = (s, score) => ({ source: s.r.source, slug: s.r.slug, url: s.r.url, title: s.r.title, lang: s.r.lang, score: +score.toFixed(4), text: s.r.text.slice(0, 900) });
     for (const s of scored) {
+      if (s.score <= 0) continue;
       const key = s.r.source + '/' + s.r.slug; const n = seen.get(key) || 0;
       if (n >= 2) continue; seen.set(key, n + 1);
-      out.push({ source: s.r.source, slug: s.r.slug, url: s.r.url, title: s.r.title, lang: s.r.lang, score: +s.score.toFixed(4), text: s.r.text.slice(0, 900) });
+      out.push(hit(s, s.score));
       if (out.length >= want) break;
     }
-    if (!rerankTo) return out;
+    // The rescue, and the only thing an augment run adds. `seen` now holds exactly the pages of the list
+    // above - the original top-N, N being the count that has always fed the <=2-chunks-per-page and rerank
+    // stage - so every page in it is one the question found for itself and is left alone, score and place.
+    // Only the pages it never surfaced can be appended, each carrying the hybrid score the English
+    // rendering gave it, and the same <=2-chunks-per-page rule applies to them.
+    if (qv2 && augment) {
+      const extra = [], extraSeen = new Map();
+      for (const s of scored.filter(x => x.b !== null && x.b > 0).sort((x, y) => y.b - x.b)) {
+        const key = s.r.source + '/' + s.r.slug;
+        if (seen.has(key)) continue;
+        const n = extraSeen.get(key) || 0; if (n >= 2) continue; extraSeen.set(key, n + 1);
+        extra.push(hit(s, s.b));
+        if (extra.length >= BILINGUAL_AUGMENT_MAX) break;
+      }
+      stats.bilingualRescued += extra.length;
+      // augment: after the list, full stop. augment-top: merged in by score with first place pinned.
+      if (extra.length && fusion === 'augment-top' && out.length) {
+        const rest = out.slice(1).concat(extra).sort((x, y) => y.score - x.score);
+        out.length = 1; out.push(...rest);
+      } else if (extra.length) out.push(...extra);
+    }
+    // Without a reranker there is nothing a rescued page can be rescued INTO: k pages were asked for and k
+    // come back. Under `augment` those k are, by construction, the ones a single-query search returns.
+    if (!rerankTo) return out.slice(0, want);
     // The gap between the two best PAGES, not the two best chunks: out may hold two chunks of one
     // page, and a page arguing with itself is not a contest.
     const best = []; for (const o of out) { if (!best.some(b => b.slug === o.slug)) best.push(o); if (best.length === 2) break; }
