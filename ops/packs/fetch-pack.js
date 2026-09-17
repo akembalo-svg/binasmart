@@ -366,8 +366,9 @@ function fill(tpl, vars) {
 // Mobiles are 09x (Ethio Telecom) and 07x (Safaricom Ethiopia), so in international form they are 251
 // followed by 9 or 7. Landlines are 011, 022, 025, 033, 034, 046, 047, 057, 058 - 251 followed by 1, 2, 3, 4
 // or 5 - so a switchboard like +251 11 551 0033 and a short code like 8482 or 6333 are left exactly as the
-// institution published them. Separators inside the number are allowed (+251-913-236-054), and a digit on
-// either side disqualifies the match, so a longer reference number is never half-masked.
+// institution published them. Separators inside the number are allowed (+251-900-000-004), and a digit on
+// either side disqualifies the match, so a longer reference number is never half-masked. (The example
+// numbers in this comment and in test/business/mask-phones.test.js are invented, not the register's.)
 const MOBILE_RE = /(?<![0-9])(\+?251)[ -]?([79](?:[ -]?[0-9]){8})(?![0-9])/g;
 const MASKED_RE = /251\u2022{5}[0-9]{4}/;
 const maskPhones = text => String(text == null ? '' : text)

@@ -21,16 +21,16 @@ const MASKED = new RegExp('251' + B + '{5}[0-9]{4}');
 const FULL_MOBILE = /(?<![0-9])\+?251[ -]?[79](?:[ -]?[0-9]){8}(?![0-9])/;
 
 test('a mobile number is masked to its last four digits', () => {
-  assert.equal(maskPhones('251911500742'), '251' + B.repeat(5) + '0742');
-  assert.equal(maskPhones('251970625402'), '251' + B.repeat(5) + '5402');
+  assert.equal(maskPhones('251900000001'), '251' + B.repeat(5) + '0001');
+  assert.equal(maskPhones('251900000002'), '251' + B.repeat(5) + '0002');
   // Safaricom Ethiopia is 07x, so 2517 is a mobile too.
-  assert.equal(maskPhones('251710100100'), '251' + B.repeat(5) + '0100');
+  assert.equal(maskPhones('251700000003'), '251' + B.repeat(5) + '0003');
 });
 
 test('a mobile written with separators is masked the same way', () => {
-  assert.equal(maskPhones('Phone: +251-913-236-054'), 'Phone: 251' + B.repeat(5) + '6054');
-  assert.equal(maskPhones('+251 911 516 125'), '251' + B.repeat(5) + '6125');
-  assert.equal(maskPhones('+251922874914'), '251' + B.repeat(5) + '4914');
+  assert.equal(maskPhones('Phone: +251-900-000-004'), 'Phone: 251' + B.repeat(5) + '0004');
+  assert.equal(maskPhones('+251 900 000 005'), '251' + B.repeat(5) + '0005');
+  assert.equal(maskPhones('+251900000006'), '251' + B.repeat(5) + '0006');
 });
 
 test('an office line and a short code are left exactly as the institution published them', () => {
@@ -43,19 +43,19 @@ test('an office line and a short code are left exactly as the institution publis
 
 test('the mask does not bite into a longer digit run', () => {
   // A 13-digit run is not a phone number, and half-masking one would corrupt a figure.
-  assert.equal(maskPhones('2519115007421'), '2519115007421');
-  assert.equal(maskPhones('12519115007 42'), '12519115007 42');
+  assert.equal(maskPhones('2519000000012'), '2519000000012');
+  assert.equal(maskPhones('1251900000001'), '1251900000001');
 });
 
 test('masking is idempotent, so a re-render cannot eat the number twice', () => {
-  const once = maskPhones('251911500742');
+  const once = maskPhones('251900000007');
   assert.equal(maskPhones(once), once);
 });
 
 test('a masked number keeps the last four digits of the original', () => {
-  const src = 'Manager | 251911093732 | Saudi Arabia';
+  const src = 'Manager | 251900000008 | Saudi Arabia';
   const out = maskPhones(src);
-  assert.ok(/251•{5}3732/.test(out), 'expected the real last four digits, got ' + out);
+  assert.ok(/251•{5}0008/.test(out), 'expected the real last four digits, got ' + out);
   assert.ok(out.startsWith('Manager | ') && out.endsWith(' | Saudi Arabia'),
     'the rest of the row must survive untouched, got ' + out);
   assert.ok(!FULL_MOBILE.test(out), 'no full mobile may survive');
