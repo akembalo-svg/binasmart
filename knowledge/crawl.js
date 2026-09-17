@@ -9,10 +9,13 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { htmlToText } = require('./index');
+const { htmlToText, curatedHosts, curatedSkip } = require('./index');
 
 const REG = JSON.parse(fs.readFileSync(path.join(__dirname, 'sources-am.json'), 'utf8')).sources;
 const OUT = path.join(__dirname, 'web');
+// Hosts owned by a sector pack (knowledge/<pack>/sources.json). The index refuses their crawled copies
+// anyway (knowledge/index.js, curatedHosts); skipping here means we also stop spending the fetch.
+const CURATED = curatedHosts(path.join(__dirname, '..'));
 const args = process.argv.slice(2);
 const only = args.includes('--only') ? args[args.indexOf('--only') + 1].split(',') : null;
 const maxOverride = args.includes('--max') ? Number(args[args.indexOf('--max') + 1]) : 0;
@@ -50,6 +53,8 @@ const esc = s => String(s).replace(/"/g, '\\"');
   const report = [];
   for (const src of REG) {
     if (!src.crawl || (only && !only.includes(src.id))) continue;
+    const owned = curatedSkip(CURATED, src.am || src.url);
+    if (owned) { console.log('[crawl] skipped ' + owned.host + ' — curated by ' + owned.pack); continue; }
     const dir = path.join(OUT, src.id); fs.mkdirSync(dir, { recursive: true });
     const max = maxOverride || src.maxPages || 30;
     const seen = new Set(); const queue = [src.am || src.url]; if (src.am) queue.push(src.url);
