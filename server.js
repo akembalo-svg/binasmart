@@ -972,7 +972,7 @@ function biniGuards(text, msg, hist, grounding) {
   // once answered with a 4.4 km trip and a 239 birr fare having called nothing — and the fare is the one
   // number this product promises never to guess.
   if (grounding !== undefined) {
-    const g = dropUngrounded(t, grounding);
+    const g = dropUngrounded(t, grounding, msg);
     if (g.dropped.length) {
       console.warn('[bini] dropped ungrounded ' + g.dropped.map(d => d.text).join(', '));
       t = g.text || (/[ሀ-፿]/.test(t)

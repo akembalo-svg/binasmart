@@ -41,3 +41,28 @@ test('a clean reply passes through untouched', () => {
   const t = 'ዋጋው ቋሚ ነው፣ ከመያዝዎ በፊት ይታያል።';
   assert.deepEqual(dropUngrounded(t, ''), { text: t, dropped: [] });
 });
+
+test('a figure the user typed in the question is grounded by the question', () => {
+  // The measured failure: asked what telebirr charges to send 1,000 birr, the guard dropped the sentence
+  // carrying "1,000 Birr" even though the fee itself was on the page, and the answer came out mangled.
+  const question = 'what does telebirr charge to send 1,000 birr to another telebirr user?';
+  const page = 'telebirr send money to another telebirr user: 501 to 1500 | 4';
+  const reply = 'Sending 1,000 Birr to another telebirr user costs 4 Birr.';
+  assert.ok(findUngrounded(reply, page).length, 'without the question the user amount is dropped');
+  assert.deepEqual(findUngrounded(reply, page, question), [], 'the question grounds the amount the user chose');
+  assert.equal(dropUngrounded(reply, page, question).text, reply, 'the sentence survives whole');
+});
+
+test('the question grounds only what it actually contains', () => {
+  const question = 'what does telebirr charge to send 1,000 birr?';
+  const page = 'telebirr send money: 501 to 1500 | 4';
+  assert.ok(findUngrounded('The fee is 37 Birr.', page, question).length,
+    'a figure in neither the page nor the question is still dropped');
+  assert.deepEqual(findUngrounded('The fee is 4 Birr.', page, question), [],
+    'a figure that came from the page is still grounded');
+});
+
+test('the question is normalised the same way the documents are', () => {
+  assert.deepEqual(findUngrounded('Sending 1500 ETB costs 4 Birr.', 'tariff 501 to 1500 | 4',
+    'የ 1,500 ብር ብልክ ስንት ነው?'), [], 'commas and Ethiopic script in the question still match');
+});

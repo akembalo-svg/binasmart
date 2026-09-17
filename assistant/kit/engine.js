@@ -127,14 +127,16 @@ function makeEngine(deps) {
         text = f.text;
       }
 
-      // 6. Grounding: a figure nobody gave the model — not a document, not a tool — is dropped. Each tool
+      // 6. Grounding: a figure nobody gave the model — not a document, not a tool, not the question the user
+      // just asked — is dropped. A figure the user typed is not a recommendation: the dosage rule is the
+      // filter above, which runs first and removes a dose however it arrived. Each tool
       // result is cut to the same length callBini actually sent the model, so a figure past that cut (one the
       // model itself never saw) can't ground anything either.
       const documents = extra.grounding != null ? String(ctx || '') + ' ' + extra.grounding : ctx;
       const grounding = toolResults.length
         ? String(documents || '') + ' ' + toolResults.map(r => JSON.stringify(r.out).slice(0, TOOL_RESULT_LIMIT)).join(' ')
         : documents;
-      const g = dropUngrounded(text, grounding);
+      const g = dropUngrounded(text, grounding, msg);
       if (g.dropped.length) warn('[' + agent.name + '] dropped ungrounded ' + g.dropped.map(x => x.text).join(', '));
       text = g.text;
 

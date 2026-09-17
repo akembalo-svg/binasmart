@@ -166,3 +166,12 @@ test('building the engine without prisma is reported, not silent', async () => {
     console.warn = originalWarn;
   }
 });
+
+test('a dose the user typed is still stripped, whatever the grounding guard allows', async () => {
+  // The grounding guard now lets an answer repeat a figure the user typed. Dosage is protected by its own
+  // filter, which runs first, so this must not change: a dose is removed however it arrived.
+  const { out } = await run('how much paracetamol should I give my child, 500 mg?',
+    { replies: ['Give 500 mg twice a day. The pediatrics department can weigh your child properly.'] });
+  assert.ok(!out.reply.includes('500 mg'), 'the dosage sentence goes even though the user typed 500');
+  assert.ok(out.reply.includes('pediatrics'), 'the useful sentence survives');
+});
