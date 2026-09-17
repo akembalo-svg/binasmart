@@ -9,7 +9,10 @@
     "amHeaders": true,
     "titleSuffix": "",
     "disclaimerEn": "Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid.",
-    "disclaimerAm": "ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።"
+    "disclaimerAm": "ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።",
+    "headerEnTemplate": "Source: {url} (official {siteName} page, {langWord}), fetched {today}. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. {disclaimerEn} BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.",
+    "headerAmTemplate": "ይህ ገጽ {fromAm} ኦፊሴላዊ ድረ-ገጽ {langWordAm} የተወሰደ ነው። {disclaimerAm}",
+    "_headerNote": "Added on 2026-09-17, after the Task 5 fetch wrote 62 documents and not one of them carried the disclaimer or the Source line: the registry had the two disclaimers but neither template, and header() fills templates - a pack with no template renders no header sentence at all. Found by reading a document, not by reading a log."
   },
   "sites": [
     {
@@ -127,12 +130,22 @@
         {
           "key": "industrial-parks",
           "titleAm": "የኢንዱስትሪ ፓርኮች",
-          "match": "industrial park|park|shed|zone"
+          "match": "industrial park|park|shed|zone|sez"
         },
         {
           "key": "help",
           "titleAm": "አገልግሎትና እገዛ",
           "match": "faq|guide|one.stop|service|resource"
+        },
+        {
+          "key": "sectors",
+          "titleAm": "የኢንቨስትመንት ዘርፎች",
+          "match": "key-sectors|sectors|agricultur|manufactur|mining|tourism|ict|energy|health|transport|leather|pharmaceutic|textile|agro|emerging|financial-services|telecom|privatization"
+        },
+        {
+          "key": "about",
+          "titleAm": "ስለ ኮሚሽኑና ሕትመቶች",
+          "match": "about-eic|who-we-are|our-team|publication|get-started|why-ethiopia|faqs|country-data"
         }
       ],
       "probePaths": [
@@ -141,7 +154,8 @@
         "/e-services/submit"
       ],
       "_allowNote": "Widened once, on 2026-09-17, after the Task 4 dry run selected 24 of the 77 urls in page-sitemap.xml and every one of them was a why-invest-here page. The names added are read from that sitemap, not guessed: /investment-process (how an investment permit is actually obtained), /investment-regulations and /investment (the incentive rules, which knowledge/law does not hold - grep for 586/2026 returns nothing), /faqs, /industry-parks, and the /key-sectors and /sezs trees, which carry the sector-by-sector and zone-by-zone conditions. Nothing was widened by pattern.",
-      "_denyNote": "The dry run of 2026-09-17 selected /about-eic/who-we-are-old and wrote it as a document beside /about-eic/who-we-are. The site keeps -old copies of at least three pages (who-we-are-old, mining-old, tourism-old) and a /dev-who-we-are staging page. A stale duplicate of a page we already hold is exactly the duplication this pack exists to avoid, so they are denied by name."
+      "_denyNote": "The dry run of 2026-09-17 selected /about-eic/who-we-are-old and wrote it as a document beside /about-eic/who-we-are. The site keeps -old copies of at least three pages (who-we-are-old, mining-old, tourism-old) and a /dev-who-we-are staging page. A stale duplicate of a page we already hold is exactly the duplication this pack exists to avoid, so they are denied by name.",
+      "_sectionNote": "The sectors and about sections were appended on 2026-09-17 because 23 eic documents had been written with no section: sectionOf() tests each section regex against the path, and investment|incentives|licensing|industrial-parks matched none of /why-ethiopia, /key-sectors/..., /about-eic/... or /publications. They are appended rather than inserted so that first-match-wins leaves every section already assigned exactly where it was."
     },
     {
       "id": "mols",
@@ -164,7 +178,8 @@
       "checked": "2026-09-17",
       "reachNote": "UP from the VPS and from the laptop, although knowledge/sources-am.json records `timeout` from 2026-09-14 and knowledge/web/mols/ holds 37 pages from the 2026-09-08 crawl whose overseas-employment content may predate Proclamation 1389/2025. The page sitemap answered on the second attempt.",
       "allow": [
-        "^/(services?|service-.*|employment|employer|work-permit|labou?r|labor-.*|pension|social-security|skills?|training|coc|certificate-of-competence|lmis|about|faq|guidelines?|directives?|proclamations?|forms?)(/|$)"
+        "^/(services?|service-.*|employment|employer|work-permit|labou?r|labor-.*|pension|social-security|skills?|training|coc|certificate-of-competence|lmis|about|faq|guidelines?|directives?|proclamations?|forms?)(/|$)",
+        "^/(online-services|overseas-ethiopian-workers|licensed-requirement-agencies|applications-and-appeals|appellate-authority-kereta-semi|download-forms|public-complaint|agencies|documents|e-library|key-statistics)$"
       ],
       "deny": [
         "^/(news|press|media|events?|blog|gallery|job-openings?|vacanc|tender|author|category|tag|wp-content|wp-admin|feed|sample-page|contact)(/|$)",
@@ -175,7 +190,7 @@
         {
           "key": "employment",
           "titleAm": "የሥራ ስምሪትና የሥራ ውል",
-          "match": "employment|contract|employer|worker"
+          "match": "employment|contract|employer|worker|overseas|agenc"
         },
         {
           "key": "work-permit",
@@ -195,14 +210,16 @@
         {
           "key": "help",
           "titleAm": "አገልግሎትና እገዛ",
-          "match": "faq|guide|service|form|about"
+          "match": "faq|guide|service|form|about|appeal|application|complaint|document|library|statistic|online"
         }
       ],
       "probePaths": [
         "/wp-login.php",
         "/apply-online",
         "/e-services/submit"
-      ]
+      ],
+      "_allowNote": "Widened once, on 2026-09-17, after the live fetch of Task 5 read all 53 urls of wp-sitemap-posts-page-1.xml and the allow list selected 2 of them (/about and /labor-identification-number). Every name added is read from that sitemap: /overseas-ethiopian-workers and /licensed-requirement-agencies are the foreign-employment and recruitment-agency counters, /online-services, /applications-and-appeals, /appellate-authority-kereta-semi, /download-forms and /public-complaint are the procedure pages, /agencies, /documents, /e-library and /key-statistics are the ministry own libraries. DELIBERATELY NOT added, although they are in the sitemap: /international-labor-laws, /ministry-proclamation, /law-and-order and /constitutional-provision. The rule is knowledge/law - the counter is this pack. That boundary is the reason the pack exists.",
+      "_sectionNote": "The employment and help matches were extended on 2026-09-17 so that every newly allowed path lands in a section: without overseas and agenc, /overseas-ethiopian-workers and /licensed-requirement-agencies would have been written with no section at all."
     },
     {
       "id": "eccsa",
@@ -248,12 +265,12 @@
         {
           "key": "trade",
           "titleAm": "ንግድና የንግድ መረጃ",
-          "match": "trade|business information|export|market"
+          "match": "trade|business information|export|market|afcfta"
         },
         {
           "key": "help",
           "titleAm": "አገልግሎትና እገዛ",
-          "match": "faq|service|about|contact|training"
+          "match": "faq|service|about|contact|training|frequently-asked"
         }
       ],
       "probePaths": [
@@ -261,7 +278,8 @@
         "/membership/apply",
         "/my-account"
       ],
-      "_allowNote": "Widened once, on 2026-09-17, after the Task 4 dry run selected 5 of 50 sitemap urls and produced 3 documents. Each name is read from page-sitemap.xml: /frequently-asked-question (the allow list said faq and the site spells it out), /legal-and-arbitration (commercial dispute resolution, which nothing else in the repository covers), /trade-and-investment, /afcfta (the continental free trade area rules an exporter asks about), /training-programs and /about-eccsa. The news, gallery, event, booking, login, register and user-profile paths stay out."
+      "_allowNote": "Widened once, on 2026-09-17, after the Task 4 dry run selected 5 of 50 sitemap urls and produced 3 documents. Each name is read from page-sitemap.xml: /frequently-asked-question (the allow list said faq and the site spells it out), /legal-and-arbitration (commercial dispute resolution, which nothing else in the repository covers), /trade-and-investment, /afcfta (the continental free trade area rules an exporter asks about), /training-programs and /about-eccsa. The news, gallery, event, booking, login, register and user-profile paths stay out.",
+      "_sectionNote": "help gained frequently-asked and trade gained afcfta on 2026-09-17: the site spells its FAQ /frequently-asked-question, which the word faq does not match, and /afcfta was written with no section."
     },
     {
       "id": "aaccsa",
