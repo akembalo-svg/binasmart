@@ -3,6 +3,8 @@
 **Date:** 2026-09-17 · **Plan:** `docs/superpowers/plans/2026-09-16-banking-knowledge-pack.md`
 **Design:** `docs/superpowers/specs/2026-09-16-airline-travel-design.md` §1 (the sector-pack method), applied to banking as the second sector.
 
+**Where the numbers come from.** Every figure below is quoted from a log or a result file, never from memory. The logs this report cites by their `/tmp` names — `t5-fetch.log`, `t5-counts.txt`, `t12-proof.log`, `t13-ingest.log`, `t13-bench.log`, `t13-dry.log`, `t13-safety.log`, `t13-afiya2.log`, `t13-afiya3.log`, `t13-sample.txt`, `t13-refusals.txt` — were copied out of `/tmp` on 2026-09-17 and kept at **`/root/bini-eval/banking-pack/`**. The benchmark JSON stays in `/root/bini-eval/`.
+
 ## 1. What was built
 
 234 curated documents under `knowledge/banking/`, from 6 institutions, indexed as the source `banking`, with 60 gold questions, a benchmark, a weekly freshness check and a per-message preference in Bini. The airline pack's fetcher, freshness job and gold builder were generalised rather than copied; the airline pack did not move.
