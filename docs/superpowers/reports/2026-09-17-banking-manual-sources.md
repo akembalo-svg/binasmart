@@ -662,6 +662,14 @@ Dated with `እ.ኤ.አ.` and attributed to the institution, unprompted.
 
 **One thing this did not fix, named rather than tidied away.** The same fee asked as `ቴሌብር 1,000 ብር ወደ ሌላ ቴሌብር ተጠቃሚ ለመላክ ስንት ያስከፍላል?` answered *"ለ1,000 ብር የሚከፈለው ታሪፍ 5 ብር ነው [4, 5]"* with **no date at all** and with `quote_ride` in its tool list: `ስንት ያስከፍላል` matches `FORCE_TOOL_RE` in `server.js`, the fare tool is forced on a telebirr tariff question, and the answer comes out of the forced-tool path where the money guardrail lands differently. That is a routing defect, older than this task and untouched by it, and it is why the telebirr check above is quoted from the tariff phrasing as well.
 
+**Fixed the same day, in `a296de8`.** The routing defect named above is closed. `FORCE_TOOL_RE` is gone from `server.js`; the decision lives in `assistant/force.js`, where a price word on its own (`ስንት ያስከፍላል`, `how much`, `fare`) forces nothing: every other forced intent is unchanged, a banking or travel question never forces — decided by the same two tests that point retrieval at those packs — and a price word forces only beside a ride cue (a vehicle, a driver, a pickup, a destination), because `quote_ride` needs two points inside Addis and cannot answer a tariff. `ቴሌብር` and the other wallets were missing from the Amharic side of the banking HARD list as well, which is why the guardrails, and with them the date, never reached that prompt at all.
+
+Live on the restarted server, `x-binasmart-eval: 1`. `ቴሌብር 1,000 ብር ለመላክ ስንት ያስከፍላል?` → `tools: []`, and: *"እንደ ኢትዮ ቴሌኮም — ቴሌብር ኦፊሴላዊ ድር-ገጽ (እ.ኤ.አ. መስከረም 16 ቀን 2026 የተወሰደ) መሠረት [1, 5]፣ እስከ 250 ብር በቴሌብር ለመላክ ምንም ክፍያ የለው። ከ251 እስከ 500 ብር ደግሞ 2 ብር፣ ከ501 እስከ 1,000 ብር ደግሞ 4 ብር ያስከፍላል። ስለዚህ 1,000 ብር ለመላክ 4 ብር ነው።"* — dated, attributed, tiered, and with no fare tool in it.
+
+`ከቦሌ ወደ ፈያሳ ስንት ያስከፍላል?` still forces the fare: `tools: ["search_places", "search_places", "quote_ride"]`, answering *"ሞተር (1 ሰው): 150 ብር … ባጃጅ (3 ሰዎች): 185 ብር … ኢኮኖሚ (4 ሰዎች): 330 ብር … ኮምፎርት (4 ሰዎች): 470 ብር … XL / ትን (7 ሰዎች): 660 ብር"*. `npm test` **1,587 pass, 1 fail** — six new tests in `test/bini-force-tool.test.js`, and the one failure is still `test/pwa.test.js` on the `public/ai.html` another task is rewriting in this working tree. `pm2 restart binasmart-api`; `/health` **200**.
+
+Measured with a log sentinel rather than by eye: the line count of `binasmart-api-error.log` taken before the telebirr question and its tail read after, the banking answer added **no** new line — no `forced intent called no tool`, which is the entry that named this bug.
+
 Neither `/api/afiya` nor `/api/asmat` was called. Nothing was sent to Telegram.
 
 ---
