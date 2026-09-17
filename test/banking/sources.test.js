@@ -7,6 +7,9 @@
 //   - a source we cannot reach from this server is listed as manual with a measured reason, never dropped;
 //   - a host that is measurably NOT the bank (awashbank.com serves someone else's blocked.html today) is
 //     listed with an explicit do-not-fetch flag so nobody "fixes" it later by turning fetching on;
+//   - a source somebody fetched BY HAND from a machine where it answers is `fetch: dir`, names the folder of
+//     its harvest, and is held to exactly the same allow/deny discipline as a fetched one;
+//   - a dir site's PDFs are an explicit list, never a pattern: 564 were harvested and 45 are in the pack;
 //   - every source already in the repo is listed under references, so the pack never duplicates it.
 const test = require('node:test');
 const assert = require('node:assert');
@@ -15,7 +18,9 @@ const path = require('path');
 
 const FILE = path.join(__dirname, '..', '..', 'knowledge', 'banking', 'sources.json');
 const reg = JSON.parse(fs.readFileSync(FILE, 'utf8'));
-const fetched = reg.sites.filter(s => s.fetch !== 'manual');
+const fetched = reg.sites.filter(s => s.fetch !== 'manual' && s.fetch !== 'dir');
+const dirs = reg.sites.filter(s => s.fetch === 'dir');
+const selected = reg.sites.filter(s => s.fetch !== 'manual');
 const manual = reg.sites.filter(s => s.fetch === 'manual');
 
 test('the registry has a version, a note, a pack block and a list of sites', () => {
@@ -52,23 +57,68 @@ test('a fetched site names how it is fetched and where its pages come from', () 
       assert.ok(Array.isArray(s.urls) && s.urls.length >= 1, s.id + ' fetch: urls needs urls');
       for (const u of s.urls) assert.ok(u.startsWith('https://' + s.host + '/'), s.id + ' url is off-host: ' + u);
     }
+  }
+});
+
+test('every site the pack builds documents from has an allow list, a deny list, sections and a budget', () => {
+  assert.ok(selected.length >= 8, 'five fetched and three harvested');
+  for (const s of selected) {
     assert.ok(Array.isArray(s.allow) && s.allow.length, s.id + ' needs an allow list');
     assert.ok(Array.isArray(s.deny) && s.deny.length, s.id + ' needs a deny list');
     assert.ok(Array.isArray(s.sections) && s.sections.length, s.id + ' needs sections');
     assert.ok(Number(s.maxPages) > 0, s.id + ' needs maxPages');
-    for (const p of [...s.allow, ...s.deny]) assert.doesNotThrow(() => new RegExp(p), s.id + ' bad regex: ' + p);
+    for (const p of [...s.allow, ...s.deny, ...(s.allowPdf || [])]) assert.doesNotThrow(() => new RegExp(p), s.id + ' bad regex: ' + p);
     for (const sec of s.sections) {
       assert.ok(sec.key && sec.titleAm && sec.match, s.id + ' section needs key, titleAm, match');
       assert.ok(/[ሀ-፿]/.test(sec.titleAm), s.id + '/' + sec.key + ' titleAm must be Amharic');
-      assert.doesNotThrow(() => new RegExp(sec.match));
+      assert.doesNotThrow(() => new RegExp(sec.match, sec.matchFlags || ''));
     }
   }
+});
+
+test('a harvested site names the folder it is built from, its budget and, for pdfs, every file by name', () => {
+  assert.equal(dirs.length, 3, 'nbe, ethiotelecom and safaricom were fetched by hand');
+  for (const s of dirs) {
+    assert.match(s.dir, /^[a-z0-9.-]+$/, s.id + ' dir must be a plain host folder name: ' + s.dir);
+    assert.ok(!s.sitemaps && !s.sitemap && !s.urls, s.id + ' is built from a folder, not from the network');
+    assert.match(String(s.harvestedAt || ''), /^2026-09-16/, s.id + ' must say when the harvest was taken');
+    assert.ok(/harvested from Ibrahim/i.test(s.why), s.id + ' why must say where the bytes came from');
+    assert.notEqual(s.reach, 'up', s.id + ' a dir site is one this server cannot reach, so the weekly job must keep knocking');
+    if (s.allowPdf) {
+      assert.ok(s.allowPdf.length <= 80, s.id + ' the pdf budget is 80');
+      for (const p of s.allowPdf) assert.match(p, /^\^\/wp-content\/uploads\//, s.id + ' a pdf rule names one file: ' + p);
+    }
+  }
+  const nbe = dirs.find(s => s.id === 'nbe');
+  assert.equal(nbe.allowPdf.length, 45, 'the 45 measured, readable, consumer-relevant NBE pdfs');
+  assert.ok(!dirs.find(s => s.id === 'ethiotelecom').allowPdf, 'ethio telecom publishes no pdf we read');
+  const mpesa = dirs.find(s => s.id === 'safaricom');
+  assert.equal(mpesa.host, 'm-pesa.safaricom.et', 'M-PESA is not on www.safaricom.et');
+  assert.equal(mpesa.slugPrefix + '-' + mpesa.tariffDoc.slug, 'mpesa-tariff', 'the captured fee table is one document');
+  assert.equal(mpesa.tariffDoc.section, 'fees');
+});
+
+test('every Amharic or query-string path of a harvested site is named by hand', () => {
+  for (const s of dirs) {
+    const slugs = Object.values(s.pathSlugs || {});
+    if (!slugs.length) continue;
+    for (const [p, slug] of Object.entries(s.pathSlugs)) {
+      assert.ok(p.startsWith('/'), s.id + ' pathSlugs key must be a path: ' + p);
+      assert.match(slug, /^[a-z0-9-]{3,60}$/, s.id + ' pathSlugs value must be a readable ascii slug: ' + slug);
+    }
+    assert.equal(new Set(slugs).size, slugs.length, s.id + ': two pages cannot share a slug');
+  }
+  const et = dirs.find(s => s.id === 'ethiotelecom');
+  assert.ok(et.pathSlugs['/telebirr/telebirr-pricing?lang=am'], 'the Amharic tariff page is named');
+  assert.ok((et.langOverrides || []).some(o => /lang=am/.test(o.match)), 'this site carries its language in the query');
+  const nbe = dirs.find(s => s.id === 'nbe');
+  assert.equal(nbe.pathSlugs['/am'], 'am-home', 'the slug rule drops a two-letter locale and would leave /am nameless');
 });
 
 test('this pack informs: no account, login, transaction or application-form path is ever allowed', () => {
   const forbidden = ['/login', '/signin', '/sign-in', '/register', '/account/open', '/onlinebanking',
     '/apply', '/application-form', '/transfer', '/payment', '/checkout', '/my-account'];
-  for (const s of fetched) {
+  for (const s of selected) {
     const probes = forbidden.concat(s.probePaths || []);
     const allow = s.allow.map(p => new RegExp(p)), deny = s.deny.map(p => new RegExp(p));
     for (const p of probes) {
@@ -90,15 +140,19 @@ test('the daily exchange-rate post stream is dropped up front, on every site tha
   }
 });
 
-test('every manual site says, in its own words, what was measured and what it costs us', () => {
-  assert.ok(manual.length >= 7, 'at least seven sources are out of reach today');
-  for (const s of manual) {
+test('every source we cannot reach says, in its own words, what was measured and what it costs us', () => {
+  assert.ok(manual.length >= 5, 'at least five sources are still out of reach today');
+  for (const s of manual.concat(dirs)) {
     assert.ok(String(s.why || '').length > 120, s.id + ' needs a measured reason, not a shrug');
     assert.ok(/2026-09-16/.test(s.why), s.id + ' reason must name the day it was measured');
     assert.ok(String(s.costsUs || '').length > 20, s.id + ' must say what the pack cannot answer without it');
   }
-  for (const id of ['nbe', 'ethiotelecom', 'safaricom', 'awash', 'abyssinia', 'edif', 'fis'])
+  for (const id of ['awash', 'abyssinia', 'hibret', 'edif', 'fis'])
     assert.ok(manual.some(s => s.id === id), 'missing manual entry: ' + id);
+  // nbe, ethiotelecom and safaricom moved from manual to dir on 2026-09-17: still unreachable from this
+  // server, no longer absent from the pack.
+  for (const id of ['nbe', 'ethiotelecom', 'safaricom'])
+    assert.ok(dirs.some(s => s.id === id), 'missing harvested entry: ' + id);
 });
 
 test('a host that is not the bank is flagged so nobody turns fetching on later', () => {
