@@ -3,6 +3,8 @@
 **Date:** 2026-09-17 · **Task:** 15a, the follow-up §10.1 of `docs/superpowers/reports/2026-09-16-banking-knowledge-pack-report.md` asked for.
 **What it does:** the National Bank of Ethiopia, telebirr and M-PESA — the three sources the pack was missing, and the ones §2 called *"the hole to say out loud"* — are now curated documents in `knowledge/banking/`, built from bytes fetched by hand on a machine where those hosts answer.
 
+**Where the numbers come from.** Every figure below is quoted from a log, a result file or a document read on disk. The logs this report leans on — the import run, the two Amharic-header runs, the ingest loop, the benchmark run, the live checks and the full test suite — were copied out of `/tmp` before it was cleared and kept at **`/root/bini-eval/banking-manual/`**, along with `nbe.pdftext.tsv` (the pdftotext measurement of all 105 candidate PDFs) and `nbe.pdfchosen.tsv` (the 45 that were taken). The benchmark JSON stays in `/root/bini-eval/`.
+
 > **Read §7 first.** One gate did not hold. The travel pack's retrieval benchmark fell from 86.7 % to 85.0 %, by exactly one question, and two `npm test` assertions that pin the banking benchmark's floor now fail. Neither threshold was moved to make a run pass. §7 says which questions, what outranked them, and why the honest reading is a stale gold set rather than a worse retriever — and §9 hands both to Task 15b.
 
 ---
