@@ -45,8 +45,9 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 ## Developer and AI resources
 
 - [Use BinaSmart inside ChatGPT, Claude, Gemini or Perplexity](https://bina.et/ai): paste the MCP link, no login
-- [MCP server](https://bina.et/mcp): quote and request rides, search the directory, list films and events, read the guides, BinaPool corridors and cars filling, and search_knowledge over every service and practical Addis Ababa knowledge; documentation at that URL
-- [Knowledge search](https://bina.et/api/knowledge/search?q=Megenagna): JSON passages with source urls, same index Bini uses
+- [MCP server](https://bina.et/mcp): quote and request rides, search the directory, list films and events, read the guides, BinaPool corridors and cars filling, and search_knowledge over every service and practical Addis Ababa knowledge; documentation at that URL. No login. 20 tool calls an hour per address without a key (the connection handshake is free), shared with the knowledge search below
+- [Knowledge search](https://bina.et/api/knowledge/search?q=Megenagna): JSON passages with source urls, same index Bini uses. No login. 20 requests an hour per address without a key, shared with the MCP server above; over that you get HTTP 429 with a Retry-After
+- Want more than 20 an hour? Keys are free. Email info@gccdomestic.com saying what you are building and roughly how many requests a day you need, and send the key as `Authorization: Bearer <key>` (or `X-API-Key`). Terms: [bina.et/terms#api](https://bina.et/terms#api)
 - [Sitemap](https://bina.et/sitemap.xml): every public page
 
 ## Facts

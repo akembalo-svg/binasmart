@@ -1,11 +1,18 @@
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { createApp } from '../server.mjs';
+import apiGate from '../../api/gate.js';
 
 const guides = new Map([['fayda', { slug: 'fayda', title: 'Fayda', summary: 'ID', url: 'https://bina.et/fayda', text: '# Fayda\nHello' }]]);
 const db = { query: async () => ({ rows: [] }) };
 const api = { search: async () => ({ ok: true, results: [] }), quote: async () => ({}), request: async () => ({}), status: async () => ({}), cancel: async () => ({}), settings: async () => ({ ok: true }) };
-const app = createApp({ rideApi: api, db, guides, callLimit: { windowMs: 60_000, max: 3 } });
+// A meter on a throwaway directory: the real counters live in /root/storage/api/usage and a test run
+// must not spend the server's allowance or leave rows in its accounting.
+const gate = apiGate.makeGate({ dir: fs.mkdtempSync(path.join(os.tmpdir(), 'bina-mcp-gate-')), proc: 'mcp-test', proxyHeader: 'x-real-ip', anonPerHour: 1000 });
+const app = createApp({ rideApi: api, db, guides, callLimit: { windowMs: 60_000, max: 3 }, gate });
 const srv = app.listen(0, '127.0.0.1');
 await new Promise(r => srv.once('listening', r));
 const url = `http://127.0.0.1:${srv.address().port}/mcp`;
@@ -36,15 +43,19 @@ test('initialize + tools/list exposes exactly the 13 tools with annotations', as
   assert.equal(list.result.tools.find(t => t.name === 'cancel_ride').annotations.destructiveHint, true);
 });
 
+// The caller is the address nginx saw, NOT Mcp-Session-Id: that header is chosen by the client, so
+// keying the limit on it meant a new id per call bypassed it entirely.
 test('tools/call runs a tool; per-caller limit returns a tool error after max calls', async () => {
-  const h = { 'mcp-session-id': 'sess-A' };
+  const h = { 'x-real-ip': '41.86.1.1' };
   const r1 = await rpc('tools/call', { name: 'get_ethiopia_guide', arguments: { slug: 'fayda' } }, h);
   assert.match(r1.result.content[0].text, /"title": "Fayda"/);
   await rpc('tools/call', { name: 'get_ethiopia_guide', arguments: {} }, h);
   await rpc('tools/call', { name: 'get_ethiopia_guide', arguments: {} }, h);
   const r4 = await rpc('tools/call', { name: 'get_ethiopia_guide', arguments: {} }, h);
   assert.equal(r4.result.isError, true); assert.match(r4.result.content[0].text, /slow down/i);
-  const other = await rpc('tools/call', { name: 'get_ethiopia_guide', arguments: {} }, { 'mcp-session-id': 'sess-B' });
+  const renamed = await rpc('tools/call', { name: 'get_ethiopia_guide', arguments: {} }, { 'x-real-ip': '41.86.1.1', 'mcp-session-id': 'a-brand-new-session' });
+  assert.equal(renamed.result.isError, true, 'inventing a new session id must not buy a fresh allowance');
+  const other = await rpc('tools/call', { name: 'get_ethiopia_guide', arguments: {} }, { 'x-real-ip': '102.22.3.4' });
   assert.notEqual(other.result.isError, true, 'independent caller unaffected');
 });
 

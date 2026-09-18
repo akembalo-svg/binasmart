@@ -47,6 +47,14 @@ ops/backups/
 # the tuned instructions are not. Backed up to /root/storage/binasmart-private/prompts/
 prompts/
 
+# Anything key-shaped. The API keys for the public knowledge endpoints live OUTSIDE this repo, in
+# /root/storage/api/keys.json (mode 600), and only ever as a sha256 of the key and the pepper. These
+# patterns are the belt to that braces: a keys.json or a usage directory must never land here.
+keys.json
+api/keys.json
+ops/api/keys.json
+usage/
+
 # Planetiler download scratch (1.5 GB). The tile rebuild uses pmtiles extract, not planetiler —
 # see ops/map/rebuild-tiles.sh. Left here once by an abandoned build; never commit it.
 data/

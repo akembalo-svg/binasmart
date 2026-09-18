@@ -7,10 +7,17 @@ import express from 'express';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { makeLimiter } from './lib/limiter.mjs';
+import apiGate from '../api/gate.js';
+import apiKeystore from '../api/keystore.js';
+import { envValue } from './lib/env.mjs';
 import { registerRideTools, toolError } from './tools/ride.mjs';
 import { registerDirectoryTools } from './tools/directory.mjs';
 import { registerGuideTools, loadGuides } from './tools/guides.mjs';
 import { registerKnowledgeTools } from './tools/knowledge.mjs';
+
+const { makeGate } = apiGate;
+const { makeKeystore } = apiKeystore;
+const API_KEY_PEPPER = envValue('API_KEY_PEPPER');
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const VERSION = JSON.parse(fs.readFileSync(path.join(here, 'package.json'), 'utf8')).version;
@@ -46,7 +53,13 @@ export function buildServer({ rideApi, db, guides, callerKey, callsRL, bookRL })
   return server;
 }
 
-export function createApp({ rideApi, db, guides, callLimit = { windowMs: 60_000, max: 30 }, bookLimit = { windowMs: 3_600_000, max: 10 } }) {
+export function createApp({ rideApi, db, guides, callLimit = { windowMs: 60_000, max: 30 }, bookLimit = { windowMs: 3_600_000, max: 10 },
+  // The meter (api/gate.js), shared with binasmart-api through /root/storage/api/usage: ONE anonymous
+  // allowance across bina.et/mcp and bina.et/api/knowledge/search, because they are two doors onto the
+  // same 23,463 chunks. Injectable so a test never writes to the real counter directory.
+  gate = makeGate({ proc: 'mcp', proxyHeader: 'x-real-ip', salt: API_KEY_PEPPER,
+    keystore: makeKeystore({ pepper: API_KEY_PEPPER }),
+    anonPerHour: Number(envValue('API_ANON_PER_HOUR') || 20) }) }) {
   const callsRL = makeLimiter(callLimit.windowMs, callLimit.max);
   const bookRL = makeLimiter(bookLimit.windowMs, bookLimit.max);
   const app = express();
@@ -55,14 +68,28 @@ export function createApp({ rideApi, db, guides, callLimit = { windowMs: 60_000,
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Mcp-Session-Id, Mcp-Protocol-Version, Authorization');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Mcp-Session-Id, Mcp-Protocol-Version, Authorization, X-API-Key');
     res.setHeader('Access-Control-Expose-Headers', 'Mcp-Session-Id');
     if (req.method === 'OPTIONS') return res.sendStatus(204);
     next();
   });
 
   app.post('/mcp', async (req, res) => {
-    const callerKey = req.headers['mcp-session-id'] || req.headers['x-real-ip'] || req.ip || 'anon';
+    // The handshake - initialize, the notifications that follow it, ping - is recorded but not charged.
+    // It costs a harvester nothing, and charging it would spend a fifth of an honest assistant's hourly
+    // allowance before the person has asked anything.
+    const method = String((req.body && req.body.method) || '');
+    const free = method === 'initialize' || method === 'ping' || method.startsWith('notifications/');
+    const d = gate.check({ headers: req.headers, ip: req.ip, endpoint: free ? 'mcp:' + (method || 'unknown') : 'mcp', charge: !free });
+    if (!d.allowed) {
+      res.setHeader('Retry-After', String(d.retryAfter));
+      return res.status(d.status).json(d.body);
+    }
+    // Who is being counted: the API key if there is one, otherwise the address nginx saw. It used to be
+    // Mcp-Session-Id first - a value the CLIENT invents - which made the 30-calls-a-minute limit below an
+    // honour system: a new session id per call and it never fired. The session id keeps its own job,
+    // MCP's session semantics, and no longer decides anything about rate limiting.
+    const callerKey = d.caller;
     try {
       const server = buildServer({ rideApi, db, guides, callerKey, callsRL, bookRL });
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });

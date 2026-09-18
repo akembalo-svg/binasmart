@@ -27,6 +27,8 @@ ol li b{color:var(--ink)}
 .mut{color:var(--mut);font-size:14px;margin-top:16px}
 footer{max-width:820px;margin:0 auto;padding:18px;color:var(--mut);font-size:13px;display:flex;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line)}
 footer a{color:var(--mut);font-weight:700}
+.card h2{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.2px;margin-bottom:10px}
+.card code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:1px 5px}
 </style>
 <link rel="stylesheet" href="/static/site-v3.css?v=5">
 <meta name="theme-color" content="#009688"></head>
@@ -51,6 +53,18 @@ footer a{color:var(--mut);font-weight:700}
 <li><b>Contact.</b> <a href="/support">bina.et/support</a> · WhatsApp <a href="https://wa.me/251911244344">+251 911 244 344</a>.</li>
 </ol>
 <p class="mut">We may update these terms; the date above changes when we do.</p>
+</div>
+
+<div class="card" id="api">
+<h2>API</h2>
+<ol>
+<li><b>What is open.</b> <a href="/api/knowledge/search?q=Megenagna">bina.et/api/knowledge/search</a> and the MCP server at <a href="/mcp">bina.et/mcp</a> are public and need no login. They are meant to be used, including by AI assistants answering someone&rsquo;s question.</li>
+<li><b>Limits.</b> Without a key: 20 requests an hour per address, shared between the two. Over that you get HTTP 429 and a <code>Retry-After</code> telling you when to come back. Keys are free and have their own higher limits &mdash; email <a href="mailto:info@gccdomestic.com">info@gccdomestic.com</a> saying what you are building and roughly how many requests a day you need. Send a key as <code>Authorization: Bearer &lt;key&gt;</code> or <code>X-API-Key</code>, and keep it secret; requests made with your key are your responsibility.</li>
+<li><b>Acceptable use.</b> Answer questions, build something, try things out. Do not copy the index wholesale or rebuild it elsewhere, do not run more than one identity to get around the limit, and do not use it to mislead people about what Ethiopian law or a government office requires.</li>
+<li><b>Attribution.</b> If you show an answer that came from here, say it came from BinaSmart and keep the <code>source_url</code> we return with it. The sources are public documents; how they are gathered, checked and indexed is our work.</li>
+<li><b>No warranty.</b> The data is provided as it is. We keep it current and we say where every passage came from, but official requirements change and we do not promise the API is accurate, complete or available. Check anything that matters with the office concerned. We are not liable for what is done with an answer.</li>
+<li><b>We may revoke a key.</b> Or change these limits, or withdraw the endpoints, at any time and without notice &mdash; usually because a key is being used to harvest rather than to answer. If your key stops working and you think that is wrong, write to us.</li>
+</ol>
 </div>
 </main>
 <footer><a href="/">BinaSmart</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/support">Support</a><span>© 2026 BinaSmart · Addis Ababa</span></footer>

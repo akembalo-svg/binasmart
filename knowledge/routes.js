@@ -1,10 +1,14 @@
 'use strict';
-// HTTP surface of the knowledge index: public search (rate-limited, never returns the internal skill
-// chunks to the public), health, and owner-only reload / reindex.
-module.exports = function knowledgeRoutes(fastify, { knowledge, OWNER_KEY }) {
-  const hits = new Map();
-  const rl = (ip, max = 60) => { const now = Date.now(); const a = (hits.get(ip) || []).filter(t => now - t < 60000); if (a.length >= max) return false; a.push(now); hits.set(ip, a); if (hits.size > 5000) hits.clear(); return true; };
-  const ip = req => String(req.headers['x-real-ip'] || req.ip);
+// HTTP surface of the knowledge index: public search (metered, never returns the internal skill chunks
+// to the public), health, and owner-only reload / reindex.
+//
+// The meter is api/gate.js and is shared with the MCP server: 20 requests an hour per address across
+// both doors, a key's own quota for anyone who asks for one, loopback exempt. It replaced a 60/minute
+// counter that lived in a Map in this process - binasmart-api had restarted 115 times in five days, so
+// that counter was empty most of the time it mattered.
+const { makeGate } = require('../api/gate');
+
+module.exports = function knowledgeRoutes(fastify, { knowledge, OWNER_KEY, gate = makeGate({ proc: 'api', proxyHeader: 'x-forwarded-for' }) }) {
   // One resolution of the key, used by the gate below and by the public/internal decision in search.
   // Header first: a query string is written to the access log and the address bar. The parameter
   // stays because some callers can only pass one.
@@ -12,7 +16,16 @@ module.exports = function knowledgeRoutes(fastify, { knowledge, OWNER_KEY }) {
   const owner = (req, reply) => { if (keyOf(req) !== OWNER_KEY) { reply.code(401).send({ ok: false, error: 'unauthorized' }); return false; } return true; };
 
   fastify.get('/api/knowledge/search', async (req, reply) => {
-    if (!rl(ip(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
+    // The owner key opens the internal view of the index below; it also stands in for an API key here,
+    // so the owner's own tooling is never metered as a stranger.
+    const d = keyOf(req) === OWNER_KEY
+      ? { allowed: true }
+      : gate.check({ headers: req.headers, ip: req.ip, endpoint: 'knowledge_search' });
+    if (!d.allowed) {
+      reply.header('Retry-After', String(d.retryAfter));
+      reply.header('Cache-Control', 'no-store');
+      return reply.code(d.status).send(d.body);
+    }
     const q = String(req.query.q || '').slice(0, 500);
     if (!q.trim()) return reply.code(400).send({ ok: false, error: 'q required' });
     const k = Math.max(1, Math.min(8, Number(req.query.k) || 4));
