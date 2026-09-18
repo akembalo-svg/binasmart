@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assistant dashboard — BinaSmart AI</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/icon-32.png">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=3">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#000;--bg2:#0a0a0a;--line:#1f1f1f;--line2:#2e2e2e;--txt:#ededed;--mut:#a1a1a1;--dim:#6b6b6b;--em:#10b981;--em2:#34d399;--red:#f87171;--amber:#f5a524;--mono:'Geist Mono',ui-monospace,Menlo,Consolas,monospace}
+body{font-family:Geist,Inter,'Noto Sans Ethiopic',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--em2)}
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:5}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header .wrap{display:flex;align-items:center;gap:14px;height:60px}
+.brand{font-weight:700;color:#fff;text-decoration:none;display:flex;gap:8px;align-items:center}
+.brand i{width:22px;height:22px;border-radius:6px;background:conic-gradient(from 200deg,#10b981,#3b82f6,#f472b6,#f5a524,#10b981)}
+.who{margin-left:auto;color:var(--mut);font-size:14px;display:flex;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 14px;border-radius:10px;border:1px solid var(--line2);background:#0d0d0d;color:#fff;font:600 14px Inter,sans-serif;cursor:pointer}
+.btn:hover{border-color:#555}
+.btn.p{background:#fff;color:#000;border-color:#fff}
+.btn.d{color:var(--red)}
+.btn:disabled{opacity:.5;cursor:default}
+h1{font-size:28px;letter-spacing:-.03em;color:#fff;margin:34px 0 4px}
+.sub{color:var(--mut)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(4,1fr);margin:24px 0}
+@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}}
+.kpi{border:1px solid var(--line2);border-radius:14px;padding:18px;background:var(--bg2)}
+.kpi b{display:block;font-size:28px;color:#fff;letter-spacing:-.02em}
+.kpi span{color:var(--mut);font-size:13px}
+.cols{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+@media(max-width:900px){.cols{grid-template-columns:1fr}}
+.card{border:1px solid var(--line2);border-radius:14px;background:var(--bg2);padding:20px;margin-bottom:16px}
+.card h2{font-size:17px;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h2 small{color:var(--dim);font-weight:500;font-size:13px}
+label{display:block;font-size:13px;color:var(--mut);margin:12px 0 6px}
+input,textarea,select{width:100%;background:#050505;border:1px solid var(--line2);border-radius:10px;color:#fff;padding:10px 12px;font:14px Inter,'Noto Sans Ethiopic',sans-serif}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:var(--em)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tabs{display:flex;gap:4px;margin-bottom:6px}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;color:var(--mut);padding:8px 10px;font:600 14px Inter,sans-serif;cursor:pointer}
+.tabs button.on{color:#fff;border-color:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line)}
+th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+td.q{max-width:420px}
+.tag{font:600 11px var(--mono);padding:2px 8px;border-radius:999px;border:1px solid}
+.ok{color:var(--em2);border-color:rgba(16,185,129,.4)}
+.no{color:var(--amber);border-color:rgba(245,165,36,.4)}
+pre{background:#050505;border:1px solid var(--line2);border-radius:10px;padding:12px;font:12.5px/1.6 var(--mono);white-space:pre-wrap;word-break:break-all;color:#d4d4d4}
+.chat{height:320px;overflow-y:auto;border:1px solid var(--line2);border-radius:10px;padding:12px;background:#050505;display:flex;flex-direction:column;gap:8px}
+.m{max-width:88%;padding:8px 11px;border-radius:12px;font-size:14px;white-space:pre-wrap}
+.m.u{align-self:flex-end;background:#10b981;color:#000}
+.m.a{align-self:flex-start;background:#161616;border:1px solid var(--line2)}
+.m small{display:block;color:var(--dim);margin-top:4px;font-size:12px}
+.msg{margin-top:10px;font-size:14px;min-height:20px}
+.msg.e{color:var(--red)}.msg.s{color:var(--em2)}
+#login{max-width:440px;margin:90px auto;text-align:center}
+#login p{color:var(--mut);margin:8px 0 22px}
+.hide{display:none!important}
+.empty{color:var(--dim);font-size:14px;padding:10px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/ai"><i></i>BinaSmart AI</a>
+  <div class="who"><span id="wsName"></span><button class="btn hide" id="logout" type="button">Sign out</button></div>
+</div></header>
+
+<div class="wrap">
+  <section id="login">
+    <h1>Assistant dashboard</h1>
+    <p>Sign in with your company's secret key (starts with <code>bsk_</code>).<br><span style="font-size:.9em">የድርጅትዎን ሚስጥራዊ ቁልፍ ያስገቡ።</span></p>
+    <input id="key" type="password" placeholder="bsk_…" autocomplete="off">
+    <div style="margin-top:12px"><button class="btn p" id="go" type="button" style="width:100%">Sign in</button></div>
+    <div class="msg e" id="loginMsg"></div>
+    <p style="margin-top:28px;font-size:13px">No key yet? <a href="https://t.me/Bina_smart" rel="noopener">Ask on Telegram</a></p>
+  </section>
+
+  <section id="app" class="hide">
+    <h1 id="title">Dashboard</h1>
+    <div class="sub" id="plan"></div>
+    <div class="grid">
+      <div class="kpi"><b id="kToday">0</b><span>questions today</span></div>
+      <div class="kpi"><b id="kTotal">0</b><span>questions · 30 days</span></div>
+      <div class="kpi"><b id="kMiss">0</b><span>not answered · 30 days</span></div>
+      <div class="kpi"><b id="kDocs">0</b><span>documents · <span id="kChunks">0</span> passages</span></div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="card">
+          <h2>Teach your assistant <small>text, website page or PDF</small></h2>
+          <div class="tabs"><button class="on" data-k="text" type="button">Text</button><button data-k="url" type="button">Website page</button><button data-k="pdf" type="button">PDF</button></div>
+          <label>Title</label><input id="dTitle" placeholder="e.g. Savings account terms">
+          <div data-p="text"><label>Text</label><textarea id="dText" placeholder="Paste FAQs, product terms, fees, branch hours…"></textarea></div>
+          <div data-p="url" class="hide"><label>Page address</label><input id="dUrl" placeholder="https://yourcompany.com/products"></div>
+          <div data-p="pdf" class="hide"><label>PDF file (max 10 MB)</label><input id="dPdf" type="file" accept="application/pdf"></div>
+          <div class="row" style="margin-top:14px"><button class="btn p" id="upload" type="button">Add to knowledge</button></div>
+          <div class="msg" id="upMsg"></div>
+        </div>
+
+        <div class="card">
+          <h2>Documents</h2>
+          <table><thead><tr><th>Title</th><th>Type</th><th>Size</th><th></th></tr></thead><tbody id="docs"></tbody></table>
+          <div class="empty hide" id="docsEmpty">No documents yet. Add your first one above.</div>
+        </div>
+
+        <div class="card">
+          <h2>Questions your customers asked</h2>
+          <table><thead><tr><th>Question</th><th>When</th><th>Status</th></tr></thead><tbody id="recent"></tbody></table>
+          <div class="empty hide" id="recentEmpty">No questions yet.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h2>Try it</h2>
+          <div class="chat" id="chat"></div>
+          <div class="row" style="margin-top:10px"><input id="ask" placeholder="Ask your assistant…"><button class="btn p" id="send" type="button">Send</button></div>
+        </div>
+
+        <div class="card">
+          <h2>Add to your website</h2>
+          <p class="sub" style="font-size:14px">Paste this before <code>&lt;/body&gt;</code>. It works only on the websites listed below.</p>
+          <pre id="snippet"></pre>
+          <div class="row" style="margin-top:8px"><button class="btn" id="copySnip" type="button">Copy</button></div>
+        </div>
+
+        <div class="card">
+          <h2>Settings</h2>
+          <label>Assistant name</label><input id="sName">
+          <label>Colour</label><input id="sColor" type="color" style="height:42px;padding:4px">
+          <label>Default language</label><select id="sLang"><option value="am">አማርኛ</option><option value="en">English</option><option value="om">Afaan Oromoo</option></select>
+          <label>Welcome message</label><input id="sWelcome" maxlength="300">
+          <label>About your company (the assistant reads this)</label><textarea id="sAbout" maxlength="1500"></textarea>
+          <label>Allowed websites (one per line)</label><textarea id="sOrigins" placeholder="https://yourcompany.com" style="min-height:70px"></textarea>
+          <div class="row" style="margin-top:14px"><button class="btn p" id="save" type="button">Save</button></div>
+          <div class="msg" id="saveMsg"></div>
+        </div>
+
+        <div class="card">
+          <h2>Server API</h2>
+          <pre>curl https://bina.et/api/ws/chat \
+  -H "Authorization: Bearer $BSK_KEY" \
+  -H "content-type: application/json" \
+  -d '{"message":"…","user":{"uid":"customer123"}}'</pre>
+          <p class="sub" style="font-size:13px;margin-top:10px">Keep your secret key on your server only. Lost or leaked? Rotate it — the old key stops working at once.</p>
+          <div class="row" style="margin-top:10px"><button class="btn d" id="rotate" type="button">Rotate secret key</button></div>
+          <div class="msg" id="rotMsg"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var KEY = null, kind = 'text', ws = null;
+  try { KEY = sessionStorage.getItem('bina_bsk'); } catch (e) {}
+
+  function api(path, opts) {
+    opts = opts || {};
+    opts.headers = Object.assign({ authorization: 'Bearer ' + KEY }, opts.body ? { 'content-type': 'application/json' } : {}, opts.headers || {});
+    return fetch(path, opts).then(function (r) { return r.json().then(function (d) { d._status = r.status; return d; }); });
+  }
+  function msg(el, text, cls) { el.textContent = text || ''; el.className = 'msg' + (cls ? ' ' + cls : ''); }
+  function cell(tr, text, cls) { var td = document.createElement('td'); if (cls) td.className = cls; td.textContent = text; tr.appendChild(td); return td; }
+  function when(d) { try { return new Date(d).toLocaleString(); } catch (e) { return ''; } }
+  function size(n) { return n > 1000 ? Math.round(n / 1000) + 'k chars' : n + ' chars'; }
+
+  function load() {
+    return api('/api/ws/me').then(function (d) {
+      if (!d.ok) throw new Error(d.error || 'failed');
+      ws = d.workspace; var s = d.stats;
+      $('login').classList.add('hide'); $('app').classList.remove('hide'); $('logout').classList.remove('hide');
+      $('wsName').textContent = ws.name; $('title').textContent = ws.name;
+      $('plan').textContent = 'Plan: ' + ws.plan + ' · ' + s.today + ' of ' + s.dailyLimit + ' questions used today';
+      $('kToday').textContent = s.today; $('kTotal').textContent = s.total; $('kMiss').textContent = s.unanswered;
+      $('kDocs').textContent = s.documents.length; $('kChunks').textContent = s.chunks;
+      var tb = $('docs'); tb.textContent = '';
+      s.documents.forEach(function (doc) {
+        var tr = document.createElement('tr');
+        cell(tr, doc.title); cell(tr, doc.kind); cell(tr, size(doc.chars));
+        var td = cell(tr, ''); var b = document.createElement('button'); b.className = 'btn d'; b.type = 'button'; b.textContent = 'Remove';
+        b.onclick = function () { if (!confirm('Remove "' + doc.title + '"?')) return; api('/api/ws/me/docs/' + encodeURIComponent(doc.id), { method: 'DELETE' }).then(load); };
+        td.appendChild(b); tb.appendChild(tr);
+      });
+      $('docsEmpty').classList.toggle('hide', s.documents.length > 0);
+      var rb = $('recent'); rb.textContent = '';
+      s.recent.forEach(function (q) {
+        var tr = document.createElement('tr'); cell(tr, q.question, 'q'); cell(tr, when(q.createdAt));
+        var td = cell(tr, ''); var t = document.createElement('span'); t.className = 'tag ' + (q.answered ? 'ok' : 'no'); t.textContent = q.answered ? 'answered' : 'no answer'; td.appendChild(t);
+        rb.appendChild(tr);
+      });
+      $('recentEmpty').classList.toggle('hide', s.recent.length > 0);
+      $('snippet').textContent = '<script src="https://bina.et/embed.js" data-key="' + ws.siteKey + '" defer><\/script>';
+      $('sName').value = ws.name; $('sColor').value = ws.color; $('sLang').value = ws.lang;
+      $('sWelcome').value = ws.welcome || ''; $('sAbout').value = ws.about || ''; $('sOrigins').value = (ws.origins || []).join('\n');
+    });
+  }
+
+  $('go').onclick = function () {
+    KEY = $('key').value.trim();
+    load().then(function () { try { sessionStorage.setItem('bina_bsk', KEY); } catch (e) {} })
+      .catch(function () { msg($('loginMsg'), 'That key was not accepted.', 'e'); });
+  };
+  $('key').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('go').click(); });
+  $('logout').onclick = function () { try { sessionStorage.removeItem('bina_bsk'); } catch (e) {} location.reload(); };
+
+  document.querySelectorAll('.tabs button').forEach(function (b) {
+    b.onclick = function () {
+      kind = b.getAttribute('data-k');
+      document.querySelectorAll('.tabs button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      document.querySelectorAll('[data-p]').forEach(function (p) { p.classList.toggle('hide', p.getAttribute('data-p') !== kind); });
+    };
+  });
+
+  $('upload').onclick = function () {
+    var b = $('upload'), body = { kind: kind, title: $('dTitle').value.trim() };
+    function send() {
+      b.disabled = true; msg($('upMsg'), 'Reading and learning… this can take a minute for long documents.');
+      api('/api/ws/me/docs', { method: 'POST', body: JSON.stringify(body) }).then(function (d) {
+        if (!d.ok) throw new Error(d.error);
+        msg($('upMsg'), 'Added "' + d.document.title + '" (' + d.document.chunks + ' passages).', 's');
+        $('dTitle').value = ''; $('dText').value = ''; $('dUrl').value = ''; $('dPdf').value = '';
+        return load();
+      }).catch(function (e) { msg($('upMsg'), 'Could not add: ' + e.message, 'e'); })
+        .then(function () { b.disabled = false; });
+    }
+    if (kind === 'text') { body.text = $('dText').value; send(); }
+    else if (kind === 'url') { body.url = $('dUrl').value.trim(); send(); }
+    else {
+      var f = $('dPdf').files[0];
+      if (!f) return msg($('upMsg'), 'Choose a PDF first.', 'e');
+      if (f.size > 10 * 1024 * 1024) return msg($('upMsg'), 'The PDF is larger than 10 MB.', 'e');
+      if (!body.title) body.title = f.name.replace(/\.pdf$/i, '');
+      var r = new FileReader();
+      r.onload = function () { body.data = String(r.result).split(',')[1]; send(); };
+      r.readAsDataURL(f);
+    }
+  };
+
+  function bubble(cls, text, sources, typed) {
+    var m = document.createElement('div'); m.className = 'm ' + cls; m.textContent = typed ? '' : text;
+    if (typed) {
+      var words = String(text).split(/(\s+)/), i = 0;
+      (function step() { var c = ''; for (var n = 0; n < 2 && i < words.length; n++, i++) c += words[i];
+        m.firstChild ? (m.firstChild.nodeValue += c) : m.appendChild(document.createTextNode(c));
+        $('chat').scrollTop = $('chat').scrollHeight; if (i < words.length) setTimeout(step, 28); })();
+    }
+    if (sources && sources.length) { var s = document.createElement('small'); s.textContent = 'From: ' + sources.map(function (x) { return x.title; }).join(' · '); m.appendChild(s); }
+    $('chat').appendChild(m); $('chat').scrollTop = $('chat').scrollHeight; return m;
+  }
+  $('send').onclick = function () {
+    var q = $('ask').value.trim(); if (!q) return;
+    $('ask').value = ''; bubble('u', q); var w = bubble('a', '…');
+    api('/api/ws/chat', { method: 'POST', body: JSON.stringify({ message: q }) }).then(function (d) {
+      w.remove(); bubble('a', d.reply || d.error || 'No answer', d.sources, true); load();
+    }).catch(function () { w.textContent = 'Error'; });
+  };
+  $('ask').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('send').click(); });
+
+  $('save').onclick = function () {
+    api('/api/ws/me', { method: 'POST', body: JSON.stringify({ name: $('sName').value, color: $('sColor').value, lang: $('sLang').value,
+      welcome: $('sWelcome').value, about: $('sAbout').value, origins: $('sOrigins').value.split(/\s+/).filter(Boolean) }) })
+      .then(function (d) { if (!d.ok) throw new Error(d.error); msg($('saveMsg'), 'Saved.', 's'); return load(); })
+      .catch(function (e) { msg($('saveMsg'), 'Could not save: ' + e.message, 'e'); });
+  };
+  $('copySnip').onclick = function () { try { navigator.clipboard.writeText($('snippet').textContent); $('copySnip').textContent = 'Copied'; } catch (e) {} };
+  $('rotate').onclick = function () {
+    if (!confirm('Create a new secret key? The current key stops working immediately.')) return;
+    api('/api/ws/me/rotate', { method: 'POST', body: '{}' }).then(function (d) {
+      if (!d.ok) throw new Error(d.error);
+      KEY = d.secretKey; try { sessionStorage.setItem('bina_bsk', KEY); } catch (e) {}
+      msg($('rotMsg'), 'New key (copy it now, it is shown only once): ' + d.secretKey, 's');
+    }).catch(function (e) { msg($('rotMsg'), e.message, 'e'); });
+  };
+
+  if (KEY) load().catch(function () { KEY = null; try { sessionStorage.removeItem('bina_bsk'); } catch (e) {} });
+})();
+</script>
+</body>
+</html>

@@ -1651,3 +1651,63 @@ model OwnerAction {
   @@index([status, expiresAt])
   @@index([buildingId, bulk, confirmedAt])
 }
+
+// ===== Business assistants (workspaces/) — 2026-09-17 =====
+// One Workspace per client company. Its documents and their chunks live in these tables only, never in
+// KnowledgeChunk: the public index (Bini, the agents, MCP search) loads KnowledgeChunk whole, so a client's
+// private text there would be served to everyone. Chunk vectors are BGE-M3 (bina-embed, local), so a client's
+// documents are never sent to an outside embedding service. Keys are stored as sha256 hashes only.
+model Workspace {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  color       String   @default("#059669")
+  lang        String   @default("am")          // default reply language: am | en | om
+  welcome     String?                          // first message in the chat bubble
+  about       String?                          // one paragraph the assistant is told about the company
+  secretHash  String   @unique                 // sha256 of the server key (bsk_…), for the API and the dashboard
+  siteKey     String   @unique                 // public key (bpk_…) for the website bubble; useless off the allowed origins
+  origins     String[] @default([])            // allowed website origins for siteKey, e.g. https://example.com
+  dailyLimit  Int      @default(100)           // questions per day (free plan)
+  plan        String   @default("free")        // free | business | enterprise
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model WorkspaceDoc {
+  id          String   @id @default(cuid())
+  workspaceId String
+  title       String
+  url         String?
+  kind        String   // text | url | pdf
+  lang        String   @default("en")
+  chars       Int      @default(0)
+  createdAt   DateTime @default(now())
+  @@index([workspaceId])
+}
+
+model WorkspaceChunk {
+  id          String   @id @default(cuid())
+  workspaceId String
+  docId       String
+  ord         Int
+  heading     String?
+  text        String
+  vec         Bytes?   // BGE-M3, 1024 float32, L2-normalised
+  createdAt   DateTime @default(now())
+  @@index([workspaceId])
+  @@index([docId])
+}
+
+model WorkspaceQuestion {
+  id          String   @id @default(cuid())
+  workspaceId String
+  channel     String   // api | site
+  lang        String   @default("en")
+  question    String
+  answered    Boolean  @default(true)
+  ms          Int      @default(0)
+  createdAt   DateTime @default(now())
+  @@index([workspaceId, createdAt])
+}

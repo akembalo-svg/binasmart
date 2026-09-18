@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Document check · የሰነድ ማረጋገጫ — BinaSmart AI</title>
+<meta name="description" content="Check an Ethiopian document against official sources: the law it cites, the fees it quotes, the office that issued it and the links it carries.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/icon-32.png">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=3">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#000;--bg2:#0a0a0a;--line:#1f1f1f;--line2:#2e2e2e;--txt:#ededed;--mut:#a1a1a1;--dim:#6b6b6b;--em:#10b981;--em2:#34d399;--amber:#f5a524;--red:#f87171;--mono:'Geist Mono',ui-monospace,Menlo,monospace}
+body{font-family:Geist,Inter,'Noto Sans Ethiopic',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.55}
+a{color:var(--em2)}
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:5}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+header .wrap{display:flex;align-items:center;gap:12px;height:60px}
+.brand{font-weight:700;color:#fff;text-decoration:none;display:flex;gap:8px;align-items:center}
+.brand i{width:22px;height:22px;border-radius:6px;background:conic-gradient(from 200deg,#10b981,#3b82f6,#f472b6,#f5a524,#10b981)}
+.tag{margin-left:auto;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid rgba(245,165,36,.4);color:var(--amber)}
+h1{font-size:30px;letter-spacing:-.03em;color:#fff;margin:34px 0 6px}
+h1 span{display:block;font-size:20px;color:var(--em2);font-family:'Noto Sans Ethiopic',sans-serif;margin-top:6px}
+.lead{color:var(--mut);max-width:70ch}
+.card{border:1px solid var(--line2);border-radius:14px;background:var(--bg2);padding:20px;margin:18px 0}
+textarea{width:100%;min-height:190px;background:#050505;border:1px solid var(--line2);border-radius:10px;color:#fff;padding:12px;font:14px Geist,Inter,'Noto Sans Ethiopic',sans-serif;resize:vertical}
+textarea:focus{outline:none;border-color:var(--em)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+input[type=password],input[type=file]{background:#050505;border:1px solid var(--line2);border-radius:10px;color:#fff;padding:10px 12px;font:14px Geist,sans-serif}
+.btn{height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--line2);background:#0d0d0d;color:#fff;font:600 14px Geist,sans-serif;cursor:pointer}
+.btn.p{background:#fff;color:#000;border-color:#fff}
+.btn:disabled{opacity:.5;cursor:default}
+.verdict{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:700;color:#fff;margin-bottom:6px}
+.pill{font:600 12px var(--mono);padding:3px 10px;border-radius:999px;border:1px solid}
+.s-ok{color:var(--em2);border-color:rgba(16,185,129,.4)}
+.s-warning{color:var(--red);border-color:rgba(248,113,113,.45)}
+.s-unknown{color:var(--amber);border-color:rgba(245,165,36,.4)}
+.f{border-top:1px solid var(--line);padding:14px 0;display:grid;grid-template-columns:110px 1fr;gap:14px}
+.f:first-of-type{border-top:0}
+.f .k{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.f b{color:#fff;font-size:15px;display:block;margin-bottom:4px}
+.f p{color:var(--mut);font-size:14px}
+.f q{display:block;margin-top:8px;padding:10px 12px;border-left:2px solid var(--line2);background:#060606;border-radius:0 8px 8px 0;color:#cfcfcf;font-size:13.5px;quotes:none}
+.f q a{display:block;margin-top:6px;font-size:12.5px}
+.note{color:var(--dim);font-size:13px;margin-top:14px}
+.msg{margin-top:10px;font-size:14px}
+.msg.e{color:var(--red)}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0;color:var(--dim);font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="/ai"><i></i>BinaSmart AI</a><span class="tag">Pilot · version 1</span></div></header>
+
+<div class="wrap">
+  <h1>Document check<span>የሰነድ ማረጋገጫ</span></h1>
+  <p class="lead">Paste the text of a licence, certificate or official letter — or photograph it with your phone, or upload its PDF. We check what the document
+    <em>claims</em> — the law it stands on, the fees it quotes, the office that issued it, its dates and links — against our
+    library of official Ethiopian sources.
+    <span style="display:block;margin-top:8px;font-family:'Noto Sans Ethiopic',sans-serif;color:var(--dim)">የሰነዱን ጽሑፍ ይለጥፉ፣ በስልክዎ ፎቶ ያንሱ ወይም PDF ይስቀሉ። ሰነዱ የጠቀሰው አዋጅ፣ ክፍያ፣ ሰጪ ተቋምና ቀን ከኦፊሴላዊ ምንጮች ጋር ይመሳከራል።</span></p>
+
+  <div class="card">
+    <textarea id="text" placeholder="Paste the document text here…&#10;ለምሳሌ፦ በአዋጅ ቁጥር 980/2016 መሠረት የተሰጠ የንግድ ፈቃድ… ክፍያ ብር 1,500…"></textarea>
+    <div class="row">
+      <input id="pdf" type="file" accept="application/pdf,image/png,image/jpeg,image/webp,image/*" capture="environment">
+      <input id="key" type="password" placeholder="Your key (bsk_… )" autocomplete="off" style="flex:1;min-width:200px">
+      <button class="btn p" id="go" type="button">Check document</button>
+    </div>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div class="card" id="out" style="display:none"></div>
+
+  <p class="note">⚠️ This is a consistency check, not proof. It cannot see paper, seals or signatures, and a forged document that
+    quotes the right law will pass. Confirm authenticity with the office that issued the document.</p>
+</div>
+<footer><div class="wrap">© BinaSmart · <a href="/ai">bina.et/ai</a></div></footer>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function render(r) {
+    var out = $('out'); out.textContent = ''; out.style.display = 'block';
+    var head = el('div', 'verdict');
+    head.appendChild(el('span', null, r.verdict));
+    head.appendChild(el('span', 'pill s-ok', r.counts.ok + ' ok'));
+    head.appendChild(el('span', 'pill s-warning', r.counts.warning + ' warning'));
+    head.appendChild(el('span', 'pill s-unknown', r.counts.unknown + ' unconfirmed'));
+    out.appendChild(head);
+    r.findings.forEach(function (f) {
+      var row = el('div', 'f');
+      row.appendChild(el('div', 'k', f.kind));
+      var right = el('div');
+      right.appendChild(el('b', null, f.claim));
+      var p = el('p'); p.appendChild(el('span', 'pill s-' + f.status, f.status)); p.appendChild(document.createTextNode(' ' + f.note));
+      right.appendChild(p);
+      if (f.source) {
+        var q = el('q', null, f.source.passage || '');
+        if (f.source.url) { var a = el('a', null, f.source.title || f.source.url); a.href = f.source.url; a.target = '_blank'; a.rel = 'noopener'; q.appendChild(a); }
+        else if (f.source.title) q.appendChild(el('a', null, f.source.title));
+        right.appendChild(q);
+      }
+      row.appendChild(right); out.appendChild(row);
+    });
+    out.appendChild(el('p', 'note', r.disclaimer));
+  }
+
+  $('go').onclick = function () {
+    var key = $('key').value.trim(), text = $('text').value.trim(), file = $('pdf').files[0];
+    if (!key) return ($('msg').textContent = 'Your key is needed.', $('msg').className = 'msg e');
+    if (!text && !file) return ($('msg').textContent = 'Paste the text, photograph the document, or choose a PDF.', $('msg').className = 'msg e');
+    $('go').disabled = true; $('msg').className = 'msg'; $('msg').textContent = file ? 'Reading the document… a photo takes a few seconds.' : 'Checking…';
+    function send(body) {
+      fetch('/api/verify', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + key }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (!d.ok) throw new Error(d.error || 'failed');
+          $('msg').textContent = d.read === 'photo' ? 'Read from the photo by OCR — check the text was read correctly.'
+            : (d.read === 'pdf-scan' ? 'This PDF is a scan; it was read by OCR.' : '');
+          render(d.result);
+        })
+        .catch(function (e) { $('msg').className = 'msg e'; $('msg').textContent = 'Could not check: ' + e.message; })
+        .then(function () { $('go').disabled = false; });
+    }
+    if (file) {
+      var fr = new FileReader();
+      fr.onload = function () { send({ kind: /pdf$/i.test(file.type) ? 'pdf' : 'image', data: String(fr.result).split(',')[1], title: file.name }); };
+      fr.readAsDataURL(file);
+    } else send({ text: text });
+  };
+})();
+</script>
+</body>
+</html>
