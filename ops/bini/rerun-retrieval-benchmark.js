@@ -102,6 +102,59 @@ function knowledgeOptions(mode, { prisma, apiKey, fetchImpl = (...a) => fetch(..
   return o;
 }
 
+// TEST-ONLY partial local coverage (2026-09-18), for measuring the fallback cliff: a pack ingest leaves most of
+// its new chunks without a BGE-M3 vector (300 a run), and under a Gemini outage those chunks used to score as if
+// they matched nothing. To reproduce that state without touching the database:
+//   --hide-local-fraction 0.5 --seed 7 [--hide-local-source business]
+// hides the local vector of a seeded, deterministic half of the chunks (of one source, when named) in THIS
+// script's copy of the rows only. The DB is read, never written. Which chunk is hidden depends on the seed and
+// the chunk id alone, so a before and an after run hide exactly the same chunks.
+function hideLocalOptions(argv = process.argv) {
+  const i = argv.indexOf('--hide-local-fraction');
+  if (i === -1) return null;
+  const fraction = Number(argv[i + 1]);
+  if (!(fraction > 0 && fraction <= 1)) throw new Error('--hide-local-fraction takes a number in (0, 1]');
+  const j = argv.indexOf('--seed');
+  const seed = j === -1 ? 7 : Number(argv[j + 1]);
+  if (!Number.isInteger(seed)) throw new Error('--seed takes an integer');
+  const s = argv.indexOf('--hide-local-source');
+  const source = s === -1 ? '' : String(argv[s + 1] || '');
+  if (s !== -1 && !/^[a-z-]+$/.test(source)) throw new Error('--hide-local-source takes a source name');
+  // --hide-local-unit page hides whole documents (every chunk of a chosen page) rather than single chunks.
+  // That is the shape an ingest actually leaves: local vectors are filled in id order, 300 a run, so what is
+  // missing after a big ingest is the newest DOCUMENTS entirely, not a scatter of chunks across all of them.
+  const u = argv.indexOf('--hide-local-unit');
+  const unit = u === -1 ? 'chunk' : String(argv[u + 1] || '');
+  if (unit !== 'chunk' && unit !== 'page') throw new Error('--hide-local-unit takes chunk or page');
+  return unit === 'chunk' ? { fraction, seed, source } : { fraction, seed, source, unit };
+}
+function hiddenLocal(id, seed, fraction) {
+  const h = require('crypto').createHash('sha1').update(seed + ':' + String(id)).digest();
+  return h.readUInt32BE(0) / 0x100000000 < fraction;
+}
+// A prisma whose knowledgeChunk.findMany hands back rows with the chosen local vectors removed. Everything else is
+// the real client, unchanged. counts: { seen, hidden } of rows that had a local vector in the hidden scope.
+function hideLocalPrisma(prisma, opts, counts = { seen: 0, hidden: 0 }) {
+  if (!opts) return prisma;
+  const kc = prisma.knowledgeChunk;
+  const findMany = async args => {
+    const rows = await kc.findMany(args);
+    return rows.map(r => {
+      if (!r || !r.embeddingLocal || (opts.source && r.source !== opts.source)) return r;
+      counts.seen++;
+      if (!hiddenLocal(opts.unit === 'page' ? r.source + '/' + r.slug : r.id, opts.seed, opts.fraction)) return r;
+      counts.hidden++;
+      return { ...r, embeddingLocal: null };
+    });
+  };
+  const chunk = new Proxy(kc, { get: (t, p) => (p === 'findMany' ? findMany : (typeof t[p] === 'function' ? t[p].bind(t) : t[p])) });
+  return new Proxy(prisma, { get: (t, p) => (p === 'knowledgeChunk' ? chunk : (typeof t[p] === 'function' ? t[p].bind(t) : t[p])) });
+}
+function hideTag(tag, opts) {
+  if (!opts) return tag;
+  return tag + '-hide' + Math.round(opts.fraction * 100) + (opts.unit === 'page' ? 'pages' : '') + (opts.source ? '-' + opts.source : '') + '-seed' + opts.seed;
+}
+
 // retrieval-20260913-220955.json — UTC, to the second. With a tag: retrieval-gold-v2-20260914-101500.json.
 function resultName(at = new Date(), tag = '') {
   const s = at.toISOString();
@@ -186,16 +239,20 @@ async function main() {
   const goldRaw = readGold(goldFile);
   const prisma = new PrismaClient();
   const mode = forceFailMode();
-  const k = makeKnowledge(knowledgeOptions(mode, { prisma, apiKey: process.env.GEMINI_API_KEY }));
+  const hide = hideLocalOptions();
+  const hideCounts = { seen: 0, hidden: 0 };
+  const k = makeKnowledge(knowledgeOptions(mode, { prisma: hideLocalPrisma(prisma, hide, hideCounts), apiKey: process.env.GEMINI_API_KEY }));
   if (mode) console.log('TEST-ONLY: --force-embed-fail ' + mode + (mode === 'all' ? ' (Gemini query embed and bina-embed both fail: keyword-only)' : ' (Gemini query embed fails: BGE-M3 fallback)'));
   await k.load();
+  if (hide) console.log('TEST-ONLY: --hide-local-fraction ' + hide.fraction + ' --seed ' + hide.seed + (hide.source ? ' --hide-local-source ' + hide.source : '') + (hide.unit ? ' --hide-local-unit ' + hide.unit : '')
+    + ': local vectors hidden in this script\'s copy for ' + hideCounts.hidden + ' of ' + hideCounts.seen + ' chunks (the database is not touched)');
   const health = k.health();
   console.log('corpus: ' + health.chunks + ' chunks, ' + health.embedded + ' embedded, gemini=' + health.gemini
     + ', local vectors ' + health.embeddedLocal + (health.localFallback ? '' : ' (fallback off)'));
 
   console.log('bilingual query retrieval: ' + (bilingual.query ? 'ON (fusion ' + bilingual.fusion + (bilingual.en2am ? ', en2am ON' : '') + ')' : 'off'));
 
-  const tag = runTag(goldTag(goldFile), mode);
+  const tag = hideTag(runTag(goldTag(goldFile), mode), hide);
   const norm = normalizeGold(goldRaw);
   let gold = norm.questions;
   if (limit) gold = gold.slice(0, limit);
@@ -325,13 +382,14 @@ async function main() {
     bilingualOk: hs.bilingualOk, bilingualCached: hs.bilingualCached, bilingualSkipped: hs.bilingualSkipped, bilingualFused: hs.bilingualFused, bilingualRescued: hs.bilingualRescued };
   console.log('\n  query embed paths: ' + JSON.stringify(embedPaths));
   console.log('  search latency ms: ' + JSON.stringify(latency));
-  const f = writeResult(OUT, { at: at.toISOString(), gold: goldFile, chunks: health.chunks, limit: limit || null, ...(mode ? { forceEmbedFail: mode } : {}), bilingual, embedPaths, latency, table, rows }, at, { latest: !limit && !mode, tag });
-  console.log('\n  written: ' + f + (mode ? '  (forced-failure run: no latest file)' : limit ?'  (--limit run: ' + LATEST + ' left alone)' : '  (and ' + LATEST + ')'));
+  const f = writeResult(OUT, { at: at.toISOString(), gold: goldFile, chunks: health.chunks, limit: limit || null, ...(mode ? { forceEmbedFail: mode } : {}),
+    ...(hide ? { hideLocal: { ...hide, ...hideCounts } } : {}), bilingual, embedPaths, latency, table, rows }, at, { latest: !limit && !mode && !hide, tag });
+  console.log('\n  written: ' + f + (mode || hide ? '  (forced-failure or hidden-coverage run: no latest file)' : limit ?'  (--limit run: ' + LATEST + ' left alone)' : '  (and ' + LATEST + ')'));
   await prisma.$disconnect();
 }
 
 module.exports = { resultName, writeResult, goldPath, goldTag, readGold, latestName, normText, pagesContaining, GOLD, forceFailMode, runTag, knowledgeOptions,
-  normalizeGold, goldKeys, pageRank, searchOptionsFor };
+  normalizeGold, goldKeys, pageRank, searchOptionsFor, hideLocalOptions, hiddenLocal, hideLocalPrisma, hideTag };
 
 // Only when run as a script: requiring it (the tests do) must not open the DB or spend Gemini calls.
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
