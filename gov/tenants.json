@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "tenants": [
+    {
+      "id": "mols",
+      "institution": { "am": "የሥራና ክህሎት ሚኒስቴር", "en": "Ministry of Labour and Skills", "om": "Ministeera Hojii fi Ogummaa" },
+      "home": "https://mols.gov.et/",
+      "assistantName": { "am": "የሥራ መረጃ ረዳት", "en": "Labour information assistant", "om": "Gargaaraa Odeeffannoo Hojii" },
+      "role": { "am": "ከታተሙ ሰነዶች የሚመልስ · የሚኒስቴሩ አይደለም", "en": "Answers from published documents · not the Ministry", "om": "Galmee maxxanfame irraa deebisa · kan Ministeerichaa miti" },
+      "languages": ["am", "en"],
+      "sources": ["law", "health", "eservices", "business", "guide", "news"],
+      "prefer": [
+        "law:overseas-employment-proclamation-1389-2025*",
+        "law:labour-proclamation-1156-2019*",
+        "law:mols-overseas-employment-directive-2018-ec-draft*",
+        "law:foreign-work-permit-mols-directive-44-2013-fee-regulation-394-2016",
+        "law:private-employees-pension-1268-2022*",
+        "law:refugee-right-to-work-permit-1110-2019*",
+        "law:medical-certificate-for-local-job-1362-2024-labour-1156-2019",
+        "law:returnee-migrants-reintegration-support*",
+        "health:overseas-employment-medical-exam-1389-2025",
+        "business:mols-about",
+        "business:mols-am-about",
+        "eservices:ministry-of-labor-and-skills",
+        "eservices:private-organization-employees-social-security-agency",
+        "guide:lmis-labor-id-ethiopia",
+        "guide:coc-certificate-ethiopia",
+        "guide:living-working-in-ethiopia-guide",
+        "news:law-*"
+      ],
+      "exclude": ["business:mols-agencies*", "law:civil-servants-proclamation-1353-2025*"],
+      "refuse": { "agencyLookup": true, "personalRecords": true, "caseAdvice": true, "politics": true },
+      "agencyRegister": "https://mols.gov.et/agencies/",
+      "recordsGuide": "https://bina.et/lmis-labor-id-ethiopia",
+      "notes": [
+        "The documents whose names contain mols-overseas-employment-directive-2018-ec-draft are an UNSIGNED DRAFT and are NOT in force. Whenever you use one, say in the same sentence that it is an unsigned draft that is not in force.",
+        "Employment in private organisations is governed by Labour Proclamation No. 1156/2019. Federal civil servants are under a different proclamation, administered by the civil service commission. If a question is about civil servants, say that this assistant covers private employment and point to the civil service commission; never answer a private-sector question from the civil-service rules.",
+        "You never look up, list, name or confirm individual employment agencies, and you never give a phone number of an agency, a company or a person."
+      ],
+      "contacts": [
+        {
+          "id": "mols-main",
+          "tel": "+251116671792",
+          "label": { "am": "የሥራና ክህሎት ሚኒስቴር", "en": "Ministry of Labour and Skills", "om": "Ministeera Hojii fi Ogummaa" },
+          "doc": "law:foreign-work-permit-mols-directive-44-2013-fee-regulation-394-2016",
+          "fetched": "2026-09-17",
+          "approved": false
+        }
+      ],
+      "brand": { "color": "#1f5f8b", "label": { "am": "ጥያቄ አለዎት?", "en": "Ask a question", "om": "Gaaffii qabduu?" } },
+      "greeting": { "am": "ሰላም", "en": "Hello", "om": "Akkam" },
+      "intro": {
+        "am": "ስለ ውጭ አገር ሥራ ስምሪት፣ ስለ ሥራ ፈቃድና ስለ አሠሪና ሠራተኛ ሕግ ከታተሙ ሰነዶች እመልሳለሁ። የቢናስማርት ረዳት ነኝ እንጂ የሚኒስቴሩ አይደለሁም፤ ስህተት ልሠራ እችላለሁ፣ ስለዚህ ከእያንዳንዱ መልስ በታች ያለውን ምንጭ ይመልከቱ።",
+        "en": "I answer questions about working abroad, work permits and labour law from published documents. I am BinaSmart's assistant, not the Ministry's, and I can be wrong, so check the source under each answer.",
+        "om": "Waa'ee hojii biyya alaa, hayyama hojii fi seera hojjetaa fi hojjechiisaa galmee maxxanfaman irraa nan deebisa. Ani gargaaraa BinaSmart ti, kan Ministeerichaa miti; dogoggoruu nan danda'a, kanaaf madda deebii hunda jala jiru ilaalaa."
+      },
+      "placeholder": { "am": "ለምሳሌ፦ ለሥራ ወደ ሳውዲ ለመሄድ ምን ያስፈልገኛል?", "en": "e.g. What do I need to go to Saudi Arabia for work?", "om": "Fkn. Hojiif Saawudii deemuuf maaltu na barbaachisa?" },
+      "suggestions": {
+        "am": ["ለሥራ ወደ ውጭ አገር ለመሄድ ምን ማድረግ አለብኝ?", "የሕክምና ምርመራው ምንን ያካትታል፣ ወጪውንስ ማን ይሸፍናል?", "የውጭ አገር ዜጋ የሥራ ፈቃድ እንዴት ያገኛል፣ ክፍያውስ ስንት ነው?"],
+        "en": ["What do I need to do to go abroad for work?", "What does the medical examination cover, and who pays for it?", "How does a foreign national get a work permit, and what does it cost?"],
+        "om": ["Hojiif gara biyya alaa deemuuf maal gochuu qaba?", "Qorannoon fayyaa maal of keessaa qaba, baasii isaa eenyutu kaffala?", "Lammiin biyya alaa hayyama hojii akkamitti argata, kaffaltiin isaa meeqa?"]
+      },
+      "footer": {
+        "am": "ይህ ረዳት የሚሠራው በቢናስማርት እንጂ በሥራና ክህሎት ሚኒስቴር አይደለም። ከታተሙ ሰነዶች ይመልሳል፤ ስህተት ሊኖረው ይችላል። ጥያቄዎች በGoogle Gemini ይሠራሉ። ውይይቱ የሚቀመጠው በዚህ መሣሪያ ላይ ብቻ ነው።",
+        "en": "This assistant is run by BinaSmart, not by the Ministry of Labour and Skills. It answers from published documents and can be wrong. Questions are processed by Google's Gemini. The conversation is kept on this device only.",
+        "om": "Gargaaraan kun kan BinaSmart ti, kan Ministeera Hojii fi Ogummaa miti. Galmee maxxanfaman irraa deebisa; dogoggora qabaachuu danda'a. Gaaffileen Google Gemini'n hojjetamu. Mariin kun meeshaa kana qofa irratti kuufama."
+      },
+      "trialDays": 60,
+      "quotaPerDayTrial": 500,
+      "gate": { "safetyAll": true, "maxWrong": 2, "maxLeadWrong": 0, "minGood": 32, "minSourcedShare": 0.9, "maxAgeDays": 7 },
+      "pendingOwner": {
+        "Y1": "footer (the Gemini wording) is the recommended default until the owner answers",
+        "Y2": "trialDays 60 and quotaPerDayTrial 500 are the recommended default until the owner answers",
+        "Y4": "gate thresholds are the design default until the owner answers",
+        "Y5": "contacts: mols-main stays approved false (hidden) until the owner answers",
+        "Y8": "languages am and en only; om written but off until a speaker has read it"
+      },
+      "gold": "ops/gov/gold/mols.json"
+    }
+  ]
+}
