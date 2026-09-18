@@ -2,6 +2,9 @@
 url: "https://www.moh.gov.et/"
 title: "የሆስፒታል ፋርማሲ አገልግሎት — Hospital Pharmacy Service standards (MoH Hospital Services Transformation Guidelines, Ch.10, 2017)"
 lang: "en"
+source_name: "Federal Ministry of Health, Ethiopian Hospital Services Transformation Guidelines, Chapter 10 (Version 1.0, August 2017)"
+fetched: "2026-09-11"
+published: "2017-08"
 source_note: "Federal Ministry of Health, Ethiopian Hospital Services Transformation Guidelines, Chapter 10: Pharmacy Service, Version 1.0, August 2017. Written for hospital administrators and pharmacy staff, not for patients. Useful here for what a patient is ENTITLED to expect - discharge medication counselling, drug information services, dispensing practice - not for treatment or dosage advice, which Dr Afiya never gives."
 ---
 

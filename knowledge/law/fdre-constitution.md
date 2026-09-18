@@ -2,6 +2,9 @@
 url: "https://ethiopianembassy.be/wp-content/uploads/Constitution-of-the-FDRE.pdf"
 title: "Constitution of the Federal Democratic Republic of Ethiopia (Proclamation 1/1995)"
 lang: "en"
+source_name: "Federal Negarit Gazeta 1st Year No. 1 (Proclamation No. 1/1995), English column; PDF hosted at ethiopianembassy.be"
+fetched: "2026-09-10"
+published: "1995-08-21"
 source_note: "English column of the bilingual Federal Negarit Gazeta, 21 August 1995. The Amharic column of this PDF is set in a legacy font and extracts as unreadable Latin, so it is NOT included here - an Amharic copy with real Unicode text is still needed."
 ---
 

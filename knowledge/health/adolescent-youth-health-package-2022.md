@@ -2,6 +2,9 @@
 url: "http://www.moh.gov.et/"
 title: "Adolescent and Youth Health Standards, Implementation Guideline and Minimum Service Delivery Package (Ministry of Health, November 2022)"
 lang: "en"
+source_name: "Federal Ministry of Health, Maternal Adolescent and Child Health Directorate (November 2022), via an Internet Archive snapshot of moh.gov.et"
+fetched: "2026-09-11"
+published: "2022-11"
 source_note: "Federal Ministry of Health, Maternal Adolescent and Child Health Directorate, November 2022. Recovered from an Internet Archive snapshot of moh.gov.et, which does not respond from outside Ethiopia; two of the six archived snapshots were truncated at exactly 1024 KB and unreadable, this is one of the intact ones. Says what adolescent and youth health services a health post, health centre and hospital must provide and who is entitled to them - level-of-care navigation, not treatment guidance. The quality and coverage measurement annex (a supervisor questionnaire, pages 67-135) is deliberately NOT included: it is blank form fields and would only pollute retrieval. References HSTP 2021-2025. Confirm current entitlements with the Ministry of Health."
 ---
 

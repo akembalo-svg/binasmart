@@ -2,6 +2,9 @@
 url: "https://justice.gov.et/en/law/urban-lands-lease-holding-proclamation/"
 title: "የከተማ ቦታን በሊዝ ስለመያዝ — አዋጅ ቁጥር 721/2004 ዓ.ም. (721/2011)"
 lang: "am"
+source_name: "Urban Lands Lease Holding Proclamation No. 721/2011 (Federal Negarit Gazeta 18th Year No. 4) via Ministry of Justice"
+fetched: "2026-09-14"
+published: "2011-11-28"
 source_note: "Urban Lands Lease Holding Proclamation No. 721/2011 (Federal Negarit Gazeta, 18th Year No. 4, 28 November 2011). Article 18 lease-period figures cross-checked against peer-reviewed legal literature citing Art 18(1)(a)-(c) directly. City administrations issue their own implementing regulations; verify current Addis Ababa figures with the relevant land administration office before relying on them."
 ---
 

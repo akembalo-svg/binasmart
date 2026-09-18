@@ -2,6 +2,9 @@
 url: "http://www.moh.gov.et/"
 title: "የጤና ጣቢያ መስፈርቶች — Health Centre Requirements (Ethiopian Standard ES 3611, first edition)"
 lang: "en"
+source_name: "Ethiopian Standards Agency, ES 3611 Health Center Requirements, via an Internet Archive snapshot of moh.gov.et"
+fetched: "2026-09-11"
+published: "2012"
 source_note: "Ethiopian Standards Agency, ES 3611, Health Center - Requirements, first edition. Recovered from the Internet Archive snapshot of moh.gov.et (2021-05-09), because moh.gov.et does not respond from outside Ethiopia. Defines what services, rooms, staff and equipment a health centre must provide - which is level-of-care navigation, not treatment guidance. Standards are revised; confirm current requirements with the Ministry of Health."
 ---
 

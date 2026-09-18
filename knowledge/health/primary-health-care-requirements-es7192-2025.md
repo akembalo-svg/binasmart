@@ -2,6 +2,9 @@
 url: "https://ict.moh.gov.et/en/elibrary"
 title: "Primary Health Care Unit Requirements (Ethiopian Standard ES 7192:2025, first edition)"
 lang: "en"
+source_name: "Ethiopian Standards Agency, ES 7192:2025, via the Ministry of Health e-library (ict.moh.gov.et)"
+fetched: "2026-09-11"
+published: "2025"
 source_note: "Ethiopian Standards Agency, ES 7192:2025, first edition. Downloaded from the Ministry of Health e-library at ict.moh.gov.et/elibrary, which is a JavaScript application - invisible to a crawler and to the Internet Archive, readable with a headless browser. Defines what a primary health care unit must provide across health centres, health posts and family health teams. Level-of-care navigation, not treatment guidance: zero dosage instructions in the whole document. Newer and broader than ES 3611. Standards are revised; confirm current requirements with the Ministry of Health."
 ---
 

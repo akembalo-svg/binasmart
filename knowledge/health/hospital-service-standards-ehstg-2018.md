@@ -2,6 +2,9 @@
 url: "http://www.moh.gov.et/"
 title: "የሆስፒታል አገልግሎት መስፈርቶች — Hospital service standards (MoH EHSTG Assessment Handbook, revised June 2018)"
 lang: "en"
+source_name: "Federal Ministry of Health, EHSTG Assessment Handbook (revised June 2018)"
+fetched: "2026-09-11"
+published: "2018-06"
 source_note: "Federal Ministry of Health, Ethiopian Hospitals Service Transformation Guideline - Assessment Handbook, revised June 2018. The standards Ethiopian hospitals are assessed against across 20 chapters, including emergency, outpatient, radiology, financing and quality. Written for hospital management and assessors; useful here for what services a hospital must provide and what a patient can expect, not for treatment advice."
 ---
 

@@ -2,6 +2,9 @@
 url: "https://chilot.wordpress.com/labour-proclamation-no-1156-2019/"
 title: "Seera Hojjetaa fi Hojjachiisaa — Labsii Lakk. 1156/2019"
 lang: "om"
+source_name: "Labour Proclamation No. 1156/2019 (Federal Negarit Gazette 25th Year No. 89), text via chilot.wordpress.com"
+fetched: "2026-09-14"
+published: "2019-09-05"
 source_note: "Labour Proclamation No. 1156/2019, Federal Negarit Gazette 25th Year No. 89, 5 September 2019. Figures taken directly from the proclamation text (Arts 11, 35, 39, 40, 61, 69, 77, 88). Afaan Oromoo rendering of the Amharic guide."
 ---
 

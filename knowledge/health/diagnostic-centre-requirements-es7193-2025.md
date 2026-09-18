@@ -2,6 +2,9 @@
 url: "https://ict.moh.gov.et/en/elibrary"
 title: "Diagnostic Centre Requirements (Ethiopian Standard ES 7193:2025, first edition)"
 lang: "en"
+source_name: "Ethiopian Standards Agency, ES 7193:2025, via the Ministry of Health e-library (ict.moh.gov.et)"
+fetched: "2026-09-11"
+published: "2025"
 source_note: "Ethiopian Standards Agency, ES 7193:2025, first edition. Same source as ES 7192. Defines what a diagnostic centre must provide - useful for answering where a test or scan can be done and what the facility must have. Zero dosage instructions. Confirm current requirements with the Ministry of Health."
 ---
 

@@ -2,6 +2,9 @@
 url: "https://justice.gov.et/en/law/urban-lands-lease-holding-proclamation/"
 title: "Lafa Magaalaa Liizii Qabachuu — Labsii Lakk. 721/2011"
 lang: "om"
+source_name: "Urban Lands Lease Holding Proclamation No. 721/2011 (Federal Negarit Gazeta 18th Year No. 4) via Ministry of Justice"
+fetched: "2026-09-14"
+published: "2011-11-28"
 source_note: "Urban Lands Lease Holding Proclamation No. 721/2011, Article 18 lease periods. Afaan Oromoo rendering of the Amharic guide. City administrations issue their own implementing regulations; verify current figures with the land administration office."
 ---
 

@@ -2,6 +2,9 @@
 url: "https://www.moh.gov.et/"
 title: "Essential Health Services Package of Ethiopia (Ministry of Health, November 2019) - Annex II: which facility provides each service, and who pays"
 lang: "en"
+source_name: "Ministry of Health, Essential Health Services Package of Ethiopia (November 2019), via the University of Bergen mirror"
+fetched: "2026-09-11"
+published: "2019-11"
 source_note: "Ministry of Health of Ethiopia, Essential Health Services Package, November 2019, Annex II Table 19. Retrieved from the University of Bergen mirror; the ministry site serves it too but drops roughly one connection in five. This file is a CONVERSION, not the original text: the annex is a table whose meaning is carried by column position, so each row has been rewritten as a sentence naming the facility levels in full. The sixth marked column, Co, is omitted because the document defines IC, HP, HC, PH, GH and TH and never defines Co. Payment categories are the document's own. Service availability and fees change; confirm with the facility."
 ---
 
