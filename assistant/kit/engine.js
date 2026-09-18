@@ -19,6 +19,7 @@ const TOOL_RESULT_LIMIT = 6000; // callBini sends JSON.stringify(out).slice(0, 6
 const { sourcesFrom } = require('./sources');
 // Not a dep: every agent gets this filter, and no definition may choose to be without it.
 const { fixCalendarMarker } = require('../grounding');
+const { tidyAnswer, stripIntro } = require('../tidy');
 
 // What the engine hands contextFor. Only the two list fields of a knowledge declaration are passed, copied, so a
 // definition can neither change k or the voice lookups nor be mutated by the index.
@@ -127,6 +128,20 @@ function makeEngine(deps) {
         const f = filter(text);
         if (f.removed) warn('[' + agent.name + '] removed ' + f.removed + ' ' + f.what);
         text = f.text;
+      }
+
+      // 5c. How the answer looks: the context's bracket numbers and Source lines are reference furniture the
+      // model was shown, not something a customer should read (owner's instruction, 2026-09-17).
+      const tidied = tidyAnswer(text);
+      if (tidied.removed) warn('[' + agent.name + '] removed reference furniture');
+      text = tidied.text;
+      // The engine sends one message at a time, so the model cannot know it has already introduced itself.
+      // A definition that lists its display names (agent.names) gets every later self-introduction removed;
+      // the chat page shows its own greeting card, so nothing is lost.
+      if (Array.isArray(agent.names) && agent.names.length) {
+        const si = stripIntro(text, agent.names);
+        if (si.removed) warn('[' + agent.name + '] removed a repeated self-introduction');
+        if (si.text) text = si.text;
       }
 
       // 6. Grounding: a figure nobody gave the model — not a document, not a tool, not the question the user
