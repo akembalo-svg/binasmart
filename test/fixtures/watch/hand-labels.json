@@ -1,7 +1,7 @@
 {
   "_note": "The regression set for the classifier: every item of the four channels the survey of 2026-09-18 hand-classified, labelled here by post id so that the text itself stays exactly as the captured preview page holds it. Four labels: pack-grade (a fact a pack would want), perishable (a true tariff or offer that stops being true), weak (real, but no rule anyone can act on) and excluded. Only pack-grade and perishable are admitted; weak and excluded are not.",
-  "_windows": "Fana 19 posts and ethio telecom 12 posts from 16-18 September, NBE all 16 over 32 days, Customs all 8 over 14 months. The survey counted 54 items; this set holds 55, because ethio telecom posted once more between the survey and the capture.",
-  "_counts": { "pack-grade": 13, "perishable": 4, "weak": 3, "excluded": 35, "total": 55 },
+  "_windows": "Fana 19 posts and ethio telecom 12 posts from 16-18 September, NBE all 16 over 32 days, Customs all 8 over 14 months. The survey counted 54 items; this set holds 58: ethio telecom posted once more between the survey and the capture, and the dry run of 18 September added three items it admitted and should not have - the Ministry of Health consultative forum and two Addis Ababa Education Bureau press items, every one of them admitted only because a word containing the Ethiopic for birr appears in it.",
+  "_counts": { "pack-grade": 13, "perishable": 4, "weak": 3, "excluded": 38, "total": 58 },
   "labels": {
     "@nbethiopia/617": ["excluded", "Green Legacy staff planting"],
     "@nbethiopia/625": ["pack-grade", "NOTICE OF FOREIGN EXCHANGE AUCTION NO. 25"],
@@ -60,6 +60,9 @@
     "@fanatelevision/111527": ["excluded", "Yahode, the Hadiya new year"],
     "@fanatelevision/111528": ["excluded", "a bare YouTube link"],
     "@fanatelevision/111529": ["excluded", "the Fana Lamrot talent contest"],
-    "@fanatelevision/111530": ["excluded", "Italy to deploy warships in the Red Sea"]
+    "@fanatelevision/111530": ["excluded", "Italy to deploy warships in the Red Sea"],
+    "@M0H_EThiopia/3496": ["excluded", "a consultative forum was held, with the minister opening it"],
+    "@wwwAddisAbabaeducationbureau/33262": ["excluded", "urban farming at a secondary school, a bureau press item"],
+    "@wwwAddisAbabaeducationbureau/33265": ["excluded", "a school feeding programme progress item, a bureau press item"]
   }
 }

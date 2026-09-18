@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const UA = 'BinaSmart/1.0 (+https://bina.et; knowledge watch)';
-const OUT = path.join(__dirname, '..', 'test', 'fixtures', 'watch');
+const OUT = path.join(__dirname, '..', '..', '..', 'test', 'fixtures', 'watch');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 const JOBS = {
@@ -13,6 +13,8 @@ const JOBS = {
     ['tme-ethiopiancustomscommission.html', 'https://t.me/s/EthiopianCustomsCommission'],
     ['tme-ethio_telecom.html', 'https://t.me/s/ethio_telecom'],
     ['tme-fanatelevision.html', 'https://t.me/s/fanatelevision'],
+    ['tme-m0h_ethiopia.html', 'https://t.me/s/M0H_EThiopia'],
+    ['tme-wwwaddisababaeducationbureau.html', 'https://t.me/s/wwwAddisAbabaeducationbureau'],
     ['tme-missing-handle.html', 'https://t.me/s/binasmart_no_such_office_channel_2026'],
   ],
   feeds: [

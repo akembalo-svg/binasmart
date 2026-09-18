@@ -49,7 +49,10 @@ const DIPLOMACY = ['brics', 'ብሪክስ', 'bilateral', 'ሁለትዮሽ', 'sum
   'sign cooperation', 'ስምምነት ተፈራረሙ'];
 const CEREMONY = ['ውይይት', 'ስልጠና', 'ሥልጠና', 'ሽልማት', 'እውቅና', 'ተመረቀ', 'ምረቃ', 'ግምገማ', 'ጉብኝት', 'ceremony', 'training',
   'workshop', 'award', 'inaugurat', 'graduat', 'anniversary', 'ክብረ በዓል', 'ዓውደ ጥናት', 'meeting', 'green legacy',
-  'ችግኝ', 'ተከላ', 'ዓመታዊ ስብሰባ', 'conference'];
+  'ችግኝ', 'ተከላ', 'ዓመታዊ ስብሰባ', 'conference',
+  // Added after the dry run of 18 September: a consultative forum the Ministry of Health held was admitted,
+  // because CEREMONY knew ውይይት but not መድረክ or ምክክር, and knew ስልጠና but not that it had been ተካሄደ.
+  'መድረክ', 'ምክክር', 'ተካሄደ', 'forum', 'consultative', 'held a', 'visited', 'awarded', 'celebrat'];
 const HOLIDAY = ['በዓል', 'ዘመን መለወጫ', 'እንኳን አደረሳችሁ', 'እንኳን', 'መልካም አዲስ ዓመት', 'happy new year', 'new year',
   'holiday', 'ገና', 'ፋሲካ', 'ኢድ', 'መስቀል', 'ኢሬቻ', 'ሃይማኖት', 'ሀይማኖት', 'ቤተ ክርስቲያን', 'መስጊድ', 'ሽማግሌዎች', 'greetings'];
 const SPORT = ['sport', 'ስፖርት', 'ሊግ', 'league', 'ውድድር', 'ሩጫ', 'ክለብ', 'ስታዲየም', 'football', 'እግር ኳስ', 'ጨዋታ',
@@ -66,13 +69,54 @@ const VIDEO = /^(?:https?:\/\/\S+\s*)+$/;
 // ---------- stage 2: what makes an item worth keeping ----------
 const DIRECTIVE = ['መመሪያ', 'አዋጅ', 'ደንብ', 'ማስታወቂያ', 'ማሳሰቢያ', 'ማስጠንቀቂያ', 'ታሪፍ', 'ቀነ ገደብ', 'የስራ ሰዓት', 'የሥራ ሰዓት',
   'ተፈጻሚ', 'ተግባራዊ ይሆናል', 'directive', 'proclamation', 'regulation', 'circular', 'notice', 'auction', 'tariff',
-  'fee', 'deadline', 'hours', 'announcement', 'guideline', 'amendment', 'effective from', 'with effect from'];
+  'fee', 'deadline', 'hours', 'announcement', 'guideline', 'amendment', 'effective from', 'with effect from', 'registration opens'];
 const WARNING = ['fraud', 'ማጭበርበር', 'ጥንቃቄ', 'scam', 'illegal', 'unauthorized', 'unauthorised', 'ሕገ ወጥ', 'ህገ ወጥ',
   'ህገወጥ', 'awareness', 'warning', 'alert', 'ማስጠንቀቂያ'];
 const SERVICE = ['ምዝገባ', 'ኅትመት', 'ህትመት', 'portal', 'ፖርታል', 'self-service', 'self service', 'e-service', 'eservice',
   'አገልግሎት ማዕከል', 'shortcode', 'አጭር የጽሑፍ መልእክት', 'ኦንላይን', 'online service', 'apply online', 'ማመልከቻ'];
-const TARIFF = ['ቅናሽ', 'discount', 'ጥቅል', 'bundle', 'ብር', 'birr', 'ታሪፍ', 'tariff', 'ዋጋ', 'price', 'offer',
-  'በየወሩ', 'per month', 'ክፍያ', 'ብድር', 'ወለድ', 'loan', 'interest rate'];
+// An offer word is a tariff on its own: nobody writes ቅናሽ or ጥቅል or ብድር about anything but money.
+// Reported speech. An office channel writing "the deputy director general explained", "he said", "she called on
+// stakeholders" is issuing a press release about somebody having spoken, which is the same thing QUOTED catches
+// when quotation marks are used and a title follows. It is checked in stage 2, after a directive word, a public
+// warning and a link into the office's own host have all had their say, so an announcement that happens to quote
+// the official who made it is still kept.
+const REPORTED = ['ብለዋል', 'እንደገለጹት', 'እንደገለፁት', 'እንደተናገሩት', 'ገልጸዋል', 'ገልፀዋል', 'ገልፃል', 'ገልጿል', 'አስረድተዋል',
+  'አመልክተዋል', 'ተናግረዋል', 'ጠቁመዋል', 'ጥሪ አቅርበዋል', 'አጽንኦት ሰጥተዋል', 'ነው ያሉት', 'told reporters'];
+// And the other half of a bureau press item: work is underway, work is being carried out, the school is creating
+// opportunities. A progress report is never a rule a citizen can follow, and like REPORTED it is only asked after
+// a directive word, a warning and an own-host link have been looked for.
+const PROGRESS = ['እየተሰራ ነው', 'እየሰራ ነው', 'በማከናወን ላይ', 'እያከናወነ ይገኛል', 'እየፈጠረ ይገኛል', 'እየተሰራ መሆኑን'];
+
+const OFFER = ['ቅናሽ', 'discount', 'ጥቅል', 'bundle', 'offer', 'በየወሩ', 'per month', 'ክፍያ', 'ብድር', 'ወለድ', 'loan',
+  'interest rate'];
+// A price noun is not. ብር is inside ቴሌብር, inside ግብርና and inside መርሐ ግብር; ዋጋ is inside የዋጋ ግሽበት, which is
+// inflation and not a price list. On 18 September those two letter pairs admitted a health ministry consultative
+// forum and two school press items. A price noun now counts only when an amount is written against it, and a bare
+// currency word must also say what the money is for — a fee word, or the name of a service.
+const CURRENCY = ['ብር', 'birr', 'etb'];
+const PRICED = ['ታሪፍ', 'tariff', 'ዋጋ', 'price', 'fee', 'charge'].concat(CURRENCY);
+const FEE = ['ክፍያ', 'ታሪፍ', 'ዋጋ', 'fee', 'tariff', 'price', 'charge'];
+const TARIFF = OFFER.concat(PRICED);   // kept for anything that wants to read the whole vocabulary
+// A digit within a dozen characters of the word, on either side: በ30 ብር, 3,189 ብር, ETB 500, tariff of 149.
+function amountNear(text, word) {
+  const hay = text.toLowerCase();
+  const needle = word.toLowerCase();
+  for (let at = hay.indexOf(needle); at >= 0; at = hay.indexOf(needle, at + 1)) {
+    if (/[0-9]/.test(hay.slice(Math.max(0, at - 12), at + needle.length + 12))) return true;
+  }
+  return false;
+}
+function tariffHit(text) {
+  const offer = firstHit(text, OFFER);
+  if (offer) return offer;
+  for (const w of PRICED) {
+    if (!has(text, w) || !amountNear(text, w)) continue;
+    if (CURRENCY.indexOf(w) < 0) return w;
+    const what = firstHit(text, FEE) || firstHit(text, SERVICE);
+    if (what) return w + ' against ' + what;
+  }
+  return '';
+}
 
 // Office names, in both languages, and the hosts each office publishes on. This is the classifier's own
 // knowledge and is deliberately not in registry.json: the registry says where to READ, this says how to
@@ -147,7 +191,11 @@ function classifyByRules(post, { source } = {}) {
   for (const [why, list] of [['politics', POLITICS], ['diplomacy', DIPLOMACY], ['ceremony', CEREMONY],
     ['holiday', HOLIDAY], ['sport', SPORT], ['live stream', LIVESTREAM], ['promotion', PROMO], ['advertorial', ADVERTORIAL]]) {
     const k = firstHit(text, list);
-    if (k) return out('excluded', why + ': ' + k, channelOffice, 1);
+    if (!k) continue;
+    // Only CEREMONY yields, and only to a directive word: a deadline read out at a forum, a registration opened at
+    // a launch. Politics, sport, holidays and the rest are never overridden by anything.
+    if (why === 'ceremony' && directive) continue;
+    return out('excluded', why + ': ' + k, channelOffice, 1);
   }
   if (QUOTED.test(text)) return out('excluded', 'a quotation attributed to a person', channelOffice, 1);
   if (VIDEO.test(text.trim())) return out('excluded', 'a bare link with no text', channelOffice, 1);
@@ -164,8 +212,12 @@ function classifyByRules(post, { source } = {}) {
   if (directive) return out('pack-grade', 'an office channel with a directive word: ' + directive, channelOffice, 2);
   if (warning) return out('pack-grade', 'an office channel with a public warning: ' + warning, channelOffice, 2);
   if (doc) return out('pack-grade', 'an office channel linking its own host: ' + doc, channelOffice, 2);
+  const spoken = firstHit(text, REPORTED);
+  if (spoken) return out('excluded', 'a press release about somebody having spoken: ' + spoken, channelOffice, 2);
+  const progress = firstHit(text, PROGRESS);
+  if (progress) return out('excluded', 'a progress report, not a rule: ' + progress, channelOffice, 2);
   if (named && firstHit(text, SERVICE)) return out('pack-grade', 'names ' + named + ' and tells a citizen how to use a service', named, 2);
-  const tariff = firstHit(text, TARIFF);
+  const tariff = tariffHit(text);
   if (tariff) return out('perishable', 'a price or an offer: ' + tariff, channelOffice, 2);
   return out('unsettled', 'neither rule settled it', channelOffice, 2);
 }

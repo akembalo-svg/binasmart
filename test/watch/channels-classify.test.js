@@ -3,7 +3,7 @@
 //
 // The regression set is real data: every bubble of the four channels the survey of 2026-09-18 classified by
 // hand, joined to test/fixtures/watch/hand-labels.json by post id so that the text stays exactly as the
-// captured preview holds it. 55 items, 13 of them pack-grade, 4 perishable, 3 weak, 35 excluded.
+// captured preview holds it. 58 items, 13 of them pack-grade, 4 perishable, 3 weak, 38 excluded.
 //
 // What is asserted is not an accuracy number for its own sake. It is: the nine NBE notices and the customs
 // opening-hours item — the two findings that justify the whole watch — are admitted; the TPLF item and the
@@ -26,6 +26,8 @@ const FILES = {
   '@EthiopianCustomsCommission': 'tme-ethiopiancustomscommission.html',
   '@ethio_telecom': 'tme-ethio_telecom.html',
   '@fanatelevision': 'tme-fanatelevision.html',
+  '@M0H_EThiopia': 'tme-m0h_ethiopia.html',
+  '@wwwAddisAbabaeducationbureau': 'tme-wwwaddisababaeducationbureau.html',
 };
 const byChannel = new Map();
 for (const [handle, file] of Object.entries(FILES)) {
@@ -44,9 +46,9 @@ const run = c => classifyByRules(c.post, { source: c.src, registry });
 const goldAdmit = c => ADMITTED.has(c.label);
 
 test('the regression set is the survey, joined to the captured pages', () => {
-  assert.equal(CASES.length, 55);
+  assert.equal(CASES.length, 58);
   const n = l => CASES.filter(c => c.label === l).length;
-  assert.deepEqual([n('pack-grade'), n('perishable'), n('weak'), n('excluded')], [13, 4, 3, 35]);
+  assert.deepEqual([n('pack-grade'), n('perishable'), n('weak'), n('excluded')], [13, 4, 3, 38]);
 });
 
 test('all nine NBE notices are admitted, and nothing else on that channel is', () => {
@@ -91,6 +93,31 @@ test('no outlet item is admitted unless it names one of the six uncovered office
     const r = run(c);
     if (r.admit) assert.ok(uncovered.has(r.office), c.key + ' admitted for ' + r.office);
   }
+});
+
+test('the three the 18 September dry run admitted on a bare currency word are refused', () => {
+  // A Ministry of Health consultative forum and two Addis Ababa Education Bureau press items. None of the three
+  // names a price: the Ethiopic for birr sits inside another word each time, in the ministry's prose, and inside
+  // gbrna and merha gbr on the bureau's. A currency word alone can no longer admit anything.
+  for (const key of ['@M0H_EThiopia/3496', '@wwwAddisAbabaeducationbureau/33262', '@wwwAddisAbabaeducationbureau/33265']) {
+    const c = CASES.find(x => x.key === key);
+    assert.ok(c, 'missing from the regression set: ' + key);
+    const r = run(c);
+    assert.equal(r.admit, false, key + ' admitted as ' + r.label + ': ' + r.reason);
+    assert.equal(r.label, 'excluded', key + ' - ' + r.reason);
+    assert.equal(r.settled, true, key + ' must not cost a model call');
+  }
+});
+
+test('a telecom price post still says perishable, because that is what the design admits it as', () => {
+  const priced = CASES.filter(c => c.label === 'perishable');
+  assert.ok(priced.length >= 4);
+  for (const c of priced) assert.equal(run(c).admit, true, c.key + ' - ' + c.why);
+});
+
+test('no hand label carries a real phone number', () => {
+  const raw = fs.readFileSync(path.join(FIX, 'hand-labels.json'), 'utf8');
+  assert.deepEqual(raw.match(/(?:\+?251|0)[79]\d{8}/g) || [], []);
 });
 
 test('the whole set: every admitted item is one the hand labelled admitted', () => {
