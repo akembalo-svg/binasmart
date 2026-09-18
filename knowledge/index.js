@@ -637,6 +637,52 @@ function docMetaFile(root, source, slug) {
   if (PACK_DIRS.has(source)) return s.includes('/') ? null : path.join(root, 'knowledge', source, s + '.md');
   return null;
 }
+// ---------- our own pages: publisher, address and the day the page last changed ----------
+// The guide and service pages (GUIDE_SLUGS, PAGE_SLUGS) are HTML in public/, not markdown with front matter, so
+// until 2026-09-18 their Source line was a title and a link and no date. Measured on the Ministry of Labour
+// demo's forty questions (retrieval only): 25 of the 32 undated Source lines were ours — the Labor ID / LMIS
+// guide 17 times and the COC guide 8 times. We did not FETCH our own page, so the honest date is the day it
+// last changed: the date of the last commit that touched public/<slug>.html (`git log -1 --format=%as`), and
+// the line says "updated", never "fetched". Not the file's mtime: a copy, a checkout or a restore moves an
+// mtime on this server without the page changing. A page may state its own date with
+// <meta name="bina:updated" content="YYYY-MM-DD">, and when it does that date is used instead.
+// One git call for every own page, once per process per root (makeKnowledge.load warms it); a git failure
+// leaves the pages undated, which is what they were, and never invents a date.
+const OWN_PAGE_SLUGS = { guide: new Set(GUIDE_SLUGS), page: new Set(PAGE_SLUGS) };
+const ISO_DAY = /^\d{4}-\d{2}-\d{2}$/;
+const _ownDates = new Map();   // root -> Map('public/<slug>.html' -> YYYY-MM-DD)
+function ownPageDates(root, { git } = {}) {
+  root = root || ROOT;
+  if (_ownDates.has(root)) return _ownDates.get(root);
+  const out = new Map();
+  const files = [...new Set([...GUIDE_SLUGS, ...PAGE_SLUGS])].map(s => 'public/' + s + '.html');
+  try {
+    const run = git || (args => require('child_process').execFileSync('git', args, { encoding: 'utf8', timeout: 20000, maxBuffer: 32 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] }));
+    // newest first, so the first date seen for a file is the date of the last commit that changed it
+    const txt = String(run(['-C', root, 'log', '--relative', '--format=@%as', '--name-only', '--', ...files]) || '');
+    let day = '';
+    for (const line of txt.split('\n')) {
+      const l = line.trim(); if (!l) continue;
+      if (l[0] === '@') { day = l.slice(1); continue; }
+      if (ISO_DAY.test(day) && !out.has(l)) out.set(l, day);
+    }
+  } catch (e) { /* not a git checkout, or git missing: no dates, nothing invented */ }
+  _ownDates.set(root, out);
+  return out;
+}
+const META_UPDATED = /<meta\s+name=["']bina:updated["']\s+content=["'](\d{4}-\d{2}-\d{2})["']/i;
+// { source_name, url, updated } for one of our own pages that exists on disk, or null (a slug that is not in
+// GUIDE_SLUGS/PAGE_SLUGS never reaches the file system, so nothing from the database picks the path).
+function ownPageMeta(root, source, slug) {
+  const set = OWN_PAGE_SLUGS[source];
+  if (!set || !set.has(slug)) return null;
+  let html = '';
+  try { html = fs.readFileSync(path.join(root, 'public', slug + '.html'), 'utf8'); } catch (e) { return null; }
+  const tag = META_UPDATED.exec(html.slice(0, 20000));
+  const updated = tag ? tag[1] : (ownPageDates(root).get('public/' + slug + '.html') || '');
+  return { source_name: 'BinaSmart', url: 'https://bina.et/' + slug, updated };
+}
+
 // Front matter, cached per process. These files change only when a fetch or a crawl rewrites them, and both
 // are followed by an ingest and a pm2 restart, so a stale entry cannot outlive a deploy.
 function docMeta(root, source, slug) {
@@ -644,6 +690,7 @@ function docMeta(root, source, slug) {
   if (_docMeta.has(key)) return _docMeta.get(key);
   const f = docMetaFile(root || ROOT, source, slug);
   let meta = null;
+  if (!f && OWN_PAGE_SLUGS[source]) meta = ownPageMeta(root || ROOT, source, String(slug || ''));
   if (f) {
     try {
       const raw = fs.readFileSync(f, 'utf8');
@@ -658,20 +705,31 @@ function docMeta(root, source, slug) {
 // ops/packs/fetch-pack.js and ops/travel/fetch-airline.js write fetchedAt and lastChecked; knowledge/crawl.js
 // writes fetched. "(checked …)" is left out when it is the same day as the fetch, which it is for a page
 // fetched today: two identical dates read as noise, and the fetch date is the one the guardrail asks for.
+// Our own pages (ownPageMeta) carry `updated` instead: the day the page last changed, labelled as such.
 const SOURCE_WORDS = {
-  en: { label: 'Source:', fetched: 'fetched', checked: 'checked' },
-  am: { label: 'ምንጭ፦', fetched: 'የተወሰደበት ቀን', checked: 'የተረጋገጠበት' },
+  en: { label: 'Source:', fetched: 'fetched', checked: 'checked', updated: 'updated' },
+  am: { label: 'ምንጭ፦', fetched: 'የተወሰደበት ቀን', checked: 'የተረጋገጠበት', updated: 'የተሻሻለበት ቀን' },
 };
+// The url a page is credited with. The front matter's, when it has one, for the header line as well as the
+// Source line: the chunk row's url was written at ingest and is never rewritten while the chunk text is
+// unchanged, so a document whose front matter moved to another copy (the labour proclamation, chilot ->
+// FAOLEX, 2026-09-18) would otherwise print one copy's address above the other copy's name and date.
+function pageUrl(hit, { root } = {}) {
+  const meta = docMeta(root || ROOT, hit.source, hit.slug) || {};
+  return String(meta.url || hit.url || '').trim();
+}
 function sourceLine(hit, { root, am = false } = {}) {
   const meta = docMeta(root || ROOT, hit.source, hit.slug) || {};
   const w = am ? SOURCE_WORDS.am : SOURCE_WORDS.en;
   const name = String(meta.source_name || hit.title || hit.slug || '').replace(/\s+/g, ' ').trim();
-  const url = String(meta.url || hit.url || '').trim();
+  const url = pageUrl(hit, { root });
   const fetched = String(meta.fetchedAt || meta.fetched || '').trim();
   const checked = String(meta.lastChecked || '').trim();
+  const updated = String(meta.updated || '').trim();
   const bits = [name];
   if (url) bits.push(url);
   if (fetched) bits.push(w.fetched + ' ' + fetched + (checked && checked !== fetched ? ' (' + w.checked + ' ' + checked + ')' : ''));
+  else if (updated) bits.push(w.updated + ' ' + updated);
   return w.label + ' ' + bits.join(' — ');
 }
 
@@ -710,6 +768,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     const all = await prisma.knowledgeChunk.findMany({ orderBy: [{ source: 'asc' }, { slug: 'asc' }, { ord: 'asc' }] });
     rows = all.map(r => ({ id: r.id, source: r.source, slug: r.slug, url: r.url, title: r.title, lang: r.lang, ord: r.ord, text: r.text, vec: r.embedding && r.embedding.length ? fromBuf(r.embedding) : null,
       lvec: localOn && r.embeddingLocal && r.embeddingLocal.length === LOCAL_DIMS * 4 ? fromBuf(r.embeddingLocal) : null, toks: new Set(tokens(r.text)) }));
+    ownPageDates(root || ROOT);   // the own pages' "updated" dates: one git call, once per process
     loadedAt = Date.now();
     return rows.length;
   }
@@ -1032,7 +1091,14 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
       if (qv && rv) { for (let i = 0; i < dims; i++) cos += qv[i] * rv[i]; }
       const kw = keywordScore(qt, r);
       const pref = preferred ? preferred(r.source, r.slug) : undefined;
-      const a = hybridScore({ cos, kw, source: r.source, hasVec: !!qv, preferred: pref });
+      // The local-fallback cliff (docs/superpowers/notes/2026-09-18-local-fallback-backfill.md): on the BGE-M3
+      // path a chunk with no local vector used to be scored as cos 0 + 0.15 * kw, which is next to nothing
+      // against chunks with a real cosine — business under a forced Gemini failure fell to 5.0% Page@3 half
+      // embedded, against 56.7% keyword-only. Every pack ingest leaves such chunks (300 local vectors a run).
+      // So on that path, and only there, a chunk with no local vector is scored exactly as keyword-only mode
+      // scores it. The Gemini path is untouched: there `hasVec` is `!!qv`, as it always was.
+      const hasVec = !!qv && !(useLocal && !rv);
+      const a = hybridScore({ cos, kw, source: r.source, hasVec, preferred: pref });
       // Fusion, before anything else runs: each chunk keeps the better of the two hybrid scores. The
       // ≤2-chunks-per-page rule, the reranker, its 0.03 gate and the +0.06 tie-breaker are untouched below.
       let b = null;
@@ -1126,10 +1192,11 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
           const key = h.source + '/' + h.slug;
           const src = named.has(key) ? '' : sourceLine(h, { root: root || ROOT, am }) + '\n';
           named.add(key);
-          return '[' + (i + 1) + '] ' + h.title + (h.url ? ' — ' + h.url : '') + '\n' + src + h.text.replace(/\n{2,}/g, '\n');
+          const url = pageUrl(h, { root: root || ROOT });
+          return '[' + (i + 1) + '] ' + h.title + (url ? ' — ' + url : '') + '\n' + src + h.text.replace(/\n{2,}/g, '\n');
         });
         blocks.push('## Relevant BinaSmart knowledge (facts here override anything you remember; do NOT write the bracket numbers or paste these links in your answer — name a law or an official document briefly in the sentence instead; '
-          + 'each page\'s Source line gives the publisher and the date that page was fetched — that is the date to state)\n' + lines.join('\n\n'));
+          + 'each page\'s Source line gives the publisher and the date that page was fetched — that is the date to state; for BinaSmart\'s own pages it is the date the page was last updated, and you say "updated", not "fetched")\n' + lines.join('\n\n'));
       }
     }
     if (om && styleK > 0) {
@@ -1143,10 +1210,17 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     return blocks.join('\n\n');
   }
 
-  function health() { return { chunks: rows.length, embedded: rows.filter(r => r.vec).length, embeddedLocal: rows.filter(r => r.lvec).length, loadedAt, gemini: !!apiKey, localFallback: localOn, ...stats }; }
+  // localCoverage: { source: { chunks, local } } — a source whose `local` trails its `chunks` is one a Gemini
+  // outage would search partly by keyword (see search above), and the gap is what the laptop route fills.
+  function localCoverage() {
+    const out = {};
+    for (const r of rows) { const c = out[r.source] || (out[r.source] = { chunks: 0, local: 0 }); c.chunks++; if (r.lvec) c.local++; }
+    return out;
+  }
+  function health() { return { chunks: rows.length, embedded: rows.filter(r => r.vec).length, embeddedLocal: rows.filter(r => r.lvec).length, loadedAt, gemini: !!apiKey, localFallback: localOn, ...stats, localCoverage: localCoverage() }; }
   return { load, ingest, checkMasks, search, contextFor, health, embedPendingGemini, embedPendingLocal, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, docMeta, docMetaFile, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
+module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, pageUrl, docMeta, docMetaFile, ownPageDates, ownPageMeta, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
   LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled,
   bilingualEnabled, bilingualEn2AmEnabled, makeQueryTranslator, normaliseQuery, BILINGUAL_TIMEOUT_MS, BILINGUAL_CACHE_MAX };

@@ -24,8 +24,12 @@ const { DATING } = require('../../assistant/dating');
 test('the date clause stands alone and gives the form of words, in both languages', () => {
   assert.match(DATING, /EVERY FIGURE YOU STATE CARRIES ITS DATE IN THE SAME SENTENCE/,
     'the instruction is its own sentence, not a clause hanging off the institution');
-  assert.match(DATING, /as published on 16 September 2026/, 'and it shows the form to write');
-  assert.ok(DATING.includes('እንደታተመው'), 'the Amharic form of words is given too');
+  // 2026-09-18: the form was "as published on" / "እንደታተመው", and the model called our fetch date the day the
+  // Ministry of Revenue published a VAT rule. The date is the fetch date, and the form of words now says so.
+  assert.match(DATING, /as\s+fetched on 16 September 2026/, 'and it shows the form to write');
+  assert.ok(DATING.includes('እ.ኤ.አ. ሴፕቴምበር 16 ቀን 2026 እንደተወሰደው'), 'the Amharic form of words is given too');
+  assert.doesNotMatch(DATING, /as\s+published on 16 September/, 'the fetch date is never shown as a publication date');
+  assert.match(DATING, /NOT the day the institution published it/);
   assert.match(DATING, /take the date from\s+the document you are quoting, never from memory/,
     'the close-out also found a fabricated date: February 13, 2024 on a document stamped 2026-09-16');
   assert.match(DATING, /carries no\s+date, say that instead of inventing one/);
