@@ -28,7 +28,7 @@ const DATING = '\n\n## Every figure and every rule carries its institution, its 
   + 'without its document is as weak as a figure without its date.\n'
   + '- EVERY FIGURE YOU STATE CARRIES ITS DATE IN THE SAME SENTENCE. A fee, a rate, a limit, a charge, a '
   + 'threshold, a deadline, a period of notice or of leave. Write it as "Zemen Bank\'s tariff page, as '
-  + 'published on 16 September 2026" — in Amharic, "እ.ኤ.አ. በ16 መስከረም 2026 እንደታተመው" — and take the date from '
+  + 'published on 16 September 2026" — in Amharic, "እ.ኤ.አ. በ16 ሴፕቴምበር 2026 እንደታተመው" — and take the date from '
   + 'the document you are quoting, never from memory and never from a guess.\n'
   + '- The date to use is the one written in the document you are quoting, on its "Source: ... fetched '
   + 'YYYY-MM-DD" line — in an Amharic context the same line reads "ምንጭ፦ ... የተወሰደበት ቀን YYYY-MM-DD". Every '
@@ -49,8 +49,16 @@ const DATING = '\n\n## Every figure and every rule carries its institution, its 
   // Ministry of Labour audit of 2026-09-18, this time in English: "fetched on 2011 E.C.". A deterministic
   // filter rewrites the marker (assistant/grounding.js, fixCalendarMarker); this is what stops it being
   // written at all.
-  + '- A FETCHED DATE IS A GREGORIAN DATE, AND IN AMHARIC IT CARRIES THE GREGORIAN MARKER. In an Amharic answer '
-  + 'write it as "እ.ኤ.አ. መስከረም 16 ቀን 2026", once, before the date — not a second marker after it. In an English '
+  // And the month (2026-09-18): the example here used to read "እ.ኤ.አ. መስከረም 16 ቀን 2026". መስከረም is the
+  // ETHIOPIAN month — to an Ethiopian reader መስከረም 16 is 26 September — so every dated Amharic answer was ten
+  // days off, and the model generalised the pattern to "እ.ኤ.አ. ነሐሴ 8 ቀን 2025" for 14 August 2025 (the
+  // Ethiopian day under a Gregorian year). assistant/dates.js is the deterministic half.
+  + '- A FETCHED DATE IS A GREGORIAN DATE, AND IN AMHARIC IT CARRIES THE GREGORIAN MARKER AND THE GREGORIAN MONTH. '
+  + 'In an Amharic answer write it as "እ.ኤ.አ. ሴፕቴምበር 16 ቀን 2026", once, before the date — not a second marker '
+  + 'after it. The Gregorian months in Amharic are ጃንዋሪ ፌብሩዋሪ ማርች ኤፕሪል ሜይ ጁን ጁላይ ኦገስት ሴፕቴምበር ኦክቶበር '
+  + 'ኖቬምበር ዲሴምበር. The Ethiopian months መስከረም through ጳጉሜ go ONLY with a date the document itself prints '
+  + 'with ዓ.ም.: "እ.ኤ.አ. መስከረም 16" is a wrong date, because መስከረም 16 is 26 September. Never carry a day number '
+  + 'from one calendar into the other: ነሐሴ 8 ቀን 2017 ዓ.ም. is ኦገስት 14 ቀን 2025, not "ነሐሴ 8 ቀን 2025". In an English '
   + 'answer write "16 September 2026" with no marker at all: an English reader assumes the Gregorian calendar, '
   + 'and an Amharic marker in an English sentence is one more thing to explain. NEVER write "ዓ.ም." after a Gregorian year: '
   + '"ዓ.ም." means the Ethiopian year, which runs seven to eight years behind, so "2026 ዓ.ም." tells an '
@@ -65,7 +73,10 @@ const DATING = '\n\n## Every figure and every rule carries its institution, its 
   + 'ደንቡን ስትናገር የመጣበትን ሰነድ — መመሪያውን ወይም አዋጁን በቁጥሩ (ለምሳሌ «የፋይናንስ ደንበኛ ጥበቃ መመሪያ ቁጥር FCP/01/2020»፣ '
   + '«የባንክ ሥራ አዋጅ ቁጥር 1360/2025»፣ «አዋጅ ቁጥር 1156/2019») — ከተቋሙ ስምና ከተወሰደበት ቀን ጋር በመጀመሪያው መልስ ውስጥ ጥቀስ፤ '
   + '«ምንጭህ ምንድን ነው?» ተብለህ እስክትጠየቅ አትጠብቅ። ከሰነድ የተወሰደው ቀን የፈረንጅ (ግሪጎሪያን) ቀን ነው፤ ስለዚህ '
-  + '«እ.ኤ.አ. መስከረም 16 ቀን 2026» ብለህ ጻፈው። ከግሪጎሪያን ዓመት ቀጥሎ «ዓ.ም.» ወይም «E.C.» ፈጽሞ አትጻፍ፤ እነዚህ የሚጻፉት '
+  + '«እ.ኤ.አ. ሴፕቴምበር 16 ቀን 2026» ብለህ ጻፈው። የፈረንጅ ወራት በአማርኛ ጃንዋሪ፣ ፌብሩዋሪ፣ ማርች፣ ኤፕሪል፣ ሜይ፣ ጁን፣ ጁላይ፣ '
+  + 'ኦገስት፣ ሴፕቴምበር፣ ኦክቶበር፣ ኖቬምበር፣ ዲሴምበር ናቸው፤ ከመስከረም እስከ ጳጉሜ ያሉት የኢትዮጵያ ወራት የሚጻፉት ሰነዱ ራሱ '
+  + 'በ«ዓ.ም.» ከሚጽፈው ቀን ጋር ብቻ ነው። «እ.ኤ.አ. መስከረም 16» ስህተት ነው፤ መስከረም 16 ሴፕቴምበር 26 ነውና። የቀኑን ቁጥር '
+  + 'ከአንዱ አቆጣጠር ወደ ሌላው አታሻግር፤ ነሐሴ 8 ቀን 2017 ዓ.ም. ኦገስት 14 ቀን 2025 ነው። ከግሪጎሪያን ዓመት ቀጥሎ «ዓ.ም.» ወይም «E.C.» ፈጽሞ አትጻፍ፤ እነዚህ የሚጻፉት '
   + 'ሰነዱ ራሱ በኢትዮጵያ አቆጣጠር ሲጽፈው ብቻ ነው። ደንቦችና ክፍያዎች ይለወጣሉና ተቋሙን እንዲያረጋግጡ ንገራቸው። '
   + 'መረጃው ከሌለህ እንደሌለህ ተናገር፤ ከቶ አትገምት።\n';
 

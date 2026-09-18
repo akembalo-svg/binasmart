@@ -15,6 +15,8 @@
 //     by that date's conversion (the model's "ነሐሴ 8 ቀን 2025" can only mean ነሐሴ 8 2017 = 14 August 2025);
 //   - nothing to convert from -> the Gregorian part alone is DROPPED (an Ethiopian date beside it is kept).
 // A Gregorian date the answer pairs with an Ethiopian date it is the exact conversion of is left alone.
+// A grounded Gregorian date written with an Ethiopian month name ("እ.ኤ.አ. መስከረም 16 ቀን 2026" for 2026-09-16)
+// keeps its digits and gets the Gregorian month (ሴፕቴምበር): መስከረም 16 is 26 September to an Ethiopian reader.
 // A sentence is never dropped for a date, and nothing is ever invented: every date this writes is computed
 // from an Ethiopian date the sources printed.
 //
@@ -211,7 +213,13 @@ function guardDates(text, grounding, question, opts = {}) {
   for (const x of dates) {
     if (x.cal !== 'greg') continue;
     const valid = x.m && validGreg(x.y, x.m, x.d);
-    if (valid && greg.has(key(x.y, x.m, x.d))) continue;
+    if (valid && greg.has(key(x.y, x.m, x.d))) {
+      // The digits are right but the month is Ethiopian: "እ.ኤ.አ. መስከረም 16 ቀን 2026" for the fetch date
+      // 2026-09-16. To an Ethiopian reader መስከረም 16 is 26 September, so the month is rewritten to the
+      // Gregorian one (ሴፕቴምበር) and the digits kept. Our own prompt taught this form until 2026-09-18.
+      if (x.ethName) edits.push({ a: x.start, b: x.end, to: formatLike(x, x), before: x.text, after: formatLike(x, x) });
+      continue;
+    }
     const [sa, sb] = sentenceOf(s, x.start);
     const beside = dates.filter(e => e.cal === 'eth' && e.start >= sa && e.end <= sb && validEth(e.y, e.m, e.d));
     // The answer pairs it with an Ethiopian date it is the exact conversion of: the pair is consistent, and

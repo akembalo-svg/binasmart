@@ -123,7 +123,7 @@ test('measured: "ቁጥር 44/2013" is a directive number, not the month ጥር'
 test('fetch dates, Source lines and years inside document numbers are untouched', () => {
   const said = 'Proclamation No. 1389/2025 and Proclamation No. 1156/2019 apply (Ministry of Labour and Skills, fetched 2026-09-16).\nSource: https://mols.gov.et/ fetched 2026-09-16';
   assert.deepEqual(g(said, RETURNEE), { text: said, changes: [] });
-  const am = 'የሥራና ክህሎት ሚኒስቴር (እ.ኤ.አ. መስከረም 16 ቀን 2026) እንዳሳተመው፣ አዋጅ ቁጥር 1156/2011 ዓ.ም. ተፈጻሚ ነው።';
+  const am = 'የሥራና ክህሎት ሚኒስቴር (እ.ኤ.አ. ሴፕቴምበር 16 ቀን 2026) እንዳሳተመው፣ አዋጅ ቁጥር 1156/2011 ዓ.ም. ተፈጻሚ ነው።';
   assert.deepEqual(g(am, RETURNEE), { text: am, changes: [] });
   const en = 'as published on 16 September 2026 by the Ministry.';
   assert.deepEqual(g(en, RETURNEE), { text: en, changes: [] });
@@ -145,7 +145,19 @@ test('runs after fixCalendarMarker and does not undo it', () => {
   const ctx = 'Source: https://mols.gov.et/ fetched 2026-09-16';
   const cal = grounding.fixCalendarMarker('ከመስከረም 16 ቀን 2026 ዓ.ም. ጀምሮ', ctx);
   assert.equal(cal.fixed, 1);
-  assert.deepEqual(g(cal.text, ctx), { text: cal.text, changes: [] });
+  // the marker fix keeps the date; the date guard then gives it the Gregorian month, digits unchanged
+  assert.equal(g(cal.text, ctx).text, cal.text.replace('መስከረም', 'ሴፕቴምበር'));
+  assert.ok(g(cal.text, ctx).text.includes('(እ.ኤ.አ.)'));
+});
+
+test('a Source-line date written with the Ethiopian month gets the Gregorian month, digits kept', () => {
+  const ctx = 'ምንጭ፦ https://mols.gov.et/ የተወሰደበት ቀን 2026-09-16';
+  const r = g('የሥራና ክህሎት ሚኒስቴር እ.ኤ.አ. መስከረም 16 ቀን 2026 እንዳሳተመው፣ ክፍያው 500 ብር ነው።', ctx);
+  assert.equal(r.text, 'የሥራና ክህሎት ሚኒስቴር እ.ኤ.አ. ሴፕቴምበር 16 ቀን 2026 እንዳሳተመው፣ ክፍያው 500 ብር ነው።');
+  assert.deepEqual(r.changes, [{ before: 'መስከረም 16 ቀን 2026', after: 'ሴፕቴምበር 16 ቀን 2026' }]);
+  assert.equal(g('እ.ኤ.አ. በ16 መስከረም 2026 እንደታተመው', ctx).text, 'እ.ኤ.አ. በ16 ሴፕቴምበር 2026 እንደታተመው');
+  // an Ethiopian date the document prints with ዓ.ም. keeps its Ethiopian month
+  assert.deepEqual(g('መስከረም 6 ቀን 2019 ዓ.ም.', ctx).changes, []);
 });
 
 test('fixGregorianDates logs before and after under the agent name', () => {

@@ -84,7 +84,13 @@ test('and they tell an Amharic answer to name its document in the first reply', 
 
 test('the shared rule says a fetched date is Gregorian, in both halves', () => {
   assert.match(DATING, /A FETCHED DATE IS A GREGORIAN DATE/);
-  assert.ok(DATING.includes('እ.ኤ.አ. መስከረም 16 ቀን 2026'), 'the form of words is given');
+  assert.ok(DATING.includes('እ.ኤ.አ. ሴፕቴምበር 16 ቀን 2026'), 'the form of words is given, with the Gregorian month');
+  // 2026-09-18: the example used to be "እ.ኤ.አ. መስከረም 16 ቀን 2026" — the Ethiopian month, which is ten days off
+  // (መስከረም 16 is 26 September) and taught the model "እ.ኤ.አ. ነሐሴ 8 ቀን 2025" for 14 August 2025.
+  assert.ok(!/እ\.ኤ\.አ\.\s*(?:በ\d{1,2}\s*)?መስከረም\s*\d/.test(DATING.replace(/"እ\.ኤ\.አ\. መስከረም 16" is a wrong date|«እ\.ኤ\.አ\. መስከረም 16» ስህተት ነው/g, '')),
+    'no example pairs the Gregorian marker with an Ethiopian month');
+  assert.ok(DATING.includes('ጃንዋሪ ፌብሩዋሪ ማርች ኤፕሪል ሜይ ጁን ጁላይ ኦገስት ሴፕቴምበር ኦክቶበር'), 'the Gregorian months are named');
+  assert.ok(DATING.includes('ኦገስት፣ ሴፕቴምበር፣ ኦክቶበር'), 'in the Amharic half too');
   assert.match(DATING, /NEVER write "ዓ\.ም\." after a Gregorian year/);
   assert.ok(DATING.includes('2018 ዓ.ም.'), 'and the one case where the Ethiopian marker is right');
   assert.ok(/ከግሪጎሪያን ዓመት ቀጥሎ/.test(DATING), 'the Amharic half carries the same rule');
