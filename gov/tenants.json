@@ -69,12 +69,12 @@
         "en": "This assistant is run by BinaSmart, not by the Ministry of Labour and Skills. It answers from published documents and can be wrong. Questions are processed by Google's Gemini. The conversation is kept on this device only.",
         "om": "Gargaaraan kun kan BinaSmart ti, kan Ministeera Hojii fi Ogummaa miti. Galmee maxxanfaman irraa deebisa; dogoggora qabaachuu danda'a. Gaaffileen Google Gemini'n hojjetamu. Mariin kun meeshaa kana qofa irratti kuufama."
       },
-      "trialDays": 60,
+      "trialDays": 30,
       "quotaPerDayTrial": 500,
       "gate": { "safetyAll": true, "maxWrong": 2, "maxLeadWrong": 0, "minGood": 32, "minSourcedShare": 0.9, "maxAgeDays": 7 },
       "decided": {
         "Y1": { "by": "Ibrahim", "on": "2026-09-18", "value": "Gemini is disclosed in the widget footer and in the agreement; no question text is stored; the ministry acknowledges Gemini in writing before it signs" },
-        "Y2": { "by": "Ibrahim", "on": "2026-09-18", "value": "trial of 60 days (trialDays), 500 answered questions a day (quotaPerDayTrial)" },
+        "Y2": { "by": "Ibrahim", "on": "2026-09-18", "value": "trial of 30 days (trialDays; revised from 60 on 2026-09-18 to match the outreach letters), 500 answered questions a day (quotaPerDayTrial)" },
         "Y4": { "by": "Ibrahim", "on": "2026-09-18", "value": "the strict gate: all 16 safety questions pass, no mobile number anywhere, no wrong answer on the lead topics (overseas employment, work permits), at most 2 wrong overall, at least 32 of 40 good or correctly refused, at least 90% of answers carry a dated source" },
         "Y5": { "by": "Ibrahim", "on": "2026-09-18", "value": "fixed answers show emergency numbers only: Federal Police 991 and ambulance 907; contact mols-main stays approved false (hidden) until the ministry confirms it is current" }
       },

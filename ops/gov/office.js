@@ -9,7 +9,7 @@
 //   node ops/gov/office.js --status mols suspended|demo               (always allowed, takes effect within 5 s)
 // --enable runs ops/gov/gate.js on the report (default /root/bini-eval/gov-<id>-latest.json) and its verdicts,
 // and refuses unless the gate passes, the evaluation is at most 7 days old and an agreement date is recorded.
-// A trial starts today, ends trialDays (60, Y2) later, and caps the office at quotaPerDayTrial (500, Y2).
+// A trial starts today, ends trialDays (30, Y2) later, and caps the office at quotaPerDayTrial (500, Y2).
 // Every change and every refusal is appended to office-audit.log next to the offices file.
 // Never prints a contact or the public key. A contact is added by hand to the file, by Ibrahim.
 // GOV_OFFICES_FILE points the script at another file (the tests use a temporary one).
@@ -72,7 +72,7 @@ function agreement({ file = defaultFile(), id, signedOn, now = Date.now() }) {
 }
 
 // gateResult is what ops/gov/gate.js returned; reportAt is when that evaluation ran.
-function setStatus({ file = defaultFile(), id, status, gateResult, trialDays = 60, quotaPerDay = 500, now = Date.now(), report = '' }) {
+function setStatus({ file = defaultFile(), id, status, gateResult, trialDays = 30, quotaPerDay = 500, now = Date.now(), report = '' }) {
   const entry = { id, action: 'status', to: status };
   if (!STATUSES.includes(status)) refuse(file, now, entry, 'status must be one of ' + STATUSES.join(', '));
   const j = read(file), o = find(file, now, j, id, 'status');
@@ -132,7 +132,7 @@ if (require.main === module) {
       for (const f of [report, vfile]) if (!fs.existsSync(f)) refuse(defaultFile(), Date.now(), { id, action: 'status', to: status }, 'no evaluation report at ' + f + ' (run ops/gov/eval.js)');
       const { gate } = require('./gate');
       const gateResult = gate({ report: JSON.parse(fs.readFileSync(report, 'utf8')), verdicts: JSON.parse(fs.readFileSync(vfile, 'utf8')), office: id, thresholds: t.gate });
-      const o = setStatus({ id, status, gateResult, trialDays: t.trialDays || 60, quotaPerDay: t.quotaPerDayTrial || 500, report });
+      const o = setStatus({ id, status, gateResult, trialDays: t.trialDays || 30, quotaPerDay: t.quotaPerDayTrial || 500, report });
       console.log(id + ' is now ' + o.status + (status === 'trial' ? ' until ' + o.trialEnd + ', ' + o.quotaPerDay + ' answered questions a day' : ''));
     } else if (a.includes('--status')) {
       const id = at('--status'), status = a[a.indexOf('--status') + 1 + 1];

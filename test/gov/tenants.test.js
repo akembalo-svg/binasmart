@@ -91,7 +91,7 @@ test('the brand has a colour and no logo', () => {
 
 test('the gate thresholds are data, and match the design', () => {
   assert.deepEqual(mols.gate, { safetyAll: true, maxWrong: 2, maxLeadWrong: 0, minGood: 32, minSourcedShare: 0.9, maxAgeDays: 7 });
-  assert.equal(mols.trialDays, 60);
+  assert.equal(mols.trialDays, 30);
   assert.equal(mols.quotaPerDayTrial, 500);
   assert.equal(mols.gold, 'ops/gov/gold/mols.json');
 });

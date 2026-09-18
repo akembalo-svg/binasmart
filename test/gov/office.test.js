@@ -80,15 +80,15 @@ test('init creates a demo record with a public key; trial is refused without an 
   assert.throws(() => office.setStatus({ file, id: 'mols', status: 'open', now: NOW }), /status must be/);
   assert.throws(() => office.setStatus({ file, id: 'nope', status: 'suspended', now: NOW }), /no office/);
   assert.equal(JSON.parse(fs.readFileSync(file, 'utf8')).offices[0].status, 'demo');
-  const t = office.setStatus({ file, id: 'mols', status: 'trial', gateResult: PASS, trialDays: 60, quotaPerDay: 500, now: NOW, report: '/r.json' });
-  assert.deepEqual([t.status, t.trialStart, t.trialEnd, t.evalReport, t.quotaPerDay], ['trial', '2026-10-01', '2026-11-30', '/r.json', 500]);
+  const t = office.setStatus({ file, id: 'mols', status: 'trial', gateResult: PASS, trialDays: 30, quotaPerDay: 500, now: NOW, report: '/r.json' });
+  assert.deepEqual([t.status, t.trialStart, t.trialEnd, t.evalReport, t.quotaPerDay], ['trial', '2026-10-01', '2026-10-31', '/r.json', 500]);
   assert.equal(office.setStatus({ file, id: 'mols', status: 'suspended', now: NOW }).status, 'suspended', 'suspending needs nothing');
   assert.throws(() => office.setStatus({ file, id: 'mols', status: 'trial', gateResult: PASS, now: NOW }), /trial already/);
   const log = auditOf(file);
   assert.deepEqual(log.filter(l => l.ok).map(l => l.action + ':' + (l.to || '')), ['init:demo', 'agreement:', 'status:trial', 'status:suspended']);
   assert.ok(log.filter(l => !l.ok).length >= 8, 'every refusal is written down');
   const trial = log.find(l => l.ok && l.to === 'trial');
-  assert.deepEqual([trial.from, trial.trialStart, trial.trialEnd, trial.quotaPerDay, trial.report], ['demo', '2026-10-01', '2026-11-30', 500, '/r.json']);
+  assert.deepEqual([trial.from, trial.trialStart, trial.trialEnd, trial.quotaPerDay, trial.report], ['demo', '2026-10-01', '2026-10-31', 500, '/r.json']);
   assert.ok(!JSON.stringify(log).includes(out.publicKey), 'the audit never holds the key');
 });
 
@@ -176,7 +176,7 @@ test('the command line refuses to switch an office on without a fresh passing ev
   assert.equal(ok.code, 0, ok.out);
   assert.match(ok.out, /mols is now trial until \d{4}-\d{2}-\d{2}/);
   const rec = JSON.parse(fs.readFileSync(file, 'utf8')).offices[0];
-  assert.deepEqual([rec.status, rec.quotaPerDay, (Date.parse(rec.trialEnd) - Date.parse(rec.trialStart)) / DAY], ['trial', 500, 60]);
+  assert.deepEqual([rec.status, rec.quotaPerDay, (Date.parse(rec.trialEnd) - Date.parse(rec.trialStart)) / DAY], ['trial', 500, 30]);
   const shown = run('--show', 'mols').out + run('--list').out;
   assert.ok(!shown.includes(key));
   assert.match(shown, /publicKey\s+\(27 characters\)/);

@@ -35,7 +35,7 @@ Y1, Y2, Y4 and Y5 were **decided by Ibrahim on 2026-09-18**, each as recommended
 | # | Question | Recommendation | Status |
 |---|---|---|---|
 | Y1 | **The Gemini position for government tenants** (§6). | v1: disclose it in the widget and in the agreement, store no question text, voice off; the office acknowledges Gemini in writing before it signs. A local answer path is a separate, costed project. | **Decided 2026-09-18 (Ibrahim):** as recommended. |
-| Y2 | **Trial length and trial cap.** | 60 days from the day the widget is switched on for the office's origin; 500 answered questions a day during the trial. | **Decided 2026-09-18 (Ibrahim):** 60 days, 500 answered questions a day. |
+| Y2 | **Trial length and trial cap.** | 30 days from the day the widget is switched on for the office's origin; 500 answered questions a day during the trial. | **Decided 2026-09-18 (Ibrahim):** 60 days, then revised the same day to 30 days to match the outreach letters; 500 answered questions a day. |
 | Y3 | **The billable unit** as defined in D12. | As written. | Pending. |
 | Y4 | **The evaluation threshold** for switching an office on (§10). | As written in §10. | **Decided 2026-09-18 (Ibrahim):** the strict threshold of §10 as written. |
 | Y5 | **The numbers the danger-abroad and complaint answers may show.** | v1 shows only the Federal Police (991), the ambulance (907) and the ministry line `+251 116 671792` that sits, sourced and dated, in our work-permit document. Ask the ministry for its complaints desk and the labour attachés. | **Decided 2026-09-18 (Ibrahim):** emergency numbers only for now, Federal Police 991 and ambulance 907. The ministry line stays hidden (`approved: false`) until the ministry confirms it is current. |
@@ -192,7 +192,7 @@ Never in any log line: a question, an answer, a visitor id, an address, a frame 
 
 ## 8. Trial and billing (D12, Y2, Y3)
 
-- **Status lifecycle:** `demo` (framable only by `bina.et` itself) → `trial` (framable by the office's origins; `trialStart` is the day it was switched on; `trialEnd` is 60 days later; Y2, decided 2026-09-18: 60 days, 500 answered questions a day) → `paid`, or `suspended` at any time. A trial past its end stops serving: the loader returns an empty script and the launcher never appears, so the office's page is unchanged.
+- **Status lifecycle:** `demo` (framable only by `bina.et` itself) → `trial` (framable by the office's origins; `trialStart` is the day it was switched on; `trialEnd` is 30 days later; Y2, decided 2026-09-18: 30 days, 500 answered questions a day) → `paid`, or `suspended` at any time. A trial past its end stops serving: the loader returns an empty script and the launcher never appears, so the office's page is unchanged.
 - **Billable unit:** one answered question, as defined in D12. The engine marks it (`answered: true` on its success path only), so the definition lives in one place and is tested.
 - **Statement:** `ops/gov/statement.js --office mols --month 2026-10` reads the ledger's day files and prints answered (billable), refused, emergency and danger-abroad, limited, errors, thumbs up/down, reports and denied-over-quota, per day and in total, then `price: not set`. No price exists anywhere in the code; when Ibrahim sets one it goes into the office's operational record, and the statement multiplies.
 
