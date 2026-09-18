@@ -1239,6 +1239,14 @@ fastify.post('/api/afiya', (req, reply) => runAgent(afiyaAgent, req, reply, { li
 // One office = gov/tenants.json (behaviour, reviewed) + /root/storage/gov/offices.json (operations).
 // Design: docs/superpowers/specs/2026-09-18-government-widget-design.md
 fastify.register(require('./gov/routes'), { runAgent, evalAllowed: isEval });
+// ===== Business assistants (workspaces/): one private knowledge base and assistant per institution. =====
+// The client's documents live in WorkspaceChunk and are embedded by bina-embed on this machine, so they
+// never reach KnowledgeChunk (which the public index loads whole) and never leave the server. Answers go
+// through the same engine as Afiya and Asmat, so the grounding, date and refusal guards apply unchanged.
+// Pages: /ws/dashboard (the client), /verify (the document check), /embed.js (the website bubble).
+require('./workspaces/routes')(fastify, { prisma, runAgent, isMiss: (t, o) => biniMemory.isMiss(t, o),
+  limiter: hotelLimiter, ownerKey: OWNER_KEY,
+  verifier: require('./workspaces/verify').makeVerifier({ knowledge }) });
 
 fastify.get('/api/assistant/misses', async (req, reply) => {
   if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
