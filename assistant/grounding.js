@@ -250,5 +250,9 @@ function dropUngrounded(text, grounding, question) {
   return { text: kept.join(' ').replace(/\s{2,}/g, ' ').trim(), dropped: bad };
 }
 
-module.exports = { findUngrounded, dropUngrounded, fixCalendarMarker, maskedShapes, completesMask,
+// The date itself, once the marker is right: assistant/dates.js. A Gregorian date must be in the sources or be
+// the exact conversion of an Ethiopian date that is; exported here so it runs wherever fixCalendarMarker does.
+const { fixGregorianDates } = require('./dates');
+
+module.exports = { findUngrounded, dropUngrounded, fixCalendarMarker, fixGregorianDates, maskedShapes, completesMask,
   FIGURE, YEAR, EC_MARKER, LONGNUM, MASKED_NUMBER, TRIVIAL, LONG_MIN, OWN_NUMBERS };

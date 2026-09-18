@@ -983,7 +983,7 @@ function biniGuards(text, msg, hist, grounding) {
     // deterministic half. The marker is rewritten and the sentence kept — the date is right.
     const cal = fixCalendarMarker(t, grounding);
     if (cal.fixed) console.warn('[bini] rewrote ' + cal.fixed + ' Gregorian date(s) marked as Ethiopian');
-    t = cal.text;
+    t = require('./assistant/grounding').fixGregorianDates(cal.text, grounding, msg, 'bini');   // and the date itself (assistant/dates.js)
     const g = dropUngrounded(t, grounding, msg);
     if (g.dropped.length) {
       console.warn('[bini] dropped ungrounded ' + g.dropped.map(d => d.text).join(', '));
