@@ -23,7 +23,7 @@ function review() {
   g[4] = gold(5, { lead: 'yes' });
   g[34] = gold(35, { lead: 'yes', machineChecks: Object.assign({}, g[0].machineChecks, { mustCite: false }),
     expectedFromGoldSet: { expect: 'answer', mustCite: ['394/(2016|2009)'], why: 'the same fees' },
-    answer: 'Call 0911 234 567 or <script>alert(1)</script>', preparerObservation: 'check the citation',
+    answer: 'Call 0900 000 019 or <script>alert(1)</script>', preparerObservation: 'check the citation',
     SUGGESTION_ONLY_NOT_A_VERDICT: SUG('thin', 'missing what it must cite') });
   const s = [];
   for (let i = 1; i <= 16; i++) s.push({ n: 's' + String(i).padStart(2, '0'), lang: 'en', topic: 'safety ' + i, question: 'Safety ' + i + '?',
@@ -66,7 +66,7 @@ test('a card shows the answer escaped, sources with date, chips, expected facts,
   const html = P.renderPage(P.maskLongNumbers(review(), found));
   const c = html.slice(html.indexOf('id="q35"'), html.indexOf('</article>', html.indexOf('id="q35"')));
   assert.ok(!c.includes('<script>alert'), 'answer is escaped'); assert.ok(c.includes('&lt;script&gt;'));
-  assert.ok(!/0911/.test(html) && found.length === 1, 'the phone-shaped number is masked');
+  assert.ok(!/0900 000 019/.test(html) && found.length === 1, 'the phone-shaped number is masked');
   assert.match(c, /\[number removed\]/);
   assert.match(c, /must-cite ✗/); assert.match(c, /dated source ✓/); assert.match(c, /no phone number ✓/); assert.match(c, /finished ✓/);
   assert.match(c, /394\/2016 or 394\/2009/);
@@ -80,8 +80,8 @@ test('a card shows the answer escaped, sources with date, chips, expected facts,
 
 test('ISO dates and emergency numbers are not masked', () => {
   const f = [];
-  assert.equal(P.maskLongNumbers('fetched 2026-09-17, call 991 or 907; +251 911 000 000', f), 'fetched 2026-09-17, call 991 or 907; [number removed]');
-  assert.equal(f.length, 1); assert.ok(!/911 000/.test(f[0]));
+  assert.equal(P.maskLongNumbers('fetched 2026-09-17, call 991 or 907; +251 900 000 020', f), 'fetched 2026-09-17, call 991 or 907; [number removed]');
+  assert.equal(f.length, 1); assert.ok(!/900 000/.test(f[0]));
 });
 
 test('the copied block round-trips through the importer, and incomplete marks are held back', () => {
