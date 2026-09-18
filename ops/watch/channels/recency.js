@@ -24,19 +24,23 @@ const EN = [
 ];
 
 // Amharic markers. አዲስ (new), ዛሬ (today), ትናንት (yesterday), በዚህ ሳምንት (this week), በዚህ ወር (this month),
-// ሰሞኑን (these past days), ተቀየረ / ተለወጠ (changed), ተሻሽሏል (was updated), አዲስ ማስታወቂያ (new notice),
-// የቅርብ ጊዜ (recent). Amharic is written without spaces between a word and its suffixes, so these are
-// substring tests on purpose — \b does not help in Ethiopic.
+// ሰሞኑን (these past days), ተቀየረ / ተለወጠ (changed), ተሻሽሏል (was updated), የቅርብ ጊዜ (recent). Amharic is written
+// without spaces between a word and its suffixes, so these match as substrings on purpose — \b does not help
+// in Ethiopic.
+//
+// አዲስ አበባ is the one that had to be carved out, and it was the gold set that caught it: "የአዲስ አበባ ነዋሪነት
+// መታወቂያ እንዴት ይወጣል?" is a question about a kebele ID in Addis Ababa, not about anything new, and every
+// question anyone asks about the capital would otherwise have reached the watch instead of the directive.
 const AM = [
-  'አዲስ', 'አዳዲስ', 'ዛሬ', 'ትናንት', 'በዚህ ሳምንት', 'በዚህ ወር', 'ሰሞኑን', 'በቅርቡ', 'የቅርብ ጊዜ',
-  'ተቀየረ', 'ተቀይሯል', 'ተለወጠ', 'ተሻሻለ', 'ተሻሽሏል', 'አዲሱ', 'አዲሷ', 'አሁን',
+  /አዲስ(?!\s*አበባ)/, /አዳዲስ/, /አዲሱ/, /አዲሷ/, /ዛሬ/, /ትናንት/, /በዚህ ሳምንት/, /በዚህ ወር/, /ሰሞኑን/, /በቅርቡ/,
+  /የቅርብ ጊዜ/, /ተቀየረ/, /ተቀይሯል/, /ተለወጠ/, /ተሻሻለ/, /ተሻሽሏል/, /አሁን/,
 ];
 
 function hasRecencyMarker(question) {
   const q = String(question || '');
   if (!q.trim()) return false;
   for (const re of EN) if (re.test(q)) return true;
-  for (const w of AM) if (q.includes(w)) return true;
+  for (const re of AM) if (re.test(q)) return true;
   return false;
 }
 
