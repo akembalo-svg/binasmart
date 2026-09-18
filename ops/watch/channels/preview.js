@@ -62,7 +62,8 @@ const WHEN = /class="tgme_widget_message_date"[^>]*>\s*<time datetime="([^"]+)"/
 // begins. Telegram nests a second div of the same class inside the first, so a "find the closing tag" parser
 // would stop halfway through a long post; the footer marker does not move.
 const TEXT_START = /<div class="tgme_widget_message_text[^"]*"[^>]*>/;
-const TEXT_END = /<div class="tgme_widget_message_(footer|info)\b/;
+// …and the reactions block, which is a row of emoji and counts and is not something the office wrote.
+const TEXT_END = /<div class="tgme_widget_message_(footer|info|reactions)\b/;
 
 // html -> { title, handle, live, posts: [{ id, at, date, text, links, lang, url }] }
 function readPreview(html, { handle } = {}) {
