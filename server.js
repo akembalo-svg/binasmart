@@ -1235,6 +1235,11 @@ fastify.post('/api/asmat', (req, reply) => runAgent(asmatAgent, req, reply, { li
 // stroke. Everything else is grounded, stripped of any dosage, and closed with the disclosure.
 fastify.post('/api/afiya', (req, reply) => runAgent(afiyaAgent, req, reply, { limit: agentLimit(req) }));
 
+// ===== The government widget (gov/): an office's assistant in a frame on its own site. =====
+// One office = gov/tenants.json (behaviour, reviewed) + /root/storage/gov/offices.json (operations).
+// Design: docs/superpowers/specs/2026-09-18-government-widget-design.md
+fastify.register(require('./gov/routes'), { runAgent, evalAllowed: isEval });
+
 fastify.get('/api/assistant/misses', async (req, reply) => {
   if ((req.headers['x-owner-key'] || req.query.key) !== OWNER_KEY) return reply.code(401).send({ ok: false, error: 'unauthorized' });
   const days = Math.max(1, Math.min(90, Number(req.query.days) || 7));
