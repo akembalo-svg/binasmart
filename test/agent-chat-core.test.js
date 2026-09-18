@@ -79,10 +79,13 @@ test('nothing from a reply can become markup, a script link or a bad tel: link',
   assert.deepEqual(C.toCard(null, AFIYA), { kind: 'answer', text: '', disclosure: '', call: [], sources: [] });
 });
 
-test('sources: at most two, http(s) only, titles cleaned', () => {
+// The cap was two until 2026-09-18, when the government frame began showing the documents an office
+// answers from (Task 10, design D7: at most three, each with its publisher and the date it was fetched).
+// Afiya and Asmat are unaffected: their engine never hands the card more than two.
+test('sources: at most three, http(s) only, titles cleaned', () => {
   const card = C.toCard({ reply: 'a', sources: [
-    { title: ' **One** ', url: 'https://bina.et/1' }, { title: 'ftp', url: 'ftp://x' }, { title: 'Two', url: 'http://www.moh.gov.et/' }, { title: 'Three', url: 'https://bina.et/3' }] }, AFIYA);
-  assert.deepEqual(card.sources, [{ title: 'One', url: 'https://bina.et/1' }, { title: 'Two', url: 'http://www.moh.gov.et/' }]);
+    { title: ' **One** ', url: 'https://bina.et/1' }, { title: 'ftp', url: 'ftp://x' }, { title: 'Two', url: 'http://www.moh.gov.et/' }, { title: 'Three', url: 'https://bina.et/3' }, { title: 'Four', url: 'https://bina.et/4' }] }, AFIYA);
+  assert.deepEqual(card.sources, [{ title: 'One', url: 'https://bina.et/1' }, { title: 'Two', url: 'http://www.moh.gov.et/' }, { title: 'Three', url: 'https://bina.et/3' }]);
 });
 
 test('linkify trims trailing punctuation and keeps the text around links', () => {

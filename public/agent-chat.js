@@ -89,8 +89,40 @@
 
   root.appendChild(head); root.appendChild(log); root.appendChild(bar);
 
+  // ---------- the frame's extras: a fixed footer under the bar, and feedback under a fresh answer.
+  // Both are off unless the page's config asks for them, so /afiya and /asmat are untouched (Task 10).
+  var foot = null;
+  if (cfg.footer) { foot = el('p', 'ac-foot'); root.appendChild(foot); }
+  function renderFoot() { if (foot) foot.textContent = tr('footer') || ''; }
+  function addFeedback(w, question, card) {
+    var row = el('div', 'ac-fb'), done = false;
+    function post(body) {
+      body.uid = uid(); body.lang = lang;
+      return fetch(cfg.feedback.api, { method: 'POST', headers: Object.assign({ 'content-type': 'application/json' }, cfg.headers || {}),
+        body: JSON.stringify(body) }).catch(function () {});
+    }
+    function thanks() { row.textContent = ''; row.appendChild(el('span', null, ui('thanks'))); }
+    function vote(v) { if (done) return; done = true; post({ vote: v }); thanks(); }
+    var up = button('ac-fb-b', ui('up'), function () { vote('up'); }); up.textContent = '👍';
+    var down = button('ac-fb-b', ui('down'), function () { vote('down'); }); down.textContent = '👎';
+    var rep = button('ac-fb-r', '', function () {
+      if (done) return;
+      row.textContent = '';
+      row.appendChild(el('span', null, ui('reportConsent')));
+      var yes = button('ac-fb-b', '', function () { done = true; post({ vote: 'report', consent: true, question: question, answer: card.text, sources: card.sources }); thanks(); });
+      yes.textContent = ui('reportYes');
+      var no = button('ac-fb-b', '', function () { row.parentNode.removeChild(row); });
+      no.textContent = ui('reportNo');
+      row.appendChild(yes); row.appendChild(no);
+    });
+    rep.textContent = ui('report');
+    row.appendChild(up); row.appendChild(down); row.appendChild(rep);
+    w.appendChild(row);
+  }
+
   // ---------- fixed texts, redrawn on a language change ----------
   function renderChrome() {
+    renderFoot();
     whoName.textContent = tr('name'); whoRole.textContent = tr('role');
     menuBtn.setAttribute('aria-label', ui('chats'));
     newBtn.setAttribute('aria-label', ui('newChat'));
@@ -173,13 +205,14 @@
         if (i) src.appendChild(document.createTextNode(' · '));
         var a = el('a', null, s.title); a.href = s.url; a.rel = 'noopener'; a.target = '_blank';
         src.appendChild(a);
+        if (s.publisher || s.fetched) src.appendChild(document.createTextNode(' — ' + [s.publisher, s.fetched ? ui('fetched') + ' ' + s.fetched : ''].filter(Boolean).join(', ')));
       });
       w.appendChild(src);
     }
     if (card.disclosure) w.appendChild(el('p', 'ac-disc', card.disclosure));
     return w;
   }
-  function addAgent(card) { var w = renderCard(card); log.appendChild(w); scrollEnd(w); }
+  function addAgent(card) { var w = renderCard(card); log.appendChild(w); scrollEnd(w); return w; }
   function addChips() {
     var list = (tr('chips') || []).slice(0, 3);
     if (!list.length) return;
@@ -215,15 +248,19 @@
   function ask(text) {
     setBusy(true);
     var t = typing(), id = chatId;
-    fetch(cfg.api, { method: 'POST', headers: { 'content-type': 'application/json' },
+    fetch(cfg.api, { method: 'POST', headers: Object.assign({ 'content-type': 'application/json' }, cfg.headers || {}),
       body: JSON.stringify({ message: text, user: { uid: uid() } }) })
-      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (r.status === 401 && cfg.headers) { showNote(ui('expired')); setTimeout(function () { window.location.reload(); }, 800); throw new Error('expired'); }
+        return r.json();
+      })
       .then(function (d) {
         if (!d || typeof d.reply !== 'string' || !d.reply) throw new Error('no reply');
         t.parentNode.removeChild(t);
         var card = C.toCard(d, cfg);
-        addAgent(card);
+        var drawn = addAgent(card);
         history.add(id, { role: 'agent', card: card });
+        if (cfg.feedback && card.kind === 'answer' && drawn) addFeedback(drawn, text, card);
         if (card.kind === 'answer') addChips();
       })
       .catch(function () { if (t.parentNode) t.parentNode.removeChild(t); addError(text); })

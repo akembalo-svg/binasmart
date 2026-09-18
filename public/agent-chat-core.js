@@ -69,12 +69,16 @@
   function cleanSources(list) {
     var out = [];
     if (!Array.isArray(list)) return out;
-    for (var i = 0; i < list.length && out.length < 2; i++) {
+    for (var i = 0; i < list.length && out.length < 3; i++) {
       var s = list[i];
       if (!s || typeof s !== 'object') continue;
       var url = str(s.url), title = cleanText(s.title).replace(/\s+/g, ' ').slice(0, 120);
       if (!/^https?:\/\/[^\s<>"']+$/i.test(url) || !title) continue;
-      out.push({ title: title, url: url });
+      var entry = { title: title, url: url };
+      var pub = cleanText(s.publisher).replace(/\s+/g, ' ').slice(0, 120);
+      if (pub) entry.publisher = pub;
+      if (/^\d{4}-\d{2}-\d{2}$/.test(str(s.fetched))) entry.fetched = str(s.fetched);
+      out.push(entry);
     }
     return out;
   }

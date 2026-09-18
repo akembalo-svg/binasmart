@@ -60,7 +60,7 @@ function frameHtml(office, token, l) {
     + '<script id="agent-chat-config" type="application/json">' + json(cfg) + '</script>'
     + '<div id="agent-chat" class="ac"></div>'
     + '<script src="/static/w/frame.js?v=1"></script>'
-    + '<script src="/static/agent-chat-core.js?v=2" defer></script><script src="/static/agent-chat.js?v=2" defer></script>'
+    + '<script src="/static/agent-chat-core.js?v=3" defer></script><script src="/static/agent-chat.js?v=3" defer></script>'
     + '</body></html>';
 }
 

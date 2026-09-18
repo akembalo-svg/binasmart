@@ -104,12 +104,26 @@ test('the two pages keep their chats apart', () => {
   assert.notEqual(config(read('afiya.html')).storageKey, config(read('asmat.html')).storageKey);
 });
 
+// Four things the chat learned for the government frame (Task 10, 2026-09-18) are drawn only when the
+// page's config asks: cfg.headers (an expired frame reloads), dated sources, cfg.footer and cfg.feedback.
+// Their fixed texts belong to the frame, which builds its ui block in gov/pages.js — not to /afiya and
+// /asmat, whose config is unchanged. So they are required there instead, in both languages, not skipped.
+const FRAME_ONLY = ['expired', 'fetched', 'up', 'down', 'report', 'reportConsent', 'reportYes', 'reportNo', 'thanks'];
+
 test('every fixed text agent-chat.js asks for is in both pages, in Amharic and English', () => {
   const keys = new Set();
   for (const m of read('agent-chat.js').matchAll(/\bui\(([^()]*)\)/g)) for (const k of m[1].matchAll(/(?<!=== )'([A-Za-z]+)'/g)) keys.add(k[1]);
   assert.ok(keys.size >= 20, 'found ' + keys.size + ' keys');
   for (const page of ['afiya.html', 'asmat.html']) {
     const cfg = config(read(page));
-    for (const k of keys) for (const l of ['am', 'en']) assert.ok(cfg.ui[l][k], page + ' ui.' + l + '.' + k);
+    for (const k of keys) {
+      if (FRAME_ONLY.includes(k)) continue;
+      for (const l of ['am', 'en']) assert.ok(cfg.ui[l][k], page + ' ui.' + l + '.' + k);
+    }
   }
+});
+
+test('the texts only the government frame draws are in the frame own ui block, in both languages', () => {
+  const UI = require('../gov/pages.js').UI;
+  for (const k of FRAME_ONLY) for (const l of ['am', 'en']) assert.ok(UI[l][k], 'gov/pages.js UI.' + l + '.' + k);
 });
