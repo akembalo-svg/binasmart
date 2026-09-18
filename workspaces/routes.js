@@ -1,6 +1,6 @@
 'use strict';
 // HTTP surface of the business assistants (workspaces/index.js). Registered from server.js with one call:
-//   require('./workspaces/routes')(fastify, { prisma, runAgent, isMiss, limiter: hotelLimiter, ownerKey: OWNER_KEY })
+//   require('./workspaces/routes')(fastify, { prisma, runAgent, isMiss, limiter: hotelLimiter, staffKey: OWNER_KEY })
 //
 // Three kinds of caller, three kinds of key, and none is ever derived from the request body:
 //   BinaSmart staff   x-owner-key: OWNER_KEY               create a workspace, set its plan and limit
@@ -17,7 +17,7 @@ const NO_INFO = /(do not|don't|does not|doesn't) have (any |enough |that |this |
 const PDF_BODY_LIMIT = 15 * 1024 * 1024;   // base64 of a ~11 MB PDF
 
 module.exports = function registerWorkspaces(fastify, deps) {
-  const { prisma, runAgent, isMiss, limiter, ownerKey } = deps;
+  const { prisma, runAgent, isMiss, limiter, staffKey } = deps;
   const ws = deps.workspaces || makeWorkspaces({ prisma });
   const ipOf = req => String(req.headers['x-real-ip'] || req.ip);
   const siteIpRL = limiter(600000, 30);      // 30 questions per 10 minutes per visitor address, per bubble
@@ -35,12 +35,12 @@ module.exports = function registerWorkspaces(fastify, deps) {
 
   // ---------- staff ----------
   fastify.post('/api/ws', async (req, reply) => {
-    if (!ownerKey || ownerKey === 'change-me' || req.headers['x-owner-key'] !== ownerKey) return reply.code(401).send({ ok: false, error: 'unauthorized' });
+    if (!staffKey || staffKey === 'change-me' || req.headers['x-owner-key'] !== staffKey) return reply.code(401).send({ ok: false, error: 'unauthorized' });
     try { return { ok: true, ...(await ws.create(req.body || {})) }; }
     catch (e) { if (e && e.code === 'P2002') return reply.code(409).send({ ok: false, error: 'slug already taken' }); return fail(reply, e); }
   });
   fastify.post('/api/ws/:slug/plan', async (req, reply) => {
-    if (!ownerKey || ownerKey === 'change-me' || req.headers['x-owner-key'] !== ownerKey) return reply.code(401).send({ ok: false, error: 'unauthorized' });
+    if (!staffKey || staffKey === 'change-me' || req.headers['x-owner-key'] !== staffKey) return reply.code(401).send({ ok: false, error: 'unauthorized' });
     const w = await prisma.workspace.findUnique({ where: { slug: String(req.params.slug) } });
     if (!w) return reply.code(404).send({ ok: false, error: 'not found' });
     const b = req.body || {};
@@ -126,7 +126,7 @@ module.exports = function registerWorkspaces(fastify, deps) {
   // Open to a client key, and to staff with the owner key; text or a PDF, never stored.
   fastify.post('/api/verify', { bodyLimit: PDF_BODY_LIMIT }, async (req, reply) => {
     if (!deps.verifier) return reply.code(503).send({ ok: false, error: 'document check not available' });
-    const staff = ownerKey && ownerKey !== 'change-me' && req.headers['x-owner-key'] === ownerKey;
+    const staff = staffKey && staffKey !== 'change-me' && req.headers['x-owner-key'] === staffKey;
     let w = null;
     if (!staff) { w = await client(req, reply); if (!w) return; if (!uploadRL(w.id)) return reply.code(429).send({ ok: false, error: 'too many checks, try again later' }); }
     const b = req.body || {};

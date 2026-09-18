@@ -28,6 +28,6 @@ const runAgent = makeEngine({ callModel, contextFor: (q, o) => knowledge.context
   handover: async () => false, dropUngrounded, isEval: () => true, prisma, audit: async () => {} });
 const { makeVerifier } = require('../workspaces/verify');
 const verifier = makeVerifier({ knowledge });
-require('../workspaces/routes')(fastify, { prisma, runAgent, isMiss: memory.isMiss, limiter, ownerKey: process.env.OWNER_KEY, verifier });
+require('../workspaces/routes')(fastify, { prisma, runAgent, isMiss: memory.isMiss, limiter, staffKey: process.env.OWNER_KEY, verifier });
 knowledge.load().then(()=>console.log('knowledge loaded'));
 fastify.listen({ port: 4299, host: '127.0.0.1' }).then(() => console.log('harness on 4299'));
