@@ -1245,7 +1245,9 @@ fastify.register(require('./gov/routes'), { runAgent, evalAllowed: isEval });
 // through the same engine as Afiya and Asmat, so the grounding, date and refusal guards apply unchanged.
 // Pages: /ws/dashboard (the client), /verify (the document check), /embed.js (the website bubble).
 require('./workspaces/routes')(fastify, { prisma, runAgent, isMiss: (t, o) => biniMemory.isMiss(t, o),
-  limiter: hotelLimiter, staffKey: OWNER_KEY,   // named staffKey, not ownerKey: a building owner key is a different thing (test/building/ownerKeys.test.js)
+  // staffKey, not the other name: a building owner key is a different thing, and test/building/
+  // ownerKeys.test.js guards server.js against that name coming back on any line.
+  limiter: hotelLimiter, staffKey: OWNER_KEY,
   verifier: require('./workspaces/verify').makeVerifier({ knowledge }) });
 
 fastify.get('/api/assistant/misses', async (req, reply) => {
