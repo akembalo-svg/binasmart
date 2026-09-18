@@ -110,6 +110,25 @@ test('the collective-agreement rule: in force on signature, registration is a se
   assert.match(n, /registration does not approve, ratify or bring the agreement into force/);
 });
 
+// Measured 2026-09-18 through gov/agent.js on the live index (/root/bini-eval/wp/base.json, notes.json): asked in
+// English what a foreigner's work permit costs (gold 35), 3 of 3 answers took the fee from Overseas Employment
+// Proclamation 1389/2025 Art. 19(1)(d) (the employer of an Ethiopian going abroad pays the destination's permit
+// fee) and never named Regulation 394/2016, because the English query retrieves the work-permit document's
+// chunks without its fee lines, and the 1389 chunk listing "work permit fee" does come in. With this line, 3 of 3
+// named Regulation 394/2016 and none cited 1389; the Amharic question (gold 21) stayed 3 of 3 with the figures.
+// Dropping eservices or 1389 from prefer did not bring a fee chunk into the 18-chunk pool. The note names the
+// regulation and never a figure: an amount reaches an answer only from the retrieved document.
+test('the foreign work permit comes from Regulation 394/2016, never from the overseas employment law', () => {
+  const n = mols.notes.find(s => /foreign national's permit to work in Ethiopia/.test(s));
+  assert.ok(n, 'the note is there');
+  assert.match(n, /Directive No\. 44\/2013/);
+  assert.match(n, /Regulation No\. 394\/2016/);
+  assert.match(n, /1389\/2025/);
+  assert.match(n, /Ethiopians going to work abroad/);
+  assert.doesNotMatch(n, /\d,\d{3}|Birr|\bETB\b/, 'no fee figure in the prompt: the amount comes from the document');
+  assert.ok(mols.notes.indexOf(n) < mols.notes.length - 1, 'the length rule stays the last note');
+});
+
 test('the owner decisions of 2026-09-18 are recorded, the rest stay pending, and no price exists', () => {
   for (const y of ['Y1', 'Y2', 'Y4', 'Y5']) {
     assert.ok(mols.decided && mols.decided[y], y + ' decided');
