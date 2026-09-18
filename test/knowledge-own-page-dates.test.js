@@ -44,10 +44,11 @@ test('a guide page: BinaSmart, its bina.et url, and the date of the last commit 
   assert.equal(docMeta(root, 'guide', 'coc-certificate-ethiopia').updated, '2026-09-01');
 });
 
+// The publisher's name is written in Amharic in an Amharic source line: SOURCE_WORDS carries us: 'ቢናስማርት'.
 test('the Amharic context says "updated" in Amharic, never "fetched"', () => {
   const root = gitRepo();
   const line = sourceLine({ source: 'guide', slug: 'lmis-labor-id-ethiopia', title: 'x', url: null }, { root, am: true });
-  assert.equal(line, 'ምንጭ፦ BinaSmart — https://bina.et/lmis-labor-id-ethiopia — የተሻሻለበት ቀን 2026-09-12');
+  assert.equal(line, 'ምንጭ፦ ቢናስማርት — https://bina.et/lmis-labor-id-ethiopia — የተሻሻለበት ቀን 2026-09-12');
   assert.equal(/የተወሰደበት|fetched/.test(line), false);
 });
 
