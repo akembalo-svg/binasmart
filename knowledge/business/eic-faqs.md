@@ -21,6 +21,8 @@ Ethiopian Investment Commission — help — FAQs | Ethiopian Investment Commiss
 
 ይህ ገጽ በኢትዮጵያ ኩባንያ ለማቋቋም የሚያስፈልጉትን ዝርዝር አሰራሮች ያብራራል። ለግል ባለቤትነት (Sole Proprietorship) እና ለግል የተወሰነ ኩባንያ (Private Limited Company - PLC) የሚያስፈልጉትን 8 እርምጃዎች በዝርዝር ያቀርባል። በተጨማሪም፣ አንድ ኩባንያ ባለአክሲዮን ከሆነ የሚያስፈልጉ ተጨማሪ ሰነዶችን ይዘረዝራል።
 
+⚠️ BinaSmart has added a correction to this page: a passage below restates a rule that has since changed, and the current rule, with its legal authority, is marked directly after that passage. The page itself is left exactly as the institution published it. ⚠️ ቢናስማርት በዚህ ገጽ ላይ እርማት አክሏል፦ ከታች ያለው አንድ ክፍል የተቀየረ ደንብ ይደግማል፤ የአሁኑ ደንብና ሕጋዊ ምንጩ ከዚያ ክፍል ቀጥሎ ተጠቅሰዋል። ገጹ ራሱ ተቋሙ ባሳተመው መልኩ ነው።
+
 Source: https://investethiopia.gov.et/faqs (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
 # Frequently Asked Questions
@@ -156,6 +158,9 @@ Ethiopia has a low cost labour compare to other countries. Ethiopia offers compe
 - Educated and easily trainable labor force – over 50 Universities with around half million student population; over 1,300 Technical and Vocational Education and Training (TVET) Institutes with an annual intake close to one million students.
 
 - Overtime pay ranges from 1.25x hourly wage (on work days) to 2.5x hourly wage (on public holidays).
+
+⚠️ Correction by BinaSmart (checked 2026-09-18): This page restates an outdated overtime rule. Under Article 68(1) of the Labour Proclamation 1156/2019 a worker is paid for overtime, in addition to the normal wage, at least 1.5 times the ordinary hourly rate for work between 6:00 a.m. and 10:00 p.m., 1.75 times for night work between 10:00 p.m. and 6:00 a.m., 2 times on the weekly rest day and 2.5 times on a public holiday; under Article 68(2) it is paid on the normal payday together with the wage. · በአማርኛ፦ ይህ ገጽ ጊዜው ያለፈበትን የትርፍ ሰዓት ክፍያ ተመን ይደግማል። በሠራተኛና አሠሪ ሕግ አዋጅ ቁጥር 1156/2019 አንቀጽ 68(1) መሠረት የትርፍ ሰዓት ሥራ የሚሠራ ሠራተኛ ከመደበኛ ደመወዙ በተጨማሪ ለመደበኛ ሥራ በሰዓት ከሚከፈለው ደመወዝ ቢያንስ፦ ከንጋቱ 12 ሰዓት እስከ ምሽቱ 4 ሰዓት × 1.5፣ ከምሽቱ 4 ሰዓት እስከ ንጋቱ 12 ሰዓት × 1.75፣ በሳምንት የዕረፍት ቀን × 2፣ በሕዝብ በዓላት ቀን × 2.5 ይከፈለዋል፤ ክፍያው ለደመወዝ መክፈያ በተወሰነው ቀን ከደመወዝ ጋር ተደምሮ ይከፈላል (አንቀጽ 68(2))። (Labour Proclamation 1156/2019 Art. 68)
+
 
 - Working hours: The working hours is set at 48 hours per week;
 

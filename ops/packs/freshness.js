@@ -128,6 +128,9 @@ function noteFor(reports, { today, pack, extra } = {}) {
       headline += rep.missed.length;
     }
     if (rep.revived.length) lines.push('↩️ ' + rep.name + ': ' + rep.revived.length + ' page(s) are back');
+    // A BinaSmart correction whose passage is no longer on the page: the page changed, the note was not
+    // inserted, and somebody has to look at the registry entry.
+    if (rep.uncorrected && rep.uncorrected.length) lines.push('🩹 ' + rep.name + ': correction no longer matches ' + rep.uncorrected.join(', ') + ' — check the corrections in sources.json');
     if (rep.ingest) lines.push('   re-indexed: +' + rep.ingest.inserted + ' chunks, −' + rep.ingest.deleted + ' stale');
   }
   return (pack && pack.noteTitle ? pack.noteTitle : '📚 Knowledge pack') + ' — ' + headline + ' thing(s) moved\n\n'
@@ -185,6 +188,9 @@ async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites,
   // The Amharic sidecar has to reach writePack, or every unchanged English document would be re-rendered
   // without the Amharic header ops/packs/am-headers.js wrote for it: the weekly check would quietly undo it.
   const amHeaders = cfg.amHeaders ? readSidecar(dir) : null;
+  // The registry's corrections, or the ones a test hands in on the pack block. Without them the weekly
+  // re-render of an unchanged page would quietly take a correction back out.
+  const corrections = (reg && reg.corrections) || cfg.corrections || [];
   // fetchSite tags its own progress lines with the pack it is given, so a banking run never says [travel].
   // The rewrite below is the belt to that pair of braces: an injected fetchSite, and any older caller that
   // still writes the tag itself, are corrected rather than believed.
@@ -196,14 +202,14 @@ async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites,
   for (const site of list) {
     const { pages, failed } = await fetchSite(site, { log: say, tag: prefix });
     const docs = stripPackBoilerplate(pages).filter(d => d.text.trim().length >= MIN_CHARS);
-    const r = writePack(dir, docs, site, { today: day, dryRun, failed, pack: cfg, amHeaders });
+    const r = writePack(dir, docs, site, { today: day, dryRun, failed, pack: cfg, amHeaders, corrections });
     const titles = {};
     for (const d of docs) titles[d.slug] = d.title;
     const total = r.added.length + r.changed.length + r.unchanged.length;
     const rep = { site: site.id, name: site.name, total, titles, failed: failed.length,
       added: r.added || [], changed: r.changed || [], unchanged: r.unchanged || [], gone: r.gone || [],
       reformatted: r.reformatted || [], goneWhy: r.goneWhy || {}, missed: r.missed || [],
-      revived: r.revived || [], refused: !!r.refused, refusedWhy: r.refusedWhy };
+      revived: r.revived || [], uncorrected: r.uncorrected || [], refused: !!r.refused, refusedWhy: r.refusedWhy };
     if (rep.refused) anyRefused = true;
     else if (rep.added.length || rep.changed.length || rep.gone.length || rep.revived.length || rep.missed.length) moved = true;
     log('[' + prefix + '-freshness] ' + site.id + ': +' + rep.added.length + ' new, ' + rep.changed.length + ' changed, '

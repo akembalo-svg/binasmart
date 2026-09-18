@@ -286,12 +286,81 @@ function ungroundedFigures(text, ...strings) {
 // the one every registry's headerEnTemplate opens with, so the text starts after that paragraph however many
 // paragraphs the header has - three today, four once a sidecar entry adds a summary. null means the file was
 // not written by this renderer, and a caller must leave it alone rather than guess where its text begins.
+// A correction note (see "corrections" below) sits INSIDE the page text, directly after the passage it
+// corrects, so it is taken out again here: the page text is what the institution published, and what
+// contentHash, the Amharic sidecar and the next re-render all read.
 function bodyText(md) {
   const parts = bodyOf(md).split('\n\n');
   for (let i = 0; i < Math.min(parts.length, 8); i++) {
-    if (/^Source: https?:\/\//.test(parts[i].trim())) return parts.slice(i + 1).join('\n\n').trim();
+    if (/^Source: https?:\/\//.test(parts[i].trim())) return stripCorrections(parts.slice(i + 1).join('\n\n')).trim();
   }
   return null;
+}
+
+// ---------- corrections ----------
+// Some institutions' pages restate a rule that has since changed: the Investment Commission's FAQ still gives
+// overtime "from 1.25x", which is the repealed 377/2003 rate, and the model trusted it over the law. Editing
+// that page by hand is wrong twice: the page must stay as the institution published it, and the weekly
+// refetch would overwrite the edit anyway. So a pack's sources.json may carry a `corrections` array:
+//   { slug, match, noteEn, noteAm, authority, authorityDoc, checked }
+// renderDoc inserts the note as its own paragraph directly after the line holding `match` (a literal, or a
+// regular expression written /like this/flags), and adds a one-line flag to the header. Every figure in
+// noteEn and noteAm must appear in the authority's own text (knowledge/law/<authorityDoc>.md), or the render
+// refuses: a correction can never introduce a number. If `match` is no longer on the page, the page changed;
+// the document is still written, untouched, and the miss is reported to the caller and the weekly note.
+const LAW_DIR = path.join(ROOT, 'knowledge', 'law');
+const CORR_MARK = '⚠️ Correction by BinaSmart';
+const CORR_RE = /\n\n⚠️ Correction by BinaSmart[^\n]*\n?/g;
+const stripCorrections = text => String(text == null ? '' : text).replace(CORR_RE, '');
+const CORR_FLAG_EN = '⚠️ BinaSmart has added a correction to this page: a passage below restates a rule that has since changed, and the current rule, with its legal authority, is marked directly after that passage. The page itself is left exactly as the institution published it.';
+const CORR_FLAG_AM = '⚠️ ቢናስማርት በዚህ ገጽ ላይ እርማት አክሏል፦ ከታች ያለው አንድ ክፍል የተቀየረ ደንብ ይደግማል፤ የአሁኑ ደንብና ሕጋዊ ምንጩ ከዚያ ክፍል ቀጥሎ ተጠቅሰዋል። ገጹ ራሱ ተቋሙ ባሳተመው መልኩ ነው።';
+
+function authorityTextOf(c, { lawDir = LAW_DIR } = {}) {
+  if (c.authorityText != null) return String(c.authorityText);
+  const name = String(c.authorityDoc || '');
+  if (!/^[a-z0-9][a-z0-9-]{1,150}$/.test(name)) {
+    throw new Error('[pack] correction for ' + c.slug + ' refused: authorityDoc must name a knowledge/law/ document without .md, got ' + JSON.stringify(name));
+  }
+  try { return fs.readFileSync(path.join(lawDir, name + '.md'), 'utf8'); }
+  catch (e) { throw new Error('[pack] correction for ' + c.slug + ' refused: authority document not found: knowledge/law/' + name + '.md'); }
+}
+function findPassage(text, match) {
+  const m = /^\/([\s\S]+)\/([a-z]*)$/.exec(String(match || ''));
+  if (m) {
+    const r = new RegExp(m[1], m[2].replace(/g/g, '')).exec(text);
+    return r ? { start: r.index, end: r.index + r[0].length } : null;
+  }
+  const i = match ? text.indexOf(String(match)) : -1;
+  return i >= 0 ? { start: i, end: i + String(match).length } : null;
+}
+function correctionNote(c) {
+  return CORR_MARK + ' (checked ' + c.checked + '): ' + String(c.noteEn).trim() + ' · በአማርኛ፦ ' + String(c.noteAm).trim()
+    + ' (' + c.authority + ')';
+}
+// Returns { text, applied: [correction], unmatched: [correction] }. Idempotent: notes already in the text are
+// taken out first, so a document rendered from its own rendered text carries each note once.
+function applyCorrections(text, slug, corrections, opts = {}) {
+  let out = stripCorrections(text);
+  const applied = [], unmatched = [];
+  for (const c of (Array.isArray(corrections) ? corrections : []).filter(x => x && x.slug === slug)) {
+    for (const k of ['match', 'noteEn', 'noteAm', 'authority', 'checked']) {
+      if (!c[k]) throw new Error('[pack] correction for ' + slug + ' refused: it has no ' + k);
+    }
+    for (const k of ['noteEn', 'noteAm']) if (/\n/.test(c[k])) throw new Error('[pack] correction for ' + slug + ' refused: ' + k + ' must be one line');
+    const bad = ungroundedFigures(authorityTextOf(c, opts), c.noteEn, c.noteAm);
+    if (bad.length) {
+      throw new Error('[pack] correction for ' + slug + ' refused: ' + bad.join(', ') + ' not found in the authority text ('
+        + (c.authorityDoc || c.authority) + ') - a correction may not introduce a figure');
+    }
+    const hit = findPassage(out, c.match);
+    if (!hit) { unmatched.push(c); continue; }
+    // After the line the passage ends on, never inside it: the institution's sentence stays whole.
+    let at = out.indexOf('\n', Math.max(hit.start, hit.end - 1));
+    if (at < 0) at = out.length;
+    out = out.slice(0, at) + '\n\n' + correctionNote(c) + '\n' + out.slice(at);
+    applied.push(c);
+  }
+  return { text: out, applied, unmatched };
 }
 // Two renders of one document differ in the two lines that move on their own: lastChecked advances every run,
 // and missedAt is cleared by a run that succeeds. Everything else - the front matter, the header, the text -
@@ -374,7 +443,7 @@ const MASKED_RE = /251\u2022{5}[0-9]{4}/;
 const maskPhones = text => String(text == null ? '' : text)
   .replace(MOBILE_RE, m => '251' + '\u2022'.repeat(5) + m.replace(/[^0-9]/g, '').slice(-4));
 
-function header(page, site, today, pack, amh) {
+function header(page, site, today, pack, amh, corrected = false) {
   const heads = pageHeadings(page.text, page.title);
   const lang = page.lang || langFor(site, page.path);
   const vars = {
@@ -412,10 +481,20 @@ function header(page, site, today, pack, amh) {
   const masked = !!(site && site.maskPhones && MASKED_RE.test(page.text || ''));
   const maskNote = masked ? fill(pack && pack.maskNoteEn, vars) || null : null;
   const maskNoteAm = masked ? fill(pack && pack.maskNoteAm, vars) || null : null;
-  return [what, am, (amh && amh.summaryAm) || null, ocrNoteAm, ocrNote, maskNoteAm, maskNote, en].filter(Boolean).join('\n\n');
+  // The correction flag, like the other notes, goes BEFORE the Source paragraph, and only on a page where a
+  // correction actually landed. It carries no figure: the figures are in the note, checked against the law.
+  const corr = corrected ? CORR_FLAG_EN + ' ' + CORR_FLAG_AM : null;
+  return [what, am, (amh && amh.summaryAm) || null, ocrNoteAm, ocrNote, maskNoteAm, maskNote, corr, en].filter(Boolean).join('\n\n');
 }
 
-function renderDoc(page, site, { today, firstFetched, pack, amHeaders } = {}) {
+// `corrections` is the registry's corrections array; `onUnmatched(slug, correction)` hears about a correction
+// whose passage is no longer on the page. Without a callback the miss is logged, never swallowed.
+function renderDoc(page, site, { today, firstFetched, pack, amHeaders, corrections, onUnmatched } = {}) {
+  const fixed = applyCorrections(page.text, page.slug, corrections);
+  for (const c of fixed.unmatched) {
+    if (onUnmatched) onUnmatched(page.slug, c);
+    else console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] correction no longer matches ' + page.slug);
+  }
   const amh = amEntry(page, site, pack, amHeaders);
   const titleAm = (amh && amh.titleAm) || '';
   const title = site.name + ' — ' + (page.title || page.slug);
@@ -431,7 +510,7 @@ function renderDoc(page, site, { today, firstFetched, pack, amHeaders } = {}) {
     contentHash: contentHash(page.text), generated_by: (pack && pack.generatedBy) || 'ops/travel/fetch-airline.js',
     packFormat: (pack && pack.packFormat) || PACK_FORMAT };
   return frontMatter(meta) + '\n\n# ' + title + (titleAm ? ' · ' + titleAm : '')
-    + '\n\n' + header(page, site, today, pack, amh) + '\n\n' + page.text.trim() + '\n';
+    + '\n\n' + header(page, site, today, pack, amh, fixed.applied.length > 0) + '\n\n' + fixed.text.trim() + '\n';
 }
 
 // Rewrite exactly one line. Used when a page is unchanged: the body must stay byte-identical (so git shows
@@ -460,14 +539,21 @@ const normUrl = u => String(u || '').replace(/\/+$/, '');
 // docs: [{ siteId, slug, path, url, title, section, sectionTitleAm, text }] for ONE site, already stripped.
 // failed: [{ url, why }] exactly as fetchSite reports it - what did not come back this run, and why.
 // Returns { added, changed, unchanged, gone, goneWhy, missed, revived } as lists of slugs.
-function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, amHeaders } = {}) {
+function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, amHeaders, corrections } = {}) {
   fs.mkdirSync(dir, { recursive: true });
+  // Every renderDoc below hears about a correction whose passage has left the page; the list goes back to the
+  // caller as `uncorrected`, which is how the weekly note learns of it.
+  const uncorrected = [];
+  const onUnmatched = slug => {
+    if (!uncorrected.includes(slug)) uncorrected.push(slug);
+    console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] correction no longer matches ' + slug);
+  };
   // Masked BEFORE anything hashes or writes it, so contentHash is the hash of what the repository actually
   // holds and the unchanged-check below compares like with like. Re-fetching the same page therefore reads
   // as unchanged, rather than as 805 numbers that moved.
   if (site && site.maskPhones) for (const d of docs) d.text = maskPhones(d.text);
   const day = today || new Date().toISOString().slice(0, 10);
-  const r = { added: [], changed: [], unchanged: [], gone: [], goneWhy: {}, missed: [], revived: [], reformatted: [] };
+  const r = { added: [], changed: [], unchanged: [], gone: [], goneWhy: {}, missed: [], revived: [], reformatted: [], uncorrected };
   const deadUrls = new Map();
   for (const f of failed || []) { const w = DEAD[f.why]; if (w) deadUrls.set(normUrl(f.url), w); }
   const wanted = new Map(docs.map(d => [d.slug, d]));
@@ -483,7 +569,7 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
       // header the sidecar did not hold last time. Re-render it from the text that just came off the site,
       // keeping the day the content was fetched, and keep it out of `changed`: the weekly note is about what
       // the airline did, not about what we did.
-      const fresh = renderDoc(d, site, { today: oldMeta.fetchedAt || day, firstFetched: oldMeta.firstFetched || oldMeta.fetchedAt || day, pack, amHeaders });
+      const fresh = renderDoc(d, site, { today: oldMeta.fetchedAt || day, firstFetched: oldMeta.firstFetched || oldMeta.fetchedAt || day, pack, amHeaders, corrections, onUnmatched });
       if (oldMeta.packFormat !== PACK_FORMAT || !sameDoc(fresh, old)) {
         r.reformatted.push(slug);
         if (dryRun) continue;
@@ -503,7 +589,7 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
     const first = (oldMeta && (oldMeta.firstFetched || oldMeta.fetchedAt)) || dday;
     if (!old) r.added.push(slug); else { r.changed.push(slug); if (oldMeta.status === 'gone') r.revived.push(slug); }
     if (!dryRun) {
-      fs.writeFileSync(file, renderDoc(d, site, { today: dday, firstFetched: first, pack, amHeaders }));
+      fs.writeFileSync(file, renderDoc(d, site, { today: dday, firstFetched: first, pack, amHeaders, corrections, onUnmatched }));
       if (dday !== day) touchLastChecked(file, day);
     }
   }
@@ -551,8 +637,13 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
 // lastChecked are carried through exactly as they stood, so the ingest re-chunks the document while the
 // freshness record still says the institution changed nothing. Reported as re-rendered, never as changed.
 function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
-  const r = { rerendered: [], unchanged: [], skipped: [] };
+  const r = { rerendered: [], unchanged: [], skipped: [], uncorrected: [] };
   const sites = new Map((reg.sites || []).map(s => [s.name, s]));
+  const corrections = reg.corrections || [];
+  const onUnmatched = slug => {
+    if (!r.uncorrected.includes(slug)) r.uncorrected.push(slug);
+    console.log('[' + ((reg.pack && reg.pack.logPrefix) || (reg.pack && reg.pack.id) || 'pack') + '] correction no longer matches ' + slug);
+  };
   for (const f of fs.readdirSync(dir).filter(x => x.endsWith('.md')).sort()) {
     const slug = f.replace(/\.md$/, '');
     const file = path.join(dir, f);
@@ -584,7 +675,7 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
       textSource: meta.text_source || '', ocrQuality: meta.ocr_quality || '',
       ocrPages: meta.pages === undefined || meta.pages === '' ? null : meta.pages,
       part: pt ? Number(pt[1]) : null, parts: pt ? Number(pt[2]) : 1 };
-    let fresh = renderDoc(page, site, { today: meta.fetchedAt, firstFetched: meta.firstFetched || meta.fetchedAt, pack: reg.pack, amHeaders });
+    let fresh = renderDoc(page, site, { today: meta.fetchedAt, firstFetched: meta.firstFetched || meta.fetchedAt, pack: reg.pack, amHeaders, corrections, onUnmatched });
     // renderDoc writes lastChecked from the day it is given, and the day it is given here is the day the page
     // was fetched. Put the record of when we last looked back exactly as it stood.
     if (meta.lastChecked) fresh = fresh.replace(/^lastChecked: ".*"$/m, 'lastChecked: "' + esc(meta.lastChecked) + '"');
@@ -1139,7 +1230,7 @@ async function main(bound = {}) {
     const n = rr.rerendered.length + rr.unchanged.length + rr.skipped.length;
     log('[travel] ' + pack + ': ' + n + ' documents (0 added, 0 changed, ' + rr.rerendered.length + ' re-rendered, '
       + rr.unchanged.length + ' unchanged, ' + rr.skipped.length + ' skipped)' + (dryRun ? '  [DRY RUN — nothing written]' : ''));
-    console.log(JSON.stringify({ pack, rerendered: rr.rerendered.length, unchanged: rr.unchanged.length, skipped: rr.skipped }));
+    console.log(JSON.stringify({ pack, rerendered: rr.rerendered.length, unchanged: rr.unchanged.length, skipped: rr.skipped, uncorrected: rr.uncorrected }));
     return;
   }
   let bad = 0;
@@ -1157,7 +1248,7 @@ async function main(bound = {}) {
       : await fetchSite(site, { limit, log, tag });
     const docs = stripPackBoilerplate(pages);
     const { kept, thin } = splitThin(docs);
-    const r = writePack(outDir, kept, site, { today, dryRun, failed, pack: reg.pack, amHeaders });
+    const r = writePack(outDir, kept, site, { today, dryRun, failed, pack: reg.pack, amHeaders, corrections: reg.corrections });
     if (r.refused) { log('[travel] ' + site.id + ': REFUSED to update the pack — ' + r.refusedWhy + '. Nothing written.'); bad++; continue; }
     bad += failed.length;
     log('[travel] ' + site.id + ': ' + kept.length + ' documents'
@@ -1194,14 +1285,21 @@ function packBlock(registry) {
   try { return JSON.parse(fs.readFileSync(registry, 'utf8')).pack || {}; } catch (e) { return {}; }
 }
 
+// The registry's corrections travel with the pack the same way its header wording does.
+function packCorrections(registry) {
+  try { return JSON.parse(fs.readFileSync(registry, 'utf8')).corrections || []; } catch (e) { return []; }
+}
+
 function forPack(pack) {
   const dir = packDir(pack);
   const REGISTRY = path.join(dir, 'sources.json');
   const dflt = packTitleSuffix(REGISTRY);
   const blk = packBlock(REGISTRY);
   const amh = blk.amHeaders ? readAmHeaders(pack) : null;
+  const corr = packCorrections(REGISTRY);
   const withPack = opts => ({ ...opts, pack: opts && opts.pack !== undefined ? opts.pack : blk,
-    amHeaders: opts && opts.amHeaders !== undefined ? opts.amHeaders : amh });
+    amHeaders: opts && opts.amHeaders !== undefined ? opts.amHeaders : amh,
+    corrections: opts && opts.corrections !== undefined ? opts.corrections : corr });
   return { ...module.exports, pack, REGISTRY, OUT_DIR: dir, amHeaders: amh,
     cleanTitle: (raw, titleSuffix) => cleanTitle(raw, titleSuffix === undefined ? dflt : titleSuffix),
     extract: (html, opts) => extract(html, { titleSuffix: opts && opts.titleSuffix !== undefined ? opts.titleSuffix : dflt }),
@@ -1218,6 +1316,7 @@ module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugF
   dirKeyOf, pdfSlugOf, readPdfText, readDirManifest, selectDirEntries, tariffDocFrom, fetchDir, DIR_ROOT,
   readOcrManifest, ocrTitleOf, splitOcrParts, splitLongParts, ocrLangOf, OCR_MAX_CHARS, HTML_MAX_CHARS,
   langOfText, ethiopicCount, AM_FLOOR,
+  applyCorrections, stripCorrections, correctionNote, packCorrections, CORR_MARK,
   PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR };
 
 //   node ops/packs/fetch-pack.js --pack banking

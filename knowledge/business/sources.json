@@ -827,5 +827,17 @@
       "fetch": "none",
       "note": "id.gov.et is crawled as `fayda` in knowledge/sources-am.json (34 pages in knowledge/web/fayda/) and summarised in public/fayda.html, which is in GUIDE_SLUGS. The national ID is a prerequisite for several business registrations, so the pack links to it and never re-fetches it. Measured 2026-09-17: /services 2,673 characters, /faq 948, zero Ethiopic in either - thin, and another reason not to duplicate it."
     }
+  ],
+  "_corrections": "Where an institution's page restates a rule that has since changed, the page is kept exactly as published and ops/packs/fetch-pack.js renderDoc inserts a labelled BinaSmart correction directly after the passage (match = a literal, or /regex/flags), with a one-line flag in the header. Every figure in noteEn and noteAm must appear in knowledge/law/<authorityDoc>.md or the render refuses. If match is no longer on the page the render logs [business] correction no longer matches <slug> and the weekly freshness note says so. Found 2026-09-18: asked the overtime rate, Bini answered 1.25x citing the Commission's FAQ over the law.",
+  "corrections": [
+    {
+      "slug": "eic-faqs",
+      "match": "Overtime pay ranges from 1.25x hourly wage",
+      "noteEn": "This page restates an outdated overtime rule. Under Article 68(1) of the Labour Proclamation 1156/2019 a worker is paid for overtime, in addition to the normal wage, at least 1.5 times the ordinary hourly rate for work between 6:00 a.m. and 10:00 p.m., 1.75 times for night work between 10:00 p.m. and 6:00 a.m., 2 times on the weekly rest day and 2.5 times on a public holiday; under Article 68(2) it is paid on the normal payday together with the wage.",
+      "noteAm": "ይህ ገጽ ጊዜው ያለፈበትን የትርፍ ሰዓት ክፍያ ተመን ይደግማል። በሠራተኛና አሠሪ ሕግ አዋጅ ቁጥር 1156/2019 አንቀጽ 68(1) መሠረት የትርፍ ሰዓት ሥራ የሚሠራ ሠራተኛ ከመደበኛ ደመወዙ በተጨማሪ ለመደበኛ ሥራ በሰዓት ከሚከፈለው ደመወዝ ቢያንስ፦ ከንጋቱ 12 ሰዓት እስከ ምሽቱ 4 ሰዓት × 1.5፣ ከምሽቱ 4 ሰዓት እስከ ንጋቱ 12 ሰዓት × 1.75፣ በሳምንት የዕረፍት ቀን × 2፣ በሕዝብ በዓላት ቀን × 2.5 ይከፈለዋል፤ ክፍያው ለደመወዝ መክፈያ በተወሰነው ቀን ከደመወዝ ጋር ተደምሮ ይከፈላል (አንቀጽ 68(2))።",
+      "authority": "Labour Proclamation 1156/2019 Art. 68",
+      "authorityDoc": "labour-proclamation-1156-2019",
+      "checked": "2026-09-18"
+    }
   ]
 }
