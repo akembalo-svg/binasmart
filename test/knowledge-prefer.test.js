@@ -35,10 +35,12 @@ const DOCS = [
 ];
 
 test('no declaration: contextFor builds exactly the search options it used before', () => {
-  assert.deepEqual(contextSearchOptions({}), { k: 18, exclude: ['style', 'style-om'], rerankTo: 6 });
-  assert.deepEqual(contextSearchOptions({ k: 6 }), { k: 18, exclude: ['style', 'style-om'], rerankTo: 6 });
-  assert.deepEqual(contextSearchOptions(), { k: 18, exclude: ['style', 'style-om'], rerankTo: 6 });
-  assert.deepEqual(contextSearchOptions({ k: 3 }), { k: 9, exclude: ['style', 'style-om'], rerankTo: 3 });
+  // `watch` is excluded by default now: a question with no recency marker must reach the law, not a Telegram post.
+  // Nothing that existed before is retrieved any differently; the new source is the only entry added.
+  assert.deepEqual(contextSearchOptions({}), { k: 18, exclude: ['style', 'style-om', 'watch'], rerankTo: 6 });
+  assert.deepEqual(contextSearchOptions({ k: 6 }), { k: 18, exclude: ['style', 'style-om', 'watch'], rerankTo: 6 });
+  assert.deepEqual(contextSearchOptions(), { k: 18, exclude: ['style', 'style-om', 'watch'], rerankTo: 6 });
+  assert.deepEqual(contextSearchOptions({ k: 3 }), { k: 9, exclude: ['style', 'style-om', 'watch'], rerankTo: 3 });
 });
 
 test('no preference: hybridScore is the old formula for every source, with and without a vector', () => {
@@ -107,7 +109,7 @@ test('prefer: the boost moves to the preferred sources and away from the ones it
 
 test('the voice corpora stay out of the facts block whatever an agent lists', () => {
   const o = contextSearchOptions({ prefer: ['style'], exclude: ['page'] });
-  assert.deepEqual(o.exclude, ['style', 'style-om', 'page']);
+  assert.deepEqual(o.exclude, ['style', 'style-om', 'page', 'watch']);
   assert.deepEqual(o.prefer, ['style']);
 });
 

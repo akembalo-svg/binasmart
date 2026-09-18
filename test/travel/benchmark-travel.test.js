@@ -31,14 +31,15 @@ test('a question with no agent and no prefer gets the options the benchmark alwa
 test('a question that carries its own prefer is searched with it, and no agent file is read', () => {
   const prefer = ['travel', 'page:airport', 'page:flights', 'page:travel'];
   const o = searchOptionsFor({ qid: 'tv-001', agent: 'bini', prefer }, { contextSearchOptions, knowledgeOf });
-  assert.deepEqual(o.shipped, { k: 18, exclude: ['style', 'style-om'], rerankTo: 6, prefer });
-  assert.deepEqual(o.plain, { k: 18, exclude: ['style', 'style-om'], prefer });
+  // `watch` is excluded by default now: a question with no recency marker must reach the law, not a Telegram post.
+  assert.deepEqual(o.shipped, { k: 18, exclude: ['style', 'style-om', 'watch'], rerankTo: 6, prefer });
+  assert.deepEqual(o.plain, { k: 18, exclude: ['style', 'style-om', 'watch'], prefer });
 });
 
 test('an agent question with no prefer still reads that agent declaration', () => {
   const o = searchOptionsFor({ qid: 'q', agent: 'afiya' },
     { contextSearchOptions, knowledgeOf: () => ({ prefer: ['health'], exclude: ['page'] }) });
-  assert.deepEqual(o.shipped, { k: 18, exclude: ['style', 'style-om', 'page'], rerankTo: 6, prefer: ['health'] });
+  assert.deepEqual(o.shipped, { k: 18, exclude: ['style', 'style-om', 'page', 'watch'], rerankTo: 6, prefer: ['health'] });
 });
 
 test('gold_pages means the source has to match too, so travel:x is not guide:x', () => {

@@ -104,8 +104,9 @@ test('PREFER names the pack and BinaSmart own money pages, and nothing else', ()
 });
 
 test('the preference becomes real search options', () => {
+  // `watch` is excluded by default now: a question with no recency marker must reach the law, not a Telegram post.
   assert.deepEqual(contextSearchOptions({ prefer: PREFER }),
-    { k: 18, exclude: ['style', 'style-om'], rerankTo: 6, prefer: PREFER });
+    { k: 18, exclude: ['style', 'style-om', 'watch'], rerankTo: 6, prefer: PREFER });
 });
 
 test('the guardrail says the three things this pack will not do', () => {

@@ -7,6 +7,8 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+// Pure, no deps: the one question the `watch` ranking rule turns on (see contextSearchOptions).
+const { hasRecencyMarker } = require('../ops/watch/channels/recency');
 
 const EMBED_MODEL = 'gemini-embedding-001';
 const DIMS = 768;
@@ -605,10 +607,21 @@ function pageMatcher(list) {
 // The search options contextFor uses, in one place so an evaluation can run exactly the same retrieval.
 // With no prefer and no exclude this is, to the key, what contextFor passed before per-agent preferences existed.
 // The voice corpora are always excluded from the facts block, whatever an agent lists.
-function contextSearchOptions({ k = 6, prefer, exclude } = {}) {
+// `watch` (the daily channel watch) is the one source that is excluded by DEFAULT, and lifted by the question
+// rather than by the caller (design 5.7). A watch document is a ministry's Telegram post from yesterday; the
+// law is a regulation. "What is the work-permit fee" must reach Regulation 394/2016, so the post is not even
+// retrieved; "what changed for work permits this week" carries a recency marker, so the exclusion is dropped and
+// `prefer: ['watch']` applied instead. It is done here, not in the agent definitions, because Bini's own route
+// (server.js) declares no knowledge options at all and a definition that forgot the entry would be a silent
+// regression. A caller that lists `watch` in its own `exclude` is still obeyed: the marker lifts the default,
+// never a stated exclusion.
+function contextSearchOptions({ k = 6, prefer, exclude, message } = {}) {
   const o = { k: Math.min(k * 3, 18), exclude: ['style', 'style-om'], rerankTo: k };
   if (Array.isArray(exclude) && exclude.length) o.exclude = o.exclude.concat(exclude.map(String));
   if (Array.isArray(prefer)) o.prefer = prefer.map(String);
+  const stated = o.exclude.includes('watch');
+  if (!stated && hasRecencyMarker(message)) o.prefer = (o.prefer || []).concat(['watch']);
+  else if (!stated) o.exclude = o.exclude.concat(['watch']);
   return o;
 }
 
@@ -1206,7 +1219,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     if (!greeting && (words.length >= 2 || am || om)) {
       // Retrieve a wider pool, then rerank down to k. Style lookups below are deliberately NOT reranked:
       // voice examples are chosen for register, not for whether they answer the question.
-      const hits = await search(m, contextSearchOptions({ k, prefer, exclude }));
+      const hits = await search(m, contextSearchOptions({ k, prefer, exclude, message: m }));
       if (hits.length) {
         // The numbered header line is untouched — assistant/kit/sources.js parses it for the "From:" line —
         // and the Source line sits under it, once per PAGE: two chunks of one page are one page, and saying
