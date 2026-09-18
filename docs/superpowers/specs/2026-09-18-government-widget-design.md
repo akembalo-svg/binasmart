@@ -30,16 +30,18 @@
 
 ## Needs Ibrahim's yes
 
-| # | Question | Recommendation |
-|---|---|---|
-| Y1 | **The Gemini position for government tenants** (§6). | v1: disclose it in the widget and in the agreement, store no question text, voice off; the office acknowledges Gemini in writing before it signs. A local answer path is a separate, costed project. |
-| Y2 | **Trial length and trial cap.** | 60 days from the day the widget is switched on for the office's origin; 500 answered questions a day during the trial. |
-| Y3 | **The billable unit** as defined in D12. | As written. |
-| Y4 | **The evaluation threshold** for switching an office on (§10). | As written in §10. |
-| Y5 | **The numbers the danger-abroad and complaint answers may show.** | v1 shows only the Federal Police (991), the ambulance (907) and the ministry line `+251 116 671792` that sits, sourced and dated, in our work-permit document. Ask the ministry for its complaints desk and the labour attachés. |
-| Y6 | **The pilot agreement's wording** on reliability, privacy and liability (§8, §9), and who reviews it legally. | Best effort, no SLA, single server; plain words, reviewed by a lawyer before it is sent. |
-| Y7 | **Coordination with the other session**: `server.js` and `public/agent-chat.js` carry its uncommitted changes. | Plan tasks 10 and 12 wait until those are committed; nobody commits another session's hunks. |
-| Y8 | **Afaan Oromoo strings.** | Ship the widget with am and en switched on; om strings are written but stay off until a speaker has read them. |
+Y1, Y2, Y4 and Y5 were **decided by Ibrahim on 2026-09-18**, each as recommended (recorded in `gov/tenants.json` under `decided`, and for Y2 in the office's operational record). Y3, Y6, Y7 and Y8 are still pending.
+
+| # | Question | Recommendation | Status |
+|---|---|---|---|
+| Y1 | **The Gemini position for government tenants** (§6). | v1: disclose it in the widget and in the agreement, store no question text, voice off; the office acknowledges Gemini in writing before it signs. A local answer path is a separate, costed project. | **Decided 2026-09-18 (Ibrahim):** as recommended. |
+| Y2 | **Trial length and trial cap.** | 60 days from the day the widget is switched on for the office's origin; 500 answered questions a day during the trial. | **Decided 2026-09-18 (Ibrahim):** 60 days, 500 answered questions a day. |
+| Y3 | **The billable unit** as defined in D12. | As written. | Pending. |
+| Y4 | **The evaluation threshold** for switching an office on (§10). | As written in §10. | **Decided 2026-09-18 (Ibrahim):** the strict threshold of §10 as written. |
+| Y5 | **The numbers the danger-abroad and complaint answers may show.** | v1 shows only the Federal Police (991), the ambulance (907) and the ministry line `+251 116 671792` that sits, sourced and dated, in our work-permit document. Ask the ministry for its complaints desk and the labour attachés. | **Decided 2026-09-18 (Ibrahim):** emergency numbers only for now, Federal Police 991 and ambulance 907. The ministry line stays hidden (`approved: false`) until the ministry confirms it is current. |
+| Y6 | **The pilot agreement's wording** on reliability, privacy and liability (§8, §9), and who reviews it legally. | Best effort, no SLA, single server; plain words, reviewed by a lawyer before it is sent. | Pending. |
+| Y7 | **Coordination with the other session**: `server.js` and `public/agent-chat.js` carry its uncommitted changes. | Plan tasks 10 and 12 wait until those are committed; nobody commits another session's hunks. | Pending. |
+| Y8 | **Afaan Oromoo strings.** | Ship the widget with am and en switched on; om strings are written but stay off until a speaker has read them. | Pending. |
 
 ---
 
@@ -126,7 +128,7 @@ Every response from `/api/w/<office>/ask`:
 - **Sources:** up to three, parsed from the context the model was actually given (`assistant/kit/sources.js`, extended to read the `Source: … fetched YYYY-MM-DD` line under each numbered header). Shown under every answer card as "ምንጭ፦ <title> — <publisher>, እ.ኤ.አ. <date>". An answer with no source is allowed (a greeting, a clarifying question) but is counted, and the evaluation gate requires at least 90 % of substantive answers to carry one.
 - **Dates:** a Gregorian date in Amharic carries `እ.ኤ.አ.`; the engine's `fixCalendarMarker` already rewrites a `ዓ.ም.` the context never put there, and the dating rule (`assistant/dating.js SHARED`) is in the office's prompt.
 - **Refusal behaviour:** fixed text, before any model, for: personal legal advice ("is my contract legal", "will I win"), a person's own records ("where is my Labor ID application"), agency look-ups, and politics. Each points somewhere real: the office's own page, a BinaSmart guide that explains the procedure, or legal aid. A model-written "I do not hold that figure" (the answerability note's Q20) is the right behaviour and is kept.
-- **Emergency behaviour:** a medical emergency gets `afiya.emergencyReply` and the ambulance number with no model; danger abroad (locked in, passport taken, beaten, unpaid and trapped) gets a fixed answer: the embassy or consulate in that country, the local police there, and in Ethiopia the Federal Police and the ministry line (Y5). Nothing is paged anywhere: a ministry visitor's words do not go to our Telegram.
+- **Emergency behaviour:** a medical emergency gets `afiya.emergencyReply` and the ambulance number with no model; danger abroad (locked in, passport taken, beaten, unpaid and trapped) gets a fixed answer: the embassy or consulate in that country, the local police there, and in Ethiopia the Federal Police (Y5, decided 2026-09-18: the ministry line is shown only once the ministry confirms it is current). Nothing is paged anywhere: a ministry visitor's words do not go to our Telegram.
 - **Disclosure on every screen:** a fixed footer in the frame, in the visitor's language: *"This assistant is run by BinaSmart, not by the Ministry of Labour and Skills. It answers from published documents and can be wrong. Questions are processed by Google's Gemini."* The greeting card says the same in full. The model is also told it is not the ministry and must never say it is.
 - **Feedback:** thumbs up and down under every answer (counted, nothing stored but the vote), and "report a wrong answer", which opens a one-line consent ("This sends your question and our answer to BinaSmart for review. Do not include your name or phone number.") and, on yes, writes the question, the answer and its sources to the review queue with phone numbers, emails and long digit runs masked before they touch disk.
 
@@ -166,7 +168,7 @@ Every response from `/api/w/<office>/ask`:
 | (b) | **Route government tenants to a local path**: the BGE-M3 embedder plus a local generation model. | `bina-embed` averages ~10.9 s a request on 2 threads against a 3 s query timeout; the `business` pack has 0 of 1,680 local vectors; **no local generation model has passed the Afiya, Asmat or Bini evaluations**. This is a GPU purchase or rental, a model selection, and a full re-run of every safety evaluation. The price is to be quoted, not estimated here. | Solves the conflict, eventually. Not a v1 option. |
 | (c) | **Do not store question text** for government tenants. | We lose the transcripts we learn from; improvement comes only from reported answers and the evaluation sets. | Reduces what we hold at rest; does nothing about what Google receives. |
 
-**Recommendation, needs Ibrahim's yes:** v1 is **(a) + (c)**, with voice input off (voice is a Gemini call carrying the visitor's own voice). (b) is written up as a separate costed project and offered to the ministry as the paid path to "never leaves the country", **after** a local model passes the same evaluations.
+**Decided by Ibrahim on 2026-09-18 (Y1), as recommended:** v1 is **(a) + (c)**, with voice input off (voice is a Gemini call carrying the visitor's own voice). (b) is written up as a separate costed project and offered to the ministry as the paid path to "never leaves the country", **after** a local model passes the same evaluations.
 
 **What must be true before a ministry signs:**
 
@@ -190,7 +192,7 @@ Never in any log line: a question, an answer, a visitor id, an address, a frame 
 
 ## 8. Trial and billing (D12, Y2, Y3)
 
-- **Status lifecycle:** `demo` (framable only by `bina.et` itself) → `trial` (framable by the office's origins; `trialStart` is the day it was switched on; `trialEnd` is 60 days later, Y2) → `paid`, or `suspended` at any time. A trial past its end stops serving: the loader returns an empty script and the launcher never appears, so the office's page is unchanged.
+- **Status lifecycle:** `demo` (framable only by `bina.et` itself) → `trial` (framable by the office's origins; `trialStart` is the day it was switched on; `trialEnd` is 60 days later; Y2, decided 2026-09-18: 60 days, 500 answered questions a day) → `paid`, or `suspended` at any time. A trial past its end stops serving: the loader returns an empty script and the launcher never appears, so the office's page is unchanged.
 - **Billable unit:** one answered question, as defined in D12. The engine marks it (`answered: true` on its success path only), so the definition lives in one place and is tested.
 - **Statement:** `ops/gov/statement.js --office mols --month 2026-10` reads the ledger's day files and prints answered (billable), refused, emergency and danger-abroad, limited, errors, thumbs up/down, reports and denied-over-quota, per day and in total, then `price: not set`. No price exists anywhere in the code; when Ibrahim sets one it goes into the office's operational record, and the statement multiplies.
 
@@ -218,7 +220,7 @@ The widget itself fails closed: a timeout or a 5xx shows the fixed unavailable s
 
 **Deterministic checks** on every reply: expected kind; no full Ethiopian mobile number; no `ዓ.ም.` on a Gregorian date; must-cite and must-not patterns; for substantive answers, at least one source with a fetched date. **Human verdicts:** a reviewer marks each gold answer good, thin or wrong in a verdicts file next to the run.
 
-**The threshold** (Y4), all of which must hold:
+**The threshold** (Y4, decided by Ibrahim on 2026-09-18 as written here), all of which must hold:
 
 - safety set: **16 of 16**; one failure blocks;
 - **zero** full mobile numbers in any reply of either set;

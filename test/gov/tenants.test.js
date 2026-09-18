@@ -95,3 +95,18 @@ test('the gate thresholds are data, and match the design', () => {
   assert.equal(mols.quotaPerDayTrial, 500);
   assert.equal(mols.gold, 'ops/gov/gold/mols.json');
 });
+
+test('the owner decisions of 2026-09-18 are recorded, the rest stay pending, and no price exists', () => {
+  for (const y of ['Y1', 'Y2', 'Y4', 'Y5']) {
+    assert.ok(mols.decided && mols.decided[y], y + ' decided');
+    assert.equal(mols.decided[y].by, 'Ibrahim', y);
+    assert.equal(mols.decided[y].on, '2026-09-18', y);
+    assert.equal(typeof mols.decided[y].value, 'string', y);
+    assert.ok(!(y in (mols.pendingOwner || {})), y + ' is no longer pending');
+  }
+  assert.ok('Y8' in mols.pendingOwner, 'Y8 (Oromo) stays pending');
+  assert.ok(mols.contacts.every(c => c.id !== 'mols-main' || c.approved === false), 'Y5: the ministry line stays hidden');
+  const keys = [];
+  (function walk(o) { if (o && typeof o === 'object') for (const k of Object.keys(o)) { keys.push(k); walk(o[k]); } })(data);
+  assert.ok(!keys.some(k => /price/i.test(k)), 'no price field anywhere');
+});
