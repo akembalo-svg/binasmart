@@ -7,12 +7,19 @@
 const REF = /\s*\[(?:\d{1,2}|[^\]\n]{1,40}\s\d{1,2})(?:\s*,\s*(?:\d{1,2}|[^\]\n]{1,40}\s\d{1,2}))*\]/g;
 const SOURCE_LINE = /^\s*(?:\(|\[)?\s*(?:source|sources|ምንጭ|ምንጮች|Madda)\s*[:：፦·\-–—]\s*.*$/gim;
 const TRAILING_URL_LINE = /^\s*(?:\(|\[)?\s*https?:\/\/\S+\s*(?:\)|\])?\s*$/gim;
+// Our own domain, misspelt. Measured 2026-09-18 in the Ministry of Labour audit: two answers — including the
+// best answer of the run — sent readers to "bima.et/...", which is not ours and does not resolve. Nothing in
+// the repository, no knowledge document and no prompt writes bima.et, so the model brought it with it. The
+// prompt now names the address (assistant/dating.js, DOMAIN); this is the deterministic half, and it repairs
+// rather than drops, because the path after the host was right and the answer around it is worth keeping.
+const WRONG_HOST = /\bbima\.et\b/gi;
 
 function tidyAnswer(text) {
   const before = String(text || '');
   let out = before.replace(REF, '');
   out = out.replace(SOURCE_LINE, '');
   out = out.replace(TRAILING_URL_LINE, '');
+  out = out.replace(WRONG_HOST, 'bina.et');
   out = out.replace(/[ \t]+([,.;:።?!])/g, '$1').replace(/\n{3,}/g, '\n\n').replace(/[ \t]{2,}/g, ' ').trim();
   return { text: out, removed: out === before ? 0 : 1 };
 }
@@ -81,4 +88,4 @@ function stripIntro(text, names) {
   return { text: rest, removed: 1 };
 }
 
-module.exports = { tidyAnswer, stripIntro, REF, SOURCE_LINE, REFUSAL_MARKER };
+module.exports = { tidyAnswer, stripIntro, REF, SOURCE_LINE, REFUSAL_MARKER, WRONG_HOST };

@@ -83,9 +83,13 @@ const PREFER = ['business', 'guide:business-registration-ethiopia', 'guide:how-t
 
 // What this pack is not. Added to Bini's system prompt for the message that triggered the preference, so the
 // limits are stated where the answer is written rather than hoped for. The wording follows the banking
-// pack's, including the two clauses it had to learn: the date clause is a sentence Bini must actually write,
-// and the identifier warning is its own clause rather than the second half of a sentence whose first half
-// has already been obeyed.
+// pack's, including the clause it had to learn: the identifier warning is its own clause rather than the
+// second half of a sentence whose first half has already been obeyed.
+//
+// Dating and attribution is no longer here either. It said the same thing as the banking block, and between
+// them the two blocks only reached a message one of the two packs claimed — which the Ministry of Labour
+// audit of 2026-09-18 measured as 10 of 40 answers carrying a date. It is in assistant/dating.js now, in the
+// base prompt for every message.
 const GUARDRAILS = '\n\n## Business, licence and paperwork questions — what you may and may not do\n'
   + 'BinaSmart is not the Ministry of Trade, the Revenue office, the Customs Commission or the Investment '
   + 'Commission, and is not a lawyer, an accountant or a customs broker. You can see no register of any kind.\n'
@@ -100,14 +104,7 @@ const GUARDRAILS = '\n\n## Business, licence and paperwork questions — what yo
   + '- NEVER say "you are compliant", "you are registered", "your licence is valid" or "you do not need a '
   + 'licence". You cannot see any register. The licence checker on etrade.gov.et is the only thing that can '
   + 'answer whether a licence is valid, and your job is to send the person there.\n'
-  + '- EVERY FEE, DEADLINE, CAPITAL THRESHOLD AND CONTRIBUTION RATE YOU STATE CARRIES THE OFFICE AND THE '
-  + 'DOCUMENT\'S FETCHED DATE IN THE SAME SENTENCE. Take the date from the document you are quoting, on its '
-  + '"Source: ... fetched YYYY-MM-DD" line — in an Amharic context the same line reads "ምንጭ፦ ... '
-  + 'የተወሰደበት ቀን YYYY-MM-DD". COPY IT AS IT IS WRITTEN, digit for digit; do not convert it to another '
-  + 'calendar and do not read a date out of the page\'s own prose. A LINK IS NOT A DATE. Before you send, '
-  + 'read back every figure: if any one of them has no office and no fetched date beside it, put them there '
-  + 'or take the figure out. If the pack does not hold the figure, say plainly that you do not have it — '
-  + 'never estimate a fee, a threshold or a processing time from memory.\n'
+  // The fee-and-date clause was here. It is in assistant/dating.js now, in the base prompt for every message.
   + '- You may NOT advise on structure or on tax position. Never say which legal form to choose, which '
   + 'sector to enter, whether to register for VAT before the threshold, or how to reduce a liability. Lay '
   + 'out what the offices publish and let them and their accountant decide.\n'
@@ -115,13 +112,9 @@ const GUARDRAILS = '\n\n## Business, licence and paperwork questions — what yo
   + 'and the licence checker), the Customs Commission or the Intellectual Property Authority. For those, '
   + 'name the office that publishes it and say we do not have the page. Never present a bina.et guide as '
   + 'though it were the register.\n'
-  + '- Fees, thresholds and requirements change without notice. Say so, and tell them to confirm with the '
-  + 'office.\n'
   + 'በአማርኛ፦ ቢና የንግድ ሚኒስቴር፣ የገቢዎች መሥሪያ ቤት ወይም የጉምሩክ ኮሚሽን አይደለም። ማንኛውንም መዝገብ ማየት አይችልም። '
   + 'በእርስዎ ስም መመዝገብ፣ ማደስ፣ ማመልከት ወይም ክፍያ መፈጸም አይችልም። የግብር ከፋይ መለያ ቁጥር፣ የፈቃድ ቁጥር፣ የመታወቂያ ቁጥር '
   + 'ወይም የይለፍ ቃል በጭራሽ አትቀበል፤ ሲቀርብልህም «እነዚህን ቁጥሮች ለማንም — ለእኔም ቢሆን — በመልእክት አያጋሩ» ብለህ አስጠንቅቅ። '
-  + '«ፈቃድዎ ትክክለኛ ነው» ወይም «ተመዝግበዋል» ብለህ ከቶ አትናገር። ማንኛውም ክፍያ፣ የጊዜ ገደብ ወይም የካፒታል መጠን የመሥሪያ ቤቱን '
-  + 'ስምና የሰነዱን የተወሰደበት ቀን በዚያው ዓረፍተ ነገር ውስጥ ይዞ ይቅረብ፤ ቀን የሌለው ቁጥር ከቶ አይነገር። መረጃው ከሌለህ እንደሌለህ '
-  + 'ተናገር። ክፍያዎችና መስፈርቶች ይለወጣሉና መሥሪያ ቤቱን እንዲያረጋግጡ ንገራቸው።\n';
+  + '«ፈቃድዎ ትክክለኛ ነው» ወይም «ተመዝግበዋል» ብለህ ከቶ አትናገር።\n';
 
 module.exports = { isBusinessQuestion, hasBusinessHardWord, PREFER, GUARDRAILS, HARD, OTHER_SERVICE, STRONG, WEAK };

@@ -108,12 +108,22 @@ test('the preference becomes real search options', () => {
     { k: 18, exclude: ['style', 'style-om'], rerankTo: 6, prefer: PREFER });
 });
 
-test('the guardrail says the four things this pack will not do', () => {
+test('the guardrail says the three things this pack will not do', () => {
   assert.match(GUARDRAILS, /not a bank/i);
   assert.match(GUARDRAILS, /account/i);
   assert.match(GUARDRAILS, /advice/i);
-  assert.match(GUARDRAILS, /date/i);
   assert.ok(/[ሀ-፿]/.test(GUARDRAILS), 'the guardrail must also be stated in Amharic');
+});
+
+test('the fourth thing — a figure without a date — is now said to every message, not only this one', () => {
+  // It was a bullet here until 2026-09-18. A rule that only fires on the intents two packs happen to
+  // recognise is a coincidence, not a rule, so it is in the base prompt now. See assistant/dating.js.
+  const { DATING } = require('../../assistant/dating');
+  assert.match(DATING, /date/i);
+  const src = fs.readFileSync(path.join(__dirname, '..', '..', 'server.js'), 'utf8');
+  assert.ok(src.includes("require('./assistant/dating')"), 'the shared rule is not required by the server');
+  assert.ok(/ASSIST_SYS \+ ASSIST_FACTS \+ BINI_TOOL_RULES \+ BINI_SHARED/.test(src),
+    'and it is not in the base prompt every answer is written under');
 });
 
 test('Bini asks for the banking pack only when the message is about money at a bank', () => {

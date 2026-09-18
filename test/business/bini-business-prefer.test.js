@@ -108,13 +108,22 @@ test('contextSearchOptions accepts the prefer list', () => {
   assert.ok(o && typeof o === 'object');
 });
 
-test('the guardrails say the four things this pack must never do', () => {
+test('the guardrails say the three things this pack must never do', () => {
   assert.match(GUARDRAILS, /not.*(file|submit|lodge|register).*on (your|anyone|anybody)/i);
   assert.match(GUARDRAILS, /compliant|valid/i);
-  assert.match(GUARDRAILS, /date/i);
   assert.match(GUARDRAILS, /TIN|licence number|registration number/i);
   assert.ok(/[ሀ-፿]/.test(GUARDRAILS), 'the guardrails must also be stated in Amharic');
   assert.ok(GUARDRAILS.length > 1200, 'the banking guardrails are this long because half-stated rules are half-obeyed');
+});
+
+test('the fee-and-date clause left this pack for the base prompt, and is still stated once', () => {
+  // Until 2026-09-18 this pack and the banking pack each carried their own copy, and a question neither
+  // pack claimed — a labour-law question, a pension question, a work-permit question — got neither.
+  const { DATING } = require('../../assistant/dating');
+  assert.ok(!/CARRIES THE OFFICE AND THE/.test(GUARDRAILS), 'the pack no longer says it');
+  assert.match(DATING, /EVERY FIGURE YOU STATE CARRIES ITS DATE IN THE SAME SENTENCE/, 'the base prompt does');
+  assert.match(DATING, /Source: \.\.\. fetched YYYY-MM-DD/, 'and still says which date to copy');
+  assert.ok(/የተወሰደበት ቀን YYYY-MM-DD/.test(DATING), 'in the Amharic form of the same line too');
 });
 
 test('the word tables do not overlap between tiers', () => {

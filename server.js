@@ -1006,6 +1006,12 @@ const biniForce = require('./assistant/force');
 const isEval = req => String((req && req.headers && req.headers['x-binasmart-eval']) || '') === '1';
 const biniTools = require('./assistant/tools');
 const { dropUngrounded, fixCalendarMarker } = require('./assistant/grounding');
+// Dating, attribution and our own address: what every answer owes the reader, whatever it is about.
+// These were bullets inside the banking and the business guardrails until 2026-09-18, and a pack only
+// appends its guardrails to a message its own intent claimed - so a labour-law, pension or
+// overseas-employment question was never told to date anything. The Ministry of Labour audit measured
+// the result: 10 of 40 answers carried a date. Said once here, they reach every message instead.
+const { SHARED: BINI_SHARED } = require('./assistant/dating');
 const afiya = require('./assistant/afiya');
 const asmat = require('./assistant/asmat');
 const scope = require('./assistant/scope');
@@ -1140,7 +1146,7 @@ fastify.post('/api/assistant', async (req, reply) => {
           + '\n\nThese are the ONLY businesses BinaSmart has. Name none other. If the list is empty, say plainly that we do not have that kind of place listed yet, that we are signing them up, and offer WhatsApp — do NOT suggest places from your own knowledge and do NOT imply BinaSmart lists many.';
       }
     }
-    const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + voice + '\n\n' + biniLang.directive(lang) + turn + bankGuard + bizGuard + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
+    const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + BINI_SHARED + voice + '\n\n' + biniLang.directive(lang) + turn + bankGuard + bizGuard + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys + preTool, [...hist, { role: 'user', content: msg }], 900, opts);
     // tool_choice:'required' is advisory and this model ignores it often enough to matter — measured
     // as a price question answered with no price, and as an invented BinaPool corridor. One retry,

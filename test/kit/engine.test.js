@@ -163,3 +163,34 @@ test('an incomplete agent is refused loudly', async () => {
   const { fallback, ...broken } = base();
   await assert.rejects(() => h.handle(broken, req('hi'), res()), /agent demo is missing fallback/);
 });
+
+// The three answer filters the Ministry of Labour audit of 2026-09-18 turned on are guards every agent needs,
+// not Bini's alone: Dr Afiya cites a directive, Asmat cites a proclamation, and an owner's agent reads
+// records. Each of these was measured through server.js, and each is asserted here through the kit engine as
+// well, because "it runs on Bini's path" is not the same claim as "it runs on every agent's path".
+test('a Gregorian year an agent marks ዓ.ም. is corrected before the reply leaves the engine', async () => {
+  const h = harness({ replies: ['ሰነዱ በ2026 ዓ.ም. ታትሟል።'],
+    context: 'Source: https://nbe.gov.et/ fetched 2026-09-16' });
+  const out = await h.handle(base(), req('መቼ ነው የታተመው?'), res());
+  assert.ok(out.reply.includes('እ.ኤ.አ.'), 'the marker is rewritten on the agent path too, got ' + out.reply);
+  assert.ok(!/ዓ\.ም/.test(out.reply), 'and the Ethiopian one is gone');
+  assert.ok(out.reply.includes('2026'), 'the date itself survives — only the calendar it claimed was wrong');
+  assert.ok(h.calls.warns.some(w => /rewrote 1 Gregorian date/.test(w)), 'and it is logged');
+});
+
+test('an agent that completes a masked number loses the sentence, not just Bini', async () => {
+  const register = 'Source: https://mols.gov.et/agencies/ fetched 2026-09-17\n'
+    + '| AKLID EMPLOYMENT AGENCY | Addis Ababa | 251' + '•'.repeat(5) + '0042 | Saudi Arabia |';
+  const h = harness({ replies: ['Call the manager on 251900000042. The register is on the ministry site.'],
+    context: register });
+  const out = await h.handle(base(), req('how do I check the agency?'), res());
+  assert.ok(!/251900000042/.test(out.reply), 'the reconstructed mobile must not reach the user, got ' + out.reply);
+  assert.ok(out.reply.includes('register is on the ministry site'), 'the sentence that answers survives');
+});
+
+test('our own domain is repaired whichever agent misspells it', async () => {
+  const h = harness({ replies: ['You can read more at bima.et/ai.'], context: 'the AI page is at bina.et/ai' });
+  const out = await h.handle(base(), req('where do I read about the AI service?'), res());
+  assert.ok(out.reply.includes('bina.et/ai'), 'bima.et is not ours and does not open, got ' + out.reply);
+  assert.ok(!/bima\.et/.test(out.reply));
+});

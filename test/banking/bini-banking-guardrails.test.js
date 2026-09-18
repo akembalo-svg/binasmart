@@ -14,15 +14,28 @@
 const test = require('node:test');
 const assert = require('node:assert');
 const { GUARDRAILS, isBankingQuestion } = require('../../assistant/banking');
+// The date clause moved out of this pack on 2026-09-18 and into assistant/dating.js, which the base prompt
+// carries for every message. It was never a banking rule: the Ministry of Labour audit measured 10 of 40
+// answers carrying a date, and the ones with no date were the labour-law and overseas-employment questions
+// that neither pack claims, so neither pack's copy of the rule ever reached them. The clause is unchanged
+// and is still pinned, one directory up.
+const { DATING } = require('../../assistant/dating');
 
 test('the date clause stands alone and gives the form of words, in both languages', () => {
-  assert.match(GUARDRAILS, /EVERY FIGURE YOU STATE CARRIES ITS DATE IN THE SAME SENTENCE/,
+  assert.match(DATING, /EVERY FIGURE YOU STATE CARRIES ITS DATE IN THE SAME SENTENCE/,
     'the instruction is its own sentence, not a clause hanging off the institution');
-  assert.match(GUARDRAILS, /as published on 16 September 2026/, 'and it shows the form to write');
-  assert.ok(GUARDRAILS.includes('እንደታተመው'), 'the Amharic form of words is given too');
-  assert.match(GUARDRAILS, /take the date from the document you are quoting, never from memory/,
+  assert.match(DATING, /as published on 16 September 2026/, 'and it shows the form to write');
+  assert.ok(DATING.includes('እንደታተመው'), 'the Amharic form of words is given too');
+  assert.match(DATING, /take the date from\s+the document you are quoting, never from memory/,
     'the close-out also found a fabricated date: February 13, 2024 on a document stamped 2026-09-16');
-  assert.match(GUARDRAILS, /carries no date, say that instead of inventing one/);
+  assert.match(DATING, /carries no\s+date, say that instead of inventing one/);
+});
+
+test('and the banking pack no longer says it a second time', () => {
+  assert.ok(!/CARRIES ITS DATE IN THE SAME SENTENCE/.test(GUARDRAILS),
+    'one rule, said once; a rule stated twice is a rule that drifts');
+  assert.ok(!/A LINK IS NOT A DATE/.test(GUARDRAILS));
+  assert.ok(!/A FETCHED DATE IS A GREGORIAN DATE/.test(GUARDRAILS));
 });
 
 test('a refusal about an account must carry the warning about numbers, PINs and OTPs', () => {
@@ -64,22 +77,22 @@ test('the balance clause says refuse FIRST and how-to only after', () => {
 });
 
 test('the date must be the one written on the document, not today and not the bare year', () => {
-  assert.match(GUARDRAILS, /Source: \.\.\. fetched YYYY-MM-DD/, 'it is told where to find the date');
+  assert.match(DATING, /Source: \.\.\. fetched YYYY-MM-DD/, 'it is told where to find the date');
   // Task 15b put that line into the context for real (knowledge/index.js sourceLine), in both languages, so
   // the prompt names the Amharic form too and says to copy the date rather than convert or re-read it.
-  assert.match(GUARDRAILS, /ምንጭ፦ \.\.\. የተወሰደበት ቀን YYYY-MM-DD/, 'the Amharic Source line is named as well');
-  assert.match(GUARDRAILS, /COPY IT AS IT IS WRITTEN/, 'the date is copied, not converted');
-  assert.match(GUARDRAILS, /Not today's date, not the year on its own/);
-  assert.match(GUARDRAILS, /read back every figure in it/, 'a check before sending, not a hope');
+  assert.match(DATING, /ምንጭ፦ \.\.\. የተወሰደበት ቀን YYYY-MM-DD/, 'the Amharic Source line is named as well');
+  assert.match(DATING, /COPY IT AS IT IS WRITTEN/, 'the date is copied, not converted');
+  assert.match(DATING, /Not today's\s+date, not the year on its own/);
+  assert.match(DATING, /read back every figure in the answer/, 'a check before sending, not a hope');
 });
 
 // Measured live on 2026-09-17: asked for the National Bank's travel allowance, Bini gave USD 5,000, USD
 // 10,000 and 10 % correctly, named the National Bank, linked https://nbe.gov.et/fx — and gave no date at all.
 // A list of bullets under one link is the shape the clause kept missing.
 test('a link is not a date, and a list of figures needs one on every line', () => {
-  assert.match(GUARDRAILS, /A LINK IS NOT A DATE/);
-  assert.match(GUARDRAILS, /Whenever you give a link, give the institution and the fetched date in the\s+same sentence/);
-  assert.match(GUARDRAILS, /every bullet with a number in it\s+needs the date/);
+  assert.match(DATING, /A LINK IS NOT A DATE/);
+  assert.match(DATING, /Whenever you give a link, give the institution and the fetched date in the\s+same sentence/);
+  assert.match(DATING, /every bullet with a number in it\s+needs the date/);
 });
 
 test('the pack now HAS telebirr and M-PESA, and the guardrail no longer says it has not', () => {
@@ -90,7 +103,10 @@ test('the pack now HAS telebirr and M-PESA, and the guardrail no longer says it 
 });
 
 test('nothing that was already true was dropped', () => {
-  for (const re of [/not a bank/i, /may NOT give advice/, /never predict/, /confirm with the institution/,
-    /never estimate a rate, a fee or a limit from memory/]) assert.match(GUARDRAILS, re);
+  for (const re of [/not a bank/i, /may NOT give advice/, /never predict/]) assert.match(GUARDRAILS, re);
   assert.ok(/[ሀ-፿]/.test(GUARDRAILS), 'the guardrail is still stated in Amharic as well as English');
+  // The two that left this block with the date clause, because they are the same rule about the same
+  // figures and a question no pack claims needs them just as much: say it changes, and never guess.
+  assert.match(DATING, /confirm\s+with the institution/);
+  assert.match(DATING, /never estimate a fee, a rate, a limit, a threshold or a processing time from memory/);
 });

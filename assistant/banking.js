@@ -83,16 +83,19 @@ const isBankingQuestion = makeIntent({ hard: HARD, otherService: OTHER_SERVICE, 
 const PREFER = ['banking', 'guide:open-bank-account-ethiopia', 'page:diaspora'];
 
 // What this pack is not. Added to Bini's system prompt for the message that triggered the preference, so the
-// limits are stated where the answer is written rather than hoped for. Four things:
-//   it cannot touch an account, it cannot move money, it does not advise, and every figure it gives is dated
-//   and attributed, because a rate quoted without a date and a bank's name is worse than no rate at all.
-// Two of these clauses are worded the way they are because of what a close-out measured on 2026-09-17, not
-// because of what reads well. The date clause is repeated as a sentence Bini must actually write, because one
-// sampled answer gave three interest rates with the institution and the link and no date at all — two of the
-// three things the old wording asked for, which is how a half-obeyed instruction looks. And the warning about
-// account numbers is lifted out of the refusal clause into a clause of its own, because when someone offered
-// an account number Bini refused the balance check correctly and never gave the warning: it was the second
-// half of a sentence whose first half had already been obeyed.
+// limits are stated where the answer is written rather than hoped for. Three things:
+//   it cannot touch an account, it cannot move money, and it does not advise.
+// The warning about account numbers is worded the way it is because of what a close-out measured on
+// 2026-09-17, not because of what reads well: it is lifted out of the refusal clause into a clause of its
+// own, because when someone offered an account number Bini refused the balance check correctly and never
+// gave the warning — it was the second half of a sentence whose first half had already been obeyed.
+//
+// What is NOT here any more: dating and attribution. "Every figure carries its institution and the page's
+// fetched date" was written here and in assistant/business.js, and each block only reaches a message its own
+// pack claimed. The Ministry of Labour audit of 2026-09-18 measured the consequence — 10 of 40 answers
+// carried a date, and the labour-law, pension and work-permit questions, which no pack claims, were told
+// nothing. That rule now lives in assistant/dating.js and is in the base prompt for every message. Saying it
+// twice would only make this block longer.
 const GUARDRAILS = '\n\n## Money questions — what you may and may not do\n'
   + 'BinaSmart is not a bank, a broker or a licensed adviser, and you have no access to anybody\'s account.\n'
   + '- You may explain what an Ethiopian institution publishes: fees, tariffs, interest rates, account types, '
@@ -111,46 +114,8 @@ const GUARDRAILS = '\n\n## Money questions — what you may and may not do\n'
   + 'a PIN or an OTP.\n'
   + '- You may NOT give advice. Never say which bank, loan, account or currency someone should choose, never predict '
   + 'a rate, and never say whether a deal is good. Lay out what the institutions publish and let them decide.\n'
-  + '- EVERY FIGURE YOU STATE CARRIES ITS DATE IN THE SAME SENTENCE. A rate, a fee, a limit or a charge without '
-  + 'a date is worse than no figure, because the reader cannot tell whether it is this month\'s. Write it as '
-  + '"Zemen Bank\'s tariff page, as published on 16 September 2026" — in Amharic, "እ.ኤ.አ. በ16 መስከረም 2026 እንደታተመው" — '
-  + 'and take the date from the document you are quoting, never from memory and never from a guess. If a '
-  + 'document you are quoting carries no date, say that instead of inventing one. Rates, fees and exchange '
-  + 'rates change without notice; say so, and tell them to confirm with the institution. If the pack does not '
-  + 'hold the figure, say plainly that you do not have it — never estimate a rate, a fee or a limit from memory.\n'
-  + '- The date to use is the one written in the document you are quoting, on its "Source: ... fetched YYYY-MM-DD" '
-  + 'line — in an Amharic context the same line reads "ምንጭ፦ ... የተወሰደበት ቀን YYYY-MM-DD". Since 2026-09-17 every '
-  + 'page in the knowledge block carries one, so there is always a date to give. COPY IT AS IT IS WRITTEN, '
-  + 'digit for digit, and do not convert it to another calendar or read a date out of the page\'s own prose: '
-  + 'the page may print the day a rule was signed, which is not the day this text was fetched. '
-  + 'Not today\'s date, not the year on its own, not a date from anywhere else. Before you send a money '
-  + 'answer, read back every figure in it: if any one of them has no institution and no fetched date beside it, '
-  + 'put them there or take the figure out.\n'
-  + '- A LINK IS NOT A DATE. "You can find more details at https://nbe.gov.et/fx" does not tell the reader '
-  + 'when those figures were published, and an undated figure with a link beside it reads as if it were '
-  + 'current when it may not be. Whenever you give a link, give the institution and the fetched date in the '
-  + 'same sentence. This applies to a list of figures as much as to one: every bullet with a number in it '
-  + 'needs the date, not just the paragraph the list sits under.\n'
-  // Measured live on 2026-09-17 (§15c.7): "ከመስከረም 16 ቀን 2026 ዓ.ም." — the Gregorian fetch date 2026-09-16 with
-  // the Ethiopian-calendar marker after it. To an Ethiopian reader that reads as a date seven to eight years
-  // away, on the one line whose whole job was to say how current the rule is. A deterministic filter rewrites
-  // the marker (assistant/grounding.js, fixCalendarMarker); this is what stops it being written at all.
-  + '- A FETCHED DATE IS A GREGORIAN DATE, AND IN AMHARIC IT CARRIES THE GREGORIAN MARKER. Write it as '
-  + '"እ.ኤ.አ. መስከረም 16 ቀን 2026" or "16 September 2026 (እ.ኤ.አ.)". NEVER write "ዓ.ም." after a Gregorian year: '
-  + '"ዓ.ም." means the Ethiopian year, which runs seven to eight years behind, so "2026 ዓ.ም." tells an '
-  + 'Ethiopian reader a date that is not the one on the document. Use "ዓ.ም." only when the document itself '
-  + 'prints an Ethiopian-calendar date (for example 2018 ዓ.ም.), and then copy that date exactly as it stands '
-  + 'and do not convert it. The same holds for a date you write in English inside an Amharic answer.\n'
-  // Measured the same day and in the same pair of answers: the English reply named Banking Business
-  // Proclamation No. 1360/2025 unprompted; the Amharic reply gave the right rule and the right escalation
-  // with no directive and no date, and only named FCP/01/2020 when the user asked where it came from. The
-  // Source line was in the Amharic context too, so the gap was in the answer, not in the pack.
-  + '- NAME THE DOCUMENT IN THE FIRST ANSWER, IN WHATEVER LANGUAGE YOU ARE WRITING. An Amharic answer owes '
-  + 'the reader exactly what an English one gives: the directive, proclamation or page the rule comes from, '
-  + 'by its number where it has one — "የፋይናንስ ደንበኛ ጥበቃ መመሪያ ቁጥር FCP/01/2020", "የባንክ ሥራ አዋጅ ቁጥር 1360/2025" — '
-  + 'with the institution and the fetched date, in the FIRST reply. Never state a rule in Amharic and hold '
-  + 'the source back until you are asked for it; being asked "where does that come from?" after an answer '
-  + 'means the answer was incomplete. A rule without its document is as weak as a figure without its date.\n'
+  // Dating and attribution used to be five bullets here. They are in assistant/dating.js now, in the base
+  // prompt for every message, so a labour-law question gets them as surely as a bank tariff does.
   + '- telebirr and M-PESA ARE in the pack as of 17 September 2026: telebirr\'s own pricing, FAQ, registration, '
   + 'deposit, withdraw, send-money and remittance pages in English and Amharic, and M-PESA\'s FAQs, terms, KYC '
   + 'and its own fee table. Quote them the same way you quote a bank — by name and with the date — and say so '
@@ -158,11 +123,6 @@ const GUARDRAILS = '\n\n## Money questions — what you may and may not do\n'
   + 'በአማርኛ፦ ቢና ባንክ አይደለም። የማንም ሰው ሂሳብ ማየት፣ ገንዘብ ማንቀሳቀስ ወይም ማመልከት አትችልም። የሂሳብ ቁጥር፣ የካርድ ቁጥር፣ '
   + 'ፒን፣ የአንድ ጊዜ የማረጋገጫ ኮድ (OTP) ወይም የይለፍ ቃል በጭራሽ አትቀበል፤ ሂሳብን የሚመለከት ጥያቄ በተከለከለ ቁጥር ደግሞ '
   + '«እነዚህን ቁጥሮች ለማንም — ለእኔም ቢሆን፣ ከባንክ ነኝ ለሚልም ቢሆን — በመልእክት አያጋሩ» ብለህ አስጠንቅቅ። የትኛው ባንክ ወይም '
-  + 'ብድር እንደሚሻል አትምከር። ማንኛውም ቁጥር የተቋሙን ስምና የታተመበትን ቀን በዚያው ዓረፍተ ነገር ውስጥ ይዞ ይቅረብ፤ ቀን የሌለው '
-  + 'ቁጥር ከቶ አይነገር። ተመኖችና ክፍያዎች ይለወጣሉና ተቋሙን እንዲያረጋግጡ ንገራቸው። መረጃው ከሌለህ እንደሌለህ ተናገር። '
-  + 'ደንቡን ስትናገር የመጣበትን ሰነድ — መመሪያውን ወይም አዋጁን በቁጥሩ (ለምሳሌ «የፋይናንስ ደንበኛ ጥበቃ መመሪያ ቁጥር FCP/01/2020»፣ '
-  + '«የባንክ ሥራ አዋጅ ቁጥር 1360/2025») — ከተቋሙ ስምና ከተወሰደበት ቀን ጋር በመጀመሪያው መልስ ውስጥ ጥቀስ፤ «ምንጭህ ምንድን ነው?» '
-  + 'ተብለህ እስክትጠየቅ አትጠብቅ። ከሰነድ የተወሰደው ቀን የፈረንጅ (ግሪጎሪያን) ቀን ነው፤ ስለዚህ «እ.ኤ.አ. መስከረም 16 ቀን 2026» ብለህ '
-  + 'ጻፈው። ከግሪጎሪያን ዓመት ቀጥሎ «ዓ.ም.» ፈጽሞ አትጻፍ፤ «ዓ.ም.» የሚጻፈው ሰነዱ ራሱ በኢትዮጵያ አቆጣጠር ሲጽፈው ብቻ ነው።\n';
+  + 'ብድር እንደሚሻል አትምከር።\n';
 
 module.exports = { isBankingQuestion, PREFER, GUARDRAILS, HARD, OTHER_SERVICE, STRONG, WEAK };

@@ -18,7 +18,12 @@ const fs = require('fs');
 const path = require('path');
 const { fixCalendarMarker } = require('../assistant/grounding');
 const { voiceBlock } = require('../knowledge');
-const { GUARDRAILS } = require('../assistant/banking');
+// The dating rule used to live in the banking pack's guardrails and was asserted here against them. It said
+// the same thing as the business pack's, and between the two of them it only ever reached a message one of
+// the two packs claimed — so a labour-law or overseas-employment question was never told to date anything,
+// which the Ministry of Labour audit of 2026-09-18 measured as 10 of 40 answers carrying a date. It is in
+// assistant/dating.js now and in the base prompt for every message; the assertions follow it there.
+const { DATING } = require('../assistant/dating');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -77,17 +82,35 @@ test('and they tell an Amharic answer to name its document in the first reply', 
   assert.ok(v.includes('FCP/01/2020'), 'with the form a directive number takes');
 });
 
-test('the banking guardrail says a fetched date is Gregorian, in both halves', () => {
-  assert.match(GUARDRAILS, /A FETCHED DATE IS A GREGORIAN DATE/);
-  assert.ok(GUARDRAILS.includes('እ.ኤ.አ. መስከረም 16 ቀን 2026'), 'the form of words is given');
-  assert.match(GUARDRAILS, /NEVER write "ዓ\.ም\." after a Gregorian year/);
-  assert.ok(GUARDRAILS.includes('2018 ዓ.ም.'), 'and the one case where the Ethiopian marker is right');
-  assert.ok(/ከግሪጎሪያን ዓመት ቀጥሎ/.test(GUARDRAILS), 'the Amharic half carries the same rule');
+test('the shared rule says a fetched date is Gregorian, in both halves', () => {
+  assert.match(DATING, /A FETCHED DATE IS A GREGORIAN DATE/);
+  assert.ok(DATING.includes('እ.ኤ.አ. መስከረም 16 ቀን 2026'), 'the form of words is given');
+  assert.match(DATING, /NEVER write "ዓ\.ም\." after a Gregorian year/);
+  assert.ok(DATING.includes('2018 ዓ.ም.'), 'and the one case where the Ethiopian marker is right');
+  assert.ok(/ከግሪጎሪያን ዓመት ቀጥሎ/.test(DATING), 'the Amharic half carries the same rule');
+  assert.match(DATING, /NEVER write "E\.C\." after one either/, 'the Latin marker is the same mistake');
+  // Measured on 2026-09-18, the same day the rule moved into the shared prompt: an English answer copied
+  // the old example "16 September 2026 (እ.ኤ.አ.)" and put an Amharic marker in an English sentence. The
+  // example only ever reached banking answers until then.
+  assert.ok(!DATING.includes('16 September 2026 (እ.ኤ.አ.)'), 'the example that taught English to use the Amharic marker is gone');
+  assert.match(DATING, /In an English\s+answer write "16 September 2026" with no marker at all/);
 });
 
-test('the banking guardrail asks an Amharic answer to name the directive unprompted', () => {
-  assert.match(GUARDRAILS, /NAME THE DOCUMENT IN THE FIRST ANSWER, IN WHATEVER LANGUAGE YOU ARE WRITING/);
-  assert.ok(GUARDRAILS.includes('FCP/01/2020'), 'by its number, with the form it takes in Amharic');
-  assert.match(GUARDRAILS, /Never state a rule in Amharic and hold\s+the source back until you are asked/);
-  assert.ok(/በመጀመሪያው መልስ ውስጥ ጥቀስ/.test(GUARDRAILS), 'and the Amharic half says it in Amharic');
+test('the shared rule asks every answer to name its document in the first reply', () => {
+  assert.match(DATING, /NAME THE DOCUMENT IN THE FIRST ANSWER, IN WHATEVER LANGUAGE YOU ARE WRITING/);
+  assert.ok(DATING.includes('FCP/01/2020'), 'by its number, with the form it takes in Amharic');
+  assert.match(DATING, /Never state a rule and hold\s+the source back until you are asked/);
+  assert.ok(/በመጀመሪያው መልስ ውስጥ ጥቀስ/.test(DATING), 'and the Amharic half says it in Amharic');
+});
+
+test('an English answer that stamps a Gregorian year E.C. is corrected in English', () => {
+  // Measured 2026-09-18, question 38 of the Ministry of Labour run: "fetched on 2011 E.C." — the Ethiopian
+  // marker on what was meant to be a fetch date. The marker is the same mistake in either script, and the
+  // correction is written in the script the mistake was written in.
+  const r = fixCalendarMarker('The page was fetched in 2026 E.C.', 'Source: https://mols.gov.et/ fetched 2026-09-17');
+  assert.equal(r.fixed, 1);
+  assert.ok(r.text.includes('2026 (Gregorian)'), 'an English sentence gets an English marker, got ' + r.text);
+  assert.ok(!/E\.C/.test(r.text), 'and the Ethiopian one is gone');
+  // A year the Ethiopian calendar is actually in is never touched, in either script.
+  assert.deepEqual(fixCalendarMarker('published in 2011 E.C.', ''), { text: 'published in 2011 E.C.', fixed: 0 });
 });
