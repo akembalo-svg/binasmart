@@ -192,17 +192,26 @@ function normaliseHost(h) {
   s = s.replace(/^\/\//, '').split('/')[0].split('@').pop().replace(/:\d+$/, '');
   return s.replace(/^www\./, '');
 }
-// host -> { pack, site } for every host any pack registry claims. First pack to claim a host keeps it.
-function curatedHosts(root) {
-  const out = new Map();
+// Every pack registry under knowledge/: [{ pack, sites }] in pack-name order. curatedHosts and maskedSites read
+// the registries through this one function, so they agree about what a pack and a site are.
+function packRegistries(root) {
   const kdir = path.join(root, 'knowledge');
   let packs = [];
-  try { packs = fs.readdirSync(kdir, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name).sort(); } catch (e) { return out; }
+  try { packs = fs.readdirSync(kdir, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name).sort(); } catch (e) { return []; }
+  const out = [];
   for (const pack of packs) {
     let reg = null;
     try { reg = JSON.parse(fs.readFileSync(path.join(kdir, pack, 'sources.json'), 'utf8')); } catch (e) { continue; } // not a pack, or unreadable
-    for (const site of (Array.isArray(reg.sites) ? reg.sites : [])) {
-      if (!site || !CURATED_FETCH.has(String(site.fetch || '').trim())) continue;
+    out.push({ pack, sites: (Array.isArray(reg.sites) ? reg.sites : []).filter(Boolean) });
+  }
+  return out;
+}
+// host -> { pack, site } for every host any pack registry claims. First pack to claim a host keeps it.
+function curatedHosts(root) {
+  const out = new Map();
+  for (const { pack, sites } of packRegistries(root)) {
+    for (const site of sites) {
+      if (!CURATED_FETCH.has(String(site.fetch || '').trim())) continue;
       const claims = [site.host, site.dir, site.sitemap]
         .concat(Array.isArray(site.sitemaps) ? site.sitemaps : [])
         .concat(Array.isArray(site.urls) ? site.urls : []);
@@ -210,6 +219,58 @@ function curatedHosts(root) {
     }
   }
   return out;
+}
+
+// ---------- personal numbers ----------
+// A pack site with `maskPhones` publishes people's mobile numbers (mols.gov.et lists the manager's mobile for
+// every licensed agency). ops/packs/fetch-pack.js masks them when it writes the file, but the index must not
+// depend on the files: on 2026-09-17 the files were masked (4020770) while the index, built from the unmasked
+// files, was not re-ingested, and for half a day search, Bini and the MCP server served 1,208 real mobiles.
+// So readSources masks again on the way in (maskDocs, with fetch-pack's own maskPhones, which is idempotent:
+// a correctly masked file hashes exactly as before), and every ingest counts what is left (maskViolations).
+// fetch-pack requires this file, so it is required lazily here: at the top it would get a half-built module.
+function packTools() { return require(path.join(ROOT, 'ops', 'packs', 'fetch-pack.js')); }
+// pack -> [{ site, prefix, mask }] for each pack with at least one masking site, longest slug prefix first.
+// Slugs are site-prefixed (mols-agencies is site mols), so a document belongs to the site with the longest
+// prefix it carries; a masking site with no prefix (slugPrefix: false) owns whatever no other site claims.
+function maskedSites(root) {
+  const { slugPrefixOf } = packTools();
+  const out = new Map();
+  for (const { pack, sites } of packRegistries(root)) {
+    if (!sites.some(s => s.maskPhones)) continue;
+    const list = [];
+    for (const s of sites) { const prefix = slugPrefixOf(s); if (prefix !== '-') list.push({ site: s.id || '', prefix, mask: !!s.maskPhones }); }
+    out.set(pack, list.sort((a, b) => b.prefix.length - a.prefix.length));
+  }
+  return out;
+}
+function masksDoc(masked, source, slug) {
+  const sites = masked.get(source); if (!sites) return false;
+  const owner = sites.find(s => String(slug).startsWith(s.prefix));
+  return !!(owner && owner.mask);
+}
+function maskDocs(docs, root) {
+  const masked = maskedSites(root);
+  if (!masked.size) return docs;
+  const { maskPhones } = packTools();
+  for (const d of docs) if (masksDoc(masked, d.source, d.slug)) { d.text = maskPhones(d.text); if (d.title) d.title = maskPhones(d.title); }
+  return docs;
+}
+// A full personal mobile in either form: 2519/2517 + 8 digits (with or without +, separators allowed as in
+// fetch-pack's MOBILE_RE) or the local 09/07 + 8 digits. The masked form 251 + five dots + four digits never matches.
+const PERSONAL_MOBILE = /(?<![0-9])(?:\+?251[ -]?[79](?:[ -]?[0-9]){8}|0[79](?:[ -]?[0-9]){8})(?![0-9])/g;
+// rows: [{ source, slug, text }] -> [{ source, slug, n }] for chunks of masking sites that still hold a full mobile.
+function maskViolations(rows, masked) {
+  const by = new Map();
+  for (const r of rows) {
+    if (!masksDoc(masked, r.source, r.slug)) continue;
+    const n = (String(r.text || '').match(PERSONAL_MOBILE) || []).length;
+    if (!n) continue;
+    const key = r.source + ':' + r.slug;
+    const v = by.get(key) || { source: r.source, slug: r.slug, n: 0 };
+    v.n += n; by.set(key, v);
+  }
+  return [...by.values()];
 }
 // knowledge/web/<dir> is named after the crawl registry id, never after the host, so the host comes from the
 // registry entry when there is one and from the first document's `url:` front matter otherwise — the registry
@@ -343,7 +404,7 @@ function readSources(root, only) {
     let text = htmlToText(html); if (text.length > 30000) text = text.slice(0, 30000);
     docs.push({ source, slug, title: titleOf(html) || slug, url: 'https://bina.et/' + slug, lang: /[ሀ-፿]/.test(text.slice(0, 400)) ? 'am' : 'en', text });
   }
-  return docs;
+  return maskDocs(docs, root);
 }
 
 // ---------- Gemini ----------
@@ -716,6 +777,16 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   }
   async function ensureLoaded() { if (!loadedAt) await load(); }
 
+  // Full personal mobiles left in the chunks of maskPhones sites (see maskViolations). Read-only. Runs at the end
+  // of every ingest, whatever its scope, and on demand: node --env-file=.env knowledge/ingest.js --check-masks
+  async function checkMasks() {
+    const masked = maskedSites(root || ROOT);
+    if (!masked.size) return { checked: 0, violations: [] };
+    const got = await prisma.knowledgeChunk.findMany({ where: { source: { in: [...masked.keys()] } }, select: { source: true, slug: true, text: true } });
+    const flagged = got.filter(r => masksDoc(masked, r.source, r.slug));
+    return { checked: flagged.length, violations: maskViolations(flagged, masked) };
+  }
+
   // (Re)build the store: chunk every source, insert new hashes, embed only what has no embedding, drop stale.
   async function ingest({ only, embed = true, embedTake = 2000, localMax = LOCAL_MAX_PER_RUN } = {}) {
     const docs = readSources(root || ROOT, only);
@@ -770,6 +841,8 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
       if (localOn) { const l = await embedPendingLocal({ max: localMax }); localEmbedded = l.embedded; localPending = l.pending; }
     }
     await load();
+    const mask = await checkMasks();
+    for (const v of mask.violations) say('[knowledge] MASK VIOLATION ' + v.source + ':' + v.slug + ' n=' + v.n);
     const hy = readSources.lastHygiene;
     if (hy && (Object.keys(hy.spam).length || hy.boilerplateChars)) {
       const spam = Object.entries(hy.spam).map(([k, v]) => k + ':' + v).join(' ');
@@ -779,7 +852,8 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     }
     say('[knowledge] ingest: ' + docs.length + ' docs, +' + inserted + ' chunks, -' + deleted + ' stale, -' + orphaned + ' orphaned, ' + embedded + ' embedded, ' + rows.length + ' total'
       + (embedRemaining ? ', ' + embedRemaining + ' still unembedded' : '') + (localOn && embed ? ', local ' + localEmbedded + ' embedded' + (localPending ? ' / ' + localPending + ' pending' : '') : ''));
-    return { docs: docs.length, inserted, deleted, orphaned, embedded, embedRemaining, localEmbedded, localPending, total: rows.length };
+    return { docs: docs.length, inserted, deleted, orphaned, embedded, embedRemaining, localEmbedded, localPending, total: rows.length,
+      maskChecked: mask.checked, maskViolations: mask.violations };
   }
 
   // What BinaSmart wrote itself answers correctly 91.7% of the time; crawled sites manage 62.5%. Rank
@@ -1070,9 +1144,9 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   }
 
   function health() { return { chunks: rows.length, embedded: rows.filter(r => r.vec).length, embeddedLocal: rows.filter(r => r.lvec).length, loadedAt, gemini: !!apiKey, localFallback: localOn, ...stats }; }
-  return { load, ingest, search, contextFor, health, embedPendingGemini, embedPendingLocal, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
+  return { load, ingest, checkMasks, search, contextFor, health, embedPendingGemini, embedPendingLocal, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, curatedHosts, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, docMeta, docMetaFile, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
+module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, docMeta, docMetaFile, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
   LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled,
   bilingualEnabled, bilingualEn2AmEnabled, makeQueryTranslator, normaliseQuery, BILINGUAL_TIMEOUT_MS, BILINGUAL_CACHE_MAX };
