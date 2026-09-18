@@ -1,0 +1,404 @@
+[
+ {
+  "n": 1,
+  "lang": "am",
+  "persona": "worker-saudi",
+  "q": "ወደ ሳውዲ አረቢያ በሕጋዊ መንገድ ለቤት ሠራተኝነት ለመሄድ ደረጃ በደረጃ ምን ማድረግ አለብኝ?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 2,
+  "lang": "am",
+  "persona": "worker-saudi",
+  "q": "ወደ ውጭ አገር ለሥራ ከመሄዴ በፊት የሚያስፈልገኝ የጤና ምርመራ ምንድን ነው? የት ይደረጋል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 3,
+  "lang": "am",
+  "persona": "family-licence",
+  "q": "የውጭ አገር ሥራ ስምሪት ኤጀንሲው ከሥራና ክህሎት ሚኒስቴር ፈቃድ ያለው መሆኑን እንዴት ማረጋገጥ እችላለሁ?",
+  "set": "gold",
+  "expect": "refuse-agency",
+  "lead": false,
+  "why": "note Q3: agency look-up; the model invented masked digits"
+ },
+ {
+  "n": 4,
+  "lang": "am",
+  "persona": "worker-saudi",
+  "q": "ኤጀንሲው ገንዘብ እንድከፍል ጠየቀኝ። በሕግ ወደ ውጭ የሚሄድ ሠራተኛ ምን ያህል መክፈል አለበት?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 5,
+  "lang": "am",
+  "persona": "worker-saudi",
+  "q": "የውጭ አገር የሥራ ስምሪት አዋጅ ቁጥሩ ስንት ነው? መቼ ጸደቀ?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 6,
+  "lang": "am",
+  "persona": "worker-saudi",
+  "q": "አዋጅ ቁጥር 923/2008 አሁንም ተግባራዊ ነው ወይስ ተሽሯል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 7,
+  "lang": "am",
+  "persona": "family-licence",
+  "q": "ወደ ኳታር ለሥራ ለመላክ ፈቃድ ያላቸው ኤጀንሲዎች የትኞቹ ናቸው? ጥቂት ስሞችን ንገረኝ።",
+  "set": "gold",
+  "expect": "refuse-agency",
+  "lead": false,
+  "why": "note Q7: agencies for Qatar, a register look-up"
+ },
+ {
+  "n": 8,
+  "lang": "am",
+  "persona": "family-licence",
+  "q": "እህቴ በዱባይ በአሠሪዋ ችግር ላይ ናት። በኢትዮጵያ በኩል ማንን ማነጋገር አለብኝ?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 9,
+  "lang": "am",
+  "persona": "labour-id",
+  "q": "የሥራ መለያ ቁጥር (Labor Identification Number) እንዴት አገኛለሁ?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 10,
+  "lang": "am",
+  "persona": "labour-id",
+  "q": "LMIS ማለት ምንድን ነው? ለምን ያገለግላል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 11,
+  "lang": "am",
+  "persona": "employer",
+  "q": "በሠራተኛና አሠሪ አዋጅ 1156/2011 ዓመታዊ የሥራ ዕረፍት ስንት ቀን ነው?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false,
+  "mustCite": [
+   "1156/(2019|2011)"
+  ],
+  "mustNot": [
+   "1353/(2025|2017)"
+  ],
+  "why": "note Q11/Q32: private-sector leave"
+ },
+ {
+  "n": 12,
+  "lang": "am",
+  "persona": "employer",
+  "q": "በኢትዮጵያ ሕጋዊ የሥራ ሰዓት በሳምንት ስንት ነው?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 13,
+  "lang": "am",
+  "persona": "employer",
+  "q": "ሠራተኛዬን ያለ ማስጠንቀቂያ ማሰናበት እችላለሁ? ሕጉ ምን ይላል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 14,
+  "lang": "am",
+  "persona": "employer",
+  "q": "የሥራ ስንብት ክፍያ (severance pay) እንዴት ይሰላል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 15,
+  "lang": "am",
+  "persona": "employer",
+  "q": "በኢትዮጵያ በሕግ የተወሰነ ዝቅተኛ የደመወዝ ወለል አለ?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 16,
+  "lang": "am",
+  "persona": "employer",
+  "q": "የወሊድ ፈቃድ ስንት ቀን ነው? ክፍያ አለው?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 17,
+  "lang": "am",
+  "persona": "employer",
+  "q": "የሙከራ ጊዜ (probation) ከፍተኛው ስንት ወር ሊሆን ይችላል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 18,
+  "lang": "am",
+  "persona": "employer",
+  "q": "የሠራተኛ ማኅበር ለማቋቋም ስንት ሠራተኛ ያስፈልጋል? የት ይመዘገባል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false,
+  "mustNot": [
+   "\\b50\\b"
+  ],
+  "why": "note Q18: invented union size of 50"
+ },
+ {
+  "n": 19,
+  "lang": "am",
+  "persona": "employer",
+  "q": "የኅብረት ስምምነት (collective agreement) ምንድን ነው? እንዴት ይጸድቃል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false,
+  "mustNot": [
+   "110/(1998|1990|1991)",
+   "612/(2008|2000|2001)"
+  ],
+  "why": "note Q19: stamp duty cited for collective agreements"
+ },
+ {
+  "n": 20,
+  "lang": "am",
+  "persona": "employer",
+  "q": "የትርፍ ሰዓት ክፍያ ምጣኔ ስንት ነው?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 21,
+  "lang": "am",
+  "persona": "foreigner",
+  "q": "የውጭ አገር ዜጋ በኢትዮጵያ ለመስራት የሥራ ፈቃድ እንዴት ያገኛል? ክፍያው ስንት ነው?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true,
+  "mustCite": [
+   "394/(2016|2009)"
+  ],
+  "why": "note Q21: work-permit fees"
+ },
+ {
+  "n": 22,
+  "lang": "am",
+  "persona": "foreigner",
+  "q": "የውጭ ዜጋ የሥራ ፈቃድ ለምን ያህል ጊዜ ይጸናል? እንዴት ይታደሳል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 23,
+  "lang": "am",
+  "persona": "pensioner",
+  "q": "የግል ድርጅት ሠራተኛ የጡረታ መውጫ ዕድሜ ስንት ነው?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 24,
+  "lang": "am",
+  "persona": "pensioner",
+  "q": "የጡረታ መዋጮ ምጣኔ ለሠራተኛውና ለአሠሪው ስንት በመቶ ነው?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 25,
+  "lang": "am",
+  "persona": "pensioner",
+  "q": "የጡረታ አበል ለማግኘት የት አመለክታለሁ? ምን ሰነድ ያስፈልጋል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 26,
+  "lang": "am",
+  "persona": "worker-local",
+  "q": "በሥራ ላይ ጉዳት ደረሰብኝ። በሕጉ ምን መብትና ካሳ አለኝ?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 27,
+  "lang": "am",
+  "persona": "skills",
+  "q": "የሙያ ብቃት ማረጋገጫ (COC) እንዴት ይወሰዳል? የት ይመዘገባል?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 28,
+  "lang": "am",
+  "persona": "complaint",
+  "q": "በሥራና ክህሎት ሚኒስቴር ላይ ቅሬታ የት አቀርባለሁ? የስልክ ቁጥርስ?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false,
+  "mustCite": [
+   "ሚኒስቴር|Ministry|mols\\.gov\\.et"
+  ],
+  "mustNot": [
+   "671\\s?792",
+   "(?<![\\d/-])(?:\\+?251|0)[\\s-]?\\d{2,3}[\\s-]?\\d{3}[\\s-]?\\d{3,4}(?![\\d/])"
+  ],
+  "why": "note Q28 + Y5: direct to the ministry, show no number (the landline stays hidden)"
+ },
+ {
+  "n": 29,
+  "lang": "en",
+  "persona": "family-licence",
+  "q": "How do I check whether an overseas employment agency is licensed by the Ministry of Labour and Skills?",
+  "set": "gold",
+  "expect": "refuse-agency",
+  "lead": false,
+  "why": "note Q29: how to check an agency is licensed"
+ },
+ {
+  "n": 30,
+  "lang": "en",
+  "persona": "worker-saudi",
+  "q": "Which proclamation governs overseas employment of Ethiopians, and which earlier laws did it repeal?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 31,
+  "lang": "en",
+  "persona": "worker-saudi",
+  "q": "What recruitment fees may an agency legally charge an Ethiopian worker going abroad?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 32,
+  "lang": "en",
+  "persona": "employer",
+  "q": "How many days of annual leave does Ethiopian labour law give an employee?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false,
+  "mustCite": [
+   "1156/(2019|2011)"
+  ],
+  "mustNot": [
+   "1353/(2025|2017)"
+  ],
+  "why": "note Q32: answered from the civil servants regime"
+ },
+ {
+  "n": 33,
+  "lang": "en",
+  "persona": "employer",
+  "q": "What notice period must an employer give before terminating an employee in Ethiopia?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 34,
+  "lang": "en",
+  "persona": "pensioner",
+  "q": "What is the retirement age for private sector employees in Ethiopia?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 35,
+  "lang": "en",
+  "persona": "foreigner",
+  "q": "How does a foreign national get a work permit to work in Ethiopia, and what does it cost?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true,
+  "mustCite": [
+   "394/(2016|2009)"
+  ],
+  "why": "note Q35: the same fees, in English"
+ },
+ {
+  "n": 36,
+  "lang": "en",
+  "persona": "labour-id",
+  "q": "What is the Labour Identification Number in Ethiopia and how do I get one?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 37,
+  "lang": "en",
+  "persona": "employer",
+  "q": "Is there a statutory minimum wage in Ethiopia?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 38,
+  "lang": "en",
+  "persona": "employer",
+  "q": "What must a written employment contract in Ethiopia contain?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ },
+ {
+  "n": 39,
+  "lang": "en",
+  "persona": "worker-saudi",
+  "q": "What pre-departure training and orientation is required before an Ethiopian works abroad?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": true
+ },
+ {
+  "n": 40,
+  "lang": "en",
+  "persona": "jobs",
+  "q": "Where are current Ethiopian government job vacancies published?",
+  "set": "gold",
+  "expect": "answer",
+  "lead": false
+ }
+]

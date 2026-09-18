@@ -39,6 +39,12 @@ const TEXT = {
     en: () => 'Too many questions in a short time. Please wait a little and try again.',
     om: () => 'Yeroo gabaabaa keessatti gaaffiin baay\'een na qaqqabe. Maaloo xiqqoo turaatii irra deebi\'aa yaalaa.',
   },
+  // Y8: a language the office has not switched on. Said in both switched-on languages, never in the one asked in:
+  // the Oromo strings are not shown until a speaker has read them.
+  language: {
+    am: () => 'ለጊዜው የምመልሰው በአማርኛና በእንግሊዝኛ ብቻ ነው። እባክዎ ጥያቄዎን በአማርኛ ወይም በእንግሊዝኛ ይጠይቁ።',
+    en: () => 'For now I answer in Amharic and English only. Please ask your question in Amharic or English.',
+  },
   fallback: {
     am: h => 'አሁን መመለስ አልቻልኩም። እባክዎ ቆይተው ይሞክሩ፤ ወይም የሚኒስቴሩን ድረ ገጽ ይመልከቱ፦ ' + h,
     en: h => 'I couldn\'t answer just now. Please try again later, or see the Ministry\'s own site: ' + h,
@@ -77,6 +83,9 @@ function makeOfficeAgent(office) {
     gate('emergency', c => afiya.isEmergency(c.msg), c => ({ reply: afiya.emergencyReply(c.l), emergency: true, ambulance: afiya.AMBULANCE })),
     gate('danger', c => F.isDangerAbroad(c.msg), c => ({ reply: dangerReply(t, c.l), urgent: true })),
   ];
+  const langs = Array.isArray(t.languages) && t.languages.length ? t.languages : ['am', 'en'];
+  gates.push(gate('language', c => !langs.includes(c.l),
+    () => ({ reply: TEXT.language.en() + '\n' + TEXT.language.am(), redirected: true, refused: 'language' })));
   if (refuse.politics) gates.push(gate('politics', c => politics.isPolitical(c.msg),
     c => ({ reply: politics.politicalReply(c.l), redirected: true, refused: 'politics' })));
   if (refuse.agencyLookup) gates.push(gate('agency', c => F.isAgencyLookup(c.msg),
@@ -90,7 +99,8 @@ function makeOfficeAgent(office) {
   return {
     name: 'gov-' + t.id,
     soul: soulFor(t),
-    maxTokens: 700,
+    // The office's own limit (gov/tenants.json maxTokens): 700 cut long Amharic answers mid-word (2026-09-18).
+    maxTokens: Number.isInteger(t.maxTokens) && t.maxTokens > 0 ? t.maxTokens : 700,
     names: [t.assistantName.am, t.assistantName.en, t.assistantName.om].filter(Boolean),
     knowledge: { prefer: t.prefer.slice(), exclude: office.exclude.slice() },
     gates,
