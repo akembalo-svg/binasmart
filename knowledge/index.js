@@ -309,8 +309,11 @@ function curatedSkip(curated, url) {
 function webKeepCurated(env = process.env) { return /^(1|on|true|yes)$/i.test(String(env.KNOWLEDGE_WEB_KEEP_CURATED || '').trim()); }
 
 // ---------- sources ----------
-function readSources(root, only) {
+// `today` exists for one source: `watch` documents expire, and a test must be able to stand on a given day
+// without moving the clock. Every other caller passes two arguments and gets exactly what it always got.
+function readSources(root, only, { today } = {}) {
   const docs = [];
+  const day = String(today || new Date().toISOString().slice(0, 10)).slice(0, 10);
   const want = s => !only || only.includes(s);
   const rd = p => { try { return fs.readFileSync(p, 'utf8'); } catch (e) { return null; } };
   if (want('skill')) { const t = rd(path.join(root, 'skills', 'binasmart-system', 'SKILL.md')); if (t) docs.push({ source: 'skill', slug: 'binasmart-system', title: 'BinaSmart system', url: 'https://bina.et/llms.txt', lang: 'en', text: stripFrontmatter(t), internal: true }); }
@@ -348,9 +351,15 @@ function readSources(root, only) {
       const fm = /^---\n([\s\S]*?)\n---\n/.exec(raw); if (!fm) continue;
       const meta = {}; for (const line of fm[1].split('\n')) { const m = /^(\w+):\s*"?(.*?)"?\s*$/.exec(line); if (m) meta[m[1]] = m[2].replace(/\\"/g, '"'); }
       // A curated document may record that its source page no longer exists (ops/travel/freshness.js writes
-      // status: "gone"). It stays on disk as the last thing we knew and stays out of the index: the ingest's
-      // orphan collection then drops its chunks on the next run.
-      if (meta.status === 'gone') continue;
+      // status: "gone"), and a watch document may record that a curated one has overtaken it
+      // (status: "superseded", with superseded_by). Anything whose status is not live stays on disk as the
+      // last thing we knew and stays out of the index: the ingest's orphan collection then drops its chunks on
+      // the next run. A document with no status line at all is a curated one and is indexed as it always was.
+      if (meta.status && meta.status !== 'live') continue;
+      // A watch item is news, and news stops being true. expires_at is the day it stops being an answer — the
+      // customs opening hours end on 2026-10-10 and must not still be served in December — and the last day is
+      // inclusive. The file is not deleted: the record of what was announced outlives its usefulness.
+      if (meta.expires_at && /^\d{4}-\d{2}-\d{2}$/.test(meta.expires_at) && meta.expires_at < day) continue;
       docs.push({ source, slug: f.replace(/\.md$/, ''), title: meta.title || f,
         url: meta.url || null, lang: meta.lang || defaultLang, text: raw.slice(fm[0].length) });
     }
@@ -622,7 +631,12 @@ function contextSearchOptions({ k = 6, prefer, exclude } = {}) {
 // Ethiopic, poessa at 62 and motri at 43, and the importer's own measurement only ever DEMOTES a document from
 // am to en when its Ethiopic count falls under the floor. A default of am is therefore the safe direction -
 // the wrong guess gets corrected by measurement, and the other way round it does not.
-const PACK_SOURCES = [['law', 'am'], ['health', 'am'], ['eservices', 'en'], ['mor', 'am'], ['travel', 'en'], ['banking', 'en'], ['business', 'am']];
+// `watch` is the daily channel watch (ops/watch/channels): one dated document per announcement an office
+// published on its own Telegram channel, read whole because an item is a few hundred characters long. It is
+// deliberately absent from OWN_SOURCES — a ministry's announcement is not our page and must not be boosted
+// like one — and it is the only source whose documents expire (expires_at) or are superseded by a curated
+// document that later covers the same fact.
+const PACK_SOURCES = [['law', 'am'], ['health', 'am'], ['eservices', 'en'], ['mor', 'am'], ['travel', 'en'], ['banking', 'en'], ['business', 'am'], ['watch', 'am']];
 const PACK_DIRS = new Set(PACK_SOURCES.map(([s]) => s));
 const SAFE_SLUG = /^[A-Za-z0-9._\-/]+$/;
 const _docMeta = new Map();   // root\0source\0slug -> front matter | null
@@ -706,9 +720,11 @@ function docMeta(root, source, slug) {
 // writes fetched. "(checked …)" is left out when it is the same day as the fetch, which it is for a page
 // fetched today: two identical dates read as noise, and the fetch date is the one the guardrail asks for.
 // Our own pages (ownPageMeta) carry `updated` instead: the day the page last changed, labelled as such.
+// `reported` is the watch source's own date: the day the OFFICE announced the thing, which is the date an
+// answer must speak. The day we fetched it is printed as well and never instead.
 const SOURCE_WORDS = {
-  en: { label: 'Source:', fetched: 'fetched', checked: 'checked', updated: 'updated', us: 'BinaSmart' },
-  am: { label: 'ምንጭ፦', fetched: 'የተወሰደበት ቀን', checked: 'የተረጋገጠበት', updated: 'የተሻሻለበት ቀን', us: 'ቢናስማርት' },
+  en: { label: 'Source:', fetched: 'fetched', checked: 'checked', updated: 'updated', us: 'BinaSmart', reported: 'reported' },
+  am: { label: 'ምንጭ፦', fetched: 'የተወሰደበት ቀን', checked: 'የተረጋገጠበት', updated: 'የተሻሻለበት ቀን', us: 'ቢናስማርት', reported: 'የተገለጸበት ቀን' },
 };
 // The url a page is credited with. The front matter's, when it has one, for the header line as well as the
 // Source line: the chunk row's url was written at ingest and is never rewritten while the chunk text is
@@ -732,8 +748,10 @@ function sourceLine(hit, { root, am = false } = {}) {
   const fetched = String(meta.fetchedAt || meta.fetched || '').trim();
   const checked = String(meta.lastChecked || '').trim();
   const updated = String(meta.updated || '').trim();
+  const reported = String(meta.reported_at || '').trim();
   const bits = [name];
   if (url) bits.push(url);
+  if (reported) bits.push(w.reported + ' ' + reported);
   if (fetched) bits.push(w.fetched + ' ' + fetched + (checked && checked !== fetched ? ' (' + w.checked + ' ' + checked + ')' : ''));
   else if (updated) bits.push(w.updated + ' ' + updated);
   return w.label + ' ' + bits.join(' — ');
