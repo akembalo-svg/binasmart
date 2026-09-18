@@ -169,7 +169,7 @@ function manualNote(sites, probed) {
 }
 
 // Everything injectable, so the tests run the real decisions with no network, no database and no Telegram.
-async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites, manualSites,
+async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites, manualSites, triggerDir,
   fetchSite = realFetchSite, sendTg = sendTgReal, runIngest = runIngestReal,
   runAmHeaders = runAmHeadersReal, rerender = rerenderReal, log = m => console.log(m) } = {}) {
   const day = today || new Date().toISOString().slice(0, 10);
@@ -196,6 +196,19 @@ async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites,
   // still writes the tag itself, are corrected rather than believed.
   const prefix = cfg.logPrefix || cfg.id || packId;
   const say = m => log(String(m).replace(/^\[travel\]/, '[' + prefix + ']'));
+  // The daily channel watch may have asked for this run (design 5.12 of the channel-watch design): an office
+  // announced a directive last night, and the pack that owns that office goes and gets the document the same
+  // night instead of waiting for Sunday. The trigger is read and CLEARED here, at the top, so a pack
+  // re-fetches once -- a trigger that is read and left behind is a pack that re-fetches every night for ever.
+  // A dry run reads it and leaves it. The watch itself fetches nothing; this is the only thing it calls.
+  let triggeredBy = [];
+  try {
+    const { takeTrigger } = require('../watch/channels/trigger');
+    triggeredBy = takeTrigger(cfg.id || packId, triggerDir ? { dir: triggerDir, dryRun } : { dryRun });
+  } catch (e) { log('[' + prefix + '-freshness] the watch trigger could not be read: ' + e.message); }
+  if (triggeredBy.length) log('[' + prefix + '-freshness] the channel watch asked for this run: '
+    + triggeredBy.map(t => (t.office || '?') + ' -- ' + (t.title || t.post || '')).join('; '));
+
   const reports = [];
   let moved = false, anyRefused = false;
 
@@ -223,7 +236,7 @@ async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites,
   // has come back set `moved`, and only `moved` sends a note.
   let quiet = !moved && !anyRefused;
   const tag = '[' + prefix + '-freshness] ';
-  const result = { quiet, refused: anyRefused, reports,
+  const result = { quiet, refused: anyRefused, reports, triggeredBy,
     added: reports.flatMap(r => r.added), changed: reports.flatMap(r => r.changed), gone: reports.flatMap(r => r.gone),
     missed: reports.flatMap(r => r.missed), reformatted: reports.flatMap(r => r.reformatted || []) };
   const setQuiet = v => { quiet = v; result.quiet = v; };
