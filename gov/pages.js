@@ -51,11 +51,21 @@ function frameHtml(office, token, l) {
     emergency: { numbers: tel, labels: { am: ['አምቡላንስ', 'ፖሊስ'], en: ['Ambulance', 'Police'] } },
     ui: pickLangs(UI, langs),
   };
-  return '<!doctype html>\n<html lang="' + lang + '"><head><meta charset="utf-8">'
+  return '<!doctype html>\n<html lang="' + lang + '" class="ac-page"><head><meta charset="utf-8">'
     + '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">'
     + '<title>' + esc(t.assistantName[lang] || t.assistantName.en) + '</title>'
     + '<link rel="stylesheet" href="/static/fonts/fonts.css?v=2"><link rel="stylesheet" href="/static/agent-chat.css?v=1">'
-    + '<style>:root{--ac-brand:' + esc(t.brand.color) + '}html,body{height:100%;margin:0}.ac{height:100%}'
+    // agent-chat.css hangs its colour tokens on html.ac-page, which /afiya and /asmat set and the frame
+    // did not: without the class the frame had no palette at all, so cards, borders and the card
+    // background disappeared. The office colour replaces the teal. Measured in a browser, 2026-09-18.
+    // And the frame is a fixed box, not a page: the log scrolls inside it, so the fixed footer stays
+    // under the input bar instead of sitting below the fold.
+    + '<style>html.ac-page{--ac:' + esc(t.brand.color) + ';--ac-user:' + esc(t.brand.color) + ';--ac-link:' + esc(t.brand.color) + ';--ac-brand:' + esc(t.brand.color) + '}'
+    + 'html,body{height:100%;margin:0;overflow:hidden}.ac{height:100%;min-height:0;max-width:none}'
+    + '.ac-log{flex:1 1 auto;min-height:0;overflow-y:auto}.ac-log>*{flex:0 0 auto}'
+    + '.ac-fb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 0;font-size:13px;color:var(--ac-mut)}'
+    + '.ac .ac-fb-b{min-height:32px;padding:2px 10px;border:1px solid var(--ac-line);border-radius:999px;font-size:15px}'
+    + '.ac .ac-fb-r{min-height:32px;padding:2px 4px;color:var(--ac-link);text-decoration:underline;font-size:13px}'
     + '.ac-foot{font-size:12px;line-height:1.4;margin:0;padding:6px 12px;background:#f4f6f8;color:#333}</style></head><body>'
     + '<script id="agent-chat-config" type="application/json">' + json(cfg) + '</script>'
     + '<div id="agent-chat" class="ac"></div>'

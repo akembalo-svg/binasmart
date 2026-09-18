@@ -26,7 +26,7 @@ test('the loader carries the frame url with the public key, and escapes <', () =
 
 test('the frame: config inlined safely, token in the headers, footer, no voice, no Gemini voice api', () => {
   const html = frameHtml(office, 'TOKEN.abc', 'en');
-  assert.match(html, /<html lang="en">/);
+  assert.match(html, /<html lang="en" class="ac-page">/);
   const cfg = JSON.parse(/<script id="agent-chat-config" type="application\/json">([\s\S]*?)<\/script>/.exec(html)[1]);
   assert.equal(cfg.api, '/api/w/mols/ask');
   assert.deepEqual(cfg.headers, { 'x-bina-frame': 'TOKEN.abc' });
@@ -43,8 +43,21 @@ test('the frame: config inlined safely, token in the headers, footer, no voice, 
 });
 
 test('an unknown language falls back to am', () => {
-  assert.match(frameHtml(office, 't.x', 'fr'), /<html lang="am">/);
-  assert.match(frameHtml(office, 't.x', 'om'), /<html lang="am">/, 'om is off for this tenant (Y8)');
+  assert.match(frameHtml(office, 't.x', 'fr'), /<html lang="am" class="ac-page">/);
+  assert.match(frameHtml(office, 't.x', 'om'), /<html lang="am" class="ac-page">/, 'om is off for this tenant (Y8)');
+});
+
+// Measured in a headless browser on 2026-09-18: without these the frame has no colour tokens at all
+// (agent-chat.css puts them on html.ac-page, which /afiya and /asmat set and the frame did not), and the
+// page itself scrolls, so the fixed footer sat 160px below the fold instead of under the input bar.
+test('the frame carries the chat colour tokens and lets only the log scroll', () => {
+  const html = frameHtml(office, 't.x', 'am');
+  assert.match(html, /<html lang="am" class="ac-page">/);
+  assert.ok(html.includes('--ac:' + tenant.brand.color), 'the office colour is the chat colour');
+  assert.match(html, /\.ac\{[^}]*height:100%/);
+  assert.match(html, /\.ac-log\{[^}]*min-height:0[^}]*overflow-y:auto/, 'the log scrolls, not the page');
+  assert.match(html, /\.ac-log>\*\{flex:0 0 auto\}/, 'and a long answer is not squashed by the column that holds it');
+  assert.match(html, /\.ac-foot\{/, 'and the footer is drawn under the bar');
 });
 
 test('the demo is labelled a mock, has no logo and no ministry image, and embeds the real loader', () => {
