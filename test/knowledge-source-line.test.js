@@ -128,10 +128,33 @@ test('nothing is invented: a page with no metadata gets its title and stops', ()
   const root = fixture();
   assert.equal(sourceLine({ source: 'banking', slug: 'bare', title: 'A page that records nothing about itself', url: null }, { root }),
     'Source: A page that records nothing about itself');
-  // a source that is not a file on disk at all (a guide, a news article) keeps whatever the row carries
+  // a source that is not a file on disk at all (a guide, a news article) keeps the url the row carries
   assert.equal(sourceLine({ source: 'guide', slug: 'fayda', title: 'Fayda', url: 'https://bina.et/fayda' }, { root }),
-    'Source: Fayda — https://bina.et/fayda');
+    'Source: BinaSmart — https://bina.et/fayda');
   assert.equal(docMeta(root, 'guide', 'fayda'), null);
+});
+
+// Found in the government widget on 2026-09-18: a bina.et/news article was credited to a clipped copy of its
+// own Amharic headline. Our own pages have no front matter to read a publisher out of, so the publisher is us.
+test('a page of ours is published by us, never by a piece of its own title', () => {
+  const root = fixture();
+  const news = { source: 'news', slug: 'law-overseas-employment-guide-part-4',
+    title: 'የሕግ መመሪያ (ክፍል 4)፦ ወደ ውጭ ሀገር ለሥራ', url: 'https://bina.et/news/law-overseas-employment-guide-part-4' };
+  assert.equal(sourceLine(news, { root }), 'Source: BinaSmart — https://bina.et/news/law-overseas-employment-guide-part-4');
+  assert.equal(sourceLine({ source: 'page', slug: 'lmis-labor-id-ethiopia', title: 'Labor ID', url: 'https://bina.et/lmis-labor-id-ethiopia' }, { root }),
+    'Source: BinaSmart — https://bina.et/lmis-labor-id-ethiopia');
+  assert.equal(sourceLine(news, { root, am: true }).split(' — ')[0], 'ምንጭ፦ ቢናስማርት');
+  // and a page we fetched is still credited to whoever published it, from its front matter
+  assert.match(sourceLine({ source: 'banking', slug: 'nbe-foreign-exchange', title: 'x', url: null }, { root }),
+    /^Source: National Bank of Ethiopia — /);
+  assert.match(sourceLine({ source: 'web', slug: 'ebc/abc123', title: 'ኢቢሲ (EBC) · A crawled page', url: null }, { root }),
+    /^Source: ኢቢሲ \(EBC\) — /);
+  fs.mkdirSync(path.join(root, 'knowledge', 'law'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'knowledge', 'law', 'labour-proclamation-1156-2019.md'),
+    ['---', 'url: "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC193081/"', 'title: "Labour Proclamation No. 1156/2019"',
+      'source_name: "FAOLEX"', 'fetchedAt: "2026-09-17"', '---', '', 'body', ''].join('\n'));
+  assert.equal(sourceLine({ source: 'law', slug: 'labour-proclamation-1156-2019', title: 'Labour Proclamation No. 1156/2019 (part 3)', url: null }, { root }),
+    'Source: FAOLEX — https://www.fao.org/faolex/results/details/en/c/LEX-FAOC193081/ — fetched 2026-09-17');
 });
 
 test('a slug can never read a file outside the knowledge tree', () => {

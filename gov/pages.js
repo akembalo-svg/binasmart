@@ -9,6 +9,10 @@ const LOADER = fs.readFileSync(path.join(__dirname, 'loader.js'), 'utf8');
 const json = o => JSON.stringify(o).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const pickLangs = (o, langs) => Object.fromEntries(langs.filter(l => o && o[l] != null).map(l => [l, o[l]]));
+// Every language the chat can be switched to (public/agent-chat-core.js, LANGS). The frame names the ones its
+// tenant enables, and the rest are not drawn: found in a browser on 2026-09-18 offering OM on mols, whose
+// Oromo strings are written but off until a speaker has read them (tenants.json, pendingOwner Y8).
+const ALL_LANGS = ['am', 'en', 'om'];
 
 const UI = {
   am: { chats: 'የቀድሞ ውይይቶች', newChat: 'አዲስ ውይይት', close: 'ዝጋ', noChats: 'እስካሁን ውይይት የለም።', delete: 'ሰርዝ',
@@ -44,6 +48,7 @@ function frameHtml(office, token, l) {
     agent: 'gov-' + t.id, api: '/api/w/' + t.id + '/ask', headers: { 'x-bina-frame': token },
     feedback: { api: '/api/w/' + t.id + '/feedback' }, storageKey: 'bina_gov_' + t.id,
     avatar: '/static/w/assistant.svg?v=1', voice: false, sources: true,
+    langs: ALL_LANGS.filter(x => langs.includes(x)),
     name: pickLangs(t.assistantName, langs), role: pickLangs(t.role, langs), greeting: pickLangs(t.greeting, langs),
     intro: pickLangs(t.intro, langs), placeholder: pickLangs(t.placeholder, langs),
     suggestions: pickLangs(t.suggestions, langs), chips: pickLangs(t.suggestions, langs),
@@ -66,7 +71,13 @@ function frameHtml(office, token, l) {
     + '.ac-fb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 0;font-size:13px;color:var(--ac-mut)}'
     + '.ac .ac-fb-b{min-height:32px;padding:2px 10px;border:1px solid var(--ac-line);border-radius:999px;font-size:15px}'
     + '.ac .ac-fb-r{min-height:32px;padding:2px 4px;color:var(--ac-link);text-decoration:underline;font-size:13px}'
-    + '.ac-foot{font-size:12px;line-height:1.4;margin:0;padding:6px 12px;background:#f4f6f8;color:#333}</style></head><body>'
+    + '.ac-foot{font-size:12px;line-height:1.4;margin:0;padding:6px 12px;background:#f4f6f8;color:#333}'
+    // The language row is drawn from the chat's own list of languages, not from this config, so a language the
+    // tenant has not enabled is taken out of the row here. Nothing else in the frame offers it: the strings
+    // (name, greeting, intro, suggestions, footer, ui) are already picked by tenant language, and a request for
+    // an unenabled language falls back to am above.
+    + ALL_LANGS.filter(x => !langs.includes(x)).map(x => '.ac-langs .ac-lang[lang="' + x + '"]{display:none}').join('')
+    + '</style></head><body>'
     + '<script id="agent-chat-config" type="application/json">' + json(cfg) + '</script>'
     + '<div id="agent-chat" class="ac"></div>'
     + '<script src="/static/w/frame.js?v=1"></script>'

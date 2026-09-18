@@ -42,6 +42,22 @@ test('the frame: config inlined safely, token in the headers, footer, no voice, 
   assert.ok(!/<script>(?!\s*<\/script>)/.test(html), 'no inline executable script (CSP script-src self)');
 });
 
+// Found in a browser on 2026-09-18: the frame's language row offered OM although mols has Oromo off (Y8).
+// The row is built from the languages the frame is told about, so the frame names them, and the ones the
+// tenant does not enable are not drawn.
+test('the frame offers only the languages the tenant enables', () => {
+  const cfgOf = html => JSON.parse(/<script id="agent-chat-config" type="application\/json">([\s\S]*?)<\/script>/.exec(html)[1]);
+  const html = frameHtml(office, 't.x', 'am');
+  assert.deepEqual(cfgOf(html).langs, ['am', 'en'], 'om is off for this tenant (Y8)');
+  assert.match(html, /\.ac-langs \.ac-lang\[lang="om"\]\{display:none\}/, 'and the OM button is not drawn');
+
+  const three = { ...office, tenant: { ...tenant, languages: ['am', 'en', 'om'] } };
+  const htmlThree = frameHtml(three, 't.x', 'am');
+  assert.deepEqual(cfgOf(htmlThree).langs, ['am', 'en', 'om'], 'a tenant with om on gets all three');
+  assert.ok(!/display:none/.test(htmlThree), 'and nothing is hidden');
+  assert.equal(cfgOf(htmlThree).footer.om, tenant.footer.om);
+});
+
 test('an unknown language falls back to am', () => {
   assert.match(frameHtml(office, 't.x', 'fr'), /<html lang="am" class="ac-page">/);
   assert.match(frameHtml(office, 't.x', 'om'), /<html lang="am" class="ac-page">/, 'om is off for this tenant (Y8)');

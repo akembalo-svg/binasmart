@@ -707,8 +707,8 @@ function docMeta(root, source, slug) {
 // fetched today: two identical dates read as noise, and the fetch date is the one the guardrail asks for.
 // Our own pages (ownPageMeta) carry `updated` instead: the day the page last changed, labelled as such.
 const SOURCE_WORDS = {
-  en: { label: 'Source:', fetched: 'fetched', checked: 'checked', updated: 'updated' },
-  am: { label: 'ምንጭ፦', fetched: 'የተወሰደበት ቀን', checked: 'የተረጋገጠበት', updated: 'የተሻሻለበት ቀን' },
+  en: { label: 'Source:', fetched: 'fetched', checked: 'checked', updated: 'updated', us: 'BinaSmart' },
+  am: { label: 'ምንጭ፦', fetched: 'የተወሰደበት ቀን', checked: 'የተረጋገጠበት', updated: 'የተሻሻለበት ቀን', us: 'ቢናስማርት' },
 };
 // The url a page is credited with. The front matter's, when it has one, for the header line as well as the
 // Source line: the chunk row's url was written at ingest and is never rewritten while the chunk text is
@@ -718,10 +718,16 @@ function pageUrl(hit, { root } = {}) {
   const meta = docMeta(root || ROOT, hit.source, hit.slug) || {};
   return String(meta.url || hit.url || '').trim();
 }
+// A page of ours is published by us, whatever the document is called. Our own pages are not markdown with
+// front matter (guide, page and news are HTML and database rows), so until 2026-09-18 the name fell through
+// to hit.title and the widget credited a bina.et/news article to a clipped copy of its own headline. The
+// packs and the crawled pages keep their front matter's source_name, which is the publisher we fetched from.
+// `news` is deliberately outside OWN_SOURCES (that set is the ranking boost, which news does not get).
+const OWN_PUBLISHER = new Set([...OWN_SOURCES, 'news']);
 function sourceLine(hit, { root, am = false } = {}) {
   const meta = docMeta(root || ROOT, hit.source, hit.slug) || {};
   const w = am ? SOURCE_WORDS.am : SOURCE_WORDS.en;
-  const name = String(meta.source_name || hit.title || hit.slug || '').replace(/\s+/g, ' ').trim();
+  const name = OWN_PUBLISHER.has(hit.source) ? w.us : String(meta.source_name || hit.title || hit.slug || '').replace(/\s+/g, ' ').trim();
   const url = pageUrl(hit, { root });
   const fetched = String(meta.fetchedAt || meta.fetched || '').trim();
   const checked = String(meta.lastChecked || '').trim();
