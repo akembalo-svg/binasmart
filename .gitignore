@@ -58,3 +58,6 @@ usage/
 # Planetiler download scratch (1.5 GB). The tile rebuild uses pmtiles extract, not planetiler —
 # see ops/map/rebuild-tiles.sh. Left here once by an abandoned build; never commit it.
 data/
+
+# Owner review pages written by ops/gov/review-page.js - generated from eval answers, deleted after review, never committed
+public/review-*.html
