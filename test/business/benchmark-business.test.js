@@ -36,6 +36,7 @@ const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('fs');
 const path = require('path');
+const { shippedFloor } = require('../lib/benchmark-floor');
 
 const DIR = '/root/bini-eval';
 const files = fs.existsSync(DIR) ? fs.readdirSync(DIR).filter(f => /^retrieval-gold-business-\d/.test(f)).sort() : [];
@@ -54,7 +55,7 @@ test('the newest business run answers 60 questions', { skip }, () => {
 
 test('the whole set is at or above 90 per cent as shipped', { skip }, () => {
   const all = row(newest(), /^all questions/);
-  assert.ok(pct(all.shipped) >= 90,
+  assert.ok(shippedFloor(all, 90),
     'as shipped is ' + all.shipped + '; the design predicted 70-78%, two runs measured 91.7 and 90.0');
   assert.ok(pct(all.plain) >= 95,
     'retrieval is ' + all.plain + '; both runs measured exactly 95.0% on 23,430 chunks');
@@ -64,7 +65,7 @@ test('the same-language slice is at or above 90.9 per cent', { skip }, () => {
   const s = row(newest(), /share a language/);
   assert.ok(s, 'the benchmark must report the same-language slice');
   assert.ok(s.n === 44, 'the same-language slice should hold 44 questions (24 am on am pages + 20 en)');
-  assert.ok(pct(s.shipped) >= 90.9,
+  assert.ok(shippedFloor(s, 90.9),
     'same-language is ' + s.shipped + '; two runs measured 93.2 and 90.9, and the floor is the lower one');
   assert.ok(pct(s.plain) >= 95.5, 'same-language retrieval is ' + s.plain + '; both runs measured 95.5%');
 });
@@ -73,7 +74,7 @@ test('the cross-lingual slice is at or above 87.5 per cent', { skip }, () => {
   const s = row(newest(), /am question, gold only in English/);
   assert.ok(s, 'the benchmark must report the cross-lingual slice');
   assert.ok(s.n === 16, 'the cross-lingual slice should hold 16 questions; the spec measured 16 before the run');
-  assert.ok(pct(s.shipped) >= 87.5,
+  assert.ok(shippedFloor(s, 87.5),
     'cross-lingual is ' + s.shipped + '; both runs measured 87.5%, against banking 43.8/50.0 and a plan floor of 50. '
     + 'A fall towards 50 means ops/packs/am-headers.js has not run, or has run and failed - check that before touching anything else');
   assert.ok(pct(s.plain) >= 93.8, 'cross-lingual retrieval is ' + s.plain + '; both runs measured 93.8%');
@@ -82,14 +83,14 @@ test('the cross-lingual slice is at or above 87.5 per cent', { skip }, () => {
 test('the English slice is at or above 90 per cent', { skip }, () => {
   const s = row(newest(), /^\s*English/);
   assert.ok(s && s.n === 20, 'the English slice should hold 20 questions');
-  assert.ok(pct(s.shipped) >= 90, 'English is ' + s.shipped + '; both runs measured 90.0%');
+  assert.ok(shippedFloor(s, 90), 'English is ' + s.shipped + '; both runs measured 90.0%');
   assert.ok(pct(s.plain) >= 90, 'English retrieval is ' + s.plain + '; both runs measured 90.0%');
 });
 
 test('the Amharic slice is not carried by the English one', { skip }, () => {
   const am = row(newest(), /^\s*Amharic/);
   assert.ok(am && am.n === 40, 'the Amharic slice should hold 40 questions');
-  assert.ok(pct(am.shipped) >= 90, 'the Amharic slice is ' + am.shipped
+  assert.ok(shippedFloor(am, 90), 'the Amharic slice is ' + am.shipped
     + '; two runs measured 92.5 and 90.0, and the plan floor was 68. Below 90 the pack is answering English and not Amharic');
   assert.ok(pct(am.plain) >= 97.5, 'Amharic retrieval is ' + am.plain + '; both runs measured 97.5%');
 });

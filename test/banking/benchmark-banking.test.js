@@ -101,6 +101,7 @@ const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('fs');
 const path = require('path');
+const { shippedFloor } = require('../lib/benchmark-floor');
 
 //
 // 2026-09-17, bilingual query retrieval: the floors below did NOT move. The experiment is in the tree
@@ -133,7 +134,7 @@ test('the right page is in the top three at least as often as it was measured', 
   // The design's target was 90.0. Measured 2026-09-17: 55.0, then 61.7 with the Amharic headers, then
   // 56.7 when the corpus grew under a gold set that could not see the new sources, and 72.2 once that
   // gold set was extended to 90 questions. See the note at the top of this file.
-  assert.ok(pct(all) >= 70.9, 'as shipped is ' + all.shipped + ', the measured floor is 70.9%, the lowest of three runs (the design target was 90.0%)');
+  assert.ok(shippedFloor(all, 70.9), 'as shipped is ' + all.shipped + ', the measured floor is 70.9%, the lowest of three runs (the design target was 90.0%)');
   // Retrieval is deterministic - identical in all three runs - so it is pinned exactly, not loosely.
   assert.ok(Number(String(all.plain).replace('%', '')) >= 71.8, 'retrieval is ' + all.plain + ', the measured floor is 71.8%');
 });
@@ -144,7 +145,7 @@ test('the Amharic slice is not carried by the English one', { skip: !files.lengt
   // The design wanted 85. Measured 2026-09-17: 52.5, then 60.0 with the Amharic headers, then 68.3 with
   // batch 2 - whose Amharic questions are mostly answered by telebirr's own Amharic pages - against 80.0
   // for the English slice. Still not carried, and still short of the design.
-  assert.ok(pct(am) >= 67.6, 'the Amharic slice is ' + am.shipped + '; the measured floor is 67.6% (the design target was 85%)');
+  assert.ok(shippedFloor(am, 67.6), 'the Amharic slice is ' + am.shipped + '; the measured floor is 67.6% (the design target was 85%)');
 });
 
 test('the same-language slice still beats the cross-lingual one', { skip: !files.length && 'no banking benchmark yet' }, () => {
@@ -173,12 +174,12 @@ test('all three batches are in the run, and each is pinned to what it measured',
   // 93.3 -> 90.0, measured before and after the same ingest on the same gold set. See the Task 15c note at
   // the top. They are pinned to the lowest of the three runs made on the new corpus, not to what was hoped
   // for and not to the run that read best.
-  assert.ok(pct(b1) >= 58.3, 'batch 1 is ' + b1.shipped + ', the measured floor is 58.3% (was 61.7% before Task 15c)');
+  assert.ok(shippedFloor(b1, 58.3), 'batch 1 is ' + b1.shipped + ', the measured floor is 58.3% (was 61.7% before Task 15c)');
   // Batch 1 retrieval is 58.3% in all three runs, down from 60.0% before the ingest - one question.
   assert.ok(Number(String(b1.plain).replace('%', '')) >= 58.3, 'batch 1 retrieval is ' + b1.plain + ', the measured floor is 58.3%');
   // 90.0% is the design's 90.0% exactly, on the slice of this pack written against sources whose Amharic
   // pages exist. It is not a general claim about the pack, and it is 3.3 points below what it was.
-  assert.ok(pct(b2) >= 90.0, 'batch 2 is ' + b2.shipped + ', the measured floor is 90.0% (was 93.3% before Task 15c)');
+  assert.ok(shippedFloor(b2, 90.0), 'batch 2 is ' + b2.shipped + ', the measured floor is 90.0% (was 93.3% before Task 15c)');
   // Batch 3 scored 0.0% on the pre-ingest baseline because none of its documents were in the pack yet.
-  assert.ok(pct(b3) >= 80.0, 'batch 3 is ' + b3.shipped + ', the measured floor is 80.0% (0.0% before the OCR documents were ingested)');
+  assert.ok(shippedFloor(b3, 80.0), 'batch 3 is ' + b3.shipped + ', the measured floor is 80.0% (0.0% before the OCR documents were ingested)');
 });

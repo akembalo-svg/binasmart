@@ -32,6 +32,7 @@ const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('fs');
 const path = require('path');
+const { shippedFloor } = require('../lib/benchmark-floor');
 
 //
 // 2026-09-17, bilingual query retrieval: the floors below did NOT move. With KNOWLEDGE_BILINGUAL_QUERY on,
@@ -67,5 +68,5 @@ test('travel as shipped has not fallen below the lower of the two measured runs'
   const all = newest().table.find(t => /^all questions/.test(t.name));
   // 83.3% is the number Ibrahim accepted and the number the second run of 2026-09-17 measured; 81.7% is
   // what the first run measured, one reranker call apart. The floor is the lower one, on purpose.
-  assert.ok(num(all.shipped) >= 81.7, 'as shipped is ' + all.shipped + ', the measured floor is 81.7% (accepted: 83.3%)');
+  assert.ok(shippedFloor(all, 81.7), 'as shipped is ' + all.shipped + ', the measured floor is 81.7% (accepted: 83.3%)');
 });
