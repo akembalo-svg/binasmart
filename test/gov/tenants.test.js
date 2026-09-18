@@ -96,6 +96,20 @@ test('the gate thresholds are data, and match the design', () => {
   assert.equal(mols.gold, 'ops/gov/gold/mols.json');
 });
 
+// Measured 2026-09-18 through gov/agent.js on the live index (/root/bini-eval/mols/probe-ca-*.json): without
+// this line, 4 of 6 answers to "what is a collective agreement, how is it approved / when does it take effect"
+// blended the eServices registration service into the law, calling registration the approval step or never
+// giving the date; with it, 4 of 4 said it takes effect on signature and registration is a separate duty.
+// Ranking law above eservices instead (the eservices page dropped from prefer) was worse: 2 of 3 said outright
+// that it takes effect by registration.
+test('the collective-agreement rule: in force on signature, registration is a separate duty', () => {
+  const n = mols.notes.find(s => /collective agreement/i.test(s));
+  assert.ok(n, 'the note is there');
+  assert.match(n, /Art\. 134\(2\)/);
+  assert.match(n, /sign/);
+  assert.match(n, /registration does not approve, ratify or bring the agreement into force/);
+});
+
 test('the owner decisions of 2026-09-18 are recorded, the rest stay pending, and no price exists', () => {
   for (const y of ['Y1', 'Y2', 'Y4', 'Y5']) {
     assert.ok(mols.decided && mols.decided[y], y + ' decided');
