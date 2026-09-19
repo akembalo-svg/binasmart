@@ -155,11 +155,28 @@ function e164(v){
 function mask(p){ return '+251 ••• ' + String(p).slice(-4); }
 
 // after any successful sign-in, owners go to their building, everyone else to the "next" they came with
+// Where a person lands after signing in, decided by what their number already is (auth/identity.js roles).
+// One place to work (a building, or the driver app) -> straight there. More than one, or a driver still waiting for
+// approval, or a business -> /account, which shows every door. Nothing but a rider or plain user -> where they were going.
+// A page that sent them here with ?next= is honoured, except that a building owner always reaches their own dashboard.
+function destFor(me, next, explicit){
+  var roles = (me && me.roles) || [];
+  var homes = [];
+  if (me && me.buildingSlug) homes.push('/owner/' + me.buildingSlug);
+  if (roles.indexOf('driver') >= 0) homes.push('/drive');
+  var hub = roles.indexOf('business') >= 0 || roles.indexOf('driver_pending') >= 0 || roles.indexOf('admin') >= 0;
+  if (me && me.buildingSlug && homes.length === 1 && !hub) return homes[0];
+  if (explicit) return next;
+  if (hub) return '/account';
+  if (homes.length === 1) return homes[0];
+  if (homes.length > 1) return '/account';
+  return next;
+}
 async function land(){
   try{
-    var s = await (await fetch('/api/auth/get-session')).json();
-    var slug = s && s.user && s.user.buildingSlug;
-    location.href = slug ? '/owner/' + slug : NEXT;
+    var r = await fetch('/api/me', { cache: 'no-store' });
+    var me = r.ok ? (await r.json()).me : null;
+    location.href = destFor(me, NEXT, NEXT !== '/');
   }catch(e){ location.href = NEXT; }
 }
 
