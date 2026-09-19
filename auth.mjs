@@ -59,7 +59,7 @@ export const auth = betterAuth({
   },
   session: {
     modelName: 'authSession',
-    expiresIn: 60 * 60 * 24 * 30, // 30 days
+    expiresIn: 60 * 60 * 24 * 90, // 90 days (Ibrahim 2026-09-19: fewer sign-in SMS codes)
     updateAge: 60 * 60 * 24,
     cookieCache: { enabled: true, maxAge: 5 * 60 },
   },
