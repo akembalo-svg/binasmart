@@ -458,5 +458,22 @@ addEventListener('appinstalled',function(){var b=document.getElementById('instal
 <script src="/static/bina-footer.js?v=9" defer></script>
 <script src="/static/telebirr-bridge.js?v=1"></script>
 <script src="/static/pwa.js?v=1" defer></script>
+<script>
+/* Signed in? Then the header's Login pill becomes Account. /api/me answers 401 when nobody is signed in, and the pill stays as it is. */
+(function () {
+  try {
+    fetch('/api/me', { credentials: 'same-origin', cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.ok) return;
+        var pill = document.querySelector('header a.pill[href="/owner"]');
+        if (!pill) return;
+        pill.setAttribute('href', '/account');
+        var t = pill.querySelector('span'); if (t) t.textContent = 'Account \u00b7 \u1218\u1208\u12eb';
+      })
+      .catch(function () {});
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
