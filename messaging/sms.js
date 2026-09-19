@@ -128,8 +128,16 @@ function makeGeezSms({ token, shortcodeId = '', fetchImpl = fetch, baseUrl = GEE
     if (sc) form.set('shortcode_id', sc);
     if (callbackUrl) form.set('callback', callbackUrl);
     const { status, body } = await call(baseUrl + '/api/v1/sms/send', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: form.toString() });
-    if (status >= 200 && status < 300 && body && body.message_status === 'success')
-      return { ok: true, providerId: body.api_log_id != null ? String(body.api_log_id) : (body.log ? String(body.log) : null) };
+    // Two reply shapes: the old one ({message_status:'success', api_log_id}) and the one the account returns today
+    // ({error:false, msg:'SMS has been sent successfully.', data}). The new shape counts only when error is the boolean
+    // false AND the message says success; anything else, including {error:true}, stays a failure.
+    const okOld = !!body && body.message_status === 'success';
+    const okNew = !!body && body.error === false && /success/i.test(String(body.msg || ''));
+    if (status >= 200 && status < 300 && (okOld || okNew)) {
+      const d = body.data && typeof body.data === 'object' ? body.data : {};
+      const id = body.api_log_id != null ? body.api_log_id : (d.api_log_id != null ? d.api_log_id : (d.id != null ? d.id : null));
+      return { ok: true, providerId: id != null ? String(id) : (body.log ? String(body.log) : null) };
+    }
     return { ok: false, error: 'http ' + status + ' ' + String((body && (body.message_status || body.msg || body.error)) || '') };
   }
   async function balance() {

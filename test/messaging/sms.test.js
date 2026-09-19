@@ -204,3 +204,19 @@ test('the balance is reachable only when a provider is configured, and never the
   assert.equal(String(makeSms({ mode: 'live', provider }).balance).includes('geezsms.com'), false);
   assert.equal(asked, 0, 'building the adapter calls nothing');
 });
+
+test('GeezSMS: the current reply shape (error false + success message) counts as sent', async () => {
+  const reply = (status, body) => require('../../messaging/sms').makeGeezSms({ token: 't', fetchImpl: async () => ({ status, json: async () => body }) });
+  const r = await reply(200, { error: false, msg: 'SMS has been sent successfully.', data: { id: 4242 } }).send({ to: '+251900000001', text: 'x' });
+  assert.deepEqual([r.ok, r.providerId], [true, '4242']);
+  const r2 = await reply(200, { error: false, msg: 'SMS has been sent successfully.' }).send({ to: '+251900000001', text: 'x' });
+  assert.equal(r2.ok, true);
+});
+
+test('GeezSMS: error true, a non-success message, or a non-2xx status is still a failure in the new shape', async () => {
+  const reply = (status, body) => require('../../messaging/sms').makeGeezSms({ token: 't', fetchImpl: async () => ({ status, json: async () => body }) });
+  assert.equal((await reply(200, { error: true, msg: 'No Shortcode was found!' }).send({ to: '+251900000001', text: 'x' })).ok, false);
+  assert.equal((await reply(200, { error: false, msg: 'Insufficient balance' }).send({ to: '+251900000001', text: 'x' })).ok, false);
+  assert.equal((await reply(400, { error: false, msg: 'SMS has been sent successfully.' }).send({ to: '+251900000001', text: 'x' })).ok, false);
+  assert.equal((await reply(200, { error: 'false', msg: 'SMS has been sent successfully.' }).send({ to: '+251900000001', text: 'x' })).ok, false);
+});
