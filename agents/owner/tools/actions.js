@@ -24,7 +24,7 @@ const DEFS = [
       units: UNITS,
       text: { type: 'string', description: 'The message in the owner\'s own words and language, at most ' + P.NOTICE_MAX + ' characters. You may fix spelling and punctuation only. Never add a name, a token, an amount or a date the owner did not write. The building name and signature are added by the system.' } },
     ['target', 'text']),
-  def('prepare_reminders', 'Prepare payment reminders for tenants with unpaid invoices that are due now or within 5 days; each tenant gets their own amounts and due dates from the records. units limits it to those units. It does NOT send: the owner confirms with ✅.',
+  def('prepare_reminders', 'ONLY when the owner explicitly asks you to remind or to send reminders. A request for a list or an amount of who is due or owes is a question for unpaid, never for this tool. Prepare payment reminders for tenants with unpaid invoices that are due now or within 5 days; each tenant gets their own amounts and due dates from the records. units limits it to those units. It does NOT send: the owner confirms with ✅.',
     { units: UNITS }),
   def('prepare_invoice_send', 'Prepare sending each named unit\'s newest unpaid invoice to its tenant. It does NOT send: the owner confirms with ✅.',
     { units: UNITS }, ['units']),
