@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
 <link rel="stylesheet" href="/static/ride/ui.css?v=9">
 <link rel="stylesheet" href="/static/ride/drive.css?v=8">
+<style>.dbrand .logo{background:linear-gradient(135deg,#ff9a3d,#ef6c2f)!important;box-shadow:0 10px 22px -10px rgba(239,108,47,.9)!important}</style>
 <script>
 /* "next" look (default since 7 Sep 2026): html.next + ride/drive-next.css. ?v=classic remembers the old look; ?v=next restores. */
 (function(){var on=true,ls=null,q=location.search||'';try{ls=localStorage.getItem('bina_drive_next');}catch(e){}
@@ -26,7 +27,7 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
 <div id="map"></div>
 
 <header class="dtop">
-  <div class="dbrand"><i class="logo"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><g transform="scale(0.024)"><path transform="translate(255,700) scale(0.62,-0.62)" d="M699 -82Q668 -82 645.5 -55.0Q623 -28 615 0H437V465Q437 551 408.0 597.5Q379 644 311 644Q236 644 208.5 595.0Q181 546 181 464V0H90V472Q90 586 144.0 655.0Q198 724 311 724Q426 724 477.0 658.5Q528 593 528 470V73H615Q623 101 645.5 127.5Q668 154 699 154H723L697 36L723 -82Z" fill="#fff" stroke="#fff" stroke-width="56" stroke-linejoin="round"/><path d="M800 150l24 62 62 24-62 24-24 62-24-62-62-24 62-24z" fill="#fff"/></g></svg></i><div><b>Bina<span>Ride</span> Driver</b><small>ሹፌር · አዲስ አበባ</small></div></div>
+  <div class="dbrand"><i class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5a7 7 0 1 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></i><div><b>Bina<span>Ride</span> Driver</b><small>ሹፌር · አዲስ አበባ</small></div></div>
   <div class="dstats">
     <div class="dstat"><span id="earn">0</span><small>ETB today</small></div>
     <div class="dstat"><span id="trips">0</span><small>trips</small></div>
