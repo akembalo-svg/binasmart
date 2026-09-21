@@ -1,0 +1,135 @@
+'use strict';
+// What a document of the telecom pack must be, checked on the bytes on disk and not on the fetcher's log: a 200
+// is not a fetched page, and an exit code 0 is not a written file.
+const test = require('node:test');
+const assert = require('node:assert');
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.join(__dirname, '..', '..');
+const DIR = path.join(ROOT, 'knowledge', 'telecom');
+const reg = JSON.parse(fs.readFileSync(path.join(DIR, 'sources.json'), 'utf8'));
+const files = fs.readdirSync(DIR).filter(f => f.endsWith('.md'));
+const read = f => fs.readFileSync(path.join(DIR, f), 'utf8');
+const meta = raw => { const m = /^---\n([\s\S]*?)\n---\n/.exec(raw); const o = {}; if (m) for (const l of m[1].split('\n')) { const k = /^(\w+):\s*"?(.*?)"?\s*$/.exec(l); if (k) o[k[1]] = k[2].replace(/\\"/g, '"'); } return o; };
+const bodyOf = raw => raw.slice(raw.indexOf('\n---\n', 4) + 5);
+// the page's own text: everything after the header paragraph that opens with "Source: http"
+const pageText = raw => { const parts = bodyOf(raw).split('\n\n'); const i = parts.findIndex(p => /^Source: https?:\/\//.test(p.trim())); return parts.slice(i + 1).join('\n\n'); };
+const ethiopic = s => (String(s || '').match(/[ሀ-፿]/g) || []).length;
+const host = f => (/^telecom-(ethiotelecom|safaricom|eca)-/.exec(f) || [])[1];
+
+test('the pack is a pack, not a handful of pages', () => {
+  assert.ok(files.length >= 200, 'expected at least 200 documents, got ' + files.length);
+  const by = {}; for (const f of files) by[host(f)] = (by[host(f)] || 0) + 1;
+  assert.ok(by.ethiotelecom >= 150 && by.safaricom >= 20 && by.eca >= 25, JSON.stringify(by));
+  assert.ok(files.every(f => host(f)), 'every file name is telecom-<host>-<slug>: ' + files.filter(f => !host(f)).join(' '));
+});
+
+test('every document has front matter with a url, a title, a language, a section, a source name and a fetched date', () => {
+  for (const f of files) {
+    const m = meta(read(f));
+    assert.match(m.url || '', /^https:\/\//, f);
+    assert.ok((m.title || '').length > 3, f + ' has no title');
+    assert.ok(['en', 'am'].includes(m.lang), f + ' lang: ' + m.lang);
+    assert.ok((m.section || '').length > 0, f + ' has no section');
+    assert.ok((m.source_name || '').length > 3, f);
+    assert.match(m.fetchedAt || '', /^2026-09-\d\d$/, f + ' fetched date');
+    assert.equal(m.status, 'live');
+    assert.equal(m.generated_by, 'ops/packs/fetch-pack.js --pack telecom');
+    const site = reg.sites.find(s => s.id === host(f));
+    assert.ok(site.sections.some(s => s.key === m.section), f + ' section ' + m.section + ' is not one of the site sections');
+  }
+});
+
+test('every document opens with what it is, and its Source line carries the url and the date the harvest captured it', () => {
+  for (const f of files) {
+    const raw = read(f), m = meta(raw);
+    const src = bodyOf(raw).split('\n\n').find(p => /^Source: https?:\/\//.test(p.trim()));
+    assert.ok(src, f + ' has no Source paragraph');
+    assert.ok(src.includes(m.url), f + ' Source line does not name its url');
+    assert.ok(src.includes('fetched ' + m.fetchedAt), f + ' Source line does not carry the fetched date');
+    assert.ok(/^#\s/m.test(bodyOf(raw)), f + ' has no title line');
+    assert.ok(/[ሀ-፿]/.test(bodyOf(raw).split('\n\n').slice(0, 4).join(' ')), f + ' has no Amharic in its header');
+  }
+});
+
+test('a document marked Amharic really is Amharic, and a regulator PDF is Amharic only if its text says so', () => {
+  let am = 0;
+  for (const f of files) {
+    const raw = read(f), m = meta(raw);
+    if (m.lang !== 'am') continue;
+    am++;
+    const floor = host(f) === 'ethiotelecom' ? 80 : 300;
+    assert.ok(ethiopic(pageText(raw)) >= floor, f + ' is marked am and holds only ' + ethiopic(pageText(raw)) + ' Ethiopic characters');
+  }
+  assert.ok(am >= 60, 'Amharic documents: ' + am);
+  assert.equal(meta(read('telecom-eca-am-directive-1024-2017-license-and-regulatory-fees.md')).lang, 'am');
+  assert.equal(meta(read('telecom-eca-directive-1024-2024-license-and-regulatory-fees.md')).lang, 'en');
+});
+
+test('no document is a near-empty shell, and none still carries the site mega-menu', () => {
+  for (const f of files) {
+    const t = pageText(read(f)).trim();
+    assert.ok(t.length >= 150, f + ' is ' + t.length + ' characters after the header');
+    for (const junk of ['Close Menu', 'Our Brand Logos', 'Cookie Policy', 'Skip to content']) assert.ok(!t.includes(junk), f + ' still holds "' + junk + '"');
+  }
+});
+
+test('no document holds a full mobile number, and a masked one is announced in the header', () => {
+  const { PERSONAL_MOBILE } = require(path.join(ROOT, 'knowledge', 'index.js'));
+  let masked = 0;
+  for (const f of files) {
+    const raw = read(f);
+    assert.equal((raw.match(PERSONAL_MOBILE) || []).length, 0, f + ' holds a full mobile number');
+    // and not one with a digit stuck to the front of it either: a dialling example such as 3 followed by a full local number
+    assert.doesNotMatch(pageText(raw), /(?:251[79]|0[79])[0-9]{8}/, f + ' holds a ten-digit mobile-shaped string');
+    if (/(?:251|0[79])•{5}\d{4}/.test(pageText(raw))) {
+      masked++;
+      assert.match(bodyOf(raw), /Phone numbers on this page are masked/, f + ' masks a number without saying so');
+    }
+  }
+  assert.ok(masked >= 1, 'the Safaricom contact page masks its two chargeable lines');
+  const contact = pageText(read('telecom-safaricom-support-contact-us.md'));
+  assert.match(contact, /Short number\s*\n?\s*700 \(Free\)/, 'the 700 short code stays');
+});
+
+test('the regulator documents carry their instrument number, and the scanned regulation says it was read by a machine', () => {
+  const eca = files.filter(f => host(f) === 'eca');
+  const titles = eca.map(f => meta(read(f)).title).join('\n');
+  for (const n of ['1148/2019', '1321/2024', '585/2026', '791/2021', '792/2021', '793/2021', '794/2021', '795/2021', '796/2021', '797/2021', '798/2021', '799/2021', '800/2021', '832/2021', '1024/2024', '1024/2017']) {
+    assert.ok(titles.includes(n), n + ' has no document');
+  }
+  const ocr = read('telecom-eca-universal-access-fund-regulation-585-2026.md'), m = meta(ocr);
+  assert.equal(m.text_source, 'ocr');
+  assert.ok(['good', 'poor'].includes(m.ocr_quality));
+  assert.equal(m.pages, '16');
+  assert.match(bodyOf(ocr), /read by OCR on 2026-09-22 \(Tesseract 5, 300 dpi/);
+  assert.match(bodyOf(ocr), /ይህ ሰነድ ከኢትዮጵያ ኮሙኒኬሽን ባለሥልጣን የተገኘው በስካን/);
+  assert.match(pageText(ocr), /1\.5%/, 'the levy figure the OCR read clearly');
+  assert.equal(files.filter(f => meta(read(f)).text_source === 'ocr').length, 1);
+});
+
+test('a page lives in one pack only: no telecom url is a banking url, and the Oromo, Somali and Tigrinya pages are not here', () => {
+  const norm = u => String(u).replace(/^https?:\/\/(www\.)?/, '').replace(/\/+(\?|$)/, '$1').toLowerCase();
+  const banking = new Set(fs.readdirSync(path.join(ROOT, 'knowledge', 'banking')).filter(f => f.endsWith('.md'))
+    .map(f => norm(meta(fs.readFileSync(path.join(ROOT, 'knowledge', 'banking', f), 'utf8')).url || '')));
+  for (const f of files) {
+    const u = meta(read(f)).url;
+    assert.ok(!banking.has(norm(u)), f + ' is also a banking document: ' + u);
+    assert.doesNotMatch(u, /[?&]lang=(om|so|Tig)\b/i, f);
+    assert.doesNotMatch(u, /\/telebirr(\/|\?|$)/, f);
+  }
+});
+
+test('the general FAQ no longer carries the telebirr FAQ the banking pack holds', () => {
+  const t = pageText(read('telecom-ethiotelecom-am-faq.md'));
+  assert.ok(t.length < 12000, 'the Amharic FAQ is ' + t.length + ' characters');
+  assert.match(t, /11:00/, 'customer support hours stay');
+});
+
+test('an English document carries an Amharic title and summary in its header once am-headers has run', () => {
+  const en = files.filter(f => meta(read(f)).lang === 'en');
+  const withAm = en.filter(f => meta(read(f)).titleAm);
+  assert.ok(withAm.length / en.length >= 0.9, withAm.length + ' of ' + en.length + ' English documents have a titleAm');
+  assert.ok(fs.existsSync(path.join(DIR, 'am-headers.json')));
+});

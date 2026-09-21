@@ -15,7 +15,7 @@ const OPS_FILE = '/root/storage/gov/offices.json';
 // Every source knowledge/index.js can hold. A tenant lists what it reads; the rest is excluded for it.
 // test/gov/registry.test.js fails when the index names a source that is not here.
 const ALL_SOURCES = ['law', 'health', 'eservices', 'business', 'guide', 'news', 'web', 'page', 'skill', 'llms',
-  'docs', 'addis', 'travel', 'banking', 'mor', 'style', 'style-om', 'watch'];
+  'docs', 'addis', 'travel', 'banking', 'telecom', 'mor', 'style', 'style-om', 'watch'];
 const STATUSES = ['demo', 'trial', 'paid', 'suspended'];
 const SERVABLE = new Set(['demo', 'trial', 'paid']);
 const ID = /^[a-z0-9-]{2,32}$/;

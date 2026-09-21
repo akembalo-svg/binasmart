@@ -273,6 +273,8 @@ sites = [
         'maxPages': 400,
         'dedupAgainstPacks': ['banking'],
         'dedupNote': 'A paragraph of 80 characters or more that a live banking document already holds word for word is taken out of these pages (Ethio telecom general FAQ, Amharic, embeds the whole telebirr FAQ that the banking pack holds as ethiotelecom-am-telebirr-faq).',
+        'htmlPrep': [{'match': '(?<![0-9])([1-9])(0[79][0-9]{8})(?![0-9])', 'flags': 'g', 'replace': '$1 $2'}],
+        'htmlPrepNote': 'The Virtual Number page gives a dialling example: a prefix digit followed directly by a full local mobile number, eleven digits with no space. maskPhones does not mask a number with a digit in front of it (an identifier is not a phone), so the example is given its space back and the mask then reads it as the number it is. Nothing else is changed.',
         'minChars': 150,
         'amFloor': 80,
         'amFloorNote': 'The pack-wide floor of 300 Ethiopic characters called 18 Amharic price pages English (a table of numbers under a short Amharic label); 80 keeps a page that is really untranslated English (5g-launch, create-your-own-package) recorded as English.',

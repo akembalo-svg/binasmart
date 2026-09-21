@@ -652,7 +652,14 @@ function contextSearchOptions({ k = 6, prefer, exclude, message } = {}) {
 // deliberately absent from OWN_SOURCES — a ministry's announcement is not our page and must not be boosted
 // like one — and it is the only source whose documents expire (expires_at) or are superseded by a curated
 // document that later covers the same fact.
-const PACK_SOURCES = [['law', 'am'], ['health', 'am'], ['eservices', 'en'], ['mor', 'am'], ['travel', 'en'], ['banking', 'en'], ['business', 'am'], ['watch', 'am']];
+const PACK_SOURCES = [['law', 'am'], ['health', 'am'], ['eservices', 'en'], ['mor', 'am'], ['travel', 'en'], ['banking', 'en'], ['business', 'am'], ['telecom', 'en'], ['watch', 'am']];
+// 'telecom' added 2026-09-22: the fourth sector pack (ops/packs/fetch-pack.js --pack telecom from
+// knowledge/telecom/sources.json): Ethio telecom and Safaricom Ethiopia consumer pages in English and Amharic, and the
+// Ethiopian Communications Authority's consumer-affairs pages and every telecom law and directive as its own
+// document. Default 'en': the regulator and Safaricom publish English only and Ethio telecom's Amharic pages
+// carry lang: am in their front matter. curatedHosts reads the packs in name order, so banking holds
+// ethiotelecom.et (the telebirr pages) and this pack holds safaricom.et and eca.et; a crawled copy of any of
+// the three is not loaded beside the curated one.
 const PACK_DIRS = new Set(PACK_SOURCES.map(([s]) => s));
 const SAFE_SLUG = /^[A-Za-z0-9._\-/]+$/;
 const _docMeta = new Map();   // root\0source\0slug -> front matter | null
