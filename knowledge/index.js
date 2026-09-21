@@ -102,7 +102,10 @@ function tokens(s) { return foldEthiopic(String(s).toLowerCase().replace(/[^\p{L
 const paras = t => String(t).split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
 const normPara = p => p.replace(/\s+/g, ' ').trim().toLowerCase();
 
-function stripBoilerplate(docs, { minPages = 4, ratio = 0.15 } = {}) {
+// `keep(paragraph)` is optional: a paragraph it returns true for is never called template, however many pages
+// repeat it. A telecom price page is cards of "1 GB" and "45 ETB", and the same card text recurs across the
+// data, voice and SMS pages, so a frequency rule alone deleted the prices. Nothing that passes no `keep` changes.
+function stripBoilerplate(docs, { minPages = 4, ratio = 0.15, keep = null } = {}) {
   const bySite = new Map();
   for (const d of docs) { const site = String(d.slug).split('/')[0]; if (!bySite.has(site)) bySite.set(site, []); bySite.get(site).push(d); }
   for (const ds of bySite.values()) {
@@ -110,7 +113,7 @@ function stripBoilerplate(docs, { minPages = 4, ratio = 0.15 } = {}) {
     const pages = new Map();
     for (const d of ds) for (const p of new Set(paras(d.text).map(normPara))) pages.set(p, (pages.get(p) || 0) + 1);
     const limit = Math.max(minPages, Math.ceil(ds.length * ratio));
-    const boiler = new Set([...pages].filter(([, n]) => n >= limit).map(([p]) => p));
+    const boiler = new Set([...pages].filter(([p, n]) => n >= limit && !(keep && keep(p))).map(([p]) => p));
     if (!boiler.size) continue;
     for (const d of ds) d.text = paras(d.text).filter(p => !boiler.has(normPara(p))).join('\n\n');
   }

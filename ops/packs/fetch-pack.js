@@ -174,14 +174,17 @@ function cleanTitle(raw, titleSuffix) {
 }
 
 // { ok:true, title, text, chars } or { ok:false, why } where why is empty | soft_404 | thin.
-function extract(html, { titleSuffix } = {}) {
+// `minChars` lets a site say what "thin" means for its own pages. The default is the 400-character floor every
+// pack has always used; a telecom price list is five rows of a table and a few lines of terms, which is a
+// complete answer at 300 characters, so the telecom registry lowers it and nothing else changes.
+function extract(html, { titleSuffix, minChars } = {}) {
   const s = String(html || '');
   if (s.length < 200 || !/<html|<body|<div/i.test(s)) return { ok: false, why: 'empty' };
   const m = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(s);
   const title = cleanTitle(m ? m[1] : '', titleSuffix);
   if (NOT_FOUND.test(title)) return { ok: false, why: 'soft_404' };
   const text = htmlToText(s);
-  if (text.trim().length < MIN_CHARS) return { ok: false, why: 'thin' };
+  if (text.trim().length < (Number(minChars) || MIN_CHARS)) return { ok: false, why: 'thin' };
   return { ok: true, title: title || '(untitled)', text, chars: text.length };
 }
 
@@ -194,18 +197,57 @@ const { stripBoilerplate } = require(path.join(ROOT, 'knowledge', 'index.js'));
 // already solves this for crawled sites and is exported: any paragraph that appears on a large share of one
 // site's pages is template, not content. It groups by the first path segment of the slug, so the site id is
 // borrowed as that segment here and taken off again afterwards.
-function stripPackBoilerplate(pages) {
+// `site.keepNumericParagraphs` says a paragraph holding a digit is never template: a price, an allowance, a code
+// and an article number are content on the sites that set it (Safaricom's package cards, the regulator's
+// directives), and the mega-menu of those sites carries no digit. Ethio telecom does not set it, because its own
+// menu names "5G" and "4G" and a digit rule would leave those on every page.
+function stripPackBoilerplate(pages, site = null) {
   const wrapped = pages.map(p => ({ ...p, slug: p.siteId + '/' + p.slug }));
-  const stripped = stripBoilerplate(wrapped, { minPages: 4, ratio: 0.15 });
+  const keep = site && site.keepNumericParagraphs ? (p => /[0-9]/.test(p)) : null;
+  const stripped = stripBoilerplate(wrapped, { minPages: 4, ratio: 0.15, keep });
   return stripped.map(p => ({ ...p, slug: p.slug.slice(p.siteId.length + 1), text: p.text.trim() }));
+}
+
+// The no-duplicate rule at the level of the paragraph. A site may name `dedupAgainstPacks: ["banking"]`: a
+// paragraph of at least 80 characters that a live document of one of those packs already holds, word for word
+// (whitespace and case aside), is taken out of this page, because two packs must not both answer the same
+// sentence. Ethio telecom's general FAQ page carries the whole telebirr FAQ inside it, and the telebirr FAQ is the
+// banking pack's document; the rest of that page, which is about SIM cards, numbers and opening hours, stays.
+// Returns the number of paragraphs taken out, per slug, so the run can say what it did.
+const normParaText = p => String(p || '').normalize('NFC').toLowerCase().replace(/\s+/g, ' ').trim();
+function dropPackDuplicates(docs, site, { root = ROOT } = {}) {
+  const packs = site && Array.isArray(site.dedupAgainstPacks) ? site.dedupAgainstPacks : [];
+  const dropped = {};
+  if (!packs.length) return dropped;
+  const seen = new Set();
+  for (const pk of packs) {
+    let dir; try { packDir(pk); dir = path.join(root, 'knowledge', pk); } catch (e) { continue; }
+    let files = []; try { files = fs.readdirSync(dir).filter(f => f.endsWith('.md')); } catch (e) { continue; }
+    for (const f of files) {
+      let md; try { md = fs.readFileSync(path.join(dir, f), 'utf8'); } catch (e) { continue; }
+      if (readMeta(md).status === 'gone') continue;
+      const text = bodyText(md);
+      if (text) for (const p of text.split(/\n{2,}/)) { const n = normParaText(p); if (n.length >= 80) seen.add(n); }
+    }
+  }
+  for (const d of docs) {
+    const keep = [];
+    for (const p of String(d.text || '').split(/\n{2,}/)) {
+      const n = normParaText(p);
+      if (n.length >= 80 && seen.has(n)) { dropped[d.slug] = (dropped[d.slug] || 0) + 1; continue; }
+      keep.push(p);
+    }
+    d.text = keep.join('\n\n').trim();
+  }
+  return dropped;
 }
 
 // Stripping the template can take a page under the floor: a page that was mostly mega-menu has almost
 // nothing left once the mega-menu goes. The floor is therefore checked again AFTER stripping, and such a
 // page is reported as thin rather than written to disk as a near-empty document.
-function splitThin(docs) {
-  const kept = [], thin = [];
-  for (const d of docs) (String(d.text || '').trim().length >= MIN_CHARS ? kept : thin).push(d);
+function splitThin(docs, minChars) {
+  const kept = [], thin = [], floor = Number(minChars) || MIN_CHARS;
+  for (const d of docs) (String(d.text || '').trim().length >= floor ? kept : thin).push(d);
   return { kept, thin };
 }
 
@@ -439,9 +481,16 @@ function fill(tpl, vars) {
 // either side disqualifies the match, so a longer reference number is never half-masked. (The example
 // numbers in this comment and in test/business/mask-phones.test.js are invented, not the register's.)
 const MOBILE_RE = /(?<![0-9])(\+?251)[ -]?([79](?:[ -]?[0-9]){8})(?![0-9])/g;
-const MASKED_RE = /251\u2022{5}[0-9]{4}/;
+// The local form 09xxxxxxxx / 07xxxxxxxx is the same number written the way a person writes it inside Ethiopia,
+// and knowledge/index.js's PERSONAL_MOBILE counts it as a mobile too, so an ingest of a page that held one would
+// fail the MASK VIOLATION check while this function left it whole. It is masked to the same last four digits and
+// keeps its own prefix (09•••••NNNN), so a masked number still reads as the form it was written in. A digit
+// directly before it disqualifies the match (30900000015 is not a mobile), exactly as for the international form.
+const LOCAL_MOBILE_RE = /(?<![0-9])(0[79])(?:[ -]?[0-9]){8}(?![0-9])/g;
+const MASKED_RE = /(?:251|0[79])\u2022{5}[0-9]{4}/;
 const maskPhones = text => String(text == null ? '' : text)
-  .replace(MOBILE_RE, m => '251' + '\u2022'.repeat(5) + m.replace(/[^0-9]/g, '').slice(-4));
+  .replace(MOBILE_RE, m => '251' + '\u2022'.repeat(5) + m.replace(/[^0-9]/g, '').slice(-4))
+  .replace(LOCAL_MOBILE_RE, (m, pre) => pre + '\u2022'.repeat(5) + m.replace(/[^0-9]/g, '').slice(-4));
 
 function header(page, site, today, pack, amh, corrected = false) {
   const heads = pageHeadings(page.text, page.title);
@@ -913,9 +962,31 @@ const pdfSlugOf = p => {
 // poppler's pdftotext, in layout mode so a fee table stays a table. A PDF with no text layer — and many of
 // the National Bank's older directives are photographs of paper — returns nothing, and the caller reports it
 // rather than writing an empty document.
-function readPdfText(file, { maxChars = PDF_MAX_CHARS } = {}) {
-  const out = execFileSync('pdftotext', ['-layout', '-q', file, '-'], { maxBuffer: 1 << 28, timeout: 180000 }).toString('utf8');
+// A bilingual Negarit Gazette page sets the Amharic text in the left column and the English in the right, and the
+// Amharic of the 2019 communications proclamation is in a pre-Unicode font that no extractor can read. pdftotext
+// can be told to read one rectangle of every page (-x -y -W -H, in points), which is the English column and
+// nothing of the other. The crop is a registry fact, `pdfCrop`, per document; a document that names none is read
+// whole exactly as before. Whatever of the neighbouring column bleeds into the left margin is a one-to-three
+// character token followed by a run of spaces at the start of a line, and stripMarginGarble takes it off.
+function stripMarginGarble(text) {
+  return String(text || '').split('\f').map(pg => pg.split('\n').map(l => l.replace(/^[^\s]{1,3}[ \t]{2,}(?=\S)/, '').replace(/^\s+/, '')
+    .replace(/^[^\sA-Za-z0-9]{1,3}$/, '')).join('\n')).join('\f');
+}
+function readPdfText(file, { maxChars = PDF_MAX_CHARS, crop = null } = {}) {
+  const args = ['-layout', '-q'];
+  if (crop) args.push('-x', String(crop.x), '-y', String(crop.y), '-W', String(crop.W), '-H', String(crop.H));
+  args.push(file, '-');
+  let out = execFileSync('pdftotext', args, { maxBuffer: 1 << 28, timeout: 180000 }).toString('utf8');
+  if (crop) out = stripMarginGarble(out);
   return out.length > maxChars ? out.slice(0, maxChars) : out;
+}
+// The crop for one PDF: the first `pdfCrop` entry of the site whose `match` (a regular expression, case
+// insensitive) holds for the document's key, or null.
+function pdfCropFor(site, key) {
+  for (const c of (site && Array.isArray(site.pdfCrop) ? site.pdfCrop : [])) {
+    if (new RegExp(c.match, 'i').test(String(key || ''))) return { x: c.x, y: c.y, W: c.W, H: c.H };
+  }
+  return null;
 }
 
 // A page is Amharic because its text is Amharic, not because its url sits on the /am/ tree. Six of the
@@ -926,7 +997,9 @@ function readPdfText(file, { maxChars = PDF_MAX_CHARS } = {}) {
 // already uses to decide whether a page marked Amharic really is.
 const AM_FLOOR = 300;
 const ethiopicCount = s => (String(s || '').match(/[ሀ-፿]/g) || []).length;
-const langOfText = (declared, text) => (declared === 'am' && ethiopicCount(text) < AM_FLOOR ? 'en' : declared);
+// `floor` is the site's own: a telecom price page in Amharic is a table of numbers under a short Amharic label and can be
+// 100 Ethiopic characters long without being English, so a site may say `amFloor` and take a lower one.
+const langOfText = (declared, text, floor) => (declared === 'am' && ethiopicCount(text) < (Number(floor) || AM_FLOOR) ? 'en' : declared);
 
 function readDirManifest(root, site) {
   const dir = path.join(root || DIR_ROOT, site.dir || site.host);
@@ -1071,7 +1144,16 @@ function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfT
   const out = [], failed = [...(sel.skipped || [])];
   for (const r of htmlRows) {
     let ex;
-    try { ex = extract(fs.readFileSync(path.join(dir, r.e.file), 'utf8'), { titleSuffix: site.titleSuffix }); }
+    try {
+      // `htmlPrep` is a list of { match, flags, replace } applied to the raw page before it is read, for a site whose
+      // markup separates what the page itself keeps together: Safaricom's package card is one <p> for the
+      // allowance and another for the price, and read as text they are two unrelated paragraphs. Joining them
+      // (the registry does it with " - ") changes no word and no figure, and a page that has none of the
+      // markup is untouched.
+      let raw = fs.readFileSync(path.join(dir, r.e.file), 'utf8');
+      for (const pr of site.htmlPrep || []) raw = raw.replace(new RegExp(pr.match, pr.flags || 'g'), pr.replace);
+      ex = extract(raw, { titleSuffix: site.titleSuffix, minChars: site.minChars });
+    }
     catch (err) { failed.push({ url: r.e.url, why: 'unreadable' }); continue; }
     if (!ex.ok) { failed.push({ url: r.e.url, why: ex.why }); continue; }
     // Every page of m-pesa.safaricom.et carries the same <title>, "M-PESA Ethiopia |" — 24 pages, one title.
@@ -1079,7 +1161,7 @@ function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfT
     // the page's own words: "KYC Requirements as per M-PESA", "Frequently Asked Questions".
     let title = ex.title;
     if (site.titleFrom === 'heading') {
-      const h = (String(ex.text).match(/^#{1,3}[ \t]*(\S.*)$/m) || [])[1];
+      const h = (String(ex.text).match(/^#{1,3}[ \t]*([^#\s].*)$/m) || [])[1];
       if (h) title = h.replace(/\s+/g, ' ').trim().slice(0, 90);
     } else if (site.titleFrom === 'manifest-heading' && r.e.heading) {
       // Every route of the etrade application carries one <title>, "e-Trade Online Trade Registration &
@@ -1087,8 +1169,10 @@ function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfT
       // The rendered capture recorded it per page, so the document is named what the page calls itself.
       title = String(r.e.heading).replace(/\s+/g, ' ').trim().slice(0, 90);
     }
+    // A site whose pages all carry one <title> and whose first heading is a slogan names each page in the registry.
+    if (site.pageTitles && site.pageTitles[r.key]) title = String(site.pageTitles[r.key]);
     const declared = langFor(site, r.key);
-    const lang = langOfText(declared, ex.text);
+    const lang = langOfText(declared, ex.text, site.amFloor);
     if (lang !== declared) log('[' + tag + '] ' + site.id + ': ' + r.key + ' is on the ' + declared
       + ' tree but holds only ' + ethiopicCount(ex.text) + ' Ethiopic characters — recorded as ' + lang);
     // One page can be too long to be one document: mols.gov.et/agencies is the register of 1,222 licensed
@@ -1119,9 +1203,14 @@ function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfT
       failed.push({ url: r.e.url, why: 'selected from the ocr manifest but its text is missing' }); continue;
     } else {
       let text = '';
-      try { text = readPdf(path.join(dir, r.e.file)); }
+      // A site that sets `pdfSplit` reads a text-layer PDF WHOLE and splits it at a page break into parts of at
+      // most OCR_MAX_CHARS, exactly as a long OCR'd proclamation is: the 60,000-character cap below is for a
+      // pack that treats a PDF as a directive, not for one that must answer a question about article 60 of a
+      // proclamation. A site that sets neither pdfSplit nor pdfCrop takes the old call, byte for byte.
+      const crop = pdfCropFor(site, r.key), split = !!site.pdfSplit;
+      try { text = (crop || split) ? readPdf(path.join(dir, r.e.file), { crop, maxChars: split ? Infinity : PDF_MAX_CHARS }) : readPdf(path.join(dir, r.e.file)); }
       catch (err) { failed.push({ url: r.e.url, why: 'pdftotext: ' + String(err.message).split('\n')[0].slice(0, 50) }); continue; }
-      bodies = [String(text || '')];
+      bodies = split ? splitOcrParts(String(text || ''), ocrMaxChars) : [String(text || '')];
       prov = { textSource: 'pdf', ocrQuality: '', ocrPages: null };
       titleRaw = cleanTitle(r.e.title || '', site.titleSuffix);
     }
@@ -1133,7 +1222,7 @@ function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfT
         continue;
       }
       out.push({ url: r.e.url, path: r.key, siteId: site.id, title: t, text,
-        lang: o ? ocrLangOf(text) : langFor(site, r.key),
+        lang: (o || site.pdfLangFromText) ? ocrLangOf(text) : langFor(site, r.key),
         fetchedAt: String(r.e.fetchedAt || '').slice(0, 10), isPdf: true,
         part: bodies.length > 1 ? n + 1 : 1, parts: bodies.length, ...prov });
     }
@@ -1246,8 +1335,10 @@ async function main(bound = {}) {
     const { pages, failed } = site.fetch === 'dir'
       ? fetchDir(site, { root: fromDir, log, tag, limit })
       : await fetchSite(site, { limit, log, tag });
-    const docs = stripPackBoilerplate(pages);
-    const { kept, thin } = splitThin(docs);
+    const docs = stripPackBoilerplate(pages, site);
+    const dup = dropPackDuplicates(docs, site);
+    for (const [slug, n] of Object.entries(dup)) log('[travel] ' + site.id + ': ' + n + ' paragraph(s) already in ' + site.dedupAgainstPacks.join('/') + ' taken out of ' + slug);
+    const { kept, thin } = splitThin(docs, site.minChars);
     const r = writePack(outDir, kept, site, { today, dryRun, failed, pack: reg.pack, amHeaders, corrections: reg.corrections });
     if (r.refused) { log('[travel] ' + site.id + ': REFUSED to update the pack — ' + r.refusedWhy + '. Nothing written.'); bad++; continue; }
     bad += failed.length;
@@ -1310,14 +1401,14 @@ function forPack(pack) {
 }
 
 module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugFor, assignSlugs, cleanTitle, extract, langFor, fill, slugPrefixOf,
-  readAmHeaders, amEntry, ungroundedFigures, digitRuns, maskPhones, MOBILE_RE, bodyText, sameDoc, rerenderPack, AM_HEADERS,
+  readAmHeaders, amEntry, ungroundedFigures, digitRuns, maskPhones, MOBILE_RE, LOCAL_MOBILE_RE, bodyText, sameDoc, rerenderPack, AM_HEADERS,
   stripPackBoilerplate, splitThin, contentHash, frontMatter, readMeta, bodyOf, header, pageHeadings, PACK_FORMAT, renderDoc, touchLastChecked, clearMissed, writePack,
   makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR,
   dirKeyOf, pdfSlugOf, readPdfText, readDirManifest, selectDirEntries, tariffDocFrom, fetchDir, DIR_ROOT,
   readOcrManifest, ocrTitleOf, splitOcrParts, splitLongParts, ocrLangOf, OCR_MAX_CHARS, HTML_MAX_CHARS,
   langOfText, ethiopicCount, AM_FLOOR,
   applyCorrections, stripCorrections, correctionNote, packCorrections, CORR_MARK,
-  PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR };
+  PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates };
 
 //   node ops/packs/fetch-pack.js --pack banking
 //   node ops/packs/fetch-pack.js --pack banking --site zemen --limit 5 --dry-run
