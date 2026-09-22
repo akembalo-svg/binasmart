@@ -14,6 +14,12 @@ const EMBED_MODEL = 'gemini-embedding-001';
 const DIMS = 768;
 const GEMINI = 'https://generativelanguage.googleapis.com/v1beta/models/' + EMBED_MODEL;
 const CHUNK = 900, OVERLAP = 120;
+// Sources chunked with chunkDoc's lineSafe option: the carried-over context never starts mid-line. Per source so
+// that switching a pack re-embeds only that pack (a changed chunk is a new hash and a new embedding).
+// 'business' since 2026-09-22: the EIC shed-rent table is one line per lease period, and the old 120-character
+// carry started a chunk with "Adama & Dire Dawa Industry Parks $4.0 per m2 ..." cut from its "Year 11 – 15:",
+// which search ranked first for "how much does it cost to rent a shed" and Bini quoted as THE price.
+const LINE_SAFE_SOURCES = new Set(['business']);
 
 const ROOT = path.join(__dirname, '..');
 const GUIDE_SLUGS = ['fayda', 'telebirr', 'cbe-birr-guide', 'passport', 'ethiopia-evisa', 'telesign', 'mesob', 'tin-registration-ethiopia',
@@ -44,7 +50,17 @@ function stripFrontmatter(md) { return String(md).replace(/^---[\s\S]*?\n---\s*/
 
 // Split a document into heading-aware chunks of ~CHUNK chars with a small overlap. Each chunk carries
 // "Title › Heading" so the embedding knows where it came from.
-function chunkDoc(text, title) {
+// The last ~n characters of s, starting at a line start: after the first line break inside them, or nothing
+// when they are all one line (a mid-line fragment reads as a complete fact once it opens a chunk).
+function lineTail(s, n) {
+  if (s.length <= n) return s.replace(/^\n+/, '');
+  const i = s.indexOf('\n', s.length - n - 1);
+  return i < 0 ? '' : s.slice(i + 1).replace(/^\n+/, '');
+}
+// lineSafe (LINE_SAFE_SOURCES): the overlap is whole lines only (see lineTail), and a paragraph too long for one
+// chunk is cut at a line break in the back half of the chunk, or failing that at a space, never over CHUNK.
+// Without it the output is byte-identical to what it was before the option existed.
+function chunkDoc(text, title, { lineSafe = false } = {}) {
   const lines = String(text).replace(/\r/g, '').split('\n');
   const sections = []; let cur = { heading: '', body: [] };
   for (const l of lines) {
@@ -61,9 +77,22 @@ function chunkDoc(text, title) {
     for (const p of paras) {
       if ((buf + '\n\n' + p).length > CHUNK && buf) {
         flush();
-        buf = buf.slice(-OVERLAP).replace(/^\S*\s/, '') + '\n\n' + p; // carry a little context over
+        if (lineSafe) { const carry = lineTail(buf, OVERLAP); buf = carry.trim() ? carry + '\n\n' + p : p; }
+        else buf = buf.slice(-OVERLAP).replace(/^\S*\s/, '') + '\n\n' + p; // carry a little context over
       } else buf = buf ? buf + '\n\n' + p : p;
-      while (buf.length > CHUNK * 1.6) { out.push({ heading: sec.heading, text: buf.slice(0, CHUNK).trim() }); buf = buf.slice(CHUNK - OVERLAP); }
+      while (buf.length > CHUNK * 1.6) {
+        if (!lineSafe) { out.push({ heading: sec.heading, text: buf.slice(0, CHUNK).trim() }); buf = buf.slice(CHUNK - OVERLAP); continue; }
+        const nl = buf.lastIndexOf('\n', CHUNK);
+        if (nl >= CHUNK / 2) {   // whole lines up to the break; the next piece restarts at a line start
+          const piece = buf.slice(0, nl), carry = lineTail(piece, OVERLAP);
+          out.push({ heading: sec.heading, text: piece.trim() });
+          buf = (carry.trim() ? carry + '\n' : '') + buf.slice(nl + 1);
+        } else {                 // one long line: cut at a space and carry nothing
+          const sp = buf.lastIndexOf(' ', CHUNK), cut = sp >= CHUNK / 2 ? sp : CHUNK;
+          out.push({ heading: sec.heading, text: buf.slice(0, cut).trim() });
+          buf = buf.slice(cut).replace(/^\s+/, '');
+        }
+      }
     }
     flush();
   }
@@ -905,7 +934,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     }
     let inserted = 0, deleted = 0, embedded = 0;
     for (const d of docs) {
-      const chunks = chunkDoc(d.text, d.title);
+      const chunks = chunkDoc(d.text, d.title, { lineSafe: LINE_SAFE_SOURCES.has(d.source) });
       const hashes = chunks.map(c => sha1(d.source + '|' + d.slug + '|' + c.text));
       // identical chunks inside one page (repeated blocks on crawled sites) would collide on the unique hash: keep the first
       const dupe = new Set(); for (let i = chunks.length - 1; i >= 0; i--) { if (dupe.has(hashes[i])) { chunks.splice(i, 1); hashes.splice(i, 1); } else dupe.add(hashes[i]); }
@@ -1275,6 +1304,6 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   return { load, ingest, checkMasks, search, contextFor, health, embedPendingGemini, embedPendingLocal, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, pageUrl, docMeta, docMetaFile, ownPageDates, ownPageMeta, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
+module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, LINE_SAFE_SOURCES, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, pageUrl, docMeta, docMetaFile, ownPageDates, ownPageMeta, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
   LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled,
   bilingualEnabled, bilingualEn2AmEnabled, makeQueryTranslator, normaliseQuery, BILINGUAL_TIMEOUT_MS, BILINGUAL_CACHE_MAX };
