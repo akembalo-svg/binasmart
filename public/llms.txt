@@ -65,6 +65,7 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 
 ## Optional
 
+- [About BinaSmart](https://bina.et/about): who we are, headquarters (JJ Darule Building, Arada, Addis Ababa), founder, what we run, and how we differ from similarly named companies
 - [Why BinaSmart Ride](https://bina.et/why-binasmart): the fare is locked when you book; no app to install
 - [Privacy](https://bina.et/privacy) and [Terms](https://bina.et/terms)
 - [Support](https://bina.et/support)
