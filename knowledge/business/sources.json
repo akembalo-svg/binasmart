@@ -198,6 +198,23 @@
       "maskPhones": true,
       "tableRows": true,
       "tableRowsNote": "The FAQ page lays out its tables one <td> per source line, so htmlToText wrote the industrial-park shed lease table one cell per line and Bini attached prices to the wrong park and the wrong years. tableRows (ops/packs/fetch-pack.js) writes each row as one line naming its column headers; every cell copied exactly. A table without a figure-free header row is left as it was.",
+      "sectionDocs": [
+        {
+          "doc": "eic-faqs",
+          "key": "industry-park-leases",
+          "start": "There are 3 types of leases and prices for industry parks",
+          "end": "- Readymade land",
+          "title": "FAQs: industry park leases and readymade shed prices"
+        },
+        {
+          "doc": "eic-faqs",
+          "key": "industry-park-land-leases",
+          "start": "- Readymade land",
+          "end": "/^[0-9]+\\.\\s*\\S.*\\?$/",
+          "title": "FAQs: industry park leases, readymade land and raw land"
+        }
+      ],
+      "sectionDocsNote": "The FAQ page is about 27,000 characters and search keeps at most two chunks of one document, so three other chunks of it outranked the industry-park lease table for \"how much does it cost to rent a shed in an industrial park\" and the table never reached Bini (measured 2026-09-22). sectionDocs (ops/packs/fetch-pack.js splitSections) writes the lease answer as two documents with the page url and dates: eic-faqs-industry-park-leases (the three lease types, readymade sheds and the shed lease table) and eic-faqs-industry-park-land-leases (readymade land, the Kilinto example and raw land, up to the next numbered question); eic-faqs keeps everything else, word for word. Two, not one: with the whole answer in one document (measured 2026-09-23) the readymade-land and raw-land chunks took that document's two places and the table chunk still never reached Bini, and for \"year 6\" the Kilinto land schedule (Year 6-10) outranked the shed table. Titles are built from words on the page and hold no figure. Approved by Ibrahim 2026-09-23.",
       "name": "Ethiopian Investment Commission",
       "nameAm": "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን",
       "host": "investethiopia.gov.et",

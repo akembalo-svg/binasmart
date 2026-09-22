@@ -393,7 +393,7 @@ const esc = s => String(s).replace(/"/g, '\\"');
 // pack is never half one format and half the other - and a re-render is not reported as a change, because the
 // airline changed nothing.
 const PACK_FORMAT = '2';
-const FM_KEYS = ['url', 'title', 'titleAm', 'source_name', 'section', 'lang', 'part', 'pages', 'text_source',
+const FM_KEYS = ['url', 'title', 'titleAm', 'source_name', 'section', 'lang', 'part', 'sectionOf', 'pages', 'text_source',
   'ocr_quality', 'status', 'fetchedAt', 'lastChecked',
   'firstFetched', 'goneAt', 'missedAt', 'contentHash', 'generated_by', 'packFormat'];
 function frontMatter(meta) {
@@ -534,6 +534,97 @@ function applyCorrections(text, slug, corrections, opts = {}) {
   }
   return { text: out, applied, unmatched };
 }
+// ---------- a section of a page as a document of its own ----------
+// Search keeps at most two chunks of one document, so a long page whose best answer sits in its middle loses that
+// answer to its own neighbours: the Investment Commission's FAQ page is 27,000 characters, and three of its other
+// chunks outranked the industry-park lease table for "how much does it cost to rent a shed in an industrial park",
+// so the table never reached Bini. A site may therefore name `sectionDocs`: sections of one of its pages that are
+// written as documents of their own, exactly as a long page is written as parts.
+//   { doc, key, start, end, title }
+// `doc` is the page's document name (eic-faqs). The section is whole paragraphs: it opens with the first paragraph
+// holding `start` and runs up to, not including, the first later paragraph matching `end` (both a literal, or a
+// regular expression written /like this/flags, as for corrections). A section with no end on the page is not a
+// section: nothing is split, and the miss is reported rather than the page being cut at a guess.
+// The section becomes <doc>-<key>, with the page's url, institution, section, language and dates. Its title is the
+// registry's, and every word of it must be on the page (in the page's text or its own title), and it may hold
+// no digit: the title says what the section is, in the page's words, and adds no fact. The page keeps everything
+// else, word for word; nothing is written twice. Both documents record the hash of the page as the institution
+// published it, whole: the section is not a page of its own, so the weekly check still reads an unchanged page as
+// unchanged, and the Amharic sidecar entry stamped with that hash still applies to the page it was written from.
+// The section document carries `sectionOf: <doc>` in its front matter and says in its header which page it is part
+// of. A correction registered for the page applies to whichever of the two documents now holds its passage.
+const SECTION_KEY = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+function checkSectionSpec(s, site) {
+  const who = '[pack] sectionDocs ' + ((site && site.id) || '?') + '/' + (s && s.doc) + '-' + (s && s.key);
+  for (const k of ['doc', 'key', 'start', 'end', 'title']) if (!s || !s[k]) throw new Error(who + ' refused: it has no ' + k);
+  if (!SECTION_KEY.test(s.key)) throw new Error(who + ' refused: key must be lower-case words joined by hyphens');
+  if (/[0-9]/.test(s.title)) throw new Error(who + ' refused: the title may not hold a figure');
+}
+// The words of a section title that are not on the page, case aside; empty when the title is grounded.
+function ungroundedWords(title, ...texts) {
+  const have = texts.map(t => String(t || '')).join('\n').toLowerCase();
+  return (String(title).toLowerCase().match(/[a-z]{3,}/g) || []).filter(w => !have.includes(w));
+}
+// { text: the section, rest: the page without it } or null when the page holds no such section.
+function findSection(text, s) {
+  const paras = String(text == null ? '' : text).split('\n\n');
+  const i = paras.findIndex(p => findPassage(p, s.start));
+  if (i < 0) return null;
+  let j = -1;
+  for (let k = i + 1; k < paras.length; k++) if (findPassage(paras[k].trim(), s.end)) { j = k; break; }
+  if (j < 0) return null;
+  const sec = paras.slice(i, j).join('\n\n').trim();
+  if (!sec) return null;
+  return { text: sec, rest: [...paras.slice(0, i), ...paras.slice(j)].join('\n\n') };
+}
+const sectionSpecsOf = site => (site && Array.isArray(site.sectionDocs) ? site.sectionDocs : []);
+// docs: the pages of ONE site. Returns { docs, split: [{ doc, slug }], unmatched: [{ doc, slug }] }; a page with
+// no section named in the registry is passed through untouched, the same object.
+function splitSections(docs, site) {
+  const specs = sectionSpecsOf(site);
+  if (!specs.length) return { docs, split: [], unmatched: [] };
+  for (const s of specs) checkSectionSpec(s, site);
+  const out = [], split = [], unmatched = [];
+  for (const d of docs) {
+    const mine = specs.filter(s => s.doc === d.slug);
+    if (!mine.length) { out.push(d); continue; }
+    const whole = d.contentHash || contentHash(d.text);
+    let rest = String(d.text == null ? '' : d.text);
+    const kids = [];
+    for (const s of mine) {
+      const slug = d.slug + '-' + s.key;
+      const hit = findSection(rest, s);
+      if (!hit) { unmatched.push({ doc: d.slug, slug }); continue; }
+      const bad = ungroundedWords(s.title, d.text, d.title);
+      if (bad.length) throw new Error('[pack] sectionDocs ' + slug + ' refused: the title words ' + bad.join(', ') + ' are not on the page');
+      rest = hit.rest;
+      kids.push({ ...d, slug, title: s.title, text: hit.text, contentHash: whole, sectionOf: d.slug,
+        sectionOfTitle: d.title || d.slug, part: null, parts: 1 });
+      split.push({ doc: d.slug, slug });
+    }
+    out.push(kids.length ? { ...d, text: rest.trim(), contentHash: whole } : d, ...kids);
+  }
+  return { docs: out, split, unmatched };
+}
+// A correction names the page it was written for. Once a section of that page is a document of its own, the
+// correction goes to whichever of them holds its passage: the page if it still does, otherwise the section.
+// `textOf` gives the text the correction will be matched against (the tableRows layout on a site that sets it).
+function sectionCorrections(corrections, docs, textOf = d => d.text) {
+  const list = Array.isArray(corrections) ? corrections : [];
+  const kids = new Map();
+  for (const d of docs) if (d.sectionOf) { if (!kids.has(d.sectionOf)) kids.set(d.sectionOf, []); kids.get(d.sectionOf).push(d); }
+  if (!kids.size) return list;
+  const bySlug = new Map(docs.map(d => [d.slug, d]));
+  return list.map(c => {
+    const ks = c && kids.get(c.slug);
+    if (!ks) return c;
+    const own = bySlug.get(c.slug);
+    if (own && findPassage(stripCorrections(textOf(own)), c.match)) return c;
+    const k = ks.find(x => findPassage(stripCorrections(textOf(x)), c.match));
+    return k ? { ...c, slug: k.slug } : c;
+  });
+}
+
 // Two renders of one document differ in the two lines that move on their own: lastChecked advances every run,
 // and missedAt is cleared by a run that succeeds. Everything else - the front matter, the header, the text -
 // is what "did this document really change" means.
@@ -636,7 +727,12 @@ function header(page, site, today, pack, amh, corrected = false) {
     disclaimerEn: (pack && pack.disclaimerEn) || '', disclaimerAm: (pack && pack.disclaimerAm) || '',
   };
   const what = site.name + ' — ' + (page.section ? page.section + ' — ' : '') + (page.title || page.slug) + '.'
-    + (heads.length ? ' On this page: ' + heads.join(', ') + '.' : '');
+    + (heads.length ? ' On this page: ' + heads.join(', ') + '.' : '')
+    // A section written as a document of its own says so, and names the page it belongs to - by that page's own
+    // title, unless the title holds a digit, which a header written here may not.
+    + (page.sectionOf ? ' This is one section of the page'
+      + (page.sectionOfTitle && !/[0-9]/.test(page.sectionOfTitle) ? ' "' + page.sectionOfTitle + '"' : '')
+      + ', kept as a document of its own; the rest of that page is a separate document.' : '');
   const am = 'በአማርኛ፦ ' + (page.sectionTitleAm ? page.sectionTitleAm + ' — ' : '') + (page.title || page.slug) + '። '
     + fill(pack && pack.headerAmTemplate, vars);
   const en = fill(pack && pack.headerEnTemplate, vars);
@@ -687,6 +783,7 @@ function renderDoc(page, site, { today, firstFetched, pack, amHeaders, correctio
     // so a citation still points at the one PDF the institution published. A document that was not split
     // carries no part line at all.
     part: page.parts > 1 && page.part ? page.part + ' of ' + page.parts : '',
+    sectionOf: page.sectionOf || '',
     pages: page.ocrPages == null ? '' : String(page.ocrPages),
     text_source: page.textSource || '', ocr_quality: page.ocrQuality || '',
     status: 'live', fetchedAt: today, lastChecked: today, firstFetched: firstFetched && firstFetched !== today ? firstFetched : '',
@@ -735,8 +832,18 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
   // holds and the unchanged-check below compares like with like. Re-fetching the same page therefore reads
   // as unchanged, rather than as 805 numbers that moved.
   if (site && site.maskPhones) for (const d of docs) d.text = maskPhones(d.text);
+  // A section the registry names is written as a document of its own (see splitSections). Done here, after the
+  // mask and before any hash, so the weekly check (ops/packs/freshness.js) and a fetch from this file split the
+  // page alike. A section no longer on a page that came back is reported, and its document is marked gone below:
+  // the page now holds whatever is there, and the same text must not stay live twice.
+  const sp = splitSections(docs, site);
+  docs = sp.docs;
+  corrections = sectionCorrections(corrections, docs, d => (site && site.tableRows ? tableRows(d.text) : d.text));
+  const sectionGone = new Set(sp.unmatched.map(u => u.slug));
+  for (const u of sp.unmatched) console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] section ' + u.slug + ' is no longer on its page ' + u.doc);
   const day = today || new Date().toISOString().slice(0, 10);
-  const r = { added: [], changed: [], unchanged: [], gone: [], goneWhy: {}, missed: [], revived: [], reformatted: [], uncorrected };
+  const r = { added: [], changed: [], unchanged: [], gone: [], goneWhy: {}, missed: [], revived: [], reformatted: [], uncorrected,
+    split: sp.split.map(x => x.slug), unsplit: sp.unmatched.map(x => x.slug) };
   const deadUrls = new Map();
   for (const f of failed || []) { const w = DEAD[f.why]; if (w) deadUrls.set(normUrl(f.url), w); }
   const wanted = new Map(docs.map(d => [d.slug, d]));
@@ -746,7 +853,7 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
     const file = path.join(dir, slug + '.md');
     const old = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null;
     const oldMeta = old ? readMeta(old) : null;
-    if (oldMeta && oldMeta.contentHash === contentHash(d.text) && oldMeta.status !== 'gone') {
+    if (oldMeta && oldMeta.contentHash === (d.contentHash || contentHash(d.text)) && oldMeta.status !== 'gone') {
       r.unchanged.push(slug);
       // The page did not change, but the way this script writes a page did - a new packFormat, or an Amharic
       // header the sidecar did not hold last time. Re-render it from the text that just came off the site,
@@ -795,7 +902,7 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
     // A page is gone when the site SAYS it is gone, or when it has been missing two runs running. One
     // timeout is not a deletion: record the miss, leave the document live and indexed, and let next
     // Sunday decide. Anything else drops a week of answers on the floor over a network blip.
-    const dead = deadUrls.get(normUrl(meta.url));
+    const dead = deadUrls.get(normUrl(meta.url)) || (sectionGone.has(slug) ? 'the section is no longer on its page' : null);
     if (!dead && !meta.missedAt) {
       r.missed.push(slug);
       if (dryRun) continue;
@@ -820,14 +927,20 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
 // lastChecked are carried through exactly as they stood, so the ingest re-chunks the document while the
 // freshness record still says the institution changed nothing. Reported as re-rendered, never as changed.
 function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
-  const r = { rerendered: [], unchanged: [], skipped: [], uncorrected: [] };
+  const r = { rerendered: [], unchanged: [], skipped: [], uncorrected: [], split: [], unsplit: [] };
   const sites = new Map((reg.sites || []).map(s => [s.name, s]));
-  const corrections = reg.corrections || [];
   const onUnmatched = slug => {
     if (!r.uncorrected.includes(slug)) r.uncorrected.push(slug);
     console.log('[' + ((reg.pack && reg.pack.logPrefix) || (reg.pack && reg.pack.id) || 'pack') + '] correction no longer matches ' + slug);
   };
-  for (const f of fs.readdirSync(dir).filter(x => x.endsWith('.md')).sort()) {
+  // Read every document first and render afterwards, because a section document and its page are two files that
+  // have to be seen together: the page may still hold the section (the first re-render after the registry named
+  // it, which writes the section's document), and a correction registered for the page may now sit in either.
+  const items = [];
+  const metaOf = new Map();
+  const files = fs.readdirSync(dir).filter(x => x.endsWith('.md')).sort();
+  for (const f of files) metaOf.set(f.replace(/\.md$/, ''), readMeta(fs.readFileSync(path.join(dir, f), 'utf8')));
+  for (const f of files) {
     const slug = f.replace(/\.md$/, '');
     const file = path.join(dir, f);
     const old = fs.readFileSync(file, 'utf8');
@@ -852,22 +965,61 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
     // an OCR document that came back as an ordinary one would lose its quality grade, its page count and the
     // sentence telling a reader a machine read it off a photograph.
     const pt = /^(\d+) of (\d+)$/.exec(meta.part || '');
+    const specs = sectionSpecsOf(site);
+    // A section document on disk takes its title from the registry entry that names it, so a better title reaches
+    // it on the next re-render, and names its page by that page's own title.
+    const spec = meta.sectionOf ? specs.find(s => s.doc + '-' + s.key === slug) : null;
+    const stripPre = t => (t && t.slice(0, pre.length) === pre ? t.slice(pre.length) : t);
+    const parentMeta = meta.sectionOf ? metaOf.get(meta.sectionOf) : null;
     const page = { url: meta.url, path: p, slug, lang: meta.lang, text,
-      title: meta.title && meta.title.slice(0, pre.length) === pre ? meta.title.slice(pre.length) : meta.title,
+      title: spec ? spec.title : stripPre(meta.title),
       section: meta.section || (sec ? sec.key : null), sectionTitleAm: sec ? sec.titleAm : null,
       textSource: meta.text_source || '', ocrQuality: meta.ocr_quality || '',
       ocrPages: meta.pages === undefined || meta.pages === '' ? null : meta.pages,
       part: pt ? Number(pt[1]) : null, parts: pt ? Number(pt[2]) : 1,
+      sectionOf: meta.sectionOf || undefined,
+      sectionOfTitle: meta.sectionOf ? stripPre(parentMeta && parentMeta.title) || meta.sectionOf : undefined,
       // A tableRows site's text on disk holds its tables one row per line, which is our layout, not the page:
-      // the hash recorded when the page was fetched is the hash of the page as published, and it is carried.
-      contentHash: site.tableRows && meta.contentHash ? meta.contentHash : undefined };
-    let fresh = renderDoc(page, site, { today: meta.fetchedAt, firstFetched: meta.firstFetched || meta.fetchedAt, pack: reg.pack, amHeaders, corrections, onUnmatched });
+      // the hash recorded when the page was fetched is the hash of the page as published, and it is carried. So is
+      // the hash of a page that is split into sections, and of each section: both are the whole page's.
+      contentHash: (site.tableRows || meta.sectionOf || specs.some(s => s.doc === slug)) && meta.contentHash ? meta.contentHash : undefined };
+    items.push({ slug, file, old, meta, site, page });
+  }
+  // The split. A page that still holds a section the registry names gives up that section to a document of its own
+  // (written now, dated as the page is). A page that no longer holds it is the steady state when that document is
+  // already live on disk, and a miss worth reporting when it is not.
+  const out = [];
+  for (const it of items) {
+    const sp = splitSections([it.page], it.site);
+    for (const u of sp.unmatched) {
+      const m = metaOf.get(u.slug);
+      if (!(m && m.sectionOf === u.doc && m.status !== 'gone')) {
+        r.unsplit.push(u.slug);
+        console.log('[' + ((reg.pack && reg.pack.logPrefix) || (reg.pack && reg.pack.id) || 'pack') + '] section ' + u.slug + ' is on neither its page nor disk');
+      }
+    }
+    if (!sp.split.length) { out.push(it); continue; }
+    out.push({ ...it, page: sp.docs[0] });
+    for (const d of sp.docs.slice(1)) {
+      const file = path.join(dir, d.slug + '.md');
+      out.push({ slug: d.slug, file, old: fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null, meta: it.meta, site: it.site, page: d, fromSplit: true });
+      r.split.push(d.slug);
+    }
+  }
+  // A section just split from its page replaces any older copy of that document read from disk.
+  const fresh = new Set(out.filter(x => x.fromSplit).map(x => x.slug));
+  const todo = out.filter(x => x.fromSplit || !fresh.has(x.slug));
+  const siteOf = new Map(todo.map(x => [x.slug, x.site]));
+  const corrections = sectionCorrections(reg.corrections || [], todo.map(x => x.page),
+    d => (siteOf.get(d.slug) && siteOf.get(d.slug).tableRows ? tableRows(d.text) : d.text));
+  for (const { slug, file, old, meta, site, page } of todo) {
+    let doc = renderDoc(page, site, { today: meta.fetchedAt, firstFetched: meta.firstFetched || meta.fetchedAt, pack: reg.pack, amHeaders, corrections, onUnmatched });
     // renderDoc writes lastChecked from the day it is given, and the day it is given here is the day the page
     // was fetched. Put the record of when we last looked back exactly as it stood.
-    if (meta.lastChecked) fresh = fresh.replace(/^lastChecked: ".*"$/m, 'lastChecked: "' + esc(meta.lastChecked) + '"');
-    if (fresh === old) { r.unchanged.push(slug); continue; }
+    if (meta.lastChecked) doc = doc.replace(/^lastChecked: ".*"$/m, 'lastChecked: "' + esc(meta.lastChecked) + '"');
+    if (doc === old) { r.unchanged.push(slug); continue; }
     r.rerendered.push(slug);
-    if (!dryRun) fs.writeFileSync(file, fresh);
+    if (!dryRun) fs.writeFileSync(file, doc);
   }
   return r;
 }
@@ -1456,7 +1608,8 @@ async function main(bound = {}) {
     const n = rr.rerendered.length + rr.unchanged.length + rr.skipped.length;
     log('[travel] ' + pack + ': ' + n + ' documents (0 added, 0 changed, ' + rr.rerendered.length + ' re-rendered, '
       + rr.unchanged.length + ' unchanged, ' + rr.skipped.length + ' skipped)' + (dryRun ? '  [DRY RUN — nothing written]' : ''));
-    console.log(JSON.stringify({ pack, rerendered: rr.rerendered.length, unchanged: rr.unchanged.length, skipped: rr.skipped, uncorrected: rr.uncorrected }));
+    console.log(JSON.stringify({ pack, rerendered: rr.rerendered.length, unchanged: rr.unchanged.length, skipped: rr.skipped, uncorrected: rr.uncorrected,
+      split: rr.split, unsplit: rr.unsplit, changedDocs: rr.rerendered }));
     return;
   }
   let bad = 0;
@@ -1545,7 +1698,8 @@ module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugF
   readOcrManifest, ocrTitleOf, splitOcrParts, splitLongParts, ocrLangOf, OCR_MAX_CHARS, HTML_MAX_CHARS,
   langOfText, ethiopicCount, AM_FLOOR,
   applyCorrections, stripCorrections, correctionNote, packCorrections, CORR_MARK,
-  PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates, tableRows };
+  PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates, tableRows,
+  splitSections, findSection, sectionCorrections };
 
 //   node ops/packs/fetch-pack.js --pack banking
 //   node ops/packs/fetch-pack.js --pack banking --site zemen --limit 5 --dry-run

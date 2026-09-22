@@ -387,37 +387,6 @@ The government plan to construct 20 state-of-the-art industrial parks located al
 
 There is no a special procedure to get in to industrial parks except to the fact that the company must export its products 100%. Once an investor decides to operate within the industry park, the Ethiopian Investment Commission along with the Ethiopian Industrial Parks Development Corporation will facilitate the entire process.
 
-There are 3 types of leases and prices for industry parks; readymade sheds, readymade land, and raw land.
-
-- Readymade sheds are available start at a price of $2 per m2 per month
-
-There are 3 types of leases and prices for industry parks; readymade sheds, readymade land, and raw land.
-- Readymade sheds are available start at a price of $2 per m2 per month
-Table: Lease Period by Adama & Dire Dawa Industry Parks, All other Industry Parks
-Lease Period | Adama & Dire Dawa Industry Parks | All other Industry Parks
-Year 1 – 4: Adama & Dire Dawa Industry Parks $2.75 per m2 per month; All other Industry Parks $2.0 per m2 per month
-Year 5 – 7: Adama & Dire Dawa Industry Parks $3.0 per m2 per month; All other Industry Parks $2.5 per m2 per month
-Year 8 – 10: Adama & Dire Dawa Industry Parks $3.5 per m2 per month; All other Industry Parks $2.75 per m2 per month
-Year 11 – 15: Adama & Dire Dawa Industry Parks $4.0 per m2 per month; All other Industry Parks $3 per m2 per month
-
-- Readymade land
-
-Investors are expected to pay a single fee of $.04 cents per m2, plus land development recovery costs which may vary by location. Investors are also expected to build their own factory sheds at own expense. The readymade land includes developed roads and utility infrastructure. Land recovery costs are calculated based on a progressive method. The IPDC will make such issues clear in the land sub-lease agreements.
-
-An example for Kilinto Industry Park is provided for references. The average cost for Kilinto Industrial Park is $3.59 m2 per annum (no built sheds will be prepared but serviced land). The detail payment of the infrastructure cost for the park based on progressive rate for the lease period can be seen as follows:
-
-– Year 1-5: 0.8975 (~0.9) USD m2per annum
-
-– Year 6-10: 1.795 (~1.8) USD m2 per annum
-
-– Year 11 +, a flat rate of USD 4.34 m2 per annum
-
-Note: up on the decision of the developer and/or the investment board of Ethiopia, the lease price may vary for upcoming industrial parks.
-
-- Raw Land
-
-Investors are expected to pay a single fee of $.04 cents per m2 and all costs of land development and infrastructure are to be covered by the investor.
-
 2. Is there any minimum capital requirement for domestic investors to work inside the industrial parks?
 
 Eligible local investors who exhibit a feasible proposal would have the opportunity to join the parks by showing 15% equity in cash via bank letter of the total investment cost. There is no minimum capital requirement for local investors to be in to the parks, but the very nominal figure as of the small-scale enterprises is not applicable so that the total capital should be reasonable enough.
