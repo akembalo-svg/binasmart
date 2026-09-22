@@ -1,6 +1,117 @@
+# bina.et — what machines may read here.
+#
+# Search engines are welcome: being findable is the point of publishing.
+# Content harvesters and AI training crawlers are not: the vacancies, tenders and company
+# profiles on this site were checked and assembled by BinaSmart, and copying the whole board
+# is not reading it. The same rule we obey on other people's sites, applied to our own.
+
 User-agent: *
 Allow: /
 Disallow: /owner/
 Disallow: /api/
+Disallow: /ops/
+Disallow: /cv/
 Disallow: /w/
+
+# --- Search engines: full access ---
+User-agent: Googlebot
+Allow: /
+User-agent: Googlebot-Image
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: DuckDuckBot
+Allow: /
+User-agent: YandexBot
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: TelegramBot
+Allow: /
+
+# --- Bulk harvesters and scrapers: no ---
+User-agent: Bytespider
+Disallow: /
+User-agent: PetalBot
+Disallow: /
+User-agent: DataForSeoBot
+Disallow: /
+User-agent: MJ12bot
+Disallow: /
+User-agent: DotBot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /
+User-agent: AhrefsBot
+Disallow: /
+User-agent: BLEXBot
+Disallow: /
+User-agent: SeekportBot
+Disallow: /
+User-agent: Scrapy
+Disallow: /
+User-agent: python-requests
+Disallow: /
+User-agent: HTTrack
+Disallow: /
+User-agent: Wget
+Disallow: /
+User-agent: SiteSucker
+Disallow: /
+User-agent: WebCopier
+Disallow: /
+User-agent: Diffbot
+Disallow: /
+User-agent: Omgili
+Disallow: /
+User-agent: magpie-crawler
+Disallow: /
+User-agent: Timpibot
+Disallow: /
+User-agent: ImagesiftBot
+Disallow: /
+
+# --- AI answer engines: yes ---
+# These fetch a page to answer someone's question and cite the source. That sends people here;
+# bina.et also publishes /llms.txt and an MCP server for exactly this. Different from training.
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# --- AI training crawlers: no ---
+# Answering a question with our data and citing us is fine; taking the board to train on is not.
+User-agent: GPTBot
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: Claude-Web
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+User-agent: Applebot-Extended
+Disallow: /
+User-agent: Meta-ExternalAgent
+Disallow: /
+User-agent: FacebookBot
+Disallow: /
+User-agent: cohere-ai
+Disallow: /
+User-agent: YouBot
+Disallow: /
+User-agent: Bytespider-Extended
+Disallow: /
+
 Sitemap: https://bina.et/sitemap.xml

@@ -18,7 +18,7 @@
       ['ቲቪ · ፊልም', 'Watch', '/watch'], ['ሲኒማ', 'Cinema', '/cinema'], ['ሬስቶራንት', 'Restaurants', '/restaurant/bina-restaurant'],
       ['ንብረት', 'Property', '/property'], ['መኪና', 'Cars', '/cars'], ['መድን', 'Insurance', '/insurance'],
       ['በረራ', 'Flights', '/flights'], ['አውቶቡስ', 'Bus tickets', '/travel'], ['ሆስፒታሎች', 'Hospitals', '/hospital/bina-general-hospital'],
-      ['ዜና', 'News', '/news'], ['ጨረታ', 'Tenders', '/tenders'], ['መመሪያዎች', 'Guides', '/guides'], ['ሱቆች', 'Shops', '/business'],
+      ['ዜና', 'News', '/news'], ['ጨረታ', 'Tenders', '/tenders'], ['ሥራ', 'Jobs', '/jobs'], ['መመሪያዎች', 'Guides', '/guides'], ['ሱቆች', 'Shops', '/business'],
     ]],
     ['ይቀላቀሉን', 'Join us', [
       ['ሱቅ አለዎት?', 'For business', '/for-business'], ['ሆቴል አለዎት?', 'For hotels', '/for-business'], ['ሲኒማ ቤት?', 'For cinemas', '/for-cinemas'],

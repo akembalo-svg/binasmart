@@ -60,7 +60,9 @@ body>.top:not(:has(.in))>span{font-size:11.5px;font-weight:800;color:var(--em2)!
 /* ---- guides ---- */
 .top .logo.am{font-family:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif}
 .top a.back{font-weight:800;color:var(--em2);background:rgba(0,200,150,.12);border-radius:12px;padding:8px 12px}
-.phero{background:linear-gradient(135deg,#0F172A,#0B3B31 70%,#00C896 160%);border-radius:26px}
+.phero{background:var(--pg,linear-gradient(135deg,#0F172A,#0B3B31 70%,#00C896 160%));border-radius:26px}
+/* --pg is set inline per section (brand/sections.js) so jobs, tenders, news and cinema each keep
+   their own colour. This rule used to hard-code the green and quietly overrode all of them. */
 .phero .kick{color:#14D8B4}
 .gcard .go{color:var(--em2)}
 /* ---- news + tenders shell ---- */

@@ -144,6 +144,7 @@ model Building {
   travelTrips  TravelTrip[]
   departments  Department[]
   appointments Appointment[]
+  employers     Employer[]   // employers whose office is in this building (jobs, 2026-09-21)
 }
 
 model Unit {
@@ -1710,4 +1711,153 @@ model WorkspaceQuestion {
   ms          Int      @default(0)
   createdAt   DateTime @default(now())
   @@index([workspaceId, createdAt])
+}
+
+// ===== Jobs (2026-09-21) =====
+// A vacancy always belongs to an employer, and the employer record is built from the first job that
+// names it and enriched later. That way the company profile grows by itself as more of its jobs arrive,
+// and after a season the platform holds something no Ethiopian site has: a real register of employers
+// with what they actually hire for.
+model Employer {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  nameAm    String?
+  sector    String?
+  city      String   @default("Addis Ababa")
+  about     String?
+  website   String?
+  phone     String?
+  email     String?
+  logoUrl   String?
+  verified  Boolean  @default(false)   // somebody confirmed this is the real company, not a broker
+
+  // Where it actually is. Researched per employer, not guessed from the advert: an address typed by a
+  // recruiter ("around Bole") is not a place, and a job seeker who travels to the wrong gate loses a day
+  // and the fare. lat/lng are what make the rest work - the office can be a ride destination and a point
+  // on the map, so a person can see what getting to the interview costs before deciding to apply.
+  address        String?
+  lat            Float?
+  lng            Float?
+  locationNote   String?   // "3rd floor, behind the Total station" - what a taxi driver actually needs
+  locationChecked DateTime? // when a human last confirmed the coordinates, not when the row was written
+  buildingId     String?   // when the employer sits in a building BinaSmart already knows
+  building       Building? @relation(fields: [buildingId], references: [id])
+  jobs      Job[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+}
+
+model Job {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  titleAm     String?
+  employerId  String
+  employer    Employer  @relation(fields: [employerId], references: [id])
+  city        String    @default("Addis Ababa")
+  jobType     String?   // full-time | part-time | contract | internship | temporary
+  experience  String?   // as the advert states it, never our own guess
+  education   String?
+  salary      String?   // text, not a number: most Ethiopian adverts say "as per company scale"
+  vacancies   Int?      // how many posts, when the advert says
+  summary     String
+  bodyHtml    String?
+  howToApply  String?
+  deadline    DateTime?
+  // The field of work, worked out from the title by jobs/categories.js - a rule list, not a model, so
+  // the same advert lands in the same place every day and a category page can be ranked.
+  category    String?
+  // Some sources publish the vacancy itself as a photographed notice - the positions, the requirements
+  // and the salary live inside the image, not in the page text. We copy that image to our own server and
+  // show it, so the reader sees exactly what the employer published rather than our transcription of it.
+  imageUrl    String?
+  sourceUrl   String?
+  sourceName  String?
+  published   Boolean   @default(true)
+  publishedAt DateTime  @default(now())
+  // When this vacancy went out on the Telegram channel. Null means "not announced yet"; the announcer
+  // batches new vacancies rather than posting 200 separate messages a day, which would empty a channel
+  // faster than it fills it.
+  announcedAt DateTime?
+
+  @@index([deadline])
+  @@index([employerId])
+}
+
+// A vacancy somebody asked us to publish — from Bini in chat, from an employer, from a form.
+//
+// It does NOT go on the board. It waits here until a person approves it, and that is the whole point:
+// job scams are the commonest fraud against Ethiopian workers (fake vacancy, "pay the registration
+// fee", vanish), the board now carries real people's CVs, and no model can tell a real employer from a
+// well-written one. So an advert reaches the public only when a human said yes.
+//
+// checks holds what the automatic tests noticed - a fee demanded, a personal phone, an employer we have
+// never seen - so the reviewer reads the reasons rather than a verdict.
+model JobSubmission {
+  id           String    @id @default(cuid())
+  createdAt    DateTime  @default(now())
+  source       String    @default("bini")   // bini | form | telegram | api
+  submitter    String?                      // who sent it, as they identified themselves
+  submitterRef String?                      // chat id, phone or ip - for rate limiting and follow-up
+
+  employerName String
+  title        String
+  titleAm      String?
+  city         String?
+  jobType      String?
+  salary       String?
+  summary      String?
+  bodyHtml     String?
+  howToApply   String?
+  deadline     DateTime?
+
+  checks       String?                      // what looked wrong, in plain words
+  status       String    @default("pending") // pending | published | rejected
+  token        String    @unique            // the approve/reject link's secret
+  reviewedAt   DateTime?
+  reviewNote   String?
+  jobId        String?                      // the published Job, once approved
+
+  @@index([status, createdAt])
+}
+
+// A person who sent a CV through bina.et (2026-09-21).
+//
+// This table holds real people's documents, so the rules are written here rather than left to whoever
+// reads the code next:
+//   · the file never leaves this server. It is stored on disk, not in a cloud bucket, not in a backup
+//     that travels, and it is not attached to an email.
+//   · shareWider is FALSE unless the person ticked the box. It is the difference between "send my CV to
+//     this employer" and "send my CV to whoever you like", and only they can make that choice.
+//   · deleteAfter is set on every row. A CV is not ours to keep for ever; when the date passes the row
+//     and the file go. Somebody who sent a CV in 2026 should not find it circulating in 2029.
+//   · the parsed summary is for matching, never for publishing. No profile page, no directory of job
+//     seekers - a public database of people looking for work is a database of people to exploit.
+model Candidate {
+  id           String    @id @default(cuid())
+  name         String
+  phone        String
+  email        String?
+  city         String?
+  category     String?              // the field of work, so a CV can be matched to the right vacancy
+  jobId        String?              // the vacancy they applied for, when they came from one
+  employerId   String?              // resolved from that vacancy, kept if the job row is later removed
+  cvPath       String               // on this server only
+  cvMime       String?
+  summary      String?              // short profile extracted from the CV, for matching
+  skills       String[]  @default([])
+  years        Int?
+  shareWider   Boolean   @default(false)   // may we show this CV to other employers in the same field?
+  sentTo       String[]  @default([])      // employer ids the CV has been forwarded to, so none twice
+  status       String    @default("new")   // new | reviewed | forwarded | hired | withdrawn
+  note         String?
+  createdAt    DateTime  @default(now())
+  deleteAfter  DateTime                     // retention: the row and the file go after this date
+
+  @@index([category])
+  @@index([jobId])
+  @@index([createdAt])
 }

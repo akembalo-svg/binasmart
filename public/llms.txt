@@ -1,6 +1,6 @@
 # BinaSmart (bina.et)
 
-> BinaSmart is Ethiopia's all-in-one digital platform, based in Addis Ababa, in Amharic and English: fixed-price ride-hailing, cinema and event tickets, films, shop pages with ordering, flight tickets, smart building management, hotels, restaurants, hospitals, insurance comparison, car and property marketplaces, verified tenders, Amharic news and Digital Ethiopia guides. Customers reach it on the web, in Telegram (@bina_smart_bot) and through AI assistants over MCP.
+> BinaSmart is Ethiopia's all-in-one digital platform, based in Addis Ababa, in Amharic and English: fixed-price ride-hailing, cinema and event tickets, films, shop pages with ordering, flight tickets, smart building management, hotels, restaurants, hospitals, insurance comparison, car and property marketplaces, job vacancies, verified tenders, Amharic news and Digital Ethiopia guides. Customers reach it on the web, in Telegram (@bina_smart_bot) and through AI assistants over MCP.
 
 BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian retail ERP) or "Smartlife Bina" (Turkey). BinaSmart is Ethiopian, headquartered at JJ Darule Building, Addis Ababa. It is a neutral platform: airlines, agencies, insurers, dealers, cinemas and shops supply their own products and prices; BinaSmart does not issue tickets or hold customer money. No fare, price or seat map on the site is invented — each comes from the provider.
 
@@ -20,6 +20,7 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 - [Insurance](https://bina.et/insurance): compare Ethiopia's licensed insurers, instant indicative estimate, buy through a trusted agent
 - [Cars](https://bina.et/cars): cars for sale in Ethiopia; tell us the car you want and we look for it, with 1-tap insurance
 - [Property](https://bina.et/property): verified homes, land and commercial property for sale and rent; diaspora-friendly
+- [Jobs](https://bina.et/jobs): Ethiopian job vacancies — thousands of open posts from seven job boards and employers, each linked to the company that posted it with its profile, address and logo; sixteen fields of work (https://bina.et/jobs/category/banking, /accounting, /engineering, /it, /health, /education, /sales, /ngo, /logistics, /admin, /hospitality, /construction, /agriculture, /legal, /security, /media); Amharic and English; refreshed every morning; free for job seekers and free for employers to post. A seeker without a CV can answer a few questions and get one written as a PDF. BinaSmart never charges an applicant.
 - [Tenders](https://bina.et/tenders): verified Ethiopian government and company tenders, free for bidders, updated daily
 - [News](https://bina.et/news): Amharic technology, business and construction news, politics-free; Telegram channel https://t.me/binasmart
 - [Guides](https://bina.et/guides): Digital Ethiopia guides — Fayda ID, telebirr, e-Passport, TIN, VAT, business registration, driving licence, customs and import duty, Labor ID and LMIS registration, COC competency certificate
@@ -45,7 +46,7 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 ## Developer and AI resources
 
 - [Use BinaSmart inside ChatGPT, Claude, Gemini or Perplexity](https://bina.et/ai): paste the MCP link, no login
-- [MCP server](https://bina.et/mcp): quote and request rides, search the directory, list films and events, read the guides, BinaPool corridors and cars filling, and search_knowledge over every service and practical Addis Ababa knowledge; documentation at that URL. No login. 20 tool calls an hour per address without a key (the connection handshake is free), shared with the knowledge search below
+- [MCP server](https://bina.et/mcp): quote and request rides, search the directory, list films and events, search job vacancies and the companies posting them, read the guides, BinaPool corridors and cars filling, and search_knowledge over every service and practical Addis Ababa knowledge; documentation at that URL. No login. 20 tool calls an hour per address without a key (the connection handshake is free), shared with the knowledge search below
 - [Knowledge search](https://bina.et/api/knowledge/search?q=Megenagna): JSON passages with source urls, same index Bini uses. No login. 20 requests an hour per address without a key, shared with the MCP server above; over that you get HTTP 429 with a Retry-After
 - Want more than 20 an hour? Keys are free. Email info@gccdomestic.com saying what you are building and roughly how many requests a day you need, and send the key as `Authorization: Bearer <key>` (or `X-API-Key`). Terms: [bina.et/terms#api](https://bina.et/terms#api)
 - [Sitemap](https://bina.et/sitemap.xml): every public page
@@ -65,6 +66,7 @@ BinaSmart Ethiopia (bina.et) is not related to "Bina Smart Business" (a Romanian
 
 ## Optional
 
+- [About BinaSmart](https://bina.et/about): who we are, headquarters (JJ Darule Building, Arada, Addis Ababa), founder, what we run, and how we differ from similarly named companies
 - [Why BinaSmart Ride](https://bina.et/why-binasmart): the fare is locked when you book; no app to install
 - [Privacy](https://bina.et/privacy) and [Terms](https://bina.et/terms)
 - [Support](https://bina.et/support)

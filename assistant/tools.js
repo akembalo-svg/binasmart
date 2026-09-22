@@ -33,6 +33,24 @@ const DEFS = [
       limit: { type: 'number', description: 'How many to return, 1-10, default 6' } } } },
   { name: 'watch_channels', description: 'BinaWatch (bina.et/watch): live Ethiopian TV channels, FM radio stations (Sheger FM, etc.), series playlists and kids channels, each with a direct open link. Call it for any request to watch, listen, open, play a TV channel, radio station, series or drama; answer with the openUrl so the user taps once. Never send users to outside websites for TV or radio.',
     parameters: { type: 'object', properties: { q: { type: 'string', description: 'channel, station or series name, e.g. "Sheger", "EBS", "ደራሽ"; empty = list all' }, kind: { type: 'string', enum: ['tv', 'radio', 'series', 'kids', 'all'] } } } },
+  { name: 'search_jobs', description: 'Search open job vacancies in Ethiopia on BinaSmart (bina.et/jobs): by keyword, field of work or city. Returns the job title, the company, the city, the deadline and the bina.et link. Use it whenever someone asks about work, a vacancy, hiring, "ሥራ አለ?", or names a profession. Thousands of vacancies, refreshed every morning. Never invent a vacancy this tool did not return.',
+    parameters: { type: 'object', properties: {
+      q: { type: 'string', description: 'Keyword: a job title, a skill or a company, in Amharic or English' },
+      field: { type: 'string', enum: ['banking', 'accounting', 'engineering', 'it', 'health', 'education', 'sales', 'ngo', 'logistics', 'admin', 'hospitality', 'construction', 'agriculture', 'legal', 'security', 'media'], description: 'Field of work' },
+      city: { type: 'string', description: 'City, e.g. Addis Ababa, Adama, Hawassa' },
+      limit: { type: 'number', description: 'How many to return, 1-10, default 6' } } } },
+  { name: 'post_job', description: 'Send an employer\'s vacancy to BinaSmart to be published, free. Use ONLY when someone says they want to advertise a job they are hiring for. It does NOT publish: the vacancy goes to the BinaSmart team, a person checks it, and it appears on bina.et within a few hours. Tell the user exactly that - never tell them it is live. Collect the company name and the job title first (both required), and ask for the city, how to apply and a short description before calling. If the person cannot give a company name, do not call this tool.',
+    parameters: { type: 'object', required: ['employerName', 'title'], properties: {
+      employerName: { type: 'string', description: 'The hiring company, as the employer gives it' },
+      title: { type: 'string', description: 'The job title' },
+      city: { type: 'string' },
+      jobType: { type: 'string', enum: ['full-time', 'part-time', 'contract', 'internship', 'temporary'] },
+      salary: { type: 'string', description: 'Only if the employer states one' },
+      deadline: { type: 'string', description: 'Closing date, YYYY-MM-DD, only if stated' },
+      summary: { type: 'string', description: 'One or two lines about the job' },
+      bodyHtml: { type: 'string', description: 'Duties, requirements and experience, in the employer\'s own words' },
+      howToApply: { type: 'string', description: 'Email, office address or application link' },
+      submitter: { type: 'string', description: 'Who is posting it, if they say' } } } },
   { name: 'remember', description: 'Save something about this user for next time: their name, phone, preferred language, home or work place, or a short note. For home/work pass the place NAME as value; this tool finds the coordinates itself, so do NOT call search_places first. Call it whenever the user says "remember", "my name is", "my home is", "my work is", "ቤቴ … ነው", "ስሜ … ነው", "manni koo …" — one call per fact.',
     parameters: { type: 'object', properties: { field: { type: 'string', enum: ['name', 'phone', 'lang', 'home', 'work', 'notes'] }, value: { type: 'string' }, lat: { type: 'number' }, lng: { type: 'number' } }, required: ['field', 'value'] } },
   { name: 'contact_team', description: 'Hand the conversation to the BinaSmart team (a person) with a short summary, when the user asks for a human, has a complaint you cannot resolve, or needs something only the team can do (pricing for businesses, a refund, a partner request). Tell the user the team will reply on this chat or on WhatsApp.',
@@ -139,6 +157,30 @@ function makeExecutor(ctx) {
       if (want('kids')) for (const c of data.kids || []) if (hit(c.name) || hit(c.nameAm) || hit(c.id)) out.push({ kind: 'kids', name: c.name, nameAm: c.nameAm, openUrl: base + '?open=kids/' + c.id });
       if (want('series')) for (const s of data.series || []) if (hit(s.title) || hit(s.titleAm) || hit(s.id)) out.push({ kind: 'series', name: s.title, nameAm: s.titleAm, genre: s.kind, openUrl: base + '?open=series/' + s.id });
       return { count: out.length, items: out.slice(0, 12), allUrl: base, note: out.length ? 'Give the openUrl; it opens inside BinaWatch (free, Ethiopian content only).' : 'Not on BinaWatch; say so and offer the full list at /watch. Do not link outside sites.' };
+    },
+    async search_jobs({ q, field, city, limit }) {
+      const qs = new URLSearchParams();
+      if (q) qs.set('q', String(q).slice(0, 60));
+      if (field) qs.set('field', String(field).slice(0, 20));
+      if (city) qs.set('city', String(city).slice(0, 40));
+      qs.set('limit', String(Math.min(Math.max(Number(limit) || 6, 1), 10)));
+      const d = await api('GET', '/api/jobs/search?' + qs.toString());
+      if (d.error) return d;
+      if (!d.jobs || !d.jobs.length) return { results: [], note: 'No open vacancy matches that right now. All vacancies: https://bina.et/jobs' };
+      return { results: d.jobs, note: 'Open vacancies on bina.et. BinaSmart never charges a job seeker; an advert that asks for a fee is a scam.' };
+    },
+    // Collects a vacancy; it does NOT publish one. jobs/submit.js explains why a person approves first.
+    async post_job(a) {
+      const body = {};
+      for (const k of ['employerName', 'title', 'city', 'jobType', 'salary', 'deadline', 'summary', 'bodyHtml', 'howToApply', 'submitter']) {
+        if (a[k]) body[k] = String(a[k]).slice(0, k === 'bodyHtml' ? 8000 : 300);
+      }
+      body.source = 'bini';
+      if (!body.employerName || !body.title) return { error: 'employerName and title are required — ask the employer for the company name and the job title' };
+      const d = await api('POST', '/api/jobs/submit', body);
+      if (d.error) return d;
+      return { ok: true, status: 'pending_review',
+        tell_the_user: 'It has been sent to the BinaSmart team. A person checks every advert before it goes on the board — usually within a few hours — and it is free.' };
     },
     async remember({ field, value, lat, lng }) {
       if (!ctx.memory || !ctx.memory.persistent) return { ok: false, note: 'This channel has no stable identity; nothing saved. Suggest the Telegram bot @bina_smart_bot for memory.' };
