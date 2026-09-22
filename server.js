@@ -1543,7 +1543,16 @@ function cardFor(slug){
     return { full: '/static/' + full, thumb: fs.existsSync(require('path').join(dir, thumb)) ? '/static/' + thumb : '/static/' + full };
   } catch (e) { return null; }
 }
-function ogFor(slug, fallback){ try { return fs.existsSync(require('path').join(__dirname,'public','og-'+slug+'.png')) ? 'https://bina.et/static/og-'+slug+'.png' : fallback; } catch(e){ return fallback; } }
+// The card's url carries the file's own timestamp. Telegram, Facebook and WhatsApp cache an
+// og:image by URL for weeks, so a redrawn card kept showing the old picture (owner, 22 Sep 2026:
+// "still not fix og"). With ?v=<mtime> a redraw IS a new url, and the next fetch gets the new
+// picture. It does not purge what a platform already cached - for Telegram, send the link to
+// @WebpageBot - but it stops the problem recurring.
+function ogFor(slug, fallback){ try {
+  const f = require('path').join(__dirname,'public','og-'+slug+'.png');
+  if (!fs.existsSync(f)) return fallback;
+  return 'https://bina.et/static/og-'+slug+'.png?v=' + Math.floor(fs.statSync(f).mtimeMs/1000);
+} catch(e){ return fallback; } }
 function newsShell({ title, desc, canonical, extraHead = '', body, active = 'news', ogImage = 'https://bina.et/static/bina-news.png' }) {
   return `<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>${escH(title)}</title><meta name="description" content="${escH(desc)}"><link rel="canonical" href="${canonical}">
@@ -1805,8 +1814,14 @@ fastify.register(require('./jobs/ops-candidates'), { prisma, OWNER_KEY });
 fastify.register(require('./jobs/submit'), { prisma, limiter: hotelLimiter, OWNER_KEY });
 // The employer-facing side of that queue: bina.et/jobs/post, free, five required fields.
 fastify.register(require('./jobs/post-form'), { shell: newsShell, escH });
+// "Show us your system" - the first contact for the portal-copilot service (ai/assessment.js).
+// Licensed organisations only, and we promise an assessment rather than a delivery date.
+fastify.register(require('./ai/assessment'), { prisma, limiter: hotelLimiter, OWNER_KEY });
 fastify.register(require('./jobs/cv-build'), { prisma, limiter: hotelLimiter,
   apiKey: process.env.GEMINI_API_KEY || '', normPhone: require('./jobs/apply').normPhone });
+// "12 vacancies match your CV" - the page a job seeker lands on the moment after they apply, while they
+// are still reading (jobs/matches.js). It shows vacancies and the reason for each, and no personal data.
+fastify.register(require('./jobs/matches'), { prisma, shell: newsShell });
 
 // Section marks and colours (brand/sections.js): each hub carries its own badge instead of an emoji
 // watermark, and the colour tells a returning reader where they are before they read a word.

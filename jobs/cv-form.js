@@ -36,6 +36,7 @@ const L = {
     share: 'ሲቪዬ በተመሳሳይ የሥራ ዘርፍ ላሉ ሌሎች ቀጣሪዎችም ይላክ',
     send: 'ላክ', build: 'ሲቪዬን ይሠራ', sending: 'እየተላከ…', building: 'ሲቪዎ እየተሠራ ነው…',
     ok: '✅ ደርሷል። ሲቪዎ ወደዚህ ቀጣሪ ይተላለፋል።',
+    match: '🔎 ከሲቪዎ ጋር የሚስማሙ ሌሎች ክፍት የሥራ ቦታዎችን ይመልከቱ',
     okWide: '✅ ደርሷል። ሲቪዎ ወደዚህ ቀጣሪ፣ እንዲሁም በዚሁ ዘርፍ ወደሚቀጥሩ ሌሎች ድርጅቶች ይተላለፋል።',
     okBuilt: '✅ ሲቪዎ ተሠርቷል፤ ደርሶናል።',
     dl: '⬇️ ሲቪዎን ያውርዱ (PDF)',
@@ -66,6 +67,7 @@ const L = {
     share: 'Also send my CV to other employers hiring in the same field',
     send: 'Send', build: 'Build my CV', sending: 'Sending…', building: 'Writing your CV…',
     ok: '✅ Received. Your CV will be passed to this employer.',
+    match: '🔎 See other vacancies that match your CV',
     okWide: '✅ Received. Your CV will be passed to this employer and to others hiring in the same field.',
     okBuilt: '✅ Your CV is ready, and we have it.',
     dl: '⬇️ Download your CV (PDF)',
@@ -166,7 +168,7 @@ function cvForm({ job, lang = 'am', escH, main = false }) {
   (function(){
     var box=document.querySelector('.cvbox'); if(!box) return;
     var T=${JSON.stringify({ sending: t.sending, building: t.building, send: t.send, build: t.build,
-      ok: t.ok, okWide: t.okWide, okBuilt: t.okBuilt, dl: t.dl, keep: t.keep, err: t.err })};
+      ok: t.ok, okWide: t.okWide, okBuilt: t.okBuilt, dl: t.dl, keep: t.keep, match: t.match, err: t.err })};
     var JOB=${JSON.stringify(job.id)};
 
     box.querySelectorAll('.cvtab').forEach(function(b){
@@ -206,8 +208,9 @@ function cvForm({ job, lang = 'am', escH, main = false }) {
       r.onload=function(){
         post('/api/jobs/apply',{ jobId:JOB, name:E.name.value, phone:E.phone.value, city:E.city.value,
           category:E.category.value, cv:String(r.result).split(',')[1]||'', cvMime:file.type||'application/pdf',
-          shareWider:E.shareWider.checked }, msg, btn, T.send, function(){
-            done(f, msg, E.shareWider.checked?T.okWide:T.ok);
+          shareWider:E.shareWider.checked }, msg, btn, T.send, function(d){
+            done(f, msg, (E.shareWider.checked?T.okWide:T.ok)+
+              (d&&d.matches?'<br><a href="'+d.matches+'">'+T.match+'</a>':''));
           });
       };
       r.onerror=function(){ fail(msg,btn,T.send); };
@@ -226,7 +229,8 @@ function cvForm({ job, lang = 'am', escH, main = false }) {
         history:E.history.value, skills:E.skills.value, languages:E.languages.value,
         shareWider:E.shareWider.checked }, msg2, btn, T.build, function(d){
           done(b2, msg2, (E.shareWider.checked?T.okWide:T.okBuilt)+
-            '<br><a href="'+d.pdf+'" target="_blank" rel="noopener">'+T.dl+'</a>');
+            '<br><a href="'+d.pdf+'" target="_blank" rel="noopener">'+T.dl+'</a>'+
+            (d.matches?'<br><a href="'+d.matches+'">'+T.match+'</a>':''));
         });
     });
   })();

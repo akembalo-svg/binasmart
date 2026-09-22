@@ -12,6 +12,7 @@
 //   · a candidate who did not tick the box is marked as such, in red, and cannot be sent to anyone but
 //     the employer whose vacancy they applied for.
 const fs = require('fs');
+const { candidatesFor } = require('./match');
 
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const ago = d => {
@@ -78,6 +79,7 @@ module.exports = function opsCandidates(fastify, { prisma, OWNER_KEY }) {
         </div>
         <div class="row">
           <a class="btn" href="/ops/candidates/${c.id}/cv?key=${esc(key)}" target="_blank">⬇ CV</a>
+          <a class="btn" href="/jobs/matches/${c.id}?lang=en" target="_blank">🔎 matching vacancies</a>
           <input id="to-${c.id}" placeholder="sent to (company)">
           <button class="btn go" onclick="rec('${c.id}')">Record</button>
         </div>
@@ -120,6 +122,51 @@ module.exports = function opsCandidates(fastify, { prisma, OWNER_KEY }) {
           .catch(function(){ alert('failed'); });
       }
       </script>
+      </body></html>`);
+  });
+
+  // The other direction: an employer asks "who have you got for this post?" - jobs/match.js scores every
+  // CV we may show against one vacancy, so the answer is a list to read rather than a promise to look.
+  // Consent still decides: a CV that did not tick the box appears only for the vacancy it was sent for.
+  fastify.get('/ops/job-candidates', async (req, reply) => {
+    if (!guard(req, reply)) return;
+    const key = String(req.query.key || '');
+    const ref = String(req.query.job || '').trim();
+    const job = ref ? await prisma.job.findFirst({
+      where: { OR: [{ slug: ref }, { id: ref }] },
+      include: { employer: { select: { name: true } } },
+    }).catch(() => null) : null;
+
+    const found = job ? await candidatesFor(prisma, job, { limit: 30 }) : [];
+    const row = m => `<div class="c">
+      <div class="hd"><div><b>${esc(m.candidate.name)}</b>
+        <span class="mut">· ${esc(m.candidate.city || '—')}${m.candidate.category ? ' · ' + esc(m.candidate.category) : ''}${m.candidate.years != null ? ' · ' + m.candidate.years + 'y' : ''}</span></div>
+        <span class="mut">${m.candidate.jobId === job.id ? 'applied for this' : 'score ' + m.score}</span></div>
+      ${m.candidate.summary ? `<p>${esc(m.candidate.summary)}</p>` : '<p class="mut">CV not read yet.</p>'}
+      <div class="mut sm">${m.reasons.join(' · ') || 'no strong reason'}${m.candidate.shareWider ? '<b class="ok"> · may be sent to other employers</b>' : '<b class="no"> · this employer only</b>'}</div>
+      <div class="row"><a class="btn" href="/ops/candidates/${m.candidate.id}/cv?key=${esc(key)}" target="_blank">⬇ CV</a>
+        <a class="btn" href="tel:${esc(m.candidate.phone)}">${esc(m.candidate.phone)}</a></div></div>`;
+
+    reply.type('text/html').send(`<!doctype html><html><head><meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+      <title>Candidates for a vacancy · BinaSmart</title><style>
+      body{font-family:system-ui,-apple-system,"Noto Sans Ethiopic",sans-serif;background:#f5f6f8;margin:0;padding:16px;color:#111}
+      h1{font-size:19px;margin:0 0 4px} .mut{color:#667} .sm{font-size:12.5px} .ok{color:#047857} .no{color:#b45309}
+      .c{background:#fff;border:1px solid #e3e6ec;border-radius:14px;padding:13px 15px;margin:10px 0;max-width:720px}
+      .hd{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+      p{margin:7px 0;line-height:1.5} .row{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+      form{display:flex;gap:6px;margin:12px 0;max-width:720px} input{border:1px solid #ccd;border-radius:9px;padding:8px 11px;font:inherit;flex:1}
+      .btn{border:1px solid #ccd;background:#fff;border-radius:999px;padding:8px 15px;font-weight:700;font-size:13px;text-decoration:none;color:#111;cursor:pointer}
+      .go{background:#1e3a8a;color:#fff;border-color:#1e3a8a} a{color:#1e3a8a}
+      </style></head><body>
+      <h1>${job ? 'Candidates for ' + esc(job.title) : 'Candidates for a vacancy'}</h1>
+      <div class="mut sm">${job ? esc(job.employer.name) + ' · ' + esc(job.city || '') : 'Paste a vacancy slug (the last part of its bina.et/jobs/… address) or its id.'}</div>
+      <form method="get"><input type="hidden" name="key" value="${esc(key)}">
+        <input name="job" value="${esc(ref)}" placeholder="vacancy slug or id"><button class="btn go">Find</button></form>
+      ${job ? (found.length ? `<div class="mut sm">${found.length} CV${found.length === 1 ? '' : 's'} worth reading</div>` + found.map(row).join('')
+                            : '<p class="mut">No CV on file matches this vacancy yet.</p>')
+            : ''}
+      <p><a href="/ops/candidates?key=${encodeURIComponent(key)}">← all CVs</a></p>
       </body></html>`);
   });
 

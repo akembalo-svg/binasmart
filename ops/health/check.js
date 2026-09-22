@@ -16,6 +16,18 @@ const path = require('path');
 const { execSync } = require('child_process');
 require('dotenv').config({ path: path.join(__dirname, '..', '..', '.env') });
 
+// The MCP probe below is a paying caller like any other: anonymous callers get 20 requests per UTC hour
+// per address (api/gate.js), shared by /mcp and /api/knowledge/search, and this cron alone spends up to
+// 24 of them an hour — so it used to run itself out of allowance and report the MCP server down. It now
+// presents the internal monitor key from the keystore, which has its own quota and leaves the public
+// anonymous allowance untouched. No key found: the probe still runs, just anonymously, as before.
+const MONITOR_KEY = (() => {
+  try { return fs.readFileSync('/root/storage/api/monitor.key', 'utf8').trim() || ''; } catch { return ''; }
+})();
+const mcpHeaders = () => Object.assign(
+  { 'content-type': 'application/json', accept: 'application/json, text/event-stream' },
+  MONITOR_KEY ? { authorization: 'Bearer ' + MONITOR_KEY } : {});
+
 const DRY = process.argv.includes('--dry-run');
 const STATE = '/root/storage/bina-health.json';
 const TIMEOUT_MS = 8000;
@@ -51,12 +63,12 @@ const CHECKS = {
   },
   'MCP server': async () => {
     const r = await fetchJson('https://bina.et/mcp', { method: 'POST',
-      headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' },
+      headers: mcpHeaders(),
       body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} }) });
     // Streamable HTTP answers as an SSE frame, so json may be null; fall back to the raw text.
     if (r.json && r.json.result && r.json.result.tools) return r.json.result.tools.length >= 9 ? null : 'only ' + r.json.result.tools.length + ' tools';
     const raw = await (await fetch('https://bina.et/mcp', { method: 'POST',
-      headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' },
+      headers: mcpHeaders(),
       body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} }) })).text();
     const n = (raw.match(/"name":"[a-z_]+"/g) || []).length;
     return n >= 9 ? null : 'tools/list returned ' + n + ' tools (HTTP ' + r.status + ')';

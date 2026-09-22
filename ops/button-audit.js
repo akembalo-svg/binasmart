@@ -115,6 +115,12 @@ for (const f of pages) {
     const type = (attr(c.tag, 'type') || '').toLowerCase();
     if (type === 'submit' || c.kind === 'input') continue;                    // the form handles it
 
+    // A disabled button is not a dead button. The pool corridor list ends with
+    // `<button type="button" disabled>🏁 destination</button>` - a label shaped like a button, which
+    // cannot be clicked and therefore must not have a handler. Reported as dead every week until
+    // 2026-09-20, which is how a real dead button would have been lost in the noise.
+    if (/(^|\s)disabled(\s|=|$)/i.test(c.tag)) continue;   // c.tag is the attribute list only, no trailing ">"
+
     const id = attr(c.tag, 'id');
     if (id && js.includes(id)) continue;                                      // something listens for it
 

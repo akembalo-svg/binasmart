@@ -1,4 +1,7 @@
 'use strict';
+
+// A website typed without a scheme would resolve against bina.et; make it absolute before it is linked.
+const absUrl = w => /^https?:\/\//i.test(String(w).trim()) ? String(w).trim() : 'https://' + String(w).trim().replace(/^\/+/, '');
 // bina.et/jobs — vacancies, and the employers behind them.
 //
 //   GET  /jobs                 open vacancies, soonest deadline first
@@ -147,7 +150,7 @@ function jobLd(j, e, escH) {
     description: (j.bodyHtml || j.summary || '').slice(0, 5000),
     datePosted: new Date(j.publishedAt).toISOString().slice(0, 10),
     hiringOrganization: { '@type': 'Organization', name: e.name,
-      ...(e.website ? { sameAs: e.website } : {}), ...(e.logoUrl ? { logo: 'https://bina.et' + e.logoUrl } : {}) },
+      ...(e.website ? { sameAs: absUrl(e.website) } : {}), ...(e.logoUrl ? { logo: 'https://bina.et' + e.logoUrl } : {}) },
     jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress',
       addressLocality: j.city, addressCountry: 'ET', ...(e.address ? { streetAddress: e.address } : {}) } },
     ...(j.deadline ? { validThrough: new Date(j.deadline).toISOString().slice(0, 10) } : {}),
@@ -242,6 +245,18 @@ module.exports = async function jobRoutes(fastify, { prisma, shell, escH, amDate
   // is updated every morning, and a reader who follows the channel hears about a vacancy the day it
   // opens instead of the week it closes. @binasmart is the CHANNEL (BINA_TG_CHANNEL); @Bina_smart is
   // the chat people write to - different accounts, so the link is written out rather than guessed at.
+  // On a category page the band subscribes to THAT field; on the board it opens the chooser. A deep
+  // link needs no login and no form - one tap and they are subscribed.
+  const alertLink = cat => 'https://t.me/bina_smart_bot?start=jobs_' + (cat && BY_SLUG.get(cat) ? cat : 'all');
+  const tgAlert = (lang, cat) => `<a href="${alertLink(cat)}" target="_blank" rel="noopener" class="sans tgband">
+      <span class="tgi">🔔</span>
+      <span class="tgt"><b>${lang === 'en'
+        ? (cat && BY_SLUG.get(cat) ? 'Get every new ' + escH(catLabel(cat, 'en')) + ' vacancy' : 'Get every new vacancy')
+        : (cat && BY_SLUG.get(cat) ? 'አዲስ ' + escH(catLabel(cat, 'am')) + ' ሥራ ሲወጣ ይወቁ' : 'አዲስ ሥራ ሲወጣ ይወቁ')}</b>
+      <small>${lang === 'en' ? 'One tap. We message you every morning. Free, stop any time.' : 'በአንድ ጠቅታ። በየጠዋቱ እንነግርዎታለን። ነጻ፣ በፈለጉ ጊዜ ያቁሙ።'}</small></span>
+      <span class="tggo">${lang === 'en' ? 'Notify me' : 'አሳውቀኝ'} →</span>
+    </a>`;
+
   const tgBand = lang => `<a href="https://t.me/binasmart" target="_blank" rel="noopener" class="sans tgband">
       <span class="tgi">✈️</span>
       <span class="tgt"><b>${lang === 'en' ? 'Every new vacancy on Telegram' : 'አዲስ ሥራ በቴሌግራም ይከታተሉ'}</b>
@@ -273,7 +288,15 @@ module.exports = async function jobRoutes(fastify, { prisma, shell, escH, amDate
 // card; ops/og/section-cards.js draws them. Falling back to the section card is deliberate: a category
 // we have not drawn yet must not silently borrow the news one.
 const OG = 'https://bina.et/static/';
-const ogJobs = cat => OG + (cat && BY_SLUG.get(cat) ? 'og-jobs-category-' + cat + '.png' : 'og-section-jobs.png');
+// ?v=<file mtime>: platforms cache an og:image by url for weeks, so a redrawn card must arrive at a new
+// url or nobody ever sees it. Falls back to the plain url if the file is missing.
+const ogJobs = cat => {
+  const name = (cat && BY_SLUG.get(cat)) ? 'og-jobs-category-' + cat + '.png' : 'og-section-jobs.png';
+  try {
+    const f = require('path').join(__dirname, '..', 'public', name);
+    return OG + name + '?v=' + Math.floor(require('fs').statSync(f).mtimeMs / 1000);
+  } catch (e) { return OG + name; }
+};
 
   // One list, two doors: /jobs with filters, and /jobs/category/<slug> - a page per field of work,
   // which is what people actually search for ("accounting jobs in ethiopia", "የባንክ ክፍት የሥራ ቦታ") and
@@ -339,7 +362,7 @@ const ogJobs = cat => OG + (cat && BY_SLUG.get(cat) ? 'og-jobs-category-' + cat 
       </form>
       ${(q || city || type) ? `<p class="sans" style="margin:0 0 12px;color:var(--mut);font-size:13.5px">${jobs.length} ${lang === 'en' ? 'result(s)' : 'ውጤት'}</p>` : ''}
       ${jobs.length
-        ? jobs.map((j, i) => jobCard(j, req) + (i === 4 && jobs.length > 6 ? tgBand(lang) : '')).join('')
+        ? jobs.map((j, i) => jobCard(j, req) + (i === 4 && jobs.length > 6 ? tgAlert(lang, catDef && catDef.slug) : '')).join('')
           + (jobs.length > 4 ? tgBand(lang) : '')
         : empty}
       ${!showClosed && closedCount ? `<p class="sans" style="text-align:center;margin:26px 0 4px;font-size:13.5px"><a href="/jobs${qs(req, ['show=closed'])}" style="color:var(--mut)">${t.viewClosed(closedCount)}</a></p>` : ''}
@@ -461,7 +484,7 @@ const ogJobs = cat => OG + (cat && BY_SLUG.get(cat) ? 'og-jobs-category-' + cat 
              </div>`
           : `<div style="margin-top:8px;color:var(--mut);font-size:13px">${t.unverified}</div>`}
         ${e.phone ? `<div style="margin-top:8px">📞 <a href="tel:${escH(e.phone)}">${escH(e.phone)}</a></div>` : ''}
-        ${e.website ? `<div>🔗 <a href="${escH(e.website)}" target="_blank" rel="noopener">${escH(e.website)}</a></div>` : ''}
+        ${e.website ? `<div>🔗 <a href="${escH(absUrl(e.website))}" target="_blank" rel="noopener">${escH(e.website)}</a></div>` : ''}
         <div style="margin-top:10px"><a href="/employer/${e.slug}${qs(req)}" style="font-weight:700">${t.allJobs}</a></div>
       </div>
 
@@ -503,7 +526,7 @@ const ogJobs = cat => OG + (cat && BY_SLUG.get(cat) ? 'og-jobs-category-' + cat 
           : `<div style="margin-top:6px;color:var(--mut);font-size:13px">${t.unverified}</div>`}
         ${e.phone ? `<div style="margin-top:8px">📞 <a href="tel:${escH(e.phone)}">${escH(e.phone)}</a></div>` : ''}
         ${e.email ? `<div>✉️ ${escH(e.email)}</div>` : ''}
-        ${e.website ? `<div>🔗 <a href="${escH(e.website)}" target="_blank" rel="noopener">${escH(e.website)}</a></div>` : ''}
+        ${e.website ? `<div>🔗 <a href="${escH(absUrl(e.website))}" target="_blank" rel="noopener">${escH(e.website)}</a></div>` : ''}
       </div>
       ${open.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding-bottom:8px">${t.openVac}</h2>${open.map(j => `<div class="t-card"><div><h3><a href="/jobs/${j.slug}">${escH(j.titleAm || j.title)}</a></h3><div class="t-tags sans"><span class="t-tag">📍 ${escH(j.city)}</span>${typePill(j.jobType, lang)}${dlPill(j.deadline, lang)}</div></div></div>`).join('')}` : '<div class="empty"><div class="big">💼</div><h3>${t.noJobs}</h3></div>'}
       ${shut.length ? `<p class="sans" style="margin-top:20px;color:var(--mut);font-size:13.5px">🔒 ${shut.length} ${lang === 'en' ? 'closed' : 'የተዘጉ ማስታወቂያዎች'}</p>` : ''}

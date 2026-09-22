@@ -94,7 +94,7 @@ module.exports = function applyRoutes(fastify, { prisma, limiter, readCv }) {
       }).catch(() => {});
     }
 
-    return { ok: true, id: cand.id };
+    return { ok: true, id: cand.id, matches: '/jobs/matches/' + cand.id };
   });
 };
 

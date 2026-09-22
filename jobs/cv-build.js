@@ -212,7 +212,7 @@ module.exports = function cvBuildRoutes(fastify, { prisma, limiter, apiKey, norm
       deleteAfter: new Date(Date.now() + KEEP_DAYS * 86400000),
     } });
 
-    return { ok: true, id: cand.id, pdf: '/cv/' + cand.id + '.pdf?k=' + token };
+    return { ok: true, id: cand.id, pdf: '/cv/' + cand.id + '.pdf?k=' + token, matches: '/jobs/matches/' + cand.id };
   });
 
   // Their own copy. The token is in the row; without it this is a 404, not a listing.

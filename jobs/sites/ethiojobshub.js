@@ -87,14 +87,29 @@ async function fetchImage(src) {
   return null;
 }
 
+// A line following the "Position 2:" marker is not always a post. The same announcements run
+// "Position 2: Cashier" and then "Fluency in Amharic is required." or "Qualification and Experience",
+// and both arrived on the board as vacancies with nobody hiring for them. A job title names a role; it
+// does not make a statement, so a finite verb or a bare count disqualifies it, and a requirements
+// heading welded onto a real title is cut off rather than thrown away.
+const NOT_A_TITLE = /\b(?:is|are|was|were|must|should|shall|will|can|has|have)\b|^\d+\s*(?:position|vacanc)/i;
+const TITLE_TAIL = /\s*[-–:]?\s*(?:qualifications?\s*(?:and|&)\s*experience|requirements?|job\s*requirements?|qualifications?)\s*$/i;
+
+function cleanPositionTitle(raw) {
+  let t = String(raw).replace(/[\s\-–:]+$/, '').replace(/\s{2,}/g, ' ').trim();
+  t = t.replace(TITLE_TAIL, '').replace(/\.+$/, '').trim();
+  if (NOT_A_TITLE.test(t)) return null;
+  return t;
+}
+
 // "Position 1: Senior IT Officer (Re-advertised)" → the separate vacancies inside one announcement.
 function splitPositions(text) {
   const re = /^\s*(?:position|vacancy|job\s*title)\s*(?:no\.?\s*)?\d*\s*[:\-–]\s*(.+)$/gim;
   const marks = [];
   let m;
   while ((m = re.exec(text)) && marks.length < MAX_POSITIONS) {
-    const title = m[1].replace(/[\s\-–:]+$/, '').replace(/\s{2,}/g, ' ').trim();
-    if (title.length >= 3 && title.length <= 110) marks.push({ title, at: m.index, end: re.lastIndex });
+    const title = cleanPositionTitle(m[1]);
+    if (title && title.length >= 3 && title.length <= 110) marks.push({ title, at: m.index, end: re.lastIndex });
   }
   if (marks.length < 2) return [];                       // a single marker is a heading, not a list
   return marks.map((mk, i) => ({
@@ -174,3 +189,4 @@ module.exports.employerFrom = employerFrom;
 module.exports.howToApply = howToApply;
 module.exports.deadlineFrom = deadlineFrom;
 module.exports.splitPositions = splitPositions;
+module.exports.cleanPositionTitle = cleanPositionTitle;

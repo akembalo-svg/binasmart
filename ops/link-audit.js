@@ -82,8 +82,15 @@ function isRealLink(raw) {
   // footer's link table directly and count every entry as appearing on every page.
   try {
     const fjs = await text(BASE + '/static/bina-footer.js');
-    for (const m of fjs.matchAll(/\[\s*'[^']*',\s*'[^']*',\s*'([^']+)'\s*\]/g)) {
-      const u = new URL(m[1], BASE).toString().replace(/#.*$/, '');
+    // Two different tables live in that file and they are not shaped alike. A nav row is
+    // ['አማርኛ', 'English', '/url'] - the url is third. A social row is ['Facebook', 'https://…',
+    // '<path d="M14 8h3V4h…"/>'] - the url is SECOND and the third is SVG. Reading the third of both
+    // turned the icons' path data into links, and the audit reported /%3Cpath%20d=… as broken on every
+    // page, three times, every week (found 2026-09-20). Take whichever field actually looks like a url.
+    for (const m of fjs.matchAll(/\[\s*'[^']*',\s*'([^']*)',\s*'([^']+)'\s*\]/g)) {
+      const cand = [m[1], m[2]].find(v => /^(https?:\/\/|\/)/.test(v));
+      if (!cand) continue;
+      const u = new URL(cand, BASE).toString().replace(/#.*$/, '');
       if (!/^https?:/.test(u) || (ONLY_INTERNAL && !u.startsWith(BASE))) continue;
       if (!links.has(u)) links.set(u, new Set());
       links.get(u).add('(footer, every page)');

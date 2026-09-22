@@ -1,0 +1,8 @@
+[
+ { "title": "The AI platform built for Ethiopia.", "am": "የኢትዮጵያ AI መድረክ · አማርኛ · English · Oromoo", "url": "bina.et/ai",
+   "stats": ["22,000+|official passages", "46|government sectors", "96%|public-services test"], "out": "public/og-ai.png" },
+ { "title": "ለኢትዮጵያ የተሠራ የ AI መድረክ", "am": "ለመንግሥት ተቋማት፣ ለድርጅቶችና ለሕዝብ — በአማርኛ", "url": "bina.et/ai-am",
+   "stats": ["22,000+|ኦፊሴላዊ ክፍሎች", "46|የመንግሥት ዘርፎች", "96%|የፈተና ውጤት"], "out": "public/og-ai-am.png" },
+ { "title": "Your own AI assistant, on your own documents.", "am": "የራስዎ ሰነድ የሚያነብ የራስዎ AI ረዳት", "url": "bina.et/ai",
+   "stats": ["Amharic|English · Oromoo", "Free|to try"], "out": "public/og-ai-business.png" }
+]
