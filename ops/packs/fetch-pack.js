@@ -230,7 +230,21 @@ function stripPackBoilerplate(pages, site = null) {
 // filled and none holds a digit: a header names columns, it does not carry figures. A table whose first row fails
 // that, or whose rows do not all have the same number of cells (a header cell spanning two columns), is left
 // exactly as it was: guessing which column a figure belongs to is worse than the flat form.
+// A table rewritten this way also gets a lead-in, the first lines of its block, so the chunk that holds the table
+// says what the table is about even when the sentence that introduces it went into the previous chunk: the shed
+// lease table opened its chunk with "- Readymade sheds ..." and nothing on that chunk said "industry park lease",
+// so search never ranked it for "how much does it cost to rent a shed in an industrial park". The lead-in is built
+// only from text already on the page and adds no fact:
+//   - the nearest non-empty lines before the table (at most TABLE_LEAD_LINES of them, TABLE_LEAD_CHARS together),
+//     copied verbatim; a heading, a line of an earlier table and a line too long to fit end the walk back, and
+//   - "Table: <first header cell> by <the other header cells, comma-separated>", the header cells copied exactly.
+// The lead-in, the header line and the rows are one paragraph, with no blank line, so the chunker keeps them in
+// one chunk. A table tableRows leaves alone gets no lead-in. A block that is already tableRows output (the text
+// on disk that a --rerender reads) is recognised by parsing every row line back into its cells and writing it
+// again, and it gets its lead-in then; its lines before the header must be nothing or exactly the lead-in this
+// would write, or the block is left as it is. So running it twice changes nothing.
 const TABLE_CELL = /^(.*?)\s*\|$/;
+const TABLE_LEAD_LINES = 2, TABLE_LEAD_CHARS = 300;
 function tableCells(block) {
   const lines = String(block).split('\n').map(l => l.trim()).filter(Boolean);
   if (lines.length < 2) return null;
@@ -244,17 +258,81 @@ function tableRowLine(head, row) {
   if (!pairs.length) return row[0] || '';
   return (row[0] ? row[0] + ': ' : '') + pairs.join('; ');
 }
+const isTableHead = head => head.length >= 2 && head.every(c => c && c === c.trim() && !/[0-9]/.test(c));
+// A row line tableRowLine wrote, read back into its cells; null unless writing those cells gives the line again.
+function parseRowLine(head, line) {
+  const n = head.length;
+  const headAt = (s, from) => { for (let k = from; k < n; k++) if (s.startsWith(head[k] + ' ')) return k; return -1; };
+  const tries = [];
+  for (let i = line.indexOf(': '); i >= 0; i = line.indexOf(': ', i + 1)) tries.push([line.slice(0, i), line.slice(i + 2)]);
+  tries.push(['', line]);
+  for (const [row0, whole] of tries) {
+    let rest = whole, k = headAt(rest, 1);
+    if (k < 0) continue;
+    const cells = new Array(n).fill(''); cells[0] = row0;
+    while (k >= 0) {
+      rest = rest.slice(head[k].length + 1);
+      let end = rest.length, next = -1;
+      for (let i = rest.indexOf('; '); i >= 0; i = rest.indexOf('; ', i + 1)) {
+        const k2 = headAt(rest.slice(i + 2), k + 1);
+        if (k2 >= 0) { end = i; next = k2; break; }
+      }
+      cells[k] = rest.slice(0, end);
+      if (next < 0) break;
+      rest = rest.slice(end + 2); k = next;
+    }
+    if (tableRowLine(head, cells) === line) return cells;
+  }
+  return null;
+}
+// A block that is already tableRows output: { pre: the lines above the header, head, rows } or null.
+function rewrittenTable(block) {
+  const lines = String(block).split('\n');
+  for (let h = 0; h < lines.length - 1; h++) {
+    const head = lines[h].split(' | ');
+    if (!isTableHead(head)) continue;
+    const rows = lines.slice(h + 1).map(l => parseRowLine(head, l));
+    if (rows.every(Boolean)) return { pre: lines.slice(0, h), head, rows };
+  }
+  return null;
+}
+function tableLeadIn(out, tableAt, head) {
+  const ctx = [];
+  let chars = 0;
+  walk: for (let b = out.length - 1; b >= 0; b--) {
+    if (tableAt.has(b)) break;
+    const lines = String(out[b]).split('\n').map(l => l.trim()).filter(Boolean);
+    for (let k = lines.length - 1; k >= 0; k--) {
+      const l = lines[k];
+      if (/^#/.test(l) || /\|$/.test(l) || chars + l.length > TABLE_LEAD_CHARS) break walk;
+      ctx.unshift(l); chars += l.length;
+      if (ctx.length >= TABLE_LEAD_LINES) break walk;
+    }
+  }
+  return [...ctx, 'Table: ' + head[0] + ' by ' + head.slice(1).join(', ')];
+}
 function tableRows(text) {
   const blocks = String(text == null ? '' : text).split('\n\n');
-  const out = [];
+  const out = [], tableAt = new Set();
+  const emit = (head, rows, lead) => {
+    tableAt.add(out.length);
+    out.push([...lead, head.join(' | '), ...rows.map(r => tableRowLine(head, r)).filter(Boolean)].join('\n'));
+  };
   for (let i = 0; i < blocks.length;) {
     const head = tableCells(blocks[i]);
     const rows = [];
     let j = i + 1;
     if (head) for (; j < blocks.length; j++) { const c = tableCells(blocks[j]); if (!c || c.length !== head.length) break; rows.push(c); }
-    if (!head || !rows.length) { out.push(blocks[i]); i++; continue; }
-    if (!head.every(c => c && !/[0-9]/.test(c))) { for (let k = i; k < j; k++) out.push(blocks[k]); i = j; continue; }
-    out.push([head.join(' | '), ...rows.map(r => tableRowLine(head, r)).filter(Boolean)].join('\n'));
+    if (!head || !rows.length) {
+      const own = head ? null : rewrittenTable(blocks[i]);
+      if (own) {
+        const lead = tableLeadIn(out, tableAt, own.head);
+        if (!own.pre.length || own.pre.join('\n') === lead.join('\n')) { emit(own.head, own.rows, lead); i++; continue; }
+      }
+      out.push(blocks[i]); i++; continue;
+    }
+    if (!isTableHead(head)) { for (let k = i; k < j; k++) out.push(blocks[k]); i = j; continue; }
+    emit(head, rows, tableLeadIn(out, tableAt, head));
     i = j;
   }
   return out.join('\n\n');

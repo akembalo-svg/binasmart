@@ -19,11 +19,12 @@ const FLAT = [
   '- Readymade halls come with chairs.',
 ].join('\n\n');
 
-test('a table with a header row becomes the header line and one self-contained line per row', () => {
+test('a table with a header row becomes its lead-in, the header line and one self-contained line per row', () => {
   const out = P.tableRows(FLAT);
   assert.equal(out, [
     'Rent for the halls is as follows:',
-    'Hire Period | North & South Halls | All other Halls\n'
+    'Rent for the halls is as follows:\nTable: Hire Period by North & South Halls, All other Halls\n'
+      + 'Hire Period | North & South Halls | All other Halls\n'
       + 'Week 1 – 2: North & South Halls $7.25 per seat per day; All other Halls $6.0 per seat per day\n'
       + 'Week 3 – 5: All other Halls $6.5 per seat per day\n'
       + 'Week 6 – 9: North & South Halls $8.0 per seat per day; All other Halls $7 per seat per day',
@@ -126,4 +127,92 @@ test('the Amharic sidecar entry stamped with the page hash still applies after t
   assert.ok(md.includes('Week 6 – 9: North & South Halls $8.0 per seat per day'));
   assert.ok(md.includes('የአዳራሽ ኪራይ'), 'the Amharic title is kept');
   assert.equal(P.renderDoc(page(), site({ tableRows: true }), { today: '2026-09-22', pack: amPack, amHeaders: am }).includes('የአዳራሽ ኪራይ'), true);
+});
+
+// ---------- the lead-in ----------
+// The chunk that holds a table must say what the table is about. The lead-in is the nearest lines above the table,
+// copied verbatim, and "Table: <header> by <headers>", the header cells copied exactly: nothing else.
+const TABLE_ONLY = FLAT.split('\n\n').slice(1, 5);   // the four blocks of the hall table
+const INTRO = 'There are 2 kinds of hall hire; seated halls and open halls.';
+const START = '- Seated halls start at $6 per seat per day';
+const LED = ['## Halls', 'An older line that is not the nearest.', INTRO, START, ...TABLE_ONLY, 'After the table.'].join('\n\n');
+const HEAD_LINE = 'Table: Hire Period by North & South Halls, All other Halls';
+const tableBlock = out => out.split('\n\n').find(b => b.includes('Hire Period | North & South Halls | All other Halls'));
+
+test('lead-in: the two nearest lines above the table, copied verbatim, then the header template, in the table block', () => {
+  const block = tableBlock(P.tableRows(LED)).split('\n');
+  assert.deepEqual(block.slice(0, 4), [INTRO, START, HEAD_LINE, 'Hire Period | North & South Halls | All other Halls']);
+  assert.equal(block.length, 4 + 3, 'lead-in, header and the three rows are one paragraph');
+  assert.ok(P.tableRows(LED).startsWith('## Halls\n\nAn older line that is not the nearest.\n\n' + INTRO + '\n\n' + START + '\n\n'),
+    'the page text above the table is still there as it was');
+});
+
+test('lead-in: built only from page lines and header cells; every digit in it is in the lines it was copied from', () => {
+  const block = tableBlock(P.tableRows(LED)).split('\n');
+  const lead = block.slice(0, block.indexOf('Hire Period | North & South Halls | All other Halls'));
+  const sourceLines = LED.split('\n').map(l => l.trim());
+  const head = ['Hire Period', 'North & South Halls', 'All other Halls'];
+  for (const l of lead) {
+    if (l.startsWith('Table: ')) assert.equal(l, 'Table: ' + head[0] + ' by ' + head.slice(1).join(', '));
+    else assert.ok(sourceLines.includes(l), 'not a line of the page: ' + l);
+  }
+  const copied = lead.filter(l => !l.startsWith('Table: ')).join('\n');
+  for (const d of lead.join('\n').match(/[0-9]+(?:[.,][0-9]+)*/g) || []) assert.ok(copied.includes(d), 'digit run not on the page: ' + d);
+  assert.ok(!/[0-9]/.test(HEAD_LINE), 'the template line adds no figure');
+});
+
+test('lead-in: a heading ends the walk back, and a table with no text above it gets only the header template', () => {
+  const afterHeading = ['## Halls', ...TABLE_ONLY].join('\n\n');
+  assert.deepEqual(tableBlock(P.tableRows(afterHeading)).split('\n').slice(0, 2), [HEAD_LINE, 'Hire Period | North & South Halls | All other Halls']);
+  const atStart = TABLE_ONLY.join('\n\n');
+  assert.deepEqual(P.tableRows(atStart).split('\n').slice(0, 2), [HEAD_LINE, 'Hire Period | North & South Halls | All other Halls']);
+  const long = ['x'.repeat(400), ...TABLE_ONLY].join('\n\n');
+  assert.equal(tableBlock(P.tableRows(long)).split('\n')[0], HEAD_LINE, 'a line too long for the lead-in is not copied');
+});
+
+test('lead-in: it never reaches back into an earlier table', () => {
+  const two = [...TABLE_ONLY, 'The second table:', ...TABLE_ONLY].join('\n\n');
+  const blocks = P.tableRows(two).split('\n\n');
+  assert.equal(blocks.length, 3);
+  assert.deepEqual(blocks[2].split('\n').slice(0, 3), ['The second table:', HEAD_LINE, 'Hire Period | North & South Halls | All other Halls'],
+    'one line copied, then the walk stops at the earlier table');
+});
+
+test('lead-in: idempotent, and the one-row-per-line form without a lead-in gets it on the next run', () => {
+  for (const t of [FLAT, LED, TABLE_ONLY.join('\n\n')]) {
+    const once = P.tableRows(t);
+    assert.equal(P.tableRows(once), once);
+    assert.equal(P.tableRows(P.tableRows(once)), once);
+  }
+  const once = P.tableRows(LED);
+  const withoutLead = once.split('\n\n').map(b => b.includes(HEAD_LINE) ? b.split('\n').slice(3).join('\n') : b).join('\n\n');
+  assert.ok(!withoutLead.includes(HEAD_LINE));
+  assert.equal(P.tableRows(withoutLead), once, 'the earlier layout (842c190) is upgraded, not left or doubled');
+});
+
+test('lead-in: a block with other lines above its header is not taken for a table', () => {
+  const once = tableBlock(P.tableRows(LED));
+  const odd = 'Something else.\n\n' + 'A different line.\n' + once.split('\n').slice(3).join('\n');
+  assert.equal(P.tableRows(odd), odd);
+});
+
+test('lead-in: tables tableRows leaves alone get none', () => {
+  const noHeader = ['Intro line.', 'Week 1 – 2 |\n$7.25 per seat per day |\n$6.0 per seat per day |',
+    'Week 3 – 5 |\n$6.75 per seat per day |\n$6.5 per seat per day |'].join('\n\n');
+  const spanned = 'Intro line.\n\nKind of Fee |\nRate |\n\n1 |\nEntry fee |\n5% |\n\n2 |\nExit fee |\n2% |';
+  for (const t of [noHeader, spanned, 'Intro.\n\nHome |\nAbout us |']) {
+    assert.equal(P.tableRows(t), t);
+    assert.ok(!P.tableRows(t).includes('Table: '));
+  }
+});
+
+test('lead-in: the line-safe chunker keeps the lead-in and every row in one chunk', () => {
+  const { chunkDoc } = require(path.join(__dirname, '..', '..', 'knowledge', 'index.js'));
+  const filler = Array.from({ length: 6 }, (_, i) => 'Filler paragraph ' + 'about hall bookings and opening hours. '.repeat(5) + i);
+  const doc = P.tableRows([...filler, INTRO, START, ...TABLE_ONLY, ...filler].join('\n\n'));
+  const chunks = chunkDoc(doc, 'Test Hall Office — Halls', { lineSafe: true });
+  const holder = chunks.filter(c => c.text.includes('Hire Period | North & South Halls'));
+  assert.equal(holder.length, 1);
+  for (const l of [INTRO, START, HEAD_LINE, 'Week 1 – 2: North & South Halls $7.25', 'Week 6 – 9: North & South Halls $8.0'])
+    assert.ok(holder[0].text.includes(l), 'missing from the table chunk: ' + l);
 });
