@@ -118,6 +118,7 @@
     api('/api/cinema/venues').then(function (j) {
       var box = $('venues'); if (!box || !j.ok || !j.venues.length) return;
       var html = '<h2 style="margin-top:22px">ሲኒማ ቤቶች በአዲስ አበባ · Cinemas in Addis Ababa</h2><p class="sub">' + j.venues.length + ' ቦታዎች · ' + j.venues.length + ' venues. ሲኒማ ቤት ወይም አዘጋጅ ነዎት? <a href="/for-cinemas"><b>ትኬትዎን እዚህ ይሽጡ — በጅምር ወቅት ነፃ →</b></a> · Run a cinema or events? <a href="/for-cinemas">Sell tickets here, free during launch.</a></p>';
+      html += '<p class="sub" style="margin:-6px 0 10px">☎️ ስልክና አድራሻ ከሕዝባዊ ምንጮች የተወሰዱ ናቸው — ከመሄድዎ በፊት ያረጋግጡ። · Phone numbers and addresses come from public listings; check before you travel.</p>';
       j.venues.forEach(function (v) {
         var maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(v.name + ', Addis Ababa');
         html += '<div class="card" style="margin-bottom:10px;padding:12px 14px"><div style="display:flex;gap:10px;align-items:flex-start"><div style="flex:1;min-width:0"><div style="font-weight:900;font-size:15px">' + esc(v.nameAm || v.name) + '</div>'
@@ -125,7 +126,7 @@
           + (v.address ? '<div class="sub" style="margin-top:4px">📍 ' + esc(v.address) + '</div>' : '')
           + (v.notes ? '<div class="sub" style="margin-top:2px;font-size:12px">' + esc(v.notes) + '</div>' : '')
           + '</div>' + (v.nextShowAt ? '<span class="pill ok">🎟️ ትኬት አለ</span>' : (document.getElementById('prog-' + v.slug) ? '<a class="pill ok" href="#prog-' + esc(v.slug) + '" onclick="var d=document.getElementById(\'prog-' + esc(v.slug) + '\'); if(d){d.open=true;}">📅 ፕሮግራም</a>' : '<span class="pill mute">ትኬት በቅርቡ</span>')) + '</div>'
-          + '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">' + (v.phone ? '<a class="btn ghost sm" href="tel:' + esc(v.phone) + '">📞 ' + esc(v.phone) + '</a>' : '') + '<a class="btn ghost sm" href="' + maps + '" target="_blank" rel="noopener">🗺️ ካርታ · Map</a>' + (v.website ? '<a class="btn ghost sm" href="' + esc(v.website) + '" target="_blank" rel="noopener nofollow">🌐 ድረ-ገጽ</a>' : '') + '</div></div>';
+          + '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">' + (v.phone ? '<a class="btn ghost sm" href="tel:' + esc(v.phone) + '">📞 ' + esc(v.phone) + (v.phoneChecked ? ' ✓' : '') + '</a>' : '') + '<a class="btn ghost sm" href="' + maps + '" target="_blank" rel="noopener">🗺️ ካርታ · Map</a>' + (v.website ? '<a class="btn ghost sm" href="' + esc(v.website) + '" target="_blank" rel="noopener nofollow">🌐 ድረ-ገጽ</a>' : '') + '</div></div>';
       });
       box.innerHTML = html;
     });

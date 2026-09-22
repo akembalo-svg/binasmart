@@ -153,7 +153,9 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     const venues = await prisma.venue.findMany({ where: { active: true }, include: { halls: true }, orderBy: { name: 'asc' } });
     const shows = await prisma.show.findMany({ where: { status: 'onsale', startsAt: { gte: new Date(Date.now() - 3600000) } }, include: { hall: true } });
     const next = {}; for (const s of shows) { const v = s.hall && s.hall.venueId; if (v && (!next[v] || s.startsAt < next[v])) next[v] = s.startsAt; }
-    return { ok: true, venues: venues.map(v => ({ id: v.id, slug: v.slug, name: v.name, nameAm: v.nameAm, address: v.address, phone: v.phone, website: v.website, notes: v.notes, lat: v.lat, lng: v.lng,
+    // phoneChecked says whether anybody has actually got through on that number. It is shown, because
+    // every other number in this list was read off a blog or a directory and may ring a stranger.
+    return { ok: true, venues: venues.map(v => ({ id: v.id, slug: v.slug, name: v.name, nameAm: v.nameAm, address: v.address, phone: v.phone, phoneChecked: !!v.phoneChecked, website: v.website, notes: v.notes, lat: v.lat, lng: v.lng,
       halls: v.halls.length, nextShowAt: next[v.id] || null })) };
   });
 
