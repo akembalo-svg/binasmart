@@ -30,6 +30,12 @@ const TELECOM = [
   'what is the USSD code to check my airtime?',
   'what is the customer care number and mobile network coverage in Jimma?',
   'my data and internet keep running out',
+  // the regulator's Amharic spellings carry a suffix (ባለሥልጣኑ), the universal-access fund and the postpaid words are
+  // telecom's alone, and a dialing code is a telecom question with no operator named
+  'ወደ ኮሙኒኬሽን ባለሥልጣኑ በስንት ቀን ውስጥ ማመልከት እችላለሁ?',
+  'ለሁለንተናዊ ተደራሽነት ፈንድ ስንት በመቶ ይከፈላል?',
+  'የድህረ ክፍያ ጥቅል ስንት ብር ነው?',
+  'what is the international dialing code for Bahrain?',
 ];
 
 const NOT_TELECOM = [

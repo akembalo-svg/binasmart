@@ -24,7 +24,8 @@ const { makeIntent, rxOf, hits, fold } = require('./intent');
 
 // Only telecom says these. One is enough, and it beats the other-service guard.
 const HARD = [
-  'ኢትዮ ቴሌኮም', 'ኢትዮቴሌኮም', 'ኢትዮ ቴሌ', 'ሳፋሪኮም', 'ቴሌኮም', 'ቴሌኮሙኒኬሽን', 'ኮሙኒኬሽን ባለስልጣን', 'ኮሙኒኬሽን ባለሥልጣን',
+  'ኢትዮ ቴሌኮም', 'ኢትዮቴሌኮም', 'ኢትዮ ቴሌ', 'ሳፋሪኮም', 'ቴሌኮም', 'ቴሌኮሙኒኬሽን', 'ኮሙኒኬሽን', 'ሁለንተናዊ ተደራሽነት', 'ድህረ ክፍያ',
+  'ሞባይል ሼር ፕላን', 'universal access',
   'የኮሙኒኬሽን አገልግሎት', 'ሲም ካርድ', 'ሲም', 'የአየር ሰዓት', 'የአየር ሰአት', 'የአየር ጊዜ', 'የሞባይል ካርድ', 'ሞባይል ካርድ', 'ሮሚንግ',
   'ዳታ ጥቅል', 'የዳታ ጥቅል', 'የድምፅ ጥቅል', 'ድምፅ ጥቅል', 'የሞባይል ጥቅል', 'ሞባይል ጥቅል', 'የኢንተርኔት ጥቅል', 'ኢንተርኔት ጥቅል',
   'ሞባይል ዳታ', 'የሞባይል ዳታ', 'የሞባይል ኢንተርኔት', '4ጂ', '5ጂ', 'ብሮድባንድ', 'ፋይበር ኢንተርኔት', 'ቮልቲኢ', 'ቨርቹዋል ነምበር',
@@ -50,9 +51,9 @@ const OTHER_SERVICE = [
 ];
 // Telecom words other things also use. One decides it, once no other service has claimed the message.
 const STRONG = [
-  'ኢ-ሲም', 'ኢሲም', 'ስልክ ቁጥር', 'የሞባይል ቁጥር', 'የስልክ መስመር', 'ኔትወርክ', 'ኔትዎርክ', 'የኔትወርክ ሽፋን', 'ዩኤስኤስዲ',
+  'ኢ-ሲም', 'ኢሲም', 'ቅድመ ክፍያ', 'የሞባይል አገልግሎት', 'ሞባይል አገልግሎት', 'ኦፕሬተር', 'ፍሪኩዌንሲ', 'ስልክ ቁጥር', 'የሞባይል ቁጥር', 'የስልክ መስመር', 'ኔትወርክ', 'ኔትዎርክ', 'የኔትወርክ ሽፋን', 'ዩኤስኤስዲ',
   'ካርድ መሙላት', 'ካርድ ለመሙላት', 'የደንበኞች አገልግሎት ማዕከል', 'የጥሪ ክፍያ', 'የጥሪ ታሪፍ',
-  'esim', 'e-sim', 'phone number', 'mobile number', 'phone line', 'mobile network', 'network signal', 'ussd', 'short code',
+  'esim', 'e-sim', 'dialing code', 'dialling code', 'country code', 'international call', 'international calls', 'phone number', 'mobile number', 'phone line', 'mobile network', 'network signal', 'ussd', 'short code',
   'recharge card', 'top up', 'top-up', 'call rates', 'call charges', 'call tariff', 'customer care', 'prepaid',
   'wifi router', 'mifi', 'home internet', 'business internet',
 ];
