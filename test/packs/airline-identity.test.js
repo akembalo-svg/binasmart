@@ -36,7 +36,13 @@ test('renderDoc produces the same bytes it produced before the split', () => {
 
 test('and those bytes are still what is on disk', () => {
   const disk = fs.readFileSync(path.join(ROOT, 'knowledge', 'travel', fx.page.slug + '.md'), 'utf8');
-  assert.equal(fx.expected, disk);
+  // `lastChecked` is the one field the weekly freshness job moves on an UNCHANGED page (it says "we looked", not
+  // "the page changed"), so pinning its date made this test fail every time the job ran - it did on 2026-09-21,
+  // when a stray refresh took it from 2026-09-16 - and a test that fails on a maintenance date gets ignored.
+  // Everything else, contentHash and body included, is still compared byte for byte.
+  const norm = t => t.replace(/^lastChecked: ".*"$/m, 'lastChecked: "<date>"');
+  assert.equal(norm(fx.expected), norm(disk));
+  assert.match(disk, /^lastChecked: "\d{4}-\d{2}-\d{2}"$/m, 'the page must still carry a lastChecked date');
 });
 
 test('the header is unchanged, Amharic sentence included', () => {
