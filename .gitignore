@@ -61,3 +61,15 @@ data/
 
 # Owner review pages written by ops/gov/review-page.js - generated from eval answers, deleted after review, never committed
 public/review-*.html
+
+# Company logos and vacancy posters copied from the boards we read (37 MB and growing).
+# They belong on the server, not in a PUBLIC repository: redistributing other companies'
+# marks and employers' notices through GitHub is a different act from showing them on a
+# listing page, and they would bloat every clone. jobs/fetch-logos.js and friends rebuild
+# them from source at any time.
+public/logos/
+public/jobposters/
+
+# IndexNow key file: it is the token that proves the site is ours to submit. Serving it is
+# the point; publishing it in a public repo is not.
+public/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.txt
