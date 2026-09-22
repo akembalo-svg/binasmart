@@ -677,5 +677,19 @@
   "contentHash": "fcd34bad82fa108207f0446e66e24cbfa60a3097",
   "generatedAt": "2026-09-17",
   "model": "gemini-2.5-flash"
+ },
+ "eic-faqs-industry-park-leases": {
+  "titleAm": "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የኢንዱስትሪ ፓርክ ኪራይ እና የተዘጋጁ ሼድ ዋጋዎች",
+  "summaryAm": "ይህ ገጽ ስለ ኢንዱስትሪ ፓርኮች የኪራይ ዓይነቶች እና ዋጋዎች ያብራራል። ሶስት የኪራይ ዓይነቶች አሉ፡ የተዘጋጁ ሼዶች፣ የተዘጋጀ መሬት እና ጥሬ መሬት። የተዘጋጁ ሼዶች ዋጋ በወር ከ $2 በ m2 ይጀምራል።",
+  "contentHash": "4eb6cdeafd5d505506ced619196aaa2b7ca87619",
+  "generatedAt": "2026-09-22",
+  "model": "gemini-2.5-flash"
+ },
+ "eic-faqs-industry-park-land-leases": {
+  "titleAm": "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የኢንዱስትሪ ፓርክ የሊዝ፣ የተዘጋጀና ጥሬ መሬት ተደጋጋሚ ጥያቄዎች",
+  "summaryAm": "",
+  "contentHash": "4eb6cdeafd5d505506ced619196aaa2b7ca87619",
+  "generatedAt": "2026-09-22",
+  "model": "gemini-2.5-flash"
  }
 }
