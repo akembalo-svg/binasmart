@@ -14,6 +14,21 @@ const EMBED_MODEL = 'gemini-embedding-001';
 const DIMS = 768;
 const GEMINI = 'https://generativelanguage.googleapis.com/v1beta/models/' + EMBED_MODEL;
 const CHUNK = 900, OVERLAP = 120;
+// What one search hit carries of its chunk - so what Bini, every kit agent, the MCP and the reranker are handed.
+// It was a flat text.slice(0, 900) (CHUNK), while chunkDoc stores pieces up to CHUNK * 1.6 plus the "Title > Heading"
+// line: on 2026-09-23 12,788 of 27,731 chunks were longer than 900 (the longest 1,835) and every one of them reached
+// the model cut mid-line. The EIC shed-rent table ended "Year 8 – 10: Adama & Dire Da", its last two rows lost, and
+// Bini made up the prices for them. HIT_CHARS sits above every chunk in the index, so a chunk is passed whole; one
+// that is still longer is cut by clipLines at a line break (failing that, a space), never mid-row.
+const HIT_CHARS = 2000;
+function clipLines(s, n = HIT_CHARS) {
+  s = String(s);
+  if (s.length <= n) return s;
+  const nl = s.lastIndexOf('\n', n);
+  if (nl >= n / 2) return s.slice(0, nl);
+  const sp = s.lastIndexOf(' ', n);
+  return s.slice(0, sp >= n / 2 ? sp : n);
+}
 // Sources chunked with chunkDoc's lineSafe option: the carried-over context never starts mid-line. Per source so
 // that switching a pack re-embeds only that pack (a changed chunk is a new hash and a new embedding).
 // 'business' since 2026-09-22: the EIC shed-rent table is one line per lease period, and the old 120-character
@@ -1208,7 +1223,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     // one chunk per (source, slug) unless the same page clearly wins twice
     const want = rerankTo ? Math.min(k, 20) : k;
     const out = [], seen = new Map();
-    const hit = (s, score) => ({ source: s.r.source, slug: s.r.slug, url: s.r.url, title: s.r.title, lang: s.r.lang, score: +score.toFixed(4), text: s.r.text.slice(0, 900) });
+    const hit = (s, score) => ({ source: s.r.source, slug: s.r.slug, url: s.r.url, title: s.r.title, lang: s.r.lang, score: +score.toFixed(4), text: clipLines(s.r.text) });
     for (const s of scored) {
       if (s.score <= 0) continue;
       const key = s.r.source + '/' + s.r.slug; const n = seen.get(key) || 0;
@@ -1304,6 +1319,6 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   return { load, ingest, checkMasks, search, contextFor, health, embedPendingGemini, embedPendingLocal, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, LINE_SAFE_SOURCES, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, pageUrl, docMeta, docMetaFile, ownPageDates, ownPageMeta, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
+module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, LINE_SAFE_SOURCES, HIT_CHARS, clipLines, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, pageUrl, docMeta, docMetaFile, ownPageDates, ownPageMeta, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
   LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled,
   bilingualEnabled, bilingualEn2AmEnabled, makeQueryTranslator, normaliseQuery, BILINGUAL_TIMEOUT_MS, BILINGUAL_CACHE_MAX };

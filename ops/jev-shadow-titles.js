@@ -21,7 +21,13 @@
 const { PrismaClient } = require('@prisma/client');
 const { cleanPositionTitle } = require('../jobs/sites/ethiojobshub');
 
+// Two doors to the same model. TypeSafe's own console was full on 22 Sep ("Whoops, we're full"), and
+// Vercel's AI Gateway serves it as typesafe-ai/jev to anyone with a vck_ key, at the same price. The
+// body is the same shape either way, so the transport is two environment variables rather than a fork.
+//   TypeSafe:  JEV_API_KEY=ts_…   (defaults below)
+//   Gateway:   JEV_API_KEY=vck_…  JEV_API_URL=https://ai-gateway.vercel.sh/v1/evaluate  JEV_MODEL=typesafe-ai/jev
 const API = process.env.JEV_API_URL || 'https://api.typesafe.ai/v1/systemone';
+const MODEL = process.env.JEV_MODEL || 'jev-latest';
 const KEY = process.env.JEV_API_KEY || '';
 const N = Number((process.argv.find(a => a.startsWith('--n')) || '').split('=')[1] || process.argv[process.argv.indexOf('--n') + 1] || 60);
 const PRICE_PER_M_IN = 0.042;     // TypeSafe's published price; output is free
@@ -40,7 +46,7 @@ async function askJev(title) {
     method: 'POST',
     headers: { authorization: 'Bearer ' + KEY, 'content-type': 'application/json' },
     body: JSON.stringify({
-      model: 'jev-latest',
+      model: MODEL,
       state: title,
       questions: {
         kind: {
@@ -61,7 +67,12 @@ async function askJev(title) {
 
 (async () => {
   if (!KEY) {
-    console.error('No JEV_API_KEY. Get one at console.typesafe.ai, then:\n  JEV_API_KEY=… node --env-file=.env ops/jev-shadow-titles.js');
+    console.error([
+      'No JEV_API_KEY.',
+      '  TypeSafe key:  JEV_API_KEY=ts_… node --env-file=.env ops/jev-shadow-titles.js',
+      '  Vercel key:    JEV_API_KEY=vck_… JEV_API_URL=https://ai-gateway.vercel.sh/v1/evaluate JEV_MODEL=typesafe-ai/jev \\',
+      '                 node --env-file=.env ops/jev-shadow-titles.js',
+    ].join('\n'));
     process.exit(2);
   }
   const prisma = new PrismaClient();
