@@ -169,7 +169,8 @@ test('two sections of one page, one after the other, become two documents and th
   assert.deepEqual(r.split, ['t-halls-seated-halls', 't-halls-open-halls']);
   const a = P.bodyText(read(dir, 't-halls-seated-halls')), b = P.bodyText(read(dir, 't-halls-open-halls'));
   assert.equal(b, SECTION.slice(5).join('\n\n'));
-  assert.ok(a.startsWith(SECTION[0] + '\n\n' + SECTION[1] + '\n\n' + SECTION[0] + '\n'), 'the table keeps its lead-in');
+  assert.ok(a.startsWith(SECTION[0] + '\n' + SECTION[1] + '\nTable: Hire Period by North & South Halls, All other Halls\n'), 'the table keeps its lead-in');
+  assert.equal(a.split('\n').filter(l => l === SECTION[0]).length, 1, 'moved into the table block, not written twice');
   assert.ok(!a.includes('Open halls') && !b.includes('Week'));
   assert.equal(P.bodyText(read(dir, 't-halls')), [...BEFORE, ...AFTER].join('\n\n'));
   const rr = P.rerenderPack(dir, { pack, sites: [site({ sectionDocs: specs, tableRows: true })] });

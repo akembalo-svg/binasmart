@@ -48,8 +48,6 @@ A yellow fever certificate is required when investors arrive from selected Afric
 ### Public Holidays
 
 Public holidays are celebrated according to the Ethiopian (Julian) Calendar, which consists of the following:
-
-Public holidays are celebrated according to the Ethiopian (Julian) Calendar, which consists of the following:
 Table: Date by Public holidays, Remarks
 Date | Public holidays | Remarks
 September 11: Public holidays Ethiopian New Year; Remarks National holiday

@@ -25,10 +25,6 @@ Ethiopian Investment Commission — help — FAQs: industry park leases and read
 Source: https://investethiopia.gov.et/faqs (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
 There are 3 types of leases and prices for industry parks; readymade sheds, readymade land, and raw land.
-
-- Readymade sheds are available start at a price of $2 per m2 per month
-
-There are 3 types of leases and prices for industry parks; readymade sheds, readymade land, and raw land.
 - Readymade sheds are available start at a price of $2 per m2 per month
 Table: Lease Period by Adama & Dire Dawa Industry Parks, All other Industry Parks
 Lease Period | Adama & Dire Dawa Industry Parks | All other Industry Parks
