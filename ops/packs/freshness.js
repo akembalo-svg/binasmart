@@ -22,7 +22,7 @@
 const path = require('path');
 const { execFileSync } = require('child_process');
 const { fetchSite: realFetchSite, stripPackBoilerplate, writePack, readMeta, makeFetcher, packDir,
-  rerenderPack, AM_HEADERS, MIN_CHARS } = require('./fetch-pack');
+  rerenderPack, AM_HEADERS, MIN_CHARS, readDirManifest, selectDirEntries, extract, contentHash } = require('./fetch-pack');
 const fs = require('fs');
 
 const ROOT = path.join(__dirname, '..', '..');
@@ -95,6 +95,9 @@ const label = (rep, slug) => (rep.titles && rep.titles[slug]) ? rep.titles[slug]
 
 // One message. Written to be read on a phone.
 function noteFor(reports, { today, pack, extra } = {}) {
+  // A manual pack has no fetched site, so there is nothing to count: its note is the reminder and the check.
+  if (!reports.length) return (pack && pack.noteTitle ? pack.noteTitle : '📚 Knowledge pack') + '\n\n' + String(extra || '').trim()
+    + '\n\n' + (today || new Date().toISOString().slice(0, 10)) + ' · ops/packs/freshness.js --pack ' + ((pack && pack.id) || '');
   const lines = [];
   let headline = 0;
   for (const rep of reports) {
@@ -168,9 +171,72 @@ function manualNote(sites, probed) {
       + ' bytes. It can become a fetched source; that is a change to knowledge/' + (s.pack || 'banking') + '/sources.json, not something this job does.').join('\n');
 }
 
+// ---------- a manual pack: the monthly reminder, and the one door that is open ----------
+// The telecom pack is a hand harvest. Ethio telecom does not answer this server (its host times out) and the
+// regulator's site is flaky for the big PDFs, so nothing here fetches them and nothing may pretend to. What the
+// weekly job can honestly do is two things, both declared by the registry's pack block:
+//
+//   pack.manual = { reminderDayMax: 7, serverChecks: ['safaricom'], harvestRoot, howTo }
+//
+//   * once a month say so: "telecom pack is manual, re-harvest from the laptop". The cron line runs on Sundays,
+//     so the first Sunday of a month is the one whose day-of-month is 1 to 7: no state file, no drift.
+//   * for a source that DOES answer (safaricom.et), fetch its pages politely and compare the TEXT the pack's own
+//     reader (extract, with the site's htmlPrep) takes from the live page with the text it takes from the
+//     harvested bytes. Raw bytes are useless for this - a Next.js page changes its build hashes every deploy.
+//     It only reports. A changed page is a reason to re-harvest and read the diff, and nothing is rewritten, so a
+//     price is never replaced by a machine that has not been checked by a person.
+const SOFT_404 = /Page data not found/;
+const isReminderDay = (day, max = 7) => { const d = Number(String(day).slice(8, 10)); return d >= 1 && d <= max; };
+const daysBetween = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);
+
+async function checkServerFetchable(site, { root, get, log = () => {} } = {}) {
+  const { dir, entries } = readDirManifest(root, site);
+  const sel = selectDirEntries(site, entries, null);
+  const prep = raw => { for (const pr of site.htmlPrep || []) raw = raw.replace(new RegExp(pr.match, pr.flags || 'g'), pr.replace); return raw; };
+  const textOf = raw => { const ex = extract(prep(raw), { titleSuffix: site.titleSuffix, minChars: site.minChars }); return ex && ex.ok ? ex.text : null; };
+  const fetcher = get || makeFetcher({ delayMs: 5000, timeoutMs: 20000 });
+  const out = { site: site.id, checked: 0, unchanged: [], changed: [], gone: [], missed: [] };
+  for (const r of sel.html) {
+    const before = textOf(fs.readFileSync(path.join(dir, r.e.file), 'utf8'));
+    if (before == null) continue;
+    const live = await fetcher(r.e.url);
+    out.checked++;
+    if (!live.ok) { (/^http_(404|410)$/.test(live.why || '') ? out.gone : out.missed).push(r.key); continue; }
+    if (SOFT_404.test(live.html || '')) { out.gone.push(r.key); continue; }
+    const after = textOf(live.html || '');
+    if (after == null) { out.missed.push(r.key); continue; }
+    (contentHash(after) === contentHash(before) ? out.unchanged : out.changed).push(r.key);
+  }
+  log('[freshness] ' + site.id + ' live check: ' + out.checked + ' pages, ' + out.changed.length + ' changed, ' + out.gone.length + ' gone, ' + out.missed.length + ' did not answer');
+  return out;
+}
+
+// One block of the note. Empty when there is nothing to say.
+function manualBlock({ pack, day, harvestedAt, checks, reminder }) {
+  const lines = [];
+  if (reminder) {
+    const age = harvestedAt ? daysBetween(harvestedAt, day) : null;
+    lines.push('🖐 This pack is manual: re-harvest from the laptop. Ethio telecom and the communications authority cannot be fetched from this server, '
+      + 'so every page in it is a hand harvest' + (harvestedAt ? ' dated ' + harvestedAt + (age != null ? ' (' + age + ' days old)' : '') : '') + '. '
+      + 'How to re-run it: ' + ((pack.manual && pack.manual.howTo) || 'the harvest README') + '. This reminder comes once a month.');
+  }
+  for (const c of checks || []) {
+    if (c.failed) { lines.push('⚠️ ' + c.site + ': the live check failed — ' + c.failed); continue; }
+    if (c.checked && c.missed.length === c.checked) { lines.push('⚠️ ' + c.site + ': did not answer this time (' + c.checked + ' pages), so nothing was compared'); continue; }
+    if (c.changed.length && c.checked >= 6 && c.changed.length > c.checked * MASS_CHANGE)   // a template change, not a small sample
+      lines.push('⚠️ ' + c.site + ': ' + c.changed.length + ' of ' + c.checked + ' pages read differently at once — a site-wide template change, not ' + c.changed.length + ' edits');
+    else if (c.changed.length) lines.push('✏️ ' + c.site + ': ' + c.changed.length + ' of ' + c.checked + ' page(s) read differently from the harvest'
+      + '\n' + c.changed.slice(0, 8).map(k => '   • ' + k).join('\n') + (c.changed.length > 8 ? '\n   • … and ' + (c.changed.length - 8) + ' more' : ''));
+    if (c.gone.length) lines.push('🗑 ' + c.site + ': ' + c.gone.length + ' page(s) now answer "not found": ' + c.gone.slice(0, 6).join(', '));
+    if (c.changed.length || c.gone.length) lines.push('   Nothing was rewritten. Re-harvest, read the difference, then rebuild the pack.');
+  }
+  return lines.join('\n');
+}
+const manualNews = (checks, reminder) => !!reminder || (checks || []).some(c => c.failed || c.changed.length || c.gone.length || (c.checked && c.missed.length === c.checked));
+
 // Everything injectable, so the tests run the real decisions with no network, no database and no Telegram.
 async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites, manualSites, triggerDir,
-  fetchSite = realFetchSite, sendTg = sendTgReal, runIngest = runIngestReal,
+  fetchSite = realFetchSite, sendTg = sendTgReal, runIngest = runIngestReal, getLive,
   runAmHeaders = runAmHeadersReal, rerender = rerenderReal, log = m => console.log(m) } = {}) {
   const day = today || new Date().toISOString().slice(0, 10);
   const reg = (pack && sites) ? null : JSON.parse(fs.readFileSync(packFile(packId), 'utf8'));
@@ -247,8 +313,25 @@ async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites,
   const back = manualNote(manual.map(s => ({ ...s, pack: cfg.id || packId })), probed);
   if (back) { result.manualBack = Object.keys(probed).filter(k => probed[k] && probed[k].ok); moved = true; setQuiet(false); }
 
+  // A manual pack (registry pack.manual): the once-a-month reminder, and the live check of the sources that answer.
+  let manualText = '';
+  if (cfg.manual) {
+    const m = cfg.manual;
+    const checks = [];
+    for (const id of m.serverChecks || []) {
+      const s = (reg ? reg.sites : (manualSites || [])).find(x => x.id === id);
+      if (!s) continue;
+      try { checks.push(await checkServerFetchable(s, { root: m.harvestRoot, get: getLive, log })); }
+      catch (e) { checks.push({ site: id, failed: e.message, checked: 0, unchanged: [], changed: [], gone: [], missed: [] }); }
+    }
+    const reminder = isReminderDay(day, m.reminderDayMax || 7);
+    const harvestedAt = ([...(reg ? reg.sites : []), ...(manualSites || [])].map(x => x.harvestedAt).filter(Boolean).sort().pop()) || m.harvestedAt || null;
+    result.manual = { reminder, checks };
+    if (manualNews(checks, reminder)) { manualText = manualBlock({ pack: cfg, day, harvestedAt, checks, reminder }); setQuiet(false); }
+  }
+
   if (quiet && !back) { log(tag + 'nothing changed — no note sent, which is the point'); return result; }
-  if (dryRun) { log(tag + 'would have sent:\n' + noteFor(reports, { today: day, pack: cfg, extra: back })); return result; }
+  if (dryRun) { log(tag + 'would have sent:\n' + noteFor(reports, { today: day, pack: cfg, extra: (manualText ? '\n\n' + manualText : '') + back })); return result; }
 
   // The Amharic header of a page that really changed is a summary of the page as it was, so it is dropped,
   // written again from the new text and re-rendered into the documents BEFORE the ingest - otherwise the index
@@ -273,13 +356,13 @@ async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites,
       break;   // one ingest covers the whole source, whichever site moved
     }
   }
-  const note = noteFor(reports, { today: day, pack: cfg, extra: back });
+  const note = noteFor(reports, { today: day, pack: cfg, extra: (manualText ? '\n\n' + manualText : '') + back });
   log(note);
   await sendTg(note);
   return result;
 }
 
-module.exports = { run, noteFor, probeManual, manualNote, dropStaleAmHeaders, sendTgReal, runIngestReal,
+module.exports = { run, noteFor, probeManual, manualNote, checkServerFetchable, manualBlock, isReminderDay, dropStaleAmHeaders, sendTgReal, runIngestReal,
   runAmHeadersReal, rerenderReal, MASS_CHANGE, packFile };
 
 //   node --env-file=.env ops/packs/freshness.js --pack banking
