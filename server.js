@@ -1822,6 +1822,9 @@ fastify.register(require('./jobs/cv-build'), { prisma, limiter: hotelLimiter,
 // "12 vacancies match your CV" - the page a job seeker lands on the moment after they apply, while they
 // are still reading (jobs/matches.js). It shows vacancies and the reason for each, and no personal data.
 fastify.register(require('./jobs/matches'), { prisma, shell: newsShell });
+// The call list for Addis cinemas (cinema/ops-venues.js). Booking is built and empty because it needs
+// one cinema to say yes; this is where ringing them turns a number copied off a blog into a fact.
+fastify.register(require('./cinema/ops-venues'), { prisma, OWNER_KEY });
 
 // Section marks and colours (brand/sections.js): each hub carries its own badge instead of an emoji
 // watermark, and the colour tells a returning reader where they are before they read a word.

@@ -1305,6 +1305,16 @@ model Venue {
   scanKeyAt   DateTime?
   website   String?
   notes     String?   // halls/seats/source as researched; verify before the first show
+  // Reaching the cinema itself. Every phone number here was read off a blog, a directory or a
+  // Facebook page - none of it came from the venue, and a number nobody has dialled is a guess with
+  // a plus sign in front of it. These columns are where calling turns the guess into a fact, and
+  // where the answer is kept so the next person does not ring the same cinema again.
+  contactName  String?
+  contactRole  String?      // "manager", "ticket office", "owner"
+  phoneChecked DateTime?    // when somebody actually got through on it
+  outreach     String   @default("new")   // new | called | no_answer | interested | declined | signed
+  outreachNote String?
+  outreachAt   DateTime?
   active    Boolean   @default(true)
   halls     Hall[]
   programme Programme[]
