@@ -21,6 +21,13 @@
 //   share a language (44)    95.5 / 93.2        95.5 / 90.9        95.5 retrieval, 90.9 shipped
 //   cross-lingual (16)       93.8 / 87.5        93.8 / 87.5        93.8 retrieval, 87.5 shipped
 //
+// SHIPPED FLOORS RAISED 2026-09-22, after the reranker was given 1000 characters of each passage instead of 420
+// (knowledge/index.js RERANK_CHARS). Two runs on an identical corpus of 27,810 chunks
+// (/root/bini-eval/retrieval-gold-business-20260922-104526.json and -104638.json) measured the same thing twice:
+//   all 96.7 / 96.7   Amharic 97.5 / 97.5   English 95.0 / 95.0   same-language 97.7 / 97.7   cross-lingual 93.8 / 93.8
+// (retrieval / shipped). The reranker now drops 1 gold page (bz-045) where it dropped 8. Each shipped floor below is
+// that measured value; shippedFloor() still allows one question of reranker variance under it.
+//
 // RETRIEVAL WAS IDENTICAL IN BOTH RUNS, every slice, so the retrieval floors are pinned at the exact
 // measured value. Only `shipped` moved, by one question: bz-018 survived the reranker in run 1 and was
 // dropped in run 2. That is the same reranker variance the travel and banking packs recorded, so every
@@ -53,45 +60,45 @@ test('the newest business run answers 60 questions', { skip }, () => {
   assert.equal(row(newest(), /^all questions/).n, 60);
 });
 
-test('the whole set is at or above 90 per cent as shipped', { skip }, () => {
+test('the whole set is at or above 96.7 per cent as shipped', { skip }, () => {
   const all = row(newest(), /^all questions/);
-  assert.ok(shippedFloor(all, 90),
-    'as shipped is ' + all.shipped + '; the design predicted 70-78%, two runs measured 91.7 and 90.0');
+  assert.ok(shippedFloor(all, 96.7),
+    'as shipped is ' + all.shipped + '; two runs with RERANK_CHARS 1000 measured 96.7 and 96.7 (85.0 with the old 420)');
   assert.ok(pct(all.plain) >= 95,
     'retrieval is ' + all.plain + '; both runs measured exactly 95.0% on 23,430 chunks');
 });
 
-test('the same-language slice is at or above 90.9 per cent', { skip }, () => {
+test('the same-language slice is at or above 97.7 per cent', { skip }, () => {
   const s = row(newest(), /share a language/);
   assert.ok(s, 'the benchmark must report the same-language slice');
   assert.ok(s.n === 44, 'the same-language slice should hold 44 questions (24 am on am pages + 20 en)');
-  assert.ok(shippedFloor(s, 90.9),
-    'same-language is ' + s.shipped + '; two runs measured 93.2 and 90.9, and the floor is the lower one');
+  assert.ok(shippedFloor(s, 97.7),
+    'same-language is ' + s.shipped + '; two runs with RERANK_CHARS 1000 measured 97.7 and 97.7');
   assert.ok(pct(s.plain) >= 95.5, 'same-language retrieval is ' + s.plain + '; both runs measured 95.5%');
 });
 
-test('the cross-lingual slice is at or above 87.5 per cent', { skip }, () => {
+test('the cross-lingual slice is at or above 93.8 per cent', { skip }, () => {
   const s = row(newest(), /am question, gold only in English/);
   assert.ok(s, 'the benchmark must report the cross-lingual slice');
   assert.ok(s.n === 16, 'the cross-lingual slice should hold 16 questions; the spec measured 16 before the run');
-  assert.ok(shippedFloor(s, 87.5),
-    'cross-lingual is ' + s.shipped + '; both runs measured 87.5%, against banking 43.8/50.0 and a plan floor of 50. '
+  assert.ok(shippedFloor(s, 93.8),
+    'cross-lingual is ' + s.shipped + '; two runs with RERANK_CHARS 1000 measured 93.8% (87.5 before it), against banking 43.8/50.0 and a plan floor of 50. '
     + 'A fall towards 50 means ops/packs/am-headers.js has not run, or has run and failed - check that before touching anything else');
   assert.ok(pct(s.plain) >= 93.8, 'cross-lingual retrieval is ' + s.plain + '; both runs measured 93.8%');
 });
 
-test('the English slice is at or above 90 per cent', { skip }, () => {
+test('the English slice is at or above 95 per cent', { skip }, () => {
   const s = row(newest(), /^\s*English/);
   assert.ok(s && s.n === 20, 'the English slice should hold 20 questions');
-  assert.ok(shippedFloor(s, 90), 'English is ' + s.shipped + '; both runs measured 90.0%');
+  assert.ok(shippedFloor(s, 95), 'English is ' + s.shipped + '; two runs with RERANK_CHARS 1000 measured 95.0%');
   assert.ok(pct(s.plain) >= 90, 'English retrieval is ' + s.plain + '; both runs measured 90.0%');
 });
 
 test('the Amharic slice is not carried by the English one', { skip }, () => {
   const am = row(newest(), /^\s*Amharic/);
   assert.ok(am && am.n === 40, 'the Amharic slice should hold 40 questions');
-  assert.ok(shippedFloor(am, 90), 'the Amharic slice is ' + am.shipped
-    + '; two runs measured 92.5 and 90.0, and the plan floor was 68. Below 90 the pack is answering English and not Amharic');
+  assert.ok(shippedFloor(am, 97.5), 'the Amharic slice is ' + am.shipped
+    + '; two runs with RERANK_CHARS 1000 measured 97.5 and 97.5 (92.5 and 90.0 before it), and the plan floor was 68. Below 90 the pack is answering English and not Amharic');
   assert.ok(pct(am.plain) >= 97.5, 'Amharic retrieval is ' + am.plain + '; both runs measured 97.5%');
 });
 

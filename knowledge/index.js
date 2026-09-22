@@ -997,12 +997,19 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   // the 4 regressions — a better net outcome than running it always, for 73% fewer calls.
   const RERANK_GAP = Number(process.env.RERANK_GAP || 0.03);
   const rrCache = new Map();
+  // How much of each candidate passage the reranker reads. It was the first 420 characters, and a chunk is up
+  // to ~900 with a ~100-character "<title> > <heading>" line at the top, so the reranker judged most chunks on
+  // their first half. 2026-09-22: asked what a factory shed costs in an industrial park, the EIC FAQ chunk
+  // holding the lease table was a candidate, but its "$2 per m2 per month" sits at character 659, the reranker
+  // never saw it and dropped the passage; the business benchmark counted 8 gold pages "found by retrieval but
+  // dropped by the reranker". Env override like RERANK_MODEL and RERANK_GAP; an integer clamped to 200..4000.
+  const RERANK_CHARS = Math.min(4000, Math.max(200, Math.round(Number(process.env.RERANK_CHARS) || 1000)));
 
   async function rerank(query, cands, k) {
     if (!apiKey || cands.length <= k) return cands;
     const ck = query + '|' + cands.map(c => c.source + '/' + c.slug).join(',');
     if (rrCache.has(ck)) { const ord = rrCache.get(ck); return ord.map(i => cands[i]).filter(Boolean).slice(0, k); }
-    const list = cands.map((c, i) => '[' + i + '] ' + (c.title || '') + '\n' + String(c.text || '').slice(0, 420)).join('\n\n');
+    const list = cands.map((c, i) => '[' + i + '] ' + (c.title || '') + '\n' + String(c.text || '').slice(0, RERANK_CHARS)).join('\n\n');
     const prompt = 'Question:\n' + query + '\n\nPassages:\n' + list +
       '\n\nReturn ONLY a JSON array of passage numbers, most useful first, keeping at most ' + k +
       '. Judge whether a passage ANSWERS the question, not whether it shares its topic. Omit passages that do not help. No prose.';
