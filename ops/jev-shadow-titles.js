@@ -29,7 +29,8 @@ const { cleanPositionTitle } = require('../jobs/sites/ethiojobshub');
 const API = process.env.JEV_API_URL || 'https://api.typesafe.ai/v1/systemone';
 const MODEL = process.env.JEV_MODEL || 'jev-latest';
 const KEY = process.env.JEV_API_KEY || '';
-const N = Number((process.argv.find(a => a.startsWith('--n')) || '').split('=')[1] || process.argv[process.argv.indexOf('--n') + 1] || 60);
+const nArg = process.argv.indexOf('--n');
+const N = Math.max(5, Number(nArg > -1 ? process.argv[nArg + 1] : 0) || 60);
 const PRICE_PER_M_IN = 0.042;     // TypeSafe's published price; output is free
 
 // The three things a line taken out of an advert can be. Written as plainly as the adverts are - the
@@ -59,10 +60,24 @@ async function askJev(title) {
   });
   const d = await r.json().catch(() => null);
   if (r.status !== 200 || !d || !d.answers) {
-    throw new Error('HTTP ' + r.status + ' ' + JSON.stringify(d).slice(0, 200));
+    const e = new Error('HTTP ' + r.status + ' ' + JSON.stringify(d).slice(0, 120));
+    e.retryable = r.status === 429 || r.status >= 500;
+    throw e;
   }
   const a = d.answers.kind || {};
-  return { choice: a.choice, confidence: a.confidence, tokens: (d.usage || {}).input_tokens || 0 };
+  const u = d.usage || {};
+  return { choice: a.choice, confidence: a.confidence, tokens: u.input_tokens || u.inputTokens || u.promptTokens || 0 };
+}
+
+// Launch week: the provider answers 429 "high demand" for roughly half the calls. A benchmark that
+// silently drops those rows measures the queue, not the model, so each title is retried with a widening
+// wait and only counted when it is genuinely answered or genuinely refused.
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+async function askJevPatient(title, tries = 5) {
+  for (let i = 0; i < tries; i++) {
+    try { return await askJev(title); }
+    catch (e) { if (!e.retryable || i === tries - 1) throw e; await sleep(1500 * (i + 1) + Math.random() * 600); }
+  }
 }
 
 (async () => {
@@ -96,7 +111,7 @@ async function askJev(title) {
       // What the rule says today: null means "this is not a job title".
       const mine = cleanPositionTitle(title) ? 'job_title' : 'not_a_title';
       let jev;
-      try { jev = await askJev(title); } catch (e) { failed++; console.log('  !! ' + title.slice(0, 50) + ' — ' + e.message); continue; }
+      try { jev = await askJevPatient(title); await sleep(250); } catch (e) { failed++; console.log('  !! ' + title.slice(0, 50) + ' — ' + e.message); continue; }
       tokens += jev.tokens;
       const theirs = jev.choice === 'job_title' ? 'job_title' : 'not_a_title';
       if (theirs === mine) agree++;

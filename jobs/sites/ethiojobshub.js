@@ -111,7 +111,11 @@ function splitPositions(text) {
     const title = cleanPositionTitle(m[1]);
     if (title && title.length >= 3 && title.length <= 110) marks.push({ title, at: m.index, end: re.lastIndex });
   }
-  if (marks.length < 2) return [];                       // a single marker is a heading, not a list
+  // A single "Position: Junior Accountant" IS the vacancy - most of these announcements advertise one
+  // post. Requiring two markers sent 463 real vacancies onto the board titled "Vacancy announcement —
+  // 21 Sept 2026", which is a date, not a job, and which nobody searches for. (Found on 22 Sep by the
+  // Jev shadow test, ops/jev-shadow-titles.js; my own rules passed those titles without blinking.)
+  if (!marks.length) return [];
   return marks.map((mk, i) => ({
     title: mk.title,
     body: text.slice(mk.end, i + 1 < marks.length ? marks[i + 1].at : text.length).trim(),

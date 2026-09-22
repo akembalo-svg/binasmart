@@ -243,6 +243,13 @@ function stripPackBoilerplate(pages, site = null) {
 // on disk that a --rerender reads) is recognised by parsing every row line back into its cells and writing it
 // again, and it gets its lead-in then; its lines before the header must be nothing or exactly the lead-in this
 // would write, or the block is left as it is. So running it twice changes nothing.
+// The lines the lead-in takes are MOVED into the table block when they make up whole blocks of their own, and copied
+// only when they are the tail of a longer paragraph (which is left as it is). Copying whole blocks wrote the same
+// sentences twice in a row: the EIC shed lease section read "There are 3 types of leases ... / - Readymade sheds
+// ... $2 per m2 per month" on its own and then again above the table, the chunker made the first copy a chunk of its
+// own, and that 411-character chunk (no table in it) took the section's second search place from the table chunk
+// for the Amharic question "how much does it cost to rent a shed in an industrial park" (2026-09-23, 0.8501 against
+// 0.8459; search keeps at most two chunks of a document). Moved, every line of the page is in the document once.
 const TABLE_CELL = /^(.*?)\s*\|$/;
 const TABLE_LEAD_LINES = 2, TABLE_LEAD_CHARS = 300;
 function tableCells(block) {
@@ -296,9 +303,11 @@ function rewrittenTable(block) {
   }
   return null;
 }
+// { lead, whole }: the lead-in lines, and how many of the blocks just above the table the walk took entirely.
+// Every block it visits but the last is taken whole, so those blocks are the last `whole` entries of out.
 function tableLeadIn(out, tableAt, head) {
   const ctx = [];
-  let chars = 0;
+  let chars = 0, whole = 0;
   walk: for (let b = out.length - 1; b >= 0; b--) {
     if (tableAt.has(b)) break;
     const lines = String(out[b]).split('\n').map(l => l.trim()).filter(Boolean);
@@ -306,15 +315,18 @@ function tableLeadIn(out, tableAt, head) {
       const l = lines[k];
       if (/^#/.test(l) || /\|$/.test(l) || chars + l.length > TABLE_LEAD_CHARS) break walk;
       ctx.unshift(l); chars += l.length;
+      if (k === 0) whole++;
       if (ctx.length >= TABLE_LEAD_LINES) break walk;
     }
+    if (!lines.length) whole++;
   }
-  return [...ctx, 'Table: ' + head[0] + ' by ' + head.slice(1).join(', ')];
+  return { lead: [...ctx, 'Table: ' + head[0] + ' by ' + head.slice(1).join(', ')], whole: ctx.length ? whole : 0 };
 }
 function tableRows(text) {
   const blocks = String(text == null ? '' : text).split('\n\n');
   const out = [], tableAt = new Set();
-  const emit = (head, rows, lead) => {
+  const emit = (head, rows, { lead, whole }) => {
+    if (whole) out.splice(out.length - whole, whole);   // moved into the table block, not copied
     tableAt.add(out.length);
     out.push([...lead, head.join(' | '), ...rows.map(r => tableRowLine(head, r)).filter(Boolean)].join('\n'));
   };
@@ -326,8 +338,8 @@ function tableRows(text) {
     if (!head || !rows.length) {
       const own = head ? null : rewrittenTable(blocks[i]);
       if (own) {
-        const lead = tableLeadIn(out, tableAt, own.head);
-        if (!own.pre.length || own.pre.join('\n') === lead.join('\n')) { emit(own.head, own.rows, lead); i++; continue; }
+        const li = tableLeadIn(out, tableAt, own.head);
+        if (!own.pre.length || own.pre.join('\n') === li.lead.join('\n')) { emit(own.head, own.rows, li); i++; continue; }
       }
       out.push(blocks[i]); i++; continue;
     }
