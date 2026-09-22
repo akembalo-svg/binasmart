@@ -40,7 +40,12 @@ module.exports = {
     prefer: ['law', 'guide', 'eservices', 'mor', 'news:law-*', 'web:justice/*'],
     // `travel` added 2026-09-16 with the Ethiopian Airlines pack: an airline's conditions of carriage are
     // a commercial contract, not Ethiopian law, and must never be quoted as one.
-    exclude: ['page', 'skill', 'llms', 'travel', 'banking', 'business'],
+    // `telecom` is excluded page by page, not as a source: the Ethio telecom and Safaricom pages are commercial
+    // price lists (like an airline's conditions of carriage, never to be quoted as Ethiopian law), while the
+    // communications authority's own documents in the same source - Proclamation 1148/2019, Directives 791-800
+    // and 832/2021, 1321/2024, Regulation 585/2026 - are law and stay available to him. The trailing-star form
+    // is pageMatcher's prefix match (knowledge/index.js); a new operator page would need adding here.
+    exclude: ['page', 'skill', 'llms', 'travel', 'banking', 'business', 'telecom:telecom-ethiotelecom-*', 'telecom:telecom-safaricom-*'],
   },
 
   gates: [

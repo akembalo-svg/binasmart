@@ -1000,6 +1000,7 @@ const biniPolitics = require('./assistant/politics');
 const biniTravel = require('./assistant/travel');
 const biniBanking = require('./assistant/banking');
 const biniBusiness = require('./assistant/business');
+const biniTelecom = require('./assistant/telecom');
 const biniForce = require('./assistant/force');
 // A harness sets this header. Opt-in rather than a guess at IP patterns: a pattern would rot the
 // first time a harness changed its ip, and rot invisibly.
@@ -1083,7 +1084,12 @@ fastify.post('/api/assistant', async (req, reply) => {
     // assistant/business.js precisely because that question is the bank pack's. Travel still wins over both.
     const businessPrefer = !travelPrefer.prefer && biniBusiness.isBusinessQuestion(msg) ? { prefer: biniBusiness.PREFER } : {};
     const businessWins = !!businessPrefer.prefer && (!bankingPrefer.prefer || biniBusiness.hasBusinessHardWord(msg));
-    const packPrefer = { ...travelPrefer, ...bankingPrefer, ...(businessWins ? businessPrefer : {}) };
+    // A phone line, a mobile package or the telecom rules points at knowledge/telecom (assistant/telecom.js). It is a
+    // soft boost for telecom, banking and law together, never a filter: the Amharic Ethio telecom FAQ is a banking
+    // document. A telecom HARD word takes the preference from banking and business, and from travel unless the
+    // message names the airline; soft telecom signal wins nothing another pack has already claimed.
+    const telecomPrefer = biniTelecom.telecomWins(msg, { travel: !!travelPrefer.prefer, banking: !!bankingPrefer.prefer, business: !!businessPrefer.prefer, businessHard: biniBusiness.hasBusinessHardWord(msg) }) ? { prefer: biniTelecom.PREFER } : {};
+    const packPrefer = { ...travelPrefer, ...bankingPrefer, ...(businessWins ? businessPrefer : {}), ...telecomPrefer };
     // What Bini may not do with money, stated where the answer is written: no account access, no transaction,
     // no advice, every figure dated and attributed. Only on the message that asked.
     const bankGuard = bankingPrefer.prefer ? biniBanking.GUARDRAILS : '';

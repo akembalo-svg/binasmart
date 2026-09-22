@@ -279,7 +279,7 @@ function makeWorkspaces({ prisma, embedder, fetchImpl, now } = {}) {
       soul,
       maxTokens: 600,
       log: false,                       // client customers' questions stay out of Bini's chat log (see record())
-      knowledge: { exclude: ['page', 'skill', 'llms', 'news', 'banking'] }, // public law and government knowledge; not BinaSmart marketing, news or other banks' tariffs
+      knowledge: { exclude: ['page', 'skill', 'llms', 'news', 'banking', 'telecom:telecom-ethiotelecom-*', 'telecom:telecom-safaricom-*'] }, // public law and government knowledge; not BinaSmart marketing, news, other banks' tariffs or operators' price lists (the regulator's own telecom law stays)
       gates: [
         // A medical emergency still gets the ambulance number first, without paging BinaSmart's staff.
         { test: c => afiya.isEmergency(c.msg), answer: c => ({ body: { reply: afiya.emergencyReply(c.l), emergency: true } }) },

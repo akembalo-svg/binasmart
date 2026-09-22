@@ -134,7 +134,7 @@ test('Bini asks for the banking pack only when the message is about money at a b
     'the per-message banking preference is not computed, or travel does not win a tie');
   // The business pack joined the merge in Task 7 of the business plan. Banking still wins over a merely soft
   // business signal; only a business HARD word (assistant/business.js hasBusinessHardWord) takes it back.
-  assert.ok(src.includes('const packPrefer = { ...travelPrefer, ...bankingPrefer, ...(businessWins ? businessPrefer : {}) };'), 'the three are not merged');
+  assert.ok(src.includes('const packPrefer = { ...travelPrefer, ...bankingPrefer, ...(businessWins ? businessPrefer : {}), ...telecomPrefer };'), 'the four are not merged');
   assert.ok(src.includes('const businessWins = !!businessPrefer.prefer && (!bankingPrefer.prefer || biniBusiness.hasBusinessHardWord(msg));'),
     'a banking question with only soft business words must keep the banking preference');
   assert.ok(src.includes('knowledge.contextFor(msg, { lang, ...packPrefer })'), 'contextFor is not given the merged preference');

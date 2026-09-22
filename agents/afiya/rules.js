@@ -28,7 +28,9 @@ module.exports = {
     // assumed: the gap audit of 2026-09-14 found the etrade BUSINESS licence checker answering "is this clinic
     // / doctor licensed?" - a patient sent to the wrong register - which is why the two bina.et business
     // guides below were already excluded. The whole pack now follows them out.
-    exclude: ['page', 'skill', 'llms', 'mor', 'travel', 'banking', 'business', 'guide:business-registration-ethiopia', 'guide:how-to-start-a-business-in-ethiopia',
+    // `telecom` added 2026-09-22 with the telecom pack: package prices, SIM rules and the communications-authority
+    // directives are not health answers, and a patient asking about a clinic must never be handed an operator's page.
+    exclude: ['page', 'skill', 'llms', 'mor', 'travel', 'banking', 'business', 'telecom', 'guide:business-registration-ethiopia', 'guide:how-to-start-a-business-in-ethiopia',
       'guide:mesob', 'guide:telebirr', 'guide:tenant-screening-ethiopia'],
   },
 
