@@ -7,7 +7,7 @@ section: "about"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
+lastChecked: "2026-09-20"
 contentHash: "62e483f1e000308a35070e8e20d2f58a022609c4"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
@@ -20,6 +20,8 @@ Ethiopian Investment Commission — about — Why Ethiopia | Ethiopian Investmen
 በአማርኛ፦ ስለ ኮሚሽኑና ሕትመቶች — Why Ethiopia | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
 ይህ ገጽ ኢትዮጵያ ለምን ለኢንቨስትመንት ምቹ እንደሆነች ያብራራል። ኢትዮጵያ በዓለም ላይ በፍጥነት ከሚያድጉ ኢኮኖሚዎች አንዷ ስትሆን፣ ባለፉት 15 ዓመታት በአፍሪካ ፈጣን ዕድገት ያስመዘገበች ሀገር ነች። እ.ኤ.አ. በ2021 4.1 ቢሊዮን ዶላር ኢንቨስትመንት ስባለች።
+
+⚠️ BinaSmart has added a correction to this page: a passage below restates a rule that has since changed, and the current rule, with its legal authority, is marked directly after that passage. The page itself is left exactly as the institution published it. ⚠️ ቢናስማርት በዚህ ገጽ ላይ እርማት አክሏል፦ ከታች ያለው አንድ ክፍል የተቀየረ ደንብ ይደግማል፤ የአሁኑ ደንብና ሕጋዊ ምንጩ ከዚያ ክፍል ቀጥሎ ተጠቅሰዋል። ገጹ ራሱ ተቋሙ ባሳተመው መልኩ ነው።
 
 Source: https://investethiopia.gov.et/why-ethiopia (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
@@ -115,6 +117,9 @@ Next
 
 With a population of 120 million and a rapidly growing middle class, Ethiopia is the second largest consumer market in Africa. In addition, we are strategically located to serve the African continent as we are part of the Common Market for Eastern and Southern Africa (COMESA), which comprises 21 member-countries and over 583 million consumers. Further, our central location on the global map, with proximity to the Middle East, Europe, USA and Asia markets, makes us an ideal location for trading in the global economy.
 
+⚠️ Correction by BinaSmart (checked 2026-09-22): Ethiopia's population is 135.5 million (World Bank, 2025), not 120 million; COMESA states its own population is over 640 million. · በአማርኛ፦ የኢትዮጵያ ሕዝብ ብዛት 135.5 ሚሊዮን ነው (የዓለም ባንክ፣ 2025)፣ 120 ሚሊዮን አይደለም፤ COMESA ራሱ ሕዝቡ ከ640 ሚሊዮን በላይ መሆኑን ይገልጻል። (World Bank Open Data 2025; COMESA official website)
+
+
 We are connected to the main regional and global markets by our flag carrier, Ethiopian Airlines, the continent´s largest in terms of passengers carried and the world´s fourth largest in terms of nations served. Ethiopian currently serves 127 international passenger destinations and 44 freighter destinations. With 12 million passengers handled every year, Bole International Airport in the capital, Addis Ababa, is one of the busiest and fastest-growing airports in Africa. Over 3.5 billion of the world’s population live within 8 hours of flight from Addis Ababa.
 
 Previous
@@ -136,6 +141,9 @@ Next
 ### Competitive Workforce
 
 Since the turn of the millennium, our population has doubled to 120 million. This has afforded us the second largest labor force in Africa, with more than 60 million active workers. Our workforce is young, fast-learning and productive. Every year, it grows by two million, becoming an engine of our fast-growing economy. To build our human capital, we are investing heavily in expanding access to high-quality technical and vocational education.
+
+⚠️ Correction by BinaSmart (checked 2026-09-22): Ethiopia's population is now 135.5 million (World Bank, 2025), not 120 million. · በአማርኛ፦ የኢትዮጵያ ሕዝብ ብዛት አሁን 135.5 ሚሊዮን ነው (የዓለም ባንክ፣ 2025)፣ 120 ሚሊዮን አይደለም። (World Bank Open Data, Ethiopia population 2025)
+
 
 Our relatively low wage rates and large industrial workforce offer significant labor-cost advantages for investors. Our investor-friendly labor regime features one of the lowest labor-tax contributions of the region (12.4% of profits in 2019).
 

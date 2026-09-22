@@ -842,6 +842,42 @@
       "authority": "Labour Proclamation 1156/2019 Art. 68",
       "authorityDoc": "labour-proclamation-1156-2019",
       "checked": "2026-09-18"
+    },
+    {
+      "slug": "eic-why-ethiopia-emerging-and-connected-market",
+      "match": "With a population of 117 million and a rapidly growing middle class we are the second largest consumer market in Africa.",
+      "noteEn": "Ethiopia's population is 135.5 million (World Bank, 2025), not 117 million.",
+      "noteAm": "የኢትዮጵያ ሕዝብ ብዛት 135.5 ሚሊዮን ነው (የዓለም ባንክ፣ 2025)፣ 117 ሚሊዮን አይደለም።",
+      "authority": "World Bank Open Data, Ethiopia population 2025",
+      "authorityDoc": "ethiopia-population-comesa-2026",
+      "checked": "2026-09-22"
+    },
+    {
+      "slug": "eic-why-ethiopia-emerging-and-connected-market",
+      "match": "We are strategically located to serve the African continent as we are part of the Common Market for Eastern and Southern Africa (COMESA) comprising 19-member countries and over 400 million consumers.",
+      "noteEn": "COMESA has 21 member states and a population of over 640 million, per its own website.",
+      "noteAm": "COMESA በራሱ ድረ ገጽ መሠረት 21 አባል ሀገራት እና ከ640 ሚሊዮን በላይ ሕዝብ አለው።",
+      "authority": "COMESA official website, comesa.int/what-is-comesa",
+      "authorityDoc": "ethiopia-population-comesa-2026",
+      "checked": "2026-09-22"
+    },
+    {
+      "slug": "eic-why-ethiopia",
+      "match": "With a population of 120 million and a rapidly growing middle class, Ethiopia is the second largest consumer market in Africa. In addition, we are strategically located to serve the African continent as we are part of the Common Market for Eastern and Southern Africa (COMESA), which comprises 21 member-countries and over 583 million consumers.",
+      "noteEn": "Ethiopia's population is 135.5 million (World Bank, 2025), not 120 million; COMESA states its own population is over 640 million.",
+      "noteAm": "የኢትዮጵያ ሕዝብ ብዛት 135.5 ሚሊዮን ነው (የዓለም ባንክ፣ 2025)፣ 120 ሚሊዮን አይደለም፤ COMESA ራሱ ሕዝቡ ከ640 ሚሊዮን በላይ መሆኑን ይገልጻል።",
+      "authority": "World Bank Open Data 2025; COMESA official website",
+      "authorityDoc": "ethiopia-population-comesa-2026",
+      "checked": "2026-09-22"
+    },
+    {
+      "slug": "eic-why-ethiopia",
+      "match": "Since the turn of the millennium, our population has doubled to 120 million.",
+      "noteEn": "Ethiopia's population is now 135.5 million (World Bank, 2025), not 120 million.",
+      "noteAm": "የኢትዮጵያ ሕዝብ ብዛት አሁን 135.5 ሚሊዮን ነው (የዓለም ባንክ፣ 2025)፣ 120 ሚሊዮን አይደለም።",
+      "authority": "World Bank Open Data, Ethiopia population 2025",
+      "authorityDoc": "ethiopia-population-comesa-2026",
+      "checked": "2026-09-22"
     }
   ]
 }
