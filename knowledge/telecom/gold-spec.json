@@ -1,0 +1,579 @@
+{
+ "version": 1,
+ "source": "telecom",
+ "qidPrefix": "tl-",
+ "_about": "The 60 gold questions for the BinaSmart telecom pack (knowledge/telecom, source `telecom`): 25 Amharic questions answered by an Amharic page, 20 English questions answered by an English page and 15 Amharic questions whose answer is on an English page (the ECA laws and Safaricom, which has no Amharic site). Every question names the document under knowledge/telecom/ that answers it. `topic` is the English subject the page must discuss and `topicAm` the Amharic one for a page that is itself in Amharic; ops/packs/build-gold.js refuses to write the gold file unless three of a topic's content words are in that page. `alsoSlugs` names a second document that carries the same answer (Directive 832/2021 and the ECA consumer-affairs page repeat each other), verified the same way. Written on 2026-09-22 from the fetched pages, never from memory; every figure in a question was read on its page first.",
+ "questions": [
+  {
+   "lang": "am",
+   "section": "student",
+   "slug": "telecom-ethiotelecom-am-student-package",
+   "topic": "student package data voice birr minutes",
+   "question": "የተማሪዎች ጥቅል የ1 ጊባ ዳታ ስንት ብር ነው?",
+   "topicAm": "የተማሪዎች ጥቅል ዳታ ብር ደቂቃ",
+   "goldLang": "am",
+   "qid": "tl-001"
+  },
+  {
+   "lang": "am",
+   "section": "disability",
+   "slug": "telecom-ethiotelecom-am-disability-package",
+   "topic": "disability package daily voice minutes birr",
+   "question": "ለአካል ጉዳተኞች የቀረበው ዕለታዊ የድምፅ ጥቅል ስንት ነው?",
+   "topicAm": "የአካል ጉዳተኞች ጥቅል ዕለታዊ የድምፅ ደቂቃ",
+   "goldLang": "am",
+   "qid": "tl-002"
+  },
+  {
+   "lang": "am",
+   "section": "women",
+   "slug": "telecom-ethiotelecom-am-women-package",
+   "topic": "women package digital identity service centres",
+   "question": "የሴቶች ሞባይል ጥቅልን ለመጀመር ምን ማድረግ አለብኝ?",
+   "topicAm": "የሴቶች ጥቅል ዲጂታል መታወቂያ ማዕከሎቻችን",
+   "goldLang": "am",
+   "qid": "tl-003"
+  },
+  {
+   "lang": "am",
+   "section": "youth",
+   "slug": "telecom-ethiotelecom-am-youth-data-package",
+   "topic": "youth data package daily gigabyte spotify",
+   "question": "የወጣቶች ዳታ ጥቅል ዕለታዊ 1 ጊባ ስንት ብር ነው?",
+   "topicAm": "የወጣቶች ዳታ ጥቅል ዕለታዊ ስፖቲፋይ",
+   "goldLang": "am",
+   "qid": "tl-004"
+  },
+  {
+   "lang": "am",
+   "section": "sim",
+   "slug": "telecom-ethiotelecom-am-esim",
+   "topic": "esim sim card number phone",
+   "question": "ኢ-ሲም ምንድን ነው፣ ጥቅሙስ?",
+   "topicAm": "ኢ-ሲም ሲም ካርድ ስልክ ቁጥር",
+   "goldLang": "am",
+   "qid": "tl-005"
+  },
+  {
+   "lang": "am",
+   "section": "roaming",
+   "slug": "telecom-ethiotelecom-am-hajj-roaming",
+   "topic": "hajj roaming package pilgrims saudi arabia days",
+   "question": "የሐጅ ሮሚንግ ጥቅል ለምን ያህል ቀናት ያገለግላል?",
+   "topicAm": "የሐጅ ሮሚንግ ጥቅል ሳዑዲ ዐረቢያ ምእመናን",
+   "goldLang": "am",
+   "qid": "tl-006"
+  },
+  {
+   "lang": "am",
+   "section": "roaming",
+   "slug": "telecom-ethiotelecom-am-umrah-roaming-package",
+   "topic": "umrah roaming package voice data minutes birr",
+   "question": "ለዑምራ ጉዞ የ15 ቀን 500 ሜ.ባ ከ75 ደቂቃ ጋር የሮሚንግ ጥቅል ስንት ብር ነው?",
+   "topicAm": "ዑምራ ሮሚንግ ጥቅል ደቂቃ ብር ሳዑዲ",
+   "goldLang": "am",
+   "qid": "tl-007"
+  },
+  {
+   "lang": "am",
+   "section": "sim",
+   "slug": "telecom-ethiotelecom-am-faq",
+   "topic": "sim card replacement damaged birr mobile number",
+   "question": "የተበላሸ ሲም ካርድ ለመተካት ስንት ብር ይከፈላል?",
+   "topicAm": "ሲም ካርድ መተኪያ ብር ሞባይል ቁጥር",
+   "goldLang": "am",
+   "qid": "tl-008"
+  },
+  {
+   "lang": "am",
+   "section": "airtime",
+   "slug": "telecom-ethiotelecom-am-faq",
+   "topic": "airtime credit eligibility dial code customers",
+   "question": "የአየር ሰዓት ክሬዲት ማግኘት እንደምችል በየትኛው ቁጥር ማረጋገጥ እችላለሁ?",
+   "topicAm": "የአየር ሰአት ክሬዲት ብቁ ደንበኞች ይደዉሉ",
+   "goldLang": "am",
+   "qid": "tl-009"
+  },
+  {
+   "lang": "am",
+   "section": "care",
+   "slug": "telecom-ethiotelecom-am-contact-us",
+   "topic": "head office address churchill avenue addis ababa",
+   "question": "የኢትዮ ቴሌኮም ዋና ቢሮ አድራሻ የት ነው?",
+   "topicAm": "አድራሻ ቸርችል ልደታ አዲስ አበባ ዋና ቢሮ",
+   "goldLang": "am",
+   "qid": "tl-010"
+  },
+  {
+   "lang": "am",
+   "section": "fraud",
+   "slug": "telecom-ethiotelecom-am-fraud-awareness",
+   "topic": "fraud report message numbers customers",
+   "question": "የማጭበርበር መልዕክት ሲደርሰኝ ወደ የትኞቹ ቁጥሮች ማሳወቅ እችላለሁ?",
+   "topicAm": "ማጭበርበር መልዕክት ማሳወቅ ደውሉ",
+   "goldLang": "am",
+   "qid": "tl-011"
+  },
+  {
+   "lang": "am",
+   "section": "sim",
+   "slug": "telecom-ethiotelecom-am-virtual-number",
+   "topic": "virtual number sim card mobile number additional",
+   "question": "ቨርቹዋል ነምበር ምንድን ነው?",
+   "topicAm": "ቨርቹዋል ነምበር ሲም ካርድ ሞባይል ቁጥር",
+   "goldLang": "am",
+   "qid": "tl-012"
+  },
+  {
+   "lang": "am",
+   "section": "packages",
+   "slug": "telecom-ethiotelecom-am-weekend-package",
+   "topic": "weekend package saturday sunday night hours",
+   "question": "የቅዳሜና እሁድ ጥቅል መቼ ነው የሚያገለግለው?",
+   "topicAm": "የቅዳሜና እሁድ ጥቅል ሌሊት ሰዓታት ኪድጆ",
+   "goldLang": "am",
+   "qid": "tl-013"
+  },
+  {
+   "lang": "am",
+   "section": "packages",
+   "slug": "telecom-ethiotelecom-am-no-expiry-date-mobile-package",
+   "topic": "no expiry mobile package gigabyte birr",
+   "question": "ቀነ-ገደብ የሌለው የሞባይል ጥቅል 20 ጊባ ስንት ብር ነው?",
+   "topicAm": "ቀነ-ገደብ የሌለው ሞባይል ጥቅል ጊባ ብር",
+   "goldLang": "am",
+   "qid": "tl-014"
+  },
+  {
+   "lang": "am",
+   "section": "business",
+   "slug": "telecom-ethiotelecom-am-mobile-share-plan",
+   "topic": "mobile share plan monthly fee organisations employees",
+   "question": "የሞባይል ሼር ፕላን MSP 1 ወርሃዊ ክፍያ ስንት ነው?",
+   "topicAm": "ሞባይል ሼር ፕላን ወርኃዊ ክፍያ ድርጅቶች ሰራተኞች",
+   "goldLang": "am",
+   "qid": "tl-015"
+  },
+  {
+   "lang": "am",
+   "section": "tariff",
+   "slug": "telecom-ethiotelecom-am-tariff-revision-notice",
+   "topic": "tariff revision foreign exchange customers infrastructure",
+   "question": "ኢትዮ ቴሌኮም የታሪፍ ማሻሻያ ያደረገው ለምንድን ነው?",
+   "topicAm": "ታሪፍ ማሻሻያ የውጭ ምንዛሬ ደንበኞቻችን መሰረተ ልማት",
+   "goldLang": "am",
+   "qid": "tl-016"
+  },
+  {
+   "lang": "am",
+   "section": "packages",
+   "slug": "telecom-ethiotelecom-am-mobile-data-package-new",
+   "topic": "mobile data package telebirr increase bonus customers",
+   "question": "በቴሌብር የሞባይል ዳታ ጥቅል ስገዛ ምን ተጨማሪ ጥቅም አገኛለሁ?",
+   "topicAm": "ሞባይል ዳታ ጥቅል ቴሌብር ደንበኞች ጭማሪ",
+   "goldLang": "am",
+   "qid": "tl-017"
+  },
+  {
+   "lang": "am",
+   "section": "packages",
+   "slug": "telecom-ethiotelecom-am-sms-package-new",
+   "topic": "sms package daily weekly monthly text messages birr",
+   "question": "የ30 የፅሁፍ መልዕክት ዕለታዊ ጥቅል ስንት ብር ነው?",
+   "topicAm": "የፅሁፍ መልዕክት ጥቅል ዕለታዊ ሳምንታዊ ወርኃዊ",
+   "goldLang": "am",
+   "qid": "tl-018"
+  },
+  {
+   "lang": "am",
+   "section": "roaming",
+   "slug": "telecom-ethiotelecom-am-international-roaming",
+   "topic": "roaming service countries local sim calls",
+   "question": "በሮሚንግ አገልግሎት በስንት ሀገሮች ውስጥ መጠቀም እችላለሁ?",
+   "topicAm": "ሮሚንግ አገልግሎት ሀገሮች ሲም ካርድ ጥሪዎችን",
+   "goldLang": "am",
+   "qid": "tl-019"
+  },
+  {
+   "lang": "am",
+   "section": "roaming",
+   "slug": "telecom-ethiotelecom-am-international-call-sms",
+   "topic": "international voice package middle east countries birr",
+   "question": "ወደ ተባበሩት አረብ ኤምሬትስ ለመደወል የመካከለኛው ምሥራቅ ወርኃዊ 50 ደቂቃ ጥቅል ስንት ብር ነው?",
+   "topicAm": "ዓለም አቀፍ ድምፅ ጥቅል መካከለኛው ምሥራቅ ደቂቃ ብር",
+   "goldLang": "am",
+   "qid": "tl-020"
+  },
+  {
+   "lang": "am",
+   "section": "sim",
+   "slug": "telecom-ethiotelecom-am-national-id",
+   "topic": "fayda digital identity biometric fingerprint",
+   "question": "ፋይዳ ብሔራዊ መታወቂያ ምንድን ነው?",
+   "topicAm": "ፋይዳ ዲጂታል መታወቂያ ባዮሜትሪክ የጣት አሻራ",
+   "goldLang": "am",
+   "qid": "tl-021"
+  },
+  {
+   "lang": "am",
+   "section": "postpaid",
+   "slug": "telecom-ethiotelecom-am-postpaid-mobile-package",
+   "topic": "postpaid mobile package monthly minutes gigabyte birr",
+   "question": "ለድርጅት ደንበኞች የቀረበው 300 ደቂቃ ያለው የድህረ ክፍያ ጥቅል ስንት ብር ነው?",
+   "topicAm": "የድህረ ክፍያ ሞባይል ጥቅል ደቂቃ ድርጅት",
+   "goldLang": "am",
+   "qid": "tl-022"
+  },
+  {
+   "lang": "am",
+   "section": "coverage",
+   "slug": "telecom-ethiotelecom-am-5g-mobile-package",
+   "topic": "5g network sites addis ababa devices packages",
+   "question": "የ5ጂ አገልግሎት በአዲስ አበባ በስንት ሳይቶች ተጀምሯል?",
+   "topicAm": "አገልግሎት ኔትወርክ አዲስ አበባ ደንበኞቹ",
+   "goldLang": "am",
+   "qid": "tl-023"
+  },
+  {
+   "lang": "am",
+   "section": "consumer",
+   "slug": "telecom-eca-am-safaricom-draft-consumer-code-of-conduct",
+   "topic": "complaint response working days customers safaricom",
+   "question": "ሳፋሪኮም ኢትዮጵያ የደንበኛ ቅሬታ ሲደርሰው በስንት የስራ ቀናት ውስጥ ምላሽ ይሰጣል?",
+   "topicAm": "ቅሬታ ሳፋሪኮም ኢትዮጵያ የስራ ቀናት ምላሽ",
+   "goldLang": "am",
+   "qid": "tl-024"
+  },
+  {
+   "lang": "am",
+   "section": "fees",
+   "slug": "telecom-eca-am-directive-1024-2017-license-and-regulatory-fees",
+   "topic": "license application fee refund not granted",
+   "question": "የፈቃድ ማመልከቻ ክፍያ ፈቃዱ ካልተሰጠ ተመላሽ ይደረጋል?",
+   "topicAm": "የፈቃድ ማመልከቻ ክፍያ ተመላሽ ፈቃድ",
+   "goldLang": "am",
+   "qid": "tl-025"
+  },
+  {
+   "lang": "en",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-packages-data",
+   "topic": "safaricom data packages daily weekly monthly ETB",
+   "question": "How much is the 1 GB daily data package on Safaricom Ethiopia?",
+   "goldLang": "en",
+   "qid": "tl-026"
+  },
+  {
+   "lang": "en",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-packages-voice",
+   "topic": "safaricom voice packages monthly minutes ETB",
+   "question": "How much does a 500 minute monthly voice package cost on Safaricom?",
+   "goldLang": "en",
+   "qid": "tl-027"
+  },
+  {
+   "lang": "en",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-packages-sms",
+   "topic": "safaricom sms packages monthly ETB",
+   "question": "What does the 1,000 SMS monthly package cost on Safaricom Ethiopia?",
+   "goldLang": "en",
+   "qid": "tl-028"
+  },
+  {
+   "lang": "en",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-getting-started-get-sim-card",
+   "topic": "safaricom sim card APN settings android",
+   "question": "How do I set up the internet APN after I get a Safaricom SIM card?",
+   "goldLang": "en",
+   "qid": "tl-029"
+  },
+  {
+   "lang": "en",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-getting-started-roaming-and-internationals",
+   "topic": "safaricom roaming internet package weekly ETB",
+   "question": "How much is the 1 GB weekly roaming internet package on Safaricom?",
+   "goldLang": "en",
+   "qid": "tl-030"
+  },
+  {
+   "lang": "en",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-support-contact-us",
+   "topic": "safaricom customer care short number prepay postpay",
+   "question": "What is the short number for Safaricom Ethiopia prepay customer care?",
+   "goldLang": "en",
+   "qid": "tl-031"
+  },
+  {
+   "lang": "en",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-special-offers-vo-lte",
+   "topic": "safaricom volte 4G smartphone coverage requirements",
+   "question": "What do I need to use VoLTE on Safaricom Ethiopia?",
+   "goldLang": "en",
+   "qid": "tl-032"
+  },
+  {
+   "lang": "en",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-fixed-service-fiber",
+   "topic": "safaricom fiber broadband prepaid Mbps ETB",
+   "question": "How much is 50 Mbps prepaid fiber broadband on Safaricom Ethiopia?",
+   "goldLang": "en",
+   "qid": "tl-033"
+  },
+  {
+   "lang": "en",
+   "section": "ethiotelecom",
+   "slug": "telecom-ethiotelecom-faq",
+   "topic": "ethio numbering scheme mobile numbers digits subscriber",
+   "question": "What digits do Ethio telecom mobile numbers start with?",
+   "goldLang": "en",
+   "qid": "tl-034"
+  },
+  {
+   "lang": "en",
+   "section": "care",
+   "slug": "telecom-ethiotelecom-faq",
+   "topic": "customer support till service",
+   "question": "Until what time does Ethio telecom provide customer support?",
+   "goldLang": "en",
+   "qid": "tl-035"
+  },
+  {
+   "lang": "en",
+   "section": "sim",
+   "slug": "telecom-ethiotelecom-esim",
+   "topic": "esim embedded multiple numbers device QR code",
+   "question": "What is eSIM and how do I activate it on Ethio telecom?",
+   "goldLang": "en",
+   "qid": "tl-036"
+  },
+  {
+   "lang": "en",
+   "section": "sim",
+   "slug": "telecom-ethiotelecom-prepaid-mobile",
+   "topic": "prepaid mobile subscription requirement photographs application form",
+   "question": "What documents do I need to subscribe to a prepaid mobile line on Ethio telecom?",
+   "goldLang": "en",
+   "qid": "tl-037"
+  },
+  {
+   "lang": "en",
+   "section": "internet",
+   "slug": "telecom-ethiotelecom-wireless-broadband",
+   "topic": "wireless broadband unlimited monthly package speed price birr",
+   "question": "What is the monthly price of the 10 Mbps unlimited wireless broadband package?",
+   "goldLang": "en",
+   "qid": "tl-038"
+  },
+  {
+   "lang": "en",
+   "section": "coverage",
+   "slug": "telecom-ethiotelecom-new-ethio-telecom-4g-lte-sites",
+   "topic": "4G LTE sites region town Ethio telecom",
+   "question": "Which towns got new 4G LTE sites on Ethio telecom?",
+   "goldLang": "en",
+   "qid": "tl-039"
+  },
+  {
+   "lang": "en",
+   "section": "coverage",
+   "slug": "telecom-ethiotelecom-5g-mobile-package",
+   "topic": "5G network sites Addis Ababa devices supported",
+   "question": "On how many sites in Addis Ababa did Ethio telecom start its 5G service?",
+   "goldLang": "en",
+   "qid": "tl-040"
+  },
+  {
+   "lang": "en",
+   "section": "student",
+   "slug": "telecom-ethiotelecom-student-package",
+   "topic": "student package data voice birr minutes gift",
+   "question": "What does the Ethio telecom student data package cost for 1 GB?",
+   "goldLang": "en",
+   "qid": "tl-041"
+  },
+  {
+   "lang": "en",
+   "section": "fraud",
+   "slug": "telecom-ethiotelecom-what-are-frequent-fraud-types",
+   "topic": "fraud types social engineering phishing customers",
+   "question": "What are the most frequent fraud types Ethio telecom warns customers about?",
+   "goldLang": "en",
+   "qid": "tl-042"
+  },
+  {
+   "lang": "en",
+   "section": "roaming",
+   "slug": "telecom-ethiotelecom-international-dialing-codes",
+   "topic": "international dialing codes country Bahrain",
+   "question": "What is the international dialing code for Bahrain?",
+   "goldLang": "en",
+   "qid": "tl-043"
+  },
+  {
+   "lang": "en",
+   "section": "roaming",
+   "slug": "telecom-ethiotelecom-international-roaming",
+   "topic": "roaming United Arab Emirates Saudi Arabia partner networks",
+   "question": "Which partner networks does Ethio telecom use for roaming in the UAE and Saudi Arabia?",
+   "goldLang": "en",
+   "qid": "tl-044"
+  },
+  {
+   "lang": "en",
+   "section": "consumer",
+   "slug": "telecom-eca-consumer-affairs",
+   "topic": "consumer complaint authority working days licensee escalation",
+   "question": "When can I take my complaint about a telecom operator to the Ethiopian Communications Authority?",
+   "alsoSlugs": [
+    "telecom-eca-directive-832-2021-consumer-rights-and-protection"
+   ],
+   "goldLang": "en",
+   "qid": "tl-045"
+  },
+  {
+   "lang": "am",
+   "section": "consumer",
+   "slug": "telecom-eca-directive-832-2021-consumer-rights-and-protection",
+   "topic": "licensee complaint ten working days notification authority thirty",
+   "question": "ቅሬታዬን ለአገልግሎት ሰጪው ካቀረብኩ በኋላ ካልተፈታ ወደ ኮሙኒኬሽን ባለሥልጣኑ በስንት የሥራ ቀናት ውስጥ ማመልከት አለብኝ?",
+   "alsoSlugs": [
+    "telecom-eca-consumer-affairs"
+   ],
+   "goldLang": "en",
+   "qid": "tl-046"
+  },
+  {
+   "lang": "am",
+   "section": "consumer",
+   "slug": "telecom-eca-consumer-affairs",
+   "topic": "complaint filing authority full name address telephone complainant",
+   "question": "ለኢትዮጵያ ኮሙኒኬሽን ባለሥልጣን ቅሬታ ሳቀርብ ምን መረጃ መስጠት አለብኝ?",
+   "goldLang": "en",
+   "qid": "tl-047"
+  },
+  {
+   "lang": "am",
+   "section": "sim",
+   "slug": "telecom-eca-directive-799-2021-sim-card-registration",
+   "topic": "sim card registration business letter licence TIN identification",
+   "question": "ለድርጅት ሲም ካርድ ለማስመዝገብ ምን ሰነዶች ያስፈልጋሉ?",
+   "goldLang": "en",
+   "qid": "tl-048"
+  },
+  {
+   "lang": "am",
+   "section": "sim",
+   "slug": "telecom-eca-directive-799-2021-sim-card-registration",
+   "topic": "sim registration minor guardian birth certificate",
+   "question": "ለልጅ ሲም ካርድ ለማስመዝገብ ምን ማቅረብ አለብኝ?",
+   "goldLang": "en",
+   "qid": "tl-049"
+  },
+  {
+   "lang": "am",
+   "section": "numbering",
+   "slug": "telecom-eca-directive-795-2021-numbering",
+   "topic": "numbers national resources owned customers licensees",
+   "question": "የስልክ ቁጥር የማን ንብረት ነው፣ የደንበኛ ወይስ የአገልግሎት ሰጪው?",
+   "goldLang": "en",
+   "qid": "tl-050"
+  },
+  {
+   "lang": "am",
+   "section": "tariff",
+   "slug": "telecom-eca-directive-797-2021-lawful-tariffs",
+   "topic": "tariff approval authority fifteen working days notify",
+   "question": "አንድ ኦፕሬተር አዲስ ታሪፍ ሲያቀርብ ባለሥልጣኑ በስንት የሥራ ቀናት ውስጥ ይወስናል?",
+   "goldLang": "en",
+   "qid": "tl-051"
+  },
+  {
+   "lang": "am",
+   "section": "law",
+   "slug": "telecom-eca-communications-service-proclamation-1148-2019",
+   "topic": "authority require telecommunications operators register SIM cards National Subscriber Registry",
+   "question": "ሲም ካርዶችን መመዝገብና ብሔራዊ የተመዝጋቢዎች መዝገብ ማቋቋም በኮሙኒኬሽን አገልግሎት አዋጅ ለማን ተሰጥቷል?",
+   "goldLang": "en",
+   "qid": "tl-052"
+  },
+  {
+   "lang": "am",
+   "section": "law",
+   "slug": "telecom-eca-personal-data-protection-proclamation-1321-2024",
+   "topic": "personal data breach notify authority seventy-two hours controller",
+   "question": "የግል መረጃ ጥሰት ሲከሰት የመረጃ ተቆጣጣሪው ለባለሥልጣኑ በስንት ሰዓት ውስጥ ማሳወቅ አለበት?",
+   "goldLang": "en",
+   "qid": "tl-053"
+  },
+  {
+   "lang": "am",
+   "section": "levy",
+   "slug": "telecom-eca-universal-access-fund-regulation-585-2026",
+   "topic": "universal access levy licensees gross annual revenue percent",
+   "question": "ለሁለንተናዊ ተደራሽነት ፈንድ ፈቃድ ባለቤቶች ከዓመታዊ ገቢያቸው ስንት በመቶ ይከፍላሉ?",
+   "goldLang": "en",
+   "qid": "tl-054"
+  },
+  {
+   "lang": "am",
+   "section": "levy",
+   "slug": "telecom-eca-universal-access-fund-regulation-585-2026",
+   "topic": "grace period new entrant licensees three years levy",
+   "question": "አዲስ ወደ ገበያው የገቡ ፈቃድ ባለቤቶች ከሁለንተናዊ ተደራሽነት መዋጮ የሚቆዩበት የእፎይታ ጊዜ ስንት ነው?",
+   "goldLang": "en",
+   "qid": "tl-055"
+  },
+  {
+   "lang": "am",
+   "section": "fees",
+   "slug": "telecom-eca-directive-1024-2024-license-and-regulatory-fees",
+   "topic": "frequency usage fee mobile services first year percent",
+   "question": "የሞባይል አገልግሎት የፍሪኩዌንሲ ክፍያ በመጀመሪያው ዓመት ስንት በመቶ ይከፈላል?",
+   "goldLang": "en",
+   "qid": "tl-056"
+  },
+  {
+   "lang": "am",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-packages-data",
+   "topic": "safaricom data packages monthly 1 GB ETB",
+   "question": "የሳፋሪኮም ወርኃዊ 1 ጊባ ዳታ ጥቅል ስንት ብር ነው?",
+   "goldLang": "en",
+   "qid": "tl-057"
+  },
+  {
+   "lang": "am",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-support-contact-us",
+   "topic": "safaricom customer care short number prepay postpay",
+   "question": "የሳፋሪኮም ደንበኞች አገልግሎት አጭር ቁጥር ስንት ነው?",
+   "goldLang": "en",
+   "qid": "tl-058"
+  },
+  {
+   "lang": "am",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-special-offers-vo-lte",
+   "topic": "safaricom volte extra cost voice plan bundle",
+   "question": "ሳፋሪኮም ቮልቲኢ (VoLTE) ለመጠቀም ተጨማሪ ክፍያ አለው?",
+   "goldLang": "en",
+   "qid": "tl-059"
+  },
+  {
+   "lang": "am",
+   "section": "safaricom",
+   "slug": "telecom-safaricom-fixed-service-fiber",
+   "topic": "safaricom fiber broadband Mbps ETB prepaid",
+   "question": "የሳፋሪኮም 100 ሜጋቢት ፋይበር ኢንተርኔት በወር ስንት ብር ነው?",
+   "goldLang": "en",
+   "qid": "tl-060"
+  }
+ ]
+}

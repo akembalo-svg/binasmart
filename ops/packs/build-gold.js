@@ -63,6 +63,20 @@ function verify(questions, dir) {
       bad.push({ qid: q.qid, slug: q.slug, why: 'topic_not_on_page', missing: words.filter(w => !matched.includes(w)) });
       continue;
     }
+    // `alsoSlugs`: another document of the pack that carries the same answer (a directive and the regulator's page
+    // that repeats it). Each one must pass exactly the same test as the first, or the question is refused by name.
+    let alsoBad = false;
+    for (const slug of (Array.isArray(q.alsoSlugs) ? q.alsoSlugs : [])) {
+      const a = readDoc(dir, slug);
+      if (!a) { bad.push({ qid: q.qid, slug, why: 'no_document' }); alsoBad = true; continue; }
+      const aAm = (a.meta.lang || 'en') === 'am';
+      if (aAm && !q.topicAm) { bad.push({ qid: q.qid, slug, why: 'no_topic_am' }); alsoBad = true; continue; }
+      const aHay = aAm ? foldEthiopic(norm(a.text)) : norm(a.text);
+      const aWords = aAm ? contentWordsAm(q.topicAm) : contentWords(q.topic);
+      const aMatched = aWords.filter(w => aHay.includes(w));
+      if (aMatched.length < MIN_MATCHES) { bad.push({ qid: q.qid, slug, why: 'topic_not_on_page', missing: aWords.filter(w => !aMatched.includes(w)) }); alsoBad = true; }
+    }
+    if (alsoBad) continue;
     ok.push({ ...q, matched, pageLang: d.meta.lang || 'en', title: d.meta.title || q.slug });
   }
   return { ok, bad };
@@ -86,7 +100,7 @@ function buildGold(questions, dir, out, { source, prefer, about } = {}) {
       batch: q.batch || 1,
       agent: 'bini', prefer,
       gold_source: source, gold_slug: q.slug,
-      gold_pages: [{ source, slug: q.slug }],
+      gold_pages: [{ source, slug: q.slug }].concat((Array.isArray(q.alsoSlugs) ? q.alsoSlugs : []).map(slug => ({ source, slug }))),
       grade: 'GOOD',
       crossLingual: q.lang !== q.pageLang,
       strictCrossLingual: q.lang !== q.pageLang,
@@ -119,6 +133,7 @@ const PREFER_OF = {
   travel: () => require(path.join(ROOT, 'assistant', 'travel.js')).PREFER,
   banking: () => require(path.join(ROOT, 'assistant', 'banking.js')).PREFER,
   business: () => require(path.join(ROOT, 'assistant', 'business.js')).PREFER,
+  telecom: () => require(path.join(ROOT, 'assistant', 'telecom.js')).PREFER,
 };
 
 function main(argv = process.argv.slice(2)) {
