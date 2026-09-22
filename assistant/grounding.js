@@ -13,13 +13,20 @@
 // This is deliberately domain-neutral. The same guard is what any adviser built on this stack needs, where
 // an invented dose, deadline or figure is not a nuisance but a harm.
 
-const MONEY = 'ብር|birr|birrii|ETB';
+// Dollars and euros are here since 2026-09-23. Asked what a shed costs in an industrial park, Bini wrote
+// "Years 8-10: US$3.25 per square meter per month" twice, from a table whose Year 8-10 cells are $3.5 and
+// $2.75. 3.25 is in no source. It reached the reader because the only currencies this list knew were birr,
+// so a dollar price was not a figure at all — and a currency written BEFORE the number ($3.25, US$1.5,
+// USD 4.34) matched no pattern, whatever the currency. Investment, airline and visa pages price in dollars.
+const MONEY = 'ብር|birr|birrii|ETB|USD|US ?dollars?|dollars?|ዶላር|EUR|euros?|ዩሮ';
 const DISTANCE = 'ኪሎ ?ሜትር|ኪ\\.?ሜ|km|kilomet\\w*|ሜትር|met(?:er|re)s?';
 const PERCENT = 'በመቶ|percent|%';
 const TIME = 'ደቂቃ|minutes?|mins?|ሰዓት|hours?|ቀናት?|days?|ወራት?|months?';
 
 // number + unit
 const FIGURE = new RegExp('(\\d[\\d,.٬\']*)\\s*(' + MONEY + '|' + DISTANCE + '|' + PERCENT + '|' + TIME + ')', 'gi');
+// currency + number: $3.25, US$1.5, US $ 2, USD 4.34, ETB 1,000, €20, £15. Always money, so always checked.
+const PREFIXED = /(?<![A-Za-z])(US ?\$|\$|USD|ETB|EUR|€|£|GBP)\s?(\d[\d,.٬']*)/gi;
 // A bare four-digit year is a claim too, and it carries no unit, so the regex above never saw one. Measured on
 // 2026-09-17 inside an answer that cited Banking Business Proclamation No. 1360/2025 correctly: "This change
 // came about in the last quarter of 2022 with a new bill" — a date in no page of the pack, sitting inside a
@@ -36,16 +43,24 @@ const ALWAYS = new RegExp('^(' + MONEY + '|' + DISTANCE + '|' + PERCENT + ')$', 
 // a duration or count below this is normal speech ("8 minutes", "2 days"), above it is a specific claim
 const TRIVIAL = 24;
 
-function digitsOf(s) { return String(s).replace(/[,٬'\s]/g, '').replace(/\.0+$/, ''); }
+// One number, one key. Separators go ("1,500" = "1500"), a full stop that ends the sentence goes ("239." =
+// "239"), and a decimal is keyed by its VALUE: trailing zeros after the point go, so 3 = 3.0 = 3.00 and
+// 3.5 = 3.50. Equal values are the same figure — the EIC lease table itself writes "$3" in one row and
+// "$3.0" in the next. Digits that change the value never match: 3.25 is not 3, not 25, not 2.5 and not 32.5.
+function digitsOf(s) {
+  let d = String(s).replace(/[,٬'\s]/g, '').replace(/\.+$/, '');
+  if (/^\d+\.\d+$/.test(d)) d = d.replace(/0+$/, '').replace(/\.$/, '');
+  return d;
+}
 
 // Every number in the grounding, normalised the same way, so "1,500" in a document matches "1500" in a reply.
+// Each number is added whole and only whole. Until 2026-09-23 a decimal also added its integer part ("3.5"
+// added "3"), and a decimal in the reply was accepted when its integer part was grounded — so "3.25" passed
+// because the table had a $3 somewhere. That fallback was there for a number that ends a sentence ("239.");
+// digitsOf now drops that full stop itself, so the fallback has no job left except letting decimals through.
 function groundedNumbers(grounding) {
   const out = new Set();
-  for (const m of String(grounding || '').matchAll(/\d[\d,.٬']*/g)) {
-    const d = digitsOf(m[0]);
-    out.add(d);
-    if (d.includes('.')) out.add(d.split('.')[0]);
-  }
+  for (const m of String(grounding || '').matchAll(/\d[\d,.٬']*/g)) out.add(digitsOf(m[0]));
   return out;
 }
 
@@ -161,14 +176,22 @@ function findUngrounded(text, grounding, question) {
   const have = groundedNumbers(grounding);
   for (const d of groundedNumbers(question)) have.add(d);
   const bad = [];
+  const seen = new Set();   // "$3.25 USD" is one figure, not two
+  for (const m of String(text || '').matchAll(PREFIXED)) {
+    const d = digitsOf(m[2]);
+    if (!Number.isFinite(Number(d))) continue;
+    seen.add(m.index + m[0].length - m[2].length);
+    if (have.has(d)) continue;
+    bad.push({ value: m[2], unit: m[1].trim(), text: m[0] });
+  }
   for (const m of String(text || '').matchAll(FIGURE)) {
+    if (seen.has(m.index)) continue;
     const d = digitsOf(m[1]);
     const n = Number(d);
     if (!Number.isFinite(n)) continue;
     const unit = m[2].trim();
     if (!ALWAYS.test(unit) && n <= TRIVIAL) continue;
     if (have.has(d)) continue;
-    if (d.includes('.') && have.has(d.split('.')[0])) continue;
     bad.push({ value: m[1], unit, text: m[0] });
   }
   // The same test for a bare year. A fetched date ("fetched 2026-09-16", "የተወሰደበት ቀን 2026-09-16") is on the
@@ -245,9 +268,17 @@ function dropUngrounded(text, grounding, question) {
   // was reversed rather than a figure being wrong, and it must appear on every agent's path.
   const masked = bad.filter(b => b.reason === 'masked');
   if (masked.length) console.warn('[grounding] dropped masked-number reconstruction: ' + masked.map(b => b.text).join(', '));
-  const parts = String(text).split(/(?<=[.!?።])\s+/);
-  const kept = parts.filter(p => !bad.some(b => p.includes(b.text)));
-  return { text: kept.join(' ').replace(/\s{2,}/g, ' ').trim(), dropped: bad };
+  // A line is a boundary as well as a full stop. A price list is written one bullet per line with no full
+  // stop anywhere, so splitting on punctuation alone made the whole list one "sentence": the one invented row
+  // took every true row with it, and joining the rest with spaces flattened the list. Each line is split into
+  // sentences, the sentences with an invented figure go, and the lines keep their breaks and indentation.
+  const lines = [];
+  for (const line of String(text).split('\n')) {
+    if (!line.trim()) { lines.push(''); continue; }
+    const kept = line.split(/(?<=[.!?።])\s+/).filter(p => !bad.some(b => p.includes(b.text)));
+    if (kept.length) lines.push(kept.join(' ').replace(/(\S)[ \t]{2,}/g, '$1 ').replace(/\s+$/, ''));
+  }
+  return { text: lines.join('\n').replace(/\n{3,}/g, '\n\n').trim(), dropped: bad };
 }
 
 // The date itself, once the marker is right: assistant/dates.js. A Gregorian date must be in the sources or be
@@ -255,4 +286,4 @@ function dropUngrounded(text, grounding, question) {
 const { fixGregorianDates } = require('./dates');
 
 module.exports = { findUngrounded, dropUngrounded, fixCalendarMarker, fixGregorianDates, maskedShapes, completesMask,
-  FIGURE, YEAR, EC_MARKER, LONGNUM, MASKED_NUMBER, TRIVIAL, LONG_MIN, OWN_NUMBERS };
+  FIGURE, PREFIXED, YEAR, EC_MARKER, LONGNUM, MASKED_NUMBER, TRIVIAL, LONG_MIN, OWN_NUMBERS };
