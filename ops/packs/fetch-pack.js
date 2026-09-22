@@ -208,6 +208,58 @@ function stripPackBoilerplate(pages, site = null) {
   return stripped.map(p => ({ ...p, slug: p.slug.slice(p.siteId.length + 1), text: p.text.trim() }));
 }
 
+// ---------- tables, one self-contained line per row ----------
+// htmlToText ends every table cell with " | " and every row with a newline, so a table whose page source puts each
+// <td> on a line of its own reaches the pack one CELL per line, the rows split by blank lines:
+//   Lease Period |                        Year 5 – 7 |
+//   Adama & Dire Dawa Industry Parks |    $3.0 per m2 per month |
+//   All other Industry Parks |            $2.5 per m2 per month |
+// Nine lines below the header nothing says which column "$2.5 per m2 per month" sits under, and Bini paired the
+// Investment Commission's shed lease prices with the wrong parks and the wrong years. A site that sets
+// `tableRows` has such a table written as its header line and then one line per data row that names the column
+// of every value:
+//   Lease Period | Adama & Dire Dawa Industry Parks | All other Industry Parks
+//   Year 5 – 7: Adama & Dire Dawa Industry Parks $3.0 per m2 per month; All other Industry Parks $2.5 per m2 per month
+// Every cell is copied exactly: nothing is computed, merged or restated, and an empty cell is left out rather than
+// filled. renderDoc applies it to the body it writes, so the weekly fetch (writePack) and a --rerender from the text
+// on disk write the same document; it is idempotent, because no line it writes ends in "|". The document's
+// contentHash stays the hash of the page as published, so an unchanged page still reads as unchanged and the
+// Amharic sidecar entry stamped with that hash still applies.
+// What counts as a table: two or more consecutive blank-line-separated blocks in which every line ends in "|",
+// all with the same number of cells, at least two. The first block is a header only if every one of its cells is
+// filled and none holds a digit: a header names columns, it does not carry figures. A table whose first row fails
+// that, or whose rows do not all have the same number of cells (a header cell spanning two columns), is left
+// exactly as it was: guessing which column a figure belongs to is worse than the flat form.
+const TABLE_CELL = /^(.*?)\s*\|$/;
+function tableCells(block) {
+  const lines = String(block).split('\n').map(l => l.trim()).filter(Boolean);
+  if (lines.length < 2) return null;
+  const cells = [];
+  for (const l of lines) { const m = TABLE_CELL.exec(l); if (!m) return null; cells.push(m[1].trim()); }
+  return cells;
+}
+function tableRowLine(head, row) {
+  const pairs = [];
+  for (let k = 1; k < row.length; k++) if (row[k]) pairs.push(head[k] + ' ' + row[k]);
+  if (!pairs.length) return row[0] || '';
+  return (row[0] ? row[0] + ': ' : '') + pairs.join('; ');
+}
+function tableRows(text) {
+  const blocks = String(text == null ? '' : text).split('\n\n');
+  const out = [];
+  for (let i = 0; i < blocks.length;) {
+    const head = tableCells(blocks[i]);
+    const rows = [];
+    let j = i + 1;
+    if (head) for (; j < blocks.length; j++) { const c = tableCells(blocks[j]); if (!c || c.length !== head.length) break; rows.push(c); }
+    if (!head || !rows.length) { out.push(blocks[i]); i++; continue; }
+    if (!head.every(c => c && !/[0-9]/.test(c))) { for (let k = i; k < j; k++) out.push(blocks[k]); i = j; continue; }
+    out.push([head.join(' | '), ...rows.map(r => tableRowLine(head, r)).filter(Boolean)].join('\n'));
+    i = j;
+  }
+  return out.join('\n\n');
+}
+
 // The no-duplicate rule at the level of the paragraph. A site may name `dedupAgainstPacks: ["banking"]`: a
 // paragraph of at least 80 characters that a live document of one of those packs already holds, word for word
 // (whitespace and case aside), is taken out of this page, because two packs must not both answer the same
@@ -307,7 +359,7 @@ function amEntry(page, site, pack, amHeaders) {
   // went - which is worse than no Amharic summary at all, because it reads like this week's. Such an entry is
   // ignored until ops/packs/am-headers.js writes it again from the new text, which ops/packs/freshness.js
   // makes it do in the same weekly run that noticed the change.
-  if (e.contentHash && e.contentHash !== contentHash(page.text)) return null;
+  if (e.contentHash && e.contentHash !== (page.contentHash || contentHash(page.text))) return null;
   return e;
 }
 // The grounding rule, enforced in code rather than trusted to the model: every run of digits in an Amharic
@@ -539,7 +591,11 @@ function header(page, site, today, pack, amh, corrected = false) {
 // `corrections` is the registry's corrections array; `onUnmatched(slug, correction)` hears about a correction
 // whose passage is no longer on the page. Without a callback the miss is logged, never swallowed.
 function renderDoc(page, site, { today, firstFetched, pack, amHeaders, corrections, onUnmatched } = {}) {
-  const fixed = applyCorrections(page.text, page.slug, corrections);
+  // tableRows changes how a table is laid out in the document and nothing else, so it is applied to the body
+  // only. contentHash stays the hash of the page as the institution published it (or the one a --rerender
+  // carries), which is what the weekly unchanged-check and the Amharic sidecar entries are stamped with.
+  const body = site && site.tableRows ? tableRows(page.text) : page.text;
+  const fixed = applyCorrections(body, page.slug, corrections);
   for (const c of fixed.unmatched) {
     if (onUnmatched) onUnmatched(page.slug, c);
     else console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] correction no longer matches ' + page.slug);
@@ -556,7 +612,7 @@ function renderDoc(page, site, { today, firstFetched, pack, amHeaders, correctio
     pages: page.ocrPages == null ? '' : String(page.ocrPages),
     text_source: page.textSource || '', ocr_quality: page.ocrQuality || '',
     status: 'live', fetchedAt: today, lastChecked: today, firstFetched: firstFetched && firstFetched !== today ? firstFetched : '',
-    contentHash: contentHash(page.text), generated_by: (pack && pack.generatedBy) || 'ops/travel/fetch-airline.js',
+    contentHash: page.contentHash || contentHash(page.text), generated_by: (pack && pack.generatedBy) || 'ops/travel/fetch-airline.js',
     packFormat: (pack && pack.packFormat) || PACK_FORMAT };
   return frontMatter(meta) + '\n\n# ' + title + (titleAm ? ' · ' + titleAm : '')
     + '\n\n' + header(page, site, today, pack, amh, fixed.applied.length > 0) + '\n\n' + fixed.text.trim() + '\n';
@@ -723,7 +779,10 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
       section: meta.section || (sec ? sec.key : null), sectionTitleAm: sec ? sec.titleAm : null,
       textSource: meta.text_source || '', ocrQuality: meta.ocr_quality || '',
       ocrPages: meta.pages === undefined || meta.pages === '' ? null : meta.pages,
-      part: pt ? Number(pt[1]) : null, parts: pt ? Number(pt[2]) : 1 };
+      part: pt ? Number(pt[1]) : null, parts: pt ? Number(pt[2]) : 1,
+      // A tableRows site's text on disk holds its tables one row per line, which is our layout, not the page:
+      // the hash recorded when the page was fetched is the hash of the page as published, and it is carried.
+      contentHash: site.tableRows && meta.contentHash ? meta.contentHash : undefined };
     let fresh = renderDoc(page, site, { today: meta.fetchedAt, firstFetched: meta.firstFetched || meta.fetchedAt, pack: reg.pack, amHeaders, corrections, onUnmatched });
     // renderDoc writes lastChecked from the day it is given, and the day it is given here is the day the page
     // was fetched. Put the record of when we last looked back exactly as it stood.
@@ -1408,7 +1467,7 @@ module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugF
   readOcrManifest, ocrTitleOf, splitOcrParts, splitLongParts, ocrLangOf, OCR_MAX_CHARS, HTML_MAX_CHARS,
   langOfText, ethiopicCount, AM_FLOOR,
   applyCorrections, stripCorrections, correctionNote, packCorrections, CORR_MARK,
-  PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates };
+  PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates, tableRows };
 
 //   node ops/packs/fetch-pack.js --pack banking
 //   node ops/packs/fetch-pack.js --pack banking --site zemen --limit 5 --dry-run

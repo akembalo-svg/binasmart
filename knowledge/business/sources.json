@@ -196,6 +196,8 @@
     {
       "id": "eic",
       "maskPhones": true,
+      "tableRows": true,
+      "tableRowsNote": "The FAQ page lays out its tables one <td> per source line, so htmlToText wrote the industrial-park shed lease table one cell per line and Bini attached prices to the wrong park and the wrong years. tableRows (ops/packs/fetch-pack.js) writes each row as one line naming its column headers; every cell copied exactly. A table without a figure-free header row is left as it was.",
       "name": "Ethiopian Investment Commission",
       "nameAm": "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን",
       "host": "investethiopia.gov.et",

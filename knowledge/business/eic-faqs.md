@@ -7,7 +7,7 @@ section: "help"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
+lastChecked: "2026-09-20"
 contentHash: "4eb6cdeafd5d505506ced619196aaa2b7ca87619"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
@@ -391,25 +391,11 @@ There are 3 types of leases and prices for industry parks; readymade sheds, read
 
 - Readymade sheds are available start at a price of $2 per m2 per month
 
-Lease Period |
-Adama & Dire Dawa Industry Parks |
-All other Industry Parks |
-
-Year 1 – 4 |
-$2.75 per m2 per month |
-$2.0 per m2 per month |
-
-Year 5 – 7 |
-$3.0 per m2 per month |
-$2.5 per m2 per month |
-
-Year 8 – 10 |
-$3.5 per m2 per month |
-$2.75 per m2 per month |
-
-Year 11 – 15 |
-$4.0 per m2 per month |
-$3 per m2 per month |
+Lease Period | Adama & Dire Dawa Industry Parks | All other Industry Parks
+Year 1 – 4: Adama & Dire Dawa Industry Parks $2.75 per m2 per month; All other Industry Parks $2.0 per m2 per month
+Year 5 – 7: Adama & Dire Dawa Industry Parks $3.0 per m2 per month; All other Industry Parks $2.5 per m2 per month
+Year 8 – 10: Adama & Dire Dawa Industry Parks $3.5 per m2 per month; All other Industry Parks $2.75 per m2 per month
+Year 11 – 15: Adama & Dire Dawa Industry Parks $4.0 per m2 per month; All other Industry Parks $3 per m2 per month
 
 - Readymade land
 

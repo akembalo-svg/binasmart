@@ -7,7 +7,7 @@ section: "about"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
+lastChecked: "2026-09-20"
 contentHash: "d3e087a2cd9cc54f2228c5b141faf9bbb2c7cf90"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
@@ -49,61 +49,20 @@ A yellow fever certificate is required when investors arrive from selected Afric
 
 Public holidays are celebrated according to the Ethiopian (Julian) Calendar, which consists of the following:
 
-Date |
-Public holidays |
-Remarks |
-
-September 11 |
-Ethiopian New Year |
-National holiday |
-
-September 27 |
-The Finding of the True Cross (Meskel) |
-Christian holiday |
-
-October 26 |
-Id Al Adaha (Arafa) |
-Muslim holiday |
-
-January 7 |
-Ethiopian Christmas |
-Christian holiday |
-
-January 19 |
-Ethiopian Epiphany |
-Christian holiday |
-
-January 24 |
-Prophet Mohamed’s Birthday (Maulid) |
-Muslim holiday |
-
-March 2 |
-Victory of Adwa |
-National holiday |
-
-May 1 |
-International Labor Day |
-National holiday |
-
-May 3 |
-Ethiopian Good Friday |
-Christian holiday |
-
-May 5 |
-Ethiopian Patriots day |
-National holiday |
-
-May 5 |
-Easter |
-Christian holiday |
-
-May 28 |
-Downfall of the Derg |
-National holiday |
-
-August 8 |
-Id Al Fater (Ramadan) |
-Muslim holiday |
+Date | Public holidays | Remarks
+September 11: Public holidays Ethiopian New Year; Remarks National holiday
+September 27: Public holidays The Finding of the True Cross (Meskel); Remarks Christian holiday
+October 26: Public holidays Id Al Adaha (Arafa); Remarks Muslim holiday
+January 7: Public holidays Ethiopian Christmas; Remarks Christian holiday
+January 19: Public holidays Ethiopian Epiphany; Remarks Christian holiday
+January 24: Public holidays Prophet Mohamed’s Birthday (Maulid); Remarks Muslim holiday
+March 2: Public holidays Victory of Adwa; Remarks National holiday
+May 1: Public holidays International Labor Day; Remarks National holiday
+May 3: Public holidays Ethiopian Good Friday; Remarks Christian holiday
+May 5: Public holidays Ethiopian Patriots day; Remarks National holiday
+May 5: Public holidays Easter; Remarks Christian holiday
+May 28: Public holidays Downfall of the Derg; Remarks National holiday
+August 8: Public holidays Id Al Fater (Ramadan); Remarks Muslim holiday
 
 ### Business Hours
 
