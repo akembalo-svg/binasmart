@@ -430,6 +430,15 @@ const ogJobs = cat => {
   fastify.get('/jobs/:slug', async (req, reply) => {
     const t = pick(req), lang = langOf(req);
     const j = await prisma.job.findUnique({ where: { slug: String(req.params.slug) }, include: { employer: true } });
+    // An address this vacancy used to live at: Google has it indexed, somebody has it in a Telegram
+    // message. A permanent redirect keeps both working and passes the ranking to the new address.
+    if (!j) {
+      const alias = await prisma.jobAlias.findUnique({ where: { slug: String(req.params.slug) } }).catch(() => null);
+      if (alias) {
+        const to = await prisma.job.findUnique({ where: { id: alias.jobId }, select: { slug: true, published: true } });
+        if (to && to.published) return reply.redirect('/jobs/' + to.slug, 301);
+      }
+    }
     if (!j || !j.published) return reply.code(404).type('text/html').send(shell({ title: 'አልተገኘም', desc: '', canonical: 'https://bina.et/jobs', body: '<main><div class="empty"><div class="big">🔍</div><h3>ይህ ማስታወቂያ የለም</h3><p class="sans"><a href="/jobs">ወደ ክፍት ሥራዎች →</a></p></div></main>', active: 'jobs' }));
     const closed = isClosed(j.deadline);
     const e = j.employer;
