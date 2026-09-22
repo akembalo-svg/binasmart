@@ -1787,6 +1787,55 @@ model Job {
   @@index([employerId])
 }
 
+// Somebody who wants to hear when a job in their field opens (2026-09-22).
+//
+// The board has thousands of vacancies and almost no returning readers: a job seeker looks once and
+// forgets the site. An alert reverses that - they choose a field once, and every morning the vacancies
+// that matter to them arrive in Telegram. It is the cheapest retention we can build, because the
+// channel, the categories and the bot already exist.
+//
+// One row per chat per field. lastSentAt is what stops a vacancy being sent twice; a new subscriber
+// starts from the moment they subscribe, never with a dump of the archive.
+model JobAlert {
+  id         String   @id @default(cuid())
+  chatId     String
+  field      String                        // a jobs/categories.js slug, or "all"
+  city       String?
+  lang       String   @default("am")
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  lastSentAt DateTime @default(now())
+  sentCount  Int      @default(0)
+
+  @@unique([chatId, field])
+  @@index([active])
+}
+
+// A company asking us to look at the system their staff struggle with — LMIS, Musaned, an embassy
+// portal, anything (2026-09-22).
+//
+// What we promise on the page is an ASSESSMENT, not a delivery date: "show us your system and in 3-5
+// days we tell you exactly what we can do, free". That is a promise we can always keep, and the owner's
+// rule is that we work only with licensed companies and government offices - so the licence and TIN/VAT
+// are asked for at first contact rather than discovered later.
+model AiAssessment {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  org         String                      // the company or office
+  contact     String                      // who is asking
+  phone       String
+  email       String?
+  licence     String?                     // trade licence number
+  tin         String?                     // TIN / VAT number
+  systems     String?                     // which systems they use
+  pain        String?                     // what their staff get stuck on
+  sector      String?                     // agency | bank | hospital | government | other
+  status      String   @default("new")    // new | assessing | answered | declined
+  note        String?
+
+  @@index([status, createdAt])
+}
+
 // A vacancy somebody asked us to publish — from Bini in chat, from an employer, from a form.
 //
 // It does NOT go on the board. It waits here until a person approves it, and that is the whole point:
@@ -1860,4 +1909,17 @@ model Candidate {
   @@index([category])
   @@index([jobId])
   @@index([createdAt])
+}
+
+// Where a person is in a conversation with @bina_smart_bot. The bot is otherwise stateless - every
+// message is answered on its own - which is right for questions and wrong for the one flow that takes
+// more than a message: speaking a CV. Kept in the database rather than in memory so a restart in the
+// middle does not silently swallow somebody's voice note, and swept by age, not by hand.
+model BotState {
+  chatId    String   @id
+  state     String                          // cv_wait_voice | cv_wait_phone
+  data      Json?                           // what has been gathered so far
+  updatedAt DateTime @updatedAt
+
+  @@index([updatedAt])
 }

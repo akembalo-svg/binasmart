@@ -38,6 +38,9 @@ const PROMPT = [
   '  "headline"  — their trade in 2-5 words (e.g. "Accountant", "Store keeper", "Nurse").',
   '  "summary"   — 2 or 3 sentences built only from what they wrote. Use NO pronouns: never he, she,',
   '                 his or her. The person\'s sex is not on this form and must not be guessed from a name.',
+  '                 IN AMHARIC this means no conjugated verb endings either - "አለው" and "አላት" both state a',
+  '                 sex nobody told you. Write the Amharic profile as noun phrases: "የ4 ዓመት የሽያጭ ልምድ።',
+  '                 በሽያጭ ሥራ አመራር ዲፕሎማ።" Never "አለው", "አላት", "ሠርቷል", "ሠርታለች".',
   '  "jobs"      — array of { "role", "employer", "period", "points": [up to 3 short duty lines] },',
   '                 newest first, ONLY for work they described. "" for anything they did not say.',
   '  "education" — array of { "award", "place", "year" }, only what they wrote.',
@@ -136,6 +139,60 @@ const toPdf = (html, out) => new Promise((resolve, reject) => {
   });
 });
 
+
+// One CV, from whatever the person gave us. The web form fills `source` from its fields; the bot fills it
+// from a spoken minute (jobs/voice-cv.js). Both land here, so the grounding rules above are applied once
+// rather than copied into a second path where they would quietly drift.
+async function buildCvFor({ prisma, apiKey, who, source, years, jobId, shareWider }) {
+  const name = who.name;
+  const phone = who.phone;
+  const cv = await askModel({ apiKey, text: source });
+  if (!cv) return { ok: false, error: 'other' };
+
+  // Drop anything the person did not actually say.
+  const hay = source;
+  cv.jobs = (Array.isArray(cv.jobs) ? cv.jobs : []).filter(j => grounded(j.role, hay) && grounded(j.employer, hay)).slice(0, 8)
+    .map(j => ({ role: clean(j.role, 80), employer: clean(j.employer, 90), period: clean(j.period, 40),
+      points: (Array.isArray(j.points) ? j.points : []).filter(p => grounded(p, hay)).slice(0, 3).map(p => clean(p, 160)) }));
+  cv.education = (Array.isArray(cv.education) ? cv.education : []).filter(e => grounded(e.award, hay) && grounded(e.place, hay)).slice(0, 5)
+    .map(e => ({ award: clean(e.award, 90), place: clean(e.place, 90), year: clean(e.year, 20) }));
+  cv.skills = (Array.isArray(cv.skills) ? cv.skills : []).filter(s => grounded(s, hay)).slice(0, 14).map(s => clean(s, 40));
+  cv.languages = (Array.isArray(cv.languages) ? cv.languages : []).filter(l => grounded(l && l.name, hay)).slice(0, 6)
+    .map(l => ({ name: clean(l.name, 30), level: clean(l.level, 20) }));
+  cv.headline = clean(cv.headline, 60);
+  // The summary is the one field that is meant to be rephrased, so the word-overlap test is the wrong
+  // one for it: it threw away perfectly honest profile lines. What must not be invented in prose is a
+  // QUANTITY - "six years", "managed 12 staff" - so the summary is kept unless it states a number the
+  // person never gave us.
+  const nums = new Set((hay.match(/\d+/g) || []));
+  const madeUp = (String(cv.summary || '').match(/\d+/g) || []).some(n => !nums.has(n));
+  cv.summary = madeUp ? '' : clean(cv.summary, 600);
+
+  fs.mkdirSync(CV_DIR, { recursive: true, mode: 0o700 });
+  const id = 'cv_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  const file = path.join(CV_DIR, id + '.pdf');
+  try { await toPdf(renderHtml(cv, who), file); } catch (e) { console.error('[cv] pdf: ' + e.message); return { ok: false, error: 'pdf' }; }
+  fs.chmodSync(file, 0o600);
+
+  let job = null;
+  if (jobId) job = await prisma.job.findUnique({ where: { id: String(jobId) }, select: { id: true, employerId: true, city: true } }).catch(() => null);
+
+  // The token is what lets the person download their own copy without an account, and nobody else's.
+  const token = crypto.randomBytes(12).toString('base64url');
+  const cand = await prisma.candidate.create({ data: {
+    name, phone, email: who.email || null, city: who.city || job?.city || null,
+    category: who.category || cv.headline || null,
+    jobId: job?.id || null, employerId: job?.employerId || null,
+    cvPath: file, cvMime: 'application/pdf',
+    summary: cv.summary || null, skills: cv.skills, years: Number.isFinite(Number(years)) ? Math.round(Number(years)) : null,
+    shareWider: shareWider === true || shareWider === 'true',
+    note: 'built:' + token,
+    deleteAfter: new Date(Date.now() + KEEP_DAYS * 86400000),
+  } });
+
+  return { ok: true, id: cand.id, token, pdf: '/cv/' + cand.id + '.pdf?k=' + token, matches: '/jobs/matches/' + cand.id, path: file, cv };
+}
+
 module.exports = function cvBuildRoutes(fastify, { prisma, limiter, apiKey, normPhone }) {
   const ipRL = limiter(3600000, 8);
   const phoneRL = limiter(86400000, 3);
@@ -168,51 +225,9 @@ module.exports = function cvBuildRoutes(fastify, { prisma, limiter, apiKey, norm
     // phone number helps nobody.
     if (!b.history && !b.education) return reply.code(400).send({ ok: false, error: 'tell_us_more' });
 
-    const cv = await askModel({ apiKey, text: source });
-    if (!cv) return reply.code(502).send({ ok: false, error: 'other' });
-
-    // Drop anything the person did not actually say.
-    const hay = source;
-    cv.jobs = (Array.isArray(cv.jobs) ? cv.jobs : []).filter(j => grounded(j.role, hay) && grounded(j.employer, hay)).slice(0, 8)
-      .map(j => ({ role: clean(j.role, 80), employer: clean(j.employer, 90), period: clean(j.period, 40),
-        points: (Array.isArray(j.points) ? j.points : []).filter(p => grounded(p, hay)).slice(0, 3).map(p => clean(p, 160)) }));
-    cv.education = (Array.isArray(cv.education) ? cv.education : []).filter(e => grounded(e.award, hay) && grounded(e.place, hay)).slice(0, 5)
-      .map(e => ({ award: clean(e.award, 90), place: clean(e.place, 90), year: clean(e.year, 20) }));
-    cv.skills = (Array.isArray(cv.skills) ? cv.skills : []).filter(s => grounded(s, hay)).slice(0, 14).map(s => clean(s, 40));
-    cv.languages = (Array.isArray(cv.languages) ? cv.languages : []).filter(l => grounded(l && l.name, hay)).slice(0, 6)
-      .map(l => ({ name: clean(l.name, 30), level: clean(l.level, 20) }));
-    cv.headline = clean(cv.headline, 60);
-    // The summary is the one field that is meant to be rephrased, so the word-overlap test is the wrong
-    // one for it: it threw away perfectly honest profile lines. What must not be invented in prose is a
-    // QUANTITY - "six years", "managed 12 staff" - so the summary is kept unless it states a number the
-    // person never gave us.
-    const nums = new Set((hay.match(/\d+/g) || []));
-    const madeUp = (String(cv.summary || '').match(/\d+/g) || []).some(n => !nums.has(n));
-    cv.summary = madeUp ? '' : clean(cv.summary, 600);
-
-    fs.mkdirSync(CV_DIR, { recursive: true, mode: 0o700 });
-    const id = 'cv_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-    const file = path.join(CV_DIR, id + '.pdf');
-    try { await toPdf(renderHtml(cv, who), file); } catch (e) { req.log.error({ e: String(e.message) }, 'cv pdf'); return reply.code(500).send({ ok: false, error: 'other' }); }
-    fs.chmodSync(file, 0o600);
-
-    let job = null;
-    if (b.jobId) job = await prisma.job.findUnique({ where: { id: String(b.jobId) }, select: { id: true, employerId: true, city: true } }).catch(() => null);
-
-    // The token is what lets the person download their own copy without an account, and nobody else's.
-    const token = crypto.randomBytes(12).toString('base64url');
-    const cand = await prisma.candidate.create({ data: {
-      name, phone, email: who.email || null, city: who.city || job?.city || null,
-      category: who.category || cv.headline || null,
-      jobId: job?.id || null, employerId: job?.employerId || null,
-      cvPath: file, cvMime: 'application/pdf',
-      summary: cv.summary || null, skills: cv.skills, years: Number.isFinite(Number(b.years)) ? Math.round(Number(b.years)) : null,
-      shareWider: b.shareWider === true || b.shareWider === 'true',
-      note: 'built:' + token,
-      deleteAfter: new Date(Date.now() + KEEP_DAYS * 86400000),
-    } });
-
-    return { ok: true, id: cand.id, pdf: '/cv/' + cand.id + '.pdf?k=' + token, matches: '/jobs/matches/' + cand.id };
+    const built = await buildCvFor({ prisma, apiKey, who, source, years: b.years, jobId: b.jobId, shareWider: b.shareWider });
+    if (!built.ok) return reply.code(built.error === 'other' ? 502 : 500).send({ ok: false, error: 'other' });
+    return { ok: true, id: built.id, pdf: built.pdf, matches: built.matches };
   });
 
   // Their own copy. The token is in the row; without it this is a 404, not a listing.
@@ -232,3 +247,5 @@ module.exports = function cvBuildRoutes(fastify, { prisma, limiter, apiKey, norm
 module.exports.PROMPT = PROMPT;
 module.exports.grounded = grounded;
 module.exports.renderHtml = renderHtml;
+
+module.exports.buildCvFor = buildCvFor;

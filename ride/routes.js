@@ -5,7 +5,11 @@ const tgauth = require('./tgauth');
 const dstate = require('./driverState');
 
 const ACTIVE = ['requested', 'dispatching', 'assigned', 'arriving', 'arrived', 'ontrip'];
-const NEXT = { assigned: ['arriving', 'arrived', 'cancelled'], arriving: ['arrived', 'cancelled'], arrived: ['ontrip', 'cancelled'], ontrip: ['completed'], dispatching: ['cancelled'], requested: ['cancelled'] };
+// ontrip -> cancelled is for the owner only, and exists because a driver can abandon a started trip
+// (2026-09-19). The rider's own cancel route has its own, stricter rule: see CANCELLABLE below.
+const NEXT = { assigned: ['arriving', 'arrived', 'cancelled'], arriving: ['arrived', 'cancelled'], arrived: ['ontrip', 'cancelled'], ontrip: ['completed', 'cancelled'], dispatching: ['cancelled'], requested: ['cancelled'] };
+// What a RIDER may cancel at any time, with no further test.
+const CANCELLABLE = ['requested', 'dispatching', 'assigned', 'arriving', 'arrived'];
 
 function limiter(windowMs, max) {
   const m = new Map();
@@ -224,7 +228,19 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     if (!lookupRL(req.params.id)) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const ride = await prisma.ride.findUnique({ where: { id: req.params.id } });
     if (!ride || normPhone((req.body || {}).phone) !== ride.riderPhone) return reply.code(404).send({ ok: false, error: 'not_found' });
-    if (!['requested', 'dispatching', 'assigned', 'arriving', 'arrived'].includes(ride.status)) return reply.code(409).send({ ok: false, error: 'cannot_cancel_now' });
+    // A rider may not cancel a trip that is under way — they are in the car. But a driver who closes the
+    // Mini App mid-trip leaves the ride 'ontrip' for ever (2026-09-19: three and a half hours, rider
+    // locked out of cancelling, driver frozen out of every future offer), and a trip nobody is driving is
+    // not a trip. So 'ontrip' becomes cancellable once the driver has been silent for the same half hour
+    // the abandoned sweep uses — measured from his last location fix, which a real trip refreshes every
+    // four seconds.
+    let abandoned = false;
+    if (ride.status === 'ontrip' && ride.driverId) {
+      const drv = await prisma.driver.findUnique({ where: { id: ride.driverId }, select: { lastSeenAt: true } });
+      const quietMs = drv && drv.lastSeenAt ? Date.now() - new Date(drv.lastSeenAt).getTime() : Infinity;
+      abandoned = quietMs >= (dispatch.QUIET_MS || 30 * 60 * 1000);
+    }
+    if (!CANCELLABLE.includes(ride.status) && !abandoned) return reply.code(409).send({ ok: false, error: 'cannot_cancel_now' });
     dispatch.cancel(ride.id);
     const upd = await prisma.ride.update({ where: { id: ride.id }, data: { status: 'cancelled', cancelledBy: 'rider', cancelledAt: new Date() }, include: { driver: true } });
     // Free the driver, or they stay marked busy forever and silently stop receiving every future

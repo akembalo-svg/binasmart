@@ -37,6 +37,7 @@ const L = {
     send: 'ላክ', build: 'ሲቪዬን ይሠራ', sending: 'እየተላከ…', building: 'ሲቪዎ እየተሠራ ነው…',
     ok: '✅ ደርሷል። ሲቪዎ ወደዚህ ቀጣሪ ይተላለፋል።',
     match: '🔎 ከሲቪዎ ጋር የሚስማሙ ሌሎች ክፍት የሥራ ቦታዎችን ይመልከቱ',
+    voice: '🎤 መጻፍ ይከብዳል? በቴሌግራም በድምጽ ይናገሩ — ሲቪዎን እኛ እንጽፋለን',
     okWide: '✅ ደርሷል። ሲቪዎ ወደዚህ ቀጣሪ፣ እንዲሁም በዚሁ ዘርፍ ወደሚቀጥሩ ሌሎች ድርጅቶች ይተላለፋል።',
     okBuilt: '✅ ሲቪዎ ተሠርቷል፤ ደርሶናል።',
     dl: '⬇️ ሲቪዎን ያውርዱ (PDF)',
@@ -68,6 +69,7 @@ const L = {
     send: 'Send', build: 'Build my CV', sending: 'Sending…', building: 'Writing your CV…',
     ok: '✅ Received. Your CV will be passed to this employer.',
     match: '🔎 See other vacancies that match your CV',
+    voice: '🎤 Rather speak than type? Say it on Telegram and we write the CV',
     okWide: '✅ Received. Your CV will be passed to this employer and to others hiring in the same field.',
     okBuilt: '✅ Your CV is ready, and we have it.',
     dl: '⬇️ Download your CV (PDF)',
@@ -121,6 +123,7 @@ function cvForm({ job, lang = 'am', escH, main = false }) {
 
       <div id="pane-ai" hidden>
         <p class="cvhint">${t.aiHint}</p>
+        <a class="cvvoice" href="https://t.me/bina_smart_bot?start=cv" target="_blank" rel="noopener">${t.voice}</a>
         <form id="cvb">${common}
           <div class="two">
             <input name="years" inputmode="numeric" placeholder="${escH(t.years)}" maxlength="20">
@@ -161,6 +164,8 @@ function cvForm({ job, lang = 'am', escH, main = false }) {
     .cvgo{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;border:0;border-radius:999px;padding:12px 26px;
       font-weight:800;font-size:14.5px;font-family:inherit;cursor:pointer;justify-self:start}
     .cvgo[disabled]{opacity:.6}
+    .cvvoice{display:block;border:1.5px solid #cfe3d8;background:#f2fbf6;color:#065f46;border-radius:12px;
+      padding:10px 13px;font-size:13.5px;font-weight:700;margin:0 0 12px;text-align:center}
     .cvmsg{font-size:13.5px;line-height:1.5}
     .cvmsg a{font-weight:800}
   </style>

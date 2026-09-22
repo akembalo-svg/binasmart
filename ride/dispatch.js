@@ -62,7 +62,50 @@ function makeDispatch({ prisma, telegram, settings, offers, setTimeoutFn, clearT
     return n;
   }
 
-  return { start, cancel, toConcierge, sweepStale, setOffers };
+  // A trip the driver walked away from. Found on 2026-09-19 with a real driver: he accepted a ride,
+  // tapped "start trip", then closed the Mini App — which stops running the moment it leaves the screen.
+  // Three and a half hours later the ride was still 'ontrip', the rider could not cancel it (the cancel
+  // route refuses once a trip has started, which is right while somebody is actually in the car), and
+  // the driver was still flagged busy, so he was excluded from every future offer. Nothing recovered it:
+  // sweepStale only looks at rides stuck in 'dispatching'.
+  //
+  // The test is silence, not elapsed time: a live trip sends a fix every 4 seconds, so a ride whose
+  // driver has reported within QUIET_MS is left alone however long it has been running — a crossing of
+  // Addis in traffic is allowed to be slow. Freeing the driver is the urgent half; while onRideId is set
+  // he receives nothing at all. The ride itself is left for a person to close, because only a person can
+  // find out whether the passenger was actually carried and owes a fare.
+  //
+  // Idempotent without a new column: the alert fires only when this sweep is the one that freed the
+  // driver (updateMany count > 0), so a ride already freed is passed over in silence.
+  const QUIET_MS = 30 * 60 * 1000;
+  const LIVE = ['assigned', 'arriving', 'arrived', 'ontrip'];
+
+  async function sweepAbandoned(now = Date.now()) {
+    const cutoff = new Date(now - QUIET_MS);
+    const rides = await prisma.ride.findMany({
+      where: { status: { in: LIVE }, driverId: { not: null },
+        OR: [{ driver: { lastSeenAt: { lt: cutoff } } }, { driver: { lastSeenAt: null } }] },
+      include: { driver: true }, take: 20 });
+    let n = 0;
+    for (const ride of rides) {
+      try {
+        const freed = await prisma.driver.updateMany({ where: { id: ride.driverId, onRideId: ride.id }, data: { onRideId: null } });
+        if (freed.count === 0) continue;
+        const seen = ride.driver && ride.driver.lastSeenAt;
+        const quiet = seen ? Math.round((now - new Date(seen)) / 60000) + ' minutes' : 'the whole trip';
+        const since = new Date(ride.startedAt || ride.assignedAt || ride.requestedAt).toISOString().slice(11, 16);
+        await telegram.ownerNote('🟠 ABANDONED TRIP — still "' + ride.status + '" since ' + since + ' UTC'
+          + '\nDriver ' + ((ride.driver && ride.driver.name) || '?') + ' has sent no location for ' + quiet + '.'
+          + '\nRider: ' + ride.riderName + ' · ' + ride.riderPhone
+          + '\nThe driver is free again and the rider can cancel. Close the ride in /ride-ops.').catch(() => {});
+        n++;
+      } catch (e) { console.error('[ride/dispatch] abandoned sweep failed for ride ' + ride.id + ':', e.message); }
+    }
+    if (n) console.log('[ride/dispatch] ' + n + ' abandoned trip(s): driver freed, owner told');
+    return n;
+  }
+
+  return { start, cancel, toConcierge, sweepStale, sweepAbandoned, setOffers, QUIET_MS };
 }
 
 module.exports = { makeDispatch };

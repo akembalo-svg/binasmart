@@ -21,6 +21,8 @@ function makeTgApi({ token, fetchImpl, apiBase, timeoutMs }) {
     sendMessage: (chat_id, text, extra) => call('sendMessage', Object.assign({ chat_id, text }, extra || {})),
     sendChatAction: (chat_id, action) => call('sendChatAction', { chat_id, action: action || 'typing' }),
     sendPhoto: (chat_id, photo, caption, extra) => call('sendPhoto', Object.assign({ chat_id, photo, caption }, extra || {})),
+    // A document by URL: Telegram fetches it itself, so nothing here has to build a multipart body.
+    sendDocument: (chat_id, document, caption, extra) => call('sendDocument', Object.assign({ chat_id, document, caption }, extra || {})),
     getFile: file_id => call('getFile', { file_id }),
     downloadFile,
     setWebhook: (url, secret_token) => call('setWebhook', { url, secret_token, allowed_updates: ['message', 'callback_query'] }),

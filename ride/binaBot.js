@@ -16,7 +16,7 @@ const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 // Tenant-link errors are logged by kind (Prisma code or error name), never by message: messages can carry ids or numbers.
 const errKind = e => String((e && (e.code || e.name)) || 'Error').replace(/[^A-Za-z0-9_]/g, '').slice(0, 40) || 'Error';
 
-function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey, owner, tenant }) {
+function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey, owner, tenant, jobs, cv }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
   const hist = new Map(); // chatId -> { turns: [{role, content}], t }
   const menuMarkup = () => ({ inline_keyboard: MENU.map(row => row.map(b => ({ text: b.text, web_app: { url: baseUrl + b.path } }))) });
@@ -111,6 +111,113 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     }
     return PASS;
   }
+
+
+  // Job alerts: /start jobs_<field> from the board, /jobs to choose, /stopjobs to stop. Private chats
+  // only, and only when server.js passes the service. The board is full of vacancies and empty of
+  // returning readers; this is the half that brings people back.
+  async function handleJobsCommand(chatId, msg, text) {
+    const start = /^\/start\s+jobs_([a-z]{2,20})(?:\s|$)/.exec(text);
+    if (start) {
+      const r = await jobs.subscribe({ chatId, field: start[1], lang: 'am' }).catch(() => null);
+      if (!r || !r.ok) return api.sendMessage(chatId, 'ይቅርታ፣ አልተሳካም። እንደገና ይሞክሩ። · Sorry, that did not work.');
+      const name = r.field === 'all' ? 'ሁሉም ዘርፎች' : jobLabel(r.field);
+      return api.sendMessage(chatId,
+        '🔔 ተመዝግበዋል — <b>' + name + '</b>\n\nአዲስ ክፍት የሥራ ቦታ ሲወጣ በየጠዋቱ እዚህ እነግርዎታለሁ።\nለማቆም /stopjobs ይጻፉ።',
+        { parse_mode: 'HTML' });
+    }
+    if (/^\/stopjobs\b/.test(text)) {
+      const n = await jobs.stop(chatId).catch(() => 0);
+      return api.sendMessage(chatId, n
+        ? '🔕 የሥራ ማሳወቂያ ቆሟል። እንደገና ለመጀመር bina.et/jobs ይክፈቱ።'
+        : 'የሥራ ማሳወቂያ አልነበረዎትም። · You were not subscribed.');
+    }
+    if (/^\/jobs\b/.test(text)) {
+      const mine = await jobs.listFor(chatId).catch(() => []);
+      const head = mine.length
+        ? '🔔 አሁን የሚደርስዎት፦ ' + mine.map(a => a.field === 'all' ? 'ሁሉም' : jobLabel(a.field)).join('፣ ') + '\n\n'
+        : '';
+      return api.sendMessage(chatId, head
+        + '💼 <b>ክፍት የሥራ ቦታዎች</b>\n\nዘርፍ ይምረጡ — አዲስ ሲወጣ በየጠዋቱ እነግርዎታለሁ።',
+        { parse_mode: 'HTML', reply_markup: { inline_keyboard: jobFieldRows() } });
+    }
+    return PASS;
+  }
+
+  // A CV spoken instead of typed: /cv, then one voice note, then one tap to share a number.
+  // The written form asks the same person to type their education, work history and skills into a
+  // phone in Ethiopic - which is why almost nobody finishes it. jobs/voice-cv.js holds the flow and
+  // the state; this is only the Telegram half of it.
+  async function handleCvCommand(chatId, msg, text) {
+    if (/^\/start\s+cv\b/.test(text) || /^\/cv\b/.test(text)) {
+      return api.sendMessage(chatId, await cv.begin(chatId), { parse_mode: 'HTML', reply_markup: { remove_keyboard: true } });
+    }
+    const st = await cv.stateOf(chatId);
+    if (!st) return PASS;
+
+    if (/^\/cancel\b/.test(text)) {
+      await cv.cancel(chatId);
+      return api.sendMessage(chatId, 'እሺ፣ ቆሟል። በማንኛውም ጊዜ /cv ብለው እንደገና መጀመር ይችላሉ።', { reply_markup: { remove_keyboard: true } });
+    }
+    // Another command mid-flow is a change of mind, not an answer - let it through to its own handler.
+    if (/^\//.test(text)) { await cv.cancel(chatId); return PASS; }
+
+    if (st.state === 'cv_wait_name' && text) {
+      const r = await cv.onName(chatId, text);
+      if (!r.ok) return api.sendMessage(chatId, 'ሙሉ ስምዎን ይጻፉ።');
+      return askPhone(chatId);
+    }
+
+    if (st.state === 'cv_wait_phone') {
+      // Their own number only: a contact forwarded from somebody else would put a stranger's phone on
+      // this CV, and the employer would ring them instead.
+      if (msg.contact && msg.from && msg.contact.user_id && String(msg.contact.user_id) !== String(msg.from.id)) {
+        return api.sendMessage(chatId, 'የራስዎን ስልክ ቁጥር ይላኩ።');
+      }
+      const raw = msg.contact ? msg.contact.phone_number : text;
+      if (!raw) return PASS;
+      if (!cv.normPhone(raw)) return api.sendMessage(chatId, 'ስልክ ቁጥሩ ትክክል አይደለም። 09… ወይም +2519… ይጻፉ።');
+      await api.sendMessage(chatId, '⏳ ሲቪዎን በመጻፍ ላይ ነኝ — አንድ ደቂቃ ያህል ይወስዳል።', { reply_markup: { remove_keyboard: true } });
+      const r = await cv.onPhone(chatId, raw);
+      if (!r.ok) return api.sendMessage(chatId, 'ይቅርታ፣ ሲቪውን መሥራት አልቻልኩም። እባክዎ /cv ብለው እንደገና ይሞክሩ።');
+      const url = baseUrl + r.pdf;
+      try {
+        await api.sendDocument(chatId, url, '📄 ' + r.who.name + ' — CV', {});
+      } catch (e) {
+        console.error('[binaBot] cv document: ' + e.message);
+        await api.sendMessage(chatId, '📄 ሲቪዎ ተዘጋጅቷል፦ ' + url);
+      }
+      return api.sendMessage(chatId,
+        '✅ <b>ሲቪዎ ተዘጋጅቷል።</b>\n\nከሲቪዎ ጋር የሚስማሙ ክፍት የሥራ ቦታዎችን እዚህ ይመልከቱ፦\n' + baseUrl + r.matches
+        + '\n\nሲቪዎን በዚሁ ዘርፍ ለሚቀጥሩ ሌሎች ድርጅቶችም እንላክላቸው?',
+        { parse_mode: 'HTML', disable_web_page_preview: true,
+          reply_markup: { inline_keyboard: [[
+            { text: '✅ አዎ፣ ይላኩልኝ', callback_data: 'cv:y:' + r.id },
+            { text: '🔒 አይ፣ እኔው እመርጣለሁ', callback_data: 'cv:n:' + r.id }]] } });
+    }
+    return PASS;
+  }
+
+  function askPhone(chatId) {
+    return api.sendMessage(chatId,
+      '📱 አንድ ነገር ብቻ ቀረ — ቀጣሪው የሚደውልበት ስልክ ቁጥርዎ።',
+      { reply_markup: { keyboard: [[{ text: '📱 ስልኬን አጋራ', request_contact: true }]],
+        resize_keyboard: true, one_time_keyboard: true } });
+  }
+
+  // Two per row, the fields people ask for most first. Each button is a normal deep link, so the
+  // subscription survives the person closing Telegram mid-way.
+  function jobFieldRows() {
+    const pick = ['accounting', 'engineering', 'banking', 'sales', 'it', 'health', 'admin', 'logistics', 'education', 'ngo'];
+    const rows = [];
+    for (let i = 0; i < pick.length; i += 2) {
+      rows.push(pick.slice(i, i + 2).map(f => ({ text: jobLabel(f), url: 'https://t.me/' + (botUsername || 'bina_smart_bot') + '?start=jobs_' + f })));
+    }
+    rows.push([{ text: '🔔 ሁሉም ዘርፍ · All fields', url: 'https://t.me/' + (botUsername || 'bina_smart_bot') + '?start=jobs_all' }]);
+    rows.push([{ text: '📋 ሁሉንም ክፍት ሥራ ይመልከቱ', web_app: { url: baseUrl + '/jobs' } }]);
+    return rows;
+  }
+  const jobLabel = f => { try { return require('../jobs/categories').label(f, 'am'); } catch (e) { return f; } };
 
   // Owner answers keep their slashes: "/bini", "ETB 12,000 /month" and "Units 101 /102" are not bina.et paths.
   function forOwnerTelegram(text) {
@@ -326,7 +433,13 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
   // A voice note: download from Telegram, transcribe through the app (Gemini), then answer it like typed text.
   async function handleVoice(chatId, msg) {
     const v = msg.voice || msg.audio;
-    if (!v || (v.duration && v.duration > 120)) return api.sendMessage(chatId, 'የድምጽ መልእክቱ በጣም ረጅም ነው (እስከ 2 ደቂቃ)። · Voice note too long (max 2 minutes).');
+    // Somebody speaking their working life needs longer than somebody asking a question.
+    const cvState = cv ? await cv.stateOf(chatId).catch(() => null) : null;
+    const speakingCv = !!(cvState && cvState.state === 'cv_wait_voice');
+    const maxSec = speakingCv ? 240 : 120;
+    if (!v || (v.duration && v.duration > maxSec)) return api.sendMessage(chatId,
+      speakingCv ? 'የድምጽ መልእክቱ በጣም ረጅም ነው (እስከ 4 ደቂቃ)። · Voice note too long (max 4 minutes).'
+                 : 'የድምጽ መልእክቱ በጣም ረጅም ነው (እስከ 2 ደቂቃ)። · Voice note too long (max 2 minutes).');
     if (api.sendChatAction) api.sendChatAction(chatId, 'typing').catch(() => {});
     try {
       const file = await api.getFile(v.file_id);
@@ -335,6 +448,14 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       const d = await r.json().catch(() => ({}));
       const text = d && d.ok ? String(d.text || '').trim() : '';
       if (!text || /^\[unclear\]/i.test(text) || isNoise(text)) return api.sendMessage(chatId, 'ይቅርታ፣ ድምጹን መስማት አልቻልኩም። እባክዎ ይጻፉ ወይም እንደገና ይሞክሩ። · Sorry, I could not hear that. Please type it or try again.');
+      // A spoken CV (jobs/voice-cv.js), not a question - the transcript goes to the CV writer.
+      if (speakingCv) {
+        const r = await cv.onTranscript(chatId, text).catch(() => ({ ok: false }));
+        if (!r.ok) return api.sendMessage(chatId,
+          'ትንሽ አጭር ነው። ስምዎን፣ የሠሩትን ሥራ፣ የት እና መቼ፣ እንዲሁም ትምህርትዎን ጨምረው እንደገና ይናገሩ።');
+        if (r.need === 'name') return api.sendMessage(chatId, 'ጥሩ። ሙሉ ስምዎን ይጻፉልኝ።');
+        return askPhone(chatId);
+      }
       const ownerScope = await ownerScopeFor(msg);
       if (ownerScope) return answerOwner(chatId, text, msg.from, ownerScope);
       const reply = await askBini(chatId, text.slice(0, 1200), msg.from);
@@ -353,6 +474,16 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     // passes the tenant link service.
     if (tenant && isPrivate(msg) && msg.from) {
       const handled = await handleTenantCommand(chatId, msg, text);
+      if (handled !== PASS) return handled;
+    }
+    // A CV spoken into the bot: /cv, the voice note, the name, the shared contact — private chats only.
+    if (cv && isPrivate(msg) && msg.from) {
+      const handled = await handleCvCommand(chatId, msg, text);
+      if (handled !== PASS) return handled;
+    }
+    // Job alerts: /start jobs_<field>, /jobs, /stopjobs — private chats only.
+    if (jobs && isPrivate(msg) && msg.from) {
+      const handled = await handleJobsCommand(chatId, msg, text);
       if (handled !== PASS) return handled;
     }
     // Bini for owners: /start owner, the shared contact, /logout, /bini, /owner — private chats only, and only
@@ -397,6 +528,16 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     if (!cq || !cq.message) return;
     const oa = /^oa:([cxu]):([A-Za-z0-9_-]{22})$/.exec(String(cq.data || ''));
     if (oa && owner && owner.actions) return pressOwnerAction(cq, oa[1], oa[2]);
+    // Consent for a spoken CV, asked after the person has the PDF in their hand rather than before.
+    const cvc = /^cv:([yn]):([A-Za-z0-9_-]{10,40})$/.exec(String(cq.data || ''));
+    if (cvc && cv) {
+      try { await api.answerCallbackQuery(cq.id); } catch (e) { /* ignore */ }
+      const yes = cvc[1] === 'y';
+      await cv.setConsent(cvc[2], yes);
+      return api.sendMessage(String(cq.message.chat.id), yes
+        ? '✅ እሺ። በዘርፍዎ ለሚቀጥሩ ድርጅቶች ሲቪዎን እንልካለን። ሐሳብዎን ከቀየሩ ይጻፉልን።'
+        : '🔒 እሺ። ሲቪዎ ለማንም አይላክም — እርስዎ ሲያመለክቱ ብቻ ነው የሚሄደው።');
+    }
     try { await api.answerCallbackQuery(cq.id); } catch (e) { /* ignore */ }
     if (cq.data === 'menu') return api.sendMessage(String(cq.message.chat.id), 'Pick a service · አገልግሎት ይምረጡ 👇', { reply_markup: menuMarkup() });
   }
