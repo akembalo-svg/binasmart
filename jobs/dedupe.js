@@ -36,24 +36,37 @@ const DRY = process.argv.includes('--dry-run');
   }
 
   // ---- 2. merge the duplicates ----
+  // Grouped on a NORMALISED title, not the exact one. Boards type the same post differently -
+  // "IT Technician" / "IT technician", "F&B Director" / "F&B DIRECTOR", "General   Accounts Head" with
+  // three spaces - and an exact GROUP BY reads those as different vacancies. On 23 September 2026 that
+  // left 60 adverts on the board twice, every one of them a case or whitespace difference.
   const groups = await prisma.$queryRawUnsafe(
-    `SELECT "employerId", title, count(*)::int AS c FROM "Job" GROUP BY 1,2 HAVING count(*) > 1 ORDER BY c DESC`);
+    `SELECT "employerId", lower(regexp_replace(btrim(title), '\\s+', ' ', 'g')) AS norm, count(*)::int AS c
+       FROM "Job" GROUP BY 1,2 HAVING count(*) > 1 ORDER BY c DESC`);
   console.log('[dedupe] duplicate groups: ' + groups.length);
 
   let removed = 0, kept = 0;
   for (const g of groups) {
-    const rows = await prisma.job.findMany({
-      where: { employerId: g.employerId, title: g.title },
+    const rows = (await prisma.job.findMany({
+      where: { employerId: g.employerId },
       orderBy: [{ deadline: { sort: 'desc', nulls: 'last' } }, { publishedAt: 'desc' }],
-    });
+    })).filter(r => r.title.trim().replace(/\s+/g, ' ').toLowerCase() === g.norm);
+    if (rows.length < 2) continue;
     const [keep, ...rest] = rows;
     // The survivor should not be poorer than the copies we are deleting.
     const patch = {};
     for (const f of ['howToApply', 'imageUrl', 'bodyHtml', 'salary', 'experience', 'education', 'jobType']) {
       if (!keep[f]) { const donor = rest.find(r => r[f]); if (donor) patch[f] = donor[f]; }
     }
+    // Keep the best-written title in the group: a board that shouted "F&B DIRECTOR" should not decide
+    // how the post is printed, and neither should one that left three spaces in the middle.
+    const tidy = t => t.trim().replace(/\s+/g, ' ');
+    const caseScore = t => (/[a-z]/.test(t) && /[A-Z]/.test(t) ? 1 : 0);
+    const bestTitle = tidy(rows.slice().sort((a, b) => caseScore(b.title) - caseScore(a.title))[0].title);
+    if (bestTitle !== keep.title) patch.title = bestTitle;
+
     kept++;
-    console.log('  · ' + g.title.slice(0, 60) + '  ×' + rows.length
+    console.log('  · ' + bestTitle.slice(0, 60) + '  ×' + rows.length
       + (Object.keys(patch).length ? '  (+' + Object.keys(patch).join(',') + ')' : ''));
     if (DRY) { removed += rest.length; continue; }
     if (Object.keys(patch).length) await prisma.job.update({ where: { id: keep.id }, data: patch });
