@@ -252,34 +252,20 @@ No subscription fee
 
 Fixed Line to Fixed Line Call Packages |
 
-Price |
-For |
-Benefit |
-
-30 birr |
-PSTN/FL NGN |
-Unlimited call to any residential fixed line per month |
+Table: Price by For, Benefit
+Price | For | Benefit
+30 birr: For PSTN/FL NGN; Benefit Unlimited call to any residential fixed line per month
 
 CDMA |
 1800-minute call to any residential fixed line per month |
 
 Fixed Line to mobile Call Packages |
 
-Package Name |
-Price |
-Benefit |
-
-Fixed to mobile voice Res 25 min |
-10 birr |
-25 minute call from residential fixed to mobile |
-
-Fixed to mobile voice Res 55 min |
-20 birr |
-55 minute call from residential fixed to mobile |
-
-Fixed to mobile voice Res 85 min |
-30 birr |
-85 minute call from residential fixed to mobile |
+Table: Package Name by Price, Benefit
+Package Name | Price | Benefit
+Fixed to mobile voice Res 25 min: Price 10 birr; Benefit 25 minute call from residential fixed to mobile
+Fixed to mobile voice Res 55 min: Price 20 birr; Benefit 55 minute call from residential fixed to mobile
+Fixed to mobile voice Res 85 min: Price 30 birr; Benefit 85 minute call from residential fixed to mobile
 
 ማስታወሻ
 

@@ -261,3 +261,28 @@ test('lead-in: the line-safe chunker keeps the lead-in and every row in one chun
   for (const l of [INTRO, START, HEAD_LINE, 'Week 1 – 2: North & South Halls $7.25', 'Week 6 – 9: North & South Halls $8.0'])
     assert.ok(holder[0].text.includes(l), 'missing from the table chunk: ' + l);
 });
+
+// Two shapes the header guess reads wrongly, found by the 2026-09-23 survey of the banking and travel packs. Both
+// pass isTableHead (every first-row cell filled, no digit), so tableRows takes a data row or a label for a header:
+//   - a label/value list laid out as two columns (Ethiopian Airlines' worldwide contacts), and
+//   - parallel columns with no row-label column (Dashen's Import | Export requirement lists), where the first
+//     column's item becomes the "label" of the second column's item.
+// The sites whose pages have these shapes keep tableRows off; these tests pin both why and that. Invented data.
+test('a label/value list is taken for a table, which is why a site with such lists keeps tableRows off', () => {
+  const KV = 'Company: |\nAcme Travel Ltd. |\n\nPhone: |\n+999 555 0100 |';
+  assert.equal(P.tableRows(KV).split('\n').pop(), 'Phone:: Acme Travel Ltd. +999 555 0100');
+});
+
+test('parallel columns without a row-label column pair each item with the wrong label', () => {
+  const PAR = 'Import |\nExport |\n\nSigned import form |\nSigned sales contract |';
+  assert.equal(P.tableRows(PAR).split('\n').pop(), 'Signed import form: Export Signed sales contract');
+});
+
+test('tableRows stays off for the sites whose tables have those shapes', () => {
+  const regOf = pk => JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'knowledge', pk, 'sources.json'), 'utf8'));
+  const siteOf = (pk, id) => regOf(pk).sites.find(s => s.id === id);
+  for (const [pk, id] of [['banking', 'dashen'], ['banking', 'ethiotelecom'], ['travel', 'ethiopian-airlines']]) {
+    assert.ok(siteOf(pk, id), pk + '/' + id + ' exists');
+    assert.ok(!siteOf(pk, id).tableRows, pk + '/' + id + ' must not set tableRows until the header guess handles its tables');
+  }
+});

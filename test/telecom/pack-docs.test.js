@@ -133,3 +133,22 @@ test('an English document carries an Amharic title and summary in its header onc
   assert.ok(withAm.length / en.length >= 0.9, withAm.length + ' of ' + en.length + ' English documents have a titleAm');
   assert.ok(fs.existsSync(path.join(DIR, 'am-headers.json')));
 });
+
+// tableRows on the Ethio telecom site (2026-09-23): a tariff table is its header line and one line per row that names
+// the column of every value, and a re-render from the text on disk writes every document exactly as it is.
+test('the Ethio telecom tariff tables are one line per row, naming their columns', () => {
+  const has = (f, s) => assert.ok(read(f).includes(s), f + ' lacks: ' + s);
+  has('telecom-ethiotelecom-fixed-line-services.md', 'Package Name | Price | Benefit\n'
+    + 'Fixed to mobile voice Res 25 min: Price 10 birr; Benefit 25 minute call from residential fixed to mobile');
+  has('telecom-ethiotelecom-international-services.md',
+    'Limited Premium Plus Package: Packed Services Local Call; Volume 9000 Minutes; Monthly Rent 3500 Birr');
+  has('telecom-ethiotelecom-am-student-package.md', 'ዋጋ 34 ብር');
+  assert.match(read('telecom-ethiotelecom-am-student-package.md'), /^Table: \S+ by /m);
+});
+
+test('a re-render of the telecom pack from disk changes nothing', () => {
+  const P = require(path.join(ROOT, 'ops', 'packs', 'fetch-pack.js'));
+  const amHeaders = reg.pack && reg.pack.amHeaders ? P.readAmHeaders('telecom') : null;
+  const r = P.rerenderPack(DIR, reg, { dryRun: true, amHeaders });
+  assert.deepEqual(r.rerendered, []);
+});
