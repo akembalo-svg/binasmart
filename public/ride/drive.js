@@ -704,14 +704,17 @@
     // The city map goes up first in every state. A blank black rectangle reads as a broken app.
     ensureMap();
     if (DEMO) { window.DDemo.badge(); }
-    if (!initData && !DEMO) {
-      return inTelegram
-        ? gate('Reopen from the bot', 'Telegram opened this page without signing you in. Go back to @binasmartdriverbot and tap the "Open the driver app" button in a message rather than a plain link.\nከቦቱ ውስጥ ያለውን አዝራር ተጭነው ይክፈቱ።', 'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot')
-        : gate('Open this in Telegram', 'The driver app runs inside @binasmartdriverbot so we know it is really you. Open the bot and tap the button.\nመተግበሪያው በቴሌግራም ውስጥ ይሰራል።', 'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot');
+    // Outside Telegram the bina.et session cookie may carry the driver (Bina Partner app): ask before refusing.
+    if (!initData && !DEMO && inTelegram) {
+      return gate('Reopen from the bot', 'Telegram opened this page without signing you in. Go back to @binasmartdriverbot and tap the "Open the driver app" button in a message rather than a plain link.\nከቦቱ ውስጥ ያለውን አዝራር ተጭነው ይክፈቱ።', 'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot');
     }
     post('/api/drive/session').then(function (j) {
       if (j._status === 404) {
         return gate('Register first · ይመዝገቡ', 'You are not a BinaSmart driver yet. Registration takes two minutes, is free, and commission is 0% during our launch.\nምዝገባው ነጻ ነው።', 'Register in Telegram', 'https://t.me/binasmartdriverbot');
+      }
+      if (j._status === 401 && !initData) {
+        var inApp = false; try { inApp = !!sessionStorage.getItem('bina_app') || matchMedia('(display-mode: standalone)').matches; } catch (e) {}
+        return gate('Sign in · ይግቡ', 'Sign in with your phone to use the driver app here, or open it inside @binasmartdriverbot.\nበስልክ ቁጥርዎ ይግቡ ወይም በቴሌግራም ቦቱ ይክፈቱ።', 'Sign in · ግባ', inApp ? '/partner' : '/login?next=/drive');
       }
       if (j._status === 401) {
         return gate('Please reopen the app', 'Your Telegram session expired. Close this window and open the driver app again from the bot.', 'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot');

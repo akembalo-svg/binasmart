@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F4FAF8">
+<meta name="color-scheme" content="light only">
+<title>ቢና አጋር · Bina Partner</title>
+<meta name="description" content="Bina Partner: the BinaSmart app for drivers and building owners in Addis Ababa.">
+<link rel="manifest" href="/partner.webmanifest">
+<link rel="icon" href="/icon-32.png">
+<link rel="apple-touch-icon" href="/static/partner/icon-192.png">
+<link rel="preload" href="/static/fonts/noto-sans-ethiopic-400-900-ethiopic-f73467.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
+<style>
+/* Bina Partner (23 Sep 2026). The start page of the Android app (TWA, et.bina.partner) and of
+   /partner on the web. LIGHT only — no dark theme, on purpose (Ibrahim rejected dark app themes). */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#F4FAF8; --card:#FFFFFF; --ink:#081120; --ink2:#2B3A47; --mut:#5A6B78; --line:#DCE8E4;
+  --em:#00C896; --em2:#009688; --emd:#007A6E; --wash:#E3F6F0; --err:#C92A2F; --errbg:#FDF0F0;
+  --r-lg:28px; --r-md:18px; --r-sm:12px;
+  --am:'Noto Sans Ethiopic','Plus Jakarta Sans',system-ui,sans-serif;
+  --en:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif;
+}
+html{background:var(--paper);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--en);color:var(--ink);background:var(--paper);min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;overscroll-behavior-y:none}
+.am{font-family:var(--am)}
+.en{font-family:var(--en);color:var(--mut)}
+[hidden]{display:none!important}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--em);outline-offset:3px;border-radius:10px}
+
+/* ---- top bar ---- */
+.bar{display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) 6px max(20px,env(safe-area-inset-left))}
+.tile{width:36px;height:36px;border-radius:10px;flex:none;background:linear-gradient(135deg,var(--em),var(--em2));display:grid;place-items:center;box-shadow:0 6px 14px -8px rgba(0,150,136,.8)}
+.tile svg{width:26px;height:26px}
+.bar b{font-size:15px;font-weight:800;letter-spacing:-.2px}
+.bar small{display:block;font-size:11.5px;color:var(--mut);font-weight:600;margin-top:1px}
+
+/* ---- screens ---- */
+main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin:0 auto}
+.scr{flex:1;display:flex;flex-direction:column}
+.hero{padding:18px 24px 0}
+.hero h1{font-family:var(--am);font-size:clamp(46px,14vw,60px);font-weight:800;line-height:1.02;letter-spacing:-1px;color:var(--ink)}
+.hero .sub{margin-top:10px;font-family:var(--am);font-size:17px;font-weight:600;color:var(--ink2);line-height:1.45}
+.hero .sub .en{display:block;font-size:14px;font-weight:500;margin-top:2px}
+.scene{display:block;width:100%;height:auto;margin:auto 0 -2px;padding-top:14px;max-height:170px}
+#sIn .sheet{margin-top:0}
+
+/* the white sheet that holds every action */
+.sheet{margin-top:auto;background:var(--card);border-radius:var(--r-lg) var(--r-lg) 0 0;
+  padding:24px max(22px,env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));
+  box-shadow:0 -1px 0 var(--line),0 -24px 48px -32px rgba(8,17,32,.28)}
+.lbl{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:700;color:var(--ink2);margin-bottom:8px}
+.lbl .en{font-size:12.5px;font-weight:600}
+.field{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:var(--r-md);background:#fff;height:58px;transition:border-color .15s,box-shadow .15s}
+.field:focus-within{border-color:var(--em2);box-shadow:0 0 0 4px rgba(0,200,150,.14)}
+.field .cc{padding:0 12px 0 16px;font-weight:700;color:var(--mut);font-size:16px;border-right:1.5px solid var(--line);height:28px;display:flex;align-items:center}
+.field input{flex:1;min-width:0;border:0;outline:0;background:none;height:100%;padding:0 16px;font:700 19px/1 var(--en);color:var(--ink);letter-spacing:.5px}
+.field input::placeholder{color:#A9B7BF;font-weight:600}
+#code{letter-spacing:.42em;text-align:center;font-size:24px;padding-left:24px}
+.cta{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:14px;
+  border-radius:var(--r-md);color:#fff;background:linear-gradient(135deg,#00B98A,var(--emd));
+  box-shadow:0 10px 22px -12px rgba(0,122,110,.9),inset 0 1px 0 rgba(255,255,255,.25);text-decoration:none;transition:transform .12s,filter .12s}
+.cta:active{transform:scale(.985);filter:brightness(.96)}
+.cta:disabled{filter:saturate(.4) brightness(1.1);cursor:wait}
+.cta .am{font-size:17px;font-weight:800;line-height:1.2}
+.cta small{font-size:12.5px;font-weight:600;opacity:.88}
+.ghost{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;margin-top:10px;border-radius:var(--r-md);
+  border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:700;font-size:15px;text-decoration:none}
+.ghost:active{background:var(--wash)}
+.err{margin-top:12px;background:var(--errbg);color:var(--err);border-radius:var(--r-sm);padding:11px 13px;font-size:14px;font-weight:600;line-height:1.5}
+.note{margin-top:10px;font-size:13.5px;color:var(--mut);line-height:1.55}
+.sent{font-size:14.5px;color:var(--ink2);line-height:1.5;margin-bottom:14px}
+.row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 14px;margin-top:14px;font-size:14px;font-weight:700}
+.row a,.row button{color:var(--emd);text-decoration:none;padding:6px 0}
+.row [aria-disabled="true"]{color:var(--mut);pointer-events:none}
+.or{display:flex;align-items:center;gap:12px;margin:18px 0 12px;color:var(--mut);font-size:13px;font-weight:600}
+.or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
+#tgWidget{min-height:46px;display:flex;justify-content:center}
+.owner{display:block;text-align:center;margin-top:16px;font-size:14px;font-weight:700;color:var(--ink2);text-decoration:none;padding:8px 0;line-height:1.5}
+.owner .en{display:block;font-size:12.5px;font-weight:600}
+
+/* ---- signed in: the "we know you" moment ---- */
+.who{margin:auto 24px;text-align:left}
+.av{width:64px;height:64px;border-radius:20px;background:var(--wash);color:var(--emd);display:grid;place-items:center;font:800 26px/1 var(--am);margin-bottom:20px;overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.who h2{font-family:var(--am);font-size:34px;font-weight:800;line-height:1.15;letter-spacing:-.5px}
+.who p{margin-top:8px;font-family:var(--am);font-size:17px;color:var(--ink2);font-weight:600;line-height:1.5}
+.who p .en{display:block;font-size:14px;font-weight:500}
+.track{margin-top:26px;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.track i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,var(--em),var(--em2))}
+.track.run i{animation:fill var(--dur,900ms) cubic-bezier(.4,0,.2,1) forwards}
+@keyframes fill{to{width:100%}}
+
+/* ---- chooser / info cards ---- */
+.head{padding:14px 24px 18px}
+.head h2{font-family:var(--am);font-size:30px;font-weight:800;line-height:1.15;letter-spacing:-.4px}
+.head p{margin-top:6px;font-size:14.5px;color:var(--mut);line-height:1.5}
+.cards{display:flex;flex-direction:column;gap:14px;padding:0 20px}
+.pick{position:relative;display:flex;align-items:center;gap:16px;width:100%;min-height:112px;padding:18px;border-radius:24px;
+  background:var(--card);border:1.5px solid var(--line);text-align:left;text-decoration:none;color:var(--ink);
+  box-shadow:0 14px 30px -26px rgba(8,17,32,.5);transition:border-color .15s,transform .12s}
+.pick:active{transform:scale(.99)}
+.pick.last{border-color:var(--em2);box-shadow:0 0 0 3px rgba(0,200,150,.14),0 14px 30px -26px rgba(8,17,32,.5)}
+.pick .ic{width:60px;height:60px;border-radius:18px;flex:none;display:grid;place-items:center;background:var(--wash)}
+.pick .ic svg{width:34px;height:34px}
+.pick b{display:block;font-family:var(--am);font-size:21px;font-weight:800;line-height:1.2}
+.pick span.en{display:block;font-size:13.5px;margin-top:3px;line-height:1.4}
+.pick .tag{position:absolute;top:12px;right:14px;font-size:11.5px;font-weight:700;color:var(--emd);background:var(--wash);border-radius:999px;padding:3px 9px}
+.pick .chev{margin-left:auto;flex:none;color:#9FB2BA}
+.pick.soft{min-height:0;background:#FBFDFC}
+.auto{margin:16px 24px 0;font-size:13.5px;color:var(--mut);display:flex;align-items:center;gap:10px}
+.auto .track{flex:1;margin:0}
+.auto button{color:var(--emd);font-weight:700;padding:8px 0}
+
+/* pending: a real sequence, so it is numbered */
+.steps{list-style:none;margin:0 24px;padding:0;counter-reset:s}
+.steps li{position:relative;padding:0 0 22px 46px;font-family:var(--am);font-size:16px;font-weight:700;line-height:1.4;color:var(--ink2)}
+.steps li .en{display:block;font-size:13.5px;font-weight:500;margin-top:2px}
+.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:-2px;width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;font:800 14px/1 var(--en);background:#fff;border:1.5px solid var(--line);color:var(--mut)}
+.steps li:after{content:"";position:absolute;left:14.25px;top:30px;bottom:2px;width:1.5px;background:var(--line)}
+.steps li:last-child:after{display:none}
+.steps li.done:before{content:"✓";background:var(--em2);border-color:var(--em2);color:#fff}
+.steps li.now:before{background:var(--wash);border-color:var(--em2);color:var(--emd);box-shadow:0 0 0 5px rgba(0,200,150,.12)}
+.steps li.now{color:var(--ink)}
+
+.me{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--mut);margin-bottom:12px}
+.me b{color:var(--ink2);font-weight:700}
+.me button{margin-left:auto;color:var(--emd);font-weight:700;padding:8px 0}
+
+@media (min-height:760px){.hero{padding-top:30px}}
+@media (min-width:600px){.sheet{border-radius:var(--r-lg);margin:24px 0}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:1ms!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <span class="tile" aria-hidden="true"><svg viewBox="0 0 1000 1000"><path transform="translate(255,700) scale(0.62,-0.62)" d="M699 -82Q668 -82 645.5 -55.0Q623 -28 615 0H437V465Q437 551 408.0 597.5Q379 644 311 644Q236 644 208.5 595.0Q181 546 181 464V0H90V472Q90 586 144.0 655.0Q198 724 311 724Q426 724 477.0 658.5Q528 593 528 470V73H615Q623 101 645.5 127.5Q668 154 699 154H723L697 36L723 -82Z" fill="#fff" stroke="#fff" stroke-width="56" stroke-linejoin="round"/><path d="M800 150l24 62 62 24-62 24-24 62-24-62-62-24 62-24z" fill="#fff"/></svg></span>
+  <div><b>Bina Partner</b><small class="am">ቢናስማርት · BinaSmart</small></div>
+</header>
+
+<main id="main">
+  <!-- loading: nothing but the bar, so a signed-in partner never sees the sign-in form flash -->
+  <section class="scr" id="sLoad" aria-busy="true"></section>
+
+  <!-- signed out -->
+  <section class="scr" id="sIn" hidden>
+    <div class="hero">
+      <h1>ቢና አጋር</h1>
+      <p class="sub">ለሹፌሮችና ለሕንጻ ባለቤቶች<span class="en">For drivers and building owners in Addis Ababa</span></p>
+    </div>
+    <svg class="scene" viewBox="0 0 360 132" fill="none" aria-hidden="true">
+      <g stroke="#009688" stroke-width="2" stroke-linejoin="round">
+        <path d="M150 104V40h34v64" fill="#E3F6F0"/><path d="M188 104V18h40v86" fill="#fff"/><path d="M232 104V52h30v52" fill="#E3F6F0"/>
+        <path d="M266 104V32h44v72" fill="#fff"/><path d="M314 104V64h26v40" fill="#E3F6F0"/><path d="M208 18V8"/>
+      </g>
+      <g fill="#00C896"><rect x="196" y="30" width="7" height="7" rx="1.5"/><rect x="212" y="30" width="7" height="7" rx="1.5"/><rect x="196" y="46" width="7" height="7" rx="1.5" opacity=".45"/><rect x="212" y="46" width="7" height="7" rx="1.5"/><rect x="196" y="62" width="7" height="7" rx="1.5"/><rect x="212" y="62" width="7" height="7" rx="1.5" opacity=".45"/>
+        <rect x="276" y="44" width="7" height="7" rx="1.5" opacity=".45"/><rect x="292" y="44" width="7" height="7" rx="1.5"/><rect x="276" y="60" width="7" height="7" rx="1.5"/><rect x="292" y="60" width="7" height="7" rx="1.5"/><rect x="276" y="76" width="7" height="7" rx="1.5"/><rect x="292" y="76" width="7" height="7" rx="1.5" opacity=".45"/>
+        <rect x="160" y="52" width="6" height="6" rx="1.5"/><rect x="170" y="52" width="6" height="6" rx="1.5" opacity=".45"/><rect x="160" y="66" width="6" height="6" rx="1.5" opacity=".45"/><rect x="170" y="66" width="6" height="6" rx="1.5"/></g>
+      <path d="M0 104h360" stroke="#009688" stroke-width="2"/>
+      <path d="M0 118h360" stroke="#B9DCD4" stroke-width="2" stroke-dasharray="14 12"/>
+      <g transform="translate(46 84)">
+        <path d="M4 20c0-6 3-9 8-10l8-8h26l10 8c6 1 10 4 10 10v2H4z" fill="#fff" stroke="#009688" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M22 4h11v7H15z M37 4h8l7 7H37z" fill="#E3F6F0"/>
+        <circle cx="18" cy="22" r="6" fill="#fff" stroke="#009688" stroke-width="2"/><circle cx="52" cy="22" r="6" fill="#fff" stroke="#009688" stroke-width="2"/>
+      </g>
+      <path d="M124 94c6 0 10-3 14-3" stroke="#00C896" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 6"/>
+    </svg>
+    <div class="sheet">
+      <div id="pBox" hidden>
+        <div id="p1">
+          <label class="lbl" for="phone"><span class="am">ስልክ ቁጥር</span><span class="en">Phone number</span></label>
+          <div class="field"><span class="cc">+251</span><input id="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="17" placeholder="9XX XXX XXX"></div>
+          <button class="cta" id="pSend" type="button"><span class="am" id="pSendT">ኮድ ላክ</span><small id="pSendE">Send me a code by SMS</small></button>
+        </div>
+        <div id="p2" hidden>
+          <p class="sent" id="pSent"></p>
+          <label class="lbl" for="code"><span class="am">ባለ6 አኃዝ ኮድ</span><span class="en">6-digit code</span></label>
+          <div class="field"><input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••"></div>
+          <button class="cta" id="pGo" type="button"><span class="am" id="pGoT">ግባ</span><small id="pGoE">Sign in</small></button>
+          <div class="row"><button type="button" id="pResend" aria-disabled="true"></button><button type="button" id="pBack" class="am">ቁጥር ቀይር · Change number</button></div>
+        </div>
+      </div>
+      <div class="err" id="err" role="alert" hidden></div>
+      <div id="tgBox" hidden>
+        <div class="or" id="tgOr"><span class="am">ወይም · or</span></div>
+        <div id="tgWidget"></div>
+      </div>
+      <a class="ghost" id="keyOwner" hidden href="/owner"></a>
+      <a class="owner" href="/owner"><span class="am">የሕንጻ ባለቤት ሆነው በይለፍ ቃል ይገባሉ?</span><span class="en">Building owner with a password? Sign in here</span></a>
+    </div>
+  </section>
+
+  <!-- signed in, one place to go -->
+  <section class="scr" id="sGo" hidden>
+    <div class="who">
+      <div class="av" id="goAv" aria-hidden="true"></div>
+      <h2 id="goHi"></h2>
+      <p id="goWhere"></p>
+      <div class="track" id="goTrack"><i></i></div>
+    </div>
+  </section>
+
+  <!-- signed in, more than one place -->
+  <section class="scr" id="sPick" hidden>
+    <div class="head"><h2 id="pickHi"></h2><p><span class="am">ዛሬ ምን ይክፈቱ?</span> · What would you like to open?</p></div>
+    <div class="cards" id="pickCards"></div>
+    <div class="auto" id="pickAuto" hidden><span class="am">በመክፈት ላይ…</span><div class="track" id="pickTrack"><i></i></div><button type="button" id="pickStop">አቁም · Stay here</button></div>
+    <div class="sheet" style="margin-top:auto;padding-top:18px"><div class="me" id="pickMe"></div></div>
+  </section>
+
+  <!-- driver waiting for approval -->
+  <section class="scr" id="sWait" hidden>
+    <div class="head"><h2 id="waitH">ማመልከቻዎ እየታየ ነው</h2><p id="waitP">Your driver application is being reviewed. This usually takes up to 24 hours.</p></div>
+    <ol class="steps" id="waitSteps">
+      <li class="done">ተመዝግበዋል<span class="en">You registered as a driver</span></li>
+      <li class="now">ፈቃድዎንና የመኪናዎን ፎቶ እያረጋገጥን ነው<span class="en">We are checking your licence and car photo</span></li>
+      <li>ሲጸድቅ በቴሌግራም እናሳውቅዎታለን<span class="en">We message you in Telegram when you are approved</span></li>
+      <li>GO ይጫኑ፣ ጉዞ ይቀበሉ<span class="en">Open this app, tap GO and receive rides</span></li>
+    </ol>
+    <div class="sheet">
+      <div class="me" id="waitMe"></div>
+      <button class="cta" type="button" id="waitCheck"><span class="am">እንደገና አረጋግጥ</span><small>Check my status again</small></button>
+      <a class="ghost" href="https://t.me/binasmartdriverbot">Open @binasmartdriverbot</a>
+    </div>
+  </section>
+
+  <!-- signed in, not a partner yet -->
+  <section class="scr" id="sNone" hidden>
+    <div class="head"><h2>ገና አጋር አልሆኑም</h2><p>This account is not set up as a driver or a building owner yet. Choose what fits you.</p></div>
+    <div class="cards">
+      <a class="pick" href="/drive-with-us">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M4 22c0-3 2-5 5-5l4-5h9l5 5c3 0 4 2 4 5v3H4z"/><circle cx="10" cy="25" r="3" fill="#fff"/><circle cx="25" cy="25" r="3" fill="#fff"/></svg></span>
+        <span><b>ሹፌር መሆን እፈልጋለሁ</b><span class="en">I want to drive. Registration is free and takes two minutes.</span></span>
+        <svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg>
+      </a>
+      <a class="pick" href="https://t.me/bina_smart_bot">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M6 30V9l11-5v26M17 30V13l11 4v13M3 30h28"/><path d="M10 13h3M10 18h3M10 23h3M21 20h3M21 25h3"/></svg></span>
+        <span><b>ሕንጻ አለኝ</b><span class="en">I own a building. Our team sets up your dashboard; message us on Telegram.</span></span>
+        <svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg>
+      </a>
+      <a class="pick soft" href="/support"><span><b style="font-size:17px">እርዳታ ይፈልጋሉ?</b><span class="en">Need help? Contact BinaSmart support</span></span><svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg></a>
+    </div>
+    <div class="sheet"><div class="me" id="noneMe"></div></div>
+  </section>
+
+  <!-- no connection -->
+  <section class="scr" id="sOff" hidden>
+    <div class="who">
+      <h2>ግንኙነት የለም</h2>
+      <p>በይነመረብዎን ያረጋግጡና እንደገና ይሞክሩ።<span class="en">We could not reach BinaSmart. Check your internet and try again.</span></p>
+      <button class="cta" type="button" id="offRetry"><span class="am">እንደገና ሞክር</span><small>Try again</small></button>
+    </div>
+  </section>
+</main>
+
+<script>
+/* route:start — which screen a signed-in person gets. /api/me is the only authority: nothing here
+   guesses a role from a stored flag. Pinned by test/partner.test.js. */
+function partnerRoute(me, last) {
+  if (!me) return { view: 'signin' };
+  var roles = me.roles || [];
+  var opts = [];
+  if (roles.indexOf('driver') >= 0) opts.push({ kind: 'driver', href: '/drive' });
+  if (me.buildingSlug) opts.push({ kind: 'owner', href: '/owner/' + encodeURIComponent(me.buildingSlug), slug: me.buildingSlug });
+  var pending = roles.indexOf('driver_pending') >= 0;
+  if (opts.length === 1 && !pending) return { view: 'go', to: opts[0] };
+  if (!opts.length) return { view: pending ? 'pending' : 'none' };
+  var known = false;
+  for (var i = 0; i < opts.length; i++) if (opts[i].kind === last) known = true;
+  return { view: 'choose', options: opts, pending: pending, last: known ? last : null };
+}
+/* route:end */
+
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var LAST = 'bina_partner_last';
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  // Back from /drive or a dashboard lands here again; never bounce someone forward twice.
+  var navType = '';
+  try { navType = (performance.getEntriesByType('navigation')[0] || {}).type || ''; } catch (e) {}
+  var cameBack = navType === 'back_forward';
+
+  var SCREENS = ['sLoad', 'sIn', 'sGo', 'sPick', 'sWait', 'sNone', 'sOff'];
+  function show(id) { SCREENS.forEach(function (s) { $(s).hidden = s !== id; }); window.scrollTo(0, 0); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function firstName(me) {
+    var n = String((me && me.name) || '').trim().split(/\s+/)[0] || '';
+    return n.length > 24 ? n.slice(0, 24) : n;
+  }
+  function mask(p) { p = String(p || ''); return p ? '+251 ••• ' + p.slice(-4) : ''; }
+  function meLine(box, me) {
+    box.textContent = '';
+    var t = el('span'); t.appendChild(document.createTextNode('Signed in as '));
+    t.appendChild(el('b', '', firstName(me) || mask(me.phone) || 'BinaSmart'));
+    box.appendChild(t);
+    var b = el('button', 'am', 'ውጣ · Sign out'); b.type = 'button'; b.onclick = signOut; box.appendChild(b);
+  }
+  function hello(me) { var n = firstName(me); return n ? 'ሰላም፣ ' + n : 'እንኳን ደህና መጡ'; }
+
+  var WHERE = {
+    driver: { am: 'የሹፌር መተግበሪያውን በመክፈት ላይ', en: 'Opening the driver app', title: 'ሹፌር', sub: 'Drive · receive ride offers near you' },
+    owner: { am: 'የሕንጻዎን ዳሽቦርድ በመክፈት ላይ', en: 'Opening your building dashboard', title: 'ሕንጻዬ', sub: 'My building · rent, payments and tenants' }
+  };
+  var ICON = {
+    driver: '<svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M4 22c0-3 2-5 5-5l4-5h9l5 5c3 0 4 2 4 5v3H4z"/><circle cx="10" cy="25" r="3" fill="#fff"/><circle cx="25" cy="25" r="3" fill="#fff"/></svg>',
+    owner: '<svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M6 30V9l11-5v26M17 30V13l11 4v13M3 30h28"/><path d="M10 13h3M10 18h3M10 23h3M21 20h3M21 25h3"/></svg>'
+  };
+  var CHEV = '<svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg>';
+
+  function go(to, replace) {
+    store.set(LAST, to.kind);
+    if (replace) location.replace(to.href); else location.href = to.href;
+  }
+
+  // ---- one place: say hello, then open it. replace() keeps /partner out of the history, so the
+  // Android back button from /drive closes the app instead of bouncing through this page.
+  function showGo(me, to) {
+    var av = $('goAv'); av.textContent = '';
+    if (me.image && /^https:\/\//.test(me.image)) { var im = el('img'); im.alt = ''; im.src = me.image; av.appendChild(im); }
+    else av.textContent = (firstName(me) || 'ቢ').charAt(0).toUpperCase();
+    $('goHi').textContent = hello(me);
+    var w = WHERE[to.kind], p = $('goWhere'); p.textContent = w.am + '…';
+    p.appendChild(el('span', 'en', w.en));
+    show('sGo');
+    var tr = $('goTrack'); tr.classList.remove('run'); void tr.offsetWidth; tr.classList.add('run');
+    setTimeout(function () { go(to, true); }, 950);
+  }
+
+  var autoTimer = 0;
+  function showPick(me, r) {
+    $('pickHi').textContent = hello(me);
+    var box = $('pickCards'); box.textContent = '';
+    var opts = r.options.slice();
+    if (r.last) opts.sort(function (a, b) { return (b.kind === r.last) - (a.kind === r.last); });
+    opts.forEach(function (o) {
+      var a = el('a', 'pick' + (o.kind === r.last ? ' last' : '')); a.href = o.href;
+      a.innerHTML = '<span class="ic" aria-hidden="true">' + ICON[o.kind] + '</span>';
+      var tx = el('span'); tx.appendChild(el('b', '', WHERE[o.kind].title));
+      var sub = WHERE[o.kind].sub + (o.kind === 'owner' && o.slug ? ' · ' + o.slug : '');
+      tx.appendChild(el('span', 'en', sub)); a.appendChild(tx);
+      a.insertAdjacentHTML('beforeend', CHEV);
+      if (o.kind === r.last) a.appendChild(el('span', 'tag am', 'ባለፈው · Last used'));
+      a.addEventListener('click', function (e) { e.preventDefault(); stopAuto(); go(o, false); });
+      box.appendChild(a);
+    });
+    if (r.pending) {
+      var w = el('a', 'pick soft'); w.href = '#';
+      var t2 = el('span'); t2.appendChild(el('b', '', 'የሹፌር ማመልከቻ')); t2.appendChild(el('span', 'en', 'Driver application · waiting for approval'));
+      w.appendChild(t2); w.insertAdjacentHTML('beforeend', CHEV);
+      w.addEventListener('click', function (e) { e.preventDefault(); stopAuto(); showWait(me); });
+      box.appendChild(w);
+    }
+    meLine($('pickMe'), me);
+    show('sPick');
+    // The device remembers the last choice; on a fresh launch it opens again after a short, stoppable beat.
+    $('pickAuto').hidden = true;
+    if (r.last && !cameBack) {
+      var to = null; r.options.forEach(function (o) { if (o.kind === r.last) to = o; });
+      $('pickAuto').hidden = false;
+      var tr = $('pickTrack'); tr.style.setProperty('--dur', '1600ms'); tr.classList.remove('run'); void tr.offsetWidth; tr.classList.add('run');
+      autoTimer = setTimeout(function () { go(to, false); }, 1650);
+    }
+  }
+  function stopAuto() { clearTimeout(autoTimer); $('pickAuto').hidden = true; }
+  $('pickStop').onclick = stopAuto;
+
+  function showWait(me) {
+    var paused = me.driver && me.driver.status === 'suspended';
+    $('waitH').textContent = paused ? 'መለያዎ ለጊዜው ቆሟል' : 'ማመልከቻዎ እየታየ ነው';
+    $('waitP').textContent = paused
+      ? 'Your driver account is paused. Message us in @binasmartdriverbot and we will sort it out.'
+      : 'Your driver application is being reviewed. This usually takes up to 24 hours.';
+    $('waitSteps').hidden = !!paused;
+    meLine($('waitMe'), me);
+    show('sWait');
+  }
+  $('waitCheck').onclick = function () { boot(true); };
+
+  function route(me) {
+    var r = partnerRoute(me, store.get(LAST));
+    if (r.view === 'signin') return showSignIn();
+    if (r.view === 'go') return showGo(me, r.to);
+    if (r.view === 'choose') return showPick(me, r);
+    if (r.view === 'pending') return showWait(me);
+    meLine($('noneMe'), me);
+    show('sNone');
+  }
+
+  function boot(quiet) {
+    if (!quiet) show('sLoad');
+    fetch('/api/me', { cache: 'no-store', credentials: 'same-origin' })
+      .then(function (r) {
+        if (r.status === 401 || r.status === 404) return null;
+        if (!r.ok) throw new Error('me ' + r.status);
+        return r.json().then(function (j) { return j && j.me; });
+      })
+      .then(route)
+      .catch(function () { show('sOff'); });
+  }
+  $('offRetry').onclick = function () { boot(); };
+
+  function signOut() {
+    fetch('/api/auth/sign-out', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}', credentials: 'same-origin' })
+      .catch(function () {}).then(function () { showSignIn(); });
+  }
+
+  // ---------------- signed out ----------------
+  var T = {
+    badPhone: 'ትክክለኛ የኢትዮጵያ ስልክ ቁጥር ያስገቡ · Enter an Ethiopian mobile number, for example 0911 234 567',
+    notReach: 'ወደዚህ ቁጥር ኤስኤምኤስ መላክ አይቻልም · We cannot send an SMS to that number. Use an Ethio Telecom number starting 09.',
+    tooMany: 'በጣም ብዙ ሙከራ · Too many tries. Wait a few minutes and try again.',
+    offline: 'ግንኙነት አልተሳካም · Connection failed. Try again.',
+    noDoor: 'በስልክ መግባት ለጊዜው አይገኝም · Phone sign-in is not available right now. Use Telegram below.',
+    badCode: 'ኮዱ ትክክል አይደለም ወይም ጊዜው አልፎበታል · That code is wrong or has expired. Ask for a new one.',
+    need6: 'ባለ6 አኃዝ ኮድ ያስገቡ · Enter the six digits from the SMS.',
+    tgFail: 'በቴሌግራም መግባት አልተሳካም · Telegram sign-in did not complete. Try again.'
+  };
+  function showErr(m) { var e = $('err'); e.textContent = m; e.hidden = false; }
+  function clearErr() { var e = $('err'); e.textContent = ''; e.hidden = true; }
+  // Only for showing a number back to the person who typed it. The server decides what a number is.
+  function e164(v) {
+    var s = String(v || '').replace(/[^\d+]/g, '');
+    if (/^0\d{9}$/.test(s)) s = '+251' + s.slice(1);
+    if (/^9\d{8}$/.test(s) || /^7\d{8}$/.test(s)) s = '+251' + s;
+    if (/^251\d{9}$/.test(s)) s = '+' + s;
+    return /^\+251\d{9}$/.test(s) ? s : null;
+  }
+
+  var methodsLoaded = false;
+  function showSignIn() {
+    show('sIn');
+    // An owner who signed in with a password (/owner) holds a building key on this device, not an
+    // account; offer their dashboard back rather than a second sign-in. The dashboard checks the key.
+    var k = store.get('bs_key'), s = store.get('bs_slug');
+    var ko = $('keyOwner');
+    if (k && s && /^[a-z0-9-]{1,80}$/i.test(s)) {
+      ko.href = '/owner/' + encodeURIComponent(s); ko.textContent = 'ሕንጻዬን ክፈት · Open my building dashboard'; ko.hidden = false;
+    } else ko.hidden = true;
+    if (methodsLoaded) return;
+    methodsLoaded = true;
+    fetch('/api/auth-methods').then(function (r) { return r.json(); }).then(function (m) {
+      if (m.phone) { $('pBox').hidden = false; }
+      if (m.telegram && m.telegramBot) {
+        $('tgBox').hidden = false;
+        if (!m.phone) $('tgOr').hidden = true;
+        var sc = document.createElement('script');
+        sc.async = true; sc.src = 'https://telegram.org/js/telegram-widget.js?22';
+        sc.setAttribute('data-telegram-login', m.telegramBot);
+        sc.setAttribute('data-size', 'large');
+        sc.setAttribute('data-radius', '14');
+        sc.setAttribute('data-onauth', 'onTelegramAuth(user)');
+        sc.setAttribute('data-request-access', 'write');
+        $('tgWidget').appendChild(sc);
+      }
+      if (!m.phone && !(m.telegram && m.telegramBot)) {
+        // No door this page can open: hand over to /login, which also has the staff form.
+        var a = $('keyOwner'); a.hidden = false; a.href = '/login?next=/partner'; a.textContent = 'ግባ · Sign in';
+      }
+    }).catch(function () { methodsLoaded = false; showErr(T.offline); });
+  }
+
+  window.onTelegramAuth = function (user) {
+    clearErr();
+    fetch('/api/auth/sign-in/telegram', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ widget: user, callbackURL: '/partner' }) })
+      .then(function (r) { if (r.ok) boot(); else showErr(T.tgFail); })
+      .catch(function () { showErr(T.offline); });
+  };
+
+  // ---- the phone door: the same endpoints as /login (auth/phone-code-plugin.mjs), nothing new ----
+  var PHONE = '', tick = null;
+  function startTick() {
+    var left = 60, a = $('pResend');
+    clearInterval(tick);
+    a.textContent = 'እንደገና ላክ · Send again in ' + left + 's'; a.setAttribute('aria-disabled', 'true');
+    tick = setInterval(function () {
+      left--;
+      if (left > 0) { a.textContent = 'እንደገና ላክ · Send again in ' + left + 's'; return; }
+      clearInterval(tick); a.textContent = 'እንደገና ላክ · Send the code again'; a.removeAttribute('aria-disabled');
+    }, 1000);
+  }
+  function ask(p) {
+    clearErr();
+    var btn = $('pSend'); btn.disabled = true; $('pSendT').textContent = 'በመላክ ላይ…'; $('pSendE').textContent = 'Sending';
+    fetch('/api/auth/sign-in/phone-code/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone: p }) })
+      .then(function (r) {
+        btn.disabled = false; $('pSendT').textContent = 'ኮድ ላክ'; $('pSendE').textContent = 'Send me a code by SMS';
+        if (r.ok) {
+          PHONE = p;
+          $('pSent').textContent = 'ኮድ ወደ ' + mask(p) + ' ተልኳል። · We sent a code to ' + mask(p) + '. It works for 5 minutes.';
+          $('p1').hidden = true; $('p2').hidden = false; $('code').value = ''; $('code').focus();
+          startTick(); return;
+        }
+        if (r.status === 400) return showErr(T.notReach);
+        if (r.status === 429) return showErr(T.tooMany);
+        if (r.status === 503) { $('pBox').hidden = true; $('tgOr').hidden = true; return showErr(T.noDoor); }
+        showErr(T.offline);
+      })
+      .catch(function () { btn.disabled = false; $('pSendT').textContent = 'ኮድ ላክ'; $('pSendE').textContent = 'Send me a code by SMS'; showErr(T.offline); });
+  }
+  function sendCode() { var p = e164($('phone').value); clearErr(); if (!p) return showErr(T.badPhone); ask(p); }
+  function verify() {
+    var c = String($('code').value || '').replace(/\D/g, '');
+    clearErr();
+    if (c.length !== 6) return showErr(T.need6);
+    var btn = $('pGo'); btn.disabled = true; $('pGoT').textContent = 'በማረጋገጥ ላይ…'; $('pGoE').textContent = 'Checking';
+    fetch('/api/auth/sign-in/phone-code/verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone: PHONE, code: c }) })
+      .then(function (r) {
+        btn.disabled = false; $('pGoT').textContent = 'ግባ'; $('pGoE').textContent = 'Sign in';
+        if (r.ok) { clearInterval(tick); return boot(); }
+        $('code').value = ''; $('code').focus();
+        showErr(r.status === 429 ? T.tooMany : T.badCode);
+      })
+      .catch(function () { btn.disabled = false; $('pGoT').textContent = 'ግባ'; $('pGoE').textContent = 'Sign in'; showErr(T.offline); });
+  }
+  $('pSend').onclick = sendCode;
+  $('pGo').onclick = verify;
+  $('pResend').onclick = function () { if ($('pResend').getAttribute('aria-disabled') !== 'true') ask(PHONE); };
+  $('pBack').onclick = function () { clearInterval(tick); clearErr(); $('p2').hidden = true; $('p1').hidden = false; $('phone').focus(); };
+  $('phone').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); sendCode(); } });
+  $('code').addEventListener('input', function () { if (String(this.value).replace(/\D/g, '').length === 6) verify(); });
+
+  // Opened from the Android app: remember it for this tab so pages can tell (pwa.js hides its install bar).
+  try { if (/[?&]src=app\b/.test(location.search) || document.referrer.indexOf('android-app://') === 0) sessionStorage.setItem('bina_app', '1'); } catch (e) {}
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { cameBack = true; stopAuto(); } });
+  boot();
+})();
+</script>
+<script src="/static/pwa.js?v=1" defer></script>
+</body>
+</html>

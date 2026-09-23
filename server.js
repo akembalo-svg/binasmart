@@ -225,6 +225,10 @@ fastify.get('/airport', async (req, reply) => reply.sendFile('airport.html')); /
 fastify.get('/pool', async (req, reply) => reply.sendFile('pool.html')); // BinaPool landing (8 Sep 2026) -> hands off to /ride?pool=1
 fastify.get('/login', async (req, reply) => reply.sendFile('login.html'));
 fastify.get('/account', async (req, reply) => reply.header('Cache-Control','no-store').sendFile('account.html'));
+// Bina Partner (23 Sep 2026): start page of the Android app et.bina.partner (a TWA) for drivers and building
+// owners. It asks /api/me who is signed in and opens /drive or /owner/<slug>. Its manifest keeps scope '/'.
+fastify.get('/partner', async (req, reply) => reply.header('Cache-Control', 'no-cache').sendFile('partner.html'));
+fastify.get('/partner.webmanifest', async (req, reply) => reply.type('application/manifest+json').sendFile('partner.webmanifest'));
 // ===== OWNER LOGIN: phone + password =====
 const cryptoMod = require('crypto');
 function hashPw(pw){
