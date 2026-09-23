@@ -8,5 +8,15 @@
         "12:D1:D2:3F:A8:A8:43:64:35:A9:4A:04:EF:55:36:FF:84:7D:C1:F6:1D:78:6B:92:25:C1:D2:77:05:9C:E3:07"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "et.bina.app",
+      "sha256_cert_fingerprints": [
+        "16:6D:08:09:7A:AB:66:39:FD:56:C3:B6:46:6A:48:F2:BA:D4:EF:1F:07:A0:B8:32:67:75:14:50:0A:EF:28:4C"
+      ]
+    }
   }
 ]

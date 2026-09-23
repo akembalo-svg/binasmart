@@ -232,6 +232,9 @@ fastify.get('/account', async (req, reply) => reply.header('Cache-Control','no-s
 // owners. It asks /api/me who is signed in and opens /drive or /owner/<slug>. Its manifest keeps scope '/'.
 fastify.get('/partner', async (req, reply) => reply.header('Cache-Control', 'no-cache').sendFile('partner.html'));
 fastify.get('/partner.webmanifest', async (req, reply) => reply.type('application/manifest+json').sendFile('partner.webmanifest'));
+// Bina, the customer app (Android TWA et.bina.app): one big box to ask Bini + the five most used services.
+fastify.get('/go', async (req, reply) => reply.header('Cache-Control', 'no-cache').sendFile('go.html'));
+fastify.get('/go.webmanifest', async (req, reply) => reply.type('application/manifest+json').sendFile('go.webmanifest'));
 // ===== OWNER LOGIN: phone + password =====
 const cryptoMod = require('crypto');
 function hashPw(pw){
