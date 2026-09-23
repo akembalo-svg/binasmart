@@ -16,10 +16,14 @@ const CATEGORIES = [
     re: /\b(?:bank|banking|branch manager|teller|credit analyst|loan|insuranc|underwrit|actuar|claims?|bancassur|micro ?financ|customer service officer)/i },
   { slug: 'accounting', en: 'Accounting & Finance', am: 'ሒሳብና ፋይናንስ',
     re: /\b(?:account(ant|ing|s)?\b|financ|audit|auditor|cashier|budget|tax|treasur|payroll|ifrs|book ?keep|cost control)/i },
-  { slug: 'engineering', en: 'Engineering', am: 'ኢንጂነሪንግ',
-    re: /\b(?:engineer(ing)?|mechanic(al)?|electric(al|ian)?|civil|surveyor|quantity survey|technician|maintenance|machin|welder|plumb)/i },
+  // IT sits above engineering deliberately (23 September 2026 audit). The engineering pattern
+  // matches 'engineer' and 'technician', so with engineering first a Software Engineer, a DevOps
+  // Engineer, a Network Technician and an IT Technician were all filed under Engineering - 45 of
+  // them. The specific must sit above the general, which is the rule this list already states.
   { slug: 'it', en: 'IT & Software', am: 'አይቲና ሶፍትዌር',
     re: /\b(?:it |i\.t\.|software|developer|programm|data ?(base|center|analyst|scien)|network|system admin|cyber|web|devops|erp|oracle|sql)/i },
+  { slug: 'engineering', en: 'Engineering', am: 'ኢንጂነሪንግ',
+    re: /\b(?:engineer(ing)?|mechanic(al)?|electric(al|ian)?|civil|surveyor|quantity survey|technician|maintenance|machin|welder|plumb)/i },
   { slug: 'health', en: 'Health & Medical', am: 'ጤናና ሕክምና',
     re: /\b(?:nurse|nursing|doctor|physician|medical|health|pharmac|laborator|midwif|dental|clinic|surgeon|radiolog|nutrition|iycf|wash officer)/i },
   { slug: 'education', en: 'Education & Training', am: 'ትምህርትና ሥልጠና',
