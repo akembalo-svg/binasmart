@@ -13,6 +13,8 @@
   "sites": [
     {
       "id": "ethiopian-airlines",
+      "tableRows": true,
+      "tableRowsNote": "The help-and-contact pages lay out their tables one <td> per source line, so htmlToText wrote the call-centre numbers and the area-manager contacts one cell per line and nothing said which country a number belonged to. tableRows (ops/packs/fetch-pack.js) writes each row as one line naming its column headers; every cell copied exactly. Turned on 2026-09-23 after the header guard: a first row whose cell ends in \":\" or holds a web or email address is not a header, so the worldwide-contacts page, which is label/value lists (\"Phone:\"), is left as it was. Dry run: 3 documents rewritten, every digit run kept, no number added.",
       "slugPrefix": false,
       "name": "Ethiopian Airlines",
       "nameAm": "የኢትዮጵያ አየር መንገድ",

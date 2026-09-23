@@ -172,103 +172,38 @@ Ding | https://www.ding.com/countries/africa/ethiopia/top-up-ethio-telecom |
 
 ## Our International Airtime TOP-UP POS & Digital Partners
 
-Country |
-Retailer Name |
-Web Address |
-
-UAE |
-NTPayments |
-www.ntpayments.com |
-
-UAE |
-ManGO Wallet |
-mangokiosk.com |
-
-UAE |
-Gulfbox |
-www.gulfbox.ae |
-
-UAE |
-Upay |
-upay.ae |
-
-UAE |
-Al Ansari Exchange |
-www.alansariexchange.com |
-
-Italy |
-Sisalpay |
-www.sisalpay.it |
-
-Spain |
-Disashop |
-www.disashop.com |
-
-USA |
-Bossrevolution |
-www.bossrevolution.com |
-
-UK |
-Poundland |
-www.poundland.co.uk |
-
-Kuwai |
-ENET |
-www.e.net.kw |
-
-South Africa |
-Kazang |
-www.kazang.com |
+Table: Country by Retailer Name, Web Address
+Country | Retailer Name | Web Address
+UAE: Retailer Name NTPayments; Web Address www.ntpayments.com
+UAE: Retailer Name ManGO Wallet; Web Address mangokiosk.com
+UAE: Retailer Name Gulfbox; Web Address www.gulfbox.ae
+UAE: Retailer Name Upay; Web Address upay.ae
+UAE: Retailer Name Al Ansari Exchange; Web Address www.alansariexchange.com
+Italy: Retailer Name Sisalpay; Web Address www.sisalpay.it
+Spain: Retailer Name Disashop; Web Address www.disashop.com
+USA: Retailer Name Bossrevolution; Web Address www.bossrevolution.com
+UK: Retailer Name Poundland; Web Address www.poundland.co.uk
+Kuwai: Retailer Name ENET; Web Address www.e.net.kw
+South Africa: Retailer Name Kazang; Web Address www.kazang.com
 
 Digital Retailers
-
-Retailer Name |
-Web Address |
-
-Senditoo |
-www.senditoo.com |
-
-Rebtel |
-www.rebtel.com |
-
-WorldRemit |
-www.worldremit.com |
-
-MobileRecharge |
-https://MobileRecharge.com/s/Ethiopia |
-
-Recharge |
-www.recharge.com |
-
-PrepaidUnion |
-www.prepaidunion.com |
-
-Utransto |
-www.utransto.com |
-
-SiftMobile |
-www.siftmobile.io |
-
-beCharge |
-www.becharge.com |
-
-DentWireless |
-www.dentwireless.com |
-
-Orange Top Up |
-www.topup.orange.com |
-
-VIP |
-www.joinvip.com |
-
-Bookeey |
-www.bookeey.com |
-
-Prepay nation |
-www.prepaynation.com |
-
-Ding |
-https://www.ding.com/countries/africa/ethiopia/top-up-ethio-telecom |
+Table: Retailer Name by Web Address
+Retailer Name | Web Address
+Senditoo: Web Address www.senditoo.com
+Rebtel: Web Address www.rebtel.com
+WorldRemit: Web Address www.worldremit.com
+MobileRecharge: Web Address https://MobileRecharge.com/s/Ethiopia
+Recharge: Web Address www.recharge.com
+PrepaidUnion: Web Address www.prepaidunion.com
+Utransto: Web Address www.utransto.com
+SiftMobile: Web Address www.siftmobile.io
+beCharge: Web Address www.becharge.com
+DentWireless: Web Address www.dentwireless.com
+Orange Top Up: Web Address www.topup.orange.com
+VIP: Web Address www.joinvip.com
+Bookeey: Web Address www.bookeey.com
+Prepay nation: Web Address www.prepaynation.com
+Ding: Web Address https://www.ding.com/countries/africa/ethiopia/top-up-ethio-telecom
 
 # Telecom Service Bill Payment from abroad
 

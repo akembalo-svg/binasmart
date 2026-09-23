@@ -598,6 +598,8 @@
     },
     {
       "id": "ethiotelecom",
+      "tableRows": true,
+      "tableRowsNote": "telebirr pages lay out their tables one <td> per source line, so htmlToText wrote them one cell per line (the SIM replacement fees in the Amharic getting-started page, the Mela micro-credit terms, the international top-up retailers by country) and nothing on a value line said which column it sat under. tableRows (ops/packs/fetch-pack.js) writes each row as one line naming its column headers; every cell copied exactly, the mask is applied before it. Turned on 2026-09-23 after the header guard: a first row whose cell ends in \":\" or holds a web or email address is not a header, so the Amharic top-up retailer list, which has no header row, is left as it was. Dry run: 3 documents rewritten, every digit run kept, no mobile added.",
       "name": "Ethio telecom — telebirr",
       "nameAm": "ኢትዮ ቴሌኮም — ቴሌብር",
       "host": "www.ethiotelecom.et",
