@@ -24,6 +24,7 @@ const EMPLOYER = {
   website: 'https://bina.et',
   sector: 'Technology',
   about: 'የኢትዮጵያ ዲጂታል መድረክ — ሥራ፣ ጨረታ፣ ዜና፣ ሲኒማ፣ ራይድና የAI ረዳት። BinaSmart is an Ethiopian digital platform: jobs, tenders, news, cinema, rides and an Amharic AI assistant.',
+  logoUrl: '/static/logos/binasmart.png',
   verified: true,
 };
 
@@ -122,6 +123,8 @@ const JOBS = [
       if (!DRY) employer = await prisma.employer.create({ data: EMPLOYER });
     } else {
       console.log('[jobs] employer exists: ' + employer.name);
+      // Re-running should keep the row current, not silently skip it.
+      if (!DRY) employer = await prisma.employer.update({ where: { id: employer.id }, data: EMPLOYER });
     }
 
     for (const j of JOBS) {
