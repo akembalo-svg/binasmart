@@ -24,6 +24,7 @@ const { closesAt, isClosed, openSince } = require('../tenders/deadline');
 const { badge, gradient, mark, brandTile } = require('../brand/sections');
 const { cvForm } = require('./cv-form');
 const { CATEGORIES, BY_SLUG, categorise, label: catLabel } = require('./categories');
+const { cleanCity, regionFor, salaryLd } = require('./place');
 
 // Contact goes to Telegram (@Bina_smart), never to a personal phone number: the owner asked on
 // 2026-09-21, and at a jobs board's volume a published mobile becomes a day of calls from applicants
@@ -144,6 +145,9 @@ const JOBS_CSS = `<style>
 // invented closing date, and no `directApply` claim, which would say the application completes on this
 // page when for most adverts it does not. The description is the advert's own text.
 function jobLd(j, e, escH) {
+  const locality = cleanCity(j.city) || cleanCity(e.city);
+  const region = regionFor(locality);
+  const salary = salaryLd(j.salary);
   const ld = {
     '@context': 'https://schema.org', '@type': 'JobPosting',
     title: j.title,
@@ -152,7 +156,12 @@ function jobLd(j, e, escH) {
     hiringOrganization: { '@type': 'Organization', name: e.name,
       ...(e.website ? { sameAs: absUrl(e.website) } : {}), ...(e.logoUrl ? { logo: 'https://bina.et' + e.logoUrl } : {}) },
     jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress',
-      addressLocality: j.city, addressCountry: 'ET', ...(e.address ? { streetAddress: e.address } : {}) } },
+      // Boards put the working arrangement in the city column ("Project Based", "Head Office"), which
+      // is not a place. Fall back to the employer's own city rather than publish a non-place as one.
+      ...(locality ? { addressLocality: locality } : {}),
+      ...(region ? { addressRegion: region } : {}),
+      addressCountry: 'ET', ...(e.address ? { streetAddress: e.address } : {}) } },
+    ...(salary ? { baseSalary: salary } : {}),
     ...(j.deadline ? { validThrough: new Date(j.deadline).toISOString().slice(0, 10) } : {}),
     ...(j.jobType ? { employmentType: ({ 'full-time': 'FULL_TIME', 'part-time': 'PART_TIME', contract: 'CONTRACTOR',
       internship: 'INTERN', temporary: 'TEMPORARY' })[j.jobType] } : {}),
@@ -366,6 +375,7 @@ const ogJobs = cat => {
           + (jobs.length > 4 ? tgBand(lang) : '')
         : empty}
       ${!showClosed && closedCount ? `<p class="sans" style="text-align:center;margin:26px 0 4px;font-size:13.5px"><a href="/jobs${qs(req, ['show=closed'])}" style="color:var(--mut)">${t.viewClosed(closedCount)}</a></p>` : ''}
+      <p class="sans" style="margin:22px 0 10px;font-size:14px;line-height:1.9;text-align:center"><!-- guide-links:job-list -->📚 <a href="${lang === 'en' ? '/cv-ethiopia-en' : '/cv-ethiopia'}" style="font-weight:700">${lang === 'en' ? 'CV guide' : 'የሲቪ አጻጻፍ'}</a> · <a href="/interview-questions-ethiopia" style="font-weight:700">${lang === 'en' ? 'Interview questions' : 'የቃለ መጠይቅ ጥያቄዎች'}</a> · <a href="/ethiopia-jobs-report-september-2026" style="font-weight:700">${lang === 'en' ? 'Jobs report' : '📊 የሥራ ገበያ ሪፖርት'}</a>${catDef && catDef.slug === 'banking' ? ` · <a href="/bank-jobs-ethiopia" style="font-weight:700">${lang === 'en' ? '🏦 What banks ask for' : '🏦 ባንኮች ምን ይጠይቃሉ'}</a>` : ''}</p>
       <div class="cta-band sans" style="background:${gradient('jobs')}"><div><h3>${t.postFree}</h3><p>${t.postSub}</p></div><a style="background:#fff;color:#1e3a8a" href="/jobs/post${lang === 'en' ? '?lang=en' : ''}">${lang === 'en' ? 'Post it here →' : 'እዚህ ያውጡ →'}</a></div>
     </main>`;
     // The category page carries its own title, description and canonical. Without them Google sees
@@ -480,6 +490,7 @@ const ogJobs = cat => {
           return `<div style="margin-top:12px"><a href="${escH(r.href)}" target="_blank" rel="noopener" style="display:inline-block;background:${gradient('jobs')};color:#fff;border-radius:999px;padding:11px 24px;font-weight:800;font-size:14.5px">${label} →</a>${note}</div>`;
         })()}</div>` : ''}
       <div id="${j.howToApply ? 'apply-cv' : 'apply'}">${cvForm({ job: j, lang, escH, main: !j.howToApply })}</div>
+      <div class="sans" style="margin:18px 0;padding:14px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--line)"><!-- guide-links:job-detail --><b>${lang === 'en' ? '📚 Before you apply' : '📚 ከማመልከትዎ በፊት'}</b><div style="margin-top:6px;font-size:14px;line-height:1.9"><a href="${lang === 'en' ? '/cv-ethiopia-en' : '/cv-ethiopia'}" style="font-weight:700">${lang === 'en' ? '📄 How to write a CV for Ethiopian jobs' : '📄 የሲቪ አጻጻፍ መመሪያ'}</a> · <a href="/interview-questions-ethiopia" style="font-weight:700">${lang === 'en' ? '🤝 Interview questions' : '🤝 የቃለ መጠይቅ ጥያቄዎች'}</a>${j.category === 'banking' ? ` · <a href="/bank-jobs-ethiopia" style="font-weight:700">${lang === 'en' ? '🏦 What Ethiopian banks ask for' : '🏦 ባንኮች ምን ይጠይቃሉ'}</a>` : ''}</div></div>
 
       <div class="sans" style="margin:18px 0;padding:18px;border-radius:16px;background:#fff;border:1.5px solid var(--line)">
         <div style="display:flex;gap:12px;align-items:center;margin-bottom:6px">${avatarFor(e, 44)}
