@@ -600,6 +600,51 @@
       "id": "ethiotelecom",
       "tableRows": true,
       "tableRowsNote": "telebirr pages lay out their tables one <td> per source line, so htmlToText wrote them one cell per line (the SIM replacement fees in the Amharic getting-started page, the Mela micro-credit terms, the international top-up retailers by country) and nothing on a value line said which column it sat under. tableRows (ops/packs/fetch-pack.js) writes each row as one line naming its column headers; every cell copied exactly, the mask is applied before it. Turned on 2026-09-23 after the header guard: a first row whose cell ends in \":\" or holds a web or email address is not a header, so the Amharic top-up retailer list, which has no header row, is left as it was. Dry run: 3 documents rewritten, every digit run kept, no mobile added.",
+      "sectionDocs": [
+        {
+          "doc": "ethiotelecom-telebirr-telebirr-pricing",
+          "key": "bank-transfer-tariff",
+          "start": "## telebirr to bank transfer tariff",
+          "end": "## telebirr to telebirr (P2P) transfer tariff",
+          "title": "telebirr Pricing: telebirr to bank transfer tariff"
+        },
+        {
+          "doc": "ethiotelecom-telebirr-telebirr-pricing",
+          "key": "p2p-transfer-tariff",
+          "start": "## telebirr to telebirr (P2P) transfer tariff",
+          "end": "/^-\\nTigrinya/",
+          "title": "telebirr Pricing: telebirr to telebirr send money transfer tariff"
+        },
+        {
+          "doc": "ethiotelecom-am-telebirr-pricing",
+          "key": "bank-transfer-tariff",
+          "start": "## ከቴሌብር ወደ ባንክ",
+          "end": "## ከቴሌብር ወደ ቴሌብር",
+          "title": "የቴሌብር ዋጋ: ከቴሌብር ወደ ባንክ ታሪፍ"
+        },
+        {
+          "doc": "ethiotelecom-am-telebirr-pricing",
+          "key": "p2p-transfer-tariff",
+          "start": "## ከቴሌብር ወደ ቴሌብር",
+          "end": "/^-\\nTigrinya/",
+          "title": "የቴሌብር ዋጋ: ከቴሌብር ወደ ቴሌብር ገንዘብ ለማስተላለፍ ታሪፍ"
+        },
+        {
+          "doc": "ethiotelecom-endekise-overdraft-service-credit-pay",
+          "key": "mela-terms-and-conditions",
+          "start": "TERMS AND CONDITIONS FOR THE ACTIVATION AND USE OF MELA (MICRO-CREDIT) SERVICES",
+          "end": "/^-\\nTigrinya/",
+          "title": "Terms and conditions for the activation and use of Mela (micro-credit) services"
+        },
+        {
+          "doc": "ethiotelecom-am-endekise-overdraft",
+          "key": "mela-terms-and-conditions",
+          "start": "መላ ( አነስተኛ ብድር) አገልግሎትን ለማስጀመር እና ለመጠቀም ደንቦችና ሁኔታዎች",
+          "end": "/^-\\nTigrinya/",
+          "title": "መላ (አነስተኛ ብድር) አገልግሎትን ለማስጀመር እና ለመጠቀም ደንቦችና ሁኔታዎች"
+        }
+      ],
+      "sectionDocsNote": "Search keeps at most two chunks of one document. telebirr's pricing page has four tariff tables, and for \"what does telebirr charge to send 1,000 birr\" its header chunk and the telebirr-to-bank table took the page's two places, so the telebirr-to-telebirr (P2P) table was not among the 18 candidates and Bini answered with the bank tariff or said the fee was not specified (measured 2026-09-23). On the Amharic page both transfer tables sit under a bare \"ታሪፍ\" heading, so neither chunk said which transfer it prices. Each page's two transfer tariffs are therefore documents of their own, titled with the transfer they price in the page's own words. The Endekise page, in English and in Amharic, also carries the full terms and conditions of Mela micro-credit; they were indexed as \"Endekise › Pay Back\" and reached Mela answers cited as the Endekise page. That block is a document of its own titled with its own heading, and the Endekise page keeps its own eligibility, tariff and how-to (and, in Amharic, its own terms). Titles hold no figure and every word is on the page. Approved by Ibrahim 2026-09-23.",
       "name": "Ethio telecom — telebirr",
       "nameAm": "ኢትዮ ቴሌኮም — ቴሌብር",
       "host": "www.ethiotelecom.et",
