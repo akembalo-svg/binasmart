@@ -69,7 +69,11 @@ function htmlToText(html) {
   s = s.replace(/<head\b[\s\S]*?<\/head>/gi, ' ').replace(/<(script|style|nav|footer|header|noscript|svg|form)\b[\s\S]*?<\/\1>/gi, ' ').replace(/<!--[\s\S]*?-->/g, ' ');
   s = s.replace(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi, '\n\n# $1\n\n').replace(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi, '\n\n## $1\n\n').replace(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gi, '\n\n### $1\n\n');
   s = s.replace(/<li\b[^>]*>/gi, '\n- ').replace(/<\/(p|div|section|article|tr|ul|ol|table|blockquote|dd|dt)>/gi, '\n').replace(/<br\s*\/?>/gi, '\n').replace(/<\/t[dh]>/gi, ' | ');
-  s = s.replace(/<[^>]+>/g, ''); s = decode(s);
+  // A tag starts with a letter, "/", "!" or "?"; a "<" followed by anything else is text, as a browser reads it
+  // (and "</ span>", an end tag gone wrong, is dropped, as a browser drops it). telebirr's English tariff page
+  // writes its first band as a raw "<td>< 100</td>"; the old /<[^>]+>/ took "< 100 | <td>" for a tag, so the row
+  // read "1 | 1 |" where the Amharic page, which escapes it as "&lt; 100", read "1 | < 100 | 1 |".
+  s = s.replace(/<[A-Za-z!?/][^>]*>/g, ''); s = decode(s);
   s = s.split('\n').map(l => l.replace(/[ \t ]+/g, ' ').trim()).join('\n').replace(/\n{3,}/g, '\n\n').trim();
   return s;
 }

@@ -25,7 +25,9 @@ test('readSources loads the telecom pack whole, with a url and a language on eve
     assert.equal(d.source, 'telecom');
     assert.match(d.slug, /^telecom-(ethiotelecom|safaricom|eca)-[a-z0-9-]+$/);
     assert.match(d.url || '', /^https:\/\//, d.slug);
-    assert.ok(['en', 'am'].includes(d.lang), d.slug + ' lang: ' + d.lang);
+    // om: Ethio telecom's own Afaan Oromoo versions of pages the pack holds in English (sources.json translationOf)
+    assert.ok(['en', 'am', 'om'].includes(d.lang), d.slug + ' lang: ' + d.lang);
+    if (d.lang === 'om') assert.match(d.slug, /^telecom-ethiotelecom-om-/);
   }
   const proc = docs.find(d => d.slug === 'telecom-eca-communications-service-proclamation-1148-2019');
   assert.ok(proc.text.length > 60000, 'the proclamation is not truncated: ' + proc.text.length);

@@ -414,7 +414,7 @@ const esc = s => String(s).replace(/"/g, '\\"');
 // pack is never half one format and half the other - and a re-render is not reported as a change, because the
 // airline changed nothing.
 const PACK_FORMAT = '2';
-const FM_KEYS = ['url', 'title', 'titleAm', 'source_name', 'section', 'lang', 'part', 'sectionOf', 'pages', 'text_source',
+const FM_KEYS = ['url', 'title', 'titleAm', 'source_name', 'section', 'lang', 'translationOf', 'part', 'sectionOf', 'pages', 'text_source',
   'ocr_quality', 'status', 'fetchedAt', 'lastChecked',
   'firstFetched', 'goneAt', 'missedAt', 'contentHash', 'generated_by', 'packFormat'];
 function frontMatter(meta) {
@@ -755,6 +755,23 @@ function langFor(site, p) {
   return (site && site.lang) || 'en';
 }
 
+// What the header calls a page's language, in English and in Amharic. Ethio telecom publishes some pages in Afaan
+// Oromoo, Somali and Tigrinya as well (?lang=om, so, Tig); until 2026-09-23 every language that was not am read
+// "in English", which an Oromo page is not. A language this table does not name still reads "in English", exactly
+// as before, so no existing document changes.
+const LANG_WORDS = {
+  en: ['in English', 'በእንግሊዝኛ'], am: ['in Amharic', 'በአማርኛ'],
+  om: ['in Afaan Oromoo', 'በአፋን ኦሮሞ'], so: ['in Somali', 'በሶማሊኛ'], ti: ['in Tigrinya', 'በትግርኛ'],
+};
+const LANG_NAMES = { om: 'Afaan Oromoo', so: 'Somali', ti: 'Tigrinya' };
+const langWords = lang => LANG_WORDS[lang] || LANG_WORDS.en;
+// A site may name, per page address, the English page that page translates (`translationOf`, copied from the page's
+// own hreflang="en" link by the registry). Only a page in a language LANG_NAMES knows is called a translation.
+function translationOfPage(site, key, lang) {
+  const t = site && site.translationOf && site.translationOf[key];
+  return t && LANG_NAMES[lang] ? String(t) : undefined;
+}
+
 // The wording belongs to the pack, not to this file. The airline says "the airline publishes no Amharic page";
 // a bank says "rates and fees change, confirm before you act". Both are registry text, filled in here.
 // The placeholders, and nothing else, are substituted: {siteName} {sectionAm} {title} {fromAm} {url}
@@ -797,8 +814,8 @@ function header(page, site, today, pack, amh, corrected = false) {
   const vars = {
     siteName: site.name, sectionAm: page.sectionTitleAm || '', title: page.title || page.slug,
     fromAm: fromAm(site.nameAm), url: page.url, today,
-    langWord: lang === 'am' ? 'in Amharic' : 'in English',
-    langWordAm: lang === 'am' ? 'በአማርኛ' : 'በእንግሊዝኛ',
+    langWord: langWords(lang)[0],
+    langWordAm: langWords(lang)[1],
     ocrPages: page.ocrPages == null ? '' : String(page.ocrPages),
     ocrQuality: page.ocrQuality || '',
     part: page.parts > 1 ? String(page.part) : '', parts: page.parts > 1 ? String(page.parts) : '',
@@ -810,7 +827,12 @@ function header(page, site, today, pack, amh, corrected = false) {
     // title, unless the title holds a digit, which a header written here may not.
     + (page.sectionOf ? ' This is one section of the page'
       + (page.sectionOfTitle && !/[0-9]/.test(page.sectionOfTitle) ? ' "' + page.sectionOfTitle + '"' : '')
-      + ', kept as a document of its own; the rest of that page is a separate document.' : '');
+      + ', kept as a document of its own; the rest of that page is a separate document.' : '')
+    // A translation says what it is and which English page it translates, by that page's address as the page
+    // itself links it. The text is the operator's own; nothing here is translated by us.
+    + (page.translationOf && LANG_NAMES[lang] ? ' This page is in ' + LANG_NAMES[lang] + ': it is ' + site.name
+      + '\'s own ' + LANG_NAMES[lang] + ' version of its English page ' + page.translationOf
+      + ', which is a separate document.' : '');
   const am = 'በአማርኛ፦ ' + (page.sectionTitleAm ? page.sectionTitleAm + ' — ' : '') + (page.title || page.slug) + '። '
     + fill(pack && pack.headerAmTemplate, vars);
   const en = fill(pack && pack.headerEnTemplate, vars);
@@ -857,6 +879,7 @@ function renderDoc(page, site, { today, firstFetched, pack, amHeaders, correctio
   const title = site.name + ' — ' + (page.title || page.slug);
   const meta = { url: page.url, title, titleAm, source_name: site.name, section: page.section || '',
     lang: page.lang || langFor(site, page.path),
+    translationOf: page.translationOf || '',
     // A document split out of a long one says which part of it this is, and both parts carry the same url,
     // so a citation still points at the one PDF the institution published. A document that was not split
     // carries no part line at all.
@@ -1061,6 +1084,7 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
       ocrPages: meta.pages === undefined || meta.pages === '' ? null : meta.pages,
       part: pt ? Number(pt[1]) : null, parts: pt ? Number(pt[2]) : 1,
       sectionOf: meta.sectionOf || undefined,
+      translationOf: meta.translationOf || undefined,
       sectionOfTitle: meta.sectionOf ? stripPre(parentMeta && parentMeta.title) || meta.sectionOf : undefined,
       // A tableRows site's text on disk holds its tables one row per line, which is our layout, not the page:
       // the hash recorded when the page was fetched is the hash of the page as published, and it is carried. So is
@@ -1566,6 +1590,7 @@ function fetchDir(site, { root, log = () => {}, tag = 'pack', readPdf = readPdfT
     for (let n = 0; n < bodies.length; n++) {
       out.push({ url: r.e.url, path: r.key, siteId: site.id, title, text: bodies[n],
         lang, fetchedAt: String(r.e.fetchedAt || '').slice(0, 10), isPdf: false,
+        translationOf: translationOfPage(site, r.key, lang),
         part: n + 1, parts: bodies.length });
     }
   }
@@ -1790,7 +1815,7 @@ module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugF
   makeFetcher, linksOn, fetchSite, main, forPack, packDir, UA, REGISTRY, OUT_DIR, ROOT, MIN_CHARS, MASS_LOSS_FLOOR,
   dirKeyOf, pdfSlugOf, readPdfText, readDirManifest, selectDirEntries, tariffDocFrom, fetchDir, DIR_ROOT,
   readOcrManifest, ocrTitleOf, splitOcrParts, splitLongParts, ocrLangOf, OCR_MAX_CHARS, HTML_MAX_CHARS,
-  langOfText, ethiopicCount, AM_FLOOR,
+  langOfText, ethiopicCount, AM_FLOOR, LANG_WORDS, LANG_NAMES, langWords, translationOfPage,
   applyCorrections, stripCorrections, correctionNote, packCorrections, CORR_MARK,
   PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates, tableRows, isTableHead,
   splitSections, findSection, sectionCorrections, dropSharedText, SHARED_MIN };

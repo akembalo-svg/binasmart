@@ -49,9 +49,21 @@
     {
      "match": "\\?lang=am$",
      "lang": "am"
+    },
+    {
+     "match": "\\?lang=om$",
+     "lang": "om"
+    },
+    {
+     "match": "\\?lang=so$",
+     "lang": "so"
+    },
+    {
+     "match": "\\?lang=Tig$",
+     "lang": "ti"
     }
    ],
-   "langNote": "The language is in the query string, exactly as in the banking pack: /esim is English and /esim?lang=am is Amharic, and they are two documents. A page whose ?lang=am body holds under 300 Ethiopic characters is recorded as English by the importer's own measurement.",
+   "langNote": "The language is in the query string, exactly as in the banking pack: /esim is English and /esim?lang=am is Amharic, and they are two documents. A page whose ?lang=am body holds under 300 Ethiopic characters is recorded as English by the importer's own measurement. ?lang=om is Afaan Oromoo (lang om), ?lang=so Somali (so) and ?lang=Tig Tigrinya (ti); see translationOf.",
    "maxPages": 400,
    "dedupAgainstPacks": [
     "banking"
@@ -72,18 +84,18 @@
    "reach": "unreachable from this server",
    "checked": "2026-09-22",
    "why": "www.ethiotelecom.et answers inside Ethiopia and not from this VPS (measured 2026-09-16 for the banking pack, three https probes and one http probe, no bytes). The pages were harvested from Ibrahim's laptop on 2026-09-21/22 (Python stdlib fetcher, 5 s pacing, robots respected, every file sha256-verified) and copied to /root/storage/packs/telecom-manual/www.ethiotelecom.et. The harvest holds 517 HTML pages: 183 English, 319 Amharic, 13 Oromo, 1 Somali, 1 Tigrinya.",
-   "costsUs": "The pack holds the consumer-facing package, SIM, roaming, coverage, fixed-line and FAQ pages in English and in Amharic. It does not hold the package price tables that the site draws as pictures (the documents say so where it happens), the app, or the Oromo, Somali and Tigrinya pages.",
+   "costsUs": "The pack holds the consumer-facing package, SIM, roaming, coverage, fixed-line and FAQ pages in English and in Amharic, and the translations the site publishes of them in its other languages where they hold translated text (10 Afaan Oromoo). It does not hold the package price tables that the site draws as pictures (the documents say so where it happens), the app, or the translations listed in translationsSkipped.",
    "workaround": "Re-probe on every freshness run: the day www.ethiotelecom.et answers from this server this entry can become fetch: sitemap.",
    "allow": [
     "^/(mobile\\-packages|mobile\\-packages\\-2|package\\-offers|package\\-offer\\-new|mobile\\-data\\-package\\-new|voice\\-package\\-new|voice\\-data\\-new|sms\\-package\\-new|social\\-media\\-packages|long\\-validity\\-mobile\\-package|long\\-validity\\-package\\-personal|no\\-expiry\\-date\\-mobile\\-package|micro\\-packages|multiple\\-validity\\-package|package\\-extender\\-packages|one\\-birr\\-package\\-new|other\\-package\\-new|flexi\\-mobile\\-package|postpaid\\-mobile\\-package|post\\-paid\\-package|postpaid\\-mobile|prepaid\\-mobile|student\\-package|youth\\-data\\-package|women\\-package|disability\\-package|friends\\-family\\-package|good\\-morning\\-package\\-new|happy\\-hour\\-package|weekend\\-package|birthday\\-package|day\\-by\\-day\\-data\\-package|hourly\\-and\\-daily\\-unlimited\\-package|priority\\-access\\-data\\-package|premium\\-unlimited\\-mobile\\-packages%e2%80%8b|create\\-your\\-own\\-package|mobile\\-share\\-plan|mobile\\-group\\-offering\\-package|mobile\\-recurring\\-incentive\\-plan|20\\-discount\\-for\\-20\\-packages|5g\\-mobile\\-package|5g\\-mobile\\-packages|air\\-time\\-credit|evdo\\-packages|superapp\\-special\\-package|telebirr\\-only\\-mobile\\-package|crbt|adey\\-abeba\\-bulk\\-gift\\-package|promotional\\-device\\-bundled\\-offer|fixed\\-line\\-voice\\-fixed\\-broadband\\-internet\\-combo|win\\-back\\-your\\-fixed\\-line\\-voice\\-service\\-get\\-free\\-calling\\-minutes|iat\\-terms|enterprise\\-starter\\-package\\-esp|business\\-mobile\\-offers|business\\-mobile\\-packages|esim|national\\-id|nid\\-temporary\\-registration\\-center|international\\-roaming|international\\-call\\-sms|international\\-data\\-services|international\\-dialing\\-codes|international\\-services|international\\-vas|international\\-visitors\\-plan|hajj\\-roaming|5g\\-launch|new\\-ethio\\-telecom\\-4g\\-lte\\-sites|fixed\\-bb\\-internet|fixed\\-bb\\-enterprise|fixed\\-line\\-services|fixed\\-line\\-service\\-personal|fixed\\-line\\-service\\-business|wireless\\-broadband|basic\\-internet\\-usage\\-guidelines|faq|contact\\-us|ardi\\-chat\\-bot|fraud\\-awareness|what\\-are\\-frequent\\-fraud\\-types|cyberawareness|privacy\\-policy|app\\-privacy\\-policy|vpn|virtual\\-number|vas|mobile\\-conference\\-call|push\\-to\\-talk)(\\?lang=am)?$",
-    "^(/%e1%8b%91%e1%88%9d%e1%88%ab\\-%e1%8b%a8%e1%88%ae%e1%88%9a%e1%8a%95%e1%8c%8d\\-%e1%8c%a5%e1%89%85%e1%88%8d\\?lang=am|/%e1%8b%a8%e1%89%b3%e1%88%aa%e1%8d%8d\\-%e1%88%9b%e1%88%bb%e1%88%bb%e1%8b%ab\\-%e1%88%b5%e1%88%88%e1%88%9b%e1%8b%b5%e1%88%a8%e1%8c%8d\\?lang=am|/%e1%8b%ab%e1%8c%8d%e1%8a%99%e1%8a%95\\?lang=am|/premium\\-unlimited\\-mobile\\-packages%e2%80%8b\\?lang=am)$"
+    "^(/%e1%8b%91%e1%88%9d%e1%88%ab\\-%e1%8b%a8%e1%88%ae%e1%88%9a%e1%8a%95%e1%8c%8d\\-%e1%8c%a5%e1%89%85%e1%88%8d\\?lang=am|/%e1%8b%a8%e1%89%b3%e1%88%aa%e1%8d%8d\\-%e1%88%9b%e1%88%bb%e1%88%bb%e1%8b%ab\\-%e1%88%b5%e1%88%88%e1%88%9b%e1%8b%b5%e1%88%a8%e1%8c%8d\\?lang=am|/%e1%8b%ab%e1%8c%8d%e1%8a%99%e1%8a%95\\?lang=am|/premium\\-unlimited\\-mobile\\-packages%e2%80%8b\\?lang=am)$",
+    "^(/e\\-siim\\?lang=om|/gaaffilee\\-irra\\-deddeebianii\\-kaan\\?lang=om|/inerneetii\\-bb\\-dhaabbataa\\?lang=om|/kuufama\\-miidiyaa\\-hawaasaa\\?lang=om|/kuufama\\-moobaayilaa\\-5g\\?lang=om|/kuufama\\-moobaayilaa\\-turtii\\-yeroo\\-dheeraa\\?lang=om|/package\\-offer\\-mobile\\-package\\?lang=om|/tajaajila\\-bareechituu\\-sagalee\\?lang=om|/tajaajila\\-roomiingii\\?lang=om|/tajaajiloota\\-dabalataa\\-vas\\?lang=om)$"
    ],
    "deny": [
     "_files/",
-    "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$",
-    "\\?lang=(Tig|om|so)$"
+    "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
    ],
-   "denyNote": "Oromo, Somali and Tigrinya variants stay on disk in the harvest and are NOT indexed yet (Oromo comes later). The telebirr, mobile-money, credit and saving pages (telebirr, mela, wabi, sinq, enderas, adrash, sanduq, endekise, virtual-visa-card, remittance-telebirr, airtime-top-up, international-airtime-top-up, monthly-telecom-bill-payment-options, getting-started and everything under /telebirr/) belong to the banking pack and are not allowed here: a page lives in one pack only. Enterprise IT solutions, news, investor relations, careers, galleries, promotions and the site map are out of scope by not being named in allow.",
+   "denyNote": "An Oromo, Somali or Tigrinya page is allowed only by its exact address, and only when translationOf names it (see there); every other one stays on disk in the harvest. The telebirr, mobile-money, credit and saving pages (telebirr, mela, wabi, sinq, enderas, adrash, sanduq, endekise, virtual-visa-card, remittance-telebirr, airtime-top-up, international-airtime-top-up, monthly-telecom-bill-payment-options, getting-started and everything under /telebirr/) belong to the banking pack and are not allowed here: a page lives in one pack only. Enterprise IT solutions, news, investor relations, careers, galleries, promotions and the site map are out of scope by not being named in allow.",
    "pathSlugs": {
     "/mobile-packages-2?lang=am": "am-mobile-packages-2",
     "/package-offers?lang=am": "am-package-offers",
@@ -160,34 +172,44 @@
     "/mobile-conference-call?lang=am": "am-mobile-conference-call",
     "/push-to-talk?lang=am": "am-push-to-talk",
     "/%e1%8b%91%e1%88%9d%e1%88%ab-%e1%8b%a8%e1%88%ae%e1%88%9a%e1%8a%95%e1%8c%8d-%e1%8c%a5%e1%89%85%e1%88%8d?lang=am": "am-umrah-roaming-package",
-    "/%e1%8b%a8%e1%89%b3%e1%88%aa%e1%8d%8d-%e1%88%9b%e1%88%bb%e1%88%bb%e1%8b%ab-%e1%88%b5%e1%88%88%e1%88%9b%e1%8b%b5%e1%88%a8%e1%8c%8d?lang=am": "am-tariff-revision-notice"
+    "/%e1%8b%a8%e1%89%b3%e1%88%aa%e1%8d%8d-%e1%88%9b%e1%88%bb%e1%88%bb%e1%8b%ab-%e1%88%b5%e1%88%88%e1%88%9b%e1%8b%b5%e1%88%a8%e1%8c%8d?lang=am": "am-tariff-revision-notice",
+    "/e-siim?lang=om": "om-esim",
+    "/gaaffilee-irra-deddeebianii-kaan?lang=om": "om-faq",
+    "/inerneetii-bb-dhaabbataa?lang=om": "om-fixed-bb-internet",
+    "/kuufama-miidiyaa-hawaasaa?lang=om": "om-social-media-packages",
+    "/kuufama-moobaayilaa-5g?lang=om": "om-5g-mobile-package",
+    "/kuufama-moobaayilaa-turtii-yeroo-dheeraa?lang=om": "om-long-validity-package-personal",
+    "/package-offer-mobile-package?lang=om": "om-package-offers",
+    "/tajaajila-bareechituu-sagalee?lang=om": "om-crbt",
+    "/tajaajila-roomiingii?lang=om": "om-international-roaming",
+    "/tajaajiloota-dabalataa-vas?lang=om": "om-vas"
    },
-   "pathSlugsNote": "Every Amharic page is named am-<the English slug it shares>, because ?lang=am is not a readable file name. premium-unlimited-mobile-packages carries a zero-width space in its address, which is why its escape is named by hand.",
+   "pathSlugsNote": "Every Amharic page is named am-<the English slug it shares>, because ?lang=am is not a readable file name, and every Oromo, Somali or Tigrinya page om-, so- or ti-<the English slug it translates>. premium-unlimited-mobile-packages carries a zero-width space in its address, which is why its escape is named by hand.",
    "sections": [
     {
      "key": "packages",
      "titleAm": "የሞባይል ጥቅሎች",
-     "match": "^/(mobile\\-packages|mobile\\-packages\\-2|package\\-offers|package\\-offer\\-new|mobile\\-data\\-package\\-new|voice\\-package\\-new|voice\\-data\\-new|sms\\-package\\-new|social\\-media\\-packages|long\\-validity\\-mobile\\-package|long\\-validity\\-package\\-personal|no\\-expiry\\-date\\-mobile\\-package|micro\\-packages|multiple\\-validity\\-package|package\\-extender\\-packages|one\\-birr\\-package\\-new|other\\-package\\-new|flexi\\-mobile\\-package|postpaid\\-mobile\\-package|post\\-paid\\-package|postpaid\\-mobile|prepaid\\-mobile|student\\-package|youth\\-data\\-package|women\\-package|disability\\-package|friends\\-family\\-package|good\\-morning\\-package\\-new|happy\\-hour\\-package|weekend\\-package|birthday\\-package|day\\-by\\-day\\-data\\-package|hourly\\-and\\-daily\\-unlimited\\-package|priority\\-access\\-data\\-package|premium\\-unlimited\\-mobile\\-packages%e2%80%8b|create\\-your\\-own\\-package|mobile\\-share\\-plan|mobile\\-group\\-offering\\-package|mobile\\-recurring\\-incentive\\-plan|20\\-discount\\-for\\-20\\-packages|5g\\-mobile\\-package|5g\\-mobile\\-packages|air\\-time\\-credit|evdo\\-packages|superapp\\-special\\-package|telebirr\\-only\\-mobile\\-package|crbt|adey\\-abeba\\-bulk\\-gift\\-package|promotional\\-device\\-bundled\\-offer|fixed\\-line\\-voice\\-fixed\\-broadband\\-internet\\-combo|win\\-back\\-your\\-fixed\\-line\\-voice\\-service\\-get\\-free\\-calling\\-minutes|iat\\-terms|enterprise\\-starter\\-package\\-esp|business\\-mobile\\-offers|business\\-mobile\\-packages)(\\?lang=am)?$|^(/premium\\-unlimited\\-mobile\\-packages%e2%80%8b\\?lang=am)$"
+     "match": "^/(mobile\\-packages|mobile\\-packages\\-2|package\\-offers|package\\-offer\\-new|mobile\\-data\\-package\\-new|voice\\-package\\-new|voice\\-data\\-new|sms\\-package\\-new|social\\-media\\-packages|long\\-validity\\-mobile\\-package|long\\-validity\\-package\\-personal|no\\-expiry\\-date\\-mobile\\-package|micro\\-packages|multiple\\-validity\\-package|package\\-extender\\-packages|one\\-birr\\-package\\-new|other\\-package\\-new|flexi\\-mobile\\-package|postpaid\\-mobile\\-package|post\\-paid\\-package|postpaid\\-mobile|prepaid\\-mobile|student\\-package|youth\\-data\\-package|women\\-package|disability\\-package|friends\\-family\\-package|good\\-morning\\-package\\-new|happy\\-hour\\-package|weekend\\-package|birthday\\-package|day\\-by\\-day\\-data\\-package|hourly\\-and\\-daily\\-unlimited\\-package|priority\\-access\\-data\\-package|premium\\-unlimited\\-mobile\\-packages%e2%80%8b|create\\-your\\-own\\-package|mobile\\-share\\-plan|mobile\\-group\\-offering\\-package|mobile\\-recurring\\-incentive\\-plan|20\\-discount\\-for\\-20\\-packages|5g\\-mobile\\-package|5g\\-mobile\\-packages|air\\-time\\-credit|evdo\\-packages|superapp\\-special\\-package|telebirr\\-only\\-mobile\\-package|crbt|adey\\-abeba\\-bulk\\-gift\\-package|promotional\\-device\\-bundled\\-offer|fixed\\-line\\-voice\\-fixed\\-broadband\\-internet\\-combo|win\\-back\\-your\\-fixed\\-line\\-voice\\-service\\-get\\-free\\-calling\\-minutes|iat\\-terms|enterprise\\-starter\\-package\\-esp|business\\-mobile\\-offers|business\\-mobile\\-packages)(\\?lang=am)?$|^(/premium\\-unlimited\\-mobile\\-packages%e2%80%8b\\?lang=am|/kuufama\\-miidiyaa\\-hawaasaa\\?lang=om|/kuufama\\-moobaayilaa\\-5g\\?lang=om|/kuufama\\-moobaayilaa\\-turtii\\-yeroo\\-dheeraa\\?lang=om|/package\\-offer\\-mobile\\-package\\?lang=om|/tajaajila\\-bareechituu\\-sagalee\\?lang=om)$"
     },
     {
      "key": "sim",
      "titleAm": "ሲም ካርድና መታወቂያ",
-     "match": "^/(esim|national\\-id|nid\\-temporary\\-registration\\-center)(\\?lang=am)?$"
+     "match": "^/(esim|national\\-id|nid\\-temporary\\-registration\\-center)(\\?lang=am)?$|^(/e\\-siim\\?lang=om)$"
     },
     {
      "key": "roaming",
      "titleAm": "ዓለም አቀፍና ሮሚንግ",
-     "match": "^/(international\\-roaming|international\\-call\\-sms|international\\-data\\-services|international\\-dialing\\-codes|international\\-services|international\\-vas|international\\-visitors\\-plan|hajj\\-roaming)(\\?lang=am)?$|^(/%e1%8b%91%e1%88%9d%e1%88%ab\\-%e1%8b%a8%e1%88%ae%e1%88%9a%e1%8a%95%e1%8c%8d\\-%e1%8c%a5%e1%89%85%e1%88%8d\\?lang=am)$"
+     "match": "^/(international\\-roaming|international\\-call\\-sms|international\\-data\\-services|international\\-dialing\\-codes|international\\-services|international\\-vas|international\\-visitors\\-plan|hajj\\-roaming)(\\?lang=am)?$|^(/%e1%8b%91%e1%88%9d%e1%88%ab\\-%e1%8b%a8%e1%88%ae%e1%88%9a%e1%8a%95%e1%8c%8d\\-%e1%8c%a5%e1%89%85%e1%88%8d\\?lang=am|/tajaajila\\-roomiingii\\?lang=om)$"
     },
     {
      "key": "coverage",
      "titleAm": "ሽፋንና ኢንተርኔት",
-     "match": "^/(5g\\-launch|new\\-ethio\\-telecom\\-4g\\-lte\\-sites|fixed\\-bb\\-internet|fixed\\-bb\\-enterprise|fixed\\-line\\-services|fixed\\-line\\-service\\-personal|fixed\\-line\\-service\\-business|wireless\\-broadband|basic\\-internet\\-usage\\-guidelines)(\\?lang=am)?$"
+     "match": "^/(5g\\-launch|new\\-ethio\\-telecom\\-4g\\-lte\\-sites|fixed\\-bb\\-internet|fixed\\-bb\\-enterprise|fixed\\-line\\-services|fixed\\-line\\-service\\-personal|fixed\\-line\\-service\\-business|wireless\\-broadband|basic\\-internet\\-usage\\-guidelines)(\\?lang=am)?$|^(/inerneetii\\-bb\\-dhaabbataa\\?lang=om)$"
     },
     {
      "key": "help",
      "titleAm": "እገዛ፣ ጥያቄዎችና አድራሻ",
-     "match": "^/(faq|contact\\-us|ardi\\-chat\\-bot)(\\?lang=am)?$|^(/%e1%8b%ab%e1%8c%8d%e1%8a%99%e1%8a%95\\?lang=am|/%e1%8b%a8%e1%89%b3%e1%88%aa%e1%8d%8d\\-%e1%88%9b%e1%88%bb%e1%88%bb%e1%8b%ab\\-%e1%88%b5%e1%88%88%e1%88%9b%e1%8b%b5%e1%88%a8%e1%8c%8d\\?lang=am)$"
+     "match": "^/(faq|contact\\-us|ardi\\-chat\\-bot)(\\?lang=am)?$|^(/%e1%8b%ab%e1%8c%8d%e1%8a%99%e1%8a%95\\?lang=am|/%e1%8b%a8%e1%89%b3%e1%88%aa%e1%8d%8d\\-%e1%88%9b%e1%88%bb%e1%88%bb%e1%8b%ab\\-%e1%88%b5%e1%88%88%e1%88%9b%e1%8b%b5%e1%88%a8%e1%8c%8d\\?lang=am|/gaaffilee\\-irra\\-deddeebianii\\-kaan\\?lang=om)$"
     },
     {
      "key": "fraud",
@@ -202,12 +224,84 @@
     {
      "key": "business",
      "titleAm": "የንግድ አገልግሎቶች",
-     "match": "^/(vpn|virtual\\-number|vas|mobile\\-conference\\-call|push\\-to\\-talk)(\\?lang=am)?$"
+     "match": "^/(vpn|virtual\\-number|vas|mobile\\-conference\\-call|push\\-to\\-talk)(\\?lang=am)?$|^(/tajaajiloota\\-dabalataa\\-vas\\?lang=om)$"
     },
     {
      "key": "other",
      "titleAm": "ሌሎች አገልግሎቶች",
      "match": "^/"
+    }
+   ],
+   "translationOf": {
+    "/e-siim?lang=om": "https://www.ethiotelecom.et/esim/",
+    "/gaaffilee-irra-deddeebianii-kaan?lang=om": "https://www.ethiotelecom.et/faq/",
+    "/inerneetii-bb-dhaabbataa?lang=om": "https://www.ethiotelecom.et/fixed-bb-internet/",
+    "/kuufama-miidiyaa-hawaasaa?lang=om": "https://www.ethiotelecom.et/social-media-packages/",
+    "/kuufama-moobaayilaa-5g?lang=om": "https://www.ethiotelecom.et/5g-mobile-package/",
+    "/kuufama-moobaayilaa-turtii-yeroo-dheeraa?lang=om": "https://www.ethiotelecom.et/long-validity-package-personal/",
+    "/package-offer-mobile-package?lang=om": "https://www.ethiotelecom.et/package-offers/",
+    "/tajaajila-bareechituu-sagalee?lang=om": "https://www.ethiotelecom.et/crbt/",
+    "/tajaajila-roomiingii?lang=om": "https://www.ethiotelecom.et/international-roaming/",
+    "/tajaajiloota-dabalataa-vas?lang=om": "https://www.ethiotelecom.et/vas/"
+   },
+   "translationOfNote": "A page in Afaan Oromoo, Somali or Tigrinya, keyed by its address, and the English page it translates, exactly as its own hreflang=\"en\" link names it. The document header says which language the page is in and names that English page, which is a document of this pack too. Nothing is translated here: the text is the operator's own.",
+   "translationsSkipped": {
+    "/ijaartuu-marsariitii?lang=om": "its English page /web-builder/ is not in this pack (out of scope), so neither is its translation",
+    "/telediraayivii?lang=om": "its English page /teledrive/ is not in this pack (out of scope), so neither is its translation",
+    "/teledrive-2?lang=om": "an attachment (image) page: its hreflang=\"en\" link is ?attachment_id=534318, and its text is the language switcher only (31 characters).",
+    "/teledrive?lang=Tig": "an attachment (image) page: its hreflang=\"en\" link is ?attachment_id=534318, and its text is the language switcher only (30 characters).",
+    "/teledrive?lang=so": "an attachment (image) page: its hreflang=\"en\" link is ?attachment_id=534318, and its text is the language switcher only (30 characters)."
+   },
+   "sharedText": [
+    {
+     "home": "telecom-ethiotelecom-esim",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-esim$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
+    },
+    {
+     "home": "telecom-ethiotelecom-faq",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-faq$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
+    },
+    {
+     "home": "telecom-ethiotelecom-fixed-bb-internet",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-fixed\\-bb\\-internet$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
+    },
+    {
+     "home": "telecom-ethiotelecom-social-media-packages",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-social\\-media\\-packages$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
+    },
+    {
+     "home": "telecom-ethiotelecom-5g-mobile-package",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-5g\\-mobile\\-package$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
+    },
+    {
+     "home": "telecom-ethiotelecom-long-validity-package-personal",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-long\\-validity\\-package\\-personal$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
+    },
+    {
+     "home": "telecom-ethiotelecom-package-offers",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-package\\-offers$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
+    },
+    {
+     "home": "telecom-ethiotelecom-crbt",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-crbt$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
+    },
+    {
+     "home": "telecom-ethiotelecom-international-roaming",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-international\\-roaming$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
+    },
+    {
+     "home": "telecom-ethiotelecom-vas",
+     "pages": "^telecom\\-ethiotelecom\\-om\\-vas$",
+     "note": "The Afaan Oromoo page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only."
     }
    ]
   },
