@@ -152,6 +152,17 @@
         "^/(branch-network|atm-network|merchant-locations|find-a-branch|find-an-atm|official-social-media-accounts|quality-assurance-survey|visa-cards-2)(/|$)",
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
       ],
+      "tableShape": [
+        {"pages":"^/(import|export)$","shape":"columns"},
+        {"pages":"^/other-special-deposit$","first":"DB Star","shape":"columns"},
+        {"pages":"^/consumer-loan$","head":"Basic Eligibility [Requirements] | For Diaspora | For others","shape":"labels","columnsUnder":["Basic Eligibility [Requirements]"]},
+        {"pages":"^/consumer-loan$","shape":"labels"},
+        {"pages":"^/welcome-home$","first":"Type of financing","shape":"rows"},
+        {"pages":"^/welcome-home$","first":"","shape":"rows","headRows":[1,2,3,7,9]},
+        {"pages":"^/frequently-asked-questions$","first":"Business category","shape":"rows"},
+        {"pages":"^/frequently-asked-questions$","shape":"labels"}
+      ],
+      "tableShapeNote": "Dashen's tables are of four kinds and no rule read off the text tells them apart, so each is named here and laid out from the page's own HTML (tableShape in ops/packs/fetch-pack.js), rowspans and colspans in place: the Import and Export pages' four tables are two independent lists side by side (columns: \"Import: ...; ...\" then \"Export: ...\"); the DB Star / DB Prime / DB Prime Plus table on the special-deposit page is three lists of benefits with no row labels (columns; Amex Gold is DB Star's); the consumer-loan tables are labels with their values to the right, a label spanning several rows (labels), except the eligibility rows headed For Diaspora / For others, which are two lists (columnsUnder); Welcome Home's Murabaha table is a header row and one row per product (rows), and its loan rate table has three header rows over 18 columns and two more header rows further down (rows, headRows 1, 2, 3, 7 and 9); the FAQ's MESMER loan table is rows and its question/answer tables are labels. The mobile-app download table (For iOS / For Android: Click Here) is named by no rule and stays as it was. tableRows stays off for Dashen: run over these tables it paired \"Tin Certificate\" with the Export column and Amex Gold with DB Prime. Checked against the live HTML 2026-09-23.",
       "sections": [
         { "key": "accounts", "titleAm": "ሂሳብና ተቀማጭ", "match": "^/(saving-deposit|current-demand-deposit|fixed-time-deposit|other-special-deposit)$" },
         { "key": "loans", "titleAm": "ብድር", "match": "^/(consumer-loan|business-loan)$" },

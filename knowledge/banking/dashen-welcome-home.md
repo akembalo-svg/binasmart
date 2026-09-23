@@ -7,7 +7,7 @@ section: "diaspora"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
+lastChecked: "2026-09-23"
 contentHash: "48e5c6c93a611af57e475ab9f60caf073c6e527d"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
@@ -61,118 +61,25 @@ Dashen Bank provides the following banking services for the Diaspora:
 – Tin certificate by applicant and spouse (if Married)
 – Tax clearance confirmation letter from the concerned office on fulfillment of tax obligation of both the borrower and mortgagers and their spouse, if any valid for six months from the date of application
 
-|
-Interest Rate |
-
-Type of loan |
-Equity and loan repayment in FCY |
-Equity in FCY and loan repayment in LCY |
-Equity LCY and loan repayment in FCY |
-
-Contribution |
-10% |
-20% |
-30% |
-40% |
->=50% and <70% |
->=70 % |
-10% |
-20% |
-30% |
-40% |
->=50% and <70% |
->=70% |
-10% |
-20% |
-30% |
-40% |
->=50% and <70% |
->=70% |
-
-Mortgage Loan |
-10.5 |
-10 |
-9.5 |
-8.5 |
-7.5 |
-7 |
-13 |
-12.5 |
-12 |
-11.5 |
-10.5 |
-10 |
-11 |
-11.5 |
-12 |
-12.5 |
-13 |
-13.5 |
-
-car Loan |
-NA |
-10.5 |
-10 |
-9.5 |
-8.5 |
-7 |
-NA |
-13 |
-12.5 |
-12 |
-11 |
-10 |
-NA |
-12 |
-12.5 |
-13 |
-13.5 |
-13.75 |
-
-Personal Loan |
-10.5 |
-10 |
-9.5 |
-8.5 |
-7.5 |
-7 |
-13 |
-12.5 |
-12 |
-11.5 |
-10.5 |
-10 |
-11 |
-11.5 |
-12 |
-12.5 |
-13 |
-13.5 |
-
-|
-Equity and loan repayment in FCY-30% and above |
-Equity in FCY and loan repayment in LCY-30% and above |
-Equity LCY and loan repayment in FCY- 30% and above |
-
-Investment |
-8% |
-9% |
-8.5 % |
-
-|
-Loan Term |
-
-Mortgage Loan |
-20 years |
-
-Car Loan |
-8 years for new and 5 years for used Vehicles |
-
-Personal Loan |
-4 years |
-
-Investment |
-maximum 15 years |
+Interest Rate
+Type of loan | Equity and loan repayment in FCY | Equity in FCY and loan repayment in LCY | Equity LCY and loan repayment in FCY
+Contribution | 10% | 20% | 30% | 40% | >=50% and <70% | >=70 % | 10% | 20% | 30% | 40% | >=50% and <70% | >=70% | 10% | 20% | 30% | 40% | >=50% and <70% | >=70%
+Mortgage Loan, Interest Rate, Equity and loan repayment in FCY: 10% 10.5; 20% 10; 30% 9.5; 40% 8.5; >=50% and <70% 7.5; >=70 % 7
+Mortgage Loan, Interest Rate, Equity in FCY and loan repayment in LCY: 10% 13; 20% 12.5; 30% 12; 40% 11.5; >=50% and <70% 10.5; >=70% 10
+Mortgage Loan, Interest Rate, Equity LCY and loan repayment in FCY: 10% 11; 20% 11.5; 30% 12; 40% 12.5; >=50% and <70% 13; >=70% 13.5
+car Loan, Interest Rate, Equity and loan repayment in FCY: 10% NA; 20% 10.5; 30% 10; 40% 9.5; >=50% and <70% 8.5; >=70 % 7
+car Loan, Interest Rate, Equity in FCY and loan repayment in LCY: 10% NA; 20% 13; 30% 12.5; 40% 12; >=50% and <70% 11; >=70% 10
+car Loan, Interest Rate, Equity LCY and loan repayment in FCY: 10% NA; 20% 12; 30% 12.5; 40% 13; >=50% and <70% 13.5; >=70% 13.75
+Personal Loan, Interest Rate, Equity and loan repayment in FCY: 10% 10.5; 20% 10; 30% 9.5; 40% 8.5; >=50% and <70% 7.5; >=70 % 7
+Personal Loan, Interest Rate, Equity in FCY and loan repayment in LCY: 10% 13; 20% 12.5; 30% 12; 40% 11.5; >=50% and <70% 10.5; >=70% 10
+Personal Loan, Interest Rate, Equity LCY and loan repayment in FCY: 10% 11; 20% 11.5; 30% 12; 40% 12.5; >=50% and <70% 13; >=70% 13.5
+Equity and loan repayment in FCY-30% and above | Equity in FCY and loan repayment in LCY-30% and above | Equity LCY and loan repayment in FCY- 30% and above
+Investment: Equity and loan repayment in FCY-30% and above 8%; Equity in FCY and loan repayment in LCY-30% and above 9%; Equity LCY and loan repayment in FCY- 30% and above 8.5 %
+Loan Term
+Mortgage Loan: Loan Term 20 years
+Car Loan: Loan Term 8 years for new and 5 years for used Vehicles
+Personal Loan: Loan Term 4 years
+Investment: Loan Term maximum 15 years
 
 3. Issuing International Debit Card
 Eligible customers and accounts
@@ -260,35 +167,12 @@ Murabah Investment Financing:–
 
 The following summary portrays the type of IFB financing products and its pricing For the Diaspora communities:-
 
-Type of financing |
-Customer contributions |
-Profit Mark –up rate |
-Tenors |
-
-Murabaha mortgage Financing |
-From 10 % To 70% |
-Starting From 4% |
-From 1 to 20 years |
-
-Murabaha Car Financing |
-From 20 % To 70% |
-Starting From 4% |
-From 1 to 8 years |
-
-Murabaha Personal Financing |
-From 10 % To 70% |
-Starting From 4% |
-From 1 to 5 years |
-
-Murabaha Investment Financing |
-30 % and above |
-Starting From 4.5% |
-From 1 to 20 years |
-
-Export Financing |
-– |
-Starting From Zero Percent |
-Three months and above |
+Type of financing | Customer contributions | Profit Mark –up rate | Tenors
+Murabaha mortgage Financing: Customer contributions From 10 % To 70%; Profit Mark –up rate Starting From 4%; Tenors From 1 to 20 years
+Murabaha Car Financing: Customer contributions From 20 % To 70%; Profit Mark –up rate Starting From 4%; Tenors From 1 to 8 years
+Murabaha Personal Financing: Customer contributions From 10 % To 70%; Profit Mark –up rate Starting From 4%; Tenors From 1 to 5 years
+Murabaha Investment Financing: Customer contributions 30 % and above; Profit Mark –up rate Starting From 4.5%; Tenors From 1 to 20 years
+Export Financing: Customer contributions –; Profit Mark –up rate Starting From Zero Percent; Tenors Three months and above
 
 Required Documents
 

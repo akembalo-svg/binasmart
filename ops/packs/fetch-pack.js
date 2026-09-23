@@ -359,6 +359,234 @@ function tableRows(text) {
   return out.join('\n\n');
 }
 
+// ---------- tables laid out from the page's own HTML, as the registry says each one reads ----------
+// tableRows reads a table back out of the text htmlToText wrote, and that text keeps no rowspan or colspan: on
+// Dashen Bank's pages a label that spans four rows ("Features") reaches the text once, followed by three rows of
+// one cell each, and a cell that holds a <p> puts its " |" on a line of its own, so the row a value sat on is gone
+// too (the Import page's permit table came out with its Import and Export items interleaved). Nor are Dashen's
+// tables of one kind: the Import/Export requirement lists are two independent lists side by side, the DB Star /
+// DB Prime / DB Prime Plus table is three lists of benefits (Amex Gold is DB Star's), the loan tables are labels
+// with their values to the right, the FAQ tables are question and answer. No rule read off the text can tell
+// those apart, and tableRows run over them paired "Tin Certificate" with "Export" and Amex Gold with DB Prime.
+// So a site may name `tableShape`: a list of rules, each
+//   { pages: <regex on the path, optional>, first: <the exact text of the table's first cell, optional>,
+//     head: <the first row's cells joined " | ", optional>, shape: "columns" | "rows" | "labels",
+//     headRows: [1-based rows that name columns, "rows" only, default [1]],
+//     columnsUnder: [labels whose group of rows is two lists side by side, "labels" only] }
+// The first rule whose pages, first and head all match a table decides its shape; a table no rule names is left
+// exactly as htmlToText wrote it. The table is read from the HTML at fetch time (the grid, with every rowspan and
+// colspan in place) and written:
+//   columns  "<header>: <item>; <item>; ..." once per column, the first row being the headers;
+//   rows     the header row(s) as they stand, then per row "<row label>: <column header> <value>; ...". Where
+//            several header rows stack, the upper ones are named once per group ("Mortgage Loan, Interest Rate,
+//            Equity in FCY: 10% 13; 20% 12.5"), and a value spanning several columns is written once;
+//   labels   per label in the first column, "<label>: <what is to its right>; ...", a label spanning rows owning
+//            every row it spans, and a cell spanning rows inside it owning its own ("<cell> — <x> / <y>").
+// Every cell is copied as the page has it; an empty cell is left out, never filled; nothing is computed. The table
+// is only replaced when the text of its cells, read from the grid, is exactly the text htmlToText wrote for it, so
+// a table the parser misread keeps its flat form. The layout is applied where tableRows is (renderDoc), to the text
+// that came off the page, and the page's contentHash stays the hash of that text as htmlToText wrote it, so an
+// unchanged page still reads as unchanged, its Amharic header still applies, and the weekly fetch writes the
+// layout as a re-render of an unchanged page. A --rerender has no HTML: the text on disk already holds the layout,
+// and it is written again as it stands, so a change to a rule reaches the documents at the next fetch.
+const TABLE_SHAPES = new Set(['columns', 'rows', 'labels']);
+function tableShapeRules(site) {
+  const rules = site && site.tableShape;
+  if (rules == null) return [];
+  if (!Array.isArray(rules)) throw new Error('[pack] tableShape ' + ((site && site.id) || '?') + ' refused: a list of rules is needed');
+  for (const r of rules) {
+    const bad = !r || !TABLE_SHAPES.has(r.shape)
+      || (r.headRows != null && (!Array.isArray(r.headRows) || !r.headRows.every(n => Number.isInteger(n) && n >= 1)))
+      || (r.columnsUnder != null && (!Array.isArray(r.columnsUnder) || !r.columnsUnder.every(s => typeof s === 'string')))
+      || (r.first != null && typeof r.first !== 'string') || (r.head != null && typeof r.head !== 'string')
+      || (r.pages != null && typeof r.pages !== 'string');
+    if (bad) throw new Error('[pack] tableShape ' + ((site && site.id) || '?') + ' refused: ' + JSON.stringify(r));
+  }
+  return rules;
+}
+const cellLines = inner => htmlToText('<div>' + inner + '</div>').split('\n').map(l => l.trim()).filter(Boolean);
+const cellText = x => (x ? x.lines.join(' ') : '');
+// { width, height, rows: [[cell|null]], cells } from one <table>, or null. A cell is { id, lines, r0, c0, rs, cs }
+// and sits in every grid position it spans.
+function tableGrid(src) {
+  const trs = [...String(src).matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr\s*>/gi)];
+  if (!trs.length) return null;
+  const rows = trs.map(() => []), cells = [];
+  trs.forEach((tr, r) => {
+    let c = 0;
+    for (const m of tr[1].matchAll(/<(t[dh])\b([^>]*)>([\s\S]*?)<\/\1\s*>/gi)) {
+      while (rows[r][c]) c++;
+      const num = re => { const x = re.exec(m[2]); const n = x ? parseInt(x[1], 10) : 1; return n >= 1 && n <= 100 ? n : 1; };
+      const rs = Math.min(num(/\browspan\s*=\s*["']?(\d+)/i), trs.length - r), cs = num(/\bcolspan\s*=\s*["']?(\d+)/i);
+      const cell = { id: cells.length, lines: cellLines(m[3]), r0: r, c0: c, rs, cs };
+      cells.push(cell);
+      for (let i = r; i < r + rs; i++) for (let k = c; k < c + cs; k++) rows[i][k] = cell;
+      c += cs;
+    }
+  });
+  const width = Math.max(0, ...rows.map(r => r.length));
+  for (const r of rows) for (let k = 0; k < width; k++) if (!r[k]) r[k] = null;
+  return { width, height: rows.length, rows, cells };
+}
+// The distinct cells of one row from column `from` on, in order.
+function rowCells(g, r, from = 0) {
+  const out = [], seen = new Set();
+  for (let k = from; k < g.width; k++) { const x = g.rows[r][k]; if (x && !seen.has(x.id)) { seen.add(x.id); out.push(x); } }
+  return out;
+}
+// Parallel lists over rows [r0, r1) and columns [c0, width): the first row names them.
+function columnLines(g, r0, r1, c0) {
+  const out = [], done = new Set();
+  for (let c = c0; c < g.width; c++) {
+    const h = g.rows[r0][c];
+    if (h && done.has(h.id)) continue;
+    if (h) done.add(h.id);
+    const cols = h ? Array.from({ length: h.cs }, (_, i) => h.c0 + i).filter(k => k >= c0 && k < g.width) : [c];
+    const items = [], seen = new Set(h ? [h.id] : []);
+    for (let r = r0 + 1; r < r1; r++) for (const k of cols) {
+      const x = g.rows[r][k];
+      if (!x || seen.has(x.id)) continue;
+      seen.add(x.id);
+      const t = cellText(x); if (t) items.push(t);
+    }
+    if (items.length) out.push((cellText(h) ? cellText(h) + ': ' : '') + items.join('; '));
+  }
+  return out;
+}
+function shapeColumns(g) { return columnLines(g, 0, g.height, 0).join('\n\n'); }
+// The text of header row `sr` over the columns cell x spans.
+function headerOver(g, sr, x) {
+  const seen = new Set(), t = [];
+  for (let k = x.c0; k < Math.min(g.width, x.c0 + x.cs); k++) {
+    const h = g.rows[sr][k];
+    if (!h || seen.has(h.id) || h === x) continue;
+    seen.add(h.id); if (cellText(h)) t.push(cellText(h));
+  }
+  return t.join(' / ');
+}
+function shapeRows(g, rule) {
+  const heads = new Set((rule.headRows || [1]).map(n => n - 1));
+  const lines = [];
+  let stack = [], inHead = false;
+  for (let r = 0; r < g.height; r++) {
+    if (heads.has(r)) {
+      if (!inHead) stack = [];
+      stack.push(r); inHead = true;
+      const h = rowCells(g, r).map(cellText).filter(Boolean);
+      if (h.length) lines.push(h.join(' | '));
+      continue;
+    }
+    inHead = false;
+    const lab = g.rows[r][0];
+    const label = cellText(lab);
+    const groups = [];
+    for (const x of rowCells(g, r, lab ? lab.c0 + lab.cs : 0)) {
+      const t = cellText(x); if (!t) continue;
+      const path = stack.map(sr => headerOver(g, sr, x)).filter(Boolean);
+      const key = path.slice(0, -1).join(', '), last = path.length ? path[path.length - 1] : '';
+      let gr = groups[groups.length - 1];
+      if (!gr || gr.key !== key) groups.push(gr = { key, pairs: [] });
+      gr.pairs.push(last ? last + ' ' + t : t);
+    }
+    if (!groups.length) { if (label) lines.push(label); continue; }
+    for (const gr of groups) {
+      const pre = [label, gr.key].filter(Boolean).join(', ');
+      lines.push((pre ? pre + ': ' : '') + gr.pairs.join('; '));
+    }
+  }
+  return lines.join('\n');
+}
+// What rows [r0, r1) hold from column c on: a cell spanning several rows owns what is to its right on each of them.
+function labelItems(g, r0, r1, c) {
+  const items = [];
+  if (c >= g.width) return items;
+  for (let r = r0; r < r1;) {
+    const x = g.rows[r][c];
+    if (!x) { items.push(...labelItems(g, r, r + 1, c + 1)); r++; continue; }
+    const xr1 = Math.min(r1, x.r0 + x.rs);
+    const t = cellText(x), sub = labelItems(g, r, xr1, x.c0 + x.cs);
+    if (!sub.length) { if (t) items.push(t); }
+    else if (!t) items.push(...sub);
+    else items.push(t + ' — ' + sub.join(' / '));
+    r = xr1;
+  }
+  return items;
+}
+// A label that already ends in a question mark or a colon is followed by a space, not by another colon.
+const labelLead = label => (label ? label + (/[?:：፦፧]$/.test(label) ? ' ' : ': ') : '');
+function shapeLabels(g, rule) {
+  const cols = new Set(rule.columnsUnder || []);
+  const paras = [];
+  for (let r = 0; r < g.height;) {
+    const lab = g.rows[r][0];
+    const r1 = lab ? Math.min(g.height, lab.r0 + lab.rs) : r + 1;
+    const c1 = lab ? lab.c0 + lab.cs : 1;
+    const label = cellText(lab);
+    let lines;
+    if (lab && cols.has(label)) lines = columnLines(g, r, r1, c1).map(l => label + ' — ' + l);
+    else {
+      const right = r1 - r === 1 ? rowCells(g, r, c1).filter(x => cellText(x)) : null;
+      // One row, one cell to the right: its own lines are kept (an answer that is a list stays a list).
+      if (right && right.length === 1 && right[0].rs === 1) lines = [labelLead(label) + right[0].lines.join('\n')];
+      else { const items = labelItems(g, r, r1, c1); lines = [items.length ? labelLead(label) + items.join('; ') : label]; }
+    }
+    lines = lines.filter(Boolean);
+    if (lines.length) paras.push(lines.join('\n'));
+    r = Math.max(r1, r + 1);
+  }
+  return paras.join('\n\n');
+}
+const SHAPERS = { columns: shapeColumns, rows: shapeRows, labels: shapeLabels };
+const bare = s => String(s).replace(/[\s|]+/g, '');
+// [{ plain, text, shape }] for every table on the page a tableShape rule names: plain is the table as htmlToText
+// wrote it into the page text, text is its layout.
+function htmlTables(html, site, pagePath) {
+  const rules = tableShapeRules(site).filter(r => r.pages == null || new RegExp(r.pages).test(pagePath || ''));
+  if (!rules.length) return [];
+  const out = [];
+  for (const m of String(html || '').matchAll(/<table\b[\s\S]*?<\/table\s*>/gi)) {
+    const src = m[0];
+    if (/<table\b/i.test(src.slice(6))) continue;             // a table inside a table: left as it is
+    const g = tableGrid(src);
+    if (!g || !g.width) continue;
+    const firstRow = rowCells(g, 0).map(cellText);
+    const rule = rules.find(r => (r.first == null || r.first === (firstRow[0] || ''))
+      && (r.head == null || r.head === firstRow.join(' | ')));
+    if (!rule) continue;
+    const plain = htmlToText(src).trim();
+    if (!plain || bare(plain) !== bare(g.cells.map(x => x.lines.join('')).join(''))) continue;
+    const text = SHAPERS[rule.shape](g, rule).trim();
+    if (text) out.push({ plain, text, shape: rule.shape });
+  }
+  return out;
+}
+// The page text with every table htmlTables laid out put in place of its flat form. A table whose flat form is
+// not in the text as whole lines (boilerplate stripping took part of it, say) is left as it is.
+function shapeTables(text, tables, site) {
+  let out = String(text == null ? '' : text);
+  if (!Array.isArray(tables) || !tables.length) return out;
+  const mask = site && site.maskPhones ? maskPhones : (s => s);
+  let from = 0;
+  for (const t of tables) {
+    const plain = mask(t.plain), shaped = mask(t.text);
+    let at = out.indexOf(plain, from);
+    while (at >= 0 && !((at === 0 || out[at - 1] === '\n') && (at + plain.length === out.length || out[at + plain.length] === '\n')))
+      at = out.indexOf(plain, at + 1);
+    if (at < 0) continue;
+    const pre = at > 0 && !out.slice(0, at).endsWith('\n\n') ? '\n' : '';
+    const end = at + plain.length;
+    const post = end < out.length && !out.slice(end).startsWith('\n\n') ? '\n' : '';
+    out = out.slice(0, at) + pre + shaped + post + out.slice(end);
+    from = at + pre.length + shaped.length;
+  }
+  return out;
+}
+// The body a document is written with: the registry's table layouts, then tableRows, each where the site asks.
+function layoutBody(page, site) {
+  const text = site && site.tableShape ? shapeTables(page.text, page.tables, site) : page.text;
+  return site && site.tableRows ? tableRows(text) : text;
+}
+
 // The no-duplicate rule at the level of the paragraph. A site may name `dedupAgainstPacks: ["banking"]`: a
 // paragraph of at least 80 characters that a live document of one of those packs already holds, word for word
 // (whitespace and case aside), is taken out of this page, because two packs must not both answer the same
@@ -868,7 +1096,8 @@ function renderDoc(page, site, { today, firstFetched, pack, amHeaders, correctio
   // tableRows changes how a table is laid out in the document and nothing else, so it is applied to the body
   // only. contentHash stays the hash of the page as the institution published it (or the one a --rerender
   // carries), which is what the weekly unchanged-check and the Amharic sidecar entries are stamped with.
-  const body = site && site.tableRows ? tableRows(page.text) : page.text;
+  // tableShape (the tables of a site that names it, laid out from its HTML) works the same way; see layoutBody.
+  const body = layoutBody(page, site);
   const fixed = applyCorrections(body, page.slug, corrections);
   for (const c of fixed.unmatched) {
     if (onUnmatched) onUnmatched(page.slug, c);
@@ -944,7 +1173,7 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
   const shared = dropSharedText(docs, site);
   for (const h of shared.noHome) console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] sharedText home ' + h + ' is not among this run\'s documents: its copies stay this run');
   for (const s of shared.kept) console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] sharedText would leave ' + s + ' under the floor: left whole');
-  corrections = sectionCorrections(corrections, docs, d => (site && site.tableRows ? tableRows(d.text) : d.text));
+  corrections = sectionCorrections(corrections, docs, d => layoutBody(d, site));
   const sectionGone = new Set(sp.unmatched.map(u => u.slug));
   for (const u of sp.unmatched) console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] section ' + u.slug + ' is no longer on its page ' + u.doc);
   const day = today || new Date().toISOString().slice(0, 10);
@@ -1086,12 +1315,12 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
       sectionOf: meta.sectionOf || undefined,
       translationOf: meta.translationOf || undefined,
       sectionOfTitle: meta.sectionOf ? stripPre(parentMeta && parentMeta.title) || meta.sectionOf : undefined,
-      // A tableRows site's text on disk holds its tables one row per line, which is our layout, not the page:
+      // A tableRows or tableShape site's text on disk holds its tables in our layout, not as the page has them:
       // the hash recorded when the page was fetched is the hash of the page as published, and it is carried. So is
       // the hash of a page that is split into sections, and of each section: both are the whole page's. And so is the
       // hash of every page of a site that names sharedText: a page whose copy of a shared block was taken out still
       // records the page as published, whole.
-      contentHash: (site.tableRows || meta.sectionOf || specs.some(s => s.doc === slug) || sharedTextOf(site).length) && meta.contentHash ? meta.contentHash : undefined };
+      contentHash: (site.tableRows || site.tableShape || meta.sectionOf || specs.some(s => s.doc === slug) || sharedTextOf(site).length) && meta.contentHash ? meta.contentHash : undefined };
     items.push({ slug, file, old, meta, site, page });
   }
   // The split. A page that still holds a section the registry names gives up that section to a document of its own
@@ -1129,7 +1358,7 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
   }
   const siteOf = new Map(todo.map(x => [x.slug, x.site]));
   const corrections = sectionCorrections(reg.corrections || [], todo.map(x => x.page),
-    d => (siteOf.get(d.slug) && siteOf.get(d.slug).tableRows ? tableRows(d.text) : d.text));
+    d => layoutBody(d, siteOf.get(d.slug)));
   for (const { slug, file, old, meta, site, page } of todo) {
     let doc = renderDoc(page, site, { today: meta.fetchedAt, firstFetched: meta.firstFetched || meta.fetchedAt, pack: reg.pack, amHeaders, corrections, onUnmatched });
     // renderDoc writes lastChecked from the day it is given, and the day it is given here is the day the page
@@ -1225,7 +1454,8 @@ async function fetchSite(site, { fetchImpl, sleep, limit = 0, log = () => {}, ta
       if (round === 1 && site.discoverLinks) for (const l of linksOn(r.html, p.url)) discovered.add(l);
       const ex = extract(r.html, { titleSuffix: site.titleSuffix });
       if (!ex.ok) { failed.push({ url: p.url, why: ex.why }); continue; }
-      fetched.set(p.path, { ...p, siteId: site.id, title: ex.title, text: ex.text, lang: langFor(site, p.path) });
+      fetched.set(p.path, { ...p, siteId: site.id, title: ex.title, text: ex.text, lang: langFor(site, p.path),
+        ...(site.tableShape ? { tables: htmlTables(r.html, site, p.path) } : {}) });
       if ((i + 1) % 10 === 0) log('[' + tag + '] ' + site.id + ' round ' + round + ': ' + (i + 1) + '/' + list.length);
     }
   };
@@ -1818,6 +2048,7 @@ module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugF
   langOfText, ethiopicCount, AM_FLOOR, LANG_WORDS, LANG_NAMES, langWords, translationOfPage,
   applyCorrections, stripCorrections, correctionNote, packCorrections, CORR_MARK,
   PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates, tableRows, isTableHead,
+  tableGrid, htmlTables, shapeTables, layoutBody, tableShapeRules,
   splitSections, findSection, sectionCorrections, dropSharedText, SHARED_MIN };
 
 //   node ops/packs/fetch-pack.js --pack banking
