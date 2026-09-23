@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#F4FAF8">
 <meta name="color-scheme" content="light only">
 <title>ቢና አጋር · Bina Partner</title>
-<meta name="description" content="Bina Partner: the BinaSmart app for drivers and building owners in Addis Ababa.">
+<meta name="description" content="Bina Partner: the BinaSmart app for drivers and business owners in Addis Ababa.">
 <link rel="manifest" href="/partner.webmanifest">
 <link rel="icon" href="/icon-32.png">
 <link rel="apple-touch-icon" href="/static/partner/icon-192.png">
@@ -114,6 +114,10 @@ main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin
 .pick .tag{position:absolute;top:12px;right:14px;font-size:11.5px;font-weight:700;color:var(--emd);background:var(--wash);border-radius:999px;padding:3px 9px}
 .pick .chev{margin-left:auto;flex:none;color:#9FB2BA}
 .pick.soft{min-height:0;background:#FBFDFC}
+.pick .step{display:block;position:relative;margin-top:8px;padding-left:13px;font-size:13px;font-weight:700;color:var(--emd);line-height:1.4}
+.pick .step:before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--em)}
+.pick .step .en{display:block;margin-top:1px;font-size:12.5px;font-weight:600;color:var(--emd)}
+.back{display:inline-flex;align-items:center;gap:6px;margin:4px 0 0 18px;padding:10px 6px;font-size:14px;font-weight:700;color:var(--emd)}
 .auto{margin:16px 24px 0;font-size:13.5px;color:var(--mut);display:flex;align-items:center;gap:10px}
 .auto .track{flex:1;margin:0}
 .auto button{color:var(--emd);font-weight:700;padding:8px 0}
@@ -153,7 +157,7 @@ main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin
   <section class="scr" id="sIn" hidden>
     <div class="hero">
       <h1>ቢና አጋር</h1>
-      <p class="sub">ለሹፌሮችና ለሕንጻ ባለቤቶች<span class="en">For drivers and building owners in Addis Ababa</span></p>
+      <p class="sub">ለሹፌሮችና ለንግድ ባለቤቶች<span class="en">For drivers and business owners in Addis Ababa</span></p>
     </div>
     <svg class="scene" viewBox="0 0 360 132" fill="none" aria-hidden="true">
       <g stroke="#009688" stroke-width="2" stroke-linejoin="round">
@@ -193,7 +197,7 @@ main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin
         <div id="tgWidget"></div>
       </div>
       <a class="ghost" id="keyOwner" hidden href="/owner"></a>
-      <a class="owner" href="/owner"><span class="am">የሕንጻ ባለቤት ሆነው በይለፍ ቃል ይገባሉ?</span><span class="en">Building owner with a password? Sign in here</span></a>
+      <a class="owner" href="/owner"><span class="am">ዳሽቦርድዎ በይለፍ ቃል ነው የሚከፈተው?</span><span class="en">Owner with a dashboard password? Sign in here</span></a>
     </div>
   </section>
 
@@ -215,6 +219,14 @@ main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin
     <div class="sheet" style="margin-top:auto;padding-top:18px"><div class="me" id="pickMe"></div></div>
   </section>
 
+  <!-- signed in: the businesses this account runs (hotel, building, shop, restaurant, clinic, cinema...) -->
+  <section class="scr" id="sBiz" hidden>
+    <button type="button" class="back" id="bizBack" hidden>‹ ተመለስ · Back</button>
+    <div class="head"><h2 id="bizHi"></h2><p><span class="am">የትኛውን ንግድ ይክፈቱ?</span> · Which business would you like to open?</p></div>
+    <div class="cards" id="bizCards"></div>
+    <div class="sheet" style="margin-top:auto;padding-top:18px"><div class="me" id="bizMe"></div></div>
+  </section>
+
   <!-- driver waiting for approval -->
   <section class="scr" id="sWait" hidden>
     <div class="head"><h2 id="waitH">ማመልከቻዎ እየታየ ነው</h2><p id="waitP">Your driver application is being reviewed. This usually takes up to 24 hours.</p></div>
@@ -233,7 +245,7 @@ main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin
 
   <!-- signed in, not a partner yet -->
   <section class="scr" id="sNone" hidden>
-    <div class="head"><h2>ገና አጋር አልሆኑም</h2><p>This account is not set up as a driver or a building owner yet. Choose what fits you.</p></div>
+    <div class="head"><h2>ገና አጋር አልሆኑም</h2><p>This account is not set up as a driver or a business owner yet. Choose what fits you.</p></div>
     <div class="cards">
       <a class="pick" href="/drive-with-us">
         <span class="ic" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M4 22c0-3 2-5 5-5l4-5h9l5 5c3 0 4 2 4 5v3H4z"/><circle cx="10" cy="25" r="3" fill="#fff"/><circle cx="25" cy="25" r="3" fill="#fff"/></svg></span>
@@ -241,8 +253,8 @@ main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin
         <svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg>
       </a>
       <a class="pick" href="https://t.me/bina_smart_bot">
-        <span class="ic" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M6 30V9l11-5v26M17 30V13l11 4v13M3 30h28"/><path d="M10 13h3M10 18h3M10 23h3M21 20h3M21 25h3"/></svg></span>
-        <span><b>ሕንጻ አለኝ</b><span class="en">I own a building. Our team sets up your dashboard; message us on Telegram.</span></span>
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><rect x="4" y="11" width="26" height="17" rx="3"/><path d="M12 11V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3M4 18h26M15 18v3h4v-3"/></svg></span>
+        <span><b>ንግድ አለኝ</b><span class="en">I own a business: a building, hotel, shop, restaurant, clinic or cinema. Message us on Telegram and our team connects your dashboard.</span></span>
         <svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg>
       </a>
       <a class="pick soft" href="/support"><span><b style="font-size:17px">እርዳታ ይፈልጋሉ?</b><span class="en">Need help? Contact BinaSmart support</span></span><svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg></a>
@@ -263,25 +275,46 @@ main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin
 <script>
 /* route:start — which screen a signed-in person gets. /api/me is the only authority: nothing here
    guesses a role from a stored flag. Pinned by test/partner.test.js. */
-function partnerRoute(me, last) {
+// The businesses this account runs. /api/me `owned` (auth/identity.js) lists each with its dashboard URL and
+// how that dashboard lets the owner in; an older /api/me without it falls back to buildingSlug.
+function partnerOwned(me) {
+  var out = [];
+  var src = me && Object.prototype.toString.call(me.owned) === '[object Array]' ? me.owned : null;
+  if (src) {
+    for (var i = 0; i < src.length; i++) {
+      var b = src[i];
+      if (b && b.id && typeof b.url === 'string' && /^\/(?![\/\\])/.test(b.url)) out.push(b);
+    }
+  } else if (me && me.buildingSlug) {
+    out.push({ id: 'building:' + me.buildingSlug, type: 'building', name: me.buildingSlug, url: '/owner/' + encodeURIComponent(me.buildingSlug), access: 'account' });
+  }
+  return out;
+}
+function partnerRoute(me, last, lastBiz) {
   if (!me) return { view: 'signin' };
   var roles = me.roles || [];
+  var biz = partnerOwned(me);
   var opts = [];
   if (roles.indexOf('driver') >= 0) opts.push({ kind: 'driver', href: '/drive' });
-  if (me.buildingSlug) opts.push({ kind: 'owner', href: '/owner/' + encodeURIComponent(me.buildingSlug), slug: me.buildingSlug });
+  // One business the account itself opens: straight there. Several, or one that asks for its own
+  // sign-in: the list, so the owner sees which one and what the next step is.
+  if (biz.length === 1 && biz[0].access === 'account') opts.push({ kind: 'owner', href: biz[0].url, biz: biz[0] });
+  else if (biz.length) opts.push({ kind: 'owner', list: true });
   var pending = roles.indexOf('driver_pending') >= 0;
-  if (opts.length === 1 && !pending) return { view: 'go', to: opts[0] };
+  var lb = null;
+  for (var j = 0; j < biz.length; j++) if (biz[j].id === lastBiz) lb = lastBiz;
+  if (opts.length === 1 && !pending) return opts[0].list ? { view: 'owners', businesses: biz, lastBiz: lb } : { view: 'go', to: opts[0] };
   if (!opts.length) return { view: pending ? 'pending' : 'none' };
   var known = false;
-  for (var i = 0; i < opts.length; i++) if (opts[i].kind === last) known = true;
-  return { view: 'choose', options: opts, pending: pending, last: known ? last : null };
+  for (var k = 0; k < opts.length; k++) if (opts[k].kind === last) known = true;
+  return { view: 'choose', options: opts, pending: pending, last: known ? last : null, businesses: biz, lastBiz: lb };
 }
 /* route:end */
 
 (function () {
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
-  var LAST = 'bina_partner_last';
+  var LAST = 'bina_partner_last', LASTBIZ = 'bina_partner_biz', ME = null;
   var store = {
     get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -291,7 +324,7 @@ function partnerRoute(me, last) {
   try { navType = (performance.getEntriesByType('navigation')[0] || {}).type || ''; } catch (e) {}
   var cameBack = navType === 'back_forward';
 
-  var SCREENS = ['sLoad', 'sIn', 'sGo', 'sPick', 'sWait', 'sNone', 'sOff'];
+  var SCREENS = ['sLoad', 'sIn', 'sGo', 'sPick', 'sBiz', 'sWait', 'sNone', 'sOff'];
   function show(id) { SCREENS.forEach(function (s) { $(s).hidden = s !== id; }); window.scrollTo(0, 0); }
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 
@@ -311,16 +344,50 @@ function partnerRoute(me, last) {
 
   var WHERE = {
     driver: { am: 'የሹፌር መተግበሪያውን በመክፈት ላይ', en: 'Opening the driver app', title: 'ሹፌር', sub: 'Drive · receive ride offers near you' },
-    owner: { am: 'የሕንጻዎን ዳሽቦርድ በመክፈት ላይ', en: 'Opening your building dashboard', title: 'ሕንጻዬ', sub: 'My building · rent, payments and tenants' }
+    owner: { am: 'የንግድዎን ዳሽቦርድ በመክፈት ላይ', en: 'Opening your business dashboard', title: 'ባለቤት', sub: 'Owner · your business dashboard' }
   };
   var ICON = {
     driver: '<svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M4 22c0-3 2-5 5-5l4-5h9l5 5c3 0 4 2 4 5v3H4z"/><circle cx="10" cy="25" r="3" fill="#fff"/><circle cx="25" cy="25" r="3" fill="#fff"/></svg>',
-    owner: '<svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M6 30V9l11-5v26M17 30V13l11 4v13M3 30h28"/><path d="M10 13h3M10 18h3M10 23h3M21 20h3M21 25h3"/></svg>'
+    owner: '<svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><rect x="4" y="11" width="26" height="17" rx="3"/><path d="M12 11V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3M4 18h26M15 18v3h4v-3"/></svg>'
+  };
+  // One label and one picture per kind of business. Unknown kinds read as a plain business.
+  var SVG0 = '<svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">';
+  var PICS = {
+    building: '<path d="M6 30V9l11-5v26M17 30V13l11 4v13M3 30h28"/><path d="M10 13h3M10 18h3M10 23h3M21 20h3M21 25h3"/>',
+    bed: '<path d="M4 27V9M4 21h26v6M30 21v-3a4 4 0 0 0-4-4H15v7"/><circle cx="9.5" cy="17" r="2.5"/>',
+    health: '<rect x="5" y="5" width="24" height="24" rx="6"/><path d="M17 11v12M11 17h12"/>',
+    bus: '<rect x="6" y="4" width="22" height="21" rx="4"/><path d="M6 15h22M10 29v-4M24 29v-4"/><circle cx="11" cy="20" r="1.2"/><circle cx="23" cy="20" r="1.2"/>',
+    fork: '<path d="M8 4v7a3 3 0 0 0 6 0V4M11 14v16M25 30V4c-4 2-6 8-6 13h6"/>',
+    cup: '<path d="M6 12h18v7a7 7 0 0 1-7 7h-4a7 7 0 0 1-7-7z"/><path d="M24 14h2a3 3 0 0 1 0 6h-2M11 5v3M16 4v4"/>',
+    bag: '<path d="M7 11h20l-1.5 18h-17z"/><path d="M12 11V9a5 5 0 0 1 10 0v2"/>',
+    film: '<rect x="5" y="7" width="24" height="20" rx="3"/><path d="M10 7v20M24 7v20M5 13h5M5 21h5M24 13h5M24 21h5"/>',
+    case: '<rect x="4" y="11" width="26" height="17" rx="3"/><path d="M12 11V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3M4 18h26M15 18v3h4v-3"/>'
+  };
+  var TYPES = {
+    building: { am: 'ሕንጻ', en: 'Building', pic: 'building' },
+    hotel: { am: 'ሆቴል', en: 'Hotel', pic: 'bed' },
+    hospital: { am: 'ሆስፒታል', en: 'Hospital', pic: 'health' },
+    clinic: { am: 'ክሊኒክ', en: 'Clinic', pic: 'health' },
+    pharmacy: { am: 'ፋርማሲ', en: 'Pharmacy', pic: 'health' },
+    travel: { am: 'የጉዞ ድርጅት', en: 'Travel company', pic: 'bus' },
+    restaurant: { am: 'ምግብ ቤት', en: 'Restaurant', pic: 'fork' },
+    cafe: { am: 'ካፌ', en: 'Café', pic: 'cup' },
+    shop: { am: 'ሱቅ', en: 'Shop', pic: 'bag' },
+    venue: { am: 'ሲኒማና መድረክ', en: 'Cinema & venue', pic: 'film' }
+  };
+  function typeOf(b) { return TYPES[b && b.type] || { am: 'ንግድ', en: 'Business', pic: 'case' }; }
+  // Where a business card goes, and the step the owner meets there. Only what the server said.
+  function bizHref(b) { return b.access === 'owner_key' ? '/owner' : b.url; }
+  var STEP = {
+    business_sign_in: { am: 'ቀጥሎ ስልክዎን ያረጋግጣሉ', en: 'Next, confirm your phone to open this dashboard' },
+    owner_key: { am: 'በዳሽቦርድ የይለፍ ቃልዎ ይገባሉ', en: 'Sign in with this dashboard’s owner password' }
   };
   var CHEV = '<svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg>';
 
   function go(to, replace) {
     store.set(LAST, to.kind);
+    if (to.list) return showBiz(ME, true);
+    if (to.biz) store.set(LASTBIZ, to.biz.id);
     if (replace) location.replace(to.href); else location.href = to.href;
   }
 
@@ -332,6 +399,7 @@ function partnerRoute(me, last) {
     else av.textContent = (firstName(me) || 'ቢ').charAt(0).toUpperCase();
     $('goHi').textContent = hello(me);
     var w = WHERE[to.kind], p = $('goWhere'); p.textContent = w.am + '…';
+    if (to.biz) w = { en: w.en + ' · ' + (to.biz.name || typeOf(to.biz).en) };
     p.appendChild(el('span', 'en', w.en));
     show('sGo');
     var tr = $('goTrack'); tr.classList.remove('run'); void tr.offsetWidth; tr.classList.add('run');
@@ -348,7 +416,9 @@ function partnerRoute(me, last) {
       var a = el('a', 'pick' + (o.kind === r.last ? ' last' : '')); a.href = o.href;
       a.innerHTML = '<span class="ic" aria-hidden="true">' + ICON[o.kind] + '</span>';
       var tx = el('span'); tx.appendChild(el('b', '', WHERE[o.kind].title));
-      var sub = WHERE[o.kind].sub + (o.kind === 'owner' && o.slug ? ' · ' + o.slug : '');
+      var sub = o.kind === 'owner'
+        ? 'የንግድዎ ዳሽቦርድ · ' + (o.biz ? (o.biz.nameAm || o.biz.name || typeOf(o.biz).en) : 'Your business dashboard')
+        : WHERE[o.kind].sub;
       tx.appendChild(el('span', 'en', sub)); a.appendChild(tx);
       a.insertAdjacentHTML('beforeend', CHEV);
       if (o.kind === r.last) a.appendChild(el('span', 'tag am', 'ባለፈው · Last used'));
@@ -374,6 +444,37 @@ function partnerRoute(me, last) {
     }
   }
   function stopAuto() { clearTimeout(autoTimer); $('pickAuto').hidden = true; }
+
+  // ---- the owner's businesses: one card each, the last one opened first ----
+  function showBiz(me, fromChooser) {
+    var r = partnerRoute(me, null, store.get(LASTBIZ));
+    var list = (r.businesses || []).slice();
+    if (r.lastBiz) list.sort(function (a, b) { return (b.id === r.lastBiz) - (a.id === r.lastBiz); });
+    $('bizHi').textContent = hello(me);
+    var box = $('bizCards'); box.textContent = '';
+    list.forEach(function (b) {
+      var t = typeOf(b), a = el('a', 'pick' + (b.id === r.lastBiz ? ' last' : '')); a.href = bizHref(b);
+      a.innerHTML = '<span class="ic" aria-hidden="true">' + SVG0 + PICS[t.pic] + '</svg></span>';
+      var tx = el('span');
+      tx.appendChild(el('b', '', b.nameAm || b.name || t.am));
+      var line = t.am + ' · ' + t.en + (b.nameAm && b.name ? ' · ' + b.name : '') + (b.role === 'staff' ? ' · staff' : '');
+      tx.appendChild(el('span', 'en', line));
+      var st = STEP[b.access];
+      if (st) { var n = el('span', 'step'); n.appendChild(el('span', 'am', st.am)); n.appendChild(el('span', 'en', st.en)); tx.appendChild(n); }
+      a.appendChild(tx);
+      a.insertAdjacentHTML('beforeend', CHEV);
+      if (b.id === r.lastBiz) a.appendChild(el('span', 'tag am', 'ባለፈው · Last used'));
+      a.addEventListener('click', function (e) { e.preventDefault(); store.set(LAST, 'owner'); store.set(LASTBIZ, b.id); location.href = bizHref(b); });
+      box.appendChild(a);
+    });
+    $('bizBack').hidden = !fromChooser;
+    meLine($('bizMe'), me);
+    // From the chooser, Android back returns to it rather than closing the app.
+    if (fromChooser) { try { history.pushState({ partner: 'biz' }, ''); } catch (e) {} }
+    show('sBiz');
+  }
+  $('bizBack').onclick = function () { history.back(); };
+  window.addEventListener('popstate', function () { if (!$('sBiz').hidden && ME) { cameBack = true; route(ME); } });
   $('pickStop').onclick = stopAuto;
 
   function showWait(me) {
@@ -389,7 +490,9 @@ function partnerRoute(me, last) {
   $('waitCheck').onclick = function () { boot(true); };
 
   function route(me) {
-    var r = partnerRoute(me, store.get(LAST));
+    ME = me;
+    var r = partnerRoute(me, store.get(LAST), store.get(LASTBIZ));
+    if (r.view === 'owners') return showBiz(me, false);
     if (r.view === 'signin') return showSignIn();
     if (r.view === 'go') return showGo(me, r.to);
     if (r.view === 'choose') return showPick(me, r);

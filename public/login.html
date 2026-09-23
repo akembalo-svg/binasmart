@@ -159,13 +159,21 @@ function mask(p){ return '+251 ••• ' + String(p).slice(-4); }
 // One place to work (a building, or the driver app) -> straight there. More than one, or a driver still waiting for
 // approval, or a business -> /account, which shows every door. Nothing but a rider or plain user -> where they were going.
 // A page that sent them here with ?next= is honoured, except that a building owner always reaches their own dashboard.
+// me.owned (auth/identity.js) lists every business the account runs, each with its dashboard URL: a hotel
+// or building opens /owner/<slug>, a shop, restaurant, clinic or cinema opens /business. Two shops share
+// /business (it has its own switcher), so homes are counted by URL. An older /api/me without owned
+// falls back to buildingSlug.
 function destFor(me, next, explicit){
   var roles = (me && me.roles) || [];
   var homes = [];
-  if (me && me.buildingSlug) homes.push('/owner/' + me.buildingSlug);
+  var owned = (me && Object.prototype.toString.call(me.owned) === '[object Array]') ? me.owned : null;
+  if (owned) owned.forEach(function(b){ if (b && typeof b.url === 'string' && /^\/(?![\/\\])/.test(b.url) && homes.indexOf(b.url) < 0) homes.push(b.url); });
+  else if (me && me.buildingSlug) homes.push('/owner/' + me.buildingSlug);
+  var ownerHome = homes.length === 1 ? homes[0] : null;
   if (roles.indexOf('driver') >= 0) homes.push('/drive');
-  var hub = roles.indexOf('business') >= 0 || roles.indexOf('driver_pending') >= 0 || roles.indexOf('admin') >= 0;
-  if (me && me.buildingSlug && homes.length === 1 && !hub) return homes[0];
+  var hub = (roles.indexOf('business') >= 0 && !owned) || roles.indexOf('driver_pending') >= 0 || roles.indexOf('admin') >= 0;
+  // A building dashboard wins over ?next as before; /business only when nothing else was asked for.
+  if (ownerHome && homes.length === 1 && !hub && (!explicit || /^\/owner\//.test(ownerHome))) return ownerHome;
   if (explicit) return next;
   if (hub) return '/account';
   if (homes.length === 1) return homes[0];
