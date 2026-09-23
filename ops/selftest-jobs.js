@@ -60,7 +60,7 @@ function check(name, ok, detail) {
 (async () => {
   const { PrismaClient } = require('@prisma/client');
   const prisma = new PrismaClient();
-  const testPhone = '0915550042';               // one number, so a failed run leaves nothing new behind
+  const testPhone = '0900000042';               // invented range (09000000xx); one number, so a failed run leaves nothing new behind
   const testCompany = 'BinaSmart Self Test PLC';
 
   try {
@@ -130,7 +130,7 @@ function check(name, ok, detail) {
     check('new vacancies in the last 3 days', fresh > 0, fresh + ' added');
 
     // 7. nothing left behind by earlier runs
-    const leftovers = await prisma.candidate.count({ where: { phone: { contains: '91555004' } } })
+    const leftovers = await prisma.candidate.count({ where: { phone: { contains: '900000042' } } })
       + await prisma.jobSubmission.count({ where: { employerName: testCompany } });
     check('no test rows left behind', leftovers === 0, leftovers + ' found');
 
