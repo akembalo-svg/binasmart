@@ -7,7 +7,8 @@
 //   · 23 active cinema venues in our directory (Venue, active), 123 programme rows (Programme)
 //   · 15 films live on /cinema that morning: Gast 8, Alem 6, Adot 1
 //   · the three channels we read: t.me/gastcinema, t.me/alem_cinema, t.me/AdotCinema
-//   · phones taken from the cinemas' own posts: Alem +251986959595, Gast +251930113377;
+//   · phones taken from the cinemas' own posts, read at run time from the Venue rows alem-cinema and gast-cinema
+//     (kept out of this public repository);
 //     Adot publishes no number, only Hulu Beje
 //   · the harvester runs 04:10 and 18:40 UTC daily (crontab), i.e. 07:10 and 21:40 Addis
 //
@@ -17,9 +18,10 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+const localForm = e164 => { const d = String(e164 || '').replace(/\D/g, '').replace(/^251/, '').replace(/^0/, ''); return /^[79][0-9]{8}$/.test(d) ? '0' + d.slice(0, 3) + ' ' + d.slice(3, 5) + ' ' + d.slice(5, 7) + ' ' + d.slice(7) : null; };
 const slug = 'addis-cinema-programme-telegram-poster-amharic';
 
-const body = `
+const bodyFor = P => `
 <p>ፊልሙ ዛሬ ማታ ይታያል። ትኬቱ አለ፣ አዳራሹ ክፍት ነው፣ ሲኒማ ቤቱም ፕሮግራሙን ዛሬ ጠዋት አውጥቶታል። ግን "በአዲስ አበባ ዛሬ ምን ይታያል?" ብለው ጎግል ላይ ቢፈልጉ — አያገኙትም።</p>
 
 <p>ይህ ጽሑፍ <strong>ለምን እንደማያገኙት</strong> ነው የሚያብራራው። ምክንያቱ የሲኒማ ቤቶቹ ስንፍና አይደለም። ፕሮግራሙ ተለጥፏል፤ ነገር ግን በሚነበብ ቦታ ላይ አልተለጠፈም።</p>
@@ -55,7 +57,7 @@ const body = `
 
 <h3>🎟️ ግልጽ እንሁን፦ ትኬቱን የሚሸጡት እነሱ ናቸው</h3>
 <p>ቢናስማርት ለእነዚህ ሲኒማ ቤቶች ትኬት አይሸጥም። የምናደርገው አንድ ነገር ነው — <strong>የወጣውን ፕሮግራም የሚነበብና የሚፈለግ ማድረግ</strong>። ትኬቱ በሲኒማ ቤቱ በር ላይ ነው፤ ዓለም ሲኒማ ደግሞ በቴሌብር እና በሁሉ በጀ ይሸጣል።</p>
-<p>ስልኮቹ ከራሳቸው ፖስቶች የተወሰዱ ናቸው፦ ዓለም ሲኒማ <strong>0986 95 95 95</strong>፣ ጋስት ሲኒማ <strong>0930 11 33 77</strong>። አዶት ስልክ አያወጣም — በቴሌግራም <a href="https://t.me/AdotCinema">t.me/AdotCinema</a> ነው።</p>
+<p>ስልኮቹ ከራሳቸው ፖስቶች የተወሰዱ ናቸው፦ ዓለም ሲኒማ <strong>${P.alem}</strong>፣ ጋስት ሲኒማ <strong>${P.gast}</strong>። አዶት ስልክ አያወጣም — በቴሌግራም <a href="https://t.me/AdotCinema">t.me/AdotCinema</a> ነው።</p>
 <p>ከመሄድዎ በፊት ደውለው ያረጋግጡ። ፕሮግራም በመጨረሻ ሰዓት ሊቀየር ይችላል፤ እኛ የምናሳየው ሲኒማ ቤቱ ያወጣውን ነው።</p>
 
 <h3>🏢 ለሲኒማ ቤቶችና ለዝግጅት አዘጋጆች</h3>
@@ -69,10 +71,13 @@ const body = `
 <p><strong>The second problem.</strong> A poster that says "1:10" means 19:10 on the international clock; another cinema writes 19:10 directly. Both are right, and a wrong guess sends somebody across the city for nothing. Our rule: if the printed time and the converted time do not reconcile, the row is dropped rather than guessed at — and the page shows both clocks.</p>
 <p><strong>What we did.</strong> We read the cinemas' own channels, the text and the poster, and a model that can read an image returns the films and times. Only what is printed; dates are never invented (a poster naming its days is trusted for those days, one that does not is held for a week and expires by itself); and every row carries a link to the post it came from, so anyone can check our reading against the picture. It refreshes twice a day, 07:10 and 21:40 Addis time, with nobody retyping anything.</p>
 <p><strong>Today, 23 September 2026:</strong> 15 films across three cinemas on <a href="https://bina.et/cinema">bina.et/cinema</a> — Gast 8, Alem 6, Adot 1. Showtimes already past are faded and the next screening still to come is highlighted, because at 6pm the question is not what was on, it is what you can still catch.</p>
-<p><strong>What we do not do.</strong> We do not sell these tickets. The cinema does, at the door; Alem also sells through telebirr and Hulu Beje. Phone numbers come from the cinemas' own posts: Alem 0986 95 95 95, Gast 0930 11 33 77; Adot publishes none. Call before you travel — a programme can change at the last minute, and what we show is what the cinema published.</p>
+<p><strong>What we do not do.</strong> We do not sell these tickets. The cinema does, at the door; Alem also sells through telebirr and Hulu Beje. Phone numbers come from the cinemas' own posts: Alem ${P.alem}, Gast ${P.gast}; Adot publishes none. Call before you travel — a programme can change at the last minute, and what we show is what the cinema published.</p>
 `.trim();
 
 (async () => {
+  const v = Object.fromEntries((await prisma.venue.findMany({ where: { slug: { in: ['alem-cinema', 'gast-cinema'] } }, select: { slug: true, phone: true } })).map(r => [r.slug, localForm(r.phone)]));
+  if (!v['alem-cinema'] || !v['gast-cinema']) throw new Error('Alem or Gast has no phone in the Venue table: not publishing an article without them');
+  const body = bodyFor({ alem: v['alem-cinema'], gast: v['gast-cinema'] });
   const data = {
     title: 'What is showing in Addis tonight — and why you cannot Google it',
     titleAm: 'የአዲስ አበባ ሲኒማ ፕሮግራም — ጎግል ማንበብ የማይችለው፣ በፖስተር ውስጥ ያለው',
