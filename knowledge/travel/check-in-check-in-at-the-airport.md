@@ -121,14 +121,6 @@ Availability of Self-baggage Drop Off Counters (SBD)
 - MAD: Madrid
 - ADD: Addis Ababa
 
-Save your Time by avoiding long Queues. Use Ethiopian Airlines Web check-in Service to choose your preferred Seat and to Print Boarding Pass Online.
-
-Online Check-in
-
-Online Check-in
-
-Save your Time by avoiding long Queues. Use Ethiopian Airlines Web check-in Service to choose your preferred Seat and to Print Boarding Pass Online.
-
 1. When do Ethiopian Airlines check-in counters open and close?
 
 Ethiopian Airlines check-in counters open 3 hours before departure and close 1 hour prior to flight time. However, for some airports like London Heathrow (LHR) and Manchester (MAN), check-in closes 75 minutes before departure, while at Paris Charles de Gaulle (CDG), it closes 90 minutes before departure.

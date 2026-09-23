@@ -14,7 +14,7 @@ packFormat: "2"
 
 # Ethiopian Airlines — Cloud Nine Services
 
-Ethiopian Airlines — on-board — Cloud Nine Services. On this page: Short-haul flights, Medium and Long-haul flights, Meal service, Inflight Entertainment, Relax and Rest.
+Ethiopian Airlines — on-board — Cloud Nine Services. On this page: Short-haul flights, Medium and Long-haul flights, Inflight Entertainment, Relax and Rest.
 
 በአማርኛ፦ በበረራ ላይ — Cloud Nine Services። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
 
@@ -57,10 +57,6 @@ No matter where your destination may be, step into a relaxed cabin where you wil
 # Medium and Long-haul flights
 
 Enjoy our Cloud 9 service with a variety of delicious international dishes infused with homegrown ingredients and tastes of Ethiopian national dishes, prepared by our top chefs making your journey pleasant..
-
-## Meal service
-
-Our menu consists of carefully prepared appetizers, a taste of Ethiopian national dishes, creamy yet healthy meals, followed by the selection finest cheese, fruit and dessert. The cabin crew will setup your table to create the best dining experience.
 
 No matter where your destination may be, step into a relaxed cabin where you will be greeted with our cabin crew.
 

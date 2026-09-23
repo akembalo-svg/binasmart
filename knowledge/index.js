@@ -42,6 +42,10 @@ function clipLines(s, n = HIT_CHARS) {
 // check-in questions lost their gold page to sibling Ethiopian Airlines pages (tv-012, tv-023, tv-049), so travel
 // was re-ingested with the old chunker. Every other pack held or gained. workspaces/index.js (private client
 // documents) calls chunkDoc without the option and keeps the old chunks.
+// Re-tested 2026-09-23 after the travel pack's shared blocks were written once, on their home page only
+// (knowledge/travel/sources.json sharedText; the copies of one baggage FAQ on eight pages were what outranked the
+// gold pages): old chunker 90.0% retrieval / 90.0% shipped, line-safe 90.0% / 88.3%. Line-safe no longer loses the
+// baggage and check-in pages, but the reranker keeps fewer gold pages under it, so travel stays on the old chunker.
 const LINE_SAFE_OPT_OUT = new Set(['travel']);
 const lineSafeFor = source => !LINE_SAFE_OPT_OUT.has(source);
 

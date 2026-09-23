@@ -23,38 +23,6 @@ Source: https://www.ethiopianairlines.com/et/information/baggage-information/car
 #
 Carry on Baggage
 
-Carry on baggage
-
-Carry on baggage
-
-Free baggage allowance
-
-Special baggage
-
-Extra baggage
-
-Lost, delayed and damaged baggage
-
-Restricted baggage
-
-Interline and partners baggage policy
-
-Carry on baggage
-
-Free baggage allowance
-
-Special baggage
-
-Extra baggage
-
-Lost, delayed and damaged baggage
-
-Restricted baggage
-
-Interline Partners Baggage
-
-Please note!
-
 Note: Star Alliance Gold passengers traveling in First/Business class are entitled to at least 2 pieces of carry-on luggage weighing 7kg each with the dimension of each piece 23 x 40 x 55 (cm).
 
 Musical instruments is permitted as carry-on baggage so long as the dimension of the instrument (inside or outside of its package) do not exceed the carry-on dimension standard set by the airline. That is to say 23 x 40 x 55 (cm).
@@ -174,14 +142,6 @@ You can bring a few personal items in addition to your carry-on baggage which sh
 *Food or other items bought
 at the airport
 
-Explore our options for additional baggage allowance and ensure a seamless journey. Click to learn more and pack without limits!
-
-Extra baggage
-
-Extra baggage
-
-Explore our options for additional baggage allowance and ensure a seamless journey. Click to learn more and pack without limits!
-
 Restricted
 
 - What are the safety concerns for cabin baggage?
@@ -197,26 +157,6 @@ Yes, Ethiopian receives connecting passenger&rsquo;s baggage from other airlines
 
 - Can I carry firearms, weapons, and ammunition in my baggage?
 Ammunition, firearms, sharp knives and/or other security-restricted items belonging to passengers shall not be carried inside cabin and/or flight deck (cockpit), and passengers must declare such items at the time of check-in. All ammunition shall be carried in the aircraft hold as checked baggage only and with approval of concerned Security Authorities.
-
-Free Baggage Allowance
-
-1. What is the free baggage allowance for my flight?
-If you are travelling in Economy class, 2 pieces 23kg each and C-9 3 pieces 23kg each Or 2 pieces of 32kg.
-Note that some weight systems depend on the routes where you are travelling.
-2. How much weight can I carry for my checked baggage?
-It depends on the route and class. If you are travelling in Economy class, 2 pieces 23kg each and C-9, 3 pieces 23kg each Or 2 pieces of 32kg.
-
-3. What are the dimensions allowed for my carry-on luggage?
-(55cmx40cmx20cm)
-4. Can I bring additional items like a laptop bag or a purse as hand luggage?
-Its possible to have the below items in addition to carry-on luggage: -
-1 Laptop, books, purse, 1iPad/1 phone but the maximum weight should not exceed 3kg.
-
-5. Are there any restrictions on the number of bags I can check in for free?
-
-Economy class 2bags and business class 2/3bags
-
-Carry on baggage
 
 - What is Ethiopian Airlines' allowed size and weight for carry-on baggage in Economy class?
 
@@ -245,16 +185,6 @@ If your carry-on bag exceeds the specified size or weight limit with Ethiopian A
 - Is there a difference in carry-on allowances for different classes of service with Ethiopian Airlines?
 
 Yes, there is a difference. Business class passengers with Ethiopian Airlines have a higher allowance, with 2 pieces of hand luggage weighing 7 kg each, compared to Economy class.
-
-Explore our options for additional baggage allowance and ensure a seamless journey. Click to learn more and pack without limits!
-
-Extra baggage
-
-Extra baggage
-
-Explore our options for additional baggage allowance and ensure a seamless journey. Click to learn more and pack without limits!
-
-Carry on baggage
 
 - What is Ethiopian Airlines' allowed size and weight for carry-on baggage in Economy class?
 

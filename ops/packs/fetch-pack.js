@@ -646,6 +646,63 @@ function sectionCorrections(corrections, docs, textOf = d => d.text) {
   });
 }
 
+// ---------- the same block on several pages of one site ----------
+// Some sites print one block of text on every page of a section: Ethiopian Airlines puts its baggage
+// questions-and-answers accordion at the foot of eight baggage pages, its online check-in FAQ on three check-in
+// pages and six "Personalize your trip" tiles on six booking pages. Every copy became chunks of its own, and search
+// keeps up to two chunks of each page, so one answer arrived from five or six pages at once and pushed the page that
+// is actually about the question out of the top three: on 2026-09-23 "How many bags can I check in for free?" found
+// the allowance answer on four sibling baggage pages before the free-baggage-allowance page. dropPackDuplicates is the
+// no-duplicate rule between packs; this is the same rule inside one site, at the level of a block.
+// A site may name `sharedText`, a list of { home, pages, note }:
+//   home    the document that keeps the block: a page of this site, or a section document (sectionDocs)
+//   pages   a regular expression over slugs, naming the pages the copies are taken out of (never home itself)
+// A block is a run of consecutive paragraphs of a page, every one of which the home document also holds word for
+// word (whitespace and case aside), at least SHARED_MIN characters together. A lone short paragraph that happens to
+// equal one on the home page ("Book now", "Yes.") is not a block and stays where it is. The rules apply in the order
+// listed, each to the documents as the rules before it left them, so a paragraph ends up on exactly one page.
+// Nothing is lost and nothing is invented: a rule whose home is not among the documents does nothing (the weekly
+// fetch of a week in which the home page failed keeps every copy until it is back), and a page the rule would leave
+// under the site's floor is left whole and reported - a page that is nothing but the copy belongs in `deny`.
+// The page's contentHash stays the hash of the page as the institution published it, so the weekly check still reads
+// an unchanged page as unchanged. Returns { dropped: { slug: characters taken out }, noHome: [home], kept: [slug] }.
+const SHARED_MIN = 200;
+const sharedTextOf = site => (site && Array.isArray(site.sharedText) ? site.sharedText : []);
+function dropSharedText(docs, site) {
+  const out = { dropped: {}, noHome: [], kept: [] };
+  const rules = sharedTextOf(site);
+  if (!rules.length) return out;
+  const floor = Number(site && site.minChars) || MIN_CHARS;
+  for (const rule of rules) {
+    if (!rule || !rule.home || !rule.pages) throw new Error('[pack] sharedText ' + ((site && site.id) || '?') + ' refused: a rule needs home and pages');
+    const pages = new RegExp(rule.pages);
+    const home = docs.find(d => d.slug === rule.home);
+    if (!home) { out.noHome.push(rule.home); continue; }
+    const held = new Set(String(home.text == null ? '' : home.text).split('\n\n').map(normParaText).filter(Boolean));
+    for (const d of docs) {
+      if (d === home || !pages.test(d.slug)) continue;
+      const paras = String(d.text == null ? '' : d.text).split('\n\n');
+      const norms = paras.map(normParaText);
+      const drop = new Array(paras.length).fill(false);
+      for (let i = 0; i < paras.length;) {
+        if (!norms[i] || !held.has(norms[i])) { i++; continue; }
+        let j = i, chars = 0;
+        while (j < paras.length && (!norms[j] || held.has(norms[j]))) { chars += norms[j].length; j++; }
+        while (j > i && !norms[j - 1]) j--;   // a run ends on a paragraph, not on the blank lines after it
+        if (chars >= SHARED_MIN) for (let k = i; k < j; k++) drop[k] = true;
+        i = Math.max(j, i + 1);
+      }
+      if (!drop.some(Boolean)) continue;
+      const text = paras.filter((p, k) => !drop[k]).join('\n\n').replace(/\n{3,}/g, '\n\n').trim();
+      if (text.length < floor) { out.kept.push(d.slug); continue; }
+      if (!d.contentHash) d.contentHash = contentHash(d.text);
+      out.dropped[d.slug] = (out.dropped[d.slug] || 0) + (String(d.text).trim().length - text.length);
+      d.text = text;
+    }
+  }
+  return out;
+}
+
 // Two renders of one document differ in the two lines that move on their own: lastChecked advances every run,
 // and missedAt is cleared by a run that succeeds. Everything else - the front matter, the header, the text -
 // is what "did this document really change" means.
@@ -859,12 +916,17 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
   // the page now holds whatever is there, and the same text must not stay live twice.
   const sp = splitSections(docs, site);
   docs = sp.docs;
+  // A block the site prints on several pages stays on its home only (see dropSharedText). After the split, because a
+  // home may be a section document; before the corrections are placed, because they are matched against what stays.
+  const shared = dropSharedText(docs, site);
+  for (const h of shared.noHome) console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] sharedText home ' + h + ' is not among this run\'s documents: its copies stay this run');
+  for (const s of shared.kept) console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] sharedText would leave ' + s + ' under the floor: left whole');
   corrections = sectionCorrections(corrections, docs, d => (site && site.tableRows ? tableRows(d.text) : d.text));
   const sectionGone = new Set(sp.unmatched.map(u => u.slug));
   for (const u of sp.unmatched) console.log('[' + ((pack && pack.logPrefix) || (pack && pack.id) || 'pack') + '] section ' + u.slug + ' is no longer on its page ' + u.doc);
   const day = today || new Date().toISOString().slice(0, 10);
   const r = { added: [], changed: [], unchanged: [], gone: [], goneWhy: {}, missed: [], revived: [], reformatted: [], uncorrected,
-    split: sp.split.map(x => x.slug), unsplit: sp.unmatched.map(x => x.slug) };
+    split: sp.split.map(x => x.slug), unsplit: sp.unmatched.map(x => x.slug), shared: shared.dropped };
   const deadUrls = new Map();
   for (const f of failed || []) { const w = DEAD[f.why]; if (w) deadUrls.set(normUrl(f.url), w); }
   const wanted = new Map(docs.map(d => [d.slug, d]));
@@ -948,7 +1010,7 @@ function writePack(dir, docs, site, { today, dryRun = false, failed = [], pack, 
 // lastChecked are carried through exactly as they stood, so the ingest re-chunks the document while the
 // freshness record still says the institution changed nothing. Reported as re-rendered, never as changed.
 function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
-  const r = { rerendered: [], unchanged: [], skipped: [], uncorrected: [], split: [], unsplit: [] };
+  const r = { rerendered: [], unchanged: [], skipped: [], uncorrected: [], split: [], unsplit: [], shared: {}, sharedKept: [], sharedNoHome: [] };
   const sites = new Map((reg.sites || []).map(s => [s.name, s]));
   const onUnmatched = slug => {
     if (!r.uncorrected.includes(slug)) r.uncorrected.push(slug);
@@ -1002,8 +1064,10 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
       sectionOfTitle: meta.sectionOf ? stripPre(parentMeta && parentMeta.title) || meta.sectionOf : undefined,
       // A tableRows site's text on disk holds its tables one row per line, which is our layout, not the page:
       // the hash recorded when the page was fetched is the hash of the page as published, and it is carried. So is
-      // the hash of a page that is split into sections, and of each section: both are the whole page's.
-      contentHash: (site.tableRows || meta.sectionOf || specs.some(s => s.doc === slug)) && meta.contentHash ? meta.contentHash : undefined };
+      // the hash of a page that is split into sections, and of each section: both are the whole page's. And so is the
+      // hash of every page of a site that names sharedText: a page whose copy of a shared block was taken out still
+      // records the page as published, whole.
+      contentHash: (site.tableRows || meta.sectionOf || specs.some(s => s.doc === slug) || sharedTextOf(site).length) && meta.contentHash ? meta.contentHash : undefined };
     items.push({ slug, file, old, meta, site, page });
   }
   // The split. A page that still holds a section the registry names gives up that section to a document of its own
@@ -1030,6 +1094,15 @@ function rerenderPack(dir, reg, { dryRun = false, amHeaders = null } = {}) {
   // A section just split from its page replaces any older copy of that document read from disk.
   const fresh = new Set(out.filter(x => x.fromSplit).map(x => x.slug));
   const todo = out.filter(x => x.fromSplit || !fresh.has(x.slug));
+  // The shared blocks, exactly as the weekly fetch takes them out (writePack): per site, after the split, before the
+  // corrections are placed. On a pack already written this way there is nothing left to take, so a second re-render
+  // changes nothing.
+  const bySite = new Map();
+  for (const x of todo) { if (!bySite.has(x.site)) bySite.set(x.site, []); bySite.get(x.site).push(x.page); }
+  for (const [site, pages] of bySite) {
+    const sh = dropSharedText(pages, site);
+    Object.assign(r.shared, sh.dropped); r.sharedKept.push(...sh.kept); r.sharedNoHome.push(...sh.noHome);
+  }
   const siteOf = new Map(todo.map(x => [x.slug, x.site]));
   const corrections = sectionCorrections(reg.corrections || [], todo.map(x => x.page),
     d => (siteOf.get(d.slug) && siteOf.get(d.slug).tableRows ? tableRows(d.text) : d.text));
@@ -1630,7 +1703,7 @@ async function main(bound = {}) {
     log('[travel] ' + pack + ': ' + n + ' documents (0 added, 0 changed, ' + rr.rerendered.length + ' re-rendered, '
       + rr.unchanged.length + ' unchanged, ' + rr.skipped.length + ' skipped)' + (dryRun ? '  [DRY RUN — nothing written]' : ''));
     console.log(JSON.stringify({ pack, rerendered: rr.rerendered.length, unchanged: rr.unchanged.length, skipped: rr.skipped, uncorrected: rr.uncorrected,
-      split: rr.split, unsplit: rr.unsplit, changedDocs: rr.rerendered }));
+      split: rr.split, unsplit: rr.unsplit, shared: rr.shared, sharedKept: rr.sharedKept, sharedNoHome: rr.sharedNoHome, changedDocs: rr.rerendered }));
     return;
   }
   let bad = 0;
@@ -1720,7 +1793,7 @@ module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugF
   langOfText, ethiopicCount, AM_FLOOR,
   applyCorrections, stripCorrections, correctionNote, packCorrections, CORR_MARK,
   PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates, tableRows, isTableHead,
-  splitSections, findSection, sectionCorrections };
+  splitSections, findSection, sectionCorrections, dropSharedText, SHARED_MIN };
 
 //   node ops/packs/fetch-pack.js --pack banking
 //   node ops/packs/fetch-pack.js --pack banking --site zemen --limit 5 --dry-run
