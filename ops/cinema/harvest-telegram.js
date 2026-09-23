@@ -39,6 +39,7 @@ const EARLIEST_HOUR = 10;         // the earliest hour an Addis cinema actually 
 const CHANNELS = [
   { venue: 'alem-cinema', channel: 'alem_cinema', name: 'Alem Cinema Telegram channel' },
   { venue: 'gast-cinema', channel: 'gastcinema', name: 'Gast Cinema Telegram channel' },
+  { venue: 'adot-multiplex', channel: 'AdotCinema', name: 'Adot Cinema Telegram channel' },
 ];
 
 const PROMPT = [
@@ -75,6 +76,10 @@ const PROMPT = [
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const clean = (s, n) => String(s || '').replace(/\s+/g, ' ').trim().slice(0, n);
+// The same film comes back as "HULET FIT", "Hulet Fit" and "Hulete Fit" on three days' posters. Shouted
+// titles are set in title case so one film is one row, and a normalised form is used to match them.
+const titleCase = t => (/[a-z]/.test(t) ? t : t.toLowerCase().replace(/\b([a-z])/g, c => c.toUpperCase()));
+const keyOf = t => String(t || '').toLowerCase().replace(/[^a-z0-9\u1200-\u137f]+/g, '');
 
 // The Ethiopian clock runs six hours behind the international one, and turns again in the evening:
 // 1:00 is 07:00, 12:00 is 18:00, and an evening 2:30 is 20:30. A printed time and a converted one that
@@ -115,6 +120,9 @@ function parsePosts(html) {
     const text = raw.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')
       .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'")
       .replace(/&laquo;|&raquo;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
+    // "CHANNEL pinned «…»" is Telegram repeating a post back at itself; reading it again would double
+    // every programme it quotes.
+    if (/\spinned\s+[«"]/.test(text.slice(0, 120))) continue;
     if (link && when) out.push({ link: 'https://t.me/' + link, postedAt: new Date(when), text, img });
   }
   return out;
@@ -181,11 +189,24 @@ async function readPost(post) {
           dateTo = new Date(Math.min(end.getTime(), pf.getTime() + 14 * 86400000) + 86400000 - 1);
         }
 
+        // One post, one row per film: a poster listing a film three times must not become three rows.
+        const merged = new Map();
         for (const s of read.shows) {
+          const k = keyOf(s.titleAm || s.title);
+          if (!k) continue;
+          if (!merged.has(k)) merged.set(k, { ...s, printed: [...(s.printed || [])], times24: [...(s.times24 || [])] });
+          else {
+            const m = merged.get(k);
+            m.printed.push(...(s.printed || []));
+            m.times24.push(...(s.times24 || []));
+            if (!m.note && s.note) m.note = s.note;
+          }
+        }
+        for (const s of merged.values()) {
           const printed = Array.isArray(s.printed) ? s.printed : [];
           const conv = Array.isArray(s.times24) ? s.times24 : [];
           const times = [...new Set(printed.map((p, i) => reconcile(p, conv[i], s.clock)).filter(Boolean))].sort();
-          const title = clean(s.title, 90) || clean(s.titleAm, 90);
+          const title = titleCase(clean(s.title, 90) || clean(s.titleAm, 90));
           if (!title || !times.length) { skipped++; continue; }                // a show with no readable time is not shown
 
           const note = [clean(s.kind, 20) === 'theatre' ? 'ቴአትር · theatre' : (clean(s.kind, 20) === 'film' ? 'ፊልም · film' : ''),
@@ -194,11 +215,18 @@ async function readPost(post) {
           if (DRY) { console.log('  ' + title + '  ' + times.join(', ') + '  [' + note + ']'); added++; continue; }
 
           // One row per title per post: re-running the harvester must not double the board.
-          const twin = await prisma.programme.findFirst({ where: { venueId: venue.id, title, sourceUrl: post.link } });
-          if (twin) { await prisma.programme.update({ where: { id: twin.id }, data: { times, notes: note, dateFrom, dateTo, active: true } }); }
+          const titleAm = clean(s.titleAm, 90) || null;
+          const ident = keyOf(titleAm || title);
+          const sameDays = await prisma.programme.findMany({ where: { venueId: venue.id, dateFrom } });
+          const twin = sameDays.find(x => keyOf(x.titleAm || x.title) === ident) ||
+            await prisma.programme.findFirst({ where: { venueId: venue.id, title, sourceUrl: post.link } });
+          if (twin) {
+            const union = [...new Set([...(twin.times || []), ...times])].sort();
+            await prisma.programme.update({ where: { id: twin.id }, data: { times: union, notes: note || twin.notes, dateTo, active: true } });
+          }
           else {
             await prisma.programme.create({ data: {
-              venueId: venue.id, title, titleAm: clean(s.titleAm, 90) || null,
+              venueId: venue.id, title, titleAm,
               times, dateFrom, dateTo, notes: note || null,
               sourceName: site.name, sourceUrl: post.link, postedAt: post.postedAt, active: true,
             } });
