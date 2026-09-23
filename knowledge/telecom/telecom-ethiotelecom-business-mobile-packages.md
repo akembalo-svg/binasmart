@@ -87,11 +87,9 @@ Unlimited Voice only CUG | up to 20 Members | 175 Birr
 
 ## Subscription Requirements
 
-Customer Category |
-Main Requirements |
-
-Key Account Non-Government, Key account government, International organizations and embassies, SOHO / SME |
-Service request letter |
+Table: Customer Category by Main Requirements
+Customer Category | Main Requirements
+Key Account Non-Government, Key account government, International organizations and embassies, SOHO / SME: Main Requirements Service request letter
 
 GSM postpaid subscription requirement (in case of new request) |
 

@@ -108,3 +108,14 @@ test('what the pack leaves to other packs is written down', () => {
   for (const id of ['banking-telebirr', 'banking-mpesa', 'law-eca-consumer-complaint', 'law-stolen-phone', 'law-pdp']) assert.ok(ids.includes(id), id);
   for (const r of reg.references) { assert.equal(r.fetch, 'none'); assert.ok(r.note.length > 40); }
 });
+
+// 2026-09-23: Ethio telecom's tariff pages put every <td> on a line of its own, so a table reached the pack one cell
+// per line and nothing on a price line said which package or column it belonged to. tableRows writes each row as one
+// line naming its columns. It was turned on after a dry run of every document it rewrites on this site (six), with
+// every digit run of each document kept; Safaricom and the ECA were not surveyed and stay as they are.
+test('Ethio telecom tables are written one row per line (tableRows), and its numbers are still masked first', () => {
+  assert.equal(et.tableRows, true);
+  assert.equal(et.maskPhones, true, 'rerenderPack masks the text before renderDoc rewrites its tables');
+  assert.ok(String(et.tableRowsNote || '').length > 80, 'the reason is written down');
+  assert.ok(!saf.tableRows && !eca.tableRows, 'on only where a dry run of every rewritten document was read');
+});

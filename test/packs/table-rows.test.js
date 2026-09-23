@@ -22,7 +22,6 @@ const FLAT = [
 test('a table with a header row becomes its lead-in, the header line and one self-contained line per row', () => {
   const out = P.tableRows(FLAT);
   assert.equal(out, [
-    'Rent for the halls is as follows:',
     'Rent for the halls is as follows:\nTable: Hire Period by North & South Halls, All other Halls\n'
       + 'Hire Period | North & South Halls | All other Halls\n'
       + 'Week 1 – 2: North & South Halls $7.25 per seat per day; All other Halls $6.0 per seat per day\n'
@@ -143,8 +142,41 @@ test('lead-in: the two nearest lines above the table, copied verbatim, then the 
   const block = tableBlock(P.tableRows(LED)).split('\n');
   assert.deepEqual(block.slice(0, 4), [INTRO, START, HEAD_LINE, 'Hire Period | North & South Halls | All other Halls']);
   assert.equal(block.length, 4 + 3, 'lead-in, header and the three rows are one paragraph');
-  assert.ok(P.tableRows(LED).startsWith('## Halls\n\nAn older line that is not the nearest.\n\n' + INTRO + '\n\n' + START + '\n\n'),
-    'the page text above the table is still there as it was');
+  assert.ok(P.tableRows(LED).startsWith('## Halls\n\nAn older line that is not the nearest.\n\n' + INTRO + '\n' + START + '\n' + HEAD_LINE + '\n'),
+    'the page text above the lead-in is still there as it was');
+});
+
+// The lead-in lines are moved when they are whole blocks, so no sentence of the page is written twice: two copies
+// of the introduction made the first one a chunk of its own, and that chunk took the table chunk's search place.
+test('lead-in: lines that are whole blocks of their own are moved into the table block, and each page line is there once', () => {
+  const out = P.tableRows(LED);
+  for (const l of [INTRO, START, 'An older line that is not the nearest.'])
+    assert.equal(out.split('\n').filter(x => x === l).length, 1, 'once: ' + l);
+  assert.ok(!out.split('\n\n').includes(INTRO) && !out.split('\n\n').includes(START), 'no block of its own any more');
+  assert.equal(P.tableRows(FLAT).split('\n').filter(x => x === 'Rent for the halls is as follows:').length, 1);
+});
+
+test('lead-in: lines copied from the tail of a longer paragraph are copied, and the paragraph is left whole', () => {
+  const para = 'Halls are let by the day.\nThe office opens at eight.\n' + INTRO + '\n' + START;
+  const out = P.tableRows([para, ...TABLE_ONLY].join('\n\n'));
+  assert.ok(out.startsWith(para + '\n\n' + INTRO + '\n' + START + '\n' + HEAD_LINE + '\n'), 'the paragraph stays, its last two lines lead the table');
+  assert.equal(P.tableRows(out), out, 'idempotent');
+});
+
+test('lead-in: a lead-in that walks across one whole block and the tail of another moves only the whole one', () => {
+  const para = 'Halls are let by the day.\n' + INTRO;
+  const out = P.tableRows([para, START, ...TABLE_ONLY].join('\n\n'));
+  assert.equal(out.split('\n\n')[0], para, 'the partly copied paragraph is left whole');
+  assert.equal(out.split('\n\n')[1].split('\n').slice(0, 3).join('\n'), INTRO + '\n' + START + '\n' + HEAD_LINE);
+  assert.equal(out.split('\n').filter(x => x === START).length, 1);
+  assert.equal(P.tableRows(out), out, 'idempotent');
+});
+
+test('lead-in: a document written with the copied lead-in (7cfb40b) is rewritten with it moved, and then stays', () => {
+  const old = P.tableRows(LED).replace(INTRO + '\n' + START + '\n' + HEAD_LINE, INTRO + '\n\n' + START + '\n\n' + INTRO + '\n' + START + '\n' + HEAD_LINE);
+  assert.equal(old.split('\n').filter(x => x === INTRO).length, 2, 'the old layout wrote it twice');
+  assert.equal(P.tableRows(old), P.tableRows(LED));
+  assert.equal(P.tableRows(P.tableRows(old)), P.tableRows(LED));
 });
 
 test('lead-in: built only from page lines and header cells; every digit in it is in the lines it was copied from', () => {
@@ -173,8 +205,8 @@ test('lead-in: a heading ends the walk back, and a table with no text above it g
 test('lead-in: it never reaches back into an earlier table', () => {
   const two = [...TABLE_ONLY, 'The second table:', ...TABLE_ONLY].join('\n\n');
   const blocks = P.tableRows(two).split('\n\n');
-  assert.equal(blocks.length, 3);
-  assert.deepEqual(blocks[2].split('\n').slice(0, 3), ['The second table:', HEAD_LINE, 'Hire Period | North & South Halls | All other Halls'],
+  assert.equal(blocks.length, 2, 'the line between the tables is moved into the second table block');
+  assert.deepEqual(blocks[1].split('\n').slice(0, 3), ['The second table:', HEAD_LINE, 'Hire Period | North & South Halls | All other Halls'],
     'one line copied, then the walk stops at the earlier table');
 });
 
@@ -185,7 +217,8 @@ test('lead-in: idempotent, and the one-row-per-line form without a lead-in gets 
     assert.equal(P.tableRows(P.tableRows(once)), once);
   }
   const once = P.tableRows(LED);
-  const withoutLead = once.split('\n\n').map(b => b.includes(HEAD_LINE) ? b.split('\n').slice(3).join('\n') : b).join('\n\n');
+  // The 842c190 layout: the page lines above the table as they were, and the rows with no lead-in.
+  const withoutLead = once.split('\n\n').map(b => b.includes(HEAD_LINE) ? INTRO + '\n\n' + START + '\n\n' + b.split('\n').slice(3).join('\n') : b).join('\n\n');
   assert.ok(!withoutLead.includes(HEAD_LINE));
   assert.equal(P.tableRows(withoutLead), once, 'the earlier layout (842c190) is upgraded, not left or doubled');
 });
@@ -206,6 +239,18 @@ test('lead-in: tables tableRows leaves alone get none', () => {
   }
 });
 
+test('lead-in: a short section, introduction then table, is one chunk for the table and none for the introduction alone', () => {
+  const { chunkDoc } = require(path.join(__dirname, '..', '..', 'knowledge', 'index.js'));
+  const header = 'Source: an invented header paragraph about where this page came from. '.repeat(11).trim();
+  const doc = header + '\n\n' + P.tableRows([INTRO, START, ...TABLE_ONLY].join('\n\n'));
+  const chunks = chunkDoc(doc, 'Test Hall Office — Halls', { lineSafe: true });
+  const holder = chunks.filter(c => c.text.includes('Hire Period | North & South Halls'));
+  assert.equal(holder.length, 1);
+  assert.ok(holder[0].text.includes(INTRO) && holder[0].text.includes(START));
+  assert.equal(chunks.filter(c => c.text.includes(START) && !c.text.includes('Hire Period |')).length, 0,
+    'no chunk holds the introduction without the table');
+});
+
 test('lead-in: the line-safe chunker keeps the lead-in and every row in one chunk', () => {
   const { chunkDoc } = require(path.join(__dirname, '..', '..', 'knowledge', 'index.js'));
   const filler = Array.from({ length: 6 }, (_, i) => 'Filler paragraph ' + 'about hall bookings and opening hours. '.repeat(5) + i);
@@ -215,4 +260,29 @@ test('lead-in: the line-safe chunker keeps the lead-in and every row in one chun
   assert.equal(holder.length, 1);
   for (const l of [INTRO, START, HEAD_LINE, 'Week 1 – 2: North & South Halls $7.25', 'Week 6 – 9: North & South Halls $8.0'])
     assert.ok(holder[0].text.includes(l), 'missing from the table chunk: ' + l);
+});
+
+// Two shapes the header guess reads wrongly, found by the 2026-09-23 survey of the banking and travel packs. Both
+// pass isTableHead (every first-row cell filled, no digit), so tableRows takes a data row or a label for a header:
+//   - a label/value list laid out as two columns (Ethiopian Airlines' worldwide contacts), and
+//   - parallel columns with no row-label column (Dashen's Import | Export requirement lists), where the first
+//     column's item becomes the "label" of the second column's item.
+// The sites whose pages have these shapes keep tableRows off; these tests pin both why and that. Invented data.
+test('a label/value list is taken for a table, which is why a site with such lists keeps tableRows off', () => {
+  const KV = 'Company: |\nAcme Travel Ltd. |\n\nPhone: |\n+999 555 0100 |';
+  assert.equal(P.tableRows(KV).split('\n').pop(), 'Phone:: Acme Travel Ltd. +999 555 0100');
+});
+
+test('parallel columns without a row-label column pair each item with the wrong label', () => {
+  const PAR = 'Import |\nExport |\n\nSigned import form |\nSigned sales contract |';
+  assert.equal(P.tableRows(PAR).split('\n').pop(), 'Signed import form: Export Signed sales contract');
+});
+
+test('tableRows stays off for the sites whose tables have those shapes', () => {
+  const regOf = pk => JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'knowledge', pk, 'sources.json'), 'utf8'));
+  const siteOf = (pk, id) => regOf(pk).sites.find(s => s.id === id);
+  for (const [pk, id] of [['banking', 'dashen'], ['banking', 'ethiotelecom'], ['travel', 'ethiopian-airlines']]) {
+    assert.ok(siteOf(pk, id), pk + '/' + id + ' exists');
+    assert.ok(!siteOf(pk, id).tableRows, pk + '/' + id + ' must not set tableRows until the header guess handles its tables');
+  }
 });

@@ -34,18 +34,10 @@ International call & SMS is an interconnect arrangement among telecom operators 
 Dial to Ethiopia preceding our area code +251 followed by the desired mobile (9xx xx xx xx) number or landline number (11y yy yy yy) in Addis Ababa).
 
 Click here to get the area code of other countries.
-
 Package is available to make outgoing international with local calls
-
-Package Name |
-Packed Services |
-Volume |
-Monthly Rent |
-
-Limited Premium Plus Package |
-Local Call |
-9000 Minutes |
-3500 Birr |
+Table: Package Name by Packed Services, Volume, Monthly Rent
+Package Name | Packed Services | Volume | Monthly Rent
+Limited Premium Plus Package: Packed Services Local Call; Volume 9000 Minutes; Monthly Rent 3500 Birr
 
 International Call |
 100 Minutes |
@@ -104,98 +96,36 @@ With the international top-up, you can also pay your telecom bills by recharging
 Just try the below login portals of our partners to top up airtime or pay bill (Remark: we will list exhaustively).
 
 POS Retailers
-
 Digital Retailers
+Table: Country by Retailer Name, Web Address
+Country | Retailer Name | Web Address
+UAE: Retailer Name NTPayments; Web Address www.ntpayments.com
+UAE: Retailer Name ManGO Wallet; Web Address mangokiosk.com
+UAE: Retailer Name Gulfbox; Web Address www.gulfbox.ae
+UAE: Retailer Name Upay; Web Address upay.ae
+UAE: Retailer Name AlAnsariExchange; Web Address www.alansariexchange.com
+Italy: Retailer Name Sisalpay; Web Address www.sisalpay.it
+Spain: Retailer Name Disashop; Web Address www.disashop.com
+USA: Retailer Name Bossrevolution; Web Address www.bossrevolution.com
+UK: Retailer Name Poundland; Web Address www.poundland.co.uk
+Kuwai: Retailer Name ENET; Web Address www.e.net.kw
+South Africa: Retailer Name Kazang; Web Address www.kazang.com
 
-Country |
-Retailer Name |
-Web Address |
-
-UAE |
-NTPayments |
-www.ntpayments.com |
-
-UAE |
-ManGO Wallet |
-mangokiosk.com |
-
-UAE |
-Gulfbox |
-www.gulfbox.ae |
-
-UAE |
-Upay |
-upay.ae |
-
-UAE |
-AlAnsariExchange |
-www.alansariexchange.com |
-
-Italy |
-Sisalpay |
-www.sisalpay.it |
-
-Spain |
-Disashop |
-www.disashop.com |
-
-USA |
-Bossrevolution |
-www.bossrevolution.com |
-
-UK |
-Poundland |
-www.poundland.co.uk |
-
-Kuwai |
-ENET |
-www.e.net.kw |
-
-South Africa |
-Kazang |
-www.kazang.com |
-
-Retailer Name |
-Web Address |
-
-Senditoo |
-www.senditoo.com |
-
-Rebtel |
-www.rebtel.com |
-
-WorldRemit |
-www.worldremit.com |
-
-MobileRecharge |
-www.mobilerecharge.com |
-
-Recharge |
-www.recharge.com |
-
-PrepaidUnion |
-www.prepaidunion.com |
-
-Utransto |
-www.utransto.com |
-
-SiftMobile |
-www.siftmobile.io |
-
-beCharge |
-www.becharge.com |
-
-DentWireless |
-www.dentwireless.com |
-
-Orange Top Up |
-www.topup.orange.com |
-
-VIP |
-www.joinvip.com |
-
-Bookeey |
-www.bookeey.com |
+Table: Retailer Name by Web Address
+Retailer Name | Web Address
+Senditoo: Web Address www.senditoo.com
+Rebtel: Web Address www.rebtel.com
+WorldRemit: Web Address www.worldremit.com
+MobileRecharge: Web Address www.mobilerecharge.com
+Recharge: Web Address www.recharge.com
+PrepaidUnion: Web Address www.prepaidunion.com
+Utransto: Web Address www.utransto.com
+SiftMobile: Web Address www.siftmobile.io
+beCharge: Web Address www.becharge.com
+DentWireless: Web Address www.dentwireless.com
+Orange Top Up: Web Address www.topup.orange.com
+VIP: Web Address www.joinvip.com
+Bookeey: Web Address www.bookeey.com
 
 # CORPORATE BUSINESS
 
@@ -209,17 +139,11 @@ You can directly call or send using the appropriate dialing code and number of a
 Dial to Ethiopia preceding our area code + 251 followed by the desired mobile (9xxxxxxxx) or landline (11yyyyyyy for Addis Ababa) number.
 Click here to get the area code of other countries.
 
+Click here to get the area code of other countries.
 Package is available to make outgoing international with local calls
-
-Package Name |
-Packed Services |
-Volume |
-Monthly Rent |
-
-Limited Premium Plus Package |
-Local Call |
-9000 Minutes |
-3500 Birr |
+Table: Package Name by Packed Services, Volume, Monthly Rent
+Package Name | Packed Services | Volume | Monthly Rent
+Limited Premium Plus Package: Packed Services Local Call; Volume 9000 Minutes; Monthly Rent 3500 Birr
 
 International Call |
 100 Minutes |
@@ -354,98 +278,36 @@ International Bill Payment Top-up
 With the international top-up, you can also pay your telecom bills by recharging the payable amount from anywhere.
 
 POS Retailers
-
 Digital Retailers
+Table: Country by Retailer Name, Web Address
+Country | Retailer Name | Web Address
+UAE: Retailer Name NTPayments; Web Address www.ntpayments.com
+UAE: Retailer Name ManGO Wallet; Web Address mangokiosk.com
+UAE: Retailer Name Gulfbox; Web Address www.gulfbox.ae
+UAE: Retailer Name Upay; Web Address upay.ae
+UAE: Retailer Name AlAnsariExchange; Web Address www.alansariexchange.com
+Italy: Retailer Name Sisalpay; Web Address www.sisalpay.it
+Spain: Retailer Name Disashop; Web Address www.disashop.com
+USA: Retailer Name Bossrevolution; Web Address www.bossrevolution.com
+UK: Retailer Name Poundland; Web Address www.poundland.co.uk
+Kuwai: Retailer Name ENET; Web Address www.e.net.kw
+South Africa: Retailer Name Kazang; Web Address www.kazang.com
 
-Country |
-Retailer Name |
-Web Address |
-
-UAE |
-NTPayments |
-www.ntpayments.com |
-
-UAE |
-ManGO Wallet |
-mangokiosk.com |
-
-UAE |
-Gulfbox |
-www.gulfbox.ae |
-
-UAE |
-Upay |
-upay.ae |
-
-UAE |
-AlAnsariExchange |
-www.alansariexchange.com |
-
-Italy |
-Sisalpay |
-www.sisalpay.it |
-
-Spain |
-Disashop |
-www.disashop.com |
-
-USA |
-Bossrevolution |
-www.bossrevolution.com |
-
-UK |
-Poundland |
-www.poundland.co.uk |
-
-Kuwai |
-ENET |
-www.e.net.kw |
-
-South Africa |
-Kazang |
-www.kazang.com |
-
-Retailer Name |
-Web Address |
-
-Senditoo |
-www.senditoo.com |
-
-Rebtel |
-www.rebtel.com |
-
-WorldRemit |
-www.worldremit.com |
-
-MobileRecharge |
-www.mobilerecharge.com |
-
-Recharge |
-www.recharge.com |
-
-PrepaidUnion |
-www.prepaidunion.com |
-
-Utransto |
-www.utransto.com |
-
-SiftMobile |
-www.siftmobile.io |
-
-beCharge |
-www.becharge.com |
-
-DentWireless |
-www.dentwireless.com |
-
-Orange Top Up |
-www.topup.orange.com |
-
-VIP |
-www.joinvip.com |
-
-Bookeey |
-www.bookeey.com |
+Table: Retailer Name by Web Address
+Retailer Name | Web Address
+Senditoo: Web Address www.senditoo.com
+Rebtel: Web Address www.rebtel.com
+WorldRemit: Web Address www.worldremit.com
+MobileRecharge: Web Address www.mobilerecharge.com
+Recharge: Web Address www.recharge.com
+PrepaidUnion: Web Address www.prepaidunion.com
+Utransto: Web Address www.utransto.com
+SiftMobile: Web Address www.siftmobile.io
+beCharge: Web Address www.becharge.com
+DentWireless: Web Address www.dentwireless.com
+Orange Top Up: Web Address www.topup.orange.com
+VIP: Web Address www.joinvip.com
+Bookeey: Web Address www.bookeey.com
 
 # WHOLESALE BUSINESS
 
