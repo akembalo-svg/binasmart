@@ -345,7 +345,7 @@ fastify.get('/sitemap.xml', async (req, reply) => {
     ? (await prisma.employer.findMany({ where: { id: { in: jobEmployerIds } }, select: { slug: true } }).catch(() => []))
     : [];
 
-  const urls = ['https://bina.et/', 'https://bina.et/ai', 'https://bina.et/ai-am', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/cv-ethiopia', 'https://bina.et/cv-ethiopia-en', 'https://bina.et/interview-questions-ethiopia', 'https://bina.et/bole-airport-to-city', 'https://bina.et/egp-registration-ethiopia', 'https://bina.et/ethiopia-jobs-report-september-2026', 'https://bina.et/how-to-bid-tenders-ethiopia', 'https://bina.et/bank-jobs-ethiopia', 'https://bina.et/bid-security-cpo-ethiopia', 'https://bina.et/about', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/oromo-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/tax-forms', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.filter(p => !CANONICAL_TO[p.slug]).map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), /* /b/:slug is noindex — it lists tenants by name, unit and phone — so it is not requested here.
+  const urls = ['https://bina.et/', 'https://bina.et/ai', 'https://bina.et/ai-am', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/cv-ethiopia', 'https://bina.et/cv-ethiopia-en', 'https://bina.et/interview-questions-ethiopia', 'https://bina.et/bole-airport-to-city', 'https://bina.et/egp-registration-ethiopia', 'https://bina.et/ethiopia-jobs-report-september-2026', 'https://bina.et/how-to-bid-tenders-ethiopia', 'https://bina.et/bank-jobs-ethiopia', 'https://bina.et/bid-security-cpo-ethiopia', 'https://bina.et/ethiopia-tender-report-september-2026', 'https://bina.et/send-money-to-ethiopia', 'https://bina.et/about', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/oromo-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/tax-forms', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.filter(p => !CANONICAL_TO[p.slug]).map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), /* /b/:slug is noindex — it lists tenants by name, unit and phone — so it is not requested here.
      The hotel pages below are a different template and stay. */ ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug), 'https://bina.et/jobs', ...jobCats.map(c => 'https://bina.et/jobs/category/' + c), ...openJobs.map(j => 'https://bina.et/jobs/' + j.slug), ...jobEmployers.map(e => 'https://bina.et/employer/' + e.slug), ...(fastify.healthServiceUrls ? fastify.healthServiceUrls() : [])]
     .filter(u => u !== 'https://bina.et/travel' || tripsAhead)
     .filter(u => (u !== 'https://bina.et/cars' || carsListed) && (u !== 'https://bina.et/property' || propsListed));
@@ -820,6 +820,8 @@ fastify.get('/ethiopia-jobs-report-september-2026', async (req, reply) => reply.
 fastify.get('/how-to-bid-tenders-ethiopia', async (req, reply) => reply.sendFile('how-to-bid-tenders-ethiopia.html'));
 fastify.get('/bank-jobs-ethiopia', async (req, reply) => reply.sendFile('bank-jobs-ethiopia.html'));
 fastify.get('/bid-security-cpo-ethiopia', async (req, reply) => reply.sendFile('bid-security-cpo-ethiopia.html'));
+fastify.get('/ethiopia-tender-report-september-2026', async (req, reply) => reply.sendFile('ethiopia-tender-report-september-2026.html'));
+fastify.get('/send-money-to-ethiopia', async (req, reply) => reply.sendFile('send-money-to-ethiopia.html'));
 fastify.get('/privacy', async (req, reply) => reply.sendFile('privacy.html'));
 fastify.get('/terms', async (req, reply) => reply.sendFile('terms.html'));
 fastify.get('/support', async (req, reply) => reply.sendFile('support.html'));
@@ -2048,6 +2050,52 @@ fastify.post('/api/admin/news', async (req, reply) => {
     }).catch(() => {});
   }
   return { ok: true, url };
+});
+// ---- Share an article to the channels, from a phone ----
+// The owner writes and reviews on Telegram, not at a terminal, so the decision to publish to a live
+// public channel has to be one tap he can make himself. /api/admin/news already shares on write; this
+// is the same share for a post that is already on the site, without rewriting the row.
+fastify.get('/ops/news', async (req, reply) => {
+  if ((req.query.key || '') !== OWNER_KEY) { reply.code(401).type('text/html').send('<h2>Unauthorized</h2>'); return; }
+  const posts = await prisma.newsPost.findMany({ orderBy: { publishedAt: 'desc' }, take: 15 });
+  const k = encodeURIComponent(req.query.key);
+  const rows = posts.map(p => `<div class="c">
+      <div class="t">${escH(p.titleAm || p.title)}</div>
+      <div class="s">${escH(p.author)} · ${amDate(p.publishedAt)}${p.published ? '' : ' · <b>not published</b>'}</div>
+      <a class="b${p.published ? '' : ' off'}" href="/ops/news/${encodeURIComponent(p.slug)}/share?key=${k}">📣 ወደ ቻናል ላክ · Share</a>
+      <a class="l" href="/news/${encodeURIComponent(p.slug)}" target="_blank">ጽሑፉን ክፈት · open</a>
+    </div>`).join('');
+  reply.type('text/html').send(`<!doctype html><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>ዜና ማጋሪያ</title>
+<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:0 auto;padding:18px;background:#f7f7f5;color:#141a24}
+h2{margin:6px 0 14px}.c{background:#fff;border:1px solid #e6e4df;border-radius:14px;padding:14px;margin-bottom:12px}
+.t{font-weight:800;font-size:16px;line-height:1.35}.s{color:#7b8494;font-size:13px;margin:6px 0 12px}
+.b{display:inline-block;background:#078930;color:#fff;text-decoration:none;font-weight:800;padding:11px 16px;border-radius:11px}
+.b.off{background:#b9bec7;pointer-events:none}.l{margin-left:12px;color:#2563eb;font-size:14px}
+p.n{color:#7b8494;font-size:13px}</style>
+<h2>📣 ዜና ማጋሪያ</h2>
+<p class="n">አንድ ጊዜ መጫን ጽሑፉን ወደ ቴሌግራም ቻናል እና ወደ ፌስቡክ ገጽ ይልካል። · One tap sends the article to the Telegram channel and the Facebook page.</p>
+${rows}`);
+});
+fastify.get('/ops/news/:slug/share', async (req, reply) => {
+  if ((req.query.key || '') !== OWNER_KEY) { reply.code(401).type('text/html').send('<h2>Unauthorized</h2>'); return; }
+  const post = await prisma.newsPost.findUnique({ where: { slug: req.params.slug } });
+  const back = `<p style="margin-top:18px"><a href="/ops/news?key=${encodeURIComponent(req.query.key)}">← ተመለስ · back</a></p>`;
+  const page = (h, b) => reply.type('text/html').send(`<!doctype html><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:0 auto;padding:22px;color:#141a24}</style>
+<h2>${h}</h2><p>${b}</p>${back}`);
+  // A share whose link 404s is worse than no share at all.
+  if (!post) return page('❌', 'ጽሑፉ የለም · no such article');
+  if (!post.published) return page('❌', 'ጽሑፉ ገና አልታተመም · not published yet');
+  const url = 'https://bina.et/news/' + post.slug;
+  const out = await autopostAll({
+    emoji: post.heroEmoji || '📰', title: post.titleAm || post.title, excerpt: post.excerpt, url,
+    tags: '#BinaZena #' + post.category,
+    linkedin: post.title + '\n\n' + post.excerpt + '\n\nRead in Amharic + English: ' + url + '\n\n#Ethiopia #' + post.category,
+  }).catch(e => ['❌ ' + e.message]);
+  return page('✅ ተልኳል · sent', escH(post.titleAm || post.title) + '<br><br>' + out.map(escH).join('<br>'));
 });
 fastify.post('/api/admin/tender', async (req, reply) => {
   if (authFail(req, reply)) return;

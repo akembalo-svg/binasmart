@@ -26,6 +26,12 @@ const slug = 'typesafe-jev-system-one-amharic';
 const body = `
 <p style="background:#f4f1ea;border-left:4px solid #b8860b;padding:14px 18px;border-radius:8px;font-size:15px;color:#5c5548"><strong>ምንጭ፦</strong> የTypeSafe AI የራሱ ገጾች (typesafe.ai እና typesafe.ai/team)፣ ሴፕቴምበር 23 ቀን 2026 የተነበቡ። የፍጥነትና የዋጋ ቁጥሮች የኩባንያው የራሱ መለኪያዎች ናቸው፤ ሁኔታቸው አብሮ ተጠቅሷል። የመጨረሻው ክፍል ግን የእኛ የራሳችን ሙከራ ነው።</p>
 
+<figure style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;background:#fff;border:1px solid #e8e2d6;border-radius:12px;padding:20px 18px;margin:22px 0">
+  <img src="/static/newslogos/typesafe.png" alt="TypeSafe AI" width="48" height="48" style="height:48px;width:48px;border-radius:12px">
+  <span style="font-size:20px;font-weight:800;color:#141a24">TypeSafe AI</span>
+  <figcaption style="flex-basis:100%;text-align:center;font-size:12px;color:#8b8578;margin-top:8px">የTypeSafe AI የንግድ ምልክት፡ ለመለያ ብቻ ያገለግላል። · TypeSafe AI trademark, shown for identification only.</figcaption>
+</figure>
+
 <p>AI ሲባል ChatGPT፣ Claude ወይም Gemini ይታወሰናል — እንጠይቃለን፣ ይጽፉልናል። ይህ ግን AI ከሚሠራው ሥራ አንዱ ዓይነት ብቻ ነው።</p>
 <p>ብዙውን ጊዜ ሶፍትዌር የሚፈልገው ረጅም መልስ አይደለም። <strong>አንድ ውሳኔ</strong> ነው የሚፈልገው። "ይህ መልእክት ስለ ክፍያ ነው ወይስ ስለ ማድረስ?" — መልሱ አንድ ቃልና አንድ ቁጥር ነው። ለዚህ ሥራ ደግሞ አንቀጽ የሚጽፍ ሞዴል መጠቀም መዶሻ በሚያስፈልግበት ቦታ መኪና እንደመጠቀም ነው።</p>
 <p>ይህ ጽሑፍ <strong>TypeSafe AI</strong> የተባለውን ኩባንያና <strong>Jev</strong> የተባለውን ሞዴሉን ነው የሚያብራራው — እንዲሁም እኛ ራሳችን በእውነተኛ ሥራ ላይ ስንሞክረው ያገኘነውን።</p>

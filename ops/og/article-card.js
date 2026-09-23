@@ -55,6 +55,11 @@ const STYLES = {
   bars: (p, m) => `<div class="fig bars">${(m.bars || [28, 46, 70, 100]).map((h, i) =>
     `<div class="bar b${i + 1}" style="height:${Math.max(12, Math.min(100, h))}%"></div>`).join('')}</div>`,
 
+  // The companies' own marks — what a reader recognises in a feed before reading a word.
+  logo: (p, m) => `<div class="fig logorow"><div class="marks${(m.logos || []).length === 1 ? ' one' : ''}">${(m.logos || []).map((f, i) =>
+    (i ? '<span class="plus">+</span>' : '') + `<img src="${dataUri(f)}" alt="">`).join('')}</div>${
+    m.logoText ? `<div class="lname">${esc(m.logoText)}</div>` : ''}</div>`,
+
   // A door / gateway — access, permission, a way in.
   gate: (p, m) => `<div class="fig gate"><div class="arch"><div class="glow"></div>
       <div class="key">${esc((m.labels || [''])[0] || '')}</div></div></div>`,
@@ -62,6 +67,16 @@ const STYLES = {
 const STYLE_ORDER = Object.keys(STYLES);
 
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+// A logo is read from disk and inlined. The renderer must not depend on the network, and a card is
+// re-rendered months later when a path may have moved — a data: URI fails loudly at build time instead.
+const MIME = { '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp' };
+function dataUri(file) {
+  const abs = path.isAbsolute(file) ? file : path.join(__dirname, '..', '..', file);
+  const type = MIME[path.extname(abs).toLowerCase()];
+  if (!type) throw new Error('logo must be svg/png/jpg/webp: ' + file);
+  return 'data:' + type + ';base64,' + fs.readFileSync(abs).toString('base64');
+}
 
 // Stable per slug: the same article always renders the same picture.
 function pick(list, slug, salt) {
@@ -131,6 +146,15 @@ function html({ title, lede, kicker, read, style, palette, motif }) {
   .stat .big{font-size:150px;font-weight:900;letter-spacing:-6px;line-height:1;
     background:linear-gradient(145deg,${p.a},${p.b});-webkit-background-clip:text;background-clip:text;color:transparent}
   .stat .cap{margin-top:14px;font-size:22px;font-weight:700;color:#4b5565;text-align:center;max-width:12em}
+
+  /* logo row */
+  .logorow{flex-direction:column;gap:22px}
+  .marks{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+  .marks img{height:52px;width:auto;max-width:430px;object-fit:contain}
+  .marks .plus{font-size:30px;font-weight:800;color:#b0aa9e;line-height:1}
+  /* a single square mark has the whole figure to itself, so it is shown at a size people recognise */
+  .marks.one img{height:132px;border-radius:30px}
+  .lname{font-size:30px;font-weight:800;letter-spacing:-.4px;color:#141a24}
 
   /* mosaic */
   .mosaic{display:grid;grid-template-columns:repeat(3,96px);grid-template-rows:repeat(3,96px);gap:16px}
