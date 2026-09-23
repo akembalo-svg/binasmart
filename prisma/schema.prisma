@@ -822,6 +822,9 @@ model NewsPost {
   bodyHtml    String
   lang        String   @default("am")
   author      String   @default("ቢና ዜና ዴስክ")
+  // A guest byline: when the piece was written by a named person rather than the desk, their own
+  // page (LinkedIn, a profile) so the credit is checkable and Google records a Person, not just us.
+  authorUrl   String?
   heroEmoji   String?
   readMinutes Int      @default(4)
   evergreen   Boolean  @default(false)
