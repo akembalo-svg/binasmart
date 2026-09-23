@@ -227,7 +227,12 @@ function stripPackBoilerplate(pages, site = null) {
 // Amharic sidecar entry stamped with that hash still applies.
 // What counts as a table: two or more consecutive blank-line-separated blocks in which every line ends in "|",
 // all with the same number of cells, at least two. The first block is a header only if every one of its cells is
-// filled and none holds a digit: a header names columns, it does not carry figures. A table whose first row fails
+// filled and none holds a digit: a header names columns, it does not carry figures. Nor does a header cell end in
+// ":" or hold a web address or an email address (a phone-like digit run is already out, being digits): those are the
+// marks of a label/value list ("Phone:" | "+999 ...", Ethiopian Airlines' worldwide contacts, where the "header"
+// wrote "Phone:: <office> <number>") and of a table with no header row at all, whose first data row names a
+// retailer and its web address (telebirr's Amharic international top-up list, where every retailer came out as
+// "<first retailer's column>: <its web addresses>"). A table whose first row fails
 // that, or whose rows do not all have the same number of cells (a header cell spanning two columns), is left
 // exactly as it was: guessing which column a figure belongs to is worse than the flat form.
 // A table rewritten this way also gets a lead-in, the first lines of its block, so the chunk that holds the table
@@ -265,7 +270,11 @@ function tableRowLine(head, row) {
   if (!pairs.length) return row[0] || '';
   return (row[0] ? row[0] + ': ' : '') + pairs.join('; ');
 }
-const isTableHead = head => head.length >= 2 && head.every(c => c && c === c.trim() && !/[0-9]/.test(c));
+// A header cell that ends in a colon, or holds a URL, a www. address, a bare domain or an email address, is a label
+// or a data cell, not a column name.
+const TABLE_HEAD_BAD = /[:\uFF1A\u1366]$|https?:\/\/|\bwww\.|[\w.+-]+@[\w-]+(?:\.[\w-]+)+|\b[a-z0-9-]+\.(?:com|net|org|et|io|co|gov|edu|info|biz|app|me|uk|ae|us)\b/i;
+const isTableHead = head => head.length >= 2
+  && head.every(c => c && c === c.trim() && !/[0-9]/.test(c) && !TABLE_HEAD_BAD.test(c));
 // A row line tableRowLine wrote, read back into its cells; null unless writing those cells gives the line again.
 function parseRowLine(head, line) {
   const n = head.length;
@@ -1710,7 +1719,7 @@ module.exports = { sitemapUrls, sitemapsOf, pathOf, sectionOf, selectUrls, slugF
   readOcrManifest, ocrTitleOf, splitOcrParts, splitLongParts, ocrLangOf, OCR_MAX_CHARS, HTML_MAX_CHARS,
   langOfText, ethiopicCount, AM_FLOOR,
   applyCorrections, stripCorrections, correctionNote, packCorrections, CORR_MARK,
-  PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates, tableRows,
+  PDF_MAX_CHARS, NEEDS_NAME, NEEDS_NAME_DIR, stripMarginGarble, pdfCropFor, dropPackDuplicates, tableRows, isTableHead,
   splitSections, findSection, sectionCorrections };
 
 //   node ops/packs/fetch-pack.js --pack banking

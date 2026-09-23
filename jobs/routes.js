@@ -432,9 +432,10 @@ const ogJobs = cat => {
     const j = await prisma.job.findUnique({ where: { slug: String(req.params.slug) }, include: { employer: true } });
     // An address this vacancy used to live at: Google has it indexed, somebody has it in a Telegram
     // message. A permanent redirect keeps both working and passes the ranking to the new address.
-    if (!j) {
+    if (!j || !j.published) {
       const alias = await prisma.jobAlias.findUnique({ where: { slug: String(req.params.slug) } }).catch(() => null);
-      if (alias) {
+      if (alias && alias.path) return reply.redirect(alias.path, 301);
+      if (alias && alias.jobId) {
         const to = await prisma.job.findUnique({ where: { id: alias.jobId }, select: { slug: true, published: true } });
         if (to && to.published) return reply.redirect('/jobs/' + to.slug, 301);
       }

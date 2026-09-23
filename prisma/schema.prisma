@@ -1939,7 +1939,11 @@ model BotState {
 // somebody's bookmarks. This table is what turns a rename into a redirect instead of a 404.
 model JobAlias {
   slug      String   @id
-  jobId     String
+  jobId     String?                       // the vacancy it became, when it became one
+  // Or a page it became instead. An aggregated notice ("8 Positions") is not one vacancy and must not
+  // redirect to whichever of the eight happened to be created first; it redirects to the employer,
+  // where all eight are listed.
+  path      String?
   createdAt DateTime @default(now())
 
   @@index([jobId])
