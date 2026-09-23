@@ -4,7 +4,7 @@ const fastify = require('fastify')({ logger: false, ignoreTrailingSlash: true })
 
 // ---- technical-SEO: security headers + static-asset caching ----
 fastify.addHook('onSend', async (req, reply, payload) => {
-  reply.header('Strict-Transport-Security', 'max-age=15768000');
+  reply.header('Strict-Transport-Security', 'max-age=31536000');
   reply.header('X-Content-Type-Options', 'nosniff');
   // A route that chose its own Referrer-Policy keeps it (/i/:token and the tenant poster send no-referrer).
   if (!reply.hasHeader('Referrer-Policy')) reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -213,10 +213,13 @@ const slugMiss = (what, back) => '<!doctype html><html lang="am"><head><meta cha
   + '<h1 style="font-size:22px">' + what + ' አልተገኘም · Not found</h1>'
   + '<p><a href="' + back + '">← ' + back + '</a></p></body></html>';
 
-async function slugPage(reply, file, found, canonical, what, back) {
+async function slugPage(reply, file, found, canonical, what, back, noindex) {
   if (!found) return reply.code(404).type('text/html; charset=utf-8').send(slugMiss(what, back));
   let html = fs.readFileSync(path.join(__dirname, 'public', file), 'utf8');
   if (!/rel="canonical"/.test(html)) html = html.replace('</head>', '<link rel="canonical" href="' + canonical + '">\n</head>');
+  // Demo buildings (hotels/rules.js isDemo) are real pages for showing the product, not businesses a searcher
+  // can visit, so they stay reachable but out of the index.
+  if (noindex) { html = html.replace('</head>', '<meta name="robots" content="noindex, follow">\n</head>'); reply.header('X-Robots-Tag', 'noindex, follow'); }
   return reply.type('text/html; charset=utf-8').send(html);
 }
 
@@ -295,7 +298,7 @@ fastify.get('/:key.txt', async (req, reply) => {
   return reply.type('text/plain; charset=utf-8').sendFile(name + '.txt');
 });
 fastify.get('/sitemap.xml', async (req, reply) => {
-  const bs = await prisma.building.findMany({ select: { qrSlug: true, buildingType: true }, orderBy: { createdAt: 'asc' } });
+  const bs = await prisma.building.findMany({ select: { qrSlug: true, buildingType: true, name: true, subCity: true }, orderBy: { createdAt: 'asc' } });
   const posts = await prisma.newsPost.findMany({ where: { published: true }, select: { slug: true } });
   // Only tenders that are still open. A sitemap is a list of pages worth crawling, and a closed
   // tender can never satisfy the search that finds it — 101 of 244 had already expired.
@@ -327,9 +330,10 @@ fastify.get('/sitemap.xml', async (req, reply) => {
   // 21 August and /api/travel filters to future departures, so /travel has been empty since. Same
   // rule as the tenders and the cinema shows above; this one was a hardcoded string and escaped it.
   const tripsAhead = await prisma.travelTrip.count({ where: { active: true, departure: { gt: new Date() } } }).catch(() => 0);
-  // Same for the marketplaces: with no active listing, /cars and /property are an empty grid and a form.
-  const carsListed = await prisma.carListing.count({ where: { active: true } }).catch(() => 0);
-  const propsListed = await prisma.propertyListing.count({ where: { active: true } }).catch(() => 0);
+  // /cars and /property used to be dropped here while their listings tables were empty. They are
+  // guides now - 25KB on used-car checks, libre transfer and insurance; 13KB on buying and renting -
+  // each with a small listings strip at the foot that hides itself when it has nothing to show. A
+  // guide is worth crawling whether or not an unrelated marketplace feature has rows in it.
   // Jobs. Same rule as the tenders above: only what is still open, because a closed vacancy can never
   // satisfy the search that finds it. A category page is listed only while it actually has vacancies in
   // it - an empty "Agriculture jobs" page asks Google to rank a promise we are not keeping.
@@ -345,10 +349,10 @@ fastify.get('/sitemap.xml', async (req, reply) => {
     ? (await prisma.employer.findMany({ where: { id: { in: jobEmployerIds } }, select: { slug: true } }).catch(() => []))
     : [];
 
-  const urls = ['https://bina.et/', 'https://bina.et/ai', 'https://bina.et/ai-am', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/cv-ethiopia', 'https://bina.et/cv-ethiopia-en', 'https://bina.et/interview-questions-ethiopia', 'https://bina.et/bole-airport-to-city', 'https://bina.et/egp-registration-ethiopia', 'https://bina.et/ethiopia-jobs-report-september-2026', 'https://bina.et/how-to-bid-tenders-ethiopia', 'https://bina.et/bank-jobs-ethiopia', 'https://bina.et/bid-security-cpo-ethiopia', 'https://bina.et/ethiopia-tender-report-september-2026', 'https://bina.et/send-money-to-ethiopia', 'https://bina.et/about', 'https://bina.et/drive-with-us', 'https://bina.et/nav', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/travel', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/restaurant/bina-restaurant', 'https://bina.et/hospital/bina-general-hospital', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/oromo-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/tax-forms', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.filter(p => !CANONICAL_TO[p.slug]).map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), /* /b/:slug is noindex — it lists tenants by name, unit and phone — so it is not requested here.
-     The hotel pages below are a different template and stay. */ ...bs.filter(b => b.buildingType === 'HOTEL').map(b => 'https://bina.et/hotel/' + b.qrSlug), 'https://bina.et/jobs', ...jobCats.map(c => 'https://bina.et/jobs/category/' + c), ...openJobs.map(j => 'https://bina.et/jobs/' + j.slug), ...jobEmployers.map(e => 'https://bina.et/employer/' + e.slug), ...(fastify.healthServiceUrls ? fastify.healthServiceUrls() : [])]
+  const urls = ['https://bina.et/', 'https://bina.et/ai', 'https://bina.et/ai-am', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/cv-ethiopia', 'https://bina.et/cv-ethiopia-en', 'https://bina.et/interview-questions-ethiopia', 'https://bina.et/bole-airport-to-city', 'https://bina.et/egp-registration-ethiopia', 'https://bina.et/ethiopia-jobs-report-september-2026', 'https://bina.et/how-to-bid-tenders-ethiopia', 'https://bina.et/bank-jobs-ethiopia', 'https://bina.et/bid-security-cpo-ethiopia', 'https://bina.et/ethiopia-tender-report-september-2026', 'https://bina.et/send-money-to-ethiopia', 'https://bina.et/tender-documents-checklist-ethiopia', 'https://bina.et/trade-license-check-ethiopia', 'https://bina.et/world-bank-tenders-ethiopia', 'https://bina.et/about', 'https://bina.et/drive-with-us', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/oromo-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/tax-forms', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.filter(p => !CANONICAL_TO[p.slug]).map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), /* /b/:slug is noindex — it lists tenants by name, unit and phone — so it is not requested here.
+     The hotel pages below are a different template and stay. */ ...bs.filter(b => b.buildingType === 'HOTEL' && !hotelIsDemo(b)).map(b => 'https://bina.et/hotel/' + b.qrSlug), 'https://bina.et/jobs', ...jobCats.map(c => 'https://bina.et/jobs/category/' + c), ...openJobs.map(j => 'https://bina.et/jobs/' + j.slug), ...jobEmployers.map(e => 'https://bina.et/employer/' + e.slug), ...(fastify.healthServiceUrls ? fastify.healthServiceUrls() : [])]
     .filter(u => u !== 'https://bina.et/travel' || tripsAhead)
-    .filter(u => (u !== 'https://bina.et/cars' || carsListed) && (u !== 'https://bina.et/property' || propsListed));
+    ;
   reply.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + urls.map(u => '<url><loc>' + u + '</loc></url>').join('\n') + '\n</urlset>');
 });
@@ -452,9 +456,11 @@ fastify.get('/restaurant/:slug', async (req, reply) => {
   // tenant without one is not a restaurant, it is a person.
   const slug = String(req.params.slug);
   const shop = await prisma.shop.findFirst({ where: { name: { equals: slug.replace(/-/g, ' '), mode: 'insensitive' }, tenancy: { active: true } },
-    include: { products: { where: { visible: true }, select: { id: true }, take: 1 } } });
+    include: { products: { where: { visible: true }, select: { id: true }, take: 1 },
+      tenancy: { select: { unit: { select: { building: { select: { name: true, subCity: true } } } } } } } });
   return slugPage(reply, 'restaurant.html', !!(shop && shop.products.length),
-    'https://bina.et/restaurant/' + slug, 'ሬስቶራንት · Restaurant', '/business');
+    'https://bina.et/restaurant/' + slug, 'ሬስቶራንት · Restaurant', '/business',
+    !!(shop && shop.tenancy && shop.tenancy.unit && hotelIsDemo(shop.tenancy.unit.building)));
 });
 
 // ===== DIASPORA: building-owner leads =====
@@ -822,6 +828,9 @@ fastify.get('/bank-jobs-ethiopia', async (req, reply) => reply.sendFile('bank-jo
 fastify.get('/bid-security-cpo-ethiopia', async (req, reply) => reply.sendFile('bid-security-cpo-ethiopia.html'));
 fastify.get('/ethiopia-tender-report-september-2026', async (req, reply) => reply.sendFile('ethiopia-tender-report-september-2026.html'));
 fastify.get('/send-money-to-ethiopia', async (req, reply) => reply.sendFile('send-money-to-ethiopia.html'));
+fastify.get('/tender-documents-checklist-ethiopia', async (req, reply) => reply.sendFile('tender-documents-checklist-ethiopia.html'));
+fastify.get('/trade-license-check-ethiopia', async (req, reply) => reply.sendFile('trade-license-check-ethiopia.html'));
+fastify.get('/world-bank-tenders-ethiopia', async (req, reply) => reply.sendFile('world-bank-tenders-ethiopia.html'));
 fastify.get('/privacy', async (req, reply) => reply.sendFile('privacy.html'));
 fastify.get('/terms', async (req, reply) => reply.sendFile('terms.html'));
 fastify.get('/support', async (req, reply) => reply.sendFile('support.html'));
@@ -1396,8 +1405,8 @@ fastify.post('/api/owner/:slug/appointment/:id/status', async (req, reply) => {
 
 fastify.get('/hospital/:slug', async (req, reply) => {
   const slug = String(req.params.slug);
-  const b = await prisma.building.findFirst({ where: { qrSlug: slug, buildingType: 'HOSPITAL' }, select: { id: true } });
-  return slugPage(reply, 'hospital.html', !!b, 'https://bina.et/hospital/' + slug, 'ሆስፒታል · Hospital', '/');
+  const b = await prisma.building.findFirst({ where: { qrSlug: slug, buildingType: 'HOSPITAL' }, select: { id: true, name: true, subCity: true } });
+  return slugPage(reply, 'hospital.html', !!b, 'https://bina.et/hospital/' + slug, 'ሆስፒታል · Hospital', '/', !!b && hotelIsDemo(b));
 });
 
 // ===== TRAVEL: trips + tickets =====
@@ -1516,8 +1525,8 @@ fastify.post('/api/owner/:slug/booking/:id/status', async (req, reply) => {
 
 fastify.get('/hotel/:slug', async (req, reply) => {
   const slug = String(req.params.slug);
-  const b = await prisma.building.findFirst({ where: { qrSlug: slug, buildingType: 'HOTEL' }, select: { id: true } });
-  return slugPage(reply, 'hotel.html', !!b, 'https://bina.et/hotel/' + slug, 'ሆቴል · Hotel', '/hotels');
+  const b = await prisma.building.findFirst({ where: { qrSlug: slug, buildingType: 'HOTEL' }, select: { id: true, name: true, subCity: true } });
+  return slugPage(reply, 'hotel.html', !!b, 'https://bina.et/hotel/' + slug, 'ሆቴል · Hotel', '/hotels', !!b && hotelIsDemo(b));
 });
 fastify.get('/hotels', async (req, reply) => reply.sendFile('hotels.html')); // BinaHotels landing (7 Sep 2026)
 // Every building that has at least one active room type is a hotel on BinaSmart.
@@ -1879,6 +1888,7 @@ fastify.get('/tenders', async (req, reply) => {
   const body = `<main>
     <div class="phero" style="--pg:${sectionBrand.gradient('tenders')};--wm:''"><div style="display:flex;align-items:center;gap:14px">${sectionBrand.badge('tenders')}<h1 style="margin:0">ጨረታዎች · Tenders</h1></div><div class="am sans">የተረጋገጡ የኢትዮጵያ ጨረታዎች — ግንባታ · አቅርቦት · አገልግሎት</div><div class="sub sans">Verified Ethiopian tenders with full details, contacts &amp; deadlines — updated daily, free.</div></div>
     <div class="chips" style="--chipon:#059669">${chips}</div>
+    <p class="sans" style="margin:2px 0 16px;font-size:14px;line-height:1.9"><!-- guide-links:tender-list -->📚 <a href="/how-to-bid-tenders-ethiopia" style="color:var(--em);font-weight:700">ጨረታ እንዴት ይወዳደራሉ</a> · <a href="/bid-security-cpo-ethiopia" style="color:var(--em);font-weight:700">የጨረታ ማስከበሪያ (CPO)</a> · <a href="/egp-registration-ethiopia" style="color:var(--em);font-weight:700">eGP ምዝገባ</a> · <a href="/ethiopia-tender-report-september-2026" style="color:var(--em);font-weight:700">📦 የጨረታ ገበያ ሪፖርት</a> · <a href="/world-bank-tenders-ethiopia" style="color:var(--em);font-weight:700">🌍 የዓለም ባንክ ጨረታዎች</a></p>
     ${showClosed ? `<div class="sans" style="display:flex;gap:12px;align-items:center;margin:0 0 18px;padding:13px 17px;border-radius:14px;background:#fdeaea;border:1.5px solid #f3bdbd;color:#8a1f1f"><span style="font-size:22px;line-height:1">🔒</span><span><b style="display:block;font-size:15px">የተዘጉ ጨረታዎች · Closed tenders</b><span style="font-size:13px">እነዚህ ማብቂያቸው አልፏል። <a href="/tenders" style="color:#8a1f1f;font-weight:700">ክፍት ጨረታዎች · Open tenders →</a></span></span></div>` : ''}
     ${rows || empty}
     ${!showClosed && closedCount ? `<p class="sans" style="text-align:center;margin:26px 0 4px;font-size:13.5px"><a href="/tenders?show=closed${cat ? '&cat=' + encodeURIComponent(cat) : ''}" style="color:var(--mut)">🔒 ${closedCount} የተዘጉ ጨረታዎችን ይመልከቱ · View ${closedCount} closed tenders</a></p>` : ''}
@@ -1901,9 +1911,20 @@ function fitTitle(name, suffix, budget) {
   return (sp > room * 0.6 ? cut.slice(0, sp) : cut).replace(/[\s,;:\u2014-]+$/, '') + '…' + suffix;
 }
 
+// Breadcrumb for a tender page, named as its <h1> is. Harvested titles can contain anything, so "<" is
+// escaped: a "</script>" inside a title must not end the JSON-LD block.
+function tenderLd(t) {
+  const ld = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'መነሻ', item: 'https://bina.et/' },
+    { '@type': 'ListItem', position: 2, name: 'ጨረታዎች', item: 'https://bina.et/tenders' },
+    { '@type': 'ListItem', position: 3, name: String(t.titleAm || t.title || '').slice(0, 110), item: 'https://bina.et/tenders/' + t.slug }] };
+  return '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>';
+}
 fastify.get('/tenders/:slug', async (req, reply) => {
   const t = await prisma.tender.findUnique({ where: { slug: req.params.slug } });
-  if (!t || !t.published) return reply.code(404).type('text/html').send(newsShell({ title: 'Not found', desc: '', canonical: 'https://bina.et/tenders', body: '<main><div class="empty"><div class="big">📋</div><h3>ጨረታው አልተገኘም</h3><p class="sans"><a href="/tenders" style="color:var(--em)">← ወደ ጨረታዎች</a></p></div></main>', active: 'tenders' }));
+  // A row that exists but is unpublished (duplicate, rejected or withdrawn) is gone for good: 410 tells a
+  // crawler to drop it now. A slug that never existed stays 404.
+  if (!t || !t.published) return reply.code(t ? 410 : 404).type('text/html').send(newsShell({ title: 'Not found', desc: '', canonical: 'https://bina.et/tenders', body: '<main><div class="empty"><div class="big">📋</div><h3>ጨረታው አልተገኘም</h3><p class="sans"><a href="/tenders" style="color:var(--em)">← ወደ ጨረታዎች</a></p></div></main>', active: 'tenders' }));
   // A tender whose deadline has passed says so HERE, in the html, not only after the countdown
   // script runs — a crawler and a slow connection both see the server's version first.
   const tenderClosed = tenderClosedAt(t.deadline);
@@ -1922,6 +1943,7 @@ fastify.get('/tenders/:slug', async (req, reply) => {
     <div class="body-t"><p>${escH(t.summary)}</p>${t.bodyHtml || ''}</div>
     ${t.sourceUrl ? `<h2 class="sans" style="font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin:26px 0 8px">ምንጭ · Source</h2>` : ''}
     ${t.sourceUrl ? `<p class="sans" style="font-size:13px;color:var(--mut)">ምንጭ · Source: <a href="${escH(t.sourceUrl)}" rel="nofollow" style="color:var(--em)">${escH(t.sourceName || t.sourceUrl)}</a></p>` : ''}
+    <div class="sans" style="margin:24px 0 8px;padding:15px 18px;border-radius:14px;border:1.5px solid var(--line)"><!-- guide-links:tender-detail --><b>📚 ለመወዳደር ከመዘጋጀትዎ በፊት · Before you bid</b><div style="margin-top:6px;font-size:14px;line-height:1.9"><a href="/how-to-bid-tenders-ethiopia" style="color:var(--em);font-weight:700">🏛️ ጨረታ እንዴት ይወዳደራሉ</a> · <a href="/bid-security-cpo-ethiopia" style="color:var(--em);font-weight:700">🧾 የጨረታ ማስከበሪያ (CPO)</a> · <a href="/tender-documents-checklist-ethiopia" style="color:var(--em);font-weight:700">✅ የሰነዶች ዝርዝር</a> · <a href="/egp-registration-ethiopia" style="color:var(--em);font-weight:700">🖥️ eGP ምዝገባ</a>${/world bank/i.test((t.sourceName || '') + ' ' + (t.org || '')) ? ` · <!-- guide-links:wb --><a href="/world-bank-tenders-ethiopia" style="color:var(--em);font-weight:700">🌍 የዓለም ባንክ ጨረታዎች</a>` : ''}</div></div>
     <div class="cta-band sans"><div><h3>🔔 ተመሳሳይ ጨረታዎችን በቴሌግራም ይቀበሉ</h3><p>Get tenders like this the moment they publish.</p></div><a href="https://t.me/Bina_smart" target="_blank" rel="noopener">Subscribe →</a></div>
   </article></main>`;
   // Say it before the click, not after. Discovering a dead deadline yourself is the unkind version.
@@ -1929,7 +1951,7 @@ fastify.get('/tenders/:slug', async (req, reply) => {
   const closedPrefix = tenderClosed ? 'ተዘግቷል · ' : '';
   // the budget covers the WHOLE tag, prefix included — otherwise a closed tender runs long again
   const titleTag = closedPrefix + fitTitle(t.title, ' — ጨረታ', 60 - closedPrefix.length);
-  reply.type('text/html').send(newsShell({ title: titleTag, desc: (tenderClosed ? 'ተዘግቷል · This tender has closed. ' : '') + t.summary.slice(0, 155), canonical: 'https://bina.et/tenders/' + t.slug, body, active: 'tenders', ogImage: ogFor(t.slug, 'https://bina.et/static/og-section-tenders.png') }));
+  reply.type('text/html').send(newsShell({ title: titleTag, desc: (tenderClosed ? 'ተዘግቷል · This tender has closed. ' : '') + t.summary.slice(0, 155), canonical: 'https://bina.et/tenders/' + t.slug, extraHead: tenderLd(t), body, active: 'tenders', ogImage: ogFor(t.slug, 'https://bina.et/static/og-section-tenders.png') }));
 });
 
 
