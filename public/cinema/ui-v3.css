@@ -126,3 +126,11 @@ details.vprog .vbody{padding:0 14px 12px}
 .pill.warn{border-color:rgba(245,158,11,.3)}
 /* v4 (8 Sep 2026): top-bar links are glass too */
 .top a.lnk,.top button.lnk{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+
+/* Programme showtimes (ops/cinema/harvest-telegram.js output). A chip is one screening:
+   already gone is faded, the next one still to come tonight is the one being looked for. */
+.tchip{border:1px solid var(--line);border-radius:11px;padding:5px 9px;font-size:12px;font-weight:800;background:#fff;line-height:1.2;display:inline-block}
+.tchip small{display:block;font-size:10px;color:var(--mute);font-weight:700}
+.tchip.past{opacity:.38;background:#f6f7f9}
+.tchip.next{border-color:var(--brand);border-width:2px;box-shadow:0 10px 20px -16px rgba(6,140,120,.9)}
+.pill.now{background:#dcfce7;color:#065f46;border-color:#86efac}

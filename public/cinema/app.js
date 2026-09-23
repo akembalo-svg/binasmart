@@ -51,8 +51,8 @@
       if (!j.ok) { view.innerHTML = '<div class="card">' + esc(T[j.error] || T.net) + '</div>'; return; }
       var groups = {}, order = [];
       j.shows.forEach(function (s) { var k = s.event.id; if (!groups[k]) { groups[k] = { ev: s.event, venue: s.venue, shows: [] }; order.push(k); } groups[k].shows.push(s); });
-      var html = '<h1>ሲኒማ እና ዝግጅቶች</h1><p class="sub">ወንበርዎን በካርታው ላይ ይምረጡ፣ QR ትኬት ያግኙ · Pick your exact seat, get a QR ticket.' + (j.chapa && j.chapa.enabled && j.chapa.mode !== 'live' ? ' <span class="pill warn">🧪 Chapa TEST</span>' : '') + '</p>';
-      if (!order.length) html += '<div class="card" style="margin-top:14px"><b>በቅርቡ · Coming soon.</b><div class="sub" style="margin-top:6px">ገና ትርዒት አልተለቀቀም። ሲኒማ ቤት ወይም የዝግጅት አዘጋጅ ነዎት? <a href="https://t.me/bina_smart_bot">@bina_smart_bot</a> ያነጋግሩን። · No shows on sale yet. Run a cinema or events? Talk to us.</div></div>';
+      var html = '<h1>ሲኒማ እና ዝግጅቶች</h1><p class="sub">' + (order.length ? 'ወንበርዎን በካርታው ላይ ይምረጡ፣ QR ትኬት ያግኙ · Pick your exact seat, get a QR ticket.' : 'በአዲስ አበባ ሲኒማ ቤቶች አሁን ምን እንደሚያሳዩ · What the cinemas of Addis Ababa are showing right now.') + (order.length && j.chapa && j.chapa.enabled && j.chapa.mode !== 'live' ? ' <span class="pill warn">🧪 Chapa TEST</span>' : '') + '</p>';
+      if (!order.length) html += '<div class="card" style="margin-top:14px"><b>🎟️ ትኬት በሲኒማ ቤቱ · Tickets at the cinema</b><div class="sub" style="margin-top:6px">እስካሁን ትኬት አንሸጥም። ግን አሁን በአዲስ አበባ የሚታየው ሁሉ እዚህ አለ። <a href="#whatson"><b>አሁን የሚታዩ ፈይሎች ↓</b></a><br>We do not sell the ticket yet — every film showing in Addis right now is listed below. <a href="#whatson">See what is on ↓</a></div><div class="sub" style="margin-top:8px;font-size:12px">ሲኒማ ቤት ወይም የዝግጅት አዝጋጅ ነዎት? <a href="https://t.me/bina_smart_bot">@bina_smart_bot</a> · Run a cinema or events? Talk to us.</div></div>';
       var cardFor = function (k) {
         var g = groups[k], e = g.ev, isFilm = e.kind === 'FILM';
         return '<div class="card ev"><div class="poster">' + (e.posterUrl ? '<img src="' + esc(e.posterUrl) + '" alt="" loading="lazy">' : esc(e.emoji || (isFilm ? '🎬' : '🎟️'))) + '</div><div>'
@@ -83,20 +83,40 @@
       var day = function (d) { return new Date(d).toLocaleDateString('en-GB', { timeZone: TZ, day: 'numeric', month: 'short' }); };
       var html = '<h2 id="whatson" style="margin-top:22px">📅 አሁን የሚታዩ · What\'s on in Addis</h2><p class="sub">ሲኒማ ቤቶቹ ራሳቸው እንደለጠፉት፤ ትኬት በሲኒማ ቤቱ። ሰዓቶቹ በዓለም አቀፍ እና በኢትዮጵያ (ኢት) አቆጣጠር። · As the cinemas posted it; tickets at the cinema. Times shown in both the international and the Ethiopian clock.</p>';
       var openSlug = (location.hash.match(/^#prog-([a-z0-9-]+)/) || [])[1];
+
+      // What a person actually wants to know standing in Addis at 18:30: which screenings are still
+      // ahead of them tonight. Times are stored as printed by the cinema, i.e. Addis local.
+      var nowParts = new Date().toLocaleString('en-GB', { timeZone: TZ, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+      var nowDay = (nowParts.match(/(\d{2})\/(\d{2})\/(\d{4})/) || []).slice(1);
+      var todayKey = nowDay.length ? nowDay[2] + '-' + nowDay[1] + '-' + nowDay[0] : '';
+      var nowMin = (function () { var m = /(\d{2}):(\d{2})(?!.*\d{2}:\d{2})/.exec(nowParts); return m ? Number(m[1]) * 60 + Number(m[2]) : -1; })();
+      var dayKey = function (d) { return new Date(d).toLocaleDateString('en-CA', { timeZone: TZ }); };
+      var onToday = function (p) { return todayKey && dayKey(p.dateFrom) <= todayKey && todayKey <= dayKey(p.dateTo); };
+      var minutes = function (t) { var m = /^(\d{1,2}):(\d{2})$/.exec(t); return m ? Number(m[1]) * 60 + Number(m[2]) : -1; };
+      // Busiest cinema first: a venue with eight films should not sit shut under one with a single film.
+      j.venues.sort(function (a, b) { return b.films.length - a.films.length; });
       j.venues.forEach(function (g, gi) {
         var v = g.venue;
         // Group this cinema's entries by date range so a week reads day by day.
         var groups = {}, order = [];
         g.films.forEach(function (p) { var k = day(p.dateFrom) + (day(p.dateTo) !== day(p.dateFrom) ? ' – ' + day(p.dateTo) : ''); if (!groups[k]) { groups[k] = []; order.push(k); } groups[k].push(p); });
         var titles = {}; g.films.forEach(function (p) { titles[p.titleAm || p.title] = 1; });
-        html += '<details class="vprog card" id="prog-' + esc(v.slug) + '"' + (openSlug ? (openSlug === v.slug ? ' open' : '') : (gi === 0 ? ' open' : '')) + '><summary><div style="flex:1;min-width:0"><div style="font-weight:900;font-size:16px">' + esc(v.nameAm || v.name) + ' <span class="pill mute">' + Object.keys(titles).length + ' ፊልም</span></div><div class="sub">' + esc(v.name) + (v.address ? ' · ' + esc(v.address) : '') + '</div></div>' + (v.phone ? '<a class="btn ghost sm" href="tel:' + esc(v.phone) + '" onclick="event.stopPropagation()">📞</a>' : '') + '<span class="chev">▾</span></summary><div class="vbody">';
+        html += '<details class="vprog card" id="prog-' + esc(v.slug) + '"' + ' open' + '><summary><div style="flex:1;min-width:0"><div style="font-weight:900;font-size:16px">' + esc(v.nameAm || v.name) + ' <span class="pill mute">' + Object.keys(titles).length + ' ፊልም</span></div><div class="sub">' + esc(v.name) + (v.address ? ' · ' + esc(v.address) : '') + '</div></div>' + (v.phone ? '<a class="btn ghost sm" href="tel:' + esc(v.phone) + '" onclick="event.stopPropagation()">📞</a>' : '') + '<span class="chev">▾</span></summary><div class="vbody">';
         order.forEach(function (k) {
-          html += '<div class="dayhdr">📅 ' + esc(k) + '</div>';
+          var isToday = groups[k].some(onToday);
+          html += '<div class="dayhdr">📅 ' + esc(k) + (isToday ? ' <span class="pill now">ዛሬ · today</span>' : '') + '</div>';
           groups[k].forEach(function (p) {
           html += '<div style="border-top:1px solid var(--line);padding:10px 0;display:flex;gap:10px"><div style="width:48px;height:66px;border-radius:8px;background:linear-gradient(160deg,#0b2a26,#068c78);flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:22px">' + (p.posterUrl ? '<img src="' + esc(p.posterUrl) + '" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '🎬') + '</div><div style="flex:1;min-width:0">'
             + '<div style="font-weight:900">' + esc(p.titleAm || p.title) + (p.titleAm && p.title !== p.titleAm ? ' <small class="sub">' + esc(p.title) + '</small>' : '') + '</div>'
             + '<div class="sub" style="font-size:12px">' + [p.notes, p.hallName, p.priceText].filter(Boolean).map(esc).join(' · ') + '</div>'
-            + '<div class="times">' + p.times.map(function (t) { return '<span style="border:1.5px solid var(--line);border-radius:10px;padding:5px 9px;font-size:12px;font-weight:800;background:#fff;line-height:1.2">' + esc(t) + '<small style="display:block;font-size:10px;color:var(--mute);font-weight:700">' + esc(ethClock(t)) + ' ኢት</small></span>'; }).join('') + (p.trailerEmbed ? '<button type="button" class="trailer" data-embed="' + esc(p.trailerEmbed) + '" style="border:1.5px solid var(--brand);color:var(--brand);border-radius:10px;padding:5px 9px;font-size:12px;font-weight:900;background:#fff;font-family:inherit;cursor:pointer">▶ ትሬለር · Trailer</button>' : '') + '</div>'
+            + '<div class="times">' + (function () {
+              var live = onToday(p), nextT = null;
+              if (live && nowMin >= 0) { p.times.forEach(function (t) { if (nextT === null && minutes(t) >= nowMin) nextT = t; }); }
+              return p.times.map(function (t) {
+                var cls = 'tchip' + (live && nowMin >= 0 && minutes(t) >= 0 && minutes(t) < nowMin ? ' past' : '') + (t === nextT ? ' next' : '');
+                return '<span class="' + cls + '">' + esc(t) + '<small>' + esc(ethClock(t)) + ' ኢት</small></span>';
+              }).join('');
+            })() + (p.trailerEmbed ? '<button type="button" class="trailer" data-embed="' + esc(p.trailerEmbed) + '" style="border:1.5px solid var(--brand);color:var(--brand);border-radius:10px;padding:5px 9px;font-size:12px;font-weight:900;background:#fff;font-family:inherit;cursor:pointer">▶ ትሬለር · Trailer</button>' : '') + '</div>'
             + (p.trailerEmbed ? '<div class="trbox" hidden style="margin-top:8px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000"></div>' : '')
             + '<div class="sub" style="font-size:11px;margin-top:6px">ምንጭ · ' + esc(p.sourceName) + ', ' + day(p.postedAt) + (p.sourceUrl ? ' · <a href="' + esc(p.sourceUrl) + '" target="_blank" rel="noopener nofollow">link</a>' : '') + '</div></div></div>';
           });
