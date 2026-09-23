@@ -66,7 +66,13 @@
     if (b.dataset.t === 'prog') loadProgramme();
   });
 
+  // Opened from Bina Partner as /business?open=<id>: switch to that page first. The server only accepts
+  // a page this owner may run, so a wrong id simply leaves the current one open.
+  var OPEN = null; try { OPEN = new URLSearchParams(location.search).get('open'); } catch (e) {}
+  if (OPEN) { try { history.replaceState(null, '', location.pathname); } catch (e) {} }
+  function inApp() { try { return !!sessionStorage.getItem('bina_app') || matchMedia('(display-mode: standalone)').matches; } catch (e) { return false; } }
   function load() {
+    if (OPEN) { var o = OPEN; OPEN = null; return api('/api/business/switch', { id: o }).then(function () { load(); }); }
     api('/api/business/me').then(function (j) {
       if (!j.ok) { $('signin').hidden = false; $('app').hidden = true; if (tok) { tok = null; try { localStorage.removeItem('bs_owner'); } catch (e) {} } return; }
       ME = j; $('signin').hidden = true; $('app').hidden = false;
@@ -90,7 +96,12 @@
       $('copyUrl').onclick = function () { navigator.clipboard.writeText(url).then(function () { toast('ተቀድቷል · copied'); }); };
     });
   }
-  $('signOut').addEventListener('click', function () { api('/api/business/logout', {}).then(function () { tok = null; try { localStorage.removeItem('bs_owner'); } catch (e) {} location.reload(); }); });
+  $('signOut').addEventListener('click', function () { api('/api/business/logout', {}).then(function (j) {
+    tok = null; try { localStorage.removeItem('bs_owner'); } catch (e) {}
+    var done = function () { if (inApp()) location.href = '/partner'; else location.reload(); };
+    // Signed in with a bina.et account: end that too, or the reload opens the dashboard again.
+    if (j && j.account) fetch('/api/auth/sign-out', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}', credentials: 'same-origin' }).catch(function () {}).then(done); else done();
+  }); });
 
   // ---------------- my page ----------------
   function fillProfile(s, cats) {

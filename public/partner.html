@@ -140,6 +140,64 @@ main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin
 
 @media (min-height:760px){.hero{padding-top:30px}}
 @media (min-width:600px){.sheet{border-radius:var(--r-lg);margin:24px 0}}
+
+/* ---- light glass (23 Sep 2026, Ibrahim: "transparent glass") ----
+   Glass only reads as glass over colour, so the page sits on soft brand blobs painted ONCE on a fixed
+   layer (no image, no repaint while scrolling). The top edge stays the status-bar colour #F4FAF8 so the
+   Android bar and the page meet without a seam. Light only: dark glass was rejected on 9 Sep. */
+:root{
+  --glass:rgba(255,255,255,.52); --glass-hi:rgba(255,255,255,.7); --glass-edge:rgba(255,255,255,.78);
+  --glass-shadow:0 18px 40px -26px rgba(8,40,52,.45),0 2px 6px -4px rgba(8,40,52,.12);
+  --glass-blur:blur(16px) saturate(165%);
+}
+body{background:#F4FAF8;position:relative;isolation:isolate}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(70vmax 48vmax at -8% 34%,rgba(0,200,150,.34),transparent 62%),
+    radial-gradient(60vmax 44vmax at 108% 22%,rgba(0,153,255,.24),transparent 62%),
+    radial-gradient(55vmax 42vmax at 92% 96%,rgba(108,99,255,.22),transparent 62%),
+    radial-gradient(64vmax 46vmax at 6% 104%,rgba(0,168,138,.34),transparent 60%),
+    linear-gradient(180deg,#F4FAF8 0,#F4FAF8 7%,rgba(244,250,248,0) 22%);}
+/* the surfaces: blur only on the big panes; small chips inside them stay flat (nested blur costs on cheap phones) */
+.sheet,.pick,.ghost,.field,.err{
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
+.sheet{background:var(--glass);border:1px solid var(--glass-edge);border-bottom:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 -20px 50px -34px rgba(8,40,52,.4)}
+.pick{background:var(--glass);border:1px solid var(--glass-edge);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),var(--glass-shadow)}
+.pick.soft{background:rgba(255,255,255,.38)}
+.pick.last{border-color:rgba(0,150,136,.55);box-shadow:0 0 0 3px rgba(0,200,150,.16),inset 0 1px 0 rgba(255,255,255,.9),var(--glass-shadow)}
+.pick .ic{background:rgba(227,246,240,.62);border:1px solid rgba(255,255,255,.7)}
+.pick .tag{background:rgba(227,246,240,.75);border:1px solid rgba(255,255,255,.8)}
+.field{background:var(--glass-hi);border-color:rgba(255,255,255,.85);box-shadow:inset 0 1px 2px rgba(8,40,52,.06)}
+.field:focus-within{background:rgba(255,255,255,.86)}
+.ghost{background:var(--glass);border-color:var(--glass-edge)}
+.av{background:rgba(227,246,240,.7);border:1px solid rgba(255,255,255,.8)}
+.steps li:before{background:rgba(255,255,255,.62);border-color:rgba(255,255,255,.85)}
+.steps li.now:before{background:rgba(227,246,240,.85);border-color:var(--em2)}
+.steps li:after{background:rgba(0,150,136,.22)}
+.err{background:rgba(253,240,240,.82)}
+.track{background:rgba(0,150,136,.14)}
+/* emerald glass for the one primary action; dark enough for white text (AA at this size and weight) */
+.cta{background:linear-gradient(135deg,rgba(0,128,106,.95),rgba(0,104,95,.96));
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid rgba(255,255,255,.35);box-shadow:0 12px 26px -14px rgba(0,112,101,.9),inset 0 1px 0 rgba(255,255,255,.35)}
+.cta .am{font-size:18px}
+.cta small{opacity:.95}
+.tile{box-shadow:0 8px 18px -8px rgba(0,150,136,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+.scene{opacity:.92}
+/* no backdrop-filter (old WebView, some low-end phones): near-solid white, so text never sits on colour */
+/* review pass (23 Sep): the Last-used chip sits above the title instead of over it; every text button
+   is at least 44px tall; Ethiopic titles get room above and below the tall glyphs. */
+.pick .tag{position:static;display:inline-block;margin:0 0 6px;padding:2px 9px;font-size:11.5px;line-height:1.5}
+.pick b{line-height:1.3}
+.head h2,.who h2{line-height:1.22}
+.me button,.auto button,.row a,.row button,.back{min-height:44px;display:inline-flex;align-items:center;padding-top:0;padding-bottom:0}
+.owner{min-height:44px}
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .sheet,.pick,.ghost{background:rgba(255,255,255,.93)}
+  .field{background:#fff}
+  .pick .ic,.av{background:#E3F6F0}
+}
 @media (prefers-reduced-motion:reduce){*{animation-duration:1ms!important;transition:none!important}}
 </style>
 </head>
@@ -421,7 +479,7 @@ function partnerRoute(me, last, lastBiz) {
         : WHERE[o.kind].sub;
       tx.appendChild(el('span', 'en', sub)); a.appendChild(tx);
       a.insertAdjacentHTML('beforeend', CHEV);
-      if (o.kind === r.last) a.appendChild(el('span', 'tag am', 'ባለፈው · Last used'));
+      if (o.kind === r.last) tx.insertBefore(el('span', 'tag am', 'ባለፈው · Last used'), tx.firstChild);
       a.addEventListener('click', function (e) { e.preventDefault(); stopAuto(); go(o, false); });
       box.appendChild(a);
     });
@@ -463,7 +521,7 @@ function partnerRoute(me, last, lastBiz) {
       if (st) { var n = el('span', 'step'); n.appendChild(el('span', 'am', st.am)); n.appendChild(el('span', 'en', st.en)); tx.appendChild(n); }
       a.appendChild(tx);
       a.insertAdjacentHTML('beforeend', CHEV);
-      if (b.id === r.lastBiz) a.appendChild(el('span', 'tag am', 'ባለፈው · Last used'));
+      if (b.id === r.lastBiz) tx.insertBefore(el('span', 'tag am', 'ባለፈው · Last used'), tx.firstChild);
       a.addEventListener('click', function (e) { e.preventDefault(); store.set(LAST, 'owner'); store.set(LASTBIZ, b.id); location.href = bizHref(b); });
       box.appendChild(a);
     });

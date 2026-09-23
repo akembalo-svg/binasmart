@@ -167,7 +167,8 @@ function destFor(me, next, explicit){
   var roles = (me && me.roles) || [];
   var homes = [];
   var owned = (me && Object.prototype.toString.call(me.owned) === '[object Array]') ? me.owned : null;
-  if (owned) owned.forEach(function(b){ if (b && typeof b.url === 'string' && /^\/(?![\/\\])/.test(b.url) && homes.indexOf(b.url) < 0) homes.push(b.url); });
+  var paths = [];
+  if (owned) owned.forEach(function(b){ if (b && typeof b.url === 'string' && /^\/(?![\/\\])/.test(b.url) && paths.indexOf(b.url.split('?')[0]) < 0) { paths.push(b.url.split('?')[0]); homes.push(b.url); } });
   else if (me && me.buildingSlug) homes.push('/owner/' + me.buildingSlug);
   var ownerHome = homes.length === 1 ? homes[0] : null;
   if (roles.indexOf('driver') >= 0) homes.push('/drive');

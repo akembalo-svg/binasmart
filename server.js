@@ -155,10 +155,13 @@ const authFail = (req, reply) => {
 // not a hashed column. Building.ownerKey used to hold them in plain text, compared with ===.
 const { makeOwnerKeys } = require('./building/ownerKeys');
 const ownerKeys = makeOwnerKeys({ prisma });
+// building/memberAccess.js: an ACTIVE OWNER building membership = that building's owner key, nothing more.
+const isBuildingMember = require('./building/memberAccess').makeBuildingMember({ prisma });
 async function authBuildingFail(req, reply, slug) {
   if (req.authUser) {
     if (req.authUser.role === 'admin') return false;
     if (req.authUser.buildingSlug && req.authUser.buildingSlug === slug) return false;
+    if (await isBuildingMember(req.authUser.id, slug)) return false;
   }
   const key = keyOf(req);
   if (key === OWNER_KEY) return false;

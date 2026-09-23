@@ -78,9 +78,10 @@ function makeIdentity({ prisma, now }) {
   // What this account runs, one row per business, with the page that manages it (Bina Partner, 23 Sep
   // 2026). Only this account's own rows (AuthUser.buildingSlug and its active memberships), and only
   // names, public slugs and types: never a key, token, phone or password.
-  //   access 'account'          the dashboard admits this signed-in account (server.js authBuildingFail)
-  //   access 'business_sign_in' /business needs its own phone sign-in (business/index.js, bsown cookie)
-  //   access 'owner_key'        a building dashboard reached only with its owner key or password (/owner)
+  //   access 'account'          the dashboard admits this signed-in account: its own building, or an
+  //                             ACTIVE OWNER membership (server.js authBuildingFail, business/accountOwners.js)
+  //   access 'business_sign_in' /business needs its own phone sign-in (a staff membership: no staff tier there)
+  //   access 'owner_key'        a building dashboard reached only with its owner key or password (staff)
   const BUILDING_TYPE = { HOTEL: 'hotel', HOSPITAL: 'hospital', TRAVEL: 'travel' };
   const SHOP_TYPE = { RESTAURANT: 'restaurant', CAFE: 'cafe', CLINIC: 'clinic', PHARMACY: 'pharmacy' };
   async function ownedBy(u) {
@@ -107,21 +108,24 @@ function makeIdentity({ prisma, now }) {
       const mine = slug === u.buildingSlug;
       const m = ms.find(x => x.kind === 'building' && x.buildingSlug === slug);
       out.push({ id: 'building:' + slug, type: BUILDING_TYPE[b.buildingType] || 'building', name: b.name || slug, nameAm: b.nameAm || null,
-        role: mine ? 'owner' : (m && m.role) || 'owner', url: '/owner/' + encodeURIComponent(slug), access: mine ? 'account' : 'owner_key' });
+        role: mine ? 'owner' : (m && m.role) || 'owner', url: '/owner/' + encodeURIComponent(slug),
+        access: mine || (m && (m.role || 'owner') === 'owner') ? 'account' : 'owner_key' });
     }
     for (const id of shopIds) {
       const s = ss ? ss.get(id) : { id };
       if (!s || s.status === 'hidden') continue;             // /business refuses a hidden shop too
       const m = ms.find(x => x.kind === 'shop' && x.shopId === id);
+      const own = !m || (m.role || 'owner') === 'owner';
       out.push({ id: 'shop:' + id, type: SHOP_TYPE[s.category] || 'shop', name: s.name || null, nameAm: s.nameAm || null,
-        role: (m && m.role) || 'owner', url: '/business', access: 'business_sign_in' });
+        role: (m && m.role) || 'owner', url: own ? '/business?open=' + encodeURIComponent(id) : '/business', access: own ? 'account' : 'business_sign_in' });
     }
     for (const id of venueIds) {
       const v = vs ? vs.get(id) : { id, active: true };
       if (!v || v.active === false) continue;
       const m = ms.find(x => x.kind === 'venue' && x.venueId === id);
+      const own = !m || (m.role || 'owner') === 'owner';
       out.push({ id: 'venue:' + id, type: 'venue', name: v.name || null, nameAm: v.nameAm || null,
-        role: (m && m.role) || 'owner', url: '/business', access: 'business_sign_in' });
+        role: (m && m.role) || 'owner', url: own ? '/business?open=' + encodeURIComponent(id) : '/business', access: own ? 'account' : 'business_sign_in' });
     }
     return out;
   }

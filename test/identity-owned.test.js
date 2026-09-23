@@ -57,9 +57,11 @@ test('owned lists the account building, its memberships, with type, dashboard an
   const byId = Object.fromEntries(me.owned.map(b => [b.id, b]));
   assert.deepEqual(Object.keys(byId).sort(), ['building:sample-hotel', 'building:sample-tower', 'shop:s1', 'venue:v1']);
   assert.deepEqual(byId['building:sample-hotel'], { id: 'building:sample-hotel', type: 'hotel', name: 'Sample Hotel', nameAm: 'ናሙና ሆቴል', role: 'owner', url: '/owner/sample-hotel', access: 'account' });
-  assert.equal(byId['building:sample-tower'].access, 'owner_key', 'a building membership is not admitted by the account (authBuildingFail)');
+  assert.equal(byId['building:sample-tower'].access, 'account', 'an active OWNER building membership opens directly (building/memberAccess.js)');
   assert.equal(byId['building:sample-tower'].type, 'building');
-  assert.deepEqual(byId['shop:s1'], { id: 'shop:s1', type: 'cafe', name: 'Sample Cafe', nameAm: 'ናሙና ካፌ', role: 'owner', url: '/business', access: 'business_sign_in' });
+  assert.deepEqual(byId['shop:s1'], { id: 'shop:s1', type: 'cafe', name: 'Sample Cafe', nameAm: 'ናሙና ካፌ', role: 'owner', url: '/business?open=s1', access: 'account' });
+  assert.equal(byId['venue:v1'].access, 'business_sign_in', 'a STAFF venue membership keeps the phone sign-in');
+  assert.equal(byId['venue:v1'].url, '/business');
   assert.equal(byId['venue:v1'].type, 'venue');
   assert.equal(byId['venue:v1'].role, 'staff');
   // the old fields are still there for account.html and login.html
@@ -80,6 +82,7 @@ test('suspended memberships, hidden shops and other people\'s businesses never a
     assert.deepEqual([...q.where[Object.keys(q.where)[0]].in].sort(), want.sort(), q.name + ' asks only for this account\'s rows');
   }
   const two = await makeIdentity({ prisma: db() }).me('u2');
+
   assert.deepEqual(two.owned.map(b => b.id).sort(), ['building:sample-tower', 'shop:s4']);
   assert.equal(two.owned.find(b => b.id === 'shop:s4').type, 'clinic');
   assert.deepEqual((await makeIdentity({ prisma: db() }).me('u3')).owned, []);

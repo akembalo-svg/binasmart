@@ -60,6 +60,14 @@ test('one business that needs its own sign-in (a cafe, a cinema) shows the list 
   assert.ok(partner.includes("return b.access === 'owner_key' ? '/owner' : b.url;"), 'an owner-key building goes to the password sign-in');
 });
 
+test('one shop the account opens itself (owner membership) goes straight to /business?open=<id>', () => {
+  const SHOP = { id: 'shop:s-9', type: 'restaurant', name: 'Sample Restaurant', url: '/business?open=s-9', access: 'account' };
+  const r = plain(route(me(['business'], [SHOP]), null, null));
+  assert.equal(r.view, 'go');
+  assert.equal(r.to.href, '/business?open=s-9');
+  assert.equal(destFor(me(['business'], [SHOP, Object.assign({}, SHOP, { id: 'shop:s-8', url: '/business?open=s-8' })]), '/', false), '/business?open=s-9', 'two shops are still one home');
+});
+
 test('driver + shop owner get the two-card chooser (Driver / Owner)', () => {
   const r = plain(route(me(['driver', 'business'], [CAFE, CINEMA]), 'owner', null));
   assert.equal(r.view, 'choose');
