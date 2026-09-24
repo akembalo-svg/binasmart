@@ -45,7 +45,10 @@ function world(over) {
     },
     driver: {
       findMany: async ({ where }) => state.drivers
-        .filter(d => d.status === 'approved' && d.online === true && d.away === false && d.onRideId === null && (!where.tier || d.tier === where.tier))
+        .filter(d => d.status === 'approved' && d.online === true && d.onRideId === null && (!where.tier || d.tier === where.tier)
+          && d.away === (where.away === undefined ? false : where.away)
+          && (!where.telegramId || d.telegramId != null)
+          && (!where.lastSeenAt || (d.lastSeenAt != null && d.lastSeenAt >= where.lastSeenAt.gte)))
         .map(d => ({ ...d })),
       findUnique: async ({ where }) => state.drivers.find(d => d.id === where.id) || null,
       updateMany: async ({ where, data }) => {
@@ -247,4 +250,41 @@ test('an expired offer says expired, a skipped one says no offer, and a stranger
   assert.equal((await offers.accept('r1', 'dA')).error, 'expired', 'the window closed on them');
 
   assert.equal((await offers.accept('r1', 'dZZ')).error, 'no_offer', 'never offered at all');
+});
+
+// Weak signal: the app went quiet (the server marked the driver away) but the last good fix is recent.
+test('a weak-signal driver is offered the ride by Telegram only after every connected driver, and is told why', async () => {
+  const w = world();
+  const now = new Date(w.clockRef.t);
+  w.state.drivers = [
+    { id: 'dW', name: 'Worku', tier: 'economy', status: 'approved', online: true, away: true, onRideId: null, lat: 9.0101, lng: 38.7601, telegramId: '121', lastSeenAt: new Date(now - 120 * 1000) },
+    { id: 'dA', name: 'Abel', tier: 'economy', status: 'approved', online: true, away: false, onRideId: null, lat: 9.014, lng: 38.764, telegramId: '111' },
+  ];
+  const n = await w.make().open('r1');
+  assert.equal(n, 2);
+  assert.deepEqual(w.state.offers.map(o => o.driverId), ['dA', 'dW'], 'the connected driver first, even though Worku is closer');
+  const toW = w.sent.find(s => s.chat === '121');
+  assert.match(toW.text, /lost signal/);
+  assert.deepEqual(toW.extra.reply_markup.inline_keyboard[0].map(b => b.callback_data), ['acc:r1', 'dec:r1']);
+  assert.doesNotMatch(w.sent.find(s => s.chat === '111').text, /lost signal/);
+  const r = await w.make().accept('r1', 'dW');
+  assert.equal(r.ok, true, 'a weak-signal driver can take the ride from Telegram');
+});
+
+test('an away driver silent for more than five minutes, or without Telegram, is never asked', async () => {
+  const w = world();
+  const now = new Date(w.clockRef.t);
+  w.state.drivers = [
+    { id: 'dOld', name: 'Old', tier: 'economy', status: 'approved', online: true, away: true, onRideId: null, lat: 9.0101, lng: 38.7601, telegramId: '131', lastSeenAt: new Date(now - 301 * 1000) },
+    { id: 'dNoTg', name: 'NoTg', tier: 'economy', status: 'approved', online: true, away: true, onRideId: null, lat: 9.0101, lng: 38.7601, telegramId: null, lastSeenAt: new Date(now - 60 * 1000) },
+  ];
+  assert.equal(await w.make().open('r1'), 0);
+  assert.equal(w.sent.length, 0);
+});
+
+test('with three connected drivers near, no weak-signal driver takes a place', async () => {
+  const w = world();
+  w.state.drivers.push({ id: 'dW', name: 'Worku', tier: 'economy', status: 'approved', online: true, away: true, onRideId: null, lat: 9.0100, lng: 38.7600, telegramId: '121', lastSeenAt: new Date(w.clockRef.t - 30 * 1000) });
+  await w.make().open('r1');
+  assert.deepEqual(w.state.offers.map(o => o.driverId), ['dA', 'dB', 'dC']);
 });
