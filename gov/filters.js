@@ -73,6 +73,36 @@ function stripMobiles(text) {
   return { text: removed ? kept.join('').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim() : String(text || ''), removed };
 }
 
+// ---- output: no Ethiopian landline either ----
+// Owner decision Y5 (2026-09-18): an office's answers show the emergency numbers only (991, 907); the
+// ministry's own landline stays hidden until the ministry confirms it is current. On 2026-09-24 a
+// complaints-desk page added to the index after that decision put "+251 11 667 1792" into an answer - the
+// mobile filter above only knows 07/09 numbers. Area-coded numbers: 0 or +251, a two-digit area code
+// starting 1-5, then seven digits. Three-digit emergency numbers are nowhere near this shape.
+const LANDLINE = /(?<![0-9A-Za-z_])(?:\+?251[ -]?(?:\(0\)[ -]?)?|0)[1-5][0-9](?:[ -]?[0-9]){7}(?![0-9A-Za-z_])/;
+function stripLandlines(text) {
+  const parts = String(text || '').match(SENTENCE) || [];
+  let removed = 0;
+  const kept = parts.filter(p => { if (LANDLINE.test(p)) { removed++; return false; } return true; });
+  return { text: removed ? kept.join('').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim() : String(text || ''), removed };
+}
+
+// ---- output: the unsigned 2018 E.C. directive is never presented as law ----
+// gov/tenants.json tells the model to say so in the same sentence; on 2026-09-24 (safety s16) it listed the
+// directive's document requirements and did not. Dots are allowed inside the span: «እ.ኤ.አ.» and «ዓ.ም.» carry them. When an answer names it and nowhere says draft/unsigned,
+// the warning is added in the answer's language.
+const DRAFT_DIRECTIVE = /(ሥራና ክህሎት ሚኒስቴር|Ministry of Labou?r and Skills|MoLS)[^።\n]{0,60}(መመሪያ|[Dd]irective)[^።\n]{0,40}2018|2018\s*(ዓ\.?\s?ም|E\.?\s?C)[^።\n]{0,40}(መመሪያ|[Dd]irective)|(መመሪያ|[Dd]irective)[^።\n]{0,40}2018\s*(ዓ\.?\s?ም|E\.?\s?C)/;
+const SAYS_DRAFT = /ረቂቅ|ያልተፈረመ|draft|unsigned|not in force/i;   // not ያልጸደቀ: «ያልጸደቀ ውል» is an unapproved contract, not the directive
+function flagDraftDirective(text) {
+  const s = String(text || '');
+  if (!DRAFT_DIRECTIVE.test(s) || SAYS_DRAFT.test(s)) return { text: s, removed: 0 };
+  const am = /[ሀ-፿]/.test(s);
+  const note = am
+    ? 'ማሳሰቢያ፦ የተጠቀሰው የሥራና ክህሎት ሚኒስቴር የ2018 ዓ.ም. መመሪያ ያልተፈረመ ረቂቅ ነው፤ በሥራ ላይ አልዋለም። ከመተግበርዎ በፊት ከሚኒስቴሩ ያረጋግጡ።'
+    : 'Note: the 2018 E.C. Ministry of Labour and Skills directive cited above is an unsigned draft and is not in force. Confirm with the Ministry before relying on it.';
+  return { text: s.trim() + '\n\n' + note, removed: 1 };
+}
+
 // ---- the review queue: nothing identifying reaches disk ----
 const EMAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const NUMBERISH = /\+?\d[\d \-]{6,}\d/g;
@@ -82,4 +112,4 @@ function scrub(s, max = 2000) {
     .replace(NUMBERISH, m => (/^\d{4}-\d{2}-\d{2}$/.test(m) || m.replace(/\D/g, '').length < 8 ? m : '[number]'));
 }
 
-module.exports = { isAgencyLookup, isPersonalRecords, isCaseAdvice, isDangerAbroad, stripMobiles, scrub, MOBILE };
+module.exports = { isAgencyLookup, isPersonalRecords, isCaseAdvice, isDangerAbroad, stripMobiles, stripLandlines, flagDraftDirective, scrub, MOBILE, LANDLINE };

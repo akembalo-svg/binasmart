@@ -108,6 +108,8 @@ function makeOfficeAgent(office) {
     redirect: fallback,
     filters: [
       text => { const m = F.stripMobiles(text); return { text: m.text, removed: m.removed, what: 'sentence(s) carrying a mobile number' }; },
+      text => { const m = F.stripLandlines(text); return { text: m.text, removed: m.removed, what: 'sentence(s) carrying a landline number' }; },
+      text => { const d = F.flagDraftDirective(text); return { text: d.text, removed: d.removed, what: 'unsigned-draft warning added' }; },
       text => { const v = asmat.stripVerdict(text); return { text: v.text, removed: v.removed, what: 'verdict sentence(s)' }; },
     ],
     finish(c, text) { if (!String(text || '').trim()) { c.govEmpty = true; return fallback(c); } return text; },
