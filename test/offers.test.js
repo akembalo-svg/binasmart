@@ -90,7 +90,7 @@ function world(over) {
   } };
   const settings = { get: async () => ({ offerWindowS: 25, conciergeAfterS: 60, radiiKm: [3, 6, 10], commissionPct: 0 }) };
   const api = { sendMessage: async (chat, text, extra) => { sent.push({ chat, text, extra }); return { message_id: sent.length }; } };
-  const make = () => makeOffers({
+  const make = (extra) => makeOffers({ ...(extra || {}),
     prisma, geo, settings, api,
     concierge: async id => { escalated.push(id); return true; },
     cancelTimer: id => timersCancelled.push(id),
@@ -287,4 +287,35 @@ test('with three connected drivers near, no weak-signal driver takes a place', a
   w.state.drivers.push({ id: 'dW', name: 'Worku', tier: 'economy', status: 'approved', online: true, away: true, onRideId: null, lat: 9.0100, lng: 38.7600, telegramId: '121', lastSeenAt: new Date(w.clockRef.t - 30 * 1000) });
   await w.make().open('r1');
   assert.deepEqual(w.state.offers.map(o => o.driverId), ['dA', 'dB', 'dC']);
+});
+
+test('a weak-signal driver with no Telegram gets an SMS with a link to that one offer; nobody is texted without SMS', async () => {
+  const w = world();
+  w.state.drivers = [
+    { id: 'dP', name: 'Petros', tier: 'economy', status: 'approved', online: true, away: true, onRideId: null, lat: 9.0101, lng: 38.7601, telegramId: null, phone: '+251900000078', lastSeenAt: new Date(w.clockRef.t - 90 * 1000) },
+  ];
+  // without SMS there is no way to reach Petros, so he is not asked
+  assert.equal(await w.make().open('r1'), 0);
+  const texts = [];
+  const sms = { send: async (phone, text) => { texts.push({ phone, text }); return 'sent'; } };
+  const links = { url: id => 'https://bina.et/o/' + id + '.sig' };
+  assert.equal(await w.make({ sms, links }).open('r1'), 1);
+  const o = w.state.offers.find(x => x.driverId === 'dP');
+  assert.equal(texts.length, 1);
+  assert.equal(texts[0].phone, '+251900000078');
+  assert.match(texts[0].text, /Pickup: Edna Mall/);
+  assert.match(texts[0].text, /You earn 295 ETB/);
+  assert.ok(texts[0].text.endsWith('https://bina.et/o/' + o.id + '.sig'), 'the link names his own offer');
+  assert.equal(w.sent.length, 0, 'no Telegram message: he has none');
+});
+
+test('a weak-signal driver with Telegram gets Telegram, not an SMS', async () => {
+  const w = world();
+  w.state.drivers = [
+    { id: 'dW', name: 'Worku', tier: 'economy', status: 'approved', online: true, away: true, onRideId: null, lat: 9.0101, lng: 38.7601, telegramId: '121', phone: '+251900000079', lastSeenAt: new Date(w.clockRef.t - 90 * 1000) },
+  ];
+  const texts = [];
+  await w.make({ sms: { send: async (p, t) => { texts.push(t); return 'sent'; } }, links: { url: id => 'x/' + id } }).open('r1');
+  assert.equal(texts.length, 0);
+  assert.equal(w.sent.length, 1);
 });

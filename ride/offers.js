@@ -6,15 +6,19 @@
 // which is never removed. This module never escalates on its own except when every radius is
 // exhausted; dispatch.start() owns the first escalation.
 const { haversineM } = require('./geo');
+const { offerSmsText } = require('./offerLink');
 
 const MAX_PER_ROUND = 3;
 // A driver whose app went quiet (weak signal: the server calls them away after 45 s) but whose last
 // good fix is this recent can still be offered a ride through Telegram, which often gets through when
-// the app cannot. They only fill places no fully connected driver takes.
+// the app cannot — or, for a driver with no Telegram, by SMS with a bina.et/o/ link (ride/offerLink.js),
+// which arrives with no mobile data at all. They only fill places no fully connected driver takes.
 const WEAK_SIGNAL_S = 300;
 const WEAK_NOTE = '📶 Your app has lost signal — tap Accept here. · መተግበሪያው ምልክት አጥቷል፤ እዚህ ይቀበሉ።';
 
-function makeOffers({ prisma, geo, settings, api, concierge, cancelTimer, riderNotify, baseUrl, now }) {
+// sms: { send(phone, text) -> 'sent' | 'test' | 'failed' } and links: makeOfferLink(); both optional.
+function makeOffers({ prisma, geo, settings, api, concierge, cancelTimer, riderNotify, baseUrl, now, sms, links }) {
+  const bySms = !!(sms && links);
   const clock = now || Date.now;
 
   function card(ride, etaS, distanceM) {
@@ -38,15 +42,17 @@ function makeOffers({ prisma, geo, settings, api, concierge, cancelTimer, riderN
   async function eligible(ride, radiusKm) {
     const base = { status: 'approved', online: true, onRideId: null, tier: ride.tier };
     const drivers = await prisma.driver.findMany({ where: { ...base, away: false } });
-    const weak = api ? await prisma.driver.findMany({ where: { ...base, away: true, telegramId: { not: null },
-      lastSeenAt: { gte: new Date(clock() - WEAK_SIGNAL_S * 1000) } } }) : [];
+    const weakWhere = { ...base, away: true, lastSeenAt: { gte: new Date(clock() - WEAK_SIGNAL_S * 1000) } };
+    if (!bySms) weakWhere.telegramId = { not: null };
+    const weak = (api || bySms) ? await prisma.driver.findMany({ where: weakWhere }) : [];
     const asked = await prisma.rideOffer.findMany({ where: { rideId: ride.id }, select: { driverId: true } });
     const seen = new Set(asked.map(o => o.driverId));
     const near = d => d.lat != null && d.lng != null && !seen.has(d.id) &&
       haversineM({ lat: d.lat, lng: d.lng }, ride.pickup) <= radiusKm * 1000;
     const live = drivers.filter(near);
     const liveIds = new Set(live.map(d => d.id));
-    return live.concat(weak.filter(d => near(d) && d.telegramId && !liveIds.has(d.id)).map(d => ({ ...d, weak: true })));
+    const reachable = d => (d.telegramId && api) || (!d.telegramId && bySms && d.phone);
+    return live.concat(weak.filter(d => near(d) && reachable(d) && !liveIds.has(d.id)).map(d => ({ ...d, weak: true })));
   }
 
   // Rank by real driving ETA to the pickup, not straight-line distance. A routing failure falls back
@@ -85,6 +91,19 @@ function makeOffers({ prisma, geo, settings, api, concierge, cancelTimer, riderN
     await prisma.rideOffer.createMany({
       data: ranked.map(x => ({ rideId: ride.id, driverId: x.d.id, etaS: x.etaS, distanceM: x.distanceM, round: r })),
     });
+    // Weak-signal drivers without Telegram get an SMS carrying their own offer's link.
+    const bySmsNow = bySms ? ranked.filter(x => x.d.weak && !x.d.telegramId && x.d.phone) : [];
+    if (bySmsNow.length) {
+      const made = await prisma.rideOffer.findMany({ where: { rideId: ride.id, status: 'open' } });
+      for (const x of bySmsNow) {
+        const o = made.find(m => m.driverId === x.d.id);
+        if (!o) continue;
+        try {
+          const st = await sms.send(x.d.phone, offerSmsText(ride, x.etaS, links.url(o.id)));
+          if (st !== 'sent' && st !== 'test') console.error('[ride/offers] offer SMS ' + st + ' for driver ' + x.d.id);
+        } catch (e) { console.error('[ride/offers] offer SMS failed for driver ' + x.d.id + ': ' + e.message); }
+      }
+    }
     for (const x of ranked) {
       if (!x.d.telegramId || !api) continue;
       try {
@@ -98,7 +117,7 @@ function makeOffers({ prisma, geo, settings, api, concierge, cancelTimer, riderN
       } catch (e) { console.error('[ride/offers] offer push failed for driver ' + x.d.id + ': ' + e.message); }
     }
     const weakN = ranked.filter(x => x.d.weak).length;
-    console.log('[ride/offers] ride ' + ride.id + ' offered to ' + ranked.length + ' driver(s)' + (weakN ? ' (' + weakN + ' by Telegram only, weak signal)' : '') + ', round ' + r + ' (' + radii[r - 1] + ' km)');
+    console.log('[ride/offers] ride ' + ride.id + ' offered to ' + ranked.length + ' driver(s)' + (weakN ? ' (' + weakN + ' weak signal: Telegram or SMS only)' : '') + ', round ' + r + ' (' + radii[r - 1] + ' km)');
     return ranked.length;
   }
 
