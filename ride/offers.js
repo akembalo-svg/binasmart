@@ -14,11 +14,21 @@ const MAX_PER_ROUND = 3;
 // the app cannot — or, for a driver with no Telegram, by SMS with a bina.et/o/ link (ride/offerLink.js),
 // which arrives with no mobile data at all. They only fill places no fully connected driver takes.
 const WEAK_SIGNAL_S = 300;
+// An SMS can take a while to arrive, so an offer sent by SMS stays open this long. The ride does not
+// wait for it: at the normal window it is offered further out as usual, and whoever accepts first wins.
+// Which offers went by SMS is kept in memory; after a restart they simply close at the normal window.
+const SMS_WINDOW_S = 90;
 const WEAK_NOTE = '📶 Your app has lost signal — tap Accept here. · መተግበሪያው ምልክት አጥቷል፤ እዚህ ይቀበሉ።';
 
 // sms: { send(phone, text) -> 'sent' | 'test' | 'failed' } and links: makeOfferLink(); both optional.
 function makeOffers({ prisma, geo, settings, api, concierge, cancelTimer, riderNotify, baseUrl, now, sms, links }) {
   const bySms = !!(sms && links);
+  const smsOffers = new Set();   // offer ids sent by SMS and still open
+  const widened = new Set();     // SMS offers past the normal window whose ride was already offered further out
+  function windowFor(offerId, baseS) {
+    const b = baseS || 25;
+    return smsOffers.has(offerId) ? Math.max(SMS_WINDOW_S, b) : b;
+  }
   const clock = now || Date.now;
 
   function card(ride, etaS, distanceM) {
@@ -100,7 +110,8 @@ function makeOffers({ prisma, geo, settings, api, concierge, cancelTimer, riderN
         if (!o) continue;
         try {
           const st = await sms.send(x.d.phone, offerSmsText(ride, x.etaS, links.url(o.id)));
-          if (st !== 'sent' && st !== 'test') console.error('[ride/offers] offer SMS ' + st + ' for driver ' + x.d.id);
+          if (st === 'sent' || st === 'test') smsOffers.add(o.id);
+          else console.error('[ride/offers] offer SMS ' + st + ' for driver ' + x.d.id);
         } catch (e) { console.error('[ride/offers] offer SMS failed for driver ' + x.d.id + ': ' + e.message); }
       }
     }
@@ -164,25 +175,36 @@ function makeOffers({ prisma, geo, settings, api, concierge, cancelTimer, riderN
   // Scheduled by index.js. Expiry is measured from createdAt, so a restart can never strand an offer.
   async function expire() {
     const s = await settings.get();
-    const cut = new Date(clock() - (s.offerWindowS || 25) * 1000);
+    const baseS = s.offerWindowS || 25, t = clock();
+    const cut = new Date(t - baseS * 1000), smsCut = t - Math.max(SMS_WINDOW_S, baseS) * 1000;
     const stale = await prisma.rideOffer.findMany({ where: { status: 'open', createdAt: { lt: cut } } });
     if (!stale.length) return 0;
-    const lastRound = new Map();
-    for (const o of stale) lastRound.set(o.rideId, Math.max(lastRound.get(o.rideId) || 1, o.round || 1));
-    await prisma.rideOffer.updateMany({ where: { status: 'open', createdAt: { lt: cut } }, data: { status: 'expired', decidedAt: new Date(clock()) } });
+    const lastRound = new Map(), close = [];
+    for (const o of stale) {
+      const bySmsOffer = smsOffers.has(o.id);
+      const due = !bySmsOffer || new Date(o.createdAt).getTime() < smsCut;
+      // Widen once when an offer passes the normal window, and once more when an SMS offer finally closes.
+      const trigger = due || !widened.has(o.id);
+      if (due) { close.push(o.id); smsOffers.delete(o.id); widened.delete(o.id); } else widened.add(o.id);
+      if (trigger) lastRound.set(o.rideId, Math.max(lastRound.get(o.rideId) || 1, o.round || 1));
+    }
+    if (close.length) await prisma.rideOffer.updateMany({ where: { id: { in: close }, status: 'open' }, data: { status: 'expired', decidedAt: new Date(t) } });
     let again = 0;
     for (const [rideId, round] of lastRound) {
       try {
         const n = await open(rideId, round + 1);
-        if (n) again++;
-        else if (concierge) await concierge(rideId); // every radius exhausted — hand it to a human
+        if (n) { again++; continue; }
+        if (!concierge) continue;
+        // Every radius exhausted — hand it to a human, unless an SMS driver can still answer.
+        const waiting = await prisma.rideOffer.findMany({ where: { rideId, status: 'open' } });
+        if (!waiting.length) await concierge(rideId);
       } catch (e) { console.error('[ride/offers] re-dispatch failed for ride ' + rideId + ': ' + e.message); }
     }
     if (again) console.log('[ride/offers] re-dispatched ' + again + ' ride(s) after expiry');
     return again;
   }
 
-  return { open, accept, decline, expire, MAX_PER_ROUND, WEAK_SIGNAL_S };
+  return { open, accept, decline, expire, windowFor, MAX_PER_ROUND, WEAK_SIGNAL_S, SMS_WINDOW_S };
 }
 
 module.exports = { makeOffers, MAX_PER_ROUND };

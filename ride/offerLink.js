@@ -33,7 +33,7 @@ function offerSmsText(ride, etaS, url) {
   const mins = Math.max(1, Math.round((etaS || 0) / 60));
   const pick = String((ride.pickup && ride.pickup.label) || '—').slice(0, 40);
   return 'አዲስ ጉዞ · New ride\nPickup: ' + pick + ' (' + mins + ' min)\nYou earn ' + ride.driverTakeEtb + ' ETB\n'
-    + 'ፈጥነው ይቀበሉ · Accept fast: ' + url;
+    + 'በ90 ሰከንድ ይቀበሉ · Accept within 90 s: ' + url;
 }
 
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -112,7 +112,8 @@ function offerPage(fastify, { prisma, offers, links, settings, baseUrl, now } = 
       if (ride.driverId === offer.driverId && ACTIVE.includes(ride.status)) return send(reply, 200, tripView(ride, baseUrl));
       if (offer.status === 'open' && !ride.driverId && ['requested', 'dispatching'].includes(ride.status)) {
         const s = await settings.get();
-        const left = Math.round((s.offerWindowS || 25) - (clock() - new Date(offer.createdAt).getTime()) / 1000);
+        const windowS = offers.windowFor ? offers.windowFor(offer.id, s.offerWindowS || 25) : (s.offerWindowS || 25);
+        const left = Math.round(windowS - (clock() - new Date(offer.createdAt).getTime()) / 1000);
         if (left > 0) return send(reply, 200, openView(ride, offer, left));
         return send(reply, 200, closedView('⌛ ጊዜው አልፎበታል · This offer has expired'));
       }

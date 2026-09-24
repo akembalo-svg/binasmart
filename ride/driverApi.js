@@ -104,9 +104,11 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
       const ride = await prisma.ride.findUnique({ where: { id: o.rideId } });
       if (!ride || ride.driverId || !['requested', 'dispatching'].includes(ride.status)) continue;
       const pi = await poolInfo(ride.id);
+      // An offer that also went by SMS has a longer window; the app's ring must say the same.
+      const ws = offers && offers.windowFor ? offers.windowFor(o.id, windowS) : windowS;
       out.push({ rideId: ride.id, etaS: o.etaS, distanceM: o.distanceM, round: o.round,
-        expiresInS: Math.max(0, Math.round((new Date(o.createdAt).getTime() + windowS * 1000 - clock()) / 1000)),
-        windowS: windowS,
+        expiresInS: Math.max(0, Math.round((new Date(o.createdAt).getTime() + ws * 1000 - clock()) / 1000)),
+        windowS: ws,
         tier: ride.tier, pickup: ride.pickup, dropoff: ride.dropoff, fareEtb: ride.fareEtb,
         driverTakeEtb: ride.driverTakeEtb, tripDistanceM: ride.distanceM, tripDurationS: ride.durationS,
         pool: pi ? { riders: pi.seats.length, corridor: pi.corridor.name, corridorAm: pi.corridor.nameAm, stops: pi.corridor.stops.map(s => s.label) } : null });

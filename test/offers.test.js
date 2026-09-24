@@ -74,7 +74,7 @@ function world(over) {
   };
   function match(o, where) {
     if (!where) return true;
-    if (where.id && o.id !== where.id) return false;
+    if (where.id && (where.id.in ? !where.id.in.includes(o.id) : o.id !== where.id)) return false;
     if (where.rideId && o.rideId !== where.rideId) return false;
     if (where.driverId && o.driverId !== where.driverId) return false;
     if (where.status && o.status !== where.status) return false;
@@ -318,4 +318,48 @@ test('a weak-signal driver with Telegram gets Telegram, not an SMS', async () =>
   await w.make({ sms: { send: async (p, t) => { texts.push(t); return 'sent'; } }, links: { url: id => 'x/' + id } }).open('r1');
   assert.equal(texts.length, 0);
   assert.equal(w.sent.length, 1);
+});
+
+test('an SMS offer stays open for 90 s while the ride is offered further out at 25 s, and only then does anything reach a human', async () => {
+  const w = world();
+  w.state.drivers = [
+    { id: 'dP', name: 'Petros', tier: 'economy', status: 'approved', online: true, away: true, onRideId: null, lat: 9.0101, lng: 38.7601, telegramId: null, phone: '+251900000078', lastSeenAt: new Date(w.clockRef.t - 60 * 1000) },
+  ];
+  const sms = { send: async () => 'sent' }, links = { url: id => 'https://bina.et/o/' + id };
+  const o = w.make({ sms, links });
+  assert.equal(await o.open('r1'), 1);
+  const smsOffer = w.state.offers[0];
+  assert.equal(o.windowFor(smsOffer.id, 25), 90);
+  // 30 s: past the normal window. The SMS offer stays open; nobody else is near, but no human yet either.
+  w.clockRef.t += 30 * 1000; await o.expire();
+  assert.equal(smsOffer.status, 'open');
+  assert.deepEqual(w.escalated, [], 'the SMS driver can still answer');
+  // a later sweep before 90 s changes nothing
+  w.clockRef.t += 20 * 1000; await o.expire();
+  assert.equal(smsOffer.status, 'open');
+  // Petros accepts at 50 s and gets the ride
+  const r = await o.accept('r1', 'dP');
+  assert.equal(r.ok, true);
+});
+
+test('an unanswered SMS offer closes at 90 s and the ride then goes to a human', async () => {
+  const w = world();
+  w.state.drivers = [
+    { id: 'dP', name: 'Petros', tier: 'economy', status: 'approved', online: true, away: true, onRideId: null, lat: 9.0101, lng: 38.7601, telegramId: null, phone: '+251900000078', lastSeenAt: new Date(w.clockRef.t - 60 * 1000) },
+  ];
+  const o = w.make({ sms: { send: async () => 'sent' }, links: { url: id => 'x/' + id } });
+  await o.open('r1');
+  w.clockRef.t += 30 * 1000; await o.expire();
+  w.clockRef.t += 61 * 1000; await o.expire();
+  assert.equal(w.state.offers[0].status, 'expired');
+  assert.deepEqual(w.escalated, ['r1']);
+});
+
+test('a Telegram or in-app offer keeps the normal window', async () => {
+  const w = world();
+  const o = w.make();
+  await o.open('r1');
+  assert.equal(o.windowFor(w.state.offers[0].id, 25), 25);
+  w.clockRef.t += 26 * 1000; await o.expire();
+  assert.ok(w.state.offers.filter(x => x.round === 1).every(x => x.status === 'expired'));
 });
