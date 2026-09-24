@@ -1168,7 +1168,7 @@ fastify.post('/api/assistant', async (req, reply) => {
     const voice = (lang === 'am' || lang === 'am-latin') ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : (lang === 'om' ? '\n\n## Afaan Oromoo voice (glossary + rules)\n' + knowledge.voice('om') : '');
     const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
     let toolOut = '';   // every tool result this turn, so a figure can be traced to its source
-    const runTool = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', prisma, memory: mem, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
+    const runTool = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', prisma, memory: mem, telegramId: u.telegramId || null, lang, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
       handover: h => biniHandover({ ...h, userKey, channel, lang, user: known || u, message: msg, history: hist }) });
     const execute = async (name, args) => {
       const r = await runTool(name, args);

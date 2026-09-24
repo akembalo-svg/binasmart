@@ -51,6 +51,14 @@ const DEFS = [
       bodyHtml: { type: 'string', description: 'Duties, requirements and experience, in the employer\'s own words' },
       howToApply: { type: 'string', description: 'Email, office address or application link' },
       submitter: { type: 'string', description: 'Who is posting it, if they say' } } } },
+  // 24 September 2026: 128 people had 5,848 conversations with Bini and 2 of them ever subscribed to a
+  // job alert. The product existed; nothing ever offered it. A person asking about work is exactly the
+  // person who wants to hear when the next one opens, and asking them costs one sentence.
+  { name: 'job_alert', description: 'Subscribe this person to a daily alert for new vacancies in a field of work, or stop one, or list what they get. OFFER THIS whenever someone asks about jobs, says they are looking for work, or searches a field and finds nothing today - one short question, "shall I tell you when a new one opens?", and set it up if they say yes. Telegram only: it has nowhere to send to on the website, and the tool will say so.',
+    parameters: { type: 'object', required: ['action'], properties: {
+      action: { type: 'string', enum: ['subscribe', 'stop', 'list'] },
+      field: { type: 'string', enum: ['all', 'banking', 'accounting', 'engineering', 'it', 'health', 'education', 'sales', 'ngo', 'logistics', 'admin', 'hospitality', 'construction', 'agriculture', 'legal', 'security', 'media'], description: 'Field of work, or "all" for every new vacancy. Required to subscribe or stop.' },
+      city: { type: 'string', description: 'Only if they name one, e.g. Addis Ababa, Adama' } } } },
   { name: 'remember', description: 'Save something about this user for next time: their name, phone, preferred language, home or work place, or a short note. For home/work pass the place NAME as value; this tool finds the coordinates itself, so do NOT call search_places first. Call it whenever the user says "remember", "my name is", "my home is", "my work is", "ቤቴ … ነው", "ስሜ … ነው", "manni koo …" — one call per fact.',
     parameters: { type: 'object', properties: { field: { type: 'string', enum: ['name', 'phone', 'lang', 'home', 'work', 'notes'] }, value: { type: 'string' }, lat: { type: 'number' }, lng: { type: 'number' } }, required: ['field', 'value'] } },
   { name: 'contact_team', description: 'Hand the conversation to the BinaSmart team (a person) with a short summary, when the user asks for a human, has a complaint you cannot resolve, or needs something only the team can do (pricing for businesses, a refund, a partner request). Tell the user the team will reply on this chat or on WhatsApp.',
@@ -181,6 +189,37 @@ function makeExecutor(ctx) {
       if (d.error) return d;
       return { ok: true, status: 'pending_review',
         tell_the_user: 'It has been sent to the BinaSmart team. A person checks every advert before it goes on the board — usually within a few hours — and it is free.' };
+    },
+    // The subscription lives on a Telegram chat id, because that is where the morning message is sent
+    // (ops/send-job-alerts.js, via @bina_smart_bot). On the website there is nowhere to send to, so the
+    // tool says so plainly rather than saving a row that can never be delivered.
+    async job_alert({ action, field, city }) {
+      if (!ctx.prisma) return { error: 'alerts unavailable' };
+      const chatId = ctx.telegramId ? String(ctx.telegramId) : null;
+      if (!chatId) return { ok: false, note: 'Job alerts are sent on Telegram, and this conversation is not on Telegram.',
+        tell_the_user: 'Open t.me/bina_smart_bot and ask me there — then I can send you the alert every morning.' };
+
+      if (action === 'list') {
+        const rows = await ctx.prisma.jobAlert.findMany({ where: { chatId, active: true }, select: { field: true, city: true } });
+        return { ok: true, alerts: rows };
+      }
+      const f = String(field || '').trim();
+      if (!f) return { ok: false, note: 'Ask which field of work first.' };
+
+      if (action === 'stop') {
+        const r = await ctx.prisma.jobAlert.updateMany({ where: { chatId, field: f }, data: { active: false } });
+        return { ok: true, stopped: r.count, tell_the_user: r.count ? 'Stopped.' : 'There was no alert for that field.' };
+      }
+      // Subscribe. lastSentAt starts now on purpose: a new subscriber gets tomorrow's vacancies, never
+      // a dump of the archive.
+      const now = new Date();
+      const row = await ctx.prisma.jobAlert.upsert({
+        where: { chatId_field: { chatId, field: f } },
+        update: { active: true, city: city || null, lang: ctx.lang === 'en' ? 'en' : (ctx.lang === 'om' ? 'om' : 'am') },
+        create: { chatId, field: f, city: city || null, lang: ctx.lang === 'en' ? 'en' : (ctx.lang === 'om' ? 'om' : 'am'), lastSentAt: now },
+      });
+      return { ok: true, field: row.field, city: row.city || null,
+        tell_the_user: 'Done — every morning I will send the new vacancies in that field. Say stop any time.' };
     },
     async remember({ field, value, lat, lng }) {
       if (!ctx.memory || !ctx.memory.persistent) return { ok: false, note: 'This channel has no stable identity; nothing saved. Suggest the Telegram bot @bina_smart_bot for memory.' };
