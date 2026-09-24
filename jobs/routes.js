@@ -556,6 +556,98 @@ const ogJobs = cat => {
       ogImage: ogJobs(null) }));
   });
 
+  // ---- The company directory ----
+  // Until today every company page was an island: reachable from a vacancy and from nowhere else, so
+  // Google had no way in and no reason to believe the pages belonged together. /employers is that way
+  // in, and a page per sector answers a search nobody here answers well - "construction companies in
+  // Addis Ababa" is a real query with no good Ethiopian result.
+  //
+  // Only companies with a vacancy that is still open are listed. Same rule as the sitemap: a directory
+  // padded with companies that are not hiring asks Google to rank a promise we are not keeping.
+  async function hiringNow() {
+    const now = new Date();
+    const jobs = await prisma.job.findMany({
+      where: { published: true, OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }] },
+      select: { employerId: true, deadline: true },
+    });
+    const live = new Map();
+    for (const j of jobs) if (!isClosed(j.deadline, now)) live.set(j.employerId, (live.get(j.employerId) || 0) + 1);
+    return live;
+  }
+
+  function employerCard(e, n, lang) {
+    return `<a class="jc" href="/employer/${encodeURIComponent(e.slug)}" style="display:flex;gap:12px;align-items:center;padding:12px 14px">
+      ${avatarFor(e, 44)}
+      <span style="flex:1;min-width:0">
+        <b style="display:block">${escH(e.name)}</b>
+        <small class="sans" style="color:var(--mut)">${escH(e.sector || '')}${e.sector ? ' · ' : ''}📍 ${escH(e.city)}</small>
+      </span>
+      <span class="t-tag">${n} ${lang === 'en' ? (n === 1 ? 'vacancy' : 'vacancies') : 'ክፍት'}</span>
+    </a>`;
+  }
+
+  async function employersPage(req, reply, sectorSlug) {
+    const lang = langOf(req);
+    const def = sectorSlug ? BY_SLUG.get(sectorSlug) : null;
+    if (sectorSlug && !def) return reply.code(404).type('text/html').send(shell({
+      title: 'አልተገኘም', desc: '', canonical: 'https://bina.et/employers', body: '<main><article class="art"><h1>አልተገኘም</h1></article></main>', active: 'jobs' }));
+
+    const live = await hiringNow();
+    const ids = [...live.keys()];
+    const emps = ids.length ? await prisma.employer.findMany({
+      where: { id: { in: ids }, ...(def ? { sector: catLabel(def.slug, 'en') } : {}) },
+      select: { id: true, slug: true, name: true, city: true, sector: true, logoUrl: true },
+    }) : [];
+    emps.sort((a, b) => (live.get(b.id) || 0) - (live.get(a.id) || 0) || a.name.localeCompare(b.name));
+
+    // Every sector that actually has somebody hiring, for the chips at the top.
+    const bySector = new Map();
+    if (!def) {
+      const all = ids.length ? await prisma.employer.findMany({ where: { id: { in: ids } }, select: { sector: true } }) : [];
+      for (const e of all) if (e.sector) bySector.set(e.sector, (bySector.get(e.sector) || 0) + 1);
+    }
+
+    const chips = def ? '' : CATEGORIES.map(c => {
+      const n = bySector.get(catLabel(c.slug, 'en')) || 0;
+      return n ? `<a class="t-tag" href="/employers/${c.slug}">${escH(lang === 'en' ? c.en : c.am)} <b>${n}</b></a>` : '';
+    }).join('');
+
+    const heading = def
+      ? (lang === 'en' ? def.en + ' companies hiring in Ethiopia' : 'በ' + def.am + ' ዘርፍ ሠራተኛ እየቀጠሩ ያሉ ድርጅቶች')
+      : (lang === 'en' ? 'Companies hiring in Ethiopia' : 'በኢትዮጵያ ሠራተኛ እየቀጠሩ ያሉ ድርጅቶች');
+
+    const body = `<main><article class="art">
+      ${langToggle(req)}
+      <h1>${escH(heading)}</h1>
+      <p class="lead">${emps.length} ${lang === 'en'
+        ? 'companies with at least one vacancy open right now. Every one is a company that actually advertised — nothing here is invented.'
+        : 'ድርጅቶች አሁን ክፍት የሥራ ቦታ አላቸው። ሁሉም በእውነት ማስታወቂያ ያወጡ ናቸው።'}</p>
+      ${chips ? `<div class="t-tags sans" style="margin:10px 0 18px">${chips}</div>` : ''}
+      ${def ? `<p class="sans" style="margin:0 0 14px"><a href="/employers">← ${lang === 'en' ? 'all sectors' : 'ሁሉም ዘርፎች'}</a></p>` : ''}
+      <div style="display:flex;flex-direction:column;gap:10px">${emps.map(e => employerCard(e, live.get(e.id) || 0, lang)).join('')}</div>
+      ${emps.length ? '' : `<p class="sans">${lang === 'en' ? 'Nobody in this sector is hiring today.' : 'በዚህ ዘርፍ ዛሬ የሚቀጥር የለም።'}</p>`}
+    </article></main>`;
+
+    reply.type('text/html').send(shell({
+      title: def
+        ? (lang === 'en' ? def.en + ' companies hiring in Ethiopia — ' + emps.length + ' with open vacancies'
+                         : 'በ' + def.am + ' ዘርፍ የሚቀጥሩ ድርጅቶች — ' + emps.length)
+        : (lang === 'en' ? 'Companies hiring in Ethiopia — ' + emps.length + ' with open vacancies'
+                         : 'በኢትዮጵያ የሚቀጥሩ ድርጅቶች — ' + emps.length),
+      desc: def
+        ? (lang === 'en' ? emps.length + ' ' + def.en.toLowerCase() + ' companies in Ethiopia with vacancies open now — each with its address, its logo and what it is hiring for.'
+                         : 'በ' + def.am + ' ዘርፍ ' + emps.length + ' ድርጅቶች አሁን ክፍት የሥራ ቦታ አላቸው።')
+        : (lang === 'en' ? 'Every Ethiopian company advertising a vacancy on BinaSmart right now, by sector, with addresses and logos.'
+                         : 'በቢናስማርት ላይ አሁን ማስታወቂያ ያወጡ የኢትዮጵያ ድርጅቶች — በዘርፍ፣ ከአድራሻና ከምልክት ጋር።'),
+      canonical: 'https://bina.et/employers' + (def ? '/' + def.slug : ''),
+      extraHead: JOBS_HEAD, body, active: 'jobs', ogImage: ogJobs(def && def.slug),
+    }));
+  }
+
+  fastify.get('/employers', async (req, reply) => employersPage(req, reply, null));
+  fastify.get('/employers/:sector', async (req, reply) => employersPage(req, reply, String(req.params.sector || '')));
+
+
   // Publishing. Owner key only for now: at 2,000 a day this becomes a harvester writing through the same
   // function, and the employer matching above is what keeps that from creating 2,000 companies a day.
   fastify.post('/api/ops/jobs', async (req, reply) => {
