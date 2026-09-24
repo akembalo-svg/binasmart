@@ -733,6 +733,7 @@ const ogJobs = cat => {
       <p class="lead">${emps.length} ${lang === 'en'
         ? 'companies with at least one vacancy open right now. Every one is a company that actually advertised — nothing here is invented.'
         : 'ድርጅቶች አሁን ክፍት የሥራ ቦታ አላቸው። ሁሉም በእውነት ማስታወቂያ ያወጡ ናቸው።'}</p>
+      <p class="sans" style="font-size:13.5px;margin:0 0 12px">🏢 ${lang === 'en' ? 'Is your company listed? Open its page and tap «Is this your company?» to add your exact address and map pin — free.' : 'ድርጅትዎ እዚህ አለ? ገጹን ከፍተው «ይህ የእርስዎ ድርጅት ነው?» በመጫን ትክክለኛ አድራሻዎንና የካርታ ቦታዎን በነጻ ያክሉ።'}</p>
       ${chips ? `<div class="t-tags sans" style="margin:10px 0 18px">${chips}</div>` : ''}
       ${def ? `<p class="sans" style="margin:0 0 14px"><a href="/employers">← ${lang === 'en' ? 'all sectors' : 'ሁሉም ዘርፎች'}</a></p>` : ''}
       <div style="display:flex;flex-direction:column;gap:10px">${emps.map(e => employerCard(e, live.get(e.id) || 0, lang)).join('')}</div>
