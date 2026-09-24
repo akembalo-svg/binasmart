@@ -41,7 +41,8 @@
   ];
   var nav = window.navigator || {};
   var light = (nav.deviceMemory && nav.deviceMemory <= 2) || (nav.hardwareConcurrency && nav.hardwareConcurrency <= 4);
-  var N = S.length, STEP = 360 / N, M = light ? 30 : 60, H = 168, R = 360;
+  var N = S.length, STEP = 360 / N, M = light ? 20 : 30, R = 360;
+  var H = parseInt(getComputedStyle(stage).getPropertyValue('--ring-h'), 10) || 168;   // panel height, set by the page
   var tilt = document.getElementById('tilt'), rimTop = document.getElementById('rimTop'), rimBot = document.getElementById('rimBot');
   var dName = document.getElementById('dName'), dText = document.getElementById('dText'), dOpen = document.getElementById('dOpen'), count = document.getElementById('count');
 
@@ -61,15 +62,19 @@
 
   function wrapDeg(d) { d = d % 360; if (d > 180) d -= 360; if (d < -180) d += 360; return d; }
 
-  function layout() {
-    R = Math.max(290, Math.min(400, stage.clientWidth * 0.95));
+  function layout(radius) {
+    // The panel height follows the room the page gives the ring, so the ring fills the screen on any phone.
+    var sh = stage.clientHeight || 300;
+    H = Math.round(Math.max(110, Math.min(200, sh * 0.62)));
+    tilt.style.top = Math.round(Math.max(26, sh * 0.2)) + 'px';
+    R = radius || Math.max(290, Math.min(430, stage.clientWidth * 0.95));
     var W = 2 * R * Math.sin(Math.PI / N) + 1.5, sw = 2 * R * Math.sin(Math.PI / M) + 0.4;
     cards.forEach(function (c, i) {
-      c.style.width = W + 'px'; c.style.left = (-W / 2) + 'px';
+      c.style.width = W + 'px'; c.style.left = (-W / 2) + 'px'; c.style.height = H + 'px';
       c.style.transform = 'rotateY(' + (i * STEP + STEP / 2) + 'deg) translateZ(' + R + 'px)';
     });
     strips.forEach(function (st, k) {
-      st.style.width = sw + 'px'; st.style.left = (-sw / 2) + 'px';
+      st.style.width = sw + 'px'; st.style.left = (-sw / 2) + 'px'; st.style.height = H + 'px';
       st.style.transform = 'rotateY(' + (k * 360 / M) + 'deg) translateZ(' + R + 'px)';
     });
     tilt.style.transform = 'translateZ(' + (-R) + 'px) translateY(' + (H / 2) + 'px) rotateX(-13deg) translateY(' + (-H / 2) + 'px)';
@@ -77,6 +82,43 @@
       var e = r[0]; e.style.width = e.style.height = (2 * R) + 'px'; e.style.left = e.style.top = (-R) + 'px';
       e.style.transform = 'translateY(' + r[1] + 'px) rotateX(90deg)';
     });
+  }
+
+  // After drawing, measure the ring as the eye sees it (tilt and perspective make it taller than its
+  // panels, mostly the flat rim seen at an angle), then scale the whole ring down if it needs to and
+  // centre it, so every phone shows the entire ring inside its space.
+  function drawn() {
+    var boxes = [rimTop.getBoundingClientRect(), rimBot.getBoundingClientRect()];
+    cards.forEach(function (c) { boxes.push(c.getBoundingClientRect()); });
+    return { top: Math.min.apply(null, boxes.map(function (b) { return b.top; })),
+             bot: Math.max.apply(null, boxes.map(function (b) { return b.bottom; })),
+             // width from the glass slices themselves: a rim's box is its whole flat square, far wider than the eye sees
+             left: Math.min.apply(null, strips.map(function (e) { return e.getBoundingClientRect().left; })),
+             right: Math.max.apply(null, strips.map(function (e) { return e.getBoundingClientRect().right; })) };
+  }
+  // Fit the height (scale the whole ring, centre it), then widen the circle until its sides reach the
+  // screen edges: a wider radius makes the panels wider, never the letters stretched.
+  function fitHeight(s) {
+    var base = 'translateZ(' + (-R) + 'px) translateY(' + (H / 2) + 'px) rotateX(-13deg) translateY(' + (-H / 2) + 'px)';
+    tilt.style.transform = base;
+    var d = drawn(), room = s.height - 12, k = Math.min(1.35, room / (d.bot - d.top));
+    tilt.style.transform = 'scale(' + k.toFixed(3) + ') ' + base;
+    // perspective makes size and scale not quite proportional: correct once more on the measured result
+    d = drawn(); k = Math.min(1.35, k * room / (d.bot - d.top));
+    tilt.style.transform = 'scale(' + k.toFixed(3) + ') ' + base;
+    for (var pass = 0; pass < 3; pass++) {
+      d = drawn();
+      var shift = (s.top + (s.height - (d.bot - d.top)) / 2) - d.top;
+      if (Math.abs(shift) < 1) break;
+      tilt.style.top = ((parseFloat(tilt.style.top) || 0) + shift) + 'px';
+    }
+  }
+  // Only the height is fitted. The radius is capped (layout), so on a tablet or a computer the ring keeps a
+  // phone-like shape instead of stretching into a thin oval with tiny panels.
+  function fit() {
+    var s = stage.getBoundingClientRect();
+    if (!s.height) return;
+    fitHeight(s);
   }
 
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -150,7 +192,7 @@
   });
   document.getElementById('ringNext').addEventListener('click', function () { touched = true; snapTo(nearest() + STEP); });
   document.getElementById('ringPrev').addEventListener('click', function () { touched = true; snapTo(nearest() - STEP); });
-  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { layout(); render(); }, 120); });
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { layout(); render(); fit(); }, 120); });
 
   function nudge() {
     if (touched || reduce) return;
@@ -166,5 +208,5 @@
     io.observe(stage);
   }
 
-  layout(); render();
+  layout(); render(); fit();
 })();

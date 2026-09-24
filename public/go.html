@@ -216,6 +216,59 @@ body.chat{overflow:hidden}
 .rb{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--sheet);color:var(--ind);display:grid;place-items:center}
 .rb svg.i{width:20px;height:20px}
 .open:focus-visible,.rb:focus-visible,.ride:focus-visible{outline:3px solid var(--sa);outline-offset:2px}
+
+/* ---- compact:v1 — the whole start screen fits one phone screen ---- */
+.top{padding:calc(5px + env(safe-area-inset-top)) 4px 5px}
+.ask:not(.open) .who{align-items:center}
+.ask:not(.open) .who .bm{width:28px;height:28px;font-size:14px;flex:none}
+.ask:not(.open) .who p{font-size:13px;line-height:1.25}
+.ask:not(.open) .who p br{display:none}
+.ask:not(.open) .who p .en{font-size:11.5px;margin-left:6px}
+.wm b{font-size:24px}
+.me{min-height:38px;padding:3px 12px 3px 4px}.me .av{width:30px;height:30px}
+.ask:not(.open) .tibeb{margin:9px 18px 0;height:9px}
+.ask:not(.open) .who{padding:7px 18px 0}
+.ask:not(.open) .form{padding:0 14px 10px}
+.ask:not(.open) .q:placeholder-shown{font-size:clamp(24px,6.8vw,28px);line-height:1.15;min-height:0;height:calc(1.15em + 10px)}
+.ask:not(.open) .q{padding:6px 4px 2px}
+.ask:not(.open) .acts{margin-top:2px}
+.ask:not(.open) .mic,.ask:not(.open) .send{width:44px;height:44px}
+.tries{margin-top:10px}
+.try{min-height:36px;padding:5px 12px;font-size:13.5px}
+.svc{margin-top:12px}
+.ride{padding:9px 14px;margin-bottom:8px;gap:12px}
+.ride .ic{width:38px;height:38px;border-radius:12px}
+.ride b{font-size:17px}.ride small{font-size:12px;margin-top:0}
+.ringhead h2{font-size:18px}
+/* one screen, no scrolling: the ring takes whatever height the phone has left */
+.wrap{min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+main{flex:1;display:flex;flex-direction:column}
+.svc{flex:1;display:flex;flex-direction:column}
+.ringzone{flex:1;display:flex;flex-direction:column}
+.stage{flex:1 1 auto;height:auto;min-height:170px;max-height:460px}
+/* the ring area runs edge to edge of the SCREEN, also on tablets and wide windows, not only the 520 px column */
+.ringzone .stage{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);max-width:none}
+html,body{overflow-x:hidden}
+@media (max-height:680px){.tries{display:none}.svc{margin-top:10px}}
+.face{padding:12px 11px}
+.card .ic{width:38px;height:38px;border-radius:12px}.card .ic svg{width:20px;height:20px}
+.card b{font-size:18px;font-weight:800;letter-spacing:-.1px}.card small{font-size:12.5px;font-weight:600;color:var(--ink2)}
+.floor{height:18px}
+.detail{padding:6px;gap:6px}
+.detail p b{font-size:15px}.detail p span{font-size:12px}
+.rb{width:40px;height:40px}.open{min-height:40px;padding:0 14px}
+.foot{margin-top:8px;font-size:11.5px;line-height:1.45}
+.wrap{padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+
+/* ---- smooth:v1 — lighter to draw while the ring turns ---- */
+.washes i{filter:none;opacity:.55}
+.washes .w1{background:radial-gradient(closest-side,#8F8AF0,rgba(143,138,240,0))}
+.washes .w2{background:radial-gradient(closest-side,#F3C27A,rgba(243,194,122,0))}
+.washes .w3{background:radial-gradient(closest-side,#6FD8BE,rgba(111,216,190,0))}
+.card .ic{box-shadow:none}
+.detail{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.9)}
+.stage{contain:layout paint}
+.face{-webkit-font-smoothing:antialiased}
 </style>
 </head>
 <body>
@@ -289,7 +342,7 @@ body.chat{overflow:hidden}
 </div>
 <script src="/static/agent-chat-core.js?v=1"></script>
 <script src="/static/go/app.js?v=5" defer></script>
-<script src="/static/go/ring.js?v=3" defer></script>
+<script src="/static/go/ring.js?v=4" defer></script>
 <script src="/static/pwa.js?v=1" defer></script>
 </body>
 </html>
