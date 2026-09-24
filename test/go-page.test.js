@@ -10,21 +10,32 @@ const root = path.join(__dirname, '..');
 const pub = path.join(root, 'public');
 const html = fs.readFileSync(path.join(pub, 'go.html'), 'utf8');
 const js = fs.readFileSync(path.join(pub, 'go', 'app.js'), 'utf8');
+const ring = fs.readFileSync(path.join(pub, 'go', 'ring.js'), 'utf8');
 const G = require('../public/go/app.js');
 const plain = x => JSON.parse(JSON.stringify(x));
 
-test('go.html: light only, its own manifest, the shared chat core, and only the five chosen services', () => {
+test('go.html: light only, its own manifest, the shared chat core, Ride on its own and every service on the ring', () => {
   assert.ok(!/prefers-color-scheme:\s*dark/.test(html), 'no dark theme');
   assert.ok(html.includes('content="light only"'));
   assert.ok(html.includes('rel="manifest" href="/go.webmanifest"'));
   assert.ok(html.includes('src="/static/agent-chat-core.js?v=1"'), 'reuses the /afiya /asmat core read-only');
   assert.match(html, /src="\/static\/go\/app\.js\?v=\d+"/);
-  const tiles = [...html.matchAll(/<a class="t[^"]*" href="([^"]+)"/g)].map(m => m[1]);
-  assert.deepEqual(tiles, ['/news', '/tenders', '/guides', '/jobs', '/ride']);
+  assert.ok(/<a class="ride" href="\/ride">/.test(html), 'Ride is its own card, not on the ring');
+  assert.match(html, /src="\/static\/go\/ring\.js\?v=\d+"/);
+  assert.ok(html.includes('id="stage"') && html.includes('id="ringPrev"') && html.includes('id="ringNext"') && html.includes('id="dOpen"'));
   assert.ok(html.includes('placeholder="ምን ልርዳዎ?"'));
   assert.equal((html.match(/class="try"/g) || []).length, 4, 'four example questions');
   assert.ok(html.includes('env(safe-area-inset-top)') && html.includes('env(safe-area-inset-bottom)'));
   assert.ok(/<meta name="robots" content="noindex">/.test(html), 'app page, not a second home page for search');
+});
+
+test('ring.js: fifteen services, every one a site path, Ride not among them, and it respects reduced motion', () => {
+  const paths = [...ring.matchAll(/'(\/[a-z-]+)', '[a-z]+', '#[0-9A-F]{6}'\]/g)].map(m => m[1]);
+  assert.equal(paths.length, 15);
+  assert.equal(new Set(paths).size, 15, 'no service twice');
+  assert.ok(!paths.includes('/ride') && !paths.includes('/go') && !paths.includes('/login'));
+  assert.ok(ring.includes('prefers-reduced-motion'));
+  assert.ok(!/\(\?<[=!]/.test(ring), 'no regex lookbehind (old Android Chrome cannot parse it)');
 });
 
 test('app.js writes replies as text, never as HTML, and never forces a sign-in', () => {
