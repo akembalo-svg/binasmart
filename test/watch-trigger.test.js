@@ -101,7 +101,8 @@ test('a queued pack runs its own freshness check, one at a time, and only that p
     appendTriggers([item(), item({ office: 'mols', source: { office: 'mols', pack: 'law' } },
       { text: 'የሥራ ፈቃድ መመሪያ', url: 'https://t.me/FDRE_MoLSofficial/91' })], { registry, dir });
     const ran = [];
-    const r = refetch({ dir, lock: path.join(dir, '.lock'), runFreshness: p => ran.push(p), busy: () => 0, log: () => {} });
+    const r = refetch({ dir, lock: path.join(dir, '.lock'), runFreshness: p => ran.push(p), busy: () => 0, log: () => {},
+      registry: () => true });   // about order and the lock, not about which packs have a sources.json on this disk
     assert.deepEqual(ran, ['banking', 'law'], 'in order, one at a time, and no other pack');
     assert.deepEqual(r.ran.map(x => x.ok), [true, true]);
     assert.equal(fs.existsSync(path.join(dir, '.lock')), false, 'the lock is dropped when the run ends');

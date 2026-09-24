@@ -7,7 +7,7 @@ section: "accounts"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
+lastChecked: "2026-09-23"
 contentHash: "2c47e59edf109a1655be9a3a59c5c30f0f7cda1e"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
@@ -360,33 +360,11 @@ Saving account that entitles customers a privilege for higher than normal saving
 
 - Can be withdrawn through cash, account to account transfer, Debit Card internet and mobile banking, standing instruction
 
-DB Star |
-DB Prime |
-DB Prime Plus |
+DB Star: Impressive interest rate; Priority in foreign currency provision for travel abroad; Amex Gold card; Gift Card; Overdraft Privilege
 
-Impressive interest rate |
-Interest greater than DB Star |
-Interest greater than DB star and DB prime |
+DB Prime: Interest greater than DB Star; Priority in foreign currency provision for travel abroad; Dashen Branded Gold Debit card; Gift Card; Privilege for Checkbook
 
-Priority in foreign currency provision for travel abroad |
-Priority in foreign currency provision for travel abroad |
-Priority in foreign currency provision for travel abroad |
-
-Amex Gold card |
-Dashen Branded Gold Debit card |
-Dashen Branded Platinum Debit card |
-
-Gift Card |
-Gift Card |
-Premium Customer ID (Priority queuing in banking services) |
-
-Overdraft Privilege |
-Privilege for Checkbook |
-Dedicated Relationship Manager |
-
-|
-|
-Privilege for Checkbook |
+DB Prime Plus: Interest greater than DB star and DB prime; Priority in foreign currency provision for travel abroad; Dashen Branded Platinum Debit card; Premium Customer ID (Priority queuing in banking services); Dedicated Relationship Manager; Privilege for Checkbook
 
 - Customers should fulfill the usual due diligence requirement for account opening
 

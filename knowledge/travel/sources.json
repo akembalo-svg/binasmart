@@ -13,6 +13,8 @@
   "sites": [
     {
       "id": "ethiopian-airlines",
+      "tableRows": true,
+      "tableRowsNote": "The help-and-contact pages lay out their tables one <td> per source line, so htmlToText wrote the call-centre numbers and the area-manager contacts one cell per line and nothing said which country a number belonged to. tableRows (ops/packs/fetch-pack.js) writes each row as one line naming its column headers; every cell copied exactly. Turned on 2026-09-23 after the header guard: a first row whose cell ends in \":\" or holds a web or email address is not a header, so the worldwide-contacts page, which is label/value lists (\"Phone:\"), is left as it was. Dry run: 3 documents rewritten, every digit run kept, no number added.",
       "slugPrefix": false,
       "name": "Ethiopian Airlines",
       "nameAm": "የኢትዮጵያ አየር መንገድ",
@@ -67,8 +69,13 @@
         "^/et/explore/fleet/seat-map(/|$)",
         "^/et/explore/fleet/modern-aircrafts$",
         "^/et/explore/fleet/interior-features$",
+        "^/et/services/add-on-services/meet-and-greet$",
+        "^/et/book/booking/charter-flights/passenger-charter-flight$",
+        "^/et/services/help-and-contact/global-customer-interaction-centre-numbers$",
+        "^/et/information/rules-and-regulations$",
         "\\.(pdf|jpg|jpeg|png|gif|svg|zip|docx?|xlsx?|mp4|mp3)$"
       ],
+      "whyDenyCopies": "Four pages are another page of the site printed again at a second address, and the pack's no-duplicate rule keeps one copy (measured on the documents of 2026-09-23). /services/help-and-contact/global-customer-interaction-centre-numbers is byte for byte the text of /services/help-and-contact/call-center-numbers (same title, same table); /information/rules-and-regulations is byte for byte /information/rules-and-regulations/website-terms-of-use; /services/add-on-services/meet-and-greet is /meet-and-greet-services-at-addis-ababa-airport plus the add-ons side menu; and /book/booking/charter-flights/passenger-charter-flight is the charter questions and answers of /book/booking/charter-flights plus the words of an empty booking form. The copy that stays: the call-center-numbers page, the website-terms-of-use page (the text is the terms of use), the meet-and-greet page without the side menu, and the charter page that also carries the charter introduction. Denied from the fetch and their documents removed from the pack, as for the fleet pages above: the text is not missing, it is in the copy that stays.",
       "whyDenyFleet": "The per-aircraft seat-map pages (/explore/fleet/seat-map/plane/<tail>, one per registration: A350 x3, B737 x2, B777 x2, B787 x4, Q-400 x2) and the two index pages above them are the same navigation list of thirteen tail numbers printed thirteen more times, plus a paragraph of airframe description. They answer nothing a passenger asks: the seat map itself is a picture, so the text that reaches the index is the list, the legend and the aircraft's specification. The two hub pages, /explore/fleet/modern-aircrafts and /explore/fleet/interior-features, are link tiles padded with the corporate-travel FAQ that /book/special-deals/corporate-travel already carries in full. Denied from the fetch, so neither this script nor the weekly freshness job asks for them again, and the documents are removed from the pack rather than marked gone — they are not missing, they were never worth indexing. What a passenger CAN ask about stays: Cloud Nine cabin and seat features under /services/on-board-services and /book/manage/upgrade-to-cloud-nine, and the B787 cabin pages under /explore/fleet/interior-features/<page>, which the $ anchors above leave allowed.",
       "sections": [
         { "key": "baggage", "titleAm": "ሻንጣ", "match": "^/et/information/baggage-information(/|$)" },
@@ -86,7 +93,26 @@
         { "key": "et-specials", "titleAm": "ShebaMiles፣ ሆሊደይስና ስካይላይት", "match": "^/et/explore/et-specials(/|$)" },
         { "key": "fleet-network", "titleAm": "አውሮፕላኖችና መዳረሻዎች", "match": "^/et/explore/(fleet|network)(/|$)" },
         { "key": "updates", "titleAm": "የጉዞ ማሳሰቢያዎች", "match": "^/et/(travel-update|tsa-pre-check|ethiopian-app|meet-and-greet)" }
-      ]
+      ],
+      "sharedText": [
+        { "home": "special-needs-travelling-with-pets", "pages": "^baggage-information-special-baggage$",
+          "note": "The pets part of the special-baggage page is the travelling-with-pets page, word for word (2,523 characters)." },
+        { "home": "baggage-information-free-baggage-allowance", "pages": "^baggage-information-",
+          "note": "The 'Free Baggage Allowance' tab of the baggage questions-and-answers accordion (its questions 1 to 5: pieces and kilos per class, carry-on dimensions, the laptop bag, how many bags) is printed on eight baggage pages. It stays on the free-baggage-allowance page, the one page that prints that tab alone." },
+        { "home": "baggage-information-carry-on-baggage", "pages": "^baggage-information-",
+          "note": "The 'Restricted' and 'Carry on baggage' tabs of the same accordion are printed on seven baggage pages. They stay on the carry-on page: most of the questions in them are carry-on questions." },
+        { "home": "check-in-online-check-in", "pages": "^check-in-",
+          "note": "The online check-in questions and answers (25 questions and the table of error codes, 9,645 characters) are printed on the online-check-in, web-check-in and check-in-process pages. The online-check-in page prints all of them; the other two print a subset. They stay there." },
+        { "home": "manage-manage-booking", "pages": "^(manage|booking)-",
+          "note": "The 'Personalize your trip' tiles (lounge, e-SIM, excess baggage, ShebaMiles, Wi-Fi, priority boarding and the rest, 3,369 characters) are printed on six booking and manage-booking pages. They stay on the manage-booking page; every tile also has an add-on page of its own." },
+        { "home": "cloud-nine-services-medium-and-long-haul-flights", "pages": "^on-board-services-",
+          "note": "The medium- and long-haul Cloud Nine text is its own page, and the Cloud Nine, in-flight-meal-menu and economy-services pages print parts of it again." },
+        { "home": "on-board-services-cloud-nine-services", "pages": "^on-board-services-in-flight-meal-menu$",
+          "note": "The short-haul Cloud Nine paragraphs of the Cloud Nine page are printed again on the in-flight-meal-menu page." },
+        { "home": "add-on-services-preferred-seat", "pages": "^on-board-services-economy-services$",
+          "note": "The preferred-seat description is printed again on the economy-services page." }
+      ],
+      "sharedTextNote": "ops/packs/fetch-pack.js dropSharedText: a run of paragraphs that the home document also holds word for word, 200 characters or more, is taken out of the other pages the rule names; rules apply in order, so each block ends on exactly one page. Turned on 2026-09-23: the copies were the reason English baggage and check-in questions found their answer on four or five sibling pages before the page about the question, which kept this pack on the old chunker (knowledge/index.js LINE_SAFE_OPT_OUT)."
     },
     {
       "id": "ethiopian-cargo",

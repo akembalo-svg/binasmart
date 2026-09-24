@@ -14,7 +14,7 @@ packFormat: "2"
 
 # Ethiopian Airlines — Economy Services
 
-Ethiopian Airlines — on-board — Economy Services. On this page: Economy Class, Preferred Zone Seat, Medium and Long-haul flights, Extra leg room.
+Ethiopian Airlines — on-board — Economy Services. On this page: Economy Class.
 
 በአማርኛ፦ በበረራ ላይ — Economy Services። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
 
@@ -47,15 +47,3 @@ In Flight Meal Menu
 
 Fly with Ethiopian Airlines and experience a comfortable journey in our spacious Economy Class seats equipped with the latest in-flight entertainment. Enjoy warm Ethiopian hospitality with individual attention that makes every flight memorable.
 Savor a full-course hot meal along with a selection of wines, beers, and beverages, including light snacks. Our skilled chefs prepare fresh and varied meals of the highest quality for your enjoyment. Sit back, relax, and let us make your travel experience truly delightful from takeoff to landing
-
-## Preferred Zone Seat
-
-As a rule, the preferred seating area is located in the front part of Economy Class, directly behind Business or Premium Economy Class. These seats enable you to leave the aircraft quickly after landing, making your journey even easier and more flexible.
-
-# Medium and Long-haul flights
-
-Enjoy our Cloud 9 service with a variety of delicious international dishes infused with homegrown ingredients and tastes of Ethiopian national dishes, prepared by our top chefs making your journey pleasant.
-
-## Extra leg room
-
-These seats are available in both Premium Economy and Economy Class.

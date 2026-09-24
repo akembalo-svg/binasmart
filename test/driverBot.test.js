@@ -205,3 +205,20 @@ test('a typed colour is accepted and normalised; "Other" leaves the column empty
   await u.b.handleUpdate(photo('lic')); await u.b.handleUpdate(photo('car'));
   assert.equal(u.prisma.drivers[0].vehicleColour, null, '"Other" stores nothing rather than the word Other');
 });
+
+test('after Accept in Telegram the driver gets the passenger, the pickup and a directions button, so a weak line is enough', async () => {
+  const t = bot({ accept: async (rideId, driverId) => ({ ok: true, rideId, driverId }), decline: async () => ({ ok: true }) });
+  t.prisma.drivers.push({ id: 'd9', name: 'Abel', telegramId: '555', tier: 'economy', plate: 'AA 1', status: 'approved', online: true, away: true, rating: 5, ridesCount: 3, earningsTodayEtb: 0 });
+  t.prisma.ride = { findUnique: async ({ where }) => (where.id === 'r1' ? {
+    id: 'r1', riderName: 'Sara', riderPhone: '+251900000077', fareEtb: 295, paymentMethod: 'cash',
+    pickup: { lat: 9.01, lng: 38.76, label: 'Edna Mall' }, dropoff: { lat: 9.04, lng: 38.75, label: 'Piassa' } } : null) };
+  await t.b.handleUpdate(tap('acc:r1'));
+  const last = t.api.sent[t.api.sent.length - 1];
+  assert.match(last.text, /Sara · \+251900000077/);
+  assert.match(last.text, /Pickup · መነሻ: Edna Mall/);
+  assert.match(last.text, /Drop-off · መድረሻ: Piassa/);
+  assert.match(last.text, /295 ETB · CASH/);
+  const kb = last.extra.reply_markup.inline_keyboard;
+  assert.equal(kb[0][0].web_app.url, 'https://bina.et/drive');
+  assert.equal(kb[1][0].url, 'https://www.google.com/maps/dir/?api=1&destination=9.01,38.76&travelmode=driving');
+});

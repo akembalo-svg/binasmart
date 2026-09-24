@@ -7,15 +7,15 @@ section: "fees"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-16"
-lastChecked: "2026-09-17"
-contentHash: "75bdaa96f83c6b1c008b10d672de16d5c4049f8f"
+lastChecked: "2026-09-23"
+contentHash: "60dcdbbfa63149dead86d7562a1dbf6094b13cad"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
 # Ethio telecom — telebirr — telebirr Pricing · ኢትዮ ቴሌኮም — ቴሌብር: የቴሌብር ታሪፍ
 
-Ethio telecom — telebirr — fees — telebirr Pricing. On this page: Cash-in New Tariff, Cash-out New Tariff, telebirr to bank transfer tariff.
+Ethio telecom — telebirr — fees — telebirr Pricing. On this page: Cash-in New Tariff, Cash-out New Tariff.
 
 በአማርኛ፦ የቴሌብር ታሪፍ — telebirr Pricing። ይህ ገጽ ከኢትዮ ቴሌኮም — ቴሌብር ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
 
@@ -221,24 +221,6 @@ Tariff |
 75,000 |
 
 25 |
-
-## telebirr to bank transfer tariff
-
-S.N | Band | tariff |
-1 | 1 |
-2 | 101 to 500 | 3 |
-3 | 501 to 1500 | 6 |
-4 | 1501 to 5000 | 9 |
-5 | 5001 to 75000 | 15 |
-
-## telebirr to telebirr (P2P) transfer tariff
-
-S.N | Band | tariff |
-1 | 1 |
-2 | 101 to 500 | 2 |
-3 | 501 to 1500 | 4 |
-4 | 1501 to 5000 | 6 |
-5 | 5001 to 75000 | 8 |
 
 -
 Tigrinya

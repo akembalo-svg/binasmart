@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const { makeOwners } = require('./owners');
 const { isClaimed } = require('./claimed');
+const { makeAccountOwners } = require('./accountOwners');
 const { normPhone, phoneKey } = require('../ride/phone');
 const { makeTgApi } = require('../ride/tgApi');
 
@@ -67,10 +68,17 @@ module.exports = function registerBusiness(fastify, deps) {
   const COOKIE = 'bsown';
   const tokenOf = req => { const m = (req.headers.cookie || '').match(/(?:^|;\s*)bsown=([A-Za-z0-9_-]+)/); return m ? m[1] : (req.headers['x-owner-token'] || null); };
   const setCookie = (reply, token) => reply.header('set-cookie', COOKIE + '=' + token + '; Path=/; Max-Age=' + (30 * 24 * 3600) + '; HttpOnly; Secure; SameSite=Lax');
+  // One sign-in for all owners (business/accountOwners.js): a valid bsown session wins, exactly as before;
+  // without one, a signed-in account opens the shop or venue its ACTIVE OWNER memberships name, and only those.
+  const acct = makeAccountOwners({ prisma });
   async function me(req, reply) {
     const s = await owners.session(tokenOf(req));
-    if (!s) { reply.code(401).send({ ok: false, error: 'sign_in' }); return null; }
-    return s;
+    if (s) return s;
+    const uid = req.authUser && req.authUser.id;
+    const all = uid ? await acct.list(uid) : [];
+    const t = acct.pick(all, acct.pickOf(req));
+    if (t) return acct.asSession(t, uid, all);
+    reply.code(401).send({ ok: false, error: 'sign_in' }); return null;
   }
 
   const pubShop = (s, extra) => ({ id: s.id, slug: s.slug, name: s.name, nameAm: s.nameAm, category: s.category, categoryAm: CAT_AM[s.category] || null,
@@ -217,11 +225,12 @@ module.exports = function registerBusiness(fastify, deps) {
     if (deps.onClaimVerified) { try { await deps.onClaimVerified(req, r); } catch (e) { console.error('[business] claim link: ' + e.message); } }
     return { ok: true, kind: r.kind, token: r.token };
   });
-  fastify.post('/api/business/logout', async (req, reply) => { await owners.signOut(tokenOf(req)); reply.header('set-cookie', COOKIE + '=; Path=/; Max-Age=0'); return { ok: true }; });
+  // Also forgets the account's page choice; the account session itself is ended by the page (/api/auth/sign-out).
+  fastify.post('/api/business/logout', async (req, reply) => { await owners.signOut(tokenOf(req)); reply.header('set-cookie', [COOKIE + '=; Path=/; Max-Age=0', acct.clearCookie]); return { ok: true, account: !!(req.authUser && req.authUser.id) }; });
 
   fastify.get('/api/business/me', async (req, reply) => {
     const s = await me(req, reply); if (!s) return;
-    const pages = await owners.pagesFor(s.session);
+    const pages = s.account ? acct.pages(s.account, s.session.shopId || s.session.venueId) : await owners.pagesFor(s.session);
     if (s.kind === 'venue') return { ok: true, kind: 'venue', pages, venue: { id: s.venue.id, name: s.venue.name, nameAm: s.venue.nameAm, slug: s.venue.slug, phone: s.venue.phone, address: s.venue.address } };
     const shop = s.shop; const slug = await ensureSlug(shop);
     const [products, offers, orders] = await Promise.all([
@@ -233,6 +242,15 @@ module.exports = function registerBusiness(fastify, deps) {
   });
   fastify.post('/api/business/switch', async (req, reply) => {
     const s = await me(req, reply); if (!s) return;
+    if (s.account) {
+      // Only a page in this account's own memberships; the id from the body is checked, never trusted.
+      const want = String((req.body || {}).id || '');
+      const t = acct.ID_RE.test(want) ? s.account.find(x => x.id === want) : null;
+      if (!t) return reply.code(403).send({ ok: false, error: 'not_yours' });
+      reply.header('set-cookie', acct.pickCookie(t.id));
+      const x = t.shop || t.venue;
+      return { ok: true, kind: t.kind, id: t.id, name: x.nameAm || x.name };
+    }
     const r = await owners.switchTo(tokenOf(req), (req.body || {}).id);
     return r.ok ? r : reply.code(403).send(r);
   });

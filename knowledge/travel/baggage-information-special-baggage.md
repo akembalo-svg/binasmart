@@ -14,7 +14,7 @@ packFormat: "2"
 
 # Ethiopian Airlines — Special Baggage
 
-Ethiopian Airlines — baggage — Special Baggage. On this page: New Entry Requirements: USA, Disclaimer.
+Ethiopian Airlines — baggage — Special Baggage.
 
 በአማርኛ፦ ሻንጣ — Special Baggage። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
 
@@ -22,36 +22,6 @@ Source: https://www.ethiopianairlines.com/et/information/baggage-information/spe
 
 #
 Special Baggage
-
-Carry on baggage
-
-Carry on baggage
-
-Free baggage allowance
-
-Special baggage
-
-Extra baggage
-
-Lost, delayed and damaged baggage
-
-Restricted baggage
-
-Interline and partners baggage policy
-
-Carry on baggage
-
-Free baggage allowance
-
-Special baggage
-
-Extra baggage
-
-Lost, delayed and damaged baggage
-
-Restricted baggage
-
-Interline Partners Baggage
 
 We understand that some items require special considerations when it comes to traveling.Whether you're planning to bring sports equipment, weapons, oversized luggage, musical instruments, or pets on your journey, we are here to assist you. From detailed instructions on handling sports equipment and oversized luggage to guidelines for traveling with weapons, musical instruments, and pets, this section provides the essential information you need for a seamless journey. Let's make your travel experience extraordinary!
 
@@ -410,25 +380,6 @@ Pets
 Travelling with Pets
 A. Policy
 
-- Cats and dogs, as defined in current passenger tariffs, may be transported in the cabin or baggage compartment when in a container and accompanied by a passenger or shipped as cargo.
-- Ethiopian Airlines accepts only dogs and cats in the cabin, with a limited number allowed per compartment:
-
-Aircraft Type | C9 Class | Economy Class |
-Wide Body | 2 | 4 |
-Narrow Body | 1 | 2 |
-
-Note: You must bring your pet in a box that does not exceed 55 x 40 x 20 cm and 8 kg (including the container). If the size or weight is more, the pet must be transported in the aircraft hold.
-
-- If the cage is larger than allowed for cabin travel, or the total weight (pet + cage) is more than 8 kg and up to 45 kg, it will be transported in the hold.
-
-- Pets (including cage) weighing more than 45 kg must be transported as cargo, following cargo procedures.
-
-- Seeing-eye dogs (trained to assist visually impaired passengers), when harnessed and muzzled, may travel in the cabin on all Ethiopian Airlines aircraft at no charge. This depends on local or government restrictions.
-
-- Hearing-ear dogs (trained to assist hearing-impaired passengers), when harnessed and muzzled, may also travel in the cabin for free. This requires advance arrangements and is subject to local or government restrictions.
-
-- Service dogs for visually or hearing-impaired passengers travel free and can stay in the cabin. You must notify the airline in advance.
-
 Snub-nosed dog and cat breeds are not accepted, due to increased breathing risks caused by stress and temperature changes during transport.
 B. Procedure on carriage of pets
 ● Pets are accepted in the cabin on all Ethiopian Q-400 aircraft.
@@ -455,26 +406,6 @@ Genral rules and application | Exception: For ET codeshare flights, the operatin
 For any Kg, use the standard size
 PET that is more than 45 KG, including the cage, shall be transported as cargo per cargo procedure
 PET/AVIH is charged the above payment only regardless of whether it is within free baggage allowance or not |
-
-- For pets over 45 kg, transport must be as cargo.
-
-- The PET/AVIH fee applies regardless of whether it fits within your free baggage allowance.
-
-- For codeshare flights, the operating carrier&rsquo;s rules apply.
-
-- The pet owner accepts all risks (injury, sickness, or death) and is responsible for meeting all legal requirements. Ethiopian Airlines is not liable if a pet is denied entry to, or transit through, any location.
-
-### New Entry Requirements: USA
-
-As of 1 August 2024, the U.S. CDC has new entry requirements for live dogs.
-Click here for more information.
-Bringing a Pet to Norway
-● To bring a pet in cabin, follow these official rules.
-To import animals, follow the import guidelines here.
-
-### Disclaimer
-
-This information is for guidance only and does not form a contract. Details may change without notice. Ethiopian Airlines is not liable for any such changes and reserves the right to interpret and apply these rules at its discretion. Ethiopian&rsquo;s interpretation is final.
 
 Others
 
@@ -548,147 +479,3 @@ Domestic Flight
 56&rdquo;-65&rdquo; | ETB 500 | ETB 2100 |
 
 Note : Flat TV with 66" and above is not accepted as accompanied baggage and may be carried as Cargo per cargo procedure & Rate Valid on/after 6-MAY-21
-
-Explore our options for additional baggage allowance and ensure a seamless journey. Click to learn more and pack without limits!
-
-Extra baggage
-
-Extra baggage
-
-Explore our options for additional baggage allowance and ensure a seamless journey. Click to learn more and pack without limits!
-
-Restricted
-
-- What are the safety concerns for cabin baggage?
-Passengers are not allowed to carry the following items in their hand baggage for passengers&rsquo; safety and security reasons. To minimize inconvenience, you are advised to check in or put these items in your checked baggage instead:
-
-Please note that these items will be retrieved at the boarding gate by the local authorities and depending on local rules and regulations, the items may not be returned to you.
-
-- What are the rules and charges for travelling with animals?
-Ethiopian shall accept only Dog or Cat into the cabin with limited number per compartment (2 in economy class and 1 in business class) with a box measuring dimensions not more than 55x40x20cms and does not exceed 8kgs including transport container, otherwise it should be loaded in belly.
-
-- Is baggage transferred when I&rsquo;m on connecting Ethiopian airlines flights?
-Yes, Ethiopian receives connecting passenger&rsquo;s baggage from other airlines. If luggage of connecting passenger is not submitted by the delivering carrier such connecting passenger should be informed using a slip prepared for this purpose that their luggage is not delivered to Ethiopian and hence not to expect at final destination.
-
-- Can I carry firearms, weapons, and ammunition in my baggage?
-Ammunition, firearms, sharp knives and/or other security-restricted items belonging to passengers shall not be carried inside cabin and/or flight deck (cockpit), and passengers must declare such items at the time of check-in. All ammunition shall be carried in the aircraft hold as checked baggage only and with approval of concerned Security Authorities.
-
-Free Baggage Allowance
-
-1. What is the free baggage allowance for my flight?
-If you are travelling in Economy class, 2 pieces 23kg each and C-9 3 pieces 23kg each Or 2 pieces of 32kg.
-Note that some weight systems depend on the routes where you are travelling.
-2. How much weight can I carry for my checked baggage?
-It depends on the route and class. If you are travelling in Economy class, 2 pieces 23kg each and C-9, 3 pieces 23kg each Or 2 pieces of 32kg.
-
-3. What are the dimensions allowed for my carry-on luggage?
-(55cmx40cmx20cm)
-4. Can I bring additional items like a laptop bag or a purse as hand luggage?
-Its possible to have the below items in addition to carry-on luggage: -
-1 Laptop, books, purse, 1iPad/1 phone but the maximum weight should not exceed 3kg.
-
-5. Are there any restrictions on the number of bags I can check in for free?
-
-Economy class 2bags and business class 2/3bags
-
-Carry on baggage
-
-- What is Ethiopian Airlines' allowed size and weight for carry-on baggage in Economy class?
-
-In Economy class with Ethiopian Airlines, passengers are allowed 1 piece of hand luggage with a maximum weight of 7 kg and a maximum dimensions equal to 23 x 40 x 55 (cm) .
-
-- What is the carry-on baggage allowance for Business class passengers with Ethiopian Airlines?
-
-Business class passengers with Ethiopian Airlines are allowed 2 pieces of hand luggage, each weighing a maximum of 7 kg.
-
-- Can I bring personal items in addition to my carry-on baggage on Ethiopian Airlines?
-
-Yes, Ethiopian Airlines allows personal accessories in addition to the specified carry-on baggage allowance in both Economy and Business class.
-
-- Are there restrictions on the types of items I can bring in my carry-on bag with Ethiopian Airlines?
-
-Ethiopian Airlines, like other airlines, may have restrictions on carrying liquids, gels, and certain hazardous items in carry-on bags. Familiarize yourself with Ethiopian Airlines' specific policies.
-
-- Can I bring food on board in my carry-on bag with Ethiopian Airlines?
-
-Generally, you can bring snacks and non-liquid food items in your carry-on bag with Ethiopian Airlines, adhering to their specified policies.
-
-- What happens if my carry-on bag exceeds the size or weight limit with Ethiopian Airlines?
-
-If your carry-on bag exceeds the specified size or weight limit with Ethiopian Airlines, you may be subject to additional fees, or you may need to check the bag.
-
-- Is there a difference in carry-on allowances for different classes of service with Ethiopian Airlines?
-
-Yes, there is a difference. Business class passengers with Ethiopian Airlines have a higher allowance, with 2 pieces of hand luggage weighing 7 kg each, compared to Economy class.
-
-Explore our options for additional baggage allowance and ensure a seamless journey. Click to learn more and pack without limits!
-
-Extra baggage
-
-Extra baggage
-
-Explore our options for additional baggage allowance and ensure a seamless journey. Click to learn more and pack without limits!
-
-Restricted
-
-- What are the safety concerns for cabin baggage?
-Passengers are not allowed to carry the following items in their hand baggage for passengers&rsquo; safety and security reasons. To minimize inconvenience, you are advised to check in or put these items in your checked baggage instead:
-
-Please note that these items will be retrieved at the boarding gate by the local authorities and depending on local rules and regulations, the items may not be returned to you.
-
-- What are the rules and charges for travelling with animals?
-Ethiopian shall accept only Dog or Cat into the cabin with limited number per compartment (2 in economy class and 1 in business class) with a box measuring dimensions not more than 55x40x20cms and does not exceed 8kgs including transport container, otherwise it should be loaded in belly.
-
-- Is baggage transferred when I&rsquo;m on connecting Ethiopian airlines flights?
-Yes, Ethiopian receives connecting passenger&rsquo;s baggage from other airlines. If luggage of connecting passenger is not submitted by the delivering carrier such connecting passenger should be informed using a slip prepared for this purpose that their luggage is not delivered to Ethiopian and hence not to expect at final destination.
-
-- Can I carry firearms, weapons, and ammunition in my baggage?
-Ammunition, firearms, sharp knives and/or other security-restricted items belonging to passengers shall not be carried inside cabin and/or flight deck (cockpit), and passengers must declare such items at the time of check-in. All ammunition shall be carried in the aircraft hold as checked baggage only and with approval of concerned Security Authorities.
-
-Free Baggage Allowance
-
-1. What is the free baggage allowance for my flight?
-If you are travelling in Economy class, 2 pieces 23kg each and C-9 3 pieces 23kg each Or 2 pieces of 32kg.
-Note that some weight systems depend on the routes where you are travelling.
-2. How much weight can I carry for my checked baggage?
-It depends on the route and class. If you are travelling in Economy class, 2 pieces 23kg each and C-9, 3 pieces 23kg each Or 2 pieces of 32kg.
-
-3. What are the dimensions allowed for my carry-on luggage?
-(55cmx40cmx20cm)
-4. Can I bring additional items like a laptop bag or a purse as hand luggage?
-Its possible to have the below items in addition to carry-on luggage: -
-1 Laptop, books, purse, 1iPad/1 phone but the maximum weight should not exceed 3kg.
-
-5. Are there any restrictions on the number of bags I can check in for free?
-
-Economy class 2bags and business class 2/3bags
-
-Carry on baggage
-
-- What is Ethiopian Airlines' allowed size and weight for carry-on baggage in Economy class?
-
-In Economy class with Ethiopian Airlines, passengers are allowed 1 piece of hand luggage with a maximum weight of 7 kg and a maximum dimensions equal to 23 x 40 x 55 (cm) .
-
-- What is the carry-on baggage allowance for Business class passengers with Ethiopian Airlines?
-
-Business class passengers with Ethiopian Airlines are allowed 2 pieces of hand luggage, each weighing a maximum of 7 kg.
-
-- Can I bring personal items in addition to my carry-on baggage on Ethiopian Airlines?
-
-Yes, Ethiopian Airlines allows personal accessories in addition to the specified carry-on baggage allowance in both Economy and Business class.
-
-- Are there restrictions on the types of items I can bring in my carry-on bag with Ethiopian Airlines?
-
-Ethiopian Airlines, like other airlines, may have restrictions on carrying liquids, gels, and certain hazardous items in carry-on bags. Familiarize yourself with Ethiopian Airlines' specific policies.
-
-- Can I bring food on board in my carry-on bag with Ethiopian Airlines?
-
-Generally, you can bring snacks and non-liquid food items in your carry-on bag with Ethiopian Airlines, adhering to their specified policies.
-
-- What happens if my carry-on bag exceeds the size or weight limit with Ethiopian Airlines?
-
-If your carry-on bag exceeds the specified size or weight limit with Ethiopian Airlines, you may be subject to additional fees, or you may need to check the bag.
-
-- Is there a difference in carry-on allowances for different classes of service with Ethiopian Airlines?
-
-Yes, there is a difference. Business class passengers with Ethiopian Airlines have a higher allowance, with 2 pieces of hand luggage weighing 7 kg each, compared to Economy class.

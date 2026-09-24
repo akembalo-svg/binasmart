@@ -1577,7 +1577,7 @@
  "ethiotelecom-telebirr-telebirr-pricing": {
   "titleAm": "ኢትዮ ቴሌኮም — ቴሌብር: የቴሌብር ታሪፍ",
   "summaryAm": "ይህ ገጽ የቴሌብር አገልግሎት ታሪፎችን ያብራራል። የገንዘብ ማስገቢያ ታሪፍ ከ1 እስከ 250 ብር ነፃ ሲሆን፣ ከ20,001 እስከ 75,000 ብር ደግሞ 15 ብር ነው። የገንዘብ ማውጫ ታሪፍ ከ25.1 እስከ 50 ብር 1.2 ብር ሲሆን፣ ከ30,001 እስከ 75,000 ብር ደግሞ 25 ብር ነው።",
-  "contentHash": "75bdaa96f83c6b1c008b10d672de16d5c4049f8f",
+  "contentHash": "60dcdbbfa63149dead86d7562a1dbf6094b13cad",
   "generatedAt": "2026-09-17",
   "model": "gemini-2.5-flash"
  },

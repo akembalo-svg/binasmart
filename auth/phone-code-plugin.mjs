@@ -62,6 +62,8 @@ export const phoneCode = (options = {}) => {
       normalise: normPhone,
       sender: options.sender,
       linkPhone: (userId, phone) => identity.setVerifiedPhone(userId, phone, 'sms'),
+      // The app-store reviewer's login; off unless both variables are set. See phone-code-flow.js.
+      review: options.review || { phone: process.env.AUTH_REVIEW_PHONE || '', code: process.env.AUTH_REVIEW_CODE || '' },
       log: options.log || (m => console.log(m)),
       store: {
         find: id => ia.findVerificationValue(id),

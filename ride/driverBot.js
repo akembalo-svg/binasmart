@@ -140,6 +140,31 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
       { reply_markup: { inline_keyboard: [[{ text: '🚗 Open the driver app · መተግበሪያ', web_app: { url: baseUrl + '/drive' } }]] } });
   }
 
+  // After an Accept in Telegram: everything needed to do the trip even if the app will not load on a
+  // weak line — who, where, what to collect, and a directions button that opens Google Maps.
+  function tripText(ride) {
+    if (!ride) return '✅ Ride accepted. Open the app for turn-by-turn and the passenger\'s phone.\nጉዞው የእርስዎ ነው። መተግበሪያውን ክፈቱ።';
+    const lab = p => (p && p.label) || '—';
+    const by = ride.bookedBy && ride.bookedBy.name
+      ? ['📞 Booked by ' + ride.bookedBy.name + (ride.bookedBy.phone ? ' · ' + ride.bookedBy.phone : '') + ' (not the passenger)'] : [];
+    return ['✅ Ride accepted · ጉዞው የእርስዎ ነው', '',
+      '🙋 ' + (ride.riderName || 'Passenger') + (ride.riderPhone ? ' · ' + ride.riderPhone : '')]
+      .concat(by, [
+        '📍 Pickup · መነሻ: ' + lab(ride.pickup),
+        '🏁 Drop-off · መድረሻ: ' + lab(ride.dropoff),
+        '💰 ' + ride.fareEtb + ' ETB · ' + String(ride.paymentMethod || 'cash').toUpperCase(), '',
+        'Open the app for the map, voice directions and the trip buttons. No signal? Use the directions button below; trip steps you tap in the app are saved and sent when the signal is back.',
+        'ምልክት ከሌለ ከታች ያለውን የአቅጣጫ አዝራር ይጠቀሙ።']).join('\n');
+  }
+  function tripButtons(ride) {
+    const rows = [[{ text: '🗺 Open the trip · ጉዞውን ክፈት', web_app: { url: baseUrl + '/drive' } }]];
+    const p = ride && ride.pickup, lat = p && Number(p.lat), lng = p && Number(p.lng);
+    if (Number.isFinite(lat) && Number.isFinite(lng)) {
+      rows.push([{ text: '🧭 Directions to pickup · አቅጣጫ', url: 'https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng + '&travelmode=driving' }]);
+    }
+    return rows;
+  }
+
   // Accept / Skip straight from the offer card. The auction owns the race; this only reports it.
   async function decide(chatId, cq, what, rideId) {
     const ans = (t, alert) => api.answerCallbackQuery(cq.id, t, !!alert).catch(() => {});
@@ -159,10 +184,11 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
     }
     const r = await offers.accept(rideId, drv.id);
     if (r.ok) {
-      settle('✅ YOURS — open the app for the map and the passenger\'s number.');
-      await ans('Yours! Open the app 🚗');
-      return api.sendMessage(chatId, '✅ Ride accepted. Open the app for turn-by-turn and the passenger\'s phone.\nጉዞው የእርስዎ ነው። መተግበሪያውን ክፈቱ።',
-        { reply_markup: { inline_keyboard: [[{ text: '🗺 Open the trip · ጉዞውን ክፈት', web_app: { url: baseUrl + '/drive' } }]] } });
+      settle('✅ YOURS — the passenger and the pickup are in the next message.');
+      await ans('Yours! 🚗');
+      let ride = null;
+      try { ride = prisma.ride ? await prisma.ride.findUnique({ where: { id: rideId } }) : null; } catch (e) { ride = null; }
+      return api.sendMessage(chatId, tripText(ride), { reply_markup: { inline_keyboard: tripButtons(ride) } });
     }
     const why = r.error === 'taken' ? '😔 Another driver got this one.'
       : r.error === 'busy' ? '⚠️ Finish your current ride first.'

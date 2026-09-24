@@ -19,6 +19,9 @@
 
   function show(id) { document.querySelectorAll('.screen').forEach(function (s) { s.classList.add('hidden'); }); $(id).classList.remove('hidden'); }
   function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.remove('hidden'); clearTimeout(t._t); t._t = setTimeout(function () { t.classList.add('hidden'); }, 2600); }
+  // telebirr-gate:v1 — telebirr pay buttons only when the server says telebirr is live (sandbox = test gateway).
+  var TB_LIVE = false;
+  try { fetch('/api/telebirr/health').then(function (r) { return r.json(); }).then(function (h) { TB_LIVE = !!(h && h.enabled && h.mode === 'live'); }).catch(function () {}); } catch (e) {}
   function api(path, body) {
     return fetch(path, body ? { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) } : {}).then(function (r) { return r.json(); });
   }
@@ -317,8 +320,14 @@
     if (IN_TG) { if (['requested', 'dispatching', 'assigned', 'arriving', 'arrived'].indexOf(r.status) >= 0) TG.main('ሰርዝ · Cancel ride', cancel); else TG.mainHide(); }
     if (r.status === 'dispatching' || r.status === 'requested') {
       show('s-finding');
-      $('findTitle').innerHTML = r.concierge ? 'ሹፌር እየመደብንልዎ ነው <small>A dispatcher is assigning your driver</small>' : 'ሹፌር እየፈለግን ነው… <small>Finding your driver…</small>';
-      $('findSub').textContent = r.concierge ? 'እባክዎ ይጠብቁ — ወዲያውኑ እናሳውቅዎታለን · Please hold, we\'ll confirm shortly.' : 'Usually under a minute.';
+      // Honest about supply: with nobody online, say so, and say when the request closes by itself.
+      var none = r.concierge && r.driversOnline === 0;
+      var mins = r.closesAt ? Math.max(1, Math.ceil((new Date(r.closesAt).getTime() - Date.now()) / 60000)) : 10;
+      $('findTitle').innerHTML = none ? 'አሁን በአካባቢዎ ሹፌር የለም <small>No driver near you right now</small>'
+        : r.concierge ? 'ሹፌር እየመደብንልዎ ነው <small>A dispatcher is assigning your driver</small>' : 'ሹፌር እየፈለግን ነው… <small>Finding your driver…</small>';
+      $('findSub').textContent = none
+        ? 'ቢና ራይድ ገና በመጀመር ላይ ነው። ለ' + mins + ' ደቂቃ እንሞክራለን፤ ካልተገኘ ጥያቄዎ በራሱ ይሰረዛል — ምንም አይከፍሉም። · Bina Ride is just starting. We keep trying for ' + mins + ' more min, then cancel it for you — you pay nothing.'
+        : r.concierge ? 'እባክዎ ይጠብቁ — እስከ ' + mins + ' ደቂቃ · Please hold, up to ' + mins + ' min.' : 'Usually under a minute.';
     } else if (['assigned', 'arriving', 'arrived', 'ontrip'].includes(r.status)) {
       show('s-assigned');
       var d = r.driver || {};
@@ -341,13 +350,17 @@
       stopPoll(); window.BinaTrack.stop(); lsDel('bina_ride_active'); show('s-done');
       $('doneFare').textContent = r.fareEtb + ' ETB';
       $('payBox').innerHTML = r.paymentStatus === 'paid' ? '<div class="small">✅ ተከፍሏል · Paid</div>'
-        : ('<div class="small">💵 ለሹፌሩ በጥሬ ገንዘብ ይክፈሉ · Pay the driver in cash — ወይም · or</div>'
-          + '<button class="cta" id="payTelebirr">📱 ' + r.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr</button>'
+        : ('<div class="small">💵 ለሹፌሩ በጥሬ ገንዘብ ይክፈሉ · Pay the driver in cash' + (TB_LIVE ? ' — ወይም · or' : '') + '</div>'
+          + (TB_LIVE ? '<button class="cta" id="payTelebirr">📱 ' + r.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr</button>' : '')
           + (r.paymentMethod === 'chapa' ? '<button class="cta ghost" id="payNow">💳 Chapa</button>' : ''));
       var pn = $('payNow'); if (pn) pn.addEventListener('click', payNow);
       var pt = $('payTelebirr'); if (pt) pt.addEventListener('click', payTelebirr);
       if (r.driverRating) markStars(r.driverRating);
-    } else if (r.status === 'cancelled') { stopPoll(); window.BinaTrack.stop(); lsDel('bina_ride_active'); show('s-cancelled'); }
+    } else if (r.status === 'cancelled') {
+      stopPoll(); window.BinaTrack.stop(); lsDel('bina_ride_active'); show('s-cancelled');
+      var why = $('cancelWhy');
+      if (why) why.textContent = r.cancelledBy === 'nodriver' ? 'ሹፌር አልተገኘም፤ ምንም አልተከፈለም። እባክዎ ቆይተው ይሞክሩ። · No driver was free this time — nothing was charged. Please try again later.' : '';
+    }
   }
   // telebirr: in the SuperApp this opens the PIN sheet; on the web it goes to telebirr's checkout and comes back to /ride?id=…&paid=1
   function payTelebirrSeat(seat) {
@@ -677,7 +690,7 @@
     $('cancelFinding').classList.remove('hidden');
     render(mine);
     if (['assigned', 'arriving', 'arrived', 'ontrip'].indexOf(r.status) >= 0) { $('cancelAssigned').classList.add('hidden'); $('aFare').textContent = seat.fareEtb + ' ETB'; $('aPay').textContent = '· your seat · ' + p.filled + ' riders · cash'; if (IN_TG) TG.mainHide(); }
-    if (r.status === 'completed') { $('doneFare').textContent = seat.fareEtb + ' ETB'; $('payBox').innerHTML = seat.paid ? '<div class="small">✅ መቀመጫዎ ተከፍሏል · Seat paid with telebirr</div>' : ('<div class="small">💵 የመቀመጫዎን ' + seat.fareEtb + ' ETB ለሹፌሩ ይክፈሉ · Pay your seat to the driver in cash — ወይም · or</div><button class="cta" id="payTelebirrSeat">📱 ' + seat.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr</button>'); var ps = $('payTelebirrSeat'); if (ps) ps.addEventListener('click', function () { payTelebirrSeat(seat); }); if (seat.paid || !S.pool) { lsDel('bina_pool_active'); S.pool = null; } }
+    if (r.status === 'completed') { $('doneFare').textContent = seat.fareEtb + ' ETB'; $('payBox').innerHTML = seat.paid ? '<div class="small">✅ መቀመጫዎ ተከፍሏል · Seat paid with telebirr</div>' : ('<div class="small">💵 የመቀመጫዎን ' + seat.fareEtb + ' ETB ለሹፌሩ ይክፈሉ · Pay your seat to the driver in cash' + (TB_LIVE ? ' — ወይም · or</div><button class="cta" id="payTelebirrSeat">📱 ' + seat.fareEtb + ' ETB በቴሌብር ይክፈሉ · Pay with telebirr</button>' : '</div>')); var ps = $('payTelebirrSeat'); if (ps) ps.addEventListener('click', function () { payTelebirrSeat(seat); }); if (seat.paid || !S.pool) { lsDel('bina_pool_active'); S.pool = null; } }
     if (r.status === 'cancelled') { lsDel('bina_pool_active'); S.pool = null; }
   }
   function leavePool() {

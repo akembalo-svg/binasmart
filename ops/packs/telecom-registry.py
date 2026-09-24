@@ -11,7 +11,7 @@ Re-run it when the harvest is refreshed: it re-reads the manifests, re-chooses t
 (the page's own ?lang=am view when the harvest holds it, else the Ethiopic-slug page its hreflang link points at) and
 writes the registry again. Scope, the regulator PDF list and every note are edited here, in one place.
 """
-import json, os, re, sys, hashlib
+import html, json, os, re, sys, hashlib
 from urllib.parse import urlparse, quote
 
 HARVEST = '/root/storage/packs/telecom-manual'
@@ -123,10 +123,61 @@ allow_et = ['^/(' + alt(et_slugs) + ')(\\?lang=am)?$']
 if am_only_keys:
     allow_et.append('^(' + alt(am_only_keys) + ')$')
 
+# ---------------------------------------------------------------- ethiotelecom.et: Oromo, Somali and Tigrinya pages
+# The harvest holds the site's pages in its three other languages too (?lang=om, ?lang=so, ?lang=Tig). Each names
+# the English page it translates in its own hreflang="en" link, and that link, copied, is the only thing that
+# matches a translation to its English document. A translation is indexed when its English page is in this pack
+# (scope is decided by the page, not by the language) and it is not skipped below for a reason measured on the page.
+# It is its own document, lang om / so / ti, named <lang>-<the English slug>: a translation, not a duplicate, so it
+# stays beside the English and the Amharic page. Paragraphs it leaves in English, word for word as on the English
+# page, are taken out of it by a sharedText rule (at least 200 characters in a run), so the English text is indexed
+# once, on the English document.
+TR_LANG = {'om': 'om', 'so': 'so', 'Tig': 'ti'}
+TR_LANG_NAME = {'om': 'Afaan Oromoo', 'so': 'Somali', 'ti': 'Tigrinya'}
+TR_SKIP = {
+    '/teledrive-2?lang=om': 'an attachment (image) page: its hreflang="en" link is ?attachment_id=534318, and its text is the language switcher only (31 characters).',
+    '/teledrive?lang=so': 'an attachment (image) page: its hreflang="en" link is ?attachment_id=534318, and its text is the language switcher only (30 characters).',
+    '/teledrive?lang=Tig': 'an attachment (image) page: its hreflang="en" link is ?attachment_id=534318, and its text is the language switcher only (30 characters).',
+}
+translations = {}          # key -> (lang, English slug, English url exactly as the page links it)
+translations_skipped = {}  # key -> why
+for e in sorted(et_ok, key=lambda e: key_of(e['url'])):
+    k = key_of(e['url'])
+    mt = re.search(r'\?lang=(om|so|Tig)$', k)
+    if not mt:
+        continue
+    if k in TR_SKIP:
+        translations_skipped[k] = TR_SKIP[k]
+        continue
+    t = open(os.path.join(HARVEST, 'www.ethiotelecom.et', e['file']), encoding='utf-8', errors='replace').read()
+    h_ = re.search(r'hreflang="en" href="([^"]+)"', t)
+    en_url = html.unescape(h_.group(1)) if h_ else ''
+    en_slug = _unq(urlparse(en_url).path.strip('/')) if en_url else ''
+    if not en_url or urlparse(en_url).query or not en_slug:
+        translations_skipped[k] = 'its hreflang="en" link (' + (en_url or 'none') + ') names no English page'
+        continue
+    if en_slug not in et_slugs:
+        translations_skipped[k] = 'its English page /' + en_slug + '/ is not in this pack (out of scope), so neither is its translation'
+        continue
+    translations[k] = (TR_LANG[mt.group(1)], en_slug, en_url)
+tr_names = {}
+for k, (lang_, en_slug, en_url) in sorted(translations.items()):
+    name = lang_ + '-' + ET_AM_NAMES.get(en_slug, en_slug)
+    assert name not in tr_names.values(), 'two translations want one name: ' + name
+    tr_names[k] = name
+    path_slugs_et[k] = name
+if translations:
+    allow_et.append('^(' + alt(sorted(translations)) + ')$')
+tr_count = {}
+for k, (lang_, _s, _u) in translations.items():
+    tr_count[lang_] = tr_count.get(lang_, 0) + 1
+tr_held = ', '.join(str(n) + ' ' + TR_LANG_NAME[l] for l, n in sorted(tr_count.items())) or 'none'
+
 sections_et = []
 for key in ['packages', 'sim', 'roaming', 'coverage', 'help', 'fraud', 'legal', 'business']:
     extra = [am_choice[s_] for s_ in ET[key] if am_choice.get(s_) in am_only_keys]
     extra += [am_choice['extra:' + n_] for o_, (n_, sec_) in ET_ORPHAN_EXTRAS.items() if sec_ == key]
+    extra += sorted(k_ for k_, (l_, s_, u_) in translations.items() if s_ in ET[key])
     sections_et.append({'key': key, 'titleAm': ET_SECTIONS_AM[key],
                         'match': '^/(' + alt(ET[key]) + ')(\\?lang=am)?$' + ('|^(' + alt(extra) + ')$' if extra else '')})
 sections_et.append({'key': 'other', 'titleAm': ET_SECTIONS_AM['other'], 'match': '^/'})
@@ -268,11 +319,14 @@ sites = [
         'id': 'ethiotelecom', 'name': 'Ethio telecom', 'nameAm': 'ኢትዮ ቴሌኮም', 'host': 'www.ethiotelecom.et',
         'slugPrefix': 'telecom-ethiotelecom',
         'maskPhones': True,
+        'tableRows': True,
+        'tableRowsNote': 'Ethio telecom pages lay out their tariff tables one <td> per source line, so htmlToText wrote them one cell per line (fixed-line packages, the student package, business mobile requirements, international retailer lists) and nothing on a value line said which column it sat under. tableRows (ops/packs/fetch-pack.js) writes each row as one line naming its column headers; every cell copied exactly, the mask is applied before it. A table without a figure-free header row is left as it was. Turned on 2026-09-23 after a dry run of all six documents it rewrites (every digit run kept, no mobile added). Dashen (banking) stays off: its parallel Import/Export and DB Star columns have no row-label column. telebirr (banking) and Ethiopian Airlines (travel) were turned on 2026-09-23 once the header guard kept a headerless retailer list and label/value lists (a header cell ending in ":" or holding a web or email address) as they were.',
         'fetch': 'dir', 'dir': 'www.ethiotelecom.et', 'harvestedAt': '2026-09-21/22', 'crawlDelaySeconds': 5,
         'lang': 'en', 'hasAmharic': True,
         'titleSuffix': r'\s*[-–|]\s*Ethio telecom\s*$',
-        'langOverrides': [{'match': r'\?lang=am$', 'lang': 'am'}],
-        'langNote': 'The language is in the query string, exactly as in the banking pack: /esim is English and /esim?lang=am is Amharic, and they are two documents. A page whose ?lang=am body holds under 300 Ethiopic characters is recorded as English by the importer\'s own measurement.',
+        'langOverrides': [{'match': r'\?lang=am$', 'lang': 'am'}, {'match': r'\?lang=om$', 'lang': 'om'},
+                          {'match': r'\?lang=so$', 'lang': 'so'}, {'match': r'\?lang=Tig$', 'lang': 'ti'}],
+        'langNote': 'The language is in the query string, exactly as in the banking pack: /esim is English and /esim?lang=am is Amharic, and they are two documents. A page whose ?lang=am body holds under 300 Ethiopic characters is recorded as English by the importer\'s own measurement. ?lang=om is Afaan Oromoo (lang om), ?lang=so Somali (so) and ?lang=Tig Tigrinya (ti); see translationOf.',
         'maxPages': 400,
         'dedupAgainstPacks': ['banking'],
         'dedupNote': 'A paragraph of 80 characters or more that a live banking document already holds word for word is taken out of these pages (Ethio telecom general FAQ, Amharic, embeds the whole telebirr FAQ that the banking pack holds as ethiotelecom-am-telebirr-faq).',
@@ -285,14 +339,21 @@ sites = [
         'reach': 'unreachable from this server',
         'checked': '2026-09-22',
         'why': 'www.ethiotelecom.et answers inside Ethiopia and not from this VPS (measured 2026-09-16 for the banking pack, three https probes and one http probe, no bytes). The pages were harvested from Ibrahim\'s laptop on 2026-09-21/22 (Python stdlib fetcher, 5 s pacing, robots respected, every file sha256-verified) and copied to /root/storage/packs/telecom-manual/www.ethiotelecom.et. The harvest holds 517 HTML pages: 183 English, 319 Amharic, 13 Oromo, 1 Somali, 1 Tigrinya.',
-        'costsUs': 'The pack holds the consumer-facing package, SIM, roaming, coverage, fixed-line and FAQ pages in English and in Amharic. It does not hold the package price tables that the site draws as pictures (the documents say so where it happens), the app, or the Oromo, Somali and Tigrinya pages.',
+        'costsUs': 'The pack holds the consumer-facing package, SIM, roaming, coverage, fixed-line and FAQ pages in English and in Amharic, and the translations the site publishes of them in its other languages where they hold translated text (' + tr_held + '). It does not hold the package price tables that the site draws as pictures (the documents say so where it happens), the app, or the translations listed in translationsSkipped.',
         'workaround': 'Re-probe on every freshness run: the day www.ethiotelecom.et answers from this server this entry can become fetch: sitemap.',
         'allow': allow_et,
-        'deny': common_deny_html + [r'\?lang=(Tig|om|so)$'],
-        'denyNote': 'Oromo, Somali and Tigrinya variants stay on disk in the harvest and are NOT indexed yet (Oromo comes later). The telebirr, mobile-money, credit and saving pages (telebirr, mela, wabi, sinq, enderas, adrash, sanduq, endekise, virtual-visa-card, remittance-telebirr, airtime-top-up, international-airtime-top-up, monthly-telecom-bill-payment-options, getting-started and everything under /telebirr/) belong to the banking pack and are not allowed here: a page lives in one pack only. Enterprise IT solutions, news, investor relations, careers, galleries, promotions and the site map are out of scope by not being named in allow.',
+        'deny': common_deny_html,
+        'denyNote': 'An Oromo, Somali or Tigrinya page is allowed only by its exact address, and only when translationOf names it (see there); every other one stays on disk in the harvest. The telebirr, mobile-money, credit and saving pages (telebirr, mela, wabi, sinq, enderas, adrash, sanduq, endekise, virtual-visa-card, remittance-telebirr, airtime-top-up, international-airtime-top-up, monthly-telecom-bill-payment-options, getting-started and everything under /telebirr/) belong to the banking pack and are not allowed here: a page lives in one pack only. Enterprise IT solutions, news, investor relations, careers, galleries, promotions and the site map are out of scope by not being named in allow.',
         'pathSlugs': path_slugs_et,
-        'pathSlugsNote': 'Every Amharic page is named am-<the English slug it shares>, because ?lang=am is not a readable file name. premium-unlimited-mobile-packages carries a zero-width space in its address, which is why its escape is named by hand.',
+        'pathSlugsNote': 'Every Amharic page is named am-<the English slug it shares>, because ?lang=am is not a readable file name, and every Oromo, Somali or Tigrinya page om-, so- or ti-<the English slug it translates>. premium-unlimited-mobile-packages carries a zero-width space in its address, which is why its escape is named by hand.',
         'sections': sections_et,
+        'translationOf': {k: translations[k][2] for k in sorted(translations)},
+        'translationOfNote': 'A page in Afaan Oromoo, Somali or Tigrinya, keyed by its address, and the English page it translates, exactly as its own hreflang="en" link names it. The document header says which language the page is in and names that English page, which is a document of this pack too. Nothing is translated here: the text is the operator\'s own.',
+        'translationsSkipped': {k: translations_skipped[k] for k in sorted(translations_skipped)},
+        'sharedText': [{'home': 'telecom-ethiotelecom-' + ET_AM_NAMES.get(translations[k][1], translations[k][1]),
+                        'pages': '^' + re.escape('telecom-ethiotelecom-' + tr_names[k]) + '$',
+                        'note': 'The ' + TR_LANG_NAME[translations[k][0]] + ' page keeps some paragraphs in English, word for word as on the English page; those stay on the English document only.'}
+                       for k in sorted(translations)],
     },
     {
         'id': 'safaricom', 'name': 'Safaricom Ethiopia', 'nameAm': 'ሳፋሪኮም ኢትዮጵያ', 'host': 'www.safaricom.et',
@@ -385,4 +446,5 @@ reg = {
 }
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 json.dump(reg, open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-print('wrote', OUT, len(json.dumps(reg)), 'bytes;', len(allow_pdf), 'pdf allow entries;', len(path_slugs_et), 'et pathSlugs')
+print('wrote', OUT, len(json.dumps(reg)), 'bytes;', len(allow_pdf), 'pdf allow entries;', len(path_slugs_et), 'et pathSlugs;',
+      len(translations), 'translations (' + tr_held + '),', len(translations_skipped), 'skipped')

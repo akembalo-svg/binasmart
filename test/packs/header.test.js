@@ -70,3 +70,64 @@ test('langFor reads the site langOverrides', () => {
   const dashen = banking.sites.find(s => s.id === 'dashen');
   assert.equal(P.langFor(dashen, '/anything'), 'en');
 });
+
+// An operator that publishes one page in several languages: the header names the page's language, and a translation
+// names the English page it translates. The site, the page and every word below are invented.
+const tsite = { id: 'demo', name: 'Demo Telecom', nameAm: 'ዴሞ ቴሌኮም', lang: 'en',
+  langOverrides: [{ match: '\\?lang=am$', lang: 'am' }, { match: '\\?lang=om$', lang: 'om' }, { match: '\\?lang=so$', lang: 'so' }],
+  translationOf: { '/tajaajila?lang=om': 'https://demo.example/service/', '/adeeg?lang=so': 'https://demo.example/service/' } };
+const tpack = { headerEnTemplate: 'Source: {url} (official {siteName} page, {langWord}).', headerAmTemplate: 'ይህ ገጽ {fromAm} {langWordAm} የተወሰደ ነው።' };
+const tpage = { url: 'https://demo.example/tajaajila/?lang=om', path: '/tajaajila?lang=om', slug: 'om-service', title: 'Tajaajila',
+  text: '## Kuufama\n\nQarshii kuma tokko' };
+
+test('an Oromo page says it is Oromo, in both header languages', () => {
+  const h = P.header({ ...tpage, lang: 'om' }, tsite, '2026-09-23', tpack);
+  assert.ok(h.includes('(official Demo Telecom page, in Afaan Oromoo)'), h);
+  assert.ok(h.includes('በአፋን ኦሮሞ'), h);
+  assert.ok(!h.includes('in English'), h);
+});
+
+test('a translation names the English page it translates; a page with no translationOf says nothing of the kind', () => {
+  const tr = P.translationOfPage(tsite, '/tajaajila?lang=om', 'om');
+  assert.equal(tr, 'https://demo.example/service/');
+  const h = P.header({ ...tpage, lang: 'om', translationOf: tr }, tsite, '2026-09-23', tpack);
+  assert.ok(h.includes('This page is in Afaan Oromoo: it is Demo Telecom\'s own Afaan Oromoo version of its English page https://demo.example/service/'), h);
+  const plain = P.header({ ...tpage, lang: 'om' }, tsite, '2026-09-23', tpack);
+  assert.ok(!plain.includes('version of its English page'), plain);
+  // only a language the renderer names as a translation language is one: an English or Amharic page never is
+  assert.equal(P.translationOfPage(tsite, '/tajaajila?lang=om', 'en'), undefined);
+  assert.equal(P.translationOfPage(tsite, '/tajaajila?lang=om', 'am'), undefined);
+  assert.equal(P.translationOfPage(tsite, '/elsewhere?lang=om', 'om'), undefined);
+  assert.equal(P.translationOfPage({ id: 'x' }, '/tajaajila?lang=om', 'om'), undefined);
+  const so = P.header({ ...tpage, lang: 'so', translationOf: P.translationOfPage(tsite, '/adeeg?lang=so', 'so') }, tsite, '2026-09-23', tpack);
+  assert.ok(so.includes('in Somali') && so.includes('Somali version of its English page'), so);
+});
+
+test('a language the renderer does not know still reads "in English", as every page did before', () => {
+  assert.deepEqual(P.langWords('xx'), P.LANG_WORDS.en);
+  assert.deepEqual(P.langWords(undefined), P.LANG_WORDS.en);
+  const h = P.header({ ...tpage, lang: 'xx' }, tsite, '2026-09-23', tpack);
+  assert.ok(h.includes('in English'), h);
+});
+
+test('translationOf is written to the front matter and a re-render from disk keeps it', () => {
+  const os = require('os');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pack-tr-'));
+  const site = { ...tsite, name: 'Demo Telecom', sections: [] };
+  const pg = { ...tpage, lang: 'om', translationOf: 'https://demo.example/service/' };
+  const doc = P.renderDoc(pg, site, { today: '2026-09-23', pack: tpack });
+  assert.match(doc, /^translationOf: "https:\/\/demo\.example\/service\/"$/m);
+  assert.equal(P.readMeta(doc).translationOf, 'https://demo.example/service/');
+  // an English page carries no translationOf line at all, so no existing document changes
+  const en = P.renderDoc({ ...tpage, url: 'https://demo.example/service/', path: '/service', slug: 'service', lang: 'en' }, site, { today: '2026-09-23', pack: tpack });
+  assert.doesNotMatch(en, /^translationOf:/m);
+  const reg = { pack: { ...tpack, id: 'demo' }, sites: [{ ...site, name: site.name }] };
+  const doc2 = doc.replace(/^source_name: .*$/m, 'source_name: "Demo Telecom"');
+  fs.writeFileSync(path.join(dir, 'om-service.md'), doc2);
+  const r = P.rerenderPack(dir, reg, { dryRun: false });
+  assert.deepEqual(r.skipped, []);
+  const after = fs.readFileSync(path.join(dir, 'om-service.md'), 'utf8');
+  assert.equal(P.readMeta(after).translationOf, 'https://demo.example/service/');
+  assert.ok(after.includes('version of its English page https://demo.example/service/'), after);
+  fs.rmSync(dir, { recursive: true, force: true });
+});
