@@ -60,6 +60,12 @@ const STYLES = {
     (i ? '<span class="plus">+</span>' : '') + `<img src="${dataUri(f)}" alt="">`).join('')}</div>${
     m.logoText ? `<div class="lname">${esc(m.logoText)}</div>` : ''}</div>`,
 
+  // A mesob — the woven basket table Ethiopians eat around together. Drawn here rather than borrowed:
+  // it is the country's own everyday object, and one place where everything is brought together is
+  // exactly what a one-stop service is. Bands alternate the way the straw does.
+  mesob: (p, m) => `<div class="fig mesobfig"><div class="dome">${Array.from({ length: 7 }, (_, i) =>
+    `<span class="bnd b${i + 1}"></span>`).join('')}</div><div class="stem"></div><div class="foot"></div></div>`,
+
   // A door / gateway — access, permission, a way in.
   gate: (p, m) => `<div class="fig gate"><div class="arch"><div class="glow"></div>
       <div class="key">${esc((m.labels || [''])[0] || '')}</div></div></div>`,
@@ -155,6 +161,21 @@ function html({ title, lede, kicker, read, style, palette, motif }) {
   /* a single square mark has the whole figure to itself, so it is shown at a size people recognise */
   .marks.one img{height:132px;border-radius:30px}
   .lname{font-size:30px;font-weight:800;letter-spacing:-.4px;color:#141a24}
+
+  /* mesob */
+  .mesobfig{flex-direction:column;justify-content:center;gap:0}
+  .mesobfig .dome{position:relative;width:300px;height:190px;border-radius:150px 150px 14px 14px;overflow:hidden;
+    box-shadow:0 26px 40px -26px rgba(20,26,36,.55);border:3px solid ${p.b}}
+  .mesobfig .bnd{position:absolute;left:0;right:0;display:block}
+  .mesobfig .b1{top:0;height:34px;background:${p.b}}
+  .mesobfig .b2{top:34px;height:22px;background:#f4e3c1}
+  .mesobfig .b3{top:56px;height:26px;background:${p.a}}
+  .mesobfig .b4{top:82px;height:22px;background:#f4e3c1}
+  .mesobfig .b5{top:104px;height:30px;background:${p.b}}
+  .mesobfig .b6{top:134px;height:22px;background:#f4e3c1}
+  .mesobfig .b7{top:156px;height:34px;background:${p.a}}
+  .mesobfig .stem{width:44px;height:52px;background:linear-gradient(180deg,${p.b},${p.a});border-radius:0 0 8px 8px}
+  .mesobfig .foot{width:170px;height:20px;border-radius:12px;background:${p.b};box-shadow:0 14px 26px -16px rgba(20,26,36,.6)}
 
   /* mosaic */
   .mosaic{display:grid;grid-template-columns:repeat(3,96px);grid-template-rows:repeat(3,96px);gap:16px}
