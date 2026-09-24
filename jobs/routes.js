@@ -171,6 +171,42 @@ function jobLd(j, e, escH) {
   return '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>';
 }
 
+// schema.org Organization for a company page. Only what we hold: the name, their own website, the logo
+// we host, the address and city they advertised. No founding date, no employee count, no rating.
+function orgLd(e) {
+  const locality = cleanCity(e.city);
+  const region = regionFor(locality);
+  const ld = {
+    '@context': 'https://schema.org', '@type': 'Organization',
+    name: e.name, url: 'https://bina.et/employer/' + e.slug,
+    ...(e.nameAm && e.nameAm !== e.name ? { alternateName: e.nameAm } : {}),
+    ...(e.website ? { sameAs: absUrl(e.website) } : {}),
+    ...(e.logoUrl ? { logo: 'https://bina.et' + e.logoUrl } : {}),
+    address: { '@type': 'PostalAddress', addressCountry: 'ET',
+      ...(locality ? { addressLocality: locality } : {}), ...(region ? { addressRegion: region } : {}),
+      ...(e.address ? { streetAddress: e.address } : {}) },
+  };
+  return '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>';
+}
+
+// What a company's own adverts say about it, counted: the fields it hires in, where, on what terms,
+// since when. Every line is a tally of rows we hold - the page gets longer only by telling the truth.
+function hiringHistory(all) {
+  const tally = key => {
+    const m = new Map();
+    for (const j of all) { const v = key(j); if (v) m.set(v, (m.get(v) || 0) + 1); }
+    return [...m.entries()].sort((a, b) => b[1] - a[1]);
+  };
+  const first = all.reduce((d, j) => (j.publishedAt && (!d || j.publishedAt < d) ? j.publishedAt : d), null);
+  return {
+    total: all.length,
+    since: first,
+    cats: tally(j => j.category),
+    cities: tally(j => cleanCity(j.city)),
+    types: tally(j => j.jobType),
+  };
+}
+
 // The employer's OWN way in, pulled out of their instructions: a Google form, their recruitment page,
 // an email address. That is a link we are glad to publish - it takes the applicant to the company, not
 // to another jobs board. The boards we read from are blocked by name, which is the whole distinction:
@@ -529,6 +565,36 @@ const ogJobs = cat => {
     const open = all.filter(j => !isClosed(j.deadline, now));
     const shut = all.filter(j => isClosed(j.deadline, now));
     const mapped = e.lat != null && e.lng != null && e.locationChecked;
+    const h = hiringHistory(all);
+    const en = lang === 'en';
+    const monthYear = d => new Date(d).toLocaleDateString(en ? 'en-GB' : 'en-GB', { month: 'long', year: 'numeric' });
+    const sectorDef = e.sector ? CATEGORIES.find(c => catLabel(c.slug, 'en') === e.sector) : null;
+    // Other companies in the same line of business that are hiring today - the way sideways for a reader
+    // whose company has nothing open, and the link Google follows from one company to the next.
+    let peers = [];
+    if (sectorDef) {
+      const live = await hiringNow();
+      const ids = [...live.keys()].filter(id => id !== e.id);
+      if (ids.length) {
+        peers = await prisma.employer.findMany({ where: { id: { in: ids }, sector: e.sector },
+          select: { id: true, slug: true, name: true, city: true, sector: true, logoUrl: true } });
+        peers = peers.sort((a, b) => (live.get(b.id) || 0) - (live.get(a.id) || 0) || a.name.localeCompare(b.name)).slice(0, 6)
+          .map(p => ({ p, n: live.get(p.id) || 0 }));
+      }
+    }
+    const typeName = ty => (en ? ty.replace('-', ' ') : (TYPE_AM[ty] || ty));
+    const history = h.total ? `<div class="sans" style="padding:16px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--line);margin:0 0 18px">
+        <b style="display:block;margin-bottom:6px">${en ? '📊 Hiring history on BinaSmart' : '📊 በቢናስማርት ላይ ያለው የቅጥር ታሪክ'}</b>
+        <div style="line-height:1.8">
+          ${en
+            ? `${h.total} ${h.total === 1 ? 'advert' : 'adverts'} recorded${h.since ? ' since ' + monthYear(h.since) : ''} — ${open.length} open now, ${shut.length} closed.`
+            : `${h.since ? 'ከ' + monthYear(h.since) + ' ጀምሮ ' : ''}${h.total} ማስታወቂያዎች ተመዝግበዋል — ${open.length} አሁን ክፍት፣ ${shut.length} የተዘጉ።`}
+          ${h.cats.length ? `<div>${en ? 'Hires in' : 'የሚቀጥርባቸው ዘርፎች'}: ${h.cats.slice(0, 4).map(([c, n]) => `<a href="/jobs/category/${escH(c)}${qs(req)}">${escH(catLabel(c, lang))}</a> (${n})`).join(' · ')}</div>` : ''}
+          ${h.cities.length ? `<div>${en ? 'Places' : 'ቦታዎች'}: ${h.cities.slice(0, 4).map(([c, n]) => `${escH(c)} (${n})`).join(' · ')}</div>` : ''}
+          ${h.types.length ? `<div>${en ? 'Terms' : 'የቅጥር ዓይነት'}: ${h.types.map(([ty, n]) => `${escH(typeName(ty))} (${n})`).join(' · ')}</div>` : ''}
+        </div>
+        <div style="margin-top:6px;color:var(--mut);font-size:12.5px">${en ? 'Counted from this company\'s own adverts. Nothing here is estimated.' : 'ከድርጅቱ ራሱ ማስታወቂያዎች የተቆጠረ ነው፤ ግምት የለበትም።'}</div>
+      </div>` : '';
     const body = `<main><article class="art">
       ${langToggle(req)}
       <div style="display:flex;gap:14px;align-items:center">${avatarFor(e, 62)}
@@ -536,7 +602,7 @@ const ogJobs = cat => {
       ${e.nameAm && e.nameAm !== e.name ? `<p class="lead">${escH(e.nameAm)}</p>` : ''}
       ${e.about ? `<p class="lead">${escH(e.about)}</p>` : ''}
       <div class="t-tags sans" style="margin:8px 0 16px">
-        ${e.sector ? `<span class="t-tag">🏭 ${escH(e.sector)}</span>` : ''}
+        ${e.sector ? (sectorDef ? `<a class="t-tag" href="/employers/${sectorDef.slug}${qs(req)}">🏭 ${escH(en ? sectorDef.en : sectorDef.am)}</a>` : `<span class="t-tag">🏭 ${escH(e.sector)}</span>`) : ''}
         <span class="t-tag">📍 ${escH(e.city)}</span>
         <span class="t-tag">💼 ${open.length} ${t.open}</span>
       </div>
@@ -549,10 +615,20 @@ const ogJobs = cat => {
         ${e.email ? `<div>✉️ ${escH(e.email)}</div>` : ''}
         ${e.website ? `<div>🔗 <a href="${escH(absUrl(e.website))}" target="_blank" rel="noopener">${escH(e.website)}</a></div>` : ''}
       </div>
-      ${open.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding-bottom:8px">${t.openVac}</h2>${open.map(j => `<div class="t-card"><div><h3><a href="/jobs/${j.slug}">${escH(j.titleAm || j.title)}</a></h3><div class="t-tags sans"><span class="t-tag">📍 ${escH(j.city)}</span>${typePill(j.jobType, lang)}${dlPill(j.deadline, lang)}</div></div></div>`).join('')}` : '<div class="empty"><div class="big">💼</div><h3>${t.noJobs}</h3></div>'}
-      ${shut.length ? `<p class="sans" style="margin-top:20px;color:var(--mut);font-size:13.5px">🔒 ${shut.length} ${lang === 'en' ? 'closed' : 'የተዘጉ ማስታወቂያዎች'}</p>` : ''}
+      ${open.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding-bottom:8px">${t.openVac}</h2>${open.map(j => `<div class="t-card"><div><h3><a href="/jobs/${j.slug}">${escH(j.titleAm || j.title)}</a></h3><div class="t-tags sans"><span class="t-tag">📍 ${escH(j.city)}</span>${typePill(j.jobType, lang)}${dlPill(j.deadline, lang)}</div></div></div>`).join('')}` : `<div class="empty"><div class="big">💼</div><h3>${escH(t.noJobs)}</h3></div>`}
+      ${history}
+      ${shut.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding:14px 0 8px">🔒 ${en ? 'Past adverts' : 'ያለፉ ማስታወቂያዎች'} · ${shut.length}</h2>
+        <ul class="sans" style="margin:0 0 18px;padding-left:18px;line-height:1.9">${shut.slice(0, 12).map(j => `<li><a href="/jobs/${j.slug}${qs(req)}">${escH(j.titleAm || j.title)}</a>${j.deadline ? ` <span style="color:var(--mut);font-size:13px">· ${en ? 'closed' : 'ተዘግቷል'} ${new Date(j.deadline).toISOString().slice(0, 10)}</span>` : ''}</li>`).join('')}</ul>` : ''}
+      ${peers.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding:14px 0 8px">${en ? 'Also hiring in ' + escH(sectorDef.en) : 'በ' + escH(sectorDef.am) + ' ዘርፍ ሌሎች የሚቀጥሩ'}</h2>
+        <div style="display:flex;flex-direction:column;gap:10px">${peers.map(x => employerCard(x.p, x.n, lang)).join('')}</div>
+        <p class="sans" style="margin:10px 0 0"><a href="/employers/${sectorDef.slug}${qs(req)}" style="font-weight:700">${en ? 'All ' + escH(sectorDef.en.toLowerCase()) + ' companies hiring →' : 'በዚህ ዘርፍ ሁሉም የሚቀጥሩ ድርጅቶች →'}</a></p>` : ''}
     </article></main>`;
-    reply.type('text/html').send(shell({ title: e.name + ' · ክፍት የሥራ ቦታዎች', desc: (e.about || (e.name + ' — ክፍት የሥራ ቦታዎችና የድርጅት መገለጫ በቢናስማርት።')).slice(0, 160), canonical: 'https://bina.et/employer/' + e.slug, extraHead: JOBS_HEAD, body, active: 'jobs',
+    const thin = !open.length && h.total <= 1;
+    const desc = e.about || (en
+      ? `${e.name}${e.city ? ', ' + e.city : ''} — ${open.length} open ${open.length === 1 ? 'vacancy' : 'vacancies'} now; ${h.total} ${h.total === 1 ? 'advert' : 'adverts'} on BinaSmart${h.cats.length ? ', mostly ' + catLabel(h.cats[0][0], 'en') : ''}.`
+      : `${e.name} — አሁን ${open.length} ክፍት የሥራ ቦታ፤ በቢናስማርት ${h.total} ማስታወቂያዎች${h.cats.length ? '፣ በብዛት በ' + catLabel(h.cats[0][0], 'am') + ' ዘርፍ' : ''}።`);
+    reply.type('text/html').send(shell({ title: e.name + ' · ክፍት የሥራ ቦታዎች', desc: desc.slice(0, 160), canonical: 'https://bina.et/employer/' + e.slug,
+      extraHead: JOBS_HEAD + orgLd(e) + (thin ? '<meta name="robots" content="noindex,follow">' : ''), body, active: 'jobs',
       ogImage: ogJobs(null) }));
   });
 
