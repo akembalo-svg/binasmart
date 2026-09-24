@@ -640,7 +640,18 @@ const ogJobs = cat => {
   //
   // Only companies with a vacancy that is still open are listed. Same rule as the sitemap: a directory
   // padded with companies that are not hiring asks Google to rank a promise we are not keeping.
+  // Who is hiring today, counted over every open vacancy (~4,500 rows). Every company page asks this
+  // for its "also hiring" list, so a crawler walking 1,780 of them would recount the whole board 1,780
+  // times; measured 24 September 2026 at 50-130 ms a page against 7 ms without it. Five minutes old is
+  // fresh enough for a list of companies - the board itself changes a few times a day.
+  let hiringMemo = null;
   async function hiringNow() {
+    if (hiringMemo && Date.now() - hiringMemo.at < 300000) return hiringMemo.live;
+    const live = await countHiring();
+    hiringMemo = { at: Date.now(), live };
+    return live;
+  }
+  async function countHiring() {
     const now = new Date();
     const jobs = await prisma.job.findMany({
       where: { published: true, OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }] },
