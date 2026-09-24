@@ -42,7 +42,7 @@
  {"id":"aacity","level":"city","en":"Addis Ababa City Administration","am":"የአዲስ አበባ ከተማ አስተዳደር","handles":"city services, sub-cities, bureaus","url":"https://www.addisababa.gov.et"},
  {"id":"aawsa","level":"city","en":"Addis Ababa Water and Sewerage Authority","am":"የአዲስ አበባ ውሃና ፍሳሽ ባለሥልጣን","handles":"water connections, bills, leaks","url":"https://www.aawsa.gov.et"},
  {"id":"aapolice","level":"city","en":"Addis Ababa Police Commission","am":"የአዲስ አበባ ፖሊስ ኮሚሽን","handles":"police in Addis Ababa","url":"https://www.aapolice.gov.et"},
- {"id":"aatrade","level":"city","en":"Addis Ababa Trade Bureau","am":"የአዲስ አበባ ንግድ ቢሮ","handles":"trade licences in Addis Ababa","url":"https://www.aatb.gov.et"},
+ {"id":"aatrade","level":"city","en":"Addis Ababa Trade Bureau","am":"የአዲስ አበባ ንግድ ቢሮ","handles":"trade licences in Addis Ababa","url":"http://www.addistradebureau.gov.et","urlSource":"listed on motri.gov.et/en/regionaloffices (2026-09-17)"},
  {"id":"aarevenue","level":"city","en":"Addis Ababa Revenue Bureau","am":"የአዲስ አበባ ገቢዎች ቢሮ","handles":"city taxes, TIN for Addis businesses","url":"https://www.aarb.gov.et"},
  {"id":"aacrrsa","level":"city","en":"Addis Ababa Civil Registration and Residency Service Agency","am":"የአዲስ አበባ የሲቪል ምዝገባና የነዋሪነት አገልግሎት ኤጀንሲ","handles":"birth, marriage and death certificates, kebele ID","url":"https://www.aacrrsa.gov.et"},
  {"id":"aaroads","level":"city","en":"Addis Ababa City Roads Authority","am":"የአዲስ አበባ ከተማ መንገዶች ባለሥልጣን","handles":"city roads","url":"https://www.aacra.gov.et"},
