@@ -88,7 +88,9 @@ test('without Gemini (no key, or the API down) search still works on keywords, a
   assert.ok((await down.k.search('Merkato market', { k: 1 })).length, 'keyword search survives');
 });
 
-test('Amharic voice: detection, glossary block, style examples only for Amharic and never public', async () => {
+// Bini's Amharic style guide is private (.gitignore); this runs where it is deployed and skips elsewhere.
+const HAS_STYLE = require('fs').existsSync(path.join(__dirname, '..', 'knowledge', 'amharic-style.md'));
+test('Amharic voice: detection, glossary block, style examples only for Amharic and never public', { skip: !HAS_STYLE && 'knowledge/amharic-style.md is private (.gitignore) and not in this checkout' }, async () => {
   const { isAmharic, voiceBlock } = require('../knowledge/index');
   assert.equal(isAmharic('ጋራ ጉዞ ምንድን ነው'), true);
   assert.equal(isAmharic('selam, ride sint new ke piassa wede bole?'), true);

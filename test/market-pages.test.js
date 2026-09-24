@@ -84,8 +84,11 @@ test('server.js: admin listing routes refuse an imageUrl that is not a web addre
   }
 });
 
-test('server.js: the sitemap leaves out /cars and /property while nothing is listed', () => {
+// Since e6c12a7 (2026-09-23) /cars and /property are real guides with a listings strip at the foot, so
+// the sitemap lists them whether or not anything is listed. Only /travel, which is nothing but trips, waits.
+test('server.js: the sitemap always lists the /cars and /property guides; only /travel waits for trips', () => {
   const src = read('server.js');
-  assert.match(src, /u !== 'https:\/\/bina\.et\/cars' \|\| carsListed/);
-  assert.match(src, /u !== 'https:\/\/bina\.et\/property' \|\| propsListed/);
+  assert.ok(src.includes("'https://bina.et/cars'") && src.includes("'https://bina.et/property'"));
+  assert.doesNotMatch(src, /carsListed|propsListed/, 'no rule hides the two guides when their listings are empty');
+  assert.match(src, /u !== 'https:\/\/bina\.et\/travel' \|\| tripsAhead/);
 });
