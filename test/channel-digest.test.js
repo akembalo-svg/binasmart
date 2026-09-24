@@ -27,7 +27,7 @@ test('the morning post: new jobs from three employers, tenders closing soon, one
   const noStory = D.morningText({ now: NOW, jobsNew: 0, jobsOpen: 10, tendersOpen: 0, jobs: [], closing: [], story: null, tip: D.QA[0] });
   assert.match(noStory, /💡 <b>የዛሬ ጥቆማ፦<\/b>/);
   const urls = D.morningButtons().flat().map(b => b.url);
-  assert.deepEqual(urls, ['https://bina.et/jobs', 'https://bina.et/tenders', 'https://bina.et/go']);
+  assert.deepEqual(urls, ['https://bina.et/jobs', 'https://bina.et/tenders', 'https://bina.et/jobs/alert/all', 'https://bina.et/go']);
   assert.ok(t.length < 1500, 'short enough to read on a phone');
 });
 

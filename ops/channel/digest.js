@@ -65,7 +65,7 @@ function morningText({ now, jobsNew, jobsOpen, jobs, tendersOpen, closing, story
 }
 function morningButtons() {
   return [[{ text: '💼 ሁሉም ሥራዎች', url: 'https://bina.et/jobs' }, { text: '📋 ሁሉም ጨረታዎች', url: 'https://bina.et/tenders' }],
-          [{ text: '💬 ቢኒን ይጠይቁ', url: 'https://bina.et/go' }]];
+          [{ text: '🔔 የሥራ ማሳወቂያ', url: 'https://bina.et/jobs/alert/all' }, { text: '💬 ቢኒን ይጠይቁ', url: 'https://bina.et/go' }]];
 }
 
 function eveningText(qa) {
