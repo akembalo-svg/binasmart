@@ -58,6 +58,9 @@ function morningText({ now, jobsNew, jobsOpen, jobs, tendersOpen, closing, story
   }
   if (story) L.push('📰 ' + esc(cut(story.title, 110)) + '\n' + story.url);
   else if (tip) L.push('💡 <b>የዛሬ ጥቆማ፦</b> ' + esc(tip.tip));
+  // Once a week, Monday: companies can put their own address and map pin on their page (jobs/claim.js). Weekly,
+  // not daily - the channel lost subscribers when it posted too much (2026-09-23), and a line every morning is noise.
+  if (addisDay(now).wd === 1) L.push('', '🏢 <b>ድርጅትዎ በቢና ላይ አለ?</b> ገጽዎን በ bina.et/employers ያግኙና «ይህ የእርስዎ ድርጅት ነው?» በመጫን ትክክለኛ አድራሻዎንና የካርታ ቦታዎን በነጻ ያክሉ — ሥራ ፈላጊዎች ትክክለኛው በር ላይ ይደርሳሉ።');
   return L.join('\n').trim();
 }
 function morningButtons() {

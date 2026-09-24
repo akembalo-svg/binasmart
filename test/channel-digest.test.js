@@ -51,3 +51,10 @@ test('every answer names a source and a bina.et guide, and the morning tip is ne
     assert.notEqual(D.qaFor(now, 'morning'), D.qaFor(now, 'evening'));
   }
 });
+
+test('on Mondays only, the morning post tells companies they can add their own address', () => {
+  const base = { jobsNew: 0, jobsOpen: 10, tendersOpen: 0, jobs: [], closing: [], story: null, tip: D.QA[0] };
+  const monday = Date.UTC(2026, 8, 28, 4, 30);        // 07:30 Addis, Monday 28 September 2026
+  assert.match(D.morningText({ ...base, now: monday }), /ድርጅትዎ በቢና ላይ አለ\?[\s\S]*bina\.et\/employers/);
+  assert.doesNotMatch(D.morningText({ ...base, now: NOW }), /bina\.et\/employers/, 'Friday: no company line');
+});
