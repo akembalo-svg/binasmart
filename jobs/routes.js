@@ -324,7 +324,10 @@ module.exports = async function jobRoutes(fastify, { prisma, shell, escH, amDate
   // the chat people write to - different accounts, so the link is written out rather than guessed at.
   // On a category page the band subscribes to THAT field; on the board it opens the chooser. A deep
   // link needs no login and no form - one tap and they are subscribed.
-  const alertLink = cat => 'https://t.me/bina_smart_bot?start=jobs_' + (cat && BY_SLUG.get(cat) ? cat : 'all');
+  // Through /jobs/alert/<field> (below), not straight to t.me: on 24 September 2026 two people had alerts and
+  // there was no way to tell whether anybody had even tapped the link. The redirect is one nginx log line a tap.
+  const alertSlug = cat => (cat && BY_SLUG.get(cat) ? cat : 'all');
+  const alertLink = cat => '/jobs/alert/' + alertSlug(cat);
   const tgAlert = (lang, cat) => `<a href="${alertLink(cat)}" target="_blank" rel="noopener" class="sans tgband">
       <span class="tgi">🔔</span>
       <span class="tgt"><b>${lang === 'en'
@@ -337,7 +340,7 @@ module.exports = async function jobRoutes(fastify, { prisma, shell, escH, amDate
   const tgBand = lang => `<a href="https://t.me/binasmart" target="_blank" rel="noopener" class="sans tgband">
       <span class="tgi">✈️</span>
       <span class="tgt"><b>${lang === 'en' ? 'Every new vacancy on Telegram' : 'አዲስ ሥራ በቴሌግራም ይከታተሉ'}</b>
-      <small>${lang === 'en' ? '200+ new jobs a day · free · updated every morning' : 'በየቀኑ 200+ አዲስ ሥራ · ነጻ · በየጠዋቱ ይታደሣል'}</small></span>
+      <small>${lang === 'en' ? 'The best new jobs and closing tenders every morning · free' : 'በየጠዋቱ ምርጥ አዳዲስ ሥራዎችና የሚዘጉ ጨረታዎች · ነጻ'}</small></span>
       <span class="tggo">${lang === 'en' ? 'Join' : 'ይቀላቀሉ'} →</span>
     </a>`;
 
@@ -505,6 +508,11 @@ const ogJobs = cat => {
   fastify.get('/jobs/category/:cat', async (req, reply) => jobsPage(req, reply, String(req.params.cat || '')));
   fastify.get('/jobs', async (req, reply) => jobsPage(req, reply, null));
 
+  fastify.get('/jobs/alert/:field', async (req, reply) => {
+    const f = alertSlug(String(req.params.field || ''));
+    return reply.header('cache-control', 'no-store').header('x-robots-tag', 'noindex').redirect('https://t.me/bina_smart_bot?start=jobs_' + f, 302);
+  });
+
   fastify.get('/jobs/:slug', async (req, reply) => {
     const t = pick(req), lang = langOf(req);
     const j = await prisma.job.findUnique({ where: { slug: String(req.params.slug) }, include: { employer: true } });
@@ -558,6 +566,7 @@ const ogJobs = cat => {
           return `<div style="margin-top:12px"><a href="${escH(r.href)}" target="_blank" rel="noopener" style="display:inline-block;background:${gradient('jobs')};color:#fff;border-radius:999px;padding:11px 24px;font-weight:800;font-size:14.5px">${label} →</a>${note}</div>`;
         })()}</div>` : ''}
       <div id="${j.howToApply ? 'apply-cv' : 'apply'}">${cvForm({ job: j, lang, escH, main: !j.howToApply })}</div>
+      ${tgAlert(lang, j.category)}
       <div class="sans" style="margin:18px 0;padding:14px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--line)"><!-- guide-links:job-detail --><b>${lang === 'en' ? '📚 Before you apply' : '📚 ከማመልከትዎ በፊት'}</b><div style="margin-top:6px;font-size:14px;line-height:1.9"><a href="${lang === 'en' ? '/cv-ethiopia-en' : '/cv-ethiopia'}" style="font-weight:700">${lang === 'en' ? '📄 How to write a CV for Ethiopian jobs' : '📄 የሲቪ አጻጻፍ መመሪያ'}</a> · <a href="/interview-questions-ethiopia" style="font-weight:700">${lang === 'en' ? '🤝 Interview questions' : '🤝 የቃለ መጠይቅ ጥያቄዎች'}</a>${j.category === 'banking' ? ` · <a href="/bank-jobs-ethiopia" style="font-weight:700">${lang === 'en' ? '🏦 What Ethiopian banks ask for' : '🏦 ባንኮች ምን ይጠይቃሉ'}</a>` : ''}</div></div>
 
       <div class="sans" style="margin:18px 0;padding:18px;border-radius:16px;background:#fff;border:1.5px solid var(--line)">
