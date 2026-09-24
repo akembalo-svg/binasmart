@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F4FAF8">
+<meta name="color-scheme" content="light only">
+<title>ቢና አጋር · Bina Partner</title>
+<meta name="description" content="Bina Partner: the BinaSmart app for drivers and business owners in Addis Ababa.">
+<link rel="manifest" href="/partner.webmanifest">
+<link rel="icon" href="/icon-32.png">
+<link rel="apple-touch-icon" href="/static/partner/icon-192.png">
+<link rel="preload" href="/static/fonts/noto-sans-ethiopic-400-900-ethiopic-f73467.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
+<style>
+/* Bina Partner (23 Sep 2026). The start page of the Android app (TWA, et.bina.partner) and of
+   /partner on the web. LIGHT only — no dark theme, on purpose (Ibrahim rejected dark app themes). */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --paper:#F4FAF8; --card:#FFFFFF; --ink:#081120; --ink2:#2B3A47; --mut:#5A6B78; --line:#DCE8E4;
+  --em:#00C896; --em2:#009688; --emd:#007A6E; --wash:#E3F6F0; --err:#C92A2F; --errbg:#FDF0F0;
+  --r-lg:28px; --r-md:18px; --r-sm:12px;
+  --am:'Noto Sans Ethiopic','Plus Jakarta Sans',system-ui,sans-serif;
+  --en:'Plus Jakarta Sans','Noto Sans Ethiopic',system-ui,sans-serif;
+}
+html{background:var(--paper);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--en);color:var(--ink);background:var(--paper);min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;overscroll-behavior-y:none}
+.am{font-family:var(--am)}
+.en{font-family:var(--en);color:var(--mut)}
+[hidden]{display:none!important}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--em);outline-offset:3px;border-radius:10px}
+
+/* ---- top bar ---- */
+.bar{display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) 6px max(20px,env(safe-area-inset-left))}
+.tile{width:36px;height:36px;border-radius:10px;flex:none;background:linear-gradient(135deg,var(--em),var(--em2));display:grid;place-items:center;box-shadow:0 6px 14px -8px rgba(0,150,136,.8)}
+.tile svg{width:26px;height:26px}
+.bar b{font-size:15px;font-weight:800;letter-spacing:-.2px}
+.bar small{display:block;font-size:11.5px;color:var(--mut);font-weight:600;margin-top:1px}
+
+/* ---- screens ---- */
+main{flex:1;display:flex;flex-direction:column;width:100%;max-width:480px;margin:0 auto}
+.scr{flex:1;display:flex;flex-direction:column}
+.hero{padding:18px 24px 0}
+.hero h1{font-family:var(--am);font-size:clamp(46px,14vw,60px);font-weight:800;line-height:1.02;letter-spacing:-1px;color:var(--ink)}
+.hero .sub{margin-top:10px;font-family:var(--am);font-size:17px;font-weight:600;color:var(--ink2);line-height:1.45}
+.hero .sub .en{display:block;font-size:14px;font-weight:500;margin-top:2px}
+.scene{display:block;width:100%;height:auto;margin:auto 0 -2px;padding-top:14px;max-height:170px}
+#sIn .sheet{margin-top:0}
+
+/* the white sheet that holds every action */
+.sheet{margin-top:auto;background:var(--card);border-radius:var(--r-lg) var(--r-lg) 0 0;
+  padding:24px max(22px,env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));
+  box-shadow:0 -1px 0 var(--line),0 -24px 48px -32px rgba(8,17,32,.28)}
+.lbl{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:700;color:var(--ink2);margin-bottom:8px}
+.lbl .en{font-size:12.5px;font-weight:600}
+.field{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:var(--r-md);background:#fff;height:58px;transition:border-color .15s,box-shadow .15s}
+.field:focus-within{border-color:var(--em2);box-shadow:0 0 0 4px rgba(0,200,150,.14)}
+.field .cc{padding:0 12px 0 16px;font-weight:700;color:var(--mut);font-size:16px;border-right:1.5px solid var(--line);height:28px;display:flex;align-items:center}
+.field input{flex:1;min-width:0;border:0;outline:0;background:none;height:100%;padding:0 16px;font:700 19px/1 var(--en);color:var(--ink);letter-spacing:.5px}
+.field input::placeholder{color:#A9B7BF;font-weight:600}
+#code{letter-spacing:.42em;text-align:center;font-size:24px;padding-left:24px}
+.cta{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:14px;
+  border-radius:var(--r-md);color:#fff;background:linear-gradient(135deg,#00B98A,var(--emd));
+  box-shadow:0 10px 22px -12px rgba(0,122,110,.9),inset 0 1px 0 rgba(255,255,255,.25);text-decoration:none;transition:transform .12s,filter .12s}
+.cta:active{transform:scale(.985);filter:brightness(.96)}
+.cta:disabled{filter:saturate(.4) brightness(1.1);cursor:wait}
+.cta .am{font-size:17px;font-weight:800;line-height:1.2}
+.cta small{font-size:12.5px;font-weight:600;opacity:.88}
+.ghost{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;margin-top:10px;border-radius:var(--r-md);
+  border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:700;font-size:15px;text-decoration:none}
+.ghost:active{background:var(--wash)}
+.err{margin-top:12px;background:var(--errbg);color:var(--err);border-radius:var(--r-sm);padding:11px 13px;font-size:14px;font-weight:600;line-height:1.5}
+.note{margin-top:10px;font-size:13.5px;color:var(--mut);line-height:1.55}
+.sent{font-size:14.5px;color:var(--ink2);line-height:1.5;margin-bottom:14px}
+.row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 14px;margin-top:14px;font-size:14px;font-weight:700}
+.row a,.row button{color:var(--emd);text-decoration:none;padding:6px 0}
+.row [aria-disabled="true"]{color:var(--mut);pointer-events:none}
+.or{display:flex;align-items:center;gap:12px;margin:18px 0 12px;color:var(--mut);font-size:13px;font-weight:600}
+.or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
+#tgWidget{min-height:46px;display:flex;justify-content:center}
+.owner{display:block;text-align:center;margin-top:16px;font-size:14px;font-weight:700;color:var(--ink2);text-decoration:none;padding:8px 0;line-height:1.5}
+.owner .en{display:block;font-size:12.5px;font-weight:600}
+
+/* ---- signed in: the "we know you" moment ---- */
+.who{margin:auto 24px;text-align:left}
+.av{width:64px;height:64px;border-radius:20px;background:var(--wash);color:var(--emd);display:grid;place-items:center;font:800 26px/1 var(--am);margin-bottom:20px;overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.who h2{font-family:var(--am);font-size:34px;font-weight:800;line-height:1.15;letter-spacing:-.5px}
+.who p{margin-top:8px;font-family:var(--am);font-size:17px;color:var(--ink2);font-weight:600;line-height:1.5}
+.who p .en{display:block;font-size:14px;font-weight:500}
+.track{margin-top:26px;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.track i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,var(--em),var(--em2))}
+.track.run i{animation:fill var(--dur,900ms) cubic-bezier(.4,0,.2,1) forwards}
+@keyframes fill{to{width:100%}}
+
+/* ---- chooser / info cards ---- */
+.head{padding:14px 24px 18px}
+.head h2{font-family:var(--am);font-size:30px;font-weight:800;line-height:1.15;letter-spacing:-.4px}
+.head p{margin-top:6px;font-size:14.5px;color:var(--mut);line-height:1.5}
+.cards{display:flex;flex-direction:column;gap:14px;padding:0 20px}
+.pick{position:relative;display:flex;align-items:center;gap:16px;width:100%;min-height:112px;padding:18px;border-radius:24px;
+  background:var(--card);border:1.5px solid var(--line);text-align:left;text-decoration:none;color:var(--ink);
+  box-shadow:0 14px 30px -26px rgba(8,17,32,.5);transition:border-color .15s,transform .12s}
+.pick:active{transform:scale(.99)}
+.pick.last{border-color:var(--em2);box-shadow:0 0 0 3px rgba(0,200,150,.14),0 14px 30px -26px rgba(8,17,32,.5)}
+.pick .ic{width:60px;height:60px;border-radius:18px;flex:none;display:grid;place-items:center;background:var(--wash)}
+.pick .ic svg{width:34px;height:34px}
+.pick b{display:block;font-family:var(--am);font-size:21px;font-weight:800;line-height:1.2}
+.pick span.en{display:block;font-size:13.5px;margin-top:3px;line-height:1.4}
+.pick .tag{position:absolute;top:12px;right:14px;font-size:11.5px;font-weight:700;color:var(--emd);background:var(--wash);border-radius:999px;padding:3px 9px}
+.pick .chev{margin-left:auto;flex:none;color:#9FB2BA}
+.pick.soft{min-height:0;background:#FBFDFC}
+.pick .step{display:block;position:relative;margin-top:8px;padding-left:13px;font-size:13px;font-weight:700;color:var(--emd);line-height:1.4}
+.pick .step:before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--em)}
+.pick .step .en{display:block;margin-top:1px;font-size:12.5px;font-weight:600;color:var(--emd)}
+.back{display:inline-flex;align-items:center;gap:6px;margin:4px 0 0 18px;padding:10px 6px;font-size:14px;font-weight:700;color:var(--emd)}
+.auto{margin:16px 24px 0;font-size:13.5px;color:var(--mut);display:flex;align-items:center;gap:10px}
+.auto .track{flex:1;margin:0}
+.auto button{color:var(--emd);font-weight:700;padding:8px 0}
+
+/* pending: a real sequence, so it is numbered */
+.steps{list-style:none;margin:0 24px;padding:0;counter-reset:s}
+.steps li{position:relative;padding:0 0 22px 46px;font-family:var(--am);font-size:16px;font-weight:700;line-height:1.4;color:var(--ink2)}
+.steps li .en{display:block;font-size:13.5px;font-weight:500;margin-top:2px}
+.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:-2px;width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;font:800 14px/1 var(--en);background:#fff;border:1.5px solid var(--line);color:var(--mut)}
+.steps li:after{content:"";position:absolute;left:14.25px;top:30px;bottom:2px;width:1.5px;background:var(--line)}
+.steps li:last-child:after{display:none}
+.steps li.done:before{content:"✓";background:var(--em2);border-color:var(--em2);color:#fff}
+.steps li.now:before{background:var(--wash);border-color:var(--em2);color:var(--emd);box-shadow:0 0 0 5px rgba(0,200,150,.12)}
+.steps li.now{color:var(--ink)}
+
+.me{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--mut);margin-bottom:12px}
+.me b{color:var(--ink2);font-weight:700}
+.me button{margin-left:auto;color:var(--emd);font-weight:700;padding:8px 0}
+
+@media (min-height:760px){.hero{padding-top:30px}}
+@media (min-width:600px){.sheet{border-radius:var(--r-lg);margin:24px 0}}
+
+/* ---- light glass (23 Sep 2026, Ibrahim: "transparent glass") ----
+   Glass only reads as glass over colour, so the page sits on soft brand blobs painted ONCE on a fixed
+   layer (no image, no repaint while scrolling). The top edge stays the status-bar colour #F4FAF8 so the
+   Android bar and the page meet without a seam. Light only: dark glass was rejected on 9 Sep. */
+:root{
+  --glass:rgba(255,255,255,.52); --glass-hi:rgba(255,255,255,.7); --glass-edge:rgba(255,255,255,.78);
+  --glass-shadow:0 18px 40px -26px rgba(8,40,52,.45),0 2px 6px -4px rgba(8,40,52,.12);
+  --glass-blur:blur(16px) saturate(165%);
+}
+body{background:#F4FAF8;position:relative;isolation:isolate}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(70vmax 48vmax at -8% 34%,rgba(0,200,150,.34),transparent 62%),
+    radial-gradient(60vmax 44vmax at 108% 22%,rgba(0,153,255,.24),transparent 62%),
+    radial-gradient(55vmax 42vmax at 92% 96%,rgba(108,99,255,.22),transparent 62%),
+    radial-gradient(64vmax 46vmax at 6% 104%,rgba(0,168,138,.34),transparent 60%),
+    linear-gradient(180deg,#F4FAF8 0,#F4FAF8 7%,rgba(244,250,248,0) 22%);}
+/* the surfaces: blur only on the big panes; small chips inside them stay flat (nested blur costs on cheap phones) */
+.sheet,.pick,.ghost,.field,.err{
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur)}
+.sheet{background:var(--glass);border:1px solid var(--glass-edge);border-bottom:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 -20px 50px -34px rgba(8,40,52,.4)}
+.pick{background:var(--glass);border:1px solid var(--glass-edge);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),var(--glass-shadow)}
+.pick.soft{background:rgba(255,255,255,.38)}
+.pick.last{border-color:rgba(0,150,136,.55);box-shadow:0 0 0 3px rgba(0,200,150,.16),inset 0 1px 0 rgba(255,255,255,.9),var(--glass-shadow)}
+.pick .ic{background:rgba(227,246,240,.62);border:1px solid rgba(255,255,255,.7)}
+.pick .tag{background:rgba(227,246,240,.75);border:1px solid rgba(255,255,255,.8)}
+.field{background:var(--glass-hi);border-color:rgba(255,255,255,.85);box-shadow:inset 0 1px 2px rgba(8,40,52,.06)}
+.field:focus-within{background:rgba(255,255,255,.86)}
+.ghost{background:var(--glass);border-color:var(--glass-edge)}
+.av{background:rgba(227,246,240,.7);border:1px solid rgba(255,255,255,.8)}
+.steps li:before{background:rgba(255,255,255,.62);border-color:rgba(255,255,255,.85)}
+.steps li.now:before{background:rgba(227,246,240,.85);border-color:var(--em2)}
+.steps li:after{background:rgba(0,150,136,.22)}
+.err{background:rgba(253,240,240,.82)}
+.track{background:rgba(0,150,136,.14)}
+/* emerald glass for the one primary action; dark enough for white text (AA at this size and weight) */
+.cta{background:linear-gradient(135deg,rgba(0,128,106,.95),rgba(0,104,95,.96));
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid rgba(255,255,255,.35);box-shadow:0 12px 26px -14px rgba(0,112,101,.9),inset 0 1px 0 rgba(255,255,255,.35)}
+.cta .am{font-size:18px}
+.cta small{opacity:.95}
+.tile{box-shadow:0 8px 18px -8px rgba(0,150,136,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+.scene{opacity:.92}
+/* no backdrop-filter (old WebView, some low-end phones): near-solid white, so text never sits on colour */
+/* review pass (23 Sep): the Last-used chip sits above the title instead of over it; every text button
+   is at least 44px tall; Ethiopic titles get room above and below the tall glyphs. */
+.pick .tag{position:static;display:inline-block;margin:0 0 6px;padding:2px 9px;font-size:11.5px;line-height:1.5}
+.pick b{line-height:1.3}
+.head h2,.who h2{line-height:1.22}
+.me button,.auto button,.row a,.row button,.back{min-height:44px;display:inline-flex;align-items:center;padding-top:0;padding-bottom:0}
+.owner{min-height:44px}
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .sheet,.pick,.ghost{background:rgba(255,255,255,.93)}
+  .field{background:#fff}
+  .pick .ic,.av{background:#E3F6F0}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:1ms!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <span class="tile" aria-hidden="true"><svg viewBox="0 0 1000 1000"><path transform="translate(255,700) scale(0.62,-0.62)" d="M699 -82Q668 -82 645.5 -55.0Q623 -28 615 0H437V465Q437 551 408.0 597.5Q379 644 311 644Q236 644 208.5 595.0Q181 546 181 464V0H90V472Q90 586 144.0 655.0Q198 724 311 724Q426 724 477.0 658.5Q528 593 528 470V73H615Q623 101 645.5 127.5Q668 154 699 154H723L697 36L723 -82Z" fill="#fff" stroke="#fff" stroke-width="56" stroke-linejoin="round"/><path d="M800 150l24 62 62 24-62 24-24 62-24-62-62-24 62-24z" fill="#fff"/></svg></span>
+  <div><b>Bina Partner</b><small class="am">ቢናስማርት · BinaSmart</small></div>
+</header>
+
+<main id="main">
+  <!-- loading: nothing but the bar, so a signed-in partner never sees the sign-in form flash -->
+  <section class="scr" id="sLoad" aria-busy="true"></section>
+
+  <!-- signed out -->
+  <section class="scr" id="sIn" hidden>
+    <div class="hero">
+      <h1>ቢና አጋር</h1>
+      <p class="sub">ለሹፌሮችና ለንግድ ባለቤቶች<span class="en">For drivers and business owners in Addis Ababa</span></p>
+    </div>
+    <svg class="scene" viewBox="0 0 360 132" fill="none" aria-hidden="true">
+      <g stroke="#009688" stroke-width="2" stroke-linejoin="round">
+        <path d="M150 104V40h34v64" fill="#E3F6F0"/><path d="M188 104V18h40v86" fill="#fff"/><path d="M232 104V52h30v52" fill="#E3F6F0"/>
+        <path d="M266 104V32h44v72" fill="#fff"/><path d="M314 104V64h26v40" fill="#E3F6F0"/><path d="M208 18V8"/>
+      </g>
+      <g fill="#00C896"><rect x="196" y="30" width="7" height="7" rx="1.5"/><rect x="212" y="30" width="7" height="7" rx="1.5"/><rect x="196" y="46" width="7" height="7" rx="1.5" opacity=".45"/><rect x="212" y="46" width="7" height="7" rx="1.5"/><rect x="196" y="62" width="7" height="7" rx="1.5"/><rect x="212" y="62" width="7" height="7" rx="1.5" opacity=".45"/>
+        <rect x="276" y="44" width="7" height="7" rx="1.5" opacity=".45"/><rect x="292" y="44" width="7" height="7" rx="1.5"/><rect x="276" y="60" width="7" height="7" rx="1.5"/><rect x="292" y="60" width="7" height="7" rx="1.5"/><rect x="276" y="76" width="7" height="7" rx="1.5"/><rect x="292" y="76" width="7" height="7" rx="1.5" opacity=".45"/>
+        <rect x="160" y="52" width="6" height="6" rx="1.5"/><rect x="170" y="52" width="6" height="6" rx="1.5" opacity=".45"/><rect x="160" y="66" width="6" height="6" rx="1.5" opacity=".45"/><rect x="170" y="66" width="6" height="6" rx="1.5"/></g>
+      <path d="M0 104h360" stroke="#009688" stroke-width="2"/>
+      <path d="M0 118h360" stroke="#B9DCD4" stroke-width="2" stroke-dasharray="14 12"/>
+      <g transform="translate(46 84)">
+        <path d="M4 20c0-6 3-9 8-10l8-8h26l10 8c6 1 10 4 10 10v2H4z" fill="#fff" stroke="#009688" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M22 4h11v7H15z M37 4h8l7 7H37z" fill="#E3F6F0"/>
+        <circle cx="18" cy="22" r="6" fill="#fff" stroke="#009688" stroke-width="2"/><circle cx="52" cy="22" r="6" fill="#fff" stroke="#009688" stroke-width="2"/>
+      </g>
+      <path d="M124 94c6 0 10-3 14-3" stroke="#00C896" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 6"/>
+    </svg>
+    <div class="sheet">
+      <div id="pBox" hidden>
+        <div id="p1">
+          <label class="lbl" for="phone"><span class="am">ስልክ ቁጥር</span><span class="en">Phone number</span></label>
+          <div class="field"><span class="cc">+251</span><input id="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="17" placeholder="9XX XXX XXX"></div>
+          <button class="cta" id="pSend" type="button"><span class="am" id="pSendT">ኮድ ላክ</span><small id="pSendE">Send me a code by SMS</small></button>
+        </div>
+        <div id="p2" hidden>
+          <p class="sent" id="pSent"></p>
+          <label class="lbl" for="code"><span class="am">ባለ6 አኃዝ ኮድ</span><span class="en">6-digit code</span></label>
+          <div class="field"><input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••"></div>
+          <button class="cta" id="pGo" type="button"><span class="am" id="pGoT">ግባ</span><small id="pGoE">Sign in</small></button>
+          <div class="row"><button type="button" id="pResend" aria-disabled="true"></button><button type="button" id="pBack" class="am">ቁጥር ቀይር · Change number</button></div>
+        </div>
+      </div>
+      <div class="err" id="err" role="alert" hidden></div>
+      <div id="tgBox" hidden>
+        <div class="or" id="tgOr"><span class="am">ወይም · or</span></div>
+        <div id="tgWidget"></div>
+      </div>
+      <a class="ghost" id="keyOwner" hidden href="/owner"></a>
+      <a class="owner" href="/owner"><span class="am">ዳሽቦርድዎ በይለፍ ቃል ነው የሚከፈተው?</span><span class="en">Owner with a dashboard password? Sign in here</span></a>
+    </div>
+  </section>
+
+  <!-- signed in, one place to go -->
+  <section class="scr" id="sGo" hidden>
+    <div class="who">
+      <div class="av" id="goAv" aria-hidden="true"></div>
+      <h2 id="goHi"></h2>
+      <p id="goWhere"></p>
+      <div class="track" id="goTrack"><i></i></div>
+    </div>
+  </section>
+
+  <!-- signed in, more than one place -->
+  <section class="scr" id="sPick" hidden>
+    <div class="head"><h2 id="pickHi"></h2><p><span class="am">ዛሬ ምን ይክፈቱ?</span> · What would you like to open?</p></div>
+    <div class="cards" id="pickCards"></div>
+    <div class="auto" id="pickAuto" hidden><span class="am">በመክፈት ላይ…</span><div class="track" id="pickTrack"><i></i></div><button type="button" id="pickStop">አቁም · Stay here</button></div>
+    <div class="sheet" style="margin-top:auto;padding-top:18px"><div class="me" id="pickMe"></div></div>
+  </section>
+
+  <!-- signed in: the businesses this account runs (hotel, building, shop, restaurant, clinic, cinema...) -->
+  <section class="scr" id="sBiz" hidden>
+    <button type="button" class="back" id="bizBack" hidden>‹ ተመለስ · Back</button>
+    <div class="head"><h2 id="bizHi"></h2><p><span class="am">የትኛውን ንግድ ይክፈቱ?</span> · Which business would you like to open?</p></div>
+    <div class="cards" id="bizCards"></div>
+    <div class="sheet" style="margin-top:auto;padding-top:18px"><div class="me" id="bizMe"></div></div>
+  </section>
+
+  <!-- driver waiting for approval -->
+  <section class="scr" id="sWait" hidden>
+    <div class="head"><h2 id="waitH">ማመልከቻዎ እየታየ ነው</h2><p id="waitP">Your driver application is being reviewed. This usually takes up to 24 hours.</p></div>
+    <ol class="steps" id="waitSteps">
+      <li class="done">ተመዝግበዋል<span class="en">You registered as a driver</span></li>
+      <li class="now">ፈቃድዎንና የመኪናዎን ፎቶ እያረጋገጥን ነው<span class="en">We are checking your licence and car photo</span></li>
+      <li>ሲጸድቅ በቴሌግራም እናሳውቅዎታለን<span class="en">We message you in Telegram when you are approved</span></li>
+      <li>GO ይጫኑ፣ ጉዞ ይቀበሉ<span class="en">Open this app, tap GO and receive rides</span></li>
+    </ol>
+    <div class="sheet">
+      <div class="me" id="waitMe"></div>
+      <button class="cta" type="button" id="waitCheck"><span class="am">እንደገና አረጋግጥ</span><small>Check my status again</small></button>
+      <a class="ghost" href="https://t.me/binasmartdriverbot">Open @binasmartdriverbot</a>
+    </div>
+  </section>
+
+  <!-- signed in, not a partner yet -->
+  <section class="scr" id="sNone" hidden>
+    <div class="head"><h2>ገና አጋር አልሆኑም</h2><p>This account is not set up as a driver or a business owner yet. Choose what fits you.</p></div>
+    <div class="cards">
+      <a class="pick" href="/drive-with-us">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M4 22c0-3 2-5 5-5l4-5h9l5 5c3 0 4 2 4 5v3H4z"/><circle cx="10" cy="25" r="3" fill="#fff"/><circle cx="25" cy="25" r="3" fill="#fff"/></svg></span>
+        <span><b>ሹፌር መሆን እፈልጋለሁ</b><span class="en">I want to drive. Registration is free and takes two minutes.</span></span>
+        <svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg>
+      </a>
+      <a class="pick" href="https://t.me/bina_smart_bot">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><rect x="4" y="11" width="26" height="17" rx="3"/><path d="M12 11V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3M4 18h26M15 18v3h4v-3"/></svg></span>
+        <span><b>ንግድ አለኝ</b><span class="en">I own a business: a building, hotel, shop, restaurant, clinic or cinema. Message us on Telegram and our team connects your dashboard.</span></span>
+        <svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg>
+      </a>
+      <a class="pick soft" href="/support"><span><b style="font-size:17px">እርዳታ ይፈልጋሉ?</b><span class="en">Need help? Contact BinaSmart support</span></span><svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg></a>
+    </div>
+    <div class="sheet"><div class="me" id="noneMe"></div></div>
+  </section>
+
+  <!-- no connection -->
+  <section class="scr" id="sOff" hidden>
+    <div class="who">
+      <h2>ግንኙነት የለም</h2>
+      <p>በይነመረብዎን ያረጋግጡና እንደገና ይሞክሩ።<span class="en">We could not reach BinaSmart. Check your internet and try again.</span></p>
+      <button class="cta" type="button" id="offRetry"><span class="am">እንደገና ሞክር</span><small>Try again</small></button>
+    </div>
+  </section>
+</main>
+
+<script>
+/* route:start — which screen a signed-in person gets. /api/me is the only authority: nothing here
+   guesses a role from a stored flag. Pinned by test/partner.test.js. */
+// The businesses this account runs. /api/me `owned` (auth/identity.js) lists each with its dashboard URL and
+// how that dashboard lets the owner in; an older /api/me without it falls back to buildingSlug.
+function partnerOwned(me) {
+  var out = [];
+  var src = me && Object.prototype.toString.call(me.owned) === '[object Array]' ? me.owned : null;
+  if (src) {
+    for (var i = 0; i < src.length; i++) {
+      var b = src[i];
+      if (b && b.id && typeof b.url === 'string' && /^\/(?![\/\\])/.test(b.url)) out.push(b);
+    }
+  } else if (me && me.buildingSlug) {
+    out.push({ id: 'building:' + me.buildingSlug, type: 'building', name: me.buildingSlug, url: '/owner/' + encodeURIComponent(me.buildingSlug), access: 'account' });
+  }
+  return out;
+}
+function partnerRoute(me, last, lastBiz) {
+  if (!me) return { view: 'signin' };
+  var roles = me.roles || [];
+  var biz = partnerOwned(me);
+  var opts = [];
+  if (roles.indexOf('driver') >= 0) opts.push({ kind: 'driver', href: '/drive' });
+  // One business the account itself opens: straight there. Several, or one that asks for its own
+  // sign-in: the list, so the owner sees which one and what the next step is.
+  if (biz.length === 1 && biz[0].access === 'account') opts.push({ kind: 'owner', href: biz[0].url, biz: biz[0] });
+  else if (biz.length) opts.push({ kind: 'owner', list: true });
+  var pending = roles.indexOf('driver_pending') >= 0;
+  var lb = null;
+  for (var j = 0; j < biz.length; j++) if (biz[j].id === lastBiz) lb = lastBiz;
+  if (opts.length === 1 && !pending) return opts[0].list ? { view: 'owners', businesses: biz, lastBiz: lb } : { view: 'go', to: opts[0] };
+  if (!opts.length) return { view: pending ? 'pending' : 'none' };
+  var known = false;
+  for (var k = 0; k < opts.length; k++) if (opts[k].kind === last) known = true;
+  return { view: 'choose', options: opts, pending: pending, last: known ? last : null, businesses: biz, lastBiz: lb };
+}
+/* route:end */
+
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var LAST = 'bina_partner_last', LASTBIZ = 'bina_partner_biz', ME = null;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  // Back from /drive or a dashboard lands here again; never bounce someone forward twice.
+  var navType = '';
+  try { navType = (performance.getEntriesByType('navigation')[0] || {}).type || ''; } catch (e) {}
+  var cameBack = navType === 'back_forward';
+
+  var SCREENS = ['sLoad', 'sIn', 'sGo', 'sPick', 'sBiz', 'sWait', 'sNone', 'sOff'];
+  function show(id) { SCREENS.forEach(function (s) { $(s).hidden = s !== id; }); window.scrollTo(0, 0); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function firstName(me) {
+    var n = String((me && me.name) || '').trim().split(/\s+/)[0] || '';
+    return n.length > 24 ? n.slice(0, 24) : n;
+  }
+  function mask(p) { p = String(p || ''); return p ? '+251 ••• ' + p.slice(-4) : ''; }
+  function meLine(box, me) {
+    box.textContent = '';
+    var t = el('span'); t.appendChild(document.createTextNode('Signed in as '));
+    t.appendChild(el('b', '', firstName(me) || mask(me.phone) || 'BinaSmart'));
+    box.appendChild(t);
+    var b = el('button', 'am', 'ውጣ · Sign out'); b.type = 'button'; b.onclick = signOut; box.appendChild(b);
+  }
+  function hello(me) { var n = firstName(me); return n ? 'ሰላም፣ ' + n : 'እንኳን ደህና መጡ'; }
+
+  var WHERE = {
+    driver: { am: 'የሹፌር መተግበሪያውን በመክፈት ላይ', en: 'Opening the driver app', title: 'ሹፌር', sub: 'Drive · receive ride offers near you' },
+    owner: { am: 'የንግድዎን ዳሽቦርድ በመክፈት ላይ', en: 'Opening your business dashboard', title: 'ባለቤት', sub: 'Owner · your business dashboard' }
+  };
+  var ICON = {
+    driver: '<svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><path d="M4 22c0-3 2-5 5-5l4-5h9l5 5c3 0 4 2 4 5v3H4z"/><circle cx="10" cy="25" r="3" fill="#fff"/><circle cx="25" cy="25" r="3" fill="#fff"/></svg>',
+    owner: '<svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round"><rect x="4" y="11" width="26" height="17" rx="3"/><path d="M12 11V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3M4 18h26M15 18v3h4v-3"/></svg>'
+  };
+  // One label and one picture per kind of business. Unknown kinds read as a plain business.
+  var SVG0 = '<svg viewBox="0 0 34 34" fill="none" stroke="#007A6E" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">';
+  var PICS = {
+    building: '<path d="M6 30V9l11-5v26M17 30V13l11 4v13M3 30h28"/><path d="M10 13h3M10 18h3M10 23h3M21 20h3M21 25h3"/>',
+    bed: '<path d="M4 27V9M4 21h26v6M30 21v-3a4 4 0 0 0-4-4H15v7"/><circle cx="9.5" cy="17" r="2.5"/>',
+    health: '<rect x="5" y="5" width="24" height="24" rx="6"/><path d="M17 11v12M11 17h12"/>',
+    bus: '<rect x="6" y="4" width="22" height="21" rx="4"/><path d="M6 15h22M10 29v-4M24 29v-4"/><circle cx="11" cy="20" r="1.2"/><circle cx="23" cy="20" r="1.2"/>',
+    fork: '<path d="M8 4v7a3 3 0 0 0 6 0V4M11 14v16M25 30V4c-4 2-6 8-6 13h6"/>',
+    cup: '<path d="M6 12h18v7a7 7 0 0 1-7 7h-4a7 7 0 0 1-7-7z"/><path d="M24 14h2a3 3 0 0 1 0 6h-2M11 5v3M16 4v4"/>',
+    bag: '<path d="M7 11h20l-1.5 18h-17z"/><path d="M12 11V9a5 5 0 0 1 10 0v2"/>',
+    film: '<rect x="5" y="7" width="24" height="20" rx="3"/><path d="M10 7v20M24 7v20M5 13h5M5 21h5M24 13h5M24 21h5"/>',
+    case: '<rect x="4" y="11" width="26" height="17" rx="3"/><path d="M12 11V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3M4 18h26M15 18v3h4v-3"/>'
+  };
+  var TYPES = {
+    building: { am: 'ሕንጻ', en: 'Building', pic: 'building' },
+    hotel: { am: 'ሆቴል', en: 'Hotel', pic: 'bed' },
+    hospital: { am: 'ሆስፒታል', en: 'Hospital', pic: 'health' },
+    clinic: { am: 'ክሊኒክ', en: 'Clinic', pic: 'health' },
+    pharmacy: { am: 'ፋርማሲ', en: 'Pharmacy', pic: 'health' },
+    travel: { am: 'የጉዞ ድርጅት', en: 'Travel company', pic: 'bus' },
+    restaurant: { am: 'ምግብ ቤት', en: 'Restaurant', pic: 'fork' },
+    cafe: { am: 'ካፌ', en: 'Café', pic: 'cup' },
+    shop: { am: 'ሱቅ', en: 'Shop', pic: 'bag' },
+    venue: { am: 'ሲኒማና መድረክ', en: 'Cinema & venue', pic: 'film' }
+  };
+  function typeOf(b) { return TYPES[b && b.type] || { am: 'ንግድ', en: 'Business', pic: 'case' }; }
+  // Where a business card goes, and the step the owner meets there. Only what the server said.
+  function bizHref(b) { return b.access === 'owner_key' ? '/owner' : b.url; }
+  var STEP = {
+    business_sign_in: { am: 'ቀጥሎ ስልክዎን ያረጋግጣሉ', en: 'Next, confirm your phone to open this dashboard' },
+    owner_key: { am: 'በዳሽቦርድ የይለፍ ቃልዎ ይገባሉ', en: 'Sign in with this dashboard’s owner password' }
+  };
+  var CHEV = '<svg class="chev" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 5l5 5-5 5"/></svg>';
+
+  function go(to, replace) {
+    store.set(LAST, to.kind);
+    if (to.list) return showBiz(ME, true);
+    if (to.biz) store.set(LASTBIZ, to.biz.id);
+    if (replace) location.replace(to.href); else location.href = to.href;
+  }
+
+  // ---- one place: say hello, then open it. replace() keeps /partner out of the history, so the
+  // Android back button from /drive closes the app instead of bouncing through this page.
+  function showGo(me, to) {
+    var av = $('goAv'); av.textContent = '';
+    if (me.image && /^https:\/\//.test(me.image)) { var im = el('img'); im.alt = ''; im.src = me.image; av.appendChild(im); }
+    else av.textContent = (firstName(me) || 'ቢ').charAt(0).toUpperCase();
+    $('goHi').textContent = hello(me);
+    var w = WHERE[to.kind], p = $('goWhere'); p.textContent = w.am + '…';
+    if (to.biz) w = { en: w.en + ' · ' + (to.biz.name || typeOf(to.biz).en) };
+    p.appendChild(el('span', 'en', w.en));
+    show('sGo');
+    var tr = $('goTrack'); tr.classList.remove('run'); void tr.offsetWidth; tr.classList.add('run');
+    setTimeout(function () { go(to, true); }, 950);
+  }
+
+  var autoTimer = 0;
+  function showPick(me, r) {
+    $('pickHi').textContent = hello(me);
+    var box = $('pickCards'); box.textContent = '';
+    var opts = r.options.slice();
+    if (r.last) opts.sort(function (a, b) { return (b.kind === r.last) - (a.kind === r.last); });
+    opts.forEach(function (o) {
+      var a = el('a', 'pick' + (o.kind === r.last ? ' last' : '')); a.href = o.href;
+      a.innerHTML = '<span class="ic" aria-hidden="true">' + ICON[o.kind] + '</span>';
+      var tx = el('span'); tx.appendChild(el('b', '', WHERE[o.kind].title));
+      var sub = o.kind === 'owner'
+        ? 'የንግድዎ ዳሽቦርድ · ' + (o.biz ? (o.biz.nameAm || o.biz.name || typeOf(o.biz).en) : 'Your business dashboard')
+        : WHERE[o.kind].sub;
+      tx.appendChild(el('span', 'en', sub)); a.appendChild(tx);
+      a.insertAdjacentHTML('beforeend', CHEV);
+      if (o.kind === r.last) tx.insertBefore(el('span', 'tag am', 'ባለፈው · Last used'), tx.firstChild);
+      a.addEventListener('click', function (e) { e.preventDefault(); stopAuto(); go(o, false); });
+      box.appendChild(a);
+    });
+    if (r.pending) {
+      var w = el('a', 'pick soft'); w.href = '#';
+      var t2 = el('span'); t2.appendChild(el('b', '', 'የሹፌር ማመልከቻ')); t2.appendChild(el('span', 'en', 'Driver application · waiting for approval'));
+      w.appendChild(t2); w.insertAdjacentHTML('beforeend', CHEV);
+      w.addEventListener('click', function (e) { e.preventDefault(); stopAuto(); showWait(me); });
+      box.appendChild(w);
+    }
+    meLine($('pickMe'), me);
+    show('sPick');
+    // The device remembers the last choice; on a fresh launch it opens again after a short, stoppable beat.
+    $('pickAuto').hidden = true;
+    if (r.last && !cameBack) {
+      var to = null; r.options.forEach(function (o) { if (o.kind === r.last) to = o; });
+      $('pickAuto').hidden = false;
+      var tr = $('pickTrack'); tr.style.setProperty('--dur', '1600ms'); tr.classList.remove('run'); void tr.offsetWidth; tr.classList.add('run');
+      autoTimer = setTimeout(function () { go(to, false); }, 1650);
+    }
+  }
+  function stopAuto() { clearTimeout(autoTimer); $('pickAuto').hidden = true; }
+
+  // ---- the owner's businesses: one card each, the last one opened first ----
+  function showBiz(me, fromChooser) {
+    var r = partnerRoute(me, null, store.get(LASTBIZ));
+    var list = (r.businesses || []).slice();
+    if (r.lastBiz) list.sort(function (a, b) { return (b.id === r.lastBiz) - (a.id === r.lastBiz); });
+    $('bizHi').textContent = hello(me);
+    var box = $('bizCards'); box.textContent = '';
+    list.forEach(function (b) {
+      var t = typeOf(b), a = el('a', 'pick' + (b.id === r.lastBiz ? ' last' : '')); a.href = bizHref(b);
+      a.innerHTML = '<span class="ic" aria-hidden="true">' + SVG0 + PICS[t.pic] + '</svg></span>';
+      var tx = el('span');
+      tx.appendChild(el('b', '', b.nameAm || b.name || t.am));
+      var line = t.am + ' · ' + t.en + (b.nameAm && b.name ? ' · ' + b.name : '') + (b.role === 'staff' ? ' · staff' : '');
+      tx.appendChild(el('span', 'en', line));
+      var st = STEP[b.access];
+      if (st) { var n = el('span', 'step'); n.appendChild(el('span', 'am', st.am)); n.appendChild(el('span', 'en', st.en)); tx.appendChild(n); }
+      a.appendChild(tx);
+      a.insertAdjacentHTML('beforeend', CHEV);
+      if (b.id === r.lastBiz) tx.insertBefore(el('span', 'tag am', 'ባለፈው · Last used'), tx.firstChild);
+      a.addEventListener('click', function (e) { e.preventDefault(); store.set(LAST, 'owner'); store.set(LASTBIZ, b.id); location.href = bizHref(b); });
+      box.appendChild(a);
+    });
+    $('bizBack').hidden = !fromChooser;
+    meLine($('bizMe'), me);
+    // From the chooser, Android back returns to it rather than closing the app.
+    if (fromChooser) { try { history.pushState({ partner: 'biz' }, ''); } catch (e) {} }
+    show('sBiz');
+  }
+  $('bizBack').onclick = function () { history.back(); };
+  window.addEventListener('popstate', function () { if (!$('sBiz').hidden && ME) { cameBack = true; route(ME); } });
+  $('pickStop').onclick = stopAuto;
+
+  function showWait(me) {
+    var paused = me.driver && me.driver.status === 'suspended';
+    $('waitH').textContent = paused ? 'መለያዎ ለጊዜው ቆሟል' : 'ማመልከቻዎ እየታየ ነው';
+    $('waitP').textContent = paused
+      ? 'Your driver account is paused. Message us in @binasmartdriverbot and we will sort it out.'
+      : 'Your driver application is being reviewed. This usually takes up to 24 hours.';
+    $('waitSteps').hidden = !!paused;
+    meLine($('waitMe'), me);
+    show('sWait');
+  }
+  $('waitCheck').onclick = function () { boot(true); };
+
+  function route(me) {
+    ME = me;
+    var r = partnerRoute(me, store.get(LAST), store.get(LASTBIZ));
+    if (r.view === 'owners') return showBiz(me, false);
+    if (r.view === 'signin') return showSignIn();
+    if (r.view === 'go') return showGo(me, r.to);
+    if (r.view === 'choose') return showPick(me, r);
+    if (r.view === 'pending') return showWait(me);
+    meLine($('noneMe'), me);
+    show('sNone');
+  }
+
+  function boot(quiet) {
+    if (!quiet) show('sLoad');
+    fetch('/api/me', { cache: 'no-store', credentials: 'same-origin' })
+      .then(function (r) {
+        if (r.status === 401 || r.status === 404) return null;
+        if (!r.ok) throw new Error('me ' + r.status);
+        return r.json().then(function (j) { return j && j.me; });
+      })
+      .then(route)
+      .catch(function () { show('sOff'); });
+  }
+  $('offRetry').onclick = function () { boot(); };
+
+  function signOut() {
+    fetch('/api/auth/sign-out', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}', credentials: 'same-origin' })
+      .catch(function () {}).then(function () { showSignIn(); });
+  }
+
+  // ---------------- signed out ----------------
+  var T = {
+    badPhone: 'ትክክለኛ የኢትዮጵያ ስልክ ቁጥር ያስገቡ · Enter an Ethiopian mobile number, for example 0911 234 567',
+    notReach: 'ወደዚህ ቁጥር ኤስኤምኤስ መላክ አይቻልም · We cannot send an SMS to that number. Use an Ethio Telecom number starting 09.',
+    tooMany: 'በጣም ብዙ ሙከራ · Too many tries. Wait a few minutes and try again.',
+    offline: 'ግንኙነት አልተሳካም · Connection failed. Try again.',
+    noDoor: 'በስልክ መግባት ለጊዜው አይገኝም · Phone sign-in is not available right now. Use Telegram below.',
+    badCode: 'ኮዱ ትክክል አይደለም ወይም ጊዜው አልፎበታል · That code is wrong or has expired. Ask for a new one.',
+    need6: 'ባለ6 አኃዝ ኮድ ያስገቡ · Enter the six digits from the SMS.',
+    tgFail: 'በቴሌግራም መግባት አልተሳካም · Telegram sign-in did not complete. Try again.'
+  };
+  function showErr(m) { var e = $('err'); e.textContent = m; e.hidden = false; }
+  function clearErr() { var e = $('err'); e.textContent = ''; e.hidden = true; }
+  // Only for showing a number back to the person who typed it. The server decides what a number is.
+  function e164(v) {
+    var s = String(v || '').replace(/[^\d+]/g, '');
+    if (/^0\d{9}$/.test(s)) s = '+251' + s.slice(1);
+    if (/^9\d{8}$/.test(s) || /^7\d{8}$/.test(s)) s = '+251' + s;
+    if (/^251\d{9}$/.test(s)) s = '+' + s;
+    return /^\+251\d{9}$/.test(s) ? s : null;
+  }
+
+  var methodsLoaded = false;
+  function showSignIn() {
+    show('sIn');
+    // An owner who signed in with a password (/owner) holds a building key on this device, not an
+    // account; offer their dashboard back rather than a second sign-in. The dashboard checks the key.
+    var k = store.get('bs_key'), s = store.get('bs_slug');
+    var ko = $('keyOwner');
+    if (k && s && /^[a-z0-9-]{1,80}$/i.test(s)) {
+      ko.href = '/owner/' + encodeURIComponent(s); ko.textContent = 'ሕንጻዬን ክፈት · Open my building dashboard'; ko.hidden = false;
+    } else ko.hidden = true;
+    if (methodsLoaded) return;
+    methodsLoaded = true;
+    fetch('/api/auth-methods').then(function (r) { return r.json(); }).then(function (m) {
+      if (m.phone) { $('pBox').hidden = false; }
+      if (m.telegram && m.telegramBot) {
+        $('tgBox').hidden = false;
+        if (!m.phone) $('tgOr').hidden = true;
+        var sc = document.createElement('script');
+        sc.async = true; sc.src = 'https://telegram.org/js/telegram-widget.js?22';
+        sc.setAttribute('data-telegram-login', m.telegramBot);
+        sc.setAttribute('data-size', 'large');
+        sc.setAttribute('data-radius', '14');
+        sc.setAttribute('data-onauth', 'onTelegramAuth(user)');
+        sc.setAttribute('data-request-access', 'write');
+        $('tgWidget').appendChild(sc);
+      }
+      if (!m.phone && !(m.telegram && m.telegramBot)) {
+        // No door this page can open: hand over to /login, which also has the staff form.
+        var a = $('keyOwner'); a.hidden = false; a.href = '/login?next=/partner'; a.textContent = 'ግባ · Sign in';
+      }
+    }).catch(function () { methodsLoaded = false; showErr(T.offline); });
+  }
+
+  window.onTelegramAuth = function (user) {
+    clearErr();
+    fetch('/api/auth/sign-in/telegram', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ widget: user, callbackURL: '/partner' }) })
+      .then(function (r) { if (r.ok) boot(); else showErr(T.tgFail); })
+      .catch(function () { showErr(T.offline); });
+  };
+
+  // ---- the phone door: the same endpoints as /login (auth/phone-code-plugin.mjs), nothing new ----
+  var PHONE = '', tick = null;
+  function startTick() {
+    var left = 60, a = $('pResend');
+    clearInterval(tick);
+    a.textContent = 'እንደገና ላክ · Send again in ' + left + 's'; a.setAttribute('aria-disabled', 'true');
+    tick = setInterval(function () {
+      left--;
+      if (left > 0) { a.textContent = 'እንደገና ላክ · Send again in ' + left + 's'; return; }
+      clearInterval(tick); a.textContent = 'እንደገና ላክ · Send the code again'; a.removeAttribute('aria-disabled');
+    }, 1000);
+  }
+  function ask(p) {
+    clearErr();
+    var btn = $('pSend'); btn.disabled = true; $('pSendT').textContent = 'በመላክ ላይ…'; $('pSendE').textContent = 'Sending';
+    fetch('/api/auth/sign-in/phone-code/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone: p }) })
+      .then(function (r) {
+        btn.disabled = false; $('pSendT').textContent = 'ኮድ ላክ'; $('pSendE').textContent = 'Send me a code by SMS';
+        if (r.ok) {
+          PHONE = p;
+          $('pSent').textContent = 'ኮድ ወደ ' + mask(p) + ' ተልኳል። · We sent a code to ' + mask(p) + '. It works for 5 minutes.';
+          $('p1').hidden = true; $('p2').hidden = false; $('code').value = ''; $('code').focus();
+          startTick(); return;
+        }
+        if (r.status === 400) return showErr(T.notReach);
+        if (r.status === 429) return showErr(T.tooMany);
+        if (r.status === 503) { $('pBox').hidden = true; $('tgOr').hidden = true; return showErr(T.noDoor); }
+        showErr(T.offline);
+      })
+      .catch(function () { btn.disabled = false; $('pSendT').textContent = 'ኮድ ላክ'; $('pSendE').textContent = 'Send me a code by SMS'; showErr(T.offline); });
+  }
+  function sendCode() { var p = e164($('phone').value); clearErr(); if (!p) return showErr(T.badPhone); ask(p); }
+  function verify() {
+    var c = String($('code').value || '').replace(/\D/g, '');
+    clearErr();
+    if (c.length !== 6) return showErr(T.need6);
+    var btn = $('pGo'); btn.disabled = true; $('pGoT').textContent = 'በማረጋገጥ ላይ…'; $('pGoE').textContent = 'Checking';
+    fetch('/api/auth/sign-in/phone-code/verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone: PHONE, code: c }) })
+      .then(function (r) {
+        btn.disabled = false; $('pGoT').textContent = 'ግባ'; $('pGoE').textContent = 'Sign in';
+        if (r.ok) { clearInterval(tick); return boot(); }
+        $('code').value = ''; $('code').focus();
+        showErr(r.status === 429 ? T.tooMany : T.badCode);
+      })
+      .catch(function () { btn.disabled = false; $('pGoT').textContent = 'ግባ'; $('pGoE').textContent = 'Sign in'; showErr(T.offline); });
+  }
+  $('pSend').onclick = sendCode;
+  $('pGo').onclick = verify;
+  $('pResend').onclick = function () { if ($('pResend').getAttribute('aria-disabled') !== 'true') ask(PHONE); };
+  $('pBack').onclick = function () { clearInterval(tick); clearErr(); $('p2').hidden = true; $('p1').hidden = false; $('phone').focus(); };
+  $('phone').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); sendCode(); } });
+  $('code').addEventListener('input', function () { if (String(this.value).replace(/\D/g, '').length === 6) verify(); });
+
+  // Opened from the Android app: remember it for this tab so pages can tell (pwa.js hides its install bar).
+  try { if (/[?&]src=app\b/.test(location.search) || document.referrer.indexOf('android-app://') === 0) sessionStorage.setItem('bina_app', '1'); } catch (e) {}
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { cameBack = true; stopAuto(); } });
+  boot();
+})();
+</script>
+<script src="/static/pwa.js?v=1" defer></script>
+</body>
+</html>

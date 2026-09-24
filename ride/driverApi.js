@@ -70,10 +70,18 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
   async function auth(req, reply, opts) {
     const body = req.body || {};
     const initData = String(body.initData || req.query.initData || '');
-    // The injected clock, not Date.now(): keeps the 24 h freshness check honest under test.
-    const tg = tgauth.verifyInitData(initData, driverBotToken, { now: clock() });
-    if (!tg) { reply.code(401).send({ ok: false, error: 'telegram_auth_invalid' }); return null; }
-    const drv = await prisma.driver.findFirst({ where: { telegramId: String(tg.user.id) } });
+    let drv;
+    if (!initData && req.authUser && req.authUser.id) {
+      // Signed in on bina.et instead (the Bina Partner Android app, or a plain browser): the driver row this
+      // account was joined to by a PROVEN phone (auth/identity.js). Never matched on a typed number, and only
+      // when no initData came at all, so a Telegram request is always judged by its signature alone.
+      drv = await prisma.driver.findFirst({ where: { authUserId: String(req.authUser.id) } });
+    } else {
+      // The injected clock, not Date.now(): keeps the 24 h freshness check honest under test.
+      const tg = tgauth.verifyInitData(initData, driverBotToken, { now: clock() });
+      if (!tg) { reply.code(401).send({ ok: false, error: 'telegram_auth_invalid' }); return null; }
+      drv = await prisma.driver.findFirst({ where: { telegramId: String(tg.user.id) } });
+    }
     if (!drv) { reply.code(404).send({ ok: false, error: 'not_registered' }); return null; }
     // The first moment there is an identity to limit. Before this there is only an address, and on
     // this network an address is a neighbourhood rather than a person.

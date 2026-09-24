@@ -7,7 +7,7 @@ section: "help"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
+lastChecked: "2026-09-23"
 contentHash: "27e0c91deaf756b0b11d645495088aad7cbff98e"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
@@ -27,474 +27,247 @@ Source: https://dashenbanksc.com/frequently-asked-questions (official Dashen Ban
 
 Dormant Account Activation
 
-ዶርማንት አካዉንት ማለት ምን ማለት ነዉ? |
-
-ዶርማንት አካዉንት ማለት ምንም ዓይነት ገቢ ወጪ ሳያሳዩ ለረጅም ጊዜ የቆዩ የባንክ ሂሳቦች ማለት ነዉ
-
+ዶርማንት አካዉንት ማለት ምን ማለት ነዉ? ዶርማንት አካዉንት ማለት ምንም ዓይነት ገቢ ወጪ ሳያሳዩ ለረጅም ጊዜ የቆዩ የባንክ ሂሳቦች ማለት ነዉ
 - ለቁጠባ ሂሳብ አንድ ዓመትና ከዚያ በላይ ገቢ ወጪ ሳያሳይ የቆየ ሂሳብ ሲሆን
-
 - ለተንቀሳቃሽ ሂሳብ ስድስት ወር እና ከዚያ በላይ ገቢ ወጪ ሳያሳይ የቆየ ሂሳብ ማለት ነዉ
 
-|
-
-አካዉንቱን ለመጠቀም ምን ማድረግ አለብኝ? |
-
-ወደ ሚቀርቦ የባንኩ ቅርንጫፍ ከዚህ በታች የተጠቀሱትን መረጃዎች ይዘዉ በመቅረብ ለዚህ ተብሎ የተዘጋጀዉን ቅጽ በመሙላትና በማቅረብ ሂሳብዎን ማንቀሳቀስ ይችላሉ፡፡
-
+አካዉንቱን ለመጠቀም ምን ማድረግ አለብኝ? ወደ ሚቀርቦ የባንኩ ቅርንጫፍ ከዚህ በታች የተጠቀሱትን መረጃዎች ይዘዉ በመቅረብ ለዚህ ተብሎ የተዘጋጀዉን ቅጽ በመሙላትና በማቅረብ ሂሳብዎን ማንቀሳቀስ ይችላሉ፡፡
 - ለግለሰብ ሂሳብ
-
 - የፋይዳ መታወቂያና የሂሳብ ደብተር (በደብተር የተከፈተ ከሆነ ብቻ)፤ለተንቀሳቃሽ ሂሳብ የታደሰ ንግድ ፍቃድና የፋይዳ መታወቂያ
-
 - ለድርጅት ሂሳብ
-
 የድርጅቱ ባለቤት ወይም የፈራሚዉ ፋይዳ መታወቂያ፤ የታደሰ ንግድ ወይም የኢንቨስትመንት ፍቃድ.
 
-|
-
-ሂሳቤን ለማንቀሳቀስ የምከፍለዉ የአገልግሎት ክፍያ አለ? |
-
-ከዚህ ጋር ተያይዞ የሚከፈል የአገልግሎት ክፍያ የለም፡፡
-
-|
+ሂሳቤን ለማንቀሳቀስ የምከፍለዉ የአገልግሎት ክፍያ አለ? ከዚህ ጋር ተያይዞ የሚከፈል የአገልግሎት ክፍያ የለም፡፡
 
 SWIFT
 
-Why did SWIFT make this change?
+Why did SWIFT make this change? SWIFT has upgraded its messaging system to ISO 20022, a global standard that provides richer and more structured payment information which makes international payments faster, safer, and easier to track.
 
-|
+What happens if I use the old MT format? As of 22 November 2025, SWIFT no longer processes MT messages for cross-border payments. Any payment sent in the old format may be delayed, rejected, or incur extra charges.
 
-SWIFT has upgraded its messaging system to ISO 20022, a global standard that provides richer and more structured payment information which makes international payments faster, safer, and easier to track.
+Do I need to do anything? No action is required for customers. Our systems are already updated. When initiating transfers, please provide complete and accurate details such as beneficiary name, address, purpose of payment. This ensures smooth processing.
 
-|
-
-What happens if I use the old MT format?
-
-|
-
-As of 22 November 2025, SWIFT no longer processes MT messages for cross-border payments. Any payment sent in the old format may be delayed, rejected, or incur extra charges.
-
-|
-
-Do I need to do anything?
-
-|
-No action is required for customers. Our systems are already updated. When initiating transfers, please provide complete and accurate details such as beneficiary name, address, purpose of payment. This ensures smooth processing. |
-
-How does this benefit me?
-
-|
-
-- Faster payments with fewer delays.
-
+How does this benefit me? - Faster payments with fewer delays.
 - Better transparency: more information travels with your payment.
-
 - Improved security: structured data helps to meet global compliance standards.
 
-|
+Will this change affect domestic transfers? No. This change applies only to international (cross-border) payments. Local transfers remain unaffected.
 
-Will this change affect domestic transfers?
-
-|
-
-No. This change applies only to international (cross-border) payments. Local transfers remain unaffected.
-
-|
-
-Who can I contact if I have questions?
-
-|
-
-Our Customer Service Team is ready to assist you 7/24 with any concerns or clarifications. You can call to our contact centre via 6333 for any support.
-
-|
+Who can I contact if I have questions? Our Customer Service Team is ready to assist you 7/24 with any concerns or clarifications. You can call to our contact centre via 6333 for any support.
 
 Dashen Edil
 
-What is the Dashen Edil Lottery-Based Loyalty Program? |
-Dashen Edil is a culturally inspired lottery rewards program designed to encourage user engagement with the Dashen Super App through gamified activities and exciting prizes. |
+What is the Dashen Edil Lottery-Based Loyalty Program? Dashen Edil is a culturally inspired lottery rewards program designed to encourage user engagement with the Dashen Super App through gamified activities and exciting prizes.
 
-Why is it called “Edil”? |
-“Edil” reflects Ethiopia’s traditional raffle-style draws often seen in local markets like Merkato, symbolizing luck, participation, and community spirit. |
+Why is it called “Edil”? “Edil” reflects Ethiopia’s traditional raffle-style draws often seen in local markets like Merkato, symbolizing luck, participation, and community spirit.
 
-Who can participate in the Dashen Edil program |
-All registered Dashen Super App users. |
+Who can participate in the Dashen Edil program: All registered Dashen Super App users.
 
-How do I earn coins? |
-You earn coins by performing eligible activities on the Dashen Super App, such as sending money, paying bills, referring friends, or topping up airtime. |
+How do I earn coins? You earn coins by performing eligible activities on the Dashen Super App, such as sending money, paying bills, referring friends, or topping up airtime.
 
-What can I do with my coins? |
-Coins can be used to enter raffles for different reward levels. The more coins you have, the higher the level and the bigger the prizes you can win. |
+What can I do with my coins? Coins can be used to enter raffles for different reward levels. The more coins you have, the higher the level and the bigger the prizes you can win.
 
-How do I know if I’ve won? |
-After shaking your phone, your reward will be revealed. Additionally, you can find it in the coin storage section “🎁” |
+How do I know if I’ve won? After shaking your phone, your reward will be revealed. Additionally, you can find it in the coin storage section “🎁”
 
-What types of prizes can I win? |
-
-There are three reward levels:
-
+What types of prizes can I win? There are three reward levels:
 - Level 1: Cash prizes (ETB 100–2,000) and 1GB data packages.
-
 - Level 2: Smartphones (iPhone 16, Samsung Galaxy S23/A54) and cash rewards (ETB 5,000–15,000).
-
 - Level 3: A brand-new BYD car and major cash prizes (ETB 10,000–100,000).
 
-|
+How many times can I play the lottery? You can play multiple times as long as you have enough coins and meet the engagement criteria for each level.
 
-How many times can I play the lottery? |
-You can play multiple times as long as you have enough coins and meet the engagement criteria for each level. |
+Are there limits to how many coins I can earn? Yes. Certain activities, like money transfers, are limited to earning coins for up to two eligible transactions per day.
 
-Are there limits to how many coins I can earn? |
-Yes. Certain activities, like money transfers, are limited to earning coins for up to two eligible transactions per day. |
-
-What are “eligible activities”? |
-
-Eligible activities include:
-
+What are “eligible activities”? Eligible activities include:
 - Sending or receiving money
-
 - Paying bills or merchants
-
 - Referring new users
-
 - Chat banking transactions
-
 - Airtime top-ups
-
 - Using the budget management tool
-
 - Purchasing e-tickets or paying for fuel via the App
-
 - Additional criteria can be found in the game coin information section.
 
-|
+Do I need to pay to join the lottery? No. Participation is completely free. You only need to use the Dashen Super App to perform eligible actions.
 
-Do I need to pay to join the lottery?
-
-|
-No. Participation is completely free. You only need to use the Dashen Super App to perform eligible actions. |
-
-How can I get help or more information? |
-
-You can contact Dashen Bank via:
-
+How can I get help or more information? You can contact Dashen Bank via:
 - In-App Support: Dashen Super App Help Center
-
 - Call Center: 6333
-
 - Social Media: @DashenBankOfficial
-
-|
 
 Zoorya ERP
 
-What is Zoorya ERP?
-
-|
-
-Zoorya is an all-in-one POS, ERP, and ERCA-certified cash register built for Ethiopian businesses.
-
+What is Zoorya ERP? Zoorya is an all-in-one POS, ERP, and ERCA-certified cash register built for Ethiopian businesses.
 It helps merchants sell smarter, track inventory automatically, manage sales and finances, and run payroll and HR tools — all from one platform. Whether you’re running a retail shop, a café, or a hotel, Zoorya simplifies your day-to-day operations so you can focus on growing your business.
 
-|
-
-What is Zoorya building next?
-
-|
-
-We’re just getting started. Here’s what’s coming soon to help Ethiopian businesses grow even faster
-
+What is Zoorya building next? We’re just getting started. Here’s what’s coming soon to help Ethiopian businesses grow even faster
 - Accelerate SME digitization
-
 - Expand access to financial services
-
 - Boost digital transactions and bank deposits
-
 - Enhance merchant profitability and business insights
-
 - Strengthen strategic partnerships
-
 - Drive greater market adoption
-
 - E-commerce sync – connect online and in-store sales seamlessly
 
-|
-
-What types of businesses can use Zoorya?
-
-|
-
--
+What types of businesses can use Zoorya? -
 Zoorya is designed for a wide range of Ethiopian businesses, including:
-
 - Retailers and Mini-marts
-
 - Restaurants and Cafés
-
 - Hotels and Hospitality providers
-
 - Wholesale businesses
-
 - Pharmacies
-
 - Professional service providers (e.g., salons, clinics)
 
-|
-
-What features does Zoorya offer?
-
-|
-
--
-
+What features does Zoorya offer? -
 - POS, Inventory & Sales Management
-
 - Employee & Payroll Management
-
 - Purchasing & Invoicing
-
 - CRM & Customer Contact Tools
-
 - Expense Tracking
-
 - Accounting & Finance Reports
-
 - Manufacturing & Document Handling
-
 - Business Intelligence Dashboards
-
 - Project Management Tools
-
-|
 
 Sharik Warehouse Receipt Financing(WRF) FAQ's
 
-What is Sharik Warehouse Receipt Financing(WRF)? |
-Sharik Warehouse Receipt Financing(WRF) is a financial arrangement whereby farmers, agricultural cooperatives and agro-processors can access bank financing by pledging their warehouse receipts issued against commodities stored in accredited warehouses. |
+What is Sharik Warehouse Receipt Financing(WRF)? Sharik Warehouse Receipt Financing(WRF) is a financial arrangement whereby farmers, agricultural cooperatives and agro-processors can access bank financing by pledging their warehouse receipts issued against commodities stored in accredited warehouses.
 
-Who are the target customers of Warehouse Receipt Financing? |
-The product is intended to serve customers of the bank engaging in the buyer side and the seller side of agricultural commodity transactions. The seller side WRF is designed combining the Murabaha and Tijara contracts while the buyer side WRF relied on the murabaha principles |
+Who are the target customers of Warehouse Receipt Financing? The product is intended to serve customers of the bank engaging in the buyer side and the seller side of agricultural commodity transactions. The seller side WRF is designed combining the Murabaha and Tijara contracts while the buyer side WRF relied on the murabaha principles
 
-What is the use of the products for Farmer organizations, agro-processors? |
-
-- Farmers- can use the seller side Sharik WRF to get better market price for their produce
-
+What is the use of the products for Farmer organizations, agro-processors? - Farmers- can use the seller side Sharik WRF to get better market price for their produce
 - Farmer organizations, agro-processors and other aggregators purchasing commodities as part of their business can access working capital through the buyer side Sharik WRF to increase their aggregation capacity during harvest where the agricultural commodities are fresh and abundantly available in the market.
 
-|
-
-What are the main features of the Sharik Warehouse Receipt Financing? |
-
-- It provides a short-term financing facility designed to meet customers’ working capital needs.
-
+What are the main features of the Sharik Warehouse Receipt Financing? - It provides a short-term financing facility designed to meet customers’ working capital needs.
 - Is intended to serve customers of the bank engaging in the buye side and the seller side of agricultural commodity transactions.
-
 - It has a very short financing processing time, quick and efficient financing processing and disbursement service is crucial for the customer because of the dynamic commodity market price especially during the harvest season.
-
 - Maximum Tenure of Financing is set to be 6 Months.
-
 - Financing is secured by warehouse receipts, which represent ownership rights over the underlying stored commodities, granting perfected security right for the Bank.
-
 - Customers shall be availed with financing up to 70% net of the WR value.
-
 - Minimum draw-down size is set at 200,000.00 Birr (release request per WR).
-
 - If the total amount of approved financing is less than 200,000 Birr, the whole amount shall be released in at once.
-
 - The customer may serve as the banks’ agent to sell the product to Third party.
-
 - The bank may reserve the right to sale the product directly to a third party.
 
-|
-
-Eligibility Criteria’s for Sharik Warehouse Receipt Financing? |
-
-General requirement
-
+Eligibility Criteria’s for Sharik Warehouse Receipt Financing? General requirement
 - The customer shall maintain an account at Dashen bank
-
 - The customer shall be engaged in sharia compliant business lines
-
 - The product or commodity to be purchased shall have
-
 - Reasonably long shelf life,
-
 - A standardized quality grading
-
 - Relatively predictable price trend
-
 - Relatively high market demand
-
 Specific Requirement
-
 Requirements for Smallholder Farmers:
-
 - Renewed ID card
-
 - Marriage/ singleness certificate or support letter from a woreda administration where the customer resides
-
 - Landholding certificate or a registered rental contract for rented farmland
-
 - TIN
-
 - Tax Clearance (optional)
-
 - Financial Credit Report that shall be filled out by the bank officer based on the information the customer provides
-
 - Commercial farmers financing request shall be entertained in accordance with the regular financing requirements provided in this product profile and other internal rules of the bank.
-
-|
 
 Dashen Super App FAQ
 
-What is the Dashen Bank Super App |
-It is an innovative platform designed to revolutionize financial management, offering features like balance checking, fund transfers, bill payments, and investments. |
+What is the Dashen Bank Super App: It is an innovative platform designed to revolutionize financial management, offering features like balance checking, fund transfers, bill payments, and investments.
 
-Who developed the Super App |
-The app was developed in partnership with EagleLion Systems Technology. |
+Who developed the Super App: The app was developed in partnership with EagleLion Systems Technology.
 
-What is the primary focus of the Super App |
-To enhance customer convenience, security, and the overall banking experience. |
+What is the primary focus of the Super App: To enhance customer convenience, security, and the overall banking experience.
 
-Does the Super App support biometric login |
-Yes, users can log in using a 6-digit PIN or biometric options. |
+Does the Super App support biometric login: Yes, users can log in using a 6-digit PIN or biometric options.
 
-Can the Super App generate receipts |
-Yes, it provides comprehensive electronic receipts with transaction details and a scannable QR code for verification. |
+Can the Super App generate receipts: Yes, it provides comprehensive electronic receipts with transaction details and a scannable QR code for verification.
 
-What information is available on the app’s opening page |
-The opening page includes menu options like Exchange Rates, Fees and Tariffs, Feedback, FAQs, Customer Support, and Privacy Policy. |
+What information is available on the app’s opening page: The opening page includes menu options like Exchange Rates, Fees and Tariffs, Feedback, FAQs, Customer Support, and Privacy Policy.
 
-What are the supported languages in the Super App |
-The app supports Amharic, English, Afaan Oromoo, Af-Soomaali, and Tigrigna. |
+What are the supported languages in the Super App: The app supports Amharic, English, Afaan Oromoo, Af-Soomaali, and Tigrigna.
 
-What is the purpose of the Feedback feature |
-It allows customers to rate the app, provide comments, and help improve its functionality. |
+What is the purpose of the Feedback feature: It allows customers to rate the app, provide comments, and help improve its functionality.
 
-What should a user do if they uninstall the app |
-Use the “Activate Account” feature to regain access, which requires branch verification and setting a new PIN. |
+What should a user do if they uninstall the app: Use the “Activate Account” feature to regain access, which requires branch verification and setting a new PIN.
 
-How does the app ensure security |
-It uses device tokenization, PIN and biometric authentication, and PIN -based transaction approvals. |
+How does the app ensure security: It uses device tokenization, PIN and biometric authentication, and PIN -based transaction approvals.
 
-Can the app be used on multiple devices |
-No, the app is designed to be used on a single device for enhanced security. |
+Can the app be used on multiple devices: No, the app is designed to be used on a single device for enhanced security.
 
-What additional features are included in transaction receipts |
-Receipts include VAT, discounts, the Dashen Bank stamp, and a scannable QR code. |
+What additional features are included in transaction receipts: Receipts include VAT, discounts, the Dashen Bank stamp, and a scannable QR code.
 
-What does the Privacy Policy cover in Super App |
-It explains how Dashen Bank collects, uses, shares, and protects personal information. |
+What does the Privacy Policy cover in Super App: It explains how Dashen Bank collects, uses, shares, and protects personal information.
 
-Can users modify their email address after registration |
-No, email addresses cannot be modified in the app. However, notification preferences can be adjusted. |
+Can users modify their email address after registration: No, email addresses cannot be modified in the app. However, notification preferences can be adjusted.
 
-How can users contact Dashen Bank |
-Users can contact the bank via 6333, info@dashenbanksc.com, or through links to the bank’s website and social media. |
+How can users contact Dashen Bank: Users can contact the bank via 6333, info@dashenbanksc.com, or through links to the bank’s website and social media.
 
-Is there a FAQs section in the app |
-Yes, the app includes a dropdown FAQs section to assist customers. |
+Is there a FAQs section in the app: Yes, the app includes a dropdown FAQs section to assist customers.
 
-What does the Budget feature do |
-It helps users track income and expenses, categorize spending, and manage finances effectively. |
+What does the Budget feature do: It helps users track income and expenses, categorize spending, and manage finances effectively.
 
-What is the IFB version of the Super App |
-It is branded as “Sharik” and provides a customized experience for IFB account holders. |
+What is the IFB version of the Super App: It is branded as “Sharik” and provides a customized experience for IFB account holders.
 
-What exclusive feature is available in the IFB version |
-Transfers to Sahay Microfinance are exclusively available. |
+What exclusive feature is available in the IFB version: Transfers to Sahay Microfinance are exclusively available.
 
-How does the app improve the customer experience |
-It simplifies transactions, enhances security, and provides convenient banking anytime, anywhere. |
+How does the app improve the customer experience: It simplifies transactions, enhances security, and provides convenient banking anytime, anywhere.
 
-Can users set budgets through the app |
-Yes, users can set daily, weekly, or monthly budgets to track their expenses. |
+Can users set budgets through the app: Yes, users can set daily, weekly, or monthly budgets to track their expenses.
 
-What should I do if I don’t receive the OTP |
-Ensure your phone number is registered correctly. If the issue persists, contact customer support. |
+What should I do if I don’t receive the OTP: Ensure your phone number is registered correctly. If the issue persists, contact customer support.
 
-What is the purpose of OTP during registration |
-The OTP ensures secure verification of your identity during account linking and registration processes. |
+What is the purpose of OTP during registration: The OTP ensures secure verification of your identity during account linking and registration processes.
 
-How can I find information about fees and tariffs |
-Fees and tariffs are listed on the app’s opening page under the corresponding menu. |
+How can I find information about fees and tariffs: Fees and tariffs are listed on the app’s opening page under the corresponding menu.
 
-Does the app support multiple user profiles |
-No, the app is designed for individual accounts and does not support multiple profiles. |
+Does the app support multiple user profiles: No, the app is designed for individual accounts and does not support multiple profiles.
 
-What should I do if I lose my registered phone number |
-Visit a branch to update your phone number and regain access to your account. |
+What should I do if I lose my registered phone number: Visit a branch to update your phone number and regain access to your account.
 
-What happens if I enter my PIN incorrectly multiple times |
-Your account may be temporarily locked for security reasons. Contact customer support for assistance. |
+What happens if I enter my PIN incorrectly multiple times: Your account may be temporarily locked for security reasons. Contact customer support for assistance.
 
-Can I disable biometric login |
-Yes, biometric login can be disabled in the app’s security settings. |
+Can I disable biometric login: Yes, biometric login can be disabled in the app’s security settings.
 
-Are there any fees for using the Super App |
-The app itself is free, but standard transaction fees may apply as per Dashen Bank’s policies. |
+Are there any fees for using the Super App: The app itself is free, but standard transaction fees may apply as per Dashen Bank’s policies.
 
-Can the app notify me about transactions |
-Yes, you can enable notifications via email or SMS for transaction alerts. |
+Can the app notify me about transactions: Yes, you can enable notifications via email or SMS for transaction alerts.
 
-Does the app provide currency exchange rates |
-Yes, exchange rates are listed on the app’s opening page under the “Exchange Rate” menu. |
+Does the app provide currency exchange rates: Yes, exchange rates are listed on the app’s opening page under the “Exchange Rate” menu.
 
-Can I set daily transaction limits in the app |
-Transaction limits are managed by the bank. Contact your nearest branch for customization options. |
+Can I set daily transaction limits in the app: Transaction limits are managed by the bank. Contact your nearest branch for customization options.
 
-Are there any special features for IFB customers |
-Yes, IFB customers get a customized user interface and exclusive services, such as transfers to Sahay Microfinance. |
+Are there any special features for IFB customers: Yes, IFB customers get a customized user interface and exclusive services, such as transfers to Sahay Microfinance.
 
-What is the purpose of the QR code on receipts |
-The QR code ensures transaction authenticity and allows for quick verification. |
+What is the purpose of the QR code on receipts: The QR code ensures transaction authenticity and allows for quick verification.
 
-How do I configure my email address in the app |
-After registration, you can add your email address to receive OTPs and transaction notifications. An OTP will be sent to your email for confirmation. |
+How do I configure my email address in the app: After registration, you can add your email address to receive OTPs and transaction notifications. An OTP will be sent to your email for confirmation.
 
-Can I find Dashen Bank’s social media links in the app |
-Yes, the “Contact Us” menu provides links to Dashen Bank’s official website and social media platforms. |
+Can I find Dashen Bank’s social media links in the app: Yes, the “Contact Us” menu provides links to Dashen Bank’s official website and social media platforms.
 
-What is the purpose of the “Activate Account” option |
-It allows users to regain access after uninstalling the app or unlinking their device, requiring branch verification. |
+What is the purpose of the “Activate Account” option: It allows users to regain access after uninstalling the app or unlinking their device, requiring branch verification.
 
-Can I use the app abroad |
-Yes, as long as your registered phone number or email are accessible for OTPs. |
+Can I use the app abroad: Yes, as long as your registered phone number or email are accessible for OTPs.
 
-How is the IFB version different from the regular app |
-The IFB version features a tailored interface, exclusive IFB services, and branding aligned with Sharik. |
+How is the IFB version different from the regular app: The IFB version features a tailored interface, exclusive IFB services, and branding aligned with Sharik.
 
-Can I set reminders for payments in the app |
-Currently, the app does not support reminders but provides transaction history for tracking payments. |
+Can I set reminders for payments in the app: Currently, the app does not support reminders but provides transaction history for tracking payments.
 
-What happens if my account registration is incomplete |
-You need to visit the nearest branch to fulfill KYC requirements and complete the registration. |
+What happens if my account registration is incomplete: You need to visit the nearest branch to fulfill KYC requirements and complete the registration.
 
-Can I make payments using QR codes |
-Yes, the app supports QR code-based payments for merchants. |
+Can I make payments using QR codes: Yes, the app supports QR code-based payments for merchants.
 
-Enabling or disabling my Dashen Super App account |
-Visit your branch to enable or disable your Dashen Super App account based on your request. |
+Enabling or disabling my Dashen Super App account: Visit your branch to enable or disable your Dashen Super App account based on your request.
 
-Process for unlinking a device from the Dashen Super App |
-Branch staff can unlink your device from the Dashen Super App, allowing you to link a new one. OTP verification is required. |
+Process for unlinking a device from the Dashen Super App: Branch staff can unlink your device from the Dashen Super App, allowing you to link a new one. OTP verification is required.
 
-Reactivating the Dashen Super App account after uninstalling |
-Visit a branch to reactivate your Dashen Super App account after uninstalling the app. |
+Reactivating the Dashen Super App account after uninstalling: Visit a branch to reactivate your Dashen Super App account after uninstalling the app.
 
-Detaching a phone number from the Dashen Super App |
-Visit your branch to request phone number detachment from the Dashen Super App. OTP verification ensures security. |
+Detaching a phone number from the Dashen Super App: Visit your branch to request phone number detachment from the Dashen Super App. OTP verification ensures security.
 
-Actions after unlinking a device in the Dashen Super App |
-Once unlinked, the Dashen Super App can be linked to a new device by visiting the branch. |
+Actions after unlinking a device in the Dashen Super App: Once unlinked, the Dashen Super App can be linked to a new device by visiting the branch.
 
-Default transfer limits in the Dashen Super App |
-Limits are centrally set and adjustable upon request at a branch for the Dashen Super App. |
+Default transfer limits in the Dashen Super App: Limits are centrally set and adjustable upon request at a branch for the Dashen Super App.
 
-Bill payments subject to transfer limits in the Dashen Super App |
-Bill payments are exempt from transfer limit restrictions in the Dashen Super App. |
+Bill payments subject to transfer limits in the Dashen Super App: Bill payments are exempt from transfer limit restrictions in the Dashen Super App.
 
-Retrieving a specific transaction in the Dashen Super App |
-Provide transaction ID, account number, or sender’s name at the branch for assistance with the Dashen Super App. |
+Retrieving a specific transaction in the Dashen Super App: Provide transaction ID, account number, or sender’s name at the branch for assistance with the Dashen Super App.
 
 What are the features of Murabaha Plus product?
 
@@ -973,20 +746,11 @@ How do I make school fee payments on Dashen Mobile Plus?
 
 What is the MESMER project loan amount provided per enterprise?
 
-Business category |
-Credit amount in Birr |
-
-Start-ups |
-95,000.00 |
-
-Micro |
-95,000.00 |
-
-Small |
-235,000.00 |
-
-Medium |
-375,000.00 |
+Business category | Credit amount in Birr
+Start-ups: Credit amount in Birr 95,000.00
+Micro: Credit amount in Birr 95,000.00
+Small: Credit amount in Birr 235,000.00
+Medium: Credit amount in Birr 375,000.00
 
 What are the supporting documents required during MESMER project application and later appraisal?
 

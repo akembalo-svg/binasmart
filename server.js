@@ -155,10 +155,13 @@ const authFail = (req, reply) => {
 // not a hashed column. Building.ownerKey used to hold them in plain text, compared with ===.
 const { makeOwnerKeys } = require('./building/ownerKeys');
 const ownerKeys = makeOwnerKeys({ prisma });
+// building/memberAccess.js: an ACTIVE OWNER building membership = that building's owner key, nothing more.
+const isBuildingMember = require('./building/memberAccess').makeBuildingMember({ prisma });
 async function authBuildingFail(req, reply, slug) {
   if (req.authUser) {
     if (req.authUser.role === 'admin') return false;
     if (req.authUser.buildingSlug && req.authUser.buildingSlug === slug) return false;
+    if (await isBuildingMember(req.authUser.id, slug)) return false;
   }
   const key = keyOf(req);
   if (key === OWNER_KEY) return false;
@@ -228,6 +231,13 @@ fastify.get('/airport', async (req, reply) => reply.sendFile('airport.html')); /
 fastify.get('/pool', async (req, reply) => reply.sendFile('pool.html')); // BinaPool landing (8 Sep 2026) -> hands off to /ride?pool=1
 fastify.get('/login', async (req, reply) => reply.sendFile('login.html'));
 fastify.get('/account', async (req, reply) => reply.header('Cache-Control','no-store').sendFile('account.html'));
+// Bina Partner (23 Sep 2026): start page of the Android app et.bina.partner (a TWA) for drivers and building
+// owners. It asks /api/me who is signed in and opens /drive or /owner/<slug>. Its manifest keeps scope '/'.
+fastify.get('/partner', async (req, reply) => reply.header('Cache-Control', 'no-cache').sendFile('partner.html'));
+fastify.get('/partner.webmanifest', async (req, reply) => reply.type('application/manifest+json').sendFile('partner.webmanifest'));
+// Bina, the customer app (Android TWA et.bina.app): one big box to ask Bini + the five most used services.
+fastify.get('/go', async (req, reply) => reply.header('Cache-Control', 'no-cache').sendFile('go.html'));
+fastify.get('/go.webmanifest', async (req, reply) => reply.type('application/manifest+json').sendFile('go.webmanifest'));
 // ===== OWNER LOGIN: phone + password =====
 const cryptoMod = require('crypto');
 function hashPw(pw){

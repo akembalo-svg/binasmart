@@ -164,10 +164,11 @@ async function load(){
   if (r.status === 401) { // REDIR-TO-LOGIN
     localStorage.removeItem('bs_key'); KEY = '';
     const prefix = location.pathname.split('/owner/')[0];
-    location.href = prefix + '/login';
+    location.href = ownerInApp() ? '/partner' : prefix + '/login';
     return;
   }
   const d = await r.json();
+  try { if (r.ok) localStorage.setItem('bs_slug', slug); } catch (e) {}   // /partner offers this dashboard back to a key-holding owner
   await loadUnits();
   const now = new Date();
   document.getElementById('bname').textContent = d.building.name;
@@ -968,8 +969,14 @@ function loginKey(){
   load();
 }
 function logoutKey(){
-  localStorage.removeItem('bs_key'); KEY = '';
-  location.reload();
+  localStorage.removeItem('bs_key'); localStorage.removeItem('bs_slug'); KEY = '';
+  // An owner signed in with a bina.et account is let in by the session, not the key: end that too, or
+  // Exit reloads straight back into the dashboard. Inside the Bina Partner app, go back to its start page.
+  fetch('/api/auth/sign-out', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })
+    .catch(function () {}).then(function () { if (ownerInApp()) location.href = '/partner'; else location.reload(); });
+}
+function ownerInApp(){
+  try { return !!sessionStorage.getItem('bina_app') || matchMedia('(display-mode: standalone)').matches; } catch (e) { return false; }
 }
 
 const MAINT_ICON = { PLUMBING:'🚿', ELECTRIC:'💡', LIFT:'🛗', CLEANING:'🧹', SECURITY:'🛡️', GENERAL:'🔧' };

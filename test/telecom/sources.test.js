@@ -6,12 +6,14 @@
 //   - the telebirr, mobile-money, credit and saving pages of ethiotelecom.et belong to the banking pack, and a
 //     page lives in one pack only: none of their paths may be allowed here;
 //   - every regulator PDF is named, not matched by a pattern;
-//   - the Oromo, Somali and Tigrinya pages stay on disk and out of the index until they are wanted.
+//   - an Oromo, Somali or Tigrinya page is taken only when it translates an English page the pack holds, named by
+//     its exact address in translationOf; every other one, and every one the registry skips, stays on disk.
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('fs');
 const path = require('path');
 
+const P = require(path.join(__dirname, '..', '..', 'ops', 'packs', 'fetch-pack.js'));
 const FILE = path.join(__dirname, '..', '..', 'knowledge', 'telecom', 'sources.json');
 const reg = JSON.parse(fs.readFileSync(FILE, 'utf8'));
 const site = id => reg.sites.find(s => s.id === id);
@@ -75,9 +77,30 @@ test('the consumer pages the pack exists for are allowed, in both languages wher
   for (const k of ['/statistics', '/registration-eca-et', '/search', '/public-notice']) assert.equal(allowed(eca, k), false, k + ' has no content or is a login');
 });
 
-test('the Oromo, Somali and Tigrinya pages are denied by pattern and named in the note', () => {
-  for (const q of ['om', 'so', 'Tig']) assert.equal(denied(et, '/esim?lang=' + q), true, q);
-  assert.match(et.denyNote, /Oromo, Somali and Tigrinya/);
+test('an Oromo, Somali or Tigrinya page is allowed only by its exact address, when translationOf names it', () => {
+  const tr = et.translationOf || {};
+  const keys = Object.keys(tr);
+  assert.ok(keys.length >= 5, 'the Oromo translations are named: ' + keys.length);
+  for (const k of keys) {
+    assert.match(k, /\?lang=om$/, k);
+    assert.equal(allowed(et, k) && !denied(et, k), true, k + ' is named but not allowed');
+    assert.equal(P.langFor(et, k), 'om', k);
+    const en = new URL(tr[k]);
+    assert.equal(en.hostname, 'www.ethiotelecom.et');
+    assert.equal(allowed(et, en.pathname.replace(/\/+$/, '')), true, k + ': its English page ' + tr[k] + ' is not in the pack');
+    assert.ok((et.sharedText || []).some(r => new RegExp(r.pages).test('telecom-ethiotelecom-' + et.pathSlugs[k])), k + ' has no sharedText rule');
+    assert.match(et.pathSlugs[k], /^om-[a-z0-9-]+$/, k);
+  }
+  // a page the registry does not name is not allowed, whatever its language
+  for (const q of ['om', 'so', 'Tig']) assert.equal(allowed(et, '/esim?lang=' + q), false, q);
+  assert.equal(allowed(et, '/telediraayivii?lang=om'), false);
+  assert.equal(P.langFor(et, '/x?lang=so'), 'so');
+  assert.equal(P.langFor(et, '/x?lang=Tig'), 'ti');
+  // every skipped page says why, and the Somali and Tigrinya ones are among them
+  const skipped = et.translationsSkipped || {};
+  for (const k of ['/teledrive?lang=so', '/teledrive?lang=Tig']) assert.ok(String(skipped[k] || '').length > 20, k);
+  for (const k of Object.keys(skipped)) assert.ok(!allowed(et, k), k + ' is skipped but allowed');
+  assert.match(et.denyNote, /Oromo, Somali or Tigrinya/);
 });
 
 test('a Safaricom page is named by the registry, its cards are joined and its numbers are kept', () => {

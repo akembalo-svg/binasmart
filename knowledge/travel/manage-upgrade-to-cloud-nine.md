@@ -22,36 +22,6 @@ Source: https://www.ethiopianairlines.com/et/book/manage/upgrade-to-cloud-nine (
 
 ## Upgrade to Cloud Nine
 
-Upgrade to Cloud Nine
-
-Upgrade to Cloud Nine
-
-Book a flight
-
-Flight Status
-
-Manage Booking
-
-Online Check-in
-
-Upgrade to Cloud Nine
-
-Flight Schedules
-
-Upgrade to Cloud Nine
-
-Book a flight
-
-Flight Status
-
-Manage Booking
-
-Online Check-in
-
-Upgrade to Cloud Nine
-
-Flight Schedules
-
 Please be aware that offers made on group bookings apply to all passengers in the booking. If you wish to make an offer only for specific passengers, please contact our customer service to divide your booking so that you can submit an offer accordingly
 
 ## Upgrade to Cloud Nine Business Class!

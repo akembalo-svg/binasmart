@@ -1,10 +1,11 @@
 'use strict';
-// chunkDoc's lineSafe option (LINE_SAFE_SOURCES): the carried-over context and the cut of an oversized paragraph
+// chunkDoc's lineSafe option (on for every knowledge-index source, lineSafeFor): the carried-over context and the cut of an oversized paragraph
 // never leave a chunk opening mid-line. All text below is invented.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('path');
-const { chunkDoc, LINE_SAFE_SOURCES, readSources } = require('../knowledge/index');
+const fs = require('fs');
+const { chunkDoc, LINE_SAFE_OPT_OUT, lineSafeFor, readSources, PACK_SOURCES } = require('../knowledge/index');
 
 // chunkDoc exactly as it was before the option existed (HEAD 842c190), to prove the default path did not move.
 function oldChunkDoc(text, title) {
@@ -55,8 +56,21 @@ const body = c => c.text.split('\n').slice(1).join('\n');          // drop the "
 const firstLine = c => body(c).split('\n')[0];
 const srcLines = doc => new Set(doc.split('\n').map(l => l.trim()).filter(Boolean));
 
-test('LINE_SAFE_SOURCES is business only (other packs keep their chunks and their embeddings)', () => {
-  assert.deepEqual([...LINE_SAFE_SOURCES], ['business']);
+test('every knowledge-index source is line-safe except travel, which fell below its retrieval floor on the switch', () => {
+  assert.deepEqual([...LINE_SAFE_OPT_OUT], ['travel']);
+  assert.equal(lineSafeFor('travel'), false);
+  const sources = [...PACK_SOURCES.map(([s]) => s), 'news', 'web', 'page', 'guide', 'addis', 'llms', 'skill', 'docs', 'style'].filter(s => s !== 'travel');
+  for (const s of sources) assert.equal(lineSafeFor(s), true, s);
+});
+
+test('the ingest chunks with lineSafeFor(source); workspaces keep the old chunker', () => {
+  const idx = fs.readFileSync(path.join(__dirname, '..', 'knowledge', 'index.js'), 'latin1');
+  assert.match(idx, /chunkDoc\(d\.text, d\.title, \{ lineSafe: lineSafeFor\(d\.source\) \}\)/);
+  // private client documents: no lineSafe option, so the default path below (byte-identical to the old chunker)
+  const ws = fs.readFileSync(path.join(__dirname, '..', 'workspaces', 'index.js'), 'utf8');
+  const calls = ws.match(/chunkDoc\([^)]*\)/g) || [];
+  assert.ok(calls.length >= 1, 'workspaces chunks documents');
+  for (const c of calls) assert.doesNotMatch(c, /lineSafe/, c);
 });
 
 test('the old carry-over starts a chunk with a fragment of the last table row (the bug this fixes)', () => {
@@ -97,6 +111,7 @@ test('lineSafe: one very long line is cut at spaces, never mid-word, and carries
   assert.equal(cs.reduce((n, c) => n + body(c).split(' ').length, 0), 700, 'every word exactly once: no carry-over');
 });
 
+// The default path is what workspaces/index.js uses for private client documents.
 test('default path and lineSafe:false are byte-identical to the old chunker', () => {
   const samples = [tableDoc, longDoc, oneLine,
     '# Addis\n\nintro para that is long enough to count as a chunk of text for the index.\n\n## Bole\n\n' + 'Bole is the airport district. '.repeat(60) + '\n\n## Piassa\n\nOld town.',

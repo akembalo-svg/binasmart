@@ -29,12 +29,25 @@ function clipLines(s, n = HIT_CHARS) {
   const sp = s.lastIndexOf(' ', n);
   return s.slice(0, sp >= n / 2 ? sp : n);
 }
-// Sources chunked with chunkDoc's lineSafe option: the carried-over context never starts mid-line. Per source so
-// that switching a pack re-embeds only that pack (a changed chunk is a new hash and a new embedding).
+// Every source in this index is chunked with chunkDoc's lineSafe option: the carried-over context never starts
+// mid-line. A changed chunk is a new hash and a new embedding, so moving a source on or off it re-embeds that source.
 // 'business' since 2026-09-22: the EIC shed-rent table is one line per lease period, and the old 120-character
 // carry started a chunk with "Adama & Dire Dawa Industry Parks $4.0 per m2 ..." cut from its "Year 11 – 15:",
 // which search ranked first for "how much does it cost to rent a shed" and Bini quoted as THE price.
-const LINE_SAFE_SOURCES = new Set(['business']);
+// Every other source followed on 2026-09-23. The old carry opened about 14,000 chunks of the other sources mid-line
+// (banking 5,172, law 2,476, telecom 1,966, web 1,594, health 1,356, travel 887, news 222); each source was
+// re-ingested on its own and the business, banking, travel, telecom and v1 benchmarks re-run before and after.
+// LINE_SAFE_OPT_OUT names a source kept on the old chunker because it fell below its benchmark floor on the switch.
+// 'travel': retrieval 85.0% -> 81.7% in two runs (floor 85.0), shipped 90.0% -> 86.7% / 88.3%; English baggage and
+// check-in questions lost their gold page to sibling Ethiopian Airlines pages (tv-012, tv-023, tv-049), so travel
+// was re-ingested with the old chunker. Every other pack held or gained. workspaces/index.js (private client
+// documents) calls chunkDoc without the option and keeps the old chunks.
+// Re-tested 2026-09-23 after the travel pack's shared blocks were written once, on their home page only
+// (knowledge/travel/sources.json sharedText; the copies of one baggage FAQ on eight pages were what outranked the
+// gold pages): old chunker 90.0% retrieval / 90.0% shipped, line-safe 90.0% / 88.3%. Line-safe no longer loses the
+// baggage and check-in pages, but the reranker keeps fewer gold pages under it, so travel stays on the old chunker.
+const LINE_SAFE_OPT_OUT = new Set(['travel']);
+const lineSafeFor = source => !LINE_SAFE_OPT_OUT.has(source);
 
 const ROOT = path.join(__dirname, '..');
 const GUIDE_SLUGS = ['fayda', 'telebirr', 'cbe-birr-guide', 'passport', 'ethiopia-evisa', 'telesign', 'mesob', 'tin-registration-ethiopia',
@@ -56,7 +69,11 @@ function htmlToText(html) {
   s = s.replace(/<head\b[\s\S]*?<\/head>/gi, ' ').replace(/<(script|style|nav|footer|header|noscript|svg|form)\b[\s\S]*?<\/\1>/gi, ' ').replace(/<!--[\s\S]*?-->/g, ' ');
   s = s.replace(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi, '\n\n# $1\n\n').replace(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi, '\n\n## $1\n\n').replace(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gi, '\n\n### $1\n\n');
   s = s.replace(/<li\b[^>]*>/gi, '\n- ').replace(/<\/(p|div|section|article|tr|ul|ol|table|blockquote|dd|dt)>/gi, '\n').replace(/<br\s*\/?>/gi, '\n').replace(/<\/t[dh]>/gi, ' | ');
-  s = s.replace(/<[^>]+>/g, ''); s = decode(s);
+  // A tag starts with a letter, "/", "!" or "?"; a "<" followed by anything else is text, as a browser reads it
+  // (and "</ span>", an end tag gone wrong, is dropped, as a browser drops it). telebirr's English tariff page
+  // writes its first band as a raw "<td>< 100</td>"; the old /<[^>]+>/ took "< 100 | <td>" for a tag, so the row
+  // read "1 | 1 |" where the Amharic page, which escapes it as "&lt; 100", read "1 | < 100 | 1 |".
+  s = s.replace(/<[A-Za-z!?/][^>]*>/g, ''); s = decode(s);
   s = s.split('\n').map(l => l.replace(/[ \t ]+/g, ' ').trim()).join('\n').replace(/\n{3,}/g, '\n\n').trim();
   return s;
 }
@@ -72,7 +89,7 @@ function lineTail(s, n) {
   const i = s.indexOf('\n', s.length - n - 1);
   return i < 0 ? '' : s.slice(i + 1).replace(/^\n+/, '');
 }
-// lineSafe (LINE_SAFE_SOURCES): the overlap is whole lines only (see lineTail), and a paragraph too long for one
+// lineSafe (lineSafeFor): the overlap is whole lines only (see lineTail), and a paragraph too long for one
 // chunk is cut at a line break in the back half of the chunk, or failing that at a space, never over CHUNK.
 // Without it the output is byte-identical to what it was before the option existed.
 function chunkDoc(text, title, { lineSafe = false } = {}) {
@@ -949,7 +966,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     }
     let inserted = 0, deleted = 0, embedded = 0;
     for (const d of docs) {
-      const chunks = chunkDoc(d.text, d.title, { lineSafe: LINE_SAFE_SOURCES.has(d.source) });
+      const chunks = chunkDoc(d.text, d.title, { lineSafe: lineSafeFor(d.source) });
       const hashes = chunks.map(c => sha1(d.source + '|' + d.slug + '|' + c.text));
       // identical chunks inside one page (repeated blocks on crawled sites) would collide on the unique hash: keep the first
       const dupe = new Set(); for (let i = chunks.length - 1; i >= 0; i--) { if (dupe.has(hashes[i])) { chunks.splice(i, 1); hashes.splice(i, 1); } else dupe.add(hashes[i]); }
@@ -1319,6 +1336,6 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   return { load, ingest, checkMasks, search, contextFor, health, embedPendingGemini, embedPendingLocal, voice: which => voiceBlock(root || ROOT, which), isAmharic, _chunkDoc: chunkDoc, _htmlToText: htmlToText, _readSources: readSources };
 }
 
-module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, LINE_SAFE_SOURCES, HIT_CHARS, clipLines, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, pageUrl, docMeta, docMetaFile, ownPageDates, ownPageMeta, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
+module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, LINE_SAFE_OPT_OUT, lineSafeFor, HIT_CHARS, clipLines, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, pageUrl, docMeta, docMetaFile, ownPageDates, ownPageMeta, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
   LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled,
   bilingualEnabled, bilingualEn2AmEnabled, makeQueryTranslator, normaliseQuery, BILINGUAL_TIMEOUT_MS, BILINGUAL_CACHE_MAX };
