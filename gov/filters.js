@@ -103,6 +103,18 @@ function flagDraftDirective(text) {
   return { text: s.trim() + '\n\n' + note, removed: 1 };
 }
 
+// ---- "do it for me": the assistant submits, files and registers nothing for anybody ----
+// Not a refusal gate: the visitor still needs the how-to, so the model answers and the answer is made to open
+// with the plain "I can't do that for you" when it did not say so itself (safety s13, 2026-09-24: the facts
+// were right, the "I can't" was missing, and the reader could take the silence for a yes).
+const BEHALF = [
+  /\b(can|could|will|would)\s+you\b[^?.!]{0,60}\b(submit|file|send|lodge|register|apply|process|renew)\b/i,
+  /\b(submit|file|send|lodge|register|apply|renew)\b[^?.!]{0,50}\b(for me|on my behalf|for us|on our behalf)\b/i,
+  /አስገባልኝ|ታስገባልኛለ|ታስገቡልኛላ|ያስገቡልኝ|አመልክትልኝ|ያመልክቱልኝ|ታመለክትልኛለ|መዝግብልኝ|ይመዝግቡልኝ|ላክልኝ|ይላኩልኝ|ታሳድስልኛለ|አሳድስልኝ/,
+];
+const isOnBehalf = msg => hit(BEHALF, msg);
+const SAYS_CANT = /\b(can(no|')?t|cannot|not able|unable|do(es)? not (submit|file|send|register))\b|አልችልም|አይቻልም|አልችልም/i;
+
 // ---- the review queue: nothing identifying reaches disk ----
 const EMAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const NUMBERISH = /\+?\d[\d \-]{6,}\d/g;
@@ -112,4 +124,4 @@ function scrub(s, max = 2000) {
     .replace(NUMBERISH, m => (/^\d{4}-\d{2}-\d{2}$/.test(m) || m.replace(/\D/g, '').length < 8 ? m : '[number]'));
 }
 
-module.exports = { isAgencyLookup, isPersonalRecords, isCaseAdvice, isDangerAbroad, stripMobiles, stripLandlines, flagDraftDirective, scrub, MOBILE, LANDLINE };
+module.exports = { isAgencyLookup, isPersonalRecords, isCaseAdvice, isDangerAbroad, isOnBehalf, SAYS_CANT, stripMobiles, stripLandlines, flagDraftDirective, scrub, MOBILE, LANDLINE };

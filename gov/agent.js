@@ -34,6 +34,13 @@ const TEXT = {
     en: p => 'If someone is in danger now: contact the Ethiopian embassy or consulate in that country and the local police there straight away. In Ethiopia: Federal Police ' + p + '.',
     om: p => 'Namni tokko amma balaa keessa yoo jiraate: ambaasii ykn qonsilaa Itoophiyaa biyya sana jiru fi poolisii biyyattii battaluma quunnamaa. Itoophiyaa keessatti: Poolisii Federaalaa ' + p + '.',
   },
+  // Opens an answer to "can you submit it for me?" when the model did not say it cannot (filters.isOnBehalf).
+  // Oromo is switched off (Y8); until a speaker writes it, an Oromo request gets the English line.
+  behalf: {
+    am: () => 'ማመልከቻ ማስገባት፣ መመዝገብ ወይም ሰነድ መላክ በማንም ስም አልችልም፤ ይህን ማድረግ የሚችሉት እርስዎ ራስዎ ብቻ ነዎት። እንዴት እንደሚደረግ ግን ይኸው፦',
+    en: () => 'I can\'t submit, register or send anything on anyone\'s behalf; only you can do that. Here is how it is done:',
+    om: () => 'I can\'t submit, register or send anything on anyone\'s behalf; only you can do that. Here is how it is done:',
+  },
   limited: {
     am: () => 'በአጭር ጊዜ ብዙ ጥያቄዎች ደርሰውኛል። እባክዎ ትንሽ ቆይተው እንደገና ይሞክሩ።',
     en: () => 'Too many questions in a short time. Please wait a little and try again.',
@@ -112,7 +119,11 @@ function makeOfficeAgent(office) {
       text => { const d = F.flagDraftDirective(text); return { text: d.text, removed: d.removed, what: 'unsigned-draft warning added' }; },
       text => { const v = asmat.stripVerdict(text); return { text: v.text, removed: v.removed, what: 'verdict sentence(s)' }; },
     ],
-    finish(c, text) { if (!String(text || '').trim()) { c.govEmpty = true; return fallback(c); } return text; },
+    finish(c, text) {
+      if (!String(text || '').trim()) { c.govEmpty = true; return fallback(c); }
+      if (F.isOnBehalf(c.msg) && !F.SAYS_CANT.test(text)) return say('behalf', c.l) + '\n\n' + text;
+      return text;
+    },
     body: c => (c.govEmpty ? { answered: false } : {}),
     fallback,
     limited: c => say('limited', c.l),
