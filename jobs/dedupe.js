@@ -70,6 +70,12 @@ const DRY = process.argv.includes('--dry-run');
       + (Object.keys(patch).length ? '  (+' + Object.keys(patch).join(',') + ')' : ''));
     if (DRY) { removed += rest.length; continue; }
     if (Object.keys(patch).length) await prisma.job.update({ where: { id: keep.id }, data: patch });
+    // Every address we delete keeps working: it becomes an alias of the survivor, which /jobs/:slug answers
+    // with a 301. Until 25 September 2026 this step deleted without one, and Googlebot - which had the twins'
+    // addresses from the sitemap - met 404s on pages it was just starting to index.
+    for (const r of rest) {
+      await prisma.jobAlias.upsert({ where: { slug: r.slug }, update: { jobId: keep.id, path: null }, create: { slug: r.slug, jobId: keep.id } });
+    }
     const del = await prisma.job.deleteMany({ where: { id: { in: rest.map(r => r.id) } } });
     removed += del.count;
   }
