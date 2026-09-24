@@ -6,6 +6,12 @@
   'use strict';
 
   var PING_MS = 4000, OFFER_WINDOW_S = 25, RING = 119.4; // OFFER_WINDOW_S is only a fallback
+  // Parked, or on 2G / data saver, with no trip or offer on screen: every 8 s is plenty. The server
+  // only calls a driver away after 45 s of silence, so this never costs an offer.
+  var PING_SLOW_MS = 8000;
+  // Low-data mode: drive.html skipped the map engine and left a stub BinaMap. Voice turn-by-turn still
+  // works, because it reads the route the server sends, not the map.
+  var LITE = !!window.__driveLite;
   var $ = function (id) { return document.getElementById(id); };
   // TG.initData is a function in the shim, and it returns null outside Telegram.
   var initData = (window.TG && window.TG.initData && window.TG.initData()) || '';
@@ -37,6 +43,41 @@
       body: JSON.stringify(Object.assign({ initData: initData }, body || {})),
     }).then(function (r) { return r.json().then(function (j) { j._status = r.status; return j; }); });
   }
+  // ---------- weak networks ----------
+  // A trip step tapped with no signal is kept on the phone and sent, in order, when the network is back.
+  // Before this, the tap failed silently and the server could believe a finished trip was still running.
+  var NET_MSG = '📡 ኢንተርኔት የለም — እንደገና ይሞክሩ · No connection. Try again.';
+  var OUTBOX = 'bina_drive_outbox', OUTBOX_TTL_MS = 3 * 3600 * 1000;
+  function outbox() {
+    try { var q = JSON.parse(localStorage.getItem(OUTBOX) || '[]'); return Array.isArray(q) ? q : []; } catch (e) { return []; }
+  }
+  function saveOutbox(q) {
+    try { if (q.length) localStorage.setItem(OUTBOX, JSON.stringify(q)); else localStorage.removeItem(OUTBOX); } catch (e) {}
+  }
+  function queueStatus(id, next) {
+    var q = outbox().filter(function (x) { return !(x.id === id && x.next === next); });
+    q.push({ id: id, next: next, t: Date.now() });
+    saveOutbox(q.slice(-10));
+  }
+  var flushing = false;
+  // Resolves true when nothing is left to send, false when the network is still down.
+  function flush() {
+    if (flushing) return Promise.resolve(!outbox().length);
+    var q = outbox().filter(function (x) { return x && x.id && x.next && Date.now() - x.t < OUTBOX_TTL_MS; });
+    saveOutbox(q);
+    if (!q.length) return Promise.resolve(true);
+    flushing = true;
+    var it = q[0];
+    return post('/api/drive/ride/' + it.id + '/status', { status: it.next }).then(function (j) {
+      flushing = false;
+      if (j._status === 403) return false;          // signed out: keep it until boot() signs back in
+      // Sent, or refused because the trip already moved on: either way the server now decides.
+      saveOutbox(outbox().filter(function (x) { return !(x.id === it.id && x.next === it.next); }));
+      if (j.ok && !outbox().length) banner('✅ የተቀመጠው ተልኳል · Saved trip update sent.', true);
+      return flush();
+    }, function () { flushing = false; return false; });
+  }
+
   // Mobile browsers stay silent until the user touches the page, so the first tap opens the audio.
   document.addEventListener('click', function () { window.DNav.unlock(); }, { once: true });
   document.addEventListener('touchstart', function () { window.DNav.unlock(); }, { once: true });
@@ -584,6 +625,12 @@
     render();
   }
   function ping() {
+    if (!st.driver) return;
+    // Anything saved while offline goes first, so the answer to this ping already reflects it.
+    if (outbox().length) { flush().then(function (done) { if (done) sendPing(); }); return; }
+    sendPing();
+  }
+  function sendPing() {
     if (!st.driver || st.driver.status !== 'approved' || !st.driver.online) return;
     var body = st.pos ? { lat: st.pos.lat, lng: st.pos.lng, bearing: st.pos.bearing, speedKph: st.pos.speedKph, accuracy: st.pos.accuracy } : {};
     post('/api/drive/ping', body).then(function (j) {
@@ -606,7 +653,9 @@
   function act(el, fn) {
     if (st.busy) return;
     st.busy = true; el.disabled = true;
-    fn().then(function () {}).catch(function () {}).then(function () { st.busy = false; el.disabled = false; });
+    // A request that never reached the server used to end silently; now the driver is told to retry.
+    fn().then(function () {}).catch(function () { haptic('error'); banner(NET_MSG); })
+      .then(function () { st.busy = false; el.disabled = false; });
   }
   $('oacc').addEventListener('click', function () {
     var id = this.dataset.ride, self = this;
@@ -652,6 +701,15 @@
           banner('✅ Trip complete · ' + (j.driver.earningsTodayEtb || 0) + ' ETB today', true);
           render();
         } else { st.job = j.job; st.driver = j.driver; st.routeFor = ''; st.legSpoken = ''; render(); paintNavHud(); }
+      }, function () {
+        // No connection: the step is saved and the screen moves on, exactly as if it had gone through.
+        queueStatus(id, next);
+        haptic('warning');
+        if (next === 'completed') {
+          window.DNav.say('ጉዞው ተጠናቋል። ኢንተርኔት ሲመለስ ይላካል።');
+          st.job = null; st.legSpoken = ''; render();
+        } else if (st.job) { st.job.status = next; st.routeFor = ''; st.legSpoken = ''; render(); paintNavHud(); }
+        banner('💾 ተቀምጧል — ኢንተርኔት ሲመለስ ይላካል · Saved on the phone. It will be sent when the connection is back.');
       });
     });
   }
@@ -698,6 +756,14 @@
     if (st.nav) navCamera(st.pos); else follow(st.pos);
   });
   $('tcancel').addEventListener('click', function () { window.open('https://t.me/binasmartdriverbot', '_blank'); });
+  // Low-data mode is remembered on the phone; switching reloads the page without (or with) the map engine.
+  $('lite').textContent = LITE ? '🗺' : '📉';
+  $('lite').setAttribute('aria-label', LITE ? 'Map on · ካርታ አብራ' : 'Low-data mode, map off · ዝቅተኛ ዳታ');
+  $('lite').addEventListener('click', function () {
+    try { localStorage.setItem('bina_drive_lite', LITE ? '0' : '1'); } catch (e) {}
+    location.reload();
+  });
+  if (LITE) banner('📉 ዝቅተኛ ዳታ — ካርታ ጠፍቷል፤ የድምፅ አቅጣጫ ይሠራል · Low-data mode: map off, voice directions still work.', true);
 
   // ---------- boot ----------
   function boot() {
@@ -734,12 +800,24 @@
       absorb(j);
       if (st.driver.online) { startGps(); wakeLock(true); }
     }).catch(function () {
-      gate('No connection', 'We could not reach BinaSmart. Check your internet and reopen the app.', 'Retry', location.href);
+      // Keep trying by ourselves: a driver in a weak-signal street should not have to find a Retry button.
+      gate('No connection · ኢንተርኔት የለም', 'We could not reach BinaSmart. We keep trying every few seconds — you can also tap Retry.\nግንኙነት እስኪመለስ ድረስ በራሳችን እንሞክራለን።', 'Retry · እንደገና', location.href);
+      clearTimeout(st.bootRetry); st.bootRetry = setTimeout(boot, 6000);
     });
   }
 
-  setInterval(ping, PING_MS);
+  // One ping at a time, at a pace that follows the situation (see PING_SLOW_MS).
+  function pingDelay() {
+    if (st.job || st.offer || st.filling || outbox().length) return PING_MS;
+    var c = navigator.connection || {};
+    var slowNet = !!c.saveData || /2g$/.test(c.effectiveType || '');
+    var parked = !!(st.pos && st.pos.speedKph != null && st.pos.speedKph < 2);
+    return (slowNet || parked) ? PING_SLOW_MS : PING_MS;
+  }
+  (function loop() { ping(); setTimeout(loop, pingDelay()); })();
   // A backgrounded Mini App stops timers; catch up the moment it comes back.
   document.addEventListener('visibilitychange', function () { if (!document.hidden) ping(); });
+  // The network came back: send what was saved, then catch up.
+  window.addEventListener('online', function () { flush().then(function () { ping(); }); });
   boot();
 })();

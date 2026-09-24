@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="/static/vendor/maplibre-gl.css">
 <link rel="stylesheet" href="/static/ride/ui.css?v=9">
 <link rel="stylesheet" href="/static/ride/drive.css?v=8">
+<style>html.lite #map,html.lite #recenter{display:none}
+html.lite body.drv{background:#0b1220 radial-gradient(60% 40% at 50% 25%,rgba(0,200,150,.10),transparent)}
+html.lite body.drv::before{content:"📉 ዝቅተኛ ዳታ · Low-data mode";position:fixed;left:0;right:0;top:38%;text-align:center;color:rgba(255,255,255,.28);font:600 14px system-ui,sans-serif;letter-spacing:.04em;pointer-events:none}</style>
 <style>.dbrand .logo{background:linear-gradient(135deg,#ff9a3d,#ef6c2f)!important;box-shadow:0 10px 22px -10px rgba(239,108,47,.9)!important}</style>
 <script>
 /* "next" look (default since 7 Sep 2026): html.next + ride/drive-next.css. ?v=classic remembers the old look; ?v=next restores. */
@@ -32,6 +35,7 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
     <div class="dstat"><span id="earn">0</span><small>ETB today</small></div>
     <div class="dstat"><span id="trips">0</span><small>trips</small></div>
   </div>
+  <button id="lite" class="dghost" aria-label="Low-data mode, map off">📉</button>
   <button id="mute" class="dghost" aria-label="Sound on or off">🔔</button>
   <button id="recenter" class="dghost" aria-label="Recentre the map">◎</button>
 </header>
@@ -144,13 +148,22 @@ if(on){window.__rideNext=true;document.documentElement.className+=' next';
 if(!(/tgWebApp/i.test(s)||window.TelegramWebviewProxy||/Telegram/i.test(navigator.userAgent)))return;
 document.write('<scr'+'ipt src="https://telegram.org/js/telegram-web-app.js"><\/scr'+'ipt>');})();
 </script>
-<script src="/static/vendor/maplibre-gl.js"></script>
-<script src="/static/vendor/pmtiles.js"></script>
+<script>
+/* Low-data mode (📉 in the header, or ?lite=1): skip the 190 KB map engine and its tiles entirely.
+   drive.js then gets a BinaMap that draws nothing; trips, offers and voice directions all still work. */
+(function(){var lite=false,q=location.search||'';try{lite=localStorage.getItem('bina_drive_lite')==='1';}catch(e){}
+if(/[?&]lite=1\b/.test(q)){lite=true;try{localStorage.setItem('bina_drive_lite','1');}catch(e){}}
+else if(/[?&]lite=0\b/.test(q)){lite=false;try{localStorage.setItem('bina_drive_lite','0');}catch(e){}}
+window.__driveLite=lite;
+if(lite){document.documentElement.className+=' lite';
+var no=function(){return null;};window.BinaMap={init:no,set3D:no,drawRoute:no,clearRoute:no,setDrop:no,whenReady:no};}
+else document.write('<scr'+'ipt src="/static/vendor/maplibre-gl.js"><\/scr'+'ipt><scr'+'ipt src="/static/vendor/pmtiles.js"><\/scr'+'ipt>');})();
+</script>
 <script src="/static/ride/tg.js?v=2"></script>
-<script src="/static/ride/map.js?v=8"></script>
+<script>if(!window.__driveLite)document.write('<scr'+'ipt src="/static/ride/map.js?v=8"><\/scr'+'ipt>');</script>
 <script src="/static/ride/drivedemo.js?v=2"></script>
 <script src="/static/ride/drivenav.js?v=2"></script>
-<script src="/static/ride/drive.js?v=17"></script>
+<script src="/static/ride/drive.js?v=18"></script>
 <script src="/static/pwa.js?v=1" defer></script>
 </body>
 </html>
