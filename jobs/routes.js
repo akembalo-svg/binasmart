@@ -210,7 +210,7 @@ function hiringHistory(all) {
 // One contact card for a company, used on its page and under every vacancy: where it is, how to get there,
 // how to reach it. Every button is only what we hold. A map point nobody has confirmed is shown, labelled as
 // unconfirmed, with directions but no ride booking: the ride button waits for locationChecked (a person).
-function contactCard(e, lang, { escH, rideLabel, unverified, compact = false }) {
+function contactCard(e, lang, { escH, rideLabel, unverified, compact = false, claim = false }) {
   const en = lang === 'en';
   const has = e.lat != null && e.lng != null;
   const checked = has && !!e.locationChecked;
@@ -233,6 +233,7 @@ function contactCard(e, lang, { escH, rideLabel, unverified, compact = false }) 
     ${!has ? `<div style="margin-top:6px;color:var(--mut);font-size:13px">${escH(unverified)}</div>` : ''}
     ${e.email ? `<div style="margin-top:6px">✉️ ${escH(e.email)}</div>` : ''}
     ${buttons.length ? `<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">${buttons.join('')}</div>` : ''}
+    ${claim && !e.locationChecked ? `<div style="margin-top:12px;font-size:13.5px"><a href="/employer/${escH(e.slug)}/claim${en ? '?lang=en' : ''}" style="font-weight:700">${en ? '🏢 Is this your company? Add your exact address →' : '🏢 ይህ የእርስዎ ድርጅት ነው? ትክክለኛ አድራሻዎን ያክሉ →'}</a></div>` : ''}
   </div>`;
 }
 
@@ -289,6 +290,8 @@ function postedAgo(d, lang) {
 let escHSafe = s => String(s == null ? '' : s);
 
 module.exports = async function jobRoutes(fastify, { prisma, shell, escH, amDate, OWNER_KEY }) {
+  // "Is this your company?": the company gives its address and pin, a person approves (jobs/claim.js).
+  require('./claim')(fastify, { prisma, shell, escH, OWNER_KEY });
   escHSafe = escH;
   const daysLeft = d => Math.ceil((closesAt(d).getTime() - Date.now()) / 86400000);
 
@@ -635,7 +638,7 @@ const ogJobs = cat => {
         <span class="t-tag">📍 ${escH(e.city)}</span>
         <span class="t-tag">💼 ${open.length} ${t.open}</span>
       </div>
-      ${contactCard(e, lang, { escH, rideLabel: t.ride, unverified: t.unverified })}
+      ${contactCard(e, lang, { escH, rideLabel: t.ride, unverified: t.unverified, claim: true })}
       ${open.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding-bottom:8px">${t.openVac}</h2>${open.map(j => `<div class="t-card"><div><h3><a href="/jobs/${j.slug}">${escH(j.titleAm || j.title)}</a></h3><div class="t-tags sans"><span class="t-tag">📍 ${escH(j.city)}</span>${typePill(j.jobType, lang)}${dlPill(j.deadline, lang)}</div></div></div>`).join('')}` : `<div class="empty"><div class="big">💼</div><h3>${escH(t.noJobs)}</h3></div>`}
       ${history}
       ${shut.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding:14px 0 8px">🔒 ${en ? 'Past adverts' : 'ያለፉ ማስታወቂያዎች'} · ${shut.length}</h2>
