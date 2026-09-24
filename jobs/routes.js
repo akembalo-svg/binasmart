@@ -207,6 +207,35 @@ function hiringHistory(all) {
   };
 }
 
+// One contact card for a company, used on its page and under every vacancy: where it is, how to get there,
+// how to reach it. Every button is only what we hold. A map point nobody has confirmed is shown, labelled as
+// unconfirmed, with directions but no ride booking: the ride button waits for locationChecked (a person).
+function contactCard(e, lang, { escH, rideLabel, unverified, compact = false }) {
+  const en = lang === 'en';
+  const has = e.lat != null && e.lng != null;
+  const checked = has && !!e.locationChecked;
+  const btn = (href, label, strong, blank) => `<a href="${escH(href)}"${blank ? ' target="_blank" rel="noopener"' : ''} style="display:inline-block;border-radius:999px;padding:9px 16px;font-weight:700;font-size:13.5px;${strong ? 'background:#064e3b;color:#fff' : 'border:1.5px solid var(--line)'}">${label}</a>`;
+  const buttons = [
+    checked ? btn('/ride?to=' + e.lat + ',' + e.lng + '&label=' + encodeURIComponent(e.name), escH(rideLabel), true) : '',
+    has ? btn('https://www.google.com/maps/dir/?api=1&destination=' + e.lat + ',' + e.lng, en ? '🧭 Directions' : '🧭 አቅጣጫ', false, true) : '',
+    has ? btn('https://www.openstreetmap.org/?mlat=' + e.lat + '&mlon=' + e.lng + '#map=18/' + e.lat + '/' + e.lng, en ? '🗺 Map' : '🗺 ካርታ', false, true) : '',
+    e.phone ? btn('tel:' + String(e.phone).replace(/[^\d+]/g, ''), '📞 ' + escH(e.phone), false) : '',
+    e.website ? btn(absUrl(e.website), en ? '🌐 Website' : '🌐 ድረ ገጽ', false, true) : '',
+  ].filter(Boolean);
+  return `<div class="sans" style="padding:16px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--line);margin-bottom:18px">
+    ${compact ? '' : `<b style="display:block;margin-bottom:6px">${en ? '📇 Where and how to reach' : '📇 አድራሻና መገናኛ'}</b>`}
+    ${e.address ? `<div>📍 ${escH(e.address)}</div>` : `<div style="color:var(--mut)">${en ? 'Address not recorded yet' : 'አድራሻው ገና አልተመዘገበም'}</div>`}
+    ${/* A point matched from OpenStreetMap (ops/places/employer-osm.js) says so once, in the page's language. */''}
+    ${e.locationNote && !/^Map point from OpenStreetMap/.test(e.locationNote) ? `<div style="color:var(--mut);font-size:13px">${escH(e.locationNote)}</div>` : ''}
+    ${has && !checked ? `<div style="margin-top:4px;color:#8a5a00;font-size:13px">${/^Map point from OpenStreetMap/.test(e.locationNote || '')
+      ? (en ? '⚠️ Map point from OpenStreetMap, matched by the company name — not yet confirmed. Call before you travel.' : '⚠️ የካርታው ቦታ ከOpenStreetMap በድርጅቱ ስም የተገኘ ነው — ገና አልተረጋገጠም። ከመሄድዎ በፊት ይደውሉ።')
+      : (en ? '⚠️ Map point not yet confirmed — call before you travel.' : '⚠️ የካርታው ቦታ ገና አልተረጋገጠም — ከመሄድዎ በፊት ይደውሉ።')}</div>` : ''}
+    ${!has ? `<div style="margin-top:6px;color:var(--mut);font-size:13px">${escH(unverified)}</div>` : ''}
+    ${e.email ? `<div style="margin-top:6px">✉️ ${escH(e.email)}</div>` : ''}
+    ${buttons.length ? `<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">${buttons.join('')}</div>` : ''}
+  </div>`;
+}
+
 // The employer's OWN way in, pulled out of their instructions: a Google form, their recruitment page,
 // an email address. That is a link we are glad to publish - it takes the applicant to the company, not
 // to another jobs board. The boards we read from are blocked by name, which is the whole distinction:
@@ -606,15 +635,7 @@ const ogJobs = cat => {
         <span class="t-tag">📍 ${escH(e.city)}</span>
         <span class="t-tag">💼 ${open.length} ${t.open}</span>
       </div>
-      <div class="sans" style="padding:16px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--line);margin-bottom:18px">
-        ${e.address ? `<div>📍 ${escH(e.address)}</div>` : (lang === 'en' ? '<div style="color:var(--mut)">Address not recorded yet</div>' : '<div style="color:var(--mut)">አድራሻው ገና አልተመዘገበም</div>')}
-        ${e.locationNote ? `<div style="color:var(--mut);font-size:13px">${escH(e.locationNote)}</div>` : ''}
-        ${mapped ? `<div style="margin-top:10px"><a href="/ride?to=${e.lat},${e.lng}&label=${encodeURIComponent(e.name)}" style="background:#064e3b;color:#fff;border-radius:999px;padding:9px 18px;font-weight:700;font-size:13.5px">${t.ride}</a></div>`
-          : `<div style="margin-top:6px;color:var(--mut);font-size:13px">${t.unverified}</div>`}
-        ${e.phone ? `<div style="margin-top:8px">📞 <a href="tel:${escH(e.phone)}">${escH(e.phone)}</a></div>` : ''}
-        ${e.email ? `<div>✉️ ${escH(e.email)}</div>` : ''}
-        ${e.website ? `<div>🔗 <a href="${escH(absUrl(e.website))}" target="_blank" rel="noopener">${escH(e.website)}</a></div>` : ''}
-      </div>
+      ${contactCard(e, lang, { escH, rideLabel: t.ride, unverified: t.unverified })}
       ${open.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding-bottom:8px">${t.openVac}</h2>${open.map(j => `<div class="t-card"><div><h3><a href="/jobs/${j.slug}">${escH(j.titleAm || j.title)}</a></h3><div class="t-tags sans"><span class="t-tag">📍 ${escH(j.city)}</span>${typePill(j.jobType, lang)}${dlPill(j.deadline, lang)}</div></div></div>`).join('')}` : `<div class="empty"><div class="big">💼</div><h3>${escH(t.noJobs)}</h3></div>`}
       ${history}
       ${shut.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding:14px 0 8px">🔒 ${en ? 'Past adverts' : 'ያለፉ ማስታወቂያዎች'} · ${shut.length}</h2>
