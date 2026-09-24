@@ -101,6 +101,10 @@ module.exports = function registerRide(fastify, deps) {
   const expiry = setInterval(() => offers.expire().catch(e => console.error('[ride] offer expiry error:', e.message)), 5000);
   const awaySweep = setInterval(() => location.staleSweep().catch(e => console.error('[ride] away sweep error:', e.message)), 20000);
   const abandonSweep = setInterval(() => dispatch.sweepAbandoned().catch(e => console.error('[ride] abandoned sweep error:', e.message)), 300000);
+  // A request no driver took in ten minutes is closed, and the rider is told instead of waiting for ever.
+  const unservedSweep = setInterval(() => dispatch.sweepUnserved(Date.now(), id => riderNotify.notify(id, 'cancelled'))
+    .catch(e => console.error('[ride] unserved sweep error:', e.message)), 60000);
+  if (unservedSweep.unref) unservedSweep.unref();
   sweep.unref(); expiry.unref(); awaySweep.unref(); abandonSweep.unref();
   console.log('[ride] BinaSmart Ride module mounted' + (riderBotToken ? ' (Telegram bots on)' : ' (no Telegram bot tokens)'));
   return { settings, geo, telegram, dispatch, riderNotify, offers, location, drive, pool, groups, jobAlerts };

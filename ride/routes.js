@@ -40,7 +40,7 @@ function pubRide(ride) {
   return { id: ride.id, status: ride.status, concierge: ride.concierge, tier: ride.tier, pickup: ride.pickup, dropoff: ride.dropoff,
     distanceM: ride.distanceM, durationS: ride.durationS, fareEtb: ride.fareEtb, estimate: ride.estimate,
     paymentMethod: ride.paymentMethod, paymentStatus: ride.paymentStatus, requestedAt: ride.requestedAt, assignedAt: ride.assignedAt,
-    completedAt: ride.completedAt, cancelledAt: ride.cancelledAt, driverRating: ride.driverRating,
+    completedAt: ride.completedAt, cancelledAt: ride.cancelledAt, cancelledBy: ride.cancelledBy || null, driverRating: ride.driverRating,
     driver: d ? { name: d.name, phone: d.phone, photo: d.photo, carPhoto: d.carPhotoUrl || null, plate: d.plate, vehicle: [d.vehicleColour, d.vehicleMake].filter(Boolean).join(' '), rating: d.rating, tier: d.tier } : null };
 }
 
@@ -221,7 +221,14 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     if (!lookupRL(req.params.id)) return reply.code(429).send({ ok: false, error: 'slow_down' });
     const ride = await prisma.ride.findUnique({ where: { id: req.params.id }, include: { driver: true } });
     if (!ride || normPhone(req.query.phone) !== ride.riderPhone) return reply.code(404).send({ ok: false, error: 'not_found' });
-    return { ok: true, ride: pubRide(ride) };
+    const out = pubRide(ride);
+    // While a human is looking for a driver, the rider is told the truth: whether anyone is online at all,
+    // and when the request will be closed for them (dispatch.sweepUnserved).
+    if (ride.concierge && ['requested', 'dispatching'].includes(ride.status)) {
+      out.driversOnline = await prisma.driver.count({ where: { status: 'approved', online: true, away: false } });
+      out.closesAt = new Date(new Date(ride.requestedAt).getTime() + (dispatch.UNSERVED_MIN || 10) * 60000);
+    }
+    return { ok: true, ride: out };
   });
 
   fastify.post('/api/ride/:id/cancel', async (req, reply) => {
