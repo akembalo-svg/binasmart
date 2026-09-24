@@ -33,7 +33,7 @@ async function main() {
     const data = { name: NAME, phone, phoneVerifiedAt: new Date(), role: 'owner', buildingSlug: DEMO_BUILDING };
     const u = holder
       ? await prisma.authUser.update({ where: { id: holder.id }, data })
-      : await prisma.authUser.create({ data: Object.assign({ email: pc.phonePlaceholderEmail(phone), emailVerified: false }, data) });
+      : await prisma.authUser.create({ data: Object.assign({ id: require('crypto').randomBytes(16).toString('hex'), email: pc.phonePlaceholderEmail(phone), emailVerified: false }, data) });
     console.log('reviewer account ready:', u.id, u.role, u.buildingSlug);
   } finally {
     await prisma.$disconnect();
