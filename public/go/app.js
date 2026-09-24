@@ -158,7 +158,23 @@
     catch (e) { return false; }
   }
 
-  var api = { STORE_KEY: STORE_KEY, HISTORY_TURNS: HISTORY_TURNS, MAX_Q: MAX_Q, safeHref: safeHref, isInternal: isInternal,
+  // Sharing an answer: the question, the start of Bini's answer as plain text, and a link that opens Bini
+  // with the same question typed in. The link never sends it by itself: a chat app's link preview must not
+  // spend an answer, and the friend should see the question before asking it.
+  function plainText(t) {
+    return String(t == null ? '' : t).replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/^#+\s*/gm, '').replace(/\n{3,}/g, '\n\n').trim();
+  }
+  function shareLink(question) {
+    return 'https://bina.et/go?q=' + encodeURIComponent(String(question == null ? '' : question).trim().slice(0, 300)) + '&s=share';
+  }
+  function shareText(question, answer) {
+    var a = plainText(answer);
+    if (a.length > 280) a = a.slice(0, 277).replace(/\s+\S*$/, '') + '…';
+    return '❓ ' + String(question == null ? '' : question).trim().slice(0, 200) + '\n\n' + a + '\n\n— ቢኒ · Bini, bina.et';
+  }
+
+  var api = { STORE_KEY: STORE_KEY, plainText: plainText, shareLink: shareLink, shareText: shareText, HISTORY_TURNS: HISTORY_TURNS, MAX_Q: MAX_Q, safeHref: safeHref, isInternal: isInternal,
     inline: inline, blocks: blocks, opensFrom: opensFrom, historyFor: historyFor, pageForTools: pageForTools, loadChat: loadChat, saveChat: saveChat };
   if (typeof document !== 'undefined' && document.getElementById('ask')) boot(api);
   return api;
@@ -219,7 +235,21 @@
     }
     function bini(node) { var w = el('div', 'msg b'), m = el('span', 'bm', 'ቢ'); m.setAttribute('aria-hidden', 'true'); w.appendChild(m); w.appendChild(node); return w; }
     function drawUser(t) { var w = el('div', 'msg u'); w.appendChild(el('p', null, t)); log.appendChild(w); return w; }
-    function drawBini(m) {
+    function shareRow(qText, answer) {
+      var row = el('div', 'share'), url = G.shareLink(qText), text = G.shareText(qText, answer);
+      if (navigator.share) {
+        var b = el('button', null, '↗ ለጓደኛ ላክ · Share'); b.type = 'button';
+        b.addEventListener('click', function () { navigator.share({ title: 'ቢኒ · Bini', text: text, url: url }).catch(function () {}); });
+        row.appendChild(b);
+      } else {
+        row.appendChild(el('span', null, '↗ ለጓደኛ ላክ · Share'));
+        var tg = el('a', null, 'Telegram'); tg.href = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text);
+        var wa = el('a', null, 'WhatsApp'); wa.href = 'https://wa.me/?text=' + encodeURIComponent(text + '\n' + url);
+        [tg, wa].forEach(function (a) { a.target = '_blank'; a.rel = 'noopener'; row.appendChild(a); });
+      }
+      return row;
+    }
+    function drawBini(m, qText) {
       var body;
       if (m.k === 'sos') {
         body = el('div', 'body');
@@ -235,13 +265,15 @@
           opens.forEach(function (o) { var a = el('a'); a.href = o.href; a.appendChild(document.createTextNode(o.label)); a.appendChild(icon('M9 5l7 7-7 7')); row.appendChild(a); });
           body.appendChild(row);
         }
+        if (qText) body.appendChild(shareRow(qText, m.t));
       }
       var w = bini(body); log.appendChild(w); return w;
     }
     function drawAll() {
       log.textContent = '';
       log.appendChild(el('p', 'disc', 'ቢኒ AI ነው፤ ክፍያና ቀን ከምንጩ ያረጋግጡ · Bini is AI: check fees and dates with the source'));
-      msgs.forEach(function (m) { if (m.r === 'u') drawUser(m.t); else drawBini(m); });
+      var lastQ = '';
+      msgs.forEach(function (m) { if (m.r === 'u') { lastQ = m.t; drawUser(m.t); } else drawBini(m, lastQ); });
     }
     function toEnd(node, smooth) {
       if (!node) { log.scrollTop = log.scrollHeight; return; }
@@ -336,7 +368,7 @@
           if (d.emergency === true) { m.k = 'sos'; if (/^\d{3,4}$/.test(String(d.ambulance || ''))) m.amb = String(d.ambulance); }
           msgs.push(m); G.saveChat(store, msgs);
           t.parentNode.removeChild(t);
-          toEnd(drawBini(m), true);
+          toEnd(drawBini(m, text), true);
         })
         .catch(function () {
           if (t.parentNode) t.parentNode.removeChild(t);
@@ -425,6 +457,11 @@
         }).catch(function () {});
     } catch (e) {}
 
+    // A shared link (bina.et/go?q=…) arrives with the question typed in, waiting for a tap on Send.
+    try {
+      var sq = window.URLSearchParams ? new URLSearchParams(location.search).get('q') : null;
+      if (sq && String(sq).trim()) { q.value = String(sq).trim().slice(0, G.MAX_Q); q.dispatchEvent(new Event('input')); }
+    } catch (e) {}
     syncSend(); syncResume();
     if (location.hash === '#chat' && msgs.length) open(false);
     else if (location.hash === '#chat') { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }

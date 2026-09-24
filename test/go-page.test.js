@@ -150,3 +150,16 @@ test('assetlinks.json names both apps, each with a well-formed SHA-256', () => {
     for (const f of st.target.sha256_cert_fingerprints) assert.match(f, /^([0-9A-F]{2}:){31}[0-9A-F]{2}$/);
   }
 });
+
+test('share: the question, the start of the answer as plain text, and a link that only types the question in', () => {
+  const t = G.shareText('የፓስፖርት ክፍያ ስንት ነው?', '**ክፍያው** 5,000 ብር ነው። ዝርዝሩ [እዚህ](https://bina.et/passport) ነው።');
+  assert.ok(t.startsWith('❓ የፓስፖርት ክፍያ ስንት ነው?'));
+  assert.match(t, /ክፍያው 5,000 ብር ነው። ዝርዝሩ እዚህ ነው።/, 'bold and link markup become plain text');
+  assert.ok(t.endsWith('— ቢኒ · Bini, bina.et'));
+  const long = G.shareText('q', 'ሀ '.repeat(400));
+  assert.ok(long.length < 330, 'a long answer is cut short: ' + long.length);
+  assert.equal(G.shareLink('ከቦሌ ወደ ፒያሳ?'), 'https://bina.et/go?q=' + encodeURIComponent('ከቦሌ ወደ ፒያሳ?') + '&s=share');
+  assert.ok(G.shareLink('x'.repeat(2000)).length < 360, 'the question in the link is capped');
+  const boot = js.slice(js.indexOf('// A shared link'), js.indexOf('syncSend(); syncResume();'));
+  assert.ok(boot.includes('q.value') && !/submit\(|ask_\(/.test(boot), 'a shared link fills the box and never asks by itself');
+});
