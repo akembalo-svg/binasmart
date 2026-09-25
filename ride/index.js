@@ -22,7 +22,10 @@ const routes = require('./routes');
 // registerRide(fastify, { prisma, sendTg, OWNER_KEY, OWNER_CHAT, ROUTER_URL, BASE_URL })
 module.exports = function registerRide(fastify, deps) {
   const settings = makeSettings(deps.prisma);
-  const geo = makeGeo({ routerUrl: deps.ROUTER_URL, prisma: deps.prisma, gazetteer: require('./gazetteer').makeGazetteer() });
+  const gazetteer = require('./gazetteer').makeGazetteer();
+  // Place reviews: only from completed rides that ended at the place (ride/placeReviews.js).
+  const placeReviews = require('./placeReviews').makePlaceReviews({ prisma: deps.prisma, gazetteer });
+  const geo = makeGeo({ routerUrl: deps.ROUTER_URL, prisma: deps.prisma, gazetteer, ratings: placeReviews });
   // Telegram bots (rider @bina_smart_bot, driver @binasmartdriverbot). Tokens only from .env.
   const riderBotToken = process.env.BINA_RIDER_BOT_TOKEN || '', driverBotToken = process.env.BINA_DRIVER_BOT_TOKEN || '';
   const riderApi = makeTgApi({ token: riderBotToken }), driverTgApi = makeTgApi({ token: driverBotToken });
@@ -98,6 +101,7 @@ module.exports = function registerRide(fastify, deps) {
   dispatch.setOffers(offers);
   const driverBot = makeDriverBot({ prisma: deps.prisma, api: driverTgApi, telegram, uploadsDir, baseUrl: deps.BASE_URL, offers });
   const drive = makeDriverApi({ prisma: deps.prisma, driverBotToken, location, offers, telegram, riderNotify, geo, settings, pool });
+  require('./placeReviews').placeReviewRoutes(fastify, { prisma: deps.prisma, reviews: placeReviews, telegram, normPhone: require('./phone').normPhone, baseUrl: deps.BASE_URL });
   const helpers = routes(fastify, { prisma: deps.prisma, settings, geo, telegram, dispatch, OWNER_KEY: deps.OWNER_KEY,
     riderBotToken, webhookSecret: process.env.TG_WEBHOOK_SECRET || '', riderBot, driverBot, riderNotify, uploadsDir, drive, location, askBini: deps.askBini || null, pool });
   poolRoutes(fastify, { pool, groups, riderBotToken, drive, limiter: helpers.limiter, clientIp: helpers.clientIp, OWNER_KEY: deps.OWNER_KEY });

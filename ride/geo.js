@@ -79,7 +79,7 @@ function landmarkFor(q) {
 }
 
 
-function makeGeo({ routerUrl, fetchFn, prisma, gazetteer }) {
+function makeGeo({ routerUrl, fetchFn, prisma, gazetteer, ratings }) {
   const f = fetchFn || fetch;
   let lastRouteWarn = 0;
 
@@ -160,6 +160,7 @@ function makeGeo({ routerUrl, fetchFn, prisma, gazetteer }) {
     // or more answers, Photon is not asked at all: faster, Amharic-aware, and the keystroke never leaves the VPS.
     let local = [];
     try { local = gazetteer ? gazetteer.search(q, bias || ADDIS) : []; } catch (e) { local = []; }
+    if (ratings && local.length) local = await ratings.decorate(local).catch(() => local);   // ★ from rides (ride/placeReviews.js)
     let osm = [];
     if (local.length < 4) try {
       const lat = (bias && bias.lat) || ADDIS.lat, lng = (bias && bias.lng) || ADDIS.lng;

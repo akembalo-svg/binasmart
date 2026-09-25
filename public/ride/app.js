@@ -356,6 +356,7 @@
       var pn = $('payNow'); if (pn) pn.addEventListener('click', payNow);
       var pt = $('payTelebirr'); if (pt) pt.addEventListener('click', payTelebirr);
       if (r.driverRating) markStars(r.driverRating);
+      showPlaceRate(r);
     } else if (r.status === 'cancelled') {
       stopPoll(); window.BinaTrack.stop(); lsDel('bina_ride_active'); show('s-cancelled');
       var why = $('cancelWhy');
@@ -402,7 +403,30 @@
   // ---- cancel / rate / again ----
   function cancel() { if (!S.ride) return; var go = function (yes) { if (!yes) return; api('/api/ride/' + S.ride.id + '/cancel', { phone: ME.phone }).then(function (d) { if (d.ok) render(d.ride); else toast(d.error || 'Cannot cancel now'); }).catch(function () { toast('Network error'); }); }; if (IN_TG) TG.confirm('ጉዞውን ይሰርዙ? · Cancel this ride?', go); else go(confirm('ጉዞውን ይሰርዙ? · Cancel this ride?')); }
   $('cancelFinding').addEventListener('click', cancel); $('cancelAssigned').addEventListener('click', cancel);
+  // Rate the place: shown only when the drop-off is at a named place on the map (GET /api/ride/:id/place).
+  var PR = { stars: 0, loaded: '' };
+  function markPStars(n) { $('pstars').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', +b.dataset.s <= n); }); }
+  function showPlaceRate(r) {
+    var box = $('placeRate'); if (!box || !ME || !ME.phone || PR.loaded === r.id) return;
+    PR.loaded = r.id;
+    fetch('/api/ride/' + r.id + '/place?phone=' + encodeURIComponent(ME.phone)).then(function (x) { return x.json(); }).then(function (d) {
+      if (!d || !d.ok || !d.place) return;
+      $('placeName').textContent = d.place.nameAm || d.place.name;
+      box.classList.remove('hidden');
+      if (d.mine) { PR.stars = d.mine.stars; markPStars(d.mine.stars); $('ptext').value = d.mine.text || ''; $('psend').disabled = false; }
+    }).catch(function () {});
+  }
   function markStars(n) { $('stars').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', +b.dataset.s <= n); }); }
+  if ($('pstars')) {
+    $('pstars').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { PR.stars = +b.dataset.s; markPStars(PR.stars); $('psend').disabled = false; }); });
+    $('psend').addEventListener('click', function () {
+      if (!PR.stars || !S.ride) return;
+      $('psend').disabled = true;
+      api('/api/ride/' + S.ride.id + '/place-review', { phone: ME.phone, stars: PR.stars, text: $('ptext').value }).then(function (d) {
+        $('pmsg').textContent = d && d.textStatus === 'pending' ? 'አመሰግናለሁ! ኮከቦቹ ተቆጥረዋል፤ አስተያየትዎ ከተገመገመ በኋላ ይታያል። · Thank you! Stars counted; your words appear after a check.' : 'አመሰግናለሁ! · Thank you!';
+      }).catch(function () { $('psend').disabled = false; toast('Network error'); });
+    });
+  }
   $('stars').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { var n = +b.dataset.s; markStars(n); api('/api/ride/' + S.ride.id + '/rate', { phone: ME.phone, stars: n }).then(function () { $('rateMsg').textContent = 'አመሰግናለሁ! · Thank you!'; }).catch(function () { toast('Network error'); }); }); });
   function reset(swap) {
     if (IN_TG) { TG.mainHide(); TG.backHide(); }

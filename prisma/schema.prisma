@@ -1874,6 +1874,24 @@ model TenderAlert {
   @@index([active])
 }
 
+// A place review from a completed ride whose drop-off is at the named place (ride/placeReviews.js). One per ride.
+model PlaceReview {
+  id         String   @id @default(cuid())
+  rideId     String   @unique
+  placeRef   String                        // the OpenStreetMap element, "node/123" - ride/gazetteer.js
+  placeName  String
+  lat        Float
+  lng        Float
+  stars      Int
+  text       String?
+  textStatus String   @default("none")     // none | pending | published | hidden - words wait for a person
+  token      String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([placeRef])
+}
+
 model JobSubmission {
   id           String    @id @default(cuid())
   createdAt    DateTime  @default(now())

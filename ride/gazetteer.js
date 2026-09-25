@@ -65,7 +65,7 @@ function makeGazetteer({ file = process.env.PLACES_GAZETTEER || '/root/storage/o
         if (kind === 'street') { if (seen.has(label.toLowerCase())) continue; seen.add(label.toLowerCase()); }
         const labelAm = /[ሀ-፿]/.test(tg['name:am'] || '') ? tg['name:am'] : (/[ሀ-፿]/.test(tg.name || '') ? tg.name : '');
         const names = [label, labelAm, tg.name, tg.alt_name, tg.old_name, tg.short_name].filter(Boolean);
-        out.push({ label, labelAm, kind, sub: bySub[e.type + e.id] || '', lat, lng, keys: [...new Set(names.map(norm).filter(Boolean))] });
+        out.push({ ref: e.type + '/' + e.id, label, labelAm, kind, sub: bySub[e.type + e.id] || '', lat, lng, keys: [...new Set(names.map(norm).filter(Boolean))] });
       }
       entries = out; mtime = st.mtimeMs;
     } catch (e) { /* keep the last good list */ }
@@ -100,10 +100,31 @@ function makeGazetteer({ file = process.env.PLACES_GAZETTEER || '/root/storage/o
       const d = bias ? Math.hypot((e.lat - bias.lat) * 111, (e.lng - bias.lng) * 109.5) : 0;
       scored.push({ e, s: r * 1000 + (e.kind === 'street' ? 500 : e.kind === 'stop' || e.kind === 'taxi rank' ? 450 : 0) + Math.min(d, 400) });   // the area before its stops and streets
     }
-    return scored.sort((a, b) => a.s - b.s).slice(0, limit).map(({ e }) => ({
-      kind: 'place', label: e.label, labelAm: e.labelAm, sub: [e.kind, e.sub, 'Addis Ababa'].filter(Boolean).join(' · '), lat: e.lat, lng: e.lng }));
+    // The same place is often mapped twice (a mall as a mall and as a store): one name within 300 m is one answer.
+    const picked = [];
+    for (const { e } of scored.sort((a, b) => a.s - b.s)) {
+      if (picked.some(p => p.label.toLowerCase() === e.label.toLowerCase() && Math.hypot((p.lat - e.lat) * 111, (p.lng - e.lng) * 109.5) < 0.3)) continue;
+      picked.push(e); if (picked.length >= limit) break;
+    }
+    return picked.map(e => ({
+      ref: e.ref, kind: 'place', label: e.label, labelAm: e.labelAm, sub: [e.kind, e.sub, 'Addis Ababa'].filter(Boolean).join(' · '), lat: e.lat, lng: e.lng }));
   }
-  return { search, size: () => { load(); return entries.length; } };
+  // The named place at a drop-off: the nearest non-street, non-stop entry within 80 m, one whose name the ride's
+  // label contains first. Used to tie a review to the place the rider actually went to.
+  function nearest(lat, lng, label) {
+    load();
+    const want = norm(label || '');
+    let best = null, bestScore = Infinity;
+    for (const e of entries) {
+      if (e.kind === 'street' || e.kind === 'stop' || e.kind === 'taxi rank') continue;
+      const d = Math.hypot((e.lat - lat) * 111000, (e.lng - lng) * 109500);
+      if (d > 80) continue;
+      const s = d - (want && e.keys.some(k => want.includes(k) || k.includes(want)) ? 1000 : 0);
+      if (s < bestScore) { bestScore = s; best = e; }
+    }
+    return best ? { ref: best.ref, label: best.label, labelAm: best.labelAm, kind: best.kind, lat: best.lat, lng: best.lng } : null;
+  }
+  return { search, nearest, size: () => { load(); return entries.length; } };
 }
 
 module.exports = { makeGazetteer, kindOf, norm };
