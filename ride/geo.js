@@ -79,7 +79,7 @@ function landmarkFor(q) {
 }
 
 
-function makeGeo({ routerUrl, fetchFn, prisma }) {
+function makeGeo({ routerUrl, fetchFn, prisma, gazetteer }) {
   const f = fetchFn || fetch;
   let lastRouteWarn = 0;
 
@@ -156,8 +156,12 @@ function makeGeo({ routerUrl, fetchFn, prisma }) {
       ...shops.map(s => { const b = s.tenancy.unit.building;
         return { kind: 'shop', label: s.name, labelAm: s.nameAm, sub: b.name + ' · ' + s.tenancy.unit.number, lat: b.lat, lng: b.lng, slug: b.qrSlug }; })
     ];
+    // Addis's own named places (ride/gazetteer.js), searched on this server. When they already give a rider four
+    // or more answers, Photon is not asked at all: faster, Amharic-aware, and the keystroke never leaves the VPS.
+    let local = [];
+    try { local = gazetteer ? gazetteer.search(q, bias || ADDIS) : []; } catch (e) { local = []; }
     let osm = [];
-    try {
+    if (local.length < 4) try {
       const lat = (bias && bias.lat) || ADDIS.lat, lng = (bias && bias.lng) || ADDIS.lng;
       const key = q.toLowerCase() + '|' + lat.toFixed(2) + ',' + lng.toFixed(2);
       const c = photonCache.get(key);
@@ -173,7 +177,8 @@ function makeGeo({ routerUrl, fetchFn, prisma }) {
         cacheSet(key, osm);
       }
     } catch (e) { osm = []; }
-    const rest = [...dir, ...osm];
+    const near = (a, b) => haversineM({ lat: a.lat, lng: a.lng }, { lat: b.lat, lng: b.lng }) < 150;
+    const rest = [...dir, ...local.filter(l => !dir.some(d => near(d, l))), ...osm.filter(o => !local.some(l => near(l, o)))];
     if (!pinned) return rest.slice(0, 10);
     const dupe = h => haversineM({ lat: pinned.lat, lng: pinned.lng }, { lat: h.lat, lng: h.lng }) < 200;
     return [pinned, ...rest.filter(h => !dupe(h))].slice(0, 10);

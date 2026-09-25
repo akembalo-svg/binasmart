@@ -22,7 +22,7 @@ const routes = require('./routes');
 // registerRide(fastify, { prisma, sendTg, OWNER_KEY, OWNER_CHAT, ROUTER_URL, BASE_URL })
 module.exports = function registerRide(fastify, deps) {
   const settings = makeSettings(deps.prisma);
-  const geo = makeGeo({ routerUrl: deps.ROUTER_URL, prisma: deps.prisma });
+  const geo = makeGeo({ routerUrl: deps.ROUTER_URL, prisma: deps.prisma, gazetteer: require('./gazetteer').makeGazetteer() });
   // Telegram bots (rider @bina_smart_bot, driver @binasmartdriverbot). Tokens only from .env.
   const riderBotToken = process.env.BINA_RIDER_BOT_TOKEN || '', driverBotToken = process.env.BINA_DRIVER_BOT_TOKEN || '';
   const riderApi = makeTgApi({ token: riderBotToken }), driverTgApi = makeTgApi({ token: driverBotToken });
