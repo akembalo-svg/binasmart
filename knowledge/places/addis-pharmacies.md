@@ -1,6 +1,6 @@
 ---
 title: "Pharmacies in Addis Ababa (ፋርማሲዎች)"
-url: "https://www.openstreetmap.org/relation/1707699"
+url: "https://www.openstreetmap.org/#map=12/9.0100/38.7600"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
 fetched: "2026-09-24"

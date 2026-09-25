@@ -1,6 +1,6 @@
 ---
 title: "Landmarks, museums, parks, cinemas and libraries in Addis Ababa (ታዋቂ ቦታዎች፣ ሙዚየሞች፣ መናፈሻዎችና ሲኒማዎች)"
-url: "https://www.openstreetmap.org/relation/1707699"
+url: "https://www.openstreetmap.org/#map=12/9.0100/38.7600"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
 fetched: "2026-09-24"

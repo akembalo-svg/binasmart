@@ -1,6 +1,6 @@
 ---
 title: "Community centres and post offices in Addis Ababa (የማኅበረሰብ ማዕከላትና ፖስታ ቤቶች)"
-url: "https://www.openstreetmap.org/relation/1707699"
+url: "https://www.openstreetmap.org/#map=12/9.0100/38.7600"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
 fetched: "2026-09-24"

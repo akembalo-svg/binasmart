@@ -187,7 +187,7 @@ function build({ at, elements, bySub }) {
       const c = st.e.center; const where = st.subs.size ? [...st.subs].map(x => subMeta[x].en + ' (' + subMeta[x].am + ')').join(', ') : 'Addis Ababa';
       return '- **' + mdEsc(n) + '**' + (st.am && st.am !== n ? ' (' + mdEsc(st.am) + ')' : '') + ' · ' + where + (c ? ' · map https://www.openstreetmap.org/?mlat=' + c.lat.toFixed(5) + '&mlon=' + c.lon.toFixed(5) + '#map=17/' + c.lat.toFixed(5) + '/' + c.lon.toFixed(5) : '');
     });
-    const fm = ['---', 'title: "Streets and roads in Addis Ababa (መንገዶች)"', 'url: "https://www.openstreetmap.org/relation/1707699"', 'lang: "en"', 'source_name: "OpenStreetMap contributors (ODbL)"', 'fetched: "' + day + '"', 'count: "' + lines.length + '"', '---', ''].join('\n');
+    const fm = ['---', 'title: "Streets and roads in Addis Ababa (መንገዶች)"', 'url: "https://www.openstreetmap.org/#map=12/9.0100/38.7600"', 'lang: "en"', 'source_name: "OpenStreetMap contributors (ODbL)"', 'fetched: "' + day + '"', 'count: "' + lines.length + '"', '---', ''].join('\n');
     files['addis-streets.md'] = fm + '# Streets and roads in Addis Ababa · በአዲስ አበባ ያሉ መንገዶች\n\n' + lines.length + ' named streets, each with the sub-cities it runs through. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of ' + day + '. Street names in Addis are often not what people use; ask for the landmark or neighbourhood too.\n\n' + lines.join('\n') + '\n';
   }
   for (const { k, groups } of Object.values(docs)) {
@@ -202,7 +202,7 @@ function build({ at, elements, bySub }) {
       const sm = subMeta[g];
       body += '\n## ' + (sm ? sm.en + ' sub-city · ' + sm.am + ' ክፍለ ከተማ' : g) + ' — ' + lines.length + '\n\n' + lines.join('\n') + '\n';
     }
-    const fm = ['---', 'title: "' + k.en + ' in Addis Ababa (' + k.am + ')"', 'url: "https://www.openstreetmap.org/relation/1707699"',
+    const fm = ['---', 'title: "' + k.en + ' in Addis Ababa (' + k.am + ')"', 'url: "https://www.openstreetmap.org/#map=12/9.0100/38.7600"',
       'lang: "en"', 'source_name: "OpenStreetMap contributors (ODbL)"', 'fetched: "' + day + '"', 'count: "' + n + '"', '---', ''].join('\n');
     files['addis-' + k.slug + '.md'] = fm + body;
   }
