@@ -1858,6 +1858,22 @@ model AiAssessment {
 //
 // checks holds what the automatic tests noticed - a fee demanded, a personal phone, an employer we have
 // never seen - so the reviewer reads the reasons rather than a verdict.
+// "Tell me when a tender in my line of business opens" (tenders/alerts.js). The same shape as JobAlert, a
+// table of its own so a tender subscriber never shares a row, a counter or a unique key with a job seeker.
+model TenderAlert {
+  id         String   @id @default(cuid())
+  chatId     String
+  cat        String                        // a tenders/alerts.js CATS slug, or "all"
+  lang       String   @default("am")
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  lastSentAt DateTime @default(now())
+  sentCount  Int      @default(0)
+
+  @@unique([chatId, cat])
+  @@index([active])
+}
+
 model JobSubmission {
   id           String    @id @default(cuid())
   createdAt    DateTime  @default(now())

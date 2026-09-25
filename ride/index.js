@@ -40,6 +40,17 @@ module.exports = function registerRide(fastify, deps) {
   const jobAlerts = require('../jobs/alerts').makeJobAlerts({
     prisma: deps.prisma, api: riderApi, openSince: jobOpenSince, isClosed: jobIsClosed });
 
+  // Tender alerts, the job alerts' twin for businesses (tenders/alerts.js); ops/send-tender-alerts.js sends them.
+  const tenderAlerts = require('../tenders/alerts').makeTenderAlerts({
+    prisma: deps.prisma, api: riderApi, openSince: jobOpenSince, isClosed: jobIsClosed });
+  // Every tender-alert link goes through bina.et so a tap is one countable nginx line (as /jobs/alert/<field>).
+  fastify.get('/tenders/alert/:cat', async (req, reply) => {
+    const c = String(req.params.cat || '').toLowerCase();
+    const slug = require('../tenders/alerts').BY_SLUG.get(c) ? c : 'all';
+    return reply.header('cache-control', 'no-store').header('x-robots-tag', 'noindex')
+      .redirect('https://t.me/' + (process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot') + '?start=tenders_' + slug, 302);
+  });
+
   // Speaking a CV instead of typing one. Built here for the same reason as the alerts: it answers through
   // the rider bot's own client, and it needs no route of its own (jobs/voice-cv.js).
   const voiceCv = require('../jobs/voice-cv').makeVoiceCv({
@@ -54,6 +65,7 @@ module.exports = function registerRide(fastify, deps) {
     owner: deps.ownerTelegram || null,    // Bini for owners (agents/owner/access.js); absent = off
     tenant: deps.tenantTelegram || null,   // tenant notices (messaging/tenant-link.js); absent = off
     jobs: jobAlerts,                       // job alerts: /start jobs_<field>, /jobs, /stopjobs
+    tenders: tenderAlerts,                 // tender alerts: /start tenders_<kind>, /tenders, /stoptenders
     cv: voiceCv });                        // a CV spoken instead of typed: /cv (jobs/voice-cv.js)
   // BinaPool shares the fare engine, the auction and the driver app; riderNotify fans ride events out to every seat.
   const pool = makePool({ prisma: deps.prisma, geo, settings, dispatch, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL, dstate: require('./driverState') });

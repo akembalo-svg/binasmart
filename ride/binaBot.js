@@ -16,7 +16,7 @@ const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 // Tenant-link errors are logged by kind (Prisma code or error name), never by message: messages can carry ids or numbers.
 const errKind = e => String((e && (e.code || e.name)) || 'Error').replace(/[^A-Za-z0-9_]/g, '').slice(0, 40) || 'Error';
 
-function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey, owner, tenant, jobs, cv }) {
+function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey, owner, tenant, jobs, cv, tenders }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
   const hist = new Map(); // chatId -> { turns: [{role, content}], t }
   const menuMarkup = () => ({ inline_keyboard: MENU.map(row => row.map(b => ({ text: b.text, web_app: { url: baseUrl + b.path } }))) });
@@ -143,6 +143,40 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     }
     return PASS;
   }
+
+  // Tender alerts: /start tenders_<kind> from the tender pages, /tenders to choose, /stoptenders to stop.
+  // The job alerts' twin for businesses (tenders/alerts.js); private chats only.
+  async function handleTendersCommand(chatId, msg, text) {
+    const start = /^\/start\s+tenders_([a-z]{2,20})(?:\s|$)/.exec(text);
+    if (start) {
+      const r = await tenders.subscribe({ chatId, cat: start[1], lang: 'am' }).catch(() => null);
+      if (!r || !r.ok) return api.sendMessage(chatId, 'ይቅርታ፣ አልተሳካም። እንደገና ይሞክሩ። · Sorry, that did not work.');
+      return api.sendMessage(chatId,
+        '🔔 ተመዝግበዋል — <b>' + tenderLabel(r.cat) + '</b>\n\nአዲስ ጨረታ ሲወጣ እዚህ እነግርዎታለሁ። · New tenders will arrive here.\nለማቆም /stoptenders ይጻፉ።',
+        { parse_mode: 'HTML' });
+    }
+    if (/^\/stoptenders\b/.test(text)) {
+      const n = await tenders.stop(chatId).catch(() => 0);
+      return api.sendMessage(chatId, n ? '🔕 የጨረታ ማሳወቂያ ቆሟል። · Tender alerts stopped.' : 'የጨረታ ማሳወቂያ አልነበረዎትም። · You were not subscribed.');
+    }
+    if (/^\/tenders\b/.test(text)) {
+      const mine = await tenders.listFor(chatId).catch(() => []);
+      const head = mine.length ? '🔔 አሁን የሚደርስዎት፦ ' + mine.map(a => tenderLabel(a.cat)).join('፣ ') + '\n\n' : '';
+      return api.sendMessage(chatId, head + '📋 <b>የጨረታ ማሳወቂያ · Tender alerts</b>\n\nየጨረታ ዓይነት ይምረጡ — አዲስ ሲወጣ እነግርዎታለሁ።',
+        { parse_mode: 'HTML', reply_markup: { inline_keyboard: tenderRows() } });
+    }
+    return PASS;
+  }
+  function tenderRows() {
+    const cats = require('../tenders/alerts').CATS, rows = [];
+    for (let i = 0; i < cats.length; i += 2) {
+      rows.push(cats.slice(i, i + 2).map(c => ({ text: c.am + ' · ' + c.en.split(' ')[0], url: 'https://t.me/' + (botUsername || 'bina_smart_bot') + '?start=tenders_' + c.slug })));
+    }
+    rows.push([{ text: '🔔 ሁሉም ጨረታዎች · All tenders', url: 'https://t.me/' + (botUsername || 'bina_smart_bot') + '?start=tenders_all' }]);
+    rows.push([{ text: '📋 ክፍት ጨረታዎችን ይመልከቱ', web_app: { url: baseUrl + '/tenders' } }]);
+    return rows;
+  }
+  const tenderLabel = c => { try { return require('../tenders/alerts').labelOf(c, 'am'); } catch (e) { return c; } };
 
   // A CV spoken instead of typed: /cv, then one voice note, then one tap to share a number.
   // The written form asks the same person to type their education, work history and skills into a
@@ -484,6 +518,11 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     // Job alerts: /start jobs_<field>, /jobs, /stopjobs — private chats only.
     if (jobs && isPrivate(msg) && msg.from) {
       const handled = await handleJobsCommand(chatId, msg, text);
+      if (handled !== PASS) return handled;
+    }
+    // Tender alerts: /start tenders_<kind>, /tenders, /stoptenders — private chats only.
+    if (tenders && isPrivate(msg) && msg.from) {
+      const handled = await handleTendersCommand(chatId, msg, text);
       if (handled !== PASS) return handled;
     }
     // Bini for owners: /start owner, the shared contact, /logout, /bini, /owner — private chats only, and only
