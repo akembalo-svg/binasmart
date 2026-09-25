@@ -1,0 +1,564 @@
+---
+title: "Hotels and guest houses in Addis Ababa (ሆቴሎችና የእንግዳ ማረፊያዎች)"
+url: "https://www.openstreetmap.org/relation/1707699"
+lang: "en"
+source_name: "OpenStreetMap contributors (ODbL)"
+fetched: "2026-05-31"
+count: "520"
+---
+# Hotels and guest houses in Addis Ababa · በአዲስ አበባ ያሉ ሆቴሎችና የእንግዳ ማረፊያዎች
+
+520 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+
+## Arada sub-city · አራዳ ክፍለ ከተማ — 46
+
+- **A As pension** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04644&mlon=38.74736#map=18/9.04644/38.74736
+- **Abyssinia** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03167&mlon=38.75383#map=18/9.03167/38.75383
+- **Addis Regency** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04166&mlon=38.75299#map=18/9.04166/38.75299
+- **Addis View** (አዲስ ቪው) · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 124 9766 · http://addisviewhotel.com · map https://www.openstreetmap.org/?mlat=9.03191&mlon=38.77159#map=18/9.03191/38.77159
+- **Belair Hotel** (ቤልኤር ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03093&mlon=38.77483#map=18/9.03093/38.77483
+- **Blue nile hotel** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03547&mlon=38.75506#map=18/9.03547/38.75506
+- **Churchill Hotel ቸርችል ሆቴል** (ቸርችል ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02586&mlon=38.75213#map=18/9.02586/38.75213
+- **Comfy Spot Guest House** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03948&mlon=38.74754#map=18/9.03948/38.74754
+- **Continental Hotel | ኮንትኔንታል ሆቴል** (ኮንትኔንታል ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03114&mlon=38.75528#map=18/9.03114/38.75528
+- **Denver Hotel** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03533&mlon=38.75930#map=18/9.03533/38.75930
+- **Ebenezer Hotel & Guest House** (አቤኔዘር የእንግዳ ማረፊያ) · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 123 1276 · http://www.Ebenezerghouse.com/ · map https://www.openstreetmap.org/?mlat=9.03262&mlon=38.77314#map=18/9.03262/38.77314
+- **Ebenezer Hotel & Guest House** (አቤኔዘር የእንግዳ ማረፊያ) · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 123 1276 · map https://www.openstreetmap.org/?mlat=9.03270&mlon=38.77317#map=18/9.03270/38.77317
+- **Eliana Hotel** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03030&mlon=38.75097#map=18/9.03030/38.75097
+- **Fikadu Zeleka** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04230&mlon=38.74624#map=18/9.04230/38.74624
+- **Fraol Hotel** (ፍራኦል ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04302&mlon=38.74962#map=18/9.04302/38.74962
+- **Gambela hotel** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04084&mlon=38.75693#map=18/9.04084/38.75693
+- **Gibe Hotel** (ጊቤ ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03445&mlon=38.75479#map=18/9.03445/38.75479
+- **Gonder Hotel** (ጎንደር ሆስቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03099&mlon=38.75501#map=18/9.03099/38.75501
+- **Green valley** (ግሪን ቫሊ ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03270&mlon=38.77345#map=18/9.03270/38.77345
+- **Hayat Penision** (ሀያት መኝታ ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03599&mlon=38.74267#map=18/9.03599/38.74267
+- **Jerusalem Hotel** (እየሩሳሌም ሆቴል) · 802, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 155 1712 · map https://www.openstreetmap.org/?mlat=9.04629&mlon=38.74250#map=18/9.04629/38.74250
+- **Kangaroo** (ካንጋሮ ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03419&mlon=38.74442#map=18/9.03419/38.74442
+- **Lele pension** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04662&mlon=38.74703#map=18/9.04662/38.74703
+- **Life Pension No 1** (ላይፍ ፔንሲዮን ቁ.1) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02656&mlon=38.75668#map=18/9.02656/38.75668
+- **Life Pension No 2** (ላይፍ ፔንሲዮን ቁ.2) · 815/817, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04509&mlon=38.74151#map=18/9.04509/38.74151
+- **Lomi Guest House** · Shewareged Gedle Street, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 123 3628 · http://www.lomiguesthouse.com · map https://www.openstreetmap.org/?mlat=9.03497&mlon=38.77133#map=18/9.03497/38.77133
+- **Monalisa Hotel** (ሞናሊዛ ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02770&mlon=38.77522#map=18/9.02770/38.77522
+- **Monarch ParkView** · Arada sub-city (አራዳ ክፍለ ከተማ) · https://monarchaddis.com/ · map https://www.openstreetmap.org/?mlat=9.02684&mlon=38.75418#map=18/9.02684/38.75418
+- **Nafyad Hotel** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04500&mlon=38.74794#map=18/9.04500/38.74794
+- **National** (ናሽናል ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 155 1678 · map https://www.openstreetmap.org/?mlat=9.03131&mlon=38.75395#map=18/9.03131/38.75395
+- **Nigus Kitfo and Fish Hotel** (ንጉስ ክትፎና አሣ Hotel) · Arat kilo to Piassa street (Infront of Ampire), Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03453&mlon=38.75536#map=18/9.03453/38.75536
+- **Queens** · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 155 7731 · map https://www.openstreetmap.org/?mlat=9.03191&mlon=38.75361#map=18/9.03191/38.75361
+- **Ras Amba** (ራስ አምባ) · Queen Elizabeth Street, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 122 8080 · https://hotelrasamba.com/ · map https://www.openstreetmap.org/?mlat=9.03179&mlon=38.77114#map=18/9.03179/38.77114
+- **Sarem International Hotel | ሳሬም ሆቴል** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05174&mlon=38.74353#map=18/9.05174/38.74353
+- **Semien Hotel** (ሰሜን ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04408&mlon=38.74901#map=18/9.04408/38.74901
+- **Soramba Hotel** (ሶራምባ ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 156 5633 · map https://www.openstreetmap.org/?mlat=9.04083&mlon=38.75089#map=18/9.04083/38.75089
+- **Taitu Hotel** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03025&mlon=38.75408#map=18/9.03025/38.75408
+- **Taitu Hotel** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03096&mlon=38.75441#map=18/9.03096/38.75441
+- **Tedela** (ተድላ ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 155 9147 · map https://www.openstreetmap.org/?mlat=9.03174&mlon=38.75355#map=18/9.03174/38.75355
+- **Tiga Hotel** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03877&mlon=38.74773#map=18/9.03877/38.74773
+- **Tourist International Hotel** (ቱሪስት ኢንተርናሽናል ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 155 0122 · map https://www.openstreetmap.org/?mlat=9.03324&mlon=38.76220#map=18/9.03324/38.76220
+- **Tsegreda Hotel** · run by Asefash kinfu · 366 Dejazemach Jote Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03130&mlon=38.75397#map=18/9.03130/38.75397
+- **Wegagen Hotel** (ወጋገን ሆቴል) · 364, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 111 5308 · map https://www.openstreetmap.org/?mlat=9.03148&mlon=38.75381#map=18/9.03148/38.75381
+- **wossen's house** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03284&mlon=38.77063#map=18/9.03284/38.77063
+- **Wutma Hotel** (ውጥማ ሆቴል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03087&mlon=38.75317#map=18/9.03087/38.75317
+- **yeshi** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02947&mlon=38.77165#map=18/9.02947/38.77165
+
+## Bole sub-city · ቦሌ ክፍለ ከተማ — 207
+
+- **Aaran Hotel** · 1442 Bole Michael Woreda 01, Ayer Amba, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 639 2240 · map https://www.openstreetmap.org/?mlat=8.98333&mlon=38.77618#map=18/8.98333/38.77618
+- **Abbas NazrAli HOME ABEL** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01689&mlon=38.80394#map=18/9.01689/38.80394
+- **Abbysinia Renaisence** (አቢሲኒያ ሬናይሰንስ) · Bob Marley Square, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00102&mlon=38.80126#map=18/9.00102/38.80126
+- **abegaz hotel** (አበጋዝ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00644&mlon=38.78895#map=18/9.00644/38.78895
+- **Abyssinia Guest House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.abyssiniaguesthouse.com · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00612&mlon=38.78261#map=18/9.00612/38.78261
+- **Abyssinia Guest House** · Mickey Leland Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.abyssiniaguesthouse.com · map https://www.openstreetmap.org/?mlat=9.00638&mlon=38.78234#map=18/9.00638/38.78234
+- **Addis Bright Guesthouse** · run by Solomon · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 667 3029 · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01278&mlon=38.78444#map=18/9.01278/38.78444
+- **Addissinia Hotel** · Djibouti Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00444&mlon=38.78903#map=18/9.00444/38.78903
+- **Adites Guesthouse** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00388&mlon=38.79696#map=18/9.00388/38.79696
+- **Adore** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99958&mlon=38.77967#map=18/8.99958/38.77967
+- **afajeshgn hotel** (አፋጀሽኝ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98781&mlon=38.85395#map=18/8.98781/38.85395
+- **Airport Motel** (የአየር ማረፊያ ሞቴል) · 2356, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 0422 · map https://www.openstreetmap.org/?mlat=8.99395&mlon=38.79502#map=18/8.99395/38.79502
+- **Alef Hotel** · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01616&mlon=38.79374#map=18/9.01616/38.79374
+- **Alula 2** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00758&mlon=38.78340#map=18/9.00758/38.78340
+- **Amanaya Guesthouse** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00445&mlon=38.81137#map=18/9.00445/38.81137
+- **Amared Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98679&mlon=38.78732#map=18/8.98679/38.78732
+- **Ambassador Hotel Bole** (አምባሳደር ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 8284 · map https://www.openstreetmap.org/?mlat=8.99210&mlon=38.78798#map=18/8.99210/38.78798
+- **Ambassador Hotel** (አምባሳደር ሆቴል) · Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 8284 · map https://www.openstreetmap.org/?mlat=8.99190&mlon=38.78841#map=18/8.99190/38.78841
+- **Andromeda Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00639&mlon=38.78779#map=18/9.00639/38.78779
+- **Anteneh House** (አንተነህ ቤት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01571&mlon=38.83436#map=18/9.01571/38.83436
+- **Anteneh's home የአንተነህ ቤት** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01576&mlon=38.83436#map=18/9.01576/38.83436
+- **Ark Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00429&mlon=38.79741#map=18/9.00429/38.79741
+- **Aroma Guest House** · Road to Gergi Giorgis, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00368&mlon=38.81164#map=18/9.00368/38.81164
+- **Atlas international hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00362&mlon=38.78060#map=18/9.00362/38.78060
+- **Atlas International Hotel** (አትላስ ኢንተርናሽናል ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 7432 · https://atlasinternationalhotel.com/ · map https://www.openstreetmap.org/?mlat=9.00372&mlon=38.78067#map=18/9.00372/38.78067
+- **Awraris Hotel (Haya hulet)** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01018&mlon=38.78802#map=18/9.01018/38.78802
+- **Awraris Hotel** (አውራሪስ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 4933 / +251 11 663 4404 · map https://www.openstreetmap.org/?mlat=9.01002&mlon=38.78801#map=18/9.01002/38.78801
+- **Azzeman** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00150&mlon=38.78206#map=18/9.00150/38.78206
+- **Bagy Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98669&mlon=38.78754#map=18/8.98669/38.78754
+- **Baks Hotel Appartement** (ባክስ ሆቴል አፓርታመንት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99954&mlon=38.80483#map=18/8.99954/38.80483
+- **Base Ethiopia** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00492&mlon=38.78037#map=18/9.00492/38.78037
+- **BBC Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98326&mlon=38.77604#map=18/8.98326/38.77604
+- **Beer Garden Inn** (ቢር ጋርደን ኢንተርናሽናል ሆቴል) · german · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 2595 / +251 11 618 2591 · map https://www.openstreetmap.org/?mlat=8.99516&mlon=38.78640#map=18/8.99516/38.78640
+- **Besha Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01528&mlon=38.79094#map=18/9.01528/38.79094
+- **Best Western Plus Addis Ababa** (ቤስት ዌስተርን ፕላሥ አዲስ አበባ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 667 1414 · https://bwplusaddisababa.com/ · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99689&mlon=38.78597#map=18/8.99689/38.78597
+- **Bete Abrham Hotel** (ቤተ አብርሃም ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 2245 · map https://www.openstreetmap.org/?mlat=8.98601&mlon=38.78489#map=18/8.98601/38.78489
+- **Beyene Gebretinsae G. House በየነ ገ/ትንሳኤ** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98787&mlon=38.78147#map=18/8.98787/38.78147
+- **Big John Residence** (የቢግ ጆን መኖሪያ ቤት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01365&mlon=38.83535#map=18/9.01365/38.83535
+- **Biruk Bed & Breakfast** (ብሩክ መኝታና ቁርስ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99703&mlon=38.78133#map=18/8.99703/38.78133
+- **Blue Birds Hotel** · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01557&mlon=38.78915#map=18/9.01557/38.78915
+- **bluesky Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00693&mlon=38.79809#map=18/9.00693/38.79809
+- **Bole Area Guest House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97973&mlon=38.77788#map=18/8.97973/38.77788
+- **Bole Central Apartment** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01022&mlon=38.78196#map=18/9.01022/38.78196
+- **Bole Guest House** (ቦሌ እንግዳ ማረፊያ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00335&mlon=38.78093#map=18/9.00335/38.78093
+- **Bole Homes** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98751&mlon=38.79722#map=18/8.98751/38.79722
+- **Bole International Hotel** (ቦሌ ኢንተርናሽናል ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 663 3000 / +251 11 663 3840 · map https://www.openstreetmap.org/?mlat=8.99251&mlon=38.79146#map=18/8.99251/38.79146
+- **Bole Skygate Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98948&mlon=38.79460#map=18/8.98948/38.79460
+- **Bole tourist ቦሌ ቱሪስት** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01471&mlon=38.79750#map=18/9.01471/38.79750
+- **Bon Royal Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98510&mlon=38.78401#map=18/8.98510/38.78401
+- **Bonanza** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99471&mlon=38.78572#map=18/8.99471/38.78572
+- **Brana Hotel** (ብራና ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01354&mlon=38.78232#map=18/9.01354/38.78232
+- **Broadway Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98280&mlon=38.77882#map=18/8.98280/38.77882
+- **Capital Hotel & Spa** · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01340&mlon=38.77977#map=18/9.01340/38.77977
+- **Caravan Hotel** · Mike Leyland Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01011&mlon=38.78210#map=18/9.01011/38.78210
+- **Cityana guest house** (ሲቲ አና) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01021&mlon=38.78466#map=18/9.01021/38.78466
+- **Classic Hotel** · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01385&mlon=38.78194#map=18/9.01385/38.78194
+- **Darasalaam Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98357&mlon=38.77526#map=18/8.98357/38.77526
+- **Debebe Tekle Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00280&mlon=38.78558#map=18/9.00280/38.78558
+- **Denuka Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99631&mlon=38.81349#map=18/8.99631/38.81349
+- **Desalagen Hotel** (ደሳለኝ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 4524 · map https://www.openstreetmap.org/?mlat=8.99987&mlon=38.77985#map=18/8.99987/38.77985
+- **Desta Pension** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00910&mlon=38.78256#map=18/9.00910/38.78256
+- **DHM guest house** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 667 6262 · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00187&mlon=38.81742#map=18/9.00187/38.81742
+- **Dolphin pension new** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01236&mlon=38.78744#map=18/9.01236/38.78744
+- **Dolphin pension** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01435&mlon=38.78440#map=18/9.01435/38.78440
+- **DoubleTree by Hilton Addis Ababa Airport** · run by Hilton · Bole, Wereda 3, Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 113 9950 · https://www.hilton.com/en/hotels/addaadi-doubletree-addis-ababa-airport/ · map https://www.openstreetmap.org/?mlat=8.99108&mlon=38.79288#map=18/8.99108/38.79288
+- **DS Guesthouse** (ዲኤስ የእንግዳ ማረፊያ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00253&mlon=38.78334#map=18/9.00253/38.78334
+- **Ecco guest house** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00282&mlon=38.78634#map=18/9.00282/38.78634
+- **Eliston Hotel** · chinese international ethiopian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00112&mlon=38.80273#map=18/9.00112/38.80273
+- **Empire Addis International Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99228&mlon=38.78744#map=18/8.99228/38.78744
+- **English** · Djibouti Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00765&mlon=38.78899#map=18/9.00765/38.78899
+- **Etaferaw shirobet እታፈራው ሽሮቤት** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.01525&mlon=38.85243#map=18/9.01525/38.85243
+- **Ethiopian Skylight Hotel** (ስካይላይት ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98755&mlon=38.79030#map=18/8.98755/38.79030
+- **Eyob G/tinsae G. House እዮብ** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99563&mlon=38.84867#map=18/8.99563/38.84867
+- **Faafen Hote** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98344&mlon=38.77527#map=18/8.98344/38.77527
+- **Faafen Hotel** · Bole Michael, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98337&mlon=38.77534#map=18/8.98337/38.77534
+- **Foyat Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99137&mlon=38.79422#map=18/8.99137/38.79422
+- **FOYAT HOTEL** · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99128&mlon=38.79425#map=18/8.99128/38.79425
+- **Friendship International hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99401&mlon=38.78459#map=18/8.99401/38.78459
+- **Getfam Hotel** · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01479&mlon=38.78379#map=18/9.01479/38.78379
+- **GG Royal Hotel** (ጂጂ ሮያል ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 629 2329 / +251 11 433 5567 · map https://www.openstreetmap.org/?mlat=9.00202&mlon=38.80132#map=18/9.00202/38.80132
+- **Golden Royal** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99847&mlon=38.78316#map=18/8.99847/38.78316
+- **Golden Tulip** · BL_03_670 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99554&mlon=38.78700#map=18/8.99554/38.78700
+- **Golis Hotel** · Bole Michael, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98318&mlon=38.77500#map=18/8.98318/38.77500
+- **Grmanesh** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99687&mlon=38.81570#map=18/8.99687/38.81570
+- **Guangdong Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98857&mlon=38.78749#map=18/8.98857/38.78749
+- **Haimi Apartment Hotel** (ሃይሚ አፓርትመንት ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99948&mlon=38.78514#map=18/8.99948/38.78514
+- **Hanom Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99764&mlon=38.78551#map=18/8.99764/38.78551
+- **Harmony Hotel** (ሐርመኒ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 3100 · https://www.harmonyhotelethiopia.com/ · map https://www.openstreetmap.org/?mlat=8.99589&mlon=38.78619#map=18/8.99589/38.78619
+- **Hello Guest House** (ሄሎ እንግዳ ማረፊያ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98785&mlon=38.77953#map=18/8.98785/38.77953
+- **Hilina Tadesse's Home የህሊና ቤት** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98750&mlon=38.85480#map=18/8.98750/38.85480
+- **Hollywood Hotel** (ሆሊዉድ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00760&mlon=38.78901#map=18/9.00760/38.78901
+- **Home** (Ever) · 0235, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00262&mlon=38.80080#map=18/9.00262/38.80080
+- **Hometown Addis Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00284&mlon=38.77949#map=18/9.00284/38.77949
+- **Hostel Ethiopia** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01022&mlon=38.85296#map=18/9.01022/38.85296
+- **Hotel Siyonat** (ሆቴል ሲዮናት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99471&mlon=38.78491#map=18/8.99471/38.78491
+- **Hotel Tirago** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01036&mlon=38.78008#map=18/9.01036/38.78008
+- **Jazly Bed & Breakfast** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00697&mlon=38.81504#map=18/9.00697/38.81504
+- **Josha** (እያሱ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01815&mlon=38.84497#map=18/9.01815/38.84497
+- **Jupiter international (Bole)** (ጁፒተር ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 6969 / +251 11 552 7333 · https://www.jupiterhotel.com/ · map https://www.openstreetmap.org/?mlat=8.98910&mlon=38.78549#map=18/8.98910/38.78549
+- **Jupiter International Hotel** (ጁፒተር ኢንተርናሽናል ሆቴል) · Back of Friendship, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 6969 · map https://www.openstreetmap.org/?mlat=8.98907&mlon=38.78550#map=18/8.98907/38.78550
+- **Kal Guest House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00730&mlon=38.78660#map=18/9.00730/38.78660
+- **Kaleb Hotel** (ካሌብ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 2200 / +251 11 662 2213 · map https://www.openstreetmap.org/?mlat=8.99556&mlon=38.78604#map=18/8.99556/38.78604
+- **Kenenisa Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99530&mlon=38.78842#map=18/8.99530/38.78842
+- **kulmiye hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98451&mlon=38.77742#map=18/8.98451/38.77742
+- **KZ Hotel** (ኬዜድ ሆቴል) · 445, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 1677 / +251 11 661 4836 · http://www.Kzfamilyhotel.com · map https://www.openstreetmap.org/?mlat=8.99217&mlon=38.78178#map=18/8.99217/38.78178
+- **Leda home** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99407&mlon=38.85895#map=18/8.99407/38.85895
+- **Leda Home** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99676&mlon=38.86379#map=18/8.99676/38.86379
+- **Lilu House** · Mike Leyland Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01310&mlon=38.77997#map=18/9.01310/38.77997
+- **Liya Guest House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00405&mlon=38.78756#map=18/9.00405/38.78756
+- **Liya Pension** · run by Sisay · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98824&mlon=38.78817#map=18/8.98824/38.78817
+- **lobelia** · BL 03 721 st, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99270&mlon=38.79241#map=18/8.99270/38.79241
+- **M.W. Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99833&mlon=38.78676#map=18/8.99833/38.78676
+- **Mac Addis** (ማክ አዲስ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99043&mlon=38.78010#map=18/8.99043/38.78010
+- **Mad Vervet Hostel - Addis** · 1000 Haya arat, Addis Ababa, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://madvervet.com/ · map https://www.openstreetmap.org/?mlat=9.00827&mlon=38.80031#map=18/9.00827/38.80031
+- **Mad Vervet** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00839&mlon=38.78587#map=18/9.00839/38.78587
+- **Mado Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00048&mlon=38.78310#map=18/9.00048/38.78310
+- **Magnolia Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00059&mlon=38.78040#map=18/9.00059/38.78040
+- **Makiba Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01600&mlon=38.82233#map=18/9.01600/38.82233
+- **Marriot** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99459&mlon=38.78922#map=18/8.99459/38.78922
+- **Medina edris rent house 1** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01111&mlon=38.81470#map=18/9.01111/38.81470
+- **Meridian Hotel** (ሜሪዲያን ሆቴል) · 755/22, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 5050 · map https://www.openstreetmap.org/?mlat=8.99238&mlon=38.78134#map=18/8.99238/38.78134
+- **Milano pension** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01278&mlon=38.78430#map=18/9.01278/38.78430
+- **Milano Pension** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01281&mlon=38.78431#map=18/9.01281/38.78431
+- **Molla Appartment Hotel** (ሞላ አፓርትመንት ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00484&mlon=38.77943#map=18/9.00484/38.77943
+- **Molla Guest House** (ሞላ የእንግዳ ማረፊያ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 663 3582 · http://www.mollahouse.com · map https://www.openstreetmap.org/?mlat=8.99148&mlon=38.79205#map=18/8.99148/38.79205
+- **Momona Hotel** · B166_29 Africa Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99065&mlon=38.78514#map=18/8.99065/38.78514
+- **Monarch Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 667 2480 · map https://www.openstreetmap.org/?mlat=8.99470&mlon=38.78537#map=18/8.99470/38.78537
+- **Moonlight Addis Hotel** · 1156 BL_03_507 Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://moonlightaddishotel.com/ · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00840&mlon=38.78539#map=18/9.00840/38.78539
+- **Mosaic Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99598&mlon=38.78479#map=18/8.99598/38.78479
+- **Mr. Martins Cozy Place** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00292&mlon=38.77918#map=18/9.00292/38.77918
+- **Mubarak 2** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98258&mlon=38.77614#map=18/8.98258/38.77614
+- **Mubarak one** · Rwanda Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98342&mlon=38.77426#map=18/8.98342/38.77426
+- **Mulugeta G/gergs G. House ሙሉጌታ ገ/ገርግስ** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01107&mlon=38.82482#map=18/9.01107/38.82482
+- **MY guest house** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00212&mlon=38.78706#map=18/9.00212/38.78706
+- **My Home Abel Amare** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01556&mlon=38.82779#map=18/9.01556/38.82779
+- **My Home ABEL** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01551&mlon=38.82784#map=18/9.01551/38.82784
+- **My home** · Semit to goro, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99376&mlon=38.83764#map=18/8.99376/38.83764
+- **nah bro** (ናሆም) · gerji, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00262&mlon=38.81225#map=18/9.00262/38.81225
+- **Nanaya Guesthouse** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01246&mlon=38.79794#map=18/9.01246/38.79794
+- **Nati Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98237&mlon=38.77396#map=18/8.98237/38.77396
+- **Natna Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00185&mlon=38.78823#map=18/9.00185/38.78823
+- **Negat Hotel** (ንጋት ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 645 8962 · map https://www.openstreetmap.org/?mlat=9.00385&mlon=38.81381#map=18/9.00385/38.81381
+- **Nexus Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00757&mlon=38.80535#map=18/9.00757/38.80535
+- **Panorama Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01777&mlon=38.79659#map=18/9.01777/38.79659
+- **Paris Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01021&mlon=38.78186#map=18/9.01021/38.78186
+- **Plaza Hotel** (ፕላዛ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01211&mlon=38.77763#map=18/9.01211/38.77763
+- **Pomy home** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98539&mlon=38.86320#map=18/8.98539/38.86320
+- **Ramada Hotel** (Ramada Hotel ራማዳ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99190&mlon=38.78283#map=18/8.99190/38.78283
+- **Refenti Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94848&mlon=38.78472#map=18/8.94848/38.78472
+- **Riverside Apartments** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98639&mlon=38.77280#map=18/8.98639/38.77280
+- **Sabon Hotel** · Namibia Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99920&mlon=38.78396#map=18/8.99920/38.78396
+- **Sabon Hotel** · Namibia Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99980&mlon=38.78401#map=18/8.99980/38.78401
+- **SAMARA Hotel** · Africa China Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 667 4103 · http://www.samarahoteladdis.com · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.98415&mlon=38.78203#map=18/8.98415/38.78203
+- **Sapphire Addis Hotel** · Namibia Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00022&mlon=38.78339#map=18/9.00022/38.78339
+- **Shalla Guesthouse** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.ethiopiantravels.com/ · map https://www.openstreetmap.org/?mlat=9.00139&mlon=38.78414#map=18/9.00139/38.78414
+- **Sheba Guest House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.shebaguesthouse.com/ · map https://www.openstreetmap.org/?mlat=8.99788&mlon=38.77677#map=18/8.99788/38.77677
+- **Sheza Guest House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00217&mlon=38.80065#map=18/9.00217/38.80065
+- **Sidama Inn** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00371&mlon=38.77964#map=18/9.00371/38.77964
+- **Sidra Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01308&mlon=38.79638#map=18/9.01308/38.79638
+- **Sky Hotel** (ስካይ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00129&mlon=38.80249#map=18/9.00129/38.80249
+- **Skylight In-Terminal Hotel** (ቦሌ አለምዓቀፍ አውሮፕላን ማረፊያ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98335&mlon=38.79384#map=18/8.98335/38.79384
+- **Sunland Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00108&mlon=38.78546#map=18/9.00108/38.78546
+- **Sunspot Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99697&mlon=38.79123#map=18/8.99697/38.79123
+- **Sunspot** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99698&mlon=38.79124#map=18/8.99698/38.79124
+- **Tayo Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98270&mlon=38.77887#map=18/8.98270/38.77887
+- **Teferi mimi** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01856&mlon=38.84278#map=18/9.01856/38.84278
+- **Temudas Pension** (ቴሙዳስ ፔንሲዮን) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00111&mlon=38.78385#map=18/9.00111/38.78385
+- **Tesfu Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01870&mlon=38.87340#map=18/9.01870/38.87340
+- **Tesfu Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01884&mlon=38.87349#map=18/9.01884/38.87349
+- **The Container** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.ethiopiantravels.com/ · map https://www.openstreetmap.org/?mlat=8.99375&mlon=38.78431#map=18/8.99375/38.78431
+- **The Hub Hotel** (ዘሃብ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99547&mlon=38.79339#map=18/8.99547/38.79339
+- **Tiga Hotel** · Africa Avenue / Bole Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98696&mlon=38.78744#map=18/8.98696/38.78744
+- **Tigist Teferi ትዕግስት ተፈሪ** · 500 civil service college, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 645 7888 · map https://www.openstreetmap.org/?mlat=9.01575&mlon=38.83437#map=18/9.01575/38.83437
+- **Tiru bet Guest House** (ጥሩ ቤት እንግዳ ማረፊያ) · BL_03_534 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01349&mlon=38.78407#map=18/9.01349/38.78407
+- **Tirunesh Hotel** · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01737&mlon=38.79472#map=18/9.01737/38.79472
+- **Tizeze Hotel** (ትዘዝ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 639 2000 · https://tizezehotel.com/ · map https://www.openstreetmap.org/?mlat=8.98423&mlon=38.77842#map=18/8.98423/38.77842
+- **Toronto** · Mike Leyland Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 2742 · map https://www.openstreetmap.org/?mlat=9.00995&mlon=38.78008#map=18/9.00995/38.78008
+- **Trinity Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99848&mlon=38.78686#map=18/8.99848/38.78686
+- **Triple E** · 22 mazoria,, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00875&mlon=38.78760#map=18/9.00875/38.78760
+- **Tsehay Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01215&mlon=38.78449#map=18/9.01215/38.78449
+- **Tsehay Pension** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01222&mlon=38.78448#map=18/9.01222/38.78448
+- **TZ Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98617&mlon=38.77494#map=18/8.98617/38.77494
+- **Ugbaad Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98193&mlon=38.77685#map=18/8.98193/38.77685
+- **Vamos Addis Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99244&mlon=38.79402#map=18/8.99244/38.79402
+- **Vila Dize Enze Guest house** (ቪላ ደዚ እንዝ እንግዳ ማረፊያ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98697&mlon=38.77847#map=18/8.98697/38.77847
+- **VRAJ Indian Hotel And Rstaurant** · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98277&mlon=38.77898#map=18/8.98277/38.77898
+- **Waberi Hotel** (ወበሪ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99321&mlon=38.80832#map=18/8.99321/38.80832
+- **Washington Hotel** · Cape Verde Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00212&mlon=38.78010#map=18/9.00212/38.78010
+- **Wassamar Hotel** (ዋሳማር ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 0055 · map https://www.openstreetmap.org/?mlat=8.99210&mlon=38.78199#map=18/8.99210/38.78199
+- **WGM Apartments** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98561&mlon=38.78722#map=18/8.98561/38.78722
+- **White House Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99285&mlon=38.79406#map=18/8.99285/38.79406
+- **Winner Pension** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00790&mlon=38.78298#map=18/9.00790/38.78298
+- **Wudasie hotel** · Mike Leyland Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 2727 · map https://www.openstreetmap.org/?mlat=9.00909&mlon=38.78076#map=18/9.00909/38.78076
+- **Ya Grand Pension** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00890&mlon=38.78242#map=18/9.00890/38.78242
+- **Yahoo Pension** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01216&mlon=38.78035#map=18/9.01216/38.78035
+- **Ye-afoli Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98819&mlon=38.77995#map=18/8.98819/38.77995
+- **Yoni’s house** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99347&mlon=38.80526#map=18/8.99347/38.80526
+- **Z Addis Hotel** · Salitemihret - Summit Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01085&mlon=38.83733#map=18/9.01085/38.83733
+- **Zeist Lodge** (ዛይስት ሎጅ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98590&mlon=38.77518#map=18/8.98590/38.77518
+- **ZMAMA HOTEL** · BL_03_534 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00787&mlon=38.78454#map=18/9.00787/38.78454
+- **Zola International Hotel** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00375&mlon=38.79731#map=18/9.00375/38.79731
+- **ሰላምሰው Selamsew's home** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01648&mlon=38.84585#map=18/9.01648/38.84585
+- **ባርክልኝ ክርስቶፎል** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01197&mlon=38.82662#map=18/9.01197/38.82662
+- **አንተነህ ቤት Anteneh home** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01579&mlon=38.83431#map=18/9.01579/38.83431
+- **አንተነህ ቤት Anteneh House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01573&mlon=38.83435#map=18/9.01573/38.83435
+- **አፋረንሲስ አለም አቀፍ ሆቴል Afarensis international hotel** (AFARENSIS International Hotel አፋረንሲስ አለምአቀፍ ሆቴል) · bole subcity kebele 08/09 hous no074, Addis Ababa, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 9700 · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01742&mlon=38.80144#map=18/9.01742/38.80144
+- **ደረጀ መንግስቱ Derege Mengstu** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99752&mlon=38.84218#map=18/8.99752/38.84218
+
+## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 9
+
+- **Beteseb hotel** (ቤተሰብ ሆቴል) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03107&mlon=38.73475#map=18/9.03107/38.73475
+- **Daruselam guesthouse** (ዳሩሰላም የእንግዳ ማረፊያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03413&mlon=38.73415#map=18/9.03413/38.73415
+- **Kegnew Shaleka Hotel** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=9.03176&mlon=38.73725#map=18/9.03176/38.73725
+- **Mearab Hotel** (ምዕራብ ሆቴል) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 275 3014 · map https://www.openstreetmap.org/?mlat=9.02953&mlon=38.73748#map=18/9.02953/38.73748
+- **Metro Hotel** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02942&mlon=38.73876#map=18/9.02942/38.73876
+- **Motera Hotel** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04617&mlon=38.72909#map=18/9.04617/38.72909
+- **Motera** (ሞተራ ሆቴል) · 716, Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 275 4633 · map https://www.openstreetmap.org/?mlat=9.04618&mlon=38.72897#map=18/9.04618/38.72897
+- **SSAWIM PENISION** (ሳዊም ፔንሲዎን) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03568&mlon=38.73166#map=18/9.03568/38.73166
+- **Tsegaye hiwi Atena tera ABEL** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03957&mlon=38.71991#map=18/9.03957/38.71991
+
+## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 90
+
+- **Abesha Bar and Restaurant** (አበሻ ባርና ሬስቶራንት) · 456, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 550 3128 · map https://www.openstreetmap.org/?mlat=9.01085&mlon=38.74877#map=18/9.01085/38.74877
+- **ABM PENSION** (ኤ ቢ ኤም እንግዳ ማረፊያ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99154&mlon=38.76834#map=18/8.99154/38.76834
+- **Adams Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99771&mlon=38.75468#map=18/8.99771/38.75468
+- **Addis Guest House and Pension** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99285&mlon=38.76522#map=18/8.99285/38.76522
+- **Adea Hotel and Restaurant** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99929&mlon=38.75713#map=18/8.99929/38.75713
+- **Adot Tina Hotel** (አዶት ቲና ሆቴል) · 499, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 467 3939 · map https://www.openstreetmap.org/?mlat=8.99135&mlon=38.76705#map=18/8.99135/38.76705
+- **Al Nahari Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99238&mlon=38.77399#map=18/8.99238/38.77399
+- **Aphrodite International Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01367&mlon=38.76921#map=18/9.01367/38.76921
+- **Aseb Qestedamena Hotel** (አሰብ ቀስተዳመና ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01572&mlon=38.77073#map=18/9.01572/38.77073
+- **Astara Hotel** (አስታራ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 416 0194 · map https://www.openstreetmap.org/?mlat=9.00299&mlon=38.75824#map=18/9.00299/38.75824
+- **Bloom Tower - Guest House Apartments** (ብሉም ታወር - አፓርታማ) · Joseph Tito Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01616&mlon=38.76851#map=18/9.01616/38.76851
+- **BMORE Apartment Hotel** (ቢ ሞር አፓርትመንት ሆቴል) · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00931&mlon=38.76652#map=18/9.00931/38.76652
+- **Bole Guesthouse** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · http://www.boleguesthouse.com · map https://www.openstreetmap.org/?mlat=9.00187&mlon=38.77210#map=18/9.00187/38.77210
+- **Bow Hotel B&B** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99840&mlon=38.76482#map=18/8.99840/38.76482
+- **Celeste Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99459&mlon=38.77303#map=18/8.99459/38.77303
+- **Chuchu Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98278&mlon=38.76381#map=18/8.98278/38.76381
+- **condo** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99631&mlon=38.76548#map=18/8.99631/38.76548
+- **Damu Hotel** (ዳሙ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 550 9828 · map https://www.openstreetmap.org/?mlat=8.99849&mlon=38.77200#map=18/8.99849/38.77200
+- **Destiny** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00424&mlon=38.77265#map=18/9.00424/38.77265
+- **Di Napoli Hotel** (ዲናፖሊ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 467 1587 / +251 11 467 2039 · map https://www.openstreetmap.org/?mlat=8.98992&mlon=38.75891#map=18/8.98992/38.75891
+- **Dreamliner Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99510&mlon=38.76692#map=18/8.99510/38.76692
+- **Dreamliner Hotel** (ድሪም ላይነር ሆቴል) · New, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 467 4000 · map https://www.openstreetmap.org/?mlat=8.99508&mlon=38.76693#map=18/8.99508/38.76693
+- **Edna Addis** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02000&mlon=38.77000#map=18/9.02000/38.77000
+- **Elilly International Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01425&mlon=38.76889#map=18/9.01425/38.76889
+- **Etaba bet እታባ ቤት** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99250&mlon=38.77014#map=18/8.99250/38.77014
+- **Etaba እታባ** · KR_02_370 St., Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99294&mlon=38.77041#map=18/8.99294/38.77041
+- **Ethiopia Hotel** (ኢትዮጵያ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 7400 · map https://www.openstreetmap.org/?mlat=9.01702&mlon=38.75351#map=18/9.01702/38.75351
+- **ETT Guesthouse** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01542&mlon=38.76879#map=18/9.01542/38.76879
+- **Family Cozy Bed and Breakfast** (ፋሚሊ ኮዚ መኝታና ቁርስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98877&mlon=38.77203#map=18/8.98877/38.77203
+- **Finfine Adarash Hotel** (ፊንፊኔ አዳራሽ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01757&mlon=38.75810#map=18/9.01757/38.75810
+- **Fle woha** (ፍልውሃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01856&mlon=38.75861#map=18/9.01856/38.75861
+- **Genet Hotel** (ገነት ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 8125 · map https://www.openstreetmap.org/?mlat=9.00338&mlon=38.74782#map=18/9.00338/38.74782
+- **Ghion Hotel** (ጊዮን ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 3222 · map https://www.openstreetmap.org/?mlat=9.01380&mlon=38.76030#map=18/9.01380/38.76030
+- **Global Hotel** (ግሎባል ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 466 4766 / +251 11 466 3906 · map https://www.openstreetmap.org/?mlat=8.99372&mlon=38.75986#map=18/8.99372/38.75986
+- **Harar Ber Hotel** (ሀረር በር ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01558&mlon=38.77094#map=18/9.01558/38.77094
+- **Hawi Hotel** (ሃዊ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 465 4499 · map https://www.openstreetmap.org/?mlat=8.98957&mlon=38.75824#map=18/8.98957/38.75824
+- **HeRa Addis Hotel** · KR_02_299 St., Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 470 6109 · map https://www.openstreetmap.org/?mlat=8.99059&mlon=38.75378#map=18/8.99059/38.75378
+- **Hilton addis ababa** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01784&mlon=38.76493#map=18/9.01784/38.76493
+- **Hilton Addis Ababa** · run by Hilton · Menelik II Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 517 0000 · https://www.hilton.com/en/hotels/addhitw-hilton-addis-ababa/ · map https://www.openstreetmap.org/?mlat=9.01874&mlon=38.76503#map=18/9.01874/38.76503
+- **Hotel Celeste** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99411&mlon=38.77274#map=18/8.99411/38.77274
+- **Hotel Concord** (ኮንኮር ሆቴል) · 888, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 465 4953 / +251 11 466 0831 · map https://www.openstreetmap.org/?mlat=8.98964&mlon=38.75899#map=18/8.98964/38.75899
+- **Hotel D'Leopol** (ደ ሊኦፖል ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 550 7777 / +251 11 515 5080 · map https://www.openstreetmap.org/?mlat=9.00947&mlon=38.77263#map=18/9.00947/38.77263
+- **Hotel De France** (ሆቴል ደ ፍራንስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 554 7389 · map https://www.openstreetmap.org/?mlat=8.99679&mlon=38.74531#map=18/8.99679/38.74531
+- **Hotel Selete** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99624&mlon=38.77130#map=18/8.99624/38.77130
+- **Hyatt Regency Addis Ababa** (ህያት ሪጀንሲ ኢንተርናሽናል ሆቴል) · run by Hyatt · Meskel Square, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 517 1234 · https://www.hyatt.com/hyatt-regency/en-US/addra-hyatt-regency-addis-ababa · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01020&mlon=38.76391#map=18/9.01020/38.76391
+- **Ibex Hotel** (አይቤክስ ሆቴል) · KR_02_380 St., Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 465 4400 · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.98886&mlon=38.77149#map=18/8.98886/38.77149
+- **Intercontinental Bistro and Long Term Appartments** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01610&mlon=38.76852#map=18/9.01610/38.76852
+- **Intercontinental Hotel** (ኢንተርኮንትኔንታል ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 550 5066 / +251 11 518 0444 · http://www.intercontinentaladdis.com.et/ · map https://www.openstreetmap.org/?mlat=9.01544&mlon=38.76962#map=18/9.01544/38.76962
+- **Jambo Real Estate, Meskel Flower Apartment** · KR_02_501 St., Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Sa 09:00-17:00 · map https://www.openstreetmap.org/?mlat=8.98855&mlon=38.76245#map=18/8.98855/38.76245
+- **Jemeà bldg** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99519&mlon=38.76663#map=18/8.99519/38.76663
+- **Johnny** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://www.redalrescate.org/ · map https://www.openstreetmap.org/?mlat=8.99232&mlon=38.74953#map=18/8.99232/38.74953
+- **Jupiter International Hotel (Kazanchis)** (ጁፒተር ሆቴል) · Joseph Tito Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 552 7333 · https://www.jupiterinternationalhotel.com/ · map https://www.openstreetmap.org/?mlat=9.01615&mlon=38.76822#map=18/9.01615/38.76822
+- **King's Hotel** (ኪንግስ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 371 1300 / +251 11 371 2295 / +251 11 372 0106 · map https://www.openstreetmap.org/?mlat=8.99812&mlon=38.73998#map=18/8.99812/38.73998
+- **La Source Guest House** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99126&mlon=38.76650#map=18/8.99126/38.76650
+- **Luhena Hotel - Cafe, Bar and Restaurant** (ሉኸና ሆቴል - ባር ካፌና ሬስቶራንት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 416 6956 · map https://www.openstreetmap.org/?mlat=8.98920&mlon=38.76562#map=18/8.98920/38.76562
+- **Mama's Inn Boutique hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99443&mlon=38.76831#map=18/8.99443/38.76831
+- **Marriott Executive Apartments** · run by Marriott · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01044&mlon=38.76495#map=18/9.01044/38.76495
+- **Meaza cafe መአዛ ካፌ** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00395&mlon=38.75598#map=18/9.00395/38.75598
+- **Menahereya** (መናኋሪያ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01973&mlon=38.76794#map=18/9.01973/38.76794
+- **Merci Hotel** (ሜርሲ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99411&mlon=38.74774#map=18/8.99411/38.74774
+- **Meskel Flower** (መስቀል ፍላወር ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 467 0125 / +251 11 467 1025 · map https://www.openstreetmap.org/?mlat=8.98818&mlon=38.76473#map=18/8.98818/38.76473
+- **Miky** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98507&mlon=38.75471#map=18/8.98507/38.75471
+- **Mosy Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99558&mlon=38.76690#map=18/8.99558/38.76690
+- **MZ Guest House** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00645&mlon=38.76935#map=18/9.00645/38.76935
+- **Nazra Hotel** (ናዝራ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99321&mlon=38.76621#map=18/8.99321/38.76621
+- **Olympia Homestay** · run by Getu · 326 KR_02_326 St., Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99518&mlon=38.76854#map=18/8.99518/38.76854
+- **Omedla Hotel** (ኦሜድላ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 466 4748 · map https://www.openstreetmap.org/?mlat=8.98475&mlon=38.75938#map=18/8.98475/38.75938
+- **Quara Hotel** (ቋራ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01772&mlon=38.76795#map=18/9.01772/38.76795
+- **Radisson Blu** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 515 7600 · https://www.radissonblu.com/hotel-addisababa · map https://www.openstreetmap.org/?mlat=9.01619&mlon=38.76775#map=18/9.01619/38.76775
+- **Ras Hotel** (ራስ ሆቴል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 7060 · map https://www.openstreetmap.org/?mlat=9.01504&mlon=38.75230#map=18/9.01504/38.75230
+- **Residence Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00458&mlon=38.76968#map=18/9.00458/38.76968
+- **Roha Guest House** (ሮሃ እንግዳ ማረፊያ) · Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99586&mlon=38.77641#map=18/8.99586/38.77641
+- **Selam Pension** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00332&mlon=38.76700#map=18/9.00332/38.76700
+- **Sheraton Addis** · run by Sheraton · Taitu Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 517 1717 · https://www.marriott.com/hotels/travel/addlc-sheraton-addis-a-luxury-collection-hotel-addis-ababa/ · map https://www.openstreetmap.org/?mlat=9.02030&mlon=38.75948#map=18/9.02030/38.75948
+- **Signature Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98787&mlon=38.77176#map=18/8.98787/38.77176
+- **Skylight Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02145&mlon=38.76482#map=18/9.02145/38.76482
+- **Tegene Building** (ተገኔ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99340&mlon=38.75986#map=18/8.99340/38.75986
+- **The Hive Guest House** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99593&mlon=38.77391#map=18/8.99593/38.77391
+- **Tina Guest House** (ቲና የእንግዳ ማረፊያ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99672&mlon=38.77568#map=18/8.99672/38.77568
+- **Tossa terara Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01783&mlon=38.76805#map=18/9.01783/38.76805
+- **Tulip Inn** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.99077&mlon=38.76574#map=18/8.99077/38.76574
+- **Union Hotel Apartment** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99664&mlon=38.74390#map=18/8.99664/38.74390
+- **Wollo safer** · KR_02_372 St., Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98827&mlon=38.77213#map=18/8.98827/38.77213
+- **Yetam Hotel** (የታም ሆቴል) · 120, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 466 7626 · map https://www.openstreetmap.org/?mlat=8.99606&mlon=38.76696#map=18/8.99606/38.76696
+- **Yetsion Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98837&mlon=38.75942#map=18/8.98837/38.75942
+- **Yordanos Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01086&mlon=38.76985#map=18/9.01086/38.76985
+- **Zenu Guest House** (ዘኑ እንግዳ ማረፊያ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99714&mlon=38.76704#map=18/8.99714/38.76704
+- **الفندق قام نام مسكن فلور** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99803&mlon=38.76783#map=18/8.99803/38.76783
+- **فندق واليا** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99361&mlon=38.76651#map=18/8.99361/38.76651
+- **መአዛ Meaza Cafe** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00395&mlon=38.75608#map=18/9.00395/38.75608
+
+## Gulele sub-city · ጉለሌ ክፍለ ከተማ — 12
+
+- **Berekt marketing house** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06608&mlon=38.74698#map=18/9.06608/38.74698
+- **Embilta Hotel** (እምቢልታ ሆቴል) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04902&mlon=38.73701#map=18/9.04902/38.73701
+- **Emebet Hotel** (እመቤት ሆቴል) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06266&mlon=38.73120#map=18/9.06266/38.73120
+- **ETALEM HOME ABEL** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06709&mlon=38.73313#map=18/9.06709/38.73313
+- **GENET MENAFESHA ENKULAL FABRICA ABEL** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04976&mlon=38.73598#map=18/9.04976/38.73598
+- **Medhanialem condominium** (መዳኒያለም ኮንዶሚንየም) · 4, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05563&mlon=38.72194#map=18/9.05563/38.72194
+- **Natane Hotel** (ናታን ሆቴል) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05529&mlon=38.71961#map=18/9.05529/38.71961
+- **NATINAS HOTEL** · 499 Gulele _07_1318 St, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · https://nathnaeladmasumarket.blogspot.com/?m=1 · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.05976&mlon=38.74965#map=18/9.05976/38.74965
+- **SGS Hotel** · Tunisia Avenue, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05723&mlon=38.74061#map=18/9.05723/38.74061
+- **Tsion** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06542&mlon=38.73238#map=18/9.06542/38.73238
+- **Worknesh Fanta ወርቅነሽ ፋንታ** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06196&mlon=38.73965#map=18/9.06196/38.73965
+- **Yina Hotel** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05860&mlon=38.74169#map=18/9.05860/38.74169
+
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 25
+
+- **Abinet Hotel** (አብነት ሆቴል) · Bekele Weya Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01894&mlon=38.73320#map=18/9.01894/38.73320
+- **Afro Legacy Hotel** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00027&mlon=38.73889#map=18/9.00027/38.73889
+- **Alamudin guest house** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01549&mlon=38.71853#map=18/9.01549/38.71853
+- **Assab Hotel** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02877&mlon=38.74426#map=18/9.02877/38.74426
+- **Biserat Hotel** (ብስራት ሆቴል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 553 3517 · map https://www.openstreetmap.org/?mlat=9.01276&mlon=38.74036#map=18/9.01276/38.74036
+- **Blue Nest Hotel** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00137&mlon=38.73793#map=18/9.00137/38.73793
+- **D'Afrique Hotel** (አፍሪካ ሆቴል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 551 7385 · map https://www.openstreetmap.org/?mlat=9.01405&mlon=38.74483#map=18/9.01405/38.74483
+- **Dessie Hotel** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00714&mlon=38.73429#map=18/9.00714/38.73429
+- **Diplomat Furnished Guest House** (ዲፕሎማት የእንግዳ ማረፊያ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99609&mlon=38.73628#map=18/8.99609/38.73628
+- **Enda kwaja** · run by Home · Lideta sub-city (ልደታ ክፍለ ከተማ) · http://www.danaplc.com · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02968&mlon=38.74718#map=18/9.02968/38.74718
+- **Extrim hotel** (ኤክስትሪም ሆቴል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02790&mlon=38.74874#map=18/9.02790/38.74874
+- **Harambee Hotel** (ሐራምቤ ሆቴል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 551 4482 / +251 11 551 4000 · map https://www.openstreetmap.org/?mlat=9.01778&mlon=38.75440#map=18/9.01778/38.75440
+- **Haven Hotel** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01556&mlon=38.73591#map=18/9.01556/38.73591
+- **Lido Hotel** (ሊዶ ሆቴል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 551 4488 · map https://www.openstreetmap.org/?mlat=9.01661&mlon=38.74747#map=18/9.01661/38.74747
+- **Mexico Hotel** · Roosevelt Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00851&mlon=38.74359#map=18/9.00851/38.74359
+- **Sarendem Hotel** (ሳሬንደም ሆቴል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01885&mlon=38.73341#map=18/9.01885/38.73341
+- **SIM - Guesthouse** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02134&mlon=38.74835#map=18/9.02134/38.74835
+- **Solish Hotel** · Liberia Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01240&mlon=38.74107#map=18/9.01240/38.74107
+- **Solish Hotel** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01241&mlon=38.74130#map=18/9.01241/38.74130
+- **Tirar International Hotel** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01748&mlon=38.73804#map=18/9.01748/38.73804
+- **Tirar** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01683&mlon=38.73845#map=18/9.01683/38.73845
+- **UMMA Hotel** · Ring Road, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00314&mlon=38.71911#map=18/9.00314/38.71911
+- **Vamos** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01543&mlon=38.73727#map=18/9.01543/38.73727
+- **Wabe Shebelle Hotel** (ዋቢ ሸበሌ ሆቴል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 551 7187 · map https://www.openstreetmap.org/?mlat=9.01235&mlon=38.74683#map=18/9.01235/38.74683
+- **Warka Hotel** (ዋርካ ሆቴል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01822&mlon=38.73358#map=18/9.01822/38.73358
+
+## Yeka sub-city · የካ ክፍለ ከተማ — 53
+
+- **Abem Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03606&mlon=38.85425#map=18/9.03606/38.85425
+- **Abem Hotel** (አቤም ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03612&mlon=38.85419#map=18/9.03612/38.85419
+- **Afropolitan Hotel** (አፍሮፖሊታን ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01805&mlon=38.79011#map=18/9.01805/38.79011
+- **Ararat Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02422&mlon=38.81829#map=18/9.02422/38.81829
+- **Archi Hotel** (አርኪ ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02424&mlon=38.82544#map=18/9.02424/38.82544
+- **Aunt home** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02861&mlon=38.84254#map=18/9.02861/38.84254
+- **Axum** (አክሱም ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 3916 · map https://www.openstreetmap.org/?mlat=9.01531&mlon=38.78401#map=18/9.01531/38.78401
+- **Ayat My rented house** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02873&mlon=38.88348#map=18/9.02873/38.88348
+- **Balderas Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02839&mlon=38.78444#map=18/9.02839/38.78444
+- **Belle View Hotel and Spa** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02158&mlon=38.80300#map=18/9.02158/38.80300
+- **Bereket Bar and Restaurant** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03882&mlon=38.84977#map=18/9.03882/38.84977
+- **Blue Cave** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01714&mlon=38.78183#map=18/9.01714/38.78183
+- **Cmore hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01957&mlon=38.78803#map=18/9.01957/38.78803
+- **Dave's Home** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03543&mlon=38.88018#map=18/9.03543/38.88018
+- **Demissie zewde ደምሴ ዘዉዴ** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04611&mlon=38.85480#map=18/9.04611/38.85480
+- **Demissie zewde's home ደምሴ** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04735&mlon=38.85483#map=18/9.04735/38.85483
+- **Demitri Hotel** (ዲምትሪ ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02353&mlon=38.82632#map=18/9.02353/38.82632
+- **DSTV HOUSE** (እንግሊዝ ኢምባሲ) · Lorenzo Taezaz Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02859&mlon=38.78763#map=18/9.02859/38.78763
+- **Edna Addis Hotel** (ኤድና አዲስ ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02432&mlon=38.77625#map=18/9.02432/38.77625
+- **Gentle Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 667 6065 · http://www.gentlehoteladdis.com · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02331&mlon=38.81984#map=18/9.02331/38.81984
+- **Getachew Worku ጌታቸው ወርቁ** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03116&mlon=38.79999#map=18/9.03116/38.79999
+- **Govani Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01716&mlon=38.79117#map=18/9.01716/38.79117
+- **Hamonah Guest House** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 667 0022 · http://www.hamonahguesthouse.com · map https://www.openstreetmap.org/?mlat=9.02283&mlon=38.84301#map=18/9.02283/38.84301
+- **Hareg Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03967&mlon=38.85090#map=18/9.03967/38.85090
+- **Hayes Hotel Addis Ababa** · 22 Mike Leyland Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 666 2261 · https://hayesaddishotel.com · map https://www.openstreetmap.org/?mlat=9.01746&mlon=38.78147#map=18/9.01746/38.78147
+- **Holiday Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01456&mlon=38.78134#map=18/9.01456/38.78134
+- **Holyday Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01466&mlon=38.78130#map=18/9.01466/38.78130
+- **Jambo bela apartment** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04444&mlon=38.78336#map=18/9.04444/38.78336
+- **Keba Guesthouse** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02455&mlon=38.79059#map=18/9.02455/38.79059
+- **KG** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03477&mlon=38.81846#map=18/9.03477/38.81846
+- **Konjo Guesthouse** · Kenenisa Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02054&mlon=38.79386#map=18/9.02054/38.79386
+- **Korebtama Menafesha Hotel** (ኮረብታማ መናፈሻ ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02353&mlon=38.81744#map=18/9.02353/38.81744
+- **Louvre Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02504&mlon=38.78687#map=18/9.02504/38.78687
+- **M.N. International** (ኤም.ኤን ኢንተርናሽናል ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01399&mlon=38.77957#map=18/9.01399/38.77957
+- **Meheretabe Hotel** (ምህረትዓብ ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03788&mlon=38.85199#map=18/9.03788/38.85199
+- **Melala Addis Bed&Breakfast** · run by Melala Addis · 666/11/16 Togo Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02038&mlon=38.78753#map=18/9.02038/38.78753
+- **Melala Addis** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02460&mlon=38.79049#map=18/9.02460/38.79049
+- **Nigussie Dimamu ንጉሴ ድማሙ** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04347&mlon=38.84369#map=18/9.04347/38.84369
+- **Pacific Hotel** · Fikre Mariam Aba Techan Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02319&mlon=38.81965#map=18/9.02319/38.81965
+- **Poli Lotus closed comunitiy** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02295&mlon=38.85286#map=18/9.02295/38.85286
+- **Queen Of Sheba** (ንግስተ ሣባ ሆቴል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 5400 / +251 11 618 0000 · map https://www.openstreetmap.org/?mlat=9.01339&mlon=38.77872#map=18/9.01339/38.77872
+- **Raya pension** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02086&mlon=38.79130#map=18/9.02086/38.79130
+- **Sofia Kebede ሶፍያ ከበደ** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01990&mlon=38.79412#map=18/9.01990/38.79412
+- **Stayeasy Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01531&mlon=38.78294#map=18/9.01531/38.78294
+- **Tedros Belay International Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02159&mlon=38.85485#map=18/9.02159/38.85485
+- **Tegen Hotel** · house no. 343 Comoros Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 2870 · https://www.tegenhotel.com/ · map https://www.openstreetmap.org/?mlat=9.02903&mlon=38.79182#map=18/9.02903/38.79182
+- **Tegen Hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02904&mlon=38.79182#map=18/9.02904/38.79182
+- **Tenay's** (የጤናዬ ቤት) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06719&mlon=38.86269#map=18/9.06719/38.86269
+- **Tewdoros Belay International Hotel** (ቴዎድሮስ በላይ ኢንተርናሽናል ሆቴል) · YK_13_0605 St., Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 668 0145 · http://www.tewdorosbelay.international.com · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02122&mlon=38.85512#map=18/9.02122/38.85512
+- **top ten hotel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.tripadvisor.com/Hotel_Review-g293791-d2641616-Reviews-Top_Ten_Hotel-Addis_Ababa.html · map https://www.openstreetmap.org/?mlat=9.01922&mlon=38.82203#map=18/9.01922/38.82203
+- **Yeka Guest House** · Comoros Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 06:00-22:00 · map https://www.openstreetmap.org/?mlat=9.03267&mlon=38.78153#map=18/9.03267/38.78153
+- **Zee Home** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02286&mlon=38.87206#map=18/9.02286/38.87206
+- **አበበ Abebe** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04596&mlon=38.85606#map=18/9.04596/38.85606
+
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 29
+
+- **3F furniture factory** (ከታር ሆቴል) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95508&mlon=38.76352#map=18/8.95508/38.76352
+- **Adonis grand Father** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98898&mlon=38.73009#map=18/8.98898/38.73009
+- **Andi** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96246&mlon=38.72855#map=18/8.96246/38.72855
+- **Avola Hotel** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95872&mlon=38.70727#map=18/8.95872/38.70727
+- **BeAleta Hotel Apartment** · run by abel13lakew@gmail.com · Saris Addis Sefer, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 470 8292 · http://bealetahotel.com · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96020&mlon=38.76518#map=18/8.96020/38.76518
+- **bela addis hotel** · run by ermias seyum · 1 jemo, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95227&mlon=38.71614#map=18/8.95227/38.71614
+- **Benazo Hotel** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94895&mlon=38.72110#map=18/8.94895/38.72110
+- **Deapo St. George Hotel** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97737&mlon=38.76008#map=18/8.97737/38.76008
+- **ELGEL Hotel & Spa** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98111&mlon=38.72218#map=18/8.98111/38.72218
+- **Fikre kunspanga** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95714&mlon=38.71300#map=18/8.95714/38.71300
+- **Game Hotel** (ጌም ሆቴል) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96704&mlon=38.76411#map=18/8.96704/38.76411
+- **Gofa camp** (ጎፋ ካምፕ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96936&mlon=38.74022#map=18/8.96936/38.74022
+- **Gofa Hotel** (ጎፋ ሆቴል) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 466 2089 · map https://www.openstreetmap.org/?mlat=8.98002&mlon=38.74921#map=18/8.98002/38.74921
+- **Home** · 421/0028 Kadisco, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 440 1933 · map https://www.openstreetmap.org/?mlat=8.96500&mlon=38.76669#map=18/8.96500/38.76669
+- **Ivory Hotel** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94830&mlon=38.74465#map=18/8.94830/38.74465
+- **Kebron Guest House** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94680&mlon=38.74157#map=18/8.94680/38.74157
+- **kiki** (ኪኪ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96534&mlon=38.72714#map=18/8.96534/38.72714
+- **Mena Hotel** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98509&mlon=38.72646#map=18/8.98509/38.72646
+- **Nati Pension** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95098&mlon=38.73157#map=18/8.95098/38.73157
+- **Salayesh Hotel** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94918&mlon=38.72487#map=18/8.94918/38.72487
+- **Sol Mile Family Guest House** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96460&mlon=38.74891#map=18/8.96460/38.74891
+- **Tedi home ቴዎድሮስ ፀጋዬ** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96365&mlon=38.71297#map=18/8.96365/38.71297
+- **Tulusa Hotel (Pension)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94858&mlon=38.72462#map=18/8.94858/38.72462
+- **Watot Bar, Restaurant and Hotel** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94822&mlon=38.73202#map=18/8.94822/38.73202
+- **Yidnekachew ይድነቃቸው** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95659&mlon=38.71846#map=18/8.95659/38.71846
+- **Yilma Hotel** (ይልማ ሆቴል) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98263&mlon=38.73118#map=18/8.98263/38.73118
+- **Yohannis Hotel** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96850&mlon=38.72123#map=18/8.96850/38.72123
+- **Yosef & Tizita** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95231&mlon=38.68551#map=18/8.95231/38.68551
+- **ደገሰ ሆቴል** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94893&mlon=38.72749#map=18/8.94893/38.72749
+
+## Akaki Kality sub-city · አቃቂ ቃሊቲ ክፍለ ከተማ — 26
+
+- **ababora** (አባቦራ ሆቴል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85854&mlon=38.79788#map=18/8.85854/38.79788
+- **Adey Hotel** (አደይ ሆቴል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95737&mlon=38.76446#map=18/8.95737/38.76446
+- **Arsema Hotel** (አርሴማ ሆቴል) · Debre Zeit Road, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93627&mlon=38.76404#map=18/8.93627/38.76404
+- **Babecare** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89990&mlon=38.76771#map=18/8.89990/38.76771
+- **Baro2 Hotel** (ባሮ 2 ሆቴል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95657&mlon=38.76505#map=18/8.95657/38.76505
+- **Bridge Hotel** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95743&mlon=38.76583#map=18/8.95743/38.76583
+- **Deme home ABEL** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90812&mlon=38.76152#map=18/8.90812/38.76152
+- **Gojo Hotel** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89235&mlon=38.77574#map=18/8.89235/38.77574
+- **Hewan** (ሄዋን) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90855&mlon=38.76508#map=18/8.90855/38.76508
+- **Heyday Hotel** · 09 Wereda, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · https://heydayhotelethiopia.com · map https://www.openstreetmap.org/?mlat=8.95817&mlon=38.77001#map=18/8.95817/38.77001
+- **kality-Crown Hotel** (ክራውን ሆቴል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.91372&mlon=38.76271#map=18/8.91372/38.76271
+- **Kings Hotel - Kaliti** (ኪንግስ ሆቴል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89119&mlon=38.77608#map=18/8.89119/38.77608
+- **Liya Hotel** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95741&mlon=38.76560#map=18/8.95741/38.76560
+- **MEKLIT MITKU CONDOMINIUM BLOCK 85 HOUSE NO 11** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89819&mlon=38.80634#map=18/8.89819/38.80634
+- **MY FAMILY HOME** · run by Minassie Belaynhe · 113 አዲስ ሰፈር አካባቢ / Addis Sefer, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · tel +251 11 440 5549 · map https://www.openstreetmap.org/?mlat=8.95816&mlon=38.76874#map=18/8.95816/38.76874
+- **Nega Bonger Hotel** (ነጋ ቦንገር ሆቴል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · tel +251 11 470 8100 · https://negabonger.com/ · map https://www.openstreetmap.org/?mlat=8.95192&mlon=38.76121#map=18/8.95192/38.76121
+- **Quara Hotel** · Debrezeit Road, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89195&mlon=38.77607#map=18/8.89195/38.77607
+- **Saris checheho Hotel** (ጨጨሆ ሆቴል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95730&mlon=38.76472#map=18/8.95730/38.76472
+- **Sonz Hotel** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95782&mlon=38.76572#map=18/8.95782/38.76572
+- **South Gete Hotel** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88160&mlon=38.76952#map=18/8.88160/38.76952
+- **Wanos** (ዋኖስ) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90297&mlon=38.76657#map=18/8.90297/38.76657
+- **Yayu's** (ያዪ) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86484&mlon=38.81289#map=18/8.86484/38.81289
+- **Yeabsira** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89974&mlon=38.76779#map=18/8.89974/38.76779
+- **Yohannes Hotel** (የኋንስ ሆቴል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89451&mlon=38.77379#map=18/8.89451/38.77379
+- **በየነ ደጀኔ /መሰረት አበበ Beyene Dejene /meseret Abebe** · 193 Gelan Condomminium, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87886&mlon=38.76958#map=18/8.87886/38.76958
+- **ቤት 4** (መሬት የገዛነው ቦታ) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87750&mlon=38.81241#map=18/8.87750/38.81241
+
+## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 22
+
+- **Aberash Pension** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06781&mlon=38.69444#map=18/9.06781/38.69444
+- **Alesko** (አሌስኮ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06494&mlon=38.69121#map=18/9.06494/38.69121
+- **Asko Condominium** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05846&mlon=38.69204#map=18/9.05846/38.69204
+- **ASKO HOME ABEL** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05380&mlon=38.69378#map=18/9.05380/38.69378
+- **BENJAMIN ALEM BANK HOME ABEL** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00009&mlon=38.67320#map=18/9.00009/38.67320
+- **Bingo** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01756&mlon=38.68301#map=18/9.01756/38.68301
+- **Debre Abay Hotel** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99351&mlon=38.68720#map=18/8.99351/38.68720
+- **HIWI MOTHER HOME** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03097&mlon=38.68624#map=18/9.03097/38.68624
+- **Holy Savior Guest Home** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · https://stayholysavior.com/ · map https://www.openstreetmap.org/?mlat=9.00155&mlon=38.69403#map=18/9.00155/38.69403
+- **Jemo grand hotel** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97563&mlon=38.68197#map=18/8.97563/38.68197
+- **kirkos hotel** · አየርጤና, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97987&mlon=38.69974#map=18/8.97987/38.69974
+- **KOLFE KERANIYO KIFLE KETEMA ABEL** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00261&mlon=38.69879#map=18/9.00261/38.69879
+- **Like hotel** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97629&mlon=38.67977#map=18/8.97629/38.67977
+- **Meaza Hailu መዐዛ ኃይሉ** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00315&mlon=38.68521#map=18/9.00315/38.68521
+- **Meaza hailu's home መአዛ ኃይሉ** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00315&mlon=38.68520#map=18/9.00315/38.68520
+- **Meseret Abebe መሰረት አበበ** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05113&mlon=38.69786#map=18/9.05113/38.69786
+- **Morning Coffee** · run by Birtukan Sinishaw · KK_05_FM, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99406&mlon=38.69846#map=18/8.99406/38.69846
+- **Rahel and alex home** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00287&mlon=38.67429#map=18/9.00287/38.67429
+- **Rodas and Hilina Fikru and Abeba Home** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01343&mlon=38.70547#map=18/9.01343/38.70547
+- **Sena** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06619&mlon=38.69341#map=18/9.06619/38.69341
+- **Senea** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06752&mlon=38.69392#map=18/9.06752/38.69392
+- **Tibebu Mulat ጥበቡ ሙላት** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98099&mlon=38.69539#map=18/8.98099/38.69539
+
+## Addis Ababa (sub-city not given in OpenStreetMap) — 1
+
+- **Baro Hotel** (ባሮ ሆተል) · Addis Ababa · map https://www.openstreetmap.org/?mlat=9.03074&mlon=38.75344#map=18/9.03074/38.75344

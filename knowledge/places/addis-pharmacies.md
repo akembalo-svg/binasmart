@@ -3,12 +3,12 @@ title: "Pharmacies in Addis Ababa (ፋርማሲዎች)"
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-09-24"
-count: "180"
+fetched: "2026-05-31"
+count: "177"
 ---
 # Pharmacies in Addis Ababa · በአዲስ አበባ ያሉ ፋርማሲዎች
 
-180 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+177 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 17
 
@@ -39,7 +39,7 @@ count: "180"
 - **Ariti Herbal** (አሪቲ) · Mike Leyland Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00854&mlon=38.78077#map=18/9.00854/38.78077
 - **Axum Pharmacy** · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01826&mlon=38.79733#map=18/9.01826/38.79733
 - **C.M.C Michael Pharmacy** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02122&mlon=38.83958#map=18/9.02122/38.83958
-- **Droga Pharmacy** (ድሮጋ መድኃኒት ቤት) · Salitemihret - Summit Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-22:00 · map https://www.openstreetmap.org/?mlat=9.01094&mlon=38.83659#map=18/9.01094/38.83659
+- **Droga Pharmacy** · Salitemihret - Summit Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-22:00 · map https://www.openstreetmap.org/?mlat=9.01085&mlon=38.83658#map=18/9.01085/38.83658
 - **Effrata Pharmacy** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01879&mlon=38.82013#map=18/9.01879/38.82013
 - **Ethiopian Red Cross Society, Addis Ababa Pharmacy No. 3** · run by Ethiopian Red Cross Society · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 667 6578 · map https://www.openstreetmap.org/?mlat=9.01871&mlon=38.82073#map=18/9.01871/38.82073
 - **Eyased** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99272&mlon=38.86015#map=18/8.99272/38.86015
@@ -136,10 +136,9 @@ count: "180"
 - **Metroz Pharmacy** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06625&mlon=38.86458#map=18/9.06625/38.86458
 - **Solomon Pharmacy** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02527&mlon=38.78141#map=18/9.02527/38.78141
 
-## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 50
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 47
 
 - **Abe Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98227&mlon=38.73025#map=18/8.98227/38.73025
-- **Abel** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96216&mlon=38.75605#map=18/8.96216/38.75605
 - **Abyssinia Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.97943&mlon=38.74916#map=18/8.97943/38.74916
 - **Afri Dan Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95666&mlon=38.69133#map=18/8.95666/38.69133
 - **Aleph Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94688&mlon=38.74523#map=18/8.94688/38.74523
@@ -161,7 +160,6 @@ count: "180"
 - **Helina Pharmacy** (ከነማ መድኃኒት ቤት ቁ.5) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 466 5118 · map https://www.openstreetmap.org/?mlat=8.98436&mlon=38.74998#map=18/8.98436/38.74998
 - **Helsiy Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96057&mlon=38.71333#map=18/8.96057/38.71333
 - **Jemo 2 Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95364&mlon=38.69337#map=18/8.95364/38.69337
-- **Kare pharmacutical Shop** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96776&mlon=38.76362#map=18/8.96776/38.76362
 - **Kebron Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94683&mlon=38.74170#map=18/8.94683/38.74170
 - **Kenema Pharmacy No 5** (ከነማ መድኃኒት ቤት ቁ.5) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 465 3339 · map https://www.openstreetmap.org/?mlat=8.98464&mlon=38.74981#map=18/8.98464/38.74981
 - **Kenema Public Pharmacy (Oilibiya H.office)** (ከነማ ፋርማሲ ቁ.7 (ኦሊቢያ ዋና መስሪያቤት ፊት)) · Debre Zeit Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 442 3175 · map https://www.openstreetmap.org/?mlat=8.97394&mlon=38.76072#map=18/8.97394/38.76072
@@ -170,7 +168,6 @@ count: "180"
 - **Lewi's Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93869&mlon=38.73497#map=18/8.93869/38.73497
 - **Lidet Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 811 4141 · hours Mo-Su 07:00-21:00 · map https://www.openstreetmap.org/?mlat=8.99011&mlon=38.72488#map=18/8.99011/38.72488
 - **Makda Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.95854&mlon=38.71241#map=18/8.95854/38.71241
-- **Mamo Area Pharmacy** (ማሞ ሰፈር መድኃኒት ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97295&mlon=38.76242#map=18/8.97295/38.76242
 - **Maphi Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97366&mlon=38.73143#map=18/8.97366/38.73143
 - **Naol Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95153&mlon=38.68785#map=18/8.95153/38.68785
 - **Nejashi Pharmacy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95483&mlon=38.69221#map=18/8.95483/38.69221

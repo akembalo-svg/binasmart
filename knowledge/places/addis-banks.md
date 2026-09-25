@@ -3,12 +3,12 @@ title: "Bank branches in Addis Ababa (የባንክ ቅርንጫፎች)"
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-09-24"
-count: "778"
+fetched: "2026-05-31"
+count: "767"
 ---
 # Bank branches in Addis Ababa · በአዲስ አበባ ያሉ የባንክ ቅርንጫፎች
 
-778 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+767 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 63
 
@@ -76,7 +76,7 @@ count: "778"
 - **Wegagen Bank (Arat kilo Branch)** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03321&mlon=38.76239#map=18/9.03321/38.76239
 - **Wegagen Bank Habtegiorgis Branch** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03383&mlon=38.74610#map=18/9.03383/38.74610
 
-## Bole sub-city · ቦሌ ክፍለ ከተማ — 186
+## Bole sub-city · ቦሌ ክፍለ ከተማ — 184
 
 - **Abay Bank (Bole Medhanialem Branch)** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99961&mlon=38.78422#map=18/8.99961/38.78422
 - **Abay Bank (Bole Michael Branch)** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98322&mlon=38.77285#map=18/8.98322/38.77285
@@ -201,12 +201,10 @@ count: "778"
 - **Debub Global Bank (Bole Michael Branch)** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98174&mlon=38.77439#map=18/8.98174/38.77439
 - **Debub global Bank gerji branch** (Debub global bank gerji qitinchaf) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99455&mlon=38.81067#map=18/8.99455/38.81067
 - **Debub Global Bank Yerer Ber Branch** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00342&mlon=38.81665#map=18/9.00342/38.81665
-- **Enat Bank** · BL_03_706 Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99339&mlon=38.79419#map=18/8.99339/38.79419
 - **Enat Bank** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00362&mlon=38.79739#map=18/9.00362/38.79739
 - **Enat Bank** · Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99399&mlon=38.79006#map=18/8.99399/38.79006
 - **Enat Bank** · Salitemihret - Summit Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:30-17:00 · map https://www.openstreetmap.org/?mlat=9.01185&mlon=38.83406#map=18/9.01185/38.83406
 - **Export Import Bank of India - East Africa Office** (ሮማኒያ ኤምባሲ - መኖሪያ) · run by Export Import Bank of India · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99652&mlon=38.77805#map=18/8.99652/38.77805
-- **Gadaa Bank** · BL_03_706 Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99342&mlon=38.79421#map=18/8.99342/38.79421
 - **Global Bank** · Goro to CMC Figa, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=9.00461&mlon=38.83058#map=18/9.00461/38.83058
 - **Goro** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99696&mlon=38.83205#map=18/8.99696/38.83205
 - **Hibret Bank** · Goro to CMC Figa, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=9.00646&mlon=38.83324#map=18/9.00646/38.83324
@@ -265,7 +263,7 @@ count: "778"
 - **Zemen Bank** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00182&mlon=38.77960#map=18/9.00182/38.77960
 - **Zemen Bank** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01095&mlon=38.78115#map=18/9.01095/38.78115
 
-## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 40
+## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 39
 
 - **Addis International Bank (Goma Tera Branch)** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02700&mlon=38.73989#map=18/9.02700/38.73989
 - **Addis International Bank (Sebategna Branch)** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03130&mlon=38.73231#map=18/9.03130/38.73231
@@ -279,7 +277,6 @@ count: "778"
 - **Bank of Abyssian (St. Paulos Branch)** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04619&mlon=38.72915#map=18/9.04619/38.72915
 - **Bank of Abyssina Raguel Branch** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03316&mlon=38.73999#map=18/9.03316/38.73999
 - **Bank of Abyssinia Autobis Tera Branch** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03139&mlon=38.73215#map=18/9.03139/38.73215
-- **Bank Of Abyssinia** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03209&mlon=38.73622#map=18/9.03209/38.73622
 - **Buna International Bank (Mesalemia Branch)** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03361&mlon=38.72835#map=18/9.03361/38.72835
 - **Bunna International Bank (Goma Tera Branch)** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02703&mlon=38.73995#map=18/9.02703/38.73995
 - **CBE - Pastor Square Branch** (የኢትዮጵያ ንግድ ባንክ - ፓስተር አደባባይ ቅርንጫፍ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours Mo-Sa 08:00-17:30 · map https://www.openstreetmap.org/?mlat=9.04624&mlon=38.73271#map=18/9.04624/38.73271
@@ -377,7 +374,7 @@ count: "778"
 - **Commercial Bank of Ethiopia** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02168&mlon=38.76498#map=18/9.02168/38.76498
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ (ጠመንጃ ያዥ ቅርንጫፍ)) · run by Government · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 465 5178 · http://combanketh.et · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.99783&mlon=38.75874#map=18/8.99783/38.75874
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.00523&mlon=38.76728#map=18/9.00523/38.76728
-- **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 442 4269 · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.98145&mlon=38.76367#map=18/8.98145/38.76367
+- **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 442 4269 · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.98144&mlon=38.76363#map=18/8.98144/38.76363
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 2184 · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.01141&mlon=38.76213#map=18/9.01141/38.76213
 - **Commercial Bank Of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 2300 · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.01278&mlon=38.74869#map=18/9.01278/38.74869
 - **Cooperative Bank of Oromia Odaa Branch** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01656&mlon=38.76591#map=18/9.01656/38.76591
@@ -410,7 +407,7 @@ count: "778"
 - **Oromiya International Bank Wello Sefer Branch** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98406&mlon=38.76596#map=18/8.98406/38.76596
 - **Tsehay Bank Beklo Bet Branch** · run by Tsehay Bank S.C · Sierra Leone Av, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 470 6998 · https://tsehaybank.com.et/ · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=8.99346&mlon=38.75929#map=18/8.99346/38.75929
 - **Tsehay Bank Bole Avenue Branch** · run by Tsehay Bank SC · Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://tsehaybank.com.et · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=9.00638&mlon=38.76654#map=18/9.00638/38.76654
-- **Tsehay Bank Gotera Branch** · run by Tsehay Bank SC · Ethio-Chinese Friendship Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://tsehaybank.com.et · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=8.98141&mlon=38.76365#map=18/8.98141/38.76365
+- **Tsehay Bank Gotera Branch** · run by Tsehay Bank SC · Ethio-Chinese Friendship Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://tsehaybank.com.et · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=8.98139&mlon=38.76362#map=18/8.98139/38.76362
 - **Tsehay Bank Head Office** · run by Tsehay Bank SC · Sierra Leone Av, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 470 6854 · https://tsehaybank.com.et · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=8.99357&mlon=38.75901#map=18/8.99357/38.75901
 - **Tsehay Bank Legahar Branch** · run by Tsehay Bank SC · Ras Mekonnen Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 558 2933 · https://tsehaybank.com.et/ · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=9.01246&mlon=38.75202#map=18/9.01246/38.75202
 - **Tsehay Bank Meskel Flower Branch** · run by Tsehay Bank SC · Gabon Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://tsehaybank.com.et/ · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=8.99146&mlon=38.76629#map=18/8.99146/38.76629
@@ -453,16 +450,15 @@ count: "778"
 - **United Bank (Addisu Gebeya Branch)** (ሕብረት ባንክ (አዲሱ ገበያ ቅርንጫፍ)) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06091&mlon=38.73587#map=18/9.06091/38.73587
 - **United Bank Sidist Kilo Branch** (ህብረት ባንክ ስድስት ኪሎ ቅርንጫፍ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04422&mlon=38.76032#map=18/9.04422/38.76032
 
-## Lideta sub-city · ልደታ ክፍለ ከተማ — 40
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 37
 
 - **Abay Bank Head Office** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01610&mlon=38.74498#map=18/9.01610/38.74498
 - **Ahadu Bank Gejje Sefer Branch** · Burundi Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01658&mlon=38.73863#map=18/9.01658/38.73863
 - **Awash bank sc Tegbare-ed Branch** · ሜክሲኮ, Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 558 9507 · https://www.awashbank.com/ · hours Mo-Sa 02:00-01:00 · map https://www.openstreetmap.org/?mlat=9.01094&mlon=38.74083#map=18/9.01094/38.74083
-- **Awash International Bank** (አዋሽ ኢንተርናሽናል ባንክ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 554 6572 · https://www.awashbank.com/ · map https://www.openstreetmap.org/?mlat=9.01304&mlon=38.73471#map=18/9.01304/38.73471
-- **Bank Of Abyssinia** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01274&mlon=38.73709#map=18/9.01274/38.73709
+- **Awash International Bank** (አዋሽ ኢንተርናሽናል ባንክ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 554 6572 · https://www.awashbank.com/ · map https://www.openstreetmap.org/?mlat=9.01303&mlon=38.73455#map=18/9.01303/38.73455
 - **Bank of Abyssinia** (አቢሲኒያ ባንክ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 278 1307 · map https://www.openstreetmap.org/?mlat=9.02170&mlon=38.73323#map=18/9.02170/38.73323
 - **Bank of Bbyssinia** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01681&mlon=38.74441#map=18/9.01681/38.74441
-- **Commercial Bank of Ethiopia (Balcha Branch)** · run by Government · Lideta sub-city (ልደታ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.01292&mlon=38.73803#map=18/9.01292/38.73803
+- **Commercial Bank of Ethiopia (Balcha Branch)** · run by Government · Lideta sub-city (ልደታ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.01298&mlon=38.73792#map=18/9.01298/38.73792
 - **Commercial Bank of Ethiopia (Berebere Tera Branch)** · run by Government · Lideta sub-city (ልደታ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.02528&mlon=38.73910#map=18/9.02528/38.73910
 - **Commercial Bank of Ethiopia (Geja Sefer Branch)** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Lideta sub-city (ልደታ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.01796&mlon=38.73817#map=18/9.01796/38.73817
 - **Commercial Bank of Ethiopia (Lideta Branch)** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Lideta sub-city (ልደታ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.01153&mlon=38.73251#map=18/9.01153/38.73251
@@ -472,7 +468,6 @@ count: "778"
 - **Cooperative Bank of Oromia (Sulula Branch)** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02523&mlon=38.73904#map=18/9.02523/38.73904
 - **Dashen Bank (Ledeta Branch)** (ዳሽን ባንክ (ልደታ ቅርንጫፍ)) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 552 5645 · map https://www.openstreetmap.org/?mlat=9.01101&mlon=38.74057#map=18/9.01101/38.74057
 - **Dashen Bank Golla Branch** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02695&mlon=38.74474#map=18/9.02695/38.74474
-- **Dashen Bank** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01343&mlon=38.73469#map=18/9.01343/38.73469
 - **Dashen Bank** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01670&mlon=38.74949#map=18/9.01670/38.74949
 - **Dashen Bank** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02212&mlon=38.74769#map=18/9.02212/38.74769
 - **Dashen International Bank Head Quarter** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01884&mlon=38.75094#map=18/9.01884/38.75094
@@ -494,7 +489,6 @@ count: "778"
 - **United Bank** (ህብረት ባንክ) · ሰንጋ ተራ Sengatera, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01394&mlon=38.74914#map=18/9.01394/38.74914
 - **Wegagen Bank (Africa Union Branch)** (ወጋገን ባንክ (አፍሪካ ሕብረት ቅርንጫፍ)) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 554 7063 / +251 11 554 7134 · map https://www.openstreetmap.org/?mlat=9.00119&mlon=38.74019#map=18/9.00119/38.74019
 - **Zemen Bank (Future Headquarters) (Under Construction)** · run by Zemen Bank · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01444&mlon=38.74979#map=18/9.01444/38.74979
-- **Zemen Bank** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01271&mlon=38.73731#map=18/9.01271/38.73731
 
 ## Yeka sub-city · የካ ክፍለ ከተማ — 106
 
@@ -508,6 +502,7 @@ count: "778"
 - **Ahadu Bank Sholla Gebya Branch** · Kenenisa Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Su-Fr 08:00-18:30 · map https://www.openstreetmap.org/?mlat=9.02297&mlon=38.79389#map=18/9.02297/38.79389
 - **Ahadu Bank St. Salite-Mihiret Branch** · Jacros, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-18:30 · map https://www.openstreetmap.org/?mlat=9.02362&mlon=38.82628#map=18/9.02362/38.82628
 - **Ahadu Bank Wosen Branch** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Su-Fr 08:00-18:30 · map https://www.openstreetmap.org/?mlat=9.02844&mlon=38.83394#map=18/9.02844/38.83394
+- **Ahdu Bank Ayat Branch** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Su-Fr 08:00-18:30 · map https://www.openstreetmap.org/?mlat=9.02971&mlon=38.87754#map=18/9.02971/38.87754
 - **AWACH HEAD OFFICE ABEL** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02581&mlon=38.77755#map=18/9.02581/38.77755
 - **Awash bank (Yared Branch)** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04218&mlon=38.76586#map=18/9.04218/38.76586
 - **Awash Bank Gurd shola branch** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01911&mlon=38.82249#map=18/9.01911/38.82249
@@ -546,10 +541,10 @@ count: "778"
 - **Commercial Bank of Ethiopia Branch** · run by Government · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.02817&mlon=38.83298#map=18/9.02817/38.83298
 - **Commercial Bank of Ethiopia Diaspora Adebabay Branch** · run by Government · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.02006&mlon=38.80110#map=18/9.02006/38.80110
 - **Commercial Bank of Ethiopia Megenagna Branch** · run by Government · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.01810&mlon=38.79585#map=18/9.01810/38.79585
+- **Commercial Bank of Ethiopia Shola Gebeya Branch** · run by Government · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.02304&mlon=38.79529#map=18/9.02304/38.79529
 - **Commercial Bank of Ethiopia** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02267&mlon=38.78125#map=18/9.02267/38.78125
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ - አዋሬ ቅርንጫፍ) · run by Government · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.02578&mlon=38.77616#map=18/9.02578/38.77616
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Omedla Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.05718&mlon=38.77714#map=18/9.05718/38.77714
-- **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.02306&mlon=38.79525#map=18/9.02306/38.79525
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.04250&mlon=38.76529#map=18/9.04250/38.76529
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.06456&mlon=38.77134#map=18/9.06456/38.77134
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02706&mlon=38.78310#map=18/9.02706/38.78310
@@ -567,7 +562,6 @@ count: "778"
 - **Dashin Bank** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05670&mlon=38.77739#map=18/9.05670/38.77739
 - **Enat Bank Abebech Gobena Megenagna Branch** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02022&mlon=38.79956#map=18/9.02022/38.79956
 - **Enat Bank** (እናት ባንክ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06375&mlon=38.87424#map=18/9.06375/38.87424
-- **Gadaa Bank** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Su-Fr 08:00-18:30 · map https://www.openstreetmap.org/?mlat=9.02971&mlon=38.87754#map=18/9.02971/38.87754
 - **Hibret Bank** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01975&mlon=38.78223#map=18/9.01975/38.78223
 - **lion international bank head office** (አንበሳ ባንክ ዋና ቢሮ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01536&mlon=38.78219#map=18/9.01536/38.78219
 - **Lion International Bank** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02552&mlon=38.77664#map=18/9.02552/38.77664
@@ -605,7 +599,7 @@ count: "778"
 - **ዘመን ባንክ / Zemen Bank** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02632&mlon=38.87729#map=18/9.02632/38.87729
 - **ደቡብ ግሎባል ባንክ / Debub Global Bank** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02366&mlon=38.87766#map=18/9.02366/38.87766
 
-## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 115
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 110
 
 - **Abay Bank (Lafto Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94670&mlon=38.73847#map=18/8.94670/38.73847
 - **Abay Bank Jemo Branch** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96178&mlon=38.71556#map=18/8.96178/38.71556
@@ -615,11 +609,10 @@ count: "778"
 - **Ahadu Bank Hana Mariam Branch** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Su-Fr 08:00-18:30 · map https://www.openstreetmap.org/?mlat=8.93001&mlon=38.74240#map=18/8.93001/38.74240
 - **Ahadu Bank Lafto Branch** · NL_12_4814 St., Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Su-Fr 08:00-18:30 · map https://www.openstreetmap.org/?mlat=8.95268&mlon=38.74477#map=18/8.95268/38.74477
 - **Ahadu Bank Lebu Branch** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Su-Fr 08:00-18:30 · map https://www.openstreetmap.org/?mlat=8.94892&mlon=38.72380#map=18/8.94892/38.72380
+- **Anbesa Bank** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99117&mlon=38.73828#map=18/8.99117/38.73828
 - **Awash bank (Lafto Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94961&mlon=38.74441#map=18/8.94961/38.74441
 - **Awash Bank (Tulu Ajersa Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92357&mlon=38.73462#map=18/8.92357/38.73462
 - **Awash bank hurbu branch** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96024&mlon=38.71232#map=18/8.96024/38.71232
-- **Awash Bank** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96871&mlon=38.74677#map=18/8.96871/38.74677
-- **Awash Bank** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97656&mlon=38.74686#map=18/8.97656/38.74686
 - **Awash International Bank (Gofa Sefer Branch)** (አዋሽ ኢንተርናሽናል ባንክ (ጎፋ ሰፈር ቅርንጫፍ)) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98395&mlon=38.74963#map=18/8.98395/38.74963
 - **Awash International Bank (Hana Mariam Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93185&mlon=38.74286#map=18/8.93185/38.74286
 - **Awash International Bank (Harbu Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95876&mlon=38.71179#map=18/8.95876/38.71179
@@ -636,10 +629,9 @@ count: "778"
 - **Bank of Abyssinia - Hanna Mariam Branch** (አቢሲንያ ባንክ - ሀና ማርያም ቅርንጫፍ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.bankofabyssinia.com/ · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.93919&mlon=38.74836#map=18/8.93919/38.74836
 - **Bank of Abyssinia (Bisrate Gibreal Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99007&mlon=38.72486#map=18/8.99007/38.72486
 - **Bank of Abyssinia (Dejazmach Gebremariam Gari Branch)** (አቢሲንያ ባንክ - ደጃዝማች ገብረማርያም ጋሪ ቅርንጫፍ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.bankofabyssinia.com/ · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.93769&mlon=38.73615#map=18/8.93769/38.73615
+- **Bank of Abyssinia (Gotera Branch)** (አቢሲንያ ባንክ (ጎተራ ቅርንጫፍ)) · Debre Zeit Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.bankofabyssinia.com/ · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.97309&mlon=38.76097#map=18/8.97309/38.76097
 - **Bank of Abyssinia (Jemo Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96089&mlon=38.71444#map=18/8.96089/38.71444
 - **Bank of Abyssinia (Mekanisa Branch)** (አቢሲንያ ባንክ - መካኒሳ ቅርንጫፍ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.bankofabyssinia.com/ · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.98241&mlon=38.73378#map=18/8.98241/38.73378
-- **Bank Of Abyssinia** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99320&mlon=38.73798#map=18/8.99320/38.73798
-- **Bank of Abyssinia** (አቢሲንያ ባንክ) · Debre Zeit Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.bankofabyssinia.com/ · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.97310&mlon=38.76110#map=18/8.97310/38.76110
 - **Bank of Abyssinia** (አቢሲንያ ባንክ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97554&mlon=38.74562#map=18/8.97554/38.74562
 - **Bank of Oromia** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94037&mlon=38.73529#map=18/8.94037/38.73529
 - **Berhan International Bank (Hana Mariam Branch)** · Hana mariam, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92823&mlon=38.74159#map=18/8.92823/38.74159
@@ -658,10 +650,9 @@ count: "778"
 - **Commercial Bank of Ethiopia (Kotari Condominium Branch)** · run by Government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.94075&mlon=38.73476#map=18/8.94075/38.73476
 - **Commercial Bank of Ethiopia (Lafto Branch)** · run by Government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.94828&mlon=38.74456#map=18/8.94828/38.74456
 - **Commercial Bank of Ethiopia (Lebu Branch)** · run by Government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.94761&mlon=38.73417#map=18/8.94761/38.73417
-- **Commercial Bank Of Ethiopia (Mebrat Condominium Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96609&mlon=38.74851#map=18/8.96609/38.74851
 - **Commercial Bank of Ethiopia (Mekanisa Branch)** (የኢትዮጵያ ንግድ ባንክ - መካኒሳ ቅርንጫፍ) · run by Government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.96490&mlon=38.73265#map=18/8.96490/38.73265
 - **Commercial bank of Ethiopia (Saris 58 mazoria Branch)** · run by Government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.93951&mlon=38.74877#map=18/8.93951/38.74877
-- **Commercial Bank of Ethiopia (Shell Depot Branch)** (የኢትዮጵያ ንግድ ባንክ (ሼል ዴፖ ቅርንጫፍ)) · run by Government · Debre Zeit Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.97301&mlon=38.76099#map=18/8.97301/38.76099
+- **Commercial Bank of Ethiopia (Shell Depot Branch)** (የኢትዮጵያ ንግድ ባንክ (ሼል ዴፖ ቅርንጫፍ)) · run by Government · Debre Zeit Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.97301&mlon=38.76098#map=18/8.97301/38.76098
 - **Commercial Bank Of Ethiopia (Yoseph Branch)** (የኢትዮጵያ ንግድ ባንክ (ዮሴፍ ቅርንጫፍ)) · run by Government · Debre Zeit Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.96612&mlon=38.76305#map=18/8.96612/38.76305
 - **Commercial Bank of Ethiopia lafto branch** (የኢትዮጵያ ንግድ ባንክ ላፍቶ ቅርንጫፍ) · Lafto NL_12_4903 St., Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:30-17:30 · map https://www.openstreetmap.org/?mlat=8.94712&mlon=38.74440#map=18/8.94712/38.74440
 - **Commercial Bank of Ethiopia Lafto Branch** (የኢትዮጵያ ንግድ ባንክ ላፍቶ ቅርንጫፍ) · NL_12_4903 St., Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.combanketh.et/ · map https://www.openstreetmap.org/?mlat=8.94717&mlon=38.74450#map=18/8.94717/38.74450
@@ -671,7 +662,6 @@ count: "778"
 - **Commercial Bank of Ethiopia** (የኢተዮጵያ ንግድ ባንክ ጀሞ ናሰው ቅርንጫፍ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96455&mlon=38.71926#map=18/8.96455/38.71926
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ ሳሪስ ቅርንጫፍ) · run by Government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.96211&mlon=38.76376#map=18/8.96211/38.76376
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ ጀሞ ናሰው ቅርንጫፍ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96198&mlon=38.71697#map=18/8.96198/38.71697
-- **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99329&mlon=38.73798#map=18/8.99329/38.73798
 - **Commercial Bank Of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.96215&mlon=38.75550#map=18/8.96215/38.75550
 - **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · run by Government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.98206&mlon=38.75624#map=18/8.98206/38.75624
 - **Cooperative Bank of Oromia (Bakanisa Branch)** · ኤኤሲኤምዋይ መኖሪያ ቤት, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97105&mlon=38.73159#map=18/8.97105/38.73159
@@ -696,7 +686,6 @@ count: "778"
 - **Enat Bank (Sister Zebider Zewde Lafto Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94708&mlon=38.74273#map=18/8.94708/38.74273
 - **Lion International Bank (Hana Mariam Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93309&mlon=38.74354#map=18/8.93309/38.74354
 - **Lion International Bank (Jemo Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96114&mlon=38.71522#map=18/8.96114/38.71522
-- **Lion International Bank** (አንበሳ ኢንተርናሽናል ባንክ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99106&mlon=38.73836#map=18/8.99106/38.73836
 - **NIB Bank** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95422&mlon=38.76338#map=18/8.95422/38.76338
 - **Nib International Bank (Hana Mariam Branch)** · Hana mariam, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93032&mlon=38.74277#map=18/8.93032/38.74277
 - **Nib International Bank (Jemo Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96200&mlon=38.71601#map=18/8.96200/38.71601

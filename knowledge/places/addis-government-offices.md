@@ -3,12 +3,12 @@ title: "Government offices in Addis Ababa (የመንግሥት ተቋማት)"
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-09-24"
-count: "255"
+fetched: "2026-05-31"
+count: "253"
 ---
 # Government offices in Addis Ababa · በአዲስ አበባ ያሉ የመንግሥት ተቋማት
 
-255 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+253 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 40
 
@@ -184,11 +184,11 @@ count: "255"
 - **Sibiseba Maeikel** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05438&mlon=38.76295#map=18/9.05438/38.76295
 - **ፕላን ኮሚሽን** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04415&mlon=38.76150#map=18/9.04415/38.76150
 
-## Lideta sub-city · ልደታ ክፍለ ከተማ — 25
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 24
 
 - **City Government of Addis Ababa industrial Development Bureau Investment Agency** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01345&mlon=38.74857#map=18/9.01345/38.74857
 - **Documents Authentication and Registration Office** (የሰነዶች ማረጋገጫና ምዝገባ ጽ/ቤት) · 2fl, 3fl, 4fl, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01105&mlon=38.74091#map=18/9.01105/38.74091
-- **Ethiopia Commodity Exchange** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01107&mlon=38.74054#map=18/9.01107/38.74054
+- **Ethiopia Commodity Exchange** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01105&mlon=38.74055#map=18/9.01105/38.74055
 - **Ethiopian Metrology Agency** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01907&mlon=38.74718#map=18/9.01907/38.74718
 - **Ethiopian Petroleum** · Roosevelt Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00808&mlon=38.74323#map=18/9.00808/38.74323
 - **Ethiopian Telecommunications Corp. HQ** (የኢትዮጵያ ቴሌ ኮሙኒኬሽን ኮርፖሬሽን) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02090&mlon=38.75262#map=18/9.02090/38.75262
@@ -207,7 +207,6 @@ count: "255"
 - **Ministry Of Defence Heaquarters** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00760&mlon=38.72331#map=18/9.00760/38.72331
 - **Ministry of Defense** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01775&mlon=38.75297#map=18/9.01775/38.75297
 - **Ministry of Health** · Sudan Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01605&mlon=38.74669#map=18/9.01605/38.74669
-- **Ministry of Revenues** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01235&mlon=38.73740#map=18/9.01235/38.73740
 - **Ministry Of Transport and Communication** (የትራንስፖርትና መገናኛ ሚኒስቴር) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 551 6166 · map https://www.openstreetmap.org/?mlat=9.01981&mlon=38.75264#map=18/9.01981/38.75264
 - **ልደታ ክ/ከ ወረዳ 02 አስተዳደር** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01661&mlon=38.71883#map=18/9.01661/38.71883
 - **አዲስ አበባ መንገዶች ባለስልጣን ተሾመ ካባ Addis Ababa Road Aoutority Teshome kaba** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00275&mlon=38.71574#map=18/9.00275/38.71574
@@ -237,7 +236,7 @@ count: "255"
 - **Yeka Sub City Wereda 12 Administrative Office** (በየካ ክፍለ ከተማ የወረዳ 12 አስተዳደር ጽ/ቤት) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03729&mlon=38.85584#map=18/9.03729/38.85584
 - **Yeka Wereda 13 Adminstration Office** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02600&mlon=38.85026#map=18/9.02600/38.85026
 
-## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 23
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 21
 
 - **BUDSWS** (ህከዲቁስዘ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96928&mlon=38.75928#map=18/8.96928/38.75928
 - **Document Authentication and Registration Agency Branch 14 Office** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96187&mlon=38.71560#map=18/8.96187/38.71560
@@ -259,9 +258,7 @@ count: "255"
 - **Nifas silk lafto Sub City Wereda 06 Administrative Office** (በንፋስ ስልክ ላፍቶ ክፍለ ከተማ የወረዳ 06 አስተዳደር ጽ/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 467 2676 · map https://www.openstreetmap.org/?mlat=8.97792&mlon=38.75158#map=18/8.97792/38.75158
 - **Nifas Silk Laptho Sub City Drivers and Vehicle Authority** (ን/ስ/ላ ክ/ከ አሽከርካሪና ተሽከርካሪ ፈቃድና ቁጥጥር ባለስልጣን ቅ/ጽ/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97303&mlon=38.73072#map=18/8.97303/38.73072
 - **Nifasilik k k wereda 04 admi. office** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98623&mlon=38.74097#map=18/8.98623/38.74097
-- **Oromia Agricultural Research Institute** (የኦሮሚያ ግብርና ምርምር ኢንስቲትዩት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97235&mlon=38.76291#map=18/8.97235/38.76291
 - **Peace Corps Office** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98732&mlon=38.73638#map=18/8.98732/38.73638
-- **Sheger Chamber of Commerce and Sectoral Associations** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99318&mlon=38.73794#map=18/8.99318/38.73794
 
 ## Akaki Kality sub-city · አቃቂ ቃሊቲ ክፍለ ከተማ — 18
 
@@ -294,3 +291,7 @@ count: "255"
 - **ቆሼ ኤሌክትሪክ** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97377&mlon=38.70909#map=18/8.97377/38.70909
 - **ኮልፌ ቀራንዮ ክ/ከተማ መሬት አስተዳደር ጽ/ቤት** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00245&mlon=38.69884#map=18/9.00245/38.69884
 - **ኮልፌ ቀራንዮ ወረዳ 6** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours Su-Th 08:30-05:30 · map https://www.openstreetmap.org/?mlat=9.00276&mlon=38.69814#map=18/9.00276/38.69814
+
+## Addis Ababa (sub-city not given in OpenStreetMap) — 1
+
+- **Oromia Agricultural Research Institute** · Addis Ababa · map https://www.openstreetmap.org/?mlat=8.97237&mlon=38.76291#map=18/8.97237/38.76291

@@ -3,12 +3,12 @@ title: "Hospitals in Addis Ababa (ሆስፒታሎች)"
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-09-24"
-count: "115"
+fetched: "2026-05-31"
+count: "114"
 ---
 # Hospitals in Addis Ababa · በአዲስ አበባ ያሉ ሆስፒታሎች
 
-115 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+114 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 9
 
@@ -20,9 +20,9 @@ count: "115"
 - **Ras Desta Hospital** (ራስ ደስታ ሆስፒታል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04513&mlon=38.74446#map=18/9.04513/38.74446
 - **Teklehaimanot General Hospital** (ተክለሃይማኖት ሆስፒታል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03136&mlon=38.74667#map=18/9.03136/38.74667
 - **yehuleshet referral hospital** (የሁልእሸት ሪፈራል ሆስፒታል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02771&mlon=38.75127#map=18/9.02771/38.75127
-- **Yekatit 12 Hospital Medical College** (ቲኬት 12 ሆስፒታል ሜዲካል ኮሌጅ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04284&mlon=38.75998#map=18/9.04284/38.75998
+- **Yekatit 12 Hospital** (የካቲት 12 ሆስፒታል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04284&mlon=38.75998#map=18/9.04284/38.75998
 
-## Bole sub-city · ቦሌ ክፍለ ከተማ — 25
+## Bole sub-city · ቦሌ ክፍለ ከተማ — 24
 
 - **1st Chiropractic Clinic** · run by Dr. Selam Aklilu · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99086&mlon=38.79407#map=18/8.99086/38.79407
 - **Abebech Gobena MCH Hospital** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02173&mlon=38.88988#map=18/9.02173/38.88988
@@ -33,7 +33,6 @@ count: "115"
 - **Bulbula Health Center** (ቡልቡላ ጤና ጣቢያ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95358&mlon=38.78208#map=18/8.95358/38.78208
 - **Christmas mind opration hospital** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00871&mlon=38.79303#map=18/9.00871/38.79303
 - **Etab Inter medica** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00615&mlon=38.81115#map=18/9.00615/38.81115
-- **Ethio-Istanbul General Hospital** (የኢትዮ-ኢስታንቡል አጠቃላይ ሆስፒታል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://ethioistanbulgeneralhospital.com/ · map https://www.openstreetmap.org/?mlat=8.98943&mlon=38.79476#map=18/8.98943/38.79476
 - **Goro wereda 09 health center** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99695&mlon=38.83223#map=18/8.99695/38.83223
 - **Grace Maternal and Children’s Hospital** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99461&mlon=38.79486#map=18/8.99461/38.79486
 - **Hayat hospital** (ሃያት ሆስፒታል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 4488 / +251 11 661 4250 · map https://www.openstreetmap.org/?mlat=8.99441&mlon=38.79527#map=18/8.99441/38.79527
@@ -148,7 +147,7 @@ count: "115"
 ## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 7
 
 - **Afran primary hospital** (አፍራን የመጀመሪያ ደረጃ ሆስፒታል) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · tel +251 11 369 3354 · map https://www.openstreetmap.org/?mlat=8.98192&mlon=38.69576#map=18/8.98192/38.69576
-- **ALERT & AHRI Health Village** (አለርት እና አህሪ የጤና መንደር) · run by Federal Ministry of Health · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98645&mlon=38.71224#map=18/8.98645/38.71224
+- **Alert Hospital** (አለርት ሆስፒታል) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98645&mlon=38.71224#map=18/8.98645/38.71224
 - **Ayer Tena primary Hospital** (አየር ጤና የመ/ደ ሆስፒታል) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98195&mlon=38.69112#map=18/8.98195/38.69112
 - **Bethel Hospital** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00463&mlon=38.69311#map=18/9.00463/38.69311
 - **Bethel Teaching** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00443&mlon=38.69267#map=18/9.00443/38.69267

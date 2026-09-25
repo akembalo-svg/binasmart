@@ -3,12 +3,12 @@ title: "Clinics and health centres in Addis Ababa (ክሊኒኮችና ጤና ጣ
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-09-24"
+fetched: "2026-05-31"
 count: "96"
 ---
 # Clinics and health centres in Addis Ababa · በአዲስ አበባ ያሉ ክሊኒኮችና ጤና ጣቢያዎች
 
-96 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+96 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 9
 
@@ -67,6 +67,7 @@ count: "96"
 
 ## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 14
 
+- **AA Poly Internal Medicine Speciality Clinic** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01539&mlon=38.75654#map=18/9.01539/38.75654
 - **Adera Medical Center** (አደራ የውስጥ ደዌ ማዕከል) · Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00807&mlon=38.76419#map=18/9.00807/38.76419
 - **Afei diagnosis center** · Belo bet st, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99471&mlon=38.75949#map=18/8.99471/38.75949
 - **Afei Diagnostic Center** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99537&mlon=38.75932#map=18/8.99537/38.75932
@@ -77,7 +78,6 @@ count: "96"
 - **International Clinical Laboratories** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01163&mlon=38.76703#map=18/9.01163/38.76703
 - **Meshualekiya Tena Tabiya** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00117&mlon=38.76276#map=18/9.00117/38.76276
 - **OIA India Eye Care Centre** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01805&mlon=38.75703#map=18/9.01805/38.75703
-- **Rhehum International Medicine Clinic** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99503&mlon=38.75389#map=18/8.99503/38.75389
 - **Senay Medical Center** (ሰናይ የውስጥ ደዌ ህክሰናይ የውስጥ ደዌ እና የአይን ህክምና ማዕከልምና ማዕከል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98922&mlon=38.75985#map=18/8.98922/38.75985
 - **Suisse Clinic** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99140&mlon=38.75280#map=18/8.99140/38.75280
 - **WAGGA Eye Center** (ዋጋ የአይን ማዕከል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · http://www.waggaeyecenter.com · map https://www.openstreetmap.org/?mlat=8.98419&mlon=38.76606#map=18/8.98419/38.76606

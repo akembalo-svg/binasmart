@@ -3,12 +3,12 @@ title: "Police stations in Addis Ababa (ፖሊስ ጣቢያዎች)"
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-09-24"
-count: "59"
+fetched: "2026-05-31"
+count: "56"
 ---
 # Police stations in Addis Ababa · በአዲስ አበባ ያሉ ፖሊስ ጣቢያዎች
 
-59 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+56 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 3
 
@@ -16,7 +16,7 @@ count: "59"
 - **Police Commission** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04190&mlon=38.75060#map=18/9.04190/38.75060
 - **Yohannes Area Police** (የዮሃንስ አካባቢ ፖሊስ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04573&mlon=38.74363#map=18/9.04573/38.74363
 
-## Bole sub-city · ቦሌ ክፍለ ከተማ — 8
+## Bole sub-city · ቦሌ ክፍለ ከተማ — 7
 
 - **Bole area Police station** (ቦሌ አካባቢ ፖሊስ ጣቢያ አንበሳ ጋራዥ ጀርባ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00596&mlon=38.80594#map=18/9.00596/38.80594
 - **Bole Sub-city Police Department** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99653&mlon=38.78531#map=18/8.99653/38.78531
@@ -25,7 +25,6 @@ count: "59"
 - **Goro area Police station** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99586&mlon=38.82804#map=18/8.99586/38.82804
 - **Meri police station** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01728&mlon=38.86003#map=18/9.01728/38.86003
 - **Police Station** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01212&mlon=38.78113#map=18/9.01212/38.78113
-- **Smart police station** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99297&mlon=38.77783#map=18/8.99297/38.77783
 
 ## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 3
 
@@ -33,10 +32,9 @@ count: "59"
 - **Mesalemia Area Police** (መሳለሚያ አካባቢ ፖሊስ ጣቢያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03300&mlon=38.72549#map=18/9.03300/38.72549
 - **Quwasmeda Area Police** (ኳስሜዳ አካባቢ ፖሊስ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03472&mlon=38.72795#map=18/9.03472/38.72795
 
-## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 11
+## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 10
 
 - **Bole S/City Police Department** (ቦሌ ክ/ከተማ ፖሊስ መምሪያ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00918&mlon=38.77371#map=18/9.00918/38.77371
-- **Community Policing Center** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00294&mlon=38.75657#map=18/9.00294/38.75657
 - **Dembel Area Police** (ደምበል አካባቢ ፖሊስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00186&mlon=38.76630#map=18/9.00186/38.76630
 - **F.D.R.E FEDERAL POLICE COMMISSION CRIME INVESTIGATION BUREAU** (የኢ.ፊ.ድ.ሪ ፊደራል ፖሊስ ኮሚሽን የወንጀል ምርመራ ቢሮ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 5711 · map https://www.openstreetmap.org/?mlat=9.01117&mlon=38.77005#map=18/9.01117/38.77005
 - **Kazanchiz Area Police** (ካዛንቺዝ አካባቢ ፖሊስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01314&mlon=38.77421#map=18/9.01314/38.77421
@@ -60,7 +58,7 @@ count: "59"
 - **BGI area community policing office** (የቢጂአይ አካባቢ ኮሚኒቲ ፖሊስ ጽ/ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01263&mlon=38.74124#map=18/9.01263/38.74124
 - **Federal Police & Interpol** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02173&mlon=38.75020#map=18/9.02173/38.75020
 - **Federal Police Commission Crime Prevention** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01638&mlon=38.74574#map=18/9.01638/38.74574
-- **Federal Police HQ** (ፌደራል ፖሊስ ዋና ጽ/ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00976&mlon=38.74346#map=18/9.00976/38.74346
+- **Federal Police HQ** (ፌደራል ፖሊስ ዋና ጽ/ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00977&mlon=38.74344#map=18/9.00977/38.74344
 - **Lideta Sub City Community police station** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01869&mlon=38.74626#map=18/9.01869/38.74626
 
 ## Yeka sub-city · የካ ክፍለ ከተማ — 7
@@ -73,9 +71,8 @@ count: "59"
 - **Yeka Sub City Police** (የካ ክፍለ ከተማ ፖሊስ ጣቢያ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02455&mlon=38.79561#map=18/9.02455/38.79561
 - **ለሚ ኩራ ክፍለ ከተማ ፖሊስ መምሪያ/ Lemi Kura Sub-city Police Station** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02710&mlon=38.87817#map=18/9.02710/38.87817
 
-## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 8
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 7
 
-- **Gendekore Police Station** (ገንደቆሬ ፖሊስ ጣቢያ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 470 9072 · map https://www.openstreetmap.org/?mlat=8.97485&mlon=38.76051#map=18/8.97485/38.76051
 - **Gotera traffic police station** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98115&mlon=38.75524#map=18/8.98115/38.75524
 - **Jemo police** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96016&mlon=38.71385#map=18/8.96016/38.71385
 - **Nefas silk lafto Police station** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94561&mlon=38.74167#map=18/8.94561/38.74167

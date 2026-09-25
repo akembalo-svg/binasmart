@@ -24,3 +24,13 @@ test('a built document names its source and licence, and never carries a mobile'
   assert.doesNotMatch(t, /0900000042/);
   assert.match(t, /Lemi Kura/, 'Bole carries the Lemi Kura caveat');
 });
+
+test('an entry with a mobile number in its name or text is left out whole', () => {
+  const { files, mobileLines } = build({ at: '2026-09-25T00:00:00Z', bySub: {}, elements: [
+    { type: 'node', id: 3, lat: 9, lon: 38.7, tags: { amenity: 'restaurant', name: 'Sample Cafe 0900000042' } },
+    { type: 'node', id: 4, lat: 9, lon: 38.7, tags: { amenity: 'restaurant', name: 'Sample Restaurant', opening_hours: 'call 0900000042' } },
+    { type: 'node', id: 5, lat: 9, lon: 38.7, tags: { amenity: 'restaurant', name: 'Clean Sample Restaurant' } } ] });
+  assert.equal(mobileLines, 2);
+  assert.match(files['addis-restaurants-cafes.md'], /Clean Sample Restaurant/);
+  assert.doesNotMatch(files['addis-restaurants-cafes.md'], /0900000042/);
+});

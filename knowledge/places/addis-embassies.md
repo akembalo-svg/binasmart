@@ -3,12 +3,12 @@ title: "Embassies, consulates and international missions in Addis Ababa (ኤም�
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-09-24"
+fetched: "2026-05-31"
 count: "116"
 ---
 # Embassies, consulates and international missions in Addis Ababa · በአዲስ አበባ ያሉ ኤምባሲዎችና ዓለም አቀፍ ተቋማት
 
-116 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+116 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 3
 
@@ -130,7 +130,7 @@ count: "116"
 - **Embassy of Algeria** · Lesotho Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 371 9666 · hours Mo-Fr 09:00-17:00; Sa 10:00-13:00 · map https://www.openstreetmap.org/?mlat=8.98782&mlon=38.72485#map=18/8.98782/38.72485
 - **Embassy of Austria** · South Africa Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.bmeia.gv.at/oeb-addis-abeba/ · map https://www.openstreetmap.org/?mlat=8.99435&mlon=38.72772#map=18/8.99435/38.72772
 - **Embassy of Burkina Faso** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99371&mlon=38.72963#map=18/8.99371/38.72963
-- **Embassy of Canada** (ካናዳ ኤምባሲ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99485&mlon=38.73586#map=18/8.99485/38.73586
+- **Embassy of Canada** (ካናዳ ኤምባሲ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99483&mlon=38.73586#map=18/8.99483/38.73586
 - **Embassy of Chad** (የቻድ ኤምባሲ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94720&mlon=38.73181#map=18/8.94720/38.73181
 - **Embassy of Iran** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 372 7600 · https://ethiopia.mfa.gov.ir/ · hours Mo-Fr 09:00-17:00 · map https://www.openstreetmap.org/?mlat=8.98637&mlon=38.72387#map=18/8.98637/38.72387
 - **Embassy of Qatar** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99182&mlon=38.72537#map=18/8.99182/38.72537
