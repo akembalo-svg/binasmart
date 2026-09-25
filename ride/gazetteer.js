@@ -78,9 +78,24 @@ function makeGazetteer({ file = process.env.PLACES_GAZETTEER || '/root/storage/o
     const n = norm(q);
     if (n.length < 2 || !entries.length) return [];
     const scored = [];
+    // Rank 3 (checked against AddisMap's featured places, 25 September 2026): people write "Dinapoli" for
+    // "Di Napoli Hotel" and "AU Conference Center" for "African Union Conference Center". So a name also matches
+    // when it contains the words typed with the spaces taken out, or when every typed word starts a word of the
+    // name, in any order ("AU" -> "African Union" is left to the words that do match: "conference", "center").
+    const compact = n.replace(/ /g, '');
+    const words = n.split(' ').filter(w => w.length > 1);
     for (const e of entries) {
       let r = 9;
-      for (const k of e.keys) { if (k === n) { r = 0; break; } if (k.startsWith(n)) r = Math.min(r, 1); else if (k.includes(n)) r = Math.min(r, 2); }
+      for (const k of e.keys) {
+        if (k === n) { r = 0; break; }
+        if (k.startsWith(n)) r = Math.min(r, 1); else if (k.includes(n)) r = Math.min(r, 2);
+        else if (compact.length >= 5 && k.replace(/ /g, '').includes(compact)) r = Math.min(r, 3);
+        else if (words.length > 1) {
+          const kw = k.split(' ');
+          const hitw = words.filter(w => kw.some(x => x.startsWith(w))).length;
+          if (hitw === words.length || (words.length >= 3 && hitw >= words.length - 1 && hitw >= 2)) r = Math.min(r, 3);
+        }
+      }
       if (r === 9) continue;
       const d = bias ? Math.hypot((e.lat - bias.lat) * 111, (e.lng - bias.lng) * 109.5) : 0;
       scored.push({ e, s: r * 1000 + (e.kind === 'street' ? 500 : e.kind === 'stop' || e.kind === 'taxi rank' ? 450 : 0) + Math.min(d, 400) });   // the area before its stops and streets

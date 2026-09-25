@@ -58,3 +58,14 @@ test('a shop, an office and a bus stop are destinations, named by their own type
   assert.match(g.search('Sample Aid')[0].sub, /^ngo/);
   assert.match(g.search('Sample Stop')[0].sub, /^stop/);
 });
+
+test('spacing and word order do not hide a place; one missing short word does not either', () => {
+  const f4 = path.join(path.dirname(file), 'words.json');
+  fs.writeFileSync(f4, JSON.stringify({ bySub: {}, elements: [
+    { type: 'node', id: 1, lat: 9.0, lon: 38.75, tags: { tourism: 'hotel', name: 'Di Sample Hotel' } },
+    { type: 'node', id: 2, lat: 9.01, lon: 38.76, tags: { building: 'yes', name: 'Sample Union Conference Center' } } ] }));
+  const g = makeGazetteer({ file: f4 });
+  assert.equal(g.search('Disample')[0].label, 'Di Sample Hotel');
+  assert.equal(g.search('SU Conference Center')[0].label, 'Sample Union Conference Center');
+  assert.equal(g.search('center conference')[0].label, 'Sample Union Conference Center');
+});
