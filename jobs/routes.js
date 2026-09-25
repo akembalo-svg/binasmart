@@ -600,6 +600,12 @@ const ogJobs = cat => {
   fastify.get('/employer/:slug', async (req, reply) => {
     const t = pick(req), lang = langOf(req);
     const e = await prisma.employer.findUnique({ where: { slug: String(req.params.slug) } });
+    // A company merged into another keeps its address: 301 to the one it became (ops/jobs/clean-employers.js).
+    if (!e && prisma.employerAlias) {
+      const a = await prisma.employerAlias.findUnique({ where: { slug: String(req.params.slug) } }).catch(() => null);
+      const to = a && await prisma.employer.findUnique({ where: { id: a.employerId }, select: { slug: true } });
+      if (to) return reply.redirect('/employer/' + to.slug + (req.query.lang === 'en' ? '?lang=en' : ''), 301);
+    }
     if (!e) return reply.code(404).type('text/html').send(shell({ title: 'አልተገኘም', desc: '', canonical: 'https://bina.et/jobs', body: '<main><div class="empty"><div class="big">🔍</div><h3>ይህ ድርጅት የለም</h3><p class="sans"><a href="/jobs">ወደ ክፍት ሥራዎች →</a></p></div></main>', active: 'jobs' }));
     const now = new Date();
     const all = await prisma.job.findMany({ where: { employerId: e.id, published: true }, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: 120 });

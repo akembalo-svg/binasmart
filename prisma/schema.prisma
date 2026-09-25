@@ -1892,6 +1892,16 @@ model PlaceReview {
   @@index([placeRef])
 }
 
+// A company address that still works after its row was merged into another (ops/jobs/clean-employers.js):
+// /employer/<slug> answers 301 to the company it became, so Google and shared links keep their way in.
+model EmployerAlias {
+  slug       String   @id
+  employerId String
+  createdAt  DateTime @default(now())
+
+  @@index([employerId])
+}
+
 model JobSubmission {
   id           String    @id @default(cuid())
   createdAt    DateTime  @default(now())
