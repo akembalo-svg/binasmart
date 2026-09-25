@@ -3,14 +3,14 @@ title: "Neighbourhoods, areas and squares in Addis Ababa (ሰፈሮችና አደ
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-05-31"
-count: "183"
+fetched: "2026-09-24"
+count: "186"
 ---
 # Neighbourhoods, areas and squares in Addis Ababa · በአዲስ አበባ ያሉ ሰፈሮችና አደባባዮች
 
-183 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+186 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
-## Arada sub-city · አራዳ ክፍለ ከተማ — 22
+## Arada sub-city · አራዳ ክፍለ ከተማ — 23
 
 - **Abacoran Sefer** (አባኮራን ሰፈር) · neighbourhood · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04047&mlon=38.73995#map=18/9.04047/38.73995
 - **Amist Kilo** · neighbourhood · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03772&mlon=38.76268#map=18/9.03772/38.76268
@@ -24,6 +24,7 @@ count: "183"
 - **Gedam Seffer** (ገዳም ሰፈር) · neighbourhood · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03894&mlon=38.75028#map=18/9.03894/38.75028
 - **Giorgis** (ጊዮርጊስ) · suburb · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03597&mlon=38.75238#map=18/9.03597/38.75238
 - **Kebena** (ቀበና) · neighbourhood · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03490&mlon=38.77860#map=18/9.03490/38.77860
+- **Menelik II Square** (ዳግማዊ ምኒልክ አደባባይ) · square · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03582&mlon=38.75240#map=18/9.03582/38.75240
 - **Piassa (piazza)** (ፒያሳ አካባቢ) · suburb · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03370&mlon=38.75475#map=18/9.03370/38.75475
 - **Posta Bet** (ፖስታ ቤት) · neighbourhood · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02156&mlon=38.75310#map=18/9.02156/38.75310
 - **Ras Mekonnen Deldey** (ራስ መኮንን ድልድይ) · neighbourhood · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03967&mlon=38.75635#map=18/9.03967/38.75635
@@ -47,7 +48,7 @@ count: "183"
 - **Kotebe Shet'** · locality · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96667&mlon=38.83333#map=18/8.96667/38.83333
 - **Mariam Mazoria** · square · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95218&mlon=38.78637#map=18/8.95218/38.78637
 - **Rwanda** (ሩዋንዳ / Rwanda) · suburb · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99179&mlon=38.77932#map=18/8.99179/38.77932
-- **Selam Sefer | ሰላም ሰፈር** · suburb · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01312&mlon=38.83167#map=18/9.01312/38.83167
+- **Selam Sefer | ሰላም ሰፈር** · suburb · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01304&mlon=38.83134#map=18/9.01304/38.83134
 - **T'Afo Shet'** · locality · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00974&mlon=38.90567#map=18/9.00974/38.90567
 - **Ulan Ula Shet'** · locality · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95000&mlon=38.90000#map=18/8.95000/38.90000
 - **Urael** (ኡራኤል) · suburb · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01094&mlon=38.77501#map=18/9.01094/38.77501
@@ -125,17 +126,18 @@ count: "183"
 - **Semien Mezegaja** (Semien Mezegaja | ሰሜን መዘጋጃ) · neighbourhood · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05337&mlon=38.74239#map=18/9.05337/38.74239
 - **Shegole** (ሸጎሌ) · neighbourhood · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06316&mlon=38.72018#map=18/9.06316/38.72018
 - **Shiromeda** (Shiromeda-ሽሮሜዳ) · neighbourhood · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06053&mlon=38.76137#map=18/9.06053/38.76137
-- **Sidist Kilo** (ስድስት ኪሎ) · suburb · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04756&mlon=38.76068#map=18/9.04756/38.76068
+- **Sidist Kilo** (ስድስት ኪሎ) · suburb · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04747&mlon=38.76104#map=18/9.04747/38.76104
 - **Winget** (ዊንጌት) · neighbourhood · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05681&mlon=38.71339#map=18/9.05681/38.71339
 
-## Lideta sub-city · ልደታ ክፍለ ከተማ — 21
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 22
 
+- **Abnet Square** (አብነት አደባባይ) · square · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02037&mlon=38.73338#map=18/9.02037/38.73338
 - **Abnet Square** (አብነት አደባባይ) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02034&mlon=38.73328#map=18/9.02034/38.73328
 - **Agusta** (አጉስታ) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00592&mlon=38.71720#map=18/9.00592/38.71720
 - **Ambassador** (አምባሳደር) · neighbourhood · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01831&mlon=38.75403#map=18/9.01831/38.75403
 - **Berberee Berenda** (በርበሬ ተራ) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02628&mlon=38.74051#map=18/9.02628/38.74051
 - **Coca** (ኮካ ኮላ) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01654&mlon=38.72996#map=18/9.01654/38.72996
-- **Darmar** (ዳርማር) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01394&mlon=38.73436#map=18/9.01394/38.73436
+- **Darmar** (ዳርማር) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01380&mlon=38.73435#map=18/9.01380/38.73435
 - **Geja Seffer** (ጌጃ ሰፈር) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01736&mlon=38.73840#map=18/9.01736/38.73840
 - **Golla Mikael** (ጎላ ሚካኤል አካባቢ) · neighbourhood · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02592&mlon=38.74781#map=18/9.02592/38.74781
 - **Goma Kuteba** (ጎማ ቁጠባ) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01661&mlon=38.74629#map=18/9.01661/38.74629
@@ -148,7 +150,7 @@ count: "183"
 - **Mexico** (ሜክሲኮ) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01039&mlon=38.74455#map=18/9.01039/38.74455
 - **Microlink Project** (አገናኝደቂቅ ፕሮጀክት) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01507&mlon=38.74853#map=18/9.01507/38.74853
 - **Mobil** (ሞቢል) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00164&mlon=38.71876#map=18/9.00164/38.71876
-- **Sarbet** (ሳር ቤት) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99432&mlon=38.73777#map=18/8.99432/38.73777
+- **Sarbet** (ሳር ቤት) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99541&mlon=38.73771#map=18/8.99541/38.73771
 - **Sengatera** (ሰንጋ ተራ) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01491&mlon=38.74696#map=18/9.01491/38.74696
 - **Tor Hiylloch** (ጦር ሃይሎች) · suburb · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01148&mlon=38.72410#map=18/9.01148/38.72410
 
@@ -157,7 +159,7 @@ count: "183"
 - **Aware** (አዋሬ) · neighbourhood · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02706&mlon=38.77546#map=18/9.02706/38.77546
 - **Ayat** (አያት) · suburb · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03457&mlon=38.84606#map=18/9.03457/38.84606
 - **Bole Ayat** (ቦሌ አያት) · suburb · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03842&mlon=38.86239#map=18/9.03842/38.86239
-- **CMC square** · square · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02088&mlon=38.85230#map=18/9.02088/38.85230
+- **CMC square** · square · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02087&mlon=38.85232#map=18/9.02087/38.85232
 - **Kara Alo** (ካራ አሎ) · suburb · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03929&mlon=38.85134#map=18/9.03929/38.85134
 - **Kara** (ካራ - Kara) · suburb · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04192&mlon=38.86096#map=18/9.04192/38.86096
 - **Kotebe** (ኮተቤ) · suburb · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03713&mlon=38.83985#map=18/9.03713/38.83985
@@ -191,7 +193,7 @@ count: "183"
 - **Nefas Silk-Lafto** (ንፋስ ስልክ ላፍቶ) · suburb · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95774&mlon=38.72750#map=18/8.95774/38.72750
 - **Vatican** (ቫቲካን) · suburb · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98858&mlon=38.73733#map=18/8.98858/38.73733
 
-## Akaki Kality sub-city · አቃቂ ቃሊቲ ክፍለ ከተማ — 12
+## Akaki Kality sub-city · አቃቂ ቃሊቲ ክፍለ ከተማ — 13
 
 - **Addis Sefer** (አዲስ ሰፈር አካባቢ) · suburb · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95687&mlon=38.77155#map=18/8.95687/38.77155
 - **Adiss** (አዲስ) · suburb · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95000&mlon=38.76667#map=18/8.95000/38.76667
@@ -204,6 +206,7 @@ count: "183"
 - **Saris** (ሳሪስ) · suburb · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95325&mlon=38.76362#map=18/8.95325/38.76362
 - **Selbane** · locality · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90000&mlon=38.78333#map=18/8.90000/38.78333
 - **Tug Cabana** · locality · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93333&mlon=38.78333#map=18/8.93333/38.78333
+- **Tulu Dimtu Main Toll Plaza** (ቱሉ ዲምቱ ዋና የክፍያ ጣቢያ) · square · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86273&mlon=38.82661#map=18/8.86273/38.82661
 - **Tulu Dimtu** · locality · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85000&mlon=38.81666#map=18/8.85000/38.81666
 
 ## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 14

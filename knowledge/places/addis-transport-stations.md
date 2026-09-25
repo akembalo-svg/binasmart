@@ -3,12 +3,12 @@ title: "Bus and rail stations in Addis Ababa (የአውቶቡስና የባቡር
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-05-31"
+fetched: "2026-09-24"
 count: "72"
 ---
 # Bus and rail stations in Addis Ababa · በአዲስ አበባ ያሉ የአውቶቡስና የባቡር ጣቢያዎች
 
-72 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+72 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 2
 
@@ -25,7 +25,7 @@ count: "72"
 
 - **Autobus Tera** (አውቶቡስ ተራ) · run by Ethiopian Railway Corporation, Shenzhen Metro Group · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03406&mlon=38.73306#map=18/9.03406/38.73306
 - **Gojam Berenda** (ጎጃም በረንዳ) · run by Ethiopian Railway Corporation, Shenzhen Metro Group · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03419&mlon=38.73840#map=18/9.03419/38.73840
-- **Long Distance Bus Station ረጅም ርቀት አውቶቡስ መናሃሪያ** (ረጅም ርቀት አውቶቡስ መናሃሪያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03442&mlon=38.73146#map=18/9.03442/38.73146
+- **Long Distance Bus Station ረጅም ርቀት አውቶቡስ መናሃሪያ** (ረጅም ርቀት አውቶቡስ መናሃሪያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03444&mlon=38.73147#map=18/9.03444/38.73147
 - **Sebategna** (ሰባተኛ) · run by Ethiopian Railway Corporation, Shenzhen Metro Group · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02832&mlon=38.73306#map=18/9.02832/38.73306
 - **Short Distance Bus Station አዲስ ከተማ ሁለተኛ ደረጃ ት/ቤት** (አጭር ርቀት አውቶቡስ መናሃሪያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03456&mlon=38.73249#map=18/9.03456/38.73249
 

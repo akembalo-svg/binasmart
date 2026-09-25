@@ -3,14 +3,14 @@ title: "Restaurants, cafes and bars in Addis Ababa (ምግብ ቤቶች፣ ካ�
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-05-31"
-count: "1012"
+fetched: "2026-09-24"
+count: "1037"
 ---
 # Restaurants, cafes and bars in Addis Ababa · በአዲስ አበባ ያሉ ምግብ ቤቶች፣ ካፌዎችና መጠጥ ቤቶች
 
-1012 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+1037 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
-## Arada sub-city · አራዳ ክፍለ ከተማ — 108
+## Arada sub-city · አራዳ ክፍለ ከተማ — 110
 
 - **Addis Ababa Resturant** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04090&mlon=38.75321#map=18/9.04090/38.75321
 - **Addis Downtown** · international ethiopian · Churchill Avenue, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03170&mlon=38.75150#map=18/9.03170/38.75150
@@ -106,6 +106,7 @@ count: "1012"
 - **Sunshine Bar** (ሰንሻይን ባር) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03217&mlon=38.75462#map=18/9.03217/38.75462
 - **Tadesse butchery & bar** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03921&mlon=38.75094#map=18/9.03921/38.75094
 - **Tigist** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02523&mlon=38.75758#map=18/9.02523/38.75758
+- **Tomoca Coffee** (ቶሞካ ቡና) · 858/3 Walwal, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 111 2498 · map https://www.openstreetmap.org/?mlat=9.03091&mlon=38.75084#map=18/9.03091/38.75084
 - **TOMOCA ቶሞካ ቡና** (ቶሞካ ቡና) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02891&mlon=38.75185#map=18/9.02891/38.75185
 - **Top Bar & Restaurant** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03511&mlon=38.77222#map=18/9.03511/38.77222
 - **Tourist Cafe** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03325&mlon=38.76227#map=18/9.03325/38.76227
@@ -117,16 +118,17 @@ count: "1012"
 - **WOW Burger** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03153&mlon=38.75323#map=18/9.03153/38.75323
 - **WOW Burger** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03447&mlon=38.76035#map=18/9.03447/38.76035
 - **Yeshi Buna** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03139&mlon=38.75401#map=18/9.03139/38.75401
+- **Yod Abyssinia Cultural Restaurant** (ዮድ አቢሲኒያ የባህል ምግብ አዳራሽ) · ethiopian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02601&mlon=38.75076#map=18/9.02601/38.75076
 - **Your delicious moment** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03344&mlon=38.76248#map=18/9.03344/38.76248
 - **Yuhemiya** (ዩኽሚያ ክትፎ ቤት) · regional · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03105&mlon=38.75541#map=18/9.03105/38.75541
 - **Zumbaba Tej Bet** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03960&mlon=38.75035#map=18/9.03960/38.75035
 
-## Bole sub-city · ቦሌ ክፍለ ከተማ — 398
+## Bole sub-city · ቦሌ ክፍለ ከተማ — 414
 
 - **10 birr macchiato cafe** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01107&mlon=38.78112#map=18/9.01107/38.78112
 - **17 17** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00269&mlon=38.78151#map=18/9.00269/38.78151
 - **2000 Habesha 2** (2000 ሀበሻ ቁጥር 2) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98757&mlon=38.78768#map=18/8.98757/38.78768
-- **2000 Habesha** · regional · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 2253 · https://www.2000habesha.net/ · map https://www.openstreetmap.org/?mlat=9.00137&mlon=38.78147#map=18/9.00137/38.78147
+- **2000 Habesha** · regional · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 2253 / +251 11 618 2258 · https://www.2000habesha.net/ · map https://www.openstreetmap.org/?mlat=9.00137&mlon=38.78147#map=18/9.00137/38.78147
 - **90's Movie Center & Internet** (90'ስ የፊልም ማእከል እና ኢንተርኔት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00821&mlon=38.85082#map=18/9.00821/38.85082
 - **A-Licious Juice & Fast Food House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 867 5424 · map https://www.openstreetmap.org/?mlat=9.01417&mlon=38.78199#map=18/9.01417/38.78199
 - **AB Cafe** · regional pizza coffee shop sandwich · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01624&mlon=38.79050#map=18/9.01624/38.79050
@@ -134,7 +136,7 @@ count: "1012"
 - **Abucci** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99715&mlon=38.78189#map=18/8.99715/38.78189
 - **Abucci** · italian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00021&mlon=38.78295#map=18/9.00021/38.78295
 - **abyssinia Coffee** · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01631&mlon=38.79050#map=18/9.01631/38.79050
-- **Abyssinia Coffee** · ethiopian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://coffeeabyssinia.com/ · map https://www.openstreetmap.org/?mlat=9.00595&mlon=38.78046#map=18/9.00595/38.78046
+- **Abyssinia Coffee** · ethiopian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://coffeeabyssinia.com/ · map https://www.openstreetmap.org/?mlat=9.00563&mlon=38.78021#map=18/9.00563/38.78021
 - **Abyssinia Renaissance** · pizza burger italian chicken · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00109&mlon=38.80119#map=18/9.00109/38.80119
 - **Addis Ababa Elegant Burger House - ኤለጋንት በርገር እና ካፌ** (ኤለጋንት በርገር እነ ካፌ - አዲስ አበባ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00968&mlon=38.78809#map=18/9.00968/38.78809
 - **Addis Betty Cafe** · pizza burger international regional · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01875&mlon=38.82041#map=18/9.01875/38.82041
@@ -161,6 +163,7 @@ count: "1012"
 - **Aser Park** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99264&mlon=38.77894#map=18/8.99264/38.77894
 - **Asse Fast Foods** (አሴ ፋስት ፉድስ) · Djibouti Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00450&mlon=38.78946#map=18/9.00450/38.78946
 - **Assiha Restaurant** (አሲሃ ሬስቶራንት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00910&mlon=38.79049#map=18/9.00910/38.79049
+- **Atmosphere** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98928&mlon=38.78414#map=18/8.98928/38.78414
 - **Avanti** · italian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.sefere.net/place/avanti-restaurant-wine-bar/ · map https://www.openstreetmap.org/?mlat=8.99196&mlon=38.78744#map=18/8.99196/38.78744
 - **Ayenalem Traditonal Coffe** (አይንዬ ምርጥ የጀበና ቡና) · ethiopian · CMC Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=9.02143&mlon=38.83632#map=18/9.02143/38.83632
 - **Azemera Shiro 22** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00740&mlon=38.78433#map=18/9.00740/38.78433
@@ -202,6 +205,7 @@ count: "1012"
 - **botel house** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97790&mlon=38.89175#map=18/8.97790/38.89175
 - **Broz** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99129&mlon=38.79322#map=18/8.99129/38.79322
 - **Bruno's Ice Cream (Ice Cafe)** (ብሩኖ አይስ ክሬም(አይስ ካፌ)) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99607&mlon=38.79202#map=18/8.99607/38.79202
+- **Burger King** · burger · Bole Medhaniyalem Awlo business Center, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 666 2888 · map https://www.openstreetmap.org/?mlat=8.99593&mlon=38.78808#map=18/8.99593/38.78808
 - **Burger King** · burger · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98329&mlon=38.79547#map=18/8.98329/38.79547
 - **Ca'de Burger** (ካዴ በርገር) · burger · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98966&mlon=38.78267#map=18/8.98966/38.78267
 - **Café Crema** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99839&mlon=38.78652#map=18/8.99839/38.78652
@@ -209,6 +213,7 @@ count: "1012"
 - **Canary Lounge** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00318&mlon=38.81692#map=18/9.00318/38.81692
 - **Care Bar & Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00523&mlon=38.77799#map=18/9.00523/38.77799
 - **Casa Bonita Bar and Restaurant** · pizza italian regional kebab chicken international · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02119&mlon=38.83830#map=18/9.02119/38.83830
+- **Cava Lounge** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00247&mlon=38.80484#map=18/9.00247/38.80484
 - **Celavie Chicken and Burger** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99006&mlon=38.79294#map=18/8.99006/38.79294
 - **Chacha Bar & Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99493&mlon=38.81202#map=18/8.99493/38.81202
 - **Chaka Buna** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01131&mlon=38.78105#map=18/9.01131/38.78105
@@ -216,6 +221,7 @@ count: "1012"
 - **Chechebsa House** · To Egzabheraab, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01424&mlon=38.81104#map=18/9.01424/38.81104
 - **CHEERS BURGER** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98875&mlon=38.78662#map=18/8.98875/38.78662
 - **Chef's Plate** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00889&mlon=38.80666#map=18/9.00889/38.80666
+- **Chengdu Stir-Fry BBQ** (ቼንዱ ጥብስ) · chinese barbecue · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98912&mlon=38.78048#map=18/8.98912/38.78048
 - **Chicago Cafe & Restaurant** · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01575&mlon=38.78839#map=18/9.01575/38.78839
 - **Chicago** · american · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01582&mlon=38.78839#map=18/9.01582/38.78839
 - **Chicken Hut** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99735&mlon=38.78688#map=18/8.99735/38.78688
@@ -233,6 +239,7 @@ count: "1012"
 - **Daeron Cafe** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98679&mlon=38.78076#map=18/8.98679/38.78076
 - **Daily's** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98923&mlon=38.79241#map=18/8.98923/38.79241
 - **Danny’s** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00246&mlon=38.78668#map=18/9.00246/38.78668
+- **Daokou Roast Chicken** (ዳካው የተጠበሰ ዶሮ) · chinese chicken · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98893&mlon=38.78076#map=18/8.98893/38.78076
 - **Dawit Kitfo Gurage Cuisine and Hotel** (ዳዊት የጉራጌ ክትፎና ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01566&mlon=38.79500#map=18/9.01566/38.79500
 - **Debonair's Pizza** (ዴቦኔይር ፒዛ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00159&mlon=38.77956#map=18/9.00159/38.77956
 - **Delmela** · international · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99214&mlon=38.78825#map=18/8.99214/38.78825
@@ -243,13 +250,15 @@ count: "1012"
 - **Dolce Caffe & Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99894&mlon=38.78387#map=18/8.99894/38.78387
 - **Dreamers bar & restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99249&mlon=38.85918#map=18/8.99249/38.85918
 - **Duo Wei Ju** · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99058&mlon=38.77926#map=18/8.99058/38.77926
-- **Effoi Pizza** · pizza · run by Gigi · Cape Verde Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 849 3648 · https://www.effoipizza.com/ · hours Su-We 11:00-22:00; Th-Sa 11:00-02:00 · map https://www.openstreetmap.org/?mlat=9.00244&mlon=38.77974#map=18/9.00244/38.77974
+- **Effoi Pizza** · pizza · run by Gigi · Cape Verde Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.effoipizza.com/ · hours Su-We 11:00-22:00; Th-Sa 11:00-02:00 · map https://www.openstreetmap.org/?mlat=9.00244&mlon=38.77974#map=18/9.00244/38.77974
 - **Elegance Lounge and Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99577&mlon=38.78781#map=18/8.99577/38.78781
 - **Elegant Burger and Cafe** (ኢለጋንት ካፌ እና በርገር) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00969&mlon=38.78805#map=18/9.00969/38.78805
 - **Elegant Burger House -ኤለጋንት በርገር Addis Ababa** (ኤለጋንት በርገር ቤት አዲስ አበባ) · Near Awraris Building - አውራሪስ ህንፃ አጠገብ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00954&mlon=38.78854#map=18/9.00954/38.78854
+- **Ellina Coffee** · BL_03_706 Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99356&mlon=38.79417#map=18/8.99356/38.79417
 - **Elsa Bar & Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01323&mlon=38.78186#map=18/9.01323/38.78186
 - **Elseven Coffee** · Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99208&mlon=38.79225#map=18/8.99208/38.79225
 - **Emamaye** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00368&mlon=38.78558#map=18/9.00368/38.78558
+- **Entoto Cafe And Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99181&mlon=38.78125#map=18/8.99181/38.78125
 - **Entoto Cloud** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98330&mlon=38.79670#map=18/8.98330/38.79670
 - **Erestu sega bet** (እርስቱ ስጋ ቤት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01212&mlon=38.78193#map=18/9.01212/38.78193
 - **Ero Shake Juice jacros branch** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00389&mlon=38.81731#map=18/9.00389/38.81731
@@ -260,6 +269,7 @@ count: "1012"
 - **Ethio - BelgoBar & Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99826&mlon=38.78478#map=18/8.99826/38.78478
 - **Ethiopian Skylight Hotel - Lobby Lounge** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98732&mlon=38.79017#map=18/8.98732/38.79017
 - **Euro Shake Juice** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00777&mlon=38.78433#map=18/9.00777/38.78433
+- **Family Banquet Private Home Dishes** (የቤት ግብዣ የግል ምግብ) · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99064&mlon=38.77987#map=18/8.99064/38.77987
 - **Fiesta Ultra Lounge** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01004&mlon=38.78052#map=18/9.01004/38.78052
 - **Fikat Buna** · burger regional coffee shop · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01882&mlon=38.81942#map=18/9.01882/38.81942
 - **Fonous Cafe** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98831&mlon=38.78900#map=18/8.98831/38.78900
@@ -282,6 +292,7 @@ count: "1012"
 - **Grand Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01112&mlon=38.78099#map=18/9.01112/38.78099
 - **Green View** (ግሪን ቪው) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00335&mlon=38.77979#map=18/9.00335/38.77979
 - **Guac On Addis** · ethiopian mexican · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01065&mlon=38.79092#map=18/9.01065/38.79092
+- **Guang Dong Rice Roll** (ጓንዶንግ የሩዝ ሮል) · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99054&mlon=38.77994#map=18/8.99054/38.77994
 - **Hadramaout** · yemeni · Rwanda Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://hadramot.com/ · map https://www.openstreetmap.org/?mlat=8.98935&mlon=38.77750#map=18/8.98935/38.77750
 - **Haile's Mojito Bar** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00477&mlon=38.78259#map=18/9.00477/38.78259
 - **Hamburg Cafe** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01536&mlon=38.78716#map=18/9.01536/38.78716
@@ -296,7 +307,6 @@ count: "1012"
 - **Hibir Bar & Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00456&mlon=38.78059#map=18/9.00456/38.78059
 - **Hill Belt Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00621&mlon=38.80186#map=18/9.00621/38.80186
 - **Hop Lounge** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00621&mlon=38.78097#map=18/9.00621/38.78097
-- **Hot-Yesbing** · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99027&mlon=38.77965#map=18/8.99027/38.77965
 - **Hua Xing** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98969&mlon=38.78314#map=18/8.98969/38.78314
 - **Ilan’s Falafel** · turkish · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01004&mlon=38.78807#map=18/9.01004/38.78807
 - **Ilcamineto Restaurant** (ኢልሚንቶ ሬስቶራንት) · italian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98912&mlon=38.79225#map=18/8.98912/38.79225
@@ -334,8 +344,10 @@ count: "1012"
 - **Kebele 1974** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99577&mlon=38.77909#map=18/8.99577/38.77909
 - **Kech Cafe** · Block 182, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99034&mlon=38.85582#map=18/8.99034/38.85582
 - **Kidus Building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99389&mlon=38.78412#map=18/8.99389/38.78412
+- **Kin Burger** · american · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00462&mlon=38.78031#map=18/9.00462/38.78031
 - **King's Pizza** · pizza · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00437&mlon=38.81143#map=18/9.00437/38.81143
-- **KKFC Kaptain K Fried Chicken** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00156&mlon=38.77986#map=18/9.00156/38.77986
+- **KK Pizza** · pizza · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00156&mlon=38.77995#map=18/9.00156/38.77995
+- **KKFC Kaptain K Fried Chicken** · chicken · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00153&mlon=38.78000#map=18/9.00153/38.78000
 - **Kona Coffee** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01171&mlon=38.79751#map=18/9.01171/38.79751
 - **Kona** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01146&mlon=38.79780#map=18/9.01146/38.79780
 - **Konark Cafe and mini mart** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98692&mlon=38.78774#map=18/8.98692/38.78774
@@ -349,10 +361,11 @@ count: "1012"
 - **Labrina Restaurant & Bar** · ethiopian italian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00134&mlon=38.77975#map=18/9.00134/38.77975
 - **Lao Xiang Shi Chinese Restorant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99463&mlon=38.78299#map=18/8.99463/38.78299
 - **Le Grand Reve** · french and belgian cuisine · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00025&mlon=38.78172#map=18/9.00025/38.78172
-- **Lela Sishu** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00543&mlon=38.78074#map=18/9.00543/38.78074
+- **Lela Sishu** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00533&mlon=38.78061#map=18/9.00533/38.78061
 - **Letish Bar** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.letishbar.com · map https://www.openstreetmap.org/?mlat=9.00717&mlon=38.78675#map=18/9.00717/38.78675
 - **Lidet Restaurant & Bar** (ልደት ሬስቶራንት ና ባር) · diner ethiopian local · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00189&mlon=38.78759#map=18/9.00189/38.78759
 - **Lime Tree Bole** · chicken tapas ethiopian asian italian mexican coffee shop mediterranean tea burger cake pasta lebanese kebab breakfast international · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:30-22:00 · map https://www.openstreetmap.org/?mlat=8.99049&mlon=38.78388#map=18/8.99049/38.78388
+- **Liu Ji Stir Fry** (ሊዩ ጂ ምግብ) · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99045&mlon=38.77989#map=18/8.99045/38.77989
 - **London Cafe** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98192&mlon=38.79340#map=18/8.98192/38.79340
 - **London Cafe** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98332&mlon=38.79676#map=18/8.98332/38.79676
 - **London park** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99527&mlon=38.86169#map=18/8.99527/38.86169
@@ -398,6 +411,7 @@ count: "1012"
 - **Opium Burrito** · mexican burger sandwich · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00119&mlon=38.77952#map=18/9.00119/38.77952
 - **Opium Restaurant** (ኦፒይም ረስቱርንት) · american mexican · run by Chef Mekbib · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.opiumaddis.com/ · hours Mo-Sa 08:30-20:30 · map https://www.openstreetmap.org/?mlat=9.00460&mlon=38.78218#map=18/9.00460/38.78218
 - **Palmy Lounge** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00259&mlon=38.77976#map=18/9.00259/38.77976
+- **Panda** · bubble tea · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99828&mlon=38.78474#map=18/8.99828/38.78474
 - **Paris** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01024&mlon=38.78186#map=18/9.01024/38.78186
 - **Park Dale Burger** (ፓርክ ዴል በርገር) · burger · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98918&mlon=38.78668#map=18/8.98918/38.78668
 - **Parkdale Burger** · burger · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 09:00-23:00 · map https://www.openstreetmap.org/?mlat=8.99510&mlon=38.80914#map=18/8.99510/38.80914
@@ -412,7 +426,6 @@ count: "1012"
 - **Prime Deli** · deli · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00238&mlon=38.77975#map=18/9.00238/38.77975
 - **Raeiy Restaurant and Juice** · regional international · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02117&mlon=38.83933#map=18/9.02117/38.83933
 - **Raha Arabiyan Restaurant and Cafe** (ራሃ የአረቢያን ምግብ ቤትና ካፌ) · arab · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00431&mlon=38.77947#map=18/9.00431/38.77947
-- **Rainbow Korean - Korean Restaurant** (ኮሪያን ሬስቶራንት) · korean · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99006&mlon=38.78097#map=18/8.99006/38.78097
 - **Red Roof** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99528&mlon=38.80332#map=18/8.99528/38.80332
 - **Reem Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01651&mlon=38.79382#map=18/9.01651/38.79382
 - **Reyan Muslim Restaurant and Butchery** · international regional · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02114&mlon=38.83932#map=18/9.02114/38.83932
@@ -425,7 +438,7 @@ count: "1012"
 - **Sabeh** · Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99382&mlon=38.79087#map=18/8.99382/38.79087
 - **Sahis Coffee** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99964&mlon=38.78417#map=18/8.99964/38.78417
 - **Salamet Bar** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01264&mlon=38.78343#map=18/9.01264/38.78343
-- **Sami Kitfo** (ሳሚ ክትፎ) · regional · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99311&mlon=38.79150#map=18/8.99311/38.79150
+- **Sami Kitfo** (ሳሚ ክትፎ) · regional · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99310&mlon=38.79150#map=18/8.99310/38.79150
 - **Samket** · international · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99049&mlon=38.77913#map=18/8.99049/38.77913
 - **Sapore Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98990&mlon=38.78272#map=18/8.98990/38.78272
 - **Saq Cafe and Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00493&mlon=38.79452#map=18/9.00493/38.79452
@@ -435,6 +448,7 @@ count: "1012"
 - **Selam** · ethiopian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 07:00-20:00 · map https://www.openstreetmap.org/?mlat=9.02122&mlon=38.84016#map=18/9.02122/38.84016
 - **Selo Craft Tella** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00817&mlon=38.78170#map=18/9.00817/38.78170
 - **Shawarma kebab** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99868&mlon=38.78606#map=18/8.99868/38.78606
+- **Shaxian Snacks** · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99005&mlon=38.78100#map=18/8.99005/38.78100
 - **Shebel Bar and Restoran** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98632&mlon=38.80143#map=18/8.98632/38.80143
 - **sheble bar and restaurant** · run by Hailu nigusse · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99471&mlon=38.80866#map=18/8.99471/38.80866
 - **Sheger bar and resturant** (ሸገር ባር ና resturant) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98037&mlon=38.88504#map=18/8.98037/38.88504
@@ -451,7 +465,7 @@ count: "1012"
 - **Subway Sheger** (ሰብ ዌይ ሸገር) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00087&mlon=38.78677#map=18/9.00087/38.78677
 - **Subway ሸገር** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00096&mlon=38.78656#map=18/9.00096/38.78656
 - **Sudanese Restaurant** · african · Cape Verde Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99853&mlon=38.77952#map=18/8.99853/38.77952
-- **Sudanese Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99839&mlon=38.78460#map=18/8.99839/38.78460
+- **Sudanese Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99843&mlon=38.78470#map=18/8.99843/38.78470
 - **Sudanese Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 863 7999 · map https://www.openstreetmap.org/?mlat=8.99839&mlon=38.77950#map=18/8.99839/38.77950
 - **Sudanese** · african · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99990&mlon=38.78029#map=18/8.99990/38.78029
 - **Sun Bird cafe** (ሰንበርድ ካፌ) · 612, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 1383 · map https://www.openstreetmap.org/?mlat=8.98831&mlon=38.79142#map=18/8.98831/38.79142
@@ -460,11 +474,13 @@ count: "1012"
 - **Tadesse Fish** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00400&mlon=38.81755#map=18/9.00400/38.81755
 - **Tady cafe** (ቴዲ ካፌ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99950&mlon=38.78482#map=18/8.99950/38.78482
 - **Tages Sega Bet** · ethiopian · Goro to CMC Figa, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 06:00-21:00 · map https://www.openstreetmap.org/?mlat=9.01018&mlon=38.83622#map=18/9.01018/38.83622
+- **Tao** (ታኦ) · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98944&mlon=38.78040#map=18/8.98944/38.78040
 - **Tedy Bar** (ቴዲ ባር) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97798&mlon=38.77329#map=18/8.97798/38.77329
 - **Ten Ten** · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98926&mlon=38.79244#map=18/8.98926/38.79244
 - **Texas Restaurant** · regional international · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02124&mlon=38.83966#map=18/9.02124/38.83966
 - **Tez butchery and bar** · regional · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01883&mlon=38.81964#map=18/9.01883/38.81964
 - **The BURGER STOP** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-20:30 · map https://www.openstreetmap.org/?mlat=9.01667&mlon=38.79515#map=18/9.01667/38.79515
+- **The Desert Bar** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00199&mlon=38.78160#map=18/9.00199/38.78160
 - **The Ethiopian Lounge** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99329&mlon=38.78516#map=18/8.99329/38.78516
 - **The Goat Cafe** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99464&mlon=38.79376#map=18/8.99464/38.79376
 - **the REBAR** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99935&mlon=38.78401#map=18/8.99935/38.78401
@@ -494,7 +510,6 @@ count: "1012"
 - **Woinshet Dore Bet** (ወይንሸት ዶሮ ቤት) · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-22:00 · map https://www.openstreetmap.org/?mlat=9.01362&mlon=38.78412#map=18/9.01362/38.78412
 - **Wow Burger** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98929&mlon=38.78723#map=18/8.98929/38.78723
 - **Wow Burger** · burger pizza chicken smoothie · 123 Djibouti Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99731&mlon=38.78675#map=18/8.99731/38.78675
-- **XiaoLin Chinese Noodle Restorant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98891&mlon=38.78084#map=18/8.98891/38.78084
 - **Ya Grand Bar & Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00912&mlon=38.78168#map=18/9.00912/38.78168
 - **Yared St. George House** (ያሬድ ሴንት ጆርጅ ሃውስ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01052&mlon=38.78393#map=18/9.01052/38.78393
 - **Ye Esrael Bar Ena Restaurant** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01008&mlon=38.86580#map=18/9.01008/38.86580
@@ -507,6 +522,7 @@ count: "1012"
 - **Yo Coffee** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00673&mlon=38.78554#map=18/9.00673/38.78554
 - **Yoalu Grill** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99768&mlon=38.80592#map=18/8.99768/38.80592
 - **Yod Abyssinia Traditional Restaurant** (ዮድ አቢሲኒያ የባህል ሬስቶራንት) · ethiopian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99125&mlon=38.79350#map=18/8.99125/38.79350
+- **Yod Abyssinia** · BL_03_706 Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99321&mlon=38.79423#map=18/8.99321/38.79423
 - **Yohannes Kitfo** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01072&mlon=38.78417#map=18/9.01072/38.78417
 - **Yummy Pizza** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01946&mlon=38.81582#map=18/9.01946/38.81582
 - **Zebra Grill** · kenya · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02130&mlon=38.83804#map=18/9.02130/38.83804
@@ -515,12 +531,14 @@ count: "1012"
 - **Zi Place** (ዜድአይ ፕሌስ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98975&mlon=38.79300#map=18/8.98975/38.79300
 - **Zola Restaurant** (ዞላ ሬስቶራንት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 651 8708 / +251 11 663 2520 · map https://www.openstreetmap.org/?mlat=8.99878&mlon=38.78593#map=18/8.99878/38.78593
 - **Zurich Bar** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00455&mlon=38.78635#map=18/9.00455/38.78635
+- **ሊያውቲን ሬስቶራንት** · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99005&mlon=38.77923#map=18/8.99005/38.77923
 - **ሩፍቶፕ ሬስቶራንት** · european · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 663 5920 · map https://www.openstreetmap.org/?mlat=8.98845&mlon=38.79196#map=18/8.98845/38.79196
 - **ስቶኮልም** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99180&mlon=38.78317#map=18/8.99180/38.78317
 - **ተርኪሽ ስፔሻል ሬስቶራንት እና ካፌ** · turkish · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 663 4212 · map https://www.openstreetmap.org/?mlat=8.98571&mlon=38.78505#map=18/8.98571/38.78505
 - **ቻኖሊ ኑድልስ Chanoly Noodles - ሰሚት ቅርንጫፍ** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01135&mlon=38.85131#map=18/9.01135/38.85131
 - **አምስተርዳም ባርና ሬስቶራንት** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 3493 · map https://www.openstreetmap.org/?mlat=8.98851&mlon=38.78854#map=18/8.98851/38.78854
 - **እሺ** · ethiopian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98734&mlon=38.77562#map=18/8.98734/38.77562
+- **ጂያን ናን ዪ ሬስቶራንት** · chinese · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98997&mlon=38.77967#map=18/8.98997/38.77967
 
 ## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 18
 
@@ -543,7 +561,7 @@ count: "1012"
 - **ክቡ ምግብ ቤት** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03901&mlon=38.73330#map=18/9.03901/38.73330
 - **ወደ ኮልፌ አጠና ተራ** (ዘ ጆይስ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03551&mlon=38.72355#map=18/9.03551/38.72355
 
-## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 203
+## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 208
 
 - **9-Ja** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00255&mlon=38.74280#map=18/9.00255/38.74280
 - **A tavola** (ኤታቮላ) · italian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98891&mlon=38.77206#map=18/8.98891/38.77206
@@ -574,7 +592,7 @@ count: "1012"
 - **Bonjour** (ቦንዡር ካፌ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01085&mlon=38.74556#map=18/9.01085/38.74556
 - **Bonjour** (ቦንዡር ካፌ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01125&mlon=38.75888#map=18/9.01125/38.75888
 - **Bonna Annee Restaurant** (ቦን አኔ) · 467, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 416 6200 · map https://www.openstreetmap.org/?mlat=8.99426&mlon=38.76639#map=18/8.99426/38.76639
-- **Buffet de la Gare** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00998&mlon=38.75264#map=18/9.00998/38.75264
+- **Buffet de la Gare** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00996&mlon=38.75266#map=18/9.00996/38.75266
 - **Buna Tera** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00723&mlon=38.76924#map=18/9.00723/38.76924
 - **Bure** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00191&mlon=38.76643#map=18/9.00191/38.76643
 - **Café Choché** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00942&mlon=38.75347#map=18/9.00942/38.75347
@@ -588,6 +606,7 @@ count: "1012"
 - **Choma** (ቢ ኤንድ ቢ) · ethiopian · 440, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99899&mlon=38.74103#map=18/8.99899/38.74103
 - **Clay Pot Resturant** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Sa 11:30-22:00 · map https://www.openstreetmap.org/?mlat=9.00866&mlon=38.77109#map=18/9.00866/38.77109
 - **Cloud 9 Cafe and Restaurant** (ክላውድ 9 ካፌና ሬስቶራንት) · 990, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00239&mlon=38.76941#map=18/9.00239/38.76941
+- **Coffee City** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99350&mlon=38.77470#map=18/8.99350/38.77470
 - **Coffee Day's** (ኮፊ ዴይስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01565&mlon=38.77082#map=18/9.01565/38.77082
 - **Coffee Plus** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98690&mlon=38.76497#map=18/8.98690/38.76497
 - **Cosmos cafe** (ኮስሞስ ካፌ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 550 6030 · map https://www.openstreetmap.org/?mlat=9.01184&mlon=38.75562#map=18/9.01184/38.75562
@@ -601,13 +620,14 @@ count: "1012"
 - **Enset Restaurant** (እንሰት ምግብ ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99011&mlon=38.76588#map=18/8.99011/38.76588
 - **Epiphany Cafe** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99961&mlon=38.74021#map=18/8.99961/38.74021
 - **Facebook Bar** (Facebook ባር) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98465&mlon=38.75665#map=18/8.98465/38.75665
+- **Fafat Kitfo** · ethiopian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99716&mlon=38.75787#map=18/8.99716/38.75787
 - **Family Restaurant Debre Zeit** (ፋሚሊ ሬስቶራንት ደበረ ዘይት) · mexican · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 850 0279 / +251 11 552 8413 · map https://www.openstreetmap.org/?mlat=9.00864&mlon=38.77096#map=18/9.00864/38.77096
 - **Fanous Cafe** · arab · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99795&mlon=38.76911#map=18/8.99795/38.76911
 - **Fendika** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01910&mlon=38.77013#map=18/9.01910/38.77013
 - **Fidel Bar & Restaurant** (ፊደል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99557&mlon=38.77162#map=18/8.99557/38.77162
 - **FOOD WORLD** (ፉድ ወርልድ) · ethiopian arab pizza · run by Menesur Muzemel · Mezid Plaza #1 Near to AAU College of Commercial, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Su 07:00-15:00 · map https://www.openstreetmap.org/?mlat=9.01342&mlon=38.75065#map=18/9.01342/38.75065
 - **Food World** (ፉድ ወርልድ) · ethiopian pizza burger arab · run by Mensur Muzemil · Mezid Plaza #1 Near to AAU College of Commercial, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Su 07:00-21:00 · map https://www.openstreetmap.org/?mlat=9.01340&mlon=38.75065#map=18/9.01340/38.75065
-- **Frank Addis** (ፍራንክ አዲስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00700&mlon=38.76780#map=18/9.00700/38.76780
+- **Frank Addis** (ፍራንክ አዲስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00703&mlon=38.76785#map=18/9.00703/38.76785
 - **Free Town Bar & Restaurant** (ፍሪ ታውን ባርና ሬስቶራንት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00589&mlon=38.76790#map=18/9.00589/38.76790
 - **Garden of Coffee** · coffee shop · Alexander Pushkin, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99231&mlon=38.73974#map=18/8.99231/38.73974
 - **Garden Paradise** · burger american sandwich grill ethiopian · 4th floor Alexander Pushkin, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 372 0065 · hours Mo-Su 08:00-22:00 · map https://www.openstreetmap.org/?mlat=8.99513&mlon=38.73900#map=18/8.99513/38.73900
@@ -624,21 +644,23 @@ count: "1012"
 - **Hel-Zee Traditional Restaurant** (ሄል-ዚ የባህል ምግብ አዳራሽ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00776&mlon=38.76212#map=18/9.00776/38.76212
 - **Hide out** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98158&mlon=38.76329#map=18/8.98158/38.76329
 - **Homie bar and lounge** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Su 11:45-03:30 · map https://www.openstreetmap.org/?mlat=8.99908&mlon=38.77025#map=18/8.99908/38.77025
-- **Hot Spot Bar and Restaurant** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01500&mlon=38.75676#map=18/9.01500/38.75676
 - **HQ Irish Pub** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98165&mlon=38.76328#map=18/8.98165/38.76328
 - **Ibex Lalibela Restaurant** (አይቤክስ ላሊበላ ሬስቶራንት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 515 9332 · map https://www.openstreetmap.org/?mlat=9.01174&mlon=38.75633#map=18/9.01174/38.75633
+- **IDDO Restaurant** · ethiopian international · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://iddorestaurant.com · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99287&mlon=38.77574#map=18/8.99287/38.77574
 - **Inter Bistro** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01629&mlon=38.76882#map=18/9.01629/38.76882
 - **Ismael Tibs & Kitfo** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00158&mlon=38.76781#map=18/9.00158/38.76781
 - **Jewel of India** · indian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99889&mlon=38.76797#map=18/8.99889/38.76797
 - **Jewel of India** (ጂውል ኦፍ ኢንዲያ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00428&mlon=38.76992#map=18/9.00428/38.76992
-- **Juventus Italian Restaurant** · italian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00908&mlon=38.76132#map=18/9.00908/38.76132
+- **Juventus Italian Restaurant** · italian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00912&mlon=38.76122#map=18/9.00912/38.76122
 - **Kal Cafe** (ቃል ካፌ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00787&mlon=38.76518#map=18/9.00787/38.76518
 - **Kaldi's Coffe** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00223&mlon=38.76894#map=18/9.00223/38.76894
 - **Kaldi's Coffee** (ካልዲስ ቡና) · 317/02, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 372 4583 · map https://www.openstreetmap.org/?mlat=8.99507&mlon=38.73901#map=18/8.99507/38.73901
 - **Kaldi's Coffee** (ካልዲስ ቡና) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00798&mlon=38.76506#map=18/9.00798/38.76506
+- **Kebeki Bar & Restaurant** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99923&mlon=38.77419#map=18/8.99923/38.77419
 - **Kebericho Restaurant** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00141&mlon=38.76933#map=18/9.00141/38.76933
 - **Keli's gourmet burger** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · http://www.KeLisGB.com · map https://www.openstreetmap.org/?mlat=9.01152&mlon=38.76712#map=18/9.01152/38.76712
 - **KHOKHLOMA Russian restaurant** · russian · 370, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://t.me/KhokhlomaRusRestorant · hours Mo-Sa 13:00-21:00 · map https://www.openstreetmap.org/?mlat=8.99611&mlon=38.74290#map=18/8.99611/38.74290
+- **Koba** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99904&mlon=38.77433#map=18/8.99904/38.77433
 - **Kozak Restaurant** (ኮዛክ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00119&mlon=38.76645#map=18/9.00119/38.76645
 - **La Bontia Pizza** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98666&mlon=38.75821#map=18/8.98666/38.75821
 - **La Madelene** (ላሜዳሊያን) · 112/01, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01174&mlon=38.75718#map=18/9.01174/38.75718
@@ -729,7 +751,7 @@ count: "1012"
 - **Union Cocktail Bar & Restaurant** · ethiopian italian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00935&mlon=38.76228#map=18/9.00935/38.76228
 - **United Nation;Effoi (Orange)** · pizza · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01325&mlon=38.76854#map=18/9.01325/38.76854
 - **V Lounge** · run by Variety restaurant and lounge · Guinea Konakri Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01362&mlon=38.76963#map=18/9.01362/38.76963
-- **Velvet** (ቬልቬት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00847&mlon=38.76596#map=18/9.00847/38.76596
+- **Velvet** (ቬልቬት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00847&mlon=38.76594#map=18/9.00847/38.76594
 - **Vics Bar** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00438&mlon=38.77185#map=18/9.00438/38.77185
 - **Viking Bar & Restaurant** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01766&mlon=38.76713#map=18/9.01766/38.76713
 - **Villa Verde** (ቪላ ቬርዴ) · italian pizza chicken fine dining pizza burger pasta italian grill · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Su 10:00-04:00 · map https://www.openstreetmap.org/?mlat=8.98591&mlon=38.76313#map=18/8.98591/38.76313
@@ -737,6 +759,7 @@ count: "1012"
 - **Vine** · italian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00471&mlon=38.76748#map=18/9.00471/38.76748
 - **Washington Cafe** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01272&mlon=38.75329#map=18/9.01272/38.75329
 - **Wow Burger** (ዋው በርገር) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00535&mlon=38.76838#map=18/9.00535/38.76838
+- **Yegna** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01211&mlon=38.76114#map=18/9.01211/38.76114
 - **Yenad Coffee** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99731&mlon=38.76409#map=18/8.99731/38.76409
 - **Yesitota Cafe and Restaurant** · ethiopian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99648&mlon=38.76563#map=18/8.99648/38.76563
 - **Yummy Pizza** · Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00932&mlon=38.76521#map=18/9.00932/38.76521
@@ -759,7 +782,7 @@ count: "1012"
 - **Dibab Cafe & Restaurant ድባብ ካፌና ሬስቶራንት** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04705&mlon=38.76221#map=18/9.04705/38.76221
 - **Emama Fishka Mini Restaurant** (እማማ ፊሽካ ምግብ ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05344&mlon=38.74344#map=18/9.05344/38.74344
 - **Genet Baltena Menafesha Hotel** · ethiopian · run by Dr Alula · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04970&mlon=38.73605#map=18/9.04970/38.73605
-- **Gete park & Art Gallery** · regional · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.08841&mlon=38.76390#map=18/9.08841/38.76390
+- **Gete park & Art Gallery** · regional · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.08840&mlon=38.76390#map=18/9.08840/38.76390
 - **Guve terara building** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05037&mlon=38.76082#map=18/9.05037/38.76082
 - **Haile Selassie London Bus** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04685&mlon=38.76120#map=18/9.04685/38.76120
 - **Jobra Cafe Medanialem** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05512&mlon=38.71993#map=18/9.05512/38.71993
@@ -773,8 +796,9 @@ count: "1012"
 - **University Cafeteria** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04559&mlon=38.75787#map=18/9.04559/38.75787
 - **Yobet Bar and Restaurant** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05806&mlon=38.73852#map=18/9.05806/38.73852
 
-## Lideta sub-city · ልደታ ክፍለ ከተማ — 23
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 24
 
+- **AB Edget Bar & Restaurant** (ኤቢ እድገት ባር እና ሬስቶራንት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01406&mlon=38.73420#map=18/9.01406/38.73420
 - **Ahadu Special Juice** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01097&mlon=38.73719#map=18/9.01097/38.73719
 - **Ambassador Restaurant** (አምባሳደር ሬስቶራንት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01821&mlon=38.75416#map=18/9.01821/38.75416
 - **Anwar Yehager Bet Tibs and Kitfo** (አንዋር የሀገር ቤት ጥብስና ክትፎ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01868&mlon=38.73716#map=18/9.01868/38.73716
@@ -870,7 +894,7 @@ count: "1012"
 - **Yeka Bar & Restaurant** · ethiopian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02607&mlon=38.79403#map=18/9.02607/38.79403
 - **ሮቤሪ ግሮሰሪ** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02889&mlon=38.83944#map=18/9.02889/38.83944
 
-## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 113
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 121
 
 - **A.G Cafe** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Su 08:00-21:00 · map https://www.openstreetmap.org/?mlat=8.94872&mlon=38.72920#map=18/8.94872/38.72920
 - **Aba Guben Bakery** (አባ ጉበን ዳቦ መጋገሪያ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99678&mlon=38.72989#map=18/8.99678/38.72989
@@ -888,6 +912,7 @@ count: "1012"
 - **Ashu Bucher House** (አሹ ስጋ ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94884&mlon=38.72321#map=18/8.94884/38.72321
 - **Aster Tej** · ethiopian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99535&mlon=38.72982#map=18/8.99535/38.72982
 - **Atakilt Salad & Juice** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99236&mlon=38.73813#map=18/8.99236/38.73813
+- **ATG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97302&mlon=38.76103#map=18/8.97302/38.76103
 - **Ayate Coffee | አያቴ ቡና** · coffee shop · Lafto, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 07:30AM-8:30PM Sun 1:30PM-8:30PM · map https://www.openstreetmap.org/?mlat=8.95016&mlon=38.73775#map=18/8.95016/38.73775
 - **Azmera Shiro** · ethiopian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99567&mlon=38.72984#map=18/8.99567/38.72984
 - **Bana cafe** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94942&mlon=38.74459#map=18/8.94942/38.74459
@@ -900,11 +925,14 @@ count: "1012"
 - **Bright Cafe** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95967&mlon=38.71029#map=18/8.95967/38.71029
 - **Bubbles Cafe** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96092&mlon=38.73606#map=18/8.96092/38.73606
 - **Buna Biet** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94956&mlon=38.72956#map=18/8.94956/38.72956
+- **Cal** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95290&mlon=38.75988#map=18/8.95290/38.75988
 - **Cape cafe** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95160&mlon=38.68972#map=18/8.95160/38.68972
 - **Chanoly Noodle and smoothy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94834&mlon=38.73016#map=18/8.94834/38.73016
 - **Chanoly Smoothie and Noodles** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98703&mlon=38.73771#map=18/8.98703/38.73771
 - **Chicken Hut** · chicken · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Su 08:00-20:00 · map https://www.openstreetmap.org/?mlat=8.94927&mlon=38.72408#map=18/8.94927/38.72408
 - **Chicken Hut** (ቺክን ሃት) · burger · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99324&mlon=38.72810#map=18/8.99324/38.72810
+- **CoAli BBQ** · burger chicken · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97998&mlon=38.73544#map=18/8.97998/38.73544
+- **CoAli BBQ** · burger chicken · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97999&mlon=38.73545#map=18/8.97999/38.73545
 - **Coffee Dot Com** · italian coffee shop · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99259&mlon=38.72413#map=18/8.99259/38.72413
 - **Coffee shop** (ካፌ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97355&mlon=38.73131#map=18/8.97355/38.73131
 - **Corner** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96584&mlon=38.74584#map=18/8.96584/38.74584
@@ -916,7 +944,7 @@ count: "1012"
 - **Dink Donut** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99338&mlon=38.72814#map=18/8.99338/38.72814
 - **Dodi** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99668&mlon=38.73193#map=18/8.99668/38.73193
 - **E You Pizzeria Cafe** (ኢ ዩ ፒዜሪያ ካፌ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94797&mlon=38.73572#map=18/8.94797/38.73572
-- **Effoi Pizza - Lebu (New 2021)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94870&mlon=38.73238#map=18/8.94870/38.73238
+- **Effoi Pizza (Lebu Mebrat Haile)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94870&mlon=38.73238#map=18/8.94870/38.73238
 - **Fikadu Bar and Restaurant** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97530&mlon=38.76034#map=18/8.97530/38.76034
 - **Fikere Bar and Restaurant** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94921&mlon=38.72009#map=18/8.94921/38.72009
 - **Fiqr (Love) Grocery** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95266&mlon=38.74477#map=18/8.95266/38.74477
@@ -930,11 +958,12 @@ count: "1012"
 - **In Joy Burger** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94821&mlon=38.73264#map=18/8.94821/38.73264
 - **Kaldi's Coffee** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94943&mlon=38.72136#map=18/8.94943/38.72136
 - **Kaldi's Coffee** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98888&mlon=38.72381#map=18/8.98888/38.72381
-- **Kaldi's Coffee** (ካልዲስ ኮፊ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99966&mlon=38.71958#map=18/8.99966/38.71958
+- **Kaldi's Coffee** (ካልዲስ ኮፊ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99967&mlon=38.71957#map=18/8.99967/38.71957
 - **Kaldis Coffee, Mekanisa** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97434&mlon=38.73133#map=18/8.97434/38.73133
 - **Kaldis Coffee** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96184&mlon=38.71573#map=18/8.96184/38.71573
 - **Kiru Bar & Restaurant** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96525&mlon=38.74483#map=18/8.96525/38.74483
 - **Kiru Bar and Restaurant** (ኪሩ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95681&mlon=38.71317#map=18/8.95681/38.71317
+- **KKFC** (ኬኬ ኤፍ ሲ) · chicken · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99693&mlon=38.72998#map=18/8.99693/38.72998
 - **KT Pizza & Burger** (ኬቲ ፒዛ እና በርገር) · burger · run by Teddy · Jemo 1 block 235/4, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95675&mlon=38.71190#map=18/8.95675/38.71190
 - **L Burger and Pizza House** · american italian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97426&mlon=38.76064#map=18/8.97426/38.76064
 - **Lafto(home sweet home)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94544&mlon=38.74216#map=18/8.94544/38.74216
@@ -945,6 +974,7 @@ count: "1012"
 - **Mamiger** (ማሚገር) · ጀሞ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95681&mlon=38.71255#map=18/8.95681/38.71255
 - **Mamo Kacha Cafe** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99206&mlon=38.73934#map=18/8.99206/38.73934
 - **Mamush Bucher** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97309&mlon=38.74308#map=18/8.97309/38.74308
+- **Mera Coffee** (ሜራ ቡና) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99689&mlon=38.72996#map=18/8.99689/38.72996
 - **Meron** (ሜሮን) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95821&mlon=38.76372#map=18/8.95821/38.76372
 - **Miki Cafe** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94712&mlon=38.74309#map=18/8.94712/38.74309
 - **Millefeuilles** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98798&mlon=38.72419#map=18/8.98798/38.72419
@@ -971,9 +1001,11 @@ count: "1012"
 - **TABOR** (ታቦር) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93394&mlon=38.73053#map=18/8.93394/38.73053
 - **Tedy spot** (ቴዲ spot) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95587&mlon=38.71244#map=18/8.95587/38.71244
 - **The Brim cafe** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96649&mlon=38.72536#map=18/8.96649/38.72536
+- **Tian Tian Noodles** · chinese · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99711&mlon=38.72992#map=18/8.99711/38.72992
 - **Tivoli** (ቲቮሊ ምግብ ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99479&mlon=38.72827#map=18/8.99479/38.72827
 - **Tsiga Shiro** · ethiopian · Lebu Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94841&mlon=38.72956#map=18/8.94841/38.72956
 - **Tsion Bar and Restaurant** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94884&mlon=38.72290#map=18/8.94884/38.72290
+- **Warit** (ዋሪት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97319&mlon=38.76095#map=18/8.97319/38.76095
 - **winner Bar & Restaurant** (ዊነር ባርና ሬስቶራንት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 466 4965 · map https://www.openstreetmap.org/?mlat=8.98362&mlon=38.74968#map=18/8.98362/38.74968
 - **Winta Shiro** (ዊንታ ሽሮ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94804&mlon=38.73635#map=18/8.94804/38.73635
 - **Yamrot Cafe and Bakery** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95438&mlon=38.69247#map=18/8.95438/38.69247
@@ -981,12 +1013,12 @@ count: "1012"
 - **Yonis Pizza** (ዮኒስ ፒዛ) · pizza · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99601&mlon=38.73304#map=18/8.99601/38.73304
 - **Zaid Coffee and Snack bar ®** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96019&mlon=38.71472#map=18/8.96019/38.71472
 - **Zebasil Bar and Restaurant ®** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94819&mlon=38.73216#map=18/8.94819/38.73216
-- **Zing Coffer** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98414&mlon=38.72720#map=18/8.98414/38.72720
+- **Zing Coffee** · coffee shop breakfast pastry pasta pizza · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98414&mlon=38.72720#map=18/8.98414/38.72720
 - **Zoe Cafe** (ዞዊ ካፍተርያ/ሻሂ ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94792&mlon=38.73487#map=18/8.94792/38.73487
 - **ሐ ባር እና ሬስቶራንት** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96495&mlon=38.71991#map=18/8.96495/38.71991
 - **ሐመሩሀ ካፌና ሬስቶራንት** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96500&mlon=38.71995#map=18/8.96500/38.71995
 
-## Akaki Kality sub-city · አቃቂ ቃሊቲ ክፍለ ከተማ — 21
+## Akaki Kality sub-city · አቃቂ ቃሊቲ ክፍለ ከተማ — 23
 
 - **AASTU Cafe 2** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88520&mlon=38.80807#map=18/8.88520/38.80807
 - **AASTU Cafe** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88409&mlon=38.81181#map=18/8.88409/38.81181
@@ -994,12 +1026,14 @@ count: "1012"
 - **Agaz Dibora Hotel** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90115&mlon=38.76645#map=18/8.90115/38.76645
 - **Birhan Bar & Restaurant** · ethiopian · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89740&mlon=38.77307#map=18/8.89740/38.77307
 - **Camp Arada** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89289&mlon=38.77527#map=18/8.89289/38.77527
+- **Cheru Adema** · raw meat · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87324&mlon=38.81592#map=18/8.87324/38.81592
 - **Cup Cake Cafe** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours Mo-Su 08:00-22:00 · map https://www.openstreetmap.org/?mlat=8.89214&mlon=38.77003#map=18/8.89214/38.77003
 - **Gelan condominium gibi wuset** (ገላን ኮንዶሚኒየም ገቢ ውሰጥ) · ethiopian · run by Biftu Alemayehu · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours Mo-Su 07:00-00:00 · map https://www.openstreetmap.org/?mlat=8.88161&mlon=38.77178#map=18/8.88161/38.77178
 - **Goverment cafe** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88763&mlon=38.81008#map=18/8.88763/38.81008
 - **Hildus Cafe & Restaurant** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89642&mlon=38.77115#map=18/8.89642/38.77115
 - **Kalab** (ቃል አብ) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86810&mlon=38.78882#map=18/8.86810/38.78882
 - **KIBINESH** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88628&mlon=38.81067#map=18/8.88628/38.81067
+- **Maraki** (ማራኪ ልዩ ቁርጥ እና ክትፎ) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87155&mlon=38.81006#map=18/8.87155/38.81006
 - **Muslim Restaurant** (የሙስሊም ምግብ ቤት) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95556&mlon=38.76400#map=18/8.95556/38.76400
 - **Robik Cafe** · burger pizza coffee shop · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87880&mlon=38.76666#map=18/8.87880/38.76666
 - **SEWSABI** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89242&mlon=38.80844#map=18/8.89242/38.80844
@@ -1042,15 +1076,3 @@ count: "1012"
 - **Winner** (ዊነር) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03329&mlon=38.71207#map=18/9.03329/38.71207
 - **Yemisirach Bar and Restaurant** (የምስራች ባርና ሬስቶራንት) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05114&mlon=38.69875#map=18/9.05114/38.69875
 - **Zola cafe and restaurant** (ዞላ ካፌና ሬስቶራንት) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04386&mlon=38.69894#map=18/9.04386/38.69894
-
-## Addis Ababa (sub-city not given in OpenStreetMap) — 9
-
-- **Arada Bar & Restaurant** (አራዳ ባርና ሬስቶራንት) · Addis Ababa · tel +251 11 155 3468 · map https://www.openstreetmap.org/?mlat=9.03288&mlon=38.75148#map=18/9.03288/38.75148
-- **Avocado Bistro** · Addis Ababa · map https://www.openstreetmap.org/?mlat=8.98928&mlon=38.78729#map=18/8.98928/38.78729
-- **Jungle** · Addis Ababa · map https://www.openstreetmap.org/?mlat=8.98886&mlon=38.78501#map=18/8.98886/38.78501
-- **Mankira cafe** · Addis Ababa · map https://www.openstreetmap.org/?mlat=9.03279&mlon=38.75190#map=18/9.03279/38.75190
-- **Miki Bar** (ሚኪ ባር) · Addis Ababa · map https://www.openstreetmap.org/?mlat=9.03291&mlon=38.75147#map=18/9.03291/38.75147
-- **Natani** · Addis Ababa · map https://www.openstreetmap.org/?mlat=9.03280&mlon=38.75193#map=18/9.03280/38.75193
-- **Sugar cane juice** · Addis Ababa · map https://www.openstreetmap.org/?mlat=9.03278&mlon=38.75109#map=18/9.03278/38.75109
-- **TG Bar** · Addis Ababa · map https://www.openstreetmap.org/?mlat=8.98943&mlon=38.79415#map=18/8.98943/38.79415
-- **Tomoca Coffee House ቶሞካ ቡና** (ቶሞካ ቡና) · 858/3 Walwal, Addis Ababa · tel +251 11 111 2498 · map https://www.openstreetmap.org/?mlat=9.03084&mlon=38.75077#map=18/9.03084/38.75077

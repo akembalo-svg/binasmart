@@ -63,7 +63,16 @@ const KINDS = [
   { slug: 'shopping-markets', q: ["nwr[\"shop\"=\"mall\"]", "nwr[\"shop\"=\"supermarket\"]", "nwr[\"shop\"=\"department_store\"]", "nwr[\"amenity\"=\"marketplace\"]"], en: 'Malls, supermarkets and markets', am: 'የገበያ ማዕከላት፣ ሱፐርማርኬቶችና ገበያዎች' },
   { slug: 'fuel-stations', q: ["nwr[\"amenity\"=\"fuel\"]"], en: 'Fuel stations', am: 'ነዳጅ ማደያዎች' },
   { slug: 'community-post', q: ["nwr[\"amenity\"=\"community_centre\"]", "nwr[\"amenity\"=\"post_office\"]"], en: 'Community centres and post offices', am: 'የማኅበረሰብ ማዕከላትና ፖስታ ቤቶች' },
-  { slug: 'streets', q: ["way[\"highway\"=\"trunk\"]", "way[\"highway\"=\"primary\"]", "way[\"highway\"=\"secondary\"]", "way[\"highway\"=\"tertiary\"]", "way[\"highway\"=\"residential\"]"], en: 'Streets and roads', am: 'መንገዶች', street: true },
+  // Added 25 September 2026 from the full Geofabrik extract: EVERY other named thing, in catch-all kinds that
+  // match on the key alone ("shop" of any value) and print the value ("bakery", "car repair") on each line.
+  { slug: 'stops-taxi-rail', q: ["nwr[\"public_transport\"=\"platform\"]", "nwr[\"public_transport\"=\"stop_position\"]", "nwr[\"public_transport\"=\"station\"]", "nwr[\"highway\"=\"bus_stop\"]", "nwr[\"amenity\"=\"taxi\"]", "nwr[\"railway\"=\"light_rail\"]", "nwr[\"railway\"=\"tram_stop\"]", "nwr[\"railway\"=\"halt\"]", "nwr[\"railway\"=\"stop\"]"], en: 'Bus stops, taxi ranks and light-rail stops', am: 'የአውቶቡስ ፌርማታዎች፣ የታክሲ መያዣዎችና የቀላል ባቡር ጣቢያዎች', showType: true },
+  { slug: 'shops-services', q: ["nwr[\"shop\"]", "nwr[\"amenity\"=\"internet_cafe\"]", "nwr[\"amenity\"=\"car_wash\"]", "nwr[\"amenity\"=\"car_rental\"]", "nwr[\"amenity\"=\"vehicle_inspection\"]", "nwr[\"amenity\"=\"atm\"]", "nwr[\"amenity\"=\"bureau_de_change\"]", "nwr[\"amenity\"=\"money_transfer\"]", "nwr[\"craft\"]"], en: 'Shops and services', am: 'ሱቆችና አገልግሎቶች', showType: true },
+  { slug: 'offices-companies', q: ["nwr[\"office\"]"], en: 'Companies, NGOs and offices', am: 'ድርጅቶችና ቢሮዎች', showType: true },
+  { slug: 'health-other', q: ["nwr[\"healthcare\"]", "nwr[\"amenity\"=\"dentist\"]", "nwr[\"amenity\"=\"doctors\"]", "nwr[\"amenity\"=\"veterinary\"]", "nwr[\"amenity\"=\"nursing_home\"]"], en: 'Dentists, doctors and other health services', am: 'የጥርስ ሕክምናና ሌሎች የጤና አገልግሎቶች', showType: true },
+  { slug: 'sport-leisure', q: ["nwr[\"leisure\"]", "nwr[\"amenity\"=\"nightclub\"]", "nwr[\"amenity\"=\"events_venue\"]", "nwr[\"amenity\"=\"conference_centre\"]", "nwr[\"amenity\"=\"arts_centre\"]", "nwr[\"amenity\"=\"social_facility\"]"], en: 'Sport, leisure, venues and nightlife', am: 'ስፖርት፣ መዝናኛና የዝግጅት ቦታዎች', showType: true },
+  { slug: 'buildings-apartments', q: ["nwr[\"tourism\"=\"apartment\"]", "nwr[\"building\"]"], en: 'Named buildings and apartments', am: 'ስም ያላቸው ሕንፃዎችና አፓርትመንቶች', showType: true },
+  { slug: 'other-named-places', q: ["nwr[\"amenity\"]", "nwr[\"tourism\"]", "nwr[\"man_made\"]", "nwr[\"public_transport\"]", "nwr[\"railway\"]", "nwr[\"place\"]", "nwr[\"historic\"]"], en: 'Other named places', am: 'ሌሎች ስም ያላቸው ቦታዎች', showType: true },
+  { slug: 'streets', q: ["way[\"highway\"=\"trunk\"]", "way[\"highway\"=\"primary\"]", "way[\"highway\"=\"secondary\"]", "way[\"highway\"=\"tertiary\"]", "way[\"highway\"=\"residential\"]", "way[\"highway\"=\"unclassified\"]", "way[\"highway\"=\"living_street\"]", "way[\"highway\"=\"service\"]", "way[\"highway\"=\"primary_link\"]", "way[\"highway\"=\"secondary_link\"]", "way[\"highway\"=\"trunk_link\"]"], en: 'Streets and roads', am: 'መንገዶች', street: true },
 ];
 
 // Ethiopian numbers. Mobiles are dropped; an area-coded landline or a 3-4 digit short code is kept.
@@ -111,13 +120,15 @@ async function fetchAll() {
 }
 
 const kindOf = t => KINDS.find(k => k.q.some(q => {
-  const [, key, val] = /"([^"]+)"="([^"]+)"/.exec(q);
-  return t[key] === val;
+  const kv = /"([^"]+)"="([^"]+)"/.exec(q);
+  if (kv) return t[kv[1]] === kv[2];
+  const key = /\["([^"]+)"\]/.exec(q);
+  return !!(key && t[key[1]] != null && t[key[1]] !== 'no');
 }));
 const clean = s => String(s || '').replace(/\s+/g, ' ').trim();
 const mdEsc = s => clean(s).replace(/([\\*_`[\]])/g, '\\$1');
 
-function entryLine(e, sub) {
+function entryLine(e, sub, kind) {
   const t = e.tags || {};
   const lat = e.lat != null ? e.lat : e.center && e.center.lat;
   const lon = e.lon != null ? e.lon : e.center && e.center.lon;
@@ -127,6 +138,7 @@ function entryLine(e, sub) {
   if (t.amenity === 'place_of_worship') { const r = [t.denomination, t.religion].filter(Boolean).join(' '); if (r) parts.push(mdEsc(r.replace(/_/g, ' '))); }
   if (t.cuisine && /^(restaurant|cafe|fast_food)$/.test(t.amenity)) parts.push(mdEsc(t.cuisine.replace(/[_;]/g, ' ')));
   if (t.place) parts.push(t.place);
+  else if (kind && kind.showType) { const ty = ['shop', 'office', 'craft', 'healthcare', 'amenity', 'leisure', 'tourism', 'public_transport', 'highway', 'railway', 'building', 'man_made', 'historic'].map(x => t[x]).find(v => v && v !== 'yes'); if (ty) parts.push(mdEsc(String(ty).replace(/_/g, ' '))); }
   if (t.operator && clean(t.operator) !== name) parts.push('run by ' + mdEsc(t.operator));
   const street = clean([t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' '));
   const place = clean(t['addr:suburb'] || t['addr:neighbourhood'] || '');
@@ -165,7 +177,7 @@ function build({ at, elements, bySub }) {
     const g = subName || 'Addis Ababa (sub-city not given in OpenStreetMap)';
     // A mobile can hide outside the phone field - typed into a name ("Cafe 09…"), a website or opening hours.
     // Such an entry is left out whole; the final guard below still refuses to write if one slips through.
-    const line = entryLine(e, subName ? subMeta[subName] : null);
+    const line = entryLine(e, subName ? subMeta[subName] : null, k);
     if (MOBILE.test(line.replace(/map https:\/\/\S+/g, ''))) { mobileLines++; continue; }
     (docs[k.slug].groups[g] ||= []).push(line);
   }

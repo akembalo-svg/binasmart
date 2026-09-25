@@ -34,3 +34,11 @@ test('an entry with a mobile number in its name or text is left out whole', () =
   assert.match(files['addis-restaurants-cafes.md'], /Clean Sample Restaurant/);
   assert.doesNotMatch(files['addis-restaurants-cafes.md'], /0900000042/);
 });
+
+test('every other named thing lands in a catch-all kind, labelled by its own type', () => {
+  const { files } = build({ at: '2026-09-25T00:00:00Z', bySub: {}, elements: [
+    { type: 'node', id: 7, lat: 9, lon: 38.7, tags: { shop: 'bakery', name: 'Sample Bakery' } },
+    { type: 'node', id: 8, lat: 9, lon: 38.7, tags: { highway: 'bus_stop', public_transport: 'platform', name: 'Sample Stop' } } ] });
+  assert.match(files['addis-shops-services.md'], /Sample Bakery\*\* · bakery/);
+  assert.match(files['addis-stops-taxi-rail.md'], /Sample Stop/);
+});

@@ -3,46 +3,46 @@ title: "Schools, colleges and universities in Addis Ababa (ትምህርት ቤ�
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-05-31"
-count: "385"
+fetched: "2026-09-24"
+count: "387"
 ---
 # Schools, colleges and universities in Addis Ababa · በአዲስ አበባ ያሉ ትምህርት ቤቶች፣ ኮሌጆችና ዩኒቨርሲቲዎች
 
-385 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+387 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 44
 
-- **AAU College of Natural Sciences** (የAAU የተፈጥሮ ሳይንስ ኮሌጅ) · King George VI Avenue, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03437&mlon=38.76515#map=18/9.03437/38.76515
-- **Africa Andenet School** (አፍሪካ አንድነት ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03359&mlon=38.74843#map=18/9.03359/38.74843
-- **Agazzian primary school** (አጋዚያን የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03759&mlon=38.74041#map=18/9.03759/38.74041
-- **Agazzian primary school** (አጋዚያን የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03882&mlon=38.74504#map=18/9.03882/38.74504
+- **Addis Ababa University - College of Natural Sciences** (አዲስ አበባ ዩኒቨርሲቲ - የተፈጥሮ ሳይንስ ኮሌጅ) · King George VI Avenue, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03426&mlon=38.76539#map=18/9.03426/38.76539
+- **Africa Andenet School** (አፍሪካ አንድነት ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03354&mlon=38.74839#map=18/9.03354/38.74839
+- **Agazzian primary school** (አጋዚያን የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03764&mlon=38.74039#map=18/9.03764/38.74039
+- **Agazzian primary school** (አጋዚያን የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03881&mlon=38.74496#map=18/9.03881/38.74496
 - **Albert Institute** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03256&mlon=38.75087#map=18/9.03256/38.75087
-- **Alle School of Fine Arts and Design** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03636&mlon=38.76598#map=18/9.03636/38.76598
+- **Alle School of Fine Arts and Design** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03645&mlon=38.76591#map=18/9.03645/38.76591
 - **American College of Technology** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03118&mlon=38.76177#map=18/9.03118/38.76177
-- **Arbegnoch Primary School** (አርበኞች የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04694&mlon=38.74283#map=18/9.04694/38.74283
-- **Aweliya Primary School** (አወሊያ የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03611&mlon=38.74949#map=18/9.03611/38.74949
+- **Arbegnoch Primary School** (አርበኞች የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04695&mlon=38.74280#map=18/9.04695/38.74280
+- **Aweliya Primary School** (አወሊያ የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03615&mlon=38.74951#map=18/9.03615/38.74951
 - **Behere-Ethiopia Public School** · run by The Minester of Education · Shewareged Gedle Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03816&mlon=38.77265#map=18/9.03816/38.77265
-- **Behere-Ethiopia Public School** · Shewareged Gedle Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03817&mlon=38.77254#map=18/9.03817/38.77254
-- **Bethelhem School ቤተልሄም ት/ቤት** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04174&mlon=38.74918#map=18/9.04174/38.74918
+- **Behere-Ethiopia Public School** · Shewareged Gedle Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03818&mlon=38.77254#map=18/9.03818/38.77254
+- **Bethelhem School ቤተልሄም ት/ቤት** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04175&mlon=38.74916#map=18/9.04175/38.74916
 - **Computational Science Program** · 710 Queen Elizabeth Street, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 655 1915 · map https://www.openstreetmap.org/?mlat=9.03413&mlon=38.76637#map=18/9.03413/38.76637
 - **Creative Videography Training Institute** (ክሬቲቭ የቪዲዮግራፊ ማሰልጠኛ ተቋም) · 692, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04032&mlon=38.75901#map=18/9.04032/38.75901
 - **Dagmawi Minilik School** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03569&mlon=38.75905#map=18/9.03569/38.75905
 - **Damat Hotel And Business collage** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03911&mlon=38.75018#map=18/9.03911/38.75018
 - **Danu Hospital** (ዳኑ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03027&mlon=38.76157#map=18/9.03027/38.76157
-- **ECUSTA** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03016&mlon=38.74897#map=18/9.03016/38.74897
+- **ECUSTA** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03021&mlon=38.74896#map=18/9.03021/38.74896
 - **Genet KG School** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04206&mlon=38.76273#map=18/9.04206/38.76273
 - **Helen** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03676&mlon=38.75207#map=18/9.03676/38.75207
 - **HiLCoE - school of computer science and technology** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03007&mlon=38.76243#map=18/9.03007/38.76243
-- **Horn of Africa Regional Environment Center (HoAREC)** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03407&mlon=38.76629#map=18/9.03407/38.76629
+- **Horn of Africa Regional Environment Center (HoAREC)** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03407&mlon=38.76630#map=18/9.03407/38.76630
 - **Indian International School** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03502&mlon=38.77421#map=18/9.03502/38.77421
 - **Italian Comprehensive School of Addis Ababa - Italian Cultural Institute** (የጣልያን ትምህርት ቤት - የጣልያን የባሕል ተቋም) · ደጃ/ች በላይ ዘለቀ መንገድ, Arada sub-city (አራዳ ክፍለ ከተማ) · http://www.iicaddisabeba.esteri.it/IIC_AddisAbeba/Menu/Istituto/Come_raggiungerci/ · map https://www.openstreetmap.org/?mlat=9.04411&mlon=38.74995#map=18/9.04411/38.74995
-- **Lideta Catholic Cathedral School** · Wawel Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03086&mlon=38.74905#map=18/9.03086/38.74905
+- **Lideta Catholic Cathedral School** · Wawel Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03083&mlon=38.74905#map=18/9.03083/38.74905
 - **LM international** (ኤል ኤም) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03792&mlon=38.76612#map=18/9.03792/38.76612
-- **Lycée Guébré-Mariam (French School)** (ሊሴ ገ/ማሪያም ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 155 1603 · https://www.guebre-mariam.org/ · map https://www.openstreetmap.org/?mlat=9.02378&mlon=38.75292#map=18/9.02378/38.75292
+- **Lycée Guébré-Mariam (French School)** (ሊሴ ገ/ማሪያም ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 155 1603 · https://www.guebre-mariam.org/ · map https://www.openstreetmap.org/?mlat=9.02379&mlon=38.75295#map=18/9.02379/38.75295
 - **Menelik Primary School** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03647&mlon=38.76316#map=18/9.03647/38.76316
-- **Menellik II Primary School** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03678&mlon=38.76449#map=18/9.03678/38.76449
+- **Menellik II Primary School** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03672&mlon=38.76443#map=18/9.03672/38.76443
 - **Micro Link Information Technology College** · run by Mr Abenezer Ashebir · Abune Petros, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 654 1015 · http://www.Microlinkcollege.com · hours Mo-Sa 00:00-24:00 · map https://www.openstreetmap.org/?mlat=9.03682&mlon=38.75069#map=18/9.03682/38.75069
-- **Nativity Girls School** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03033&mlon=38.74813#map=18/9.03033/38.74813
+- **Nativity Girls School** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03034&mlon=38.74818#map=18/9.03034/38.74818
 - **Nazareth School** (ናዝሬት ትምህርት ቤት አ/አ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03913&mlon=38.75801#map=18/9.03913/38.75801
 - **Nejashi Academy** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04160&mlon=38.74387#map=18/9.04160/38.74387
 - **New Era Public Shool** · run by Government · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03876&mlon=38.75142#map=18/9.03876/38.75142
@@ -50,11 +50,11 @@ count: "385"
 - **Radical School** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03948&mlon=38.76280#map=18/9.03948/38.76280
 - **Royal University College Piazza** (ሮያል ዩኒቨርሲቲ ኮሌጅ ፒያሳ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03259&mlon=38.75431#map=18/9.03259/38.75431
 - **Sandford International School** · 2QPC+HX8 Shewareged Gedle Street, Arada sub-city (አራዳ ክፍለ ከተማ) · https://sandfordschool.org/ · map https://www.openstreetmap.org/?mlat=9.03650&mlon=38.77256#map=18/9.03650/38.77256
-- **Sandford International School** · Arada sub-city (አራዳ ክፍለ ከተማ) · https://sandfordschool.org/ · map https://www.openstreetmap.org/?mlat=9.03646&mlon=38.77255#map=18/9.03646/38.77255
+- **Sandford International School** · Arada sub-city (አራዳ ክፍለ ከተማ) · https://sandfordschool.org/ · map https://www.openstreetmap.org/?mlat=9.03649&mlon=38.77255#map=18/9.03649/38.77255
 - **Save Heaven** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03257&mlon=38.76911#map=18/9.03257/38.76911
-- **Tibeb Ediget Primary School | ጥበብ እድገት የመጀመሪያ ደረጃ ት/ቤት** (ጥበብ እድገት የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05119&mlon=38.74579#map=18/9.05119/38.74579
-- **Tikur Anbessa Secondary school** (ጥቁር አንበሳ ሁለተኛ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02247&mlon=38.75274#map=18/9.02247/38.75274
-- **Wro Kelemwork Tiruneghe Primary & Secondary School** (ወ/ሮ ቀለም ወርቅ ጥሩነህ የመጀመሪያ እና ሁለተኛ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04799&mlon=38.74550#map=18/9.04799/38.74550
+- **Tibeb Ediget Primary School | ጥበብ እድገት የመጀመሪያ ደረጃ ት/ቤት** (ጥበብ እድገት የመጀመሪያ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05121&mlon=38.74572#map=18/9.05121/38.74572
+- **Tikur Anbessa Secondary school** (ጥቁር አንበሳ ሁለተኛ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02247&mlon=38.75270#map=18/9.02247/38.75270
+- **Wro Kelemwork Tiruneghe Primary & Secondary School** (ወ/ሮ ቀለም ወርቅ ጥሩነህ የመጀመሪያ እና ሁለተኛ ደረጃ ት/ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04803&mlon=38.74550#map=18/9.04803/38.74550
 - **አቡነ ጎርጎርዮስ ት/ቤት Abune Gorgorios School** · Aware, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 850 1611 · map https://www.openstreetmap.org/?mlat=9.02886&mlon=38.77885#map=18/9.02886/38.77885
 
 ## Bole sub-city · ቦሌ ክፍለ ከተማ — 56
@@ -64,11 +64,11 @@ count: "385"
 - **Admas walelegn** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01806&mlon=38.79678#map=18/9.01806/38.79678
 - **Andode Secondary school** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99317&mlon=38.85810#map=18/8.99317/38.85810
 - **Atronus School of Computer** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 647 7078 · map https://www.openstreetmap.org/?mlat=9.01863&mlon=38.82166#map=18/9.01863/38.82166
-- **Berhane Zare School** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00930&mlon=38.78504#map=18/9.00930/38.78504
+- **Berhane Zare School** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00932&mlon=38.78502#map=18/9.00932/38.78502
 - **Beshale School** · CMC Figa to Goro, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 07:00-19:00 · map https://www.openstreetmap.org/?mlat=9.00937&mlon=38.83498#map=18/9.00937/38.83498
 - **Bole Arabsa scgool** (ቦሌ አራርሳ ት/ቤት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98029&mlon=38.88729#map=18/8.98029/38.88729
-- **Bole Community High School** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99826&mlon=38.78909#map=18/8.99826/38.78909
-- **Bole Community School** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98978&mlon=38.79830#map=18/8.98978/38.79830
+- **Bole Community High School** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99826&mlon=38.78910#map=18/8.99826/38.78910
+- **Bole Community School** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98973&mlon=38.79838#map=18/8.98973/38.79838
 - **Bole Ethio China Friendship primary school** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98919&mlon=38.86062#map=18/8.98919/38.86062
 - **Bole Kale-Hiwot School** (ቦሌ ቃለ-ሕይወት ትምህርት-ቤት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97900&mlon=38.77548#map=18/8.97900/38.77548
 - **Bole TVT Institute** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01954&mlon=38.80932#map=18/9.01954/38.80932
@@ -80,7 +80,7 @@ count: "385"
 - **Fountain of knowledge school** (ፋውንቴን ኦፍ ኖውሌጅ ት/ቤት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01737&mlon=38.83836#map=18/9.01737/38.83836
 - **Gage college** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01624&mlon=38.80111#map=18/9.01624/38.80111
 - **Gebeya Computer Training** (ሲናን ኮሜርሺያል ሴንተር) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99040&mlon=38.78206#map=18/8.99040/38.78206
-- **Gerji unity area** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00041&mlon=38.80807#map=18/9.00041/38.80807
+- **Gerji unity area** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00040&mlon=38.80807#map=18/9.00040/38.80807
 - **Gibson Youth Academy** (ጊብሰን) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98871&mlon=38.78538#map=18/8.98871/38.78538
 - **Goro primary school** · jacros to meskid, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99487&mlon=38.82703#map=18/8.99487/38.82703
 - **Hayat Medical College** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99475&mlon=38.79465#map=18/8.99475/38.79465
@@ -105,85 +105,85 @@ count: "385"
 - **SHIBU EJERSA ELEMENTARY SCHOOL** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98726&mlon=38.84870#map=18/8.98726/38.84870
 - **Texas School of English and Computer** · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01479&mlon=38.78368#map=18/9.01479/38.78368
 - **Unity Academy** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00352&mlon=38.80563#map=18/9.00352/38.80563
-- **Unity University (Gerji Campus)** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00114&mlon=38.80761#map=18/9.00114/38.80761
+- **Unity University (Gerji Campus)** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00106&mlon=38.80773#map=18/9.00106/38.80773
 - **Unity University College** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00349&mlon=38.80497#map=18/9.00349/38.80497
-- **Unity university** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00026&mlon=38.80884#map=18/9.00026/38.80884
+- **Unity university** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00025&mlon=38.80885#map=18/9.00025/38.80885
 - **Unity University** (ዩኒቲ ዩኒቨርሲቲ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00017&mlon=38.80434#map=18/9.00017/38.80434
 - **vision acadamy** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00440&mlon=38.81068#map=18/9.00440/38.81068
 - **vision acadamy** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00564&mlon=38.81286#map=18/9.00564/38.81286
 - **Vision School** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01009&mlon=38.84926#map=18/9.01009/38.84926
 - **Yemisrach Kindergarten School** · CMC Figa to Goro, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-15:00 · map https://www.openstreetmap.org/?mlat=9.00967&mlon=38.83529#map=18/9.00967/38.83529
-- **Yenegew sew** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01102&mlon=38.79623#map=18/9.01102/38.79623
+- **Yenegew sew** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01102&mlon=38.79624#map=18/9.01102/38.79624
 - **Young Roots International School** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00985&mlon=38.85011#map=18/9.00985/38.85011
 
-## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 21
+## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 20
 
-- **Abyssinia Primary School** (አቢሲኒያ የመጀመሪያ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 277 0952 · map https://www.openstreetmap.org/?mlat=9.04607&mlon=38.72444#map=18/9.04607/38.72444
-- **Addis ketema Secondary School አዲስ ከተማ ሁለተኛ ደረጃ ት/ቤት** (አዲስ ከተማ ሁለተኛ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 276 3814 · map https://www.openstreetmap.org/?mlat=9.03509&mlon=38.73326#map=18/9.03509/38.73326
+- **Abyssinia Primary School** (አቢሲኒያ የመጀመሪያ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 277 0952 · map https://www.openstreetmap.org/?mlat=9.04608&mlon=38.72445#map=18/9.04608/38.72445
+- **Addis ketema Secondary School አዲስ ከተማ ሁለተኛ ደረጃ ት/ቤት** (አዲስ ከተማ ሁለተኛ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 276 3814 · map https://www.openstreetmap.org/?mlat=9.03512&mlon=38.73335#map=18/9.03512/38.73335
 - **Addis ketema tvte** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02492&mlon=38.73437#map=18/9.02492/38.73437
 - **Bitweded Beshah Public Primary School ቢትወደድ በሻህ የመጀመሪያ ደረጃ የህዝብ ት/ቤት** (ቢትወደድ በሻህ የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03520&mlon=38.73154#map=18/9.03520/38.73154
-- **Dagmawi Berhan Primary school የካቲት 23 ሁለተኛ ደረጃ ት/ቤት** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03303&mlon=38.72614#map=18/9.03303/38.72614
-- **Dej. Hailu Tesfaye Primary Public School** (ደጃች ሃይሉ ተስፋዮ የመጀመሪያ ደረጃ የሕዝብ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02731&mlon=38.72624#map=18/9.02731/38.72624
-- **Dilachin Secondary school** (ድላችን ሁለተኛ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02698&mlon=38.72374#map=18/9.02698/38.72374
-- **Dj.Geneme Primary School ሃሌሉያ የመጀመሪያ ት/ቤት** (ደጃ/ች ገነሜ የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03756&mlon=38.73127#map=18/9.03756/38.73127
-- **Eshet Primary School** (እሸት የመጀመሪያ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 277 5949 · map https://www.openstreetmap.org/?mlat=9.03594&mlon=38.72731#map=18/9.03594/38.72731
+- **Dagmawi Berhan Primary school የካቲት 23 ሁለተኛ ደረጃ ት/ቤት** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03300&mlon=38.72619#map=18/9.03300/38.72619
+- **Dej. Hailu Tesfaye Primary Public School** (ደጃች ሃይሉ ተስፋዮ የመጀመሪያ ደረጃ የሕዝብ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02724&mlon=38.72616#map=18/9.02724/38.72616
+- **Dilachin Secondary school** (ድላችን ሁለተኛ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02692&mlon=38.72387#map=18/9.02692/38.72387
+- **Dj.Geneme Primary School ሃሌሉያ የመጀመሪያ ት/ቤት** (ደጃ/ች ገነሜ የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03753&mlon=38.73127#map=18/9.03753/38.73127
+- **Eshet Primary School** (እሸት የመጀመሪያ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 277 5949 · map https://www.openstreetmap.org/?mlat=9.03596&mlon=38.72729#map=18/9.03596/38.72729
 - **Gelila Primary School** (ገሊላ የመጀመሪያ ደረጃ ትምህርት ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02375&mlon=38.72834#map=18/9.02375/38.72834
-- **Halleluya primary school ሃሌሉያ የመጀመሪያ ት/ቤት** (ሃሌሉያ የመጀመሪያ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 213 0437 · map https://www.openstreetmap.org/?mlat=9.04021&mlon=38.73139#map=18/9.04021/38.73139
-- **Higher 7 TVET School** (ከፍተኛ 7 የቴክኒክና ሙያ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04197&mlon=38.72028#map=18/9.04197/38.72028
-- **Hiwot Birhan School** (ሕይወት ብርሃን ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04509&mlon=38.73082#map=18/9.04509/38.73082
-- **May Day Primary Public School** (ሜይ ዴይ የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03530&mlon=38.73723#map=18/9.03530/38.73723
+- **Halleluya primary school ሃሌሉያ የመጀመሪያ ት/ቤት** (ሃሌሉያ የመጀመሪያ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 213 0437 · map https://www.openstreetmap.org/?mlat=9.04020&mlon=38.73140#map=18/9.04020/38.73140
+- **Higher 7 TVET School** (ከፍተኛ 7 የቴክኒክና ሙያ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04193&mlon=38.72033#map=18/9.04193/38.72033
+- **Hiwot Birhan School** (ሕይወት ብርሃን ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04511&mlon=38.73077#map=18/9.04511/38.73077
+- **May Day Primary Public School** (ሜይ ዴይ የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03528&mlon=38.73725#map=18/9.03528/38.73725
 - **Non Formal Education center** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03952&mlon=38.73057#map=18/9.03952/38.73057
-- **Raguel Primary School** (ራጉኤል የመጀመሪያ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03274&mlon=38.73978#map=18/9.03274/38.73978
-- **Sefere Selam Primary Public School የካቲት 23 ሁለተኛ ደረጃ ት/ቤት** (ሰፈረ ሰላም የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03814&mlon=38.71950#map=18/9.03814/38.71950
-- **Shawel Dema Primary School** (ሻውል ደማ የመጀመሪያ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02893&mlon=38.72913#map=18/9.02893/38.72913
+- **Sefere Selam Primary Public School የካቲት 23 ሁለተኛ ደረጃ ት/ቤት** (ሰፈረ ሰላም የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03814&mlon=38.71949#map=18/9.03814/38.71949
+- **Shawel Dema Primary School** (ሻውል ደማ የመጀመሪያ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02891&mlon=38.72916#map=18/9.02891/38.72916
 - **Ummar Semeter School** (ዑመር ሰመተር የመጀመሪያ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03362&mlon=38.74096#map=18/9.03362/38.74096
-- **Yekatit 23 Secondary School የካቲት 23 ሁለተኛ ደረጃ ት/ቤት** (የካቲት 23 ሁለተኛ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 276 8120 · map https://www.openstreetmap.org/?mlat=9.03267&mlon=38.72694#map=18/9.03267/38.72694
+- **Yekatit 23 Secondary School የካቲት 23 ሁለተኛ ደረጃ ት/ቤት** (የካቲት 23 ሁለተኛ ደረጃ ት/ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 276 8120 · map https://www.openstreetmap.org/?mlat=9.03268&mlon=38.72689#map=18/9.03268/38.72689
 - **ከፍተኛ -7 ቴክኒክ ኮሌጅ** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04281&mlon=38.71963#map=18/9.04281/38.71963
 
-## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 35
+## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 36
 
-- **AAU College of Commercial** (በአዲስ አበባ ዩኒቨርሲቲ የንግድ ሥራ ኮሌጅ) · run by government · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01326&mlon=38.74966#map=18/9.01326/38.74966
+- **AAU College of Commercial** (በአዲስ አበባ ዩኒቨርሲቲ የንግድ ሥራ ኮሌጅ) · run by government · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01326&mlon=38.74980#map=18/9.01326/38.74980
 - **Abyot Ermja Or Mision School** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00511&mlon=38.77139#map=18/9.00511/38.77139
 - **Abyot Kirs Preparatory School** (አብዮት ቅርስ የመሰናዶ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98851&mlon=38.75590#map=18/8.98851/38.75590
 - **Addis Ababa University, School of commerce** (አዲስ አበባ ዩንቨርሲቲ የንግድ ስራ ትምህርት ቤት) · Ras Abebe Aregay Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://www.aau.edu.et · map https://www.openstreetmap.org/?mlat=9.01325&mlon=38.74958#map=18/9.01325/38.74958
 - **Admas University** (አድማስ ዩኒቨርስቲ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01130&mlon=38.75889#map=18/9.01130/38.75889
-- **Africa Beza University College** (አፍሪካ ቤዛ ዩኒቨርስቲ ኮሌጅ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 550 5998 · map https://www.openstreetmap.org/?mlat=9.00930&mlon=38.74679#map=18/9.00930/38.74679
-- **Agazzian primary school** (አጋዚያን የመጀመሪያ ደረጃ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00685&mlon=38.74453#map=18/9.00685/38.74453
+- **Africa Beza University College** (አፍሪካ ቤዛ ዩኒቨርስቲ ኮሌጅ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 550 5998 · map https://www.openstreetmap.org/?mlat=9.00930&mlon=38.74678#map=18/9.00930/38.74678
+- **Agazzian primary school** (አጋዚያን የመጀመሪያ ደረጃ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00686&mlon=38.74453#map=18/9.00686/38.74453
 - **Alpha University College** (አልፋ ዩኒቨርሲቲ ኮሌጅ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99400&mlon=38.75716#map=18/8.99400/38.75716
-- **Assai Primary and Secondary Public School** (አሳይ የመጀመሪያና ሁለተኛ ደረጃ የሕዝብ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00199&mlon=38.76823#map=18/9.00199/38.76823
+- **Assai Primary and Secondary Public School** (አሳይ የመጀመሪያና ሁለተኛ ደረጃ የሕዝብ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00198&mlon=38.76822#map=18/9.00198/38.76822
 - **Brana Playschool** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98761&mlon=38.75783#map=18/8.98761/38.75783
-- **College of Telecommunication and Information** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98767&mlon=38.76879#map=18/8.98767/38.76879
+- **College of Telecommunication and Information** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98766&mlon=38.76874#map=18/8.98766/38.76874
 - **Dandii Boru school** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99311&mlon=38.77220#map=18/8.99311/38.77220
 - **Edget behebret primary school** (ዕድገት በህብረት የመጀመሪያ ደረጃ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01330&mlon=38.75182#map=18/9.01330/38.75182
 - **Ethio telecom training ,** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98760&mlon=38.77021#map=18/8.98760/38.77021
-- **Felege Yordanos School** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00229&mlon=38.75429#map=18/9.00229/38.75429
+- **Felege Yordanos School** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00230&mlon=38.75430#map=18/9.00230/38.75430
 - **Flipper International School - Beklobet** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99827&mlon=38.76190#map=18/8.99827/38.76190
 - **FTA** (ፊታአ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98301&mlon=38.76636#map=18/8.98301/38.76636
 - **GAGE Technology and Business College** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99891&mlon=38.76730#map=18/8.99891/38.76730
 - **GAGE Technology and Business College** (ጌጅ የቴክኖሎጂና ቢዝነስ ኮሌጅ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99868&mlon=38.76736#map=18/8.99868/38.76736
-- **Greek School** (ግሪክ ትምህርት ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00739&mlon=38.76895#map=18/9.00739/38.76895
+- **Greek School** (ግሪክ ትምህርት ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00743&mlon=38.76892#map=18/9.00743/38.76892
 - **Intellectual Schools** (የአዕምሮ ትምህርት ቤቶች) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 416 8818 · map https://www.openstreetmap.org/?mlat=8.99521&mlon=38.74377#map=18/8.99521/38.74377
+- **Kirkos Manufacturing College** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99191&mlon=38.75285#map=18/8.99191/38.75285
 - **lunar college** (ሉናር ኮሌጅ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00594&mlon=38.76807#map=18/9.00594/38.76807
 - **Mandela Distance Education Academy** (ማንዴላ የርቀት ትምህርት አካዳሚ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00380&mlon=38.75501#map=18/9.00380/38.75501
-- **MEDCO Bio-Medical College** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98602&mlon=38.76779#map=18/8.98602/38.76779
+- **MEDCO Bio-Medical College** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98603&mlon=38.76779#map=18/8.98603/38.76779
 - **National College Mexico Branch** (ናሽናል ኮሌጅ ሜክሲኮ ቅርንጫፍ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00660&mlon=38.74562#map=18/9.00660/38.74562
 - **National colleges** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00490&mlon=38.74276#map=18/9.00490/38.74276
-- **NECAT Engineering College** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98646&mlon=38.76969#map=18/8.98646/38.76969
+- **NECAT Engineering College** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98646&mlon=38.76970#map=18/8.98646/38.76970
 - **New Millenium International Hotel and Tourism Institute** (ኒው ሚሊኒየም ኢንተርናሽናል የሆቴልና ቱሪዝም ተቋም) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00434&mlon=38.75277#map=18/9.00434/38.75277
-- **Shimels Habete Elementary School** (ሽመልስ ሃብቴ መጀመሪያ ደረጃ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00566&mlon=38.74800#map=18/9.00566/38.74800
-- **Shimels Habete Secondary School** (ሽመልስ ሃብቴ ሁለተኛ ደረጃ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00224&mlon=38.74915#map=18/9.00224/38.74915
+- **Shimels Habete Elementary School** (ሽመልስ ሃብቴ መጀመሪያ ደረጃ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00562&mlon=38.74803#map=18/9.00562/38.74803
+- **Shimels Habete Secondary School** (ሽመልስ ሃብቴ ሁለተኛ ደረጃ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00227&mlon=38.74914#map=18/9.00227/38.74914
 - **Shimels Habete Secondary School** (ሽመልስ ሃብቴ ሁለተኛ ደረጃ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00350&mlon=38.74907#map=18/9.00350/38.74907
-- **St. Joseph School** (ቅዱስ ዮሴፍ ትምህርት ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00983&mlon=38.75996#map=18/9.00983/38.75996
+- **St. Joseph School** (ቅዱስ ዮሴፍ ትምህርት ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00975&mlon=38.75985#map=18/9.00975/38.75985
 - **Werha Yekatit Primary School** (ወርሃ የካቲት የመጀመሪያ ደረጃ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98897&mlon=38.75252#map=18/8.98897/38.75252
 - **yelbe fana elementary school** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01887&mlon=38.77114#map=18/9.01887/38.77114
-- **Yewket Fana Primery Public School** (የእውቀት ፋና የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99667&mlon=38.75646#map=18/8.99667/38.75646
+- **Yewket Fana Primery Public School** (የእውቀት ፋና የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99663&mlon=38.75645#map=18/8.99663/38.75645
 
 ## Gulele sub-city · ጉለሌ ክፍለ ከተማ — 29
 
 - **AAU CBE** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04676&mlon=38.76320#map=18/9.04676/38.76320
-- **AAU Faculty of Social Science** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · https://aau.edu.et · map https://www.openstreetmap.org/?mlat=9.04640&mlon=38.75865#map=18/9.04640/38.75865
-- **Addis Ababa Primary School** (አዲስ አበባ የመጀመሪያ ደረጃ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04713&mlon=38.73600#map=18/9.04713/38.73600
-- **Belay Zeleke primary School** (በላይ ዘለቀ አንደኛ ደረጃ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06420&mlon=38.73106#map=18/9.06420/38.73106
+- **Addis Ababa Primary School** (አዲስ አበባ የመጀመሪያ ደረጃ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04712&mlon=38.73597#map=18/9.04712/38.73597
+- **Addis Ababa University - Faculty of Social Science** (አዲስ አበባ ዩኒቨርሲቲ - የማኅበራዊ ሳይንስ ፋኩልቲ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · https://aau.edu.et · map https://www.openstreetmap.org/?mlat=9.04631&mlon=38.75900#map=18/9.04631/38.75900
+- **Belay Zeleke primary School** (በላይ ዘለቀ አንደኛ ደረጃ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06415&mlon=38.73115#map=18/9.06415/38.73115
 - **Belay zelke** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06394&mlon=38.73122#map=18/9.06394/38.73122
 - **Del Ber high school** (ድል በር ሁለተኛ ደርጃ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05706&mlon=38.74168#map=18/9.05706/38.74168
 - **Dil Be Tigel Primary school** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06086&mlon=38.75935#map=18/9.06086/38.75935
@@ -195,46 +195,49 @@ count: "385"
 - **Eshetu Chole Building** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04709&mlon=38.76273#map=18/9.04709/38.76273
 - **Ethiopian space science institute** (የኢትዮጵያ ህዋ ምርምር) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05076&mlon=38.76160#map=18/9.05076/38.76160
 - **Fasil Primary School** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06103&mlon=38.71908#map=18/9.06103/38.71908
-- **Hamle 19** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06129&mlon=38.73953#map=18/9.06129/38.73953
+- **Hamle 19** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06134&mlon=38.73943#map=18/9.06134/38.73943
 - **kechene debre selam** (ቀጨኔ ደብረ ሰላም ት/ት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05716&mlon=38.74978#map=18/9.05716/38.74978
-- **Medhanialem Preparatory School** (መድኃኒዓለም የመሰናዶ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · tel +251 11 259 3437 · map https://www.openstreetmap.org/?mlat=9.05238&mlon=38.72352#map=18/9.05238/38.72352
-- **Medhanialem Primary School መድኃኒዓለም የመጀመሪያ ደረጃ ት/ቤት** (መድኃኒዓለም የመጀመሪያ ደረጃ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05313&mlon=38.72263#map=18/9.05313/38.72263
+- **Medhanialem Preparatory School** (መድኃኒዓለም የመሰናዶ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · tel +251 11 259 3437 · map https://www.openstreetmap.org/?mlat=9.05232&mlon=38.72352#map=18/9.05232/38.72352
+- **Medhanialem Primary School መድኃኒዓለም የመጀመሪያ ደረጃ ት/ቤት** (መድኃኒዓለም የመጀመሪያ ደረጃ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05314&mlon=38.72263#map=18/9.05314/38.72263
 - **Menen, Yekatit 12 School** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05030&mlon=38.75937#map=18/9.05030/38.75937
 - **Meraf School** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06763&mlon=38.71658#map=18/9.06763/38.71658
 - **Regina Familiy Center** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06501&mlon=38.73466#map=18/9.06501/38.73466
-- **Rift Vally University** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04548&mlon=38.76457#map=18/9.04548/38.76457
+- **Rift Vally University** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04548&mlon=38.76458#map=18/9.04548/38.76458
 - **School of tomorrow (SOT) KG** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04958&mlon=38.72637#map=18/9.04958/38.72637
 - **Shero Meda Technical School** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05980&mlon=38.75981#map=18/9.05980/38.75981
 - **St. Marry Shool** (ቅድሰተ ማርያም ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05774&mlon=38.74237#map=18/9.05774/38.74237
-- **St.Paul's Hospital Millennium Medical College** (የቅዱስ ጳውሎስ ሆስፒታል ሚሊኒየም ሜዲካል ኮሌጅ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · tel +251 11 275 0125 · https://sphmmc.edu.et · map https://www.openstreetmap.org/?mlat=9.04891&mlon=38.72857#map=18/9.04891/38.72857
+- **St.Paul's Hospital Millennium Medical College** (የቅዱስ ጳውሎስ ሆስፒታል ሚሊኒየም ሜዲካል ኮሌጅ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · tel +251 11 275 0125 · https://sphmmc.edu.et · map https://www.openstreetmap.org/?mlat=9.04893&mlon=38.72858#map=18/9.04893/38.72858
 - **Teferi Mekonen college** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05114&mlon=38.76518#map=18/9.05114/38.76518
 - **የካቲት 12 መሰናዶ** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05024&mlon=38.75943#map=18/9.05024/38.75943
 
-## Lideta sub-city · ልደታ ክፍለ ከተማ — 26
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 29
 
 - **Abader** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02821&mlon=38.74837#map=18/9.02821/38.74837
-- **Alem Maya Primary School** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02494&mlon=38.74227#map=18/9.02494/38.74227
+- **Africa union secondary school** (አፍሪካ ህብረት 2ኛ ደረጃ ት/ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00506&mlon=38.73689#map=18/9.00506/38.73689
+- **Alem Maya Primary School** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02494&mlon=38.74226#map=18/9.02494/38.74226
 - **Bethel Medical College** (ቤተል ሜዲካል ኮሌጅ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01439&mlon=38.73073#map=18/9.01439/38.73073
 - **Chair of Housing** · Dejazmach Balcha Aba Nefso Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01276&mlon=38.72981#map=18/9.01276/38.72981
 - **Dej. Balcha Abanefso Comprehensive Secondary And Preparatory School** (ደጃ.ባልቻ አባነፍሶ አጠቃላይ ሁለተኛ እና መሰናዶ ትምህርት ቤት) · Bekele Weya Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01363&mlon=38.73252#map=18/9.01363/38.73252
-- **Dejazmach Balcha Abanefso secondary and preparatory school** (ደጃዝማች ባልቻ አባነፍሶ ሁለተኛ ደረጃና መሰናዶ ትምህርት ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01371&mlon=38.73261#map=18/9.01371/38.73261
-- **Frehiywot primary school** (ፍሬህይወት የመጀመሪያ ደረጃ ት/ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00525&mlon=38.74017#map=18/9.00525/38.74017
+- **Dejazmach Balcha Abanefso secondary and preparatory school** (ደጃዝማች ባልቻ አባነፍሶ ሁለተኛ ደረጃና መሰናዶ ትምህርት ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01371&mlon=38.73252#map=18/9.01371/38.73252
+- **Ethiopian Institute of Architecture , Building Construction and City Development** (በአዲስ አበባ ዩኒቨርሲቲ የህንፃ ኮሌጅ) · run by Addis Ababa University · Chad Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 276 7605 · http://www.eiabc.edu.et · map https://www.openstreetmap.org/?mlat=9.01288&mlon=38.73030#map=18/9.01288/38.73030
+- **Frehiywot primary school** (ፍሬህይወት የመጀመሪያ ደረጃ ት/ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00524&mlon=38.74018#map=18/9.00524/38.74018
 - **Geja Kale Hiwot Elementary School** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02199&mlon=38.73799#map=18/9.02199/38.73799
-- **Geja Kale Hiwot** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02191&mlon=38.73790#map=18/9.02191/38.73790
+- **Geja Kale Hiwot** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02190&mlon=38.73791#map=18/9.02190/38.73791
 - **Hibret Machin Tools Enginering Complex** (ሕብር) · run by government · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00646&mlon=38.74196#map=18/9.00646/38.74196
 - **Intellectual Schools** · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 839 1598 · map https://www.openstreetmap.org/?mlat=8.99601&mlon=38.73653#map=18/8.99601/38.73653
-- **Karamara Primary Public School** (ካራማራ የመጀመሪያ ደረጃ ት/ቤት) · Bekele Weya Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02035&mlon=38.73466#map=18/9.02035/38.73466
-- **Lideta Manufacturing College** (ልደታ ማኑፋክቸሪንግ ኮሌጅ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 276 3713 · https://lmc.edu.et/ · map https://www.openstreetmap.org/?mlat=9.01712&mlon=38.72796#map=18/9.01712/38.72796
+- **Karamara Primary Public School** (ካራማራ የመጀመሪያ ደረጃ ት/ቤት) · Bekele Weya Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02043&mlon=38.73465#map=18/9.02043/38.73465
+- **Lideta Manufacturing College** (ልደታ ማኑፋክቸሪንግ ኮሌጅ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 276 3713 · https://lmc.edu.et/ · map https://www.openstreetmap.org/?mlat=9.01710&mlon=38.72787#map=18/9.01710/38.72787
 - **Metebaber Primary School** (መተባበር የመጀመሪያ ደረጃ ትምህርት ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02339&mlon=38.72948#map=18/9.02339/38.72948
 - **New Bright Academy** (ኒው ብራይት አካዳሚ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02000&mlon=38.72994#map=18/9.02000/38.72994
 - **omedla school** (ኦሜድላ ትምህርት ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02286&mlon=38.73116#map=18/9.02286/38.73116
-- **School of Americana** (ስኩል ኦፍ አሜሪካና) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01339&mlon=38.74039#map=18/9.01339/38.74039
+- **School of Americana** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01447&mlon=38.73398#map=18/9.01447/38.73398
+- **School of Americana** (ስኩል ኦፍ አሜሪካና) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01339&mlon=38.74040#map=18/9.01339/38.74040
 - **St Mary College GRE Testing** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00836&mlon=38.74249#map=18/9.00836/38.74249
-- **St. George Primary & Secondary School** (ቅዱስ ጊዮርጊስ የመጀመሪያና ሁለተኛ ደረጃ ት/ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 515 2944 · map https://www.openstreetmap.org/?mlat=9.01304&mlon=38.73936#map=18/9.01304/38.73936
-- **St. Lideta Health Science College** (ቅድስት ልደታ ጤና ሳይንስ ኮሌጅ) · Chad Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01083&mlon=38.73731#map=18/9.01083/38.73731
-- **St. Mary's University College** (ቅድስት ማሪያም ዩኒቨርሲቲ ኮሌጅ) · run by private · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 553 8001 · map https://www.openstreetmap.org/?mlat=9.01333&mlon=38.74706#map=18/9.01333/38.74706
-- **Tegbareed College ተግባረ ዕድ** (አዲስ አበባ ተግባረ ዕድ) · run by government · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01133&mlon=38.74369#map=18/9.01133/38.74369
-- **Tesfa kokeb Primery School** (ተስፋ ኮከብ የመጀመሪያ ደረጃ ት/ቤት) · Bekele Weya Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 550 3950 · map https://www.openstreetmap.org/?mlat=9.01465&mlon=38.73508#map=18/9.01465/38.73508
+- **St. George Primary & Secondary School** (ቅዱስ ጊዮርጊስ የመጀመሪያና ሁለተኛ ደረጃ ት/ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 515 2944 · map https://www.openstreetmap.org/?mlat=9.01305&mlon=38.73937#map=18/9.01305/38.73937
+- **St. Lideta Health Science College** (ቅድስት ልደታ ጤና ሳይንስ ኮሌጅ) · Chad Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01087&mlon=38.73732#map=18/9.01087/38.73732
+- **St. Mary's University College** (ቅድስት ማሪያም ዩኒቨርሲቲ ኮሌጅ) · run by private · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 553 8001 · map https://www.openstreetmap.org/?mlat=9.01331&mlon=38.74702#map=18/9.01331/38.74702
+- **Tegbareed College ተግባረ ዕድ** (አዲስ አበባ ተግባረ ዕድ) · run by government · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01131&mlon=38.74370#map=18/9.01131/38.74370
+- **Tesfa kokeb Primery School** (ተስፋ ኮከብ የመጀመሪያ ደረጃ ት/ቤት) · Bekele Weya Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 550 3950 · map https://www.openstreetmap.org/?mlat=9.01466&mlon=38.73505#map=18/9.01466/38.73505
 - **Unity school** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01376&mlon=38.71841#map=18/9.01376/38.71841
 - **unity university** (ዩኒቲ ዩኒቨርሲቲ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · https://uu.edu.et/ · map https://www.openstreetmap.org/?mlat=9.01361&mlon=38.71616#map=18/9.01361/38.71616
 - **ሂልቶፕስ አካዳሚ Hilltops Academy** · LD_02_0248 St., Lideta sub-city (ልደታ ክፍለ ከተማ) · hours Mo-Fr 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.01987&mlon=38.71799#map=18/9.01987/38.71799
@@ -245,9 +248,8 @@ count: "385"
 - **ACIPH** · Road 6, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02857&mlon=38.87718#map=18/9.02857/38.87718
 - **Addis college** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02470&mlon=38.78880#map=18/9.02470/38.78880
 - **Admas** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01849&mlon=38.79695#map=18/9.01849/38.79695
-- **Berhane Guzo Kindergarten and Primary School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01925&mlon=38.77885#map=18/9.01925/38.77885
-- **Birhane Guzo Kindergarten and Primary School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01904&mlon=38.77888#map=18/9.01904/38.77888
-- **Civil Service University College** (ሲቪል ሰርቪስ ዩኒቨርስቲ ኮሌጅ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03066&mlon=38.82502#map=18/9.03066/38.82502
+- **Berhane Guzo Kindergarten and Primary School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01925&mlon=38.77893#map=18/9.01925/38.77893
+- **Civil Service University College** (ሲቪል ሰርቪስ ዩኒቨርስቲ ኮሌጅ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03075&mlon=38.82490#map=18/9.03075/38.82490
 - **Civil Service University ስቪል ሰርቪስ ዩኒቨርሲቲ** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02326&mlon=38.83305#map=18/9.02326/38.83305
 - **Dej. Wondirad Preparatory School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03377&mlon=38.83175#map=18/9.03377/38.83175
 - **Dejazmach Wondirad Preparatory School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 645 6197 · map https://www.openstreetmap.org/?mlat=9.03640&mlon=38.83247#map=18/9.03640/38.83247
@@ -257,16 +259,17 @@ count: "385"
 - **Esayam school** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04132&mlon=38.85208#map=18/9.04132/38.85208
 - **Ethiopian Civil Service College** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02217&mlon=38.83443#map=18/9.02217/38.83443
 - **Evo Fashion Design Academy** · run by Evo · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 862 8823 · map https://www.openstreetmap.org/?mlat=9.02133&mlon=38.78651#map=18/9.02133/38.78651
+- **Fairway School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05754&mlon=38.87494#map=18/9.05754/38.87494
 - **Ferensay Legaseyon Technical and Vocational Institute** (ፈረንሳይ ለጋሲዮን ቴክኒክና ሙያ ማሰልጠኛ ተቋም) · run by Government · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05919&mlon=38.77373#map=18/9.05919/38.77373
 - **Flipper International School** (ፍሊፐር አለምአቀፍ ትምህርት ቤት) · D.A.R. Sahara Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.flipperschool.com/ · hours Mo-Fr 08:00-15:30 · map https://www.openstreetmap.org/?mlat=9.02105&mlon=38.77202#map=18/9.02105/38.77202
-- **German Embassy School / Deutsche Schule Addis Abeba** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.dbsaa.de/ · map https://www.openstreetmap.org/?mlat=9.02722&mlon=38.77936#map=18/9.02722/38.77936
+- **German Embassy School / Deutsche Schule Addis Abeba** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.dbsaa.de/ · map https://www.openstreetmap.org/?mlat=9.02723&mlon=38.77934#map=18/9.02723/38.77934
 - **German embassy school** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02727&mlon=38.77934#map=18/9.02727/38.77934
 - **Gibson School Systems** (ጊብሰን የትምህርት ስርዓቶች) · YK_13_0605 St., Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02185&mlon=38.83629#map=18/9.02185/38.83629
-- **Higher 12** (ከፍተኛ 12) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05687&mlon=38.77837#map=18/9.05687/38.77837
+- **Higher 12** (ከፍተኛ 12) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05688&mlon=38.77836#map=18/9.05688/38.77836
 - **Hillside School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02807&mlon=38.83274#map=18/9.02807/38.83274
-- **Intellectual Schools** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06145&mlon=38.78406#map=18/9.06145/38.78406
+- **Intellectual Schools** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06145&mlon=38.78409#map=18/9.06145/38.78409
 - **Kebena Adventist School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03829&mlon=38.77688#map=18/9.03829/38.77688
-- **Kokebe Tsibah** (ኮከበ ጽባህ ት/ቤት) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03579&mlon=38.78116#map=18/9.03579/38.78116
+- **Kokebe Tsibah** (ኮከበ ጽባህ ት/ቤት) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03585&mlon=38.78107#map=18/9.03585/38.78107
 - **Kotebe College of Teacher's Education** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03876&mlon=38.83847#map=18/9.03876/38.83847
 - **Kotebe Metropolitan University** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03821&mlon=38.83747#map=18/9.03821/38.83747
 - **Kotebe University College** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03738&mlon=38.83794#map=18/9.03738/38.83794
@@ -274,7 +277,7 @@ count: "385"
 - **Leilt Zenebwerk School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02060&mlon=38.77287#map=18/9.02060/38.77287
 - **Magic Carpet School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02315&mlon=38.79044#map=18/9.02315/38.79044
 - **Misraq Technical and Vocational College** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02452&mlon=38.78489#map=18/9.02452/38.78489
-- **Misraq Technical and Vocational College** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02461&mlon=38.78460#map=18/9.02461/38.78460
+- **Misraq Technical and Vocational College** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02463&mlon=38.78459#map=18/9.02463/38.78459
 - **National Aviation College** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01787&mlon=38.78863#map=18/9.01787/38.78863
 - **Rift Valley University College** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02351&mlon=38.79909#map=18/9.02351/38.79909
 - **School Of Tomorrow Cmc Branch** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02123&mlon=38.85705#map=18/9.02123/38.85705
@@ -282,73 +285,74 @@ count: "385"
 - **Silicon Valley College** (ሲልከን ቫሊ ኮሌጅ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-20:30 · map https://www.openstreetmap.org/?mlat=9.02150&mlon=38.80243#map=18/9.02150/38.80243
 - **Swedish community school** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02019&mlon=38.77337#map=18/9.02019/38.77337
 - **Universal university college** · Togo Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02064&mlon=38.78750#map=18/9.02064/38.78750
-- **Yared Music School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04346&mlon=38.76440#map=18/9.04346/38.76440
+- **Yared Music School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04351&mlon=38.76440#map=18/9.04351/38.76440
 - **Yedget Chora High School** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03280&mlon=38.87859#map=18/9.03280/38.87859
 - **Yeka Sub City Administration Werda 06** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02741&mlon=38.77773#map=18/9.02741/38.77773
-- **ተስፋ ብርሃን 2ኛ ደረጃ ት/ቤት** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://tesfabirhans.sims.addislearning.edu.et/ · map https://www.openstreetmap.org/?mlat=9.02161&mlon=38.79526#map=18/9.02161/38.79526
+- **ተስፋ ብርሃን 2ኛ ደረጃ ት/ቤት** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://tesfabirhans.sims.addislearning.edu.et/ · map https://www.openstreetmap.org/?mlat=9.02161&mlon=38.79527#map=18/9.02161/38.79527
 
-## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 67
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 68
 
 - **Abadir School** (አባድር ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98582&mlon=38.73940#map=18/8.98582/38.73940
-- **Abay Primary School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95550&mlon=38.71004#map=18/8.95550/38.71004
+- **Abay Primary School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95549&mlon=38.71005#map=18/8.95549/38.71005
 - **Abune Gorgorios School** (አቡነ ጎርጎርዮስ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95052&mlon=38.71566#map=18/8.95052/38.71566
 - **Addis Ababa science and technology university** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98209&mlon=38.74801#map=18/8.98209/38.74801
 - **Admas University College (mekanisa branch )** · Ring Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96669&mlon=38.72505#map=18/8.96669/38.72505
-- **Agaziyan Primary School** (አግአዚያን የመጀመርያ ደረጃ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 442 8051 · map https://www.openstreetmap.org/?mlat=8.97582&mlon=38.76117#map=18/8.97582/38.76117
-- **Alpha Blen School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96785&mlon=38.72276#map=18/8.96785/38.72276
+- **Agaziyan Primary School** (አግአዚያን የመጀመርያ ደረጃ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 442 8051 · map https://www.openstreetmap.org/?mlat=8.97584&mlon=38.76115#map=18/8.97584/38.76115
+- **Alpha Blen School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96784&mlon=38.72275#map=18/8.96784/38.72275
 - **B.T.D. Educational Acadamy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97766&mlon=38.76113#map=18/8.97766/38.76113
 - **Bizrate Gebriel Gofa** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96883&mlon=38.74956#map=18/8.96883/38.74956
-- **Bosco Children 2** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96112&mlon=38.71741#map=18/8.96112/38.71741
-- **Bosco Children** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.amicidelsidamo.org/ · map https://www.openstreetmap.org/?mlat=8.97256&mlon=38.72293#map=18/8.97256/38.72293
+- **Bosco Children 2** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96117&mlon=38.71747#map=18/8.96117/38.71747
+- **Bosco Children** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.amicidelsidamo.org/ · map https://www.openstreetmap.org/?mlat=8.97261&mlon=38.72300#map=18/8.97261/38.72300
 - **Cordova Academy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95541&mlon=38.69179#map=18/8.95541/38.69179
 - **Cordova Academy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98113&mlon=38.74717#map=18/8.98113/38.74717
 - **Don Bosco Catholic School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97339&mlon=38.72291#map=18/8.97339/38.72291
 - **Dove Academy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 655 6598 · map https://www.openstreetmap.org/?mlat=8.97358&mlon=38.74382#map=18/8.97358/38.74382
-- **Dream International Academy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95882&mlon=38.71014#map=18/8.95882/38.71014
+- **Dream International Academy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95882&mlon=38.71013#map=18/8.95882/38.71013
 - **El-Bethel School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95775&mlon=38.77456#map=18/8.95775/38.77456
 - **Engineering Solution Training Center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95429&mlon=38.76181#map=18/8.95429/38.76181
+- **Ethiopian Graduate School of Theology** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://egst.edu.et · map https://www.openstreetmap.org/?mlat=8.99163&mlon=38.73875#map=18/8.99163/38.73875
 - **Fitawirari Lakedgh** (ፊታውራሪ ላቀ እድገህ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97821&mlon=38.75399#map=18/8.97821/38.75399
 - **Frehiwot Secondary School (no.2)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96552&mlon=38.76510#map=18/8.96552/38.76510
 - **Gibson lafto branch** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94328&mlon=38.74936#map=18/8.94328/38.74936
 - **Gibson Youth Academy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97326&mlon=38.72845#map=18/8.97326/38.72845
-- **Gibson Youth Academy** · run by Gibson School Systems · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98479&mlon=38.73786#map=18/8.98479/38.73786
+- **Gibson Youth Academy** · run by Gibson School Systems · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98478&mlon=38.73790#map=18/8.98478/38.73790
 - **Gibson Youth Academy** (ጊብሰን ዩዝ አካዳሚ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94376&mlon=38.74943#map=18/8.94376/38.74943
-- **Ginbot 20 Senior Secondary School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94561&mlon=38.75345#map=18/8.94561/38.75345
+- **Ginbot 20 Senior Secondary School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94570&mlon=38.75335#map=18/8.94570/38.75335
 - **Gybson youth academy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97341&mlon=38.72836#map=18/8.97341/38.72836
 - **Hidase primary school** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93642&mlon=38.72423#map=18/8.93642/38.72423
 - **Higher 23 Preparatory School** · South Africa Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99377&mlon=38.72702#map=18/8.99377/38.72702
 - **Hope University College** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95196&mlon=38.71224#map=18/8.95196/38.71224
 - **ICSAddis** · S021 South Africa Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99704&mlon=38.72879#map=18/8.99704/38.72879
-- **International Community School** (የአለም አቀፍ ማህበረስብ) · P.O. 70282, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99656&mlon=38.72782#map=18/8.99656/38.72782
+- **International Community School** (የአለም አቀፍ ማህበረስብ) · P.O. 70282, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99648&mlon=38.72767#map=18/8.99648/38.72767
 - **Kids First Academy Kindergarten** (ኪድስ ፈርስት አካዳሚ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 371 1509 · hours Mo-Fr 08:00-15:00 · map https://www.openstreetmap.org/?mlat=8.99566&mlon=38.73403#map=18/8.99566/38.73403
-- **Lafto Primary School** (ላፍቶ የመጀመሪያ ደረጃ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95604&mlon=38.74640#map=18/8.95604/38.74640
+- **Lafto Primary School** (ላፍቶ የመጀመሪያ ደረጃ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95595&mlon=38.74639#map=18/8.95595/38.74639
 - **Lebu Bright Academy** · run by Alebel · Lebu Mebrathayil, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94879&mlon=38.73146#map=18/8.94879/38.73146
 - **Mark youth Academy** (ማርክ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95829&mlon=38.71283#map=18/8.95829/38.71283
-- **Megabit 28 Primary School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94494&mlon=38.75391#map=18/8.94494/38.75391
+- **Megabit 28 Primary School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94494&mlon=38.75395#map=18/8.94494/38.75395
 - **Mekane-Yesus Seminary** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97007&mlon=38.73236#map=18/8.97007/38.73236
 - **Mekanisa Deaf School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98225&mlon=38.72952#map=18/8.98225/38.72952
 - **Mekdela Elementary School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99532&mlon=38.72588#map=18/8.99532/38.72588
 - **Mount-olive Academy** (ማዉንት ኦሊቭ አካዳሚ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96987&mlon=38.73061#map=18/8.96987/38.73061
-- **Musse Primary Public School** (ሙሴ የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 442 4694 · map https://www.openstreetmap.org/?mlat=8.97302&mlon=38.76150#map=18/8.97302/38.76150
+- **Musse Primary Public School** (ሙሴ የመጀመሪያ ደረጃ የህዝብ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 442 4694 · map https://www.openstreetmap.org/?mlat=8.97301&mlon=38.76150#map=18/8.97301/38.76150
 - **Netsanet Chora** (ነፃነት ጮራ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97865&mlon=38.74987#map=18/8.97865/38.74987
 - **New English Private School (NEPS)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98950&mlon=38.72226#map=18/8.98950/38.72226
 - **Neway Challenge Academy** (ንዋይ ቻሌንጅ አካዳሚ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Fr 07:30-17:30; Sa 08:30-12:30 · map https://www.openstreetmap.org/?mlat=8.94991&mlon=38.73174#map=18/8.94991/38.73174
-- **Nifas Silk** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97123&mlon=38.75920#map=18/8.97123/38.75920
+- **Nifas Silk** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97129&mlon=38.75921#map=18/8.97129/38.75921
 - **Omega primary and secondary school** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99853&mlon=38.71928#map=18/8.99853/38.71928
 - **Principles health and business college** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95303&mlon=38.69558#map=18/8.95303/38.69558
 - **Queens College** (ኩዊንስ ኮሌጅ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94613&mlon=38.73463#map=18/8.94613/38.73463
 - **Red Cross Society Traning Center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95806&mlon=38.76034#map=18/8.95806/38.76034
 - **Rift Vally University** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96926&mlon=38.72100#map=18/8.96926/38.72100
-- **Rift Vally University** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97939&mlon=38.76038#map=18/8.97939/38.76038
+- **Rift Vally University** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97936&mlon=38.76037#map=18/8.97936/38.76037
 - **Sanford School** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95032&mlon=38.72533#map=18/8.95032/38.72533
 - **School of Nations** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99082&mlon=38.74035#map=18/8.99082/38.74035
 - **School of Redemption** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94989&mlon=38.71884#map=18/8.94989/38.71884
 - **School of Tomorrow (Bisrat Branch)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99306&mlon=38.72910#map=18/8.99306/38.72910
 - **School of Tomorrow (Gofa)** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96559&mlon=38.75163#map=18/8.96559/38.75163
-- **Schoolof Indiana** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96180&mlon=38.71325#map=18/8.96180/38.71325
-- **Sebiste Negasi Primary School** (ስብስቴ ነጋሲ የመጀመሪያ ደረጃ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97139&mlon=38.76276#map=18/8.97139/38.76276
+- **Schoolof Indiana** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96181&mlon=38.71326#map=18/8.96181/38.71326
+- **Sebiste Negasi Primary School** (ስብስቴ ነጋሲ የመጀመሪያ ደረጃ ት/ቤት) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97125&mlon=38.76270#map=18/8.97125/38.76270
 - **Sene 9 public school** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96327&mlon=38.75862#map=18/8.96327/38.75862
-- **South West Acadamy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96234&mlon=38.71226#map=18/8.96234/38.71226
+- **South West Acadamy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96237&mlon=38.71223#map=18/8.96237/38.71223
 - **Southwest Academy lafto-58 Branch** (ደቡብ ምዕራብ ትምህርት ቤት ላፍቶ ፶፰ ቅርንጫፍ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94472&mlon=38.75137#map=18/8.94472/38.75137
 - **Southwest Academy** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94694&mlon=38.74318#map=18/8.94694/38.74318
 - **SouthWest Academy** (ሳውዝ ዌስት አካዳሚ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 19:00-18:00 · map https://www.openstreetmap.org/?mlat=8.95113&mlon=38.74046#map=18/8.95113/38.74046
@@ -363,7 +367,7 @@ count: "385"
 - **Aastu registeral** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88904&mlon=38.80961#map=18/8.88904/38.80961
 - **Aastu registerar** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88494&mlon=38.80978#map=18/8.88494/38.80978
 - **AASTU University** (አዲስ አበባ ሣይንስና ቴክኖሎጂ ዩንቨርስቲ) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88359&mlon=38.81059#map=18/8.88359/38.81059
-- **Addis Ababa Science and Technology University** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88899&mlon=38.80913#map=18/8.88899/38.80913
+- **Addis Ababa Science and Technology University** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88865&mlon=38.80912#map=18/8.88865/38.80912
 - **Admas University And College Akaki Kality Branch** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93044&mlon=38.76764#map=18/8.93044/38.76764
 - **Admas University College Kality Campus** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92988&mlon=38.76793#map=18/8.92988/38.76793
 - **Aygoda Nursery School** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95396&mlon=38.76586#map=18/8.95396/38.76586
@@ -382,33 +386,34 @@ count: "385"
 - **Real Vision Academy** (ሪል ቪዥን አካዳሚ) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87306&mlon=38.76822#map=18/8.87306/38.76822
 - **Rift Valley University** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90865&mlon=38.76557#map=18/8.90865/38.76557
 - **SCHOOL OF AYGODA** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95453&mlon=38.76488#map=18/8.95453/38.76488
-- **School Of Indiana** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89700&mlon=38.77234#map=18/8.89700/38.77234
+- **School Of Indiana** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89702&mlon=38.77241#map=18/8.89702/38.77241
 - **School Of Indiana** (ስኩል ኦፍ ኢንዲያና) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86853&mlon=38.80473#map=18/8.86853/38.80473
 - **Seattle academy 9-12 branch** · run by seattle academy members · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · tel +251 11 434 7275 · hours Mo-Sa 02:00-23:30 · map https://www.openstreetmap.org/?mlat=8.89678&mlon=38.77545#map=18/8.89678/38.77545
 - **Seattle academy** · run by plc · Total condominum, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours Mo-Sa 02:30-12:30 · map https://www.openstreetmap.org/?mlat=8.89700&mlon=38.77552#map=18/8.89700/38.77552
-- **University of South Africa (UNISA) - Regional Learning Center** (ደቡብ አፍሪካ ዩኒቨርስቲ - ክልላዊ መማሪያ ማዕከል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85798&mlon=38.80531#map=18/8.85798/38.80531
+- **University of South Africa (UNISA) - Regional Learning Center** (ደቡብ አፍሪካ ዩኒቨርስቲ - ክልላዊ መማሪያ ማዕከል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85788&mlon=38.80521#map=18/8.85788/38.80521
 - **Yenegew Sew TVET Institute** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86548&mlon=38.78657#map=18/8.86548/38.78657
 - **አቤኔዘር አካዳሚ Abenezer academy KG and Primary school** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87864&mlon=38.76677#map=18/8.87864/38.76677
 
-## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 29
+## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 30
 
 - **Abune Basilouse primary School** (አብነ ባስልዮስ የመጀመሪያ ደረጃ ት/ቤት) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97731&mlon=38.70699#map=18/8.97731/38.70699
 - **Al afia school** (አል አፍያ ትምሕርት ቤት) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours Mo-Fr 00:00-24:00; Sa 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.03282&mlon=38.69492#map=18/9.03282/38.69492
 - **Alfa** (አልፋ ትምህርት ቤት) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00526&mlon=38.67321#map=18/9.00526/38.67321
 - **Asko Home** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06817&mlon=38.69494#map=18/9.06817/38.69494
 - **Asko Home** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06837&mlon=38.69487#map=18/9.06837/38.69487
-- **Asko secondary school** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05485&mlon=38.69855#map=18/9.05485/38.69855
+- **Asko secondary school** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05484&mlon=38.69846#map=18/9.05484/38.69846
 - **Ayer Tena SSS** (አየር ጤና ከ2ተኛ ደረጃ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98361&mlon=38.69477#map=18/8.98361/38.69477
 - **Berhan Ber** (ብርሃን በር) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04109&mlon=38.71561#map=18/9.04109/38.71561
 - **Beteseb Academy** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00479&mlon=38.70054#map=18/9.00479/38.70054
+- **Bethel Primary and Middle School** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00532&mlon=38.67745#map=18/9.00532/38.67745
 - **Bingham Academy** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04106&mlon=38.71657#map=18/9.04106/38.71657
 - **Ewket Fana** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00327&mlon=38.67625#map=18/9.00327/38.67625
 - **Ewuket Wogene primary school** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03572&mlon=38.71407#map=18/9.03572/38.71407
 - **FetAwerari HabeteGiorgis** · run by Governmental · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06257&mlon=38.69468#map=18/9.06257/38.69468
-- **G.Winget Technical College** (ጀነራል ዊንጌት የቴክኒክና ሙያ ኮሌጅ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05188&mlon=38.71362#map=18/9.05188/38.71362
+- **G.Winget Technical College** (ጀነራል ዊንጌት የቴክኒክና ሙያ ኮሌጅ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05159&mlon=38.71360#map=18/9.05159/38.71360
 - **Gibson kolfe branch** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04794&mlon=38.71131#map=18/9.04794/38.71131
 - **Hands in Hands at Hiwot Berhan church** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99530&mlon=38.70694#map=18/8.99530/38.70694
-- **Hope Enterprise College** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98438&mlon=38.69865#map=18/8.98438/38.69865
+- **Hope Enterprise College** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98443&mlon=38.69862#map=18/8.98443/38.69862
 - **Japan primary school** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97683&mlon=38.67395#map=18/8.97683/38.67395
 - **Jemmo primary school** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99832&mlon=38.68103#map=18/8.99832/38.68103
 - **Kolfe Secondary school** (ኮልፌ ሁለተኛ ደረጃ ት/ቤት) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · tel 2016 · map https://www.openstreetmap.org/?mlat=9.03421&mlon=38.70470#map=18/9.03421/38.70470
@@ -420,10 +425,4 @@ count: "385"
 - **Repi secondary school** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97751&mlon=38.67601#map=18/8.97751/38.67601
 - **Stairway school** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95839&mlon=38.68968#map=18/8.95839/38.68968
 - **tigat primary school** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98025&mlon=38.69948#map=18/8.98025/38.69948
-- **Yandalem Academy** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95714&mlon=38.68946#map=18/8.95714/38.68946
-
-## Addis Ababa (sub-city not given in OpenStreetMap) — 3
-
-- **Africa union secondary school** · Addis Ababa · map https://www.openstreetmap.org/?mlat=9.00518&mlon=38.73691#map=18/9.00518/38.73691
-- **Ethiopian Institute of Architecture , Building Construction and City Development** (በአዲስ አበባ ዩኒቨርሲቲ የህንፃ ኮሌጅ) · run by Addis Ababa University · Chad Street, Addis Ababa · tel +251 11 276 7605 · http://www.eiabc.edu.et · map https://www.openstreetmap.org/?mlat=9.01321&mlon=38.73025#map=18/9.01321/38.73025
-- **በአዲስ አበባ ዩኒቨርሲቲ የተፈጥሮ ሳይንስ ት/ክፍል** · Addis Ababa · https://www.aau.edu.et/ · map https://www.openstreetmap.org/?mlat=9.03384&mlon=38.76354#map=18/9.03384/38.76354
+- **Yandalem Academy** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95713&mlon=38.68946#map=18/8.95713/38.68946

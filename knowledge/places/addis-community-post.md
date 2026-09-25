@@ -3,12 +3,12 @@ title: "Community centres and post offices in Addis Ababa (የማኅበረሰብ
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-05-31"
-count: "97"
+fetched: "2026-09-24"
+count: "98"
 ---
 # Community centres and post offices in Addis Ababa · በአዲስ አበባ ያሉ የማኅበረሰብ ማዕከላትና ፖስታ ቤቶች
 
-97 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+98 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 4
 
@@ -60,7 +60,7 @@ count: "97"
 - **Addis ketema wereda 2 youth center** (አ/ከ/ክ/ከ ወረዳ 2 ወጣቶች ማዕከል) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02828&mlon=38.72957#map=18/9.02828/38.72957
 - **Libese safiwochee** (ልብስ ሰፊ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03182&mlon=38.73754#map=18/9.03182/38.73754
 - **Post** (ፖስታ ቤት) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03701&mlon=38.73181#map=18/9.03701/38.73181
-- **woreda 2 youth center** · 3 Congo Street, Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02831&mlon=38.72956#map=18/9.02831/38.72956
+- **woreda 2 youth center** · 3 Congo Street, Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02830&mlon=38.72956#map=18/9.02830/38.72956
 
 ## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 7
 
@@ -82,13 +82,14 @@ count: "97"
 - **Together! Ethiopian Residents Charity Organization** · Kechenie to Semien, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · tel +251 11 812 1504 · http://www.together-et.org · map https://www.openstreetmap.org/?mlat=9.05622&mlon=38.74322#map=18/9.05622/38.74322
 - **ስምጥ መግቢያ** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07648&mlon=38.75837#map=18/9.07648/38.75837
 
-## Lideta sub-city · ልደታ ክፍለ ከተማ — 5
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 6
 
 - **Electric Club** (መብራት ሃይል ክበብ) · Roosevelt Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00913&mlon=38.74325#map=18/9.00913/38.74325
 - **EMS Ethiopia** (ኢኤምኤስ ኢትዮጵያ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02032&mlon=38.75267#map=18/9.02032/38.75267
 - **Ethiopian Postal Service Authority Lideta Branch** (የኢትዮዽያ ፖስታ አገልግሎት ባለስልጣን) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01655&mlon=38.73794#map=18/9.01655/38.73794
-- **Ethiopian Postal Service Enterprise (Main Post Office) የኢትዮጵያ ፖስታ አገልግሎት ድርጅት** (የኢትዮጵያ ፖስታ አገልግሎት ድርጅት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 551 5011 · map https://www.openstreetmap.org/?mlat=9.02032&mlon=38.75308#map=18/9.02032/38.75308
+- **Ethiopian Postal Service Enterprise (Main Post Office) የኢትዮጵያ ፖስታ አገልግሎት ድርጅት** (የኢትዮጵያ ፖስታ አገልግሎት ድርጅት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 551 5011 · map https://www.openstreetmap.org/?mlat=9.02033&mlon=38.75308#map=18/9.02033/38.75308
 - **HNL (Harari National League)** · Ring Road, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours Mo-Su 08:00-20:00 · map https://www.openstreetmap.org/?mlat=9.00374&mlon=38.71911#map=18/9.00374/38.71911
+- **Wedding Hall** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00245&mlon=38.73651#map=18/9.00245/38.73651
 
 ## Yeka sub-city · የካ ክፍለ ከተማ — 16
 
@@ -107,7 +108,7 @@ count: "97"
 - **Yeka Abado St. Arsema Church** (የካ አባዶ ቅድስት አርሴማ ቤተክርስቲያን) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06387&mlon=38.87792#map=18/9.06387/38.87792
 - **Yeka Abado** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06616&mlon=38.87727#map=18/9.06616/38.87727
 - **Yeka Abadu Condominium** · Fikre Mariam Aba Techan Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06274&mlon=38.87242#map=18/9.06274/38.87242
-- **Yeka Sub City Wereda 01 Youth Center** (የካ ክፍለ ከተማ ወረዳ 01 ወጣት ማዕከል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06541&mlon=38.77463#map=18/9.06541/38.77463
+- **Yeka Sub City Wereda 01 Youth Center** (የካ ክፍለ ከተማ ወረዳ 01 ወጣት ማዕከል) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06542&mlon=38.77464#map=18/9.06542/38.77464
 
 ## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 6
 

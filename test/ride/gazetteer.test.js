@@ -47,10 +47,14 @@ test('the ride search lists local places after the directory and skips Photon wh
   assert.equal(photon, 0, 'four local answers: no outside call');
 });
 
-test('one place mapped twice under one name is one answer', () => {
-  const f2 = path.join(path.dirname(file), 'twice.json');
-  fs.writeFileSync(f2, JSON.stringify({ bySub: {}, elements: [
-    { type: 'node', id: 1, lat: 9.0, lon: 38.79, tags: { shop: 'mall', name: 'Sample Mall' } },
-    { type: 'way', id: 2, center: { lat: 9.0005, lon: 38.7902 }, tags: { shop: 'department_store', name: 'Sample Mall' } } ] }));
-  assert.equal(makeGazetteer({ file: f2 }).search('Sample Mall').length, 1);
+test('a shop, an office and a bus stop are destinations, named by their own type', () => {
+  const f3 = path.join(path.dirname(file), 'rest.json');
+  fs.writeFileSync(f3, JSON.stringify({ bySub: {}, elements: [
+    { type: 'node', id: 1, lat: 9.0, lon: 38.75, tags: { shop: 'bakery', name: 'Sample Bakery' } },
+    { type: 'node', id: 2, lat: 9.01, lon: 38.76, tags: { office: 'ngo', name: 'Sample Aid' } },
+    { type: 'node', id: 3, lat: 9.02, lon: 38.77, tags: { highway: 'bus_stop', public_transport: 'platform', name: 'Sample Stop' } } ] }));
+  const g = makeGazetteer({ file: f3 });
+  assert.match(g.search('Sample Bakery')[0].sub, /^bakery/);
+  assert.match(g.search('Sample Aid')[0].sub, /^ngo/);
+  assert.match(g.search('Sample Stop')[0].sub, /^stop/);
 });

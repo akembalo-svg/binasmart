@@ -27,7 +27,20 @@ const KIND = [
   ['office', { government: 'government office', diplomatic: 'embassy' }],
   ['highway', { trunk: 'street', primary: 'street', secondary: 'street', tertiary: 'street', residential: 'street' }],
 ];
-const kindOf = t => { for (const [k, m] of KIND) if (t[k] && m[t[k]]) return m[t[k]]; return t.historic ? 'landmark' : null; };
+// The rest of the named map (25 September 2026, full Geofabrik extract): a bus stop, a bakery, a company, a named
+// building is a real destination too. The tag's own value names it ("car repair", "bakery").
+const TYPE_KEYS = ['shop', 'office', 'craft', 'healthcare', 'amenity', 'tourism', 'leisure', 'building'];
+// Street furniture has names in OSM too; nobody books a ride to a bench.
+const NOT_A_DESTINATION = /^(bench|waste_basket|waste_disposal|recycling|toilets|drinking_water|parking_space|parking_entrance|bicycle_parking|vending_machine|telephone|post_box|clock|shelter|grit_bin|fountain)$/;
+const kindOf = t => {
+  for (const [k, m] of KIND) if (t[k] && m[t[k]]) return m[t[k]];
+  if (t.historic) return 'landmark';
+  if (t.public_transport || t.highway === 'bus_stop' || t.amenity === 'taxi' || t.railway === 'light_rail' || t.railway === 'tram_stop') return t.amenity === 'taxi' ? 'taxi rank' : 'stop';
+  if (t.highway && /^(unclassified|living_street|service)$/.test(t.highway)) return 'street';
+  if (NOT_A_DESTINATION.test(t.amenity || '')) return null;
+  for (const k of TYPE_KEYS) if (t[k] && t[k] !== 'no') return t[k] === 'yes' ? (k === 'building' ? 'building' : k) : String(t[k]).replace(/_/g, ' ');
+  return null;
+};
 const norm = s => fold(String(s || '')).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 
 function makeGazetteer({ file = process.env.PLACES_GAZETTEER || '/root/storage/osm-addis-latest.json', now = Date.now } = {}) {
@@ -70,15 +83,9 @@ function makeGazetteer({ file = process.env.PLACES_GAZETTEER || '/root/storage/o
       for (const k of e.keys) { if (k === n) { r = 0; break; } if (k.startsWith(n)) r = Math.min(r, 1); else if (k.includes(n)) r = Math.min(r, 2); }
       if (r === 9) continue;
       const d = bias ? Math.hypot((e.lat - bias.lat) * 111, (e.lng - bias.lng) * 109.5) : 0;
-      scored.push({ e, s: r * 1000 + (e.kind === 'street' ? 500 : 0) + Math.min(d, 400) });
+      scored.push({ e, s: r * 1000 + (e.kind === 'street' ? 500 : e.kind === 'stop' || e.kind === 'taxi rank' ? 450 : 0) + Math.min(d, 400) });   // the area before its stops and streets
     }
-    // The same place is often mapped twice (a mall as a mall and as a store): one name within 300 m is one answer.
-    const picked = [];
-    for (const { e } of scored.sort((a, b) => a.s - b.s)) {
-      if (picked.some(p => p.label.toLowerCase() === e.label.toLowerCase() && Math.hypot((p.lat - e.lat) * 111, (p.lng - e.lng) * 109.5) < 0.3)) continue;
-      picked.push(e); if (picked.length >= limit) break;
-    }
-    return picked.map(e => ({
+    return scored.sort((a, b) => a.s - b.s).slice(0, limit).map(({ e }) => ({
       kind: 'place', label: e.label, labelAm: e.labelAm, sub: [e.kind, e.sub, 'Addis Ababa'].filter(Boolean).join(' · '), lat: e.lat, lng: e.lng }));
   }
   return { search, size: () => { load(); return entries.length; } };

@@ -1,0 +1,1419 @@
+---
+title: "Named buildings and apartments in Addis Ababa (ስም ያላቸው ሕንፃዎችና አፓርትመንቶች)"
+url: "https://www.openstreetmap.org/relation/1707699"
+lang: "en"
+source_name: "OpenStreetMap contributors (ODbL)"
+fetched: "2026-09-24"
+count: "1378"
+---
+# Named buildings and apartments in Addis Ababa · በአዲስ አበባ ያሉ ስም ያላቸው ሕንፃዎችና አፓርትመንቶች
+
+1378 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+
+## Arada sub-city · አራዳ ክፍለ ከተማ — 74
+
+- **4 kilo Condominium** · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03293&mlon=38.76020#map=18/9.03293/38.76020
+- **402 Girl's Dormitory** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03449&mlon=38.76394#map=18/9.03449/38.76394
+- **403 Boys Dormitory** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03463&mlon=38.76444#map=18/9.03463/38.76444
+- **5 kilo pension** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03717&mlon=38.76353#map=18/9.03717/38.76353
+- **AAU Student Canteen** (የተማሪዎች ካፌ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03475&mlon=38.76509#map=18/9.03475/38.76509
+- **Abadir BLVD** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03371&mlon=38.76304#map=18/9.03371/38.76304
+- **Abel rosa home correct** · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02585&mlon=38.77041#map=18/9.02585/38.77041
+- **Addis Ababa City Administrative Council Office** (የአዲስ አበባ ከተማ አስተዳደር ጽ/ቤት) · fire station · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03733&mlon=38.75263#map=18/9.03733/38.75263
+- **Addis Ababa Fire Stations Head Quarters | የአዲስ አበባ የዕሳትና ድንገተኛ አደጋዎች** (የአዲስ አበባ የዕሳትና ድንገተኛ አደጋዎች) · fire station · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03757&mlon=38.75321#map=18/9.03757/38.75321
+- **Addis Ababa Institute ofTechnology** · university · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04038&mlon=38.76327#map=18/9.04038/38.76327
+- **Admin\_Clinic** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03427&mlon=38.76361#map=18/9.03427/38.76361
+- **Afdera** · residential · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02318&mlon=38.75514#map=18/9.02318/38.75514
+- **Arada Building** · Cunningham Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03276&mlon=38.75245#map=18/9.03276/38.75245
+- **Arada Fire Station** (የአራዳ ክ/ከተማ የዕሳትና ድንገተኛ አደጋዎች) · fire station · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03769&mlon=38.75378#map=18/9.03769/38.75378
+- **Arada Manufacturing College** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03704&mlon=38.76948#map=18/9.03704/38.76948
+- **Arada subcity Wereda 10 Multi Purpose Youth Center** (በአራዳ ክ/ከተማ የወረዳ 10 የወጣቶች ማእከል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03511&mlon=38.75433#map=18/9.03511/38.75433
+- **Assayie Sister Home** (የአሳዬ እህት ቤት) · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03020&mlon=38.77400#map=18/9.03020/38.77400
+- **AY-Shashe BLDG** (አዩ ሻሼ ሕንፃ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02282&mlon=38.75179#map=18/9.02282/38.75179
+- **Ayu Shashe Building** · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02279&mlon=38.75179#map=18/9.02279/38.75179
+- **B-Complex(B1-B6)** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03381&mlon=38.76499#map=18/9.03381/38.76499
+- **Banko D' Roma** (ባንኮ ዲ ሮማ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03053&mlon=38.75168#map=18/9.03053/38.75168
+- **Berhanena Selam Printing College** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03419&mlon=38.76108#map=18/9.03419/38.76108
+- **Bet Rufael Building** (ቤተ ሩፋኤል ሕንፃ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03425&mlon=38.74915#map=18/9.03425/38.74915
+- **Blue Building** (ሰማያዊ ሕንፃ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03226&mlon=38.75464#map=18/9.03226/38.75464
+- **buil** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03484&mlon=38.76067#map=18/9.03484/38.76067
+- **Cafteria** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03481&mlon=38.76477#map=18/9.03481/38.76477
+- **Church of Saint George** (ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን) · ደጃ/ች በላይ ዘለቀ መንገድ, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03680&mlon=38.75134#map=18/9.03680/38.75134
+- **Country Tower** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03139&mlon=38.74993#map=18/9.03139/38.74993
+- **Dallol** · residential · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02326&mlon=38.75548#map=18/9.02326/38.75548
+- **Dept. of Computer Science** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03280&mlon=38.76434#map=18/9.03280/38.76434
+- **Eeyor Tower** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02619&mlon=38.75144#map=18/9.02619/38.75144
+- **Egg House** (እንቁላል ቤት) · heritage · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02528&mlon=38.76390#map=18/9.02528/38.76390
+- **Eliana Mall** (ኤሊያና የገብያ ማዕከል) · mall · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03029&mlon=38.75099#map=18/9.03029/38.75099
+- **Enati Building** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02994&mlon=38.75343#map=18/9.02994/38.75343
+- **Ertale A** · residential · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02309&mlon=38.75589#map=18/9.02309/38.75589
+- **Ertale B** · residential · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02337&mlon=38.75585#map=18/9.02337/38.75585
+- **Eshetu Mamo Commercial** (እሸቱ ማሞ ኮሜርሻል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02813&mlon=38.75184#map=18/9.02813/38.75184
+- **Etege Taitu Bitul's Quarter** (የእቴጌ ጣይቱ ብጡል እልፍኝ) · heritage · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02503&mlon=38.76405#map=18/9.02503/38.76405
+- **Ethiopian Electric Power Corpration** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03226&mlon=38.75402#map=18/9.03226/38.75402
+- **Ethiopian Heritage Authority** (የኢትዮጵያ ቅርስ ባለሥልጣን) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03839&mlon=38.76150#map=18/9.03839/38.76150
+- **Freshman Building** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03345&mlon=38.76421#map=18/9.03345/38.76421
+- **Fuad sadik land** (ፉአድ ሳዲቅ መሬት) · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03013&mlon=38.75941#map=18/9.03013/38.75941
+- **Graduate Digital Library** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03266&mlon=38.76570#map=18/9.03266/38.76570
+- **Hana’s home** · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04523&mlon=38.74923#map=18/9.04523/38.74923
+- **Haron Tower ሃሮን ታወር** (ሃሮን ታወር) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02890&mlon=38.75189#map=18/9.02890/38.75189
+- **house** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04023&mlon=38.76114#map=18/9.04023/38.76114
+- **Jolly Bar** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03338&mlon=38.76300#map=18/9.03338/38.76300
+- **Kelifa building** (ከሊፋ ሕንፃ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03391&mlon=38.74599#map=18/9.03391/38.74599
+- **mekonenoch kebebe** (መኮንኖች ክበብ) · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04800&mlon=38.73947#map=18/9.04800/38.73947
+- **Melka Tower** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02345&mlon=38.75159#map=18/9.02345/38.75159
+- **Men's Dormitory** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03441&mlon=38.76474#map=18/9.03441/38.76474
+- **Menelik Secondary School** (የምኒልክ ሁለተኛ ደረጃ ትምህርት ቤት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03522&mlon=38.76384#map=18/9.03522/38.76384
+- **Ministry of Defence's Waiting Room** (የጦር ሚኒስቴሩ መቆያ ክፍል) · heritage · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02495&mlon=38.76364#map=18/9.02495/38.76364
+- **Ministry of Finance & Economy** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04125&mlon=38.76134#map=18/9.04125/38.76134
+- **MK Business Center** (ኤም.ኬ. የንግድ ማዕከል) · commercial · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02844&mlon=38.75186#map=18/9.02844/38.75186
+- **Museum of the Holy Trinity Cathedral** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03039&mlon=38.76731#map=18/9.03039/38.76731
+- **National lottery** (ብሔራዊ ሎተሪ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03033&mlon=38.75474#map=18/9.03033/38.75474
+- **NB** · NB BUILDING · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04078&mlon=38.76399#map=18/9.04078/38.76399
+- **Nigat & her family** (ንጋት እና ቤተሰቦቿ ሕንፃ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03242&mlon=38.77462#map=18/9.03242/38.77462
+- **Old Geology Building** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03414&mlon=38.76420#map=18/9.03414/38.76420
+- **Oli Tour, ኦሊ ታወር** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02193&mlon=38.75564#map=18/9.02193/38.75564
+- **piassa kebele 10 condominium** (ፒያሳ ቀበሌ 10 ኮንደሚኒየም) · apartment · run by Adam · block 2 Dejazemach Jote Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03111&mlon=38.75579#map=18/9.03111/38.75579
+- **Roman Atsbeha Building** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03902&mlon=38.76299#map=18/9.03902/38.76299
+- **Russia Sciences and Culture Center የሩሲያ የሳይንስ እና ባህል ማዕከል** (የሩሲያ የሳይንስ እና ባህል ማዕከል) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03227&mlon=38.74962#map=18/9.03227/38.74962
+- **Saba men's dormitory** · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03599&mlon=38.76650#map=18/9.03599/38.76650
+- **taddes chekol** (ታደሰ ቸኮል building) · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04825&mlon=38.74120#map=18/9.04825/38.74120
+- **Teter Building** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03513&mlon=38.76284#map=18/9.03513/38.76284
+- **Throne House** (ዙፋን ቤት) · heritage · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02484&mlon=38.76330#map=18/9.02484/38.76330
+- **Top View Restaurant** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03188&mlon=38.77151#map=18/9.03188/38.77151
+- **Tulsi yoga centre** · commercial · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03214&mlon=38.77129#map=18/9.03214/38.77129
+- **Ye hale luya bet** · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04696&mlon=38.74721#map=18/9.04696/38.74721
+- **Yetwins Garage** · apartment · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03378&mlon=38.75033#map=18/9.03378/38.75033
+- **ZTE tower** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02227&mlon=38.75184#map=18/9.02227/38.75184
+- **የንዋያተ ቅድሳት ማኖሪያ** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02497&mlon=38.76570#map=18/9.02497/38.76570
+
+## Bole sub-city · ቦሌ ክፍለ ከተማ — 322
+
+- **"Menschen für Menschen" Foundation (MfM)** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96293&mlon=38.78832#map=18/8.96293/38.78832
+- **109-116** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98563&mlon=38.85670#map=18/8.98563/38.85670
+- **117-118-124-124** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98498&mlon=38.85561#map=18/8.98498/38.85561
+- **118** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98514&mlon=38.85581#map=18/8.98514/38.85581
+- **13-21** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98293&mlon=38.86173#map=18/8.98293/38.86173
+- **151-154** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98730&mlon=38.85811#map=18/8.98730/38.85811
+- **156** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98778&mlon=38.85873#map=18/8.98778/38.85873
+- **166-171** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98802&mlon=38.85750#map=18/8.98802/38.85750
+- **192-199** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98767&mlon=38.85480#map=18/8.98767/38.85480
+- **200-207** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98834&mlon=38.85463#map=18/8.98834/38.85463
+- **208-213** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98941&mlon=38.85508#map=18/8.98941/38.85508
+- **214-221** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98929&mlon=38.85417#map=18/8.98929/38.85417
+- **22-29** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98371&mlon=38.86191#map=18/8.98371/38.86191
+- **285-289** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99240&mlon=38.85990#map=18/8.99240/38.85990
+- **344** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99817&mlon=38.85856#map=18/8.99817/38.85856
+- **345** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99812&mlon=38.85821#map=18/8.99812/38.85821
+- **346** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99775&mlon=38.85816#map=18/8.99775/38.85816
+- **349** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99794&mlon=38.85777#map=18/8.99794/38.85777
+- **373** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99676&mlon=38.85752#map=18/8.99676/38.85752
+- **375** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99827&mlon=38.85774#map=18/8.99827/38.85774
+- **379** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00065&mlon=38.86083#map=18/9.00065/38.86083
+- **380** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00031&mlon=38.86099#map=18/9.00031/38.86099
+- **381** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00009&mlon=38.86111#map=18/9.00009/38.86111
+- **382** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99939&mlon=38.86153#map=18/8.99939/38.86153
+- **383** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99902&mlon=38.86147#map=18/8.99902/38.86147
+- **384** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99914&mlon=38.86177#map=18/8.99914/38.86177
+- **385** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99692&mlon=38.86359#map=18/8.99692/38.86359
+- **386** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99702&mlon=38.86403#map=18/8.99702/38.86403
+- **390** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99609&mlon=38.86349#map=18/8.99609/38.86349
+- **392** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99570&mlon=38.86375#map=18/8.99570/38.86375
+- **393** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99579&mlon=38.86355#map=18/8.99579/38.86355
+- **394** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99592&mlon=38.86321#map=18/8.99592/38.86321
+- **395** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99614&mlon=38.86286#map=18/8.99614/38.86286
+- **396** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99591&mlon=38.86240#map=18/8.99591/38.86240
+- **397** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99564&mlon=38.86295#map=18/8.99564/38.86295
+- **398** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99579&mlon=38.86414#map=18/8.99579/38.86414
+- **399** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99554&mlon=38.86412#map=18/8.99554/38.86412
+- **400** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99548&mlon=38.86441#map=18/8.99548/38.86441
+- **5-13** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98547&mlon=38.86365#map=18/8.98547/38.86365
+- **54-58** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98405&mlon=38.86089#map=18/8.98405/38.86089
+- **67-71** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98390&mlon=38.85845#map=18/8.98390/38.85845
+- **72-76** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98452&mlon=38.85856#map=18/8.98452/38.85856
+- **77-81** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98496&mlon=38.85863#map=18/8.98496/38.85863
+- **88-92** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98457&mlon=38.85788#map=18/8.98457/38.85788
+- **93-97** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98538&mlon=38.85781#map=18/8.98538/38.85781
+- **ABCO Building** (አብኮ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99035&mlon=38.79283#map=18/8.99035/38.79283
+- **Abderuf Plaza** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99132&mlon=38.78186#map=18/8.99132/38.78186
+- **Abyssinia Building** (አቢሲኒያ ሕንፃ) · commercial · B 208_3 Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99443&mlon=38.79026#map=18/8.99443/38.79026
+- **Abyssinia Plaza** (አቢሲንያ ፕላዛ) · commercial · B 208_19 BL_03_680 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99462&mlon=38.79040#map=18/8.99462/38.79040
+- **Adane and meskerem** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01550&mlon=38.83298#map=18/9.01550/38.83298
+- **Adey home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00364&mlon=38.87016#map=18/9.00364/38.87016
+- **ADIKA** (አዲካ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00663&mlon=38.80193#map=18/9.00663/38.80193
+- **Ahadu Complex** (አሀዱ ኮምፕሌክስ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00530&mlon=38.80884#map=18/9.00530/38.80884
+- **Airport Appartments** (የማማ ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00337&mlon=38.88891#map=18/9.00337/38.88891
+- **Alem Building** (ዓለም ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99026&mlon=38.78493#map=18/8.99026/38.78493
+- **Alem Gebre Building** (አለም ገብረ ህንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00521&mlon=38.80906#map=18/9.00521/38.80906
+- **Ambassador Hotel** · hotel · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99219&mlon=38.78794#map=18/8.99219/38.78794
+- **Amen Building** (አሜን ህንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00829&mlon=38.77628#map=18/9.00829/38.77628
+- **Anat Building** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00143&mlon=38.78677#map=18/9.00143/38.78677
+- **ArabsaBlock 596** (አራብሳ ብሎክ 596) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97368&mlon=38.88595#map=18/8.97368/38.88595
+- **Artist Alemayhu Eshete Residence** (ድምፃዊ ዓለማየሁ እሸቴ መኖሪያ ቤት) · detached · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01177&mlon=38.82404#map=18/9.01177/38.82404
+- **ashe house summit** (አሼ ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01229&mlon=38.85968#map=18/9.01229/38.85968
+- **Atikilt** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94565&mlon=38.78018#map=18/8.94565/38.78018
+- **Ato Yimer Hassen Muhammed** (አቶ ይመር ሀሰን ሙሐመድ) · house · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00970&mlon=38.82720#map=18/9.00970/38.82720
+- **AWDA** · commercial · BL/W3 Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99399&mlon=38.79072#map=18/8.99399/38.79072
+- **Ayat 5 condominium** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01028&mlon=38.88444#map=18/9.01028/38.88444
+- **AZEMAN HOTEL** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00148&mlon=38.78207#map=18/9.00148/38.78207
+- **B & C Aluminium** (ቢ ኤንድ ሲ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99624&mlon=38.78619#map=18/8.99624/38.78619
+- **B1** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98687&mlon=38.78277#map=18/8.98687/38.78277
+- **B12** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98696&mlon=38.78248#map=18/8.98696/38.78248
+- **Bata Complex** · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01486&mlon=38.78492#map=18/9.01486/38.78492
+- **Bati Complex** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99855&mlon=38.78685#map=18/8.99855/38.78685
+- **Beer Garden Inn** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99502&mlon=38.78623#map=18/8.99502/38.78623
+- **Bermog Construction Plc Bldg** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01543&mlon=38.79636#map=18/9.01543/38.79636
+- **Besha Hotel** · hotel · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01529&mlon=38.79094#map=18/9.01529/38.79094
+- **Beshir Home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97471&mlon=38.77184#map=18/8.97471/38.77184
+- **Beshir Home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97658&mlon=38.77418#map=18/8.97658/38.77418
+- **Beti bar summit** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98978&mlon=38.85720#map=18/8.98978/38.85720
+- **beti block 24** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00479&mlon=38.89889#map=18/9.00479/38.89889
+- **Beyene Gebretinsae Beyene** (በየነ ገብረትንሳኤ በየነ) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01257&mlon=38.85285#map=18/9.01257/38.85285
+- **Beyene Geretinsae Residence** (እንዳ በየነ ገ/ትንሳኤ መንበሪ) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01086&mlon=38.85701#map=18/9.01086/38.85701
+- **Beza Building** · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99391&mlon=38.79007#map=18/8.99391/38.79007
+- **Big Boss Mo Trading PLC** · office · BL_03_672 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://bigboss-mo.com/ · map https://www.openstreetmap.org/?mlat=8.99573&mlon=38.78727#map=18/8.99573/38.78727
+- **Biniyam house** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96764&mlon=38.88637#map=18/8.96764/38.88637
+- **Birehanu's Residence** (ብርሃኑ መኖሪያ) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00092&mlon=38.82244#map=18/9.00092/38.82244
+- **Birhane Africa Mall** · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99580&mlon=38.78798#map=18/8.99580/38.78798
+- **Blen Bldg** (ብሌን ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00001&mlon=38.78785#map=18/9.00001/38.78785
+- **Block 265-271** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99258&mlon=38.85725#map=18/8.99258/38.85725
+- **Block 48** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97756&mlon=38.88615#map=18/8.97756/38.88615
+- **BMA Plaza** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00086&mlon=38.80240#map=18/9.00086/38.80240
+- **Bole Arabsa Site** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96381&mlon=38.87545#map=18/8.96381/38.87545
+- **Bole Beshale Block-01** (ቦሌ በሻሌ ብሎክ-01) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99778&mlon=38.88278#map=18/8.99778/38.88278
+- **Bole Beshale** (ቦሌ በሻሌ) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99685&mlon=38.88408#map=18/8.99685/38.88408
+- **Bole Bulbula condominium** (ቦሌ ቡልቡላ ኮንዶሚኒየም) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94827&mlon=38.79320#map=18/8.94827/38.79320
+- **bole hayat 2 24 condominium** (ቤቲ ኮንዶሚንየም) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00451&mlon=38.89917#map=18/9.00451/38.89917
+- **Bole International Airport Terminal** (ቦሌ ዓለም አቀፍ አውሮፕላን ማረፊያ ተርሚናል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98323&mlon=38.79569#map=18/8.98323/38.79569
+- **Bole Kefile Ketema Kebela 03/05 Youth Association** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00341&mlon=38.78386#map=18/9.00341/38.78386
+- **Bosten Partner's Building** (ቦስተን ፓርትነርስ ሕህፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99059&mlon=38.78386#map=18/8.99059/38.78386
+- **British International School** · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99335&mlon=38.79502#map=18/8.99335/38.79502
+- **BUILDING11** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98688&mlon=38.78261#map=18/8.98688/38.78261
+- **Bulbula 40/60 Block 25** · apartments · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95012&mlon=38.77683#map=18/8.95012/38.77683
+- **Bulbula** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96217&mlon=38.78592#map=18/8.96217/38.78592
+- **CBB4** (ኮቢባ4) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00385&mlon=38.88165#map=18/9.00385/38.88165
+- **Century Mall building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01942&mlon=38.81374#map=18/9.01942/38.81374
+- **chen house** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00080&mlon=38.83741#map=18/9.00080/38.83741
+- **Cherkos** (ጨርቆስ) · apartment · 372, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99853&mlon=38.86085#map=18/8.99853/38.86085
+- **Cherkos** (ጨርቆስ) · apartment · B372, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99791&mlon=38.86098#map=18/8.99791/38.86098
+- **Cherkos** (ጨርቆስ) · shelter · Block_372 Summit, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00013&mlon=38.86049#map=18/9.00013/38.86049
+- **Conari Apartments** · Zimbabwe Av, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98882&mlon=38.78345#map=18/8.98882/38.78345
+- **DABI Clarks Building** (ዳቢ ክላርክ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99165&mlon=38.78324#map=18/8.99165/38.78324
+- **Damirnof Building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01935&mlon=38.81438#map=18/9.01935/38.81438
+- **Dasset** · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99087&mlon=38.79410#map=18/8.99087/38.79410
+- **DDONE HOUSE 1** (ዲዶን ቤት 1) · apartment · run by D · 4, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01043&mlon=38.80714#map=18/9.01043/38.80714
+- **Debe and Atay Building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00460&mlon=38.78024#map=18/9.00460/38.78024
+- **Desalegn Menjis home** (የደደሳለኝ ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95104&mlon=38.77849#map=18/8.95104/38.77849
+- **DH Geda Tower** (ዲ ኤች ገዳ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98960&mlon=38.78639#map=18/8.98960/38.78639
+- **Domestic Terminal** (የሀገር ውስጥ መንገደኞች ተርሚናል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98185&mlon=38.79219#map=18/8.98185/38.79219
+- **EBM building** · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00400&mlon=38.82006#map=18/9.00400/38.82006
+- **Embassy of Rwanda** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98816&mlon=38.77680#map=18/8.98816/38.77680
+- **Ermy's Home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98560&mlon=38.85774#map=18/8.98560/38.85774
+- **Et Village** (አየር መንገድ ቤቶች) · apartment · Chefie condominiums, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00254&mlon=38.88949#map=18/9.00254/38.88949
+- **ETC** (ኢትዮጵያ ቴሌ ኮሙኒኬሽን ኮርፖሬሽን) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99984&mlon=38.78442#map=18/8.99984/38.78442
+- **ETC** (ኢትዮጵያ ቴሌ ኮሙኒኬሽን ኮርፖሬሽን) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99992&mlon=38.78455#map=18/8.99992/38.78455
+- **Ethio Best** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01859&mlon=38.88897#map=18/9.01859/38.88897
+- **Ethio Best** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01960&mlon=38.88905#map=18/9.01960/38.88905
+- **Ethiopian Airline Hangar** · hangar · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98243&mlon=38.78603#map=18/8.98243/38.78603
+- **Ethiopian Airlines Ayat Compound** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00400&mlon=38.88929#map=18/9.00400/38.88929
+- **Ethiopian Airlines Cargo** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97947&mlon=38.78333#map=18/8.97947/38.78333
+- **Ethiopian Midwives Association** (የኢትዮጵያ ሚድዋይፎች ማህበር) · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01567&mlon=38.79182#map=18/9.01567/38.79182
+- **Ethiopian Skylight Hotel** (ስካይላይት ሆቴል) · Block C, D & E, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98688&mlon=38.78916#map=18/8.98688/38.78916
+- **Ethiopian Standards Agency የኢትዮጵያ የደረጃዎች ኤጀንሲ** (የኢትዮጵያ የደረጃዎች ኤጀንሲ) · ቀለበት መንገድ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 646 0111 · hours Mo-Fr 08:30-17:30 · map https://www.openstreetmap.org/?mlat=9.01067&mlon=38.80528#map=18/9.01067/38.80528
+- **FAO Food and Agriculture Organisatioz of the UN** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 647 8888 · https://www.fao.org/ · map https://www.openstreetmap.org/?mlat=9.01672&mlon=38.81856#map=18/9.01672/38.81856
+- **Fasika’s Home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97667&mlon=38.88661#map=18/8.97667/38.88661
+- **Fekadu & Frealem House** (የፍቃዱ እና ፍሬዓለም መኖሪያ ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02114&mlon=38.83542#map=18/9.02114/38.83542
+- **Fekadu Tsige's House** (የፍቃዱ ፅጌ መኖሪያ ቤት) · apartment · B-55/2 Megenagna- CMC Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 646 1113 · map https://www.openstreetmap.org/?mlat=9.01912&mlon=38.83678#map=18/9.01912/38.83678
+- **Fekadu Tsige's House** (ፍቃዱ ፅጌ መኖሪያ ቤት) · apartment · B-55/2 Salitemihret - Summit road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01903&mlon=38.83674#map=18/9.01903/38.83674
+- **Figa Flintstone home Apartments** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00641&mlon=38.83904#map=18/9.00641/38.83904
+- **Flintstone Figa** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00675&mlon=38.83886#map=18/9.00675/38.83886
+- **Flintstone Goro Twin Crossing** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00003&mlon=38.83689#map=18/9.00003/38.83689
+- **Flintstone Town Houses** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00031&mlon=38.83348#map=18/9.00031/38.83348
+- **Food kiosk** · kiosk · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01302&mlon=38.79213#map=18/9.01302/38.79213
+- **Friendship Building ፍሬንድሽፕ ህንጻ** (ፍሬንድ ሺፕ ሕንፃ) · public · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98974&mlon=38.78600#map=18/8.98974/38.78600
+- **Garji Condo** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94951&mlon=38.77689#map=18/8.94951/38.77689
+- **Gast Entertainment Mall** · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02094&mlon=38.84188#map=18/9.02094/38.84188
+- **getachewu agote home** (ጌታቸዉ ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01123&mlon=38.83254#map=18/9.01123/38.83254
+- **Getahun Beshahe BLDG** (ጌታሁን በሻህ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01463&mlon=38.78366#map=18/9.01463/38.78366
+- **Gezahegn Tilahun** (ገዛኋኝ ጥላሁን) · apartment · 2/05 Jacros, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00450&mlon=38.80795#map=18/9.00450/38.80795
+- **Gojito guest house** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01303&mlon=38.78679#map=18/9.01303/38.78679
+- **Golagol Tower** (ጎላጉል ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01535&mlon=38.78696#map=18/9.01535/38.78696
+- **Golagul Tower (hayahulet)** (ጎላጉል ህንጻ (ሃያሁለት)) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01556&mlon=38.78721#map=18/9.01556/38.78721
+- **GrandView Apartments** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://grandviewoption.squarespace.com · map https://www.openstreetmap.org/?mlat=8.98689&mlon=38.77441#map=18/8.98689/38.77441
+- **Guard House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.93998&mlon=38.78168#map=18/8.93998/38.78168
+- **Guest house** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99731&mlon=38.78445#map=18/8.99731/38.78445
+- **Gulf Aziz** (ገልፍ አዚዝ) · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99516&mlon=38.78510#map=18/8.99516/38.78510
+- **Gurd Shola Building** · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01844&mlon=38.82190#map=18/9.01844/38.82190
+- **Haji Bushra Building** (ሀጂ ቡሽራ ህንፃ) · hospital · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98381&mlon=38.78101#map=18/8.98381/38.78101
+- **Hana home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98952&mlon=38.79697#map=18/8.98952/38.79697
+- **HDC Office Addis Ababa(ኤች ዲ ሲ ቢሮ)** (ኤች ዲ ሲ ቢሮ) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00251&mlon=38.78437#map=18/9.00251/38.78437
+- **Helzer Tower** (ሄልዘር ታወር) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99907&mlon=38.78575#map=18/8.99907/38.78575
+- **Henok Tarekegn** (ሄኖክ ታረቀኝ) · apartment · 08, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00440&mlon=38.80716#map=18/9.00440/38.80716
+- **Heritage Building** (ሄሪቴጅ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99169&mlon=38.79249#map=18/8.99169/38.79249
+- **Hidmona** (ህድሞና) · commercial · Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99340&mlon=38.79067#map=18/8.99340/38.79067
+- **Holy City Center** · mall · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01920&mlon=38.81694#map=18/9.01920/38.81694
+- **Hömë 22** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01311&mlon=38.79291#map=18/9.01311/38.79291
+- **Home 72** · apartment · run by Ema & Abe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00362&mlon=38.86868#map=18/9.00362/38.86868
+- **Home yerer** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00228&mlon=38.82102#map=18/9.00228/38.82102
+- **Home** (ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01470&mlon=38.85362#map=18/9.01470/38.85362
+- **Home** (ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01474&mlon=38.85348#map=18/9.01474/38.85348
+- **Hotel Lobelia** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99269&mlon=38.79235#map=18/8.99269/38.79235
+- **Impress Hotel** · commercial · BL_03_680 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99478&mlon=38.79071#map=18/8.99478/38.79071
+- **IOM Migration Health Assessment Center** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99242&mlon=38.78913#map=18/8.99242/38.78913
+- **IPS Building** (ኢንዱስትሪ ፕሮጀክቶች አገልግሎት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01448&mlon=38.78310#map=18/9.01448/38.78310
+- **Isabella** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00444&mlon=38.78013#map=18/9.00444/38.78013
+- **Jacros Compound** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00401&mlon=38.81602#map=18/9.00401/38.81602
+- **Jhone GAA home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99248&mlon=38.84345#map=18/8.99248/38.84345
+- **Kadisco General Hospital** (ካዲስኮ አጠቃላ ሆስፒታል) · hospital · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 629 8902 · http://www.kadcogroup.com/kgh/ · map https://www.openstreetmap.org/?mlat=8.99550&mlon=38.81437#map=18/8.99550/38.81437
+- **Kal' Family** (የቃል ቤተሰቦች) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99921&mlon=38.81345#map=18/8.99921/38.81345
+- **Kal's Home** (ቃል ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99653&mlon=38.81380#map=18/8.99653/38.81380
+- **Kasahun building** (ካሳሁን ህንጻ) · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98262&mlon=38.77380#map=18/8.98262/38.77380
+- **Kasech Site** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00300&mlon=38.78458#map=18/9.00300/38.78458
+- **kebele 24 megenagna house no 0664** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00865&mlon=38.79614#map=18/9.00865/38.79614
+- **Kebele House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99257&mlon=38.79080#map=18/8.99257/38.79080
+- **Kelsam Building** · Mike Leyland Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00537&mlon=38.78061#map=18/9.00537/38.78061
+- **Konjit House** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97341&mlon=38.88570#map=18/8.97341/38.88570
+- **Land Mark Plaza & Apartment** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00375&mlon=38.77976#map=18/9.00375/38.77976
+- **leka building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99932&mlon=38.82069#map=18/8.99932/38.82069
+- **Lidu bole** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99770&mlon=38.79204#map=18/8.99770/38.79204
+- **Lucky** (ላኪ ሕንፃ) · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99496&mlon=38.78498#map=18/8.99496/38.78498
+- **Mag International Building** (ማግ ኢንተርናሽናል ህንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00566&mlon=38.80830#map=18/9.00566/38.80830
+- **Mahider F** (ማህደር) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96224&mlon=38.78965#map=18/8.96224/38.78965
+- **Mana Ibsa Dirre Tele** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97883&mlon=38.77717#map=18/8.97883/38.77717
+- **Mana Raha sah Ibsa tel bulbula** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96245&mlon=38.78551#map=18/8.96245/38.78551
+- **Mana sahiba ibsa tel** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97828&mlon=38.77529#map=18/8.97828/38.77529
+- **Mariyam Gerji** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99864&mlon=38.80211#map=18/8.99864/38.80211
+- **Medhanialem Building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99755&mlon=38.78627#map=18/8.99755/38.78627
+- **Meklit Building** · commercial · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01618&mlon=38.79062#map=18/9.01618/38.79062
+- **Mekonnen tg** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01756&mlon=38.84571#map=18/9.01756/38.84571
+- **Metals Industry Development Institute** (የብረታብረት ኢንዱስትሪ ልማት ድርጅት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00560&mlon=38.80651#map=18/9.00560/38.80651
+- **Midre Kebd Building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00886&mlon=38.78833#map=18/9.00886/38.78833
+- **Mintiwab Hunegnaw** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00023&mlon=38.78799#map=18/9.00023/38.78799
+- **Moha Soft Drinks Industry S.Co.(HO)** (ሞሐ የለስላሳ መጠጦች ማምረቻ ድርጅት (ዋና መስሪያ ቤት)) · office · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98970&mlon=38.79316#map=18/8.98970/38.79316
+- **Mohammed melaku** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01567&mlon=38.84718#map=18/9.01567/38.84718
+- **MOHAN** · office · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98659&mlon=38.78103#map=18/8.98659/38.78103
+- **Morning Star Mall** · hotel · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99653&mlon=38.78652#map=18/8.99653/38.78652
+- **Mosaic Hotel** (ሞዛይክ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99596&mlon=38.78480#map=18/8.99596/38.78480
+- **MT-Home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99732&mlon=38.81749#map=18/8.99732/38.81749
+- **Mulmul Bakery** · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99220&mlon=38.77859#map=18/8.99220/38.77859
+- **Mulugeta Zeleke Buiilding** (ሙልጌታ፡ዘለቀ፡ሕንፃ) · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01865&mlon=38.80138#map=18/9.01865/38.80138
+- **National Meteorological Agency** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.ethiomet.gov.et/ · map https://www.openstreetmap.org/?mlat=8.98595&mlon=38.78611#map=18/8.98595/38.78611
+- **National Oil Company Ethiopia** (የኢትዮጵያ ነዳጅ ምርት ድርጅት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00277&mlon=38.78010#map=18/9.00277/38.78010
+- **Netsi home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00686&mlon=38.84119#map=18/9.00686/38.84119
+- **New bright Tower** (ኒው ብራይት ታወር) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99651&mlon=38.78745#map=18/8.99651/38.78745
+- **Noab ral Estate** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00452&mlon=38.77952#map=18/9.00452/38.77952
+- **Noah apartments** · apartments · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00568&mlon=38.77991#map=18/9.00568/38.77991
+- **Oasis BLDG** (ኦሲስ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99688&mlon=38.78715#map=18/8.99688/38.78715
+- **Oromya Building** (ኦሮሚያ ህንጻ) · apartment · Medhanialem area, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99268&mlon=38.78876#map=18/8.99268/38.78876
+- **Park Lane Tower** (ፓርክ ሌን ታወር) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99490&mlon=38.78580#map=18/8.99490/38.78580
+- **phison realstate** · apartment · phison realstate, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://phisonrealstate.com · hours Su-Fr 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.00651&mlon=38.87495#map=18/9.00651/38.87495
+- **POLY-GCL Addis Ababa Apartment** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00233&mlon=38.84518#map=18/9.00233/38.84518
+- **Radi house** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99772&mlon=38.79205#map=18/8.99772/38.79205
+- **Raky** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00051&mlon=38.83692#map=18/9.00051/38.83692
+- **Ramada Hotel** (Ramada Hotel ራማዳ ሆቴል) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99190&mlon=38.78283#map=18/8.99190/38.78283
+- **Redwan Building** (ሬድዋን ሕንፃ) · office · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99855&mlon=38.78648#map=18/8.99855/38.78648
+- **Reliance Hotel Apartments** · hotel · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99193&mlon=38.78801#map=18/8.99193/38.78801
+- **Residence - AUC Commissioner for Social Affiars** (የአፍሪካ ህብረት ኮሚሽነር ለሶሻል አፌር መኖሪያ ቤት) · detached · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98496&mlon=38.78287#map=18/8.98496/38.78287
+- **Robel Plaza** (ሮቤል ፕላዛ) · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99563&mlon=38.78534#map=18/8.99563/38.78534
+- **Rwanda Chat bet** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98433&mlon=38.77770#map=18/8.98433/38.77770
+- **Rwanda chat bet** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98759&mlon=38.77770#map=18/8.98759/38.77770
+- **Saay building** (ሳይ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99168&mlon=38.78283#map=18/8.99168/38.78283
+- **Sahiba ibsa** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95032&mlon=38.78818#map=18/8.95032/38.78818
+- **Sahiba ibsa** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97880&mlon=38.77636#map=18/8.97880/38.77636
+- **Sami Building** (ሳሚ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00121&mlon=38.80139#map=18/9.00121/38.80139
+- **sami house** (ሳሚ ቤት best man) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99072&mlon=38.85689#map=18/8.99072/38.85689
+- **Saro Maria Hotel** · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99426&mlon=38.78531#map=18/8.99426/38.78531
+- **Selam Ethiopia** · commercial · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01569&mlon=38.78844#map=18/9.01569/38.78844
+- **Semit condominium 17** (ሰሚት ኮንዶሚንየም ብሎክ ፩፯) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00341&mlon=38.85852#map=18/9.00341/38.85852
+- **Setawiyan Tseyon Maryam Catholic Monastry School** (ገዳመ ሲታውያን ፅዮን ማርያም ካቶሊክ ትምህርት ቤት) · school · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01239&mlon=38.82400#map=18/9.01239/38.82400
+- **Sevita Building: Hagbes Pvt. Ltd. Co.** · commercial · Africa Avenue / Bole Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98876&mlon=38.78865#map=18/8.98876/38.78865
+- **Sheger House** (ሸገር ሃውስ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99872&mlon=38.78527#map=18/8.99872/38.78527
+- **Shekhinah Building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99838&mlon=38.78579#map=18/8.99838/38.78579
+- **Shopping Mall** · retail · Djibouti Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01469&mlon=38.78766#map=18/9.01469/38.78766
+- **Sidama Lodge** (ሲዳማ ሎጅ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99526&mlon=38.77823#map=18/8.99526/38.77823
+- **Sidrak Alpha @fb home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99894&mlon=38.86212#map=18/8.99894/38.86212
+- **Sky Apartment** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99552&mlon=38.78460#map=18/8.99552/38.78460
+- **Snap Plaza** · retail · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98989&mlon=38.78757#map=18/8.98989/38.78757
+- **South Gate Plaza** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99842&mlon=38.78665#map=18/8.99842/38.78665
+- **St George Church Bole Bulbula Road** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96720&mlon=38.77977#map=18/8.96720/38.77977
+- **St Urael Building** (ቅዱስ ኡራኤል ህንፃ) · public building · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01101&mlon=38.77557#map=18/9.01101/38.77557
+- **store** · garage · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.93979&mlon=38.78140#map=18/8.93979/38.78140
+- **Store** · garage · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94022&mlon=38.78153#map=18/8.94022/38.78153
+- **Store** · garage · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94101&mlon=38.78153#map=18/8.94101/38.78153
+- **store** · shed · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.93987&mlon=38.78142#map=18/8.93987/38.78142
+- **store** · shed · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94015&mlon=38.78151#map=18/8.94015/38.78151
+- **Summit Condominium Block 372** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99832&mlon=38.86093#map=18/8.99832/38.86093
+- **Summit condominium No. 2** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00361&mlon=38.85908#map=18/9.00361/38.85908
+- **Sunrise realestate** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00093&mlon=38.84717#map=18/9.00093/38.84717
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00108&mlon=38.84682#map=18/9.00108/38.84682
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00110&mlon=38.84713#map=18/9.00110/38.84713
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00113&mlon=38.84632#map=18/9.00113/38.84632
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00117&mlon=38.84572#map=18/9.00117/38.84572
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00152&mlon=38.84653#map=18/9.00152/38.84653
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00155&mlon=38.84713#map=18/9.00155/38.84713
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00156&mlon=38.84594#map=18/9.00156/38.84594
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00156&mlon=38.84622#map=18/9.00156/38.84622
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00156&mlon=38.84681#map=18/9.00156/38.84681
+- **sunrise realsstate** · apartments · Summit - Goro road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00158&mlon=38.84565#map=18/9.00158/38.84565
+- **Sunshine Apartments CMC compound** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01528&mlon=38.85076#map=18/9.01528/38.85076
+- **Sunshine CMC Apartments** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01296&mlon=38.84825#map=18/9.01296/38.84825
+- **sweet home** · apartment · 05, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00454&mlon=38.88795#map=18/9.00454/38.88795
+- **T1** · terrace · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00045&mlon=38.88873#map=18/9.00045/38.88873
+- **T2** · terrace · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00019&mlon=38.88873#map=18/9.00019/38.88873
+- **T3** · terrace · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99995&mlon=38.88868#map=18/8.99995/38.88868
+- **T4** · terrace · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99971&mlon=38.88866#map=18/8.99971/38.88866
+- **T5** · terrace · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99944&mlon=38.88872#map=18/8.99944/38.88872
+- **T6** · terrace · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99915&mlon=38.88875#map=18/8.99915/38.88875
+- **Tamrat Building** (ታምራት ህንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99038&mlon=38.78248#map=18/8.99038/38.78248
+- **Tana Apartment** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99145&mlon=38.78406#map=18/8.99145/38.78406
+- **TDS Hotel** (ፀሐይና ልጆቿ ሆቴል) · hotel · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00213&mlon=38.78207#map=18/9.00213/38.78207
+- **Tena Kebede BLDG** (ጠና ከበደ ሕንፃ 1) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98847&mlon=38.79180#map=18/8.98847/38.79180
+- **Terminal 1** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98185&mlon=38.79306#map=18/8.98185/38.79306
+- **The Place** · Cape Verde Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00186&mlon=38.77951#map=18/9.00186/38.77951
+- **Tihmat BLDG** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99227&mlon=38.77818#map=18/8.99227/38.77818
+- **Tinsae Building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99473&mlon=38.77871#map=18/8.99473/38.77871
+- **TK International Building 2** (ቲኬ ኢንተርናሽናል ሕንፃ 2) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98833&mlon=38.79149#map=18/8.98833/38.79149
+- **Tor Hayloch Business Office** · run by Government · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00270&mlon=38.80061#map=18/9.00270/38.80061
+- **TSBG Building** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01929&mlon=38.81538#map=18/9.01929/38.81538
+- **Tsehay Complex** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00548&mlon=38.80860#map=18/9.00548/38.80860
+- **Tseyon Maryam Catholic Church** · church · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01289&mlon=38.82281#map=18/9.01289/38.82281
+- **TTC Building** (ቲቲሲ ህንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98883&mlon=38.77818#map=18/8.98883/38.77818
+- **Vv** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00940&mlon=38.81000#map=18/9.00940/38.81000
+- **watchtower** · house · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94054&mlon=38.78123#map=18/8.94054/38.78123
+- **watchtower** · house · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94114&mlon=38.78162#map=18/8.94114/38.78162
+- **Welelay Bldg** (ወለላይ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00021&mlon=38.78814#map=18/9.00021/38.78814
+- **Welthungerhilfe | GAA** · commercial · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99870&mlon=38.78369#map=18/8.99870/38.78369
+- **Wende's Crib** (የወንዴ ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00896&mlon=38.85038#map=18/9.00896/38.85038
+- **Werku building** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00705&mlon=38.78912#map=18/9.00705/38.78912
+- **Weynishet Sec** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99925&mlon=38.81198#map=18/8.99925/38.81198
+- **Womsadco BLDG** (ዎማሳድኮ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98948&mlon=38.79298#map=18/8.98948/38.79298
+- **Wonde's home** (የወንዴ ቤት) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01817&mlon=38.88529#map=18/9.01817/38.88529
+- **Workshop** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00059&mlon=38.80835#map=18/9.00059/38.80835
+- **Yeabsira tilahun home yab interior** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01516&mlon=38.83378#map=18/9.01516/38.83378
+- **Yebsabi Guest House** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99657&mlon=38.77914#map=18/8.99657/38.77914
+- **Yegna bet** · apartment · Jacros, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00287&mlon=38.81917#map=18/9.00287/38.81917
+- **Yemisirach home** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00864&mlon=38.85367#map=18/9.00864/38.85367
+- **Yesh bez sin hou** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99497&mlon=38.79110#map=18/8.99497/38.79110
+- **Yezed's Plaza** (የዜድስ ፕላዛ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00039&mlon=38.80326#map=18/9.00039/38.80326
+- **Yoly** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00628&mlon=38.78091#map=18/9.00628/38.78091
+- **Yordi Beza summit** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99321&mlon=38.85500#map=18/8.99321/38.85500
+- **YTGC Head office** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01352&mlon=38.79280#map=18/9.01352/38.79280
+- **Zefmesh** · retail · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00353&mlon=38.82086#map=18/9.00353/38.82086
+- **Zerihun** (ዘሪሁን) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01414&mlon=38.78205#map=18/9.01414/38.78205
+- **Zurga bldg** (ዙርጋ ሕንፃ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01262&mlon=38.78745#map=18/9.01262/38.78745
+- **መሪ 40/60 ኮንዶሚኒየም** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01974&mlon=38.86677#map=18/9.01974/38.86677
+- **ሰሚት ኮንደሚኒየም** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99249&mlon=38.85859#map=18/8.99249/38.85859
+- **ቦሌ ብልቡላ ኮንዲሚንየም 04** · apartment · 04, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95133&mlon=38.79105#map=18/8.95133/38.79105
+- **አስቴር ቃል Aster Kal** · apartment · 1 floor 2 Road to Gergi Giorgis, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99442&mlon=38.81254#map=18/8.99442/38.81254
+- **አያት ኢቲ** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00274&mlon=38.88853#map=18/9.00274/38.88853
+- **አድዋ ፓርክ ኮደሚኒየም** · residential · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00039&mlon=38.80114#map=18/9.00039/38.80114
+- **እንዳለ ቤት** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00536&mlon=38.79991#map=18/9.00536/38.79991
+- **የሚሚ ቤት** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99765&mlon=38.85780#map=18/8.99765/38.85780
+- **የበሽር ሙሣ መኖሪያ ቤት** · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00692&mlon=38.79391#map=18/9.00692/38.79391
+- **የቤቲ አክስት ቤት ሄለን** (ቤቲ uncle house) · apartment · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99753&mlon=38.81444#map=18/8.99753/38.81444
+
+## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 24
+
+- **Addis Ababa Business Center** (አዲስ አበባ የገበያ ማዕከል) · mall · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03206&mlon=38.73940#map=18/9.03206/38.73940
+- **Addis ketema Sub City Wereda 09 Administrative Office** (በአዲስ ከተማ ክፍለ ከተማ የወረዳ 09 አስተዳደር ጽ/ቤት) · administrative · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · tel +251 11 278 4375 · map https://www.openstreetmap.org/?mlat=9.03625&mlon=38.72633#map=18/9.03625/38.72633
+- **Afia Shopping Center** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02819&mlon=38.73841#map=18/9.02819/38.73841
+- **Africa Market** (አፍሪካ ገበያ) · mall · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02981&mlon=38.73925#map=18/9.02981/38.73925
+- **Amanuel Tsega Building** (አማኑኤል ፀጋ ሕንፃ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03240&mlon=38.72423#map=18/9.03240/38.72423
+- **commercial bank if ethiopia** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02913&mlon=38.73667#map=18/9.02913/38.73667
+- **Dire Tower** (ድሬ ታወር) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02793&mlon=38.73274#map=18/9.02793/38.73274
+- **Girum Hospital** · hospital · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04685&mlon=38.71980#map=18/9.04685/38.71980
+- **Haji Legese Sherefa BLDG** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02978&mlon=38.74137#map=18/9.02978/38.74137
+- **Henock.home** (ሄኖክ ቤት) · apartment · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02278&mlon=38.72242#map=18/9.02278/38.72242
+- **jabulani** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02924&mlon=38.73621#map=18/9.02924/38.73621
+- **Leyila Building** (ለይላ ሕንፃ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02772&mlon=38.74162#map=18/9.02772/38.74162
+- **Lid atubus tera house** · apartment · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03480&mlon=38.73460#map=18/9.03480/38.73460
+- **Raey BLDG** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02915&mlon=38.74039#map=18/9.02915/38.74039
+- **Rimo building** (ሪሞ ሕንፃ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03717&mlon=38.72153#map=18/9.03717/38.72153
+- **Shewa Tsega BLDG** (ሸዋፀጋ ሕንፃ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03447&mlon=38.72798#map=18/9.03447/38.72798
+- **Sidamo Tera Commercial Center** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02937&mlon=38.74024#map=18/9.02937/38.74024
+- **Tana Business Center** (ጣና የገበያ ማዕከል) · mall · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03082&mlon=38.73948#map=18/9.03082/38.73948
+- **Tewekel** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02923&mlon=38.73950#map=18/9.02923/38.73950
+- **The Fantaye** (የፋንታዬ ቤተሰብ) · apartment · Uganda Street, Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02477&mlon=38.73510#map=18/9.02477/38.73510
+- **Tseday Mall** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02693&mlon=38.74003#map=18/9.02693/38.74003
+- **Yenegat Birehan Shoping Center** (የንጋት ብርሃን የገበያ ማዕከል) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03210&mlon=38.73632#map=18/9.03210/38.73632
+- **Yerga Haile Bldg.** (ይርጋ ሀይሌ ህንጻ) · metkato street, Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03357&mlon=38.73954#map=18/9.03357/38.73954
+- **Zeway BLDG** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02855&mlon=38.74011#map=18/9.02855/38.74011
+
+## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 164
+
+- **1st Class Block A.** (አንደኛ ማዕረግ ኤ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01852&mlon=38.75842#map=18/9.01852/38.75842
+- **ABC Building** (ኤቢሲ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00654&mlon=38.76899#map=18/9.00654/38.76899
+- **Abebech BLDG** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98212&mlon=38.76443#map=18/8.98212/38.76443
+- **Abel rosa Home** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01673&mlon=38.76662#map=18/9.01673/38.76662
+- **Aberus Complex** (አበሩስ ኮምፕሌክስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00587&mlon=38.76763#map=18/9.00587/38.76763
+- **aderesa house** (አድርሴ ቤት) · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00255&mlon=38.76340#map=18/9.00255/38.76340
+- **African Hall** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01470&mlon=38.76410#map=18/9.01470/38.76410
+- **African Union Conference Center** (የአፍሪካ ህብረት ኮንፈረንስ ማዕከል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00003&mlon=38.74408#map=18/9.00003/38.74408
+- **African Union headquarters** · public building · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00097&mlon=38.74193#map=18/9.00097/38.74193
+- **Al Pawlo** (አል ፓውሎ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99190&mlon=38.75874#map=18/8.99190/38.75874
+- **Alemu Wolede Tsadik BLDG** (ዓለሙ ወልደ ፃዲቅ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99869&mlon=38.75899#map=18/8.99869/38.75899
+- **Amanelwa Bldg.** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98520&mlon=38.76715#map=18/8.98520/38.76715
+- **Ambassel Building** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98575&mlon=38.76768#map=18/8.98575/38.76768
+- **Aster Plaza** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98870&mlon=38.76563#map=18/8.98870/38.76563
+- **Awash International Bank (HO)** (አዋሽ ኢንተርናሽናል ባንክ ዋና መስሪያ ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01463&mlon=38.75124#map=18/9.01463/38.75124
+- **Axum Building** (አክሱም ህንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00715&mlon=38.77628#map=18/9.00715/38.77628
+- **Aynalem Beze** (አይናለም በዜ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99487&mlon=38.74734#map=18/8.99487/38.74734
+- **B & B** (ቢ ኤንድ ቢ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99899&mlon=38.74103#map=18/8.99899/38.74103
+- **B13** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98843&mlon=38.77248#map=18/8.98843/38.77248
+- **B14** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98819&mlon=38.77282#map=18/8.98819/38.77282
+- **B77 Miky** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98511&mlon=38.75458#map=18/8.98511/38.75458
+- **BAHI Commercial Center** (ባሒ ንግድ ማዕከል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00735&mlon=38.74675#map=18/9.00735/38.74675
+- **Baleker Tower** (ባልኬር) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98679&mlon=38.75957#map=18/8.98679/38.75957
+- **Be Desta Building** (በደስታ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00618&mlon=38.76780#map=18/9.00618/38.76780
+- **Beale** (በዓል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98622&mlon=38.75058#map=18/8.98622/38.75058
+- **Bedelu BLDG** (በድሉ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01444&mlon=38.75093#map=18/9.01444/38.75093
+- **Betezata clinic** (ቤተዛታ ክሊኒክ) · hospital · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00258&mlon=38.76821#map=18/9.00258/38.76821
+- **Block 115** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98391&mlon=38.75685#map=18/8.98391/38.75685
+- **Block 14** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98415&mlon=38.75633#map=18/8.98415/38.75633
+- **Block 34** · apartments · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98580&mlon=38.75734#map=18/8.98580/38.75734
+- **Block 35** · apartments · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98603&mlon=38.75743#map=18/8.98603/38.75743
+- **Block 36** · apartments · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98625&mlon=38.75772#map=18/8.98625/38.75772
+- **Block 65** · apartments · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98543&mlon=38.75562#map=18/8.98543/38.75562
+- **Block 65** · apartments · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98544&mlon=38.75562#map=18/8.98544/38.75562
+- **Bunna Insurance Head Quarter** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99933&mlon=38.74125#map=18/8.99933/38.74125
+- **Chaka Coffee, ጫካ ቡና** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01407&mlon=38.75392#map=18/9.01407/38.75392
+- **Chamber of Commerce** (ንግድ ምክር ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00893&mlon=38.74438#map=18/9.00893/38.74438
+- **Commercial Bank of Ethiopia Headquarters** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01655&mlon=38.75427#map=18/9.01655/38.75427
+- **Dani Plaza** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99161&mlon=38.77322#map=18/8.99161/38.77322
+- **Dashen Bank HQ** · Sierra Leone Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99628&mlon=38.75919#map=18/8.99628/38.75919
+- **Deberework Tower** (ደብረወርቅ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01029&mlon=38.74740#map=18/9.01029/38.74740
+- **Demble City Center ደምበል ሲቲ ሴንተር** (ደምበል ሲቲ ሴንተር) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00485&mlon=38.76731#map=18/9.00485/38.76731
+- **Dita Building** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98623&mlon=38.75113#map=18/8.98623/38.75113
+- **Duki** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98689&mlon=38.76492#map=18/8.98689/38.76492
+- **Electro commercial** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00538&mlon=38.74575#map=18/9.00538/38.74575
+- **Elily International Hotel** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01463&mlon=38.76906#map=18/9.01463/38.76906
+- **Emewdesh Building** (እምወድሽ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99847&mlon=38.73971#map=18/8.99847/38.73971
+- **Ethio Telecom** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01336&mlon=38.75347#map=18/9.01336/38.75347
+- **Ethiopia hotel** · commercial · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01509&mlon=38.75326#map=18/9.01509/38.75326
+- **Ethiopian Commodity Exchange** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01096&mlon=38.74718#map=18/9.01096/38.74718
+- **Ethiopian Insurance Corporation** (የኢትዮጵያ መድን ድርጅት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 2400 · map https://www.openstreetmap.org/?mlat=9.01209&mlon=38.75265#map=18/9.01209/38.75265
+- **Ethiopian Investment Commission** (የኢትዮጵያ ኢንቨስትመንት ኮሚሽን) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00656&mlon=38.76742#map=18/9.00656/38.76742
+- **Ethiopian Railway Corporation HQ** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00666&mlon=38.75801#map=18/9.00666/38.75801
+- **Ethiopian Red Cross Society H/Q የደም ባንክ** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01481&mlon=38.75592#map=18/9.01481/38.75592
+- **Ethiopian Road Authority HQ** (የኢትዮጵያ መንገዶች ባለስልጣን) · Ras Abebe Aregay Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01251&mlon=38.74818#map=18/9.01251/38.74818
+- **Ethiopian Transport and Road Authority የኢትዮጵያ መንገዶች ባልሰልጣን** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01289&mlon=38.75442#map=18/9.01289/38.75442
+- **Ethiopien Road Construction Corporation (ERCC)** · construction · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00810&mlon=38.74607#map=18/9.00810/38.74607
+- **European Union Delegation to the African Union** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99878&mlon=38.74134#map=18/8.99878/38.74134
+- **Finfinne** (ፊንፊኔ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01153&mlon=38.76210#map=18/9.01153/38.76210
+- **Flamingo** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00373&mlon=38.76424#map=18/9.00373/38.76424
+- **Fre's home** (ፍሬ) · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00026&mlon=38.75706#map=18/9.00026/38.75706
+- **G.G.Building** (ጂ.ጂ. ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99768&mlon=38.73964#map=18/8.99768/38.73964
+- **Garad condominiums** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01918&mlon=38.77167#map=18/9.01918/38.77167
+- **German House (GIZ)** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01515&mlon=38.76833#map=18/9.01515/38.76833
+- **Get House Building** (ጌት ሃውስ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00761&mlon=38.76532#map=18/9.00761/38.76532
+- **Getu Commercial center** (ጌቱ የንግድ ማዕከል) · commercial · 990 Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 554 0795 · https://feres.et/ · map https://www.openstreetmap.org/?mlat=9.00235&mlon=38.76959#map=18/9.00235/38.76959
+- **GIZ Guesthouse** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99981&mlon=38.76263#map=18/8.99981/38.76263
+- **Gotära apartment** (ጎተራ ኮንዶሚኒየም) · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98697&mlon=38.75761#map=18/8.98697/38.75761
+- **Guenet Church Office** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99365&mlon=38.74624#map=18/8.99365/38.74624
+- **Guest Registry Building** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01412&mlon=38.76809#map=18/9.01412/38.76809
+- **Haile Alem Building** (ኃይሌ አለም ህንፃ) · commercial · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01085&mlon=38.77362#map=18/9.01085/38.77362
+- **Haile Gebril Building** (ሃይለገብርኤል ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00984&mlon=38.77093#map=18/9.00984/38.77093
+- **Hall 1** (አዳራሽ 1) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00824&mlon=38.76183#map=18/9.00824/38.76183
+- **Hall 2** (አዳራሽ 2) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00803&mlon=38.76122#map=18/9.00803/38.76122
+- **Hall 3** (አዳራሽ 3) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00778&mlon=38.76096#map=18/9.00778/38.76096
+- **Hall for Events** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00284&mlon=38.76073#map=18/9.00284/38.76073
+- **HaPo plc @Yeshi tam building** · office · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99524&mlon=38.75940#map=18/8.99524/38.75940
+- **HiLCoE School of Computer Science & Technology** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99683&mlon=38.76233#map=18/8.99683/38.76233
+- **HMM Tower** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99209&mlon=38.77331#map=18/8.99209/38.77331
+- **Home** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00892&mlon=38.77428#map=18/9.00892/38.77428
+- **House** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99255&mlon=38.76768#map=18/8.99255/38.76768
+- **IOM** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98160&mlon=38.76238#map=18/8.98160/38.76238
+- **Johnny Bldg** (ጆን ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01365&mlon=38.76954#map=18/9.01365/38.76954
+- **Juventus Club** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00905&mlon=38.76133#map=18/9.00905/38.76133
+- **K-Kare** (ኬኬር ሕንጻ) · commercial · 182 Mozambique Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00792&mlon=38.74672#map=18/9.00792/38.74672
+- **Kabe Building** (ካቤ ህንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00424&mlon=38.75800#map=18/9.00424/38.75800
+- **Kale House** · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01006&mlon=38.76820#map=18/9.01006/38.76820
+- **KAS Tower** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98310&mlon=38.76480#map=18/8.98310/38.76480
+- **Kasma Building** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98284&mlon=38.76647#map=18/8.98284/38.76647
+- **Kazanchis Central Apartment** · apartment · Joseph Tito Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01548&mlon=38.76917#map=18/9.01548/38.76917
+- **Ki Ab** (ኪያ አብ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99292&mlon=38.73960#map=18/8.99292/38.73960
+- **Kibatu's home** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00039&mlon=38.75564#map=18/9.00039/38.75564
+- **Kirkos health Center** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00295&mlon=38.74844#map=18/9.00295/38.74844
+- **Kirkos Sub City Kebele 12/13/25 Public Center** (ቂርቆስ ክ/ከተማ ቀበሌ 13/14/25 የህዝብ መዝናኛ ክበብ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00398&mlon=38.75812#map=18/9.00398/38.75812
+- **Kirkos subcity Wereda 07 Multi Purpose Youth Center** (በአራዳ ክ/ከተማ የወረዳ 07 የወጣቶች ማእከል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01383&mlon=38.75132#map=18/9.01383/38.75132
+- **KKare Bldg** (ኬኬር ህንጻ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00830&mlon=38.74669#map=18/9.00830/38.74669
+- **La Gare** · commercial · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00946&mlon=38.75322#map=18/9.00946/38.75322
+- **Legacy Building** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98759&mlon=38.77113#map=18/8.98759/38.77113
+- **Lemi home** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98574&mlon=38.75212#map=18/8.98574/38.75212
+- **Liko Building** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99739&mlon=38.76493#map=18/8.99739/38.76493
+- **Lion House 2 Building** (አንበሳ ሕንፃ 2) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01178&mlon=38.75572#map=18/9.01178/38.75572
+- **Lion House** (አንበሳ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01182&mlon=38.75963#map=18/9.01182/38.75963
+- **MARU Metal Industry plc (Kera site)** · industrial · Kirkos subcity, W.05, H.no 536 Dej Beyene Merid Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98682&mlon=38.75059#map=18/8.98682/38.75059
+- **MBI** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00196&mlon=38.74440#map=18/9.00196/38.74440
+- **Mega BLDG** (ሜጋ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99947&mlon=38.77021#map=18/8.99947/38.77021
+- **Meskel Sq. Parking Entrance** · commercial · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01038&mlon=38.76043#map=18/9.01038/38.76043
+- **Mezid Plaza** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01338&mlon=38.75068#map=18/9.01338/38.75068
+- **Mina Building** (ሚና) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99137&mlon=38.77222#map=18/8.99137/38.77222
+- **Ministry of Foreign Affairs** (የውጭ ጉዳይ ሚኒስቴር) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 7345 · map https://www.openstreetmap.org/?mlat=9.01911&mlon=38.76264#map=18/9.01911/38.76264
+- **Ministry of Justice** (የፍትሕ ሚኒስቴር) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 5099 · map https://www.openstreetmap.org/?mlat=9.01047&mlon=38.77123#map=18/9.01047/38.77123
+- **Ministry of Trade & Industry** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01618&mlon=38.76471#map=18/9.01618/38.76471
+- **Ministry of Trade & Industry** (የንግድና ኢንዱስትሪ ሚኒስቴር) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 8025 · map https://www.openstreetmap.org/?mlat=9.01666&mlon=38.76481#map=18/9.01666/38.76481
+- **Ministry of Youth and Sports** (የወጣቶችና ስፖርት ሚኒስቴር) · public · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01154&mlon=38.76127#map=18/9.01154/38.76127
+- **Mujib Tower** (ሙጂብ ህንጻ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99819&mlon=38.75854#map=18/8.99819/38.75854
+- **Nani Tower** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01318&mlon=38.75860#map=18/9.01318/38.75860
+- **National Regional State of Oromia office** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00723&mlon=38.76660#map=18/9.00723/38.76660
+- **National Theatre** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01561&mlon=38.75207#map=18/9.01561/38.75207
+- **National Tower** · commercial · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01488&mlon=38.75385#map=18/9.01488/38.75385
+- **Nega City Mall** (ነጋ ሲቲ ሞል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01643&mlon=38.76568#map=18/9.01643/38.76568
+- **Nigist Towers** (ንግስት ታወርስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://nigisttowers.com/ · map https://www.openstreetmap.org/?mlat=9.01384&mlon=38.76945#map=18/9.01384/38.76945
+- **Norwegian Church Aid** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99112&mlon=38.77291#map=18/8.99112/38.77291
+- **Nudi Tower** (ኑዲዲታወር) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98190&mlon=38.76349#map=18/8.98190/38.76349
+- **ODDA Building** (ኦዳ ህንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01650&mlon=38.76595#map=18/9.01650/38.76595
+- **Office for government communication affers** (የመንግስት ኮምንኬሽን ጉዳዩች ጽ/ቤት) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00864&mlon=38.76380#map=18/9.00864/38.76380
+- **Old Villa Verde** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98592&mlon=38.76339#map=18/8.98592/38.76339
+- **Radi denbel** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00203&mlon=38.76370#map=18/9.00203/38.76370
+- **Rainbow Foam** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99210&mlon=38.74659#map=18/8.99210/38.74659
+- **Ras Hall** (ራስ አዳራሽ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 7060 · map https://www.openstreetmap.org/?mlat=9.01453&mlon=38.75222#map=18/9.01453/38.75222
+- **Rediat Bldg** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02019&mlon=38.76780#map=18/9.02019/38.76780
+- **Reggies** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98607&mlon=38.76819#map=18/8.98607/38.76819
+- **Rose Luxury Suites** (ሮዝ ሌግዠሪ ሲዩትስ) · apartment · Roosevelt Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://www.roseluxurysuites.com/ · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99701&mlon=38.74041#map=18/8.99701/38.74041
+- **S.A. Business Center** (ኤስ ኤ ቢዝነስ ሴንተር) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00268&mlon=38.76952#map=18/9.00268/38.76952
+- **Sabit BLDG** (ሳቢት ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99725&mlon=38.77218#map=18/8.99725/38.77218
+- **Sam House** (ሳም ሀውስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99275&mlon=38.76613#map=18/8.99275/38.76613
+- **Sami shum gotera metatefiya** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98652&mlon=38.75978#map=18/8.98652/38.75978
+- **SARA AFRICA MALL** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01624&mlon=38.77063#map=18/9.01624/38.77063
+- **Shemsu.bet** · apartment · 1, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99506&mlon=38.77122#map=18/8.99506/38.77122
+- **Simona's Residence** · house · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00809&mlon=38.76733#map=18/9.00809/38.76733
+- **sis house ሴቷ** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98834&mlon=38.75367#map=18/8.98834/38.75367
+- **solo complex building** · commercial · Gabon Av, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99335&mlon=38.76664#map=18/8.99335/38.76664
+- **St. George Terrace** (ቅዱስ ጊዮርጊስ ቴራስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01414&mlon=38.75213#map=18/9.01414/38.75213
+- **Sterling** · commercial · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99967&mlon=38.76735#map=18/8.99967/38.76735
+- **Sunshine** (ሰንሻይን) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00910&mlon=38.76479#map=18/9.00910/38.76479
+- **Tebaber Berta** (ተባበር በርታ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99055&mlon=38.77315#map=18/8.99055/38.77315
+- **Temama fok** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02124&mlon=38.76538#map=18/9.02124/38.76538
+- **Tesfaye Gete Building** (ተስፋዬ ጌጤ ህንፃ) · apartments · KR_02_245 St., Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00163&mlon=38.77178#map=18/9.00163/38.77178
+- **Tibebu Building** (ጥበቡ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99498&mlon=38.76636#map=18/8.99498/38.76636
+- **Tila Apartments** · apartments · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01053&mlon=38.77060#map=18/9.01053/38.77060
+- **Tom Tower Building** (ቶም ታወር ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00797&mlon=38.76494#map=18/9.00797/38.76494
+- **Transport constraction Designs sc** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01164&mlon=38.74883#map=18/9.01164/38.74883
+- **Tsehay Messay** (ፀሐይ መሳይ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01000&mlon=38.76916#map=18/9.01000/38.76916
+- **Tselere Building** (ጽለረ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00604&mlon=38.74643#map=18/9.00604/38.74643
+- **UN ECA Zambezi building** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01472&mlon=38.76758#map=18/9.01472/38.76758
+- **UNICEF** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01515&mlon=38.76883#map=18/9.01515/38.76883
+- **Visitor Centre** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02288&mlon=38.75940#map=18/9.02288/38.75940
+- **Wegagen Bank Head Office** (የዌጋገን ባንክ ዋና ቢሮ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01153&mlon=38.75607#map=18/9.01153/38.75607
+- **Wengalawit Building** (ወንጌላዊት ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98133&mlon=38.76371#map=18/8.98133/38.76371
+- **World Bank** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99339&mlon=38.77692#map=18/8.99339/38.77692
+- **Yayeheyerad BLDG** (ያየህ ይራድ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98086&mlon=38.76374#map=18/8.98086/38.76374
+- **Yehual Worke Building** (የኃላ ወርቅ ሕንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99891&mlon=38.75894#map=18/8.99891/38.75894
+- **Zefco Building** (ዘፍኮ ህንፃ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99061&mlon=38.75893#map=18/8.99061/38.75893
+- **Ziquala Complex** (ዝቋላ ኮምፕሌክስ) · office · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01082&mlon=38.76787#map=18/9.01082/38.76787
+- **መዝገበ ስጋ ቤት** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99546&mlon=38.77187#map=18/8.99546/38.77187
+- **አቤም hotel** · apartment · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99843&mlon=38.76843#map=18/8.99843/38.76843
+
+## Gulele sub-city · ጉለሌ ክፍለ ከተማ — 47
+
+- **abebaw** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06853&mlon=38.74137#map=18/9.06853/38.74137
+- **Addis Ababa University Menen Condominium Apartments** (አዲስ አበባ ዩንቨርስቲ መነን ኮንዶሚኒየም አፓርታማ) · apartment · Botswana Street, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04954&mlon=38.75843#map=18/9.04954/38.75843
+- **Banchiayehu BLDG** (ባንቺአየሁ ሕንፃ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06105&mlon=38.73629#map=18/9.06105/38.73629
+- **Botanic (Faris & his friends)** · apartments · Ring Road, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06919&mlon=38.71935#map=18/9.06919/38.71935
+- **Christmas Hall** (ልደት አዳራሽ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04809&mlon=38.76046#map=18/9.04809/38.76046
+- **College of Social Sciences Building** (የሶሻል ሳይንስ ኮሌጅ ህንፃ) · Algeria Street, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04571&mlon=38.75986#map=18/9.04571/38.75986
+- **Cultural Center** (የባሕል ፡ ማዕከል) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04535&mlon=38.75731#map=18/9.04535/38.75731
+- **Cure Hospital** (ኪዩር ሆስፒታል) · hospital · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05789&mlon=38.76652#map=18/9.05789/38.76652
+- **Dat BLDG** (ዳት ሕንፃ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06093&mlon=38.73580#map=18/9.06093/38.73580
+- **Dersh** (ድርሻዬ) · apartment · 0912 Gulele _07_1365 St, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.06403&mlon=38.74607#map=18/9.06403/38.74607
+- **Elevation Residences** · residential · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05105&mlon=38.76780#map=18/9.05105/38.76780
+- **Embilta Hotel እምቢልታ ሆቴል** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04909&mlon=38.73683#map=18/9.04909/38.73683
+- **Gash desalegn @ dud** · apartment · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06823&mlon=38.72017#map=18/9.06823/38.72017
+- **Guard Tower** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07420&mlon=38.72712#map=18/9.07420/38.72712
+- **Gulele I Condo** · apartments · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05020&mlon=38.72747#map=18/9.05020/38.72747
+- **Gulele I Condo** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05009&mlon=38.72733#map=18/9.05009/38.72733
+- **Gulele I Condo** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05034&mlon=38.72760#map=18/9.05034/38.72760
+- **haji Muhdin** (ሀጂ ሙህዲን ቤት) · apartment · Sheh Hojele Av, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06066&mlon=38.72323#map=18/9.06066/38.72323
+- **HOMELAND VISA INFORMATION SERVICES** · SHEROMEDA Algeria Street, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05978&mlon=38.76195#map=18/9.05978/38.76195
+- **Jambo Business Center** · Tunisia Av., Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05912&mlon=38.73713#map=18/9.05912/38.73713
+- **Lazarist Catholic Mission School** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05848&mlon=38.74424#map=18/9.05848/38.74424
+- **Mandela Building** (ማንዴላ ህንፃ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04494&mlon=38.75810#map=18/9.04494/38.75810
+- **Mastewal driving licenece school** · driving school · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05918&mlon=38.74078#map=18/9.05918/38.74078
+- **Medhanialem Preparatory School** · school · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05163&mlon=38.72312#map=18/9.05163/38.72312
+- **Medhanialem Preparatory School** · school · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05187&mlon=38.72265#map=18/9.05187/38.72265
+- **Medhanialem Preparatory School** · school · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05196&mlon=38.72285#map=18/9.05196/38.72285
+- **Medhanialem Preparatory School** · school · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05198&mlon=38.72365#map=18/9.05198/38.72365
+- **Medhanialem Preparatory School** · school · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05221&mlon=38.72303#map=18/9.05221/38.72303
+- **meeting center** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07536&mlon=38.72315#map=18/9.07536/38.72315
+- **Mereb BLDG** (መረብ ሕንፃ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06063&mlon=38.73602#map=18/9.06063/38.73602
+- **Muhdin Issa** (ሙህዲን ኢሳ) · apartment · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05999&mlon=38.72405#map=18/9.05999/38.72405
+- **New Administration Building** (አዲሱ የአስተዳደር ህንፃ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04587&mlon=38.75843#map=18/9.04587/38.75843
+- **Paster** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04826&mlon=38.73042#map=18/9.04826/38.73042
+- **Post-Graduate library** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04765&mlon=38.75984#map=18/9.04765/38.75984
+- **Rufael Church** · church · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05787&mlon=38.72763#map=18/9.05787/38.72763
+- **School of Law** (ሕግ ት/ቤት) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04549&mlon=38.75839#map=18/9.04549/38.75839
+- **School of Tomorrow** · school · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04951&mlon=38.72961#map=18/9.04951/38.72961
+- **Sheikh Mohammed Hussein Ali Al-Amoudi Building** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04736&mlon=38.75771#map=18/9.04736/38.75771
+- **Sr. JALE** · Gulele_07_1485 St, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06861&mlon=38.74134#map=18/9.06861/38.74134
+- **St. Paulos Hospital Medical School Campus** · school · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04951&mlon=38.73065#map=18/9.04951/38.73065
+- **St. Paulos Hospital** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04797&mlon=38.72833#map=18/9.04797/38.72833
+- **St.Mikael BLDG | ቅዱስ ሚካኤል ሕንፃ** (ቅዱስ ሚካኤል ሕንፃ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05969&mlon=38.73640#map=18/9.05969/38.73640
+- **wereda 07 admiistration Office** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06091&mlon=38.74011#map=18/9.06091/38.74011
+- **wereda 07 youth center** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06121&mlon=38.74014#map=18/9.06121/38.74014
+- **Yengew Frea school የነገው ፍሬ ት/ቤት** · school · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06391&mlon=38.72724#map=18/9.06391/38.72724
+- **Yerossa Apartment and Guest House** · apartment · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05850&mlon=38.73914#map=18/9.05850/38.73914
+- **Yina Hotel** · hotel apartment · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05859&mlon=38.74167#map=18/9.05859/38.74167
+
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 70
+
+- **Abdisa Aga Kindergarten** · school · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01749&mlon=38.73289#map=18/9.01749/38.73289
+- **Abinet Federal police Buldg** (አብነት ፌዴራል ፖሊስ ህንፃ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01795&mlon=38.73458#map=18/9.01795/38.73458
+- **Addis Ababa Bible College** (የአዲስ አበባ የመጽሐፍ ቅዱስ ትምህርት ቤት) · college · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01441&mlon=38.73887#map=18/9.01441/38.73887
+- **Addis Ababa Islamic Affairs Supreme Council** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00851&mlon=38.71933#map=18/9.00851/38.71933
+- **Alta** (አልታ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01093&mlon=38.74132#map=18/9.01093/38.74132
+- **Alulla Abaneg Buldg** · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01760&mlon=38.73526#map=18/9.01760/38.73526
+- **Axum Pharmacy #4** (አክሱም መድሃኒት ቤት ቁ.4) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01218&mlon=38.74654#map=18/9.01218/38.74654
+- **Baby's** · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01964&mlon=38.74355#map=18/9.01964/38.74355
+- **Balcha Condominium** (ባልቻ ኮንዶሚንየም) · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01627&mlon=38.73322#map=18/9.01627/38.73322
+- **Biftu Building** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01399&mlon=38.74911#map=18/9.01399/38.74911
+- **Bisrat FM 101.1 Radio** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00006&mlon=38.73917#map=18/9.00006/38.73917
+- **Block 1** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01491&mlon=38.74720#map=18/9.01491/38.74720
+- **Block 2** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01515&mlon=38.74755#map=18/9.01515/38.74755
+- **Block 3** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01556&mlon=38.74800#map=18/9.01556/38.74800
+- **Block 4** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01591&mlon=38.74760#map=18/9.01591/38.74760
+- **Block 5** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01539&mlon=38.74668#map=18/9.01539/38.74668
+- **Capstone Building** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01253&mlon=38.73726#map=18/9.01253/38.73726
+- **Cheleleq Al-Sam Tower** (ጨለለቅ አልሳም ታወር) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01101&mlon=38.74098#map=18/9.01101/38.74098
+- **Dama House** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01347&mlon=38.73748#map=18/9.01347/38.73748
+- **Darens Building** (ዳሬንስ ሕንፃ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02215&mlon=38.74782#map=18/9.02215/38.74782
+- **Dashen Bank** (ዳሽን ባንክ) · commercial · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01362&mlon=38.73481#map=18/9.01362/38.73481
+- **EiABC Students' Dormitory** (የተማሪዎች ማደርያ) · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01329&mlon=38.73146#map=18/9.01329/38.73146
+- **Embassy of Switzerland** · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 371 0577 · https://www.eda.admin.ch/addisabeba · map https://www.openstreetmap.org/?mlat=9.00510&mlon=38.71837#map=18/9.00510/38.71837
+- **Emergency Unit** · hospital · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02012&mlon=38.74793#map=18/9.02012/38.74793
+- **Ethio Canada Diagnostic Imaging Center** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01279&mlon=38.74055#map=18/9.01279/38.74055
+- **Ethio Telecom(Microwave Office)** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01856&mlon=38.74761#map=18/9.01856/38.74761
+- **Ethio Telecom** · commercial · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01849&mlon=38.74704#map=18/9.01849/38.74704
+- **Ethiopian Broadcasting Corporation የኢትዮጵያ ሬድዮና ቴሌቪዥን ድርጅት** (የኢትዮጵያ ሬድዮና ቴሌቪዥን ድርጅት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01864&mlon=38.75192#map=18/9.01864/38.75192
+- **Ethiopian Immigration Office** · public building · Churchill Avenue, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02158&mlon=38.75088#map=18/9.02158/38.75088
+- **Etmas BLDG** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01285&mlon=38.73893#map=18/9.01285/38.73893
+- **Evangelical Theological College** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99739&mlon=38.73871#map=18/8.99739/38.73871
+- **Fana Broadcasting Corporation** (ፋና ብሮድካስቲንግ ኮርፖሬሽን) · studio · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01766&mlon=38.74851#map=18/9.01766/38.74851
+- **Garad BLDG** (ጋራድ ሕንፃ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02710&mlon=38.74481#map=18/9.02710/38.74481
+- **Gedame Eyesus Orthodox Church** · church · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02026&mlon=38.71840#map=18/9.02026/38.71840
+- **Gibe Center** (ጊቤ የንግድ ማእክል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02161&mlon=38.73311#map=18/9.02161/38.73311
+- **Handicap National** (ሃንዲካፕ ናሽናል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01272&mlon=38.74087#map=18/9.01272/38.74087
+- **Home Lideta** · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01055&mlon=38.73380#map=18/9.01055/38.73380
+- **Iceaddis** · office · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01327&mlon=38.73038#map=18/9.01327/38.73038
+- **Kidane Building** (ኪዳነ በየነ ሕንፃ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01901&mlon=38.75314#map=18/9.01901/38.75314
+- **LC 1-2** · house · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01769&mlon=38.72124#map=18/9.01769/38.72124
+- **LC 1-3** · house · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01840&mlon=38.72101#map=18/9.01840/38.72101
+- **Lideta Condominium** (ልደታ ኮንዶሚኒየም) · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01229&mlon=38.73590#map=18/9.01229/38.73590
+- **Lideta Merkato Shopping Mall** (ልደታ መርካቶ የገበያ ማዕከል) · retail · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01290&mlon=38.73520#map=18/9.01290/38.73520
+- **Lideta Sub City Admin Office** (የልደታ ክፍለ ከተማ አስተዳደር ጽ/ቤት) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01789&mlon=38.74685#map=18/9.01789/38.74685
+- **Lideta Sub City Wereda 03 Youth Center** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01916&mlon=38.73216#map=18/9.01916/38.73216
+- **Lideta Sub-City Administration** (የልደታ ክፍለ ከተማ አስተዳደር) · public · Bekele Weya Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01596&mlon=38.73534#map=18/9.01596/38.73534
+- **Lideta Subcity Woreda 3 SME Shed** (በልደታ ክፍለ ከተማ ወረዳ 3 ጥቃቅንና አነስተኛ ሸድ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01890&mlon=38.73299#map=18/9.01890/38.73299
+- **Mama's home** (የማማ ቤት) · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00912&mlon=38.71631#map=18/9.00912/38.71631
+- **Medina umer's home** (የ መዲና ኡመር ቤት) · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01684&mlon=38.72096#map=18/9.01684/38.72096
+- **Michew BLDG** (ማይጨው ሕንፃ) · apartments · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01029&mlon=38.74191#map=18/9.01029/38.74191
+- **Ministry of Urban Developement Housing and Construction** · public building · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 153 1688 · map https://www.openstreetmap.org/?mlat=9.01664&mlon=38.75116#map=18/9.01664/38.75116
+- **My G+1 Rental home (gulit sefer)** · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00704&mlon=38.71456#map=18/9.00704/38.71456
+- **My Holy Place** · apartment · Ring Road, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00705&mlon=38.71849#map=18/9.00705/38.71849
+- **Natan Home** · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01779&mlon=38.73841#map=18/9.01779/38.73841
+- **National Bank of Ethiopia (NBE)** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01747&mlon=38.75032#map=18/9.01747/38.75032
+- **National Blood bank service** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01606&mlon=38.74634#map=18/9.01606/38.74634
+- **National Library and Archives** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01800&mlon=38.75009#map=18/9.01800/38.75009
+- **National Meteorological Agency** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01917&mlon=38.74702#map=18/9.01917/38.74702
+- **Nure BLDG** (ኑር ሕንፃ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01300&mlon=38.73468#map=18/9.01300/38.73468
+- **Pediatric Emergency Unit** · hospital · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02072&mlon=38.74879#map=18/9.02072/38.74879
+- **Philips BLDG** (ፊሊፕስ ሕንፃ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01035&mlon=38.74096#map=18/9.01035/38.74096
+- **Seada Building** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01308&mlon=38.73799#map=18/9.01308/38.73799
+- **Smart Plaza** (ስማርት ፕላዛ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01617&mlon=38.73850#map=18/9.01617/38.73850
+- **St. Marry University** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01319&mlon=38.74699#map=18/9.01319/38.74699
+- **Tearfund Country Office** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99935&mlon=38.71748#map=18/8.99935/38.71748
+- **Tehadso hiwot International church** (ተሐድሶ ሕይወት ዓለም አቀፍ ቤ/ክ) · apartment · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00811&mlon=38.73441#map=18/9.00811/38.73441
+- **Urban Buidng** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01261&mlon=38.72987#map=18/9.01261/38.72987
+- **Wabe Shebelle Garden Restaurant** · hotel · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01224&mlon=38.74626#map=18/9.01224/38.74626
+- **Yobek bldg ዮቤክ ህንጻ** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01357&mlon=38.74742#map=18/9.01357/38.74742
+- **ዛግዌ ህንፃ** · Dejazmach Balcha Aba Nefso Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01193&mlon=38.73477#map=18/9.01193/38.73477
+
+## Yeka sub-city · የካ ክፍለ ከተማ — 112
+
+- **Abraham Berhanu Residence** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04171&mlon=38.84762#map=18/9.04171/38.84762
+- **Abrehot High-school** · school · Lorenzo Taezaz Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02574&mlon=38.77790#map=18/9.02574/38.77790
+- **Addis Ababa Roads and Transport Bureau** · Kenenisa, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01941&mlon=38.79962#map=18/9.01941/38.79962
+- **Afro** · house · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02994&mlon=38.87480#map=18/9.02994/38.87480
+- **B1** · apartments · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02147&mlon=38.77876#map=18/9.02147/38.77876
+- **B2** · apartments · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02157&mlon=38.77853#map=18/9.02157/38.77853
+- **B3** · apartments · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02195&mlon=38.77848#map=18/9.02195/38.77848
+- **B4** · apartments · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02221&mlon=38.77857#map=18/9.02221/38.77857
+- **B5** · apartments · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02215&mlon=38.77888#map=18/9.02215/38.77888
+- **B6** · apartments · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02064&mlon=38.77642#map=18/9.02064/38.77642
+- **B6** · apartments · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02186&mlon=38.77900#map=18/9.02186/38.77900
+- **Behailu's Home** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04760&mlon=38.81696#map=18/9.04760/38.81696
+- **Berta realestate** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02830&mlon=38.85252#map=18/9.02830/38.85252
+- **Bete Noah** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05895&mlon=38.87202#map=18/9.05895/38.87202
+- **Betelhem Plaza** (ቤተልሔም፡ፕላዛ) · commercial · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01987&mlon=38.80083#map=18/9.01987/38.80083
+- **Beti ayertena home** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03129&mlon=38.82919#map=18/9.03129/38.82919
+- **Birhanu Block 6** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06166&mlon=38.87214#map=18/9.06166/38.87214
+- **Block 280** (ብሎክ 280) · apartment · 280, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06686&mlon=38.86529#map=18/9.06686/38.86529
+- **block 281** (ብሎክ 281) · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06657&mlon=38.86552#map=18/9.06657/38.86552
+- **Block 282** (ብሎክ 282) · apartment · 282, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06634&mlon=38.86604#map=18/9.06634/38.86604
+- **Block 284 ብሎክ 284** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06601&mlon=38.86699#map=18/9.06601/38.86699
+- **Block 285 (ብሎክ 285)** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06584&mlon=38.86743#map=18/9.06584/38.86743
+- **Block 580** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.07024&mlon=38.87393#map=18/9.07024/38.87393
+- **block 91** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06280&mlon=38.86622#map=18/9.06280/38.86622
+- **British Council** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03171&mlon=38.78513#map=18/9.03171/38.78513
+- **CMC Michael Condominiums** (ሲኤምሲ ሚካኤል ኮንዶሚንየም) · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02313&mlon=38.84098#map=18/9.02313/38.84098
+- **COMET** (ኮሜት) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01524&mlon=38.78359#map=18/9.01524/38.78359
+- **Condominium infront of Arsema** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06494&mlon=38.87895#map=18/9.06494/38.87895
+- **condominium** · apartments · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02636&mlon=38.82665#map=18/9.02636/38.82665
+- **Dagi home** · apartment · Fikre Mariam Aba Techan Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04186&mlon=38.84969#map=18/9.04186/38.84969
+- **Debre Damo Hotel** · commercial · Haile Gebresellasie Avenue, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01555&mlon=38.78506#map=18/9.01555/38.78506
+- **Dimberua Child and Women Hospital** · hospital · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02034&mlon=38.78657#map=18/9.02034/38.78657
+- **Dimitri Apartments - long and short term rentals** · apartment · 00 Kebena Area, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.dimitri-apartments.com · map https://www.openstreetmap.org/?mlat=9.03851&mlon=38.78515#map=18/9.03851/38.78515
+- **Doro Irbata (Poultry)** (ዶሮ እርባታ) · farm auxiliary · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06022&mlon=38.77023#map=18/9.06022/38.77023
+- **Dr. Gadissa Anbese residential** (የ ዶክተር (ሻምበል) ጋዲሳ አንበሴ መኖሪያ ቤት) · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04182&mlon=38.82373#map=18/9.04182/38.82373
+- **ECSU President Office** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02251&mlon=38.83328#map=18/9.02251/38.83328
+- **ECSU Student Cafeteria** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02651&mlon=38.83032#map=18/9.02651/38.83032
+- **ECSU Student Dormitory** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02555&mlon=38.83033#map=18/9.02555/38.83033
+- **ECSU Student Dormitory** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02596&mlon=38.83079#map=18/9.02596/38.83079
+- **ECSU Student Dormitory** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02599&mlon=38.83006#map=18/9.02599/38.83006
+- **ECSU Student Launge** · Yeka 9_2624 St, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02570&mlon=38.83095#map=18/9.02570/38.83095
+- **ECSU Training Center** · YK_13_0605 St., Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02278&mlon=38.83333#map=18/9.02278/38.83333
+- **Eka duty room** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04373&mlon=38.84846#map=18/9.04373/38.84846
+- **EKKO Guest House and Apartments** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02257&mlon=38.77726#map=18/9.02257/38.77726
+- **EKKO Guest House** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02256&mlon=38.77725#map=18/9.02256/38.77725
+- **Ethiopian Athletics Federations Building** · public building · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01936&mlon=38.82367#map=18/9.01936/38.82367
+- **Ethiopian Seed Enterprise** (የኢትዮጵያ ምርጥ ዘር ድርጅት) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 2236 · map https://www.openstreetmap.org/?mlat=9.01440&mlon=38.78096#map=18/9.01440/38.78096
+- **Eyoel Building** (እዩኤል ህንፃ) · commercial · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02191&mlon=38.84212#map=18/9.02191/38.84212
+- **Ferensay ketena 3** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05475&mlon=38.78117#map=18/9.05475/38.78117
+- **Ferensay ketena sosit** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05458&mlon=38.78115#map=18/9.05458/38.78115
+- **German Church - Gymastics Hall** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04456&mlon=38.76489#map=18/9.04456/38.76489
+- **German Church School** · school · Angola Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://schule.addis.center/ · map https://www.openstreetmap.org/?mlat=9.04399&mlon=38.76524#map=18/9.04399/38.76524
+- **Gift real estate** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02678&mlon=38.85345#map=18/9.02678/38.85345
+- **Gift Real Estate** (ጊፍት ሪል እስቴት) · apartment · run by Tomas · Hayat 49, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02228&mlon=38.88523#map=18/9.02228/38.88523
+- **Great Abyssinia Plc** (ግሬት አቢሲንያ ኃ.የተ.የግ.ድ.) · industrial · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06325&mlon=38.77984#map=18/9.06325/38.77984
+- **Haile Gebresellasie** (ኃይሌ ገ/ሥላሴ) · 111140 Haile, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01317&mlon=38.77834#map=18/9.01317/38.77834
+- **Haileselassie resident** · apartment · run by haileselassie · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04912&mlon=38.82937#map=18/9.04912/38.82937
+- **Hisbawi Serawit Kindergarten and Primary School** (ሕዝባዊ ሰራዊት አፀደ ሕፃናት እና የመጀመሪያ ደረጃ ትምህርት ቤት) · school · Omedla Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05775&mlon=38.77820#map=18/9.05775/38.77820
+- **Home Yit's** · apartment · Eritrea Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04369&mlon=38.77950#map=18/9.04369/38.77950
+- **Home** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04377&mlon=38.82684#map=18/9.04377/38.82684
+- **Hyunday Building** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02187&mlon=38.80001#map=18/9.02187/38.80001
+- **Janmeda Sports Hall** (ጃንሜዳ የስፖርት አዳራሽ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04050&mlon=38.77013#map=18/9.04050/38.77013
+- **Ka Abado condominium building** (የካ አባዶ የጋራ መኖሪያ ቤቶች ህንፃ) · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06742&mlon=38.87296#map=18/9.06742/38.87296
+- **Karaville Realestate** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03489&mlon=38.85017#map=18/9.03489/38.85017
+- **Kidus Markos Kindergarten** (ቅዱስ ማርቆስ አፀደ ሕፃናት) · kindergarten · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05935&mlon=38.77678#map=18/9.05935/38.77678
+- **Kidus Markos Primary School** (ቅዱስ ማርቆስ የመጀመሪያ ደረጃ ትምህርት ቤት) · school · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05909&mlon=38.77654#map=18/9.05909/38.77654
+- **Konsular and Visa Section - German Embassy** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03817&mlon=38.78003#map=18/9.03817/38.78003
+- **Lamberet Condominium** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02667&mlon=38.82695#map=18/9.02667/38.82695
+- **Ledeta Lemariam Church** · church · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04091&mlon=38.78823#map=18/9.04091/38.78823
+- **Lemlem Kindergarten upto Collage Preparatory School** (ለምለም ከአፀደ ሕፃናት እስከ ኮሌጅ መሰናዶ ትምህርት ቤት) · school · Omedla Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05604&mlon=38.77722#map=18/9.05604/38.77722
+- **Leul Taz Building** (ልኡል ታዝ ህንፃ) · commercial · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02197&mlon=38.84235#map=18/9.02197/38.84235
+- **Lex Plaza** (ሌክስ ፕላዛ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01492&mlon=38.78214#map=18/9.01492/38.78214
+- **M & M** (ኤም እና ኤም) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01538&mlon=38.78430#map=18/9.01538/38.78430
+- **Meseret Home** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02679&mlon=38.78659#map=18/9.02679/38.78659
+- **Metebaber Building** (መተባበር ህንፃ) · Kenenisa Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02022&mlon=38.80110#map=18/9.02022/38.80110
+- **Meyaziya 23 Kindergarten and Primary School** (ሚያዝያ 23 አፀደ ሕፃናት እና የመጀመሪያ ደረጃ ትምህርት ቤት) · school · Madagascar Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06251&mlon=38.77267#map=18/9.06251/38.77267
+- **Mihret** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.07501&mlon=38.87651#map=18/9.07501/38.87651
+- **Ministry of Commerce** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02021&mlon=38.79944#map=18/9.02021/38.79944
+- **Ministry Of Mines** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02453&mlon=38.82538#map=18/9.02453/38.82538
+- **Mr. Sebisibe Woldetsadik resident የአቶ ሰብስቤ ወ/ፃድቅ መኖሪያ ቤት** (Mr. Sebisibe Woldetsadik resident) · apartment · run by Sebsibe welde tsadik · 121 Ararat to Kara, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04121&mlon=38.82576#map=18/9.04121/38.82576
+- **My home** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04372&mlon=38.82680#map=18/9.04372/38.82680
+- **My residential area** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06496&mlon=38.78908#map=18/9.06496/38.78908
+- **Nahom's home** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.07140&mlon=38.77268#map=18/9.07140/38.77268
+- **New Apartment** (ኒው አፓርትመንት) · apartment · 1550 Madagascar Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06166&mlon=38.76786#map=18/9.06166/38.76786
+- **ODWaCE (Organization for the Development of Women and Children Ethiopia** · house · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01840&mlon=38.79093#map=18/9.01840/38.79093
+- **Pluto Real Estate** (ፕሉቶ የመኖርያ መንደር) · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://plutoestates.com/ · hours Mo-Sa 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.02450&mlon=38.83899#map=18/9.02450/38.83899
+- **Rahem Building** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02140&mlon=38.79981#map=18/9.02140/38.79981
+- **Rebecca** (ርብቃ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01546&mlon=38.78467#map=18/9.01546/38.78467
+- **Serawit Alemu Residence** (ሠራዊት አለሙ መኖሪያ) · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04189&mlon=38.84719#map=18/9.04189/38.84719
+- **Service Quarters** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04440&mlon=38.76465#map=18/9.04440/38.76465
+- **Sunshine - Meri Loke Main Gate** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03475&mlon=38.84966#map=18/9.03475/38.84966
+- **Sunshine Meri Loke** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03192&mlon=38.85064#map=18/9.03192/38.85064
+- **Tafo condominium (Yeka Hayat 02)** (ጣፎ ኮንዶሚኒየም (የካ ሃያት ቁጥ 2)) · apartment · 4, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04628&mlon=38.88215#map=18/9.04628/38.88215
+- **Tafo condominium B20** · apartment · 20 Fikre Mariam Aba Techan Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04626&mlon=38.88001#map=18/9.04626/38.88001
+- **Tafo Condominium** (ጣፎ ኮንደሚኒየም) · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04694&mlon=38.87517#map=18/9.04694/38.87517
+- **Tesfaye Residence** · house · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02923&mlon=38.85128#map=18/9.02923/38.85128
+- **Tiblet hayat ትብለጥ ሀያት** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02374&mlon=38.88174#map=18/9.02374/38.88174
+- **Tigile Lenetsanet Kindergarten and Primary School** (ትግል ለነፃነት አፀደ ሕፃናት እና የመጀመሪያ ደረጃ ትምህርት ቤት) · school · Madagascar Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06238&mlon=38.77021#map=18/9.06238/38.77021
+- **Traffic Office** (ትራፊክ ጽ/ቤት) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01581&mlon=38.78599#map=18/9.01581/38.78599
+- **Trfe tesema house** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04915&mlon=38.85446#map=18/9.04915/38.85446
+- **Ye Ato aschalew ted family home** · apartment · Yeka 9_2624 St, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03869&mlon=38.82143#map=18/9.03869/38.82143
+- **Yeka Abado Condominium - Block 281** (ብሎክ 281) · apartment · 281, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06651&mlon=38.86554#map=18/9.06651/38.86554
+- **Yeka condominium** (የካ ኮንዶሚኒየም/የወንዴ ቤት) · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02687&mlon=38.78335#map=18/9.02687/38.78335
+- **Yene atity bet** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06013&mlon=38.77715#map=18/9.06013/38.77715
+- **yerer building** (የረር ህንፃ) · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03551&mlon=38.82812#map=18/9.03551/38.82812
+- **Yitna Butcher** (ይጥና ስጋቤት) · commercial · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 07:00-21:00 · map https://www.openstreetmap.org/?mlat=9.05618&mlon=38.77472#map=18/9.05618/38.77472
+- **Zefmesh Grand Mall** (ዘፍመሽ፡ግራንድ፡ሞል) · commercial · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02057&mlon=38.80023#map=18/9.02057/38.80023
+- **ለሚ ኩራ ክፍለ ከተማ ፖሊስ መምሪያ/ Lemi Kura Sub-city Police Station** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02715&mlon=38.87828#map=18/9.02715/38.87828
+- **ብሎክ 283** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06616&mlon=38.86650#map=18/9.06616/38.86650
+- **ብሎክ 286** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06566&mlon=38.86808#map=18/9.06566/38.86808
+- **ቴዎድሮስ ካሳሁን** · +251111225364 Madagascar Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06165&mlon=38.77071#map=18/9.06165/38.77071
+- **የዶክተር ወንድወሠን ገብሬ መኖሪያ ቤት (wendewesen home )** · apartment · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04209&mlon=38.82560#map=18/9.04209/38.82560
+
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 393
+
+- **17** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96794&mlon=38.74417#map=18/8.96794/38.74417
+- **213** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95644&mlon=38.71652#map=18/8.95644/38.71652
+- **Aba Hawa Trading plc** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94503&mlon=38.73503#map=18/8.94503/38.73503
+- **Abtam Center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95011&mlon=38.71978#map=18/8.95011/38.71978
+- **Achrie** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96264&mlon=38.71488#map=18/8.96264/38.71488
+- **Adot Complex** (አዶት የገበያ ማእከል) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99314&mlon=38.72796#map=18/8.99314/38.72796
+- **Afran Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96053&mlon=38.71343#map=18/8.96053/38.71343
+- **Africa Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96708&mlon=38.72040#map=18/8.96708/38.72040
+- **Africa Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96750&mlon=38.72044#map=18/8.96750/38.72044
+- **Africa Insurance** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99330&mlon=38.72763#map=18/8.99330/38.72763
+- **ARE Tewodros** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93658&mlon=38.73042#map=18/8.93658/38.73042
+- **Aregash Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98033&mlon=38.74921#map=18/8.98033/38.74921
+- **Ayalew Building** (አያሌው ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98081&mlon=38.74932#map=18/8.98081/38.74932
+- **Bangkok Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94939&mlon=38.71982#map=18/8.94939/38.71982
+- **Bediru** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96110&mlon=38.77158#map=18/8.96110/38.77158
+- **Beka Commercial Center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96523&mlon=38.73258#map=18/8.96523/38.73258
+- **bele ans d madi house** (በሌ እና ማዲ ቤት) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95159&mlon=38.73773#map=18/8.95159/38.73773
+- **bele house garmebt** (የ በሌ ቤት ጋርመንት) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92812&mlon=38.72570#map=18/8.92812/38.72570
+- **Berka Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95922&mlon=38.70895#map=18/8.95922/38.70895
+- **Bilalu Habesha Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98599&mlon=38.73792#map=18/8.98599/38.73792
+- **Bilen Building** (ቢለን ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97923&mlon=38.74908#map=18/8.97923/38.74908
+- **Bisrate Gebriel International School** · South Africa Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99222&mlon=38.72741#map=18/8.99222/38.72741
+- **Block 124** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96242&mlon=38.74180#map=18/8.96242/38.74180
+- **Block 130** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96274&mlon=38.74164#map=18/8.96274/38.74164
+- **Block 33** · apartment · 33, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96561&mlon=38.74459#map=18/8.96561/38.74459
+- **Block 6** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96829&mlon=38.74310#map=18/8.96829/38.74310
+- **Block 64** · Block 64, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93305&mlon=38.73072#map=18/8.93305/38.73072
+- **Chale'$ land option2** (የቻሌ መሬት) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96369&mlon=38.70304#map=18/8.96369/38.70304
+- **Commercial Bank of Ethiopia Facilities Management** · run by Government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.98528&mlon=38.73779#map=18/8.98528/38.73779
+- **Core Consulting Engineers plc** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98894&mlon=38.74046#map=18/8.98894/38.74046
+- **CV house** · house · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99450&mlon=38.72753#map=18/8.99450/38.72753
+- **DANOTEK Alternative Energy Technologies** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94374&mlon=38.73569#map=18/8.94374/38.73569
+- **Danshire Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96111&mlon=38.71314#map=18/8.96111/38.71314
+- **Dawi** (ዳዊ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96071&mlon=38.76410#map=18/8.96071/38.76410
+- **Delina Mall** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96189&mlon=38.71564#map=18/8.96189/38.71564
+- **Dimma cultural restaurant** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99124&mlon=38.71880#map=18/8.99124/38.71880
+- **Down Town Building** (ዳውን ታውን ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98306&mlon=38.74959#map=18/8.98306/38.74959
+- **DW1** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98927&mlon=38.71766#map=18/8.98927/38.71766
+- **Edget Village** (ዕድገት ቪሌጅ) · information · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99449&mlon=38.73745#map=18/8.99449/38.73745
+- **ERCS trainig center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95773&mlon=38.75963#map=18/8.95773/38.75963
+- **ERCS training center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95736&mlon=38.76007#map=18/8.95736/38.76007
+- **ERCS training center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95737&mlon=38.75968#map=18/8.95737/38.75968
+- **ERCS training center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95757&mlon=38.76003#map=18/8.95757/38.76003
+- **Etharso wood Factory** (ኢትአርሶ እንጨት ፋብሪካ) · manufacture · Guinea-Bissau, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97106&mlon=38.73076#map=18/8.97106/38.73076
+- **Ethiopian Red Cross Society - Essential Drug Program** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95730&mlon=38.75929#map=18/8.95730/38.75929
+- **Exit roaf main highway to lands** (ህህህ) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94864&mlon=38.71168#map=18/8.94864/38.71168
+- **Ezra Tessema** (ዕዝራ ተሰማ) · apartment · B7-4-4, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95071&mlon=38.70996#map=18/8.95071/38.70996
+- **Fikadu Wedaje Building** (ፍቃዱ ወዳጄ ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94813&mlon=38.73106#map=18/8.94813/38.73106
+- **Filip Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96199&mlon=38.71595#map=18/8.96199/38.71595
+- **Filiya Building** (ፊሊያ ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98155&mlon=38.74941#map=18/8.98155/38.74941
+- **Fits.Home** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97167&mlon=38.75121#map=18/8.97167/38.75121
+- **Fitse home** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97661&mlon=38.72421#map=18/8.97661/38.72421
+- **Foziana BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94900&mlon=38.72868#map=18/8.94900/38.72868
+- **Gechie** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96146&mlon=38.77048#map=18/8.96146/38.77048
+- **General Mercantile** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94315&mlon=38.73547#map=18/8.94315/38.73547
+- **gifto bete** (ጊፍቶ ቤት) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92654&mlon=38.74742#map=18/8.92654/38.74742
+- **Giseam BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95027&mlon=38.73779#map=18/8.95027/38.73779
+- **Gofa Mebrat Haile Condominium - Block 177** (ጎፍ መብራት ሃይል ኮንዶሚኒየም - ሕንጻ 177) · apartments · 177 - 15 Mauritius Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96673&mlon=38.74246#map=18/8.96673/38.74246
+- **Grade 1** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99597&mlon=38.72904#map=18/8.99597/38.72904
+- **habhaile home** (ሀብኃይለ ቤት) · apartment · South Africa Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99052&mlon=38.73149#map=18/8.99052/38.73149
+- **habt home** (ሀብት ቤት) · apartment · jomo, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96024&mlon=38.70332#map=18/8.96024/38.70332
+- **Haeazo Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97003&mlon=38.72227#map=18/8.97003/38.72227
+- **Hale, luya house 2** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97707&mlon=38.72403#map=18/8.97707/38.72403
+- **Hana Mariam Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93172&mlon=38.74277#map=18/8.93172/38.74277
+- **Hart Apartments** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99242&mlon=38.72866#map=18/8.99242/38.72866
+- **Hawi BLDG** (ዋኒ ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94815&mlon=38.73125#map=18/8.94815/38.73125
+- **Hirut Anteneh** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94231&mlon=38.74319#map=18/8.94231/38.74319
+- **Hiwi Fam Home** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95565&mlon=38.69369#map=18/8.95565/38.69369
+- **Hiwi's home** (የነሂዊ ቤት) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94283&mlon=38.75587#map=18/8.94283/38.75587
+- **Hiwot H** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98922&mlon=38.73885#map=18/8.98922/38.73885
+- **home sweet home** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94781&mlon=38.71939#map=18/8.94781/38.71939
+- **home** (ቤት) · apartment · Block 139 Jemo-1, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95903&mlon=38.71484#map=18/8.95903/38.71484
+- **Hulet shi 2000** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94666&mlon=38.74799#map=18/8.94666/38.74799
+- **Jegol BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96208&mlon=38.75550#map=18/8.96208/38.75550
+- **Jemo 1 block 100** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95807&mlon=38.71682#map=18/8.95807/38.71682
+- **Jemo 1 block 104** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95867&mlon=38.71598#map=18/8.95867/38.71598
+- **Jemo 1 block 105** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95743&mlon=38.71859#map=18/8.95743/38.71859
+- **Jemo 1 block 105** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95891&mlon=38.71576#map=18/8.95891/38.71576
+- **Jemo 1 block 106** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95902&mlon=38.71560#map=18/8.95902/38.71560
+- **Jemo 1 block 108** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96001&mlon=38.71342#map=18/8.96001/38.71342
+- **Jemo 1 block 109** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95980&mlon=38.71356#map=18/8.95980/38.71356
+- **Jemo 1 block 110** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95955&mlon=38.71339#map=18/8.95955/38.71339
+- **Jemo 1 block 111** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95963&mlon=38.71316#map=18/8.95963/38.71316
+- **Jemo 1 block 112** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95918&mlon=38.71279#map=18/8.95918/38.71279
+- **Jemo 1 block 113** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95909&mlon=38.71303#map=18/8.95909/38.71303
+- **Jemo 1 block 114** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95883&mlon=38.71290#map=18/8.95883/38.71290
+- **Jemo 1 block 116** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95882&mlon=38.71234#map=18/8.95882/38.71234
+- **Jemo 1 block 118** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95779&mlon=38.71268#map=18/8.95779/38.71268
+- **Jemo 1 block 120** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95739&mlon=38.71286#map=18/8.95739/38.71286
+- **Jemo 1 block 121** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95720&mlon=38.71297#map=18/8.95720/38.71297
+- **Jemo 1 block 122** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95725&mlon=38.71326#map=18/8.95725/38.71326
+- **Jemo 1 block 123** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95735&mlon=38.71369#map=18/8.95735/38.71369
+- **Jemo 1 block 124** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95762&mlon=38.71384#map=18/8.95762/38.71384
+- **Jemo 1 block 128** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95840&mlon=38.71346#map=18/8.95840/38.71346
+- **Jemo 1 block 129** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95866&mlon=38.71361#map=18/8.95866/38.71361
+- **Jemo 1 block 130** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95855&mlon=38.71385#map=18/8.95855/38.71385
+- **Jemo 1 block 131** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95836&mlon=38.71412#map=18/8.95836/38.71412
+- **Jemo 1 block 132** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95819&mlon=38.71427#map=18/8.95819/38.71427
+- **Jemo 1 block 133** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95796&mlon=38.71409#map=18/8.95796/38.71409
+- **Jemo 1 block 134** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95939&mlon=38.71415#map=18/8.95939/38.71415
+- **Jemo 1 block 135** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95917&mlon=38.71396#map=18/8.95917/38.71396
+- **Jemo 1 block 146** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96015&mlon=38.71425#map=18/8.96015/38.71425
+- **Jemo 1 block 157** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95773&mlon=38.71438#map=18/8.95773/38.71438
+- **Jemo 1 block 158** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95798&mlon=38.71452#map=18/8.95798/38.71452
+- **Jemo 1 block 162** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95740&mlon=38.71412#map=18/8.95740/38.71412
+- **Jemo 1 block 163** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95714&mlon=38.71398#map=18/8.95714/38.71398
+- **Jemo 1 block 164** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95683&mlon=38.71397#map=18/8.95683/38.71397
+- **Jemo 1 block 165** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95652&mlon=38.71411#map=18/8.95652/38.71411
+- **Jemo 1 block 166** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95625&mlon=38.71413#map=18/8.95625/38.71413
+- **Jemo 1 block 167** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95646&mlon=38.71448#map=18/8.95646/38.71448
+- **Jemo 1 block 168** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95674&mlon=38.71466#map=18/8.95674/38.71466
+- **Jemo 1 block 169** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95699&mlon=38.71481#map=18/8.95699/38.71481
+- **Jemo 1 block 172** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95697&mlon=38.71359#map=18/8.95697/38.71359
+- **Jemo 1 block 172** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95710&mlon=38.70991#map=18/8.95710/38.70991
+- **Jemo 1 block 173** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95682&mlon=38.71327#map=18/8.95682/38.71327
+- **Jemo 1 block 174** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95661&mlon=38.71337#map=18/8.95661/38.71337
+- **Jemo 1 block 175** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95641&mlon=38.71347#map=18/8.95641/38.71347
+- **Jemo 1 block 176** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95620&mlon=38.71357#map=18/8.95620/38.71357
+- **Jemo 1 block 177** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95589&mlon=38.71381#map=18/8.95589/38.71381
+- **Jemo 1 block 178** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95569&mlon=38.71390#map=18/8.95569/38.71390
+- **Jemo 1 block 179** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95549&mlon=38.71403#map=18/8.95549/38.71403
+- **Jemo 1 block 180** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95566&mlon=38.71436#map=18/8.95566/38.71436
+- **Jemo 1 block 180** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95596&mlon=38.71434#map=18/8.95596/38.71434
+- **Jemo 1 block 182** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95606&mlon=38.71462#map=18/8.95606/38.71462
+- **Jemo 1 block 183** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95576&mlon=38.71457#map=18/8.95576/38.71457
+- **Jemo 1 block 184** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95552&mlon=38.71470#map=18/8.95552/38.71470
+- **Jemo 1 block 185** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95560&mlon=38.71515#map=18/8.95560/38.71515
+- **Jemo 1 block 186** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95586&mlon=38.71490#map=18/8.95586/38.71490
+- **Jemo 1 block 187** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95682&mlon=38.71503#map=18/8.95682/38.71503
+- **Jemo 1 block 188** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95659&mlon=38.71485#map=18/8.95659/38.71485
+- **Jemo 1 block 189** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95642&mlon=38.71499#map=18/8.95642/38.71499
+- **Jemo 1 block 190** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95623&mlon=38.71526#map=18/8.95623/38.71526
+- **Jemo 1 block 191** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95612&mlon=38.71550#map=18/8.95612/38.71550
+- **Jemo 1 block 192** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95639&mlon=38.71567#map=18/8.95639/38.71567
+- **Jemo 1 block 198** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95673&mlon=38.71589#map=18/8.95673/38.71589
+- **Jemo 1 block 199** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95759&mlon=38.71278#map=18/8.95759/38.71278
+- **Jemo 1 block 206** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95726&mlon=38.71672#map=18/8.95726/38.71672
+- **Jemo 1 block 211** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95678&mlon=38.71636#map=18/8.95678/38.71636
+- **Jemo 1 block 212** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95649&mlon=38.71620#map=18/8.95649/38.71620
+- **Jemo 1 block 223** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95912&mlon=38.71019#map=18/8.95912/38.71019
+- **Jemo 1 block 224** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95896&mlon=38.71051#map=18/8.95896/38.71051
+- **Jemo 1 block 225** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95920&mlon=38.71059#map=18/8.95920/38.71059
+- **Jemo 1 block 226** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95885&mlon=38.71103#map=18/8.95885/38.71103
+- **Jemo 1 block 227** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95861&mlon=38.71096#map=18/8.95861/38.71096
+- **Jemo 1 block 228** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95841&mlon=38.71150#map=18/8.95841/38.71150
+- **Jemo 1 block 229** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95851&mlon=38.71178#map=18/8.95851/38.71178
+- **Jemo 1 block 230** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95870&mlon=38.71167#map=18/8.95870/38.71167
+- **Jemo 1 block 231** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95778&mlon=38.71191#map=18/8.95778/38.71191
+- **Jemo 1 block 232** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95776&mlon=38.71163#map=18/8.95776/38.71163
+- **Jemo 1 block 235** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95696&mlon=38.71177#map=18/8.95696/38.71177
+- **Jemo 1 block 237** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95765&mlon=38.71115#map=18/8.95765/38.71115
+- **Jemo 1 block 240** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95687&mlon=38.71137#map=18/8.95687/38.71137
+- **Jemo 1 block 241** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95681&mlon=38.71103#map=18/8.95681/38.71103
+- **Jemo 1 block 242** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95701&mlon=38.71073#map=18/8.95701/38.71073
+- **Jemo 1 block 243** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95725&mlon=38.71038#map=18/8.95725/38.71038
+- **Jemo 1 block 244** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95740&mlon=38.71011#map=18/8.95740/38.71011
+- **Jemo 1 block 247** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95805&mlon=38.71058#map=18/8.95805/38.71058
+- **Jemo 1 block 248** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95788&mlon=38.71081#map=18/8.95788/38.71081
+- **Jemo 1 block 249** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95855&mlon=38.70979#map=18/8.95855/38.70979
+- **Jemo 1 block 250** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95840&mlon=38.71006#map=18/8.95840/38.71006
+- **Jemo 1 block 253** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95774&mlon=38.70959#map=18/8.95774/38.70959
+- **Jemo 1 block 254** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95792&mlon=38.70937#map=18/8.95792/38.70937
+- **Jemo 1 block 258** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95879&mlon=38.70950#map=18/8.95879/38.70950
+- **Jemo 1 block 259** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95816&mlon=38.70903#map=18/8.95816/38.70903
+- **Jemo 1 block 261** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95787&mlon=38.70881#map=18/8.95787/38.70881
+- **Jemo 1 block 262** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95765&mlon=38.70858#map=18/8.95765/38.70858
+- **Jemo 1 block 263** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95749&mlon=38.70847#map=18/8.95749/38.70847
+- **Jemo 1 block 266** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95694&mlon=38.70874#map=18/8.95694/38.70874
+- **Jemo 1 block 268** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95714&mlon=38.70898#map=18/8.95714/38.70898
+- **Jemo 1 block 278** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95671&mlon=38.71049#map=18/8.95671/38.71049
+- **Jemo 1 block 279** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95657&mlon=38.71075#map=18/8.95657/38.71075
+- **Jemo 1 block 282** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95603&mlon=38.71009#map=18/8.95603/38.71009
+- **Jemo 1 block 288** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95647&mlon=38.71114#map=18/8.95647/38.71114
+- **Jemo 1 block 289** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95655&mlon=38.71143#map=18/8.95655/38.71143
+- **Jemo 1 block 292** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95570&mlon=38.71133#map=18/8.95570/38.71133
+- **Jemo 1 block 294** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95585&mlon=38.71202#map=18/8.95585/38.71202
+- **Jemo 1 block 299** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95668&mlon=38.71212#map=18/8.95668/38.71212
+- **Jemo 1 block 300** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95674&mlon=38.71255#map=18/8.95674/38.71255
+- **Jemo 1 block 301** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95651&mlon=38.71266#map=18/8.95651/38.71266
+- **Jemo 1 block 302** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95628&mlon=38.71278#map=18/8.95628/38.71278
+- **Jemo 1 block 303** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95605&mlon=38.71288#map=18/8.95605/38.71288
+- **Jemo 1 block 304** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95572&mlon=38.71272#map=18/8.95572/38.71272
+- **Jemo 1 block 305** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95580&mlon=38.71301#map=18/8.95580/38.71301
+- **Jemo 1 block 306** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95560&mlon=38.71315#map=18/8.95560/38.71315
+- **Jemo 1 block 307** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95540&mlon=38.71326#map=18/8.95540/38.71326
+- **Jemo 1 block 308** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95519&mlon=38.71336#map=18/8.95519/38.71336
+- **Jemo 1 block 309** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95499&mlon=38.71345#map=18/8.95499/38.71345
+- **Jemo 1 block 310** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95498&mlon=38.71286#map=18/8.95498/38.71286
+- **Jemo 1 block 313** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95567&mlon=38.71235#map=18/8.95567/38.71235
+- **Jemo 1 block 314** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95558&mlon=38.71205#map=18/8.95558/38.71205
+- **Jemo 1 block 315** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95550&mlon=38.71164#map=18/8.95550/38.71164
+- **Jemo 1 block 316** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95547&mlon=38.71136#map=18/8.95547/38.71136
+- **Jemo 1 block 321** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95625&mlon=38.70935#map=18/8.95625/38.70935
+- **Jemo 1 block 323** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95697&mlon=38.70822#map=18/8.95697/38.70822
+- **Jemo 1** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95973&mlon=38.71631#map=18/8.95973/38.71631
+- **Jemo 1** (ጀሞ 1) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95790&mlon=38.70825#map=18/8.95790/38.70825
+- **Jemo 1** (ጀሞ አንድ) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95769&mlon=38.71069#map=18/8.95769/38.71069
+- **Jemo 2 block 042** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95368&mlon=38.69289#map=18/8.95368/38.69289
+- **Jemo 2 block 047** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95398&mlon=38.69269#map=18/8.95398/38.69269
+- **Jemo 2 block 052** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95459&mlon=38.69228#map=18/8.95459/38.69228
+- **Jemo 2 block 053** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95488&mlon=38.69208#map=18/8.95488/38.69208
+- **Jemo 2 block 092** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95773&mlon=38.69136#map=18/8.95773/38.69136
+- **Jemo 2 block 093** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95837&mlon=38.69151#map=18/8.95837/38.69151
+- **Jemo 2 block 094** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95819&mlon=38.69127#map=18/8.95819/38.69127
+- **Jemo 2 block 095** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95794&mlon=38.69113#map=18/8.95794/38.69113
+- **Jemo 2 block 096** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95753&mlon=38.69117#map=18/8.95753/38.69117
+- **Jemo 2 block 097** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95765&mlon=38.69083#map=18/8.95765/38.69083
+- **Jemo 2 block 098** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95741&mlon=38.69100#map=18/8.95741/38.69100
+- **Jemo 2 block 099** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95701&mlon=38.69175#map=18/8.95701/38.69175
+- **Jemo 2 block 100** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95719&mlon=38.69157#map=18/8.95719/38.69157
+- **Jemo 2 block 101** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95722&mlon=38.69132#map=18/8.95722/38.69132
+- **Jemo 3 block 01** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95747&mlon=38.69459#map=18/8.95747/38.69459
+- **Jemo 3 block 02** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95763&mlon=38.69436#map=18/8.95763/38.69436
+- **Jemo 3 block 03** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95779&mlon=38.69417#map=18/8.95779/38.69417
+- **Jemo 3 block 04** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95795&mlon=38.69399#map=18/8.95795/38.69399
+- **Jemo 3 block 05** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95817&mlon=38.69383#map=18/8.95817/38.69383
+- **Jemo 3 block 06** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95816&mlon=38.69410#map=18/8.95816/38.69410
+- **Jemo 3 block 07** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95783&mlon=38.69466#map=18/8.95783/38.69466
+- **Jemo 3 block 08** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95800&mlon=38.69446#map=18/8.95800/38.69446
+- **Jemo 3 block 09** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95822&mlon=38.69450#map=18/8.95822/38.69450
+- **Jemo 3 block 10** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95832&mlon=38.69490#map=18/8.95832/38.69490
+- **Jemo 3 block 100** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95796&mlon=38.69848#map=18/8.95796/38.69848
+- **Jemo 3 block 101** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95813&mlon=38.69877#map=18/8.95813/38.69877
+- **Jemo 3 block 102** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95832&mlon=38.69906#map=18/8.95832/38.69906
+- **Jemo 3 block 103** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95839&mlon=38.69936#map=18/8.95839/38.69936
+- **Jemo 3 block 104** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95816&mlon=38.69942#map=18/8.95816/38.69942
+- **Jemo 3 block 105** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95792&mlon=38.69924#map=18/8.95792/38.69924
+- **Jemo 3 block 106** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95767&mlon=38.69882#map=18/8.95767/38.69882
+- **Jemo 3 block 107** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95766&mlon=38.69854#map=18/8.95766/38.69854
+- **Jemo 3 block 108** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95734&mlon=38.69885#map=18/8.95734/38.69885
+- **Jemo 3 block 109** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95755&mlon=38.69909#map=18/8.95755/38.69909
+- **Jemo 3 block 110** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95773&mlon=38.69937#map=18/8.95773/38.69937
+- **Jemo 3 block 111** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95759&mlon=38.69959#map=18/8.95759/38.69959
+- **Jemo 3 block 112** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95737&mlon=38.69951#map=18/8.95737/38.69951
+- **Jemo 3 block 113** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95710&mlon=38.69900#map=18/8.95710/38.69900
+- **Jemo 3 block 114** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95841&mlon=38.69528#map=18/8.95841/38.69528
+- **Jemo 3 block 12** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95824&mlon=38.69537#map=18/8.95824/38.69537
+- **Jemo 3 block 13** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95807&mlon=38.69519#map=18/8.95807/38.69519
+- **Jemo 3 block 14** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95687&mlon=38.69522#map=18/8.95687/38.69522
+- **Jemo 3 block 15** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95703&mlon=38.69504#map=18/8.95703/38.69504
+- **Jemo 3 block 16** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95721&mlon=38.69486#map=18/8.95721/38.69486
+- **Jemo 3 block 17** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95744&mlon=38.69497#map=18/8.95744/38.69497
+- **Jemo 3 block 18** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95763&mlon=38.69514#map=18/8.95763/38.69514
+- **Jemo 3 block 184** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95974&mlon=38.70618#map=18/8.95974/38.70618
+- **Jemo 3 block 19** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95756&mlon=38.69552#map=18/8.95756/38.69552
+- **Jemo 3 block 20** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95776&mlon=38.69534#map=18/8.95776/38.69534
+- **Jemo 3 block 21** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95802&mlon=38.69550#map=18/8.95802/38.69550
+- **Jemo 3 block 22** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95820&mlon=38.69573#map=18/8.95820/38.69573
+- **Jemo 3 block 23** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95796&mlon=38.69599#map=18/8.95796/38.69599
+- **Jemo 3 block 24** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95763&mlon=38.69601#map=18/8.95763/38.69601
+- **Jemo 3 block 25** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95744&mlon=38.69582#map=18/8.95744/38.69582
+- **Jemo 3 block 26** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95726&mlon=38.69598#map=18/8.95726/38.69598
+- **Jemo 3 block 27** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95747&mlon=38.69618#map=18/8.95747/38.69618
+- **Jemo 3 block 28** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95752&mlon=38.69640#map=18/8.95752/38.69640
+- **Jemo 3 block 29** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95725&mlon=38.69656#map=18/8.95725/38.69656
+- **Jemo 3 block 30** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95703&mlon=38.69640#map=18/8.95703/38.69640
+- **Jemo 3 block 31** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95683&mlon=38.69622#map=18/8.95683/38.69622
+- **Jemo 3 block 32** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95660&mlon=38.69602#map=18/8.95660/38.69602
+- **Jemo 3 block 33** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95641&mlon=38.69582#map=18/8.95641/38.69582
+- **Jemo 3 block 34** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95659&mlon=38.69552#map=18/8.95659/38.69552
+- **Jemo 3 block 35** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95587&mlon=38.69639#map=18/8.95587/38.69639
+- **Jemo 3 block 36** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95608&mlon=38.69615#map=18/8.95608/38.69615
+- **Jemo 3 block 37** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95632&mlon=38.69629#map=18/8.95632/38.69629
+- **Jemo 3 block 38** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95657&mlon=38.69651#map=18/8.95657/38.69651
+- **Jemo 3 block 39** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95679&mlon=38.69672#map=18/8.95679/38.69672
+- **Jemo 3 block 40** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95692&mlon=38.69692#map=18/8.95692/38.69692
+- **Jemo 3 block 41** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95669&mlon=38.69712#map=18/8.95669/38.69712
+- **Jemo 3 block 42** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95642&mlon=38.69696#map=18/8.95642/38.69696
+- **Jemo 3 block 43** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95628&mlon=38.69717#map=18/8.95628/38.69717
+- **Jemo 3 block 44** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95641&mlon=38.69737#map=18/8.95641/38.69737
+- **Jemo 3 block 45** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95616&mlon=38.69755#map=18/8.95616/38.69755
+- **Jemo 3 block 46** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95591&mlon=38.69737#map=18/8.95591/38.69737
+- **Jemo 3 block 47** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95560&mlon=38.69709#map=18/8.95560/38.69709
+- **Jemo 3 block 48** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95571&mlon=38.69671#map=18/8.95571/38.69671
+- **Jemo 3 block 50** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95814&mlon=38.69637#map=18/8.95814/38.69637
+- **Jemo 3 block 51** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95830&mlon=38.69621#map=18/8.95830/38.69621
+- **Jemo 3 block 52** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95848&mlon=38.69606#map=18/8.95848/38.69606
+- **Jemo 3 block 53** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95870&mlon=38.69619#map=18/8.95870/38.69619
+- **Jemo 3 block 54** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95884&mlon=38.69645#map=18/8.95884/38.69645
+- **Jemo 3 block 55** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95868&mlon=38.69655#map=18/8.95868/38.69655
+- **Jemo 3 block 56** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95852&mlon=38.69666#map=18/8.95852/38.69666
+- **Jemo 3 block 57** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95836&mlon=38.69678#map=18/8.95836/38.69678
+- **Jemo 3 block 64** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95824&mlon=38.69730#map=18/8.95824/38.69730
+- **Jemo 3 block 65** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95800&mlon=38.69737#map=18/8.95800/38.69737
+- **Jemo 3 block 66** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95786&mlon=38.69753#map=18/8.95786/38.69753
+- **Jemo 3 block 67** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95799&mlon=38.69778#map=18/8.95799/38.69778
+- **Jemo 3 block 68** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95816&mlon=38.69787#map=18/8.95816/38.69787
+- **Jemo 3 block 69** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95836&mlon=38.69773#map=18/8.95836/38.69773
+- **Jemo 3 block 70** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95719&mlon=38.69726#map=18/8.95719/38.69726
+- **Jemo 3 block 71** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95740&mlon=38.69755#map=18/8.95740/38.69755
+- **Jemo 3 block 72** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95769&mlon=38.69806#map=18/8.95769/38.69806
+- **Jemo 3 block 73** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95759&mlon=38.69829#map=18/8.95759/38.69829
+- **Jemo 3 block 74** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95733&mlon=38.69828#map=18/8.95733/38.69828
+- **Jemo 3 block 75** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95710&mlon=38.69788#map=18/8.95710/38.69788
+- **Jemo 3 block 76** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95697&mlon=38.69766#map=18/8.95697/38.69766
+- **Jemo 3 block 77** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95698&mlon=38.69740#map=18/8.95698/38.69740
+- **Jemo 3 block 78** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95720&mlon=38.69764#map=18/8.95720/38.69764
+- **Jemo 3 block 79** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95702&mlon=38.69829#map=18/8.95702/38.69829
+- **Jemo 3 block 80** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95715&mlon=38.69853#map=18/8.95715/38.69853
+- **Jemo 3 block 81** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95692&mlon=38.69871#map=18/8.95692/38.69871
+- **Jemo 3 block 82** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95674&mlon=38.69850#map=18/8.95674/38.69850
+- **Jemo 3 block 96** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95898&mlon=38.69921#map=18/8.95898/38.69921
+- **Jemo 3 block 97** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95872&mlon=38.69898#map=18/8.95872/38.69898
+- **Jemo 3 block 98** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95844&mlon=38.69854#map=18/8.95844/38.69854
+- **Jemo 3 block 99** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95825&mlon=38.69824#map=18/8.95825/38.69824
+- **Jemo block 213** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95639&mlon=38.71649#map=18/8.95639/38.71649
+- **Jemo Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95952&mlon=38.71000#map=18/8.95952/38.71000
+- **Jemo Hime** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93789&mlon=38.72103#map=18/8.93789/38.72103
+- **Jemo Michael Condominium** (ጀሞ ሚካኤል ኮንደሚንየም) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96774&mlon=38.72592#map=18/8.96774/38.72592
+- **Jemo No1 Block 8 ®** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96257&mlon=38.71490#map=18/8.96257/38.71490
+- **JFK Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97672&mlon=38.74712#map=18/8.97672/38.74712
+- **Kadisko** (ካዲስኮ ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96615&mlon=38.76311#map=18/8.96615/38.76311
+- **Kalu Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96103&mlon=38.71531#map=18/8.96103/38.71531
+- **Kera woreda 05(455)** · apartment · 455, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98127&mlon=38.74470#map=18/8.98127/38.74470
+- **Kidanu Building** (ኪዳኑ ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98068&mlon=38.74927#map=18/8.98068/38.74927
+- **Kotari Primary School** · school · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93677&mlon=38.74654#map=18/8.93677/38.74654
+- **Lafto condominium No. 1** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95421&mlon=38.74639#map=18/8.95421/38.74639
+- **Lafto Desset Condominum** · apartment · Gate 3, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95171&mlon=38.75029#map=18/8.95171/38.75029
+- **Lafto Genet Condominium Gate 1** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95237&mlon=38.74979#map=18/8.95237/38.74979
+- **Lafto Genet Condominium** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94921&mlon=38.74879#map=18/8.94921/38.74879
+- **Land -1** (መሬት 1) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93359&mlon=38.71173#map=18/8.93359/38.71173
+- **Land-2** (መሬት 2) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93377&mlon=38.71122#map=18/8.93377/38.71122
+- **Large Tukul** · hut · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99649&mlon=38.72814#map=18/8.99649/38.72814
+- **Lebu Real Estate - Varnero Appartments -** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94841&mlon=38.72734#map=18/8.94841/38.72734
+- **Library** (ላይብረሪ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99660&mlon=38.72855#map=18/8.99660/38.72855
+- **Loli BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98951&mlon=38.72457#map=18/8.98951/38.72457
+- **mafi.house** (የሙሽቁላ ቤት) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93680&mlon=38.72045#map=18/8.93680/38.72045
+- **Mame ERA Hamil Relatives** (ማሜ ኢራ ሀሚል ዘመድ) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93590&mlon=38.71051#map=18/8.93590/38.71051
+- **Mamo condominium** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97322&mlon=38.76234#map=18/8.97322/38.76234
+- **Mande Apartment** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95741&mlon=38.71991#map=18/8.95741/38.71991
+- **Mekanisa Condominium** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97382&mlon=38.73087#map=18/8.97382/38.73087
+- **Mekanissa kore condominium 1** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97591&mlon=38.72450#map=18/8.97591/38.72450
+- **Mekanissa Kore condominium 2** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97719&mlon=38.72287#map=18/8.97719/38.72287
+- **Mina Mall** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96901&mlon=38.72132#map=18/8.96901/38.72132
+- **Mintewab** (ምንትዋብ ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97847&mlon=38.75978#map=18/8.97847/38.75978
+- **Mistr** · apartment · B-30, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95705&mlon=38.69645#map=18/8.95705/38.69645
+- **mushkila brother house** (መፊ ወንድም) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95156&mlon=38.71130#map=18/8.95156/38.71130
+- **My Home** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94984&mlon=38.73077#map=18/8.94984/38.73077
+- **Naod Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96150&mlon=38.71439#map=18/8.96150/38.71439
+- **NAZO** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93786&mlon=38.73550#map=18/8.93786/38.73550
+- **nequ house lebu** (ነቁ ቤት) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93577&mlon=38.72585#map=18/8.93577/38.72585
+- **Nile Insurance** (ናይል ኢንሹራንስ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97946&mlon=38.76132#map=18/8.97946/38.76132
+- **Noah BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96029&mlon=38.76572#map=18/8.96029/38.76572
+- **Norwegian residence** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98674&mlon=38.71933#map=18/8.98674/38.71933
+- **Oliasha Bldg** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94271&mlon=38.75395#map=18/8.94271/38.75395
+- **Osac Business Tower** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94903&mlon=38.72837#map=18/8.94903/38.72837
+- **Penn Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99149&mlon=38.73844#map=18/8.99149/38.73844
+- **Qore guest house** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97691&mlon=38.71830#map=18/8.97691/38.71830
+- **Rawi Bldg** (ራዊ ህንጻ) · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97308&mlon=38.76117#map=18/8.97308/38.76117
+- **Rehoboth BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95263&mlon=38.71547#map=18/8.95263/38.71547
+- **Rift Vally University** · university · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97525&mlon=38.76047#map=18/8.97525/38.76047
+- **Saba Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96107&mlon=38.71585#map=18/8.96107/38.71585
+- **Sabeh Springs BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94893&mlon=38.72904#map=18/8.94893/38.72904
+- **Sabit** · apartments · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99379&mlon=38.72854#map=18/8.99379/38.72854
+- **Samuel Building** (ሳሙኤል ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94777&mlon=38.73420#map=18/8.94777/38.73420
+- **Sani Building** (ሳኒ ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97953&mlon=38.74912#map=18/8.97953/38.74912
+- **Sara Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94896&mlon=38.72053#map=18/8.94896/38.72053
+- **Sazhak BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94829&mlon=38.72946#map=18/8.94829/38.72946
+- **Selam Building** (ሰላም ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97902&mlon=38.74905#map=18/8.97902/38.74905
+- **Selase Gofa building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97692&mlon=38.74884#map=18/8.97692/38.74884
+- **Sersa Furnished Apartment** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99155&mlon=38.72509#map=18/8.99155/38.72509
+- **Shimekit** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99257&mlon=38.72787#map=18/8.99257/38.72787
+- **Shitaye Mehdi** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92426&mlon=38.75010#map=18/8.92426/38.75010
+- **Shoa Shopping Center** · commercial · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98875&mlon=38.72379#map=18/8.98875/38.72379
+- **Small Tukul** · hut · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99642&mlon=38.72873#map=18/8.99642/38.72873
+- **Sofia Mall** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97939&mlon=38.75006#map=18/8.97939/38.75006
+- **Sofia supermarket** (ሶፊያ ሱፐርማርኬት(Jemo)) · apartment · Ring Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99837&mlon=38.71902#map=18/8.99837/38.71902
+- **T/Haymanot BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96587&mlon=38.76330#map=18/8.96587/38.76330
+- **Tadelu Kebede** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95771&mlon=38.71021#map=18/8.95771/38.71021
+- **Tdelu Kebede - ታደሉ ከበደ Addis Ababa Apartment** (የወ/ሮ ታደሉ ከበደ መኖሪያ አዲስ አበባ) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95762&mlon=38.71019#map=18/8.95762/38.71019
+- **Tensaea Kassa Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97594&mlon=38.74869#map=18/8.97594/38.74869
+- **Tessema Woubneh** (ተሰማ ዉብነህ) · apartment · 407/0870, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96207&mlon=38.77129#map=18/8.96207/38.77129
+- **Tige’s** (ጥጌ) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94181&mlon=38.74137#map=18/8.94181/38.74137
+- **top pesion** (ቶፕ ፔንሲዮን) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96328&mlon=38.75077#map=18/8.96328/38.75077
+- **Tracon Apartments** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95108&mlon=38.71112#map=18/8.95108/38.71112
+- **Venus Commercial Center (VCC)** · commercial · Gofa Mebrat Hail, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96629&mlon=38.74830#map=18/8.96629/38.74830
+- **W/Yohanes Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94179&mlon=38.73560#map=18/8.94179/38.73560
+- **Wae Misha Building** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96221&mlon=38.71618#map=18/8.96221/38.71618
+- **Yared BLDG** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96031&mlon=38.76507#map=18/8.96031/38.76507
+- **YDCS-Yemisirach Dimts** (ዋይዲሲኤስ - የምስራች ድምጽ) · office · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97081&mlon=38.73203#map=18/8.97081/38.73203
+- **Ye fedlu bet** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93382&mlon=38.71159#map=18/8.93382/38.71159
+- **Yenim Furnisihed Apartment** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99007&mlon=38.72651#map=18/8.99007/38.72651
+- **Yotek real estate** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95916&mlon=38.72596#map=18/8.95916/38.72596
+- **Yotek** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99102&mlon=38.73842#map=18/8.99102/38.73842
+- **Zawditu Bldg.** · South Africa Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99349&mlon=38.72865#map=18/8.99349/38.72865
+- **Zeleke Building** (ዘለቀ ሕንፃ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98315&mlon=38.75013#map=18/8.98315/38.75013
+- **ሰዒድ ያሲን** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95305&mlon=38.69576#map=18/8.95305/38.69576
+- **ሳሚ ሾፌር Sami Driver** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94732&mlon=38.75311#map=18/8.94732/38.75311
+- **ሸምsu** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94369&mlon=38.75827#map=18/8.94369/38.75827
+- **ቆጣሪ ኮንዶሚኒየም block 60** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93326&mlon=38.72910#map=18/8.93326/38.72910
+- **ንቁ ቤት 2** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93097&mlon=38.72441#map=18/8.93097/38.72441
+- **የፍሬ ጀሞ ፈሳሽ ሳሙና** · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95789&mlon=38.70824#map=18/8.95789/38.70824
+- **ጀረጄ በርባዶስ** (ጀረጄ በርባዶስ ቤት) · apartment · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93862&mlon=38.73096#map=18/8.93862/38.73096
+
+## Akaki Kality sub-city · አቃቂ ቃሊቲ ክፍለ ከተማ — 95
+
+- **ababora** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86244&mlon=38.79658#map=18/8.86244/38.79658
+- **ababora** (አባቦራ) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85840&mlon=38.79915#map=18/8.85840/38.79915
+- **Aklilu's house** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94818&mlon=38.76820#map=18/8.94818/38.76820
+- **ale mom home** (አለኸኝ መኖርያ ቤት) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85821&mlon=38.79934#map=18/8.85821/38.79934
+- **Apartment Bajaj castomer** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86302&mlon=38.81306#map=18/8.86302/38.81306
+- **Ato Getachew Residence** (የአቶ ጌታቸው መኖሪያ) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87060&mlon=38.80508#map=18/8.87060/38.80508
+- **Beti and Abel's Home** (የቤቲ እና የአቤል ቤት) · apartment · B-98/26 Gelan Condominium, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87019&mlon=38.76912#map=18/8.87019/38.76912
+- **Block 19** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87256&mlon=38.77375#map=18/8.87256/38.77375
+- **Block 238** (ብሎክ 238) · apartment · 238 Gelan condominium, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87908&mlon=38.76293#map=18/8.87908/38.76293
+- **Block 340 Rahmeto Koyefetche** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90882&mlon=38.82349#map=18/8.90882/38.82349
+- **CMC Home** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93137&mlon=38.82530#map=18/8.93137/38.82530
+- **Delta Complex** · commercial · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93080&mlon=38.76814#map=18/8.93080/38.76814
+- **Esu home** · apartment · run by Haile · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85902&mlon=38.82089#map=18/8.85902/38.82089
+- **Esu home** · house · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85901&mlon=38.82088#map=18/8.85901/38.82088
+- **Farid Kaliti Commercial Center** (ፋሪድ ካሊቲ የንግድ ማዕከል) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89626&mlon=38.77133#map=18/8.89626/38.77133
+- **G-7 Block 01** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87081&mlon=38.82183#map=18/8.87081/38.82183
+- **G-7 Block 192** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87053&mlon=38.82211#map=18/8.87053/38.82211
+- **Gelan Condominium B169-178 Communal** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87546&mlon=38.76554#map=18/8.87546/38.76554
+- **Gelan Condominium B169-178** (ገላን ኮንዶሚኒየም B169-178) · apartment · B169-178 Highway to Adama, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87523&mlon=38.76553#map=18/8.87523/38.76553
+- **Gelan Condominium B169-178** (ገላን ኮንዶሚኒየም B169-178) · apartment · B169-178 Highway, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87562&mlon=38.76455#map=18/8.87562/38.76455
+- **Gelan Condominium** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88013&mlon=38.76807#map=18/8.88013/38.76807
+- **Home** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95700&mlon=38.77127#map=18/8.95700/38.77127
+- **KAFDEM Building** · commercial · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89415&mlon=38.77272#map=18/8.89415/38.77272
+- **Kafdem** · commercial · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89417&mlon=38.77273#map=18/8.89417/38.77273
+- **KAFDM Plaza** (ካፍደም ፕላዛ) · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89458&mlon=38.77296#map=18/8.89458/38.77296
+- **Kality Chefe Condominium** (ቃሊቲ ጨፌ ኮንዶሚኒየም) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90211&mlon=38.77903#map=18/8.90211/38.77903
+- **Kality Total Condominium** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89738&mlon=38.77589#map=18/8.89738/38.77589
+- **Kedir House** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94968&mlon=38.77111#map=18/8.94968/38.77111
+- **Kilinto Condeminium block 181-190** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89327&mlon=38.80675#map=18/8.89327/38.80675
+- **kilinto Condominium** · Kilinto condominium B.no 101 H.no 20 kilinto Condominium, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89542&mlon=38.80007#map=18/8.89542/38.80007
+- **Kilinto tach sefer** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89181&mlon=38.80484#map=18/8.89181/38.80484
+- **Koye Fetche Block 435 Bekri House** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90328&mlon=38.82332#map=18/8.90328/38.82332
+- **Koye nfasslk b 478** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89509&mlon=38.82754#map=18/8.89509/38.82754
+- **Kuye 477 block** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89561&mlon=38.82762#map=18/8.89561/38.82762
+- **LEMMA DEBELA** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85763&mlon=38.81949#map=18/8.85763/38.81949
+- **Lid 477.4** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89370&mlon=38.82442#map=18/8.89370/38.82442
+- **lid House 477** (የሊዲያ ቤት) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89541&mlon=38.82768#map=18/8.89541/38.82768
+- **low density mixed residence** · residential · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89620&mlon=38.80602#map=18/8.89620/38.80602
+- **MARU Metal Industry plc (Kaliti production site)** · industrial · Akaki/Kaliti subcity W.05, H.no.9999, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92111&mlon=38.76693#map=18/8.92111/38.76693
+- **Mitu's home** (ሚጡ ቤት) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.91148&mlon=38.76675#map=18/8.91148/38.76675
+- **MTDK Home** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93206&mlon=38.82530#map=18/8.93206/38.82530
+- **Mulugeta Gebregergis ሙሉጌታ ገ/ገርግስ** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87377&mlon=38.80240#map=18/8.87377/38.80240
+- **my palace (ታሪክና ፀጋ)** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87796&mlon=38.81149#map=18/8.87796/38.81149
+- **Neima Home Original** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88370&mlon=38.78214#map=18/8.88370/38.78214
+- **Neima Home** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88489&mlon=38.78115#map=18/8.88489/38.78115
+- **New Hope BLDG** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95998&mlon=38.76574#map=18/8.95998/38.76574
+- **Nile Insurance Building** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93934&mlon=38.77051#map=18/8.93934/38.77051
+- **Oromia Water Works Construction Enterprise(OWWCE)** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93321&mlon=38.76471#map=18/8.93321/38.76471
+- **Project 17** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90791&mlon=38.83036#map=18/8.90791/38.83036
+- **Robel and rich home** (የሮቤል እና የራሔል ቤት) · apartment · 238 Gelan condominium, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87921&mlon=38.76286#map=18/8.87921/38.76286
+- **Selam Building** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88360&mlon=38.77656#map=18/8.88360/38.77656
+- **Service Quarters / Biblical Training Rooms** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94469&mlon=38.77054#map=18/8.94469/38.77054
+- **Tach Sefer Condominium Block 73** (ታች ሰፈር ህንፃ ቁጥር 73) · apartment · 73 Kilinto to Koye Street, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89861&mlon=38.80497#map=18/8.89861/38.80497
+- **Telkam** · commercial · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92906&mlon=38.76749#map=18/8.92906/38.76749
+- **Tullu Dimtu cindominium** (ቱሉ ዲምቱ ኮንዶሚንየም) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86599&mlon=38.82261#map=18/8.86599/38.82261
+- **Tulu Dimtu Condominium** (ቱሉ ዲምቱ ኮንዶሚኒየም) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87509&mlon=38.82111#map=18/8.87509/38.82111
+- **Tulu dimtu** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87453&mlon=38.81986#map=18/8.87453/38.81986
+- **Zenith kids home** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86572&mlon=38.80792#map=18/8.86572/38.80792
+- **ብሎክ 030/Block 030** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88419&mlon=38.76837#map=18/8.88419/38.76837
+- **ብሎክ 034 block 034** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86953&mlon=38.76972#map=18/8.86953/38.76972
+- **ብሎክ 079/Block 079** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88324&mlon=38.76878#map=18/8.88324/38.76878
+- **ብሎክ 084/Block 084** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88250&mlon=38.76895#map=18/8.88250/38.76895
+- **ብሎክ 174 Block 174** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87511&mlon=38.76610#map=18/8.87511/38.76610
+- **ብሎክ 186 block 186** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87715&mlon=38.76697#map=18/8.87715/38.76697
+- **ብሎክ 187 block 187** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87696&mlon=38.76673#map=18/8.87696/38.76673
+- **ብሎክ 207/Block 207** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87673&mlon=38.76481#map=18/8.87673/38.76481
+- **አንላኤል አቃቂ ቤታቸው Anlael Akakl betachew** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87809&mlon=38.81127#map=18/8.87809/38.81127
+- **ካብቱ ዘመድ** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87640&mlon=38.81042#map=18/8.87640/38.81042
+- **ኮዪ ፈጬ ኮንደሚኒም Koye Feche Conduminium** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90322&mlon=38.82479#map=18/8.90322/38.82479
+- **ኮዪ ፈጮ ኮንደሚኒየም ፕሮጀክት 11 Koye Fechi Condominium projuct 11** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89212&mlon=38.84078#map=18/8.89212/38.84078
+- **የምንይሁን መኖሪያ ቤት** · apartment · 26, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86871&mlon=38.77068#map=18/8.86871/38.77068
+- **ገላን ኮንዶሚኒየም ብሎክ 025 Gelan Condominium block 025** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86851&mlon=38.77039#map=18/8.86851/38.77039
+- **ገላን ኮንዶሚኒየም ብሎክ 031 Gelan Condominium block 031** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86897&mlon=38.76998#map=18/8.86897/38.76998
+- **ገላን ኮንዶሚኒየም ብሎክ 033 Gelan Condominium block 033** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86945&mlon=38.76953#map=18/8.86945/38.76953
+- **ገላን ኮንዶሚኒየም ብሎክ 095 Gelan Condominium block 095** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87060&mlon=38.76880#map=18/8.87060/38.76880
+- **ገላን ኮንዶሚኒየም ብሎክ 144 Gelan Condominium block 144** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87501&mlon=38.76853#map=18/8.87501/38.76853
+- **ገላን ኮንዶሚኒየም ብሎክ 151 Gelan Condominium block 151** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87348&mlon=38.76729#map=18/8.87348/38.76729
+- **ገላን ኮንዶሚኒየም ብሎክ 153 Gelan Condominium block 153** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87298&mlon=38.76688#map=18/8.87298/38.76688
+- **ገላን ኮንዶሚኒየም ብሎክ 158 Gelan Condominium block 158** (ገላን ኮንዶሚኒየም ብሎክ 158) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87318&mlon=38.76671#map=18/8.87318/38.76671
+- **ገላን ኮንዶሚኒየም ብሎክ 166 Gelan Condominium block 166** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87521&mlon=38.76502#map=18/8.87521/38.76502
+- **ገላን ኮንዶሚኒየም ብሎክ 169 Gelan Condominium block 169** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87547&mlon=38.76529#map=18/8.87547/38.76529
+- **ገላን ኮንዶሚኒየም ብሎክ 172 Gelan Condominium block 172** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87504&mlon=38.76563#map=18/8.87504/38.76563
+- **ገላን ኮንዶሚኒየም ብሎክ 175 Gelan Condominium block 175** · apartment · B175, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87535&mlon=38.76597#map=18/8.87535/38.76597
+- **ገላን ኮንዶሚኒየም ብሎክ 178 Gelan Condominium block 178** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87569&mlon=38.76517#map=18/8.87569/38.76517
+- **ገላን ኮንዶሚኒየም ብሎክ 189 Gelan Condominium block 189** (ገላን ኮንዶሚኒየም ብሎክ 188) · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87672&mlon=38.76791#map=18/8.87672/38.76791
+- **ገላን ኮንዶሚኒየም ብሎክ 193 Gelan Condominium block 193** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87783&mlon=38.76739#map=18/8.87783/38.76739
+- **ገላን ኮንዶሚኒየም ብሎክ 194 Gelan Condominium block 194** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87811&mlon=38.76728#map=18/8.87811/38.76728
+- **ገላን ኮንዶሚኒየም ብሎክ 211 Gelan Condominium block 211** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87606&mlon=38.76528#map=18/8.87606/38.76528
+- **ገላን ኮንዶሚኒየም ብሎክ 212 Gelan Condominium block 212** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87590&mlon=38.76504#map=18/8.87590/38.76504
+- **ገላን ኮንዶሚኒየም ብሎክ 218 Gelan Condominium block 218** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87646&mlon=38.76399#map=18/8.87646/38.76399
+- **ገላን ኮንዶሚኒየም ብሎክ 222 Gelan Condominium block 222** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87586&mlon=38.76390#map=18/8.87586/38.76390
+- **ገላን ኮንዶሚኒየም ብሎክ 228 Gelan Condominium block 228** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87753&mlon=38.76240#map=18/8.87753/38.76240
+- **ግላን ኮንዶሚኒየም Gelan Condominium B140** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87477&mlon=38.76909#map=18/8.87477/38.76909
+- **ግላን ኮንዶሚኒየም Gelan Condominium B209** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87748&mlon=38.77148#map=18/8.87748/38.77148
+- **ግላን ኮንዶሚኒየም Gelan Condominium B214** · apartment · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87671&mlon=38.77037#map=18/8.87671/38.77037
+
+## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 77
+
+- **400 fqr** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01261&mlon=38.68866#map=18/9.01261/38.68866
+- **abdi place** (አብዲ place) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01427&mlon=38.67721#map=18/9.01427/38.67721
+- **Addis kiray 1** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00054&mlon=38.70485#map=18/9.00054/38.70485
+- **ALERT Hostel** · house · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98636&mlon=38.71195#map=18/8.98636/38.71195
+- **Armauer Hansen Research Institute (AHRI)** (አርማወር ሐንሰን የምርምር ተቋም (አህሪ)) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98677&mlon=38.71253#map=18/8.98677/38.71253
+- **Asko leez safer** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05277&mlon=38.69378#map=18/9.05277/38.69378
+- **Auzubillahi mineshytan** (ለይላ ሻንከር ግቢ) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99047&mlon=38.69737#map=18/8.99047/38.69737
+- **Bcorrect home** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97185&mlon=38.71106#map=18/8.97185/38.71106
+- **berhanu betu** (ብሬ ቤት) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97696&mlon=38.69650#map=18/8.97696/38.69650
+- **berhanu yebegeta house** (ብርሀኑ ይብጌታ ቤት) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97696&mlon=38.69648#map=18/8.97696/38.69648
+- **Bicha Building** (ቢጫ ህንፃ) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00573&mlon=38.69494#map=18/9.00573/38.69494
+- **Block 63** · New Ambo Road, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05089&mlon=38.70122#map=18/9.05089/38.70122
+- **Block65** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05144&mlon=38.70073#map=18/9.05144/38.70073
+- **Block73** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05304&mlon=38.70165#map=18/9.05304/38.70165
+- **Dema Building** (ዲማ ህንፃ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02339&mlon=38.71542#map=18/9.02339/38.71542
+- **Demesew** (ደምሰወ) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00295&mlon=38.67837#map=18/9.00295/38.67837
+- **Dr umer house** (ዶክተር ኡመር ቤት) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00949&mlon=38.69334#map=18/9.00949/38.69334
+- **Efoyta** (እፎይታ) · apartment · አጠና ተራ አካባቢ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours Mo-Su 02:29-14:01 · map https://www.openstreetmap.org/?mlat=9.04166&mlon=38.71285#map=18/9.04166/38.71285
+- **Ekram House** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99640&mlon=38.67112#map=18/8.99640/38.67112
+- **FetAwerari HabeteGiorgis** · school · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06204&mlon=38.69496#map=18/9.06204/38.69496
+- **FetAwerari HabeteGiorgis** · school · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06220&mlon=38.69518#map=18/9.06220/38.69518
+- **FetAwerari HabeteGiorgis** · school · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06223&mlon=38.69455#map=18/9.06223/38.69455
+- **FetAwerari HabeteGiorgis** · school · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06234&mlon=38.69412#map=18/9.06234/38.69412
+- **FetAwerari HabeteGiorgis** · school · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06240&mlon=38.69475#map=18/9.06240/38.69475
+- **FetAwerari HabeteGiorgis** · school · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06260&mlon=38.69406#map=18/9.06260/38.69406
+- **FetAwerari HabeteGiorgis** · school · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06265&mlon=38.69420#map=18/9.06265/38.69420
+- **FetAwerari HabeteGiorgis** · school · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06280&mlon=38.69467#map=18/9.06280/38.69467
+- **Feven Habte** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97909&mlon=38.69472#map=18/8.97909/38.69472
+- **Fitse keranio home** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01394&mlon=38.70898#map=18/9.01394/38.70898
+- **Fitse keranio** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01398&mlon=38.70866#map=18/9.01398/38.70866
+- **Gizawu** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97329&mlon=38.70883#map=18/8.97329/38.70883
+- **health clinic** · hospital · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05340&mlon=38.70119#map=18/9.05340/38.70119
+- **Hirut home** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06072&mlon=38.69471#map=18/9.06072/38.69471
+- **House for sale kara elpa** (የሚሸጥ ቤት ካራ 173) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97963&mlon=38.67873#map=18/8.97963/38.67873
+- **House for salw jemo (alembank)** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99661&mlon=38.67975#map=18/8.99661/38.67975
+- **Jemo 2 block 103** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95836&mlon=38.69021#map=18/8.95836/38.69021
+- **Jemo 2 block 104** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95814&mlon=38.69036#map=18/8.95814/38.69036
+- **Jemo 2 block 105** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95794&mlon=38.69060#map=18/8.95794/38.69060
+- **Jemo 2 block 106** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95819&mlon=38.69075#map=18/8.95819/38.69075
+- **Jemo 2 block 107** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95841&mlon=38.69050#map=18/8.95841/38.69050
+- **Jemo 2 block 108** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95874&mlon=38.69039#map=18/8.95874/38.69039
+- **Jemo 2 block 109** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95867&mlon=38.69072#map=18/8.95867/38.69072
+- **Jemo 2 block 110** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95845&mlon=38.69099#map=18/8.95845/38.69099
+- **Jemo 2 block 111** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95861&mlon=38.69123#map=18/8.95861/38.69123
+- **Jemo 2 block 112** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95883&mlon=38.69103#map=18/8.95883/38.69103
+- **Jemo 2 block 113** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95919&mlon=38.69063#map=18/8.95919/38.69063
+- **Jemo 2 block 114** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95937&mlon=38.69037#map=18/8.95937/38.69037
+- **Jemo 2 block 117** · apartments · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95769&mlon=38.69020#map=18/8.95769/38.69020
+- **Jemo Block 130** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95790&mlon=38.68839#map=18/8.95790/38.68839
+- **Jezbaw's** (የጀዝባው) · apartment · run by Fikre · KK_07_2645 St., Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01354&mlon=38.67570#map=18/9.01354/38.67570
+- **Jossi Family House** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96453&mlon=38.67280#map=18/8.96453/38.67280
+- **kebe house** (ከቤ ቤት) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96351&mlon=38.66800#map=18/8.96351/38.66800
+- **keder housw** (የ ከድር ቤት) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97465&mlon=38.70114#map=18/8.97465/38.70114
+- **mame bete** (መሀሙዴ ቤት) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98025&mlon=38.65971#map=18/8.98025/38.65971
+- **MCC Office** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99311&mlon=38.70700#map=18/8.99311/38.70700
+- **Mother home** (ማዘር ቤት) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97922&mlon=38.70244#map=18/8.97922/38.70244
+- **Musa Mohammed Home የሙሳ መሐመድ ቤት** (የሙሳ መሐመድ ቤት) · apartment · run by Rental · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01039&mlon=38.67103#map=18/9.01039/38.67103
+- **My home** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04330&mlon=38.69895#map=18/9.04330/38.69895
+- **my home** (ቤቴ) · apartments · 102 Mickililand Condominium, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04934&mlon=38.69776#map=18/9.04934/38.69776
+- **Nure's Home1** (የኑሬ ቤት1) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03178&mlon=38.70186#map=18/9.03178/38.70186
+- **Nure2** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03618&mlon=38.69844#map=18/9.03618/38.69844
+- **Oda building** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00405&mlon=38.69392#map=18/9.00405/38.69392
+- **Pharmacy** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98576&mlon=38.71218#map=18/8.98576/38.71218
+- **Raki lamri home** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98324&mlon=38.69941#map=18/8.98324/38.69941
+- **SIL Ethiopia** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98050&mlon=38.70113#map=18/8.98050/38.70113
+- **sisay sister home** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96536&mlon=38.65957#map=18/8.96536/38.65957
+- **Sr. Lezena home** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02197&mlon=38.71261#map=18/9.02197/38.71261
+- **St. Francisco Frairy** · church · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06260&mlon=38.69873#map=18/9.06260/38.69873
+- **Suzanne's** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99029&mlon=38.71726#map=18/8.99029/38.71726
+- **tariku home** (ታሪኩ ግርሰሪ ቤት) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98647&mlon=38.68750#map=18/8.98647/38.68750
+- **Tesfaye home** (የተስፋዬ አማረ ቤት) · apartment · Old Ambo Road -የድሮው የአምቦ መንገድ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05270&mlon=38.71717#map=18/9.05270/38.71717
+- **Upside APARTMENT አኘ ሳይድ** (Upside REDAT APARTMENT) · apartment · 67667, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01852&mlon=38.67187#map=18/9.01852/38.67187
+- **Weyira GTZ condominiums** (ወይራ ጅቲዜድ ኮንዶሚኒየም) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00284&mlon=38.70987#map=18/9.00284/38.70987
+- **Yari's Crib** (ቤቴ) · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06135&mlon=38.69111#map=18/9.06135/38.69111
+- **ነጁ** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03358&mlon=38.68421#map=18/9.03358/38.68421
+- **የ ተሽዬ ቤት** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97792&mlon=38.70618#map=18/8.97792/38.70618
+- **የ ጋሽ ብሬ ቤት** · apartment · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97824&mlon=38.70257#map=18/8.97824/38.70257

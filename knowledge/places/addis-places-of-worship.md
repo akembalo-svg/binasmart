@@ -3,41 +3,42 @@ title: "Churches, mosques and other places of worship in Addis Ababa (ቤተ ክ
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-05-31"
-count: "512"
+fetched: "2026-09-24"
+count: "504"
 ---
 # Churches, mosques and other places of worship in Addis Ababa · በአዲስ አበባ ያሉ ቤተ ክርስቲያናትና መስጊዶች
 
-512 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+504 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
-## Arada sub-city · አራዳ ክፍለ ከተማ — 24
+## Arada sub-city · አራዳ ክፍለ ከተማ — 25
 
 - **Apostolic Church of Ethiopia Addis Ababa Presbytery, North Addis Ababa Rehoboth Chapel** (በኢትዮጵያውያ ሐዋርያት ቤተ ከርስቲያን አድስ አበባ ሰበካ የሰሜን አድስ አበባ ርሆቦት አጥቢያ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04892&mlon=38.74616#map=18/9.04892/38.74616
-- **Ba'eta LeMariam Monastery** (ቤተ ማሪያም) · ethiopian orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02522&mlon=38.76499#map=18/9.02522/38.76499
-- **Blue Mosque** · sunni muslim · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04562&mlon=38.75498#map=18/9.04562/38.75498
 - **Church french speaking community** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03900&mlon=38.75784#map=18/9.03900/38.75784
-- **Church of the Holy Child** (ባለወልድ ቤተ ክርስትያን) · ethiopian orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02983&mlon=38.76733#map=18/9.02983/38.76733
-- **Debre Mengist St. Gabriel Church** (ቅዱስ ገብርኤል ቤተ ክርስቲያን) · catholic christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02393&mlon=38.76650#map=18/9.02393/38.76650
+- **Church of Saint Mary** (ቤተ ማሪያም) · ethiopian orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02522&mlon=38.76499#map=18/9.02522/38.76499
+- **Church of the Holy Child** (ባለወልድ ቤተ ክርስትያን) · ethiopian orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02984&mlon=38.76733#map=18/9.02984/38.76733
+- **Covenant of Mercy** (ኪዳነ ምሕረት) · orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02530&mlon=38.76456#map=18/9.02530/38.76456
+- **Ethiopian Full Gospel Believers Church Semien Local Church** (በኢትዮጵያ ሙሉ ወንጌል አማኞች ቤተክርስቲያን የሰሜን አካባቢ አጥቢያ ቤተክርስቲያን) · pentecostal christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04351&mlon=38.74878#map=18/9.04351/38.74878
 - **Greece Orthodox Church** (ግረክ ኦርቶዶክስ ቤተ ክርስቲያን) · orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03742&mlon=38.75555#map=18/9.03742/38.75555
-- **Holy Trinity Cathedral** (ስላሴ ቤተ ክርስቲያን) · ethiopian orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03080&mlon=38.76649#map=18/9.03080/38.76649
+- **Holy Trinity Cathedral** (ስላሴ ቤተ ክርስቲያን) · ethiopian orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03080&mlon=38.76648#map=18/9.03080/38.76648
 - **Kebena Medhanialem Church** (ቀበና ምስራቀ ፀሐይ መድኃኔዓለም ቤተ ክርስቲያን) · ከቀበና ወደ 4 ኪሎ በሚወስደው መንገድ መድኃኔዓለም አከባቢ, Arada sub-city (አራዳ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.03145&mlon=38.77662#map=18/9.03145/38.77662
 - **Kidane Mehret Church** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03547&mlon=38.77605#map=18/9.03547/38.77605
 - **Kingdom Hall of Jehovah's witnesses** · Arada sub-city (አራዳ ክፍለ ከተማ) · https://www.jw.org/ · map https://www.openstreetmap.org/?mlat=9.02437&mlon=38.75591#map=18/9.02437/38.75591
 - **MedhaneAlem Church** · orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03169&mlon=38.77638#map=18/9.03169/38.77638
-- **Nur Mosque (beni)** (ኑር መስጅድ) · muslim · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03223&mlon=38.74824#map=18/9.03223/38.74824
-- **Our Lady Covenant of Mercy church** (ኪዳነ ምሕረት) · orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02528&mlon=38.76453#map=18/9.02528/38.76453
+- **Nur Mosque (beni)** (ኑር መስጅድ) · muslim · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03224&mlon=38.74823#map=18/9.03224/38.74823
+- **Saint Gabriel Church** (ቅዱስ ገብርኤል ቤተ ክርስቲያን) · ethiopian orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02393&mlon=38.76651#map=18/9.02393/38.76651
 - **Spiritans** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03716&mlon=38.76544#map=18/9.03716/38.76544
 - **St Matthew’s Anglican Church** · anglican christian · PO Box 109 Queen Elizabeth Street, Arada sub-city (አራዳ ክፍለ ከተማ) · http://stmattsaddis.org · map https://www.openstreetmap.org/?mlat=9.03318&mlon=38.76874#map=18/9.03318/38.76874
 - **St. Mary Church** (ቅድስት ማሪያም ቤተ ክርስቲያን) · orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04144&mlon=38.74559#map=18/9.04144/38.74559
-- **St. Yohannes Church** (ቅዱስ ዮሃንስ ቤተ ክርስቲያን) · orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04211&mlon=38.74571#map=18/9.04211/38.74571
+- **St. Yohannes Church** (ቅዱስ ዮሃንስ ቤተ ክርስቲያን) · orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04211&mlon=38.74572#map=18/9.04211/38.74572
 - **St. Yohannis Orthodox church** (ደብረ ነጎድጓድ ቅዱስ ዩሐንስ ቤተ ክርስቲያን በ፲፱፻፲፭ ዓ.ም ተመሠረተ) · ዮሃንስ, Arada sub-city (አራዳ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04211&mlon=38.74573#map=18/9.04211/38.74573
 - **St.Geberel** · catholic christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04615&mlon=38.74365#map=18/9.04615/38.74365
-- **St.Mary** (ቅድስት ማሪያም ቤተ ክርስቲያን) · orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03733&mlon=38.76212#map=18/9.03733/38.76212
 - **The Ethiopian Evangelical Lutheran Church** · lutheran christian · Arbegnoch Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04393&mlon=38.74482#map=18/9.04393/38.74482
 - **The Nativity of the Blessed Virgin Mary Catholic Cathedral** · catholic christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03043&mlon=38.74895#map=18/9.03043/38.74895
 - **መካነ ጎልጎታ ቅድስት ማርያም ቤተ ክርስቲያን በ፲፱፻፶ ዓ.ም ተመሠረተ** · ዮሃንስ, Arada sub-city (አራዳ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04146&mlon=38.74559#map=18/9.04146/38.74559
+- **ቅድስት ማሪያም ቤተ ክርስቲያን** · ethiopian orthodox christian · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03733&mlon=38.76213#map=18/9.03733/38.76213
+- **አል-አቅሷ መስጊድ** · sunni muslim · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04563&mlon=38.75495#map=18/9.04563/38.75495
 
-## Bole sub-city · ቦሌ ክፍለ ከተማ — 98
+## Bole sub-city · ቦሌ ክፍለ ከተማ — 100
 
 - **24 Mosque** (24 መስጅድ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01171&mlon=38.80013#map=18/9.01171/38.80013
 - **Addis Kidan Kahnat Bete Christian (MARSIL TV)** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99706&mlon=38.80540#map=18/8.99706/38.80540
@@ -51,17 +52,19 @@ count: "512"
 - **Beza international Church** (ቤዛ ኢንተርናሽናል ቤተክርስቲያን) · protestant christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98835&mlon=38.79179#map=18/8.98835/38.79179
 - **Bole Airport Mosque (ቦሌ አየር መንገድ መስጊድ)** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97846&mlon=38.77592#map=18/8.97846/38.77592
 - **Bole Bulbula st. George Church** (ቦሌ ቡልቡላ ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን) · ከቦሌ ሚካኤል ወደ ቡልቡላ በሚወስደው መንገድ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96708&mlon=38.78022#map=18/8.96708/38.78022
-- **Bole Kale-Hiwot Church** (ቦሌ ቃለ ሕይወት ቤተ-ክርስቲያን) · christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97919&mlon=38.77604#map=18/8.97919/38.77604
+- **Bole Kale-Hiwot Church** (ቦሌ ቃለ ሕይወት ቤተ-ክርስቲያን) · christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97919&mlon=38.77603#map=18/8.97919/38.77603
 - **Bole Mosque** (ኤድናሞል መስጅድ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00160&mlon=38.78884#map=18/9.00160/38.78884
-- **Bole St. Michael church ቦሌ ሚካኤ ቤተክርስቲያን** · orthodox christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98097&mlon=38.76927#map=18/8.98097/38.76927
-- **Bole St. Michael church** (ቦሌ ሚካኤል ቤ/ክ) · orthodox christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98053&mlon=38.77110#map=18/8.98053/38.77110
+- **Bole St. Michael church** (ቦሌ ሚካኤ ቤተክርስቲያን) · ethiopian orthodox christian · ከወሎ ሰፈር ወደ ቦሌ ቅዱስ ሚካኤል በሚወስደው መንገድ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.98096&mlon=38.76928#map=18/8.98096/38.76928
+- **Bole St. Michael church** (ቦሌ ደብረ ምሕረት ቅዱስ ሚካኤል ቤተክርስቲያን) · ethiopian orthodox christian · ቦሌ ሚካኤል አከባቢ ቀለበት መንገድ አቅራቢያ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.98053&mlon=38.77110#map=18/8.98053/38.77110
 - **Bulbula Mariam & Bulbula Yohannis Orthodox church** (ቦሌ ቡልቡላ ፍኖተ ሕይወት ቅድስት ማርያም እና መጥምቀ መለኮት ቅዱስ ዩሐንስ ቤተ ክርስቶያን) · orthodox christian · ቦሌ ቡልቡላ ኮንዶሚኒየም ጀርባ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94856&mlon=38.79598#map=18/8.94856/38.79598
+- **Chabad Ethiopia** · jewish · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97781&mlon=38.77800#map=18/8.97781/38.77800
 - **City of Refuge Protestant Church** (የመማፀኛ ከተማ ቤተክርስቲያን) · pentecostal christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://yougocitychurch.org/ · map https://www.openstreetmap.org/?mlat=8.99269&mlon=38.79189#map=18/8.99269/38.79189
 - **Dewam Mosque** · muslim · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01512&mlon=38.78699#map=18/9.01512/38.78699
 - **Eastridge Church Addis** · christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.facebook.com/eastridgechurchaddis/ · map https://www.openstreetmap.org/?mlat=8.99570&mlon=38.78748#map=18/8.99570/38.78748
 - **Egziabher Ab church** (እግዚያብሄር አብ) · orthodox christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01217&mlon=38.81183#map=18/9.01217/38.81183
 - **Egzihabiher Ab Orthodox church** (ቦሌ መንበረ ብርሃን ቅዱስ እግዚአብሔር አብ ቤተ ክርስቲያን) · christian · ከመገናኛ ወደ እግዚአብሔር አብ ቤተ ክርስቲያን በሚወስደው መንገድ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01218&mlon=38.81184#map=18/9.01218/38.81184
 - **Ethiopian Orthodox Tewahedo Church (EOTC)** (የኢትዮጵያ ኦርቶዶክስ ተዋህዶ ቤተክርስቲያን) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00200&mlon=38.83026#map=18/9.00200/38.83026
+- **gerji mariyam** · orthodox christian · gerji, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99867&mlon=38.80211#map=18/8.99867/38.80211
 - **Gerji Saint George** (ገርጂ ቅዱስ ጊዮርጊስ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99277&mlon=38.81812#map=18/8.99277/38.81812
 - **Giorgis Orthodox Church Summit** (ጊዮርጊስ ኦርቶዶክስ ቤተ ክርስትያን ሰሚት) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99536&mlon=38.85201#map=18/8.99536/38.85201
 - **Goro Gebriel Orthodox church** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00200&mlon=38.83027#map=18/9.00200/38.83027
@@ -71,8 +74,8 @@ count: "512"
 - **Holy International Healing & Miracle Church** · christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 868 8821 · map https://www.openstreetmap.org/?mlat=9.01982&mlon=38.80561#map=18/9.01982/38.80561
 - **iqrae Islamic center** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01624&mlon=38.85135#map=18/9.01624/38.85135
 - **Katela Maryam church** (ቃጥላ ማርያም ቤተክርስቲያን) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98618&mlon=38.86706#map=18/8.98618/38.86706
-- **Medhanialem Church** (መድኃኒያለም ቤተ ክርስቲያን) · orthodox christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99590&mlon=38.78993#map=18/8.99590/38.78993
-- **Mekane Jesus** · protestant christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99796&mlon=38.79948#map=18/8.99796/38.79948
+- **Medhane Alem Church** (መድኃኒያለም ቤተ ክርስቲያን) · orthodox christian · ቦሌ መድኃኔዓለም አከባቢ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99593&mlon=38.78995#map=18/8.99593/38.78995
+- **Mekane Jesus** · protestant christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99796&mlon=38.79950#map=18/8.99796/38.79950
 - **mesjid** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97102&mlon=38.89020#map=18/8.97102/38.89020
 - **mesjid** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97103&mlon=38.89006#map=18/8.97103/38.89006
 - **mesjid** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98359&mlon=38.88925#map=18/8.98359/38.88925
@@ -86,7 +89,7 @@ count: "512"
 - **Prayer Room for Males** · muslim · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98377&mlon=38.79713#map=18/8.98377/38.79713
 - **Sealite Mihret Meslaemiya - ሰአሊተ ምህረት መሳለሚያ** · ethiopian orthodox christian · Summit - Salitemihret road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01678&mlon=38.82702#map=18/9.01678/38.82702
 - **St Michael's Catholic Church** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00776&mlon=38.80241#map=18/9.00776/38.80241
-- **St. Giorgis church** · christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99288&mlon=38.81842#map=18/8.99288/38.81842
+- **St. Giorgis church** · christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99288&mlon=38.81843#map=18/8.99288/38.81843
 - **St. Madihanialem Orthodox Church** · christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99476&mlon=38.78996#map=18/8.99476/38.78996
 - **St.Mariyam** (ሰዓሊተ ምህረት ማርያም ቤተክርስቲያን) · ethiopian orthodox christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01895&mlon=38.82861#map=18/9.01895/38.82861
 - **Summit Beshale Lideta Mariam Church** · orthodox christian · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01282&mlon=38.84327#map=18/9.01282/38.84327
@@ -141,7 +144,7 @@ count: "512"
 ## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 19
 
 - **Ababora(Yusuf) Mesjid** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03960&mlon=38.73772#map=18/9.03960/38.73772
-- **Anwar Grand Mosque** (አንዋር መስጊድ) · muslim · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03272&mlon=38.74081#map=18/9.03272/38.74081
+- **Anwar Grand Mosque** (አንዋር መስጊድ) · muslim · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03277&mlon=38.74082#map=18/9.03277/38.74082
 - **Bayush mosque** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02647&mlon=38.73817#map=18/9.02647/38.73817
 - **Bilale Mosqu** (ቢላል መስጊድ) · muslim · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03571&mlon=38.72236#map=18/9.03571/38.72236
 - **Feth Masjid** (ፈትህ መስጂድ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04047&mlon=38.73486#map=18/9.04047/38.73486
@@ -152,7 +155,7 @@ count: "512"
 - **Mosque Haji Yenus** (መስጊድ ሀጂ የኑስ) · Malawi Street, Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04009&mlon=38.72822#map=18/9.04009/38.72822
 - **Rahma Mesjid** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03009&mlon=38.73175#map=18/9.03009/38.73175
 - **St. Michael Church (Addisu) ኣዲሱ ሚካኤል ቤተ ክርስቲያን** (ኣዲሱ ቅዱስ ሚካኤል ቤተ ክርስቲያን) · orthodox christian · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04090&mlon=38.73292#map=18/9.04090/38.73292
-- **St.Amanuel Church** · orthodox christian · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02802&mlon=38.72246#map=18/9.02802/38.72246
+- **St.Amanuel Church** · orthodox christian · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02802&mlon=38.72247#map=18/9.02802/38.72247
 - **St.Raguel Church ቅዱስ ራጉኤል ቤተ ክርስቲያን** (ቅዱስ ራጉኤል ቤተ ክርስቲያን) · orthodox christian · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03218&mlon=38.73989#map=18/9.03218/38.73989
 - **ቅዱስ አማኑኤል ቤተክርስቲያን St. Emanueal Church** · LD_02_0269 St., Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02800&mlon=38.72247#map=18/9.02800/38.72247
 - **ቅዱስ አማኑኤል ቤተክርስቲያን St. Emanuel Church** · LD_02_0269 St., Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02802&mlon=38.72246#map=18/9.02802/38.72246
@@ -162,38 +165,38 @@ count: "512"
 
 ## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 20
 
-- **Bulgaria Mikael** (አፍሪካ ኅብረት ደብረ ምሕረት ቅዱስ ሚካኤል ቤተ ክርስቲያን በ፲፱፻፷፱ ዓ.ም ተመሠረተ) · ቡልጋሪያ, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99610&mlon=38.74448#map=18/8.99610/38.74448
+- **Bulgaria Mikael** (አፍሪካ ኅብረት ደብረ ምሕረት ቅዱስ ሚካኤል ቤተ ክርስቲያን በ፲፱፻፷፱ ዓ.ም ተመሠረተ) · christian · ቡልጋሪያ, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99610&mlon=38.74448#map=18/8.99610/38.74448
 - **Filwoha seventh day Adventist Church** (ፍልውሃ 7ተኛ ቀን አድቬንቲስት ቤተክርስቲያን) · Ras Desta Damtew Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 3202 · https://www.filwohasda.org/ · hours Mo-Su 12:00-18:00 · map https://www.openstreetmap.org/?mlat=9.01621&mlon=38.75569#map=18/9.01621/38.75569
 - **Hiyaw kal church** (ህያው ቃል ቤተክርስቲያን) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99522&mlon=38.75955#map=18/8.99522/38.75955
-- **Holy Savior Catholic Church** · catholic christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 515 7508 · map https://www.openstreetmap.org/?mlat=9.01339&mlon=38.75263#map=18/9.01339/38.75263
+- **Holy Savior Catholic Church** · catholic christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 515 7508 · map https://www.openstreetmap.org/?mlat=9.01338&mlon=38.75264#map=18/9.01338/38.75264
 - **Kera mosque** · muslim · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98793&mlon=38.74919#map=18/8.98793/38.74919
 - **Kidus Yared Orthodox church** (ደብረ ይባቤ ቅዱስ ያሬድ ቤተ ክርስቲያን በ፲፱፻፵፰ ዓ.ም ተመሠረተ) · መስቀል ፍላወር, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.98641&mlon=38.76213#map=18/8.98641/38.76213
 - **Southern Addis Ababa Meserete Kristos Church** (የደቡብ አዲስ አበባ መሰረተ ክርስቶስ ቤተ ክርስትያን) · pentecostal christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00017&mlon=38.76365#map=18/9.00017/38.76365
-- **St Yared church** (ቅዱስ ያሬድ ቤተ ክርስቲያን) · ethiopian orthodox tewahedo christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98641&mlon=38.76217#map=18/8.98641/38.76217
+- **St Yared church** (ቅዱስ ያሬድ ቤተ ክርስቲያን) · ethiopian orthodox christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98641&mlon=38.76217#map=18/8.98641/38.76217
 - **St. Michael Church** (ደ/ምህረት ቅ/ሚካኤል ቤተ ክርስትያን) · orthodox christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99609&mlon=38.74448#map=18/8.99609/38.74448
 - **St.Estifanos** (እስጢፋኖስ ቤተ ክርስቲያን) · orthodox christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01217&mlon=38.76357#map=18/9.01217/38.76357
-- **St.Kirkos church** (ቂርቆስ ቤተ ክርስቲያን) · ethiopian orthodox tewahedo christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00457&mlon=38.75357#map=18/9.00457/38.75357
+- **St.Kirkos church** (ቂርቆስ ቤተ ክርስቲያን) · ethiopian orthodox christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00457&mlon=38.75358#map=18/9.00457/38.75358
 - **Tebarek Mosque (German gebi)** (ተባረክ መስጅድ (ጀርመን ግቢ)) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00903&mlon=38.74827#map=18/9.00903/38.74827
 - **Thehadso International Church** · christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99340&mlon=38.77061#map=18/8.99340/38.77061
 - **Toba Mosque** (ቶባ መስጊድ ካዛንችስ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01554&mlon=38.77031#map=18/9.01554/38.77031
-- **Welo Sefer Mosque** · muslim · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99243&mlon=38.77571#map=18/8.99243/38.77571
+- **Welo Sefer Mosque** · muslim · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99242&mlon=38.77571#map=18/8.99242/38.77571
 - **Zetseat Apostolic Reformation Church** · protestant christian · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99038&mlon=38.74274#map=18/8.99038/38.74274
 - **አቡነ ተክለሃይማኖት ወ አቡና ሃብተ ማርያም ቤተክርስቲያን** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01649&mlon=38.77712#map=18/9.01649/38.77712
 - **ወሎ ሰፈር ቅድስት ማርያምና ቅዱስ ገብርኤል ቤተክርስቲያን** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98852&mlon=38.77353#map=18/8.98852/38.77353
 - **ደብረ ሰላም ቅዱስ እስጢፋኖስ ቤተ ክርስቲያን በ፲፱፻፱ ዓ.ም ተመሠረተ** · ቅዱስ እስጢፋኖስ አከባቢ, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01217&mlon=38.76360#map=18/9.01217/38.76360
 - **ደብረ ፍስሃ መካነ ሰማዕት ቅዱስ ቂርቆስ ቤተ ክርስቲያን በ፲፰፻፺፱ ዓ.ም ተመሠረተ** · ቂርቆስ ክፍለ ከተማ Kirkos, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00458&mlon=38.75359#map=18/9.00458/38.75359
 
-## Gulele sub-city · ጉለሌ ክፍለ ከተማ — 34
+## Gulele sub-city · ጉለሌ ክፍለ ከተማ — 33
 
 - **Brothers of Saint John (Catholic community)** (ወቅዱስ ዮሐንስ ገዳም) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07695&mlon=38.75908#map=18/9.07695/38.75908
 - **Brothers of Saint John** · catholic christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07700&mlon=38.75919#map=18/9.07700/38.75919
-- **Debre Elias;ርእሰ አድባራት እንጦጦ ደብረ ኃይል ቅዱስ ራጉኤል ወኤሊያስ ቤተ ክርስቲያን በ፲፰፻፸፪ ተመሠረተ** · ethiopian orthodox christian · Entoto Road, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.08958&mlon=38.75111#map=18/9.08958/38.75111
+- **Debre Elias;ርእሰ አድባራት እንጦጦ ደብረ ኃይል ቅዱስ ራጉኤል ወኤሊያስ ቤተ ክርስቲያን በ፲፰፻፸፪ ተመሠረተ** · ethiopian orthodox christian · Entoto Road, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.08957&mlon=38.75111#map=18/9.08957/38.75111
 - **Debre Tabor St. Michael the Archangel Abune Teklehaimanot and St. Arsema Monastery** (መንበረ ክብር ደብረ ታቦር ቅዱስ ሚካኤል ጻድቁ አቡነ ተክለሃይማኖት እና ቅድስት አርሴማ ገዳም በ፲፱፻፺፪ ዓ.ም ተመሠረተ) · Gulele_07_1424 St, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.07081&mlon=38.74633#map=18/9.07081/38.74633
 - **Delbere Mekane Golegota Medhanealem Church** (ድል በር መካነ ጎልጎታ መድኃኔዓለም ቤተ ክርስቲያን) · Gulele_08_1746 St, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.07267&mlon=38.73578#map=18/9.07267/38.73578
 - **Entoto Hamere Noah Kidane Mihiret Monastery Established 1903 EC** (እንጦጦ ሐመረ ኖኅ ኪዳነምሕረት ገዳም በ፲፱፻፫ ዓ.ም ተመሠረተ) · እንጦጦ ኪዳነምሕረት መንገድ, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.07662&mlon=38.77297#map=18/9.07662/38.77297
 - **Entoto Mariam** (ርእሰ አድባራት እንጦጦ መንበረ ፀሐይ ቅድስት ማርያም ቤተ ክርስቲያን በ፲፰፻፸ ዓ.ም ተመሠረተ) · ethiopian orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.08960&mlon=38.76362#map=18/9.08960/38.76362
 - **Entoto Mekane Eyesus-Shiromeda** (እንጦጦ መካነ ኢየሱስ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06194&mlon=38.76170#map=18/9.06194/38.76170
-- **Ethiopian Evangelical Church Mekane Yesus** · Ethiopian Evangelical Church Mekane Yesus christian · ALGERIA ST, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06014&mlon=38.76248#map=18/9.06014/38.76248
+- **Ethiopian Evangelical Church Mekane Yesus** · Ethiopian Evangelical Church Mekane Yesus christian · ALGERIA ST, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06013&mlon=38.76247#map=18/9.06013/38.76247
 - **Hassen & Hussen Mosque** (ሐሰን እና ሑሴን መስጊድ) · ሸጎሌ, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.06256&mlon=38.72019#map=18/9.06256/38.72019
 - **Hassen and Hussein Mosque** · Shegole, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.06057&mlon=38.71950#map=18/9.06057/38.71950
 - **Holy Trinity Ethiopian Orthodox Church** (መንበረ ስብሐት ቅድስት ሥላሴ ቤተ ክርስቲያን በ፲፱፻፴፰ ዓ.ም ተመሠረተ) · christian · ሽሮ ሜዳ እንጦጦ መንገድ, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.07002&mlon=38.76128#map=18/9.07002/38.76128
@@ -203,16 +206,15 @@ count: "512"
 - **kechene Mekane Eyesus** (ቀጨኔ መካነ ኢየሱስ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06065&mlon=38.74802#map=18/9.06065/38.74802
 - **Kechene St. Gerbriel Orthodox church** (ቀጨኔ ደብረ ትጎሀን ቅዱስ ገብርኤል ቤተ ክርስቲያን) · Abera Gizwa Street, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.05485&mlon=38.75269#map=18/9.05485/38.75269
 - **Kidane Miheret** · orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07094&mlon=38.72666#map=18/9.07094/38.72666
-- **Kidist Selasi Church** · orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07001&mlon=38.76129#map=18/9.07001/38.76129
+- **Kidist Selasi Church** · orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07001&mlon=38.76130#map=18/9.07001/38.76130
 - **Kidus Rufael Church ቅዱስ ሩፋኤል ቤተ ክርስቲያን** (ቅዱስ ሩፋኤል ቤተ ክርስቲያን) · orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05787&mlon=38.72764#map=18/9.05787/38.72764
 - **Maskaye Hazunan Medhanealem Monastery** (ምስካየ ኅዙናን መድኃኔዓለም ገዳም በ፲፱፻፴፭ ዓ.ም ተመሠረተ) · ከ6ኪሎ ወደ ሽሮ ሜዳ በሚወስደው መንገድ ከዩኒቨርስቲው ትንሽ ከፍ ብሎ አስፓልት ዳር, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.05057&mlon=38.76273#map=18/9.05057/38.76273
 - **meketeya mekane eyesus** (መቀጠያ መካነ ኢየሱስ) · Intoto Road, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07482&mlon=38.75228#map=18/9.07482/38.75228
 - **menbere nigist kuskuam mariam orthodox church** (መንበረ መንግሥት ቁስቋም ማርያም ቤተ ክርስቲያን በ፲፱፻፲፱ ዓ.ም ተመሠረተ) · christian · Entoto Road, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.07602&mlon=38.75557#map=18/9.07602/38.75557
-- **Mosque** · muslim · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06053&mlon=38.72161#map=18/9.06053/38.72161
 - **Mount Sinai Holy God Father Church** (ደብረ ሲና ቅዱስ እግዚአብሔር አብ ቤተ ክርስቲያን በ፲፱፻፷፱ ዓ.ም ተመሠረተ) · Gulele _07_1472 St, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.06626&mlon=38.73921#map=18/9.06626/38.73921
-- **Qusquam Mariam Orthodox Church** · ethiopian orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07612&mlon=38.75557#map=18/9.07612/38.75557
+- **Qusquam Mariam Orthodox Church** · ethiopian orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07610&mlon=38.75558#map=18/9.07610/38.75558
 - **Saba Mosqe** (ሳባ መስጅድ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04924&mlon=38.72646#map=18/9.04924/38.72646
-- **Sedetegnaw Medanialem Church** · orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05057&mlon=38.76268#map=18/9.05057/38.76268
+- **Sedetegnaw Medanialem Church** · orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05058&mlon=38.76269#map=18/9.05058/38.76269
 - **Sheh Hojele mosque** (ሸህ ሆጀሌ መስጅድ) · Sheh Hojele Av, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06036&mlon=38.72646#map=18/9.06036/38.72646
 - **St. Mark's Church** (ቅዱስ ማርቆስ ቤተክርስቲያን) · orthodox christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04477&mlon=38.75981#map=18/9.04477/38.75981
 - **St. Michael Orthodox Church** (ተራራው ሚካኤል) · christian · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07079&mlon=38.74631#map=18/9.07079/38.74631
@@ -220,11 +222,11 @@ count: "512"
 - **Zemzem Mosqe** (ዘምዘም መስጅድ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05834&mlon=38.73020#map=18/9.05834/38.73020
 - **ቅድስት ኪዳነምሕረት ቤተ ክርስቲያን** · ሩፋኤል አካባቢ, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.05794&mlon=38.72832#map=18/9.05794/38.72832
 
-## Lideta sub-city · ልደታ ክፍለ ከተማ — 30
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 29
 
 - **26 መስጂድ** · muslim · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02330&mlon=38.73092#map=18/9.02330/38.73092
-- **Addis Ababa International Lutheran Church and Mekane Yesus Lideta Congregation** (የአዲስ አበባ ዓለም አቀፍ የሉተራን ቤተክርስቲያን እና የመካነ ኢየሱስ ልደታ ጉባኤ) · lutheran christian · Burundi Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01580&mlon=38.74208#map=18/9.01580/38.74208
-- **Agusta Tsion Mariam Church** · orthodox christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00820&mlon=38.71322#map=18/9.00820/38.71322
+- **Addis Ababa International Lutheran Church and Mekane Yesus Lideta Congregation** (የአዲስ አበባ ዓለም አቀፍ የሉተራን ቤተክርስቲያን እና የመካነ ኢየሱስ ልደታ ጉባኤ) · lutheran christian · Burundi Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01578&mlon=38.74207#map=18/9.01578/38.74207
+- **Agusta Tsion Mariam Church** · orthodox christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00813&mlon=38.71326#map=18/9.00813/38.71326
 - **Coka Mosque** (ኮካ መስጅድ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01495&mlon=38.72837#map=18/9.01495/38.72837
 - **English congregation** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01529&mlon=38.74341#map=18/9.01529/38.74341
 - **Ethiopian Assemblies of God church - Lideta** (የኢትዮጵያ ጉባኤ እግዚአብሔር ቤተክርስቲያን ልደታ አጥቢያ) · assemblies of god christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01376&mlon=38.73798#map=18/9.01376/38.73798
@@ -234,21 +236,20 @@ count: "512"
 - **Hamza mosque** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01617&mlon=38.71396#map=18/9.01617/38.71396
 - **International Evangelical Church** · christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99769&mlon=38.73881#map=18/8.99769/38.73881
 - **Ketena Hulet Mulu Wongel Church** (ቀጠና ሁለት ሙሉ ወንጌል ቤተ ክርስቲያን) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01004&mlon=38.72015#map=18/9.01004/38.72015
-- **Lideta Full Gospel Church** (የልደታ ሙሉ ወንጌል ቤተክርስቲያን) · protestant christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01494&mlon=38.74269#map=18/9.01494/38.74269
-- **Medhanealem church** (መድሃኒዓለም ቤተክርስቲያን) · orthodox christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01034&mlon=38.73776#map=18/9.01034/38.73776
-- **Meserete Kirstos Church** (መሰረተ ክርስቶስ ቤተክርስቲያን) · protestant christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01753&mlon=38.73346#map=18/9.01753/38.73346
-- **Reyan mesjid(ረያን መስጅድ) torhayloch** · muslim · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00830&mlon=38.71892#map=18/9.00830/38.71892
+- **Lideta Full Gospel Church** (የልደታ ሙሉ ወንጌል ቤተክርስቲያን) · protestant christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01494&mlon=38.74270#map=18/9.01494/38.74270
+- **Medhanealem church** (መድሃኒዓለም ቤተክርስቲያን) · orthodox christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01034&mlon=38.73777#map=18/9.01034/38.73777
+- **Meserete Kirstos Church** (መሰረተ ክርስቶስ ቤተክርስቲያን) · protestant christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01752&mlon=38.73347#map=18/9.01752/38.73347
+- **Reyan mesjid(ረያን መስጅድ) torhayloch** · muslim · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00830&mlon=38.71890#map=18/9.00830/38.71890
 - **Somali Tera Mosque** (ሱማሌ ተራ መስጅድ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01908&mlon=38.73562#map=18/9.01908/38.73562
-- **St. Michael Church (gola)** (ቅዱስ ሚካኤል ቤተ ክርስቲያን) · orthodox christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02523&mlon=38.74925#map=18/9.02523/38.74925
+- **St. Michael Church (gola)** (ቅዱስ ሚካኤል ቤተ ክርስቲያን) · orthodox christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02523&mlon=38.74924#map=18/9.02523/38.74924
 - **St.Lideta Church** (ቅድስት ልደታ ቤተክርስቲያን) · orthodox christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01043&mlon=38.73707#map=18/9.01043/38.73707
-- **Tekelehaymanot ተክለሃይማኖት ቤተ ክርስቲያን** (ተክለሃይማኖት ቤተ ክርስቲያን) · ethiopian orthodox tewahedo christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02719&mlon=38.74332#map=18/9.02719/38.74332
+- **Tekelehaymanot ተክለሃይማኖት ቤተ ክርስቲያን** (ተክለሃይማኖት ቤተ ክርስቲያን) · ethiopian orthodox christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02720&mlon=38.74332#map=18/9.02720/38.74332
 - **Teklehaimanot Orthodox Church** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02720&mlon=38.74332#map=18/9.02720/38.74332
 - **ማኅደረ ስብሐት ቅድስት ልደታ ለማርያም ቤተ ክርስቲያን ፲፱፻፲፯ ዓ.ም ተመሠረተ** · ልደታ Lideta, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01044&mlon=38.73706#map=18/9.01044/38.73706
 - **አውግስታ ደብረ ፅዮን ቅድስት ማርያም ቤተ ክርስቲያን** · ጦር ሃይሎች አጉስታ አከባቢ, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00818&mlon=38.71315#map=18/9.00818/38.71315
 - **ኦርቶዶክስ ተዋህዶ ቤተክርስቲያንየ** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99821&mlon=38.71723#map=18/8.99821/38.71723
 - **ደብረ መድኃኒት መድኃኔዓለም ቤተ ክርስቲያን በ፲፱፻፹፭ ዓ.ም ተመሠረተ** · ልደታ Lideta, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01033&mlon=38.73779#map=18/9.01033/38.73779
 - **ደብረ አሚን ተክለሃይማኖት ቤተ ክርስቲያን በ፲፰፻፺፰ ዓ.ም ተመሠረተ** · ተክለሃይማኖት አከባቢ, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02725&mlon=38.74331#map=18/9.02725/38.74331
-- **ደብረ ገነት ቅድስት ሥላሴ ቤተ ክርስቲያን** · christian · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99779&mlon=38.71663#map=18/8.99779/38.71663
 - **ደብረ ገነት ቅድስት ሥላሴ ቤተ ክርስቲያን** · ቶታል ሶስት ቁጥር ማዞሪያ ሰፈረ ገነት, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99790&mlon=38.71660#map=18/8.99790/38.71660
 - **ገዳመ እየሱስ ቤተክርስትያን Gdame Eyesus Church** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02025&mlon=38.71827#map=18/9.02025/38.71827
 - **ፈለገ ሕይወት ኪዳነምሕረት እና መድኃኔዓለም ቤተ ክርስቲያን** · ሶስት ቁጥር, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99507&mlon=38.71291#map=18/8.99507/38.71291
@@ -259,10 +260,10 @@ count: "512"
 - **Abado Mosque** (አባዶ መስጅድ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06091&mlon=38.86447#map=18/9.06091/38.86447
 - **Abo** (አቦ) · orthodox christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05067&mlon=38.78047#map=18/9.05067/38.78047
 - **Ankorcha kidus GEBREÁL church** (አንቆርጫ ቅዱስ ገብርኤል ቤተ-ክርስቲያን) · Kotebe, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04652&mlon=38.81492#map=18/9.04652/38.81492
-- **Anqtse Mihret Saint Mekaeal Church** (አንቀፀ ምህረት ቅዱስ ሚካኤል ቤተ ክርስቲያን) · orthodox christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06403&mlon=38.76845#map=18/9.06403/38.76845
+- **Anqtse Mihret Saint Mekaeal Church** (አንቀፀ ምህረት ቅዱስ ሚካኤል ቤተ ክርስቲያን) · orthodox christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06403&mlon=38.76846#map=18/9.06403/38.76846
 - **Apostolic church Rehobot local church** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06288&mlon=38.79173#map=18/9.06288/38.79173
 - **Assembly Hall of Jehovah's Witnesses and Bethel** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.jw.org/ · map https://www.openstreetmap.org/?mlat=9.03789&mlon=38.84815#map=18/9.03789/38.84815
-- **Ayat Full Gospel Church, Ethiopian Full Gospel Church** (አያት ሙሉ ወንጌል ቤተክርስቲያን) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02958&mlon=38.88411#map=18/9.02958/38.88411
+- **Ayat Full Gospel Church, Ethiopian Full Gospel Church** (አያት ሙሉ ወንጌል ቤተክርስቲያን) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02960&mlon=38.88416#map=18/9.02960/38.88416
 - **Caraalo Holy Trinity Church** (ካራአሎ ቅድስት ሥላሴ ቤተ ክርስቲያን) · ካራአሎ አከባቢ ተራራው ላይ, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04731&mlon=38.86577#map=18/9.04731/38.86577
 - **Christ Embassy** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02160&mlon=38.79402#map=18/9.02160/38.79402
 - **Christian Orthodox Church** · christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04329&mlon=38.80716#map=18/9.04329/38.80716
@@ -276,15 +277,15 @@ count: "512"
 - **Evangelische Kreuzkirche (German Church)** · lutheran christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://gemeinde.addis.center · map https://www.openstreetmap.org/?mlat=9.04430&mlon=38.76481#map=18/9.04430/38.76481
 - **Ferensay Gurara Mosque** (ፈረንሳይ ጉራራ መስጅድ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05992&mlon=38.78725#map=18/9.05992/38.78725
 - **France-Gurara St. George Church** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06472&mlon=38.78408#map=18/9.06472/38.78408
-- **Garment workshop** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03973&mlon=38.82261#map=18/9.03973/38.82261
+- **Garment workshop** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03973&mlon=38.82260#map=18/9.03973/38.82260
 - **Gospel Light Church** (ወንጌል ብርሃን ቤተክርስቲያን) · christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02097&mlon=38.77606#map=18/9.02097/38.77606
-- **Gospel Light Church** (ወንጌል ብርሃን ቤተክርስቲያን) · evangelical christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02084&mlon=38.77607#map=18/9.02084/38.77607
+- **Gospel Light Church** (ወንጌል ብርሃን ቤተክርስቲያን) · evangelical christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02085&mlon=38.77608#map=18/9.02085/38.77608
 - **Gurara East Sun Holy Covenant of Mercy and St. Gabriel Church** (ጉራራ ምሥራቀ ፀሐይ ቅድስት ኪዳነ ምሕረት እና ቅዱስ ገብርኤል ቤተ ክርስቲያን) · ፈረንሳይ ጉራራ አደባባይ ዝቅ ብሎ, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.06192&mlon=38.79032#map=18/9.06192/38.79032
-- **hana maryam church** (ሀና ማርያም ቤተክርስቲያን) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04306&mlon=38.83165#map=18/9.04306/38.83165
+- **hana maryam church** (ሀና ማርያም ቤተክርስቲያን) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04306&mlon=38.83163#map=18/9.04306/38.83163
 - **Jehovah Witnesses branch - Addis Ababa** (የይሖዋ ምስክሮች ቅርንጫፍ ቢሮ) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.jw.org/am · map https://www.openstreetmap.org/?mlat=9.03845&mlon=38.84779#map=18/9.03845/38.84779
 - **Kebena Kidanemihret Church** (ቀበና ቤዛዊተ ዓለም ቅድስት ኪዳነ ምሕረት ቤተ ክርስቲያን) · Comoros Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.03158&mlon=38.78011#map=18/9.03158/38.78011
 - **kidus amanuel monastery church** · orthodox orthodox tewahdo · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04150&mlon=38.81801#map=18/9.04150/38.81801
-- **Kotebe Bireta Biret - Kidane Mihret Church** (ኮተቤ ብረታ ብረት - ኪዳነ ምህረት ቤተክርስቲያን) · orthodox christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.03546&mlon=38.82044#map=18/9.03546/38.82044
+- **Kotebe Bireta Biret - Kidane Mihret Church** (ኮተቤ ብረታ ብረት - ኪዳነ ምህረት ቤተክርስቲያን) · orthodox christian · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.03546&mlon=38.82045#map=18/9.03546/38.82045
 - **Kotebe Debre Leule Dagmawi Kulbi Kidus Gebriel Bete Kirstiyan** (ኮተቤ ደብረ ልዑል ዳግማዊ ቁልቢ ቅዱስ ገብርኤል ቤተ ክርስትያን) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04518&mlon=38.84987#map=18/9.04518/38.84987
 - **KOTEBE MESERETE KRSTOS CHURCH - KMKC** (ኮተቤ መሰረተ ክርስቶስ ቤተክርስቲያን) · ኮተቤ, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 06:00-21:00 · map https://www.openstreetmap.org/?mlat=9.03987&mlon=38.84330#map=18/9.03987/38.84330
 - **Kotebie Debre leule Dagmawi Kulbi Kidus Gebriel EOTC** (በኢትዮጵያ አኦርቶዶስ ተዋህዶ የኮተቤ ደብረ ልዑል ዳግማዊ ቁልቢ ቅዱስ ገብርኤል ቤተ-ክርስትያን) · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04478&mlon=38.84915#map=18/9.04478/38.84915
@@ -333,16 +334,16 @@ count: "512"
 - **ደብረ አራራት ማኅበረ በኩር ቅዱስ አማኑኤል የአንድነት ገዳም በ፲፱፻፺ ዓ.ም ተመሠረተ** · ኮተቤ ብረታብረት ገባ ብሎ, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04146&mlon=38.81800#map=18/9.04146/38.81800
 - **ደብረ ዕንቁ ልደታ ለማርያም ቤተ ክርስቲያን በ፲፱፻፹፮ ዓ.ም ተመሠረተ** · ቀበና ሩሲያ ኢምባሲ ከፍ ብሎ ጋራው ላይ, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04094&mlon=38.78822#map=18/9.04094/38.78822
 - **ደብረ ጽባሕ ቅዱስ ሚካኤል ቤተ ክርስቲያን** · ሲ ኤም ሲ አከባቢ CMC, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02291&mlon=38.84028#map=18/9.02291/38.84028
-- **ዳግማዊ ቁልቢ ቅዱስ ገብርዔል ቤተ ክርስቲያን** · Fikre Mariam Aba Techan Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04515&mlon=38.84987#map=18/9.04515/38.84987
+- **ዳግማዊ ቁልቢ ቅዱስ ገብርዔል ቤተ ክርስቲያን** · Fikre Mariam Aba Techan Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04515&mlon=38.84988#map=18/9.04515/38.84988
 - **ጉራራ ደብረ ፂሆን ማርያም ቤተክርስቲያን** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.07197&mlon=38.79982#map=18/9.07197/38.79982
 - **ፈረንሳይ ጉራራ ደብረ ፀሐይ ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን በ፲፱፻፹፬ ዓ.ም ተመሠረተ** · ፈረንሳይ ጉራራ ብረት ድልድይ አከባቢ, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.06474&mlon=38.78408#map=18/9.06474/38.78408
 
-## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 72
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 73
 
 - **Abader Mosques** (አባድር መስጂድ) · ቫቲካን, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98600&mlon=38.73908#map=18/8.98600/38.73908
 - **Apostolic Church Of Ethiopia Head Quarter** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97080&mlon=38.74592#map=18/8.97080/38.74592
 - **Apostolic Church of Ethiopia** · christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97034&mlon=38.74561#map=18/8.97034/38.74561
-- **behretsege** · muslim · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95717&mlon=38.75651#map=18/8.95717/38.75651
+- **behretsege** · muslim · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95716&mlon=38.75651#map=18/8.95716/38.75651
 - **Besrate Gebriel church** (ደብረ ብሥራት ቅዱስ ገብርኤል ቤተ ክርስቲያን በ፲፱፻፶፯ ዓ.ም ተመሠረተ) · christian · ብስራተ ገብርኤል, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99111&mlon=38.72661#map=18/8.99111/38.72661
 - **Betephage International Church** (ቤተፈጌ አለም አቀፍ ቤተ ክርስቲያን) · Gofe Gabriel round about to Lafto road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97043&mlon=38.74930#map=18/8.97043/38.74930
 - **Christ Army church** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96040&mlon=38.75844#map=18/8.96040/38.75844
@@ -357,9 +358,10 @@ count: "512"
 - **Gofa Gebriel church** (መካነ ህያዋን ቅዱስ ገብርኤል ቤተ ክርስቲያን በ፲፱፻፶፭ ዓ.ም ተመሠረተ) · ጎፋ ማዞሪያ ገብርኤል አደባባይ ፊት ለፊት, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.97658&mlon=38.75293#map=18/8.97658/38.75293
 - **Gofa Kidane Mihret Orthodox church** (ጎፋ ቤዛ ብዙኃን ቅድስት ኪዳነ ምሕረት ቤተ ክርስቲያን በ፲፱፻፹፬ ዓ.ም ተመሠረተ) · ጎፋ ኪዳነ ምሕረት አከባቢ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.97550&mlon=38.73732#map=18/8.97550/38.73732
 - **Gofa Markorios & Yohannis church** (ጎፋ መብራት ኃይል ደብረ መዊዕ ቅዱስ መርቆሬዎስ እና መጥምቀ መለኮት ቅዱስ ዩሐንስ ቤተ ክርስቲያን) · Gofa Mazoria to Mebrathail, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96909&mlon=38.75186#map=18/8.96909/38.75186
-- **Gofa Urael Orthodox church** (ጉፋ መብራት ኃይል ቅዱስ ኡራኤል ቤተ ክርስቲያን) · Mebrat Haile Condominium, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96375&mlon=38.74441#map=18/8.96375/38.74441
+- **Gofa Urael Orthodox church** (ጉፋ መብራት ኃይል ቅዱስ ኡራኤል ቤተ ክርስቲያን) · christian · Mebrat Haile Condominium, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96375&mlon=38.74441#map=18/8.96375/38.74441
+- **Gospel of Peace Believers' Church** (የሰላም ወንጌል አማኞች ቤተ.ክርስቲያን) · evangelical christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97873&mlon=38.76004#map=18/8.97873/38.76004
 - **Hassan Mesjid** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94122&mlon=38.75172#map=18/8.94122/38.75172
-- **Hewfelah mosque** · muslim · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95724&mlon=38.75637#map=18/8.95724/38.75637
+- **Hewfelah mosque** · muslim · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95735&mlon=38.75639#map=18/8.95735/38.75639
 - **Huda Masjid** · sunni muslim · Qore street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97427&mlon=38.73197#map=18/8.97427/38.73197
 - **Jemo 3 St.Merry church** (ጀሞ 3 ቅ/ማርያም ቤ/ክ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96323&mlon=38.70585#map=18/8.96323/38.70585
 - **Jemo 3 St.Merry church** (ፈለገ ዮርዳኖስ ቅዱስ ዮሐንስና ቅድስት ማርያም ቤተ ክርስቲያን) · orthodox christian · ጀሞ 3 መስተዋት ፋብሪካው ጀርባ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96426&mlon=38.70639#map=18/8.96426/38.70639
@@ -371,11 +373,11 @@ count: "512"
 - **Lafto Eyarico Medhanialem Orthodox church** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94169&mlon=38.74436#map=18/8.94169/38.74436
 - **Lafto Kale Hiwot Church** (ላፍቶ ቃለ ህይወት ቤተ-ክርስቲያን) · christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94719&mlon=38.73886#map=18/8.94719/38.73886
 - **Lafto Michael Church** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95236&mlon=38.75007#map=18/8.95236/38.75007
-- **Lebu Gebriel** · ethiopian orthodox tewahedo christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95716&mlon=38.73441#map=18/8.95716/38.73441
+- **Lebu Gebriel** · ethiopian orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95716&mlon=38.73441#map=18/8.95716/38.73441
 - **Lebu Medhanialem Timket bahir** (ጀሞ መድኀኔዓለም ጥምቀተ ባህር) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95219&mlon=38.71712#map=18/8.95219/38.71712
 - **Lebu Mesrak Tsehay Kedus Gebrael ena Kedest Arsema WeAbun Adam Bete Kerstiyan** (ለቡ ምሥራቀ ፀሐይ ቅዱስ ገብርኤል እና ቅድስት አርሴማ ወአቡነ አዳም ቤተ ክርስቲያን በ፲፱፻፺፬ ዓ.ም ተመሠረተ) · orthodox christian · ከለቡ መብራት ኃይል ወደ ጀርመን አደባባይ በሚወስደው ቀለበት መንገድ ዳር, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.95219&mlon=38.73326#map=18/8.95219/38.73326
 - **Mekane Eyesus Church** (መካነ እየሱስ ቸርች) · christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96969&mlon=38.73198#map=18/8.96969/38.73198
-- **Mekanisa Mekane Eyesus Church** · evangelical christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98423&mlon=38.73490#map=18/8.98423/38.73490
+- **Mekanisa Mekane Eyesus Church** · evangelical christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98424&mlon=38.73490#map=18/8.98424/38.73490
 - **Mekanisa Mekane yesus** (መካኒሳ መካነ ኢየሱስ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98408&mlon=38.73482#map=18/8.98408/38.73482
 - **Meserete Kirstos church** (መሰረተ ከርስቶስ ቤተክርስቲያን) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95722&mlon=38.75942#map=18/8.95722/38.75942
 - **mesjid** (ቢላል መስጂድ مسجد بلال) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.94891&mlon=38.74416#map=18/8.94891/38.74416
@@ -384,15 +386,15 @@ count: "512"
 - **River of life church** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96059&mlon=38.72043#map=18/8.96059/38.72043
 - **Seid Yasim Mosque** (ሰዒድ ያሲን መስጂድ) · muslim · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95193&mlon=38.69527#map=18/8.95193/38.69527
 - **St. Gebriel Church** (ቅዱስ ገብርኤል ቤተ ክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99112&mlon=38.72659#map=18/8.99112/38.72659
-- **St. Joseph Church** (ቅዱስ ሚካኤል ቤተ ክርስቲያን) · ethiopian orthodox tewahedo christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96979&mlon=38.76743#map=18/8.96979/38.76743
-- **St. Michael** · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96977&mlon=38.72451#map=18/8.96977/38.72451
+- **St. Joseph Church** (ቅዱስ ሚካኤል ቤተ ክርስቲያን) · ethiopian orthodox christian · ቅዱስ ዮሴፍ አከባቢ ቀለበት መንገድ አጠገብ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96979&mlon=38.76744#map=18/8.96979/38.76744
+- **St. Michael** · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96978&mlon=38.72452#map=18/8.96978/38.72452
 - **St. Mikael church (Mekanisa)** (መካኒሳ ደብረ ገነት ቅዱስ ሚካኤል ቤተ ክርስቲያን በ፲፱፻፹፬ ዓ.ም ተመሠረተ) · ጀሞ ሚካኤል አደባባይ ቀለበት መንገድ አጠገብ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96978&mlon=38.72456#map=18/8.96978/38.72456
-- **St. Mikael Church** (ቅዱስ ዮሴፍ ቤተ ክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96986&mlon=38.76592#map=18/8.96986/38.76592
+- **St. Mikael Church** (ቅዱስ ዮሴፍ ቤተ ክርስቲያን) · ethiopian orthodox christian · ቀለበት መንገድ ቅዱስ ዮሴፍ አከባቢ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96986&mlon=38.76592#map=18/8.96986/38.76592
 - **St. Urael church** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94780&mlon=38.69547#map=18/8.94780/38.69547
-- **St.Abo** (አቦ ቤተክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98213&mlon=38.72843#map=18/8.98213/38.72843
-- **St.Gabriel Church** (ቅዱስ ገብርኤል ቤተ ክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97657&mlon=38.75298#map=18/8.97657/38.75298
-- **St.Marry** (ቅድስት ማሪያም ቤተክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95793&mlon=38.75237#map=18/8.95793/38.75237
-- **St.Mikael** (ቅዱስ ሚካኤል ቤተ ክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95345&mlon=38.74855#map=18/8.95345/38.74855
+- **St.Abo** (አቦ ቤተክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98213&mlon=38.72842#map=18/8.98213/38.72842
+- **St.Gabriel Church** (ቅዱስ ገብርኤል ቤተ ክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97658&mlon=38.75297#map=18/8.97658/38.75297
+- **St.Marry** (ቅድስት ማሪያም ቤተክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95794&mlon=38.75238#map=18/8.95794/38.75238
+- **St.Mikael** (ቅዱስ ሚካኤል ቤተ ክርስቲያን) · orthodox christian · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95344&mlon=38.74856#map=18/8.95344/38.74856
 - **ለቡ ደብረ ታቦር በዓለወልድ እና አበ ብዙሃን አብርሃም ገዳም** · orthodox christian · ለቡ በቫርኔሮ ጋራ ማርት ገባ ብሎ ደብረታቦር (ለቡ) ተራራ ላይ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.94382&mlon=38.73006#map=18/8.94382/38.73006
 - **ላፍቶ ደብረ ትጉሃን ቅዱስ ሚካኤል ቤተ ክርስቲያን በ፲፱፻፹፫ ዓ.ም ተመሠረተ** (ላፍቶ ደብረ ትጉሃን ቅዱስ ሚካኤል ቤተ ክርስቲያን) · NL_12_4766 St., Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.95345&mlon=38.74856#map=18/8.95345/38.74856
 - **መካኒሳ ምዕራፈ ፃድቃን አቡነ ገብረ መንፈስ ቅዱስ ቤተ ክርስቲያን በ፲፱፻፹፬ ዓ.ም ተመሠረተ** · መካኒሳ አቦ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.98214&mlon=38.72845#map=18/8.98214/38.72845
@@ -407,7 +409,7 @@ count: "512"
 - **ዘነበ ወርቅ አቡነ ተክለ ሐይማኖት ቤተክርስቲያን** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98571&mlon=38.71795#map=18/8.98571/38.71795
 - **የላፍቶ ደብረ መንክራት ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን በ፲፱፻፺፩ ዓ.ም ተመሠረተ** · NL_12_4852 St., Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.95668&mlon=38.74073#map=18/8.95668/38.74073
 - **የምሥራቀ ፀሐይ ቅዱስ ገብርኤል እና ቅድስት አርሴማ ወአቡነ አዳም ቤተ ክርስቲያን በ፲፱፻፺፬ ዓ.ም ተመሠረተ** · ከለቡ መብራት ኃይል ወደ ጀርመን አደባባይ በሚወስደው ቀለበት መንገድ ዳር (ለቡ ገብርኤል አከባቢ), Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.95721&mlon=38.73441#map=18/8.95721/38.73441
-- **ጉፋ መብራትኃይል ቅዱስ ኡራኤል ቤተ ክርስቲያን** · Mebrat Haile Condominium, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96375&mlon=38.74446#map=18/8.96375/38.74446
+- **ጉፋ መብራትኃይል ቅዱስ ኡራኤል ቤተ ክርስቲያን** · christian · Mebrat Haile Condominium, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96375&mlon=38.74446#map=18/8.96375/38.74446
 - **ጽርሐ ንግሥት ፉሪ ቅድስት ሐና ቤተ ክርስቲያን በ፲፻፱፳፮ ዓ.ም ተመሠረተ** · orthodox christian · ሐና ማርያም አከባቢ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.92679&mlon=38.74289#map=18/8.92679/38.74289
 - **ፈለገ ብርሃን ቅድስት ሥላሴ ቤተ ክርስቲያን** · ሳሪስ 58 አከባቢ በኪዳነምሕረት ፀበል ገባ ብሎ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.93811&mlon=38.75235#map=18/8.93811/38.75235
 - **ፉሪ ደብረ ሰላም መድኃኔዓለም ቤተ ክርስቲያን** · ከጀሞ 1 ወደ ለቡ መብራት ኃይል በሚወስደው መንገድ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.95276&mlon=38.71643#map=18/8.95276/38.71643
@@ -435,7 +437,7 @@ count: "512"
 - **Oumer Ibn Al-Khattab Mosque (ኡመር ኢብኑል ኸጣብ መስጂድ)** · sunni muslim · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86775&mlon=38.80012#map=18/8.86775/38.80012
 - **Qilinto Arsema** · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87899&mlon=38.80856#map=18/8.87899/38.80856
 - **Salo Giyorgis Church** (ሳሎ ጊዮርጊስ ቤተ ክርስቲያን) · orthodox christian · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88663&mlon=38.76156#map=18/8.88663/38.76156
-- **Saris Abo Church** (ሳሪስ አቦ ቤተክርስቲያን) · orthodox christian · Ring Road, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94510&mlon=38.77073#map=18/8.94510/38.77073
+- **Saris Abo Church** (ሳሪስ አቦ ቤተክርስቲያን) · orthodox christian · Ring Road, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94508&mlon=38.77072#map=18/8.94508/38.77072
 - **ሐመረ ወርቅ ቅድስት ማርያም እና ቅድስት አርሴማ ቤተ ክርስቲያን በ፲፱፻፹፰ ዓ.ም ተመሠረተ** · ወርቁ ሠፈር, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.93541&mlon=38.77640#map=18/8.93541/38.77640
 - **መጠሊ ደብረ አሮን ፍልፍል ዋሻ ቅዱስ ገብርኤል እና አቡነ ተክለሐይማኖት ቤተ ክርስቲያን** · orthodox christian · አቃቂ ቃሊቲ /ክ/ከ ገላን ጉራ ገበሬ ማህበር መጠሊ, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.94297&mlon=38.80777#map=18/8.94297/38.80777
 - **ሣሎ ደብረ ፀሀይ ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን በ፲፰፻፳፰ ዓ.ም የተመሠረተ** · በቃሊቲ ቶታል ወደ ውስጥ ገባ ብሎ, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.88666&mlon=38.76156#map=18/8.88666/38.76156
@@ -452,20 +454,19 @@ count: "512"
 - **ጃቴ መካነሕይወት ኪዳነምሕረት ቤተክርስቲያን በ፲፱፻፶፰ ዓ.ም ተመሠረተ** · ቃሊቲ ኪዳነምሕረት አከባቢ, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.88454&mlon=38.77793#map=18/8.88454/38.77793
 - **ፈጬ ደብረ ገነት ቅድስት ማርያም ቤተ ክርስቲያን** · christian · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.87286&mlon=38.82763#map=18/8.87286/38.82763
 
-## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 88
+## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 87
 
 - **Aba Jifar Mosque** (አባጅፋር መስጊድ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02121&mlon=38.71633#map=18/9.02121/38.71633
 - **Abdulmejid Mosque** (አብዱልመጂድ መስጊድ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97382&mlon=38.68019#map=18/8.97382/38.68019
 - **Abo and Amanuel Church** (አቦ እና አማኑኤል ቤተክርስቲያን) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06142&mlon=38.69634#map=18/9.06142/38.69634
-- **Abubeker Mosque** · muslim · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00531&mlon=38.68450#map=18/9.00531/38.68450
+- **Abubeker Mosque** · muslim · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00531&mlon=38.68451#map=18/9.00531/38.68451
 - **Abune Habtemaryam Monastery** (ቃሉ በተራራ አቡነ ሀብተማርያም፣ ቅድስት ልደታ እና ቅድስት አርሴማ ገዳም) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07218&mlon=38.70730#map=18/9.07218/38.70730
 - **Akaki Kalehiwot Church** · protestant christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98945&mlon=38.70791#map=18/8.98945/38.70791
 - **Al-Nejah Mosque** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00313&mlon=38.70796#map=18/9.00313/38.70796
-- **Alem Bank Mosque (አለምባንክ መስጂድ)** (አለምባንክ መስጂድ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99897&mlon=38.67778#map=18/8.99897/38.67778
 - **Amar Mosque** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05768&mlon=38.69838#map=18/9.05768/38.69838
 - **Anfo bridge Mosque** (አንፎ ድልድይ መስጅድ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01460&mlon=38.67700#map=18/9.01460/38.67700
 - **Anfo Mosque** · Ambo road, Anfo Adebabay, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00641&mlon=38.67632#map=18/9.00641/38.67632
-- **Asco Debre Medhanit Medhanealem Church** (አስኮ ደብረ መድኃኒት መድኃኔዓለም ቤተ ክርስቲያን) · አስኮ አዲስ ሰፈር, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04744&mlon=38.69395#map=18/9.04744/38.69395
+- **Asco Debre Medhanit Medhanealem Church** (አስኮ ደብረ መድኃኒት መድኃኔዓለም ቤተ ክርስቲያን) · ethiopian orthodox christian · አስኮ አዲሱ ሰፈር ብርጭቆ ኮንዶሚኒየም ጀርባ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04745&mlon=38.69396#map=18/9.04745/38.69396
 - **Atana Tera Mosque** (አጠና ተራ መስጅድ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04227&mlon=38.71351#map=18/9.04227/38.71351
 - **Awolia (Iran Mosque)** (አወልያ (ኢራን መስጅድ)) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99286&mlon=38.71255#map=18/8.99286/38.71255
 - **Awolia** (አወልያ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06067&mlon=38.70970#map=18/9.06067/38.70970
@@ -476,7 +477,6 @@ count: "512"
 - **Betel-Yealem-Birhan Meserete-Kerstos** (ቤቴል-የአለም-ብርሀን መሠረተ-ክረስቶስ ቤተ-ክርስቲያን-ቅዱሳን-መሰብሰብያ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00679&mlon=38.67881#map=18/9.00679/38.67881
 - **Bethel Full Gospel Church** (ቤቴል ሙሉ ወንጌል ቤተ ክርስቲያን) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00002&mlon=38.69152#map=18/9.00002/38.69152
 - **Christ witness church** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97739&mlon=38.67404#map=18/8.97739/38.67404
-- **Church** · ethiopian orthodox tewahedo christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04744&mlon=38.69396#map=18/9.04744/38.69396
 - **Colfe New Mosque** (ኮልፌ አዲሱ መስጊድ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04212&mlon=38.70766#map=18/9.04212/38.70766
 - **Debre Abay Arsema** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98761&mlon=38.68288#map=18/8.98761/38.68288
 - **Debre Yederas St. Georgis Church** (ደብረ ይድራስ ቅዱስ ጊዮርጊስ) · orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00160&mlon=38.70054#map=18/9.00160/38.70054
@@ -484,23 +484,25 @@ count: "512"
 - **Faruqe Mosque (Rome)** (ፋሩቅ መስጅድ (ሮም)) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00837&mlon=38.68196#map=18/9.00837/38.68196
 - **FELAH MESJID** (ፈላህ መስጅድ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99959&mlon=38.71038#map=18/8.99959/38.71038
 - **Ibnukesir mesjid** (ኢብኑከሲር መስጂድ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.03564&mlon=38.71232#map=18/9.03564/38.71232
+- **Imamu Ahmed Al-Gazi Mosque** (ኢማሙ አህመድ አልጋዚ መስጂድ እና መድረሳ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00599&mlon=38.67641#map=18/9.00599/38.67641
 - **Keranio Medhanialem Orthodox Church** (ደብረ ቀራንዮ መድኃኔዓለም ቤተ ክርስቲያን በ፲፰፻፳፯ ዓ.ም ተመሠረተ) · ቀራንዮ መድኃኔዓለም አከባቢ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01513&mlon=38.70630#map=18/9.01513/38.70630
 - **keranyo bethel kalehiwot church** · pentecostal christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00245&mlon=38.70531#map=18/9.00245/38.70531
 - **Kolfe Debre Berhan Holy Trinity Church** (ኮልፌ ደብረ ብርሃን ቅድስት ሥላሴ ቤተ ክርስቲያን) · ዊንጌት ጠሮ አራት መንታ መንገድ አከባቢ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.05010&mlon=38.70781#map=18/9.05010/38.70781
-- **Mariam** · ethiopian orthodox tewahedo christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05669&mlon=38.70560#map=18/9.05669/38.70560
+- **Mariam** · ethiopian orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05669&mlon=38.70560#map=18/9.05669/38.70560
 - **mesjid** · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99229&mlon=38.68240#map=18/8.99229/38.68240
 - **Miftah Mosque AyerTena** (ሚፍታህ መስጅድ አየር ጤና) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98430&mlon=38.70793#map=18/8.98430/38.70793
 - **Mosque** · muslim · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98883&mlon=38.69250#map=18/8.98883/38.69250
+- **Musab Mosque** (ሙስአብ መስጂድ) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99897&mlon=38.67778#map=18/8.99897/38.67778
 - **Petros Church** · christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05344&mlon=38.71514#map=18/9.05344/38.71514
 - **Petros Paulos Orthodox church** (ብርሃናተ ዓለም ጴጥሮስ ወጳውሎስ ቤተ ክርስቲያን በ፲፱፻፩ ዓ.ም ተመሠረተ) · Old Ambo Road -የድሮው የአምቦ መንገድ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.05343&mlon=38.71514#map=18/9.05343/38.71514
 - **Petros** · christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05362&mlon=38.71563#map=18/9.05362/38.71563
-- **Qidus Giorgis church** · ethiopian orthodox tewahedo christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04662&mlon=38.69286#map=18/9.04662/38.69286
+- **Qidus Giorgis church** · ethiopian orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04662&mlon=38.69286#map=18/9.04662/38.69286
 - **Repi Medihanialem church** (ረጲ መድሃኒያለም ቤ/ክርስቲያን) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97396&mlon=38.69080#map=18/8.97396/38.69080
 - **St. Arsema church** (ቅድስት አርሴማ ቤተክርስቲያን) · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06346&mlon=38.70878#map=18/9.06346/38.70878
-- **St. Fanuel Church** (ቅዱስ ፋኑኤል ቤተ ክርስቲያን) · ethiopian orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99121&mlon=38.66511#map=18/8.99121/38.66511
+- **St. Fanuel Church** (ቅዱስ ፋኑኤል ቤተ ክርስቲያን) · ethiopian orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99120&mlon=38.66511#map=18/8.99120/38.66511
 - **St. Francisco Frairy** · catholic christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06281&mlon=38.69886#map=18/9.06281/38.69886
-- **St. Paulus Church** (ቅዱስ ጳውሎስ ቤተ ክርስቲያን) · ethiopian orthodox christian · ኮልፌ ልኳንዳ ፈጥኖ ደራሽ ካምፕ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02864&mlon=38.70369#map=18/9.02864/38.70369
-- **St.Filipos** (ቅዱስ ፊሊጶስ ቤተ ክርስቲያን) · orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04183&mlon=38.70447#map=18/9.04183/38.70447
+- **St. Paulus Church** (ቅዱስ ጳውሎስ ቤተ ክርስቲያን) · ethiopian orthodox christian · ኮልፌ ልኳንዳ ፈጥኖ ደራሽ ካምፕ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02864&mlon=38.70370#map=18/9.02864/38.70370
+- **St.Filipos** (ቅዱስ ፊሊጶስ ቤተ ክርስቲያን) · orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04183&mlon=38.70448#map=18/9.04183/38.70448
 - **St.Geberel** · orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06719&mlon=38.69206#map=18/9.06719/38.69206
 - **St.Geberel** · orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06819&mlon=38.69175#map=18/9.06819/38.69175
 - **St.Petrose We Pawlos** (ቅዱስ ጴጥሮሰ ወ ጳውሎስ ቤተ ክርስቲያን) · orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05347&mlon=38.71515#map=18/9.05347/38.71515
@@ -527,7 +529,6 @@ count: "512"
 - **አለም ባንክ ቅድስት ሥላሴ ቤተክርስቲያን** · KK_07_2355 Av, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00837&mlon=38.66776#map=18/9.00837/38.66776
 - **አስኮ መካነ ሕይወት ቅዱስ አማኑኤል እና አቡነ ገብረ መንፈስ ቅዱስ ቤተ ክርስቲያን** · አስኮ ብርጭቆ ፋብሪካ አካባቢ / Asko Bercheko Faberika Area, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.06146&mlon=38.69633#map=18/9.06146/38.69633
 - **አስኮ ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን** · አስኮ አዲሱ ሰፈር ብርጭቆ ኮንዶሚኒየም ጀርባ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04591&mlon=38.69456#map=18/9.04591/38.69456
-- **አስኮ ደብረ መድኃኒት መድኃኔዓለም ቤተ ክርስቲያን** · አስኮ አዲሱ ሰፈር ብርጭቆ ኮንዶሚኒየም ጀርባ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04744&mlon=38.69396#map=18/9.04744/38.69396
 - **አስኮ ደብረ ገነት ቅዱስ ገብርኤል ቤተ ክትስቲያን** · አስኮ አካባቢ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.06720&mlon=38.69206#map=18/9.06720/38.69206
 - **አቡኖ አረጋዊ ቤተ ክርስቲያን Abuno Aregawi Betekeresetyane** (አቡኖ አረጋዊ ቤተ ክርስቲያን) · orthodox christian · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98355&mlon=38.70974#map=18/8.98355/38.70974
 - **አንቀጸ ብፁዐን አቡነ ገብረ መንፈስ ቅዱስ ቤተ ክርስቲያን** · ከወይራ ኮንዶሚኒየም ወረድ ብሎ መንዙ ዳር, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99752&mlon=38.71369#map=18/8.99752/38.71369
@@ -542,15 +543,3 @@ count: "512"
 - **ደብረ ክዋክብት አቡነ አረጋዊ እና ቅዱስ ገብረ ክርስቶስ ቤተ ክርስቲያን በ፲፱፻፵፪ ዓ.ም ተመሠረተ** · Qore street, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.98356&mlon=38.70978#map=18/8.98356/38.70978
 - **ደብረ ይድረስ ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን በ፲፱፻፹፩ ዓ.ም ተመሠረተ** · KK_07_2202 Av., Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00155&mlon=38.70056#map=18/9.00155/38.70056
 - **ገነተ ሰማይ ቅድስት አርሴማ ወአቡነ እጨጌ ዮሐንስ ቤተ ክርስቲያን** · ወይራ ሰፈር ዶሮ እርባታ አከባቢ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01066&mlon=38.70755#map=18/9.01066/38.70755
-
-## Addis Ababa (sub-city not given in OpenStreetMap) — 9
-
-- **Bole Medhanialem Church** · orthodox christian · Addis Ababa · map https://www.openstreetmap.org/?mlat=8.99591&mlon=38.78987#map=18/8.99591/38.78987
-- **Bole Mikael Orthodox church** (ቦሌ ደብረ ምሕረት ቅዱስ ሚካኤል ቤተ ክርስቲያን በ፲፱፻፷፰ ዓ.ም ተመሠረተ) · ቦሌ ሚካኤል አከባቢ ቀለበት መንገድ አቅራቢያ, Addis Ababa · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.98054&mlon=38.77106#map=18/8.98054/38.77106
-- **St. George's Cathedral** (ቅዱስ ጊዮርጊስ ቤተ ክርስቲያን) · ethiopian orthodox tewahedo christian · ደጃ/ች በላይ ዘለቀ መንገድ, Addis Ababa · map https://www.openstreetmap.org/?mlat=9.03676&mlon=38.75131#map=18/9.03676/38.75131
-- **St. Medhanialem Church** · orthodox christian · Addis Ababa · map https://www.openstreetmap.org/?mlat=8.99590&mlon=38.79004#map=18/8.99590/38.79004
-- **ቅዱስ ሚካኤል ቤተ ክርስቲያን** · ቀለበት መንገድ ቅዱስ ዮሴፍ አከባቢ, Addis Ababa · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96987&mlon=38.76591#map=18/8.96987/38.76591
-- **ደብረ ሰላም መድኃኔዓለም ወመጥምቁ ቅዱስ ዩሐንስ ወአቡነ አረጋዊ ቤተ ክርስቲያን በ፲፱፻፸፪ ዓ.ም ተመሠረተ** · ቦሌ መድኃኔዓለም አከባቢ, Addis Ababa · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99594&mlon=38.78984#map=18/8.99594/38.78984
-- **ደብረ ሰላም መድኃኔዓለም ወመጥምቁ ቅዱስ ዩሐንስ ወአቡነ አረጋዊ ቤተ ክርስቲያን በ፲፱፻፸፪ ዓ.ም ተመሠረተ** · ቦሌ መድኃኔዓለም አደባባይ, Addis Ababa · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99583&mlon=38.79005#map=18/8.99583/38.79005
-- **ደብረ ናዝሬት ቅዱስ ዮሴፍ ቤተ ክርስቲያን በ፲፱፻፲፩ ዓ.ም ተመሠረተ** · ቅዱስ ዮሴፍ አከባቢ ቀለበት መንገድ አጠገብ, Addis Ababa · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96979&mlon=38.76741#map=18/8.96979/38.76741
-- **ፃድቁ አቡነ ጎርጎሪዎስ ቤተ ክርስቶያን ፲፱፻፺፫ ዓ.ም ተመሠረተ** · ከወሎ ሰፈር ወደ ቦሌ ቅዱስ ሚካኤል በሚወስደው መንገድ, Addis Ababa · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.98099&mlon=38.76926#map=18/8.98099/38.76926

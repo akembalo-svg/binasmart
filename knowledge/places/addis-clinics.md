@@ -3,12 +3,12 @@ title: "Clinics and health centres in Addis Ababa (ክሊኒኮችና ጤና ጣ
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-05-31"
+fetched: "2026-09-24"
 count: "96"
 ---
 # Clinics and health centres in Addis Ababa · በአዲስ አበባ ያሉ ክሊኒኮችና ጤና ጣቢያዎች
 
-96 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+96 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 9
 
@@ -62,12 +62,11 @@ count: "96"
 
 - **Addis sub city Felege meles health center** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04486&mlon=38.73344#map=18/9.04486/38.73344
 - **Alemetena clinic** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04610&mlon=38.72931#map=18/9.04610/38.72931
-- **Bitania Clinic** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04660&mlon=38.72701#map=18/9.04660/38.72701
+- **Bitania Clinic** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04662&mlon=38.72700#map=18/9.04662/38.72700
 - **Marie Stopes International Clinic** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04496&mlon=38.73323#map=18/9.04496/38.73323
 
 ## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 14
 
-- **AA Poly Internal Medicine Speciality Clinic** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01539&mlon=38.75654#map=18/9.01539/38.75654
 - **Adera Medical Center** (አደራ የውስጥ ደዌ ማዕከል) · Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00807&mlon=38.76419#map=18/9.00807/38.76419
 - **Afei diagnosis center** · Belo bet st, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99471&mlon=38.75949#map=18/8.99471/38.75949
 - **Afei Diagnostic Center** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99537&mlon=38.75932#map=18/8.99537/38.75932
@@ -78,6 +77,7 @@ count: "96"
 - **International Clinical Laboratories** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01163&mlon=38.76703#map=18/9.01163/38.76703
 - **Meshualekiya Tena Tabiya** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00117&mlon=38.76276#map=18/9.00117/38.76276
 - **OIA India Eye Care Centre** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01805&mlon=38.75703#map=18/9.01805/38.75703
+- **Rhehum International Medicine Clinic** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99503&mlon=38.75389#map=18/8.99503/38.75389
 - **Senay Medical Center** (ሰናይ የውስጥ ደዌ ህክሰናይ የውስጥ ደዌ እና የአይን ህክምና ማዕከልምና ማዕከል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98922&mlon=38.75985#map=18/8.98922/38.75985
 - **Suisse Clinic** · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99140&mlon=38.75280#map=18/8.99140/38.75280
 - **WAGGA Eye Center** (ዋጋ የአይን ማዕከል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · http://www.waggaeyecenter.com · map https://www.openstreetmap.org/?mlat=8.98419&mlon=38.76606#map=18/8.98419/38.76606
@@ -87,7 +87,7 @@ count: "96"
 - **Abc** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06577&mlon=38.74546#map=18/9.06577/38.74546
 - **Bonat cilinic ቦናት ክልንክ** (ቦናት ክልንክ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05599&mlon=38.71965#map=18/9.05599/38.71965
 - **Boni-At Cilinic ቦኒ-አት ክልንክ** (ቦኒ-አት ክልንክ) · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05571&mlon=38.71998#map=18/9.05571/38.71998
-- **Kechene Medhanialem higher clinic** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05905&mlon=38.74021#map=18/9.05905/38.74021
+- **Kechene Medhanialem higher clinic** · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05906&mlon=38.74022#map=18/9.05906/38.74022
 
 ## Lideta sub-city · ልደታ ክፍለ ከተማ — 6
 
@@ -116,8 +116,8 @@ count: "96"
 - **feto clinic** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94663&mlon=38.74066#map=18/8.94663/38.74066
 - **Go Far Vision** · run by Dr Alemayew · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97572&mlon=38.74861#map=18/8.97572/38.74861
 - **Lotus Gynecology and Obsetrics Special Clinic** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://lotus-maternity.com/;https://www.facebook.com/lotusmaternity/ · map https://www.openstreetmap.org/?mlat=8.94051&mlon=38.73530#map=18/8.94051/38.73530
-- **Nefas Silk Lafto Subcity Wereda 5 Health Center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97292&mlon=38.74223#map=18/8.97292/38.74223
-- **Nifas Silk Lafto Sub City Wereda 11 Health Center** · run by government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93068&mlon=38.74226#map=18/8.93068/38.74226
+- **Nefas Silk Lafto Subcity Wereda 5 Health Center** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97293&mlon=38.74224#map=18/8.97293/38.74224
+- **Nifas Silk Lafto Sub City Wereda 11 Health Center** · run by government · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93067&mlon=38.74226#map=18/8.93067/38.74226
 - **Nifas Silk Lafto Woreda 06 Health Center** (ንፋስ ስልክ ላፍቶ ወረዳ 06 ጤና ጣቢያ) · Mauritius Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Fr 08:00-17:00 · map https://www.openstreetmap.org/?mlat=8.97153&mlon=38.75019#map=18/8.97153/38.75019
 - **Swift Healing Clinic** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95013&mlon=38.71799#map=18/8.95013/38.71799
 

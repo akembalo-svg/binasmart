@@ -1,0 +1,1818 @@
+---
+title: "Shops and services in Addis Ababa (ሱቆችና አገልግሎቶች)"
+url: "https://www.openstreetmap.org/relation/1707699"
+lang: "en"
+source_name: "OpenStreetMap contributors (ODbL)"
+fetched: "2026-09-24"
+count: "1777"
+---
+# Shops and services in Addis Ababa · በአዲስ አበባ ያሉ ሱቆችና አገልግሎቶች
+
+1777 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+
+## Arada sub-city · አራዳ ክፍለ ከተማ — 190
+
+- **111004** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04477&mlon=38.74157#map=18/9.04477/38.74157
+- **111022** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02370&mlon=38.76785#map=18/9.02370/38.76785
+- **111025** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02901&mlon=38.75778#map=18/9.02901/38.75778
+- **111028** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03476&mlon=38.74433#map=18/9.03476/38.74433
+- **111029** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03934&mlon=38.75152#map=18/9.03934/38.75152
+- **111032** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04797&mlon=38.73918#map=18/9.04797/38.73918
+- **111075** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04344&mlon=38.75084#map=18/9.04344/38.75084
+- **111114** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03448&mlon=38.76128#map=18/9.03448/38.76128
+- **111146** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03922&mlon=38.75667#map=18/9.03922/38.75667
+- **111151** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04893&mlon=38.74822#map=18/9.04893/38.74822
+- **111195** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03858&mlon=38.74338#map=18/9.03858/38.74338
+- **111195** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03859&mlon=38.74339#map=18/9.03859/38.74339
+- **111402** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04086&mlon=38.76113#map=18/9.04086/38.76113
+- **111420-3F BULD** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02943&mlon=38.75268#map=18/9.02943/38.75268
+- **111434** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03222&mlon=38.75465#map=18/9.03222/38.75465
+- **111444** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02693&mlon=38.76254#map=18/9.02693/38.76254
+- **111617** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03200&mlon=38.76064#map=18/9.03200/38.76064
+- **111623** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03726&mlon=38.75262#map=18/9.03726/38.75262
+- **111627** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05320&mlon=38.74606#map=18/9.05320/38.74606
+- **111643** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03970&mlon=38.76405#map=18/9.03970/38.76405
+- **111668** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05136&mlon=38.73830#map=18/9.05136/38.73830
+- **111722** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04089&mlon=38.74172#map=18/9.04089/38.74172
+- **111759** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04589&mlon=38.74788#map=18/9.04589/38.74788
+- **111772** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03779&mlon=38.76880#map=18/9.03779/38.76880
+- **111842** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05181&mlon=38.74351#map=18/9.05181/38.74351
+- **112071** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02482&mlon=38.75219#map=18/9.02482/38.75219
+- **112081** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04217&mlon=38.74629#map=18/9.04217/38.74629
+- **112082** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03777&mlon=38.76131#map=18/9.03777/38.76131
+- **112097** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03956&mlon=38.74785#map=18/9.03956/38.74785
+- **112100** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02451&mlon=38.75723#map=18/9.02451/38.75723
+- **112102** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04708&mlon=38.74670#map=18/9.04708/38.74670
+- **112120** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04403&mlon=38.75478#map=18/9.04403/38.75478
+- **112123** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03746&mlon=38.73970#map=18/9.03746/38.73970
+- **Abbdulhair's Ready Made Cloth & Shoes** · clothes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03206&mlon=38.75181#map=18/9.03206/38.75181
+- **ABC Trading** (ኤቢሲ ትሬዲንግ) · musical instrument · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03420&mlon=38.74452#map=18/9.03420/38.74452
+- **ABI Garage Steering & Suspension** · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03335&mlon=38.74652#map=18/9.03335/38.74652
+- **Abush Garage** (ኣቡሽ ጋራጅ) · car repair · 07 Queen Elizabeth Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03079&mlon=38.77182#map=18/9.03079/38.77182
+- **Addis Bakery** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04413&mlon=38.74396#map=18/9.04413/38.74396
+- **Addis Bakery** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04419&mlon=38.74399#map=18/9.04419/38.74399
+- **Adey Laundry** · laundry · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03503&mlon=38.76289#map=18/9.03503/38.76289
+- **Africans Book Shop** · books · 185 Hailesilase Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03521&mlon=38.75501#map=18/9.03521/38.75501
+- **All in one Gifts @ Souvenirs shop** · gift · Nigeria Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02165&mlon=38.75316#map=18/9.02165/38.75316
+- **Anbessa Shoe** · shoes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03279&mlon=38.75420#map=18/9.03279/38.75420
+- **Anbessa Shoe** · shoes · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 275 1605 · map https://www.openstreetmap.org/?mlat=9.03238&mlon=38.75205#map=18/9.03238/38.75205
+- **ARK bakery** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04137&mlon=38.76231#map=18/9.04137/38.76231
+- **Aynamawe** · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02778&mlon=38.75444#map=18/9.02778/38.75444
+- **Bags Family Construction PLC - Tent works and rent** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03164&mlon=38.77020#map=18/9.03164/38.77020
+- **Beky Hair & Make Up Studio** · beauty · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03225&mlon=38.77224#map=18/9.03225/38.77224
+- **Bilo's pastry** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03418&mlon=38.76010#map=18/9.03418/38.76010
+- **Book Light** · books · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03534&mlon=38.75905#map=18/9.03534/38.75905
+- **Book World** · books · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03109&mlon=38.75031#map=18/9.03109/38.75031
+- **CBE - FOREX BUREAU** (የኢትዮጵያ ንግድ ባንክ የውጭ ምንዛሪ ቢሮ) · bureau de change · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02162&mlon=38.75379#map=18/9.02162/38.75379
+- **Churchill Stationary Enterprise** (ቸርችል የፅህፈት መሳሪያ ኢንተርፕራይዝ) · stationery · Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 157 3178 · map https://www.openstreetmap.org/?mlat=9.02295&mlon=38.75190#map=18/9.02295/38.75190
+- **Classic** · stationery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03507&mlon=38.77590#map=18/9.03507/38.77590
+- **Clean + Plc (Offices+Residences+Cars)** · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02086&mlon=38.75378#map=18/9.02086/38.75378
+- **Comercial Bank of Ethiopia** · atm · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03488&mlon=38.76293#map=18/9.03488/38.76293
+- **Commercial Bank of Ethiopia** · bureau de change · run by Government · Arada sub-city (አራዳ ክፍለ ከተማ) · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.03891&mlon=38.76221#map=18/9.03891/38.76221
+- **Cottex T-shirts** · clothes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03198&mlon=38.76548#map=18/9.03198/38.76548
+- **Dereje CARBURETOR cleaner Kechene ABEL** · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05096&mlon=38.74841#map=18/9.05096/38.74841
+- **Dink Donuts** (ዲኬ ዶነትስ - ቀበና) · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03565&mlon=38.77750#map=18/9.03565/38.77750
+- **EDEN Sweater Garments** · clothes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03212&mlon=38.75180#map=18/9.03212/38.75180
+- **Edget Gousegold & Office Furniture** · furniture · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03624&mlon=38.76226#map=18/9.03624/38.76226
+- **Elephant Coffee** · coffee · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03334&mlon=38.76137#map=18/9.03334/38.76137
+- **Emerald furniture** · furniture · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03718&mlon=38.75442#map=18/9.03718/38.75442
+- **Ethio ceramics - Main Show Room and Head Office** (ኢትዮ-ሴራሚክስ - ማሳያ ክፍል እና ዋና ቢሮ) · furniture · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02882&mlon=38.75514#map=18/9.02882/38.75514
+- **Ethio ceramics - Piassa Shop** (ኢትዮ-ሴራሚክስ - አትክልት ተራ አካባቢ መሸጫ ማዕከል) · furniture · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03288&mlon=38.74886#map=18/9.03288/38.74886
+- **Ethio ceramics - Piassa Shop** (ኢትዮ-ሴራሚክስ - አትክልት ተራ አካባቢ መሸጫ ማዕከል) · furniture · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03297&mlon=38.74926#map=18/9.03297/38.74926
+- **Ethio Telecom** · mobile phone · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03392&mlon=38.76142#map=18/9.03392/38.76142
+- **Ethio Telecom** · mobile phone · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03904&mlon=38.75178#map=18/9.03904/38.75178
+- **Ethiopia Video** · video · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03487&mlon=38.74641#map=18/9.03487/38.74641
+- **Ethiopian Rift Valley Safaris** · travel agency · Wawel Street, Arada sub-city (አራዳ ክፍለ ከተማ) · https://ervstours.com/ · hours Mo-Su 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.03249&mlon=38.75036#map=18/9.03249/38.75036
+- **Fruit Stall** · health food · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03267&mlon=38.77525#map=18/9.03267/38.77525
+- **General Motors** (ጄነራል ሞተርስ) · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02803&mlon=38.77490#map=18/9.02803/38.77490
+- **GH Furniture** (ጂ.ኤች ፈርኒቸር) · furniture · Mahtama Gandhi Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03044&mlon=38.75322#map=18/9.03044/38.75322
+- **Grand Bakery** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03203&mlon=38.76572#map=18/9.03203/38.76572
+- **Halaba Eco Tour** (ሀላባ ኢኮ ቱሪዝም አገልግሎት) · car rental · 110 ቀበና, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03492&mlon=38.77858#map=18/9.03492/38.77858
+- **Hamelmal Beauty Salon** (ሀመልማል የሴቶች የውበት ሳሎን) · hairdresser · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01941&mlon=38.75431#map=18/9.01941/38.75431
+- **Hamer Gallery** (ሐመር ጋለሪ) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02235&mlon=38.75362#map=18/9.02235/38.75362
+- **Hardware store** · hardware · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03290&mlon=38.77516#map=18/9.03290/38.77516
+- **Hardware Store** · hardware · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03316&mlon=38.77547#map=18/9.03316/38.77547
+- **Horon Computer 5th floor cash register service** · computer · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02885&mlon=38.75199#map=18/9.02885/38.75199
+- **Iris Optics** (አይሪስ የዓይን ህክምና) · optician · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03059&mlon=38.76336#map=18/9.03059/38.76336
+- **Jack mobile** · mobile phone · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02242&mlon=38.75173#map=18/9.02242/38.75173
+- **John car mechanic sumale tera** · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03192&mlon=38.74537#map=18/9.03192/38.74537
+- **K Electronics** · electronics · Churchill Avenue, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03190&mlon=38.75101#map=18/9.03190/38.75101
+- **Kaleab Trading p.l.c** (ቃለአብ ትሬዲንግ ግ•ማ) · beverages · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03212&mlon=38.77283#map=18/9.03212/38.77283
+- **Kasu garage ካሱ ጋራጅ** · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03686&mlon=38.74886#map=18/9.03686/38.74886
+- **Kefo** (ቀፎ) · copyshop · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03895&mlon=38.75472#map=18/9.03895/38.75472
+- **Kinfe Vols Garage** (ክንፈ ቮልስ ጋራዥ) · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03673&mlon=38.74872#map=18/9.03673/38.74872
+- **KOBA Patisserie & Bakery** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03507&mlon=38.77215#map=18/9.03507/38.77215
+- **KOBA Patisserie & Bakery** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03620&mlon=38.76259#map=18/9.03620/38.76259
+- **Kraod** (ኬሮድ) · clothes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03160&mlon=38.75368#map=18/9.03160/38.75368
+- **LNS Kitchen** · houseware · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03218&mlon=38.75178#map=18/9.03218/38.75178
+- **MAMUSH EGIR MECHANIC ENKULAL FABRICA** · car · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04949&mlon=38.73987#map=18/9.04949/38.73987
+- **Mega Book Store** · books · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03585&mlon=38.76258#map=18/9.03585/38.76258
+- **Mega** · books · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03589&mlon=38.76256#map=18/9.03589/38.76256
+- **Merit Studio** · photo studio · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03376&mlon=38.76170#map=18/9.03376/38.76170
+- **Mina Car Market** · car · ዮሃንስ, Arada sub-city (አራዳ ክፍለ ከተማ) · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=9.04150&mlon=38.74605#map=18/9.04150/38.74605
+- **Misrach optics** · optician · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03810&mlon=38.76513#map=18/9.03810/38.76513
+- **Mohamef garage 1** · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03355&mlon=38.74644#map=18/9.03355/38.74644
+- **Mohammed garage** (መሀመድ ጋራጅ) · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03338&mlon=38.74678#map=18/9.03338/38.74678
+- **MSAG-401** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03621&mlon=38.76238#map=18/9.03621/38.76238
+- **MSAG-405** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03326&mlon=38.75409#map=18/9.03326/38.75409
+- **MSAG-410** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02997&mlon=38.75220#map=18/9.02997/38.75220
+- **MSAG-4108** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02890&mlon=38.75536#map=18/9.02890/38.75536
+- **MSAG-416** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02754&mlon=38.75219#map=18/9.02754/38.75219
+- **MSAG-419** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04672&mlon=38.74245#map=18/9.04672/38.74245
+- **MSAG-421** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03386&mlon=38.76228#map=18/9.03386/38.76228
+- **MSAG-422** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03884&mlon=38.74219#map=18/9.03884/38.74219
+- **MSAG-423** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02727&mlon=38.75100#map=18/9.02727/38.75100
+- **MSAG-431** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03559&mlon=38.75892#map=18/9.03559/38.75892
+- **MSAG-435** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05015&mlon=38.74421#map=18/9.05015/38.74421
+- **MSAG-439** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02503&mlon=38.75212#map=18/9.02503/38.75212
+- **MSAG-445** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03953&mlon=38.75155#map=18/9.03953/38.75155
+- **MSAG-456** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04175&mlon=38.74863#map=18/9.04175/38.74863
+- **MSAG-457** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03811&mlon=38.75185#map=18/9.03811/38.75185
+- **MSAG-467** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04893&mlon=38.74613#map=18/9.04893/38.74613
+- **MSAG-468** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04512&mlon=38.75576#map=18/9.04512/38.75576
+- **MSAG-469** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03441&mlon=38.75984#map=18/9.03441/38.75984
+- **MSAG-470** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03544&mlon=38.75535#map=18/9.03544/38.75535
+- **MSAG-472** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03606&mlon=38.75288#map=18/9.03606/38.75288
+- **MSAG-473** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04240&mlon=38.74988#map=18/9.04240/38.74988
+- **MSAG-474** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03955&mlon=38.75137#map=18/9.03955/38.75137
+- **MSAG-475** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04130&mlon=38.75370#map=18/9.04130/38.75370
+- **MSAG-476** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03799&mlon=38.75258#map=18/9.03799/38.75258
+- **MSAG-478** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04087&mlon=38.75022#map=18/9.04087/38.75022
+- **MSAG-479** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03959&mlon=38.75116#map=18/9.03959/38.75116
+- **MSAG-480** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04267&mlon=38.74578#map=18/9.04267/38.74578
+- **MSAG-482** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03597&mlon=38.74914#map=18/9.03597/38.74914
+- **MSAG-484** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03889&mlon=38.74237#map=18/9.03889/38.74237
+- **MSAG-485** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03548&mlon=38.74533#map=18/9.03548/38.74533
+- **MSAG-486** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03389&mlon=38.74898#map=18/9.03389/38.74898
+- **MSAG-487** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03369&mlon=38.74888#map=18/9.03369/38.74888
+- **MSAG-489** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03134&mlon=38.75543#map=18/9.03134/38.75543
+- **MSAG-490** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.03113&mlon=38.75544#map=18/9.03113/38.75544
+- **MSAG-491** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03252&mlon=38.75433#map=18/9.03252/38.75433
+- **MSAG-492** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03208&mlon=38.75273#map=18/9.03208/38.75273
+- **MSAG-493** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03990&mlon=38.75881#map=18/9.03990/38.75881
+- **MSAG-495** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03880&mlon=38.75787#map=18/9.03880/38.75787
+- **MSAG-687** · internet cafe · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04161&mlon=38.73712#map=18/9.04161/38.73712
+- **Mubarek computer importer** · computer · kelifa building 106A Atikilt Tera, Arada sub-city (አራዳ ክፍለ ከተማ) · hours Mo-Sa 09:00-17:30 · map https://www.openstreetmap.org/?mlat=9.03407&mlon=38.74598#map=18/9.03407/38.74598
+- **Mubarek Computer importer** (ሙባረክ ኮምፒውተር አስመጭ) · computer · kelifa bdg 106A አትክልት ተራ, Arada sub-city (አራዳ ክፍለ ከተማ) · hours Mo-Sa 09:00-17:30 · map https://www.openstreetmap.org/?mlat=9.03406&mlon=38.74598#map=18/9.03406/38.74598
+- **Mudaser Shop** (ሙደሲር ሱቅ) · kiosk · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02520&mlon=38.75241#map=18/9.02520/38.75241
+- **munich origenal P.L.C.** · sports · 185 Hailesilase Street, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 111 6115 · hours Mo-Sa 08:00-06:00 · map https://www.openstreetmap.org/?mlat=9.03603&mlon=38.75563#map=18/9.03603/38.75563
+- **Natan Tyre Shop** · tyres · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04283&mlon=38.76273#map=18/9.04283/38.76273
+- **Ok jamaka** · shoes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03459&mlon=38.74782#map=18/9.03459/38.74782
+- **OPC Trading** · computer · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03167&mlon=38.77014#map=18/9.03167/38.77014
+- **Orbit** · stationery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03447&mlon=38.76297#map=18/9.03447/38.76297
+- **Osa Bakery** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03334&mlon=38.76710#map=18/9.03334/38.76710
+- **Photo Unique** · photo studio · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03381&mlon=38.76161#map=18/9.03381/38.76161
+- **Ping Computer Solution & Software Gallery** · computer · Cunningham Street, Arada sub-city (አራዳ ክፍለ ከተማ) · https://www.facebook.com/pingcomputersolution?mibextid=ZbWKwL · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.03240&mlon=38.75314#map=18/9.03240/38.75314
+- **Plan Copy (Blue Print)** (ፕላን ኮፒ/ብሉ ፕሪንት) · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02039&mlon=38.75380#map=18/9.02039/38.75380
+- **Police Garage** (ፖሊስ ጋራዥ) · car repair · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03701&mlon=38.75348#map=18/9.03701/38.75348
+- **Rade Souvenier Shop** (ራዴ የስጦታ ዕቃዎች) · gift · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02152&mlon=38.75305#map=18/9.02152/38.75305
+- **Ramsay** (ራምሴ ጫማ) · shoes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03816&mlon=38.75266#map=18/9.03816/38.75266
+- **SABIT ELECTRONICS** · electronics · Hailesilase Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03564&mlon=38.75528#map=18/9.03564/38.75528
+- **Sally Beauty Supplies** · beauty · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03385&mlon=38.76308#map=18/9.03385/38.76308
+- **Sami electronics repair** · electronics · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03804&mlon=38.75196#map=18/9.03804/38.75196
+- **Sami Frame** · furniture · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02999&mlon=38.75286#map=18/9.02999/38.75286
+- **Shoa Bakery** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03506&mlon=38.77602#map=18/9.03506/38.77602
+- **Shoa Bakery** · bakery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03764&mlon=38.76282#map=18/9.03764/38.76282
+- **Shoe Repairs** · shoes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03521&mlon=38.77716#map=18/9.03521/38.77716
+- **Sony** · electronics · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03225&mlon=38.75454#map=18/9.03225/38.75454
+- **Souvenier Shop** (የስጦታ ዕቃዎች) · gift · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02152&mlon=38.75283#map=18/9.02152/38.75283
+- **Souvenier Shop** (የስጦታ ዕቃዎች) · gift · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02152&mlon=38.75296#map=18/9.02152/38.75296
+- **Souvenier Shop** (የስጦታ ዕቃዎች) · gift · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02157&mlon=38.75273#map=18/9.02157/38.75273
+- **Souvenier Shop** (የስጦታ ዕቃዎች) · gift · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02163&mlon=38.75260#map=18/9.02163/38.75260
+- **Souvenirs** · gift · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02309&mlon=38.75188#map=18/9.02309/38.75188
+- **Sun Optics - Arat kilo** (ሣን ኦፕቲክስ - አራት ኪሎ) · optician · አራት ኪሎ, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 126 3595 · map https://www.openstreetmap.org/?mlat=9.03392&mlon=38.76137#map=18/9.03392/38.76137
+- **Sun Optics - Piassa Branch** (ሣን ኦፕቲክስ - ፒያሳ ቅርንጫፍ) · optician · Mahtama Gandhi Street, Arada sub-city (አራዳ ክፍለ ከተማ) · tel +251 11 156 7578 · https://www.sunopticaltechnologies.com/ · map https://www.openstreetmap.org/?mlat=9.03228&mlon=38.75263#map=18/9.03228/38.75263
+- **Super** (ሱፐር የንጽህና መስጫ) · laundry · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03589&mlon=38.75297#map=18/9.03589/38.75297
+- **Supreme IT Solution** (ሱፕሪም አይቲ ሶሉሽን) · computer · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02839&mlon=38.75180#map=18/9.02839/38.75180
+- **Tecno** · mobile phone · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02243&mlon=38.75182#map=18/9.02243/38.75182
+- **Tenkir kibret souvenir** (ጠንክር ክብረት የስጦታ እቃዎች መሸጫ) · gift · Tewodros Square, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02780&mlon=38.75205#map=18/9.02780/38.75205
+- **Top Fashion** · clothes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03143&mlon=38.75409#map=18/9.03143/38.75409
+- **Total** · car wash · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02694&mlon=38.75658#map=18/9.02694/38.75658
+- **Tyres Workshop** · tyres · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03503&mlon=38.77563#map=18/9.03503/38.77563
+- **Universal Stationery** · books · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03444&mlon=38.76297#map=18/9.03444/38.76297
+- **Uptown Licours** · alcohol · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03631&mlon=38.75811#map=18/9.03631/38.75811
+- **Vegetable market** · greengrocer · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03402&mlon=38.74795#map=18/9.03402/38.74795
+- **Walia Stationary** · convenience · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03379&mlon=38.75485#map=18/9.03379/38.75485
+- **Wegagen** · atm · run by Dashen Bank · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03847&mlon=38.76230#map=18/9.03847/38.76230
+- **Western Union** · money transfer · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03251&mlon=38.77569#map=18/9.03251/38.77569
+- **Wine Store** · winery · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03485&mlon=38.77250#map=18/9.03485/38.77250
+- **wisdom book publishing** (ዊዝደም መፅሀፍ ማተሚያ) · books · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04401&mlon=38.75717#map=18/9.04401/38.75717
+- **Wudassie Souvenier** (ውዳሴ የስጦታ ዕቃዎች) · gift · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02171&mlon=38.75247#map=18/9.02171/38.75247
+- **YMA Bicycles** · bicycle · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03151&mlon=38.74630#map=18/9.03151/38.74630
+- **zomiyas choice** (ዞሚያስ ቾይስ) · clothes · Mahtama Gandhi Street, Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03189&mlon=38.75253#map=18/9.03189/38.75253
+- **ሱፍ ቤት** · clothes · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03133&mlon=38.75411#map=18/9.03133/38.75411
+- **중고차 거리** · car · Arada sub-city (አራዳ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04770&mlon=38.74200#map=18/9.04770/38.74200
+
+## Bole sub-city · ቦሌ ክፍለ ከተማ — 395
+
+- **111008- BOLE BULBULA BRIDGE** (111008 - ቦሌ ቡልቡላ ድልድይ (ማሞ)) · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97667&mlon=38.76750#map=18/8.97667/38.76750
+- **111010** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98076&mlon=38.77538#map=18/8.98076/38.77538
+- **111017** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00672&mlon=38.79895#map=18/9.00672/38.79895
+- **111270** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94723&mlon=38.77417#map=18/8.94723/38.77417
+- **111271** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96728&mlon=38.77662#map=18/8.96728/38.77662
+- **111272** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98547&mlon=38.78536#map=18/8.98547/38.78536
+- **111387** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95849&mlon=38.78631#map=18/8.95849/38.78631
+- **111399** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97699&mlon=38.77557#map=18/8.97699/38.77557
+- **111603 - GUMURUK** · telecommunication · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01506&mlon=38.79994#map=18/9.01506/38.79994
+- **111639** · telecommunication · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01164&mlon=38.79762#map=18/9.01164/38.79762
+- **111774** · telecommunication · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94067&mlon=38.85287#map=18/8.94067/38.85287
+- **111883** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98156&mlon=38.77059#map=18/8.98156/38.77059
+- **111895** · telecommunication · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94336&mlon=38.87033#map=18/8.94336/38.87033
+- **112087** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98489&mlon=38.77560#map=18/8.98489/38.77560
+- **112117** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97947&mlon=38.77236#map=18/8.97947/38.77236
+- **112135** · telecommunication · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98994&mlon=38.81022#map=18/8.98994/38.81022
+- **112147** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95277&mlon=38.78778#map=18/8.95277/38.78778
+- **112158** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97185&mlon=38.82809#map=18/8.97185/38.82809
+- **112174** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95679&mlon=38.82435#map=18/8.95679/38.82435
+- **112175** · telecommunication · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95752&mlon=38.80718#map=18/8.95752/38.80718
+- **112188** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.95151&mlon=38.78250#map=18/8.95151/38.78250
+- **112189** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94984&mlon=38.80706#map=18/8.94984/38.80706
+- **112190** · telecommunication · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94350&mlon=38.83307#map=18/8.94350/38.83307
+- **112243** · telecommunication · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94803&mlon=38.88870#map=18/8.94803/38.88870
+- **112258** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96774&mlon=38.79721#map=18/8.96774/38.79721
+- **113061** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94747&mlon=38.78997#map=18/8.94747/38.78997
+- **24 kebele small stadium** (ተስፋ ሜዳ 24 ሜዳ) · sports · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00797&mlon=38.79792#map=18/9.00797/38.79792
+- **2KB Kids Collection** · boutique · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02122&mlon=38.83965#map=18/9.02122/38.83965
+- **AB AGRICON steel** (ኤቢ ኣግሪኮን) · hardware · 500/08 To Egzabheraab, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://ab-agricon.business.site/ · hours Mo-Sa 08:30-17:00 · map https://www.openstreetmap.org/?mlat=9.01361&mlon=38.80968#map=18/9.01361/38.80968
+- **AB AGRICON** · hardware · 500 To Egzabheraab, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.01360&mlon=38.80970#map=18/9.01360/38.80970
+- **AB AGRICON** · hardware · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://ab-agricon.business.site/ · hours Mo-Sa 08:30-17:00 · map https://www.openstreetmap.org/?mlat=9.01568&mlon=38.83029#map=18/9.01568/38.83029
+- **ABC Car Rental PLC** (ኤቢሲ የመኪና ኪራይ) · car rental · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99655&mlon=38.78574#map=18/8.99655/38.78574
+- **Aberus Bakery Bole Bulbulla 93 Mazorya** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96058&mlon=38.78550#map=18/8.96058/38.78550
+- **aberus mana daabboo** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96057&mlon=38.78550#map=18/8.96057/38.78550
+- **ABYSOPIA** (አቢሶጵያ) · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.abysopia.com · map https://www.openstreetmap.org/?mlat=8.99123&mlon=38.81911#map=18/8.99123/38.81911
+- **Abyssinia Beatuy Salon** (አቢሲኒያ የውበት ሳሎን) · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99251&mlon=38.78294#map=18/8.99251/38.78294
+- **Abyssinia Bottle Water store** · alcohol · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01284&mlon=38.81114#map=18/9.01284/38.81114
+- **Addis Renaissance Stones Trading PLC - Granite and Marble** (አዲስ ሬነሳንስ ስቶን ትሬዲንግ ፒልሲ) · hardware · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98848&mlon=38.78322#map=18/8.98848/38.78322
+- **Addis tesfa fisseha stadium bole, Al-tad cmc Michael Addis Ababa** (ኢዲስ ተስፋ ፍስሃ ስታዲየም ቦሌ አልታድ ሲኤምሲ ሚካኤል አዲስ አበባ) · sports · 211219, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.addistesfa96@gmail.com · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01964&mlon=38.83951#map=18/9.01964/38.83951
+- **Agazian Garment Addis Abab - አግአዝያን ጋርመንት አዲስ አበበ** (አግአዝያን ጨርቃጨርቅና አልባሳት ማምረቻ) · tailor · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99281&mlon=38.81420#map=18/8.99281/38.81420
+- **Agusta garage** · car repair · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99897&mlon=38.80377#map=18/8.99897/38.80377
+- **Akkoo** · coffee · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99576&mlon=38.78717#map=18/8.99576/38.78717
+- **Alem Genet Roofing** · roofer · run by Alem Genet · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 419 5959 · map https://www.openstreetmap.org/?mlat=9.02119&mlon=38.83809#map=18/9.02119/38.83809
+- **Alemye Fashion** · clothes · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01505&mlon=38.78494#map=18/9.01505/38.78494
+- **Alfaraq Addis Ababa Duty Free** · general · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98284&mlon=38.79522#map=18/8.98284/38.79522
+- **Alfaraq Addis Ababa Duty Free** · general · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98303&mlon=38.79584#map=18/8.98303/38.79584
+- **Alfaraq** · duty free · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98195&mlon=38.79311#map=18/8.98195/38.79311
+- **Alfoz Plaza** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00104&mlon=38.80217#map=18/9.00104/38.80217
+- **Almi Mini Market** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00454&mlon=38.78606#map=18/9.00454/38.78606
+- **Ambassel Studio** (አምባሰል ፎቶ ስቱዲዮ) · photo studio · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00010&mlon=38.78786#map=18/9.00010/38.78786
+- **Amele clothes Shop** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99637&mlon=38.81375#map=18/8.99637/38.81375
+- **Amy Cafe & Restaurant appliances** · houseware · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01826&mlon=38.79733#map=18/9.01826/38.79733
+- **Anbessa Bus Garage** (አንበሳ ጋራዥ) · car repair · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00616&mlon=38.80395#map=18/9.00616/38.80395
+- **Anbessa Garage** · car repair · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00711&mlon=38.80472#map=18/9.00711/38.80472
+- **And Sew - One Man Shoe Shop** · shoes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01961&mlon=38.80416#map=18/9.01961/38.80416
+- **Anjelo Pictures** · photo · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00149&mlon=38.78663#map=18/9.00149/38.78663
+- **Anoneya Printing and Advertising** · stationery · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01820&mlon=38.79725#map=18/9.01820/38.79725
+- **Anser's suk** · stationery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99295&mlon=38.80610#map=18/8.99295/38.80610
+- **Apple Store** · electronics · Bole Medhanalem Mall, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.facebook.com/AppleAuthorizedEthiopia/ · hours 09:30-18:30 · map https://www.openstreetmap.org/?mlat=8.99739&mlon=38.78631#map=18/8.99739/38.78631
+- **Archies Gallery Giftshop** (አርቺስ ጋለሪ) · florist · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99062&mlon=38.79281#map=18/8.99062/38.79281
+- **Ardent coffee** · coffee · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00306&mlon=38.81703#map=18/9.00306/38.81703
+- **AtoZ Dry Cleaners** · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02122&mlon=38.83781#map=18/9.02122/38.83781
+- **Avocado Bistro** · massage · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98922&mlon=38.78731#map=18/8.98922/38.78731
+- **B2K ladies** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01494&mlon=38.78414#map=18/9.01494/38.78414
+- **Banchi Pepsi products distro** · alcohol · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99539&mlon=38.86345#map=18/8.99539/38.86345
+- **Barber shop** (ፀጉር አስተካካይ) · hairdresser · BL_03_548 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 07:00-20:00 · map https://www.openstreetmap.org/?mlat=9.00184&mlon=38.78714#map=18/9.00184/38.78714
+- **BD Backpacker Tours** · travel agency · run by Nati · Cape Verde Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://bdbackpackertours.wordpress.com/ · hours 8:00 - 5:30 · map https://www.openstreetmap.org/?mlat=9.00289&mlon=38.77917#map=18/9.00289/38.77917
+- **Be Wellness and Spa** · beauty · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98321&mlon=38.79628#map=18/8.98321/38.79628
+- **Belay (bale) women salon** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99456&mlon=38.86121#map=18/8.99456/38.86121
+- **Bella beauty salon** · beauty · Road to Gergi Giorgis, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99505&mlon=38.81101#map=18/8.99505/38.81101
+- **BeMistre** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00079&mlon=38.77977#map=18/9.00079/38.77977
+- **Betta Aquarium shop** · pet · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://t.me/BettaAquarium · map https://www.openstreetmap.org/?mlat=9.02112&mlon=38.84180#map=18/9.02112/38.84180
+- **Betty secretary and stationary office** (ቤቲ የፅህፈት ስራ) · copyshop · 7, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01477&mlon=38.85268#map=18/9.01477/38.85268
+- **betty work place(jipe building)** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00867&mlon=38.80182#map=18/9.00867/38.80182
+- **Bilos Pastry** · pastry · run by Bilos · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01944&mlon=38.81538#map=18/9.01944/38.81538
+- **Bisrat Ride Taxi** (ብስሬ ራይድ) · car rental · BL_03_573 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00497&mlon=38.78772#map=18/9.00497/38.78772
+- **Bless Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02037&mlon=38.85391#map=18/9.02037/38.85391
+- **Boston Day Spa** (ቦስተን ዴይ ስፓ) · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 663 6557 · hours Mo-Su 08:30-20:30 · map https://www.openstreetmap.org/?mlat=8.99066&mlon=38.78389#map=18/8.99066/38.78389
+- **Building Material Shop** (ዱኢትዩርስልፍ) · doityourself · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98982&mlon=38.79265#map=18/8.98982/38.79265
+- **Building Materials Supply Enterprise** (የህንፃ ዕቃዎች አቅራቢ ድርጅት) · doityourself · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01532&mlon=38.78596#map=18/9.01532/38.78596
+- **Capital Laundry** · laundry · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01357&mlon=38.78008#map=18/9.01357/38.78008
+- **Carcare Computerized Auto Service** · car repair · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00324&mlon=38.80526#map=18/9.00324/38.80526
+- **Casa Mia** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00128&mlon=38.77964#map=18/9.00128/38.77964
+- **Champion Secretarial & Stationery Shop** (ሻምፒዮን ቢዝነስ ሴንተር) · stationery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00426&mlon=38.81145#map=18/9.00426/38.81145
+- **Chefie Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01880&mlon=38.81985#map=18/9.01880/38.81985
+- **Ciket Technology - 3D Printing, Embedded Systems and Software Solutions** · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://ctech.page.et/ · map https://www.openstreetmap.org/?mlat=9.01918&mlon=38.80114#map=18/9.01918/38.80114
+- **Clip** · hairdresser · BL_03_706 Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99352&mlon=38.79412#map=18/8.99352/38.79412
+- **Commercial Bank of Ethiopia ATM** · atm · run by Government · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.combanketh.et/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.02160&mlon=38.83218#map=18/9.02160/38.83218
+- **Commercial Bank of Ethiopia** (የኢትዮጵያ ንግድ ባንክ) · atm · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://combanketh.et · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.01477&mlon=38.78362#map=18/9.01477/38.78362
+- **Computer and Stationery Store** · stationery · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01590&mlon=38.79017#map=18/9.01590/38.79017
+- **Corner Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01873&mlon=38.81942#map=18/9.01873/38.81942
+- **Cotsco Addis** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00248&mlon=38.84360#map=18/9.00248/38.84360
+- **Cottex t-shirts** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99978&mlon=38.78736#map=18/8.99978/38.78736
+- **Country Liquors** · alcohol · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00142&mlon=38.77952#map=18/9.00142/38.77952
+- **Crown Soft Dream Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01947&mlon=38.81556#map=18/9.01947/38.81556
+- **Crystal Car Wash** · car repair · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00399&mlon=38.80120#map=18/9.00399/38.80120
+- **Daggy Stationary** · stationery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02125&mlon=38.83961#map=18/9.02125/38.83961
+- **Dagi's Spa** · beauty · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00637&mlon=38.78091#map=18/9.00637/38.78091
+- **Dagis Spa** · cosmetics · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98900&mlon=38.78641#map=18/8.98900/38.78641
+- **Dashen Forex** · bureau de change · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98322&mlon=38.79593#map=18/8.98322/38.79593
+- **Dawit brundo kitfo** · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01127&mlon=38.83674#map=18/9.01127/38.83674
+- **DayStar Systems Technology** (ዴይስታር ሲስተምስ ቴክኖሎጂ) · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:30-07:00 · map https://www.openstreetmap.org/?mlat=8.99567&mlon=38.78549#map=18/8.99567/38.78549
+- **Delta digital print** (ዴልታ ህትመት) · photo · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01571&mlon=38.78862#map=18/9.01571/38.78862
+- **Deluxe furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02125&mlon=38.83901#map=18/9.02125/38.83901
+- **Demetre Curtain** · curtain · run by Demetre · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01930&mlon=38.81692#map=18/9.01930/38.81692
+- **Derartu Building** · variety store · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01881&mlon=38.79959#map=18/9.01881/38.79959
+- **DINIYAM SPARE PART& CAR DICORE** · car parts · 303 Jacros, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.diniyam.com · hours Mo-Sa 08:00-19:00 · map https://www.openstreetmap.org/?mlat=9.01534&mlon=38.82385#map=18/9.01534/38.82385
+- **Donut Electronics** · electronics · Namibia Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://donutelectronics.com/ · hours Mo-Sa 09:00-18:00 · map https://www.openstreetmap.org/?mlat=8.99879&mlon=38.78604#map=18/8.99879/38.78604
+- **Dream Mobile** · mobile phone · run by Yonathan · Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://facebook.com/dreammobile · map https://www.openstreetmap.org/?mlat=8.99641&mlon=38.78767#map=18/8.99641/38.78767
+- **East Smart Collection** (ኢስት ስማርት ኮሌክሽን) · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99919&mlon=38.78719#map=18/8.99919/38.78719
+- **Eden Mart** · gift · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98348&mlon=38.79607#map=18/8.98348/38.79607
+- **Efoy Tech** · electronics · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99340&mlon=38.79412#map=18/8.99340/38.79412
+- **Ehiopian Tourist Trading Enterprise - Duty Free Shop - Ayat Branch** (ቱሪስት፡ንግድ፡ሥራ፡ድርጅት ፦ አያት፡ቅርንጫፍ) · alcohol · run by ቱሪስት፡ንግድ፡ሥራ፡ድርጅት · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02053&mlon=38.87613#map=18/9.02053/38.87613
+- **Ekram Mobile** · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99880&mlon=38.78709#map=18/8.99880/38.78709
+- **Elias Boutique** · boutique · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01881&mlon=38.81982#map=18/9.01881/38.81982
+- **Elkad Style** (ኤልካድ ስታይል) · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99947&mlon=38.78730#map=18/8.99947/38.78730
+- **Elsa Kolo** · convenience · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01666&mlon=38.79196#map=18/9.01666/38.79196
+- **elsa msa bet** · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01044&mlon=38.79774#map=18/9.01044/38.79774
+- **Elshalom Sheketasheket** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99717&mlon=38.85756#map=18/8.99717/38.85756
+- **emartzon gadgets store** (ኢማርትዞን ጋጀትስ) · electronics · run by Fikadu Abebe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://emartzon.com/ · hours Mo-Sa 00:00-24:00 · map https://www.openstreetmap.org/?mlat=9.00647&mlon=38.78908#map=18/9.00647/38.78908
+- **Emirates Airlines** · travel agency · BL_03_680 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99463&mlon=38.79039#map=18/8.99463/38.79039
+- **Empire Entertainment** · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 10:00-22:00 · map https://www.openstreetmap.org/?mlat=8.98811&mlon=38.78153#map=18/8.98811/38.78153
+- **Enrich Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98561&mlon=38.78757#map=18/8.98561/38.78757
+- **Entoto Art Gallery** · art · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99179&mlon=38.78130#map=18/8.99179/38.78130
+- **Eristu Siga Bet 22 ABEL** · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01071&mlon=38.78139#map=18/9.01071/38.78139
+- **Eskedar's Traditional Cloths & Souvenirs** · gift · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98345&mlon=38.79598#map=18/8.98345/38.79598
+- **Etalem Style** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02117&mlon=38.83862#map=18/9.02117/38.83862
+- **Ethio Ceramics** · appliance · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01980&mlon=38.81117#map=18/9.01980/38.81117
+- **Ethio Telecom** · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99206&mlon=38.78172#map=18/8.99206/38.78172
+- **Ethiopian Airlines Addis Ababa Sales Office** · travel agency · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98640&mlon=38.79165#map=18/8.98640/38.79165
+- **Ethiopian Airlines Bole Ticket Office** · ticket · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98589&mlon=38.79180#map=18/8.98589/38.79180
+- **Ethiopian Airlines** · ticket · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99443&mlon=38.78504#map=18/8.99443/38.78504
+- **Ethiopian Customer Service Desk** · travel agency · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su,PH 09:00+ · map https://www.openstreetmap.org/?mlat=8.98287&mlon=38.79636#map=18/8.98287/38.79636
+- **Ethiopian Leather Products** · leather · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98295&mlon=38.79558#map=18/8.98295/38.79558
+- **Ethiopian Photography Tours** · travel agency · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.ethiopianphotographytours.com/ · hours Su 08:30-17:30 · map https://www.openstreetmap.org/?mlat=9.01416&mlon=38.79247#map=18/9.01416/38.79247
+- **Ethiopian** (የኢትዮጵያ) · ticket · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=9.01957&mlon=38.81362#map=18/9.01957/38.81362
+- **Ethnic Contact Tour** (ኢትኒክ ኮንታክት ቱር) · travel agency · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99334&mlon=38.80805#map=18/8.99334/38.80805
+- **Etsub Design** (ዕፁብ ዲዛይን) · clothes · Road to Gergi Giorgis, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-19:00 · map https://www.openstreetmap.org/?mlat=8.99543&mlon=38.80788#map=18/8.99543/38.80788
+- **Ette Duty Free** · general · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98310&mlon=38.79607#map=18/8.98310/38.79607
+- **Evolution Garment** (ጋርመንት ኢቮሉሽን) · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00411&mlon=38.77966#map=18/9.00411/38.77966
+- **Ewunet Bakery** · bakery · Road to Gergi Giorgis, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.ewunetbakery.com · hours Mo-Su 06:00-21:00 · map https://www.openstreetmap.org/?mlat=8.99232&mlon=38.81470#map=18/8.99232/38.81470
+- **Eyerukal general Trading Import & Export** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01862&mlon=38.82170#map=18/9.01862/38.82170
+- **Eyerusalem Beauty Spot** (እየሩሳሌም የውበት ሳሎን) · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 7472 · map https://www.openstreetmap.org/?mlat=8.99000&mlon=38.79280#map=18/8.99000/38.79280
+- **Falcon Motors** · car · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00493&mlon=38.78044#map=18/9.00493/38.78044
+- **Farahan Collection** · boutique · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01932&mlon=38.81698#map=18/9.01932/38.81698
+- **Fasil Asrat Garage** · car repair · run by Fasil Asrst · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01264&mlon=38.82427#map=18/9.01264/38.82427
+- **Fasil Asrat Garage** (ፋሲል አስራት ጋራዥ) · car repair · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01523&mlon=38.88034#map=18/9.01523/38.88034
+- **Fekadu General Glass and Frame Works** (ፍቃዱ ጠቅላላ የመስታወትና ፍሬም ስራ) · frame · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00843&mlon=38.77607#map=18/9.00843/38.77607
+- **Filimon Professional Studio** · photographic laboratory · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02153&mlon=38.83343#map=18/9.02153/38.83343
+- **Filln Motors** · car · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00517&mlon=38.78051#map=18/9.00517/38.78051
+- **Fish Internet Cafe 2nd floor (Mana Hentsa)** · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00219&mlon=38.85117#map=18/9.00219/38.85117
+- **Fiyel Bet** · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00977&mlon=38.85231#map=18/9.00977/38.85231
+- **Fresh Corner** · greengrocer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.99458&mlon=38.81178#map=18/8.99458/38.81178
+- **Fresh Corner** · greengrocer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00370&mlon=38.81551#map=18/9.00370/38.81551
+- **Fresh Corner** · greengrocer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01024&mlon=38.84685#map=18/9.01024/38.84685
+- **Fresh Corner** · greengrocer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01032&mlon=38.84529#map=18/9.01032/38.84529
+- **Fresh Corner** · greengrocer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01946&mlon=38.81615#map=18/9.01946/38.81615
+- **Fresh Corner** · greengrocer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02048&mlon=38.85393#map=18/9.02048/38.85393
+- **Fufis Salon & Spa** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00587&mlon=38.77973#map=18/9.00587/38.77973
+- **GADI Leather** · bag · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98951&mlon=38.77765#map=18/8.98951/38.77765
+- **Gari Auto Care Plus - Restaurant and Car Wash** · car wash · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01397&mlon=38.79612#map=18/9.01397/38.79612
+- **Garment Evolution** (ጋርመንት ኢቮሉሽን) · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00413&mlon=38.77964#map=18/9.00413/38.77964
+- **Gemja Mobile Center** · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02124&mlon=38.83964#map=18/9.02124/38.83964
+- **Gentlemen's** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00009&mlon=38.77971#map=18/9.00009/38.77971
+- **Gerji Giorgis shop** · clothes · Road to Gergi Giorgis, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99250&mlon=38.81420#map=18/8.99250/38.81420
+- **Germany Mini Market** · convenience · BL_03_706 Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99334&mlon=38.79414#map=18/8.99334/38.79414
+- **Getesh Fashion** · fashion · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01831&mlon=38.79751#map=18/9.01831/38.79751
+- **GIGI bahel** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00747&mlon=38.78880#map=18/9.00747/38.78880
+- **Girma Garage** (ግርማ ጋራዥ) · car repair · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01603&mlon=38.79799#map=18/9.01603/38.79799
+- **GM Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01946&mlon=38.81612#map=18/9.01946/38.81612
+- **Gomista** (ጎሚስታ) · tyres · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01108&mlon=38.87834#map=18/9.01108/38.87834
+- **Good shopping street** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01190&mlon=38.78793#map=18/9.01190/38.78793
+- **GOUN GOUN FAMILY & KIDS SHOP** · gift · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99264&mlon=38.79480#map=18/8.99264/38.79480
+- **Grace Beauty Salon** (ግሬስ የውበት ሳሎን) · beauty · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 07:00-22:00 · map https://www.openstreetmap.org/?mlat=9.00725&mlon=38.79407#map=18/9.00725/38.79407
+- **Grace Flowers** · florist · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99204&mlon=38.78175#map=18/8.99204/38.78175
+- **Grand Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00888&mlon=38.78074#map=18/9.00888/38.78074
+- **Guna Trading** (ጉና ትሬዲንግ) · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00790&mlon=38.81672#map=18/9.00790/38.81672
+- **Gurd Shola Glass & Frame works** · frame · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01866&mlon=38.82094#map=18/9.01866/38.82094
+- **H Bay Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02122&mlon=38.83957#map=18/9.02122/38.83957
+- **Habenu Mobile** (ሀበኑ ሞባይል) · mobile phone · run by Haben · BL_03_564, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 09:00-22:00 · map https://www.openstreetmap.org/?mlat=8.99864&mlon=38.78633#map=18/8.99864/38.78633
+- **Habtu Flower Shop** · florist · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01945&mlon=38.81605#map=18/9.01945/38.81605
+- **Hag Ceramics Adhesive Store** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00735&mlon=38.79062#map=18/9.00735/38.79062
+- **Harmony fruits and restaurant** · greengrocer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01881&mlon=38.81978#map=18/9.01881/38.81978
+- **Harmony Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01882&mlon=38.81977#map=18/9.01882/38.81977
+- **Harmony Hail Salon** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01882&mlon=38.81962#map=18/9.01882/38.81962
+- **Hasset** · photo · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99186&mlon=38.85872#map=18/8.99186/38.85872
+- **Hello mekina** · car · A218 Bole Medhaniyalem Awlo business Center, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:30-17:30 · map https://www.openstreetmap.org/?mlat=8.99568&mlon=38.78827#map=18/8.99568/38.78827
+- **Himdar liquor Store** · alcohol · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00635&mlon=38.78375#map=18/9.00635/38.78375
+- **Hirut Stationary** · stationery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02125&mlon=38.83942#map=18/9.02125/38.83942
+- **HL Trading** · gift · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98356&mlon=38.79634#map=18/8.98356/38.79634
+- **Huawei sales** · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01948&mlon=38.81373#map=18/9.01948/38.81373
+- **Hurry Fashion** (ኸሪ ፋሽን) · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00655&mlon=38.78903#map=18/9.00655/38.78903
+- **ICE Dream** · confectionery · Cameroon Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99473&mlon=38.79043#map=18/8.99473/38.79043
+- **ICT Park** (አይ ሲ ቲ ፓርክ) · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96363&mlon=38.83552#map=18/8.96363/38.83552
+- **ICT Park** (አይ.ሲ.ቲ ፓርክ) · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96903&mlon=38.84051#map=18/8.96903/38.84051
+- **Imported Candy, Food, Beauty Products Store** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00306&mlon=38.78073#map=18/9.00306/38.78073
+- **Insta Computers** (ኢንስታ ኮምፒውተርስ) · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.00436&mlon=38.77941#map=18/9.00436/38.77941
+- **Insta Mobiles** (ኢንስታ ሞባይል) · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 09:00-19:00 · map https://www.openstreetmap.org/?mlat=8.99050&mlon=38.79278#map=18/8.99050/38.79278
+- **Jenita Choice Shop** · fashion · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02123&mlon=38.83956#map=18/9.02123/38.83956
+- **Jerry Home** · beverages · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02023&mlon=38.83605#map=18/9.02023/38.83605
+- **Jewel of Ethiopia Tour & Car Rental** (ጁዌል ኦፍ ኢትዮጲያ አስጎብኝና የመኪና ኪራይ) · car rental · run by Jewel of Ethiopia · B29_66 ጂቡቲ መንገድ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.jewelofethiopia.com · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=9.00306&mlon=38.78858#map=18/9.00306/38.78858
+- **Johnny Auto** · car parts · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01070&mlon=38.80787#map=18/9.01070/38.80787
+- **Josi Kids Shop** · boutique · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02122&mlon=38.83962#map=18/9.02122/38.83962
+- **K Electronics Camera Repair** · car repair · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://www.facebook.com/k.electronics · hours Su-Fr 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.01573&mlon=38.78846#map=18/9.01573/38.78846
+- **K.B Juice** · greengrocer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01955&mlon=38.80407#map=18/9.01955/38.80407
+- **kal** · books · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.96837&mlon=38.77471#map=18/8.96837/38.77471
+- **Kebe Pastry** · pastry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02117&mlon=38.83808#map=18/9.02117/38.83808
+- **Kebe Pastry** (ከቤ ኬክ) · pastry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00244&mlon=38.84363#map=18/9.00244/38.84363
+- **Kertina** (ኬርቲና) · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99483&mlon=38.80855#map=18/8.99483/38.80855
+- **Kidus Markos** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01946&mlon=38.81588#map=18/9.01946/38.81588
+- **Koba** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00099&mlon=38.78012#map=18/9.00099/38.78012
+- **Ladies Plus** · beauty · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-14:00 · map https://www.openstreetmap.org/?mlat=8.99055&mlon=38.78214#map=18/8.99055/38.78214
+- **Lalibela Jewelery** · jewelry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98359&mlon=38.79644#map=18/8.98359/38.79644
+- **Lava Ethiopia Tours** · travel agency · 22 Selam City Mall, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://lavaethiopiatours.com · map https://www.openstreetmap.org/?mlat=8.99330&mlon=38.79135#map=18/8.99330/38.79135
+- **Le Chateau** · winery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99731&mlon=38.77921#map=18/8.99731/38.77921
+- **Legese Zeleke Shopping Center** · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01829&mlon=38.79746#map=18/9.01829/38.79746
+- **Lemon Flowers And Gifts** · florist · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99579&mlon=38.78825#map=18/8.99579/38.78825
+- **Letay Liquor Store** · alcohol · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01883&mlon=38.81974#map=18/9.01883/38.81974
+- **Lidya photo and video** · photographic laboratory · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01504&mlon=38.78490#map=18/9.01504/38.78490
+- **Lily Brand Collection** · boutique · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01875&mlon=38.81949#map=18/9.01875/38.81949
+- **Liyu Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01876&mlon=38.82060#map=18/9.01876/38.82060
+- **London Collection Shop** (ለንደን ኮሌክሽን ሱቅ) · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00671&mlon=38.78899#map=18/9.00671/38.78899
+- **Loyal "supermarket"** (ሎያል፡"ሱፐር፡ማርኬት") · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02098&mlon=38.87358#map=18/9.02098/38.87358
+- **Lucinya Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01037&mlon=38.85052#map=18/9.01037/38.85052
+- **Magic Press Laundry** (ማጂክ ፕሬስ ላውንድሪ) · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98902&mlon=38.78813#map=18/8.98902/38.78813
+- **Mahi kids cloth shop** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99809&mlon=38.86060#map=18/8.99809/38.86060
+- **MAKRI's KIDS and Maternity** (ማክሪስ የህፃናትና ነፍሰጡሮች አልባሳት) · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00685&mlon=38.78898#map=18/9.00685/38.78898
+- **Mam Cake & Bakery** · bakery · Djibouti Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00933&mlon=38.78846#map=18/9.00933/38.78846
+- **Maraki Shoe** · shoes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02122&mlon=38.83964#map=18/9.02122/38.83964
+- **Markid Funture** (ማርኪደ ፈርኒቸር) · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00225&mlon=38.84340#map=18/9.00225/38.84340
+- **Mash Alah Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01881&mlon=38.82005#map=18/9.01881/38.82005
+- **Mass Sport** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98362&mlon=38.79654#map=18/8.98362/38.79654
+- **Maybach** · car repair · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00538&mlon=38.80512#map=18/9.00538/38.80512
+- **Mayet Fashion** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00255&mlon=38.78847#map=18/9.00255/38.78847
+- **mb mobile** · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99880&mlon=38.78522#map=18/8.99880/38.78522
+- **Meaza Pajamas and Maternity store** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02125&mlon=38.83963#map=18/9.02125/38.83963
+- **Megeni Coffee** · coffee · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00472&mlon=38.78041#map=18/9.00472/38.78041
+- **Mel Flower Shop** · florist · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00447&mlon=38.78034#map=18/9.00447/38.78034
+- **Mena Bakery and Pastry** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01859&mlon=38.82266#map=18/9.01859/38.82266
+- **Menab Advertising and Printing** · stationery · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01825&mlon=38.79741#map=18/9.01825/38.79741
+- **Meru Sports Tennis Shop** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00151&mlon=38.77951#map=18/9.00151/38.77951
+- **Mery Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00510&mlon=38.79405#map=18/9.00510/38.79405
+- **Meser mulugeta** · beauty · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01779&mlon=38.84160#map=18/9.01779/38.84160
+- **Mesfin butchers and restaurant** · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99209&mlon=38.79076#map=18/8.99209/38.79076
+- **MESFIN PHONE ABEL** · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01519&mlon=38.78554#map=18/9.01519/38.78554
+- **Mesi grocery** · beverages · 25 CMC Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 09:00-21:00 · map https://www.openstreetmap.org/?mlat=9.02081&mlon=38.83479#map=18/9.02081/38.83479
+- **Meta Beer factory (Jacros)** · beverages · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01168&mlon=38.82072#map=18/9.01168/38.82072
+- **Metal & Engineering Corporation Ethiopia Plastic Industry** · electronics · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00884&mlon=38.80490#map=18/9.00884/38.80490
+- **metro print Netsanet bro** · copyshop · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01727&mlon=38.82117#map=18/9.01727/38.82117
+- **Michot Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01955&mlon=38.81404#map=18/9.01955/38.81404
+- **Mike Aleka** · variety store · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01826&mlon=38.84256#map=18/9.01826/38.84256
+- **Millenium Duty Free** · general · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98320&mlon=38.79639#map=18/8.98320/38.79639
+- **MOENCO TOYOTA** · car · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99529&mlon=38.79555#map=18/8.99529/38.79555
+- **Moti** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.94733&mlon=38.78274#map=18/8.94733/38.78274
+- **Mr. Price Fashion** · clothes · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01503&mlon=38.78485#map=18/9.01503/38.78485
+- **Mulmul Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99236&mlon=38.77824#map=18/8.99236/38.77824
+- **mulmul bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00427&mlon=38.81097#map=18/9.00427/38.81097
+- **Mulmul Bakery** · bakery · Summit - Salitemihret road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01933&mlon=38.81467#map=18/9.01933/38.81467
+- **Neb Fashion** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02125&mlon=38.83948#map=18/9.02125/38.83948
+- **Netsi Beauty Salon** · beauty · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01866&mlon=38.82172#map=18/9.01866/38.82172
+- **NHY Duty Free** · general · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98324&mlon=38.79650#map=18/8.98324/38.79650
+- **Novi Smart** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98351&mlon=38.79617#map=18/8.98351/38.79617
+- **NTO** · travel agency · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98981&mlon=38.80784#map=18/8.98981/38.80784
+- **Nurhussen Yassin Omer** · chemist · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99179&mlon=38.79195#map=18/8.99179/38.79195
+- **Nusra Ghion Gas Distributer** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01881&mlon=38.82002#map=18/9.01881/38.82002
+- **Nyala Motors S.C.** · car · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01024&mlon=38.80362#map=18/9.01024/38.80362
+- **Oasis Salon & Spa** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00537&mlon=38.78061#map=18/9.00537/38.78061
+- **Olympic Travel Agency** · travel agency · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01411&mlon=38.78186#map=18/9.01411/38.78186
+- **Osis bercha bet** · confectionery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.97661&mlon=38.88675#map=18/8.97661/38.88675
+- **Papaya Car Wash Service** (ፓፓያ የመኪና እጥበት አገልግሎት) · car wash · BL_03_785 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00572&mlon=38.79379#map=18/9.00572/38.79379
+- **Peram Souvenir** · gift · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00442&mlon=38.78032#map=18/9.00442/38.78032
+- **Perfecto home Furniture** · furniture · run by Perfecto · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01947&mlon=38.81561#map=18/9.01947/38.81561
+- **Phares Mobile & Accessories** · electronics · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98337&mlon=38.79573#map=18/8.98337/38.79573
+- **Photo Desta** · photographic laboratory · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01478&mlon=38.78367#map=18/9.01478/38.78367
+- **Photo Savanna** · photographic laboratory · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01879&mlon=38.82009#map=18/9.01879/38.82009
+- **Piccolo Addis Restaurant and cleaning hub** · car wash · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99201&mlon=38.79404#map=18/8.99201/38.79404
+- **Posh Laundry** · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99599&mlon=38.77856#map=18/8.99599/38.77856
+- **Prime Meat Products** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01945&mlon=38.81563#map=18/9.01945/38.81563
+- **Pro Tech** (ፕሮ ቴክ) · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98952&mlon=38.78713#map=18/8.98952/38.78713
+- **Procolor Digital Photo Studio** · photo · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00357&mlon=38.81559#map=18/9.00357/38.81559
+- **Quality Men's Salon** · hairdresser · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01476&mlon=38.78365#map=18/9.01476/38.78365
+- **Quality Photo and Video Studio** · photo · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02122&mlon=38.83960#map=18/9.02122/38.83960
+- **Rainbow Digital Studio** · photographic laboratory · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01424&mlon=38.78202#map=18/9.01424/38.78202
+- **Rainbow Foam** · bed · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98897&mlon=38.77712#map=18/8.98897/38.77712
+- **Rainbow Paint Reseller** · paint · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02123&mlon=38.83964#map=18/9.02123/38.83964
+- **Rami Men's Salon** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02123&mlon=38.83962#map=18/9.02123/38.83962
+- **Reem Trading** (ሪም ትሬዲንግ) · electronics · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98879&mlon=38.78896#map=18/8.98879/38.78896
+- **Relic Granite** · appliance · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01660&mlon=38.79189#map=18/9.01660/38.79189
+- **Roba Dabo** (ሮባ ዳቦ ቤት) · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99463&mlon=38.81334#map=18/8.99463/38.81334
+- **Root Electronics** · electronics · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98340&mlon=38.79582#map=18/8.98340/38.79582
+- **root system** (ሩት ሲስተም) · computer · BL_03_646 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · http://ethioroot.com · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99757&mlon=38.78629#map=18/8.99757/38.78629
+- **Roseland Flowers Shop** · florist · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 863 2983 · map https://www.openstreetmap.org/?mlat=8.99249&mlon=38.77783#map=18/8.99249/38.77783
+- **Rosetta Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99107&mlon=38.78181#map=18/8.99107/38.78181
+- **Rovestone Brothers** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01945&mlon=38.81538#map=18/9.01945/38.81538
+- **Royal Foam** · bed · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99049&mlon=38.77843#map=18/8.99049/38.77843
+- **Royal House Finishing** · appliance · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02046&mlon=38.85380#map=18/9.02046/38.85380
+- **Royal Travel Agency** · travel agency · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01417&mlon=38.78197#map=18/9.01417/38.78197
+- **Saba Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02000&mlon=38.81000#map=18/9.02000/38.81000
+- **Safeway Supermarket** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00225&mlon=38.78128#map=18/9.00225/38.78128
+- **Salem's Ethiopia** · gift · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99352&mlon=38.79279#map=18/8.99352/38.79279
+- **Sam Studio Ethiopia** (ሳም ሰቱደዮ) · photo · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00225&mlon=38.84353#map=18/9.00225/38.84353
+- **Sami Leyou Kuret** (ሳሚ ልዩ ቁርጥ) · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99318&mlon=38.79132#map=18/8.99318/38.79132
+- **Sanapisami Spicalized Eye Center** (የአፍሪካ ህብረት ኮሚሽነር ለሶሻል አፌር መኖሪያ ቤትሳናፒሳሚ ስፔሻላይዝድ የአይን ማዕክል) · optician · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98439&mlon=38.78224#map=18/8.98439/38.78224
+- **Scalpalex Scalp Micropigmentation** · tattoo · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.scalpalex.com/ · hours Mo-Sa 09:00-19:00, Su closed · map https://www.openstreetmap.org/?mlat=8.99370&mlon=38.79021#map=18/8.99370/38.79021
+- **Scandinavian Bakery** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00456&mlon=38.78385#map=18/9.00456/38.78385
+- **Seife Garage ሰይፈ ጋራጅ** · car repair · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00802&mlon=38.83404#map=18/9.00802/38.83404
+- **Selam Sefer Ashewa Tera - ሰላም ሰፈር አሸዋ ተራ** · building materials · run by - · Summit - Sealite Mihret Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01338&mlon=38.83223#map=18/9.01338/38.83223
+- **Selam's Ethiopia** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99354&mlon=38.79244#map=18/8.99354/38.79244
+- **Selina Morocco** · massage · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00978&mlon=38.78184#map=18/9.00978/38.78184
+- **Sentish Digital photo studio** (ስንትሽ ዲጂታል ፎቶ ስቱዲዬ) · photo · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00807&mlon=38.78945#map=18/9.00807/38.78945
+- **Sheda collection** · clothes · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01511&mlon=38.78530#map=18/9.01511/38.78530
+- **SIGMA Electric Plc.** · electronics · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01549&mlon=38.80258#map=18/9.01549/38.80258
+- **Simien Ethiopia Tours** · travel agency · run by Mercy · Cape Verde Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://simienethiopiatours.com/ · hours 8:00 - 5:00 · map https://www.openstreetmap.org/?mlat=9.00298&mlon=38.77920#map=18/9.00298/38.77920
+- **Simple Coffee** · coffee · Civil Service to Selam Sefer Ashewa Tera, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 09:00-20:00 · map https://www.openstreetmap.org/?mlat=9.01460&mlon=38.83371#map=18/9.01460/38.83371
+- **Sis Curtain and Carpet** · curtain · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01879&mlon=38.81935#map=18/9.01879/38.81935
+- **Smart Fashion** · boutique · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01877&mlon=38.82057#map=18/9.01877/38.82057
+- **SNAP Computer** · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00832&mlon=38.80613#map=18/9.00832/38.80613
+- **So'Toys** · toys · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01947&mlon=38.81537#map=18/9.01947/38.81537
+- **Sobuco Jarret** · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01875&mlon=38.81949#map=18/9.01875/38.81949
+- **Sol Image Ethiopia** (ሶል ኢሜጅ ኢትዮጵያ) · photographer · run by Solomon Bogale/ሰለሞን ቦጋለ · Abyssinia Mall, First Floor, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 10:00-20:00 · map https://www.openstreetmap.org/?mlat=8.99454&mlon=38.79066#map=18/8.99454/38.79066
+- **spa** · alcohol · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00032&mlon=38.78721#map=18/9.00032/38.78721
+- **Sport Center** (ስፖርት ማእከል) · sports · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00082&mlon=38.79861#map=18/9.00082/38.79861
+- **St. George stadium** · sports · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01311&mlon=38.86788#map=18/9.01311/38.86788
+- **Sun City Supermarket** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98344&mlon=38.79816#map=18/8.98344/38.79816
+- **Sun Optics - 22 Branch** (ሣን ኦፕቲክስ - 22 ቅርንጫፍ) · optician · Djibouti Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.sunopticaltechnologies.com/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.01491&mlon=38.78764#map=18/9.01491/38.78764
+- **Sun Optics- Friendship Branch** (ሣን አፕቲክስ- ፍሬንድሺፕ ቅርንጫፍ) · optician · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 661 0982 · https://www.sunopticaltechnologies.com/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=8.98986&mlon=38.78608#map=18/8.98986/38.78608
+- **Sun Optics** · optician · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99447&mlon=38.78505#map=18/8.99447/38.78505
+- **Sunmate Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00984&mlon=38.80427#map=18/9.00984/38.80427
+- **Sunny 13 Tour and Travel** · travel agency · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01942&mlon=38.81434#map=18/9.01942/38.81434
+- **Sunshine Industrial Laundry** (ሰንሻይን ኢንዱስትሪያል ላውንደሪ) · laundry · run by Sunsisters Trading · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 667 1903 · map https://www.openstreetmap.org/?mlat=9.00947&mlon=38.81712#map=18/9.00947/38.81712
+- **Sunshine Laundry No.10** (ሰንሻይን ላውንደሪ ቁ.10) · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 868 1542 · map https://www.openstreetmap.org/?mlat=9.01043&mlon=38.84761#map=18/9.01043/38.84761
+- **Sunshine Laundry No.12** (ሰንሻይን ላውንደሪ ቁ.12) · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 868 9409 · map https://www.openstreetmap.org/?mlat=9.02079&mlon=38.86930#map=18/9.02079/38.86930
+- **Sunshine Laundry No.13** (ሰንሻይን ላውንደሪ ቁ.13) · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 647 9619 · map https://www.openstreetmap.org/?mlat=9.00573&mlon=38.80878#map=18/9.00573/38.80878
+- **Sunshine Laundry No.6** (ሰንሻይን ላውንደሪ ቁ.6) · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 872 1656 · map https://www.openstreetmap.org/?mlat=8.99457&mlon=38.81133#map=18/8.99457/38.81133
+- **Sunshine Laundry No.8** (ሰንሻይን ላውንደሪ ቁ.8) · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 872 0954 · map https://www.openstreetmap.org/?mlat=8.98883&mlon=38.77697#map=18/8.98883/38.77697
+- **Sunshine Laundry No.9** (ሰንሻይን ላውንደሪ ቁ.9) · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 9558 · map https://www.openstreetmap.org/?mlat=8.99251&mlon=38.78841#map=18/8.99251/38.78841
+- **Sunshine Laundry** · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98883&mlon=38.77698#map=18/8.98883/38.77698
+- **Sunshine Laundry** · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00329&mlon=38.78091#map=18/9.00329/38.78091
+- **Sunsisters Trading** (ሰንሲስተርስ ትሬዲንግ) · laundry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00944&mlon=38.81704#map=18/9.00944/38.81704
+- **Surf Internet Cafe** (ሰርፍ ኢንተርኔት ካፌ) · internet cafe · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99932&mlon=38.78499#map=18/8.99932/38.78499
+- **T-Systems** · electronics · Bob Marley Square, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00193&mlon=38.79987#map=18/9.00193/38.79987
+- **Taem Bakery** (ጣዕም፡ዳቦ) · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02091&mlon=38.87271#map=18/9.02091/38.87271
+- **Tafachi Bakery** · bakery · CMC Figa to Goro, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-19:00 · map https://www.openstreetmap.org/?mlat=9.00564&mlon=38.83219#map=18/9.00564/38.83219
+- **Talaku suq** (ታላቁ ሱቅ) · variety store · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01120&mlon=38.78721#map=18/9.01120/38.78721
+- **Tapu Cooked Food** · convenience · run by Tapu · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02046&mlon=38.85374#map=18/9.02046/38.85374
+- **Tapu Prepared Foods** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99098&mlon=38.78185#map=18/8.99098/38.78185
+- **TarikuIsrael Furniture's and Interior Design** (ታሪኩ(Tariku Furnitures)) · furniture · ገርጂ አካባቢ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99295&mlon=38.80604#map=18/8.99295/38.80604
+- **Tecno mobile sales** · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01956&mlon=38.81358#map=18/9.01956/38.81358
+- **TECNO MOBILE** (ቴክኖ ሞባይል) · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99788&mlon=38.78641#map=18/8.99788/38.78641
+- **Terara Coffee Factory** · beverages · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 618 2109 · https://tararacoffee.com/ · hours Mo-Sa 08:00-16:30 · map https://www.openstreetmap.org/?mlat=9.01103&mlon=38.81951#map=18/9.01103/38.81951
+- **Tesfaye Fruit and Juice shop** · greengrocer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01868&mlon=38.82087#map=18/9.01868/38.82087
+- **Teshe** · alcohol · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00423&mlon=38.78011#map=18/9.00423/38.78011
+- **TGA (Tewolde General Automotive** (ተወልደ ጀነራል አውቶሞቲቭ) · car repair · run by TGA Group · Jacros, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 865 9999 · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=9.01491&mlon=38.82517#map=18/9.01491/38.82517
+- **The Daily** · bakery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00634&mlon=38.78101#map=18/9.00634/38.78101
+- **Tigistu Kazanchis butchery** · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98990&mlon=38.85844#map=18/8.98990/38.85844
+- **Tihitna Building** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01865&mlon=38.82150#map=18/9.01865/38.82150
+- **Tihitna Furniture** · furniture · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00739&mlon=38.85584#map=18/9.00739/38.85584
+- **Tilahun Wolde Memorial Garage** (티라훈 정비소 0116460515) · car repair · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 646 0515 · hours Mo-Sa 08:30-17:00 · map https://www.openstreetmap.org/?mlat=9.01083&mlon=38.80742#map=18/9.01083/38.80742
+- **Timo xiire** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98091&mlon=38.77691#map=18/8.98091/38.77691
+- **Tiny Treasures kids store** (ታይኒ ትሬዠርስ) · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://t.me/tinytreasurekidsstore · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02113&mlon=38.84177#map=18/9.02113/38.84177
+- **TIRU-TECH Computer Repairs** (ጥሩ ቴክ ኮምፒውተር ጥገና) · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01307&mlon=38.78380#map=18/9.01307/38.78380
+- **TIRU-TECH Computer Repairs** (ጥሩ ቴክ የኮምፒውተር ጥገና) · computer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01362&mlon=38.78403#map=18/9.01362/38.78403
+- **Tizzy Professional Beauty Salon** · hairdresser · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02124&mlon=38.83950#map=18/9.02124/38.83950
+- **Tom's Tech** (ቶም ቴክ) · electronics · run by tom · 004 ጂቡቲ መንገድ, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.facebook.com/tomtech101/ · hours Mo-Sa 09:00-19:00 · map https://www.openstreetmap.org/?mlat=8.99999&mlon=38.78778#map=18/8.99999/38.78778
+- **Top Woman Fashion** · boutique · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01956&mlon=38.81374#map=18/9.01956/38.81374
+- **Toro wood and metal works** · furniture · Jacros, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00636&mlon=38.80770#map=18/9.00636/38.80770
+- **Toro wood and metal works** · furniture · Jacros, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00637&mlon=38.80769#map=18/9.00637/38.80769
+- **Toto Furniture** (ቶቶ ፈርኒቸር) · furniture · BL_03_776 St., Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-20:00 · map https://www.openstreetmap.org/?mlat=8.99599&mlon=38.79216#map=18/8.99599/38.79216
+- **Tourist Information and Guiding Service** (የቱሪስት መረጃ እና አስጐብነኚ) · travel agency · Djibouti Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00413&mlon=38.78930#map=18/9.00413/38.78930
+- **Train Ticket Shop** · ticket · Equatorial Guinea Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01583&mlon=38.78921#map=18/9.01583/38.78921
+- **Train Ticket Shop** · ticket · run by Addis Ababa Light Rail Agency · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01891&mlon=38.81944#map=18/9.01891/38.81944
+- **Tsega Business Centre** · clothes · Djibouti Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01036&mlon=38.78806#map=18/9.01036/38.78806
+- **Turkish Airlines** · travel agency · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98971&mlon=38.78768#map=18/8.98971/38.78768
+- **Tyre Repairs** · tyres · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00744&mlon=38.77658#map=18/9.00744/38.77658
+- **Uniform Solution** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00355&mlon=38.81653#map=18/9.00355/38.81653
+- **WARYT Furniture Store** · furniture · run by WARYT · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01955&mlon=38.81415#map=18/9.01955/38.81415
+- **WBC Real Leather Shop** · clothes · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98343&mlon=38.79592#map=18/8.98343/38.79592
+- **We Glow Wellness & Spa** · massage · BL_03_706 Street, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99317&mlon=38.79438#map=18/8.99317/38.79438
+- **Wefcho Bet** (ወፍጮ ቤት) · bookmaker · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00346&mlon=38.80222#map=18/9.00346/38.80222
+- **Wegen Photo and Video** · photographic laboratory · Haile Gebresellasie Avenue, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01491&mlon=38.78400#map=18/9.01491/38.78400
+- **Wereda 07 Meznagna** (ወረዳ 7 መዝናኛ) · caterer · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 07:00-23:00 · map https://www.openstreetmap.org/?mlat=9.01803&mlon=38.82219#map=18/9.01803/38.82219
+- **Weyni bakery** · bakery · goro to st. mikael, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 06:00-21:00 · map https://www.openstreetmap.org/?mlat=8.99564&mlon=38.82906#map=18/8.99564/38.82906
+- **Wine Store** · winery · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00537&mlon=38.78096#map=18/9.00537/38.78096
+- **Yafe Tour and Car Rent PLC** · car rental · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 662 5748 · map https://www.openstreetmap.org/?mlat=8.99566&mlon=38.78543#map=18/8.99566/38.78543
+- **Ye Ab Zer Gemstones** · jewelry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00172&mlon=38.78226#map=18/9.00172/38.78226
+- **Yodit & Family Ceramics** · appliance · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 869 3963 · map https://www.openstreetmap.org/?mlat=9.01961&mlon=38.80429#map=18/9.01961/38.80429
+- **Yonas Mobile** (ዮናስ ሞባይል) · mobile phone · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99567&mlon=38.78844#map=18/8.99567/38.78844
+- **Yora Morocco Bath** · massage · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01942&mlon=38.81444#map=18/9.01942/38.81444
+- **Z Boss Pastry & Restaurant** · pastry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.00217&mlon=38.78148#map=18/9.00217/38.78148
+- **Zoe Style** · boutique · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01928&mlon=38.81699#map=18/9.01928/38.81699
+- **Zuriash Mall** · variety store · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01547&mlon=38.87161#map=18/9.01547/38.87161
+- **Zwose Cake & Bread Ingredients** · pastry · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00471&mlon=38.78066#map=18/9.00471/38.78066
+- **ላኦ ቼን ሚኒ ማርኬት** · convenience · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98946&mlon=38.78169#map=18/8.98946/38.78169
+- **ችባን ክትፎ** · butcher · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01208&mlon=38.79643#map=18/9.01208/38.79643
+- **አስሚ** · cosmetics · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.99363&mlon=38.83192#map=18/8.99363/38.83192
+
+## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 132
+
+- **111001** · internet cafe · መሳለሚያ, Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03244&mlon=38.72548#map=18/9.03244/38.72548
+- **111023** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02514&mlon=38.73766#map=18/9.02514/38.73766
+- **111027** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03134&mlon=38.72176#map=18/9.03134/38.72176
+- **111044** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04117&mlon=38.73204#map=18/9.04117/38.73204
+- **111053** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02764&mlon=38.74159#map=18/9.02764/38.74159
+- **111054** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02972&mlon=38.73756#map=18/9.02972/38.73756
+- **111056** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03400&mlon=38.73875#map=18/9.03400/38.73875
+- **111057** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03447&mlon=38.73297#map=18/9.03447/38.73297
+- **111080** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04328&mlon=38.73498#map=18/9.04328/38.73498
+- **111130** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04260&mlon=38.72318#map=18/9.04260/38.72318
+- **111131** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03796&mlon=38.73558#map=18/9.03796/38.73558
+- **111150** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04909&mlon=38.72164#map=18/9.04909/38.72164
+- **111159** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02708&mlon=38.72702#map=18/9.02708/38.72702
+- **111197** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03894&mlon=38.72623#map=18/9.03894/38.72623
+- **111198** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02362&mlon=38.72271#map=18/9.02362/38.72271
+- **111199** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03876&mlon=38.71937#map=18/9.03876/38.71937
+- **111275** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04425&mlon=38.72756#map=18/9.04425/38.72756
+- **111389** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02999&mlon=38.72806#map=18/9.02999/38.72806
+- **111390** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02804&mlon=38.73285#map=18/9.02804/38.73285
+- **111404** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03371&mlon=38.72777#map=18/9.03371/38.72777
+- **111547** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04198&mlon=38.72758#map=18/9.04198/38.72758
+- **111642** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04790&mlon=38.72401#map=18/9.04790/38.72401
+- **111687** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04548&mlon=38.73313#map=18/9.04548/38.73313
+- **111701** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02128&mlon=38.72453#map=18/9.02128/38.72453
+- **111735** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02834&mlon=38.72936#map=18/9.02834/38.72936
+- **111746** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03611&mlon=38.71755#map=18/9.03611/38.71755
+- **111746** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03614&mlon=38.71755#map=18/9.03614/38.71755
+- **111822** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03243&mlon=38.71856#map=18/9.03243/38.71856
+- **111822** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03244&mlon=38.71859#map=18/9.03244/38.71859
+- **111836** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04284&mlon=38.71958#map=18/9.04284/38.71958
+- **111845** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03415&mlon=38.73639#map=18/9.03415/38.73639
+- **112076** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03703&mlon=38.73123#map=18/9.03703/38.73123
+- **112083** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02474&mlon=38.73369#map=18/9.02474/38.73369
+- **112101** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03347&mlon=38.72993#map=18/9.03347/38.72993
+- **112101** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03348&mlon=38.72993#map=18/9.03348/38.72993
+- **112183** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02890&mlon=38.72240#map=18/9.02890/38.72240
+- **112202** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03150&mlon=38.73984#map=18/9.03150/38.73984
+- **112220** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03214&mlon=38.73543#map=18/9.03214/38.73543
+- **113001** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03206&mlon=38.73743#map=18/9.03206/38.73743
+- **113002** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02941&mlon=38.73885#map=18/9.02941/38.73885
+- **Africa kids shop** (አንተነህ ሱቅ) · bicycle · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03049&mlon=38.73753#map=18/9.03049/38.73753
+- **Agenbi Business Centre** (አጌን ቢ የገበያ ማዕከል) · convenience · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02915&mlon=38.73985#map=18/9.02915/38.73985
+- **Aisha** (አይሻ ዳቦ ቤት) · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03492&mlon=38.72414#map=18/9.03492/38.72414
+- **Alem collection** (አለም ኮሌክሽን) · clothes · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03330&mlon=38.73548#map=18/9.03330/38.73548
+- **Amede Gebeya አመዴ ገበያ** (አመዴ ገበያ) · shoes · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03283&mlon=38.73520#map=18/9.03283/38.73520
+- **Amir Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03364&mlon=38.72740#map=18/9.03364/38.72740
+- **Arki Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04966&mlon=38.72496#map=18/9.04966/38.72496
+- **Aster Sanitaryware & Pipe Fittings** (አስቴር የባኞ ቤት እና የቧንቧ ዕቃዎች) · hardware · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours Mo-Su 07:30-18:30 · map https://www.openstreetmap.org/?mlat=9.03181&mlon=38.73553#map=18/9.03181/38.73553
+- **Azmood** · bakery · አውቶብስ ተራ / Autobus Tera, Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03385&mlon=38.73297#map=18/9.03385/38.73297
+- **Becky dish** · electronics · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03352&mlon=38.74050#map=18/9.03352/38.74050
+- **Beza Family collection** (ቤዛ ፋሚሊ ኮሌክሽን) · gift · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours Mo-Sa 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.03335&mlon=38.73533#map=18/9.03335/38.73533
+- **DIRE BLDG.** (ደሬ ህንፃ) · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02795&mlon=38.73290#map=18/9.02795/38.73290
+- **EVO** · clothes · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04992&mlon=38.72467#map=18/9.04992/38.72467
+- **HAJU COPY SHOP** · copyshop · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03554&mlon=38.73408#map=18/9.03554/38.73408
+- **Harar Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02880&mlon=38.73836#map=18/9.02880/38.73836
+- **Kadisco Paints - Distribution Shop** (ካዲስኮ ቀለሞች ማከፋፈያ ሱቅ) · convenience · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03017&mlon=38.73787#map=18/9.03017/38.73787
+- **Kids cloths የህፃናት ልብስ** (የህፃናት ልብስ) · clothes · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03313&mlon=38.73687#map=18/9.03313/38.73687
+- **Madaberia Tera** · hardware · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03015&mlon=38.73941#map=18/9.03015/38.73941
+- **Merkato (Clothing)** · clothes · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03129&mlon=38.73756#map=18/9.03129/38.73756
+- **Merkato (Traditional Souvenirs)** · gift · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03101&mlon=38.73707#map=18/9.03101/38.73707
+- **Meskerm Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04119&mlon=38.73745#map=18/9.04119/38.73745
+- **Mewded kids fashion** · toys · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03037&mlon=38.73764#map=18/9.03037/38.73764
+- **Mkb** (ኤምኬቢ) · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04041&mlon=38.72799#map=18/9.04041/38.72799
+- **Moges Sanitary-ware** (አስፋው ተክሌ ሆቴል) · hardware · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours Mo-Sa 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.03172&mlon=38.73582#map=18/9.03172/38.73582
+- **Mohammed Amed** · toys · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02943&mlon=38.73839#map=18/9.02943/38.73839
+- **MSAG-1222** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03281&mlon=38.71485#map=18/9.03281/38.71485
+- **MSAG-1223** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03156&mlon=38.71638#map=18/9.03156/38.71638
+- **MSAG-602** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03434&mlon=38.73637#map=18/9.03434/38.73637
+- **MSAG-605** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03078&mlon=38.73245#map=18/9.03078/38.73245
+- **MSAG-606** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02858&mlon=38.73304#map=18/9.02858/38.73304
+- **MSAG-607** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03435&mlon=38.73898#map=18/9.03435/38.73898
+- **MSAG-608** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03031&mlon=38.74111#map=18/9.03031/38.74111
+- **MSAG-609** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03148&mlon=38.73734#map=18/9.03148/38.73734
+- **MSAG-612** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03249&mlon=38.73918#map=18/9.03249/38.73918
+- **MSAG-613** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03127&mlon=38.74151#map=18/9.03127/38.74151
+- **MSAG-614** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04061&mlon=38.73214#map=18/9.04061/38.73214
+- **MSAG-617** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02958&mlon=38.73761#map=18/9.02958/38.73761
+- **MSAG-618** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03690&mlon=38.72320#map=18/9.03690/38.72320
+- **MSAG-619** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03825&mlon=38.72112#map=18/9.03825/38.72112
+- **MSAG-625** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02527&mlon=38.72067#map=18/9.02527/38.72067
+- **MSAG-626** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03529&mlon=38.73408#map=18/9.03529/38.73408
+- **MSAG-627** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03582&mlon=38.73204#map=18/9.03582/38.73204
+- **MSAG-630** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04945&mlon=38.72446#map=18/9.04945/38.72446
+- **MSAG-632** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05287&mlon=38.71985#map=18/9.05287/38.71985
+- **MSAG-635** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03441&mlon=38.72972#map=18/9.03441/38.72972
+- **MSAG-636** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03645&mlon=38.73156#map=18/9.03645/38.73156
+- **MSAG-638** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04167&mlon=38.73262#map=18/9.04167/38.73262
+- **MSAG-640** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03110&mlon=38.73679#map=18/9.03110/38.73679
+- **MSAG-644** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02252&mlon=38.72563#map=18/9.02252/38.72563
+- **MSAG-645** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03951&mlon=38.73140#map=18/9.03951/38.73140
+- **MSAG-647** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03371&mlon=38.72472#map=18/9.03371/38.72472
+- **MSAG-648** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03359&mlon=38.73516#map=18/9.03359/38.73516
+- **MSAG-649** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04319&mlon=38.72987#map=18/9.04319/38.72987
+- **MSAG-651** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02327&mlon=38.73347#map=18/9.02327/38.73347
+- **MSAG-655** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03167&mlon=38.73445#map=18/9.03167/38.73445
+- **MSAG-656** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03224&mlon=38.73574#map=18/9.03224/38.73574
+- **MSAG-658** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03372&mlon=38.73148#map=18/9.03372/38.73148
+- **MSAG-659** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03038&mlon=38.72370#map=18/9.03038/38.72370
+- **MSAG-661** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02731&mlon=38.72290#map=18/9.02731/38.72290
+- **MSAG-663** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03464&mlon=38.72481#map=18/9.03464/38.72481
+- **MSAG-664** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04254&mlon=38.72140#map=18/9.04254/38.72140
+- **MSAG-666** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02991&mlon=38.73814#map=18/9.02991/38.73814
+- **MSAG-667** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02563&mlon=38.72600#map=18/9.02563/38.72600
+- **MSAG-668** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02644&mlon=38.73302#map=18/9.02644/38.73302
+- **MSAG-669** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03344&mlon=38.73773#map=18/9.03344/38.73773
+- **MSAG-673** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03391&mlon=38.73328#map=18/9.03391/38.73328
+- **MSAG-674** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02371&mlon=38.72999#map=18/9.02371/38.72999
+- **MSAG-684** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02497&mlon=38.72088#map=18/9.02497/38.72088
+- **MSAG-685** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03979&mlon=38.73181#map=18/9.03979/38.73181
+- **MSAG-686** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04532&mlon=38.73283#map=18/9.04532/38.73283
+- **MSAG-689** · internet cafe · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04032&mlon=38.72794#map=18/9.04032/38.72794
+- **Muhamed bus parts** · car parts · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03365&mlon=38.72893#map=18/9.03365/38.72893
+- **Muke barbery** · beauty · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02506&mlon=38.73393#map=18/9.02506/38.73393
+- **MW ላሜራ፡ማጠፊያ** · metal construction · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02516&mlon=38.73830#map=18/9.02516/38.73830
+- **Nahom** · mobile phone · 81, Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03365&mlon=38.73957#map=18/9.03365/38.73957
+- **Neba Trading** (ነባ ትሬዲንግ) · hardware · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours Mo-Su 07:30-18:30 · map https://www.openstreetmap.org/?mlat=9.03187&mlon=38.73550#map=18/9.03187/38.73550
+- **Our car** · pawnbroker · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03202&mlon=38.73617#map=18/9.03202/38.73617
+- **Photo Kaleb** · photo · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03166&mlon=38.73756#map=18/9.03166/38.73756
+- **Raki Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05271&mlon=38.72028#map=18/9.05271/38.72028
+- **Redwan pallet wood** · hardware · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03113&mlon=38.73451#map=18/9.03113/38.73451
+- **Reja cosmetics** · beauty · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03000&mlon=38.73818#map=18/9.03000/38.73818
+- **Shege store** (ሸገ መጋዘን) · variety store · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours Mo-Su 07:00-17:30 · map https://www.openstreetmap.org/?mlat=9.03359&mlon=38.73848#map=18/9.03359/38.73848
+- **Shoa Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03396&mlon=38.73838#map=18/9.03396/38.73838
+- **Taem Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02774&mlon=38.73332#map=18/9.02774/38.73332
+- **Team Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03432&mlon=38.73687#map=18/9.03432/38.73687
+- **Timonior** (ቲሞኒየር) · tailor · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03416&mlon=38.73485#map=18/9.03416/38.73485
+- **Wera Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02895&mlon=38.73375#map=18/9.02895/38.73375
+- **Wood stores (imported pine and recycled)** · hardware · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03148&mlon=38.73451#map=18/9.03148/38.73451
+- **Yeafrican Bakery** · bakery · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02481&mlon=38.73334#map=18/9.02481/38.73334
+- **Yirga Haile Building** (ይርጋ ሃይሌ ህንፃ) · electronics · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03370&mlon=38.73957#map=18/9.03370/38.73957
+- **Z.M. Industrial Electrical Material** · electronics · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · hours Mo-Fr 08:00-18:00; Sa 08:00-12:00 · map https://www.openstreetmap.org/?mlat=9.03305&mlon=38.74134#map=18/9.03305/38.74134
+- **ቤት** (14) · beauty · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02323&mlon=38.72442#map=18/9.02323/38.72442
+
+## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 243
+
+- **111011** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98733&mlon=38.76974#map=18/8.98733/38.76974
+- **111013** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99689&mlon=38.77271#map=18/8.99689/38.77271
+- **111015** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00134&mlon=38.75466#map=18/9.00134/38.75466
+- **111016** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00322&mlon=38.76191#map=18/9.00322/38.76191
+- **111019** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01169&mlon=38.75633#map=18/9.01169/38.75633
+- **111043** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00735&mlon=38.76653#map=18/9.00735/38.76653
+- **111047** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98292&mlon=38.76465#map=18/8.98292/38.76465
+- **111049** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00473&mlon=38.75274#map=18/9.00473/38.75274
+- **111058** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01366&mlon=38.75356#map=18/9.01366/38.75356
+- **111077** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99660&mlon=38.76015#map=18/8.99660/38.76015
+- **111129** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99320&mlon=38.74543#map=18/8.99320/38.74543
+- **111133** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98870&mlon=38.76191#map=18/8.98870/38.76191
+- **111134** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99428&mlon=38.76756#map=18/8.99428/38.76756
+- **111137** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00527&mlon=38.77184#map=18/9.00527/38.77184
+- **111138** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00977&mlon=38.75898#map=18/9.00977/38.75898
+- **111139** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01139&mlon=38.76697#map=18/9.01139/38.76697
+- **111154** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02062&mlon=38.76447#map=18/9.02062/38.76447
+- **111168- KIRKOS TELLE OFFICE** (111168-ቂርቆስ ቴሌ) · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99388&mlon=38.75397#map=18/8.99388/38.75397
+- **111200** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99707&mlon=38.76471#map=18/8.99707/38.76471
+- **111217** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98697&mlon=38.75817#map=18/8.98697/38.75817
+- **111218** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98661&mlon=38.74672#map=18/8.98661/38.74672
+- **111388** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00287&mlon=38.76939#map=18/9.00287/38.76939
+- **111393** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01280&mlon=38.74869#map=18/9.01280/38.74869
+- **111396 NATIONAL HOTEL** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01301&mlon=38.76275#map=18/9.01301/38.76275
+- **111401** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01896&mlon=38.76812#map=18/9.01896/38.76812
+- **111405** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00870&mlon=38.77313#map=18/9.00870/38.77313
+- **111411** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01731&mlon=38.75716#map=18/9.01731/38.75716
+- **111416** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01497&mlon=38.76515#map=18/9.01497/38.76515
+- **111417** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98876&mlon=38.75314#map=18/8.98876/38.75314
+- **111428** · telecommunication · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99877&mlon=38.75104#map=18/8.99877/38.75104
+- **111565** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99564&mlon=38.73920#map=18/8.99564/38.73920
+- **111618** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00968&mlon=38.74882#map=18/9.00968/38.74882
+- **111721- ODDA BUILDING** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01650&mlon=38.76602#map=18/9.01650/38.76602
+- **111742** · telecommunication · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01932&mlon=38.77089#map=18/9.01932/38.77089
+- **111749** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01935&mlon=38.77088#map=18/9.01935/38.77088
+- **112072** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02033&mlon=38.75657#map=18/9.02033/38.75657
+- **112074** · telecommunication · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99232&mlon=38.75076#map=18/8.99232/38.75076
+- **112077** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98624&mlon=38.75061#map=18/8.98624/38.75061
+- **112078** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00663&mlon=38.76345#map=18/9.00663/38.76345
+- **112085** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99907&mlon=38.76835#map=18/8.99907/38.76835
+- **112086** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99226&mlon=38.77401#map=18/8.99226/38.77401
+- **112090** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00456&mlon=38.75927#map=18/9.00456/38.75927
+- **112091** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00888&mlon=38.74434#map=18/9.00888/38.74434
+- **112092** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00186&mlon=38.74928#map=18/9.00186/38.74928
+- **112095** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00849&mlon=38.76943#map=18/9.00849/38.76943
+- **112099** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01899&mlon=38.76237#map=18/9.01899/38.76237
+- **112122** · telecommunication · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99614&mlon=38.74364#map=18/8.99614/38.74364
+- **112139** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00891&mlon=38.76234#map=18/9.00891/38.76234
+- **112168** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01109&mlon=38.74731#map=18/9.01109/38.74731
+- **112201** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99073&mlon=38.75895#map=18/8.99073/38.75895
+- **112248** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01209&mlon=38.75945#map=18/9.01209/38.75945
+- **117111** · internet cafe · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98870&mlon=38.76702#map=18/8.98870/38.76702
+- **3F Furniture Sales Center** · furniture · run by 3F · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01009&mlon=38.76828#map=18/9.01009/38.76828
+- **Abay Technic and Trading S.C** (አባይ የቴክኒክ እና የንግድ አ.ማ) · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00469&mlon=38.74606#map=18/9.00469/38.74606
+- **Abisiniya Computers** (አቢሲኒያ ኮምፒውተር) · computer · 182 Mozambique Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00797&mlon=38.74664#map=18/9.00797/38.74664
+- **ABUKA WOOD WORK SHOP** · tyres · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00783&mlon=38.75377#map=18/9.00783/38.75377
+- **AD Stationary** (ኤዲ ስቴሽነሪ) · copyshop · 1146 Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 554 9284 · http://www.classicethiopiatours.com · hours Mo-Sa 09:00-19:00 · map https://www.openstreetmap.org/?mlat=9.00463&mlon=38.76736#map=18/9.00463/38.76736
+- **Ada bakery** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99764&mlon=38.75464#map=18/8.99764/38.75464
+- **Addis pompista** · car repair · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98544&mlon=38.76106#map=18/8.98544/38.76106
+- **Adidas** · sports · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00178&mlon=38.76912#map=18/9.00178/38.76912
+- **Afia Bakery** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00423&mlon=38.75296#map=18/9.00423/38.75296
+- **Agape Car Market** (ኣጋፔ የመኪና ገበያ) · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98655&mlon=38.75010#map=18/8.98655/38.75010
+- **Akemel Juice Bet** · greengrocer · 203 Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01670&mlon=38.77319#map=18/9.01670/38.77319
+- **Alebachew Studio** (አለባቸው ስቱዲዮ) · video · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00385&mlon=38.75576#map=18/9.00385/38.75576
+- **Alpha Tour and Travel** (አልፋ አስጎብኚ እና የጉዞ ወኪል) · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01389&mlon=38.76964#map=18/9.01389/38.76964
+- **Amanga Advertising & Print** (አማንጋ ህትመትና የማስታወቂያ ስራ) · copyshop · 306 Gambia Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Su-Fr 07:00-14:00 · map https://www.openstreetmap.org/?mlat=9.01546&mlon=38.75356#map=18/9.01546/38.75356
+- **Ambassador City Center** (አምባሳደር የገበያ ማዕከል) · clothes · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01206&mlon=38.75389#map=18/9.01206/38.75389
+- **Anwar** · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98220&mlon=38.76468#map=18/8.98220/38.76468
+- **Asfa Atklet Bet** · greengrocer · 627 Yohanis Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01756&mlon=38.77020#map=18/9.01756/38.77020
+- **Ashenge Tour, Travel and Car Rental** (አሸንጌ አስጎብኚ፣ የጉዞ ወኪልና የኪና ኪራይ) · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00230&mlon=38.76731#map=18/9.00230/38.76731
+- **Askale Juice Bet** · greengrocer · 102 Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01638&mlon=38.77261#map=18/9.01638/38.77261
+- **Aynalem Book Store** · books · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01386&mlon=38.75068#map=18/9.01386/38.75068
+- **Bahran mall** (ባህራን ሞል) · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01381&mlon=38.77391#map=18/9.01381/38.77391
+- **Bameza** · fashion accessories · run by Aman · Menelik II Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://bameza.com · hours Mo-Fr 08:00-17:00 · map https://www.openstreetmap.org/?mlat=9.01226&mlon=38.76254#map=18/9.01226/38.76254
+- **Behailu Injunction garage** · car repair · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98840&mlon=38.74886#map=18/8.98840/38.74886
+- **BEKI Square** · computer · 805 Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://bekisquare.com/ · map https://www.openstreetmap.org/?mlat=9.00473&mlon=38.76737#map=18/9.00473/38.76737
+- **Belayab Motors** · car repair · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Su-Th 08:00-16:00; Fr 08:00-11:00 · map https://www.openstreetmap.org/?mlat=9.00488&mlon=38.74318#map=18/9.00488/38.74318
+- **Belaynesh Sook** · kiosk · 241 Zewditu Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 552 1755 · map https://www.openstreetmap.org/?mlat=9.01786&mlon=38.77345#map=18/9.01786/38.77345
+- **Belete Garage** · car repair · run by Belete · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00176&mlon=38.75723#map=18/9.00176/38.75723
+- **Believe Computer and Digital Solutions** · computer · Gabon Av, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99340&mlon=38.76651#map=18/8.99340/38.76651
+- **Betere Guarag** · car repair · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00836&mlon=38.76040#map=18/9.00836/38.76040
+- **Betty's Fashion** (ቤትስ ፋሽን) · clothes · BMS 03A African Ave, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00469&mlon=38.76756#map=18/9.00469/38.76756
+- **bezabeh car** (በዛብህ ጋራዥ) · car parts · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99220&mlon=38.75543#map=18/8.99220/38.75543
+- **Birana Printing Firm** · bookmaker · run by METECH · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98532&mlon=38.76801#map=18/8.98532/38.76801
+- **Biru Itfurit** · greengrocer · Josfi Jeto Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01568&mlon=38.77120#map=18/9.01568/38.77120
+- **Biruk Tyre and Battery** (ብሩክ ጎማና ባትሪ) · tyres · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98728&mlon=38.76012#map=18/8.98728/38.76012
+- **Black Market Money Exchange** · bureau de change · Gambia Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01487&mlon=38.75292#map=18/9.01487/38.75292
+- **Black Markets** · bureau de change · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01567&mlon=38.75614#map=18/9.01567/38.75614
+- **Bless Massage Spa & Beauty Center** (ብለስ ማሳጅ ስፓ እና የዉበት ሳሎን) · massage · 896, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98449&mlon=38.76588#map=18/8.98449/38.76588
+- **Buna Tera** · coffee · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00211&mlon=38.76900#map=18/9.00211/38.76900
+- **Central Printing** · ሴንተራል ፕሪንቲግ · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98971&mlon=38.76543#map=18/8.98971/38.76543
+- **Classic Ethiopia Tours** (ክላሲክ ኢትዮጵያ አስጎብኚ) · car rental · 1146/ BMC 03 Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 554 9284 · http://www.classicethiopiatours.com · hours Mo-Fr 09:00-17:00; Sa 09:00-18:30 · map https://www.openstreetmap.org/?mlat=9.00462&mlon=38.76734#map=18/9.00462/38.76734
+- **Clothes Shops (Grouped)** (ልብስ መሸጫ ሱቆች) · clothes · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00427&mlon=38.75844#map=18/9.00427/38.75844
+- **Commercial Nominees** (ኮሜርሻል ኖሚኒስ) · bureau de change · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01513&mlon=38.77017#map=18/9.01513/38.77017
+- **Country Liquor Store** · alcohol · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00710&mlon=38.77640#map=18/9.00710/38.77640
+- **Dan Furniture** (ዳን) · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00841&mlon=38.76402#map=18/9.00841/38.76402
+- **Delil Sook** · kiosk · 11 Zewditu Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01741&mlon=38.77420#map=18/9.01741/38.77420
+- **Delux Furniture** (ዴሉክስ የቤትና የቢሮ እቃዎች) · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99051&mlon=38.77306#map=18/8.99051/38.77306
+- **Deluxe furniture Mall** (ዴሉክስ ፈርኒቸር) · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99911&mlon=38.76829#map=18/8.99911/38.76829
+- **Deluxe furniture** (ዴሉክስ ፈርኒቸር) · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00451&mlon=38.76861#map=18/9.00451/38.76861
+- **Dereje Sook** · kiosk · 246 Zewditu Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01777&mlon=38.77339#map=18/9.01777/38.77339
+- **DHL** · shipping · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01148&mlon=38.75512#map=18/9.01148/38.75512
+- **Dinke Traditinal** (ድንቄ ባህላዊ ልብስ) · clothes · BMS 03B African Ave, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00472&mlon=38.76754#map=18/9.00472/38.76754
+- **ELICO Leather Goods and Garments Unit** (ኤሊኮ የቆዳ ውጤቶች መሸጫ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01590&mlon=38.75297#map=18/9.01590/38.75297
+- **Elsa Secretarial Service and Stationary** (ኤልሳ የፅህፈት መሳሪያዎችና ስቴሽነሪ) · stationery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01423&mlon=38.75085#map=18/9.01423/38.75085
+- **Enat Bakery and Pastry** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00012&mlon=38.75881#map=18/9.00012/38.75881
+- **Ergo bet** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98496&mlon=38.76549#map=18/8.98496/38.76549
+- **Etakaa Trading** · computer · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02162&mlon=38.76578#map=18/9.02162/38.76578
+- **Ethelco Shop (Philips)** (ኢቴልኮ ሱቅ (ፊሊፕስ)) · electronics · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01600&mlon=38.75296#map=18/9.01600/38.75296
+- **Ethio ceramics - Kazanchis Area Shop** (ኢትዮ-ሴራሚክስ - ካዛንቺስ አካባቢ መሸጫ ማዕከል) · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01362&mlon=38.77402#map=18/9.01362/38.77402
+- **Ethio link(NIVEA)** · cosmetics · Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 552 4037 · hours Mo-Sa · map https://www.openstreetmap.org/?mlat=8.99804&mlon=38.77258#map=18/8.99804/38.77258
+- **Ethio Telecom Shop - Stadium** · mobile phone · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01127&mlon=38.75496#map=18/9.01127/38.75496
+- **Ethio Travel and Tours** · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://ethiotravelandtours.com/ · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01656&mlon=38.76566#map=18/9.01656/38.76566
+- **Ethio Travel and Tours** · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://ethiotravelandtours.com/ · map https://www.openstreetmap.org/?mlat=9.01662&mlon=38.76570#map=18/9.01662/38.76570
+- **Ethio-Nippon Technical Company S.CO.- Head Office** (ኢትዮ ኒፖን) · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00064&mlon=38.74618#map=18/9.00064/38.74618
+- **Ethiopian Airlines Ticket Office** (የኢትዮጲያ አየር መንገድ ትኬት መሸጫ ቢሮ) · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01625&mlon=38.75296#map=18/9.01625/38.75296
+- **Ethioplastic Distribution Shop** (ኢትዮ-ፕላስቲክ ምርት ማከፋፈያ ሱቅ) · hardware · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00565&mlon=38.74602#map=18/9.00565/38.74602
+- **EthioTelecom Car Repair Shop** (ቴሌ ጋራዥ) · car repair · run by EthioTelecom · Sierra Leone Av, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99890&mlon=38.75780#map=18/8.99890/38.75780
+- **EthioTelecom Office** · mobile phone · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01000&mlon=38.77242#map=18/9.01000/38.77242
+- **Etish Juice Bet** · greengrocer · Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01705&mlon=38.77355#map=18/9.01705/38.77355
+- **Etsegenet Sook** · kiosk · 203 Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01683&mlon=38.77330#map=18/9.01683/38.77330
+- **Flower And Plant Market** · florist · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99723&mlon=38.75457#map=18/8.99723/38.75457
+- **Freeland Tour and Travel** · travel agency · 202 Africa Avenue / Bole Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://www.freelandethiopia.com/ · hours Mo-Su 08:30-20:00 · map https://www.openstreetmap.org/?mlat=8.99897&mlon=38.77126#map=18/8.99897/38.77126
+- **Fresh Corner** · greengrocer · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.99356&mlon=38.75932#map=18/8.99356/38.75932
+- **Fujifilm** · photo · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00321&mlon=38.76785#map=18/9.00321/38.76785
+- **GG Auto Spare Parts** · car parts · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99323&mlon=38.74822#map=18/8.99323/38.74822
+- **Gize Transit and Transport Plc** (ጊዜ አስጎብኚ እና የጉዞ ወኪል) · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99924&mlon=38.76807#map=18/8.99924/38.76807
+- **Gojo bakery** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98512&mlon=38.75944#map=18/8.98512/38.75944
+- **Habesha Bus** · ticket · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01223&mlon=38.76305#map=18/9.01223/38.76305
+- **Hanan Bakery** (ሀናን ዳቦ መጋገሪያ) · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01577&mlon=38.77063#map=18/9.01577/38.77063
+- **Hanna Building Materials Shop** (ሃና ህንፃ መሳሪያ መደብር) · hardware · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00338&mlon=38.75851#map=18/9.00338/38.75851
+- **Hardware, Gas Bottles, Building Material** (የህንጻ መሳሪያና ሲሊንደር መሽጫ) · hardware · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00030&mlon=38.76705#map=18/9.00030/38.76705
+- **Heyru Sook** · kiosk · 103 Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01639&mlon=38.77265#map=18/9.01639/38.77265
+- **Hulucars** · car · 182 Mozambique Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://www.hulucars.com/ · map https://www.openstreetmap.org/?mlat=9.00790&mlon=38.74669#map=18/9.00790/38.74669
+- **Jafar Book Store** · books · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01179&mlon=38.75058#map=18/9.01179/38.75058
+- **Jemal Sook** · kiosk · 155 Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01650&mlon=38.77280#map=18/9.01650/38.77280
+- **Jossi Mobile Maintenance and Accessories** (ጆሲ ሞባይል ጥገናና ሽያጭ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01419&mlon=38.75151#map=18/9.01419/38.75151
+- **kalid used cars importer** (ካሊድ መኪና አስመጪ) · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98908&mlon=38.76685#map=18/8.98908/38.76685
+- **KAN Electircal Trading** · appliance · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01009&mlon=38.77293#map=18/9.01009/38.77293
+- **kebel food** (ቀበሌ ምግብ ቤት) · butcher · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99386&mlon=38.76659#map=18/8.99386/38.76659
+- **KeeKoo Design (Traditional Upper Class Clothes and More)** · clothes · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 550 1907 · http://www.keekoodesign.com/ · map https://www.openstreetmap.org/?mlat=9.00453&mlon=38.76914#map=18/9.00453/38.76914
+- **Konjo Professional Salon** · hairdresser · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99108&mlon=38.76702#map=18/8.99108/38.76702
+- **Kuk Yelesh Juice House** (ኩክ የለሽ ጭማቂ ቤት) · greengrocer · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00843&mlon=38.77575#map=18/9.00843/38.77575
+- **Lake Tana Tours** · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99133&mlon=38.77224#map=18/8.99133/38.77224
+- **Leul Bakery** · bakery · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01002&mlon=38.77044#map=18/9.01002/38.77044
+- **Leul Fikre car repairw** · car repair · meskel flower, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98591&mlon=38.76291#map=18/8.98591/38.76291
+- **Lidu** · beauty · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98645&mlon=38.75864#map=18/8.98645/38.75864
+- **Lifan Motors** · hardware · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01226&mlon=38.77409#map=18/9.01226/38.77409
+- **luel garuge** · car repair · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98864&mlon=38.76596#map=18/8.98864/38.76596
+- **Lufthansa Ticket Office** (ሉፍታንዛ ትኬት ቢሮ) · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 5666 · hours Mo-Fr 08:30-17:00 "no lunch break" · map https://www.openstreetmap.org/?mlat=9.00725&mlon=38.77630#map=18/9.00725/38.77630
+- **Lufthansa Ticket Office** (ሉፍትሀንዛ) · ticket · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00713&mlon=38.77637#map=18/9.00713/38.77637
+- **Maji Day Spa** · beauty · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99354&mlon=38.76627#map=18/8.99354/38.76627
+- **MAKARIOS Technologies** · computer · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://t.me/makariostech · map https://www.openstreetmap.org/?mlat=9.00163&mlon=38.76721#map=18/9.00163/38.76721
+- **Masa Coffee** · coffee · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99824&mlon=38.77107#map=18/8.99824/38.77107
+- **Medium Book Shops** · books · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01371&mlon=38.75065#map=18/9.01371/38.75065
+- **Megabook Store** · books · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01204&mlon=38.76252#map=18/9.01204/38.76252
+- **Mekab Bakery and Pastry** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98505&mlon=38.75059#map=18/8.98505/38.75059
+- **Mekobu** · bicycle · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99041&mlon=38.76040#map=18/8.99041/38.76040
+- **Melse Sook** · kiosk · 76 Zewditu Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 550 0784 · map https://www.openstreetmap.org/?mlat=9.01626&mlon=38.77467#map=18/9.01626/38.77467
+- **Mesfen Juce Bet** · greengrocer · Josfi Jeto Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01599&mlon=38.77052#map=18/9.01599/38.77052
+- **Mezegaja Garaxe** (መዘጋጃ ጋራዥ) · car repair · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99936&mlon=38.76610#map=18/8.99936/38.76610
+- **Mikias Printing Press** (ሚኪያስ ማተሚያ ቤት) · copyshop · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00519&mlon=38.76885#map=18/9.00519/38.76885
+- **Mina bakery** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98745&mlon=38.75964#map=18/8.98745/38.75964
+- **Mohamed Sook** · kiosk · 101 Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01633&mlon=38.77252#map=18/9.01633/38.77252
+- **Mommy's Hug** (የእናት እቅፍ ምቹ ፍራሽ) · bed · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99222&mlon=38.77384#map=18/8.99222/38.77384
+- **Moti Engineering** · electronics · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99344&mlon=38.76719#map=18/8.99344/38.76719
+- **Mujib Trading PLC** (ሙጂብ የንግድ ማዕከል ኃ.የተ.የግ.ማ) · electronics · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98960&mlon=38.75975#map=18/8.98960/38.75975
+- **Mule ceramic** · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01069&mlon=38.77457#map=18/9.01069/38.77457
+- **Mule ceramic** · furniture · urael, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01068&mlon=38.77459#map=18/9.01068/38.77459
+- **Mulugeta Commercial Billing** · hardware · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01224&mlon=38.77372#map=18/9.01224/38.77372
+- **Nahomie Fashion** (ናሆሜ ፋሽን) · clothes · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98990&mlon=38.76578#map=18/8.98990/38.76578
+- **Nano Garage** · car repair · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98928&mlon=38.76198#map=18/8.98928/38.76198
+- **National Motors Corporation** (ናሽናል ሞተርስ ኮርፖሬሽን) · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 551 0499 / +251 11 551 6144 · map https://www.openstreetmap.org/?mlat=9.00546&mlon=38.74489#map=18/9.00546/38.74489
+- **National Tour Operators (NTO)** (ብሄራዊ አስጎብኚ ድርጅት) · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01410&mlon=38.75749#map=18/9.01410/38.75749
+- **Ndara - Camera Repairs** · electronics · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00493&mlon=38.76689#map=18/9.00493/38.76689
+- **Netsanet Natural Flower Shop** · florist · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01001&mlon=38.77040#map=18/9.01001/38.77040
+- **NICON Transit and Transport PLC** (ኒኮን የትራንዚት እና ትራንስፖርት አገልግሎት) · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00126&mlon=38.76708#map=18/9.00126/38.76708
+- **Nu-El Beauty Bar** · beauty · 27 St Yared church shopping center, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Sa 09:00-19:30 · map https://www.openstreetmap.org/?mlat=8.98605&mlon=38.76105#map=18/8.98605/38.76105
+- **Oil Filters** · car parts · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99017&mlon=38.74815#map=18/8.99017/38.74815
+- **Orbis** · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00253&mlon=38.74566#map=18/9.00253/38.74566
+- **Orbis** (ኦርቢስ) · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00187&mlon=38.74609#map=18/9.00187/38.74609
+- **Professional Electronic Data Systems (PEDS)** · computer · Dem. Rep. of Congo Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 515 4000 · https://p-eds.com/ · map https://www.openstreetmap.org/?mlat=9.00659&mlon=38.76950#map=18/9.00659/38.76950
+- **Quantum Electronics PLC** · appliance · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00987&mlon=38.77162#map=18/9.00987/38.77162
+- **Racrob Business PLC** · energy · Ethio-Chinese Friendship Road, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://racrob.et · map https://www.openstreetmap.org/?mlat=8.98337&mlon=38.76571#map=18/8.98337/38.76571
+- **Riche Photo Shop** (ርቼ ፎቶ ቤት) · photo · ሪቼ Riche, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Su 08:00-20:00 · map https://www.openstreetmap.org/?mlat=9.00407&mlon=38.75905#map=18/9.00407/38.75905
+- **Royal Ceramic** · appliance · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00987&mlon=38.77139#map=18/9.00987/38.77139
+- **Sable Juice** · greengrocer · Marmiya Bet, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01716&mlon=38.77140#map=18/9.01716/38.77140
+- **Sadis Trading** (ሳድስ ትሬዲንግ) · computer · 317 Zewditu Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 870 3801 · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=9.01991&mlon=38.76720#map=18/9.01991/38.76720
+- **Sadula Beauty Salon and Spa** · beauty · 626/35, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 416 3716 · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.99797&mlon=38.76724#map=18/8.99797/38.76724
+- **Sami Electronics** · electronics · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00198&mlon=38.75713#map=18/9.00198/38.75713
+- **Sami wendemamachoch butchery & bar** · butcher · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99962&mlon=38.76854#map=18/8.99962/38.76854
+- **Sat Solar Engineering** · appliance · run by Sat Solar · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01009&mlon=38.76914#map=18/9.01009/38.76914
+- **Second Hand Market** · clothes · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00644&mlon=38.75984#map=18/9.00644/38.75984
+- **Security Camera Dealers** · hifi · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01434&mlon=38.75726#map=18/9.01434/38.75726
+- **Sefeian Ethippia (VW)** · car parts · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00861&mlon=38.74435#map=18/9.00861/38.74435
+- **Sehalu It Fruit** · greengrocer · 110/3 Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01762&mlon=38.77053#map=18/9.01762/38.77053
+- **Selam Bus Ticket Office** · ticket · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01240&mlon=38.76305#map=18/9.01240/38.76305
+- **Selam Sook** · kiosk · 5 Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01731&mlon=38.77391#map=18/9.01731/38.77391
+- **Sharp** · photo · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00027&mlon=38.77057#map=18/9.00027/38.77057
+- **Shemsedin Juice Bet** · greengrocer · 2 Zewditu Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01736&mlon=38.77493#map=18/9.01736/38.77493
+- **Shoa Baker (Olympia)** (ሸዋ ዳቦ (ኦሎምፒያ)) · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00255&mlon=38.76870#map=18/9.00255/38.76870
+- **Shoa** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00490&mlon=38.75903#map=18/9.00490/38.75903
+- **Signature Spa** · hairdresser · W 03 H 1049, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 823 1810 · map https://www.openstreetmap.org/?mlat=8.98777&mlon=38.77166#map=18/8.98777/38.77166
+- **Solyana Furniture** (ሶልያና ፈርኒቸር) · furniture · 4 Soliyana fur., Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98778&mlon=38.76041#map=18/8.98778/38.76041
+- **Soreti Spa** · beauty · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99524&mlon=38.77568#map=18/8.99524/38.77568
+- **stadtmobil CarSharing-Station** · car rental · 182 Mozambique Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00796&mlon=38.74688#map=18/9.00796/38.74688
+- **Sterling Travel and Tour** (ስተርሊግ አስጎብኚና የጉዞ ወኪል) · travel agency · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01623&mlon=38.75310#map=18/9.01623/38.75310
+- **Sun optics, Legehar branch** (ሣን ኦፕቲክስ ለገር ቅርንጫፍ) · optician · ለገሐር አካባቢ / Legahar, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · https://www.sunopticaltechnologies.com/ · map https://www.openstreetmap.org/?mlat=9.01361&mlon=38.75248#map=18/9.01361/38.75248
+- **Sunshine Laundry No. 3** · laundry · run by Sunshine · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01030&mlon=38.76737#map=18/9.01030/38.76737
+- **Sunshine** (ሰንሻይን) · laundry · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00906&mlon=38.76473#map=18/9.00906/38.76473
+- **Tade jeans hadid** · gift · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00542&mlon=38.76248#map=18/9.00542/38.76248
+- **Tafach Fresh Juice** · greengrocer · 689 Zewditu Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01763&mlon=38.77632#map=18/9.01763/38.77632
+- **Techno Style** · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01143&mlon=38.76923#map=18/9.01143/38.76923
+- **TEGONA car import&sales** · car · Gabon Av, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99236&mlon=38.76631#map=18/8.99236/38.76631
+- **Tegona meskel flower** · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99487&mlon=38.76648#map=18/8.99487/38.76648
+- **Trans Ethiopia, Bambis Branch** · tyres · run by Trans Ethiopia · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01018&mlon=38.76857#map=18/9.01018/38.76857
+- **Transport auth. Gov. Vihacle repair** · car repair · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00545&mlon=38.74418#map=18/9.00545/38.74418
+- **Tsega Business Center** (ፀጋ ቢዝነስ ሴንተር) · stationery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99345&mlon=38.77414#map=18/8.99345/38.77414
+- **Turkey Men** · clothes · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00239&mlon=38.76966#map=18/9.00239/38.76966
+- **Tyre Repair and Pumping** (ጎሚስታ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01438&mlon=38.75253#map=18/9.01438/38.75253
+- **Tyre Repair Service** · tyres · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00426&mlon=38.74193#map=18/9.00426/38.74193
+- **Uni Furniture** (ዩኒ የቤትና የቢሮ እቃዎች) · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00681&mlon=38.76689#map=18/9.00681/38.76689
+- **Uni Mag PLC** · hardware · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 442 3537 · map https://www.openstreetmap.org/?mlat=8.98309&mlon=38.76559#map=18/8.98309/38.76559
+- **unity hair barber & training anteneh ketema** · hairdresser · Haile Gebresellasie Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00749&mlon=38.77629#map=18/9.00749/38.77629
+- **Unity park entrance** · ticket · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02168&mlon=38.76475#map=18/9.02168/38.76475
+- **VARMORA Ceramic** · appliance · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00991&mlon=38.77113#map=18/9.00991/38.77113
+- **Vasu Light** · appliance · Jomo Kenyatta Avenue, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00986&mlon=38.77157#map=18/9.00986/38.77157
+- **Wabi Sook** · kiosk · 14 Zewditu Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01726&mlon=38.77436#map=18/9.01726/38.77436
+- **Walya Bus** · ticket · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01124&mlon=38.76279#map=18/9.01124/38.76279
+- **Walya Bus** · ticket · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01162&mlon=38.76291#map=18/9.01162/38.76291
+- **Waryt Quality Furniture Center #3** (ዋሪት የቤትና የቢሮ እቃዎች) · furniture · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99489&mlon=38.73913#map=18/8.99489/38.73913
+- **Web Sprix - IT Solutions PLC** (ዌብ ስፕሪክስ) · internet cafe · Joseph Tito Street, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01615&mlon=38.76857#map=18/9.01615/38.76857
+- **Werku Sook** · kiosk · 217 Zewditu, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01718&mlon=38.77370#map=18/9.01718/38.77370
+- **Weyzer Bakery** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01796&mlon=38.77689#map=18/9.01796/38.77689
+- **Woldemariam Garage** (ወልደማርያም ጋራዥ) · car repair · From Wollo Sefer to Kera, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 653 3398 · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=8.98355&mlon=38.75429#map=18/8.98355/38.75429
+- **Woldemariam Garage** (ወልደማርያም ጋራዥ) · car repair · ከጎተራ ወደ ቄራ, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · tel +251 11 839 0607 · hours Mo-Sa 08:00-23:00 · map https://www.openstreetmap.org/?mlat=8.98353&mlon=38.75425#map=18/8.98353/38.75425
+- **Wondesen Photo Studio** · photographer · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01209&mlon=38.74662#map=18/9.01209/38.74662
+- **Yared Gas (Gas Bottle Shop)** (ያሬድ ሲሊንድር) · hardware · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98904&mlon=38.76553#map=18/8.98904/38.76553
+- **Yene Habesha** · clothes · ቂርቆስ ክፍለ ከተማ Kirkos, Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · hours Mo-Sa 08:00-20:00 · map https://www.openstreetmap.org/?mlat=9.00508&mlon=38.75290#map=18/9.00508/38.75290
+- **Yoyo's bakery** · bakery · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00412&mlon=38.75338#map=18/9.00412/38.75338
+- **አብዱልቃድር በግ ስጋ Abdulqadir Butcher's** · butcher · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01216&mlon=38.77022#map=18/9.01216/38.77022
+- **አዊር መኪና መሸጫ** · car wash · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99635&mlon=38.76995#map=18/8.99635/38.76995
+- **자동차 수입상** · car · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99255&mlon=38.76700#map=18/8.99255/38.76700
+
+## Gulele sub-city · ጉለሌ ክፍለ ከተማ — 102
+
+- **111036** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05028&mlon=38.75839#map=18/9.05028/38.75839
+- **111037** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05435&mlon=38.72833#map=18/9.05435/38.72833
+- **111038** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05935&mlon=38.73490#map=18/9.05935/38.73490
+- **111039** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06331&mlon=38.75103#map=18/9.06331/38.75103
+- **111045** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04903&mlon=38.73021#map=18/9.04903/38.73021
+- **111060** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06597&mlon=38.74393#map=18/9.06597/38.74393
+- **111061** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06955&mlon=38.75912#map=18/9.06955/38.75912
+- **111068** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05526&mlon=38.73888#map=18/9.05526/38.73888
+- **111069** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05637&mlon=38.74974#map=18/9.05637/38.74974
+- **111078** (111078 - ቀለም አምባ ት/ቤት) · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06097&mlon=38.72650#map=18/9.06097/38.72650
+- **111079** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07111&mlon=38.73748#map=18/9.07111/38.73748
+- **111108** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05634&mlon=38.76300#map=18/9.05634/38.76300
+- **111118** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05760&mlon=38.74372#map=18/9.05760/38.74372
+- **111124** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06279&mlon=38.71944#map=18/9.06279/38.71944
+- **111194- ፅዮን ሆቴል** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07105&mlon=38.73048#map=18/9.07105/38.73048
+- **111204** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04960&mlon=38.76463#map=18/9.04960/38.76463
+- **111274** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04842&mlon=38.75191#map=18/9.04842/38.75191
+- **111276** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05373&mlon=38.72007#map=18/9.05373/38.72007
+- **111278** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04382&mlon=38.75871#map=18/9.04382/38.75871
+- **111439** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.09175&mlon=38.75454#map=18/9.09175/38.75454
+- **111440** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.09323&mlon=38.76184#map=18/9.09323/38.76184
+- **111563** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06815&mlon=38.72232#map=18/9.06815/38.72232
+- **111564** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05949&mlon=38.71651#map=18/9.05949/38.71651
+- **111570** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06735&mlon=38.72637#map=18/9.06735/38.72637
+- **111593** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06463&mlon=38.73060#map=18/9.06463/38.73060
+- **111644 - አባዲና** (111644- አባዲና) · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05232&mlon=38.73348#map=18/9.05232/38.73348
+- **111653** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04624&mlon=38.76223#map=18/9.04624/38.76223
+- **111663** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05401&mlon=38.75122#map=18/9.05401/38.75122
+- **111664** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06585&mlon=38.74931#map=18/9.06585/38.74931
+- **111665** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05428&mlon=38.75827#map=18/9.05428/38.75827
+- **111666- ሩፋኤል** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05927&mlon=38.72141#map=18/9.05927/38.72141
+- **111681** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06149&mlon=38.73995#map=18/9.06149/38.73995
+- **111682** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05878&mlon=38.74945#map=18/9.05878/38.74945
+- **111683** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06768&mlon=38.75282#map=18/9.06768/38.75282
+- **111684** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06615&mlon=38.73771#map=18/9.06615/38.73771
+- **111685** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05862&mlon=38.72877#map=18/9.05862/38.72877
+- **111686** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05208&mlon=38.72435#map=18/9.05208/38.72435
+- **111839** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07220&mlon=38.74533#map=18/9.07220/38.74533
+- **111841** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06220&mlon=38.74464#map=18/9.06220/38.74464
+- **111843** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05831&mlon=38.75715#map=18/9.05831/38.75715
+- **111844** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06810&mlon=38.73447#map=18/9.06810/38.73447
+- **111846** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06237&mlon=38.73369#map=18/9.06237/38.73369
+- **111849** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07214&mlon=38.75683#map=18/9.07214/38.75683
+- **111852** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07487&mlon=38.76016#map=18/9.07487/38.76016
+- **111865** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06935&mlon=38.72963#map=18/9.06935/38.72963
+- **111874** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06158&mlon=38.71376#map=18/9.06158/38.71376
+- **111876** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05656&mlon=38.76792#map=18/9.05656/38.76792
+- **111877** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07558&mlon=38.75132#map=18/9.07558/38.75132
+- **112219 - SULULITA KELLA** (112219- ሱሉልታ ኬላ) · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.08092&mlon=38.72946#map=18/9.08092/38.72946
+- **140026** · bookmaker · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06297&mlon=38.71318#map=18/9.06297/38.71318
+- **Adam Bedane oda** (አደም በዳኔ ኦዳ) · variety store · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06078&mlon=38.75924#map=18/9.06078/38.75924
+- **Anbessa Garage** (አንበሳ ጋራዥ) · car repair · run by Mercedes · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06468&mlon=38.71960#map=18/9.06468/38.71960
+- **Belladonna Catering & Food Delivery** (ቤላዶና የምግብ ዝግጅትና አቅርቦት) · caterer · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06423&mlon=38.73428#map=18/9.06423/38.73428
+- **car EGIR Yishak body shop wekiye carina II ABEL** · car repair · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05654&mlon=38.72946#map=18/9.05654/38.72946
+- **Emmanuel Atnafu District** · convenience · run by Emmanuel Atnafu · GL_09_2052 St., Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06198&mlon=38.72245#map=18/9.06198/38.72245
+- **Entoto** · jewelry · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04945&mlon=38.76639#map=18/9.04945/38.76639
+- **ferej habeshan clothing** (ፈረጅ የሀበሻ ልብስ) · clothes · run by business owner · Gundish suit 3 Haile Melekot Street, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · https://www.m.facebook.com/m.ferej.habeshan1 · map https://www.openstreetmap.org/?mlat=9.06407&mlon=38.76185#map=18/9.06407/38.76185
+- **Habesha beer store** (ሐበሻ ስቶር) · alcohol · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06909&mlon=38.71538#map=18/9.06909/38.71538
+- **Hanan Bakery** · bakery · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06250&mlon=38.76132#map=18/9.06250/38.76132
+- **Henok Design** · clothes · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05907&mlon=38.73715#map=18/9.05907/38.73715
+- **iCog-Labs** · electronics · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · https://icog-labs.com/ · hours Mo-Su 08:00-20:00 · map https://www.openstreetmap.org/?mlat=9.04490&mlon=38.76347#map=18/9.04490/38.76347
+- **Mo's** (ሞስ) · internet cafe · run by yoseph biniyam and mussie biniyam · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05362&mlon=38.72020#map=18/9.05362/38.72020
+- **MSAG-1301** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06079&mlon=38.73677#map=18/9.06079/38.73677
+- **MSAG-1302** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06324&mlon=38.73401#map=18/9.06324/38.73401
+- **MSAG-1303** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06187&mlon=38.73151#map=18/9.06187/38.73151
+- **MSAG-1304** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06850&mlon=38.73546#map=18/9.06850/38.73546
+- **MSAG-1305** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06607&mlon=38.73315#map=18/9.06607/38.73315
+- **MSAG-1306** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05990&mlon=38.73315#map=18/9.05990/38.73315
+- **MSAG-1307** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05693&mlon=38.73519#map=18/9.05693/38.73519
+- **MSAG-1308** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06306&mlon=38.74348#map=18/9.06306/38.74348
+- **MSAG-1309** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05851&mlon=38.73441#map=18/9.05851/38.73441
+- **MSAG-1310** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05874&mlon=38.73446#map=18/9.05874/38.73446
+- **MSAG-1311** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06062&mlon=38.73340#map=18/9.06062/38.73340
+- **MSAG-1501** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06443&mlon=38.71790#map=18/9.06443/38.71790
+- **MSAG-1502** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06316&mlon=38.72038#map=18/9.06316/38.72038
+- **MSAG-1503** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06067&mlon=38.72434#map=18/9.06067/38.72434
+- **MSAG-1504** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05849&mlon=38.72712#map=18/9.05849/38.72712
+- **MSAG-1505** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06246&mlon=38.71928#map=18/9.06246/38.71928
+- **MSAG-1506** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05547&mlon=38.72436#map=18/9.05547/38.72436
+- **MSAG-1507** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05751&mlon=38.72171#map=18/9.05751/38.72171
+- **MSAG-1508** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05833&mlon=38.71939#map=18/9.05833/38.71939
+- **MSAG-1509** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06565&mlon=38.72109#map=18/9.06565/38.72109
+- **MSAG-4104** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05369&mlon=38.74466#map=18/9.05369/38.74466
+- **MSAG-4105** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05270&mlon=38.74991#map=18/9.05270/38.74991
+- **MSAG-432** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05031&mlon=38.75257#map=18/9.05031/38.75257
+- **MSAG-440** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05337&mlon=38.74255#map=18/9.05337/38.74255
+- **MSAG-464** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04683&mlon=38.75462#map=18/9.04683/38.75462
+- **MSAG-497** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06529&mlon=38.74933#map=18/9.06529/38.74933
+- **MSAG-624** · internet cafe · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04689&mlon=38.73559#map=18/9.04689/38.73559
+- **Muya Ethiopia PLC** · handicraft · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05098&mlon=38.76655#map=18/9.05098/38.76655
+- **Nahom Garage** (ናሆም ጋራዥ) · car repair · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05589&mlon=38.71922#map=18/9.05589/38.71922
+- **Saba high grade bakery** · bakery · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · hours Mo-Su 07:30-21:30 · map https://www.openstreetmap.org/?mlat=9.04951&mlon=38.72658#map=18/9.04951/38.72658
+- **Sami internet and copy center** (ሳሚ ኢንተርኔት) · copyshop · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05009&mlon=38.76024#map=18/9.05009/38.76024
+- **Selam Bakery** · bakery · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05125&mlon=38.75927#map=18/9.05125/38.75927
+- **Shiromeda traditional cloth market** (የባህል ልብስ ገበያ) · clothes · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06340&mlon=38.76099#map=18/9.06340/38.76099
+- **Sudeyis** · bakery · Simt, Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.07657&mlon=38.75792#map=18/9.07657/38.75792
+- **WASIHUN GARAGE SEMEN MAZEGAJA ABEL** · car repair · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05358&mlon=38.74237#map=18/9.05358/38.74237
+- **Yasmin Bakery** · bakery · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05166&mlon=38.75859#map=18/9.05166/38.75859
+- **Yegna Bakery and Pastry** · pastry · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06314&mlon=38.72029#map=18/9.06314/38.72029
+- **Yekim Bakery** · bakery · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05065&mlon=38.72404#map=18/9.05065/38.72404
+- **አነባበሮ** · bakery · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04990&mlon=38.75254#map=18/9.04990/38.75254
+- **ዬናስ ፀጉር ቤት** · beauty · Gulele sub-city (ጉለሌ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05328&mlon=38.75876#map=18/9.05328/38.75876
+
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 92
+
+- **111020** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01518&mlon=38.73856#map=18/9.01518/38.73856
+- **111024** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02702&mlon=38.74503#map=18/9.02702/38.74503
+- **111040** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01936&mlon=38.73993#map=18/9.01936/38.73993
+- **111041** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02247&mlon=38.72973#map=18/9.02247/38.72973
+- **111050** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01097&mlon=38.74121#map=18/9.01097/38.74121
+- **111051** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01847&mlon=38.74686#map=18/9.01847/38.74686
+- **111052** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02114&mlon=38.75272#map=18/9.02114/38.75272
+- **111081** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02111&mlon=38.73524#map=18/9.02111/38.73524
+- **111109** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01352&mlon=38.74423#map=18/9.01352/38.74423
+- **111142** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01897&mlon=38.72722#map=18/9.01897/38.72722
+- **111167** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01906&mlon=38.71695#map=18/9.01906/38.71695
+- **111181** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01097&mlon=38.71833#map=18/9.01097/38.71833
+- **111187** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01097&mlon=38.72726#map=18/9.01097/38.72726
+- **111395** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03024&mlon=38.74546#map=18/9.03024/38.74546
+- **111419** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01621&mlon=38.72176#map=18/9.01621/38.72176
+- **111486** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01097&mlon=38.72727#map=18/9.01097/38.72727
+- **111557** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02004&mlon=38.74975#map=18/9.02004/38.74975
+- **111645** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01174&mlon=38.73648#map=18/9.01174/38.73648
+- **111886** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00973&mlon=38.72239#map=18/9.00973/38.72239
+- **112070** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01866&mlon=38.74361#map=18/9.01866/38.74361
+- **112093** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01292&mlon=38.73296#map=18/9.01292/38.73296
+- **112094** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01765&mlon=38.73393#map=18/9.01765/38.73393
+- **112108** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01729&mlon=38.75049#map=18/9.01729/38.75049
+- **112114** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01965&mlon=38.72175#map=18/9.01965/38.72175
+- **112115** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01588&mlon=38.72730#map=18/9.01588/38.72730
+- **112118 - Golla Mikael Church** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02400&mlon=38.74903#map=18/9.02400/38.74903
+- **112121** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02231&mlon=38.73904#map=18/9.02231/38.73904
+- **112264** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02086&mlon=38.74815#map=18/9.02086/38.74815
+- **Aba Bakery** · bakery · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01298&mlon=38.74429#map=18/9.01298/38.74429
+- **Abrose Bekery** · bakery · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02090&mlon=38.73316#map=18/9.02090/38.73316
+- **Addis & Belay Car Sales** (አዲስ እና በላይ የመኪና ሽያጭ) · car · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01684&mlon=38.74763#map=18/9.01684/38.74763
+- **adey meda** (አደይ ሜዳ) · sports · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02125&mlon=38.72979#map=18/9.02125/38.72979
+- **Adisu Kifle Garage #1** (አዲሱ ክፍሌ ጋራጅ) · car repair · Coka mazoria, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01828&mlon=38.72757#map=18/9.01828/38.72757
+- **African steel international group plc** · hardware · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02350&mlon=38.74369#map=18/9.02350/38.74369
+- **amar stayl** (አማር ፋሽን) · clothes · Liberia Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01275&mlon=38.74349#map=18/9.01275/38.74349
+- **Ambassador Laundry** (አምባሳደር ላውንደሪ) · laundry · Lideta sub-city (ልደታ ክፍለ ከተማ) · hours Mo-Sa 08:00-19:00 · map https://www.openstreetmap.org/?mlat=9.01888&mlon=38.75319#map=18/9.01888/38.75319
+- **Behailu Injection** (በሃይሉ ኢንጀክሽን) · car repair · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01666&mlon=38.73679#map=18/9.01666/38.73679
+- **Chat distribution** · stationery · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01646&mlon=38.74339#map=18/9.01646/38.74339
+- **Ck's Bakery** · bakery · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00221&mlon=38.71854#map=18/9.00221/38.71854
+- **electrical supplier** · hardware · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01372&mlon=38.74771#map=18/9.01372/38.74771
+- **Eshetu G/Selase** · car repair · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01300&mlon=38.74136#map=18/9.01300/38.74136
+- **ETHELCO** (ኢቴልኮ) · electronics · Chad Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · https://www.ethelcoplc.com/ · map https://www.openstreetmap.org/?mlat=9.01040&mlon=38.74097#map=18/9.01040/38.74097
+- **Ethio Telecom Shopping Center | Lideta Branch** (የኢትዮ ቴሌኮም የሽያጭ ማዕከል | ልደታ ቅርንጫፍ) · telecommunication · run by ethio telecom · Burundi Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours Mo-Fr 09:00-17:00 · map https://www.openstreetmap.org/?mlat=9.01656&mlon=38.73888#map=18/9.01656/38.73888
+- **family bakery** (ቤተሰብ ዳቦ) · bakery · Dejazmach Balcha Aba Nefso Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01687&mlon=38.72964#map=18/9.01687/38.72964
+- **Flight Centre** · travel agency · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01265&mlon=38.74741#map=18/9.01265/38.74741
+- **German Bakery** · bakery · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99545&mlon=38.73705#map=18/8.99545/38.73705
+- **International Boutique** · boutique · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01277&mlon=38.74761#map=18/9.01277/38.74761
+- **KTM Ethiopia** · motorcycle · Lideta sub-city (ልደታ ክፍለ ከተማ) · http://africaridingadventures.com · map https://www.openstreetmap.org/?mlat=9.01662&mlon=38.74743#map=18/9.01662/38.74743
+- **Leggio Alumunium** (ሌጆ አልሙኒየም) · hardware · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00542&mlon=38.73992#map=18/9.00542/38.73992
+- **Lidet Pastry** · pastry · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02254&mlon=38.74739#map=18/9.02254/38.74739
+- **Mahir spare parts** (ማሂር መኪና መለዋዋጫ) · car parts · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01634&mlon=38.73663#map=18/9.01634/38.73663
+- **Meaza Spare Parts Shop - Lideta Branch** (መአዛ የመኪና እቃ መለዋወጫ - ልደታ) · car parts · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01312&mlon=38.73647#map=18/9.01312/38.73647
+- **Meda Garage** (ሜዳ ጋራዥ) · car repair · run by Public · Tesema Aba Kemaw Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=9.02094&mlon=38.74706#map=18/9.02094/38.74706
+- **meki Suk** · car parts · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01703&mlon=38.73679#map=18/9.01703/38.73679
+- **Melak Trading - Batteries** · car parts · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02627&mlon=38.74507#map=18/9.02627/38.74507
+- **Mitchellcotts** (ሚቸልኮትስ) · car repair · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01555&mlon=38.74418#map=18/9.01555/38.74418
+- **Mohamed** · car repair · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01610&mlon=38.74290#map=18/9.01610/38.74290
+- **MSAG-420** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02797&mlon=38.74813#map=18/9.02797/38.74813
+- **MSAG-425** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02606&mlon=38.74674#map=18/9.02606/38.74674
+- **MSAG-444** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02817&mlon=38.74827#map=18/9.02817/38.74827
+- **MSAG-622** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01933&mlon=38.73294#map=18/9.01933/38.73294
+- **MSAG-628** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01746&mlon=38.73480#map=18/9.01746/38.73480
+- **MSAG-633** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01387&mlon=38.73428#map=18/9.01387/38.73428
+- **MSAG-650** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02627&mlon=38.74230#map=18/9.02627/38.74230
+- **MSAG-660** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02269&mlon=38.73610#map=18/9.02269/38.73610
+- **MSAG-682** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01726&mlon=38.72898#map=18/9.01726/38.72898
+- **MSAG-683** · internet cafe · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01777&mlon=38.73294#map=18/9.01777/38.73294
+- **murid shop** (ሙሪድ ሱቅ) · seafood · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02037&mlon=38.73234#map=18/9.02037/38.73234
+- **Musie Building Materials Shop** · hardware · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01975&mlon=38.73271#map=18/9.01975/38.73271
+- **Pawe** (ፓዌ) · car repair · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01621&mlon=38.74336#map=18/9.01621/38.74336
+- **Petram PLC** · convenience · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01409&mlon=38.74451#map=18/9.01409/38.74451
+- **Rainbow Exclusive Car Rental & Tour Services PLC** (ሬይንቦ የሚኪና ኪራይና የአስጎብኚ አገልግሎት ኃ.የተ.የግል ማ.) · travel agency · Lideta sub-city (ልደታ ክፍለ ከተማ) · tel +251 11 371 7944 / +251 11 551 3755 · map https://www.openstreetmap.org/?mlat=8.99557&mlon=38.73788#map=18/8.99557/38.73788
+- **RED Movie and Software Store** · variety store · 118A Liberia Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · hours Mo-Su 09:00-09:00 · map https://www.openstreetmap.org/?mlat=9.01322&mlon=38.73753#map=18/9.01322/38.73753
+- **Rome Bakery** · bakery · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00082&mlon=38.74005#map=18/9.00082/38.74005
+- **Royal Professional Photo Studio** (ሮያል ፕሮፌሽናል ፎቶ ስቱድዮ) · photo · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01171&mlon=38.73460#map=18/9.01171/38.73460
+- **Saudi Arabian Airlines Ticket Office** (የሳኡዲ አረቢያ አየርመንገድ ወኪል ቢሮ) · travel agency · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01792&mlon=38.75408#map=18/9.01792/38.75408
+- **Sefa & Family** · tyres · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01746&mlon=38.74332#map=18/9.01746/38.74332
+- **Soft bakery & Cafe** · bakery · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01287&mlon=38.73864#map=18/9.01287/38.73864
+- **Sudan Airways** · ticket · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01785&mlon=38.75419#map=18/9.01785/38.75419
+- **Teklehayimanot tyres shope** (ተክለሀይማኖት ጎማ መሸጫ) · car repair · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02655&mlon=38.74488#map=18/9.02655/38.74488
+- **TIMONIER TAILORY** · tailor · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01055&mlon=38.74372#map=18/9.01055/38.74372
+- **Tyre & Battery Shop** · tyres · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02769&mlon=38.74417#map=18/9.02769/38.74417
+- **Tyres Store** · tyres · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02858&mlon=38.74554#map=18/9.02858/38.74554
+- **Used Car Parts** · car parts · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01831&mlon=38.73652#map=18/9.01831/38.73652
+- **Whole Street is Car Parts** · car parts · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02685&mlon=38.74469#map=18/9.02685/38.74469
+- **Ye buhe Bakery** · bakery · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01314&mlon=38.73639#map=18/9.01314/38.73639
+- **Yema Bakery** · bakery · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01242&mlon=38.71899#map=18/9.01242/38.71899
+- **Yeshi Tyres** · tyres · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02795&mlon=38.74368#map=18/9.02795/38.74368
+- **ቶርቶራ ቪቴ ሀውስ** · sports · ሀድይ, Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01255&mlon=38.71888#map=18/9.01255/38.71888
+- **미쯔비시 부품가계 - Mitsubishi parts household** · car parts · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01825&mlon=38.73827#map=18/9.01825/38.73827
+- **자동차 정비소** · car repair · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01616&mlon=38.73954#map=18/9.01616/38.73954
+- **휠얼라이먼트** · car repair · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01949&mlon=38.74320#map=18/9.01949/38.74320
+
+## Yeka sub-city · የካ ክፍለ ከተማ — 121
+
+- **06 Meznagna** (06 መዝናኛ) · caterer · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-22:00 · map https://www.openstreetmap.org/?mlat=9.05800&mlon=38.77239#map=18/9.05800/38.77239
+- **07 Meznagna** (07 መዝናኛ) · caterer · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-22:00 · map https://www.openstreetmap.org/?mlat=9.05611&mlon=38.77409#map=18/9.05611/38.77409
+- **111067** · internet cafe · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06332&mlon=38.77715#map=18/9.06332/38.77715
+- **111148** · internet cafe · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04214&mlon=38.76663#map=18/9.04214/38.76663
+- **111207** · internet cafe · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05890&mlon=38.77005#map=18/9.05890/38.77005
+- **111432** · internet cafe · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01835&mlon=38.79621#map=18/9.01835/38.79621
+- **111599** · internet cafe · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06813&mlon=38.77174#map=18/9.06813/38.77174
+- **111851** · internet cafe · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04668&mlon=38.77052#map=18/9.04668/38.77052
+- **112160** · internet cafe · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.07346&mlon=38.77186#map=18/9.07346/38.77186
+- **22 Meznagna** (22 መዝናኛ) · caterer · Madagascar Av, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-22:00 · map https://www.openstreetmap.org/?mlat=9.06122&mlon=38.76905#map=18/9.06122/38.76905
+- **90's Movie & Internet Center** (90 ዎቹ የፊልም ማዕከል) · internet cafe · run by Solamon Fikru · Summit, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05109&mlon=38.85563#map=18/9.05109/38.85563
+- **Abenezer** · chemist · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03952&mlon=38.85066#map=18/9.03952/38.85066
+- **Abol Suqi** (አቦል ሱቅ) · variety store · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 08:00-22:00 · map https://www.openstreetmap.org/?mlat=9.06177&mlon=38.77203#map=18/9.06177/38.77203
+- **Alpha Optics** · optician · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02328&mlon=38.77728#map=18/9.02328/38.77728
+- **Amazon Furniture** · furniture · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02326&mlon=38.77708#map=18/9.02326/38.77708
+- **Arsema Barber** · hairdresser · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02037&mlon=38.77647#map=18/9.02037/38.77647
+- **Awash** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03845&mlon=38.84394#map=18/9.03845/38.84394
+- **Ayat roundabout** (አያት እደባባይ) · bookmaker · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02139&mlon=38.87583#map=18/9.02139/38.87583
+- **B.l.M (bealem) trading plc** · car parts · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01759&mlon=38.79393#map=18/9.01759/38.79393
+- **Bank of Abyssinia** (አቢሲኒያ ባንክ) · atm · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.02191&mlon=38.83753#map=18/9.02191/38.83753
+- **Below nigid bank Siga bet Arif new** · butcher · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04136&mlon=38.86065#map=18/9.04136/38.86065
+- **Brook- tech** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02315&mlon=38.77622#map=18/9.02315/38.77622
+- **Bunna Bank ATM** · atm · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01650&mlon=38.78898#map=18/9.01650/38.78898
+- **CAR REPAIR SHOP ABEL** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03021&mlon=38.78625#map=18/9.03021/38.78625
+- **Derege Volks ደረጀ ቮልስ ጥገና** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02077&mlon=38.81106#map=18/9.02077/38.81106
+- **Dinkenesh Baltena** · spices · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02326&mlon=38.77837#map=18/9.02326/38.77837
+- **Easy Life Furniture and Home Finishing PLC** (ኢዚ ላይፍ ፈርኒቸር እና ሆም ፊኒሺንግ) · furniture · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02647&mlon=38.88480#map=18/9.02647/38.88480
+- **ELSA KOLO BALDERAS** · beverages · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02773&mlon=38.78354#map=18/9.02773/38.78354
+- **Enbut bakery** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04377&mlon=38.76335#map=18/9.04377/38.76335
+- **Estif Playstation** (እስጢፍ ፕሌይስቴሽን) · video games · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02417&mlon=38.84649#map=18/9.02417/38.84649
+- **Ethio ceramics - Aware Area Shop** (ኢትዮ-ሴራሚክስ - አዋሬ አካባቢ መሸጫ ማዕከል) · furniture · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02145&mlon=38.77392#map=18/9.02145/38.77392
+- **Ethio telecom** · copyshop · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02799&mlon=38.87743#map=18/9.02799/38.87743
+- **Ethiopia Reads** · books · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02454&mlon=38.87454#map=18/9.02454/38.87454
+- **Ethiopian Airlines Ticket office CMC branch** · travel agency · CMC, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Fr 08:00-17:00 · map https://www.openstreetmap.org/?mlat=9.02468&mlon=38.85199#map=18/9.02468/38.85199
+- **Evo** · clothes · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02130&mlon=38.78648#map=18/9.02130/38.78648
+- **Eyoha Bakery** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02294&mlon=38.87730#map=18/9.02294/38.87730
+- **Fabel Bakery** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02699&mlon=38.77503#map=18/9.02699/38.77503
+- **Feed Green Ethiopia PLC** · greengrocer · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03547&mlon=38.84333#map=18/9.03547/38.84333
+- **Fekadu Car Repair** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02201&mlon=38.78134#map=18/9.02201/38.78134
+- **FIKRE CARBURETOR CLEANER ABEL** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02335&mlon=38.82112#map=18/9.02335/38.82112
+- **Fish and chicken store** · convenience · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01975&mlon=38.79510#map=18/9.01975/38.79510
+- **Fitsum Leather** · bag · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02136&mlon=38.81791#map=18/9.02136/38.81791
+- **Gashaw hintsa mesariya medebir ( tools shop )** (ጋሻው ህንፃ መሣሪያ መደብር !) · variety store · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04096&mlon=38.82481#map=18/9.04096/38.82481
+- **Girum Building** (ግሩም ህንፃ) · bureau de change · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03435&mlon=38.82421#map=18/9.03435/38.82421
+- **Gishen Bakery & Pastry** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04149&mlon=38.86197#map=18/9.04149/38.86197
+- **Habesha bakery** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06562&mlon=38.86799#map=18/9.06562/38.86799
+- **Haile Garage.** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-17:30 · map https://www.openstreetmap.org/?mlat=9.02196&mlon=38.86549#map=18/9.02196/38.86549
+- **Hardware Store** · hardware · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02333&mlon=38.77718#map=18/9.02333/38.77718
+- **Hardware Store** · hardware · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02730&mlon=38.78718#map=18/9.02730/38.78718
+- **Hardware Store** · hardware · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03868&mlon=38.77295#map=18/9.03868/38.77295
+- **Homer** · bookmaker · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02610&mlon=38.84318#map=18/9.02610/38.84318
+- **Ineb Bakery** (ኢነብ ዳቦ ቤት) · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03559&mlon=38.82808#map=18/9.03559/38.82808
+- **iRescue Computer Solutions** (አይሬስኪዩ የኮምፒውተር ሶሉሽን) · computer · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02025&mlon=38.77625#map=18/9.02025/38.77625
+- **Jelele Sook** · kiosk · 164 DHR Shara Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01756&mlon=38.77451#map=18/9.01756/38.77451
+- **Jemal (JB) car rental service** · car rental · 21 Mann St, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.mimosaethiopiatours.com/ · hours Mo-Sa 08:30-18:30 · map https://www.openstreetmap.org/?mlat=9.01943&mlon=38.82092#map=18/9.01943/38.82092
+- **Jemal (JB) Car Rental Service** (ጄቢ የመኪና ኪራይ አገልግሎት) · car rental · 116 CMC street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.mimosaethiopiatours.com/ · hours Mo-Sa 08:30-18:00 · map https://www.openstreetmap.org/?mlat=9.02151&mlon=38.84475#map=18/9.02151/38.84475
+- **Jemal car rental service** (ጄቢ የመኪና ኪራይ አገልግሎት) · car rental · 112 Mann St, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.mimosaethiopiatours.com/ · hours Mo-Sa 08:30-18:30 · map https://www.openstreetmap.org/?mlat=9.02340&mlon=38.81174#map=18/9.02340/38.81174
+- **josi garage** · car · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02137&mlon=38.79698#map=18/9.02137/38.79698
+- **JS Cae Decor** · car parts · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01894&mlon=38.78224#map=18/9.01894/38.78224
+- **Kassech Kitfo** · butcher · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01666&mlon=38.78269#map=18/9.01666/38.78269
+- **KEBEDE MOHAMMED BATLAMERA WESSEN** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03191&mlon=38.84172#map=18/9.03191/38.84172
+- **Koba Dabo Bakery** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06436&mlon=38.87172#map=18/9.06436/38.87172
+- **Lelo** · clothes · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02063&mlon=38.80009#map=18/9.02063/38.80009
+- **Lily's Food Point** (ሊሊስ፡ፉድ፡ፖይንት) · pastry · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02860&mlon=38.87696#map=18/9.02860/38.87696
+- **Liquor Land** · alcohol · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02521&mlon=38.78135#map=18/9.02521/38.78135
+- **Lomi Addis Fashion** · clothes · Enderasse Condominium, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.lomi-addis.com/ · hours Tu-Su 09:00-19:00 · map https://www.openstreetmap.org/?mlat=9.02059&mlon=38.77646#map=18/9.02059/38.77646
+- **Maed** (ማእድ) · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Su 06:00-22:00 · map https://www.openstreetmap.org/?mlat=9.04037&mlon=38.82964#map=18/9.04037/38.82964
+- **Malda Bakery** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06625&mlon=38.86617#map=18/9.06625/38.86617
+- **Mami Store** · baby goods · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02178&mlon=38.79457#map=18/9.02178/38.79457
+- **Mark Guarage** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02419&mlon=38.77583#map=18/9.02419/38.77583
+- **Marka beauty salon & spa** · cosmetics · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02157&mlon=38.78654#map=18/9.02157/38.78654
+- **Mekonnen Auto Garage** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01929&mlon=38.77707#map=18/9.01929/38.77707
+- **Menab car audio** (ምናብ car audio) · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03215&mlon=38.78413#map=18/9.03215/38.78413
+- **Merdi** · chemist · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06640&mlon=38.87598#map=18/9.06640/38.87598
+- **Messaye Grocery** · greengrocer · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04194&mlon=38.84845#map=18/9.04194/38.84845
+- **Mezege Ta (Plant Nursery)** · garden centre · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02074&mlon=38.77213#map=18/9.02074/38.77213
+- **Mimi's Bakery** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02631&mlon=38.77587#map=18/9.02631/38.77587
+- **Mimosa Ethiopia Tours** (ሚሞሳ ኢትዮጵያ አስጎብኚ ድርጅት) · travel agency · 112 Adwa street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · https://www.mimosaethiopiatours.com/ · hours Mo-Sa 08:30-17:30 · map https://www.openstreetmap.org/?mlat=9.03380&mlon=38.78055#map=18/9.03380/38.78055
+- **Mulmul** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01988&mlon=38.78634#map=18/9.01988/38.78634
+- **Mulugeta garaj wesen ABEL** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03497&mlon=38.85508#map=18/9.03497/38.85508
+- **My Music Store** · musical instrument · Zefmesh Grand Mall, 3rd floor, #325 Megenagna, Kenenisa Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.02055&mlon=38.80004#map=18/9.02055/38.80004
+- **Nahom fashion** (ናሆም ፋሽን) · shoes · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02070&mlon=38.79894#map=18/9.02070/38.79894
+- **Nahuta Mart** · convenience · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02264&mlon=38.78577#map=18/9.02264/38.78577
+- **Nata Connection** (ናታ ኮኔክሽን) · internet cafe · 1 Kenenisa Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01990&mlon=38.80091#map=18/9.01990/38.80091
+- **natane décor** (ናታን ዲኮር) · car parts · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01911&mlon=38.78240#map=18/9.01911/38.78240
+- **Pain Dépice** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Tu-Sa 07:00-19:00; Su 07:30-13:30 · map https://www.openstreetmap.org/?mlat=9.02796&mlon=38.77940#map=18/9.02796/38.77940
+- **Protestant Funeral** · funeral directors · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03110&mlon=38.80797#map=18/9.03110/38.80797
+- **royal fome** (ሮያል ፏም) · car · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02128&mlon=38.79405#map=18/9.02128/38.79405
+- **Samsung store** · mobile phone · Haile Gebresellasie Avenue, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 10:00-22:00 · map https://www.openstreetmap.org/?mlat=9.01485&mlon=38.78211#map=18/9.01485/38.78211
+- **Sefa & Family** · car parts · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02035&mlon=38.79119#map=18/9.02035/38.79119
+- **Senayit** · convenience · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=9.02033&mlon=38.81090#map=18/9.02033/38.81090
+- **Sewi Design** · tailor · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02179&mlon=38.79463#map=18/9.02179/38.79463
+- **Sisay Garage** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02007&mlon=38.78453#map=18/9.02007/38.78453
+- **Sisters home beuty** · cosmetics · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.05053&mlon=38.82696#map=18/9.05053/38.82696
+- **Sol WiFi Cafe** · internet cafe · Cote d'Ivoire Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02729&mlon=38.78322#map=18/9.02729/38.78322
+- **Sunshine Laundry No.18** (ሰንሻይን ላውንደሪ ቁ.18) · laundry · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 872 2499 · map https://www.openstreetmap.org/?mlat=9.02956&mlon=38.83665#map=18/9.02956/38.83665
+- **Sunshine Laundry No.7** (ሰንሻይን ላውንደሪ ቁ.7) · laundry · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · tel +251 11 646 5690 · map https://www.openstreetmap.org/?mlat=9.01911&mlon=38.82195#map=18/9.01911/38.82195
+- **Suzi Hair Salon** (ሱዚ ፀጉር ቤት) · hairdresser · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02175&mlon=38.79463#map=18/9.02175/38.79463
+- **Tebabe Juice** · greengrocer · DHR Shara Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01754&mlon=38.77590#map=18/9.01754/38.77590
+- **Tedy Electronics** (ቴዲ ኤሌክትሮኒክስ ጥገና) · electronics · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.05843&mlon=38.87280#map=18/9.05843/38.87280
+- **TEMESGEN CAR BATTERY REPAIR SHOP ABEL** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03028&mlon=38.78615#map=18/9.03028/38.78615
+- **Tofic dabo bet** (ቶፊቅ ዳቦ ቤት) · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03964&mlon=38.82575#map=18/9.03964/38.82575
+- **Top Galery Furniture** · furniture · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02625&mlon=38.79284#map=18/9.02625/38.79284
+- **Tyre workshop** · tyres · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01762&mlon=38.78236#map=18/9.01762/38.78236
+- **Tyre/tire repair shop** (ጎማ፡ጥገና(ጎሚስታ)) · tyres · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02688&mlon=38.87811#map=18/9.02688/38.87811
+- **Tyres Workshop** · tyres · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02145&mlon=38.78208#map=18/9.02145/38.78208
+- **Tyres Workshop** · tyres · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02268&mlon=38.78093#map=18/9.02268/38.78093
+- **Warit** (ዋሪት) · furniture · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01375&mlon=38.77924#map=18/9.01375/38.77924
+- **Weyn Fashion** · clothes · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02051&mlon=38.79499#map=18/9.02051/38.79499
+- **WMA Car Rental & Cleaning Service** · car wash · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02169&mlon=38.78755#map=18/9.02169/38.78755
+- **WMA Car Rental & Washing Service** · car wash · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02149&mlon=38.78604#map=18/9.02149/38.78604
+- **Woink Supermarket** · convenience · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02041&mlon=38.77647#map=18/9.02041/38.77647
+- **Wow Cosmo** · cosmetics · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03871&mlon=38.77290#map=18/9.03871/38.77290
+- **Yakob’s Auto Service** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02540&mlon=38.84377#map=18/9.02540/38.84377
+- **Yami Pastry** · pastry · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.06541&mlon=38.86882#map=18/9.06541/38.86882
+- **Yared Engineering Torno Bet** · car parts · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01698&mlon=38.79082#map=18/9.01698/38.79082
+- **Yenat Bakery & Pastry** · bakery · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.03018&mlon=38.78582#map=18/9.03018/38.78582
+- **Z153 Bike Center** · bicycle · Kenenisa Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · hours Mo-Sa 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.02073&mlon=38.79688#map=18/9.02073/38.79688
+- **zerfe suk** · variety store · Fikre Mariam Aba Techan Street, Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.04490&mlon=38.84743#map=18/9.04490/38.84743
+- **ለምልሚ መርካቶ** · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02182&mlon=38.79461#map=18/9.02182/38.79461
+- **ፈታሽ** · car repair · Yeka sub-city (የካ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01969&mlon=38.78704#map=18/9.01969/38.78704
+
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 271
+
+- **111007** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96415&mlon=38.76277#map=18/8.96415/38.76277
+- **111009- GOTERA TELL SHOP** (111009- ጎተራ ቴሌ ጽ/ቤት) · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97972&mlon=38.75836#map=18/8.97972/38.75836
+- **111071** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97027&mlon=38.76644#map=18/8.97027/38.76644
+- **111120** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94580&mlon=38.74745#map=18/8.94580/38.74745
+- **111123** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96307&mlon=38.75711#map=18/8.96307/38.75711
+- **111126** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95379&mlon=38.75867#map=18/8.95379/38.75867
+- **111127** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98006&mlon=38.75260#map=18/8.98006/38.75260
+- **111156** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95581&mlon=38.74204#map=18/8.95581/38.74204
+- **111157** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93125&mlon=38.75401#map=18/8.93125/38.75401
+- **111173** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94875&mlon=38.75316#map=18/8.94875/38.75316
+- **111177** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96466&mlon=38.74919#map=18/8.96466/38.74919
+- **111180** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93660&mlon=38.73970#map=18/8.93660/38.73970
+- **111185** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97183&mlon=38.74011#map=18/8.97183/38.74011
+- **111188** · internet cafe · ቫቲካን, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98931&mlon=38.73969#map=18/8.98931/38.73969
+- **111190** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98818&mlon=38.71820#map=18/8.98818/38.71820
+- **111193** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97230&mlon=38.75940#map=18/8.97230/38.75940
+- **111203** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97113&mlon=38.74963#map=18/8.97113/38.74963
+- **111205** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97002&mlon=38.73089#map=18/8.97002/38.73089
+- **111206** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98029&mlon=38.74688#map=18/8.98029/38.74688
+- **111211** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95824&mlon=38.70715#map=18/8.95824/38.70715
+- **111212** · telecommunication · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95219&mlon=38.72243#map=18/8.95219/38.72243
+- **111225** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96103&mlon=38.73503#map=18/8.96103/38.73503
+- **111228** · telecommunication · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94401&mlon=38.73428#map=18/8.94401/38.73428
+- **111422** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96023&mlon=38.76513#map=18/8.96023/38.76513
+- **111429** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92976&mlon=38.74501#map=18/8.92976/38.74501
+- **111555** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94938&mlon=38.74105#map=18/8.94938/38.74105
+- **111559** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95524&mlon=38.74983#map=18/8.95524/38.74983
+- **111560** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98788&mlon=38.72279#map=18/8.98788/38.72279
+- **111574** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92806&mlon=38.73694#map=18/8.92806/38.73694
+- **111576** · telecommunication · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95505&mlon=38.72717#map=18/8.95505/38.72717
+- **111578** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96461&mlon=38.74100#map=18/8.96461/38.74100
+- **111579** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96490&mlon=38.72615#map=18/8.96490/38.72615
+- **111657** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95933&mlon=38.77090#map=18/8.95933/38.77090
+- **111750** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96866&mlon=38.72612#map=18/8.96866/38.72612
+- **111765** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92266&mlon=38.74617#map=18/8.92266/38.74617
+- **111832** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95022&mlon=38.74736#map=18/8.95022/38.74736
+- **111833** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94245&mlon=38.74393#map=18/8.94245/38.74393
+- **111881** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94518&mlon=38.75758#map=18/8.94518/38.75758
+- **111882** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94349&mlon=38.75397#map=18/8.94349/38.75397
+- **111884** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95715&mlon=38.75558#map=18/8.95715/38.75558
+- **111885** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97252&mlon=38.73586#map=18/8.97252/38.73586
+- **112048** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97698&mlon=38.74884#map=18/8.97698/38.74884
+- **112062** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96840&mlon=38.74395#map=18/8.96840/38.74395
+- **112075** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93674&mlon=38.75168#map=18/8.93674/38.75168
+- **112088** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97376&mlon=38.76321#map=18/8.97376/38.76321
+- **112112** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96919&mlon=38.75633#map=18/8.96919/38.75633
+- **112129** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93595&mlon=38.74751#map=18/8.93595/38.74751
+- **112157** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92704&mlon=38.71202#map=18/8.92704/38.71202
+- **112166** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.91802&mlon=38.73486#map=18/8.91802/38.73486
+- **112167** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93300&mlon=38.72612#map=18/8.93300/38.72612
+- **112169** · telecommunication · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94448&mlon=38.72506#map=18/8.94448/38.72506
+- **112184** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94993&mlon=38.71890#map=18/8.94993/38.71890
+- **112193** · telecommunication · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94100&mlon=38.72685#map=18/8.94100/38.72685
+- **112211** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95267&mlon=38.74498#map=18/8.95267/38.74498
+- **112212** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.91115&mlon=38.73405#map=18/8.91115/38.73405
+- **112229** · telecommunication · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94126&mlon=38.71466#map=18/8.94126/38.71466
+- **112239** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97393&mlon=38.74371#map=18/8.97393/38.74371
+- **117107** · telecommunication · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94886&mlon=38.72913#map=18/8.94886/38.72913
+- **117108** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95591&mlon=38.71216#map=18/8.95591/38.71216
+- **3F (Finfine Furniture Factory)** · furniture · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95605&mlon=38.76361#map=18/8.95605/38.76361
+- **Abadir Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94891&mlon=38.72828#map=18/8.94891/38.72828
+- **Abdi's Mobile** · mobile phone · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97656&mlon=38.75999#map=18/8.97656/38.75999
+- **Abegaz Motors Engineering** (አበጋዝ ሞተርስ ኢንጅነሪንግ) · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 465 1553 · map https://www.openstreetmap.org/?mlat=8.98529&mlon=38.74649#map=18/8.98529/38.74649
+- **AddiNet** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95645&mlon=38.71276#map=18/8.95645/38.71276
+- **Addis Dawit Hydroulik Hose Work** (አዲስ ዳዊት ኃይድሮሊክ ሆዝ ስራ) · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98389&mlon=38.75037#map=18/8.98389/38.75037
+- **Addis Home Depot** · doityourself · South Africa Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98963&mlon=38.72348#map=18/8.98963/38.72348
+- **Addis Home Depot** (አዲስ ሆም ዴፖ) · convenience · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98971&mlon=38.72341#map=18/8.98971/38.72341
+- **Afla Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97623&mlon=38.74869#map=18/8.97623/38.74869
+- **Ahadu Kitchen Appliances** · hardware · Around Haile Garment Total Fuel Station, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93123&mlon=38.73189#map=18/8.93123/38.73189
+- **Aisha Bottled Water Sales** (አይሻ የታሸገ ውሃ ማከፋፈያ) · alcohol · NL_12_4821 St., Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Su 08:00-07:00 · map https://www.openstreetmap.org/?mlat=8.95402&mlon=38.74142#map=18/8.95402/38.74142
+- **Akbe Internet Cafe** (ኢንተርነት ቤት) · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Su 07:00-20:30 · map https://www.openstreetmap.org/?mlat=8.94882&mlon=38.73228#map=18/8.94882/38.73228
+- **Aman Beleche** (አማን) · confectionery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95918&mlon=38.71072#map=18/8.95918/38.71072
+- **Arki Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96713&mlon=38.72048#map=18/8.96713/38.72048
+- **ashe bolo** (አሼ ቦሎ) · car parts · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96879&mlon=38.72587#map=18/8.96879/38.72587
+- **Ashu Mobile center** · mobile phone · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97456&mlon=38.76056#map=18/8.97456/38.76056
+- **Asnake Greengrocery** (አስናቀ ግሪን ግሮስሪ) · greengrocer · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97249&mlon=38.73086#map=18/8.97249/38.73086
+- **Awash Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94540&mlon=38.75791#map=18/8.94540/38.75791
+- **Awash bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94806&mlon=38.71806#map=18/8.94806/38.71806
+- **Ayu bakery and pastry** · bakery · Hana Mariam, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92845&mlon=38.74173#map=18/8.92845/38.74173
+- **Ayu Bakery and Pastry** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98422&mlon=38.75024#map=18/8.98422/38.75024
+- **B.T General Auto Service (Garage)** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97458&mlon=38.74325#map=18/8.97458/38.74325
+- **Baby Mobile & Computer Solution** · mobile phone · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98053&mlon=38.76207#map=18/8.98053/38.76207
+- **Belayab Motors Repair shop** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96351&mlon=38.76471#map=18/8.96351/38.76471
+- **Belayab Motors** · car · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96028&mlon=38.76414#map=18/8.96028/38.76414
+- **Belive** (ብሊቭ) · printer · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97842&mlon=38.75974#map=18/8.97842/38.75974
+- **Belive** (ብልቭ) · copyshop · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Fr 08:30-12:30,13:00-20:00; Sa 8:30-12:30 · map https://www.openstreetmap.org/?mlat=8.97847&mlon=38.75974#map=18/8.97847/38.75974
+- **Bereka Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.96539&mlon=38.74859#map=18/8.96539/38.74859
+- **Bereka Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96540&mlon=38.74859#map=18/8.96540/38.74859
+- **Berket Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95666&mlon=38.71595#map=18/8.95666/38.71595
+- **Betopia Properties** · estate agent · www.betopiahomes.com, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98708&mlon=38.73781#map=18/8.98708/38.73781
+- **beza** · car wash · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96015&mlon=38.76972#map=18/8.96015/38.76972
+- **binyam breck lingn and clutch repair** (ቢንያም የፍሬን እና የፍሪሲዮን ሸራ ስራ) · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98362&mlon=38.75059#map=18/8.98362/38.75059
+- **Brothers Mini Market** · convenience · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.95740&mlon=38.71276#map=18/8.95740/38.71276
+- **CANDLS Wheel Alignment & Paint Booth Service** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.addismap.com/candlsalignment · map https://www.openstreetmap.org/?mlat=8.97744&mlon=38.76152#map=18/8.97744/38.76152
+- **Car Wash** · car wash · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95529&mlon=38.71436#map=18/8.95529/38.71436
+- **Chere Men's Beauty Salon** (ቸሬ የወንዳች የውበት ሳሎን) · beauty · ሃይሌ ጋርመንት / Haile Garment, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Su 09:00-21:00 · map https://www.openstreetmap.org/?mlat=8.93465&mlon=38.73262#map=18/8.93465/38.73262
+- **Coba Dabo Bet** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95822&mlon=38.69887#map=18/8.95822/38.69887
+- **CTP Ethiopia Business PLC** · car · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96259&mlon=38.76317#map=18/8.96259/38.76317
+- **Daemat Ethiopia Tour and Travel Agency** (ዳዕማት ኢትዮጽያ አስጎብኝና የጉዞ ወኪል) · travel agency · F5-O6 Gofa Gabriel Eth-Yibarek Bld., Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 470 3959 · https://www.daematethtourandtravel.com/ · hours Mo-Sa 08:00-08:00, 17:00-17:00 · map https://www.openstreetmap.org/?mlat=8.97337&mlon=38.74334#map=18/8.97337/38.74334
+- **Dallas Drug Store** · chemist · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96527&mlon=38.73270#map=18/8.96527/38.73270
+- **DAMA trade** · electrical · 1823 Egypt Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 371 6876 / +251 11 320 2105 · hours Sa 08:00-12:00; Mo-Fr 08:00-17:00 · map https://www.openstreetmap.org/?mlat=8.98836&mlon=38.73862#map=18/8.98836/38.73862
+- **Daniel Garage** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97319&mlon=38.74255#map=18/8.97319/38.74255
+- **Deluxe Furniture** · furniture · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96190&mlon=38.71593#map=18/8.96190/38.71593
+- **Derese & Aklil Garage** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96865&mlon=38.74810#map=18/8.96865/38.74810
+- **Diva massage** · massage · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98730&mlon=38.73739#map=18/8.98730/38.73739
+- **Embwa ice cream** · confectionery · South Africa Street, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99495&mlon=38.72854#map=18/8.99495/38.72854
+- **Emwedesh bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94686&mlon=38.74494#map=18/8.94686/38.74494
+- **Enat Abysinnia Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96016&mlon=38.76941#map=18/8.96016/38.76941
+- **endal bat lamera 2** (እንዳለ ባት ላሜራ 1) · car parts · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96789&mlon=38.74828#map=18/8.96789/38.74828
+- **endale bat lamera** (እንዳለ ባት ላሜራ) · car parts · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96709&mlon=38.74850#map=18/8.96709/38.74850
+- **Endo Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94843&mlon=38.74435#map=18/8.94843/38.74435
+- **Ertib** (እርጥብ ቤት) · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95862&mlon=38.77165#map=18/8.95862/38.77165
+- **Essay Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.97455&mlon=38.73106#map=18/8.97455/38.73106
+- **Essay Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95244&mlon=38.71596#map=18/8.95244/38.71596
+- **Essay Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97445&mlon=38.73111#map=18/8.97445/38.73111
+- **ETHIO CHIS MAWCHA** · car · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97910&mlon=38.74990#map=18/8.97910/38.74990
+- **Etu Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.96672&mlon=38.74861#map=18/8.96672/38.74861
+- **Etu Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96672&mlon=38.74860#map=18/8.96672/38.74860
+- **Fresh Corner** · greengrocer · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95249&mlon=38.71590#map=18/8.95249/38.71590
+- **Fresh Corner** · greengrocer · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98712&mlon=38.73738#map=18/8.98712/38.73738
+- **Frie Massage** (ፍሬ ማሳጅ) · massage · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96095&mlon=38.76692#map=18/8.96095/38.76692
+- **Furno Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94690&mlon=38.74292#map=18/8.94690/38.74292
+- **Gash Gere Kera mechanic** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97361&mlon=38.74474#map=18/8.97361/38.74474
+- **Gedeb Engineering PLC (John Deere)** · agricultural engines · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96325&mlon=38.74872#map=18/8.96325/38.74872
+- **German Square** · car wash · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96255&mlon=38.72600#map=18/8.96255/38.72600
+- **Gezash Sook** · kiosk · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96603&mlon=38.76091#map=18/8.96603/38.76091
+- **Gilando Biomedical Solution PLC main office** · outdoor · 3 Labu, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · http://www.gilando.com.et · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.95261&mlon=38.71564#map=18/8.95261/38.71564
+- **Guarag yenaw Lafto** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93978&mlon=38.75020#map=18/8.93978/38.75020
+- **GUARAGE WEBE** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98094&mlon=38.75173#map=18/8.98094/38.75173
+- **Habesha Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97156&mlon=38.74166#map=18/8.97156/38.74166
+- **Haimi Cake - Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94972&mlon=38.73163#map=18/8.94972/38.73163
+- **Hanit Bakery** (ሃኒት ዳቦ) · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98271&mlon=38.73374#map=18/8.98271/38.73374
+- **Happiness Furniture** · furniture · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97344&mlon=38.76087#map=18/8.97344/38.76087
+- **Hawaz Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.95367&mlon=38.74480#map=18/8.95367/38.74480
+- **Hawi Internet Cafe** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95906&mlon=38.77093#map=18/8.95906/38.77093
+- **Hira Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95747&mlon=38.77292#map=18/8.95747/38.77292
+- **Hira Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96051&mlon=38.76835#map=18/8.96051/38.76835
+- **Home Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96900&mlon=38.74364#map=18/8.96900/38.74364
+- **Home** · beverages · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97667&mlon=38.72292#map=18/8.97667/38.72292
+- **iNaod Computer Repairs** · computer · Lebu, Ashu Bucher House, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Fr 09:00-17:00 · map https://www.openstreetmap.org/?mlat=8.94929&mlon=38.72288#map=18/8.94929/38.72288
+- **Infinity Internet Cafe** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.95874&mlon=38.71164#map=18/8.95874/38.71164
+- **Kadisco saris** (ካዲስኮ ሳሪስ) · beauty · 102 Debre Zeit Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96615&mlon=38.76329#map=18/8.96615/38.76329
+- **Kebe Pastry** · pastry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94893&mlon=38.72222#map=18/8.94893/38.72222
+- **Kera area garage** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97879&mlon=38.74653#map=18/8.97879/38.74653
+- **Kidus laundry** · laundry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95677&mlon=38.69125#map=18/8.95677/38.69125
+- **King Barber Shop** (ኪንግ የወንዶች ውበት ቤት) · hairdresser · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Su 08:00-21:00 · map https://www.openstreetmap.org/?mlat=8.94696&mlon=38.74513#map=18/8.94696/38.74513
+- **Lala Audio-video** (ላላ ኦዲኦ ቪዲኦ) · music · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97275&mlon=38.73065#map=18/8.97275/38.73065
+- **Lali Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94801&mlon=38.73707#map=18/8.94801/38.73707
+- **Lali Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95223&mlon=38.74468#map=18/8.95223/38.74468
+- **Laundry** · laundry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96579&mlon=38.74449#map=18/8.96579/38.74449
+- **Leza bakery and Pastry** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96916&mlon=38.72124#map=18/8.96916/38.72124
+- **Light Rail Ticket Shop** (የቀላል ባቡር ቲኬት ሱቅ) · ticket · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97279&mlon=38.76062#map=18/8.97279/38.76062
+- **Lina Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95088&mlon=38.68732#map=18/8.95088/38.68732
+- **Lio Guarage sino importer** · car parts · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94615&mlon=38.73643#map=18/8.94615/38.73643
+- **Liyan Oil** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97615&mlon=38.74608#map=18/8.97615/38.74608
+- **Liyu Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95234&mlon=38.74487#map=18/8.95234/38.74487
+- **Loza Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95409&mlon=38.69270#map=18/8.95409/38.69270
+- **Malefia Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95391&mlon=38.69318#map=18/8.95391/38.69318
+- **Mama's Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97678&mlon=38.72243#map=18/8.97678/38.72243
+- **Marathon Motor's** · car · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95895&mlon=38.76368#map=18/8.95895/38.76368
+- **Markos butchery** (ማርቆስ ስጋ ቤት) · butcher · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97232&mlon=38.73129#map=18/8.97232/38.73129
+- **Master car key** (ማስተር የመኪና ቁልፍ) · car parts · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96707&mlon=38.74831#map=18/8.96707/38.74831
+- **Mati Drug Store** · chemist · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95544&mlon=38.71475#map=18/8.95544/38.71475
+- **Matiwos break ling works** (ማቲዎስ ፍሬን ሸራ ስራ) · car parts · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 02:00-12:00 · map https://www.openstreetmap.org/?mlat=8.97998&mlon=38.75015#map=18/8.97998/38.75015
+- **Meheret** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95785&mlon=38.71494#map=18/8.95785/38.71494
+- **Meki Grocery** (መኪ ግሮሰሪ) · alcohol · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96138&mlon=38.76753#map=18/8.96138/38.76753
+- **Mekoya Sook** · kiosk · 1764, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97820&mlon=38.76127#map=18/8.97820/38.76127
+- **Men Hairdresser - Barber** · hairdresser · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94758&mlon=38.73422#map=18/8.94758/38.73422
+- **Menex B** · mobile phone · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96529&mlon=38.72469#map=18/8.96529/38.72469
+- **mengtu tadese TATA garage** (መንግስቱ ታደሰ የ ታታ መኪናዎች ጥገና) · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97987&mlon=38.74956#map=18/8.97987/38.74956
+- **Mesay Butcher and restaurant** · butcher · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98123&mlon=38.74946#map=18/8.98123/38.74946
+- **Mesfen** · butcher · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96007&mlon=38.71337#map=18/8.96007/38.71337
+- **Mimo Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94623&mlon=38.73886#map=18/8.94623/38.73886
+- **Mina Furniture** · furniture · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95931&mlon=38.70900#map=18/8.95931/38.70900
+- **Modern Bakery** (ሞደርን ዳቦ መጋገሪያ) · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94894&mlon=38.72734#map=18/8.94894/38.72734
+- **MSAG- 1907** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95293&mlon=38.74477#map=18/8.95293/38.74477
+- **MSAG-1901** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94543&mlon=38.74771#map=18/8.94543/38.74771
+- **MSAG-1902** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94540&mlon=38.75013#map=18/8.94540/38.75013
+- **MSAG-1903** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94496&mlon=38.75138#map=18/8.94496/38.75138
+- **MSAG-1904** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94722&mlon=38.74626#map=18/8.94722/38.74626
+- **MSAG-1905** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94947&mlon=38.74566#map=18/8.94947/38.74566
+- **MSAG-1906** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94952&mlon=38.74451#map=18/8.94952/38.74451
+- **MSAG-1908** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95287&mlon=38.74531#map=18/8.95287/38.74531
+- **MSAG-1909** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94712&mlon=38.74294#map=18/8.94712/38.74294
+- **MSAG-1910** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94636&mlon=38.74315#map=18/8.94636/38.74315
+- **MSAG-1911** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94636&mlon=38.74958#map=18/8.94636/38.74958
+- **MSAG-1912** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94981&mlon=38.74228#map=18/8.94981/38.74228
+- **MSAG-1913** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94800&mlon=38.73492#map=18/8.94800/38.73492
+- **MSAG-1914** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93830&mlon=38.74815#map=18/8.93830/38.74815
+- **MSAG-1915** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93862&mlon=38.74072#map=18/8.93862/38.74072
+- **MSAG-1916** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93509&mlon=38.74573#map=18/8.93509/38.74573
+- **MSAG-1917** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93510&mlon=38.74486#map=18/8.93510/38.74486
+- **MSAG-1918** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95420&mlon=38.74540#map=18/8.95420/38.74540
+- **MSAG-1919** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94918&mlon=38.74936#map=18/8.94918/38.74936
+- **Mullege Pvt.Ltd.Co** · wholesale · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96773&mlon=38.76164#map=18/8.96773/38.76164
+- **Mulmul Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94872&mlon=38.73212#map=18/8.94872/38.73212
+- **Mulmul bakery** (ሙልሙል ዳቦ መጋገሪያ) · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99243&mlon=38.72673#map=18/8.99243/38.72673
+- **Mulu massage** · cosmetics · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99633&mlon=38.73012#map=18/8.99633/38.73012
+- **Munir Building Materials** (ሙኒር ህንፃ መሳሪያ) · doityourself · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 416 8254 · map https://www.openstreetmap.org/?mlat=8.98334&mlon=38.74975#map=18/8.98334/38.74975
+- **NA Engineering** · car repair · Debre Zeit Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96732&mlon=38.76435#map=18/8.96732/38.76435
+- **Nadisun Mini Market** · convenience · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99183&mlon=38.73801#map=18/8.99183/38.73801
+- **Nather Furniter PLC (show room)** (ናዛር ፉርኒቸች ( ሾው ሩም) · furniture · Ring Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 00:00-24:00 · map https://www.openstreetmap.org/?mlat=8.94820&mlon=38.73224#map=18/8.94820/38.73224
+- **Negist** · gift · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99794&mlon=38.72706#map=18/8.99794/38.72706
+- **Panda IT Technologies** · computer · 302 kerra to goffa road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 10:00-22:00 · map https://www.openstreetmap.org/?mlat=8.98201&mlon=38.74948#map=18/8.98201/38.74948
+- **Rak Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96187&mlon=38.71580#map=18/8.96187/38.71580
+- **RAM Family Engineering** (ራም ፋሚሊ ኢንጅነሪንግ) · electronics · run by Mesfin Solomon · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96871&mlon=38.74768#map=18/8.96871/38.74768
+- **Rami Cosmetics** · cosmetics · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95677&mlon=38.71263#map=18/8.95677/38.71263
+- **Ramsay Shoe** (ራምሴ ጫማ) · shoes · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98306&mlon=38.75005#map=18/8.98306/38.75005
+- **Rome Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94993&mlon=38.71983#map=18/8.94993/38.71983
+- **Rosa Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96742&mlon=38.72064#map=18/8.96742/38.72064
+- **Rukia Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97001&mlon=38.72276#map=18/8.97001/38.72276
+- **Ruti Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94705&mlon=38.74594#map=18/8.94705/38.74594
+- **Sabahar Shop** · gift · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98063&mlon=38.72245#map=18/8.98063/38.72245
+- **Sabahar** · gift · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97993&mlon=38.72295#map=18/8.97993/38.72295
+- **Sehne** · beauty · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96155&mlon=38.77217#map=18/8.96155/38.77217
+- **Semere Garage** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97205&mlon=38.74217#map=18/8.97205/38.74217
+- **Seya dish** (ሰያ ዲሽ) · shoemaker · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95565&mlon=38.71292#map=18/8.95565/38.71292
+- **Sheger Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94914&mlon=38.72476#map=18/8.94914/38.72476
+- **Shewit Garage** (ሸዊት ጋራዥ) · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97336&mlon=38.75527#map=18/8.97336/38.75527
+- **Shewit Guarag** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97337&mlon=38.75525#map=18/8.97337/38.75525
+- **Shoa Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95621&mlon=38.71423#map=18/8.95621/38.71423
+- **Shoa dabo** (ሻዋ ዳቦ) · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97400&mlon=38.73178#map=18/8.97400/38.73178
+- **Shoa** (ሸዋ) · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95468&mlon=38.76344#map=18/8.95468/38.76344
+- **Sirak** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97407&mlon=38.74385#map=18/8.97407/38.74385
+- **Sis** (ሲስ) · cosmetics · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.95952&mlon=38.71468#map=18/8.95952/38.71468
+- **Sisfam Pastry and Cafe** · pastry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.95554&mlon=38.71393#map=18/8.95554/38.71393
+- **SK Best Furniture** · furniture · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96097&mlon=38.71474#map=18/8.96097/38.71474
+- **Smart Barber** · hairdresser · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99506&mlon=38.73025#map=18/8.99506/38.73025
+- **Smart Garage** (ስማርት ጋራጅ) · car repair · Mebrat Haile Condominium, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97048&mlon=38.74314#map=18/8.97048/38.74314
+- **Smart Garage** (ስማርት ጋራጅ) · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-17:00 · map https://www.openstreetmap.org/?mlat=8.97044&mlon=38.74314#map=18/8.97044/38.74314
+- **sndu copy shop** (ስንዱ ኮፒ) · copyshop · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98020&mlon=38.74995#map=18/8.98020/38.74995
+- **Sofet ,Haydrolics Teklay** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96484&mlon=38.73679#map=18/8.96484/38.73679
+- **sole rolfo** (ሶል ሮልፎ) · car parts · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97436&mlon=38.74899#map=18/8.97436/38.74899
+- **Solina Sofa** · furniture · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97318&mlon=38.73160#map=18/8.97318/38.73160
+- **Sook** · kiosk · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97800&mlon=38.76136#map=18/8.97800/38.76136
+- **Stationery & Secretary Service** · stationery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97322&mlon=38.76095#map=18/8.97322/38.76095
+- **Sun optics - Bisrate gebrael branch** (ሣን ኦፕቲክስ - ብስራተ ገብርኤል ቅርንጫፍ) · optician · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.sunopticaltechnologies.com/ · hours Mo-Sa 09:00-17:30 · map https://www.openstreetmap.org/?mlat=8.99141&mlon=38.72582#map=18/8.99141/38.72582
+- **Sun Optics - Lebu Branch** (ሣን ኦፕቲክስ - ለቡ ቅርንጫፍ) · optician · Varnero Real Estate, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://www.sunopticaltechnologies.com/ · hours Mo-Sa 09:00-17:30 · map https://www.openstreetmap.org/?mlat=8.94924&mlon=38.72424#map=18/8.94924/38.72424
+- **Sunshine Laundary** · laundry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 868 9407 · map https://www.openstreetmap.org/?mlat=8.96206&mlon=38.71609#map=18/8.96206/38.71609
+- **Sunshine Laundry No.15** (ሰንሻይን ላውንደሪ ቁ.15) · laundry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 878 7546 · map https://www.openstreetmap.org/?mlat=8.98601&mlon=38.73785#map=18/8.98601/38.73785
+- **Sunshine Laundry No.3** (ሰንሻይን ላውንደሪ ቁ.3) · laundry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 372 8719 · map https://www.openstreetmap.org/?mlat=8.99452&mlon=38.72806#map=18/8.99452/38.72806
+- **Sunshine Laundry No.4** (ሰንሻይን ላውንደሪ ቁ.4) · laundry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 872 0948 · map https://www.openstreetmap.org/?mlat=8.98932&mlon=38.72184#map=18/8.98932/38.72184
+- **Sunshine laundry** · laundry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94826&mlon=38.72945#map=18/8.94826/38.72945
+- **Sunshine Laundry** · laundry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98604&mlon=38.73783#map=18/8.98604/38.73783
+- **Sunshine Laundry** · laundry · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99455&mlon=38.72811#map=18/8.99455/38.72811
+- **Suzuki Automotive Service** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96893&mlon=38.72950#map=18/8.96893/38.72950
+- **Taba Meseret** · cosmetics · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96202&mlon=38.76850#map=18/8.96202/38.76850
+- **Take Burger** · stationery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Su 08:00-02:30 · map https://www.openstreetmap.org/?mlat=8.97338&mlon=38.76088#map=18/8.97338/38.76088
+- **Tamirat Garage Body Repair** (ታምራት ጋራጅ ባት ላሜራ) · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97493&mlon=38.73597#map=18/8.97493/38.73597
+- **Tamirat Teka Garage** (ታምራት ተካ ጋራጅ) · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97534&mlon=38.73452#map=18/8.97534/38.73452
+- **Tasty Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94962&mlon=38.72041#map=18/8.94962/38.72041
+- **Tati Mar Bekery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95924&mlon=38.70872#map=18/8.95924/38.70872
+- **Telkam Trading Plc** (ቴልካም ትሬዲንግ ኃ.የተ.የግ.ማህ) · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 465 4618 / +251 11 439 6517 / +251 11 439 6518 · map https://www.openstreetmap.org/?mlat=8.98414&mlon=38.74992#map=18/8.98414/38.74992
+- **Tes** · cosmetics · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96950&mlon=38.73659#map=18/8.96950/38.73659
+- **Tigest Fire Fighting Equipment & Cylinger Gas Retail Trade** · gas · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · tel +251 11 470 8411 · map https://www.openstreetmap.org/?mlat=8.97400&mlon=38.76069#map=18/8.97400/38.76069
+- **Trio Craft Production Center** (ትሪዮ ክራፍት - ማምረቻ) · clothes · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96219&mlon=38.76605#map=18/8.96219/38.76605
+- **Tutto Gelato** · confectionery · Alexander Pushkin Avenue, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99252&mlon=38.73921#map=18/8.99252/38.73921
+- **ULTIMATE MOTORS** · car · Debre Zeit Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97235&mlon=38.76146#map=18/8.97235/38.76146
+- **Vanilla Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94657&mlon=38.74070#map=18/8.94657/38.74070
+- **Victory Department Store** (ድል ገበያ) · convenience · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99326&mlon=38.72675#map=18/8.99326/38.72675
+- **Viro Garden Furniture** · furniture · Ring Road, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96179&mlon=38.76766#map=18/8.96179/38.76766
+- **WD Auto Service** · car repair · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98259&mlon=38.72755#map=18/8.98259/38.72755
+- **Worku Electronics** · electronics · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98213&mlon=38.75606#map=18/8.98213/38.75606
+- **Wow Purified Water HQ** · beverages · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96172&mlon=38.71512#map=18/8.96172/38.71512
+- **Yeamrot Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95768&mlon=38.69958#map=18/8.95768/38.69958
+- **Yehulum Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95151&mlon=38.68927#map=18/8.95151/38.68927
+- **Yeserim bakery and pastry** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95101&mlon=38.68648#map=18/8.95101/38.68648
+- **Yumna bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95147&mlon=38.68819#map=18/8.95147/38.68819
+- **Zen Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96059&mlon=38.71343#map=18/8.96059/38.71343
+- **Zhel Bakery** · bakery · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96100&mlon=38.71303#map=18/8.96100/38.71303
+- **Zizu Internet Cafe** · internet cafe · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours Mo-Sa 08:00-18:00 · map https://www.openstreetmap.org/?mlat=8.95573&mlon=38.71380#map=18/8.95573/38.71380
+
+## Akaki Kality sub-city · አቃቂ ቃሊቲ ክፍለ ከተማ — 100
+
+- **@KuKuLu Net Cafè** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96024&mlon=38.76904#map=18/8.96024/38.76904
+- **1** (Koye Abo 400kV变电站) · outdoor · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90083&mlon=38.84781#map=18/8.90083/38.84781
+- **111002** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89526&mlon=38.77862#map=18/8.89526/38.77862
+- **111003 - KALITY CERALIYA** (111003 - ቃሊቲ ቸራሊያ) · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90477&mlon=38.76667#map=18/8.90477/38.76667
+- **111005** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93311&mlon=38.77200#map=18/8.93311/38.77200
+- **111033 - KALITY NATAN BULDG.** (111033 - ቃሊቲ ናታን ሕንፃ) · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90080&mlon=38.76729#map=18/8.90080/38.76729
+- **111034** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88151&mlon=38.78278#map=18/8.88151/38.78278
+- **111070** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94817&mlon=38.76514#map=18/8.94817/38.76514
+- **111072** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94095&mlon=38.77479#map=18/8.94095/38.77479
+- **111073** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.91533&mlon=38.76825#map=18/8.91533/38.76825
+- **111111** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94189&mlon=38.76467#map=18/8.94189/38.76467
+- **111115** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95657&mlon=38.76846#map=18/8.95657/38.76846
+- **111132** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.91804&mlon=38.75806#map=18/8.91804/38.75806
+- **111196** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92635&mlon=38.76317#map=18/8.92635/38.76317
+- **111267** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88455&mlon=38.77233#map=18/8.88455/38.77233
+- **111268** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92055&mlon=38.77722#map=18/8.92055/38.77722
+- **111269** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93809&mlon=38.75876#map=18/8.93809/38.75876
+- **111408 - AKAKI TELLE OFFICE** (111408 - አቃቂ ቴሌ ጽ/ቤት) · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86743&mlon=38.78939#map=18/8.86743/38.78939
+- **111415** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95269&mlon=38.76318#map=18/8.95269/38.76318
+- **111436** · telecommunication · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.85106&mlon=38.79014#map=18/8.85106/38.79014
+- **111567** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90976&mlon=38.76048#map=18/8.90976/38.76048
+- **111589** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93346&mlon=38.83195#map=18/8.93346/38.83195
+- **111604** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87474&mlon=38.77828#map=18/8.87474/38.77828
+- **111626 - KALITY TOTAL** (111626 - ቃሊቲ ቶታል) · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89472&mlon=38.77258#map=18/8.89472/38.77258
+- **111637** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93331&mlon=38.76668#map=18/8.93331/38.76668
+- **111658** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90864&mlon=38.77166#map=18/8.90864/38.77166
+- **111661** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92358&mlon=38.76776#map=18/8.92358/38.76776
+- **111673** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87884&mlon=38.81152#map=18/8.87884/38.81152
+- **111674** · telecommunication · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87000&mlon=38.82007#map=18/8.87000/38.82007
+- **111729** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90879&mlon=38.76720#map=18/8.90879/38.76720
+- **111732** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92017&mlon=38.76250#map=18/8.92017/38.76250
+- **111733** · telecommunication · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90034&mlon=38.76358#map=18/8.90034/38.76358
+- **111738** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87112&mlon=38.75228#map=18/8.87112/38.75228
+- **111767** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93213&mlon=38.76243#map=18/8.93213/38.76243
+- **111835** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93681&mlon=38.77020#map=18/8.93681/38.77020
+- **111889** · telecommunication · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92604&mlon=38.84845#map=18/8.92604/38.84845
+- **111890** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89946&mlon=38.82913#map=18/8.89946/38.82913
+- **111892** · telecommunication · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90790&mlon=38.84689#map=18/8.90790/38.84689
+- **111999** · telecommunication · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86034&mlon=38.82489#map=18/8.86034/38.82489
+- **112057** · telecommunication · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89372&mlon=38.84955#map=18/8.89372/38.84955
+- **112089** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95775&mlon=38.76422#map=18/8.95775/38.76422
+- **112089** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95776&mlon=38.76422#map=18/8.95776/38.76422
+- **112137** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89198&mlon=38.78273#map=18/8.89198/38.78273
+- **112141** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88699&mlon=38.80570#map=18/8.88699/38.80570
+- **112142** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86018&mlon=38.80628#map=18/8.86018/38.80628
+- **112148** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87650&mlon=38.79608#map=18/8.87650/38.79608
+- **112151** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92049&mlon=38.80571#map=18/8.92049/38.80571
+- **112164** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89058&mlon=38.76115#map=18/8.89058/38.76115
+- **112165** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90505&mlon=38.78590#map=18/8.90505/38.78590
+- **112180** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90720&mlon=38.75384#map=18/8.90720/38.75384
+- **112181** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89309&mlon=38.84045#map=18/8.89309/38.84045
+- **112191** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93033&mlon=38.77593#map=18/8.93033/38.77593
+- **112198** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88759&mlon=38.78305#map=18/8.88759/38.78305
+- **112209- GELAN CONDOMINIUM** (112209-ገላን ኮንዶሚኒየም) · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.87642&mlon=38.76942#map=18/8.87642/38.76942
+- **112213** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86547&mlon=38.78293#map=18/8.86547/38.78293
+- **112215** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.91121&mlon=38.75075#map=18/8.91121/38.75075
+- **112228 - TULUDIMTU** · telecommunication · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86695&mlon=38.82497#map=18/8.86695/38.82497
+- **112259** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93806&mlon=38.80331#map=18/8.93806/38.80331
+- **114001** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88560&mlon=38.75739#map=18/8.88560/38.75739
+- **117101** · internet cafe · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95137&mlon=38.77028#map=18/8.95137/38.77028
+- **117110** · telecommunication · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89886&mlon=38.81400#map=18/8.89886/38.81400
+- **Bakery** · bakery · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95848&mlon=38.77155#map=18/8.95848/38.77155
+- **Belay Ab Moters Plc** · car rental · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95966&mlon=38.76459#map=18/8.95966/38.76459
+- **Belayab Moters በላይአብ ሞተርስ** · car repair · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86838&mlon=38.79847#map=18/8.86838/38.79847
+- **Building/ብሎክ 26 AASTU** · convenience · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88401&mlon=38.81358#map=18/8.88401/38.81358
+- **El- Berka Bakery** · bakery · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95736&mlon=38.76615#map=18/8.95736/38.76615
+- **Equatorial Business Group** (ኢኩዋቶሪያል ቢዝነስ ግሩፕ) · car · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94626&mlon=38.76391#map=18/8.94626/38.76391
+- **Ethio credit service center** · car repair · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94879&mlon=38.76619#map=18/8.94879/38.76619
+- **Ethio Credit show room Saris** · car · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94854&mlon=38.76617#map=18/8.94854/38.76617
+- **Ethio-Nippon Technical Company S.CO.- Kality Branch** (ኢትዮ-ኒፖን የቴክኒክ ካምፓኒ አ.ማ) · car · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92734&mlon=38.76434#map=18/8.92734/38.76434
+- **Fame Computer Solution Inc.** · internet cafe · run by Zekariyas Bule · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours Mo-Su 08:00-20:00 · map https://www.openstreetmap.org/?mlat=8.89433&mlon=38.77291#map=18/8.89433/38.77291
+- **GOAL Kaliti Warehouse** (ጎል ቃሊቲ መጋዘን) · toys · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89186&mlon=38.77034#map=18/8.89186/38.77034
+- **Hana Construction Material Shop - ሃና የህንፃ መሳሪያዎች መሸጫ** · copyshop · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95244&mlon=38.76146#map=18/8.95244/38.76146
+- **kality driving licence** (ቃሊቲ የአሽከርካሪዎች ማሰልጠኛ) · car · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93270&mlon=38.76676#map=18/8.93270/38.76676
+- **Koket Mini Market** · convenience · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88212&mlon=38.77311#map=18/8.88212/38.77311
+- **koyo Abbo substation** · electronics · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90058&mlon=38.84779#map=18/8.90058/38.84779
+- **Mami Bakery** · bakery · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88171&mlon=38.77093#map=18/8.88171/38.77093
+- **Mimi Beauty** · beauty · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95161&mlon=38.75992#map=18/8.95161/38.75992
+- **Mina Bakery** · bakery · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95733&mlon=38.76461#map=18/8.95733/38.76461
+- **Moenco Kality Branch** · car · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89051&mlon=38.76774#map=18/8.89051/38.76774
+- **Natanim Mini Market** · convenience · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.88067&mlon=38.76893#map=18/8.88067/38.76893
+- **NOC STORE KALITY** · variety store · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92951&mlon=38.75753#map=18/8.92951/38.75753
+- **Nyala Furniture and Building Electric and Water bill** · furniture · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92432&mlon=38.76519#map=18/8.92432/38.76519
+- **Nyala** · furniture · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92429&mlon=38.76515#map=18/8.92429/38.76515
+- **One Stop Service Building (Kilinto Industry Park)** (አንድ አገልግሎት ማዕከል ህንፃ (ቂሊንጦ የኢንዱስትሪ ፓርክ)) · variety store · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90508&mlon=38.81540#map=18/8.90508/38.81540
+- **Rombos siga bet** (ሮምቦስ ስጋ ቤት) · butcher · 3 3, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · hours Th, Sa-Tu 09:00-18:00 · map https://www.openstreetmap.org/?mlat=8.86786&mlon=38.78764#map=18/8.86786/38.78764
+- **Royal Foam and Furniture** (ሮያል ፎም እና ፈርኒቸር) · furniture · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.91575&mlon=38.76158#map=18/8.91575/38.76158
+- **Sanador trading** (ሳናዶር ትሬዲንግ) · electronics · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89468&mlon=38.77294#map=18/8.89468/38.77294
+- **Saris Ries EngineerinSRies** (ሪየስ ኢንጅነሪንግ) · car · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95280&mlon=38.76422#map=18/8.95280/38.76422
+- **Sheger Bread (ሸገር ዳቦ) M** · bakery · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.92163&mlon=38.76412#map=18/8.92163/38.76412
+- **Shoa** (ሸዋ) · bakery · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89854&mlon=38.76886#map=18/8.89854/38.76886
+- **Simon Digital Studio** · photo · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89629&mlon=38.77127#map=18/8.89629/38.77127
+- **Tana Enginering(kality)** (ጣና ኢንጅነሪንግ) · car · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.89173&mlon=38.77485#map=18/8.89173/38.77485
+- **Tilahun Guarage** · tyres · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.91237&mlon=38.75678#map=18/8.91237/38.75678
+- **watts mobile and movie house** (ሞባይል ጥገና እና ፊልም ቤት) · mobile phone · run by Alehegn & temu · akaki gebeya, Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · https://t.me/WATTSMOVIE · hours Mo-Su 01:00-00:00 · map https://www.openstreetmap.org/?mlat=8.86814&mlon=38.78786#map=18/8.86814/38.78786
+- **watts mobile and movie** · mobile phone · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.86796&mlon=38.78819#map=18/8.86796/38.78819
+- **Weyira Transport** (ዓሳ መሸጫ) · seafood · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94412&mlon=38.76675#map=18/8.94412/38.76675
+- **XGMA Ethiopia Service** · car · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · tel +251 11 663 0185 · map https://www.openstreetmap.org/?mlat=8.92241&mlon=38.76473#map=18/8.92241/38.76473
+- **Zad bakkery** · bakery · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.90486&mlon=38.76578#map=18/8.90486/38.76578
+- **ምድብ 2 መሠናክል** · car parts · Akaki Kality sub-city (አቃቂ ቃሊቲ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93419&mlon=38.77127#map=18/8.93419/38.77127
+
+## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 131
+
+- **111030** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03993&mlon=38.71346#map=18/9.03993/38.71346
+- **111035** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05029&mlon=38.70458#map=18/9.05029/38.70458
+- **111048-KAOOJJ** (111048-ካኦ ጄጄ) · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06514&mlon=38.70378#map=18/9.06514/38.70378
+- **111062** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05676&mlon=38.69577#map=18/9.05676/38.69577
+- **111063** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05218&mlon=38.69983#map=18/9.05218/38.69983
+- **111147** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04112&mlon=38.70361#map=18/9.04112/38.70361
+- **111149** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04691&mlon=38.71636#map=18/9.04691/38.71636
+- **111152** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05644&mlon=38.71178#map=18/9.05644/38.71178
+- **111153** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04636&mlon=38.71192#map=18/9.04636/38.71192
+- **111158** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05272&mlon=38.71235#map=18/9.05272/38.71235
+- **111160** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04653&mlon=38.70449#map=18/9.04653/38.70449
+- **111163-ASKO** (111163 አስኮ) · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06429&mlon=38.69778#map=18/9.06429/38.69778
+- **111189** · telecommunication · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00073&mlon=38.70052#map=18/9.00073/38.70052
+- **111210** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03365&mlon=38.70484#map=18/9.03365/38.70484
+- **111213** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01432&mlon=38.71203#map=18/9.01432/38.71203
+- **111394** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04138&mlon=38.71028#map=18/9.04138/38.71028
+- **111410** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03305&mlon=38.68510#map=18/9.03305/38.68510
+- **111426** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04685&mlon=38.68678#map=18/9.04685/38.68678
+- **111431** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02485&mlon=38.71745#map=18/9.02485/38.71745
+- **111431** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02485&mlon=38.71748#map=18/9.02485/38.71748
+- **111551** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02992&mlon=38.70817#map=18/9.02992/38.70817
+- **111561** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04417&mlon=38.69962#map=18/9.04417/38.69962
+- **111562** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03844&mlon=38.70678#map=18/9.03844/38.70678
+- **111580** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05635&mlon=38.70562#map=18/9.05635/38.70562
+- **111638- አስኮ መናሀሪያ** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06700&mlon=38.69367#map=18/9.06700/38.69367
+- **111648 - አስኮ ሊዝ ሰፈር** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05298&mlon=38.69263#map=18/9.05298/38.69263
+- **111651** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03377&mlon=38.71414#map=18/9.03377/38.71414
+- **111676** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03254&mlon=38.69370#map=18/9.03254/38.69370
+- **111676** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03256&mlon=38.69371#map=18/9.03256/38.69371
+- **111696** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02377&mlon=38.71493#map=18/9.02377/38.71493
+- **111742** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03611&mlon=38.69373#map=18/9.03611/38.69373
+- **111744** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05074&mlon=38.70988#map=18/9.05074/38.70988
+- **111838** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04740&mlon=38.69780#map=18/9.04740/38.69780
+- **112127** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05992&mlon=38.68881#map=18/9.05992/38.68881
+- **112128 - ASKO** (112128 - አስኮ ብርጭቆ ሰፈር) · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05982&mlon=38.70240#map=18/9.05982/38.70240
+- **112179** · telecommunication · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01404&mlon=38.68427#map=18/9.01404/38.68427
+- **112187** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00906&mlon=38.68022#map=18/9.00906/38.68022
+- **112235** · telecommunication · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02082&mlon=38.67332#map=18/9.02082/38.67332
+- **ABDURE MOBILE** · mobile phone · 08 KK_07_2288 St., Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00196&mlon=38.67726#map=18/9.00196/38.67726
+- **Abebech Grocery** · alcohol · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06961&mlon=38.69393#map=18/9.06961/38.69393
+- **Addis Beauty Salon** (አዲስ የውበት ሳሎን) · hairdresser · run by Addis · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours Sa-Su 00:00-24:00 · map https://www.openstreetmap.org/?mlat=9.06608&mlon=38.69262#map=18/9.06608/38.69262
+- **adnewu sega bate** (አድነዉ ስጋ ቤት) · butcher · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98294&mlon=38.69849#map=18/8.98294/38.69849
+- **All season food bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98086&mlon=38.68842#map=18/8.98086/38.68842
+- **Atanatera bridge** (አጣነተራ ድልድይ) · car wash · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04193&mlon=38.71242#map=18/9.04193/38.71242
+- **Bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06335&mlon=38.69375#map=18/9.06335/38.69375
+- **Baya Books** · books · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01028&mlon=38.69497#map=18/9.01028/38.69497
+- **berbera** (ወፍጮ በርበሬ) · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98949&mlon=38.70582#map=18/8.98949/38.70582
+- **Broni Bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99328&mlon=38.68763#map=18/8.99328/38.68763
+- **Brother's Bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03574&mlon=38.71452#map=18/9.03574/38.71452
+- **Chillax juice bar #2** (ቺላክስ ጁስ ባር # 2) · beverages · New Ambo Road, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03296&mlon=38.71285#map=18/9.03296/38.71285
+- **chris** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05235&mlon=38.69877#map=18/9.05235/38.69877
+- **chris** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05385&mlon=38.69966#map=18/9.05385/38.69966
+- **Daruselam candy and sweet chocolate p.l.c.** (ዳሩ ሰላም ከረሜላና ጣፋጭ ቸኮሌት plc) · confectionery · 01 Old Ambo Road -የድሮው የአምቦ መንገድ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06194&mlon=38.71198#map=18/9.06194/38.71198
+- **Demesse Shop** · convenience · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06780&mlon=38.69490#map=18/9.06780/38.69490
+- **ELA CONSMOTICS AND COSMO PRODUCT** (ኤላ ኮስሞቲክስ) · beauty · አጠና ተራ አካባቢ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.04208&mlon=38.71364#map=18/9.04208/38.71364
+- **Enbut bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00060&mlon=38.67808#map=18/9.00060/38.67808
+- **English** · car parts · Old Ambo Road -የድሮው የአምቦ መንገድ, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06427&mlon=38.70100#map=18/9.06427/38.70100
+- **EVAD WIFI ZONE** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98039&mlon=38.68502#map=18/8.98039/38.68502
+- **Evan** · car rental · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00613&mlon=38.67734#map=18/9.00613/38.67734
+- **Fasika grocery** · butcher · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99596&mlon=38.68331#map=18/8.99596/38.68331
+- **FILIDORO** (ፊሊዶሮ) · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03334&mlon=38.68525#map=18/9.03334/38.68525
+- **Fraole Beauty Salon** · hairdresser · run by Addis · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours Sa-Su 00:00-24:00 · map https://www.openstreetmap.org/?mlat=9.06829&mlon=38.69365#map=18/9.06829/38.69365
+- **furniture** · furniture · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00421&mlon=38.70509#map=18/9.00421/38.70509
+- **Girar Condominium** (ግራር ኮንዶሚኒየም) · bookmaker · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98381&mlon=38.68281#map=18/8.98381/38.68281
+- **Hani bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95988&mlon=38.68847#map=18/8.95988/38.68847
+- **Hanit bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97979&mlon=38.68598#map=18/8.97979/38.68598
+- **hasen jirra car wash** (ሀሰንጂራ መኪና ማጠቢያ) · car wash · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98155&mlon=38.69294#map=18/8.98155/38.69294
+- **Hira Bakery and Pastry** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99679&mlon=38.68285#map=18/8.99679/38.68285
+- **Jalene stationary & internet-cafe** · stationery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00396&mlon=38.69219#map=18/9.00396/38.69219
+- **KOLFE KERANIYO BETEL YENE KIRINCHAF ABEL** · car · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00419&mlon=38.69370#map=18/9.00419/38.69370
+- **Kolfe Muslims Graveyard** (ኮልፌ የሙስሊም መካነ መቃብር) · funeral directors · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04333&mlon=38.70368#map=18/9.04333/38.70368
+- **Loga menswear production** (ሎጋ የወንዶች አልባሳት) · clothes · run by General manager · KK_07_2273 St., Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · http://logawears.com · hours Mo-Su 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.00397&mlon=38.68861#map=18/9.00397/38.68861
+- **Loga wears** (ሎጋ የወንዶች አልባሳት) · clothes · KK_07_2273 St., Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · http://www.logawears.com · hours Mo-Su 09:00-18:00 · map https://www.openstreetmap.org/?mlat=9.00399&mlon=38.68879#map=18/9.00399/38.68879
+- **Mass Bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98782&mlon=38.69316#map=18/8.98782/38.69316
+- **medhanialem church** · books · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01749&mlon=38.70470#map=18/9.01749/38.70470
+- **Milano Bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00405&mlon=38.68972#map=18/9.00405/38.68972
+- **MSAG- 1201** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04145&mlon=38.70758#map=18/9.04145/38.70758
+- **MSAG-1202** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04673&mlon=38.70089#map=18/9.04673/38.70089
+- **MSAG-1203** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04618&mlon=38.70663#map=18/9.04618/38.70663
+- **MSAG-1204** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04795&mlon=38.70871#map=18/9.04795/38.70871
+- **MSAG-1206** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03956&mlon=38.71284#map=18/9.03956/38.71284
+- **MSAG-1207** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03875&mlon=38.71085#map=18/9.03875/38.71085
+- **MSAG-1208** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04762&mlon=38.71307#map=18/9.04762/38.71307
+- **MSAG-1209** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04446&mlon=38.71084#map=18/9.04446/38.71084
+- **MSAG-1210** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03625&mlon=38.70654#map=18/9.03625/38.70654
+- **MSAG-1211** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03967&mlon=38.71052#map=18/9.03967/38.71052
+- **MSAG-1212** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05178&mlon=38.70900#map=18/9.05178/38.70900
+- **MSAG-1214** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03255&mlon=38.70767#map=18/9.03255/38.70767
+- **MSAG-1215** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03349&mlon=38.70784#map=18/9.03349/38.70784
+- **MSAG-1218** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03258&mlon=38.70796#map=18/9.03258/38.70796
+- **MSAG-1219** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03328&mlon=38.71441#map=18/9.03328/38.71441
+- **MSAG-1220** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02897&mlon=38.71270#map=18/9.02897/38.71270
+- **MSAG-1224** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04049&mlon=38.71325#map=18/9.04049/38.71325
+- **MSAG-1225** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03964&mlon=38.71368#map=18/9.03964/38.71368
+- **MSAG-1226** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04032&mlon=38.71585#map=18/9.04032/38.71585
+- **MSAG-1227** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03716&mlon=38.71420#map=18/9.03716/38.71420
+- **MSAG-2101** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06377&mlon=38.69878#map=18/9.06377/38.69878
+- **MSAG-2102** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06127&mlon=38.70130#map=18/9.06127/38.70130
+- **MSAG-2103** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05935&mlon=38.70290#map=18/9.05935/38.70290
+- **MSAG-2104** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06547&mlon=38.69353#map=18/9.06547/38.69353
+- **MSAG-2105** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06608&mlon=38.69351#map=18/9.06608/38.69351
+- **MSAG-2106** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06485&mlon=38.68975#map=18/9.06485/38.68975
+- **MSAG-2107** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05865&mlon=38.69093#map=18/9.05865/38.69093
+- **MSAG-2108** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05858&mlon=38.69107#map=18/9.05858/38.69107
+- **MSAG-2110** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05827&mlon=38.70667#map=18/9.05827/38.70667
+- **MSAG-2111** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05820&mlon=38.70640#map=18/9.05820/38.70640
+- **MSAG-2112** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05346&mlon=38.69863#map=18/9.05346/38.69863
+- **MSAG-2116** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05354&mlon=38.70104#map=18/9.05354/38.70104
+- **MSAG-2118** · internet cafe · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05858&mlon=38.69084#map=18/9.05858/38.69084
+- **My Bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05682&mlon=38.70007#map=18/9.05682/38.70007
+- **nejela internet cafe** · copyshop · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04427&mlon=38.69827#map=18/9.04427/38.69827
+- **niam internet cafe** · copyshop · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05124&mlon=38.70965#map=18/9.05124/38.70965
+- **Nocha Stove shop and maintenance** (ኖቻ ምጣድ መሸጫና ማደሻ) · electronics · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03218&mlon=38.70741#map=18/9.03218/38.70741
+- **Peach Pastry** · pastry · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00436&mlon=38.68431#map=18/9.00436/38.68431
+- **Selam bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97662&mlon=38.67759#map=18/8.97662/38.67759
+- **Sun Optics - Ayer Tena Branch** (ሣን ኦፕቲስ - አየር ጤና ቅርንጫፍ) · optician · አየርጤና, Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · https://www.sunopticaltechnologies.com/ · hours Mo-Sa 08:30-17:30 · map https://www.openstreetmap.org/?mlat=8.98426&mlon=38.69651#map=18/8.98426/38.69651
+- **Sunshine Laundry No.16** (ሰንሻይን ላውንደሪ ቁ.16) · laundry · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · tel +251 11 878 7554 · map https://www.openstreetmap.org/?mlat=9.00638&mlon=38.69506#map=18/9.00638/38.69506
+- **Tesfaye and his family wood work** · doityourself · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01825&mlon=38.70812#map=18/9.01825/38.70812
+- **TG Grocery** (ቲጂ ግሮሰሪ) · alcohol · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02801&mlon=38.71471#map=18/9.02801/38.71471
+- **Tikus Dabo Bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05632&mlon=38.69987#map=18/9.05632/38.69987
+- **Tirar Bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.05857&mlon=38.70651#map=18/9.05857/38.70651
+- **Usmi Bakery and Sweet** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00407&mlon=38.69398#map=18/9.00407/38.69398
+- **Waliya Bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.00048&mlon=38.67761#map=18/9.00048/38.67761
+- **welete Silase church** (ወለቴ ስላሴ ቤ/ክ) · funeral directors · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96636&mlon=38.66270#map=18/8.96636/38.66270
+- **Yemserach bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96056&mlon=38.68767#map=18/8.96056/38.68767
+- **Zenbework market area** (ዘነበወርቅ የገበያ አዳራሽ) · clothes · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98444&mlon=38.70567#map=18/8.98444/38.70567
+- **Zenebewerk Bus Station** · ticket · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98241&mlon=38.70611#map=18/8.98241/38.70611
+- **Zhel bakery** · bakery · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95774&mlon=38.69021#map=18/8.95774/38.69021
+- **تسوق** · clothes · KK_07_2302 St., Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01423&mlon=38.70377#map=18/9.01423/38.70377
+- **መኩ ሞባይል ጥገና እና ሽያጭ** · electronics repair · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06562&mlon=38.69268#map=18/9.06562/38.69268
+- **አጠና መሸጫ** · variety store · Kolfe Keranio sub-city (ኮልፌ ቀራኒዮ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99058&mlon=38.68912#map=18/8.99058/38.68912

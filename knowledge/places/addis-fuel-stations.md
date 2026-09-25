@@ -3,12 +3,12 @@ title: "Fuel stations in Addis Ababa (ነዳጅ ማደያዎች)"
 url: "https://www.openstreetmap.org/relation/1707699"
 lang: "en"
 source_name: "OpenStreetMap contributors (ODbL)"
-fetched: "2026-05-31"
+fetched: "2026-09-24"
 count: "113"
 ---
 # Fuel stations in Addis Ababa · በአዲስ አበባ ያሉ ነዳጅ ማደያዎች
 
-113 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-05-31. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
+113 named places, grouped by sub-city. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. This is a map of where places are, not an official register: names and numbers are as volunteers mapped them. Confirm opening hours and services with the place itself before you go. Only landline numbers are listed; mobile numbers are left out on purpose.
 
 ## Arada sub-city · አራዳ ክፍለ ከተማ — 9
 
@@ -30,7 +30,7 @@ count: "113"
 - **Nile petroleum** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00662&mlon=38.86682#map=18/9.00662/38.86682
 - **Nile Petroleum** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.02107&mlon=38.84257#map=18/9.02107/38.84257
 - **NOC (Summit 72)** (ኖክ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00733&mlon=38.86827#map=18/9.00733/38.86827
-- **NOC Bole** (ኖክ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98868&mlon=38.79074#map=18/8.98868/38.79074
+- **NOC Bole** (ኖክ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=8.98866&mlon=38.79075#map=18/8.98866/38.79075
 - **NOC Fuel Station** (ኖክ ነዳጅ ማደያ) · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00070&mlon=38.80340#map=18/9.00070/38.80340
 - **NOC** · Ring Road, Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.01079&mlon=38.80386#map=18/9.01079/38.80386
 - **Oil Libya** · Bole sub-city (ቦሌ ክፍለ ከተማ) — within the old boundary; since 2020 part of this area is Lemi Kura sub-city · map https://www.openstreetmap.org/?mlat=9.00033&mlon=38.83862#map=18/9.00033/38.83862
@@ -44,11 +44,11 @@ count: "113"
 - **Oilibya** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03034&mlon=38.73301#map=18/9.03034/38.73301
 - **Oilibya** (ኦሊቢያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03437&mlon=38.74339#map=18/9.03437/38.74339
 - **Oilibya** (ኦሊቢያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03545&mlon=38.73966#map=18/9.03545/38.73966
-- **Oilibya** (ኦይሊቢያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04879&mlon=38.72568#map=18/9.04879/38.72568
+- **Oilibya** (ኦይሊቢያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04879&mlon=38.72569#map=18/9.04879/38.72569
 - **Total Gas Station** (ቶታል መደያ) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02579&mlon=38.72170#map=18/9.02579/38.72170
 - **Total** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02690&mlon=38.73295#map=18/9.02690/38.73295
 - **Total** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02937&mlon=38.73430#map=18/9.02937/38.73430
-- **Total** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03594&mlon=38.72312#map=18/9.03594/38.72312
+- **Total** · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03595&mlon=38.72315#map=18/9.03595/38.72315
 - **Total** (ቶታል) · Addis Ketema sub-city (አዲስ ከተማ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03120&mlon=38.74120#map=18/9.03120/38.74120
 
 ## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 22
@@ -57,7 +57,7 @@ count: "113"
 - **Kobil ኮቢል** (ኮቢል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98334&mlon=38.75907#map=18/8.98334/38.75907
 - **Kobil** (ኮቢል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.98345&mlon=38.75686#map=18/8.98345/38.75686
 - **NOC** (ኖክ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99598&mlon=38.75937#map=18/8.99598/38.75937
-- **NOC** (ኖክ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01030&mlon=38.76715#map=18/9.01030/38.76715
+- **NOC** (ኖክ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01030&mlon=38.76714#map=18/9.01030/38.76714
 - **NOC** (ኖክ) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01178&mlon=38.75035#map=18/9.01178/38.75035
 - **Oilibya - Hilton Area** (ኦሊብያ ሂልተን አካባቢ) · run by Oilibya · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01657&mlon=38.76632#map=18/9.01657/38.76632
 - **Oilibya - Sedestegna** (ኦሊብያ ስድስተኛ) · run by Oilibya · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01638&mlon=38.76958#map=18/9.01638/38.76958
@@ -74,7 +74,7 @@ count: "113"
 - **Total** (ቶታል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99859&mlon=38.77089#map=18/8.99859/38.77089
 - **Total** (ቶታል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01073&mlon=38.74540#map=18/9.01073/38.74540
 - **Total** (ቶታል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01108&mlon=38.75899#map=18/9.01108/38.75899
-- **Total** (ቶታል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01158&mlon=38.75571#map=18/9.01158/38.75571
+- **Total** (ቶታል) · Kirkos sub-city (ቂርቆስ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01158&mlon=38.75572#map=18/9.01158/38.75572
 
 ## Gulele sub-city · ጉለሌ ክፍለ ከተማ — 6
 
@@ -93,7 +93,7 @@ count: "113"
 - **Oilibya** (ኦሊቢያ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02175&mlon=38.74792#map=18/9.02175/38.74792
 - **Oilibya** (ኦይሊቢያ) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02710&mlon=38.74151#map=18/9.02710/38.74151
 - **OLA Energy** · Chad Street, Lideta sub-city (ልደታ ክፍለ ከተማ) · http://www.olaenergy.com/ · hours 24/7 · map https://www.openstreetmap.org/?mlat=9.01118&mlon=38.73510#map=18/9.01118/38.73510
-- **Total** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01768&mlon=38.75452#map=18/9.01768/38.75452
+- **Total** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01768&mlon=38.75454#map=18/9.01768/38.75454
 - **Total** (ቶታል) · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01438&mlon=38.74696#map=18/9.01438/38.74696
 - **Yetebaberut Gas Station** · Lideta sub-city (ልደታ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=9.01203&mlon=38.72704#map=18/9.01203/38.72704
 
@@ -108,13 +108,13 @@ count: "113"
 ## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 13
 
 - **Baro Oil Ethiopia** (ባሮ ኦይል ኢትዮጵያ) · ጀርመን አደባባይ, Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · https://barooilethiopia.com/ · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.96416&mlon=38.73214#map=18/8.96416/38.73214
-- **NOC oil** (ኖክ ጋዝ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99618&mlon=38.73374#map=18/8.99618/38.73374
 - **NOC oil** (ኖክ ጋዝ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99622&mlon=38.73366#map=18/8.99622/38.73366
+- **NOC oil** (ኖክ ጋዝ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99623&mlon=38.73369#map=18/8.99623/38.73369
 - **NOC** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95167&mlon=38.68994#map=18/8.95167/38.68994
 - **NOC** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.96694&mlon=38.74887#map=18/8.96694/38.74887
 - **Oilibya** · run by Libya Oil Ethiopia Limited · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · hours 24/7 · map https://www.openstreetmap.org/?mlat=8.97716&mlon=38.75995#map=18/8.97716/38.75995
 - **Oilibya** (ኦሊቢያ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.99489&mlon=38.71827#map=18/8.99489/38.71827
-- **Ola (Gotera)** (ኦሊቢያ (ጎተራ)) · run by Ola · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97620&mlon=38.75962#map=18/8.97620/38.75962
+- **Ola (Gotera)** (ኦሊቢያ (ጎተራ)) · run by Ola · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.97621&mlon=38.75963#map=18/8.97621/38.75963
 - **Ola** (ኦሊብያ) · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.95867&mlon=38.76371#map=18/8.95867/38.76371
 - **Total** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.93181&mlon=38.73359#map=18/8.93181/38.73359
 - **Zemen Oil Ethiopia** · Nifas Silk-Lafto sub-city (ንፋስ ስልክ ላፍቶ ክፍለ ከተማ) · map https://www.openstreetmap.org/?mlat=8.94878&mlon=38.73029#map=18/8.94878/38.73029
