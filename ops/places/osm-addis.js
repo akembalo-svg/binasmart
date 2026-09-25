@@ -86,7 +86,13 @@ async function overpass(query, tries = 6) {
   for (let i = 0; i < tries; i++) {
     const r = await fetch(APIS[i % APIS.length], { method: 'POST', headers: { 'user-agent': UA, 'content-type': 'application/x-www-form-urlencoded' },
       body: 'data=' + encodeURIComponent(query) }).catch(e => ({ ok: false, status: 0, text: async () => e.message }));
-    if (r.ok) { const j = await r.json().catch(() => null); if (j && j.elements) return j; }
+    if (r.ok) {
+      const j = await r.json().catch(() => null);
+      // A mirror can be months behind (overpass.kumi.systems served map data from 31 May 2026 on 25 September):
+      // an answer older than 14 days counts as no answer, so stale places never replace fresh ones.
+      const base = j && j.osm3s && Date.parse(j.osm3s.timestamp_osm_base);
+      if (j && j.elements && !(base && Date.now() - base > 14 * 864e5)) return j;
+    }
     await new Promise(res => setTimeout(res, 5000 * (i + 1)));
   }
   throw new Error('Overpass did not answer: ' + query.slice(0, 80));
