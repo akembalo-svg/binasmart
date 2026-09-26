@@ -108,6 +108,13 @@ h2.sec::before{content:'';width:10px;height:10px;border-radius:50%;background:li
 .dh .t i.ok{background:rgba(4,120,87,.1);color:#047857}
 .more{display:block;margin:14px auto 0;height:44px;padding:0 20px;border-radius:13px;border:1px solid rgba(8,17,32,.14);background:#fff;font:inherit;font-weight:800;font-size:13px;cursor:pointer;color:var(--ink)}
 .attr{font-size:12px;color:var(--mut);line-height:1.55;margin-top:12px}
+.addh{margin-top:12px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:12px 14px}
+.addh summary{cursor:pointer;font-weight:800;font-size:14px;color:var(--em2)}
+.addh form{display:grid;gap:10px;margin-top:12px}
+.addh label{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--mut)}
+.addh input,.addh select{font:inherit;font-size:15px;color:var(--ink);padding:11px;border-radius:12px;border:1px solid rgba(8,17,32,.15);background:#fff;width:100%}
+.addh button{height:46px;border:0;border-radius:13px;background:linear-gradient(135deg,var(--em),var(--em2));color:#fff;font:inherit;font-weight:800;font-size:14px;cursor:pointer}
+#addmsg{font-size:13px;font-weight:700}
 @media(min-width:900px){
   .dirbar{grid-template-columns:1fr 260px}.dir{grid-template-columns:repeat(3,minmax(0,1fr))}
   .nav{left:40px;right:40px;top:20px;height:68px;border-radius:22px;padding:0 12px 0 18px;gap:22px}
@@ -176,6 +183,14 @@ h2.sec::before{content:'';width:10px;height:10px;border-radius:50%;background:li
   <div class="dir" id="dir"><div class="skel" style="height:80px"></div><div class="skel" style="height:80px"></div></div>
   <button class="more" id="dmore" hidden>Show more · ተጨማሪ</button>
   <p class="attr">From the city map (© OpenStreetMap contributors, ODbL): where each place is and what the map says about it. It is not an official licence register, and only hotels in the list above can be booked here. <b>Own or run one of these?</b> Open it and tap <i>Claim this listing</i>. It's free.</p>
+  <details class="addh"><summary><span class="am">ሆቴልዎ ዝርዝሩ ውስጥ የለም?</span> · My hotel isn't in the list</summary>
+  <form id="addf"><input type="hidden" name="ref" value="new">
+  <label>Hotel name · <span class="am">የሆቴሉ ስም</span><input name="hotel" required minlength="2" maxlength="120"></label>
+  <label>Area / sub-city · <span class="am">ሰፈር / ክፍለ ከተማ</span><input name="area" maxlength="80" placeholder="e.g. Bole, near Edna Mall"></label>
+  <label>Your name · <span class="am">ስምዎ</span><input name="name" required minlength="2" maxlength="80" autocomplete="name"></label>
+  <label>Your role · <span class="am">ኃላፊነትዎ</span><select name="role"><option value="owner">Owner · ባለቤት</option><option value="manager">Manager · ሥራ አስኪያጅ</option><option value="staff">Staff · ሠራተኛ</option></select></label>
+  <label>Phone · <span class="am">ስልክ</span><input name="phone" required inputmode="tel" autocomplete="tel" placeholder="09… / +251…"></label>
+  <button type="submit"><span class="am">ይላኩ</span> · Add my hotel</button><div id="addmsg" role="status"></div></form></details>
 
   <h2 class="sec am">ለምን በቢና?</h2>
   <div class="sub2">Why book here</div>
@@ -249,6 +264,13 @@ fetch('/api/hotels').then(r => r.json()).then(d => {
   $('dq').addEventListener('input', function(){ shown = 60; draw(); });
   $('dsub').addEventListener('change', function(){ shown = 60; draw(); });
   $('dmore').addEventListener('click', function(){ shown += 60; draw(); });
+  $('addf').addEventListener('submit', function(ev){ ev.preventDefault(); var f = this, m = $('addmsg'), btn = f.querySelector('button'); btn.disabled = true; m.textContent = '…';
+    fetch('/api/hotels/claim', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(f))) })
+      .then(function(r){ return r.json(); }).then(function(d){
+        if (d.ok) { f.innerHTML = '<p style="font-weight:800;color:#047857">✓ ተቀብለናል · Received. We will call you to confirm, then add your hotel.</p>'; return; }
+        m.textContent = ({ phone: 'Please check the phone number · ስልኩን ያረጋግጡ', name: 'Please write your name · ስምዎን ይጻፉ', hotel: 'Please write the hotel name · የሆቴሉን ስም ይጻፉ', slow_down: 'Too many tries, please wait an hour.' })[d.error] || 'Could not send. Please try again.'; btn.disabled = false;
+      }).catch(function(){ m.textContent = 'Could not send. Please try again.'; btn.disabled = false; });
+  });
 })();
 </script>
 <script src="/static/bina-footer.js?v=9" defer></script>

@@ -3,11 +3,13 @@
 //
 //   GET  /api/hotels/directory               all of them (hotels, guest houses, hostels, motels, apartments)
 //   GET  /hotels/:slug                        one place: what the map knows, and "is this your hotel?"
-//   POST /api/hotels/claim                    an owner's claim - stored; a person decides
+//   POST /api/hotels/claim                    an owner's claim - stored; a person decides. ref "new" = a hotel that is
+//                                             not in the list (the map does not draw every one); it is added by hand
 //   GET  /ops/hotel-claims/:id/:action?t=…    approve | reject, one tap from the Telegram message
 //
 // Source: /root/storage/osm-addis-latest.json (ops/places/refresh.sh, monthly) - the file ride/gazetteer.js
-// and the places knowledge already read, so the directory, the ride search and Bini name the same places.
+// and the places knowledge already read, so the directory, the ride search and Bini name the same places -
+// plus Wikidata's Addis hotels (/root/storage/wikidata-addis-hotels.json, ops/places/wikidata-hotels.js).
 //
 // What a listing will not show:
 //   · A mobile number. On the map a hotel's number is often the owner's own phone, typed in by a stranger.
@@ -19,6 +21,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 
 const FILE = process.env.BINA_OSM_ADDIS || '/root/storage/osm-addis-latest.json';
+const WD_FILE = process.env.BINA_WD_HOTELS || '/root/storage/wikidata-addis-hotels.json';
 const KINDS = {
   hotel: { en: 'Hotel', am: 'ሆቴል' },
   guest_house: { en: 'Guest house', am: 'የእንግዳ ማረፊያ' },
@@ -41,31 +44,78 @@ const slugOf = e => (kebab(e.tags.name) || 'place') + '-' + e.type[0] + e.id;
 const website = t => { const w = String(t.website || t['contact:website'] || t.url || '').trim().split(/[;\s]/)[0];
   return !w ? null : /^https?:\/\//i.test(w) ? w : /^[\w.-]+\.[a-z]{2,}/i.test(w) ? 'https://' + w : null; };
 
-function buildDirectory(osm) {
+// A place the map does not tag as lodging, but whose name says it is one: "Besha Hotel" drawn as a building,
+// "TM Pension" drawn as a restaurant. In Addis "ሆቴል" is also the word for an eatery ("… Kitfo and Hotel"), so
+// a restaurant, bar or café counts only when its name says pension, guest house, lodge, inn or apartment - never
+// on "hotel" alone. These listings say so on their page: call to check it takes guests.
+const LODGE_WORD = /\b(hotels?|pension|guest ?house|lodge|inn|resort|hostel|motel|apartments?|suites)\b|ሆቴል|ፔንሲዮን|ፔኒሲዮን|ፔንስዮን|እንግዳ ማረፊያ|መኝታ ቤት|አፓርታማ|አፓርትመንት|ሪዞርት|ሎጅ/i;
+const STAY_WORD = /\b(pension|guest ?house|lodge|inn|hostel|motel|apartments?)\b|ፔንሲዮን|ፔኒሲዮን|ፔንስዮን|እንግዳ ማረፊያ|መኝታ ቤት|አፓርታማ|አፓርትመንት|ሎጅ/i;
+const NOT_STAY = /institute|college|collage|school|training|academy|embassy|residence|bowling|mall|\bbus\b|\bstop\b|terminal|lobby|lounge|homeowners|real ?estate|association|university|bank/i;
+const EATERY = new Set(['restaurant', 'bar', 'cafe', 'fast_food', 'pub', 'hospital', 'clinic']);
+const NOT_A_PLACE = ['public_transport', 'highway', 'railway', 'shop', 'healthcare'];
+const GENERIC = new Set(['hotel', 'hotels', 'pension', 'guest', 'house', 'guesthouse', 'lodge', 'inn', 'resort', 'hostel', 'motel', 'apartment', 'apartments', 'suites',
+  'addis', 'ababa', 'international', 'the', 'and', 'spa', 'by', 'plc', 'complex']);
+const nameKey = s => String(s || '').toLowerCase().replace(/[^a-z0-9\s]+/g, ' ').split(/\s+/).filter(w => w && !GENERIC.has(w)).join(' ');
+const kindFromName = n => /apartment|suites|አፓርት|አፓርታማ/i.test(n) ? 'apartment' : /pension|guest ?house|ፔን|ፔኒ|እንግዳ ማረፊያ|መኝታ/i.test(n) ? 'guest_house'
+  : /hostel/i.test(n) ? 'hostel' : /motel/i.test(n) ? 'motel' : 'hotel';
+const km = (a, b) => Math.hypot((a.lat - b.lat) * 111, (a.lng - b.lng) * 109.5);
+
+// wikidata: [{ qid, name, nameAm, lat, lng }] from ops/places/wikidata-hotels.js (CC0) - hotels the map draws
+// only as a bus stop or a building get their own listing at Wikidata's point.
+function buildDirectory(osm, wikidata) {
   const els = (osm && osm.elements) || [], bySub = (osm && osm.bySub) || {};
-  const out = [];
+  const out = [], extra = [];
   for (const e of els) {
-    const t = e.tags || {}, kind = t.tourism;
-    if (!KINDS[kind] || !(t.name || t['name:en'] || t['name:am'])) continue;
-    const lat = e.lat != null ? e.lat : e.center && e.center.lat, lng = e.lon != null ? e.lon : e.center && e.center.lon;
-    if (lat == null || lng == null) continue;
+    const t = e.tags || {};
+    if (!(t.name || t['name:en'] || t['name:am'])) continue;
+    let kind = t.tourism, unsure = false;
     // Many Addis entries carry the Amharic name as "name" and the English one as "name:en": list them by the
     // English name, with the Amharic under it, so "Semien Hotel" is found by the name a visitor types.
     const ethiopic = /[ሀ-፿]/.test(t.name || '') && !/[a-z]/i.test(t.name || '');
     const name = String((ethiopic && t['name:en']) || t.name || t['name:en'] || t['name:am']).trim();
+    if (!KINDS[kind]) {
+      const all = [t.name, t['name:en'], t['name:am']].filter(Boolean).join(' ');
+      // ("ማረፊያ" alone is also the airport - አውሮፕላን ማረፊያ - so only "እንግዳ ማረፊያ" counts.) Any amenity other than an
+      // eatery is a different business that borrowed a hotel's name: "Merab hotel" the bank, "111396 National Hotel" the internet café.
+      if (!LODGE_WORD.test(all) || NOT_STAY.test(all) || NOT_A_PLACE.some(k => k in t) || t.tourism || t.office || (t.amenity && !EATERY.has(t.amenity))) continue;
+      if (EATERY.has(t.amenity) && !STAY_WORD.test(all)) continue;
+      if (!nameKey(name) && !/[ሀ-፿]/.test(name)) continue;          // just "Guest house"
+      kind = kindFromName(all); unsure = true;
+    }
+    const lat = e.lat != null ? e.lat : e.center && e.center.lat, lng = e.lon != null ? e.lon : e.center && e.center.lon;
+    if (lat == null || lng == null) continue;
     const nameAm = String(t['name:am'] || (ethiopic ? t.name : '') || '').trim();
     const stars = parseInt(t.stars, 10);
     const sub = bySub[e.type + e.id] || '';
-    out.push({ ref: e.type + '/' + e.id, slug: slugOf({ ...e, tags: { ...t, name } }), name, nameAm: nameAm && nameAm !== name ? nameAm : '',
+    (unsure ? extra : out).push({ ref: e.type + '/' + e.id, slug: slugOf({ ...e, tags: { ...t, name } }), name, nameAm: nameAm && nameAm !== name ? nameAm : '',
       kind, sub, subAm: SUB_AM[sub] || '', lat: +lat.toFixed(6), lng: +lng.toFixed(6), stars: stars >= 1 && stars <= 5 ? stars : null,
-      phones: landlines(t.phone || t['contact:phone']), website: website(t), street: t['addr:street'] || '', rich: Object.keys(t).length });
+      phones: landlines(t.phone || t['contact:phone']), website: website(t), street: t['addr:street'] || '', unsure, rich: Object.keys(t).length });
   }
   // The same place is often mapped twice (a node and a building): one name within 300 m is one listing.
   out.sort((a, b) => b.rich - a.rich);
   const kept = [];
   for (const p of out) {
-    if (kept.some(k => k.name.toLowerCase() === p.name.toLowerCase() && Math.hypot((k.lat - p.lat) * 111, (k.lng - p.lng) * 109.5) < 0.3)) continue;
+    if (kept.some(k => k.name.toLowerCase() === p.name.toLowerCase() && km(k, p) < 0.3)) continue;
     kept.push(p);
+  }
+  // An extra is dropped when a listing within 300 m already carries its name ("Ghion Hotel ግዮን ሆቴል" beside "Ghion Hotel").
+  // Wikidata's "Jupiter International Hotel - Cazanchis" is the map's "Jupiter International Hotel (Kazanchis)": at the
+  // same spot (250 m), the same first word is enough.
+  const same = (a, b) => { const x = nameKey(a.name), y = nameKey(b.name);
+    return (x && y && (x === y || (x.length > 3 && y.length > 3 && (x.includes(y) || y.includes(x)))
+      || (km(a, b) < 0.25 && x.split(' ')[0].length > 2 && x.split(' ')[0] === y.split(' ')[0])
+      || (km(a, b) < 0.1 && x.length > 3 && x.slice(0, 4) === y.slice(0, 4)))) || a.name.toLowerCase() === b.name.toLowerCase(); };   // "Elily" / "Elilly", 40 m apart
+  for (const p of extra.sort((a, b) => b.rich - a.rich)) if (!kept.some(k => km(k, p) < 0.3 && same(k, p))) kept.push(p);
+  // Wikidata's hotels, where nothing on the map within 1.5 km has the name. Sub-city from the nearest mapped place.
+  const located = els.filter(e => bySub[e.type + e.id] && (e.lat != null || e.center));
+  for (const w of wikidata || []) {
+    if (!w || !w.name || w.lat == null || w.lng == null) continue;
+    if (kept.some(k => km(k, w) < 1.5 && same(k, w))) continue;
+    let near = null, best = 0.8;
+    for (const e of located) { const d = km({ lat: e.lat != null ? e.lat : e.center.lat, lng: e.lon != null ? e.lon : e.center.lon }, w); if (d < best) { best = d; near = e; } }
+    const sub = near ? bySub[near.type + near.id] : '';
+    kept.push({ ref: 'wikidata/' + w.qid, slug: (kebab(w.name) || 'hotel') + '-' + String(w.qid).toLowerCase(), name: w.name, nameAm: w.nameAm && w.nameAm !== w.name ? w.nameAm : '',
+      kind: kindFromName(w.name), sub, subAm: SUB_AM[sub] || '', lat: +(+w.lat).toFixed(6), lng: +(+w.lng).toFixed(6), stars: null, phones: [], website: null, street: '', unsure: false });
   }
   kept.forEach(p => delete p.rich);
   return kept.sort((a, b) => (b.stars || 0) - (a.stars || 0) || a.name.localeCompare(b.name));
@@ -86,7 +136,9 @@ async function tellOwner(text) {
 
 function page(p, claimed) {
   const k = KINDS[p.kind];
-  const map = 'https://www.openstreetmap.org/' + p.ref + '#map=18/' + p.lat + '/' + p.lng;
+  const wd = p.ref.startsWith('wikidata/');
+  const map = wd ? 'https://www.openstreetmap.org/?mlat=' + p.lat + '&mlon=' + p.lng + '#map=18/' + p.lat + '/' + p.lng
+    : 'https://www.openstreetmap.org/' + p.ref + '#map=18/' + p.lat + '/' + p.lng;
   const facts = [
     '<li><span>Type · ዓይነት</span><b>' + esc(k.en) + ' · <span class="am">' + k.am + '</span></b></li>',
     p.sub ? '<li><span>Sub-city · ክፍለ ከተማ</span><b>' + esc(p.sub) + (p.subAm ? ' · <span class="am">' + p.subAm + '</span>' : '') + '</b></li>' : '',
@@ -136,7 +188,8 @@ button{height:48px;border:0;border-radius:14px;background:linear-gradient(135deg
 ${claimed ? '<span class="ok">✓ Owner confirmed · <span class="am">ባለቤቱ አረጋግጧል</span></span>' : ''}
 <ul>${facts}</ul>
 <div class="acts"><a class="btn pri" href="${esc(map)}" target="_blank" rel="noopener">📍 Map · <span class="am">ካርታ</span></a><a class="btn" href="/ride">🚕 Ride there · <span class="am">ይሂዱ</span></a><a class="btn" href="/airport">✈️ From Bole airport</a></div>
-<p class="src">From the city map (© OpenStreetMap contributors, ODbL). This is where the place is and what the map says about it, not an official licence register, and BinaSmart cannot book it yet. Call before you go.</p>
+${p.unsure ? '<p class="src"><b>The map marks this place as a building or a restaurant, not as somewhere to stay.</b> Its name says it is one; call to check it takes guests.</p>' : ''}
+<p class="src">${wd ? 'From Wikidata (CC0), <a href="https://www.wikidata.org/wiki/' + esc(p.ref.slice(9)) + '" rel="nofollow noopener" target="_blank">' + esc(p.ref.slice(9)) + '</a>' : 'From the city map (© OpenStreetMap contributors, ODbL)'}. This is where the place is and what the source says about it, not an official licence register, and BinaSmart cannot book it yet. Call before you go.</p>
 </div>
 <div class="card claim" id="claim">
 <h2 class="am">${claimed ? 'ይህ የእርስዎ ሆቴል ነው?' : 'ይህ የእርስዎ ሆቴል ነው? በነጻ ይረከቡት'}</h2>
@@ -168,10 +221,12 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
   let cache = { mtime: 0, list: [], bySlug: new Map(), byRef: new Map() };
   function load() {
     let st; try { st = fs.statSync(FILE); } catch (e) { return cache; }
-    if (st.mtimeMs === cache.mtime) return cache;
+    let wdm = 0; try { wdm = fs.statSync(WD_FILE).mtimeMs; } catch (e) { /* optional */ }
+    if (st.mtimeMs + wdm === cache.mtime) return cache;
     try {
-      const list = buildDirectory(JSON.parse(fs.readFileSync(FILE, 'utf8')));
-      cache = { mtime: st.mtimeMs, list, bySlug: new Map(list.map(p => [p.slug, p])), byRef: new Map(list.map(p => [p.ref, p])) };
+      let wd = []; try { wd = JSON.parse(fs.readFileSync(WD_FILE, 'utf8')).hotels || []; } catch (e) { /* optional */ }
+      const list = buildDirectory(JSON.parse(fs.readFileSync(FILE, 'utf8')), wd);
+      cache = { mtime: st.mtimeMs + wdm, list, bySlug: new Map(list.map(p => [p.slug, p])), byRef: new Map(list.map(p => [p.ref, p])) };
     } catch (e) { fastify.log.error('hotel directory: ' + e.message); }
     return cache;
   }
@@ -188,7 +243,7 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
     const { list } = load(), ok = await approved();
     return { count: list.length, source: 'OpenStreetMap contributors (ODbL)', kinds: KINDS,
       places: list.map(p => ({ slug: p.slug, name: p.name, nameAm: p.nameAm, kind: p.kind, sub: p.sub, subAm: p.subAm,
-        stars: p.stars, phone: p.phones.length > 0, website: !!p.website, claimed: ok.has(p.ref) })) };
+        stars: p.stars, phone: p.phones.length > 0, website: !!p.website, unsure: p.unsure || undefined, claimed: ok.has(p.ref) })) };
   });
 
   fastify.get('/hotels/:slug', async (req, reply) => {
@@ -202,7 +257,9 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
   fastify.post('/api/hotels/claim', { bodyLimit: 16 * 1024 }, async (req, reply) => {
     const b = req.body || {};
     if (!ipRL(String(req.headers['x-real-ip'] || req.ip || ''))) return reply.code(429).send({ ok: false, error: 'slow_down' });
-    const p = load().byRef.get(String(b.ref || ''));
+    const isNew = b.ref === 'new', hotel = clean(b.hotel, 120), area = clean(b.area, 80);
+    if (isNew && hotel.length < 2) return reply.code(400).send({ ok: false, error: 'hotel' });
+    const p = isNew ? { ref: 'new:' + (kebab(hotel) || 'hotel'), name: hotel, slug: '', kind: kindFromName(hotel), sub: area, phones: [] } : load().byRef.get(String(b.ref || ''));
     if (!p) return reply.code(404).send({ ok: false, error: 'place' });
     const name = clean(b.name, 80), role = ['owner', 'manager', 'staff'].includes(b.role) ? b.role : 'owner', note = clean(b.note, 500);
     const digits = String(b.phone || '').replace(/[^\d+]/g, '');
@@ -213,9 +270,9 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
     const c = await prisma.hotelClaim.create({ data: { placeRef: p.ref, placeName: p.name, slug: p.slug, name, role, phone: digits, note: note || null,
       token: crypto.randomBytes(16).toString('hex') } });
     const base = 'https://bina.et/ops/hotel-claims/' + c.id + '/';
-    await tellOwner('🏨 <b>Hotel claim</b> · ' + esc(p.name) + ' (' + esc(KINDS[p.kind].en) + (p.sub ? ', ' + esc(p.sub) : '') + ')\n'
+    await tellOwner((isNew ? '🆕 <b>Hotel NOT in the list</b> (add it by hand after the call) · ' : '🏨 <b>Hotel claim</b> · ') + esc(p.name) + ' (' + esc(KINDS[p.kind].en) + (p.sub ? ', ' + esc(p.sub) : '') + ')\n'
       + '👤 ' + esc(name) + ' — ' + role + '\n📞 ' + esc(digits) + (p.phones.length ? '\n☎ map says: ' + esc(p.phones.join(', ')) : '') + (note ? '\n📝 ' + esc(note) : '')
-      + '\n\nCall before approving.\n<a href="https://bina.et/hotels/' + p.slug + '">listing</a> · <a href="' + base + 'approve?t=' + c.token + '">✅ approve</a> · <a href="' + base + 'reject?t=' + c.token + '">❌ reject</a>');
+      + '\n\nCall before approving.\n' + (isNew ? '' : '<a href="https://bina.et/hotels/' + p.slug + '">listing</a> · ') + '<a href="' + base + 'approve?t=' + c.token + '">✅ approve</a> · <a href="' + base + 'reject?t=' + c.token + '">❌ reject</a>');
     return { ok: true };
   });
 
@@ -227,7 +284,7 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
     if (!['approve', 'reject'].includes(action)) return reply.code(400).send('approve or reject');
     await prisma.hotelClaim.update({ where: { id: c.id }, data: { status: action === 'approve' ? 'approved' : 'rejected', decidedAt: new Date() } });
     claimed.at = 0;
-    return reply.type('text/html; charset=utf-8').send('<p style="font-family:system-ui;padding:40px">' + (action === 'approve' ? '✅ Approved' : '❌ Rejected') + ': ' + esc(c.placeName) + ' — ' + esc(c.name) + '. <a href="/hotels/' + esc(c.slug) + '">listing</a></p>');
+    return reply.type('text/html; charset=utf-8').send('<p style="font-family:system-ui;padding:40px">' + (action === 'approve' ? '✅ Approved' : '❌ Rejected') + ': ' + esc(c.placeName) + ' — ' + esc(c.name) + '. ' + (c.slug ? '<a href="/hotels/' + esc(c.slug) + '">listing</a>' : 'Not on the map yet: add it by hand.') + '</p>');
   });
   done();
 };

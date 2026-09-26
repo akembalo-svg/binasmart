@@ -36,3 +36,36 @@ test('a listing shows landlines, never a mobile', () => {
   assert.deepEqual(landlines('0900000001, 0700000002, +251 900 000 003'), []);
   assert.deepEqual(landlines('+251110000001/02, 0110000003'), ['+251110000001/02', '0110000003']);
 });
+
+test('a place the map draws as a building counts when its name says it is somewhere to stay', () => {
+  const extra = { bySub: { node20: 'Yeka', node21: 'Yeka' }, elements: [
+    { type: 'node', id: 20, lat: 9.02, lon: 38.80, tags: { building: 'yes', name: 'Sample Pension' } },
+    { type: 'node', id: 21, lat: 9.02, lon: 38.81, tags: { amenity: 'restaurant', name: 'Sample Kitfo and Hotel' } },
+    { type: 'node', id: 22, lat: 9.02, lon: 38.82, tags: { amenity: 'restaurant', name: 'Sample Guest House' } },
+    { type: 'node', id: 23, lat: 9.02, lon: 38.83, tags: { highway: 'bus_stop', name: 'Sample Hotel' } },
+    { type: 'node', id: 24, lat: 9.02, lon: 38.84, tags: { building: 'yes', name: 'Sample Hotel Training Institute' } },
+    { type: 'node', id: 25, lat: 9.03, lon: 38.75, tags: { tourism: 'hotel', name: 'Other Hotel' } },
+    { type: 'node', id: 26, lat: 9.0301, lon: 38.7501, tags: { building: 'yes', name: 'Other Hotel ሌላ ሆቴል' } },
+    { type: 'node', id: 27, lat: 9.04, lon: 38.70, tags: { name: 'Sample Airport', 'name:am': 'ናሙና አውሮፕላን ማረፊያ' } },
+    { type: 'node', id: 28, lat: 9.04, lon: 38.71, tags: { amenity: 'internet_cafe', name: '100000 Sample Hotel' } },
+    { type: 'node', id: 29, lat: 9.05, lon: 38.72, tags: { tourism: 'hotel', name: 'Elilly Sample Hotel' } },
+    { type: 'way', id: 30, center: { lat: 9.0503, lon: 38.7202 }, tags: { building: 'yes', name: 'Elily Sample Hotel' } },
+  ] };
+  const d = buildDirectory(extra);
+  assert.deepEqual(d.map(p => p.name).sort(), ['Elilly Sample Hotel', 'Other Hotel', 'Sample Guest House', 'Sample Pension']);
+  const pen = d.find(p => p.name === 'Sample Pension');
+  assert.equal(pen.kind, 'guest_house'); assert.equal(pen.unsure, true); assert.equal(pen.sub, 'Yeka');
+  assert.equal(d.find(p => p.name === 'Other Hotel').unsure, false);
+});
+
+test('a Wikidata hotel gets a listing only when the map has no such name nearby', () => {
+  const map = { bySub: { node30: 'Kirkos' }, elements: [{ type: 'node', id: 30, lat: 9.01, lon: 38.76, tags: { tourism: 'hotel', name: 'Sample Grand Hotel' } }] };
+  const d = buildDirectory(map, [
+    { qid: 'Q1', name: 'Sample Grand Hotel Addis Ababa', lat: 9.011, lng: 38.761 },
+    { qid: 'Q2', name: 'Namuna Inn', nameAm: 'ናሙና', lat: 9.012, lng: 38.762 },
+    { qid: 'Q3', name: 'Sample Grand Hotel - Cazanchis', lat: 9.0101, lng: 38.7601 },
+  ]);
+  assert.deepEqual(d.map(p => p.name), ['Namuna Inn', 'Sample Grand Hotel']);
+  const w = d[0];
+  assert.equal(w.ref, 'wikidata/Q2'); assert.equal(w.slug, 'namuna-inn-q2'); assert.equal(w.sub, 'Kirkos', 'sub-city from the nearest mapped place');
+});
