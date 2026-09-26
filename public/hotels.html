@@ -6,7 +6,7 @@
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#00C896">
 <title>BinaHotels · ሆቴሎች በአዲስ አበባ — book direct, 0% commission</title>
-<meta name="description" content="Hotels in Addis Ababa on BinaSmart: pick your dates, book direct with the hotel, pay at reception. No credit card, no commission, instant confirmation code. · ሆቴል በቀጥታ ያስይዙ።">
+<meta name="description" content="Every hotel, guest house, hostel and apartment in Addis Ababa by sub-city, and hotels you can book direct on BinaSmart: pay at reception, no card, no commission. · በአዲስ አበባ ያሉ ሁሉም ሆቴሎችና ማረፊያዎች።">
 <link rel="canonical" href="https://bina.et/hotels">
 <meta property="og:title" content="BinaHotels — Book Addis Ababa hotels direct, 0% commission">
 <meta property="og:description" content="Pick your dates, book direct, pay at the hotel. No card, no commission, instant confirmation.">
@@ -93,7 +93,23 @@ h2.sec::before{content:'';width:10px;height:10px;border-radius:50%;background:li
 .app .ic svg{width:26px;height:26px}
 .app b{display:block;font-size:16px;font-weight:800}.app small{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,.8);margin-top:2px}
 .app .btn{margin-left:auto;height:40px;padding:0 14px;border-radius:12px;background:#fff;color:#081120;display:flex;align-items:center;font-weight:800;font-size:12px;flex-shrink:0}
+.dirbar{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:10px}
+.dirbar input,.dirbar select{font:inherit;font-size:15px;font-weight:600;color:var(--ink);height:48px;padding:0 14px;border-radius:14px;border:1px solid rgba(8,17,32,.14);background:#fff;width:100%}
+.kinds{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.kinds button{font:inherit;font-size:12.5px;font-weight:800;height:34px;padding:0 12px;border-radius:999px;border:1px solid rgba(8,17,32,.14);background:#fff;color:var(--ink);cursor:pointer}
+.kinds button.on{background:var(--em2);border-color:var(--em2);color:#fff}
+.kinds button small{font-weight:600;opacity:.7;margin-left:4px}
+.dir{display:grid;grid-template-columns:1fr;gap:8px}
+.dh{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:16px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.dh b{font-size:15px;font-weight:800}.dh .a{font-size:13px;font-weight:700;color:var(--em2)}
+.dh .m{font-size:12px;font-weight:600;color:var(--mut)}
+.dh .t{display:flex;flex-wrap:wrap;gap:5px;margin-top:3px}
+.dh .t i{font-style:normal;font-size:10.5px;font-weight:800;padding:3px 7px;border-radius:999px;background:rgba(8,17,32,.05);color:#334155}
+.dh .t i.ok{background:rgba(4,120,87,.1);color:#047857}
+.more{display:block;margin:14px auto 0;height:44px;padding:0 20px;border-radius:13px;border:1px solid rgba(8,17,32,.14);background:#fff;font:inherit;font-weight:800;font-size:13px;cursor:pointer;color:var(--ink)}
+.attr{font-size:12px;color:var(--mut);line-height:1.55;margin-top:12px}
 @media(min-width:900px){
+  .dirbar{grid-template-columns:1fr 260px}.dir{grid-template-columns:repeat(3,minmax(0,1fr))}
   .nav{left:40px;right:40px;top:20px;height:68px;border-radius:22px;padding:0 12px 0 18px;gap:22px}
   .nav .logo i{width:40px;height:40px;border-radius:12px}.nav .logo b{font-size:19px}.nav .logo small{font-size:10.5px}
   .nav .links{display:flex;gap:26px;margin-left:10px}.nav .links a{color:rgba(255,255,255,.88);font-weight:600;font-size:14px}.nav .links a.on{color:#fff;border-bottom:2px solid var(--em);padding-bottom:4px}
@@ -153,6 +169,14 @@ h2.sec::before{content:'';width:10px;height:10px;border-radius:50%;background:li
   <div class="sub2">Hotels on BinaSmart · book direct with each hotel</div>
   <div class="hotels" id="hotels"><div class="skel"></div><div class="skel"></div></div>
 
+  <h2 class="sec am" id="all">ሁሉም ማረፊያዎች በአዲስ አበባ</h2>
+  <div class="sub2" id="allsub">Every hotel, guest house, hostel and apartment in Addis Ababa, by sub-city</div>
+  <div class="dirbar"><input id="dq" type="search" placeholder="Search a name or area · ሆቴል ወይም ሰፈር ይፈልጉ" aria-label="Search places to stay"><select id="dsub" aria-label="Sub-city"><option value="">All sub-cities · ሁሉም ክፍለ ከተሞች</option></select></div>
+  <div class="kinds" id="dkinds"></div>
+  <div class="dir" id="dir"><div class="skel" style="height:80px"></div><div class="skel" style="height:80px"></div></div>
+  <button class="more" id="dmore" hidden>Show more · ተጨማሪ</button>
+  <p class="attr">From the city map (© OpenStreetMap contributors, ODbL): where each place is and what the map says about it. It is not an official licence register, and only hotels in the list above can be booked here. <b>Own or run one of these?</b> Open it and tap <i>Claim this listing</i>. It's free.</p>
+
   <h2 class="sec am">ለምን በቢና?</h2>
   <div class="sub2">Why book here</div>
   <div class="feats">
@@ -162,11 +186,12 @@ h2.sec::before{content:'';width:10px;height:10px;border-radius:50%;background:li
     <div class="feat"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16l4-1 4.5-6 6.5-4.5c1.4-.9 3 .6 2.2 2L16.5 11l-1 8-2.5-1-.5-4.5-3.5 2.5-.5 2.5-2.5.5z"/></svg></span><b class="am">ከአየር ማረፊያ</b><small>Airport transfer, fixed price</small><p>Land at Bole and ride straight to your hotel at a price you saw before booking.</p></div>
   </div>
 
-  <div class="owner"><div><b class="am">ሆቴል አለዎት? በቢና ስማርት ላይ ያስመዝግቡ</b><p>List your hotel free. Rooms, availability, direct bookings and Telegram alerts, with 0% commission. Your guests pay you, not a booking site.</p></div><a class="btn" href="/for-business">List my hotel →</a></div>
+  <p style="margin:14px 0;font-size:15px">✈️ <span class="am">ከቦሌ ኤርፖርት ወደ ሆቴልዎ፦</span> <a href="/bole-airport-to-city" style="font-weight:700">ዋጋውና አማራጮቹ · Bole airport to the city →</a></p>
+  <div class="owner"><div><b class="am">ሆቴል አለዎት? በቢና ስማርት ላይ ያስመዝግቡ</b><p>Your hotel is probably already in the list above. Find it and claim it free, then add rooms, availability, direct bookings and Telegram alerts, with 0% commission. Your guests pay you, not a booking site.</p></div><a class="btn" href="#all">Find my hotel →</a></div>
 
   <div class="apps">
     <div class="app" style="background:linear-gradient(135deg,#0099FF,#1D4ED8 70%,#081120 170%)"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0099FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/></svg></span><div><b>Telegram Mini App</b><small><span class="am">መጫን አያስፈልግም</span> · @bina_smart_bot · book for family from abroad</small></div><a class="btn" href="https://t.me/bina_smart_bot" target="_blank" rel="noopener" style="color:#0B4FB3">Open</a></div>
-    <div class="app" style="background:linear-gradient(135deg,#0F172A,#0B3B31 70%,#00C896 160%)"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.8A8 8 0 1 1 8.2 19z"/></svg></span><div><b>WhatsApp</b><small><span class="am">በዋትስአፕ ይጠይቁ</span> · +251 911 244 344</small></div><a class="btn" href="https://wa.me/251911244344?text=Hotel%20booking%20in%20Addis" target="_blank" rel="noopener">Chat</a></div>
+    <div class="app" style="background:linear-gradient(135deg,#0F172A,#0B3B31 70%,#00C896 160%)"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.8A8 8 0 1 1 8.2 19z"/></svg></span><div><b>WhatsApp</b><small><span class="am">በቴሌግራም ይጠይቁ</span> · @Bina_smart</small></div><a class="btn" href="https://t.me/Bina_smart" target="_blank" rel="noopener">Chat</a></div>
   </div>
 </div>
 
@@ -186,6 +211,45 @@ fetch('/api/hotels').then(r => r.json()).then(d => {
   $('hotels').innerHTML = hs.length ? hs.map(h => '<a class="hotel" href="' + url(h.slug) + '"><div class="img">' + (h.photo ? '<img src="' + esc(h.photo) + '" alt="" loading="lazy">' : '') + (h.demo ? '<span class="badge demo">DEMO · ' + '<span class="am">ናሙና</span></span>' : '<span class="badge">' + h.rooms + ' room types</span>') + '</div><div class="bd"><b>' + esc(h.name) + '</b><span class="a am">' + esc(h.nameAm || '') + '</span><span class="loc">📍 ' + esc((h.subCity ? h.subCity + ' · ' : '') + (h.city || 'Addis Ababa')) + '</span><div class="foot"><span class="from">from <b>' + Number(h.fromPrice || 0).toLocaleString() + ' ETB</b> / night</span><span class="go">See rooms →</span></div></div></a>').join('')
     : '<p style="color:#94a3b8;padding:20px;text-align:center">No hotels yet.</p>';
 }).catch(() => { $('hotels').innerHTML = '<p style="color:#94a3b8;padding:20px;text-align:center">Could not load hotels.</p>'; });
+</script>
+<script>
+// The directory: every place to stay on the city map (hotels/directory.js).
+(function(){
+  var all = [], kinds = {}, kind = '', shown = 60, $ = function(id){ return document.getElementById(id); };
+  function e(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function norm(s){ return String(s || '').toLowerCase().replace(/[^a-z0-9\u1200-\u137f]+/g, ''); }
+  function list(){
+    var q = norm($('dq').value), sub = $('dsub').value;
+    return all.filter(function(p){ return (!kind || (kind === 'hostel' ? (p.kind === 'hostel' || p.kind === 'motel') : p.kind === kind)) && (!sub || p.sub === sub)
+      && (!q || norm(p.name + p.nameAm + p.sub + p.subAm).indexOf(q) >= 0); });
+  }
+  function draw(){
+    var l = list();
+    $('dir').innerHTML = l.length ? l.slice(0, shown).map(function(p){
+      var k = kinds[p.kind] || {};
+      return '<a class="dh" href="/hotels/' + encodeURIComponent(p.slug) + '"><b>' + e(p.name) + '</b>' + (p.nameAm ? '<span class="a am">' + e(p.nameAm) + '</span>' : '')
+        + '<span class="m">' + e(k.en) + ' · <span class="am">' + e(k.am) + '</span>' + (p.sub ? ' · 📍 ' + e(p.sub) : '') + (p.stars ? ' · ' + '★'.repeat(p.stars) : '') + '</span>'
+        + '<span class="t">' + (p.claimed ? '<i class="ok">✓ owner confirmed</i>' : '') + (p.phone ? '<i>☎ phone</i>' : '') + (p.website ? '<i>🌐 website</i>' : '') + '</span></a>';
+    }).join('') : '<p style="color:#94a3b8;padding:14px">No place matches. Try another spelling · ሌላ አጻጻፍ ይሞክሩ</p>';
+    $('dmore').hidden = l.length <= shown;
+    $('allsub').textContent = l.length.toLocaleString() + (l.length === all.length ? ' places to stay in Addis Ababa, by sub-city' : ' of ' + all.length.toLocaleString() + ' places to stay');
+  }
+  fetch('/api/hotels/directory').then(function(r){ return r.json(); }).then(function(d){
+    all = d.places || []; kinds = d.kinds || {};
+    var n = function(k){ return all.filter(function(p){ return k === 'hostel' ? (p.kind === 'hostel' || p.kind === 'motel') : p.kind === k; }).length; };
+    var chips = [['', 'All', 'ሁሉም', all.length], ['hotel', 'Hotels', 'ሆቴሎች', n('hotel')], ['guest_house', 'Guest houses', 'የእንግዳ ማረፊያዎች', n('guest_house')],
+      ['apartment', 'Apartments', 'አፓርትመንቶች', n('apartment')], ['hostel', 'Hostels & motels', 'ሆስቴሎች', n('hostel')]];
+    $('dkinds').innerHTML = chips.map(function(c){ return '<button type="button" data-k="' + c[0] + '"' + (c[0] === '' ? ' class="on"' : '') + '><span class="am">' + c[2] + '</span> · ' + c[1] + '<small>' + c[3] + '</small></button>'; }).join('');
+    var subs = {}; all.forEach(function(p){ if (p.sub) subs[p.sub] = p.subAm; });
+    $('dsub').innerHTML += Object.keys(subs).sort().map(function(s){ return '<option value="' + e(s) + '">' + e(s) + (subs[s] ? ' · ' + e(subs[s]) : '') + '</option>'; }).join('');
+    draw();
+  }).catch(function(){ $('dir').innerHTML = '<p style="color:#94a3b8;padding:14px">Could not load the list.</p>'; });
+  $('dkinds').addEventListener('click', function(ev){ var b = ev.target.closest('button'); if (!b) return; kind = b.dataset.k; shown = 60;
+    Array.prototype.forEach.call(this.children, function(x){ x.classList.toggle('on', x === b); }); draw(); });
+  $('dq').addEventListener('input', function(){ shown = 60; draw(); });
+  $('dsub').addEventListener('change', function(){ shown = 60; draw(); });
+  $('dmore').addEventListener('click', function(){ shown += 60; draw(); });
+})();
 </script>
 <script src="/static/bina-footer.js?v=9" defer></script>
 <script src="/static/pwa.js?v=1" defer></script>

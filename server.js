@@ -1856,6 +1856,8 @@ fastify.register(require('./jobs/matches'), { prisma, shell: newsShell });
 // The call list for Addis cinemas (cinema/ops-venues.js). Booking is built and empty because it needs
 // one cinema to say yes; this is where ringing them turns a number copied off a blog into a fact.
 fastify.register(require('./cinema/ops-venues'), { prisma, OWNER_KEY });
+// Every place to stay in Addis from the city map, and owners claiming theirs (hotels/directory.js, 26 Sep 2026).
+fastify.register(require('./hotels/directory'), { prisma, limiter: hotelLimiter });
 
 // Section marks and colours (brand/sections.js): each hub carries its own badge instead of an emoji
 // watermark, and the colour tells a returning reader where they are before they read a word.

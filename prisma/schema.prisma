@@ -1902,6 +1902,24 @@ model EmployerAlias {
   @@index([employerId])
 }
 
+// "This is my hotel" from a listing in the hotel directory (hotels/directory.js). A person calls before approving.
+model HotelClaim {
+  id        String    @id @default(cuid())
+  placeRef  String                         // the map element, "node/123"
+  placeName String
+  slug      String
+  name      String
+  role      String                         // owner | manager | staff
+  phone     String
+  note      String?
+  status    String    @default("pending")  // pending | approved | rejected
+  token     String
+  createdAt DateTime  @default(now())
+  decidedAt DateTime?
+
+  @@index([placeRef])
+}
+
 model JobSubmission {
   id           String    @id @default(cuid())
   createdAt    DateTime  @default(now())
