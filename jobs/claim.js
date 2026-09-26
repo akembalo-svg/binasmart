@@ -44,15 +44,22 @@ function save(c) { fs.mkdirSync(DIR, { recursive: true, mode: 0o700 }); fs.write
 function load(id) { try { return /^[a-f0-9]{16}$/.test(id) ? JSON.parse(fs.readFileSync(path.join(DIR, id + '.json'), 'utf8')) : null; } catch (e) { return null; } }
 function all() { try { return fs.readdirSync(DIR).filter(f => f.endsWith('.json')).map(f => load(f.slice(0, -5))).filter(Boolean).sort((a, b) => b.at.localeCompare(a.at)); } catch (e) { return []; } }
 
+// Sent by @bina_smart_bot (BINA_RIDER_BOT_TOKEN) to the admin chats. Not BINASMART_TG_TOKEN: that is the old
+// @gccandconectbot, which the owner never started - getChat on 26 Sep 2026 said "chat not found" for both chats,
+// so every alert sent with it was lost. The sending bot and the chat must belong together.
 async function tellOwner(text) {
-  const tok = process.env.BINASMART_TG_TOKEN;
-  const chat = process.env.BINA_OWNER_TG_CHAT || process.env.BINASMART_ADMIN_TG_CHAT;
-  if (!tok || !chat) return false;
-  try {
-    const r = await fetch('https://api.telegram.org/bot' + tok + '/sendMessage', { method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ chat_id: chat, text, parse_mode: 'HTML', disable_web_page_preview: true }) });
-    return (await r.json()).ok === true;
-  } catch (e) { return false; }
+  const tok = process.env.BINA_RIDER_BOT_TOKEN;
+  const chats = [process.env.BINASMART_ADMIN_TG_CHAT, process.env.BINASMART_OPS_TG_CHAT].filter(Boolean);
+  if (!tok || !chats.length) return false;
+  let ok = false;
+  for (const chat of [...new Set(chats)]) {
+    try {
+      const r = await fetch('https://api.telegram.org/bot' + tok + '/sendMessage', { method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ chat_id: chat, text, parse_mode: 'HTML', disable_web_page_preview: true }) });
+      ok = (await r.json()).ok === true || ok;
+    } catch (e) { /* the other chat may still get it */ }
+  }
+  return ok;
 }
 
 const L = {

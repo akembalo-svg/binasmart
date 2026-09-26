@@ -8,6 +8,7 @@ const path = require('path');
 
 process.env.EMPLOYER_CLAIMS_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'claims-'));
 delete process.env.BINASMART_TG_TOKEN;            // nothing is sent anywhere from a test
+delete process.env.BINA_RIDER_BOT_TOKEN;          // (the bot tellOwner() really sends with)
 const claim = require('../jobs/claim');
 const Fastify = require('fastify');
 
