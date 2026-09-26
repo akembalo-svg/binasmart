@@ -22,6 +22,8 @@ const crypto = require('crypto');
 
 const FILE = process.env.BINA_OSM_ADDIS || '/root/storage/osm-addis-latest.json';
 const WD_FILE = process.env.BINA_WD_HOTELS || '/root/storage/wikidata-addis-hotels.json';
+// Listings a hotel asked us to take down ("reply remove"): a JSON array of refs, e.g. ["node/123"]. Edited by hand.
+const HIDDEN_FILE = process.env.BINA_HOTELS_HIDDEN || '/root/storage/hotel-outreach/hidden.json';
 const KINDS = {
   hotel: { en: 'Hotel', am: 'ሆቴል' },
   guest_house: { en: 'Guest house', am: 'የእንግዳ ማረፊያ' },
@@ -124,14 +126,22 @@ function buildDirectory(osm, wikidata) {
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const clean = (s, n) => String(s || '').replace(/\s+/g, ' ').trim().slice(0, n);
 
+// Sent by @bina_smart_bot (BINA_RIDER_BOT_TOKEN) to the admin chats. Not BINASMART_TG_TOKEN: that is the old
+// @gccandconectbot, which the owner never started - getChat on 26 Sep 2026 said "chat not found" for both chats,
+// so every claim would have vanished. The sending bot and the chat must belong together.
 async function tellOwner(text) {
-  const tok = process.env.BINASMART_TG_TOKEN, chat = process.env.BINA_OWNER_TG_CHAT || process.env.BINASMART_ADMIN_TG_CHAT;
-  if (!tok || !chat) return false;
-  try {
-    const r = await fetch('https://api.telegram.org/bot' + tok + '/sendMessage', { method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ chat_id: chat, text, parse_mode: 'HTML', disable_web_page_preview: true }) });
-    return (await r.json()).ok === true;
-  } catch (e) { return false; }
+  const tok = process.env.BINA_RIDER_BOT_TOKEN;
+  const chats = [process.env.BINASMART_ADMIN_TG_CHAT, process.env.BINASMART_OPS_TG_CHAT].filter(Boolean);
+  if (!tok || !chats.length) return false;
+  let ok = false;
+  for (const chat of [...new Set(chats)]) {
+    try {
+      const r = await fetch('https://api.telegram.org/bot' + tok + '/sendMessage', { method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ chat_id: chat, text, parse_mode: 'HTML', disable_web_page_preview: true }) });
+      ok = (await r.json()).ok === true || ok;
+    } catch (e) { /* the other chat may still get it */ }
+  }
+  return ok;
 }
 
 function page(p, claimed) {
@@ -222,10 +232,12 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
   function load() {
     let st; try { st = fs.statSync(FILE); } catch (e) { return cache; }
     let wdm = 0; try { wdm = fs.statSync(WD_FILE).mtimeMs; } catch (e) { /* optional */ }
+    try { wdm += fs.statSync(HIDDEN_FILE).mtimeMs; } catch (e) { /* optional */ }
     if (st.mtimeMs + wdm === cache.mtime) return cache;
     try {
       let wd = []; try { wd = JSON.parse(fs.readFileSync(WD_FILE, 'utf8')).hotels || []; } catch (e) { /* optional */ }
-      const list = buildDirectory(JSON.parse(fs.readFileSync(FILE, 'utf8')), wd);
+      let hidden = []; try { hidden = JSON.parse(fs.readFileSync(HIDDEN_FILE, 'utf8')); } catch (e) { /* optional */ }
+      const list = buildDirectory(JSON.parse(fs.readFileSync(FILE, 'utf8')), wd).filter(p => !hidden.includes(p.ref));
       cache = { mtime: st.mtimeMs + wdm, list, bySlug: new Map(list.map(p => [p.slug, p])), byRef: new Map(list.map(p => [p.ref, p])) };
     } catch (e) { fastify.log.error('hotel directory: ' + e.message); }
     return cache;
