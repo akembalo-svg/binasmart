@@ -35,6 +35,8 @@ test('a listing shows landlines, never a mobile', () => {
   assert.deepEqual(buildDirectory(osm)[0].phones, ['+251110000001']);
   assert.deepEqual(landlines('0900000001, 0700000002, +251 900 000 003'), []);
   assert.deepEqual(landlines('+251110000001/02, 0110000003'), ['+251110000001/02', '0110000003']);
+  assert.deepEqual(landlines('+251 900 000 004 (bookings +251 110 000005)'), [], 'a mobile anywhere in the part drops it');
+  assert.deepEqual(landlines('00251900000006'), [], 'the 00251 form is a mobile too');
 });
 
 test('a place the map draws as a building counts when its name says it is somewhere to stay', () => {

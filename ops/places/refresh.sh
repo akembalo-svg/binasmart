@@ -23,4 +23,6 @@ node ops/places/office-contacts-md.js || echo "!! office-contacts-md failed"
 node --env-file=.env ops/places/employer-osm.js --apply | grep -E "employers without|written" || echo "!! employer-osm failed"
 # Wikidata's Addis hotels (CC0) for the hotel directory; a failed fetch keeps last month's file.
 node ops/places/wikidata-hotels.js || echo "!! wikidata-hotels failed"
+# Bini's hotel knowledge from the same data as bina.et/hotels; replaces the addis-hotels.md osm-addis.js wrote above.
+node ops/places/hotels-md.js || echo "!! hotels-md failed"
 echo "== done $(date -u +%Y-%m-%dT%H:%MZ)"

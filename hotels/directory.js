@@ -36,9 +36,12 @@ const SUB_AM = { 'Addis Ketema': 'አዲስ ከተማ', 'Akaki Kality': 'አቃ�
 const MOBILE = /^(?:\+?251|0)?[79]\d{8}$/;
 
 // "+251116292329/30, 0911…" -> the landline parts only, as written.
+// A part is dropped when a mobile appears ANYWHERE in it, not only when the whole part is one: the map has
+// "+251 9… (bookings +251 114 …)" and "00251 9…" (26 Sep 2026 - both reached a public page before this).
+const MOBILE_ANY = /(?:\+?251[\s-]?|\b0)[79](?:[\s-]?\d){8}/;
 function landlines(raw) {
   return String(raw || '').split(/[;,]/).map(s => s.trim()).filter(Boolean)
-    .filter(s => { const d = s.split('/')[0].replace(/[^\d+]/g, ''); return d.replace(/\D/g, '').length >= 9 && !MOBILE.test(d); });
+    .filter(s => { const d = s.split('/')[0].replace(/[^\d+]/g, ''); return d.replace(/\D/g, '').length >= 9 && !MOBILE.test(d) && !MOBILE_ANY.test(s); });
 }
 const kebab = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[^\x00-\x7f]/g, '').replace(/&/g, ' and ')
   .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
