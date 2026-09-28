@@ -1251,6 +1251,25 @@ fastify.post('/api/assistant', async (req, reply) => {
     // Backstop: a clearly stated fact gets saved even when the model forgot to call remember().
     if (!toolsUsed.includes('remember') && mem.persistent) for (const f of require('./assistant/memory').extractMemory(msg)) { await execute('remember', { field: f.field, value: f.value }).catch(() => {}); toolsUsed.push('remember*'); }
     text = biniGuards(text, msg, hist, String(ctx || '') + ' ' + preTool + ' ' + toolOut);
+    // An English question gets an English answer. The model sometimes answers a clearly English question in
+    // Amharic when its tools and knowledge came back in Amharic (15 of 73 real English messages in September;
+    // nightly guard, 28 Sep 2026). Only when the question is unmistakably English (3+ Latin words, no Ethiopic)
+    // and most of the reply is Ethiopic outside brackets, the reply is TRANSLATED - no tool runs again and no new
+    // fact can enter; a failed translation keeps the original.
+    if (lang === 'en' && text && !/[\u1200-\u137f]/.test(msg) && (msg.match(/[A-Za-z]{2,}/g) || []).length >= 3) {
+      const bare = text.replace(/\([^)]*\)/g, '');
+      const eth = (bare.match(/[\u1200-\u137f]/g) || []).length, lat = (bare.match(/[A-Za-z]/g) || []).length;
+      if (eth > 0.5 * (eth + lat)) {
+        const en = await callBini('Translate the assistant answer below into clear, natural English. Keep every number, price, date, name, phone, link and list item exactly as written; keep Amharic place names and put the English name first. Output only the translation.',
+          [{ role: 'user', content: text }], 900).catch(() => '');
+        const e2 = (en.match(/[\u1200-\u137f]/g) || []).length, l2 = (en.match(/[A-Za-z]/g) || []).length;
+        if (en && l2 > e2) { text = en.trim(); toolsUsed.push('translated_en'); }
+      }
+    }
+    // A hotel answer always carries its way in. search_hotels returns each hotel's bina.et/hotels link and the model
+    // often drops them all (replay of real questions, 28 Sep 2026): when none survived, the directory link is added.
+    if (toolsUsed.some(n => /^search_hotels/.test(n)) && text && !/bina\.et\/hotels/.test(text))
+      text += (lang === 'am' ? '\n\n🏨 ሁሉም ሆቴሎችና የእንግዳ ማረፊያዎች፦ ' : '\n\n🏨 All hotels and guest houses: ') + 'https://bina.et/hotels';
     // A complaint goes to a person even when Bini sounded confident, and it is never rate-limited:
     // a second complaint from the same rider is more urgent than the first, not less.
     const always_handover = COMPLAINT_RE.test(msg) || biniMemory.wantsHuman(msg);

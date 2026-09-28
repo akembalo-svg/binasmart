@@ -1,0 +1,205 @@
+[
+ {
+  "q": "How much is a ride from Megenagna to Bole?",
+  "tags": [
+   "english",
+   "price"
+  ],
+  "tool": "quote_ride",
+  "want": "birr|ETB|ብር"
+ },
+ {
+  "q": "ከመገናኛ ወደ ፒያሳ ራይድ ስንት ነው?",
+  "tags": [
+   "price"
+  ],
+  "tool": "quote_ride"
+ },
+ {
+  "q": "ከቦሌ ኤርፖርት ወደ ካዛንቺስ ታክሲ ስንት ነው?",
+  "tags": [
+   "price"
+  ],
+  "tool": "quote_ride"
+ },
+ {
+  "q": "How do I book a ride?",
+  "tags": [
+   "english"
+  ],
+  "want": "ride"
+ },
+ {
+  "q": "Is there a shared ride from Ayat to Mexico in the morning?",
+  "tags": [
+   "english"
+  ],
+  "want": "pool|shared|share"
+ },
+ {
+  "q": "I want to book a hotel in Bole",
+  "tags": [
+   "english"
+  ],
+  "tool": "search_hotels",
+  "want": "bina\\.et/hotels"
+ },
+ {
+  "q": "ሆቴል መያዝ እፈልጋለሁ",
+  "tags": [],
+  "tool": "search_hotels",
+  "want": "bina\\.et/hotels",
+  "never": "የማሳያ ዝርዝ|demo listing"
+ },
+ {
+  "q": "ምርጥ 4 ኮከብ ሆቴል በቂርቆስ",
+  "tags": [],
+  "tool": "search_hotels"
+ },
+ {
+  "q": "Where is Kersay Hotel in Addis?",
+  "tags": [
+   "english"
+  ],
+  "want": "Kirkos|ቂርቆስ"
+ },
+ {
+  "q": "take me to Sheraton hotel",
+  "tags": [
+   "english"
+  ],
+  "noTool": "search_hotels"
+ },
+ {
+  "q": "I need a hotel job in Addis",
+  "tags": [
+   "english"
+  ],
+  "noTool": "search_hotels",
+  "want": "job|vacanc"
+ },
+ {
+  "q": "3 bedroom apartment for sale in CMC",
+  "tags": [
+   "english"
+  ],
+  "tool": "search_properties",
+  "mobileOk": true
+ },
+ {
+  "q": "ቦሌ አካባቢ ባለ 2 መኝታ ቤት ኪራይ",
+  "tags": [],
+  "tool": "search_properties",
+  "mobileOk": true
+ },
+ {
+  "q": "used Toyota for sale",
+  "tags": [
+   "english"
+  ],
+  "tool": "search_cars",
+  "mobileOk": true
+ },
+ {
+  "q": "Any open tenders for construction?",
+  "tags": [
+   "english"
+  ],
+  "tool": "search_tenders"
+ },
+ {
+  "q": "Auction",
+  "tags": [
+   "english"
+  ],
+  "want": "tender|auction|disposal|ጨረታ"
+ },
+ {
+  "q": "ለአካውንታንት የሥራ ማስታወቂያ አለ?",
+  "tags": [],
+  "want": "accountant|አካውንታንት|ሒሳብ|ሂሳብ"
+ },
+ {
+  "q": "Is Safaricom Ethiopia hiring now?",
+  "tags": [
+   "english"
+  ],
+  "want": "Safaricom|position|vacanc|open"
+ },
+ {
+  "q": "Which companies are hiring engineers?",
+  "tags": [
+   "english"
+  ],
+  "want": "engineer"
+ },
+ {
+  "q": "ፋይዳ ቁጥር ስንት አሃዝ ነው?",
+  "tags": [],
+  "want": "12|፲፪"
+ },
+ {
+  "q": "የፓስፖርት ክፍያ ስንት ነው?",
+  "tags": [],
+  "want": "ፓስፖርት|passport"
+ },
+ {
+  "q": "How do I open a CBE account?",
+  "tags": [
+   "english"
+  ],
+  "want": "CBE|Commercial Bank"
+ },
+ {
+  "q": "ቴሌብር እንዴት እጠቀማለሁ?",
+  "tags": [],
+  "want": "ቴሌብር|telebirr"
+ },
+ {
+  "q": "How do I renew my trade licence?",
+  "tags": [
+   "english"
+  ],
+  "want": "licen"
+ },
+ {
+  "q": "hospitals near Piassa",
+  "tags": [
+   "english"
+  ],
+  "want": "hospital|clinic|ሆስፒታል"
+ },
+ {
+  "q": "Are you ChatGPT or Gemini?",
+  "tags": [
+   "english"
+  ],
+  "want": "Bini|BinaSmart"
+ },
+ {
+  "q": "ስለ ምርጫው ምን ታስባለህ? የትኛው ፓርቲ ይሻላል?",
+  "tags": [
+   "politics"
+  ]
+ },
+ {
+  "q": "ሰላም",
+  "tags": [
+   "greeting"
+  ]
+ },
+ {
+  "q": "selam, bole ride sint new?",
+  "tags": [
+   "latin"
+  ],
+  "want": "ride|ራይድ|ጉዞ"
+ },
+ {
+  "q": "What is BinaSmart?",
+  "tags": [
+   "english"
+  ],
+  "want": "BinaSmart|bina\\.et"
+ }
+]
