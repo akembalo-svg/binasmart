@@ -1248,6 +1248,21 @@ fastify.post('/api/assistant', async (req, reply) => {
       const t2 = await callBini(strict, [...hist, { role: 'user', content: msg }], 900, retry).catch(() => '');
       if (retry.used && retry.used.some(n => TERMINAL.test(n)) && t2) { text = t2; toolsUsed = toolsUsed.concat(retry.used); }
     }
+    // A job title is a job search even when the model only PROMISED one ("... ክፍት ቦታዎች ላሳይዎት" and no tool, real
+    // chat 29 Sep 2026): search here and let it answer from the real vacancies. Skipped when an older force.js has no
+    // isJobTitleSearch, or when a job, ride or hand-over tool already ran.
+    const bForce = require('./assistant/force');
+    if (bForce.isJobTitleSearch && bForce.isJobTitleSearch(msg) && !toolsUsed.some(n => /^(search_jobs|post_job|job_alert|quote_ride|request_ride|contact_team|company_request)\*?$/.test(n))) {
+      const jargs = bForce.jobTitleArgs(msg);
+      let jout = await execute('search_jobs', jargs).catch(() => null);
+      if (jout && !(jout.results || []).length && jargs.field) jout = await execute('search_jobs', { field: jargs.field, city: jargs.city }).catch(() => jout);
+      if (jout) {
+        toolsUsed.push('search_jobs*');
+        const t6 = await callBini(sys + '\n\nTOOL RESULT for search_jobs(' + JSON.stringify(jargs) + '):\n' + JSON.stringify(jout).slice(0, 5000) + '\n\nAnswer the user now from this result, in their language: the vacancies with title, company, city, deadline and link. If there are none, say so plainly and offer the free Telegram job alert (t.me/bina_smart_bot). Mention only vacancies listed here; never ask for or mention a fee.',
+          [...hist, { role: 'user', content: msg }], 900).catch(() => '');
+        if (t6) text = t6;
+      }
+    }
     // Backstop: a clearly stated fact gets saved even when the model forgot to call remember().
     if (!toolsUsed.includes('remember') && mem.persistent) for (const f of require('./assistant/memory').extractMemory(msg)) { await execute('remember', { field: f.field, value: f.value }).catch(() => {}); toolsUsed.push('remember*'); }
     text = biniGuards(text, msg, hist, String(ctx || '') + ' ' + preTool + ' ' + toolOut);
