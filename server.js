@@ -1181,7 +1181,9 @@ fastify.post('/api/assistant', async (req, reply) => {
     };
     // Flash sometimes answers a price or "remember me" from memory; on those intents the first round must call a tool.
     // Which intents those are, and why a price word is not one of them on its own any more (a bank and an airline charge too): assistant/force.js.
-    const allTools = biniTools.toOpenAI();
+    // Only the tools this conversation can need (assistant/tool-router.js): all 19 definitions are ~4,400 tokens on
+    // every call. Unclear topic, owner/company/listing helper modes -> every tool, as before.
+    const allTools = require('./assistant/tool-router').pickTools(biniTools.toOpenAI(), { msg, hist, special: !!(b.listing || b.company || b.hotel) });
     const forced = biniForce.shouldForceTool(msg);
     const rememberIntent = /(remember|አስታውስ|አስታውሰኝ|yaadadh)/i.test(msg);
     // While forcing, the model may only choose an action tool: never contact_team (that spammed handovers), remember only on remember intent.
