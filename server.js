@@ -912,6 +912,10 @@ async function callBini(system, messages0, maxTokens, opts){
       clearTimeout(to);
       const d = await r.json();
       // Token counts for labelled calls (tool agents: the owner agent). Counts only — never the prompt.
+      // Meter: every model call, one line per call in /root/storage/ai-usage/bini-<date>.log (time, model, prompt and
+      // completion tokens). ops/ai-cost.js turns it into a daily bill. Fire-and-forget; a full disk never breaks a reply.
+      if (d && d.usage) fs.promises.appendFile('/root/storage/ai-usage/bini-' + new Date().toISOString().slice(0, 10) + '.log',
+        new Date().toISOString().slice(11, 19) + ' ' + model + ' ' + (d.usage.prompt_tokens || 0) + ' ' + (d.usage.completion_tokens || 0) + '\n').catch(() => {});
       if (opts && opts.label && d && d.usage) console.log('[bini] usage ' + opts.label + ' prompt=' + d.usage.prompt_tokens + ' completion=' + d.usage.completion_tokens);
       let text = '';
       if (fmt === 'openai') {

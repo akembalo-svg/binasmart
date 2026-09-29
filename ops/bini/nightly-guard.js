@@ -12,6 +12,9 @@
 // Quiet by design: the weekly Amharic check (amharic-eval.js) is the report; this one speaks only when Bini got
 // worse - a score 3 or more below the last run, or under 70%, or 2+ empty answers - so a message means act.
 // Cron 02:15 UTC (05:15 Addis), before the morning traffic. Results: /root/bini-eval/nightly-<date>.json
+// Cost (29 Sep 2026): 30 questions a night cost more than all real users together (~$7.50 a month at list price), so
+// each night asks ONE THIRD of the set (question n where n % 3 == day % 3): every question still runs every 3 nights,
+// and a night is compared with the last run of the same third. --all asks all 30.
 const fs = require('fs');
 const path = require('path');
 const { check } = require('./checks');
@@ -39,7 +42,9 @@ function judge(item, reply, tools) {
 }
 
 (async () => {
-  const items = JSON.parse(fs.readFileSync(path.join(__dirname, 'nightly-questions.json'), 'utf8'));
+  const every = JSON.parse(fs.readFileSync(path.join(__dirname, 'nightly-questions.json'), 'utf8'));
+  const part = Math.floor(Date.now() / 864e5) % 3;
+  const items = process.argv.includes('--all') ? every : every.filter((_, i) => i % 3 === part);
   const rows = [];
   for (let i = 0; i < items.length; i++) {
     const it = items[i], t0 = Date.now();
@@ -57,16 +62,22 @@ function judge(item, reply, tools) {
   const passed = rows.filter(r => r.ok).length, empty = rows.filter(r => r.fails.some(f => f === 'empty' || f.startsWith('error'))).length;
   const date = new Date().toISOString().slice(0, 10);
   fs.mkdirSync(OUT, { recursive: true });
-  const prevFile = fs.readdirSync(OUT).filter(f => /^nightly-\d{4}-\d\d-\d\d\.json$/.test(f) && f !== 'nightly-' + date + '.json').sort().pop();
-  const prev = prevFile ? JSON.parse(fs.readFileSync(path.join(OUT, prevFile), 'utf8')) : null;
-  const result = { date, passed, total: rows.length, empty, avgMs: Math.round(rows.reduce((a, r) => a + r.ms, 0) / rows.length), rows };
+  // The last run that asked the same questions (older runs asked all 30: compare on the shared questions only).
+  const sameQs = new Set(rows.map(r => r.q));
+  let prev = null;
+  for (const f of fs.readdirSync(OUT).filter(f => /^nightly-\d{4}-\d\d-\d\d\.json$/.test(f) && f !== 'nightly-' + date + '.json').sort().reverse()) {
+    const old = JSON.parse(fs.readFileSync(path.join(OUT, f), 'utf8'));
+    const shared = old.rows.filter(r => sameQs.has(r.q));
+    if (shared.length >= rows.length) { prev = { passed: shared.filter(r => r.ok).length, total: shared.length, rows: shared }; break; }
+  }
+  const result = { date, part: process.argv.includes('--all') ? 'all' : part, passed, total: rows.length, empty, avgMs: Math.round(rows.reduce((a, r) => a + r.ms, 0) / rows.length), rows };
   console.log('Bini nightly guard ' + date + ': ' + passed + '/' + rows.length + (prev ? ' (last run ' + prev.passed + '/' + prev.total + ')' : ' (first run)') + ' · avg ' + result.avgMs + ' ms · long answers ' + rows.filter(r => r.long).length);
   for (const r of rows.filter(r => !r.ok)) console.log('  ❌ #' + r.n + ' ' + r.q.slice(0, 50) + ' -> ' + r.fails.join(', '));
   if (dry) return;
   fs.writeFileSync(path.join(OUT, 'nightly-' + date + '.json'), JSON.stringify(result, null, 1));
 
   const newlyBroken = prev ? rows.filter(r => !r.ok && (prev.rows.find(p => p.q === r.q) || {}).ok) : [];
-  const alarm = (prev && passed <= prev.passed - 3) || passed < rows.length * 0.7 || empty >= 2;
+  const alarm = (prev && passed <= prev.passed - Math.max(2, Math.round(rows.length / 10))) || passed < rows.length * 0.7 || empty >= 2;
   if (!alarm) return;
   if (!TOKEN || !CHAT) { console.error('alarm, but no BINA_RIDER_BOT_TOKEN / BINI_EVAL_CHAT to send it'); process.exitCode = 1; return; }
   const text = ['⚠️ Bini got worse overnight: ' + passed + '/' + rows.length + (prev ? ' (was ' + prev.passed + '/' + prev.total + ')' : ''),
