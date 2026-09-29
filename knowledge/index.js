@@ -617,6 +617,7 @@ function makeQueryTranslator({ apiKey, fetchImpl, model, timeoutMs } = {}) {
           generationConfig: { temperature: 0, maxOutputTokens: 64, thinkingConfig: { thinkingBudget: 0 } } }) });
       if (!r.ok) throw new Error('gemini ' + r.status);
       const j = await r.json();
+      try { require('../assistant/ai-meter').meter('translate', model || BILINGUAL_MODEL, j.usageMetadata); } catch (e) { /* meter only */ }
       const parts = (((j.candidates || [])[0] || {}).content || {}).parts;
       const raw = String((parts && parts[0] && parts[0].text) || '').replace(/\s+/g, ' ').trim().replace(/^["'“”]+|["'“”]+$/g, '');
       if (!raw) throw new Error('empty');
@@ -1084,6 +1085,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
       });
       if (!r.ok) throw new Error('rerank ' + r.status);
       const j = await r.json();
+      try { require('../assistant/ai-meter').meter('rerank', RERANK_MODEL, j.usageMetadata); } catch (e) { /* meter only */ }
       const txt = (((j.candidates || [])[0] || {}).content || {}).parts?.[0]?.text || '';
       const m = txt.match(/\[[\s\S]*?\]/); if (!m) throw new Error('no array');
       const ord = JSON.parse(m[0]).filter(n => Number.isInteger(n) && n >= 0 && n < cands.length);
