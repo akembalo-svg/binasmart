@@ -73,7 +73,7 @@ function check(item, reply, { known, tools } = {}) {
   const priced = Array.isArray(tools) && tools.some(t => /^(quote_ride|pool_board|search_tenders|ride_status)$/.test(t));
   const isEn = tags.includes('english'), isLatin = tags.includes('latin'), isOm = tags.includes('om');
   if (!r.trim()) fails.push('empty');
-  if (isEn) { if (ETHIOPIC.test(r.replace(/\([^)]*\)/g, '').replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ/g, ''))) fails.push('english_drift_to_amharic'); }   // an Amharic name in brackets is a help, not drift
+  if (isEn) { if (ETHIOPIC.test(r.replace(/\([^)]*\)/g, '').replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ|ሰላም/g, ''))) fails.push('english_drift_to_amharic'); }   // an Amharic name in brackets, or a "ሰላም" greeting, is not drift
   else if (isOm) { if (ETHIOPIC.test(r.replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ/g, ''))) fails.push('oromo_drift_to_amharic'); if (!OROMO_HINT.test(r)) fails.push('not_oromo'); }
   else if (!ETHIOPIC.test(r)) fails.push('no_amharic_script');
   if (isLatin && !/\([^)]*[a-z]{3,}[^)]*\)\s*$/i.test(r.trim())) fails.push('latin_gloss_missing');
