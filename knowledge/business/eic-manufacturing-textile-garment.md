@@ -1,27 +1,30 @@
 ---
 url: "https://investethiopia.gov.et/key-sectors/manufacturing/textile-garment"
 title: "Ethiopian Investment Commission — Textile & Garment | Ethiopian Investment Commission"
-titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የጨርቃጨርቅና አልባሳት ዘርፍ"
+titleAm: "የኢትዮጵያ ኢንቨስትመንት ኮሚሽን: የጨርቃጨርቅ እና አልባሳት ዘርፍ"
 source_name: "Ethiopian Investment Commission"
 section: "sectors"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
-contentHash: "25a6df8a380b3840d7ca4bb79fe00738836bf076"
+fetchedAt: "2026-09-20"
+lastChecked: "2026-09-20"
+firstFetched: "2026-09-17"
+contentHash: "646eef3d5b4e0fd5cc02c89a82ba1c55199e1e57"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Ethiopian Investment Commission — Textile & Garment | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የጨርቃጨርቅና አልባሳት ዘርፍ
+# Ethiopian Investment Commission — Textile & Garment | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን: የጨርቃጨርቅ እና አልባሳት ዘርፍ
 
 Ethiopian Investment Commission — sectors — Textile & Garment | Ethiopian Investment Commission. On this page: Textile & apparel, Brands working with us, Keep in touch.
 
 በአማርኛ፦ የኢንቨስትመንት ዘርፎች — Textile & Garment | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
-ኢትዮጵያ በጨርቃጨርቅና አልባሳት ዘርፍ ለባለሀብቶች ማራኪ የኢንቨስትመንት ዕድል ትሰጣለች። ይህ ዘርፍ ከ2020 ጀምሮ በአራት እጥፍ አድጎ ከ140 ሚሊዮን ዶላር በላይ ወደ ውጭ በመላክ የላቀ አፈጻጸም አሳይቷል። እንደ AGOA እና EBA ባሉ የንግድ ስምምነቶች በመታገዝ ኢትዮጵያ በቀጣዩ አስርት ዓመታት ውስጥ 30 ቢሊዮን ዶላር ወደ ውጭ ለመላክ በማቀድ የአፍሪካ መሪ የጨርቃጨርቅ ማምረቻ ማዕከል ለመሆን እየተንቀሳቀሰች ነው።
+ይህ ገጽ ኢትዮጵያ በጨርቃጨርቅ እና አልባሳት ዘርፍ ላለፉት ባለሀብቶች ማራኪ የኢንቨስትመንት ዕድል እንደምትሰጥ ያብራራል። እ.ኤ.አ. ከ2020 ጀምሮ የጨርቃጨርቅ እና አልባሳት ዘርፍ በአራት እጥፍ አድጓል፣ ከ140 ሚሊዮን ዶላር በላይ ወደ ውጭ በመላክ ላይ ይገኛል። ኢትዮጵያ በቀጣዮቹ አስር ዓመታት ውስጥ 30 ቢሊዮን ዶላር ወደ ውጭ የመላክ ግብ በማውጣት በአፍሪካ ግንባር ቀደም የጨርቃጨርቅ እና የማምረቻ ማዕከል ለመሆን እየተንቀሳቀሰች ነው።
 
-Source: https://investethiopia.gov.et/key-sectors/manufacturing/textile-garment (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
+Source: https://investethiopia.gov.et/key-sectors/manufacturing/textile-garment (official Ethiopian Investment Commission page, in English), fetched 2026-09-20. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
+
+INVEST IN ETHIOPIA
 
 # Textile & apparel
 
@@ -38,5 +41,9 @@ We are on our way to becoming the leading textile and manufacturing hub in Afric
 ## Brands working with us
 
 ### Keep in touch
+
+Mulusew Ashenf+25191522833
+
+Mulusew.Ashenf@eic.gov.et
 
 Invest in Ethiopia’s Textile SectorView All Resources

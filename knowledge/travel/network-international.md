@@ -5,9 +5,10 @@ source_name: "Ethiopian Airlines"
 section: "fleet-network"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
-contentHash: "c40dec5b6b07b118423fdf3e7e719e05a6dd4d23"
+fetchedAt: "2026-09-27"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-16"
+contentHash: "a17b6fd0a5eff4568f86b06a8d906b3a01152f10"
 generated_by: "ops/travel/fetch-airline.js"
 packFormat: "2"
 ---
@@ -18,7 +19,7 @@ Ethiopian Airlines — fleet-network — International Network | Ethiopian Airli
 
 በአማርኛ፦ አውሮፕላኖችና መዳረሻዎች — International Network | Ethiopian Airlines Ethiopian | ET። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
 
-Source: https://www.ethiopianairlines.com/et/explore/network/international (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Source: https://www.ethiopianairlines.com/et/explore/network/international (official Ethiopian Airlines page, in English), fetched 2026-09-27. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 #
 Ethiopian Airlines International Destinations
@@ -29,7 +30,7 @@ GLOBAL DESTINATIONS
 
 ## 126
 
-All POINTS
+ALL POINTS
 
 ## 4
 
@@ -1317,7 +1318,7 @@ What to visit in Tokyo
 - Shibuya Crossing
 - Tokyo Skytree
 
-Show More
+show more
 
 ### Explore Africa Flight Routes
 

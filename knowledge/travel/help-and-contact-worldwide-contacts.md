@@ -5,9 +5,10 @@ source_name: "Ethiopian Airlines"
 section: "help"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
-contentHash: "c29c61a4264ff9bf75fc8273c74227c254c73ba6"
+fetchedAt: "2026-09-27"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-16"
+contentHash: "7f75776ece57ecebfe028fd214405e613026be23"
 generated_by: "ops/travel/fetch-airline.js"
 packFormat: "2"
 ---
@@ -18,7 +19,7 @@ Ethiopian Airlines — help — Worldwide Contacts. On this page: Ethiopian Worl
 
 በአማርኛ፦ እገዛና አድራሻ — Worldwide Contacts። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
 
-Source: https://www.ethiopianairlines.com/et/services/help-and-contact/worldwide-contacts (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Source: https://www.ethiopianairlines.com/et/services/help-and-contact/worldwide-contacts (official Ethiopian Airlines page, in English), fetched 2026-09-27. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 #
 Ethiopian Worldwide Contacts
@@ -3339,7 +3340,7 @@ E-mail: | HGAsales@ethiopianairlines.com
 Reservation : reservation@noble-travel.com
 Sales : HGAsales@ethiopianairlines.com
 Office Manager: Abdirahman.issa@noble-travel.com
-Area Manager: BeniyamAy@ethiopianairlines.com |
+Area Manager: HirpaA@ethiopianairlines.com |
 E-Working Hours: | Mon-Sun 7:30 AM to 6:30 PM |
 
 Airport Office
@@ -3424,14 +3425,14 @@ Working Hours: | MON-FRI 09AM to 06PM |
 
 Airport Office
 Airport: | Incheon Airport |
-Address: | #2056, Passenger Terminal, Incheon Int`l Airport
+Address: | #4817, Passenger Terminal, Incheon Int`l Airport
 Woonseo-dong, Joong-Gu, Incheon City, Korea |
 Phone: | +82-32-743-5704 |
 E-mail: | icnet@sharp.co.kr
 ICNbaggage@ethiopianairlines.com
 |
 Working Hours: | TUE, THU, SAT: 01Pm to 10Pm |
-Global Call Center number: | 823083210197 |
+Global Call Center number: | 003083210197 |
 
 Contact for South Sudan Tomping, Airport - Ministries Road, Panorama Plaza Hotel, Ground Floor
 

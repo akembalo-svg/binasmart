@@ -1,0 +1,594 @@
+---
+title: "Hotels, guest houses, hostels and apartments in Addis Ababa (ሆቴሎችና የእንግዳ ማረፊያዎች)"
+url: "https://bina.et/hotels"
+lang: "en"
+source_name: "BinaSmart hotel directory: OpenStreetMap contributors (ODbL) and Wikidata (CC0)"
+fetched: "2026-09-26"
+count: "552"
+---
+
+# Places to stay in Addis Ababa · በአዲስ አበባ ያሉ ሆቴሎችና የእንግዳ ማረፊያዎች
+
+552 places to stay, grouped by sub-city, as of 2026-09-26: 360 hotels, 142 guest houses and pensions, 13 apartments, 37 hostels and motels. The full list with search is at https://bina.et/hotels. This is where each place is and what the city map says about it, not an official licence register or star rating. Only hotels that list their rooms on BinaSmart can be booked on bina.et; for the others, call the hotel. A hotel owner claims their listing free on its bina.et page ("Claim this listing"); a hotel that is not listed can be added from https://bina.et/hotels ("My hotel isn't in the list").
+
+## Bole sub-city · ቦሌ ክፍለ ከተማ — 226
+
+- **Golden Tulip** · hotel · ሆቴል · 5-star · BL\_03\_670 St. · https://bina.et/hotels/golden-tulip-n4429346206
+- **Jupiter international (Bole)** (ጁፒተር ሆቴል) · hotel · ሆቴል · 4-star · office phone +251 (0) 11 661 6969, +251 (0) 11 552 7333 · website https://www.jupiterhotel.com/ · https://bina.et/hotels/jupiter-international-bole-n1697805263
+- **Jupiter International Hotel** (ጁፒተር ኢንተርናሽናል ሆቴል) · hotel · ሆቴል · 4-star · office phone +251116616969 · https://bina.et/hotels/jupiter-international-hotel-w58706701
+- **Aaran Hotel** · hotel · ሆቴል · Bole Michael Woreda 01, Ayer Amba · office phone +251116392240 · https://bina.et/hotels/aaran-hotel-n5911892785
+- **Abbas NazrAli HOME ABEL** · hostel · ሆስቴል · https://bina.et/hotels/abbas-nazrali-home-abel-n8568509819
+- **Abbysinia Renaisence** (አቢሲኒያ ሬናይሰንስ) · hotel · ሆቴል · Bob Marley Square · https://bina.et/hotels/abbysinia-renaisence-w184876464
+- **abegaz hotel** (አበጋዝ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/abegaz-hotel-n8493690826
+- **Abyssinia Guest House** · guest house / pension · የእንግዳ ማረፊያ · Mickey Leland Street · website http://www.abyssiniaguesthouse.com · https://bina.et/hotels/abyssinia-guest-house-n6799476385
+- **Addis Bright Guesthouse** · hotel · ሆቴል · office phone +251116673029 · https://bina.et/hotels/addis-bright-guesthouse-n5279417721
+- **Addissinia Hotel** · hotel · ሆቴል · Djibouti Street · https://bina.et/hotels/addissinia-hotel-w348301516
+- **Adites Guesthouse** · hotel · ሆቴል · https://bina.et/hotels/adites-guesthouse-n7116686490
+- **Adore** · hotel · ሆቴል · https://bina.et/hotels/adore-n13059876102
+- **afajeshgn hotel** (አፋጀሽኝ) · hotel · ሆቴል · https://bina.et/hotels/afajeshgn-hotel-n11011157305
+- **AFARENSIS International Hotel አፋረንሲስ አለምአቀፍ ሆቴል** · hotel · ሆቴል · bole subcity kebele 08/09 hous no074, Addis Ababa · office phone 0116629700 · https://bina.et/hotels/afarensis-international-hotel-n6269898185
+- **Agerbet Guesthouse** · guest house / pension · የእንግዳ ማረፊያ · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/agerbet-guesthouse-n845052308
+- **Airport Motel** (የአየር ማረፊያ ሞቴል) · hotel · ሆቴል · office phone +251116610422 · https://bina.et/hotels/airport-motel-w205209699
+- **Alef Hotel** · hotel · ሆቴል · Equatorial Guinea Street · https://bina.et/hotels/alef-hotel-n4967287133
+- **Alula 2** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/alula-2-n6332800288
+- **Amanaya Guesthouse** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/amanaya-guesthouse-n3875820123
+- **Amared Hotel** · hotel · ሆቴል · https://bina.et/hotels/amared-hotel-n5087890321
+- **Ambassador Hotel** (አምባሳደር ሆቴል) · hotel · ሆቴል · Cameroon Street · office phone +251 116188284 · https://bina.et/hotels/ambassador-hotel-n6980183685
+- **Ambassador Hotel Bole** (አምባሳደር ሆቴል) · hotel · ሆቴል · office phone +251116188284 · https://bina.et/hotels/ambassador-hotel-bole-n1697805261
+- **Andromeda Hotel** · hotel · ሆቴል · https://bina.et/hotels/andromeda-hotel-n10589614179
+- **Anteneh House** (አንተነህ ቤት) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/anteneh-house-n5174345621
+- **Anteneh's home የአንተነህ ቤት** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/anteneh-s-home-n5238273723
+- **Ark Hotel** · hotel · ሆቴል · https://bina.et/hotels/ark-hotel-n6814279366
+- **Aroma** (Aroma Guest House) · guest house / pension · የእንግዳ ማረፊያ · Road to Gergi Giorgis · https://bina.et/hotels/aroma-n8552489718
+- **Atlas International Hotel** (አትላስ ኢንተርናሽናል ሆቴል) · hotel · ሆቴል · office phone +251116187432 · website https://atlasinternationalhotel.com/ · https://bina.et/hotels/atlas-international-hotel-w199677809
+- **Awraris Hotel** (አውራሪስ ሆቴል) · hotel · ሆቴል · office phone +251116614933, +251116634404 · https://bina.et/hotels/awraris-hotel-w184870603
+- **Awraris Hotel (Haya hulet)** · hotel · ሆቴል · https://bina.et/hotels/awraris-hotel-haya-hulet-n7920285785
+- **AZEMAN HOTEL** · apartment · አፓርትመንት · https://bina.et/hotels/azeman-hotel-n10794916106
+- **Azzeman** · hotel · ሆቴል · https://bina.et/hotels/azzeman-n4479547892
+- **Bagy Hotel** · hotel · ሆቴል · https://bina.et/hotels/bagy-hotel-n4418239290
+- **Baks Hotel Appartement** (ባክስ ሆቴል አፓርታመንት) · hotel · ሆቴል · https://bina.et/hotels/baks-hotel-appartement-n547972069
+- **Base Ethiopia** · hotel · ሆቴል · https://bina.et/hotels/base-ethiopia-n3157961261
+- **BBC Hotel** · hotel · ሆቴል · https://bina.et/hotels/bbc-hotel-n4940307622
+- **Beer Garden Inn** (ቢር ጋርደን ኢንተርናሽናል ሆቴል) · hotel · ሆቴል · office phone +251116182595, +251116182591 · https://bina.et/hotels/beer-garden-inn-w195341184
+- **Bentark Hotel** · hotel · ሆቴል · https://bina.et/hotels/bentark-hotel-n13992194732
+- **Besha Hotel** · hotel · ሆቴል · https://bina.et/hotels/besha-hotel-n7247515842
+- **Best Western Plus Addis Ababa** (ቤስት ዌስተርን ፕላሥ አዲስ አበባ) · hotel · ሆቴል · office phone +251116671414 · website https://bwplusaddisababa.com/ · https://bina.et/hotels/best-western-plus-addis-ababa-n6220898097
+- **Bete Abrham Hotel** (ቤተ አብርሃም ሆቴል) · hotel · ሆቴል · office phone +251 11 662 22 45 · https://bina.et/hotels/bete-abrham-hotel-n2047735852
+- **Beyene Gebretinsae G. House በየነ ገ/ትንሳኤ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/beyene-gebretinsae-g-house-n4837941121
+- **Big John Residence** (የቢግ ጆን መኖሪያ ቤት) · hostel · ሆስቴል · https://bina.et/hotels/big-john-residence-n7304487886
+- **Biruk Bed & Breakfast** (ብሩክ መኝታና ቁርስ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/biruk-bed-and-breakfast-n834401669
+- **Blue Birds Hotel** · hotel · ሆቴል · Equatorial Guinea Street · https://bina.et/hotels/blue-birds-hotel-n4954690360
+- **bluesky Hotel** · hotel · ሆቴል · https://bina.et/hotels/bluesky-hotel-n5428870323
+- **Bole Ararbssa ቦሌ ኣራብሳ ኮንደሚንየም** · motel · ሞቴል · https://bina.et/hotels/bole-ararbssa-n4965224521
+- **Bole Area Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/bole-area-guest-house-n9088613717
+- **Bole Central Apartment** · hotel · ሆቴል · https://bina.et/hotels/bole-central-apartment-n12973650002
+- **Bole Guest House** (ቦሌ እንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/bole-guest-house-w199677801
+- **Bole Homes** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/bole-homes-n8622818517
+- **Bole International Hotel** (ቦሌ ኢንተርናሽናል ሆቴል) · hotel · ሆቴል · office phone +251116633000, +251116633840 · https://bina.et/hotels/bole-international-hotel-n659241014
+- **Bole Skygate Hotel** · hotel · ሆቴል · https://bina.et/hotels/bole-skygate-hotel-n7257112818
+- **Bole tourist ቦሌ ቱሪስት** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/bole-tourist-n6325303685
+- **Bon Royal Hotel** · hotel · ሆቴል · https://bina.et/hotels/bon-royal-hotel-n12005554669
+- **Bonanza** · hotel · ሆቴል · https://bina.et/hotels/bonanza-n8824053257
+- **Brana Hotel** (ብራና ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/brana-hotel-n5518834723
+- **Broadway Hotel** · hotel · ሆቴል · https://bina.et/hotels/broadway-hotel-n6782305914
+- **C Fun Addis Hotel** · hotel · ሆቴል · https://bina.et/hotels/c-fun-addis-hotel-q111999068
+- **Capital Hotel & Spa** · hotel · ሆቴል · Haile Gebresellasie Avenue · https://bina.et/hotels/capital-hotel-and-spa-n4369155093
+- **Caravan Hotel** · hotel · ሆቴል · Mike Leyland Street · https://bina.et/hotels/caravan-hotel-w207757305
+- **Cityana guest house** (ሲቲ አና) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/cityana-guest-house-n10794916406
+- **Classic Hotel** · hotel · ሆቴል · Haile Gebresellasie Avenue · https://bina.et/hotels/classic-hotel-n4425258290
+- **Darasalaam Hotel** · hotel · ሆቴል · https://bina.et/hotels/darasalaam-hotel-n6971755385
+- **Debebe Tekle Hotel** · hotel · ሆቴል · https://bina.et/hotels/debebe-tekle-hotel-n3293032951
+- **Denuka Hotel** · hotel · ሆቴል · https://bina.et/hotels/denuka-hotel-n4285949891
+- **Desalagen Hotel** (ደሳለኝ ሆቴል) · hotel · ሆቴል · office phone +251116624524 · https://bina.et/hotels/desalagen-hotel-w201451128
+- **Desta Pension** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/desta-pension-n7179527663
+- **DHM guest house** · guest house / pension · የእንግዳ ማረፊያ · office phone 011 667 6262 · https://bina.et/hotels/dhm-guest-house-n8755192337
+- **Dolphin pension** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/dolphin-pension-n7261348385
+- **Dolphin pension new** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/dolphin-pension-new-n7261348785
+- **DoubleTree by Hilton Addis Ababa Airport** · hotel · ሆቴል · Bole, Wereda 3, Cameroon Street · office phone +251 11 113 9950 · website https://www.hilton.com/en/hotels/addaadi-doubletree-addis-ababa-airport/ · https://bina.et/hotels/doubletree-by-hilton-addis-ababa-airport-w704868333
+- **DS Guesthouse** (ዲኤስ የእንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/ds-guesthouse-n787536913
+- **Ecco guest house** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/ecco-guest-house-n10568462609
+- **Eliston Hotel** · hotel · ሆቴል · https://bina.et/hotels/eliston-hotel-n445313461
+- **Empire Addis International Hotel** · hotel · ሆቴል · https://bina.et/hotels/empire-addis-international-hotel-n4221712089
+- **Etaferaw shirobet እታፈራው ሽሮቤት** · hotel · ሆቴል · https://bina.et/hotels/etaferaw-shirobet-n5174243922
+- **Ethiopian Skylight Hotel** (ስካይላይት ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/ethiopian-skylight-hotel-w674289542
+- **Ever** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/ever-n4691592789
+- **Eyob G/tinsae G. House እዮብ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/eyob-g-tinsae-g-house-n4827054331
+- **Faafen Hotel** · hotel · ሆቴል · https://bina.et/hotels/faafen-hotel-n5920105685
+- **FOYAT HOTEL** · hotel · ሆቴል · Ring Road · https://bina.et/hotels/foyat-hotel-n4317313595
+- **Friendship International hotel** · hotel · ሆቴል · https://bina.et/hotels/friendship-international-hotel-n4391597689
+- **Getfam Hotel** · hotel · ሆቴል · Haile Gebresellasie Avenue · https://bina.et/hotels/getfam-hotel-n4954591889
+- **GG Royal Hotel** (ጂጂ ሮያል ሆቴል) · hotel · ሆቴል · office phone +251116292329/30, +251114335567 · https://bina.et/hotels/gg-royal-hotel-n445313459
+- **Gloria Hotel** · motel · ሞቴል · https://bina.et/hotels/gloria-hotel-n5922758885
+- **Gojito guest house** · apartment · አፓርትመንት · https://bina.et/hotels/gojito-guest-house-n10794916107
+- **Golden Royal** · hotel · ሆቴል · https://bina.et/hotels/golden-royal-n8990568917
+- **Golis Hotel** · hotel · ሆቴል · Bole Michael · https://bina.et/hotels/golis-hotel-w703048755
+- **Grmanesh** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/grmanesh-n5486536422
+- **Guangdong Hotel** · hotel · ሆቴል · https://bina.et/hotels/guangdong-hotel-n4443384889
+- **Guest Hotel** · hotel · ሆቴል · ቦሌ\_03\_779 መንገድ · https://bina.et/hotels/guest-hotel-n14052030338
+- **Guzara Hotel Addis** · hotel · ሆቴል · https://bina.et/hotels/guzara-hotel-addis-q112027090
+- **Haimi Apartment Hotel** (ሃይሚ አፓርትመንት ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/haimi-apartment-hotel-w184954488
+- **Hanom Hotel** · hotel · ሆቴል · https://bina.et/hotels/hanom-hotel-n7473036285
+- **Happy Pension** · motel · ሞቴል · Summit - Goro road · https://bina.et/hotels/happy-pension-n12794489601
+- **Harmony Hotel** (ሐርመኒ ሆቴል) · hotel · ሆቴል · office phone +251116183100 · website https://www.harmonyhotelethiopia.com/ · https://bina.et/hotels/harmony-hotel-w151358127
+- **Heaven Pension** (ሔቨን ፔኒሲዮን) · motel · ሞቴል · https://bina.et/hotels/heaven-pension-n5916647891
+- **Hello Guest House** (ሄሎ እንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/hello-guest-house-w151577846
+- **Hilina Tadesse's Home የህሊና ቤት** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/hilina-tadesse-s-home-n5267996222
+- **Hjem** · motel · ሞቴል · https://bina.et/hotels/hjem-n7011272585
+- **Hollywood Hotel** · hotel · ሆቴል · Djibouti Street · https://bina.et/hotels/hollywood-hotel-n5901929185
+- **Hometown Addis Hotel** · hotel · ሆቴል · https://bina.et/hotels/hometown-addis-hotel-n4423999200
+- **Hostel Ethiopia** · hostel · ሆስቴል · https://bina.et/hotels/hostel-ethiopia-n5959666885
+- **Hotel Siyonat** (ሆቴል ሲዮናት) · hotel · ሆቴል · https://bina.et/hotels/hotel-siyonat-w184954449
+- **Hotel Tirago** · hostel · ሆስቴል · https://bina.et/hotels/hotel-tirago-n7102314185
+- **Impress Hotel** · hotel · ሆቴል · BL\_03\_680 St. · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/impress-hotel-w60545076
+- **Jazly Bed & Breakfast** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/jazly-bed-and-breakfast-w310646948
+- **Josha** (እያሱ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/josha-n4467565392
+- **Kal Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/kal-guest-house-n7231203730
+- **Kaleb Hotel** (ካሌብ ሆቴል) · hotel · ሆቴል · office phone +251116622200, +251116622213 · https://bina.et/hotels/kaleb-hotel-w151358123
+- **Kefetew Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/kefetew-guest-house-q111888312
+- **Kenenisa Hotel** · hotel · ሆቴል · https://bina.et/hotels/kenenisa-hotel-w201244079
+- **kulmiye hotel** · hotel · ሆቴል · https://bina.et/hotels/kulmiye-hotel-n9969878517
+- **KZ Hotel** (ኬዜድ ሆቴል) · hotel · ሆቴል · office phone +251116621677, +251116614836 · website http://www.Kzfamilyhotel.com · https://bina.et/hotels/kz-hotel-w162213973
+- **Leda home** · hostel · ሆስቴል · https://bina.et/hotels/leda-home-n8568510226
+- **Leda Home** · hostel · ሆስቴል · https://bina.et/hotels/leda-home-n8568509924
+- **Lilu House** · guest house / pension · የእንግዳ ማረፊያ · Mike Leyland Street · https://bina.et/hotels/lilu-house-n6247227885
+- **Liya Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/liya-guest-house-n3293032959
+- **Liya Pension** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/liya-pension-n5086797122
+- **lobelia** · hotel · ሆቴል · BL 03 721 st · https://bina.et/hotels/lobelia-n6704810985
+- **M.W. Hotel** · hotel · ሆቴል · https://bina.et/hotels/m-w-hotel-n6624500169
+- **Mac Addis** (ማክ አዲስ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/mac-addis-n1699677954
+- **Mad Vervet** · hostel · ሆስቴል · https://bina.et/hotels/mad-vervet-n6863086488
+- **Mad Vervet Hostel - Addis** · hostel · ሆስቴል · Haya arat, Addis Ababa · website https://madvervet.com/ · https://bina.et/hotels/mad-vervet-hostel-addis-n13395960301
+- **Mado Hotel** · hotel · ሆቴል · https://bina.et/hotels/mado-hotel-n6782303635
+- **Magnolia Hotel** · hotel · ሆቴል · https://bina.et/hotels/magnolia-hotel-n7138564487
+- **Makiba Hotel** · hotel · ሆቴል · https://bina.et/hotels/makiba-hotel-n8041344680
+- **Marcen Addis Hotel** · hotel · ሆቴል · https://bina.et/hotels/marcen-addis-hotel-q111999069
+- **Marriot** · hotel · ሆቴል · https://bina.et/hotels/marriot-n9164023629
+- **Medina edris rent house 1** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/medina-edris-rent-house-1-n7474977085
+- **Meridian Hotel** (ሜሪዲያን ሆቴል) · hotel · ሆቴል · office phone +251116615050 · https://bina.et/hotels/meridian-hotel-n1697757615
+- **Milano Pension** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/milano-pension-n7114177086
+- **MM Cozy Place mid-range Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/mm-cozy-place-mid-range-guest-house-q111120828
+- **Molla Appartment Hotel** (ሞላ አፓርትመንት ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/molla-appartment-hotel-w157062064
+- **Molla Guest House** (ሞላ የእንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · office phone +251116633582 · website http://www.mollahouse.com · https://bina.et/hotels/molla-guest-house-w201430250
+- **Momona Hotel** · hotel · ሆቴል · Africa Avenue · https://bina.et/hotels/momona-hotel-n4362368694
+- **Monarch Hotel** · hotel · ሆቴል · office phone +251 11 6672480 · https://bina.et/hotels/monarch-hotel-n3241845662
+- **Moonlight Addis Hotel** · hotel · ሆቴል · BL\_03\_507 Street · website https://moonlightaddishotel.com/ · https://bina.et/hotels/moonlight-addis-hotel-n13637301410
+- **Mosaic Hotel** · hotel · ሆቴል · https://bina.et/hotels/mosaic-hotel-n6743412586
+- **Mr. Martins Cozy Place** · hostel · ሆስቴል · https://bina.et/hotels/mr-martins-cozy-place-n598182739
+- **Mubarak 2** · hotel · ሆቴል · https://bina.et/hotels/mubarak-2-n7851940495
+- **Mubarak one** · hotel · ሆቴል · Rwanda Street · https://bina.et/hotels/mubarak-one-n5405052024
+- **Mulugeta G/gergs G. House ሙሉጌታ ገ/ገርግስ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/mulugeta-g-gergs-g-house-n4827054827
+- **MY guest house** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/my-guest-house-n10568462610
+- **My home** · guest house / pension · የእንግዳ ማረፊያ · Semit to goro · https://bina.et/hotels/my-home-n5608358021
+- **My Home ABEL** · hostel · ሆስቴል · https://bina.et/hotels/my-home-abel-n8568510229
+- **My Home Abel Amare** · hostel · ሆስቴል · https://bina.et/hotels/my-home-abel-amare-n8568510023
+- **nah bro** (ናሆም) · guest house / pension · የእንግዳ ማረፊያ · gerji · https://bina.et/hotels/nah-bro-n5661585021
+- **Nanaya Guesthouse** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/nanaya-guesthouse-n7100624085
+- **Nati Hotel** · hotel · ሆቴል · https://bina.et/hotels/nati-hotel-n2041750984
+- **Natna Hotel** · hotel · ሆቴል · https://bina.et/hotels/natna-hotel-n6912114485
+- **Negat Hotel** (ንጋት ሆቴል) · hotel · ሆቴል · office phone +251116458962 · https://bina.et/hotels/negat-hotel-w199642222
+- **Nexus Hotel** · hotel · ሆቴል · https://bina.et/hotels/nexus-hotel-n8926431554
+- **Panorama Hotel** · hotel · ሆቴል · https://bina.et/hotels/panorama-hotel-n3569146293
+- **Paris Hotel** · hotel · ሆቴል · https://bina.et/hotels/paris-hotel-n12973653902
+- **Plaza Hotel** (ፕላዛ ሆቴል) · hotel · ሆቴል · office phone +251 (0) 116 612200 · https://bina.et/hotels/plaza-hotel-w51547950
+- **Pomy home** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/pomy-home-n4992893526
+- **Ramada Hotel ራማዳ ሆቴል** · hotel · ሆቴል · https://bina.et/hotels/ramada-hotel-n4404326090
+- **Refenti Hotel** · hotel · ሆቴል · https://bina.et/hotels/refenti-hotel-w1509744917
+- **Reliance Hotel Apartments** · apartment · አፓርትመንት · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/reliance-hotel-apartments-w184954481
+- **Riverside Apartments** · hotel · ሆቴል · https://bina.et/hotels/riverside-apartments-n5179383922
+- **Sabon Hotel** · hotel · ሆቴል · Namibia Street · https://bina.et/hotels/sabon-hotel-n8025765460
+- **SAMARA Hotel** · hotel · ሆቴል · Africa China Avenue · office phone +251116674103 · website http://www.samarahoteladdis.com · https://bina.et/hotels/samara-hotel-w963995770
+- **Sapphire Addis Hotel** · hotel · ሆቴል · Namibia Avenue · https://bina.et/hotels/sapphire-addis-hotel-n4932413822
+- **Saro Maria Hotel** · hotel · ሆቴል · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/saro-maria-hotel-w184954452
+- **Segen Motel** (ሰገን ሞቴል) · motel · ሞቴል · office phone +251 (0) 11 663 20 51 · https://bina.et/hotels/segen-motel-n784693168
+- **Shalla Guesthouse** · hotel · ሆቴል · website https://www.ethiopiantravels.com/ · https://bina.et/hotels/shalla-guesthouse-n6859634185
+- **Sheba Guest House** · guest house / pension · የእንግዳ ማረፊያ · website https://www.shebaguesthouse.com/ · https://bina.et/hotels/sheba-guest-house-n3764372641
+- **Sheza Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/sheza-guest-house-n4298856396
+- **Sidama Inn** · hotel · ሆቴል · https://bina.et/hotels/sidama-inn-n8280561717
+- **Sidama Lodge** (ሲዳማ ሎጅ) · hotel · ሆቴል · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/sidama-lodge-w201451129
+- **Sidra Hotel** · hotel · ሆቴል · https://bina.et/hotels/sidra-hotel-n8330163218
+- **Sky Hotel** (ስካይ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/sky-hotel-n445313460
+- **Skylight In-Terminal Hotel** (ቦሌ አለምዓቀፍ አውሮፕላን ማረፊያ) · hotel · ሆቴል · https://bina.et/hotels/skylight-in-terminal-hotel-n1874704567
+- **Social house** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/social-house-w1537462938
+- **Sunland Hotel** · hotel · ሆቴል · https://bina.et/hotels/sunland-hotel-n9231696580
+- **Sunspot** · hotel · ሆቴል · https://bina.et/hotels/sunspot-n6058636185
+- **Sunspot Hotel** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/sunspot-hotel-n7807278685
+- **Tayo Hotel** · hotel · ሆቴል · https://bina.et/hotels/tayo-hotel-n9084506819
+- **TDS Hotel** (ፀሐይና ልጆቿ ሆቴል) · hotel · ሆቴል · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/tds-hotel-w199677793
+- **Teferi mimi** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/teferi-mimi-n6771633388
+- **Temudas Pension** (ቴሙዳስ ፔንሲዮን) · hotel · ሆቴል · https://bina.et/hotels/temudas-pension-n598182728
+- **Tesfu Hotel** · hotel · ሆቴል · https://bina.et/hotels/tesfu-hotel-n4298830697
+- **The Container** · hotel · ሆቴል · website https://www.ethiopiantravels.com/ · https://bina.et/hotels/the-container-n6859760085
+- **The Hub Hotel** (ዘሃብ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/the-hub-hotel-n10240043711
+- **Tiga Hotel** · hotel · ሆቴል · Africa Avenue / Bole Road · https://bina.et/hotels/tiga-hotel-n5962428453
+- **Tigist Teferi ትዕግስት ተፈሪ** · guest house / pension · የእንግዳ ማረፊያ · civil service college · office phone 0116457888 · https://bina.et/hotels/tigist-teferi-n5592821921
+- **Tiru bet Guest House** (ጥሩ ቤት እንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · BL\_03\_534 St. · https://bina.et/hotels/tiru-bet-guest-house-n4801875627
+- **Tirunesh Hotel** · hotel · ሆቴል · Equatorial Guinea Street · https://bina.et/hotels/tirunesh-hotel-n4967296705
+- **Tizeze Hotel** (ትዘዝ ሆቴል) · hotel · ሆቴል · office phone +251 11 639 20 00/01/02 · website https://tizezehotel.com/ · https://bina.et/hotels/tizeze-hotel-w193904728
+- **TM Pension** · guest house / pension · የእንግዳ ማረፊያ · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/tm-pension-n847918862
+- **Toronto** · hotel · ሆቴል · Mike Leyland Street · office phone +251116622742 / 43 · https://bina.et/hotels/toronto-n5918068890
+- **Trinity Hotel** · hotel · ሆቴል · https://bina.et/hotels/trinity-hotel-n5338558537
+- **Triple E** · hotel · ሆቴል · mazoria, · https://bina.et/hotels/triple-e-n11280336269
+- **Tsehay Hotel** · hotel · ሆቴል · https://bina.et/hotels/tsehay-hotel-n6010009985
+- **Tsehay Pension** · hotel · ሆቴል · https://bina.et/hotels/tsehay-pension-n6009513685
+- **TZ Hotel** · hotel · ሆቴል · https://bina.et/hotels/tz-hotel-n6814283304
+- **Ugbaad Hotel** · hotel · ሆቴል · https://bina.et/hotels/ugbaad-hotel-n6782303790
+- **Vamos Addis Hotel** · hotel · ሆቴል · https://bina.et/hotels/vamos-addis-hotel-n8706603111
+- **Venetian Hotel** · hotel · ሆቴል · https://bina.et/hotels/venetian-hotel-q111999050
+- **Vila Dize Enze Guest house** (ቪላ ደዚ እንዝ እንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · office phone +251 11 92 351 75 79 · https://bina.et/hotels/vila-dize-enze-guest-house-n2047703667
+- **VRAJ Indian Hotel And Rstaurant** · hotel · ሆቴል · Ring Road · https://bina.et/hotels/vraj-indian-hotel-and-rstaurant-n12375918001
+- **Waberi Hotel** (ወበሪ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/waberi-hotel-n5149811327
+- **Washington Hotel** · hotel · ሆቴል · Cape Verde Street · https://bina.et/hotels/washington-hotel-n4424010089
+- **Wassamar Hotel** (ዋሳማር ሆቴል) · hotel · ሆቴል · office phone +251116610055 · https://bina.et/hotels/wassamar-hotel-w162213975
+- **WGM Apartments** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/wgm-apartments-n4418294631
+- **White House Hotel** · hotel · ሆቴል · https://bina.et/hotels/white-house-hotel-n6779933285
+- **Winner Pension** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/winner-pension-n7179550936
+- **Wudasie hotel** · hotel · ሆቴል · Mike Leyland Street · office phone +251116622727 · https://bina.et/hotels/wudasie-hotel-n4278011089
+- **Ya Grand Pension** · hotel · ሆቴል · https://bina.et/hotels/ya-grand-pension-n5922758985
+- **Yahoo Pension** · hotel · ሆቴል · https://bina.et/hotels/yahoo-pension-n6009512485
+- **Ye-afoli Hotel** · hotel · ሆቴል · https://bina.et/hotels/ye-afoli-hotel-n6433584214
+- **Yebsabi Guest House** · guest house / pension · የእንግዳ ማረፊያ · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/yebsabi-guest-house-n7138528128
+- **Yoly Addis Hotel** · hotel · ሆቴል · https://bina.et/hotels/yoly-addis-hotel-q111999066
+- **Yoni’s house** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/yonis-house-n5564159015
+- **Z Addis Hotel** · hotel · ሆቴል · Salitemihret - Summit Road · https://bina.et/hotels/z-addis-hotel-n13282784101
+- **Zeist Lodge** (ዛይስት ሎጅ) · hotel · ሆቴል · https://bina.et/hotels/zeist-lodge-n8823032217
+- **ZMAMA HOTEL** · hotel · ሆቴል · BL\_03\_534 St. · https://bina.et/hotels/zmama-hotel-n5906830988
+- **Zola International Hotel** · hotel · ሆቴል · https://bina.et/hotels/zola-international-hotel-n3455351150
+- **ሰላምሰው Selamsew's home** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/selamsew-s-home-n5645956424
+- **ባርክልኝ ክርስቶፎል** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/place-n6468041387
+- **አንተነህ ቤት Anteneh House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/anteneh-house-n5174338124
+- **አንተነህ ቤት Anteneh home** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/anteneh-home-n5174230824
+- **ደረጀ መንግስቱ Derege Mengstu** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/derege-mengstu-n5692412322
+- **君悦酒店** (ጁንዩዌ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/place-n4696726445
+
+## Kirkos sub-city · ቂርቆስ ክፍለ ከተማ — 97
+
+- **Hyatt Regency Addis Ababa** (ህያት ሪጀንሲ ኢንተርናሽናል ሆቴል) · hotel · ሆቴል · 5-star · Meskel Square · office phone +251 115171234 · website https://www.hyatt.com/hyatt-regency/en-US/addra-hyatt-regency-addis-ababa · https://bina.et/hotels/hyatt-regency-addis-ababa-w678129398
+- **Intercontinental Hotel** (ኢንተርኮንትኔንታል ሆቴል) · hotel · ሆቴል · 5-star · office phone +251 11 550 5066, +251 11 518 0444 · website http://www.intercontinentaladdis.com.et/ · https://bina.et/hotels/intercontinental-hotel-w157915625
+- **Sheraton Addis** · hotel · ሆቴል · 5-star · Taitu Street · office phone +251 11 517 1717 · website https://www.marriott.com/hotels/travel/addlc-sheraton-addis-a-luxury-collection-hotel-addis-ababa/ · https://bina.et/hotels/sheraton-addis-w383637412
+- **Astara Hotel** (አስታራ ሆቴል) · hotel · ሆቴል · 4-star · office phone +251114160194 · https://bina.et/hotels/astara-hotel-w156923488
+- **Ghion Hotel** (ጊዮን ሆቴል) · hotel · ሆቴል · 4-star · office phone +251115513222 · https://bina.et/hotels/ghion-hotel-n768599389
+- **Global Hotel** (ግሎባል ሆቴል) · hotel · ሆቴል · 4-star · office phone +251114664766, +251 114663906 · https://bina.et/hotels/global-hotel-n726512062
+- **Hilton Addis Ababa** · hotel · ሆቴል · 4-star · Menelik II Street · office phone +251-11-517-0000 · website https://www.hilton.com/en/hotels/addhitw-hilton-addis-ababa/ · https://bina.et/hotels/hilton-addis-ababa-w51550170
+- **Jupiter International Hotel (Kazanchis)** (ጁፒተር ሆቴል) · hotel · ሆቴል · 4-star · Joseph Tito Street · office phone +25116616969, +251115527333 · website https://www.jupiterinternationalhotel.com/ · https://bina.et/hotels/jupiter-international-hotel-kazanchis-w157915626
+- **King's Hotel** (ኪንግስ ሆቴል) · hotel · ሆቴል · 4-star · office phone +251113711300, +251113712295, +251113720106 · https://bina.et/hotels/king-s-hotel-w158332696
+- **Adot Tina Hotel** (አዶት ቲና ሆቴል) · hotel · ሆቴል · 3-star · office phone +251114673939 · https://bina.et/hotels/adot-tina-hotel-w184954484
+- **Di Napoli Hotel** (ዲናፖሊ ሆቴል) · hotel · ሆቴል · 3-star · office phone +251 114 67 15 87, +251 114 67 20 39 · https://bina.et/hotels/di-napoli-hotel-w202426515
+- **Hotel Celeste** · hotel · ሆቴል · 3-star · https://bina.et/hotels/hotel-celeste-w666429246
+- **Abesha Bar and Restaurant** (አበሻ ባርና ሬስቶራንት) · hotel · ሆቴል · office phone +251115503128 · https://bina.et/hotels/abesha-bar-and-restaurant-n847244477
+- **ABM PENSION** (ኤ ቢ ኤም እንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/abm-pension-n5060321723
+- **Adams Hotel** · hotel · ሆቴል · https://bina.et/hotels/adams-hotel-n6745669997
+- **Addis Guest House and Pension** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/addis-guest-house-and-pension-n7184993185
+- **Adea Hotel and Restaurant** · hotel · ሆቴል · https://bina.et/hotels/adea-hotel-and-restaurant-n6285337889
+- **Al Nahari Hotel** · hotel · ሆቴል · https://bina.et/hotels/al-nahari-hotel-w702459918
+- **Ami pension** (አሚ ፔንሲዮን) · motel · ሞቴል · https://bina.et/hotels/ami-pension-n2047651225
+- **Aphrodite International Hotel** · hotel · ሆቴል · Guinea Konakri Street · office phone +25111 552 2229 · website https://www.aphroditeaddis.com/ · https://bina.et/hotels/aphrodite-international-hotel-w254811567
+- **Aseb Qestedamena Hotel** (አሰብ ቀስተዳመና ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/aseb-qestedamena-hotel-n774899801
+- **Bloom Tower - Guest House Apartments** (ብሉም ታወር - አፓርታማ) · guest house / pension · የእንግዳ ማረፊያ · Joseph Tito Street · https://bina.et/hotels/bloom-tower-guest-house-apartments-n8013067287
+- **BMORE Apartment Hotel** (ቢ ሞር አፓርትመንት ሆቴል) · hotel · ሆቴል · Jomo Kenyatta Avenue · https://bina.et/hotels/bmore-apartment-hotel-n10845715707
+- **Bole Guesthouse** · guest house / pension · የእንግዳ ማረፊያ · website http://www.boleguesthouse.com · https://bina.et/hotels/bole-guesthouse-n4691849894
+- **Bow Hotel B&B** · hotel · ሆቴል · https://bina.et/hotels/bow-hotel-b-and-b-n4135368931
+- **Celeste Hotel** · hotel · ሆቴል · https://bina.et/hotels/celeste-hotel-n7528067388
+- **Chuchu Hotel** · hotel · ሆቴል · https://bina.et/hotels/chuchu-hotel-n4631142899
+- **condo** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/condo-n4730055294
+- **Damu Hotel** (ዳሙ ሆቴል) · hotel · ሆቴል · office phone +251115509828 /29/35 · https://bina.et/hotels/damu-hotel-w202562443
+- **De Leopol Hotel Addis Ababa** · hotel · ሆቴል · https://bina.et/hotels/de-leopol-hotel-addis-ababa-q111999074
+- **Destiny** · hotel · ሆቴል · https://bina.et/hotels/destiny-w391579626
+- **Dreamliner Hotel** (ድሪም ላይነር ሆቴል) · hotel · ሆቴል · office phone +251114674000 · https://bina.et/hotels/dreamliner-hotel-w184954399
+- **Edna Addis** · hotel · ሆቴል · https://bina.et/hotels/edna-addis-n6695523249
+- **Elilly International Hotel** · hotel · ሆቴል · https://bina.et/hotels/elilly-international-hotel-n5477824185
+- **Etaba bet እታባ ቤት** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/etaba-bet-n5773341654
+- **Etaba እታባ** · guest house / pension · የእንግዳ ማረፊያ · KR\_02\_370 St. · https://bina.et/hotels/etaba-n5798699854
+- **Ethiopia Hotel** (ኢትዮጵያ ሆቴል) · hotel · ሆቴል · office phone +251115517400 · https://bina.et/hotels/ethiopia-hotel-w50807864
+- **ETT Guesthouse** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/ett-guesthouse-n6593255287
+- **Family Cozy Bed and Breakfast** (ፋሚሊ ኮዚ መኝታና ቁርስ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/family-cozy-bed-and-breakfast-n2041818300
+- **Filwuha** (ፍልውሃ) · hotel · ሆቴል · https://bina.et/hotels/filwuha-w42981906
+- **Finfine Adarash Hotel** (ፊንፊኔ አዳራሽ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/finfine-adarash-hotel-n722475375
+- **Genet Hotel** (ገነት ሆቴል) · hotel · ሆቴል · office phone +251115518125 · https://bina.et/hotels/genet-hotel-w204652880
+- **GIZ Guesthouse** · guest house / pension · የእንግዳ ማረፊያ · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/giz-guesthouse-n1424008438
+- **Harar Ber Hotel** (ሀረር በር ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/harar-ber-hotel-n774899824
+- **Hawi Hotel** (ሃዊ ሆቴል) · hotel · ሆቴል · office phone +251114654499, +25111416471 · https://bina.et/hotels/hawi-hotel-n1697805262
+- **HeRa Addis Hotel** · hotel · ሆቴል · KR\_02\_299 St. · office phone 0114706109 · https://bina.et/hotels/hera-addis-hotel-n8602514217
+- **Hotel Aid** · hotel · ሆቴል · https://bina.et/hotels/hotel-aid-w195578188
+- **Hotel Concord** (ኮንኮር ሆቴል) · hotel · ሆቴል · office phone +251114654953, +251114660831 · https://bina.et/hotels/hotel-concord-w157062063
+- **Hotel D'Leopol** (ደ ሊኦፖል ሆቴል) · hotel · ሆቴል · office phone +251115507777, +251115155080 · https://bina.et/hotels/hotel-d-leopol-w158895438
+- **Hotel De France** (ሆቴል ደ ፍራንስ) · hotel · ሆቴል · office phone +251115547389/90 · website https://www.hoteldefranceaddis.com · https://bina.et/hotels/hotel-de-france-w195696439
+- **Hotel Selete** · hotel · ሆቴል · https://bina.et/hotels/hotel-selete-n7528067387
+- **Intercontinental Bistro and Long Term Appartments** · hotel · ሆቴል · https://bina.et/hotels/intercontinental-bistro-and-long-term-appartments-w157915652
+- **Jambo Real Estate, Meskel Flower Apartment** · guest house / pension · የእንግዳ ማረፊያ · KR\_02\_501 St. · https://bina.et/hotels/jambo-real-estate-meskel-flower-apartment-n4857980021
+- **Jemeà bldg** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/jemea-bldg-n7950704388
+- **Johnny** · hostel · ሆስቴል · website https://www.redalrescate.org/ · https://bina.et/hotels/johnny-n8200959217
+- **Kersay Hotel** · hotel · ሆቴል · https://bina.et/hotels/kersay-hotel-q111999070
+- **La Source Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/la-source-guest-house-n7769782899
+- **Luhena Hotel - Cafe, Bar and Restaurant** (ሉኸና ሆቴል - ባር ካፌና ሬስቶራንት) · hotel · ሆቴል · office phone +251114166956 · https://bina.et/hotels/luhena-hotel-cafe-bar-and-restaurant-n844762228
+- **Mama's Inn Boutique hotel** · hotel · ሆቴል · https://bina.et/hotels/mama-s-inn-boutique-hotel-w764354175
+- **Marriott Executive Apartments** · hotel · ሆቴል · Jomo Kenyatta Avenue · https://bina.et/hotels/marriott-executive-apartments-w58670010
+- **Meaza cafe መአዛ ካፌ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/meaza-cafe-n5789566054
+- **Menahereya** (መናኋሪያ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/menahereya-n1708707078
+- **Merci Hotel** (ሜርሲ) · hotel · ሆቴል · office phone +251(0)911 987 182 · https://bina.et/hotels/merci-hotel-n838787480
+- **Meskel Flower** (መስቀል ፍላወር ሆቴል) · hotel · ሆቴል · office phone +251114670125, +251114671025 · https://bina.et/hotels/meskel-flower-w196096793
+- **Miky** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/miky-n8714450617
+- **Mosy Hotel** · hotel · ሆቴል · https://bina.et/hotels/mosy-hotel-n7533926685
+- **MZ Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/mz-guest-house-n6624610286
+- **Nazra Hotel** (ናዝራ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/nazra-hotel-n6295246885
+- **Olympia Homestay** · guest house / pension · የእንግዳ ማረፊያ · KR\_02\_326 St. · https://bina.et/hotels/olympia-homestay-n6174374085
+- **Omedla Hotel** (ኦሜድላ ሆቴል) · hotel · ሆቴል · office phone +251114664748 · https://bina.et/hotels/omedla-hotel-n1701593747
+- **Quara Hotel** (ቋራ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/quara-hotel-n1708707080
+- **Radisson Blu** · hotel · ሆቴል · office phone + 251 1 15 15 76 00 · website https://www.radissonblu.com/hotel-addisababa · https://bina.et/hotels/radisson-blu-w157915633
+- **Ras Hotel** (ራስ ሆቴል) · hotel · ሆቴል · office phone +251115517060 · https://bina.et/hotels/ras-hotel-w50833512
+- **Residence Hotel** · hotel · ሆቴል · https://bina.et/hotels/residence-hotel-n4276504491
+- **Roha Guest House** (ሮሃ እንግዳ ማረፊያ) · hotel · ሆቴል · Africa Avenue / Bole Road · https://bina.et/hotels/roha-guest-house-n2093047690
+- **Rose Luxury Suites** (ሮዝ ሌግዠሪ ሲዩትስ) · apartment · አፓርትመንት · Roosevelt Street · website https://www.roseluxurysuites.com/ · https://bina.et/hotels/rose-luxury-suites-n8690688818
+- **Selam Pension** · hotel · ሆቴል · https://bina.et/hotels/selam-pension-n3497857190
+- **Signature Hotel** · hotel · ሆቴል · https://bina.et/hotels/signature-hotel-w702441350
+- **Skylight Hotel** · hotel · ሆቴል · https://bina.et/hotels/skylight-hotel-n11135828506
+- **Tegene Building** (ተገኔ ሕንፃ) · hotel · ሆቴል · https://bina.et/hotels/tegene-building-w48893698
+- **The Hive Guest House** · hotel · ሆቴል · https://bina.et/hotels/the-hive-guest-house-n5852075085
+- **Tina Guest House** (ቲና የእንግዳ ማረፊያ) · hotel · ሆቴል · https://bina.et/hotels/tina-guest-house-n613555223
+- **Tossa terara Hotel** · hotel · ሆቴል · https://bina.et/hotels/tossa-terara-hotel-n5428870823
+- **Tulip Inn** · hotel · ሆቴል · https://bina.et/hotels/tulip-inn-n6814283321
+- **Union Hotel Apartment** · hotel · ሆቴል · https://bina.et/hotels/union-hotel-apartment-n3215710979
+- **Weygoss Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/weygoss-guest-house-q111999073
+- **Wim’s Holland House rooms** · motel · ሞቴል · https://bina.et/hotels/wims-holland-house-rooms-n6285337988
+- **Wollo safer** · hostel · ሆስቴል · KR\_02\_372 St. · https://bina.et/hotels/wollo-safer-n5404878322
+- **Yetam Hotel** (የታም ሆቴል) · hotel · ሆቴል · office phone +251114667626/25/11 · https://bina.et/hotels/yetam-hotel-w206104656
+- **Yetsion Hotel** · hotel · ሆቴል · https://bina.et/hotels/yetsion-hotel-n6742306270
+- **Yordanos Hotel** · hotel · ሆቴል · https://bina.et/hotels/yordanos-hotel-w717913112
+- **Zenu Guest House** (ዘኑ እንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/zenu-guest-house-w206104657
+- **الفندق قام نام مسكن فلور** · hotel · ሆቴል · https://bina.et/hotels/place-n4245074098
+- **فندق واليا** · hotel · ሆቴል · https://bina.et/hotels/place-n8599610818
+- **መአዛ Meaza Cafe** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/meaza-cafe-n5692415221
+- **አቤም hotel** · apartment · አፓርትመንት · https://bina.et/hotels/hotel-n8791862845
+- **አይቤክስ ሆቴል Ibex Hotel** (አይቤክስ ሆቴል) · hotel · ሆቴል · KR\_02\_380 St. · office phone +251114654400 · https://bina.et/hotels/ibex-hotel-n847911025
+
+## Yeka sub-city · የካ ክፍለ ከተማ — 56
+
+- **Abem Hotel** (አቤም ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/abem-hotel-n6813834793
+- **Afropolitan Hotel** (አፍሮፖሊታን ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/afropolitan-hotel-n4423440589
+- **Ag Palace Hotel** · hotel · ሆቴል · https://bina.et/hotels/ag-palace-hotel-q111120830
+- **Ararat Hotel** · hotel · ሆቴል · https://bina.et/hotels/ararat-hotel-n2203245328
+- **Archi Hotel** (አርኪ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/archi-hotel-n6555540487
+- **Aunt home** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/aunt-home-n4974709524
+- **Axum** (አክሱም ሆቴል) · hotel · ሆቴል · office phone +251116613916 · https://bina.et/hotels/axum-w51078485
+- **Ayat My rented house** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/ayat-my-rented-house-n9982808118
+- **Balderas Hotel** · hotel · ሆቴል · https://bina.et/hotels/balderas-hotel-n7147908305
+- **Belle View Hotel and Spa** · hotel · ሆቴል · https://bina.et/hotels/belle-view-hotel-and-spa-w200560162
+- **Bereket Bar and Restaurant** · hotel · ሆቴል · https://bina.et/hotels/bereket-bar-and-restaurant-n6813835985
+- **Blue Cave** · hotel · ሆቴል · https://bina.et/hotels/blue-cave-n5906822790
+- **Cmore hotel** · hotel · ሆቴል · https://bina.et/hotels/cmore-hotel-n8789581417
+- **Dave's Home** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/dave-s-home-n4688545389
+- **Debre Damo Hotel** · hotel · ሆቴል · Haile Gebresellasie Avenue · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/debre-damo-hotel-w184954496
+- **Demissie zewde ደምሴ ዘዉዴ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/demissie-zewde-n5789581553
+- **Demissie zewde's home ደምሴ** · guest house / pension · የእንግዳ ማረፊያ · office phone +2519254628 · https://bina.et/hotels/demissie-zewde-s-home-n5692412323
+- **Demitri Hotel** (ዲምትሪ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/demitri-hotel-n4413923489
+- **Dimitri Apartments - long and short term rentals** · apartment · አፓርትመንት · Kebena Area · office phone +25191122588 · website https://www.dimitri-apartments.com · https://bina.et/hotels/dimitri-apartments-long-and-short-term-rentals-n7884680266
+- **DSTV HOUSE** (እንግሊዝ ኢምባሲ) · hotel · ሆቴል · Lorenzo Taezaz Street · https://bina.et/hotels/dstv-house-n9915054019
+- **Edna Addis Hotel** (ኤድና አዲስ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/edna-addis-hotel-w207328425
+- **EKKO Guest House** · apartment · አፓርትመንት · https://bina.et/hotels/ekko-guest-house-w841976422
+- **EKKO Guest House and Apartments** · apartment · አፓርትመንት · https://bina.et/hotels/ekko-guest-house-and-apartments-n7855600831
+- **Gentle Hotel** · hotel · ሆቴል · office phone +251 116676065 · website http://www.gentlehoteladdis.com · https://bina.et/hotels/gentle-hotel-n4720820191
+- **Getachew Worku ጌታቸው ወርቁ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/getachew-worku-n6058361485
+- **Govani Hotel** · hotel · ሆቴል · https://bina.et/hotels/govani-hotel-n5428858824
+- **Hamonah Guest House** · guest house / pension · የእንግዳ ማረፊያ · office phone +251116670022 · website http://www.hamonahguesthouse.com · https://bina.et/hotels/hamonah-guest-house-n6191995226
+- **Hareg Hotel** · hotel · ሆቴል · https://bina.et/hotels/hareg-hotel-n4533238589
+- **Hayes Hotel Addis Ababa** · hotel · ሆቴል · Mike Leyland Street · office phone +251 11 666 2261 · website https://hayesaddishotel.com · https://bina.et/hotels/hayes-hotel-addis-ababa-n13704965201
+- **Holiday Hotel** · hotel · ሆቴል · https://bina.et/hotels/holiday-hotel-w897042722
+- **Holyday Hotel** · hotel · ሆቴል · https://bina.et/hotels/holyday-hotel-w191459747
+- **Jambo bela apartment** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/jambo-bela-apartment-n4857980121
+- **Keba Guesthouse** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/keba-guesthouse-n9138220417
+- **KG** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/kg-n4469846189
+- **Konjo Guesthouse** · guest house / pension · የእንግዳ ማረፊያ · Kenenisa Street · https://bina.et/hotels/konjo-guesthouse-n5561964721
+- **Korebtama Menafesha Hotel** (ኮረብታማ መናፈሻ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/korebtama-menafesha-hotel-n1435199883
+- **Louvre Hotel** · hotel · ሆቴል · https://bina.et/hotels/louvre-hotel-n3440581202
+- **M.N. International** (ኤም.ኤን ኢንተርናሽናል ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/m-n-international-w51078479
+- **Meheretabe Hotel** (ምህረትዓብ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/meheretabe-hotel-n6813834792
+- **Melala Addis** · hotel · ሆቴል · https://bina.et/hotels/melala-addis-n9138221628
+- **Melala Addis Bed&Breakfast** · guest house / pension · የእንግዳ ማረፊያ · Togo Street · website http://www.booking.com/melala · https://bina.et/hotels/melala-addis-bed-and-breakfast-n4957072924
+- **Nigussie Dimamu ንጉሴ ድማሙ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/nigussie-dimamu-n5486792324
+- **Pacific Hotel** · hotel · ሆቴል · Fikre Mariam Aba Techan Street · https://bina.et/hotels/pacific-hotel-n4789718122
+- **Poli Lotus closed comunitiy** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/poli-lotus-closed-comunitiy-n6419727985
+- **Queen Of Sheba** (ንግስተ ሣባ ሆቴል) · hotel · ሆቴል · office phone +251116615400, +251116180000 · https://bina.et/hotels/queen-of-sheba-w51078480
+- **Raya pension** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/raya-pension-n7236558087
+- **Sofia Kebede ሶፍያ ከበደ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/sofia-kebede-n6212736486
+- **Stayeasy Hotel** · hotel · ሆቴል · https://bina.et/hotels/stayeasy-hotel-w191459749
+- **Tedros Belay International Hotel** · hotel · ሆቴል · https://bina.et/hotels/tedros-belay-international-hotel-n6825650685
+- **Tegen Hotel** · hotel · ሆቴል · Comoros Street · office phone +251116182870 · website https://www.tegenhotel.com/ · https://bina.et/hotels/tegen-hotel-n5848059285
+- **Tenay's** (የጤናዬ ቤት) · hostel · ሆስቴል · https://bina.et/hotels/tenay-s-n4452993490
+- **Tewdoros Belay International Hotel** (ቴዎድሮስ በላይ ኢንተርናሽናል ሆቴል) · hotel · ሆቴል · YK\_13\_0605 St. · office phone +251 116680145 · website http://www.tewdorosbelay.international.com · https://bina.et/hotels/tewdoros-belay-international-hotel-n6954544985
+- **top ten hotel** · hotel · ሆቴል · website https://www.tripadvisor.com/Hotel_Review-g293791-d2641616-Reviews-Top_Ten_Hotel-Addis_Ababa.html · https://bina.et/hotels/top-ten-hotel-n2921841167
+- **Yeka Guest House** · guest house / pension · የእንግዳ ማረፊያ · Comoros Street · https://bina.et/hotels/yeka-guest-house-n4262998995
+- **Zee Home** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/zee-home-n11209701037
+- **አበበ Abebe** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/abebe-n5174243925
+
+## Arada sub-city · አራዳ ክፍለ ከተማ — 45
+
+- **Churchill Hotel ቸርችል ሆቴል** (ቸርችል ሆቴል) · hotel · ሆቴል · 4-star · https://bina.et/hotels/churchill-hotel-w202426500
+- **Soramba Hotel** (ሶራምባ ሆቴል) · hotel · ሆቴል · 4-star · office phone +251111565633 · https://bina.et/hotels/soramba-hotel-n1435174663
+- **Semien Hotel** (ሰሜን ሆቴል) · hotel · ሆቴል · 3-star · office phone +251 (0) 111 550067 · https://bina.et/hotels/semien-hotel-w49991064
+- **Jerusalem Hotel** (እየሩሳሌም ሆቴል) · hotel · ሆቴል · 2-star · office phone +251111551712 · https://bina.et/hotels/jerusalem-hotel-w49911402
+- **5 kilo pension** · guest house / pension · የእንግዳ ማረፊያ · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/5-kilo-pension-w532328739
+- **A As pension** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/a-as-pension-n6463584090
+- **Abyssinia** · hotel · ሆቴል · https://bina.et/hotels/abyssinia-n790008089
+- **Addis Regency** · hotel · ሆቴል · https://bina.et/hotels/addis-regency-w742635420
+- **Addis View** (አዲስ ቪው) · hotel · ሆቴል · office phone +251-11-124 97 66 /124 97 67 · website http://addisviewhotel.com · https://bina.et/hotels/addis-view-w200666429
+- **Belair Hotel** (ቤልኤር ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/belair-hotel-n773595294
+- **Blue nile hotel** · hotel · ሆቴል · https://bina.et/hotels/blue-nile-hotel-n6715412564
+- **Comfy Spot Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/comfy-spot-guest-house-n2036233504
+- **Continental Hotel | ኮንትኔንታል ሆቴል** (ኮንትኔንታል ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/continental-hotel-n1728006991
+- **Denver Hotel** · hotel · ሆቴል · https://bina.et/hotels/denver-hotel-w714757571
+- **Ebenezer Hotel & Guest House** (አቤኔዘር የእንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · office phone +251 (0) 11 123 1276 · website https://www.Ebenezerghouse.com · https://bina.et/hotels/ebenezer-hotel-and-guest-house-w200666430
+- **Eliana Hotel** · hotel · ሆቴል · https://bina.et/hotels/eliana-hotel-n3985953602
+- **Fikadu Zeleka** · hotel · ሆቴል · https://bina.et/hotels/fikadu-zeleka-n4946368121
+- **Fraol Hotel** (ፍራኦል ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/fraol-hotel-w49991066
+- **Gambela hotel** · hotel · ሆቴል · https://bina.et/hotels/gambela-hotel-n12508237916
+- **Gibe Hotel** (ጊቤ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/gibe-hotel-n1702623281
+- **Green valley** (ግሪን ቫሊ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/green-valley-w200666431
+- **Hayat Penision** (ሀያት መኝታ ቤት) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/hayat-penision-n6248880386
+- **Kangaroo** (ካንጋሮ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/kangaroo-n790008138
+- **Lele pension** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/lele-pension-n6463570989
+- **Life Pension No 1** (ላይፍ ፔንሲዮን ቁ.1) · guest house / pension · የእንግዳ ማረፊያ · office phone +251 (0) 111 57 10 01 · https://bina.et/hotels/life-pension-no-1-n894039309
+- **Life Pension No 2** (ላይፍ ፔንሲዮን ቁ.2) · guest house / pension · የእንግዳ ማረፊያ · office phone +251 (0) 111 55 26 79 · https://bina.et/hotels/life-pension-no-2-n894043304
+- **Lomi Guest House** · hotel · ሆቴል · Shewareged Gedle Street · office phone +251 111 233628 · website http://www.lomiguesthouse.com · https://bina.et/hotels/lomi-guest-house-n3099989929
+- **Monalisa Hotel** (ሞናሊዛ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/monalisa-hotel-n1435268585
+- **Monarch ParkView** · hotel · ሆቴል · website https://monarchaddis.com/ · https://bina.et/hotels/monarch-parkview-w1049563429
+- **Nafyad Hotel** · hostel · ሆስቴል · https://bina.et/hotels/nafyad-hotel-n4907358421
+- **National** (ናሽናል ሆቴል) · hotel · ሆቴል · office phone +251111551678 · https://bina.et/hotels/national-n790008135
+- **Queens** · hotel · ሆቴል · office phone +251111557731 · https://bina.et/hotels/queens-n790008096
+- **Ras Amba** (ራስ አምባ) · hotel · ሆቴል · Queen Elizabeth Street · office phone +251-111-2280-80 · website https://hotelrasamba.com/ · https://bina.et/hotels/ras-amba-w374396808
+- **Sarem International Hotel | ሳሬም ሆቴል** · hotel · ሆቴል · https://bina.et/hotels/sarem-international-hotel-w203610499
+- **Taitu Hotel** · hotel · ሆቴል · https://bina.et/hotels/taitu-hotel-n3283845190
+- **Tedela** (ተድላ ሆቴል) · hotel · ሆቴል · office phone +251111559147 · https://bina.et/hotels/tedela-n790007931
+- **Tiga Hotel** · hotel · ሆቴል · office phone 251 (0) 11 618 88 51/52/45 · https://bina.et/hotels/tiga-hotel-n2036233508
+- **Tourist International Hotel** (ቱሪስት ኢንተርናሽናል ሆቴል) · hotel · ሆቴል · office phone +251111550122/23 · https://bina.et/hotels/tourist-international-hotel-w51001242
+- **Tsegreda Hotel** · hotel · ሆቴል · Dejazemach Jote Street · https://bina.et/hotels/tsegreda-hotel-n3772632880
+- **Wegagen Hotel** (ወጋገን ሆቴል) · hotel · ሆቴል · office phone +251111115308 · https://bina.et/hotels/wegagen-hotel-n790008149
+- **wossen's house** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/wossen-s-house-n5299078421
+- **Wutma Hotel** (ውጥማ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/wutma-hotel-n1766631069
+- **yeshi** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/yeshi-n4369116392
+- **ንጉስ ክትፎና አሣ Hotel** · hotel · ሆቴል · Arat kilo to Piassa street (Infront of Ampire) · https://bina.et/hotels/hotel-n6917869587
+- **ጎንደር ሆቴል | Gonder Hotel** (ጎንደር ሆስቴል) · hostel · ሆስቴል · https://bina.et/hotels/gonder-hotel-n732448085
+
+## Nifas Silk-Lafto sub-city · ንፋስ ስልክ ላፍቶ ክፍለ ከተማ — 33
+
+- **Adonis grand Father** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/adonis-grand-father-n6581132487
+- **Andi** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/andi-n5596164823
+- **Avola Hotel** · hotel · ሆቴል · https://bina.et/hotels/avola-hotel-n6716220882
+- **BeAleta Hotel Apartment** · hotel · ሆቴል · Saris Addis Sefer · office phone +251114708292 · website http://bealetahotel.com · https://bina.et/hotels/bealeta-hotel-apartment-n6129843286
+- **bela addis hotel** · hotel · ሆቴል · jemo · https://bina.et/hotels/bela-addis-hotel-n4204528940
+- **Benazo Hotel** · hotel · ሆቴል · https://bina.et/hotels/benazo-hotel-n6723128493
+- **Deapo St. George Hotel** · hotel · ሆቴል · https://bina.et/hotels/deapo-st-george-hotel-w1018362164
+- **ELGEL Hotel & Spa** · hotel · ሆቴል · https://bina.et/hotels/elgel-hotel-and-spa-n11348087387
+- **Fikre kunspanga** · hotel · ሆቴል · https://bina.et/hotels/fikre-kunspanga-n5622052721
+- **Game Hotel** (ጌም ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/game-hotel-n4581267690
+- **Gofa camp** (ጎፋ ካምፕ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/gofa-camp-n5121290223
+- **Gofa Hotel** (ጎፋ ሆቴል) · hotel · ሆቴል · office phone +251114662089 · https://bina.et/hotels/gofa-hotel-w198597568
+- **Ivory Hotel** · hotel · ሆቴል · https://bina.et/hotels/ivory-hotel-n8223211018
+- **Kebron Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/kebron-guest-house-n7179553761
+- **kiki** (ኪኪ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/kiki-n5156647222
+- **Mena Hotel** · hotel · ሆቴል · https://bina.et/hotels/mena-hotel-n6700101786
+- **Nati Pension** · hotel · ሆቴል · https://bina.et/hotels/nati-pension-n7004375390
+- **Qore guest house** · apartment · አፓርትመንት · https://bina.et/hotels/qore-guest-house-n6731303785
+- **Salayesh Hotel** · hotel · ሆቴል · https://bina.et/hotels/salayesh-hotel-w712322006
+- **Sersa Furnished Apartment** · apartment · አፓርትመንት · https://bina.et/hotels/sersa-furnished-apartment-n6738288933
+- **Sol Mile Family Guest House** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/sol-mile-family-guest-house-w711731841
+- **TEBABER REAL STATE** · guest house / pension · የእንግዳ ማረፊያ · Kadisco · office phone 0114401933 · https://bina.et/hotels/tebaber-real-state-n6332800287
+- **Tedi home ቴዎድሮስ ፀጋዬ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/tedi-home-n5645960721
+- **top pesion** (ቶፕ ፔንሲዮን) · apartment · አፓርትመንት · https://bina.et/hotels/top-pesion-n8808505919
+- **Tulusa Hotel (Pension)** · hotel · ሆቴል · https://bina.et/hotels/tulusa-hotel-pension-n8013933385
+- **Victoria Guesthouse Addis** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/victoria-guesthouse-addis-q111999078
+- **Watot Bar, Restaurant and Hotel** · hotel · ሆቴል · https://bina.et/hotels/watot-bar-restaurant-and-hotel-n6449322187
+- **Yenim Furnisihed Apartment** · apartment · አፓርትመንት · https://bina.et/hotels/yenim-furnisihed-apartment-n6738288931
+- **Yidnekachew ይድነቃቸው** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/yidnekachew-n5174182626
+- **Yilma Hotel** (ይልማ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/yilma-hotel-n1435219112
+- **Yohannis Hotel** · hotel · ሆቴል · https://bina.et/hotels/yohannis-hotel-n6736192704
+- **Yosef & Tizita** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/yosef-and-tizita-n8205122117
+- **ደገሰ ሆቴል** · hotel · ሆቴል · https://bina.et/hotels/place-n2348651194
+
+## Akaki Kality sub-city · አቃቂ ቃሊቲ ክፍለ ከተማ — 26
+
+- **Kings Hotel - Kaliti** (ኪንግስ ሆቴል) · hotel · ሆቴል · 4-star · https://bina.et/hotels/kings-hotel-kaliti-n1435242261
+- **Nega Bonger Hotel** (ነጋ ቦንገር ሆቴል) · hotel · ሆቴል · 4-star · office phone +251 11 470 8100 · website https://negabonger.com/ · https://bina.et/hotels/nega-bonger-hotel-w720505868
+- **ababora** (አባቦራ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/ababora-n7454878287
+- **Adey Hotel** (አደይ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/adey-hotel-n1435251479
+- **Arsema Hotel** (አርሴማ ሆቴል) · hotel · ሆቴል · Debre Zeit Road · https://bina.et/hotels/arsema-hotel-n7873525285
+- **Babecare** · hotel · ሆቴል · https://bina.et/hotels/babecare-n5614151743
+- **Baro2 Hotel** (ባሮ 2 ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/baro2-hotel-n988149874
+- **Bridge Hotel** · hotel · ሆቴል · https://bina.et/hotels/bridge-hotel-n6718704340
+- **Deme home ABEL** · hostel · ሆስቴል · https://bina.et/hotels/deme-home-abel-n8568510124
+- **Gojo Hotel** · hotel · ሆቴል · https://bina.et/hotels/gojo-hotel-n5395481322
+- **Hewan** (ሄዋን) · hotel · ሆቴል · https://bina.et/hotels/hewan-n849596907
+- **Heyday Hotel** · hotel · ሆቴል · Wereda · website https://heydayhotelethiopia.com · https://bina.et/hotels/heyday-hotel-w786136296
+- **Home** · motel · ሞቴል · https://bina.et/hotels/home-n5698561121
+- **kality-Crown Hotel** (ክራውን ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/kality-crown-hotel-n615219200
+- **Liya Hotel** · hotel · ሆቴል · https://bina.et/hotels/liya-hotel-n6718704341
+- **MY FAMILY HOME** · guest house / pension · የእንግዳ ማረፊያ · አዲስ ሰፈር አካባቢ / Addis Sefer · office phone 0114405549 · https://bina.et/hotels/my-family-home-n6480091213
+- **Quara Hotel** · hotel · ሆቴል · Debrezeit Road · https://bina.et/hotels/quara-hotel-n4267860490
+- **Saris checheho Hotel** (ጨጨሆ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/saris-checheho-hotel-n1435251486
+- **Sonz Hotel** · hotel · ሆቴል · https://bina.et/hotels/sonz-hotel-n6718704342
+- **South Gete Hotel** · hotel · ሆቴል · https://bina.et/hotels/south-gete-hotel-w715708540
+- **Wanos** (ዋኖስ) · hotel · ሆቴል · https://bina.et/hotels/wanos-n849596985
+- **Yayu's** (ያዪ) · hostel · ሆስቴል · https://bina.et/hotels/yayu-s-n4513505090
+- **Yeabsira** · hotel · ሆቴል · https://bina.et/hotels/yeabsira-n5608955225
+- **Yohannes Hotel** (የኋንስ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/yohannes-hotel-n6950699385
+- **በየነ ደጀኔ /መሰረት አበበ Beyene Dejene /meseret Abebe** · guest house / pension · የእንግዳ ማረፊያ · Gelan Condomminium · https://bina.et/hotels/beyene-dejene-meseret-abebe-n5880380685
+- **ቤት 4** (መሬት የገዛነው ቦታ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/4-n5174230823
+
+## Lideta sub-city · ልደታ ክፍለ ከተማ — 24
+
+- **Biserat Hotel** (ብስራት ሆቴል) · hotel · ሆቴል · 2-star · office phone +251115533517 · https://bina.et/hotels/biserat-hotel-w155010423
+- **Abinet Hotel** (አብነት ሆቴል) · hotel · ሆቴል · Bekele Weya Street · https://bina.et/hotels/abinet-hotel-n4954579123
+- **Afro Legacy Hotel** · hotel · ሆቴል · https://bina.et/hotels/afro-legacy-hotel-n7160425258
+- **Alamudin guest house** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/alamudin-guest-house-n5942433386
+- **Assab Hotel** · hotel · ሆቴል · https://bina.et/hotels/assab-hotel-w43456217
+- **Blue Nest Hotel** · hotel · ሆቴል · https://bina.et/hotels/blue-nest-hotel-w712531459
+- **D'Afrique Hotel** (አፍሪካ ሆቴል) · hotel · ሆቴል · office phone +251115517385 · https://bina.et/hotels/d-afrique-hotel-w42981880
+- **Dessie Hotel** · hotel · ሆቴል · https://bina.et/hotels/dessie-hotel-n6700600970
+- **Diplomat Furnished Gust House** (ዲፕሎማት የእንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/diplomat-furnished-gust-house-w151469148
+- **Enda kwaja** · guest house / pension · የእንግዳ ማረፊያ · website http://www.danaplc.com · https://bina.et/hotels/enda-kwaja-n5174399321
+- **Extrim hotel** (ኤክስትሪም ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/extrim-hotel-n5494132121
+- **Harambee Hotel** (ሐራምቤ ሆቴል) · hotel · ሆቴል · office phone +251115514482, +251115514000 · https://bina.et/hotels/harambee-hotel-w50807894
+- **Haven Hotel** · hotel · ሆቴል · https://bina.et/hotels/haven-hotel-n6579585985
+- **Lido Hotel** (ሊዶ ሆቴል) · hotel · ሆቴል · office phone +251115514488 · https://bina.et/hotels/lido-hotel-n1594538584
+- **Mexico Hotel** · hotel · ሆቴል · Roosevelt Street · https://bina.et/hotels/mexico-hotel-n7025989985
+- **Sarendem Hotel** (ሳሬንደም ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/sarendem-hotel-w1364249566
+- **SIM - Guesthouse** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/sim-guesthouse-n4523344490
+- **Solish Hotel** · hotel · ሆቴል · Liberia Street · https://bina.et/hotels/solish-hotel-w255552677
+- **Tirar** · hotel · ሆቴል · https://bina.et/hotels/tirar-n9543731817
+- **Tirar International Hotel** · hotel · ሆቴል · https://bina.et/hotels/tirar-international-hotel-w712667211
+- **UMMA Hotel** · hotel · ሆቴል · Ring Road · https://bina.et/hotels/umma-hotel-n4258298334
+- **Vamos** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/vamos-n6312724787
+- **Wabe Shebelle Hotel** (ዋቢ ሸበሌ ሆቴል) · hotel · ሆቴል · office phone +251115517187 · https://bina.et/hotels/wabe-shebelle-hotel-w58252853
+- **Warka Hotel** (ዋርካ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/warka-hotel-w1364249567
+
+## Kolfe Keranio sub-city · ኮልፌ ቀራኒዮ ክፍለ ከተማ — 23
+
+- **Aberash Pension** · hostel · ሆስቴል · https://bina.et/hotels/aberash-pension-n5060323223
+- **ALERT Hostel** · hostel · ሆስቴል · the map marks it as a building or restaurant: call to check it takes guests · https://bina.et/hotels/alert-hostel-w1542822037
+- **Alesko** (አሌስኮ) · hotel · ሆቴል · https://bina.et/hotels/alesko-n5170790629
+- **Asko Condominium** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/asko-condominium-n5060323121
+- **ASKO HOME ABEL** · hostel · ሆስቴል · https://bina.et/hotels/asko-home-abel-n8568510126
+- **BENJAMIN ALEM BANK HOME ABEL** · hostel · ሆስቴል · https://bina.et/hotels/benjamin-alem-bank-home-abel-n8568510022
+- **Bingo** · hotel · ሆቴል · https://bina.et/hotels/bingo-n11446171769
+- **Debre Abay Hotel** · hotel · ሆቴል · https://bina.et/hotels/debre-abay-hotel-n4592674092
+- **HIWI MOTHER HOME** · hostel · ሆስቴል · https://bina.et/hotels/hiwi-mother-home-n8568510818
+- **Holy Savior Guest Home** · guest house / pension · የእንግዳ ማረፊያ · website https://stayholysavior.com/ · https://bina.et/hotels/holy-savior-guest-home-n5001453025
+- **Jemo grand hotel** · hotel · ሆቴል · https://bina.et/hotels/jemo-grand-hotel-n7553512495
+- **kirkos hotel** · hotel · ሆቴል · አየርጤና · https://bina.et/hotels/kirkos-hotel-n11298611870
+- **KOLFE KERANIYO KIFLE KETEMA ABEL** · hostel · ሆስቴል · https://bina.et/hotels/kolfe-keraniyo-kifle-ketema-abel-n8568510130
+- **Like hotel** · hotel · ሆቴል · https://bina.et/hotels/like-hotel-n7553516888
+- **Meaza Hailu መዐዛ ኃይሉ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/meaza-hailu-n5781721253
+- **Meaza hailu's home መአዛ ኃይሉ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/meaza-hailu-s-home-n6004510285
+- **Meseret Abebe መሰረት አበበ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/meseret-abebe-n5174243921
+- **Morning Coffee** · guest house / pension · የእንግዳ ማረፊያ · KK\_05\_FM · https://bina.et/hotels/morning-coffee-n8002978485
+- **Rahel and alex home** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/rahel-and-alex-home-n8493717420
+- **Rodas and Hilina Fikru and Abeba Home** · hostel · ሆስቴል · https://bina.et/hotels/rodas-and-hilina-fikru-and-abeba-home-n8568509926
+- **Sena** · hotel · ሆቴል · https://bina.et/hotels/sena-n5060323022
+- **Senea** · hostel · ሆስቴል · https://bina.et/hotels/senea-n5060323221
+- **Tibebu Mulat ጥበቡ ሙላት** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/tibebu-mulat-n5692372324
+
+## Gulele sub-city · ጉለሌ ክፍለ ከተማ — 13
+
+- **Berekt marketing house** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/berekt-marketing-house-n8493690819
+- **Embilta Hotel** (እምቢልታ ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/embilta-hotel-n4931849221
+- **Emebet Hotel** (እመቤት ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/emebet-hotel-n7128255720
+- **ETALEM HOME ABEL** · hostel · ሆስቴል · https://bina.et/hotels/etalem-home-abel-n8568510030
+- **GENET MENAFESHA ENKULAL FABRICA ABEL** · hotel · ሆቴል · https://bina.et/hotels/genet-menafesha-enkulal-fabrica-abel-n8568510321
+- **Medhanialem condominium** (መዳኒያለም ኮንዶሚንየም) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/medhanialem-condominium-n4705260594
+- **Natane Hotel** (ናታን ሆቴል) · hotel · ሆቴል · https://bina.et/hotels/natane-hotel-n6944748511
+- **NATINAS HOTEL** · hotel · ሆቴል · Gulele \_07\_1318 St · website https://nathnaeladmasumarket.blogspot.com/?m=1 · https://bina.et/hotels/natinas-hotel-n10282159809
+- **SGS Hotel** · hotel · ሆቴል · Tunisia Avenue · https://bina.et/hotels/sgs-hotel-n4880307187
+- **Tsion** · hotel · ሆቴል · https://bina.et/hotels/tsion-n5300852322
+- **Worknesh Fanta ወርቅነሽ ፋንታ** · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/worknesh-fanta-n5494005121
+- **Yerossa Apartment and Guest House** · apartment · አፓርትመንት · https://bina.et/hotels/yerossa-apartment-and-guest-house-w839696902
+- **Yina Hotel** · hotel · ሆቴል · https://bina.et/hotels/yina-hotel-n7833570274
+
+## Addis Ketema sub-city · አዲስ ከተማ ክፍለ ከተማ — 9
+
+- **Motera** (ሞተራ ሆቴል) · hotel · ሆቴል · 2-star · office phone +251112754633 · https://bina.et/hotels/motera-w202382409
+- **Beteseb hotel** (ቤተሰብ ሆቴል) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/beteseb-hotel-n6435305185
+- **Daruselam guesthouse** (ዳሩሰላም የእንግዳ ማረፊያ) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/daruselam-guesthouse-n6849435385
+- **Kegnew Shaleka Hotel** · hotel · ሆቴል · https://bina.et/hotels/kegnew-shaleka-hotel-n6814283333
+- **Mearab Hotel** (ምዕራብ ሆቴል) · hotel · ሆቴል · office phone +251112753014 · https://bina.et/hotels/mearab-hotel-w49911418
+- **Metro Hotel** · hotel · ሆቴል · https://bina.et/hotels/metro-hotel-n4683067995
+- **Motera Hotel** · hotel · ሆቴል · https://bina.et/hotels/motera-hotel-w157076382
+- **SSAWIM PENISION** (ሳዊም ፔንሲዎን) · guest house / pension · የእንግዳ ማረፊያ · https://bina.et/hotels/ssawim-penision-n11215669942
+- **Tsegaye hiwi Atena tera ABEL** · hostel · ሆስቴል · https://bina.et/hotels/tsegaye-hiwi-atena-tera-abel-n8568510125

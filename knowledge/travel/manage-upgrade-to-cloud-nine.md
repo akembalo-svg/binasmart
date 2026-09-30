@@ -6,7 +6,7 @@ section: "changes-refunds"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
+lastChecked: "2026-09-27"
 contentHash: "d10f11d8e99e2268ef43941ce0d4051e33fe209c"
 generated_by: "ops/travel/fetch-airline.js"
 packFormat: "2"
@@ -21,36 +21,6 @@ Ethiopian Airlines — changes-refunds — Upgrade to Cloud Nine Business Class 
 Source: https://www.ethiopianairlines.com/et/book/manage/upgrade-to-cloud-nine (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 ## Upgrade to Cloud Nine
-
-Upgrade to Cloud Nine
-
-Upgrade to Cloud Nine
-
-Book a flight
-
-Flight Status
-
-Manage Booking
-
-Online Check-in
-
-Upgrade to Cloud Nine
-
-Flight Schedules
-
-Upgrade to Cloud Nine
-
-Book a flight
-
-Flight Status
-
-Manage Booking
-
-Online Check-in
-
-Upgrade to Cloud Nine
-
-Flight Schedules
 
 Please be aware that offers made on group bookings apply to all passengers in the booking. If you wish to make an offer only for specific passengers, please contact our customer service to divide your booking so that you can submit an offer accordingly
 

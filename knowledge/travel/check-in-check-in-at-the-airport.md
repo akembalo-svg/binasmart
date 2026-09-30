@@ -6,7 +6,7 @@ section: "check-in"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
+lastChecked: "2026-09-27"
 contentHash: "6764d1d5860c43c85de815700ed8a440568332bc"
 generated_by: "ops/travel/fetch-airline.js"
 packFormat: "2"
@@ -120,14 +120,6 @@ Availability of Self-baggage Drop Off Counters (SBD)
 - EZE: Ezeiza Airport
 - MAD: Madrid
 - ADD: Addis Ababa
-
-Save your Time by avoiding long Queues. Use Ethiopian Airlines Web check-in Service to choose your preferred Seat and to Print Boarding Pass Online.
-
-Online Check-in
-
-Online Check-in
-
-Save your Time by avoiding long Queues. Use Ethiopian Airlines Web check-in Service to choose your preferred Seat and to Print Boarding Pass Online.
 
 1. When do Ethiopian Airlines check-in counters open and close?
 

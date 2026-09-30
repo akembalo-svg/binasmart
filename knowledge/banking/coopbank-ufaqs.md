@@ -1,29 +1,36 @@
 ---
 url: "https://coopbankoromia.com.et/ufaqs"
 title: "Cooperative Bank of Oromia — FAQs Archive"
-titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎች"
+titleAm: "የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎች ማህደር"
 source_name: "Cooperative Bank of Oromia"
 section: "help"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
-contentHash: "4e3ac4928eab73b5ef421fd3dc0dce73be5e3339"
+fetchedAt: "2026-09-20"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-16"
+contentHash: "fa3d9c3fa6e86d399da987e6ff5bd6911042d2c4"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
 
-# Cooperative Bank of Oromia — FAQs Archive · የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎች
+# Cooperative Bank of Oromia — FAQs Archive · የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎች ማህደር
 
-Cooperative Bank of Oromia — help — FAQs Archive. On this page: Archives FAQs, Is there any assurance for Coopbank Alhuda Sharia compliance?, What is a minimum deposit to open Labbaik Saving Account?, Does Coopbank Alhuda offer its services to Non-Muslims?, What types of collaterals are acceptable?, What are the general eligibility requirements for credit?, Am I eligible to have Gudunfa?, What should I do if I lost my passbook, Cheque or CPO?.
+Cooperative Bank of Oromia — help — FAQs Archive. On this page: Archives FAQs, Is there any assurance for Coopbank Alhuda Sharia compliance?, What is a minimum deposit to open Labbaik Saving Account?, Does Coopbank Alhuda offer its services to Non-Muslims?, What types of collaterals are acceptable?, What are the general eligibility requirements for credit?, Am I eligible to have Gudunfa?.
 
 በአማርኛ፦ ተደጋጋሚ ጥያቄዎች — FAQs Archive። ይህ ገጽ ከኦሮሚያ ኅብረት ሥራ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
 
-ይህ ገጽ ስለ የኦሮሚያ ኅብረት ሥራ ባንክ ተደጋጋሚ ጥያቄዎችን ያቀርባል። ስለ Coopbank Alhuda ሸሪዓ ተገዢነት፣ የተለያዩ የሙዳረባ አይነቶች፣ የቁጠባ ሂሳብ ለመክፈት የሚያስፈልገው ዝቅተኛ ተቀማጭ ገንዘብ እና ሌሎችም መረጃዎችን ያገኛሉ። በተጨማሪም ተቀባይነት ስላላቸው የዋስትና አይነቶች እና ለብድር የሚያስፈልጉ አጠቃላይ መስፈርቶች ተብራርተዋል።
+ይህ ገጽ ስለ ኦሮሚያ ኅብረት ሥራ ባንክ በተደጋጋሚ የሚነሱ ጥያቄዎችን ያቀርባል። ስለ CoopRemit ምንዛሪ ተመን፣ ስለ አልሁዳ ሸሪዓ ተገዢነት፣ ስለ ሙዳረባ አይነቶች እና ስለ ቁጠባ ሂሳብ ዝቅተኛ ተቀማጭ ገንዘብ መረጃዎችን ያገኛሉ። በተጨማሪም፣ ስለ ብድር ብቁነት መስፈርቶች እና ተቀባይነት ያላቸው የዋስትና አይነቶች ዝርዝር መረጃዎችን ይዟል።
 
-Source: https://coopbankoromia.com.et/ufaqs (official Cooperative Bank of Oromia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
+Source: https://coopbankoromia.com.et/ufaqs (official Cooperative Bank of Oromia page, in English), fetched 2026-09-20. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
 # Archives FAQs
+
+### How much is 1 USD to Ethiopian Birr today?
+
+The current CoopRemit exchange rate is 1 USD = 180 ETB. Exchange rates may change, so check the latest rate in the CoopRemit app before sending.
+
+by web admin
 
 ### Is there any assurance for Coopbank Alhuda Sharia compliance?
 
@@ -124,12 +131,6 @@ Eligible customers of the Gudunfa Saving Mobilization Service are individuals th
 - Parents to teach their children about saving.
 
 Other groups can also be considered as long as they are deemed to be unbanked and/or have low-income. Branches shall assess their environment and prioritize the distribution of "Gudunfaa" accordingly
-
-by Web Admin
-
-### What should I do if I lost my passbook, Cheque or CPO?
-
-- Incase you lost your passbook, cheque, or CPO; please report to your branch as immediately as possible.
 
 by Web Admin
 

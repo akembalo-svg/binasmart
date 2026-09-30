@@ -1,27 +1,28 @@
 ---
 url: "https://ipdc.gov.et/service/parks/15"
 title: "Industrial Parks Development Corporation — Industrial Parks Development Coorporation"
-titleAm: "የኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን፡ የኢንዱስትሪ ፓርኮች"
+titleAm: "የኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን የኢንዱስትሪ ፓርኮች"
 source_name: "Industrial Parks Development Corporation"
 section: "industrial-parks"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
-contentHash: "96b3816eb0e39518eb2398d4c8d380a3fed486e1"
+fetchedAt: "2026-09-20"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-17"
+contentHash: "45e2f13063b66ab8c0cec933e0d56507e83b3c8c"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
-# Industrial Parks Development Corporation — Industrial Parks Development Coorporation · የኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን፡ የኢንዱስትሪ ፓርኮች
+# Industrial Parks Development Corporation — Industrial Parks Development Coorporation · የኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን የኢንዱስትሪ ፓርኮች
 
 Industrial Parks Development Corporation — industrial-parks — Industrial Parks Development Coorporation. On this page: Semera.
 
 በአማርኛ፦ የኢንዱስትሪ ፓርኮች — Industrial Parks Development Coorporation። ይህ ገጽ ከኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
-ይህ ገጽ የኢንዱስትሪ ፓርኮች ልማት ኮርፖሬሽን ስለሚያስተዳድራቸው የኢንዱስትሪ ፓርኮች መረጃ ይሰጣል። በተለይም ስለ ሰመራ ልዩ የኢኮኖሚ ዞን ያብራራል፣ ይህም በአፋር ክልል ዋና ከተማ ሰመራ የሚገኝ ሲሆን ከአዲስ አበባ 597 ኪሎ ሜትር ርቀት ላይ ይገኛል። ፓርኩ 50 ሄክታር መሬት ላይ ያረፈ ስምንት የፋብሪካ ሼዶች ያሉት ሲሆን ከእነዚህ ውስጥ ሦስቱ ለባለሀብቶች ተከራይተዋል።
+ይህ ገጽ ስለ ሰመራ ልዩ የኢኮኖሚ ዞን መረጃ ይሰጣል። ሰመራ በአፋር ክልል ዋና ከተማ የምትገኝ ሲሆን ከኢትዮጵያ ዋና ከተማ አዲስ አበባ 597 ኪሎ ሜትር ርቀት ላይ ትገኛለች። ፓርኩ 50 ሄክታር መሬት ላይ ያረፈ ሲሆን 8 የፋብሪካ ሼዶች አሉት።
 
-Source: https://ipdc.gov.et/service/parks/15 (official Industrial Parks Development Corporation page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
+Source: https://ipdc.gov.et/service/parks/15 (official Industrial Parks Development Corporation page, in English), fetched 2026-09-20. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
 ## Semera
 
@@ -37,3 +38,6 @@ Textile, Garment, Leather, Packaging material Production and chemical Industries
 
 Total Land in hectare
 50
+
+Total number of shades
+8

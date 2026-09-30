@@ -6,9 +6,10 @@ source_name: "Ethiopian Investment Commission"
 section: "sectors"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
-contentHash: "45047f45c6c591b22b46f3e368ab79fbb1e68581"
+fetchedAt: "2026-09-20"
+lastChecked: "2026-09-20"
+firstFetched: "2026-09-17"
+contentHash: "91d6202b077f2fd600acad44b8091942f3512e0a"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
@@ -19,9 +20,11 @@ Ethiopian Investment Commission — sectors — ICT | Ethiopian Investment Commi
 
 በአማርኛ፦ የኢንቨስትመንት ዘርፎች — ICT | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
-ኢትዮጵያ በICT ዘርፍ ለሚሰማሩ ባለሀብቶች ማራኪ የኢንቨስትመንት ዕድሎችን ታቀርባለች። ሀገሪቱ እያደገ የመጣ የቴክኖሎጂ እውቀት ያለው የሰው ኃይል፣ ዝቅተኛ የኤሌክትሪክ እና የሪል እስቴት ወጪዎች እንዲሁም በ200 ሄክታር ላይ ያረፈ የICT ኢንዱስትሪ ፓርክ አላት። የቴሌኮም ዘርፉ መከፈት እና እንደ Safaricom ያሉ ኩባንያዎች መግባታቸው ለዘርፉ እድገት አስተዋጽኦ አድርጓል።
+ይህ ገጽ በኢትዮጵያ የICT ዘርፍ ውስጥ ስላሉ የኢንቨስትመንት ዕድሎች ያብራራል። ኢትዮጵያ በ2020 የጀመረችው ዲጂታል ኢትዮጵያ 2025 ስትራቴጂ ያላት ሲሆን፣ በ200 ሄክታር ላይ ያረፈ የICT ኢንዱስትሪ ፓርክ በአዲስ አበባ አላት። እንደ Red Fox እና Safaricom ያሉ ባለሀብቶች በ2022 የውሂብ ማዕከሎቻቸውን ገንብተዋል።
 
-Source: https://investethiopia.gov.et/key-sectors/ict (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
+Source: https://investethiopia.gov.et/key-sectors/ict (official Ethiopian Investment Commission page, in English), fetched 2026-09-20. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
+
+INVEST IN ETHIOPIA
 
 # ICT
 

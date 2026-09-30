@@ -6,7 +6,7 @@ section: "on-board"
 lang: "en"
 status: "live"
 fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
+lastChecked: "2026-09-27"
 contentHash: "0ed3a1dc38ea2e12ca22a35ab601952252cca0c8"
 generated_by: "ops/travel/fetch-airline.js"
 packFormat: "2"
@@ -91,19 +91,9 @@ Breakfast is typically light, fresh, and cold. It features meal is composed of b
 
 ### Medium and Long-haul flights
 
-Enjoy our Cloud 9 service with a variety of delicious international dishes infused with homegrown ingredients and tastes of Ethiopian national dishes, prepared by our top chefs making your journey pleasant.
-
-## Meal service
-
-Our menu consists of carefully prepared appetizers, a taste of Ethiopian national dishes, creamy yet healthy meals, followed by the selection finest cheese, fruit and dessert. The cabin crew will setup your table to create the best dining experience.
-
 No matter where your destination may be, step into a relaxed cabin where you will be greeted with our cabin crew
 
 ## Short-haul flight
-
-Enjoy our delicious meals prepared by our top chefs with a variety of alcoholic and non-alcoholic beverages including our finest Ethiopian red and white wine.
-
-No matter where your destination may be, step into a relaxed cabin where you will be greeted with our cabin crew who will assist you with your seat, take your coat and serve you welcome drinks marking the beginning of your pleasant journey.
 
 ## Order Summary
 

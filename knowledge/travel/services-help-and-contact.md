@@ -5,9 +5,10 @@ source_name: "Ethiopian Airlines"
 section: "help"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
-contentHash: "2f8541917cc35a8721bec61c860fbd7bed557930"
+fetchedAt: "2026-09-27"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-16"
+contentHash: "80c34f6ab0d311500314e5ad1ed17ec5d1097163"
 generated_by: "ops/travel/fetch-airline.js"
 packFormat: "2"
 ---
@@ -18,7 +19,7 @@ Ethiopian Airlines — help — Help and Contact.
 
 በአማርኛ፦ እገዛና አድራሻ — Help and Contact። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
 
-Source: https://www.ethiopianairlines.com/et/services/help-and-contact (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Source: https://www.ethiopianairlines.com/et/services/help-and-contact (official Ethiopian Airlines page, in English), fetched 2026-09-27. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 #
 Help and Contact
@@ -45,4 +46,4 @@ Find global support numbers by country. Call for help with bookings, baggage, or
 
 Lost & Found
 
-Lost & Found
+Find assistance for luggage irregularities, including a swift recovery process for any belongings that may be misplaced or lost while flying with us. We make every effort to reunite you with your belongings as quickly as possible.

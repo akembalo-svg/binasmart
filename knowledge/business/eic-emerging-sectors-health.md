@@ -6,22 +6,23 @@ source_name: "Ethiopian Investment Commission"
 section: "sectors"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
-contentHash: "443ea08316fc69d7f2d862024febfe103070b18b"
+fetchedAt: "2026-09-20"
+lastChecked: "2026-09-20"
+firstFetched: "2026-09-17"
+contentHash: "7190324792e549d03a3f66b6b7ac364c3fc0a2eb"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
 # Ethiopian Investment Commission — Health | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የጤና ዘርፍ ኢንቨስትመንት ዕድሎች
 
-Ethiopian Investment Commission — sectors — Health | Ethiopian Investment Commission. On this page: Healthcare, A ripening market offering quick win opportunities, Ethiopia has a large and growing unserved market, Ethiopia can become a regional healthcare hub in Africa.
+Ethiopian Investment Commission — sectors — Health | Ethiopian Investment Commission. On this page: Healthcare, A ripening market offering quick win opportunities, Ethiopia has a large and growing unserved market, Ethiopia can become a regional healthcare hub in Africa, Testimonials.
 
 በአማርኛ፦ የኢንቨስትመንት ዘርፎች — Health | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
 ይህ ገጽ በኢትዮጵያ የጤና ዘርፍ ስላሉት ሰፊ የኢንቨስትመንት ዕድሎች ያብራራል። ኢትዮጵያ 116 ሚሊዮን ህዝብ ያላት ሲሆን፣ በ2024-2025 የጤና ወጪዋ 5 ቢሊዮን ዶላር ይደርሳል ተብሎ ይጠበቃል። በአሁኑ ጊዜ ከ6,000 በላይ ኢትዮጵያውያን ለህክምና በየዓመቱ ወደ ውጭ ሀገር የሚጓዙ ሲሆን፣ ከ120 ሚሊዮን ዶላር በላይ ያወጣሉ።
 
-Source: https://investethiopia.gov.et/key-sectors/emerging-sectors/health (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
+Source: https://investethiopia.gov.et/key-sectors/emerging-sectors/health (official Ethiopian Investment Commission page, in English), fetched 2026-09-20. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
 KEY SECTORS / HEALTHCARE
 
@@ -84,6 +85,8 @@ Providing high-impact public health services, including care for tuberculosis, H
 Development of healthcare professionals including midwives, anesthesiologists, obstetric surgeons and other high-end specialties and subspecialties.
 
 There is strong commitment from the government to improve healthcare in Ethiopia. The government is implementing the second Ethiopian Health Sector Transformation Plan, which aims to enhance private investment in strategic areas. The Ethiopian Ministry of Health is looking to partner with investors and ensure successful implementation of projects. The Ethiopian Investment Commission is also proving all necessary services to investors during their pre-implementation, establishment and operation journeys.
+
+## Testimonials
 
 “We are excited to play a leading role in in enhancing Ethiopia’s health sector. The Roha Medical Campus will create an Ethiopian hub for medical tourism, working with Ethiopian Airlines and local hotels to create travel packages specifically for patients.”
 Brooks Washington, Founder of U.S. Roha Group

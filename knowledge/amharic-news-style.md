@@ -74,6 +74,12 @@ to this list rather than arguing with it — the reviewer reads Amharic daily an
 | ምስጠራ (for cryptographic) | **ሚስጥር** — የሚስጥር ውጤቶች, የሚስጥር መሠረተ ልማት | 2026-09-20, INSA text |
 | ግልፅ (with ፅ) | **ግልጽ** (with ጽ) — the standard, grammatically accepted spelling: ግልጥ የሆነ፣ የተገለጠ፣ ለመረዳት የማይቸግር | 2026-09-20 |
 | በመስመር ላይ | **ኦንላይን** is accepted in a CHAT reply — the word people actually use | 2026-09-20 |
+| ማሄድ (to run a system) | **ማስኬድ** — causative: you cause it to run. "ሞዴል በራስ ሰርቨር ላይ ማስኬድ", not ማሄድ. Same for ያስኬዳል, አያስኬድም | 2026-09-22, vLLM article |
+| "… ሲጠይቀው … ማስተዳደር ይጠይቃል።" | **"… ሲጠቀምበት … ማስተዳደር ያስፈልጋል።"** — ይጠይቃል for "it requires" reads as a repeat of ሲጠይቀው in the same sentence. Use ያስፈልጋል, and change the first verb where the root would echo | 2026-09-22 |
+| A definition that stops on a bare noun: "… የሚያገለግል ንብርብር።" | Close it: **"… የሚያገለግል ንብርብር ማለት ነው።"** — when the sentence explains what something IS and ends on a noun phrase, ማለት ነው before the ። | 2026-09-22, vLLM article |
+| "ይህ ጽሑፍ ስለ X ነው፦ …" | **"ይህ ጽሑፍ ስለ X ነው የሚያብራራው፦ …"** — say what the article DOES, not only what it is about. (He wrote it as ሚያብራራው in chat; an article takes the full የሚያብራራው.) Also drop a noun the sentence does not need: "በራስ ሰርቨር ላይ ማስኬድ", not "ሞዴል በራስ ሰርቨር ላይ ማስኬድ" | 2026-09-22 |
+| ይዘምናል | **ይታደሣል** — for a board or a page that is refreshed: "በየጠዋቱ ይታደሣል" | 2026-09-22 |
+| "እከሌ እንደዘገበው" over a place | Just give the place: "በethiopianairlines.com ላይ ይይዛሉ". Cite a source for a RULE, never for a booking page, phone number or address | 2026-09-22 |
 | ሒሳብ (for a bank account) | **አካውንት** is accepted in a CHAT reply | 2026-09-20 |
 
 The last two were approved for Bini's chat answers, where the everyday word wins. Whether an article
@@ -127,3 +133,23 @@ nothing links to is a page nobody arrives at.
 - Never link the same page twice in one article, and never link a page that does not exist - check it.
 
 What NOT to do: a block of unrelated links at the end. Search engines discount it and readers ignore it.
+
+## The share card — a different picture every time
+
+(Owner, 22 September 2026: "why repeat same picture".) Three articles went out with the same stacked
+blue drawing, and three identical cards read as one article posted three times.
+
+`ops/og/article-card.js <slug> --title … --lede …` draws it. Six styles (slabs, rings, stat, mosaic,
+bars, gate) and six palettes (blue, green, amber, purple, teal, crimson). Left alone it picks from the
+slug, so the same article always keeps its picture and consecutive articles differ. Name `--style` and
+`--palette` when the subject suggests one:
+
+- **stat** — the point IS a number ($899, 4%, 3,782). Put the number in `--motif '{"stat":"…"}'`.
+- **bars** — growth, or before and after.
+- **rings** — one idea at the centre with context around it.
+- **gate** — access, permission, a way in.
+- **mosaic** — many things, one that matters.
+- **slabs** — layers that build on each other. Do not use it twice in a row.
+
+Rule: never ship two consecutive articles with the same style AND palette. Look at the PNG before
+posting — a card is the first thing a reader sees, and half of them see nothing else.

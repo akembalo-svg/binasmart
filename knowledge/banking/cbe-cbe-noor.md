@@ -6,9 +6,10 @@ source_name: "Commercial Bank of Ethiopia"
 section: "ifb"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
-contentHash: "58791c81d1674fc6500ea24d7135c4bfaad70d4f"
+fetchedAt: "2026-09-27"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-16"
+contentHash: "24c0d25610e988791caf3f6fb975b05555c45b51"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
 ---
@@ -19,15 +20,15 @@ Commercial Bank of Ethiopia — ifb — Commercial Bank of Ethiopia. On this pag
 
 በአማርኛ፦ ወለድ አልባ ባንክ — Commercial Bank of Ethiopia። ይህ ገጽ ከኢትዮጵያ ንግድ ባንክ ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። የወለድ መጠን፣ የአገልግሎት ክፍያ፣ ታሪፍና የምንዛሪ ተመን ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት ባንኩን ያረጋግጡ።
 
-ይህ ገጽ የኢትዮጵያ ንግድ ባንክ ወለድ አልባ የባንክ አገልግሎት ስለሆነው ስለ CBE Noor ያብራራል። CBE Noor በሸሪዓ ህግ መሰረት የሚሰራ ሲሆን ወለድን (ሪባን) የሚከለክል እና ፍትሃዊነትን፣ ግልጽነትን እና ስጋት መጋራትን የሚያጎላ ነው። አገልግሎቱ ለግለሰቦች፣ ለንግድ ድርጅቶች እና ለዲያስፖራ ማህበረሰቦች የተዘጋጀ ነው።
+ይህ ገጽ የኢትዮጵያ ንግድ ባንክ ስለሚያቀርበው ወለድ አልባ የባንክ አገልግሎት (CBE Noor) ያብራራል። CBE Noor በሸሪዓ ህግ መሰረት የሚሰራ ሲሆን ወለድን (ሪባን) የሚከለክል እና ፍትሃዊነትን፣ ግልጽነትንና ስጋት መጋራትን የሚያጎላ ነው። አገልግሎቱ ለግለሰቦች፣ ለንግድ ድርጅቶች እና ለዲያስፖራ ማህበረሰቦች የተዘጋጀ ነው።
 
-Source: https://combanketh.et/cbe-noor (official Commercial Bank of Ethiopia page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
+Source: https://combanketh.et/cbe-noor (official Commercial Bank of Ethiopia page, in English), fetched 2026-09-27. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
 Foreign Exchange Rate: No data available
 
 # Seamless & Secure Foreign Exchange Services
 
-Learn more about Foreign Exchange Services
+Learn more about Foreign Exchange ServicesFor Developers: Exchange Rate API Docs
 
 # Bank the Shariah-compliant way with CBE Noor!
 

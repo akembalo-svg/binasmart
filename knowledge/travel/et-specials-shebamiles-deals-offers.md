@@ -5,9 +5,10 @@ source_name: "Ethiopian Airlines"
 section: "et-specials"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
-contentHash: "65799aa8e231f40af8a080cc0d95ad873c71a231"
+fetchedAt: "2026-09-27"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-16"
+contentHash: "f69e0622e51615b77f4567059435b4e6b82cf091"
 generated_by: "ops/travel/fetch-airline.js"
 packFormat: "2"
 ---
@@ -18,7 +19,7 @@ Ethiopian Airlines — et-specials — ShebaMiles - Ethiopian airlines. On this 
 
 በአማርኛ፦ ShebaMiles፣ ሆሊደይስና ስካይላይት — ShebaMiles - Ethiopian airlines። ይህ ገጽ ከኢትዮጵያ አየር መንገድ ኦፊሴላዊ ድረ-ገጽ የተወሰደ ነው፤ አየር መንገዱ የአማርኛ ገጽ ስለማያዘጋጅ ጽሑፉ በእንግሊዝኛ ነው። ከመጓዝዎ በፊት በገጹ ላይ ያረጋግጡ።
 
-Source: https://www.ethiopianairlines.com/et/explore/et-specials/shebamiles-deals-offers (official Ethiopian Airlines page, in English), fetched 2026-09-16. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
+Source: https://www.ethiopianairlines.com/et/explore/et-specials/shebamiles-deals-offers (official Ethiopian Airlines page, in English), fetched 2026-09-27. Everything below is that page as it was written — figures, fees, kilos and time limits are copied, not restated. Confirm on the page before travelling.
 
 Login | Signup
 
@@ -26,18 +27,6 @@ You haven't registered yet?
 
 Search
 When autocomplete results are available use up and down arrows to review and enter to select.
-
-## Your next reward is closer than you think. Enjoy a mega bonus of up to 40% when you buy miles. And up to 40% bonus to your friends when you gift miles.
-
-Validity Period: September 06 - 20, 2026
-
-Buy Now
-
-## Claim Your Space Up to 20% off Neighbour-Free Seat: Exclusively for ShebaMiles members
-
-Validity Period: July 02- September 17, 2026
-
-Buy Now
 
 ## Convert Your ShebaMiles Miles into Marriott Bonvoy® points and unlock access to unparalleled travel benefits
 
@@ -56,6 +45,12 @@ Next
 Enjoy the exclusive benefits that come with being a ShebaMiles member. As a member you earn miles on the things you do every day-not just flying; and use your miles on a wide range of awards including flights, upgrades, and much more.
 
 # Deals & Offers
+
+Earn 1,000 Bonus Miles on Flights to/from Dubai
+
+❯
+
+Earn 1,000 Bonus Miles on Flights to/from Dubai
 
 Discover Lyon with Us!
 
@@ -82,35 +77,33 @@ Awash Bank
 
 Earn 3 miles for every ETB 100 spent using Awash ShebaMiles Card.
 
-EB YES Furniture
+Axis Bank
 
-Earn Miles with Every Purchase at EB YES Furniture
+Transfer your Axis Bank Edge Rewards Points into ShebaMiles miles if you hold a valid Axis Bank Credit or Debit card.
 
 Ethiopian Skylight Hotel
 
 Get the best of Ethiopia's buzzing capital and the finest in hospitality at Ethiopian Skylight Hotel Addis Ababa.
 
-Temer Properties
+Millennium Duty Free
 
-Create | Construct | Deliver.
+Spend USD 100 or more and earn 1 ShebaMile for every USD 1 spent. As a ShebaMiles member, make your eligible purchases and enjoy more rewards with every spend.
+
+Millennium Duty Free
+
+Spend USD 100 or more and earn 1 ShebaMile for every USD 1 spent. As a ShebaMiles member, make your eligible purchases and enjoy more rewards with every spend.
+
+Axis Bank
+
+Transfer your Axis Bank Edge Rewards Points into ShebaMiles miles if you hold a valid Axis Bank Credit or Debit card.
 
 Awash Bank
 
 Earn 3 miles for every ETB 100 spent using Awash ShebaMiles Card.
 
-EB YES Furniture
-
-Earn Miles with Every Purchase at EB YES Furniture
-
-Temer Properties
-
-Create | Construct | Deliver.
-
 Ethiopian Skylight Hotel
 
 Get the best of Ethiopia's buzzing capital and the finest in hospitality at Ethiopian Skylight Hotel Addis Ababa.
-
-.
 
 ShebaMiles
 

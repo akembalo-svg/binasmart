@@ -6,8 +6,9 @@ source_name: "Industrial Parks Development Corporation"
 section: "help"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
+fetchedAt: "2026-09-27"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-17"
 contentHash: "493366bee42c64137f497e4b99b9369f577b2915"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
@@ -21,7 +22,7 @@ Industrial Parks Development Corporation — help — Industrial Parks Developme
 
 ይህ ገጽ የግል ባለሀብቶች የኢንዱስትሪ ፓርኮችን በራሳቸው ወይም ከኮርፖሬሽኑ ጋር በሽርክና ማልማት እንደሚችሉ ያብራራል። የኢስተርን ኢንዱስትሪያል ዞን፣ ጆርጅ ሹ ክላስተር ኢንዱስትሪያል ፓርክ እና ሁዋጂያን ግሩፕ ሹስ ክላስተር ኢንዱስትሪያል ፓርኮች ከእነዚህ ውስጥ ጥቂቶቹ ናቸው። ኮርፖሬሽኑ የመሬት ባንክ አመቻች እና የመሠረተ ልማት አቅራቢ በመሆን ከግል የኢንዱስትሪ ፓርኮች ገንቢዎች ጋር ለመስራት ቁርጠኛ ነው።
 
-Source: https://ipdc.gov.et/service/service/10 (official Industrial Parks Development Corporation page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
+Source: https://ipdc.gov.et/service/service/10 (official Industrial Parks Development Corporation page, in English), fetched 2026-09-27. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
 ## Private Developer
 

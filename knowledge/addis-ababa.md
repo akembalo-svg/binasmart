@@ -31,7 +31,7 @@ The city is divided into eleven sub-cities: Addis Ketema, Akaki Kality, Arada, B
 - **Light rail (ቀላል ባቡር):** two lines that cross at the centre, one east–west between Ayat and Torhailoch and one north–south between the Menelik II Square area and Kality; the first light rail in sub-Saharan Africa.
 - **Ride-hailing:** BinaRide (fixed price, no surge, cash to the driver) and other apps. BinaPool lets four people share one Comfort car on the commute at a fraction of the solo fare.
 - **Contract taxis (ኮንትራት):** a car hired for a trip or a daily run, traditionally arranged by phone; BinaPool's daily groups formalise this.
-- **Airport:** Bole International is inside the city, roughly 6 km south-east of Meskel Square. International flights use Terminal 2. Bina Airport gives a fixed-price transfer with the flight number tracked.
+- **Airport:** Bole International is inside the city, roughly 6 km south-east of Meskel Square. International flights use Terminal 2. Bina Airport books a fixed-price ride from Terminal 2; the fare is shown before you confirm.
 - **Bajaj (ባጃጅ)** three-wheelers serve the outer districts and side streets where minibuses do not go.
 
 ## Daily life facts

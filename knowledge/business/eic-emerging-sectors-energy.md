@@ -6,22 +6,23 @@ source_name: "Ethiopian Investment Commission"
 section: "sectors"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
-contentHash: "97f8eb140a690aa6da2616a34c591cb393575850"
+fetchedAt: "2026-09-20"
+lastChecked: "2026-09-20"
+firstFetched: "2026-09-17"
+contentHash: "93dd6dc36b472353de1f14240ad5aedb9d2a2b05"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
 
 # Ethiopian Investment Commission — Energy | Ethiopian Investment Commission · የኢትዮጵያ ኢንቨስትመንት ኮሚሽን፡ የኢንቨስትመንት ዘርፎች - ኢነርጂ
 
-Ethiopian Investment Commission — sectors — Energy | Ethiopian Investment Commission. On this page: Energy, Diverse opportunities, attractive potential.
+Ethiopian Investment Commission — sectors — Energy | Ethiopian Investment Commission. On this page: Energy, Diverse opportunities, attractive potential, Testimonials.
 
 በአማርኛ፦ የኢንቨስትመንት ዘርፎች — Energy | Ethiopian Investment Commission። ይህ ገጽ ከኢትዮጵያ ኢንቨስትመንት ኮሚሽን ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
-ይህ ገጽ በኢትዮጵያ ስላለው የኢነርጂ ዘርፍ የኢንቨስትመንት ዕድሎችን ያብራራል። በአሁኑ ጊዜ 4,478 ሜጋ ዋት የተገጠመ የኤሌክትሪክ ኃይል ማመንጫ አቅም ሲኖር፣ እስከ 2030 ድረስ 19,900 ሜጋ ዋት ለማድረስ ታቅዷል። ኢትዮጵያ 45 ጊጋ ዋት የውሃ ኃይል እና 1,350 ጊጋ ዋት የንፋስ ኃይልን ጨምሮ ከፍተኛ ታዳሽ የኃይል ምንጮች አሏት።
+ይህ ገጽ በኢትዮጵያ ስላለው የኢነርጂ ዘርፍ የኢንቨስትመንት ዕድሎችን ያብራራል። በአሁኑ ጊዜ 4,478 ሜጋ ዋት የተገጠመ የኤሌክትሪክ ኃይል ማመንጫ አቅም ሲኖር፣ እስከ 2030 ድረስ 19,900 ሜጋ ዋት ለማድረስ ታቅዷል። ኢትዮጵያ ከፍተኛ የውሃ፣ የንፋስ፣ የፀሐይ እና የጂኦተርማል ኃይል ምንጮች አሏት።
 
-Source: https://investethiopia.gov.et/key-sectors/emerging-sectors/energy (official Ethiopian Investment Commission page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
+Source: https://investethiopia.gov.et/key-sectors/emerging-sectors/energy (official Ethiopian Investment Commission page, in English), fetched 2026-09-20. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
 KEY SECTORS / Energy
 
@@ -77,6 +78,8 @@ Ethiopia is one of the few countries in Africa with a significant potential of g
 - Solar Energy Development
 
 Of the estimated 1,350 gigawatt potential of solar energy in Ethiopia, less than 1% is currently developed. This offers a significant opportunity for investors to cover off-grid areas with electricity.
+
+## Testimonials
 
 “Ethiopia has plenty of renewable sources that can generate energy at affordable rates thanks to modern green technologies. Additionally, Ethiopia boasts a stable regulatory framework, based on tenders and PPAs, and steady energy demand growth, which is also sustained by a long-term electrification plan. We are more than happy to invest in this country, with the aim of meeting its energy demand through our renewable energy expertise, helping to boost Ethiopia’s overall development while supporting local communities with our sustainability initiatives.”
 Antonio Cammisecra, Head of Enel Green Power

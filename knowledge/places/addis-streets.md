@@ -1,0 +1,2004 @@
+---
+title: "Streets and roads in Addis Ababa (መንገዶች)"
+url: "https://www.openstreetmap.org/#map=12/9.0100/38.7600"
+lang: "en"
+source_name: "OpenStreetMap contributors (ODbL)"
+fetched: "2026-09-24"
+count: "1992"
+---
+# Streets and roads in Addis Ababa · በአዲስ አበባ ያሉ መንገዶች
+
+1992 named streets, each with the sub-cities it runs through. Source: OpenStreetMap (© OpenStreetMap contributors, ODbL), map data as of 2026-09-24. Street names in Addis are often not what people use; ask for the landmark or neighbourhood too.
+
+- **20m** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01346&mlon=38.85875#map=17/9.01346/38.85875
+- **3\_546** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98430&mlon=38.76466#map=17/8.98430/38.76466
+- **30 meter** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00982&mlon=38.85661#map=17/9.00982/38.85661
+- **8\_2223** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02641&mlon=38.79060#map=17/9.02641/38.79060
+- **8\_2225** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02653&mlon=38.79014#map=17/9.02653/38.79014
+- **8\_2333** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02707&mlon=38.79033#map=17/9.02707/38.79033
+- **Aba Kiros Roundabout** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.05695&mlon=38.87822#map=17/9.05695/38.87822
+- **Abera Gizwa Street** (አበራ ግዛው መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05587&mlon=38.75239#map=17/9.05587/38.75239
+- **Abera Gizwa Street / Gulele\_02\_368 St.** (አበራ ግዛው መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05276&mlon=38.75758#map=17/9.05276/38.75758
+- **Addis Ababa - Bahir Dar Road** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07548&mlon=38.73767#map=17/9.07548/38.73767
+- **Adey Abeba Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95530&mlon=38.76102#map=17/8.95530/38.76102
+- **Adwa Square** (አድዋ አደባባይ) · Yeka (የካ), Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01998&mlon=38.80148#map=17/9.01998/38.80148
+- **Adwa Street** (ኃይለስላሴ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03833&mlon=38.75701#map=17/9.03833/38.75701
+- **Africa Avenue / Bole Road** (አፍሪካ ጎዳና) · Kirkos (ቂርቆስ), Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99274&mlon=38.77708#map=17/8.99274/38.77708
+- **Africa-China Cooperation Square** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98785&mlon=38.79194#map=17/8.98785/38.79194
+- **Alexander Pushkin** (አሌክሳንደር ፑሽኪን አደባባይ) · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ), Lideta (ልደታ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99451&mlon=38.73800#map=17/8.99451/38.73800
+- **Alexander Pushkin Avenue** (አሌክሳንደር ፑሽኪን መንገድ) · Kirkos (ቂርቆስ), Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.99013&mlon=38.74175#map=17/8.99013/38.74175
+- **Algeria Av** (አልጄሪያ መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05729&mlon=38.76264#map=17/9.05729/38.76264
+- **Algeria Avenue** (አልጄሪያ መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04516&mlon=38.76142#map=17/9.04516/38.76142
+- **Ameya Street** · Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.90955&mlon=38.77209#map=17/8.90955/38.77209
+- **Anbesa Garage - Jackros** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00600&mlon=38.80789#map=17/9.00600/38.80789
+- **Anbessa Grarage to Jackros** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00419&mlon=38.81128#map=17/9.00419/38.81128
+- **Angola Street** (አንጎላ መንገድ) · Gulele (ጉለሌ), Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.04486&mlon=38.76496#map=17/9.04486/38.76496
+- **AR\_04\_0601 Av** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04485&mlon=38.74899#map=17/9.04485/38.74899
+- **AR\_04\_0602 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04946&mlon=38.74915#map=17/9.04946/38.74915
+- **AR\_04\_0602 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04650&mlon=38.74948#map=17/9.04650/38.74948
+- **AR\_04\_0603 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04522&mlon=38.74903#map=17/9.04522/38.74903
+- **AR\_04\_0605 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04503&mlon=38.74841#map=17/9.04503/38.74841
+- **AR\_04\_0607 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04590&mlon=38.74881#map=17/9.04590/38.74881
+- **AR\_04\_0608 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04959&mlon=38.74827#map=17/9.04959/38.74827
+- **AR\_04\_0608 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04794&mlon=38.74830#map=17/9.04794/38.74830
+- **AR\_04\_0609 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04641&mlon=38.74922#map=17/9.04641/38.74922
+- **AR\_04\_0610 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04903&mlon=38.74771#map=17/9.04903/38.74771
+- **AR\_04\_0611 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04760&mlon=38.74788#map=17/9.04760/38.74788
+- **AR\_04\_0612 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04606&mlon=38.74882#map=17/9.04606/38.74882
+- **AR\_04\_0613 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04788&mlon=38.74972#map=17/9.04788/38.74972
+- **AR\_04\_0613 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04768&mlon=38.74954#map=17/9.04768/38.74954
+- **AR\_04\_0615 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04792&mlon=38.74697#map=17/9.04792/38.74697
+- **AR\_04\_0625 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05010&mlon=38.74798#map=17/9.05010/38.74798
+- **AR\_04\_0628 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04535&mlon=38.74719#map=17/9.04535/38.74719
+- **AR\_04\_0630 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04611&mlon=38.74566#map=17/9.04611/38.74566
+- **AR\_04\_0632 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04650&mlon=38.74373#map=17/9.04650/38.74373
+- **AR\_04\_0634 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04742&mlon=38.74377#map=17/9.04742/38.74377
+- **AR\_04\_0636 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04699&mlon=38.74371#map=17/9.04699/38.74371
+- **AR\_04\_0637 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04389&mlon=38.74509#map=17/9.04389/38.74509
+- **AR\_04\_0638 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04404&mlon=38.74599#map=17/9.04404/38.74599
+- **AR\_04\_0639 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04535&mlon=38.74766#map=17/9.04535/38.74766
+- **AR\_04\_0640 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04389&mlon=38.74561#map=17/9.04389/38.74561
+- **AR\_04\_0641 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04503&mlon=38.74585#map=17/9.04503/38.74585
+- **AR\_04\_0642 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04831&mlon=38.74330#map=17/9.04831/38.74330
+- **AR\_04\_0643 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04562&mlon=38.74704#map=17/9.04562/38.74704
+- **AR\_04\_0645 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04569&mlon=38.74635#map=17/9.04569/38.74635
+- **AR\_04\_0651 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04649&mlon=38.74441#map=17/9.04649/38.74441
+- **AR\_04\_0653 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04730&mlon=38.74471#map=17/9.04730/38.74471
+- **AR\_04\_0654 St.** · Gulele (ጉለሌ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05421&mlon=38.74968#map=17/9.05421/38.74968
+- **AR\_04\_0655 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04744&mlon=38.74412#map=17/9.04744/38.74412
+- **AR\_04\_0656 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05342&mlon=38.74913#map=17/9.05342/38.74913
+- **AR\_04\_0657 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04837&mlon=38.74411#map=17/9.04837/38.74411
+- **AR\_04\_0657 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04832&mlon=38.74418#map=17/9.04832/38.74418
+- **AR\_04\_0658 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05310&mlon=38.74878#map=17/9.05310/38.74878
+- **AR\_04\_0659 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04736&mlon=38.74280#map=17/9.04736/38.74280
+- **AR\_04\_0659 Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04776&mlon=38.74268#map=17/9.04776/38.74268
+- **AR\_04\_0660 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05374&mlon=38.74836#map=17/9.05374/38.74836
+- **AR\_04\_0661 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04964&mlon=38.74438#map=17/9.04964/38.74438
+- **AR\_04\_0662 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05299&mlon=38.74838#map=17/9.05299/38.74838
+- **AR\_04\_0664 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05379&mlon=38.74722#map=17/9.05379/38.74722
+- **AR\_04\_0666 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05266&mlon=38.74758#map=17/9.05266/38.74758
+- **AR\_04\_0668 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05350&mlon=38.74607#map=17/9.05350/38.74607
+- **AR\_04\_0670 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05179&mlon=38.74674#map=17/9.05179/38.74674
+- **AR\_04\_0674 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05151&mlon=38.74637#map=17/9.05151/38.74637
+- **AR\_04\_0675 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05134&mlon=38.74840#map=17/9.05134/38.74840
+- **AR\_04\_0676 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04889&mlon=38.74654#map=17/9.04889/38.74654
+- **AR\_04\_0677 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05096&mlon=38.74753#map=17/9.05096/38.74753
+- **AR\_04\_0678 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05135&mlon=38.74462#map=17/9.05135/38.74462
+- **AR\_04\_0679 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05152&mlon=38.74797#map=17/9.05152/38.74797
+- **AR\_04\_0680 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05280&mlon=38.74405#map=17/9.05280/38.74405
+- **AR\_04\_0681 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05048&mlon=38.74685#map=17/9.05048/38.74685
+- **AR\_04\_0681 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05029&mlon=38.74588#map=17/9.05029/38.74588
+- **AR\_04\_0685 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05219&mlon=38.74624#map=17/9.05219/38.74624
+- **AR\_04\_0687 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05346&mlon=38.74866#map=17/9.05346/38.74866
+- **AR\_04\_0689 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05281&mlon=38.74644#map=17/9.05281/38.74644
+- **AR\_04\_0691 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05209&mlon=38.74460#map=17/9.05209/38.74460
+- **AR\_04\_0692 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05192&mlon=38.74292#map=17/9.05192/38.74292
+- **AR\_04\_0694 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05206&mlon=38.74236#map=17/9.05206/38.74236
+- **AR\_04\_0695 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05267&mlon=38.74463#map=17/9.05267/38.74463
+- **AR\_04\_0696 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05217&mlon=38.74151#map=17/9.05217/38.74151
+- **AR\_04\_0698 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04945&mlon=38.74329#map=17/9.04945/38.74329
+- **AR\_04\_0702 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05010&mlon=38.74182#map=17/9.05010/38.74182
+- **AR\_04\_0702 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04985&mlon=38.74178#map=17/9.04985/38.74178
+- **AR\_04\_0704 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05244&mlon=38.74097#map=17/9.05244/38.74097
+- **AR\_04\_0707 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04925&mlon=38.74295#map=17/9.04925/38.74295
+- **AR\_04\_0707 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05023&mlon=38.74194#map=17/9.05023/38.74194
+- **AR\_04\_0708 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05031&mlon=38.74117#map=17/9.05031/38.74117
+- **AR\_04\_0708 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05137&mlon=38.73944#map=17/9.05137/38.73944
+- **AR\_04\_0709 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04974&mlon=38.74282#map=17/9.04974/38.74282
+- **AR\_04\_0709 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04885&mlon=38.74263#map=17/9.04885/38.74263
+- **AR\_04\_0711 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04935&mlon=38.74196#map=17/9.04935/38.74196
+- **AR\_04\_0711 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04959&mlon=38.74201#map=17/9.04959/38.74201
+- **AR\_04\_0712 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04915&mlon=38.74082#map=17/9.04915/38.74082
+- **AR\_04\_0714 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04896&mlon=38.74036#map=17/9.04896/38.74036
+- **AR\_04\_0715 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04915&mlon=38.74000#map=17/9.04915/38.74000
+- **AR\_04\_0716 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05010&mlon=38.73902#map=17/9.05010/38.73902
+- **AR\_04\_0717 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04972&mlon=38.74061#map=17/9.04972/38.74061
+- **AR\_04\_0718 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04942&mlon=38.73858#map=17/9.04942/38.73858
+- **AR\_04\_0719 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05064&mlon=38.74081#map=17/9.05064/38.74081
+- **AR\_04\_0720 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05078&mlon=38.73792#map=17/9.05078/38.73792
+- **AR\_04\_0720 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05053&mlon=38.73832#map=17/9.05053/38.73832
+- **AR\_04\_0721 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05157&mlon=38.74272#map=17/9.05157/38.74272
+- **AR\_04\_0723 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05002&mlon=38.73821#map=17/9.05002/38.73821
+- **AR\_04\_0725 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05111&mlon=38.74062#map=17/9.05111/38.74062
+- **AR\_04\_0725 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05100&mlon=38.74097#map=17/9.05100/38.74097
+- **AR\_04\_0727 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05023&mlon=38.73804#map=17/9.05023/38.73804
+- **AR\_04\_0729 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05182&mlon=38.74202#map=17/9.05182/38.74202
+- **AR\_04\_0731 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05194&mlon=38.74037#map=17/9.05194/38.74037
+- **AR\_04\_0733 St** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05186&mlon=38.73898#map=17/9.05186/38.73898
+- **AR\_04\_2413 Av** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04976&mlon=38.73771#map=17/9.04976/38.73771
+- **AR\_06\_1001 St. / Haile Maryam Mamo St.** (ሣህለ ስላሴ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03818&mlon=38.76618#map=17/9.03818/38.76618
+- **AR\_06\_1003 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03999&mlon=38.76613#map=17/9.03999/38.76613
+- **AR\_06\_1010 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04192&mlon=38.76410#map=17/9.04192/38.76410
+- **AR\_06\_1011 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04121&mlon=38.76542#map=17/9.04121/38.76542
+- **AR\_06\_1012 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04015&mlon=38.76497#map=17/9.04015/38.76497
+- **AR\_06\_1013 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04162&mlon=38.76480#map=17/9.04162/38.76480
+- **AR\_06\_1015 St.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04241&mlon=38.76322#map=17/9.04241/38.76322
+- **AR\_06\_1017 Av.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04315&mlon=38.76316#map=17/9.04315/38.76316
+- **AR\_06\_1031 St.** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.04398&mlon=38.76487#map=17/9.04398/38.76487
+- **AR\_06\_1036 St.** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.04319&mlon=38.76491#map=17/9.04319/38.76491
+- **AR\_06\_1074 St. / Welete Yohanis Street** (ወለተ ዮሃንስ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04081&mlon=38.75781#map=17/9.04081/38.75781
+- **AR\_06\_1084 St. / Tewodros Av** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04178&mlon=38.75985#map=17/9.04178/38.75985
+- **AR\_06\_1104 Street. / Tenagnework Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04240&mlon=38.75581#map=17/9.04240/38.75581
+- **Arada 6\_1083 St.** (አራዳ 6\_1083 መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04506&mlon=38.75767#map=17/9.04506/38.75767
+- **Arada Street** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04039&mlon=38.76063#map=17/9.04039/38.76063
+- **Ararat to Kara** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03756&mlon=38.85946#map=17/9.03756/38.85946
+- **Arbegnoch Square** (አርበኞች አደባባይ) · Addis Ketema (አዲስ ከተማ), Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.02885&mlon=38.74319#map=17/9.02885/38.74319
+- **Arbegnoch Street** (አርበኞች መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03398&mlon=38.75047#map=17/9.03398/38.75047
+- **Ayele Haile Av.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05223&mlon=38.75012#map=17/9.05223/38.75012
+- **Ayele Haile Avenue** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04597&mlon=38.75521#map=17/9.04597/38.75521
+- **Balcha Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.97553&mlon=38.77166#map=17/8.97553/38.77166
+- **Bekele Weya Street** (በቀለ ወያ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01642&mlon=38.73488#map=17/9.01642/38.73488
+- **Benin Street** (ቤኒን መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04188&mlon=38.75395#map=17/9.04188/38.75395
+- **Bergoyane Street** (ቤርጎያን መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03145&mlon=38.75183#map=17/9.03145/38.75183
+- **Beyene Aba Sebsib Avenue** (በየነ አናባ ሰብስቤ ጎዳና) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98894&mlon=38.75941#map=17/8.98894/38.75941
+- **Beyene Merid Street** (በየነ መርድ መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99745&mlon=38.74757#map=17/8.99745/38.74757
+- **BL\_02\_303 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99234&mlon=38.77799#map=17/8.99234/38.77799
+- **BL\_02\_318 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99163&mlon=38.77868#map=17/8.99163/38.77868
+- **BL\_02\_320 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99155&mlon=38.77903#map=17/8.99155/38.77903
+- **BL\_02\_322 Street** · Kirkos (ቂርቆስ), Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99206&mlon=38.77760#map=17/8.99206/38.77760
+- **BL\_02\_349 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98566&mlon=38.78139#map=17/8.98566/38.78139
+- **BL\_02\_351 St** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98530&mlon=38.78159#map=17/8.98530/38.78159
+- **BL\_02\_355 St** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98494&mlon=38.78182#map=17/8.98494/38.78182
+- **BL\_02\_359 St** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98413&mlon=38.78101#map=17/8.98413/38.78101
+- **BL\_02\_376 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98635&mlon=38.78096#map=17/8.98635/38.78096
+- **BL\_02\_379 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98707&mlon=38.78226#map=17/8.98707/38.78226
+- **BL\_02\_380 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98906&mlon=38.78029#map=17/8.98906/38.78029
+- **BL\_02\_381 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98659&mlon=38.78256#map=17/8.98659/38.78256
+- **BL\_02\_383 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98682&mlon=38.78310#map=17/8.98682/38.78310
+- **BL\_02\_386 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99004&mlon=38.78197#map=17/8.99004/38.78197
+- **BL\_02\_389 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98600&mlon=38.78290#map=17/8.98600/38.78290
+- **BL\_02\_391 St.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98580&mlon=38.78431#map=17/8.98580/38.78431
+- **BL\_02\_393 St** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98519&mlon=38.78361#map=17/8.98519/38.78361
+- **BL\_02\_393 St.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98487&mlon=38.78260#map=17/8.98487/38.78260
+- **BL\_02\_394 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98533&mlon=38.78254#map=17/8.98533/38.78254
+- **BL\_02\_396 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98617&mlon=38.78280#map=17/8.98617/38.78280
+- **BL\_02\_413 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98919&mlon=38.78449#map=17/8.98919/38.78449
+- **BL\_02\_415 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98844&mlon=38.78418#map=17/8.98844/38.78418
+- **BL\_02\_501 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01106&mlon=38.78474#map=17/9.01106/38.78474
+- **BL\_03\_503 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01062&mlon=38.78502#map=17/9.01062/38.78502
+- **BL\_03\_505 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01026&mlon=38.78767#map=17/9.01026/38.78767
+- **BL\_03\_506 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00509&mlon=38.78245#map=17/9.00509/38.78245
+- **BL\_03\_507 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00847&mlon=38.78489#map=17/9.00847/38.78489
+- **BL\_03\_509 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00750&mlon=38.78282#map=17/9.00750/38.78282
+- **BL\_03\_510 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00685&mlon=38.78302#map=17/9.00685/38.78302
+- **BL\_03\_511 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00835&mlon=38.78623#map=17/9.00835/38.78623
+- **BL\_03\_512 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00790&mlon=38.78320#map=17/9.00790/38.78320
+- **BL\_03\_513 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00866&mlon=38.78773#map=17/9.00866/38.78773
+- **BL\_03\_514 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00320&mlon=38.78452#map=17/9.00320/38.78452
+- **BL\_03\_516 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00100&mlon=38.78393#map=17/9.00100/38.78393
+- **BL\_03\_517 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00673&mlon=38.78265#map=17/9.00673/38.78265
+- **BL\_03\_518 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00128&mlon=38.78443#map=17/9.00128/38.78443
+- **BL\_03\_519 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00622&mlon=38.78294#map=17/9.00622/38.78294
+- **BL\_03\_520 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00071&mlon=38.78433#map=17/9.00071/38.78433
+- **BL\_03\_521 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00664&mlon=38.78474#map=17/9.00664/38.78474
+- **BL\_03\_521 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00731&mlon=38.78691#map=17/9.00731/38.78691
+- **BL\_03\_523 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00544&mlon=38.78178#map=17/9.00544/38.78178
+- **BL\_03\_525 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00630&mlon=38.78547#map=17/9.00630/38.78547
+- **BL\_03\_526 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00080&mlon=38.78599#map=17/9.00080/38.78599
+- **BL\_03\_527 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00509&mlon=38.78245#map=17/9.00509/38.78245
+- **BL\_03\_528** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00001&mlon=38.78526#map=17/9.00001/38.78526
+- **BL\_03\_529 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00501&mlon=38.78304#map=17/9.00501/38.78304
+- **BL\_03\_530** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99950&mlon=38.78550#map=17/8.99950/38.78550
+- **BL\_03\_531 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00600&mlon=38.78608#map=17/9.00600/38.78608
+- **BL\_03\_532 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00335&mlon=38.78496#map=17/9.00335/38.78496
+- **BL\_03\_533 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00664&mlon=38.78834#map=17/9.00664/38.78834
+- **BL\_03\_534 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00126&mlon=38.78764#map=17/9.00126/38.78764
+- **BL\_03\_535 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00571&mlon=38.78700#map=17/9.00571/38.78700
+- **BL\_03\_536 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01061&mlon=38.78431#map=17/9.01061/38.78431
+- **BL\_03\_537 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00524&mlon=38.78737#map=17/9.00524/38.78737
+- **BL\_03\_538 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00340&mlon=38.78622#map=17/9.00340/38.78622
+- **BL\_03\_539 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00453&mlon=38.78282#map=17/9.00453/38.78282
+- **BL\_03\_540 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00769&mlon=38.78575#map=17/9.00769/38.78575
+- **BL\_03\_541 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00399&mlon=38.78222#map=17/9.00399/38.78222
+- **BL\_03\_542 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00548&mlon=38.78623#map=17/9.00548/38.78623
+- **BL\_03\_544 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00342&mlon=38.78707#map=17/9.00342/38.78707
+- **BL\_03\_546 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01024&mlon=38.78571#map=17/9.01024/38.78571
+- **BL\_03\_547 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00461&mlon=38.78811#map=17/9.00461/38.78811
+- **BL\_03\_548 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00313&mlon=38.78753#map=17/9.00313/38.78753
+- **BL\_03\_549 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00351&mlon=38.78167#map=17/9.00351/38.78167
+- **BL\_03\_550 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00003&mlon=38.78629#map=17/9.00003/38.78629
+- **BL\_03\_551 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00410&mlon=38.78659#map=17/9.00410/38.78659
+- **BL\_03\_552 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00809&mlon=38.78668#map=17/9.00809/38.78668
+- **BL\_03\_554 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00795&mlon=38.78719#map=17/9.00795/38.78719
+- **BL\_03\_555 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00439&mlon=38.78817#map=17/9.00439/38.78817
+- **BL\_03\_556 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00507&mlon=38.78797#map=17/9.00507/38.78797
+- **BL\_03\_557 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00300&mlon=38.78308#map=17/9.00300/38.78308
+- **BL\_03\_558 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01000&mlon=38.78746#map=17/9.01000/38.78746
+- **BL\_03\_559 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00374&mlon=38.78670#map=17/9.00374/38.78670
+- **BL\_03\_560 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00843&mlon=38.78779#map=17/9.00843/38.78779
+- **BL\_03\_561 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00389&mlon=38.78848#map=17/9.00389/38.78848
+- **BL\_03\_562 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00295&mlon=38.78815#map=17/9.00295/38.78815
+- **BL\_03\_563 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00340&mlon=38.78622#map=17/9.00340/38.78622
+- **BL\_03\_564** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00071&mlon=38.78721#map=17/9.00071/38.78721
+- **BL\_03\_565 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00295&mlon=38.78699#map=17/9.00295/38.78699
+- **BL\_03\_567 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00326&mlon=38.78826#map=17/9.00326/38.78826
+- **BL\_03\_569 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00207&mlon=38.78661#map=17/9.00207/38.78661
+- **BL\_03\_571 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00204&mlon=38.78539#map=17/9.00204/38.78539
+- **BL\_03\_573 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00239&mlon=38.78406#map=17/9.00239/38.78406
+- **BL\_03\_573 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00486&mlon=38.78724#map=17/9.00486/38.78724
+- **BL\_03\_577 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00036&mlon=38.78678#map=17/9.00036/38.78678
+- **BL\_03\_579** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00110&mlon=38.78462#map=17/9.00110/38.78462
+- **BL\_03\_579 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99984&mlon=38.78684#map=17/8.99984/38.78684
+- **BL\_03\_581 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00255&mlon=38.78233#map=17/9.00255/38.78233
+- **BL\_03\_583 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00219&mlon=38.78248#map=17/9.00219/38.78248
+- **BL\_03\_588 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00400&mlon=38.77942#map=17/9.00400/38.77942
+- **BL\_03\_590 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00349&mlon=38.77932#map=17/9.00349/38.77932
+- **BL\_03\_592 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99759&mlon=38.77865#map=17/8.99759/38.77865
+- **BL\_03\_594 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99881&mlon=38.77825#map=17/8.99881/38.77825
+- **BL\_03\_596 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99863&mlon=38.77873#map=17/8.99863/38.77873
+- **BL\_03\_598 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99711&mlon=38.77794#map=17/8.99711/38.77794
+- **BL\_03\_600 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99863&mlon=38.77873#map=17/8.99863/38.77873
+- **BL\_03\_602 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99468&mlon=38.77783#map=17/8.99468/38.77783
+- **BL\_03\_604 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00382&mlon=38.78222#map=17/9.00382/38.78222
+- **BL\_03\_607 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00285&mlon=38.77878#map=17/9.00285/38.77878
+- **BL\_03\_608 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00234&mlon=38.78079#map=17/9.00234/38.78079
+- **BL\_03\_610 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00152&mlon=38.78153#map=17/9.00152/38.78153
+- **BL\_03\_612 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00122&mlon=38.78116#map=17/9.00122/38.78116
+- **BL\_03\_613 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00142&mlon=38.77999#map=17/9.00142/38.77999
+- **BL\_03\_614 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99962&mlon=38.78129#map=17/8.99962/38.78129
+- **BL\_03\_615 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00182&mlon=38.78124#map=17/9.00182/38.78124
+- **BL\_03\_617 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00152&mlon=38.78153#map=17/9.00152/38.78153
+- **BL\_03\_618 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99864&mlon=38.78174#map=17/8.99864/38.78174
+- **BL\_03\_619 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00095&mlon=38.78138#map=17/9.00095/38.78138
+- **BL\_03\_620 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99641&mlon=38.78060#map=17/8.99641/38.78060
+- **BL\_03\_621 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00020&mlon=38.78205#map=17/9.00020/38.78205
+- **BL\_03\_622 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99432&mlon=38.78054#map=17/8.99432/38.78054
+- **BL\_03\_622 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99661&mlon=38.77906#map=17/8.99661/38.77906
+- **BL\_03\_623 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00055&mlon=38.78015#map=17/9.00055/38.78015
+- **BL\_03\_624 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99386&mlon=38.78004#map=17/8.99386/38.78004
+- **BL\_03\_625 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99870&mlon=38.77794#map=17/8.99870/38.77794
+- **BL\_03\_626 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99370&mlon=38.77926#map=17/8.99370/38.77926
+- **BL\_03\_627 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99958&mlon=38.78034#map=17/8.99958/38.78034
+- **BL\_03\_628 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99622&mlon=38.78220#map=17/8.99622/38.78220
+- **BL\_03\_629 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99796&mlon=38.77763#map=17/8.99796/38.77763
+- **BL\_03\_629 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99710&mlon=38.77701#map=17/8.99710/38.77701
+- **BL\_03\_630 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99261&mlon=38.78284#map=17/8.99261/38.78284
+- **BL\_03\_631 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99886&mlon=38.78033#map=17/8.99886/38.78033
+- **BL\_03\_632 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99569&mlon=38.78313#map=17/8.99569/38.78313
+- **BL\_03\_633 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99864&mlon=38.78087#map=17/8.99864/38.78087
+- **BL\_03\_634 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99814&mlon=38.78375#map=17/8.99814/38.78375
+- **BL\_03\_635 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99887&mlon=38.78207#map=17/8.99887/38.78207
+- **BL\_03\_636 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99648&mlon=38.78403#map=17/8.99648/38.78403
+- **BL\_03\_637 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99861&mlon=38.78417#map=17/8.99861/38.78417
+- **BL\_03\_638 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99268&mlon=38.78410#map=17/8.99268/38.78410
+- **BL\_03\_639 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99753&mlon=38.78064#map=17/8.99753/38.78064
+- **BL\_03\_640 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99788&mlon=38.78498#map=17/8.99788/38.78498
+- **BL\_03\_641 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99796&mlon=38.78498#map=17/8.99796/38.78498
+- **BL\_03\_643 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99688&mlon=38.77973#map=17/8.99688/38.77973
+- **BL\_03\_644 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99776&mlon=38.78562#map=17/8.99776/38.78562
+- **BL\_03\_645 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99727&mlon=38.78220#map=17/8.99727/38.78220
+- **BL\_03\_646 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99445&mlon=38.78505#map=17/8.99445/38.78505
+- **BL\_03\_647 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99746&mlon=38.78427#map=17/8.99746/38.78427
+- **BL\_03\_649 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99532&mlon=38.77755#map=17/8.99532/38.77755
+- **BL\_03\_653 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99675&mlon=38.78220#map=17/8.99675/38.78220
+- **BL\_03\_655 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99690&mlon=38.78495#map=17/8.99690/38.78495
+- **BL\_03\_659 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99557&mlon=38.78028#map=17/8.99557/38.78028
+- **BL\_03\_661 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99596&mlon=38.78094#map=17/8.99596/38.78094
+- **BL\_03\_663 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99562&mlon=38.78176#map=17/8.99562/38.78176
+- **BL\_03\_665 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99569&mlon=38.78220#map=17/8.99569/38.78220
+- **BL\_03\_667 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99607&mlon=38.78370#map=17/8.99607/38.78370
+- **BL\_03\_669 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99495&mlon=38.78162#map=17/8.99495/38.78162
+- **BL\_03\_670 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99611&mlon=38.78663#map=17/8.99611/38.78663
+- **BL\_03\_671 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99504&mlon=38.78370#map=17/8.99504/38.78370
+- **BL\_03\_672 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99203&mlon=38.78554#map=17/8.99203/38.78554
+- **BL\_03\_675 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99421&mlon=38.78143#map=17/8.99421/38.78143
+- **BL\_03\_676 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99115&mlon=38.78622#map=17/8.99115/38.78622
+- **BL\_03\_678 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99078&mlon=38.78713#map=17/8.99078/38.78713
+- **BL\_03\_679 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99380&mlon=38.78182#map=17/8.99380/38.78182
+- **BL\_03\_680 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99528&mlon=38.79066#map=17/8.99528/38.79066
+- **BL\_03\_682 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99205&mlon=38.78844#map=17/8.99205/38.78844
+- **BL\_03\_683 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99349&mlon=38.78217#map=17/8.99349/38.78217
+- **BL\_03\_684 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99513&mlon=38.79118#map=17/8.99513/38.79118
+- **BL\_03\_685 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99328&mlon=38.78366#map=17/8.99328/38.78366
+- **BL\_03\_686 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99487&mlon=38.79152#map=17/8.99487/38.79152
+- **BL\_03\_688 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99471&mlon=38.79203#map=17/8.99471/38.79203
+- **BL\_03\_690 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99403&mlon=38.79220#map=17/8.99403/38.79220
+- **BL\_03\_692 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99351&mlon=38.79248#map=17/8.99351/38.79248
+- **BL\_03\_694 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99490&mlon=38.79428#map=17/8.99490/38.79428
+- **BL\_03\_696 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99426&mlon=38.79403#map=17/8.99426/38.79403
+- **BL\_03\_700** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99188&mlon=38.79303#map=17/8.99188/38.79303
+- **Bl\_03\_702 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99097&mlon=38.79100#map=17/8.99097/38.79100
+- **BL\_03\_704 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99048&mlon=38.79131#map=17/8.99048/38.79131
+- **BL\_03\_706 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99286&mlon=38.79417#map=17/8.99286/38.79417
+- **BL\_03\_706 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99173&mlon=38.79368#map=17/8.99173/38.79368
+- **BL\_03\_708 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98967&mlon=38.79257#map=17/8.98967/38.79257
+- **BL\_03\_709 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99566&mlon=38.79177#map=17/8.99566/38.79177
+- **BL\_03\_711 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99283&mlon=38.79469#map=17/8.99283/38.79469
+- **BL\_03\_713 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99382&mlon=38.79291#map=17/8.99382/38.79291
+- **BL\_03\_717 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99267&mlon=38.79303#map=17/8.99267/38.79303
+- **BL\_03\_719 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99405&mlon=38.79124#map=17/8.99405/38.79124
+- **BL\_03\_721** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99218&mlon=38.79253#map=17/8.99218/38.79253
+- **BL\_03\_727 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99082&mlon=38.79175#map=17/8.99082/38.79175
+- **Bl\_03\_729 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99097&mlon=38.79100#map=17/8.99097/38.79100
+- **Bl\_03\_734 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00867&mlon=38.78947#map=17/9.00867/38.78947
+- **Bl\_03\_735 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99088&mlon=38.79034#map=17/8.99088/38.79034
+- **BL\_03\_738 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00746&mlon=38.79133#map=17/9.00746/38.79133
+- **BL\_03\_739 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99196&mlon=38.78729#map=17/8.99196/38.78729
+- **BL\_03\_740 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00597&mlon=38.79175#map=17/9.00597/38.79175
+- **BL\_03\_741 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99167&mlon=38.78644#map=17/8.99167/38.78644
+- **BL\_03\_743 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99115&mlon=38.78622#map=17/8.99115/38.78622
+- **BL\_03\_744 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99971&mlon=38.78804#map=17/8.99971/38.78804
+- **BL\_03\_746 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99943&mlon=38.78867#map=17/8.99943/38.78867
+- **BL\_03\_748 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99909&mlon=38.78949#map=17/8.99909/38.78949
+- **BL\_03\_750 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99931&mlon=38.79069#map=17/8.99931/38.79069
+- **BL\_03\_762 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99776&mlon=38.79141#map=17/8.99776/38.79141
+- **BL\_03\_764 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99765&mlon=38.79170#map=17/8.99765/38.79170
+- **Bl\_03\_765 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00686&mlon=38.79844#map=17/9.00686/38.79844
+- **Bl\_03\_765 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00890&mlon=38.79051#map=17/9.00890/38.79051
+- **BL\_03\_771 street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00789&mlon=38.78879#map=17/9.00789/38.78879
+- **BL\_03\_772 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99803&mlon=38.79242#map=17/8.99803/38.79242
+- **BL\_03\_773 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00791&mlon=38.79025#map=17/9.00791/38.79025
+- **Bl\_03\_775 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00752&mlon=38.79037#map=17/9.00752/38.79037
+- **BL\_03\_779 St.** (ቦሌ\_03\_779 መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00703&mlon=38.78949#map=17/9.00703/38.78949
+- **BL\_03\_779 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00668&mlon=38.78983#map=17/9.00668/38.78983
+- **Bl\_03\_781 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00682&mlon=38.79078#map=17/9.00682/38.79078
+- **BL\_03\_783 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00628&mlon=38.79058#map=17/9.00628/38.79058
+- **BL\_03\_785 Av** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00320&mlon=38.79811#map=17/9.00320/38.79811
+- **BL\_03\_785 Avenue** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00565&mlon=38.79123#map=17/9.00565/38.79123
+- **BL\_03\_786 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99685&mlon=38.79277#map=17/8.99685/38.79277
+- **BL\_03\_787 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00264&mlon=38.79790#map=17/9.00264/38.79790
+- **BL\_03\_788 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99669&mlon=38.79311#map=17/8.99669/38.79311
+- **BL\_03\_789 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99713&mlon=38.79580#map=17/8.99713/38.79580
+- **BL\_03\_792 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99699&mlon=38.79379#map=17/8.99699/38.79379
+- **BL\_03\_795 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99909&mlon=38.78949#map=17/8.99909/38.78949
+- **BL\_03\_797 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99784&mlon=38.79295#map=17/8.99784/38.79295
+- **BL\_03\_798 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99681&mlon=38.79429#map=17/8.99681/38.79429
+- **BL\_03\_803 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99686&mlon=38.79493#map=17/8.99686/38.79493
+- **BL\_03\_804 St.** (ቦሌ\_03\_804 መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99631&mlon=38.79473#map=17/8.99631/38.79473
+- **BL\_03\_805 St.** (ቦሌ\_03\_805 መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99716&mlon=38.79330#map=17/8.99716/38.79330
+- **BL\_03\_809 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99685&mlon=38.79277#map=17/8.99685/38.79277
+- **BL\_03\_811 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99652&mlon=38.79361#map=17/8.99652/38.79361
+- **BL\_03\_817 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99698&mlon=38.79110#map=17/8.99698/38.79110
+- **BL\_03\_819 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99654&mlon=38.79196#map=17/8.99654/38.79196
+- **BL\_03\_821 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99706&mlon=38.78931#map=17/8.99706/38.78931
+- **BL\_06\_1397 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01172&mlon=38.80774#map=17/9.01172/38.80774
+- **BL\_12\_4737 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94842&mlon=38.75039#map=17/8.94842/38.75039
+- **Bole 1\_336 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98486&mlon=38.77783#map=17/8.98486/38.77783
+- **Bole 2\_234 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98521&mlon=38.77916#map=17/8.98521/38.77916
+- **Bole 2\_312 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98960&mlon=38.77683#map=17/8.98960/38.77683
+- **Bole 2\_312 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99023&mlon=38.77763#map=17/8.99023/38.77763
+- **Bole 2\_314 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99057&mlon=38.77792#map=17/8.99057/38.77792
+- **Bole 2\_316 Street.** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99090&mlon=38.77824#map=17/8.99090/38.77824
+- **Bole 2\_320 St.** (ቦሌ 2\_320 መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99021&mlon=38.78051#map=17/8.99021/38.78051
+- **Bole 2\_333 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98620&mlon=38.77713#map=17/8.98620/38.77713
+- **Bole 2\_335 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98567&mlon=38.77772#map=17/8.98567/38.77772
+- **Bole 2\_343 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98536&mlon=38.77894#map=17/8.98536/38.77894
+- **Bole 2\_352 Street** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98677&mlon=38.77862#map=17/8.98677/38.77862
+- **Bole 2\_371 St.** (ቦሌ 2\_371 መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99020&mlon=38.77966#map=17/8.99020/38.77966
+- **Bole2\_204** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98608&mlon=38.78383#map=17/8.98608/38.78383
+- **Boston Day Spa Parking Lot Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99063&mlon=38.78417#map=17/8.99063/38.78417
+- **Botswana Street** (ቦትስዋና መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04579&mlon=38.75555#map=17/9.04579/38.75555
+- **Bulen Street** · Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.91035&mlon=38.77287#map=17/8.91035/38.77287
+- **Burkina Faso Street** (ቡርኪና ፋሶ መንገድ) · Arada (አራዳ), Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04183&mlon=38.73686#map=17/9.04183/38.73686
+- **Burundi Street** (ብሩንዲ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01642&mlon=38.73488#map=17/9.01642/38.73488
+- **Cameroon Street** (ካሜሩን መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99433&mlon=38.78996#map=17/8.99433/38.78996
+- **Cape Verde Street** (ኬፕ ቨርዴ መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00026&mlon=38.77952#map=17/9.00026/38.77952
+- **Central Africa Republic Street** (መካከለኛው አፍሪካ ሪፖብሊክ መንገድ) · Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03079&mlon=38.73269#map=17/9.03079/38.73269
+- **Chad Street** (ቻድ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01050&mlon=38.74351#map=17/9.01050/38.74351
+- **Chilalo Street** · Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.91051&mlon=38.77348#map=17/8.91051/38.77348
+- **Churchill Avenue** (ቸርችል ጎዳና) · Arada (አራዳ), Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.03149&mlon=38.75133#map=17/9.03149/38.75133
+- **Civil Service to Selam Sefer Ashewa Tera** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01982&mlon=38.83390#map=17/9.01982/38.83390
+- **CMC Figa to Goro** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00131&mlon=38.83047#map=17/9.00131/38.83047
+- **CMC to Figa** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01451&mlon=38.83783#map=17/9.01451/38.83783
+- **Colsen Steet** (ኮንሰን መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02730&mlon=38.76079#map=17/9.02730/38.76079
+- **Colsen Street** (ኮንሰን መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02656&mlon=38.75522#map=17/9.02656/38.75522
+- **Comoros Street** (ኮሞሮስ መንገድ) · Yeka (የካ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03283&mlon=38.78231#map=17/9.03283/38.78231
+- **Congo Street** (ኮንጎ መንገድ) · Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02830&mlon=38.72566#map=17/9.02830/38.72566
+- **Cote d'Ivoire Street** (ኮት ዲቯር መንገድ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02938&mlon=38.78518#map=17/9.02938/38.78518
+- **Cunningham Street** (ካኒንግሃም መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03355&mlon=38.74921#map=17/9.03355/38.74921
+- **D.A.R. Sahara Street** · Kirkos (ቂርቆስ), Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02030&mlon=38.76822#map=17/9.02030/38.76822
+- **Dashen Road** · Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.90925&mlon=38.77306#map=17/8.90925/38.77306
+- **Debre Zeit Road** (ደብራ ዘይት መንገድ) · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ), Kirkos (ቂርቆስ), Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.96817&mlon=38.76249#map=17/8.96817/38.76249
+- **dechasa** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99745&mlon=38.76199#map=17/8.99745/38.76199
+- **Dej Beyene Merid Street** (ደጃ/ች በየነ መርድ መንገድ) · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98444&mlon=38.75082#map=17/8.98444/38.75082
+- **Dej Wolde Michael Street** (ደጃዝማች ወልደ ሚካኤል መንገድ) · Addis Ketema (አዲስ ከተማ), Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.02812&mlon=38.73996#map=17/9.02812/38.73996
+- **Dej Zewdu Aba Koran Street** (ደጃ/ች ዘውዱ አባ ኮራን መንገድ) · Arada (አራዳ), Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.04328&mlon=38.74222#map=17/9.04328/38.74222
+- **Dej. Hailesilassie Av** (ደጃ/ች ኃይለ ስላሴ መንገድ) · Gulele (ጉለሌ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05399&mlon=38.75100#map=17/9.05399/38.75100
+- **Dej. Hailesilassie Av. / Tunisia Av.** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03816&mlon=38.75199#map=17/9.03816/38.75199
+- **Dej. Mekonin Demisaw** (ደጃ/ች መኮንን ደምሰው መንገድ) · Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02459&mlon=38.73357#map=17/9.02459/38.73357
+- **Dejazemach Belay Zeleke Street** (ደጃዝማች በላይ ዘለቀ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03511&mlon=38.75300#map=17/9.03511/38.75300
+- **Dejazemach Jote Street** (ደጃ/ች ጆቴ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03011&mlon=38.75683#map=17/9.03011/38.75683
+- **Dejazmach Afewerk Street** (ደጃ/ች አፈወርቅ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03484&mlon=38.75424#map=17/9.03484/38.75424
+- **Dejazmach Balcha Aba Nefso Street** (ደጃ/ች ባልቻ አባ ነፍሶ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01824&mlon=38.73190#map=17/9.01824/38.73190
+- **Dejezamach Wolde Gebriel Street** (ደጃች ወልደ ገብርኤል መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02982&mlon=38.77407#map=17/9.02982/38.77407
+- **Democratic Republic of Congo Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00993&mlon=38.77015#map=17/9.00993/38.77015
+- **Diaspora Square** (ዳያስፖራ አደባባይ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02175&mlon=38.80114#map=17/9.02175/38.80114
+- **Djibouti Street** (ጂቡቲ መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01064&mlon=38.78809#map=17/9.01064/38.78809
+- **Eden Street** (ኤደን መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03385&mlon=38.75349#map=17/9.03385/38.75349
+- **Egypt Street** (ግብፅ መንገድ) · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.98728&mlon=38.73762#map=17/8.98728/38.73762
+- **Egzabheraab To Mebrathail** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01001&mlon=38.81231#map=17/9.01001/38.81231
+- **Entoto Road** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.09208&mlon=38.75526#map=17/9.09208/38.75526
+- **Equatorial Guinea Street** (ኢኳቶሪያል ጊኒ መንገድ) · Bole (ቦሌ), Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.01818&mlon=38.79703#map=17/9.01818/38.79703
+- **Eritrea Street** (ኤርትራ መንገድ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.04328&mlon=38.78004#map=17/9.04328/38.78004
+- **Ethio-Chinese Friendship Road** (ኢትዮ ቻይና መንገድ) · Kirkos (ቂርቆስ), Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.99002&mlon=38.77256#map=17/8.99002/38.77256
+- **Figa to CMC Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01467&mlon=38.83801#map=17/9.01467/38.83801
+- **Fikre Mariam Aba Techan Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03143&mlon=38.82144#map=17/9.03143/38.82144
+- **Fitawrari Damtew Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99816&mlon=38.74233#map=17/8.99816/38.74233
+- **Fitawrari Gebeyehu Street** (ፊታውራሪ ገበየሁ መንገድ) · Addis Ketema (አዲስ ከተማ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03394&mlon=38.74191#map=17/9.03394/38.74191
+- **Fitawrari Habte Giorgis Street** (ፊታውራሪ ሃብተጊዮርጊስ መንገድ) · Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03382&mlon=38.72820#map=17/9.03382/38.72820
+- **Fitawrari Habte Giorgis Street -ፊታዉራሪ ሀብተጊዮርጊስ መንገድ** (ፊታውራሪ ሃብተጊዮርጊስ መንገድ) · Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03392&mlon=38.74016#map=17/9.03392/38.74016
+- **From Wollo Sefer to Kera** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98105&mlon=38.75930#map=17/8.98105/38.75930
+- **Gabon Av** (ጋቦን መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98756&mlon=38.76046#map=17/8.98756/38.76046
+- **Gabon Avenue** (ጋቦን መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99398&mlon=38.76657#map=17/8.99398/38.76657
+- **Gambia Street** (ጋምቢያ መንገድ) · Kirkos (ቂርቆስ), Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01172&mlon=38.75318#map=17/9.01172/38.75318
+- **Gaston Guez Street** · Lideta (ልደታ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02863&mlon=38.74409#map=17/9.02863/38.74409
+- **gazebo adebabay** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00049&mlon=38.76657#map=17/9.00049/38.76657
+- **General Mulugeta Buli Street** (ጀነራል ሙሉጌታ ቡሊ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.04297&mlon=38.77130#map=17/9.04297/38.77130
+- **General Wingate Street** (ጀነራል ዊንጌት መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02973&mlon=38.75319#map=17/9.02973/38.75319
+- **Genral Abebe Damtew Street** (ጀነራል አበበ ዳምጠው መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01476&mlon=38.75404#map=17/9.01476/38.75404
+- **German Square** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.96449&mlon=38.73295#map=17/8.96449/38.73295
+- **Ghana Street** (ጋና መንገድ) · Bole (ቦሌ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00755&mlon=38.77635#map=17/9.00755/38.77635
+- **Ghion Hotel Enterance** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01273&mlon=38.75866#map=17/9.01273/38.75866
+- **Ginfele** · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03383&mlon=38.76853#map=17/9.03383/38.76853
+- **GL\_08\_1601 Av.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05293&mlon=38.74093#map=17/9.05293/38.74093
+- **GL\_08\_1609 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05224&mlon=38.73673#map=17/9.05224/38.73673
+- **GL\_08\_1651 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05744&mlon=38.73331#map=17/9.05744/38.73331
+- **GL\_08\_1685 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05884&mlon=38.72837#map=17/9.05884/38.72837
+- **GL\_08\_1708 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05992&mlon=38.72837#map=17/9.05992/38.72837
+- **GL\_08\_1712 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05928&mlon=38.72799#map=17/9.05928/38.72799
+- **GL\_08\_1723St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06617&mlon=38.72948#map=17/9.06617/38.72948
+- **GL\_08\_1724 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06325&mlon=38.73442#map=17/9.06325/38.73442
+- **GL\_08\_1727 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06571&mlon=38.73179#map=17/9.06571/38.73179
+- **GL\_08\_1728 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06318&mlon=38.73344#map=17/9.06318/38.73344
+- **GL\_08\_1734 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06641&mlon=38.73315#map=17/9.06641/38.73315
+- **GL\_08\_1736 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07171&mlon=38.73508#map=17/9.07171/38.73508
+- **GL\_08\_1736 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06995&mlon=38.73514#map=17/9.06995/38.73514
+- **GL\_08\_1737 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06765&mlon=38.73008#map=17/9.06765/38.73008
+- **GL\_08\_1738 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07344&mlon=38.73756#map=17/9.07344/38.73756
+- **GL\_08\_1739 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06710&mlon=38.73406#map=17/9.06710/38.73406
+- **GL\_08\_1748 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07150&mlon=38.73496#map=17/9.07150/38.73496
+- **GL\_08\_1748 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07098&mlon=38.73469#map=17/9.07098/38.73469
+- **GL\_08\_1749Cu.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06914&mlon=38.72792#map=17/9.06914/38.72792
+- **GL\_08\_1750 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07150&mlon=38.73443#map=17/9.07150/38.73443
+- **GL\_08\_1750 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07075&mlon=38.73439#map=17/9.07075/38.73439
+- **GL\_08\_1752 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07203&mlon=38.73414#map=17/9.07203/38.73414
+- **GL\_08\_1756 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07250&mlon=38.73388#map=17/9.07250/38.73388
+- **GL\_08\_1763 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07066&mlon=38.73327#map=17/9.07066/38.73327
+- **GL\_08\_1766 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06705&mlon=38.73198#map=17/9.06705/38.73198
+- **GL\_08\_1770 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06772&mlon=38.73061#map=17/9.06772/38.73061
+- **GL\_08\_1771 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07072&mlon=38.73413#map=17/9.07072/38.73413
+- **GL\_08\_1776 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06563&mlon=38.73001#map=17/9.06563/38.73001
+- **GL\_08\_1776Cu.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06563&mlon=38.73001#map=17/9.06563/38.73001
+- **GL\_08\_1776St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06537&mlon=38.72910#map=17/9.06537/38.72910
+- **GL\_08\_1779 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07123&mlon=38.73515#map=17/9.07123/38.73515
+- **GL\_08\_1779 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07112&mlon=38.73512#map=17/9.07112/38.73512
+- **GL\_08\_1781 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07169&mlon=38.73462#map=17/9.07169/38.73462
+- **GL\_08\_1784Cu.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06563&mlon=38.72894#map=17/9.06563/38.72894
+- **GL\_08\_1784St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06544&mlon=38.72885#map=17/9.06544/38.72885
+- **GL\_08\_1792Cu.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06824&mlon=38.72843#map=17/9.06824/38.72843
+- **GL\_08\_1902 Av.** (ሼህ ኦጄሌ መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05508&mlon=38.73228#map=17/9.05508/38.73228
+- **GL\_08\_2020 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06521&mlon=38.72842#map=17/9.06521/38.72842
+- **GL\_08\_2020Cu.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06583&mlon=38.72856#map=17/9.06583/38.72856
+- **GL\_08\_2284 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06566&mlon=38.72828#map=17/9.06566/38.72828
+- **GL\_09\_1902 Av.** (ሼህ ኦጄሌ መንገድ) · Gulele (ጉለሌ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.05854&mlon=38.72790#map=17/9.05854/38.72790
+- **GL\_09\_1903 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04973&mlon=38.73672#map=17/9.04973/38.73672
+- **GL\_09\_1903 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04949&mlon=38.73614#map=17/9.04949/38.73614
+- **GL\_09\_1905 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05111&mlon=38.73654#map=17/9.05111/38.73654
+- **GL\_09\_1906 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05386&mlon=38.73304#map=17/9.05386/38.73304
+- **GL\_09\_1907 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05015&mlon=38.73540#map=17/9.05015/38.73540
+- **GL\_09\_1909 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04891&mlon=38.73439#map=17/9.04891/38.73439
+- **GL\_09\_1911 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05149&mlon=38.73656#map=17/9.05149/38.73656
+- **GL\_09\_1912 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05010&mlon=38.73605#map=17/9.05010/38.73605
+- **GL\_09\_1913 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05133&mlon=38.73593#map=17/9.05133/38.73593
+- **GL\_09\_1914 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04927&mlon=38.73727#map=17/9.04927/38.73727
+- **GL\_09\_1915 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04926&mlon=38.73403#map=17/9.04926/38.73403
+- **GL\_09\_1916 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05068&mlon=38.73529#map=17/9.05068/38.73529
+- **GL\_09\_1917 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04768&mlon=38.73264#map=17/9.04768/38.73264
+- **GL\_09\_1918 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04934&mlon=38.73558#map=17/9.04934/38.73558
+- **GL\_09\_1919 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04966&mlon=38.73350#map=17/9.04966/38.73350
+- **GL\_09\_1920 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05134&mlon=38.73313#map=17/9.05134/38.73313
+- **GL\_09\_1921 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04795&mlon=38.73182#map=17/9.04795/38.73182
+- **GL\_09\_1922 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04788&mlon=38.73622#map=17/9.04788/38.73622
+- **GL\_09\_1922 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04816&mlon=38.73647#map=17/9.04816/38.73647
+- **GL\_09\_1923 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05071&mlon=38.73343#map=17/9.05071/38.73343
+- **GL\_09\_1924 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04999&mlon=38.73345#map=17/9.04999/38.73345
+- **GL\_09\_1925 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05129&mlon=38.73251#map=17/9.05129/38.73251
+- **GL\_09\_1926 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05026&mlon=38.73260#map=17/9.05026/38.73260
+- **GL\_09\_1927 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05004&mlon=38.73034#map=17/9.05004/38.73034
+- **GL\_09\_1928 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05198&mlon=38.73073#map=17/9.05198/38.73073
+- **GL\_09\_1929 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04989&mlon=38.73012#map=17/9.04989/38.73012
+- **GL\_09\_1930 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04781&mlon=38.73545#map=17/9.04781/38.73545
+- **GL\_09\_1931 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04995&mlon=38.72982#map=17/9.04995/38.72982
+- **GL\_09\_1932 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05126&mlon=38.73017#map=17/9.05126/38.73017
+- **GL\_09\_1933 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05173&mlon=38.73157#map=17/9.05173/38.73157
+- **GL\_09\_1934 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05067&mlon=38.73193#map=17/9.05067/38.73193
+- **GL\_09\_1935 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05199&mlon=38.73149#map=17/9.05199/38.73149
+- **GL\_09\_1936 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04831&mlon=38.73365#map=17/9.04831/38.73365
+- **GL\_09\_1937 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05337&mlon=38.73227#map=17/9.05337/38.73227
+- **GL\_09\_1938 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04952&mlon=38.73193#map=17/9.04952/38.73193
+- **GL\_09\_1939 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05252&mlon=38.73133#map=17/9.05252/38.73133
+- **GL\_09\_1940 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05076&mlon=38.72939#map=17/9.05076/38.72939
+- **GL\_09\_1941 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05013&mlon=38.72874#map=17/9.05013/38.72874
+- **GL\_09\_1942 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05046&mlon=38.72898#map=17/9.05046/38.72898
+- **GL\_09\_1943 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04850&mlon=38.72721#map=17/9.04850/38.72721
+- **GL\_09\_1944 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04902&mlon=38.73159#map=17/9.04902/38.73159
+- **GL\_09\_1945 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05119&mlon=38.72902#map=17/9.05119/38.72902
+- **GL\_09\_1947 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04953&mlon=38.72710#map=17/9.04953/38.72710
+- **GL\_09\_1948 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05017&mlon=38.72869#map=17/9.05017/38.72869
+- **GL\_09\_1950 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04989&mlon=38.72841#map=17/9.04989/38.72841
+- **GL\_09\_1959 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05357&mlon=38.73184#map=17/9.05357/38.73184
+- **GL\_09\_1961 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04984&mlon=38.72681#map=17/9.04984/38.72681
+- **GL\_09\_1963 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05438&mlon=38.73162#map=17/9.05438/38.73162
+- **GL\_09\_1967 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05104&mlon=38.72708#map=17/9.05104/38.72708
+- **GL\_09\_1969 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05136&mlon=38.72727#map=17/9.05136/38.72727
+- **GL\_09\_1970 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05438&mlon=38.73222#map=17/9.05438/38.73222
+- **GL\_09\_1971 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04975&mlon=38.72573#map=17/9.04975/38.72573
+- **GL\_09\_1973 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05536&mlon=38.73001#map=17/9.05536/38.73001
+- **GL\_09\_1974 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05657&mlon=38.72804#map=17/9.05657/38.72804
+- **GL\_09\_1976 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05377&mlon=38.73036#map=17/9.05377/38.73036
+- **GL\_09\_1976 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05508&mlon=38.72882#map=17/9.05508/38.72882
+- **GL\_09\_1977 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05408&mlon=38.72822#map=17/9.05408/38.72822
+- **GL\_09\_1979 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05253&mlon=38.72697#map=17/9.05253/38.72697
+- **GL\_09\_1984 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05603&mlon=38.72507#map=17/9.05603/38.72507
+- **GL\_09\_1986 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05597&mlon=38.72478#map=17/9.05597/38.72478
+- **GL\_09\_1987 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05122&mlon=38.72384#map=17/9.05122/38.72384
+- **GL\_09\_1988 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05318&mlon=38.72751#map=17/9.05318/38.72751
+- **GL\_09\_1988 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05505&mlon=38.72503#map=17/9.05505/38.72503
+- **GL\_09\_1989 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05146&mlon=38.72502#map=17/9.05146/38.72502
+- **GL\_09\_1993 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05527&mlon=38.72746#map=17/9.05527/38.72746
+- **GL\_09\_1994 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05473&mlon=38.72427#map=17/9.05473/38.72427
+- **GL\_09\_1995 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05384&mlon=38.72523#map=17/9.05384/38.72523
+- **GL\_09\_1998 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05109&mlon=38.72701#map=17/9.05109/38.72701
+- **GL\_09\_2000 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05228&mlon=38.72553#map=17/9.05228/38.72553
+- **GL\_09\_2000 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05324&mlon=38.72437#map=17/9.05324/38.72437
+- **GL\_09\_2006 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05095&mlon=38.72462#map=17/9.05095/38.72462
+- **GL\_09\_2009 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05684&mlon=38.72823#map=17/9.05684/38.72823
+- **GL\_09\_2015 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05562&mlon=38.72539#map=17/9.05562/38.72539
+- **GL\_09\_2017 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05406&mlon=38.72372#map=17/9.05406/38.72372
+- **GL\_09\_2020 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06346&mlon=38.72768#map=17/9.06346/38.72768
+- **GL\_09\_2022 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06251&mlon=38.72722#map=17/9.06251/38.72722
+- **GL\_09\_2024 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06059&mlon=38.72731#map=17/9.06059/38.72731
+- **GL\_09\_2026 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06131&mlon=38.72705#map=17/9.06131/38.72705
+- **GL\_09\_2029 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05775&mlon=38.72626#map=17/9.05775/38.72626
+- **GL\_09\_2030 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06098&mlon=38.72682#map=17/9.06098/38.72682
+- **GL\_09\_2031 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05359&mlon=38.72232#map=17/9.05359/38.72232
+- **GL\_09\_2032 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06005&mlon=38.72691#map=17/9.06005/38.72691
+- **GL\_09\_2033 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05706&mlon=38.72471#map=17/9.05706/38.72471
+- **GL\_09\_2034 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06228&mlon=38.72674#map=17/9.06228/38.72674
+- **GL\_09\_2035 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05678&mlon=38.72441#map=17/9.05678/38.72441
+- **GL\_09\_2036 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06213&mlon=38.72648#map=17/9.06213/38.72648
+- **GL\_09\_2037 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05556&mlon=38.72326#map=17/9.05556/38.72326
+- **GL\_09\_2038 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06259&mlon=38.72601#map=17/9.06259/38.72601
+- **GL\_09\_2039 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05305&mlon=38.72125#map=17/9.05305/38.72125
+- **GL\_09\_2040 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06243&mlon=38.72542#map=17/9.06243/38.72542
+- **GL\_09\_2041 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05851&mlon=38.72576#map=17/9.05851/38.72576
+- **GL\_09\_2042 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06180&mlon=38.72524#map=17/9.06180/38.72524
+- **GL\_09\_2043 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05849&mlon=38.72534#map=17/9.05849/38.72534
+- **GL\_09\_2044 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06167&mlon=38.72449#map=17/9.06167/38.72449
+- **GL\_09\_2045 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05592&mlon=38.72289#map=17/9.05592/38.72289
+- **GL\_09\_2046 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06082&mlon=38.72490#map=17/9.06082/38.72490
+- **GL\_09\_2047 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05984&mlon=38.72648#map=17/9.05984/38.72648
+- **GL\_09\_2048 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06094&mlon=38.72377#map=17/9.06094/38.72377
+- **GL\_09\_2049 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05513&mlon=38.72097#map=17/9.05513/38.72097
+- **GL\_09\_2050 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05909&mlon=38.72546#map=17/9.05909/38.72546
+- **GL\_09\_2051 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05955&mlon=38.72590#map=17/9.05955/38.72590
+- **GL\_09\_2052 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05982&mlon=38.72356#map=17/9.05982/38.72356
+- **GL\_09\_2053 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05676&mlon=38.72291#map=17/9.05676/38.72291
+- **GL\_09\_2054 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05849&mlon=38.72534#map=17/9.05849/38.72534
+- **GL\_09\_2055 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06095&mlon=38.72652#map=17/9.06095/38.72652
+- **GL\_09\_2056 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05981&mlon=38.72267#map=17/9.05981/38.72267
+- **GL\_09\_2057 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05546&mlon=38.72087#map=17/9.05546/38.72087
+- **GL\_09\_2057 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05639&mlon=38.72210#map=17/9.05639/38.72210
+- **GL\_09\_2058 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05814&mlon=38.72491#map=17/9.05814/38.72491
+- **GL\_09\_2059 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05770&mlon=38.72307#map=17/9.05770/38.72307
+- **GL\_09\_2060 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05840&mlon=38.72386#map=17/9.05840/38.72386
+- **GL\_09\_2060 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05817&mlon=38.72435#map=17/9.05817/38.72435
+- **GL\_09\_2061 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05799&mlon=38.72259#map=17/9.05799/38.72259
+- **GL\_09\_2062 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05901&mlon=38.72283#map=17/9.05901/38.72283
+- **GL\_09\_2063 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05960&mlon=38.72391#map=17/9.05960/38.72391
+- **GL\_09\_2064 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05840&mlon=38.72258#map=17/9.05840/38.72258
+- **GL\_09\_2065 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06188&mlon=38.72600#map=17/9.06188/38.72600
+- **GL\_09\_2066 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05764&mlon=38.72376#map=17/9.05764/38.72376
+- **GL\_09\_2067 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06231&mlon=38.72521#map=17/9.06231/38.72521
+- **GL\_09\_2068 St.GL\_09\_2068 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05821&mlon=38.72184#map=17/9.05821/38.72184
+- **GL\_09\_2068 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05821&mlon=38.72184#map=17/9.05821/38.72184
+- **GL\_09\_2069 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06088&mlon=38.72313#map=17/9.06088/38.72313
+- **GL\_09\_2070 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05714&mlon=38.72213#map=17/9.05714/38.72213
+- **GL\_09\_2071 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05812&mlon=38.72211#map=17/9.05812/38.72211
+- **GL\_09\_2072 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05610&mlon=38.72266#map=17/9.05610/38.72266
+- **GL\_09\_2073 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06005&mlon=38.72212#map=17/9.06005/38.72212
+- **GL\_09\_2075 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06096&mlon=38.72265#map=17/9.06096/38.72265
+- **GL\_09\_2076 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05655&mlon=38.72180#map=17/9.05655/38.72180
+- **GL\_09\_2077 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06344&mlon=38.72668#map=17/9.06344/38.72668
+- **GL\_09\_2078 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05580&mlon=38.72216#map=17/9.05580/38.72216
+- **GL\_09\_2080 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05496&mlon=38.72224#map=17/9.05496/38.72224
+- **GL\_09\_2082 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05546&mlon=38.72120#map=17/9.05546/38.72120
+- **GL\_09\_2082 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05466&mlon=38.72192#map=17/9.05466/38.72192
+- **GL\_09\_2084 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05378&mlon=38.72197#map=17/9.05378/38.72197
+- **GL\_09\_2086 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05457&mlon=38.72090#map=17/9.05457/38.72090
+- **GL\_10\_2105 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05720&mlon=38.71969#map=17/9.05720/38.71969
+- **GL\_10\_2154 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05645&mlon=38.72061#map=17/9.05645/38.72061
+- **GL\_10\_2160 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05723&mlon=38.72022#map=17/9.05723/38.72022
+- **GL\_10\_2167 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05559&mlon=38.71791#map=17/9.05559/38.71791
+- **GL\_10\_2167 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05428&mlon=38.72000#map=17/9.05428/38.72000
+- **GL\_10\_2168 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05772&mlon=38.71963#map=17/9.05772/38.71963
+- **GL\_10\_2188 Av.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05805&mlon=38.71900#map=17/9.05805/38.71900
+- **GL\_10\_2192 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05345&mlon=38.71965#map=17/9.05345/38.71965
+- **GL\_10\_2207 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06622&mlon=38.71825#map=17/9.06622/38.71825
+- **GL\_10\_2262 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06609&mlon=38.71787#map=17/9.06609/38.71787
+- **Gobena Aba Tigu Street** (ጎበና አባ ጥጉ መንገድ) · Lideta (ልደታ), Arada (አራዳ), Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02852&mlon=38.74375#map=17/9.02852/38.74375
+- **Gofa Mazoria to Mebrathail** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.98087&mlon=38.74965#map=17/8.98087/38.74965
+- **Goldya Lane** · Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.90861&mlon=38.77276#map=17/8.90861/38.77276
+- **Goro to CMC Figa** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99825&mlon=38.82925#map=17/8.99825/38.82925
+- **Guinea Conakry Street** (ጊኒ ኮናክሬ መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01329&mlon=38.76973#map=17/9.01329/38.76973
+- **Guinea-Bissau street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.96963&mlon=38.73142#map=17/8.96963/38.73142
+- **Gulele \_07\_ 1322 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06377&mlon=38.74729#map=17/9.06377/38.74729
+- **Gulele \_07\_ 1508 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06750&mlon=38.73951#map=17/9.06750/38.73951
+- **Gulele \_07\_1304 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06020&mlon=38.74821#map=17/9.06020/38.74821
+- **Gulele \_07\_1307 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05492&mlon=38.74846#map=17/9.05492/38.74846
+- **Gulele \_07\_1308 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05612&mlon=38.74838#map=17/9.05612/38.74838
+- **Gulele \_07\_1309 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05441&mlon=38.74449#map=17/9.05441/38.74449
+- **Gulele \_07\_1310 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05548&mlon=38.74808#map=17/9.05548/38.74808
+- **Gulele \_07\_1318 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05715&mlon=38.74753#map=17/9.05715/38.74753
+- **Gulele \_07\_1319 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05610&mlon=38.74579#map=17/9.05610/38.74579
+- **Gulele \_07\_1321 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05534&mlon=38.74466#map=17/9.05534/38.74466
+- **Gulele \_07\_1322 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06416&mlon=38.74690#map=17/9.06416/38.74690
+- **Gulele \_07\_1325 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05585&mlon=38.74387#map=17/9.05585/38.74387
+- **Gulele \_07\_1326 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06266&mlon=38.74676#map=17/9.06266/38.74676
+- **Gulele \_07\_1327 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05642&mlon=38.74791#map=17/9.05642/38.74791
+- **Gulele \_07\_1328 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05695&mlon=38.74660#map=17/9.05695/38.74660
+- **Gulele \_07\_1331 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05703&mlon=38.74787#map=17/9.05703/38.74787
+- **Gulele \_07\_1337 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05820&mlon=38.74497#map=17/9.05820/38.74497
+- **Gulele \_07\_1338 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06417&mlon=38.74609#map=17/9.06417/38.74609
+- **Gulele \_07\_1340 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06411&mlon=38.74566#map=17/9.06411/38.74566
+- **Gulele \_07\_1341 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05870&mlon=38.74581#map=17/9.05870/38.74581
+- **Gulele \_07\_1345 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05904&mlon=38.74580#map=17/9.05904/38.74580
+- **Gulele \_07\_1347 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06007&mlon=38.74486#map=17/9.06007/38.74486
+- **Gulele \_07\_1350 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06285&mlon=38.74519#map=17/9.06285/38.74519
+- **Gulele \_07\_1352 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06156&mlon=38.74577#map=17/9.06156/38.74577
+- **Gulele \_07\_1353 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06087&mlon=38.74422#map=17/9.06087/38.74422
+- **Gulele \_07\_1356 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05520&mlon=38.74499#map=17/9.05520/38.74499
+- **Gulele \_07\_1358 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05454&mlon=38.74485#map=17/9.05454/38.74485
+- **Gulele \_07\_1359 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06206&mlon=38.74772#map=17/9.06206/38.74772
+- **Gulele \_07\_1363 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06223&mlon=38.74444#map=17/9.06223/38.74444
+- **Gulele \_07\_1365 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06305&mlon=38.74761#map=17/9.06305/38.74761
+- **Gulele \_07\_1369 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06376&mlon=38.74645#map=17/9.06376/38.74645
+- **Gulele \_07\_1378 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05532&mlon=38.74362#map=17/9.05532/38.74362
+- **Gulele \_07\_1378 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06181&mlon=38.74388#map=17/9.06181/38.74388
+- **Gulele \_07\_1386 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06029&mlon=38.74254#map=17/9.06029/38.74254
+- **Gulele \_07\_1390 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06116&mlon=38.74191#map=17/9.06116/38.74191
+- **Gulele \_07\_1392 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06031&mlon=38.74118#map=17/9.06031/38.74118
+- **Gulele \_07\_1393 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05867&mlon=38.74317#map=17/9.05867/38.74317
+- **Gulele \_07\_1396 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06058&mlon=38.74054#map=17/9.06058/38.74054
+- **Gulele \_07\_1397 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05847&mlon=38.73978#map=17/9.05847/38.73978
+- **Gulele \_07\_1400 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06024&mlon=38.73996#map=17/9.06024/38.73996
+- **Gulele \_07\_1403 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06019&mlon=38.74120#map=17/9.06019/38.74120
+- **Gulele \_07\_1407 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06024&mlon=38.73996#map=17/9.06024/38.73996
+- **Gulele \_07\_1421 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06478&mlon=38.74659#map=17/9.06478/38.74659
+- **Gulele \_07\_1423 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05986&mlon=38.73862#map=17/9.05986/38.73862
+- **Gulele \_07\_1424 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06613&mlon=38.74746#map=17/9.06613/38.74746
+- **Gulele \_07\_1425 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06213&mlon=38.74116#map=17/9.06213/38.74116
+- **Gulele \_07\_1426 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06845&mlon=38.74670#map=17/9.06845/38.74670
+- **Gulele \_07\_1427 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06250&mlon=38.74083#map=17/9.06250/38.74083
+- **Gulele \_07\_1429 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06208&mlon=38.73953#map=17/9.06208/38.73953
+- **Gulele \_07\_1430 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06746&mlon=38.74669#map=17/9.06746/38.74669
+- **Gulele \_07\_1431 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06259&mlon=38.73934#map=17/9.06259/38.73934
+- **Gulele \_07\_1433 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06388&mlon=38.74114#map=17/9.06388/38.74114
+- **Gulele \_07\_1437 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06402&mlon=38.73922#map=17/9.06402/38.73922
+- **Gulele \_07\_1439 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06444&mlon=38.74374#map=17/9.06444/38.74374
+- **Gulele \_07\_1440 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06675&mlon=38.74329#map=17/9.06675/38.74329
+- **Gulele \_07\_1441 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06450&mlon=38.74081#map=17/9.06450/38.74081
+- **Gulele \_07\_1444 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06751&mlon=38.74264#map=17/9.06751/38.74264
+- **Gulele \_07\_1445 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06504&mlon=38.74535#map=17/9.06504/38.74535
+- **Gulele \_07\_1450 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06377&mlon=38.74289#map=17/9.06377/38.74289
+- **Gulele \_07\_1455 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06445&mlon=38.73918#map=17/9.06445/38.73918
+- **Gulele \_07\_1458 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06285&mlon=38.74339#map=17/9.06285/38.74339
+- **Gulele \_07\_1460 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06288&mlon=38.74225#map=17/9.06288/38.74225
+- **Gulele \_07\_1463 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06709&mlon=38.74616#map=17/9.06709/38.74616
+- **Gulele \_07\_1468 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06201&mlon=38.74060#map=17/9.06201/38.74060
+- **Gulele \_07\_1470 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06310&mlon=38.73987#map=17/9.06310/38.73987
+- **Gulele \_07\_1472 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06493&mlon=38.73965#map=17/9.06493/38.73965
+- **Gulele \_07\_1474 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06363&mlon=38.73966#map=17/9.06363/38.73966
+- **Gulele \_07\_1478 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06316&mlon=38.73870#map=17/9.06316/38.73870
+- **Gulele \_07\_1487 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06970&mlon=38.74696#map=17/9.06970/38.74696
+- **Gulele \_07\_1495 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07471&mlon=38.74013#map=17/9.07471/38.74013
+- **Gulele \_07\_1499 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.08548&mlon=38.72695#map=17/9.08548/38.72695
+- **Gulele \_07\_1508 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06792&mlon=38.73956#map=17/9.06792/38.73956
+- **Gulele \_07\_1510 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06032&mlon=38.73872#map=17/9.06032/38.73872
+- **Gulele \_07\_1512 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06247&mlon=38.73809#map=17/9.06247/38.73809
+- **Gulele \_07\_1513 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05952&mlon=38.73758#map=17/9.05952/38.73758
+- **Gulele \_07\_1514 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06206&mlon=38.73799#map=17/9.06206/38.73799
+- **Gulele \_07\_1516 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06198&mlon=38.73767#map=17/9.06198/38.73767
+- **Gulele \_07\_1518 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06350&mlon=38.73761#map=17/9.06350/38.73761
+- **Gulele \_07\_1520 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06451&mlon=38.73756#map=17/9.06451/38.73756
+- **Gulele \_07\_1520 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06541&mlon=38.73793#map=17/9.06541/38.73793
+- **Gulele \_07\_1522 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06217&mlon=38.73712#map=17/9.06217/38.73712
+- **Gulele \_07\_1523 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06173&mlon=38.73833#map=17/9.06173/38.73833
+- **Gulele \_07\_1526 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06820&mlon=38.73911#map=17/9.06820/38.73911
+- **Gulele \_07\_1527 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06243&mlon=38.73755#map=17/9.06243/38.73755
+- **Gulele \_07\_1528 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06902&mlon=38.73923#map=17/9.06902/38.73923
+- **Gulele \_07\_1529 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06277&mlon=38.73740#map=17/9.06277/38.73740
+- **Gulele \_07\_1530 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06681&mlon=38.73811#map=17/9.06681/38.73811
+- **Gulele \_07\_1531 Av** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06257&mlon=38.73506#map=17/9.06257/38.73506
+- **Gulele \_07\_1536 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06833&mlon=38.73774#map=17/9.06833/38.73774
+- **Gulele \_07\_1537 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06379&mlon=38.73758#map=17/9.06379/38.73758
+- **Gulele \_07\_1540 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06479&mlon=38.73578#map=17/9.06479/38.73578
+- **Gulele \_07\_1541 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06461&mlon=38.73722#map=17/9.06461/38.73722
+- **Gulele \_07\_1542 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06618&mlon=38.73637#map=17/9.06618/38.73637
+- **Gulele \_07\_1544 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06678&mlon=38.73587#map=17/9.06678/38.73587
+- **Gulele \_07\_1545 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06583&mlon=38.73518#map=17/9.06583/38.73518
+- **Gulele \_07\_1546 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06789&mlon=38.73667#map=17/9.06789/38.73667
+- **Gulele \_07\_1548 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06535&mlon=38.73497#map=17/9.06535/38.73497
+- **Gulele \_07\_1555 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06681&mlon=38.73811#map=17/9.06681/38.73811
+- **Gulele \_07\_1555 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06674&mlon=38.73791#map=17/9.06674/38.73791
+- **Gulele \_07\_1561 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06800&mlon=38.73859#map=17/9.06800/38.73859
+- **Gulele \_07\_1567 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06939&mlon=38.73724#map=17/9.06939/38.73724
+- **Gulele\_02** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05096&mlon=38.76726#map=17/9.05096/38.76726
+- **Gulele\_02\_256 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04377&mlon=38.76253#map=17/9.04377/38.76253
+- **Gulele\_02\_265 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04756&mlon=38.76807#map=17/9.04756/38.76807
+- **Gulele\_02\_270 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05500&mlon=38.76639#map=17/9.05500/38.76639
+- **Gulele\_02\_272 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05443&mlon=38.76608#map=17/9.05443/38.76608
+- **Gulele\_02\_273 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04889&mlon=38.76932#map=17/9.04889/38.76932
+- **Gulele\_02\_274 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05501&mlon=38.76670#map=17/9.05501/38.76670
+- **Gulele\_02\_275 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04856&mlon=38.76827#map=17/9.04856/38.76827
+- **Gulele\_02\_276 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05629&mlon=38.76773#map=17/9.05629/38.76773
+- **Gulele\_02\_279 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04929&mlon=38.76642#map=17/9.04929/38.76642
+- **Gulele\_02\_282 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05346&mlon=38.76728#map=17/9.05346/38.76728
+- **Gulele\_02\_283 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04996&mlon=38.76695#map=17/9.04996/38.76695
+- **Gulele\_02\_288 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05016&mlon=38.76734#map=17/9.05016/38.76734
+- **Gulele\_02\_290 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05012&mlon=38.76794#map=17/9.05012/38.76794
+- **Gulele\_02\_291 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05442&mlon=38.76521#map=17/9.05442/38.76521
+- **Gulele\_02\_293 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05438&mlon=38.76642#map=17/9.05438/38.76642
+- **Gulele\_02\_294 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04735&mlon=38.76872#map=17/9.04735/38.76872
+- **Gulele\_02\_295 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05494&mlon=38.76584#map=17/9.05494/38.76584
+- **Gulele\_02\_296 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04778&mlon=38.76911#map=17/9.04778/38.76911
+- **Gulele\_02\_299 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05558&mlon=38.76646#map=17/9.05558/38.76646
+- **Gulele\_02\_301 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05554&mlon=38.76709#map=17/9.05554/38.76709
+- **Gulele\_02\_303 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05629&mlon=38.76773#map=17/9.05629/38.76773
+- **Gulele\_02\_315 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05556&mlon=38.76572#map=17/9.05556/38.76572
+- **Gulele\_02\_359 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05034&mlon=38.76087#map=17/9.05034/38.76087
+- **Gulele\_02\_363 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05105&mlon=38.75982#map=17/9.05105/38.75982
+- **Gulele\_02\_366 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05087&mlon=38.76064#map=17/9.05087/38.76064
+- **Gulele\_02\_369 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05162&mlon=38.75958#map=17/9.05162/38.75958
+- **Gulele\_02\_371 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05304&mlon=38.76165#map=17/9.05304/38.76165
+- **Gulele\_02\_451 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05188&mlon=38.75943#map=17/9.05188/38.75943
+- **Gulele\_07\_1311 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05478&mlon=38.74405#map=17/9.05478/38.74405
+- **Gulele\_07\_1313 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05533&mlon=38.74702#map=17/9.05533/38.74702
+- **Gulele\_07\_1320 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06394&mlon=38.74734#map=17/9.06394/38.74734
+- **Gulele\_07\_1321 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05502&mlon=38.74406#map=17/9.05502/38.74406
+- **Gulele\_07\_1323 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05541&mlon=38.74382#map=17/9.05541/38.74382
+- **Gulele\_07\_1324 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05472&mlon=38.74725#map=17/9.05472/38.74725
+- **Gulele\_07\_1329 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05701&mlon=38.74688#map=17/9.05701/38.74688
+- **Gulele\_07\_1329 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05682&mlon=38.74615#map=17/9.05682/38.74615
+- **Gulele\_07\_1330 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05611&mlon=38.74688#map=17/9.05611/38.74688
+- **Gulele\_07\_1332 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05571&mlon=38.74623#map=17/9.05571/38.74623
+- **Gulele\_07\_1333 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05711&mlon=38.74606#map=17/9.05711/38.74606
+- **Gulele\_07\_1334 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05460&mlon=38.74680#map=17/9.05460/38.74680
+- **Gulele\_07\_1335 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05774&mlon=38.74436#map=17/9.05774/38.74436
+- **Gulele\_07\_1336 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05961&mlon=38.74617#map=17/9.05961/38.74617
+- **Gulele\_07\_1342 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05633&mlon=38.74533#map=17/9.05633/38.74533
+- **Gulele\_07\_1343 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05899&mlon=38.74497#map=17/9.05899/38.74497
+- **Gulele\_07\_1344 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05903&mlon=38.74554#map=17/9.05903/38.74554
+- **Gulele\_07\_1344 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05989&mlon=38.74556#map=17/9.05989/38.74556
+- **Gulele\_07\_1354 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06199&mlon=38.74470#map=17/9.06199/38.74470
+- **Gulele\_07\_1355 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06114&mlon=38.74766#map=17/9.06114/38.74766
+- **Gulele\_07\_1357 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06155&mlon=38.74766#map=17/9.06155/38.74766
+- **Gulele\_07\_1360 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05802&mlon=38.74494#map=17/9.05802/38.74494
+- **Gulele\_07\_1362 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05997&mlon=38.74497#map=17/9.05997/38.74497
+- **Gulele\_07\_1364 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06001&mlon=38.74443#map=17/9.06001/38.74443
+- **Gulele\_07\_1382 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06115&mlon=38.74315#map=17/9.06115/38.74315
+- **Gulele\_07\_1388 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05954&mlon=38.74261#map=17/9.05954/38.74261
+- **Gulele\_07\_1398 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05935&mlon=38.74061#map=17/9.05935/38.74061
+- **Gulele\_07\_1399 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05858&mlon=38.73938#map=17/9.05858/38.73938
+- **Gulele\_07\_1401 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05967&mlon=38.74078#map=17/9.05967/38.74078
+- **Gulele\_07\_1405 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06026&mlon=38.74078#map=17/9.06026/38.74078
+- **Gulele\_07\_1405 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05974&mlon=38.73943#map=17/9.05974/38.73943
+- **Gulele\_07\_1406 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05938&mlon=38.73951#map=17/9.05938/38.73951
+- **Gulele\_07\_1408 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05943&mlon=38.73896#map=17/9.05943/38.73896
+- **Gulele\_07\_1409 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06162&mlon=38.74244#map=17/9.06162/38.74244
+- **Gulele\_07\_1410 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05971&mlon=38.73840#map=17/9.05971/38.73840
+- **Gulele\_07\_1421 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06477&mlon=38.74555#map=17/9.06477/38.74555
+- **Gulele\_07\_1424 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07129&mlon=38.74507#map=17/9.07129/38.74507
+- **Gulele\_07\_1424 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06588&mlon=38.74792#map=17/9.06588/38.74792
+- **Gulele\_07\_1428 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06559&mlon=38.74691#map=17/9.06559/38.74691
+- **Gulele\_07\_1429 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06284&mlon=38.74046#map=17/9.06284/38.74046
+- **Gulele\_07\_1432 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06642&mlon=38.74547#map=17/9.06642/38.74547
+- **Gulele\_07\_1434 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06454&mlon=38.74473#map=17/9.06454/38.74473
+- **Gulele\_07\_1435 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06361&mlon=38.74015#map=17/9.06361/38.74015
+- **Gulele\_07\_1436 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06447&mlon=38.74421#map=17/9.06447/38.74421
+- **Gulele\_07\_1442 Sq** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06666&mlon=38.74278#map=17/9.06666/38.74278
+- **Gulele\_07\_1443 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06488&mlon=38.74281#map=17/9.06488/38.74281
+- **Gulele\_07\_1446 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06440&mlon=38.74266#map=17/9.06440/38.74266
+- **Gulele\_07\_1448 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06706&mlon=38.74209#map=17/9.06706/38.74209
+- **Gulele\_07\_1449 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06548&mlon=38.74719#map=17/9.06548/38.74719
+- **Gulele\_07\_1450 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06659&mlon=38.74157#map=17/9.06659/38.74157
+- **Gulele\_07\_1452 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07094&mlon=38.74182#map=17/9.07094/38.74182
+- **Gulele\_07\_1452 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06830&mlon=38.74125#map=17/9.06830/38.74125
+- **Gulele\_07\_1453 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06568&mlon=38.74638#map=17/9.06568/38.74638
+- **Gulele\_07\_1454 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06839&mlon=38.74074#map=17/9.06839/38.74074
+- **Gulele\_07\_1455 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06521&mlon=38.74236#map=17/9.06521/38.74236
+- **Gulele\_07\_1456 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06823&mlon=38.74022#map=17/9.06823/38.74022
+- **Gulele\_07\_1457 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06543&mlon=38.74080#map=17/9.06543/38.74080
+- **Gulele\_07\_1458 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06390&mlon=38.74164#map=17/9.06390/38.74164
+- **Gulele\_07\_1459 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06609&mlon=38.74371#map=17/9.06609/38.74371
+- **Gulele\_07\_1461 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06663&mlon=38.74594#map=17/9.06663/38.74594
+- **Gulele\_07\_1462 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06258&mlon=38.74198#map=17/9.06258/38.74198
+- **Gulele\_07\_1465 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06599&mlon=38.74123#map=17/9.06599/38.74123
+- **Gulele\_07\_1466 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06346&mlon=38.74086#map=17/9.06346/38.74086
+- **Gulele\_07\_1467 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06646&mlon=38.74374#map=17/9.06646/38.74374
+- **Gulele\_07\_1469 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06675&mlon=38.74329#map=17/9.06675/38.74329
+- **Gulele\_07\_1471 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06664&mlon=38.74216#map=17/9.06664/38.74216
+- **Gulele\_07\_1473 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06719&mlon=38.74322#map=17/9.06719/38.74322
+- **Gulele\_07\_1476 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06318&mlon=38.73927#map=17/9.06318/38.73927
+- **Gulele\_07\_1477 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06751&mlon=38.74264#map=17/9.06751/38.74264
+- **Gulele\_07\_1480 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06079&mlon=38.73895#map=17/9.06079/38.73895
+- **Gulele\_07\_1481 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06823&mlon=38.74279#map=17/9.06823/38.74279
+- **Gulele\_07\_1482 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07063&mlon=38.73826#map=17/9.07063/38.73826
+- **Gulele\_07\_1482 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07076&mlon=38.73749#map=17/9.07076/38.73749
+- **Gulele\_07\_1483 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06832&mlon=38.74027#map=17/9.06832/38.74027
+- **Gulele\_07\_1485 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06883&mlon=38.74114#map=17/9.06883/38.74114
+- **Gulele\_07\_1489 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07211&mlon=38.73824#map=17/9.07211/38.73824
+- **Gulele\_07\_1491 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07341&mlon=38.73858#map=17/9.07341/38.73858
+- **Gulele\_07\_1493 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07399&mlon=38.73857#map=17/9.07399/38.73857
+- **Gulele\_07\_1515 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06008&mlon=38.73783#map=17/9.06008/38.73783
+- **Gulele\_07\_1517 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06043&mlon=38.73795#map=17/9.06043/38.73795
+- **Gulele\_07\_1519 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05998&mlon=38.73713#map=17/9.05998/38.73713
+- **Gulele\_07\_1521 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06116&mlon=38.73832#map=17/9.06116/38.73832
+- **Gulele\_07\_1523 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06258&mlon=38.73842#map=17/9.06258/38.73842
+- **Gulele\_07\_1523 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06258&mlon=38.73842#map=17/9.06258/38.73842
+- **Gulele\_07\_1524 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06078&mlon=38.73723#map=17/9.06078/38.73723
+- **Gulele\_07\_1525 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06139&mlon=38.73635#map=17/9.06139/38.73635
+- **Gulele\_07\_1529 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06221&mlon=38.73616#map=17/9.06221/38.73616
+- **Gulele\_07\_1532 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06619&mlon=38.73762#map=17/9.06619/38.73762
+- **Gulele\_07\_1534 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06952&mlon=38.73846#map=17/9.06952/38.73846
+- **Gulele\_07\_1534 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06706&mlon=38.73775#map=17/9.06706/38.73775
+- **Gulele\_07\_1538 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06376&mlon=38.73650#map=17/9.06376/38.73650
+- **Gulele\_07\_1540 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06363&mlon=38.73450#map=17/9.06363/38.73450
+- **Gulele\_07\_1542 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06973&mlon=38.73785#map=17/9.06973/38.73785
+- **Gulele\_07\_1542 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06907&mlon=38.73768#map=17/9.06907/38.73768
+- **Gulele\_07\_1548 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06970&mlon=38.73753#map=17/9.06970/38.73753
+- **Gulele\_07\_1549 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06634&mlon=38.73507#map=17/9.06634/38.73507
+- **Gulele\_07\_1550 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06485&mlon=38.73421#map=17/9.06485/38.73421
+- **Gulele\_07\_1551 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06612&mlon=38.73559#map=17/9.06612/38.73559
+- **Gulele\_07\_1552 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06435&mlon=38.73352#map=17/9.06435/38.73352
+- **Gulele\_07\_1552 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06556&mlon=38.73396#map=17/9.06556/38.73396
+- **Gulele\_07\_1553 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06824&mlon=38.73510#map=17/9.06824/38.73510
+- **Gulele\_07\_1554 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06833&mlon=38.73590#map=17/9.06833/38.73590
+- **Gulele\_07\_1556 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06971&mlon=38.73676#map=17/9.06971/38.73676
+- **Gulele\_07\_1557 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06693&mlon=38.73717#map=17/9.06693/38.73717
+- **Gulele\_07\_1563 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06841&mlon=38.73869#map=17/9.06841/38.73869
+- **Gulele\_07\_1565 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06916&mlon=38.73653#map=17/9.06916/38.73653
+- **Gulele\_08\_1721 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06443&mlon=38.73205#map=17/9.06443/38.73205
+- **Gulele\_08\_1725 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06529&mlon=38.73121#map=17/9.06529/38.73121
+- **Gulele\_08\_1729 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06612&mlon=38.73200#map=17/9.06612/38.73200
+- **Gulele\_08\_1730 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06351&mlon=38.73159#map=17/9.06351/38.73159
+- **Gulele\_08\_1731 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06649&mlon=38.73209#map=17/9.06649/38.73209
+- **Gulele\_08\_1732 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06668&mlon=38.73346#map=17/9.06668/38.73346
+- **Gulele\_08\_1733 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06693&mlon=38.73093#map=17/9.06693/38.73093
+- **Gulele\_08\_1735 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06741&mlon=38.72804#map=17/9.06741/38.72804
+- **Gulele\_08\_1737 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06774&mlon=38.73192#map=17/9.06774/38.73192
+- **Gulele\_08\_1739 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06746&mlon=38.73311#map=17/9.06746/38.73311
+- **Gulele\_08\_1740 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07037&mlon=38.73540#map=17/9.07037/38.73540
+- **Gulele\_08\_1741 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06820&mlon=38.73330#map=17/9.06820/38.73330
+- **Gulele\_08\_1742 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07142&mlon=38.73649#map=17/9.07142/38.73649
+- **Gulele\_08\_1743 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06844&mlon=38.73250#map=17/9.06844/38.73250
+- **Gulele\_08\_1744 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07067&mlon=38.73561#map=17/9.07067/38.73561
+- **Gulele\_08\_1745 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06819&mlon=38.72970#map=17/9.06819/38.72970
+- **Gulele\_08\_1746 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07361&mlon=38.73640#map=17/9.07361/38.73640
+- **Gulele\_08\_1747 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06911&mlon=38.73329#map=17/9.06911/38.73329
+- **Gulele\_08\_1749 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06858&mlon=38.73019#map=17/9.06858/38.73019
+- **Gulele\_08\_1749 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06873&mlon=38.73156#map=17/9.06873/38.73156
+- **Gulele\_08\_1750 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06881&mlon=38.73466#map=17/9.06881/38.73466
+- **Gulele\_08\_1756 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06780&mlon=38.73381#map=17/9.06780/38.73381
+- **Gulele\_08\_1757 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07007&mlon=38.73394#map=17/9.07007/38.73394
+- **Gulele\_08\_1758 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06974&mlon=38.73355#map=17/9.06974/38.73355
+- **Gulele\_08\_1760 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07162&mlon=38.73255#map=17/9.07162/38.73255
+- **Gulele\_08\_1760 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07025&mlon=38.73303#map=17/9.07025/38.73303
+- **Gulele\_08\_1761 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07052&mlon=38.73368#map=17/9.07052/38.73368
+- **Gulele\_08\_1762 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07025&mlon=38.73273#map=17/9.07025/38.73273
+- **Gulele\_08\_1764 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07091&mlon=38.73217#map=17/9.07091/38.73217
+- **Gulele\_08\_1764 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06782&mlon=38.73290#map=17/9.06782/38.73290
+- **Gulele\_08\_1766 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06621&mlon=38.73119#map=17/9.06621/38.73119
+- **Gulele\_08\_1770 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06866&mlon=38.73099#map=17/9.06866/38.73099
+- **Gulele\_08\_1771 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07093&mlon=38.73374#map=17/9.07093/38.73374
+- **Gulele\_08\_1775 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06958&mlon=38.73613#map=17/9.06958/38.73613
+- **Gulele\_08\_1776 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06684&mlon=38.73044#map=17/9.06684/38.73044
+- **Gulele\_08\_1777 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07055&mlon=38.73611#map=17/9.07055/38.73611
+- **Gulele\_08\_1778 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06819&mlon=38.73032#map=17/9.06819/38.73032
+- **Gulele\_08\_1780 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06765&mlon=38.73008#map=17/9.06765/38.73008
+- **Gulele\_08\_1781 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07195&mlon=38.73339#map=17/9.07195/38.73339
+- **Gulele\_08\_1783 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07178&mlon=38.73293#map=17/9.07178/38.73293
+- **Gulele\_08\_1784 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06703&mlon=38.72949#map=17/9.06703/38.72949
+- **Gulele\_08\_1785 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07158&mlon=38.73693#map=17/9.07158/38.73693
+- **Gulele\_08\_1787 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07216&mlon=38.73710#map=17/9.07216/38.73710
+- **Gulele\_08\_1790 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06707&mlon=38.72925#map=17/9.06707/38.72925
+- **Gulele\_08\_1792 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06688&mlon=38.72823#map=17/9.06688/38.72823
+- **Gulele\_08\_1794 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06827&mlon=38.72788#map=17/9.06827/38.72788
+- **Gulele\_08\_1796 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07245&mlon=38.73346#map=17/9.07245/38.73346
+- **Gulele\_08\_2284 St.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06672&mlon=38.72796#map=17/9.06672/38.72796
+- **Gulele\_09\_1754 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07126&mlon=38.73403#map=17/9.07126/38.73403
+- **Gulele\_09\_1754 Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07126&mlon=38.73403#map=17/9.07126/38.73403
+- **Gulele\_09\_1792 St** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06871&mlon=38.72770#map=17/9.06871/38.72770
+- **Gurdsholla - Mariam Mebrat** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01815&mlon=38.82332#map=17/9.01815/38.82332
+- **Gurdsholla to Jackros Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01632&mlon=38.82211#map=17/9.01632/38.82211
+- **Hachalu hundesa road** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94660&mlon=38.71487#map=17/8.94660/38.71487
+- **Hachalu Hundessa Road** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94656&mlon=38.71528#map=17/8.94656/38.71528
+- **Haile Gebresellasie Avenue** (ኃይሌ ገ/ሥላሴ ጎዳና) · Bole (ቦሌ), Yeka (የካ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01209&mlon=38.77709#map=17/9.01209/38.77709
+- **Haile Melekot Street** (ኃይለ መለኮት መንገ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05821&mlon=38.75981#map=17/9.05821/38.75981
+- **Haile Selassie Street** (ኃይለስላሴ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03616&mlon=38.75556#map=17/9.03616/38.75556
+- **Hailu Kebede Street** (ሃይሉ ከበደ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03868&mlon=38.75424#map=17/9.03868/38.75424
+- **Inku Silase Banty** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04925&mlon=38.75044#map=17/9.04925/38.75044
+- **Intoto Road** (እንጦጦ መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06191&mlon=38.76134#map=17/9.06191/38.76134
+- **Jackros - Anbesa Garage** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00578&mlon=38.80847#map=17/9.00578/38.80847
+- **Jackros - Sealite Mihret Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00636&mlon=38.81953#map=17/9.00636/38.81953
+- **Jackros - Yerer Goro Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00041&mlon=38.81985#map=17/9.00041/38.81985
+- **Jackros to Yerer Goro** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99648&mlon=38.82383#map=17/8.99648/38.82383
+- **Jacros** · Yeka (የካ), Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.02282&mlon=38.82636#map=17/9.02282/38.82636
+- **Jemma Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=8.98205&mlon=38.68557#map=17/8.98205/38.68557
+- **Jimma Road** (የ ጅማ መንገድ) · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=8.98190&mlon=38.69073#map=17/8.98190/38.69073
+- **John Melly Street getasew** (ዮሃንስ ሜሊ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03702&mlon=38.75408#map=17/9.03702/38.75408
+- **Jomo Kenyatta Avenue** · Bole (ቦሌ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01196&mlon=38.77684#map=17/9.01196/38.77684
+- **Joseph Tito Street** (ጆሴፍ ቲቶ መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01292&mlon=38.77294#map=17/9.01292/38.77294
+- **Josif Tito Street** (ጆሴፍ ቲቶ መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01701&mlon=38.76410#map=17/9.01701/38.76410
+- **Karl Square** (ካርል አደባባይ) · Lideta (ልደታ), Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.99769&mlon=38.73071#map=17/8.99769/38.73071
+- **Kebele 24 to Megenagna** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00894&mlon=38.79570#map=17/9.00894/38.79570
+- **Kebele 24 to Ringroad Access 1** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00884&mlon=38.79946#map=17/9.00884/38.79946
+- **Kechenie to Semien** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05457&mlon=38.75001#map=17/9.05457/38.75001
+- **Kenenisa Street** (ቀነኒሳ መንገድ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02068&mlon=38.79784#map=17/9.02068/38.79784
+- **Kenya Street** (ኬንያ መንገድ) · Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02928&mlon=38.73418#map=17/9.02928/38.73418
+- **King George VI Av. / AR\_06\_1002 Av. - Arada Avenue** (ንጉስ ጆርጅ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03771&mlon=38.76265#map=17/9.03771/38.76265
+- **King George VI Avenue** (ንጉስ ጆርጅ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03655&mlon=38.76292#map=17/9.03655/38.76292
+- **Kirkos4\_743** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99352&mlon=38.75417#map=17/8.99352/38.75417
+- **Kirkos4\_826** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99233&mlon=38.75273#map=17/8.99233/38.75273
+- **KK\_07\_2202 Av.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00386&mlon=38.70255#map=17/9.00386/38.70255
+- **KK\_07\_2203 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00012&mlon=38.69040#map=17/9.00012/38.69040
+- **KK\_07\_2204 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00063&mlon=38.69185#map=17/9.00063/38.69185
+- **KK\_07\_2206 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00336&mlon=38.69328#map=17/9.00336/38.69328
+- **KK\_07\_2207 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00037&mlon=38.69155#map=17/9.00037/38.69155
+- **KK\_07\_2208 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00288&mlon=38.69302#map=17/9.00288/38.69302
+- **KK\_07\_2210 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00156&mlon=38.69252#map=17/9.00156/38.69252
+- **KK\_07\_2211 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00015&mlon=38.69119#map=17/9.00015/38.69119
+- **KK\_07\_2212 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00323&mlon=38.69265#map=17/9.00323/38.69265
+- **KK\_07\_2213 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00105&mlon=38.68884#map=17/9.00105/38.68884
+- **KK\_07\_2214 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00068&mlon=38.69230#map=17/9.00068/38.69230
+- **KK\_07\_2215 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00122&mlon=38.69082#map=17/9.00122/38.69082
+- **KK\_07\_2216 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00249&mlon=38.69228#map=17/9.00249/38.69228
+- **KK\_07\_2217 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00169&mlon=38.68873#map=17/9.00169/38.68873
+- **KK\_07\_2218 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00157&mlon=38.69182#map=17/9.00157/38.69182
+- **KK\_07\_2219 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00159&mlon=38.69141#map=17/9.00159/38.69141
+- **KK\_07\_2220 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00148&mlon=38.69156#map=17/9.00148/38.69156
+- **KK\_07\_2221 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00238&mlon=38.68543#map=17/9.00238/38.68543
+- **KK\_07\_2221 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00246&mlon=38.68357#map=17/9.00246/38.68357
+- **KK\_07\_2222 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00311&mlon=38.69159#map=17/9.00311/38.69159
+- **KK\_07\_2223 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00253&mlon=38.68181#map=17/9.00253/38.68181
+- **KK\_07\_2224 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00148&mlon=38.69141#map=17/9.00148/38.69141
+- **KK\_07\_2225 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00319&mlon=38.67942#map=17/9.00319/38.67942
+- **KK\_07\_2226 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00068&mlon=38.69081#map=17/9.00068/38.69081
+- **KK\_07\_2227 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00221&mlon=38.69024#map=17/9.00221/38.69024
+- **KK\_07\_2228 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00316&mlon=38.69088#map=17/9.00316/38.69088
+- **KK\_07\_2229 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00250&mlon=38.68238#map=17/9.00250/38.68238
+- **KK\_07\_2229 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00291&mlon=38.68239#map=17/9.00291/38.68239
+- **KK\_07\_2230 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00186&mlon=38.69048#map=17/9.00186/38.69048
+- **KK\_07\_2231 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00308&mlon=38.68011#map=17/9.00308/38.68011
+- **KK\_07\_2232 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00316&mlon=38.69053#map=17/9.00316/38.69053
+- **KK\_07\_2233 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00251&mlon=38.69261#map=17/9.00251/38.69261
+- **KK\_07\_2234 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00031&mlon=38.69012#map=17/9.00031/38.69012
+- **KK\_07\_2235 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00363&mlon=38.68277#map=17/9.00363/38.68277
+- **KK\_07\_2236 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00221&mlon=38.69024#map=17/9.00221/38.69024
+- **KK\_07\_2237 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00277&mlon=38.68674#map=17/9.00277/38.68674
+- **KK\_07\_2238 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00316&mlon=38.69014#map=17/9.00316/38.69014
+- **KK\_07\_2239 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00276&mlon=38.69187#map=17/9.00276/38.69187
+- **KK\_07\_2240 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00187&mlon=38.68995#map=17/9.00187/38.68995
+- **KK\_07\_2241 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00300&mlon=38.68844#map=17/9.00300/38.68844
+- **KK\_07\_2242 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00324&mlon=38.68944#map=17/9.00324/38.68944
+- **KK\_07\_2244 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00227&mlon=38.68920#map=17/9.00227/38.68920
+- **KK\_07\_2245 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00397&mlon=38.68946#map=17/9.00397/38.68946
+- **KK\_07\_2246 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00297&mlon=38.68908#map=17/9.00297/38.68908
+- **KK\_07\_2247 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00380&mlon=38.67981#map=17/9.00380/38.67981
+- **KK\_07\_2248 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00204&mlon=38.68875#map=17/9.00204/38.68875
+- **KK\_07\_2249 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00313&mlon=38.69128#map=17/9.00313/38.69128
+- **KK\_07\_2250 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00143&mlon=38.68847#map=17/9.00143/38.68847
+- **KK\_07\_2251 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00316&mlon=38.69014#map=17/9.00316/38.69014
+- **KK\_07\_2252 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00300&mlon=38.68844#map=17/9.00300/38.68844
+- **KK\_07\_2253 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00350&mlon=38.68524#map=17/9.00350/38.68524
+- **KK\_07\_2254 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00197&mlon=38.68805#map=17/9.00197/38.68805
+- **KK\_07\_2255 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00367&mlon=38.68190#map=17/9.00367/38.68190
+- **KK\_07\_2256 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00404&mlon=38.68785#map=17/9.00404/38.68785
+- **KK\_07\_2257 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00373&mlon=38.68082#map=17/9.00373/38.68082
+- **KK\_07\_2258 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00372&mlon=38.68748#map=17/9.00372/38.68748
+- **KK\_07\_2259 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00339&mlon=38.69303#map=17/9.00339/38.69303
+- **KK\_07\_2260 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00334&mlon=38.68713#map=17/9.00334/38.68713
+- **KK\_07\_2261 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00350&mlon=38.69054#map=17/9.00350/38.69054
+- **KK\_07\_2262 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00335&mlon=38.68679#map=17/9.00335/38.68679
+- **KK\_07\_2263 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00366&mlon=38.68846#map=17/9.00366/38.68846
+- **KK\_07\_2264 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00378&mlon=38.68646#map=17/9.00378/38.68646
+- **KK\_07\_2265 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00375&mlon=38.68682#map=17/9.00375/38.68682
+- **KK\_07\_2266 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00277&mlon=38.68602#map=17/9.00277/38.68602
+- **KK\_07\_2267 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00383&mlon=38.68525#map=17/9.00383/38.68525
+- **KK\_07\_2268 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00380&mlon=38.68571#map=17/9.00380/38.68571
+- **KK\_07\_2269 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00398&mlon=38.68280#map=17/9.00398/38.68280
+- **KK\_07\_2270 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00386&mlon=38.68462#map=17/9.00386/38.68462
+- **KK\_07\_2271 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00409&mlon=38.68102#map=17/9.00409/38.68102
+- **KK\_07\_2272 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00393&mlon=38.68357#map=17/9.00393/38.68357
+- **KK\_07\_2273 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00413&mlon=38.68731#map=17/9.00413/38.68731
+- **KK\_07\_2274 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00360&mlon=38.68315#map=17/9.00360/38.68315
+- **KK\_07\_2276 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00363&mlon=38.68277#map=17/9.00363/38.68277
+- **KK\_07\_2278 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00367&mlon=38.68190#map=17/9.00367/38.68190
+- **KK\_07\_2280 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00296&mlon=38.68148#map=17/9.00296/38.68148
+- **KK\_07\_2281 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01110&mlon=38.69339#map=17/9.01110/38.69339
+- **KK\_07\_2282 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00410&mlon=38.68064#map=17/9.00410/38.68064
+- **KK\_07\_2284 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00413&mlon=38.68015#map=17/9.00413/38.68015
+- **KK\_07\_2285 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00431&mlon=38.69105#map=17/9.00431/38.69105
+- **KK\_07\_2286 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00354&mlon=38.67957#map=17/9.00354/38.67957
+- **KK\_07\_2287 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00476&mlon=38.69362#map=17/9.00476/38.69362
+- **KK\_07\_2288 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00216&mlon=38.67800#map=17/9.00216/38.67800
+- **KK\_07\_2289 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00468&mlon=38.69143#map=17/9.00468/38.69143
+- **KK\_07\_2295 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00617&mlon=38.69395#map=17/9.00617/38.69395
+- **KK\_07\_2297 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00562&mlon=38.69264#map=17/9.00562/38.69264
+- **KK\_07\_2299 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00688&mlon=38.69395#map=17/9.00688/38.69395
+- **KK\_07\_2301 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00504&mlon=38.69122#map=17/9.00504/38.69122
+- **KK\_07\_2302 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00846&mlon=38.69492#map=17/9.00846/38.69492
+- **KK\_07\_2303 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00616&mlon=38.69229#map=17/9.00616/38.69229
+- **KK\_07\_2304 Cu.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00596&mlon=38.69352#map=17/9.00596/38.69352
+- **KK\_07\_2304 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00496&mlon=38.69366#map=17/9.00496/38.69366
+- **KK\_07\_2305 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00496&mlon=38.69043#map=17/9.00496/38.69043
+- **KK\_07\_2306 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00625&mlon=38.69387#map=17/9.00625/38.69387
+- **KK\_07\_2307 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00561&mlon=38.69073#map=17/9.00561/38.69073
+- **KK\_07\_2308 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00857&mlon=38.69284#map=17/9.00857/38.69284
+- **KK\_07\_2310 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00884&mlon=38.69390#map=17/9.00884/38.69390
+- **KK\_07\_2311 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00813&mlon=38.69381#map=17/9.00813/38.69381
+- **KK\_07\_2312 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00865&mlon=38.69362#map=17/9.00865/38.69362
+- **KK\_07\_2313 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00573&mlon=38.69023#map=17/9.00573/38.69023
+- **KK\_07\_2314 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00727&mlon=38.69372#map=17/9.00727/38.69372
+- **KK\_07\_2315 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00520&mlon=38.68937#map=17/9.00520/38.68937
+- **KK\_07\_2316 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00801&mlon=38.69362#map=17/9.00801/38.69362
+- **KK\_07\_2317 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00460&mlon=38.68687#map=17/9.00460/38.68687
+- **KK\_07\_2318 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00422&mlon=38.69313#map=17/9.00422/38.69313
+- **KK\_07\_2319 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00526&mlon=38.68350#map=17/9.00526/38.68350
+- **KK\_07\_2320 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00647&mlon=38.69330#map=17/9.00647/38.69330
+- **KK\_07\_2321 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00486&mlon=38.68146#map=17/9.00486/38.68146
+- **KK\_07\_2323 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00493&mlon=38.68039#map=17/9.00493/38.68039
+- **KK\_07\_2324 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00515&mlon=38.69300#map=17/9.00515/38.69300
+- **KK\_07\_2325 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00490&mlon=38.68251#map=17/9.00490/38.68251
+- **KK\_07\_2326 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00651&mlon=38.69283#map=17/9.00651/38.69283
+- **KK\_07\_2327 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00485&mlon=38.68803#map=17/9.00485/38.68803
+- **KK\_07\_2328 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00744&mlon=38.69259#map=17/9.00744/38.69259
+- **KK\_07\_2329 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00884&mlon=38.69390#map=17/9.00884/38.69390
+- **KK\_07\_2330 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00592&mlon=38.69245#map=17/9.00592/38.69245
+- **KK\_07\_2331 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00895&mlon=38.69342#map=17/9.00895/38.69342
+- **KK\_07\_2332 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00668&mlon=38.69162#map=17/9.00668/38.69162
+- **KK\_07\_2334 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00597&mlon=38.69200#map=17/9.00597/38.69200
+- **KK\_07\_2335 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00626&mlon=38.68986#map=17/9.00626/38.68986
+- **KK\_07\_2336 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00662&mlon=38.69073#map=17/9.00662/38.69073
+- **KK\_07\_2337 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00538&mlon=38.68842#map=17/9.00538/38.68842
+- **KK\_07\_2338 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00585&mlon=38.69112#map=17/9.00585/38.69112
+- **KK\_07\_2339 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00515&mlon=38.68577#map=17/9.00515/38.68577
+- **KK\_07\_2340 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00617&mlon=38.69080#map=17/9.00617/38.69080
+- **KK\_07\_2341 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00520&mlon=38.68462#map=17/9.00520/38.68462
+- **KK\_07\_2342 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00504&mlon=38.69122#map=17/9.00504/38.69122
+- **KK\_07\_2343 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00533&mlon=38.68256#map=17/9.00533/38.68256
+- **KK\_07\_2344 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00646&mlon=38.69017#map=17/9.00646/38.69017
+- **KK\_07\_2345 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00540&mlon=38.68109#map=17/9.00540/38.68109
+- **KK\_07\_2346 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00469&mlon=38.69106#map=17/9.00469/38.69106
+- **KK\_07\_2347 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00548&mlon=38.68656#map=17/9.00548/38.68656
+- **KK\_07\_2348 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00626&mlon=38.68986#map=17/9.00626/38.68986
+- **KK\_07\_2349 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00485&mlon=38.67847#map=17/9.00485/38.67847
+- **KK\_07\_2350 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00442&mlon=38.69070#map=17/9.00442/38.69070
+- **KK\_07\_2351 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00922&mlon=38.69340#map=17/9.00922/38.69340
+- **KK\_07\_2352 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00560&mlon=38.69001#map=17/9.00560/38.69001
+- **KK\_07\_2353 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00602&mlon=38.68719#map=17/9.00602/38.68719
+- **KK\_07\_2354 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00437&mlon=38.69032#map=17/9.00437/38.69032
+- **KK\_07\_2355 Av** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00846&mlon=38.66574#map=17/9.00846/38.66574
+- **KK\_07\_2355 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00683&mlon=38.67598#map=17/9.00683/38.67598
+- **KK\_07\_2356 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00456&mlon=38.68975#map=17/9.00456/38.68975
+- **KK\_07\_2358 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00531&mlon=38.68890#map=17/9.00531/38.68890
+- **KK\_07\_2360 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00557&mlon=38.68873#map=17/9.00557/38.68873
+- **KK\_07\_2362 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00483&mlon=38.68879#map=17/9.00483/38.68879
+- **KK\_07\_2364 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00493&mlon=38.68829#map=17/9.00493/38.68829
+- **KK\_07\_2366 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00451&mlon=38.68768#map=17/9.00451/38.68768
+- **KK\_07\_2367 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01067&mlon=38.69436#map=17/9.01067/38.69436
+- **KK\_07\_2368 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00457&mlon=38.68732#map=17/9.00457/38.68732
+- **KK\_07\_2369 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01121&mlon=38.69505#map=17/9.01121/38.69505
+- **KK\_07\_2370 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00507&mlon=38.68691#map=17/9.00507/38.68691
+- **KK\_07\_2371 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00999&mlon=38.69299#map=17/9.00999/38.69299
+- **KK\_07\_2371 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00875&mlon=38.69101#map=17/9.00875/38.69101
+- **KK\_07\_2372 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00548&mlon=38.68656#map=17/9.00548/38.68656
+- **KK\_07\_2373 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00716&mlon=38.68362#map=17/9.00716/38.68362
+- **KK\_07\_2374 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00461&mlon=38.68612#map=17/9.00461/38.68612
+- **KK\_07\_2375 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01213&mlon=38.69557#map=17/9.01213/38.69557
+- **KK\_07\_2376 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00466&mlon=38.68517#map=17/9.00466/38.68517
+- **KK\_07\_2377 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01159&mlon=38.69499#map=17/9.01159/38.69499
+- **KK\_07\_2378 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00942&mlon=38.69141#map=17/9.00942/38.69141
+- **KK\_07\_2379 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01098&mlon=38.69384#map=17/9.01098/38.69384
+- **KK\_07\_2380 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00469&mlon=38.68463#map=17/9.00469/38.68463
+- **KK\_07\_2381 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01136&mlon=38.69397#map=17/9.01136/38.69397
+- **KK\_07\_2382 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00607&mlon=38.68429#map=17/9.00607/38.68429
+- **KK\_07\_2383 Cu.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01204&mlon=38.69399#map=17/9.01204/38.69399
+- **KK\_07\_2383 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01110&mlon=38.69339#map=17/9.01110/38.69339
+- **KK\_07\_2384 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00472&mlon=38.68383#map=17/9.00472/38.68383
+- **KK\_07\_2385 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01016&mlon=38.69247#map=17/9.01016/38.69247
+- **KK\_07\_2386 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00528&mlon=38.68326#map=17/9.00528/38.68326
+- **KK\_07\_2388 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00531&mlon=38.68291#map=17/9.00531/38.68291
+- **KK\_07\_2389 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00816&mlon=38.68950#map=17/9.00816/38.68950
+- **KK\_07\_2390 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00499&mlon=38.68255#map=17/9.00499/38.68255
+- **KK\_07\_2391 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00697&mlon=38.68552#map=17/9.00697/38.68552
+- **KK\_07\_2392 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00616&mlon=38.68224#map=17/9.00616/38.68224
+- **KK\_07\_2393 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01078&mlon=38.69242#map=17/9.01078/38.69242
+- **KK\_07\_2394 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00536&mlon=38.68175#map=17/9.00536/38.68175
+- **KK\_07\_2395 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00717&mlon=38.68699#map=17/9.00717/38.68699
+- **KK\_07\_2396 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00486&mlon=38.68146#map=17/9.00486/38.68146
+- **KK\_07\_2397 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01068&mlon=38.69157#map=17/9.01068/38.69157
+- **KK\_07\_2398 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00450&mlon=38.68104#map=17/9.00450/38.68104
+- **KK\_07\_2399 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01215&mlon=38.69201#map=17/9.01215/38.69201
+- **KK\_07\_2400 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00491&mlon=38.68069#map=17/9.00491/38.68069
+- **KK\_07\_2401 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00809&mlon=38.68841#map=17/9.00809/38.68841
+- **KK\_07\_2402 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00545&mlon=38.68043#map=17/9.00545/38.68043
+- **KK\_07\_2403 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00745&mlon=38.68712#map=17/9.00745/38.68712
+- **KK\_07\_2404 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00621&mlon=38.68004#map=17/9.00621/38.68004
+- **KK\_07\_2405 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00750&mlon=38.68520#map=17/9.00750/38.68520
+- **KK\_07\_2407 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01181&mlon=38.69138#map=17/9.01181/38.69138
+- **KK\_07\_2409 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00778&mlon=38.68705#map=17/9.00778/38.68705
+- **KK\_07\_2409 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00891&mlon=38.68902#map=17/9.00891/38.68902
+- **KK\_07\_2411 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01209&mlon=38.69107#map=17/9.01209/38.69107
+- **KK\_07\_2413 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00955&mlon=38.68897#map=17/9.00955/38.68897
+- **KK\_07\_2413 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00973&mlon=38.68923#map=17/9.00973/38.68923
+- **KK\_07\_2415 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01252&mlon=38.67839#map=17/9.01252/38.67839
+- **KK\_07\_2417 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01285&mlon=38.67851#map=17/9.01285/38.67851
+- **KK\_07\_2419 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01309&mlon=38.67854#map=17/9.01309/38.67854
+- **KK\_07\_2421 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01347&mlon=38.67854#map=17/9.01347/38.67854
+- **KK\_07\_2424 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01159&mlon=38.69531#map=17/9.01159/38.69531
+- **KK\_07\_2426 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01159&mlon=38.69499#map=17/9.01159/38.69499
+- **KK\_07\_2428 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01100&mlon=38.69480#map=17/9.01100/38.69480
+- **KK\_07\_2430 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01181&mlon=38.69138#map=17/9.01181/38.69138
+- **KK\_07\_2432 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01025&mlon=38.69340#map=17/9.01025/38.69340
+- **KK\_07\_2433 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00698&mlon=38.67905#map=17/9.00698/38.67905
+- **KK\_07\_2434 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01011&mlon=38.69318#map=17/9.01011/38.69318
+- **KK\_07\_2436 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01094&mlon=38.69212#map=17/9.01094/38.69212
+- **KK\_07\_2437 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00730&mlon=38.67940#map=17/9.00730/38.67940
+- **KK\_07\_2438 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00957&mlon=38.69326#map=17/9.00957/38.69326
+- **KK\_07\_2439 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00716&mlon=38.68362#map=17/9.00716/38.68362
+- **KK\_07\_2440 Cu.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00981&mlon=38.69246#map=17/9.00981/38.69246
+- **KK\_07\_2440 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01051&mlon=38.69185#map=17/9.01051/38.69185
+- **KK\_07\_2441 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00735&mlon=38.68155#map=17/9.00735/38.68155
+- **KK\_07\_2442 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00944&mlon=38.69305#map=17/9.00944/38.69305
+- **KK\_07\_2443 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00750&mlon=38.68399#map=17/9.00750/38.68399
+- **KK\_07\_2444 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00973&mlon=38.69260#map=17/9.00973/38.69260
+- **KK\_07\_2445 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00773&mlon=38.68335#map=17/9.00773/38.68335
+- **KK\_07\_2446 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01038&mlon=38.69138#map=17/9.01038/38.69138
+- **KK\_07\_2447 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00771&mlon=38.68157#map=17/9.00771/38.68157
+- **KK\_07\_2448 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00921&mlon=38.69268#map=17/9.00921/38.69268
+- **KK\_07\_2449 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00834&mlon=38.68345#map=17/9.00834/38.68345
+- **KK\_07\_2450 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00925&mlon=38.69230#map=17/9.00925/38.69230
+- **KK\_07\_2451 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00825&mlon=38.68284#map=17/9.00825/38.68284
+- **KK\_07\_2453 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00881&mlon=38.68299#map=17/9.00881/38.68299
+- **KK\_07\_2454 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00988&mlon=38.69152#map=17/9.00988/38.69152
+- **KK\_07\_2455 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00906&mlon=38.68274#map=17/9.00906/38.68274
+- **KK\_07\_2456 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00983&mlon=38.69115#map=17/9.00983/38.69115
+- **KK\_07\_2457 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00816&mlon=38.68127#map=17/9.00816/38.68127
+- **KK\_07\_2458 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00862&mlon=38.69164#map=17/9.00862/38.69164
+- **KK\_07\_2459 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00928&mlon=38.68187#map=17/9.00928/38.68187
+- **KK\_07\_2460 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00944&mlon=38.69097#map=17/9.00944/38.69097
+- **KK\_07\_2461 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00814&mlon=38.68071#map=17/9.00814/38.68071
+- **KK\_07\_2462 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00886&mlon=38.69120#map=17/9.00886/38.69120
+- **KK\_07\_2464 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00893&mlon=38.68045#map=17/9.00893/38.68045
+- **KK\_07\_2464 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00856&mlon=38.69117#map=17/9.00856/38.69117
+- **KK\_07\_2465 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00848&mlon=38.68057#map=17/9.00848/38.68057
+- **KK\_07\_2466 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00844&mlon=38.69094#map=17/9.00844/38.69094
+- **KK\_07\_2467 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00836&mlon=38.67831#map=17/9.00836/38.67831
+- **KK\_07\_2468 Cu.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01017&mlon=38.68868#map=17/9.01017/38.68868
+- **KK\_07\_2468 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00842&mlon=38.68933#map=17/9.00842/38.68933
+- **KK\_07\_2468 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00973&mlon=38.68923#map=17/9.00973/38.68923
+- **KK\_07\_2469 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01092&mlon=38.68264#map=17/9.01092/38.68264
+- **KK\_07\_2471 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00910&mlon=38.67912#map=17/9.00910/38.67912
+- **KK\_07\_2473 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00915&mlon=38.67801#map=17/9.00915/38.67801
+- **KK\_07\_2474 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00842&mlon=38.68933#map=17/9.00842/38.68933
+- **KK\_07\_2475 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00943&mlon=38.67913#map=17/9.00943/38.67913
+- **KK\_07\_2478 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00872&mlon=38.68870#map=17/9.00872/38.68870
+- **KK\_07\_2479 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01005&mlon=38.68107#map=17/9.01005/38.68107
+- **KK\_07\_2481 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00976&mlon=38.67952#map=17/9.00976/38.67952
+- **KK\_07\_2482 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00747&mlon=38.68908#map=17/9.00747/38.68908
+- **KK\_07\_2485 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00995&mlon=38.68016#map=17/9.00995/38.68016
+- **KK\_07\_2486 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00736&mlon=38.68889#map=17/9.00736/38.68889
+- **KK\_07\_2487 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00969&mlon=38.67839#map=17/9.00969/38.67839
+- **KK\_07\_2489 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01018&mlon=38.67769#map=17/9.01018/38.67769
+- **KK\_07\_2491 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01079&mlon=38.68106#map=17/9.01079/38.68106
+- **KK\_07\_2492 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00714&mlon=38.68857#map=17/9.00714/38.68857
+- **KK\_07\_2493 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01042&mlon=38.67843#map=17/9.01042/38.67843
+- **KK\_07\_2495 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01074&mlon=38.67923#map=17/9.01074/38.67923
+- **KK\_07\_2496 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00781&mlon=38.68768#map=17/9.00781/38.68768
+- **KK\_07\_2497 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01084&mlon=38.67774#map=17/9.01084/38.67774
+- **KK\_07\_2498 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00675&mlon=38.68788#map=17/9.00675/38.68788
+- **KK\_07\_2499 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01096&mlon=38.67775#map=17/9.01096/38.67775
+- **KK\_07\_2501 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01121&mlon=38.67732#map=17/9.01121/38.67732
+- **KK\_07\_2503 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01140&mlon=38.67776#map=17/9.01140/38.67776
+- **KK\_07\_2505 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01164&mlon=38.67736#map=17/9.01164/38.67736
+- **KK\_07\_2506 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00653&mlon=38.68698#map=17/9.00653/38.68698
+- **KK\_07\_2507 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01166&mlon=38.67929#map=17/9.01166/38.67929
+- **KK\_07\_2508 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00720&mlon=38.68666#map=17/9.00720/38.68666
+- **KK\_07\_2509 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01170&mlon=38.67814#map=17/9.01170/38.67814
+- **KK\_07\_2510 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00761&mlon=38.68630#map=17/9.00761/38.68630
+- **KK\_07\_2511 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01188&mlon=38.67738#map=17/9.01188/38.67738
+- **KK\_07\_2512 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00694&mlon=38.68588#map=17/9.00694/38.68588
+- **KK\_07\_2514 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00749&mlon=38.68556#map=17/9.00749/38.68556
+- **KK\_07\_2516 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00700&mlon=38.68508#map=17/9.00700/38.68508
+- **KK\_07\_2518 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00667&mlon=38.68472#map=17/9.00667/38.68472
+- **KK\_07\_2523 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00774&mlon=38.67016#map=17/9.00774/38.67016
+- **KK\_07\_2524 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01213&mlon=38.67835#map=17/9.01213/38.67835
+- **KK\_07\_2525 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00714&mlon=38.67592#map=17/9.00714/38.67592
+- **KK\_07\_2527 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00737&mlon=38.67197#map=17/9.00737/38.67197
+- **KK\_07\_2528 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00751&mlon=38.68439#map=17/9.00751/38.68439
+- **KK\_07\_2529 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00740&mlon=38.67057#map=17/9.00740/38.67057
+- **KK\_07\_2533 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00749&mlon=38.67599#map=17/9.00749/38.67599
+- **KK\_07\_2535 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00772&mlon=38.67205#map=17/9.00772/38.67205
+- **KK\_07\_2537 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00796&mlon=38.67031#map=17/9.00796/38.67031
+- **KK\_07\_2540 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00715&mlon=38.68396#map=17/9.00715/38.68396
+- **KK\_07\_2541 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00754&mlon=38.67605#map=17/9.00754/38.67605
+- **KK\_07\_2542 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00861&mlon=38.68319#map=17/9.00861/38.68319
+- **KK\_07\_2543 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00802&mlon=38.67355#map=17/9.00802/38.67355
+- **KK\_07\_2544 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00960&mlon=38.68221#map=17/9.00960/38.68221
+- **KK\_07\_2545 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00822&mlon=38.67031#map=17/9.00822/38.67031
+- **KK\_07\_2546 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00716&mlon=38.68341#map=17/9.00716/38.68341
+- **KK\_07\_2548 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00933&mlon=38.68248#map=17/9.00933/38.68248
+- **KK\_07\_2549 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00827&mlon=38.67165#map=17/9.00827/38.67165
+- **KK\_07\_2550 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01043&mlon=38.68071#map=17/9.01043/38.68071
+- **KK\_07\_2551 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00820&mlon=38.67608#map=17/9.00820/38.67608
+- **KK\_07\_2552 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00994&mlon=38.68065#map=17/9.00994/38.68065
+- **KK\_07\_2553 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00829&mlon=38.67363#map=17/9.00829/38.67363
+- **KK\_07\_2554 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00847&mlon=38.68160#map=17/9.00847/38.68160
+- **KK\_07\_2556 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00900&mlon=38.68109#map=17/9.00900/38.68109
+- **KK\_07\_2558 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00735&mlon=38.68155#map=17/9.00735/38.68155
+- **KK\_07\_2559 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00852&mlon=38.67352#map=17/9.00852/38.67352
+- **KK\_07\_2560 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00876&mlon=38.68083#map=17/9.00876/38.68083
+- **KK\_07\_2561 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00849&mlon=38.67604#map=17/9.00849/38.67604
+- **KK\_07\_2562 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00742&mlon=38.68047#map=17/9.00742/38.68047
+- **KK\_07\_2565 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00884&mlon=38.67707#map=17/9.00884/38.67707
+- **KK\_07\_2566 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00926&mlon=38.68013#map=17/9.00926/38.68013
+- **KK\_07\_2567 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00888&mlon=38.67387#map=17/9.00888/38.67387
+- **KK\_07\_2568 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01155&mlon=38.68002#map=17/9.01155/38.68002
+- **KK\_07\_2569 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00898&mlon=38.67189#map=17/9.00898/38.67189
+- **KK\_07\_2570 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00766&mlon=38.67973#map=17/9.00766/38.67973
+- **KK\_07\_2572 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00906&mlon=38.67975#map=17/9.00906/38.67975
+- **KK\_07\_2573 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00922&mlon=38.67361#map=17/9.00922/38.67361
+- **KK\_07\_2574 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00767&mlon=38.67941#map=17/9.00767/38.67941
+- **KK\_07\_2575 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00932&mlon=38.67220#map=17/9.00932/38.67220
+- **KK\_07\_2576 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01106&mlon=38.67961#map=17/9.01106/38.67961
+- **KK\_07\_2578 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00731&mlon=38.67906#map=17/9.00731/38.67906
+- **KK\_07\_2579 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00957&mlon=38.67389#map=17/9.00957/38.67389
+- **KK\_07\_2580 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00943&mlon=38.67913#map=17/9.00943/38.67913
+- **KK\_07\_2581 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00967&mlon=38.67221#map=17/9.00967/38.67221
+- **KK\_07\_2582 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01128&mlon=38.67926#map=17/9.01128/38.67926
+- **KK\_07\_2583 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00954&mlon=38.67654#map=17/9.00954/38.67654
+- **KK\_07\_2584 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01122&mlon=38.67886#map=17/9.01122/38.67886
+- **KK\_07\_2586 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00737&mlon=38.67824#map=17/9.00737/38.67824
+- **KK\_07\_2588 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00914&mlon=38.67836#map=17/9.00914/38.67836
+- **KK\_07\_2589 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00989&mlon=38.67621#map=17/9.00989/38.67621
+- **KK\_07\_2590 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01120&mlon=38.67812#map=17/9.01120/38.67812
+- **KK\_07\_2591 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00994&mlon=38.67423#map=17/9.00994/38.67423
+- **KK\_07\_2592 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00807&mlon=38.67792#map=17/9.00807/38.67792
+- **KK\_07\_2594 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00971&mlon=38.67805#map=17/9.00971/38.67805
+- **KK\_07\_2595 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01019&mlon=38.67564#map=17/9.01019/38.67564
+- **KK\_07\_2598 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01140&mlon=38.67776#map=17/9.01140/38.67776
+- **KK\_07\_2599 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01031&mlon=38.67424#map=17/9.01031/38.67424
+- **KK\_07\_2601 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01037&mlon=38.67254#map=17/9.01037/38.67254
+- **KK\_07\_2603 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01055&mlon=38.67568#map=17/9.01055/38.67568
+- **KK\_07\_2605 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01081&mlon=38.67711#map=17/9.01081/38.67711
+- **KK\_07\_2607 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01091&mlon=38.67625#map=17/9.01091/38.67625
+- **KK\_07\_2609 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01131&mlon=38.67234#map=17/9.01131/38.67234
+- **KK\_07\_2611 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01109&mlon=38.67664#map=17/9.01109/38.67664
+- **KK\_07\_2612 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01366&mlon=38.67706#map=17/9.01366/38.67706
+- **KK\_07\_2614 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00712&mlon=38.67637#map=17/9.00712/38.67637
+- **KK\_07\_2616 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01368&mlon=38.67675#map=17/9.01368/38.67675
+- **KK\_07\_2618 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01297&mlon=38.67656#map=17/9.01297/38.67656
+- **KK\_07\_2619 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01150&mlon=38.67630#map=17/9.01150/38.67630
+- **KK\_07\_2620 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01019&mlon=38.67623#map=17/9.01019/38.67623
+- **KK\_07\_2621 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01149&mlon=38.67381#map=17/9.01149/38.67381
+- **KK\_07\_2622 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01091&mlon=38.67625#map=17/9.01091/38.67625
+- **KK\_07\_2623 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01169&mlon=38.67668#map=17/9.01169/38.67668
+- **KK\_07\_2624 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01371&mlon=38.67630#map=17/9.01371/38.67630
+- **KK\_07\_2625 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01173&mlon=38.67224#map=17/9.01173/38.67224
+- **KK\_07\_2626 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01149&mlon=38.67594#map=17/9.01149/38.67594
+- **KK\_07\_2628 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01342&mlon=38.67592#map=17/9.01342/38.67592
+- **KK\_07\_2629 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01200&mlon=38.67613#map=17/9.01200/38.67613
+- **KK\_07\_2630 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00954&mlon=38.67565#map=17/9.00954/38.67565
+- **KK\_07\_2632 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01088&mlon=38.67568#map=17/9.01088/38.67568
+- **KK\_07\_2633 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01205&mlon=38.67250#map=17/9.01205/38.67250
+- **KK\_07\_2635 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01193&mlon=38.67670#map=17/9.01193/38.67670
+- **KK\_07\_2636 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01057&mlon=38.67526#map=17/9.01057/38.67526
+- **KK\_07\_2637 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01236&mlon=38.67384#map=17/9.01236/38.67384
+- **KK\_07\_2638 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01381&mlon=38.67542#map=17/9.01381/38.67542
+- **KK\_07\_2639 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01273&mlon=38.67584#map=17/9.01273/38.67584
+- **KK\_07\_2640 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01108&mlon=38.67461#map=17/9.01108/38.67461
+- **KK\_07\_2641 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01272&mlon=38.67422#map=17/9.01272/38.67422
+- **KK\_07\_2642 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01305&mlon=38.67470#map=17/9.01305/38.67470
+- **KK\_07\_2643 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01314&mlon=38.67354#map=17/9.01314/38.67354
+- **KK\_07\_2644 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00947&mlon=38.67423#map=17/9.00947/38.67423
+- **KK\_07\_2645 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01338&mlon=38.67626#map=17/9.01338/38.67626
+- **KK\_07\_2646 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01031&mlon=38.67424#map=17/9.01031/38.67424
+- **KK\_07\_2647 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01347&mlon=38.67430#map=17/9.01347/38.67430
+- **KK\_07\_2648 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01310&mlon=38.67425#map=17/9.01310/38.67425
+- **KK\_07\_2649 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01384&mlon=38.67402#map=17/9.01384/38.67402
+- **KK\_07\_2650 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01109&mlon=38.67375#map=17/9.01109/38.67375
+- **KK\_07\_2651 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01397&mlon=38.67675#map=17/9.01397/38.67675
+- **KK\_07\_2652 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01311&mlon=38.67389#map=17/9.01311/38.67389
+- **KK\_07\_2654 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01198&mlon=38.67344#map=17/9.01198/38.67344
+- **KK\_07\_2655 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01430&mlon=38.67676#map=17/9.01430/38.67676
+- **KK\_07\_2656 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01349&mlon=38.67357#map=17/9.01349/38.67357
+- **KK\_07\_2658 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00962&mlon=38.67294#map=17/9.00962/38.67294
+- **KK\_07\_2660 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01280&mlon=38.67313#map=17/9.01280/38.67313
+- **KK\_07\_2662 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00931&mlon=38.67248#map=17/9.00931/38.67248
+- **KK\_07\_2664 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01145&mlon=38.67262#map=17/9.01145/38.67262
+- **KK\_07\_2666 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01290&mlon=38.67271#map=17/9.01290/38.67271
+- **KK\_07\_2670 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00967&mlon=38.67221#map=17/9.00967/38.67221
+- **KK\_07\_2672 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00706&mlon=38.67196#map=17/9.00706/38.67196
+- **KK\_07\_2674 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01004&mlon=38.67196#map=17/9.01004/38.67196
+- **KK\_07\_2676 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00738&mlon=38.67175#map=17/9.00738/38.67175
+- **KK\_07\_2678 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00775&mlon=38.67155#map=17/9.00775/38.67155
+- **KK\_07\_2680 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00740&mlon=38.67131#map=17/9.00740/38.67131
+- **KK\_07\_2682 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00816&mlon=38.67125#map=17/9.00816/38.67125
+- **KK\_07\_2684 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00971&mlon=38.67133#map=17/9.00971/38.67133
+- **KK\_07\_2686 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00693&mlon=38.67106#map=17/9.00693/38.67106
+- **KK\_07\_2688 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.01071&mlon=38.67116#map=17/9.01071/38.67116
+- **KK\_07\_2690 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00740&mlon=38.67057#map=17/9.00740/38.67057
+- **KK\_07\_2692 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.00773&mlon=38.67037#map=17/9.00773/38.67037
+- **KR\_02\_201 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00045&mlon=38.76105#map=17/9.00045/38.76105
+- **KR\_02\_203 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00236&mlon=38.76320#map=17/9.00236/38.76320
+- **KR\_02\_204 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00029&mlon=38.76024#map=17/9.00029/38.76024
+- **KR\_02\_205 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99979&mlon=38.75924#map=17/8.99979/38.75924
+- **KR\_02\_206 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99961&mlon=38.76367#map=17/8.99961/38.76367
+- **KR\_02\_207 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99921&mlon=38.75959#map=17/8.99921/38.75959
+- **KR\_02\_208 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99832&mlon=38.75976#map=17/8.99832/38.75976
+- **KR\_02\_209 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99898&mlon=38.76186#map=17/8.99898/38.76186
+- **KR\_02\_210 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99925&mlon=38.76094#map=17/8.99925/38.76094
+- **KR\_02\_211 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99787&mlon=38.76075#map=17/8.99787/38.76075
+- **KR\_02\_212 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99807&mlon=38.76042#map=17/8.99807/38.76042
+- **KR\_02\_213 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99805&mlon=38.76279#map=17/8.99805/38.76279
+- **KR\_02\_214 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99742&mlon=38.76066#map=17/8.99742/38.76066
+- **KR\_02\_215 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99828&mlon=38.76373#map=17/8.99828/38.76373
+- **KR\_02\_216 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99778&mlon=38.76212#map=17/8.99778/38.76212
+- **KR\_02\_217 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99771&mlon=38.76373#map=17/8.99771/38.76373
+- **KR\_02\_218 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99797&mlon=38.76313#map=17/8.99797/38.76313
+- **KR\_02\_219 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99672&mlon=38.76138#map=17/8.99672/38.76138
+- **KR\_02\_220 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99827&mlon=38.76424#map=17/8.99827/38.76424
+- **KR\_02\_222 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99609&mlon=38.76466#map=17/8.99609/38.76466
+- **KR\_02\_227 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99571&mlon=38.76019#map=17/8.99571/38.76019
+- **KR\_02\_228 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99533&mlon=38.76217#map=17/8.99533/38.76217
+- **KR\_02\_229 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99512&mlon=38.76093#map=17/8.99512/38.76093
+- **KR\_02\_232 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99512&mlon=38.76093#map=17/8.99512/38.76093
+- **KR\_02\_241 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00159&mlon=38.76852#map=17/9.00159/38.76852
+- **KR\_02\_245 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99947&mlon=38.76937#map=17/8.99947/38.76937
+- **KR\_02\_246 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99507&mlon=38.77237#map=17/8.99507/38.77237
+- **KR\_02\_247 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99862&mlon=38.76986#map=17/8.99862/38.76986
+- **KR\_02\_248 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00006&mlon=38.76813#map=17/9.00006/38.76813
+- **KR\_02\_249 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99780&mlon=38.77025#map=17/8.99780/38.77025
+- **KR\_02\_251 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99675&mlon=38.76980#map=17/8.99675/38.76980
+- **KR\_02\_252 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99997&mlon=38.76892#map=17/8.99997/38.76892
+- **KR\_02\_253 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99716&mlon=38.77033#map=17/8.99716/38.77033
+- **KR\_02\_256 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99782&mlon=38.77065#map=17/8.99782/38.77065
+- **KR\_02\_257 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99666&mlon=38.77117#map=17/8.99666/38.77117
+- **KR\_02\_258 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99593&mlon=38.77166#map=17/8.99593/38.77166
+- **KR\_02\_259 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99523&mlon=38.77064#map=17/8.99523/38.77064
+- **KR\_02\_270 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99495&mlon=38.76604#map=17/8.99495/38.76604
+- **KR\_02\_271 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99475&mlon=38.76297#map=17/8.99475/38.76297
+- **KR\_02\_272 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99380&mlon=38.76477#map=17/8.99380/38.76477
+- **KR\_02\_274 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99393&mlon=38.76435#map=17/8.99393/38.76435
+- **KR\_02\_276 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99372&mlon=38.76229#map=17/8.99372/38.76229
+- **KR\_02\_277 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99502&mlon=38.76430#map=17/8.99502/38.76430
+- **KR\_02\_278 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99378&mlon=38.76013#map=17/8.99378/38.76013
+- **KR\_02\_279 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99482&mlon=38.76410#map=17/8.99482/38.76410
+- **KR\_02\_280 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99298&mlon=38.76082#map=17/8.99298/38.76082
+- **KR\_02\_281 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99411&mlon=38.76585#map=17/8.99411/38.76585
+- **KR\_02\_282 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99267&mlon=38.76241#map=17/8.99267/38.76241
+- **KR\_02\_283 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99335&mlon=38.76640#map=17/8.99335/38.76640
+- **KR\_02\_284 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99318&mlon=38.76356#map=17/8.99318/38.76356
+- **KR\_02\_285 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99297&mlon=38.76581#map=17/8.99297/38.76581
+- **KR\_02\_286 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99276&mlon=38.76296#map=17/8.99276/38.76296
+- **KR\_02\_287 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99364&mlon=38.76384#map=17/8.99364/38.76384
+- **KR\_02\_288 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99313&mlon=38.76446#map=17/8.99313/38.76446
+- **KR\_02\_289 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99379&mlon=38.76082#map=17/8.99379/38.76082
+- **KR\_02\_290 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99195&mlon=38.76555#map=17/8.99195/38.76555
+- **KR\_02\_291 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99298&mlon=38.76082#map=17/8.99298/38.76082
+- **KR\_02\_292 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99217&mlon=38.76179#map=17/8.99217/38.76179
+- **KR\_02\_293 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99248&mlon=38.76569#map=17/8.99248/38.76569
+- **KR\_02\_294 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99138&mlon=38.76333#map=17/8.99138/38.76333
+- **KR\_02\_295 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99270&mlon=38.76361#map=17/8.99270/38.76361
+- **KR\_02\_296 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99139&mlon=38.76127#map=17/8.99139/38.76127
+- **KR\_02\_297 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99218&mlon=38.76081#map=17/8.99218/38.76081
+- **KR\_02\_298 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99083&mlon=38.76242#map=17/8.99083/38.76242
+- **KR\_02\_299 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99138&mlon=38.76102#map=17/8.99138/38.76102
+- **KR\_02\_301 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99062&mlon=38.76126#map=17/8.99062/38.76126
+- **KR\_02\_314 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99238&mlon=38.77003#map=17/8.99238/38.77003
+- **KR\_02\_315 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99693&mlon=38.76775#map=17/8.99693/38.76775
+- **KR\_02\_316 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99819&mlon=38.76741#map=17/8.99819/38.76741
+- **KR\_02\_318 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99762&mlon=38.76780#map=17/8.99762/38.76780
+- **KR\_02\_319 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99646&mlon=38.76874#map=17/8.99646/38.76874
+- **KR\_02\_320 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99690&mlon=38.76825#map=17/8.99690/38.76825
+- **KR\_02\_322 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99691&mlon=38.76787#map=17/8.99691/38.76787
+- **KR\_02\_324 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99603&mlon=38.76885#map=17/8.99603/38.76885
+- **KR\_02\_325 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99518&mlon=38.76750#map=17/8.99518/38.76750
+- **KR\_02\_326 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99059&mlon=38.76732#map=17/8.99059/38.76732
+- **KR\_02\_327 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99540&mlon=38.76910#map=17/8.99540/38.76910
+- **KR\_02\_328 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99482&mlon=38.76869#map=17/8.99482/38.76869
+- **KR\_02\_329 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99442&mlon=38.76692#map=17/8.99442/38.76692
+- **KR\_02\_330 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99484&mlon=38.76890#map=17/8.99484/38.76890
+- **KR\_02\_331 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99435&mlon=38.76995#map=17/8.99435/38.76995
+- **KR\_02\_332 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99423&mlon=38.76945#map=17/8.99423/38.76945
+- **KR\_02\_333 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99388&mlon=38.76733#map=17/8.99388/38.76733
+- **KR\_02\_333 Street.** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99373&mlon=38.76911#map=17/8.99373/38.76911
+- **KR\_02\_334 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99315&mlon=38.76903#map=17/8.99315/38.76903
+- **KR\_02\_336 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99192&mlon=38.76734#map=17/8.99192/38.76734
+- **KR\_02\_337 Street.** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99315&mlon=38.76903#map=17/8.99315/38.76903
+- **KR\_02\_338 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99213&mlon=38.76862#map=17/8.99213/38.76862
+- **KR\_02\_339 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99264&mlon=38.76806#map=17/8.99264/38.76806
+- **KR\_02\_340 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99214&mlon=38.76913#map=17/8.99214/38.76913
+- **KR\_02\_341 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99214&mlon=38.76913#map=17/8.99214/38.76913
+- **KR\_02\_342 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98971&mlon=38.76629#map=17/8.98971/38.76629
+- **KR\_02\_343 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99218&mlon=38.76799#map=17/8.99218/38.76799
+- **KR\_02\_345 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99176&mlon=38.76793#map=17/8.99176/38.76793
+- **KR\_02\_347 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99107&mlon=38.76865#map=17/8.99107/38.76865
+- **KR\_02\_349 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99115&mlon=38.76744#map=17/8.99115/38.76744
+- **KR\_02\_351 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99039&mlon=38.76782#map=17/8.99039/38.76782
+- **KR\_02\_353 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98953&mlon=38.76583#map=17/8.98953/38.76583
+- **KR\_02\_354 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99386&mlon=38.77279#map=17/8.99386/38.77279
+- **KR\_02\_358 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99353&mlon=38.77214#map=17/8.99353/38.77214
+- **KR\_02\_365 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99470&mlon=38.77088#map=17/8.99470/38.77088
+- **KR\_02\_366 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99237&mlon=38.77122#map=17/8.99237/38.77122
+- **KR\_02\_367 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99440&mlon=38.77118#map=17/8.99440/38.77118
+- **KR\_02\_369 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99249&mlon=38.77191#map=17/8.99249/38.77191
+- **KR\_02\_370 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99209&mlon=38.77085#map=17/8.99209/38.77085
+- **KR\_02\_371 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99151&mlon=38.77171#map=17/8.99151/38.77171
+- **KR\_02\_372 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99158&mlon=38.77064#map=17/8.99158/38.77064
+- **KR\_02\_373 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99284&mlon=38.77348#map=17/8.99284/38.77348
+- **KR\_02\_374 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99165&mlon=38.77024#map=17/8.99165/38.77024
+- **KR\_02\_375 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99080&mlon=38.77215#map=17/8.99080/38.77215
+- **KR\_02\_376 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99110&mlon=38.76987#map=17/8.99110/38.76987
+- **KR\_02\_378 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99031&mlon=38.77195#map=17/8.99031/38.77195
+- **KR\_02\_380 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98968&mlon=38.77079#map=17/8.98968/38.77079
+- **KR\_02\_501 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99109&mlon=38.76531#map=17/8.99109/38.76531
+- **KR\_03\_503 Street** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99000&mlon=38.76412#map=17/8.99000/38.76412
+- **Kuriftu Rd.** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.08027&mlon=38.74098#map=17/9.08027/38.74098
+- **LD\_02\_0202 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01349&mlon=38.72630#map=17/9.01349/38.72630
+- **LD\_02\_0203 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01295&mlon=38.72159#map=17/9.01295/38.72159
+- **LD\_02\_0205 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01338&mlon=38.72599#map=17/9.01338/38.72599
+- **LD\_02\_0206 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01582&mlon=38.72485#map=17/9.01582/38.72485
+- **LD\_02\_0207 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01380&mlon=38.72568#map=17/9.01380/38.72568
+- **LD\_02\_0208 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01418&mlon=38.72143#map=17/9.01418/38.72143
+- **LD\_02\_0209 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01457&mlon=38.72666#map=17/9.01457/38.72666
+- **LD\_02\_0210 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01618&mlon=38.72630#map=17/9.01618/38.72630
+- **LD\_02\_0211 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01516&mlon=38.72541#map=17/9.01516/38.72541
+- **LD\_02\_0212 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01668&mlon=38.72579#map=17/9.01668/38.72579
+- **LD\_02\_0213 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01543&mlon=38.72514#map=17/9.01543/38.72514
+- **LD\_02\_0214 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01663&mlon=38.72538#map=17/9.01663/38.72538
+- **LD\_02\_0215 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01564&mlon=38.72390#map=17/9.01564/38.72390
+- **LD\_02\_0216 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01817&mlon=38.72478#map=17/9.01817/38.72478
+- **LD\_02\_0217 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01588&mlon=38.72637#map=17/9.01588/38.72637
+- **LD\_02\_0218 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01673&mlon=38.72454#map=17/9.01673/38.72454
+- **LD\_02\_0219 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01681&mlon=38.72235#map=17/9.01681/38.72235
+- **LD\_02\_0220 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01699&mlon=38.72385#map=17/9.01699/38.72385
+- **LD\_02\_0221 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01724&mlon=38.72548#map=17/9.01724/38.72548
+- **LD\_02\_0222 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01916&mlon=38.72254#map=17/9.01916/38.72254
+- **LD\_02\_0223 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01828&mlon=38.72322#map=17/9.01828/38.72322
+- **LD\_02\_0224 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01879&mlon=38.72185#map=17/9.01879/38.72185
+- **LD\_02\_0225 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01793&mlon=38.72213#map=17/9.01793/38.72213
+- **LD\_02\_0226 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01850&mlon=38.72120#map=17/9.01850/38.72120
+- **LD\_02\_0227 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01896&mlon=38.72228#map=17/9.01896/38.72228
+- **LD\_02\_0228 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01779&mlon=38.72235#map=17/9.01779/38.72235
+- **LD\_02\_0229 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01933&mlon=38.72234#map=17/9.01933/38.72234
+- **LD\_02\_0230 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01800&mlon=38.72103#map=17/9.01800/38.72103
+- **LD\_02\_0231 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01944&mlon=38.72197#map=17/9.01944/38.72197
+- **LD\_02\_0232 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01657&mlon=38.72126#map=17/9.01657/38.72126
+- **LD\_02\_0233 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01699&mlon=38.71943#map=17/9.01699/38.71943
+- **LD\_02\_0234 Street** · Addis Ketema (አዲስ ከተማ), Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.02043&mlon=38.72227#map=17/9.02043/38.72227
+- **LD\_02\_0235 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01862&mlon=38.71788#map=17/9.01862/38.71788
+- **LD\_02\_0236 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01962&mlon=38.72133#map=17/9.01962/38.72133
+- **LD\_02\_0237 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01905&mlon=38.71688#map=17/9.01905/38.71688
+- **LD\_02\_0238 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01946&mlon=38.72119#map=17/9.01946/38.72119
+- **LD\_02\_0239 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01996&mlon=38.71676#map=17/9.01996/38.71676
+- **LD\_02\_0240 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01775&mlon=38.72004#map=17/9.01775/38.72004
+- **LD\_02\_0241 Street** · Addis Ketema (አዲስ ከተማ), Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02413&mlon=38.72336#map=17/9.02413/38.72336
+- **LD\_02\_0242 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01873&mlon=38.71842#map=17/9.01873/38.71842
+- **LD\_02\_0244 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01597&mlon=38.71975#map=17/9.01597/38.71975
+- **LD\_02\_0248 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.02020&mlon=38.71732#map=17/9.02020/38.71732
+- **LD\_02\_0250 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.02076&mlon=38.71737#map=17/9.02076/38.71737
+- **LD\_02\_0252 Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.02063&mlon=38.71709#map=17/9.02063/38.71709
+- **LD\_02\_0253 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02230&mlon=38.71617#map=17/9.02230/38.71617
+- **LD\_02\_0255 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02319&mlon=38.71732#map=17/9.02319/38.71732
+- **LD\_02\_0257 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02316&mlon=38.71580#map=17/9.02316/38.71580
+- **LD\_02\_0259 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02361&mlon=38.71587#map=17/9.02361/38.71587
+- **LD\_02\_0261 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02402&mlon=38.71590#map=17/9.02402/38.71590
+- **LD\_02\_0263 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02456&mlon=38.71727#map=17/9.02456/38.71727
+- **LD\_02\_0264 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02196&mlon=38.71787#map=17/9.02196/38.71787
+- **LD\_02\_0265 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02472&mlon=38.71606#map=17/9.02472/38.71606
+- **LD\_02\_0266 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02206&mlon=38.71747#map=17/9.02206/38.71747
+- **LD\_02\_0267 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02545&mlon=38.71594#map=17/9.02545/38.71594
+- **LD\_02\_0268 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02186&mlon=38.71717#map=17/9.02186/38.71717
+- **LD\_02\_0269 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ), Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02611&mlon=38.71513#map=17/9.02611/38.71513
+- **LD\_02\_0270 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02401&mlon=38.71650#map=17/9.02401/38.71650
+- **LD\_02\_0272 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02258&mlon=38.71593#map=17/9.02258/38.71593
+- **LD\_02\_0273 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02608&mlon=38.71729#map=17/9.02608/38.71729
+- **LD\_02\_0274 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02317&mlon=38.71810#map=17/9.02317/38.71810
+- **LD\_02\_0275 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02666&mlon=38.71766#map=17/9.02666/38.71766
+- **LD\_02\_0276 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02483&mlon=38.71750#map=17/9.02483/38.71750
+- **LD\_02\_0277 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02711&mlon=38.71659#map=17/9.02711/38.71659
+- **LD\_02\_0278 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02425&mlon=38.71702#map=17/9.02425/38.71702
+- **LD\_02\_0279 St.** · Addis Ketema (አዲስ ከተማ), Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02864&mlon=38.71798#map=17/9.02864/38.71798
+- **LD\_02\_0279 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02790&mlon=38.71620#map=17/9.02790/38.71620
+- **LD\_02\_0280 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02588&mlon=38.71815#map=17/9.02588/38.71815
+- **LD\_02\_0282 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02724&mlon=38.71824#map=17/9.02724/38.71824
+- **LD\_02\_0284 St** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02793&mlon=38.71769#map=17/9.02793/38.71769
+- **LD\_02\_0284 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02741&mlon=38.71754#map=17/9.02741/38.71754
+- **LD\_02\_0286 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02740&mlon=38.71712#map=17/9.02740/38.71712
+- **LD\_02\_0288 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02733&mlon=38.71658#map=17/9.02733/38.71658
+- **LD\_02\_0290 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02654&mlon=38.71609#map=17/9.02654/38.71609
+- **LD\_02\_0292 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02668&mlon=38.71546#map=17/9.02668/38.71546
+- **LD\_02\_0294 Street** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02740&mlon=38.71549#map=17/9.02740/38.71549
+- **LD\_02\_0296 St.** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02836&mlon=38.71554#map=17/9.02836/38.71554
+- **LD\_02\_0381 St** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.02838&mlon=38.71619#map=17/9.02838/38.71619
+- **Leipzig Roundabout** · Arada (አራዳ), Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02706&mlon=38.77522#map=17/9.02706/38.77522
+- **Lesotho Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.98867&mlon=38.72307#map=17/8.98867/38.72307
+- **Liberia Street** (ላይቤሪያ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01303&mlon=38.73632#map=17/9.01303/38.73632
+- **Libya Street** (ሊቢያ መንገድ) · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ), Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=8.99072&mlon=38.71998#map=17/8.99072/38.71998
+- **Limu Lane** · Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.90937&mlon=38.77336#map=17/8.90937/38.77336
+- **Lorenzo Taezaz Street** (ሎሬንዞ ትዕዛዝ መንገድ) · Yeka (የካ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02830&mlon=38.78269#map=17/9.02830/38.78269
+- **Madagascar Av** (ማዳጋስካር መንገድ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.06100&mlon=38.76913#map=17/9.06100/38.76913
+- **Madagascar Avenue** (ማዳጋስካር መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05350&mlon=38.76685#map=17/9.05350/38.76685
+- **Madagascar Street** (ማዳጋስካር መንገድ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.06428&mlon=38.77105#map=17/9.06428/38.77105
+- **Maheiro Blvd** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00400&mlon=38.77187#map=17/9.00400/38.77187
+- **Mahtama Gandhi Street** (ማህተማ ጋንዲ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02878&mlon=38.75220#map=17/9.02878/38.75220
+- **Malawi Street** (ማላዊ መንገድ) · Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03729&mlon=38.72772#map=17/9.03729/38.72772
+- **Mali Av.** (ማሊ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04406&mlon=38.74798#map=17/9.04406/38.74798
+- **Mamo** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.97290&mlon=38.76327#map=17/8.97290/38.76327
+- **Mann St** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.01988&mlon=38.82148#map=17/9.01988/38.82148
+- **Mauritania Street** (ሞሪታኒያ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=8.99851&mlon=38.72435#map=17/8.99851/38.72435
+- **Mauritius Street** (ሞሪሸስ መንገድ) · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.97088&mlon=38.74873#map=17/8.97088/38.74873
+- **Mebrat Haile Condominium** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.96395&mlon=38.74297#map=17/8.96395/38.74297
+- **Mender 7 መንደር ሰባት** (መንደር ሰባት) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06410&mlon=38.72682#map=17/9.06410/38.72682
+- **Menelik II Avenue** (ዳግማዊ ምኒሊክ መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.02164&mlon=38.76359#map=17/9.02164/38.76359
+- **Mesfin harar Av** (ደጃ/ች በላይ ዘለቀ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04669&mlon=38.74730#map=17/9.04669/38.74730
+- **Mesfin Harar Av.** (ደጃ/ች በላይ ዘለቀ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04509&mlon=38.74821#map=17/9.04509/38.74821
+- **Meskele squre** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98175&mlon=38.76011#map=17/8.98175/38.76011
+- **Meyazia 27 Square** (ሜያአዚያ 27 አደባባይ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03277&mlon=38.76316#map=17/9.03277/38.76316
+- **Michew Square** (ማይጨው አደባባይ) · Lideta (ልደታ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01033&mlon=38.74405#map=17/9.01033/38.74405
+- **Mike Leyland Street** (ሚኪሊላንድ መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00739&mlon=38.78115#map=17/9.00739/38.78115
+- **Mozambique Street** (ሞዛምቢክ መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00564&mlon=38.74668#map=17/9.00564/38.74668
+- **mugae** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01989&mlon=38.74181#map=17/9.01989/38.74181
+- **Namibia Avenue** (ካሜሩን መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00084&mlon=38.78285#map=17/9.00084/38.78285
+- **New Ambo Road** · Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=9.03374&mlon=38.70536#map=17/9.03374/38.70536
+- **Niger Street** (ኒጀር መንገድ) · Arada (አራዳ), Yeka (የካ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.03166&mlon=38.76342#map=17/9.03166/38.76342
+- **Nigeria Street** (ናይጄሪያ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02166&mlon=38.75406#map=17/9.02166/38.75406
+- **NL\_12\_3039 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94691&mlon=38.75152#map=17/8.94691/38.75152
+- **NL\_12\_3097 St.** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93600&mlon=38.74478#map=17/8.93600/38.74478
+- **NL\_12\_3097 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93694&mlon=38.74053#map=17/8.93694/38.74053
+- **NL\_12\_4 St.** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93832&mlon=38.73484#map=17/8.93832/38.73484
+- **NL\_12\_4 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94439&mlon=38.73501#map=17/8.94439/38.73501
+- **NL\_12\_4201 Av** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94781&mlon=38.75841#map=17/8.94781/38.75841
+- **NL\_12\_4331 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95479&mlon=38.74264#map=17/8.95479/38.74264
+- **NL\_12\_4332 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95235&mlon=38.74287#map=17/8.95235/38.74287
+- **NL\_12\_4706 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95098&mlon=38.75084#map=17/8.95098/38.75084
+- **NL\_12\_4710 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94990&mlon=38.74856#map=17/8.94990/38.74856
+- **NL\_12\_4726 Av** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94777&mlon=38.75126#map=17/8.94777/38.75126
+- **NL\_12\_4726 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94614&mlon=38.75236#map=17/8.94614/38.75236
+- **NL\_12\_4730 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94775&mlon=38.75082#map=17/8.94775/38.75082
+- **NL\_12\_4732 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94775&mlon=38.75082#map=17/8.94775/38.75082
+- **NL\_12\_4733 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94912&mlon=38.74886#map=17/8.94912/38.74886
+- **NL\_12\_4734 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94795&mlon=38.74923#map=17/8.94795/38.74923
+- **NL\_12\_4736 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94761&mlon=38.74888#map=17/8.94761/38.74888
+- **NL\_12\_4739 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94866&mlon=38.74929#map=17/8.94866/38.74929
+- **NL\_12\_4740 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94694&mlon=38.75385#map=17/8.94694/38.75385
+- **NL\_12\_4742 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94678&mlon=38.75351#map=17/8.94678/38.75351
+- **NL\_12\_4744 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94642&mlon=38.75297#map=17/8.94642/38.75297
+- **NL\_12\_4745 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94798&mlon=38.75081#map=17/8.94798/38.75081
+- **NL\_12\_4746 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94584&mlon=38.75745#map=17/8.94584/38.75745
+- **NL\_12\_4747 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94841&mlon=38.74817#map=17/8.94841/38.74817
+- **NL\_12\_4749 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94804&mlon=38.74821#map=17/8.94804/38.74821
+- **NL\_12\_4751 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94725&mlon=38.75236#map=17/8.94725/38.75236
+- **NL\_12\_4753 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94731&mlon=38.75040#map=17/8.94731/38.75040
+- **NL\_12\_4755 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94761&mlon=38.74888#map=17/8.94761/38.74888
+- **NL\_12\_4759 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94712&mlon=38.75286#map=17/8.94712/38.75286
+- **NL\_12\_4761 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94799&mlon=38.75394#map=17/8.94799/38.75394
+- **NL\_12\_4763 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94762&mlon=38.75415#map=17/8.94762/38.75415
+- **NL\_12\_4765 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94628&mlon=38.75267#map=17/8.94628/38.75267
+- **NL\_12\_4766 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94016&mlon=38.74938#map=17/8.94016/38.74938
+- **NL\_12\_4767** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94797&mlon=38.75505#map=17/8.94797/38.75505
+- **NL\_12\_4767 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94657&mlon=38.75371#map=17/8.94657/38.75371
+- **NL\_12\_4768 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94608&mlon=38.74767#map=17/8.94608/38.74767
+- **NL\_12\_4771** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94686&mlon=38.75511#map=17/8.94686/38.75511
+- **NL\_12\_4773** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94657&mlon=38.75549#map=17/8.94657/38.75549
+- **NL\_12\_4774 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94987&mlon=38.74740#map=17/8.94987/38.74740
+- **NL\_12\_4775 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94450&mlon=38.75485#map=17/8.94450/38.75485
+- **NL\_12\_4776 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94990&mlon=38.74709#map=17/8.94990/38.74709
+- **NL\_12\_4778 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95234&mlon=38.74717#map=17/8.95234/38.74717
+- **NL\_12\_4780 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94989&mlon=38.74677#map=17/8.94989/38.74677
+- **NL\_12\_4782 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94641&mlon=38.74634#map=17/8.94641/38.74634
+- **NL\_12\_4783 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94515&mlon=38.75528#map=17/8.94515/38.75528
+- **NL\_12\_4784 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94992&mlon=38.74644#map=17/8.94992/38.74644
+- **NL\_12\_4785 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94472&mlon=38.75528#map=17/8.94472/38.75528
+- **NL\_12\_4786 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95109&mlon=38.74644#map=17/8.95109/38.74644
+- **NL\_12\_4788 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95466&mlon=38.74641#map=17/8.95466/38.74641
+- **NL\_12\_4790 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95211&mlon=38.74617#map=17/8.95211/38.74617
+- **NL\_12\_4792 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94994&mlon=38.74611#map=17/8.94994/38.74611
+- **NL\_12\_4794 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95081&mlon=38.74595#map=17/8.95081/38.74595
+- **NL\_12\_4796 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94997&mlon=38.74576#map=17/8.94997/38.74576
+- **NL\_12\_4797 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95663&mlon=38.74421#map=17/8.95663/38.74421
+- **NL\_12\_4798 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94887&mlon=38.74558#map=17/8.94887/38.74558
+- **NL\_12\_4799 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95614&mlon=38.74523#map=17/8.95614/38.74523
+- **NL\_12\_4800 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94997&mlon=38.74544#map=17/8.94997/38.74544
+- **NL\_12\_4801 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95582&mlon=38.74392#map=17/8.95582/38.74392
+- **NL\_12\_4802 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94969&mlon=38.74509#map=17/8.94969/38.74509
+- **NL\_12\_4805 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95549&mlon=38.74394#map=17/8.95549/38.74394
+- **NL\_12\_4806 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95555&mlon=38.74546#map=17/8.95555/38.74546
+- **NL\_12\_4807 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95517&mlon=38.74395#map=17/8.95517/38.74395
+- **NL\_12\_4808 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94971&mlon=38.74479#map=17/8.94971/38.74479
+- **NL\_12\_4809 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95466&mlon=38.74641#map=17/8.95466/38.74641
+- **NL\_12\_4811 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95484&mlon=38.74387#map=17/8.95484/38.74387
+- **NL\_12\_4812 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95358&mlon=38.74488#map=17/8.95358/38.74488
+- **NL\_12\_4813 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95452&mlon=38.74390#map=17/8.95452/38.74390
+- **NL\_12\_4814 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94627&mlon=38.74426#map=17/8.94627/38.74426
+- **NL\_12\_4815 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95444&mlon=38.74164#map=17/8.95444/38.74164
+- **NL\_12\_4817 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95420&mlon=38.74638#map=17/8.95420/38.74638
+- **NL\_12\_4819 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95423&mlon=38.74494#map=17/8.95423/38.74494
+- **NL\_12\_4821 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95413&mlon=38.74199#map=17/8.95413/38.74199
+- **NL\_12\_4822 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95013&mlon=38.74373#map=17/8.95013/38.74373
+- **NL\_12\_4823 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95381&mlon=38.74635#map=17/8.95381/38.74635
+- **NL\_12\_4824 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94807&mlon=38.74380#map=17/8.94807/38.74380
+- **NL\_12\_4825 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95383&mlon=38.74265#map=17/8.95383/38.74265
+- **NL\_12\_4826 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95419&mlon=38.74370#map=17/8.95419/38.74370
+- **NL\_12\_4827 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95350&mlon=38.74240#map=17/8.95350/38.74240
+- **NL\_12\_4828 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94932&mlon=38.74341#map=17/8.94932/38.74341
+- **NL\_12\_4829 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95314&mlon=38.74628#map=17/8.95314/38.74628
+- **NL\_12\_4831 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95318&mlon=38.74241#map=17/8.95318/38.74241
+- **NL\_12\_4835 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95282&mlon=38.74374#map=17/8.95282/38.74374
+- **NL\_12\_4836 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95512&mlon=38.74246#map=17/8.95512/38.74246
+- **NL\_12\_4837 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95243&mlon=38.74620#map=17/8.95243/38.74620
+- **NL\_12\_4838 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94842&mlon=38.74312#map=17/8.94842/38.74312
+- **NL\_12\_4839 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95211&mlon=38.74617#map=17/8.95211/38.74617
+- **NL\_12\_4841 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95180&mlon=38.74614#map=17/8.95180/38.74614
+- **NL\_12\_4843 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95173&mlon=38.74302#map=17/8.95173/38.74302
+- **NL\_12\_4845 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95146&mlon=38.74611#map=17/8.95146/38.74611
+- **NL\_12\_4847 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95143&mlon=38.74310#map=17/8.95143/38.74310
+- **NL\_12\_4849 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95104&mlon=38.74690#map=17/8.95104/38.74690
+- **NL\_12\_4850 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95642&mlon=38.74269#map=17/8.95642/38.74269
+- **NL\_12\_4851 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95118&mlon=38.74539#map=17/8.95118/38.74539
+- **NL\_12\_4852 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95441&mlon=38.74125#map=17/8.95441/38.74125
+- **NL\_12\_4853 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95087&mlon=38.74208#map=17/8.95087/38.74208
+- **NL\_12\_4854 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94678&mlon=38.74309#map=17/8.94678/38.74309
+- **NL\_12\_4855 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95072&mlon=38.74703#map=17/8.95072/38.74703
+- **NL\_12\_4856 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95431&mlon=38.74074#map=17/8.95431/38.74074
+- **NL\_12\_4857 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95087&mlon=38.74537#map=17/8.95087/38.74537
+- **NL\_12\_4858 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95215&mlon=38.74135#map=17/8.95215/38.74135
+- **NL\_12\_4859 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95073&mlon=38.74413#map=17/8.95073/38.74413
+- **NL\_12\_4861 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95056&mlon=38.74216#map=17/8.95056/38.74216
+- **NL\_12\_4863 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95051&mlon=38.74549#map=17/8.95051/38.74549
+- **NL\_12\_4864 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95208&mlon=38.74100#map=17/8.95208/38.74100
+- **NL\_12\_4865 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95024&mlon=38.74224#map=17/8.95024/38.74224
+- **NL\_12\_4866 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95098&mlon=38.74101#map=17/8.95098/38.74101
+- **NL\_12\_4867 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95044&mlon=38.74397#map=17/8.95044/38.74397
+- **NL\_12\_4868 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95096&mlon=38.74087#map=17/8.95096/38.74087
+- **NL\_12\_4869 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94949&mlon=38.74451#map=17/8.94949/38.74451
+- **NL\_12\_4870 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95142&mlon=38.74038#map=17/8.95142/38.74038
+- **NL\_12\_4871 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94957&mlon=38.74410#map=17/8.94957/38.74410
+- **NL\_12\_4873 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94961&mlon=38.74240#map=17/8.94961/38.74240
+- **NL\_12\_4874 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95280&mlon=38.73976#map=17/8.95280/38.73976
+- **NL\_12\_4875 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94918&mlon=38.74561#map=17/8.94918/38.74561
+- **NL\_12\_4876 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95131&mlon=38.74002#map=17/8.95131/38.74002
+- **NL\_12\_4878 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95003&mlon=38.74021#map=17/8.95003/38.74021
+- **NL\_12\_4879 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94919&mlon=38.74392#map=17/8.94919/38.74392
+- **NL\_12\_4880 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95270&mlon=38.73936#map=17/8.95270/38.73936
+- **NL\_12\_4881 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94887&mlon=38.74558#map=17/8.94887/38.74558
+- **NL\_12\_4882 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95085&mlon=38.73974#map=17/8.95085/38.73974
+- **NL\_12\_4884 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94549&mlon=38.74088#map=17/8.94549/38.74088
+- **NL\_12\_4885 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94882&mlon=38.74329#map=17/8.94882/38.74329
+- **NL\_12\_4886 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95007&mlon=38.73981#map=17/8.95007/38.73981
+- **NL\_12\_4887 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94855&mlon=38.74554#map=17/8.94855/38.74554
+- **NL\_12\_4888 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94741&mlon=38.74033#map=17/8.94741/38.74033
+- **NL\_12\_4889 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94816&mlon=38.74648#map=17/8.94816/38.74648
+- **NL\_12\_4890 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94887&mlon=38.73976#map=17/8.94887/38.73976
+- **NL\_12\_4891 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94824&mlon=38.74551#map=17/8.94824/38.74551
+- **NL\_12\_4892 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95331&mlon=38.73882#map=17/8.95331/38.73882
+- **NL\_12\_4894 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95132&mlon=38.73924#map=17/8.95132/38.73924
+- **NL\_12\_4895 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94842&mlon=38.74312#map=17/8.94842/38.74312
+- **NL\_12\_4896 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94759&mlon=38.73993#map=17/8.94759/38.73993
+- **NL\_12\_4897 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94793&mlon=38.74548#map=17/8.94793/38.74548
+- **NL\_12\_4898 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95205&mlon=38.73867#map=17/8.95205/38.73867
+- **NL\_12\_4899 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94751&mlon=38.74643#map=17/8.94751/38.74643
+- **NL\_12\_4900 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95125&mlon=38.73885#map=17/8.95125/38.73885
+- **NL\_12\_4901 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94709&mlon=38.74749#map=17/8.94709/38.74749
+- **NL\_12\_4902 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94952&mlon=38.73919#map=17/8.94952/38.73919
+- **NL\_12\_4903 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94646&mlon=38.74065#map=17/8.94646/38.74065
+- **NL\_12\_4904 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95094&mlon=38.73846#map=17/8.95094/38.73846
+- **NL\_12\_4906 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94985&mlon=38.73871#map=17/8.94985/38.73871
+- **NL\_12\_4908 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95227&mlon=38.73826#map=17/8.95227/38.73826
+- **NL\_12\_4910 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95206&mlon=38.73801#map=17/8.95206/38.73801
+- **NL\_12\_4912 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95145&mlon=38.73759#map=17/8.95145/38.73759
+- **NL\_12\_4914 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94978&mlon=38.73831#map=17/8.94978/38.73831
+- **NL\_12\_4915 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95849&mlon=38.74579#map=17/8.95849/38.74579
+- **NL\_12\_4916 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94854&mlon=38.73859#map=17/8.94854/38.73859
+- **NL\_12\_4918 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94645&mlon=38.73937#map=17/8.94645/38.73937
+- **NL\_12\_4919 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95220&mlon=38.73766#map=17/8.95220/38.73766
+- **NL\_12\_4920 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95088&mlon=38.73726#map=17/8.95088/38.73726
+- **NL\_12\_4921 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95295&mlon=38.74038#map=17/8.95295/38.74038
+- **NL\_12\_4922 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95038&mlon=38.73755#map=17/8.95038/38.73755
+- **NL\_12\_4923 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95206&mlon=38.73801#map=17/8.95206/38.73801
+- **NL\_12\_4924 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95048&mlon=38.73669#map=17/8.95048/38.73669
+- **NL\_12\_4925 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94819&mlon=38.73528#map=17/8.94819/38.73528
+- **NL\_12\_4926 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94927&mlon=38.73766#map=17/8.94927/38.73766
+- **NL\_12\_4927 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95132&mlon=38.73924#map=17/8.95132/38.73924
+- **NL\_12\_4928 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94957&mlon=38.73677#map=17/8.94957/38.73677
+- **NL\_12\_4929 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95077&mlon=38.73936#map=17/8.95077/38.73936
+- **NL\_12\_4930 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94786&mlon=38.73801#map=17/8.94786/38.73801
+- **NL\_12\_4931 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95113&mlon=38.74161#map=17/8.95113/38.74161
+- **NL\_12\_4932 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94911&mlon=38.73575#map=17/8.94911/38.73575
+- **NL\_12\_4933 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94993&mlon=38.73910#map=17/8.94993/38.73910
+- **NL\_12\_4935 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95039&mlon=38.74011#map=17/8.95039/38.74011
+- **NL\_12\_4939 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94967&mlon=38.73787#map=17/8.94967/38.73787
+- **NL\_12\_4941 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95026&mlon=38.74117#map=17/8.95026/38.74117
+- **NL\_12\_4943 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94905&mlon=38.73620#map=17/8.94905/38.73620
+- **NL\_12\_4947 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94936&mlon=38.73841#map=17/8.94936/38.73841
+- **NL\_12\_4948 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94419&mlon=38.74761#map=17/8.94419/38.74761
+- **NL\_12\_4949 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94970&mlon=38.73989#map=17/8.94970/38.73989
+- **NL\_12\_4951 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94991&mlon=38.74125#map=17/8.94991/38.74125
+- **NL\_12\_4952 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94131&mlon=38.74672#map=17/8.94131/38.74672
+- **NL\_12\_4953 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94890&mlon=38.73746#map=17/8.94890/38.73746
+- **NL\_12\_4955 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94933&mlon=38.74037#map=17/8.94933/38.74037
+- **NL\_12\_4957 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94920&mlon=38.74143#map=17/8.94920/38.74143
+- **NL\_12\_4958 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94269&mlon=38.74624#map=17/8.94269/38.74624
+- **NL\_12\_4959 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94857&mlon=38.73896#map=17/8.94857/38.73896
+- **NL\_12\_4961 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94786&mlon=38.73801#map=17/8.94786/38.73801
+- **NL\_12\_4962 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94321&mlon=38.74604#map=17/8.94321/38.74604
+- **NL\_12\_4963 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94884&mlon=38.74153#map=17/8.94884/38.74153
+- **NL\_12\_4965 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94825&mlon=38.74067#map=17/8.94825/38.74067
+- **NL\_12\_4967 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94779&mlon=38.73918#map=17/8.94779/38.73918
+- **NL\_12\_4968 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94305&mlon=38.74562#map=17/8.94305/38.74562
+- **NL\_12\_4969 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94806&mlon=38.74145#map=17/8.94806/38.74145
+- **NL\_12\_4973 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94771&mlon=38.74156#map=17/8.94771/38.74156
+- **NL\_12\_4974 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94274&mlon=38.74529#map=17/8.94274/38.74529
+- **NL\_12\_4975 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94669&mlon=38.73872#map=17/8.94669/38.73872
+- **NL\_12\_4976 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94608&mlon=38.74543#map=17/8.94608/38.74543
+- **NL\_12\_4977 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94672&mlon=38.73985#map=17/8.94672/38.73985
+- **NL\_12\_4979 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94694&mlon=38.74145#map=17/8.94694/38.74145
+- **NL\_12\_4981 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94635&mlon=38.73893#map=17/8.94635/38.73893
+- **NL\_12\_4982 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94457&mlon=38.74334#map=17/8.94457/38.74334
+- **NL\_12\_4984 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94487&mlon=38.74316#map=17/8.94487/38.74316
+- **NL\_12\_4986 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94525&mlon=38.74280#map=17/8.94525/38.74280
+- **NL\_12\_4993 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94654&mlon=38.74211#map=17/8.94654/38.74211
+- **NL\_12\_4995 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94636&mlon=38.74666#map=17/8.94636/38.74666
+- **NL\_12\_4996 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94569&mlon=38.74170#map=17/8.94569/38.74170
+- **NL\_12\_4997 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94602&mlon=38.74830#map=17/8.94602/38.74830
+- **NL\_12\_4998 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94456&mlon=38.74150#map=17/8.94456/38.74150
+- **NL\_12\_4999 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94619&mlon=38.74220#map=17/8.94619/38.74220
+- **NL\_12\_5000 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94175&mlon=38.74220#map=17/8.94175/38.74220
+- **NL\_12\_5001 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94593&mlon=38.74703#map=17/8.94593/38.74703
+- **NL\_12\_5003 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94565&mlon=38.74834#map=17/8.94565/38.74834
+- **NL\_12\_5005 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94569&mlon=38.74170#map=17/8.94569/38.74170
+- **NL\_12\_5007 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94587&mlon=38.74536#map=17/8.94587/38.74536
+- **NL\_12\_5009 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94555&mlon=38.74530#map=17/8.94555/38.74530
+- **NL\_12\_5011 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94538&mlon=38.74177#map=17/8.94538/38.74177
+- **NL\_12\_5013 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94519&mlon=38.74548#map=17/8.94519/38.74548
+- **NL\_12\_5014 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94434&mlon=38.74071#map=17/8.94434/38.74071
+- **NL\_12\_5015 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94503&mlon=38.74187#map=17/8.94503/38.74187
+- **NL\_12\_5016 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94185&mlon=38.74135#map=17/8.94185/38.74135
+- **NL\_12\_5017 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94467&mlon=38.74193#map=17/8.94467/38.74193
+- **NL\_12\_5018 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93700&mlon=38.74299#map=17/8.93700/38.74299
+- **NL\_12\_5020 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93737&mlon=38.74154#map=17/8.93737/38.74154
+- **NL\_12\_5021 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94489&mlon=38.74328#map=17/8.94489/38.74328
+- **NL\_12\_5022 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94504&mlon=38.74020#map=17/8.94504/38.74020
+- **NL\_12\_5023 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94462&mlon=38.74743#map=17/8.94462/38.74743
+- **NL\_12\_5024 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94218&mlon=38.74070#map=17/8.94218/38.74070
+- **NL\_12\_5026 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94494&mlon=38.73981#map=17/8.94494/38.73981
+- **NL\_12\_5027 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94431&mlon=38.74199#map=17/8.94431/38.74199
+- **NL\_12\_5028 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94248&mlon=38.74023#map=17/8.94248/38.74023
+- **NL\_12\_5029 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94417&mlon=38.74845#map=17/8.94417/38.74845
+- **NL\_12\_5030 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94626&mlon=38.73866#map=17/8.94626/38.73866
+- **NL\_12\_5032 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94753&mlon=38.73697#map=17/8.94753/38.73697
+- **NL\_12\_5033 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94413&mlon=38.74270#map=17/8.94413/38.74270
+- **NL\_12\_5034 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94616&mlon=38.73809#map=17/8.94616/38.73809
+- **NL\_12\_5035 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94380&mlon=38.74845#map=17/8.94380/38.74845
+- **NL\_12\_5036 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94519&mlon=38.73882#map=17/8.94519/38.73882
+- **NL\_12\_5038 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94664&mlon=38.73701#map=17/8.94664/38.73701
+- **NL\_12\_5039 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94344&mlon=38.74838#map=17/8.94344/38.74838
+- **NL\_12\_5040 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93776&mlon=38.74255#map=17/8.93776/38.74255
+- **NL\_12\_5041 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94376&mlon=38.74279#map=17/8.94376/38.74279
+- **NL\_12\_5042 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93996&mlon=38.74063#map=17/8.93996/38.74063
+- **NL\_12\_5043 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94341&mlon=38.74286#map=17/8.94341/38.74286
+- **NL\_12\_5044 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93945&mlon=38.74011#map=17/8.93945/38.74011
+- **NL\_12\_5046 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94073&mlon=38.73781#map=17/8.94073/38.73781
+- **NL\_12\_5047 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94336&mlon=38.74586#map=17/8.94336/38.74586
+- **NL\_12\_5049 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94313&mlon=38.74780#map=17/8.94313/38.74780
+- **NL\_12\_5050 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94157&mlon=38.73635#map=17/8.94157/38.73635
+- **NL\_12\_5053 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94273&mlon=38.74157#map=17/8.94273/38.74157
+- **NL\_12\_5055 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94276&mlon=38.74755#map=17/8.94276/38.74755
+- **NL\_12\_5057 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94271&mlon=38.74302#map=17/8.94271/38.74302
+- **NL\_12\_5059 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94237&mlon=38.74817#map=17/8.94237/38.74817
+- **NL\_12\_5061 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94236&mlon=38.74312#map=17/8.94236/38.74312
+- **NL\_12\_5063 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94206&mlon=38.74763#map=17/8.94206/38.74763
+- **NL\_12\_5065 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94159&mlon=38.74836#map=17/8.94159/38.74836
+- **NL\_12\_5067 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94178&mlon=38.74616#map=17/8.94178/38.74616
+- **NL\_12\_5069 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94269&mlon=38.74624#map=17/8.94269/38.74624
+- **NL\_12\_5071 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94195&mlon=38.74300#map=17/8.94195/38.74300
+- **NL\_12\_5073 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94137&mlon=38.74612#map=17/8.94137/38.74612
+- **NL\_12\_5075 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94142&mlon=38.74271#map=17/8.94142/38.74271
+- **NL\_12\_5079 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94112&mlon=38.74330#map=17/8.94112/38.74330
+- **NL\_12\_5081 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94083&mlon=38.74569#map=17/8.94083/38.74569
+- **NL\_12\_5099 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94818&mlon=38.73709#map=17/8.94818/38.73709
+- **NL\_12\_5105 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94665&mlon=38.73770#map=17/8.94665/38.73770
+- **NL\_12\_5107 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94616&mlon=38.73809#map=17/8.94616/38.73809
+- **NL\_12\_5109 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94556&mlon=38.73796#map=17/8.94556/38.73796
+- **NL\_12\_5113 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94550&mlon=38.73860#map=17/8.94550/38.73860
+- **NL\_12\_5117 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94586&mlon=38.74002#map=17/8.94586/38.74002
+- **NL\_12\_5119 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94540&mlon=38.74011#map=17/8.94540/38.74011
+- **NL\_12\_5121 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94479&mlon=38.73885#map=17/8.94479/38.73885
+- **NL\_12\_5123 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94494&mlon=38.73981#map=17/8.94494/38.73981
+- **NL\_12\_5125 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94417&mlon=38.74001#map=17/8.94417/38.74001
+- **NL\_12\_5127 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94284&mlon=38.73718#map=17/8.94284/38.73718
+- **NL\_12\_5129 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94388&mlon=38.74053#map=17/8.94388/38.74053
+- **NL\_12\_5131 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94342&mlon=38.74052#map=17/8.94342/38.74052
+- **NL\_12\_5133 St.** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93817&mlon=38.73526#map=17/8.93817/38.73526
+- **NL\_12\_5133 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94253&mlon=38.73960#map=17/8.94253/38.73960
+- **NL\_12\_5135 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94218&mlon=38.74070#map=17/8.94218/38.74070
+- **NL\_12\_5137 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94207&mlon=38.74131#map=17/8.94207/38.74131
+- **NL\_12\_5139 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94185&mlon=38.74135#map=17/8.94185/38.74135
+- **NL\_12\_5141 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94129&mlon=38.74082#map=17/8.94129/38.74082
+- **NL\_12\_5145 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.94089&mlon=38.74090#map=17/8.94089/38.74090
+- **NL\_12\_5149 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93869&mlon=38.73653#map=17/8.93869/38.73653
+- **NL\_12\_5151 Street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.93839&mlon=38.73578#map=17/8.93839/38.73578
+- **NL10\_4073** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.95283&mlon=38.76059#map=17/8.95283/38.76059
+- **Old Ambo Road -የድሮው የአምቦ መንገድ** (አምቦ መንገድ (የድሮ)) · Kolfe Keranio (ኮልፌ ቀራኒዮ), Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.05723&mlon=38.70761#map=17/9.05723/38.70761
+- **Olympia square** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00440&mlon=38.76806#map=17/9.00440/38.76806
+- **Olympia Square** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00405&mlon=38.76797#map=17/9.00405/38.76797
+- **Omedla Street** (ኦሜድላ መንገድ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.06053&mlon=38.78273#map=17/9.06053/38.78273
+- **Qore street** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ), Kolfe Keranio (ኮልፌ ቀራኒዮ) · map https://www.openstreetmap.org/?mlat=8.97601&mlon=38.72700#map=17/8.97601/38.72700
+- **Queen Elizabeth Street** (ንግስት ኤልሳቤጥ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03145&mlon=38.77010#map=17/9.03145/38.77010
+- **Ras Abebe Aregay Street** (ራስ አበበ አረጋይ መንገድ) · Lideta (ልደታ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01569&mlon=38.75132#map=17/9.01569/38.75132
+- **Ras Desta Damtew Street** (ራስ ደስታ ዳምጠው መንገድ) · Lideta (ልደታ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01816&mlon=38.75353#map=17/9.01816/38.75353
+- **Ras Lulseged Street** (ራስ ልኡል ሰገድ መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99894&mlon=38.74585#map=17/8.99894/38.74585
+- **Ras Mekonnen Avenue** (ራስ መኮንን ጎዳና) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01114&mlon=38.74903#map=17/9.01114/38.74903
+- **Residencial** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02782&mlon=38.87584#map=17/9.02782/38.87584
+- **Ring Road** (ቀለበት መንገድ) · Gulele (ጉለሌ), Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ), Akaki Kality (አቃቂ ቃሊቲ), Yeka (የካ), Bole (ቦሌ), Kolfe Keranio (ኮልፌ ቀራኒዮ), Lideta (ልደታ), Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.06985&mlon=38.71928#map=17/9.06985/38.71928
+- **road #mapathonerome171123** · Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.83704&mlon=38.80023#map=17/8.83704/38.80023
+- **Road 2** (መንገድ 2) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01959&mlon=38.87120#map=17/9.01959/38.87120
+- **Road 3** (መንገድ 3) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01915&mlon=38.87120#map=17/9.01915/38.87120
+- **Road 4** (መንገድ 4) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01870&mlon=38.87120#map=17/9.01870/38.87120
+- **Road 5** (መንገድ 5) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01823&mlon=38.87043#map=17/9.01823/38.87043
+- **Road 6** (መንገድ 6) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01775&mlon=38.87046#map=17/9.01775/38.87046
+- **Road 7** (መንገድ 7) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01726&mlon=38.87023#map=17/9.01726/38.87023
+- **Road to Gergi Giorgis** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99286&mlon=38.81435#map=17/8.99286/38.81435
+- **Roosevelt Street** (ሮዝቬልት መንገድ) · Lideta (ልደታ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00619&mlon=38.74265#map=17/9.00619/38.74265
+- **Russia Av** (ራሻ መንገድ) · Gulele (ጉለሌ), Yeka (የካ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.04364&mlon=38.76179#map=17/9.04364/38.76179
+- **Rwanda Street** (ሩዋንዳ መንገድ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99106&mlon=38.77939#map=17/8.99106/38.77939
+- **Sahle Selassie Street** (ሣህለ ስላሴ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03718&mlon=38.76052#map=17/9.03718/38.76052
+- **Salitemihret - Summit road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01058&mlon=38.84337#map=17/9.01058/38.84337
+- **Salitemihret - Summit Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01031&mlon=38.84699#map=17/9.01031/38.84699
+- **Sao Tome & Principe Street** · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01936&mlon=38.74081#map=17/9.01936/38.74081
+- **Sealite Mihret - Jackros Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01044&mlon=38.82099#map=17/9.01044/38.82099
+- **Selam Sefer L Mender** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01210&mlon=38.83240#map=17/9.01210/38.83240
+- **Senegal Street** (ሴኔጋል መንገድ) · Arada (አራዳ), Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04510&mlon=38.74946#map=17/9.04510/38.74946
+- **Seychelles Street** (ሲሸልስ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=8.99669&mlon=38.73428#map=17/8.99669/38.73428
+- **Shewareged Gedle Street** (ሸዋረገድ ገድሌ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03504&mlon=38.77197#map=17/9.03504/38.77197
+- **Sierra Leone Av** (ሴራሊዮን መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99891&mlon=38.75872#map=17/8.99891/38.75872
+- **Smuts Av** (ሰሙትስ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01054&mlon=38.72518#map=17/9.01054/38.72518
+- **Smuts Street** (ሰሙትስ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01191&mlon=38.72760#map=17/9.01191/38.72760
+- **Soloda Street** · Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.91035&mlon=38.77287#map=17/8.91035/38.77287
+- **Somalia Street** (ሱማሊያ መንገድ) · Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.03870&mlon=38.73154#map=17/9.03870/38.73154
+- **South Africa Street** (ደቡብ አፍሪካ መንገድ) · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.99321&mlon=38.72714#map=17/8.99321/38.72714
+- **Sudan Street** (ሱዳን መንገድ) · Lideta (ልደታ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01678&mlon=38.74744#map=17/9.01678/38.74744
+- **Summit - Goro road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.00146&mlon=38.83995#map=17/9.00146/38.83995
+- **Summit - Salitemihret road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01067&mlon=38.84338#map=17/9.01067/38.84338
+- **Summit - Salitemihret Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01039&mlon=38.84699#map=17/9.01039/38.84699
+- **Summit - Sealite Mihret Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01287&mlon=38.83294#map=17/9.01287/38.83294
+- **Swaziland Av.** (ስዊዘርላንድ መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04688&mlon=38.73519#map=17/9.04688/38.73519
+- **Swaziland Avenue** (ስዊዘርላንድ መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04841&mlon=38.72638#map=17/9.04841/38.72638
+- **Sylvia Pankhurst Street** (ሲልቪያ ፓንክረስት መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03814&mlon=38.74811#map=17/9.03814/38.74811
+- **Taitu Street** (እቴጌ ጣይቱ መንገድ) · Arada (አራዳ), Kirkos (ቂርቆስ), Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01853&mlon=38.75437#map=17/9.01853/38.75437
+- **Tanzania Street** (ታንዛኒያ መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99088&mlon=38.74829#map=17/8.99088/38.74829
+- **Tesema Aba Kemaw Street** (ተሰማ አባቀማው መንገድ) · Lideta (ልደታ), Kirkos (ቂርቆስ), Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02477&mlon=38.74565#map=17/9.02477/38.74565
+- **Tewodros Road** (ቴዎድሮስ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03807&mlon=38.75798#map=17/9.03807/38.75798
+- **Tewodros Square** (ቴዎድሮስ አደባባይ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02691&mlon=38.75150#map=17/9.02691/38.75150
+- **Tilahun Gessesse Square** (ጥላሁን ገሰሰ አደባባይ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.00720&mlon=38.75862#map=17/9.00720/38.75862
+- **TK International Parking** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98818&mlon=38.79133#map=17/8.98818/38.79133
+- **To Egzabheraab** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01611&mlon=38.80509#map=17/9.01611/38.80509
+- **To Mesket Square and Kera** · Nifas Silk-Lafto (ንፋስ ስልክ ላፍቶ) · map https://www.openstreetmap.org/?mlat=8.98034&mlon=38.76017#map=17/8.98034/38.76017
+- **To St. Emanuel Cherch** · Addis Ketema (አዲስ ከተማ) · map https://www.openstreetmap.org/?mlat=9.02867&mlon=38.71647#map=17/9.02867/38.71647
+- **Togo Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02226&mlon=38.78621#map=17/9.02226/38.78621
+- **Tsehafi Tiezaz Afewerk Street** (ፀሃፊ ትእዛዝ አፈወርቅ መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03667&mlon=38.77815#map=17/9.03667/38.77815
+- **Tunisia Av.** (ደጃ/ች በላይ ዘለቀ መንገድ) · Arada (አራዳ), Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04927&mlon=38.74555#map=17/9.04927/38.74555
+- **Tunisia Av. / Gulele \_07\_1726 Rd.** (ቱኒዚያ መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07230&mlon=38.73796#map=17/9.07230/38.73796
+- **Tunisia Avenue / Gulele \_07\_1726 Road** (ቱኒዚያ መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.06794&mlon=38.73478#map=17/9.06794/38.73478
+- **Tunisia Street** (ቱኒዚያ መንገድ) · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.07443&mlon=38.73810#map=17/9.07443/38.73810
+- **Uganda Street** (ኡጋንዳ መንገድ) · Addis Ketema (አዲስ ከተማ), Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.02561&mlon=38.73911#map=17/9.02561/38.73911
+- **Ummar Semetar Street** (ኡመር ሰመተር መንገድ) · Addis Ketema (አዲስ ከተማ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03414&mlon=38.74331#map=17/9.03414/38.74331
+- **Warner Lane** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02031&mlon=38.82193#map=17/9.02031/38.82193
+- **Wawel Street** (ዋውል መንገድ) · Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.03085&mlon=38.75057#map=17/9.03085/38.75057
+- **Weatherall Street** · Gulele (ጉለሌ) · map https://www.openstreetmap.org/?mlat=9.04399&mlon=38.75981#map=17/9.04399/38.75981
+- **Weji Bridge** (ወጂ ድልድይ) · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98020&mlon=38.84218#map=17/8.98020/38.84218
+- **Wello Sefer** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.98370&mlon=38.76602#map=17/8.98370/38.76602
+- **Wendimeneh Street** (ወንድሜነህ መንገድ) · Arada (አራዳ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.02394&mlon=38.75677#map=17/9.02394/38.75677
+- **Wollo Sefer Square** · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=8.99377&mlon=38.77452#map=17/8.99377/38.77452
+- **Yared Street** (ያሬድ መንገድ) · Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01866&mlon=38.74656#map=17/9.01866/38.74656
+- **Yeka 9\_2491 St.** (የካ 9\_2491 መንገድ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02283&mlon=38.81463#map=17/9.02283/38.81463
+- **Yeka 9\_2624 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02836&mlon=38.83002#map=17/9.02836/38.83002
+- **Yeka Kifle Ketema (Khebena)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03820&mlon=38.78038#map=17/9.03820/38.78038
+- **Yeka W8\_2193 St.** (የካ ወ8\_2193 መንገድ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02271&mlon=38.79255#map=17/9.02271/38.79255
+- **Yeka W8\_2226 St.** (የካ ወ8\_2226 መንገድ) · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02286&mlon=38.79308#map=17/9.02286/38.79308
+- **Yerer Goro to Jackros** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99465&mlon=38.82611#map=17/8.99465/38.82611
+- **Yerer Goro to Jackros Road** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.99255&mlon=38.82799#map=17/8.99255/38.82799
+- **Yerer Road** · Akaki Kality (አቃቂ ቃሊቲ) · map https://www.openstreetmap.org/?mlat=8.91136&mlon=38.77256#map=17/8.91136/38.77256
+- **YK 07\_1883 St** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02531&mlon=38.78250#map=17/9.02531/38.78250
+- **YK 07\_1886 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02530&mlon=38.78040#map=17/9.02530/38.78040
+- **YK 07\_1888 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02586&mlon=38.78064#map=17/9.02586/38.78064
+- **YK 07\_1890 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02617&mlon=38.78100#map=17/9.02617/38.78100
+- **YK 07\_1892 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02694&mlon=38.78116#map=17/9.02694/38.78116
+- **YK 07\_1893 St** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02707&mlon=38.78322#map=17/9.02707/38.78322
+- **YK 07\_1894 St** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02683&mlon=38.78202#map=17/9.02683/38.78202
+- **YK 07\_1928 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02712&mlon=38.78496#map=17/9.02712/38.78496
+- **YK 13 3925 mängäd** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02506&mlon=38.87506#map=17/9.02506/38.87506
+- **YK 13 4083 mängäd** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02507&mlon=38.87959#map=17/9.02507/38.87959
+- **YK\_13\_0604 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02333&mlon=38.84450#map=17/9.02333/38.84450
+- **YK\_13\_0605 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02135&mlon=38.84612#map=17/9.02135/38.84612
+- **YK\_13\_0608 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02315&mlon=38.84579#map=17/9.02315/38.84579
+- **YK\_13\_0610 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02308&mlon=38.84623#map=17/9.02308/38.84623
+- **YK\_13\_0612 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02204&mlon=38.84709#map=17/9.02204/38.84709
+- **YK\_13\_0614 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02417&mlon=38.84769#map=17/9.02417/38.84769
+- **YK\_13\_0639 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02309&mlon=38.84488#map=17/9.02309/38.84488
+- **YK\_13\_3602 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02685&mlon=38.84413#map=17/9.02685/38.84413
+- **YK\_13\_3606 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02309&mlon=38.84510#map=17/9.02309/38.84510
+- **YK\_13\_3607 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02254&mlon=38.84458#map=17/9.02254/38.84458
+- **YK\_13\_3608 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02648&mlon=38.84503#map=17/9.02648/38.84503
+- **YK\_13\_3611 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02400&mlon=38.84624#map=17/9.02400/38.84624
+- **YK\_13\_3612 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02455&mlon=38.84650#map=17/9.02455/38.84650
+- **YK\_13\_3613 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02488&mlon=38.84547#map=17/9.02488/38.84547
+- **YK\_13\_3614 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02414&mlon=38.84751#map=17/9.02414/38.84751
+- **YK\_13\_3616 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02595&mlon=38.84858#map=17/9.02595/38.84858
+- **YK\_13\_3619 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02614&mlon=38.84767#map=17/9.02614/38.84767
+- **YK\_13\_3621 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02648&mlon=38.84503#map=17/9.02648/38.84503
+- **YK\_13\_3623 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02648&mlon=38.84811#map=17/9.02648/38.84811
+- **YK\_13\_3626 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02633&mlon=38.84663#map=17/9.02633/38.84663
+- **YK\_13\_3627 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02698&mlon=38.84778#map=17/9.02698/38.84778
+- **YK\_13\_3628 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02614&mlon=38.84767#map=17/9.02614/38.84767
+- **YK\_13\_3630 Street** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02601&mlon=38.84812#map=17/9.02601/38.84812
+- **Yohanes Street** (ዮሃንስ መንገድ) · Lideta (ልደታ), Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01723&mlon=38.75349#map=17/9.01723/38.75349
+- **Yohanis Street** (ዮሃንስ መንገድ) · Kirkos (ቂርቆስ), Lideta (ልደታ) · map https://www.openstreetmap.org/?mlat=9.01740&mlon=38.75553#map=17/9.01740/38.75553
+- **Zambia Street** (ዛምቢያ መንገድ) · Lideta (ልደታ), Arada (አራዳ) · map https://www.openstreetmap.org/?mlat=9.02124&mlon=38.74998#map=17/9.02124/38.74998
+- **Zewditu Street** (ዘውዲቱ መንገድ) · Kirkos (ቂርቆስ) · map https://www.openstreetmap.org/?mlat=9.01387&mlon=38.77363#map=17/9.01387/38.77363
+- **Zimbabwe Av** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=8.98823&mlon=38.78357#map=17/8.98823/38.78357
+- **شارع توغو** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.01676&mlon=38.78731#map=17/9.01676/38.78731
+- **شارع جيبوتي** · Bole (ቦሌ) · map https://www.openstreetmap.org/?mlat=9.01453&mlon=38.78743#map=17/9.01453/38.78743
+- **የካ 13 3925 መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02490&mlon=38.87255#map=17/9.02490/38.87255
+- **የካ 13 3931 መንገድ (መንገድ፡1)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02555&mlon=38.87587#map=17/9.02555/38.87587
+- **የካ 13 3933 መንገድ (መንገድ፡2)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02599&mlon=38.87586#map=17/9.02599/38.87586
+- **የካ 13 3935መንገድ (መንገድ፡3)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02644&mlon=38.87586#map=17/9.02644/38.87586
+- **የካ 13 3937 መንገድ (መንገድ፡4)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02689&mlon=38.87585#map=17/9.02689/38.87585
+- **የካ 13 3939 መንገድ (መንገድ፡5)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02735&mlon=38.87585#map=17/9.02735/38.87585
+- **የካ 13 3941 መንገድ (መንገድ፡6)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02780&mlon=38.87584#map=17/9.02780/38.87584
+- **የካ 13 3943 መንገድ (መንገድ፡7)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02826&mlon=38.87583#map=17/9.02826/38.87583
+- **የካ 13 3945 መንገድ (መንገድ፡8)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02870&mlon=38.87583#map=17/9.02870/38.87583
+- **የካ 13 3947 መንገድ (መንገድ፡9)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02916&mlon=38.87584#map=17/9.02916/38.87584
+- **የካ 13 3949 መንገድ (መንገድ፡10)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02959&mlon=38.87462#map=17/9.02959/38.87462
+- **የካ 13 3951 መንገድ (መንገድ፡11)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03010&mlon=38.87582#map=17/9.03010/38.87582
+- **የካ 13 3953 መንገድ (መንገድ፡12)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03076&mlon=38.87582#map=17/9.03076/38.87582
+- **የካ 13 3955 መንገድ (መንገድ፡13)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03129&mlon=38.87581#map=17/9.03129/38.87581
+- **የካ 13 3957 መንገድ (መንገድ፡14)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03176&mlon=38.87581#map=17/9.03176/38.87581
+- **የካ 13 3959 መንገድ (መንገድ፡15)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03229&mlon=38.87580#map=17/9.03229/38.87580
+- **የካ 13 3961 መንገድ (መንገድ፡16)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03286&mlon=38.87580#map=17/9.03286/38.87580
+- **የካ 13 3962 መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03008&mlon=38.87460#map=17/9.03008/38.87460
+- **የካ 13 3963 መንገድ (መንገድ፡17)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03346&mlon=38.87580#map=17/9.03346/38.87580
+- **የካ 13 3965 መንገድ (መንገድ፡19)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03402&mlon=38.87579#map=17/9.03402/38.87579
+- **የካ 13 3967 መንገድ (መንገድ፡20)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03443&mlon=38.87458#map=17/9.03443/38.87458
+- **የካ 13 3969 መንገድ (መንገድ፡21)** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03490&mlon=38.87578#map=17/9.03490/38.87578
+- **የካ 13 3971 መንገድY** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03547&mlon=38.87549#map=17/9.03547/38.87549
+- **የካ 13 3973መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03601&mlon=38.87454#map=17/9.03601/38.87454
+- **የካ 13 3975 መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03643&mlon=38.87369#map=17/9.03643/38.87369
+- **የካ 13 3977 መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03681&mlon=38.87369#map=17/9.03681/38.87369
+- **የካ 13 3978 መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03734&mlon=38.87453#map=17/9.03734/38.87453
+- **የካ 13 3981 መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03715&mlon=38.87606#map=17/9.03715/38.87606
+- **የካ 13 3983 መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03735&mlon=38.87329#map=17/9.03735/38.87329
+- **የካ 13 3996 መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.03818&mlon=38.87401#map=17/9.03818/38.87401
+- **የካ 13 4083 መንገድ** · Yeka (የካ) · map https://www.openstreetmap.org/?mlat=9.02496&mlon=38.87959#map=17/9.02496/38.87959

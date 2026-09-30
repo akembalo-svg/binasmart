@@ -6,8 +6,9 @@ source_name: "EthSwitch S.C. — the national payment switch"
 section: "switch"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-16"
-lastChecked: "2026-09-16"
+fetchedAt: "2026-09-25"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-16"
 contentHash: "029ce308239602f396d783bc05c52e4730e9255c"
 generated_by: "ops/packs/fetch-pack.js --pack banking"
 packFormat: "2"
@@ -21,7 +22,7 @@ EthSwitch S.C. — the national payment switch — switch — About Us. On this 
 
 ኢትስዊች አ.ማ. በ2011 የተቋቋመ ሲሆን፣ በ2035 በአፍሪካ ውስጥ ምርጥ የክፍያ መረብ ለመሆን ያለመ ነው። የክፍያ አገልግሎት ሰጪዎችን እና የመጨረሻ ተጠቃሚዎችን ቀለል ያለ፣ ተመጣጣኝ፣ ደህንነቱ የተጠበቀ እና ቀልጣፋ የኢ-ክፍያ መሠረተ ልማት አገልግሎቶችን ይሰጣል። ከ2016 ጀምሮ የኤቲኤም እና የPOS ተርሚናሎች መስተጋብርን አስችሏል።
 
-Source: https://ethswitch.com/about-us-2 (official EthSwitch S.C. — the national payment switch page, in English), fetched 2026-09-16. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
+Source: https://ethswitch.com/about-us-2 (official EthSwitch S.C. — the national payment switch page, in English), fetched 2026-09-25. Everything below is that page as the institution wrote it — every rate, fee, limit and condition is copied, not restated. Interest rates, fees, tariffs and exchange rates change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the bank before you act on any figure. BinaSmart is not a bank: this page is information, not advice, and nothing here opens an account, moves money or applies for anything.
 
 ### About Us
 

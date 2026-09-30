@@ -6,9 +6,10 @@ source_name: "Ethiopian Chamber of Commerce and Sectoral Associations"
 section: "trade"
 lang: "en"
 status: "live"
-fetchedAt: "2026-09-17"
-lastChecked: "2026-09-17"
-contentHash: "6f3907631fa4ad4a836a8897e7e04e186faa009b"
+fetchedAt: "2026-09-27"
+lastChecked: "2026-09-27"
+firstFetched: "2026-09-17"
+contentHash: "7e6f287ba1b6c80658fe78d533b67ff60c4708a1"
 generated_by: "ops/packs/fetch-pack.js --pack business"
 packFormat: "2"
 ---
@@ -19,9 +20,9 @@ Ethiopian Chamber of Commerce and Sectoral Associations — trade — AfCFTA - E
 
 በአማርኛ፦ ንግድና የንግድ መረጃ — AfCFTA - Ethiopian Chamber of Commerce and Sectoral Association። ይህ ገጽ ከኢትዮጵያ ንግድና ዘርፍ ማህበራት ምክር ቤት ኦፊሴላዊ ድረ-ገጽ በእንግሊዝኛ የተወሰደ ነው። ክፍያዎች፣ የካፒታል መጠኖች፣ የመዋጮ ምጣኔዎችና የሚፈጀው ጊዜ ያለማስታወቂያ ይለወጣሉ። ይህ ገጽ ከላይ በተጠቀሰው ቀን ተቋሙ ባሳተመው መልኩ ነው። በማንኛውም ቁጥር ላይ ከመወሰንዎ በፊት መሥሪያ ቤቱን ያረጋግጡ። ቢና ማንኛውንም መዝገብ ማየት አይችልም፤ የእርስዎ ፈቃድ ወይም ምዝገባ ትክክለኛ መሆኑን ሊነግርዎ አይችልም።
 
-ይህ ገጽ የአፍሪካ አህጉራዊ ነፃ የንግድ ቀጣና (AfCFTA) አጭር መግለጫ ያቀርባል። AfCFTA 55 የአፍሪካ ህብረት አገሮችን እና 8 የክልል ኢኮኖሚ ማህበረሰቦችን በማሰባሰብ በዓለም ትልቁ የነፃ ንግድ ቀጣና ነው። ስምምነቱ በሜይ 30, 2019 በሥራ ላይ የዋለ ሲሆን፣ ንግድ በጃንዋሪ 1, 2021 ተጀምሯል።
+ይህ ገጽ የአፍሪካ አህጉራዊ ነፃ የንግድ ቀጣና (AfCFTA) አጭር መግለጫ ያቀርባል። AfCFTA 55 የአፍሪካ ህብረት አገሮችን እና 8 የክልል ኢኮኖሚ ማህበረሰቦችን በማሰባሰብ በዓለም ትልቁ የነፃ ንግድ ቀጣና ነው። በግምት 1.3 ቢሊዮን ህዝብ እና 3.4 ትሪሊዮን ዶላር የሚገመት የሀገር ውስጥ ምርት ያለው ነጠላ አህጉራዊ ገበያ ለመፍጠር ያለመ ነው።
 
-Source: https://ethiopianchamber.com/afcfta (official Ethiopian Chamber of Commerce and Sectoral Associations page, in English), fetched 2026-09-17. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
+Source: https://ethiopianchamber.com/afcfta (official Ethiopian Chamber of Commerce and Sectoral Associations page, in English), fetched 2026-09-27. Everything below is that page as the institution wrote it - every fee, threshold, capital requirement, contribution rate and condition is copied, not restated. Fees, thresholds, capital requirements, contribution rates and processing times change, often without notice. This is the page exactly as the institution published it on the date above. Confirm with the office before you act on any figure, and note that BinaSmart cannot see any register and cannot tell you whether your own licence or registration is valid. BinaSmart is not a government office: this page is information, not advice, and nothing here registers a business, renews a licence, pays a tax or files anything on your behalf.
 
 ###
 AfCFTA
@@ -55,17 +56,17 @@ AFCFTA
 Documents
 
 -
-The AfCFTA Rules of Origin Manual12.32 MBPreviewFebruary 15, 2025Downloads: 579
+The AfCFTA Rules of Origin Manual12.32 MBPreviewFebruary 15, 2025Downloads: 598
 Download
 
 -
-የአፍሪካ አህጉራዊ ነፃ የንግድ ቀጣና መመስረቻ ስምምነት625.28 KBPreviewFebruary 15, 2025Downloads: 1089
+የአፍሪካ አህጉራዊ ነፃ የንግድ ቀጣና መመስረቻ ስምምነት625.28 KBPreviewFebruary 15, 2025Downloads: 1103
 Download
 
 -
-A BUSINESS GUIDE TO THE AFRICAN CONTINENTAL FREE TRADE AREA AGREEMENT5.17 MBPreviewFebruary 15, 2025Downloads: 497
+A BUSINESS GUIDE TO THE AFRICAN CONTINENTAL FREE TRADE AREA AGREEMENT5.17 MBPreviewFebruary 15, 2025Downloads: 508
 Download
 
 -
-Empowering Woman In The African Continental Free Trade Area1.59 MBPreviewFebruary 15, 2025Downloads: 666
+Empowering Woman In The African Continental Free Trade Area1.59 MBPreviewFebruary 15, 2025Downloads: 676
 Download
