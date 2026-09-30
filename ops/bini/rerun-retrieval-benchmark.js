@@ -219,7 +219,10 @@ function searchOptionsFor(q, { contextSearchOptions, knowledgeOf }) {
     const plain = { ...shipped }; delete plain.rerankTo;
     return { plain, shipped };
   }
-  if (!q.agent) return { plain: { k: 18, exclude: ['style', 'style-om'] }, shipped: { k: 18, exclude: ['style', 'style-om'], rerankTo: 6 } };
+  // lang only when the question has one: search() uses it to switch on the Afaan Oromoo rendering
+  // (KNOWLEDGE_BILINGUAL_OM), and a question without it keeps exactly the options the benchmark always used.
+  const L = q.lang ? { lang: q.lang } : {};
+  if (!q.agent) return { plain: { k: 18, exclude: ['style', 'style-om'], ...L }, shipped: { k: 18, exclude: ['style', 'style-om'], rerankTo: 6, ...L } };
   const shipped = contextSearchOptions(knowledgeOf(q.agent) || {});
   const plain = { ...shipped }; delete plain.rerankTo;
   return { plain, shipped };
