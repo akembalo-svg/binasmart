@@ -77,8 +77,7 @@ public/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.txt
 tiktok/tokens.json
 
 # Media uploaded or generated at run time (30 Sep 2026, ~680 MB): listing photos and the news voice files. This is a
-# public code repo, so they stay out of it. ⚠️ No regular backup: the off-site bundle is db + config only, and the one
-# copy is a one-off local tarball of 28 Sep 2026 in /root/storage/backups/binasmart-uncommitted/ (same disk).
+# public code repo, so they stay out of it. Backed up off-site every night since 1 Oct 2026 (new and changed files).
 public/cars/img/
 public/property/img/
 public/property/logo/
