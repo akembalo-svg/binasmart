@@ -34,6 +34,7 @@ knowledge/amharic-style.md
 knowledge/oromo-style.md
 knowledge/sources-am.json
 ops/bini/questions.json
+ops/bini/nightly-questions.json
 ops/bini/amharic-eval.js
 ops/health/afiya-eval.js
 ops/law/asmat-eval.js
@@ -73,3 +74,12 @@ public/jobposters/
 # IndexNow key file: it is the token that proves the site is ours to submit. Serving it is
 # the point; publishing it in a public repo is not.
 public/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.txt
+tiktok/tokens.json
+
+# Media uploaded or generated at run time (30 Sep 2026, ~680 MB): listing photos and the news voice files. This is a
+# public code repo, so they stay out of it. ⚠️ They are NOT in any backup yet (the off-site bundle is db + config).
+public/cars/img/
+public/property/img/
+public/property/logo/
+public/hotels/img/
+public/news/audio/
