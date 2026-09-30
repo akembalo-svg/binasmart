@@ -589,10 +589,16 @@ const BILINGUAL_KEYWORD = 'union';
 const BILINGUAL_PROMPT = {
   en: 'Translate this Amharic question into a short natural English search query; output only the query.',
   am: 'Translate this English question into a short natural Amharic search query; output only the query.',
+  om2am: 'Translate this Afaan Oromoo question into a short natural Amharic search query; output only the query.',
 };
 // Off unless asked for. A flag that defaults on would make the benchmark measure itself.
 function bilingualEnabled(env = process.env) { return /^(1|on|true|yes)$/i.test(String(env.KNOWLEDGE_BILINGUAL_QUERY ?? '0').trim()); }
 // The symmetric direction (English question -> Amharic rendering) is a separate switch, measured separately.
+// Afaan Oromoo questions -> an Amharic rendering, on its own switch (off unless asked for). Measured 30 Sep 2026:
+// the global switches lifted a 30-question draft Oromo set from 86.7% to 96.7% Page@3 but cost Amharic/English
+// (v1 68.4 -> 64.9, v2 86.0 -> 84.2, v3 91.0 -> 90.1) and ~0.9 s per uncached search, so Oromo gets its own path.
+// It needs the caller's lang ('om'): Oromo is Latin script, so the query text alone cannot tell it from English.
+function bilingualOmEnabled(env = process.env) { return /^(1|on|true|yes)$/i.test(String(env.KNOWLEDGE_BILINGUAL_OM ?? '0').trim()); }
 function bilingualEn2AmEnabled(env = process.env) { return /^(1|on|true|yes)$/i.test(String(env.KNOWLEDGE_BILINGUAL_EN2AM ?? '0').trim()); }
 // The cache key: the same question typed with different spacing or capitals is the same question.
 function normaliseQuery(s) { return String(s || '').normalize('NFC').replace(/\s+/g, ' ').trim().toLowerCase(); }
@@ -852,7 +858,7 @@ function sourceLine(hit, { root, am = false } = {}) {
 // (defaults to log); it never contains the query text.
 // bilingual / bilingualEn2Am: undefined means "read the environment" (KNOWLEDGE_BILINGUAL_QUERY,
 // KNOWLEDGE_BILINGUAL_EN2AM); translateQuery(text, to) is injectable so a test never reaches the network.
-function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbedder, localFallback, localUrl, queryLog, bilingual, bilingualEn2Am, translateQuery, bilingualTimeoutMs, bilingualFusion, bilingualKeywordMode }) {
+function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbedder, localFallback, localUrl, queryLog, bilingual, bilingualEn2Am, bilingualOm, translateQuery, bilingualTimeoutMs, bilingualFusion, bilingualKeywordMode }) {
   const embedder = makeEmbedder({ apiKey, fetchImpl, sleep });
   const say = log || (() => {});
   const sayPath = queryLog || say;
@@ -861,6 +867,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
   const local = localEmbedder || makeLocalEmbedder({ fetchImpl, url: localUrl || process.env.KNOWLEDGE_LOCAL_URL });
   const bilingualOn = bilingual === undefined ? bilingualEnabled() : !!bilingual;
   const en2amOn = bilingualEn2Am === undefined ? bilingualEn2AmEnabled() : !!bilingualEn2Am;
+  const omOn = bilingualOm === undefined ? bilingualOmEnabled() : !!bilingualOm;
   const fusionAsked = String(bilingualFusion || process.env.KNOWLEDGE_BILINGUAL_FUSION || BILINGUAL_FUSION).trim().toLowerCase();
   const fusion = BILINGUAL_FUSIONS.has(fusionAsked) ? fusionAsked : 'max';
   // The two augment modes share one promise, and it is the whole point of them: the original query's
@@ -1140,11 +1147,16 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
 
   // The other-language rendering of a question, or null — and null is always safe: the caller then does
   // exactly what it did before bilingual retrieval existed.
-  async function renderOther(query, sources) {
-    if (!bilingualOn || styleOnly(sources)) return null;
+  async function renderOther(query, sources, lang) {
+    if (styleOnly(sources)) return null;
     const am = isAmharic(query);
-    if (!am && !en2amOn) return null;
-    const to = am ? 'en' : 'am';
+    let to;
+    if (omOn && lang === 'om' && !am) to = 'om2am';
+    else {
+      if (!bilingualOn) return null;
+      if (!am && !en2amOn) return null;
+      to = am ? 'en' : 'am';
+    }
     const key = to + ' ' + normaliseQuery(query);
     if (tcache.has(key)) { const v = tcache.get(key); tcache.delete(key); tcache.set(key, v); stats.bilingualCached++; return v; }
     let out = null;
@@ -1164,13 +1176,13 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     return rendering;
   }
 
-  async function search(q, { k = 4, sources, exclude, isPublic = false, rerankTo = 0, prefer } = {}) {
+  async function search(q, { k = 4, sources, exclude, isPublic = false, rerankTo = 0, prefer, lang } = {}) {
     await ensureLoaded();
     stats.searches++;
     const query = String(q || '').trim(); if (!query) return [];
     // The other-language rendering first, because it costs nothing when the flag is off and because a
     // failure here must leave everything below untouched.
-    const other = await renderOther(query, sources);
+    const other = await renderOther(query, sources, lang);
     const { qv, dims, useLocal } = await embedQuery(query);
     if (!qv) stats.keywordOnly++;
     sayPath('[knowledge] query embed: ' + (useLocal ? 'local' : qv ? 'gemini' : 'keyword'));
@@ -1302,14 +1314,14 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
     if (!greeting && (words.length >= 2 || am || om)) {
       // Retrieve a wider pool, then rerank down to k. Style lookups below are deliberately NOT reranked:
       // voice examples are chosen for register, not for whether they answer the question.
-      let hits = await search(m, contextSearchOptions({ k, prefer, exclude, message: m }));
+      let hits = await search(m, { ...contextSearchOptions({ k, prefer, exclude, message: m }), lang });
       // A short follow-up is ALSO searched with the question before it (`context`), and up to 3 of those hits are added
       // to the plain ones - never replacing them. 30 Sep 2026: searched alone, follow-ups found the telecom 5G FAQ and the
       // trade-licence system instead of the driver service and the police clearance; searched ONLY with the previous
       // question (tried and reverted the same day), a rental "how much?" lost its price chunks.
       if (context) {
         const cq = String(context).slice(0, 200) + ' — ' + m;
-        const more = await search(cq, contextSearchOptions({ k, prefer, exclude, message: cq })).catch(() => []);
+        const more = await search(cq, { ...contextSearchOptions({ k, prefer, exclude, message: cq }), lang }).catch(() => []);
         const key = h => h.id || (h.source + '/' + h.slug + '/' + h.ord), seen = new Set(hits.map(key));
         hits = hits.concat(more.filter(h => !seen.has(key(h))).slice(0, 3));
       }
@@ -1353,4 +1365,4 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
 
 module.exports = { makeKnowledge, curatedHosts, packRegistries, maskedSites, maskDocs, maskViolations, PERSONAL_MOBILE, normaliseHost, curatedSkip, webDirHost, crawlRegistry, chunkDoc, LINE_SAFE_OPT_OUT, lineSafeFor, HIT_CHARS, clipLines, htmlToText, tokens, readSources, newsDocs, readNewsSources, isOwnNewsUrl, hybridScore, OWN_SOURCES, pageMatcher, contextSearchOptions, sourceLine, pageUrl, docMeta, docMetaFile, ownPageDates, ownPageMeta, PACK_SOURCES, isAmharic, voiceBlock, stripBoilerplate, isSpam, GUIDE_SLUGS, PAGE_SLUGS, DIMS, toBuf, fromBuf,
   LOCAL_DIMS, LOCAL_BATCH, LOCAL_MAX_PER_RUN, makeLocalEmbedder, localFallbackEnabled,
-  bilingualEnabled, bilingualEn2AmEnabled, makeQueryTranslator, normaliseQuery, BILINGUAL_TIMEOUT_MS, BILINGUAL_CACHE_MAX };
+  bilingualEnabled, bilingualEn2AmEnabled, bilingualOmEnabled, makeQueryTranslator, normaliseQuery, BILINGUAL_TIMEOUT_MS, BILINGUAL_CACHE_MAX };
