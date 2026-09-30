@@ -137,7 +137,8 @@ test('Bini asks for the banking pack only when the message is about money at a b
   assert.ok(src.includes('const packPrefer = { ...travelPrefer, ...bankingPrefer, ...(businessWins ? businessPrefer : {}), ...telecomPrefer };'), 'the four are not merged');
   assert.ok(src.includes('const businessWins = !!businessPrefer.prefer && (!bankingPrefer.prefer || biniBusiness.hasBusinessHardWord(msg));'),
     'a banking question with only soft business words must keep the banking preference');
-  assert.ok(src.includes('knowledge.contextFor(msg, { lang, ...packPrefer })'), 'contextFor is not given the merged preference');
+  // Extra keys after the merged preference are fine (the follow-up `context` rides along since 30 Sep 2026).
+  assert.match(src, /knowledge\.contextFor\(msg, \{ lang, \.\.\.packPrefer(, [^{}]*)? \}\)/, 'contextFor is not given the merged preference');
   assert.ok(src.includes('+ bankGuard'), 'the guardrail is not added to the system prompt');
 });
 

@@ -157,7 +157,8 @@ test('server.js consults the telecom intent and merges it after the others', () 
   assert.match(src, /biniTelecom\.telecomWins\(msg, \{ travel: !!travelPrefer\.prefer, banking: !!bankingPrefer\.prefer, business: !!businessPrefer\.prefer, businessHard: biniBusiness\.hasBusinessHardWord\(msg\) \}\)/,
     'the route must ask the telecom intent with the other three verdicts');
   assert.ok(src.includes('...(businessWins ? businessPrefer : {}), ...telecomPrefer };'), 'the telecom preference is not merged last');
-  assert.ok(src.includes('knowledge.contextFor(msg, { lang, ...packPrefer })'), 'contextFor is not given the merged preference');
+  // Extra keys after the merged preference are fine (the follow-up `context` rides along since 30 Sep 2026).
+  assert.match(src, /knowledge\.contextFor\(msg, \{ lang, \.\.\.packPrefer(, [^{}]*)? \}\)/, 'contextFor is not given the merged preference');
 });
 
 test('Dr Afiya never reads the telecom pack, and Asmat keeps only the regulator\'s documents', () => {

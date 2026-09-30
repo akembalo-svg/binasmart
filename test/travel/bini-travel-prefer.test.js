@@ -109,6 +109,7 @@ test('Bini asks for the pack only when the message is about flying', () => {
   // with travel. It is merged after the others for that reason.
   assert.ok(src.includes('const packPrefer = { ...travelPrefer, ...bankingPrefer, ...(businessWins ? businessPrefer : {}), ...telecomPrefer };'), 'the four packs are not merged');
   assert.ok(src.includes('const businessPrefer = !travelPrefer.prefer && biniBusiness.isBusinessQuestion(msg)'), 'travel must win a tie with business too');
-  assert.ok(src.includes('knowledge.contextFor(msg, { lang, ...packPrefer })'), 'contextFor is not given the preference');
+  // Extra keys after the merged preference are fine (the follow-up `context` rides along since 30 Sep 2026).
+  assert.match(src, /knowledge\.contextFor\(msg, \{ lang, \.\.\.packPrefer(, [^{}]*)? \}\)/, 'contextFor is not given the preference');
   assert.equal(src.includes('knowledge.contextFor(msg, { lang }).catch'), false, 'the old unconditional call is still there');
 });

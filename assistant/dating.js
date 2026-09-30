@@ -51,6 +51,11 @@ const DATING = '\n\n## Every figure and every rule carries its institution, its 
   + 'የተሻሻለበት ቀን YYYY-MM-DD". That updated date IS the date for anything taken from such a page: give it the same '
   + 'way, copied digit for digit, as "BinaSmart\'s Labor ID guide, as last updated on 12 September 2026" — in '
   + 'Amharic "እ.ኤ.አ. ሴፕቴምበር 12 ቀን 2026 እንደተሻሻለው" — and never call it a fetched or a published date.\n'
+  // 2026-09-30: a live BinaRide fare came back "185 ETB, as calculated on September 9, 2026" — the /ride page's
+  // updated date stamped on a quote computed that minute.
+  + '- A FIGURE FROM A LIVE TOOL IS TODAY\'S. A fare from quote_ride, or anything else a tool returned in this '
+  + 'conversation, was produced just now: never give it a page\'s updated or fetched date, and never write "as '
+  + 'last updated" beside it. Say where it came from ("BinaRide fixed fare") and nothing about a date.\n'
   + '- A LINK IS NOT A DATE. "You can find more details at https://nbe.gov.et/fx" does not tell the reader '
   + 'when those figures were published, and an undated figure with a link beside it reads as if it were '
   + 'current when it may not be. Whenever you give a link, give the institution and the fetched date in the '

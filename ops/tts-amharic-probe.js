@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 'use strict';
+// Named *-probe, not *-test: `node --test` runs every *-test.js file, and this one calls a paid API and needs a key.
 // Does Gemini's text-to-speech actually speak Amharic? Find out instead of guessing.
 //
-//   node --env-file=.env ops/tts-amharic-test.js [--model gemini-3.8-flash-tts] [--voice Kore]
+//   node --env-file=.env ops/tts-amharic-probe.js [--model gemini-3.8-flash-tts] [--voice Kore]
 //
 // Google's announcement says "over 100 languages" and names none of them African except Arabic, so
 // whether Amharic is usable is not answerable from the documentation. It is answerable in thirty
