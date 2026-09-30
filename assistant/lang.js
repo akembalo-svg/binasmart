@@ -36,8 +36,9 @@ const NAMES = { am: 'Amharic', 'am-latin': 'Amharic', om: 'Afaan Oromoo', en: 'E
 
 // The one-line directive that goes into the system prompt for this turn.
 function directive(lang) {
-  if (lang === 'am') return 'LANGUAGE: the user wrote in Amharic script. Reply in Amharic script.';
-  if (lang === 'am-latin') return 'LANGUAGE: the user typed Amharic in LATIN letters. Reply in Amharic script (Ethiopic), then end with ONE short line in parentheses that gives the key point in Latin letters the way they typed, e.g. (Wagaw kwami new, /ride lay yasgebu.)';
+  // The polite form since 30 Sep 2026: a Labor ID answer came back as "ስምህ … ትችላለህ" (informal, masculine).
+  if (lang === 'am') return 'LANGUAGE: the user wrote in Amharic script. Reply in Amharic script. Use the polite, gender-neutral እርስዎ form throughout (ይችላሉ, ይሂዱ, ስምዎ), never the informal ህ/ሽ forms (ትችላለህ, ስምህ, ትችያለሽ), even when the user writes informally: they guess at the person\'s gender.';
+  if (lang === 'am-latin') return 'LANGUAGE: the user typed Amharic in LATIN letters. Reply in Amharic script (Ethiopic), then end with ONE short line in parentheses that gives the key point in Latin letters the way they typed, e.g. (Wagaw kwami new, /ride lay yasgebu.). Use the polite, gender-neutral እርስዎ form throughout (ይችላሉ, ይሂዱ, ስምዎ), never the informal ህ/ሽ forms (ትችላለህ, ስምህ, ትችያለሽ), even when the user writes informally: they guess at the person\'s gender.';
   if (lang === 'om') return 'LANGUAGE: the user wrote in Afaan Oromoo (qubee). Reply in Afaan Oromoo, Latin script, polite "isin" form, short clear sentences. Keep product names as they are (BinaSmart, BinaRide, Bini) and say "Imala Waliinii (BinaPool)" for the shared commute. Amharic words only inside product names. If a fact in the knowledge block is only in Amharic or English, translate its meaning faithfully, never the numbers.';
   return 'LANGUAGE: the user wrote in ENGLISH. Reply in English only (Amharic words allowed only for product names). Do not switch to Amharic even if the knowledge block is in Amharic.';
 }

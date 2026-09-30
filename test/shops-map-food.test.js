@@ -10,7 +10,8 @@ function fakeGaz() {
   const calls = [];
   const P = [{ label: 'Train house', labelAm: 'ትሬን ሃውስ', kind: 'restaurant', sub: 'Arada', lat: 9.0343, lng: 38.7546, m: 50 },
     { label: 'Alem Buna', kind: 'cafe', sub: 'Arada', lat: 9.0335, lng: 38.7549, m: 118 }];
-  return { calls, around: o => { calls.push(o); return o.words && o.words.includes('pizza') && o.lat != null ? [] : P; } };
+  return { calls, around: o => { calls.push(o); if (o.words && o.words.includes('pizza') && o.lat != null) return [];
+    return P.filter(p => !o.kinds || o.kinds.includes(p.kind)).slice(0, o.limit || 6); } };
 }
 const fetchImpl = async url => ({ ok: true, status: 200, json: async () => /q=Piassa/i.test(url) ? { results: [{ label: 'Piassa', lat: 9.0346, lng: 38.7549 }] } : { results: [] } });
 
@@ -18,6 +19,9 @@ test('no directory hit for food near a neighbourhood: map places nearest first, 
   const gaz = fakeGaz(), run = makeExecutor({ base: 'http://127.0.0.1:1', fetchImpl, prisma: empty, gazetteer: gaz, publicBase: 'https://bina.et' });
   const r = await run('search_shops', { q: 'cheap restaurant near Piassa', category: 'RESTAURANT' });
   assert.equal(r.mapPlaces.length, 2); assert.equal(r.mapPlaces[0].name, 'Train house'); assert.equal(r.mapPlaces[0].distanceKm, 0.1);
+  // restaurants first; cafes only fill in when fewer than three restaurants are near (30 Sep 2026: Piassa)
+  assert.deepEqual(gaz.calls[0].kinds, ['restaurant', 'fast food']); assert.deepEqual(gaz.calls[1].kinds, ['cafe']);
+  assert.match(r.mapNote, /each distance is from Piassa, not from the person/);
   assert.match(r.mapPlaces[0].ride, /^https:\/\/bina\.et\/ride\?to=Train%20house&lat=9\.0343&lng=38\.7546$/);
   assert.match(r.mapNote, /No phone, opening hours, prices/); assert.match(r.mapNote, /Nearest to Piassa/);
   assert.deepEqual(gaz.calls[0].words, []);   // "cheap" is not a dish: dropped, the map has no prices

@@ -218,7 +218,7 @@ function makeExecutor(ctx) {
     const k = squash(term), g = AREA_GROUPS.find(x => x.some(v => k.includes(squash(v))));
     const dish = DISH_WORDS.find(([, en, am]) => new RegExp('\\b' + en + '|' + am, 'i').test(term));
     if (!g && !dish) return { places: [] };   // "a good restaurant in Addis": ask where, as before
-    const opt = { kinds: category === 'CAFE' ? ['cafe'] : ['restaurant', 'fast food', 'cafe'], words: dish ? [dish[0]] : [], limit: 6 };
+    const opt = { kinds: category === 'CAFE' ? ['cafe'] : ['restaurant', 'fast food'], words: dish ? [dish[0]] : [], limit: 6 };
     let near = null;
     if (g) {
       if (HEALTH_SUBCITY.test(g[0])) opt.sub = g[0];
@@ -226,6 +226,9 @@ function makeExecutor(ctx) {
     }
     if (opt.lat == null && !opt.sub && !dish) return { places: [] };   // the area could not be placed: no city-wide list
     let hits = G.around(opt), unmatched = null;
+    // A restaurant question gets restaurants first: near Piassa the list was one restaurant and five cafes, and the
+    // model named the one (30 Sep 2026). Cafes fill in only when fewer than three restaurants are near.
+    if (category !== 'CAFE' && hits.length < 3) { const more = G.around(Object.assign({}, opt, { kinds: ['cafe'], limit: 6 - hits.length })); hits = hits.concat(more); }
     if (!hits.length && dish && (opt.lat != null || opt.sub)) { hits = G.around(Object.assign({}, opt, { words: [] })); unmatched = dish[0]; }
     return { near, unmatched: hits.length ? unmatched : null, places: hits.map(h => ({ name: h.label, nameAm: h.labelAm || null, kind: h.kind, area: h.sub || null,
       distanceKm: h.m != null ? +(h.m / 1000).toFixed(1) : null,
@@ -327,7 +330,7 @@ function makeExecutor(ctx) {
           out.mapPlaces = m.places; out.count += m.places.length;
           out.mapNote = 'From the city map (OpenStreetMap contributors), not the BinaSmart directory: names, area, distance, map and ride links only. '
             + 'No phone, opening hours, prices, menus or ratings: say so, never guess them, and never call these places BinaSmart partners. Name 3 to 5 of them with their distance.'
-            + (m.near ? ' Nearest to ' + m.near + ' first.' : '') + (m.unmatched ? ' None of these names mentions "' + m.unmatched + '": say that, and offer them as food places nearby.' : '');
+            + (m.near ? ' Nearest to ' + m.near + ' first; each distance is from ' + m.near + ', not from the person.' : '') + (m.unmatched ? ' None of these names mentions "' + m.unmatched + '": say that, and offer them as food places nearby.' : '');
         }
       }
       return out;
