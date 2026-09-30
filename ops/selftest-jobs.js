@@ -138,9 +138,10 @@ function check(name, ok, detail) {
       ? '🔴 <b>jobs self-test failed</b>\n\n' + fails.map(f => '• ' + f).join('\n') + '\n\n' + BASE + '/jobs'
       : null;
     if (line) {
-      const tok = process.env.BINASMART_TG_TOKEN;
-      const chat = process.env.BINA_OWNER_TG_CHAT || process.env.BINASMART_ADMIN_TG_CHAT;
-      if (tok && chat) {
+      // @bina_smart_bot, not BINASMART_TG_TOKEN (the old @gccandconectbot: "chat not found" for the admin chats, 26 Sep 2026).
+      const tok = process.env.BINA_RIDER_BOT_TOKEN;
+      const chats = [...new Set([process.env.BINASMART_ADMIN_TG_CHAT, process.env.BINASMART_OPS_TG_CHAT].filter(Boolean))];
+      for (const chat of tok ? chats : []) {
         await fetch('https://api.telegram.org/bot' + tok + '/sendMessage', {
           method: 'POST', headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ chat_id: chat, text: line, parse_mode: 'HTML', disable_web_page_preview: true }),

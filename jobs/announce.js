@@ -69,7 +69,7 @@ function compose(jobs, totalOpen) {
     const now = new Date();
     const fresh = (await prisma.job.findMany({
       where: { published: true, announcedAt: null,
-        OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }] },
+        ...require('../tenders/deadline').openJobsWhere(now) },
       include: { employer: { select: { name: true } } },
       orderBy: { publishedAt: 'desc' },
       take: (LIMIT || MAX_PER_POST) * 3,
@@ -79,7 +79,7 @@ function compose(jobs, totalOpen) {
 
     const batch = fresh.slice(0, LIMIT || MAX_PER_POST);
     const totalOpen = (await prisma.job.findMany({
-      where: { published: true, OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }] },
+      where: { published: true, ...require('../tenders/deadline').openJobsWhere(now) },
       select: { deadline: true },
     })).filter(j => !isClosed(j.deadline, now)).length;
 

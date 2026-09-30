@@ -239,6 +239,7 @@ function parseJsonLd(html, url, sourceName, cfg = {}) {
 async function harvest(key, { dry = false, limit = 0, log = console.log } = {}) {
   const site = SITES[key];
   if (!site) throw new Error('unknown site: ' + key + ' (have: ' + Object.keys(SITES).join(', ') + ')');
+  const jevGate = require('./jev-gate');
   const { PrismaClient } = require('@prisma/client');
   const prisma = new PrismaClient();
   const { findOrCreateEmployer, uniqueJobSlug } = require('./publish')({ prisma });
@@ -255,7 +256,7 @@ async function harvest(key, { dry = false, limit = 0, log = console.log } = {}) 
       const have = new Set((await prisma.job.findMany({ where: { sourceName: site.name }, select: { sourceUrl: true } })).map(j => j.sourceUrl));
       const fresh = found.filter(j => !have.has(j.sourceUrl));
       log('[' + key + '] ' + fresh.length + ' not seen before');
-      let made = 0, skipped = 0, failed = 0;
+      let made = 0, skipped = 0, failed = 0, held = 0;
       for (const j of fresh) {
         if (dry) {
           log('\n--- ' + j.title + (j.titleAm ? ' · ' + j.titleAm : ''));
@@ -278,7 +279,9 @@ async function harvest(key, { dry = false, limit = 0, log = console.log } = {}) 
           const since = new Date(Date.now() - 120 * 86400000);
           const twin = await prisma.job.findFirst({ where: { employerId: emp.id, title: j.title, publishedAt: { gte: since } } });
           if (twin) { skipped++; continue; }
-          await prisma.job.create({ data: {
+          const gate = await jevGate.check(j);   // Jev veto: holds a sure scam-type advert, fails open
+          const created = await prisma.job.create({ data: {
+            published: !gate.hold,
             slug: await uniqueJobSlug(j.title + '-' + j.employer),
             title: j.title, titleAm: j.titleAm, employerId: emp.id, city: j.city, jobType: j.jobType,
             category: require('./categories').categorise(j.title, j.summary),
@@ -286,11 +289,12 @@ async function harvest(key, { dry = false, limit = 0, log = console.log } = {}) 
             howToApply: j.howToApply || null, deadline: j.deadline, publishedAt: j.publishedAt,
             sourceUrl: j.sourceUrl, sourceName: j.sourceName,
           } });
+          if (gate.hold) { await jevGate.recordHeld(created, j, gate, log); held++; continue; }
           made++;
           if (made % 25 === 0) log('  published ' + made);
         } catch (e) { failed++; log('  !! ' + j.title + ': ' + String(e.message).slice(0, 120)); }
       }
-      log('[' + key + '] ' + (dry ? 'would publish ' : 'published ') + made + ', already held ' + skipped + ', failed ' + failed);
+      log('[' + key + '] ' + (dry ? 'would publish ' : 'published ') + made + ', already held ' + skipped + ', failed ' + failed + (held ? ', HELD by Jev ' + held : ''));
       return { made, skipped, failed };
     }
 
@@ -334,7 +338,7 @@ async function harvest(key, { dry = false, limit = 0, log = console.log } = {}) 
     if (limit) urls = urls.slice(0, limit);
     log('[' + key + '] ' + urls.length + ' not seen before');
 
-    let made = 0, skipped = 0, failed = 0, unreachable = 0;
+    let made = 0, skipped = 0, failed = 0, unreachable = 0, held = 0;
     for (const url of urls) {
       let html = await get(url);
       await sleep(PACE_MS);
@@ -388,7 +392,9 @@ async function harvest(key, { dry = false, limit = 0, log = console.log } = {}) 
             }
             skipped++; continue;
           }
-          await prisma.job.create({ data: {
+          const gate = await jevGate.check(j);   // Jev veto: holds a sure scam-type advert, fails open
+          const created = await prisma.job.create({ data: {
+            published: !gate.hold,
             slug: await uniqueJobSlug(j.title + '-' + j.employer),
             title: j.title, titleAm: j.titleAm, employerId: emp.id, city: j.city, jobType: j.jobType,
             category: require('./categories').categorise(j.title, j.summary),
@@ -397,13 +403,14 @@ async function harvest(key, { dry = false, limit = 0, log = console.log } = {}) 
             imageUrl: j.imageUrl || null, deadline: j.deadline, publishedAt: j.publishedAt,
             sourceUrl: j.sourceUrl, sourceName: j.sourceName,
           } });
+          if (gate.hold) { await jevGate.recordHeld(created, j, gate, log); held++; continue; }
           made++;
           if (made % 25 === 0) log('  published ' + made);
         } catch (e) { failed++; log('  !! ' + j.title + ': ' + String(e.message).slice(0, 120)); }
       }
     }
     log('[' + key + '] ' + (dry ? 'would publish ' : 'published ') + made + ', already held ' + skipped
-      + ', no job data ' + failed + ', could not fetch ' + unreachable);
+      + ', no job data ' + failed + ', could not fetch ' + unreachable + (held ? ', HELD by Jev ' + held : ''));
     return { made, skipped, failed, unreachable };
   } finally { await prisma.$disconnect(); }
 }

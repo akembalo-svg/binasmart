@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const fs = require('fs');
 
 const TG_TOK = process.env.BINASMART_TG_TOKEN;
-const TG_CH  = process.env.BINA_TG_CHANNEL;
+const TG_CH  = (process.env.BINA_TG_CHANNEL || process.env.BINA_DIGEST_CHANNEL);
 const FB_ID  = process.env.BINA_FB_PAGE_ID;
 const FB_TOK = process.env.BINA_FB_PAGE_TOKEN;
 

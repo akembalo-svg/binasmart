@@ -47,4 +47,35 @@ function isClosed(deadline, now = Date.now()) {
 const OPEN_GRACE_MS = DAY - ADDIS_OFFSET_MS;   // 21 hours
 const openSince = (now = Date.now()) => new Date((now instanceof Date ? now.getTime() : now) - OPEN_GRACE_MS);
 
-module.exports = { closesAt, isClosed, openSince, isDateOnly, OPEN_GRACE_MS, ADDIS_OFFSET_MS };
+// ---- An advert that never stated a closing date ----
+//
+// isClosed() says a listing with no deadline is never closed, and for a TENDER that is right: the bid
+// document carries the date and the page says so. For a VACANCY it is not. Nothing ever expires it, so
+// it sits on the board for ever. On 2026-09-26 that was 427 EthioJobsHub vacancies whose page states no
+// date anywhere - the other 892 had one printed on them and we simply could not read it until the
+// parser was widened that day; those are now filled in from the employer's own page.
+//
+// So an undated vacancy is treated as closed 90 days after it was published. Ibrahim chose 90 on
+// 2026-09-26, the long end of the two options put to him, and long is the right way to lean: hiding a
+// vacancy that is still open costs somebody a job, showing a dead one costs them an evening.
+//
+// This is a DISPLAY rule and it stays one. We do not write a made-up deadline into the row - the
+// employer never gave one, and a guessed date on a job page is exactly the thing the rest of this
+// codebase refuses to do. The stored value stays null and the page can still be reached directly.
+//
+// The sitemap has used a stricter 45 days for undated rows since before this; that is deliberate and
+// left alone. A sitemap is a request to INDEX, which is a stronger claim than showing a listing.
+const UNDATED_JOB_DAYS = 90;
+const undatedJobsSince = (now = Date.now()) =>
+  new Date((now instanceof Date ? now.getTime() : now) - UNDATED_JOB_DAYS * DAY);
+
+// The `where` fragment every job listing should use: dated and still open, OR undated and still young.
+const openJobsWhere = (now = Date.now()) => ({
+  OR: [
+    { deadline: null, publishedAt: { gte: undatedJobsSince(now) } },
+    { deadline: { gte: openSince(now) } },
+  ],
+});
+
+module.exports = { closesAt, isClosed, openSince, isDateOnly, OPEN_GRACE_MS, ADDIS_OFFSET_MS,
+  UNDATED_JOB_DAYS, undatedJobsSince, openJobsWhere };

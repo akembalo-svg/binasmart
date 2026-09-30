@@ -19,7 +19,7 @@ const absUrl = w => /^https?:\/\//i.test(String(w).trim()) ? String(w).trim() : 
 // And one that belongs to jobs alone: the employer's coordinates are shown as a place to travel to only
 // when a person has checked them (locationChecked). A guessed point sends somebody across Addis for an
 // interview that is somewhere else - they lose the fare and the day, and it is our fault, not the map's.
-const { closesAt, isClosed, openSince } = require('../tenders/deadline');
+const { closesAt, isClosed, openSince, openJobsWhere } = require('../tenders/deadline');
 // The section's own mark and colour (brand/sections.js) - jobs is not the news page in blue.
 const { badge, gradient, mark, brandTile } = require('../brand/sections');
 const { cvForm } = require('./cv-form');
@@ -171,6 +171,72 @@ function jobLd(j, e, escH) {
   return '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>';
 }
 
+// schema.org Organization for a company page. Only what we hold: the name, their own website, the logo
+// we host, the address and city they advertised. No founding date, no employee count, no rating.
+function orgLd(e) {
+  const locality = cleanCity(e.city);
+  const region = regionFor(locality);
+  const ld = {
+    '@context': 'https://schema.org', '@type': 'Organization',
+    name: e.name, url: 'https://bina.et/employer/' + e.slug,
+    ...(e.nameAm && e.nameAm !== e.name ? { alternateName: e.nameAm } : {}),
+    ...(e.website ? { sameAs: absUrl(e.website) } : {}),
+    ...(e.logoUrl ? { logo: 'https://bina.et' + e.logoUrl } : {}),
+    address: { '@type': 'PostalAddress', addressCountry: 'ET',
+      ...(locality ? { addressLocality: locality } : {}), ...(region ? { addressRegion: region } : {}),
+      ...(e.address ? { streetAddress: e.address } : {}) },
+  };
+  return '<script type="application/ld+json">' + JSON.stringify(ld).replace(/</g, '\\u003c') + '</script>';
+}
+
+// What a company's own adverts say about it, counted: the fields it hires in, where, on what terms,
+// since when. Every line is a tally of rows we hold - the page gets longer only by telling the truth.
+function hiringHistory(all) {
+  const tally = key => {
+    const m = new Map();
+    for (const j of all) { const v = key(j); if (v) m.set(v, (m.get(v) || 0) + 1); }
+    return [...m.entries()].sort((a, b) => b[1] - a[1]);
+  };
+  const first = all.reduce((d, j) => (j.publishedAt && (!d || j.publishedAt < d) ? j.publishedAt : d), null);
+  return {
+    total: all.length,
+    since: first,
+    cats: tally(j => j.category),
+    cities: tally(j => cleanCity(j.city)),
+    types: tally(j => j.jobType),
+  };
+}
+
+// One contact card for a company, used on its page and under every vacancy: where it is, how to get there,
+// how to reach it. Every button is only what we hold. A map point nobody has confirmed is shown, labelled as
+// unconfirmed, with directions but no ride booking: the ride button waits for locationChecked (a person).
+function contactCard(e, lang, { escH, rideLabel, unverified, compact = false, claim = false }) {
+  const en = lang === 'en';
+  const has = e.lat != null && e.lng != null;
+  const checked = has && !!e.locationChecked;
+  const btn = (href, label, strong, blank) => `<a href="${escH(href)}"${blank ? ' target="_blank" rel="noopener"' : ''} style="display:inline-block;border-radius:999px;padding:9px 16px;font-weight:700;font-size:13.5px;${strong ? 'background:#064e3b;color:#fff' : 'border:1.5px solid var(--line)'}">${label}</a>`;
+  const buttons = [
+    checked ? btn('/ride?to=' + e.lat + ',' + e.lng + '&label=' + encodeURIComponent(e.name), escH(rideLabel), true) : '',
+    has ? btn('https://www.google.com/maps/dir/?api=1&destination=' + e.lat + ',' + e.lng, en ? '🧭 Directions' : '🧭 አቅጣጫ', false, true) : '',
+    has ? btn('https://www.openstreetmap.org/?mlat=' + e.lat + '&mlon=' + e.lng + '#map=18/' + e.lat + '/' + e.lng, en ? '🗺 Map' : '🗺 ካርታ', false, true) : '',
+    e.phone ? btn('tel:' + String(e.phone).replace(/[^\d+]/g, ''), '📞 ' + escH(e.phone), false) : '',
+    e.website ? btn(absUrl(e.website), en ? '🌐 Website' : '🌐 ድረ ገጽ', false, true) : '',
+  ].filter(Boolean);
+  return `<div class="sans" style="padding:16px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--line);margin-bottom:18px">
+    ${compact ? '' : `<b style="display:block;margin-bottom:6px">${en ? '📇 Where and how to reach' : '📇 አድራሻና መገናኛ'}</b>`}
+    ${e.address ? `<div>📍 ${escH(e.address)}</div>` : `<div style="color:var(--mut)">${en ? 'Address not recorded yet' : 'አድራሻው ገና አልተመዘገበም'}</div>`}
+    ${/* A point matched from OpenStreetMap (ops/places/employer-osm.js) says so once, in the page's language. */''}
+    ${e.locationNote && !/^Map point from OpenStreetMap/.test(e.locationNote) ? `<div style="color:var(--mut);font-size:13px">${escH(e.locationNote)}</div>` : ''}
+    ${has && !checked ? `<div style="margin-top:4px;color:#8a5a00;font-size:13px">${/^Map point from OpenStreetMap/.test(e.locationNote || '')
+      ? (en ? '⚠️ Map point from OpenStreetMap, matched by the company name — not yet confirmed. Call before you travel.' : '⚠️ የካርታው ቦታ ከOpenStreetMap በድርጅቱ ስም የተገኘ ነው — ገና አልተረጋገጠም። ከመሄድዎ በፊት ይደውሉ።')
+      : (en ? '⚠️ Map point not yet confirmed — call before you travel.' : '⚠️ የካርታው ቦታ ገና አልተረጋገጠም — ከመሄድዎ በፊት ይደውሉ።')}</div>` : ''}
+    ${!has ? `<div style="margin-top:6px;color:var(--mut);font-size:13px">${escH(unverified)}</div>` : ''}
+    ${e.email ? `<div style="margin-top:6px">✉️ ${escH(e.email)}</div>` : ''}
+    ${buttons.length ? `<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">${buttons.join('')}</div>` : ''}
+    ${claim && !e.locationChecked ? `<div style="margin-top:12px;font-size:13.5px"><a href="/employer/${escH(e.slug)}/claim${en ? '?lang=en' : ''}" style="font-weight:700">${en ? '🏢 Is this your company? Add your exact address →' : '🏢 ይህ የእርስዎ ድርጅት ነው? ትክክለኛ አድራሻዎን ያክሉ →'}</a></div>` : ''}
+  </div>`;
+}
+
 // The employer's OWN way in, pulled out of their instructions: a Google form, their recruitment page,
 // an email address. That is a link we are glad to publish - it takes the applicant to the company, not
 // to another jobs board. The boards we read from are blocked by name, which is the whole distinction:
@@ -224,6 +290,8 @@ function postedAgo(d, lang) {
 let escHSafe = s => String(s == null ? '' : s);
 
 module.exports = async function jobRoutes(fastify, { prisma, shell, escH, amDate, OWNER_KEY }) {
+  // "Is this your company?": the company gives its address and pin, a person approves (jobs/claim.js).
+  require('./claim')(fastify, { prisma, shell, escH, OWNER_KEY });
   escHSafe = escH;
   const daysLeft = d => Math.ceil((closesAt(d).getTime() - Date.now()) / 86400000);
 
@@ -256,7 +324,10 @@ module.exports = async function jobRoutes(fastify, { prisma, shell, escH, amDate
   // the chat people write to - different accounts, so the link is written out rather than guessed at.
   // On a category page the band subscribes to THAT field; on the board it opens the chooser. A deep
   // link needs no login and no form - one tap and they are subscribed.
-  const alertLink = cat => 'https://t.me/bina_smart_bot?start=jobs_' + (cat && BY_SLUG.get(cat) ? cat : 'all');
+  // Through /jobs/alert/<field> (below), not straight to t.me: on 24 September 2026 two people had alerts and
+  // there was no way to tell whether anybody had even tapped the link. The redirect is one nginx log line a tap.
+  const alertSlug = cat => (cat && BY_SLUG.get(cat) ? cat : 'all');
+  const alertLink = cat => '/jobs/alert/' + alertSlug(cat);
   const tgAlert = (lang, cat) => `<a href="${alertLink(cat)}" target="_blank" rel="noopener" class="sans tgband">
       <span class="tgi">🔔</span>
       <span class="tgt"><b>${lang === 'en'
@@ -269,7 +340,7 @@ module.exports = async function jobRoutes(fastify, { prisma, shell, escH, amDate
   const tgBand = lang => `<a href="https://t.me/binasmart" target="_blank" rel="noopener" class="sans tgband">
       <span class="tgi">✈️</span>
       <span class="tgt"><b>${lang === 'en' ? 'Every new vacancy on Telegram' : 'አዲስ ሥራ በቴሌግራም ይከታተሉ'}</b>
-      <small>${lang === 'en' ? '200+ new jobs a day · free · updated every morning' : 'በየቀኑ 200+ አዲስ ሥራ · ነጻ · በየጠዋቱ ይታደሣል'}</small></span>
+      <small>${lang === 'en' ? 'The best new jobs and closing tenders every morning · free' : 'በየጠዋቱ ምርጥ አዳዲስ ሥራዎችና የሚዘጉ ጨረታዎች · ነጻ'}</small></span>
       <span class="tggo">${lang === 'en' ? 'Join' : 'ይቀላቀሉ'} →</span>
     </a>`;
 
@@ -338,7 +409,7 @@ const ogJobs = cat => {
       ...(catDef ? { category: catDef.slug } : {}) };
     const jobs = showClosed
       ? (await prisma.job.findMany({ where: { ...where, ...search, ...filters, deadline: { lt: openSince(now) } }, include: { employer: true }, orderBy: { deadline: 'desc' }, take: 200 })).filter(j => isClosed(j.deadline, now))
-      : (await prisma.job.findMany({ where: { ...where, ...search, ...filters, OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }], ...(q ? { AND: [search] } : {}) }, include: { employer: true }, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: 200 })).filter(j => !isClosed(j.deadline, now));
+      : (await prisma.job.findMany({ where: { ...where, ...search, ...filters, ...openJobsWhere(now), ...(q ? { AND: [search] } : {}) }, include: { employer: true }, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: 200 })).filter(j => !isClosed(j.deadline, now));
     const cities = (await prisma.job.groupBy({ by: ['city'], _count: { city: true }, orderBy: { _count: { city: 'desc' } }, take: 8 })).filter(c => c.city);
     const closedCount = (await prisma.job.findMany({ where: { ...where, deadline: { lt: openSince(now) } }, select: { deadline: true } })).filter(j => isClosed(j.deadline, now)).length;
     const employers = await prisma.employer.count();
@@ -392,7 +463,7 @@ const ogJobs = cat => {
         : (lang === 'en'
           ? 'Verified Ethiopian job vacancies, each linked to the company that posted it — address, how to apply and the deadline.'
           : 'የተረጋገጡ ክፍት የሥራ ማስታወቂያዎች — ከቀጣሪው ድርጅት መገለጫ፣ አድራሻና የማመልከቻ መንገድ ጋር።'),
-      canonical: 'https://bina.et/jobs' + (catDef ? '/category/' + catDef.slug : ''), extraHead: JOBS_HEAD, body, active: 'jobs',
+      canonical: 'https://bina.et/jobs' + (catDef ? '/category/' + catDef.slug : ''), extraHead: JOBS_HEAD + hubLd(catDef ? catDef.en + ' jobs in Ethiopia' : 'Jobs in Ethiopia', 'https://bina.et/jobs' + (catDef ? '/category/' + catDef.slug : ''), jobs.map(j => ({ url: 'https://bina.et/jobs/' + j.slug, name: j.title }))), body, active: 'jobs',
       ogImage: ogJobs(catDef && catDef.slug),
     }));
   }
@@ -435,7 +506,18 @@ const ogJobs = cat => {
   });
 
   fastify.get('/jobs/category/:cat', async (req, reply) => jobsPage(req, reply, String(req.params.cat || '')));
+// CollectionPage + ItemList for a hub page (Google reads the list; the page itself is unchanged).
+  function hubLd(name, url, items) {
+    const d = { '@context': 'https://schema.org', '@type': 'CollectionPage', name, url, mainEntity: { '@type': 'ItemList', numberOfItems: items.length,
+      itemListElement: items.slice(0, 30).map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: x.url, name: String(x.name || '').slice(0, 150) })) } };
+    return '<script type="application/ld+json">' + JSON.stringify(d).replace(/</g, '\\u003c') + '</script>';
+  }
   fastify.get('/jobs', async (req, reply) => jobsPage(req, reply, null));
+
+  fastify.get('/jobs/alert/:field', async (req, reply) => {
+    const f = alertSlug(String(req.params.field || ''));
+    return reply.header('cache-control', 'no-store').header('x-robots-tag', 'noindex').redirect('https://t.me/bina_smart_bot?start=jobs_' + f, 302);
+  });
 
   fastify.get('/jobs/:slug', async (req, reply) => {
     const t = pick(req), lang = langOf(req);
@@ -490,6 +572,7 @@ const ogJobs = cat => {
           return `<div style="margin-top:12px"><a href="${escH(r.href)}" target="_blank" rel="noopener" style="display:inline-block;background:${gradient('jobs')};color:#fff;border-radius:999px;padding:11px 24px;font-weight:800;font-size:14.5px">${label} →</a>${note}</div>`;
         })()}</div>` : ''}
       <div id="${j.howToApply ? 'apply-cv' : 'apply'}">${cvForm({ job: j, lang, escH, main: !j.howToApply })}</div>
+      ${tgAlert(lang, j.category)}
       <div class="sans" style="margin:18px 0;padding:14px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--line)"><!-- guide-links:job-detail --><b>${lang === 'en' ? '📚 Before you apply' : '📚 ከማመልከትዎ በፊት'}</b><div style="margin-top:6px;font-size:14px;line-height:1.9"><a href="${lang === 'en' ? '/cv-ethiopia-en' : '/cv-ethiopia'}" style="font-weight:700">${lang === 'en' ? '📄 How to write a CV for Ethiopian jobs' : '📄 የሲቪ አጻጻፍ መመሪያ'}</a> · <a href="/interview-questions-ethiopia" style="font-weight:700">${lang === 'en' ? '🤝 Interview questions' : '🤝 የቃለ መጠይቅ ጥያቄዎች'}</a>${j.category === 'banking' ? ` · <a href="/bank-jobs-ethiopia" style="font-weight:700">${lang === 'en' ? '🏦 What Ethiopian banks ask for' : '🏦 ባንኮች ምን ይጠይቃሉ'}</a>` : ''}</div></div>
 
       <div class="sans" style="margin:18px 0;padding:18px;border-radius:16px;background:#fff;border:1.5px solid var(--line)">
@@ -523,12 +606,48 @@ const ogJobs = cat => {
   fastify.get('/employer/:slug', async (req, reply) => {
     const t = pick(req), lang = langOf(req);
     const e = await prisma.employer.findUnique({ where: { slug: String(req.params.slug) } });
+    // A company merged into another keeps its address: 301 to the one it became (ops/jobs/clean-employers.js).
+    if (!e && prisma.employerAlias) {
+      const a = await prisma.employerAlias.findUnique({ where: { slug: String(req.params.slug) } }).catch(() => null);
+      const to = a && await prisma.employer.findUnique({ where: { id: a.employerId }, select: { slug: true } });
+      if (to) return reply.redirect('/employer/' + to.slug + (req.query.lang === 'en' ? '?lang=en' : ''), 301);
+    }
     if (!e) return reply.code(404).type('text/html').send(shell({ title: 'አልተገኘም', desc: '', canonical: 'https://bina.et/jobs', body: '<main><div class="empty"><div class="big">🔍</div><h3>ይህ ድርጅት የለም</h3><p class="sans"><a href="/jobs">ወደ ክፍት ሥራዎች →</a></p></div></main>', active: 'jobs' }));
     const now = new Date();
     const all = await prisma.job.findMany({ where: { employerId: e.id, published: true }, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: 120 });
     const open = all.filter(j => !isClosed(j.deadline, now));
     const shut = all.filter(j => isClosed(j.deadline, now));
     const mapped = e.lat != null && e.lng != null && e.locationChecked;
+    const h = hiringHistory(all);
+    const en = lang === 'en';
+    const monthYear = d => new Date(d).toLocaleDateString(en ? 'en-GB' : 'en-GB', { month: 'long', year: 'numeric' });
+    const sectorDef = e.sector ? CATEGORIES.find(c => catLabel(c.slug, 'en') === e.sector) : null;
+    // Other companies in the same line of business that are hiring today - the way sideways for a reader
+    // whose company has nothing open, and the link Google follows from one company to the next.
+    let peers = [];
+    if (sectorDef) {
+      const live = await hiringNow();
+      const ids = [...live.keys()].filter(id => id !== e.id);
+      if (ids.length) {
+        peers = await prisma.employer.findMany({ where: { id: { in: ids }, sector: e.sector },
+          select: { id: true, slug: true, name: true, city: true, sector: true, logoUrl: true } });
+        peers = peers.sort((a, b) => (live.get(b.id) || 0) - (live.get(a.id) || 0) || a.name.localeCompare(b.name)).slice(0, 6)
+          .map(p => ({ p, n: live.get(p.id) || 0 }));
+      }
+    }
+    const typeName = ty => (en ? ty.replace('-', ' ') : (TYPE_AM[ty] || ty));
+    const history = h.total ? `<div class="sans" style="padding:16px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--line);margin:0 0 18px">
+        <b style="display:block;margin-bottom:6px">${en ? '📊 Hiring history on BinaSmart' : '📊 በቢናስማርት ላይ ያለው የቅጥር ታሪክ'}</b>
+        <div style="line-height:1.8">
+          ${en
+            ? `${h.total} ${h.total === 1 ? 'advert' : 'adverts'} recorded${h.since ? ' since ' + monthYear(h.since) : ''} — ${open.length} open now, ${shut.length} closed.`
+            : `${h.since ? 'ከ' + monthYear(h.since) + ' ጀምሮ ' : ''}${h.total} ማስታወቂያዎች ተመዝግበዋል — ${open.length} አሁን ክፍት፣ ${shut.length} የተዘጉ።`}
+          ${h.cats.length ? `<div>${en ? 'Hires in' : 'የሚቀጥርባቸው ዘርፎች'}: ${h.cats.slice(0, 4).map(([c, n]) => `<a href="/jobs/category/${escH(c)}${qs(req)}">${escH(catLabel(c, lang))}</a> (${n})`).join(' · ')}</div>` : ''}
+          ${h.cities.length ? `<div>${en ? 'Places' : 'ቦታዎች'}: ${h.cities.slice(0, 4).map(([c, n]) => `${escH(c)} (${n})`).join(' · ')}</div>` : ''}
+          ${h.types.length ? `<div>${en ? 'Terms' : 'የቅጥር ዓይነት'}: ${h.types.map(([ty, n]) => `${escH(typeName(ty))} (${n})`).join(' · ')}</div>` : ''}
+        </div>
+        <div style="margin-top:6px;color:var(--mut);font-size:12.5px">${en ? 'Counted from this company\'s own adverts. Nothing here is estimated.' : 'ከድርጅቱ ራሱ ማስታወቂያዎች የተቆጠረ ነው፤ ግምት የለበትም።'}</div>
+      </div>` : '';
     const body = `<main><article class="art">
       ${langToggle(req)}
       <div style="display:flex;gap:14px;align-items:center">${avatarFor(e, 62)}
@@ -536,23 +655,25 @@ const ogJobs = cat => {
       ${e.nameAm && e.nameAm !== e.name ? `<p class="lead">${escH(e.nameAm)}</p>` : ''}
       ${e.about ? `<p class="lead">${escH(e.about)}</p>` : ''}
       <div class="t-tags sans" style="margin:8px 0 16px">
-        ${e.sector ? `<span class="t-tag">🏭 ${escH(e.sector)}</span>` : ''}
+        ${e.sector ? (sectorDef ? `<a class="t-tag" href="/employers/${sectorDef.slug}${qs(req)}">🏭 ${escH(en ? sectorDef.en : sectorDef.am)}</a>` : `<span class="t-tag">🏭 ${escH(e.sector)}</span>`) : ''}
         <span class="t-tag">📍 ${escH(e.city)}</span>
         <span class="t-tag">💼 ${open.length} ${t.open}</span>
       </div>
-      <div class="sans" style="padding:16px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--line);margin-bottom:18px">
-        ${e.address ? `<div>📍 ${escH(e.address)}</div>` : (lang === 'en' ? '<div style="color:var(--mut)">Address not recorded yet</div>' : '<div style="color:var(--mut)">አድራሻው ገና አልተመዘገበም</div>')}
-        ${e.locationNote ? `<div style="color:var(--mut);font-size:13px">${escH(e.locationNote)}</div>` : ''}
-        ${mapped ? `<div style="margin-top:10px"><a href="/ride?to=${e.lat},${e.lng}&label=${encodeURIComponent(e.name)}" style="background:#064e3b;color:#fff;border-radius:999px;padding:9px 18px;font-weight:700;font-size:13.5px">${t.ride}</a></div>`
-          : `<div style="margin-top:6px;color:var(--mut);font-size:13px">${t.unverified}</div>`}
-        ${e.phone ? `<div style="margin-top:8px">📞 <a href="tel:${escH(e.phone)}">${escH(e.phone)}</a></div>` : ''}
-        ${e.email ? `<div>✉️ ${escH(e.email)}</div>` : ''}
-        ${e.website ? `<div>🔗 <a href="${escH(absUrl(e.website))}" target="_blank" rel="noopener">${escH(e.website)}</a></div>` : ''}
-      </div>
-      ${open.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding-bottom:8px">${t.openVac}</h2>${open.map(j => `<div class="t-card"><div><h3><a href="/jobs/${j.slug}">${escH(j.titleAm || j.title)}</a></h3><div class="t-tags sans"><span class="t-tag">📍 ${escH(j.city)}</span>${typePill(j.jobType, lang)}${dlPill(j.deadline, lang)}</div></div></div>`).join('')}` : '<div class="empty"><div class="big">💼</div><h3>${t.noJobs}</h3></div>'}
-      ${shut.length ? `<p class="sans" style="margin-top:20px;color:var(--mut);font-size:13.5px">🔒 ${shut.length} ${lang === 'en' ? 'closed' : 'የተዘጉ ማስታወቂያዎች'}</p>` : ''}
+      ${contactCard(e, lang, { escH, rideLabel: t.ride, unverified: t.unverified, claim: true })}
+      ${open.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding-bottom:8px">${t.openVac}</h2>${open.map(j => `<div class="t-card"><div><h3><a href="/jobs/${j.slug}">${escH(j.titleAm || j.title)}</a></h3><div class="t-tags sans"><span class="t-tag">📍 ${escH(j.city)}</span>${typePill(j.jobType, lang)}${dlPill(j.deadline, lang)}</div></div></div>`).join('')}` : `<div class="empty"><div class="big">💼</div><h3>${escH(t.noJobs)}</h3></div>`}
+      ${history}
+      ${shut.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding:14px 0 8px">🔒 ${en ? 'Past adverts' : 'ያለፉ ማስታወቂያዎች'} · ${shut.length}</h2>
+        <ul class="sans" style="margin:0 0 18px;padding-left:18px;line-height:1.9">${shut.slice(0, 12).map(j => `<li><a href="/jobs/${j.slug}${qs(req)}">${escH(j.titleAm || j.title)}</a>${j.deadline ? ` <span style="color:var(--mut);font-size:13px">· ${en ? 'closed' : 'ተዘግቷል'} ${new Date(j.deadline).toISOString().slice(0, 10)}</span>` : ''}</li>`).join('')}</ul>` : ''}
+      ${peers.length ? `<h2 class="sans" style="font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;padding:14px 0 8px">${en ? 'Also hiring in ' + escH(sectorDef.en) : 'በ' + escH(sectorDef.am) + ' ዘርፍ ሌሎች የሚቀጥሩ'}</h2>
+        <div style="display:flex;flex-direction:column;gap:10px">${peers.map(x => employerCard(x.p, x.n, lang)).join('')}</div>
+        <p class="sans" style="margin:10px 0 0"><a href="/employers/${sectorDef.slug}${qs(req)}" style="font-weight:700">${en ? 'All ' + escH(sectorDef.en.toLowerCase()) + ' companies hiring →' : 'በዚህ ዘርፍ ሁሉም የሚቀጥሩ ድርጅቶች →'}</a></p>` : ''}
     </article></main>`;
-    reply.type('text/html').send(shell({ title: e.name + ' · ክፍት የሥራ ቦታዎች', desc: (e.about || (e.name + ' — ክፍት የሥራ ቦታዎችና የድርጅት መገለጫ በቢናስማርት።')).slice(0, 160), canonical: 'https://bina.et/employer/' + e.slug, extraHead: JOBS_HEAD, body, active: 'jobs',
+    const thin = !open.length && h.total <= 1;
+    const desc = e.about || (en
+      ? `${e.name}${e.city ? ', ' + e.city : ''} — ${open.length} open ${open.length === 1 ? 'vacancy' : 'vacancies'} now; ${h.total} ${h.total === 1 ? 'advert' : 'adverts'} on BinaSmart${h.cats.length ? ', mostly ' + catLabel(h.cats[0][0], 'en') : ''}.`
+      : `${e.name} — አሁን ${open.length} ክፍት የሥራ ቦታ፤ በቢናስማርት ${h.total} ማስታወቂያዎች${h.cats.length ? '፣ በብዛት በ' + catLabel(h.cats[0][0], 'am') + ' ዘርፍ' : ''}።`);
+    reply.type('text/html').send(shell({ title: e.name + ' · ክፍት የሥራ ቦታዎች', desc: desc.slice(0, 160), canonical: 'https://bina.et/employer/' + e.slug,
+      extraHead: JOBS_HEAD + orgLd(e) + (thin ? '<meta name="robots" content="noindex,follow">' : ''), body, active: 'jobs',
       ogImage: ogJobs(null) }));
   });
 
@@ -564,7 +685,18 @@ const ogJobs = cat => {
   //
   // Only companies with a vacancy that is still open are listed. Same rule as the sitemap: a directory
   // padded with companies that are not hiring asks Google to rank a promise we are not keeping.
+  // Who is hiring today, counted over every open vacancy (~4,500 rows). Every company page asks this
+  // for its "also hiring" list, so a crawler walking 1,780 of them would recount the whole board 1,780
+  // times; measured 24 September 2026 at 50-130 ms a page against 7 ms without it. Five minutes old is
+  // fresh enough for a list of companies - the board itself changes a few times a day.
+  let hiringMemo = null;
   async function hiringNow() {
+    if (hiringMemo && Date.now() - hiringMemo.at < 300000) return hiringMemo.live;
+    const live = await countHiring();
+    hiringMemo = { at: Date.now(), live };
+    return live;
+  }
+  async function countHiring() {
     const now = new Date();
     const jobs = await prisma.job.findMany({
       where: { published: true, OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }] },
@@ -622,6 +754,7 @@ const ogJobs = cat => {
       <p class="lead">${emps.length} ${lang === 'en'
         ? 'companies with at least one vacancy open right now. Every one is a company that actually advertised — nothing here is invented.'
         : 'ድርጅቶች አሁን ክፍት የሥራ ቦታ አላቸው። ሁሉም በእውነት ማስታወቂያ ያወጡ ናቸው።'}</p>
+      <p class="sans" style="font-size:13.5px;margin:0 0 12px">🏢 ${lang === 'en' ? 'Is your company listed? Open its page and tap «Is this your company?» to add your exact address and map pin — free.' : 'ድርጅትዎ እዚህ አለ? ገጹን ከፍተው «ይህ የእርስዎ ድርጅት ነው?» በመጫን ትክክለኛ አድራሻዎንና የካርታ ቦታዎን በነጻ ያክሉ።'}</p>
       ${chips ? `<div class="t-tags sans" style="margin:10px 0 18px">${chips}</div>` : ''}
       ${def ? `<p class="sans" style="margin:0 0 14px"><a href="/employers">← ${lang === 'en' ? 'all sectors' : 'ሁሉም ዘርፎች'}</a></p>` : ''}
       <div style="display:flex;flex-direction:column;gap:10px">${emps.map(e => employerCard(e, live.get(e.id) || 0, lang)).join('')}</div>
@@ -640,7 +773,7 @@ const ogJobs = cat => {
         : (lang === 'en' ? 'Every Ethiopian company advertising a vacancy on BinaSmart right now, by sector, with addresses and logos.'
                          : 'በቢናስማርት ላይ አሁን ማስታወቂያ ያወጡ የኢትዮጵያ ድርጅቶች — በዘርፍ፣ ከአድራሻና ከምልክት ጋር።'),
       canonical: 'https://bina.et/employers' + (def ? '/' + def.slug : ''),
-      extraHead: JOBS_HEAD, body, active: 'jobs', ogImage: ogJobs(def && def.slug),
+      extraHead: JOBS_HEAD + hubLd(def ? def.en + ' companies hiring in Ethiopia' : 'Companies hiring in Ethiopia', 'https://bina.et/employers' + (def ? '/' + def.slug : ''), emps.map(e => ({ url: 'https://bina.et/employer/' + e.slug, name: e.name }))), body, active: 'jobs', ogImage: ogJobs(def && def.slug),
     }));
   }
 

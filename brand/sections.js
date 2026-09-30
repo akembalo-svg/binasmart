@@ -26,6 +26,10 @@ const MARKS = {
   ride: '<path d="M4 15.5h16"/><path d="M5.5 15.5l1.4-4.2A2 2 0 0 1 8.8 10h6.4a2 2 0 0 1 1.9 1.3l1.4 4.2"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/><path d="M12 3.5c1.7 0 3 1.3 3 3 0 2-3 4.5-3 4.5S9 8.5 9 6.5c0-1.7 1.3-3 3-3z"/>',
   // A bed and a key: a room that is actually held for the guest.
   hotels: '<path d="M3 18v-7M3 14h12a4 4 0 0 1 4 4v0"/><path d="M3 18h18"/><circle cx="7" cy="10.5" r="2"/><circle cx="18" cy="7" r="2.2"/><path d="M18 9.2V13M17 11.4h2"/>',
+  // A house and the tick that says the listing was taken from the company's own site and checked weekly.
+  property: '<path d="M3.5 11.2 12 4l8.5 7.2"/><path d="M5.8 9.6V20h12.4V9.6"/><path d="M9.4 14.6l1.8 1.8 3.4-3.4"/>',
+  // A car and the tick above it: a real car on a real dealer's lot, checked.
+  cars: '<path d="M3.5 16h17"/><path d="M5 16l1.6-4.3A2 2 0 0 1 8.5 10.4h7a2 2 0 0 1 1.9 1.3L19 16"/><circle cx="7.6" cy="18" r="1.5"/><circle cx="16.4" cy="18" r="1.5"/><path d="M10 6.2l1.5 1.5 3-3"/>',
 };
 
 // Hero gradient per section. Tenders green and ride teal are kept because readers already know them.
@@ -36,6 +40,8 @@ const COLOURS = {
   news: ['#1f2937', '#475569'],
   ride: ['#0f766e', '#14b8a6'],
   hotels: ['#581c87', '#9333ea'],
+  property: ['#713f12', '#ca8a04'],   // gold: the free warm hue (cinema has orange)
+  cars: ['#881337', '#e11d48'],       // red: the free hue opposite ride's teal
 };
 
 // The mark as a standalone SVG, sized for a hero badge or an inline icon.
@@ -70,7 +76,7 @@ function badge(section, { size = 30 } = {}) {
 // section's own colour. A reader landing on /jobs from a search sees a jobs logo, not the news one.
 // Sections we have no mark for keep the house tile, which is what /static/site-v3.css draws.
 const SUFFIX = {
-  jobs: 'ሥራ', tenders: 'ጨረታ', news: 'ዜና', cinema: 'ሲኒማ', ride: 'ራይድ', hotels: 'ሆቴል',
+  jobs: 'ሥራ', tenders: 'ጨረታ', news: 'ዜና', cinema: 'ሲኒማ', ride: 'ራይድ', hotels: 'ሆቴል', property: 'ቤት', cars: 'መኪና',
 };
 function brandTile(section, { size = 30 } = {}) {
   if (!MARKS[section]) return '<i class="lg"></i>';

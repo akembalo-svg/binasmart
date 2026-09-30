@@ -14,12 +14,18 @@ BinaSmart (bina.et) is Ethiopia's all-in-one digital platform: fixed-price ride-
 | `search_places` | buildings, hotels, hospitals, shops (cafés, restaurants, pharmacies, banks…) | no |
 | `get_hotel_rooms` | room types and nightly prices | no |
 | `get_hospital_departments` | departments, fees, slots left | no |
+| `search_health` | hospitals, clinics, dentists, labs and doctors across Addis Ababa: by kind, sub-city, specialty or near a place (nearest first), each with its bina.et/health page and landline. Not medical advice; emergencies 907 | no |
 | `list_events` | upcoming films, concerts and events on sale, prices, seats left | no |
 | `list_films` | Amharic films to watch online: free or 48-hour rental, watch url | no |
 | `get_ethiopia_guide` | 24 step-by-step guides: Fayda, telebirr, TIN, VAT, eVisa, driving licence… | no |
 | `search_knowledge` | semantic search over every BinaSmart service, its rules, the guides and practical Addis Ababa knowledge; returns passages + source_url | no |
 | `list_pool_corridors` | BinaPool shared-commute corridors open now, stops, live seat-price ladder, cars filling | no |
 | `find_pool_groups` | cars filling within ~2.5 km of a point: seats left, price, women-only, share url | no |
+| `list_tenders` | open Ethiopian tender notices: organisation, deadline, days left, budget, link to the original notice | no |
+| `list_tender_categories` | which tender categories are open now and how many in each | no |
+| `get_tender` | one tender in full, including the notice body | no |
+| `list_news` | recent BinaSmart news, mostly Amharic: technology, business, law, real estate | no |
+| `get_news_article` | one news article in full | no |
 
 ## Connect
 - **Claude Code:** `claude mcp add --transport http binasmart https://bina.et/mcp`

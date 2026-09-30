@@ -16,6 +16,8 @@ import { registerGuideTools, loadGuides } from './tools/guides.mjs';
 import { registerKnowledgeTools } from './tools/knowledge.mjs';
 import { registerContentTools } from './tools/content.mjs';
 import { registerJobTools } from './tools/jobs.mjs';
+import { registerMarketTools } from './tools/market.mjs';
+import { registerHealthTools } from './tools/health.mjs';
 
 const { makeGate } = apiGate;
 const { makeKeystore } = apiKeystore;
@@ -28,7 +30,9 @@ const DOCS_MD = fs.existsSync(path.join(here, 'docs.md')) ? fs.readFileSync(path
 const INSTRUCTIONS =
   'BinaSmart (bina.et) is Ethiopia\'s all-in-one digital platform. Tools: fixed-price ride-hailing in Addis Ababa only ' +
   '(quote_ride → request_ride → get_ride_status / cancel_ride), a directory of buildings, hotels, hospitals and shops ' +
-  '(search_places, get_hotel_rooms, get_hospital_departments), upcoming events (list_events), open Ethiopian tender ' +
+  '(search_places, get_hotel_rooms, get_hospital_departments), hospitals, clinics, dentists, labs and doctors across Addis with ' +
+  'their bina.et/health pages (search_health; not medical advice, emergencies 907), homes for sale and rent (search_properties), cars for sale ' +
+  '(search_cars), hotels and guest houses (search_hotels), upcoming events (list_events), open Ethiopian tender ' +
   'notices with deadlines (list_tenders, list_tender_categories, get_tender), Amharic news (list_news, ' +
   'get_news_article), 24 bilingual Digital ' +
   'Ethiopia guides (get_ethiopia_guide), BinaPool shared commute (list_pool_corridors, find_pool_groups) and a knowledge ' +
@@ -56,6 +60,8 @@ export function buildServer({ rideApi, db, guides, callerKey, callsRL, bookRL })
   registerKnowledgeTools(server, { api: rideApi, wrap, json });
   registerContentTools(server, { db, wrap, json });
   registerJobTools(server, { db, wrap, json });
+  registerMarketTools(server, { wrap, json });
+  registerHealthTools(server, { wrap, json });
   return server;
 }
 

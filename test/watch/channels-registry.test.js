@@ -58,12 +58,14 @@ test('handles are unique, and a handle is written with its @', () => {
   }
 });
 
-test('the survey shipped fifteen office channels, six outlet channels and five feeds', () => {
+// 2026-09-19: Ibrahim added two outlets (Tikvah, the Prime Minister's channel) and two offices whose
+// channels exist but cannot be read without an account (ICS, the Supreme Court execution office).
+test('the registry holds fifteen office channels, eight outlet channels and five feeds', () => {
   const offices = sources.filter(s => s.kind === 'office' && s.handle);
   const outlets = sources.filter(s => s.kind === 'outlet' && s.handle);
   const feeds = sources.filter(s => s.feed);
   assert.equal(offices.length, 15);
-  assert.equal(outlets.length, 6);
+  assert.equal(outlets.length, 8);
   assert.equal(feeds.length, 5);
 });
 
@@ -76,8 +78,8 @@ test('the two entries Ibrahim has not cleared ship held back', () => {
   assert.match(etrade.note, /dormant/);
 });
 
-test('the six offices with no channel are recorded, with the handle counts tried', () => {
-  assert.equal(reg.uncovered.length, 6);
+test('the eight offices with no readable channel are recorded, with the handle counts tried', () => {
+  assert.equal(reg.uncovered.length, 8);
   for (const u of reg.uncovered) {
     assert.ok(u.office && u.name, 'an uncovered office is missing a name');
     assert.ok(Number.isInteger(u.handlesTried) && u.handlesTried > 0, u.office + ' does not say how many handles were tried');

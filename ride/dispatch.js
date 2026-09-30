@@ -105,7 +105,37 @@ function makeDispatch({ prisma, telegram, settings, offers, setTimeoutFn, clearT
     return n;
   }
 
-  return { start, cancel, toConcierge, sweepStale, sweepAbandoned, setOffers, QUIET_MS };
+  // A request nobody could serve. With no driver online the rider saw "a dispatcher is assigning your
+  // driver" with no end: 13 requests in three weeks to 2026-09-24, one completed, nine riders gave up
+  // within five minutes and three requests sat in 'dispatching' for days. Now a request still unserved
+  // after UNSERVED_MIN is closed as 'nodriver', the rider is told (riderNotify) and the owner gets one
+  // line. Pool rides have their own sweep and are left alone. Nothing is charged: no driver ever had it.
+  const UNSERVED_MIN = 10;
+  const WAITING = ['requested', 'dispatching'];
+  async function sweepUnserved(now = Date.now(), notify) {
+    const rides = await prisma.ride.findMany({
+      where: { status: { in: WAITING }, concierge: true, driverId: null, pool: { is: null },
+        requestedAt: { lt: new Date(now - UNSERVED_MIN * 60000) } },
+      select: { id: true, tier: true, fareEtb: true }, take: 50 });
+    let n = 0;
+    for (const r of rides) {
+      try {
+        const u = await prisma.ride.updateMany({ where: { id: r.id, status: { in: WAITING }, driverId: null },
+          data: { status: 'cancelled', cancelledBy: 'nodriver', cancelledAt: new Date(now) } });
+        if (!u.count) continue;                       // a driver or the rider got there first
+        cancel(r.id);
+        if (prisma.rideOffer) await prisma.rideOffer.updateMany({ where: { rideId: r.id, status: 'open' }, data: { status: 'expired', decidedAt: new Date(now) } });
+        n++;
+        if (notify) await Promise.resolve().then(() => notify(r.id)).catch(() => {});
+        if (telegram.ownerNote) await telegram.ownerNote('⚪ No driver within ' + UNSERVED_MIN + ' min — request closed and the rider told ('
+          + String(r.tier).toUpperCase() + ', ' + r.fareEtb + ' ETB).').catch(() => {});
+      } catch (e) { console.error('[ride/dispatch] unserved sweep failed for ride ' + r.id + ':', e.message); }
+    }
+    if (n) console.log('[ride/dispatch] ' + n + ' unserved request(s) closed after ' + UNSERVED_MIN + ' min');
+    return n;
+  }
+
+  return { start, cancel, toConcierge, sweepStale, sweepAbandoned, sweepUnserved, setOffers, QUIET_MS, UNSERVED_MIN };
 }
 
 module.exports = { makeDispatch };

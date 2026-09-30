@@ -62,3 +62,34 @@ test('server.js asks assistant/force.js and keeps no rule of its own', () => {
   assert.ok(/biniForce\.shouldForceTool\(msg\)/.test(src), 'the route must use the shared predicate');
   assert.ok(!/FORCE_TOOL_RE/.test(src), 'a second copy of the rule is back in server.js');
 });
+
+// 30 Sep 2026: "and with bajaj?" after a ride-price question was sometimes answered with only a link to /ride.
+test('a short tier-only follow-up to a ride-price question is forced; look-alikes are not', () => {
+  const { isRideFollowUp } = require('../assistant/force');
+  assert.equal(isRideFollowUp('and with bajaj?', 'How much is a ride from Bole to Piassa?'), true);
+  assert.equal(isRideFollowUp('ባጃጅስ?', 'ከቦሌ ወደ ፒያሳ ስንት ነው?'), true);
+  assert.equal(isRideFollowUp('what about economy?', 'How much is an economy flight to Dubai?'), false);   // a flight, not a ride
+  assert.equal(isRideFollowUp('and with bajaj?', 'hotel in Bole'), false);
+  assert.equal(isRideFollowUp('and with bajaj?', ''), false);
+  assert.equal(isRideFollowUp('I want to buy a bajaj for my business in Adama next year', 'How much is a ride from Bole to Piassa?'), false);
+  const src = require('fs').readFileSync(require('path').join(__dirname, '..', 'server.js'), 'utf8');
+  assert.ok(src.includes('biniForce.isRideFollowUp(msg, prevAsk && prevAsk.content)'), 'server.js must ask isRideFollowUp with the previous question');
+});
+
+test('ራይድ is a ride cue: an Amharic ride-price question without ወደ is forced', () => {
+  assert.equal(shouldForceTool('ከቦሌ ፒያሳ ራይድ ስንት ነው?'), true);
+  assert.equal(shouldForceTool('ራይድ ስንት ያስከፍላል?'), true);
+  assert.equal(shouldForceTool('ቴሌብር 1,000 ብር ለመላክ ስንት ያስከፍላል?'), false);   // the §15d regression stays fixed
+});
+
+// 30 Sep 2026 replay: "መገናኛ አካባቢ ምሳ መብላት የሚችሉባቸውን ቦታዎች ልፈልግልዎ። እባክዎ ትንሽ ይጠብቁ።" after search_shops had answered.
+test('a reply that only promises a search is recognised; a real answer that says "let me know" is not', () => {
+  const { isPromiseOnly } = require('../assistant/force');
+  assert.equal(isPromiseOnly('መገናኛ አካባቢ ምሳ መብላት የሚችሉባቸውን ቦታዎች ልፈልግልዎ። እባክዎ ትንሽ ይጠብቁ።'), true);
+  assert.equal(isPromiseOnly('One moment, let me search for restaurants near Megenagna.'), true);
+  assert.equal(isPromiseOnly('My Burger is 0.2 km from Megenagna: https://www.openstreetmap.org/?mlat=9.02 . Let me know if you want a ride there.'), false);
+  assert.equal(isPromiseOnly('Here are some places. Please wait for the driver at the gate. ' + 'x'.repeat(400)), false);   // long answers are answers
+  const src = require('fs').readFileSync(require('path').join(__dirname, '..', 'server.js'), 'utf8');
+  assert.ok(src.includes("if (name === 'search_shops' && r && !r.error) lastShops = { a: args, r };"), 'server.js must keep the last search_shops result');
+  assert.ok(src.includes('bForce.isPromiseOnly(text)'), 'server.js must answer again from it');
+});

@@ -102,7 +102,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     let ld;
     if (showId) {
       const s = await loadShow(showId);
-      if (!s || !s.hall || !s.event) return html;
+      if (!s || !s.hall || !s.event) return null;   // no such show: the route answers 404, not the hub with a 200
       const sold = (await prisma.ticket.findMany({ where: { showId: s.id, status: { in: SOLD_STATES } } })).reduce((n, t) => n + (t.seats || []).length, 0);
       ld = ldFor(s, (s.hall.capacity || 0) - sold);
       const v = s.hall.venue || {}, e = s.event;
@@ -134,7 +134,7 @@ module.exports = function cinemaRoutes(fastify, { prisma, holds, tickets, checki
     return html;
   }
   fastify.get('/cinema', async (req, reply) => { try { return reply.type('text/html; charset=utf-8').send(await cinemaPage(null)); } catch (e) { console.error('[cinema] page: ' + e.message); return reply.sendFile('cinema.html'); } });
-  fastify.get('/cinema/:showId', async (req, reply) => { try { return reply.type('text/html; charset=utf-8').send(await cinemaPage(String(req.params.showId))); } catch (e) { console.error('[cinema] show page: ' + e.message); return reply.sendFile('cinema.html'); } });
+  fastify.get('/cinema/:showId', async (req, reply) => { try { const h = await cinemaPage(String(req.params.showId)); if (h === null) return reply.callNotFound(); return reply.type('text/html; charset=utf-8').send(h); } catch (e) { console.error('[cinema] show page: ' + e.message); return reply.sendFile('cinema.html'); } });
 
   // ---------- public ----------
   fastify.get('/api/cinema/shows', async () => {

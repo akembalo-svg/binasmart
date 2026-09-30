@@ -48,11 +48,13 @@ for (const P of PAGES) {
 
   test(P.file + ': loads the shared chat, versioned, core before the page script, footer kept', () => {
     const order = ['/static/fonts/fonts.css?v=2', '/static/site-v3.css?v=5', '/static/agent-chat.css?v=1',
-      '/static/agent-chat-core.js?v=1', '/static/agent-chat.js?v=1', '/static/bina-footer.js?v=9'];
+      '/static/agent-chat-core.js?v=1', '/static/agent-chat.js?v=2', '/static/bina-footer.js?v=10'];
     let at = -1;
     for (const a of order) { const i = html.indexOf(a); assert.ok(i > at, a + ' missing or out of order'); at = i; }
     for (const f of ['agent-chat.css', 'agent-chat-core.js', 'agent-chat.js', 'agents/' + P.slug + '.svg']) assert.ok(fs.existsSync(path.join(PUB, f)), f);
-    const inline = [...html.matchAll(/<script(?![^>]*\bsrc=)([^>]*)>/g)].map(m => m[1]);
+    // JSON-LD is structured data for search engines, never executed, so it is not an inline script here.
+    const inline = [...html.matchAll(/<script(?![^>]*\bsrc=)([^>]*)>/g)].map(m => m[1])
+      .filter(attrs => !/type="application\/ld\+json"/.test(attrs));
     assert.deepEqual(inline, [' id="agent-chat-config" type="application/json"'], 'no inline script besides the config');
     assert.ok(html.includes('id="agent-chat"'));
   });

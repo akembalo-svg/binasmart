@@ -31,13 +31,16 @@ test('GET /mcp serves markdown docs; /mcp/health answers', async () => {
   const h = await fetch(url + '/health'); assert.equal(h.status, 200); assert.deepEqual(await h.json(), { ok: true, db: true, ride_api: true });
 });
 
-test('initialize + tools/list exposes exactly the 13 tools with annotations', async () => {
+test('initialize + tools/list exposes exactly the 26 tools with annotations', async () => {
   const init = await rpc('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 't', version: '1' } });
   assert.equal(init.result.serverInfo.name, 'binasmart');
   assert.match(init.result.instructions, /Addis Ababa/);
   const list = await rpc('tools/list', {});
   const names = list.result.tools.map(t => t.name).sort();
-  assert.deepEqual(names, ['cancel_ride', 'find_pool_groups', 'get_ethiopia_guide', 'get_hospital_departments', 'get_hotel_rooms', 'get_ride_status', 'list_events', 'list_films', 'list_pool_corridors', 'quote_ride', 'request_ride', 'search_knowledge', 'search_places']);
+  // 18 until the jobs tools (get_employer, get_job, list_job_fields, list_jobs), the market tools (search_cars, search_hotels,
+  // search_properties) and search_health (bina.et/health, 30 Sep 2026) were added without this list following them.
+  assert.deepEqual(names, ['cancel_ride', 'find_pool_groups', 'get_employer', 'get_ethiopia_guide', 'get_hospital_departments', 'get_hotel_rooms', 'get_job', 'get_news_article', 'get_ride_status', 'get_tender', 'list_events', 'list_films', 'list_job_fields', 'list_jobs', 'list_news', 'list_pool_corridors', 'list_tender_categories', 'list_tenders', 'quote_ride', 'request_ride', 'search_cars', 'search_health', 'search_hotels', 'search_knowledge', 'search_places', 'search_properties']);
+  assert.match(init.result.instructions, /search_health/);
   const req = list.result.tools.find(t => t.name === 'request_ride');
   assert.equal(req.annotations.readOnlyHint, false);
   assert.equal(list.result.tools.find(t => t.name === 'cancel_ride').annotations.destructiveHint, true);

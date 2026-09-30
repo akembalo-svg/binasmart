@@ -180,7 +180,7 @@ test('checkout: counter ticket priced server-side, holds consumed, ticket + QR r
   const { show } = await seed(f);
   const hold = seat => f.inject({ method: 'POST', url: '/api/cinema/shows/' + show.id + '/hold', headers: H('holder-aaaaaaaa'), payload: { seat } });
   await hold('A1'); await hold('B2');
-  const r = await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: show.id, seats: ['A1', 'B2'], name: 'Sara', phone: '0911223344', payMethod: 'counter', idemKey: 'k-1' } });
+  const r = await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: show.id, seats: ['A1', 'B2'], name: 'Sara', phone: '0900000021', payMethod: 'counter', idemKey: 'k-1' } });
   assert.equal(r.statusCode, 200, r.body);
   const t = r.json().ticket;
   assert.equal(t.total, 800); assert.equal(t.status, 'RESERVED'); assert.equal(t.payMethod, 'counter'); assert.equal(t.show.event.title, 'Lamb'); assert.equal(t.show.venue.name, 'Bina Hall');
@@ -192,7 +192,7 @@ test('checkout: counter ticket priced server-side, holds consumed, ticket + QR r
   assert.equal((await f.inject({ method: 'GET', url: '/api/cinema/tickets/BINA-NOPE99' })).statusCode, 404);
   const map = (await f.inject({ method: 'GET', url: '/api/cinema/shows/' + show.id })).json();
   assert.equal(map.seats.find(s => s.id === 'A1').state, 'sold');
-  const bad = await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-cccccccc'), payload: { showId: show.id, seats: ['A3'], name: 'X', phone: '0911223355', payMethod: 'counter', idemKey: 'k-2' } });
+  const bad = await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-cccccccc'), payload: { showId: show.id, seats: ['A3'], name: 'X', phone: '0900000022', payMethod: 'counter', idemKey: 'k-2' } });
   assert.equal(bad.statusCode, 409); assert.equal(bad.json().error, 'hold_expired'); assert.deepEqual(bad.json().seats, ['A3']);
   assert.equal(sent.length, 0, 'web buyer: nothing sent to Telegram');
   await f.close();
@@ -204,11 +204,11 @@ test('checkout inside Telegram: signed initData attaches the buyer and the ticke
   const { show } = await seed(f);
   await f.inject({ method: 'POST', url: '/api/cinema/shows/' + show.id + '/hold', headers: H('holder-tgtgtgtg'), payload: { seat: 'A2' } });
   const initData = sign({ user: JSON.stringify({ id: 777, first_name: 'Abel' }), auth_date: String(Math.floor(Date.now() / 1000)) }, TOKEN);
-  const r = await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-tgtgtgtg'), payload: { showId: show.id, seats: ['A2'], phone: '0911223344', payMethod: 'counter', idemKey: 'k-tg', tg: { initData } } });
+  const r = await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-tgtgtgtg'), payload: { showId: show.id, seats: ['A2'], phone: '0900000021', payMethod: 'counter', idemKey: 'k-tg', tg: { initData } } });
   assert.equal(r.statusCode, 200, r.body);
   assert.equal(r.json().ticket.name, 'Abel');
   assert.equal(sent.length, 1); assert.equal(sent[0].chat, '777'); assert.match(sent[0].text, /A2/); assert.match(sent[0].extra.reply_markup.inline_keyboard[0][0].web_app.url, /\/ticket\/BINA-/);
-  const forged = await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-tgtgtgtg'), payload: { showId: show.id, seats: ['A2'], phone: '0911223344', payMethod: 'counter', idemKey: 'k-tg2', tg: { initData: initData.replace(/hash=\w+/, 'hash=0000') } } });
+  const forged = await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-tgtgtgtg'), payload: { showId: show.id, seats: ['A2'], phone: '0900000021', payMethod: 'counter', idemKey: 'k-tg2', tg: { initData: initData.replace(/hash=\w+/, 'hash=0000') } } });
   assert.equal(forged.statusCode, 401);
   await f.close();
 });
@@ -217,7 +217,7 @@ test('Chapa: gated server-side when off; when on, a checkout URL comes back and 
   const off = await app({ chapa: { enabled: false } });
   const s1 = await seed(off.f);
   await off.f.inject({ method: 'POST', url: '/api/cinema/shows/' + s1.show.id + '/hold', headers: H('holder-aaaaaaaa'), payload: { seat: 'A1' } });
-  const r1 = (await off.f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: s1.show.id, seats: ['A1'], name: 'S', phone: '0911223344', payMethod: 'chapa', idemKey: 'c-1' } })).json();
+  const r1 = (await off.f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: s1.show.id, seats: ['A1'], name: 'S', phone: '0900000021', payMethod: 'chapa', idemKey: 'c-1' } })).json();
   assert.equal(r1.ticket.payMethod, 'counter'); assert.equal(r1.checkoutUrl, undefined);
   await off.f.close();
 
@@ -225,7 +225,7 @@ test('Chapa: gated server-side when off; when on, a checkout URL comes back and 
   const { f, db } = await app();
   const { show } = await seed(f);
   await f.inject({ method: 'POST', url: '/api/cinema/shows/' + show.id + '/hold', headers: H('holder-aaaaaaaa'), payload: { seat: 'A1' } });
-  const r = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: show.id, seats: ['A1'], name: 'S', phone: '0911223344', payMethod: 'chapa', idemKey: 'c-2' } })).json();
+  const r = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: show.id, seats: ['A1'], name: 'S', phone: '0900000021', payMethod: 'chapa', idemKey: 'c-2' } })).json();
   assert.equal(r.ticket.payMethod, 'chapa'); assert.equal(r.ticket.chapaPending, true); assert.match(r.checkoutUrl, /^https:\/\/checkout\.chapa\.co\//);
   assert.equal(chapaCalls[0].amount, 500); assert.match(chapaCalls[0].ref, /^bina-cin-/); assert.match(chapaCalls[0].returnUrl, /\/ticket\/BINA-.*paid=1/);
   assert.equal(db._.ticket[0].chapaRef, chapaCalls[0].ref);
@@ -244,7 +244,7 @@ test('door: unpaid is refused, paid admits once, second scan refused; counts ret
   const { f } = await app();
   const { show } = await seed(f);
   await f.inject({ method: 'POST', url: '/api/cinema/shows/' + show.id + '/hold', headers: H('holder-aaaaaaaa'), payload: { seat: 'B1' } });
-  const t = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: show.id, seats: ['B1'], name: 'S', phone: '0911223344', payMethod: 'counter', idemKey: 'd-1' } })).json().ticket;
+  const t = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: show.id, seats: ['B1'], name: 'S', phone: '0900000021', payMethod: 'counter', idemKey: 'd-1' } })).json().ticket;
   const scan = () => f.inject({ method: 'POST', url: '/api/cinema/ops/checkin', headers: OPS, payload: { code: t.code, showId: show.id } });
   assert.equal((await f.inject({ method: 'POST', url: '/api/cinema/ops/checkin', payload: { code: t.code } })).statusCode, 401);
   const u = await scan(); assert.equal(u.statusCode, 409); assert.equal(u.json().error, 'unpaid');
@@ -264,7 +264,7 @@ test('cancelling a show cancels live tickets, frees holds, tells Telegram buyers
   await f.inject({ method: 'POST', url: '/api/cinema/shows/' + show.id + '/hold', headers: H('holder-tgtgtgtg'), payload: { seat: 'A1' } });
   await f.inject({ method: 'POST', url: '/api/cinema/shows/' + show.id + '/hold', headers: H('holder-zzzzzzzz'), payload: { seat: 'A4' } });
   const initData = sign({ user: JSON.stringify({ id: 778, first_name: 'Beti' }), auth_date: String(Math.floor(Date.now() / 1000)) }, TOKEN);
-  await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-tgtgtgtg'), payload: { showId: show.id, seats: ['A1'], phone: '0911223344', payMethod: 'counter', idemKey: 'x-1', tg: { initData } } });
+  await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-tgtgtgtg'), payload: { showId: show.id, seats: ['A1'], phone: '0900000021', payMethod: 'counter', idemKey: 'x-1', tg: { initData } } });
   assert.equal(sent.length, 1);
   const r = (await f.inject({ method: 'POST', url: '/api/cinema/ops/shows/' + show.id + '/status', headers: OPS, payload: { status: 'cancelled' } })).json();
   assert.equal(r.cancelled, 1);
@@ -279,7 +279,9 @@ test('cancelling a show cancels live tickets, frees holds, tells Telegram buyers
 
 test('pages are served', async () => {
   const { f } = await app();
-  for (const u of ['/cinema', '/cinema/abc', '/ticket/BINA-ABCDEF', '/scan', '/ops/cinema', '/for-cinemas']) assert.equal((await f.inject({ method: 'GET', url: u })).statusCode, 200, u);
+  for (const u of ['/cinema', '/ticket/BINA-ABCDEF', '/scan', '/ops/cinema', '/for-cinemas']) assert.equal((await f.inject({ method: 'GET', url: u })).statusCode, 200, u);
+  // a show that does not exist is a real 404, not the hub answering 200 (a soft 404 Google reports; 28 Sep 2026)
+  assert.equal((await f.inject({ method: 'GET', url: '/cinema/abc' })).statusCode, 404);
   await f.close();
 });
 
@@ -295,14 +297,14 @@ test('SEO: /cinema carries an ItemList of ScreeningEvents; a show page gets its 
   assert.match(page.body, /"workPresented":\{"@type":"Movie","name":"Lamb"/); assert.match(page.body, /"availability":"https:\/\/schema.org\/InStock"/);
   assert.match(page.body, /"@type":"MovieTheater","name":"Bina Hall"/);
   const gone = await f.inject({ method: 'GET', url: '/cinema/nope' });
-  assert.equal(gone.statusCode, 200); assert.doesNotMatch(gone.body, /ld\+json">\{"@context":"https:\/\/schema.org","@type":"ScreeningEvent"/);
+  assert.equal(gone.statusCode, 404); assert.doesNotMatch(gone.body, /ld\+json">\{"@context":"https:\/\/schema.org","@type":"ScreeningEvent"/);
   await f.close();
 });
 
 // ---- programme listing ----
 test('programme: ops creates entries with a source; public groups by venue; expired entries disappear; delete hides', async () => {
   const { f, db } = await app();
-  const v = (await f.inject({ method: 'POST', url: '/api/cinema/ops/venues', headers: OPS, payload: { name: 'Gast Cinema', nameAm: 'ጋስት', phone: '0930113377' } })).json().venue;
+  const v = (await f.inject({ method: 'POST', url: '/api/cinema/ops/venues', headers: OPS, payload: { name: 'Gast Cinema', nameAm: 'ጋስት', phone: '0900000023' } })).json().venue;
   const today = new Date(Date.now() + 3 * 3600000).toISOString().slice(0, 10);
   const bad = await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Mutiny', times: '12:00', dateFrom: today } });
   assert.equal(bad.statusCode, 400); assert.match(bad.json().error, /sourceName/);
@@ -317,7 +319,7 @@ test('programme: ops creates entries with a source; public groups by venue; expi
   assert.match(page.body, /"@type":"VideoObject"/); assert.match(page.body, /youtube-nocookie\.com\/embed\/dQw4w9WgXcQ/);
   await f.inject({ method: 'POST', url: '/api/cinema/ops/programme', headers: OPS, payload: { venueId: v.id, title: 'Old Film', times: '19:00', dateFrom: '2026-01-01', dateTo: '2026-01-02', sourceName: 'Gast', sourceUrl: 'https://t.me/gastcinema' } });
   const pub = (await f.inject({ method: 'GET', url: '/api/cinema/programme' })).json();
-  assert.equal(pub.venues.length, 1); assert.equal(pub.venues[0].venue.nameAm, 'ጋስት'); assert.equal(pub.venues[0].venue.phone, '0930113377');
+  assert.equal(pub.venues.length, 1); assert.equal(pub.venues[0].venue.nameAm, 'ጋስት'); assert.equal(pub.venues[0].venue.phone, '0900000023');
   assert.deepEqual(pub.venues[0].films.map(x => x.title), ['Mutiny', 'Trailered'], 'expired entry hidden');
   assert.equal(pub.venues[0].films[0].sourceUrl, 'https://t.me/gastcinema');
   assert.equal((await f.inject({ method: 'POST', url: '/api/cinema/ops/programme/' + ok.json().programme.id + '/delete', headers: OPS, payload: {} })).json().removed, 1);
@@ -364,7 +366,7 @@ test('GA: checkout prices per place, ticket and door carry a "VIP x 2" summary',
   const url = '/api/cinema/shows/' + show.id;
   await f.inject({ method: 'POST', url: url + '/hold', headers: H('holder-aaaaaaaa'), payload: { section: 'VIP', qty: 2 } });
   await f.inject({ method: 'POST', url: url + '/hold', headers: H('holder-aaaaaaaa'), payload: { section: 'Regular', qty: 1 } });
-  const r = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: show.id, seats: ['VIP-001', 'VIP-002', 'REGULAR-001'], name: 'Sara', phone: '0911223344', payMethod: 'counter', idemKey: 'ga-1' } })).json();
+  const r = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: show.id, seats: ['VIP-001', 'VIP-002', 'REGULAR-001'], name: 'Sara', phone: '0900000021', payMethod: 'counter', idemKey: 'ga-1' } })).json();
   assert.equal(r.ok, true, JSON.stringify(r)); assert.equal(r.ticket.total, 1900);
   assert.deepEqual(r.ticket.summary, [{ section: 'VIP', nameAm: 'ቪአይፒ', count: 2 }, { section: 'Regular', nameAm: 'መደበኛ', count: 1 }]);
   assert.equal(r.ticket.show.ga, true);
@@ -404,7 +406,7 @@ const mintKey = async (f, venueId) => (await f.inject({ method: 'POST', url: '/a
 // Sells one seat and pays for it at the counter, so there is a ticket a door can actually admit.
 async function soldTicket(f, show, seat, holder) {
   await f.inject({ method: 'POST', url: '/api/cinema/shows/' + show.id + '/hold', headers: H(holder), payload: { seat } });
-  const t = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H(holder), payload: { showId: show.id, seats: [seat], name: 'Sara', phone: '0911223344', payMethod: 'counter', idemKey: holder } })).json().ticket;
+  const t = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H(holder), payload: { showId: show.id, seats: [seat], name: 'Sara', phone: '0900000021', payMethod: 'counter', idemKey: holder } })).json().ticket;
   await f.inject({ method: 'POST', url: '/api/cinema/ops/tickets/' + t.code + '/paid', headers: OPS, payload: {} });
   return t;
 }
@@ -499,7 +501,7 @@ test('door staff are told who and which seats - not the buyer\u2019s phone numbe
   assert.equal(r.ticket.phone, undefined, 'a doorkeeper does not need the buyer\u2019s phone number');
   assert.equal(r.ticket.total, undefined);
   assert.equal(r.ticket.payMethod, undefined);
-  assert.equal(JSON.stringify(r).includes('0911223344'), false);
+  assert.equal(JSON.stringify(r).includes('0900000021'), false);
   await f.close();
 });
 
@@ -510,9 +512,9 @@ test('the counter is the same staff: a venue key can mark its own ticket paid, n
   const { a, b } = await seedTwo(f);
   const ka = (await mintKey(f, a.venue.id)).key;
   await f.inject({ method: 'POST', url: '/api/cinema/shows/' + a.show.id + '/hold', headers: H('holder-aaaaaaaa'), payload: { seat: 'A1' } });
-  const ta = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: a.show.id, seats: ['A1'], name: 'Sara', phone: '0911223344', payMethod: 'counter', idemKey: 'p-a' } })).json().ticket;
+  const ta = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-aaaaaaaa'), payload: { showId: a.show.id, seats: ['A1'], name: 'Sara', phone: '0900000021', payMethod: 'counter', idemKey: 'p-a' } })).json().ticket;
   await f.inject({ method: 'POST', url: '/api/cinema/shows/' + b.show.id + '/hold', headers: H('holder-bbbbbbbb'), payload: { seat: 'A1' } });
-  const tb = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-bbbbbbbb'), payload: { showId: b.show.id, seats: ['A1'], name: 'Dawit', phone: '0911223355', payMethod: 'counter', idemKey: 'p-b' } })).json().ticket;
+  const tb = (await f.inject({ method: 'POST', url: '/api/cinema/tickets', headers: H('holder-bbbbbbbb'), payload: { showId: b.show.id, seats: ['A1'], name: 'Dawit', phone: '0900000022', payMethod: 'counter', idemKey: 'p-b' } })).json().ticket;
 
   const own = await f.inject({ method: 'POST', url: '/api/cinema/scan/tickets/' + ta.code + '/paid', headers: { 'x-scan-key': ka, 'content-type': 'application/json' }, payload: {} });
   assert.equal(own.json().status, 'CONFIRMED');

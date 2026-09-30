@@ -86,7 +86,7 @@ function scoreJob(job, candidate, { now = new Date(), field = null } = {}) {
 // field (when known) narrows the query before anything is scored.
 async function matchesFor(prisma, candidate, { limit = 12, now = new Date(), openSince, isClosed } = {}) {
   const field = fieldOf(candidate);
-  const where = { published: true, OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }] };
+  const where = { published: true, ...require('../tenders/deadline').openJobsWhere(now) };
   if (field) where.category = field;
   let rows = await prisma.job.findMany({
     where, include: { employer: { select: { name: true, slug: true, logoUrl: true } } },
@@ -95,7 +95,7 @@ async function matchesFor(prisma, candidate, { limit = 12, now = new Date(), ope
   // Without a field we cannot narrow, so widen the net rather than return nothing.
   if (field && rows.length < 40) {
     const extra = await prisma.job.findMany({
-      where: { published: true, OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }] },
+      where: { published: true, ...require('../tenders/deadline').openJobsWhere(now) },
       include: { employer: { select: { name: true, slug: true, logoUrl: true } } },
       orderBy: { publishedAt: 'desc' }, take: 250,
     });

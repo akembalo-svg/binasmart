@@ -44,8 +44,12 @@ function world(over) {
       },
     },
     driver: {
+      // Honours the weak-signal query too (away: true, recently seen, Telegram-reachable), so offers.js
+      // cannot get connected drivers back from it by accident.
       findMany: async ({ where }) => state.drivers
-        .filter(d => d.status === 'approved' && d.online === true && d.away === false && d.onRideId === null && (!where.tier || d.tier === where.tier))
+        .filter(d => d.status === 'approved' && d.online === true && d.away === !!where.away && d.onRideId === null && (!where.tier || d.tier === where.tier))
+        .filter(d => !where.lastSeenAt || (d.lastSeenAt != null && d.lastSeenAt >= where.lastSeenAt.gte))
+        .filter(d => !where.telegramId || d.telegramId != null)
         .map(d => ({ ...d })),
       findUnique: async ({ where }) => state.drivers.find(d => d.id === where.id) || null,
       updateMany: async ({ where, data }) => {
@@ -71,7 +75,7 @@ function world(over) {
   };
   function match(o, where) {
     if (!where) return true;
-    if (where.id && o.id !== where.id) return false;
+    if (where.id && (where.id.in ? !where.id.in.includes(o.id) : o.id !== where.id)) return false;
     if (where.rideId && o.rideId !== where.rideId) return false;
     if (where.driverId && o.driverId !== where.driverId) return false;
     if (where.status && o.status !== where.status) return false;

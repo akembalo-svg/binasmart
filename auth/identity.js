@@ -75,6 +75,61 @@ function makeIdentity({ prisma, now }) {
     return { ok: true, id: row.id };
   }
 
+  // What this account runs, one row per business, with the page that manages it (Bina Partner, 23 Sep
+  // 2026). Only this account's own rows (AuthUser.buildingSlug and its active memberships), and only
+  // names, public slugs and types: never a key, token, phone or password.
+  //   access 'account'          the dashboard admits this signed-in account: its own building, or an
+  //                             ACTIVE OWNER membership (server.js authBuildingFail, business/accountOwners.js)
+  //   access 'business_sign_in' /business needs its own phone sign-in (a staff membership: no staff tier there)
+  //   access 'owner_key'        a building dashboard reached only with its owner key or password (staff)
+  const BUILDING_TYPE = { HOTEL: 'hotel', HOSPITAL: 'hospital', TRAVEL: 'travel' };
+  const SHOP_TYPE = { RESTAURANT: 'restaurant', CAFE: 'cafe', CLINIC: 'clinic', PHARMACY: 'pharmacy' };
+  async function ownedBy(u) {
+    const ms = u.memberships || [];
+    const uniq = a => [...new Set(a.filter(Boolean))];
+    const slugs = uniq([u.buildingSlug].concat(ms.filter(m => m.kind === 'building').map(m => m.buildingSlug)));
+    const shopIds = uniq(ms.filter(m => m.kind === 'shop').map(m => m.shopId));
+    const venueIds = uniq(ms.filter(m => m.kind === 'venue').map(m => m.venueId));
+    // A table this deployment (or a test) does not have is "unknown", not "none": keep the row, unnamed.
+    const rows = async (d, ids, q) => {
+      if (!ids.length) return new Map();
+      if (!d || typeof d.findMany !== 'function') return null;
+      try { return new Map((await d.findMany(q)).map(r => [r.qrSlug || r.id, r])); } catch (e) { return new Map(); }   // a failed lookup hides rows, never shows them unchecked
+    };
+    const [bs, ss, vs] = await Promise.all([
+      rows(prisma.building, slugs, { where: { qrSlug: { in: slugs } }, select: { qrSlug: true, name: true, nameAm: true, buildingType: true } }),
+      rows(prisma.shop, shopIds, { where: { id: { in: shopIds } }, select: { id: true, name: true, nameAm: true, category: true, status: true } }),
+      rows(prisma.venue, venueIds, { where: { id: { in: venueIds } }, select: { id: true, name: true, nameAm: true, active: true } })
+    ]);
+    const out = [];
+    for (const slug of slugs) {
+      const b = bs ? bs.get(slug) : { qrSlug: slug, name: slug };
+      if (!b) continue;                                     // no such building: nothing to open
+      const mine = slug === u.buildingSlug;
+      const m = ms.find(x => x.kind === 'building' && x.buildingSlug === slug);
+      out.push({ id: 'building:' + slug, type: BUILDING_TYPE[b.buildingType] || 'building', name: b.name || slug, nameAm: b.nameAm || null,
+        role: mine ? 'owner' : (m && m.role) || 'owner', url: '/owner/' + encodeURIComponent(slug),
+        access: mine || (m && (m.role || 'owner') === 'owner') ? 'account' : 'owner_key' });
+    }
+    for (const id of shopIds) {
+      const s = ss ? ss.get(id) : { id };
+      if (!s || s.status === 'hidden') continue;             // /business refuses a hidden shop too
+      const m = ms.find(x => x.kind === 'shop' && x.shopId === id);
+      const own = !m || (m.role || 'owner') === 'owner';
+      out.push({ id: 'shop:' + id, type: SHOP_TYPE[s.category] || 'shop', name: s.name || null, nameAm: s.nameAm || null,
+        role: (m && m.role) || 'owner', url: own ? '/business?open=' + encodeURIComponent(id) : '/business', access: own ? 'account' : 'business_sign_in' });
+    }
+    for (const id of venueIds) {
+      const v = vs ? vs.get(id) : { id, active: true };
+      if (!v || v.active === false) continue;
+      const m = ms.find(x => x.kind === 'venue' && x.venueId === id);
+      const own = !m || (m.role || 'owner') === 'owner';
+      out.push({ id: 'venue:' + id, type: 'venue', name: v.name || null, nameAm: v.nameAm || null,
+        role: (m && m.role) || 'owner', url: own ? '/business?open=' + encodeURIComponent(id) : '/business', access: own ? 'account' : 'business_sign_in' });
+    }
+    return out;
+  }
+
   // Everything the site knows about the person behind this session, in one shape.
   async function me(userId) {
     const u = await prisma.authUser.findUnique({
@@ -101,7 +156,8 @@ function makeIdentity({ prisma, now }) {
       rider: u.rider ? { id: u.rider.id, name: u.rider.name, rating: u.rider.rating } : null,
       driver: u.driver ? { id: u.driver.id, status: u.driver.status, tier: u.driver.tier, plate: u.driver.plate, rating: u.driver.rating } : null,
       businesses: u.memberships.map(x => ({ id: x.id, kind: x.kind, shopId: x.shopId, venueId: x.venueId, buildingSlug: x.buildingSlug, role: x.role })),
-      buildingSlug: u.buildingSlug || null
+      buildingSlug: u.buildingSlug || null,
+      owned: await ownedBy(u)
     };
   }
 

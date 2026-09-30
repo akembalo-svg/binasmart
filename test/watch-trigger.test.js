@@ -101,10 +101,32 @@ test('a queued pack runs its own freshness check, one at a time, and only that p
     appendTriggers([item(), item({ office: 'mols', source: { office: 'mols', pack: 'law' } },
       { text: 'የሥራ ፈቃድ መመሪያ', url: 'https://t.me/FDRE_MoLSofficial/91' })], { registry, dir });
     const ran = [];
-    const r = refetch({ dir, lock: path.join(dir, '.lock'), runFreshness: p => ran.push(p), busy: () => 0, log: () => {} });
+    // registry: both packs have a sources.json here. The real check is the filesystem, and a pack
+    // without one takes the manual path instead - the test below.
+    const r = refetch({ dir, lock: path.join(dir, '.lock'), runFreshness: p => ran.push(p), busy: () => 0, log: () => {}, registry: () => true });
     assert.deepEqual(ran, ['banking', 'law'], 'in order, one at a time, and no other pack');
     assert.deepEqual(r.ran.map(x => x.ok), [true, true]);
     assert.equal(fs.existsSync(path.join(dir, '.lock')), false, 'the lock is dropped when the run ends');
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+// Before 2026-09-19 a pack with no sources.json crashed here with ENOENT every night an office
+// announced something, and the announcement reached the log and nobody else.
+test('a pack the server cannot fetch is reported to a person, not crashed on', () => {
+  const dir = tmp();
+  try {
+    appendTriggers([item()], { registry, dir });
+    const sent = [];
+    const ran = [];
+    const r = refetch({ dir, lock: path.join(dir, '.lock'), runFreshness: p => ran.push(p), busy: () => 0,
+      log: () => {}, registry: () => false, sendTg: t => { sent.push(t); return true; } });
+    assert.deepEqual(ran, [], 'no fetcher is started for a pack that has no registry');
+    assert.equal(r.ran[0].manual, true);
+    assert.equal(r.ran[0].ok, true, 'a pack needing a hand is not a failed run');
+    assert.equal(r.manual.length, 1);
+    assert.equal(readTrigger('banking', { dir }).length, 0, 'the trigger is taken, so the same notice is not reported every night');
+    assert.match(sent.join('\n'), /cannot be re-fetched by the server/);
+    assert.match(sent.join('\n'), /t\.me/, 'the message carries the post so it can be read');
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 

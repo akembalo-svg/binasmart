@@ -23,6 +23,9 @@ const SELF_VENDOR = new RegExp(
 const OROMO_HINT = /\b(jira|jirta|dha|isin|isinitti|gatii|gatiin|imala|imalaa|dandeessu|qabdu|akkam|nagaa|galatoom\w*|keessan|irratti|kan|fi)\b/i;
 
 // Every /path that exists on the site: static html in public/ + dynamic routes we know.
+// Server-rendered pages with a slug (hotels/directory.js, property, cars, jobs, company directory) and /llms.txt,
+// which pathsIn reads as "/llms" because it stops at the dot.
+const DYNAMIC_PAGE = /^\/(hotels|hotel|property|cars|employer|jobs|job|tenders|tender|news|companies|real-estate-companies|car-dealers)(\/[a-z0-9][a-z0-9\-_]*)?$|^\/llms$/i;
 function knownPaths(root) {
   const set = new Set(['/', '/ride', '/ride?pool=1', '/pool', '/drive', '/airport', '/hotels', '/watch', '/cinema', '/tenders', '/news', '/guides', '/ai', '/mcp', '/owner', '/nav', '/business', '/property', '/cars', '/insurance', '/flights', '/travel', '/support', '/llms.txt']);
   try { for (const f of fs.readdirSync(path.join(root, 'public'))) if (f.endsWith('.html')) set.add('/' + f.replace(/\.html$/, '')); } catch (e) { /* no public dir in tests */ }
@@ -70,7 +73,7 @@ function check(item, reply, { known, tools } = {}) {
   const priced = Array.isArray(tools) && tools.some(t => /^(quote_ride|pool_board|search_tenders|ride_status)$/.test(t));
   const isEn = tags.includes('english'), isLatin = tags.includes('latin'), isOm = tags.includes('om');
   if (!r.trim()) fails.push('empty');
-  if (isEn) { if (ETHIOPIC.test(r.replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ/g, ''))) fails.push('english_drift_to_amharic'); }
+  if (isEn) { if (ETHIOPIC.test(r.replace(/\([^)]*\)/g, '').replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ|ሰላም/g, ''))) fails.push('english_drift_to_amharic'); }   // an Amharic name in brackets, or a "ሰላም" greeting, is not drift
   else if (isOm) { if (ETHIOPIC.test(r.replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ/g, ''))) fails.push('oromo_drift_to_amharic'); if (!OROMO_HINT.test(r)) fails.push('not_oromo'); }
   else if (!ETHIOPIC.test(r)) fails.push('no_amharic_script');
   if (isLatin && !/\([^)]*[a-z]{3,}[^)]*\)\s*$/i.test(r.trim())) fails.push('latin_gloss_missing');
@@ -98,7 +101,8 @@ function check(item, reply, { known, tools } = {}) {
   if (r.length > 900) fails.push('too_long');
   if ((r.match(/https?:\/\/wa\.me/g) || []).length > 1) fails.push('whatsapp_twice');
   const kn = known || knownPaths(path.join(__dirname, '..', '..'));
-  for (const p of pathsIn(r)) if (!kn.has(p)) { fails.push('unknown_link:' + p); break; } // a query string must match exactly (/ride?pool=1 ok, /ride?id=… not)
+  // Pages with a slug (a hotel, a flat, a car, a company) are real links, not in public/*.html: accept the prefix.
+  for (const p of pathsIn(r)) if (!kn.has(p) && !DYNAMIC_PAGE.test(p)) { fails.push('unknown_link:' + p); break; } // a query string must match exactly (/ride?pool=1 ok, /ride?id=… not)
   return { ok: fails.length === 0, fails };
 }
 

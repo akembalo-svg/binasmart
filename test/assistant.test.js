@@ -46,6 +46,8 @@ test('executor: places → quote → request needs confirmation and a valid phon
   assert.equal(p.results[0].name, 'Bole Medhanialem'); assert.equal(p.results[0].nameAm, 'ቦሌ መድኃኒዓለም');
   const q = await run('quote_ride', { pickup: { lat: 9.02, lng: 38.80, label: 'Megenagna' }, dropoff: { lat: 8.9975, lng: 38.7876, label: 'Bole' } });
   assert.equal(q.fares[1].etb, 315); assert.equal(q.distanceKm, 7.2); assert.ok(touched[0].lastPickup);
+  const flat = await run('quote_ride', { pickup_lat: 9.02, pickup_lng: 38.80, dropoff_lat: 8.9975, dropoff_lng: 38.7876 });   // the model's flattened shape
+  assert.equal(flat.fares[1].etb, 315);
   const bad = await run('quote_ride', { pickup: { lat: 25, lng: 55 }, dropoff: { lat: 9, lng: 38.8 } });
   assert.match(bad.error, /inside Addis/);
   const noconf = await run('request_ride', { pickup: { lat: 9.02, lng: 38.8 }, dropoff: { lat: 9, lng: 38.79 }, tier: 'comfort', riderPhone: '0911000001', confirmed: false });
@@ -167,4 +169,10 @@ test('the wider Oromo rule does not swallow English or Amharic-in-Latin', () => 
     'betam tiru new, ameseginalehu',
     'yet new bete? min yashalal',
   ]) assert.equal(lang.detect(q), 'am-latin', q);
+});
+
+// a price list in English is English, however many times it says birr (28 Sep 2026)
+test('English with several birr prices stays English', () => {
+  assert.equal(lang.detect('Please add our rooms: Standard double 4,500 birr, Deluxe king 6,800 birr, Suite 12,000 birr.'), 'en');
+  assert.equal(lang.detect('sint birr new?'), 'am-latin');
 });

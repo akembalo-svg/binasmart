@@ -10,7 +10,9 @@ function makeRiderNotify({ prisma, api, baseUrl, pool }) {
       + '\n\n👀 Match the plate before you get in · ከመግባትዎ በፊት ታርጋውን ያረጋግጡ',
     arrived: r => '📍 Your driver has arrived' + (r.pickup && r.pickup.label ? ' at ' + r.pickup.label : '') + '.\nሹፌርዎ ደርሷል።',
     completed: r => '✅ Trip complete · ' + r.fareEtb + ' ETB' + (r.paymentStatus === 'paid' ? ' (paid)' : ' — pay the driver') + '\nጉዞው ተጠናቅቋል። Please rate your driver in the app. አመሰግናለን!',
-    cancelled: r => '❌ Ride cancelled.' + (r.cancelledBy === 'ops' ? ' Our dispatcher could not find a driver this time — sorry.' : '') + '\nጉዞው ተሰርዟል።',
+    cancelled: r => r.cancelledBy === 'nodriver'
+      ? '❌ ሹፌር አልተገኘም — ጥያቄዎ ተሰርዟል፤ ምንም አልተከፈለም። ቢና ራይድ ገና በመጀመር ላይ ነው፤ እባክዎ ቆይተው ይሞክሩ። ይቅርታ።\nNo driver was free this time, so your request was closed and nothing was charged. Bina Ride is just starting — please try again later. Sorry.'
+      : '❌ Ride cancelled.' + (r.cancelledBy === 'ops' ? ' Our dispatcher could not find a driver this time — sorry.' : '') + '\nጉዞው ተሰርዟል።',
   };
   async function notify(rideId, event) {
     try {

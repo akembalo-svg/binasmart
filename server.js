@@ -295,11 +295,25 @@ fastify.post('/api/owner/change-password', async (req, reply) => {
   return { ok: true };
 });
 fastify.get('/owner', async (req, reply) => reply.sendFile('owner-login.html'));
-fastify.get('/health', async () => ({ ok: true, service: 'binasmart-api', ts: new Date().toISOString() }));
+// A browser asks for text/html and gets the BinaSmart Health directory (health/directory.js, 30 Sep 2026); the uptime check
+// (ops/health/check.js, curl) sends */* and still gets this JSON.
+fastify.get('/health', async (req, reply) => {
+  reply.header('Vary', 'Accept');
+  const hub = require('./health/directory').hub, h = req.headers || {}, accept = String(h.accept || '');
+  // The uptime JSON is for machines ON this server (ops/health/check.js and curl on the box call 127.0.0.1 directly, with no
+  // proxy header) and for anyone who asks for JSON by name. Everyone arriving through nginx gets the page: link-preview
+  // crawlers (WhatsApp, LinkedIn, Facebook, X) send */* or nothing, and on 30 Sep 2026 they were all handed this JSON, so a
+  // shared bina.et/health link showed no preview.
+  const internal = !h['x-real-ip'] && !h['x-forwarded-for'] && /^(::ffff:)?127\.|^::1$/.test(String(req.ip || ''));
+  const wantsJson = /application\/json/.test(accept) && !/text\/html/.test(accept);
+  if (hub && !wantsJson && (!internal || /text\/html/.test(accept))) return hub(req, reply);
+  return { ok: true, service: 'binasmart-api', ts: new Date().toISOString() };
+});
 
 // ===== LANDING PAGE (connectcare.cc root) =====
 fastify.get('/', async (req, reply) => reply.sendFile('home-v3.html')); // 7 Sep 2026 BinaSmart-home style; prior: gemini-home.html, coming-soon.html, index.html
 fastify.get('/robots.txt', async (req, reply) => reply.sendFile('robots.txt'));
+fastify.get('/dee117a8-feea-4b21-b214-d466e00571f3.html', async (req, reply) => reply.type('text/html; charset=utf-8').send('dee117a8-feea-4b21-b214-d466e00571f3')); // Trustpilot domain verification
 // The IndexNow key must answer at the ROOT of the host, and this server's static files are served
 // under /static/ — the same trap the logo paths fell into. One route, matching only a 32-hex name.
 fastify.get('/:key.txt', async (req, reply) => {
@@ -309,7 +323,7 @@ fastify.get('/:key.txt', async (req, reply) => {
 });
 fastify.get('/sitemap.xml', async (req, reply) => {
   const bs = await prisma.building.findMany({ select: { qrSlug: true, buildingType: true, name: true, subCity: true }, orderBy: { createdAt: 'asc' } });
-  const posts = await prisma.newsPost.findMany({ where: { published: true }, select: { slug: true } });
+  const posts = await prisma.newsPost.findMany({ where: { published: true }, select: { slug: true, publishedAt: true } });
   // Only tenders that are still open. A sitemap is a list of pages worth crawling, and a closed
   // tender can never satisfy the search that finds it — 101 of 244 had already expired.
   // A tender with no deadline has nothing to compare against now, so it used to stay here forever.
@@ -322,7 +336,7 @@ fastify.get('/sitemap.xml', async (req, reply) => {
       { deadline: null, publishedAt: { gte: new Date(Date.now() - 45 * 86400000) } },
       { deadline: { gte: openSince() } },   // a bare date closes at midnight in Addis, not in UTC
     ] },
-    select: { slug: true, deadline: true } });
+    select: { slug: true, deadline: true, publishedAt: true } });
   // Only shops whose owner has claimed them. The rest are noindex — see business/claimed.js —
   // and a sitemap is a request to index. ownerPhone used to count here; it is ops noting who MAY
   // claim a shop, not the owner claiming it, so it never belonged in this test.
@@ -352,19 +366,45 @@ fastify.get('/sitemap.xml', async (req, reply) => {
       { deadline: null, publishedAt: { gte: new Date(Date.now() - 45 * 86400000) } },
       { deadline: { gte: openSince() } },
     ] },
-    select: { slug: true, category: true, employerId: true } }).catch(() => []);
+    select: { slug: true, category: true, employerId: true, deadline: true, publishedAt: true } }).catch(() => []);
   const jobCats = [...new Set(openJobs.map(j => j.category).filter(Boolean))];
-  const jobEmployerIds = [...new Set(openJobs.map(j => j.employerId))];
+  // the employer page is noindex when none of its jobs is open by ITS clock (isClosed), so the sitemap uses the same test
+  const jobEmployerIds = [...new Set(openJobs.filter(j => !tenderClosedAt(j.deadline)).map(j => j.employerId))];
   const jobEmployers = jobEmployerIds.length
-    ? (await prisma.employer.findMany({ where: { id: { in: jobEmployerIds } }, select: { slug: true } }).catch(() => []))
+    ? (await prisma.employer.findMany({ where: { id: { in: jobEmployerIds } }, select: { slug: true, updatedAt: true } }).catch(() => []))
     : [];
 
-  const urls = ['https://bina.et/', 'https://bina.et/ai', 'https://bina.et/ai-am', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/cv-ethiopia', 'https://bina.et/cv-ethiopia-en', 'https://bina.et/interview-questions-ethiopia', 'https://bina.et/bole-airport-to-city', 'https://bina.et/egp-registration-ethiopia', 'https://bina.et/ethiopia-jobs-report-september-2026', 'https://bina.et/how-to-bid-tenders-ethiopia', 'https://bina.et/bank-jobs-ethiopia', 'https://bina.et/bid-security-cpo-ethiopia', 'https://bina.et/ethiopia-tender-report-september-2026', 'https://bina.et/send-money-to-ethiopia', 'https://bina.et/tender-documents-checklist-ethiopia', 'https://bina.et/trade-license-check-ethiopia', 'https://bina.et/world-bank-tenders-ethiopia', 'https://bina.et/trade-license-renewal-ethiopia', 'https://bina.et/about', 'https://bina.et/drive-with-us', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/oromo-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/tax-forms', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.filter(p => !CANONICAL_TO[p.slug]).map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), /* /b/:slug is noindex — it lists tenants by name, unit and phone — so it is not requested here.
+  const urls = ['https://bina.et/', 'https://bina.et/ai', 'https://bina.et/ai-am', 'https://bina.et/news', 'https://bina.et/tenders', 'https://bina.et/insurance', 'https://bina.et/cars', 'https://bina.et/property', 'https://bina.et/for-insurers', 'https://bina.et/ride', 'https://bina.et/pool', 'https://bina.et/airport', 'https://bina.et/hotels', 'https://bina.et/why-binasmart', 'https://bina.et/cv-ethiopia', 'https://bina.et/cv-ethiopia-en', 'https://bina.et/interview-questions-ethiopia', 'https://bina.et/bole-airport-to-city', 'https://bina.et/egp-registration-ethiopia', 'https://bina.et/ethiopia-jobs-report-september-2026', 'https://bina.et/how-to-bid-tenders-ethiopia', 'https://bina.et/bank-jobs-ethiopia', 'https://bina.et/bid-security-cpo-ethiopia', 'https://bina.et/ethiopia-tender-report-september-2026', 'https://bina.et/send-money-to-ethiopia', 'https://bina.et/tender-documents-checklist-ethiopia', 'https://bina.et/trade-license-check-ethiopia', 'https://bina.et/world-bank-tenders-ethiopia', 'https://bina.et/trade-license-renewal-ethiopia', 'https://bina.et/about', 'https://bina.et/drive-with-us', 'https://bina.et/blog/smart-building-management-ethiopia', 'https://bina.et/cinema', 'https://bina.et/for-cinemas', 'https://bina.et/for-business', 'https://bina.et/flights', 'https://bina.et/for-filmmakers', 'https://bina.et/flights/hanud', 'https://bina.et/diaspora', 'https://bina.et/fayda', 'https://bina.et/telebirr', 'https://bina.et/telesign', 'https://bina.et/passport', 'https://bina.et/mesob', 'https://bina.et/guides', 'https://bina.et/free-ethiopian-tenders', 'https://bina.et/property-management', 'https://bina.et/property-management-software', 'https://bina.et/manage-rental-property', 'https://bina.et/digital-rent-collection', 'https://bina.et/tin-registration-ethiopia', 'https://bina.et/business-registration-ethiopia', 'https://bina.et/driving-licence-ethiopia', 'https://bina.et/vat-registration-ethiopia', 'https://bina.et/ethiopia-evisa', 'https://bina.et/rental-agreement-ethiopia', 'https://bina.et/cbe-birr-guide', 'https://bina.et/customs-import-duty-ethiopia', 'https://bina.et/how-to-start-a-business-in-ethiopia', 'https://bina.et/digital-ethiopia-2026', 'https://bina.et/amharic-ai', 'https://bina.et/oromo-ai', 'https://bina.et/afiya', 'https://bina.et/asmat', 'https://bina.et/living-working-in-ethiopia-guide', 'https://bina.et/ethiopia-income-tax-calculator', 'https://bina.et/tax-forms', 'https://bina.et/import-car-to-ethiopia', 'https://bina.et/car-dealers', 'https://bina.et/real-estate-companies', 'https://bina.et/ethiopian-origin-id-yellow-card', 'https://bina.et/open-bank-account-ethiopia', 'https://bina.et/birth-marriage-certificate-ethiopia', 'https://bina.et/pay-utility-bills-ethiopia', 'https://bina.et/lmis-labor-id-ethiopia', 'https://bina.et/police-clearance-ethiopia', 'https://bina.et/coc-certificate-ethiopia', 'https://bina.et/tenant-screening-ethiopia', ...posts.filter(p => !CANONICAL_TO[p.slug]).map(p => 'https://bina.et/news/' + p.slug), ...tnds.map(t => 'https://bina.et/tenders/' + t.slug), ...cshows.map(s => 'https://bina.et/cinema/' + s.id), ...shopUrls, 'https://bina.et/watch', ...films.map(f => 'https://bina.et/watch/' + f.slug), /* /b/:slug is noindex — it lists tenants by name, unit and phone — so it is not requested here.
      The hotel pages below are a different template and stay. */ ...bs.filter(b => b.buildingType === 'HOTEL' && !hotelIsDemo(b)).map(b => 'https://bina.et/hotel/' + b.qrSlug), 'https://bina.et/jobs', ...jobCats.map(c => 'https://bina.et/jobs/category/' + c), 'https://bina.et/employers', ...jobCats.map(c => 'https://bina.et/employers/' + c), ...openJobs.map(j => 'https://bina.et/jobs/' + j.slug), ...jobEmployers.map(e => 'https://bina.et/employer/' + e.slug), ...(fastify.healthServiceUrls ? fastify.healthServiceUrls() : [])]
     .filter(u => u !== 'https://bina.et/travel' || tripsAhead)
     ;
+  // Every home, car, company and reachable hotel page that is indexable - the same rules as each page's robots meta
+  // (a listing older than a year may be sold; a company or hotel we know only by name is an empty page).
+  const yearAgo = Date.now() - 365 * 864e5, fresh = r => !(r.details && r.details.updated && Date.parse(r.details.updated) < yearAgo);
+  const homes = await prisma.propertyListing.findMany({ where: { active: true }, select: { slug: true, details: true, companySlug: true, checkedAt: true } }).catch(() => []);
+  const carRows = await prisma.carListing.findMany({ where: { active: true }, select: { slug: true, details: true, companySlug: true, checkedAt: true } }).catch(() => []);
+  const selling = new Set(homes.concat(carRows).map(r => r.companySlug).filter(Boolean));
+  const companyList = (require('./companies/directory').list || (() => []))()
+    .filter(c => c.website || (c.phones || []).length || (c.places || []).length || c.employer || selling.has(c.slug));
+  const hotelList = (require('./hotels/directory').findableList || (() => []))();
+  urls.push(...(await require('./market/landing').urls().catch(() => [])).map(l => 'https://bina.et' + l.path));
+  urls.push(...homes.filter(fresh).map(r => 'https://bina.et/property/' + encodeURIComponent(r.slug)),
+    ...carRows.filter(fresh).map(r => 'https://bina.et/cars/' + encodeURIComponent(r.slug)),
+    ...companyList.map(c => 'https://bina.et/companies/' + encodeURIComponent(c.slug)),
+    ...hotelList.map(h => 'https://bina.et/hotels/' + encodeURIComponent(h.slug)));
+  urls.push('https://bina.et/shop', 'https://bina.et/health');
+  urls.push(...((require('./health/directory').findableSlugs || (() => []))()).map(p => 'https://bina.et' + p));
+  // <lastmod> only where the page has a real date (publication, the employer's last change, the company site's own date).
+  const lm = new Map(), day = d => { const t = d ? new Date(d) : null; return t && !isNaN(t) ? t.toISOString().slice(0, 10) : null; };
+  const own = r => (r.details && /^\d{4}-\d{2}-\d{2}/.test(r.details.updated || '') ? r.details.updated.slice(0, 10) : day(r.checkedAt));
+  for (const p of posts) lm.set('https://bina.et/news/' + p.slug, day(p.publishedAt));
+  for (const t of tnds) lm.set('https://bina.et/tenders/' + t.slug, day(t.publishedAt));
+  for (const j of openJobs) lm.set('https://bina.et/jobs/' + j.slug, day(j.publishedAt));
+  for (const e of jobEmployers) lm.set('https://bina.et/employer/' + e.slug, day(e.updatedAt));
+  for (const r of homes) lm.set('https://bina.et/property/' + encodeURIComponent(r.slug), own(r));
+  for (const r of carRows) lm.set('https://bina.et/cars/' + encodeURIComponent(r.slug), own(r));
   reply.type('application/xml').send('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    + urls.map(u => '<url><loc>' + u + '</loc></url>').join('\n') + '\n</urlset>');
+    + urls.map(u => '<url><loc>' + u + '</loc>' + (lm.get(u) ? '<lastmod>' + lm.get(u) + '</lastmod>' : '') + '</url>').join('\n') + '\n</urlset>');
 });
 fastify.get('/sw.js', async (req, reply) => reply.header('Cache-Control', 'no-cache').header('Service-Worker-Allowed', '/').sendFile('sw.js'));
 fastify.get('/offline', async (req, reply) => reply.header('Cache-Control', 'no-cache').sendFile('offline.html'));
@@ -389,9 +429,10 @@ fastify.get('/api/restaurant/:slug', async (req, reply) => {
   if (!shop || !shop.products.length) return reply.code(404).send({ error: 'not_found' });
   // No phone. restaurant.html never read it, and the people behind these names did not publish it.
   return { restaurant: { id: shop.id, name: shop.name, nameAm: shop.nameAm,
-    demo: hotelIsDemo(shop.tenancy.unit.building) || undefined,
+    demo: hotelIsDemo(shop.tenancy.unit.building) || undefined, photo: (shop.photos || [])[0] || undefined,
     building: shop.tenancy.unit.building.name, buildingSlug: shop.tenancy.unit.building.qrSlug, unit: shop.tenancy.unit.number },
-    menu: shop.products.map(p => ({ id: p.id, name: p.name, nameAm: p.nameAm, price: p.price, category: p.category || 'Menu' })) };
+    menu: shop.products.map(p => ({ id: p.id, name: p.name, nameAm: p.nameAm, price: p.price, category: p.category || 'Menu',
+      description: p.description || undefined, photo: p.photoUrl || undefined })) };
 });
 
 // An order is a message to a real business: notifyShop() fires for any shop with status 'live'.
@@ -473,6 +514,17 @@ fastify.get('/restaurant/:slug', async (req, reply) => {
     !!(shop && shop.tenancy && shop.tenancy.unit && hotelIsDemo(shop.tenancy.unit.building)));
 });
 
+// bina.et's own QR (30 Sep 2026): the table cards and the shop dashboard used api.qrserver.com, which saw every link
+// and failed with it. Only bina.et paths are drawn, so this is not an open QR service for any address.
+fastify.get('/qr.svg', async (req, reply) => {
+  const p = String((req.query || {}).p || '/');
+  if (!/^\/[A-Za-z0-9\-._~\/?=&%+]{0,240}$/.test(p)) return reply.code(400).send('bad path');
+  const svg = await require('qrcode').toString('https://bina.et' + p, { type: 'svg', margin: 1, errorCorrectionLevel: 'M', color: { dark: '#081120', light: '#ffffff' } });
+  return reply.header('Cache-Control', 'public, max-age=604800').type('image/svg+xml').send(svg);
+});
+// Printable table cards for any restaurant: /table-qr?r=<restaurant slug>&name=&am=&n=<tables>&from=<first table>
+fastify.get('/table-qr', async (req, reply) => reply.header('X-Robots-Tag', 'noindex').sendFile('table-qr.html'));
+
 // ===== DIASPORA: building-owner leads =====
 fastify.post('/api/diaspora-lead', async (req, reply) => {
   const { name, phone, country, city, building, units, note } = req.body || {};
@@ -490,28 +542,179 @@ fastify.get('/diaspora', async (req, reply) => reply.sendFile('diaspora.html'));
 fastify.get('/insurance', async (req, reply) => reply.sendFile('insurance.html'));
 fastify.get('/for-insurers', async (req, reply) => reply.sendFile('for-insurers.html'));
 // ===== CARS + REAL ESTATE marketplace (partner-supplied) =====
-fastify.get('/cars', async (req, reply) => reply.sendFile('cars.html'));
-fastify.get('/property', async (req, reply) => reply.sendFile('property.html'));
+// /property and /cars go out with their first 24 cards already written in (the same public/listing-cards.js the
+// browser uses) and a schema.org ItemList, so search engines see the listings; the browser then takes over (filters,
+// Show more). Before this the cards arrived only by fetch, and a crawler saw "Loading…".
+const listingCards = require('./public/listing-cards.js');
+const pageFiles = {};
+function withCards(file, gridOpen, cardsHtml, ld) {
+  const f = path.join(__dirname, 'public', file), m = fs.statSync(f).mtimeMs;
+  if (!pageFiles[file] || pageFiles[file].m !== m) pageFiles[file] = { m, html: fs.readFileSync(f, 'utf8') };
+  let html = pageFiles[file].html;
+  const i = html.indexOf(gridOpen), j = i < 0 ? -1 : html.indexOf('</div>', i + gridOpen.length);
+  if (j < 0) return html;
+  html = html.slice(0, i + gridOpen.length) + cardsHtml + html.slice(j + 6);
+  return html.replace('</head>', ldScript(ld) + '</head>');
+}
+const itemList = (name, base, list) => ({ '@context': 'https://schema.org', '@type': 'ItemList', name, numberOfItems: list.length,
+  itemListElement: list.slice(0, 100).map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: 'https://bina.et' + base + '/' + x.slug, name: x.title })) });
+fastify.get('/cars', async (req, reply) => {
+  try {
+    const cars = localFirst(await prisma.carListing.findMany({ where: { active: true }, orderBy: [{ featured: 'desc' }, { createdAt: 'desc' }], take: 1500 })).map(pubCar);
+    // the order cars.html shows first: a price and a photo first
+    const cnK = c => /china/i.test(c.city || '') ? 1 : 0;
+    const first = cars.map((c, i) => [c, i]).sort((a, b) => cnK(a[0]) - cnK(b[0]) || ((b[0].price ? 2 : 0) + (b[0].imageUrl ? 1 : 0)) - ((a[0].price ? 2 : 0) + (a[0].imageUrl ? 1 : 0)) || a[1] - b[1]).map(x => x[0]);
+    const L = require('./market/landing'), lu = (await L.urls().catch(() => [])).filter(l => l.car);
+    return reply.type('text/html; charset=utf-8').send(withCards('cars.html', '<div class="grid" id="cars">', first.slice(0, 24).map(listingCards.carCard).join(''),
+      itemList('Cars for sale in Addis Ababa', '/cars', first)).replace('<section class="wrap" id="request">', '<section class="wrap"><div class="band"><h2>Popular searches · ተፈላጊ</h2>'
+        + L.linksHtml('By make and kind', lu.map(l => ({ href: l.path, text: l.text, n: l.n }))) + '</div></section>\n<section class="wrap" id="request">'));
+  } catch (e) { req.log.error(e); return reply.sendFile('cars.html'); }
+});
+fastify.get('/property', async (req, reply) => {
+  try {
+    const props = (await prisma.propertyListing.findMany({ where: { active: true }, orderBy: [{ verified: 'desc' }, { createdAt: 'desc' }], take: 400 })).map(pubProperty);
+    const sale = props.filter(p => (p.listingType || 'sale') === 'sale');   // the tab the page opens on
+    const L = require('./market/landing'), lu = (await L.urls().catch(() => [])).filter(l => !l.car);
+    return reply.type('text/html; charset=utf-8').send(withCards('property.html', '<div class="grid" id="props">', sale.slice(0, 24).map(listingCards.propertyCard).join(''),
+      itemList('Homes, land and shops for sale and rent in Addis Ababa', '/property', props)).replace('<section class="wrap" id="request">', '<section class="wrap"><div class="band"><h2>Popular searches · ተፈላጊ</h2>'
+        + L.linksHtml('Homes for sale', lu.filter(l => l.lt === 'sale').map(l => ({ href: l.path, text: l.text.replace('Homes for sale in ', ''), n: l.n })))
+        + L.linksHtml('Homes for rent', lu.filter(l => l.lt === 'rent').map(l => ({ href: l.path, text: l.text.replace('Homes for rent in ', ''), n: l.n }))) + '</div></section>\n<section class="wrap" id="request">'));
+  } catch (e) { req.log.error(e); return reply.sendFile('property.html'); }
+});
 // What a listing shows, and nothing else. dealerPhone is deliberately absent: cars.html never reads
 // it, and the page's contact route is the lead form, which passes the enquiry through the admin
 // rather than publishing a dealer's number. `return { cars }` would publish whatever the model grows
 // next — which is exactly how /api/restaurant/:slug ended up handing out a tenant's mobile.
+// Cars in Addis first; Jedda Star's electric cars in China (ops/places/jedda-import.js) after them, whatever their import date.
+const localFirst = l => l.slice().sort((a, b) => (/china/i.test(a.city || '') ? 1 : 0) - (/china/i.test(b.city || '') ? 1 : 0));
 const pubCar = c => ({ slug: c.slug, title: c.title, make: c.make, model: c.model, year: c.year,
   price: c.price, mileage: c.mileage, fuel: c.fuel, transmission: c.transmission, bodyType: c.bodyType,
-  condition: c.condition, city: c.city, imageUrl: c.imageUrl, dealer: c.dealer, featured: c.featured });
+  condition: c.condition, city: c.city, imageUrl: c.imageUrl, dealer: c.dealer, featured: c.featured,
+  sourceUrl: c.sourceUrl, companySlug: c.companySlug, phone: c.dealerPhone, whatsapp: c.dealerWhatsapp, telegram: c.dealerTelegram,
+  logo: companyLogo(c.companySlug), updated: (c.details && c.details.updated) || null });
 fastify.get('/api/cars', async (req) => {
-  const cars = await prisma.carListing.findMany({ where: { active: true }, orderBy: [{ featured: 'desc' }, { createdAt: 'desc' }], take: 60 });
+  // 60 was enough for hand-added cars; the dealer-site import (ops/places/car-import.js) adds ~110+.
+  const cars = localFirst(await prisma.carListing.findMany({ where: { active: true }, orderBy: [{ featured: 'desc' }, { createdAt: 'desc' }], take: 1500 }));
   return { cars: cars.map(pubCar) };
+});
+// Bini's search_cars tool (assistant/tools.js): the live /cars listings, filtered. Contacts are the dealer's own.
+fastify.get('/api/cars/search', async (req) => {
+  const q = req.query || {}, low = v => String(v || '').toLowerCase();
+  const num = s => { const m = String(s || '').replace(/,/g, '').match(/\d+(\.\d+)?/); return m ? parseFloat(m[0]) : null; };
+  let list = localFirst(await prisma.carListing.findMany({ where: { active: true }, orderBy: [{ featured: 'desc' }, { createdAt: 'desc' }], take: 1500 }));
+  if (q.where === 'china') list = list.filter(c => /china/i.test(c.city || ''));
+  if (q.where === 'addis') list = list.filter(c => !/china/i.test(c.city || ''));
+  if (q.make) list = list.filter(c => low(c.make + ' ' + c.title).includes(low(q.make).trim()));
+  if (q.model) list = list.filter(c => squash(c.model + ' ' + c.title).includes(squash(q.model)));
+  if (q.body) list = list.filter(c => low(c.bodyType + ' ' + c.title).includes(low(q.body).split(' ')[0]));
+  if (q.fuel) list = list.filter(c => low(c.fuel + ' ' + c.title).includes(low(q.fuel) === 'ev' ? 'electric' : low(q.fuel)));
+  if (q.transmission) list = list.filter(c => low(c.transmission).includes(low(q.transmission)));
+  if (q.condition) list = list.filter(c => low(c.condition).includes(low(q.condition)));
+  if (Number(q.minYear) > 1900) list = list.filter(c => Number(c.year) >= Number(q.minYear));
+  if (Number(q.maxPrice) > 0) { const mx = Number(q.maxPrice); list = list.filter(c => { const n = num(c.price); return n != null && !/usd|\$/i.test(c.price) && n <= mx; }); }
+  if (q.q) { const words = low(q.q).split(/[\s,]+/).filter(w => w.length > 1 && !/^(car|cars|for|sale|buy|a|an|the|in|addis|ababa|መኪና|የሚሸጥ)$/i.test(w));
+    list = list.filter(c => { const t = squash([c.title, c.make, c.model, c.bodyType, c.fuel, c.dealer].join(' ')); return words.every(w => t.includes(squash(w))); }); }
+  // a dollar price is a China price before shipping and tax: never "cheaper" than a birr price in Addis
+  const birr = c => /usd|\$/i.test(c.price || '') ? Infinity : (num(c.price) || Infinity);
+  if (q.sort === 'cheap') list = list.slice().sort((a, b) => birr(a) - birr(b));
+  const limit = Math.min(Math.max(Number(q.limit) || 5, 1), 8);
+  return { total: list.length, results: list.slice(0, limit).map(c => ({ title: c.title, make: c.make, model: c.model, year: c.year,
+    price: c.price || 'on request', mileage: c.mileage, fuel: c.fuel, transmission: c.transmission, body: c.bodyType, condition: c.condition,
+    dealer: c.dealer, phone: c.dealerPhone, whatsapp: c.dealerWhatsapp, telegram: c.dealerTelegram ? '@' + c.dealerTelegram : null,
+    location: /china/i.test(c.city || '') ? 'In China: ' + (c.dealer || 'the importer') + ' ships it to Addis Ababa through Djibouti' : 'Addis Ababa',
+    priceNote: /china/i.test(c.city || '') ? 'China price in US dollars, BEFORE shipping, customs duty and taxes' : undefined,
+    link: 'https://bina.et/cars/' + c.slug, checkedOnDealerSite: c.checkedAt ? c.checkedAt.toISOString().slice(0, 10) : null })) };
 });
 // Same rule, same reason. agencyPhone is not here because property.html does not read it and the
 // enquiry goes through the lead form. `verified` stays — the page renders a ✓ Verified badge from it —
 // but note it means "an admin ticked the box", not that anything was checked automatically.
+// Company logos saved by ops/places/property-import.js as public/property/logo/<companySlug>.webp (read every 10 min).
+let propLogos = null, propLogosAt = 0;
+function companyLogo(slug) {
+  if (!slug) return null;
+  if (!propLogos || Date.now() - propLogosAt > 600000) {
+    propLogos = new Map(); propLogosAt = Date.now();
+    try { const dir = path.join(__dirname, 'public', 'property', 'logo');
+          for (const f of fs.readdirSync(dir)) if (f.endsWith('.webp')) propLogos.set(f.slice(0, -5), Math.floor(fs.statSync(path.join(dir, f)).mtimeMs / 1000)); } catch (e) {}
+  }
+  return propLogos.has(slug) ? '/static/property/logo/' + encodeURIComponent(slug) + '.webp?v=' + propLogos.get(slug) : null;
+}
 const pubProperty = p => ({ slug: p.slug, title: p.title, listingType: p.listingType,
   propertyType: p.propertyType, price: p.price, beds: p.beds, baths: p.baths, area: p.area,
-  city: p.city, location: p.location, imageUrl: p.imageUrl, agency: p.agency, verified: p.verified });
+  city: p.city, location: p.location, imageUrl: p.imageUrl, agency: p.agency, verified: p.verified,
+  sourceUrl: p.sourceUrl, companySlug: p.companySlug, phone: p.agencyPhone, whatsapp: p.agencyWhatsapp,
+  telegram: p.agencyTelegram, logo: companyLogo(p.companySlug), updated: (p.details && p.details.updated) || null });
 fastify.get('/api/properties', async (req) => {
-  const props = await prisma.propertyListing.findMany({ where: { active: true }, orderBy: [{ verified: 'desc' }, { createdAt: 'desc' }], take: 60 });
+  // 60 was enough for hand-added listings; the company-site import (ops/places/property-import.js) adds ~100+.
+  const props = await prisma.propertyListing.findMany({ where: { active: true }, orderBy: [{ verified: 'desc' }, { createdAt: 'desc' }], take: 400 });
   return { properties: props.map(pubProperty) };
+});
+// Bini's search_properties tool (assistant/tools.js): the live /property listings, filtered. Contacts are the
+// listing company's own (ops/places/property-import.js); prices per m² or in USD never pass a birr budget.
+// Addis neighbourhoods as buyers write them: "ሳርቤት" must find "Sarbet" (In-Addis writes English) and "Kazanchis"
+// must find "ካዛንቺስ" (Meba writes Amharic). Each group is one place; spaces are ignored when matching.
+const { AREA_GROUPS, squash } = require('./assistant/areas');   // shared with assistant/health-args.js (Bini and Dr Afiya)
+// A property question read without a model: rent or buy, the area, the bedrooms. Used when Bini's model answers
+// a forced property question without calling search_properties (it sometimes just asks "how many bedrooms?").
+function propertyArgsFromText(msg) {
+  const m = String(msg || ''), k = squash(m), a = {};
+  if (/\brent|lease|ኪራይ|የሚከራይ|ለመከራየት|ልከራይ/i.test(m)) a.listing = 'rent';
+  else if (/\b(sale|buy|buying|purchase)\b|የሚሸጥ|ለመግዛት|ልግዛ|ግዢ|ሽያጭ/i.test(m)) a.listing = 'sale';
+  const g = AREA_GROUPS.find(x => x.some(v => k.includes(squash(v))));
+  if (g) a.area = g[0];
+  const b = m.match(/(\d+)\s*-?\s*(bed|br\b|bd\b|መኝታ)/i) || m.match(/ባለ\s*(\d+)/);
+  if (b) a.beds = Number(b[1]); else if (/studio|ስቱዲዮ/i.test(m)) a.beds = 0;
+  return a;
+}
+// "ሳርቤት", "Sar Bet" or "ሳርቤት አካባቢ" -> every spelling of Sarbet; an unknown word stays itself.
+// A car-buying question read without a model (same safety net as for property): make, body, fuel, new/used, budget, year.
+function carArgsFromText(msg) {
+  const m = String(msg || ''), a = {};
+  const mk = m.match(/\b(toyota|suzuki|hyundai|kia|nissan|byd|honda|volkswagen|vw|mitsubishi|isuzu|ford|mercedes|bmw|chery|geely|changan|jac|haval|mg|tesla|peugeot|lexus|mazda|jetour|zeekr|xpeng)\b/i);
+  if (mk) a.make = mk[1];
+  if (/\bsuv/i.test(m)) a.body = 'SUV'; else if (/pick-?up|ፒካፕ/i.test(m)) a.body = 'Pickup'; else if (/sedan/i.test(m)) a.body = 'Sedan';
+  if (/electric|\bev\b|ኤሌክትሪክ/i.test(m)) a.fuel = 'Electric'; else if (/hybrid|ሃይብሪድ/i.test(m)) a.fuel = 'Hybrid'; else if (/diesel|ናፍጣ/i.test(m)) a.fuel = 'Diesel';
+  if (/\bused\b|second-?hand|ያገለገለ/i.test(m)) a.condition = 'Used'; else if (/\bnew\b|አዲስ/i.test(m)) a.condition = 'New';
+  const mil = m.match(/(\d+(?:\.\d+)?)\s*(million|mln|m\b|ሚሊዮን)/i); if (mil) a.maxPrice = Math.round(Number(mil[1]) * 1e6);
+  const yr = m.match(/\b(20[0-2]\d)\b/); if (yr) a.minYear = Number(yr[1]);
+  if (/cheap|ርካሽ/i.test(m)) a.sort = 'cheap';
+  return a;
+}
+// A place-to-stay question read without a model: area, kind, stars (same safety net as property and cars).
+function hotelArgsFromText(msg) {
+  const m = String(msg || ''), k = squash(m), a = {};
+  const g = AREA_GROUPS.find(x => x.some(v => k.includes(squash(v)))); if (g) a.area = g[0];
+  if (/guest ?house|pension|ፔንሲዮን|እንግዳ ማረፊያ/i.test(m)) a.kind = 'guest_house'; else if (/hostel/i.test(m)) a.kind = 'hostel';
+  else if (/apartment|አፓርት/i.test(m)) a.kind = 'apartment'; else if (/motel/i.test(m)) a.kind = 'motel';
+  const st = m.match(/([1-5])\s*-?\s*(star|ኮከብ)/i); if (st) a.minStars = Number(st[1]);
+  return a;
+}
+const { healthArgsFromText } = require('./assistant/health-args');   // a health-place question read without a model (Bini's safety net, Dr Afiya)
+function areaTerms(a) { const k = squash(a);
+  const g = AREA_GROUPS.find(x => x.some(v => squash(v) === k)) || (k.length > 2 && AREA_GROUPS.find(x => x.some(v => k.includes(squash(v)))));
+  return (g || [a]).map(squash); }
+// Words that say "a home, to rent, please" rather than which one; the model often sends them in q.
+const PROP_STOP = /^(ቤት|ቤቶች|አካባቢ|አካባቢ|የሚከራይ|የሚሸጥ|ኪራይ|ሽያጭ|ለኪራይ|ለሽያጭ|አሳየኝ|እፈልጋለሁ|ውስጥ|house|houses|home|homes|for|to|in|at|near|around|area|the|a|an|rent|rental|sale|buy|show|me|i|want|looking|property|properties|place)$/i;
+fastify.get('/api/properties/search', async (req) => {
+  const q = req.query || {}, low = v => String(v || '').toLowerCase();
+  const num = s => { const m = String(s || '').replace(/,/g, '').match(/\d+(\.\d+)?/); return m ? parseFloat(m[0]) : null; };
+  let list = await prisma.propertyListing.findMany({ where: { active: true }, orderBy: [{ verified: 'desc' }, { createdAt: 'desc' }], take: 400 });
+  if (q.listing === 'sale' || q.listing === 'rent') list = list.filter(p => p.listingType === q.listing);
+  if (q.type) list = list.filter(p => low(p.propertyType).includes(low(q.type).split(' ')[0]));
+  if (q.area) { const terms = areaTerms(q.area); list = list.filter(p => { const t = squash(p.location + ' ' + p.title); return terms.some(x => t.includes(x)); }); }
+  if (q.beds != null && q.beds !== '' && !isNaN(Number(q.beds))) { const b = Number(q.beds);
+    list = list.filter(p => { const n = /studio/i.test(p.title) ? 0 : parseInt(p.beds, 10); return !isNaN(n) && n >= b; }); }
+  if (Number(q.maxPrice) > 0) { const mx = Number(q.maxPrice);
+    list = list.filter(p => { const s = String(p.price || ''), n = num(s); return n != null && !/m²|m2|usd|\$/i.test(s) && n <= mx; }); }
+  if (q.q) { const words = low(q.q).split(/[\s,]+/).filter(w => w.length > 1 && !PROP_STOP.test(w)).map(areaTerms);
+    list = list.filter(p => { const t = squash([p.title, p.location, p.agency, p.propertyType].join(' ')); return words.every(ts => ts.some(w => t.includes(w))); }); }
+  const limit = Math.min(Math.max(Number(q.limit) || 5, 1), 8);
+  return { total: list.length, results: list.slice(0, limit).map(p => ({ title: p.title, listing: p.listingType, type: p.propertyType,
+    price: p.price || 'on request', beds: p.beds, baths: p.baths, size: p.area, area: p.location, company: p.agency,
+    phone: p.agencyPhone, whatsapp: p.agencyWhatsapp, telegram: p.agencyTelegram ? '@' + p.agencyTelegram : null,
+    link: 'https://bina.et/property/' + p.slug,
+    // The real date the import last saw it on the company's site - without it the model invents one.
+    checkedOnCompanySite: p.checkedAt ? p.checkedAt.toISOString().slice(0, 10) : null })) };
 });
 fastify.post('/api/admin/car', async (req, reply) => {
   if (authFail(req, reply)) return;
@@ -869,6 +1072,8 @@ fastify.get('/tax-forms', async (req, reply) => reply.sendFile('tax-forms.html')
 fastify.get('/import-car-to-ethiopia', async (req, reply) => reply.sendFile('import-car-to-ethiopia.html'));
 fastify.get('/ethiopian-origin-id-yellow-card', async (req, reply) => reply.sendFile('ethiopian-origin-id-yellow-card.html'));
 fastify.get('/lmis-labor-id-ethiopia', async (req, reply) => reply.sendFile('lmis-labor-id-ethiopia.html'));
+// Asked three times by real users on 29 Sep 2026 and answered vaguely: the police clearance guide (30 Sep 2026).
+fastify.get('/police-clearance-ethiopia', async (req, reply) => reply.sendFile('police-clearance-ethiopia.html'));
 fastify.get('/coc-certificate-ethiopia', async (req, reply) => reply.sendFile('coc-certificate-ethiopia.html'));
 fastify.get('/open-bank-account-ethiopia', async (req, reply) => reply.sendFile('open-bank-account-ethiopia.html'));
 fastify.get('/birth-marriage-certificate-ethiopia', async (req, reply) => reply.sendFile('birth-marriage-certificate-ethiopia.html'));
@@ -912,6 +1117,10 @@ async function callBini(system, messages0, maxTokens, opts){
       clearTimeout(to);
       const d = await r.json();
       // Token counts for labelled calls (tool agents: the owner agent). Counts only — never the prompt.
+      // Meter: every model call, one line per call in /root/storage/ai-usage/bini-<date>.log (time, model, prompt and
+      // completion tokens). ops/ai-cost.js turns it into a daily bill. Fire-and-forget; a full disk never breaks a reply.
+      if (d && d.usage) fs.promises.appendFile('/root/storage/ai-usage/bini-' + new Date().toISOString().slice(0, 10) + '.log',
+        new Date().toISOString().slice(11, 19) + ' ' + model + ' ' + (d.usage.prompt_tokens || 0) + ' ' + (d.usage.completion_tokens || 0) + '\n').catch(() => {});
       if (opts && opts.label && d && d.usage) console.log('[bini] usage ' + opts.label + ' prompt=' + d.usage.prompt_tokens + ' completion=' + d.usage.completion_tokens);
       let text = '';
       if (fmt === 'openai') {
@@ -926,7 +1135,7 @@ async function callBini(system, messages0, maxTokens, opts){
             (opts.used = opts.used || []).push(tc.function.name);
             next.push({ role: 'tool', tool_call_id: tc.id, content: JSON.stringify(out).slice(0, 6000) });
           }
-          opts.keepForcing = opts.rounds < 3 && !(opts.used || []).some(n => /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|cinema_programme|remember|contact_team)$/.test(n));
+          opts.keepForcing = opts.rounds < 3 && !(opts.used || []).some(n => /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|search_properties|search_cars|search_hotels|search_health|cinema_programme|remember|contact_team|company_request|listing_request|shop_post)$/.test(n));   // company_request: once, then answer
           return await once(fmt, base, key, model, next);
         }
         text = (m && m.content) ? String(m.content).trim() : '';
@@ -1063,6 +1272,9 @@ const biniBanking = require('./assistant/banking');
 const biniBusiness = require('./assistant/business');
 const biniTelecom = require('./assistant/telecom');
 const biniForce = require('./assistant/force');
+// Buying words for the bina.et/shop note (a seller posting their own shop is the shop helper, not this).
+const SHOP_BUY_RE = /(\bbuy(ing)?\b|purchase|where (can|do|could) i (get|find)|\bshop(s|ping)?\b|boutique|የት (ላገኝ|አገኛለሁ|ይገኛል|ልግዛ|እገዛ|ይሸጣል)|መግዛት|ልገዛ|ልግዛ|እገዛለሁ|ይሸጣል|የሚሸጥ|የሚሸጡ|ሱቅ|ቡቲክ)/i;
+const SHOP_SELL_RE = /(\bpost\b|\bsell (my|our)\b|ልለጥፍ|መለጠፍ|ላስተዋውቅ|ማስተዋወቅ|ልሸጥ|ልሸጣቸው|መሸጥ እፈልጋለሁ)/i;
 // A harness sets this header. Opt-in rather than a guess at IP patterns: a pattern would rot the
 // first time a harness changed its ip, and rot invisibly.
 const isEval = req => require('./api/evalGate').evalAllowed(req, OWNER_KEY);   // header alone is no longer enough: owner key, or loopback
@@ -1110,6 +1322,8 @@ fastify.post('/api/assistant', async (req, reply) => {
   const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip, evaluation: isEval(req) });
   const mem = biniMemory.forUser(userKey, { telegramId: u.telegramId, name: u.name });
   const lang = biniLang.detect(msg);
+  const coSlug = /^[a-z0-9-]{3,80}$/.test(String(b.company || '')) ? String(b.company) : null;
+  const hoSlug = /^[a-z0-9-]{3,140}$/.test(String(b.hotel || '')) ? String(b.hotel) : null;
   // FIRST, above everything, and for the same reason it is first on the other two pages: a model that
   // is right two times in three is not good enough when the third person is having a stroke.
   // Measured 2026-09-12 before this existed — Bini gave the ambulance number for a child who would not
@@ -1164,21 +1378,36 @@ fastify.post('/api/assistant', async (req, reply) => {
     // bank question and a licence question gets BOTH blocks - only one pack can hold the +0.06 tie-breaker,
     // but a limit is not a retrieval preference and a half-stated rule is a half-obeyed one.
     const bizGuard = businessPrefer.prefer ? biniBusiness.GUARDRAILS : '';
-    const [ctx, profile] = await Promise.all([knowledge.contextFor(msg, { lang, ...packPrefer }).catch(() => ''), Promise.resolve(biniMemory.profileText(known))]);
+    // A short follow-up is also searched with the question before it (knowledge/index.js contextFor `context`: added hits,
+    // never replacing). ON since 30 Sep 2026 after a 17-case multi-turn replay, two runs: 31/34 answered vs 26/34 with the
+    // message alone, no new-topic drift (/root/storage/health-fix/followup-ab.js). Off switch: BINI_FOLLOWUP_CONTEXT=0;
+    // an evaluation request with x-bini-retrieval: plain gets the old search, for the next A/B.
+    // "Short" is 10 words (was 7 until 30 Sep 2026): "ሲስተሙ online endahona ngaruge hege nbare wana meseriya bet" after a
+    // police-clearance question is 8 words, was searched alone and answered about the etrade licence system.
+    const prevAsk = hist.slice().reverse().find(m => m.role === 'user');
+    const followCtx = prevAsk && msg.trim().split(/\s+/).length <= (+process.env.BINI_FOLLOWUP_WORDS || 10) && process.env.BINI_FOLLOWUP_CONTEXT !== '0'
+      && !(isEval(req) && req.headers['x-bini-retrieval'] === 'plain') ? prevAsk.content : undefined;
+    const [ctx, profile] = await Promise.all([knowledge.contextFor(msg, { lang, ...packPrefer, context: followCtx }).catch(() => ''), Promise.resolve(biniMemory.profileText(known))]);
     const voice = (lang === 'am' || lang === 'am-latin') ? '\n\n## Amharic voice (glossary + rules)\n' + knowledge.voice() : (lang === 'om' ? '\n\n## Afaan Oromoo voice (glossary + rules)\n' + knowledge.voice('om') : '');
     const turn = hist.length ? '\n\nThis chat is already going: do not introduce yourself or say your name; do not open the way your previous reply opened.' : '\n\nFirst message of this chat: if the user only greeted you, say your name once briefly; if they asked something straight away, answer first and do not open with your name.';
     let toolOut = '';   // every tool result this turn, so a figure can be traced to its source
-    const runTool = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', prisma, memory: mem, telegramId: u.telegramId || null, lang, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
+    const healthSeen = [];   // the places search_health returned, so each one Bini names keeps its bina.et/health page
+    const runTool = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', dryRun: isEval(req), prisma, memory: mem, telegramId: u.telegramId || null, uid: /^[A-Za-z0-9_-]{6,64}$/.test(String(u.uid || '')) ? String(u.uid) : null, lang, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
       handover: h => biniHandover({ ...h, userKey, channel, lang, user: known || u, message: msg, history: hist }) });
+    let lastShops = null;   // the last search_shops result, for the promise-only backstop below
     const execute = async (name, args) => {
       const r = await runTool(name, args);
+      if (name === 'search_shops' && r && !r.error) lastShops = { a: args, r };
       try { toolOut += ' ' + JSON.stringify(r); } catch (e) { /* not serialisable, nothing to ground with */ }
+      if (name === 'search_health' && r && !r.error) healthSeen.push(...[].concat(r.results || [], r.nearest || [], r.doctors || []).filter(x => x && x.name && x.url));
       return r;
     };
     // Flash sometimes answers a price or "remember me" from memory; on those intents the first round must call a tool.
     // Which intents those are, and why a price word is not one of them on its own any more (a bank and an airline charge too): assistant/force.js.
-    const allTools = biniTools.toOpenAI();
-    const forced = biniForce.shouldForceTool(msg);
+    // Only the tools this conversation can need (assistant/tool-router.js): all 19 definitions are ~4,400 tokens on
+    // every call. Unclear topic, owner/company/listing helper modes -> every tool, as before.
+    const allTools = require('./assistant/tool-router').pickTools(biniTools.toOpenAI(), { msg, hist, special: !!(b.listing || b.shop || b.company || b.hotel) });
+    const forced = !b.listing && !b.shop && (biniForce.shouldForceTool(msg) || biniForce.isRideFollowUp(msg, prevAsk && prevAsk.content));   // listing mode: Bini asks its questions first, no forced search
     const rememberIntent = /(remember|አስታውስ|አስታውሰኝ|yaadadh)/i.test(msg);
     // While forcing, the model may only choose an action tool: never contact_team (that spammed handovers), remember only on remember intent.
     const forcedTools = allTools.filter(t => t.function.name !== 'contact_team' && (rememberIntent ? t.function.name === 'remember' : t.function.name !== 'remember'));
@@ -1218,7 +1447,37 @@ fastify.post('/api/assistant', async (req, reply) => {
           + '\n\nThese are the ONLY businesses BinaSmart has. Name none other. If the list is empty, say plainly that we do not have that kind of place listed yet, that we are signing them up, and offer WhatsApp — do NOT suggest places from your own knowledge and do NOT imply BinaSmart lists many.';
       }
     }
-    const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + BINI_SHARED + voice + '\n\n' + biniLang.directive(lang) + turn + bankGuard + bizGuard + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
+    let coCtx = '';
+    if (coSlug) {
+      let co = null; try { co = (require('./companies/directory').list() || []).find(x => x.slug === coSlug); } catch (e) { co = null; }
+      if (co) coCtx = '\n\nCOMPANY HELPER MODE: this person opened Bini from BinaSmart\'s message to ' + co.name + ' (https://bina.et/companies/' + co.slug + '), so they probably work there. Help them with their company on BinaSmart: add or change their phone or WhatsApp, correct details, add homes or cars, remove a listing, or confirm (claim) the page. Ask only for what is missing - their name, their role (owner, manager or staff), a phone number to call back, and exactly what to change - then call company_request ONCE with company "' + co.slug + '". Never say a change is already live: the team calls to confirm and approves it, usually within a day. Homes or cars they add to their own website appear on BinaSmart by themselves every week. It is free, with no commission, and buyers call the company directly. If they only have a question, answer it.';
+    }
+    if (b.shop && !coCtx) coCtx = '\n\nSHOP HELPER MODE: this person opened Bini from the "Post your shop free" button on bina.et/shop, so they probably own or work at a shop in Addis Ababa and want to post a product or an offer. '
+      // 30 Sep 2026, a real seller (a phone, 450,000 birr): five turns of one or two questions each (condition, colour,
+      // storage, category, then name and phone), and they left before the post was sent.
+      + 'What a post needs: the shop name (their own name if they sell alone) and area, the item, its price in birr, their name and an Ethiopian phone for buyers. '
+      + 'Ask for EVERYTHING still missing in ONE short message, as a short list, never one question per turn. Work out the category yourself from the item (a phone is phones) and never ask it. '
+      + 'Buyers may WhatsApp the number unless they say no: tell them, do not ask. Do not ask about colour, storage, size or condition, and never add facts they did not give (no release dates, no specs). '
+      + 'Remind them once that they can send photos now with the camera button in this chat; photos are OPTIONAL, never wait for them. As soon as you have the facts, read them back in one short message and, when they agree (or say send / submit / ላከው / አዎ), call shop_post once with action "add". '
+      + 'Posting is free with no commission; buyers call the shop directly; their phone is shown on the post; nothing is public until the team calls to confirm and approves, usually within a day. '
+      + 'Refuse medicines, weapons, alcohol, tobacco, counterfeit or adult items. For "sold, take it down" use action "remove"; for a new price use "change". If they only have a question, answer it.';
+    if (b.listing && !coCtx) coCtx = '\n\nLISTING HELPER MODE: this person opened Bini from the "List your home" button on bina.et/property. '
+      + 'They want to SELL or RENT OUT a property; they may be a private owner, an agent (delala) or a company. Guide them warmly, one or two short questions at a time, in their language, '
+      + 'to collect what listing_request needs. Remind them once that they can send photos now with the camera button in this chat; photos are OPTIONAL. As soon as you have the facts, read them back in two or three lines and submit; '
+      + 'if they have no photos, or say send / submit / ላከው / አስገባው / ይላኩት, call listing_request immediately, never wait for photos. '
+      + 'then call listing_request once with action "add". Listing is free with no commission, buyers and tenants contact them directly, and nothing is public until the team calls and approves.';
+    if (hoSlug && !coCtx) {
+      let ho = null; try { ho = (require('./hotels/directory').list() || []).find(x => x.slug === hoSlug); } catch (e) { ho = null; }
+      if (ho) coCtx = '\n\nHOTEL HELPER MODE: this person opened Bini from BinaSmart\'s link for ' + ho.name + ' (https://bina.et/hotels/' + ho.slug + '), so they probably work there. Help them with their hotel page on BinaSmart: add rooms and prices, add or change their phone, correct details (name, area, stars, website), or confirm (claim) the page so guests can book with them directly. Ask only for what is missing - their name, their role (owner, manager or staff), a phone number to call back, and exactly what to add or change (for rooms: each room type and its price per night, in birr or USD - put them in rooms as well as in request) - then call company_request ONCE with company "' + ho.slug + '" and kind "hotel". Never say a change is already live: the team calls to confirm and approves it, usually within a day. Do not promise that a mobile number will be shown on the public page; the team decides. Direct booking on BinaSmart is 0% commission and guests pay at the hotel. If they only have a question, answer it.';
+    }
+    // A buyer asking where to buy something: what shop owners posted on bina.et/shop goes in front of Bini (30 Sep 2026).
+    // Done here, not left to search_shops, because Flash answered "where can I buy a dress" from the map without calling it.
+    if (!coCtx && SHOP_BUY_RE.test(msg) && !SHOP_SELL_RE.test(msg) && !biniForce.RIDE_CUE_RE.test(msg)) {
+      try { const hits = require('./shops/posts').searchLive(msg, 3, { strict: true });
+        if (hits.length) coCtx = '\n\nPOSTED ON BINA.ET/SHOP (real shops, approved by the BinaSmart team). Offer these FIRST, with the price and the shop\'s phone so the buyer calls the shop directly (no commission); the page is https://bina.et/shop. Never add details that are not here:\n'
+          + hits.map(p => '- ' + p.title + ' · ' + p.price + ' · ' + p.shop + (p.area ? ', ' + p.area : '') + ' · ' + p.phone + (p.whatsapp ? ' (WhatsApp ok)' : '')).join('\n');
+      } catch (e) { /* the shop store is optional */ } }
+    const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + BINI_SHARED + voice + '\n\n' + biniLang.directive(lang) + turn + bankGuard + bizGuard + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + coCtx + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys + preTool, [...hist, { role: 'user', content: msg }], 900, opts);
     // tool_choice:'required' is advisory and this model ignores it often enough to matter — measured
     // as a price question answered with no price, and as an invented BinaPool corridor. One retry,
@@ -1241,16 +1500,116 @@ fastify.post('/api/assistant', async (req, reply) => {
       if (t2) text = t2;
     }
     // Flash occasionally answers a forced intent (fare, pool, TV/radio, tender…) without any tool. One strict retry, then we accept.
-    const TERMINAL = /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|search_shops|cinema_programme|watch_channels|remember)$/;
+    // company_request / contact_team finish the turn too: a hotel sending its room prices must not be "retried" into a
+    // hotel search that replaces the answer (28 Sep 2026)
+    const TERMINAL = /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|search_properties|search_cars|search_hotels|search_health|search_shops|cinema_programme|watch_channels|remember|company_request|listing_request|shop_post|contact_team)$/;
     if (forced && !toolsUsed.some(n => TERMINAL.test(n))) {
       const retry = { tools: opts.tools, forcedTools, execute, toolChoice: 'required', used: [] };
-      const strict = sys + '\n\nSYSTEM CHECK: your previous draft answered without calling the tool this request needs. Do it now: fares → search_places (first result for a known area; saved home/work coordinates when the user says home/work) then quote_ride; ጋራ ጉዞ/pool → pool_board; TV, radio, series → watch_channels; tenders → search_tenders; cinema → cinema_programme; "remember" → remember. Then answer from the result with the exact link or numbers.';
+      const strict = sys + '\n\nSYSTEM CHECK: your previous draft answered without calling the tool this request needs. Do it now: a home, flat, land or shop to buy or rent -> search_properties; a car to buy -> search_cars; a hotel or guest house to stay in -> search_hotels; fares → search_places (first result for a known area; saved home/work coordinates when the user says home/work) then quote_ride; ጋራ ጉዞ/pool → pool_board; TV, radio, series → watch_channels; tenders → search_tenders; cinema → cinema_programme; "remember" → remember. Then answer from the result with the exact link or numbers.';
       const t2 = await callBini(strict, [...hist, { role: 'user', content: msg }], 900, retry).catch(() => '');
       if (retry.used && retry.used.some(n => TERMINAL.test(n)) && t2) { text = t2; toolsUsed = toolsUsed.concat(retry.used); }
+    }
+    // A property question must be answered from the live listings. If the model still called nothing (it sometimes
+    // only asks "how many bedrooms?" and says it is searching), search here and let it answer from the result.
+    if (forced && !b.listing && require('./assistant/force').PROPERTY_RE.test(msg) && !toolsUsed.includes('search_properties') && !toolsUsed.some(n => /^(listing_request|company_request|shop_post)$/.test(n))) {   // not for someone LISTING a home
+      const pargs = propertyArgsFromText(msg);
+      const pout = await execute('search_properties', pargs).catch(() => null);
+      if (pout) {
+        toolsUsed.push('search_properties*');
+        const t3 = await callBini(sys + '\n\nTOOL RESULT for search_properties(' + JSON.stringify(pargs) + '):\n' + JSON.stringify(pout).slice(0, 6000) + '\n\nAnswer the user now from this result: show the matching listings with their links and the company phone. If you need more detail (bedrooms, budget), ask AFTER showing them. Do not write function calls as text.', [...hist, { role: 'user', content: msg }], 900, { tools: null }).catch(() => '');
+        if (t3) text = t3;
+      }
+    }
+    // Same safety net for a car-buying question: answer from the live /cars listings, never from the model's memory.
+    if (forced && require('./assistant/force').isCarBuying(msg) && !toolsUsed.includes('search_cars') && !toolsUsed.some(n => /^(quote_ride|request_ride)$/.test(n))) {
+      const cargs = carArgsFromText(msg);
+      const cout = await execute('search_cars', cargs).catch(() => null);
+      if (cout) {
+        toolsUsed.push('search_cars*');
+        const t4 = await callBini(sys + '\n\nTOOL RESULT for search_cars(' + JSON.stringify(cargs) + '):\n' + JSON.stringify(cout).slice(0, 6000) + '\n\nAnswer the user now from this result: show the matching cars with their links and the dealer phone. If you need more detail (budget, make), ask AFTER showing them. Do not write function calls as text.', [...hist, { role: 'user', content: msg }], 900, { tools: null }).catch(() => '');
+        if (t4) text = t4;
+      }
+    }
+    // Same safety net for a place to stay: answer from the hotel directory, never from the model's memory.
+    if (forced && require('./assistant/force').isHotelSearch(msg) && !toolsUsed.includes('search_hotels') && !toolsUsed.some(n => /^(quote_ride|request_ride|search_properties|company_request|contact_team|listing_request|shop_post)$/.test(n))) {
+      const hargs = hotelArgsFromText(msg);
+      const hout = await execute('search_hotels', hargs).catch(() => null);
+      if (hout) {
+        toolsUsed.push('search_hotels*');
+        const t5 = await callBini(sys + '\n\nTOOL RESULT for search_hotels(' + JSON.stringify(hargs) + '):\n' + JSON.stringify(hout).slice(0, 6000) + '\n\nAnswer the user now from this result: list the hotels with their phone or website and link, and say plainly that prices are not listed so they should call. Do not write function calls as text.', [...hist, { role: 'user', content: msg }], 900, { tools: null }).catch(() => '');
+        if (t5) text = t5;
+      }
+    }
+    // Same safety net for a place to be seen: answer from bina.et/health, never from the map chunks in the knowledge block
+    // (before this, a parent asking for a hospital open at night got the Ministry's service package and no hospital).
+    const hForce = require('./assistant/force');
+    if (forced && hForce.isHealthSearch && hForce.isHealthSearch(msg) && !toolsUsed.some(n => /^search_health/.test(n)) && !toolsUsed.some(n => /^(quote_ride|request_ride|search_hotels\*?|search_properties|company_request|contact_team|listing_request|shop_post)$/.test(n))) {
+      const dargs = healthArgsFromText(msg);
+      const dout = await execute('search_health', dargs).catch(() => null);
+      if (dout) {
+        toolsUsed.push('search_health*');
+        const t7 = await callBini(sys + '\n\nTOOL RESULT for search_health(' + JSON.stringify(dargs) + '):\n' + JSON.stringify(dout).slice(0, 6000) + '\n\nAnswer the user now from this result, in their language: name the places with their phone and their bina.et/health link, say plainly that opening hours are not known unless given so they should call first, and end with the "more" link. No diagnosis and no treatment advice. Do not write function calls as text.', [...hist, { role: 'user', content: msg }], 900, { tools: null }).catch(() => '');
+        if (t7) text = t7;
+      }
+    }
+    // A job title is a job search even when the model only PROMISED one ("... ክፍት ቦታዎች ላሳይዎት" and no tool, real
+    // chat 29 Sep 2026): search here and let it answer from the real vacancies. Skipped when an older force.js has no
+    // isJobTitleSearch, or when a job, ride or hand-over tool already ran.
+    const bForce = require('./assistant/force');
+    if (bForce.isJobTitleSearch && bForce.isJobTitleSearch(msg) && !toolsUsed.some(n => /^(search_jobs|post_job|job_alert|quote_ride|request_ride|contact_team|company_request)\*?$/.test(n))) {
+      const jargs = bForce.jobTitleArgs(msg);
+      let jout = await execute('search_jobs', jargs).catch(() => null);
+      if (jout && !(jout.results || []).length && jargs.field) jout = await execute('search_jobs', { field: jargs.field, city: jargs.city }).catch(() => jout);
+      if (jout) {
+        toolsUsed.push('search_jobs*');
+        const t6 = await callBini(sys + '\n\nTOOL RESULT for search_jobs(' + JSON.stringify(jargs) + '):\n' + JSON.stringify(jout).slice(0, 5000) + '\n\nAnswer the user now from this result, in their language: the vacancies with title, company, city, deadline and link. If there are none, say so plainly and offer the free Telegram job alert (t.me/bina_smart_bot). Mention only vacancies listed here; never ask for or mention a fee.',
+          [...hist, { role: 'user', content: msg }], 900).catch(() => '');
+        if (t6) text = t6;
+      }
+    }
+    // A place answer that only PROMISED a search while search_shops had already returned places ("… ልፈልግልዎ። እባክዎ ትንሽ
+    // ይጠብቁ።", replay of 30 Sep 2026): answer again from that result, the way job titles are handled above.
+    if (lastShops && bForce.isPromiseOnly && bForce.isPromiseOnly(text) && ((lastShops.r.shops || []).length || (lastShops.r.mapPlaces || []).length || (lastShops.r.posts || []).length)) {
+      const t7 = await callBini(sys + '\n\nTOOL RESULT for search_shops(' + JSON.stringify(lastShops.a) + '):\n' + JSON.stringify(lastShops.r).slice(0, 5000)
+        + '\n\nAnswer the user now from this result, in their language: name 3 to 5 of the places with their area and distance and a link. Follow the result\'s notes about what is not known. Do not say you will search.',
+        [...hist, { role: 'user', content: msg }], 900).catch(() => '');
+      if (t7 && !bForce.isPromiseOnly(t7)) { text = t7; toolsUsed.push('search_shops*'); }
     }
     // Backstop: a clearly stated fact gets saved even when the model forgot to call remember().
     if (!toolsUsed.includes('remember') && mem.persistent) for (const f of require('./assistant/memory').extractMemory(msg)) { await execute('remember', { field: f.field, value: f.value }).catch(() => {}); toolsUsed.push('remember*'); }
     text = biniGuards(text, msg, hist, String(ctx || '') + ' ' + preTool + ' ' + toolOut);
+    // An English question gets an English answer. The model sometimes answers a clearly English question in
+    // Amharic when its tools and knowledge came back in Amharic (15 of 73 real English messages in September;
+    // nightly guard, 28 Sep 2026). Only when the question is unmistakably English (3+ Latin words, no Ethiopic)
+    // and most of the reply is Ethiopic outside brackets, the reply is TRANSLATED - no tool runs again and no new
+    // fact can enter; a failed translation keeps the original.
+    if (lang === 'en' && text && !/[\u1200-\u137f]/.test(msg) && (msg.match(/[A-Za-z]{2,}/g) || []).length >= 3) {
+      const bare = text.replace(/\([^)]*\)/g, '');
+      const eth = (bare.match(/[\u1200-\u137f]/g) || []).length, lat = (bare.match(/[A-Za-z]/g) || []).length;
+      if (eth > 0.5 * (eth + lat)) {
+        const en = await callBini('Translate the assistant answer below into clear, natural English. Keep every number, price, date, name, phone, link and list item exactly as written; keep Amharic place names and put the English name first. Output only the translation.',
+          [{ role: 'user', content: text }], 900).catch(() => '');
+        const e2 = (en.match(/[\u1200-\u137f]/g) || []).length, l2 = (en.match(/[A-Za-z]/g) || []).length;
+        if (en && l2 > e2) { text = en.trim(); toolsUsed.push('translated_en'); }
+      }
+    }
+    // A hotel answer always carries its way in. search_hotels returns each hotel's bina.et/hotels link and the model
+    // often drops them all (replay of real questions, 28 Sep 2026): when none survived, the directory link is added.
+    if (toolsUsed.some(n => /^search_hotels/.test(n)) && text && !/bina\.et\/hotels/.test(text))
+      text += (lang === 'am' ? '\n\n🏨 ሁሉም ሆቴሎችና የእንግዳ ማረፊያዎች፦ ' : '\n\n🏨 All hotels and guest houses: ') + 'https://bina.et/hotels';
+    // A health answer always carries its way in: every place Bini NAMED keeps its own bina.et/health page (the model
+    // dropped them on "which hospital near Piassa", 30 Sep 2026), and the directory link closes the answer.
+    if (toolsUsed.some(n => /^search_health/.test(n)) && text) {
+      const low = text.toLowerCase(), miss = [], seen = new Set();
+      for (const p of healthSeen) {
+        if (seen.has(p.url)) continue; seen.add(p.url);
+        const named = low.includes(String(p.name).toLowerCase()) || (p.nameAm && text.includes(p.nameAm));
+        if (named && !text.includes(p.url.replace(/^https:\/\//, ''))) miss.push(p);
+      }
+      if (miss.length) text += '\n\n' + miss.slice(0, 6).map(p => '🏥 ' + p.name + ': ' + p.url).join('\n');
+      if (!/bina\.et\/health/.test(text))
+        text += (lang === 'am' ? '\n\n🏥 ሁሉም ሆስፒታሎች፣ ክሊኒኮችና የጥርስ ክሊኒኮች፦ ' : '\n\n🏥 All hospitals, clinics and dentists: ') + 'https://bina.et/health';
+    }
     // A complaint goes to a person even when Bini sounded confident, and it is never rate-limited:
     // a second complaint from the same rider is more urgent than the first, not less.
     const always_handover = COMPLAINT_RE.test(msg) || biniMemory.wantsHuman(msg);
@@ -1339,6 +1698,8 @@ fastify.register(require('./gov/routes'), { runAgent, evalAllowed: isEval });
 // Owner-key only, read-only, never exported. A shop number is marked uncontactable until the listing is
 // claimed - the same rule search_places uses before it will publish a phone.
 fastify.register(require('./contacts/routes'), { prisma, OWNER_KEY });
+// TikTok direct messages -> Bini (idle until TIKTOK_APP_ID/SECRET are set and the account is authorised).
+fastify.register(require('./tiktok/dm'), { OWNER_KEY });
 // ===== Business assistants (workspaces/): one private knowledge base and assistant per institution. =====
 // The client's documents live in WorkspaceChunk and are embedded by bina-embed on this machine, so they
 // never reach KnowledgeChunk (which the public index loads whole) and never leave the server. Answers go
@@ -1539,7 +1900,15 @@ fastify.get('/hotel/:slug', async (req, reply) => {
   const b = await prisma.building.findFirst({ where: { qrSlug: slug, buildingType: 'HOTEL' }, select: { id: true, name: true, subCity: true } });
   return slugPage(reply, 'hotel.html', !!b, 'https://bina.et/hotel/' + slug, 'ሆቴል · Hotel', '/hotels', !!b && hotelIsDemo(b));
 });
-fastify.get('/hotels', async (req, reply) => reply.sendFile('hotels.html')); // BinaHotels landing (7 Sep 2026)
+// BinaHotels landing (7 Sep 2026). The first 24 place cards are drawn here, so a search engine reads real hotels, not a spinner.
+fastify.get('/hotels', async (req, reply) => {
+  try {
+    const cards = require('./public/hotel-cards.js');
+    const places = cards.sortHotels(await require('./hotels/directory').cardPlaces(), ''), first = places.slice(0, 24);
+    return reply.type('text/html; charset=utf-8').send(withCards('hotels.html', '<div class="dir hg" id="dir">', first.map(cards.hotelCard).join(''),
+      itemList('Places to stay in Addis Ababa', '/hotels', first.map(p => ({ slug: p.slug, title: p.name })))));
+  } catch (e) { req.log.error(e); return reply.sendFile('hotels.html'); }
+});
 // Every building that has at least one active room type is a hotel on BinaSmart.
 fastify.get('/api/hotels', async (req, reply) => {
   reply.header('Cache-Control', 'public, max-age=300');
@@ -1574,6 +1943,24 @@ function cardFor(slug){
     return { full: '/static/' + full, thumb: fs.existsSync(require('path').join(dir, thumb)) ? '/static/' + thumb : '/static/' + full };
   } catch (e) { return null; }
 }
+// Read-aloud. The file is generated once per article by ops/news/make-audio.js and served as a plain
+// static file, so a listener costs nothing and the browser can cache it. No player is drawn for an
+// article that has no audio — a dead control is worse than no control.
+function audioFor(slug){
+  // An article's voice: <slug>.ogg (Opus, small - Chrome/Android/Firefox), <slug>.mp3 (every phone, incl. iPhone
+  // Safari and Telegram's in-app browser on iOS, which cannot play Ogg) and <slug>.json ({seconds}) for the label.
+  // Made once per article by ops/news/make-audio.js; see the player markup under the byline.
+  try {
+    const path = require('path'), dir = path.join(__dirname, 'public', 'news', 'audio');
+    const at = ext => path.join(dir, slug + ext);
+    if (!fs.existsSync(at('.ogg'))) return null;
+    const url = ext => '/static/news/audio/' + slug + ext + '?v=' + Math.floor(fs.statSync(at(ext)).mtimeMs / 1000);
+    const hasMp3 = fs.existsSync(at('.mp3'));
+    let seconds = 0; try { seconds = JSON.parse(fs.readFileSync(at('.json'), 'utf8')).seconds || 0; } catch (e) { /* no label file */ }
+    const bytes = Math.max(fs.statSync(at('.ogg')).size, hasMp3 ? fs.statSync(at('.mp3')).size : 0);
+    return { url: url('.ogg'), mp3: hasMp3 ? url('.mp3') : null, bytes, seconds };
+  } catch (e) { return null; }
+}
 // The card's url carries the file's own timestamp. Telegram, Facebook and WhatsApp cache an
 // og:image by URL for weeks, so a redrawn card kept showing the old picture (owner, 22 Sep 2026:
 // "still not fix og"). With ?v=<mtime> a redraw IS a new url, and the next fetch gets the new
@@ -1584,6 +1971,12 @@ function ogFor(slug, fallback){ try {
   if (!fs.existsSync(f)) return fallback;
   return 'https://bina.et/static/og-'+slug+'.png?v=' + Math.floor(fs.statSync(f).mtimeMs/1000);
 } catch(e){ return fallback; } }
+// CollectionPage + ItemList for a hub page (Google reads the list; the page itself is unchanged).
+function hubLd(name, url, items) {
+  const d = { '@context': 'https://schema.org', '@type': 'CollectionPage', name, url, mainEntity: { '@type': 'ItemList', numberOfItems: items.length,
+    itemListElement: items.slice(0, 30).map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: x.url, name: String(x.name || '').slice(0, 150) })) } };
+  return '<script type="application/ld+json">' + JSON.stringify(d).replace(/</g, '\\u003c') + '</script>';
+}
 function newsShell({ title, desc, canonical, extraHead = '', body, active = 'news', ogImage = 'https://bina.et/static/bina-news.png' }) {
   return `<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>${escH(title)}</title><meta name="description" content="${escH(desc)}"><link rel="canonical" href="${canonical}">
@@ -1710,7 +2103,7 @@ document.querySelectorAll('[data-deadline]').forEach(el=>{
   else{b.textContent=days; s.textContent=days===1?'ቀን ቀርቷል · day left':'ቀናት ቀርተዋል · days left';
     el.className='dl '+(days<3?'hot':days<=7?'mid':'ok');}
 });
-</script><script src="/static/bina-footer.js?v=9" defer></script></body></html>`;
+</script><script src="/static/bina-footer.js?v=10" defer></script></body></html>`;
 }
 
 // A post whose body starts at <h3> under the article's <h1> skips a level. Promote at render time.
@@ -1759,7 +2152,7 @@ fastify.get('/news', async (req, reply) => {
     ${pager}
     <div class="cta-band sans"><div><h3>📋 የግንባታ ጨረታዎችን ይከታተሉ</h3><p>Daily construction & supply tenders from across Ethiopia.</p></div><a href="/tenders">ጨረታዎችን ይመልከቱ →</a></div>
   </main>`;
-  reply.type('text/html').send(newsShell({ title: 'Bina ዜና — ቴክኖሎጂ፣ ግንባታ እና ንግድ ዜና በአማርኛ', desc: 'Ethiopian technology, construction and business news in Amharic — politics-free. ቴክኖሎጂ፣ ግንባታ እና ንግድ ዜና በአማርኛ።', canonical: 'https://bina.et/news' + (pageNo > 1 ? '?page=' + pageNo : ''), body, active: 'news', ogImage: 'https://bina.et/static/og-section-news.png' }));
+  reply.type('text/html').send(newsShell({ extraHead: hubLd('BinaSmart news', 'https://bina.et/news', posts.map(p => ({ url: 'https://bina.et/news/' + p.slug, name: p.title }))), title: 'Bina ዜና — ቴክኖሎጂ፣ ግንባታ እና ንግድ ዜና በአማርኛ', desc: 'Ethiopian technology, construction and business news in Amharic — politics-free. ቴክኖሎጂ፣ ግንባታ እና ንግድ ዜና በአማርኛ።', canonical: 'https://bina.et/news' + (pageNo > 1 ? '?page=' + pageNo : ''), body, active: 'news', ogImage: 'https://bina.et/static/og-section-news.png' }));
 });
 
 // ---- ARTICLE ----
@@ -1785,7 +2178,7 @@ const CANONICAL_TO = {
 fastify.get('/news/:slug', async (req, reply) => {
   const p = await prisma.newsPost.findUnique({ where: { slug: req.params.slug } });
   if (!p || !p.published) return reply.code(404).type('text/html').send(newsShell({ title: 'Not found', desc: '', canonical: 'https://bina.et/news', body: '<main><div class="empty"><div class="big">🗞️</div><h3>ጽሑፉ አልተገኘም</h3><p class="sans"><a href="/news" style="color:var(--em)">← ወደ ዜና ገጽ</a></p></div></main>' }));
-  const schema = ldScript({ '@context': 'https://schema.org', '@type': p.evergreen ? 'Article' : 'NewsArticle', headline: p.title, description: p.excerpt, inLanguage: p.lang, datePublished: p.publishedAt, author: p.authorUrl ? { '@type': 'Person', name: p.author, url: p.authorUrl } : { '@type': 'Organization', name: 'Bina ዜና — BinaSmart' }, publisher: { '@type': 'Organization', name: 'BinaSmart', url: 'https://bina.et' }, mainEntityOfPage: CANONICAL_TO[p.slug] || ('https://bina.et/news/' + p.slug) })
+  const schema = ldScript({ '@context': 'https://schema.org', '@type': p.evergreen ? 'Article' : 'NewsArticle', headline: p.title, description: p.excerpt, inLanguage: p.lang, datePublished: p.publishedAt, author: p.authorUrl ? { '@type': 'Person', name: p.author, url: p.authorUrl } : { '@type': 'Organization', name: 'Bina ዜና — BinaSmart' }, publisher: { '@type': 'Organization', name: 'BinaSmart', url: 'https://bina.et', sameAs: ['https://www.wikidata.org/wiki/Q141368272'] }, mainEntityOfPage: CANONICAL_TO[p.slug] || ('https://bina.et/news/' + p.slug) })
     + '<meta name="robots" content="max-image-preview:large">';
   const share = encodeURIComponent('https://bina.et/news/' + p.slug);
   const shareT = encodeURIComponent(p.title);
@@ -1806,6 +2199,27 @@ fastify.get('/news/:slug', async (req, reply) => {
     <h1>${escH(p.title)}</h1>
     <p class="lead">${escH(p.excerpt)}</p>
     <div class="rule sans"><span>${p.authorUrl ? `<a href="${escH(p.authorUrl)}" rel="author noopener" target="_blank">${escH(p.author)}</a>` : escH(p.author)}</span><span>·</span><span>${amDate(p.publishedAt)}</span><span>·</span><span>${p.readMinutes} ደቂቃ ንባብ</span></div>
+    ${(() => {
+      const a = audioFor(p.slug);
+      if (!a) return '';
+      // preload="none": most readers will not press play, and nobody in Addis should pay for a file
+      // they did not ask for. The label shows the length and the most it can cost ("up to" - the phone picks
+      // the smaller Ogg if it can play it, the MP3 otherwise). The voice is synthetic and the label says so.
+      const mins = a.seconds ? Math.max(1, Math.round(a.seconds / 60)) : 0;
+      return `<div class="sans listen" style="margin:14px 0 4px;padding:10px 14px;border:1px solid var(--line,rgba(0,0,0,.09));border-radius:14px;background:var(--soft,#faf8f4)">
+        <style>.listen .spd button{font:inherit;font-size:12px;line-height:1;padding:6px 9px;border:1px solid var(--line,rgba(0,0,0,.14));border-radius:999px;background:transparent;color:inherit;cursor:pointer}.listen .spd button[aria-pressed="true"]{background:currentColor}.listen .spd button[aria-pressed="true"] span{color:var(--soft,#faf8f4)}</style>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin-bottom:6px">
+          <div style="font-weight:700;font-size:14px">🔊 ጽሑፉን ያዳምጡ <span style="font-weight:400;color:var(--mut,#7b7566)">${mins ? '· ' + mins + ' ደቂቃ ' : ''}· እስከ ${(a.bytes / 1048576).toFixed(1)} ሜባ</span></div>
+          <div class="spd" role="group" aria-label="ፍጥነት · Speed" style="display:flex;gap:4px">${['1', '1.25', '1.5', '2'].map(v => `<button type="button" data-rate="${v}" aria-pressed="${v === '1'}"><span>${v}×</span></button>`).join('')}</div>
+        </div>
+        <audio controls preload="none" style="width:100%">
+          <source src="${a.url}" type="audio/ogg; codecs=opus">${a.mp3 ? `
+          <source src="${a.mp3}" type="audio/mpeg">` : ''}
+        </audio>
+        <div style="font-size:12px;color:var(--mut,#7b7566);margin-top:4px">በኮምፒውተር የተነበበ የአማርኛ ድምጽ · Computer-read Amharic voice</div>
+        <script>(function(){var box=document.currentScript.parentNode,au=box.querySelector('audio'),bs=box.querySelectorAll('.spd button');bs.forEach(function(b){b.addEventListener('click',function(){au.playbackRate=+b.dataset.rate;bs.forEach(function(x){x.setAttribute('aria-pressed',x===b)})})});au.addEventListener('play',function(){var r=box.querySelector('.spd [aria-pressed="true"]');if(r)au.playbackRate=+r.dataset.rate})})();</script>
+      </div>`;
+    })()}
     ${(() => { const c = cardFor(p.slug); return c ? `<figure class="art-hero"><img src="${c.full}" width="1200" height="630" alt="${escH(p.title)}" fetchpriority="high" decoding="async"></figure>` : ''; })()}
     <div class="body-t">${promoteHeadings(p.bodyHtml)}</div>
     <div class="share sans">
@@ -1856,6 +2270,20 @@ fastify.register(require('./jobs/matches'), { prisma, shell: newsShell });
 // The call list for Addis cinemas (cinema/ops-venues.js). Booking is built and empty because it needs
 // one cinema to say yes; this is where ringing them turns a number copied off a blog into a fact.
 fastify.register(require('./cinema/ops-venues'), { prisma, OWNER_KEY });
+// Every place to stay in Addis from the city map, and owners claiming theirs (hotels/directory.js, 26 Sep 2026).
+fastify.register(require('./hotels/directory'), { prisma, limiter: hotelLimiter });
+// Addis real estate companies and car sellers: /real-estate-companies, /car-dealers, /companies/<slug> (27 Sep 2026).
+fastify.register(require('./companies/directory'), { prisma, limiter: hotelLimiter });
+// bina.et/property/<slug>: one listing in full (photos, description, features, map, company contacts).
+fastify.register(require('./property/detail'), { prisma });
+fastify.register(require('./property/owner-listing'), { prisma, limiter: hotelLimiter });
+fastify.register(require('./shops/posts'), { prisma, limiter: hotelLimiter });
+fastify.register(require('./health/directory'), { prisma, limiter: hotelLimiter });   // bina.et/health: hospitals, clinics, dentists, labs + doctors who join through Dr Afiya (30 Sep 2026)
+fastify.register(require('./health/dashboard'), { prisma, limiter: hotelLimiter, runAgent, isEval, agent: require('./agents/afiya-pro/rules') });   // bina.et/health/dashboard: owners edit their pages; Dr Afiya helps with the practice side only (30 Sep 2026)   // bina.et/shop: products and offers shop owners post through Bini (30 Sep 2026)   // homes for sale / rent sent through Bini (29 Sep 2026)
+// bina.et/cars/<slug>: one car in full, same page design.
+fastify.register(require('./cars/detail'), { prisma });
+// SEO landing pages (homes by area, cars by make and kind): market/landing.js, built from the same page files.
+fastify.register(require('./market/landing'), { prisma, pubProperty, pubCar, withCards, itemList, ldScript, listingCards, AREA_GROUPS, squash });
 
 // Section marks and colours (brand/sections.js): each hub carries its own badge instead of an emoji
 // watermark, and the colour tells a returning reader where they are before they read a word.
@@ -1901,12 +2329,13 @@ fastify.get('/tenders', async (req, reply) => {
     <div class="chips" style="--chipon:#059669">${chips}</div>
     <p class="sans" style="margin:2px 0 16px;font-size:14px;line-height:1.9"><!-- guide-links:tender-list -->📚 <a href="/how-to-bid-tenders-ethiopia" style="color:var(--em);font-weight:700">ጨረታ እንዴት ይወዳደራሉ</a> · <a href="/bid-security-cpo-ethiopia" style="color:var(--em);font-weight:700">የጨረታ ማስከበሪያ (CPO)</a> · <a href="/egp-registration-ethiopia" style="color:var(--em);font-weight:700">eGP ምዝገባ</a> · <a href="/ethiopia-tender-report-september-2026" style="color:var(--em);font-weight:700">📦 የጨረታ ገበያ ሪፖርት</a> · <a href="/world-bank-tenders-ethiopia" style="color:var(--em);font-weight:700">🌍 የዓለም ባንክ ጨረታዎች</a></p>
     ${showClosed ? `<div class="sans" style="display:flex;gap:12px;align-items:center;margin:0 0 18px;padding:13px 17px;border-radius:14px;background:#fdeaea;border:1.5px solid #f3bdbd;color:#8a1f1f"><span style="font-size:22px;line-height:1">🔒</span><span><b style="display:block;font-size:15px">የተዘጉ ጨረታዎች · Closed tenders</b><span style="font-size:13px">እነዚህ ማብቂያቸው አልፏል። <a href="/tenders" style="color:#8a1f1f;font-weight:700">ክፍት ጨረታዎች · Open tenders →</a></span></span></div>` : ''}
+    ${showClosed ? '' : `<div class="cta-band sans" style="background:#1e3a8a"><div><h3>🔔 አዲስ ${require('./tenders/alerts').labelOf((require('./tenders/alerts').catOf(cat) || 'all'), 'am')} ሲወጣ ይወቁ · Tender alerts</h3><p>በቴሌግራም በአንድ ጠቅታ — ነጻ፣ በፈለጉ ጊዜ ያቁሙ። One tap in Telegram: free, stop any time.</p></div><a href="/tenders/alert/${(require('./tenders/alerts').catOf(cat) || 'all')}">አሳውቀኝ →</a></div>`}
     ${rows || empty}
     ${!showClosed && closedCount ? `<p class="sans" style="text-align:center;margin:26px 0 4px;font-size:13.5px"><a href="/tenders?show=closed${cat ? '&cat=' + encodeURIComponent(cat) : ''}" style="color:var(--mut)">🔒 ${closedCount} የተዘጉ ጨረታዎችን ይመልከቱ · View ${closedCount} closed tenders</a></p>` : ''}
     <div class="cta-band sans" style="background:var(--em)"><div><h3>📢 ጨረታዎን በነጻ ያውጡ · Post your tender FREE</h3><p>Organizations: we publish your tender at no cost — reach thousands of bidders.</p></div><a style="background:#fff;color:var(--em)" href="https://t.me/Bina_smart" target="_blank" rel="noopener">Telegram us →</a></div>
     <div class="cta-band sans"><div><h3>📰 ዜናችንንም ያንብቡ</h3><p>Technology, construction & business — in Amharic, politics-free.</p></div><a href="/news">ወደ ዜና →</a></div>
   </main>`;
-  reply.type('text/html').send(newsShell({ title: 'ጨረታዎች — Verified Ethiopian Tenders | Bina', desc: 'Daily verified Ethiopian tenders: construction, supply, services and consultancy — with deadlines and sources. የተረጋገጡ ጨረታዎች በየቀኑ።', canonical: 'https://bina.et/tenders', body, active: 'tenders', ogImage: 'https://bina.et/static/og-section-tenders.png' }));
+  reply.type('text/html').send(newsShell({ extraHead: hubLd('Verified Ethiopian tenders', 'https://bina.et/tenders', tenders.map(t => ({ url: 'https://bina.et/tenders/' + t.slug, name: t.title }))), title: 'ጨረታዎች — Verified Ethiopian Tenders | Bina', desc: 'Daily verified Ethiopian tenders: construction, supply, services and consultancy — with deadlines and sources. የተረጋገጡ ጨረታዎች በየቀኑ።', canonical: 'https://bina.et/tenders', body, active: 'tenders', ogImage: 'https://bina.et/static/og-section-tenders.png' }));
 });
 
 // ---- TENDER DETAIL ----
@@ -1952,6 +2381,7 @@ fastify.get('/tenders/:slug', async (req, reply) => {
     ${t.deadline ? `<div class="dl sans" style="display:inline-block;margin-bottom:26px" data-deadline="${closesAt(t.deadline).toISOString()}"><b></b><span></span></div>` : ''}
     <h2 class="sans" style="font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin:26px 0 10px">ስለ ጨረታው · About this tender</h2>
     <div class="body-t"><p>${escH(t.summary)}</p>${t.bodyHtml || ''}</div>
+    ${tenderClosed ? '' : `<div class="cta-band sans" style="background:#1e3a8a"><div><h3>🔔 አዲስ ${require('./tenders/alerts').labelOf((require('./tenders/alerts').catOf(t.category) || 'all'), 'am')} ሲወጣ ይወቁ · Tender alerts</h3><p>በቴሌግራም በአንድ ጠቅታ — ነጻ፣ በፈለጉ ጊዜ ያቁሙ። One tap in Telegram: free, stop any time.</p></div><a href="/tenders/alert/${(require('./tenders/alerts').catOf(t.category) || 'all')}">አሳውቀኝ →</a></div>`}
     ${t.sourceUrl ? `<h2 class="sans" style="font-size:15px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin:26px 0 8px">ምንጭ · Source</h2>` : ''}
     ${t.sourceUrl ? `<p class="sans" style="font-size:13px;color:var(--mut)">ምንጭ · Source: <a href="${escH(t.sourceUrl)}" rel="nofollow" style="color:var(--em)">${escH(t.sourceName || t.sourceUrl)}</a></p>` : ''}
     <div class="sans" style="margin:24px 0 8px;padding:15px 18px;border-radius:14px;border:1.5px solid var(--line)"><!-- guide-links:tender-detail --><b>📚 ለመወዳደር ከመዘጋጀትዎ በፊት · Before you bid</b><div style="margin-top:6px;font-size:14px;line-height:1.9"><a href="/how-to-bid-tenders-ethiopia" style="color:var(--em);font-weight:700">🏛️ ጨረታ እንዴት ይወዳደራሉ</a> · <a href="/bid-security-cpo-ethiopia" style="color:var(--em);font-weight:700">🧾 የጨረታ ማስከበሪያ (CPO)</a> · <a href="/tender-documents-checklist-ethiopia" style="color:var(--em);font-weight:700">✅ የሰነዶች ዝርዝር</a> · <a href="/egp-registration-ethiopia" style="color:var(--em);font-weight:700">🖥️ eGP ምዝገባ</a>${/world bank/i.test((t.sourceName || '') + ' ' + (t.org || '')) ? ` · <!-- guide-links:wb --><a href="/world-bank-tenders-ethiopia" style="color:var(--em);font-weight:700">🌍 የዓለም ባንክ ጨረታዎች</a>` : ''}</div></div>
@@ -2004,6 +2434,10 @@ async function autopostAll({ emoji, title, excerpt, url, tags, linkedin, ogImage
   out.push('Facebook ' + (fb.ok ? '✅' : fb.skipped ? '⏸ (no token yet)' : '❌ ' + fb.error));
   let confirm = '✅ Published: ' + title + '\n' + url + '\n\n' + out.join('\n');
   if (linkedin) confirm += '\n\n💼 LinkedIn — copy-paste this:\n──────────\n' + linkedin + '\n──────────';
+  // 28 Sep 2026: this function reported to the owner's chat and nowhere else, and each send swallows its
+  // own failure into a false. So when a share did not appear there was nothing in any log to look at and
+  // the route still answered {"ok":true}. Say what happened on stdout too, where pm2 keeps it.
+  console.log('[autopost] ' + url + ' -> ' + out.join(' | ') + (process.env.BINA_TG_CHANNEL ? '' : '  (BINA_TG_CHANNEL not set)'));
   notifyAdmins(confirm).catch(() => {});
   return out;
 }
@@ -2229,7 +2663,7 @@ function pub(){
      setTimeout(()=>location.reload(),1200);
    }).catch(e=>document.getElementById('cnt').textContent='Error: '+e);
 }
-</script><script src="/static/bina-footer.js?v=9" defer></script></body></html>`);
+</script><script src="/static/bina-footer.js?v=10" defer></script></body></html>`);
 });
 
 fastify.post('/api/admin/tender-queue/publish', async (req, reply) => {
@@ -2639,7 +3073,7 @@ fastify.get('/owner/:slug/report', async (req, reply) => {
     + '<tr><td>Owner dashboard</td><td>https://bina.et/owner/' + b.qrSlug + '</td></tr>'
     + '<tr><td>Printable entrance poster</td><td>https://bina.et/static/qr-poster.html?b=' + b.qrSlug + '</td></tr></table>'
     + '<footer>Confidential — prepared for the owner of ' + b.name + ' · BinaSmart Building Management · bina.et</footer>'
-    + '<script src="/static/bina-footer.js?v=9" defer></script></body></html>';
+    + '<script src="/static/bina-footer.js?v=10" defer></script></body></html>';
   reply.type('text/html').send(html);
 });
 
@@ -3147,7 +3581,7 @@ fastify.get('/owner/:slug/vat-report', async (req, reply) => {
     + '<h2>2 · Input — Expenses (' + expenses.length + ')</h2><table><tr><th>Date</th><th>Vendor</th><th>Category</th><th>Receipt</th><th>Amount</th><th>VAT</th></tr>' + expRows
     + '<tr><th colspan="4">TOTAL</th><th class="r">' + fmt(expTotal) + '</th><th class="r">' + fmt(inputVat) + '</th></tr></table>'
     + '<footer>Prepared by BinaSmart · bina.et · Based on VAT Proclamation No. 1341/2024 (15%). This is a management summary — please verify with your accountant before filing with the Ministry of Revenues.</footer>'
-    + '<script src="/static/bina-footer.js?v=9" defer></script></body></html>';
+    + '<script src="/static/bina-footer.js?v=10" defer></script></body></html>';
   reply.type('text/html').send(html);
 });
 
@@ -3725,7 +4159,7 @@ fastify.get('/pay/callback', async (req, reply) => {
   const body='<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+(ok?'ክፍያ ተሳክቷል':'ክፍያ በመጠባበቅ ላይ')+' · BinaSmart</title>'+
   ''+
   '<style>*{margin:0;box-sizing:border-box}body{font-family:\'Plus Jakarta Sans\',\'Noto Sans Ethiopic\',sans-serif;background:#f6faf9;color:#0b2a26;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.c{background:#fff;border:1.5px solid #e2ece9;border-radius:24px;padding:34px 26px;max-width:400px;text-align:center;box-shadow:0 20px 50px -26px rgba(11,42,38,.4)}.ic{width:84px;height:84px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff;background:'+(ok?'linear-gradient(135deg,#059669,#0aa88f)':'linear-gradient(135deg,#d97706,#f59e0b)')+'}h1{font-size:22px;font-weight:800}p{color:#5c7371;font-size:14px;margin-top:8px}.amt{font-size:30px;font-weight:800;color:#057461;margin:14px 0}a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#0b2a26,#068c78);color:#fff;font-weight:800;border-radius:999px;padding:13px 28px;text-decoration:none}</style></head>'+
-  '<body><div class="c"><div class="ic">'+(ok?'✓':'⏳')+'</div><h1 class="am">'+(ok?'ክፍያ ተሳክቷል!':'ክፍያ በመጠባበቅ ላይ ነው')+'</h1>'+(amt?'<div class="amt">ETB '+amt+'</div>':'')+'<p class="am">'+(ok?('የ'+ (purpose||'BinaSmart') +' ክፍያዎ ተከፍሏል። እናመሰግናለን!'):'ክፍያዎ ገና አልተረጋገጠም። ካጠናቀቁ ትንሽ ቆይተው ይሞክሩ።')+'</p><p style="font-size:11px;margin-top:10px">Ref: '+(ref||'')+'</p><a href="/" class="am">← ወደ BinaSmart</a></div><script src="/static/bina-footer.js?v=9" defer></script></body></html>';
+  '<body><div class="c"><div class="ic">'+(ok?'✓':'⏳')+'</div><h1 class="am">'+(ok?'ክፍያ ተሳክቷል!':'ክፍያ በመጠባበቅ ላይ ነው')+'</h1>'+(amt?'<div class="amt">ETB '+amt+'</div>':'')+'<p class="am">'+(ok?('የ'+ (purpose||'BinaSmart') +' ክፍያዎ ተከፍሏል። እናመሰግናለን!'):'ክፍያዎ ገና አልተረጋገጠም። ካጠናቀቁ ትንሽ ቆይተው ይሞክሩ።')+'</p><p style="font-size:11px;margin-top:10px">Ref: '+(ref||'')+'</p><a href="/" class="am">← ወደ BinaSmart</a></div><script src="/static/bina-footer.js?v=10" defer></script></body></html>';
   reply.type('text/html').send(body);
 });
 // Test checkout page
@@ -3750,7 +4184,7 @@ fastify.get('/pay', async (req, reply) => {
   'function body(){return{amount:amount(),name:document.getElementById("name").value,email:document.getElementById("email").value,phone:document.getElementById("phone").value,purpose:PURPOSE,bt:BT,bc:BC};}'+
   'async function payChapa(){var e=document.getElementById("err");e.textContent="";var amt=amount();if(!amt||amt<1){e.textContent="ትክክለኛ መጠን ያስገቡ";return;}var b=document.getElementById("cbtn");b.disabled=true;b.textContent="…";try{var r=await fetch("/api/pay/init",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body())});var j=await r.json();if(j.ok&&j.checkout_url){location.href=j.checkout_url;}else{e.textContent=(j.error||"አልተሳካም");b.disabled=false;b.textContent="💳 በ Chapa ይክፈሉ →";}}catch(x){e.textContent="ስህተት";b.disabled=false;b.textContent="💳 በ Chapa ይክፈሉ →";}}'+
   'async function payWallet(){var e=document.getElementById("err");e.textContent="";var amt=amount();if(!amt||amt<1){e.textContent="ትክክለኛ መጠን ያስገቡ";return;}var tok=localStorage.getItem("bina_wallet_tok");if(!tok){if(confirm("ወደ ዋሌትዎ መግባት ያስፈልጋል። አሁን ይግቡ?"))location.href="/wallet";return;}var b=document.getElementById("wbtn");b.disabled=true;b.textContent="…";try{var r=await fetch("/api/wallet/pay",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:tok,amount:amt,bt:BT,bc:BC,purpose:PURPOSE})});var j=await r.json();if(j.ok){location.href="/pay/callback?ref=wallet&ok=1&amt="+amt;}else if(r.status===402){e.textContent="በ ዋሌትዎ በቂ ገንዘብ የለም። ";if(confirm("ገንዘብ ይሙሉ?"))location.href="/wallet";b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}else if(r.status===401){location.href="/wallet";}else{e.textContent=(j.error||"አልተሳካም");b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}}catch(x){e.textContent="ስህተት";b.disabled=false;b.textContent="👛 ከ ዋሌት ይክፈሉ";}}'+
-  '</script><script src="/static/bina-footer.js?v=9" defer></script></body></html>';
+  '</script><script src="/static/bina-footer.js?v=10" defer></script></body></html>';
   reply.type('text/html').send(body);
 });
 
@@ -3858,7 +4292,7 @@ function logout(){localStorage.removeItem('bina_wallet_tok');T='';$('dashView').
   if(T){showDash();}else{$('authView').classList.remove('hide');setMode('login');}
 })();
 </script>
-</div><script src="/static/bina-footer.js?v=9" defer></script></body></html>`;
+</div><script src="/static/bina-footer.js?v=10" defer></script></body></html>`;
 
 // ===== BINASMART WALLET (phone + PIN, Chapa top-up) =====
 function walletTok(){ return cryptoMod.randomBytes(24).toString('hex'); }

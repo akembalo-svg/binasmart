@@ -55,11 +55,46 @@ function howToApply(text) {
 
 // "Deadline: sept 25, 2026". Taken only when it parses to a real date within the next months - a closing
 // date we got wrong is worse than none, because the board then hides a vacancy that is still open.
+//
+// Widened 2026-09-26. The single pattern this started as read only "Deadline: May 14, 2026" and missed
+// 43% of this board's adverts - every other source we harvest is at 0%. Sampling live pages showed what
+// it was walking past: "Deadline Date May 18, 2026", "Deadline : June 8th, 2026" (ordinal), "May 18 ,
+// 2026" (space before the comma), and "Application Deadline: Within ten (10) days from the date of this
+// announcement", which has no date in it at all and has to be counted from the post's own date.
+// Shadow-tested against 269 real pages before it went in (ops/shadow-deadline-ejh.js): 145 adverts
+// gained a closing date, and on the 3 the old pattern could already read, the two agreed exactly.
+// Still unread, and left that way on purpose: Ethiopian-calendar deadlines ("ግንቦት 05 ቀን 2018 ዓ.ም").
+// There is no EC->GC converter in this repo and half of one, guessed at inside a regex, would put wrong
+// dates on real vacancies - the one thing this function exists to avoid.
+const DEADLINE_WORDNUM = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9,
+  ten: 10, eleven: 11, twelve: 12, fourteen: 14, fifteen: 15, twenty: 20, thirty: 30 };
+const D_DAY = '\\d{1,2}\\s*(?:st|nd|rd|th)?';
+const D_MON = '[A-Za-z]{3,9}\\.?';
+const D_YEAR = '20\\d\\d';
+const D_DATE = [
+  `${D_MON}\\s+${D_DAY}\\s*,?\\s*${D_YEAR}`,
+  `${D_DAY}\\s+${D_MON}\\s*,?\\s*${D_YEAR}`,
+  '\\d{4}-\\d{2}-\\d{2}',
+  `\\d{1,2}\\/\\d{1,2}\\/${D_YEAR}`,
+].join('|');
+// "deadlines are met" in a duties list must never match: the keyword alone is not enough, a date or an
+// explicit day count has to follow it.
+const D_KEY = '(?:application|registration|submission)?\\s*(?:dead\\s*line|closing\\s+date|closing|last\\s+day\\s+of\\s+application|last\\s+day)(?:\\s+date)?';
+
 function deadlineFrom(text, from = Date.now()) {
-  const m = /(?:deadline|closing\s+date|last\s+day|dead\s*line)\s*[:\-–]?\s*([A-Za-z]{3,9}\.?\s+\d{1,2},?\s*20\d\d|\d{1,2}\s+[A-Za-z]{3,9},?\s*20\d\d|\d{4}-\d{2}-\d{2})/i.exec(text);
-  if (!m) return null;
-  const d = new Date(m[1].replace(/(\d)(st|nd|rd|th)/i, '$1'));
-  if (isNaN(d.getTime())) return null;
+  const clean = String(text || '');
+  let d = null;
+  const m = new RegExp(D_KEY + '\\s*[:\\-–—]?\\s*(' + D_DATE + ')', 'i').exec(clean);
+  if (m) d = new Date(m[1].replace(/(\d)\s*(st|nd|rd|th)/i, '$1').replace(/\s+,/, ','));
+  if (!d || isNaN(d.getTime())) {
+    const w = new RegExp(D_KEY + '[^.\\n]{0,40}?within\\s+(?:([a-z]+)\\s+)?\\(?(\\d{1,2})?\\)?\\s*(?:consecutive|working|calendar)?\\s*days', 'i').exec(clean)
+      || /within\s+(?:([a-z]+)\s+)?\(?(\d{1,2})?\)?\s*(?:consecutive|working|calendar)?\s*days\s+from\s+the\s+date\s+of\s+th(?:is|e)\s+(?:announcement|vacancy|advert)/i.exec(clean);
+    if (w) {
+      const n = Number(w[2]) || DEADLINE_WORDNUM[String(w[1] || '').toLowerCase()] || 0;
+      if (n > 0 && n <= 60) d = new Date(from + n * 86400000);
+    }
+  }
+  if (!d || isNaN(d.getTime())) return null;
   if (d.getTime() < from - 86400000 || d.getTime() > from + 200 * 86400000) return null;
   return d;
 }
@@ -132,6 +167,11 @@ module.exports = async function parseEthiojobsHub(html, url, sourceName) {
   // The board's own advice articles announce themselves in the opening of the headline.
   if (/^(how to|top \d+|best |guide|what is|why |where |when |\d+ (ways|tips|things))/i.test(h1)) return null;
   if (/ethiojobshub|step[- ]by[- ]step|guide$/i.test(h1)) return null;
+  // Scholarships and fellowships are study offers, not jobs: 15 reached the board as "X Scholarship - vacancy
+  // notice", filed under accounting, IT and sales (Jev scam check, 27 Sep 2026). One arrived as "scolarship".
+  // A post that works ON scholarships ("Scholarship Officer", "Fellowship Coordinator") is a job and stays.
+  if (/sch?olarship|fellowship|bursar(y|ies)|ስኮላርሺፕ|የትምህርት ዕድል/i.test(h1)
+    && !/\b(officers?|managers?|coordinators?|assistants?|specialists?|advisors?|directors?|associates?|administrators?|lead|head)\b/i.test(h1)) return null;
 
   const employer = employerFrom(h1);
   if (!employer || employer.length < 3) return null;

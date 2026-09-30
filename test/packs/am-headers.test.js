@@ -113,7 +113,14 @@ test('the sidecar on disk holds only entries for English documents of this pack'
     assert.ok(e.contentHash && e.generatedAt && e.model, slug + ': the sidecar must say what it was made from');
     const md = fs.readFileSync(path.join(ROOT, 'knowledge', 'banking', slug + '.md'), 'utf8');
     assert.notEqual(P.readMeta(md).lang, 'am', slug + ': an Amharic page needs no generated Amharic header');
-    if (e.summaryAm) assert.deepEqual(P.ungroundedFigures(P.bodyText(md), e.titleAm, e.summaryAm), [],
+    // A page split by sectionDocs is still one page: its entry is stamped with the whole page's hash, which its
+    // section documents carry too, so the figures it may state are the whole page's, wherever they now sit.
+    // (Endekise's summary says "6 months"; the digit is in the Mela terms the page carries, now a section.)
+    const dir = path.join(ROOT, 'knowledge', 'banking');
+    const sections = fs.readdirSync(dir).filter(f => f.startsWith(slug + '-') && f.endsWith('.md'))
+      .map(f => fs.readFileSync(path.join(dir, f), 'utf8')).filter(x => P.readMeta(x).sectionOf === slug);
+    const text = [md, ...sections].map(x => P.bodyText(x)).join('\n\n');
+    if (e.summaryAm) assert.deepEqual(P.ungroundedFigures(text, e.titleAm, e.summaryAm), [],
       slug + ': every figure in the Amharic header must be on the page');
   }
 });

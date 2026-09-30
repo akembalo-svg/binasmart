@@ -1,4 +1,7 @@
 'use strict';
+const { makeOfferLink, offerPage } = require('./offerLink');
+const { makeSmsFromEnv } = require('../messaging/sms');
+const { makeDelivery, makeDeliveryStore } = require('../messaging/delivery');
 const path = require('path');
 const { makeSettings } = require('./settings');
 const { makeGeo } = require('./geo');
@@ -19,7 +22,10 @@ const routes = require('./routes');
 // registerRide(fastify, { prisma, sendTg, OWNER_KEY, OWNER_CHAT, ROUTER_URL, BASE_URL })
 module.exports = function registerRide(fastify, deps) {
   const settings = makeSettings(deps.prisma);
-  const geo = makeGeo({ routerUrl: deps.ROUTER_URL, prisma: deps.prisma });
+  const gazetteer = require('./gazetteer').shared();   // the same instance Bini's search_shops reads
+  // Place reviews: only from completed rides that ended at the place (ride/placeReviews.js).
+  const placeReviews = require('./placeReviews').makePlaceReviews({ prisma: deps.prisma, gazetteer });
+  const geo = makeGeo({ routerUrl: deps.ROUTER_URL, prisma: deps.prisma, gazetteer, ratings: placeReviews });
   // Telegram bots (rider @bina_smart_bot, driver @binasmartdriverbot). Tokens only from .env.
   const riderBotToken = process.env.BINA_RIDER_BOT_TOKEN || '', driverBotToken = process.env.BINA_DRIVER_BOT_TOKEN || '';
   const riderApi = makeTgApi({ token: riderBotToken }), driverTgApi = makeTgApi({ token: driverBotToken });
@@ -37,6 +43,17 @@ module.exports = function registerRide(fastify, deps) {
   const jobAlerts = require('../jobs/alerts').makeJobAlerts({
     prisma: deps.prisma, api: riderApi, openSince: jobOpenSince, isClosed: jobIsClosed });
 
+  // Tender alerts, the job alerts' twin for businesses (tenders/alerts.js); ops/send-tender-alerts.js sends them.
+  const tenderAlerts = require('../tenders/alerts').makeTenderAlerts({
+    prisma: deps.prisma, api: riderApi, openSince: jobOpenSince, isClosed: jobIsClosed });
+  // Every tender-alert link goes through bina.et so a tap is one countable nginx line (as /jobs/alert/<field>).
+  fastify.get('/tenders/alert/:cat', async (req, reply) => {
+    const c = String(req.params.cat || '').toLowerCase();
+    const slug = require('../tenders/alerts').BY_SLUG.get(c) ? c : 'all';
+    return reply.header('cache-control', 'no-store').header('x-robots-tag', 'noindex')
+      .redirect('https://t.me/' + (process.env.BINA_RIDER_BOT_USERNAME || 'bina_smart_bot') + '?start=tenders_' + slug, 302);
+  });
+
   // Speaking a CV instead of typing one. Built here for the same reason as the alerts: it answers through
   // the rider bot's own client, and it needs no route of its own (jobs/voice-cv.js).
   const voiceCv = require('../jobs/voice-cv').makeVoiceCv({
@@ -51,6 +68,7 @@ module.exports = function registerRide(fastify, deps) {
     owner: deps.ownerTelegram || null,    // Bini for owners (agents/owner/access.js); absent = off
     tenant: deps.tenantTelegram || null,   // tenant notices (messaging/tenant-link.js); absent = off
     jobs: jobAlerts,                       // job alerts: /start jobs_<field>, /jobs, /stopjobs
+    tenders: tenderAlerts,                 // tender alerts: /start tenders_<kind>, /tenders, /stoptenders
     cv: voiceCv });                        // a CV spoken instead of typed: /cv (jobs/voice-cv.js)
   // BinaPool shares the fare engine, the auction and the driver app; riderNotify fans ride events out to every seat.
   const pool = makePool({ prisma: deps.prisma, geo, settings, dispatch, api: riderBotToken ? riderApi : null, baseUrl: deps.BASE_URL, dstate: require('./driverState') });
@@ -61,12 +79,29 @@ module.exports = function registerRide(fastify, deps) {
     secret: process.env.POOL_REF_SECRET || process.env.VISIT_SECRET || deps.OWNER_KEY });
   // offers needs dispatch (to escalate and to cancel its timer) and dispatch needs offers (to run the
   // auction), so dispatch is built first and told about the auction afterwards.
+  // Offer SMS for weak-signal drivers with no Telegram: only when SMS is live and a link secret exists.
+  // It goes out through the same transactional road as sign-in codes, so every one is logged and billed.
+  const linkSecret = process.env.RIDE_LINK_SECRET || process.env.BETTER_AUTH_SECRET || deps.OWNER_KEY || '';
+  const offerLinks = linkSecret ? makeOfferLink({ secret: linkSecret, baseUrl: deps.BASE_URL }) : null;
+  let offerSms = null;
+  try {
+    const smsLayer = makeSmsFromEnv(process.env, { log: m => console.log(m) });
+    if (smsLayer.mode === 'live' && offerLinks) {
+      const road = makeDelivery({ store: makeDeliveryStore(deps.prisma), sendTg: async () => false, sms: smsLayer, log: m => console.log(m) });
+      offerSms = { send: async (phone, text) => {
+        const r = await road.sendTransactionalSms({ to: phone, text, label: 'BinaSmart Ride', kind: 'ride_offer', source: 'ride-offer', live: true });
+        return (r && r.status) || 'failed';
+      } };
+    }
+  } catch (e) { console.error('[ride] offer SMS off: ' + e.message); }
   const offers = makeOffers({ prisma: deps.prisma, geo, settings, api: driverTgApi, riderNotify,
     concierge: rideId => dispatch.toConcierge(rideId), cancelTimer: rideId => dispatch.cancel(rideId),
-    baseUrl: deps.BASE_URL });
+    baseUrl: deps.BASE_URL, sms: offerSms, links: offerLinks });
+  if (offerLinks) offerPage(fastify, { prisma: deps.prisma, offers, links: offerLinks, settings, baseUrl: deps.BASE_URL });
   dispatch.setOffers(offers);
   const driverBot = makeDriverBot({ prisma: deps.prisma, api: driverTgApi, telegram, uploadsDir, baseUrl: deps.BASE_URL, offers });
   const drive = makeDriverApi({ prisma: deps.prisma, driverBotToken, location, offers, telegram, riderNotify, geo, settings, pool });
+  require('./placeReviews').placeReviewRoutes(fastify, { prisma: deps.prisma, reviews: placeReviews, telegram, normPhone: require('./phone').normPhone, baseUrl: deps.BASE_URL });
   const helpers = routes(fastify, { prisma: deps.prisma, settings, geo, telegram, dispatch, OWNER_KEY: deps.OWNER_KEY,
     riderBotToken, webhookSecret: process.env.TG_WEBHOOK_SECRET || '', riderBot, driverBot, riderNotify, uploadsDir, drive, location, askBini: deps.askBini || null, pool });
   poolRoutes(fastify, { pool, groups, riderBotToken, drive, limiter: helpers.limiter, clientIp: helpers.clientIp, OWNER_KEY: deps.OWNER_KEY });
@@ -82,6 +117,10 @@ module.exports = function registerRide(fastify, deps) {
   const expiry = setInterval(() => offers.expire().catch(e => console.error('[ride] offer expiry error:', e.message)), 5000);
   const awaySweep = setInterval(() => location.staleSweep().catch(e => console.error('[ride] away sweep error:', e.message)), 20000);
   const abandonSweep = setInterval(() => dispatch.sweepAbandoned().catch(e => console.error('[ride] abandoned sweep error:', e.message)), 300000);
+  // A request no driver took in ten minutes is closed, and the rider is told instead of waiting for ever.
+  const unservedSweep = setInterval(() => dispatch.sweepUnserved(Date.now(), id => riderNotify.notify(id, 'cancelled'))
+    .catch(e => console.error('[ride] unserved sweep error:', e.message)), 60000);
+  if (unservedSweep.unref) unservedSweep.unref();
   sweep.unref(); expiry.unref(); awaySweep.unref(); abandonSweep.unref();
   console.log('[ride] BinaSmart Ride module mounted' + (riderBotToken ? ' (Telegram bots on)' : ' (no Telegram bot tokens)'));
   return { settings, geo, telegram, dispatch, riderNotify, offers, location, drive, pool, groups, jobAlerts };

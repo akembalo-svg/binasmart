@@ -1,51 +1,51 @@
 #!/usr/bin/env node
 'use strict';
-// Share an already-published article to the channels (Telegram + Facebook page).
+// Push an ALREADY-PUBLISHED article back through the admin route so it reaches the channels.
 //
-//   node --env-file=.env ops/news/share.js <slug> [<slug> ...]
-//   node --env-file=.env ops/news/share.js <slug> --dry     print what would be sent, send nothing
+//   node --env-file=.env ops/news/share.js <slug> [--dry-run]
 //
-// Why a script: /api/admin/news is an UPSERT, so a share is a re-POST of the whole record — posting
-// the slug alone would blank every other column on create. This reads the row we already have and
-// sends it back complete, which is the safe way round.
+// Why this exists. There are two ways a post gets into the database and only one of them tells anybody:
 //
-// It refuses an unpublished post: a share whose link 404s is worse than no share.
+//   POST /api/admin/news   -> upserts the row AND calls autopostAll() -> Telegram, Facebook, LinkedIn
+//   prisma.newsPost.upsert -> writes the row and nothing else happens
+//
+// Every ops/news/add-*.js script takes the second path, so every article written that way has gone up
+// silently. The Volkswagen piece only reached the channel because it was posted by hand afterwards;
+// the LiGong and Council of Ministers pieces were never announced at all. Ibrahim noticed before I did.
+//
+// This reads the row that is already live and re-sends it through the route unchanged. The upsert is a
+// no-op on content — same slug, same fields — but it makes the announcement fire. Nothing is rewritten.
 const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
 
-const FIELDS = ['slug', 'title', 'titleAm', 'category', 'excerpt', 'bodyHtml', 'lang', 'author',
-  'authorUrl', 'heroEmoji', 'readMinutes', 'evergreen', 'published', 'publishedAt'];
-
-const args = process.argv.slice(2);
-const DRY = args.includes('--dry');
-const slugs = args.filter(a => !a.startsWith('--'));
+const slug = process.argv[2];
+const DRY = process.argv.includes('--dry-run');
 const KEY = process.env.OWNER_KEY || '';
-const BASE = process.env.SELF_URL || 'http://127.0.0.1:4210';
+const PORT = process.env.PORT || 3000;
+const FIELDS = ['slug', 'title', 'titleAm', 'category', 'excerpt', 'bodyHtml', 'lang', 'author',
+  'heroEmoji', 'readMinutes', 'evergreen', 'published', 'publishedAt', 'authorUrl'];
+
+if (!slug || slug.startsWith('--')) { console.error('usage: share.js <slug> [--dry-run]'); process.exit(2); }
 
 (async () => {
-  if (!slugs.length) { console.error('usage: share.js <slug> [<slug> ...] [--dry]'); process.exit(1); }
-  if (!KEY) { console.error('OWNER_KEY is not in the environment'); process.exit(1); }
-
-  for (const slug of slugs) {
+  if (!KEY) { console.error('OWNER_KEY is not set'); process.exit(2); }
+  const prisma = new PrismaClient();
+  try {
     const post = await prisma.newsPost.findUnique({ where: { slug } });
-    if (!post) { console.error('· ' + slug + ' — no such article, skipped'); continue; }
-    if (!post.published) { console.error('· ' + slug + ' — not published, skipped'); continue; }
-
+    if (!post) { console.error('no such article: ' + slug); process.exit(1); }
+    if (!post.published) { console.error('that article is not published; refusing to announce it'); process.exit(1); }
     const body = {};
-    for (const f of FIELDS) if (post[f] !== undefined) body[f] = post[f];
-    // The channel reads Amharic; the English title is for search engines. server.js picks titleAm.
-    console.log('· ' + slug + ' → ' + (post.titleAm || post.title));
-    if (DRY) continue;
-
-    const r = await fetch(BASE + '/api/admin/news', {
+    for (const f of FIELDS) if (post[f] !== undefined && post[f] !== null) body[f] = post[f];
+    console.log('article : ' + (post.titleAm || post.title));
+    console.log('url     : https://bina.et/news/' + slug);
+    console.log('channels: Telegram + Facebook + LinkedIn (autopostAll)');
+    if (DRY) { console.log('\n[dry run] nothing sent.'); return; }
+    const r = await fetch('http://127.0.0.1:' + PORT + '/api/admin/news', {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-owner-key': KEY },
       body: JSON.stringify(body),
     });
-    const out = await r.text();
-    console.log('  ' + r.status + ' ' + out.slice(0, 200));
-    // One at a time, with a breath between: three articles arriving in the same second reads as spam.
-    if (slugs.length > 1) await new Promise(res => setTimeout(res, 6000));
-  }
-  await prisma.$disconnect();
+    const j = await r.json().catch(() => null);
+    if (!r.ok) { console.error('HTTP ' + r.status + ' ' + JSON.stringify(j).slice(0, 200)); process.exit(1); }
+    console.log('\nsent. ' + JSON.stringify(j));
+  } finally { await prisma.$disconnect(); }
 })().catch(e => { console.error(e.message); process.exit(1); });

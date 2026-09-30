@@ -262,15 +262,65 @@ test('lead-in: the line-safe chunker keeps the lead-in and every row in one chun
     assert.ok(holder[0].text.includes(l), 'missing from the table chunk: ' + l);
 });
 
-// Two shapes the header guess reads wrongly, found by the 2026-09-23 survey of the banking and travel packs. Both
-// pass isTableHead (every first-row cell filled, no digit), so tableRows takes a data row or a label for a header:
-//   - a label/value list laid out as two columns (Ethiopian Airlines' worldwide contacts), and
-//   - parallel columns with no row-label column (Dashen's Import | Export requirement lists), where the first
-//     column's item becomes the "label" of the second column's item.
-// The sites whose pages have these shapes keep tableRows off; these tests pin both why and that. Invented data.
-test('a label/value list is taken for a table, which is why a site with such lists keeps tableRows off', () => {
+// Three shapes the header guess read wrongly, found by the 2026-09-23 survey of the banking and travel packs. All
+// three pass the old rule (every first-row cell filled, no digit), so tableRows took a data row or a label for a header:
+//   - a label/value list laid out as two columns (Ethiopian Airlines' worldwide contacts): "Phone::" came out,
+//   - a table with no header row whose first row is a retailer and its web address (telebirr's Amharic top-up list):
+//     every retailer came out labelled with the first retailer's cells, and
+//   - parallel columns with no row-label column (Dashen's Import | Export requirement lists).
+// The guard rejects a header cell that ends in ":" or holds a web or email address, which covers the first two; the
+// third has no such mark, so the site whose pages have it keeps tableRows off. Invented data throughout.
+const ENABLED = [['banking', 'ethiotelecom'], ['travel', 'ethiopian-airlines']];
+test('guard: a label/value list ("Phone:" | value) is left exactly as it was', () => {
   const KV = 'Company: |\nAcme Travel Ltd. |\n\nPhone: |\n+999 555 0100 |';
-  assert.equal(P.tableRows(KV).split('\n').pop(), 'Phone:: Acme Travel Ltd. +999 555 0100');
+  assert.equal(P.tableRows(KV), KV);
+  assert.ok(!P.tableRows(KV).includes('::'));
+});
+
+test('guard: a header cell ending in an Ethiopic preface colon or a fullwidth colon is a label too', () => {
+  for (const c of ['\u1235\u121D\u1366', 'Name\uFF1A']) {
+    const KV = c + ' |\nAcme Travel Ltd. |\n\nOther |\nNorth Hall |';
+    assert.equal(P.tableRows(KV), KV, c);
+  }
+});
+
+test('guard: a headerless retailer list (names and web addresses) is left exactly as it was', () => {
+  const RET = [
+    'Top up from abroad through these retailers:',
+    'Exampleremit |\nwww.exampleremit.test.com |\nwww.topupexample.com |',
+    'Zedpay |\nzedpay.example.net |\nhttps://zedpay.example.org/et |',
+    'Quickrecharge |\nwww.quickrecharge.io |\nsupport@quickrecharge.io |',
+  ].join('\n\n');
+  assert.equal(P.tableRows(RET), RET);
+  assert.ok(!/Zedpay: /.test(P.tableRows(RET)), 'no retailer is labelled with the first retailer\'s cells');
+});
+
+test('guard: a header cell holding a URL, a www. address, a bare domain or an email address is not a column name', () => {
+  for (const c of ['https://example.test', 'www.example', 'shop.example.com', 'desk@example.org', 'Acme.et'])
+    assert.equal(P.isTableHead(['Retailer', c]), false, c);
+  for (const c of ['Web Address', 'Retailer Name', 'Email Address', 'Phone Number', 'Lease Period', 'e.g. Hall'])
+    assert.equal(P.isTableHead(['Country', c]), true, c);
+  assert.equal(P.isTableHead(['Country', 'Line 2']), false, 'a digit still rules a header out');
+});
+
+test('guard: a real header row whose data rows carry web addresses is still rewritten', () => {
+  const T = 'Country |\nRetailer Name |\nWeb Address |\n\nAtlantis |\nExampleremit |\nwww.exampleremit.com |\n\nUtopia |\nZedpay |\nzedpay.example.net |';
+  assert.equal(P.tableRows(T), 'Table: Country by Retailer Name, Web Address\nCountry | Retailer Name | Web Address\n'
+    + 'Atlantis: Retailer Name Exampleremit; Web Address www.exampleremit.com\nUtopia: Retailer Name Zedpay; Web Address zedpay.example.net');
+});
+
+test('guard: the documents tableRows already wrote are fixed points (industry-park leases, fixed-line services)', () => {
+  const K = path.join(__dirname, '..', '..', 'knowledge');
+  for (const [pk, slug, headLine] of [
+    ['business', 'eic-faqs-industry-park-leases', 'Lease Period | '],
+    ['telecom', 'telecom-ethiotelecom-fixed-line-services', ' | '],
+  ]) {
+    const file = path.join(K, pk, slug + '.md');
+    if (!fs.existsSync(file)) continue;
+    const body = P.bodyText(fs.readFileSync(file, 'utf8'));
+    assert.ok(body.split('\n').some(l => l.includes(headLine) && !l.endsWith('|')), slug + ' holds a rewritten header line');
+    assert.equal(P.tableRows(body), body, slug + ' is written again byte for byte');
+  }
 });
 
 test('parallel columns without a row-label column pair each item with the wrong label', () => {
@@ -278,11 +328,13 @@ test('parallel columns without a row-label column pair each item with the wrong 
   assert.equal(P.tableRows(PAR).split('\n').pop(), 'Signed import form: Export Signed sales contract');
 });
 
-test('tableRows stays off for the sites whose tables have those shapes', () => {
+test('tableRows stays off for the site whose tables have that shape, and is on where the guard handles them', () => {
   const regOf = pk => JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'knowledge', pk, 'sources.json'), 'utf8'));
   const siteOf = (pk, id) => regOf(pk).sites.find(s => s.id === id);
-  for (const [pk, id] of [['banking', 'dashen'], ['banking', 'ethiotelecom'], ['travel', 'ethiopian-airlines']]) {
-    assert.ok(siteOf(pk, id), pk + '/' + id + ' exists');
-    assert.ok(!siteOf(pk, id).tableRows, pk + '/' + id + ' must not set tableRows until the header guess handles its tables');
+  assert.ok(siteOf('banking', 'dashen'), 'banking/dashen exists');
+  assert.ok(!siteOf('banking', 'dashen').tableRows, 'banking/dashen must not set tableRows until the header guess handles parallel columns');
+  for (const [pk, id] of ENABLED) {
+    assert.ok(siteOf(pk, id) && siteOf(pk, id).tableRows === true, pk + '/' + id + ' sets tableRows');
+    assert.ok(siteOf(pk, id).tableRowsNote, pk + '/' + id + ' says why');
   }
 });

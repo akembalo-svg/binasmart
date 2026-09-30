@@ -61,7 +61,7 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
 
   server.registerTool('search_places', {
     title: 'Search the BinaSmart directory',
-    description: 'Find buildings, hotels, hospitals and shops in Addis Ababa listed on BinaSmart (bina.et): cafés, restaurants, pharmacies, banks, gyms, salons, clinics, offices. Returns names (English + Amharic), building and unit, the phone only for shops that have claimed their listing, coordinates when known (usable as pickup/dropoff for quote_ride), and the bina.et page. Hotels and hospitals are flagged — use get_hotel_rooms / get_hospital_departments for details.',
+    description: 'Find buildings, hotels, hospitals and shops in Addis Ababa listed on BinaSmart (bina.et): cafés, restaurants, pharmacies, banks, gyms, salons, clinics, offices. Returns names (English + Amharic), building and unit, the phone only for shops that have claimed their listing, coordinates when known (usable as pickup/dropoff for quote_ride), and the bina.et page. Hotels and hospitals are flagged — use get_hotel_rooms / get_hospital_departments for details. For hospitals, clinics, dentists, labs and doctors anywhere in Addis Ababa, use search_health.',
     inputSchema: {
       query: z.string().min(1).max(80).describe('Name or part of a name, English or Amharic'),
       category: z.string().optional().describe('Shop category filter: ' + CATEGORIES.join(' | ')),

@@ -26,7 +26,7 @@ export const auth = betterAuth({
   },
   // Sign in with Google. Off until the two env vars exist, so a missing key can never take the site
   // down — it just means the Google button is not offered.
-  socialProviders: (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) ? {
+  socialProviders: (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && process.env.AUTH_GOOGLE !== '0') ? {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,

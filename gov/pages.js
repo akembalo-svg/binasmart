@@ -94,7 +94,7 @@ function demoHtml(office) {
     + 'header{background:#fff;border-bottom:1px solid #ddd;padding:16px}main{max-width:860px;margin:0 auto;padding:16px}'
     + 'section{background:#fff;border:1px solid #e3e3e3;border-radius:8px;padding:16px;margin:0 0 16px}</style></head><body>'
     + '<div class="mock">MOCK: this is not the ' + esc(t.institution.en) + '\'s website. BinaSmart built it to show how the assistant would look installed. '
-    + 'ይህ የ' + esc(t.institution.am) + ' ድረ ገጽ አይደለም፤ ረዳቱ ሲጫን ምን እንደሚመስል ለማሳየት ቢናስማርት የሠራው ናሙና ነው።</div>'
+    + 'ይህ ' + (/^የ/.test(t.institution.am) ? '' : 'የ') + esc(t.institution.am) + ' ድረ ገጽ አይደለም፤ ረዳቱ ሲጫን ምን እንደሚመስል ለማሳየት ቢናስማርት የሠራው ናሙና ነው።</div>'
     + '<header><strong>' + esc(t.institution.am) + ' · ' + esc(t.institution.en) + '</strong> (mock page)</header><main>'
     + '<section><h2>የውጭ አገር ሥራ ስምሪት · Overseas employment</h2><p>A placeholder section where a ministry page would describe '
     + 'working abroad. The ministry\'s own page on this subject held 57 characters when it was measured on 17 September 2026.</p></section>'

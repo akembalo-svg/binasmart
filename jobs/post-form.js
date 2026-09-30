@@ -23,6 +23,7 @@ const L = {
     ok: '✅ ደርሶናል። ከመታተሙ በፊት አንድ ሰው ያረጋግጠዋል — በተለምዶ በጥቂት ሰዓታት ውስጥ ይወጣል።',
     free: 'ነጻ ነው። ከሥራ ፈላጊም ሆነ ከቀጣሪ ምንም ክፍያ አንጠይቅም።',
     note: 'ማስታወቂያው ከመውጣቱ በፊት በሰው ይታያል — ይህ የውሸት ማስታወቂያ እንዳይወጣ ነው።',
+    claim: 'ድርጅትዎ አስቀድሞ በቢና ላይ አለ? ገጽዎን በ<a href="/employers">የድርጅቶች ማውጫ</a> ያግኙና «ይህ የእርስዎ ድርጅት ነው?» በመጫን ትክክለኛ አድራሻዎንና የካርታ ቦታዎን በነጻ ያክሉ።',
     err: { employer_required: 'የድርጅቱን ስም ይጻፉ።', title_required: 'የሥራ መደቡን ስም ይጻፉ።',
       slow_down: 'ትንሽ ቆይተው ይሞክሩ።', other: 'አልተሳካም — እንደገና ይሞክሩ።' },
   },
@@ -38,6 +39,7 @@ const L = {
     ok: '✅ Received. A person checks it before it goes live — usually within a few hours.',
     free: 'It is free. We charge neither the employer nor the job seeker.',
     note: 'Every advert is read by a person before publishing — that is how fake vacancies stay off the board.',
+    claim: 'Is your company already on Bina? Find its page in the <a href="/employers?lang=en">company directory</a> and tap «Is this your company?» to add your exact address and map pin, free.',
     err: { employer_required: 'Please write the company name.', title_required: 'Please write the job title.',
       slow_down: 'Please try again in a little while.', other: 'That did not go through — please try again.' },
   },
@@ -78,6 +80,7 @@ module.exports = function postFormRoutes(fastify, { shell, escH }) {
         <button type="submit">${t.send}</button>
         <div id="pmsg"></div>
         <p class="note">${t.note}<br>${t.free}</p>
+        <p class="note">🏢 ${t.claim}</p>
       </form>
     </main>
     <style>

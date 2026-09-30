@@ -7,7 +7,9 @@ const known = new Set(['/ride', '/ride?pool=1', '/hotels', '/fayda', '/passport'
 
 test('rubric passes a good Amharic answer and flags the classic failures', () => {
   assert.deepEqual(check({ q: 'x', tags: ['price'] }, 'ዋጋው ቋሚ ነው፣ በ /ride ላይ ያስገቡ።', { known }).fails, []);
-  assert.ok(check({ q: 'x', tags: ['price'] }, 'ወደ ቦሌ 350 ብር ነው።', { known }).fails.includes('birr_number_stated'));
+  // The invented fare must be a figure bina.et never publishes: "350 ብር" was used here until
+  // public/bole-airport-to-city.html started publishing a real 350 birr, which rightly made it "documented".
+  assert.ok(check({ q: 'x', tags: ['price'] }, 'ወደ ቦሌ 8,641 ብር ነው።', { known }).fails.includes('birr_number_stated'));
   assert.deepEqual(check({ q: 'x', tags: ['price'] }, 'ኮምፎርት 315 ብር፣ ኢኮኖሚ 250 ብር።', { known, tools: ['search_places', 'quote_ride'] }).fails, [], 'a fare from the tool is allowed');
   assert.ok(check({ q: 'x', tags: ['om', 'price'] }, 'Gatiin dhaabbataa dha, /ride irratti ilaalaa.', { known }).fails.length === 0);
   assert.ok(check({ q: 'x', tags: ['om'] }, 'ዋጋው ቋሚ ነው።', { known }).fails.includes('oromo_drift_to_amharic'));

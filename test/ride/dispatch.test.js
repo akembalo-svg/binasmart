@@ -91,3 +91,58 @@ test('with online drivers, start() opens offers; only when none can be offered d
   assert.equal(await mk({ open: async () => 0 }, alertsB).start('r1'), true, 'nobody offerable → concierge now');
   assert.deepEqual(alertsB, ['r1']);
 });
+
+// A driver who closes the Mini App mid-trip froze the ride and himself for ever (2026-09-19: 'ontrip'
+// for three and a half hours, rider locked out of cancelling, driver excluded from every offer).
+function abandonHarness({ lastSeenAt, status = 'ontrip', onRideId = 'r9' }) {
+  const driver = { id: 'd1', name: 'Fetiya', lastSeenAt, onRideId };
+  const ride = { id: 'r9', status, driverId: 'd1', driver, riderName: 'Ameran', riderPhone: '+251911',
+    startedAt: new Date(T - 3 * 3600_000), requestedAt: new Date(T - 3 * 3600_000) };
+  const notes = [];
+  const prisma = {
+    driver: {
+      count: async () => 0,
+      updateMany: async ({ where, data }) => {
+        if (driver.id !== where.id || driver.onRideId !== where.onRideId) return { count: 0 };
+        Object.assign(driver, data); return { count: 1 };
+      },
+    },
+    // The real query filters on the driver's silence; the fake must too, or the "leave a live trip
+    // alone" case passes for the wrong reason.
+    ride: {
+      findMany: async ({ where }) => {
+        const cutoff = where.OR[0].driver.lastSeenAt.lt;
+        const quiet = driver.lastSeenAt === null || driver.lastSeenAt === undefined || new Date(driver.lastSeenAt) < cutoff;
+        return (where.status.in.includes(ride.status) && quiet) ? [ride] : [];
+      },
+      updateMany: async () => ({ count: 1 }), findUnique: async () => ride,
+    },
+  };
+  const telegram = { conciergeAlert: async () => true, ownerNote: async t => { notes.push(t); return true; } };
+  const d = makeDispatch({ prisma, telegram, settings: { get: async () => ({ conciergeAfterS: 60 }) } });
+  return { d, driver, notes };
+}
+
+test('an abandoned trip frees the driver and tells the owner, exactly once', async () => {
+  const h = abandonHarness({ lastSeenAt: new Date(T - 45 * 60_000) });   // silent 45 minutes
+  assert.equal(await h.d.sweepAbandoned(T), 1);
+  assert.equal(h.driver.onRideId, null, 'the driver is released, or he receives no offer ever again');
+  assert.match(h.notes[0], /ABANDONED TRIP/);
+  assert.match(h.notes[0], /45 minutes/);
+  // Second pass: already freed, so nothing to say.
+  assert.equal(await h.d.sweepAbandoned(T), 0, 'idempotent without a new column');
+  assert.equal(h.notes.length, 1, 'the owner is not told twice about the same ride');
+});
+
+test('a trip whose driver reported recently is left alone, however long it has run', async () => {
+  const h = abandonHarness({ lastSeenAt: new Date(T - 60_000) });        // silent 1 minute
+  assert.equal(await h.d.sweepAbandoned(T), 0);
+  assert.equal(h.driver.onRideId, 'r9', 'a slow trip across Addis is still a trip');
+  assert.equal(h.notes.length, 0);
+});
+
+test('a driver who never sent a single fix counts as abandoned', async () => {
+  const h = abandonHarness({ lastSeenAt: null });
+  assert.equal(await h.d.sweepAbandoned(T), 1);
+  assert.match(h.notes[0], /the whole trip/);
+});

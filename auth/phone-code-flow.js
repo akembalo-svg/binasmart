@@ -19,16 +19,31 @@
 //
 // store { find(id), create({identifier,value,expiresAt}), remove(id), findUserByPhone(e164),
 //         createUser({email,name,role}), deleteUser(id) }
+//
+// review { phone, code } — the app-store reviewer's door (Google Play asks for a login it can use
+// without an SMS). One number, one fixed six-digit code, both from the environment
+// (AUTH_REVIEW_PHONE, AUTH_REVIEW_CODE); without both, or with a code that is not six digits, the door
+// does not exist. For that number no SMS is ever sent and no code row is written; the code only opens
+// an account that ALREADY holds the number (made by ops/play-reviewer.js) — it never creates one — and
+// guesses are capped at REVIEW_MAX per REVIEW_WINDOW_MS, because a fixed code has no lock of its own.
 const pc = require('./phone-code');
+const REVIEW_WINDOW_MS = 60 * 60 * 1000, REVIEW_MAX = 10;
 
 function makePhoneCodeFlow({ store, sender, linkPhone, normalise, pepper, now = () => new Date(), log = () => {},
-  perPhone = null, perIp = null, newCode = pc.newCode } = {}) {
+  perPhone = null, perIp = null, newCode = pc.newCode, review = null, perReview = null } = {}) {
   // Built once and kept: a limiter that is rebuilt per request limits nothing. The plugin keeps one
   // flow for the life of the process for exactly this reason.
   const phoneLimit = perPhone || pc.makeCodeLimiter({ windowMs: pc.PHONE_WINDOW_MS, max: pc.PHONE_MAX, now: () => now().getTime() });
   const ipLimit = perIp || pc.makeCodeLimiter({ windowMs: pc.IP_WINDOW_MS, max: pc.IP_MAX, now: () => now().getTime() });
 
   const ready = () => !!sender && sender.configured === true && String(pepper == null ? '' : pepper).length >= pc.MIN_PEPPER;
+
+  // The reviewer's number and the hash of its code, worked out once. Any doubt, and there is no door.
+  const reviewPhone = review && review.phone ? normalise(review.phone) : null;
+  const reviewHash = reviewPhone && /^\d{6}$/.test(String(review.code == null ? '' : review.code)) && ready()
+    ? pc.hashCode(String(review.code), reviewPhone, pepper) : null;
+  const isReview = e164 => !!reviewHash && e164 === reviewPhone;
+  const reviewLimit = perReview || pc.makeCodeLimiter({ windowMs: REVIEW_WINDOW_MS, max: REVIEW_MAX, now: () => now().getTime() });
 
   async function send({ phone, ip } = {}) {
     if (!ready()) return { ok: false, error: 'not_configured' };
@@ -39,6 +54,8 @@ function makePhoneCodeFlow({ store, sender, linkPhone, normalise, pepper, now = 
     if (!e164 || !sender.supports(e164)) return { ok: false, error: 'not_reachable' };
     // The address first, so a flood is cut off before it costs a query.
     if (!ipLimit(String(ip == null ? '' : ip))) return { ok: false, error: 'rate_limited' };
+    // The reviewer already has the code: nothing to send, nothing to write, the answer every send gets.
+    if (isReview(e164)) return { ok: true };
     const id = pc.identifierFor(e164);
     const at = now();
     const row = await store.find(id);
@@ -61,6 +78,14 @@ function makePhoneCodeFlow({ store, sender, linkPhone, normalise, pepper, now = 
     const e164 = normalise(phone);
     // Shape first: a request that cannot possibly be right costs one regular expression, not a query.
     if (!e164 || !/^\d{6}$/.test(String(code == null ? '' : code))) return { ok: false, error: 'bad_code' };
+    if (isReview(e164)) {
+      // Every try counts, right or wrong, so the cap is also a cap on how often the account opens.
+      if (!reviewLimit(e164)) return { ok: false, error: 'bad_code' };
+      if (!pc.sameHash(reviewHash, pc.hashCode(String(code), e164, pepper))) return { ok: false, error: 'bad_code' };
+      const user = await store.findUserByPhone(e164);
+      if (!user) return { ok: false, error: 'bad_code' };
+      return { ok: true, isRegister: false, user };
+    }
     const id = pc.identifierFor(e164);
     const at = now();
     const row = await store.find(id);
@@ -110,4 +135,4 @@ function makePhoneCodeFlow({ store, sender, linkPhone, normalise, pepper, now = 
   return { send, verify, ready };
 }
 
-module.exports = { makePhoneCodeFlow };
+module.exports = { makePhoneCodeFlow, REVIEW_WINDOW_MS, REVIEW_MAX };

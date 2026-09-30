@@ -69,6 +69,7 @@ async function classifyWithModel(items, { apiKey, env = process.env, fetchImpl, 
       });
       if (!r.ok) throw new Error('model ' + r.status);
       const j = await r.json();
+      try { require('../../../assistant/ai-meter').meter('watch', MODEL, j.usageMetadata); } catch (e) { /* meter only */ }
       const txt = (((j.candidates || [])[0] || {}).content || {}).parts?.[0]?.text || '';
       const v = parseVerdict(txt);
       if (!v) throw new Error('unparseable answer');

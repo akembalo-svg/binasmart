@@ -32,10 +32,12 @@ const NASTY = "Bole's 3-bed <img src=x onerror=alert(1)> \"view\"";
 
 for (const [page, fn, extra] of [['public/property.html', 'card', {}], ['public/cars.html', 'card', { slug: 'x' }]]) {
   test(page + ': a title with an apostrophe or markup cannot break or script the Enquire button', () => {
-    const { ctx } = lift(page, ['esc', 'cssUrl', fn]);
-    const html = ctx[fn](Object.assign({ title: NASTY, imageUrl: 'https://img.example/a.jpg', price: '1', city: 'Addis' }, extra));
-    assert.equal(/<img/i.test(html), false, 'markup from the title reached the page');
-    const btn = html.match(/<button class="b1"[^>]*>/)[0];
+    // the cards moved to public/listing-cards.js on 27 Sep 2026 (the same code draws them in the browser and on the server)
+    const cards = require('../public/listing-cards.js');
+    const html = (page.includes('cars') ? cards.carCard : cards.propertyCard)(Object.assign({ title: NASTY, imageUrl: 'https://img.example/a.jpg', price: '1', city: 'Addis' }, extra));
+    assert.equal(/<img[^>]*onerror/i.test(html), false, 'markup from the title reached the page');
+    const btn = (html.match(/<a class="c call" href="#request"[^>]*>/) || [''])[0];
+    if (!btn) return;   // a card with the company's own phone has no Enquire button
     assert.match(btn, /onclick="enquire\([^"]*this\.getAttribute\('data-t'\)\)"/, 'the title must not be written into the onclick');
     assert.equal(btn.includes('Bole'), true);
     assert.equal(btn.split('onclick=')[1].includes('Bole'), false);
@@ -84,8 +86,11 @@ test('server.js: admin listing routes refuse an imageUrl that is not a web addre
   }
 });
 
-test('server.js: the sitemap leaves out /cars and /property while nothing is listed', () => {
+// Since e6c12a7 (2026-09-23) /cars and /property are real guides with a listings strip at the foot, so
+// the sitemap lists them whether or not anything is listed. Only /travel, which is nothing but trips, waits.
+test('server.js: the sitemap always lists the /cars and /property guides; only /travel waits for trips', () => {
   const src = read('server.js');
-  assert.match(src, /u !== 'https:\/\/bina\.et\/cars' \|\| carsListed/);
-  assert.match(src, /u !== 'https:\/\/bina\.et\/property' \|\| propsListed/);
+  assert.ok(src.includes("'https://bina.et/cars'") && src.includes("'https://bina.et/property'"));
+  assert.doesNotMatch(src, /carsListed|propsListed/, 'no rule hides the two guides when their listings are empty');
+  assert.match(src, /u !== 'https:\/\/bina\.et\/travel' \|\| tripsAhead/);
 });

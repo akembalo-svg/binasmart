@@ -38,14 +38,28 @@ function findKey() {
   try {
     const since = fs.existsSync(STATE) ? new Date(fs.readFileSync(STATE, 'utf8').trim()) : new Date(Date.now() - 2 * 86400000);
     const now = new Date();
+    // 2026-09-26: this submitted VACANCIES ONLY. Every news article and every tender we published was
+    // written to the sitemap and then never announced to anybody - the Volkswagen piece and the LiGong
+    // piece both went out with no IndexNow ping at all. A sitemap is waited for; IndexNow is told. News
+    // is the most time-sensitive thing on the site, so it was the wrong half to leave out.
+    const fresh = { published: true, publishedAt: { gt: since } };
     const jobs = await prisma.job.findMany({
-      where: { published: true, publishedAt: { gt: since } },
-      select: { slug: true }, orderBy: { publishedAt: 'desc' }, take: LIMIT,
+      where: fresh, select: { slug: true }, orderBy: { publishedAt: 'desc' }, take: LIMIT,
     });
-    const urls = jobs.map(j => 'https://' + HOST + '/jobs/' + j.slug);
+    const posts = await prisma.newsPost.findMany({
+      where: fresh, select: { slug: true }, orderBy: { publishedAt: 'desc' }, take: LIMIT,
+    }).catch(() => []);
+    const tenders = await prisma.tender.findMany({
+      where: fresh, select: { slug: true }, orderBy: { publishedAt: 'desc' }, take: LIMIT,
+    }).catch(() => []);
+    const urls = [
+      ...posts.map(p => 'https://' + HOST + '/news/' + p.slug),
+      ...tenders.map(t => 'https://' + HOST + '/tenders/' + t.slug),
+      ...jobs.map(j => 'https://' + HOST + '/jobs/' + j.slug),
+    ];
     if (!urls.length) { console.log('[indexnow] nothing new since ' + since.toISOString()); return; }
 
-    console.log('[indexnow] ' + urls.length + ' pages published since ' + since.toISOString().slice(0, 16));
+    console.log('[indexnow] ' + urls.length + ' pages (' + posts.length + ' news, ' + tenders.length + ' tenders, ' + jobs.length + ' jobs) published since ' + since.toISOString().slice(0, 16));
     if (DRY) { urls.slice(0, 5).forEach(u => console.log('  ' + u)); return; }
 
     const r = await fetch('https://api.indexnow.org/indexnow', {

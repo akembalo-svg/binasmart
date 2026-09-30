@@ -48,7 +48,7 @@ function makeJobAlerts({ prisma, api, openSince, isClosed }) {
     const where = {
       published: true,
       publishedAt: { gt: alert.lastSentAt },
-      OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }],
+      ...require('../tenders/deadline').openJobsWhere(now),
     };
     if (alert.field !== 'all') where.category = alert.field;
     if (alert.city) where.city = { contains: alert.city, mode: 'insensitive' };

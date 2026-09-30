@@ -147,6 +147,7 @@ async function readPost(post) {
   });
   if (r.status !== 200) throw new Error('gemini ' + r.status);
   const d = await r.json();
+  try { require('../../assistant/ai-meter').meter('cinema', MODEL, d.usageMetadata); } catch (e) { /* meter only */ }
   const out = (((d.candidates || [])[0] || {}).content || {}).parts?.map(p => p.text || '').join('').trim();
   return out ? JSON.parse(out) : null;
 }

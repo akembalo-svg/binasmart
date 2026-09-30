@@ -26,6 +26,8 @@ const { voiceBlock } = require('../knowledge');
 const { DATING } = require('../assistant/dating');
 
 const ROOT = path.join(__dirname, '..');
+// Bini's Amharic style guide is private (.gitignore); these run where it is deployed and skip elsewhere.
+const HAS_STYLE = fs.existsSync(path.join(ROOT, 'knowledge', 'amharic-style.md'));
 
 test('a Gregorian year marked ዓ.ም. has its marker rewritten, and the date itself is untouched', () => {
   const said = 'ይህ መረጃ የተወሰደው ከመስከረም 16 ቀን 2026 ዓ.ም. በኢትዮጵያ ብሔራዊ ባንክ ድረ-ገጽ ላይ ከታተመ ሰነድ ነው።';
@@ -69,14 +71,14 @@ test('the rewrite runs on the two paths an answer can leave by', () => {
   assert.ok(/fixCalendarMarker/.test(engine), 'and every kit agent gets the same filter');
 });
 
-test('the Amharic voice rules Bini is sent with every message state the calendar rule', () => {
+test('the Amharic voice rules Bini is sent with every message state the calendar rule', { skip: !HAS_STYLE && 'knowledge/amharic-style.md is private (.gitignore) and not in this checkout' }, () => {
   const v = voiceBlock(ROOT, 'am');
   assert.ok(v.includes('እ.ኤ.አ.'), 'the Gregorian marker is named');
   assert.ok(/ዓ\.ም\./.test(v) && /2018/.test(v), 'and so is the one case where ዓ.ም. is right');
   assert.ok(/Gregorian/i.test(v), 'the rule says which calendar a document date is in');
 });
 
-test('and they tell an Amharic answer to name its document in the first reply', () => {
+test('and they tell an Amharic answer to name its document in the first reply', { skip: !HAS_STYLE && 'knowledge/amharic-style.md is private (.gitignore) and not in this checkout' }, () => {
   const v = voiceBlock(ROOT, 'am');
   assert.ok(/first reply/i.test(v), 'not when asked — in the first reply');
   assert.ok(v.includes('FCP/01/2020'), 'with the form a directive number takes');

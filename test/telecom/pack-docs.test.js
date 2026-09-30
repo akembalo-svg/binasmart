@@ -30,7 +30,7 @@ test('every document has front matter with a url, a title, a language, a section
     const m = meta(read(f));
     assert.match(m.url || '', /^https:\/\//, f);
     assert.ok((m.title || '').length > 3, f + ' has no title');
-    assert.ok(['en', 'am'].includes(m.lang), f + ' lang: ' + m.lang);
+    assert.ok(['en', 'am', 'om'].includes(m.lang), f + ' lang: ' + m.lang);
     assert.ok((m.section || '').length > 0, f + ' has no section');
     assert.ok((m.source_name || '').length > 3, f);
     assert.match(m.fetchedAt || '', /^2026-09-\d\d$/, f + ' fetched date');
@@ -116,8 +116,30 @@ test('a page lives in one pack only: no telecom url is a banking url, and the Or
   for (const f of files) {
     const u = meta(read(f)).url;
     assert.ok(!banking.has(norm(u)), f + ' is also a banking document: ' + u);
-    assert.doesNotMatch(u, /[?&]lang=(om|so|Tig)\b/i, f);
+    // a Somali or Tigrinya page is never here; an Oromo page only when the registry names the English page it translates
+    assert.doesNotMatch(u, /[?&]lang=(so|Tig)\b/i, f);
+    if (/[?&]lang=om\b/.test(u)) assert.ok(Object.values(reg.sites[0].translationOf || {}).length && meta(read(f)).translationOf, f + ' is Oromo but names no English page');
     assert.doesNotMatch(u, /\/telebirr(\/|\?|$)/, f);
+  }
+});
+
+test('an Oromo document says it is Oromo, names the English page it translates, and that page is in the pack', () => {
+  const om = files.filter(f => meta(read(f)).lang === 'om');
+  assert.ok(om.length >= 5, 'expected the Oromo pages, found ' + om.length);
+  const byUrl = new Map(files.map(f => [meta(read(f)).url, f]));
+  for (const f of om) {
+    const raw = read(f), m = meta(raw);
+    assert.match(f, /^telecom-ethiotelecom-om-/);
+    assert.match(m.url, /\?lang=om$/, f);
+    assert.match(m.translationOf || '', /^https:\/\/www\.ethiotelecom\.et\/[a-z0-9-]+\/$/, f);
+    const en = byUrl.get(m.translationOf);
+    assert.ok(en && meta(read(en)).lang === 'en', f + ': its English page ' + m.translationOf + ' is not an English document of the pack');
+    assert.equal(f, en.replace(/^telecom-ethiotelecom-/, 'telecom-ethiotelecom-om-'), f + ' is named after its English page');
+    const head = bodyOf(raw).split(/\n\nSource: /)[0];
+    assert.ok(head.includes('This page is in Afaan Oromoo') && head.includes(m.translationOf), f + ' header: ' + head.slice(0, 300));
+    assert.match(raw, /\(official Ethio telecom page, in Afaan Oromoo\)/, f);
+    assert.ok(!/in English\)/.test(raw), f + ' must not say it is English');
+    assert.equal(ethiopic(pageText(raw)), 0, f + ' is Oromo (qubee), not Ethiopic');
   }
 });
 
