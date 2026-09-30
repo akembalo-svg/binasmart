@@ -3,133 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="manifest" href="/manifest.webmanifest">
-<meta name="theme-color" content="#00C896">
-<title>Find Your Department — Book a Visit | BinaSmart Health</title>
-<meta name="description" content="Scan at the hospital gate: find every department, floor and room, see the fee, and book your visit — Amharic + English. Powered by BinaSmart.">
+<title>Hospital · departments, floors, fees and booking | BinaSmart Health</title>
+<meta name="description" content="Every department of the hospital with its floor, room, hours and fee. Book a visit online, or ask Dr Afiya where to go. Emergency: 907.">
+<meta name="theme-color" content="#1D4ED8">
 <link rel="icon" href="/icon-32.png">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
+<script>document.documentElement.classList.add('js')</script>
 <style>
+/* A hospital's own page (30 Sep 2026): only the hospital; BinaSmart Health's own colours (calm blue + mint,
+   emergency always red); Dr Afiya instead of Bini. The booking contract is unchanged:
+   POST /api/hospital/:slug/appointment {departmentId,name,phone,date,note}. */
+:root{--b:#1D4ED8;--b2:#2563EB;--bd:#0B1B3A;--mint:#10B981;--mint2:#D1FAE5;--sky:#F0F7FF;--line:#DCE7F7;--mut:#5B6B85;--red:#DC2626}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#faf8f4;color:#1e293b;min-height:100vh;padding-bottom:40px}
-.top{display:flex;align-items:center;gap:8px;padding:14px 18px;max-width:680px;margin:0 auto}
-.top a{text-decoration:none;color:#1e293b;font-weight:900;font-size:17px}
-.top .g{color:#d83d55}.top .caremark{width:28px;height:28px;border-radius:9px;background:#d83d55;color:#fff;display:inline-grid;place-items:center;font-size:18px;margin-right:2px}
-.wrap{max-width:680px;margin:0 auto;padding:0 16px}
-.hero{background:linear-gradient(135deg,#0e7490,#0891b2);border-radius:22px;padding:22px 18px;color:#fff}
-.hero h1{font-size:24px;font-weight:900}
-.hero .am{color:#a5f3fc;font-weight:800;font-size:14px}
-.hero .sub{font-size:11.5px;opacity:.85;margin-top:6px}
-.emerg{display:flex;align-items:center;gap:10px;background:#fef2f2;border:1.5px solid #fecaca;border-radius:16px;padding:12px 14px;margin:12px 0;font-size:12.5px;font-weight:800;color:#b91c1c}
-.emerg span{margin-left:auto;background:#dc2626;color:#fff;border-radius:999px;padding:6px 14px;font-size:11px}
-.dept{background:#fff;border:1.5px solid #e9e4da;border-radius:20px;padding:15px;margin-top:11px}
-.dh{display:flex;align-items:flex-start;gap:12px}
-.dh .ic{width:44px;height:44px;border-radius:14px;background:#ecfeff;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.dh .nm{font-weight:900;font-size:15.5px}
-.dh .am{font-size:12px;color:#64748b}
-.loc{margin-left:auto;text-align:right;flex-shrink:0}
-.loc b{font-size:12px;color:#0e7490;display:block}
-.loc span{font-size:10px;color:#94a3b8;font-weight:700}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-.tags span{font-size:10.5px;background:#ecfeff;color:#0e7490;border-radius:999px;padding:4px 10px;font-weight:800}
-.tags .fee{background:#f0fdf4;color:#047857}
-.brow{display:flex;align-items:center;justify-content:space-between}
-.slots{font-size:11.5px;font-weight:800}
-.slots.ok{color:#059669}.slots.low{color:#d97706}.slots.no{color:#dc2626}.slots.walk{color:#64748b}
-.bkbtn{border:0;border-radius:13px;padding:11px 20px;background:linear-gradient(135deg,#0e7490,#0891b2);color:#fff;font-weight:900;font-size:13px;cursor:pointer;font-family:inherit}
-.bkbtn:disabled{background:#cbd5e1;cursor:not-allowed}
-#modal{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
-#modal.on{display:flex}
-.sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:680px;padding:22px 20px calc(22px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto}
-.sheet h3{font-size:17px;font-weight:900;margin-bottom:6px}
-.sheet .sm{font-size:12px;color:#64748b;margin-bottom:8px}
-.sheet label{font-size:11px;font-weight:900;color:#64748b;display:block;margin:12px 0 4px;text-transform:uppercase;letter-spacing:1px}
-.sheet input{width:100%;border:1.5px solid #e9e4da;border-radius:12px;padding:11px 12px;font-size:15px;font-family:inherit;background:#faf8f4}
-.obtn{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#0e7490,#0891b2);color:#fff;font-weight:900;font-size:15px;cursor:pointer;font-family:inherit;margin-top:14px}
-.conf{text-align:center;padding:22px 0}
-.conf .big{font-size:52px}
-.conf h3{font-size:20px}
-.card{margin:14px auto;max-width:320px;background:#fff;border:2px dashed #0e7490;border-radius:18px;padding:16px;text-align:left}
-.card .code{font-size:22px;font-weight:900;letter-spacing:2px;color:#0e7490;text-align:center;border-bottom:1px solid #e9e4da;padding-bottom:10px;margin-bottom:10px}
-.card .row{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0}
-.card .row span{color:#94a3b8;font-weight:700}
-.card .row b{font-weight:900;text-align:right}
-.conf p{font-size:12.5px;color:#64748b;line-height:1.6}
-.wa{display:inline-block;background:#25D366;color:#fff;font-weight:900;border-radius:999px;padding:12px 26px;text-decoration:none;margin-top:8px;font-size:14px}
-.skel{background:linear-gradient(90deg,#eee 25%,#f7f5f0 50%,#eee 75%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:18px;height:110px;margin-top:12px}
-@keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
+body{font-family:'Inter','Noto Sans Ethiopic',-apple-system,'Segoe UI',system-ui,sans-serif;background:var(--sky);color:var(--bd);min-height:100vh;padding-bottom:90px;-webkit-font-smoothing:antialiased}
+.am{font-family:'Noto Sans Ethiopic','Inter',sans-serif}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit}
+.w{max-width:760px;margin:0 auto}
+/* emergency: always first, always red, one tap to call */
+.em{position:sticky;top:0;z-index:40;background:var(--red);color:#fff}
+.em .w{display:flex;align-items:center;gap:10px;padding:9px 14px;font-size:14px;font-weight:700}
+.em .dot{width:9px;height:9px;border-radius:50%;background:#fff;position:relative;flex-shrink:0}.em .dot::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid #fff;animation:ping 1.6s ease-out infinite}
+@keyframes ping{from{transform:scale(.5);opacity:1}to{transform:scale(1.9);opacity:0}}
+.em .tx{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.em a{background:#fff;color:var(--red);border-radius:999px;padding:6px 13px;text-decoration:none;font-weight:800;flex-shrink:0}
+/* cover with a living heartbeat line */
+.cover{position:relative;height:190px;overflow:hidden;background:radial-gradient(110% 90% at 90% 0%,rgba(16,185,129,.55) 0%,rgba(16,185,129,0) 55%),linear-gradient(135deg,#1D4ED8 0%,#1e3a8a 60%,#0B1B3A 130%)}
+.cover .plus{position:absolute;color:rgba(255,255,255,.12);font-weight:800;animation:float 9s ease-in-out infinite alternate}
+@keyframes float{to{transform:translateY(-16px) rotate(20deg)}}
+.cover svg{position:absolute;left:0;right:0;bottom:34px;width:100%;height:70px}
+.cover svg path{fill:none;stroke:rgba(255,255,255,.85);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900;animation:beat 3.2s linear infinite}
+@keyframes beat{0%{stroke-dashoffset:900}70%{stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:0}}
+.brand{position:relative;display:flex;align-items:center;gap:8px;padding:14px 16px;color:#fff;font-weight:800;font-size:15px}
+.brand i{width:28px;height:28px;border-radius:9px;background:#fff;color:var(--b);display:grid;place-items:center;font-style:normal;font-size:18px;font-weight:900}
+.brand small{font-weight:600;opacity:.8}
+.card{position:relative;margin:-58px 14px 0;background:#fff;border-radius:24px;padding:20px 18px 18px;box-shadow:0 1px 2px rgba(11,27,58,.05),0 18px 44px rgba(29,78,216,.14)}
+.card h1{font-size:26px;letter-spacing:-.03em;line-height:1.15}
+.card .an{font-size:16px;color:var(--b);font-weight:700;margin-top:3px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips>span{display:inline-flex;align-items:center;gap:6px;background:var(--sky);border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:13px;font-weight:600;color:#334155}
+.chips>.g{background:var(--mint2);border-color:#a7f3d0;color:#047857}
+.demo{margin:14px 14px 0;padding:13px 15px;border-radius:18px;background:#fff7e6;border:1px solid #f6d58b;color:#7c4a03;font-size:13px;line-height:1.5;display:none}.demo b{display:block}.demo.on{display:block}
+.tools{padding:18px 14px 0}
+.search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:0 12px;height:46px}
+.search input{flex:1;border:0;outline:0;font:inherit;font-size:15px;background:transparent;color:var(--bd)}
+.fl{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:12px 0 2px}.fl::-webkit-scrollbar{display:none}
+.fl button{flex-shrink:0;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;color:#475569;background:#fff;border:1px solid var(--line);transition:.2s}.fl button.on{background:var(--b);color:#fff;border-color:var(--b)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;padding:14px}
+.dp{background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:transform .3s,box-shadow .3s}
+.dp:hover{transform:translateY(-3px);box-shadow:0 16px 36px -14px rgba(29,78,216,.28)}
+.dp .hd{display:flex;gap:12px;align-items:flex-start}
+.dp .ic{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;font-size:26px;flex-shrink:0;background:linear-gradient(135deg,#DBEAFE,#D1FAE5)}
+.dp.er .ic{background:#FEE2E2}
+.dp h3{font-size:17px;letter-spacing:-.01em}.dp .sub{font-size:13px;color:var(--mut);margin-top:1px}
+.dp .rm{margin-left:auto;text-align:right;flex-shrink:0}.dp .rm b{display:block;font-size:15px;color:var(--b)}.dp .rm small{font-size:12px;color:var(--mut)}
+.meta{display:flex;flex-wrap:wrap;gap:6px}.meta span{font-size:12.5px;font-weight:600;background:var(--sky);border-radius:999px;padding:5px 10px;color:#334155}
+.bar{height:6px;border-radius:3px;background:#E2E8F0;overflow:hidden}.bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--mint),#34d399);transform-origin:left;animation:grow 1.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}}
+.ft{display:flex;align-items:center;gap:10px;margin-top:2px}
+.ft .fee{font-weight:800;font-size:16px}.ft .slots{font-size:12.5px;color:#047857;font-weight:700}
+.bk{margin-left:auto;background:linear-gradient(135deg,var(--b),var(--b2));color:#fff;border-radius:12px;padding:10px 16px;font-weight:800;font-size:14px;box-shadow:0 8px 18px -10px rgba(29,78,216,.7)}
+.walk{margin-left:auto;background:var(--mint2);color:#047857;border-radius:12px;padding:9px 14px;font-weight:800;font-size:13.5px}
+.dp.er .walk{background:#FEE2E2;color:var(--red)}
+.none{text-align:center;color:var(--mut);padding:30px}
+.skel{height:170px;border-radius:22px;margin:14px;background:linear-gradient(90deg,#e3ebf7 25%,#f3f7fd 50%,#e3ebf7 75%);background-size:200% 100%;animation:sk 1.3s linear infinite}@keyframes sk{to{background-position:-200% 0}}
+/* booking sheet */
+.ov{position:fixed;inset:0;z-index:60;background:rgba(11,27,58,.5);opacity:0;pointer-events:none;transition:opacity .25s}.ov.on{opacity:1;pointer-events:auto}
+.sh{position:fixed;left:0;right:0;bottom:0;z-index:61;max-width:760px;margin:0 auto;background:#fff;border-radius:26px 26px 0 0;max-height:92vh;overflow-y:auto;transform:translateY(105%);transition:transform .38s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom)}.sh.on{transform:none}
+.sh .grab{width:40px;height:5px;border-radius:3px;background:#cbd5e1;margin:10px auto 0}.sh .in{padding:14px 20px 24px}
+.sh h3{font-size:21px;letter-spacing:-.02em}.sh .s2{color:var(--mut);margin-top:3px;font-size:14px}
+.days{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-top:14px;padding-bottom:4px}.days::-webkit-scrollbar{display:none}
+.days button{flex-shrink:0;width:64px;border:1px solid var(--line);border-radius:16px;padding:9px 0;text-align:center;background:#fff}.days button b{display:block;font-size:19px}.days button small{font-size:11.5px;color:var(--mut);font-weight:700;text-transform:uppercase}
+.days button.on{background:var(--b);border-color:var(--b);color:#fff}.days button.on small{color:#dbeafe}
+.lbl{display:block;font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 6px}
+.inp{width:100%;border:1px solid var(--line);border-radius:14px;padding:13px 14px;font:inherit;font-size:15px;background:var(--sky);color:var(--bd);outline:0}.inp:focus{border-color:var(--b);background:#fff}
+.go{width:100%;margin-top:18px;border-radius:16px;padding:16px;background:linear-gradient(135deg,var(--b),var(--mint));color:#fff;font-weight:800;font-size:16px;box-shadow:0 12px 28px -12px rgba(29,78,216,.6)}.go:disabled{opacity:.6}
+.err{color:var(--red);font-weight:700;font-size:14px;margin-top:10px}
+.done{text-align:center}
+.chk{width:86px;height:86px;margin:8px auto 12px}.chk circle{fill:none;stroke:var(--mint);stroke-width:5;stroke-dasharray:252;stroke-dashoffset:252;animation:dr .6s ease-out forwards}.chk path{fill:none;stroke:var(--mint);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:dr .4s .5s ease-out forwards}@keyframes dr{to{stroke-dashoffset:0}}
+.code{display:inline-block;font-size:26px;font-weight:800;letter-spacing:3px;color:var(--b);background:#EFF6FF;border:2px dashed #93c5fd;border-radius:16px;padding:10px 20px;margin:12px 0}
+.rows{background:var(--sky);border-radius:18px;padding:6px 16px;text-align:left;margin-top:6px}.rows div{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px}.rows div:last-child{border:0}.rows span{color:var(--mut)}
+.wa{display:block;margin-top:14px;text-align:center;background:#E8F8EE;color:#12803f;border-radius:14px;padding:13px;font-weight:800;text-decoration:none}
+.foot{text-align:center;color:var(--mut);font-size:13px;padding:24px 16px 10px;line-height:1.7}.foot a{color:var(--b);font-weight:700;text-decoration:none}
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}.js .rv.in{opacity:1;transform:none}
+@media (min-width:800px){.card{margin:-58px 0 0}.demo{margin:14px 0 0}.tools{padding:18px 0 0}.grid{padding:14px 0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}.cover svg path{stroke-dashoffset:0}.chk circle,.chk path{stroke-dashoffset:0}}
 </style>
-<link rel="stylesheet" href="/static/site-v3.css?v=5">
-<meta name="theme-color" content="#009688"></head>
+</head>
 <body>
-<div class="top"><a href="/" class="logo"><i class="caremark">+</i>Bina<span class="g">Care</span></a><span style="margin-left:auto;font-size:11px;font-weight:800;color:#0891b2">🏥 Find your department</span></div>
-<div class="wrap">
-  <div class="hero"><h1 id="hname">Loading…</h1><div class="am" id="hnameAm"></div><div class="sub" id="hsub"></div></div>
-  <div class="emerg">🚨 Emergency? Go straight to <b>E-01, Ground Floor</b> · ድንገተኛ? በቀጥታ E-01<span>24/7</span></div>
-  <div id="depts"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+<div class="em"><div class="w"><span class="dot"></span><span class="tx" id="emtx">🚨 Emergency? Call 907 · ድንገተኛ? 907 ይደውሉ</span><a href="tel:907">📞 907</a></div></div>
+<div class="cover" aria-hidden="true">
+  <span class="plus" style="left:8%;top:30%;font-size:44px">+</span><span class="plus" style="left:78%;top:18%;font-size:30px;animation-delay:-3s">+</span><span class="plus" style="left:55%;top:52%;font-size:22px;animation-delay:-6s">+</span>
+  <div class="brand w"><i>+</i>BinaSmart <small>Health · ጤና</small></div>
+  <svg viewBox="0 0 800 70" preserveAspectRatio="none"><path d="M0 40 H250 L270 40 L285 12 L300 62 L318 22 L332 40 H470 L488 40 L500 26 L512 52 L524 40 H800"/></svg>
 </div>
-<div id="modal"><div class="sheet" id="sheet"></div></div>
+<div class="w">
+  <div class="card rv in"><h1 id="hn">Hospital</h1><div class="an am" id="ha"></div><div class="chips" id="chips"></div></div>
+  <div class="demo" id="demo"><b>ማሳያ ሆስፒታል ነው · This hospital is a demonstration</b>Sample data while real hospitals join BinaSmart. A booking here does not reach a real hospital. ይህ የናሙና መረጃ ነው፤ የሚያዝ ቀጠሮ ወደ እውነተኛ ሆስፒታል አይደርስም።</div>
+  <div class="tools">
+    <label class="search"><span>🔎</span><input id="q" type="search" placeholder="Search a department · ክፍል ይፈልጉ" autocomplete="off"></label>
+    <div class="fl" id="fl"><button class="on" data-f="">All · ሁሉም</button><button data-f="book">📅 Book online</button><button data-f="walk">🚶 Walk-in</button><button data-f="24">🕐 Open 24/7</button></div>
+  </div>
+</div>
+<main class="w grid" id="deps"><div class="skel"></div><div class="skel"></div><div class="skel"></div></main>
+<div class="foot w">Health information by <a href="/health">BinaSmart Health</a> · Dr Afiya is a guide, not a doctor.<br>Emergency · ድንገተኛ: <a href="tel:907">907</a> ambulance</div>
+<div class="ov" id="ov"></div>
+<div class="sh" id="sh" role="dialog" aria-modal="true"><div class="grab"></div><div class="in" id="shi"></div></div>
 <script>
-const slug = location.pathname.split('/')[2];
-const $ = id => document.getElementById(id);
-let H = null, DEPTS = [];
-const floorName = f => f === 0 ? 'Ground Floor · ምድር ቤት' : 'Floor ' + f + ' · ' + f + 'ኛ ፎቅ';
-async function load(){
-  const r = await fetch('/api/hospital/' + slug);
-  if (!r.ok){ $('hname').textContent = 'Hospital not found'; $('depts').innerHTML = ''; return; }
-  const d = await r.json(); H = d.hospital; DEPTS = d.departments;
-  $('hname').textContent = H.name; $('hnameAm').textContent = H.nameAm || '';
-  $('hsub').textContent = '📍 ' + (H.subCity ? H.subCity + ' · ' : '') + H.city + ' — every department, floor and fee below';
-  document.title = H.name + ' — Departments & Booking | BinaSmart';
-  $('depts').innerHTML = DEPTS.map(dp => {
-    const walkIn = dp.slotsPerDay >= 999 || !dp.fee;
-    const s = walkIn ? '<span class="slots walk">Walk-in · ቀጥታ ይግቡ</span>'
-      : dp.slotsLeft <= 0 ? '<span class="slots no">✖ Today full — book tomorrow</span>'
-      : dp.slotsLeft <= 5 ? '<span class="slots low">⚡ ' + dp.slotsLeft + ' slots left today</span>'
-      : '<span class="slots ok">✓ ' + dp.slotsLeft + ' slots today</span>';
-    return '<div class="dept"><div class="dh"><div class="ic">' + (dp.icon || '🏥') + '</div>'
-      + '<div><div class="nm">' + dp.name + '</div><div class="am">' + [dp.nameAm, dp.nameOm].filter(Boolean).join(' · ') + '</div></div>'
-      + '<div class="loc"><b>' + (dp.room || '') + '</b><span>' + floorName(dp.floor) + '</span></div></div>'
-      + '<div class="tags">' + (dp.fee ? '<span class="fee">💵 ' + dp.fee.toLocaleString() + ' ETB</span>' : '')
-      + (dp.openHours ? '<span>🕐 ' + dp.openHours + '</span>' : '')
-      + (dp.doctors || []).map(x => '<span>👨‍⚕️ ' + x + '</span>').join('') + '</div>'
-      + '<div class="brow">' + s + (walkIn ? '' : '<button class="bkbtn" onclick="openBook(\'' + dp.id + '\')">📅 Book visit · ቀጠሮ</button>') + '</div></div>';
-  }).join('');
+(function(){
+var slug = location.pathname.split('/')[2] || '';
+var $ = function(id){ return document.getElementById(id); };
+var H = null, DEPS = [], F = '';
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function floorName(f){ f = Number(f); return f === 0 ? 'Ground floor · ምድር ቤት' : 'Floor ' + f + ' · ' + f + 'ኛ ፎቅ'; }
+function bookable(d){ return d.fee != null; }
+function isER(d){ return /emergency|ድንገተኛ/i.test(d.name + ' ' + (d.nameAm || '')); }
+function is24(d){ return /24\s*\/\s*7|24 hours/i.test(d.openHours || ''); }
+function load(){
+  fetch('/api/hospital/' + encodeURIComponent(slug)).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+    if (!d){ $('hn').textContent = 'Hospital not found'; $('deps').innerHTML = '<div class="none">This hospital is not on BinaSmart. · ሆስፒታሉ አልተገኘም።</div>'; return; }
+    H = d.hospital; DEPS = d.departments || [];
+    document.title = H.name + ' · departments, floors, fees and booking | BinaSmart Health';
+    $('hn').textContent = H.name; $('ha').textContent = H.nameAm || '';
+    var demo = /demo/i.test(H.subCity || ''), er = DEPS.find(isER);
+    if (demo) $('demo').classList.add('on');
+    var chips = ['<span>📍 ' + esc(demo ? H.city : [H.subCity, H.city].filter(Boolean).join(', ')) + '</span>'];
+    if (H.floors) chips.push('<span>🏢 ' + esc(H.floors) + ' floors</span>');
+    if (er) chips.push('<span class="g">🚑 Emergency 24/7</span>');
+    chips.push('<span>📅 Book online · <span class="am">ቀጠሮ</span></span>');
+    $('chips').innerHTML = chips.join('');
+    if (er) $('emtx').textContent = '🚨 Emergency: ' + (er.room || '') + ', ' + floorName(er.floor).split(' · ')[0] + ' · or call 907';
+    render();
+  }).catch(function(){ $('deps').innerHTML = '<div class="none">Connection problem. Please try again.</div>'; });
 }
-function openBook(id){
-  const dp = DEPTS.find(x => x.id === id); if (!dp) return;
-  const today = new Date().toISOString().slice(0, 10);
-  $('modal').classList.add('on');
-  $('sheet').innerHTML = '<h3>' + (dp.icon || '🏥') + ' ' + dp.name + ' · ' + [dp.nameAm, dp.nameOm].filter(Boolean).join(' · ') + '</h3>'
-    + '<div class="sm">' + (dp.room || '') + ' · ' + floorName(dp.floor) + (dp.fee ? ' · ' + dp.fee.toLocaleString() + ' ETB' : '') + '</div>'
-    + '<label>Date / ቀን</label><input type="date" id="ad" value="' + today + '" min="' + today + '">'
-    + '<label>Full name / ሙሉ ስም</label><input id="an" placeholder="Patient name">'
-    + '<label>Phone / ስልክ</label><input id="ap" placeholder="09…" inputmode="tel">'
-    + '<label>Reason (optional) / ምክንያት</label><input id="ar" placeholder="Short description">'
-    + '<button class="obtn" onclick="submitBook(\'' + dp.id + '\')">📅 Book my visit · ቀጠሮዬን ያዙ</button>';
-  $('modal').onclick = e => { if (e.target === $('modal')) $('modal').classList.remove('on'); };
+function render(){
+  var q = $('q').value.trim().toLowerCase();
+  var list = DEPS.filter(function(d){
+    if (q && (d.name + ' ' + (d.nameAm || '') + ' ' + (d.nameOm || '')).toLowerCase().indexOf(q) < 0) return false;
+    return !F || (F === 'book' ? bookable(d) : F === 'walk' ? !bookable(d) : is24(d));
+  });
+  var max = Math.max.apply(null, DEPS.filter(bookable).map(function(d){ return d.slotsLeft || 0; }).concat([1]));
+  $('deps').innerHTML = list.length ? list.map(function(d){
+    var b = bookable(d), er = isER(d);
+    return '<article class="dp rv' + (er ? ' er' : '') + '"><div class="hd"><div class="ic">' + esc(d.icon || '🏥') + '</div><div><h3>' + esc(d.name) + '</h3><div class="sub am">' + esc([d.nameAm, d.nameOm].filter(Boolean).join(' · ')) + '</div></div>'
+      + '<div class="rm"><b>' + esc(d.room || '') + '</b><small>' + esc(floorName(d.floor)) + '</small></div></div>'
+      + '<div class="meta">' + (d.openHours ? '<span>🕐 ' + esc(d.openHours) + '</span>' : '') + (d.doctors || []).map(function(x){ return '<span>👩🏾‍⚕️ ' + esc(x) + '</span>'; }).join('') + '</div>'
+      + (b && d.slotsLeft != null ? '<div class="bar" title="Places left today"><i style="width:' + Math.max(4, Math.min(100, Math.round(d.slotsLeft / max * 100))) + '%"></i></div>' : '')
+      + '<div class="ft">' + (b ? '<span class="fee">' + Number(d.fee).toLocaleString('en-US') + ' ETB</span>' + (d.slotsLeft != null ? '<span class="slots">✓ ' + d.slotsLeft + ' left today</span>' : '') + '<button class="bk" data-b="' + esc(d.id) + '">📅 Book · ቀጠሮ</button>'
+        : '<button class="walk" data-w="' + esc(d.id) + '">' + (er ? '🚑 Go straight in · 24/7' : '🚶 Walk in · ቀጥታ ይግቡ') + '</button>') + '</div></article>';
+  }).join('') : '<div class="none">No department matches. Ask Dr Afiya which one you need. · አፍያን ይጠይቁ</div>';
+  reveal();
 }
-async function submitBook(id){
-  const an = $('an').value.trim(), ap = $('ap').value.trim();
-  if (!an || !ap) return alert('Please enter name and phone / ስም እና ስልክ ያስገቡ');
-  const r = await fetch('/api/hospital/' + slug + '/appointment', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ departmentId: id, name: an, phone: ap, date: $('ad').value, note: $('ar').value.trim() }) });
-  const d = await r.json();
-  if (!d.ok){ alert(d.error === 'day_full' ? 'That day is fully booked — please pick another date / ሙሉ ነው' : '❌ ' + (d.error || 'error')); return; }
-  const summary = '🏥 Appointment ' + d.code + '\n' + H.name + ' — ' + d.department + '\n' + d.date + ' · Queue #' + d.queueNumber + '\n' + (d.room || '') + ', floor ' + d.floor + (d.fee ? '\nFee: ' + d.fee.toLocaleString() + ' ETB' : '') + '\nPatient: ' + an;
-  $('sheet').innerHTML = '<div class="conf"><div class="big">🩺</div><h3>Appointment booked! · ቀጠሮዎ ተይዟል!</h3>'
-    + '<div class="card"><div class="code">' + d.code + '</div>'
-    + '<div class="row"><span>Department</span><b>' + d.department + '<br>' + (d.departmentAm || '') + '</b></div>'
-    + '<div class="row"><span>Date</span><b>' + d.date + '</b></div>'
-    + '<div class="row"><span>Queue</span><b>#' + d.queueNumber + '</b></div>'
-    + '<div class="row"><span>Where</span><b>' + (d.room || '') + ' · ' + floorName(d.floor) + '</b></div>'
-    + (d.fee ? '<div class="row"><span>Fee</span><b>' + d.fee.toLocaleString() + ' ETB — pay at reception</b></div>' : '') + '</div>'
-    + '<p>Show this code at reception · ኮዱን መቀበያ ላይ ያሳዩ</p>'
-    + '<a class="wa" href="https://wa.me/?text=' + encodeURIComponent(summary) + '">💬 Save to WhatsApp</a></div>';
-  load();
-}
+function reveal(){ var els = [].slice.call(document.querySelectorAll('.rv:not(.in)'));
+  if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(es){ var k = 0; es.forEach(function(e){ if (e.isIntersecting){ e.target.style.transitionDelay = (k++ * 50) + 'ms'; e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -5% 0px' });
+  els.forEach(function(e){ io.observe(e); }); }
+function open(html){ $('shi').innerHTML = html; $('ov').classList.add('on'); $('sh').classList.add('on'); $('sh').scrollTop = 0; }
+function close(){ $('ov').classList.remove('on'); $('sh').classList.remove('on'); }
+function days(){ var out = [], wd = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  for (var i = 0; i < 7; i++){ var t = new Date(); t.setDate(t.getDate() + i); var iso = t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0');
+    out.push('<button type="button" data-day="' + iso + '"' + (i === 0 ? ' class="on"' : '') + '><small>' + (i === 0 ? 'Today' : wd[t.getDay()]) + '</small><b>' + t.getDate() + '</b></button>'); }
+  return out.join(''); }
+function book(id){ var d = DEPS.find(function(x){ return x.id === id; }); if (!d) return;
+  open('<h3>' + esc(d.icon || '') + ' ' + esc(d.name) + '</h3><div class="s2">' + esc(d.room || '') + ' · ' + esc(floorName(d.floor)) + (d.fee != null ? ' · ' + Number(d.fee).toLocaleString('en-US') + ' ETB, pay at reception' : '') + '</div>'
+    + '<label class="lbl">Day · ቀን</label><div class="days" id="days">' + days() + '</div>'
+    + '<label class="lbl" for="an">Patient name · የታካሚ ስም</label><input class="inp" id="an" autocomplete="name" maxlength="80">'
+    + '<label class="lbl" for="ap">Phone · ስልክ</label><input class="inp" id="ap" inputmode="tel" autocomplete="tel" placeholder="09… / +251…" maxlength="20">'
+    + '<label class="lbl" for="ar">Reason (optional) · ምክንያት</label><input class="inp" id="ar" maxlength="200" placeholder="e.g. check-up, follow-up">'
+    + '<div class="err" id="err"></div>'
+    + '<button class="go" id="bgo">' + (H && /demo/i.test(H.subCity || '') ? '🧪 Try the demo booking' : '📅 Book the visit · ቀጠሮ ያዙ') + '</button>');
+  var day = $('days').querySelector('.on').getAttribute('data-day');
+  $('shi').onclick = function(e){ var b = e.target.closest('[data-day]'); if (b) { [].forEach.call($('days').children, function(x){ x.classList.toggle('on', x === b); }); day = b.getAttribute('data-day'); }
+    if (e.target.closest('#bgo')) submit(d, day); }; }
+function submit(d, day){ var an = $('an').value.trim(), ap = $('ap').value.trim(), btn = $('bgo');
+  if (an.length < 2 || !/^[+\d][\d\s-]{7,}$/.test(ap)) { $('err').textContent = 'Please enter the patient\'s name and a phone number. · ስም እና ስልክ ያስገቡ።'; return; }
+  btn.disabled = true; btn.textContent = 'Booking… · በመያዝ ላይ'; $('err').textContent = '';
+  fetch('/api/hospital/' + encodeURIComponent(slug) + '/appointment', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ departmentId: d.id, name: an, phone: ap, date: day, note: $('ar').value.trim() }) })
+  .then(function(r){ return r.json().catch(function(){ return {}; }); }).then(function(x){
+    if (!x.ok) { btn.disabled = false; btn.textContent = 'Try again · እንደገና'; $('err').textContent = x.error === 'day_full' ? 'That day is full. Please pick another day. · ቀኑ ሞልቷል።' : x.error === 'past_date' ? 'Please pick today or a later day.' : 'The booking did not go through. Please try again.'; return; }
+    var sum = 'Appointment ' + x.code + '\n' + H.name + ' · ' + x.department + '\n' + x.date + ' · Queue #' + x.queueNumber + '\n' + (x.room || '') + ', ' + floorName(x.floor).split(' · ')[0] + (x.fee ? '\nFee: ' + x.fee + ' ETB (pay at reception)' : '') + '\nPatient: ' + an;
+    open('<div class="done"><svg class="chk" viewBox="0 0 88 88"><circle cx="44" cy="44" r="40"/><path d="M26 45 l12 12 l24 -26"/></svg><h3>Visit booked · ቀጠሮ ተይዟል</h3>'
+      + '<div class="code">' + esc(x.code) + '</div>'
+      + '<div class="rows"><div><span>Department</span><b>' + esc(x.department) + '</b></div><div><span>Day</span><b>' + esc(x.date) + '</b></div><div><span>Queue</span><b>#' + esc(x.queueNumber) + '</b></div>'
+      + '<div><span>Where</span><b>' + esc(x.room || '') + ' · ' + esc(floorName(x.floor)) + '</b></div>' + (x.fee ? '<div><span>Fee</span><b>' + Number(x.fee).toLocaleString('en-US') + ' ETB · at reception</b></div>' : '') + '</div>'
+      + '<p style="color:var(--mut);margin-top:12px;line-height:1.6">Show this code at reception, with your ID. · ኮዱን ከመታወቂያዎ ጋር ለእንግዳ መቀበያ ያሳዩ።</p>'
+      + '<a class="wa" href="https://wa.me/?text=' + encodeURIComponent(sum) + '" target="_blank" rel="noopener">💾 Save to WhatsApp</a></div>');
+    $('shi').onclick = null; load();
+  }).catch(function(){ btn.disabled = false; btn.textContent = 'Try again · እንደገና'; $('err').textContent = 'Connection problem. Please try again.'; }); }
+function walk(id){ var d = DEPS.find(function(x){ return x.id === id; }); if (!d) return; var er = isER(d);
+  open('<h3>' + esc(d.icon || '') + ' ' + esc(d.name) + '</h3><div class="s2 am">' + esc([d.nameAm, d.nameOm].filter(Boolean).join(' · ')) + '</div>'
+    + '<div class="rows" style="margin-top:14px"><div><span>Where</span><b>' + esc(d.room || '') + ' · ' + esc(floorName(d.floor)) + '</b></div>' + (d.openHours ? '<div><span>Hours</span><b>' + esc(d.openHours) + '</b></div>' : '') + '<div><span>How</span><b>' + esc((d.doctors || [])[0] || 'Walk in') + '</b></div></div>'
+    + (er ? '<a class="go" style="display:block;text-align:center;text-decoration:none;background:#DC2626" href="tel:907">📞 Call 907 ambulance</a>' : '<button class="go" id="askA">👩🏾‍⚕️ Ask Dr Afiya about this department</button>'));
+  $('shi').onclick = function(e){ if (e.target.closest('#askA') && window.AfiyaWidget) { close(); window.AfiyaWidget.ask('What should I know before going to the ' + d.name + ' at ' + H.name + '?'); } }; }
+document.addEventListener('click', function(e){ var b = e.target.closest('[data-b]'); if (b) return book(b.getAttribute('data-b')); var w = e.target.closest('[data-w]'); if (w) return walk(w.getAttribute('data-w'));
+  var f = e.target.closest('#fl button'); if (f) { [].forEach.call($('fl').children, function(x){ x.classList.toggle('on', x === f); }); F = f.getAttribute('data-f'); render(); } });
+$('ov').onclick = close; document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+$('q').addEventListener('input', render);
 load();
+})();
 </script>
-  <script src="/static/bina-footer.js?v=9" defer></script>
+<script src="/static/afiya-widget.js?v=1" data-context="hospital" defer></script>
 <script src="/static/pwa.js?v=1" defer></script>
 </body>
 </html>

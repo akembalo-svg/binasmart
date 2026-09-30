@@ -4,43 +4,78 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Table QR Stickers — BinaSmart</title>
+<title>Table QR cards · Print | BinaSmart</title>
+<link rel="icon" href="/icon-32.png">
+<link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
 <style>
+/* Table cards a restaurant prints and puts on each table (30 Sep 2026). A4, four A6 cards per page; each QR opens
+   /restaurant/<slug>?table=N, drawn by bina.et's own /qr.svg (no outside QR service). */
+:root{--g:#00704A;--g3:#00C896;--ink:#081120;--mint:#e8f6f0}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,'Segoe UI',Roboto,'Noto Sans Ethiopic',sans-serif;background:#e5e7eb}
-.sheet{width:210mm;min-height:297mm;margin:0 auto;background:#fff;padding:8mm;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:87mm;gap:6mm}
-.stk{border:1.2mm solid #7c2d12;border-radius:8mm;padding:6mm;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 62%,#fff7ed)}
-.hd{display:flex;align-items:center;gap:2mm;font-weight:900;font-size:5mm;color:#7c2d12}
-.hd .am{font-size:3.6mm;color:#c2410c}
-.qr{width:44mm;height:44mm}
-.qr img{width:100%;height:100%}
-.cta{font-weight:900;font-size:4.6mm;color:#1e293b}
-.cta .am{display:block;font-size:4mm;color:#c2410c}
-.tno{position:absolute;top:4mm;right:5mm;background:#7c2d12;color:#fff;border-radius:999px;padding:1.6mm 4mm;font-weight:900;font-size:4.6mm}
-.ft{font-size:2.8mm;color:#94a3b8;font-weight:700}
-.steps{display:flex;gap:3mm;font-size:2.9mm;color:#475569;font-weight:700}
-.steps b{color:#7c2d12}
-@media print{body{background:#fff}.sheet{margin:0}@page{size:A4;margin:0}}
+body{font-family:'Inter','Noto Sans Ethiopic',-apple-system,'Segoe UI',sans-serif;background:#e9eeec;color:var(--ink)}
+.am{font-family:'Noto Sans Ethiopic','Inter',sans-serif}
+.tools{position:sticky;top:0;z-index:5;background:#081120;color:#fff;padding:12px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;font-size:14px}
+.tools b{font-size:15px}.tools input{width:74px;border:0;border-radius:10px;padding:8px 10px;font:inherit;font-size:15px}
+.tools button{border:0;border-radius:12px;padding:10px 18px;font:inherit;font-weight:800;font-size:15px;cursor:pointer;background:linear-gradient(135deg,var(--g3),var(--g));color:#fff}
+.tools small{opacity:.75}
+.sheet{width:210mm;height:297mm;margin:10mm auto;background:#fff;display:grid;grid-template-columns:105mm 105mm;grid-template-rows:148.5mm 148.5mm;box-shadow:0 10px 40px rgba(8,17,32,.15);page-break-after:always;break-after:page}
+.sheet:last-child{page-break-after:auto;break-after:auto}
+.cd{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;border:.2mm dashed #cfd8d4}
+.cd .top{width:100%;background:radial-gradient(120% 120% at 0% 0%,#00C896 0%,rgba(0,200,150,0) 60%),linear-gradient(135deg,#00704A,#005c3d 70%,#081120 150%);color:#fff;padding:7mm 6mm 12mm}
+.cd .rn{font-size:6.2mm;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.cd .ra{font-size:4.2mm;color:#c9f3e2;font-weight:700;margin-top:1mm}
+.cd .tn{position:relative;margin-top:-9mm;width:18mm;height:18mm;border-radius:50%;background:#fff;border:1.2mm solid var(--g);display:grid;place-items:center;box-shadow:0 2mm 5mm rgba(0,112,74,.25)}
+.cd .tn b{font-size:7.5mm;font-weight:800;line-height:1;color:var(--g)}
+.cd .tl{font-size:2.8mm;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#667085;margin-top:1.6mm}
+.cd .qr{margin-top:3mm;width:52mm;height:52mm;padding:2.2mm;border-radius:5mm;border:.8mm solid var(--mint);background:#fff}
+.cd .qr img{width:100%;height:100%;display:block}
+.cd .cta{margin-top:3.5mm;font-size:5.4mm;font-weight:800;letter-spacing:-.01em}
+.cd .cta .am{display:block;font-size:4.2mm;color:var(--g);margin-top:.6mm}
+.cd .st{display:flex;gap:2.6mm;margin-top:3.2mm;font-size:2.8mm;font-weight:700;color:#475467}
+.cd .st span{display:flex;align-items:center;gap:1mm}.cd .st i{font-style:normal;width:4.4mm;height:4.4mm;border-radius:50%;background:var(--mint);color:var(--g);display:grid;place-items:center;font-size:2.6mm;font-weight:800}
+.cd .ft{position:absolute;bottom:4.5mm;left:0;right:0;font-size:2.6mm;color:#98a2b3;font-weight:600}
+.cd .ft b{color:var(--g)}
+@media print{body{background:#fff}.tools{display:none}.sheet{margin:0;box-shadow:none}@page{size:A4;margin:0}}
+@media screen and (max-width:230mm){.sheet{transform:scale(.46);transform-origin:top center;margin:4mm auto -150mm}}
 </style>
 </head>
 <body>
-<div class="sheet" id="sheet"></div>
+<div class="tools">
+  <b>🪑 Table QR cards · <span class="am">የጠረጴዛ QR</span></b>
+  <label>Tables · <span class="am">ጠረጴዛዎች</span> <input id="n" type="number" min="1" max="80"></label>
+  <label>From · <span class="am">ከ</span> <input id="f" type="number" min="1" max="999"></label>
+  <button onclick="window.print()">🖨 Print · <span class="am">አትም</span></button>
+  <small>Cut along the dashed lines; one card per table.</small>
+</div>
+<div id="pages"></div>
 <script>
-const P = new URLSearchParams(location.search);
-const r = P.get('r') || 'bina-restaurant';
-const name = P.get('name') || 'Bina Restaurant';
-const nameAm = P.get('am') || 'ቢና ምግብ ቤት';
-const n = Math.min(20, parseInt(P.get('n')) || 10);
-let h = '';
-for (let t = 1; t <= n; t++) {
-  h += '<div class="stk"><div class="tno">🪑 ' + t + '</div>'
-    + '<div class="hd">🍽️ ' + name + ' <span class="am">' + nameAm + '</span></div>'
-    + '<div class="qr"><img src="/static/qr-table-' + r + '-' + t + '.png" alt="Table ' + t + ' QR"></div>'
-    + '<div class="cta">Scan to order<span class="am">ስካን አድርገው ይዘዙ</span></div>'
-    + '<div class="steps"><span><b>1</b> Scan ስካን</span><span><b>2</b> Choose ይምረጡ</span><span><b>3</b> We bring it እናመጣለን</span></div>'
-    + '<div class="ft">No app needed · መተግበሪያ አያስፈልግም · Powered by BinaSmart</div></div>';
-}
-document.getElementById('sheet').innerHTML = h;
+(function(){
+  var P = new URLSearchParams(location.search);
+  var slug = String(P.get('r') || 'bina-restaurant').replace(/[^\wሀ-፿.' -]/g, '').slice(0, 80);
+  var name = String(P.get('name') || slug.replace(/-/g, ' ')).slice(0, 60), nameAm = String(P.get('am') || '').slice(0, 60);
+  var n = Math.max(1, Math.min(80, parseInt(P.get('n'), 10) || 10)), from = Math.max(1, Math.min(999, parseInt(P.get('from'), 10) || 1));
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function card(t){
+    var path = '/restaurant/' + encodeURIComponent(slug) + '?table=' + t;
+    return '<div class="cd"><div class="top"><div class="rn">' + esc(name) + '</div>' + (nameAm ? '<div class="ra am">' + esc(nameAm) + '</div>' : '') + '</div>'
+      + '<div class="tn"><b>' + t + '</b></div><div class="tl">Table · <span class="am">ጠረጴዛ</span></div>'
+      + '<div class="qr"><img src="/qr.svg?p=' + encodeURIComponent(path) + '" alt="QR for table ' + t + '"></div>'
+      + '<div class="cta">Scan · Order · Eat<span class="am">ይቃኙ · ይዘዙ · ይመገቡ</span></div>'
+      + '<div class="st"><span><i>1</i>Scan · <span class="am">ይቃኙ</span></span><span><i>2</i>Choose · <span class="am">ይምረጡ</span></span><span><i>3</i>We bring it · <span class="am">እናመጣለን</span></span></div>'
+      + '<div class="ft">No app needed · <span class="am">መተግበሪያ አያስፈልግም</span> · <b>bina.et</b></div></div>';
+  }
+  function draw(){
+    var h = '', cards = [];
+    for (var t = from; t < from + n; t++) cards.push(card(t));
+    for (var i = 0; i < cards.length; i += 4) h += '<div class="sheet">' + cards.slice(i, i + 4).join('') + '</div>';
+    document.getElementById('pages').innerHTML = h;
+    document.title = name + ' · table QR cards';
+  }
+  var ni = document.getElementById('n'), fi = document.getElementById('f');
+  ni.value = n; fi.value = from;
+  ni.oninput = fi.oninput = function(){ n = Math.max(1, Math.min(80, parseInt(ni.value, 10) || 1)); from = Math.max(1, Math.min(999, parseInt(fi.value, 10) || 1)); draw(); };
+  draw();
+})();
 </script>
 </body>
 </html>

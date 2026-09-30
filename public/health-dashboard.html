@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Health dashboard · ዳሽቦርድ | BinaSmart Health</title>
+<meta name="robots" content="noindex"><meta name="theme-color" content="#1D4ED8">
+<link rel="icon" href="/icon-32.png"><link rel="stylesheet" href="/static/fonts/fonts.css?v=2"><link rel="stylesheet" href="/static/health.css?v=2">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+.dh{background:linear-gradient(140deg,var(--bd),var(--b) 55%,#0E7A6A);color:#fff;position:relative;overflow:hidden;padding:26px 0 70px}
+.dh h1{margin:0;font-size:clamp(24px,5vw,34px);letter-spacing:-.025em}.dh p{margin:4px 0 0;opacity:.9}
+.dwrap{margin-top:-52px;position:relative;z-index:2;display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:960px){.dwrap{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}.apanel{position:sticky;top:12px}}
+.box{background:#fff;border:1px solid var(--ln);border-radius:20px;padding:18px;box-shadow:var(--sh)}
+.box h2{margin:0 0 4px;font-size:18px;letter-spacing:-.01em;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}.box h2 .am{font-size:14px;color:var(--mu);font-weight:600}
+.box .hint{color:var(--mu);font-size:13.5px;margin:0 0 10px}
+.stack{display:grid;gap:14px}
+.pick{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}.pick button{flex:none;border:1px solid var(--ln);background:#fff;border-radius:999px;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer}
+.pick button.on{background:var(--b);color:#fff;border-color:var(--b)}
+.phead{display:flex;gap:14px;align-items:center}.phead .av,.phead img{width:64px;height:64px;border-radius:50%;flex:none;object-fit:cover}
+.phead .av{font-size:26px}.phead b{font-size:19px;display:block;line-height:1.25}.phead small{color:var(--mu)}
+.st{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:3px 9px;margin-top:4px}.st.live{background:#D1FAE5;color:#047857}.st.paused{background:#FEF3C7;color:#92400E}.st.hidden{background:#FEE2E2;color:var(--r)}
+.row2{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.fld{display:grid;gap:6px}.fld label{font-weight:700;font-size:14px}
+.fld input,.fld textarea,.fld select{width:100%;border:1px solid #BFD3F5;border-radius:12px;padding:11px 12px;font:inherit;font-size:15.5px;background:#fff;color:var(--ink)}
+.fld textarea{min-height:130px;resize:vertical;line-height:1.5}
+.fld .cnt{font-size:12px;color:var(--mu);text-align:right}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tags span{display:inline-flex;align-items:center;gap:6px;background:#EEF4FF;color:var(--b);font-weight:700;font-size:13.5px;border-radius:999px;padding:6px 6px 6px 12px}
+.tags span button{border:0;background:#fff;color:var(--b);width:22px;height:22px;border-radius:50%;cursor:pointer;font-weight:800;line-height:1}
+.tags.sugg span{background:#ECFDF5;color:#047857}.tags.sugg span button{color:#047857}
+.addrow{display:flex;gap:8px}.addrow input{flex:1;min-width:0}.addrow button{border:0;border-radius:12px;background:var(--b);color:#fff;font:inherit;font-weight:700;padding:0 14px;cursor:pointer}
+.tg{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14.5px;cursor:pointer}.tg input{width:20px;height:20px;accent-color:var(--m)}
+.ai{background:none;border:1px dashed #A7F3D0;color:#047857;border-radius:999px;padding:7px 12px;font:inherit;font-size:13.5px;font-weight:700;cursor:pointer;justify-self:start}
+.savebar{position:sticky;bottom:0;z-index:30;background:rgba(240,247,255,.96);border-top:1px solid var(--ln);padding:10px 0 calc(10px + env(safe-area-inset-bottom));margin-top:16px}
+.savebar .w{display:flex;gap:10px;align-items:center}.savebar .msg2{flex:1;color:var(--mu);font-size:14px}
+.btn[disabled]{opacity:.45;cursor:default}
+.facts div{display:flex;gap:10px;padding:5px 0;border-bottom:1px dashed var(--ln);font-size:14.5px}.facts div:last-child{border:0}.facts b{min-width:110px;color:var(--mu);font-weight:600}
+/* Afiya panel */
+.apanel{display:flex;flex-direction:column;padding:0;overflow:hidden;max-height:calc(100vh - 24px)}
+.ahd{display:flex;gap:10px;align-items:center;padding:14px 16px;background:linear-gradient(120deg,var(--b),var(--m));color:#fff}
+.ahd img{width:42px;height:42px;border-radius:50%;background:#fff}.ahd b{display:block}.ahd small{opacity:.92;font-size:12.5px}
+.aq{display:flex;gap:6px;flex-wrap:wrap;padding:12px 14px 0}.aq button{border:1px solid #BFD3F5;background:#F3F7FD;border-radius:999px;padding:7px 11px;font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+.aq button.on{background:var(--m);border-color:var(--m);color:#fff}
+.alog{flex:1;min-height:220px;max-height:520px;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.am2{max-width:92%;padding:10px 13px;border-radius:16px;font-size:14.5px;line-height:1.5;word-wrap:break-word}
+.am2.af{background:#F3F7FD;border:1px solid var(--ln);border-bottom-left-radius:6px;align-self:flex-start}
+.am2.me{background:var(--b);color:#fff;border-bottom-right-radius:6px;align-self:flex-end;white-space:pre-wrap}
+.am2.er{background:#FEF2F2;border:1px solid #FECACA;color:#7F1D1D}
+.am2 .acts2{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.am2 .acts2 button{border:0;background:var(--b);color:#fff;border-radius:999px;padding:6px 11px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.am2 .acts2 button.lt{background:#fff;color:var(--b);border:1px solid #BFD3F5}
+.aft{border-top:1px solid var(--ln);padding:10px 12px;display:flex;gap:8px;align-items:flex-end}
+.aft textarea{flex:1;min-width:0;border:1px solid #BFD3F5;border-radius:12px;padding:10px;font:inherit;font-size:15px;resize:none;height:46px;max-height:140px}
+.aft button{border:0;border-radius:12px;background:var(--b);color:#fff;font:inherit;font-weight:800;padding:0 16px;height:46px;cursor:pointer}
+.anote{font-size:12px;color:var(--mu);padding:0 14px 10px}
+.dots i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--b);margin-right:4px;animation:bl 1s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,100%{opacity:.25}50%{opacity:1}}
+.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;opacity:0;transition:all .3s;z-index:60;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.codein{font-size:24px!important;letter-spacing:.12em;text-transform:uppercase;text-align:center;font-weight:800}
+.skel{height:14px;border-radius:8px;background:linear-gradient(90deg,#E8F0FB,#F6F9FE,#E8F0FB);background-size:200% 100%;animation:sk 1.2s infinite;margin:8px 0}
+@keyframes sk{to{background-position:-200% 0}}
+</style></head><body>
+<header class="top"><div class="w"><a class="brand" href="/health"><i>+</i>BinaSmart <small>Health · Dashboard</small></a><nav><a href="/health">Directory</a></nav><a class="join" id="acct" href="/login?next=/health/dashboard">Sign in</a></div></header>
+<section class="dh"><div class="bl b1"></div><svg class="ecg" viewBox="0 0 800 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 H250 L270 40 L285 12 L300 62 L318 22 L332 40 H470 L488 40 L500 26 L512 52 L524 40 H800"/></svg>
+<div class="w in" style="position:relative;z-index:2"><h1 id="hi">Your health dashboard</h1><p class="am">የጤና ዳሽቦርድዎ · profile, services, hours, and Dr Afiya's help</p></div></section>
+<main class="w"><div id="app"><div class="dwrap"><div class="box"><div class="skel" style="width:40%"></div><div class="skel"></div><div class="skel" style="width:70%"></div></div></div></div></main>
+<div class="toast" id="toast"></div>
+<footer class="foot w">BinaSmart Health · <span class="am">ቢናስማርት ጤና</span> · Changes to services, hours and the About text go live at once and our team sees each one. Name, profession, licence and photos are checked by our team first.<br>Dr Afiya helps with the practice side only: no diagnosis, no medicines, no doses. Emergency: <a href="tel:907">907</a></footer>
+<script src="/static/health.js?v=6" defer></script>
+<script src="/static/health-dash.js?v=2" defer></script>
+</body></html>

@@ -1,81 +1,189 @@
-<!doctype html>
-<html lang="am">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ሱቅ · Shop | BinaSmart</title>
-<meta name="description" content="የሱቁ ገጽ በBinaSmart — ምርቶች፣ ዋጋ፣ የስራ ሰዓት፣ ስልክ እና ካርታ። A BinaSmart business page: products, prices, opening hours, phone and map.">
-<link rel="canonical" href="https://bina.et/business">
-<meta property="og:type" content="website"><meta property="og:locale" content="am_ET"><meta property="og:site_name" content="BinaSmart">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="geo.region" content="ET-AA"><meta name="geo.placename" content="Addis Ababa">
-<meta property="og:title" content="BinaSmart">
-<meta property="og:description" content="ምርቶች፣ ዋጋ፣ የስራ ሰዓት፣ ስልክ። Products, prices, opening hours, phone.">
-<meta property="og:url" content="https://bina.et/business">
-<meta property="og:image" content="https://bina.et/og-cinema.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#009688">
-<link rel="icon" href="/favicon-32.png">
+<title>Shops in Addis Ababa: New Products &amp; Offers · ሱቆች | BinaSmart</title>
+<meta name="description" content="Products and offers posted by shop owners in Addis Ababa. Call or WhatsApp the shop directly, no commission. Shop owners post free by chatting with Bini.">
+<link rel="canonical" href="https://bina.et/shop">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7b1e3a">
+<meta property="og:type" content="website"><meta property="og:site_name" content="BinaSmart">
+<meta property="og:title" content="Shops in Addis Ababa · ሱቆች | BinaSmart">
+<meta property="og:description" content="Every shop in Addis, one place. New products and offers from shop owners; call the shop directly.">
+<meta property="og:url" content="https://bina.et/shop"><meta property="og:image" content="https://bina.et/static/og-shop.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://bina.et/static/og-shop.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon-32.png">
 <link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
-<link rel="stylesheet" href="/static/cinema/ui-v3.css?v=4">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>document.documentElement.classList.add('js')</script>
+<!--LD-->
 <style>
-.wrap{max-width:720px;padding-bottom:110px}
-.hero{display:flex;gap:12px;align-items:flex-start}
-.hero .logo-img{width:64px;height:64px;border-radius:16px;background:#eef3f1;flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px}
-.hero .logo-img img{width:100%;height:100%;object-fit:cover}
-.hero h1{font-size:22px;font-weight:900;line-height:1.2}
-.hero .en{display:block;font-size:14px;color:var(--mute);font-weight:600}
-.gal{display:flex;gap:8px;overflow-x:auto;margin-top:12px;padding-bottom:4px;-webkit-overflow-scrolling:touch}
-.gal img{height:150px;border-radius:12px;flex:none;object-fit:cover}
-.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:12px}
-.acts a{display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:11px;font-weight:800;font-size:13px;text-decoration:none;color:var(--ink)}
-.menu{display:grid;gap:0}
-.prod{display:flex;gap:10px;align-items:center;border-top:1px solid var(--line);padding:11px 0}
-.prod .ph{width:60px;height:60px;border-radius:10px;background:#eef3f1;flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:24px}
-.prod .ph img{width:100%;height:100%;object-fit:cover}
-.prod .b{flex:1;min-width:0}
-.prod .b b{display:block;font-size:15px}
-.prod .b small{color:var(--mute);font-size:12px;display:block}
-.prod .price{font-weight:900;color:var(--brand);white-space:nowrap;margin-right:6px}
-.qtybox{display:flex;align-items:center;gap:6px}
-.qtybox button{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-size:18px;font-weight:900;cursor:pointer;font-family:inherit;color:var(--ink)}
-.qtybox button:disabled{opacity:.3}
-.qtybox b{min-width:16px;text-align:center;font-variant-numeric:tabular-nums}
-.grp{font-size:12px;font-weight:900;color:var(--brand);margin-top:14px}
-.hours-t{width:100%;border-collapse:collapse;font-size:14px}
-.hours-t td{padding:6px 0;border-bottom:1px solid var(--line)}
-.hours-t td:last-child{text-align:right;font-variant-numeric:tabular-nums}
-.hours-t tr.today td{font-weight:900;color:var(--brand)}
-.offer{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:14px;padding:12px;margin-top:10px}
-</style>
-<style>
-/* glass controls (8 Sep 2026) */
-.qtybox button{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);color:var(--brand2)}.qtybox button:active{background:rgba(255,255,255,.7)}
+:root{--ink:#1d1d1f;--mut:#6e6e73;--paper:#fbfbfd;--line:#e8e8ed;--burg:#7b1e3a;--burgd:#420c20;--red:#e00800;--rose:#fdf0f3;--r:22px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter','Noto Sans Ethiopic',system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.am{font-family:'Noto Sans Ethiopic',-apple-system,sans-serif}
+/* nav: solid, no backdrop-filter (it cost the home page its TBT) */
+.nav{position:sticky;top:0;z-index:40;background:rgba(251,251,253,.94);border-bottom:1px solid var(--line)}
+.nav .in{max-width:1120px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.3px;font-size:17px}.logo img{width:28px;height:28px;border-radius:8px}
+.logo small{font-weight:600;color:var(--mut);font-size:14px}
+.nav nav{margin-left:auto;display:flex;gap:20px;font-size:14px;color:var(--mut)}.nav nav a:hover{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 22px;font-weight:700;font-size:15px;transition:transform .25s,background .25s,box-shadow .25s}
+.pill:active{transform:scale(.97)}
+.pill.pri{background:var(--burg);color:#fff;box-shadow:0 8px 24px rgba(123,30,58,.28)}.pill.pri:hover{background:var(--red)}
+.pill.sm{padding:8px 16px;font-size:14px;box-shadow:none}
+.pill.lite{background:#fff;color:var(--burg)}.pill.lite:hover{background:var(--rose)}
+.pill.ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35)}.pill.ghost:hover{background:rgba(255,255,255,.22)}
+/* hero: e&-style moving colour on burgundy, Apple-size type */
+.hero{position:relative;overflow:hidden;background:var(--burgd);color:#fff;padding:96px 20px 84px;text-align:center}
+.hero .b{position:absolute;border-radius:50%;will-change:transform;pointer-events:none}
+.b1{width:760px;height:760px;left:-240px;top:-320px;background:radial-gradient(circle,rgba(224,8,0,.95) 0,rgba(224,8,0,0) 64%);animation:drift 15s ease-in-out infinite alternate}
+.b2{width:680px;height:680px;right:-260px;top:-140px;background:radial-gradient(circle,rgba(176,48,90,.95) 0,rgba(176,48,90,0) 64%);animation:drift 19s ease-in-out infinite alternate-reverse}
+.b3{width:600px;height:600px;left:32%;bottom:-400px;background:radial-gradient(circle,rgba(255,106,77,.7) 0,rgba(255,106,77,0) 60%);animation:drift 23s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(70px,50px,0) scale(1.16)}}
+.hero .in{position:relative;max-width:920px;margin:auto}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:7px 15px}
+h1{font-size:clamp(42px,7.4vw,84px);line-height:1.02;letter-spacing:-.04em;font-weight:800;margin:24px 0 14px}
+.grad{background:linear-gradient(90deg,#fff 0%,#ffc2b8 40%,#ff7a5c 70%,#fff 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s ease-in-out infinite alternate}
+@keyframes shine{from{background-position:0 0}to{background-position:100% 0}}
+.hero .am.big{font-size:clamp(22px,3.4vw,34px);font-weight:700;color:#ffd9d1}
+.hero .sub{max-width:640px;margin:20px auto 32px;font-size:clamp(16px,2vw,20px);line-height:1.5;color:rgba(255,255,255,.86)}
+.ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.stats{display:flex;gap:34px;justify-content:center;flex-wrap:wrap;margin-top:46px;font-size:14px;color:rgba(255,255,255,.78)}.stats b{display:block;font-size:28px;color:#fff;letter-spacing:-.02em}
+.up{opacity:0;transform:translateY(18px);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}.d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.52s}
+@keyframes up{to{opacity:1;transform:none}}
+/* moving category strip */
+.mq{overflow:hidden;background:#fff;border-bottom:1px solid var(--line);padding:14px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.mq .t{display:flex;gap:10px;width:max-content;animation:mq 40s linear infinite}.mq:hover .t{animation-play-state:paused}
+.mq .t>span{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;background:var(--paper)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.sec{max-width:1120px;margin:auto;padding:76px 20px}
+.h2{font-size:clamp(30px,4.6vw,46px);letter-spacing:-.035em;font-weight:800;line-height:1.08}.h2 .am{display:block;font-size:.5em;color:var(--mut);letter-spacing:0;margin-top:8px}
+.lead{color:var(--mut);font-size:17px;line-height:1.5;margin-top:10px;max-width:640px}
+.live{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:var(--burg);background:var(--rose);border-radius:999px;padding:6px 13px;margin-bottom:16px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--red);position:relative}.live i::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--red);animation:ping 1.7s ease-out infinite}
+@keyframes ping{from{transform:scale(.5);opacity:1}to{transform:scale(1.9);opacity:0}}
+.fl{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.ch{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}.ch:hover{border-color:var(--burg)}.ch.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px;margin-top:26px}
+.pc{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(0,0,0,.06);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s;scroll-margin-top:80px}
+.pc:hover{transform:translateY(-6px);box-shadow:0 2px 4px rgba(0,0,0,.05),0 22px 44px rgba(123,30,58,.16)}
+.pc:target{outline:3px solid var(--burg);outline-offset:3px}
+.pi{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--rose),#f2dde4);overflow:hidden}.pi img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1)}.pc:hover .pi img{transform:scale(1.06)}
+.pi .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:60px}
+.cb{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.95);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700}
+.ob{position:absolute;right:12px;top:12px;background:var(--red);color:#fff;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:800}
+.pn{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;padding:3px 9px;font-size:12px}
+.pb{padding:16px 18px 18px}.pb h3{font-size:17px;line-height:1.3;letter-spacing:-.01em}.pp{font-size:21px;font-weight:800;color:var(--burg);margin:6px 0 2px;letter-spacing:-.02em}
+.pd{font-size:14px;color:var(--mut);line-height:1.45;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ps{font-size:13px;color:var(--mut);margin-top:8px}.pa{display:flex;gap:8px;margin-top:14px}
+.bt{flex:1;text-align:center;border-radius:12px;padding:10px 8px;font-weight:700;font-size:14px;transition:.2s}.bt.call{background:var(--ink);color:#fff}.bt.call:hover{background:var(--burg)}.bt.wa{background:#e8f8ee;color:#12803f}.bt.wa:hover{background:#d4f2df}
+.pt{font-size:12px;color:#a1a1a6;margin-top:10px}
+/* nothing posted yet: say so, and show where a product will appear (not an invented one) */
+.empty{display:none;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center;background:#fff;border-radius:30px;padding:40px;margin-top:28px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 18px 50px rgba(123,30,58,.08)}
+.feed.is-empty .empty{display:grid}.feed.is-empty .grid,.feed.is-empty .fl{display:none}
+.empty h3{font-size:clamp(26px,3.6vw,36px);letter-spacing:-.03em;line-height:1.1}.empty h3 .am{display:block;font-size:.62em;color:var(--burg);margin-top:8px}
+.empty p{color:var(--mut);line-height:1.55;margin:14px 0 24px;font-size:16px}
+.sk{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 20px 50px rgba(123,30,58,.16);transform:rotate(2deg);animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:rotate(-1deg) translateY(-8px)}}
+.sk .i{aspect-ratio:4/3;display:grid;place-items:center;font-size:15px;font-weight:700;color:var(--burg);background:linear-gradient(90deg,#f6e4ea 25%,#fcf1f4 50%,#f6e4ea 75%);background-size:200% 100%;animation:sh 1.8s linear infinite}
+.sk .l{height:14px;border-radius:7px;margin:16px 18px 0;background:linear-gradient(90deg,#f1f1f4 25%,#fafafc 50%,#f1f1f4 75%);background-size:200% 100%;animation:sh 1.8s linear infinite}.sk .l.s{width:45%;margin-bottom:20px}
+@keyframes sh{to{background-position:-200% 0}}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.st{background:#fff;border-radius:var(--r);padding:28px;border:1px solid var(--line);transition:transform .4s,box-shadow .4s}.st:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.07)}
+.st .n{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--burg),var(--red));color:#fff;font-weight:800;font-size:18px;margin-bottom:18px}
+.st h3{font-size:19px;letter-spacing:-.02em}.st h3 .am{display:block;font-size:15px;color:var(--burg);margin-top:4px}.st p{color:var(--mut);line-height:1.5;margin-top:10px;font-size:15px}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:26px}
+.ds{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px 16px;font-size:15px;transition:transform .3s,border-color .3s}.ds:hover{border-color:var(--burg);transform:translateY(-2px)}.ds>span{font-size:22px}.ds b{display:block;font-size:15px;line-height:1.3}.ds small{display:block;color:var(--mut);font-size:13px;margin-top:2px}
+.band{position:relative;overflow:hidden;margin:0 20px 90px;border-radius:34px;color:#fff;padding:64px 28px;text-align:center;background:linear-gradient(120deg,var(--burgd),var(--burg) 40%,var(--red) 100%);background-size:220% 220%;animation:bg 14s ease infinite}
+@keyframes bg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+.band h2{font-size:clamp(30px,5vw,52px);letter-spacing:-.035em;line-height:1.05}.band .am{display:block;font-size:.5em;color:#ffd9d1;margin-top:10px;letter-spacing:0}
+.band p{max-width:560px;margin:16px auto 28px;color:rgba(255,255,255,.86);line-height:1.5}
+/* scroll reveal: only when JS runs, so the page never hides content from a reader without it */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.js .rv.in{opacity:1;transform:none}
+@media (max-width:760px){.nav nav{display:none}.empty{grid-template-columns:1fr;padding:28px}.steps{grid-template-columns:1fr}.hero{padding:72px 16px 64px}.sec{padding:60px 16px}.band{margin:0 12px 70px}.sk{max-width:320px;margin:auto}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv,.up{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top"><a class="logo" href="/"><i>▶</i>Bina<span>Smart</span></a><span class="sp"></span><a class="lnk" href="/for-business">ሱቅ አለዎት?</a></div>
-  <div id="view"><div class="skel"></div></div>
-  <p class="foot" id="foot"></p>
-</div>
-<div class="bar" id="bar" hidden><div class="in"><div class="sel"><div class="s" id="barItems">—</div><div class="m" id="barTotal"></div></div><button class="btn" id="barGo">ይዘዙ · Order</button></div></div>
-<div class="sheet" id="sheet"><div class="pane">
-  <div class="grab"></div>
-  <h2 style="margin-top:0">ትዕዛዝ · Your order</h2>
-  <div class="sub" id="shItems"></div>
-  <label>ስም · Name</label><input id="fName" maxlength="60" autocomplete="name">
-  <label>ስልክ · Phone (09…)</label><input id="fPhone" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="09xx xxx xxx">
-  <label>ማስታወሻ · Note</label><input id="fNote" maxlength="300" placeholder="ስኳር የለም …">
-  <div class="tot"><span>ጠቅላላ · Total</span><span id="shTotal"></span></div>
-  <p class="sub" style="font-size:12px">ክፍያ የለም — ሱቁ ደውሎ ያረጋግጣል። · No online payment; the shop calls you back to confirm.</p>
-  <div class="err" id="shErr"></div>
-  <button class="btn" id="shGo">📞 ትዕዛዝ ላክ · Send order</button>
-  <button class="btn ghost" id="shBack" style="margin-top:8px">← ተመለስ</button>
+<header class="nav"><div class="in">
+  <a class="logo" href="/"><img src="/icon-192.png" alt="" width="28" height="28">BinaSmart <small>· Shops <span class="am">ሱቆች</span></small></a>
+  <nav><a href="/hotels">Hotels</a><a href="/property">Property</a><a href="/cars">Cars</a><a href="/jobs">Jobs</a></nav>
+  <a class="pill pri sm" href="/shop?bini=shop">Post free</a>
+</div></header>
+
+<section class="hero">
+  <div class="b b1"></div><div class="b b2"></div><div class="b b3"></div>
+  <div class="in">
+    <span class="eyebrow up d1">🛍 BinaShops · <span class="am">ሱቆች</span></span>
+    <h1 class="up d2">Every shop in Addis.<br><span class="grad">One place.</span></h1>
+    <div class="am big up d3">የአዲስ አበባ ሱቆች፣ በአንድ ቦታ።</div>
+    <p class="sub up d4">Shop owners post their products and offers here for free. You call or WhatsApp the shop directly: no middleman, no commission.</p>
+    <div class="ctas up d5"><a class="pill lite" href="/shop?bini=shop">🏪 Post your shop free · <span class="am">በነጻ ይለጥፉ</span></a><a class="pill ghost" href="#feed">See what's new ↓</a></div>
+    <div class="stats up d5"><div><b><!--COUNT--></b>live posts</div><div><b>0%</b>commission</div><div><b>24/7</b>post with Bini</div></div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="t">
+  <span>👗 Clothes · <span class="am">ልብስ</span></span><span>👟 Shoes · <span class="am">ጫማ</span></span><span>📱 Phones · <span class="am">ስልክ</span></span><span>💻 Electronics · <span class="am">ኤሌክትሮኒክስ</span></span><span>💄 Beauty · <span class="am">ውበት</span></span><span>🧺 Food · <span class="am">ምግብ</span></span><span>🛋 Home · <span class="am">የቤት ዕቃ</span></span><span>🧸 Kids · <span class="am">ልጆች</span></span><span>📚 Books · <span class="am">መጻሕፍት</span></span><span>🏷 Offers · <span class="am">ቅናሽ</span></span>
+  <span>👗 Clothes · <span class="am">ልብስ</span></span><span>👟 Shoes · <span class="am">ጫማ</span></span><span>📱 Phones · <span class="am">ስልክ</span></span><span>💻 Electronics · <span class="am">ኤሌክትሮኒክስ</span></span><span>💄 Beauty · <span class="am">ውበት</span></span><span>🧺 Food · <span class="am">ምግብ</span></span><span>🛋 Home · <span class="am">የቤት ዕቃ</span></span><span>🧸 Kids · <span class="am">ልጆች</span></span><span>📚 Books · <span class="am">መጻሕፍት</span></span><span>🏷 Offers · <span class="am">ቅናሽ</span></span>
 </div></div>
-<div class="toast" id="toast"></div>
-<script src="/static/business/shop.js?v=2"></script>
-  <script src="/static/bina-footer.js?v=9" defer></script>
+
+<section class="sec feed <!--EMPTY-->" id="feed">
+  <span class="live"><i></i>Live · <span class="am">ቀጥታ</span></span>
+  <h2 class="h2 rv">New from shop owners<span class="am">ከሱቅ ባለቤቶች አዲስ</span></h2>
+  <p class="lead rv">Every post here comes from the shop itself and was checked by our team before it went up. Call the shop to buy.</p>
+  <div class="fl"><!--FILTERS--></div>
+  <div class="grid"><!--POSTS--></div>
+  <div class="empty rv">
+    <div>
+      <h3>Be the first shop here.<span class="am">የመጀመሪያው ሱቅ ይሁኑ።</span></h3>
+      <p>Tell Bini what you sell: a photo, the name and the price. We call you to check, and your product appears right here, on Google and in AI assistants. Free, with no commission.</p>
+      <a class="pill pri" href="/shop?bini=shop">🏪 Post your shop free</a>
+    </div>
+    <div class="sk" aria-hidden="true"><div class="i"><span>Your product here · <span class="am">የእርስዎ ዕቃ</span></span></div><div class="l"></div><div class="l s"></div></div>
+  </div>
+</section>
+
+<section class="sec" id="how" style="padding-top:20px">
+  <h2 class="h2 rv">Post in three steps.<span class="am">በሦስት ደረጃ ይለጥፉ።</span></h2>
+  <div class="steps">
+    <div class="st rv"><div class="n">1</div><h3>Chat with Bini<span class="am">ቢኒን ያናግሩ</span></h3><p>Send a photo with the camera button, then the item's name, its price and your phone. Amharic or English.</p></div>
+    <div class="st rv"><div class="n">2</div><h3>We check it<span class="am">እናረጋግጣለን</span></h3><p>Someone from our team calls you to confirm the shop and the item, usually within a day.</p></div>
+    <div class="st rv"><div class="n">3</div><h3>Buyers call you<span class="am">ገዢዎች ይደውሉልዎታል</span></h3><p>Your post goes live here with your Call and WhatsApp buttons, and people can find it on Google and AI assistants.</p></div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:20px">
+  <h2 class="h2 rv">In JJ Darule Building.<span class="am">በጄጄ ዳሩሌ ህንፃ</span></h2>
+  <p class="lead rv">Businesses with their own page on BinaSmart. <a href="/b/darulle" style="color:var(--burg);font-weight:700">Walk the building in 3D →</a></p>
+  <div class="dgrid"><!--DARULLE--></div>
+</section>
+
+<section class="band rv">
+  <h2>Own a shop? Post it today.<span class="am">ሱቅ አለዎት? ዛሬ ይለጥፉ።</span></h2>
+  <p>Free, in two minutes, straight from this page. Bini asks the questions; you answer.</p>
+  <a class="pill lite" href="/shop?bini=shop">🏪 Post your shop free</a>
+</section>
+
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){var k=0;es.forEach(function(e){if(e.isIntersecting){e.target.style.transitionDelay=(k++*70)+'ms';e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){io.observe(e);});
+  } else els.forEach(function(e){e.classList.add('in');});
+  document.addEventListener('click',function(ev){var b=ev.target.closest('.ch');if(!b)return;
+    [].forEach.call(document.querySelectorAll('.ch'),function(x){x.classList.toggle('on',x===b);});
+    var f=b.getAttribute('data-f');[].forEach.call(document.querySelectorAll('.pc'),function(c){c.style.display=!f||c.getAttribute('data-cat')===f?'':'none';});});
+  function ago(t){var m=Math.max(1,Math.round((Date.now()-Date.parse(t))/60000));return m<60?m+' min ago':m<1440?Math.round(m/60)+' h ago':Math.round(m/1440)+' d ago';}
+  setInterval(function(){[].forEach.call(document.querySelectorAll('.pt[data-t]'),function(e){e.textContent=ago(e.getAttribute('data-t'));});},60000);
+})();
+</script>
+<script src="/static/bina-footer.js?v=10" defer></script>
+<script src="/static/bina-assistant.js?v=14" defer></script>
 </body>
 </html>
