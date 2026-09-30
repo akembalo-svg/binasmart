@@ -10,27 +10,32 @@ const root = path.join(__dirname, '..');
 const pub = path.join(root, 'public');
 const html = fs.readFileSync(path.join(pub, 'go.html'), 'utf8');
 const js = fs.readFileSync(path.join(pub, 'go', 'app.js'), 'utf8');
+const ring = fs.readFileSync(path.join(pub, 'go', 'ring.js'), 'utf8');
 const G = require('../public/go/app.js');
 const plain = x => JSON.parse(JSON.stringify(x));
 
-test('go.html: light only, its own manifest, the shared chat core, one Ride button and the service ring', () => {
+test('go.html: light only, its own manifest, the shared chat core, Ride on its own and every service on the ring', () => {
   assert.ok(!/prefers-color-scheme:\s*dark/.test(html), 'no dark theme');
   assert.ok(html.includes('content="light only"'));
   assert.ok(html.includes('rel="manifest" href="/go.webmanifest"'));
   assert.ok(html.includes('src="/static/agent-chat-core.js?v=1"'), 'reuses the /afiya /asmat core read-only');
   assert.match(html, /src="\/static\/go\/app\.js\?v=\d+"/);
-  // 24 Sep redesign: the five tiles became one Ride button plus a turning ring of services (go/ring.js).
-  assert.ok(html.includes('<a class="ride" href="/ride"'), 'Ride stays one tap away');
+  assert.ok(/<a class="ride" href="\/ride">/.test(html), 'Ride is its own card, not on the ring');
   assert.match(html, /src="\/static\/go\/ring\.js\?v=\d+"/);
-  const ring = fs.readFileSync(path.join(pub, 'go', 'ring.js'), 'utf8');
-  const svc = [...ring.matchAll(/\['[^']*', '[^']*', '[^']*', '(\/[a-z-]*)'/g)].map(m => m[1]);
-  for (const p of ['/news', '/tenders', '/guides', '/jobs']) assert.ok(svc.includes(p), p + ' is on the ring');
-  assert.equal(new Set(svc).size, svc.length, 'no service on the ring twice');
-  assert.ok(!svc.includes('/ride'), 'Ride has its own button, not a ring card');
+  assert.ok(html.includes('id="stage"') && html.includes('id="ringPrev"') && html.includes('id="ringNext"') && html.includes('id="dOpen"'));
   assert.ok(html.includes('placeholder="ምን ልርዳዎ?"'));
   assert.equal((html.match(/class="try"/g) || []).length, 4, 'four example questions');
   assert.ok(html.includes('env(safe-area-inset-top)') && html.includes('env(safe-area-inset-bottom)'));
   assert.ok(/<meta name="robots" content="noindex">/.test(html), 'app page, not a second home page for search');
+});
+
+test('ring.js: fifteen services, every one a site path, Ride not among them, and it respects reduced motion', () => {
+  const paths = [...ring.matchAll(/'(\/[a-z-]+)', '[a-z]+', '#[0-9A-F]{6}'\]/g)].map(m => m[1]);
+  assert.equal(paths.length, 15);
+  assert.equal(new Set(paths).size, 15, 'no service twice');
+  assert.ok(!paths.includes('/ride') && !paths.includes('/go') && !paths.includes('/login'));
+  assert.ok(ring.includes('prefers-reduced-motion'));
+  assert.ok(!/\(\?<[=!]/.test(ring), 'no regex lookbehind (old Android Chrome cannot parse it)');
 });
 
 test('app.js writes replies as text, never as HTML, and never forces a sign-in', () => {
@@ -144,4 +149,17 @@ test('assetlinks.json names both apps, each with a well-formed SHA-256', () => {
     assert.ok(st.target.sha256_cert_fingerprints.length >= 1);
     for (const f of st.target.sha256_cert_fingerprints) assert.match(f, /^([0-9A-F]{2}:){31}[0-9A-F]{2}$/);
   }
+});
+
+test('share: the question, the start of the answer as plain text, and a link that only types the question in', () => {
+  const t = G.shareText('የፓስፖርት ክፍያ ስንት ነው?', '**ክፍያው** 5,000 ብር ነው። ዝርዝሩ [እዚህ](https://bina.et/passport) ነው።');
+  assert.ok(t.startsWith('❓ የፓስፖርት ክፍያ ስንት ነው?'));
+  assert.match(t, /ክፍያው 5,000 ብር ነው። ዝርዝሩ እዚህ ነው።/, 'bold and link markup become plain text');
+  assert.ok(t.endsWith('— ቢኒ · Bini, bina.et'));
+  const long = G.shareText('q', 'ሀ '.repeat(400));
+  assert.ok(long.length < 330, 'a long answer is cut short: ' + long.length);
+  assert.equal(G.shareLink('ከቦሌ ወደ ፒያሳ?'), 'https://bina.et/go?q=' + encodeURIComponent('ከቦሌ ወደ ፒያሳ?') + '&s=share');
+  assert.ok(G.shareLink('x'.repeat(2000)).length < 360, 'the question in the link is capped');
+  const boot = js.slice(js.indexOf('// A shared link'), js.indexOf('syncSend(); syncResume();'));
+  assert.ok(boot.includes('q.value') && !/submit\(|ask_\(/.test(boot), 'a shared link fills the box and never asks by itself');
 });
