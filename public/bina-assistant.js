@@ -106,6 +106,9 @@
   var COMODE = !!COM && /[?&]bini=company\b/.test(location.search);
   var HOT = (location.pathname.match(/^\/hotels\/([a-z0-9-]+)\/?$/) || [])[1] || null;
   var HOMODE = !!HOT && /[?&]bini=hotel\b/.test(location.search);
+  // a restaurant's own page, opened from its "Claim this page" button (restaurants/directory.js, 1 Oct 2026)
+  var RES = (location.pathname.match(/^\/restaurants\/([a-z0-9-]+)\/?$/) || [])[1] || null;
+  var REMODE = !!RES && /[?&]bini=restaurant\b/.test(location.search);
   var LIMODE = PROPERTY && /[?&]bini=list\b/.test(location.search);
   if (LIMODE) STARTERS = [
     ['\u{1F3E0} ለሽያጭ \u00b7 For sale', 'ቤቴን ለሽያጭ ማስተዋወቅ እፈልጋለሁ። · I want to list my home for sale.'],
@@ -120,7 +123,13 @@
     ['\u{1F4F7} ፎቶ ላክ · Send photos', '__photo__'],
     ['\u{1F5D1} ልጥፌን አንሳ · Remove my post', 'የለጠፍኩት ዕቃ ተሽጧል፤ እባክዎ ያንሱት። · My item is sold, please take my post down.']
   ];
-  var CONAME = (COMODE || HOMODE) ? ((document.querySelector('h1') || {}).textContent || '').trim().slice(0, 80) : '';
+  var CONAME = (COMODE || HOMODE || REMODE) ? ((document.querySelector('h1') || {}).textContent || '').trim().slice(0, 80) : '';
+  if (REMODE) STARTERS = [
+    ['📞 Our phone & hours · ስልክና ሰዓት', 'I work at this restaurant. I want to add our phone number and opening hours.'],
+    ['🍲 Add dishes & prices · ምግቦችና ዋጋ', 'I work at this restaurant. I want to add our dishes with prices.'],
+    ['✏️ Fix our details · ለማስተካከል', 'I work at this restaurant. Some of our details are wrong.'],
+    ['✅ Confirm our page · ለመረከብ', 'I own this restaurant and want to confirm (claim) our page.']
+  ];
   if (HOMODE) STARTERS = [
     ['\u{1F4F7} Add our photos \u00b7 \u134e\u1276', '__photo__'],
     ['🛏️ Add rooms & prices · ክፍሎችና ዋጋ', 'I work at this hotel. I want to add our rooms and prices.'],
@@ -156,6 +165,7 @@
     if (greeted) return; greeted = true;
     if (SHMODE) { add('assistant', 'ሰላም! እኔ ቢኒ ነኝ \u{1F6CD} ዕቃዎን ወይም ቅናሽዎን በbina.et/shop ላይ በነጻ እለጥፍልዎታለሁ። ኮሚሽን የለም፤ ገዢዎች በቀጥታ እርስዎን ይደውላሉ። ምን ይሸጣሉ? ፎቶ በካሜራ ቁልፉ መላክ ይችላሉ።\n\nHi, I\'m Bini! I\'ll post your product or offer on bina.et/shop, free and with no commission; buyers call you directly. What are you selling? You can send photos with the camera button.'); showChips(); return; }
     if (LIMODE) { add('assistant', 'ሰላም! እኔ ቢኒ ነኝ \u{1F3E0} ቤትዎን፣ አፓርታማዎን፣ ቦታዎን ወይም ሱቅዎን ለሽያጭ ወይም ለኪራይ በነጻ እናስተዋውቃለን። ኮሚሽን የለም፤ ገዢዎችና ተከራዮች በቀጥታ እርስዎን ይደውላሉ። ጥቂት ጥያቄዎችን እጠይቅዎታለሁ፤ ፎቶዎችንም በካሜራ ቁልፉ መላክ ይችላሉ። ቡድናችን ደውሎ ካረጋገጠ በኋላ ይለቀቃል።\n\nHi, I\'m Bini! List your home, apartment, land or shop for sale or rent, free and with no commission; buyers and tenants call you directly. I\'ll ask a few questions, and you can send photos with the camera button. It goes live after our team calls to confirm.'); showChips(); return; }
+    if (REMODE) { add('assistant', 'ሰላም! እኔ ቢኒ ነኝ 🍽 ' + (CONAME ? 'የ' + CONAME + ' ' : '') + 'ገጽ በቢናስማርት ላይ ነው። ስልክ ቁጥርዎን፣ የሥራ ሰዓትዎንና ምግቦችዎን ከነዋጋቸው ይንገሩኝ፤ ቡድናችን ደውሎ አረጋግጦ ያጸድቃል። ነፃ ነው፣ ኮሚሽን የለም።\n\nHi, I\'m Bini! ' + (CONAME ? CONAME + '\'s' : 'Your') + ' page is on BinaSmart. Tell me your phone, your opening hours and your dishes with prices; our team calls to confirm before anything shows. Free, no commission.'); showChips(); return; }
     if (HOMODE) { add('assistant', 'ሰላም! እኔ ቢኒ ነኝ 🏨 ' + (CONAME ? 'የ' + CONAME + ' ' : '') + 'ገጽ በቢናስማርት ላይ ነው። ክፍሎችና ዋጋ፣ ስልክ ቁጥር ወይም የሚስተካከል መረጃ ካለ ይንገሩኝ፤ ቡድናችን አረጋግጦ ያጸድቃል። እንግዶች በቀጥታ ከእርስዎ ጋር ቦታ ያስይዛሉ፤ ኮሚሽን የለም። በማንኛውም ሰዓት እመልሳለሁ።\n\nHi, I\'m Bini! ' + (CONAME ? CONAME + '\'s' : 'Your') + ' page is on BinaSmart. Tell me your rooms and prices, your phone, or what to fix, and our team will confirm and approve it. Guests book with you directly, 0% commission. I answer any time.'); showChips(); return; }
     if (COMODE) { add('assistant', 'ሰላም! እኔ ቢኒ ነኝ 🤝 ' + (CONAME ? 'የ' + CONAME + ' ' : '') + 'ገጽ በቢናስማርት ላይ ነው። ቁጥር መጨመር፣ መረጃ ማስተካከል፣ ቤት ወይም መኪና መጨመር ወይም ማስወገድ ከፈለጉ ይንገሩኝ፤ ቡድናችን አረጋግጦ ያጸድቃል። በማንኛውም ሰዓት እመልሳለሁ።\n\nHi, I\'m Bini! ' + (CONAME ? CONAME + '\'s' : 'Your') + ' page is on BinaSmart. Tell me what to add, change or remove (your WhatsApp number, details, new listings) and our team will confirm and approve it. I answer any time.'); showChips(); return; }
     if (HOTELS) { add('assistant', 'ሰላም! እኔ ቢኒ ነኝ 🏨 የት አካባቢ ማረፍ ይፈልጋሉ? ሰፈሩንና የሆቴል ዓይነቱን ይንገሩኝ።\n\nHi, I\'m Bini! Tell me the area and the kind of place, and I\'ll give you hotels with their own phone.'); showChips(); return; }
@@ -168,7 +178,7 @@
   function close(){ wrap.classList.remove('open'); btn.style.display='flex'; }
 
   btn.addEventListener('click', open);
-  if (COMODE || HOMODE || LIMODE || SHMODE) setTimeout(open, 700);
+  if (COMODE || HOMODE || LIMODE || SHMODE || REMODE) setTimeout(open, 700);
   window.biniAsk = function(m){ open(); if (m && String(m).trim()) send(String(m).trim().slice(0, 500)); };
   // A link to a spot on this page (a listing card) jumps there without reloading, even when the address has
   // ?utm=... in it; on a phone the chat closes so the card can be seen.
@@ -188,7 +198,7 @@
     txt.value = ''; add('user', m); history.push({role:'user', content:m});
     var typing = document.createElement('div'); typing.id='biniTyping'; typing.textContent='ቢኒ እየጻፈ ነው…'; msgs.appendChild(typing); msgs.scrollTop = msgs.scrollHeight;
     fetch('/api/assistant', {method:'POST', headers:{'content-type':'application/json'},
-      body: JSON.stringify({message:m, history:history.slice(-6), user:{uid:biniUid()}, company: COMODE ? COM : undefined, hotel: HOMODE ? HOT : undefined, listing: LIMODE ? true : undefined, shop: SHMODE ? true : undefined})})
+      body: JSON.stringify({message:m, history:history.slice(-6), user:{uid:biniUid()}, company: COMODE ? COM : undefined, hotel: HOMODE ? HOT : undefined, restaurant: REMODE ? RES : undefined, listing: LIMODE ? true : undefined, shop: SHMODE ? true : undefined})})
       .then(function(r){return r.json();})
       .then(function(d){
         typing.remove();

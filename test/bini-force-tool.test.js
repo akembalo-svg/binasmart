@@ -90,6 +90,6 @@ test('a reply that only promises a search is recognised; a real answer that says
   assert.equal(isPromiseOnly('My Burger is 0.2 km from Megenagna: https://www.openstreetmap.org/?mlat=9.02 . Let me know if you want a ride there.'), false);
   assert.equal(isPromiseOnly('Here are some places. Please wait for the driver at the gate. ' + 'x'.repeat(400)), false);   // long answers are answers
   const src = require('fs').readFileSync(require('path').join(__dirname, '..', 'server.js'), 'utf8');
-  assert.ok(src.includes("if (name === 'search_shops' && r && !r.error) lastShops = { a: args, r };"), 'server.js must keep the last search_shops result');
+  assert.ok(src.includes("if (name === 'search_shops' && r && !r.error) { lastShops = { a: args, r };"), 'server.js must keep the last search_shops result');
   assert.ok(src.includes('bForce.isPromiseOnly(text)'), 'server.js must answer again from it');
 });

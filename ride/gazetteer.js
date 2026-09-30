@@ -146,7 +146,7 @@ function makeGazetteer({ file = process.env.PLACES_GAZETTEER || '/root/storage/o
       if (picked.some(p => p.e.label.toLowerCase() === o.e.label.toLowerCase() && Math.hypot((p.e.lat - o.e.lat) * 111, (p.e.lng - o.e.lng) * 109.5) < 0.3)) continue;
       picked.push(o);
     }
-    return picked.map(({ e, d }) => ({ label: e.label, labelAm: e.labelAm, kind: e.kind, sub: e.sub, lat: e.lat, lng: e.lng, m: pt ? Math.round(d) : null }));
+    return picked.map(({ e, d }) => ({ ref: e.ref, label: e.label, labelAm: e.labelAm, kind: e.kind, sub: e.sub, lat: e.lat, lng: e.lng, m: pt ? Math.round(d) : null }));
   }
   return { search, nearest, around, size: () => { load(); return entries.length; } };
 }

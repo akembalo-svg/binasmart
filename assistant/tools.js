@@ -101,9 +101,11 @@ const DEFS = [
     } } },
   { name: 'remember', description: 'Save something about this user for next time: their name, phone, preferred language, home or work place, or a short note. For home/work pass the place NAME as value; this tool finds the coordinates itself, so do NOT call search_places first. Call it whenever the user says "remember", "my name is", "my home is", "my work is", "ቤቴ … ነው", "ስሜ … ነው", "manni koo …" — one call per fact.',
     parameters: { type: 'object', properties: { field: { type: 'string', enum: ['name', 'phone', 'lang', 'home', 'work', 'notes'] }, value: { type: 'string' }, lat: { type: 'number' }, lng: { type: 'number' } }, required: ['field', 'value'] } },
-  { name: 'company_request', description: 'For a person who works at a company or a hotel listed on BinaSmart (a real estate company, a car dealer, or a hotel, guest house, pension or furnished apartment): send their request to the BinaSmart team for approval. Use it to add or change their phone or WhatsApp number, correct details, add homes or cars, add hotel rooms and prices, remove a listing, or confirm (claim) their page. For a hotel pass kind "hotel". Call it once, after you have the company, the person\'s name, their role, a phone number to call back, and exactly what they want. Nothing goes live until the team approves it. Never use it for a question about BinaSmart itself (driver commission, BinaSmart prices, jobs, how the app works): answer that, or use contact_team. Not for a hospital, clinic, dentist, lab or doctor: they join BinaSmart Health free at https://bina.et/health?join=facility or https://bina.et/health?join=doctor, where Dr Afiya asks the questions and the team checks the licence.',
-    parameters: { type: 'object', properties: { company: { type: 'string', description: 'page slug (e.g. temer-properties, or a hotel slug from bina.et/hotels/<slug>) or the company or hotel name' }, kind: { type: 'string', enum: ['company', 'hotel'] }, name: { type: 'string', description: 'the person\'s name' }, role: { type: 'string', enum: ['owner', 'manager', 'staff'] }, phone: { type: 'string', description: 'Ethiopian phone number to call back, e.g. 0900 000 012' }, request: { type: 'string', description: 'exactly what to add, change or remove, with any numbers or listing details they gave' },
-      rooms: { type: 'array', description: 'for a hotel that gives room prices: each room type and its price per night, exactly as they said', items: { type: 'object', properties: { name: { type: 'string', description: 'e.g. Standard double, with breakfast' }, price: { type: 'number' }, currency: { type: 'string', enum: ['ETB', 'USD'] } }, required: ['name', 'price'] } } }, required: ['company', 'name', 'phone', 'request'] } },
+  { name: 'company_request', description: 'For a person who works at a company or a hotel listed on BinaSmart (a real estate company, a car dealer, or a hotel, guest house, pension or furnished apartment): send their request to the BinaSmart team for approval. Use it to add or change their phone or WhatsApp number, correct details, add homes or cars, add hotel rooms and prices, add a restaurant\'s hours and dishes with prices, remove a listing, or confirm (claim) their page. For a hotel pass kind "hotel"; for a restaurant, cafe or fast-food place on bina.et/restaurants pass kind "restaurant". Call it once, after you have the company, the person\'s name, their role, a phone number to call back, and exactly what they want. Nothing goes live until the team approves it. Never use it for a question about BinaSmart itself (driver commission, BinaSmart prices, jobs, how the app works): answer that, or use contact_team. Not for a hospital, clinic, dentist, lab or doctor: they join BinaSmart Health free at https://bina.et/health?join=facility or https://bina.et/health?join=doctor, where Dr Afiya asks the questions and the team checks the licence.',
+    parameters: { type: 'object', properties: { company: { type: 'string', description: 'page slug (e.g. temer-properties, or a hotel slug from bina.et/hotels/<slug>) or the company or hotel name' }, kind: { type: 'string', enum: ['company', 'hotel', 'restaurant'] }, name: { type: 'string', description: 'the person\'s name' }, role: { type: 'string', enum: ['owner', 'manager', 'staff'] }, phone: { type: 'string', description: 'Ethiopian phone number to call back, e.g. 0900 000 012' }, request: { type: 'string', description: 'exactly what to add, change or remove, with any numbers or listing details they gave' },
+      rooms: { type: 'array', description: 'for a hotel that gives room prices: each room type and its price per night, exactly as they said', items: { type: 'object', properties: { name: { type: 'string', description: 'e.g. Standard double, with breakfast' }, price: { type: 'number' }, currency: { type: 'string', enum: ['ETB', 'USD'] } }, required: ['name', 'price'] } },
+      dishes: { type: 'array', description: 'for a restaurant that gives dishes: each dish and its price, exactly as they said', items: { type: 'object', properties: { name: { type: 'string', description: 'e.g. Special kitfo' }, price: { type: 'string', description: 'e.g. 450 birr' } }, required: ['name'] } },
+      hours: { type: 'string', description: 'for a restaurant: opening hours as they said them' }, publicPhone: { type: 'string', description: 'for a restaurant: the number customers should call, if they want one shown' } }, required: ['company', 'name', 'phone', 'request'] } },
   { name: 'listing_request', description: 'For a person who wants to SELL or RENT OUT a home, apartment, condominium, villa, G+ building, land, shop, office, warehouse or room in Ethiopia: a private owner, an agent (delala) or a company. Listing is FREE, no commission; buyers and tenants call or WhatsApp the person directly. Collect, one or two questions at a time: sale or rent, property type, area / neighbourhood, price (monthly rent for rent), bedrooms, bathrooms and size when it is a home, a short description, their name, their phone number, whether that number may be shown with WhatsApp, and whether they are the owner, an agent or a company (and the company name). Offer photos once (on the website they tap the camera button in this chat); photos are OPTIONAL: if they have none or say send / submit / ላከው, do not wait. Then call it ONCE with action "add". Nothing is public yet: the team calls them to confirm, then approves, usually within a day. For a new price or other change call it with action "change", for "it is sold / rented, take it down" with action "remove"; pass the listing link or title and exactly what to change. Never invent details the person did not give. Never use it to search for a home (use search_properties).',
     parameters: { type: 'object', properties: { action: { type: 'string', enum: ['add', 'change', 'remove'] }, listing_type: { type: 'string', enum: ['sale', 'rent'] },
       property_type: { type: 'string', enum: ['villa', 'house', 'apartment', 'condominium', 'g_plus', 'land', 'shop', 'office', 'warehouse', 'room'] },
@@ -130,7 +132,7 @@ const DEFS = [
 const toOpenAI = () => DEFS.map(d => ({ type: 'function', function: d }));
 
 const HEALTH_SUBCITY = /^(bole|kirkos|arada|yeka|gulele|lideta|addis ketema|akaki|kality|kaliti|akaki kality|kolfe|kolfe keranio|nifas silk|nifas silk-lafto|lemi kura|ቦሌ|ቂርቆስ|አራዳ|የካ|ጉለሌ|ልደታ|አዲስ ከተማ|አቃቂ|ቃሊቲ|ኮልፌ|ንፋስ ስልክ|ለሚ ኩራ)(\s*(sub.?city|ክፍለ ከተማ|ክ\/ከተማ))?$/i;
-const { FOOD_RE, findFood } = require('./food-map');   // the city-map fallback for food (also /api/places/food and the MCP)
+const { FOOD_RE, findFood, NOTE: FOOD_NOTE } = require('./food-map');   // the city-map fallback for food (also /api/places/food and the MCP)
 function inAddis(p) { return p && Number.isFinite(+p.lat) && Number.isFinite(+p.lng) && +p.lat >= ADDIS.latMin && +p.lat <= ADDIS.latMax && +p.lng >= ADDIS.lngMin && +p.lng <= ADDIS.lngMax; }
 const clean = p => ({ lat: +p.lat, lng: +p.lng, label: String(p.label || '').slice(0, 80) });
 // The model sometimes FLATTENS the two points (pickup_lat, pickup_lng, dropoff_lat, ...): measured 30 Sep 2026 on
@@ -299,8 +301,7 @@ function makeExecutor(ctx) {
         const m = await mapFood(term, where.category, base).catch(() => null);
         if (m && m.places.length) {
           out.mapPlaces = m.places; out.count += m.places.length;
-          out.mapNote = 'From the city map (OpenStreetMap contributors), not the BinaSmart directory: names, area, distance, map and ride links only. '
-            + 'No phone, opening hours, prices, menus or ratings: say so, never guess them, and never call these places BinaSmart partners. Name 3 to 5 of them with their distance.'
+          out.mapNote = FOOD_NOTE
             + (m.near ? ' Nearest to ' + m.near + ' first; each distance is from ' + m.near + ', not from the person.' : '') + (m.unmatched ? ' None of these names mentions "' + m.unmatched + '": say that, and offer them as food places nearby.' : '');
         }
       }
@@ -458,7 +459,7 @@ function makeExecutor(ctx) {
       await ctx.memory.touch(patch);
       return { ok: true, saved: field };
     },
-    async company_request({ company, kind, name, role, phone, request, rooms }) {
+    async company_request({ company, kind, name, role, phone, request, rooms, dishes, hours, publicPhone }) {
       const want = String(company || '').trim(), note = String(request || '').trim();
       if (!want || !note) return { error: 'need the company and exactly what to change' };
       // BinaSmart is not a listing. 28 Sep 2026: a question about driver commission reached the team as a "hotel claim"
@@ -467,6 +468,18 @@ function makeExecutor(ctx) {
         return { error: 'not_a_listing', note: 'BinaSmart itself is not a company or hotel page. The person asked about BinaSmart: answer from what you know (search_knowledge), or use contact_team if they need a person. Do NOT call company_request for this.' };
       }
       const who = { name: String(name || '').slice(0, 80), role: ['owner', 'manager', 'staff'].includes(role) ? role : 'owner', phone: String(phone || ''), note: ('[via Bini] ' + note).slice(0, 500) };
+      // A restaurant, cafe or fast-food place on bina.et/restaurants (1 Oct 2026): its own claim path, since a shop page
+      // needs a tenancy in a building BinaSmart manages.
+      let rests = null; try { rests = require('../restaurants/directory').places(); } catch (e) { rests = null; }
+      const rest = rests ? (rests.bySlug.get(want) || (kind === 'restaurant' ? rests.list.find(x => x.name.toLowerCase() === want.toLowerCase()) || null : null)) : null;
+      if (rest || kind === 'restaurant') {
+        const rb = Object.assign(rest ? { ref: rest.ref } : { ref: 'new', restaurant: want.slice(0, 90) }, { name: who.name, role: who.role, phone: who.phone, note: who.note,
+          dishes: Array.isArray(dishes) ? dishes.slice(0, 30) : undefined, hours: hours ? String(hours).slice(0, 120) : undefined, publicPhone: publicPhone ? String(publicPhone) : undefined });
+        if (ctx.dryRun) return { ok: true, dryRun: true, wouldSend: rb, note: 'Evaluation run, nothing was sent. Otherwise answer exactly as if it was sent: the team calls this number to confirm, then approves it, usually within a day; it is NOT live yet.' };
+        const rd = await api('POST', '/api/restaurants/claim', rb, phone);
+        if (rd.error) return { error: rd.error === 'phone' ? 'that phone number looks wrong; ask for an Ethiopian number like 0900 000 012' : rd.error === 'name' ? 'ask for their name' : rd.error === 'restaurant' ? 'ask for the restaurant name' : rd.error === 'slow_down' ? 'too many requests from this number; ask them to try again later' : rd.error };
+        return { ok: true, restaurant: rest ? rest.name : want, page: rest ? (ctx.publicBase || 'https://bina.et') + '/restaurants/' + rest.slug : null, note: 'Sent to the BinaSmart team. Tell them: the team calls this number to confirm, then approves it, usually within a day; it is NOT live yet. It is free, with no commission.' };
+      }
       let hotels = [];
       try { hotels = require('../hotels/directory').list() || []; } catch (e) { hotels = []; }
       const hk = s => String(s || '').toLowerCase().replace(/[^a-z0-9\u1200-\u137f]+/g, ' ').trim();

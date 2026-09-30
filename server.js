@@ -392,7 +392,8 @@ fastify.get('/sitemap.xml', async (req, reply) => {
     ...carRows.filter(fresh).map(r => 'https://bina.et/cars/' + encodeURIComponent(r.slug)),
     ...companyList.map(c => 'https://bina.et/companies/' + encodeURIComponent(c.slug)),
     ...hotelList.map(h => 'https://bina.et/hotels/' + encodeURIComponent(h.slug)));
-  urls.push('https://bina.et/shop', 'https://bina.et/health');
+  urls.push('https://bina.et/shop', 'https://bina.et/health', 'https://bina.et/restaurants');
+  urls.push(...((require('./restaurants/directory').findableSlugs || (() => []))()).map(p => 'https://bina.et' + p));
   urls.push(...((require('./health/directory').findableSlugs || (() => []))()).map(p => 'https://bina.et' + p));
   // <lastmod> only where the page has a real date (publication, the employer's last change, the company site's own date).
   const lm = new Map(), day = d => { const t = d ? new Date(d) : null; return t && !isNaN(t) ? t.toISOString().slice(0, 10) : null; };
@@ -1324,6 +1325,7 @@ fastify.post('/api/assistant', async (req, reply) => {
   const lang = biniLang.detect(msg);
   const coSlug = /^[a-z0-9-]{3,80}$/.test(String(b.company || '')) ? String(b.company) : null;
   const hoSlug = /^[a-z0-9-]{3,140}$/.test(String(b.hotel || '')) ? String(b.hotel) : null;
+  const reSlug = /^[a-z0-9-]{3,140}$/.test(String(b.restaurant || '')) ? String(b.restaurant) : null;
   // FIRST, above everything, and for the same reason it is first on the other two pages: a model that
   // is right two times in three is not good enough when the third person is having a stroke.
   // Measured 2026-09-12 before this existed — Bini gave the ambulance number for a child who would not
@@ -1395,9 +1397,10 @@ fastify.post('/api/assistant', async (req, reply) => {
     const runTool = biniTools.makeExecutor({ base: 'http://127.0.0.1:' + (process.env.PORT || 4210), publicBase: 'https://bina.et', dryRun: isEval(req), prisma, memory: mem, telegramId: u.telegramId || null, uid: /^[A-Za-z0-9_-]{6,64}$/.test(String(u.uid || '')) ? String(u.uid) : null, lang, user: { name: (known && known.name) || u.name, phone: known && known.phone }, ip: 'bini-' + userKey.slice(0, 40),
       handover: h => biniHandover({ ...h, userKey, channel, lang, user: known || u, message: msg, history: hist }) });
     let lastShops = null;   // the last search_shops result, for the promise-only backstop below
+    const foodSeen = [];     // map places with a bina.et/restaurants page, for the links below
     const execute = async (name, args) => {
       const r = await runTool(name, args);
-      if (name === 'search_shops' && r && !r.error) lastShops = { a: args, r };
+      if (name === 'search_shops' && r && !r.error) { lastShops = { a: args, r }; foodSeen.push(...(r.mapPlaces || []).filter(x => x && x.name && x.page)); }
       try { toolOut += ' ' + JSON.stringify(r); } catch (e) { /* not serialisable, nothing to ground with */ }
       if (name === 'search_health' && r && !r.error) healthSeen.push(...[].concat(r.results || [], r.nearest || [], r.doctors || []).filter(x => x && x.name && x.url));
       return r;
@@ -1406,7 +1409,7 @@ fastify.post('/api/assistant', async (req, reply) => {
     // Which intents those are, and why a price word is not one of them on its own any more (a bank and an airline charge too): assistant/force.js.
     // Only the tools this conversation can need (assistant/tool-router.js): all 19 definitions are ~4,400 tokens on
     // every call. Unclear topic, owner/company/listing helper modes -> every tool, as before.
-    const allTools = require('./assistant/tool-router').pickTools(biniTools.toOpenAI(), { msg, hist, special: !!(b.listing || b.shop || b.company || b.hotel) });
+    const allTools = require('./assistant/tool-router').pickTools(biniTools.toOpenAI(), { msg, hist, special: !!(b.listing || b.shop || b.company || b.hotel || b.restaurant) });
     const forced = !b.listing && !b.shop && (biniForce.shouldForceTool(msg) || biniForce.isRideFollowUp(msg, prevAsk && prevAsk.content));   // listing mode: Bini asks its questions first, no forced search
     const rememberIntent = /(remember|አስታውስ|አስታውሰኝ|yaadadh)/i.test(msg);
     // While forcing, the model may only choose an action tool: never contact_team (that spammed handovers), remember only on remember intent.
@@ -1469,6 +1472,15 @@ fastify.post('/api/assistant', async (req, reply) => {
     if (hoSlug && !coCtx) {
       let ho = null; try { ho = (require('./hotels/directory').list() || []).find(x => x.slug === hoSlug); } catch (e) { ho = null; }
       if (ho) coCtx = '\n\nHOTEL HELPER MODE: this person opened Bini from BinaSmart\'s link for ' + ho.name + ' (https://bina.et/hotels/' + ho.slug + '), so they probably work there. Help them with their hotel page on BinaSmart: add rooms and prices, add or change their phone, correct details (name, area, stars, website), or confirm (claim) the page so guests can book with them directly. Ask only for what is missing - their name, their role (owner, manager or staff), a phone number to call back, and exactly what to add or change (for rooms: each room type and its price per night, in birr or USD - put them in rooms as well as in request) - then call company_request ONCE with company "' + ho.slug + '" and kind "hotel". Never say a change is already live: the team calls to confirm and approves it, usually within a day. Do not promise that a mobile number will be shown on the public page; the team decides. Direct booking on BinaSmart is 0% commission and guests pay at the hotel. If they only have a question, answer it.';
+    }
+    // A restaurant's own page (restaurants/directory.js, 1 Oct 2026). The only path a standalone restaurant has: the shop
+    // dashboard needs a tenancy in a building BinaSmart manages.
+    if (reSlug && !coCtx) {
+      let re = null; try { re = require('./restaurants/directory').places().bySlug.get(reSlug) || null; } catch (e) { re = null; }
+      if (re) coCtx = '\n\nRESTAURANT HELPER MODE: this person opened Bini from the "Claim this page" button on ' + re.name + ' (https://bina.et/restaurants/' + re.slug + '), so they probably own or work at it. Help them with their page: the number to show, opening hours, dishes with prices, a line about the place, or confirming (claiming) the page. '
+        + 'Ask for EVERYTHING still missing in ONE short message: their name, their role (owner, manager or staff), a phone to call them back, and what to add or change (for dishes: each dish and its price in birr - put them in dishes as well as in request). '
+        + 'Then call company_request ONCE with company "' + re.slug + '" and kind "restaurant". Never say anything is already live: the team calls to confirm and approves, usually within a day. '
+        + 'The number shown on the page is the one they choose for customers; do not promise any other number will be shown. BinaSmart does not deliver food or take payments, and there is no commission. If they only have a question, answer it.';
     }
     // A buyer asking where to buy something: what shop owners posted on bina.et/shop goes in front of Bini (30 Sep 2026).
     // Done here, not left to search_shops, because Flash answered "where can I buy a dress" from the map without calling it.
@@ -1597,6 +1609,18 @@ fastify.post('/api/assistant', async (req, reply) => {
     // often drops them all (replay of real questions, 28 Sep 2026): when none survived, the directory link is added.
     if (toolsUsed.some(n => /^search_hotels/.test(n)) && text && !/bina\.et\/hotels/.test(text))
       text += (lang === 'am' ? '\n\n🏨 ሁሉም ሆቴሎችና የእንግዳ ማረፊያዎች፦ ' : '\n\n🏨 All hotels and guest houses: ') + 'https://bina.et/hotels';
+    // A food answer carries its way in too (1 Oct 2026): the Amharic answer named four restaurants near Piassa and dropped
+    // every page link the English one gave. Each place Bini NAMED keeps its bina.et/restaurants page; the directory closes it.
+    if (foodSeen.length && text) {
+      const low = text.toLowerCase(), miss = [], seen = new Set();
+      for (const p of foodSeen) {
+        if (seen.has(p.page)) continue; seen.add(p.page);
+        const named = low.includes(String(p.name).toLowerCase()) || (p.nameAm && text.includes(p.nameAm));
+        if (named && !text.includes(p.page.replace(/^https:\/\//, ''))) miss.push(p);
+      }
+      if (miss.length) text += '\n\n' + miss.slice(0, 6).map(p => '🍽 ' + p.name + ': ' + p.page).join('\n');
+      if (!/bina\.et\/restaurants(\s|$|[^\/])/.test(text)) text += (lang === 'am' ? '\n\n🍽 ሁሉም ምግብ ቤቶችና ካፌዎች፦ ' : '\n\n🍽 All restaurants and cafés: ') + 'https://bina.et/restaurants';
+    }
     // A health answer always carries its way in: every place Bini NAMED keeps its own bina.et/health page (the model
     // dropped them on "which hospital near Piassa", 30 Sep 2026), and the directory link closes the answer.
     if (toolsUsed.some(n => /^search_health/.test(n)) && text) {
@@ -2278,6 +2302,7 @@ fastify.register(require('./companies/directory'), { prisma, limiter: hotelLimit
 fastify.register(require('./property/detail'), { prisma });
 fastify.register(require('./property/owner-listing'), { prisma, limiter: hotelLimiter });
 fastify.register(require('./shops/posts'), { prisma, limiter: hotelLimiter });
+fastify.register(require('./restaurants/directory'), { limiter: hotelLimiter });   // bina.et/restaurants: restaurants, cafés and fast food from the city map; claims via Bini (1 Oct 2026)
 fastify.register(require('./health/directory'), { prisma, limiter: hotelLimiter });   // bina.et/health: hospitals, clinics, dentists, labs + doctors who join through Dr Afiya (30 Sep 2026)
 fastify.register(require('./health/dashboard'), { prisma, limiter: hotelLimiter, runAgent, isEval, agent: require('./agents/afiya-pro/rules') });   // bina.et/health/dashboard: owners edit their pages; Dr Afiya helps with the practice side only (30 Sep 2026)   // bina.et/shop: products and offers shop owners post through Bini (30 Sep 2026)   // homes for sale / rent sent through Bini (29 Sep 2026)
 // bina.et/cars/<slug>: one car in full, same page design.
