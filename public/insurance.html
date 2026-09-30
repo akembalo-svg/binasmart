@@ -84,12 +84,15 @@ section{padding:44px 0}
 .ipill{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);background:rgba(255,255,255,.5)}.ipill:active,.ipill.on,.ipill.sel{background:linear-gradient(135deg,rgba(0,200,150,.8),rgba(0,150,136,.72));border:1px solid rgba(255,255,255,.6);color:#fff;text-shadow:0 1px 2px rgba(0,80,60,.35);box-shadow:0 16px 32px -14px rgba(0,200,150,.6),inset 0 1px 0 rgba(255,255,255,.45);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}.ipill.on span,.ipill.sel span{color:rgba(255,255,255,.85)}
 .tcard{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 24px -16px rgba(8,17,32,.35),inset 0 1px 0 rgba(255,255,255,.9);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);background:rgba(255,255,255,.5);border-radius:18px}.tcard:hover{background:rgba(255,255,255,.7);border-color:rgba(0,200,150,.6)}
 </style>
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Insurance · መድን — Compare & Buy in Ethiopia | BinaSmart","description":"Compare motor, health, property, travel and business insurance from Ethiopia's licensed insurers. Get an instant indicative estimate and buy through a trusted agent — in Amharic & English. የመኪና፣ ጤና፣ ንብረት መድን በቀላሉ።","url":"https://bina.et/insurance","inLanguage":"en","serviceType":"Insurance quotes","provider":{"@type":"Organization","name":"BinaSmart","url":"https://bina.et","logo":{"@type":"ImageObject","url":"https://bina.et/icon-512.png","width":512,"height":512}},"areaServed":{"@type":"Country","name":"Ethiopia"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"መነሻ","item":"https://bina.et/"},{"@type":"ListItem","position":2,"name":"Insurance · መድን","item":"https://bina.et/insurance"}]}</script>
 </head><body>
 
 <div class="top"><div class="in">
   <a href="/" class="logo"><i class="lg"></i>Bina<span class="g">Smart</span></a>
   <span class="badge am">መድን · Insurance</span>
-  <a class="wa" href="https://wa.me/251911244344?text=%E1%88%B0%E1%88%8B%E1%88%9D!%20%E1%88%98%E1%8B%B5%E1%8A%95%20(insurance)%20%E1%8A%A5%E1%8D%88%E1%88%8D%E1%8C%8B%E1%88%88%E1%88%81" target="_blank">💬 WhatsApp</a>
+  <a class="wa" href="https://t.me/Bina_smart" target="_blank">💬 Telegram</a>
 </div></div>
 
 <div class="hero wrap"><div class="hero-grid">
@@ -235,8 +238,8 @@ function submitLead(){
   fetch('/api/insurance-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
    .then(function(r){return r.json()}).then(function(d){
      document.getElementById('formInner').style.display='none';document.getElementById('okBox').classList.add('show');
-   }).catch(function(){alert('Something went wrong — please WhatsApp us.')});
+   }).catch(function(){alert('Something went wrong — please Telegram us.')});
 }
-</script>  <script src="/static/bina-footer.js?v=9" defer></script>
+</script>  <script src="/static/bina-footer.js?v=10" defer></script>
 <script src="/static/pwa.js?v=1" defer></script>
 </body></html>

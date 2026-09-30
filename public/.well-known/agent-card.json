@@ -1,0 +1,74 @@
+{
+  "name": "BinaSmart",
+  "description": "Ethiopia's all-in-one digital platform, in Amharic and English: fixed-price ride-hailing and shared commute in Addis Ababa, a directory of buildings, hotels, hospitals and shops, events and films, and 24 Digital Ethiopia guides. Agents reach it over MCP.",
+  "version": "1.0.0",
+  "url": "https://bina.et/mcp",
+  "preferredTransport": "MCP",
+  "documentationUrl": "https://bina.et/mcp",
+  "iconUrl": "https://bina.et/favicon.ico",
+  "provider": {
+    "organization": "BinaSmart",
+    "url": "https://bina.et"
+  },
+  "interfaces": [
+    {
+      "transport": "MCP",
+      "protocol": "Streamable HTTP, stateless",
+      "url": "https://bina.et/mcp",
+      "healthUrl": "https://bina.et/mcp/health"
+    }
+  ],
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["text/plain", "application/json"],
+  "authentication": {
+    "schemes": ["none", "bearer"],
+    "note": "Anonymous callers get 20 requests per UTC hour per address, shared by /mcp and /api/knowledge/search. A key raises that; see https://bina.et/mcp."
+  },
+  "skills": [
+    {
+      "id": "ride",
+      "name": "Fixed-price rides in Addis Ababa",
+      "description": "Quote a fare, book a ride, check its status or cancel it. Fares are fixed at quote time — no surge. Moto, bajaj, economy, comfort and XL. Addis Ababa only.",
+      "tags": ["transport", "ride-hailing", "addis-ababa", "ethiopia"],
+      "tools": ["quote_ride", "request_ride", "get_ride_status", "cancel_ride"]
+    },
+    {
+      "id": "pool",
+      "name": "BinaPool shared commute",
+      "description": "Corridors open now with their stops and live per-seat price ladder, and cars filling near a point — seats left, price, women-only groups.",
+      "tags": ["transport", "carpool", "commute", "addis-ababa"],
+      "tools": ["list_pool_corridors", "find_pool_groups"]
+    },
+    {
+      "id": "places",
+      "name": "Places in Addis Ababa",
+      "description": "Buildings, hotels, hospitals and shops — cafés, restaurants, pharmacies, banks, gyms, salons, clinics and offices — with hotel room types and hospital departments.",
+      "tags": ["directory", "places", "hotels", "hospitals", "addis-ababa"],
+      "tools": ["search_places", "get_hotel_rooms", "get_hospital_departments"]
+    },
+    {
+      "id": "entertainment",
+      "name": "Films and events",
+      "description": "Upcoming films, concerts, theatre and events on sale with venue, start time, prices per tier and seats left, plus Amharic films to watch online.",
+      "tags": ["cinema", "events", "tickets", "film"],
+      "tools": ["list_events", "list_films"]
+    },
+    {
+      "id": "knowledge",
+      "name": "Digital Ethiopia guides and knowledge",
+      "description": "Semantic search over every BinaSmart service and its rules, practical Addis Ababa knowledge, and 24 step-by-step guides — Fayda, telebirr, TIN, VAT, eVisa, driving licence and more. Answers carry a source url to cite.",
+      "tags": ["ethiopia", "guides", "government", "knowledge-base", "amharic"],
+      "tools": ["search_knowledge", "get_ethiopia_guide"]
+    }
+  ],
+  "languages": ["en", "am"],
+  "coverage": {
+    "country": "Ethiopia",
+    "rides": "Addis Ababa only"
+  }
+}

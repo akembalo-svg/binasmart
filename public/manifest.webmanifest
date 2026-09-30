@@ -10,15 +10,96 @@
   "orientation": "portrait",
   "background_color": "#faf8f4",
   "theme_color": "#059669",
-  "categories": ["business", "productivity", "travel"],
+  "categories": [
+    "business",
+    "productivity",
+    "travel"
+  ],
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "shortcuts": [
-    { "name": "Tenders · ጨረታ", "short_name": "Tenders", "url": "/tenders" },
-    { "name": "News · ዜና", "short_name": "News", "url": "/news" },
-    { "name": "All buildings", "short_name": "Buildings", "url": "/" }
+    {
+      "name": "Airport ride · ኤርፖርት",
+      "short_name": "Airport",
+      "description": "Fixed-fare ride to or from Bole Airport",
+      "url": "/airport?src=shortcut",
+      "icons": [
+        {
+          "src": "/static/icons/shortcut-airport.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Hotels · ሆቴሎች",
+      "short_name": "Hotels",
+      "description": "Hotels and guest houses in Addis Ababa",
+      "url": "/hotels?src=shortcut",
+      "icons": [
+        {
+          "src": "/static/icons/shortcut-hotels.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Health · ጤና",
+      "short_name": "Health",
+      "description": "Hospitals, clinics, dentists and doctors in Addis Ababa",
+      "url": "/health?src=shortcut",
+      "icons": [
+        {
+          "src": "/static/icons/shortcut-health.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Tenders · ጨረታ",
+      "short_name": "Tenders",
+      "description": "Open Ethiopian tenders with deadlines",
+      "url": "/tenders?src=shortcut",
+      "icons": [
+        {
+          "src": "/static/icons/shortcut-tenders.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "News · ዜና",
+      "short_name": "News",
+      "description": "Amharic news",
+      "url": "/news?src=shortcut",
+      "icons": [
+        {
+          "src": "/static/icons/shortcut-news.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
   ]
 }

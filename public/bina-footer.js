@@ -1,5 +1,5 @@
 /* One footer for the whole of bina.et. Any page that adds
-     <script src="/static/bina-footer.js?v=9" defer></script>
+     <script src="/static/bina-footer.js?v=10" defer></script>
    gets it, injected at the end of <body>.
    v9 (7 Sep 2026): new bi mark + Telegram Mini App init. v8: the BinaSmart home design footer — dark navy, teal play logo, tagline, nav row,
    social icons, three link columns (Amharic first, English on wide screens), bottom bar. */
@@ -34,6 +34,7 @@
     ['Telegram', 'https://t.me/binasmart', '<path d="M21 4L3 11l6 2 2 6 3-4 5 3z"/>'],
     ['Telegram bot', 'https://t.me/bina_smart_bot', '<rect x="5" y="7" width="14" height="11" rx="4"/><path d="M12 4v3M9 3.5h6"/><circle cx="9.5" cy="12.5" r="1" fill="currentColor"/><circle cx="14.5" cy="12.5" r="1" fill="currentColor"/><path d="M9.5 15.5c1.5 1 3.5 1 5 0"/>'],
     ['Facebook', 'https://www.facebook.com/binasmartet', '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/>'],
+    ['TikTok', 'https://www.tiktok.com/@bina_smart', '<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.6 2.3 4.2 5 4.5"/>'],
     ['LinkedIn', 'https://www.linkedin.com/company/144771046', '<rect x="3" y="9" width="4" height="12"/><circle cx="5" cy="5" r="2"/><path d="M11 21v-7a3 3 0 0 1 6 0v7M11 9v12M21 21v-7a5 5 0 0 0-5-5"/>'],
     ['WhatsApp', 'https://wa.me/251911244344', '<path d="M4 20l1.3-3.8A8 8 0 1 1 8.2 19z"/><path d="M9 9.5c.3 2.5 2.5 4.7 5 5l1.2-1.2-1.8-.9-.9.6c-.8-.4-1.5-1.1-1.9-1.9l.6-.9-.9-1.8z"/>'],
   ];

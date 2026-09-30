@@ -1,0 +1,39 @@
+{
+  "id": "/partner",
+  "name": "Bina Partner · ቢና አጋር",
+  "short_name": "Bina Partner",
+  "description": "BinaSmart for drivers and building owners: the driver app and the building dashboard in one place. Amharic and English.",
+  "lang": "am",
+  "dir": "ltr",
+  "start_url": "/partner?src=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4FAF8",
+  "theme_color": "#F4FAF8",
+  "categories": [
+    "business",
+    "navigation",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/static/partner/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/partner/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/partner/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

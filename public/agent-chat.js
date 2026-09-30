@@ -199,7 +199,9 @@
       w.appendChild(box);
     }
     var body = el('div', 'ac-text'); appendText(body, card.text); w.appendChild(body);
-    if (card.sources.length) {
+    // The "From: …" line is off unless the page asks for it (config "sources": true). The owner asked on
+    // 2026-09-17 for answers that read like a person, not a report; the API still returns the documents.
+    if (card.sources.length && cfg.sources) {
       var src = el('p', 'ac-src', ui('from') + ' ');
       card.sources.forEach(function (s, i) {
         if (i) src.appendChild(document.createTextNode(' · '));

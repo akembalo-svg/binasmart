@@ -147,6 +147,12 @@
         <a class="btn ghost" id="openPage" style="margin-top:10px" target="_blank">👀 ገጼን ክፈት · Open my page</a>
         <button class="btn ghost" id="copyUrl" style="margin-top:8px">🔗 ሊንኩን ቅዳ · Copy link</button>
       </div>
+      <div class="card" id="tqr" style="margin-top:12px;text-align:center" hidden>
+        <h2>🪑 የጠረጴዛ QR · Table QR cards</h2>
+        <p class="sub">ለእያንዳንዱ ጠረጴዛ QR ያትሙ፤ ደንበኞች ቃኝተው ምናሌዎን ያያሉ፣ ወደ ጠረጴዛቸው ያዝዛሉ።<span class="en" style="display:block">Print one QR card for each table: guests scan it, see your menu and order to their table. Pay at the table.</span></p>
+        <label style="display:block;margin:10px 0;font-weight:800">ጠረጴዛዎች · Tables <input id="tqrN" type="number" min="1" max="80" value="10" style="width:80px;margin-left:6px"></label>
+        <a class="btn" id="tqrGo" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">🖨 ካርዶቹን አትም · Print table cards</a>
+      </div>
       <button class="btn ghost" id="signOut" style="margin-top:12px">ውጣ · Sign out</button>
     </div>
   </div>
@@ -154,6 +160,6 @@
 </div>
 <div class="toast" id="toast"></div>
 <script src="/static/ride/tg.js?v=3"></script>
-<script src="/static/business/app.js?v=2"></script>
+<script src="/static/business/app.js?v=4"></script>
 </body>
 </html>

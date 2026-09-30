@@ -3,7 +3,7 @@
 <title>Property for sale & rent in Ethiopia · ቤት ግዢና ኪራይ | BinaSmart</title>
 <meta name="description" content="Apartments, houses, land and commercial property for sale and rent in Ethiopia. Tell us what you are looking for and we search for it. Diaspora-friendly, with property insurance in one tap. የቤት ግዢና ኪራይ በቀላሉ።">
 <link rel="canonical" href="https://bina.et/property">
-<meta property="og:title" content="Property for sale & rent in Ethiopia — ቤት | BinaSmart"><meta property="og:image" content="https://bina.et/static/bina-news.png">
+<meta property="og:title" content="Property for sale & rent in Ethiopia — ቤት | BinaSmart"><meta property="og:description" content="Apartments, houses, land and commercial property for sale and rent in Ethiopia. Tell us what you are looking for and we search for it. Diaspora-friendly,…"><meta property="og:image" content="https://bina.et/static/bina-property.png">
 <link rel="icon" href="/icon-32.png">
 <link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
 <style>
@@ -39,6 +39,52 @@ section{padding:32px 0}
 .pc .meta{font-size:12.5px;color:var(--mut);display:flex;gap:10px;flex-wrap:wrap}.pc .dl{font-size:12px;color:var(--mut);margin-top:8px}
 .pc .btns{display:flex;gap:8px;margin-top:12px}.pc .btns button{flex:1;border:0;border-radius:10px;padding:10px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
 .b1{background:var(--ink);color:#fff}.b2{background:#e6f7f4;color:var(--em2)}
+.pc .btns a{flex:1;border-radius:10px;padding:10px;font-weight:700;font-size:13px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.pc .ph.noimg{aspect-ratio:auto;height:92px}
+.pc .ph .lt{right:auto;left:10px}.pc .ph .vf{left:auto;right:10px}
+.pc .ph .cr{position:absolute;left:10px;bottom:8px;font-size:10px;color:#fff;background:rgba(15,32,39,.55);padding:2px 7px;border-radius:6px}
+.pc .ph .clogo{position:absolute;right:12px;bottom:-22px;width:48px;height:48px;border-radius:50%;background:#fff;border:3px solid #fff;box-shadow:0 4px 14px -4px rgba(15,32,39,.35);object-fit:cover}
+.pc .ph.noimg .clogo{bottom:-22px}
+.pc .price.ask{font-size:16px;color:var(--mut)}
+.pc .ty{font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.pc .bd h3{margin-top:4px;padding-right:44px}
+.pc .facts{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--ink);font-weight:600}
+.pc .facts span,.pc .dl{display:inline-flex;align-items:center;gap:5px}
+.pc .facts svg,.pc .dl svg{color:var(--mut);flex:none}
+.pc .by{font-size:12px;color:var(--mut);margin-top:6px}.pc .by a{color:inherit;text-decoration:underline}
+.pc .pcta{display:flex;gap:6px;margin-top:auto;padding-top:14px}
+.pc .pcta a.c{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;border-radius:10px;padding:10px 4px;font-weight:700;font-size:13px;text-decoration:none;border:1.5px solid transparent;white-space:nowrap}
+.pc .pcta .call{background:#fff;color:var(--em2);border-color:#cfe9e3}
+.pc .pcta .wa{background:#e7f8ee;color:#128c4a;border-color:#bfe8cf}
+.pc .pcta .tg{background:#e8f3fc;color:#1c7ed6;border-color:#c6e0f6}
+.pc.hl{outline:3px solid var(--em);outline-offset:3px}
+.age{font-size:11.5px;color:var(--mut);margin-top:6px}.age.old{color:#92400e;background:#fef3c7;border-radius:8px;padding:3px 8px;display:inline-block}
+.pc a.ph{display:flex}.pc h3 a:hover{color:var(--em2)}.pc a.pmore{display:inline-block;margin-top:8px;font-size:13px;font-weight:800;color:var(--em2)}
+.askb{background:linear-gradient(135deg,#064e3b,#059669 55%,#10b981);border-radius:22px;padding:22px;color:#fff;box-shadow:0 24px 50px -26px rgba(6,78,59,.7);margin-bottom:8px}
+.askb-hd{display:flex;gap:12px;align-items:center}.askb-hd b{display:block;font-size:19px;font-weight:800}.askb-hd span{font-size:13.5px;opacity:.92}
+.askb-av{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.askb-f{display:flex;gap:8px;margin-top:14px}
+.askb-in{flex:1;min-width:0;border:0;border-radius:12px;padding:14px;font-size:15px;font-family:inherit;color:var(--ink)}
+.askb-in:focus{outline:3px solid rgba(255,255,255,.5)}
+.askb-go{border:0;border-radius:12px;padding:0 18px;background:#fbbf24;color:#3b2a00;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.askb-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.askb-chips button{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.askb-chips button:hover{background:rgba(255,255,255,.26)}
+@media(max-width:520px){.askb{padding:18px}.askb-f{flex-direction:column}.askb-go{padding:13px}}
+.morebtn{display:block;margin:18px auto 6px;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:12px 26px;font-weight:800;font-size:14.5px;color:var(--ink);cursor:pointer;font-family:inherit;box-shadow:0 10px 24px -18px rgba(8,17,32,.45)}.morebtn:hover{border-color:var(--em)}
+.fbar{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px;box-shadow:0 10px 30px -22px rgba(15,32,39,.35)}
+.fbar .fq{display:flex;gap:8px}.fbar .fq .fi{flex:1}
+.fbar .fmore{display:grid;grid-template-columns:repeat(4,1fr) 1.1fr auto auto;gap:8px;margin-top:8px;align-items:center}
+.fi{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;background:#fff;color:var(--ink);min-width:0}
+.fi:focus{outline:0;border-color:var(--em)}
+.fchk{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--mut);white-space:nowrap;cursor:pointer}
+.freset{border:0;background:none;color:var(--em2);font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;padding:8px}
+.ftog{display:none;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:0 14px;font-weight:700;font-size:14px;color:var(--ink);font-family:inherit;cursor:pointer}
+.fcount{font-size:13px;color:var(--mut);margin:0 2px 12px}
+@media(max-width:980px){.fbar .fmore{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:620px){.ftog{display:block}.fbar .fmore{display:none;grid-template-columns:1fr 1fr}.fbar.open .fmore{display:grid}}
+.pc .an{font-size:15px;font-weight:700;color:#5f7f78;text-align:center;padding:0 14px;line-height:1.3}
+.pc .dl a{color:inherit;text-decoration:underline}
 .empty{background:#fff;border:1px dashed var(--line);border-radius:18px;padding:40px 20px;text-align:center;color:var(--mut)}
 .band{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 20px 50px -26px rgba(15,32,39,.18)}
 .band h2{font-size:24px;font-weight:800}.band p{color:var(--mut);margin-top:6px}
@@ -55,14 +101,18 @@ section{padding:32px 0}
 @media(max-width:820px){.grid{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.frow{grid-template-columns:1fr}.badge{display:none}}
 @media(max-width:520px){.grid{grid-template-columns:1fr}}
 </style><link rel="stylesheet" href="/static/site-v3.css?v=5">
-<meta name="theme-color" content="#009688"></head><body>
+<meta name="theme-color" content="#009688"><meta property="og:url" content="https://bina.et/property">
+<meta name="twitter:card" content="summary_large_image">
+<script src="/static/listing-cards.js?v=3"></script>
+</head><body>
 
 <div class="top"><div class="in">
-  <a href="/" class="logo"><i class="lg"></i>Bina<span class="g">Smart</span></a><span class="badge am">🏠 ቤት · Property</span>
-  <a class="wa" href="https://wa.me/251911244344?text=%E1%89%A4%E1%89%B5%20%E1%8A%A5%E1%8D%88%E1%88%8D%E1%8C%8B%E1%88%88%E1%88%81" target="_blank">💬 WhatsApp</a>
+  <a href="/" class="logo" style="display:inline-flex;align-items:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#ca8a04,#713f12);box-shadow:0 8px 18px -8px #ca8a04cc;vertical-align:middle;margin-right:8px;flex:none"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2"/><path d="M5.8 9.6V20h12.4V9.6"/><path d="M9.4 14.6l1.8 1.8 3.4-3.4"/></svg></span>Bina<span class="g">Smart</span><span style="color:#F59E0B;font-size:15px;margin-left:4px">ቤት</span></a><span class="badge am">🏠 ቤት · Property</span>
+  <a class="wa" href="https://t.me/Bina_smart" target="_blank">💬 Telegram</a>
 </div></div>
 
 <div class="hero wrap">
+  <div style="display:flex;justify-content:center;margin-bottom:12px"><span style="display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:9px;background:linear-gradient(135deg,#ca8a04,#713f12);box-shadow:0 8px 18px -8px #ca8a04cc;vertical-align:middle;flex:none"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2"/><path d="M5.8 9.6V20h12.4V9.6"/><path d="M9.4 14.6l1.8 1.8 3.4-3.4"/></svg></span></div>
   <h1>Homes you can trust.</h1>
   <p class="am">ቤት፣ ኮንዶሚኒየም፣ መሬትና የንግድ ቦታ — ለግዢና ለኪራይ። የሚፈልጉትን ይንገሩን፣ እኛ እናፈላልጋለን። ለዲያስፖራ ምቹ።</p>
   <div class="seg"><button id="sSale" class="on" onclick="setType('sale')">For sale · ሽያጭ</button><button id="sRent" onclick="setType('rent')">For rent · ኪራይ</button></div>
@@ -71,13 +121,44 @@ section{padding:32px 0}
 </div>
 
 <section class="wrap">
+  <div class="askb">
+    <div class="askb-hd"><span class="askb-av">✨</span><div><b>Ask Bini · ቢኒን ይጠይቁ</b><span>Tell me the home you want. I search every listing and give you the company's own phone.</span></div></div>
+    <form class="askb-f" onsubmit="event.preventDefault();askBini()">
+      <input id="askQ" class="askb-in" autocomplete="off" placeholder="e.g. 2 bedrooms in Bole under 150,000 · ቦሌ ባለ 2 መኝታ">
+      <button class="askb-go" type="submit">Ask Bini →</button>
+    </form>
+    <div class="askb-chips">
+      <button type="button" onclick="askBini('Furnished apartment for rent in Bole')">🛋️ Furnished in Bole</button>
+      <button type="button" onclick="askBini('3 bedroom apartment for sale')">🏢 3 bed for sale</button>
+      <button type="button" onclick="askBini('በሳርቤት አካባቢ የሚከራይ ቤት አሳየኝ')">🏠 ሳርቤት ኪራይ</button>
+      <button type="button" onclick="askBini('Show me the cheapest homes for sale')">💰 Cheapest for sale</button>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
   <div class="rowh"><h2 id="listTitle">Properties for sale</h2><a href="#request">Looking for something? →</a></div>
+  <div class="fbar">
+    <div class="fq"><input class="fi" id="fQ" type="search" placeholder="Search area, building, company · ፈልግ" oninput="view()" aria-label="Search"><button class="ftog" id="fTog" onclick="document.querySelector('.fbar').classList.toggle('open')">Filters</button></div>
+    <div class="fmore">
+      <select class="fi" id="fArea" onchange="view()" aria-label="Area"></select>
+      <select class="fi" id="fBeds" onchange="view()" aria-label="Bedrooms"><option value="">Bedrooms · መኝታ</option><option value="0">Studio</option><option value="1">1 bed</option><option value="2">2 beds</option><option value="3">3 beds</option><option value="4">4+ beds</option></select>
+      <select class="fi" id="fMax" onchange="view()" aria-label="Maximum price"></select>
+      <select class="fi" id="fCo" onchange="view()" aria-label="Company"></select>
+      <select class="fi" id="fSort" onchange="view()" aria-label="Sort"><option value="new">Newest first</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select>
+      <label class="fchk"><input type="checkbox" id="fPhoto" onchange="view()"> With photo</label>
+      <button class="freset" onclick="resetF()">Reset</button>
+    </div>
+  </div>
+  <div class="fcount" id="fCount"></div>
   <div class="grid" id="props"><div class="empty">Loading…</div></div>
 </section>
 
+<section class="wrap"><div class="promo ag"><h3>🏢 All real estate companies in Addis Ababa · <span class="am">ሁሉም የሪል እስቴት ኩባንያዎች</span></h3><p class="am">አልሚዎች፣ ደላላዎችና የንብረት አስተዳዳሪዎች — በክፍለ ከተማና በካርታ።</p><a href="/real-estate-companies">See the list →</a></div></section>
+
 <section class="wrap"><div class="two">
   <div class="promo ins"><h3>🛡️ Protect your property</h3><p class="am">የቤት/ንብረት መድን በአንድ ጠቅታ — ከእሳት፣ ስርቆትና አደጋ ይከላከሉ።</p><a href="/insurance">Get property insurance →</a></div>
-  <div class="promo ag"><h3>🤝 Agents & owners</h3><p class="am">ንብረትዎን በነጻ ያስተዋውቁ — ዝርዝሩን በWhatsApp ይላኩልን፣ እኛ እናወጣዋለን።</p><a href="https://wa.me/251911244344?text=%E1%8A%A5%E1%8A%94%20%E1%8B%88%E1%8A%AA%E1%88%8D%2F%E1%89%A3%E1%88%88%E1%89%A4%E1%89%B5%20%E1%8A%90%E1%8A%9D%E1%8D%A2%20%E1%8A%95%E1%89%A5%E1%88%A8%E1%89%B5%20%E1%88%88%E1%88%98%E1%8C%A8%E1%88%98%E1%88%AD%20%E1%8D%88%E1%88%8D%E1%8C%8B%E1%88%88%E1%88%81" target="_blank">List a property →</a></div>
+  <div class="promo ag"><h3>🤝 Owners, agents & companies · <span class="am">ቤትዎን ያስተዋውቁ</span></h3><p class="am">ለሽያጭ ወይም ለኪራይ — በነጻ፣ ያለ ኮሚሽን። ቢኒን ያናግሩ፤ ፎቶዎችንም ይላኩ። ገዢዎችና ተከራዮች በቀጥታ እርስዎን ይደውላሉ።</p><a href="/property?bini=list">List with Bini · ቢኒን ያናግሩ →</a></div>
 </div></section>
 
 <section class="wrap" id="request">
@@ -106,24 +187,59 @@ var PT=['Apartment','Condominium','House / Villa','Land','Commercial','Building'
 document.getElementById('ptypes').innerHTML=PT.map(function(p){return '<span class="chip" onclick="filterPt(this,\''+p+'\')">'+p+'</span>'}).join('');
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function cssUrl(u){return /^https?:\/\//i.test(u||'')?String(u).replace(/[()'"\\\s]/g,function(c){return '%'+('0'+c.charCodeAt(0).toString(16)).slice(-2).toUpperCase()}):''}
-function card(p){
-  var img=cssUrl(p.imageUrl),ph=img?('style="background-image:url('+esc(img)+')"'):'';
-  var meta=[p.beds?p.beds+' bd':'',p.baths?p.baths+' ba':'',p.area].filter(Boolean).map(esc).join(' · ');
-  return '<div class="pc"><div class="ph" '+ph+'>'+(img?'':'🏠')+(p.verified?'<span class="vf" title="Checked by BinaSmart">✓ Verified</span>':'')+'<span class="lt">'+(p.listingType==='rent'?'For rent':'For sale')+'</span></div>'+
-   '<div class="bd"><h3>'+esc(p.title)+'</h3>'+(p.price?'<div class="price">'+esc(p.price)+'</div>':'')+
-   '<div class="meta">'+meta+'</div>'+((p.location||p.city)?'<div class="dl">📍 '+esc(p.location||p.city)+(p.agency?' · '+esc(p.agency):'')+'</div>':'')+
-   '<div class="btns"><button class="b1" data-t="'+esc(p.title)+'" onclick="enquire(this.getAttribute(\'data-t\'))">Enquire</button>'+
-   '<button class="b2" onclick="location.href=\'/insurance\'">Insure</button></div></div></div>';
-}
-function view(){
-  var list=ALL.filter(function(p){return (p.listingType||'sale')===curType});
+// The card itself lives in /static/listing-cards.js - the server writes the first cards with the same code.
+var card=BinaCards.propertyCard,httpLink=function(u){return typeof u==='string'&&/^https?:\/\//i.test(u)};
+// ---- filters ----
+// Price as a number: totals/monthly rents compare with each other; "birr / m²" prices only sort after them.
+function priceNum(p){var s=String(p.price||'');var m=s.replace(/,/g,'').match(/\d+(\.\d+)?/);if(!m)return null;var n=parseFloat(m[0]);
+  if(/m²|m2/i.test(s))return {n:n,m2:true};if(/usd|\$/i.test(s))return {n:n,usd:true};if(/million|mln/i.test(s)&&n<1000)n*=1e6;return {n:n}}
+function areaOf(p){var a=String(p.location||'').split(',')[0].trim();if(!a||/^addis ababa$/i.test(a))return '';return a.charAt(0).toUpperCase()+a.slice(1)}
+function bedsOf(p){if(/studio/i.test(p.title||''))return 0;var b=parseInt(p.beds,10);return isNaN(b)?null:b}
+var MAX={sale:[3e6,5e6,8e6,10e6,15e6,20e6,30e6,50e6],rent:[20e3,40e3,60e3,80e3,100e3,150e3,200e3,300e3,500e3]};
+function money(n){return n>=1e6?(n/1e6)+' million':(n/1e3)+',000'}
+function opts(sel,first,pairs,keep){var v=keep?sel.value:'';sel.innerHTML='<option value="">'+first+'</option>'+pairs.map(function(x){return '<option value="'+esc(x[0])+'">'+esc(x[1])+'</option>'}).join('');if(v&&[].some.call(sel.options,function(o){return o.value===v}))sel.value=v}
+function counted(list,f){var c={};list.forEach(function(p){var k=f(p);if(k)c[k]=(c[k]||0)+1});return Object.keys(c).sort(function(a,b){return c[b]-c[a]||a.localeCompare(b)}).map(function(k){return [k,k+' ('+c[k]+')']})}
+function fillFilters(){var list=ALL.filter(function(p){return (p.listingType||'sale')===curType});
+  opts(document.getElementById('fArea'),'All areas · ሁሉም ሰፈር',counted(list,areaOf),true);
+  opts(document.getElementById('fCo'),'All companies',counted(list,function(p){return p.agency}),true);
+  opts(document.getElementById('fMax'),'Max price · ከፍተኛ ዋጋ',MAX[curType].map(function(n){return [n,'Up to '+money(n)+' birr'+(curType==='rent'?' / month':'')]}),false)}
+function resetF(){['fQ','fArea','fBeds','fMax','fCo'].forEach(function(id){document.getElementById(id).value=''});document.getElementById('fSort').value='new';document.getElementById('fPhoto').checked=false;
+  curPt='';document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});view()}
+// 24 cards at a time, then "Show more" (Ibrahim: the page must not go on and on).
+var PAGE=24,shown=PAGE,LIST=[];
+function moreBtn(){var g=document.getElementById('props'),b=document.getElementById('moreBtn');
+  if(!b){b=document.createElement('button');b.id='moreBtn';b.type='button';b.className='morebtn';g.parentNode.insertBefore(b,g.nextSibling);
+    b.addEventListener('click',function(){var from=shown;shown+=PAGE;g.insertAdjacentHTML('beforeend',LIST.slice(from,shown).map(card).join(''));moreBtn()})}
+  var left=LIST.length-shown;b.style.display=left>0?'':'none';b.textContent='Show more · ተጨማሪ ይመልከቱ ('+left+' more)'}
+// A landing page (/property/for-rent/bole ...) opens on its tab and area: window.__PRESET, written by market/landing.js.
+function applyPreset(){var P=window.__PRESET;if(!P||!P.type||P.type===curType)return;curType=P.type;
+  document.getElementById('sSale').classList.toggle('on',curType==='sale');document.getElementById('sRent').classList.toggle('on',curType==='rent')}
+function presetHomes(l){var P=window.__PRESET;if(!P||!P.terms)return l;return l.filter(function(p){var s=String(p.location||'').split(',')[0].toLowerCase().replace(/\s+/g,'');return P.terms.some(function(t){return s===t||s.indexOf(t)>=0})})}
+function view(keep){
+  if(!keep)shown=PAGE;
+  var all=presetHomes(ALL.filter(function(p){return (p.listingType||'sale')===curType})),list=all;
   if(curPt)list=list.filter(function(p){return (p.propertyType||'').toLowerCase().indexOf(curPt.toLowerCase().split(' ')[0])>=0});
-  document.getElementById('listTitle').textContent=(curPt||'Properties')+' '+(curType==='rent'?'for rent':'for sale');
+  var q=document.getElementById('fQ').value.trim().toLowerCase(),area=document.getElementById('fArea').value,beds=document.getElementById('fBeds').value,
+      max=+document.getElementById('fMax').value||0,co=document.getElementById('fCo').value,photo=document.getElementById('fPhoto').checked,sort=document.getElementById('fSort').value;
+  if(q)list=list.filter(function(p){return [p.title,p.location,p.agency,p.propertyType].join(' ').toLowerCase().indexOf(q)>=0});
+  if(area)list=list.filter(function(p){return areaOf(p)===area});
+  if(beds!=='')list=list.filter(function(p){var b=bedsOf(p);return b!==null&&(beds==='4'?b>=4:b===+beds)});
+  if(max)list=list.filter(function(p){var x=priceNum(p);return x&&!x.m2&&!x.usd&&x.n<=max});
+  if(co)list=list.filter(function(p){return p.agency===co});
+  if(photo)list=list.filter(function(p){return !!p.imageUrl});
+  // Price sort: birr prices first (by price), then USD prices, then "birr / m²" prices, then "price on request".
+  if(sort!=='new'){var rk=function(p){var x=priceNum(p);return !x?[3,0]:[x.m2?2:x.usd?1:0,x.n]};
+    list=list.slice().sort(function(a,b){var A=rk(a),B=rk(b);return A[0]-B[0]||(sort==='high'?B[1]-A[1]:A[1]-B[1])})}
+  var n=[q,area,beds,max,co,photo,curPt].filter(function(x){return x!==''&&x!==0&&x!==false}).length;
+  document.getElementById('fTog').textContent=n?'Filters ('+n+')':'Filters';
+  document.getElementById('fCount').textContent=all.length?('Showing '+list.length+' of '+all.length+' · '+all.length+' ንብረቶች'):'';
+  document.getElementById('listTitle').textContent=(curPt||'Properties')+' '+(curType==='rent'?'for rent':'for sale')+(window.__PRESET&&__PRESET.place?' in '+__PRESET.place:'');
   var el=document.getElementById('props');
-  if(!list.length){el.innerHTML='<div class="empty" style="grid-column:1/-1"><div style="font-size:40px">🏠</div><b>No listings here yet.</b><br><span class="am">የሚፈልጉትን ከታች ይንገሩን — እኛ እናፈላልግልዎታለን።</span></div>';return}
-  el.innerHTML=list.map(card).join('');
+  if(!list.length){LIST=[];var mb=document.getElementById('moreBtn');if(mb)mb.style.display='none';el.innerHTML='<div class="empty" style="grid-column:1/-1"><div style="font-size:40px">🏠</div><b>'+(all.length?'Nothing matches these filters.':'No listings here yet.')+'</b><br>'+
+    (all.length?'<a href="javascript:resetF()" style="color:var(--em);font-weight:700">Reset filters</a> · ':'')+'<span class="am">የሚፈልጉትን ከታች ይንገሩን — እኛ እናፈላልግልዎታለን።</span></div>';return}
+  LIST=list;el.innerHTML=list.slice(0,shown).map(card).join('');moreBtn();
 }
-function setType(t){curType=t;document.getElementById('sSale').classList.toggle('on',t==='sale');document.getElementById('sRent').classList.toggle('on',t==='rent');view()}
+function setType(t){curType=t;document.getElementById('sSale').classList.toggle('on',t==='sale');document.getElementById('sRent').classList.toggle('on',t==='rent');fillFilters();view()}
 function filterPt(chip,p){document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});if(curPt===p){curPt='';view();return}chip.classList.add('on');curPt=p;view()}
 function enquire(title){document.getElementById('rWhat').value=title;document.getElementById('request').scrollIntoView({behavior:'smooth'});setTimeout(function(){document.getElementById('rName').focus()},500)}
 var sending=false;
@@ -135,8 +251,18 @@ function reqProp(){
     name:name,phone:phone,budget:document.getElementById('rBudget').value.trim(),
     listingRef:document.getElementById('rWhat').value.trim(),note:document.getElementById('rWhat').value.trim()})})
    .then(function(r){return r.json().catch(function(){return {}}).then(function(d){if(!r.ok)throw d;return d})}).then(function(){document.getElementById('reqInner').style.display='none';document.getElementById('reqOk').classList.add('show')})
-   .catch(function(d){sending=false;alert(d&&d.error==='phone'?'Please check the phone number · ስልክ ቁጥሩን ያረጋግጡ':d&&d.error==='too_many'?'Too many requests — please try again later · እባክዎ ትንሽ ቆይተው ይሞክሩ':'Error — please WhatsApp us')});
+   .catch(function(d){sending=false;alert(d&&d.error==='phone'?'Please check the phone number · ስልክ ቁጥሩን ያረጋግጡ':d&&d.error==='too_many'?'Too many requests — please try again later · እባክዎ ትንሽ ቆይተው ይሞክሩ':'Error — please Telegram us')});
 }
-fetch('/api/properties').then(function(r){return r.json()}).then(function(d){ALL=d.properties||[];view()}).catch(function(){view()});
-</script>  <script src="/static/bina-footer.js?v=9" defer></script>
+fetch('/api/properties').then(function(r){return r.json()}).then(function(d){ALL=d.properties||[];applyPreset();fillFilters();view();openShared()}).catch(function(){view()});
+// A link from WhatsApp/Telegram (bina.et/property#p-<slug>) opens that listing's tab and scrolls to it.
+// The Ask Bini box: opens the Bini chat (bina-assistant.js) with the question. Bini answers from the live listings
+// (search_properties) and his links (bina.et/property#p-...) open the card here.
+function askBini(m){var q=m||document.getElementById('askQ').value;if(!String(q).trim()){document.getElementById('askQ').focus();return}
+  if(window.biniAsk){window.biniAsk(q);if(!m)document.getElementById('askQ').value=''}else setTimeout(function(){askBini(q)},400)}
+window.addEventListener('hashchange',openShared);
+function openShared(){var h=decodeURIComponent(location.hash||'');if(h.indexOf('#p-')!==0)return;var s=h.slice(3).replace(/[.,;:!?)]+$/,''),p=ALL.filter(function(x){return x.slug===s})[0];if(!p)return;
+  if((p.listingType||'sale')!==curType)setType(p.listingType||'sale');var el=document.getElementById('p-'+s);if(!el){resetF();var ix=LIST.findIndex(function(x){return x.slug===s});if(ix>=shown){shown=Math.ceil((ix+1)/PAGE)*PAGE;view(true)}el=document.getElementById('p-'+s)}
+  document.querySelectorAll('.pc.hl').forEach(function(c){c.classList.remove('hl')});if(el){el.classList.add('hl');el.scrollIntoView({block:'center'})}}
+</script>  <script src="/static/bina-footer.js?v=10" defer></script>
+<script src="/static/bina-assistant.js?v=14" defer></script>
 </body></html>

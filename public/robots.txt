@@ -88,6 +88,9 @@ User-agent: Perplexity-User
 Allow: /
 
 # --- AI training crawlers: no ---
+# Except (Ibrahim, 28 Sep 2026): Gemini and Apple Intelligence may use the company, home, car and hotel pages -
+# Google-Extended and Applebot-Extended decide both training AND whether those assistants can answer with a page,
+# and every company on our list should be known to every AI. The jobs and tenders boards stay out.
 # Answering a question with our data and citing us is fine; taking the board to train on is not.
 User-agent: GPTBot
 Disallow: /
@@ -100,8 +103,22 @@ Disallow: /
 User-agent: CCBot
 Disallow: /
 User-agent: Google-Extended
+Allow: /companies/
+Allow: /real-estate-companies
+Allow: /car-dealers
+Allow: /property
+Allow: /cars
+Allow: /hotels
+Allow: /llms.txt
 Disallow: /
 User-agent: Applebot-Extended
+Allow: /companies/
+Allow: /real-estate-companies
+Allow: /car-dealers
+Allow: /property
+Allow: /cars
+Allow: /hotels
+Allow: /llms.txt
 Disallow: /
 User-agent: Meta-ExternalAgent
 Disallow: /

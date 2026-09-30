@@ -1,0 +1,5 @@
+# Security contact for bina.et (RFC 9116)
+Contact: mailto:ibrahim@gccdomestic.com
+Expires: 2027-09-23T00:00:00.000Z
+Preferred-Languages: en, am
+Canonical: https://bina.et/.well-known/security.txt

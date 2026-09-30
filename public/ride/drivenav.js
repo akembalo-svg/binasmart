@@ -39,7 +39,8 @@ window.DNav = (function () {
     if (m == null) return '';
     if (m < 30) return 'አሁን';
     if (m < 950) return 'በ' + (Math.round(m / 10) * 10) + ' ሜትር';
-    return 'በ' + (Math.round(m / 100) / 10) + ' ኪሎ ሜትር';
+    if (m < 5000) return 'በ' + (Math.round(m / 100) / 10) + ' ኪሎ ሜትር';
+    return 'በ' + Math.min(30, Math.round(m / 1000)) + ' ኪሎ ሜትር';
   }
   function distEn(m) {
     if (m == null) return '';

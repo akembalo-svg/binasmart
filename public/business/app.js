@@ -66,7 +66,13 @@
     if (b.dataset.t === 'prog') loadProgramme();
   });
 
+  // Opened from Bina Partner as /business?open=<id>: switch to that page first. The server only accepts
+  // a page this owner may run, so a wrong id simply leaves the current one open.
+  var OPEN = null; try { OPEN = new URLSearchParams(location.search).get('open'); } catch (e) {}
+  if (OPEN) { try { history.replaceState(null, '', location.pathname); } catch (e) {} }
+  function inApp() { try { return !!sessionStorage.getItem('bina_app') || matchMedia('(display-mode: standalone)').matches; } catch (e) { return false; } }
   function load() {
+    if (OPEN) { var o = OPEN; OPEN = null; return api('/api/business/switch', { id: o }).then(function () { load(); }); }
     api('/api/business/me').then(function (j) {
       if (!j.ok) { $('signin').hidden = false; $('app').hidden = true; if (tok) { tok = null; try { localStorage.removeItem('bs_owner'); } catch (e) {} } return; }
       ME = j; $('signin').hidden = true; $('app').hidden = false;
@@ -86,11 +92,25 @@
         ? '<b style="color:#065f46">✅ ተገናኝቷል · Linked — orders and requests arrive on Telegram.</b>'
         : '<a class="btn" style="display:inline-block;text-decoration:none" target="_blank" rel="noopener" href="https://t.me/bina_smart_bot?start=shop_' + j.shopId + '">✈️ በቴሌግራም አገናኝ · Connect Telegram</a>'
           + '<div class="sub" style="margin-top:6px">ከተጫኑ በኋላ በቦቱ ላይ Start ይንኩ። · Press Start in the bot, then reload this page.</div>');
-      $('qrImg').src = 'https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=10&data=' + encodeURIComponent(url);
+      $('qrImg').src = '/qr.svg?p=' + encodeURIComponent(url.replace(/^https?:\/\/[^\/]+/, '') || '/');
+      // a restaurant or a cafe also prints one card per table: /table-qr opens /restaurant/<name>?table=N
+      var tq = $('tqr');
+      if (tq && j.kind === 'shop' && j.shop && /RESTAURANT|CAFE/.test(j.shop.category || '')) {
+        tq.hidden = false;
+        var rs = String(j.shop.name || '').trim().toLowerCase().replace(/\s+/g, '-');
+        var setT = function () { $('tqrGo').href = '/table-qr?r=' + encodeURIComponent(rs) + '&name=' + encodeURIComponent(j.shop.name || '')
+          + '&am=' + encodeURIComponent(j.shop.nameAm || '') + '&n=' + Math.max(1, Math.min(80, parseInt($('tqrN').value, 10) || 10)); };
+        $('tqrN').oninput = setT; setT();
+      }
       $('copyUrl').onclick = function () { navigator.clipboard.writeText(url).then(function () { toast('ተቀድቷል · copied'); }); };
     });
   }
-  $('signOut').addEventListener('click', function () { api('/api/business/logout', {}).then(function () { tok = null; try { localStorage.removeItem('bs_owner'); } catch (e) {} location.reload(); }); });
+  $('signOut').addEventListener('click', function () { api('/api/business/logout', {}).then(function (j) {
+    tok = null; try { localStorage.removeItem('bs_owner'); } catch (e) {}
+    var done = function () { if (inApp()) location.href = '/partner'; else location.reload(); };
+    // Signed in with a bina.et account: end that too, or the reload opens the dashboard again.
+    if (j && j.account) fetch('/api/auth/sign-out', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}', credentials: 'same-origin' }).catch(function () {}).then(done); else done();
+  }); });
 
   // ---------------- my page ----------------
   function fillProfile(s, cats) {
