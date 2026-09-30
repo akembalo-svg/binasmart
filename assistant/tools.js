@@ -130,14 +130,7 @@ const DEFS = [
 const toOpenAI = () => DEFS.map(d => ({ type: 'function', function: d }));
 
 const HEALTH_SUBCITY = /^(bole|kirkos|arada|yeka|gulele|lideta|addis ketema|akaki|kality|kaliti|akaki kality|kolfe|kolfe keranio|nifas silk|nifas silk-lafto|lemi kura|ቦሌ|ቂርቆስ|አራዳ|የካ|ጉለሌ|ልደታ|አዲስ ከተማ|አቃቂ|ቃሊቲ|ኮልፌ|ንፋስ ስልክ|ለሚ ኩራ)(\s*(sub.?city|ክፍለ ከተማ|ክ\/ከተማ))?$/i;
-// Food with no directory hit (30 Sep 2026): the directory had no live restaurant and one cafe, so "cheap restaurant near
-// Piassa" and "lunch near Megenagna" were answered "none" over a city map with thousands. A known dish or cuisine word
-// filters by name; any other word ("cheap", "good") is dropped, because the map has no prices or ratings to test it on.
-const FOOD_RE = /restaurant|cafe|café|coffee|\bfood|\beat\b|lunch|dinner|breakfast|pizza|burger|kitfo|tibs|ምግብ|ምሳ|እራት|ቁርስ|ካፌ|ሬስቶራንት|ቡና ቤት|ክትፎ|ጥብስ|ልብላ|እንብላ/i;
-const DISH_WORDS = [['pizza', 'pizza', 'ፒዛ'], ['burger', 'burger', 'በርገር'], ['kitfo', 'kitfo', 'ክትፎ'], ['tibs', 'tibs', 'ጥብስ'], ['pasta', 'pasta', 'ፓስታ'],
-  ['fish', 'fish', 'አሳ'], ['chicken', 'chicken', 'ዶሮ'], ['shiro', 'shiro', 'ሽሮ'], ['juice', 'juice', 'ጭማቂ'], ['cake', 'cake', 'ኬክ'], ['pastry', 'pastry', 'ፓስትሪ'],
-  ['bakery', 'bakery', 'ዳቦ ቤት'], ['chinese', 'chinese', 'ቻይና'], ['indian', 'indian', 'ህንድ'], ['italian', 'italian', 'ጣሊያን'], ['arab', 'arab', 'ዓረብ'],
-  ['shawarma', 'shawarma', 'ሻዋርማ'], ['cultural', 'cultural', 'ባህላዊ'], ['traditional', 'traditional', 'ባህላዊ'], ['gurage', 'gurage', 'ጉራጌ']];
+const { FOOD_RE, findFood } = require('./food-map');   // the city-map fallback for food (also /api/places/food and the MCP)
 function inAddis(p) { return p && Number.isFinite(+p.lat) && Number.isFinite(+p.lng) && +p.lat >= ADDIS.latMin && +p.lat <= ADDIS.latMax && +p.lng >= ADDIS.lngMin && +p.lng <= ADDIS.lngMax; }
 const clean = p => ({ lat: +p.lat, lng: +p.lng, label: String(p.label || '').slice(0, 80) });
 // The model sometimes FLATTENS the two points (pickup_lat, pickup_lng, dropoff_lat, ...): measured 30 Sep 2026 on
@@ -212,29 +205,7 @@ function makeExecutor(ctx) {
     const hit = nearest(hits.filter(h => nameFits(label, h.label, h.nameAm)), G) || (G && hits[0] && distM(hits[0], G) <= GUESS_M ? hits[0] : null);
     return hit ? { lat: hit.lat, lng: hit.lng, label: hit.label || label } : g;
   }
-  async function mapFood(term, category, base) {
-    const G = ctx.gazetteer || require('../ride/gazetteer').shared();
-    const { AREA_GROUPS, squash } = require('./areas');
-    const k = squash(term), g = AREA_GROUPS.find(x => x.some(v => k.includes(squash(v))));
-    const dish = DISH_WORDS.find(([, en, am]) => new RegExp('\\b' + en + '|' + am, 'i').test(term));
-    if (!g && !dish) return { places: [] };   // "a good restaurant in Addis": ask where, as before
-    const opt = { kinds: category === 'CAFE' ? ['cafe'] : ['restaurant', 'fast food'], words: dish ? [dish[0]] : [], limit: 6 };
-    let near = null;
-    if (g) {
-      if (HEALTH_SUBCITY.test(g[0])) opt.sub = g[0];
-      else { const p = await require('./health-args').locate(g[0], f); if (p) { opt.lat = +p.lat; opt.lng = +p.lng; near = p.label || p.name || g[0]; } else opt.sub = null; }
-    }
-    if (opt.lat == null && !opt.sub && !dish) return { places: [] };   // the area could not be placed: no city-wide list
-    let hits = G.around(opt), unmatched = null;
-    // A restaurant question gets restaurants first: near Piassa the list was one restaurant and five cafes, and the
-    // model named the one (30 Sep 2026). Cafes fill in only when fewer than three restaurants are near.
-    if (category !== 'CAFE' && hits.length < 3) { const more = G.around(Object.assign({}, opt, { kinds: ['cafe'], limit: 6 - hits.length })); hits = hits.concat(more); }
-    if (!hits.length && dish && (opt.lat != null || opt.sub)) { hits = G.around(Object.assign({}, opt, { words: [] })); unmatched = dish[0]; }
-    return { near, unmatched: hits.length ? unmatched : null, places: hits.map(h => ({ name: h.label, nameAm: h.labelAm || null, kind: h.kind, area: h.sub || null,
-      distanceKm: h.m != null ? +(h.m / 1000).toFixed(1) : null,
-      map: 'https://www.openstreetmap.org/?mlat=' + h.lat + '&mlon=' + h.lng + '#map=18/' + h.lat + '/' + h.lng,
-      ride: base + '/ride?to=' + encodeURIComponent(h.label) + '&lat=' + h.lat + '&lng=' + h.lng })) };
-  }
+  const mapFood = (term, category, base) => findFood(term, category, { gazetteer: ctx.gazetteer, fetchImpl: f, base });
   const H = {
     async search_places({ q }) {
       const d = await api('GET', '/api/ride/search?q=' + encodeURIComponent(String(q || '').slice(0, 80)));

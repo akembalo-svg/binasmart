@@ -257,3 +257,28 @@ test('a claimed shop that says it is closed is reported closed, not hidden', asy
   const r = out(await tools(db).search_places({ query: 'shut' }));
   assert.equal(r.results[0].open_now, false, 'false is an answer; undefined is the absence of one');
 });
+
+// 1 Oct 2026: the directory's restaurants are seeded demo shops. A food search with no live shop gets the city map.
+test('search_places: a food search with only demo shops gets city-map places instead (via /api/places/food)', async () => {
+  const db = fakeDb((sql) => /FROM "Shop" s/.test(sql) ? [{ name: 'Bina Restaurant', category: 'RESTAURANT', status: 'demo', unit: 'G-01', building: 'Bina Grand Hotel', qrSlug: 'bina-grand' }] : []);
+  const seen = [];
+  const fetchImpl = async (u) => { seen.push(u); return { json: async () => ({ places: [{ name: 'Train house', nameAm: 'ትሬን ሃውስ', kind: 'restaurant', area: 'Arada', distanceKm: 0.1, lat: 9.0343, lng: 38.7546,
+    map: 'https://www.openstreetmap.org/?mlat=9.0343&mlon=38.7546', ride: 'https://bina.et/ride?to=Train%20house&lat=9.0343&lng=38.7546' }], note: 'From the city map (OpenStreetMap contributors). No phone, opening hours, prices.' }) }; };
+  const reg = {}; registerDirectoryTools({ registerTool: (n, _d, f) => { reg[n] = f; } }, { db, wrap, json, fetchImpl });
+  const r = out(await reg.search_places({ query: 'restaurant near Piassa', category: 'restaurant' }));
+  assert.match(seen[0], /\/api\/places\/food\?q=restaurant%20near%20Piassa&category=RESTAURANT$/);
+  assert.equal(r.results.some(x => x.kind === 'shop'), false, 'the demo shop is dropped next to real places');
+  const m = r.results.find(x => x.kind === 'map_place');
+  assert.equal(m.name, 'Train house'); assert.deepEqual(m.coords, { lat: 9.0343, lng: 38.7546 }); assert.equal(m.distance_km, 0.1);
+  assert.match(r.map_note, /No phone, opening hours, prices/);
+});
+
+test('search_places: a live shop, or a query that is not about food, never asks the city map', async () => {
+  let asked = 0; const fetchImpl = async () => { asked++; return { json: async () => ({ places: [] }) }; };
+  const live = fakeDb((sql) => /FROM "Shop" s/.test(sql) ? [{ name: 'Kaldis Coffee', category: 'CAFE', status: 'live', unit: 'G-3', building: 'JJ', qrSlug: 'jj' }] : []);
+  const reg = {}; registerDirectoryTools({ registerTool: (n, _d, f) => { reg[n] = f; } }, { db: live, wrap, json, fetchImpl });
+  await reg.search_places({ query: 'coffee', category: 'cafe' });
+  const none = fakeDb(() => []); const reg2 = {}; registerDirectoryTools({ registerTool: (n, _d, f) => { reg2[n] = f; } }, { db: none, wrap, json, fetchImpl });
+  await reg2.search_places({ query: 'Edna Mall' });
+  assert.equal(asked, 0);
+});

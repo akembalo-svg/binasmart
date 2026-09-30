@@ -89,6 +89,17 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     return { ok: true, results: await geo.searchPlaces(req.query.q, bias) };
   });
 
+  // Food places from the city map (assistant/food-map.js), for when the directory has no live shop: the MCP
+  // server's search_places asks here, so Bini, the site and other assistants answer food the same way (1 Oct 2026).
+  fastify.get('/api/places/food', async (req, reply) => {
+    if (!searchRL(clientIp(req))) return reply.code(429).send({ ok: false, error: 'slow_down' });
+    const food = require('../assistant/food-map');
+    const q = String(req.query.q || '').slice(0, 80), cat = String(req.query.category || '').toUpperCase();
+    const r = await food.findFood(q, /^(RESTAURANT|CAFE)$/.test(cat) ? cat : null).catch(() => ({ places: [] }));
+    return { ok: true, count: r.places.length, near: r.near || null, unmatched: r.unmatched || null, places: r.places,
+      note: r.places.length ? food.NOTE + (r.near ? ' Distances are from ' + r.near + '.' : '') : 'Nothing found: name an area (Bole, Piassa, Megenagna) or a dish (pizza, kitfo).' };
+  });
+
   // ---- Ask Bini: one sentence -> destination (+ tier, payment, for-someone-else), then the normal
   // quote path. The model extracts words; the geocoder resolves them; the fare engine prices them.
   // Bini is told never to state a price or a time, and the client shows only what the quote returns.

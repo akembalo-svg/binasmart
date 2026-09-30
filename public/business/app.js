@@ -33,7 +33,7 @@
   $('siGo').addEventListener('click', function () {
     $('siErr').textContent = '';
     api('/api/business/claim', { phone: $('inPhone').value.trim() }).then(function (j) {
-      if (!j.ok) { err('siErr', j); if (j.error === 'no_match') $('siErr').innerHTML += ' — <a href="/for-business">ይመዝገቡ →</a>'; return; }
+      if (!j.ok) { err('siErr', j); if (j.error === 'no_match') $('siErr').innerHTML += ' — <a href="/shop?bini=shop">ገና አልተመዘገቡም? ምርቶችና ቅናሾች በነፃ በቢኒ ይለጥፉ · Not listed yet? Post products and offers free with Bini →</a>'; return; }   // was a link back to /for-business, which has no sign-up (1 Oct 2026)
       claimId = j.claimId;
       if (j.sent) { $('codeBox').hidden = false; $('inCode').focus(); toast('ኮድ በቴሌግራም ተልኳል · code sent in Telegram'); }
       else { $('waitBox').hidden = false; $('codeBox').hidden = true; }

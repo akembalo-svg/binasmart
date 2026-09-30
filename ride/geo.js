@@ -79,6 +79,9 @@ function landmarkFor(q) {
 }
 
 
+// The demo hotel is a building with real coordinates and nothing behind them: never a ride destination.
+const isDemoBuilding = b => require('../hotels/rules').isDemo(b);
+
 function makeGeo({ routerUrl, fetchFn, prisma, gazetteer, ratings }) {
   const f = fetchFn || fetch;
   let lastRouteWarn = 0;
@@ -146,13 +149,15 @@ function makeGeo({ routerUrl, fetchFn, prisma, gazetteer, ratings }) {
     const [bs, shops] = await Promise.all([
       prisma.building.findMany({
         where: { lat: { not: null }, lng: { not: null }, OR: [{ name: { contains: like, mode: 'insensitive' } }, { nameAm: { contains: like } }] },
-        select: { name: true, nameAm: true, qrSlug: true, lat: true, lng: true, city: true }, take: 5 }),
+        select: { name: true, nameAm: true, qrSlug: true, lat: true, lng: true, city: true, subCity: true }, take: 5 }),
+      // Live shops only (30 Sep 2026): "restaurant" put the DEMO "Bina Restaurant" first, and 345 seeded demo shops
+      // could be picked as a ride destination - a real driver sent to a shop that does not exist.
       prisma.shop.findMany({
-        where: { tenancy: { active: true, unit: { building: { lat: { not: null }, lng: { not: null } } } }, OR: [{ name: { contains: like, mode: 'insensitive' } }, { nameAm: { contains: like } }] },
+        where: { status: 'live', tenancy: { active: true, unit: { building: { lat: { not: null }, lng: { not: null } } } }, OR: [{ name: { contains: like, mode: 'insensitive' } }, { nameAm: { contains: like } }] },
         include: { tenancy: { include: { unit: { include: { building: { select: { name: true, nameAm: true, qrSlug: true, lat: true, lng: true } } } } } } }, take: 5 })
     ]);
     const dir = [
-      ...bs.map(b => ({ kind: 'building', label: b.name, labelAm: b.nameAm, sub: b.city || 'Addis Ababa', lat: b.lat, lng: b.lng, slug: b.qrSlug })),
+      ...bs.filter(b => !isDemoBuilding(b)).map(b => ({ kind: 'building', label: b.name, labelAm: b.nameAm, sub: b.city || 'Addis Ababa', lat: b.lat, lng: b.lng, slug: b.qrSlug })),
       ...shops.map(s => { const b = s.tenancy.unit.building;
         return { kind: 'shop', label: s.name, labelAm: s.nameAm, sub: b.name + ' · ' + s.tenancy.unit.number, lat: b.lat, lng: b.lng, slug: b.qrSlug }; })
     ];

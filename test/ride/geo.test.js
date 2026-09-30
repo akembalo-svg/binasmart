@@ -163,3 +163,18 @@ test('the second batch of neighbourhood names resolves, including the one search
     assert.ok(haversineM(r[0], { lat, lng }) < 50, q + ' resolved to the wrong point');
   }
 });
+
+// 30 Sep 2026: "restaurant" put the DEMO "Bina Restaurant" first in the ride search.
+test('searchPlaces() never offers a demo shop or the demo hotel as a destination', async () => {
+  let shopWhere = null;
+  const prisma = {
+    building: { findMany: async () => [
+      { name: 'Bina Grand Hotel', subCity: 'Demo hotel - sample data', qrSlug: 'bina-grand', lat: 9.0054, lng: 38.7636, city: 'Addis Ababa' },
+      { name: 'Real Tower', subCity: 'Kirkos', qrSlug: 'real', lat: 9.01, lng: 38.76, city: 'Addis Ababa' }] },
+    shop: { findMany: async ({ where }) => { shopWhere = where; return []; } }
+  };
+  const geo = makeGeo({ routerUrl: 'http://x', fetchFn: async () => ({ json: async () => ({ features: [] }) }), prisma });
+  const res = await geo.searchPlaces('Bina');
+  assert.equal(shopWhere.status, 'live', 'only live shops are asked for');
+  assert.deepEqual(res.filter(r => r.kind === 'building').map(r => r.label), ['Real Tower']);
+});

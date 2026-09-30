@@ -56,12 +56,18 @@ const SQL = {
   booked: `SELECT "departmentId", COUNT(*)::int AS n FROM "Appointment" WHERE "buildingId" = $1 AND status <> 'CANCELLED' AND date >= $2 AND date < $3 GROUP BY "departmentId"`,
 };
 
-export function registerDirectoryTools(server, { db, wrap, json }) {
+// Food (1 Oct 2026): the directory has no live restaurant yet (the restaurants in it are seeded demo shops), so a
+// food search that finds no live shop asks the site for places on the city map (GET /api/places/food, the same
+// rule Bini's search_shops uses) instead of offering assistants only demo listings.
+const LOCAL = process.env.RIDE_API || 'http://127.0.0.1:4210';
+const FOOD = /restaurant|cafe|café|coffee|\bfood\b|\beat\b|lunch|dinner|breakfast|pizza|burger|kitfo|ምግብ|ካፌ|ሬስቶራንት|ክትፎ|ቡና ቤት/i;
+
+export function registerDirectoryTools(server, { db, wrap, json, fetchImpl }) {
   const guard = fn => async args => { try { return await fn(args); } catch (e) { console.error('[mcp/directory]', e.message); return toolError('The BinaSmart directory is temporarily unavailable. Try again shortly or browse https://bina.et.'); } };
 
   server.registerTool('search_places', {
     title: 'Search the BinaSmart directory',
-    description: 'Find buildings, hotels, hospitals and shops in Addis Ababa listed on BinaSmart (bina.et): cafés, restaurants, pharmacies, banks, gyms, salons, clinics, offices. Returns names (English + Amharic), building and unit, the phone only for shops that have claimed their listing, coordinates when known (usable as pickup/dropoff for quote_ride), and the bina.et page. Hotels and hospitals are flagged — use get_hotel_rooms / get_hospital_departments for details. For hospitals, clinics, dentists, labs and doctors anywhere in Addis Ababa, use search_health.',
+    description: 'Find buildings, hotels, hospitals and shops in Addis Ababa listed on BinaSmart (bina.et): cafés, restaurants, pharmacies, banks, gyms, salons, clinics, offices. Returns names (English + Amharic), building and unit, the phone only for shops that have claimed their listing, coordinates when known (usable as pickup/dropoff for quote_ride), and the bina.et page. Hotels and hospitals are flagged — use get_hotel_rooms / get_hospital_departments for details. For hospitals, clinics, dentists, labs and doctors anywhere in Addis Ababa, use search_health. For food (restaurants, cafes, a dish, "lunch near Megenagna") with no listed shop it returns map_place results from the city map: name, area, distance, coords and ride link, with no phone, hours, prices or menu (see map_note).',
     inputSchema: {
       query: z.string().min(1).max(80).describe('Name or part of a name, English or Amharic'),
       category: z.string().optional().describe('Shop category filter: ' + CATEGORIES.join(' | ')),
@@ -96,7 +102,19 @@ export function registerDirectoryTools(server, { db, wrap, json }) {
         building: r.building, building_am: r.buildingAm || undefined, unit: r.unit, coords: coords(r),
         url: r.category === 'RESTAURANT' ? `${BASE}/restaurant/${restaurantSlug(r.name)}` : buildingUrl(r) })),
     ];
-    return json({ count: results.length, results, note: results.length ? 'coords can be passed to quote_ride as "lat,lng".' : 'Nothing matched. Try a shorter query or a category.', source_url: `${BASE}/` });
+    let mapNote;
+    if (!s.rows.some(r => r.status !== 'demo') && (cat === 'restaurant' || cat === 'cafe' || FOOD.test(query))) {
+      const u = LOCAL + '/api/places/food?q=' + encodeURIComponent(query) + (cat === 'restaurant' || cat === 'cafe' ? '&category=' + cat.toUpperCase() : '');
+      const d = await (fetchImpl || fetch)(u, { headers: { accept: 'application/json' }, signal: AbortSignal.timeout(8000) }).then(r => r.json()).catch(() => null);
+      if (d && Array.isArray(d.places) && d.places.length) {
+        for (let i = results.length - 1; i >= 0; i--) if (results[i].kind === 'shop' && results[i].demo) results.splice(i, 1);   // demo shops add nothing next to real places
+        results.push(...d.places.map(p => ({ kind: 'map_place', name: p.name, name_am: p.nameAm || undefined, place_kind: p.kind, sub_city: p.area || undefined,
+          distance_km: p.distanceKm == null ? undefined : p.distanceKm, coords: p.lat != null ? { lat: p.lat, lng: p.lng } : undefined, map_url: p.map, ride_url: p.ride })));
+        mapNote = d.note;
+      }
+    }
+    return json({ count: results.length, results, note: results.length ? 'coords can be passed to quote_ride as "lat,lng".' : 'Nothing matched. Try a shorter query or a category.',
+      map_note: mapNote, source_url: `${BASE}/` });
   })));
 
   server.registerTool('list_events', {
