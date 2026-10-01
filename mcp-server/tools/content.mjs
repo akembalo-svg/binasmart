@@ -24,7 +24,7 @@ const SQL = {
               AND ($1::boolean = true OR deadline IS NULL OR deadline > now())
               AND ($2::text IS NULL OR title ILIKE $2 OR "titleAm" LIKE $2 OR org ILIKE $2 OR summary ILIKE $2)
               AND ($3::text IS NULL OR category ILIKE $3)
-            ORDER BY (deadline IS NULL), deadline ASC NULLS LAST, "publishedAt" DESC
+            ORDER BY CASE WHEN $5::boolean THEN "publishedAt" END DESC NULLS LAST, (deadline IS NULL), deadline ASC NULLS LAST, "publishedAt" DESC
             LIMIT $4`,
   tender: `SELECT slug, title, "titleAm", category, region, org, summary, "bodyHtml", deadline, budget, "sourceUrl", "sourceName", "publishedAt"
            FROM "Tender" WHERE slug = $1 AND published = true`,
@@ -79,10 +79,11 @@ export function registerContentTools(server, { db, wrap, json }) {
       category: z.string().max(40).optional().describe('Category filter, matched loosely: Supply / አቅርቦት, Construction / ግንባታ, Consultancy / ማማከር, Services / አገልግሎት, Transport / ትራንስፖርት, Disposal auction / ሽያጭ ጨረታ. Use list_tender_categories to see what is open now.'),
       include_closed: z.boolean().optional().describe('Include tenders whose deadline has passed (default false)'),
       limit: z.number().int().min(1).max(50).optional().describe('Max tenders, default 20'),
+      newest: z.boolean().optional().describe('Newest published first, for "new", "latest", "today" or "this week" (default: closing soonest first). Each tender has published_at: never call one new unless that date says so.'),
     },
     annotations: { readOnlyHint: true, openWorldHint: false },
-  }, wrap('list_tenders', guard(async ({ query, category, include_closed, limit }) => {
-    const { rows } = await db.query(SQL.tenders, [!!include_closed, query ? like(query) : null, category ? like(category) : null, limit || 20]);
+  }, wrap('list_tenders', guard(async ({ query, category, include_closed, limit, newest }) => {
+    const { rows } = await db.query(SQL.tenders, [!!include_closed, query ? like(query) : null, category ? like(category) : null, limit || 20, !!newest]);
     if (!rows.length) {
       return toolError(query || category
         ? `No ${include_closed ? '' : 'open '}tender matching that on BinaSmart. Try a shorter keyword, or browse ${BASE}/tenders.`

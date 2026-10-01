@@ -73,6 +73,25 @@ test('executor: places → quote → request needs confirmation and a valid phon
   assert.match((await run('nope', {})).error, /unknown_tool/);
 });
 
+test('tenders: "released today" means published today, newest first, each with its published date (1 Oct 2026)', async () => {
+  const seen = [];
+  const rows = [{ slug: 't1', title: 'Supply of laptops', org: 'Sample Bank', category: 'Supply', region: 'Addis Ababa', deadline: new Date('2026-10-20'), publishedAt: new Date('2026-10-01T05:00:00Z') }];
+  const prisma = { tender: { findMany: async args => { seen.push(args); return rows; }, count: async () => 10 } };
+  const run = makeExecutor({ base: 'http://x', fetchImpl: async () => ({ json: async () => ({}) }), prisma, memory: { persistent: false, touch: async () => {} }, handover: async () => {} });
+  const today = await run('search_tenders', { q: 'tenders released today' });
+  assert.deepEqual(seen[0].orderBy, [{ publishedAt: 'desc' }]);
+  assert.ok(seen[0].where.publishedAt && seen[0].where.publishedAt.gte instanceof Date, 'only those published since midnight in Addis');
+  assert.equal(seen[0].where.AND, undefined, 'the recency words are not searched as a keyword');
+  assert.equal(today.order, 'published today, newest first'); assert.equal(today.tenders[0].published, '2026-10-01');
+  assert.equal(today.total, 10); assert.match(today.note, /Showing 1 of 10 published today/);
+  await run('search_tenders', { q: 'laptop', newest: true });
+  assert.deepEqual(seen[1].orderBy, [{ publishedAt: 'desc' }]); assert.equal(seen[1].where.publishedAt, undefined); assert.ok(seen[1].where.AND, 'the keyword still filters');
+  const plain = await run('search_tenders', { q: 'laptop' });
+  assert.deepEqual(seen[2].orderBy, [{ deadline: { sort: 'asc', nulls: 'last' } }]); assert.equal(plain.order, 'closing soonest first');
+  await run('search_tenders', { q: 'የዛሬ ጨረታዎች' });
+  assert.ok(seen[3].where.publishedAt, 'Amharic "today" too');
+});
+
 test('memory: keys, profile text, miss and human detection, handover rate limit', async () => {
   assert.equal(userKey({ telegramId: 8096525984 }), 'tg:8096525984');
   assert.equal(userKey({ uid: 'w1abc_def' }), 'web:w1abc_def');

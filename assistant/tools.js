@@ -24,8 +24,8 @@ const DEFS = [
     parameters: { type: 'object', properties: { lat: { type: 'number' }, lng: { type: 'number' } } } },
   { name: 'cinema_programme', description: 'What is showing in Addis Ababa cinemas from today: venue, film, showtimes, dates. Data comes from the cinemas\' own programmes; if a film is not listed, say so.',
     parameters: { type: 'object', properties: { venue: { type: 'string', description: 'optional venue name filter' } } } },
-  { name: 'search_tenders', description: 'Search verified Ethiopian tenders that are still open (deadline not passed): by keyword, organisation or category. Returns title, organisation, category, deadline and the bina.et link. It also holds AUCTIONS and disposal sales (banks selling property, used vehicles, scrap, equipment): for "auction", "ሐራጅ" or "ሽያጭ ጨረታ" pass q "auction" - never say there are no auctions without searching.',
-    parameters: { type: 'object', properties: { q: { type: 'string' }, category: { type: 'string' } } } },
+  { name: 'search_tenders', description: 'Search verified Ethiopian tenders that are still open (deadline not passed): by keyword, organisation or category. Returns title, organisation, category, deadline and the bina.et link. It also holds AUCTIONS and disposal sales (banks selling property, used vehicles, scrap, equipment): for "auction", "ሐራጅ" or "ሽያጭ ጨረታ" pass q "auction" - never say there are no auctions without searching. Each result has its published date: for "new", "latest", "today" or "this week" pass newest true (today: only those published today), and never call a tender new or released today unless its published date says so.',
+    parameters: { type: 'object', properties: { q: { type: 'string' }, category: { type: 'string' }, newest: { type: 'boolean', description: 'true for new / latest / today / this week: newest published first' } } } },
   { name: 'search_shops', description: 'Find a restaurant, cafe, pharmacy, bank, salon, gym, clinic or shop in Addis Ababa from the BinaSmart directory, with its page link, area and rating. Use whenever someone asks where to eat, where to buy something, for a recommendation, or for a business by name or kind. It also returns products and offers that shop owners posted on bina.et/shop (item, price, shop, area, phone): offer those when they fit, with the shop\'s phone so the buyer calls the shop directly (no commission). When the directory has no shop for a food or cafe question it returns mapPlaces from the city map (OpenStreetMap contributors): name, area, distance, map and ride links only, no phone, hours, prices or ratings - say so, and never call them BinaSmart partners. NEVER name a place or product this tool did not return.',
     parameters: { type: 'object', properties: {
       q: { type: 'string', description: 'Name or words to match, in Amharic or English, e.g. "Kaldi", "pizza", "Bole"' },
@@ -269,18 +269,27 @@ function makeExecutor(ctx) {
       if (venue) { const v = String(venue).toLowerCase(); venues = venues.filter(x => (x.venue.name + ' ' + (x.venue.nameAm || '') + ' ' + (x.venue.area || '')).toLowerCase().includes(v)); }
       return { today: d.today, venues: venues.slice(0, 8).map(x => ({ venue: x.venue.name, area: x.venue.area, films: (x.films || []).slice(0, 8).map(p => ({ title: p.title, titleAm: p.titleAm, times: p.times, from: p.dateFrom, to: p.dateTo, hall: p.hallName })) })), bookUrl: (ctx.publicBase || 'https://bina.et') + '/cinema' };
     },
-    async search_tenders({ q, category }) {
+    async search_tenders({ q, category, newest }) {
       if (!ctx.prisma) return { error: 'tenders unavailable' };
-      const term = String(q || '').trim().slice(0, 60);
+      // "Tenders released today" (1 Oct 2026) got the six that close soonest, published 16-23 Sep, called "released today",
+      // while 10 were published that day. Recency words ask for the newest; "today" means since midnight in Addis (UTC+3).
+      const RECENT = /\b(today|todays|new|newest|latest|recent|recently|this week|released|just)\b|ዛሬ|አዲስ|የቅርብ|በቅርቡ/gi;
+      const raw = String(q || '').trim().slice(0, 60), wantsToday = /\btoday\b|ዛሬ/i.test(raw);
+      const recent = newest === true || /\b(today|todays|new|newest|latest|recent|recently|this week|released|just)\b|ዛሬ|አዲስ|የቅርብ|በቅርቡ/i.test(raw);
+      const term = raw.replace(RECENT, ' ').replace(/\b(tenders?|bids?)\b|ጨረታዎች|ጨረታ/gi, ' ').replace(/\s+/g, ' ').trim();
       const where = { published: true, OR: [{ deadline: null }, { deadline: { gte: new Date() } }] };
+      if (wantsToday) { const n = new Date(Date.now() + 3 * 3600000); where.publishedAt = { gte: new Date(Date.UTC(n.getUTCFullYear(), n.getUTCMonth(), n.getUTCDate()) - 3 * 3600000) }; }
       if (category) where.category = { contains: String(category).slice(0, 40), mode: 'insensitive' };
       // An auction is a kind of notice, not a word in every title: "Auction" was answered "I don't have information about
       // auctions" on 28 Sep 2026 while 11 auctions were open. Any auction word searches the whole sales-and-disposal kind.
       if (/auction|ሐራጅ|ሃራጅ|ሽያጭ ጨረታ|dispos/i.test(term)) where.AND = [{ OR: [{ title: { contains: 'auction', mode: 'insensitive' } }, { title: { contains: 'dispos', mode: 'insensitive' } },
         { titleAm: { contains: 'ሐራጅ' } }, { titleAm: { contains: 'ሽያጭ' } }, { category: { contains: 'dispos', mode: 'insensitive' } }] }];
       else if (term) where.AND = [{ OR: [{ title: { contains: term, mode: 'insensitive' } }, { titleAm: { contains: term, mode: 'insensitive' } }, { org: { contains: term, mode: 'insensitive' } }, { summary: { contains: term, mode: 'insensitive' } }] }];
-      const rows = await ctx.prisma.tender.findMany({ where, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }], take: 6 });
-      return { count: rows.length, tenders: rows.map(t => ({ title: t.titleAm || t.title, org: t.org, category: t.category, region: t.region, deadline: t.deadline ? t.deadline.toISOString().slice(0, 10) : null, url: (ctx.publicBase || 'https://bina.et') + '/tenders/' + t.slug })), allUrl: (ctx.publicBase || 'https://bina.et') + '/tenders' };
+      const rows = await ctx.prisma.tender.findMany({ where, orderBy: recent ? [{ publishedAt: 'desc' }] : [{ deadline: { sort: 'asc', nulls: 'last' } }], take: 6 });
+      // the whole count for "today", so a list of 6 is not read as "6 tenders today" (10 were)
+      const total = wantsToday && ctx.prisma.tender.count ? await ctx.prisma.tender.count({ where }).catch(() => null) : null;
+      return { count: rows.length, total: total != null ? total : undefined, note: total != null && total > rows.length ? 'Showing ' + rows.length + ' of ' + total + ' published today; the full list is on https://bina.et/tenders' : undefined,
+        order: recent ? (wantsToday ? 'published today, newest first' : 'newest published first') : 'closing soonest first', tenders: rows.map(t => ({ title: t.titleAm || t.title, org: t.org, category: t.category, region: t.region, published: t.publishedAt ? t.publishedAt.toISOString().slice(0, 10) : null, deadline: t.deadline ? t.deadline.toISOString().slice(0, 10) : null, url: (ctx.publicBase || 'https://bina.et') + '/tenders/' + t.slug })), allUrl: (ctx.publicBase || 'https://bina.et') + '/tenders' };
     },
     async search_shops({ q, category, limit }) {
       if (!ctx.prisma) return { error: 'directory unavailable' };
