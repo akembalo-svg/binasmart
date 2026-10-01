@@ -182,7 +182,8 @@ ${listingsCard(c, L)}
 </div><script src="/static/bina-assistant.js?v=14" defer></script><script src="/static/bina-footer.js?v=10" defer></script></body></html>`;
 }
 
-module.exports = function companyDirectory(fastify, { prisma, limiter }, done) {
+module.exports = function companyDirectory(fastify, { prisma, limiter, tell }, done) {
+  const tellTeam = tell || tellOwner;   // tests pass their own: no real Telegram
   let cache = { mtime: 0, list: [], bySlug: new Map() };
   function load() {
     let m = 0; try { m = fs.statSync(FILE).mtimeMs; } catch (e) { return cache; }
@@ -241,16 +242,17 @@ module.exports = function companyDirectory(fastify, { prisma, limiter }, done) {
     const c = isNew ? { slug: '', name: company, kind, sub: area, phones: [] } : load().bySlug.get(ref.replace(/^company:/, ''));
     if (!c) return reply.code(404).send({ ok: false, error: 'company' });
     const name = clean(b.name, 80), role = ['owner', 'manager', 'staff'].includes(b.role) ? b.role : 'owner', note = clean(b.note, 500);
-    const digits = String(b.phone || '').replace(/[^\d+]/g, '');
+    // An Ethiopian mobile or landline in one stored form, as hotel, restaurant and health claims (1 Oct 2026).
+    const digits = require('../health/directory').ethPhone(b.phone);
     if (name.length < 2) return reply.code(400).send({ ok: false, error: 'name' });
-    if (!/^\+?\d{9,15}$/.test(digits)) return reply.code(400).send({ ok: false, error: 'phone' });
+    if (!digits) return reply.code(400).send({ ok: false, error: 'phone' });
     const placeRef = isNew ? 'company-new:' + (kebab(company) || 'company') : 'company:' + c.slug;
     const dup = await prisma.hotelClaim.findFirst({ where: { placeRef, phone: digits, status: 'pending' } });
     if (dup) return { ok: true };
     const row = await prisma.hotelClaim.create({ data: { placeRef, placeName: c.name, slug: c.slug, name, role, phone: digits, note: note || null,
       token: crypto.randomBytes(16).toString('hex') } });
     const base = 'https://bina.et/ops/company-claims/' + row.id + '/';
-    await tellOwner((isNew ? '🆕 <b>Company NOT in the list</b> (add it by hand after the call) · ' : (c.kind === 'car_seller' ? '🚗' : '🏢') + ' <b>Company claim</b> · ')
+    await tellTeam((isNew ? '🆕 <b>Company NOT in the list</b> (add it by hand after the call) · ' : (c.kind === 'car_seller' ? '🚗' : '🏢') + ' <b>Company claim</b> · ')
       + esc(c.name) + ' (' + esc(KINDS[c.kind].en) + (c.sub ? ', ' + esc(c.sub) : '') + ')\n👤 ' + esc(name) + ' — ' + role + '\n📞 ' + esc(digits)
       + (c.phones && c.phones.length ? '\n☎ listing says: ' + esc(c.phones.join(', ')) : '') + (note ? '\n📝 ' + esc(note) : '')
       + '\n\nCall before approving.\n' + (isNew ? '' : '<a href="https://bina.et/companies/' + c.slug + '">listing</a> · ')
@@ -264,10 +266,12 @@ module.exports = function companyDirectory(fastify, { prisma, limiter }, done) {
     if (!c || !/^company(-new)?:/.test(c.placeRef) || t.length !== want.length || !crypto.timingSafeEqual(t, want)) return reply.code(404).send('not found');
     const action = req.params.action;
     if (!['approve', 'reject'].includes(action)) return reply.code(400).send('approve or reject');
+    // a second tap on approve does nothing (as hotel claims, 1 Oct 2026)
+    if (action === 'approve' && c.status === 'approved') return reply.type('text/html; charset=utf-8').send('<p style="font-family:system-ui;padding:40px">Already approved: ' + esc(c.placeName) + '</p>');
     await prisma.hotelClaim.update({ where: { id: c.id }, data: { status: action === 'approve' ? 'approved' : 'rejected', decidedAt: new Date() } });
     conf.at = 0;
     return reply.type('text/html; charset=utf-8').send('<p style="font-family:system-ui;padding:40px">' + (action === 'approve' ? '✅ Approved' : '❌ Rejected') + ': ' + esc(c.placeName) + ' — ' + esc(c.name) + '. '
-      + (c.slug ? '<a href="/companies/' + esc(c.slug) + '">listing</a>' : 'Not in the directory yet: add it by hand.') + '</p>');
+      + (c.slug ? '<a href="/companies/' + esc(c.slug) + '">listing</a>' : action === 'approve' ? 'Not in the directory yet: add it by hand.' : '') + '</p>');
   });
   done();
 };
