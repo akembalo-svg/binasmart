@@ -550,6 +550,7 @@ fastify.get('/for-insurers', async (req, reply) => reply.sendFile('for-insurers.
 // browser uses) and a schema.org ItemList, so search engines see the listings; the browser then takes over (filters,
 // Show more). Before this the cards arrived only by fetch, and a crawler saw "Loading…".
 const listingCards = require('./public/listing-cards.js');
+const browseAll = require('./market/browse-all.js'); // every child page as a plain link on the hubs (1 Oct 2026)
 const pageFiles = {};
 function withCards(file, gridOpen, cardsHtml, ld) {
   const f = path.join(__dirname, 'public', file), m = fs.statSync(f).mtimeMs;
@@ -571,7 +572,9 @@ fastify.get('/cars', async (req, reply) => {
     const L = require('./market/landing'), lu = (await L.urls().catch(() => [])).filter(l => l.car);
     return reply.type('text/html; charset=utf-8').send(withCards('cars.html', '<div class="grid" id="cars">', first.slice(0, 24).map(listingCards.carCard).join(''),
       itemList('Cars for sale in Addis Ababa', '/cars', first)).replace('<section class="wrap" id="request">', '<section class="wrap"><div class="band"><h2>Popular searches · ተፈላጊ</h2>'
-        + L.linksHtml('By make and kind', lu.map(l => ({ href: l.path, text: l.text, n: l.n }))) + '</div></section>\n<section class="wrap" id="request">'));
+        + L.linksHtml('By make and kind', lu.map(l => ({ href: l.path, text: l.text, n: l.n }))) + '</div></section>\n'
+        + browseAll.render('All cars on BinaSmart', 'ሁሉም መኪኖች', '/cars', browseAll.groups(first.filter(browseAll.fresh), c => c.make, c => c.title))
+        + '<section class="wrap" id="request">'));
   } catch (e) { req.log.error(e); return reply.sendFile('cars.html'); }
 });
 fastify.get('/property', async (req, reply) => {
@@ -582,7 +585,9 @@ fastify.get('/property', async (req, reply) => {
     return reply.type('text/html; charset=utf-8').send(withCards('property.html', '<div class="grid" id="props">', sale.slice(0, 24).map(listingCards.propertyCard).join(''),
       itemList('Homes, land and shops for sale and rent in Addis Ababa', '/property', props)).replace('<section class="wrap" id="request">', '<section class="wrap"><div class="band"><h2>Popular searches · ተፈላጊ</h2>'
         + L.linksHtml('Homes for sale', lu.filter(l => l.lt === 'sale').map(l => ({ href: l.path, text: l.text.replace('Homes for sale in ', ''), n: l.n })))
-        + L.linksHtml('Homes for rent', lu.filter(l => l.lt === 'rent').map(l => ({ href: l.path, text: l.text.replace('Homes for rent in ', ''), n: l.n }))) + '</div></section>\n<section class="wrap" id="request">'));
+        + L.linksHtml('Homes for rent', lu.filter(l => l.lt === 'rent').map(l => ({ href: l.path, text: l.text.replace('Homes for rent in ', ''), n: l.n }))) + '</div></section>\n'
+        + browseAll.render('All homes on BinaSmart', 'ሁሉም ቤቶች', '/property', browseAll.groups(props.filter(browseAll.fresh), p => ((p.listingType || 'sale') === 'rent' ? 'For rent' : 'For sale') + ' \u00b7 ' + (p.agency || 'Owner / other'), p => p.title))
+        + '<section class="wrap" id="request">'));
   } catch (e) { req.log.error(e); return reply.sendFile('property.html'); }
 });
 // What a listing shows, and nothing else. dealerPhone is deliberately absent: cars.html never reads
@@ -1938,7 +1943,8 @@ fastify.get('/hotels', async (req, reply) => {
     const cards = require('./public/hotel-cards.js');
     const places = cards.sortHotels(await require('./hotels/directory').cardPlaces(), ''), first = places.slice(0, 24);
     return reply.type('text/html; charset=utf-8').send(withCards('hotels.html', '<div class="dir hg" id="dir">', first.map(cards.hotelCard).join(''),
-      itemList('Places to stay in Addis Ababa', '/hotels', first.map(p => ({ slug: p.slug, title: p.name })))));
+      itemList('Places to stay in Addis Ababa', '/hotels', first.map(p => ({ slug: p.slug, title: p.name }))))
+      .replace('<p class="attr">From the city map', browseAll.render('All places to stay on BinaSmart', 'ሁሉም ሆቴሎች', '/hotels', browseAll.groups((require('./hotels/directory').findableList || (() => []))(), p => p.sub || 'Addis Ababa', p => p.name)) + '<p class="attr">From the city map'));
   } catch (e) { req.log.error(e); return reply.sendFile('hotels.html'); }
 });
 // Every building that has at least one active room type is a hotel on BinaSmart.

@@ -13,7 +13,8 @@
 // Stored in /root/storage/restaurants/entries.json (a few a day, one process writes).
 
 const fs = require('fs'), path = require('path'), crypto = require('crypto');
-const H = require('../health/directory');   // esc, clean, kebab, landlines, ethPhone, SUB_AM, tokEq: one set of helpers
+const H = require('../health/directory');
+const browseAll = require('../market/browse-all.js'); // every place as a plain link on the hub (1 Oct 2026)   // esc, clean, kebab, landlines, ethPhone, SUB_AM, tokEq: one set of helpers
 const { esc, clean, kebab, landlines, ethPhone, SUB_AM, tokEq } = H;
 const OSM = () => process.env.RESTAURANTS_OSM_FILE || '/root/storage/osm-addis-latest.json';
 const STORE = () => process.env.RESTAURANTS_FILE || '/root/storage/restaurants/entries.json';
@@ -143,6 +144,7 @@ module.exports = function restaurantDirectory(fastify, { limiter, tell }, done) 
       + '<main class="w" id="all"><div class="fl" id="hk"><button class="on" data-k="">All · ሁሉም</button><button data-k="restaurant">🍽️ Restaurants</button><button data-k="cafe">☕ Cafés</button><button data-k="fast_food">🍔 Fast food</button></div>'
       + '<h2 class="h2 rv">Restaurants and cafés<span class="am">ምግብ ቤቶችና ካፌዎች</span></h2><div class="fg" id="fg">' + top.map(card).join('') + '</div>'
       + '<button class="more" id="more" data-n="' + F.length + '">Show all ' + F.length + ' places · ሁሉንም አሳይ</button><div class="none" id="none" hidden>Nothing matches. Try another spelling, an area or a dish.</div>'
+      + browseAll.render('All restaurants and cafés on BinaSmart', 'ሁሉም ምግብ ቤቶች', '/restaurants', browseAll.groups(F.filter(findable), f => f.sub || 'Addis Ababa', f => f.name))
       + '<section class="joinb rv" id="own"><div><h2>Own a restaurant or café?<span class="am">ምግብ ቤት ወይም ካፌ አለዎት?</span></h2><p>Find your place above, open its page and press <b>Claim this page</b>. Bini asks for your number, hours and dishes; our team calls to confirm before anything shows. Free, no commission.</p></div>'
       + '<div class="jb"><a class="btn" href="#all" onclick="document.getElementById(\'hq\').focus();return false">🔎 Find my restaurant</a><a class="btn lite" href="/shop?bini=shop">🏷 Post a dish or offer</a></div></section></main>'
       + FOOT;
