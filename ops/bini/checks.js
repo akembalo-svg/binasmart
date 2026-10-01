@@ -24,8 +24,9 @@ const OROMO_HINT = /\b(jira|jirta|dha|isin|isinitti|gatii|gatiin|imala|imalaa|da
 
 // Every /path that exists on the site: static html in public/ + dynamic routes we know.
 // Server-rendered pages with a slug (hotels/directory.js, property, cars, jobs, company directory) and /llms.txt,
-// which pathsIn reads as "/llms" because it stops at the dot.
-const DYNAMIC_PAGE = /^\/(hotels|hotel|property|cars|employer|jobs|job|tenders|tender|news|companies|real-estate-companies|car-dealers)(\/[a-z0-9][a-z0-9\-_]*)?$|^\/llms$/i;
+// which pathsIn reads as "/llms" because it stops at the dot. health and restaurants (30 Sep / 1 Oct 2026) are server-rendered
+// directories too: the 1 Oct nightly run failed a correct answer on /health/<slug> as an "unknown link".
+const DYNAMIC_PAGE = /^\/(hotels|hotel|property|cars|employer|jobs|job|tenders|tender|news|companies|real-estate-companies|car-dealers|health|restaurants|shop)(\/[a-z0-9][a-z0-9\-_]*)?$|^\/llms$/i;
 function knownPaths(root) {
   const set = new Set(['/', '/ride', '/ride?pool=1', '/pool', '/drive', '/airport', '/hotels', '/watch', '/cinema', '/tenders', '/news', '/guides', '/ai', '/mcp', '/owner', '/nav', '/business', '/property', '/cars', '/insurance', '/flights', '/travel', '/support', '/llms.txt']);
   try { for (const f of fs.readdirSync(path.join(root, 'public'))) if (f.endsWith('.html')) set.add('/' + f.replace(/\.html$/, '')); } catch (e) { /* no public dir in tests */ }

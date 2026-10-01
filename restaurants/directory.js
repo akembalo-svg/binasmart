@@ -82,7 +82,8 @@ function placeOut(p, L) {
   const mine = (L || live()).filter(e => e.ref === p.ref).sort((a, b) => stamp(b).localeCompare(stamp(a)));
   const top = mine[0] || {};
   return Object.assign({}, p, { phones: [...new Set([top.publicPhone].filter(Boolean).concat(p.phones))], hours: top.hours || p.hours || '',
-    hoursFromOwner: !!top.hours, dishes: top.dishes || [], about: top.about || '', confirmed: mine.length > 0 });
+    hoursFromOwner: !!top.hours, dishes: top.dishes || [], about: top.about || '', confirmed: mine.length > 0,
+    tableOrders: !!(top.ordersOn && (top.dishes || []).length) });   // the owner switched on table QR ordering (restaurants/orders.js)
 }
 // Indexed only with something to say beyond a name on a map: a number, a website, a cuisine, or the owner's word.
 const findable = f => !f.generic && (f.confirmed || f.phones.length > 0 || !!f.website || f.cuisine.length > 0);
@@ -106,7 +107,7 @@ const HEAD = (title, desc, canon, extra) => `<!DOCTYPE html><html lang="en"><hea
 <link rel="icon" href="/icon-32.png"><link rel="stylesheet" href="/static/fonts/fonts.css?v=2"><link rel="stylesheet" href="/static/restaurants.css?v=1"><script>document.documentElement.classList.add('js')</script>${extra || ''}</head><body>`;
 const TOP = '<header class="top"><div class="w"><a class="brand" href="/restaurants"><i>🍽</i>BinaSmart <small>Restaurants · ምግብ ቤቶች</small></a><nav><a href="/restaurants#all">All places</a><a href="/shop">Offers</a></nav><a class="join" href="/restaurants#own">Own one?</a></div></header>';
 const FOOT = '<footer class="foot w">BinaSmart Restaurants · <span class="am">ቢናስማርት ምግብ ቤቶች</span><br>Places from the city map (© OpenStreetMap contributors, ODbL); phone, hours and dishes from the restaurants themselves, checked by our team. We do not deliver food or take payments.<br><a href="/">bina.et</a></footer>'
-  + '<script src="/static/bina-assistant.js?v=15" defer></script><script src="/static/restaurants.js?v=1" defer></script></body></html>';
+  + '<script src="/static/bina-assistant.js?v=16" defer></script><script src="/static/restaurants.js?v=1" defer></script></body></html>';
 const ld = o => '<script type="application/ld+json">' + JSON.stringify(o).replace(/</g, '\\u003c') + '</script>';
 const kindChip = k => { const K = KINDS[k] || KINDS.restaurant; return K[0] + ' ' + K[1] + ' · <span class="am">' + K[2] + '</span>'; };
 const card = f => '<a class="fc rv" href="/restaurants/' + esc(f.slug) + '" data-k="' + f.kind + '" data-q="' + esc((f.name + ' ' + f.nameAm + ' ' + f.sub + ' ' + (KINDS[f.kind] || KINDS.restaurant)[1] + ' ' + f.cuisine.join(' ')).toLowerCase()) + '">'
@@ -168,13 +169,13 @@ module.exports = function restaurantDirectory(fastify, { limiter, tell }, done) 
       + TOP + '<section class="cov"><div class="bl b1"></div></section>'
       + '<main class="w"><div class="card rv in"><span class="kb">' + kindChip(f.kind) + '</span><h1>' + esc(f.name) + '</h1>' + (f.nameAm ? '<div class="an am">' + esc(f.nameAm) + '</div>' : '')
       + '<div class="chips">' + (f.sub ? '<span>📍 ' + esc(f.sub) + (f.subAm ? ' · <span class="am">' + esc(f.subAm) + '</span>' : '') + '</span>' : '') + f.cuisine.map(c => '<span>🍴 ' + esc(c) + '</span>').join('')
-      + (f.hours ? '<span>🕐 ' + esc(f.hours) + (f.hoursFromOwner ? '' : ' (map)') + '</span>' : '') + (f.confirmed ? '<span class="g">✓ Confirmed by the restaurant</span>' : '') + '</div>'
+      + (f.hours ? '<span>🕐 ' + esc(f.hours) + (f.hoursFromOwner ? '' : ' (map)') + '</span>' : '') + (f.confirmed ? '<span class="g">✓ Confirmed by the restaurant</span>' : '') + (f.tableOrders ? '<span class="g">🪑 Order from your table</span>' : '') + '</div>'
       + '<div class="acts">' + (f.phones[0] ? '<a class="btn" href="tel:' + esc(f.phones[0].replace(/[^\d+]/g, '')) + '">📞 Call · ይደውሉ</a>' : '') + '<a class="btn lite" href="' + esc(map) + '" target="_blank" rel="noopener">🗺 Map</a>'
       + '<a class="btn lite" href="/ride?to=' + encodeURIComponent(f.name) + '&lat=' + f.lat + '&lng=' + f.lng + '">🚕 Ride there</a>' + (f.website ? '<a class="btn lite" href="' + esc(f.website) + '" target="_blank" rel="nofollow noopener">🌐 Website</a>' : '') + '</div></div>'
       + (f.about ? '<p class="about rv">' + esc(f.about).replace(/\n+/g, '<br>') + '</p>' : '')
-      + '<h2 class="h2 rv">Dishes<span class="am">ምግቦች</span></h2>' + (f.dishes.length ? '<div class="dishes">' + f.dishes.map(d => '<div class="dish rv"><b>' + esc(d.name) + '</b>' + (d.price ? '<span>' + esc(d.price) + '</span>' : '') + '</div>').join('') + '</div><p class="muted">Prices as sent by the restaurant. Call to check before you go.</p>'
+      + '<h2 class="h2 rv">Dishes<span class="am">ምግቦች</span></h2>' + (f.dishes.length ? '<div class="dishes">' + f.dishes.map(d => '<div class="dish rv"><b>' + esc(d.name) + '</b>' + (d.price ? '<span>' + esc(d.price) + '</span>' : '') + '</div>').join('') + '</div><p class="muted">Prices as sent by the restaurant. Call to check before you go.' + (f.tableOrders ? ' At the restaurant, scan the QR card on your table to order; you pay at the table. · በጠረጴዛዎ ያለውን QR ቃኝተው ይዘዙ።' : '') + '</p>'
         : '<p class="muted rv">This ' + esc(K[1].toLowerCase()) + ' has not added its dishes yet.</p>')
-      + '<section class="joinb rv"><div><h2>Is this your ' + esc(K[1].toLowerCase()) + '?<span class="am">ይህ የእርስዎ ነው?</span></h2><p>Claim this page free: add the number to call, your hours and your dishes with prices. Bini asks the questions; our team calls to confirm before anything shows. No commission.</p></div>'
+      + '<section class="joinb rv"><div><h2>Is this your ' + esc(K[1].toLowerCase()) + '?<span class="am">ይህ የእርስዎ ነው?</span></h2><p>Claim this page free: add the number to call, your hours and your dishes with prices. Bini asks the questions; our team calls to confirm before anything shows. Then, if you like, guests can order from their table with free QR cards. No commission.</p></div>'
       + '<div class="jb"><a class="btn" href="?bini=restaurant" rel="nofollow">🔑 Claim this page · ገጹን ይያዙ</a><a class="btn lite" href="/restaurants/dashboard" rel="nofollow">Already confirmed? Dashboard →</a></div></section>'
       + (near.length ? '<h2 class="h2 rv">Nearby<span class="am">በአቅራቢያ</span></h2><div class="fg">' + near.map(x => card(placeOut(x, L)).replace('</b>', '</b><small>' + (x.d < 1 ? Math.round(x.d * 1000) + ' m' : x.d.toFixed(1) + ' km') + '</small>')).join('') + '</div>' : '')
       + '<p class="src">From the city map (© OpenStreetMap contributors, ODbL)' + (f.confirmed ? '; the number, hours and dishes from the restaurant, checked by BinaSmart' : '') + '. Call before you go. BinaSmart does not deliver food or take payments.</p></main>'

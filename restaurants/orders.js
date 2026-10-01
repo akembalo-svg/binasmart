@@ -8,6 +8,7 @@
 //   GET  /restaurants/:slug/menu?table=N             the menu (and the order sheet when ordering is on)
 //   GET  /restaurants/:slug/qr?n=&from=              printable table cards (A4, 4 per page)
 //   POST /api/restaurants/:slug/order                {table, items:[{i, qty}], name, note}
+//   POST /api/restaurants/:slug/call                 {table, kind: waiter|bill}: "call the waiter" / "bring the bill"
 //   GET  /api/restaurants/mine/:id/orders            the owner's orders (newest first)
 //   POST /api/restaurants/mine/:id/orders/:oid       {status: seen|done}
 //   POST /api/restaurants/mine/:id/settings          {ordersOn}
@@ -50,7 +51,7 @@ const PAGE = (title, body, extra) => `<!DOCTYPE html><html lang="en"><head><meta
 
 module.exports = function restaurantOrders(fastify, { limiter, tell, send }, done) {
   const notifyTeam = tell || R.tellTeam, sendTg = send || sendTelegram;   // tests pass their own send: no real Telegram
-  const orderRL = limiter(600000, 6), placeRL = limiter(3600000, 80), editRL = limiter(3600000, 120);
+  const orderRL = limiter(600000, 6), placeRL = limiter(3600000, 80), editRL = limiter(3600000, 120), callRL = limiter(600000, 8);
   const who = req => (req.authUser && req.authUser.id ? req.authUser : null);
   const ipOf = req => String(req.headers['x-real-ip'] || req.ip || '');
   const owned = (S, id, uid) => S.entries.find(e => e.id === String(id || '').slice(0, 20) && e.ownerUserId === uid && ['live', 'hidden'].includes(e.status));
@@ -68,6 +69,7 @@ module.exports = function restaurantOrders(fastify, { limiter, tell, send }, don
       + (on ? '<span class="qty"><button type="button" class="m" aria-label="less">−</button><i>0</i><button type="button" class="p" aria-label="more">+</button></span>' : '') + '</div>').join('');
     const body = '<header class="top"><div class="w"><a class="brand" href="/restaurants/' + esc(p.slug) + '"><i>🍽</i>' + esc(p.name) + (p.nameAm ? ' <small class="am">' + esc(p.nameAm) + '</small>' : '') + '</a>' + (table ? '<span class="join">🪑 Table ' + table + '</span>' : '') + '</div></header>'
       + '<main class="w" style="max-width:640px;padding-top:18px;padding-bottom:120px"><h1 style="font-size:24px;margin:4px 0">Menu · <span class="am">ሜኑ</span></h1><p class="muted">' + (on ? 'Choose your dishes and send the order. You pay at your table. · ይምረጡ፣ ይላኩ፣ በጠረጴዛዎ ይክፈሉ።' : 'Prices from the restaurant. Order with the waiter. · ከአስተናጋጁ ያዙ።') + '</p>'
+      + (on ? '<div class="calls"><button type="button" data-k="waiter">🙋 Call the waiter · አስተናጋጅ</button><button type="button" data-k="bill">🧾 Bring the bill · ሂሳብ</button></div><p class="muted" id="cmsg" hidden></p>' : '')
       + '<div class="dishes">' + rows + '</div>'
       + (on ? '<label style="display:block;font-weight:600;margin:16px 0 4px">Note for the kitchen (optional) · ማስታወሻ</label><input id="note" maxlength="140" style="width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--ln);border-radius:12px">'
         + (table ? '' : '<label style="display:block;font-weight:600;margin:12px 0 4px">Table number · የጠረጴዛ ቁጥር</label><input id="tb" inputmode="numeric" maxlength="3" style="width:120px;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--ln);border-radius:12px">') : '')
@@ -75,10 +77,14 @@ module.exports = function restaurantOrders(fastify, { limiter, tell, send }, don
       + (on ? '<div id="bar" hidden style="position:fixed;left:0;right:0;bottom:0;background:var(--b);color:#fff;padding:14px 16px calc(14px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:700"><span id="sum"></span><button id="send" style="border:0;background:#fff;color:var(--b);font:inherit;font-weight:800;padding:12px 16px;border-radius:12px">Send order · ላክ</button></div>'
         + '<script>(function(){var T=' + table + ',S="' + esc(p.slug) + '",q={};function sum(){var n=0,t=0,un=false;[].forEach.call(document.querySelectorAll(".dish"),function(d){var k=q[d.getAttribute("data-i")]||0;d.querySelector("i").textContent=k;n+=k;var pr=parseFloat(d.getAttribute("data-p"));if(k){if(pr)t+=pr*k;else un=true;}});var b=document.getElementById("bar");b.hidden=!n;document.getElementById("sum").textContent=n+" · "+(t?t.toLocaleString()+" ETB":"")+(un?" + ?":"");}'
         + 'document.addEventListener("click",function(e){var d=e.target.closest(".dish");if(!d||!e.target.matches("button"))return;var i=d.getAttribute("data-i");q[i]=Math.max(0,Math.min(20,(q[i]||0)+(e.target.classList.contains("p")?1:-1)));sum();});'
-        + 'document.getElementById("send").addEventListener("click",function(){var b=this,tb=T||parseInt((document.getElementById("tb")||{}).value,10)||0;if(!tb){alert("Please type your table number · የጠረጴዛ ቁጥር ያስገቡ");return;}var items=Object.keys(q).filter(function(i){return q[i]>0}).map(function(i){return{i:+i,qty:q[i]}});b.disabled=true;'
+        + 'function tbl(){return T||parseInt((document.getElementById("tb")||{}).value,10)||0}'
+        + '[].forEach.call(document.querySelectorAll(".calls button"),function(b){b.addEventListener("click",function(){var tb=tbl(),m=document.getElementById("cmsg");if(!tb){alert("Please type your table number · የጠረጴዛ ቁጥር ያስገቡ");return;}b.disabled=true;'
+        + 'fetch("/api/restaurants/"+S+"/call",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({table:tb,kind:b.getAttribute("data-k")})}).then(function(r){return r.json()}).then(function(j){m.hidden=false;m.textContent=j.ok?"✓ Sent. Someone will come to table "+tb+". · ተልኳል።":(j.error==="slow_down"?"Please wait a moment.":"Could not send. Please wave to the staff.");setTimeout(function(){b.disabled=false},j.ok?60000:3000);}).catch(function(){b.disabled=false;});});});'
+        + 'document.getElementById("send").addEventListener("click",function(){var b=this,tb=tbl();if(!tb){alert("Please type your table number · የጠረጴዛ ቁጥር ያስገቡ");return;}var items=Object.keys(q).filter(function(i){return q[i]>0}).map(function(i){return{i:+i,qty:q[i]}});b.disabled=true;'
         + 'fetch("/api/restaurants/"+S+"/order",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({table:tb,items:items,note:(document.getElementById("note")||{}).value||""})}).then(function(r){return r.json()}).then(function(j){if(j.ok){document.querySelector("main").innerHTML="<div class=\\"card\\" style=\\"margin-top:30px;text-align:center\\"><div style=\\"font-size:56px\\">✓</div><h1>Order sent · ተልኳል</h1><p>Order "+j.code+" · Table "+tb+"</p><p class=\\"muted\\">The restaurant has it. Pay at your table. · በጠረጴዛዎ ይክፈሉ።</p></div>";document.getElementById("bar").hidden=true;}else{b.disabled=false;alert(j.error==="off"?"Ordering is off right now. Please ask the waiter.":j.error==="slow_down"?"Please wait a moment and try again.":"Could not send. Please ask the waiter.");}}).catch(function(){b.disabled=false;alert("Could not send. Please ask the waiter.");});});})();</script>' : '');
     const css = '<style>.dish{align-items:center}.dish>span:first-child{color:var(--ink);font-weight:400;white-space:normal}.dish small{color:var(--b);font-weight:700;font-size:15px}'
-      + '.qty{display:flex;align-items:center;gap:10px}.qty button{width:38px;height:38px;border-radius:50%;border:1px solid var(--b);background:#fff;color:var(--b);font-size:20px;font-weight:700;cursor:pointer}.qty i{font-style:normal;min-width:18px;text-align:center;color:var(--ink);font-weight:700}</style>';
+      + '.qty{display:flex;align-items:center;gap:10px}.qty button{width:38px;height:38px;border-radius:50%;border:1px solid var(--b);background:#fff;color:var(--b);font-size:20px;font-weight:700;cursor:pointer}.qty i{font-style:normal;min-width:18px;text-align:center;color:var(--ink);font-weight:700}'
+      + '.calls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.calls button{border:1px solid var(--b);background:#fff;color:var(--b);font:inherit;font-weight:700;padding:12px 8px;border-radius:14px;cursor:pointer}.calls button:disabled{opacity:.5}</style>';
     return reply.type('text/html; charset=utf-8').send(PAGE(p.name + ' · Menu | BinaSmart', body, css));
   });
 
@@ -122,6 +128,27 @@ module.exports = function restaurantOrders(fastify, { limiter, tell, send }, don
     const sent = await sendTg(E.tgChatId, text).catch(() => false);
     o.telegram = sent; writeOrders(Object.assign(O, { orders: O.orders.map(x => (x.id === o.id ? o : x)) }));
     return { ok: true, code: o.code, total };
+  });
+
+  // ---- "call the waiter" / "bring the bill" from the table (same switch as ordering) ----
+  fastify.post('/api/restaurants/:slug/call', { bodyLimit: 1024 }, async (req, reply) => {
+    const p = R.places().bySlug.get(String(req.params.slug));
+    if (!p) return reply.code(404).send({ ok: false, error: 'not_found' });
+    const b = req.body || {}, table = parseInt(b.table, 10), kind = String(b.kind || '');
+    if (!['waiter', 'bill'].includes(kind)) return reply.code(400).send({ ok: false, error: 'kind' });
+    if (!(table >= 1 && table <= 500)) return reply.code(400).send({ ok: false, error: 'table' });
+    if (!callRL('ip:' + ipOf(req)) || !placeRL('p:' + p.ref)) return reply.code(429).send({ ok: false, error: 'slow_down' });
+    const { E } = entryFor(p);
+    if (!E || !E.ordersOn || !(E.dishes || []).length) return reply.code(400).send({ ok: false, error: 'off' });
+    const O = readOrders(), now = Date.now();
+    // a second tap while the first is still open is the same call: no second Telegram
+    const open = O.orders.find(o => o.type === 'call' && o.entryId === E.id && o.table === table && o.kind === kind && o.status === 'new' && now - Date.parse(o.createdAt) < 120000);
+    if (open) return { ok: true, duplicate: true };
+    const c = { id: crypto.randomBytes(5).toString('hex'), type: 'call', kind, entryId: E.id, ref: E.ref, table, items: [], total: 0, createdAt: new Date().toISOString(), status: 'new' };
+    O.orders.push(c); writeOrders(O);
+    c.telegram = await sendTg(E.tgChatId, (kind === 'bill' ? '🧾 Table ' + table + ' asks for the bill.' : '🙋 Table ' + table + ' is calling the waiter.') + '\nDashboard: bina.et/restaurants/dashboard').catch(() => false);
+    writeOrders(Object.assign(O, { orders: O.orders.map(x => (x.id === c.id ? c : x)) }));
+    return { ok: true };
   });
 
   // ---- the owner's side (signed in, as in restaurants/dashboard.js) ----

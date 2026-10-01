@@ -14,7 +14,8 @@ const DISH_WORDS = [['pizza', 'pizza', 'ፒዛ'], ['burger', 'burger', 'በር�
 // The sub-cities, as AREA_GROUPS names them (lower case): these filter by sub-city; any other area becomes a point.
 const SUBCITY = /^(bole|kirkos|arada|yeka|gulele|lideta|addis ketema|akaki|kality|kaliti|akaki kality|kolfe|kolfe keranio|nifas silk|nifas silk-lafto|lemi kura)$/i;
 const NOTE = 'From the city map (OpenStreetMap contributors), not the BinaSmart directory: names, area, distance, map and ride links only. '
-  + 'No phone, opening hours, prices, menus or ratings unless a place has confirmed: true (its own number and hours): otherwise say so, never guess them, and never call these places BinaSmart partners. Name 3 to 5 of them with their distance, and give each one\'s page link when it has one.';
+  + 'No phone, opening hours, prices, menus or ratings unless a place has confirmed: true (its own number and hours): otherwise say so, never guess them, and never call these places BinaSmart partners. Name 3 to 5 of them with their distance, and give each one\'s page link when it has one. '
+  + 'tableOrders: true means guests sitting in that restaurant can order by scanning the QR card on their table and pay at the table; it is NOT delivery or ordering from home.';
 
 async function findFood(term, category, { gazetteer, fetchImpl, base = 'https://bina.et' } = {}) {
   const G = gazetteer || require('../ride/gazetteer').shared();
@@ -40,9 +41,9 @@ async function findFood(term, category, { gazetteer, fetchImpl, base = 'https://
   try {
     const R = require('../restaurants/directory');
     pageOf = ref => (ref ? R.pageUrl(ref) : null);
-    own = ref => { const p = ref && R.places().byRef.get(ref); if (!p) return null; const f = R.placeOut(p); return f.confirmed ? { phone: f.phones[0] || undefined, hours: f.hours || undefined } : null; };
+    own = ref => { const p = ref && R.places().byRef.get(ref); if (!p) return null; const f = R.placeOut(p); return f.confirmed ? { phone: f.phones[0] || undefined, hours: f.hours || undefined, tableOrders: f.tableOrders || undefined } : null; };
   } catch (e) { /* no directory here */ }
-  return { near, unmatched: hits.length ? unmatched : null, places: hits.map(h => ({ name: h.label, nameAm: h.labelAm || null, kind: h.kind, area: h.sub || null, page: pageOf(h.ref) || undefined, confirmed: own(h.ref) ? true : undefined, phone: (own(h.ref) || {}).phone, hours: (own(h.ref) || {}).hours,
+  return { near, unmatched: hits.length ? unmatched : null, places: hits.map(h => ({ name: h.label, nameAm: h.labelAm || null, kind: h.kind, area: h.sub || null, page: pageOf(h.ref) || undefined, confirmed: own(h.ref) ? true : undefined, phone: (own(h.ref) || {}).phone, hours: (own(h.ref) || {}).hours, tableOrders: (own(h.ref) || {}).tableOrders,
     distanceKm: h.m != null ? +(h.m / 1000).toFixed(1) : null, lat: h.lat, lng: h.lng,
     map: 'https://www.openstreetmap.org/?mlat=' + h.lat + '&mlon=' + h.lng + '#map=18/' + h.lat + '/' + h.lng,
     ride: base + '/ride?to=' + encodeURIComponent(h.label) + '&lat=' + h.lat + '&lng=' + h.lng })) };

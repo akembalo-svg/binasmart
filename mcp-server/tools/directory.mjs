@@ -110,7 +110,7 @@ export function registerDirectoryTools(server, { db, wrap, json, fetchImpl }) {
         for (let i = results.length - 1; i >= 0; i--) if (results[i].kind === 'shop' && results[i].demo) results.splice(i, 1);   // demo shops add nothing next to real places
         results.push(...d.places.map(p => ({ kind: 'map_place', name: p.name, name_am: p.nameAm || undefined, place_kind: p.kind, sub_city: p.area || undefined,
           distance_km: p.distanceKm == null ? undefined : p.distanceKm, coords: p.lat != null ? { lat: p.lat, lng: p.lng } : undefined,
-          page_url: p.page || undefined, confirmed: p.confirmed || undefined, phone: p.confirmed ? p.phone || undefined : undefined, map_url: p.map, ride_url: p.ride })));
+          page_url: p.page || undefined, confirmed: p.confirmed || undefined, phone: p.confirmed ? p.phone || undefined : undefined, table_qr_ordering: p.tableOrders || undefined, map_url: p.map, ride_url: p.ride })));
         mapNote = d.note;
       }
     }

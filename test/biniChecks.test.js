@@ -20,6 +20,9 @@ test('rubric passes a good Amharic answer and flags the classic failures', () =>
   assert.deepEqual(check({ q: 'x', tags: ['english', 'demo'] }, 'The hotel listed is a demo. See /hotels.', { known }).fails, []);
   assert.ok(check({ q: 'x', tags: ['demo'] }, 'አዎ በ /hotels ላይ ይያዙ።', { known }).fails.includes('demo_not_disclosed'));
   assert.ok(check({ q: 'x', tags: ['pool'] }, 'ጉዞውን በ /ride?id=abc ይመልከቱ።', { known }).fails.some(f => f.startsWith('unknown_link')));
+  // the server-rendered directories are real pages (the 1 Oct 2026 nightly run failed a correct /health/<slug> link)
+  assert.deepEqual(check({ q: 'x', tags: ['english'] }, 'Try https://bina.et/health/sample-hospital-n1 or bina.et/restaurants/sample-trattoria-n1, and see /restaurants.', { known }).fails, []);
+  assert.ok(check({ q: 'x', tags: ['english'] }, 'See /restaurantz/abc.', { known }).fails.some(f => f.startsWith('unknown_link')), 'a typo is still caught');
   assert.ok(check({ q: 'x', tags: ['neutral'] }, 'ስትጀምሪ ለሴቶች ብቻ ምረጪ።', { known }).fails.includes('gender_assumed'));
 });
 

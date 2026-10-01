@@ -40,8 +40,8 @@ textarea{min-height:76px;resize:vertical}.row{display:grid;grid-template-columns
   // table QR ordering (restaurants/orders.js): the switch, Telegram, the cards and the orders as they come in
   function ordersBox(r) {
     if (!r.url) return '';
-    return '<div class="box ob" data-id="' + esc(r.id) + '" data-url="' + esc(r.url) + '"><h2>Table orders · የጠረጴዛ ትዕዛዝ</h2><p class="sub">Put a QR card on each table. Guests open your menu, choose and send; the order comes to your Telegram and here. They pay at the table. Free, no commission.</p>'
-      + '<label class="tog"><input type="checkbox" class="on"' + (r.dishes.length ? '' : ' disabled') + '> Take orders from the table QR · ትዕዛዝ ተቀበል</label>' + (r.dishes.length ? '' : '<p class="sub">Add your dishes and save first.</p>')
+    return '<div class="box ob" data-id="' + esc(r.id) + '" data-url="' + esc(r.url) + '"><h2>Table orders · የጠረጴዛ ትዕዛዝ</h2><p class="sub">Put a QR card on each table. Guests open your menu, choose and send, or press "Call the waiter" / "Bring the bill"; it comes to your Telegram and here. They pay at the table. Free, no commission.</p>'
+      + '<label class="tog"><input type="checkbox" class="on"' + (r.dishes.length ? '' : ' disabled') + '> Take orders and waiter calls from the table QR · ትዕዛዝ ተቀበል</label>' + (r.dishes.length ? '' : '<p class="sub">Add your dishes and save first.</p>')
       + '<div class="lk"><button type="button" class="tg">🔔 Connect Telegram</button><a href="' + esc(r.url) + '/qr?n=8" target="_blank">🖨 Table QR cards</a><a href="' + esc(r.url) + '/menu?table=1" target="_blank">See your menu</a></div><div class="msg"></div><div class="ol"></div></div>';
   }
   function load() {
@@ -79,6 +79,8 @@ textarea{min-height:76px;resize:vertical}.row{display:grid;grid-template-columns
   document.addEventListener('click', function () { beepOk = true; }, { once: true });
   function beep() { if (!beepOk) return; try { var a = new (window.AudioContext || window.webkitAudioContext)(), o = a.createOscillator(), g = a.createGain(); o.frequency.value = 880; o.connect(g); g.connect(a.destination); g.gain.value = 0.2; o.start(); o.stop(a.currentTime + 0.35); } catch (e) {} }
   function orderHtml(o) {
+    if (o.type === 'call') return '<div class="od' + (o.status === 'new' ? ' new' : '') + '"><b>' + (o.kind === 'bill' ? '🧾 Table ' + o.table + ' · the bill, please' : '🙋 Table ' + o.table + ' · calling the waiter') + '</b> <span class="t">' + esc(new Date(o.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })) + ' · ' + esc(o.status) + '</span>'
+      + (o.status === 'done' ? '' : '<div class="st"><button type="button" data-o="' + esc(o.id) + '" data-s="done">Done</button></div>') + '</div>';
     return '<div class="od' + (o.status === 'new' ? ' new' : '') + '"><b>Table ' + o.table + ' · ' + esc(o.code) + '</b> <span class="t">' + esc(new Date(o.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })) + ' · ' + esc(o.status) + '</span>'
       + '<ul>' + o.items.map(function (x) { return '<li>' + x.qty + ' × ' + esc(x.name) + (x.price ? ' (' + x.price + ')' : '') + '</li>'; }).join('') + '</ul>'
       + (o.total ? '<div>Total ' + Number(o.total).toLocaleString() + ' ETB' + (o.priced ? '' : ' + items without a price') + '</div>' : '') + (o.note ? '<div>📝 ' + esc(o.note) + '</div>' : '')

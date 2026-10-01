@@ -156,6 +156,39 @@ test('table cards: one QR per table, pointing at the menu with its number, at mo
   assert.equal((await call('GET /restaurants/:slug/qr', { params: { slug: 'nope' }, query: {} })).code, 404);
 });
 
+test('call the waiter / bring the bill: same switch as ordering, one Telegram per open call', async () => {
+  const { call, sent } = app();
+  const ring = (body, slug = 'sample-trattoria-n1') => call('POST /api/restaurants/:slug/call', { params: { slug }, body, headers: { 'x-real-ip': '10.0.0.2' } });
+  store([entry({ tgChatId: '700000001' })]);
+  assert.equal((await ring({ table: 4, kind: 'waiter' })).body.error, 'off');
+  store([entry({ ordersOn: true, tgChatId: '700000001' })]);
+  assert.equal((await ring({ table: 4, kind: 'dance' })).body.error, 'kind');
+  assert.equal((await ring({ table: 0, kind: 'waiter' })).body.error, 'table');
+  assert.equal((await ring({ table: 4, kind: 'waiter' })).body.ok, true);
+  assert.equal((await ring({ table: 4, kind: 'waiter' })).body.duplicate, true, 'a second tap is the same call');
+  assert.equal((await ring({ table: 4, kind: 'bill' })).body.ok, true);
+  assert.deepEqual(sent.map(x => [x.chat, x.text.split('\n')[0]]), [['700000001', '🙋 Table 4 is calling the waiter.'], ['700000001', '🧾 Table 4 asks for the bill.']]);
+  const list = (await call('GET /api/restaurants/mine/:id/orders', { params: { id: 'e1' }, authUser: { id: 'u1' } })).body.orders;
+  assert.deepEqual(list.map(o => [o.type, o.kind, o.table]), [['call', 'bill', 4], ['call', 'waiter', 4]]);
+  assert.equal((await call('POST /api/restaurants/mine/:id/orders/:oid', { params: { id: 'e1', oid: list[1].id }, body: { status: 'done' }, authUser: { id: 'u1' } })).body.ok, true);
+  assert.equal((await ring({ table: 4, kind: 'waiter' })).body.duplicate, undefined, 'once done, a new call rings again');
+  assert.equal((await ring({ table: 4, kind: 'waiter' }, 'nope')).code, 404);
+});
+
+test('the menu shows the call buttons only when ordering is on; the page and food answers know it is on', async () => {
+  const { call } = app();
+  const menu = () => call('GET /restaurants/:slug/menu', { params: { slug: 'sample-trattoria-n1' }, query: { table: '2' } });
+  store([entry()]);
+  assert.doesNotMatch((await menu()).body, /Call the waiter/);
+  const p = R.places().bySlug.get('sample-trattoria-n1');
+  assert.equal(R.placeOut(p).tableOrders, false);
+  store([entry({ ordersOn: true })]);
+  assert.match((await menu()).body, /Call the waiter/); assert.match((await menu()).body, /Bring the bill/);
+  assert.equal(R.placeOut(p).tableOrders, true);
+  store([entry({ ordersOn: true, dishes: [] })]);
+  assert.equal(R.placeOut(p).tableOrders, false, 'no dishes, no ordering');
+});
+
 test('price reads the number out of what the owner typed', () => {
   assert.equal(O.price('450 ETB'), 450); assert.equal(O.price('ብር 1,200'), 1200); assert.equal(O.price('12.5'), 12.5);
   assert.equal(O.price(''), null); assert.equal(O.price('ask'), null); assert.equal(O.price('0'), null);

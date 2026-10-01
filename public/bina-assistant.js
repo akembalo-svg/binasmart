@@ -128,7 +128,8 @@
     ['📞 Our phone & hours · ስልክና ሰዓት', 'I work at this restaurant. I want to add our phone number and opening hours.'],
     ['🍲 Add dishes & prices · ምግቦችና ዋጋ', 'I work at this restaurant. I want to add our dishes with prices.'],
     ['✏️ Fix our details · ለማስተካከል', 'I work at this restaurant. Some of our details are wrong.'],
-    ['✅ Confirm our page · ለመረከብ', 'I own this restaurant and want to confirm (claim) our page.']
+    ['✅ Confirm our page · ለመረከብ', 'I own this restaurant and want to confirm (claim) our page.'],
+    ['🪑 Table QR ordering · የጠረጴዛ ትዕዛዝ', 'I own this restaurant. How does table QR ordering work?']
   ];
   if (HOMODE) STARTERS = [
     ['\u{1F4F7} Add our photos \u00b7 \u134e\u1276', '__photo__'],
