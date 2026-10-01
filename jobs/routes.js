@@ -77,6 +77,27 @@ const qs = (req, extra) => {
   const parts = [...(l === 'en' ? ['lang=en'] : []), ...(extra || [])];
   return parts.length ? '?' + parts.join('&') : '';
 };
+// Crawlable pagination for the board and the category pages (2026-10-01). Until now only the first
+// 200 open vacancies were linked from anywhere but the sitemap, so most vacancy pages were discovered
+// by sitemap alone and sat unindexed. Plain <a> links; filters and language preserved; page 1 is the
+// bare URL, so the canonical of page 1 stays what it always was.
+const PAGE_SIZE = 60;
+const pageHref = (base, req, n) => {
+  const p = [];
+  if (langOf(req) === 'en') p.push('lang=en');
+  for (const k of ['q', 'city', 'type']) { const v = String(req.query[k] || '').trim(); if (v) p.push(k + '=' + encodeURIComponent(v)); }
+  if (n > 1) p.push('page=' + n);
+  return base + (p.length ? '?' + p.join('&') : '');
+};
+const pageNav = (page, pages, base, req, lang) => {
+  const a = (n, label) => `<a href="${pageHref(base, req, n)}" style="border:1.5px solid var(--line);border-radius:999px;padding:9px 18px;font-weight:700;color:var(--ink)">${label}</a>`;
+  const win = [];
+  for (let n = Math.max(1, page - 2); n <= Math.min(pages, page + 2); n++) win.push(n === page ? `<span style="padding:9px 14px;font-weight:800">${n}</span>` : a(n, String(n)));
+  return `<nav class="sans" aria-label="pagination" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:22px 0 6px;font-size:14px">`
+    + (page > 1 ? a(page - 1, lang === 'en' ? '\u2039 Previous' : '\u2039 \u1240\u12f3\u121a') : '') + win.join('')
+    + (page < pages ? a(page + 1, lang === 'en' ? 'Next \u203a' : '\u1240\u1323\u12ed \u203a') : '')
+    + `<span style="width:100%;text-align:center;color:var(--mut);font-size:13px">${lang === 'en' ? 'Page ' + page + ' of ' + pages : '\u1308\u133d ' + page + ' \u12a8 ' + pages}</span></nav>`;
+};
 const langToggle = req => {
   const l = langOf(req);
   return `<a class="sans" href="${l === 'en' ? '?lang=am' : '?lang=en'}" style="float:right;font-size:13px;font-weight:700;border:1.5px solid var(--line);border-radius:999px;padding:5px 14px">${l === 'en' ? 'አማርኛ' : 'English'}</a>`;
@@ -407,9 +428,22 @@ const ogJobs = cat => {
     } : {};
     const filters = { ...(city ? { city: { equals: city, mode: 'insensitive' } } : {}), ...(type ? { jobType: type } : {}),
       ...(catDef ? { category: catDef.slug } : {}) };
+    const page = Math.max(1, Math.min(500, parseInt(String(req.query.page || '1'), 10) || 1));
+    const openWhereAll = { ...where, ...search, ...filters, ...openJobsWhere(now), ...(q ? { AND: [search] } : {}) };
+    let totalOpen = 0;
     const jobs = showClosed
       ? (await prisma.job.findMany({ where: { ...where, ...search, ...filters, deadline: { lt: openSince(now) } }, include: { employer: true }, orderBy: { deadline: 'desc' }, take: 200 })).filter(j => isClosed(j.deadline, now))
-      : (await prisma.job.findMany({ where: { ...where, ...search, ...filters, ...openJobsWhere(now), ...(q ? { AND: [search] } : {}) }, include: { employer: true }, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: 200 })).filter(j => !isClosed(j.deadline, now));
+      : await (async () => {
+          // openJobsWhere fetches generously (21-hour grace, tenders/deadline.js) and isClosed() decides exactly,
+          // so a page has to be cut from the exactly-open list: ids and deadlines first (cheap), then one page of rows.
+          const openRows = await prisma.job.findMany({ where: openWhereAll, select: { id: true, deadline: true }, orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }, { id: 'asc' }] });
+          const openIds = openRows.filter(j => !isClosed(j.deadline, now)).map(j => j.id);
+          totalOpen = openIds.length;
+          const pageIds = openIds.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+          const rows = pageIds.length ? await prisma.job.findMany({ where: { id: { in: pageIds } }, include: { employer: true } }) : [];
+          const byId = new Map(rows.map(j => [j.id, j]));
+          return pageIds.map(id => byId.get(id)).filter(Boolean);
+        })();
     const cities = (await prisma.job.groupBy({ by: ['city'], _count: { city: true }, orderBy: { _count: { city: 'desc' } }, take: 8 })).filter(c => c.city);
     const closedCount = (await prisma.job.findMany({ where: { ...where, deadline: { lt: openSince(now) } }, select: { deadline: true } })).filter(j => isClosed(j.deadline, now)).length;
     const employers = await prisma.employer.count();
@@ -440,22 +474,26 @@ const ogJobs = cat => {
         <button type="submit" style="background:${gradient('jobs')};color:#fff;border:none;border-radius:999px;padding:10px 22px;font-weight:800;font-size:14px;cursor:pointer">${lang === 'en' ? 'Search' : 'ፈልግ'}</button>
         ${(q || city || type) ? `<a href="/jobs${lang === 'en' ? '?lang=en' : ''}" style="align-self:center;font-size:13.5px;color:var(--mut)">${lang === 'en' ? 'clear' : 'አጽዳ'}</a>` : ''}
       </form>
-      ${(q || city || type) ? `<p class="sans" style="margin:0 0 12px;color:var(--mut);font-size:13.5px">${jobs.length} ${lang === 'en' ? 'result(s)' : 'ውጤት'}</p>` : ''}
+      ${(q || city || type) ? `<p class="sans" style="margin:0 0 12px;color:var(--mut);font-size:13.5px">${showClosed ? jobs.length : totalOpen} ${lang === 'en' ? 'result(s)' : 'ውጤት'}</p>` : ''}
       ${jobs.length
         ? jobs.map((j, i) => jobCard(j, req) + (i === 4 && jobs.length > 6 ? tgAlert(lang, catDef && catDef.slug) : '')).join('')
           + (jobs.length > 4 ? tgBand(lang) : '')
         : empty}
+      ${!showClosed && totalOpen > PAGE_SIZE ? pageNav(page, Math.ceil(totalOpen / PAGE_SIZE), catDef ? '/jobs/category/' + catDef.slug : '/jobs', req, lang) : ''}
       ${!showClosed && closedCount ? `<p class="sans" style="text-align:center;margin:26px 0 4px;font-size:13.5px"><a href="/jobs${qs(req, ['show=closed'])}" style="color:var(--mut)">${t.viewClosed(closedCount)}</a></p>` : ''}
       <p class="sans" style="margin:22px 0 10px;font-size:14px;line-height:1.9;text-align:center"><!-- guide-links:job-list -->📚 <a href="${lang === 'en' ? '/cv-ethiopia-en' : '/cv-ethiopia'}" style="font-weight:700">${lang === 'en' ? 'CV guide' : 'የሲቪ አጻጻፍ'}</a> · <a href="/interview-questions-ethiopia" style="font-weight:700">${lang === 'en' ? 'Interview questions' : 'የቃለ መጠይቅ ጥያቄዎች'}</a> · <a href="/ethiopia-jobs-report-september-2026" style="font-weight:700">${lang === 'en' ? 'Jobs report' : '📊 የሥራ ገበያ ሪፖርት'}</a>${catDef && catDef.slug === 'banking' ? ` · <a href="/bank-jobs-ethiopia" style="font-weight:700">${lang === 'en' ? '🏦 What banks ask for' : '🏦 ባንኮች ምን ይጠይቃሉ'}</a>` : ''}</p>
       <div class="cta-band sans" style="background:${gradient('jobs')}"><div><h3>${t.postFree}</h3><p>${t.postSub}</p></div><a style="background:#fff;color:#1e3a8a" href="/jobs/post${lang === 'en' ? '?lang=en' : ''}">${lang === 'en' ? 'Post it here →' : 'እዚህ ያውጡ →'}</a></div>
     </main>`;
     // The category page carries its own title, description and canonical. Without them Google sees
     // seventeen copies of /jobs and ranks none of them.
-    const nOpen = jobs.length;
+    const nOpen = showClosed ? jobs.length : totalOpen;
+    const hubBase = 'https://bina.et/jobs' + (catDef ? '/category/' + catDef.slug : '');
+    const pagedView = page > 1 && !q && !city && !type && !showClosed && jobs.length > 0;
+    const pageSuffix = pagedView ? (lang === 'en' ? ' \u00b7 page ' + page : ' \u00b7 \u1308\u133d ' + page) : '';
     reply.type('text/html').send(shell({
-      title: catDef
+      title: (catDef
         ? (lang === 'en' ? catDef.en + ' jobs in Ethiopia — ' + nOpen + ' open vacancies' : catDef.am + ' ክፍት የሥራ ቦታዎች በኢትዮጵያ · ' + catDef.en + ' jobs')
-        : (lang === 'en' ? 'Jobs in Ethiopia — verified vacancies with employer profiles' : 'ክፍት የሥራ ቦታዎች በኢትዮጵያ · Jobs in Ethiopia'),
+        : (lang === 'en' ? 'Jobs in Ethiopia — verified vacancies with employer profiles' : 'ክፍት የሥራ ቦታዎች በኢትዮጵያ · Jobs in Ethiopia')) + pageSuffix,
       desc: catDef
         ? (lang === 'en'
           ? nOpen + ' open ' + catDef.en.toLowerCase() + ' vacancies in Ethiopia, each with the employer, the address, the deadline and how to apply.'
@@ -463,7 +501,7 @@ const ogJobs = cat => {
         : (lang === 'en'
           ? 'Verified Ethiopian job vacancies, each linked to the company that posted it — address, how to apply and the deadline.'
           : 'የተረጋገጡ ክፍት የሥራ ማስታወቂያዎች — ከቀጣሪው ድርጅት መገለጫ፣ አድራሻና የማመልከቻ መንገድ ጋር።'),
-      canonical: 'https://bina.et/jobs' + (catDef ? '/category/' + catDef.slug : ''), extraHead: JOBS_HEAD + hubLd(catDef ? catDef.en + ' jobs in Ethiopia' : 'Jobs in Ethiopia', 'https://bina.et/jobs' + (catDef ? '/category/' + catDef.slug : ''), jobs.map(j => ({ url: 'https://bina.et/jobs/' + j.slug, name: j.title }))), body, active: 'jobs',
+      canonical: pagedView ? hubBase + '?page=' + page : hubBase, extraHead: JOBS_HEAD + hubLd(catDef ? catDef.en + ' jobs in Ethiopia' : 'Jobs in Ethiopia', 'https://bina.et/jobs' + (catDef ? '/category/' + catDef.slug : ''), jobs.map(j => ({ url: 'https://bina.et/jobs/' + j.slug, name: j.title }))), body, active: 'jobs',
       ogImage: ogJobs(catDef && catDef.slug),
     }));
   }
