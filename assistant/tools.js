@@ -504,7 +504,7 @@ function makeExecutor(ctx) {
         if (ctx.dryRun) return { ok: true, dryRun: true, wouldSend: hb, note: 'Evaluation run, nothing was sent. Otherwise answer exactly as if it was sent: the team calls this number to confirm, then approves it, usually within a day; it is NOT live yet.' };
         const hd = await api('POST', '/api/hotels/claim', hb, phone);
         if (hd.error) return { error: hd.error === 'phone' ? 'that phone number looks wrong; ask for an Ethiopian number like 0900 000 012' : hd.error === 'name' ? 'ask for their name' : hd.error === 'slow_down' ? 'too many requests from this number; ask them to try again later' : hd.error };
-        return { ok: true, hotel: hotel ? hotel.name : want, page: hotel ? (ctx.publicBase || 'https://bina.et') + '/hotels/' + hotel.slug : null, note: 'Sent to the BinaSmart team. Tell them: the team calls this number to confirm, then approves it, usually within a day; it is NOT live yet. Guests book with the hotel directly, with 0% commission.' + (hb.rooms ? ' The room prices show on the hotel page once the team approves.' : '') };
+        return { ok: true, hotel: hotel ? hotel.name : want, page: hotel ? (ctx.publicBase || 'https://bina.et') + '/hotels/' + hotel.slug : null, note: 'Sent to the BinaSmart team. Tell them: the team calls this number to confirm, then approves it, usually within a day; it is NOT live yet. Guests book with the hotel directly, with 0% commission. Once approved, the hotel can change its room prices itself at https://bina.et/hotels/dashboard, signed in with this number.' + (hb.rooms ? ' The room prices show on the hotel page once the team approves.' : '') };
       }
       let list = [];
       try { list = require('../companies/directory').list() || []; } catch (e) { list = []; }
@@ -539,7 +539,7 @@ function makeExecutor(ctx) {
       const body = { action: a.action || 'add', listingType: a.listing_type, propertyType: a.property_type, location: a.location, price: a.price,
         beds: a.beds, baths: a.baths, size: a.size, description: a.description, name: a.name, role: a.role, company: a.company,
         phone: a.phone, whatsapp: a.whatsapp !== false, listing: a.listing, request: a.request, uid: ctx.uid || undefined };
-      const done = 'Tell them: it is NOT live yet; the team calls this number to confirm, then approves, usually within a day. It is free, with no commission, and buyers or tenants contact them directly. On bina.et/property it is findable on Google and by AI assistants.';
+      const done = 'Tell them: it is NOT live yet; the team calls this number to confirm, then approves, usually within a day. It is free, with no commission, and buyers or tenants contact them directly. On bina.et/property it is findable on Google and by AI assistants. Once it is live, they can change the price or mark it rented / sold themselves at https://bina.et/property/dashboard, signed in with this number.';
       if (ctx.dryRun) return { ok: true, dryRun: true, wouldSend: body, note: 'Evaluation run, nothing was sent. Otherwise answer exactly as if it was sent. ' + done };
       const r = await f(ctx.base + '/api/property/owner-listing', { method: 'POST', headers: { 'content-type': 'application/json',
         'x-bini-internal': require('../property/owner-listing').INTERNAL_KEY, 'x-real-ip': 'bini-' + String(a.phone || '').replace(/\D/g, '').slice(-9) }, body: JSON.stringify(body) });

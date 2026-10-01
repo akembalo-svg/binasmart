@@ -789,6 +789,10 @@
       st.driver = j.driver || (j.ok ? j.driver : null);
       if (st.driver && st.driver.status !== 'approved') {
         paintStats();
+        // A sign-up the team did not accept (1 Oct 2026): it used to read "we are checking your licence" for ever.
+        if (st.driver.status === 'rejected') return gate('Registration not accepted · ምዝገባው አልተቀበለም',
+          'Thank you for registering, ' + st.driver.name + '. We could not accept your registration at this time. If you think this is a mistake, write to us.\nስለተመዘገቡ እናመሰግናለን። ምዝገባዎን በአሁኑ ጊዜ መቀበል አልቻልንም። ስህተት ነው ብለው ካሰቡ ያግኙን።',
+          'Contact BinaSmart · ያግኙን', 'https://bina.et/support');
         return gate(
           st.driver.status === 'suspended' ? 'Account paused' : 'Waiting for approval · በመጠባበቅ ላይ',
           st.driver.status === 'suspended'

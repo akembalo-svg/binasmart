@@ -187,3 +187,5 @@ module.exports = function ownerListing(fastify, { prisma, limiter, tell }, done)
 module.exports.INTERNAL_KEY = INTERNAL_KEY;
 module.exports.ethPhone = ethPhone;
 module.exports.TYPES = TYPES;
+// for property/dashboard.js (owners mark their own homes rented / sold, 1 Oct 2026)
+Object.assign(module.exports, { clean, esc, tellTeam });

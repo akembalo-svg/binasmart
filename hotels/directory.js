@@ -546,3 +546,4 @@ module.exports.cleanRooms = cleanRooms;
 module.exports.roomMin = roomMin;
 module.exports.landlines = landlines;
 module.exports.rentsByName = rentsByName;
+module.exports.tellOwner = tellOwner;   // hotels/dashboard.js (owners edit room prices, 1 Oct 2026)

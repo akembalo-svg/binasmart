@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>My hotel · የኔ ሆቴል | BinaSmart Hotels</title><meta name="robots" content="noindex"><meta name="theme-color" content="#1E3A5F">
+<link rel="icon" href="/icon-32.png"><link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
+<style>
+:root{--b:#1E3A5F;--ink:#141B24;--mu:#5B6675;--ln:#DDE3EC;--bg:#F5F7FA;--card:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans Ethiopic",system-ui,sans-serif;line-height:1.5}
+a{color:var(--b)}.top{background:var(--b);color:#fff;padding:14px 16px}.top a{color:#fff;text-decoration:none;font-weight:800}.top small{opacity:.85;font-weight:500}
+.w{max-width:720px;margin:0 auto}.dash{padding:20px 16px 60px}h1{font-size:26px;margin:0 0 4px}.lead{color:var(--mu);margin:0 0 18px}
+.box{background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:18px;margin:0 0 14px;box-shadow:0 8px 24px rgba(30,58,95,.06)}
+.box h2{font-size:18px;margin:0 0 2px}.sub{color:var(--mu);font-size:14px;margin:0 0 10px}
+input,select{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--ln);border-radius:12px;background:#fff;color:var(--ink);min-width:0}
+.room{display:grid;grid-template-columns:1fr 110px 84px 40px;gap:8px;margin:0 0 8px}
+@media (max-width:480px){.room{grid-template-columns:1fr 90px 76px 36px}}
+.room button{border:0;background:#fee2e2;color:#b91c1c;border-radius:10px;font-size:16px;cursor:pointer}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.go{border:0;background:var(--b);color:#fff;font:inherit;font-weight:700;padding:11px 16px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-block}
+.lite{border:1px dashed var(--b);background:#fff;color:var(--b);font:inherit;font-weight:600;padding:9px 12px;border-radius:12px;cursor:pointer}
+.msg{margin-top:8px;font-weight:600}.ok{color:#047857}.err{color:#b91c1c}.foot{color:var(--mu);font-size:13px;padding:0 16px 30px}
+</style></head><body>
+<header class="top"><div class="w"><a href="/hotels">🏨 BinaSmart Hotels <small>· ሆቴሎች</small></a></div></header>
+<main class="dash w"><h1>My hotel · <span>የኔ ሆቴል</span></h1><p class="lead">Change your room prices per night. They show on your bina.et page at once. · የክፍል ዋጋ በአዳር ይቀይሩ።</p><div id="app"><p class="lead">Loading…</p></div></main>
+<p class="foot w">Your hotel is the one our team confirmed with the number you signed in with. To change the phone on the page, photos or other details, ask Bini on your hotel's page. Our team sees every change and can remove prices that look wrong. Guests book with you directly: 0% commission.</p>
+<script>
+(function () {
+  'use strict';
+  var app = document.getElementById('app');
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var ERR = { prices: 'Those prices look wrong. A room in birr is between 200 and 500,000 a night; in dollars between 5 and 5,000. Up to 10 rooms.', rooms: 'Add at least one room.', slow_down: 'Too many changes. Please wait a little.', not_found: 'This hotel is not linked to your number.', no_proven_phone: 'Sign in with Telegram or a phone code first.' };
+  function post(url, body) { return fetch(url, { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then(function (r) { return r.json().catch(function () { return { ok: false }; }); }); }
+  function roomRow(r) { return '<div class="room"><input placeholder="Room · ክፍል" value="' + esc(r.name) + '" maxlength="60" aria-label="Room name"><input placeholder="Price" inputmode="numeric" value="' + esc(r.price || '') + '" aria-label="Price per night">'
+    + '<select aria-label="Currency"><option' + (r.currency !== 'USD' ? ' selected' : '') + '>ETB</option><option' + (r.currency === 'USD' ? ' selected' : '') + '>USD</option></select><button type="button" aria-label="Remove">✕</button></div>'; }
+  function card(h) {
+    return '<form class="box" data-id="' + esc(h.claimId) + '"><h2>' + esc(h.name) + '</h2><p class="sub">' + (h.url ? '<a href="' + esc(h.url) + '" target="_blank">See your page →</a>' : '') + (h.updated ? ' · prices from ' + esc(h.updated) : '') + '</p>'
+      + '<div class="rl">' + (h.rooms.length ? h.rooms : [{ name: '', price: '', currency: 'ETB' }]).map(roomRow).join('') + '</div>'
+      + '<button class="lite add" type="button">＋ Add a room</button><div class="row"><button class="go" type="submit">Save prices · አስቀምጥ</button></div><div class="msg"></div></form>';
+  }
+  function load() {
+    fetch('/api/hotels/mine', { credentials: 'same-origin' }).then(function (r) { return r.status === 401 ? null : r.json(); }).then(function (d) {
+      if (!d) { app.innerHTML = '<div class="box"><h2>Sign in first · መጀመሪያ ይግቡ</h2><p class="sub">Sign in with Telegram or a phone code, using the number our team called.</p><a class="go" href="/login?next=/hotels/dashboard">Sign in</a></div>'; return; }
+      if (!d.phone) { app.innerHTML = '<div class="box"><h2>Your number is not proven yet</h2><p class="sub">Your hotel is matched by the number our team called. Sign in again with Telegram (share your contact) or with a code sent to your phone.</p><a class="go" href="/login?next=/hotels/dashboard">Sign in with my number</a></div>'; return; }
+      app.innerHTML = d.hotels.length ? d.hotels.map(card).join('') : '<div class="box"><h2>No hotel linked to ' + esc(d.phone) + '</h2><p class="sub">Find your hotel on <a href="/hotels">bina.et/hotels</a> and ask Bini there to claim it. After our team calls and confirms, it appears here.</p></div>';
+      wire();
+    }).catch(function () { app.innerHTML = '<p class="err">Could not load. Please try again.</p>'; });
+  }
+  function wire() {
+    [].forEach.call(document.querySelectorAll('form[data-id]'), function (f) {
+      var id = encodeURIComponent(f.getAttribute('data-id')), m = f.querySelector('.msg');
+      f.querySelector('.add').addEventListener('click', function () { f.querySelector('.rl').insertAdjacentHTML('beforeend', roomRow({ name: '', price: '', currency: 'ETB' })); });
+      f.addEventListener('click', function (e) { if (e.target.matches('.room button')) e.target.parentNode.remove(); });
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var rooms = [].map.call(f.querySelectorAll('.room'), function (r) { var i = r.querySelectorAll('input'); return { name: i[0].value.trim(), price: Number(String(i[1].value).replace(/[^\d.]/g, '')), currency: r.querySelector('select').value }; }).filter(function (r) { return r.name; });
+        post('/api/hotels/mine/' + id, { rooms: rooms }).then(function (j) {
+          if (j.ok) { m.className = 'msg ok'; m.textContent = j.kept ? '✓ Saved: ' + j.kept + ' room price' + (j.kept === 1 ? '' : 's') + ' on your page now' + (j.dropped ? ' (' + j.dropped + ' left out: name or price looked wrong)' : '') + '. · ተቀምጧል።' : 'Your prices were removed from the page.'; }
+          else { m.className = 'msg err'; m.textContent = ERR[j.error] || 'Something went wrong.'; }
+        });
+      });
+    });
+  }
+  load();
+})();
+</script></body></html>

@@ -2310,11 +2310,13 @@ fastify.register(require('./jobs/matches'), { prisma, shell: newsShell });
 fastify.register(require('./cinema/ops-venues'), { prisma, OWNER_KEY });
 // Every place to stay in Addis from the city map, and owners claiming theirs (hotels/directory.js, 26 Sep 2026).
 fastify.register(require('./hotels/directory'), { prisma, limiter: hotelLimiter });
+fastify.register(require('./hotels/dashboard'), { prisma, limiter: hotelLimiter });   // bina.et/hotels/dashboard: an approved hotel changes its room prices, by proven phone (1 Oct 2026)
 // Addis real estate companies and car sellers: /real-estate-companies, /car-dealers, /companies/<slug> (27 Sep 2026).
 fastify.register(require('./companies/directory'), { prisma, limiter: hotelLimiter });
 // bina.et/property/<slug>: one listing in full (photos, description, features, map, company contacts).
 fastify.register(require('./property/detail'), { prisma });
 fastify.register(require('./property/owner-listing'), { prisma, limiter: hotelLimiter });
+fastify.register(require('./property/dashboard'), { prisma, limiter: hotelLimiter });   // bina.et/property/dashboard: owners change the price or mark their Bini listing rented / sold, by proven phone (1 Oct 2026)
 fastify.register(require('./shops/posts'), { prisma, limiter: hotelLimiter });
 fastify.register(require('./shops/dashboard'), { prisma, limiter: hotelLimiter });   // bina.et/shop/dashboard: sellers change price / description / sold on their own posts, by proven phone (1 Oct 2026)
 fastify.register(require('./restaurants/directory'), { limiter: hotelLimiter });   // bina.et/restaurants: restaurants, cafés and fast food from the city map; claims via Bini (1 Oct 2026)
