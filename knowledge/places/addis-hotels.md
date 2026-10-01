@@ -3,13 +3,13 @@ title: "Hotels, guest houses, hostels and apartments in Addis Ababa (ሆቴሎ�
 url: "https://bina.et/hotels"
 lang: "en"
 source_name: "BinaSmart hotel directory: OpenStreetMap contributors (ODbL) and Wikidata (CC0)"
-fetched: "2026-09-26"
+fetched: "2026-10-01"
 count: "552"
 ---
 
 # Places to stay in Addis Ababa · በአዲስ አበባ ያሉ ሆቴሎችና የእንግዳ ማረፊያዎች
 
-552 places to stay, grouped by sub-city, as of 2026-09-26: 360 hotels, 142 guest houses and pensions, 13 apartments, 37 hostels and motels. The full list with search is at https://bina.et/hotels. This is where each place is and what the city map says about it, not an official licence register or star rating. Only hotels that list their rooms on BinaSmart can be booked on bina.et; for the others, call the hotel. A hotel owner claims their listing free on its bina.et page ("Claim this listing"); a hotel that is not listed can be added from https://bina.et/hotels ("My hotel isn't in the list").
+552 places to stay, grouped by sub-city, as of 2026-10-01: 360 hotels, 142 guest houses and pensions, 13 apartments, 37 hostels and motels. The full list with search is at https://bina.et/hotels. This is where each place is and what the city map says about it, not an official licence register or star rating. Only hotels that list their rooms on BinaSmart can be booked on bina.et; for the others, call the hotel. A hotel owner claims their listing free on its bina.et page ("Claim this listing"); a hotel that is not listed can be added from https://bina.et/hotels ("My hotel isn't in the list").
 
 ## Bole sub-city · ቦሌ ክፍለ ከተማ — 226
 
