@@ -126,4 +126,10 @@ ls -1t "$MAPDIR"/addis-*.pmtiles 2>/dev/null | tail -n +3 | while read -r old; d
 done
 
 log "done — live on addis-$STAMP.pmtiles (HTTP $CODE)"
+# Git keeps the style in step (1 Oct 2026): the tiles are gitignored; style.json says which build is live. Commit
+# that one file only (`git commit -- <path>`, so nothing another session staged rides along); never push.
+if [ ! -e "$ROOT/.git/index.lock" ]; then
+  git -C "$ROOT" commit -q -m "map: ride map on addis-$STAMP.pmtiles (monthly rebuild, ops/map/rebuild-tiles.sh)" -- public/ride/style.json \
+    && log "committed public/ride/style.json" || log "style.json not committed (nothing to commit, or git busy)"
+else log "git busy (index.lock): style.json left for the next commit"; fi
 alert "🗺️ Addis map updated: addis-$STAMP.pmtiles ($(du -h "$OUT" | cut -f1)) from the Protomaps build of $D. Previous kept for rollback."

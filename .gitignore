@@ -83,3 +83,9 @@ public/property/img/
 public/property/logo/
 public/hotels/img/
 public/news/audio/
+
+# The Addis map tiles (1 Oct 2026): ops/map/rebuild-tiles.sh replaces them on the 1st of each month (about 10 MB,
+# dated names because /static is cached immutably) and keeps the previous build for rollback. Not in git: the
+# job commits public/ride/style.json only. A fresh checkout gets the file from the off-site backup
+# (binasmart-media/map) or by running the script (about ten seconds).
+public/map/*.pmtiles
