@@ -121,3 +121,55 @@ test('server.js keeps each named restaurant\'s page link in Bini\'s food answers
   assert.ok(src.includes('foodSeen.push(...(r.mapPlaces || []).filter(x => x && x.name && x.page))'), 'the map places with a page are collected');
   assert.ok(src.includes("'https://bina.et/restaurants'"), 'the directory closes a food answer');
 });
+
+// ---- the owner's dashboard (restaurants/dashboard.js, step 2) ----
+function dash(users) {
+  const routes = {}, sent = [];
+  const fastify = { get(p, a, b) { routes['GET ' + p] = b || a; }, post(p, a, b) { routes['POST ' + p] = b || a; } };
+  R(fastify, { limiter: () => () => true, tell: async t => { sent.push(t); return true; } }, () => {});
+  require('../restaurants/dashboard')(fastify, { prisma: { authUser: { findUnique: async ({ where }) => users[where.id] || null } }, limiter: () => () => true, tell: async t => { sent.push(t); return true; } }, () => {});
+  const call = async (k, req = {}) => {
+    const r = { c: 200, h: {}, code(n) { this.c = n; return this; }, header(a, b) { this.h[a] = b; return this; }, type() { return this; }, send(x) { this.body = x; return x; } };
+    const out = await routes[k](Object.assign({ headers: {}, query: {}, params: {}, body: {}, authUser: null }, req), r);
+    return { code: r.c, body: out };
+  };
+  return { call, sent };
+}
+async function approved(call, sent, phone) {
+  const c = await call('POST /api/restaurants/claim', { body: { ref: 'node/1', name: 'Abel', role: 'owner', phone, note: 'claim' } });
+  await call('GET /ops/restaurants/:id/:action', { params: { id: c.body.id, action: 'approve' }, query: { t: /approve\?t=([a-f0-9]+)/.exec(sent[sent.length - 1])[1] } });
+  const E = R.readStore().entries.find(e => e.id === c.body.id);
+  return E;
+}
+
+test('approval gives a one-time code; signed in, the owner links the page with it and edits it live', async () => {
+  const { call, sent } = dash({ u1: { phone: null }, u2: { phone: null } });
+  const E = await approved(call, sent, '0900 000 081');
+  assert.match(E.dashCode, /^[A-Z0-9]{8}$/); assert.match(sent[sent.length - 1], /Dashboard code/);
+  assert.equal((await call('GET /api/restaurants/mine')).code, 401, 'not signed in');
+  const me = { id: 'u1', name: 'Abel' };
+  assert.equal((await call('POST /api/restaurants/code', { authUser: me, body: { code: 'WRONG123' } })).body.error, 'bad_code');
+  const ok = await call('POST /api/restaurants/code', { authUser: me, body: { code: E.dashCode.slice(0, 4) + '-' + E.dashCode.slice(4) } });
+  assert.equal(ok.body.ok, true);
+  assert.equal((await call('POST /api/restaurants/code', { authUser: { id: 'u2' }, body: { code: E.dashCode } })).body.error, 'bad_code', 'a code works once');
+  const mine = await call('GET /api/restaurants/mine', { authUser: me });
+  assert.equal(mine.body.restaurants.length, 1); assert.equal(mine.body.restaurants[0].url, '/restaurants/sample-trattoria-n1');
+  const ed = await call('POST /api/restaurants/mine/:id', { authUser: me, params: { id: E.id }, body: { publicPhone: '011 000 0082', hours: 'Daily 12-23', dishes: [{ name: 'Tiramisu', price: '220 birr' }] } });
+  assert.equal(ed.body.ok, true); assert.match(sent[sent.length - 1], /changed its page/); assert.match(sent[sent.length - 1], /hide page/);
+  const pg = await call('GET /restaurants/:slug', { params: { slug: 'sample-trattoria-n1' } });
+  assert.match(pg.body, /Tiramisu/); assert.match(pg.body, /Daily 12-23/); assert.match(pg.body, /tel:\+251110000082/);
+  assert.equal((await call('POST /api/restaurants/mine/:id', { authUser: { id: 'u2' }, params: { id: E.id }, body: { hours: 'x' } })).body.error, 'not_found', 'only the owner edits');
+  assert.equal((await call('POST /api/restaurants/mine/:id', { authUser: me, params: { id: E.id }, body: { publicPhone: '12345' } })).body.error, 'phone');
+});
+
+test('the number the team called, proven at sign-in, links the page without a code; the team can hide it in one tap', async () => {
+  const { call, sent } = dash({ u3: { phone: '+251900000083', phoneVerifiedAt: new Date() } });
+  const E = await approved(call, sent, '0900 000 083');
+  const mine = await call('GET /api/restaurants/mine', { authUser: { id: 'u3' } });
+  assert.equal(mine.body.restaurants.length, 1); assert.match(sent[sent.length - 1], /linked by the proven phone/);
+  const hide = await call('GET /ops/restaurants/:id/manage/:action', { params: { id: E.id, action: 'hide' }, query: { t: E.manageToken } });
+  assert.match(hide.body, /Hidden/);
+  const pg = await call('GET /restaurants/:slug', { params: { slug: 'sample-trattoria-n1' } });
+  assert.doesNotMatch(pg.body, /Confirmed by the restaurant/, 'a hidden page shows the map data only');
+  assert.equal((await call('GET /ops/restaurants/:id/manage/:action', { params: { id: E.id, action: 'hide' }, query: { t: 'nope' } })).code, 404);
+});

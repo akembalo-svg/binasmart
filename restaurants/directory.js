@@ -78,7 +78,8 @@ function writeStore(s) { const f = STORE(); fs.mkdirSync(path.dirname(f), { recu
 const live = () => readStore().entries.filter(e => e.status === 'live');
 // one place as every door sees it: the map plus what the restaurant sent and the team approved (the latest wins)
 function placeOut(p, L) {
-  const mine = (L || live()).filter(e => e.ref === p.ref).sort((a, b) => String(b.approvedAt || '').localeCompare(String(a.approvedAt || '')));
+  const stamp = e => String(e.updatedAt || e.approvedAt || '');
+  const mine = (L || live()).filter(e => e.ref === p.ref).sort((a, b) => stamp(b).localeCompare(stamp(a)));
   const top = mine[0] || {};
   return Object.assign({}, p, { phones: [...new Set([top.publicPhone].filter(Boolean).concat(p.phones))], hours: top.hours || p.hours || '',
     hoursFromOwner: !!top.hours, dishes: top.dishes || [], about: top.about || '', confirmed: mine.length > 0 });
@@ -174,7 +175,7 @@ module.exports = function restaurantDirectory(fastify, { limiter, tell }, done) 
       + '<h2 class="h2 rv">Dishes<span class="am">ምግቦች</span></h2>' + (f.dishes.length ? '<div class="dishes">' + f.dishes.map(d => '<div class="dish rv"><b>' + esc(d.name) + '</b>' + (d.price ? '<span>' + esc(d.price) + '</span>' : '') + '</div>').join('') + '</div><p class="muted">Prices as sent by the restaurant. Call to check before you go.</p>'
         : '<p class="muted rv">This ' + esc(K[1].toLowerCase()) + ' has not added its dishes yet.</p>')
       + '<section class="joinb rv"><div><h2>Is this your ' + esc(K[1].toLowerCase()) + '?<span class="am">ይህ የእርስዎ ነው?</span></h2><p>Claim this page free: add the number to call, your hours and your dishes with prices. Bini asks the questions; our team calls to confirm before anything shows. No commission.</p></div>'
-      + '<div class="jb"><a class="btn" href="?bini=restaurant" rel="nofollow">🔑 Claim this page · ገጹን ይያዙ</a></div></section>'
+      + '<div class="jb"><a class="btn" href="?bini=restaurant" rel="nofollow">🔑 Claim this page · ገጹን ይያዙ</a><a class="btn lite" href="/restaurants/dashboard" rel="nofollow">Already confirmed? Dashboard →</a></div></section>'
       + (near.length ? '<h2 class="h2 rv">Nearby<span class="am">በአቅራቢያ</span></h2><div class="fg">' + near.map(x => card(placeOut(x, L)).replace('</b>', '</b><small>' + (x.d < 1 ? Math.round(x.d * 1000) + ' m' : x.d.toFixed(1) + ' km') + '</small>')).join('') + '</div>' : '')
       + '<p class="src">From the city map (© OpenStreetMap contributors, ODbL)' + (f.confirmed ? '; the number, hours and dishes from the restaurant, checked by BinaSmart' : '') + '. Call before you go. BinaSmart does not deliver food or take payments.</p></main>'
       + FOOT;
@@ -223,12 +224,19 @@ module.exports = function restaurantDirectory(fastify, { limiter, tell }, done) 
     if (E.status !== 'pending') return page('Already ' + esc(E.status) + ': ' + esc(E.restaurant));
     if (act === 'reject') { Object.assign(E, { status: 'rejected', token: null, decidedAt: new Date().toISOString() }); writeStore(S); return page('❌ Rejected: ' + esc(E.restaurant)); }
     if (act !== 'approve') return reply.code(400).send('approve or reject');
-    Object.assign(E, { status: 'live', token: null, approvedAt: new Date().toISOString() }); writeStore(S);
-    const p = E.ref ? places().byRef.get(E.ref) : null;
-    return page('✅ Live: ' + (p ? '<a href="/restaurants/' + esc(p.slug) + '">' + esc(E.restaurant) + '</a>' : esc(E.restaurant) + ' (NOT on the map: add it to the map or tell the developer)'));
+    // The dashboard code (restaurants/dashboard.js): read out on the call; signed in at bina.et/restaurants/dashboard, the
+    // owner types it once and edits the page themselves from then on. 30 days, works once.
+    Object.assign(E, { status: 'live', token: null, approvedAt: new Date().toISOString(), dashCode: H.newCode(), dashCodeExpires: new Date(Date.now() + 30 * 864e5).toISOString(),
+      manageToken: crypto.randomBytes(16).toString('hex') });
+    writeStore(S);
+    const p = E.ref ? places().byRef.get(E.ref) : null, mb = BASE + '/ops/restaurants/' + E.id + '/manage/';
+    notify('✅ <b>' + esc(E.restaurant) + '</b> is live.\n🔑 Dashboard code: <b>' + H.fmtCode(E.dashCode) + '</b> (30 days)\nGive it on the call: they sign in at bina.et/restaurants/dashboard and type it.'
+      + '\n<a href="' + mb + 'newcode?t=' + E.manageToken + '">new code</a> · <a href="' + mb + 'hide?t=' + E.manageToken + '">hide page</a>').catch(() => {});
+    return page('✅ Live: ' + (p ? '<a href="/restaurants/' + esc(p.slug) + '">' + esc(E.restaurant) + '</a>' : esc(E.restaurant) + ' (NOT on the map: add it to the map or tell the developer)')
+      + '<br><br>🔑 Dashboard code: <b style="font-size:22px;letter-spacing:.08em">' + H.fmtCode(E.dashCode) + '</b><br>Tell them on the call: sign in at bina.et/restaurants/dashboard and type this code. It works once, for 30 days.');
   });
   done();
 };
-Object.assign(module.exports, { buildPlaces, places, placeOut, findable, pageUrl, KINDS, readStore, writeStore });
+Object.assign(module.exports, { buildPlaces, places, placeOut, findable, pageUrl, KINDS, readStore, writeStore, tellTeam });
 module.exports.list = () => places().list;
 module.exports.findableSlugs = () => { const L = live(); return places().list.map(p => placeOut(p, L)).filter(findable).map(f => '/restaurants/' + f.slug); };

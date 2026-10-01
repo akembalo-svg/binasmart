@@ -2303,6 +2303,7 @@ fastify.register(require('./property/detail'), { prisma });
 fastify.register(require('./property/owner-listing'), { prisma, limiter: hotelLimiter });
 fastify.register(require('./shops/posts'), { prisma, limiter: hotelLimiter });
 fastify.register(require('./restaurants/directory'), { limiter: hotelLimiter });   // bina.et/restaurants: restaurants, cafés and fast food from the city map; claims via Bini (1 Oct 2026)
+fastify.register(require('./restaurants/dashboard'), { prisma, limiter: hotelLimiter });   // bina.et/restaurants/dashboard: owners edit their number, hours and dishes (1 Oct 2026)
 fastify.register(require('./health/directory'), { prisma, limiter: hotelLimiter });   // bina.et/health: hospitals, clinics, dentists, labs + doctors who join through Dr Afiya (30 Sep 2026)
 fastify.register(require('./health/dashboard'), { prisma, limiter: hotelLimiter, runAgent, isEval, agent: require('./agents/afiya-pro/rules') });   // bina.et/health/dashboard: owners edit their pages; Dr Afiya helps with the practice side only (30 Sep 2026)   // bina.et/shop: products and offers shop owners post through Bini (30 Sep 2026)   // homes for sale / rent sent through Bini (29 Sep 2026)
 // bina.et/cars/<slug>: one car in full, same page design.
