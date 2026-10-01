@@ -49,17 +49,20 @@ function summarise() {
     who = { total: logs.length, real, tests: logs.length - real };
   } catch (e) { /* no database from here */ }
   const total = Object.values(byLabel).reduce((a, L) => a + L.usd, 0);
+  // '-offline' = calls from a benchmark or maintenance script under ops/ (knowledge/index.js METER_SUFFIX, 1 Oct 2026)
+  const offline = Object.entries(byLabel).filter(([k]) => /-offline$/.test(k)).reduce((a, [, L]) => a + L.usd, 0);
   const meteredDays = Object.keys(byDay).length;
   if (process.argv.includes('--json')) {
-    console.log(JSON.stringify({ days, total, meteredDays, perDay: meteredDays ? total / meteredDays : 0, who,
+    console.log(JSON.stringify({ days, total, offline, meteredDays, perDay: meteredDays ? total / meteredDays : 0, who,
       byLabel: Object.fromEntries(Object.entries(byLabel).map(([k, L]) => [k, { calls: L.calls, in: L.in, out: L.out, usd: L.usd, perCall: L.in / L.calls }])) }));
     return;
   }
   console.log('BinaSmart paid AI, last ' + days + ' days (list price, no cache discount)\n');
   for (const [k, L] of Object.entries(byLabel).sort((a, b) => b[1].usd - a[1].usd))
-    console.log(k.padEnd(10) + String(L.calls).padStart(6) + ' calls  ' + Math.round(L.in / L.calls).toLocaleString().padStart(7) + ' tokens in/call  $' + L.usd.toFixed(3));
+    console.log(k.padEnd(16) + String(L.calls).padStart(6) + ' calls  ' + Math.round(L.in / L.calls).toLocaleString().padStart(7) + ' tokens in/call  $' + L.usd.toFixed(3));
   if (!meteredDays) console.log('(no meter lines yet)');
   else console.log('\ntotal $' + total.toFixed(2) + ' over ' + meteredDays + ' metered day(s) -> about $' + (total / meteredDays * 30).toFixed(0) + ' a month at this rate');
+  if (offline > 0) console.log('of which benchmarks / maintenance scripts (-offline): $' + offline.toFixed(2));
   if (who) console.log('Bini messages: ' + who.total + ' (real users ' + who.real + ', our tests ' + who.tests + ' = ' + Math.round(who.tests / Math.max(who.total, 1) * 100) + '%)');
   console.log('News audio: local MMS voice, $0.');
 })();

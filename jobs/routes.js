@@ -509,6 +509,7 @@ const ogJobs = cat => {
   // A small JSON search, for Bini's search_jobs tool and nothing else: at most ten rows, no bodies, no
   // contact details. Deliberately not a bulk feed - the board is in the HTML pages, which is what we
   // want people (and search engines) to read.
+  const { stem, rankJobs } = require('./searchRank');
   fastify.get('/api/jobs/search', async (req, reply) => {
     const now = new Date();
     const q = String(req.query.q || '').trim().slice(0, 60);
@@ -518,12 +519,13 @@ const ogJobs = cat => {
     const where = { published: true, OR: [{ deadline: null }, { deadline: { gte: openSince(now) } }] };
     if (field && BY_SLUG.get(field)) where.category = field;
     if (city) where.city = { contains: city, mode: 'insensitive' };
+    const qs = stem(q);   // "engineers" also finds "Engineer"
     if (q) {
       where.AND = [{ OR: [
-        { title: { contains: q, mode: 'insensitive' } },
-        { titleAm: { contains: q } },
-        { summary: { contains: q, mode: 'insensitive' } },
-        { employer: { name: { contains: q, mode: 'insensitive' } } },
+        { title: { contains: qs, mode: 'insensitive' } },
+        { titleAm: { contains: qs } },
+        { summary: { contains: qs, mode: 'insensitive' } },
+        { employer: { name: { contains: qs, mode: 'insensitive' } } },
       ] }];
     }
     // Fetch well beyond `take` before filtering. The SQL window keeps anything whose deadline has not
@@ -531,10 +533,12 @@ const ogJobs = cat => {
     // exactly the ones this ordering returns first, are often the ones that just closed. Taking twice
     // `take` returned an empty list for every field on the first try.
     const rows = (await prisma.job.findMany({ where, include: { employer: { select: { name: true } } },
-      orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: Math.max(take * 10, 60) }))
-      .filter(j => !isClosed(j.deadline, now)).slice(0, take);
+      orderBy: [{ deadline: { sort: 'asc', nulls: 'last' } }, { publishedAt: 'desc' }], take: q ? 300 : Math.max(take * 10, 60) }))
+      .filter(j => !isClosed(j.deadline, now));
+    // A keyword: jobs with it in the TITLE first; summary / employer-name matches only fill a short list (1 Oct 2026).
+    const picked = q ? rankJobs(rows, q, take) : rows.slice(0, take);
     reply.header('cache-control', 'public, max-age=300');
-    return { jobs: rows.map(j => ({
+    return { jobs: picked.map(j => ({
       title: j.title, titleAm: j.titleAm || undefined, employer: j.employer.name, city: j.city,
       field: j.category || undefined, jobType: j.jobType || undefined, salary: j.salary || undefined,
       deadline: j.deadline ? new Date(j.deadline).toISOString().slice(0, 10) : undefined,

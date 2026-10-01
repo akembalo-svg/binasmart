@@ -1,4 +1,7 @@
 'use strict';
+// Cost meters: calls made by a benchmark or maintenance script (ops/...) are labelled '-offline' so the AI bill
+// (ops/ai-cost.js) shows real use apart from our own testing. 1 Oct 2026: one rerank benchmark was 228 calls.
+const METER_SUFFIX = /[\\/]ops[\\/]/.test((require.main && require.main.filename) || '') ? '-offline' : '';
 // BinaSmart knowledge index (RAG). Sources: the binasmart-system skill, the Addis Ababa notes, the guide
 // and service pages in public/, llms.txt, the MCP docs and BinaSmart's own published news (NewsPost). Chunks are stored in Postgres (KnowledgeChunk)
 // with a Gemini embedding; the whole matrix lives in RAM and search is a cosine scan plus a keyword score,
@@ -619,7 +622,7 @@ function makeQueryTranslator({ apiKey, fetchImpl, model, timeoutMs } = {}) {
           generationConfig: { temperature: 0, maxOutputTokens: 64, thinkingConfig: { thinkingBudget: 0 } } }) });
       if (!r.ok) throw new Error('gemini ' + r.status);
       const j = await r.json();
-      try { require('../assistant/ai-meter').meter('translate', model || BILINGUAL_MODEL, j.usageMetadata); } catch (e) { /* meter only */ }
+      try { require('../assistant/ai-meter').meter('translate' + METER_SUFFIX, model || BILINGUAL_MODEL, j.usageMetadata); } catch (e) { /* meter only */ }
       const parts = (((j.candidates || [])[0] || {}).content || {}).parts;
       const raw = String((parts && parts[0] && parts[0].text) || '').replace(/\s+/g, ' ').trim().replace(/^["'“”]+|["'“”]+$/g, '');
       if (!raw) throw new Error('empty');
@@ -1095,7 +1098,7 @@ function makeKnowledge({ prisma, apiKey, fetchImpl, root, log, sleep, localEmbed
       });
       if (!r.ok) throw new Error('rerank ' + r.status);
       const j = await r.json();
-      try { require('../assistant/ai-meter').meter('rerank', RERANK_MODEL, j.usageMetadata); } catch (e) { /* meter only */ }
+      try { require('../assistant/ai-meter').meter('rerank' + METER_SUFFIX, RERANK_MODEL, j.usageMetadata); } catch (e) { /* meter only */ }
       const txt = (((j.candidates || [])[0] || {}).content || {}).parts?.[0]?.text || '';
       const m = txt.match(/\[[\s\S]*?\]/); if (!m) throw new Error('no array');
       const ord = JSON.parse(m[0]).filter(n => Number.isInteger(n) && n >= 0 && n < cands.length);
