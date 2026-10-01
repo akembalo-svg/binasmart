@@ -1606,10 +1606,11 @@ fastify.post('/api/assistant', async (req, reply) => {
     text = biniGuards(text, msg, hist, String(ctx || '') + ' ' + preTool + ' ' + toolOut);
     // An English question gets an English answer. The model sometimes answers a clearly English question in
     // Amharic when its tools and knowledge came back in Amharic (15 of 73 real English messages in September;
-    // nightly guard, 28 Sep 2026). Only when the question is unmistakably English (3+ Latin words, no Ethiopic)
-    // and most of the reply is Ethiopic outside brackets, the reply is TRANSLATED - no tool runs again and no new
-    // fact can enter; a failed translation keeps the original.
-    if (lang === 'en' && text && !/[\u1200-\u137f]/.test(msg) && (msg.match(/[A-Za-z]{2,}/g) || []).length >= 3) {
+    // nightly guard, 28 Sep 2026). Only when the question is unmistakably English (biniLang.wantsEnglish: 3+ Latin
+    // words, or a short one like "Ok" in a chat that has not been in Amharic) and most of the reply is Ethiopic
+    // outside brackets, the reply is TRANSLATED - no tool runs again and no new fact can enter; a failed
+    // translation keeps the original.
+    if (text && biniLang.wantsEnglish(msg, lang, hist)) {
       const bare = text.replace(/\([^)]*\)/g, '');
       const eth = (bare.match(/[\u1200-\u137f]/g) || []).length, lat = (bare.match(/[A-Za-z]/g) || []).length;
       if (eth > 0.5 * (eth + lat)) {

@@ -59,4 +59,18 @@ function foldEthiopic(s) {
   });
 }
 
-module.exports = { detect, directive, NAMES, foldEthiopic };
+// Should an answer that came back mostly in Amharic be translated to English? (the backstop in server.js)
+// Long messages: 3+ Latin words and no Ethiopic. Short ones too since 1 Oct 2026, when a first message "Ok"
+// on Telegram got «እንዴት ልረዳዎት እችላለሁ? 😊»: one or two Latin words, none of them Amharic typed in Latin
+// (selam, eshi, tadia…), and no Ethiopic from the user earlier in this chat. After an Amharic conversation
+// "Ok" is still Amharic, so it is left alone.
+function wantsEnglish(msg, lang, hist) {
+  const s = String(msg || '');
+  if (lang !== 'en' || /[\u1200-\u137f]/.test(s)) return false;
+  const words = (s.match(/[A-Za-z]{2,}/g) || []).length;
+  if (words >= 3) return true;
+  if (!words || (s.match(AM_LATIN) || []).length) return false;
+  return !(hist || []).some(h => h && h.role === 'user' && /[\u1200-\u137f]/.test(String(h.content || '')));
+}
+
+module.exports = { detect, directive, wantsEnglish, NAMES, foldEthiopic };
