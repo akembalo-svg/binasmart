@@ -132,3 +132,4 @@ User-agent: Bytespider-Extended
 Disallow: /
 
 Sitemap: https://bina.et/sitemap.xml
+Sitemap: https://bina.et/sitemap-core.xml
