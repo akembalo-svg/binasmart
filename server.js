@@ -1403,6 +1403,7 @@ fastify.post('/api/assistant', async (req, reply) => {
     // bank question and a licence question gets BOTH blocks - only one pack can hold the +0.06 tie-breaker,
     // but a limit is not a retrieval preference and a half-stated rule is a half-obeyed one.
     const bizGuard = businessPrefer.prefer ? biniBusiness.GUARDRAILS : '';
+    const refGuard = biniForce.isReferenceCode && biniForce.isReferenceCode(msg) ? biniForce.REF_GUARD : '';   // a bare reference/ID number (1 Oct 2026)
     // A short follow-up is also searched with the question before it (knowledge/index.js contextFor `context`: added hits,
     // never replacing). ON since 30 Sep 2026 after a 17-case multi-turn replay, two runs: 31/34 answered vs 26/34 with the
     // message alone, no new-topic drift (/root/storage/health-fix/followup-ab.js). Off switch: BINI_FOLLOWUP_CONTEXT=0;
@@ -1521,7 +1522,7 @@ fastify.post('/api/assistant', async (req, reply) => {
     if (!coCtx && (biniTools.AGENT_RE.test(msg) || hist.slice(-4).some(m => m.role === 'user' && biniTools.AGENT_RE.test(m.content)))) {
       coCtx = '\n\nBINI BROWSER: ' + biniTools.AGENT_FACTS + ' ' + biniTools.AGENT_ASK;
     }
-    const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + BINI_SHARED + voice + '\n\n' + biniLang.directive(lang) + turn + bankGuard + bizGuard + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + coCtx + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
+    const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + BINI_SHARED + voice + '\n\n' + biniLang.directive(lang) + turn + bankGuard + bizGuard + refGuard + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + coCtx + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys + preTool, [...hist, { role: 'user', content: msg }], 900, opts);
     // tool_choice:'required' is advisory and this model ignores it often enough to matter — measured
     // as a price question answered with no price, and as an invented BinaPool corridor. One retry,

@@ -138,4 +138,21 @@ function isRideFollowUp(msg, prev) {
 const PROMISE_RE = /(please wait|one moment|just a moment|let me (search|find|check|look)|i('ll| will) (search|find|look|check)|ትንሽ ይጠብቁ|ይጠብቁኝ|ልፈልግልዎ|ልፈልግልህ|ልፈልግልሽ|እፈልግልዎታለሁ|እየፈለግሁ ነው)/i;
 const isPromiseOnly = t => { t = String(t || ''); return t.length < 400 && !/https?:\/\/|bina\.et\//.test(t) && PROMISE_RE.test(t); };
 
-module.exports = { isJobTitleSearch, jobTitleArgs, shouldForceTool, isRideFollowUp, isPromiseOnly, PRICE_RE, OTHER_FORCE_RE, RIDE_CUE_RE, PROPERTY_RE, CAR_BUY_RE, isCarBuying, isHotelSearch, isHealthSearch };
+// A message that is only a code: letters and digits (and / - .), no spaces, at least 3 digits and 1 letter, 6-40 long.
+// Not a BinaRide id (c + 20-30 letters/digits: tools.js ride_status), a phone number, a link, or a plain word/number.
+// 1 Oct 2026: four real people in a week pasted "EF########", "EFLGD#####", "essc/####/######/#" after asking about the
+// Labor ID; Bini ran ride_status on it or asked "what is that?". BinaSmart cannot look such records up.
+const isReferenceCode = s => {
+  s = String(s || '').trim();
+  if (s.length < 6 || s.length > 40 || /\s/.test(s) || /^https?:|\.(et|com|org)\b/i.test(s)) return false;
+  if (!/^[A-Za-z0-9/._-]+$/.test(s) || (s.match(/\d/g) || []).length < 3 || !/[A-Za-z]/.test(s)) return false;
+  if (/^c[a-z0-9]{20,30}$/.test(s)) return false;   // a BinaRide id
+  return true;
+};
+const REF_GUARD = '\n\nTHIS MESSAGE IS A CODE: the person sent what looks like a reference, application or ID number. BinaSmart cannot look up '
+  + 'government, bank or company records, so do not pretend to check it and do not call ride_status (a BinaRide id starts with "c" and has 20-30 '
+  + 'letters and digits). In one or two short sentences, in the person\'s language: say you cannot check that record here. If the conversation is '
+  + 'about the Labor ID or LMIS, say they can see it themselves on the LMIS personal dashboard (personal-dashboard.etc.lmis.gov.et) or at their '
+  + 'woreda/kebele one-stop service centre, and give https://bina.et/lmis-labor-id-ethiopia. Otherwise ask what the number is for.';
+
+module.exports = { isReferenceCode, REF_GUARD, isJobTitleSearch, jobTitleArgs, shouldForceTool, isRideFollowUp, isPromiseOnly, PRICE_RE, OTHER_FORCE_RE, RIDE_CUE_RE, PROPERTY_RE, CAR_BUY_RE, isCarBuying, isHotelSearch, isHealthSearch };
