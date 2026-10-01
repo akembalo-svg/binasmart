@@ -100,13 +100,18 @@ function shouldForceTool(msg) {
 // ("I need a waiter", "ሰራተኛ መቅጠር"), a CV, an alert, a fee or a trip is not this. Driver is left out on purpose:
 // "ሹፌር ሆኜ መስራት" is BinaRide registration.
 const JOB_STRONG_RE = /(waiter|waitress|receptionist|bartender|barista|housekeeper|\bchefs?\b|ወይትረስ|ዌይትረስ|አስተናጋጅ|ሪሴፕሽን|ሪሰፕሽን|ምግብ አብሳይ|ባርቴንደር|ሼፍ)/i;
-const JOB_WEAK_RE = /(\bcooks?\b|\bguards?\b|security|cleaner|housekeeping|ጥበቃ|ዘበኛ|ፅዳት|ጽዳት)/i;
+// Office and professional titles (1 Oct 2026: an accountant search got companies' total vacancy counts from the notes,
+// no job search) - weak too, so \"I am an accountant\" alone is not a search.
+const JOB_WEAK_RE = /(\bcooks?\b|\bguards?\b|security|cleaner|housekeeping|ጥበቃ|ዘበኛ|ፅዳት|ጽዳት|accountant|accounting|አካውንታንት|አካውንቲንግ|ሒሳብ ሰራተኛ|ሂሳብ ሰራተኛ|cashier|ካሸር|ካሼር|\bnurses?\b|ነርስ|engineer|ኢንጂነር|መሐንዲስ|መሀንዲስ|secretary|ፀሐፊ|ጸሐፊ|ሴክሬታሪ|teacher|መምህር|አስተማሪ|pharmacist|ፋርማሲስት|\bsales\b|ሽያጭ)/i;
 const JOB_WORD_RE = /(ስራ|ሥራ|\bjobs?\b|vacanc|ቅጥር|መቀጠር|ተቀጥሬ|work as|\bsira\b)/i;
 const NOT_SEEKER_RE = /(መቅጠር እፈልጋለሁ|ልቅጠር|እቀጥራለሁ|ሰራተኛ እፈልጋለሁ|ሰራተኛ ፈልጌ|ሰራተኛ ያስፈልገኛል|post (a )?job|ማስታወቂያ ማውጣት|\b(need|hire|hiring|recruit)\b[^.?!]{0,12}\b(a|an)\s+(waiter|waitress|cook|chef|guard|cleaner|receptionist|bartender|barista)\b(?!\s*(job|position|work))|ክፈል|ክፍያ|ከፍለ|\bfee\b|\bcv\b|ሲቪ|\balert|አሳውቀኝ)/i;
 const isJobTitleSearch = s => { s = String(s || ''); return (JOB_STRONG_RE.test(s) || (JOB_WEAK_RE.test(s) && JOB_WORD_RE.test(s))) && !NOT_SEEKER_RE.test(s) && !TRIP_RE.test(s); };
 const JOB_Q = [[/waiter|waitress|ወይትረስ|ዌይትረስ|አስተናጋጅ/i, 'waiter', 'hospitality'], [/receptionist|ሪሴፕሽን|ሪሰፕሽን/i, 'receptionist', 'hospitality'],
   [/\bcooks?\b|\bchefs?\b|ምግብ አብሳይ|ሼፍ/i, 'cook', 'hospitality'], [/housekeep/i, 'housekeeping', 'hospitality'], [/bartender|ባርቴንደር/i, 'bartender', 'hospitality'],
-  [/barista/i, 'barista', 'hospitality'], [/\bguards?\b|security|ጥበቃ|ዘበኛ/i, 'guard', 'security'], [/cleaner|ፅዳት|ጽዳት/i, 'cleaner', '']];
+  [/barista/i, 'barista', 'hospitality'], [/\bguards?\b|security|ጥበቃ|ዘበኛ/i, 'guard', 'security'], [/cleaner|ፅዳት|ጽዳት/i, 'cleaner', ''],
+  [/accountant|accounting|አካውንታንት|አካውንቲንግ|ሒሳብ ሰራተኛ|ሂሳብ ሰራተኛ/i, 'accountant', ''], [/cashier|ካሸር|ካሼር/i, 'cashier', ''], [/\bnurses?\b|ነርስ/i, 'nurse', ''],
+  [/engineer|ኢንጂነር|መሐንዲስ|መሀንዲስ/i, 'engineer', ''], [/secretary|ፀሐፊ|ጸሐፊ|ሴክሬታሪ/i, 'secretary', ''], [/teacher|መምህር|አስተማሪ/i, 'teacher', ''],
+  [/pharmacist|ፋርማሲስት/i, 'pharmacist', ''], [/\bsales\b|ሽያጭ/i, 'sales', '']];
 const JOB_CITY = [[/adama|nazret|አዳማ|ናዝሬት/i, 'Adama'], [/hawassa|awassa|ሀዋሳ|ሃዋሳ/i, 'Hawassa'], [/bahir ?dar|ባሕር ዳር|ባህር ዳር/i, 'Bahir Dar'],
   [/mekel+e|መቀሌ/i, 'Mekelle'], [/dire ?dawa|ድሬ ?ዳዋ/i, 'Dire Dawa'], [/gond[ae]r|ጎንደር/i, 'Gondar'], [/jimma|ጅማ/i, 'Jimma'],
   [/addis|አዲስ አበባ|bole|ቦሌ|piassa|ፒያሳ|kazanchis|ካዛንቺስ|megenagna|መገናኛ|\bcmc\b|sarbet|ሳርቤት/i, 'Addis Ababa']];

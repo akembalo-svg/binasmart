@@ -1172,9 +1172,15 @@ async function callBini(system, messages0, maxTokens, opts){
   }
   // Primary: cloud API when BINI_API_BASE is configured in .env
   if (process.env.BINI_API_BASE && process.env.BINI_API_KEY) {
-    try {
-      return await once((process.env.BINI_API_FORMAT || 'openai').toLowerCase(), process.env.BINI_API_BASE, process.env.BINI_API_KEY || 'x', process.env.BINI_API_MODEL || 'gpt-4o-mini');
-    } catch (e) { console.warn('[bini] cloud model failed, falling back to GLM: ' + (e && e.message || e)); }
+    // Primary model, then BINI_API_MODEL_FALLBACK (comma list) on the same key with tools still on. 1 Oct 2026:
+    // gemini-2.5-flash answered 503 "high demand" for hours while the GLM path was dead, so every reply was the apology.
+    const models = [process.env.BINI_API_MODEL || 'gpt-4o-mini'].concat(String(process.env.BINI_API_MODEL_FALLBACK || '').split(',').map(m => m.trim()).filter(Boolean));
+    for (let i = 0; i < models.length; i++) {
+      if (i && opts) { opts.rounds = 0; opts.keepForcing = false; opts.answeredFromTools = false; opts.used = []; } // a fresh start for the next model
+      try {
+        return await once((process.env.BINI_API_FORMAT || 'openai').toLowerCase(), process.env.BINI_API_BASE, process.env.BINI_API_KEY || 'x', models[i]);
+      } catch (e) { console.warn('[bini] cloud model ' + models[i] + ' failed' + (i < models.length - 1 ? ', trying ' + models[i + 1] : ', falling back to GLM') + ': ' + (e && e.message || e)); }
+    }
   }
   // Fallback / default: local GLM (Anthropic-compat) — no tools on this path
   if (opts) { opts.tools = null; opts.execute = null; }
@@ -1289,6 +1295,7 @@ const SHOP_SELL_RE = /(\bpost\b|\bsell (my|our)\b|ልለጥፍ|መለጠፍ|ላ�
 // first time a harness changed its ip, and rot invisibly.
 const isEval = req => require('./api/evalGate').evalAllowed(req, OWNER_KEY);   // header alone is no longer enough: owner key, or loopback
 const biniTools = require('./assistant/tools');
+const biniLinks = require('./assistant/linkGuard');   // 1 Oct 2026: bina.et links that 404 are taken out of the reply
 const { dropUngrounded, fixCalendarMarker } = require('./assistant/grounding');
 const { tidyAnswer } = require('./assistant/tidy');
 // Dating, attribution and our own address: what every answer owes the reader, whatever it is about.
@@ -1311,6 +1318,7 @@ const biniReadImage = require('./assistant/readimage').makeImageReader({ apiKey:
 const BINI_TOOL_RULES = '\n\nTOOLS: you have real tools. For any fare, place, ride status, shared-ride price, cinema programme or tender question CALL THE TOOL and answer from its result; never answer such things from memory. Flow for a ride: search_places for pickup and drop-off → quote_ride. For well-known areas and landmarks (Megenagna, Bole, Bole Medhanialem, Piassa, Kazanchis, CMC, Mexico, Merkato, Sarbet, Saris, Kality, Jemo, Gerji, Arat Kilo, the airport…) take the FIRST result and quote at once, naming the place you used; ask "which one" only when the results are genuinely different places (e.g. two hotels with the same name). Never ask the user for coordinates. → quote_ride → show the fares → only if the user says yes AND you have an Ethiopian phone number, request_ride with confirmed=true → give the ride id and tracking link. Never call request_ride without an explicit yes in this conversation. If a tool returns an error, say what is missing in one sentence. Use remember() when the user tells you their name, phone, home or work, or asks you to remember something — one call per fact; never claim you remembered without calling it. ጋራ ጉዞ / Imala Waliinii / pool / መቀመጫ (seat) price questions → pool_board. TV, radio, FM, series, drama, kids channel, "open/play/listen" → watch_channels and answer with its openUrl (BinaWatch opens it in one tap); never say you cannot open radio or TV, and never link outside websites for media. Use contact_team when a person is needed.';
 
 const _assistRL = new Map(); // ip -> [timestamps]
+const _testBudget = { day: '', n: 0 };   // test messages today (see BINI_TEST_DAILY_CAP below)
 fastify.post('/api/assistant', async (req, reply) => {
   const t0 = Date.now();
   const b = req.body || {};
@@ -1328,6 +1336,12 @@ fastify.post('/api/assistant', async (req, reply) => {
   const FALLBACK = 'ይቅርታ፣ አሁን መልስ መስጠት አልቻልኩም። እባክዎ በቴሌግራም ያግኙን፦ https://t.me/Bina_smart';
   // Who is talking: Telegram id (stable), a browser uid (stable per device), or just the IP (no memory).
   const u = (b.user && typeof b.user === 'object') ? b.user : {};
+  // Test budget (1 Oct 2026): our own checks were 90% of Bini's paid model calls. Real users are never counted.
+  if (isEval(req) || /^(e2e-|eval)/i.test(String(u.uid || ''))) {
+    const day = new Date().toISOString().slice(0, 10), cap = Number(process.env.BINI_TEST_DAILY_CAP || 150);
+    if (_testBudget.day !== day) { _testBudget.day = day; _testBudget.n = 0; }
+    if (++_testBudget.n > cap) return reply.code(429).send({ reply: '', error: 'test_budget', note: 'Bini test budget for ' + day + ' used up (' + cap + ' test messages, BINI_TEST_DAILY_CAP). Use --limit / --grep, or try tomorrow.' });
+  }
   const channel = u.telegramId ? 'telegram' : (u.uid ? 'web' : 'api');
   const userKey = biniMemory.userKey({ telegramId: u.telegramId, uid: u.uid, ip, evaluation: isEval(req) });
   const mem = biniMemory.forUser(userKey, { telegramId: u.telegramId, name: u.name });
@@ -1653,6 +1667,8 @@ fastify.post('/api/assistant', async (req, reply) => {
       if (!/bina\.et\/health/.test(text))
         text += (lang === 'am' ? '\n\n🏥 ሁሉም ሆስፒታሎች፣ ክሊኒኮችና የጥርስ ክሊኒኮች፦ ' : '\n\n🏥 All hospitals, clinics and dentists: ') + 'https://bina.et/health';
     }
+    // A link to a bina.et page that does not exist (nightly guard, 1 Oct 2026: "/Cashier") becomes plain text.
+    if (text) { try { text = await biniLinks.fix(text, { log: m => console.warn(m) }); } catch (e) { /* never block a reply */ } }
     // A complaint goes to a person even when Bini sounded confident, and it is never rate-limited:
     // a second complaint from the same rider is more urgent than the first, not less.
     const always_handover = COMPLAINT_RE.test(msg) || biniMemory.wantsHuman(msg);

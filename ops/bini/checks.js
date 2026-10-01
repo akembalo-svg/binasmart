@@ -26,7 +26,9 @@ const OROMO_HINT = /\b(jira|jirta|dha|isin|isinitti|gatii|gatiin|imala|imalaa|da
 // Server-rendered pages with a slug (hotels/directory.js, property, cars, jobs, company directory) and /llms.txt,
 // which pathsIn reads as "/llms" because it stops at the dot. health and restaurants (30 Sep / 1 Oct 2026) are server-rendered
 // directories too: the 1 Oct nightly run failed a correct answer on /health/<slug> as an "unknown link".
-const DYNAMIC_PAGE = /^\/(hotels|hotel|property|cars|employer|jobs|job|tenders|tender|news|companies|real-estate-companies|car-dealers|health|restaurants|shop)(\/[a-z0-9][a-z0-9\-_]*)?$|^\/llms$/i;
+// 1 Oct 2026: /employers (the hiring-companies directory) and a ?q= search on a directory (Bini itself closes a
+// health answer with /health?q=hospital) are real pages too - both were failed as "unknown links".
+const DYNAMIC_PAGE = /^\/(hotels|hotel|property|cars|employer|employers|jobs|job|tenders|tender|news|companies|real-estate-companies|car-dealers|health|restaurants|shop)(\/[a-z0-9][a-z0-9\-_]*)?(\?q=[a-z0-9+%\-]+)?$|^\/llms$/i;
 function knownPaths(root) {
   const set = new Set(['/', '/ride', '/ride?pool=1', '/pool', '/drive', '/airport', '/hotels', '/watch', '/cinema', '/tenders', '/news', '/guides', '/ai', '/mcp', '/owner', '/nav', '/business', '/property', '/cars', '/insurance', '/flights', '/travel', '/support', '/llms.txt']);
   try { for (const f of fs.readdirSync(path.join(root, 'public'))) if (f.endsWith('.html')) set.add('/' + f.replace(/\.html$/, '')); } catch (e) { /* no public dir in tests */ }
@@ -74,7 +76,7 @@ function check(item, reply, { known, tools } = {}) {
   const priced = Array.isArray(tools) && tools.some(t => /^(quote_ride|pool_board|search_tenders|ride_status)$/.test(t));
   const isEn = tags.includes('english'), isLatin = tags.includes('latin'), isOm = tags.includes('om');
   if (!r.trim()) fails.push('empty');
-  if (isEn) { if (ETHIOPIC.test(r.replace(/\([^)]*\)/g, '').replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ|ሰላም/g, ''))) fails.push('english_drift_to_amharic'); }   // an Amharic name in brackets, or a "ሰላም" greeting, is not drift
+  if (isEn) { if (ETHIOPIC.test(r.replace(/\([^)]*\)/g, '').replace(/\*\*[^*\n]{1,40}\*\*/g, '').replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ|ሰላም/g, ''))) fails.push('english_drift_to_amharic'); }   // a short **bold** title is the employer's own wording (1 Oct 2026)   // an Amharic name in brackets, or a "ሰላም" greeting, is not drift
   else if (isOm) { if (ETHIOPIC.test(r.replace(/ቢናስማርት|ቢኒ|ጋራ ጉዞ/g, ''))) fails.push('oromo_drift_to_amharic'); if (!OROMO_HINT.test(r)) fails.push('not_oromo'); }
   else if (!ETHIOPIC.test(r)) fails.push('no_amharic_script');
   if (isLatin && !/\([^)]*[a-z]{3,}[^)]*\)\s*$/i.test(r.trim())) fails.push('latin_gloss_missing');

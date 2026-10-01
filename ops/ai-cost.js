@@ -13,7 +13,8 @@
 const fs = require('fs');
 const path = require('path');
 const DIR = process.env.BINA_AI_USAGE_DIR || '/root/storage/ai-usage';
-const PRICE = { 'gemini-2.5-flash': [0.30, 2.50], 'gemini-2.5-flash-lite': [0.10, 0.40], 'gemini-2.0-flash': [0.10, 0.40] };
+// gemini-3.8-flash = Bini's emergency fallback (1 Oct 2026); $0.75/$3.75 until 31 Dec 2026, then $1.50/$7.50.
+const PRICE = { 'gemini-3.8-flash': [0.75, 3.75], 'gemini-2.5-flash': [0.30, 2.50], 'gemini-2.5-flash-lite': [0.10, 0.40], 'gemini-2.0-flash': [0.10, 0.40] };
 const arg = f => { const i = process.argv.indexOf(f); return i > -1 ? process.argv[i + 1] : null; };
 const days = Number(arg('--days')) || 7;
 
