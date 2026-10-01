@@ -55,7 +55,7 @@ const GUIDE_SLUGS = ['fayda', 'telebirr', 'cbe-birr-guide', 'passport', 'ethiopi
   // so "what is the salary income tax rate?" found the VAT guide instead.
   'ethiopia-income-tax-calculator'];
 const PAGE_SLUGS = ['pool', 'airport', 'hotels', 'insurance', 'cars', 'property', 'flights', 'travel', 'why-binasmart', 'drive-with-us',
-  'for-business', 'for-cinemas', 'for-filmmakers', 'for-insurers', 'diaspora', 'ai', 'amharic-ai', 'support', 'guides', 'watch', 'cinema'];
+  'for-business', 'for-owners', 'for-cinemas', 'for-filmmakers', 'for-insurers', 'diaspora', 'ai', 'amharic-ai', 'support', 'guides', 'watch', 'cinema'];
 
 // ---------- text helpers ----------
 const ENT = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', '#39': "'" };
