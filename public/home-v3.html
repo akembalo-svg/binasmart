@@ -25,7 +25,7 @@
 <link rel="preload" as="image" href="/static/home/city-m.jpg" media="(max-width:899px)">
 <link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"BinaSmart","disambiguatingDescription":"BinaSmart Ethiopia (bina.et), based in Addis Ababa — not affiliated with \"Bina Smart Business\" (a Romanian retail ERP) or \"Smartlife Bina\" (Turkey).","alternateName":"BinaSmart Ethiopia — ብልህ የህንፃ አስተዳደር","url":"https://bina.et","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Ethiopia's all-in-one platform: ride-hailing, airport transfer, hotels, live TV and films, restaurants, property, insurance, cars, hospitals, bus and flight tickets, news, tenders, Digital Ethiopia guides, building management with 3D voice navigation.","areaServed":[{"@type":"Country","name":"Ethiopia"},{"@type":"Country","name":"United Arab Emirates"}],"availableLanguage":["am","en","ar"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"BinaSmart","disambiguatingDescription":"BinaSmart Ethiopia (bina.et), based in Addis Ababa — not affiliated with \"Bina Smart Business\" (a Romanian retail ERP) or \"Smartlife Bina\" (Turkey).","alternateName":"ቢናስማርት","url":"https://bina.et","logo":"https://bina.et/static/brand-logo.png","description":"BinaSmart is Ethiopia's all-in-one digital platform — ride, hotels, TV and films, restaurants, hospitals, travel, flights, events, tenders, news, insurance, cars and property — in Amharic and English.","email":"info@bina.et","telephone":"+251911244344","areaServed":{"@type":"Country","name":"Ethiopia"},"address":{"@type":"PostalAddress","addressLocality":"Addis Ababa","addressCountry":"ET"},"founder":{"@type":"Person","name":"Ibrahim Kedir Bedru","sameAs":["https://www.wikidata.org/wiki/Q141150503","https://orcid.org/0009-0002-6562-5573"]},"foundingDate":"2025-03","sameAs":["https://www.wikidata.org/wiki/Q141368272","https://www.tiktok.com/@bina_smart","https://www.facebook.com/binasmartet","https://www.linkedin.com/company/144771046","https://t.me/binasmart"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"BinaSmart","disambiguatingDescription":"BinaSmart Ethiopia (bina.et), based in Addis Ababa — not affiliated with \"Bina Smart Business\" (a Romanian retail ERP) or \"Smartlife Bina\" (Turkey).","alternateName":"ቢናስማርት","url":"https://bina.et","logo":"https://bina.et/static/brand-logo.png","description":"BinaSmart is Ethiopia's all-in-one digital platform — ride, hotels, TV and films, restaurants, hospitals, travel, flights, events, tenders, news, insurance, cars and property — in Amharic and English.","email":"info@bina.et","telephone":"+251911244344","areaServed":{"@type":"Country","name":"Ethiopia"},"address":{"@type":"PostalAddress","addressLocality":"Addis Ababa","addressCountry":"ET"},"founder":{"@type":"Person","name":"Ibrahim Kedir Bedru","sameAs":["https://www.wikidata.org/wiki/Q141150503","https://orcid.org/0009-0002-6562-5573"]},"foundingDate":"2025-03","sameAs":["https://www.wikidata.org/wiki/Q141368272","https://www.tiktok.com/@bina_smart","https://www.facebook.com/binasmartet","https://www.linkedin.com/company/144771046","https://t.me/binasmart","https://www.crunchbase.com/organization/binasmart","https://www.google.com/maps?cid=4221379378499739498"]}</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{--bg:#F8FAFC;--ink:#081120;--mut:#64748B;--em:#00C896;--em2:#009688;--ai:#0099FF;--ai2:#6C63FF;--line:rgba(8,17,32,.07)}
@@ -197,6 +197,8 @@ main{padding-bottom:110px}
   main{padding-bottom:120px}
 }
 .minisToggle{display:none}
+#minisHead>button{all:unset;display:flex;align-items:center;gap:10px;width:100%;cursor:pointer;font:inherit;color:inherit}
+#minisHead>button:focus-visible{outline:3px solid var(--em,#14D8B4);outline-offset:4px;border-radius:8px}
 .ddhead{display:none}
 @media(max-width:759px){
   .ddhead{display:flex;align-items:center;gap:8px;width:100%;margin-top:14px;min-height:52px;padding:8px 14px;border-radius:16px;font:inherit;text-align:left;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.85);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);box-shadow:0 10px 24px -16px rgba(8,17,32,.35)}
@@ -237,7 +239,7 @@ main{padding-bottom:110px}
 
 <main>
 <section class="hero">
-  <picture><source media="(min-width:900px)" srcset="/static/home/city.jpg"><img class="ph" src="/static/home/city-m.jpg" alt="Addis Ababa skyline" fetchpriority="high"></picture>
+  <picture><source media="(min-width:900px)" srcset="/static/home/city.jpg"><img class="ph" src="/static/home/city-m.jpg" alt="Addis Ababa skyline" width="780" height="494" fetchpriority="high" decoding="async"></picture>
   <div class="fade"></div>
   <div class="box">
     <h1 class="am">እንዴት ልንረዳዎት?</h1>
@@ -304,7 +306,7 @@ main{padding-bottom:110px}
     <a class="svc" href="/shop" style="background:linear-gradient(150deg,#E00800 0%,#7B1E3A 60%,#081120 130%)"><span class="blob" style="background:#FFB3A8"></span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg></div><div class="tx"><div class="t">BinaShops</div><div class="a am">ሱቆች · ገበያ</div><div class="d">Products &amp; offers · call the shop</div></div><span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   </div>
 
-  <h2 class="sec am dd" id="minisHead" role="button" tabindex="0" aria-expanded="false" aria-controls="minis">ሁሉም አገልግሎቶች <span class="chev" aria-hidden="true">▾</span></h2>
+  <h2 class="sec am dd" id="minisHead"><button type="button" id="minisHeadBtn" aria-expanded="false" aria-controls="minis">ሁሉም አገልግሎቶች <span class="chev" aria-hidden="true">▾</span></button></h2>
   <div class="sub2">All services · 24 · <span id="minisHint">ለማየት ይንኩ · tap to open</span></div>
   <div class="minis collapsed" id="minis">
     <a class="mini" href="/property"><span class="ic" style="background:linear-gradient(135deg,#00C896,#009688)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="a am">ንብረት</span><span class="e">Property</span></a>
@@ -334,13 +336,12 @@ main{padding-bottom:110px}
   </div>
   <button type="button" class="minisToggle" id="minisToggle" aria-expanded="false">ሁሉንም አሳይ · Show all 24 <span class="chev">▾</span></button>
   <script>
-  (function(){var g=document.getElementById('minis'),t=document.getElementById('minisToggle'),h=document.getElementById('minisHead'),hint=document.getElementById('minisHint');
-  function set(open){g.classList.toggle('collapsed',!open);t.setAttribute('aria-expanded',open?'true':'false');h.setAttribute('aria-expanded',open?'true':'false');
+  (function(){var g=document.getElementById('minis'),t=document.getElementById('minisToggle'),h=document.getElementById('minisHead'),hb=document.getElementById('minisHeadBtn'),hint=document.getElementById('minisHint');
+  function set(open){g.classList.toggle('collapsed',!open);t.setAttribute('aria-expanded',open?'true':'false');hb.setAttribute('aria-expanded',open?'true':'false');
     t.innerHTML=(open?'ያንሱ · Show less':'ሁሉንም አሳይ · Show all 24')+' <span class="chev">▾</span>';if(hint)hint.textContent=open?'':'ለማየት ይንኩ · tap to open';
     if(!open&&window.innerWidth<760){var r=h.getBoundingClientRect();if(r.top<0)h.scrollIntoView({block:'start'});}}
   t.addEventListener('click',function(){set(g.classList.contains('collapsed'));});
-  h.addEventListener('click',function(){if(window.innerWidth<760)set(g.classList.contains('collapsed'));});
-  h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();h.click();}});
+  hb.addEventListener('click',function(){if(window.innerWidth<760)set(g.classList.contains('collapsed'));});
   })();
   </script>
 
@@ -349,7 +350,7 @@ main{padding-bottom:110px}
   <div class="sub2">Popular guides · the questions Ethiopians ask most, answered from official sources</div>
   <nav class="pgs" aria-label="Popular guides"><a class="pg" href="/cbe-birr-guide"><b class="am">ሲቢኢ ብር ኮድ *847#</b><small>CBE Birr USSD code</small></a><a class="pg" href="/trade-license-check-ethiopia"><b class="am">የንግድ ፈቃድ ማጣሪያ</b><small>Business licence checker</small></a><a class="pg" href="/business-registration-ethiopia"><b class="am">የንግድ ምዝገባና ፈቃድ</b><small>Register a business</small></a><a class="pg" href="/passport"><b class="am">ፓስፖርት ማውጣትና ማደስ</b><small>Ethiopian passport</small></a><a class="pg" href="/fayda"><b class="am">ፋይዳ ዲጂታል መታወቂያ</b><small>Fayda national ID</small></a><a class="pg" href="/customs-import-duty-ethiopia"><b class="am">የጉምሩክ ቀረጥ</b><small>Customs import duty</small></a><a class="pg" href="/ethiopia-income-tax-calculator"><b class="am">የደመወዝ ግብር ማስያ</b><small>Income tax calculator</small></a><a class="pg" href="/tax-forms"><b class="am">የግብር ቅጾች</b><small>Tax forms</small></a><a class="pg" href="/mesob"><b class="am">መሶብ የአንድ ማዕከል አገልግሎት</b><small>Mesob one-stop service</small></a><a class="pg all" href="/guides"><b class="am">ሁሉም መመሪያዎች →</b><small>All guides</small></a></nav>
 
-  <div class="band"><img src="/static/home/strip.jpg" alt="" loading="lazy"><div class="sh"></div><div class="tx"><b class="am">አንድ አፕ። አንድ ከተማ። ሁሉም አገልግሎት።</b><small>Your City. Your Services. All in One Place.</small><div class="k"><span style="color:#14D8B4">● Fast on 3G</span><span style="color:#7DD3FC">● Secure</span><span style="color:#C4B5FD">● Trusted</span><span style="color:#FCD34D">● 24/7 Telegram</span></div></div></div>
+  <div class="band"><img src="/static/home/strip.jpg" alt="" width="1200" height="456" loading="lazy" decoding="async"><div class="sh"></div><div class="tx"><b class="am">አንድ አፕ። አንድ ከተማ። ሁሉም አገልግሎት።</b><small>Your City. Your Services. All in One Place.</small><div class="k"><span style="color:#14D8B4">● Fast on 3G</span><span style="color:#7DD3FC">● Secure</span><span style="color:#C4B5FD">● Trusted</span><span style="color:#FCD34D">● 24/7 Telegram</span></div></div></div>
 
   <button type="button" class="ddhead" id="appsHead" aria-expanded="false" aria-controls="appsBox"><span>📲 ሚኒ አፕ · Mini Apps</span><small>Google &amp; Telegram · no download</small><span class="chev">▾</span></button>
   <div class="ddbox collapsed" id="appsBox">
