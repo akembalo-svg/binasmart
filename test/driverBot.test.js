@@ -123,6 +123,21 @@ test('notifyStatus messages the driver on approval, nothing without telegramId',
   assert.equal(await b.notifyStatus({ id: 'd2', telegramId: null }, 'approved'), false);
 });
 
+test('not accepted (1 Oct 2026): a polite no in both languages, and /start or registering again says the same', async () => {
+  const { api, prisma, b } = bot();
+  assert.equal(await b.notifyStatus({ id: 'd1', telegramId: '555' }, 'rejected'), true);
+  assert.match(api.sent.at(-1).text, /could not accept your registration/); assert.match(api.sent.at(-1).text, /bina\.et\/support/);
+  assert.doesNotMatch(api.sent.at(-1).text, /paused/);
+  prisma.drivers.push({ id: 'd9', name: 'Sample Driver', phone: '+251900000095', telegramId: '777', status: 'rejected' });
+  await b.handleUpdate({ message: { chat: { id: 777 }, from: { id: 777 }, text: '/start' } });
+  assert.match(api.sent.at(-1).text, /could not accept/, '/start does not say "registration is with us"');
+  await b.handleUpdate({ message: { chat: { id: 778 }, from: { id: 778 }, text: '/start' } });
+  await b.handleUpdate({ message: { chat: { id: 778 }, from: { id: 778 }, text: 'Sample Driver' } });
+  await b.handleUpdate({ message: { chat: { id: 778 }, from: { id: 778 }, contact: { phone_number: '+251900000095' } } });
+  assert.match(api.sent.at(-1).text, /could not accept/, 'the same phone again is not "already registered, we will call you"');
+  assert.equal(prisma.drivers.length, 1);
+});
+
 
 test('an approved driver taps Accept: the card settles, the popup confirms, and the trip link follows', async () => {
   const taken = [];

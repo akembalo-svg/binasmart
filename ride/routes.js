@@ -350,7 +350,7 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     const name = String(b.name || '').trim().slice(0, 60), plate = String(b.plate || '').trim().slice(0, 20);
     if (!phone || !name || !plate) return reply.code(400).send({ ok: false, error: 'name, phone(+251…), plate required' });
     const data = { name, tier, plate, vehicleMake: String(b.vehicleMake || '').slice(0, 40) || null, vehicleColour: String(b.vehicleColour || '').slice(0, 30) || null,
-      status: ['pending', 'approved', 'suspended'].includes(b.status) ? b.status : 'approved' };
+      status: ['pending', 'approved', 'suspended', 'rejected'].includes(b.status) ? b.status : 'approved' };
     const drv = await prisma.driver.upsert({ where: { phone }, update: data, create: { phone, ...data } });
     return { ok: true, driver: drv };
   });
@@ -358,7 +358,8 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
   fastify.post('/api/ride/ops/drivers/:id/status', async (req, reply) => {
     if (!ops(req, reply)) return;
     const to = String((req.body || {}).status || '');
-    if (!['pending', 'approved', 'suspended'].includes(to)) return reply.code(400).send({ ok: false, error: 'status must be pending|approved|suspended' });
+    // rejected (1 Oct 2026): a sign-up the team does not accept; before, the only "no" was suspended ("your account is paused")
+    if (!['pending', 'approved', 'suspended', 'rejected'].includes(to)) return reply.code(400).send({ ok: false, error: 'status must be pending|approved|suspended|rejected' });
     const drv = await prisma.driver.update({ where: { id: req.params.id }, data: { status: to } }).catch(() => null);
     if (!drv) return reply.code(404).send({ ok: false, error: 'not_found' });
     if (driverBot) driverBot.notifyStatus(drv, to).catch(() => {});

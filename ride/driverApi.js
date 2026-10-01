@@ -87,7 +87,7 @@ function makeDriverApi({ prisma, driverBotToken, location, offers, telegram, rid
     // this network an address is a neighbourhood rather than a person.
     if (!driverRL(drv.id)) { reply.code(429).send({ ok: false, error: 'slow_down' }); return null; }
     if (drv.status !== 'approved' && !(opts && opts.allowPending)) {
-      reply.code(403).send({ ok: false, error: drv.status === 'suspended' ? 'suspended' : 'awaiting_approval', driver: pubDriver(drv) });
+      reply.code(403).send({ ok: false, error: drv.status === 'suspended' ? 'suspended' : drv.status === 'rejected' ? 'not_accepted' : 'awaiting_approval', driver: pubDriver(drv) });
       return null;
     }
     return drv;

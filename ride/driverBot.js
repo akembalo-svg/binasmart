@@ -8,6 +8,9 @@ const { normPhone } = require('./phone');
 
 const TIERS = { moto: '🏍 Moto', bajaj: '🛺 Bajaj', economy: '🚗 Economy', comfort: '🚙 Comfort', xl: '🚐 XL / Van' };
 const TTL_MS = 3600 * 1000;
+// A sign-up the team did not accept (1 Oct 2026). Polite, no reason given, and a way to ask.
+const NOT_ACCEPTED = 'Thank you for registering with BinaSmart. We could not accept your registration at this time. If you think this is a mistake, write to us: https://bina.et/support\n'
+  + 'ስለተመዘገቡ እናመሰግናለን። ምዝገባዎን በአሁኑ ጊዜ መቀበል አልቻልንም። ስህተት ነው ብለው ካሰቡ ያግኙን፦ https://bina.et/support';
 
 function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now }) {
   const clock = now || Date.now;
@@ -70,6 +73,7 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
     if (text.startsWith('/start') || text === '/app' || text === '/online') {
       const known = await prisma.driver.findFirst({ where: { telegramId: chatId } });
       if (known && known.status === 'approved') return driverHome(chatId, known);
+      if (known && known.status === 'rejected') return api.sendMessage(chatId, NOT_ACCEPTED, { reply_markup: { remove_keyboard: true } });
       if (known) return api.sendMessage(chatId, '⏳ Your registration is with us. We will message you here the moment it is approved.\nምዝገባዎ በእጃችን ነው፤ ሲጸድቅ እናሳውቅዎታለን።', { reply_markup: { remove_keyboard: true } });
       sessions.delete(chatId); sess(chatId); return api.sendMessage(chatId, WELCOME);
     }
@@ -82,6 +86,7 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
         const phone = normPhone(msg.contact ? msg.contact.phone_number : text);
         if (!phone) { await api.sendMessage(chatId, 'Please share an Ethiopian number (09…) · የኢትዮጵያ ስልክ ቁጥር ያስፈልጋል'); return ask(chatId, 'phone'); }
         const existing = await prisma.driver.findUnique({ where: { phone } });
+        if (existing && existing.status === 'rejected') { sessions.delete(chatId); return api.sendMessage(chatId, NOT_ACCEPTED, { reply_markup: { remove_keyboard: true } }); }
         if (existing) { sessions.delete(chatId); return api.sendMessage(chatId, 'You are already registered ✅ We will call you. · ቀድሞ ተመዝግበዋል፤ እንደውልልዎታለን።', { reply_markup: { remove_keyboard: true } }); }
         s.data.phone = phone; s.step = 'tier'; return ask(chatId, 'tier');
       }
@@ -201,7 +206,8 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
   async function notifyStatus(driver, status) {
     if (!driver || !driver.telegramId) return false;
     const text = status === 'approved' ? '✅ Approved! Welcome to BinaSmart.\n\nOpen the driver app, tap GO, and ride offers will come to you. Registration is free and commission is 0% during our launch.\nጸድቋል! እንኳን ደህና መጡ። መተግበሪያውን ከፍተው GO ይጫኑ።'
-      : status === 'suspended' ? 'Your BinaSmart driver account is paused. Contact support: https://bina.et/support' : null;
+      : status === 'suspended' ? 'Your BinaSmart driver account is paused. Contact support: https://bina.et/support'
+      : status === 'rejected' ? NOT_ACCEPTED : null;
     if (!text) return false;
     const extra = status === 'approved'
       ? { reply_markup: { inline_keyboard: [[{ text: '🚗 Open the driver app · መተግበሪያ', web_app: { url: baseUrl + '/drive' } }]] } }
