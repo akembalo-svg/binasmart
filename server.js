@@ -313,6 +313,9 @@ fastify.get('/health', async (req, reply) => {
 // ===== LANDING PAGE (connectcare.cc root) =====
 fastify.get('/', async (req, reply) => reply.sendFile('home-v3.html')); // 7 Sep 2026 BinaSmart-home style; prior: gemini-home.html, coming-soon.html, index.html
 fastify.get('/robots.txt', async (req, reply) => reply.sendFile('robots.txt'));
+// Core-page sitemap (1 Oct 2026): 83 hub + guide URLs with lastmod, submitted to Search Console beside /sitemap.xml.
+// nginx serves the file at the root (public/ is only mounted under /static/); this route is the fallback.
+fastify.get('/sitemap-core.xml', async (req, reply) => reply.type('application/xml').sendFile('sitemap-core.xml'));
 fastify.get('/dee117a8-feea-4b21-b214-d466e00571f3.html', async (req, reply) => reply.type('text/html; charset=utf-8').send('dee117a8-feea-4b21-b214-d466e00571f3')); // Trustpilot domain verification
 // The IndexNow key must answer at the ROOT of the host, and this server's static files are served
 // under /static/ — the same trap the logo paths fell into. One route, matching only a 32-hex name.

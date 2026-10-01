@@ -461,7 +461,7 @@ const ogJobs = cat => {
 
     const body = `<main>
       ${langToggle(req)}
-      <div class="phero lite"><div style="display:flex;align-items:center;gap:12px">${brandTile('jobs', { size: 40 })}<h1 style="margin:0">${catDef ? escH(lang === 'en' ? catDef.en + ' jobs in Ethiopia' : catDef.am + ' ክፍት የሥራ ቦታዎች') : t.h1}</h1></div><div class="am sans">${t.lede}</div><div class="sub sans">${employers ? employers + (lang === 'en' ? ' employers listed.' : ' ድርጅቶች ተመዝግበዋል።') : ''}</div></div>
+      <div class="phero lite"><div style="display:flex;align-items:center;gap:12px">${brandTile('jobs', { size: 40 })}<h1 style="margin:0">${catDef ? escH(lang === 'en' ? catDef.en + ' jobs in Ethiopia' : catDef.am + ' ክፍት የሥራ ቦታዎች') : t.h1}</h1></div><div class="am sans">${t.lede}</div><div class="sub sans">${employers ? employers + (lang === 'en' ? ' employers listed.' : ' ድርጅቶች ተመዝግበዋል።') + ' <a href="/employers' + (lang === 'en' ? '?lang=en' : '') + '" style="font-weight:700">' + (lang === 'en' ? 'Companies hiring now \u2192' : '\u12a0\u1201\u1295 \u12e8\u121a\u1240\u1325\u1229 \u12f5\u122d\u1305\u1276\u127d \u2192') + '</a>' : ''}</div></div>
       ${showClosed ? `<div class="sans" style="display:flex;gap:12px;align-items:center;margin:0 0 18px;padding:13px 17px;border-radius:14px;background:#fdeaea;border:1.5px solid #f3bdbd;color:#8a1f1f"><span style="font-size:22px">🔒</span><span><b style="display:block;font-size:15px">${t.closed}</b><span style="font-size:13px"><a href="/jobs${qs(req)}" style="color:#8a1f1f;font-weight:700">${t.backOpen}</a></span></span></div>` : ''}
       ${chips ? `<div class="sans" style="display:flex;gap:7px;overflow-x:auto;padding:2px 0 12px;-webkit-overflow-scrolling:touch">
         <a href="/jobs${lang === 'en' ? '?lang=en' : ''}" style="border:1.5px solid ${cat ? 'var(--line)' : '#8fb0f2'};background:${cat ? '#fff' : '#eef4ff'};color:${cat ? 'var(--mut)' : '#1e3a8a'};border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;white-space:nowrap">${lang === 'en' ? 'All' : 'ሁሉም'}</a>${chips}</div>` : ''}
@@ -769,6 +769,15 @@ const ogJobs = cat => {
       select: { id: true, slug: true, name: true, city: true, sector: true, logoUrl: true },
     }) : [];
     emps.sort((a, b) => (live.get(b.id) || 0) - (live.get(a.id) || 0) || a.name.localeCompare(b.name));
+    // Crawlable pagination (1 Oct 2026). The all-sectors hub listed every hiring company on one page -
+    // 1,018 cards, 842 KB, a 1,018-item ItemList - and Google left it at "discovered, not indexed".
+    // Same helpers and page size as the jobs board; page 1 is the bare URL so its canonical is unchanged.
+    const page = Math.max(1, Math.min(200, parseInt(String(req.query.page || '1'), 10) || 1));
+    const pages = Math.max(1, Math.ceil(emps.length / PAGE_SIZE));
+    const pageEmps = emps.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+    const hubPath = '/employers' + (def ? '/' + def.slug : '');
+    const pagedView = page > 1 && pageEmps.length > 0;
+    const pageSuffix = pagedView ? (lang === 'en' ? ' \u00b7 page ' + page : ' \u00b7 \u1308\u133d ' + page) : '';
 
     // Every sector that actually has somebody hiring, for the chips at the top.
     const bySector = new Map();
@@ -795,23 +804,24 @@ const ogJobs = cat => {
       <p class="sans" style="font-size:13.5px;margin:0 0 12px">🏢 ${lang === 'en' ? 'Is your company listed? Open its page and tap «Is this your company?» to add your exact address and map pin — free.' : 'ድርጅትዎ እዚህ አለ? ገጹን ከፍተው «ይህ የእርስዎ ድርጅት ነው?» በመጫን ትክክለኛ አድራሻዎንና የካርታ ቦታዎን በነጻ ያክሉ።'}</p>
       ${chips ? `<div class="t-tags sans" style="margin:10px 0 18px">${chips}</div>` : ''}
       ${def ? `<p class="sans" style="margin:0 0 14px"><a href="/employers">← ${lang === 'en' ? 'all sectors' : 'ሁሉም ዘርፎች'}</a></p>` : ''}
-      <div style="display:flex;flex-direction:column;gap:10px">${emps.map(e => employerCard(e, live.get(e.id) || 0, lang)).join('')}</div>
+      <div style="display:flex;flex-direction:column;gap:10px">${pageEmps.map(e => employerCard(e, live.get(e.id) || 0, lang)).join('')}</div>
+      ${pages > 1 ? pageNav(page, pages, hubPath, req, lang) : ''}
       ${emps.length ? '' : `<p class="sans">${lang === 'en' ? 'Nobody in this sector is hiring today.' : 'በዚህ ዘርፍ ዛሬ የሚቀጥር የለም።'}</p>`}
     </article></main>`;
 
     reply.type('text/html').send(shell({
-      title: def
+      title: (def
         ? (lang === 'en' ? def.en + ' companies hiring in Ethiopia — ' + emps.length + ' with open vacancies'
                          : 'በ' + def.am + ' ዘርፍ የሚቀጥሩ ድርጅቶች — ' + emps.length)
         : (lang === 'en' ? 'Companies hiring in Ethiopia — ' + emps.length + ' with open vacancies'
-                         : 'በኢትዮጵያ የሚቀጥሩ ድርጅቶች — ' + emps.length),
+                         : 'በኢትዮጵያ የሚቀጥሩ ድርጅቶች — ' + emps.length)) + pageSuffix,
       desc: def
         ? (lang === 'en' ? emps.length + ' ' + def.en.toLowerCase() + ' companies in Ethiopia with vacancies open now — each with its address, its logo and what it is hiring for.'
                          : 'በ' + def.am + ' ዘርፍ ' + emps.length + ' ድርጅቶች አሁን ክፍት የሥራ ቦታ አላቸው።')
         : (lang === 'en' ? 'Every Ethiopian company advertising a vacancy on BinaSmart right now, by sector, with addresses and logos.'
                          : 'በቢናስማርት ላይ አሁን ማስታወቂያ ያወጡ የኢትዮጵያ ድርጅቶች — በዘርፍ፣ ከአድራሻና ከምልክት ጋር።'),
-      canonical: 'https://bina.et/employers' + (def ? '/' + def.slug : ''),
-      extraHead: JOBS_HEAD + hubLd(def ? def.en + ' companies hiring in Ethiopia' : 'Companies hiring in Ethiopia', 'https://bina.et/employers' + (def ? '/' + def.slug : ''), emps.map(e => ({ url: 'https://bina.et/employer/' + e.slug, name: e.name }))), body, active: 'jobs', ogImage: ogJobs(def && def.slug),
+      canonical: 'https://bina.et' + hubPath + (pagedView ? '?page=' + page : ''),
+      extraHead: JOBS_HEAD + hubLd(def ? def.en + ' companies hiring in Ethiopia' : 'Companies hiring in Ethiopia', 'https://bina.et/employers' + (def ? '/' + def.slug : ''), pageEmps.map(e => ({ url: 'https://bina.et/employer/' + e.slug, name: e.name }))), body, active: 'jobs', ogImage: ogJobs(def && def.slug),
     }));
   }
 
