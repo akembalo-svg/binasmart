@@ -1060,7 +1060,7 @@ model Driver {
   licenceUrl      String?
   carPhotoUrl     String?   // front of the car with the plate — shown to riders once approved
   registrationUrl String?
-  status          String    @default("pending") // pending | approved | suspended
+  status          String    @default("pending") // pending | approved | suspended | rejected | licence (expired: asked for the renewed one)
   online          Boolean   @default(false)
   lat             Float?
   lng             Float?

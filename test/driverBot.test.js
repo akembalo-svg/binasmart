@@ -123,6 +123,31 @@ test('notifyStatus messages the driver on approval, nothing without telegramId',
   assert.equal(await b.notifyStatus({ id: 'd2', telegramId: null }, 'approved'), false);
 });
 
+test('licence expired (1 Oct 2026): asked for the renewed licence; the photo replaces it and goes back to pending', async () => {
+  const { api, prisma, notes, dir, b } = bot();
+  assert.equal(await b.notifyStatus({ id: 'd1', telegramId: '555' }, 'licence'), true);
+  assert.match(api.sent.at(-1).text, /has expired/); assert.match(api.sent.at(-1).text, /ጊዜው አልፏል/);
+  assert.doesNotMatch(api.sent.at(-1).text, /could not accept/);
+  prisma.drivers.push({ id: 'd7', name: 'Sample Driver', phone: '+251900000096', plate: '3-A00000', telegramId: '779', status: 'licence' });
+  const say = m => b.handleUpdate({ message: Object.assign({ chat: { id: 779 }, from: { id: 779 } }, m) });
+  await say({ text: '/start' });
+  assert.match(api.sent.at(-1).text, /has expired/, '/start repeats the ask, not "registration is with us"');
+  await say({ text: 'I renewed it' });
+  assert.match(api.sent.at(-1).text, /has expired/, 'text is not taken as a new registration');
+  assert.equal(prisma.drivers.length, 1);
+  await say({ photo: [{ file_id: 'NEW-small' }, { file_id: 'NEW' }] });
+  assert.match(api.sent.at(-1).text, /received the photo of your renewed licence/);
+  assert.equal(prisma.drivers[0].status, 'pending');
+  assert.equal(prisma.drivers[0].licenceUrl, '/api/ride/ops/driver-doc/d7?kind=licence');
+  assert.ok(fs.existsSync(path.join(dir, 'd7.jpg')), 'the new licence replaces the old file');
+  assert.match(notes.at(-1), /RENEWED LICENCE/); assert.match(notes.at(-1), /ride-ops/);
+  await b.handleUpdate({ message: { chat: { id: 780 }, from: { id: 780 }, text: '/start' } });
+  await b.handleUpdate({ message: { chat: { id: 780 }, from: { id: 780 }, text: 'Other Sample' } });
+  prisma.drivers[0].status = 'licence';
+  await b.handleUpdate({ message: { chat: { id: 780 }, from: { id: 780 }, contact: { phone_number: '+251900000096' } } });
+  assert.match(api.sent.at(-1).text, /has expired/, 'registering the same phone again gets the ask');
+});
+
 test('not accepted (1 Oct 2026): a polite no in both languages, and /start or registering again says the same', async () => {
   const { api, prisma, b } = bot();
   assert.equal(await b.notifyStatus({ id: 'd1', telegramId: '555' }, 'rejected'), true);

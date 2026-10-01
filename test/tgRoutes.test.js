@@ -98,6 +98,8 @@ test('ops: driver status change notifies the driver; licence doc needs the owner
   assert.equal((await app.inject({ method: 'POST', url: '/api/ride/ops/drivers/d1/status', headers: { 'x-owner-key': 'OWNERKEY' }, payload: { status: 'flying' } })).statusCode, 400);
   const no = await app.inject({ method: 'POST', url: '/api/ride/ops/drivers/d1/status', headers: { 'x-owner-key': 'OWNERKEY' }, payload: { status: 'rejected' } });
   assert.equal(no.statusCode, 200); assert.equal(no.json().driver.status, 'rejected'); assert.equal(driverStatus.at(-1), 'rejected', 'the driver is told');
+  const lic = await app.inject({ method: 'POST', url: '/api/ride/ops/drivers/d1/status', headers: { 'x-owner-key': 'OWNERKEY' }, payload: { status: 'licence' } });
+  assert.equal(lic.statusCode, 200); assert.equal(lic.json().driver.status, 'licence'); assert.equal(driverStatus.at(-1), 'licence', 'asked for the renewed licence');
   assert.equal((await app.inject({ method: 'GET', url: '/api/ride/ops/driver-doc/d1' })).statusCode, 401);
   assert.equal((await app.inject({ method: 'GET', url: '/api/ride/ops/driver-doc/d1?key=OWNERKEY' })).statusCode, 404, 'no file saved in this test');
 });

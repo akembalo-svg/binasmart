@@ -793,6 +793,9 @@
         if (st.driver.status === 'rejected') return gate('Registration not accepted · ምዝገባው አልተቀበለም',
           'Thank you for registering, ' + st.driver.name + '. We could not accept your registration at this time. If you think this is a mistake, write to us.\nስለተመዘገቡ እናመሰግናለን። ምዝገባዎን በአሁኑ ጊዜ መቀበል አልቻልንም። ስህተት ነው ብለው ካሰቡ ያግኙን።',
           'Contact BinaSmart · ያግኙን', 'https://bina.et/support');
+        if (st.driver.status === 'licence') return gate('Licence expired · መንጃ ፈቃድ ጊዜው አልፏል',
+          'The driving licence in your photo has expired, ' + st.driver.name + '. When you have renewed it, send a photo of the new licence in @binasmartdriverbot and we will check it again.\nፈቃድዎን ካሳደሱ በኋላ የአዲሱን ፈቃድ ፎቶ በቦቱ ይላኩ።',
+          'Open @binasmartdriverbot', 'https://t.me/binasmartdriverbot');
         return gate(
           st.driver.status === 'suspended' ? 'Account paused' : 'Waiting for approval · በመጠባበቅ ላይ',
           st.driver.status === 'suspended'

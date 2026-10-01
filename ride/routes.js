@@ -359,7 +359,8 @@ module.exports = function routes(fastify, { prisma, settings, geo, telegram, dis
     if (!ops(req, reply)) return;
     const to = String((req.body || {}).status || '');
     // rejected (1 Oct 2026): a sign-up the team does not accept; before, the only "no" was suspended ("your account is paused")
-    if (!['pending', 'approved', 'suspended', 'rejected'].includes(to)) return reply.code(400).send({ ok: false, error: 'status must be pending|approved|suspended|rejected' });
+    // licence (1 Oct 2026): the licence has expired; the driver is asked for a photo of the renewed one (ride/driverBot.js)
+    if (!['pending', 'approved', 'suspended', 'rejected', 'licence'].includes(to)) return reply.code(400).send({ ok: false, error: 'status must be pending|approved|suspended|rejected|licence' });
     const drv = await prisma.driver.update({ where: { id: req.params.id }, data: { status: to } }).catch(() => null);
     if (!drv) return reply.code(404).send({ ok: false, error: 'not_found' });
     if (driverBot) driverBot.notifyStatus(drv, to).catch(() => {});

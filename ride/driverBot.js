@@ -11,6 +11,10 @@ const TTL_MS = 3600 * 1000;
 // A sign-up the team did not accept (1 Oct 2026). Polite, no reason given, and a way to ask.
 const NOT_ACCEPTED = 'Thank you for registering with BinaSmart. We could not accept your registration at this time. If you think this is a mistake, write to us: https://bina.et/support\n'
   + 'ስለተመዘገቡ እናመሰግናለን። ምዝገባዎን በአሁኑ ጊዜ መቀበል አልቻልንም። ስህተት ነው ብለው ካሰቡ ያግኙን፦ https://bina.et/support';
+// status 'licence' (1 Oct 2026): the licence in the photo has expired. Unlike 'rejected' this is fixable, so the
+// driver keeps the registration and sends a photo of the renewed licence here; it goes back to 'pending'.
+const LICENCE_RENEW = '🪪 The driving licence in the photo you sent has expired. When you have renewed it, send a clear photo of the new licence here and we will check it again. Your other details are kept.\n'
+  + 'በላኩት ፎቶ ላይ ያለው መንጃ ፈቃድ ጊዜው አልፏል። ፈቃድዎን ካሳደሱ በኋላ የአዲሱን ፈቃድ ግልጽ ፎቶ እዚህ ይላኩ፤ እንደገና እናየዋለን። ሌሎች መረጃዎችዎ ተቀምጠዋል።';
 
 function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now }) {
   const clock = now || Date.now;
@@ -74,8 +78,14 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
       const known = await prisma.driver.findFirst({ where: { telegramId: chatId } });
       if (known && known.status === 'approved') return driverHome(chatId, known);
       if (known && known.status === 'rejected') return api.sendMessage(chatId, NOT_ACCEPTED, { reply_markup: { remove_keyboard: true } });
+      if (known && known.status === 'licence') { sessions.delete(chatId); return api.sendMessage(chatId, LICENCE_RENEW, { reply_markup: { remove_keyboard: true } }); }
       if (known) return api.sendMessage(chatId, '⏳ Your registration is with us. We will message you here the moment it is approved.\nምዝገባዎ በእጃችን ነው፤ ሲጸድቅ እናሳውቅዎታለን።', { reply_markup: { remove_keyboard: true } });
       sessions.delete(chatId); sess(chatId); return api.sendMessage(chatId, WELCOME);
+    }
+    // Not in the middle of registering: a driver asked for a renewed licence answers with the photo.
+    if (!sessions.has(chatId)) {
+      const known = await prisma.driver.findFirst({ where: { telegramId: chatId } });
+      if (known && known.status === 'licence') return renewedLicence(chatId, known, msg);
     }
     const s = sess(chatId);
     switch (s.step) {
@@ -87,6 +97,7 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
         if (!phone) { await api.sendMessage(chatId, 'Please share an Ethiopian number (09…) · የኢትዮጵያ ስልክ ቁጥር ያስፈልጋል'); return ask(chatId, 'phone'); }
         const existing = await prisma.driver.findUnique({ where: { phone } });
         if (existing && existing.status === 'rejected') { sessions.delete(chatId); return api.sendMessage(chatId, NOT_ACCEPTED, { reply_markup: { remove_keyboard: true } }); }
+        if (existing && existing.status === 'licence') { sessions.delete(chatId); return api.sendMessage(chatId, LICENCE_RENEW, { reply_markup: { remove_keyboard: true } }); }
         if (existing) { sessions.delete(chatId); return api.sendMessage(chatId, 'You are already registered ✅ We will call you. · ቀድሞ ተመዝግበዋል፤ እንደውልልዎታለን።', { reply_markup: { remove_keyboard: true } }); }
         s.data.phone = phone; s.step = 'tier'; return ask(chatId, 'tier');
       }
@@ -203,11 +214,27 @@ function makeDriverBot({ prisma, api, telegram, uploadsDir, baseUrl, offers, now
     return ans(why.replace(/^\S+\s/, ''), true);
   }
 
+  // The photo replaces the old licence (private, owner-key only) and the driver is back in the team's queue.
+  async function renewedLicence(chatId, drv, msg) {
+    const photos = msg.photo;
+    if (!photos || !photos.length) return api.sendMessage(chatId, LICENCE_RENEW, { reply_markup: { remove_keyboard: true } });
+    try { await savePhoto(chatId, photos[photos.length - 1].file_id, drv.id, 'licence'); }
+    catch (e) {
+      console.error('[ride/driverBot] renewed licence save failed for ' + drv.id + ': ' + e.message);
+      return api.sendMessage(chatId, 'Sorry, the photo did not arrive. Please send it again. · ፎቶው አልደረሰም፤ እባክዎ እንደገና ይላኩ።');
+    }
+    await prisma.driver.update({ where: { id: drv.id }, data: { status: 'pending', licenceUrl: '/api/ride/ops/driver-doc/' + drv.id + '?kind=licence' } });
+    await api.sendMessage(chatId, '✅ Thank you. We received the photo of your renewed licence. We will check it and message you here.\nአመሰግናለን። የታደሰውን ፈቃድ ፎቶ ተቀብለናል፤ አረጋግጠን እዚህ እናሳውቅዎታለን።', { reply_markup: { remove_keyboard: true } });
+    telegram.ownerNote('🪪 RENEWED LICENCE (pending again): ' + drv.name + ' · plate ' + drv.plate + ' · ' + drv.phone
+      + '\nCheck the new photo and approve: ' + baseUrl + '/ride-ops').catch(() => {});
+  }
+
   async function notifyStatus(driver, status) {
     if (!driver || !driver.telegramId) return false;
     const text = status === 'approved' ? '✅ Approved! Welcome to BinaSmart.\n\nOpen the driver app, tap GO, and ride offers will come to you. Registration is free and commission is 0% during our launch.\nጸድቋል! እንኳን ደህና መጡ። መተግበሪያውን ከፍተው GO ይጫኑ።'
       : status === 'suspended' ? 'Your BinaSmart driver account is paused. Contact support: https://bina.et/support'
-      : status === 'rejected' ? NOT_ACCEPTED : null;
+      : status === 'rejected' ? NOT_ACCEPTED
+      : status === 'licence' ? LICENCE_RENEW : null;
     if (!text) return false;
     const extra = status === 'approved'
       ? { reply_markup: { inline_keyboard: [[{ text: '🚗 Open the driver app · መተግበሪያ', web_app: { url: baseUrl + '/drive' } }]] } }
