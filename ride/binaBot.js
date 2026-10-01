@@ -38,6 +38,9 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
   };
   const isPrivate = msg => !!(msg && msg.chat && msg.chat.type === 'private');
   const PASS = Symbol('not an owner command');
+  // Clear opt-outs: unlike a plain "stop" they never mean anything else, so they get an answer even when no alert is on
+  // (1 Oct 2026: "Get off" right after a job alert was stopped got Bini's "I'm not sure what you mean").
+  const OPT_OUT = /^(get off|unsubscribe( me)?|remove me|leave me alone|no more( messages| alerts)?|stop (sending|texting|messaging)( me)?|don'?t (send|message|text) me( anymore| again)?|\u12a0\u1275\u120b\u12a9\u120d\u129d|\u12a0\u1275\u120b\u12ad\u120d\u129d)[\s.!\u1362]*$/i;   // አትላኩልኝ / አትላክልኝ
   const STOP_WORDS = /^(\/?stop|stop (it|all|alerts?|messages?|sending)|unsubscribe|cancel alerts?|አቁም|ይቁም|አቁሙ|ማሳወቂያ(ውን)? አቁም)[\s.!።]*$/i;   // sendMessage may resolve to anything; this cannot collide
   const FAILED = Symbol('access lookup failed');
   const SORRY = 'ይቅርታ፣ እንደገና ይሞክሩ። · Sorry, please try again.';
@@ -130,7 +133,7 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     if (/^\/stopjobs\b/.test(text)) {
       const n = await jobs.stop(chatId).catch(() => 0);
       return api.sendMessage(chatId, n
-        ? '🔕 የሥራ ማሳወቂያ ቆሟል። እንደገና ለመጀመር bina.et/jobs ይክፈቱ።'
+        ? '🔕 የሥራ ማሳወቂያ ቆሟል። እንደገና ለመጀመር bina.et/jobs ይክፈቱ።\nJob alerts stopped. To start again, open bina.et/jobs.'
         : 'የሥራ ማሳወቂያ አልነበረዎትም። · You were not subscribed.');
     }
     if (/^\/jobs\b/.test(text)) {
@@ -504,7 +507,9 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     const msg = update && update.message;
     if (!msg || !msg.chat) return;
     const chatId = String(msg.chat.id);
-    const text = String(msg.text || '').trim();
+    // "Stopjob", "stop jobs", "stop tenders" typed without the slash are the commands (1 Oct 2026: "Stopjob" went to Bini).
+    const typed = String(msg.text || '').trim();
+    const text = /^stop\s?jobs?[\s.!]*$/i.test(typed) ? '/stopjobs' : /^stop\s?tenders?[\s.!]*$/i.test(typed) ? '/stoptenders' : typed;
     // Tenant notices: /start tenant_<slug>, the shared contact, /stop — private chats only, and only when server.js
     // passes the tenant link service.
     if (tenant && isPrivate(msg) && msg.from) {
@@ -529,12 +534,14 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     // A plain "stop" turns off every alert this chat gets. Only /stopjobs and /stoptenders were understood, so someone
     // who wrote "Stop" on 28 Sep 2026 got Bini's "anything else? 😊" and was sent a tender alert two days later. It acts
     // only when the chat HAS alerts; otherwise "stop" goes on to Bini like any other message.
-    if ((jobs || tenders) && isPrivate(msg) && msg.from && STOP_WORDS.test(text)) {
+    if ((jobs || tenders) && isPrivate(msg) && msg.from && (STOP_WORDS.test(text) || OPT_OUT.test(text))) {
       const nj = jobs ? await jobs.stop(chatId).catch(() => 0) : 0, nt = tenders ? await tenders.stop(chatId).catch(() => 0) : 0;
       if (nj || nt) {
         const what = [nj ? 'ሥራ · jobs' : '', nt ? 'ጨረታ · tenders' : ''].filter(Boolean).join(', ');
         return api.sendMessage(chatId, '🔕 ማሳወቂያዎችዎ ቆመዋል (' + what + ')። እንደገና ለመጀመር /jobs ወይም /tenders ይጻፉ።\nAlerts stopped (' + what + '). To start again: /jobs or /tenders.');
       }
+      if (OPT_OUT.test(text)) return api.sendMessage(chatId, '🔕 ለዚህ ቻት የሥራም የጨረታም ማሳወቂያ አልበራም፤ ምንም ማሳወቂያ አይላክልዎትም። ቦቱን ሙሉ በሙሉ ለመተው በቦቱ ሜኑ «Stop bot» ወይም «Block» ይጫኑ።\n'
+        + 'No job or tender alerts are on for this chat, so none will be sent. To leave the bot completely, choose Stop bot or Block in its menu.');
     }
     // Bini for owners: /start owner, the shared contact, /logout, /bini, /owner — private chats only, and only
     // when server.js passes the owner service.

@@ -76,3 +76,28 @@ test('a plain "Stop" turns the alerts off (28 Sep 2026: it was answered by Bini 
   assert.equal(prisma.rows.filter(r => r.active).length, 0);
   for (const w of ['stop', 'STOP.', 'unsubscribe', 'አቁም', 'ይቁም።']) assert.match(w, /^(\/?stop|stop (it|all|alerts?|messages?|sending)|unsubscribe|cancel alerts?|አቁም|ይቁም|አቁሙ|ማሳወቂያ(ውን)? አቁም)[\s.!።]*$/i, w);
 });
+
+test('"Stopjob" / "stop tenders" without the slash, and clear opt-outs like "Get off" (1 Oct 2026 real chat)', async () => {
+  const sent = [], asked = [];
+  const prisma = fakePrisma([]);
+  const tenders = T.makeTenderAlerts({ prisma, api: null, openSince: open, isClosed: shut });
+  let jobSubs = 0;
+  const jobs = { subscribe: async () => { jobSubs++; return { ok: true, field: 'health' }; }, stop: async () => { const n = jobSubs; jobSubs = 0; return n; }, listFor: async () => [] };
+  const api = { sendMessage: async (chat, text, opts) => { sent.push({ text, opts }); return {}; } };
+  const fetchImpl = async (url, o) => { asked.push(JSON.parse(o.body).message); return { ok: true, json: async () => ({ reply: 'Bini here' }) }; };
+  const bot = makeBinaBot({ api, baseUrl: 'https://bina.et', assistantUrl: 'http://x/api/assistant', fetchImpl, botUsername: 'bina_smart_bot', tenders, jobs });
+  const msg = t => ({ message: { chat: { id: 9, type: 'private' }, from: { id: 9 }, text: t } });
+  await bot.handleUpdate(msg('/start jobs_health')); await bot.handleUpdate(msg('/start tenders_supply'));
+  await bot.handleUpdate(msg('Stopjob'));
+  assert.match(sent.at(-1).text, /Job alerts stopped/); assert.equal(jobSubs, 0);
+  assert.equal(prisma.rows.filter(r => r.active).length, 1, '"Stopjob" leaves the tender alert on');
+  await bot.handleUpdate(msg('stop tenders'));
+  assert.match(sent.at(-1).text, /Tender alerts stopped/); assert.equal(prisma.rows.filter(r => r.active).length, 0);
+  await bot.handleUpdate(msg('Get off'));
+  assert.match(sent.at(-1).text, /No job or tender alerts are on/); assert.deepEqual(asked, [], 'never reached Bini');
+  await bot.handleUpdate(msg('/start jobs_health'));
+  await bot.handleUpdate(msg('please unsubscribe me.'.replace('please ', '')));
+  assert.match(sent.at(-1).text, /Alerts stopped \(ሥራ · jobs\)/);
+  await bot.handleUpdate(msg('Where do I get off for Bole?'));
+  assert.deepEqual(asked, ['Where do I get off for Bole?'], 'a ride question with "get off" in it goes to Bini');
+});
