@@ -19,6 +19,7 @@ const errKind = e => String((e && (e.code || e.name)) || 'Error').replace(/[^A-Z
 function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, linkRestaurant, mypages, internalKey, owner, tenant, jobs, cv, tenders }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
   const hist = new Map(); // chatId -> { turns: [{role, content}], t }
+  const AGENT_HELLO = '👋 ሰላም! ቢኒ ነኝ። ቢኒ ብራውዘርን ለመሥሪያ ቤትዎ ወይም ለኩባንያዎ ይፈልጋሉ? እባክዎ ይንገሩኝ፦ ስምዎ፣ የመሥሪያ ቤቱ ወይም የኩባንያው ስም፣ የሥራ ድርሻዎ፣ ስልክ ቁጥርዎ እና ቢኒ በምን የድረ-ገጽ ሥራ እንዲያግዝዎ እንደሚፈልጉ። ቡድናችን ደውሎ ያዘጋጅልዎታል።\n\nHi, I am Bini. Want Bini Browser for your office or company? Tell me your name, the office or company, your role, your phone number and what website work you want help with. The team will call you to set it up.';
   const myPagesWaiting = new Set(); // chats asked to share their number for /mypages
   const menuMarkup = () => ({ inline_keyboard: MENU.map(row => row.map(b => ({ text: b.text, web_app: { url: baseUrl + b.path } }))) });
   const WELCOME = 'ሰላም! 👋 BinaSmart — Ethiopia\'s all-in-one platform.\n🚕 Fixed-price rides · 🏨 hotels · 🍽 restaurants · 🏥 hospitals · 🎟 events · 🏠 property · 🚗 cars · 🛡 insurance · 📚 guides.\n\nPick a service below, or just type your question — Bini (ቢኒ), our assistant, answers in Amharic or English.\nከታች ይምረጡ ወይም ጥያቄዎን ይጻፉ — ቢኒ በአማርኛ ወይም በእንግሊዝኛ ይመልስልዎታል።';
@@ -585,6 +586,13 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       return api.sendMessage(chatId, r
         ? '🍽 ' + r.name + ' — የጠረጴዛ ትዕዛዞች ከአሁን ጀምሮ እዚህ ይደርሱዎታል።\nTable orders for this restaurant will arrive here from now on.'
         : 'ይህ ሊንክ አልሰራም። · That link did not work. Open bina.et/restaurants/dashboard and press "Connect Telegram" again.');
+    }
+    // "Talk to Bini" on bina.et/agent: t.me/bina_smart_bot?start=agent (1 Oct 2026). The greeting goes into this chat's
+    // history as a Bini Browser turn, so the person's next message reaches Bini as a Bini Browser request.
+    if (/^\/start\s+agent\b/.test(text)) {
+      hist.delete(chatId);
+      turns(chatId).push({ role: 'user', content: 'Bini Browser (bina.et/agent)' }, { role: 'assistant', content: AGENT_HELLO });
+      return api.sendMessage(chatId, AGENT_HELLO);
     }
     const tk = /^\/start\s+ticket_(BINA-?[A-Z0-9]{6})\b/i.exec(text);
     if (tk) return sendTicket(chatId, tk[1].toUpperCase().replace(/^BINA-?/, 'BINA-'));

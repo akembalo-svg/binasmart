@@ -65,3 +65,13 @@ test('forTelegram expands relative links and strips bold', () => {
   const { b } = bot('x');
   assert.equal(b.forTelegram('See **/guides** and [Ride](/ride) or https://bina.et/ai.'), 'See https://bina.et/guides and Ride — https://bina.et/ride or https://bina.et/ai.');
 });
+
+test('/start agent (bina.et/agent "Talk to Bini") greets and the next message reaches Bini as a Bini Browser request', async () => {
+  const { api, calls, b } = bot('ok');
+  await b.handleUpdate(msg('/start agent'));
+  assert.equal(calls.length, 0, 'the greeting is fixed text, no model call');
+  assert.match(api.sent[0].text, /ቢኒ ብራውዘር/); assert.match(api.sent[0].text, /Bini Browser/);
+  await b.handleUpdate(msg('Test Person, Test Office, 0900 000 063, eTrade licences'));
+  assert.equal(calls[0].body.history[0].content, 'Bini Browser (bina.et/agent)');
+  assert.equal(calls[0].body.history.length, 2);
+});
