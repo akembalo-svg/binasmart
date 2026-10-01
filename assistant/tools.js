@@ -246,7 +246,12 @@ function makeExecutor(ctx) {
       return { rideId: r.id, status: r.status, fareEtb: r.fareEtb || r.fare, trackUrl: (ctx.publicBase || 'https://bina.et') + '/ride?id=' + r.id, note: 'Tell the user the ride id and that the driver name, car and plate will appear on the tracking link and on Telegram.' };
     },
     async ride_status({ rideId, phone }) {
-      const d = await api('GET', '/api/ride/' + encodeURIComponent(String(rideId || '').slice(0, 40)) + '?phone=' + encodeURIComponent(String(phone || '')));
+      // A ride id is a lowercase code from the ride link (c + 24 letters/digits). 1 Oct 2026, a real person sent
+      // "essc/2084/261001/3" and heard "I can't find a ride with that ID": it was some other reference number.
+      const raw = String(rideId || '').trim(), inLink = /(?:id=)?\b(c[a-z0-9]{20,30})\b/.exec(raw);
+      const id = inLink ? inLink[1] : /^[a-z0-9]{1,30}$/.test(raw) ? raw : null;
+      if (!id) return { error: 'not_a_ride_id', note: 'This is not a BinaSmart ride id (those come from the ride link, like bina.et/ride?id=c…). Do not say a ride was not found: ask what this number is for and help with that.' };
+      const d = await api('GET', '/api/ride/' + encodeURIComponent(id) + '?phone=' + encodeURIComponent(String(phone || '')));
       if (d.error) return d;
       const r = d.ride || {};
       return { status: r.status, driver: r.driver ? { name: r.driver.name, car: r.driver.car || r.driver.vehicle, plate: r.driver.plate, phone: r.driver.phone } : null, fareEtb: r.fareEtb, pickup: r.pickup && r.pickup.label, dropoff: r.dropoff && r.dropoff.label };

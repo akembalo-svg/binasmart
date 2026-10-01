@@ -59,6 +59,9 @@ test('executor: places → quote → request needs confirmation and a valid phon
   const req = calls.find(c => /ride\/request/.test(c.url)); assert.equal(req.opts.headers['x-real-ip'], 'bini-911000001');
   const st = await run('ride_status', { rideId: 'r1', phone: '0911000001' });
   assert.equal(st.driver.plate, 'A12345');
+  const before = calls.length;   // a reference number that is not a ride id never reaches the ride API (1 Oct 2026)
+  for (const rid of ['essc/2084/261001/3', 'EFLGD49967', 'BINA-ABC123']) assert.equal((await run('ride_status', { rideId: rid, phone: '0911000001' })).error, 'not_a_ride_id', rid);
+  assert.equal(calls.length, before);
   const pool = await run('pool_board', { lat: 9.02, lng: 38.8 });
   assert.equal(pool.corridors[0].seatPrices[1].seatEtb, 105); assert.equal(pool.nearby[0].womenOnly, true); assert.match(pool.nearby[0].joinUrl, /\/pool\/p9/);
   const cin = await run('cinema_programme', { venue: 'alem' });

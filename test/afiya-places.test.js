@@ -61,14 +61,24 @@ test('reading the question: a neighbourhood becomes a point on the map, a sub-ci
 });
 
 // 30 Sep 2026, a real person on the demo hospital page: a dental check-up got only the demo hospital's room 2-06.
-test('a department question that names a need also links the real places for it; a plain one does not', async () => {
-  const c = { msg: 'Which department should I go to for a dental check-up, and what should I bring?', l: 'en' };
-  const ctx = await rules.context(c, { prisma });
-  const done = rules.finish(c, 'The Dental department is on floor 2, room 2-06.', ctx.state);
-  assert.match(done, /demonstration data/);
-  assert.match(done, /Real dental clinics in Addis Ababa: https:\/\/bina\.et\/health\?q=dental%20clinic/);
-  const am = { msg: 'ለጥርስ ምርመራ የትኛው ክፍል?', l: 'am' };
-  assert.match(rules.finish(am, 'የጥርስ ክፍል 2ኛ ፎቅ ነው።', (await rules.context(am, { prisma })).state), /እውነተኛ የጥርስ ክሊኒክ ቦታዎች፦ https:\/\/bina\.et\/health\?q=dental%20clinic/);
+test('a department question that names a kind of place is a place question: the real dentists, not the demo rooms (1 Oct 2026)', async () => {
+  const DENT = { total: 1, more: 'https://bina.et/health?q=dental%20clinic', results: [{ name: 'Sample Dental', kind: 'Dentist', area: 'Bole', url: 'https://bina.et/health/sample-dental-n1' }] };
+  const real = rules.findPlaces;
+  try {
+    rules.findPlaces = async () => DENT;
+    for (const c of [{ msg: 'Which department should I go to for a dental check-up, and what should I bring?', l: 'en' }, { msg: 'ለጥርስ ምርመራ የትኛው ክፍል?', l: 'am' }]) {
+      const ctx = await rules.context(c, { prisma });
+      assert.match(ctx.prompt, /Places from BinaSmart Health/, c.msg); assert.match(ctx.prompt, /Sample Dental/);
+      assert.doesNotMatch(ctx.prompt, /DEMO DATA|2-06/, c.msg);
+      assert.doesNotMatch(rules.finish(c, 'Sample Dental in Bole does check-ups. Bring your ID.', ctx.state), /demonstration data|ማሳያ/);
+    }
+    // no real place found: the old path, and the real list is still linked at the end
+    rules.findPlaces = async () => null;
+    const c = { msg: 'Which department should I go to for a dental check-up, and what should I bring?', l: 'en' };
+    const done = rules.finish(c, 'The Dental department is on floor 2, room 2-06.', (await rules.context(c, { prisma })).state);
+    assert.match(done, /demonstration data/);
+    assert.match(done, /Real dental clinics in Addis Ababa: https:\/\/bina\.et\/health\?q=dental%20clinic/);
+  } finally { rules.findPlaces = real; }
   const plain = { msg: 'What should I bring to my appointment?', l: 'en' };
   assert.doesNotMatch(rules.finish(plain, 'Bring your ID.', (await rules.context(plain, { prisma })).state), /bina\.et\/health/);
 });

@@ -62,8 +62,10 @@ module.exports = {
 
   // The one hospital in the system is demo data; she must never present it as a real place to attend.
   async context(c, { prisma }) {
-    // A place question: the directory, and not the demo hospital's departments beside it.
-    if (askingForPlace(c.msg)) {
+    // A place question: the directory, and not the demo hospital's departments beside it. A department question that
+    // names a kind of place is one too (1 Oct 2026: "which department for a dental check-up?" still opened with the demo
+    // hospital's floor 2, room 2-06 and its hours, the real dentists only as a link at the end).
+    if (askingForPlace(c.msg) || (GO_WHERE_RE.test(String(c.msg || '')) && !!healthArgs.healthArgsFromText(c.msg).kind)) {
       const found = await module.exports.findPlaces(c.msg).catch(() => null);
       if (found && ((found.results || []).length || (found.nearest || []).length)) {
         c._places = found;
