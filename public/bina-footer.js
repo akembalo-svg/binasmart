@@ -15,10 +15,10 @@
   var COLS = [
     ['አገልግሎቶች', 'Services', [
       ['ራይድ', 'Ride', '/ride'], ['አየር ማረፊያ', 'Airport transfer', '/airport'], ['ሆቴሎች', 'Hotels', '/hotels'],
-      ['ቲቪ · ፊልም', 'Watch', '/watch'], ['ሲኒማ', 'Cinema', '/cinema'], ['ሬስቶራንት', 'Restaurants', '/restaurant/bina-restaurant'],
+      ['ቲቪ · ፊልም', 'Watch', '/watch'], ['ሲኒማ', 'Cinema', '/cinema'], ['ሬስቶራንት', 'Restaurants', '/restaurants'],
       ['ንብረት', 'Property', '/property'], ['መኪና', 'Cars', '/cars'], ['መድን', 'Insurance', '/insurance'],
-      ['በረራ', 'Flights', '/flights'], ['አውቶቡስ', 'Bus tickets', '/travel'], ['ሆስፒታሎች', 'Hospitals', '/hospital/bina-general-hospital'],
-      ['ዜና', 'News', '/news'], ['ጨረታ', 'Tenders', '/tenders'], ['ሥራ', 'Jobs', '/jobs'], ['መመሪያዎች', 'Guides', '/guides'], ['ሱቆች', 'Shops', '/business'],
+      ['በረራ', 'Flights', '/flights'], ['አውቶቡስ', 'Bus tickets', '/travel'], ['ሆስፒታሎች', 'Hospitals', '/health'],
+      ['ዜና', 'News', '/news'], ['ጨረታ', 'Tenders', '/tenders'], ['ሥራ', 'Jobs', '/jobs'], ['መመሪያዎች', 'Guides', '/guides'], ['ሱቆች', 'Shops', '/shop'],
     ]],
     ['ይቀላቀሉን', 'Join us', [
       ['ሱቅ አለዎት?', 'For business', '/for-business'], ['ሆቴል አለዎት?', 'For hotels', '/for-business'], ['ሲኒማ ቤት?', 'For cinemas', '/for-cinemas'],

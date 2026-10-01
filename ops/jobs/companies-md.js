@@ -77,5 +77,9 @@ const MOBILE = /(?:\+?251[\s-]?|\b0)[79](?:[\s-]?\d){8}/;
     for (const f of fs.readdirSync(OUT).filter(f => f.startsWith('companies-') && !files[f])) fs.unlinkSync(path.join(OUT, f));   // a field nobody hires in any more
     for (const [f, t] of Object.entries(files)) fs.writeFileSync(path.join(OUT, f), t);
     console.log('written to ' + OUT);
+    // commit the files this run wrote, and nothing else (ops/git-commit-own.sh); never pushes. Until 1 Oct 2026 this
+    // daily job left 19 changed files in the server's tree every morning.
+    try { console.log(require('child_process').execFileSync('/bin/bash', [path.join(__dirname, '..', 'git-commit-own.sh'), 'knowledge: companies on the job board (daily, ' + day + ')', 'knowledge/places/companies-*.md'],
+      { cwd: path.join(__dirname, '..', '..'), encoding: 'utf8', timeout: 60000 }).trim()); } catch (e) { console.error('[git-own] ' + e.message); }
   } finally { await prisma.$disconnect(); }
 })().catch(e => { console.error(e.message); process.exit(1); });

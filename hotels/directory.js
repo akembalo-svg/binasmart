@@ -353,7 +353,7 @@ document.getElementById('f').addEventListener('submit', async e => {
   } catch (x) { m.textContent = 'Could not send. Please try again.'; }
   b.disabled = false;
 });
-</script><script src="/static/bina-assistant.js?v=14" defer></script><script src="/static/bina-footer.js?v=10" defer></script></body></html>`;
+</script><script src="/static/bina-assistant.js?v=14" defer></script><script src="/static/bina-footer.js?v=11" defer></script></body></html>`;
 }
 
 module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {

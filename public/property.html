@@ -263,6 +263,6 @@ window.addEventListener('hashchange',openShared);
 function openShared(){var h=decodeURIComponent(location.hash||'');if(h.indexOf('#p-')!==0)return;var s=h.slice(3).replace(/[.,;:!?)]+$/,''),p=ALL.filter(function(x){return x.slug===s})[0];if(!p)return;
   if((p.listingType||'sale')!==curType)setType(p.listingType||'sale');var el=document.getElementById('p-'+s);if(!el){resetF();var ix=LIST.findIndex(function(x){return x.slug===s});if(ix>=shown){shown=Math.ceil((ix+1)/PAGE)*PAGE;view(true)}el=document.getElementById('p-'+s)}
   document.querySelectorAll('.pc.hl').forEach(function(c){c.classList.remove('hl')});if(el){el.classList.add('hl');el.scrollIntoView({block:'center'})}}
-</script>  <script src="/static/bina-footer.js?v=10" defer></script>
+</script>  <script src="/static/bina-footer.js?v=11" defer></script>
 <script src="/static/bina-assistant.js?v=14" defer></script>
 </body></html>

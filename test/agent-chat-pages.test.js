@@ -48,7 +48,7 @@ for (const P of PAGES) {
 
   test(P.file + ': loads the shared chat, versioned, core before the page script, footer kept', () => {
     const order = ['/static/fonts/fonts.css?v=2', '/static/site-v3.css?v=5', '/static/agent-chat.css?v=1',
-      '/static/agent-chat-core.js?v=1', '/static/agent-chat.js?v=2', '/static/bina-footer.js?v=10'];
+      '/static/agent-chat-core.js?v=1', '/static/agent-chat.js?v=2', '/static/bina-footer.js?v=11'];
     let at = -1;
     for (const a of order) { const i = html.indexOf(a); assert.ok(i > at, a + ' missing or out of order'); at = i; }
     for (const f of ['agent-chat.css', 'agent-chat-core.js', 'agent-chat.js', 'agents/' + P.slug + '.svg']) assert.ok(fs.existsSync(path.join(PUB, f)), f);

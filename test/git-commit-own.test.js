@@ -28,3 +28,18 @@ test('commits the job\'s own paths only (new, changed and deleted files) and lea
   fs.writeFileSync(path.join(dir, 'knowledge', 'banking', 'a.md'), 'a3');
   assert.match(run('busy', 'knowledge/banking'), /git busy/);
 });
+
+test('a glob pathspec (the daily companies-*.md job) commits only the matching files, deletions too', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'gitown-'));
+  const git = (...a) => execFileSync('git', ['-C', dir, ...a], { encoding: 'utf8', env: { ...process.env, ...ID } });
+  git('init', '-q');
+  const P = path.join(dir, 'knowledge', 'places'); fs.mkdirSync(P, { recursive: true });
+  for (const f of ['companies-it.md', 'companies-old.md', 'addis-banks.md']) fs.writeFileSync(path.join(P, f), '1');
+  git('add', '-A'); git('commit', '-q', '-m', 'base');
+  fs.writeFileSync(path.join(P, 'companies-it.md'), '2'); fs.unlinkSync(path.join(P, 'companies-old.md')); fs.writeFileSync(path.join(P, 'companies-new.md'), 'n');
+  fs.writeFileSync(path.join(P, 'addis-banks.md'), '2');   // the monthly places refresh's file: not this job's
+  const out = execFileSync('/bin/bash', [SH, 'knowledge: companies', 'knowledge/places/companies-*.md'], { encoding: 'utf8', env: { ...process.env, ...ID, GIT_OWN_ROOT: dir } });
+  assert.match(out, /\(3 files\)/);
+  assert.deepEqual(git('show', '--name-status', '--format=', 'HEAD').trim().split('\n').sort(), ['A\tknowledge/places/companies-new.md', 'D\tknowledge/places/companies-old.md', 'M\tknowledge/places/companies-it.md']);
+  assert.equal(git('status', '--porcelain').trim(), 'M knowledge/places/addis-banks.md');
+});
