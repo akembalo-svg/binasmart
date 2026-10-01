@@ -44,15 +44,17 @@ function judge(item, reply, tools) {
 (async () => {
   const every = JSON.parse(fs.readFileSync(path.join(__dirname, 'nightly-questions.json'), 'utf8'));
   const part = Math.floor(Date.now() / 864e5) % 3;
-  const items = process.argv.includes('--all') ? every : every.filter((_, i) => i % 3 === part);
+  const grep = (process.argv.find(a => a.startsWith('--grep=')) || '').slice(7);   // --grep=<text>: only questions containing it (try new ones with --dry --all)
+  const items = (process.argv.includes('--all') ? every : every.filter((_, i) => i % 3 === part)).filter(it => !grep || it.q.includes(grep) || (it.id || '') === grep);
   const rows = [];
   for (let i = 0; i < items.length; i++) {
     const it = items[i], t0 = Date.now();
     let reply = '', tools = [], err = '';
     try {
-      const r = await fetch(API + '/api/assistant', { method: 'POST', signal: AbortSignal.timeout(90000),
+      // a question may name its door ("endpoint": Dr Afiya is /api/afiya) and the page it was asked on ("body", e.g. a restaurant's page)
+      const r = await fetch(API + (it.endpoint || '/api/assistant'), { method: 'POST', signal: AbortSignal.timeout(90000),
         headers: { 'content-type': 'application/json', 'x-binasmart-eval': '1', 'x-real-ip': 'bini-nightly-' + i },
-        body: JSON.stringify({ message: it.q, channel: 'web', user: { uid: 'e2e-nightly-guard' } }) });
+        body: JSON.stringify(Object.assign({ message: it.q, channel: 'web', user: { uid: 'e2e-nightly-guard' } }, it.body || {})) });
       const d = await r.json(); reply = String(d.reply || ''); tools = Array.isArray(d.tools) ? d.tools : [];
     } catch (e) { err = e.message; }
     const fails = err ? ['error:' + err] : judge(it, reply, tools);

@@ -7,7 +7,7 @@ const fs = require('fs'), os = require('os'), path = require('path');
 
 const DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'owndash-'));
 Object.assign(process.env, { BINA_OSM_ADDIS: DIR + '/osm.json', BINA_WD_HOTELS: DIR + '/wd.json', BINA_HOTELS_HIDDEN: DIR + '/hidden.json',
-  HOTEL_OWNER_ROOMS_FILE: DIR + '/owner-rooms.json', HOTEL_CLAIM_ROOMS_FILE: DIR + '/claim-rooms.json', BINA_RIDER_BOT_TOKEN: '' });
+  HOTEL_OWNER_ROOMS_FILE: DIR + '/owner-rooms.json', HOTEL_CLAIM_ROOMS_FILE: DIR + '/claim-rooms.json', HOTEL_OWNER_PHONES_FILE: DIR + '/owner-phones.json', BINA_RIDER_BOT_TOKEN: '' });
 fs.writeFileSync(DIR + '/osm.json', JSON.stringify({ bySub: { node1: 'Bole' }, elements: [
   { type: 'node', id: 1, lat: 9.0, lon: 38.8, tags: { tourism: 'hotel', name: 'Sample Grand Hotel', stars: '3', phone: '+251110000091' } }] }));
 const Fastify = require('fastify');
@@ -98,4 +98,23 @@ test('hotels: the hotel the team approved for this number edits its room prices,
   assert.match((await go('GET', '/ops/hotel-rooms/c1/remove?t=' + tok)).body, /removed/);
   assert.doesNotMatch((await go('GET', '/hotels/sample-grand-hotel-n1')).body, /2,500/, 'the team\'s one tap takes them off');
   assert.equal((await go('GET', '/ops/hotel-rooms/c1/remove?t=' + tok)).statusCode, 404, 'once');
+});
+
+test('hotels: the number for guests, shown first on the page and in the search answers; the team can take it back', async () => {
+  const { go, team } = await hotelApp();
+  assert.equal((await go('POST', '/api/hotels/mine/c1', { phone: '+971 50 000 0000' }, 'hotel')).json().error, 'phone');
+  const r = (await go('POST', '/api/hotels/mine/c1', { phone: '0900 000 052' }, 'hotel')).json();
+  assert.equal(r.phone, '+251900000052'); assert.equal(r.hotel.phone, '+251900000052');
+  const page = (await go('GET', '/hotels/sample-grand-hotel-n1')).body;
+  assert.ok(page.indexOf('+251900000052') > -1 && page.indexOf('+251900000052') < page.indexOf('+251110000091'), 'the hotel\'s number comes before the map\'s landline');
+  assert.match(page, /"telephone":"\+251900000052"/, 'and in the structured data');
+  const hit = (await go('GET', '/api/hotels/search?q=Sample%20Grand')).json();
+  assert.equal(JSON.stringify(hit).includes('+251900000052'), true, 'Bini and the MCP read the same number');
+  assert.match(team.at(-1), /Phone changed by the hotel/); assert.doesNotMatch(team.at(-1), /Room prices/);
+  const tok = /hotel-phone\/c1\/remove\?t=([a-f0-9]+)/.exec(team.at(-1))[1];
+  assert.match((await go('GET', '/ops/hotel-phone/c1/remove?t=' + tok)).body, /removed/);
+  assert.doesNotMatch((await go('GET', '/hotels/sample-grand-hotel-n1')).body, /900000052/);
+  await go('POST', '/api/hotels/mine/c1', { phone: '0900 000 053' }, 'hotel');
+  assert.equal((await go('POST', '/api/hotels/mine/c1', { phone: '' }, 'hotel')).json().hotel.phone, '', 'empty goes back to the map\'s number');
+  assert.equal((await go('POST', '/api/hotels/mine/c1', {}, 'hotel')).json().error, 'rooms', 'nothing to change');
 });

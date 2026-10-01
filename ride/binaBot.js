@@ -16,9 +16,10 @@ const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 // Tenant-link errors are logged by kind (Prisma code or error name), never by message: messages can carry ids or numbers.
 const errKind = e => String((e && (e.code || e.name)) || 'Error').replace(/[^A-Za-z0-9_]/g, '').slice(0, 40) || 'Error';
 
-function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, linkRestaurant, internalKey, owner, tenant, jobs, cv, tenders }) {
+function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, linkRestaurant, mypages, internalKey, owner, tenant, jobs, cv, tenders }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
   const hist = new Map(); // chatId -> { turns: [{role, content}], t }
+  const myPagesWaiting = new Set(); // chats asked to share their number for /mypages
   const menuMarkup = () => ({ inline_keyboard: MENU.map(row => row.map(b => ({ text: b.text, web_app: { url: baseUrl + b.path } }))) });
   const WELCOME = 'ሰላም! 👋 BinaSmart — Ethiopia\'s all-in-one platform.\n🚕 Fixed-price rides · 🏨 hotels · 🍽 restaurants · 🏥 hospitals · 🎟 events · 🏠 property · 🚗 cars · 🛡 insurance · 📚 guides.\n\nPick a service below, or just type your question — Bini (ቢኒ), our assistant, answers in Amharic or English.\nከታች ይምረጡ ወይም ጥያቄዎን ይጻፉ — ቢኒ በአማርኛ ወይም በእንግሊዝኛ ይመልስልዎታል።';
   const share = 'https://t.me/share/url?url=' + encodeURIComponent('https://t.me/' + (botUsername || 'bina_smart_bot')) + '&text=' + encodeURIComponent('BinaSmart — fixed-price rides, hotels, guides and more, inside Telegram');
@@ -510,6 +511,24 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
     // "Stopjob", "stop jobs", "stop tenders" typed without the slash are the commands (1 Oct 2026: "Stopjob" went to Bini).
     const typed = String(msg.text || '').trim();
     const text = /^stop\s?jobs?[\s.!]*$/i.test(typed) ? '/stopjobs' : /^stop\s?tenders?[\s.!]*$/i.test(typed) ? '/stoptenders' : typed;
+    // /mypages (1 Oct 2026): every page and listing tied to this Telegram user's PROVEN number (owners/mypages.js), each with
+    // the place to manage it. No proven number yet: one tap shares it (Telegram signs the contact; it must be their own).
+    if (mypages && isPrivate(msg) && msg.from) {
+      const asked = /^\/mypages\b|^my pages[.!?]*$|^የኔ ገጾች$/i.test(text), shared = !!msg.contact && myPagesWaiting.has(chatId);
+      if (asked || shared) {
+        if (shared) {
+          myPagesWaiting.delete(chatId);
+          if (String(msg.contact.user_id || '') !== String(msg.from.id)) return api.sendMessage(chatId, 'Please share your OWN number with the button. · እባክዎ የራስዎን ቁጥር ያጋሩ።', { reply_markup: { remove_keyboard: true } });
+        }
+        const r = await mypages(msg.from.id, shared ? msg.contact.phone_number : null).catch(() => null);
+        if (!r) {
+          myPagesWaiting.add(chatId);
+          return api.sendMessage(chatId, '📱 ገጾችዎን ለማግኘት ከታች ባለው ቁልፍ ስልክ ቁጥርዎን ያጋሩ። · To find your pages, share your phone number with the button below.',
+            { reply_markup: { keyboard: [[{ text: '📱 Share my number · ቁጥሬን አጋራ', request_contact: true }]], resize_keyboard: true, one_time_keyboard: true } });
+        }
+        return api.sendMessage(chatId, r.text, { disable_web_page_preview: true, reply_markup: { remove_keyboard: true } });
+      }
+    }
     // Tenant notices: /start tenant_<slug>, the shared contact, /stop — private chats only, and only when server.js
     // passes the tenant link service.
     if (tenant && isPrivate(msg) && msg.from) {

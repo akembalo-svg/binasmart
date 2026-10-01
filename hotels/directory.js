@@ -174,6 +174,12 @@ function ownerMap() { try { const st = fs.statSync(OWNER); if (st.mtimeMs !== ow
 const OWNER_ROOMS = process.env.HOTEL_OWNER_ROOMS_FILE || '/root/storage/hotels/owner-rooms.json', CLAIM_ROOMS = process.env.HOTEL_CLAIM_ROOMS_FILE || '/root/storage/hotels/claim-rooms.json';
 let orm = { mtime: 0, map: {} };
 function ownerRooms() { try { const st = fs.statSync(OWNER_ROOMS); if (st.mtimeMs !== orm.mtime) orm = { mtime: st.mtimeMs, map: JSON.parse(fs.readFileSync(OWNER_ROOMS, 'utf8')) }; } catch (e) {} return orm.map; }
+// The number an approved hotel chose for guests (hotels/dashboard.js, 1 Oct 2026): shown first everywhere a hotel's phone
+// is, ahead of the map's landlines. Kept apart from the room prices so clearing prices never clears the phone.
+const OWNER_PHONES = process.env.HOTEL_OWNER_PHONES_FILE || '/root/storage/hotels/owner-phones.json';
+let oph = { mtime: 0, map: {} };
+function ownerPhones() { try { const st = fs.statSync(OWNER_PHONES); if (st.mtimeMs !== oph.mtime) oph = { mtime: st.mtimeMs, map: JSON.parse(fs.readFileSync(OWNER_PHONES, 'utf8')) }; } catch (e) { oph = { mtime: 0, map: {} }; } return oph.map; }
+const phonesOf = p => { const o = (ownerPhones()[p.ref] || {}).phone; return o ? [o].concat((p.phones || []).filter(x => String(x).replace(/\D/g, '').slice(-9) !== String(o).replace(/\D/g, '').slice(-9))) : (p.phones || []); };
 const readJson = f => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) { return {}; } };
 const writeJson = (f, o) => { fs.writeFileSync(f + '.part', JSON.stringify(o, null, 1)); fs.renameSync(f + '.part', f); };
 // each room: a name and a price per night in birr (200 to 500,000) or US dollars (5 to 5,000); anything else is dropped
@@ -212,10 +218,10 @@ const FAC = { wifi: ['\u{1F4F6}', 'Free Wi-Fi', 'ዋይፋይ'], pool: ['\u{1F3C
   restaurant: ['\u{1F37D}️', 'Restaurant', 'ምግብ ቤት'], bar: ['\u{1F378}', 'Bar', 'ባር'], parking: ['\u{1F17F}️', 'Parking', 'ፓርኪንግ'], airport: ['✈️', 'Airport shuttle', 'የአየር ማረፊያ ትራንስፖርት'],
   meeting: ['\u{1F3A4}', 'Meeting rooms', 'የስብሰባ አዳራሽ'], breakfast: ['\u{1F950}', 'Breakfast', 'ቁርስ'], laundry: ['\u{1F9FA}', 'Laundry', 'ልብስ ማጠቢያ'], roomservice: ['\u{1F6CE}️', 'Room service', 'የክፍል አገልግሎት'],
   reception24: ['\u{1F550}', '24-hour reception', 'የ24 ሰዓት መስተንገዶ'], aircon: ['❄️', 'Air conditioning', 'አየር ማቀዝቀዣ'], elevator: ['\u{1F6D7}', 'Elevator', 'ሊፍት'], garden: ['\u{1F333}', 'Garden / terrace', 'የአትክልት ስፍራ'] };
-const findable = p => !p.unsure && !!(p.phones.length || siteOf(p) || p.stars || (dOf(p).photos || []).length);
+const findable = p => !p.unsure && !!(phonesOf(p).length || siteOf(p) || p.stars || (dOf(p).photos || []).length);
 function hotelLd(p, rt) {
   return '<script type="application/ld+json">' + JSON.stringify({ '@context': 'https://schema.org', '@type': p.kind === 'hotel' || p.kind === 'motel' ? 'Hotel' : p.kind === 'hostel' ? 'Hostel' : 'LodgingBusiness',
-    name: p.name, alternateName: p.nameAm || undefined, url: 'https://bina.et/hotels/' + p.slug, sameAs: siteOf(p) ? [siteOf(p)] : undefined, telephone: p.phones[0] || undefined,
+    name: p.name, alternateName: p.nameAm || undefined, url: 'https://bina.et/hotels/' + p.slug, sameAs: siteOf(p) ? [siteOf(p)] : undefined, telephone: phonesOf(p)[0] || undefined,
     starRating: p.stars ? { '@type': 'Rating', ratingValue: p.stars } : undefined,
     address: { '@type': 'PostalAddress', streetAddress: p.street || undefined, addressLocality: p.sub || 'Addis Ababa', addressRegion: 'Addis Ababa', addressCountry: 'ET' },
     geo: { '@type': 'GeoCoordinates', latitude: p.lat, longitude: p.lng },
@@ -234,7 +240,7 @@ function page(p, claimed, rating) {
       : '<p class="sum">No ratings yet. <span class="am">እስካሁን ደረጃ የለም</span></p>')
     + '<p class="src">Only a rider whose BinaSmart ride ended here can rate this place, so every rating comes from a real visit: nobody can buy, copy or write one without a ride. <span class="am">ደረጃ የሚሰጡት እዚህ በቢናስማርት የደረሱ ተሳፋሪዎች ብቻ ናቸው።</span></p>';
   const d = dOf(p), photos = d.photos || [], fac = (d.facilities || []).filter(x => FAC[x]), rooms = d.rooms || [], site = siteOf(p);
-  const tel = p.phones[0] || (d.contacts && d.contacts.phone) || null, wa = d.contacts && d.contacts.whatsapp ? String(d.contacts.whatsapp).replace(/\D/g, '') : null;
+  const tel = phonesOf(p)[0] || (d.contacts && d.contacts.phone) || null, wa = d.contacts && d.contacts.whatsapp ? String(d.contacts.whatsapp).replace(/\D/g, '') : null;
   const air = d.airport || null, rideTo = 'to=' + encodeURIComponent(p.name) + '&lat=' + p.lat + '&lng=' + p.lng;
   const credits = [...new Set((d.credits || []).map(c => c.page && /wikimedia/.test(c.page) ? '<a href="' + esc(c.page) + '" rel="nofollow noopener" target="_blank">' + esc(c.credit) + '</a> (Wikimedia Commons)' : esc(c.credit)))];
   const gal = !photos.length ? '<a class="addph" href="?bini=hotel">\u{1F4F7} No photos yet. Owner or manager? <b>Add your photos free</b>: send them to Bini <span class="am">\u134e\u1276 \u12ed\u120b\u12a9</span></a>' : photos.length ? '<div class="gal"><button type="button" class="gm" onclick="hbOpen(0)"><img src="' + esc(photos[0]) + '" alt="' + esc(p.name) + '" fetchpriority="high"></button>'
@@ -264,7 +270,7 @@ function page(p, claimed, rating) {
     p.sub ? '<li><span>Sub-city · ክፍለ ከተማ</span><b>' + esc(p.sub) + (p.subAm ? ' · <span class="am">' + p.subAm + '</span>' : '') + '</b></li>' : '',
     p.street ? '<li><span>Street · መንገድ</span><b>' + esc(p.street) + '</b></li>' : '',
     p.stars ? '<li><span>Stars · ኮከብ</span><b>' + '★'.repeat(p.stars) + '</b></li>' : '',
-    p.phones.length ? '<li><span>Phone · ስልክ</span><b>' + p.phones.map(esc).join('<br>') + '</b></li>' : '',
+    phonesOf(p).length ? '<li><span>Phone · ስልክ</span><b>' + phonesOf(p).map(esc).join('<br>') + '</b></li>' : '',
     site ? '<li><span>Website · ድረ ገጽ</span><b><a href="' + esc(site) + '" rel="nofollow noopener" target="_blank">' + esc(site.replace(/^https?:\/\//, '').replace(/\/$/, '')) + '</a></b></li>' : '',
   ].join('');
   return `<!DOCTYPE html><html lang="am"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -327,7 +333,7 @@ ${p.unsure ? '<p class="src"><b>The map marks this place as a building or a rest
 </div>
 <div class="card claim" id="claim">
 <h2 class="am">${claimed ? 'ይህ የእርስዎ ሆቴል ነው?' : 'ይህ የእርስዎ ሆቴል ነው? በነጻ ይረከቡት'}</h2>
-<p><b>Is this your ${esc(k.en.toLowerCase())}?</b> Claim this listing free. We call you to confirm, then you can fix the details, add photos and rooms, and take bookings direct with 0% commission.</p><p style="margin:10px 0 12px"><a href="?bini=hotel" style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:#0f766e;color:#fff;font-weight:700;text-decoration:none">💬 ቢኒን ይጠይቁ · Ask Bini, any time</a> <span style="font-size:13px;opacity:.75">Bini takes your changes; our team approves them.</span></p>
+<p><b>Is this your ${esc(k.en.toLowerCase())}?</b> Claim this listing free. We call you to confirm, then you can fix the details, add photos and rooms, and take bookings direct with 0% commission.</p><p style="margin:10px 0 12px"><a href="?bini=hotel" style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:#0f766e;color:#fff;font-weight:700;text-decoration:none">💬 ቢኒን ይጠይቁ · Ask Bini, any time</a> <span style="font-size:13px;opacity:.75">Bini takes your changes; our team approves them.</span>${claimed ? '<br><a href="/hotels/dashboard" style="font-weight:700">Already confirmed? Change your room prices yourself →</a>' : ''}</p>
 <p class="am">ስምዎንና ስልክዎን ይተዉ፤ ደውለን እናረጋግጣለን። ከዚያ ፎቶ፣ ክፍሎችና ዋጋ ጨምረው እንግዶች በቀጥታ እንዲያስይዙ ያደርጋሉ፤ ኮሚሽን የለም።</p>
 <form id="f"><input type="hidden" name="ref" value="${esc(p.ref)}">
 <label>Your name · <span class="am">ስምዎ</span><input name="name" required minlength="2" maxlength="80" autocomplete="name"></label>
@@ -399,7 +405,7 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter, tell }, don
 
   // one place as the list page, the map and the server-drawn cards see it
   const placeOut = (p, ok, rm) => ({ slug: p.slug, name: p.name, nameAm: p.nameAm, kind: p.kind, sub: p.sub, subAm: p.subAm,
-        stars: p.stars || dOf(p).starsClaim || undefined, phone: p.phones.length > 0 || !!(dOf(p).contacts && dOf(p).contacts.phone), website: !!siteOf(p), unsure: p.unsure || undefined, claimed: ok.has(p.ref),
+        stars: p.stars || dOf(p).starsClaim || undefined, phone: phonesOf(p).length > 0 || !!(dOf(p).contacts && dOf(p).contacts.phone), website: !!siteOf(p), unsure: p.unsure || undefined, claimed: ok.has(p.ref),
         photo: dOf(p).card || null, photos: (dOf(p).photos || []).length, lat: p.lat, lng: p.lng, air: dOf(p).airport ? { km: dOf(p).airport.km, min: dOf(p).airport.min, fare: dOf(p).airport.fareFrom } : null,
         fac: (dOf(p).facilities || []).filter(x => FAC[x]).slice(0, 8), from: (roomMin(dOf(p).rooms || []) || {}).price || null,
         rating: rm && rm.get(p.ref) ? { avg: rm.get(p.ref).avg, n: rm.get(p.ref).count } : undefined });
@@ -466,11 +472,11 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter, tell }, don
     if (q.kind && KINDS[q.kind]) list = list.filter(p => p.kind === q.kind);
     if (Number(q.minStars) > 0) list = list.filter(p => (p.stars || 0) >= Number(q.minStars));
     if (q.q) { const w = sq(q.q); list = list.filter(p => sq(p.name + ' ' + (p.nameAm || '')).includes(w)); }
-    const reach = p => (p.phones.length || siteOf(p) ? 1 : 0);   // a hotel you can call or open comes first, then stars
+    const reach = p => (phonesOf(p).length || siteOf(p) ? 1 : 0);   // a hotel you can call or open comes first, then stars
     list = list.slice().sort((a, b) => reach(b) - reach(a) || (b.stars || 0) - (a.stars || 0));
     const ok = await approved(), rm = await ratings(), limit = Math.min(Math.max(Number(q.limit) || 6, 1), 10);
     return { total: list.length, results: list.slice(0, limit).map(p => ({ name: p.name, nameAm: p.nameAm || null, kind: (KINDS[p.kind] || {}).en || p.kind,
-      area: p.sub || null, stars: p.stars || null, phone: p.phones[0] || null, website: siteOf(p), confirmedByHotel: ok.has(p.ref),
+      area: p.sub || null, stars: p.stars || null, phone: phonesOf(p)[0] || null, website: siteOf(p), confirmedByHotel: ok.has(p.ref),
       guestRating: rm.get(p.ref) ? rm.get(p.ref).avg + '/5 from ' + rm.get(p.ref).count + ' BinaSmart rider rating(s)' : null,
       roomsFrom: (roomMin(dOf(p).rooms || []) || {}).price || null, roomPrices: dOf(p).roomsFrom === 'hotel' ? 'given by the hotel on ' + dOf(p).roomsDate : (dOf(p).rooms || []).length ? 'from the hotel website' : null,
       photos: (dOf(p).photos || []).length, facilities: (dOf(p).facilities || []).filter(x => FAC[x]).map(x => FAC[x][1]), fromBoleAirport: dOf(p).airport ? dOf(p).airport.km + ' km, about ' + dOf(p).airport.min + ' min, BinaSmart ride from ' + dOf(p).airport.fareFrom + ' birr' : null,
@@ -536,7 +542,8 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter, tell }, don
     if (cr && cr.rooms && cr.rooms.length && !String(c.placeRef).startsWith('new:')) {
       const m = readJson(OWNER_ROOMS); m[c.placeRef] = { rooms: cr.rooms, date: new Date().toISOString().slice(0, 10), claimId: c.id }; writeJson(OWNER_ROOMS, m);
     }
-    if (action === 'reject') { const m = readJson(OWNER_ROOMS); if (m[c.placeRef] && m[c.placeRef].claimId === c.id) { delete m[c.placeRef]; writeJson(OWNER_ROOMS, m); } }
+    if (action === 'reject') { const m = readJson(OWNER_ROOMS); if (m[c.placeRef] && m[c.placeRef].claimId === c.id) { delete m[c.placeRef]; writeJson(OWNER_ROOMS, m); }
+      const ph = readJson(OWNER_PHONES); if (ph[c.placeRef] && ph[c.placeRef].claimId === c.id) { delete ph[c.placeRef]; writeJson(OWNER_PHONES, ph); } }
     return reply.type('text/html; charset=utf-8').send('<p style="font-family:system-ui;padding:40px">' + (action === 'approve' ? '✅ Approved' : '❌ Rejected') + ': ' + esc(c.placeName) + ' — ' + esc(c.name) + '. ' + (c.slug ? '<a href="/hotels/' + esc(c.slug) + '">listing</a>' : action === 'approve' ? 'Not on the map yet: add it by hand.' : '') + '</p>');
   });
   done();
@@ -546,4 +553,5 @@ module.exports.cleanRooms = cleanRooms;
 module.exports.roomMin = roomMin;
 module.exports.landlines = landlines;
 module.exports.rentsByName = rentsByName;
-module.exports.tellOwner = tellOwner;   // hotels/dashboard.js (owners edit room prices, 1 Oct 2026)
+module.exports.tellOwner = tellOwner;
+module.exports.OWNER_PHONES = OWNER_PHONES;   // hotels/dashboard.js (owners edit room prices, 1 Oct 2026)

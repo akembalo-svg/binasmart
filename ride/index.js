@@ -66,6 +66,15 @@ module.exports = function registerRide(fastify, deps) {
       return n.count ? deps.prisma.shop.findUnique({ where: { id: shopId }, select: { id: true, name: true, nameAm: true } }) : null; },
     // a confirmed restaurant's owner, by the one-time token on their dashboard (restaurants/orders.js)
     linkRestaurant: (token, chatId) => require('../restaurants/orders').linkTelegram(token, chatId),
+    // /mypages: the Telegram user's PROVEN number (signed-in account, or a contact shared in the bot), or one they share now
+    mypages: async (tgId, shared) => {
+      const MP = require('../owners/mypages');
+      let phone = shared || null;
+      if (!phone) { const u = await deps.prisma.authUser.findFirst({ where: { telegramId: String(tgId), phoneVerifiedAt: { not: null } }, select: { phone: true } }).catch(() => null); phone = u && u.phone; }
+      if (!phone) { const r = await deps.prisma.rider.findFirst({ where: { telegramId: String(tgId), phoneVerifiedAt: { not: null } }, select: { phone: true } }).catch(() => null); phone = r && r.phone; }
+      if (!phone) return null;
+      return { phone, text: MP.myPagesText(phone, await MP.findMyPages({ prisma: deps.prisma, phone })) };
+    },
     assistantUrl: 'http://127.0.0.1:' + (process.env.PORT || 4210) + '/api/assistant', internalKey: deps.OWNER_KEY,
     owner: deps.ownerTelegram || null,    // Bini for owners (agents/owner/access.js); absent = off
     tenant: deps.tenantTelegram || null,   // tenant notices (messaging/tenant-link.js); absent = off
