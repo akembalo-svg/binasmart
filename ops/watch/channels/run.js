@@ -162,6 +162,10 @@ module.exports = { run, harvest, classifyAll, getText, REGISTRY, WINDOW_DAYS, PA
 if (require.main === module) {
   const argv = process.argv.slice(2);
   run({ dryRun: argv.includes('--dry-run') })
-    .then(r => { if (!r.dryRun && r.note.count) console.log('[watch] note sent: ' + r.sent.sent); })
+    .then(r => {
+      if (!r.dryRun && r.note.count) console.log('[watch] note sent: ' + r.sent.sent);
+      // commit the notes this run wrote, and nothing else (ops/git-commit-own.sh, 1 Oct 2026); never pushes
+      if (!r.dryRun) try { console.log(require('child_process').execFileSync('/bin/bash', [require('path').join(__dirname, '..', '..', 'git-commit-own.sh'), 'knowledge: channel watch notes (ops/watch/channels/run.js)', 'knowledge/watch'], { encoding: 'utf8', timeout: 60000 }).trim()); } catch (e) { console.error('[watch] git commit skipped: ' + e.message); }
+    })
     .catch(e => { console.error('[watch] failed: ' + (e && e.stack || e)); process.exit(1); });
 }

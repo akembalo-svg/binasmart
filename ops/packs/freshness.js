@@ -362,7 +362,13 @@ async function run({ packId = 'travel', pack, dir, today, dryRun = false, sites,
   return result;
 }
 
-module.exports = { run, noteFor, probeManual, manualNote, checkServerFetchable, manualBlock, isReminderDay, dropStaleAmHeaders, sendTgReal, runIngestReal,
+// After a real run from cron: commit this pack's own directory and nothing else (ops/git-commit-own.sh, 1 Oct 2026).
+function commitOwn(packId) {
+  try { console.log(execFileSync('/bin/bash', [path.join(ROOT, 'ops', 'git-commit-own.sh'), 'knowledge: ' + packId + ' pack re-checked (freshness.js)', 'knowledge/' + packId], { cwd: ROOT, encoding: 'utf8', timeout: 60000 }).trim()); }
+  catch (e) { console.error('[' + packId + '-freshness] git commit skipped: ' + e.message); }
+}
+
+module.exports = { run, commitOwn, noteFor, probeManual, manualNote, checkServerFetchable, manualBlock, isReminderDay, dropStaleAmHeaders, sendTgReal, runIngestReal,
   runAmHeadersReal, rerenderReal, MASS_CHANGE, packFile };
 
 //   node --env-file=.env ops/packs/freshness.js --pack banking
@@ -370,6 +376,8 @@ module.exports = { run, noteFor, probeManual, manualNote, checkServerFetchable, 
 if (require.main === module) {
   const argv = process.argv.slice(2);
   const packId = argv.includes('--pack') ? argv[argv.indexOf('--pack') + 1] : 'travel';
-  run({ packId, dryRun: argv.includes('--dry-run') })
+  const dryRun = argv.includes('--dry-run');
+  run({ packId, dryRun })
+    .then(() => { if (!dryRun) commitOwn(packId); })
     .catch(e => { console.error('[' + packId + '-freshness] failed: ' + e.message); process.exit(1); });
 }

@@ -15,4 +15,5 @@ const F = require('../packs/freshness.js');
 module.exports = { ...F, run: opts => F.run({ packId: 'travel', ...(opts || {}) }) };
 
 if (require.main === module) F.run({ packId: 'travel', dryRun: process.argv.includes('--dry-run') })
+  .then(() => { if (!process.argv.includes('--dry-run')) F.commitOwn('travel'); })
   .catch(e => { console.error('[travel-freshness] failed: ' + e.message); process.exit(1); });

@@ -25,4 +25,6 @@ node --env-file=.env ops/places/employer-osm.js --apply | grep -E "employers wit
 node ops/places/wikidata-hotels.js || echo "!! wikidata-hotels failed"
 # Bini's hotel knowledge from the same data as bina.et/hotels; replaces the addis-hotels.md osm-addis.js wrote above.
 node ops/places/hotels-md.js || echo "!! hotels-md failed"
+# commit what this refresh wrote, and nothing else (1 Oct 2026); never pushes
+/bin/bash ops/git-commit-own.sh "knowledge: places refreshed (monthly, ops/places/refresh.sh)" knowledge/places
 echo "== done $(date -u +%Y-%m-%dT%H:%MZ)"
