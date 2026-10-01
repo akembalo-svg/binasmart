@@ -492,9 +492,10 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter, tell }, don
     const p = isNew ? { ref: 'new:' + (kebab(hotel) || 'hotel'), name: hotel, slug: '', kind: kindFromName(hotel), sub: area, phones: [] } : load().byRef.get(String(b.ref || ''));
     if (!p) return reply.code(404).send({ ok: false, error: 'place' });
     const name = clean(b.name, 80), role = ['owner', 'manager', 'staff'].includes(b.role) ? b.role : 'owner', note = clean(b.note, 500);
-    const digits = String(b.phone || '').replace(/[^\d+]/g, '');
+    // An Ethiopian mobile or landline, as restaurant and health claims (1 Oct 2026: any 9-15 digits, foreign too, went through).
+    const digits = require('../health/directory').ethPhone(b.phone);
     if (name.length < 2) return reply.code(400).send({ ok: false, error: 'name' });
-    if (!/^\+?\d{9,15}$/.test(digits)) return reply.code(400).send({ ok: false, error: 'phone' });
+    if (!digits) return reply.code(400).send({ ok: false, error: 'phone' });
     const rooms = cleanRooms(b.rooms);
     const dup = await prisma.hotelClaim.findFirst({ where: { placeRef: p.ref, phone: digits, status: 'pending' } });
     if (dup) {
@@ -536,7 +537,7 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter, tell }, don
       const m = readJson(OWNER_ROOMS); m[c.placeRef] = { rooms: cr.rooms, date: new Date().toISOString().slice(0, 10), claimId: c.id }; writeJson(OWNER_ROOMS, m);
     }
     if (action === 'reject') { const m = readJson(OWNER_ROOMS); if (m[c.placeRef] && m[c.placeRef].claimId === c.id) { delete m[c.placeRef]; writeJson(OWNER_ROOMS, m); } }
-    return reply.type('text/html; charset=utf-8').send('<p style="font-family:system-ui;padding:40px">' + (action === 'approve' ? '✅ Approved' : '❌ Rejected') + ': ' + esc(c.placeName) + ' — ' + esc(c.name) + '. ' + (c.slug ? '<a href="/hotels/' + esc(c.slug) + '">listing</a>' : 'Not on the map yet: add it by hand.') + '</p>');
+    return reply.type('text/html; charset=utf-8').send('<p style="font-family:system-ui;padding:40px">' + (action === 'approve' ? '✅ Approved' : '❌ Rejected') + ': ' + esc(c.placeName) + ' — ' + esc(c.name) + '. ' + (c.slug ? '<a href="/hotels/' + esc(c.slug) + '">listing</a>' : action === 'approve' ? 'Not on the map yet: add it by hand.' : '') + '</p>');
   });
   done();
 };

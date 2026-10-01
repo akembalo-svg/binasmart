@@ -102,6 +102,18 @@ test('remove: the team gets a take-down link that works once', async () => {
   assert.equal((await f.inject({ url: '/ops/listing-requests/' + L.id + '/remove?t=' + tok })).statusCode, 404, 'take-down token is spent');
 });
 
+test('remove asked from a number that is not on the listing: a note for the team, no one-tap take-down (1 Oct 2026)', async () => {
+  const prisma = fakePrisma(), sent = [], f = await app(prisma, sent);
+  await f.inject({ method: 'POST', url: '/api/property/owner-listing', headers: KEY, payload: RENT });
+  const L = prisma.rows[0];
+  await f.inject({ url: '/ops/listing-requests/' + L.id + '/approve?t=' + L.details.review.token });
+  const r = await f.inject({ method: 'POST', url: '/api/property/owner-listing', headers: KEY, payload: { action: 'remove', listing: 'https://bina.et/property/' + L.slug, name: 'Someone Else', phone: '0900000099', request: 'take it down' } });
+  assert.equal(JSON.parse(r.body).matched, false);
+  assert.ok(!(L.details.removeRequest && L.details.removeRequest.token), 'no take-down token');
+  assert.match(sent[sent.length - 1], /NOT on the listing/); assert.doesNotMatch(sent[sent.length - 1], /\/remove\?t=/);
+  assert.equal(L.active, true, 'still live');
+});
+
 test('photo upload: needs a uid and a real-sized image', async () => {
   const f = await app(fakePrisma(), []);
   assert.equal(JSON.parse((await f.inject({ method: 'POST', url: '/api/property/photo', payload: { uid: '!', image: 'x' } })).body).error, 'uid');

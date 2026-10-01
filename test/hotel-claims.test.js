@@ -62,3 +62,21 @@ test('approve puts the owner\'s prices on the page once; reject after approve ta
   assert.ok(!priced(await page()), 'a reject after an approve takes the prices back');
   assert.equal((await call('GET /ops/hotel-claims/:id/:action', { params: { id: c.id, action: 'approve' }, query: { t: 'x'.repeat(32) } })).code, 404);
 });
+
+test('a hotel claim needs an Ethiopian number (mobile or landline), like restaurants and health', async () => {
+  const { call, claims } = app();
+  for (const phone of ['+971500000000', '12345', '']) assert.equal((await call('POST /api/hotels/claim', { body: Object.assign({}, claim, { phone }) })).body.error, 'phone', phone);
+  assert.equal(claims.length, 0);
+  assert.equal((await call('POST /api/hotels/claim', { body: Object.assign({}, claim, { phone: '011 000 0092' }) })).body.ok, true);
+  assert.equal(claims[0].phone, '+251110000092', 'stored in one form, so the same person is recognised again');
+  assert.equal((await call('POST /api/hotels/claim', { body: Object.assign({}, claim, { phone: '+251 11 000 0092' }) })).body.ok, true);
+  assert.equal(claims.length, 1, 'the same number typed another way is the same claim');
+});
+
+test('rejecting a hotel that is not on the map does not say "add it by hand"', async () => {
+  const { call, claims } = app();
+  await call('POST /api/hotels/claim', { body: { ref: 'new', hotel: 'Sample New Pension', area: 'Bole', name: 'Sample Owner', role: 'owner', phone: '0900000053' } });
+  const c = claims[0];
+  const r = await call('GET /ops/hotel-claims/:id/:action', { params: { id: c.id, action: 'reject' }, query: { t: c.token } });
+  assert.match(r.body, /Rejected/); assert.doesNotMatch(r.body, /add it by hand/);
+});

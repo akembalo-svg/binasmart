@@ -100,17 +100,19 @@ module.exports = function ownerListing(fastify, { prisma, limiter, tell }, done)
       const ref = clean(b.listing, 120);
       const L = ref ? await prisma.propertyListing.findFirst({ where: { OR: [{ slug: ref.replace(/^.*\/property\//, '').replace(/[#?].*$/, '') }, { title: ref }] } }) : null;
       const what = clean(b.request, 500);
-      if (action === 'remove' && L) {
+      // Only the number on the listing gets the one-tap take-down (as shop posts); anyone else's request reaches the team
+      // as an ordinary note (1 Oct 2026 rehearsal: a stranger naming the listing got the take-down link sent to the team).
+      if (action === 'remove' && L && L.agencyPhone === phone) {
         const token = crypto.randomBytes(16).toString('hex');
         const d = Object.assign({}, L.details || {}, { removeRequest: { token, name, phone, at: new Date().toISOString() } });
         await prisma.propertyListing.update({ where: { id: L.id }, data: { details: d } });
         await notify('🗑 <b>Remove request via Bini</b> · ' + esc(L.title) + '\n' + who + (what ? '\n📝 ' + esc(what) : '')
           + '\n\nCall first: is this person really the owner/agent?\n<a href="https://bina.et/property/' + L.slug + '">listing</a> · <a href="https://bina.et/ops/listing-requests/' + L.id + '/remove?t=' + token + '">✅ take it down</a>');
       } else {
-        await notify((action === 'remove' ? '🗑 <b>Remove request via Bini</b> (listing not matched)' : '✏️ <b>Change request via Bini</b>') + (L ? ' · ' + esc(L.title) : ref ? ' · ' + esc(ref) : '')
+        await notify((action === 'remove' ? (L ? '🗑 <b>Remove request via Bini</b> from a number that is NOT on the listing: call the listing\'s own number first' : '🗑 <b>Remove request via Bini</b> (listing not matched)') : '✏️ <b>Change request via Bini</b>') + (L ? ' · ' + esc(L.title) : ref ? ' · ' + esc(ref) : '')
           + '\n' + who + (what ? '\n📝 ' + esc(what) : '') + '\n\nCall first, then edit by hand.' + (L ? '\n<a href="https://bina.et/property/' + L.slug + '">listing</a>' : ''));
       }
-      return { ok: true, matched: !!L };
+      return { ok: true, matched: !!L && (action !== 'remove' || L.agencyPhone === phone) };
     }
 
     const listingType = b.listingType === 'rent' ? 'rent' : 'sale';
