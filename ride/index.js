@@ -64,6 +64,8 @@ module.exports = function registerRide(fastify, deps) {
     // only a live, onboarded shop can be linked; a demo row or a guessed id links nothing
     linkShop: async (shopId, chatId) => { const n = await deps.prisma.shop.updateMany({ where: { id: shopId, status: 'live' }, data: { tgChatId: String(chatId) } });
       return n.count ? deps.prisma.shop.findUnique({ where: { id: shopId }, select: { id: true, name: true, nameAm: true } }) : null; },
+    // a confirmed restaurant's owner, by the one-time token on their dashboard (restaurants/orders.js)
+    linkRestaurant: (token, chatId) => require('../restaurants/orders').linkTelegram(token, chatId),
     assistantUrl: 'http://127.0.0.1:' + (process.env.PORT || 4210) + '/api/assistant', internalKey: deps.OWNER_KEY,
     owner: deps.ownerTelegram || null,    // Bini for owners (agents/owner/access.js); absent = off
     tenant: deps.tenantTelegram || null,   // tenant notices (messaging/tenant-link.js); absent = off

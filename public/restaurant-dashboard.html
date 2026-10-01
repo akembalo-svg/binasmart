@@ -9,6 +9,8 @@ label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}input,texta
 textarea{min-height:76px;resize:vertical}.row{display:grid;grid-template-columns:1fr 130px 40px;gap:8px;margin:0 0 8px}.row button{border:0;background:#fee2e2;color:#b91c1c;border-radius:10px;font-size:16px;cursor:pointer}
 .go{display:inline-block;border:0;background:var(--b);color:#fff;font:inherit;font-weight:700;padding:12px 18px;border-radius:12px;cursor:pointer;margin-top:14px;text-decoration:none}
 .add{border:1px dashed var(--b);background:#fff;color:var(--b);font:inherit;font-weight:600;padding:8px 12px;border-radius:10px;cursor:pointer}
+.tog{display:flex;gap:10px;align-items:center;font-weight:600;margin:10px 0}.tog input{width:22px;height:22px}.lk{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.lk a,.lk button{border:1px solid var(--b);background:#fff;color:var(--b);font:inherit;font-weight:600;padding:8px 12px;border-radius:10px;text-decoration:none;cursor:pointer}
+.od{border:1px solid var(--ln);border-radius:14px;padding:12px;margin:8px 0}.od.new{border-color:var(--b);background:#ecfdf5}.od b{font-size:16px}.od .t{color:var(--mu);font-size:13px}.od ul{margin:6px 0 6px 18px;padding:0}.od .st button{border:0;background:var(--b);color:#fff;font:inherit;font-weight:600;padding:6px 10px;border-radius:8px;margin-right:6px;cursor:pointer}
 .msg{margin-top:10px;font-weight:600}.ok{color:#047857}.err{color:#b91c1c}.code{letter-spacing:.12em;text-transform:uppercase;max-width:240px}
 </style></head><body>
 <header class="top"><div class="w"><a class="brand" href="/restaurants"><i>🍽</i>BinaSmart <small>Restaurants · ምግብ ቤቶች</small></a><nav><a href="/restaurants">All places</a></nav></div></header>
@@ -32,7 +34,15 @@ textarea{min-height:76px;resize:vertical}.row{display:grid;grid-template-columns
       + '<label>Opening hours · የሥራ ሰዓት</label><input name="hours" value="' + esc(r.hours) + '" maxlength="120" placeholder="Mon-Sat 8:00-22:00">'
       + '<label>About your place · ስለ ምግብ ቤትዎ</label><textarea name="about" maxlength="400">' + esc(r.about) + '</textarea>'
       + '<label>Dishes and prices · ምግቦችና ዋጋ</label><div class="dl">' + (r.dishes.length ? r.dishes : [{ name: '', price: '' }]).map(dishRow).join('') + '</div>'
-      + '<button type="button" class="add">＋ Add a dish</button><br><button class="go" type="submit">Save · አስቀምጥ</button><div class="msg"></div></form>';
+      + '<button type="button" class="add">＋ Add a dish</button><br><button class="go" type="submit">Save · አስቀምጥ</button><div class="msg"></div></form>'
+      + ordersBox(r);
+  }
+  // table QR ordering (restaurants/orders.js): the switch, Telegram, the cards and the orders as they come in
+  function ordersBox(r) {
+    if (!r.url) return '';
+    return '<div class="box ob" data-id="' + esc(r.id) + '" data-url="' + esc(r.url) + '"><h2>Table orders · የጠረጴዛ ትዕዛዝ</h2><p class="sub">Put a QR card on each table. Guests open your menu, choose and send; the order comes to your Telegram and here. They pay at the table. Free, no commission.</p>'
+      + '<label class="tog"><input type="checkbox" class="on"' + (r.dishes.length ? '' : ' disabled') + '> Take orders from the table QR · ትዕዛዝ ተቀበል</label>' + (r.dishes.length ? '' : '<p class="sub">Add your dishes and save first.</p>')
+      + '<div class="lk"><button type="button" class="tg">🔔 Connect Telegram</button><a href="' + esc(r.url) + '/qr?n=8" target="_blank">🖨 Table QR cards</a><a href="' + esc(r.url) + '/menu?table=1" target="_blank">See your menu</a></div><div class="msg"></div><div class="ol"></div></div>';
   }
   function load() {
     fetch('/api/restaurants/mine', { credentials: 'same-origin' }).then(function (r) { return r.status === 401 ? null : r.json(); }).then(function (d) {
@@ -41,7 +51,7 @@ textarea{min-height:76px;resize:vertical}.row{display:grid;grid-template-columns
         return;
       }
       app.innerHTML = (d.restaurants.length ? d.restaurants.map(card).join('') : '<div class="box"><h2>No restaurant linked yet</h2><p class="sub">Claim your page first: find it on <a href="/restaurants">bina.et/restaurants</a> and press <b>Claim this page</b>. After our team confirms, you get a code.</p></div>') + codeBox();
-      wire();
+      wire(); wireOrders();
     }).catch(function () { app.innerHTML = '<p class="err">Could not load. Please try again.</p>'; });
   }
   function wire() {
@@ -65,6 +75,50 @@ textarea{min-height:76px;resize:vertical}.row{display:grid;grid-template-columns
       });
     });
   }
+  var seen = {}, beepOk = false;
+  document.addEventListener('click', function () { beepOk = true; }, { once: true });
+  function beep() { if (!beepOk) return; try { var a = new (window.AudioContext || window.webkitAudioContext)(), o = a.createOscillator(), g = a.createGain(); o.frequency.value = 880; o.connect(g); g.connect(a.destination); g.gain.value = 0.2; o.start(); o.stop(a.currentTime + 0.35); } catch (e) {} }
+  function orderHtml(o) {
+    return '<div class="od' + (o.status === 'new' ? ' new' : '') + '"><b>Table ' + o.table + ' · ' + esc(o.code) + '</b> <span class="t">' + esc(new Date(o.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })) + ' · ' + esc(o.status) + '</span>'
+      + '<ul>' + o.items.map(function (x) { return '<li>' + x.qty + ' × ' + esc(x.name) + (x.price ? ' (' + x.price + ')' : '') + '</li>'; }).join('') + '</ul>'
+      + (o.total ? '<div>Total ' + Number(o.total).toLocaleString() + ' ETB' + (o.priced ? '' : ' + items without a price') + '</div>' : '') + (o.note ? '<div>📝 ' + esc(o.note) + '</div>' : '')
+      + (o.status === 'done' ? '' : '<div class="st">' + (o.status === 'new' ? '<button type="button" data-o="' + esc(o.id) + '" data-s="seen">Seen</button>' : '') + '<button type="button" data-o="' + esc(o.id) + '" data-s="done">Done</button></div>') + '</div>';
+  }
+  function poll(b) {
+    var id = encodeURIComponent(b.getAttribute('data-id'));
+    return fetch('/api/restaurants/mine/' + id + '/orders', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d.ok) return;
+      b.querySelector('.on').checked = d.ordersOn;
+      b.querySelector('.tg').textContent = d.telegram ? '✓ Telegram connected' : '🔔 Connect Telegram';
+      var fresh = d.orders.some(function (o) { return o.status === 'new' && !seen[o.id] && Object.keys(seen).length; });
+      d.orders.forEach(function (o) { seen[o.id] = 1; });
+      if (fresh) beep();
+      b.querySelector('.ol').innerHTML = d.orders.length ? d.orders.map(orderHtml).join('') : (d.ordersOn ? '<p class="sub">No orders yet. New ones show here by themselves.</p>' : '');
+    }).catch(function () {});
+  }
+  function wireOrders() {
+    [].forEach.call(document.querySelectorAll('.ob'), function (b) {
+      var id = encodeURIComponent(b.getAttribute('data-id')), m = b.querySelector('.msg');
+      b.querySelector('.on').addEventListener('change', function () {
+        var on = this.checked;
+        post('/api/restaurants/mine/' + id + '/settings', { ordersOn: on }).then(function (j) {
+          m.className = 'msg ' + (j.ok ? 'ok' : 'err'); m.textContent = j.ok ? (on ? '✓ Table orders are ON. Print the cards and put them on the tables.' : 'Table orders are off. Guests see the menu only.') : (j.error === 'no_dishes' ? 'Add your dishes and save first.' : 'Something went wrong.');
+          poll(b);
+        });
+      });
+      b.querySelector('.tg').addEventListener('click', function () {
+        fetch('/api/restaurants/mine/' + id + '/telegram', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (j) {
+          if (j.ok) { window.open(j.url, '_blank'); m.className = 'msg ok'; m.textContent = 'In Telegram, press START. Orders will come to that chat.'; }
+        });
+      });
+      b.addEventListener('click', function (e) {
+        var o = e.target.getAttribute('data-o'); if (!o) return;
+        post('/api/restaurants/mine/' + id + '/orders/' + encodeURIComponent(o), { status: e.target.getAttribute('data-s') }).then(function () { poll(b); });
+      });
+      poll(b);
+    });
+  }
+  setInterval(function () { if (!document.hidden) [].forEach.call(document.querySelectorAll('.ob'), function (b) { if (b.querySelector('.on').checked) poll(b); }); }, 20000);
   load();
 })();
 </script></body></html>

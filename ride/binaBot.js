@@ -16,7 +16,7 @@ const HIST_MAX = 8, HIST_TTL_MS = 3600 * 1000;
 // Tenant-link errors are logged by kind (Prisma code or error name), never by message: messages can carry ids or numbers.
 const errKind = e => String((e && (e.code || e.name)) || 'Error').replace(/[^A-Za-z0-9_]/g, '').slice(0, 40) || 'Error';
 
-function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, internalKey, owner, tenant, jobs, cv, tenders }) {
+function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, linkShop, linkRestaurant, internalKey, owner, tenant, jobs, cv, tenders }) {
   const f = fetchImpl || fetch, clock = now || Date.now;
   const hist = new Map(); // chatId -> { turns: [{role, content}], t }
   const menuMarkup = () => ({ inline_keyboard: MENU.map(row => row.map(b => ({ text: b.text, web_app: { url: baseUrl + b.path } }))) });
@@ -550,6 +550,15 @@ function makeBinaBot({ api, baseUrl, assistantUrl, fetchImpl, now, botUsername, 
       return api.sendMessage(chatId, shop
         ? '🔔 ' + (shop.nameAm || shop.name) + ' — ትዕዛዞችና ጥያቄዎች ከአሁን ጀምሮ እዚህ ይደርሱዎታል።\nOrders and requests for this page will arrive here from now on.'
         : 'ይህ ገጽ አልተገኘም። · That page was not found. Open bina.et/business and press the Telegram button again.');
+    }
+    // A restaurant owner pressed the dashboard's "Connect Telegram": t.me/bina_smart_bot?start=rest_<token>. Table orders
+    // from bina.et/restaurants/<slug>/menu come to this chat (restaurants/orders.js).
+    const rl = /^\/start\s+rest_([a-f0-9]{32})\b/.exec(text);
+    if (rl && linkRestaurant) {
+      const r = await Promise.resolve().then(() => linkRestaurant(rl[1], chatId)).catch(() => null);
+      return api.sendMessage(chatId, r
+        ? '🍽 ' + r.name + ' — የጠረጴዛ ትዕዛዞች ከአሁን ጀምሮ እዚህ ይደርሱዎታል።\nTable orders for this restaurant will arrive here from now on.'
+        : 'ይህ ሊንክ አልሰራም። · That link did not work. Open bina.et/restaurants/dashboard and press "Connect Telegram" again.');
     }
     const tk = /^\/start\s+ticket_(BINA-?[A-Z0-9]{6})\b/i.exec(text);
     if (tk) return sendTicket(chatId, tk[1].toUpperCase().replace(/^BINA-?/, 'BINA-'));
