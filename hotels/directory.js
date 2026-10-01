@@ -170,7 +170,8 @@ let own = { mtime: 0, map: {} };
 function ownerMap() { try { const st = fs.statSync(OWNER); if (st.mtimeMs !== own.mtime) own = { mtime: st.mtimeMs, map: JSON.parse(fs.readFileSync(OWNER, 'utf8')) }; } catch (e) {} return own.map; }
 // Rooms and prices a hotel sent through Bini (company_request rooms) wait beside its claim in CLAIM_ROOMS; when the team
 // approves the claim they move to OWNER_ROOMS and replace what we read on the hotel's website (28 Sep 2026).
-const OWNER_ROOMS = '/root/storage/hotels/owner-rooms.json', CLAIM_ROOMS = '/root/storage/hotels/claim-rooms.json';
+// The env overrides are for rehearsals and tests only (1 Oct 2026): a test claim must never put prices on a real hotel.
+const OWNER_ROOMS = process.env.HOTEL_OWNER_ROOMS_FILE || '/root/storage/hotels/owner-rooms.json', CLAIM_ROOMS = process.env.HOTEL_CLAIM_ROOMS_FILE || '/root/storage/hotels/claim-rooms.json';
 let orm = { mtime: 0, map: {} };
 function ownerRooms() { try { const st = fs.statSync(OWNER_ROOMS); if (st.mtimeMs !== orm.mtime) orm = { mtime: st.mtimeMs, map: JSON.parse(fs.readFileSync(OWNER_ROOMS, 'utf8')) }; } catch (e) {} return orm.map; }
 const readJson = f => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) { return {}; } };
@@ -356,7 +357,8 @@ document.getElementById('f').addEventListener('submit', async e => {
 </script><script src="/static/bina-assistant.js?v=14" defer></script><script src="/static/bina-footer.js?v=11" defer></script></body></html>`;
 }
 
-module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
+module.exports = function hotelDirectory(fastify, { prisma, limiter, tell }, done) {
+  const tellTeam = tell || tellOwner;   // tests and rehearsals pass their own: no real Telegram
   let cache = { mtime: 0, list: [], bySlug: new Map(), byRef: new Map() };
   function load() {
     let st; try { st = fs.statSync(FILE); } catch (e) { return cache; }
@@ -431,7 +433,7 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
     list.push({ id, ref: p.ref, slug: p.slug, name: p.name, file, w, h, note: clean(b.note, 200), at: new Date().toISOString(), token });
     fs.writeFileSync(PJSON, JSON.stringify(list));
     const base = 'https://bina.et/ops/hotel-photos/' + id + '/';
-    await tellOwner('\u{1F4F7} <b>Hotel photo sent through Bini</b> · ' + esc(p.name) + (p.sub ? ' (' + esc(p.sub) + ')' : '') + ' · ' + w + '×' + h + (b.note ? '\n\u{1F4DD} ' + esc(clean(b.note, 200)) : '')
+    await tellTeam('\u{1F4F7} <b>Hotel photo sent through Bini</b> · ' + esc(p.name) + (p.sub ? ' (' + esc(p.sub) + ')' : '') + ' · ' + w + '×' + h + (b.note ? '\n\u{1F4DD} ' + esc(clean(b.note, 200)) : '')
       + '\n\nCheck it shows this hotel before approving.\n<a href="' + base + 'view?t=' + token + '">\u{1F441} view</a> · <a href="' + base + 'approve?t=' + token + '">✅ approve</a> · <a href="' + base + 'reject?t=' + token + '">❌ reject</a> · <a href="https://bina.et/hotels/' + p.slug + '">page</a>');
     return { ok: true };
   });
@@ -498,9 +500,11 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
     if (dup) {
       // the same person again while the first request waits: new room prices replace the waiting ones
       if (rooms.length) {
-        const m = readJson(CLAIM_ROOMS); m[dup.id] = { ref: p.ref, rooms, at: new Date().toISOString() }; writeJson(CLAIM_ROOMS, m);
+        // the same prices again (Bini re-sends on "yes, send it") is not news for the team (1 Oct 2026 rehearsal)
+        const m = readJson(CLAIM_ROOMS), same = !!m[dup.id] && JSON.stringify(m[dup.id].rooms) === JSON.stringify(rooms);
+        m[dup.id] = { ref: p.ref, rooms, at: new Date().toISOString() }; writeJson(CLAIM_ROOMS, m);
         const base = 'https://bina.et/ops/hotel-claims/' + dup.id + '/';
-        await tellOwner('\u{1F6CF} <b>New room prices</b> for a waiting claim: ' + esc(p.name) + ' (' + esc(dup.name) + ', ' + esc(digits) + ')' + roomsLine(rooms)
+        if (!same) await tellTeam('\u{1F6CF} <b>New room prices</b> for a waiting claim: ' + esc(p.name) + ' (' + esc(dup.name) + ', ' + esc(digits) + ')' + roomsLine(rooms)
           + '\n\n<a href="' + base + 'approve?t=' + dup.token + '">\u2705 approve</a> \u00b7 <a href="' + base + 'reject?t=' + dup.token + '">\u274c reject</a>');
       }
       return { ok: true };
@@ -509,7 +513,7 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
       token: crypto.randomBytes(16).toString('hex') } });
     if (rooms.length) { const m = readJson(CLAIM_ROOMS); m[c.id] = { ref: p.ref, rooms, at: new Date().toISOString() }; writeJson(CLAIM_ROOMS, m); }
     const base = 'https://bina.et/ops/hotel-claims/' + c.id + '/';
-    await tellOwner((isNew ? '🆕 <b>Hotel NOT in the list</b> (add it by hand after the call) · ' : '🏨 <b>Hotel claim</b> · ') + esc(p.name) + ' (' + esc(KINDS[p.kind].en) + (p.sub ? ', ' + esc(p.sub) : '') + ')\n'
+    await tellTeam((isNew ? '🆕 <b>Hotel NOT in the list</b> (add it by hand after the call) · ' : '🏨 <b>Hotel claim</b> · ') + esc(p.name) + ' (' + esc(KINDS[p.kind].en) + (p.sub ? ', ' + esc(p.sub) : '') + ')\n'
       + '👤 ' + esc(name) + ' — ' + role + '\n📞 ' + esc(digits) + (p.phones.length ? '\n☎ map says: ' + esc(p.phones.join(', ')) : '') + (note ? '\n📝 ' + esc(note) : '')
       + roomsLine(rooms) + '\n\nCall before approving.\n' + (isNew ? '' : '<a href="https://bina.et/hotels/' + p.slug + '">listing</a> · ') + '<a href="' + base + 'approve?t=' + c.token + '">✅ approve</a> · <a href="' + base + 'reject?t=' + c.token + '">❌ reject</a>');
     return { ok: true };
@@ -521,6 +525,9 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
     if (!c || t.length !== want.length || !crypto.timingSafeEqual(t, want)) return reply.code(404).send('not found');
     const action = req.params.action;
     if (!['approve', 'reject'].includes(action)) return reply.code(400).send('approve or reject');
+    // The links stay valid after a decision (1 Oct 2026 rehearsal): a second approve does nothing, and a reject after an
+    // approve takes back the prices that approve put on the page; before, the claim said "rejected" with the prices live.
+    if (action === 'approve' && c.status === 'approved') return reply.type('text/html; charset=utf-8').send('<p style="font-family:system-ui;padding:40px">Already approved: ' + esc(c.placeName) + '</p>');
     await prisma.hotelClaim.update({ where: { id: c.id }, data: { status: action === 'approve' ? 'approved' : 'rejected', decidedAt: new Date() } });
     claimed.at = 0;
     // approved with room prices: they go on the page now (a hotel not on the map yet has no page to put them on)
@@ -528,6 +535,7 @@ module.exports = function hotelDirectory(fastify, { prisma, limiter }, done) {
     if (cr && cr.rooms && cr.rooms.length && !String(c.placeRef).startsWith('new:')) {
       const m = readJson(OWNER_ROOMS); m[c.placeRef] = { rooms: cr.rooms, date: new Date().toISOString().slice(0, 10), claimId: c.id }; writeJson(OWNER_ROOMS, m);
     }
+    if (action === 'reject') { const m = readJson(OWNER_ROOMS); if (m[c.placeRef] && m[c.placeRef].claimId === c.id) { delete m[c.placeRef]; writeJson(OWNER_ROOMS, m); } }
     return reply.type('text/html; charset=utf-8').send('<p style="font-family:system-ui;padding:40px">' + (action === 'approve' ? '✅ Approved' : '❌ Rejected') + ': ' + esc(c.placeName) + ' — ' + esc(c.name) + '. ' + (c.slug ? '<a href="/hotels/' + esc(c.slug) + '">listing</a>' : 'Not on the map yet: add it by hand.') + '</p>');
   });
   done();
