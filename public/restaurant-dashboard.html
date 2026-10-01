@@ -42,7 +42,7 @@ textarea{min-height:76px;resize:vertical}.row{display:grid;grid-template-columns
     if (!r.url) return '';
     return '<div class="box ob" data-id="' + esc(r.id) + '" data-url="' + esc(r.url) + '"><h2>Table orders · የጠረጴዛ ትዕዛዝ</h2><p class="sub">Put a QR card on each table. Guests open your menu, choose and send, or press "Call the waiter" / "Bring the bill"; it comes to your Telegram and here. They pay at the table. Free, no commission.</p>'
       + '<label class="tog"><input type="checkbox" class="on"' + (r.dishes.length ? '' : ' disabled') + '> Take orders and waiter calls from the table QR · ትዕዛዝ ተቀበል</label>' + (r.dishes.length ? '' : '<p class="sub">Add your dishes and save first.</p>')
-      + '<div class="lk"><button type="button" class="tg">🔔 Connect Telegram</button><a href="' + esc(r.url) + '/qr?n=8" target="_blank">🖨 Table QR cards</a><a href="' + esc(r.url) + '/menu?table=1" target="_blank">See your menu</a></div><div class="msg"></div><div class="ol"></div></div>';
+      + '<div class="lk"><button type="button" class="tg">🔔 Connect Telegram</button><a href="' + esc(r.url) + '/qr?n=8" target="_blank">🖨 Table QR cards</a><a href="' + esc(r.url) + '/menu?table=1" target="_blank">See your menu</a><button type="button" class="nc">🔄 New cards</button></div><p class="sub" style="margin:0">Print the cards while signed in: only those take orders. Lost a card, or a photo of one got out? Press New cards and print again.</p><div class="msg"></div><div class="ol"></div></div>';
   }
   function load() {
     fetch('/api/restaurants/mine', { credentials: 'same-origin' }).then(function (r) { return r.status === 401 ? null : r.json(); }).then(function (d) {
@@ -111,6 +111,12 @@ textarea{min-height:76px;resize:vertical}.row{display:grid;grid-template-columns
       b.querySelector('.tg').addEventListener('click', function () {
         fetch('/api/restaurants/mine/' + id + '/telegram', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (j) {
           if (j.ok) { window.open(j.url, '_blank'); m.className = 'msg ok'; m.textContent = 'In Telegram, press START. Orders will come to that chat.'; }
+        });
+      });
+      b.querySelector('.nc').addEventListener('click', function () {
+        if (!window.confirm('Make new table cards? The cards on your tables now will stop taking orders until you print and put out the new ones.')) return;
+        post('/api/restaurants/mine/' + id + '/settings', { newCards: true }).then(function (j) {
+          m.className = 'msg ' + (j.ok ? 'ok' : 'err'); m.textContent = j.ok ? '✓ New cards made. Press "Table QR cards" and print them; the old ones now only show the menu.' : 'Something went wrong.';
         });
       });
       b.addEventListener('click', function (e) {

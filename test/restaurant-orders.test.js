@@ -17,9 +17,10 @@ const R = require('../restaurants/directory');
 const O = require('../restaurants/orders');
 const { makeBinaBot } = require('../ride/binaBot');
 
-const TOK = 'a'.repeat(32);
+const TOK = 'a'.repeat(32), KEY = 'c'.repeat(32);
+const code = t => O.cardKey({ tableKey: KEY }, t);   // what a table card printed by the owner carries
 function entry(over) {
-  return Object.assign({ id: 'e1', ref: 'node/1', restaurant: 'Sample Trattoria', status: 'live', ownerUserId: 'u1', approvedAt: '2026-10-01T08:00:00Z',
+  return Object.assign({ id: 'e1', ref: 'node/1', restaurant: 'Sample Trattoria', status: 'live', ownerUserId: 'u1', approvedAt: '2026-10-01T08:00:00Z', tableKey: KEY,
     dishes: [{ name: 'Lasagna', price: '450 ETB' }, { name: 'Pizza <b>Margherita</b>', price: '1,200 birr' }, { name: 'Soup of the day', price: '' }] }, over);
 }
 function app() {
@@ -35,7 +36,7 @@ function app() {
   return { call, sent, team };
 }
 const store = entries => R.writeStore({ entries });
-const order = (call, body, slug = 'sample-trattoria-n1') => call('POST /api/restaurants/:slug/order', { params: { slug }, body, headers: { 'x-real-ip': '10.0.0.1' } });
+const order = (call, body, slug = 'sample-trattoria-n1') => call('POST /api/restaurants/:slug/order', { params: { slug }, body: Object.assign({ k: code(body.table) }, body), headers: { 'x-real-ip': '10.0.0.1' } });
 const owner = uid => ({ authUser: { id: uid } });
 
 test.before(() => fs.writeFileSync(OSMF, JSON.stringify(OSM)));
@@ -44,7 +45,7 @@ test.after(() => { for (const f of [STORE, OSMF, ORD]) try { fs.unlinkSync(f); }
 
 test('the menu: nothing to order from sends the guest to the page; ordering off shows the menu only; on adds the order sheet', async () => {
   const { call } = app();
-  const menu = (q = { table: '7' }) => call('GET /restaurants/:slug/menu', { params: { slug: 'sample-trattoria-n1' }, query: q });
+  const menu = (q = { table: '7', k: code(7) }) => call('GET /restaurants/:slug/menu', { params: { slug: 'sample-trattoria-n1' }, query: q });
   let r = await menu();
   assert.equal(r.code, 302); assert.equal(r.loc, '/restaurants/sample-trattoria-n1');   // unclaimed: the map page
   store([entry()]);
@@ -57,7 +58,9 @@ test('the menu: nothing to order from sends the guest to the page; ordering off 
   r = await menu();
   assert.match(r.body, /Send order/); assert.match(r.body, /data-p="1200"/); assert.match(r.body, /You pay at your table/);
   assert.doesNotMatch(r.body, /Table number/, 'the card already says the table');
-  assert.match((await menu({})).body, /Table number/, 'no table in the link: the guest types it');
+  assert.match((await menu({ table: '7' })).body, /scan the QR card on your table/, 'no card code: the menu only');
+  assert.doesNotMatch((await menu({ table: '7' })).body, /Send order/);
+  assert.match((await menu({})).body, /scan the QR card on your table/);
   assert.equal((await call('GET /restaurants/:slug/menu', { params: { slug: 'nope' }, query: {} })).code, 404);
 });
 
@@ -103,7 +106,10 @@ test('Telegram: the owner gets a link once; /start rest_<token> binds that chat;
   assert.equal(O.linkTelegram('not-hex', '700000002'), null);
   assert.deepEqual(O.linkTelegram(token, '700000002'), { name: 'Sample Trattoria' });
   assert.equal(R.readStore().entries[0].tgChatId, '700000002');
-  assert.equal((await tg('u1')).body.linked, true);
+  assert.equal(O.linkTelegram(token, '700000009'), null, 'the link works once: a forwarded link cannot take the orders later');
+  assert.equal(R.readStore().entries[0].tgChatId, '700000002');
+  const again = (await tg('u1')).body;
+  assert.equal(again.linked, true); assert.notEqual(again.url, a.url, 'a fresh link for the next time');
 });
 
 test('the bot: /start rest_<token> confirms in Amharic + English; a bad link says how to retry', async () => {
@@ -158,7 +164,7 @@ test('table cards: one QR per table, pointing at the menu with its number, at mo
 
 test('call the waiter / bring the bill: same switch as ordering, one Telegram per open call', async () => {
   const { call, sent } = app();
-  const ring = (body, slug = 'sample-trattoria-n1') => call('POST /api/restaurants/:slug/call', { params: { slug }, body, headers: { 'x-real-ip': '10.0.0.2' } });
+  const ring = (body, slug = 'sample-trattoria-n1') => call('POST /api/restaurants/:slug/call', { params: { slug }, body: Object.assign({ k: code(body.table) }, body), headers: { 'x-real-ip': '10.0.0.2' } });
   store([entry({ tgChatId: '700000001' })]);
   assert.equal((await ring({ table: 4, kind: 'waiter' })).body.error, 'off');
   store([entry({ ordersOn: true, tgChatId: '700000001' })]);
@@ -177,7 +183,7 @@ test('call the waiter / bring the bill: same switch as ordering, one Telegram pe
 
 test('the menu shows the call buttons only when ordering is on; the page and food answers know it is on', async () => {
   const { call } = app();
-  const menu = () => call('GET /restaurants/:slug/menu', { params: { slug: 'sample-trattoria-n1' }, query: { table: '2' } });
+  const menu = () => call('GET /restaurants/:slug/menu', { params: { slug: 'sample-trattoria-n1' }, query: { table: '2', k: code(2) } });
   store([entry()]);
   assert.doesNotMatch((await menu()).body, /Call the waiter/);
   const p = R.places().bySlug.get('sample-trattoria-n1');
@@ -192,4 +198,27 @@ test('the menu shows the call buttons only when ordering is on; the page and foo
 test('price reads the number out of what the owner typed', () => {
   assert.equal(O.price('450 ETB'), 450); assert.equal(O.price('ብር 1,200'), 1200); assert.equal(O.price('12.5'), 12.5);
   assert.equal(O.price(''), null); assert.equal(O.price('ask'), null); assert.equal(O.price('0'), null);
+});
+
+test('security (1 Oct 2026): orders and calls need the code a printed card carries; only the owner prints such cards', async () => {
+  const { call, sent } = app();
+  store([entry({ ordersOn: true, tgChatId: '700000001' })]);
+  const post = (path, body) => call('POST /api/restaurants/:slug/' + path, { params: { slug: 'sample-trattoria-n1' }, body, headers: { 'x-real-ip': '10.0.0.3' } });
+  assert.equal((await post('order', { table: 3, items: [{ i: 0, qty: 1 }] })).body.error, 'card', 'no code: the public link alone cannot order');
+  assert.equal((await post('order', { table: 3, k: 'f'.repeat(12), items: [{ i: 0, qty: 1 }] })).body.error, 'card', 'a guessed code');
+  assert.equal((await post('order', { table: 4, k: code(3), items: [{ i: 0, qty: 1 }] })).body.error, 'card', 'table 3\'s card cannot order for table 4');
+  assert.equal((await post('call', { table: 3, kind: 'waiter' })).body.error, 'card');
+  assert.equal(sent.length, 0, 'nothing reached the restaurant');
+  assert.equal((await post('order', { table: 3, k: code(3), items: [{ i: 0, qty: 1 }] })).body.ok, true);
+  const qr = (user, q) => call('GET /restaurants/:slug/qr', Object.assign({ params: { slug: 'sample-trattoria-n1' }, query: q || { n: '2', from: '3' } }, user ? { authUser: { id: user } } : {}));
+  const links = r => r.body.match(/\/qr\.svg\?p=[^"]+/g).map(x => decodeURIComponent(x.split('p=')[1]));
+  assert.deepEqual(links(await qr()), ['/restaurants/sample-trattoria-n1/menu?table=3', '/restaurants/sample-trattoria-n1/menu?table=4'], 'anyone else: menu-only cards');
+  assert.match((await qr()).body, /open the menu only/);
+  assert.deepEqual(links(await qr('u2')).every(l => !/k=/.test(l)), true, 'another account: menu-only too');
+  assert.deepEqual(links(await qr('u1')), ['/restaurants/sample-trattoria-n1/menu?table=3&k=' + code(3), '/restaurants/sample-trattoria-n1/menu?table=4&k=' + code(4)], 'the owner: cards that take orders');
+  const r = await call('POST /api/restaurants/mine/:id/settings', { params: { id: 'e1' }, body: { newCards: true }, authUser: { id: 'u1' } });
+  assert.equal(r.body.ok, true);
+  assert.equal((await post('order', { table: 3, k: code(3), items: [{ i: 0, qty: 1 }] })).body.error, 'card', 'after "New cards" the old card only shows the menu');
+  const fresh = links(await qr('u1'))[0].split('k=')[1];
+  assert.notEqual(fresh, code(3)); assert.equal((await post('order', { table: 3, k: fresh, items: [{ i: 0, qty: 1 }] })).body.ok, true);
 });
