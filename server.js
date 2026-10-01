@@ -1503,6 +1503,10 @@ fastify.post('/api/assistant', async (req, reply) => {
         if (hits.length) coCtx = '\n\nPOSTED ON BINA.ET/SHOP (real shops, approved by the BinaSmart team). Offer these FIRST, with the price and the shop\'s phone so the buyer calls the shop directly (no commission); the page is https://bina.et/shop. Never add details that are not here:\n'
           + hits.map(p => '- ' + p.title + ' · ' + p.price + ' · ' + p.shop + (p.area ? ', ' + p.area : '') + ' · ' + p.phone + (p.whatsapp ? ' (WhatsApp ok)' : '')).join('\n');
       } catch (e) { /* the shop store is optional */ } }
+    // Bini Browser (bina.et/agent): the person asks about it now or did in the last turns (they are giving their details).
+    if (!coCtx && (biniTools.AGENT_RE.test(msg) || hist.slice(-4).some(m => m.role === 'user' && biniTools.AGENT_RE.test(m.content)))) {
+      coCtx = '\n\nBINI BROWSER: ' + biniTools.AGENT_FACTS + ' ' + biniTools.AGENT_ASK;
+    }
     const sys = ASSIST_SYS + ASSIST_FACTS + BINI_TOOL_RULES + BINI_SHARED + voice + '\n\n' + biniLang.directive(lang) + turn + bankGuard + bizGuard + (profile ? '\n\n' + profile : '') + (ctx ? '\n\n' + ctx : '') + coCtx + (Number.isFinite(+b.lat) && Number.isFinite(+b.lng) ? '\n\nUser location now: lat ' + (+b.lat).toFixed(5) + ', lng ' + (+b.lng).toFixed(5) + ' (use for pool_board and as default pickup).' : '');
     let text = await callBini(sys + preTool, [...hist, { role: 'user', content: msg }], 900, opts);
     // tool_choice:'required' is advisory and this model ignores it often enough to matter — measured
@@ -1528,7 +1532,7 @@ fastify.post('/api/assistant', async (req, reply) => {
     // Flash occasionally answers a forced intent (fare, pool, TV/radio, tender…) without any tool. One strict retry, then we accept.
     // company_request / contact_team finish the turn too: a hotel sending its room prices must not be "retried" into a
     // hotel search that replaces the answer (28 Sep 2026)
-    const TERMINAL = /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|search_properties|search_cars|search_hotels|search_health|search_shops|cinema_programme|watch_channels|remember|company_request|listing_request|shop_post|contact_team)$/;
+    const TERMINAL = /^(quote_ride|pool_board|request_ride|ride_status|search_tenders|search_properties|search_cars|search_hotels|search_health|search_shops|cinema_programme|watch_channels|remember|company_request|listing_request|shop_post|bini_browser_lead|contact_team)$/;
     if (forced && !toolsUsed.some(n => TERMINAL.test(n))) {
       const retry = { tools: opts.tools, forcedTools, execute, toolChoice: 'required', used: [] };
       const strict = sys + '\n\nSYSTEM CHECK: your previous draft answered without calling the tool this request needs. Do it now: a home, flat, land or shop to buy or rent -> search_properties; a car to buy -> search_cars; a hotel or guest house to stay in -> search_hotels; fares → search_places (first result for a known area; saved home/work coordinates when the user says home/work) then quote_ride; ጋራ ጉዞ/pool → pool_board; TV, radio, series → watch_channels; tenders → search_tenders; cinema → cinema_programme; "remember" → remember. Then answer from the result with the exact link or numbers.';

@@ -5,6 +5,11 @@
 const ADDIS = { latMin: 8.5, latMax: 9.5, lngMin: 38.4, lngMax: 39.2 };
 const TIERS = ['moto', 'bajaj', 'economy', 'comfort', 'xl'];
 
+// Bini Browser (bina.et/agent): the Chrome side panel. Bini on the website and on Telegram takes the requests from
+// offices and companies who want it (1 Oct 2026, for the Bini Browser ad). It is NOT free, so no price is ever quoted.
+const AGENT_RE = /(bini ?browser|ቢኒ\s*(ብራውዘር|ብሮውዘር)|bina ?agent|ቢና\s*ኤጀንት|bina\.et\/agent|\bchrome\b|ክሮም|extension|ኤክስቴንሽን|\bbrowser\b|ብራውዘር|ብሮውዘር)/i;
+const AGENT_FACTS = 'Bini Browser (https://bina.et/agent) is Bini inside Google Chrome on a computer: a side panel that does website work for the person - it reads the page, clicks, fills forms and finds information on sites such as eTrade, eGP, LMIS, MESOB (መሶብ), Fayda (ፋይዳ) and the immigration and passport portal (in Amharic: ኢሚግሬሽን፣ ፓስፖርት - never "ስደተኞች", which means refugees), in Amharic, Afaan Oromoo or English. The person opens Chrome and tells Bini the task. It never types passwords, PINs, one-time codes or card numbers (the person signs in themselves), it never pays, it asks before it submits or sends anything, and it says only what it saw on the pages. It is for government offices, companies and anyone who works on a computer. It is NOT free (it runs on paid AI): never say it is free and never quote a price - the team agrees it with each office or company and helps them set it up.';
+const AGENT_ASK = 'If they want it for their office, company or themselves, ask in ONE message for what is missing: their name, the office or company name, whether it is a government office, a company or personal, their role, an Ethiopian phone number to call back and what work they want help with. Read it back, then call bini_browser_lead ONCE. Then tell them the team calls to set it up, usually within a day. If they only ask what it is, answer in a few lines and offer to take their details.';
 const DEFS = [
   { name: 'search_places', description: 'Find a place in Addis Ababa by name (building, hotel, shop, landmark, area) and get its coordinates. Call this BEFORE quote_ride for any pickup or drop-off the user names. Returns up to 5 matches; pick the one that matches the user\'s words and confirm if two look alike.',
     parameters: { type: 'object', properties: { q: { type: 'string', description: 'Place name in Amharic, English or Afaan Oromoo, e.g. "Bole Medhanialem", "መገናኛ", "Edna Mall"' } }, required: ['q'] } },
@@ -125,6 +130,16 @@ const DEFS = [
       whatsapp: { type: 'boolean', description: 'false only if they say buyers must not WhatsApp that number' },
       post: { type: 'string', description: 'for change / remove: which post (its item name)' }, request: { type: 'string', description: 'for change / remove: exactly what to change' } },
       required: ['action', 'name', 'phone'] } },
+  { name: 'bini_browser_lead', description: 'Send a Bini Browser request to the BinaSmart team, for a person who wants Bini Browser for their government office, their company or themselves. ' + AGENT_FACTS + ' ' + AGENT_ASK + ' Never invent details the person did not give. Not for questions about the bina.et website or other BinaSmart services.',
+    parameters: { type: 'object', properties: {
+      name: { type: 'string', description: 'the person\'s name' },
+      organisation: { type: 'string', description: 'the office or company name; "personal" if it is just for them' },
+      kind: { type: 'string', enum: ['government', 'company', 'personal', 'other'] },
+      role: { type: 'string', description: 'their role or position, if they said' },
+      phone: { type: 'string', description: 'Ethiopian phone number to call back' },
+      need: { type: 'string', description: 'what website work they want Bini Browser to help with' },
+      computers: { type: 'string', description: 'how many people or computers, if they said' } },
+      required: ['name', 'organisation', 'phone', 'need'] } },
   { name: 'contact_team', description: 'Hand the conversation to the BinaSmart team (a person) with a short summary, when the user asks for a human, has a complaint you cannot resolve, or needs something only the team can do (pricing for businesses, a refund, a partner request). Tell the user the team will reply on this chat or on WhatsApp.',
     parameters: { type: 'object', properties: { summary: { type: 'string' }, reason: { type: 'string' } }, required: ['summary'] } },
 ];
@@ -553,6 +568,25 @@ function makeExecutor(ctx) {
       if (body.action !== 'add') return { ok: true, note: 'Sent to the team. Tell them the team will call to confirm and then make the change.' };
       return { ok: true, photos: d.photos || 0, duplicate: !!d.duplicate, note: (d.photos ? 'It includes ' + d.photos + ' photo(s). ' : 'No photos came with it; they can still send photos in this chat and tell you, or the team can take them on the call. ') + done };
     },
+    async bini_browser_lead(a) {
+      const clip = (v, n) => String(v || '').replace(/\s+/g, ' ').trim().slice(0, n);
+      const lead = { name: clip(a.name, 80), organisation: clip(a.organisation, 120), kind: clip(a.kind, 20) || 'other', role: clip(a.role, 60),
+        phone: clip(a.phone, 30), need: clip(a.need, 300), computers: clip(a.computers, 40) };
+      if (!lead.name) return { error: 'ask for their name' };
+      if (!lead.organisation) return { error: 'ask which office or company it is for (or "personal")' };
+      if (!/^(251|0)?[79]\d{8}$/.test(lead.phone.replace(/\D/g, ''))) return { error: 'that phone number looks wrong; ask for an Ethiopian number like 0900 000 012' };
+      if (!lead.need) return { error: 'ask what website work they want help with' };
+      const done = 'Tell them: the team calls this number to set Bini Browser up, usually within a day. Do not quote a price and do not say it is free.';
+      // one lead per turn: the 1 Oct Amharic rehearsal called it three times in one reply
+      if (ctx._agentLead) return Object.assign({}, ctx._agentLead, { note: 'Already sent to the team in this reply - do NOT call bini_browser_lead again. ' + done });
+      if (ctx.dryRun) return (ctx._agentLead = { ok: true, dryRun: true, wouldSend: lead, note: 'Evaluation run, nothing was sent. Otherwise answer exactly as if it was sent. ' + done });
+      if (!ctx.handover) return { error: 'could not reach the team now; give them https://t.me/Bina_smart' };
+      const summary = ['🧭 BINI BROWSER LEAD (bina.et/agent)', 'Who: ' + lead.name + (lead.role ? ' (' + lead.role + ')' : ''),
+        'Where: ' + lead.organisation + ' [' + lead.kind + ']', 'Phone: ' + lead.phone, 'Needs: ' + lead.need, lead.computers ? 'Size: ' + lead.computers : ''].filter(Boolean).join('\n');
+      const sent = await ctx.handover({ summary, reason: 'Bini Browser lead', explicit: true }).catch(() => false);
+      if (sent === false) console.warn('[bini] bini_browser_lead: the team chat was not paged');
+      return (ctx._agentLead = { ok: true, note: done });
+    },
     async contact_team({ summary, reason }) {
       if (ctx.handover) await ctx.handover({ summary: String(summary || '').slice(0, 600), reason: String(reason || 'user asked for a person').slice(0, 120), explicit: true }).catch(() => {});
       return { ok: true, note: 'The team has the summary. Tell the user someone will reply here or on WhatsApp +251 911 244 344, and ask nothing more unless needed.' };
@@ -566,10 +600,10 @@ function makeExecutor(ctx) {
     if (ctx.dryRun) console.log('[bini-eval] tool ' + name + ' ' + JSON.stringify(args || {}).slice(0, 700));
     // the same request with its fields in another order is still the same request
     const canon = v => Array.isArray(v) ? '[' + v.map(canon).join(',') + ']' : v && typeof v === 'object' ? '{' + Object.keys(v).sort().map(k => JSON.stringify(k) + ':' + canon(v[k])).join(',') + '}' : JSON.stringify(v);
-    const key = name === 'company_request' || name === 'listing_request' || name === 'shop_post' ? canon(args || {}) : null;
-    if (key && sentOnce.has(key)) return Object.assign({}, sentOnce.get(key), { note: 'Already sent to the team a moment ago - do NOT call company_request again. Answer the person now: the team calls to confirm, then approves, usually within a day; it is NOT live yet.' });
+    const key = name === 'company_request' || name === 'listing_request' || name === 'shop_post' || name === 'bini_browser_lead' ? canon(args || {}) : null;
+    if (key && sentOnce.has(key)) return Object.assign({}, sentOnce.get(key), { note: 'Already sent to the team a moment ago - do NOT call ' + name + ' again. Answer the person now: the team calls to confirm, then approves, usually within a day; it is NOT live yet.' });
     try { const out = await fn(args || {}); if (key && out && out.ok) sentOnce.set(key, out); return out; } catch (e) { return { error: 'tool_failed: ' + (e && e.message || e) }; }
   };
 }
 
-module.exports = { DEFS, toOpenAI, makeExecutor, inAddis, TIERS };
+module.exports = { DEFS, toOpenAI, makeExecutor, inAddis, TIERS, AGENT_RE, AGENT_FACTS, AGENT_ASK };

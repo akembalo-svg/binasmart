@@ -28,6 +28,8 @@ const GROUPS = [
     re: /(restaurant|cafe|coffee|pharmacy|drug ?store|\bbank\b|\batm\b|salon|barber|\bgym\b|clinic|hospital|shop|supermarket|market|bakery|printer|repair|ምግብ ቤት|ካፌ|ቡና|ፋርማሲ|መድሃኒት|ባንክ|ሳሎን|ጂም|ክሊኒክ|ሆስፒታል|ሱቅ|ሱፐርማርኬት|ገበያ|ዳቦ)/i },
   { tools: ['cinema_programme', 'watch_channels'],
     re: /(cinema|movie|film|showing|\btv\b|television|radio|channel|series|drama|watch|listen|live stream|ሲኒማ|ፊልም|ቲቪ|ቴሌቪዥን|ራዲዮ|ራድዮ|ቻናል|ድራማ|ተከታታይ)/i },
+  { tools: ['bini_browser_lead'],
+    re: require('./tools').AGENT_RE },
   { tools: ['company_request'],
     re: /(company|companies|my business|our business|organi[sz]ation|\bclaim\b|list my|add my|register my|ድርጅት|ኩባንያ|ንግዴ|ድርጅቴ|ድርጅታችን)/i },
 ];
