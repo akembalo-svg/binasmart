@@ -2316,6 +2316,7 @@ fastify.register(require('./companies/directory'), { prisma, limiter: hotelLimit
 fastify.register(require('./property/detail'), { prisma });
 fastify.register(require('./property/owner-listing'), { prisma, limiter: hotelLimiter });
 fastify.register(require('./shops/posts'), { prisma, limiter: hotelLimiter });
+fastify.register(require('./shops/dashboard'), { prisma, limiter: hotelLimiter });   // bina.et/shop/dashboard: sellers change price / description / sold on their own posts, by proven phone (1 Oct 2026)
 fastify.register(require('./restaurants/directory'), { limiter: hotelLimiter });   // bina.et/restaurants: restaurants, cafés and fast food from the city map; claims via Bini (1 Oct 2026)
 fastify.register(require('./restaurants/dashboard'), { prisma, limiter: hotelLimiter });   // bina.et/restaurants/dashboard: owners edit their number, hours and dishes (1 Oct 2026)
 fastify.register(require('./restaurants/orders'), { limiter: hotelLimiter });   // table QR ordering for confirmed restaurants: /restaurants/<slug>/menu, orders to Telegram + dashboard (1 Oct 2026)

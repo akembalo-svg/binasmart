@@ -252,3 +252,5 @@ module.exports.ethPhone = ethPhone;
 module.exports.priceNum = priceNum;
 module.exports.card = card;
 module.exports.searchLive = searchLive;
+// for shops/dashboard.js (sellers edit their own posts, 1 Oct 2026)
+Object.assign(module.exports, { readStore, writeStore, clean, esc, tellTeam });

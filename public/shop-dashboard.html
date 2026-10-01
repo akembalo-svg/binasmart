@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>My posts · የኔ ልጥፎች | BinaSmart Shop</title><meta name="robots" content="noindex"><meta name="theme-color" content="#7A1F3D">
+<link rel="icon" href="/icon-32.png"><link rel="stylesheet" href="/static/fonts/fonts.css?v=2">
+<style>
+:root{--b:#7A1F3D;--b2:#A3294F;--ink:#1F1720;--mu:#6B5F66;--ln:#E9DDE2;--bg:#FBF7F8;--card:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans Ethiopic",system-ui,sans-serif;line-height:1.5}
+a{color:var(--b)}.top{background:var(--b);color:#fff;padding:14px 16px}.top a{color:#fff;text-decoration:none;font-weight:800}.top small{opacity:.85;font-weight:500}
+.w{max-width:720px;margin:0 auto}.dash{padding:20px 16px 60px}h1{font-size:26px;margin:0 0 4px}.lead{color:var(--mu);margin:0 0 18px}
+.box{background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:18px;margin:0 0 14px;box-shadow:0 8px 24px rgba(122,31,61,.06)}
+.box h2{font-size:18px;margin:0 0 2px}.sub{color:var(--mu);font-size:14px;margin:0 0 10px}
+label{display:block;font-weight:600;font-size:14px;margin:10px 0 4px}input,textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--ln);border-radius:12px;background:#fff;color:var(--ink)}
+textarea{min-height:70px;resize:vertical}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.go{border:0;background:var(--b);color:#fff;font:inherit;font-weight:700;padding:11px 16px;border-radius:12px;cursor:pointer;text-decoration:none;display:inline-block}
+.lite{border:1px solid var(--b);background:#fff;color:var(--b);font:inherit;font-weight:700;padding:10px 14px;border-radius:12px;cursor:pointer}
+.sold{opacity:.75}.tag{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:2px 9px;background:#F3E4EA;color:var(--b);margin-left:6px}
+.msg{margin-top:8px;font-weight:600}.ok{color:#047857}.err{color:#b91c1c}.foot{color:var(--mu);font-size:13px;padding:0 16px 30px}
+</style></head><body>
+<header class="top"><div class="w"><a href="/shop">🛍 BinaSmart Shop <small>· ሱቆች</small></a></div></header>
+<main class="dash w"><h1>My posts · <span>የኔ ልጥፎች</span></h1><p class="lead">Change the price, the description, or mark an item sold. It shows on bina.et/shop at once. · ዋጋ፣ መግለጫ ይቀይሩ ወይም «ተሽጧል» ያድርጉ።</p><div id="app"><p class="lead">Loading…</p></div></main>
+<p class="foot w">Your posts are the ones with the number you signed in with. To change the title, the category or the photos, or to post something new, ask Bini on <a href="/shop?bini=shop">bina.et/shop</a>. Our team sees every change and can take down a post that breaks the rules. BinaSmart takes no payments: buyers call you.</p>
+<script>
+(function () {
+  'use strict';
+  var app = document.getElementById('app');
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var ERR = { price: 'Please type a price.', slow_down: 'Too many changes. Please wait a little.', not_found: 'This post is not yours or is no longer on BinaSmart.', no_proven_phone: 'Sign in with Telegram or a phone code first.' };
+  function post(url, body) { return fetch(url, { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then(function (r) { return r.json().catch(function () { return { ok: false }; }); }); }
+  function card(p) {
+    return '<form class="box' + (p.status === 'sold' ? ' sold' : '') + '" data-id="' + esc(p.id) + '"><h2>' + esc(p.title) + (p.status === 'sold' ? '<span class="tag">SOLD · ተሽጧል</span>' : '') + '</h2>'
+      + '<p class="sub">' + esc(p.shop) + (p.area ? ' · ' + esc(p.area) : '') + (p.url ? ' · <a href="' + esc(p.url) + '" target="_blank">See it on bina.et/shop →</a>' : ' · not on the page while sold') + '</p>'
+      + '<label>Price · ዋጋ</label><input name="price" value="' + esc(p.price) + '" maxlength="50">'
+      + '<label>Description · መግለጫ</label><textarea name="description" maxlength="400">' + esc(p.description) + '</textarea>'
+      + '<div class="row"><button class="go" type="submit">Save · አስቀምጥ</button>'
+      + (p.status === 'sold' ? '<button class="lite" type="button" data-st="live">Back on sale · እንደገና ለሽያጭ</button>' : '<button class="lite" type="button" data-st="sold">Mark sold · ተሽጧል</button>')
+      + '</div><div class="msg"></div></form>';
+  }
+  function load() {
+    fetch('/api/shop/mine', { credentials: 'same-origin' }).then(function (r) { return r.status === 401 ? null : r.json(); }).then(function (d) {
+      if (!d) { app.innerHTML = '<div class="box"><h2>Sign in first · መጀመሪያ ይግቡ</h2><p class="sub">Sign in with Telegram or a phone code, using the number on your posts.</p><a class="go" href="/login?next=/shop/dashboard">Sign in</a></div>'; return; }
+      if (!d.phone) { app.innerHTML = '<div class="box"><h2>Your number is not proven yet</h2><p class="sub">Your posts are matched by phone number. Sign in again with Telegram (share your contact) or with a code sent to your phone.</p><a class="go" href="/login?next=/shop/dashboard">Sign in with my number</a></div>'; return; }
+      app.innerHTML = (d.pending ? '<div class="box"><p class="sub" style="margin:0">⏳ ' + d.pending + ' post' + (d.pending === 1 ? '' : 's') + ' waiting for our team to call you and approve.</p></div>' : '')
+        + (d.posts.length ? d.posts.map(card).join('') : '<div class="box"><h2>No posts with ' + esc(d.phone) + ' yet</h2><p class="sub">Post a product or an offer free: Bini asks the questions on <a href="/shop?bini=shop">bina.et/shop</a>.</p></div>');
+      wire();
+    }).catch(function () { app.innerHTML = '<p class="err">Could not load. Please try again.</p>'; });
+  }
+  function wire() {
+    [].forEach.call(document.querySelectorAll('form[data-id]'), function (f) {
+      var id = encodeURIComponent(f.getAttribute('data-id')), m = f.querySelector('.msg');
+      var show = function (j, okText) { if (j.ok) { m.className = 'msg ok'; m.textContent = okText; } else { m.className = 'msg err'; m.textContent = ERR[j.error] || 'Something went wrong.'; } };
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        post('/api/shop/mine/' + id, { price: f.price.value, description: f.description.value }).then(function (j) { show(j, j.changed && j.changed.length ? '✓ Saved. It is on bina.et/shop now. · ተቀምጧል።' : 'Nothing changed.'); });
+      });
+      var sb = f.querySelector('[data-st]');
+      if (sb) sb.addEventListener('click', function () {
+        post('/api/shop/mine/' + id, { status: sb.getAttribute('data-st') }).then(function (j) { if (j.ok) load(); else show(j); });
+      });
+    });
+  }
+  load();
+})();
+</script></body></html>

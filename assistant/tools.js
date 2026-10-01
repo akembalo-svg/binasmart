@@ -524,7 +524,7 @@ function makeExecutor(ctx) {
           : e === 'slow_down' ? 'too many posts just now; ask them to try again in an hour' : e };
       }
       if (d.duplicate) return { ok: true, note: 'This post was already sent a moment ago; do not send it again. ' + done };
-      return { ok: true, photos: d.photos, matched: d.matched, note: (a.action && a.action !== 'add' ? 'Sent to the team; they call to confirm, then make the change.' : done) + (d.photos ? ' ' + d.photos + ' photo(s) went with it.' : '') };
+      return { ok: true, photos: d.photos, matched: d.matched, note: (a.action && a.action !== 'add' ? 'Sent to the team; they call to confirm, then make the change. Tell them too: the price, the description and "sold" they can now change themselves at https://bina.et/shop/dashboard, signed in with the number on the post.' : done + ' Once it is live, they can change the price or mark it sold themselves at https://bina.et/shop/dashboard.') + (d.photos ? ' ' + d.photos + ' photo(s) went with it.' : '') };
     },
     async listing_request(a) {
       const body = { action: a.action || 'add', listingType: a.listing_type, propertyType: a.property_type, location: a.location, price: a.price,
